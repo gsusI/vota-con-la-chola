@@ -15,7 +15,9 @@ from .municipal import MunicipalConcejalesConnector
 from .parlament_balears import ParlamentBalearsDiputatsConnector
 from .parlamento_canarias import ParlamentoCanariasDiputadosConnector
 from .parlamento_cantabria import ParlamentoCantabriaDiputadosConnector
+from .parlamento_galicia import ParlamentoGaliciaDeputadosConnector
 from .parlamento_larioja import ParlamentoLaRiojaDiputadosConnector
+from .parlamento_navarra import ParlamentoNavarraParlamentariosForalesConnector
 from .parlament_catalunya import ParlamentCatalunyaDiputatsConnector
 from .parlamento_andalucia import ParlamentoAndaluciaDiputadosConnector
 from .parlamento_vasco import ParlamentoVascoParlamentariosConnector
@@ -37,7 +39,9 @@ __all__ = [
     "ParlamentBalearsDiputatsConnector",
     "ParlamentoCanariasDiputadosConnector",
     "ParlamentoCantabriaDiputadosConnector",
+    "ParlamentoGaliciaDeputadosConnector",
     "ParlamentoLaRiojaDiputadosConnector",
+    "ParlamentoNavarraParlamentariosForalesConnector",
     "ParlamentCatalunyaDiputatsConnector",
     "ParlamentoAndaluciaDiputadosConnector",
     "ParlamentoVascoParlamentariosConnector",
