@@ -37,6 +37,7 @@ TRACKER_SOURCE_HINTS = {
     "Parlamento de Galicia": "parlamento_galicia_deputados",
     "Parlamento de Navarra": "parlamento_navarra_parlamentarios_forales",
     "Parlamento Vasco": "parlamento_vasco_parlamentarios",
+    "Infoelectoral": "infoelectoral_descargas",
 }
 
 

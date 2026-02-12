@@ -160,6 +160,52 @@ CREATE TABLE IF NOT EXISTS mandates (
   UNIQUE (source_id, source_record_id)
 );
 
+-- Electoral: Infoelectoral (area de descargas)
+CREATE TABLE IF NOT EXISTS infoelectoral_convocatoria_tipos (
+  tipo_convocatoria TEXT PRIMARY KEY,
+  descripcion TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS infoelectoral_convocatorias (
+  convocatoria_id TEXT PRIMARY KEY,
+  tipo_convocatoria TEXT NOT NULL REFERENCES infoelectoral_convocatoria_tipos(tipo_convocatoria),
+  cod TEXT NOT NULL,
+  fecha TEXT,
+  descripcion TEXT,
+  ambito_territorio TEXT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (tipo_convocatoria, cod)
+);
+
+CREATE TABLE IF NOT EXISTS infoelectoral_archivos_extraccion (
+  archivo_id TEXT PRIMARY KEY,
+  convocatoria_id TEXT NOT NULL REFERENCES infoelectoral_convocatorias(convocatoria_id) ON DELETE CASCADE,
+  tipo_convocatoria TEXT NOT NULL REFERENCES infoelectoral_convocatoria_tipos(tipo_convocatoria),
+  id_convocatoria TEXT NOT NULL,
+  descripcion TEXT,
+  nombre_doc TEXT NOT NULL,
+  ambito TEXT,
+  download_url TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (convocatoria_id, nombre_doc)
+);
+
 CREATE INDEX IF NOT EXISTS idx_runs_source_id ON ingestion_runs(source_id);
 CREATE INDEX IF NOT EXISTS idx_persons_name ON persons(full_name);
 CREATE INDEX IF NOT EXISTS idx_persons_gender_id ON persons(gender_id);
@@ -168,6 +214,9 @@ CREATE INDEX IF NOT EXISTS idx_mandates_person ON mandates(person_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_institution_id ON mandates(institution_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_party_id ON mandates(party_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_source ON mandates(source_id);
+
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_convocatorias_tipo ON infoelectoral_convocatorias(tipo_convocatoria);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_archivos_convocatoria ON infoelectoral_archivos_extraccion(convocatoria_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_active ON mandates(is_active);
 CREATE INDEX IF NOT EXISTS idx_mandates_role_id ON mandates(role_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_admin_level_id ON mandates(admin_level_id);

@@ -4,6 +4,7 @@ tracker_path := env_var_or_default("TRACKER_PATH", "docs/etl/e2e-scrape-load-tra
 municipal_timeout := env_var_or_default("MUNICIPAL_TIMEOUT", "240")
 galicia_manual_dir := env_var_or_default("GALICIA_MANUAL_DIR", "etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages")
 navarra_manual_dir := env_var_or_default("NAVARRA_MANUAL_DIR", "etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages")
+infoelectoral_timeout := env_var_or_default("INFOELECTORAL_TIMEOUT", "30")
 
 default:
   @just --list
@@ -124,6 +125,9 @@ etl-extract-parlamento-galicia-manual:
 etl-extract-parlamento-navarra-manual:
   test -d {{navarra_manual_dir}} || (echo "NAVARRA_MANUAL_DIR no existe: {{navarra_manual_dir}}. Captura perfiles (Playwright) y exporta la ruta." && exit 2)
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source parlamento_navarra_parlamentarios_forales --from-file {{navarra_manual_dir}} --snapshot-date {{snapshot_date}}"
+
+etl-extract-infoelectoral-descargas:
+  docker compose run --rm --build etl "python3 scripts/ingestar_infoelectoral_es.py ingest --db {{db_path}} --source infoelectoral_descargas --snapshot-date {{snapshot_date}} --timeout {{infoelectoral_timeout}} --strict-network"
 
 etl-extract-all:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
