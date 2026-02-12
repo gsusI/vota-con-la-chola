@@ -250,6 +250,50 @@ CREATE TABLE IF NOT EXISTS parl_vote_member_votes (
   UNIQUE (vote_event_id, seat)
 );
 
+-- Parlamentario: iniciativas (temas/expedientes con identificador estable)
+CREATE TABLE IF NOT EXISTS parl_initiatives (
+  initiative_id TEXT PRIMARY KEY,
+  legislature TEXT,
+  expediente TEXT,
+  supertype TEXT,
+  grouping TEXT,
+  type TEXT,
+  title TEXT,
+  presented_date TEXT,
+  qualified_date TEXT,
+  author_text TEXT,
+  procedure_type TEXT,
+  result_text TEXT,
+  current_status TEXT,
+  competent_committee TEXT,
+  deadlines_text TEXT,
+  rapporteurs_text TEXT,
+  processing_text TEXT,
+  related_initiatives_text TEXT,
+  links_bocg_json TEXT,
+  links_ds_json TEXT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, legislature, expediente)
+);
+
+-- Link votes to initiatives when we can do it deterministically (or with explicit method+confidence).
+CREATE TABLE IF NOT EXISTS parl_vote_event_initiatives (
+  vote_event_id TEXT NOT NULL REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  link_method TEXT NOT NULL,
+  confidence REAL,
+  evidence_json TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (vote_event_id, initiative_id, link_method)
+);
+
 CREATE INDEX IF NOT EXISTS idx_runs_source_id ON ingestion_runs(source_id);
 CREATE INDEX IF NOT EXISTS idx_persons_name ON persons(full_name);
 CREATE INDEX IF NOT EXISTS idx_persons_gender_id ON persons(gender_id);
@@ -276,3 +320,9 @@ CREATE INDEX IF NOT EXISTS idx_parl_vote_events_date ON parl_vote_events(vote_da
 CREATE INDEX IF NOT EXISTS idx_parl_vote_events_source ON parl_vote_events(source_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_event ON parl_vote_member_votes(vote_event_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_person ON parl_vote_member_votes(person_id);
+
+CREATE INDEX IF NOT EXISTS idx_parl_initiatives_exp ON parl_initiatives(expediente);
+CREATE INDEX IF NOT EXISTS idx_parl_initiatives_leg ON parl_initiatives(legislature);
+CREATE INDEX IF NOT EXISTS idx_parl_initiatives_source ON parl_initiatives(source_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_vote ON parl_vote_event_initiatives(vote_event_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_init ON parl_vote_event_initiatives(initiative_id);

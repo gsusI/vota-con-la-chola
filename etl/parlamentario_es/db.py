@@ -85,6 +85,72 @@ def upsert_source_record_for_event(
     return int(row["source_record_pk"])
 
 
+def upsert_source_records(
+    conn: sqlite3.Connection,
+    *,
+    source_id: str,
+    rows: list[dict[str, Any]],
+    snapshot_date: str | None,
+    now_iso: str,
+) -> dict[str, int]:
+    """Batch upsert into source_records; return mapping source_record_id -> pk.
+
+    Keeps ingestion fast for list-style sources (e.g. initiatives exports).
+    """
+    if not rows:
+        return {}
+
+    params: list[tuple[Any, ...]] = []
+    record_ids: list[str] = []
+    for r in rows:
+        sid = str(r["source_record_id"])
+        payload = str(r["raw_payload"])
+        record_ids.append(sid)
+        params.append(
+            (
+                source_id,
+                sid,
+                snapshot_date,
+                payload,
+                sha256_bytes(payload.encode("utf-8")),
+                now_iso,
+                now_iso,
+            )
+        )
+
+    conn.executemany(
+        """
+        INSERT INTO source_records (
+          source_id, source_record_id, source_snapshot_date, raw_payload, content_sha256, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(source_id, source_record_id) DO UPDATE SET
+          source_snapshot_date=COALESCE(excluded.source_snapshot_date, source_records.source_snapshot_date),
+          raw_payload=excluded.raw_payload,
+          content_sha256=excluded.content_sha256,
+          updated_at=excluded.updated_at
+        """,
+        params,
+    )
+
+    # Resolve PKs in chunks to avoid hitting SQLite variable limits.
+    out: dict[str, int] = {}
+    chunk = 400
+    for i in range(0, len(record_ids), chunk):
+        batch = record_ids[i : i + chunk]
+        qmarks = ",".join("?" for _ in batch)
+        fetched = conn.execute(
+            f"""
+            SELECT source_record_id, source_record_pk
+            FROM source_records
+            WHERE source_id = ? AND source_record_id IN ({qmarks})
+            """,
+            (source_id, *batch),
+        ).fetchall()
+        for row in fetched:
+            out[str(row["source_record_id"])] = int(row["source_record_pk"])
+    return out
+
+
 def upsert_parl_vote_event(
     conn: sqlite3.Connection,
     *,
@@ -209,4 +275,68 @@ def upsert_parl_member_vote(
             now_iso,
             now_iso,
         ),
+    )
+
+
+def upsert_parl_initiatives(
+    conn: sqlite3.Connection,
+    *,
+    source_id: str,
+    rows: list[dict[str, Any]],
+) -> None:
+    if not rows:
+        return
+
+    conn.executemany(
+        """
+        INSERT INTO parl_initiatives (
+          initiative_id,
+          legislature, expediente,
+          supertype, grouping, type, title,
+          presented_date, qualified_date,
+          author_text, procedure_type, result_text, current_status,
+          competent_committee,
+          deadlines_text, rapporteurs_text, processing_text, related_initiatives_text,
+          links_bocg_json, links_ds_json,
+          source_id, source_url, source_record_pk, source_snapshot_date,
+          raw_payload, created_at, updated_at
+        ) VALUES (
+          :initiative_id,
+          :legislature, :expediente,
+          :supertype, :grouping, :type, :title,
+          :presented_date, :qualified_date,
+          :author_text, :procedure_type, :result_text, :current_status,
+          :competent_committee,
+          :deadlines_text, :rapporteurs_text, :processing_text, :related_initiatives_text,
+          :links_bocg_json, :links_ds_json,
+          :source_id, :source_url, :source_record_pk, :source_snapshot_date,
+          :raw_payload, :created_at, :updated_at
+        )
+        ON CONFLICT(initiative_id) DO UPDATE SET
+          legislature=excluded.legislature,
+          expediente=excluded.expediente,
+          supertype=excluded.supertype,
+          grouping=excluded.grouping,
+          type=excluded.type,
+          title=excluded.title,
+          presented_date=excluded.presented_date,
+          qualified_date=excluded.qualified_date,
+          author_text=excluded.author_text,
+          procedure_type=excluded.procedure_type,
+          result_text=excluded.result_text,
+          current_status=excluded.current_status,
+          competent_committee=excluded.competent_committee,
+          deadlines_text=excluded.deadlines_text,
+          rapporteurs_text=excluded.rapporteurs_text,
+          processing_text=excluded.processing_text,
+          related_initiatives_text=excluded.related_initiatives_text,
+          links_bocg_json=excluded.links_bocg_json,
+          links_ds_json=excluded.links_ds_json,
+          source_url=COALESCE(excluded.source_url, parl_initiatives.source_url),
+          source_record_pk=COALESCE(excluded.source_record_pk, parl_initiatives.source_record_pk),
+          source_snapshot_date=COALESCE(excluded.source_snapshot_date, parl_initiatives.source_snapshot_date),
+          raw_payload=excluded.raw_payload,
+          updated_at=excluded.updated_at
+        """,
+        rows,
     )

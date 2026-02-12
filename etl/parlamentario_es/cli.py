@@ -29,6 +29,8 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_ing.add_argument("--from-file", default=None, help="Archivo o directorio local (reproducible)")
     p_ing.add_argument("--url-override", default=None, help="Override URL (debug)")
     p_ing.add_argument("--max-votes", type=int, default=None, help="Limita numero de votaciones (debug)")
+    p_ing.add_argument("--max-files", type=int, default=None, help="Limita numero de ficheros (debug)")
+    p_ing.add_argument("--max-records", type=int, default=None, help="Limita numero de registros (debug)")
     p_ing.add_argument("--since-date", default=None, help="Filtra por fecha >= YYYY-MM-DD (usa path yyyymmdd)")
     p_ing.add_argument("--until-date", default=None, help="Filtra por fecha <= YYYY-MM-DD (usa path yyyymmdd)")
 
@@ -47,10 +49,13 @@ def _stats(conn: sqlite3.Connection) -> None:
         "SELECT COUNT(*) AS c FROM parl_vote_member_votes WHERE person_id IS NULL"
     ).fetchone()
     mv_unmatched = int(rows["c"]) if rows else 0
+    rows = conn.execute("SELECT COUNT(*) AS c FROM parl_initiatives").fetchone()
+    initiatives = int(rows["c"]) if rows else 0
 
     print(f"parl_vote_events: {events}")
     print(f"parl_vote_member_votes: {mv}")
     print(f"parl_vote_member_votes_unmatched_person: {mv_unmatched}")
+    print(f"parl_initiatives: {initiatives}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -89,6 +94,8 @@ def main(argv: list[str] | None = None) -> int:
 
             options: dict[str, Any] = {
                 "max_votes": args.max_votes,
+                "max_files": args.max_files,
+                "max_records": args.max_records,
                 "since_date": args.since_date,
                 "until_date": args.until_date,
             }
@@ -128,4 +135,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

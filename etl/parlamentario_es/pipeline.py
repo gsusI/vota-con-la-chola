@@ -1,16 +1,24 @@
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 from pathlib import Path
 from typing import Any
 
 from etl.politicos_es.db import finish_run, start_run
-from etl.politicos_es.util import normalize_key_part, normalize_ws, now_utc_iso, sha256_bytes, stable_json
+from etl.politicos_es.util import (
+    normalize_key_part,
+    normalize_ws,
+    now_utc_iso,
+    parse_date_flexible,
+    sha256_bytes,
+    stable_json,
+)
 
 from .config import SOURCE_CONFIG
 from .connectors.base import BaseConnector
-from .db import upsert_parl_vote_event, upsert_source_record_for_event
+from .db import upsert_parl_initiatives, upsert_parl_vote_event, upsert_source_record_for_event, upsert_source_records
 
 
 def _load_congreso_person_map(conn: sqlite3.Connection) -> dict[str, int]:
@@ -45,6 +53,141 @@ def _normalize_vote_member_name(raw: str | None) -> tuple[str | None, str | None
     else:
         full = text
     return full, normalize_key_part(full)
+
+
+def _congreso_leg_num(value: str | None) -> str | None:
+    if not value:
+        return None
+    m = re.search(r"(\d+)", str(value))
+    return m.group(1) if m else None
+
+
+def _urls_to_json_list(text: str | None) -> str | None:
+    if not text:
+        return None
+    urls = re.findall(r"https?://\\S+", str(text))
+    urls = [u.strip() for u in urls if u.strip()]
+    if not urls:
+        return None
+    return stable_json(urls)
+
+
+def _parse_congreso_date(value: str | None) -> str | None:
+    if not value:
+        return None
+    try:
+        return parse_date_flexible(normalize_ws(str(value)))
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _ingest_congreso_iniciativas(
+    conn: sqlite3.Connection,
+    *,
+    extracted_records: list[dict[str, Any]],
+    source_id: str,
+    snapshot_date: str | None,
+    now_iso: str,
+) -> tuple[int, int]:
+    # Each extracted record is one initiative row from an export list.
+    seen = 0
+    loaded = 0
+
+    upsert_rows: list[dict[str, Any]] = []
+    sr_rows: list[dict[str, Any]] = []
+    for rec in extracted_records:
+        seen += 1
+        item = rec.get("payload") or {}
+        if not isinstance(item, dict):
+            continue
+
+        category = normalize_ws(str(rec.get("category") or "")) or None
+        raw_payload = stable_json(item)
+
+        initiative_id: str | None = None
+        leg: str | None = None
+        expediente: str | None = None
+        title: str | None = None
+        type_text: str | None = None
+
+        # Shape A: general initiatives exports (have stable expediente).
+        leg = _congreso_leg_num(item.get("LEGISLATURA"))
+        expediente = normalize_ws(str(item.get("NUMEXPEDIENTE") or "")) or None
+        if leg and expediente:
+            initiative_id = f"congreso:leg{leg}:exp:{expediente}"
+            title = normalize_ws(str(item.get("OBJETO") or "")) or None
+            type_text = normalize_ws(str(item.get("TIPO") or "")) or None
+
+        # Shape B: approved laws export (no expediente/legislature).
+        if initiative_id is None and (item.get("TITULO_LEY") or item.get("NUMERO_LEY")):
+            title = normalize_ws(str(item.get("TITULO_LEY") or "")) or None
+            type_text = normalize_ws(str(item.get("TIPO") or "")) or None
+            num = normalize_ws(str(item.get("NUMERO_LEY") or "")) or None
+            year = None
+            m = re.search(r"\\bLey\\s+(\\d{1,4})/(\\d{4})\\b", title or "")
+            if m:
+                num = num or m.group(1)
+                year = m.group(2)
+            if year is None:
+                iso = _parse_congreso_date(item.get("FECHA_LEY"))
+                if iso:
+                    year = iso[:4]
+            if num and year:
+                expediente = f"ley:{num}/{year}"
+                initiative_id = f"congreso:ley:{num}:{year}"
+            else:
+                initiative_id = f"congreso:ley:{sha256_bytes(raw_payload.encode('utf-8'))[:24]}"
+
+        # Shape C: unknown export row; ingest anyway but keep an explicit hash-derived id.
+        if initiative_id is None:
+            type_text = normalize_ws(str(item.get("TIPO") or "")) or None
+            title = (
+                normalize_ws(str(item.get("OBJETO") or item.get("TITULO") or item.get("TITULO_LEY") or "")) or None
+            )
+            initiative_id = f"congreso:init:{sha256_bytes(raw_payload.encode('utf-8'))[:24]}"
+
+        sr_rows.append({"source_record_id": initiative_id, "raw_payload": raw_payload})
+
+        upsert_rows.append(
+            {
+                "initiative_id": initiative_id,
+                "legislature": leg,
+                "expediente": expediente,
+                "supertype": normalize_ws(str(item.get("SUPERTIPO") or "")) or None,
+                # Keep the OpenData export group visible even if the row lacks a domain-specific grouping.
+                "grouping": normalize_ws(str(item.get("AGRUPACION") or "")) or category,
+                "type": type_text,
+                "title": title,
+                "presented_date": _parse_congreso_date(item.get("FECHAPRESENTACION")),
+                "qualified_date": _parse_congreso_date(item.get("FECHACALIFICACION")),
+                "author_text": normalize_ws(str(item.get("AUTOR") or "")) or None,
+                "procedure_type": normalize_ws(str(item.get("TIPOTRAMITACION") or "")) or None,
+                "result_text": normalize_ws(str(item.get("RESULTADOTRAMITACION") or "")) or None,
+                "current_status": normalize_ws(str(item.get("SITUACIONACTUAL") or "")) or None,
+                "competent_committee": normalize_ws(str(item.get("COMISIONCOMPETENTE") or "")) or None,
+                "deadlines_text": normalize_ws(str(item.get("PLAZOS") or "")) or None,
+                "rapporteurs_text": normalize_ws(str(item.get("PONENTES") or "")) or None,
+                "processing_text": normalize_ws(str(item.get("TRAMITACIONSEGUIDA") or "")) or None,
+                "related_initiatives_text": normalize_ws(str(item.get("INICIATIVASRELACIONADAS") or "")) or None,
+                "links_bocg_json": _urls_to_json_list(item.get("ENLACESBOCG") or item.get("PDF")),
+                "links_ds_json": _urls_to_json_list(item.get("ENLACESDS")),
+                "source_id": source_id,
+                "source_url": str(rec.get("list_url") or "") or None,
+                "source_record_pk": None,  # filled below
+                "source_snapshot_date": snapshot_date,
+                "raw_payload": raw_payload,
+                "created_at": now_iso,
+                "updated_at": now_iso,
+            }
+        )
+
+    pk_map = upsert_source_records(conn, source_id=source_id, rows=sr_rows, snapshot_date=snapshot_date, now_iso=now_iso)
+    for row in upsert_rows:
+        row["source_record_pk"] = pk_map.get(row["initiative_id"])
+
+    upsert_parl_initiatives(conn, source_id=source_id, rows=upsert_rows)
+    loaded = len(upsert_rows)
+    return seen, loaded
 
 
 def ingest_one_source(
@@ -98,6 +241,53 @@ def ingest_one_source(
         events_seen = 0
         events_loaded = 0
         member_votes_loaded = 0
+
+        if source_id == "congreso_iniciativas":
+            rec_seen, rec_loaded = _ingest_congreso_iniciativas(
+                conn,
+                extracted_records=extracted.records,
+                source_id=source_id,
+                snapshot_date=snapshot_date,
+                now_iso=now_iso,
+            )
+            if strict_network and rec_seen > 0 and rec_loaded == 0:
+                raise RuntimeError(
+                    "strict-network abortado: records_seen > 0 y records_loaded == 0 "
+                    f"({source_id}: seen={rec_seen}, loaded={rec_loaded})"
+                )
+
+            min_loaded = SOURCE_CONFIG.get(source_id, {}).get("min_records_loaded_strict")
+            if (
+                strict_network
+                and extracted.note.startswith("network")
+                and isinstance(min_loaded, int)
+                and rec_loaded < min_loaded
+            ):
+                raise RuntimeError(
+                    f"strict-network abortado: records_loaded < min_records_loaded_strict "
+                    f"({source_id}: loaded={rec_loaded}, min={min_loaded})"
+                )
+
+            conn.commit()
+            message = json.dumps(
+                {
+                    "note": extracted.note,
+                    "initiatives_loaded": rec_loaded,
+                },
+                ensure_ascii=True,
+                sort_keys=True,
+            )
+            finish_run(
+                conn,
+                run_id=run_id,
+                status="ok",
+                message=message,
+                records_seen=rec_seen,
+                records_loaded=rec_loaded,
+                fetched_at=extracted.fetched_at,
+                raw_path=extracted.raw_path,
+            )
+            return rec_seen, rec_loaded, message
 
         for rec in extracted.records:
             events_seen += 1
