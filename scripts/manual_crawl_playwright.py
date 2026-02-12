@@ -69,6 +69,14 @@ def is_challenge_or_deny(title: str, url: str, html: str) -> bool:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Interactive Playwright crawler")
     ap.add_argument("--start-url", required=True)
+    ap.add_argument(
+        "--start-html-file",
+        help="Optional local HTML file to use as the link extraction source (no network fetch).",
+    )
+    ap.add_argument(
+        "--resolve-base-url",
+        help="Base URL used to resolve relative hrefs when --start-html-file is used.",
+    )
     ap.add_argument("--label", required=True)
     ap.add_argument("--out-dir", default="etl/data/raw/manual")
     ap.add_argument(
@@ -136,6 +144,8 @@ def main() -> int:
         "started_at": now_iso(),
         "label": args.label,
         "start_url": args.start_url,
+        "start_html_file": args.start_html_file,
+        "resolve_base_url": args.resolve_base_url,
         "user_data_dir": args.user_data_dir,
         "cookies_json": args.cookies_json,
         "href_prefix": args.href_prefix,
@@ -226,17 +236,28 @@ def main() -> int:
         page = ctx.new_page()
         page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
 
-        try:
-            page.goto(args.start_url, wait_until="domcontentloaded", timeout=120_000)
-            ensure_not_blocked(page, "start-url")
-        except Exception as e:
-            meta["errors"].append({"stage": "goto_start", "error": repr(e), "ts": now_iso()})
-            save_meta()
-            print(f"[pw] failed to open start url: {e!r}", file=sys.stderr)
-            ctx.close()
-            return 3
+        if args.start_html_file:
+            try:
+                html = pathlib.Path(args.start_html_file).read_text(encoding="utf-8", errors="replace")
+                page.set_content(html, wait_until="domcontentloaded")
+            except Exception as e:
+                meta["errors"].append({"stage": "load_start_html_file", "error": repr(e), "ts": now_iso()})
+                save_meta()
+                print(f"[pw] failed to load start html file: {e!r}", file=sys.stderr)
+                ctx.close()
+                return 3
+        else:
+            try:
+                page.goto(args.start_url, wait_until="domcontentloaded", timeout=120_000)
+                ensure_not_blocked(page, "start-url")
+            except Exception as e:
+                meta["errors"].append({"stage": "goto_start", "error": repr(e), "ts": now_iso()})
+                save_meta()
+                print(f"[pw] failed to open start url: {e!r}", file=sys.stderr)
+                ctx.close()
+                return 3
 
-        time.sleep(max(0, args.wait_seconds_before_crawl))
+            time.sleep(max(0, args.wait_seconds_before_crawl))
 
         # Extract and normalize links.
         hrefs: list[str] = page.eval_on_selector_all(
@@ -256,7 +277,7 @@ def main() -> int:
                     kept.append(h)
 
         # Resolve relative to start_url's origin.
-        base = args.start_url
+        base = args.resolve_base_url or args.start_url
         abs_links: list[str] = []
         for h in kept:
             abs_links.append(urljoin(base, h))
