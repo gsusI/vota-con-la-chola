@@ -59,3 +59,30 @@
 - `etl/data/raw/`: descargas brutas por fuente y fecha.
 - `etl/data/staging/`: datos normalizados y validados.
 - `etl/data/published/`: snapshots canónicos consumidos por app/API.
+
+## Votos y temas: que datos hacen falta (por nivel)
+
+Objetivo: poder responder a "que tema se voto" y "como voto cada representante" cuando exista voto nominal/roll-call.
+
+Minimo comun (cualquier camara):
+
+- Censo de representantes por legislatura/mandato: ids estables, nombre, grupo/partido, fechas (alta/baja).
+- Catalogo de items votables ("temas"): iniciativas/expedientes (id estable), titulo/objeto, tipo, estado, enlaces a diario/boletin.
+- Eventos de votacion: fecha, sesion, numero, contexto (orden del dia) y totales.
+- Voto por miembro (si existe): id del miembro (ideal) o nombre + grupo + opcion de voto.
+- Vinculo voto <-> expediente/iniciativa: idealmente via id/expediente en el payload; si no existe, guardar metodo+evidencia (matching determinista o manual).
+
+Cobertura por nivel (fuentes tipicas):
+
+- Europeo:
+  - Parlamento Europeo: roll-call votes + metadatos de dossiers (temas) + MEP roster.
+  - Consejo UE: resultados de votacion suelen ser por Estado miembro (no por politico individual).
+- Nacional (Espana):
+  - Congreso: `opendata/votaciones` (votos) + `opendata/iniciativas` (temas/expedientes) + `opendata/intervenciones` (contexto textual).
+  - Senado: catalogo de datos abiertos (votaciones, mociones) + roster de senadores.
+- Autonomico:
+  - Parlamentos con votacion electronica/nominativa: actas/DS/diarios con listados de votos, o datasets (si existen).
+  - Si solo hay votacion por asentimiento o por grupos, no se puede atribuir a individuo: guardar como voto no-nominal.
+- Provincial/insular/municipal:
+  - Plenos (actas y acuerdos) + grabaciones; el voto nominal individual suele ser raro.
+  - Cuando exista (voto nominal en acta), se puede extraer; si no, solo voto por grupo o resultado agregado.
