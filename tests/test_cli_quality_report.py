@@ -145,6 +145,48 @@ class TestParlCliQualityReport(unittest.TestCase):
             self.assertIn("unmatched_by_reason", unmatched)
             self.assertLessEqual(len(unmatched.get("unmatched_sample", [])), 3)
 
+    def test_quality_report_include_unmatched_rejects_negative_sample_limit(self) -> None:
+        snapshot_date = "2026-02-12"
+        connectors = get_connectors()
+
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "parl-quality-cli-invalid.db"
+            raw_dir = Path(td) / "raw"
+
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_parl_sources(conn)
+                connector = connectors["congreso_votaciones"]
+                sample_path = Path(PARL_SOURCE_CONFIG["congreso_votaciones"]["fallback_file"])
+                ingest_parl_source(
+                    conn=conn,
+                    connector=connector,
+                    raw_dir=raw_dir,
+                    timeout=5,
+                    from_file=sample_path,
+                    url_override=None,
+                    snapshot_date=snapshot_date,
+                    strict_network=True,
+                    options={},
+                )
+            finally:
+                conn.close()
+
+            with self.assertRaises(SystemExit):
+                main(
+                    [
+                        "quality-report",
+                        "--db",
+                        str(db_path),
+                        "--source-ids",
+                        "congreso_votaciones",
+                        "--include-unmatched",
+                        "--unmatched-sample-limit",
+                        "-1",
+                    ]
+                )
+
 
 if __name__ == "__main__":
     unittest.main()
