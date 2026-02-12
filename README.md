@@ -13,6 +13,7 @@ Implementado hoy:
 - **Instantánea publicada** de “próximas elecciones por nivel” (Markdown + JSON).
 - **Instantánea publicada** de representantes/mandatos activos (excluye `municipal` por defecto) en `etl/data/published/representantes-es-2026-02-12.json`.
 - **Ingesta inicial** del catálogo de descargas de Infoelectoral (tipos de convocatoria, convocatorias y archivos) a SQLite (tablas `infoelectoral_*`).
+- **Ingesta inicial** de **votaciones del Congreso** (OpenData) a SQLite (`parl_vote_events` + `parl_vote_member_votes`).
 - **Web provisional** (estática y/o Cloudflare Worker) para página de aterrizaje.
 - Cobertura actual (representantes/mandatos) verificada E2E en Docker: **20 fuentes** (incluye **Cortes de Aragón** con activos + bajas, y **Asamblea de Ceuta**).
 

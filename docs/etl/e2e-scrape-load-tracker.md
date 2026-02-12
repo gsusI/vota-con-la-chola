@@ -107,7 +107,7 @@ Legenda:
 | Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | PARTIAL | Ingesta del catalogo de descargas (tipos/convocatorias/archivos) en SQLite; falta publish y cobertura de resultados |
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
 | Marco legal electoral | Legal | BOE API | TODO | Falta conector legal y modelo de documentos |
-| Votaciones Congreso | Parlamentario | Congreso votaciones | TODO | Falta conector y modelo de voto |
+| Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; falta publish y mejorar linkage a expedientes/temas (IDs no presentes en roll-call) |
 | Iniciativas Congreso | Parlamentario | Congreso iniciativas | TODO | Falta conector y modelo de iniciativa |
 | Intervenciones Congreso | Parlamentario | Congreso intervenciones | TODO | Falta conector y modelo de evidencia textual |
 | Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | TODO | Falta conectores y mapping |

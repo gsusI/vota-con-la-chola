@@ -15,6 +15,7 @@ DEFAULT_TRACKER = Path("docs/etl/e2e-scrape-load-tracker.md")
 # Mapping between tracker table rows and source_id values.
 TRACKER_SOURCE_HINTS = {
     "Congreso OpenData Diputados": "congreso_diputados",
+    "Congreso votaciones": "congreso_votaciones",
     "Senado CSV Senadores": "senado_senadores",
     "Senado OpenData XML": "senado_senadores",
     "Europarl MEP XML": "europarl_meps",
