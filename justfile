@@ -2,6 +2,8 @@ db_path := env_var_or_default("DB_PATH", "etl/data/staging/politicos-es.db")
 snapshot_date := env_var_or_default("SNAPSHOT_DATE", "2026-02-12")
 tracker_path := env_var_or_default("TRACKER_PATH", "docs/etl/e2e-scrape-load-tracker.md")
 municipal_timeout := env_var_or_default("MUNICIPAL_TIMEOUT", "240")
+galicia_manual_dir := env_var_or_default("GALICIA_MANUAL_DIR", "etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages")
+navarra_manual_dir := env_var_or_default("NAVARRA_MANUAL_DIR", "etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages")
 
 default:
   @just --list
@@ -114,6 +116,14 @@ etl-extract-parlamento-andalucia:
 
 etl-extract-parlamento-vasco:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source parlamento_vasco_parlamentarios --snapshot-date {{snapshot_date}} --strict-network"
+
+etl-extract-parlamento-galicia-manual:
+  test -d {{galicia_manual_dir}} || (echo "GALICIA_MANUAL_DIR no existe: {{galicia_manual_dir}}. Captura perfiles (Playwright) y exporta la ruta." && exit 2)
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source parlamento_galicia_deputados --from-file {{galicia_manual_dir}} --snapshot-date {{snapshot_date}}"
+
+etl-extract-parlamento-navarra-manual:
+  test -d {{navarra_manual_dir}} || (echo "NAVARRA_MANUAL_DIR no existe: {{navarra_manual_dir}}. Captura perfiles (Playwright) y exporta la ruta." && exit 2)
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source parlamento_navarra_parlamentarios_forales --from-file {{navarra_manual_dir}} --snapshot-date {{snapshot_date}}"
 
 etl-extract-all:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
