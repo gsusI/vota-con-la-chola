@@ -48,3 +48,40 @@ jobs:
             --db etl/data/staging/politicos-es.ci-gate.db \
             --tracker docs/etl/e2e-scrape-load-tracker.md \
             --fail-on-done-zero-real
+
+  vote-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ingest parliamentary vote smoke sample
+        env:
+          DB_PATH: etl/data/staging/politicos-es.ci-votes-smoke.db
+        run: |
+          python3 scripts/ingestar_parlamentario_es.py init-db --db "$DB_PATH"
+          python3 scripts/ingestar_parlamentario_es.py ingest \
+            --db "$DB_PATH" \
+            --source congreso_votaciones \
+            --from-file etl/data/raw/samples/congreso_votaciones_sample.json \
+            --snapshot-date 2026-02-12 \
+            --strict-network
+          python3 scripts/ingestar_parlamentario_es.py ingest \
+            --db "$DB_PATH" \
+            --source senado_votaciones \
+            --from-file etl/data/raw/samples/senado_votaciones_sample.xml \
+            --snapshot-date 2026-02-12 \
+            --strict-network
+
+      - name: Validate vote smoke
+        env:
+          DB_PATH: etl/data/staging/politicos-es.ci-votes-smoke.db
+        run: |
+          python3 scripts/etl_smoke_votes.py --db "$DB_PATH"

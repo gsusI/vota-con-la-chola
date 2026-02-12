@@ -111,6 +111,12 @@ etl-smoke-e2e:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/etl_smoke_e2e.py --db {{db_path}}"
 
+etl-smoke-votes:
+  python3 scripts/ingestar_parlamentario_es.py init-db --db {{db_path}}
+  python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json --snapshot-date {{snapshot_date}} --strict-network
+  python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml --snapshot-date {{snapshot_date}} --strict-network
+  python3 scripts/etl_smoke_votes.py --db {{db_path}}
+
 etl-extract-congreso:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
 

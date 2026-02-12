@@ -59,6 +59,7 @@ just etl-e2e
 just etl-publish-representantes
 just etl-publish-votaciones
 just etl-smoke-e2e
+just etl-smoke-votes
 ```
 
 UI de navegacion de grafo (Docker):
