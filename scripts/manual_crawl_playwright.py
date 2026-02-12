@@ -98,6 +98,11 @@ def main() -> int:
     ap.add_argument("--channel", default="chrome")
     ap.add_argument("--viewport", default="1280x800")
     ap.add_argument("--save-screenshots", action="store_true")
+    ap.add_argument(
+        "--new-page-per-visit",
+        action="store_true",
+        help="Open each visited URL in a fresh tab (reduces referrer/carryover effects).",
+    )
     args = ap.parse_args()
 
     try:
@@ -143,6 +148,7 @@ def main() -> int:
         "channel": args.channel,
         "viewport": {"width": vw, "height": vh},
         "save_screenshots": bool(args.save_screenshots),
+        "new_page_per_visit": bool(args.new_page_per_visit),
         "links": [],
         "visited": [],
         "errors": [],
@@ -188,22 +194,19 @@ def main() -> int:
                 print(f"[pw] failed to preload cookies: {e!r}", file=sys.stderr)
                 sys.stderr.flush()
 
-        page = ctx.new_page()
-        page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
-
-        def ensure_not_blocked(where: str) -> None:
+        def ensure_not_blocked(p, where: str) -> None:
             deadline = time.time() + args.challenge_wait_seconds
             while True:
                 try:
-                    title = page.title()
+                    title = p.title()
                 except Exception:
                     title = ""
                 try:
-                    cur_url = page.url
+                    cur_url = p.url
                 except Exception:
                     cur_url = ""
                 try:
-                    html = page.content()
+                    html = p.content()
                 except Exception:
                     html = ""
 
@@ -220,9 +223,12 @@ def main() -> int:
                 sys.stdout.flush()
                 time.sleep(5)
 
+        page = ctx.new_page()
+        page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
+
         try:
             page.goto(args.start_url, wait_until="domcontentloaded", timeout=120_000)
-            ensure_not_blocked("start-url")
+            ensure_not_blocked(page, "start-url")
         except Exception as e:
             meta["errors"].append({"stage": "goto_start", "error": repr(e), "ts": now_iso()})
             save_meta()
@@ -280,17 +286,22 @@ def main() -> int:
             rec = {"i": i, "url": url, "started_at": now_iso(), "status": None, "title": None, "final_url": None}
             try:
                 delay()
-                resp = page.goto(url, wait_until="domcontentloaded", timeout=120_000)
-                ensure_not_blocked(f"visit:{i}")
+                visit_page = page
+                if args.new_page_per_visit:
+                    visit_page = ctx.new_page()
+                    visit_page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
+
+                resp = visit_page.goto(url, wait_until="domcontentloaded", timeout=120_000)
+                ensure_not_blocked(visit_page, f"visit:{i}")
 
                 try:
-                    page.wait_for_load_state("networkidle", timeout=10_000)
+                    visit_page.wait_for_load_state("networkidle", timeout=10_000)
                 except Exception:
                     pass
 
-                title = page.title()
-                final_url = page.url
-                html = page.content()
+                title = visit_page.title()
+                final_url = visit_page.url
+                html = visit_page.content()
 
                 # File naming uses path tail.
                 parsed = urlparse(final_url)
@@ -300,7 +311,7 @@ def main() -> int:
                 out_base.with_suffix(".html").write_text(html, encoding="utf-8")
                 if args.save_screenshots:
                     try:
-                        page.screenshot(path=str(out_base) + ".png", full_page=True)
+                        visit_page.screenshot(path=str(out_base) + ".png", full_page=True)
                     except Exception:
                         pass
 
@@ -319,6 +330,12 @@ def main() -> int:
                     save_meta()
                 print(f"[pw] {i}/{len(links)} ok status={rec['status']} title={title!r}")
                 sys.stdout.flush()
+
+                if args.new_page_per_visit:
+                    try:
+                        visit_page.close()
+                    except Exception:
+                        pass
             except Exception as e:
                 rec.update({"status": "error", "error": repr(e), "ended_at": now_iso()})
                 meta["visited"].append(rec)
@@ -326,6 +343,11 @@ def main() -> int:
                 save_meta()
                 print(f"[pw] {i}/{len(links)} ERROR {e!r}", file=sys.stderr)
                 sys.stderr.flush()
+                if args.new_page_per_visit:
+                    try:
+                        visit_page.close()
+                    except Exception:
+                        pass
 
         meta["ended_at"] = now_iso()
         save_meta()
