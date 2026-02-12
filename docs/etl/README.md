@@ -22,7 +22,11 @@ Actualmente:
 - Roadmap de cobertura de votaciones: `docs/etl/vote-coverage-roadmap.md`.
 
 Nota para votaciones:
+- Flujo recomendado: `ingest -> backfill-member-ids -> link-votes -> quality-report -> publish`.
 - Ejecuta `python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>` antes de publicar si quieres maximizar `evento -> tema`.
+- Ejecuta `python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db <db>` después de la ingesta de `congreso_votaciones,senado_votaciones` para resolver `person_id` en votos nominales.
+- Sugerencia operativa: añade `--unmatched-sample-limit 50` para capturar casos sin emparejar y priorizar corrección manual por razón (`no_candidates`, `skipped_no_name`, `ambiguous`, ...).
+- Revisa KPIs/gate con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --source-ids congreso_votaciones,senado_votaciones` y usa `--enforce-gate` para fallar en CI cuando no se cumpla el minimo.
 - El JSON de votaciones puede ser muy grande en corridas completas; para smoke/debug usa `--max-events` y/o `--max-member-votes-per-event`.
 
 ## Entorno reproducible con Docker
@@ -37,8 +41,12 @@ Prerequisitos:
 just etl-build
 just etl-init
 just etl-samples
+just parl-backfill-member-ids
 just parl-samples
+just parl-link-votes
+just parl-quality-report
 just etl-stats
+just etl-backfill-normalized
 just etl-e2e
 just etl-publish-representantes
 just etl-publish-votaciones
@@ -132,6 +140,12 @@ Backfill opcional de normalizacion (una vez, para historico):
 ```bash
 docker compose run --rm etl \
   "python3 scripts/ingestar_politicos_es.py backfill-normalized --db etl/data/staging/politicos-es.db"
+```
+
+Con `just`:
+
+```bash
+just etl-backfill-normalized
 ```
 
 Nota de rendimiento:

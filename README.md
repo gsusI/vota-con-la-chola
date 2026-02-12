@@ -107,8 +107,20 @@ just etl-init
 
 ```bash
 just etl-samples
+just parl-samples
+just parl-backfill-member-ids
+just parl-link-votes
+just parl-quality-report
 just etl-stats
 just etl-publish-votaciones
+```
+
+Flujo recomendado para votaciones parlamentarias: `ingest -> backfill-member-ids -> link-votes -> quality-report -> publish`.
+
+Si cambias o expandes normalización en esquema, ejecuta el backfill histórico una vez tras `init-db`:
+
+```bash
+just etl-backfill-normalized
 ```
 
 4) Levanta la interfaz de exploración (web):
@@ -184,6 +196,12 @@ Comandos:
 - `ingest`: ingiere una fuente (`--source <id>` o `--source all`).
 - `stats`: métricas rápidas.
 - `backfill-normalized`: relleno retroactivo (backfill) para normalización histórica (no se ejecuta en la ingesta normal).
+- `backfill-member-ids`: relleno retroactivo de `parl_vote_member_votes.person_id` por nombre+legislatura (usando `mandates` del mismo período).
+
+  - `--dry-run`: calcula emparejamientos sin escribir `person_id`.
+  - `--source-ids`: filtra orígenes (`congreso_votaciones,senado_votaciones`).
+  - `--batch-size`: tamaño de lote SQL para updates.
+  - `--unmatched-sample-limit`: incluye hasta N ejemplos de filas sin emparejar en `unmatched_sample`.
 
 Parámetros que importan:
 
