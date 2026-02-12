@@ -165,7 +165,11 @@ def main() -> int:
             locale="es-ES",
             timezone_id="Europe/Madrid",
             viewport={"width": vw, "height": vh},
-            args=["--no-default-browser-check"],
+            args=[
+                "--disable-dev-shm-usage",
+                "--no-default-browser-check",
+                "--disable-features=IsolateOrigins,site-per-process",
+            ],
         )
 
         if args.cookies_json:
