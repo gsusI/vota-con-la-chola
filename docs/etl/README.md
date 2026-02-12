@@ -12,6 +12,7 @@ Estructura minima de `etl/`:
 Actualmente:
 - Snapshot de proximas elecciones: `etl/data/published/proximas-elecciones-espana.json`.
 - Snapshot de representantes (JSON, excluye municipal por defecto): `etl/data/published/representantes-es-<snapshot_date>.json` (ver `scripts/publicar_representantes_es.py`).
+- Snapshot de votaciones parlamentarias (JSON): `etl/data/published/votaciones-es-<snapshot_date>.json` (ver `scripts/publicar_votaciones_es.py`).
 - Esquema SQLite ETL: `etl/load/sqlite_schema.sql`.
 - CLI ingesta politicos: `scripts/ingestar_politicos_es.py`.
 - CLI ingesta Infoelectoral (descargas): `scripts/ingestar_infoelectoral_es.py`.
@@ -19,6 +20,10 @@ Actualmente:
 - Plan de extraccion fuente por fuente: `docs/etl/extraccion-politicos-plan.md`.
 - Tracker E2E scrape/load (TODO operativo): `docs/etl/e2e-scrape-load-tracker.md`.
 - Roadmap de cobertura de votaciones: `docs/etl/vote-coverage-roadmap.md`.
+
+Nota para votaciones:
+- Ejecuta `python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>` antes de publicar si quieres maximizar `evento -> tema`.
+- El JSON de votaciones puede ser muy grande en corridas completas; para smoke/debug usa `--max-events` y/o `--max-member-votes-per-event`.
 
 ## Entorno reproducible con Docker
 
@@ -36,6 +41,7 @@ just parl-samples
 just etl-stats
 just etl-e2e
 just etl-publish-representantes
+just etl-publish-votaciones
 ```
 
 UI de navegacion de grafo (Docker):

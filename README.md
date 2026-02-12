@@ -14,6 +14,7 @@ Implementado hoy:
 - **Interfaz web local** para explorar el “grafo” (personas, instituciones, partidos, mandatos) y un **explorador genérico de SQLite** basado en esquema.
 - **Instantánea publicada** de “próximas elecciones por nivel” (Markdown + JSON).
 - **Instantánea publicada** de representantes/mandatos activos (excluye `municipal` por defecto) en `etl/data/published/representantes-es-2026-02-12.json`.
+- **Publicador canónico de votaciones parlamentarias** (`scripts/publicar_votaciones_es.py`) con salida en `etl/data/published/votaciones-es-<snapshot_date>.json`.
 - **Ingesta inicial** del catálogo de descargas de Infoelectoral (tipos de convocatoria, convocatorias y archivos) a SQLite (tablas `infoelectoral_*`).
 - **Ingesta inicial** de **votaciones del Congreso** (OpenData) a SQLite (`parl_vote_events` + `parl_vote_member_votes`).
 - **Web provisional** (estática y/o Cloudflare Worker) para página de aterrizaje.
@@ -107,6 +108,7 @@ just etl-init
 ```bash
 just etl-samples
 just etl-stats
+just etl-publish-votaciones
 ```
 
 4) Levanta la interfaz de exploración (web):

@@ -38,12 +38,14 @@ Meta: completar cobertura nacional reproducible (Congreso + Senado) con linking 
 
 Meta: artefacto publicable y consumible por UI/API.
 
-1. Publicacion canónica de votaciones
-- Generar snapshot en `etl/data/published/` con:
+1. Publicacion canónica de votaciones (hecho en codigo)
+- Script: `scripts/publicar_votaciones_es.py` (snapshot `etl/data/published/votaciones-es-<snapshot>.json`).
+- Genera artefacto con:
   - evento de voto
   - iniciativa/tema enlazado
   - voto por persona
   - trazabilidad de `source_id`, `source_url`, `source_record_pk`.
+- Pendiente operativo: corrida completa y versionado regular del snapshot publicado.
 
 2. KPIs de calidad y gaps
 - `% eventos con tema`
