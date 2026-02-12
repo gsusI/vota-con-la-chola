@@ -71,6 +71,13 @@ def main() -> int:
     ap.add_argument("--start-url", required=True)
     ap.add_argument("--label", required=True)
     ap.add_argument("--out-dir", default="etl/data/raw/manual")
+    ap.add_argument(
+        "--cookies-json",
+        help=(
+            "Path to a Playwright cookies JSON file (as emitted by "
+            "`scripts/manual_capture_playwright.py`) to preload into the browser context."
+        ),
+    )
 
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--href-prefix", help="Only keep links whose href starts with this prefix")
@@ -117,6 +124,7 @@ def main() -> int:
         "started_at": now_iso(),
         "label": args.label,
         "start_url": args.start_url,
+        "cookies_json": args.cookies_json,
         "href_prefix": args.href_prefix,
         "href_regex": args.href_regex,
         "max_pages": args.max_pages,
@@ -150,6 +158,22 @@ def main() -> int:
             viewport={"width": vw, "height": vh},
             args=["--no-default-browser-check"],
         )
+
+        if args.cookies_json:
+            try:
+                cookies = json.loads(pathlib.Path(args.cookies_json).read_text(encoding="utf-8"))
+                if not isinstance(cookies, list):
+                    raise ValueError("cookies json must be a list")
+                ctx.add_cookies(cookies)
+                print(f"[pw] preloaded cookies: {args.cookies_json}")
+                sys.stdout.flush()
+            except Exception as e:
+                meta["errors"].append(
+                    {"stage": "load_cookies", "path": args.cookies_json, "error": repr(e), "ts": now_iso()}
+                )
+                save_meta()
+                print(f"[pw] failed to preload cookies: {e!r}", file=sys.stderr)
+                sys.stderr.flush()
 
         page = ctx.new_page()
         page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
