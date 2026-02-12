@@ -110,7 +110,7 @@ Legenda:
 | Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; falta publish y mejorar linkage a expedientes/temas (IDs no presentes en roll-call) |
 | Iniciativas Congreso | Parlamentario | Congreso iniciativas | PARTIAL | Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; falta publish y linkage a `parl_vote_events` |
 | Intervenciones Congreso | Parlamentario | Congreso intervenciones | TODO | Falta conector y modelo de evidencia textual |
-| Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | `senado_votaciones` carga eventos + totales + roll-call via `videoservlet.senado.es/legis15/votaciones/ses_<n>.xml`; pendiente publish y mejorar linkage `person_id`/cobertura de mociones |
+| Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | `senado_votaciones` carga eventos + totales + roll-call via `videoservlet.senado.es/legis15/votaciones/ses_<n>.xml`; `senado_iniciativas` (tipoFich=9) carga temas/expedientes y permite linking determinista `(legislature, expediente)`; pendiente publish y mejorar linkage `person_id` |
 | Referencias territoriales | Catalogos | REL, INE, IGN | TODO | Falta catalogo canonico territorial |
 | Posiciones declaradas (programas) | Editorial | Webs/programas de partidos | TODO | Falta pipeline semiestructurado + revision humana |
 
@@ -224,7 +224,7 @@ Legenda:
 - [ ] Junta Electoral Central: estado de convocatorias.
 - [ ] BOE API: normativa/convocatorias.
 - [ ] Congreso votaciones.
-- [ ] Senado votaciones/mociones.
+- [ ] Senado votaciones/mociones (cerrar publish y cobertura de `person_id`).
 
 ### P1
 
