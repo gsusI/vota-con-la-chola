@@ -72,6 +72,13 @@ def main() -> int:
     ap.add_argument("--label", required=True)
     ap.add_argument("--out-dir", default="etl/data/raw/manual")
     ap.add_argument(
+        "--user-data-dir",
+        help=(
+            "Optional existing browser profile directory to reuse. "
+            "Useful when a site sets clearance cookies tied to the profile."
+        ),
+    )
+    ap.add_argument(
         "--cookies-json",
         help=(
             "Path to a Playwright cookies JSON file (as emitted by "
@@ -124,6 +131,7 @@ def main() -> int:
         "started_at": now_iso(),
         "label": args.label,
         "start_url": args.start_url,
+        "user_data_dir": args.user_data_dir,
         "cookies_json": args.cookies_json,
         "href_prefix": args.href_prefix,
         "href_regex": args.href_regex,
@@ -149,8 +157,9 @@ def main() -> int:
     sys.stdout.flush()
 
     with sync_playwright() as p:
+        profile_dir = pathlib.Path(args.user_data_dir) if args.user_data_dir else (run_dir / "profile")
         ctx = p.chromium.launch_persistent_context(
-            user_data_dir=str(run_dir / "profile"),
+            user_data_dir=str(profile_dir),
             headless=False,
             channel=args.channel or None,
             locale="es-ES",
