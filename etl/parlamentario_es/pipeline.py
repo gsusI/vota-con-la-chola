@@ -21,16 +21,17 @@ from .connectors.base import BaseConnector
 from .db import upsert_parl_initiatives, upsert_parl_vote_event, upsert_source_record_for_event, upsert_source_records
 
 
-def _load_congreso_person_map(conn: sqlite3.Connection) -> dict[str, int]:
-    # Best-effort mapping: Congreso vote files don't include deputy id, only name.
-    # We restrict candidates to active Congreso mandates to reduce collisions.
+def _load_person_map_for_mandate_source(conn: sqlite3.Connection, mandate_source_id: str) -> dict[str, int]:
+    # Best-effort mapping by active mandates in the same institution/source.
     rows = conn.execute(
         """
         SELECT DISTINCT p.person_id, p.full_name
         FROM persons p
         JOIN mandates m ON m.person_id = p.person_id
-        WHERE m.source_id = 'congreso_diputados' AND m.is_active = 1
+        WHERE m.source_id = ? AND m.is_active = 1
         """
+        ,
+        (mandate_source_id,),
     ).fetchall()
     mapping: dict[str, int] = {}
     for r in rows:
@@ -220,9 +221,11 @@ def _ingest_senado_votaciones(
     source_id: str,
     snapshot_date: str | None,
     now_iso: str,
-) -> tuple[int, int]:
+) -> tuple[int, int, int]:
     seen = 0
     loaded = 0
+    member_votes_loaded = 0
+    person_map = _load_person_map_for_mandate_source(conn, "senado_senadores")
     for rec in extracted_records:
         seen += 1
         payload = rec.get("payload") or {}
@@ -260,27 +263,98 @@ def _ingest_senado_votaciones(
                 "legislature": rec.get("legislature"),
                 "session_number": payload.get("session_id"),
                 "vote_number": payload.get("vote_id"),
-                "vote_date": None,
+                "vote_date": payload.get("vote_date"),
                 "title": payload.get("vote_title"),
                 "expediente_text": expediente_text,
                 "subgroup_title": None,
                 "subgroup_text": None,
                 "assentimiento": None,
-                "totals_present": None,
-                "totals_yes": None,
-                "totals_no": None,
-                "totals_abstain": None,
-                "totals_no_vote": None,
+                "totals_present": payload.get("totals_present"),
+                "totals_yes": payload.get("totals_yes"),
+                "totals_no": payload.get("totals_no"),
+                "totals_abstain": payload.get("totals_abstain"),
+                "totals_no_vote": payload.get("totals_no_vote"),
             },
             source_id=source_id,
-            source_url=normalize_ws(str(payload.get("source_tipo12_url") or "")) or str(rec.get("detail_url") or ""),
+            source_url=normalize_ws(
+                str(
+                    payload.get("detail_source")
+                    or payload.get("session_vote_file_url")
+                    or payload.get("source_tipo12_url")
+                    or ""
+                )
+            )
+            or str(rec.get("detail_url") or ""),
             source_record_pk=source_record_pk,
             snapshot_date=snapshot_date,
             raw_payload=event_payload_json,
             now_iso=now_iso,
         )
         loaded += 1
-    return seen, loaded
+
+        member_votes = payload.get("member_votes") or []
+        conn.execute("DELETE FROM parl_vote_member_votes WHERE vote_event_id = ?", (vote_event_id,))
+        member_rows: list[tuple[Any, ...]] = []
+        for mv in member_votes:
+            if not isinstance(mv, dict):
+                continue
+            member_name = mv.get("member_name")
+            member_full, member_norm = _normalize_vote_member_name(member_name)
+            person_id = person_map.get(member_norm or "") if member_norm else None
+            seat_raw = mv.get("seat")
+            seat = str(seat_raw) if seat_raw is not None else None
+            if not seat:
+                seat = f"name:{member_norm or sha256_bytes((member_full or member_name or '').encode('utf-8'))[:16]}"
+            member_rows.append(
+                (
+                    vote_event_id,
+                    seat,
+                    member_full,
+                    member_norm,
+                    person_id,
+                    mv.get("group"),
+                    mv.get("vote_choice") or "",
+                    source_id,
+                    str(
+                        payload.get("detail_source")
+                        or payload.get("session_vote_file_url")
+                        or payload.get("source_tipo12_url")
+                        or rec.get("detail_url")
+                        or ""
+                    ),
+                    snapshot_date,
+                    stable_json(mv),
+                    now_iso,
+                    now_iso,
+                )
+            )
+
+        if member_rows:
+            conn.executemany(
+                """
+                INSERT INTO parl_vote_member_votes (
+                  vote_event_id,
+                  seat, member_name, member_name_normalized, person_id,
+                  group_code, vote_choice,
+                  source_id, source_url, source_snapshot_date,
+                  raw_payload, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(vote_event_id, seat) DO UPDATE SET
+                  member_name=excluded.member_name,
+                  member_name_normalized=excluded.member_name_normalized,
+                  person_id=COALESCE(excluded.person_id, parl_vote_member_votes.person_id),
+                  group_code=excluded.group_code,
+                  vote_choice=excluded.vote_choice,
+                  source_url=COALESCE(excluded.source_url, parl_vote_member_votes.source_url),
+                  source_snapshot_date=COALESCE(excluded.source_snapshot_date, parl_vote_member_votes.source_snapshot_date),
+                  raw_payload=excluded.raw_payload,
+                  updated_at=excluded.updated_at
+                """,
+                member_rows,
+            )
+        member_votes_loaded += len(member_rows)
+
+    return seen, loaded, member_votes_loaded
 
 
 def ingest_one_source(
@@ -328,7 +402,9 @@ def ingest_one_source(
             ),
         )
 
-        person_map = _load_congreso_person_map(conn) if source_id == "congreso_votaciones" else {}
+        person_map: dict[str, int] = {}
+        if source_id == "congreso_votaciones":
+            person_map = _load_person_map_for_mandate_source(conn, "congreso_diputados")
 
         now_iso = now_utc_iso()
         events_seen = 0
@@ -383,7 +459,7 @@ def ingest_one_source(
             return rec_seen, rec_loaded, message
 
         if source_id == "senado_votaciones":
-            rec_seen, rec_loaded = _ingest_senado_votaciones(
+            rec_seen, rec_loaded, mv_loaded = _ingest_senado_votaciones(
                 conn,
                 extracted_records=extracted.records,
                 source_id=source_id,
@@ -413,7 +489,7 @@ def ingest_one_source(
                 {
                     "note": extracted.note,
                     "events_loaded": rec_loaded,
-                    "member_votes_loaded": 0,
+                    "member_votes_loaded": mv_loaded,
                 },
                 ensure_ascii=True,
                 sort_keys=True,

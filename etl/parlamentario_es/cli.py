@@ -32,6 +32,10 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_ing.add_argument("--max-votes", type=int, default=None, help="Limita numero de votaciones (debug)")
     p_ing.add_argument("--max-files", type=int, default=None, help="Limita numero de ficheros (debug)")
     p_ing.add_argument("--max-records", type=int, default=None, help="Limita numero de registros (debug)")
+    p_ing.add_argument("--senado-detail-dir", default=None, help="Dir local con ses_<n>.xml para enriquecer votaciones Senado")
+    p_ing.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga de detalle Senado (opcional)")
+    p_ing.add_argument("--senado-detail-host", default=None, help="Host base para ses_<n>.xml (default videoservlet)")
+    p_ing.add_argument("--senado-skip-details", action="store_true", help="No intentar enriquecer detalle por sesion en Senado")
     p_ing.add_argument("--since-date", default=None, help="Filtra por fecha >= YYYY-MM-DD (usa path yyyymmdd)")
     p_ing.add_argument("--until-date", default=None, help="Filtra por fecha <= YYYY-MM-DD (usa path yyyymmdd)")
 
@@ -118,6 +122,10 @@ def main(argv: list[str] | None = None) -> int:
                 "max_votes": args.max_votes,
                 "max_files": args.max_files,
                 "max_records": args.max_records,
+                "senado_detail_dir": args.senado_detail_dir,
+                "senado_detail_cookie": args.senado_detail_cookie,
+                "senado_detail_host": args.senado_detail_host,
+                "senado_skip_details": args.senado_skip_details,
                 "since_date": args.since_date,
                 "until_date": args.until_date,
             }
