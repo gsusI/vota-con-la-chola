@@ -8,6 +8,7 @@ from typing import Any
 
 from .config import DEFAULT_DB, DEFAULT_RAW_DIR, DEFAULT_SCHEMA, DEFAULT_TIMEOUT, SOURCE_CONFIG
 from .db import apply_schema, open_db, seed_sources
+from .linking import link_congreso_votes_to_initiatives
 from .pipeline import ingest_one_source
 from .registry import get_connectors
 
@@ -37,6 +38,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_stats = sub.add_parser("stats", help="Metricas rapidas")
     p_stats.add_argument("--db", default=str(DEFAULT_DB))
 
+    p_link = sub.add_parser("link-votes", help="Link votes -> initiatives/topics (best-effort)")
+    p_link.add_argument("--db", default=str(DEFAULT_DB))
+    p_link.add_argument("--max-events", type=int, default=None)
+    p_link.add_argument("--dry-run", action="store_true")
+
     return p.parse_args(argv)
 
 
@@ -51,11 +57,14 @@ def _stats(conn: sqlite3.Connection) -> None:
     mv_unmatched = int(rows["c"]) if rows else 0
     rows = conn.execute("SELECT COUNT(*) AS c FROM parl_initiatives").fetchone()
     initiatives = int(rows["c"]) if rows else 0
+    rows = conn.execute("SELECT COUNT(*) AS c FROM parl_vote_event_initiatives").fetchone()
+    links = int(rows["c"]) if rows else 0
 
     print(f"parl_vote_events: {events}")
     print(f"parl_vote_member_votes: {mv}")
     print(f"parl_vote_member_votes_unmatched_person: {mv_unmatched}")
     print(f"parl_initiatives: {initiatives}")
+    print(f"parl_vote_event_initiatives: {links}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -77,6 +86,19 @@ def main(argv: list[str] | None = None) -> int:
             _stats(conn)
         finally:
             conn.close()
+        return 0
+
+    if args.cmd == "link-votes":
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = link_congreso_votes_to_initiatives(
+                conn, max_events=args.max_events, dry_run=bool(args.dry_run)
+            )
+        finally:
+            conn.close()
+        print(result)
         return 0
 
     if args.cmd == "ingest":
