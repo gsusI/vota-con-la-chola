@@ -1,0 +1,35 @@
+services:
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vota-con-la-chola-etl:local
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+    entrypoint: ["/bin/sh", "-lc"]
+    command: ["python3 --version"]
+
+  graph-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vota-con-la-chola-etl:local
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+    ports:
+      - "${GRAPH_PORT:-8080}:8080"
+    entrypoint: ["/bin/sh", "-lc"]
+    command:
+      [
+        "python3 scripts/graph_ui_server.py --db ${DB_PATH:-etl/data/staging/politicos-es.db} --host 0.0.0.0 --port 8080",
+      ]
