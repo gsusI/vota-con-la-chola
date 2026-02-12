@@ -205,7 +205,7 @@ Legenda:
 - [x] Parse de grupo (`GP XXX`) y fechas `(dd.mm.yyyy - ...)`.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 60`) en codigo.
-- [ ] Considerar enriquecer con ficha personal (`/fichas/c_<id>_SM.html`) para metadatos extra.
+- [x] Considerar enriquecer con ficha personal (`/fichas/c_<id>_SM.html`) para metadatos extra.
 
 ### 10) `cortes_clm_diputados` (DONE tecnico, calidad pendiente)
 

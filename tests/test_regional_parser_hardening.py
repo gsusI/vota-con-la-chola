@@ -5,7 +5,11 @@ from unittest.mock import patch
 
 from etl.politicos_es.connectors.cortes_clm import parse_cclm_detail, parse_cclm_list_rows
 from etl.politicos_es.connectors.parlamento_andalucia import parse_pa_list_ids
-from etl.politicos_es.connectors.parlamento_vasco import parse_member_row, parse_vasco_detail_profile
+from etl.politicos_es.connectors.parlamento_vasco import (
+    build_parlamento_vasco_records,
+    parse_member_row,
+    parse_vasco_detail_profile,
+)
 
 
 class TestRegionalParserHardening(unittest.TestCase):
@@ -35,6 +39,26 @@ class TestRegionalParserHardening(unittest.TestCase):
         self.assertEqual(row["group_name"], "EA-NV")
         self.assertEqual(row["start_date"], "2024-05-14")
         self.assertEqual(row["end_date"], "2024-06-16")
+
+    @patch("etl.politicos_es.connectors.parlamento_vasco.http_get_bytes")
+    def test_build_vasco_records_enriches_from_profile_page(self, fake_http_get_bytes) -> None:
+        list_row = "<tr><td><a href=\"/fichas/c_21.html\">Kalea, Iñigo</a></td></tr>"
+        list_html = f"<table>{list_row * 55}</table>"
+        profile_payload = (b"<div>Parlamentario del Grupo Grupo Mixto-Sumar (21.05.2024 - )</div>", "text/html")
+
+        def fake_get(*_args, **_kwargs):
+            fake_get.calls += 1
+            if fake_get.calls == 1:
+                return list_html.encode("utf-8"), "text/html"
+            return profile_payload
+
+        fake_get.calls = 0
+        fake_http_get_bytes.side_effect = fake_get
+
+        records = build_parlamento_vasco_records(timeout=5)
+        self.assertEqual(len(records), 55)
+        self.assertEqual(records[0]["group_name"], "Mixto-Sumar")
+        self.assertEqual(records[0]["start_date"], "2024-05-21")
 
     def test_parse_vasco_member_row_handles_mixed_case_group(self) -> None:
         tr_html = """
