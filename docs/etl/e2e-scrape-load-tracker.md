@@ -136,7 +136,7 @@ Legenda:
 - [x] Discovery de JSON versionado.
 - [x] Ingesta real `strict-network`.
 - [x] Upsert en esquema actual.
-- [ ] Anadir validacion de `records_loaded >= 300` como regla hard.
+- [x] Anadir validacion de `records_loaded >= 300` como regla hard.
 - [ ] Completar/normalizar campos de fecha de fin y metadata adicional (si disponible).
 
 ### 2) `senado_senadores` (DONE tecnico, calidad pendiente)
@@ -171,8 +171,9 @@ Legenda:
 - [x] Parse y normalizacion a esquema canonico (`persons`, `mandates`, `parties`).
 - [x] `is_active` calculado como `legislatura == max(LEGISLATURA)` y `FECHA_FIN` vacia/`-`.
 - [x] Ingesta real `strict-network` con carga >0.
-- [ ] Definir umbral hard (ej: `records_loaded >= 5000`) en codigo.
-- [ ] Documentar consulta recomendada para "diputados actuales" (filtrar `role_title='Diputado/a'` y `is_active=1`).
+- [x] Definir umbral hard (ej: `records_loaded >= 5000`) en codigo.
+- [x] Documentar consulta recomendada para "diputados actuales":
+  - `SELECT * FROM mandates WHERE source_id='asamblea_madrid_ocupaciones' AND role_title='Diputado/a' AND is_active=1;`
 
 ### 6) `parlament_catalunya_diputats` (DONE tecnico, calidad pendiente)
 
