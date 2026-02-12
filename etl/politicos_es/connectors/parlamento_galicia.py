@@ -89,6 +89,31 @@ def parse_pg_profile_html(html: str, *, detail_url: str | None = None) -> dict[s
     if m_group:
         group_name = normalize_ws(clean_text(m_group.group(1)))
 
+    # Contact / media
+    email = None
+    m_email = re.search(r'href=["\']mailto:([^"\']+)["\']', html, flags=re.I)
+    if m_email:
+        email = normalize_ws(unescape(m_email.group(1)))
+
+    phone = None
+    m_phone = re.search(r'href=["\']tel:([^"\']+)["\']', html, flags=re.I)
+    if m_phone:
+        phone = normalize_ws(unescape(m_phone.group(1)))
+
+    photo_url = None
+    m_photo = re.search(
+        r'<img[^>]+src=["\']([^"\']*?/images/composicion/Deputados/[^"\']+)["\']',
+        html,
+        flags=re.I,
+    )
+    if m_photo:
+        photo_url = urljoin(PG_BASE, m_photo.group(1))
+
+    group_logo_url = None
+    m_gl = re.search(r'<img[^>]+src=["\']([^"\']*?/images/xeral/grupos/[^"\']+)["\']', html, flags=re.I)
+    if m_gl:
+        group_logo_url = urljoin(PG_BASE, m_gl.group(1))
+
     # Circunscripcion: label + next value.
     circ = ""
     m_c = re.search(
@@ -105,6 +130,14 @@ def parse_pg_profile_html(html: str, *, detail_url: str | None = None) -> dict[s
     if m_birth:
         birth_text = normalize_ws(clean_text(m_birth.group(1)))
 
+    # Bio: keep a cleaned long paragraph if present.
+    bio_text = ""
+    m_bio = re.search(r"</p>\s*<p>\s*([^<]{80,}.*?)</p>", html, flags=re.I | re.S)
+    if m_bio:
+        candidate = normalize_ws(clean_text(unescape(m_bio.group(1))))
+        if candidate and "grupo parlamentario" not in candidate.lower():
+            bio_text = candidate
+
     source_record_id = f"dip:{deputy_id}" if deputy_id else ""
     if not source_record_id and detail_url:
         source_record_id = f"url:{detail_url}"
@@ -118,6 +151,11 @@ def parse_pg_profile_html(html: str, *, detail_url: str | None = None) -> dict[s
         "group_name": group_name,
         "circunscripcion": circ,
         "birth_text": birth_text,
+        "email": email,
+        "phone": phone,
+        "photo_url": photo_url,
+        "group_logo_url": group_logo_url,
+        "bio_text": bio_text,
         "detail_url": detail_url,
     }
 
@@ -322,4 +360,3 @@ class ParlamentoGaliciaDeputadosConnector(BaseConnector):
             "source_snapshot_date": snapshot_date,
             "raw_payload": stable_json(record),
         }
-

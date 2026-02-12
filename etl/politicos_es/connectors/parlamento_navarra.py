@@ -89,6 +89,42 @@ def parse_pn_profile_html(html: str, *, detail_url: str | None = None) -> dict[s
             if group_name and not group_name.lower().startswith("g.p."):
                 group_name = f"G.P. {group_name}"
 
+    group_url = None
+    m_group_url = re.search(r'href="(/es/composicion-organos/gp-[^"]+)"', html, flags=re.I)
+    if m_group_url:
+        group_url = urljoin(PN_BASE, m_group_url.group(1))
+
+    group_logo_url = None
+    m_group_logo = re.search(
+        r'/es/composicion-organos/gp-[^"]+"[^>]*>\s*<img[^>]+src="([^"]+)"',
+        html,
+        flags=re.I | re.S,
+    )
+    if m_group_logo:
+        group_logo_url = m_group_logo.group(1).strip()
+
+    photo_url = None
+    m_photo = re.search(r'field-name-field-persona-foto[^<]+<img[^>]+src="([^"]+)"', html, flags=re.I | re.S)
+    if m_photo:
+        photo_url = m_photo.group(1).strip()
+
+    # Bio-ish text (datos personales) is free HTML; store as cleaned text for traceability.
+    datos_personales_text = ""
+    m_dp = re.search(r'field-name-field-datos-personales[^>]*>.*?<div class="field-item[^"]*">(.*?)</div>', html, flags=re.I | re.S)
+    if m_dp:
+        datos_personales_text = normalize_ws(clean_text(unescape(m_dp.group(1))))
+
+    videoteca_url = None
+    m_vid = re.search(r'href="(https?://grabaciones\\.parlamentodenavarra\\.es/[^"]+)"', html, flags=re.I)
+    if m_vid:
+        videoteca_url = m_vid.group(1)
+
+    # Declarations PDFs are linked inside datos personales.
+    declaraciones_urls: list[str] = []
+    for u in re.findall(r'href="(https?://parlamentodenavarra\\.es/sites/default/files/archivos-varios/[^"]+\\.pdf)"', html, flags=re.I):
+        if u not in declaraciones_urls:
+            declaraciones_urls.append(u)
+
     # Start date: find "Fecha de alta" row and read ISO from content attr.
     start_date = None
     m_start = re.search(
@@ -111,6 +147,12 @@ def parse_pn_profile_html(html: str, *, detail_url: str | None = None) -> dict[s
         "source_record_id": source_record_id,
         "full_name": full_name,
         "group_name": group_name,
+        "group_url": group_url,
+        "group_logo_url": group_logo_url,
+        "photo_url": photo_url,
+        "datos_personales_text": datos_personales_text,
+        "videoteca_url": videoteca_url,
+        "declaraciones_urls": declaraciones_urls,
         "start_date": start_date,
         "detail_url": detail_url,
     }
