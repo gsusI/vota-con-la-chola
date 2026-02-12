@@ -103,7 +103,7 @@ parl-quality-report-json:
 parl-quality-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --unmatched-sample-limit 50"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
-  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --enforce-gate"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --enforce-gate --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
 
 parl-backfill-member-ids:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}}"
