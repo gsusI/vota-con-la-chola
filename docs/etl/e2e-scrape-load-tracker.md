@@ -108,7 +108,7 @@ Legenda:
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
 | Marco legal electoral | Legal | BOE API | TODO | Falta conector legal y modelo de documentos |
 | Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; falta publish y mejorar linkage a expedientes/temas (IDs no presentes en roll-call) |
-| Iniciativas Congreso | Parlamentario | Congreso iniciativas | TODO | Falta conector y modelo de iniciativa |
+| Iniciativas Congreso | Parlamentario | Congreso iniciativas | PARTIAL | Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; falta publish y linkage a `parl_vote_events` |
 | Intervenciones Congreso | Parlamentario | Congreso intervenciones | TODO | Falta conector y modelo de evidencia textual |
 | Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | TODO | Falta conectores y mapping |
 | Referencias territoriales | Catalogos | REL, INE, IGN | TODO | Falta catalogo canonico territorial |
