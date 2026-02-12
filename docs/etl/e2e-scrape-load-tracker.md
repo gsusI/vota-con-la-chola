@@ -110,7 +110,7 @@ Legenda:
 | Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; falta publish y mejorar linkage a expedientes/temas (IDs no presentes en roll-call) |
 | Iniciativas Congreso | Parlamentario | Congreso iniciativas | PARTIAL | Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; falta publish y linkage a `parl_vote_events` |
 | Intervenciones Congreso | Parlamentario | Congreso intervenciones | TODO | Falta conector y modelo de evidencia textual |
-| Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | Conector `senado_votaciones` implementado sobre `tipoFich=12`; faltan totales/roll-call por bloqueo de ficheros `www.senado.es/legis15/votaciones/*.xml` desde este entorno |
+| Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | `senado_votaciones` carga eventos + totales + roll-call via `videoservlet.senado.es/legis15/votaciones/ses_<n>.xml`; pendiente publish y mejorar linkage `person_id`/cobertura de mociones |
 | Referencias territoriales | Catalogos | REL, INE, IGN | TODO | Falta catalogo canonico territorial |
 | Posiciones declaradas (programas) | Editorial | Webs/programas de partidos | TODO | Falta pipeline semiestructurado + revision humana |
 
