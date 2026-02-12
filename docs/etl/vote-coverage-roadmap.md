@@ -9,9 +9,10 @@ Objetivo: cobertura util y trazable de "tema + votacion + voto por politico" en 
 - `congreso_votaciones` (run parcial ampliado a legislaturas `15,14`): `120` eventos, `42000` votos nominales, fechas `2025-11-13` a `2026-02-12`.
 - `congreso_iniciativas`: `428` iniciativas.
 - `senado_iniciativas` (legislaturas `15,14`): `602` iniciativas.
-- `senado_votaciones`: bloqueado en este entorno por fallo de red en catalogo (`RemoteDisconnected`), sin carga en esta corrida.
+- `senado_votaciones` (backfill historico): `5534` eventos y `1378583` votos nominales cargados para legislaturas con datos disponibles (`15,14,12,11,10`).
+- `linking` Congreso (probe de control `max_files=10`, `max_votes=250`): `114/250` eventos enlazados (`109` por `title_norm_exact_unique`, `5` por `title_norm_prefix_unique`).
 
-Nota: en corridas previas del mismo proyecto, `senado_votaciones` si cargo eventos y votos nominales; el bloqueo actual es de disponibilidad/conectividad del endpoint en este entorno.
+Nota: el endpoint Senado sigue siendo sensible a disponibilidad/red por entorno, pero ya existe corrida historica reproducible en este proyecto.
 
 ## Fase 1 (Nacional) - En curso
 
@@ -25,13 +26,13 @@ Meta: completar cobertura nacional reproducible (Congreso + Senado) con linking 
 - Carga por legislaturas (`tipoFich=9`) con `--senado-legs`.
 - IDs estables `senado:leg<leg>:exp:<tipo>/<num>`.
 
-3. Senado votaciones historicas (pendiente operativo)
+3. Senado votaciones historicas (hecho operativo)
 - El conector ya soporta multi-legislatura.
-- Falta corrida estable por disponibilidad de red del catalogo en este entorno.
+- Corrida historica completada para legislaturas con datos expuestos por fuente (`15,14,12,11,10`).
 
 4. Linking nacional (parcial)
 - Senado: linking determinista `(legislature, expediente)` ya implementado.
-- Congreso: linking por regex de expediente (best-effort), mejorar recall en fase 2.
+- Congreso: linking por regex de expediente + matching de titulo normalizado (exacto y prefijo unico) ya implementado; queda medir KPIs globales y cerrar gaps.
 
 ## Fase 2 (Calidad de linking y publish) - Siguiente
 
