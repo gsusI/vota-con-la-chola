@@ -12,7 +12,7 @@ from urllib.parse import parse_qs, urlencode, urljoin, urlparse, urlunparse
 from etl.politicos_es.util import normalize_key_part, normalize_ws, now_utc_iso, parse_date_flexible, sha256_bytes, stable_json
 
 from ..config import SOURCE_CONFIG
-from ..http import http_get_bytes
+from ..http import http_get_bytes, payload_looks_like_html
 from ..raw import raw_output_path
 from ..types import Extracted
 from .base import BaseConnector
@@ -132,6 +132,10 @@ def _parse_vote_ids_from_url(url: str | None) -> tuple[int | None, int | None]:
 
 
 def _tipo12_urls_from_tipo9_xml(payload: bytes) -> list[str]:
+    if not payload:
+        return []
+    if payload_looks_like_html(payload):
+        raise RuntimeError("XML inesperado para tipoFich=9: HTML recibido")
     root = ET.fromstring(payload)
     if root.tag != "listaIniciativasLegislativas":
         raise RuntimeError(f"XML inesperado para tipoFich=9: root={root.tag!r}")
@@ -154,6 +158,10 @@ def _tipo12_urls_from_tipo9_xml(payload: bytes) -> list[str]:
 
 
 def _parse_sesion_vote_xml(payload: bytes) -> dict[str, Any]:
+    if not payload:
+        return {"session_date": None, "votes": []}
+    if payload_looks_like_html(payload):
+        raise RuntimeError("XML de sesion inesperado: HTML recibido")
     root = ET.fromstring(payload)
     if root.tag != "main":
         raise RuntimeError(f"XML de sesion inesperado: root={root.tag!r}")
@@ -261,6 +269,10 @@ def _pick_sesion_vote(record_payload: dict[str, Any], session_votes: list[dict[s
 
 
 def _records_from_tipo12_xml(payload: bytes, source_url: str) -> list[dict[str, Any]]:
+    if not payload:
+        return []
+    if payload_looks_like_html(payload):
+        raise RuntimeError(f"XML inesperado para Senado votaciones: HTML recibido {source_url!r}")
     root = ET.fromstring(payload)
     if root.tag != "iniciativaVotaciones":
         raise RuntimeError(f"XML inesperado para Senado votaciones: root={root.tag!r}")

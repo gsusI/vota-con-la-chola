@@ -184,6 +184,27 @@ class TestSenadoVotacionesSamplesE2E(unittest.TestCase):
             finally:
                 conn.close()
 
+    def test_parse_helpers_handle_empty_and_html_payloads(self) -> None:
+        import etl.parlamentario_es.connectors.senado_votaciones as conn_mod
+
+        tipo9 = conn_mod._tipo12_urls_from_tipo9_xml(b"")
+        self.assertEqual(tipo9, [])
+
+        ses = conn_mod._parse_sesion_vote_xml(b"")
+        self.assertEqual(ses["votes"], [])
+        self.assertIsNone(ses["session_date"])
+
+        with self.assertRaises(RuntimeError) as ctx:
+            conn_mod._parse_sesion_vote_xml(b"<!doctype html><html><body>blocked</body></html>")
+        self.assertIn("HTML", str(ctx.exception))
+
+        with self.assertRaises(RuntimeError) as ctx2:
+            conn_mod._records_from_tipo12_xml(
+                b"<!doctype html><html><body>blocked</body></html>",
+                "https://www.senado.es/fake",
+            )
+        self.assertIn("HTML", str(ctx2.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

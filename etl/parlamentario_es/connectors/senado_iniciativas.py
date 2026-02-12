@@ -9,7 +9,7 @@ from urllib.parse import parse_qs, urlencode, urljoin, urlparse, urlunparse
 from etl.politicos_es.util import normalize_ws, now_utc_iso, sha256_bytes, stable_json
 
 from ..config import SOURCE_CONFIG
-from ..http import http_get_bytes
+from ..http import http_get_bytes, payload_looks_like_html
 from ..raw import raw_output_path
 from ..types import Extracted
 from .base import BaseConnector
@@ -84,6 +84,10 @@ def _parse_vote_ids_from_url(url: str | None) -> tuple[int | None, int | None]:
 
 
 def _records_from_tipo9_xml(payload: bytes, source_url: str) -> list[dict[str, Any]]:
+    if not payload:
+        return []
+    if payload_looks_like_html(payload):
+        raise RuntimeError(f"XML inesperado para Senado iniciativas: HTML recibido {source_url!r}")
     root = ET.fromstring(payload)
     if root.tag != "listaIniciativasLegislativas":
         raise RuntimeError(f"XML inesperado para Senado iniciativas: root={root.tag!r}")
@@ -205,7 +209,13 @@ class SenadoIniciativasConnector(BaseConnector):
                 note = "from-file"
 
             for p in paths:
-                rows = _records_from_tipo9_xml(p.read_bytes(), f"file://{p.resolve()}")
+                try:
+                    rows = _records_from_tipo9_xml(p.read_bytes(), f"file://{p.resolve()}")
+                except Exception as exc:  # noqa: BLE001
+                    if strict_network:
+                        raise
+                    note = f"from-file-partial:{type(exc).__name__}: {exc}"
+                    continue
                 if isinstance(max_records, int) and max_records > 0:
                     remaining = max_records - len(records)
                     if remaining <= 0:

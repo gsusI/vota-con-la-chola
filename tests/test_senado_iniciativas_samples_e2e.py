@@ -75,6 +75,22 @@ class TestSenadoIniciativasSamplesE2E(unittest.TestCase):
             finally:
                 conn.close()
 
+    def test_records_from_tipo9_xml_rejects_html_payload(self) -> None:
+        import etl.parlamentario_es.connectors.senado_iniciativas as conn_mod
+
+        with self.assertRaises(RuntimeError) as ctx:
+            conn_mod._records_from_tipo9_xml(
+                b"<!doctype html><html><body>blocked</body></html>",
+                "https://www.senado.es/block",
+            )
+        self.assertIn("HTML", str(ctx.exception))
+
+    def test_records_from_tipo9_xml_rejects_empty_payload(self) -> None:
+        import etl.parlamentario_es.connectors.senado_iniciativas as conn_mod
+
+        rows = conn_mod._records_from_tipo9_xml(b"", "https://www.senado.es/block")
+        self.assertEqual(rows, [])
+
 
 if __name__ == "__main__":
     unittest.main()
