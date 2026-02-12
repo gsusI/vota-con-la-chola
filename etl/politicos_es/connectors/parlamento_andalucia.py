@@ -5,6 +5,7 @@ import re
 from html import unescape
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote_plus
 
 from ..config import SOURCE_CONFIG
 from ..fetch import fetch_payload
@@ -48,9 +49,11 @@ def parse_pa_list_ids(list_html: str) -> list[tuple[str, str]]:
     main = re.split(r"Listado\s+de\s+renuncias", list_html, flags=re.I)[0]
     unique: list[tuple[str, str]] = []
     seen: set[tuple[str, str]] = set()
+    href_pattern = re.compile(r'href\s*=\s*(["\'])(?P<href>.*?)\1', flags=re.I | re.S)
 
-    for href_raw in re.findall(r'href="([^"]+)"', main, flags=re.I):
-        href = unescape(href_raw)
+    for match in href_pattern.finditer(main):
+        href_raw = match.group("href")
+        href = unquote_plus(unescape(href_raw))
         if not re.search(r"accion=Ver\s+Diputados", href, flags=re.I):
             continue
         m_cod = re.search(r"\bcodmie=(\d+)\b", href, flags=re.I)
@@ -79,19 +82,37 @@ def parse_pa_detail(codmie: str, nlegis: str, timeout: int) -> dict[str, Any]:
             if len(t.split()) >= 2:
                 full_name = t
                 break
+    if not full_name:
+        h1 = re.search(r"<h1[^>]*>(.*?)</h1>", html, flags=re.I | re.S)
+        if h1:
+            t = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(h1.group(1))))
+            if t and len(t.split()) >= 2:
+                full_name = t
+    if not full_name:
+        m_title = re.search(r"<title>(.*?)</title>", html, flags=re.I | re.S)
+        if m_title:
+            t = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(m_title.group(1))))
+            if "|" in t:
+                t = t.split("|", 1)[0].strip()
+            if t and len(t.split()) >= 2:
+                full_name = t
 
     # Group appears as an h2 like "G.P. Socialista".
     group = ""
     for h2 in re.findall(r"<h2[^>]*>(.*?)</h2>", html, flags=re.I | re.S):
         t = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(h2)))
-        if t.lower().startswith("g.p."):
+        if t.lower().startswith("g.p.") or t.lower().startswith("gp.") or t.lower().startswith("grupo parlamentario"):
             group = t
             break
+    if not group:
+        m_gp = re.search(r"\b(?:G\.P\.|GP)\s*([^<\n]+)", html, flags=re.I)
+        if m_gp:
+            group = normalize_ws(m_gp.group(1))
 
     # Circunscripción: <span class=negrita>Circunscripción:</span> Málaga
     text = normalize_ws(unescape(re.sub(r"<[^>]+>", " ", html)))
     m = re.search(
-        r"Circunscripci[oó]n:\s*([A-Za-zÀ-ÿ' -]+?)(?:\s+Escaño\b|$)",
+        r"Circunscripci[oó]n:\s*([^\n]+?)(?:\s+Escaño\b|$)",
         text,
         flags=re.I,
     )

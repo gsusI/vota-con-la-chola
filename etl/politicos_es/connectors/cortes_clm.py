@@ -49,6 +49,8 @@ def parse_cclm_list_rows(list_html: str) -> list[dict[str, Any]]:
     # Rows look like:
     # <tr><td><p><a href="javascript:abrirventana(578,11);">...</a></p></td>
     # <td><p>Toledo</p></td> ... <td><p ...> &nbsp;&nbsp;GPS</p></td></tr>
+    rows: list[dict[str, Any]] = []
+    # Primary regex (legacy compact format).
     pattern = re.compile(
         r"<tr>\s*<td>\s*<p>\s*<a\s+href=\"javascript:abrirventana\((\d+),\s*(\d+)\);\">(.*?)</a>.*?</td>\s*"
         r"<td>\s*<p>(.*?)</p>\s*</td>\s*"
@@ -56,7 +58,6 @@ def parse_cclm_list_rows(list_html: str) -> list[dict[str, Any]]:
         r"<td>\s*<p[^>]*>(.*?)</p>\s*</td>\s*</tr>",
         flags=re.I | re.S,
     )
-    rows: list[dict[str, Any]] = []
     for dip_id, leg, name_html, prov_html, leg_html, group_html in pattern.findall(list_html):
         full_name = clean_text(unescape(name_html))
         provincia = clean_text(unescape(prov_html))
@@ -74,6 +75,37 @@ def parse_cclm_list_rows(list_html: str) -> list[dict[str, Any]]:
                 "source_record_id": f"id:{dip_id};leg:{leg}",
             }
         )
+
+    # Fallback parser for looser markup: iterate tr blocks and extract by markers.
+    if rows:
+        return rows
+
+    for tr in re.finditer(r"<tr[^>]*>(.*?)</tr>", list_html, flags=re.I | re.S):
+        tr_html = tr.group(1)
+        m = re.search(r"javascript:abrirventana\((\d+)\s*,\s*(\d+)\)", tr_html, flags=re.I)
+        if not m:
+            continue
+        dip_id, leg = m.group(1), m.group(2)
+        cells = re.findall(r"<td[^>]*>(.*?)</td>", tr_html, flags=re.I | re.S)
+        if not cells or len(cells) < 4:
+            continue
+        full_name = clean_text(unescape(cells[0]))
+        provincia = clean_text(unescape(cells[1])) if len(cells) > 1 else ""
+        leg_text = clean_text(unescape(cells[2])) if len(cells) > 2 else ""
+        group_short = clean_text(unescape(cells[3])) if len(cells) > 3 else ""
+        rows.append(
+            {
+                "id": str(dip_id),
+                "legislatura": str(leg),
+                "legislatura_text": leg_text,
+                "full_name": full_name,
+                "provincia": provincia,
+                "group_acronym": group_short,
+                "detail_url": f"{CCLM_DETAIL_URL}?id={dip_id}",
+                "source_record_id": f"id:{dip_id};leg:{leg}",
+            }
+        )
+
     return rows
 
 
@@ -88,6 +120,14 @@ def parse_cclm_detail(dip_id: str, timeout: int) -> dict[str, Any]:
     # Group is usually in a div id="grupo": <h3>GRUPO PARLAMENTARIO ...</h3>
     m2 = re.search(r'id=["\']grupo["\'][^>]*>.*?<h3[^>]*>(.*?)</h3>', html, flags=re.I | re.S)
     group_name = clean_text(unescape(m2.group(1))) if m2 else ""
+    if not group_name:
+        m2 = re.search(r"GRUPO\s+PARLAMENTARIO\s*[^<]*<[^>]+>([^<]+)", html, flags=re.I | re.S)
+        if m2:
+            group_name = clean_text(unescape(m2.group(1)))
+    if not group_name:
+        m2 = re.search(r"(?:GRUPO PARLAMENTARIO|GP)\s*[:\-]?\s*([A-ZÁÉÍÓÚÑa-z0-9-]{2,})", html, flags=re.I)
+        if m2:
+            group_name = normalize_ws(unescape(m2.group(1)))
 
     # Find earliest "Fecha Alta" in tables (dd/mm/yyyy). The page includes many dates;
     # using the minimum is a robust approximation for "start of activity" in the legislature.
@@ -250,4 +290,3 @@ class CortesClmDiputadosConnector(BaseConnector):
             "source_snapshot_date": snapshot_date,
             "raw_payload": stable_json(record),
         }
-

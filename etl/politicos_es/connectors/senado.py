@@ -37,7 +37,9 @@ SENADO_FICHA_SENADOR_URL_TEMPLATE = (
 SENADO_PARTY_ALIASES = {
     "indep": "Independientes",
     "independientes": "Independientes",
+    "independiente": "Independientes",
     "ccpv": "CCPV",
+    "ciudadanos": "Ciudadanos",
 }
 
 

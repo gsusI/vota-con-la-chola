@@ -31,7 +31,10 @@ PV_LIST_URL = f"{PV_BASE}/comparla/c_comparla_alf_ACT.html"
 def parse_dot_date(value: str | None) -> str | None:
     if not value:
         return None
-    m = re.search(r"(\d{1,2})\.(\d{1,2})\.(\d{4})", value)
+    value = value.strip()
+    m = re.search(r"(\d{1,2})[./-](\d{1,2})[./-](\d{4})", value)
+    if not m:
+        m = re.search(r"(\d{1,2})\s+(\d{1,2})\s+(\d{4})", value)
     if not m:
         return None
     d = int(m.group(1))
@@ -42,11 +45,11 @@ def parse_dot_date(value: str | None) -> str | None:
 
 def parse_member_row(tr_html: str) -> dict[str, Any] | None:
     # Identify member id from link.
-    m = re.search(r'href="(/fichas/c_(\d+)\.html)"', tr_html, flags=re.I)
+    m = re.search(r'href\s*=\s*(["\'])(/fichas/c_(\d+)\.html)\1', tr_html, flags=re.I)
     if not m:
         return None
-    rel = m.group(1)
-    mid = m.group(2)
+    rel = m.group(2)
+    mid = m.group(3)
     detail_url = urljoin(PV_BASE, rel)
 
     text = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(tr_html)))
@@ -59,10 +62,11 @@ def parse_member_row(tr_html: str) -> dict[str, Any] | None:
     if gm:
         group = normalize_ws(gm.group(1))
         dates = gm.group(2)
-        dm = re.search(r"(\d{1,2}\.\d{1,2}\.\d{4})\s*-\s*([0-9.]+)?", dates)
+        dm = re.search(r"([0-9./-]+)\s*-\s*([0-9./-]*)", dates)
         if dm:
             start_date = parse_dot_date(dm.group(1))
-            end_date = parse_dot_date(dm.group(2)) if dm.group(2) else None
+            if dm.group(2):
+                end_date = parse_dot_date(dm.group(2))
 
     # Name: take prefix before "GP".
     name_part = text
@@ -225,4 +229,3 @@ class ParlamentoVascoParlamentariosConnector(BaseConnector):
             "source_snapshot_date": snapshot_date,
             "raw_payload": stable_json(record),
         }
-
