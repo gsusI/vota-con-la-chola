@@ -38,12 +38,15 @@ def is_challenge_or_deny(title: str, url: str, html: str) -> bool:
     h = (html or "").lower()
 
     # Cloudflare
-    if "just a moment" in t:
-        return True
+    # Only treat as blocked when we see strong markers of an interstitial
+    # challenge page (not merely Cloudflare JS being present on an otherwise
+    # normal page).
+    title_says_challenge = ("just a moment" in t) or ("un momento" in t)
     # Some sites include Cloudflare JS (e.g. /cdn-cgi/.../jsd/main.js) even when
     # the page is accessible. Treat it as blocked only when we see a real
     # interactive challenge page marker.
-    if "_cf_chl_opt" in h:
+    has_chl_opt = "_cf_chl_opt" in h
+    if title_says_challenge and has_chl_opt:
         return True
     if "enable javascript and cookies to continue" in h:
         return True
