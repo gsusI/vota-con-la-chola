@@ -1,0 +1,10 @@
+name = "votaconlachola-org"
+main = "src/index.js"
+compatibility_date = "2026-02-12"
+account_id = "2a9c5bd32808734be6ee294d77e05ffb"
+
+# Bind to the zone route (standard Workers route).
+routes = [
+  { pattern = "votaconlachola.org/*", zone_name = "votaconlachola.org" }
+]
+

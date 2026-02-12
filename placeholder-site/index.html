@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://votaconlachola.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://votaconlachola.org/" />
+    <meta property="og:title" content="Vota Con La Chola" />
+    <meta
+      property="og:description"
+      content="Brújula cívica para votar con la cabeza: cruza tus prioridades con lo que dicen y hacen partidos y representantes, con evidencias enlazadas."
+    />
+    <meta property="og:image" content="https://votaconlachola.org/og.png?v=1" />
+    <meta property="og:image:secure_url" content="https://votaconlachola.org/og.png?v=1" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="🧠" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Vota Con La Chola" />
+    <meta
+      name="twitter:description"
+      content="Brújula cívica para votar con la cabeza: evidencias, trazabilidad e incertidumbre explícita."
+    />
+    <meta name="twitter:image" content="https://votaconlachola.org/og.png?v=1" />
+    <style>
+      :root {
+        --bg: #f5f5f7;
+        --panel: rgba(255, 255, 255, 0.72);
+        --ink: #1d1d1f;
+        --ink-soft: #6e6e73;
+        --line: rgba(0, 0, 0, 0.08);
+        --accent: #0071e3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        color: var(--ink);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        letter-spacing: -0.01em;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: saturate(180%) blur(16px);
+        -webkit-backdrop-filter: saturate(180%) blur(16px);
+        background: rgba(245, 245, 247, 0.78);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar-inner {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        padding: 10px 22px;
+        padding-left: calc(22px + env(safe-area-inset-left));
+        padding-right: calc(22px + env(safe-area-inset-right));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        font-size: 0.86rem;
+        font-weight: 600;
+      }
+
+      .status {
+        font-size: 0.76rem;
+        color: var(--ink-soft);
+      }
+
+      .hero {
+        position: relative;
+        display: grid;
+        place-items: center;
+        padding: clamp(48px, 9vw, 110px) 18px 46px;
+        padding-left: calc(18px + env(safe-area-inset-left));
+        padding-right: calc(18px + env(safe-area-inset-right));
+        overflow: hidden;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(44px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        width: 350px;
+        height: 350px;
+        background: rgba(0, 113, 227, 0.13);
+        top: -120px;
+        left: -80px;
+      }
+
+      .hero::after {
+        width: 320px;
+        height: 320px;
+        background: rgba(120, 119, 198, 0.14);
+        right: -70px;
+        bottom: -120px;
+      }
+
+      .hero-card {
+        position: relative;
+        z-index: 1;
+        width: min(960px, 100%);
+        border-radius: 34px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        backdrop-filter: saturate(170%) blur(24px);
+        -webkit-backdrop-filter: saturate(170%) blur(24px);
+        box-shadow:
+          0 30px 55px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.75);
+        padding: clamp(28px, 5vw, 56px) clamp(22px, 4vw, 52px);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.25rem, 7.6vw, 5rem);
+        line-height: 1.02;
+        letter-spacing: -0.045em;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+
+      .accent {
+        color: var(--accent);
+      }
+
+      .intro {
+        margin: 18px 0 0;
+        max-width: 68ch;
+        color: var(--ink-soft);
+        font-size: clamp(1.02rem, 2.2vw, 1.34rem);
+        line-height: 1.42;
+      }
+
+      .meta {
+        margin-top: 22px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+
+      .pill {
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.72);
+        padding: 7px 11px;
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: #3a3a3c;
+      }
+
+      .build {
+        margin-top: 20px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(245, 248, 255, 0.68));
+        padding: 12px 14px;
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        align-items: center;
+        gap: 10px;
+      }
+
+      .synergy {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.8) inset,
+          0 10px 16px rgba(0, 0, 0, 0.08);
+      }
+
+      .synergy svg {
+        width: 22px;
+        height: 22px;
+        display: block;
+        overflow: visible;
+      }
+
+      .synergy .orbit {
+        transform-origin: 11px 11px;
+        animation: sy-rotate 3.4s ease-in-out infinite;
+      }
+
+      .synergy .link {
+        stroke: rgba(0, 113, 227, 0.55);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        fill: none;
+        opacity: 0.9;
+        stroke-dasharray: 14 18;
+        animation: sy-dash 2.6s linear infinite;
+      }
+
+      .synergy .node {
+        fill: #0071e3;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
+        animation: sy-pop 1.9s ease-in-out infinite;
+      }
+
+      .synergy .node.n2 {
+        animation-delay: 120ms;
+      }
+
+      .synergy .node.n3 {
+        animation-delay: 240ms;
+      }
+
+      .build-title {
+        margin: 0;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #4a4a4e;
+        font-weight: 700;
+      }
+
+      .build-text {
+        margin: 3px 0 0;
+        font-size: 0.95rem;
+        color: var(--ink-soft);
+      }
+
+      @keyframes sy-rotate {
+        0%,
+        100% {
+          transform: rotate(-12deg);
+        }
+        50% {
+          transform: rotate(18deg);
+        }
+      }
+
+      @keyframes sy-dash {
+        to {
+          stroke-dashoffset: -32;
+        }
+      }
+
+      @keyframes sy-pop {
+        0%,
+        100% {
+          transform: scale(0.92);
+          opacity: 0.88;
+        }
+        50% {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding: 44px 18px 34px;
+        }
+
+        .hero-card {
+          padding: 26px 18px;
+          border-radius: 28px;
+        }
+
+        .intro {
+          margin-top: 14px;
+        }
+
+        .build {
+          grid-template-columns: 34px minmax(0, 1fr);
+          padding: 10px 12px;
+          gap: 9px;
+        }
+
+        .synergy {
+          width: 26px;
+          height: 26px;
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.8) inset,
+            0 10px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .synergy svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .build-text {
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          /* Keep the full title on one line on mobile. */
+          white-space: nowrap;
+          font-size: clamp(1.7rem, 7.8vw, 2.6rem);
+          letter-spacing: -0.03em;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .topbar-inner {
+          padding-left: calc(16px + env(safe-area-inset-left));
+          padding-right: calc(16px + env(safe-area-inset-right));
+        }
+
+        h1 {
+          font-size: clamp(1.6rem, 7.6vw, 2.35rem);
+        }
+
+        .intro {
+          font-size: 1rem;
+        }
+
+        .meta {
+          gap: 7px;
+        }
+
+        .pill {
+          padding: 6px 10px;
+          font-size: 0.74rem;
+        }
+
+        .build-title {
+          letter-spacing: 0.07em;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .synergy .orbit,
+        .synergy .link,
+        .synergy .node {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="brand">Vota Con La Chola</div>
+          <div class="status">Proyecto cívico</div>
+        </div>
+      </header>
+      <main class="hero">
+        <section class="hero-card">
+          <h1>Vota <span class="accent">Con La Chola 🧠</span></h1>
+          <p class="intro">
+            Brújula cívica para votar con la cabeza: cruza tus prioridades con lo que dicen y hacen partidos y
+            representantes, según territorio y nivel institucional, con evidencias enlazadas e incertidumbre explícita.
+            No recomienda voto: ofrece un mapa auditable para investigar.
+          </p>
+          <div class="meta" aria-label="Claves del proyecto">
+            <span class="pill">Alineamientos</span>
+            <span class="pill">Que dicen vs que hacen</span>
+            <span class="pill">Fuentes y evidencia</span>
+            <span class="pill">Open source</span>
+          </div>
+          <div class="build" aria-label="Proyecto en construccion">
+            <span class="synergy" aria-hidden="true">
+              <svg viewBox="0 0 22 22" role="presentation" focusable="false" aria-hidden="true">
+                <g class="orbit">
+                  <path class="link" d="M5.2 12.1 L10.8 5.3 L16.9 12.7" />
+                  <path class="link" d="M5.2 12.1 L16.9 12.7" style="opacity:0.65" />
+                  <circle class="node n1" cx="10.8" cy="5.3" r="2.05" />
+                  <circle class="node n2" cx="5.2" cy="12.1" r="1.85" />
+                  <circle class="node n3" cx="16.9" cy="12.7" r="1.75" />
+                </g>
+              </svg>
+            </span>
+            <div>
+              <p class="build-title">Proyecto en construccion</p>
+              <p class="build-text">Conectando datos publicos con metodo y trazabilidad.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
