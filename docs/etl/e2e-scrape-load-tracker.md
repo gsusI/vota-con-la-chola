@@ -104,7 +104,7 @@ Legenda:
 | Representantes y mandatos (Parlamento de Andalucia) | Autonomico | Parlamento de Andalucia (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de Navarra) | Autonomico | Parlamento de Navarra: parlamentarios forales (fichas HTML) | PARTIAL | Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>` |
 | Representantes y mandatos (Parlamento Vasco) | Autonomico | Parlamento Vasco (listado ACT) | DONE | Hardening de parsing y umbral minimo |
-| Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | TODO | Falta conector, esquema y publish |
+| Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | PARTIAL | Ingesta del catalogo de descargas (tipos/convocatorias/archivos) en SQLite; falta publish y cobertura de resultados |
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
 | Marco legal electoral | Legal | BOE API | TODO | Falta conector legal y modelo de documentos |
 | Votaciones Congreso | Parlamentario | Congreso votaciones | TODO | Falta conector y modelo de voto |
@@ -120,6 +120,7 @@ Legenda:
 - [x] Detectar payload HTML cuando se espera CSV/JSON/XML y tratarlo como error de extraccion.
 - [ ] Validar charset real (`latin-1/cp1252`) antes de parse CSV.
 - [ ] Definir umbrales minimos por fuente en codigo (no solo en docs).
+- [ ] Documentar y estandarizar el “camino manual aceptado” para fuentes bloqueadas por WAF/anti-bot (captura Playwright no-headless + ingesta por `--from-file <dir>`), incluyendo receta `just` y evidencia en tracker.
 - [ ] Crear smoke test E2E en CI (`init-db + ingest por fuente + asserts SQL`).
 - [ ] Publicar snapshot canonico de representantes en `etl/data/published/`.
 - [ ] Documentar versionado de snapshots y politica de refresh.
@@ -219,7 +220,7 @@ Legenda:
 
 ### P0 (siguiente ola, obligatoria para MVP de evidencia)
 
-- [ ] Infoelectoral: procesos celebrados + area de descargas.
+- [ ] Infoelectoral: completar cobertura (resultados/datasets), publish en `etl/data/published/` y recipe `just` para extraccion live.
 - [ ] Junta Electoral Central: estado de convocatorias.
 - [ ] BOE API: normativa/convocatorias.
 - [ ] Congreso votaciones.

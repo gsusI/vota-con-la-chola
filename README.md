@@ -11,6 +11,7 @@ Implementado hoy:
 - **ETL** de representantes y mandatos (varias fuentes oficiales) hacia **un único archivo SQLite**.
 - **Interfaz web local** para explorar el “grafo” (personas, instituciones, partidos, mandatos) y un **explorador genérico de SQLite** basado en esquema.
 - **Instantánea publicada** de “próximas elecciones por nivel” (Markdown + JSON).
+- **Ingesta inicial** del catálogo de descargas de Infoelectoral (tipos de convocatoria, convocatorias y archivos) a SQLite (tablas `infoelectoral_*`).
 - **Web provisional** (estática y/o Cloudflare Worker) para página de aterrizaje.
 - Cobertura actual (representantes/mandatos) verificada E2E en Docker: **20 fuentes** (incluye **Cortes de Aragón** con activos + bajas, y **Asamblea de Ceuta**).
 
@@ -18,7 +19,7 @@ Pendiente (ver seguimiento):
 
 - Conectores de **votaciones / iniciativas / intervenciones** y evidencia textual.
 - Publicación de una **instantánea canónica** de representantes en `etl/data/published/` (no solo en la base intermedia).
-- Fuentes bloqueadas por WAF/anti-bot (a `2026-02-12` desde este entorno): Parlamento de Galicia (403) y Parlamento de Navarra (Cloudflare challenge/403). Asamblea de Melilla pendiente de discovery de fuente nominal estable.
+- Fuentes con `--strict-network` bloqueado por WAF/anti-bot (a `2026-02-12` desde este entorno): Parlamento de Galicia (403) y Parlamento de Navarra (Cloudflare challenge/403). **Aceptamos el camino manual**: captura de fichas HTML con Playwright (no headless) + ingesta con `--from-file <directorio>` (ver `justfile`: `etl-extract-parlamento-galicia-manual` y `etl-extract-parlamento-navarra-manual`). Asamblea de Melilla pendiente de discovery de fuente nominal estable.
 
 Documento de seguimiento operativo: `docs/etl/e2e-scrape-load-tracker.md`.
 

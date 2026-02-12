@@ -13,6 +13,7 @@ Actualmente:
 - Snapshot de proximas elecciones: `etl/data/published/proximas-elecciones-espana.json`.
 - Esquema SQLite ETL: `etl/load/sqlite_schema.sql`.
 - CLI ingesta politicos: `scripts/ingestar_politicos_es.py`.
+- CLI ingesta Infoelectoral (descargas): `scripts/ingestar_infoelectoral_es.py`.
 - Plan de extraccion fuente por fuente: `docs/etl/extraccion-politicos-plan.md`.
 - Tracker E2E scrape/load (TODO operativo): `docs/etl/e2e-scrape-load-tracker.md`.
 

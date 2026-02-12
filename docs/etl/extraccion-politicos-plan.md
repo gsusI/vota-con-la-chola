@@ -117,6 +117,22 @@ Extraer e ingerir politicos en SQLite de forma reproducible, con trazabilidad y 
 - Modo: `strict-network`.
 - Validacion minima: `records_loaded > 70` (se espera 81).
 
+12. `parlamento_galicia_deputados` (prioridad P1, **camino manual aceptado**)
+- Origen: listado + fichas HTML (Parlamento de Galicia).
+- Bloqueo (realidad): a `2026-02-12` desde este entorno, `--strict-network` falla por WAF/403 en `https://www.parlamento.gal/Composicion/Deputados`.
+- Metodo aceptado (reproducible en equipo): captura manual de fichas HTML con Playwright (no headless) y ingesta desde un directorio local:
+  - `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_galicia_deputados --from-file <dir_pages_html> --snapshot-date <YYYY-MM-DD>`
+  - `just etl-extract-parlamento-galicia-manual`
+- Validacion minima: `records_loaded > 50` (se esperan 75).
+
+13. `parlamento_navarra_parlamentarios_forales` (prioridad P1, **camino manual aceptado**)
+- Origen: listado + fichas HTML (Parlamento de Navarra).
+- Bloqueo (realidad): a `2026-02-12` desde este entorno, `--strict-network` falla con Cloudflare challenge/403 (cf-mitigated).
+- Metodo aceptado (reproducible en equipo): captura manual de fichas HTML con Playwright (no headless) y ingesta desde un directorio local:
+  - `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_navarra_parlamentarios_forales --from-file <dir_pages_html> --snapshot-date <YYYY-MM-DD>`
+  - `just etl-extract-parlamento-navarra-manual`
+- Validacion minima: `records_loaded > 30` (se esperan 50).
+
 ## Ejecucion operativa (Docker)
 
 ```bash
