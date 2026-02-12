@@ -7,7 +7,15 @@ from ..config import SOURCE_CONFIG, SPAIN_COUNTRY_NAMES
 from ..fetch import fetch_payload
 from ..parsers import parse_europarl_xml
 from ..types import Extracted
-from ..util import normalize_key_part, normalize_ws, parse_date_flexible, pick_value, sha256_bytes, stable_json
+from ..util import (
+    normalize_key_part,
+    normalize_ws,
+    parse_date_flexible,
+    pick_value,
+    sha256_bytes,
+    split_spanish_name,
+    stable_json,
+)
 from .base import BaseConnector
 
 
@@ -55,7 +63,30 @@ class EuroparlMepsConnector(BaseConnector):
         )
 
     def normalize(self, record: dict[str, Any], snapshot_date: str | None) -> dict[str, Any] | None:
-        full_name = pick_value(record, ("fullName", "fullname", "name", "nombre"))
+        given_name = normalize_ws(
+            str(pick_value(record, ("name", "givenName", "first_name", "firstName")) or "")
+        )
+        family_name = normalize_ws(
+            str(pick_value(record, ("surname", "family_name", "last_name", "lastName")) or "")
+        )
+        raw_full_name = pick_value(record, ("fullName", "fullname", "name", "nombre"))
+        full_name = normalize_ws(str(raw_full_name)) if raw_full_name else ""
+
+        if not full_name and given_name and family_name:
+            full_name = normalize_ws(f"{given_name} {family_name}")
+        elif not full_name and given_name:
+            full_name = given_name
+        elif family_name and raw_full_name == given_name:
+            full_name = normalize_ws(f"{given_name} {family_name}")
+
+        if full_name and "," in full_name:
+            parsed_given, parsed_family, parsed_full = split_spanish_name(full_name)
+            full_name = parsed_full
+            if parsed_given and not given_name:
+                given_name = parsed_given
+            if parsed_family and not family_name:
+                family_name = parsed_family
+
         if not full_name:
             return None
 
@@ -70,8 +101,8 @@ class EuroparlMepsConnector(BaseConnector):
         cfg = SOURCE_CONFIG[self.source_id]
         return {
             "full_name": normalize_ws(full_name),
-            "given_name": None,
-            "family_name": None,
+            "given_name": given_name or None,
+            "family_name": family_name or None,
             "gender": pick_value(record, ("gender", "sexo", "genero")),
             "party_name": pick_value(record, ("politicalGroup", "party", "grupo")),
             "territory_code": "ES",
@@ -86,4 +117,3 @@ class EuroparlMepsConnector(BaseConnector):
             "source_snapshot_date": snapshot_date,
             "raw_payload": stable_json(record),
         }
-

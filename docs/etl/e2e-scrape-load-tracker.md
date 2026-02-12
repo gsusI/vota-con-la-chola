@@ -145,7 +145,7 @@ Legenda:
 - [x] Resolucion de `idweb` y `source_record_id` estable por senador activo.
 - [x] Enriquecimiento con ficha individual (`tipoFich=1`) para afiliacion politica (`partidoSiglas`/`partidoNombre`).
 - [x] Ingesta real `strict-network` con carga >0.
-- [ ] Definir umbral hard (`records_loaded >= 250`) en codigo.
+- [x] Definir umbral hard (`records_loaded >= 250`) en codigo.
 - [ ] Revisar normalizacion de aliases minoritarios de siglas (`INDEP`, `CCPV`, etc.).
 
 ### 3) `europarl_meps` (DONE tecnico, calidad pendiente)
@@ -153,8 +153,8 @@ Legenda:
 - [x] Parse XML y filtro por Espana.
 - [x] Ingesta real `strict-network`.
 - [x] Upsert en esquema actual.
-- [ ] Mejorar mapping de `given_name` / `family_name` si el feed lo permite.
-- [ ] Definir umbral hard (`records_loaded >= 40`) en codigo.
+- [x] Mejorar mapping de `given_name` / `family_name` si el feed lo permite.
+- [x] Definir umbral hard (`records_loaded >= 40`) en codigo.
 
 ### 4) `municipal_concejales` (DONE tecnico, calidad pendiente)
 
@@ -180,7 +180,7 @@ Legenda:
 - [x] Enriquecimiento por ficha individual y parse de `Partit Polític` y `Grup parlamentari`.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 100`) en codigo.
-- [ ] Hardening del parse de fechas de alta (`Alta: dd.mm.yyyy`) y posibles cambios de etiquetas (ca/es).
+- [x] Hardening del parse de fechas de alta (`Alta: dd.mm.yyyy`) y posibles cambios de etiquetas (ca/es).
 
 ### 7) `corts_valencianes_diputats` (DONE tecnico, calidad pendiente)
 

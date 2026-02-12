@@ -14,6 +14,7 @@ from ..raw import fallback_payload_from_sample, raw_output_path
 from ..types import Extracted
 from ..util import (
     clean_text,
+    normalize_key_part,
     normalize_ws,
     now_utc_iso,
     parse_date_flexible,
@@ -32,6 +33,22 @@ SENADO_FICHA_GRUPO_URL_TEMPLATE = (
 SENADO_FICHA_SENADOR_URL_TEMPLATE = (
     "https://www.senado.es/web/ficopendataservlet?tipoFich=1&cod={idweb}&legis=15"
 )
+
+SENADO_PARTY_ALIASES = {
+    "indep": "Independientes",
+    "independientes": "Independientes",
+    "ccpv": "CCPV",
+}
+
+
+def normalize_senado_party_name(raw: str | None) -> str | None:
+    text = clean_text(raw or "")
+    if not text:
+        return None
+    key = normalize_key_part(text)
+    return SENADO_PARTY_ALIASES.get(key, text)
+
+
 SENADO_MONTHS = {
     "ENE": "01",
     "FEB": "02",
@@ -337,7 +354,9 @@ class SenadoSenadoresConnector(BaseConnector):
         if not full_name:
             return None
 
-        party_name = pick_value(record, ("partido", "siglas", "grupo", "grupo_parlamentario"))
+        party_name = normalize_senado_party_name(
+            pick_value(record, ("partido", "siglas", "grupo", "grupo_parlamentario"))
+        )
         territory = pick_value(record, ("provincia", "circunscripcion", "territorio", "comunidad"))
 
         source_record_id = pick_value(

@@ -58,13 +58,42 @@ def clean_parlament_name(raw: str) -> str:
 
 def parse_alta_date(group_text: str) -> str | None:
     # Example: "... Alta: 10.06.2024."
-    m = re.search(r"\balta:\s*(\d{1,2})[./-](\d{1,2})[./-](\d{4})", group_text, flags=re.I)
+    if not group_text:
+        return None
+
+    normalized = normalize_ws(group_text)
+    if not normalized:
+        return None
+
+    # Common explicit format.
+    m = re.search(
+        r"\balta:\s*(\d{1,2})[./-](\d{1,2})[./-](\d{4})",
+        normalized,
+        flags=re.I,
+    )
+    if m:
+        d = int(m.group(1))
+        mo = int(m.group(2))
+        y = int(m.group(3))
+        return f"{y:04d}-{mo:02d}-{d:02d}"
+
+    # Variants where a date appears after the Alta label with extra punctuation.
+    m = re.search(r"\balta\b\D{0,24}(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})", normalized, flags=re.I)
+    if m:
+        d = int(m.group(1))
+        mo = int(m.group(2))
+        y = int(m.group(3))
+        if y < 100:
+            y += 2000
+        return f"{y:04d}-{mo:02d}-{d:02d}"
+
+    # As a last resort, search for any ISO-like date close to the Alta section.
+    m = re.search(r"\balta\b.{0,24}(\d{4}[./-]\d{1,2}[./-]\d{1,2})", normalized, flags=re.I)
     if not m:
         return None
-    d = int(m.group(1))
-    mo = int(m.group(2))
-    y = int(m.group(3))
-    return f"{y:04d}-{mo:02d}-{d:02d}"
+
+    date_text = normalize_ws(m.group(1)).replace("/", "-")
+    return parse_date_flexible(date_text)
 
 
 def extract_group_name(group_text: str) -> str:
