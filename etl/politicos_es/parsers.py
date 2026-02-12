@@ -33,10 +33,26 @@ def parse_json_source(payload: bytes) -> list[dict[str, Any]]:
     return flatten_json_records(parsed)
 
 
+def _decode_csv_payload(payload: bytes) -> str:
+    for encoding in ("utf-8-sig", "utf-8"):
+        try:
+            return payload.decode(encoding)
+        except UnicodeDecodeError:
+            pass
+
+    # Legacy feeds often arrive as Windows-1252; fallback before latin-1 so we
+    # preserve punctuation mapping (€, ñ, curly quotes, etc.).
+    for encoding in ("cp1252", "latin-1"):
+        decoded = payload.decode(encoding)
+        if "\x00" in decoded:
+            continue
+        return decoded
+
+    return payload.decode("utf-8", errors="replace")
+
+
 def parse_csv_source(payload: bytes) -> list[dict[str, Any]]:
-    text = payload.decode("utf-8-sig", errors="replace")
-    if "\ufffd" in text:
-        text = payload.decode("cp1252", errors="replace")
+    text = _decode_csv_payload(payload)
     lines = text.splitlines()
     if not lines:
         return []
@@ -223,4 +239,3 @@ def parse_asamblea_madrid_ocupaciones_csv(payload: bytes) -> list[dict[str, Any]
         row["is_active"] = bool(leg == max_leg and (raw_end_norm in {"", "-"} or end_date is None))
         row["max_legislatura_int"] = max_leg
     return rows
-
