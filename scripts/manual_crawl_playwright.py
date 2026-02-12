@@ -40,9 +40,14 @@ def is_challenge_or_deny(title: str, url: str, html: str) -> bool:
     # Cloudflare
     if "just a moment" in t:
         return True
-    if "cdn-cgi/challenge-platform" in h:
-        return True
+    # Some sites include Cloudflare JS (e.g. /cdn-cgi/.../jsd/main.js) even when
+    # the page is accessible. Treat it as blocked only when we see a real
+    # interactive challenge page marker.
     if "_cf_chl_opt" in h:
+        return True
+    if "enable javascript and cookies to continue" in h:
+        return True
+    if "performing security verification" in h:
         return True
     if "__cf_chl" in u:
         return True
@@ -294,4 +299,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
