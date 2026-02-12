@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlencode
 
-from ...politicos_es.http import http_get_bytes
+from ...politicos_es.http import http_get_bytes, payload_looks_like_html
 from ...politicos_es.raw import raw_output_path
 from ...politicos_es.types import Extracted
 from ...politicos_es.util import now_utc_iso, sha256_bytes, stable_json
@@ -20,6 +20,10 @@ def basic_auth_header(user: str, password: str) -> str:
 
 
 def parse_api_payload(payload: bytes) -> list[dict[str, Any]]:
+    if not payload:
+        raise RuntimeError("Respuesta inesperada (payload vacio)")
+    if payload_looks_like_html(payload):
+        raise RuntimeError("Respuesta inesperada (HTML recibido)")
     obj = json.loads(payload.decode("utf-8", errors="replace"))
     if not isinstance(obj, dict):
         raise RuntimeError("Respuesta inesperada (no dict)")
@@ -92,7 +96,18 @@ class InfoelectoralDescargasConnector:
             )
 
         try:
-            tipos = self._get_json(f"{INFOELECTORAL_BASE}convocatorias/tipos/", timeout)
+            notes: list[str] = []
+
+            def safe_get(url: str, label: str) -> list[dict[str, Any]] | None:
+                try:
+                    return self._get_json(url, timeout)
+                except Exception as exc:  # noqa: BLE001
+                    notes.append(f"{label}: {type(exc).__name__}: {exc}")
+                    return None
+
+            tipos = safe_get(f"{INFOELECTORAL_BASE}convocatorias/tipos/", "tipos")
+            if tipos is None:
+                raise RuntimeError("No fue posible recuperar el catálogo de tipos")
 
             records: list[dict[str, Any]] = []
             for row in tipos:
@@ -110,7 +125,9 @@ class InfoelectoralDescargasConnector:
             # Convocatorias por tipo.
             for tipo in sorted({r["tipo_convocatoria"] for r in records if r.get("kind") == "tipo_convocatoria"}):
                 conv_url = f"{INFOELECTORAL_BASE}convocatorias?{urlencode({'tipoConvocatoria': tipo})}"
-                convocatorias = self._get_json(conv_url, timeout)
+                convocatorias = safe_get(conv_url, f"convocatorias[{tipo}]")
+                if convocatorias is None:
+                    continue
                 for c in convocatorias:
                     cod = str(c.get("cod") or "").strip()
                     if not cod:
@@ -129,7 +146,9 @@ class InfoelectoralDescargasConnector:
                     )
 
                     arch_url = f"{INFOELECTORAL_BASE}archivos/extraccion?{urlencode({'tipoConvocatoria': tipo, 'idConvocatoria': cod})}"
-                    archivos = self._get_json(arch_url, timeout)
+                    archivos = safe_get(arch_url, f"archivos[{tipo}:{cod}]")
+                    if archivos is None:
+                        continue
                     for a in archivos:
                         nombre_doc = str(a.get("nombreDoc") or "").strip()
                         if not nombre_doc:
@@ -154,9 +173,15 @@ class InfoelectoralDescargasConnector:
                             }
                         )
 
+            if not records:
+                raise RuntimeError(f"No se pudo extraer ningun registro: {'; '.join(notes)}")
+
             payload = json.dumps(records, ensure_ascii=True, sort_keys=True).encode("utf-8")
             raw_path = raw_output_path(raw_dir, self.source_id, "json")
             raw_path.write_bytes(payload)
+            note = "network"
+            if notes:
+                note = f"network-with-partial-errors ({'; '.join(notes)})"
             return Extracted(
                 source_id=self.source_id,
                 source_url=resolved_url,
@@ -166,7 +191,7 @@ class InfoelectoralDescargasConnector:
                 content_sha256=sha256_bytes(payload),
                 content_type="application/json",
                 bytes=len(payload),
-                note="network",
+                note=note,
                 payload=payload,
                 records=records,
             )
@@ -193,4 +218,3 @@ class InfoelectoralDescargasConnector:
                 payload=payload,
                 records=[r for r in records if isinstance(r, dict)],
             )
-

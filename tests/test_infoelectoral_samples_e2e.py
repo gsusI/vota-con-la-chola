@@ -3,8 +3,10 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from etl.infoelectoral_es.config import SOURCE_CONFIG as INFO_SOURCE_CONFIG
+from etl.infoelectoral_es.connectors.descargas import InfoelectoralDescargasConnector
 from etl.infoelectoral_es.db import seed_sources as seed_info_sources
 from etl.infoelectoral_es.pipeline import ingest_one_source as ingest_info_one_source
 from etl.infoelectoral_es.registry import get_connectors as get_info_connectors
@@ -86,7 +88,58 @@ class TestInfoelectoralSamplesE2E(unittest.TestCase):
             finally:
                 conn.close()
 
+    def test_network_partial_failures_do_not_abort_extract(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            raw_dir = Path(td) / "raw"
+
+            tipos_payload = b"""{
+                "cod":"200",
+                "data":[{"cod":"1","descripcion":"Tipo prueba"}]
+            }"""
+            convocatorias_payload = b"""{
+                "cod":"200",
+                "data":[
+                  {"cod":"100","fecha":"2024","descripcion":"A","tipoConvocatoria":"1"},
+                  {"cod":"198305","fecha":"198305","descripcion":"B","tipoConvocatoria":"1"}
+                ]
+            }"""
+            archivos_payload_ok = b"""{
+                "cod":"200",
+                "data":[{"nombreDoc":"doc-a.zip","url":"https://example.com/doc-a.zip","descripcion":"Doc A (Madrid)"}]
+            }"""
+            html_error = b"<html><head>Security Police Violation</head></html>"
+
+            def fake_http_get_bytes(url: str, timeout: int, headers=None, insecure_ssl=False):
+                _ = timeout, headers, insecure_ssl
+                if "convocatorias/tipos/" in url:
+                    return tipos_payload, "application/json"
+                if "convocatorias?" in url:
+                    return convocatorias_payload, "application/json"
+                if "archivos/extraccion" in url:
+                    if "idConvocatoria=198305" in url:
+                        return html_error, "text/html; charset=iso-8859-1"
+                    return archivos_payload_ok, "application/json"
+                raise AssertionError(f"Unexpected URL: {url}")
+
+            connector = InfoelectoralDescargasConnector()
+            with patch("etl.infoelectoral_es.connectors.descargas.http_get_bytes", side_effect=fake_http_get_bytes):
+                extracted = connector.extract(
+                    raw_dir=raw_dir,
+                    timeout=5,
+                    from_file=None,
+                    url_override=None,
+                    strict_network=True,
+                )
+
+            kinds = sorted(r["kind"] for r in extracted.records)
+            self.assertIn("tipo_convocatoria", kinds)
+            self.assertIn("convocatoria", kinds)
+            self.assertIn("archivo_extraccion", kinds)
+            self.assertEqual(len([k for k in kinds if k == "archivo_extraccion"]), 1)
+            self.assertEqual(len(extracted.records), 4)
+            self.assertIn("network-with-partial-errors", extracted.note)
+            self.assertTrue(extracted.raw_path.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
-
