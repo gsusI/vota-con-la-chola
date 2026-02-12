@@ -26,12 +26,13 @@ from ..util import (
 from .base import BaseConnector
 
 
-SENADO_GRUPOS_URL = "https://www.senado.es/web/ficopendataservlet?tipoFich=4&legis=15"
+SENADO_DEFAULT_LEGISLATURES: tuple[str, ...] = ("14", "15")
+SENADO_GRUPOS_URL = "https://www.senado.es/web/ficopendataservlet?tipoFich=4&legis={legis}"
 SENADO_FICHA_GRUPO_URL_TEMPLATE = (
-    "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=2&cod={group_code}"
+    "https://www.senado.es/web/ficopendataservlet?legis={legis}&tipoFich=2&cod={group_code}"
 )
 SENADO_FICHA_SENADOR_URL_TEMPLATE = (
-    "https://www.senado.es/web/ficopendataservlet?tipoFich=1&cod={idweb}&legis=15"
+    "https://www.senado.es/web/ficopendataservlet?tipoFich=1&cod={idweb}&legis={legis}"
 )
 
 SENADO_PARTY_ALIASES = {
@@ -116,6 +117,22 @@ def parse_senado_group_codes(payload: bytes) -> list[str]:
     return codes
 
 
+def _parse_legislatures(value: str | None) -> tuple[str, ...]:
+    if not value:
+        return SENADO_DEFAULT_LEGISLATURES
+    values = [normalize_ws(v) for v in value.replace(";", ",").split(",")]
+    out: list[str] = []
+    seen: set[str] = set()
+    for token in values:
+        if not token:
+            continue
+        if token in seen:
+            continue
+        seen.add(token)
+        out.append(token)
+    return tuple(out)
+
+
 def select_senado_credencial(
     credenciales: list[ET.Element], preferred_cred: str | None
 ) -> ET.Element | None:
@@ -130,76 +147,154 @@ def select_senado_credencial(
     return credenciales[-1]
 
 
-def build_senado_records(timeout: int) -> list[dict[str, Any]]:
-    grupos_payload, grupos_ct = http_get_bytes(SENADO_GRUPOS_URL, timeout)
-    validate_network_payload("senado_senadores", grupos_payload, grupos_ct)
-    group_codes = parse_senado_group_codes(grupos_payload)
-    if not group_codes:
-        raise RuntimeError("No se encontraron grupos parlamentarios del Senado")
+def _senado_period_records(member: ET.Element) -> list[dict[str, str | None]]:
+    periods_by_key: dict[tuple[str, str], dict[str, str | None]] = {}
+    for period in member.findall("./periodosPertenencia/periodo"):
+        start_date = parse_senado_date(period.findtext("FechaAlta"))
+        end_date = parse_senado_date(period.findtext("FechaBaja"))
+        key = (start_date or "", end_date or "")
+        if key in periods_by_key:
+            continue
+        periods_by_key[key] = {
+            "start_date": start_date,
+            "end_date": end_date,
+            "credencial": clean_text(period.findtext("Credencial")),
+        }
 
-    active_by_id: dict[str, dict[str, str]] = {}
-    for group_code in group_codes:
-        url = SENADO_FICHA_GRUPO_URL_TEMPLATE.format(group_code=group_code)
-        payload, ct = http_get_bytes(url, timeout)
-        validate_network_payload("senado_senadores", payload, ct)
-        root = ET.fromstring(payload)
-        for member in root.findall(".//compSenador"):
-            idweb = clean_text(member.findtext("Idweb"))
-            if not idweb:
-                continue
+    periods = list(periods_by_key.values())
+    if periods:
+        return periods
+    return [{"start_date": None, "end_date": None, "credencial": ""}]
 
-            name = clean_text(member.findtext("Nombre"))
-            family = clean_text(member.findtext("Apellidos"))
-            periods = member.findall("./periodosPertenencia/periodo")
-            best_period: dict[str, str] | None = None
-            for period in periods:
-                fecha_baja = clean_text(period.findtext("FechaBaja"))
-                if fecha_baja:
+
+def build_senado_records(timeout: int, legislatures: tuple[str, ...] | None = None) -> list[dict[str, Any]]:
+    legislatures = legislatures or SENADO_DEFAULT_LEGISLATURES
+    members_by_id: dict[str, list[dict[str, Any]]] = {}
+
+    for legis in legislatures:
+        grupos_payload, grupos_ct = http_get_bytes(
+            SENADO_GRUPOS_URL.format(legis=legis),
+            timeout,
+        )
+        validate_network_payload("senado_senadores", grupos_payload, grupos_ct)
+        group_codes = parse_senado_group_codes(grupos_payload)
+        if not group_codes:
+            continue
+
+        for group_code in group_codes:
+            url = SENADO_FICHA_GRUPO_URL_TEMPLATE.format(legis=legis, group_code=group_code)
+            payload, ct = http_get_bytes(url, timeout)
+            validate_network_payload("senado_senadores", payload, ct)
+            root = ET.fromstring(payload)
+            for member in root.findall(".//compSenador"):
+                idweb = clean_text(member.findtext("Idweb"))
+                if not idweb:
                     continue
-                start_date = parse_senado_date(period.findtext("FechaAlta"))
-                candidate = {
-                    "idweb": idweb,
-                    "nombre": name,
-                    "apellidos": family,
-                    "credencial": clean_text(period.findtext("Credencial")),
-                    "proced_lugar": clean_text(period.findtext("ProcedLugar")),
-                    "start_date": start_date or "",
-                    "group_code": group_code,
-                }
-                if not best_period:
-                    best_period = candidate
-                    continue
-                best_start = best_period["start_date"]
-                if start_date and (not best_start or start_date > best_start):
-                    best_period = candidate
-            if not best_period:
-                continue
-            prev = active_by_id.get(idweb)
-            if not prev or best_period["start_date"] > prev["start_date"]:
-                active_by_id[idweb] = best_period
+
+                name = clean_text(member.findtext("Nombre"))
+                family = clean_text(member.findtext("Apellidos"))
+                proced_lugar = clean_text(member.findtext("ProcedLugar"))
+                periods = _senado_period_records(member)
+
+                members_by_id.setdefault(idweb, [])
+                for period in periods:
+                    members_by_id[idweb].append(
+                        {
+                            "idweb": idweb,
+                            "nombre": name,
+                            "apellidos": family,
+                            "legis": legis,
+                            "credencial": period["credencial"] or "",
+                            "proced_lugar": proced_lugar,
+                            "start_date": period["start_date"] or "",
+                            "end_date": period["end_date"] or "",
+                            "group_code": f"{legis}:{group_code}",
+                        }
+                    )
 
     records: list[dict[str, Any]] = []
-    for idweb, member in sorted(active_by_id.items()):
-        detail_url = SENADO_FICHA_SENADOR_URL_TEMPLATE.format(idweb=idweb)
+    for idweb, entries in sorted(members_by_id.items()):
+        ordered = sorted(
+            entries,
+            key=lambda item: (
+                item["end_date"] == "",  # active first
+                item["start_date"] or "",
+                item["credencial"],
+            ),
+            reverse=True,
+        )
+        active_seen = False
+        for member in ordered:
+            is_active = not bool(member["end_date"])
+            if is_active and not active_seen:
+                source_record_id = f"idweb:{idweb}"
+                active_seen = True
+            else:
+                source_record_id = f"idweb:{idweb}:{member['start_date'] or 'sin-fecha'}:{member['end_date'] or 'sin-fin'}"
+
+            records.append(
+                {
+                    "idweb": idweb,
+                    "source_record_id": source_record_id,
+                    "nombre": member["nombre"],
+                    "apellidos": member["apellidos"],
+                    "legis": legis,
+                    "fecha_inicio": member["start_date"],
+                    "fecha_fin": member["end_date"],
+                    "credencial": member["credencial"],
+                    "proced_lugar": member["proced_lugar"],
+                    "is_active": is_active,
+                    "group_code": member["group_code"],
+                }
+            )
+
+    deduped_records: list[dict[str, Any]] = []
+    seen_srids: set[str] = set()
+    for candidate in records:
+        srid = str(candidate["source_record_id"])
+        if srid in seen_srids:
+            continue
+        seen_srids.add(srid)
+        deduped_records.append(candidate)
+
+    records = deduped_records
+
+    if not members_by_id:
+        raise RuntimeError("No se encontraron senadores del Senado en las legislaturas configuradas")
+
+    enriched: list[dict[str, Any]] = []
+    detail_cache: dict[tuple[str, str], ET.Element | None] = {}
+    for record in records:
+        legis = str(record.get("legis") or "15")
+        cache_key = (str(record["idweb"]), legis)
         root: ET.Element | None = None
         detail_error: str | None = None
-        try:
-            detail_payload, detail_ct = http_get_bytes(detail_url, timeout)
-            validate_network_payload("senado_senadores", detail_payload, detail_ct)
-            root = ET.fromstring(detail_payload)
-        except Exception as exc:  # noqa: BLE001
-            # Robustness: a single broken detail endpoint shouldn't kill the whole run.
-            detail_error = f"{type(exc).__name__}: {exc}"
+        if cache_key not in detail_cache:
+            detail_url = SENADO_FICHA_SENADOR_URL_TEMPLATE.format(legis=legis, idweb=record["idweb"])
+            try:
+                detail_payload, detail_ct = http_get_bytes(detail_url, timeout)
+                validate_network_payload("senado_senadores", detail_payload, detail_ct)
+                detail_cache[cache_key] = ET.fromstring(detail_payload)
+            except Exception as exc:  # noqa: BLE001
+                # Keep cache for failed details to avoid repeated retries per period.
+                detail_cache[cache_key] = None
+                detail_error = f"{type(exc).__name__}: {exc}"
+
+        cached_root = detail_cache[cache_key]
+        if cached_root is None:
+            detail_error = detail_error or "no-detail"
+        else:
+            root = cached_root
 
         datos = root.find(".//datosPersonales") if root is not None else None
-        nombre = clean_text(datos.findtext("nombre") if datos is not None else None) or member["nombre"]
-        apellidos = clean_text(datos.findtext("apellidos") if datos is not None else None) or member["apellidos"]
+        nombre = clean_text(datos.findtext("nombre") if datos is not None else None) or record["nombre"]
+        apellidos = clean_text(datos.findtext("apellidos") if datos is not None else None) or record["apellidos"]
         full_name = normalize_ws(f"{nombre} {apellidos}")
 
         credenciales = root.findall(".//credenciales/credencial") if root is not None else []
-        selected_cred = select_senado_credencial(credenciales, member.get("credencial")) if root is not None else None
-        proced_literal = member.get("proced_lugar", "")
-        start_date = member.get("start_date", "")
+        selected_cred = select_senado_credencial(credenciales, record["credencial"]) if root is not None else None
+        proced_literal = str(record["proced_lugar"] or "")
+        start_date = str(record["fecha_inicio"] or "")
         party_name = ""
         party_name_full = ""
         group_name = ""
@@ -222,12 +317,12 @@ def build_senado_records(timeout: int) -> list[dict[str, Any]]:
             if not group_name:
                 group_name = clean_text(root.findtext(".//gruposParlamentarios/grupoParlamentario/grupoNombre"))
         if not group_name:
-            group_name = clean_text(member.get("group_code")) or ""
+            group_name = clean_text(str(record["group_code"]))
 
-        records.append(
+        enriched.append(
             {
-                "source_record_id": f"idweb:{idweb}",
-                "id": idweb,
+                "source_record_id": record["source_record_id"],
+                "id": record["idweb"],
                 "nombre": nombre,
                 "apellidos": apellidos,
                 "full_name": full_name,
@@ -236,11 +331,12 @@ def build_senado_records(timeout: int) -> list[dict[str, Any]]:
                 "grupo": group_name,
                 "provincia": extract_senado_procedencia(proced_literal),
                 "fecha_inicio": start_date,
+                "fecha_fin": str(record["fecha_fin"] or ""),
+                "is_active": bool(record["is_active"]),
                 "detail_error": detail_error,
             }
         )
-    return records
-
+    return enriched
 
 class SenadoSenadoresConnector(BaseConnector):
     source_id = "senado_senadores"
@@ -249,7 +345,7 @@ class SenadoSenadoresConnector(BaseConnector):
         _ = timeout
         if url_override:
             return url_override
-        return SENADO_GRUPOS_URL
+        return SENADO_GRUPOS_URL.format(legis=",".join(SENADO_DEFAULT_LEGISLATURES))
 
     def extract(
         self,
@@ -286,7 +382,8 @@ class SenadoSenadoresConnector(BaseConnector):
 
         resolved_url = self.resolve_url(url_override, timeout)
         try:
-            records = build_senado_records(timeout)
+            legislation_match = re.search(r"legis=([0-9]+(?:[\s,;][0-9]+)*)", str(resolved_url))
+            records = build_senado_records(timeout, _parse_legislatures(legislation_match.group(1) if legislation_match else None))
             payload_obj = {"source": "senado_open_data", "records": records}
             payload = json.dumps(payload_obj, ensure_ascii=True, sort_keys=True).encode("utf-8")
             fetched_at = now_utc_iso()
