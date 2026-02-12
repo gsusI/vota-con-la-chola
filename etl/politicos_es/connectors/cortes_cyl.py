@@ -50,30 +50,48 @@ def strip_tags(text: str) -> str:
 def parse_ccyl_procuradores_list(html: str) -> list[dict[str, Any]]:
     # Links look like:
     # /Organizacion/Procurador?Legislatura=11&amp;CodigoPersona=P11034
-    pattern = re.compile(
-        r'href="(?P<href>/Organizacion/Procurador\?Legislatura=(?P<leg>\d+)&amp;CodigoPersona=(?P<persona>[A-Z0-9]+))"',
-        flags=re.I,
+    anchor_pattern = re.compile(
+        r'<a[^>]+href\s*=\s*(["\'])(?P<href>[^"\']+)\1[^>]*>(?P<label>.*?)</a>',
+        flags=re.I | re.S,
     )
+    leg_pattern = re.compile(r"Legislatura=(?P<leg>\d+).*?CodigoPersona=(?P<persona>[A-Z0-9]+)", flags=re.I)
+
     seen: set[tuple[str, str]] = set()
     records: list[dict[str, Any]] = []
 
-    for m in pattern.finditer(html):
-        leg = m.group("leg")
-        persona = m.group("persona")
+    matches = list(anchor_pattern.finditer(html))
+    for idx, m in enumerate(matches):
+        href_raw = unescape(m.group("href"))
+        mm = leg_pattern.search(href_raw.replace("&amp;", "&"))
+        if not mm:
+            continue
+        leg = mm.group("leg")
+        persona = mm.group("persona")
         key = (leg, persona)
         if key in seen:
             continue
         seen.add(key)
 
-        start = max(0, m.start() - 1400)
-        end = min(len(html), m.end() + 1400)
+        # Keep a context window around the anchor to recover sibling fields
+        # while avoiding spill-over from adjacent rows.
+        next_anchor = matches[idx + 1].start() if idx + 1 < len(matches) else len(html)
+        safe_end = max(m.end(), next_anchor)
+        start = m.start()
+        end = min(len(html), safe_end)
         window = html[start:end]
 
         # Name is in <p class="cc_org_Procurador"> ... </p>
-        name = ""
+        name = normalize_ws(m.group("label"))
+        name = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(name)))
         m_name = re.search(r'<p[^>]*class="cc_org_Procurador"[^>]*>(.*?)</p>', window, flags=re.I | re.S)
         if m_name:
             name = normalize_ws(unescape(strip_tags(m_name.group(1))))
+
+        if not name:
+            # Fallback: text directly in anchor often already contains the name.
+            text_name = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(m.group("label"))))
+            if text_name:
+                name = text_name
 
         group = ""
         m_group = re.search(
@@ -83,6 +101,15 @@ def parse_ccyl_procuradores_list(html: str) -> list[dict[str, Any]]:
         )
         if m_group:
             group = normalize_ws(unescape(strip_tags(m_group.group(1))))
+        else:
+            m_group_alt = re.search(
+                r"(?:grupo|grup)\s*parlamentario\s*:?\s*([^<\n\r]+)",
+                normalize_ws(re.sub(r"<[^>]+>", " ", window)),
+                flags=re.I,
+            )
+            if m_group_alt:
+                group = normalize_ws(m_group_alt.group(1))
+                group = re.sub(r"\s+provincia[^\w].*$", "", group, flags=re.I)
 
         province = ""
         m_prov = re.search(
@@ -92,8 +119,16 @@ def parse_ccyl_procuradores_list(html: str) -> list[dict[str, Any]]:
         )
         if m_prov:
             province = normalize_ws(unescape(strip_tags(m_prov.group(1))))
+        else:
+            m_prov_alt = re.search(
+                r"(?:provincia|província)\s*:?\s*([^<\n\r]+)",
+                normalize_ws(re.sub(r"<[^>]+>", " ", window)),
+                flags=re.I,
+            )
+            if m_prov_alt:
+                province = normalize_ws(m_prov_alt.group(1))
 
-        href = unescape(m.group("href"))
+        href = unescape(href_raw)
         detail_url = f"{CCYL_BASE}{href}"
         records.append(
             {
@@ -238,4 +273,3 @@ class CortesCylProcuradoresConnector(BaseConnector):
             "source_snapshot_date": snapshot_date,
             "raw_payload": stable_json(record),
         }
-

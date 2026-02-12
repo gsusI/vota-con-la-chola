@@ -31,19 +31,24 @@ CORTS_DIPUTADOS_LIST_URL = "https://www.cortsvalencianes.es/es/composicion/diput
 def parse_corts_profile_urls(list_html: str) -> list[str]:
     # Example:
     # /es/composicion/diputados/xi/abad_soler_ramon/14e506aa72d70d597b755db69897d454
-    rels = sorted(
-        set(
-            re.findall(
-                r'href="(/es/composicion/diputados/([ivxlcdm]+)/[^"/]+/([0-9a-f]{32}))"',
-                list_html,
-                flags=re.I,
-            )
-        )
-    )
-    urls: list[str] = []
-    for rel, _leg, _sid in rels:
-        urls.append(f"{CORTS_BASE}{unescape(rel)}")
-    return urls
+    href_pattern = re.compile(r'href\s*=\s*(["\'])(?P<href>[^"\']+)\1', flags=re.I)
+    rels: set[str] = set()
+
+    for match in href_pattern.finditer(list_html):
+        href = normalize_ws(unescape(match.group("href")))
+        if not href:
+            continue
+        href_lower = href.lower()
+        if "/es/composicion/diputados/" not in href_lower:
+            continue
+
+        if re.search(r"/es/composicion/diputados/([ivxlcdm]+)/[^/]+/[0-9a-f]{32}/?$", href_lower, flags=re.I):
+            if href.startswith("http://") or href.startswith("https://"):
+                rels.add(href)
+            else:
+                rels.add(f"{CORTS_BASE}{href if href.startswith('/') else '/' + href}")
+
+    return sorted(rels)
 
 
 def extract_deputy_name(detail_html: str) -> str:
@@ -263,4 +268,3 @@ class CortsValencianesDiputatsConnector(BaseConnector):
             "source_snapshot_date": snapshot_date,
             "raw_payload": stable_json(record),
         }
-
