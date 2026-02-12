@@ -188,7 +188,7 @@ Legenda:
 - [x] Parse de `Grupo parlamentario` y provincia (circunscripcion) desde ficha.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 70`) en codigo.
-- [ ] Hardening de parsing si el HTML cambia (clases CSS y headings).
+- [x] Hardening de parsing si el HTML cambia (clases CSS y headings).
 
 ### 8) `parlamento_andalucia_diputados` (DONE tecnico, calidad pendiente)
 
