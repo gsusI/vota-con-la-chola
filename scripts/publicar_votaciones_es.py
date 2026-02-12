@@ -69,6 +69,17 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Falla con exit!=0 si quality.gate.passed es false",
     )
+    p.add_argument(
+        "--include-unmatched",
+        action="store_true",
+        help="Incluye diagnóstico en seco de votos nominales sin person_id en la sección quality.",
+    )
+    p.add_argument(
+        "--unmatched-sample-limit",
+        type=int,
+        default=0,
+        help="Límite de ejemplos de mismatches incluido al usar --include-unmatched. 0 sin muestra.",
+    )
     return p.parse_args()
 
 
@@ -101,6 +112,9 @@ def main() -> int:
     if not source_ids:
         print("ERROR: source-ids vacio", file=sys.stderr)
         return 2
+    if int(args.unmatched_sample_limit) < 0:
+        print("ERROR: unmatched-sample-limit debe ser >= 0", file=sys.stderr)
+        return 2
 
     if args.json_out:
         out_path = Path(args.json_out)
@@ -117,6 +131,8 @@ def main() -> int:
             only_linked_events=bool(args.only_linked_events),
             max_events=args.max_events,
             max_member_votes_per_event=args.max_member_votes_per_event,
+            include_unmatched_people=bool(args.include_unmatched),
+            unmatched_sample_limit=int(args.unmatched_sample_limit),
         )
     finally:
         conn.close()

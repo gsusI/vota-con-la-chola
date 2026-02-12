@@ -109,6 +109,21 @@ class TestPublishParlamentarioVotaciones(unittest.TestCase):
                 self.assertTrue(any((it.get("initiatives") or []) for it in items))
                 self.assertTrue(any((it.get("member_votes") or []) for it in items))
 
+                snap_with_unmatched = build_votaciones_snapshot(
+                    conn,
+                    snapshot_date=snapshot_date,
+                    source_ids=source_ids,
+                    include_unmatched_people=True,
+                    unmatched_sample_limit=4,
+                )
+                quality_with_unmatched = snap_with_unmatched.get("quality") or {}
+                quality_unmatched = quality_with_unmatched.get("unmatched_people")
+                self.assertIsInstance(quality_unmatched, dict)
+                self.assertIn("dry_run", quality_unmatched)
+                self.assertTrue(bool(quality_unmatched.get("dry_run")))
+                self.assertIn("total_unmatched", quality_unmatched)
+                self.assertLessEqual(len(quality_unmatched.get("unmatched_sample", [])), 4)
+
                 for it in items[:10]:
                     self.assertIn("event", it)
                     self.assertIn("source", it)

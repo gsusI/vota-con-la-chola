@@ -76,6 +76,9 @@ etl-publish-representantes:
 etl-publish-votaciones:
   docker compose run --rm --build etl "python3 scripts/publicar_votaciones_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
 
+etl-publish-votaciones-unmatched:
+  docker compose run --rm --build etl "python3 scripts/publicar_votaciones_es.py --db {{db_path}} --snapshot-date {{snapshot_date}} --include-unmatched --unmatched-sample-limit 100"
+
 etl-publish-infoelectoral:
   docker compose run --rm --build etl "python3 scripts/publicar_infoelectoral_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
 

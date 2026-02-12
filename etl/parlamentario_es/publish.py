@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .quality import compute_vote_quality_kpis, evaluate_vote_quality_gate
+from .pipeline import backfill_vote_member_person_ids
 
 
 def _sha256_text(text: str) -> str:
@@ -49,10 +50,15 @@ def build_votaciones_snapshot(
     only_linked_events: bool = False,
     max_events: int | None = None,
     max_member_votes_per_event: int | None = None,
+    include_unmatched_people: bool = False,
+    unmatched_sample_limit: int = 0,
 ) -> dict[str, Any]:
     source_ids = tuple(str(x).strip() for x in source_ids if str(x).strip())
     if not source_ids:
         raise ValueError("source_ids vacio")
+    unmatched_sample_limit_i = int(unmatched_sample_limit)
+    if unmatched_sample_limit_i < 0:
+        raise ValueError("unmatched-sample-limit debe ser >= 0")
 
     where = ["e.source_id IN (" + ",".join("?" for _ in source_ids) + ")"]
     params: list[Any] = [*source_ids]
@@ -311,6 +317,14 @@ def build_votaciones_snapshot(
 
     kpis = compute_vote_quality_kpis(conn, source_ids=source_ids)
     gate = evaluate_vote_quality_gate(kpis)
+    unmatched_people = None
+    if bool(include_unmatched_people):
+        unmatched_people = backfill_vote_member_person_ids(
+            conn,
+            vote_source_ids=source_ids,
+            dry_run=True,
+            unmatched_sample_limit=unmatched_sample_limit_i,
+        )
 
     snapshot: dict[str, Any] = {
         "fecha_referencia": snapshot_date,
@@ -328,6 +342,11 @@ def build_votaciones_snapshot(
             "scope": {"source_ids": list(source_ids)},
             "kpis": kpis,
             "gate": gate,
+            **(
+                {"unmatched_people": unmatched_people}
+                if unmatched_people is not None
+                else {}
+            ),
         },
         "items": items,
     }
