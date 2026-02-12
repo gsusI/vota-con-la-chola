@@ -206,6 +206,50 @@ CREATE TABLE IF NOT EXISTS infoelectoral_archivos_extraccion (
   UNIQUE (convocatoria_id, nombre_doc)
 );
 
+-- Parlamentario: votaciones (roll-call cuando exista)
+CREATE TABLE IF NOT EXISTS parl_vote_events (
+  vote_event_id TEXT PRIMARY KEY,
+  legislature TEXT,
+  session_number INTEGER,
+  vote_number INTEGER,
+  vote_date TEXT,
+  title TEXT,
+  expediente_text TEXT,
+  subgroup_title TEXT,
+  subgroup_text TEXT,
+  assentimiento TEXT,
+  totals_present INTEGER,
+  totals_yes INTEGER,
+  totals_no INTEGER,
+  totals_abstain INTEGER,
+  totals_no_vote INTEGER,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS parl_vote_member_votes (
+  member_vote_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  vote_event_id TEXT NOT NULL REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
+  seat TEXT,
+  member_name TEXT,
+  member_name_normalized TEXT,
+  person_id INTEGER REFERENCES persons(person_id),
+  group_code TEXT,
+  vote_choice TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (vote_event_id, seat)
+);
+
 CREATE INDEX IF NOT EXISTS idx_runs_source_id ON ingestion_runs(source_id);
 CREATE INDEX IF NOT EXISTS idx_persons_name ON persons(full_name);
 CREATE INDEX IF NOT EXISTS idx_persons_gender_id ON persons(gender_id);
@@ -227,3 +271,8 @@ CREATE INDEX IF NOT EXISTS idx_institutions_admin_level_id ON institutions(admin
 CREATE INDEX IF NOT EXISTS idx_institutions_territory_id ON institutions(territory_id);
 CREATE INDEX IF NOT EXISTS idx_party_aliases_party_id ON party_aliases(party_id);
 CREATE INDEX IF NOT EXISTS idx_territories_parent ON territories(parent_territory_id);
+
+CREATE INDEX IF NOT EXISTS idx_parl_vote_events_date ON parl_vote_events(vote_date);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_events_source ON parl_vote_events(source_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_event ON parl_vote_member_votes(vote_event_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_person ON parl_vote_member_votes(person_id);
