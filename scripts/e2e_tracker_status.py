@@ -17,6 +17,7 @@ TRACKER_SOURCE_HINTS = {
     "Congreso OpenData Diputados": "congreso_diputados",
     "Congreso votaciones": "congreso_votaciones",
     "Congreso iniciativas": "congreso_iniciativas",
+    "Senado votaciones/mociones": "senado_votaciones",
     "Senado CSV Senadores": "senado_senadores",
     "Senado OpenData XML": "senado_senadores",
     "Europarl MEP XML": "europarl_meps",

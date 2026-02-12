@@ -190,6 +190,99 @@ def _ingest_congreso_iniciativas(
     return seen, loaded
 
 
+def _build_senado_vote_event_id(rec: dict[str, Any]) -> str:
+    payload = rec.get("payload") or {}
+    if not isinstance(payload, dict):
+        payload = {}
+    vote_file_url = normalize_ws(str(payload.get("vote_file_url") or ""))
+    vote_url = normalize_ws(str(payload.get("vote_url") or ""))
+    if vote_file_url.startswith("http"):
+        return f"url:{vote_file_url}"
+    if vote_url.startswith("http"):
+        return f"url:{vote_url}"
+    fingerprint = stable_json(
+        {
+            "leg": rec.get("legislature"),
+            "tipo": payload.get("tipo_expediente"),
+            "num": payload.get("numero_expediente"),
+            "session_id": payload.get("session_id"),
+            "vote_id": payload.get("vote_id"),
+            "title": payload.get("vote_title"),
+        }
+    )
+    return f"senado:vote:{sha256_bytes(fingerprint.encode('utf-8'))[:24]}"
+
+
+def _ingest_senado_votaciones(
+    conn: sqlite3.Connection,
+    *,
+    extracted_records: list[dict[str, Any]],
+    source_id: str,
+    snapshot_date: str | None,
+    now_iso: str,
+) -> tuple[int, int]:
+    seen = 0
+    loaded = 0
+    for rec in extracted_records:
+        seen += 1
+        payload = rec.get("payload") or {}
+        if not isinstance(payload, dict):
+            payload = {}
+
+        vote_event_id = _build_senado_vote_event_id(rec)
+        event_payload_json = stable_json(payload)
+        source_record_pk = upsert_source_record_for_event(
+            conn,
+            source_id=source_id,
+            source_record_id=vote_event_id,
+            snapshot_date=snapshot_date,
+            raw_payload=event_payload_json,
+            now_iso=now_iso,
+        )
+
+        tipo_ex = normalize_ws(str(payload.get("tipo_expediente") or "")) or None
+        num_ex = normalize_ws(str(payload.get("numero_expediente") or "")) or None
+        expediente = None
+        if tipo_ex and num_ex:
+            expediente = f"{tipo_ex}/{num_ex}"
+
+        iniciativa_title = normalize_ws(str(payload.get("iniciativa_title") or "")) or None
+        expediente_text = iniciativa_title
+        if expediente and iniciativa_title and expediente not in iniciativa_title:
+            expediente_text = f"{iniciativa_title} ({expediente})"
+        elif expediente and not expediente_text:
+            expediente_text = expediente
+
+        upsert_parl_vote_event(
+            conn,
+            vote_event_id=vote_event_id,
+            row={
+                "legislature": rec.get("legislature"),
+                "session_number": payload.get("session_id"),
+                "vote_number": payload.get("vote_id"),
+                "vote_date": None,
+                "title": payload.get("vote_title"),
+                "expediente_text": expediente_text,
+                "subgroup_title": None,
+                "subgroup_text": None,
+                "assentimiento": None,
+                "totals_present": None,
+                "totals_yes": None,
+                "totals_no": None,
+                "totals_abstain": None,
+                "totals_no_vote": None,
+            },
+            source_id=source_id,
+            source_url=normalize_ws(str(payload.get("source_tipo12_url") or "")) or str(rec.get("detail_url") or ""),
+            source_record_pk=source_record_pk,
+            snapshot_date=snapshot_date,
+            raw_payload=event_payload_json,
+            now_iso=now_iso,
+        )
+        loaded += 1
+    return seen, loaded
+
+
 def ingest_one_source(
     conn: sqlite3.Connection,
     connector: BaseConnector,
@@ -273,6 +366,54 @@ def ingest_one_source(
                 {
                     "note": extracted.note,
                     "initiatives_loaded": rec_loaded,
+                },
+                ensure_ascii=True,
+                sort_keys=True,
+            )
+            finish_run(
+                conn,
+                run_id=run_id,
+                status="ok",
+                message=message,
+                records_seen=rec_seen,
+                records_loaded=rec_loaded,
+                fetched_at=extracted.fetched_at,
+                raw_path=extracted.raw_path,
+            )
+            return rec_seen, rec_loaded, message
+
+        if source_id == "senado_votaciones":
+            rec_seen, rec_loaded = _ingest_senado_votaciones(
+                conn,
+                extracted_records=extracted.records,
+                source_id=source_id,
+                snapshot_date=snapshot_date,
+                now_iso=now_iso,
+            )
+            if strict_network and rec_seen > 0 and rec_loaded == 0:
+                raise RuntimeError(
+                    "strict-network abortado: records_seen > 0 y records_loaded == 0 "
+                    f"({source_id}: seen={rec_seen}, loaded={rec_loaded})"
+                )
+
+            min_loaded = SOURCE_CONFIG.get(source_id, {}).get("min_records_loaded_strict")
+            if (
+                strict_network
+                and extracted.note.startswith("network")
+                and isinstance(min_loaded, int)
+                and rec_loaded < min_loaded
+            ):
+                raise RuntimeError(
+                    f"strict-network abortado: records_loaded < min_records_loaded_strict "
+                    f"({source_id}: loaded={rec_loaded}, min={min_loaded})"
+                )
+
+            conn.commit()
+            message = json.dumps(
+                {
+                    "note": extracted.note,
+                    "events_loaded": rec_loaded,
+                    "member_votes_loaded": 0,
                 },
                 ensure_ascii=True,
                 sort_keys=True,

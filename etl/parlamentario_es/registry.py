@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from .connectors import CongresoIniciativasConnector, CongresoVotacionesConnector
+from .connectors import CongresoIniciativasConnector, CongresoVotacionesConnector, SenadoVotacionesConnector
 from .connectors.base import BaseConnector
 
 
 def get_connectors() -> dict[str, BaseConnector]:
-    connectors: list[BaseConnector] = [CongresoVotacionesConnector(), CongresoIniciativasConnector()]
+    connectors: list[BaseConnector] = [
+        CongresoVotacionesConnector(),
+        CongresoIniciativasConnector(),
+        SenadoVotacionesConnector(),
+    ]
     return {c.source_id: c for c in connectors}

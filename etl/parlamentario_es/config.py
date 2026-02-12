@@ -20,6 +20,16 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 1,
         "fallback_file": "etl/data/raw/samples/congreso_votaciones_sample.json",
     },
+    "senado_votaciones": {
+        "name": "Senado - Votaciones (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://videoservlet.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
+        "format": "html",  # catalog page is HTML; vote references are XML (tipoFich=12)
+        "level": "nacional",
+        "institution_name": "Senado de Espana",
+        "min_records_loaded_strict": 1,
+        "fallback_file": "etl/data/raw/samples/senado_votaciones_sample.xml",
+    },
     "congreso_iniciativas": {
         "name": "Congreso - Iniciativas (OpenData)",
         "scope": "nacional",

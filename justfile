@@ -52,6 +52,7 @@ parl-init:
 parl-samples:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_iniciativas --from-file etl/data/raw/samples/congreso_iniciativas_sample.json --snapshot-date {{snapshot_date}} --strict-network"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml --snapshot-date {{snapshot_date}} --strict-network"
 
 etl-stats:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py stats --db {{db_path}}"
@@ -76,6 +77,9 @@ parl-extract-congreso-votaciones:
 
 parl-extract-congreso-iniciativas:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_iniciativas --snapshot-date {{snapshot_date}} --strict-network"
+
+parl-extract-senado-votaciones:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --strict-network"
 
 etl-extract-congreso:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
