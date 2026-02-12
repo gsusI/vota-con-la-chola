@@ -34,6 +34,8 @@ TRACKER_SOURCE_HINTS = {
     "Cortes de Castilla-La Mancha": "cortes_clm_diputados",
     "Cortes de Castilla y Leon": "cortes_cyl_procuradores",
     "Parlamento de Andalucia": "parlamento_andalucia_diputados",
+    "Parlamento de Galicia": "parlamento_galicia_deputados",
+    "Parlamento de Navarra": "parlamento_navarra_parlamentarios_forales",
     "Parlamento Vasco": "parlamento_vasco_parlamentarios",
 }
 

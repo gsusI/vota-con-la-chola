@@ -69,6 +69,8 @@ Lectura operativa:
 - `cortes_clm_diputados`: operativo con scrape HTML (listado legacy PHP + fichas) y afiliacion por `GRUPO PARLAMENTARIO ...`.
 - `cortes_cyl_procuradores`: operativo con scrape HTML (listado oficial `PlenoAlfabetico`) y afiliacion por `Grupo Parlamentario` en el listado.
 - `parlamento_andalucia_diputados`: operativo con scrape HTML (listado + fichas por `codmie`) y afiliacion por `G.P.` + circunscripcion.
+- `parlamento_galicia_deputados`: operativo via fichas HTML (captura manual Playwright + `--from-file <dir>`). `--strict-network` bloqueado por WAF/403 desde ETL (2026-02-12).
+- `parlamento_navarra_parlamentarios_forales`: operativo via fichas HTML (captura manual Playwright + `--from-file <dir>`). `--strict-network` bloqueado por Cloudflare challenge/403 desde ETL (2026-02-12).
 - `parlamento_vasco_parlamentarios`: operativo con scrape HTML del listado ACT (75 filas) con grupo y fechas.
 
 ## Tracker por tipo de dato
@@ -92,6 +94,7 @@ Legenda:
 | Representantes y mandatos (JGPA Asturias) | Autonomico | Junta General del Principado de Asturias (diputados) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de Canarias) | Autonomico | Parlamento de Canarias: diputados + grupos (API oficial) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de Cantabria) | Autonomico | Parlamento de Cantabria | DONE | Hardening de parsing y umbral minimo |
+| Representantes y mandatos (Parlamento de Galicia) | Autonomico | Parlamento de Galicia: deputados (fichas HTML) | PARTIAL | Bloqueado por WAF/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>` |
 | Representantes y mandatos (Parlament IB) | Autonomico | Parlament de les Illes Balears: diputats (listado + fichas via webGTP) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de La Rioja) | Autonomico | Parlamento de La Rioja: diputados (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlament de Catalunya) | Autonomico | Parlament de Catalunya (composicio actual + fichas) | DONE | Hardening de parsing y umbral minimo |
@@ -99,6 +102,7 @@ Legenda:
 | Representantes y mandatos (Cortes CLM) | Autonomico | Cortes de Castilla-La Mancha (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Cortes CyL) | Autonomico | Cortes de Castilla y Leon (PlenoAlfabetico) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de Andalucia) | Autonomico | Parlamento de Andalucia (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
+| Representantes y mandatos (Parlamento de Navarra) | Autonomico | Parlamento de Navarra: parlamentarios forales (fichas HTML) | PARTIAL | Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>` |
 | Representantes y mandatos (Parlamento Vasco) | Autonomico | Parlamento Vasco (listado ACT) | DONE | Hardening de parsing y umbral minimo |
 | Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | TODO | Falta conector, esquema y publish |
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
@@ -209,8 +213,8 @@ Legenda:
 
 ### Cobertura pendiente (representacion institucional)
 
-- [ ] Parlamento de Galicia (bloqueado por WAF/403): `https://www.parlamento.gal/Composicion/Deputados` (2026-02-12 devuelve 403 desde ETL).
-- [ ] Parlamento de Navarra (bloqueado por Cloudflare challenge/403): `https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales` (2026-02-12 devuelve 403 cf-mitigated).
+- [ ] Parlamento de Galicia: conector `parlamento_galicia_deputados` disponible (muestras + `--from-file <dir>`), pero `--strict-network` sigue bloqueado por WAF/403: `https://www.parlamento.gal/Composicion/Deputados` (2026-02-12 devuelve 403 desde ETL).
+- [ ] Parlamento de Navarra: conector `parlamento_navarra_parlamentarios_forales` disponible (muestras + `--from-file <dir>`), pero `--strict-network` sigue bloqueado por Cloudflare challenge/403: `https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales` (2026-02-12 devuelve 403 cf-mitigated).
 - [ ] Asamblea de Melilla (fuente oficial pendiente): no hay conector; candidato: BOME `https://bomemelilla.es/` (requiere discovery de un listado nominal estable o estrategia incremental).
 
 ### P0 (siguiente ola, obligatoria para MVP de evidencia)
