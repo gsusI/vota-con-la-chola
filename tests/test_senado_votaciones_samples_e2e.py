@@ -205,6 +205,17 @@ class TestSenadoVotacionesSamplesE2E(unittest.TestCase):
             )
         self.assertIn("HTML", str(ctx2.exception))
 
+        candidates = conn_mod._session_vote_file_url_candidates(
+            "https://www.senado.es",
+            "15",
+            10,
+            52,
+            "https://www.senado.es/legis15/votaciones/ses_10_52.xml",
+        )
+        self.assertEqual(candidates[0], "https://www.senado.es/legis15/votaciones/ses_10_52.xml")
+        self.assertIn("https://www.senado.es/legis15/votaciones/ses_10.xml", candidates)
+        self.assertIn("https://www.senado.es/legis15/votaciones/ses_52.xml", candidates)
+
 
 if __name__ == "__main__":
     unittest.main()

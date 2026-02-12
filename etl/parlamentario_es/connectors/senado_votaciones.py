@@ -113,10 +113,40 @@ def _parse_senado_vote_date(value: str | None) -> str | None:
     return None
 
 
-def _session_vote_file_url(host_base: str, legislature: str | None, session_id: int | None) -> str | None:
-    if not legislature or session_id is None:
-        return None
-    return f"{host_base.rstrip('/')}/legis{legislature}/votaciones/ses_{session_id}.xml"
+def _session_vote_file_url_candidates(
+    host_base: str,
+    legislature: str | None,
+    session_id: int | None,
+    vote_id: int | None,
+    vote_file_url: str | None,
+) -> list[str]:
+    if not legislature:
+        return []
+
+    host = host_base.rstrip("/")
+    base = f"{host}/legis{legislature}/votaciones"
+    out: list[str] = []
+
+    vote_file = normalize_ws(str(vote_file_url or ""))
+    if vote_file:
+        out.append(vote_file)
+
+    if session_id is not None and vote_id is not None:
+        out.append(f"{base}/ses_{session_id}_{vote_id}.xml")
+        if session_id != vote_id:
+            out.append(f"{base}/ses_{vote_id}_{session_id}.xml")
+
+    if session_id is not None:
+        out.append(f"{base}/ses_{session_id}.xml")
+
+    if vote_id is not None:
+        out.append(f"{base}/ses_{vote_id}.xml")
+
+    deduped: list[str] = []
+    for u in out:
+        if u and u not in deduped:
+            deduped.append(u)
+    return deduped
 
 
 def _parse_vote_ids_from_url(url: str | None) -> tuple[int | None, int | None]:
@@ -259,6 +289,12 @@ def _pick_sesion_vote(record_payload: dict[str, Any], session_votes: list[dict[s
             pool = contains
 
     if vote_id is not None:
+        by_cod = [c for c in pool if c.get("cod_votacion") == vote_id]
+        if len(by_cod) == 1:
+            return by_cod[0], "exp+cod_votacion" if used_exp else "cod_votacion", 0.95 if used_exp else 0.75
+        if len(by_cod) > 1:
+            pool = by_cod
+
         by_num = [c for c in pool if c.get("num_vot") == vote_id]
         if len(by_num) == 1:
             return by_num[0], "exp+num_vot" if used_exp else "num_vot", 0.8 if used_exp else 0.65
@@ -335,7 +371,7 @@ def _enrich_senado_record_with_details(
     rec: dict[str, Any],
     *,
     timeout: int,
-    session_cache: dict[tuple[str, int], dict[str, Any]],
+    session_cache: dict[str, dict[str, Any]],
     detail_dir: Path | None,
     detail_host: str,
     detail_cookie: str | None,
@@ -349,53 +385,115 @@ def _enrich_senado_record_with_details(
     if not leg or session_id is None:
         return
 
-    session_url = _session_vote_file_url(detail_host, leg, session_id)
-    payload["session_vote_file_url"] = session_url
-    cache_key = (leg, session_id)
-    session_info = session_cache.get(cache_key)
-    if session_info is None:
-        session_info = {"ok": False, "votes": [], "error": None, "source": None}
-        local_path = _find_local_session_xml(detail_dir, session_id) if detail_dir else None
-        if local_path is not None:
-            try:
-                parsed = _parse_sesion_vote_xml(local_path.read_bytes())
-                session_info = {"ok": True, "votes": parsed["votes"], "session_date": parsed["session_date"], "source": str(local_path)}
-            except Exception as exc:  # noqa: BLE001
-                session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
-        elif session_url:
-            try:
-                headers = {"Accept": "application/xml,text/xml,*/*"}
-                cookie = (detail_cookie or "").strip()
-                if cookie:
-                    headers["Cookie"] = cookie
-                session_bytes, ct = http_get_bytes(session_url, timeout, headers=headers)
-                if ct and "xml" not in ct.lower():
-                    raise RuntimeError(f"content_type inesperado: {ct}")
-                parsed = _parse_sesion_vote_xml(session_bytes)
-                session_info = {"ok": True, "votes": parsed["votes"], "session_date": parsed["session_date"], "source": session_url}
-            except Exception as exc:  # noqa: BLE001
-                session_info["error"] = f"network-detail: {type(exc).__name__}: {exc}"
-        session_cache[cache_key] = session_info
+    vote_id = _to_int(payload.get("vote_id"))
+    candidate_urls = _session_vote_file_url_candidates(
+        detail_host,
+        leg,
+        session_id,
+        vote_id,
+        str(payload.get("vote_file_url") or ""),
+    )
+    if candidate_urls:
+        payload["session_vote_file_urls"] = candidate_urls
+        payload["session_vote_file_url"] = candidate_urls[0]
 
-    if not session_info.get("ok"):
-        err = session_info.get("error")
-        if err:
-            payload["detail_error"] = str(err)
-            detail_failures.append(f"leg={leg} ses={session_id}: {err}")
+    first_successful_session_info: dict[str, Any] | None = None
+    for session_url in candidate_urls:
+        if not session_url:
+            continue
+        session_info = session_cache.get(session_url)
+        if session_info is None:
+            session_info = {"ok": False, "votes": [], "error": None, "source": None}
+            local_path = _find_local_session_xml(detail_dir, session_id) if detail_dir else None
+            if local_path is not None:
+                try:
+                    parsed = _parse_sesion_vote_xml(local_path.read_bytes())
+                    session_info = {
+                        "ok": True,
+                        "votes": parsed["votes"],
+                        "session_date": parsed["session_date"],
+                        "source": str(local_path),
+                    }
+                except Exception as exc:  # noqa: BLE001
+                    session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
+            else:
+                try:
+                    headers = {"Accept": "application/xml,text/xml,*/*"}
+                    cookie = (detail_cookie or "").strip()
+                    if cookie:
+                        headers["Cookie"] = cookie
+                    session_bytes, ct = http_get_bytes(session_url, timeout, headers=headers)
+                    if ct and "xml" not in ct.lower():
+                        raise RuntimeError(f"content_type inesperado: {ct}")
+                    parsed = _parse_sesion_vote_xml(session_bytes)
+                    session_info = {
+                        "ok": True,
+                        "votes": parsed["votes"],
+                        "session_date": parsed["session_date"],
+                        "source": session_url,
+                    }
+                except Exception as exc:  # noqa: BLE001
+                    session_info["error"] = f"network-detail: {type(exc).__name__}: {exc}"
+            session_cache[session_url] = session_info
+
+        if session_info.get("ok"):
+            if first_successful_session_info is None:
+                first_successful_session_info = session_info
+
+            candidate, method, confidence = _pick_sesion_vote(payload, session_info.get("votes") or [])
+            if candidate is not None:
+                payload["detail_source"] = session_info.get("source")
+                payload["detail_match_method"] = method
+                payload["detail_match_confidence"] = confidence
+                payload["matched_num_vot"] = candidate.get("num_vot")
+                payload["matched_cod_votacion"] = candidate.get("cod_votacion")
+                payload["vote_date"] = candidate.get("vote_date") or session_info.get("session_date")
+                payload["totals_present"] = candidate.get("totals_present")
+                payload["totals_yes"] = candidate.get("totals_yes")
+                payload["totals_no"] = candidate.get("totals_no")
+                payload["totals_abstain"] = candidate.get("totals_abstain")
+                payload["totals_no_vote"] = candidate.get("totals_no_vote")
+                payload["totals_absent"] = candidate.get("totals_absent")
+                payload["member_votes"] = candidate.get("member_votes") or []
+                return
+
+    if first_successful_session_info is None:
+        for session_info in session_cache.values():
+            err = session_info.get("error")
+            if err:
+                payload["detail_error"] = err
+                detail_failures.append(f"leg={leg} ses={session_id}: {err}")
+                break
+        if payload.get("detail_error") is None:
+            payload["detail_error"] = "no-match-in-session-xml"
         return
 
-    votes = session_info.get("votes") or []
+    votes = first_successful_session_info.get("votes") or []
+    session_info_source = first_successful_session_info.get("source")
+    payload["detail_source"] = session_info_source
+    payload["detail_match_method"] = payload.get("detail_match_method") or "fallback_session_first_vote"
+    payload["detail_match_confidence"] = payload.get("detail_match_confidence") or 0.4
+
     candidate, method, confidence = _pick_sesion_vote(payload, votes)
     if not candidate:
         payload["detail_error"] = "no-match-in-session-xml"
+        if votes:
+            fallback = votes[0]
+            payload["totals_present"] = fallback.get("totals_present")
+            payload["totals_yes"] = fallback.get("totals_yes")
+            payload["totals_no"] = fallback.get("totals_no")
+            payload["totals_abstain"] = fallback.get("totals_abstain")
+            payload["totals_no_vote"] = fallback.get("totals_no_vote")
+            payload["totals_absent"] = fallback.get("totals_absent")
+            payload["member_votes"] = fallback.get("member_votes") or []
+            payload["vote_date"] = payload.get("vote_date") or first_successful_session_info.get("session_date")
         return
 
-    payload["detail_source"] = session_info.get("source")
     payload["detail_match_method"] = method
     payload["detail_match_confidence"] = confidence
     payload["matched_num_vot"] = candidate.get("num_vot")
     payload["matched_cod_votacion"] = candidate.get("cod_votacion")
-    payload["vote_date"] = candidate.get("vote_date") or session_info.get("session_date")
+    payload["vote_date"] = candidate.get("vote_date") or first_successful_session_info.get("session_date")
     payload["totals_present"] = candidate.get("totals_present")
     payload["totals_yes"] = candidate.get("totals_yes")
     payload["totals_no"] = candidate.get("totals_no")
@@ -431,7 +529,7 @@ class SenadoVotacionesConnector(BaseConnector):
         skip_details = bool(options.get("senado_skip_details"))
         content_type = None
         records: list[dict[str, Any]] = []
-        session_cache: dict[tuple[str, int], dict[str, Any]] = {}
+        session_cache: dict[str, dict[str, Any]] = {}
         detail_failures: list[str] = []
         detail_hits = 0
 
