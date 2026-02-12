@@ -52,6 +52,7 @@ Meta: artefacto publicable y consumible por UI/API.
 - `% eventos con totales`
 - `% eventos con voto nominal`
 - `% votos nominales enlazados a person_id`
+- `% votos sin person_id (desglose por razón)` desde `quality-report --include-unmatched --unmatched-sample-limit N`
 
 3. Endurecer resiliencia de red
 - Retry/backoff por catalogo y fetches de detalle.
