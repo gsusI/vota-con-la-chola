@@ -64,6 +64,13 @@ class TestParlVoteQuality(unittest.TestCase):
                 self.assertGreater(int(kpis_1["events_total"]), 0)
                 self.assertGreaterEqual(int(kpis_1["events_with_nominal_vote"]), 0)
                 self.assertGreaterEqual(int(kpis_1["member_votes_total"]), 0)
+                self.assertIn("events_with_initiative_link", kpis_1)
+                self.assertIn("events_with_initiative_link_pct", kpis_1)
+                self.assertIn("events_with_initiative_link", kpis_1["by_source"]["congreso_votaciones"])
+                self.assertIn(
+                    "events_with_initiative_link_pct",
+                    kpis_1["by_source"]["congreso_votaciones"],
+                )
                 self.assertLessEqual(
                     int(kpis_1["member_votes_with_person_id"]),
                     int(kpis_1["member_votes_total"]),
@@ -98,6 +105,7 @@ class TestParlVoteQuality(unittest.TestCase):
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_date_pct"], 0.95)
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_theme_pct"], 0.95)
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_totals_pct"], 0.95)
+        self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_initiative_link_pct"], 0.0)
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["member_votes_with_person_id_pct"], 0.90)
 
         kpis = {

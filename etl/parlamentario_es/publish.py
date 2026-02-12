@@ -305,17 +305,19 @@ def build_votaciones_snapshot(
                 continue
             member_votes_by_source[src_id] = member_votes_by_source.get(src_id, 0) + 1
 
+    kpis = compute_vote_quality_kpis(conn, source_ids=source_ids)
+    events_with_initiative_link = int(kpis.get("events_with_initiative_link") or 0)
+
     totales: dict[str, Any] = {
         "eventos": len(items),
         "eventos_con_tema": events_with_topic,
+        "eventos_con_vinculo_iniciativa": events_with_initiative_link,
         "eventos_con_totales": events_with_totals,
         "votos_nominales": member_votes_total,
         "votos_nominales_con_person_id": member_votes_with_person_id,
         "eventos_por_source_id": dict(sorted(events_by_source.items())),
         "votos_por_source_id": dict(sorted(member_votes_by_source.items())),
     }
-
-    kpis = compute_vote_quality_kpis(conn, source_ids=source_ids)
     gate = evaluate_vote_quality_gate(kpis)
     unmatched_people = None
     if bool(include_unmatched_people):

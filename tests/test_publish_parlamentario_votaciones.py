@@ -68,6 +68,7 @@ class TestPublishParlamentarioVotaciones(unittest.TestCase):
                 tot = snap1.get("totales") or {}
                 self.assertGreater(int(tot.get("eventos") or 0), 0)
                 self.assertGreater(int(tot.get("votos_nominales") or 0), 0)
+                self.assertIn("eventos_con_vinculo_iniciativa", tot)
 
                 quality = snap1.get("quality") or {}
                 self.assertIsInstance(quality, dict)

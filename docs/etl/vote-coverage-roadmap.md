@@ -52,7 +52,11 @@ Meta: artefacto publicable y consumible por UI/API.
 - `% eventos con totales`
 - `% eventos con voto nominal`
 - `% votos nominales enlazados a person_id`
+- `% eventos con enlace a tema` (por fuente y total)
 - `% votos sin person_id (desglose por razón)` desde `quality-report --include-unmatched --unmatched-sample-limit N`
+
+3. Progreso reciente
+- Se añadió `events_with_initiative_link` y `events_with_initiative_link_pct` a `compute_vote_quality_kpis` y reportes de calidad para medir cobertura de topics por evento.
 
 3. Endurecer resiliencia de red
 - Retry/backoff por catalogo y fetches de detalle.

@@ -7,6 +7,7 @@ DEFAULT_VOTE_QUALITY_THRESHOLDS: dict[str, float] = {
     "events_with_date_pct": 0.95,
     "events_with_theme_pct": 0.95,
     "events_with_totals_pct": 0.95,
+    "events_with_initiative_link_pct": 0.0,
     "member_votes_with_person_id_pct": 0.90,
 }
 
@@ -31,10 +32,12 @@ def _empty_source_kpis() -> dict[str, Any]:
         "events_with_theme": 0,
         "events_with_totals": 0,
         "events_with_nominal_vote": 0,
+        "events_with_initiative_link": 0,
         "events_with_date_pct": 0.0,
         "events_with_theme_pct": 0.0,
         "events_with_totals_pct": 0.0,
         "events_with_nominal_vote_pct": 0.0,
+        "events_with_initiative_link_pct": 0.0,
         "member_votes_total": 0,
         "member_votes_with_person_id": 0,
         "member_votes_with_person_id_pct": 0.0,
@@ -62,6 +65,14 @@ def compute_vote_quality_kpis(
             totals_no_vote
           FROM parl_vote_events
           WHERE source_id IN ({placeholders})
+        ),
+        initiative_events AS (
+          SELECT DISTINCT
+            e.source_id,
+            l.vote_event_id
+          FROM selected_events e
+          JOIN parl_vote_event_initiatives l
+            ON l.vote_event_id = e.vote_event_id
         ),
         theme_events AS (
           SELECT DISTINCT vote_event_id
@@ -103,10 +114,17 @@ def compute_vote_quality_kpis(
               WHEN n.vote_event_id IS NOT NULL THEN 1
               ELSE 0
             END
-          ) AS events_with_nominal_vote
+          ) AS events_with_nominal_vote,
+          SUM(
+            CASE
+              WHEN ie.vote_event_id IS NOT NULL THEN 1
+              ELSE 0
+            END
+          ) AS events_with_initiative_link
         FROM selected_events e
         LEFT JOIN theme_events t ON t.vote_event_id = e.vote_event_id
         LEFT JOIN nominal_events n ON n.vote_event_id = e.vote_event_id
+        LEFT JOIN initiative_events ie ON ie.vote_event_id = e.vote_event_id
         GROUP BY e.source_id
         ORDER BY e.source_id
         """,
@@ -143,6 +161,7 @@ def compute_vote_quality_kpis(
         data["events_with_theme"] = int(row["events_with_theme"] or 0)
         data["events_with_totals"] = int(row["events_with_totals"] or 0)
         data["events_with_nominal_vote"] = int(row["events_with_nominal_vote"] or 0)
+        data["events_with_initiative_link"] = int(row["events_with_initiative_link"] or 0)
 
     for row in member_vote_rows:
         sid = str(row["source_id"])
@@ -158,6 +177,9 @@ def compute_vote_quality_kpis(
         data["events_with_theme_pct"] = _ratio(int(data["events_with_theme"]), events_total)
         data["events_with_totals_pct"] = _ratio(int(data["events_with_totals"]), events_total)
         data["events_with_nominal_vote_pct"] = _ratio(int(data["events_with_nominal_vote"]), events_total)
+        data["events_with_initiative_link_pct"] = _ratio(
+            int(data["events_with_initiative_link"]), events_total
+        )
         data["member_votes_with_person_id_pct"] = _ratio(
             int(data["member_votes_with_person_id"]), member_votes_total
         )
@@ -168,6 +190,9 @@ def compute_vote_quality_kpis(
     events_with_totals = sum(int(by_source[sid]["events_with_totals"]) for sid in source_ids_tuple)
     events_with_nominal_vote = sum(
         int(by_source[sid]["events_with_nominal_vote"]) for sid in source_ids_tuple
+    )
+    events_with_initiative_link = sum(
+        int(by_source[sid]["events_with_initiative_link"]) for sid in source_ids_tuple
     )
     member_votes_total = sum(int(by_source[sid]["member_votes_total"]) for sid in source_ids_tuple)
     member_votes_with_person_id = sum(
@@ -185,6 +210,8 @@ def compute_vote_quality_kpis(
         "events_with_totals_pct": _ratio(events_with_totals, events_total),
         "events_with_nominal_vote": events_with_nominal_vote,
         "events_with_nominal_vote_pct": _ratio(events_with_nominal_vote, events_total),
+        "events_with_initiative_link": events_with_initiative_link,
+        "events_with_initiative_link_pct": _ratio(events_with_initiative_link, events_total),
         "member_votes_total": member_votes_total,
         "member_votes_with_person_id": member_votes_with_person_id,
         "member_votes_with_person_id_pct": _ratio(member_votes_with_person_id, member_votes_total),
