@@ -1,0 +1,86 @@
+{
+  "anclas": {
+    "anio_ue_ultimo_conocido": 2024,
+    "fecha_generales_ultima_conocida": "2023-07-23",
+    "fecha_local_ultima_conocida": "2023-05-28"
+  },
+  "fecha_referencia": "2026-02-12",
+  "fuentes": [
+    "https://infoelectoral.interior.gob.es/es/proceso-electoral/preguntas-frecuentes/tipos-de-elecciones/",
+    "https://infoelectoral.interior.gob.es/es/proceso-electoral/preguntas-frecuentes/tipos-de-elecciones/elecciones-al-parlamento-europeo/index.html",
+    "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
+    "https://www.boe.es/legislacion/documentos/ConstitucionCASTELLANO.pdf"
+  ],
+  "generado_en": "2026-02-12T00:00:00+00:00",
+  "niveles": [
+    {
+      "eleccion": "Parlamento Europeo",
+      "estado": "ciclo conocido, fecha no fijada",
+      "nivel": "Europeo",
+      "notas": "Las elecciones europeas son cada 5 anos. La fecha exacta en Espana se fija en la convocatoria oficial.",
+      "proximo_anio_esperado": 2029
+    },
+    {
+      "eleccion": "Cortes Generales (Congreso y Senado)",
+      "estado": "fecha condicional",
+      "nivel": "Nacional",
+      "notas": "La fecha puede cambiar si hay disolucion anticipada. La ventana mostrada asume legislatura completa desde 2023-07-23.",
+      "proximo_si_legislatura_completa": {
+        "fin_legislatura": "2027-07-23",
+        "fin_ventana": "2027-09-21",
+        "fin_ventana_domingos": "2027-09-19",
+        "inicio_ventana": "2027-08-22",
+        "inicio_ventana_domingos": "2027-08-22"
+      }
+    },
+    {
+      "eleccion": "Parlamentos de las comunidades autonomas",
+      "estado": "sin fecha unica estatal",
+      "nivel": "Autonomico",
+      "notas": "No existe una fecha unica para todas las autonomicas. Cada comunidad sigue su propio calendario y convocatorias.",
+      "proximo_esperado": "depende_de_cada_comunidad"
+    },
+    {
+      "eleccion": "Ayuntamientos",
+      "estado": "ciclo fijo",
+      "nivel": "Local/Municipal",
+      "notas": "Cuarto domingo de mayo cada 4 anos.",
+      "proxima_fecha": "2027-05-23"
+    },
+    {
+      "eleccion": "Cabildos (Canarias) y Consells (Baleares)",
+      "estado": "ligado al ciclo local",
+      "nivel": "Insular",
+      "notas": "Se celebran junto con el ciclo local.",
+      "proxima_fecha": "2027-05-23"
+    },
+    {
+      "eleccion": "Asambleas de Ceuta y Melilla",
+      "estado": "ligado al ciclo local",
+      "nivel": "Ciudades autonomas",
+      "notas": "Se celebran junto con el ciclo local.",
+      "proxima_fecha": "2027-05-23"
+    },
+    {
+      "eleccion": "Juntas Generales (Alava, Bizkaia, Gipuzkoa)",
+      "estado": "ligado al ciclo local",
+      "nivel": "Territorios historicos (Pais Vasco)",
+      "notas": "Eleccion directa habitualmente alineada con el ciclo local.",
+      "proxima_fecha": "2027-05-23"
+    },
+    {
+      "eleccion": "EATIM / entidades locales menores",
+      "estado": "ligado al ciclo local",
+      "nivel": "Entidades locales menores",
+      "notas": "Generalmente alineadas con el ciclo local cuando aplica.",
+      "proxima_fecha": "2027-05-23"
+    },
+    {
+      "eleccion": "Diputaciones Provinciales",
+      "estado": "eleccion indirecta",
+      "nivel": "Provincial",
+      "notas": "Se constituyen en general de forma indirecta desde resultados municipales.",
+      "proxima_esperada_despues_de": "2027-05-23"
+    }
+  ]
+}
