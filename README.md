@@ -1,5 +1,7 @@
 # Vota Con La Chola
 
+![Vota Con La Chola - portada](docs/screenshots/cover-graph-congreso-diputados-depth-3-active-lens-all.png)
+
 Herramienta abierta y orientada a la evidencia para ayudar a decidir el voto: cruza tus prioridades con lo que actores políticos y partidos **dicen** y **hacen**, con explicaciones trazables y fuentes auditables.
 
 Este repositorio es intencionalmente **ultraligero**: pocas piezas, muchas reglas claras, y un foco fuerte en reproducibilidad y trazabilidad.
