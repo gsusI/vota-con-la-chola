@@ -18,6 +18,7 @@ Actualmente:
 - CLI parlamentario (votaciones, iniciativas): `scripts/ingestar_parlamentario_es.py`.
 - Plan de extraccion fuente por fuente: `docs/etl/extraccion-politicos-plan.md`.
 - Tracker E2E scrape/load (TODO operativo): `docs/etl/e2e-scrape-load-tracker.md`.
+- Roadmap de cobertura de votaciones: `docs/etl/vote-coverage-roadmap.md`.
 
 ## Entorno reproducible con Docker
 
