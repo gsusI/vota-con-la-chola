@@ -181,6 +181,7 @@ def build_votaciones_snapshot(
                 vote_event_id = str(r["vote_event_id"])
                 if vote_event_id not in index:
                     continue
+                evidence = _parse_json_maybe(r["evidence_json"])
                 items[index[vote_event_id]]["initiatives"].append(
                     {
                         "initiative": {
@@ -196,7 +197,7 @@ def build_votaciones_snapshot(
                         "link": {
                             "method": r["link_method"],
                             "confidence": r["confidence"],
-                            "evidence": _parse_json_maybe(r["evidence_json"]) or r["evidence_json"],
+                            "evidence": evidence if evidence is not None else r["evidence_json"],
                         },
                         "source": {
                             "source_id": str(r["initiative_source_id"]),
