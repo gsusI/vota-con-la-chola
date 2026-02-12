@@ -242,6 +242,20 @@ Rutas principales:
 - `/` o `/index.html`: vista “grafo” (usa `/api/graph`).
 - `/explorer` o `/explorer.html`: explorador (Explorer) genérico de SQLite.
 
+Capturas (ver `docs/screenshots/`):
+
+Grafo: búsqueda `pedro sanchez` (activos, `depth=2`).
+
+![Grafo: búsqueda Pedro Sanchez](docs/screenshots/graph-search-pedro-sanchez-limit-350-depth-2-active.png)
+
+Explorer: detalle de un mandato (ejemplo: `mandate_id=316`).
+
+![Explorer: mandate 316 (Pedro Sanchez, PSOE, Diputado/a)](docs/screenshots/explorer-mandate-316-pedro-sanchez-psoe-diputado.png)
+
+Explorer: territorio `Madrid` (ejemplo: `territory_id=8181`) y lista de mandatos relacionados.
+
+![Explorer: territory 8181 (Madrid) y mandatos relacionados](docs/screenshots/explorer-territory-8181-madrid-related-mandates.png)
+
 API (útil para depurar):
 
 - `/api/health`
