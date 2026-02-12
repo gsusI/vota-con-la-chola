@@ -86,6 +86,65 @@ class TestParlCliQualityReport(unittest.TestCase):
             self.assertEqual(content_first, out_path.read_bytes())
             self.assertIn("OK unchanged:", stdout2.getvalue())
 
+    def test_quality_report_include_unmatched_people_preview(self) -> None:
+        snapshot_date = "2026-02-12"
+        out_file_name = f"votaciones-kpis-cli-unmatched-test-{snapshot_date}.json"
+        connectors = get_connectors()
+
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "parl-quality-cli-unmatched.db"
+            raw_dir = Path(td) / "raw"
+            out_path = Path(td) / out_file_name
+
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_parl_sources(conn)
+                for source_id in ("congreso_votaciones", "senado_votaciones"):
+                    connector = connectors[source_id]
+                    sample_path = Path(PARL_SOURCE_CONFIG[source_id]["fallback_file"])
+                    ingest_parl_source(
+                        conn=conn,
+                        connector=connector,
+                        raw_dir=raw_dir,
+                        timeout=5,
+                        from_file=sample_path,
+                        url_override=None,
+                        snapshot_date=snapshot_date,
+                        strict_network=True,
+                        options={},
+                    )
+            finally:
+                conn.close()
+
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                code = main(
+                    [
+                        "quality-report",
+                        "--db",
+                        str(db_path),
+                        "--source-ids",
+                        "congreso_votaciones,senado_votaciones",
+                        "--include-unmatched",
+                        "--unmatched-sample-limit",
+                        "3",
+                        "--json-out",
+                        str(out_path),
+                    ]
+                )
+            self.assertEqual(code, 0)
+            self.assertTrue(out_path.exists(), f"Missing quality json output: {out_path}")
+
+            snapshot = json.loads(out_path.read_text(encoding="utf-8"))
+            self.assertIn("unmatched_vote_ids", snapshot)
+            unmatched = snapshot["unmatched_vote_ids"]
+            self.assertIn("dry_run", unmatched)
+            self.assertTrue(unmatched["dry_run"])
+            self.assertIn("total_checked", unmatched)
+            self.assertIn("unmatched_by_reason", unmatched)
+            self.assertLessEqual(len(unmatched.get("unmatched_sample", [])), 3)
+
 
 if __name__ == "__main__":
     unittest.main()

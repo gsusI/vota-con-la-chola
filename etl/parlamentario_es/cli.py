@@ -69,6 +69,20 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         default="",
         help="Ruta exacta del JSON de salida (si no se da, solo imprime por stdout)",
     )
+    p_quality.add_argument(
+        "--include-unmatched",
+        action="store_true",
+        help=(
+            "Incluye un reporte en seco de votos nominales sin person_id resuelto "
+            "para ayudar a detectar gaps de linking."
+        ),
+    )
+    p_quality.add_argument(
+        "--unmatched-sample-limit",
+        type=int,
+        default=0,
+        help="Máximo de ejemplos de votos sin person_id mostrados en quality-report. 0 desactiva muestra.",
+    )
 
     p_backfill = sub.add_parser(
         "backfill-member-ids",
@@ -130,6 +144,27 @@ def _quality_report(conn: sqlite3.Connection, *, source_ids: tuple[str, ...]) ->
         "source_ids": list(source_ids),
         "kpis": kpis,
         "gate": gate,
+    }
+
+
+def _quality_report_with_unmatched_people(
+    conn: sqlite3.Connection,
+    *,
+    source_ids: tuple[str, ...],
+    unmatched_sample_limit: int = 0,
+) -> dict[str, Any]:
+    report = _quality_report(conn, source_ids=source_ids)
+    unmatched = backfill_vote_member_person_ids(
+        conn,
+        vote_source_ids=source_ids,
+        dry_run=True,
+        unmatched_sample_limit=unmatched_sample_limit,
+    )
+    return {
+        "source_ids": report.get("source_ids", list(source_ids)),
+        "kpis": report["kpis"],
+        "gate": report["gate"],
+        "unmatched_vote_ids": unmatched,
     }
 
 
@@ -211,7 +246,17 @@ def main(argv: list[str] | None = None) -> int:
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
             seed_sources(conn)
-            result = _quality_report(conn, source_ids=source_ids)
+            if bool(args.include_unmatched):
+                unmatched_sample_limit = int(args.unmatched_sample_limit)
+                if unmatched_sample_limit < 0:
+                    raise SystemExit("unmatched-sample-limit debe ser >= 0")
+                result = _quality_report_with_unmatched_people(
+                    conn,
+                    source_ids=source_ids,
+                    unmatched_sample_limit=unmatched_sample_limit,
+                )
+            else:
+                result = _quality_report(conn, source_ids=source_ids)
         finally:
             conn.close()
 
