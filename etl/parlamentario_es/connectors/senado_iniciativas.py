@@ -15,9 +15,9 @@ from ..types import Extracted
 from .base import BaseConnector
 
 
-SENADO_BASE = "https://videoservlet.senado.es"
+SENADO_BASE = "https://www.senado.es"
 SENADO_VOTACIONES_CATALOG_URL = (
-    "https://videoservlet.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15"
+    "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15"
 )
 LEGS_SELECT_RE = re.compile(r'<select[^>]*id="legis"[^>]*>(?P<body>.*?)</select>', re.I | re.S)
 OPTION_VALUE_RE = re.compile(r'<option[^>]*value="(?P<v>\d+)"', re.I)

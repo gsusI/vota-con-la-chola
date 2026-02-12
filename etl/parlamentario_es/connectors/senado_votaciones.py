@@ -18,7 +18,8 @@ from ..types import Extracted
 from .base import BaseConnector
 
 
-SENADO_BASE = "https://videoservlet.senado.es"
+SENADO_BASE = "https://www.senado.es"
+SENADO_TIPO9_URL = f"{SENADO_BASE}/web/ficopendataservlet?tipoFich=9&legis={{leg}}"
 SENADO_MONTHS = {
     "ENE": "01",
     "FEB": "02",
@@ -128,6 +129,28 @@ def _parse_vote_ids_from_url(url: str | None) -> tuple[int | None, int | None]:
         return int(id1) if id1 and str(id1).isdigit() else None, int(id2) if id2 and str(id2).isdigit() else None
     except Exception:  # noqa: BLE001
         return None, None
+
+
+def _tipo12_urls_from_tipo9_xml(payload: bytes) -> list[str]:
+    root = ET.fromstring(payload)
+    if root.tag != "listaIniciativasLegislativas":
+        raise RuntimeError(f"XML inesperado para tipoFich=9: root={root.tag!r}")
+    out: list[str] = []
+    for node in root.findall("./iniciativa"):
+        url_raw_txt = node.findtext("./votaciones/fichGenVotaciones/fichUrlVotaciones")
+        url_raw = normalize_ws(str(url_raw_txt or "")) or None
+        if not url_raw:
+            continue
+        out.append(urljoin(SENADO_BASE, url_raw))
+    # deterministic dedupe
+    seen: set[str] = set()
+    deduped: list[str] = []
+    for u in out:
+        if u in seen:
+            continue
+        seen.add(u)
+        deduped.append(u)
+    return deduped
 
 
 def _parse_sesion_vote_xml(payload: bytes) -> dict[str, Any]:
@@ -454,21 +477,29 @@ class SenadoVotacionesConnector(BaseConnector):
             )
 
         resolved_url = self.resolve_url(url_override, timeout)
-        html_bytes, content_type = http_get_bytes(
-            resolved_url,
-            timeout,
-            headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
-        )
-        html_text = html_bytes.decode("utf-8", errors="replace")
+        html_text = ""
+        catalog_failures: list[str] = []
+        if not leg_filter:
+            try:
+                html_bytes, content_type = http_get_bytes(
+                    resolved_url,
+                    timeout,
+                    headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+                )
+                html_text = html_bytes.decode("utf-8", errors="replace")
+            except Exception as exc:  # noqa: BLE001
+                catalog_failures.append(f"{resolved_url} -> {type(exc).__name__}: {exc}")
+                if strict_network:
+                    raise
+
         target_legs = leg_filter or _extract_legislatures_from_catalog_html(html_text) or [15]
         target_legs = sorted({int(v) for v in target_legs if int(v) >= 0}, reverse=True)
 
         tipo12_urls: list[str] = []
         seen_tipo12: set[str] = set()
-        catalog_failures: list[str] = []
         for leg in target_legs:
             catalog_url = _set_legis_query(resolved_url, leg)
-            leg_html = html_text if catalog_url == resolved_url else None
+            leg_html = html_text if html_text and catalog_url == resolved_url else None
             if leg_html is None:
                 try:
                     leg_html = http_get_bytes(
@@ -490,6 +521,31 @@ class SenadoVotacionesConnector(BaseConnector):
                     continue
                 seen_tipo12.add(url)
                 tipo12_urls.append(url)
+
+        # Fallback: if catalog pages are flaky/unavailable, derive tipoFich=12 URLs from tipoFich=9 XML.
+        tipo9_failures: list[str] = []
+        tipo12_from_tipo9 = 0
+        if not tipo12_urls:
+            for leg in target_legs:
+                tipo9_url = SENADO_TIPO9_URL.format(leg=leg)
+                try:
+                    tipo9_bytes, tipo9_ct = http_get_bytes(
+                        tipo9_url,
+                        timeout,
+                        headers={"Accept": "application/xml,text/xml,*/*"},
+                    )
+                    if tipo9_ct and "xml" not in tipo9_ct.lower():
+                        raise RuntimeError(f"content_type inesperado: {tipo9_ct}")
+                    for u in _tipo12_urls_from_tipo9_xml(tipo9_bytes):
+                        if u in seen_tipo12:
+                            continue
+                        seen_tipo12.add(u)
+                        tipo12_urls.append(u)
+                        tipo12_from_tipo9 += 1
+                except Exception as exc:  # noqa: BLE001
+                    tipo9_failures.append(f"{tipo9_url} -> {type(exc).__name__}: {exc}")
+                    if strict_network:
+                        raise
 
         detail_fetch_failures: list[str] = []
         for u in tipo12_urls:
@@ -529,10 +585,12 @@ class SenadoVotacionesConnector(BaseConnector):
             "list_url": resolved_url,
             "target_legs": target_legs,
             "tipo12_urls_total": len(tipo12_urls),
+            "tipo12_from_tipo9": tipo12_from_tipo9,
             "vote_records": len(records),
             "detail_hits": detail_hits,
             "detail_failures": detail_failures,
             "catalog_failures": catalog_failures,
+            "tipo9_failures": tipo9_failures,
             "detail_fetch_failures": detail_fetch_failures,
         }
         payload_bytes = stable_json(meta).encode("utf-8")
@@ -540,7 +598,7 @@ class SenadoVotacionesConnector(BaseConnector):
         raw_path.write_bytes(payload_bytes)
 
         note = "network"
-        if catalog_failures or detail_fetch_failures:
+        if catalog_failures or tipo9_failures or detail_fetch_failures:
             note = "network-partial"
 
         return Extracted(

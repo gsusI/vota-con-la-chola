@@ -23,7 +23,7 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
     "senado_votaciones": {
         "name": "Senado - Votaciones (OpenData)",
         "scope": "nacional",
-        "default_url": "https://videoservlet.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
+        "default_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
         "format": "html",  # catalog page is HTML; vote references are XML (tipoFich=12)
         "level": "nacional",
         "institution_name": "Senado de Espana",
@@ -33,7 +33,7 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
     "senado_iniciativas": {
         "name": "Senado - Iniciativas y mociones (OpenData)",
         "scope": "nacional",
-        "default_url": "https://videoservlet.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+        "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
         "format": "xml",  # lista de iniciativas legislativas con referencias de votacion
         "level": "nacional",
         "institution_name": "Senado de Espana",
