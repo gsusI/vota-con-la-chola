@@ -122,7 +122,7 @@ Legenda:
 - [ ] Definir umbrales minimos por fuente en codigo (no solo en docs).
 - [ ] Documentar y estandarizar el “camino manual aceptado” para fuentes bloqueadas por WAF/anti-bot (captura Playwright no-headless + ingesta por `--from-file <dir>`), incluyendo receta `just` y evidencia en tracker.
 - [ ] Crear smoke test E2E en CI (`init-db + ingest por fuente + asserts SQL`).
-- [ ] Publicar snapshot canonico de representantes en `etl/data/published/`.
+- [x] Publicar snapshot canonico de representantes en `etl/data/published/` (ej: `etl/data/published/representantes-es-2026-02-12.json`).
 - [ ] Documentar versionado de snapshots y politica de refresh.
 
 ## TODO por conector activo
