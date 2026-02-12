@@ -30,6 +30,16 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 1,
         "fallback_file": "etl/data/raw/samples/senado_votaciones_sample.xml",
     },
+    "senado_iniciativas": {
+        "name": "Senado - Iniciativas y mociones (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://videoservlet.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+        "format": "xml",  # lista de iniciativas legislativas con referencias de votacion
+        "level": "nacional",
+        "institution_name": "Senado de Espana",
+        "min_records_loaded_strict": 1,
+        "fallback_file": "etl/data/raw/samples/senado_iniciativas_sample.xml",
+    },
     "congreso_iniciativas": {
         "name": "Congreso - Iniciativas (OpenData)",
         "scope": "nacional",

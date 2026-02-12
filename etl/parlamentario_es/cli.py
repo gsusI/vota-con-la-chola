@@ -8,7 +8,7 @@ from typing import Any
 
 from .config import DEFAULT_DB, DEFAULT_RAW_DIR, DEFAULT_SCHEMA, DEFAULT_TIMEOUT, SOURCE_CONFIG
 from .db import apply_schema, open_db, seed_sources
-from .linking import link_congreso_votes_to_initiatives
+from .linking import link_congreso_votes_to_initiatives, link_senado_votes_to_initiatives
 from .pipeline import ingest_one_source
 from .registry import get_connectors
 
@@ -97,9 +97,22 @@ def main(argv: list[str] | None = None) -> int:
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
             seed_sources(conn)
-            result = link_congreso_votes_to_initiatives(
+            congreso = link_congreso_votes_to_initiatives(
                 conn, max_events=args.max_events, dry_run=bool(args.dry_run)
             )
+            senado = link_senado_votes_to_initiatives(
+                conn, max_events=args.max_events, dry_run=bool(args.dry_run)
+            )
+            result = {
+                "events_seen": int(congreso.get("events_seen", 0)) + int(senado.get("events_seen", 0)),
+                "links_prepared": int(congreso.get("links_prepared", 0)) + int(senado.get("links_prepared", 0)),
+                "links_written": int(congreso.get("links_written", 0)) + int(senado.get("links_written", 0)),
+                "dry_run": bool(args.dry_run),
+                "by_source": {
+                    "congreso": congreso,
+                    "senado": senado,
+                },
+            }
         finally:
             conn.close()
         print(result)

@@ -73,6 +73,25 @@ def _urls_to_json_list(text: str | None) -> str | None:
     return stable_json(urls)
 
 
+def _urls_to_json_values(values: list[str | None]) -> str | None:
+    urls: list[str] = []
+    for value in values:
+        txt = normalize_ws(str(value or ""))
+        if not txt or not txt.startswith("http"):
+            continue
+        urls.append(txt)
+    if not urls:
+        return None
+    seen: set[str] = set()
+    deduped: list[str] = []
+    for url in urls:
+        if url in seen:
+            continue
+        seen.add(url)
+        deduped.append(url)
+    return stable_json(deduped)
+
+
 def _parse_congreso_date(value: str | None) -> str | None:
     if not value:
         return None
@@ -175,6 +194,99 @@ def _ingest_congreso_iniciativas(
                 "source_id": source_id,
                 "source_url": str(rec.get("list_url") or "") or None,
                 "source_record_pk": None,  # filled below
+                "source_snapshot_date": snapshot_date,
+                "raw_payload": raw_payload,
+                "created_at": now_iso,
+                "updated_at": now_iso,
+            }
+        )
+
+    pk_map = upsert_source_records(conn, source_id=source_id, rows=sr_rows, snapshot_date=snapshot_date, now_iso=now_iso)
+    for row in upsert_rows:
+        row["source_record_pk"] = pk_map.get(row["initiative_id"])
+
+    upsert_parl_initiatives(conn, source_id=source_id, rows=upsert_rows)
+    loaded = len(upsert_rows)
+    return seen, loaded
+
+
+def _ingest_senado_iniciativas(
+    conn: sqlite3.Connection,
+    *,
+    extracted_records: list[dict[str, Any]],
+    source_id: str,
+    snapshot_date: str | None,
+    now_iso: str,
+) -> tuple[int, int]:
+    seen = 0
+    loaded = 0
+
+    upsert_rows: list[dict[str, Any]] = []
+    sr_rows: list[dict[str, Any]] = []
+
+    for rec in extracted_records:
+        seen += 1
+        payload = rec.get("payload") or {}
+        if not isinstance(payload, dict):
+            continue
+
+        raw_payload = stable_json(payload)
+        leg = normalize_ws(str(payload.get("legislature") or rec.get("legislature") or "")) or None
+        tipo_ex = normalize_ws(str(payload.get("tipo_expediente") or "")) or None
+        num_ex = normalize_ws(str(payload.get("numero_expediente") or "")) or None
+        expediente = normalize_ws(str(payload.get("expediente") or "")) or None
+        if not expediente and tipo_ex and num_ex:
+            expediente = f"{tipo_ex}/{num_ex}"
+
+        if leg and expediente:
+            initiative_id = f"senado:leg{leg}:exp:{expediente}"
+        else:
+            initiative_id = f"senado:init:{sha256_bytes(raw_payload.encode('utf-8'))[:24]}"
+
+        sr_rows.append({"source_record_id": initiative_id, "raw_payload": raw_payload})
+
+        title = normalize_ws(str(payload.get("iniciativa_title") or "")) or None
+        votes = payload.get("vote_refs") or []
+        vote_count = len(votes) if isinstance(votes, list) else 0
+        grouping = "Votaciones por iniciativa (Senado)"
+        processing_note = f"vote_refs={vote_count}" if vote_count else None
+
+        upsert_rows.append(
+            {
+                "initiative_id": initiative_id,
+                "legislature": leg,
+                "expediente": expediente,
+                "supertype": None,
+                "grouping": grouping,
+                "type": tipo_ex,
+                "title": title,
+                "presented_date": None,
+                "qualified_date": None,
+                "author_text": None,
+                "procedure_type": None,
+                "result_text": None,
+                "current_status": None,
+                "competent_committee": None,
+                "deadlines_text": None,
+                "rapporteurs_text": None,
+                "processing_text": processing_note,
+                "related_initiatives_text": None,
+                "links_bocg_json": _urls_to_json_values(
+                    [
+                        payload.get("detail_file_url"),
+                        payload.get("enmiendas_file_url"),
+                    ]
+                ),
+                "links_ds_json": _urls_to_json_values(
+                    [
+                        payload.get("iniciativa_url"),
+                        payload.get("enmiendas_url"),
+                        payload.get("votaciones_file_url"),
+                    ]
+                ),
+                "source_id": source_id,
+                "source_url": str(rec.get("detail_url") or payload.get("source_tipo9_url") or "") or None,
+                "source_record_pk": None,
                 "source_snapshot_date": snapshot_date,
                 "raw_payload": raw_payload,
                 "created_at": now_iso,
@@ -413,6 +525,53 @@ def ingest_one_source(
 
         if source_id == "congreso_iniciativas":
             rec_seen, rec_loaded = _ingest_congreso_iniciativas(
+                conn,
+                extracted_records=extracted.records,
+                source_id=source_id,
+                snapshot_date=snapshot_date,
+                now_iso=now_iso,
+            )
+            if strict_network and rec_seen > 0 and rec_loaded == 0:
+                raise RuntimeError(
+                    "strict-network abortado: records_seen > 0 y records_loaded == 0 "
+                    f"({source_id}: seen={rec_seen}, loaded={rec_loaded})"
+                )
+
+            min_loaded = SOURCE_CONFIG.get(source_id, {}).get("min_records_loaded_strict")
+            if (
+                strict_network
+                and extracted.note.startswith("network")
+                and isinstance(min_loaded, int)
+                and rec_loaded < min_loaded
+            ):
+                raise RuntimeError(
+                    f"strict-network abortado: records_loaded < min_records_loaded_strict "
+                    f"({source_id}: loaded={rec_loaded}, min={min_loaded})"
+                )
+
+            conn.commit()
+            message = json.dumps(
+                {
+                    "note": extracted.note,
+                    "initiatives_loaded": rec_loaded,
+                },
+                ensure_ascii=True,
+                sort_keys=True,
+            )
+            finish_run(
+                conn,
+                run_id=run_id,
+                status="ok",
+                message=message,
+                records_seen=rec_seen,
+                records_loaded=rec_loaded,
+                fetched_at=extracted.fetched_at,
+                raw_path=extracted.raw_path,
+            )
+            return rec_seen, rec_loaded, message
+
+        if source_id == "senado_iniciativas":
+            rec_seen, rec_loaded = _ingest_senado_iniciativas(
                 conn,
                 extracted_records=extracted.records,
                 source_id=source_id,
