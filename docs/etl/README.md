@@ -29,6 +29,13 @@ Nota para votaciones:
 - Revisa KPIs/gate con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --source-ids congreso_votaciones,senado_votaciones` y usa `--enforce-gate` para fallar en CI cuando no se cumpla el minimo.
 - El JSON de votaciones puede ser muy grande en corridas completas; para smoke/debug usa `--max-events` y/o `--max-member-votes-per-event`.
 
+## Política de snapshots publicables
+
+- Los artefactos publicados en `etl/data/published/` llevan la fecha de snapshot en el nombre (`...-<fecha>.json`).
+- El snapshot se produce con `SNAPSHOT_DATE` y es reproducible para una fecha concreta.
+- Política de refresco: re-generar `representantes` y `votaciones` cuando cambie la composición o tras mejoras de parsing/linking de fuente, documentando la fecha en commit y tracker.
+- Mantener al menos un snapshot publicado por nivel operativo tras cambios de formato relevantes.
+
 ## Entorno reproducible con Docker
 
 Prerequisitos:
@@ -51,6 +58,7 @@ just etl-backfill-normalized
 just etl-e2e
 just etl-publish-representantes
 just etl-publish-votaciones
+just etl-smoke-e2e
 ```
 
 UI de navegacion de grafo (Docker):

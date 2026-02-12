@@ -118,14 +118,16 @@ Legenda:
 
 - [x] Fallar corrida `strict-network` si `records_seen > 0` y `records_loaded == 0`.
 - [x] Detectar payload HTML cuando se espera CSV/JSON/XML y tratarlo como error de extraccion.
-- [ ] Validar charset real (`latin-1/cp1252`) antes de parse CSV.
-- [ ] Definir umbrales minimos por fuente en codigo (no solo en docs).
+- [x] Validar charset real (`latin-1/cp1252`) antes de parse CSV.
+- [x] Definir umbrales minimos por fuente en codigo (no solo en docs).  
+  `etl/politicos_es/config.py` define `min_records_loaded_strict` y `etl/politicos_es/pipeline.py` aplica la validación en modo `--strict-network`.
 - [x] Documentar y estandarizar el “camino manual aceptado” para fuentes bloqueadas por WAF/anti-bot (captura Playwright no-headless + ingesta por `--from-file <dir>`), incluyendo receta `just` y evidencia en tracker.
 - [x] Documentar la ventana de backfill histórico (`just etl-backfill-normalized`) como paso de mantenimiento tras cambios de esquema de normalización.
-- [ ] Crear smoke test E2E en CI (`init-db + ingest por fuente + asserts SQL`).
+- [x] Crear smoke test E2E en CI (`init-db + ingest por fuente + asserts SQL`).  
+  Implementado como camino práctico con `just etl-smoke-e2e`.
 - [x] Publicar snapshot canonico de representantes en `etl/data/published/` (ej: `etl/data/published/representantes-es-2026-02-12.json`).
 - [x] Implementar publish canónico de votaciones en `etl/data/published/` (script: `scripts/publicar_votaciones_es.py`).
-- [ ] Documentar versionado de snapshots y politica de refresh.
+- [x] Documentar versionado de snapshots y politica de refresh.
 
 ## TODO por conector activo
 
