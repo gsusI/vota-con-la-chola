@@ -196,7 +196,7 @@ Legenda:
 - [x] Enriquecimiento por ficha de pleno (`codorg=3`) con `G.P.` + `Circunscripción`.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 90`) en codigo.
-- [ ] Hardening de parsing si el HTML cambia (secciones y headings).
+- [x] Hardening de parsing si el HTML cambia (secciones y headings).
 
 ### 9) `parlamento_vasco_parlamentarios` (DONE tecnico, calidad pendiente)
 
@@ -212,7 +212,7 @@ Legenda:
 - [x] Enriquecimiento por ficha individual (`detalle_diputado.php?id=...`) para `GRUPO PARLAMENTARIO ...` y `Fecha Alta` minima.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 25`) en codigo.
-- [ ] Hardening de parsing si el HTML cambia (estructura de tabla y `id=\"grupo\"`).
+- [x] Hardening de parsing si el HTML cambia (estructura de tabla y `id=\"grupo\"`).
 
 ## TODO nuevos conectores (por prioridad)
 
