@@ -7,7 +7,7 @@ import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urljoin, urlparse
+from urllib.parse import parse_qs, urlencode, urljoin, urlparse, urlunparse
 
 from etl.politicos_es.util import normalize_key_part, normalize_ws, now_utc_iso, parse_date_flexible, sha256_bytes, stable_json
 
@@ -33,6 +33,8 @@ SENADO_MONTHS = {
     "NOV": "11",
     "DIC": "12",
 }
+LEGS_SELECT_RE = re.compile(r'<select[^>]*id="legis"[^>]*>(?P<body>.*?)</select>', re.I | re.S)
+OPTION_VALUE_RE = re.compile(r'<option[^>]*value="(?P<v>\d+)"', re.I)
 
 
 def _extract_legislature(url: str) -> str | None:
@@ -44,6 +46,43 @@ def _extract_legislature(url: str) -> str | None:
     except Exception:  # noqa: BLE001
         return None
     return None
+
+
+def _extract_legislatures_from_catalog_html(html: str) -> list[int]:
+    m = LEGS_SELECT_RE.search(html)
+    if not m:
+        return []
+    vals = [int(mm.group("v")) for mm in OPTION_VALUE_RE.finditer(m.group("body"))]
+    seen: set[int] = set()
+    out: list[int] = []
+    for v in vals:
+        if v in seen:
+            continue
+        seen.add(v)
+        out.append(v)
+    return out
+
+
+def _parse_leg_filter(value: Any) -> list[int]:
+    txt = normalize_ws(str(value or ""))
+    if not txt:
+        return []
+    out: list[int] = []
+    for token in re.split(r"[,\s;]+", txt):
+        t = normalize_ws(token)
+        if not t:
+            continue
+        if t.isdigit():
+            out.append(int(t))
+    return out
+
+
+def _set_legis_query(url: str, leg: int) -> str:
+    parsed = urlparse(url)
+    q = parse_qs(parsed.query)
+    q["legis"] = [str(leg)]
+    new_q = urlencode(q, doseq=True)
+    return urlunparse((parsed.scheme, parsed.netloc, parsed.path, parsed.params, new_q, parsed.fragment))
 
 
 def _to_int(value: str | int | None) -> int | None:
@@ -349,6 +388,7 @@ class SenadoVotacionesConnector(BaseConnector):
     ) -> Extracted:
         options = dict(options or {})
         max_votes = options.get("max_votes")
+        leg_filter = _parse_leg_filter(options.get("senado_legs"))
         detail_dir_opt = options.get("senado_detail_dir")
         detail_dir = Path(str(detail_dir_opt)) if detail_dir_opt else None
         detail_host = normalize_ws(str(options.get("senado_detail_host") or SENADO_BASE)) or SENADO_BASE
@@ -420,20 +460,38 @@ class SenadoVotacionesConnector(BaseConnector):
             headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
         )
         html_text = html_bytes.decode("utf-8", errors="replace")
+        target_legs = leg_filter or _extract_legislatures_from_catalog_html(html_text) or [15]
+        target_legs = sorted({int(v) for v in target_legs if int(v) >= 0}, reverse=True)
 
-        hrefs = re.findall(r'href="([^"]*tipoFich=12[^"]*)"', html_text, flags=re.I)
         tipo12_urls: list[str] = []
-        seen: set[str] = set()
-        for href in hrefs:
-            clean = htmlmod.unescape(href)
-            clean = re.sub(r";jsessionid=[^?]+", "", clean, flags=re.I)
-            url = urljoin(SENADO_BASE, clean)
-            if url in seen:
-                continue
-            seen.add(url)
-            tipo12_urls.append(url)
+        seen_tipo12: set[str] = set()
+        catalog_failures: list[str] = []
+        for leg in target_legs:
+            catalog_url = _set_legis_query(resolved_url, leg)
+            leg_html = html_text if catalog_url == resolved_url else None
+            if leg_html is None:
+                try:
+                    leg_html = http_get_bytes(
+                        catalog_url,
+                        timeout,
+                        headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+                    )[0].decode("utf-8", errors="replace")
+                except Exception as exc:  # noqa: BLE001
+                    catalog_failures.append(f"{catalog_url} -> {type(exc).__name__}: {exc}")
+                    if strict_network:
+                        raise
+                    continue
+            hrefs = re.findall(r'href="([^"]*tipoFich=12[^"]*)"', leg_html, flags=re.I)
+            for href in hrefs:
+                clean = htmlmod.unescape(href)
+                clean = re.sub(r";jsessionid=[^?]+", "", clean, flags=re.I)
+                url = urljoin(SENADO_BASE, clean)
+                if url in seen_tipo12:
+                    continue
+                seen_tipo12.add(url)
+                tipo12_urls.append(url)
 
-        failures: list[str] = []
+        detail_fetch_failures: list[str] = []
         for u in tipo12_urls:
             if isinstance(max_votes, int) and max_votes > 0 and len(records) >= max_votes:
                 break
@@ -462,25 +520,27 @@ class SenadoVotacionesConnector(BaseConnector):
                             detail_hits += 1
                     records.append(rec)
             except Exception as exc:  # noqa: BLE001
-                failures.append(f"{u} -> {type(exc).__name__}: {exc}")
+                detail_fetch_failures.append(f"{u} -> {type(exc).__name__}: {exc}")
                 if strict_network:
                     raise
 
         meta = {
             "source": "senado_votaciones_catalog",
             "list_url": resolved_url,
+            "target_legs": target_legs,
             "tipo12_urls_total": len(tipo12_urls),
             "vote_records": len(records),
             "detail_hits": detail_hits,
             "detail_failures": detail_failures,
-            "failures": failures,
+            "catalog_failures": catalog_failures,
+            "detail_fetch_failures": detail_fetch_failures,
         }
         payload_bytes = stable_json(meta).encode("utf-8")
         raw_path = raw_output_path(raw_dir, self.source_id, "json")
         raw_path.write_bytes(payload_bytes)
 
         note = "network"
-        if failures:
+        if catalog_failures or detail_fetch_failures:
             note = "network-partial"
 
         return Extracted(

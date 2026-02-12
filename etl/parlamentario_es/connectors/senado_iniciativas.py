@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urljoin, urlparse
+from urllib.parse import parse_qs, urlencode, urljoin, urlparse, urlunparse
 
 from etl.politicos_es.util import normalize_ws, now_utc_iso, sha256_bytes, stable_json
 
@@ -15,6 +16,11 @@ from .base import BaseConnector
 
 
 SENADO_BASE = "https://videoservlet.senado.es"
+SENADO_VOTACIONES_CATALOG_URL = (
+    "https://videoservlet.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15"
+)
+LEGS_SELECT_RE = re.compile(r'<select[^>]*id="legis"[^>]*>(?P<body>.*?)</select>', re.I | re.S)
+OPTION_VALUE_RE = re.compile(r'<option[^>]*value="(?P<v>\d+)"', re.I)
 
 
 def _extract_legislature(url: str) -> str | None:
@@ -26,6 +32,43 @@ def _extract_legislature(url: str) -> str | None:
     except Exception:  # noqa: BLE001
         return None
     return None
+
+
+def _extract_legislatures_from_catalog_html(html: str) -> list[int]:
+    m = LEGS_SELECT_RE.search(html)
+    if not m:
+        return []
+    vals = [int(mm.group("v")) for mm in OPTION_VALUE_RE.finditer(m.group("body"))]
+    seen: set[int] = set()
+    out: list[int] = []
+    for v in vals:
+        if v in seen:
+            continue
+        seen.add(v)
+        out.append(v)
+    return out
+
+
+def _parse_leg_filter(value: Any) -> list[int]:
+    txt = normalize_ws(str(value or ""))
+    if not txt:
+        return []
+    out: list[int] = []
+    for token in re.split(r"[,\s;]+", txt):
+        t = normalize_ws(token)
+        if not t:
+            continue
+        if t.isdigit():
+            out.append(int(t))
+    return out
+
+
+def _set_legis_query(url: str, leg: int) -> str:
+    parsed = urlparse(url)
+    q = parse_qs(parsed.query)
+    q["legis"] = [str(leg)]
+    new_q = urlencode(q, doseq=True)
+    return urlunparse((parsed.scheme, parsed.netloc, parsed.path, parsed.params, new_q, parsed.fragment))
 
 
 def _parse_vote_ids_from_url(url: str | None) -> tuple[int | None, int | None]:
@@ -146,9 +189,9 @@ class SenadoIniciativasConnector(BaseConnector):
         strict_network: bool,
         options: dict[str, Any] | None = None,
     ) -> Extracted:
-        _ = strict_network
         options = dict(options or {})
         max_records = options.get("max_records")
+        leg_filter = _parse_leg_filter(options.get("senado_legs"))
         records: list[dict[str, Any]] = []
         content_type = None
 
@@ -195,25 +238,66 @@ class SenadoIniciativasConnector(BaseConnector):
             )
 
         resolved_url = self.resolve_url(url_override, timeout)
-        xml_bytes, content_type = http_get_bytes(
-            resolved_url,
-            timeout,
-            headers={"Accept": "application/xml,text/xml,*/*"},
-        )
-        if content_type and "xml" not in content_type.lower():
-            raise RuntimeError(f"content_type inesperado para Senado iniciativas: {content_type}")
-        records = _records_from_tipo9_xml(xml_bytes, resolved_url)
-        if isinstance(max_records, int) and max_records > 0:
-            records = records[:max_records]
+        target_legs: list[int]
+        if leg_filter:
+            target_legs = sorted({int(v) for v in leg_filter if int(v) >= 0}, reverse=True)
+        else:
+            catalog_legs: list[int] = []
+            try:
+                catalog_html = http_get_bytes(
+                    SENADO_VOTACIONES_CATALOG_URL,
+                    timeout,
+                    headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+                )[0].decode("utf-8", errors="replace")
+                catalog_legs = _extract_legislatures_from_catalog_html(catalog_html)
+            except Exception:  # noqa: BLE001
+                catalog_legs = []
+            default_leg = _extract_legislature(resolved_url)
+            target_legs = sorted(
+                {int(v) for v in (catalog_legs or ([int(default_leg)] if default_leg and default_leg.isdigit() else [15]))},
+                reverse=True,
+            )
+
+        failures: list[str] = []
+        for leg in target_legs:
+            list_url = _set_legis_query(resolved_url, leg)
+            try:
+                xml_bytes, ct = http_get_bytes(
+                    list_url,
+                    timeout,
+                    headers={"Accept": "application/xml,text/xml,*/*"},
+                )
+                if ct and "xml" not in ct.lower():
+                    raise RuntimeError(f"content_type inesperado: {ct}")
+                content_type = ct or content_type
+                rows = _records_from_tipo9_xml(xml_bytes, list_url)
+                if isinstance(max_records, int) and max_records > 0:
+                    remaining = max_records - len(records)
+                    if remaining <= 0:
+                        break
+                    rows = rows[:remaining]
+                records.extend(rows)
+                if isinstance(max_records, int) and max_records > 0 and len(records) >= max_records:
+                    break
+            except Exception as exc:  # noqa: BLE001
+                failures.append(f"{list_url} -> {type(exc).__name__}: {exc}")
+                if strict_network:
+                    raise
 
         meta = {
             "source": "senado_iniciativas_catalog",
             "list_url": resolved_url,
+            "target_legs": target_legs,
             "records": len(records),
+            "failures": failures,
         }
         payload_bytes = stable_json(meta).encode("utf-8")
         raw_path = raw_output_path(raw_dir, self.source_id, "json")
         raw_path.write_bytes(payload_bytes)
+
+        note = "network"
+        if failures:
+            note = "network-partial"
 
         return Extracted(
             source_id=self.source_id,
@@ -224,7 +308,7 @@ class SenadoIniciativasConnector(BaseConnector):
             content_sha256=sha256_bytes(payload_bytes),
             content_type=content_type,
             bytes=len(payload_bytes),
-            note="network",
+            note=note,
             payload=payload_bytes,
             records=records,
         )

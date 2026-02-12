@@ -32,6 +32,8 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_ing.add_argument("--max-votes", type=int, default=None, help="Limita numero de votaciones (debug)")
     p_ing.add_argument("--max-files", type=int, default=None, help="Limita numero de ficheros (debug)")
     p_ing.add_argument("--max-records", type=int, default=None, help="Limita numero de registros (debug)")
+    p_ing.add_argument("--congreso-legs", default=None, help="Legislaturas Congreso separadas por coma (ej: 15,14)")
+    p_ing.add_argument("--senado-legs", default=None, help="Legislaturas Senado separadas por coma (ej: 15,14)")
     p_ing.add_argument("--senado-detail-dir", default=None, help="Dir local con ses_<n>.xml para enriquecer votaciones Senado")
     p_ing.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga de detalle Senado (opcional)")
     p_ing.add_argument("--senado-detail-host", default=None, help="Host base para ses_<n>.xml (default videoservlet)")
@@ -135,6 +137,8 @@ def main(argv: list[str] | None = None) -> int:
                 "max_votes": args.max_votes,
                 "max_files": args.max_files,
                 "max_records": args.max_records,
+                "congreso_legs": args.congreso_legs,
+                "senado_legs": args.senado_legs,
                 "senado_detail_dir": args.senado_detail_dir,
                 "senado_detail_cookie": args.senado_detail_cookie,
                 "senado_detail_host": args.senado_detail_host,
