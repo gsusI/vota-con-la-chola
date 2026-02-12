@@ -1,0 +1,15 @@
+.git
+.github
+.obsidian
+.wrangler
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+etl/data/raw/*
+etl/data/staging/*
+etl/data/published/*
+!etl/data/raw/samples/
+!etl/data/raw/samples/*
+!etl/data/published/proximas-elecciones-espana.json

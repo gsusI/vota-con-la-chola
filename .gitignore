@@ -1,0 +1,43 @@
+# OS / editor / Obsidian
+.DS_Store
+.vscode/
+.cursor/
+.trash/
+.obsidian/
+
+# Keep local notes in the working tree, never in git
+intro.md
+
+# Cloudflare Wrangler local state (may contain sensitive tokens/state)
+.wrangler/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# Env files / secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+
+# Logs
+*.log
+
+# Local data outputs (keep only curated samples/published artifacts in git)
+etl/data/staging/
+etl/data/raw/*
+!etl/data/raw/samples/
+!etl/data/raw/samples/**
+
+# SQLite artifacts anywhere in the project
+*.db
+*.sqlite
+*.sqlite3

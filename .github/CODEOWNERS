@@ -1,0 +1,7 @@
+# Reemplaza estos owners por usuarios/equipos reales de GitHub.
+# Modelo recomendado para equipo pequeño: un equipo core + backup opcional.
+
+* @org/proyecto-core
+/scripts/ @org/proyecto-core
+/etl/ @org/proyecto-core
+/docs/ @org/proyecto-core
