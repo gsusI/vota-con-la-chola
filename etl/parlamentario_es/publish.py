@@ -6,6 +6,8 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any, Iterable
 
+from .quality import compute_vote_quality_kpis, evaluate_vote_quality_gate
+
 
 def _sha256_text(text: str) -> str:
     return sha256(text.encode("utf-8")).hexdigest()
@@ -297,6 +299,19 @@ def build_votaciones_snapshot(
                 continue
             member_votes_by_source[src_id] = member_votes_by_source.get(src_id, 0) + 1
 
+    totales: dict[str, Any] = {
+        "eventos": len(items),
+        "eventos_con_tema": events_with_topic,
+        "eventos_con_totales": events_with_totals,
+        "votos_nominales": member_votes_total,
+        "votos_nominales_con_person_id": member_votes_with_person_id,
+        "eventos_por_source_id": dict(sorted(events_by_source.items())),
+        "votos_por_source_id": dict(sorted(member_votes_by_source.items())),
+    }
+
+    kpis = compute_vote_quality_kpis(conn, source_ids=source_ids)
+    gate = evaluate_vote_quality_gate(kpis)
+
     snapshot: dict[str, Any] = {
         "fecha_referencia": snapshot_date,
         # Deterministic timestamp for a given snapshot date.
@@ -307,14 +322,12 @@ def build_votaciones_snapshot(
             "max_events": max_events,
             "max_member_votes_per_event": max_member_votes_per_event,
         },
-        "totales": {
-            "eventos": len(items),
-            "eventos_con_tema": events_with_topic,
-            "eventos_con_totales": events_with_totals,
-            "votos_nominales": member_votes_total,
-            "votos_nominales_con_person_id": member_votes_with_person_id,
-            "eventos_por_source_id": dict(sorted(events_by_source.items())),
-            "votos_por_source_id": dict(sorted(member_votes_by_source.items())),
+        "totales": totales,
+        "quality": {
+            "provider": "etl.parlamentario_es.quality",
+            "scope": {"source_ids": list(source_ids)},
+            "kpis": kpis,
+            "gate": gate,
         },
         "items": items,
     }

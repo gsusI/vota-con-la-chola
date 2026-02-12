@@ -320,6 +320,8 @@ CREATE INDEX IF NOT EXISTS idx_parl_vote_events_date ON parl_vote_events(vote_da
 CREATE INDEX IF NOT EXISTS idx_parl_vote_events_source ON parl_vote_events(source_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_event ON parl_vote_member_votes(vote_event_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_person ON parl_vote_member_votes(person_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_member_votes_source_name
+    ON parl_vote_member_votes(source_id, member_name_normalized);
 
 CREATE INDEX IF NOT EXISTS idx_parl_initiatives_exp ON parl_initiatives(expediente);
 CREATE INDEX IF NOT EXISTS idx_parl_initiatives_leg ON parl_initiatives(legislature);

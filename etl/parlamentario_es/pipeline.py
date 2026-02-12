@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import defaultdict
 import json
 import re
 import sqlite3
@@ -18,7 +19,18 @@ from etl.politicos_es.util import (
 
 from .config import SOURCE_CONFIG
 from .connectors.base import BaseConnector
-from .db import upsert_parl_initiatives, upsert_parl_vote_event, upsert_source_record_for_event, upsert_source_records
+from .db import (
+    upsert_parl_initiatives,
+    upsert_parl_vote_event,
+    upsert_source_record_for_event,
+    upsert_source_records,
+)
+
+
+VOTE_SOURCE_TO_MANDATE_SOURCE: dict[str, str] = {
+    "congreso_votaciones": "congreso_diputados",
+    "senado_votaciones": "senado_senadores",
+}
 
 
 def _load_person_map_for_mandate_source(conn: sqlite3.Connection, mandate_source_id: str) -> dict[str, int]:
@@ -29,8 +41,7 @@ def _load_person_map_for_mandate_source(conn: sqlite3.Connection, mandate_source
         FROM persons p
         JOIN mandates m ON m.person_id = p.person_id
         WHERE m.source_id = ? AND m.is_active = 1
-        """
-        ,
+        """,
         (mandate_source_id,),
     ).fetchall()
     mapping: dict[str, int] = {}
@@ -40,6 +51,358 @@ def _load_person_map_for_mandate_source(conn: sqlite3.Connection, mandate_source
             continue
         mapping[key] = int(r["person_id"])
     return mapping
+
+
+def _normalize_mandate_date(value: str | None) -> str | None:
+    return parse_date_flexible(str(value).strip()) if str(value).strip() else None
+
+
+def _normalize_group_key(value: str | None) -> str | None:
+    return normalize_key_part(str(value or "")) or None
+
+
+def _vote_date_in_mandate_window(vote_date: str | None, start_date: str | None, end_date: str | None) -> bool:
+    if not vote_date:
+        return False
+    if start_date and vote_date < start_date:
+        return False
+    if end_date and vote_date > end_date:
+        return False
+    return True
+
+
+def _candidate_match_key(
+    candidate: dict[str, Any],
+    *,
+    vote_date_norm: str | None,
+    group_norm: str | None,
+) -> tuple[int, int, int, str, str]:
+    in_window = _vote_date_in_mandate_window(
+        vote_date_norm,
+        str(candidate.get("start_date") or ""),
+        str(candidate.get("end_date") or ""),
+    )
+    group_match = 1 if group_norm and group_norm in candidate.get("party_keys", set()) else 0
+    return (
+        1 if in_window else 0,
+        group_match,
+        1 if int(candidate.get("is_active") or 0) == 1 else 0,
+        str(candidate.get("end_date") or "9999-12-31"),
+        str(candidate.get("start_date") or "0000-01-01"),
+    )
+
+
+def _pick_best_person_id(
+    candidates: list[dict[str, Any]],
+    *,
+    vote_date_norm: str | None,
+    group_norm: str | None,
+) -> tuple[int | None, str]:
+    if not candidates:
+        return None, "no_candidates"
+
+    best_by_person: dict[int, tuple[int, int, int, str, str]] = {}
+    for candidate in candidates:
+        key = _candidate_match_key(
+            candidate,
+            vote_date_norm=vote_date_norm,
+            group_norm=group_norm,
+        )
+        pid = int(candidate["person_id"])
+        previous = best_by_person.get(pid)
+        if previous is None or key > previous:
+            best_by_person[pid] = key
+
+    if not best_by_person:
+        return None, "no_candidates"
+
+    key_map: dict[tuple[int, int, int, str, str], list[int]] = {}
+    for pid, key in best_by_person.items():
+        key_map.setdefault(key, []).append(pid)
+
+    best_key = max(key_map)
+    winners = key_map[best_key]
+    if len(winners) != 1:
+        return None, "ambiguous"
+    return winners[0], "matched"
+
+
+def backfill_vote_member_person_ids(
+    conn: sqlite3.Connection,
+    *,
+    vote_source_ids: tuple[str, ...] | list[str] | None = None,
+    dry_run: bool = False,
+    batch_size: int = 5000,
+    unmatched_sample_limit: int = 0,
+) -> dict[str, Any]:
+    requested = list(vote_source_ids or VOTE_SOURCE_TO_MANDATE_SOURCE.keys())
+    seen: list[str] = []
+    for raw_id in requested:
+        sid = normalize_ws(str(raw_id))
+        if not sid or sid in seen:
+            continue
+        seen.append(sid)
+
+    if not seen:
+        return {
+            "source_ids": [],
+            "dry_run": bool(dry_run),
+            "total_checked": 0,
+            "total_matched": 0,
+            "total_unmatched": 0,
+            "total_ambiguous": 0,
+            "total_updated": 0,
+            "sources": [],
+        }
+
+    source_totals: dict[str, dict[str, int]] = {
+        sid: {
+            "checked": 0,
+            "matched": 0,
+            "unmatched": 0,
+            "ambiguous": 0,
+            "updated": 0,
+            "skipped_no_name": 0,
+            "no_mandate_map": 0,
+            "no_candidates": 0,
+        }
+        for sid in seen
+    }
+    unmatched_reason_totals: dict[str, int] = {}
+    unmatched_sample: list[dict[str, Any]] = []
+    unmatched_samples_left = max(0, int(unmatched_sample_limit))
+
+    source_to_mandate_index: dict[str, tuple[str, dict[str, list[dict[str, Any]]]]] = {}
+    for sid in seen:
+        mandate_sid = VOTE_SOURCE_TO_MANDATE_SOURCE.get(sid)
+        if not mandate_sid:
+            continue
+        source_to_mandate_index[sid] = (mandate_sid, _load_mandate_name_index(conn, mandate_sid))
+
+    placeholders = ",".join("?" for _ in seen)
+    cur = conn.execute(
+        f"""
+        SELECT mv.member_vote_id, mv.source_id, mv.member_name_normalized, mv.member_name,
+               mv.group_code, e.legislature, e.vote_date, mv.vote_event_id
+        FROM parl_vote_member_votes mv
+        JOIN parl_vote_events e ON e.vote_event_id = mv.vote_event_id
+        WHERE mv.source_id IN ({placeholders})
+          AND mv.person_id IS NULL
+        ORDER BY mv.source_id, mv.member_vote_id
+        """,
+        tuple(seen),
+    )
+
+    updates: list[tuple[int, int, str]] = []
+    total_checked = 0
+    total_matched = 0
+    total_unmatched = 0
+    total_ambiguous = 0
+    total_updated = 0
+
+    while True:
+        rows = cur.fetchmany(batch_size)
+        if not rows:
+            break
+
+        for row in rows:
+            sid = str(row["source_id"])
+            source_stat = source_totals.setdefault(
+                sid,
+                {
+                    "checked": 0,
+                    "matched": 0,
+                    "unmatched": 0,
+                    "ambiguous": 0,
+                    "updated": 0,
+                    "skipped_no_name": 0,
+                    "no_mandate_map": 0,
+                    "no_candidates": 0,
+                },
+            )
+            reason: str | None = None
+
+            total_checked += 1
+            source_stat["checked"] += 1
+
+            mapping = source_to_mandate_index.get(sid)
+            person_id: int | None = None
+            if mapping is None:
+                source_stat["no_mandate_map"] += 1
+                reason = "no_mandate_map"
+            else:
+                _, candidates_by_name = mapping
+                name_key = normalize_key_part(
+                    str(row["member_name_normalized"] or row["member_name"] or "")
+                )
+                if not name_key:
+                    source_stat["skipped_no_name"] += 1
+                    reason = "skipped_no_name"
+                else:
+                    candidates = candidates_by_name.get(name_key, [])
+                    if not candidates:
+                        source_stat["no_candidates"] += 1
+                        reason = "no_candidates"
+                    else:
+                        person_id, status = _pick_best_person_id(
+                            candidates,
+                            vote_date_norm=_normalize_mandate_date(str(row["vote_date"] or "")),
+                            group_norm=_normalize_group_key(row["group_code"]),
+                        )
+                        if status != "matched" or person_id is None:
+                            reason = status or "not_matched"
+
+            if reason is not None:
+                source_stat["unmatched"] += 1
+                unmatched_reason_totals[reason] = unmatched_reason_totals.get(reason, 0) + 1
+                if reason == "ambiguous":
+                    source_stat["ambiguous"] += 1
+                    total_ambiguous += 1
+                if (
+                    unmatched_samples_left > 0
+                    and len(unmatched_sample) < unmatched_samples_left
+                ):
+                    unmatched_sample.append(
+                        {
+                            "member_vote_id": int(row["member_vote_id"]),
+                            "vote_event_id": str(row["vote_event_id"]),
+                            "source_id": sid,
+                            "reason": reason,
+                            "member_name": str(row["member_name"] or ""),
+                            "member_name_normalized": str(row["member_name_normalized"] or ""),
+                            "group_code": str(row["group_code"] or ""),
+                            "vote_date": str(row["vote_date"] or ""),
+                        }
+                    )
+                continue
+
+            total_matched += 1
+            source_stat["matched"] += 1
+
+            if dry_run:
+                source_stat["updated"] += 1
+                total_updated += 1
+            else:
+                updates.append((person_id, int(row["member_vote_id"]), sid))
+
+        if not dry_run and updates:
+            conn.executemany(
+                """
+                UPDATE parl_vote_member_votes
+                SET person_id = ?
+                WHERE member_vote_id = ?
+                """,
+                [(person_id, member_vote_id) for person_id, member_vote_id, _ in updates],
+            )
+            total_updated += len(updates)
+            for _, _, sid in updates:
+                if sid in source_totals:
+                    source_totals[sid]["updated"] += 1
+            updates = []
+
+    if not dry_run and updates:
+        conn.executemany(
+            """
+            UPDATE parl_vote_member_votes
+            SET person_id = ?
+            WHERE member_vote_id = ?
+            """,
+            [(person_id, member_vote_id) for person_id, member_vote_id, _ in updates],
+        )
+        total_updated += len(updates)
+        for _, _, sid in updates:
+            if sid in source_totals:
+                source_totals[sid]["updated"] += 1
+
+    if not dry_run:
+        conn.commit()
+
+    total_unmatched = 0
+    sources_out: list[dict[str, Any]] = []
+    for sid in seen:
+        source_total = source_totals[sid]
+        source_total["source_id"] = sid
+        source_total["mandate_source_id"] = VOTE_SOURCE_TO_MANDATE_SOURCE.get(sid)
+        total_unmatched += source_total["unmatched"]
+        sources_out.append(source_total)
+
+    return {
+        "source_ids": [str(sid) for sid in seen],
+        "dry_run": bool(dry_run),
+        "total_checked": int(total_checked),
+        "total_matched": int(total_matched),
+        "total_unmatched": int(total_unmatched),
+        "total_ambiguous": int(total_ambiguous),
+        "total_updated": int(total_updated),
+        "unmatched_by_reason": {reason: int(count) for reason, count in sorted(unmatched_reason_totals.items())},
+        "unmatched_sample": unmatched_sample,
+        "sources": sources_out,
+    }
+
+
+def _load_mandate_name_index(
+    conn: sqlite3.Connection,
+    mandate_source_id: str,
+) -> dict[str, list[dict[str, Any]]]:
+    rows = conn.execute(
+        """
+        SELECT m.person_id, p.full_name, p.given_name, p.family_name,
+               m.is_active,
+               m.start_date, m.end_date,
+               par.name AS party_name,
+               par.acronym AS party_acronym,
+               pa.canonical_alias AS party_alias
+        FROM mandates m
+        JOIN persons p ON p.person_id = m.person_id
+        LEFT JOIN parties par ON par.party_id = m.party_id
+        LEFT JOIN party_aliases pa ON pa.party_id = m.party_id
+        WHERE m.source_id = ?
+        """,
+        (mandate_source_id,),
+    ).fetchall()
+
+    index: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    candidate_by_term: dict[tuple[int, str, str], dict[str, Any]] = {}
+    for r in rows:
+        person_id = int(r["person_id"])
+        start_date = _normalize_mandate_date(str(r["start_date"] or ""))
+        end_date = _normalize_mandate_date(str(r["end_date"] or ""))
+        term_key = (person_id, start_date or "", end_date or "")
+        person = candidate_by_term.get(term_key)
+        if person is None:
+            names: set[str] = {
+                normalize_key_part(str(r["full_name"] or "")),
+                normalize_key_part(str(r["given_name"] or "")),
+                normalize_key_part(str(r["family_name"] or "")),
+            }
+            given = normalize_ws(str(r["given_name"] or "")).strip()
+            family = normalize_ws(str(r["family_name"] or "")).strip()
+            if given and family:
+                names.add(normalize_key_part(f"{given} {family}"))
+                names.add(normalize_key_part(f"{family} {given}"))
+
+            person = {
+                "person_id": person_id,
+                "is_active": 1 if int(r["is_active"] or 0) == 1 else 0,
+                "start_date": start_date,
+                "end_date": end_date,
+                "party_keys": set[str](),
+            }
+            candidate_by_term[term_key] = person
+            for name in names:
+                if not name:
+                    continue
+                index[name].append(person)
+
+        for value in (
+            str(r["party_name"] or ""),
+            str(r["party_acronym"] or ""),
+            str(r["party_alias"] or ""),
+        ):
+            key = normalize_key_part(str(value).strip())
+            if key:
+                person["party_keys"].add(key)
+    return index
 
 
 def _normalize_vote_member_name(raw: str | None) -> tuple[str | None, str | None]:

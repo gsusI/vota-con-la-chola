@@ -1,0 +1,230 @@
+from __future__ import annotations
+
+import sqlite3
+from typing import Any, Iterable, Mapping
+
+DEFAULT_VOTE_QUALITY_THRESHOLDS: dict[str, float] = {
+    "events_with_date_pct": 0.95,
+    "events_with_theme_pct": 0.95,
+    "events_with_totals_pct": 0.95,
+    "member_votes_with_person_id_pct": 0.90,
+}
+
+
+def _normalize_source_ids(source_ids: Iterable[str]) -> tuple[str, ...]:
+    normalized = sorted({str(s).strip() for s in source_ids if str(s).strip()})
+    if not normalized:
+        raise ValueError("source_ids vacio")
+    return tuple(normalized)
+
+
+def _ratio(numerator: int, denominator: int) -> float:
+    if denominator <= 0:
+        return 0.0
+    return float(numerator) / float(denominator)
+
+
+def _empty_source_kpis() -> dict[str, Any]:
+    return {
+        "events_total": 0,
+        "events_with_date": 0,
+        "events_with_theme": 0,
+        "events_with_totals": 0,
+        "events_with_nominal_vote": 0,
+        "events_with_date_pct": 0.0,
+        "events_with_theme_pct": 0.0,
+        "events_with_totals_pct": 0.0,
+        "events_with_nominal_vote_pct": 0.0,
+        "member_votes_total": 0,
+        "member_votes_with_person_id": 0,
+        "member_votes_with_person_id_pct": 0.0,
+    }
+
+
+def compute_vote_quality_kpis(
+    conn: sqlite3.Connection,
+    source_ids: Iterable[str] = ("congreso_votaciones", "senado_votaciones"),
+) -> dict[str, Any]:
+    source_ids_tuple = _normalize_source_ids(source_ids)
+    placeholders = ",".join("?" for _ in source_ids_tuple)
+
+    event_rows = conn.execute(
+        f"""
+        WITH selected_events AS (
+          SELECT
+            vote_event_id,
+            source_id,
+            vote_date,
+            totals_present,
+            totals_yes,
+            totals_no,
+            totals_abstain,
+            totals_no_vote
+          FROM parl_vote_events
+          WHERE source_id IN ({placeholders})
+        ),
+        theme_events AS (
+          SELECT DISTINCT vote_event_id
+          FROM parl_vote_event_initiatives
+        ),
+        nominal_events AS (
+          SELECT DISTINCT vote_event_id
+          FROM parl_vote_member_votes
+        )
+        SELECT
+          e.source_id,
+          COUNT(*) AS events_total,
+          SUM(
+            CASE
+              WHEN e.vote_date IS NOT NULL AND TRIM(e.vote_date) <> '' THEN 1
+              ELSE 0
+            END
+          ) AS events_with_date,
+          SUM(
+            CASE
+              WHEN t.vote_event_id IS NOT NULL THEN 1
+              ELSE 0
+            END
+          ) AS events_with_theme,
+          SUM(
+            CASE
+              WHEN (
+                e.totals_present IS NOT NULL
+                OR e.totals_yes IS NOT NULL
+                OR e.totals_no IS NOT NULL
+                OR e.totals_abstain IS NOT NULL
+                OR e.totals_no_vote IS NOT NULL
+              ) THEN 1
+              ELSE 0
+            END
+          ) AS events_with_totals,
+          SUM(
+            CASE
+              WHEN n.vote_event_id IS NOT NULL THEN 1
+              ELSE 0
+            END
+          ) AS events_with_nominal_vote
+        FROM selected_events e
+        LEFT JOIN theme_events t ON t.vote_event_id = e.vote_event_id
+        LEFT JOIN nominal_events n ON n.vote_event_id = e.vote_event_id
+        GROUP BY e.source_id
+        ORDER BY e.source_id
+        """,
+        source_ids_tuple,
+    ).fetchall()
+
+    member_vote_rows = conn.execute(
+        f"""
+        SELECT
+          e.source_id,
+          COUNT(*) AS member_votes_total,
+          SUM(
+            CASE
+              WHEN mv.person_id IS NOT NULL THEN 1
+              ELSE 0
+            END
+          ) AS member_votes_with_person_id
+        FROM parl_vote_member_votes mv
+        JOIN parl_vote_events e ON e.vote_event_id = mv.vote_event_id
+        WHERE e.source_id IN ({placeholders})
+        GROUP BY e.source_id
+        ORDER BY e.source_id
+        """,
+        source_ids_tuple,
+    ).fetchall()
+
+    by_source: dict[str, dict[str, Any]] = {sid: _empty_source_kpis() for sid in source_ids_tuple}
+
+    for row in event_rows:
+        sid = str(row["source_id"])
+        data = by_source.setdefault(sid, _empty_source_kpis())
+        data["events_total"] = int(row["events_total"] or 0)
+        data["events_with_date"] = int(row["events_with_date"] or 0)
+        data["events_with_theme"] = int(row["events_with_theme"] or 0)
+        data["events_with_totals"] = int(row["events_with_totals"] or 0)
+        data["events_with_nominal_vote"] = int(row["events_with_nominal_vote"] or 0)
+
+    for row in member_vote_rows:
+        sid = str(row["source_id"])
+        data = by_source.setdefault(sid, _empty_source_kpis())
+        data["member_votes_total"] = int(row["member_votes_total"] or 0)
+        data["member_votes_with_person_id"] = int(row["member_votes_with_person_id"] or 0)
+
+    for sid in source_ids_tuple:
+        data = by_source[sid]
+        events_total = int(data["events_total"])
+        member_votes_total = int(data["member_votes_total"])
+        data["events_with_date_pct"] = _ratio(int(data["events_with_date"]), events_total)
+        data["events_with_theme_pct"] = _ratio(int(data["events_with_theme"]), events_total)
+        data["events_with_totals_pct"] = _ratio(int(data["events_with_totals"]), events_total)
+        data["events_with_nominal_vote_pct"] = _ratio(int(data["events_with_nominal_vote"]), events_total)
+        data["member_votes_with_person_id_pct"] = _ratio(
+            int(data["member_votes_with_person_id"]), member_votes_total
+        )
+
+    events_total = sum(int(by_source[sid]["events_total"]) for sid in source_ids_tuple)
+    events_with_date = sum(int(by_source[sid]["events_with_date"]) for sid in source_ids_tuple)
+    events_with_theme = sum(int(by_source[sid]["events_with_theme"]) for sid in source_ids_tuple)
+    events_with_totals = sum(int(by_source[sid]["events_with_totals"]) for sid in source_ids_tuple)
+    events_with_nominal_vote = sum(
+        int(by_source[sid]["events_with_nominal_vote"]) for sid in source_ids_tuple
+    )
+    member_votes_total = sum(int(by_source[sid]["member_votes_total"]) for sid in source_ids_tuple)
+    member_votes_with_person_id = sum(
+        int(by_source[sid]["member_votes_with_person_id"]) for sid in source_ids_tuple
+    )
+
+    return {
+        "source_ids": list(source_ids_tuple),
+        "events_total": events_total,
+        "events_with_date": events_with_date,
+        "events_with_date_pct": _ratio(events_with_date, events_total),
+        "events_with_theme": events_with_theme,
+        "events_with_theme_pct": _ratio(events_with_theme, events_total),
+        "events_with_totals": events_with_totals,
+        "events_with_totals_pct": _ratio(events_with_totals, events_total),
+        "events_with_nominal_vote": events_with_nominal_vote,
+        "events_with_nominal_vote_pct": _ratio(events_with_nominal_vote, events_total),
+        "member_votes_total": member_votes_total,
+        "member_votes_with_person_id": member_votes_with_person_id,
+        "member_votes_with_person_id_pct": _ratio(member_votes_with_person_id, member_votes_total),
+        "by_source": by_source,
+    }
+
+
+def evaluate_vote_quality_gate(
+    kpis: Mapping[str, Any],
+    thresholds: Mapping[str, float] | None = None,
+) -> dict[str, Any]:
+    resolved_thresholds = dict(DEFAULT_VOTE_QUALITY_THRESHOLDS)
+    if thresholds:
+        for metric, threshold in thresholds.items():
+            resolved_thresholds[str(metric)] = float(threshold)
+
+    ordered_metrics = sorted(resolved_thresholds.keys())
+    failures: list[dict[str, Any]] = []
+
+    for metric in ordered_metrics:
+        threshold = float(resolved_thresholds[metric])
+        actual = float(kpis.get(metric) or 0.0)
+        if actual < threshold:
+            failures.append(
+                {
+                    "metric": metric,
+                    "actual": actual,
+                    "threshold": threshold,
+                }
+            )
+
+    return {
+        "passed": len(failures) == 0,
+        "failures": failures,
+        "thresholds": {metric: float(resolved_thresholds[metric]) for metric in ordered_metrics},
+    }
+
+
+__all__ = [
+    "DEFAULT_VOTE_QUALITY_THRESHOLDS",
+    "compute_vote_quality_kpis",
+    "evaluate_vote_quality_gate",
+]

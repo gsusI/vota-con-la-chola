@@ -64,6 +64,11 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Limite de votos nominales por evento (debug)",
     )
+    p.add_argument(
+        "--enforce-quality-gate",
+        action="store_true",
+        help="Falla con exit!=0 si quality.gate.passed es false",
+    )
     return p.parse_args()
 
 
@@ -115,6 +120,28 @@ def main() -> int:
         )
     finally:
         conn.close()
+
+    if bool(args.enforce_quality_gate):
+        gate = (snap.get("quality") or {}).get("gate") or {}
+        passed = bool(gate.get("passed"))
+        if not passed:
+            failed_metrics: list[str] = []
+            failures = gate.get("failures")
+            if isinstance(failures, list):
+                for f in failures:
+                    if not isinstance(f, dict):
+                        continue
+                    metric = str(f.get("metric") or "").strip()
+                    if metric:
+                        failed_metrics.append(metric)
+            failed_metrics = sorted(dict.fromkeys(failed_metrics))
+            failed_csv = ",".join(failed_metrics) if failed_metrics else "unknown"
+            print(
+                f"ERROR: quality gate failed for source_ids={','.join(source_ids)} "
+                f"(failed_metrics={failed_csv})",
+                file=sys.stderr,
+            )
+            return 3
 
     changed = write_json_if_changed(out_path, snap)
     if changed:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sqlite3
 import sys
 from pathlib import Path
@@ -9,7 +10,8 @@ from typing import Any
 from .config import DEFAULT_DB, DEFAULT_RAW_DIR, DEFAULT_SCHEMA, DEFAULT_TIMEOUT, SOURCE_CONFIG
 from .db import apply_schema, open_db, seed_sources
 from .linking import link_congreso_votes_to_initiatives, link_senado_votes_to_initiatives
-from .pipeline import ingest_one_source
+from .pipeline import VOTE_SOURCE_TO_MANDATE_SOURCE, backfill_vote_member_person_ids, ingest_one_source
+from .quality import compute_vote_quality_kpis, evaluate_vote_quality_gate
 from .registry import get_connectors
 
 
@@ -49,7 +51,80 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_link.add_argument("--max-events", type=int, default=None)
     p_link.add_argument("--dry-run", action="store_true")
 
+    p_quality = sub.add_parser("quality-report", help="KPI + gate de calidad de votaciones")
+    p_quality.add_argument("--db", default=str(DEFAULT_DB))
+    p_quality.add_argument(
+        "--source-ids",
+        default="congreso_votaciones,senado_votaciones",
+        help="Lista CSV de source_id para incluir",
+    )
+    p_quality.add_argument(
+        "--enforce-gate",
+        action="store_true",
+        help="Salir con codigo != 0 si el gate falla",
+    )
+
+    p_backfill = sub.add_parser(
+        "backfill-member-ids",
+        help="Rellenar person_id en votes nominales con clave estable por nombre",
+    )
+    p_backfill.add_argument("--db", default=str(DEFAULT_DB))
+    p_backfill.add_argument(
+        "--source-ids",
+        default="congreso_votaciones,senado_votaciones",
+        help="Lista CSV de source_id para procesar",
+    )
+    p_backfill.add_argument("--dry-run", action="store_true", help="Simula cambios sin escribir person_id")
+    p_backfill.add_argument(
+        "--batch-size",
+        type=int,
+        default=5000,
+        help="Tamaño de lote de actualizaciones SQL",
+    )
+    p_backfill.add_argument(
+        "--unmatched-sample-limit",
+        type=int,
+        default=0,
+        help="Limita ejemplos de votos no resueltos mostrados en salida JSON (0 para desactivar)",
+    )
+
     return p.parse_args(argv)
+
+
+def _validate_vote_source_ids(requested: tuple[str, ...], *, for_command: str) -> tuple[str, ...]:
+    allowed = tuple(sorted(VOTE_SOURCE_TO_MANDATE_SOURCE.keys()))
+    if not requested:
+        raise SystemExit(f"{for_command}: source-ids vacio")
+
+    unknown = tuple(s for s in requested if s not in allowed)
+    if unknown:
+        raise SystemExit(
+            f"{for_command}: source-ids desconocidos para votaciones {', '.join(unknown)} (esperados: {', '.join(allowed)})"
+        )
+    return requested
+
+
+def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
+    vals = [x.strip() for x in str(csv_value).split(",")]
+    vals = [x for x in vals if x]
+    out: list[str] = []
+    seen: set[str] = set()
+    for v in vals:
+        if v in seen:
+            continue
+        seen.add(v)
+        out.append(v)
+    return tuple(out)
+
+
+def _quality_report(conn: sqlite3.Connection, *, source_ids: tuple[str, ...]) -> dict[str, Any]:
+    kpis = compute_vote_quality_kpis(conn, source_ids=source_ids)
+    gate = evaluate_vote_quality_gate(kpis)
+    return {
+        "source_ids": list(source_ids),
+        "kpis": kpis,
+        "gate": gate,
+    }
 
 
 def _stats(conn: sqlite3.Connection) -> None:
@@ -118,6 +193,52 @@ def main(argv: list[str] | None = None) -> int:
         finally:
             conn.close()
         print(result)
+        return 0
+
+    if args.cmd == "quality-report":
+        source_ids = _validate_vote_source_ids(
+            _parse_source_ids(str(args.source_ids)),
+            for_command="quality-report",
+        )
+
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = _quality_report(conn, source_ids=source_ids)
+        finally:
+            conn.close()
+
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        if bool(args.enforce_gate) and not bool(result.get("gate", {}).get("passed")):
+            return 1
+        return 0
+
+    if args.cmd == "backfill-member-ids":
+        source_ids = _validate_vote_source_ids(
+            _parse_source_ids(str(args.source_ids)),
+            for_command="backfill-member-ids",
+        )
+        batch_size = int(args.batch_size)
+        if batch_size <= 0:
+            raise SystemExit("batch-size debe ser mayor a 0")
+        unmatched_sample_limit = int(args.unmatched_sample_limit)
+        if unmatched_sample_limit < 0:
+            raise SystemExit("unmatched-sample-limit debe ser >= 0")
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_vote_member_person_ids(
+                conn,
+                vote_source_ids=source_ids,
+                dry_run=bool(args.dry_run),
+                batch_size=batch_size,
+                unmatched_sample_limit=unmatched_sample_limit,
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
         return 0
 
     if args.cmd == "ingest":

@@ -91,6 +91,15 @@ parl-extract-senado-votaciones:
 parl-link-votes:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
 
+parl-quality-report:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}}"
+
+parl-backfill-member-ids:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}}"
+
+parl-backfill-member-ids-dry-run:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --dry-run"
+
 etl-extract-congreso:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
 

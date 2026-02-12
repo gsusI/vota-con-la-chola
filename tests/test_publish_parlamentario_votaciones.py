@@ -56,6 +56,10 @@ class TestPublishParlamentarioVotaciones(unittest.TestCase):
                 snap1 = build_votaciones_snapshot(conn, snapshot_date=snapshot_date)
                 snap2 = build_votaciones_snapshot(conn, snapshot_date=snapshot_date)
                 self.assertEqual(snap1, snap2)
+                self.assertEqual(snap1.get("fecha_referencia"), snapshot_date)
+                self.assertEqual(snap1.get("generado_en"), f"{snapshot_date}T00:00:00+00:00")
+                for key in ("fecha_referencia", "generado_en", "totales", "items"):
+                    self.assertIn(key, snap1)
 
                 items = snap1.get("items")
                 self.assertIsInstance(items, list)
@@ -64,6 +68,43 @@ class TestPublishParlamentarioVotaciones(unittest.TestCase):
                 tot = snap1.get("totales") or {}
                 self.assertGreater(int(tot.get("eventos") or 0), 0)
                 self.assertGreater(int(tot.get("votos_nominales") or 0), 0)
+
+                quality = snap1.get("quality") or {}
+                self.assertIsInstance(quality, dict)
+                self.assertIn("provider", quality)
+                self.assertIn("scope", quality)
+                self.assertIn("kpis", quality)
+                self.assertIn("gate", quality)
+
+                qscope = quality.get("scope") or {}
+                self.assertEqual(qscope.get("source_ids"), ["congreso_votaciones", "senado_votaciones"])
+
+                kpis = quality.get("kpis") or {}
+                self.assertIn("events_total", kpis)
+                self.assertIn("member_votes_total", kpis)
+                self.assertIn("events_with_theme_pct", kpis)
+                self.assertIn("member_votes_with_person_id_pct", kpis)
+
+                gate = quality.get("gate") or {}
+                self.assertIn("passed", gate)
+                self.assertIn("failures", gate)
+                self.assertIn("thresholds", gate)
+                self.assertIsInstance(gate.get("passed"), bool)
+                self.assertIsInstance(gate.get("failures"), list)
+                self.assertIsInstance(gate.get("thresholds"), dict)
+                for failure in gate.get("failures") or []:
+                    self.assertIn("metric", failure)
+                    self.assertIn("actual", failure)
+                    self.assertIn("threshold", failure)
+
+                snap_scoped = build_votaciones_snapshot(
+                    conn,
+                    snapshot_date=snapshot_date,
+                    source_ids=("senado_votaciones",),
+                )
+                scoped_quality = snap_scoped.get("quality") or {}
+                scoped_scope = scoped_quality.get("scope") or {}
+                self.assertEqual(scoped_scope.get("source_ids"), ["senado_votaciones"])
 
                 self.assertTrue(any((it.get("initiatives") or []) for it in items))
                 self.assertTrue(any((it.get("member_votes") or []) for it in items))
