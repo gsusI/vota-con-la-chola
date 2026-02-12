@@ -89,6 +89,42 @@ def parse_member_row(tr_html: str) -> dict[str, Any] | None:
     }
 
 
+def parse_vasco_detail_profile(html: str) -> dict[str, Any]:
+    """Extract optional group/date fields from the profile HTML."""
+    text = normalize_ws(re.sub(r"<[^>]+>", " ", unescape(html)))
+    result: dict[str, Any] = {}
+    if not text:
+        return result
+
+    # Common pattern in profile detail pages:
+    # "Parlamentario del Grupo Grupo Mixto-Sumar (21.05.2024 - )"
+    m = re.search(
+        r"Parlamentari[oa]\s+del\s+Grupo\s+([A-Za-zÁÉÍÓÚÑáéíóúñ0-9./ -]+?)\s*\(([^)]*)\)",
+        text,
+        flags=re.I,
+    )
+    if not m:
+        # Fallback wording sometimes references "grupo parlamentario"
+        m = re.search(
+            r"Grupo\s+Parlamentari[o|a]\s+([A-Za-zÁÉÍÓÚÑáéíóúñ0-9./ -]+?)\s*\(([^)]*)\)",
+            text,
+            flags=re.I,
+        )
+    if m:
+        raw_group = normalize_ws(m.group(1))
+        if raw_group.lower().startswith("grupo "):
+            raw_group = raw_group[6:].strip()
+        result["group_name"] = raw_group
+        dates = m.group(2)
+        dm = re.search(r"([0-9./-]+)\s*-\s*([0-9./-]*)", dates)
+        if dm:
+            result["start_date"] = parse_dot_date(dm.group(1))
+            if dm.group(2):
+                result["end_date"] = parse_dot_date(dm.group(2))
+
+    return result
+
+
 def build_parlamento_vasco_records(timeout: int) -> list[dict[str, Any]]:
     payload, ct = http_get_bytes(PV_LIST_URL, timeout)
     html = payload.decode("utf-8", errors="replace")
@@ -100,6 +136,25 @@ def build_parlamento_vasco_records(timeout: int) -> list[dict[str, Any]]:
     for tr in trs:
         rec = parse_member_row(tr)
         if rec:
+            # Fill group/start/end from profile when list row is incomplete.
+            if not rec.get("group_name") or not rec.get("start_date"):
+                detail_url = rec["detail_url"]
+                if "_SM.html" not in detail_url:
+                    profile_url = detail_url.replace(".html", "_SM.html")
+                else:
+                    profile_url = detail_url
+                try:
+                    payload, _ = http_get_bytes(profile_url, timeout)
+                    profile = parse_vasco_detail_profile(payload.decode("utf-8", errors="replace"))
+                    if profile.get("group_name") and not rec.get("group_name"):
+                        rec["group_name"] = str(profile["group_name"])
+                    if profile.get("start_date") and not rec.get("start_date"):
+                        rec["start_date"] = str(profile["start_date"])
+                    if profile.get("end_date") and not rec.get("end_date"):
+                        rec["end_date"] = str(profile["end_date"])
+                except Exception:
+                    # Keep list-data if profile is unavailable.
+                    pass
             records.append(rec)
 
     # Basque parliament should have 75 members.

@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 from etl.politicos_es.connectors.cortes_clm import parse_cclm_detail, parse_cclm_list_rows
 from etl.politicos_es.connectors.parlamento_andalucia import parse_pa_list_ids
-from etl.politicos_es.connectors.parlamento_vasco import parse_member_row
+from etl.politicos_es.connectors.parlamento_vasco import parse_member_row, parse_vasco_detail_profile
 
 
 class TestRegionalParserHardening(unittest.TestCase):
@@ -46,6 +46,18 @@ class TestRegionalParserHardening(unittest.TestCase):
         self.assertIsNotNone(row)
         assert row is not None
         self.assertEqual(row["group_name"], "Mixto-Sumar")
+
+    def test_parse_vasco_detail_profile_extracts_group_and_dates(self) -> None:
+        html = """
+        <html><body>
+        <div>Parlamentario del Grupo Grupo Mixto-Sumar (21.05.2024 - )</div>
+        <div>Otra mención Grupo Parlamentario PSOE (01.01.2020 - 31.12.2020)</div>
+        </body></html>
+        """
+        parsed = parse_vasco_detail_profile(html)
+        self.assertEqual(parsed["group_name"], "Mixto-Sumar")
+        self.assertEqual(parsed["start_date"], "2024-05-21")
+        self.assertNotIn("end_date", parsed)
 
     def test_parse_cclm_rows_fallback_without_pristine_p_tags(self) -> None:
         html = """
