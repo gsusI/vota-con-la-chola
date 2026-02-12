@@ -1,0 +1,50 @@
+name: ETL Tracker Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  tracker-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Init DB
+        run: |
+          python3 scripts/ingestar_politicos_es.py init-db --db etl/data/staging/politicos-es.ci-gate.db
+
+      - name: Ingest DONE connectors (strict network)
+        run: |
+          set -euo pipefail
+          for source in $(python3 scripts/e2e_tracker_status.py --tracker docs/etl/e2e-scrape-load-tracker.md --print-done-sources); do
+            echo "Ingesting source: ${source}"
+            python3 scripts/ingestar_politicos_es.py ingest \
+              --db etl/data/staging/politicos-es.ci-gate.db \
+              --source "${source}" \
+              --snapshot-date 2026-02-12 \
+              --strict-network
+          done
+
+      - name: Print tracker status report
+        run: |
+          python3 scripts/e2e_tracker_status.py \
+            --db etl/data/staging/politicos-es.ci-gate.db \
+            --tracker docs/etl/e2e-scrape-load-tracker.md
+
+      - name: Gate DONE connectors with real records
+        run: |
+          python3 scripts/e2e_tracker_status.py \
+            --db etl/data/staging/politicos-es.ci-gate.db \
+            --tracker docs/etl/e2e-scrape-load-tracker.md \
+            --fail-on-done-zero-real
