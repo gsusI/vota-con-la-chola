@@ -42,6 +42,7 @@ just etl-build
 just etl-init
 just etl-samples
 just parl-backfill-member-ids
+just parl-quality-pipeline
 just parl-samples
 just parl-link-votes
 just parl-quality-report
