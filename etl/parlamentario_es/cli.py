@@ -12,6 +12,7 @@ from .db import apply_schema, open_db, seed_sources
 from .linking import link_congreso_votes_to_initiatives, link_senado_votes_to_initiatives
 from .pipeline import VOTE_SOURCE_TO_MANDATE_SOURCE, backfill_vote_member_person_ids, ingest_one_source
 from .quality import compute_vote_quality_kpis, evaluate_vote_quality_gate
+from .publish import write_json_if_changed
 from .registry import get_connectors
 
 
@@ -62,6 +63,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         "--enforce-gate",
         action="store_true",
         help="Salir con codigo != 0 si el gate falla",
+    )
+    p_quality.add_argument(
+        "--json-out",
+        default="",
+        help="Ruta exacta del JSON de salida (si no se da, solo imprime por stdout)",
     )
 
     p_backfill = sub.add_parser(
@@ -210,6 +216,13 @@ def main(argv: list[str] | None = None) -> int:
             conn.close()
 
         print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        if getattr(args, "json_out", ""):
+            out_path = Path(str(args.json_out))
+            changed = write_json_if_changed(out_path, result)
+            if changed:
+                print(f"OK wrote: {out_path}")
+            else:
+                print(f"OK unchanged: {out_path}")
         if bool(args.enforce_gate) and not bool(result.get("gate", {}).get("passed")):
             return 1
         return 0

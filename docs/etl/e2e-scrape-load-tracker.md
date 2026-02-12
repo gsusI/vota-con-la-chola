@@ -127,6 +127,7 @@ Legenda:
   Implementado como camino práctico con `just etl-smoke-e2e`.
 - [x] Publicar snapshot canonico de representantes en `etl/data/published/` (ej: `etl/data/published/representantes-es-2026-02-12.json`).
 - [x] Implementar publish canónico de votaciones en `etl/data/published/` (script: `scripts/publicar_votaciones_es.py`).
+- [x] Implementar publish canónico de procesos de Infoelectoral en `etl/data/published/` (script: `scripts/publicar_infoelectoral_es.py`).
 - [x] Documentar versionado de snapshots y politica de refresh.
 
 ## TODO por conector activo
@@ -225,7 +226,7 @@ Legenda:
 
 ### P0 (siguiente ola, obligatoria para MVP de evidencia)
 
-- [ ] Infoelectoral: completar cobertura (resultados/datasets), publish en `etl/data/published/` y recipe `just` para extraccion live.
+- [ ] Infoelectoral: completar cobertura de resultados y datasets; `publish` y recipe `just` están implementados.
 - [ ] Junta Electoral Central: estado de convocatorias.
 - [ ] BOE API: normativa/convocatorias.
 - [ ] Congreso votaciones.

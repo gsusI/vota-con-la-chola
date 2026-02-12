@@ -76,6 +76,9 @@ etl-publish-representantes:
 etl-publish-votaciones:
   docker compose run --rm --build etl "python3 scripts/publicar_votaciones_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
 
+etl-publish-infoelectoral:
+  docker compose run --rm --build etl "python3 scripts/publicar_infoelectoral_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
+
 parl-extract-congreso-votaciones:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --strict-network"
 
@@ -93,6 +96,9 @@ parl-link-votes:
 
 parl-quality-report:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}}"
+
+parl-quality-report-json:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
 
 parl-quality-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --unmatched-sample-limit 50"
