@@ -58,7 +58,7 @@ def parse_member_row(tr_html: str) -> dict[str, Any] | None:
     start_date = None
     end_date = None
 
-    gm = re.search(r"\bGP\s+([A-Z0-9-]+)\s*\(([^)]*)\)", text, flags=re.I)
+    gm = re.search(r"\bGP\s+([A-Za-zÁÉÍÓÚÑáéíóúñ0-9./ -]+?)\s*\(([^)]*)\)", text, flags=re.I)
     if gm:
         group = normalize_ws(gm.group(1))
         dates = gm.group(2)

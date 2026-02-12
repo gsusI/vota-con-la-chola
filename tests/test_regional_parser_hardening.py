@@ -36,6 +36,17 @@ class TestRegionalParserHardening(unittest.TestCase):
         self.assertEqual(row["start_date"], "2024-05-14")
         self.assertEqual(row["end_date"], "2024-06-16")
 
+    def test_parse_vasco_member_row_handles_mixed_case_group(self) -> None:
+        tr_html = """
+        <tr>
+          <td><a href='/fichas/c_21.html'>Kalea, Iñigo</a> GP Mixto-Sumar (01.11.2024 - )</td>
+        </tr>
+        """
+        row = parse_member_row(tr_html)
+        self.assertIsNotNone(row)
+        assert row is not None
+        self.assertEqual(row["group_name"], "Mixto-Sumar")
+
     def test_parse_cclm_rows_fallback_without_pristine_p_tags(self) -> None:
         html = """
         <table>
