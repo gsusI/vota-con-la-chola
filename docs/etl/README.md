@@ -11,6 +11,7 @@ Estructura minima de `etl/`:
 
 Actualmente:
 - Snapshot de proximas elecciones: `etl/data/published/proximas-elecciones-espana.json`.
+- Snapshot de representantes (JSON, excluye municipal por defecto): `etl/data/published/representantes-es-<snapshot_date>.json` (ver `scripts/publicar_representantes_es.py`).
 - Esquema SQLite ETL: `etl/load/sqlite_schema.sql`.
 - CLI ingesta politicos: `scripts/ingestar_politicos_es.py`.
 - CLI ingesta Infoelectoral (descargas): `scripts/ingestar_infoelectoral_es.py`.
@@ -31,6 +32,7 @@ just etl-init
 just etl-samples
 just etl-stats
 just etl-e2e
+just etl-publish-representantes
 ```
 
 UI de navegacion de grafo (Docker):

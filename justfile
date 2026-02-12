@@ -58,6 +58,9 @@ etl-live:
 etl-elecciones:
   docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}}"
 
+etl-publish-representantes:
+  docker compose run --rm --build etl "python3 scripts/publicar_representantes_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
+
 etl-extract-congreso:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
 
