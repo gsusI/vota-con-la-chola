@@ -12,6 +12,8 @@ class TestSenadoPartyNameNormalization(unittest.TestCase):
     def test_normalize_expands_minor_aliases(self) -> None:
         self.assertEqual(normalize_senado_party_name("INDEP"), "Independientes")
         self.assertEqual(normalize_senado_party_name("ccpv"), "CCPV")
+        self.assertEqual(normalize_senado_party_name("independiente"), "Independientes")
+        self.assertEqual(normalize_senado_party_name("Ciudadanos"), "Ciudadanos")
 
 
 if __name__ == "__main__":

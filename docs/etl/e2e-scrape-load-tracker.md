@@ -146,7 +146,7 @@ Legenda:
 - [x] Enriquecimiento con ficha individual (`tipoFich=1`) para afiliacion politica (`partidoSiglas`/`partidoNombre`).
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 250`) en codigo.
-- [ ] Revisar normalizacion de aliases minoritarios de siglas (`INDEP`, `CCPV`, etc.).
+- [x] Revisar normalizacion de aliases minoritarios de siglas (`INDEP`, `CCPV`, etc.).
 
 ### 3) `europarl_meps` (DONE tecnico, calidad pendiente)
 
