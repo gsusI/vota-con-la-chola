@@ -152,6 +152,24 @@ Guideline:
 - Current behavior: if detail fails, still emits record from group membership data, with `detail_error` populated.
 - See: `etl/politicos_es/connectors/senado.py`.
 
+#### Senado (Parallel Download Learnings)
+- Fast backfill is now implemented via threaded detail enrichment in `etl/parlamentario_es/pipeline.py` and exposed as `--detail-workers` on `backfill-senado-details`.
+- Practical defaults:
+  - `--detail-workers 16` is a good first pass on local network links.
+  - Use `1` when debugging or when upstream blocks concurrency.
+  - Keep `--timeout` low-moderate (e.g. `20-30`) to avoid long-tail stalls.
+- Strong gain case:
+  - Dry-run backfills of `--max-events` batches complete quickly and keep per-event work off main ingest path.
+  - Works well when URLs are reachable and cache-friendly.
+- Critical bottleneck:
+ - Multiple `senado_es` legislaturas return WAF-style `HTTP 403` on detail endpoints; in those cases increasing workers gives no quality gain and just increases failure attempts.
+ - In this environment, legis 10/12/15 hit 403 clusters while others may still work.
+- Speed-up rule of thumb:
+  - Maximize parallelism only for batches with expected high hit-rate.
+  - For blocked ranges, switch to `--senado-detail-dir` (pre-fetched local XML), or pause/fallback with lower worker count and explicit cookies.
+- Data tracking:
+  - Track `detail_failures` by exact `leg=... ses=...: network-detail: HTTPError: HTTP Error 403: Forbidden` patterns in logs/JSON output to identify which legislatures require manual capture or fallback.
+
 #### Asamblea de Ceuta (No Stable IDs)
 - Source is a government web page listing members by group and a Mesa section.
 - No canonical person IDs: connector generates stable-ish IDs from `(term, name, institution)`.
