@@ -427,27 +427,61 @@ def backfill_senado_vote_details(
         }
 
     # Need to enrich records with session detail to recover member votes.
-    from .connectors.senado_votaciones import _enrich_senado_record_with_details
+    from .connectors.senado_votaciones import (
+        _enrich_senado_record_with_details,
+        _load_session_vote_info,
+        _session_vote_file_url_candidates,
+        _to_int,
+    )
 
     detail_host = normalize_ws(str(senado_detail_host or "https://www.senado.es")) or "https://www.senado.es"
     detail_dir = Path(str(senado_detail_dir)) if senado_detail_dir else None
     detail_failures: list[str] = []
-
-    records: list[dict[str, Any]] = []
+    session_cache: dict[str, dict[str, Any]] = {}
+    rows_to_enrich: list[tuple[Any, dict[str, Any]]] = []
+    session_urls: dict[str, tuple[int | None, int | None]] = {}
 
     worker_count = max(1, int(detail_workers or 1))
 
-    def _enrich_row(row: Any) -> tuple[dict[str, Any] | None, list[str]]:
+    for row in rows:
         payload = _parse_raw_payload(row["raw_payload"])
         if not isinstance(payload, dict):
-            return None, []
+            continue
+        rows_to_enrich.append((row, payload))
+        leg = normalize_ws(str(payload.get("legislature") or row["legislature"] or "")) or None
+        session_id = _to_int(payload.get("session_id"))
+        vote_id = _to_int(payload.get("vote_id"))
+        vote_file_url = normalize_ws(str(payload.get("vote_file_url") or ""))
+        for session_url in _session_vote_file_url_candidates(
+            detail_host,
+            leg,
+            session_id,
+            vote_id,
+            vote_file_url,
+        ):
+            session_urls.setdefault(session_url, (session_id, vote_id))
+
+    def _prefetch_session(args: tuple[str, tuple[int | None, int | None]]) -> tuple[str, dict[str, Any]]:
+        session_url, ids = args
+        session_id, vote_id = ids
+        info = _load_session_vote_info(
+            session_url,
+            timeout=timeout,
+            detail_dir=detail_dir,
+            session_id=session_id,
+            vote_id=vote_id,
+            detail_cookie=senado_detail_cookie,
+        )
+        return session_url, info
+
+    def _enrich_row(row: Any) -> tuple[dict[str, Any] | None, list[str]]:
+        row_data, payload = row
         rec = {
-            "detail_url": row["vote_event_id"],
-            "legislature": payload.get("legislature") or row["legislature"],
+            "detail_url": row_data["vote_event_id"],
+            "legislature": payload.get("legislature") or row_data["legislature"],
             "payload": payload,
         }
         failures: list[str] = []
-        session_cache: dict[str, dict[str, Any]] = {}
         try:
             _enrich_senado_record_with_details(
                 rec,
@@ -465,8 +499,27 @@ def backfill_senado_vote_details(
             failures.append(f"unexpected-enrich-error: {type(exc).__name__}: {exc}")
         return rec, failures
 
+    if session_urls:
+        prefetch_items = list(session_urls.items())
+        if worker_count <= 1:
+            for item in prefetch_items:
+                session_url, info = _prefetch_session(item)
+                session_cache[session_url] = info
+                err = normalize_ws(str(info.get("error") or ""))
+                if err:
+                    detail_failures.append(f"detail-prefetch {session_url}: {err}")
+        else:
+            with ThreadPoolExecutor(max_workers=worker_count) as prefetch_executor:
+                for session_url, info in prefetch_executor.map(_prefetch_session, prefetch_items):
+                    session_cache[session_url] = info
+                    err = normalize_ws(str(info.get("error") or ""))
+                    if err:
+                        detail_failures.append(f"detail-prefetch {session_url}: {err}")
+
+    records: list[dict[str, Any]] = []
+
     if worker_count <= 1:
-        for row in rows:
+        for row in rows_to_enrich:
             rec, row_failures = _enrich_row(row)
             if rec is None:
                 continue
@@ -474,7 +527,7 @@ def backfill_senado_vote_details(
             detail_failures.extend(row_failures)
     else:
         with ThreadPoolExecutor(max_workers=worker_count) as executor:
-            for rec, row_failures in executor.map(_enrich_row, rows):
+            for rec, row_failures in executor.map(_enrich_row, rows_to_enrich):
                 if rec is None:
                     continue
                 records.append(rec)

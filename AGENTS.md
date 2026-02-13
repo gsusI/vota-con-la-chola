@@ -167,6 +167,9 @@ Guideline:
 - Speed-up rule of thumb:
   - Maximize parallelism only for batches with expected high hit-rate.
   - For blocked ranges, switch to `--senado-detail-dir` (pre-fetched local XML), or pause/fallback with lower worker count and explicit cookies.
+- Operational detail:
+  - Backfill now deduplicates `ses_*.xml` URLs and performs a parallel prefetch pass before per-row enrichment, so one successful session fetch can feed multiple vote rows in the same batch.
+  - The warm cache is read-only during row enrichment, reducing duplicate network calls and lowering total HTTP churn when many rows share a session context.
 - Data tracking:
   - Track `detail_failures` by exact `leg=... ses=...: network-detail: HTTPError: HTTP Error 403: Forbidden` patterns in logs/JSON output to identify which legislatures require manual capture or fallback.
 

@@ -384,6 +384,56 @@ def _find_local_session_xml(
     return None
 
 
+def _load_session_vote_info(
+    session_url: str,
+    *,
+    timeout: int,
+    detail_dir: Path | None,
+    session_id: int | None,
+    vote_id: int | None,
+    detail_cookie: str | None,
+) -> dict[str, Any]:
+    session_info: dict[str, Any] = {"ok": False, "votes": [], "error": None, "source": None}
+    if not session_url:
+        session_info["error"] = "network-detail: empty-session-url"
+        return session_info
+
+    if detail_dir is not None:
+        local_path = _find_local_session_xml(detail_dir, session_id or 0, vote_id)
+        if local_path is not None:
+            try:
+                parsed = _parse_sesion_vote_xml(local_path.read_bytes())
+                return {
+                    "ok": True,
+                    "votes": parsed["votes"],
+                    "session_date": parsed["session_date"],
+                    "error": None,
+                    "source": str(local_path),
+                }
+            except Exception as exc:  # noqa: BLE001
+                session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
+
+    try:
+        headers = {"Accept": "application/xml,text/xml,*/*"}
+        cookie = (detail_cookie or "").strip()
+        if cookie:
+            headers["Cookie"] = cookie
+        session_bytes, ct = http_get_bytes(session_url, timeout, headers=headers)
+        if ct and "xml" not in ct.lower():
+            raise RuntimeError(f"content_type inesperado: {ct}")
+        parsed = _parse_sesion_vote_xml(session_bytes)
+        return {
+            "ok": True,
+            "votes": parsed["votes"],
+            "session_date": parsed["session_date"],
+            "error": None,
+            "source": session_url,
+        }
+    except Exception as exc:  # noqa: BLE001
+        session_info["error"] = f"network-detail: {type(exc).__name__}: {exc}"
+        return session_info
+
+
 def _enrich_senado_record_with_details(
     rec: dict[str, Any],
     *,
@@ -420,37 +470,14 @@ def _enrich_senado_record_with_details(
             continue
         session_info = session_cache.get(session_url)
         if session_info is None:
-            session_info = {"ok": False, "votes": [], "error": None, "source": None}
-            local_path = _find_local_session_xml(detail_dir, session_id, vote_id) if detail_dir else None
-            if local_path is not None:
-                try:
-                    parsed = _parse_sesion_vote_xml(local_path.read_bytes())
-                    session_info = {
-                        "ok": True,
-                        "votes": parsed["votes"],
-                        "session_date": parsed["session_date"],
-                        "source": str(local_path),
-                    }
-                except Exception as exc:  # noqa: BLE001
-                    session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
-            else:
-                try:
-                    headers = {"Accept": "application/xml,text/xml,*/*"}
-                    cookie = (detail_cookie or "").strip()
-                    if cookie:
-                        headers["Cookie"] = cookie
-                    session_bytes, ct = http_get_bytes(session_url, timeout, headers=headers)
-                    if ct and "xml" not in ct.lower():
-                        raise RuntimeError(f"content_type inesperado: {ct}")
-                    parsed = _parse_sesion_vote_xml(session_bytes)
-                    session_info = {
-                        "ok": True,
-                        "votes": parsed["votes"],
-                        "session_date": parsed["session_date"],
-                        "source": session_url,
-                    }
-                except Exception as exc:  # noqa: BLE001
-                    session_info["error"] = f"network-detail: {type(exc).__name__}: {exc}"
+            session_info = _load_session_vote_info(
+                session_url,
+                timeout=timeout,
+                detail_dir=detail_dir,
+                session_id=session_id,
+                vote_id=vote_id,
+                detail_cookie=detail_cookie,
+            )
             session_cache[session_url] = session_info
 
         if session_info.get("ok"):
