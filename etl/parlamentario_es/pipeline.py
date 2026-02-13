@@ -340,6 +340,193 @@ def backfill_vote_member_person_ids(
     }
 
 
+def backfill_senado_vote_details(
+    conn: sqlite3.Connection,
+    *,
+    timeout: int,
+    snapshot_date: str | None,
+    limit: int | None = None,
+    legislature_filter: tuple[str, ...] | list[str] | None = None,
+    vote_event_ids: tuple[str, ...] | list[str] | None = None,
+    senado_detail_dir: str | None = None,
+    senado_detail_host: str | None = None,
+    senado_detail_cookie: str | None = None,
+    senado_skip_details: bool = False,
+    dry_run: bool = False,
+) -> dict[str, Any]:
+    if limit is not None and limit <= 0:
+        raise ValueError("max-events debe ser > 0")
+
+    selected_legislatures: list[str] = []
+    seen_legislatures: set[str] = set()
+    for value in legislature_filter or ():
+        txt = normalize_ws(str(value))
+        if not txt or txt in seen_legislatures:
+            continue
+        seen_legislatures.add(txt)
+        selected_legislatures.append(txt)
+
+    selected_event_ids: list[str] = []
+    seen_event_ids: set[str] = set()
+    for value in vote_event_ids or ():
+        txt = normalize_ws(str(value))
+        if not txt or txt in seen_event_ids:
+            continue
+        seen_event_ids.add(txt)
+        selected_event_ids.append(txt)
+
+    query = """
+    SELECT e.vote_event_id, e.legislature, sr.raw_payload
+    FROM parl_vote_events e
+    LEFT JOIN source_records sr ON sr.source_record_pk = e.source_record_pk
+    WHERE e.source_id = 'senado_votaciones'
+      AND NOT EXISTS (
+        SELECT 1 FROM parl_vote_member_votes mv
+        WHERE mv.vote_event_id = e.vote_event_id
+      )
+    """
+    params: list[Any] = []
+    if selected_legislatures:
+        placeholders = ",".join("?" for _ in selected_legislatures)
+        query += f" AND e.legislature IN ({placeholders})"
+        params.extend(selected_legislatures)
+    if selected_event_ids:
+        placeholders = ",".join("?" for _ in selected_event_ids)
+        query += f" AND e.vote_event_id IN ({placeholders})"
+        params.extend(selected_event_ids)
+
+    rows = conn.execute((query + " ORDER BY e.vote_event_id"), tuple(params)).fetchall()
+    if limit is not None:
+        rows = rows[:int(limit)]
+
+    if senado_skip_details:
+        # Preserve existing payload as-is if detail enrichment is disabled.
+        records = [{"payload": _parse_raw_payload(r["raw_payload"]), "legislature": r["legislature"]} for r in rows]
+        records_with_votes = [r for r in records if isinstance(r.get("payload"), dict) and r["payload"].get("member_votes")]
+        return {
+            "source_id": "senado_votaciones",
+            "dry_run": bool(dry_run),
+            "events_considered": len(rows),
+            "events_with_payload": len(records),
+            "events_without_payload": sum(1 for r in records if not isinstance(r.get("payload"), dict)),
+            "events_with_member_votes": len(records_with_votes),
+            "events_without_member_votes": len(records) - len(records_with_votes),
+            "events_reingested": 0 if dry_run else 0,
+            "member_votes_loaded": 0,
+            "errors_summary": {},
+            "detail_failures": [],
+            "would_reingest": 0,
+        }
+
+    # Need to enrich records with session detail to recover member votes.
+    from .connectors.senado_votaciones import _enrich_senado_record_with_details
+
+    detail_host = normalize_ws(str(senado_detail_host or "https://www.senado.es")) or "https://www.senado.es"
+    detail_dir = Path(str(senado_detail_dir)) if senado_detail_dir else None
+    session_cache: dict[str, dict[str, Any]] = {}
+    detail_failures: list[str] = []
+
+    records: list[dict[str, Any]] = []
+    for row in rows:
+        payload = _parse_raw_payload(row["raw_payload"])
+        if not isinstance(payload, dict):
+            continue
+        rec = {
+            "detail_url": row["vote_event_id"],
+            "legislature": payload.get("legislature") or row["legislature"],
+            "payload": payload,
+        }
+        _enrich_senado_record_with_details(
+            rec,
+            timeout=timeout,
+            session_cache=session_cache,
+            detail_dir=detail_dir,
+            detail_host=detail_host,
+            detail_cookie=senado_detail_cookie,
+            detail_failures=detail_failures,
+        )
+        records.append(rec)
+
+    records_with_votes = [r for r in records if isinstance(r.get("payload"), dict) and r["payload"].get("member_votes")]
+
+    events_by_error: dict[str, int] = {}
+    for rec in records_with_votes:
+        payload = rec.get("payload") or {}
+        if not isinstance(payload, dict):
+            continue
+        err = normalize_ws(str(payload.get("detail_error") or ""))
+        if err:
+            events_by_error[err] = events_by_error.get(err, 0) + 1
+
+    if dry_run:
+        return {
+            "source_id": "senado_votaciones",
+            "dry_run": True,
+            "events_considered": len(rows),
+            "events_with_payload": len(records),
+            "events_without_payload": len(rows) - len(records),
+            "events_with_member_votes": len(records_with_votes),
+            "events_without_member_votes": len(records) - len(records_with_votes),
+            "events_reingested": 0,
+            "member_votes_loaded": 0,
+            "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
+            "detail_failures": sorted(set(detail_failures)),
+            "would_reingest": len(records_with_votes),
+        }
+
+    if not records_with_votes:
+        return {
+            "source_id": "senado_votaciones",
+            "dry_run": False,
+            "events_considered": len(rows),
+            "events_with_payload": len(records),
+            "events_without_payload": len(rows) - len(records),
+            "events_with_member_votes": 0,
+            "events_without_member_votes": len(records),
+            "events_reingested": 0,
+            "member_votes_loaded": 0,
+            "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
+            "detail_failures": sorted(set(detail_failures)),
+            "would_reingest": 0,
+        }
+
+    now_iso = now_utc_iso()
+    _, events_reingested, member_votes_loaded = _ingest_senado_votaciones(
+        conn,
+        extracted_records=records_with_votes,
+        source_id="senado_votaciones",
+        snapshot_date=snapshot_date,
+        now_iso=now_iso,
+    )
+    conn.commit()
+
+    return {
+        "source_id": "senado_votaciones",
+        "dry_run": False,
+        "events_considered": len(rows),
+        "events_with_payload": len(records),
+        "events_without_payload": len(rows) - len(records),
+        "events_with_member_votes": len(records_with_votes),
+        "events_without_member_votes": len(records) - len(records_with_votes),
+        "events_reingested": int(events_reingested),
+        "member_votes_loaded": int(member_votes_loaded),
+        "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
+        "detail_failures": sorted(set(detail_failures)),
+    }
+
+
+def _parse_raw_payload(raw_payload: Any) -> dict[str, Any] | None:
+    if not raw_payload:
+        return None
+    if isinstance(raw_payload, dict):
+        return raw_payload
+    try:
+        parsed = json.loads(str(raw_payload))
+    except Exception:  # noqa: BLE001
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
 def _load_mandate_name_index(
     conn: sqlite3.Connection,
     mandate_source_id: str,

@@ -10,7 +10,12 @@ from typing import Any
 from .config import DEFAULT_DB, DEFAULT_RAW_DIR, DEFAULT_SCHEMA, DEFAULT_TIMEOUT, SOURCE_CONFIG
 from .db import apply_schema, open_db, seed_sources
 from .linking import link_congreso_votes_to_initiatives, link_senado_votes_to_initiatives
-from .pipeline import VOTE_SOURCE_TO_MANDATE_SOURCE, backfill_vote_member_person_ids, ingest_one_source
+from .pipeline import (
+    VOTE_SOURCE_TO_MANDATE_SOURCE,
+    backfill_senado_vote_details,
+    backfill_vote_member_person_ids,
+    ingest_one_source,
+)
 from .quality import (
     compute_initiative_quality_kpis,
     compute_vote_quality_kpis,
@@ -121,6 +126,29 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         type=int,
         default=0,
         help="Limita ejemplos de votos no resueltos mostrados en salida JSON (0 para desactivar)",
+    )
+    p_backfill_senado = sub.add_parser(
+        "backfill-senado-details",
+        help="Rellenar votos nominales de votaciones del Senado (sin member_votes)",
+    )
+    p_backfill_senado.add_argument("--db", default=str(DEFAULT_DB))
+    p_backfill_senado.add_argument("--timeout", type=int, default=int(DEFAULT_TIMEOUT))
+    p_backfill_senado.add_argument("--snapshot-date", default=None, help="YYYY-MM-DD")
+    p_backfill_senado.add_argument("--max-events", type=int, default=None, help="Límite de eventos a reintentar")
+    p_backfill_senado.add_argument("--legislature", default=None, help="Filtro por legislatura (ej: 15,14)")
+    p_backfill_senado.add_argument("--vote-event-ids", default=None, help="CSV de vote_event_id para limitar")
+    p_backfill_senado.add_argument("--dry-run", action="store_true", help="Simula cambios sin reescribir DB")
+    p_backfill_senado.add_argument("--senado-detail-dir", default=None, help="Dir local con ses_<n>.xml para enriquecer votos")
+    p_backfill_senado.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga detalle Senado (opcional)")
+    p_backfill_senado.add_argument(
+        "--senado-detail-host",
+        default=None,
+        help="Host base para ses_<n>.xml (default https://www.senado.es)",
+    )
+    p_backfill_senado.add_argument(
+        "--senado-skip-details",
+        action="store_true",
+        help="No intentar enriquecimiento de detalle (no agregará member_votes)",
     )
 
     return p.parse_args(argv)
@@ -354,6 +382,38 @@ def main(argv: list[str] | None = None) -> int:
                 dry_run=bool(args.dry_run),
                 batch_size=batch_size,
                 unmatched_sample_limit=unmatched_sample_limit,
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-senado-details":
+        if args.max_events is not None:
+            max_events = int(args.max_events)
+            if max_events <= 0:
+                raise SystemExit("max-events debe ser > 0")
+        else:
+            max_events = None
+
+        legislation = _parse_source_ids(str(args.legislature))
+        event_ids = _parse_source_ids(str(args.vote_event_ids))
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_senado_vote_details(
+                conn,
+                timeout=int(args.timeout),
+                snapshot_date=args.snapshot_date,
+                limit=max_events,
+                legislature_filter=legislation,
+                vote_event_ids=event_ids,
+                senado_detail_dir=args.senado_detail_dir,
+                senado_detail_host=args.senado_detail_host,
+                senado_detail_cookie=args.senado_detail_cookie,
+                senado_skip_details=bool(args.senado_skip_details),
+                dry_run=bool(args.dry_run),
             )
         finally:
             conn.close()
