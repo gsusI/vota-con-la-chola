@@ -144,7 +144,8 @@ Configured representative sources (`etl/politicos_es/config.py`): `23`
 - Next immediate action: focus on network-backed refresh for the 4 `DONE_ZERO_REAL` items only after deciding whether these should be treated as hard blockers or explicit "sample-only" fallback for this snapshot.
 - Additional note (latest refresh):
   - A live retry on `cortes_aragon_diputados` was attempted and ended with SSL timeout, then fell back to sample (`network-error-fallback`).
-  - Tracker status still shows `cortes_aragon_diputados`, `corts_valencianes_diputats`, `infoelectoral_descargas`, `infoelectoral_procesos` as `DONE_ZERO_REAL`.
+  - A live retry on `infoelectoral_descargas` succeeded with `263` rows (`network-with-partial-errors`), so this source is no longer `DONE_ZERO_REAL`.
+  - Tracker status now shows `cortes_aragon_diputados`, `corts_valencianes_diputats`, `infoelectoral_procesos` as `DONE_ZERO_REAL`.
 
 ## Quick runbook to continue
 
