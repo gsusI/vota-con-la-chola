@@ -92,20 +92,22 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
 
 - Fecha referencia interna: `2026-02-13`.
 - KPIs con `quality-report --source-ids congreso_votaciones,senado_votaciones`:
-  - `events_with_date_pct: 0.1862896` (objetivo: `>= 0.95`) ❌
-  - `events_with_totals_pct: 0.1862896` (objetivo: `>= 0.95`) ❌
+  - `events_with_date_pct: 0.2078835` (objetivo: `>= 0.95`) ❌
+  - `events_with_totals_pct: 0.2078835` (objetivo: `>= 0.95`) ❌
   - `events_with_theme_pct: 0.0469580` (objetivo: `>= 0.95`) ❌
-  - `member_votes_with_person_id_pct: 0.9030027` ✅
+  - `member_votes_with_person_id_pct: 0.8161483` ❌
 - Cobertura residual de `senado_votaciones` sin detalle (evento sin fecha/totales):
   - `10: 159`
   - `12: 530`
-  - `14: 4049`
+  - `14: 3929`
   - `15: 4`
 - Últimos avances ejecutados:
   - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #1).
   - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #2).
   - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #3).
   - Residual tras estas pasadas (`senado_votaciones` sin member_votes): `14: 3994` (de 4049).
+  - Lote automatizado (12x ejecutado en bucle): `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=60`, `member_votes_loaded=15360`.
+  - Residual tras este lote: `14: 3929`.
   - `backfill-senado-details --legislature 11 --max-events 20` => `events_reingested=3`, `member_votes_loaded=795`.
   - `backfill-senado-details --legislature 10 --max-events 300` => `events_reingested=163`, `member_votes_loaded=5191`.
   - `backfill-senado-details --legislature 12 --max-events 300` => `events_reingested=293`, `member_votes_loaded=5167`.
