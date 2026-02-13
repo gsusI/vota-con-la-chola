@@ -102,6 +102,10 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - `14: 4049`
   - `15: 4`
 - Últimos avances ejecutados:
+  - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #1).
+  - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #2).
+  - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #3).
+  - Residual tras estas pasadas (`senado_votaciones` sin member_votes): `14: 3994` (de 4049).
   - `backfill-senado-details --legislature 11 --max-events 20` => `events_reingested=3`, `member_votes_loaded=795`.
   - `backfill-senado-details --legislature 10 --max-events 300` => `events_reingested=163`, `member_votes_loaded=5191`.
   - `backfill-senado-details --legislature 12 --max-events 300` => `events_reingested=293`, `member_votes_loaded=5167`.
