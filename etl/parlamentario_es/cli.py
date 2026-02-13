@@ -16,6 +16,7 @@ from .pipeline import (
     backfill_vote_member_person_ids,
     ingest_one_source,
 )
+from etl.politicos_es.util import normalize_ws
 from .quality import (
     compute_initiative_quality_kpis,
     compute_vote_quality_kpis,
