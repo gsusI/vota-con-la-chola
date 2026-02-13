@@ -1,0 +1,258 @@
+{
+  "fecha_referencia": "2026-02-12",
+  "filtros": {
+    "source_default_urls": {
+      "infoelectoral_descargas": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
+      "infoelectoral_procesos": "https://infoelectoral.interior.gob.es/min/procesos/"
+    },
+    "source_ids": [
+      "infoelectoral_descargas",
+      "infoelectoral_procesos"
+    ],
+    "source_names": {
+      "infoelectoral_descargas": "Infoelectoral - Area de descargas (convocatorias + archivos)",
+      "infoelectoral_procesos": "Infoelectoral - Procesos electorales celebrados (datos/resultados)"
+    }
+  },
+  "generado_en": "2026-02-13T06:37:57+00:00",
+  "procesos": [
+    {
+      "ambito": "Nacional",
+      "detalle_url": "https://infoelectoral.interior.gob.es/min/procesos/electoral-2026-05-26",
+      "estado": "cerrado",
+      "fecha": "2026-05-26",
+      "nombre": "Procesos Electorales 2026",
+      "proceso_id": "electoral:2026:municipales",
+      "resultados": [
+        {
+          "fecha": "2026-06-16",
+          "formato": "ZIP",
+          "nombre": "Resultado agregado municipal",
+          "proceso_dataset_id": "electoral:2026:municipales:dataset_zip",
+          "source": {
+            "source_hash": "106c988a351f24741926d8bdb1ce7f2f3d3b2b9e3142d3a32ad074bb2b161cd9",
+            "source_id": "infoelectoral_procesos",
+            "source_payload": {
+              "fecha": "2026-06-16",
+              "formato": "ZIP",
+              "kind": "proceso_resultado",
+              "nombre": "Resultado agregado municipal",
+              "proceso_dataset_id": "electoral:2026:municipales:dataset_zip",
+              "proceso_id": "electoral:2026:municipales",
+              "tipo_dato": "zip",
+              "url": "https://infoelectoral.interior.gob.es/min/resultados/municipales-2026.zip"
+            },
+            "source_record_id": "pres:electoral:2026:municipales:dataset_zip",
+            "source_record_pk": 84959,
+            "source_snapshot_date": "2026-02-12"
+          },
+          "tipo_dato": "zip",
+          "url": "https://infoelectoral.interior.gob.es/min/resultados/municipales-2026.zip"
+        },
+        {
+          "fecha": "2026-06-15",
+          "formato": "CSV",
+          "nombre": "Resultados oficiales municipales",
+          "proceso_dataset_id": "electoral:2026:municipales:resultados_csv",
+          "source": {
+            "source_hash": "551f6837133f8567e84ffde53a80abc017dd717dfafe5dc7c8757e2b7dea478b",
+            "source_id": "infoelectoral_procesos",
+            "source_payload": {
+              "fecha": "2026-06-15",
+              "formato": "CSV",
+              "kind": "proceso_resultado",
+              "nombre": "Resultados oficiales municipales",
+              "proceso_dataset_id": "electoral:2026:municipales:resultados_csv",
+              "proceso_id": "electoral:2026:municipales",
+              "tipo_dato": "csv",
+              "url": "https://infoelectoral.interior.gob.es/min/resultados/municipales-2026.csv"
+            },
+            "source_record_id": "pres:electoral:2026:municipales:resultados_csv",
+            "source_record_pk": 84958,
+            "source_snapshot_date": "2026-02-12"
+          },
+          "tipo_dato": "csv",
+          "url": "https://infoelectoral.interior.gob.es/min/resultados/municipales-2026.csv"
+        }
+      ],
+      "source": {
+        "source_hash": "e024f2af804616bfcff1946266e9e19497d9f556a1a2a8c890f92d4111d05805",
+        "source_id": "infoelectoral_procesos",
+        "source_payload": {
+          "ambito": "Nacional",
+          "detalle_url": "https://infoelectoral.interior.gob.es/min/procesos/electoral-2026-05-26",
+          "estado": "cerrado",
+          "fecha": "2026-05-26",
+          "kind": "proceso",
+          "nombre": "Procesos Electorales 2026",
+          "proceso_id": "electoral:2026:municipales",
+          "tipo": "Autonómico"
+        },
+        "source_record_id": "proc:electoral:2026:municipales",
+        "source_record_pk": 84956,
+        "source_snapshot_date": "2026-02-12"
+      },
+      "tipo": "Autonómico"
+    },
+    {
+      "ambito": "Europa",
+      "detalle_url": "https://infoelectoral.interior.gob.es/min/procesos/electoral-2024-eu",
+      "estado": "cerrado",
+      "fecha": "2024-06-09",
+      "nombre": "Elecciones al Parlamento Europeo 2024",
+      "proceso_id": "electoral:2024:europ",
+      "resultados": [
+        {
+          "fecha": "2024-06-10",
+          "formato": "CSV",
+          "nombre": "Boletín de resultados europeos",
+          "proceso_dataset_id": "electoral:2024:europ:resultados_csv",
+          "source": {
+            "source_hash": "89755c577a59864cf747b6cda1a2189030af1b68a4b216f1c6291553024b497c",
+            "source_id": "infoelectoral_procesos",
+            "source_payload": {
+              "fecha": "2024-06-10",
+              "formato": "CSV",
+              "kind": "proceso_resultado",
+              "nombre": "Boletín de resultados europeos",
+              "proceso_dataset_id": "electoral:2024:europ:resultados_csv",
+              "proceso_id": "electoral:2024:europ",
+              "tipo_dato": "csv",
+              "url": "https://infoelectoral.interior.gob.es/min/resultados/europ-2024.csv"
+            },
+            "source_record_id": "pres:electoral:2024:europ:resultados_csv",
+            "source_record_pk": 84960,
+            "source_snapshot_date": "2026-02-12"
+          },
+          "tipo_dato": "csv",
+          "url": "https://infoelectoral.interior.gob.es/min/resultados/europ-2024.csv"
+        }
+      ],
+      "source": {
+        "source_hash": "04c9b855190642f75959c0d547c11bd2a989cc2e5fa8f27b15d4eddf9b806f15",
+        "source_id": "infoelectoral_procesos",
+        "source_payload": {
+          "ambito": "Europa",
+          "detalle_url": "https://infoelectoral.interior.gob.es/min/procesos/electoral-2024-eu",
+          "estado": "cerrado",
+          "fecha": "2024-06-09",
+          "kind": "proceso",
+          "nombre": "Elecciones al Parlamento Europeo 2024",
+          "proceso_id": "electoral:2024:europ",
+          "tipo": "Europeo"
+        },
+        "source_record_id": "proc:electoral:2024:europ",
+        "source_record_pk": 84957,
+        "source_snapshot_date": "2026-02-12"
+      },
+      "tipo": "Europeo"
+    }
+  ],
+  "tipos": [
+    {
+      "convocatorias": [
+        {
+          "ambito_territorio": "Nacional",
+          "archivos": [
+            {
+              "ambito": null,
+              "archivo_id": "tipo:2|conv:202307|doc:02202307_MESA.zip",
+              "descripcion": "23 de Julio de 2023 (Mesa)",
+              "download_url": "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/02202307_MESA.zip",
+              "id_convocatoria": "202307",
+              "nombre_doc": "02202307_MESA.zip",
+              "source": {
+                "source_hash": "521484a5fb321581f9b5d1ae3bc8f944807496265fdf901f201d77dd2e5960bb",
+                "source_id": "infoelectoral_descargas",
+                "source_payload": {
+                  "ambito": null,
+                  "archivo_id": "tipo:2|conv:202307|doc:02202307_MESA.zip",
+                  "convocatoria_id": "tipo:2|conv:202307",
+                  "descripcion": "23 de Julio de 2023 (Mesa)",
+                  "download_url": "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/02202307_MESA.zip",
+                  "id_convocatoria": "202307",
+                  "kind": "archivo_extraccion",
+                  "nombre_doc": "02202307_MESA.zip",
+                  "tipo_convocatoria": "2"
+                },
+                "source_record_id": "arch:tipo:2|conv:202307|doc:02202307_MESA.zip",
+                "source_record_pk": 84963,
+                "source_snapshot_date": "2026-02-12"
+              },
+              "tipo_convocatoria": "2"
+            },
+            {
+              "ambito": null,
+              "archivo_id": "tipo:2|conv:202307|doc:02202307_MUNI.zip",
+              "descripcion": "23 de Julio de 2023 (Municipio)",
+              "download_url": "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/02202307_MUNI.zip",
+              "id_convocatoria": "202307",
+              "nombre_doc": "02202307_MUNI.zip",
+              "source": {
+                "source_hash": "da83254341dad9e6c87609f4a91a2b06b41bac94aea791aefb49ac9255dc1084",
+                "source_id": "infoelectoral_descargas",
+                "source_payload": {
+                  "ambito": null,
+                  "archivo_id": "tipo:2|conv:202307|doc:02202307_MUNI.zip",
+                  "convocatoria_id": "tipo:2|conv:202307",
+                  "descripcion": "23 de Julio de 2023 (Municipio)",
+                  "download_url": "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/02202307_MUNI.zip",
+                  "id_convocatoria": "202307",
+                  "kind": "archivo_extraccion",
+                  "nombre_doc": "02202307_MUNI.zip",
+                  "tipo_convocatoria": "2"
+                },
+                "source_record_id": "arch:tipo:2|conv:202307|doc:02202307_MUNI.zip",
+                "source_record_pk": 84964,
+                "source_snapshot_date": "2026-02-12"
+              },
+              "tipo_convocatoria": "2"
+            }
+          ],
+          "codigo": "202307",
+          "convocatoria_id": "tipo:2|conv:202307",
+          "descripcion": "Julio 2023",
+          "fecha": "202307",
+          "source": {
+            "source_hash": "4d75fa823bee3505b012c9c695e0a1f00ee4a15e0048ddbc83cef89a21014194",
+            "source_id": "infoelectoral_descargas",
+            "source_payload": {
+              "ambito_territorio": "Nacional",
+              "cod": "202307",
+              "convocatoria_id": "tipo:2|conv:202307",
+              "descripcion": "Julio 2023",
+              "fecha": "202307",
+              "kind": "convocatoria",
+              "tipo_convocatoria": "2"
+            },
+            "source_record_id": "conv:tipo:2|conv:202307",
+            "source_record_pk": 84962,
+            "source_snapshot_date": "2026-02-12"
+          }
+        }
+      ],
+      "descripcion": "Congreso",
+      "source": {
+        "source_hash": "8a16f47e8a4482176cdd255810a1b42437526b12659021181c2f0c1e09886287",
+        "source_id": "infoelectoral_descargas",
+        "source_payload": {
+          "descripcion": "Congreso",
+          "kind": "tipo_convocatoria",
+          "tipo_convocatoria": "2"
+        },
+        "source_record_id": "tipo:2",
+        "source_record_pk": 84961,
+        "source_snapshot_date": "2026-02-12"
+      },
+      "tipo_convocatoria": "2"
+    }
+  ],
+  "totales": {
+    "archivos_extraccion": 2,
+    "convocatorias": 1,
+    "procesos": 2,
+    "resultados": 3,
+    "source_ids": 2,
+    "tipos": 1
+  }
+}

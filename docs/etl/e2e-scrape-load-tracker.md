@@ -104,7 +104,7 @@ Legenda:
 | Representantes y mandatos (Parlamento de Andalucia) | Autonomico | Parlamento de Andalucia (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de Navarra) | Autonomico | Parlamento de Navarra: parlamentarios forales (fichas HTML) | PARTIAL | Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>` |
 | Representantes y mandatos (Parlamento Vasco) | Autonomico | Parlamento Vasco (listado ACT) | DONE | Hardening de parsing y umbral minimo |
-| Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | PARTIAL | Ingesta del catalogo de descargas (tipos/convocatorias/archivos) en SQLite; falta publish y cobertura de resultados |
+| Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | DONE | Hardening de parsing de campos opcionales en procesos/resultados |
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
 | Marco legal electoral | Legal | BOE API | TODO | Falta conector legal y modelo de documentos |
 | Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; publish canónico disponible (`scripts/publicar_votaciones_es.py`), pendiente corrida completa + KPIs |
@@ -226,7 +226,7 @@ Legenda:
 
 ### P0 (siguiente ola, obligatoria para MVP de evidencia)
 
-- [ ] Infoelectoral: completar cobertura de resultados y datasets; `publish` y recipe `just` están implementados.
+- [x] Infoelectoral: completar cobertura de resultados y datasets; publish y recipe `just` implementados; `source` y `resultados` incluidos en `infoelectoral-es-YYYY-MM-DD.json`.
 - [ ] Junta Electoral Central: estado de convocatorias.
 - [ ] BOE API: normativa/convocatorias.
 - [ ] Congreso votaciones.
