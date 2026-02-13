@@ -167,6 +167,8 @@ Guideline:
 - Speed-up rule of thumb:
   - Maximize parallelism only for batches with expected high hit-rate.
   - For blocked ranges, switch to `--senado-detail-dir` (pre-fetched local XML), or pause/fallback with lower worker count and explicit cookies.
+- Current backfill guard:
+  - In blocked scenarios, prefetch now probes one remote detail URL first; if it returns `HTTP 403`, the remaining remote detail URLs are marked as blocked in-cache without additional HTTP calls.
 - Operational detail:
   - Backfill now deduplicates `ses_*.xml` URLs and performs a parallel prefetch pass before per-row enrichment, so one successful session fetch can feed multiple vote rows in the same batch.
   - The warm cache is read-only during row enrichment, reducing duplicate network calls and lowering total HTTP churn when many rows share a session context.

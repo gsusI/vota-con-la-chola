@@ -501,20 +501,45 @@ def backfill_senado_vote_details(
 
     if session_urls:
         prefetch_items = list(session_urls.items())
-        if worker_count <= 1:
-            for item in prefetch_items:
+        blocked_error: str | None = None
+        start_idx = 0
+        if not detail_dir and prefetch_items:
+            # If the first remote prefetch returns a hard 403, avoid hammering the host.
+            first_session_url, first_ids = prefetch_items[0]
+            session_url, info = _prefetch_session((first_session_url, first_ids))
+            session_cache[session_url] = info
+            err = normalize_ws(str(info.get("error") or ""))
+            if err:
+                detail_failures.append(f"detail-prefetch {session_url}: {err}")
+                if "HTTPError: HTTP Error 403: Forbidden" in err:
+                    blocked_error = err
+            start_idx = 1
+
+        if blocked_error is not None:
+            for session_url, _ids in prefetch_items[start_idx:]:
+                session_cache[session_url] = {
+                    "ok": False,
+                    "votes": [],
+                    "error": blocked_error,
+                    "source": None,
+                }
+                detail_failures.append(f"detail-prefetch {session_url}: {blocked_error}")
+        elif worker_count <= 1:
+            for item in prefetch_items[start_idx:]:
                 session_url, info = _prefetch_session(item)
                 session_cache[session_url] = info
                 err = normalize_ws(str(info.get("error") or ""))
                 if err:
                     detail_failures.append(f"detail-prefetch {session_url}: {err}")
         else:
-            with ThreadPoolExecutor(max_workers=worker_count) as prefetch_executor:
-                for session_url, info in prefetch_executor.map(_prefetch_session, prefetch_items):
-                    session_cache[session_url] = info
-                    err = normalize_ws(str(info.get("error") or ""))
-                    if err:
-                        detail_failures.append(f"detail-prefetch {session_url}: {err}")
+            remaining = prefetch_items[start_idx:]
+            if remaining:
+                with ThreadPoolExecutor(max_workers=worker_count) as prefetch_executor:
+                    for session_url, info in prefetch_executor.map(_prefetch_session, remaining):
+                        session_cache[session_url] = info
+                        err = normalize_ws(str(info.get("error") or ""))
+                        if err:
+                            detail_failures.append(f"detail-prefetch {session_url}: {err}")
 
     records: list[dict[str, Any]] = []
 
