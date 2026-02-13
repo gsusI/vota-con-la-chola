@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 import json
 import re
@@ -354,6 +355,7 @@ def backfill_senado_vote_details(
     senado_detail_cookie: str | None = None,
     senado_skip_details: bool = False,
     dry_run: bool = False,
+    detail_workers: int = 1,
 ) -> dict[str, Any]:
     if limit is not None and limit <= 0:
         raise ValueError("max-events debe ser > 0")
@@ -429,29 +431,54 @@ def backfill_senado_vote_details(
 
     detail_host = normalize_ws(str(senado_detail_host or "https://www.senado.es")) or "https://www.senado.es"
     detail_dir = Path(str(senado_detail_dir)) if senado_detail_dir else None
-    session_cache: dict[str, dict[str, Any]] = {}
     detail_failures: list[str] = []
 
     records: list[dict[str, Any]] = []
-    for row in rows:
+
+    worker_count = max(1, int(detail_workers or 1))
+
+    def _enrich_row(row: Any) -> tuple[dict[str, Any] | None, list[str]]:
         payload = _parse_raw_payload(row["raw_payload"])
         if not isinstance(payload, dict):
-            continue
+            return None, []
         rec = {
             "detail_url": row["vote_event_id"],
             "legislature": payload.get("legislature") or row["legislature"],
             "payload": payload,
         }
-        _enrich_senado_record_with_details(
-            rec,
-            timeout=timeout,
-            session_cache=session_cache,
-            detail_dir=detail_dir,
-            detail_host=detail_host,
-            detail_cookie=senado_detail_cookie,
-            detail_failures=detail_failures,
-        )
-        records.append(rec)
+        failures: list[str] = []
+        session_cache: dict[str, dict[str, Any]] = {}
+        try:
+            _enrich_senado_record_with_details(
+                rec,
+                timeout=timeout,
+                session_cache=session_cache,
+                detail_dir=detail_dir,
+                detail_host=detail_host,
+                detail_cookie=senado_detail_cookie,
+                detail_failures=failures,
+            )
+        except Exception as exc:  # noqa: BLE001
+            payload_detail = rec.get("payload")
+            if isinstance(payload_detail, dict):
+                payload_detail["detail_error"] = f"unexpected-enrich-error: {type(exc).__name__}: {exc}"
+            failures.append(f"unexpected-enrich-error: {type(exc).__name__}: {exc}")
+        return rec, failures
+
+    if worker_count <= 1:
+        for row in rows:
+            rec, row_failures = _enrich_row(row)
+            if rec is None:
+                continue
+            records.append(rec)
+            detail_failures.extend(row_failures)
+    else:
+        with ThreadPoolExecutor(max_workers=worker_count) as executor:
+            for rec, row_failures in executor.map(_enrich_row, rows):
+                if rec is None:
+                    continue
+                records.append(rec)
+                detail_failures.extend(row_failures)
 
     records_with_votes = [r for r in records if isinstance(r.get("payload"), dict) and r["payload"].get("member_votes")]
 

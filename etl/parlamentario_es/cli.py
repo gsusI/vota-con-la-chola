@@ -161,6 +161,12 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         action="store_true",
         help="No intentar enriquecimiento de detalle (no agregará member_votes)",
     )
+    p_backfill_senado.add_argument(
+        "--detail-workers",
+        type=int,
+        default=8,
+        help="Workers paralelos para descargar/parsear detalles Senado (>=1)",
+    )
 
     return p.parse_args(argv)
 
@@ -412,6 +418,9 @@ def main(argv: list[str] | None = None) -> int:
                 raise SystemExit("max-loops debe ser > 0")
         else:
             max_loops = None
+        detail_workers = int(args.detail_workers)
+        if detail_workers <= 0:
+            raise SystemExit("detail-workers debe ser > 0")
 
         legislation = (
             _parse_source_ids(str(args.legislature))
@@ -442,6 +451,7 @@ def main(argv: list[str] | None = None) -> int:
                     senado_detail_cookie=args.senado_detail_cookie,
                     senado_skip_details=bool(args.senado_skip_details),
                     dry_run=bool(args.dry_run),
+                    detail_workers=detail_workers,
                 )
             else:
                 remaining_limit = max_events
@@ -483,11 +493,12 @@ def main(argv: list[str] | None = None) -> int:
                         legislature_filter=legislation,
                         vote_event_ids=event_ids,
                         senado_detail_dir=args.senado_detail_dir,
-                        senado_detail_host=args.senado_detail_host,
-                        senado_detail_cookie=args.senado_detail_cookie,
-                        senado_skip_details=bool(args.senado_skip_details),
-                        dry_run=bool(args.dry_run),
-                    )
+                            senado_detail_host=args.senado_detail_host,
+                            senado_detail_cookie=args.senado_detail_cookie,
+                            senado_skip_details=bool(args.senado_skip_details),
+                            dry_run=bool(args.dry_run),
+                            detail_workers=detail_workers,
+                        )
                     events_considered = int(loop_result.get("events_considered", 0))
                     events_reingested = int(loop_result.get("events_reingested", 0))
 
