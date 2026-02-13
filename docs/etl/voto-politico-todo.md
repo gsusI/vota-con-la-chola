@@ -109,4 +109,7 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - `backfill-senado-details --vote-event-ids \"url:https://www.senado.es/legis14/votaciones/ses_21_245.xml\"` => `events_reingested=1`, `member_votes_loaded=256`.
   - `backfill-senado-details --vote-event-ids \"ses_21_217..221\"` => `events_reingested=5`, `member_votes_loaded=1280`.
 - Siguiente acción prioritaria:
-  - Enfocar en `senado_votaciones` legislatura 14 (lote pequeño y controlado), continuar por bloques de `vote-event-ids` ordenados por sesión para extraer rápidamente los grupos con mayor `events_with_member_votes` (ej. `ses_21_*`, luego `ses_22_*`).
+  - Ejecutar `backfill-senado-details --auto` para resolver senado por lotes sin intervención manual, priorizando primero `--legislature 14`.
+  - Mantener orden de avance con `--max-events` y `--max-loops` para evitar ciclos infinitos en eventos inestables.
+  - Tras cada ejecución, actualizar residual por legislatura con el recuento de `senado_votaciones` sin `member_votes`.
+  - Objetivo operativo: dejar residual cercano a cero y pasar a cierre de calidad (`quality-report`) para `events_with_date_pct` y `events_with_totals_pct`.

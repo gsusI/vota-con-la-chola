@@ -135,6 +135,17 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_backfill_senado.add_argument("--timeout", type=int, default=int(DEFAULT_TIMEOUT))
     p_backfill_senado.add_argument("--snapshot-date", default=None, help="YYYY-MM-DD")
     p_backfill_senado.add_argument("--max-events", type=int, default=None, help="Límite de eventos a reintentar")
+    p_backfill_senado.add_argument(
+        "--auto",
+        action="store_true",
+        help="Reintentar automáticamente en múltiples rondas hasta agotar eventos o llegar al tope de ciclos",
+    )
+    p_backfill_senado.add_argument(
+        "--max-loops",
+        type=int,
+        default=None,
+        help="Máximo de rondas cuando --auto está activo (mínimo 1 si se usa)",
+    )
     p_backfill_senado.add_argument("--legislature", default=None, help="Filtro por legislatura (ej: 15,14)")
     p_backfill_senado.add_argument("--vote-event-ids", default=None, help="CSV de vote_event_id para limitar")
     p_backfill_senado.add_argument("--dry-run", action="store_true", help="Simula cambios sin reescribir DB")
@@ -395,6 +406,12 @@ def main(argv: list[str] | None = None) -> int:
                 raise SystemExit("max-events debe ser > 0")
         else:
             max_events = None
+        if args.auto and args.max_loops is not None:
+            max_loops = int(args.max_loops)
+            if max_loops <= 0:
+                raise SystemExit("max-loops debe ser > 0")
+        else:
+            max_loops = None
 
         legislation = (
             _parse_source_ids(str(args.legislature))
@@ -410,19 +427,112 @@ def main(argv: list[str] | None = None) -> int:
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
             seed_sources(conn)
-            result = backfill_senado_vote_details(
-                conn,
-                timeout=int(args.timeout),
-                snapshot_date=args.snapshot_date,
-                limit=max_events,
-                legislature_filter=legislation,
-                vote_event_ids=event_ids,
-                senado_detail_dir=args.senado_detail_dir,
-                senado_detail_host=args.senado_detail_host,
-                senado_detail_cookie=args.senado_detail_cookie,
-                senado_skip_details=bool(args.senado_skip_details),
-                dry_run=bool(args.dry_run),
-            )
+            if not bool(args.auto):
+                result = backfill_senado_vote_details(
+                    conn,
+                    timeout=int(args.timeout),
+                    snapshot_date=args.snapshot_date,
+                    limit=max_events,
+                    legislature_filter=legislation,
+                    vote_event_ids=event_ids,
+                    senado_detail_dir=args.senado_detail_dir,
+                    senado_detail_host=args.senado_detail_host,
+                    senado_detail_cookie=args.senado_detail_cookie,
+                    senado_skip_details=bool(args.senado_skip_details),
+                    dry_run=bool(args.dry_run),
+                )
+            else:
+                remaining_limit = max_events
+                loops_run = 0
+                stop_reason = "not_started"
+                aggregate: dict[str, Any] = {
+                    "source_id": "senado_votaciones",
+                    "dry_run": bool(args.dry_run),
+                    "auto": True,
+                    "loops_requested": max_loops,
+                    "loops_run": 0,
+                    "events_considered": 0,
+                    "events_with_payload": 0,
+                    "events_without_payload": 0,
+                    "events_with_member_votes": 0,
+                    "events_without_member_votes": 0,
+                    "events_reingested": 0,
+                    "member_votes_loaded": 0,
+                    "would_reingest": 0,
+                    "errors_summary": {},
+                    "detail_failures": [],
+                    "results_by_loop": [],
+                }
+                details_seen: set[str] = set()
+                while True:
+                    if max_loops is not None and loops_run >= max_loops:
+                        stop_reason = "max_loops_reached"
+                        break
+
+                    loops_run += 1
+                    call_limit = remaining_limit
+                    loop_result = backfill_senado_vote_details(
+                        conn,
+                        timeout=int(args.timeout),
+                        snapshot_date=args.snapshot_date,
+                        limit=call_limit,
+                        legislature_filter=legislation,
+                        vote_event_ids=event_ids,
+                        senado_detail_dir=args.senado_detail_dir,
+                        senado_detail_host=args.senado_detail_host,
+                        senado_detail_cookie=args.senado_detail_cookie,
+                        senado_skip_details=bool(args.senado_skip_details),
+                        dry_run=bool(args.dry_run),
+                    )
+                    events_considered = int(loop_result.get("events_considered", 0))
+                    events_reingested = int(loop_result.get("events_reingested", 0))
+
+                    aggregate["results_by_loop"].append({
+                        "loop": loops_run,
+                        "events_considered": events_considered,
+                        "events_with_payload": int(loop_result.get("events_with_payload", 0)),
+                        "events_with_member_votes": int(loop_result.get("events_with_member_votes", 0)),
+                        "events_reingested": events_reingested,
+                        "member_votes_loaded": int(loop_result.get("member_votes_loaded", 0)),
+                        "errors_summary": loop_result.get("errors_summary", {}),
+                        "detail_failures": list(loop_result.get("detail_failures", [])),
+                    })
+
+                    aggregate["loops_run"] = loops_run
+                    aggregate["events_considered"] += events_considered
+                    aggregate["events_with_payload"] += int(loop_result.get("events_with_payload", 0))
+                    aggregate["events_without_payload"] += int(loop_result.get("events_without_payload", 0))
+                    aggregate["events_with_member_votes"] += int(loop_result.get("events_with_member_votes", 0))
+                    aggregate["events_without_member_votes"] += int(loop_result.get("events_without_member_votes", 0))
+                    aggregate["events_reingested"] += events_reingested
+                    aggregate["member_votes_loaded"] += int(loop_result.get("member_votes_loaded", 0))
+                    aggregate["would_reingest"] += int(loop_result.get("would_reingest", 0))
+
+                    for key, value in loop_result.get("errors_summary", {}).items():
+                        aggregate["errors_summary"][str(key)] = int(aggregate["errors_summary"].get(str(key), 0)) + int(value)
+                    for item in loop_result.get("detail_failures", []):
+                        normalized = normalize_ws(str(item))
+                        if normalized:
+                            details_seen.add(normalized)
+
+                    if call_limit is not None:
+                        remaining_limit = max(0, call_limit - events_considered)
+
+                    if events_reingested <= 0:
+                        stop_reason = "no_progress"
+                        break
+                    if events_considered <= 0:
+                        stop_reason = "no_events_considered"
+                        break
+                    if call_limit is not None and remaining_limit <= 0:
+                        stop_reason = "limit_exhausted"
+                        break
+
+                aggregate["detail_failures"] = sorted(details_seen)
+                if stop_reason == "not_started":
+                    stop_reason = "unknown"
+                aggregate["stop_reason"] = stop_reason
+                result = aggregate
         finally:
             conn.close()
         print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
