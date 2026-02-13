@@ -179,6 +179,20 @@ Guideline:
 - Data tracking:
   - Track `detail_failures` by exact `leg=... ses=...: network-detail: HTTPError: HTTP Error 403: Forbidden` patterns in logs/JSON output to identify which legislatures require manual capture or fallback.
 
+#### Parallel Scraping/Downloads: Practical Speed Notes
+- Prefer one large parallel batch over many small batches when endpoints are healthy.
+- Use bounded worker counts as a throughput lever (`--detail-workers` or equivalent), then tune downward quickly if:
+  - error rate climbs (especially 403/429),
+  - upstream latency spikes,
+  - or response body sizes shrink (common anti-bot failure signatures).
+- Always dedupe request URLs before dispatch; one session/ID can often hydrate many rows.
+- Split work into:
+  - a prefetch stage (`HEAD`/first-successful GET probe + shared cache warmup),
+  - then idempotent row enrichment reading from cache.
+- Reuse a single HTTP session/client per worker group to cut TLS handshake and DNS churn.
+- Set short timeouts for discovery and longer ones for payload reads if needed; a 20-30s envelope usually wins overall runtime by pruning dead workers.
+- In blocked/WAF conditions, parallelism no longer helps throughput; switch to local replay (`SENADO_DETAIL_DIR`/`--senado-detail-dir`) or smaller batches.
+
 #### Asamblea de Ceuta (No Stable IDs)
 - Source is a government web page listing members by group and a Mesa section.
 - No canonical person IDs: connector generates stable-ish IDs from `(term, name, institution)`.
