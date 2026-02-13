@@ -96,10 +96,15 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - `events_with_totals_pct: 0.2078835` (objetivo: `>= 0.95`) ❌
   - `events_with_theme_pct: 0.0469580` (objetivo: `>= 0.95`) ❌
   - `member_votes_with_person_id_pct: 0.8161483` ❌
+- KPIs actuales (tras continuación automática con `--timeout 3`):
+  - `events_with_date_pct: 0.2284490` (objetivo: `>= 0.95`) ❌
+  - `events_with_totals_pct: 0.2284490` (objetivo: `>= 0.95`) ❌
+  - `events_with_theme_pct: 0.0469580` (objetivo: `>= 0.95`) ❌
+  - `member_votes_with_person_id_pct: 0.7531225` ❌
 - Cobertura residual de `senado_votaciones` sin detalle (evento sin fecha/totales):
   - `10: 159`
   - `12: 530`
-  - `14: 3929`
+  - `14: 3809`
   - `15: 4`
 - Últimos avances ejecutados:
   - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=5`, `member_votes_loaded=1280` (ejecución #1).
@@ -108,6 +113,12 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - Residual tras estas pasadas (`senado_votaciones` sin member_votes): `14: 3994` (de 4049).
   - Lote automatizado (12x ejecutado en bucle): `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=60`, `member_votes_loaded=15360`.
   - Residual tras este lote: `14: 3929`.
+  - Segunda tanda (10x):
+    - 5s timeout: `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 5 --snapshot-date 2026-02-12` => `events_reingested=50`, `member_votes_loaded=12800`.
+    - Residual: `14: 3859`.
+  - Tercera tanda (10x, `--timeout 3`):
+    - `backfill-senado-details --auto --legislature 14 --max-events 30 --max-loops 1 --timeout 3 --snapshot-date 2026-02-12` => `events_reingested=50`, `member_votes_loaded=12800`.
+    - Residual: `14: 3809`.
   - `backfill-senado-details --legislature 11 --max-events 20` => `events_reingested=3`, `member_votes_loaded=795`.
   - `backfill-senado-details --legislature 10 --max-events 300` => `events_reingested=163`, `member_votes_loaded=5191`.
   - `backfill-senado-details --legislature 12 --max-events 300` => `events_reingested=293`, `member_votes_loaded=5167`.
