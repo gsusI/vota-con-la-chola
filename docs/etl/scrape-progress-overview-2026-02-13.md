@@ -145,7 +145,9 @@ Configured representative sources (`etl/politicos_es/config.py`): `23`
 - Additional note (latest refresh):
   - A live retry on `cortes_aragon_diputados` was attempted and ended with SSL timeout, then fell back to sample (`network-error-fallback`).
   - A live retry on `infoelectoral_descargas` succeeded with `263` rows (`network-with-partial-errors`), so this source is no longer `DONE_ZERO_REAL`.
-  - Tracker status now shows `cortes_aragon_diputados`, `corts_valencianes_diputats`, `infoelectoral_procesos` as `DONE_ZERO_REAL`.
+  - A live retry on `infoelectoral_procesos` returned `404` and fell back.
+  - A live retry on `corts_valencianes_diputats` succeeded with `99` rows (`run_id` now `DONE`).
+  - Tracker status now shows `cortes_aragon_diputados` and `infoelectoral_procesos` as `DONE_ZERO_REAL`.
 
 ## Quick runbook to continue
 
