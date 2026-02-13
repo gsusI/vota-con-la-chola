@@ -129,9 +129,16 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - `backfill-senado-details --vote-event-ids \"url:https://www.senado.es/legis14/votaciones/ses_21_245.xml\"` => `events_reingested=1`, `member_votes_loaded=256`.
   - `backfill-senado-details --vote-event-ids \"ses_21_217..221\"` => `events_reingested=5`, `member_votes_loaded=1280`.
 - Siguiente acción prioritaria:
+  - Con la red actual, el flujo de detalle del Senado muestra `detail_blocked` por HTTP 403 masivo en `legislatura=14`; el backfill automático se detiene de forma intencional después de la primera tanda para no spammear.
   - Ejecutar `just parl-backfill-senado-details` para resolver Senado en lote automático, priorizando `14`:
     - Configuración actual por defecto: `SENADO_DETAIL_LEGISLATURES=14`, `SENADO_DETAIL_MAX_EVENTS=30`, `SENADO_DETAIL_MAX_LOOPS=1`, `SENADO_DETAIL_TIMEOUT=8`, `SENADO_DETAIL_WORKERS=16`.
     - Ajusta `SENADO_DETAIL_MAX_LOOPS` para hacer lotes continuos y `SENADO_DETAIL_WORKERS` según estabilidad del host.
+    - Si la señal `stop_reason=detail_blocked` aparece, cambiar a:
+      - `--senado-detail-dir` con XML capturados localmente (cuando exista rastro legal),
+      - `--senado-detail-workers 1` para reprocesar eventos puntuales,
+      - o bajar `SENADO_DETAIL_MAX_EVENTS` para pruebas.
+  - Para ejecución en Docker, poner los XML en el repo (ej. `etl/data/raw/manual/senado_detail_sessions_14`) y lanzar:
+    - `SENADO_DETAIL_DIR=etl/data/raw/manual/senado_detail_sessions_14 just parl-backfill-senado-details`
   - O bien ejecutar manualmente con `python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --auto --legislature 14 ...`.
   - Tras cada ejecución, actualizar residual por legislatura con el recuento de `senado_votaciones` sin `member_votes`.
   - Objetivo operativo: dejar residual cercano a cero y pasar a cierre de calidad (`quality-report`) para `events_with_date_pct` y `events_with_totals_pct`.

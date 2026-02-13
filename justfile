@@ -10,6 +10,7 @@ senado_detail_timeout := env_var_or_default("SENADO_DETAIL_TIMEOUT", "8")
 senado_detail_max_events := env_var_or_default("SENADO_DETAIL_MAX_EVENTS", "30")
 senado_detail_max_loops := env_var_or_default("SENADO_DETAIL_MAX_LOOPS", "1")
 senado_detail_legislatures := env_var_or_default("SENADO_DETAIL_LEGISLATURES", "14")
+senado_detail_dir := env_var_or_default("SENADO_DETAIL_DIR", "")
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
 
@@ -103,7 +104,11 @@ parl-extract-senado-votaciones:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --strict-network"
 
 parl-backfill-senado-details:
-  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --db {{db_path}} --auto --legislature {{senado_detail_legislatures}} --max-events {{senado_detail_max_events}} --max-loops {{senado_detail_max_loops}} --timeout {{senado_detail_timeout}} --detail-workers {{senado_detail_workers}} --snapshot-date {{snapshot_date}}"
+  senado_detail_arg=""; \
+  if [ -n "{{senado_detail_dir}}" ]; then \
+    senado_detail_arg=" --senado-detail-dir {{senado_detail_dir}}"; \
+  fi; \
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --db {{db_path}} --auto --legislature {{senado_detail_legislatures}} --max-events {{senado_detail_max_events}} --max-loops {{senado_detail_max_loops}} --timeout {{senado_detail_timeout}} --detail-workers {{senado_detail_workers}} --snapshot-date {{snapshot_date}}${senado_detail_arg}"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids senado_votaciones --json-out etl/data/published/votaciones-kpis-senado-{{snapshot_date}}.json"
 
 parl-link-votes:

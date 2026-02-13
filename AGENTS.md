@@ -158,6 +158,7 @@ Guideline:
   - `--detail-workers 16` is a good first pass on local network links.
   - Use `1` when debugging or when upstream blocks concurrency.
   - Keep `--timeout` low-moderate (e.g. `20-30`) to avoid long-tail stalls.
+  - In container runs, set `SENADO_DETAIL_DIR` to a repo-mounted path (e.g. `etl/data/raw/manual/senado_votaciones_ses`) so cached `ses_*.xml` files are visible and reusable.
 - Auto-loop behavior:
   - When prefetch hits hard `HTTP 403`, backend sets `detail_blocked=True` and auto loops stop with `stop_reason=detail_blocked` to avoid blind repeated attempts.
   - In that state, avoid rerunning with high limits; switch to `--senado-detail-dir` or lower workers + single-event probing.
@@ -171,7 +172,7 @@ Guideline:
   - Maximize parallelism only for batches with expected high hit-rate.
   - For blocked ranges, switch to `--senado-detail-dir` (pre-fetched local XML), or pause/fallback with lower worker count and explicit cookies.
 - Current backfill guard:
-  - In blocked scenarios, prefetch now probes one remote detail URL first; if it returns `HTTP 403`, the remaining remote detail URLs are marked as blocked in-cache without additional HTTP calls.
+  - In blocked scenarios, prefetch now probes a small seed set (up to 3 URLs); if all sampled requests return hard `HTTP 403`, the run is treated as blocked and the remaining URLs are marked blocked in-cache without extra network calls.
 - Operational detail:
   - Backfill now deduplicates `ses_*.xml` URLs and performs a parallel prefetch pass before per-row enrichment, so one successful session fetch can feed multiple vote rows in the same batch.
   - The warm cache is read-only during row enrichment, reducing duplicate network calls and lowering total HTTP churn when many rows share a session context.

@@ -503,29 +503,33 @@ def backfill_senado_vote_details(
     if session_urls:
         prefetch_items = list(session_urls.items())
         blocked_error: str | None = None
+        probe_budget = min(3, len(prefetch_items))
+        probe_403_count = 0
         start_idx = 0
-        if not detail_dir and prefetch_items:
-            # If the first remote prefetch returns a hard 403, avoid hammering the host.
-            first_session_url, first_ids = prefetch_items[0]
-            session_url, info = _prefetch_session((first_session_url, first_ids))
+        # Probe a small sample first: treat repeated hard 403 as blocked host.
+        for session_url, _ids in prefetch_items[:probe_budget]:
+            session_url, info = _prefetch_session((session_url, _ids))
             session_cache[session_url] = info
             err = normalize_ws(str(info.get("error") or ""))
             if err:
                 detail_failures.append(f"detail-prefetch {session_url}: {err}")
                 if "HTTPError: HTTP Error 403: Forbidden" in err:
-                    blocked_error = err
-            start_idx = 1
+                    probe_403_count += 1
+                    if blocked_error is None:
+                        blocked_error = err
+        start_idx = probe_budget
 
-        if blocked_error is not None:
+        if blocked_error is not None and probe_403_count >= probe_budget and probe_budget > 0:
             detail_blocked = True
+            blocked_error_text = blocked_error
             for session_url, _ids in prefetch_items[start_idx:]:
                 session_cache[session_url] = {
                     "ok": False,
                     "votes": [],
-                    "error": blocked_error,
+                    "error": blocked_error_text,
                     "source": None,
                 }
-                detail_failures.append(f"detail-prefetch {session_url}: {blocked_error}")
+                detail_failures.append(f"detail-prefetch {session_url}: {blocked_error_text}")
         elif worker_count <= 1:
             for item in prefetch_items[start_idx:]:
                 session_url, info = _prefetch_session(item)
