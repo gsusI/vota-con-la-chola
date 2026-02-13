@@ -396,8 +396,16 @@ def main(argv: list[str] | None = None) -> int:
         else:
             max_events = None
 
-        legislation = _parse_source_ids(str(args.legislature))
-        event_ids = _parse_source_ids(str(args.vote_event_ids))
+        legislation = (
+            _parse_source_ids(str(args.legislature))
+            if args.legislature is not None and str(args.legislature).strip()
+            else tuple()
+        )
+        event_ids = (
+            _parse_source_ids(str(args.vote_event_ids))
+            if args.vote_event_ids is not None and str(args.vote_event_ids).strip()
+            else tuple()
+        )
         conn = open_db(Path(args.db))
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
