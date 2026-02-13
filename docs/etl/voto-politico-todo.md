@@ -87,3 +87,24 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
 8. Cerrar la semántica de votos no nominales.
 9. Documentar procedimiento manual para sesiones bloqueadas (WAF/403).
 10. Revisar riesgo de inferencia en claims públicos y anotar incertidumbre por señal.
+
+## Estado operativo actual (actualización de trabajo)
+
+- Fecha referencia interna: `2026-02-13`.
+- KPIs con `quality-report --source-ids congreso_votaciones,senado_votaciones`:
+  - `events_with_date_pct: 0.1862896` (objetivo: `>= 0.95`) ❌
+  - `events_with_totals_pct: 0.1862896` (objetivo: `>= 0.95`) ❌
+  - `events_with_theme_pct: 0.0469580` (objetivo: `>= 0.95`) ❌
+  - `member_votes_with_person_id_pct: 0.9030027` ✅
+- Cobertura residual de `senado_votaciones` sin detalle (evento sin fecha/totales):
+  - `10: 159`
+  - `12: 530`
+  - `14: 4055`
+  - `15: 4`
+- Últimos avances ejecutados:
+  - `backfill-senado-details --legislature 11 --max-events 20` => `events_reingested=3`, `member_votes_loaded=795`.
+  - `backfill-senado-details --legislature 10 --max-events 300` => `events_reingested=163`, `member_votes_loaded=5191`.
+  - `backfill-senado-details --legislature 12 --max-events 300` => `events_reingested=293`, `member_votes_loaded=5167`.
+  - `backfill-senado-details --legislature 14 --max-events 50` => `events_reingested=25`, `member_votes_loaded=6424`.
+- Siguiente acción prioritaria:
+  - Enfocar en `senado_votaciones` legislatura 14 (lote pequeño y controlado) y persistir el bloqueo exacto de `source_url` cuando no haya `vote_file_url` o `no-match-in-session-xml`.
