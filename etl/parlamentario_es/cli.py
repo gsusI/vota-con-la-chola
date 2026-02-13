@@ -423,6 +423,8 @@ def main(argv: list[str] | None = None) -> int:
             if args.vote_event_ids is not None and str(args.vote_event_ids).strip()
             else tuple()
         )
+        if args.auto and event_ids:
+            max_loops = max_loops or 1
         conn = open_db(Path(args.db))
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
@@ -464,6 +466,7 @@ def main(argv: list[str] | None = None) -> int:
                     "results_by_loop": [],
                 }
                 details_seen: set[str] = set()
+                cursor_after = None
                 while True:
                     if max_loops is not None and loops_run >= max_loops:
                         stop_reason = "max_loops_reached"
@@ -476,6 +479,7 @@ def main(argv: list[str] | None = None) -> int:
                         timeout=int(args.timeout),
                         snapshot_date=args.snapshot_date,
                         limit=call_limit,
+                        vote_event_min=cursor_after,
                         legislature_filter=legislation,
                         vote_event_ids=event_ids,
                         senado_detail_dir=args.senado_detail_dir,
@@ -515,12 +519,15 @@ def main(argv: list[str] | None = None) -> int:
                         if normalized:
                             details_seen.add(normalized)
 
+                    next_cursor = loop_result.get("last_vote_event_id")
+                    if isinstance(next_cursor, str) and next_cursor > "":
+                        cursor_after = next_cursor
+                    else:
+                        cursor_after = None
+
                     if call_limit is not None:
                         remaining_limit = max(0, call_limit - events_considered)
 
-                    if events_reingested <= 0:
-                        stop_reason = "no_progress"
-                        break
                     if events_considered <= 0:
                         stop_reason = "no_events_considered"
                         break

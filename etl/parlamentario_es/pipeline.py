@@ -348,6 +348,7 @@ def backfill_senado_vote_details(
     limit: int | None = None,
     legislature_filter: tuple[str, ...] | list[str] | None = None,
     vote_event_ids: tuple[str, ...] | list[str] | None = None,
+    vote_event_min: str | None = None,
     senado_detail_dir: str | None = None,
     senado_detail_host: str | None = None,
     senado_detail_cookie: str | None = None,
@@ -386,6 +387,9 @@ def backfill_senado_vote_details(
       )
     """
     params: list[Any] = []
+    if vote_event_min is not None:
+        query += " AND e.vote_event_id > ?"
+        params.append(vote_event_min)
     if selected_legislatures:
         placeholders = ",".join("?" for _ in selected_legislatures)
         query += f" AND e.legislature IN ({placeholders})"
@@ -398,6 +402,7 @@ def backfill_senado_vote_details(
     rows = conn.execute((query + " ORDER BY e.vote_event_id"), tuple(params)).fetchall()
     if limit is not None:
         rows = rows[:int(limit)]
+    last_vote_event_id = rows[-1]["vote_event_id"] if rows else None
 
     if senado_skip_details:
         # Preserve existing payload as-is if detail enrichment is disabled.
@@ -414,6 +419,7 @@ def backfill_senado_vote_details(
             "events_reingested": 0 if dry_run else 0,
             "member_votes_loaded": 0,
             "errors_summary": {},
+            "last_vote_event_id": last_vote_event_id,
             "detail_failures": [],
             "would_reingest": 0,
         }
@@ -470,6 +476,7 @@ def backfill_senado_vote_details(
             "events_reingested": 0,
             "member_votes_loaded": 0,
             "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
+            "last_vote_event_id": last_vote_event_id,
             "detail_failures": sorted(set(detail_failures)),
             "would_reingest": len(records_with_votes),
         }
@@ -486,6 +493,7 @@ def backfill_senado_vote_details(
             "events_reingested": 0,
             "member_votes_loaded": 0,
             "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
+            "last_vote_event_id": last_vote_event_id,
             "detail_failures": sorted(set(detail_failures)),
             "would_reingest": 0,
         }
@@ -511,6 +519,7 @@ def backfill_senado_vote_details(
         "events_reingested": int(events_reingested),
         "member_votes_loaded": int(member_votes_loaded),
         "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
+        "last_vote_event_id": last_vote_event_id,
         "detail_failures": sorted(set(detail_failures)),
     }
 
