@@ -89,3 +89,48 @@ Configured representative sources (`etl/politicos_es/config.py`): `23`
 
 - Most person-level structured scraping is in place (`mandatos`, Congress/Senate votes, initiatives, representative rosters).
 - The backlog is now mostly governance/quality and parity work: unblock partial blockers (WAF/coverage gaps), finish Congress/Senate voting hardening, and ingest remaining TODO domains (territorial/electoral/legal/reference corpora).
+
+## Pending work to resume (next actions)
+
+1. `congreso_votaciones` (PARTIAL, mismatch)
+   - Complete event-to-initiative linkage consistency and rerun congress quality publish gate.
+   - Validate `parl_vote_events=301` + unmatched linkage for `senado/congreso` cross-source KPIs.
+
+2. `senado_votaciones` (PARTIAL, mismatch)
+   - Finish Senate vote-person linkage quality (`senado_votaciones` has `5,534` events and `250,646` nominal votes, only `46.77%` mapped).
+   - Confirm `senado_mociones` linkage to `parl_initiatives` and improve identifier normalization.
+
+3. `cortes_aragon_diputados` (DONE technically, PARTIAL operationally)
+   - Current source shows `0` mandates in DB in strict comparison despite expected structure.
+   - Reconcile manifest with canonical parser and source row handling in tracker status.
+
+4. `cortes_valencianes_diputats` (DONE in code, but `DONE_ZERO_REAL`)
+   - Reconcile expected/actual counts and confirm data source path is producing non-zero real network rows.
+
+5. `infoelectoral_descargas` / `infoelectoral_procesos` (`DONE_ZERO_REAL` in checks)
+   - Keep under close watch: checklist marks complete, but strict check sees zero real rows for some phases.
+   - Run ingestion with latest sample/response fixtures and confirm strict-network invariants.
+
+6. `convocatorias_jec` (TODO)
+   - Missing connector for convocatorias + estado electoral.
+
+7. `marco_legal_boe` (TODO)
+   - Missing legal BOE catalog ingestion + normalized docs model.
+
+8. `congreso_intervenciones` (TODO)
+   - Missing textual intervention connector and evidence model.
+
+9. `referencias_territoriales` (TODO)
+   - Missing canonical catalog for REL/INE/IGN references.
+
+10. `posiciones_declaradas_programas` (TODO)
+   - Missing NLP/curation pipeline for party program positions and revision workflow.
+
+## Quick runbook to continue
+
+- Run remaining population extraction through `just`:
+  - `just etl-poblacion-municipios-json`
+  - `just etl-poblacion-municipios-2025`
+- Resume parliamentary quality pipeline when ready:
+  - `just parl-quality-pipeline`
+  - `just etl-publish-votaciones`
