@@ -359,12 +359,29 @@ def _records_from_tipo12_xml(payload: bytes, source_url: str) -> list[dict[str, 
     return records
 
 
-def _find_local_session_xml(detail_dir: Path, session_id: int) -> Path | None:
-    direct = detail_dir / f"ses_{session_id}.xml"
-    if direct.exists() and direct.is_file():
-        return direct
-    matches = sorted(detail_dir.glob(f"**/ses_{session_id}.xml"))
-    return matches[0] if matches else None
+def _find_local_session_xml(
+    detail_dir: Path,
+    session_id: int,
+    vote_id: int | None = None,
+) -> Path | None:
+    candidate_names: list[str] = []
+    if vote_id is not None:
+        candidate_names.append(f"ses_{session_id}_{vote_id}.xml")
+        candidate_names.append(f"ses_{vote_id}_{session_id}.xml")
+    candidate_names.append(f"ses_{session_id}.xml")
+
+    for name in candidate_names:
+        direct = detail_dir / name
+        if direct.exists() and direct.is_file():
+            return direct
+
+    glob_patterns = [f"**/{name}" for name in candidate_names]
+    for pattern in glob_patterns:
+        matches = sorted(detail_dir.glob(pattern))
+        if matches:
+            return matches[0]
+
+    return None
 
 
 def _enrich_senado_record_with_details(
@@ -404,7 +421,7 @@ def _enrich_senado_record_with_details(
         session_info = session_cache.get(session_url)
         if session_info is None:
             session_info = {"ok": False, "votes": [], "error": None, "source": None}
-            local_path = _find_local_session_xml(detail_dir, session_id) if detail_dir else None
+            local_path = _find_local_session_xml(detail_dir, session_id, vote_id) if detail_dir else None
             if local_path is not None:
                 try:
                     parsed = _parse_sesion_vote_xml(local_path.read_bytes())
