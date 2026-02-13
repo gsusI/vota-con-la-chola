@@ -9,9 +9,9 @@ Tracker reference: `docs/etl/e2e-scrape-load-tracker.md` and `scripts/e2e_tracke
 
 - Tracked data-types: `28`  
 - Sources present in DB registry: `29`  
-- Tracker mismatch count: `7`  
-- `done_zero_real`: `4`  
-- Ingestion runs: `103` total (`81` `ok`, `22` `error`)  
+- Tracker mismatch count: `5`  
+- `done_zero_real`: `2`  
+- Ingestion runs: `123` total (`95` `ok`, `28` `error`)  
 - Total mandates: `77,179`  
 - Active mandates: `68,460`  
 - Raw rows in `source_records`: `87,059`  
@@ -37,7 +37,7 @@ Tracker reference: `docs/etl/e2e-scrape-load-tracker.md` and `scripts/e2e_tracke
 
 - Tracker macro: `22` DONE, `5` PARTIAL, `5` TODO
 - `scripts/e2e_tracker_status.py` adds operational flags for the same set:
-  - MISMATCH: `7`
+  - MISMATCH: `5`
   - `DONE_ZERO_REAL`: `4`
 
 ## What is scraped (mandatos)
@@ -107,8 +107,8 @@ Configured representative sources (`etl/politicos_es/config.py`): `23`
 4. `cortes_valencianes_diputats` (DONE in code, but `DONE_ZERO_REAL`)
    - Reconcile expected/actual counts and confirm data source path is producing non-zero real network rows.
 
-5. `infoelectoral_descargas` / `infoelectoral_procesos` (`DONE_ZERO_REAL` in checks)
-   - Keep under close watch: checklist marks complete, but strict check sees zero real rows for some phases.
+5. `infoelectoral_procesos` (`DONE_ZERO_REAL` in checks)
+   - Keep under close watch: checklist marks complete, but strict check sees zero real rows for this phase.
    - Run ingestion with latest sample/response fixtures and confirm strict-network invariants.
 
 6. `convocatorias_jec` (TODO)
@@ -135,19 +135,20 @@ Configured representative sources (`etl/politicos_es/config.py`): `23`
   - `infoelectoral_procesos`: 5 records ingested via `--from-file etl/data/raw/samples/infoelectoral_procesos_sample.json`.
 - Current `scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db` summary:
   - `runs_ok/total` and key loads are now up for these sources.
-  - `congreso_votaciones`: still `PARTIAL / MISMATCH` (9/15 ok, network max=300, last_loaded=20).
-  - `senado_votaciones`: still `PARTIAL / MISMATCH` (27/40 ok, network max=5534, last_loaded=20).
-  - `cortes_aragon_diputados`: currently `PARTIAL` in SQL with `max_any=75` but remains `DONE_ZERO_REAL` because network-derived `max_net` is still 0.
-  - `corts_valencianes_diputats`: currently `PARTIAL` in SQL with `max_any=2` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
-  - `infoelectoral_descargas`: currently `PARTIAL` in SQL with `max_any=4` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
-  - `infoelectoral_procesos`: currently `PARTIAL` in SQL with `max_any=5` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
-- Next immediate action: focus on network-backed refresh for the 4 `DONE_ZERO_REAL` items only after deciding whether these should be treated as hard blockers or explicit "sample-only" fallback for this snapshot.
+  - `congreso_votaciones`: still `PARTIAL / MISMATCH` (10/16 ok, network max=300, last_loaded=300).
+  - `senado_votaciones`: still `PARTIAL / MISMATCH` (27/42 ok, network max=5534, last_loaded=0 after manual abort of a long-running bounded pull).
+- `cortes_aragon_diputados`: currently `PARTIAL` in SQL with `max_any=75` but remains `DONE_ZERO_REAL` because network-derived `max_net` is still 0.
+- `corts_valencianes_diputats`: now `DONE` in SQL and network-backed (`max_net=99`), no longer `DONE_ZERO_REAL`.
+- `infoelectoral_descargas`: now `DONE` in SQL and network-backed (`max_net=263`), no longer `DONE_ZERO_REAL`.
+- `infoelectoral_procesos`: currently `PARTIAL` in SQL with `max_any=5` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
+- Next immediate action: focus on network-backed refresh for the 2 `DONE_ZERO_REAL` items only (`cortes_aragon_diputados`, `infoelectoral_procesos`) after deciding whether these should be treated as hard blockers or explicit "sample-only" fallback for this snapshot.
 - Additional note (latest refresh):
   - A live retry on `cortes_aragon_diputados` was attempted and ended with SSL timeout, then fell back to sample (`network-error-fallback`).
   - A live retry on `infoelectoral_descargas` succeeded with `263` rows (`network-with-partial-errors`), so this source is no longer `DONE_ZERO_REAL`.
   - A live retry on `infoelectoral_procesos` returned `404` and fell back.
   - A live retry on `corts_valencianes_diputats` succeeded with `99` rows (`run_id` now `DONE`).
   - Tracker status now shows `cortes_aragon_diputados` and `infoelectoral_procesos` as `DONE_ZERO_REAL`.
+  - `senado_votaciones` `last_loaded` currently remains `0` due the aborted run despite network `max_net=5534` already present.
 
 ## Quick runbook to continue
 
