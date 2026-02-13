@@ -12,8 +12,19 @@ from etl.politicos_es.util import normalize_ws, now_utc_iso, stable_json
 EXPEDIENTE_RE = re.compile(r"\b(?P<tipo>\d{3})\s*/\s*(?P<num>\d{1,6})(?:\s*/\s*(?P<sub>\d{1,4}))?\b")
 SENADO_EXPEDIENTE_RE = re.compile(r"\b\d{3}/\d{6}\b")
 CANON_EXPEDIENTE_RE = re.compile(r"^(?P<tipo>\d{3})/(?P<num>\d{1,6})(?:/(?P<sub>\d{1,4}))?$")
+CONGRESO_LEY_EXPEDIENTE_RE = re.compile(
+    r"\b(?:real\s+decreto-ley|real\s+decreto\s+ley)\s+(?P<num>\d{1,3})/(?P<year>\d{4})\b",
+    re.I,
+)
 TITLE_PREFIX_INDEX_CHARS = 24
 TITLE_PREFIX_MIN_CHARS = 40
+
+
+def _asciify(value: str | None) -> str:
+    txt = normalize_ws(str(value or "")).strip().lower()
+    if not txt:
+        return ""
+    return "".join(ch for ch in unicodedata.normalize("NFD", txt) if unicodedata.category(ch) != "Mn")
 
 
 def _normalize_title_key(value: str | None) -> str | None:
@@ -24,6 +35,61 @@ def _normalize_title_key(value: str | None) -> str | None:
     cleaned = re.sub(r"[^a-z0-9]+", " ", no_accents)
     cleaned = normalize_ws(cleaned)
     return cleaned or None
+
+
+_CONGRESO_VOTE_PREFIX_PATTERNS = (
+    re.compile(r"^\s*votacion de la enmienda a la totalidad de texto alternativo a\s*", re.I),
+    re.compile(r"^\s*votacion de la enmienda a la totalidad de\s*", re.I),
+    re.compile(r"^\s*votacion de la solicitud de avocacion por el pleno de la camara de la\s*", re.I),
+    re.compile(r"^\s*votacion de la solicitud de avocacion por el pleno de la camara\s*", re.I),
+    re.compile(r"^\s*votacion de\s*", re.I),
+)
+
+_CONGRESO_VOTE_GROUP_PREFIX_PATTERNS = (
+    (re.compile(r"^(proposicion no de ley)\s+del grupo parlamentario\b[^,\n]+,?\s*", re.I), r"\1 "),
+    (re.compile(r"^(proposicion de ley)\s+del grupo parlamentario\b[^,\n]+,?\s*", re.I), r"\1 "),
+    (re.compile(r"^(mocion consecuencia de interpelacion urgente)\s+del grupo parlamentario\b[^,\n]+,?\s*", re.I), r"\1 "),
+    (re.compile(r"^(mocion consecuencia de interpelacion urgente)\s+del grupo parlamentario\b.*\)", re.I), r"\1 "),
+)
+
+_CONGRESO_VOTE_SUFFIX_PATTERNS = (
+    re.compile(r",\s*presentada por .*?$", re.I),
+    re.compile(r",\s*presentado por .*?$", re.I),
+    re.compile(r",\s*en los terminos de .*?$", re.I),
+    re.compile(r"\bse vota en los terminos.*$", re.I),
+)
+
+
+def _congreso_vote_title_key_variants(value: str | None) -> list[str]:
+    base = _asciify(value)
+    if not base:
+        return []
+
+    seeds = {base}
+    first_line = base.split("\n", 1)[0].strip()
+    if first_line:
+        seeds.add(first_line)
+
+    variants = set(seeds)
+    for seed in list(seeds):
+        for pattern in _CONGRESO_VOTE_PREFIX_PATTERNS:
+            stripped = normalize_ws(pattern.sub("", seed))
+            if stripped:
+                variants.add(stripped)
+
+        for pattern, replacement in _CONGRESO_VOTE_GROUP_PREFIX_PATTERNS:
+            replaced = normalize_ws(pattern.sub(replacement, seed))
+            if replaced:
+                variants.add(replaced)
+
+        for seed2 in list(variants):
+            for pattern in _CONGRESO_VOTE_SUFFIX_PATTERNS:
+                stripped = normalize_ws(pattern.sub("", seed2))
+                if stripped:
+                    variants.add(stripped)
+
+    keys = {_normalize_title_key(v) for v in variants}
+    return sorted((key for key in keys if key is not None), reverse=True, key=len)
 
 
 def _congreso_expediente_prefix(value: str | None) -> str | None:
@@ -65,32 +131,36 @@ def link_congreso_votes_to_initiatives(
         SELECT initiative_id, legislature, expediente, title
         FROM parl_initiatives
         WHERE source_id = 'congreso_iniciativas'
-          AND legislature IS NOT NULL
         """
     ).fetchall()
-    init_exact_map: dict[tuple[str, str], str] = {}
-    init_prefix_map: dict[tuple[str, str], set[str]] = {}
-    title_exact_map: dict[tuple[str, str], set[str]] = {}
-    title_prefix_map: dict[tuple[str, str], set[str]] = {}
+    init_exact_map: dict[tuple[str | None, str], set[str]] = {}
+    init_prefix_map: dict[tuple[str | None, str], set[str]] = {}
+    title_exact_map: dict[tuple[str | None, str], set[str]] = {}
+    title_prefix_map: dict[tuple[str | None, str], set[str]] = {}
     init_title_key: dict[str, str] = {}
 
     for r in init_rows:
         leg = normalize_ws(str(r["legislature"] or "")) or None
         if not leg:
-            continue
+            # Keep entries with unknown legislature, as many congreso law initiatives
+            # do not expose legislature in source payload.
+            pass
         initiative_id = str(r["initiative_id"])
         exp = normalize_ws(str(r["expediente"] or "")) or None
         if exp:
-            init_exact_map[(leg, exp)] = initiative_id
-            exp_prefix = _congreso_expediente_prefix(exp)
-            if exp_prefix:
-                init_prefix_map.setdefault((leg, exp_prefix), set()).add(initiative_id)
+            for map_leg in (leg, None):
+                init_exact_map.setdefault((map_leg, exp), set()).add(initiative_id)
+                exp_prefix = _congreso_expediente_prefix(exp)
+                if exp_prefix:
+                    init_prefix_map.setdefault((map_leg, exp_prefix), set()).add(initiative_id)
 
         title_key = _normalize_title_key(r["title"])
         if title_key:
-            title_exact_map.setdefault((leg, title_key), set()).add(initiative_id)
+            for map_leg in (leg, None):
+                title_exact_map.setdefault((map_leg, title_key), set()).add(initiative_id)
             prefix_key = title_key[:TITLE_PREFIX_INDEX_CHARS]
-            title_prefix_map.setdefault((leg, prefix_key), set()).add(initiative_id)
+            for map_leg in (leg, None):
+                title_prefix_map.setdefault((map_leg, prefix_key), set()).add(initiative_id)
             init_title_key[initiative_id] = title_key
 
     q = """
@@ -113,8 +183,9 @@ def link_congreso_votes_to_initiatives(
         vote_event_id = str(row["vote_event_id"])
         leg = row["legislature"]
         if leg is None:
-            continue
-        leg = str(leg)
+            leg = None
+        else:
+            leg = str(leg)
         best_links: dict[str, dict[str, Any]] = {}
 
         haystacks = [
@@ -151,11 +222,19 @@ def link_congreso_votes_to_initiatives(
             link_method = None
             confidence = None
             if exp_kind == "exact":
-                initiative_id = init_exact_map.get((leg, exp))
+                exact_candidates = init_exact_map.get((leg, exp), set())
+                if len(exact_candidates) == 1:
+                    initiative_id = next(iter(exact_candidates))
+                elif not exact_candidates:
+                    legacy_candidates = init_exact_map.get((None, exp), set())
+                    if len(legacy_candidates) == 1:
+                        initiative_id = next(iter(legacy_candidates))
                 link_method = "expediente_regex"
                 confidence = 1.0
             else:
                 pref_ids = init_prefix_map.get((leg, exp), set())
+                if not pref_ids:
+                    pref_ids = init_prefix_map.get((None, exp), set())
                 if len(pref_ids) == 1:
                     initiative_id = next(iter(pref_ids))
                     link_method = "expediente_prefix_regex_unique"
@@ -176,10 +255,18 @@ def link_congreso_votes_to_initiatives(
                 "updated_at": now_iso,
             }
 
-        topic_text = normalize_ws(str(row["expediente_text"] or "")) or None
-        topic_key = _normalize_title_key(topic_text)
-        if topic_key:
+        title_key_candidates: list[tuple[str, str]] = []
+        for field, text in haystacks:
+            if not text:
+                continue
+            for key in _congreso_vote_title_key_variants(text):
+                title_key_candidates.append((field, key))
+
+        title_key_candidates.sort(key=lambda item: len(item[1]), reverse=True)
+        for field, topic_key in title_key_candidates:
             exact_ids = title_exact_map.get((leg, topic_key), set())
+            if not exact_ids:
+                exact_ids = title_exact_map.get((None, topic_key), set())
             if len(exact_ids) == 1:
                 initiative_id = next(iter(exact_ids))
                 prev = best_links.get(initiative_id)
@@ -190,20 +277,22 @@ def link_congreso_votes_to_initiatives(
                         "link_method": "title_norm_exact_unique",
                         "confidence": 0.85,
                         "evidence_json": stable_json(
-                            {"field": "expediente_text", "title_key": topic_key, "legislature": leg}
+                            {"field": field, "title_key": topic_key, "legislature": leg}
                         ),
                         "created_at": now_iso,
                         "updated_at": now_iso,
                     }
-            elif len(exact_ids) == 0 and len(topic_key) >= TITLE_PREFIX_MIN_CHARS:
+                break
+
+            if len(exact_ids) == 0 and len(topic_key) >= TITLE_PREFIX_MIN_CHARS:
                 prefix_key = topic_key[:TITLE_PREFIX_INDEX_CHARS]
                 candidate_ids = title_prefix_map.get((leg, prefix_key), set())
+                if not candidate_ids:
+                    candidate_ids = title_prefix_map.get((None, prefix_key), set())
                 matched_ids: set[str] = set()
                 for initiative_id in candidate_ids:
                     init_key = init_title_key.get(initiative_id)
                     if not init_key:
-                        continue
-                    if not (init_key.startswith(topic_key) or topic_key.startswith(init_key)):
                         continue
                     if _common_prefix_len(init_key, topic_key) < TITLE_PREFIX_MIN_CHARS:
                         continue
@@ -219,8 +308,38 @@ def link_congreso_votes_to_initiatives(
                             "confidence": 0.75,
                             "evidence_json": stable_json(
                                 {
-                                    "field": "expediente_text",
+                                    "field": field,
                                     "title_key_prefix": topic_key[:TITLE_PREFIX_MIN_CHARS],
+                                    "legislature": leg,
+                                }
+                            ),
+                            "created_at": now_iso,
+                            "updated_at": now_iso,
+                        }
+                        break
+
+        if len(best_links) == 0 and row["expediente_text"]:
+            topic_text = normalize_ws(str(row["expediente_text"]) or "")
+            m = CONGRESO_LEY_EXPEDIENTE_RE.search(topic_text)
+            if m:
+                ley_exp = f"ley:{int(m.group('num'))}/{m.group('year')}"
+                candidates = {
+                    *(init_exact_map.get((leg, ley_exp), set()) or set()),
+                    *(init_exact_map.get((None, ley_exp), set()) if leg is not None else set()),
+                }
+                if len(candidates) == 1:
+                    initiative_id = next(iter(candidates))
+                    prev = best_links.get(initiative_id)
+                    if not prev or float(prev.get("confidence") or 0.0) < 0.9:
+                        best_links[initiative_id] = {
+                            "vote_event_id": vote_event_id,
+                            "initiative_id": initiative_id,
+                            "link_method": "congreso_law_expediente",
+                            "confidence": 0.9,
+                            "evidence_json": stable_json(
+                                {
+                                    "field": "expediente_text",
+                                    "expediente": ley_exp,
                                     "legislature": leg,
                                 }
                             ),
