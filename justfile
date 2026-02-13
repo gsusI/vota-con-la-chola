@@ -13,6 +13,10 @@ senado_detail_legislatures := env_var_or_default("SENADO_DETAIL_LEGISLATURES", "
 senado_detail_dir := env_var_or_default("SENADO_DETAIL_DIR", "")
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
+gh_pages_dir := env_var_or_default("GH_PAGES_DIR", "docs/gh-pages")
+gh_pages_remote := env_var_or_default("GH_PAGES_REMOTE", "origin")
+gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
+gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
 
 default:
   @just --list
@@ -278,6 +282,12 @@ etl-e2e:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source parlamento_vasco_parlamentarios --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py stats --db {{db_path}}"
 
+etl-poblacion-municipios-json:
+  python3 etl/poblacion_municipios.py --json-out etl/data/published/poblacion_municipios_es.json
+
+etl-poblacion-municipios-2025:
+  python3 etl/poblacion_municipios.py --year 2025 --workers 20 --timeout 30 --json-out etl/data/published/poblacion_municipios_es.json
+
 # UI: explorador de grafo (web)
 graph-ui:
   DB_PATH={{db_path}} docker compose up --build graph-ui
@@ -314,6 +324,27 @@ explorer-bg-watch:
   @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
+
+explorer-gh-pages-build:
+  rm -rf {{gh_pages_dir}}/explorer-sports
+  mkdir -p {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer
+  cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-sports/index.html
+  cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
+  python3 scripts/export_explorer_sports_snapshot.py \
+    --db "{{db_path}}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out-dir "{{gh_pages_dir}}/explorer-sports/data"
+  @echo "Build GitHub Pages listo en {{gh_pages_dir}}/explorer-sports"
+
+explorer-gh-pages-publish:
+  just explorer-gh-pages-build
+  git subtree split --prefix {{gh_pages_dir}} -b {{gh_pages_tmp_branch}}
+  git push {{gh_pages_remote}} {{gh_pages_tmp_branch}}:{{gh_pages_branch}} --force
+  git branch -D {{gh_pages_tmp_branch}}
+  @echo "Publicado: {{gh_pages_remote}} {{gh_pages_branch}}"
+
+explorer-gh-pages:
+  @just explorer-gh-pages-publish
 
 explorer-stop:
   @pid_file=/tmp/vota-explorer-ui.pid; \
