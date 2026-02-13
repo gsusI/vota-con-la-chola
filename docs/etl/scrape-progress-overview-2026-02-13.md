@@ -126,6 +126,23 @@ Configured representative sources (`etl/politicos_es/config.py`): `23`
 10. `posiciones_declaradas_programas` (TODO)
    - Missing NLP/curation pipeline for party program positions and revision workflow.
 
+## Latest resume checkpoint (2026-02-13)
+
+- Executed on-demand deterministic fills from local samples for three pending sources:
+  - `cortes_aragon_diputados`: 75 records ingested via `--from-file etl/data/raw/samples/cortes_aragon_diputados_sample.json` (run_id 112).
+  - `corts_valencianes_diputats`: 2 records ingested via `--from-file etl/data/raw/samples/corts_valencianes_diputats_sample.json`.
+  - `infoelectoral_descargas`: 4 records ingested via `--from-file etl/data/raw/samples/infoelectoral_descargas_sample.json`.
+  - `infoelectoral_procesos`: 5 records ingested via `--from-file etl/data/raw/samples/infoelectoral_procesos_sample.json`.
+- Current `scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db` summary:
+  - `runs_ok/total` and key loads are now up for these sources.
+  - `congreso_votaciones`: still `PARTIAL / MISMATCH` (9/15 ok, network max=300, last_loaded=20).
+  - `senado_votaciones`: still `PARTIAL / MISMATCH` (27/40 ok, network max=5534, last_loaded=20).
+  - `cortes_aragon_diputados`: currently `PARTIAL` in SQL with `max_any=75` but remains `DONE_ZERO_REAL` because network-derived `max_net` is still 0.
+  - `corts_valencianes_diputats`: currently `PARTIAL` in SQL with `max_any=2` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
+  - `infoelectoral_descargas`: currently `PARTIAL` in SQL with `max_any=4` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
+  - `infoelectoral_procesos`: currently `PARTIAL` in SQL with `max_any=5` but remains `DONE_ZERO_REAL` because network-derived `max_net` is 0.
+- Next immediate action: focus on network-backed refresh for the 4 `DONE_ZERO_REAL` items only after deciding whether these should be treated as hard blockers or explicit "sample-only" fallback for this snapshot.
+
 ## Quick runbook to continue
 
 - Run remaining population extraction through `just`:
