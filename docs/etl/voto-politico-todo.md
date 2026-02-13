@@ -129,7 +129,9 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - `backfill-senado-details --vote-event-ids \"url:https://www.senado.es/legis14/votaciones/ses_21_245.xml\"` => `events_reingested=1`, `member_votes_loaded=256`.
   - `backfill-senado-details --vote-event-ids \"ses_21_217..221\"` => `events_reingested=5`, `member_votes_loaded=1280`.
 - Siguiente acción prioritaria:
-  - Ejecutar `backfill-senado-details --auto` para resolver senado por lotes sin intervención manual, priorizando primero `--legislature 14`.
-  - Mantener orden de avance con `--max-events` y `--max-loops` para evitar ciclos infinitos en eventos inestables.
+  - Ejecutar `just parl-backfill-senado-details` para resolver Senado en lote automático, priorizando `14`:
+    - Configuración actual por defecto: `SENADO_DETAIL_LEGISLATURES=14`, `SENADO_DETAIL_MAX_EVENTS=30`, `SENADO_DETAIL_MAX_LOOPS=1`, `SENADO_DETAIL_TIMEOUT=8`, `SENADO_DETAIL_WORKERS=16`.
+    - Ajusta `SENADO_DETAIL_MAX_LOOPS` para hacer lotes continuos y `SENADO_DETAIL_WORKERS` según estabilidad del host.
+  - O bien ejecutar manualmente con `python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --auto --legislature 14 ...`.
   - Tras cada ejecución, actualizar residual por legislatura con el recuento de `senado_votaciones` sin `member_votes`.
   - Objetivo operativo: dejar residual cercano a cero y pasar a cierre de calidad (`quality-report`) para `events_with_date_pct` y `events_with_totals_pct`.

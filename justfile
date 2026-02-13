@@ -5,6 +5,13 @@ municipal_timeout := env_var_or_default("MUNICIPAL_TIMEOUT", "240")
 galicia_manual_dir := env_var_or_default("GALICIA_MANUAL_DIR", "etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages")
 navarra_manual_dir := env_var_or_default("NAVARRA_MANUAL_DIR", "etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages")
 infoelectoral_timeout := env_var_or_default("INFOELECTORAL_TIMEOUT", "30")
+senado_detail_workers := env_var_or_default("SENADO_DETAIL_WORKERS", "16")
+senado_detail_timeout := env_var_or_default("SENADO_DETAIL_TIMEOUT", "8")
+senado_detail_max_events := env_var_or_default("SENADO_DETAIL_MAX_EVENTS", "30")
+senado_detail_max_loops := env_var_or_default("SENADO_DETAIL_MAX_LOOPS", "1")
+senado_detail_legislatures := env_var_or_default("SENADO_DETAIL_LEGISLATURES", "14")
+explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
+explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
 
 default:
   @just --list
@@ -94,6 +101,10 @@ parl-extract-senado-iniciativas:
 
 parl-extract-senado-votaciones:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --strict-network"
+
+parl-backfill-senado-details:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --db {{db_path}} --auto --legislature {{senado_detail_legislatures}} --max-events {{senado_detail_max_events}} --max-loops {{senado_detail_max_loops}} --timeout {{senado_detail_timeout}} --detail-workers {{senado_detail_workers}} --snapshot-date {{snapshot_date}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids senado_votaciones --json-out etl/data/published/votaciones-kpis-senado-{{snapshot_date}}.json"
 
 parl-link-votes:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
@@ -272,6 +283,77 @@ graph-ui-bg:
 graph-ui-stop:
   docker compose stop graph-ui
   docker compose rm -f graph-ui
+
+# UI: explorador directo (localhost, sin Docker)
+# Single app serving:
+# - /explorer -> interfaz clásica
+# - /explorer-sports -> interfaz estilo arena/deportes
+explorer:
+  DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} python3 scripts/watch_graph_ui_server.py
+
+explorer-watch:
+  DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} python3 scripts/watch_graph_ui_server.py
+
+explorer-bg:
+  @just explorer-stop >/tmp/vota-explorer-ui-stop.log 2>&1 || true
+  DB_PATH={{db_path}} nohup python3 scripts/graph_ui_server.py --db "{{db_path}}" --host {{explorer_host}} --port {{explorer_port}} >/tmp/vota-explorer-ui.log 2>&1 & echo $! >/tmp/vota-explorer-ui.pid
+  @echo "Explorer corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
+  @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
+  @echo "PID guardado en /tmp/vota-explorer-ui.pid"
+  @echo "Logs en /tmp/vota-explorer-ui.log"
+
+explorer-bg-watch:
+  @just explorer-stop >/tmp/vota-explorer-ui-stop.log 2>&1 || true
+  DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} nohup python3 scripts/watch_graph_ui_server.py >/tmp/vota-explorer-ui.log 2>&1 & echo $! >/tmp/vota-explorer-ui.pid
+  @echo "Explorer (watch) corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
+  @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
+  @echo "PID guardado en /tmp/vota-explorer-ui.pid"
+  @echo "Logs en /tmp/vota-explorer-ui.log"
+
+explorer-stop:
+  @pid_file=/tmp/vota-explorer-ui.pid; \
+  stopped=false; \
+  if [ -f "$pid_file" ]; then \
+    pid=$(cat $pid_file 2>/dev/null | tr -d " \\t\\n"); \
+    if [ -n "$pid" ] && kill -0 "$pid" >/dev/null 2>&1; then \
+      kill "$pid" >/dev/null 2>&1 || true; \
+      echo "Stopped by pid file: $pid"; \
+      stopped=true; \
+    fi; \
+    rm -f $pid_file; \
+  fi; \
+  port_pids=$(lsof -n -iTCP:{{explorer_port}} -sTCP:LISTEN -P 2>/dev/null | awk 'NR>1 {print $2}' | sort -u | tr '\n' ' ' | tr -s ' '); \
+  if [ -n "$port_pids" ]; then \
+    echo "$port_pids" | tr ' ' '\n' | xargs -r kill -9 || true; \
+    sleep 0.15; \
+    remaining_pids=$(lsof -n -iTCP:{{explorer_port}} -sTCP:LISTEN -P 2>/dev/null | awk 'NR>1 {print $2}' | sort -u | tr '\n' ' ' | tr -s ' '); \
+    if [ -n "$remaining_pids" ]; then \
+      echo "Still bound to port {{explorer_port}}: $remaining_pids"; \
+      echo "Run manually: kill -9 $remaining_pids (or sudo kill -9 ...)"; \
+    else \
+      echo "Stopped by port bind: $port_pids"; \
+      stopped=true; \
+    fi; \
+  fi; \
+  if [ "$stopped" = "false" ]; then \
+    if [ -n "$port_pids" ]; then \
+      echo "Could not stop the process on port {{explorer_port}} automatically (permissions)."; \
+      echo "Try: sudo kill -9 $port_pids"; \
+    else \
+      echo "No explorer server process found"; \
+    fi; \
+  fi
+
+explore: explorer
+
+# Legacy aliases (compatibilidad):
+graph-explorer: explorer
+graph-explorer-bg: explorer-bg
+graph-explorer-stop: explorer-stop
+explorer-sports: explorer
+explorer-sports-bg: explorer-bg
+explorer-sports-watch: explorer-watch
+explorer-sports-bg-watch: explorer-bg-watch
 
 # Tracker: estado SQL vs checklist
 etl-tracker-status:
