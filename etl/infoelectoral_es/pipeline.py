@@ -7,13 +7,19 @@ from typing import Any
 from ..politicos_es.db import finish_run, start_run, upsert_source_record
 from ..politicos_es.util import now_utc_iso, sha256_bytes, stable_json
 from .config import SOURCE_CONFIG
-from .connectors.descargas import InfoelectoralDescargasConnector
-from .db import upsert_archivo_extraccion, upsert_convocatoria, upsert_tipo_convocatoria
+from .connectors import InfoelectoralDescargasConnector, InfoelectoralProcesosConnector
+from .db import (
+    upsert_archivo_extraccion,
+    upsert_convocatoria,
+    upsert_proceso,
+    upsert_proceso_resultado,
+    upsert_tipo_convocatoria,
+)
 
 
 def ingest_one_source(
     conn: sqlite3.Connection,
-    connector: InfoelectoralDescargasConnector,
+    connector: InfoelectoralDescargasConnector | InfoelectoralProcesosConnector,
     raw_dir: Path,
     timeout: int,
     from_file: Path | None,
@@ -61,6 +67,8 @@ def ingest_one_source(
         tipos: list[dict[str, Any]] = []
         convocatorias: list[dict[str, Any]] = []
         archivos: list[dict[str, Any]] = []
+        procesos: list[dict[str, Any]] = []
+        resultados: list[dict[str, Any]] = []
         for r in extracted.records:
             if not isinstance(r, dict):
                 continue
@@ -72,6 +80,10 @@ def ingest_one_source(
                 convocatorias.append(r)
             elif kind == "archivo_extraccion":
                 archivos.append(r)
+            elif kind == "proceso":
+                procesos.append(r)
+            elif kind == "proceso_resultado":
+                resultados.append(r)
 
         # Upsert in FK order: tipos -> convocatorias -> archivos.
         for r in tipos:
@@ -164,6 +176,78 @@ def ingest_one_source(
                 nombre_doc=nombre_doc,
                 ambito=r.get("ambito"),
                 download_url=download_url,
+                source_id=source_id,
+                source_record_pk=srpk,
+                snapshot_date=snapshot_date,
+                raw_payload=raw_payload,
+                now_iso=now_iso,
+            )
+            loaded += 1
+
+        proceso_ids = set()
+        # upsert procesos before result rows.
+        for r in procesos:
+            proceso_id = str(r.get("proceso_id") or "").strip()
+            if not proceso_id:
+                continue
+            raw_payload = stable_json(r)
+            srid = f"proc:{proceso_id}"
+            srpk = upsert_source_record(
+                conn=conn,
+                source_id=source_id,
+                source_record_id=srid,
+                snapshot_date=snapshot_date,
+                raw_payload=raw_payload,
+                content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
+                now_iso=now_iso,
+            )
+            upsert_proceso(
+                conn,
+                proceso_id=proceso_id,
+                nombre=str(r.get("nombre") or "").strip() or proceso_id,
+                tipo=r.get("tipo"),
+                ambito=r.get("ambito"),
+                estado=r.get("estado"),
+                fecha=r.get("fecha"),
+                detalle_url=r.get("detalle_url"),
+                source_id=source_id,
+                source_record_pk=srpk,
+                snapshot_date=snapshot_date,
+                raw_payload=raw_payload,
+                now_iso=now_iso,
+            )
+            proceso_ids.add(proceso_id)
+            loaded += 1
+
+        for r in resultados:
+            proceso_dataset_id = str(r.get("proceso_dataset_id") or "").strip()
+            proceso_id = str(r.get("proceso_id") or "").strip()
+            url = str(r.get("url") or "").strip()
+            if not proceso_dataset_id or not proceso_id or not url:
+                continue
+            if proceso_id not in proceso_ids:
+                # No process row in this batch; skip if FK would fail.
+                continue
+            raw_payload = stable_json(r)
+            srid = f"pres:{proceso_dataset_id}"
+            srpk = upsert_source_record(
+                conn=conn,
+                source_id=source_id,
+                source_record_id=srid,
+                snapshot_date=snapshot_date,
+                raw_payload=raw_payload,
+                content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
+                now_iso=now_iso,
+            )
+            upsert_proceso_resultado(
+                conn,
+                proceso_dataset_id=proceso_dataset_id,
+                proceso_id=proceso_id,
+                nombre=str(r.get("nombre") or "").strip() or url,
+                tipo_dato=r.get("tipo_dato"),
+                url=url,
+                formato=r.get("formato"),
+                fecha=r.get("fecha"),
                 source_id=source_id,
                 source_record_pk=srpk,
                 snapshot_date=snapshot_date,

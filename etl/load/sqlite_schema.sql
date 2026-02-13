@@ -206,6 +206,39 @@ CREATE TABLE IF NOT EXISTS infoelectoral_archivos_extraccion (
   UNIQUE (convocatoria_id, nombre_doc)
 );
 
+CREATE TABLE IF NOT EXISTS infoelectoral_procesos (
+  proceso_id TEXT PRIMARY KEY,
+  nombre TEXT NOT NULL,
+  tipo TEXT,
+  ambito TEXT,
+  estado TEXT,
+  fecha TEXT,
+  detalle_url TEXT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS infoelectoral_proceso_resultados (
+  proceso_dataset_id TEXT PRIMARY KEY,
+  proceso_id TEXT NOT NULL REFERENCES infoelectoral_procesos(proceso_id) ON DELETE CASCADE,
+  nombre TEXT NOT NULL,
+  tipo_dato TEXT,
+  url TEXT NOT NULL,
+  formato TEXT,
+  fecha TEXT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (proceso_id, url)
+);
+
 -- Parlamentario: votaciones (roll-call cuando exista)
 CREATE TABLE IF NOT EXISTS parl_vote_events (
   vote_event_id TEXT PRIMARY KEY,
@@ -305,6 +338,8 @@ CREATE INDEX IF NOT EXISTS idx_mandates_source ON mandates(source_id);
 
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_convocatorias_tipo ON infoelectoral_convocatorias(tipo_convocatoria);
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_archivos_convocatoria ON infoelectoral_archivos_extraccion(convocatoria_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_procesos_estado ON infoelectoral_procesos(estado);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_resultados_proceso ON infoelectoral_proceso_resultados(proceso_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_active ON mandates(is_active);
 CREATE INDEX IF NOT EXISTS idx_mandates_role_id ON mandates(role_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_admin_level_id ON mandates(admin_level_id);

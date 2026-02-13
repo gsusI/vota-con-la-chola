@@ -49,13 +49,17 @@ class TestInfoelectoralSamplesE2E(unittest.TestCase):
                         SELECT
                           (SELECT COUNT(*) FROM infoelectoral_convocatoria_tipos) AS tipos,
                           (SELECT COUNT(*) FROM infoelectoral_convocatorias) AS convocatorias,
-                          (SELECT COUNT(*) FROM infoelectoral_archivos_extraccion) AS archivos
+                          (SELECT COUNT(*) FROM infoelectoral_archivos_extraccion) AS archivos,
+                          (SELECT COUNT(*) FROM infoelectoral_procesos) AS procesos,
+                          (SELECT COUNT(*) FROM infoelectoral_proceso_resultados) AS resultados
                         """
                     ).fetchone()
                 )
                 self.assertGreater(counts_1["tipos"], 0)
                 self.assertGreater(counts_1["convocatorias"], 0)
                 self.assertGreater(counts_1["archivos"], 0)
+                self.assertGreater(counts_1["procesos"], 0)
+                self.assertGreater(counts_1["resultados"], 0)
 
                 fk_issues = conn.execute("PRAGMA foreign_key_check").fetchall()
                 self.assertEqual(fk_issues, [], f"FK issues: {fk_issues}")
@@ -80,7 +84,9 @@ class TestInfoelectoralSamplesE2E(unittest.TestCase):
                         SELECT
                           (SELECT COUNT(*) FROM infoelectoral_convocatoria_tipos) AS tipos,
                           (SELECT COUNT(*) FROM infoelectoral_convocatorias) AS convocatorias,
-                          (SELECT COUNT(*) FROM infoelectoral_archivos_extraccion) AS archivos
+                          (SELECT COUNT(*) FROM infoelectoral_archivos_extraccion) AS archivos,
+                          (SELECT COUNT(*) FROM infoelectoral_procesos) AS procesos,
+                          (SELECT COUNT(*) FROM infoelectoral_proceso_resultados) AS resultados
                         """
                     ).fetchone()
                 )

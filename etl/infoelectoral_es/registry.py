@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from .connectors import InfoelectoralDescargasConnector
+from .connectors import (
+    InfoelectoralDescargasConnector,
+    InfoelectoralProcesosConnector,
+)
 
 
 def get_connectors() -> dict[str, InfoelectoralDescargasConnector]:
     connectors = [
         InfoelectoralDescargasConnector(),
+        InfoelectoralProcesosConnector(),
     ]
     return {c.source_id: c for c in connectors}
-

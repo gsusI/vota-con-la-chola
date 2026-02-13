@@ -19,6 +19,15 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "fallback_file": "etl/data/raw/samples/infoelectoral_descargas_sample.json",
         # Guardarrail basico: aunque cambie el catalogo, deberia haber tipos.
         "min_records_loaded_strict": 3,
-    }
+    },
+    "infoelectoral_procesos": {
+        "name": "Infoelectoral - Procesos electorales celebrados (datos/resultados)",
+        "scope": "electoral",
+        "default_url": f"{INFOELECTORAL_BASE}procesos/",
+        "format": "json",
+        # Muestra reducida para pipeline determinista.
+        "fallback_file": "etl/data/raw/samples/infoelectoral_procesos_sample.json",
+        # Guardarrail basico: debe existir al menos un proceso catalogado.
+        "min_records_loaded_strict": 1,
+    },
 }
-

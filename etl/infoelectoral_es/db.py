@@ -140,7 +140,7 @@ def upsert_archivo_extraccion(
     snapshot_date: str | None,
     raw_payload: str,
     now_iso: str,
-) -> None:
+    ) -> None:
     conn.execute(
         """
         INSERT INTO infoelectoral_archivos_extraccion (
@@ -179,5 +179,110 @@ def upsert_archivo_extraccion(
             now_iso,
             now_iso,
         ),
+        )
+
+
+def upsert_proceso(
+    conn: sqlite3.Connection,
+    *,
+    proceso_id: str,
+    nombre: str,
+    tipo: str | None,
+    ambito: str | None,
+    estado: str | None,
+    fecha: str | None,
+    detalle_url: str | None,
+    source_id: str,
+    source_record_pk: int | None,
+    snapshot_date: str | None,
+    raw_payload: str,
+    now_iso: str,
+) -> None:
+    conn.execute(
+        """
+        INSERT INTO infoelectoral_procesos (
+          proceso_id, nombre, tipo, ambito, estado, fecha, detalle_url,
+          source_id, source_record_pk, source_snapshot_date, raw_payload, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(proceso_id) DO UPDATE SET
+          nombre=excluded.nombre,
+          tipo=excluded.tipo,
+          ambito=excluded.ambito,
+          estado=excluded.estado,
+          fecha=excluded.fecha,
+          detalle_url=excluded.detalle_url,
+          source_id=excluded.source_id,
+          source_record_pk=COALESCE(excluded.source_record_pk, infoelectoral_procesos.source_record_pk),
+          source_snapshot_date=COALESCE(excluded.source_snapshot_date, infoelectoral_procesos.source_snapshot_date),
+          raw_payload=excluded.raw_payload,
+          updated_at=excluded.updated_at
+        """,
+        (
+            proceso_id,
+            nombre,
+            tipo,
+            ambito,
+            estado,
+            fecha,
+            detalle_url,
+            source_id,
+            source_record_pk,
+            snapshot_date,
+            raw_payload,
+            now_iso,
+            now_iso,
+        ),
     )
 
+
+def upsert_proceso_resultado(
+    conn: sqlite3.Connection,
+    *,
+    proceso_dataset_id: str,
+    proceso_id: str,
+    nombre: str,
+    tipo_dato: str | None,
+    url: str,
+    formato: str | None,
+    fecha: str | None,
+    source_id: str,
+    source_record_pk: int | None,
+    snapshot_date: str | None,
+    raw_payload: str,
+    now_iso: str,
+) -> None:
+    conn.execute(
+        """
+        INSERT INTO infoelectoral_proceso_resultados (
+          proceso_dataset_id, proceso_id, nombre, tipo_dato, url, formato, fecha,
+          source_id, source_record_pk, source_snapshot_date, raw_payload, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(proceso_dataset_id) DO UPDATE SET
+          proceso_id=excluded.proceso_id,
+          nombre=excluded.nombre,
+          tipo_dato=excluded.tipo_dato,
+          url=excluded.url,
+          formato=excluded.formato,
+          fecha=excluded.fecha,
+          source_id=excluded.source_id,
+          source_record_pk=COALESCE(excluded.source_record_pk, infoelectoral_proceso_resultados.source_record_pk),
+          source_snapshot_date=COALESCE(excluded.source_snapshot_date, infoelectoral_proceso_resultados.source_snapshot_date),
+          raw_payload=excluded.raw_payload,
+          updated_at=excluded.updated_at
+        """,
+        (
+            proceso_dataset_id,
+            proceso_id,
+            nombre,
+            tipo_dato,
+            url,
+            formato,
+            fecha,
+            source_id,
+            source_record_pk,
+            snapshot_date,
+            raw_payload,
+            now_iso,
+            now_iso,
+        ),
+    )

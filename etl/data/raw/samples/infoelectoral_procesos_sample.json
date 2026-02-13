@@ -1,0 +1,52 @@
+[
+  {
+    "kind": "proceso",
+    "proceso_id": "electoral:2026:municipales",
+    "nombre": "Procesos Electorales 2026",
+    "tipo": "Autonómico",
+    "ambito": "Nacional",
+    "estado": "cerrado",
+    "fecha": "2026-05-26",
+    "detalle_url": "https://infoelectoral.interior.gob.es/min/procesos/electoral-2026-05-26"
+  },
+  {
+    "kind": "proceso_resultado",
+    "proceso_dataset_id": "electoral:2026:municipales:resultados_csv",
+    "proceso_id": "electoral:2026:municipales",
+    "nombre": "Resultados oficiales municipales",
+    "tipo_dato": "csv",
+    "url": "https://infoelectoral.interior.gob.es/min/resultados/municipales-2026.csv",
+    "formato": "CSV",
+    "fecha": "2026-06-15"
+  },
+  {
+    "kind": "proceso_resultado",
+    "proceso_dataset_id": "electoral:2026:municipales:dataset_zip",
+    "proceso_id": "electoral:2026:municipales",
+    "nombre": "Resultado agregado municipal",
+    "tipo_dato": "zip",
+    "url": "https://infoelectoral.interior.gob.es/min/resultados/municipales-2026.zip",
+    "formato": "ZIP",
+    "fecha": "2026-06-16"
+  },
+  {
+    "kind": "proceso",
+    "proceso_id": "electoral:2024:europ",
+    "nombre": "Elecciones al Parlamento Europeo 2024",
+    "tipo": "Europeo",
+    "ambito": "Europa",
+    "estado": "cerrado",
+    "fecha": "2024-06-09",
+    "detalle_url": "https://infoelectoral.interior.gob.es/min/procesos/electoral-2024-eu"
+  },
+  {
+    "kind": "proceso_resultado",
+    "proceso_dataset_id": "electoral:2024:europ:resultados_csv",
+    "proceso_id": "electoral:2024:europ",
+    "nombre": "Boletín de resultados europeos",
+    "tipo_dato": "csv",
+    "url": "https://infoelectoral.interior.gob.es/min/resultados/europ-2024.csv",
+    "formato": "CSV",
+    "fecha": "2024-06-10"
+  }
+]
