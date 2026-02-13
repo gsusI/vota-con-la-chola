@@ -99,7 +99,7 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
 - Cobertura residual de `senado_votaciones` sin detalle (evento sin fecha/totales):
   - `10: 159`
   - `12: 530`
-  - `14: 4054`
+  - `14: 4049`
   - `15: 4`
 - Últimos avances ejecutados:
   - `backfill-senado-details --legislature 11 --max-events 20` => `events_reingested=3`, `member_votes_loaded=795`.
@@ -107,5 +107,6 @@ Objetivo del proyecto: poder evaluar tendencias de decisión de cada político c
   - `backfill-senado-details --legislature 12 --max-events 300` => `events_reingested=293`, `member_votes_loaded=5167`.
   - `backfill-senado-details --legislature 14 --max-events 50` => `events_reingested=25`, `member_votes_loaded=6424`.
   - `backfill-senado-details --vote-event-ids \"url:https://www.senado.es/legis14/votaciones/ses_21_245.xml\"` => `events_reingested=1`, `member_votes_loaded=256`.
+  - `backfill-senado-details --vote-event-ids \"ses_21_217..221\"` => `events_reingested=5`, `member_votes_loaded=1280`.
 - Siguiente acción prioritaria:
-  - Enfocar en `senado_votaciones` legislatura 14 (lote pequeño y controlado), priorizando sesiones con menor tasa de fallos; registrar explícitamente casos `no-match-in-session-xml` persistentes para decidir fallback manual por sesión.
+  - Enfocar en `senado_votaciones` legislatura 14 (lote pequeño y controlado), continuar por bloques de `vote-event-ids` ordenados por sesión para extraer rápidamente los grupos con mayor `events_with_member_votes` (ej. `ses_21_*`, luego `ses_22_*`).
