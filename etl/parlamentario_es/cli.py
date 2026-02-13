@@ -464,6 +464,7 @@ def main(argv: list[str] | None = None) -> int:
                     "auto": True,
                     "loops_requested": max_loops,
                     "loops_run": 0,
+                    "detail_blocked": False,
                     "events_considered": 0,
                     "events_with_payload": 0,
                     "events_without_payload": 0,
@@ -502,6 +503,8 @@ def main(argv: list[str] | None = None) -> int:
                         )
                     events_considered = int(loop_result.get("events_considered", 0))
                     events_reingested = int(loop_result.get("events_reingested", 0))
+                    loop_detail_blocked = bool(loop_result.get("detail_blocked"))
+                    aggregate["detail_blocked"] = bool(aggregate.get("detail_blocked") or loop_detail_blocked)
 
                     aggregate["results_by_loop"].append({
                         "loop": loops_run,
@@ -545,6 +548,9 @@ def main(argv: list[str] | None = None) -> int:
                         break
                     if call_limit is not None and remaining_limit <= 0:
                         stop_reason = "limit_exhausted"
+                        break
+                    if loop_detail_blocked and events_reingested <= 0:
+                        stop_reason = "detail_blocked"
                         break
 
                 aggregate["detail_failures"] = sorted(details_seen)

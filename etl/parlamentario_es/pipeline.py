@@ -437,6 +437,7 @@ def backfill_senado_vote_details(
     detail_host = normalize_ws(str(senado_detail_host or "https://www.senado.es")) or "https://www.senado.es"
     detail_dir = Path(str(senado_detail_dir)) if senado_detail_dir else None
     detail_failures: list[str] = []
+    detail_blocked = False
     session_cache: dict[str, dict[str, Any]] = {}
     rows_to_enrich: list[tuple[Any, dict[str, Any]]] = []
     session_urls: dict[str, tuple[int | None, int | None]] = {}
@@ -516,6 +517,7 @@ def backfill_senado_vote_details(
             start_idx = 1
 
         if blocked_error is not None:
+            detail_blocked = True
             for session_url, _ids in prefetch_items[start_idx:]:
                 session_cache[session_url] = {
                     "ok": False,
@@ -574,6 +576,7 @@ def backfill_senado_vote_details(
             "source_id": "senado_votaciones",
             "dry_run": True,
             "events_considered": len(rows),
+            "detail_blocked": bool(detail_blocked),
             "events_with_payload": len(records),
             "events_without_payload": len(rows) - len(records),
             "events_with_member_votes": len(records_with_votes),
@@ -591,6 +594,7 @@ def backfill_senado_vote_details(
             "source_id": "senado_votaciones",
             "dry_run": False,
             "events_considered": len(rows),
+            "detail_blocked": bool(detail_blocked),
             "events_with_payload": len(records),
             "events_without_payload": len(rows) - len(records),
             "events_with_member_votes": 0,
@@ -617,6 +621,7 @@ def backfill_senado_vote_details(
         "source_id": "senado_votaciones",
         "dry_run": False,
         "events_considered": len(rows),
+        "detail_blocked": bool(detail_blocked),
         "events_with_payload": len(records),
         "events_without_payload": len(rows) - len(records),
         "events_with_member_votes": len(records_with_votes),

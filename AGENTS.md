@@ -158,6 +158,9 @@ Guideline:
   - `--detail-workers 16` is a good first pass on local network links.
   - Use `1` when debugging or when upstream blocks concurrency.
   - Keep `--timeout` low-moderate (e.g. `20-30`) to avoid long-tail stalls.
+- Auto-loop behavior:
+  - When prefetch hits hard `HTTP 403`, backend sets `detail_blocked=True` and auto loops stop with `stop_reason=detail_blocked` to avoid blind repeated attempts.
+  - In that state, avoid rerunning with high limits; switch to `--senado-detail-dir` or lower workers + single-event probing.
 - Strong gain case:
   - Dry-run backfills of `--max-events` batches complete quickly and keep per-event work off main ingest path.
   - Works well when URLs are reachable and cache-friendly.
