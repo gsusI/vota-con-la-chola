@@ -36,6 +36,7 @@ Comandos ejecutados (DB: `etl/data/staging/politicos-es.e2e19.db`):
 - `municipal_concejales --strict-network`: `66895/66895`
 - `asamblea_madrid_ocupaciones --strict-network`: `9188/9285`
 - `asamblea_ceuta_diputados --strict-network`: `25/25`
+- `asamblea_melilla_diputados --strict-network`: `26/26`
 - `asamblea_extremadura_diputados --strict-network`: `65/65`
 - `asamblea_murcia_diputados --strict-network`: `54/54` (45 activos + 9 bajas)
 - `jgpa_diputados --strict-network`: `45/45`
@@ -58,6 +59,7 @@ Lectura operativa:
 - `municipal_concejales`: operativo con endpoint oficial `getConcejalesLegislatura` (XLSX) y parse robusto.
 - `asamblea_madrid_ocupaciones`: operativo con CSV oficial (ocupaciones/cargos) y `is_active` calculado con `FECHA_FIN` + legislatura maxima.
 - `asamblea_extremadura_diputados`: operativo con scrape HTML (listado `dipslegis` + paginacion) y afiliacion por `Grupo Parlamentario ... (SIGLAS)`.
+- `asamblea_melilla_diputados`: operativo con extracción del dataset `dataset_PTS2_MIEMBROS` embebido en JS (`externString`, `descriptionProc`, `isActive`) y `source_record_id` estable por `dboid`.
 - `asamblea_murcia_diputados`: operativo con scrape HTML (listado + seccion `Han causado baja`) y afiliacion por `Grupo Parlamentario ...` desde ficha individual.
 - `jgpa_diputados`: operativo con scrape HTML (Liferay search container, forzando `delta=50`) y afiliacion por `Grupo Parlamentario ...`.
 - `parlamento_canarias_diputados`: operativo con API oficial JSON (por legislatura 11) incluyendo altas/bajas y circunscripcion.
@@ -89,6 +91,7 @@ Legenda:
 | Representantes y cargos locales | Municipal | RED SARA Concejales | DONE | Definir umbral minimo y criterio de cobertura |
 | Representantes y mandatos (Asamblea de Madrid) | Autonomico | Asamblea de Madrid OpenData Ocupaciones | DONE | Definir umbral minimo y aclarar semantica de `is_active` |
 | Representantes y mandatos (Asamblea de Ceuta) | Autonomico | Asamblea de Ceuta: miembros (2023/2027) | DONE | Hardening de parsing y umbral minimo |
+| Representantes y mandatos (Asamblea de Melilla) | Autonomico | Asamblea de Melilla: diputados (2023/2027) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Asamblea de Extremadura) | Autonomico | Asamblea de Extremadura (dipslegis + paginacion) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Asamblea Murcia) | Autonomico | Asamblea Regional de Murcia: diputados (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (JGPA Asturias) | Autonomico | Junta General del Principado de Asturias (diputados) | DONE | Hardening de parsing y umbral minimo |
@@ -222,7 +225,6 @@ Legenda:
 
 - [ ] Parlamento de Galicia: conector `parlamento_galicia_deputados` disponible (muestras + `--from-file <dir>`), pero `--strict-network` sigue bloqueado por WAF/403: `https://www.parlamento.gal/Composicion/Deputados` (2026-02-12 devuelve 403 desde ETL).
 - [ ] Parlamento de Navarra: conector `parlamento_navarra_parlamentarios_forales` disponible (muestras + `--from-file <dir>`), pero `--strict-network` sigue bloqueado por Cloudflare challenge/403: `https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales` (2026-02-12 devuelve 403 cf-mitigated).
-- [ ] Asamblea de Melilla (fuente oficial pendiente): no hay conector; candidato: BOME `https://bomemelilla.es/` (requiere discovery de un listado nominal estable o estrategia incremental).
 
 ### P0 (siguiente ola, obligatoria para MVP de evidencia)
 

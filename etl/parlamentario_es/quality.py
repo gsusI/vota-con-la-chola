@@ -11,6 +11,13 @@ DEFAULT_VOTE_QUALITY_THRESHOLDS: dict[str, float] = {
     "member_votes_with_person_id_pct": 0.90,
 }
 
+DEFAULT_INITIATIVE_QUALITY_THRESHOLDS: dict[str, float] = {
+    "initiatives_with_title_pct": 0.90,
+    "initiatives_with_expediente_pct": 0.70,
+    "initiatives_with_legislature_pct": 0.50,
+    "initiatives_linked_to_votes_pct": 0.0,
+}
+
 
 def _normalize_source_ids(source_ids: Iterable[str]) -> tuple[str, ...]:
     normalized = sorted({str(s).strip() for s in source_ids if str(s).strip()})
@@ -41,6 +48,20 @@ def _empty_source_kpis() -> dict[str, Any]:
         "member_votes_total": 0,
         "member_votes_with_person_id": 0,
         "member_votes_with_person_id_pct": 0.0,
+    }
+
+
+def _empty_initiative_kpis() -> dict[str, Any]:
+    return {
+        "initiatives_total": 0,
+        "initiatives_with_title": 0,
+        "initiatives_with_expediente": 0,
+        "initiatives_with_legislature": 0,
+        "initiatives_linked_to_votes": 0,
+        "initiatives_with_title_pct": 0.0,
+        "initiatives_with_expediente_pct": 0.0,
+        "initiatives_with_legislature_pct": 0.0,
+        "initiatives_linked_to_votes_pct": 0.0,
     }
 
 
@@ -219,6 +240,106 @@ def compute_vote_quality_kpis(
     }
 
 
+def compute_initiative_quality_kpis(
+    conn: sqlite3.Connection,
+    source_ids: Iterable[str] = ("congreso_iniciativas", "senado_iniciativas"),
+) -> dict[str, Any]:
+    source_ids_tuple = _normalize_source_ids(source_ids)
+    placeholders = ",".join("?" for _ in source_ids_tuple)
+
+    coverage_rows = conn.execute(
+        f"""
+        SELECT
+          i.source_id,
+          COUNT(*) AS initiatives_total,
+          SUM(CASE WHEN i.title IS NOT NULL AND TRIM(i.title) <> '' THEN 1 ELSE 0 END)
+            AS initiatives_with_title,
+          SUM(CASE WHEN i.expediente IS NOT NULL AND TRIM(i.expediente) <> '' THEN 1 ELSE 0 END)
+            AS initiatives_with_expediente,
+          SUM(
+            CASE
+              WHEN i.legislature IS NOT NULL AND TRIM(i.legislature) <> '' THEN 1
+              ELSE 0
+            END
+          ) AS initiatives_with_legislature
+        FROM parl_initiatives i
+        WHERE i.source_id IN ({placeholders})
+        GROUP BY i.source_id
+        ORDER BY i.source_id
+        """,
+        source_ids_tuple,
+    ).fetchall()
+
+    linked_rows = conn.execute(
+        f"""
+        SELECT
+          i.source_id,
+          COUNT(DISTINCT l.initiative_id) AS initiatives_linked_to_votes
+        FROM parl_initiatives i
+        LEFT JOIN parl_vote_event_initiatives l ON l.initiative_id = i.initiative_id
+        WHERE i.source_id IN ({placeholders})
+        GROUP BY i.source_id
+        ORDER BY i.source_id
+        """,
+        source_ids_tuple,
+    ).fetchall()
+
+    by_source: dict[str, dict[str, Any]] = {
+        sid: _empty_initiative_kpis() for sid in source_ids_tuple
+    }
+    for row in coverage_rows:
+        sid = str(row["source_id"])
+        data = by_source.setdefault(sid, _empty_initiative_kpis())
+        data["initiatives_total"] = int(row["initiatives_total"] or 0)
+        data["initiatives_with_title"] = int(row["initiatives_with_title"] or 0)
+        data["initiatives_with_expediente"] = int(row["initiatives_with_expediente"] or 0)
+        data["initiatives_with_legislature"] = int(row["initiatives_with_legislature"] or 0)
+
+    for row in linked_rows:
+        sid = str(row["source_id"])
+        data = by_source.setdefault(sid, _empty_initiative_kpis())
+        data["initiatives_linked_to_votes"] = int(row["initiatives_linked_to_votes"] or 0)
+
+    total_initiatives = 0
+    total_with_title = 0
+    total_with_expediente = 0
+    total_with_legislature = 0
+    total_with_links = 0
+    for sid in source_ids_tuple:
+        data = by_source[sid]
+        total = int(data["initiatives_total"])
+        total_initiatives += total
+        total_with_title += int(data["initiatives_with_title"])
+        total_with_expediente += int(data["initiatives_with_expediente"])
+        total_with_legislature += int(data["initiatives_with_legislature"])
+        total_with_links += int(data["initiatives_linked_to_votes"])
+
+        data["initiatives_with_title_pct"] = _ratio(int(data["initiatives_with_title"]), total)
+        data["initiatives_with_expediente_pct"] = _ratio(
+            int(data["initiatives_with_expediente"]), total
+        )
+        data["initiatives_with_legislature_pct"] = _ratio(
+            int(data["initiatives_with_legislature"]), total
+        )
+        data["initiatives_linked_to_votes_pct"] = _ratio(
+            int(data["initiatives_linked_to_votes"]), total
+        )
+
+    return {
+        "source_ids": list(source_ids_tuple),
+        "initiatives_total": total_initiatives,
+        "initiatives_with_title": total_with_title,
+        "initiatives_with_expediente": total_with_expediente,
+        "initiatives_with_legislature": total_with_legislature,
+        "initiatives_linked_to_votes": total_with_links,
+        "initiatives_with_title_pct": _ratio(total_with_title, total_initiatives),
+        "initiatives_with_expediente_pct": _ratio(total_with_expediente, total_initiatives),
+        "initiatives_with_legislature_pct": _ratio(total_with_legislature, total_initiatives),
+        "initiatives_linked_to_votes_pct": _ratio(total_with_links, total_initiatives),
+        "by_source": by_source,
+    }
+
+
 def evaluate_vote_quality_gate(
     kpis: Mapping[str, Any],
     thresholds: Mapping[str, float] | None = None,
@@ -250,8 +371,42 @@ def evaluate_vote_quality_gate(
     }
 
 
+def evaluate_initiative_quality_gate(
+    kpis: Mapping[str, Any],
+    thresholds: Mapping[str, float] | None = None,
+) -> dict[str, Any]:
+    resolved_thresholds = dict(DEFAULT_INITIATIVE_QUALITY_THRESHOLDS)
+    if thresholds:
+        for metric, threshold in thresholds.items():
+            resolved_thresholds[str(metric)] = float(threshold)
+
+    ordered_metrics = sorted(resolved_thresholds.keys())
+    failures: list[dict[str, Any]] = []
+
+    for metric in ordered_metrics:
+        threshold = float(resolved_thresholds[metric])
+        actual = float(kpis.get(metric) or 0.0)
+        if actual < threshold:
+            failures.append(
+                {
+                    "metric": metric,
+                    "actual": actual,
+                    "threshold": threshold,
+                }
+            )
+
+    return {
+        "passed": len(failures) == 0,
+        "failures": failures,
+        "thresholds": {metric: float(resolved_thresholds[metric]) for metric in ordered_metrics},
+    }
+
+
 __all__ = [
     "DEFAULT_VOTE_QUALITY_THRESHOLDS",
+    "DEFAULT_INITIATIVE_QUALITY_THRESHOLDS",
     "compute_vote_quality_kpis",
     "evaluate_vote_quality_gate",
+    "compute_initiative_quality_kpis",
+    "evaluate_initiative_quality_gate",
 ]

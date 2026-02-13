@@ -29,6 +29,8 @@ Nota para votaciones:
 - Sugerencia operativa: añade `--unmatched-sample-limit 50` para capturar casos sin emparejar y priorizar corrección manual por razón (`no_candidates`, `skipped_no_name`, `ambiguous`, ...).
 - Para publicar y auditar unmatched en un pass sin escribir cambios, usa:
   - `python3 scripts/publicar_votaciones_es.py --db <db> --snapshot-date <fecha> --include-unmatched --unmatched-sample-limit 100`
+- Para publicar y materializar el emparejado de `person_id` al vuelo (sin paso separado), usa:
+  - `python3 scripts/publicar_votaciones_es.py --db <db> --snapshot-date <fecha> --backfill-member-ids`
 - Revisa KPIs/gate con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --source-ids congreso_votaciones,senado_votaciones` y usa `--enforce-gate` para fallar en CI cuando no se cumpla el minimo.
 - Para incluir diagnóstico de emparejado de persona en seco, usa `--include-unmatched --unmatched-sample-limit <n>`.
 - Exporta KPIs por fecha con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --json-out etl/data/published/votaciones-kpis-es-<snapshot>.json`.
@@ -55,6 +57,7 @@ just etl-init
 just etl-samples
 just parl-backfill-member-ids
 just parl-quality-pipeline
+just parl-congreso-votaciones-pipeline
 just parl-samples
 just parl-link-votes
 just parl-quality-report
@@ -63,6 +66,7 @@ just etl-backfill-normalized
 just etl-e2e
 just etl-publish-representantes
 just etl-publish-votaciones
+just etl-publish-votaciones-backfill
 just parl-quality-report-json
 just etl-smoke-e2e
 just etl-smoke-votes

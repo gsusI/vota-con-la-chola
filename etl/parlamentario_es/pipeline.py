@@ -700,7 +700,7 @@ def _ingest_senado_votaciones(
     seen = 0
     loaded = 0
     member_votes_loaded = 0
-    person_map = _load_person_map_for_mandate_source(conn, "senado_senadores")
+    person_index = _load_mandate_name_index(conn, "senado_senadores")
     for rec in extracted_records:
         seen += 1
         payload = rec.get("payload") or {}
@@ -770,14 +770,25 @@ def _ingest_senado_votaciones(
         member_votes = payload.get("member_votes") or []
         conn.execute("DELETE FROM parl_vote_member_votes WHERE vote_event_id = ?", (vote_event_id,))
         member_rows: list[tuple[Any, ...]] = []
+        vote_date_norm = _normalize_mandate_date(str(payload.get("vote_date") or ""))
         for mv in member_votes:
             if not isinstance(mv, dict):
                 continue
             member_name = mv.get("member_name")
             member_full, member_norm = _normalize_vote_member_name(member_name)
-            person_id = person_map.get(member_norm or "") if member_norm else None
             seat_raw = mv.get("seat")
             seat = str(seat_raw) if seat_raw is not None else None
+            person_id = None
+            if member_norm:
+                candidates = person_index.get(member_norm, [])
+                if candidates:
+                    person_id, status = _pick_best_person_id(
+                        candidates,
+                        vote_date_norm=vote_date_norm,
+                        group_norm=_normalize_group_key(str(mv.get("group") or "")),
+                    )
+                    if status != "matched" or person_id is None:
+                        person_id = None
             if not seat:
                 seat = f"name:{member_norm or sha256_bytes((member_full or member_name or '').encode('utf-8'))[:16]}"
             member_rows.append(

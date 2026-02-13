@@ -24,6 +24,7 @@ TRACKER_SOURCE_HINTS = {
     "RED SARA Concejales": ["municipal_concejales"],
     "Asamblea de Madrid": ["asamblea_madrid_ocupaciones"],
     "Asamblea de Ceuta": ["asamblea_ceuta_diputados"],
+    "Asamblea de Melilla": ["asamblea_melilla_diputados"],
     "Cortes de Aragon": ["cortes_aragon_diputados"],
     "Asamblea de Extremadura": ["asamblea_extremadura_diputados"],
     "Asamblea Regional de Murcia": ["asamblea_murcia_diputados"],

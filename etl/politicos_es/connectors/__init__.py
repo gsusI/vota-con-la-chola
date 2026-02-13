@@ -3,6 +3,7 @@ from __future__ import annotations
 from .asamblea_madrid import AsambleaMadridOcupacionesConnector
 from .asamblea_extremadura import AsambleaExtremaduraDiputadosConnector
 from .asamblea_ceuta import AsambleaCeutaDiputadosConnector
+from .asamblea_melilla import AsambleaMelillaDiputadosConnector
 from .asamblea_murcia import AsambleaMurciaDiputadosConnector
 from .congreso import CongresoDiputadosConnector
 from .cortes_aragon import CortesAragonDiputadosConnector
@@ -25,6 +26,7 @@ from .senado import SenadoSenadoresConnector
 
 __all__ = [
     "AsambleaCeutaDiputadosConnector",
+    "AsambleaMelillaDiputadosConnector",
     "AsambleaExtremaduraDiputadosConnector",
     "AsambleaMadridOcupacionesConnector",
     "AsambleaMurciaDiputadosConnector",

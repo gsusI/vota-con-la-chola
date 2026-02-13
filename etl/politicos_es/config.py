@@ -102,6 +102,17 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 20,
         "fallback_file": "etl/data/raw/samples/asamblea_ceuta_diputados_sample.json",
     },
+    "asamblea_melilla_diputados": {
+        "name": "Asamblea de Melilla - Miembros (Legislatura 2023/2027)",
+        "scope": "autonomico",
+        "default_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
+        "format": "json",
+        "institution_name": "Asamblea de Melilla",
+        "level": "autonomico",
+        "role_title": "Diputado/a",
+        "min_records_loaded_strict": 20,
+        "fallback_file": "etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
+    },
     "asamblea_extremadura_diputados": {
         "name": "Asamblea de Extremadura - Diputadas/os (XII Legislatura)",
         "scope": "autonomico",

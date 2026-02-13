@@ -32,6 +32,7 @@ etl-samples:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source municipal_concejales --from-file etl/data/raw/samples/municipal_concejales_sample.csv --snapshot-date {{snapshot_date}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_madrid_ocupaciones --from-file etl/data/raw/samples/asamblea_madrid_ocupaciones_sample.csv --snapshot-date {{snapshot_date}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_ceuta_diputados --from-file etl/data/raw/samples/asamblea_ceuta_diputados_sample.json --snapshot-date {{snapshot_date}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_melilla_diputados --from-file etl/data/raw/samples/asamblea_melilla_diputados_sample.json --snapshot-date {{snapshot_date}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_extremadura_diputados --from-file etl/data/raw/samples/asamblea_extremadura_diputados_sample.json --snapshot-date {{snapshot_date}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_murcia_diputados --from-file etl/data/raw/samples/asamblea_murcia_diputados_sample.json --snapshot-date {{snapshot_date}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source jgpa_diputados --from-file etl/data/raw/samples/jgpa_diputados_sample.json --snapshot-date {{snapshot_date}}"
@@ -111,6 +112,13 @@ parl-quality-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --enforce-gate --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
 
+parl-congreso-votaciones-pipeline:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --strict-network"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --source-ids congreso_votaciones --unmatched-sample-limit 50"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids congreso_votaciones --json-out etl/data/published/votaciones-kpis-congreso-{{snapshot_date}}.json"
+  docker compose run --rm --build etl "python3 scripts/publicar_votaciones_es.py --db {{db_path}} --snapshot-date {{snapshot_date}} --source-ids congreso_votaciones --backfill-member-ids --include-unmatched --unmatched-sample-limit 100"
+
 parl-backfill-member-ids:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}}"
 
@@ -149,6 +157,9 @@ etl-extract-asamblea-madrid:
 
 etl-extract-asamblea-ceuta:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_ceuta_diputados --snapshot-date {{snapshot_date}} --strict-network"
+
+etl-extract-asamblea-melilla:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_melilla_diputados --snapshot-date {{snapshot_date}} --strict-network"
 
 etl-extract-asamblea-extremadura:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_extremadura_diputados --snapshot-date {{snapshot_date}} --strict-network"
@@ -211,6 +222,7 @@ etl-extract-all:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source municipal_concejales --snapshot-date {{snapshot_date}} --strict-network --timeout {{municipal_timeout}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_madrid_ocupaciones --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_ceuta_diputados --snapshot-date {{snapshot_date}} --strict-network"
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_melilla_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_extremadura_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_murcia_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source jgpa_diputados --snapshot-date {{snapshot_date}} --strict-network"
@@ -234,6 +246,7 @@ etl-e2e:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source municipal_concejales --snapshot-date {{snapshot_date}} --strict-network --timeout {{municipal_timeout}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_madrid_ocupaciones --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_ceuta_diputados --snapshot-date {{snapshot_date}} --strict-network"
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_melilla_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_extremadura_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source asamblea_murcia_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source jgpa_diputados --snapshot-date {{snapshot_date}} --strict-network"

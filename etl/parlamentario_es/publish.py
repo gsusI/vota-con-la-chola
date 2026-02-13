@@ -6,7 +6,12 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any, Iterable
 
-from .quality import compute_vote_quality_kpis, evaluate_vote_quality_gate
+from .quality import (
+    compute_initiative_quality_kpis,
+    compute_vote_quality_kpis,
+    evaluate_initiative_quality_gate,
+    evaluate_vote_quality_gate,
+)
 from .pipeline import backfill_vote_member_person_ids
 
 
@@ -47,18 +52,39 @@ def build_votaciones_snapshot(
     *,
     snapshot_date: str,
     source_ids: Iterable[str] = ("congreso_votaciones", "senado_votaciones"),
+    include_initiative_quality: bool = False,
+    initiative_source_ids: Iterable[str] = ("congreso_iniciativas", "senado_iniciativas"),
     only_linked_events: bool = False,
     max_events: int | None = None,
     max_member_votes_per_event: int | None = None,
+    backfill_member_ids: bool = False,
+    backfill_batch_size: int = 5000,
     include_unmatched_people: bool = False,
     unmatched_sample_limit: int = 0,
 ) -> dict[str, Any]:
     source_ids = tuple(str(x).strip() for x in source_ids if str(x).strip())
+    initiative_source_ids = tuple(
+        str(x).strip() for x in initiative_source_ids if str(x).strip()
+    )
     if not source_ids:
         raise ValueError("source_ids vacio")
+    if bool(include_initiative_quality) and not initiative_source_ids:
+        raise ValueError("initiative_source_ids vacio")
     unmatched_sample_limit_i = int(unmatched_sample_limit)
     if unmatched_sample_limit_i < 0:
         raise ValueError("unmatched-sample-limit debe ser >= 0")
+    if int(backfill_batch_size) <= 0:
+        raise ValueError("backfill-batch-size debe ser > 0")
+
+    backfill_report: dict[str, Any] | None = None
+    if bool(backfill_member_ids):
+        backfill_report = backfill_vote_member_person_ids(
+            conn,
+            vote_source_ids=source_ids,
+            dry_run=False,
+            batch_size=int(backfill_batch_size),
+            unmatched_sample_limit=0,
+        )
 
     where = ["e.source_id IN (" + ",".join("?" for _ in source_ids) + ")"]
     params: list[Any] = [*source_ids]
@@ -328,6 +354,31 @@ def build_votaciones_snapshot(
             unmatched_sample_limit=unmatched_sample_limit_i,
         )
 
+    initiatives_quality: dict[str, Any] | None = None
+    if bool(include_initiative_quality):
+        initiative_kpis = compute_initiative_quality_kpis(
+            conn,
+            source_ids=initiative_source_ids,
+        )
+        initiatives_quality = {
+            "provider": "etl.parlamentario_es.quality",
+            "scope": {"source_ids": list(initiative_source_ids)},
+            "kpis": initiative_kpis,
+            "gate": evaluate_initiative_quality_gate(initiative_kpis),
+        }
+
+    quality: dict[str, Any] = {
+        "provider": "etl.parlamentario_es.quality",
+        "scope": {"source_ids": list(source_ids)},
+        "kpis": kpis,
+        "gate": gate,
+        "member_id_backfill": backfill_report,
+    }
+    if initiatives_quality is not None:
+        quality["initiatives"] = initiatives_quality
+    if unmatched_people is not None:
+        quality["unmatched_people"] = unmatched_people
+
     snapshot: dict[str, Any] = {
         "fecha_referencia": snapshot_date,
         # Deterministic timestamp for a given snapshot date.
@@ -339,17 +390,7 @@ def build_votaciones_snapshot(
             "max_member_votes_per_event": max_member_votes_per_event,
         },
         "totales": totales,
-        "quality": {
-            "provider": "etl.parlamentario_es.quality",
-            "scope": {"source_ids": list(source_ids)},
-            "kpis": kpis,
-            "gate": gate,
-            **(
-                {"unmatched_people": unmatched_people}
-                if unmatched_people is not None
-                else {}
-            ),
-        },
+        "quality": quality,
         "items": items,
     }
     return snapshot

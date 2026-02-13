@@ -11,7 +11,12 @@ from .config import DEFAULT_DB, DEFAULT_RAW_DIR, DEFAULT_SCHEMA, DEFAULT_TIMEOUT
 from .db import apply_schema, open_db, seed_sources
 from .linking import link_congreso_votes_to_initiatives, link_senado_votes_to_initiatives
 from .pipeline import VOTE_SOURCE_TO_MANDATE_SOURCE, backfill_vote_member_person_ids, ingest_one_source
-from .quality import compute_vote_quality_kpis, evaluate_vote_quality_gate
+from .quality import (
+    compute_initiative_quality_kpis,
+    compute_vote_quality_kpis,
+    evaluate_initiative_quality_gate,
+    evaluate_vote_quality_gate,
+)
 from .publish import write_json_if_changed
 from .registry import get_connectors
 
@@ -83,6 +88,16 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         default=0,
         help="Máximo de ejemplos de votos sin person_id mostrados en quality-report. 0 desactiva muestra.",
     )
+    p_quality.add_argument(
+        "--include-initiatives",
+        action="store_true",
+        help="Incluye KPIs de iniciativas (congress/senado) en el reporte.",
+    )
+    p_quality.add_argument(
+        "--initiative-source-ids",
+        default="congreso_iniciativas,senado_iniciativas",
+        help="Lista CSV de source_id de iniciativas para incluir",
+    )
 
     p_backfill = sub.add_parser(
         "backfill-member-ids",
@@ -124,6 +139,23 @@ def _validate_vote_source_ids(requested: tuple[str, ...], *, for_command: str) -
     return requested
 
 
+def _validate_initiative_source_ids(
+    requested: tuple[str, ...],
+    *,
+    for_command: str,
+) -> tuple[str, ...]:
+    allowed = ("congreso_iniciativas", "senado_iniciativas")
+    if not requested:
+        raise SystemExit(f"{for_command}: source-ids de iniciativas vacio")
+
+    unknown = tuple(s for s in requested if s not in allowed)
+    if unknown:
+        raise SystemExit(
+            f"{for_command}: source-ids de iniciativas desconocidos: {', '.join(unknown)} (esperados: {', '.join(allowed)})"
+        )
+    return requested
+
+
 def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
     vals = [x.strip() for x in str(csv_value).split(",")]
     vals = [x for x in vals if x]
@@ -140,6 +172,20 @@ def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
 def _quality_report(conn: sqlite3.Connection, *, source_ids: tuple[str, ...]) -> dict[str, Any]:
     kpis = compute_vote_quality_kpis(conn, source_ids=source_ids)
     gate = evaluate_vote_quality_gate(kpis)
+    return {
+        "source_ids": list(source_ids),
+        "kpis": kpis,
+        "gate": gate,
+    }
+
+
+def _initiative_quality_report(
+    conn: sqlite3.Connection,
+    *,
+    source_ids: tuple[str, ...],
+) -> dict[str, Any]:
+    kpis = compute_initiative_quality_kpis(conn, source_ids=source_ids)
+    gate = evaluate_initiative_quality_gate(kpis)
     return {
         "source_ids": list(source_ids),
         "kpis": kpis,
@@ -241,6 +287,11 @@ def main(argv: list[str] | None = None) -> int:
             _parse_source_ids(str(args.source_ids)),
             for_command="quality-report",
         )
+        include_initiatives = bool(args.include_initiatives)
+        initiative_source_ids = _validate_initiative_source_ids(
+            _parse_source_ids(str(args.initiative_source_ids)),
+            for_command="quality-report",
+        )
 
         conn = open_db(Path(args.db))
         try:
@@ -257,6 +308,10 @@ def main(argv: list[str] | None = None) -> int:
                 )
             else:
                 result = _quality_report(conn, source_ids=source_ids)
+            if include_initiatives:
+                result["initiatives"] = _initiative_quality_report(
+                    conn, source_ids=initiative_source_ids
+                )
         finally:
             conn.close()
 
@@ -269,6 +324,12 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 print(f"OK unchanged: {out_path}")
         if bool(args.enforce_gate) and not bool(result.get("gate", {}).get("passed")):
+            return 1
+        if (
+            bool(args.enforce_gate)
+            and include_initiatives
+            and not bool(result.get("initiatives", {}).get("gate", {}).get("passed"))
+        ):
             return 1
         return 0
 

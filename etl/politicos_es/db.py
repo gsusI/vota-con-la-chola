@@ -21,7 +21,17 @@ def table_columns(conn: sqlite3.Connection, table: str) -> set[str]:
     return {str(r["name"]) for r in rows}
 
 
+def table_exists(conn: sqlite3.Connection, table: str) -> bool:
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name = ?",
+        (table,),
+    ).fetchone()
+    return row is not None
+
+
 def ensure_column(conn: sqlite3.Connection, table: str, column: str, definition_sql: str) -> None:
+    if not table_exists(conn, table):
+        return
     cols = table_columns(conn, table)
     if column in cols:
         return
@@ -29,42 +39,57 @@ def ensure_column(conn: sqlite3.Connection, table: str, column: str, definition_
 
 
 def ensure_schema_compat(conn: sqlite3.Connection) -> None:
-    ensure_column(conn, "persons", "gender_id", "gender_id INTEGER REFERENCES genders(gender_id)")
-    ensure_column(conn, "persons", "territory_id", "territory_id INTEGER REFERENCES territories(territory_id)")
+    compat_columns: dict[str, dict[str, str]] = {
+        "person_identifiers": {
+            "created_at": "created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))",
+        },
+        "persons": {
+            "gender_id": "gender_id INTEGER REFERENCES genders(gender_id)",
+            "territory_id": "territory_id INTEGER REFERENCES territories(territory_id)",
+        },
+        "source_records": {
+            "source_snapshot_date": "source_snapshot_date TEXT",
+            "content_sha256": "content_sha256 TEXT",
+        },
+        "mandates": {
+            "role_id": "role_id INTEGER REFERENCES roles(role_id)",
+            "admin_level_id": "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
+            "territory_id": "territory_id INTEGER REFERENCES territories(territory_id)",
+            "source_record_pk": "source_record_pk INTEGER REFERENCES source_records(source_record_pk)",
+        },
+        "institutions": {
+            "admin_level_id": "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
+            "territory_id": "territory_id INTEGER REFERENCES territories(territory_id)",
+        },
+        "parties": {
+            "acronym": "acronym TEXT",
+        },
+        "party_aliases": {
+            "created_at": "created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))",
+            "updated_at": "updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))",
+        },
+    }
 
-    ensure_column(
-        conn,
-        "institutions",
-        "admin_level_id",
-        "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
-    )
-    ensure_column(conn, "institutions", "territory_id", "territory_id INTEGER REFERENCES territories(territory_id)")
+    for table, columns in compat_columns.items():
+        for column, definition_sql in columns.items():
+            ensure_column(conn, table, column, definition_sql)
 
-    ensure_column(conn, "mandates", "role_id", "role_id INTEGER REFERENCES roles(role_id)")
-    ensure_column(
-        conn,
-        "mandates",
-        "admin_level_id",
-        "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
-    )
-    ensure_column(conn, "mandates", "territory_id", "territory_id INTEGER REFERENCES territories(territory_id)")
-    ensure_column(
-        conn,
-        "mandates",
-        "source_record_pk",
-        "source_record_pk INTEGER REFERENCES source_records(source_record_pk)",
-    )
+    conn.commit()
 
 
 def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
     sql = schema_path.read_text(encoding="utf-8")
-    try:
+    for _ in range(2):
+        try:
+            conn.executescript(sql)
+            break
+        except sqlite3.OperationalError as exc:
+            if "no such column" not in str(exc).lower():
+                raise
+            ensure_schema_compat(conn)
+    else:
         conn.executescript(sql)
-    except sqlite3.OperationalError as exc:
-        if "no such column" not in str(exc).lower():
-            raise
-        ensure_schema_compat(conn)
-        conn.executescript(sql)
+
     ensure_schema_compat(conn)
     conn.commit()
 
@@ -132,17 +157,17 @@ def upsert_admin_level(conn: sqlite3.Connection, code: str, now_iso: str) -> int
     if not code_norm:
         return None
     label = code_norm.capitalize()
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO admin_levels (code, label, created_at, updated_at)
         VALUES (?, ?, ?, ?)
         ON CONFLICT(code) DO UPDATE SET
           label=excluded.label,
           updated_at=excluded.updated_at
+        RETURNING admin_level_id
         """,
         (code_norm, label, now_iso, now_iso),
-    )
-    row = conn.execute("SELECT admin_level_id FROM admin_levels WHERE code = ?", (code_norm,)).fetchone()
+    ).fetchone()
     return int(row["admin_level_id"]) if row else None
 
 
@@ -151,17 +176,17 @@ def upsert_role(conn: sqlite3.Connection, title: str, now_iso: str) -> int | Non
     if not title_norm:
         return None
     ckey = normalize_key_part(title_norm)
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO roles (title, canonical_key, created_at, updated_at)
         VALUES (?, ?, ?, ?)
         ON CONFLICT(canonical_key) DO UPDATE SET
           title=excluded.title,
           updated_at=excluded.updated_at
+        RETURNING role_id
         """,
         (title_norm, ckey, now_iso, now_iso),
-    )
-    row = conn.execute("SELECT role_id FROM roles WHERE canonical_key = ?", (ckey,)).fetchone()
+    ).fetchone()
     return int(row["role_id"]) if row else None
 
 
@@ -182,17 +207,17 @@ def upsert_territory(conn: sqlite3.Connection, raw_code: str | None, now_iso: st
     code, name = normalize_territory_code(raw_code)
     if not code:
         return None
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO territories (code, name, level, parent_territory_id, created_at, updated_at)
         VALUES (?, ?, NULL, NULL, ?, ?)
         ON CONFLICT(code) DO UPDATE SET
           name=COALESCE(excluded.name, territories.name),
           updated_at=excluded.updated_at
+        RETURNING territory_id
         """,
         (code, name, now_iso, now_iso),
-    )
-    row = conn.execute("SELECT territory_id FROM territories WHERE code = ?", (code,)).fetchone()
+    ).fetchone()
     return int(row["territory_id"]) if row else None
 
 
@@ -223,7 +248,7 @@ def upsert_source_record(
     content_sha256: str,
     now_iso: str,
 ) -> int:
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO source_records (
           source_id, source_record_id, source_snapshot_date, raw_payload, content_sha256, created_at, updated_at
@@ -233,16 +258,9 @@ def upsert_source_record(
           raw_payload=excluded.raw_payload,
           content_sha256=excluded.content_sha256,
           updated_at=excluded.updated_at
+        RETURNING source_record_pk
         """,
         (source_id, source_record_id, snapshot_date, raw_payload, content_sha256, now_iso, now_iso),
-    )
-    row = conn.execute(
-        """
-        SELECT source_record_pk
-        FROM source_records
-        WHERE source_id = ? AND source_record_id = ?
-        """,
-        (source_id, source_record_id),
     ).fetchone()
     if row is None:
         raise RuntimeError("No se pudo resolver source_record_pk")
@@ -255,16 +273,16 @@ def upsert_party(conn: sqlite3.Connection, party_name: str | None, now_iso: str)
     party_name = normalize_ws(party_name)
     if not party_name:
         return None
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO parties (name, acronym, created_at, updated_at)
         VALUES (?, NULL, ?, ?)
         ON CONFLICT(name) DO UPDATE SET
           updated_at=excluded.updated_at
+        RETURNING party_id
         """,
         (party_name, now_iso, now_iso),
-    )
-    row = conn.execute("SELECT party_id FROM parties WHERE name = ?", (party_name,)).fetchone()
+    ).fetchone()
     party_id = int(row["party_id"]) if row else None
     if party_id is not None:
         upsert_party_alias(conn, party_id, party_name, now_iso)
@@ -280,7 +298,7 @@ def upsert_institution(
     territory_id: int | None,
     now_iso: str,
 ) -> int:
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO institutions (
           name, level, admin_level_id, territory_code, territory_id, created_at, updated_at
@@ -290,16 +308,9 @@ def upsert_institution(
           admin_level_id=COALESCE(excluded.admin_level_id, institutions.admin_level_id),
           territory_id=COALESCE(excluded.territory_id, institutions.territory_id),
           updated_at=excluded.updated_at
+        RETURNING institution_id
         """,
         (institution_name, level, admin_level_id, territory_code, territory_id, now_iso, now_iso),
-    )
-    row = conn.execute(
-        """
-        SELECT institution_id
-        FROM institutions
-        WHERE name = ? AND level = ? AND territory_code = ?
-        """,
-        (institution_name, level, territory_code),
     ).fetchone()
     if row is None:
         raise RuntimeError("No se pudo resolver institution_id")
@@ -320,15 +331,15 @@ def upsert_gender(conn: sqlite3.Connection, raw_gender: str | None, now_iso: str
         return None
     code = normalize_gender_code(raw_gender)
     labels = {"m": "Masculino", "f": "Femenino", "u": "Desconocido"}
-    conn.execute(
+    row = conn.execute(
         """
         INSERT INTO genders (code, label, created_at, updated_at)
         VALUES (?, ?, ?, ?)
         ON CONFLICT(code) DO UPDATE SET updated_at=excluded.updated_at
+        RETURNING gender_id
         """,
         (code, labels.get(code, "Desconocido"), now_iso, now_iso),
-    )
-    row = conn.execute("SELECT gender_id FROM genders WHERE code = ?", (code,)).fetchone()
+    ).fetchone()
     return int(row["gender_id"]) if row else None
 
 
@@ -340,7 +351,7 @@ def upsert_person(
     now_iso: str,
 ) -> int:
     ckey = canonical_key(row["full_name"], row.get("birth_date"), row.get("territory_code"))
-    conn.execute(
+    result = conn.execute(
         """
         INSERT INTO persons (
           full_name, given_name, family_name, gender, gender_id, birth_date, territory_code,
@@ -359,6 +370,7 @@ def upsert_person(
           END,
           territory_id=COALESCE(excluded.territory_id, persons.territory_id),
           updated_at=excluded.updated_at
+        RETURNING person_id
         """,
         (
             row["full_name"],
@@ -373,9 +385,6 @@ def upsert_person(
             now_iso,
             now_iso,
         ),
-    )
-    result = conn.execute(
-        "SELECT person_id FROM persons WHERE canonical_key = ?", (ckey,)
     ).fetchone()
     if result is None:
         raise RuntimeError("No se pudo resolver person_id")
@@ -715,4 +724,3 @@ def backfill_normalized_dimensions(conn: sqlite3.Connection) -> None:
         """
     )
     conn.commit()
-

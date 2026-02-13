@@ -70,9 +70,33 @@ def parse_args() -> argparse.Namespace:
         help="Falla con exit!=0 si quality.gate.passed es false",
     )
     p.add_argument(
+        "--include-initiatives",
+        action="store_true",
+        help="Incluye KPIs de iniciativas (congreso/senado) en la sección quality.",
+    )
+    p.add_argument(
+        "--initiative-source-ids",
+        default="congreso_iniciativas,senado_iniciativas",
+        help="Lista CSV de source_id de iniciativas para quality (solo si --include-initiatives).",
+    )
+    p.add_argument(
         "--include-unmatched",
         action="store_true",
         help="Incluye diagnóstico en seco de votos nominales sin person_id en la sección quality.",
+    )
+    p.add_argument(
+        "--backfill-member-ids",
+        action="store_true",
+        help=(
+            "Rellena person_id en votos nominales faltantes usando matching "
+            "determinista por nombre/mandato antes de publicar."
+        ),
+    )
+    p.add_argument(
+        "--backfill-batch-size",
+        type=int,
+        default=5000,
+        help="Tamaño máximo de lote al ejecutar el backfill de person_id desde el snapshot (default 5000).",
     )
     p.add_argument(
         "--unmatched-sample-limit",
@@ -109,11 +133,18 @@ def main() -> int:
         return 2
 
     source_ids = _parse_source_ids(args.source_ids)
+    initiative_source_ids = _parse_source_ids(args.initiative_source_ids)
     if not source_ids:
         print("ERROR: source-ids vacio", file=sys.stderr)
         return 2
+    if bool(args.include_initiatives) and not initiative_source_ids:
+        print("ERROR: initiative-source-ids vacio", file=sys.stderr)
+        return 2
     if int(args.unmatched_sample_limit) < 0:
         print("ERROR: unmatched-sample-limit debe ser >= 0", file=sys.stderr)
+        return 2
+    if int(args.backfill_batch_size) <= 0:
+        print("ERROR: backfill-batch-size debe ser > 0", file=sys.stderr)
         return 2
 
     if args.json_out:
@@ -128,9 +159,13 @@ def main() -> int:
             conn,
             snapshot_date=snapshot_date,
             source_ids=source_ids,
+            include_initiative_quality=bool(args.include_initiatives),
+            initiative_source_ids=initiative_source_ids,
             only_linked_events=bool(args.only_linked_events),
             max_events=args.max_events,
             max_member_votes_per_event=args.max_member_votes_per_event,
+            backfill_member_ids=bool(args.backfill_member_ids),
+            backfill_batch_size=int(args.backfill_batch_size),
             include_unmatched_people=bool(args.include_unmatched),
             unmatched_sample_limit=int(args.unmatched_sample_limit),
         )
@@ -140,6 +175,8 @@ def main() -> int:
     if bool(args.enforce_quality_gate):
         gate = (snap.get("quality") or {}).get("gate") or {}
         passed = bool(gate.get("passed"))
+        initiatives_gate = (snap.get("quality", {}).get("initiatives", {}) or {}).get("gate") or {}
+        initiatives_passed = bool(initiatives_gate.get("passed"))
         if not passed:
             failed_metrics: list[str] = []
             failures = gate.get("failures")
@@ -155,6 +192,25 @@ def main() -> int:
             print(
                 f"ERROR: quality gate failed for source_ids={','.join(source_ids)} "
                 f"(failed_metrics={failed_csv})",
+                file=sys.stderr,
+            )
+            return 3
+        if bool(args.include_initiatives) and not initiatives_passed:
+            failed_metrics = []
+            failures = initiatives_gate.get("failures")
+            if isinstance(failures, list):
+                for f in failures:
+                    if not isinstance(f, dict):
+                        continue
+                    metric = str(f.get("metric") or "").strip()
+                    if metric:
+                        failed_metrics.append(metric)
+            failed_metrics = sorted(dict.fromkeys(failed_metrics))
+            failed_csv = ",".join(failed_metrics) if failed_metrics else "unknown"
+            print(
+                "ERROR: initiative quality gate failed "
+                f"(initiative_source_ids={','.join(initiative_source_ids)}, "
+                f"failed_metrics={failed_csv})",
                 file=sys.stderr,
             )
             return 3

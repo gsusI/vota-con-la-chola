@@ -195,9 +195,10 @@ def build_parlamento_navarra_records(timeout: int) -> list[dict[str, Any]]:
 
 
 def records_from_html_dir(dir_path: Path) -> list[dict[str, Any]]:
-    html_files = sorted([p for p in dir_path.glob("*.html") if p.is_file()])
+    html_files = sorted({*dir_path.glob("*.html"), *dir_path.glob("*.htm"), *dir_path.glob("*.HTML"), *dir_path.glob("*.HTM")})
+    html_files = [p for p in html_files if p.is_file()]
     if not html_files:
-        raise RuntimeError(f"Directorio sin .html: {dir_path}")
+        raise RuntimeError(f"Directorio sin .html/.htm: {dir_path}")
 
     records: list[dict[str, Any]] = []
     for p in html_files:

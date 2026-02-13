@@ -266,7 +266,7 @@
         width: auto;
       }
 
-      .detail {
+        .detail {
         min-height: 0;
         overflow: auto;
         border-top: 1px solid #edf1f7;
@@ -278,6 +278,11 @@
         color: #3d4a64;
         font-size: 0.78rem;
         font-family: "IBM Plex Mono", monospace;
+      }
+
+      .path .path-btn {
+        display: inline-flex;
+        margin: 0;
       }
 
       .path .muted {
@@ -509,6 +514,7 @@
             <h2>3) Detalle y relaciones</h2>
             <p>Cada click abre el siguiente nivel segun claves foraneas salientes/entrantes.</p>
           </div>
+          <div id="pathTrail" class="path"></div>
           <div id="detail" class="detail"></div>
         </section>
       </main>
@@ -537,6 +543,7 @@
         tableFilter: document.getElementById("tableFilter"),
         reloadSchema: document.getElementById("reloadSchema"),
         tables: document.getElementById("tables"),
+        pathTrail: document.getElementById("pathTrail"),
         recordsHint: document.getElementById("recordsHint"),
         recordSearch: document.getElementById("recordSearch"),
         applySearch: document.getElementById("applySearch"),
@@ -556,6 +563,35 @@
         if (value === null || value === undefined) return "null";
         if (typeof value === "object") return JSON.stringify(value);
         return String(value);
+      }
+
+      function renderBreadcrumbTrail() {
+        const stepCount = Array.isArray(state.navStack) ? state.navStack.length : 0;
+        if (!stepCount || !els.pathTrail) {
+          if (els.pathTrail) {
+            els.pathTrail.innerHTML = "";
+          }
+          return;
+        }
+
+        const parts = state.navStack.map((step, idx) => {
+          const label = step?.label || step?.table || "registro";
+          const safeLabel = escapeHtml(toText(label));
+          const isLast = idx === stepCount - 1;
+          if (isLast) {
+            return `<span>${safeLabel}</span>`;
+          }
+          return `<button type="button" class="path-btn" data-nav-level="${idx}" title="Volver a ${safeLabel}">${safeLabel}</button>`;
+        });
+
+        const separators = ' <span class="muted">/</span> ';
+        if (!els.pathTrail) return;
+
+        if (!parts.length) {
+          els.pathTrail.innerHTML = "";
+          return;
+        }
+        els.pathTrail.innerHTML = parts.join(separators);
       }
 
       function escapeHtml(text) {
@@ -687,10 +723,13 @@
           const payload = await fetchRecordPayload(state.activeTable, state.activeRecordIdentity);
           if (payload.error) {
             setDetailHtml(`<div class="meta">${payload.error}</div>`);
+            renderBreadcrumbTrail();
           } else {
             renderDetail(payload);
+            renderBreadcrumbTrail();
           }
         } else {
+          renderBreadcrumbTrail();
           setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
         }
       }
@@ -1365,6 +1404,7 @@
         renderFilterOptions();
         renderActiveFilters();
         setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
+        renderBreadcrumbTrail();
         await loadRows({ reset: true });
         if (options.historyMode !== "none") pushHistory(options.historyMode);
       }
@@ -1398,9 +1438,11 @@
         const payload = await fetchRecordPayload(step.table, step.identity);
         if (payload.error) {
           setDetailHtml(`<div class="meta">${payload.error}</div>`);
+          renderBreadcrumbTrail();
           return;
         }
         renderDetail(payload);
+        renderBreadcrumbTrail();
         pushHistory("push");
       }
 
@@ -1414,6 +1456,7 @@
         const payload = await fetchRecordPayload(tableName, identity);
         if (payload.error) {
           setDetailHtml(`<div class="meta">${payload.error}</div>`);
+          renderBreadcrumbTrail();
           return;
         }
 
@@ -1421,7 +1464,7 @@
         state.activeTable = tableName;
         state.activeRecordIdentity = identity;
         if (options.pushStack) {
-          state.navStack.push({
+        state.navStack.push({
             table: tableName,
             identity,
             label: toText(label || payload.meta?.label || "record"),
@@ -1434,7 +1477,21 @@
         }
 
         renderDetail(payload);
+        renderBreadcrumbTrail();
         if (options.historyMode !== "none") pushHistory(options.historyMode);
+      }
+
+      if (els.pathTrail) {
+        els.pathTrail.addEventListener("click", (ev) => {
+          const btn = ev.target.closest("button[data-nav-level]");
+          if (!btn) return;
+          const level = Number(btn.getAttribute("data-nav-level"));
+          if (!Number.isFinite(level)) return;
+          const target = state.navStack[level];
+          if (!target || !target.identity) return;
+          if (level >= state.navStack.length - 1) return;
+          navigateToStackLevel(level).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+        });
       }
 
       els.tableFilter.addEventListener("input", () => {

@@ -31,6 +31,10 @@ LABEL_COLUMN_CANDIDATES = (
     "party_name",
     "display_name",
     "acronym",
+    "source_record_id",
+    "descripcion",
+    "description",
+    "nombre",
     "code",
     "canonical_key",
     "source_id",
@@ -1037,6 +1041,7 @@ def build_explorer_schema_payload(db_path: Path) -> dict[str, Any]:
                             }
                             for c in meta["columns"]
                         ],
+                        "label_column": choose_label_column(meta),
                         "foreign_keys_out": [
                             {
                                 "to_table": fk["to_table"],
@@ -1269,6 +1274,16 @@ def build_explorer_record_payload(
                     )
                     relation["count"] = total
                     relation["samples"] = samples
+                    facets = relation_facets(
+                        conn,
+                        schema,
+                        table=fk["to_table"],
+                        where_columns=to_cols,
+                        values=values,
+                        total=total,
+                    )
+                    if facets:
+                        relation["facets"] = facets
 
                 outgoing.append(relation)
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 from .connectors import (
     AsambleaCeutaDiputadosConnector,
     AsambleaExtremaduraDiputadosConnector,
+    AsambleaMelillaDiputadosConnector,
     AsambleaMadridOcupacionesConnector,
     AsambleaMurciaDiputadosConnector,
     CongresoDiputadosConnector,
@@ -35,6 +36,7 @@ def get_connectors() -> dict[str, BaseConnector]:
         MunicipalConcejalesConnector(),
         AsambleaMadridOcupacionesConnector(),
         AsambleaCeutaDiputadosConnector(),
+        AsambleaMelillaDiputadosConnector(),
         AsambleaExtremaduraDiputadosConnector(),
         AsambleaMurciaDiputadosConnector(),
         JuntaGeneralAsturiasDiputadosConnector(),

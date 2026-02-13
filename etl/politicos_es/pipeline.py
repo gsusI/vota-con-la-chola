@@ -194,6 +194,20 @@ def ingest_one_source(
             source_record_cache[key] = value
             return value
 
+        def assert_foreign_key_integrity() -> None:
+            violations = conn.execute("PRAGMA foreign_key_check").fetchall()
+            if not violations:
+                return
+            sample = ", ".join(
+                f"{row['table']}.{row['rowid']} -> {row['parent']}[{row['fkid']}]"
+                for row in violations[:10]
+            )
+            extra = f", ... (+{len(violations)-10} more)" if len(violations) > 10 else ""
+            raise RuntimeError(
+                f"foreign key check fallado en {source_id}: {len(violations)} violaciones "
+                f"(ej: {sample}{extra})"
+            )
+
         for record in extracted.records:
             records_seen += 1
             normalized = connector.normalize(record, snapshot_date)
@@ -236,9 +250,9 @@ def ingest_one_source(
             seen_ids.append(normalized["source_record_id"])
             loaded += 1
 
-        if strict_network and records_seen > 0 and loaded == 0:
+        if records_seen > 0 and loaded == 0:
             raise RuntimeError(
-                "strict-network abortado: records_seen > 0 y records_loaded == 0 "
+                "abortado: registros extraídos pero sin cargas válidas "
                 f"({source_id}: seen={records_seen}, loaded={loaded})"
             )
 
@@ -255,6 +269,7 @@ def ingest_one_source(
             )
 
         close_missing_mandates(conn, source_id, seen_ids, snapshot_date, now_iso)
+        assert_foreign_key_integrity()
         conn.commit()
 
         note = extracted.note or ""
