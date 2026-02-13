@@ -546,11 +546,11 @@ def main(argv: list[str] | None = None) -> int:
                     if events_considered <= 0:
                         stop_reason = "no_events_considered"
                         break
-                    if call_limit is not None and remaining_limit <= 0:
-                        stop_reason = "limit_exhausted"
-                        break
                     if loop_detail_blocked and events_reingested <= 0:
                         stop_reason = "detail_blocked"
+                        break
+                    if call_limit is not None and remaining_limit <= 0:
+                        stop_reason = "limit_exhausted"
                         break
 
                 aggregate["detail_failures"] = sorted(details_seen)
