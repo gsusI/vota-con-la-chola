@@ -200,6 +200,9 @@ etl-extract-parlamento-navarra-manual:
 etl-extract-infoelectoral-descargas:
   docker compose run --rm --build etl "python3 scripts/ingestar_infoelectoral_es.py ingest --db {{db_path}} --source infoelectoral_descargas --snapshot-date {{snapshot_date}} --timeout {{infoelectoral_timeout}} --strict-network"
 
+etl-extract-infoelectoral-procesos:
+  docker compose run --rm --build etl "python3 scripts/ingestar_infoelectoral_es.py ingest --db {{db_path}} --source infoelectoral_procesos --snapshot-date {{snapshot_date}} --timeout {{infoelectoral_timeout}} --strict-network"
+
 etl-extract-all:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source cortes_aragon_diputados --snapshot-date {{snapshot_date}} --strict-network"

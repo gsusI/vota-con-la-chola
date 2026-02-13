@@ -14,33 +14,33 @@ DEFAULT_TRACKER = Path("docs/etl/e2e-scrape-load-tracker.md")
 
 # Mapping between tracker table rows and source_id values.
 TRACKER_SOURCE_HINTS = {
-    "Congreso OpenData Diputados": "congreso_diputados",
-    "Congreso votaciones": "congreso_votaciones",
-    "Congreso iniciativas": "congreso_iniciativas",
-    "Senado votaciones/mociones": "senado_votaciones",
-    "Senado CSV Senadores": "senado_senadores",
-    "Senado OpenData XML": "senado_senadores",
-    "Europarl MEP XML": "europarl_meps",
-    "RED SARA Concejales": "municipal_concejales",
-    "Asamblea de Madrid": "asamblea_madrid_ocupaciones",
-    "Asamblea de Ceuta": "asamblea_ceuta_diputados",
-    "Cortes de Aragon": "cortes_aragon_diputados",
-    "Asamblea de Extremadura": "asamblea_extremadura_diputados",
-    "Asamblea Regional de Murcia": "asamblea_murcia_diputados",
-    "Junta General del Principado de Asturias": "jgpa_diputados",
-    "Parlament de Catalunya": "parlament_catalunya_diputats",
-    "Parlamento de Canarias": "parlamento_canarias_diputados",
-    "Parlamento de Cantabria": "parlamento_cantabria_diputados",
-    "Parlament de les Illes Balears": "parlament_balears_diputats",
-    "Parlamento de La Rioja": "parlamento_larioja_diputados",
-    "Corts Valencianes": "corts_valencianes_diputats",
-    "Cortes de Castilla-La Mancha": "cortes_clm_diputados",
-    "Cortes de Castilla y Leon": "cortes_cyl_procuradores",
-    "Parlamento de Andalucia": "parlamento_andalucia_diputados",
-    "Parlamento de Galicia": "parlamento_galicia_deputados",
-    "Parlamento de Navarra": "parlamento_navarra_parlamentarios_forales",
-    "Parlamento Vasco": "parlamento_vasco_parlamentarios",
-    "Infoelectoral": "infoelectoral_descargas",
+    "Congreso OpenData Diputados": ["congreso_diputados"],
+    "Congreso votaciones": ["congreso_votaciones"],
+    "Congreso iniciativas": ["congreso_iniciativas"],
+    "Senado votaciones/mociones": ["senado_votaciones"],
+    "Senado CSV Senadores": ["senado_senadores"],
+    "Senado OpenData XML": ["senado_senadores"],
+    "Europarl MEP XML": ["europarl_meps"],
+    "RED SARA Concejales": ["municipal_concejales"],
+    "Asamblea de Madrid": ["asamblea_madrid_ocupaciones"],
+    "Asamblea de Ceuta": ["asamblea_ceuta_diputados"],
+    "Cortes de Aragon": ["cortes_aragon_diputados"],
+    "Asamblea de Extremadura": ["asamblea_extremadura_diputados"],
+    "Asamblea Regional de Murcia": ["asamblea_murcia_diputados"],
+    "Junta General del Principado de Asturias": ["jgpa_diputados"],
+    "Parlament de Catalunya": ["parlament_catalunya_diputats"],
+    "Parlamento de Canarias": ["parlamento_canarias_diputados"],
+    "Parlamento de Cantabria": ["parlamento_cantabria_diputados"],
+    "Parlament de les Illes Balears": ["parlament_balears_diputats"],
+    "Parlamento de La Rioja": ["parlamento_larioja_diputados"],
+    "Corts Valencianes": ["corts_valencianes_diputats"],
+    "Cortes de Castilla-La Mancha": ["cortes_clm_diputados"],
+    "Cortes de Castilla y Leon": ["cortes_cyl_procuradores"],
+    "Parlamento de Andalucia": ["parlamento_andalucia_diputados"],
+    "Parlamento de Galicia": ["parlamento_galicia_deputados"],
+    "Parlamento de Navarra": ["parlamento_navarra_parlamentarios_forales"],
+    "Parlamento Vasco": ["parlamento_vasco_parlamentarios"],
+    "Infoelectoral": ["infoelectoral_descargas", "infoelectoral_procesos"],
 }
 
 
@@ -91,13 +91,11 @@ def parse_tracker_statuses(tracker_path: Path) -> dict[str, str]:
             continue
         fuente = cells[2]
         estado = cells[3].upper()
-        source_id = None
-        for hint, sid in TRACKER_SOURCE_HINTS.items():
+        for hint, source_ids in TRACKER_SOURCE_HINTS.items():
             if hint in fuente:
-                source_id = sid
+                for source_id in source_ids:
+                    statuses[source_id] = estado
                 break
-        if source_id:
-            statuses[source_id] = estado
     return statuses
 
 

@@ -4,23 +4,23 @@ import json
 import sqlite3
 from hashlib import sha256
 from pathlib import Path
+from collections.abc import Mapping
 from typing import Any
 
 from ..politicos_es.util import now_utc_iso
-
 
 def _sha256_text(text: str) -> str:
     return sha256(text.encode("utf-8")).hexdigest()
 
 
-def _source_record_hash(row: sqlite3.Row) -> str:
+def _source_record_hash(row: Mapping[str, Any]) -> str:
     source_hash = str(row["source_record_content_sha256"] or "").strip()
     if source_hash:
         return source_hash
     return _sha256_text(str(row["source_raw_payload"] or ""))
 
 
-def _source_record_payload(row: sqlite3.Row) -> dict[str, Any] | None:
+def _source_record_payload(row: Mapping[str, Any]) -> dict[str, Any] | None:
     raw_payload = row["source_raw_payload"]
     if not raw_payload:
         return None
@@ -31,25 +31,23 @@ def _source_record_payload(row: sqlite3.Row) -> dict[str, Any] | None:
     return parsed if isinstance(parsed, dict) else None
 
 
-def build_infoelectoral_snapshot(
-    conn: sqlite3.Connection,
-    *,
-    snapshot_date: str,
-) -> dict[str, Any]:
-    source_rows = conn.execute(
-        """
-        SELECT
-          s.source_id,
-          s.default_url,
-          s.name
-        FROM sources s
-        WHERE s.source_id = 'infoelectoral_descargas'
-        LIMIT 1
-        """
-    ).fetchall()
+def _source_payload_from_row(
+    source_id: str,
+    row: Mapping[str, Any] | None,
+) -> dict[str, Any] | None:
+    if not row:
+        return None
+    return {
+        "source_id": source_id,
+        "source_record_id": row["source_record_id"],
+        "source_record_pk": row["source_record_pk"],
+        "source_snapshot_date": row["source_snapshot_date"],
+        "source_payload": _source_record_payload(row),
+        "source_hash": _source_record_hash(row),
+    }
 
-    source_info = source_rows[0] if source_rows else None
 
+def _build_descargas_snapshot(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     tipos = conn.execute(
         """
         SELECT
@@ -128,14 +126,16 @@ def build_infoelectoral_snapshot(
                 "nombre_doc": row["nombre_doc"],
                 "ambito": row["ambito"],
                 "download_url": row["download_url"],
-                "source": {
-                    "source_id": "infoelectoral_descargas",
-                    "source_record_id": row["archivo_source_record_id"],
-                    "source_record_pk": row["source_record_pk"],
-                    "source_snapshot_date": row["source_snapshot_date"],
-                    "source_payload": _source_record_payload(row),
-                    "source_hash": _source_record_hash(row),
-                },
+                "source": _source_payload_from_row(
+                    "infoelectoral_descargas",
+                    {
+                        "source_record_id": row["archivo_source_record_id"],
+                        "source_record_pk": row["source_record_pk"],
+                        "source_snapshot_date": row["source_snapshot_date"],
+                        "source_record_content_sha256": row["source_record_content_sha256"],
+                        "source_raw_payload": row["source_raw_payload"],
+                    },
+                ),
             }
         )
 
@@ -152,14 +152,16 @@ def build_infoelectoral_snapshot(
                 "fecha": row["fecha"],
                 "descripcion": row["descripcion"],
                 "ambito_territorio": row["ambito_territorio"],
-                "source": {
-                    "source_id": "infoelectoral_descargas",
-                    "source_record_id": row["convocatoria_source_record_id"],
-                    "source_record_pk": row["source_record_pk"],
-                    "source_snapshot_date": row["source_snapshot_date"],
-                    "source_payload": _source_record_payload(row),
-                    "source_hash": _source_record_hash(row),
-                },
+                "source": _source_payload_from_row(
+                    "infoelectoral_descargas",
+                    {
+                        "source_record_id": row["convocatoria_source_record_id"],
+                        "source_record_pk": row["source_record_pk"],
+                        "source_snapshot_date": row["source_snapshot_date"],
+                        "source_record_content_sha256": row["source_record_content_sha256"],
+                        "source_raw_payload": row["source_raw_payload"],
+                    },
+                ),
                 "archivos": archivos_by_convocatoria.get(convocatoria_id, []),
             }
         )
@@ -169,20 +171,152 @@ def build_infoelectoral_snapshot(
         tipo = str(row["tipo_convocatoria"] or "")
         if not tipo:
             continue
-        payload = {
-            "tipo_convocatoria": tipo,
-            "descripcion": row["descripcion"],
-            "convocatorias": convocatorias_by_tipo.get(tipo, []),
-            "source": {
-                "source_id": "infoelectoral_descargas",
-                "source_record_id": row["tipo_source_record_id"],
-                "source_record_pk": row["source_record_pk"],
-                "source_snapshot_date": row["source_snapshot_date"],
-                "source_payload": _source_record_payload(row),
-                "source_hash": _source_record_hash(row),
-            },
-        }
-        tipos_payload.append(payload)
+        tipos_payload.append(
+            {
+                "tipo_convocatoria": tipo,
+                "descripcion": row["descripcion"],
+                "convocatorias": convocatorias_by_tipo.get(tipo, []),
+                "source": _source_payload_from_row(
+                    "infoelectoral_descargas",
+                    {
+                        "source_record_id": row["tipo_source_record_id"],
+                        "source_record_pk": row["source_record_pk"],
+                        "source_snapshot_date": row["source_snapshot_date"],
+                        "source_record_content_sha256": row["source_record_content_sha256"],
+                        "source_raw_payload": row["tipo_raw_payload"],
+                    },
+                ),
+            }
+        )
+    return tipos_payload
+
+
+def _build_procesos_snapshot(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    procesos = conn.execute(
+        """
+        SELECT
+          p.proceso_id,
+          p.nombre,
+          p.tipo,
+          p.ambito,
+          p.estado,
+          p.fecha,
+          p.detalle_url,
+          p.source_snapshot_date,
+          p.raw_payload AS proceso_raw_payload,
+          sr.source_record_id AS proceso_source_record_id,
+          sr.source_record_pk,
+          sr.content_sha256 AS source_record_content_sha256,
+          sr.raw_payload AS source_raw_payload
+        FROM infoelectoral_procesos p
+        LEFT JOIN source_records sr
+          ON sr.source_record_pk = p.source_record_pk
+        ORDER BY p.fecha DESC, p.proceso_id
+        """
+    ).fetchall()
+
+    resultados = conn.execute(
+        """
+        SELECT
+          r.proceso_dataset_id,
+          r.proceso_id,
+          r.nombre,
+          r.tipo_dato,
+          r.url,
+          r.formato,
+          r.fecha,
+          r.source_snapshot_date,
+          r.raw_payload AS resultado_raw_payload,
+          sr.source_record_id AS resultado_source_record_id,
+          sr.source_record_pk,
+          sr.content_sha256 AS source_record_content_sha256,
+          sr.raw_payload AS source_raw_payload
+        FROM infoelectoral_proceso_resultados r
+        LEFT JOIN source_records sr
+          ON sr.source_record_pk = r.source_record_pk
+        ORDER BY r.proceso_id, r.proceso_dataset_id
+        """
+    ).fetchall()
+
+    resultados_by_proceso: dict[str, list[dict[str, Any]]] = {}
+    for row in resultados:
+        proceso_id = str(row["proceso_id"] or "")
+        if not proceso_id:
+            continue
+        resultados_by_proceso.setdefault(proceso_id, []).append(
+            {
+                "proceso_dataset_id": row["proceso_dataset_id"],
+                "nombre": row["nombre"],
+                "tipo_dato": row["tipo_dato"],
+                "url": row["url"],
+                "formato": row["formato"],
+                "fecha": row["fecha"],
+                "source": _source_payload_from_row(
+                    "infoelectoral_procesos",
+                    {
+                        "source_record_id": row["resultado_source_record_id"],
+                        "source_record_pk": row["source_record_pk"],
+                        "source_snapshot_date": row["source_snapshot_date"],
+                        "source_record_content_sha256": row["source_record_content_sha256"],
+                        "source_raw_payload": row["source_raw_payload"],
+                    },
+                ),
+            }
+        )
+
+    procesos_payload: list[dict[str, Any]] = []
+    for row in procesos:
+        proceso_id = str(row["proceso_id"] or "")
+        if not proceso_id:
+            continue
+        procesos_payload.append(
+            {
+                "proceso_id": row["proceso_id"],
+                "nombre": row["nombre"],
+                "tipo": row["tipo"],
+                "ambito": row["ambito"],
+                "estado": row["estado"],
+                "fecha": row["fecha"],
+                "detalle_url": row["detalle_url"],
+                "resultados": resultados_by_proceso.get(proceso_id, []),
+                "source": _source_payload_from_row(
+                    "infoelectoral_procesos",
+                    {
+                        "source_record_id": row["proceso_source_record_id"],
+                        "source_record_pk": row["source_record_pk"],
+                        "source_snapshot_date": row["source_snapshot_date"],
+                        "source_record_content_sha256": row["source_record_content_sha256"],
+                        "source_raw_payload": row["proceso_raw_payload"],
+                    },
+                ),
+            }
+        )
+    return procesos_payload
+
+
+def build_infoelectoral_snapshot(
+    conn: sqlite3.Connection,
+    *,
+    snapshot_date: str,
+) -> dict[str, Any]:
+    source_rows = conn.execute(
+        """
+        SELECT
+          s.source_id,
+          s.default_url,
+          s.name
+        FROM sources s
+        WHERE s.source_id IN ('infoelectoral_descargas', 'infoelectoral_procesos')
+        ORDER BY s.source_id
+        """
+    ).fetchall()
+
+    tipos_payload = _build_descargas_snapshot(conn)
+    procesos_payload = _build_procesos_snapshot(conn)
+
+    source_ids = [row["source_id"] for row in source_rows]
+    source_names = {row["source_id"]: row["name"] for row in source_rows}
+    source_default_urls = {row["source_id"]: row["default_url"] for row in source_rows}
 
     total_tipos = len(tipos_payload)
     total_convocatorias = sum(len(x.get("convocatorias", [])) for x in tipos_payload)
@@ -191,25 +325,28 @@ def build_infoelectoral_snapshot(
         for x in tipos_payload
         for conv in x.get("convocatorias", [])
     )
+    total_procesos = len(procesos_payload)
+    total_resultados = sum(len(x.get("resultados", [])) for x in procesos_payload)
 
-    filters = {"source_id": "infoelectoral_descargas"}
-    if source_info:
-        filters.update(
-            {
-                "source_name": source_info["name"],
-                "source_default_url": source_info["default_url"],
-            }
-        )
+    filters = {
+        "source_ids": source_ids,
+        "source_names": source_names,
+        "source_default_urls": source_default_urls,
+    }
 
     return {
         "fecha_referencia": snapshot_date,
         "generado_en": now_utc_iso(),
         "filtros": filters,
         "tipos": tipos_payload,
+        "procesos": procesos_payload,
         "totales": {
             "tipos": total_tipos,
             "convocatorias": total_convocatorias,
             "archivos_extraccion": total_archivos,
+            "procesos": total_procesos,
+            "resultados": total_resultados,
+            "source_ids": len(source_ids),
         },
     }
 
