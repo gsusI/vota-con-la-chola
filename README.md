@@ -12,6 +12,7 @@ Implementado hoy:
 
 - **ETL** de representantes y mandatos (varias fuentes oficiales) hacia **un único archivo SQLite**.
 - **Interfaz web local** para explorar el “grafo” (personas, instituciones, partidos, mandatos) y un **explorador genérico de SQLite** basado en esquema.
+- **Modelo de “posiciones por temas” (schema-first)**: tablas para taxonomía de temas, evidencia auditable y agregación reproducible de posicionamiento por `scope` (ver `etl/load/sqlite_schema.sql`: `topics`, `topic_sets`, `topic_evidence`, `topic_positions`).
 - **Instantánea publicada** de “próximas elecciones por nivel” (Markdown + JSON).
 - **Instantánea publicada** de representantes/mandatos activos (excluye `municipal` por defecto) en `etl/data/published/representantes-es-2026-02-12.json`.
 - **Publicador canónico de votaciones parlamentarias** (`scripts/publicar_votaciones_es.py`) con salida en `etl/data/published/votaciones-es-<snapshot_date>.json`.
@@ -24,6 +25,7 @@ Implementado hoy:
 Pendiente (ver seguimiento):
 
 - Conectores de **votaciones / iniciativas / intervenciones** y evidencia textual.
+- Pipeline de **temas high-stakes por scope** + **evidencia (dicho/hecho)** + **posiciones agregadas** con KPIs/gates de calidad y drill-down a fuentes.
 - Fuentes con `--strict-network` bloqueado por WAF/anti-bot (a `2026-02-12` desde este entorno): Parlamento de Galicia (403) y Parlamento de Navarra (Cloudflare challenge/403). **Aceptamos el camino manual**: captura de fichas HTML con Playwright (no headless) + ingesta con `--from-file <directorio>` (ver `justfile`: `etl-extract-parlamento-galicia-manual` y `etl-extract-parlamento-navarra-manual`). Asamblea de Melilla pendiente de discovery de fuente nominal estable.
 
 Documento de seguimiento operativo: `docs/etl/e2e-scrape-load-tracker.md`.

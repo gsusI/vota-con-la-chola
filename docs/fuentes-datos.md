@@ -95,11 +95,29 @@ Regla practica: para "que han hecho", la fuente canonica suele ser la que **prod
 | P2 | Señal mediática | GDELT | https://www.gdeltproject.org/ | Termometro de narrativa/cobertura (no evidencia) | Diario | API |
 | P2 | Señal mediática | Media Cloud | https://www.mediacloud.org/documentation | Archivo/analitica de noticias (no evidencia) | Diario | API |
 
+## Inventario ideal (ambicioso)
+
+Además del inventario operativo (P0/P1/P2), mantenemos un inventario ideal, exhaustivo y programable, para “lo que dicen vs lo que hacen”:
+
+- `docs/ideal_sources_say_do.json`
+
+Ese inventario se muestra también en `explorer-sources` para que el roadmap tenga siempre un “north star”.
+
 ## Criterio de uso (lean)
 
 1. Empezar solo con `P0` para el MVP.
 2. Incorporar `P1` cuando el flujo P0 sea estable.
 3. Tratar `P2` como capa editorial asistida, no automatica sin revision humana.
+
+## Regla de "doble entrada" (evidencia vs efecto)
+
+Para no confundir “lo comunicado” con “lo efectivo”, cuando exista un registro con efectos se aplica doble entrada:
+
+- Consejo de Ministros (referencias/comunicado) -> validar con BOE (publicacion).
+- Nota/portal institucional de adjudicacion -> validar con PLACSP (expediente publicado).
+- Anuncio de ayuda/subvencion -> validar con BDNS/SNPSAP (registro oficial).
+
+En el modelo de evidencia, esto permite aumentar confianza de un evento cuando se puede enlazar a la publicacion primaria.
 
 ## Ubicacion sugerida en ETL
 

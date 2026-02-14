@@ -15,6 +15,7 @@ Actualmente:
 - Snapshot de votaciones parlamentarias (JSON): `etl/data/published/votaciones-es-<snapshot_date>.json` (ver `scripts/publicar_votaciones_es.py`).
 - Snapshot de KPIs de calidad de votaciones: `etl/data/published/votaciones-kpis-es-<snapshot_date>.json`.
 - Esquema SQLite ETL: `etl/load/sqlite_schema.sql`.
+- Esquema analitico (posiciones por temas): `topics`, `topic_sets`, `topic_set_topics`, `topic_evidence`, `topic_positions` (en el mismo SQLite).
 - CLI ingesta politicos: `scripts/ingestar_politicos_es.py`.
 - CLI ingesta Infoelectoral (descargas): `scripts/ingestar_infoelectoral_es.py`.
 - CLI parlamentario (votaciones, iniciativas): `scripts/ingestar_parlamentario_es.py`.
@@ -35,6 +36,10 @@ Nota para votaciones:
 - Para incluir diagnóstico de emparejado de persona en seco, usa `--include-unmatched --unmatched-sample-limit <n>`.
 - Exporta KPIs por fecha con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --json-out etl/data/published/votaciones-kpis-es-<snapshot>.json`.
 - El JSON de votaciones puede ser muy grande en corridas completas; para smoke/debug usa `--max-events` y/o `--max-member-votes-per-event`.
+
+Nota para posiciones por temas:
+- La representacion “politico x scope x tema” se construye desde evidencia atómica trazable (`topic_evidence`) y se agrega en snapshots recomputables (`topic_positions`).
+- El roadmap operativo y de calidad vive en `docs/etl/e2e-scrape-load-tracker.md` (filas “Analitica”).
 
 ## Política de snapshots publicables
 

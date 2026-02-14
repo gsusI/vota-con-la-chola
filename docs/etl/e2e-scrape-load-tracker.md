@@ -110,12 +110,25 @@ Legenda:
 | Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | DONE | Hardening de parsing de campos opcionales en procesos/resultados |
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
 | Marco legal electoral | Legal | BOE API | TODO | Falta conector legal y modelo de documentos |
+| Accion ejecutiva (Consejo de Ministros) | Ejecutivo | La Moncloa: referencias + RSS | TODO | Scraper + normalizacion; validar acuerdos y normas contra BOE cuando exista publicacion |
+| Contratacion publica (Espana) | Dinero | PLACSP: sindicación/ATOM (CODICE) | TODO | Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente |
+| Subvenciones y ayudas (Espana) | Dinero | BDNS/SNPSAP: API | TODO | Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario |
+| Transparencia: agendas altos cargos | Transparencia | La Moncloa + Portal de Transparencia (agendas) | TODO | Falta ingesta de agendas; KPI: % con fecha + actor resuelto; no inferir accion sin evidencia |
+| Transparencia: declaraciones/intereses | Integridad | Portal Transparencia: declaraciones bienes/derechos | TODO | Falta modelo y pipeline de declaraciones; KPI: versionado + trazabilidad 100% |
 | Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; publish canónico disponible (`scripts/publicar_votaciones_es.py`), pendiente corrida completa + KPIs |
 | Iniciativas Congreso | Parlamentario | Congreso iniciativas | PARTIAL | Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; linking a `parl_vote_events` mejorado (regex + titulo normalizado), pendiente KPIs globales |
 | Intervenciones Congreso | Parlamentario | Congreso intervenciones | TODO | Falta conector y modelo de evidencia textual |
 | Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | `senado_votaciones` carga eventos + totales + roll-call (host `www.senado.es`); `senado_iniciativas` (tipoFich=9) carga temas/expedientes y permite linking determinista `(legislature, expediente)`; publish canónico disponible, pendiente KPIs y cobertura `person_id` |
 | Referencias territoriales | Catalogos | REL, INE, IGN | TODO | Falta catalogo canonico territorial |
+| UE: legislacion y documentos | UE | EUR-Lex / Cellar (SPARQL/REST) | TODO | Falta conector UE legal; linking a expedientes y textos vigentes |
+| UE: votaciones (roll-call) | UE | Parlamento Europeo: votes XML/PDF + Open Data Portal | TODO | Falta ingesta de votos + mapeo a MEPs; KPI: % con actor resuelto |
+| UE: contratacion publica | UE | TED API (notices) | TODO | Falta ingesta; KPI: cobertura y trazabilidad por notice |
+| UE: lobbying/influencia | UE | EU Transparency Register | TODO | Falta ingesta y modelo de entidades; linking cuando existan meetings/agendas publicas |
 | Posiciones declaradas (programas) | Editorial | Webs/programas de partidos | TODO | Falta pipeline semiestructurado + revision humana |
+| Taxonomia de temas (alto impacto por scope) | Analitica | Definicion de temas + stake scoring por institucion/territorio/mandato | TODO | Falta seed inicial + reglas de versionado + KPI: cobertura de temas high-stakes por scope |
+| Evidencia textual (para posiciones declaradas) | Analitica | Diarios de sesiones, intervenciones, preguntas, notas oficiales | TODO | Falta conector(es) + modelo canonico de evidencia textual + KPI: % evidencia con `person_id` y timestamp |
+| Clasificacion evidencia -> tema (trazable) | Analitica | Reglas deterministas + señales ML opcionales (siempre auditables) | TODO | Falta pipeline + KPI: % evidencia con `topic_id` + distribucion de confianza/errores |
+| Posiciones por tema (politico x scope) | Analitica | Agregacion reproducible + drill-down a evidencia | TODO | Falta agregador + KPI: % politicos con señal suficiente por tema high-stakes + sesgo por tipo de evidencia |
 
 ## TODO global (infra y calidad)
 
@@ -231,6 +244,9 @@ Legenda:
 - [x] Infoelectoral: completar cobertura de resultados y datasets; publish y recipe `just` implementados; `source` y `resultados` incluidos en `infoelectoral-es-YYYY-MM-DD.json`.
 - [ ] Junta Electoral Central: estado de convocatorias.
 - [ ] BOE API: normativa/convocatorias.
+- [ ] Consejo de Ministros (Moncloa): referencias + RSS (señal comunicacional) con validación por BOE cuando aplique.
+- [ ] BDNS/SNPSAP: subvenciones y ayudas (registro con efectos).
+- [ ] PLACSP: contratación pública (sindicación ATOM/CODICE) (registro con efectos).
 - [ ] Congreso votaciones.
 - [ ] Senado votaciones/mociones (cerrar publish y cobertura de `person_id`).
 
@@ -240,6 +256,8 @@ Legenda:
 - [ ] Congreso intervenciones.
 - [ ] Catalogos territoriales (REL/INE/IGN).
 - [ ] OEIL / EUR-Lex (contexto UE).
+- [ ] Agendas y transparencia (Moncloa + Portal de Transparencia): ingesta de actividad pública.
+- [ ] Declaraciones/intereses (Transparencia y registros parlamentarios): modelo y pipeline (sin inferencias).
 
 ### P2
 

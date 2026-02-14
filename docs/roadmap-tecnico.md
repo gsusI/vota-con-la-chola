@@ -25,6 +25,7 @@ Brechas críticas pendientes:
 - Modelo de recomendación explicable para usuario final.
 - Capa de confiabilidad con incertidumbre (y señales de cobertura).
 - Cobertura multinivel estable para voto útil más allá de nacional.
+- Cobertura holística de “acciones” fuera del parlamento: normativa (BOE), acción ejecutiva (Consejo de Ministros), dinero público (contratación PLACSP, subvenciones BDNS) y transparencia (agendas/declaraciones) con trazabilidad.
 
 ## 3) Arquitectura objetivo (corto alcance)
 
@@ -60,6 +61,7 @@ Entregables:
 - Publicación periódica del snapshot de votaciones + KPIs.
 - Resolver `person_id` en máximo volumen posible en votos nominales.
 - Añadir auditoría de causa de no-mapeo con muestra revisable.
+- Definir “doble entrada” para acciones: señales comunicacionales (ej. referencias del Consejo de Ministros) deben validarse contra registros con efectos (ej. BOE) cuando exista correspondencia.
 
 Métricas de aceptación:
 - `>= 95%` eventos con fecha.
