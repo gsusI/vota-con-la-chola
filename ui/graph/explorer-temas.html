@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola | Temas y Posiciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-a: #f7f4ef;
+        --bg-b: #d7e6ff;
+        --panel: rgba(255, 255, 255, 0.92);
+        --ink: #1c1b16;
+        --muted: #5a5a52;
+        --line: #d7e0ee;
+        --accent: #0b5fff;
+        --ok: #16a34a;
+        --warn: #d97706;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        color: var(--ink);
+        font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+        background:
+          radial-gradient(900px 420px at 12% 10%, #fff1dc 0%, transparent 72%),
+          radial-gradient(850px 440px at 90% 95%, #dfe9ff 0%, transparent 74%),
+          linear-gradient(120deg, var(--bg-a), var(--bg-b));
+      }
+
+      .page {
+        height: 100%;
+        padding: 14px;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid rgba(255, 255, 255, 0.86);
+        border-radius: 16px;
+        background: var(--panel);
+        backdrop-filter: blur(7px);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+        min-width: 0;
+      }
+
+      .superheader {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .pilllink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      header {
+        padding: 12px 14px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.08rem;
+      }
+
+      header p {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .layout {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 320px 360px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .panel {
+        min-height: 0;
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
+      }
+
+      .head {
+        padding: 12px 12px 6px;
+      }
+
+      .head h2 {
+        margin: 0;
+        font-size: 0.96rem;
+      }
+
+      .head .sub {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .controls {
+        padding: 0 12px 10px;
+        display: grid;
+        gap: 8px;
+      }
+
+      input,
+      select,
+      button {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #d6dce5;
+        padding: 8px 10px;
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        background: linear-gradient(135deg, var(--accent), #3f7cff);
+        color: #fff;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #edf2fb;
+        color: #1c2a48;
+        border: 1px solid var(--line);
+        font-weight: 700;
+      }
+
+      .list {
+        min-height: 0;
+        overflow: auto;
+        border-top: 1px solid #edf1f7;
+        padding: 10px 10px 14px;
+      }
+
+      .item {
+        width: 100%;
+        text-align: left;
+        display: grid;
+        gap: 6px;
+        padding: 10px 10px;
+        border: 1px solid #e4e9f3;
+        border-radius: 10px;
+        background: #fff;
+        margin-bottom: 7px;
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+      }
+
+      .item:hover {
+        border-color: #b9cfff;
+        box-shadow: 0 10px 20px rgba(28, 58, 120, 0.08);
+        transform: translateY(-1px);
+      }
+
+      .item.active {
+        border-color: #9dbcff;
+        box-shadow: 0 0 0 2px #e6efff inset;
+      }
+
+      .row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .badge {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.72rem;
+        border-radius: 999px;
+        padding: 2px 8px;
+        border: 1px solid #d7e3ff;
+        background: #f3f7ff;
+        color: #17376f;
+      }
+
+      .badge.ok {
+        border-color: #dcfce7;
+        background: #f0fdf4;
+        color: var(--ok);
+        font-weight: 700;
+      }
+
+      .badge.warn {
+        border-color: #ffedd5;
+        background: #fff7ed;
+        color: var(--warn);
+        font-weight: 700;
+      }
+
+      .detail {
+        min-height: 0;
+        overflow: auto;
+        border-top: 1px solid #edf1f7;
+        padding: 12px;
+      }
+
+      .block {
+        border: 1px solid #e5ebf4;
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .block h3 {
+        margin: 0 0 8px;
+        font-size: 0.92rem;
+      }
+
+      .kv {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 10px;
+        border-top: 1px solid #f0f3f9;
+        padding: 8px 0;
+      }
+
+      .kv:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .k {
+        color: #4e4b44;
+        font-size: 0.78rem;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .v {
+        font-size: 0.84rem;
+        word-break: break-word;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      @media (max-width: 1120px) {
+        .layout {
+          grid-template-columns: 1fr;
+          grid-template-rows: minmax(260px, 32vh) minmax(260px, 32vh) minmax(300px, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="superheader">
+        <a class="pilllink" href="/">← Índice</a>
+        <a class="pilllink" href="/explorer">Explorer SQL</a>
+        <a class="pilllink" href="/explorer-sources">Fuentes</a>
+      </div>
+
+      <header class="card">
+        <div>
+          <h1>Temas y Posiciones (por scope)</h1>
+          <p>
+            Flujo recomendado: <span class="mono">topic_set</span> → temas high-stakes →
+            <span class="mono">topic_positions</span> → evidencia (<span class="mono">topic_evidence</span>).
+          </p>
+        </div>
+        <div class="mono" id="status">Cargando…</div>
+      </header>
+
+      <main class="layout">
+        <section class="panel card">
+          <div class="head">
+            <h2>1) Topic Sets</h2>
+            <p class="sub">Scope: institucion/territorio/legislatura.</p>
+          </div>
+          <div class="controls">
+            <input id="setFilter" type="text" placeholder="Filtrar sets…" />
+            <button id="reload" class="secondary" type="button">Recargar</button>
+          </div>
+          <div id="sets" class="list"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>2) Temas (en el set)</h2>
+            <p class="sub">Usa <span class="mono">topic_set_topics</span> (stake scoring).</p>
+          </div>
+          <div class="controls">
+            <select id="topicMode">
+              <option value="all">Mostrar: Todos</option>
+              <option value="high">Mostrar: Solo high-stakes</option>
+            </select>
+            <input id="topicFilter" type="text" placeholder="Filtrar temas…" />
+          </div>
+          <div id="topics" class="list"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>3) Posiciones y evidencia</h2>
+            <p class="sub">Click en una posicion para ver evidencia.</p>
+          </div>
+          <div class="controls">
+            <select id="stanceFilter">
+              <option value="">Stance: Todas</option>
+              <option value="support">support</option>
+              <option value="oppose">oppose</option>
+              <option value="mixed">mixed</option>
+              <option value="unclear">unclear</option>
+              <option value="no_signal">no_signal</option>
+            </select>
+            <button id="openInSql" class="secondary" type="button">Abrir en Explorer SQL</button>
+          </div>
+          <div id="detail" class="detail"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const state = {
+        sets: [],
+        topics: [],
+        positions: [],
+        activeSet: null,
+        activeTopic: null,
+        activePosition: null,
+      };
+
+      const els = {
+        status: document.getElementById("status"),
+        reload: document.getElementById("reload"),
+        setFilter: document.getElementById("setFilter"),
+        sets: document.getElementById("sets"),
+        topicMode: document.getElementById("topicMode"),
+        topicFilter: document.getElementById("topicFilter"),
+        topics: document.getElementById("topics"),
+        stanceFilter: document.getElementById("stanceFilter"),
+        openInSql: document.getElementById("openInSql"),
+        detail: document.getElementById("detail"),
+      };
+
+      function toText(v) {
+        if (v === null || v === undefined) return "";
+        if (typeof v === "object") return JSON.stringify(v);
+        return String(v);
+      }
+
+      function esc(s) {
+        return String(s || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      async function apiRows(table, { limit = 200, offset = 0, q = "", where = [] } = {}) {
+        const p = new URLSearchParams();
+        p.set("table", table);
+        p.set("limit", String(limit));
+        p.set("offset", String(offset));
+        if (q) p.set("q", String(q));
+        (where || []).forEach(([col, val]) => {
+          p.append("col", String(col));
+          p.append("val", String(val));
+        });
+        const resp = await fetch("/api/explorer/rows?" + p.toString());
+        return await resp.json();
+      }
+
+      function pick(obj, key) {
+        if (!obj) return "";
+        return obj[key] !== undefined && obj[key] !== null ? obj[key] : "";
+      }
+
+      function setStatus(text) {
+        els.status.textContent = text;
+      }
+
+      function renderSets() {
+        const needle = (els.setFilter.value || "").trim().toLowerCase();
+        const rows = (state.sets || []).filter((r) => {
+          if (!needle) return true;
+          const p = r.preview_display || r.preview || {};
+          return (
+            String(r.label || "").toLowerCase().includes(needle) ||
+            String(p.name || "").toLowerCase().includes(needle) ||
+            String(p.description || "").toLowerCase().includes(needle)
+          );
+        });
+
+        els.sets.innerHTML = rows.length ? "" : "<div class='muted mono'>Sin topic_sets.</div>";
+        rows.forEach((r) => {
+          const p = r.preview_display || r.preview || {};
+          const id = (r.identity && r.identity.topic_set_id) ? r.identity.topic_set_id : "";
+          const active = state.activeSet && String(state.activeSet.topic_set_id) === String(id);
+          const scopeBits = [
+            pick(p, "institution_id"),
+            pick(p, "territory_id"),
+            pick(p, "admin_level_id"),
+            pick(p, "legislature"),
+          ]
+            .map(toText)
+            .filter(Boolean)
+            .join(" · ");
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "item" + (active ? " active" : "");
+          btn.innerHTML =
+            "<div class='row'><strong>" + esc(p.name || r.label || ("topic_set " + id)) + "</strong>" +
+            "<span class='badge'>" + esc("id=" + id) + "</span></div>" +
+            "<div class='mono'>" + esc(scopeBits || "scope: —") + "</div>";
+          btn.addEventListener("click", () => selectSet(r));
+          els.sets.appendChild(btn);
+        });
+      }
+
+      function renderTopics() {
+        const needle = (els.topicFilter.value || "").trim().toLowerCase();
+        const mode = (els.topicMode.value || "all").toLowerCase();
+        const rows = (state.topics || []).filter((r) => {
+          const p = r.preview_display || r.preview || {};
+          const topicDisp = toText(p.topic_id || "");
+          const isHigh = String(p.is_high_stakes || "") === "1" || String(p.is_high_stakes || "").toLowerCase() === "true";
+          if (mode === "high" && !isHigh) return false;
+          if (!needle) return true;
+          return (
+            String(r.label || "").toLowerCase().includes(needle) ||
+            topicDisp.toLowerCase().includes(needle) ||
+            String(p.notes || "").toLowerCase().includes(needle)
+          );
+        });
+
+        els.topics.innerHTML = rows.length ? "" : "<div class='muted mono'>Selecciona un set.</div>";
+        rows.forEach((r) => {
+          const p = r.preview_display || r.preview || {};
+          const topicId = (r.identity && r.identity.topic_id) ? r.identity.topic_id : "";
+          const active = state.activeTopic && String(state.activeTopic.topic_id) === String(topicId);
+          const isHigh = String(p.is_high_stakes || "") === "1" || String(p.is_high_stakes || "").toLowerCase() === "true";
+          const badge = isHigh ? "<span class='badge ok'>high</span>" : "<span class='badge'>topic</span>";
+          const stakes = [pick(p, "stakes_rank"), pick(p, "stakes_score")]
+            .map(toText)
+            .filter(Boolean)
+            .join(" · ");
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "item" + (active ? " active" : "");
+          btn.innerHTML =
+            "<div class='row'><strong>" + esc(toText(p.topic_id || ("topic_id=" + topicId))) + "</strong>" + badge + "</div>" +
+            "<div class='mono'>" + esc(stakes || "stakes: —") + "</div>";
+          btn.addEventListener("click", () => selectTopic(r));
+          els.topics.appendChild(btn);
+        });
+      }
+
+      function renderDetailEmpty() {
+        els.detail.innerHTML =
+          "<div class='block'><h3>Posiciones</h3><div class='muted mono'>Selecciona un tema para listar posiciones.</div></div>" +
+          "<div class='block'><h3>Evidencia</h3><div class='muted mono'>Selecciona una posicion para ver evidencia.</div></div>";
+      }
+
+      function renderPositions() {
+        const rows = state.positions || [];
+        if (!rows.length) {
+          els.detail.innerHTML =
+            "<div class='block'><h3>Posiciones</h3><div class='muted mono'>Sin posiciones para este filtro.</div></div>" +
+            "<div class='block'><h3>Evidencia</h3><div class='muted mono'>—</div></div>";
+          return;
+        }
+
+        const stanceNeedle = (els.stanceFilter.value || "").trim().toLowerCase();
+        const filtered = rows.filter((r) => {
+          const p = r.preview || {};
+          const st = String(p.stance || "").toLowerCase();
+          if (stanceNeedle && st !== stanceNeedle) return false;
+          return true;
+        });
+
+        const listHtml = filtered
+          .slice(0, 80)
+          .map((r, idx) => {
+            const p = r.preview_display || r.preview || {};
+            const st = String(p.stance || "");
+            const badgeClass = st === "support" || st === "oppose" ? "ok" : st ? "warn" : "";
+            const title = toText(p.person_id || r.label || "posicion");
+            const meta = [
+              "as_of=" + toText(p.as_of_date || ""),
+              "score=" + toText(p.score || ""),
+              "evidence=" + toText(p.evidence_count || "0"),
+            ]
+              .filter((s) => !s.endsWith("="))
+              .join(" · ");
+            const active = state.activePosition && String(state.activePosition._idx) === String(idx);
+            return (
+              "<button type='button' class='item" + (active ? " active" : "") + "' data-pidx='" + idx + "'>" +
+              "<div class='row'><strong>" + esc(title) + "</strong><span class='badge " + badgeClass + "'>" + esc(st || "—") + "</span></div>" +
+              "<div class='mono'>" + esc(meta || "") + "</div>" +
+              "</button>"
+            );
+          })
+          .join("");
+
+        els.detail.innerHTML =
+          "<div class='block'><h3>Posiciones</h3>" +
+          (filtered.length ? listHtml : "<div class='muted mono'>Sin posiciones (stance filter).</div>") +
+          (filtered.length > 80 ? "<div class='muted mono'>+" + (filtered.length - 80) + " mas…</div>" : "") +
+          "</div>" +
+          "<div class='block'><h3>Evidencia</h3><div class='muted mono'>Selecciona una posicion.</div></div>";
+
+        els.detail.querySelectorAll("button[data-pidx]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const idx = Number(btn.getAttribute("data-pidx") || "0");
+            const row = filtered[idx];
+            if (!row) return;
+            selectPosition(row, idx);
+          });
+        });
+      }
+
+      function renderEvidence(rows) {
+        if (!Array.isArray(rows) || rows.length === 0) {
+          const blocks = els.detail.querySelectorAll(".block");
+          if (blocks[1]) blocks[1].innerHTML = "<h3>Evidencia</h3><div class='muted mono'>Sin evidencia.</div>";
+          return;
+        }
+        const html = rows
+          .slice(0, 60)
+          .map((r) => {
+            const p = r.preview_display || r.preview || {};
+            const et = toText(p.evidence_type || "");
+            const dt = toText(p.evidence_date || "");
+            const ex = toText(p.excerpt || "");
+            const src = toText(p.source_id || "");
+            const badge = et.includes("revealed") ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
+            return (
+              "<div class='block'>" +
+              "<div class='row'><strong>" + esc(et || "evidence") + "</strong>" + badge + "</div>" +
+              "<div class='mono'>" + esc([dt, src].filter(Boolean).join(" · ")) + "</div>" +
+              (ex ? "<div style='margin-top:8px' class='v'>" + esc(ex) + "</div>" : "") +
+              "</div>"
+            );
+          })
+          .join("");
+
+        const blocks = els.detail.querySelectorAll(".block");
+        if (blocks[1]) {
+          blocks[1].innerHTML = "<h3>Evidencia</h3>" + html + (rows.length > 60 ? "<div class='muted mono'>+" + (rows.length - 60) + " mas…</div>" : "");
+        }
+      }
+
+      async function selectSet(row) {
+        const p = row.preview || {};
+        const id = (row.identity && row.identity.topic_set_id) ? row.identity.topic_set_id : null;
+        state.activeSet = { topic_set_id: id, name: toText(p.name || row.label || "") };
+        state.activeTopic = null;
+        state.activePosition = null;
+        state.topics = [];
+        state.positions = [];
+        renderSets();
+        renderTopics();
+        renderDetailEmpty();
+        await loadTopicsForActiveSet();
+      }
+
+      async function selectTopic(row) {
+        const id = (row.identity && row.identity.topic_id) ? row.identity.topic_id : null;
+        state.activeTopic = { topic_id: id };
+        state.activePosition = null;
+        renderTopics();
+        renderDetailEmpty();
+        await loadPositionsForActiveTopic();
+      }
+
+      async function selectPosition(row, idx) {
+        state.activePosition = { _idx: idx, row };
+        renderPositions();
+        await loadEvidenceForActivePosition();
+      }
+
+      async function loadSets() {
+        const payload = await apiRows("topic_sets", { limit: 250, offset: 0 });
+        if (payload && payload.error) {
+          setStatus("Error: " + payload.error);
+          els.sets.innerHTML = "<div class='muted mono'>" + esc(payload.error) + "</div>";
+          return;
+        }
+        state.sets = payload.rows || [];
+        setStatus("Sets: " + state.sets.length);
+        renderSets();
+      }
+
+      async function loadTopicsForActiveSet() {
+        if (!state.activeSet || !state.activeSet.topic_set_id) {
+          return;
+        }
+        const payload = await apiRows("topic_set_topics", {
+          limit: 500,
+          offset: 0,
+          where: [["topic_set_id", state.activeSet.topic_set_id]],
+        });
+        state.topics = (payload && payload.rows) ? payload.rows : [];
+        renderTopics();
+      }
+
+      async function loadPositionsForActiveTopic() {
+        if (!state.activeSet || !state.activeSet.topic_set_id || !state.activeTopic || !state.activeTopic.topic_id) {
+          return;
+        }
+        const payload = await apiRows("topic_positions", {
+          limit: 500,
+          offset: 0,
+          where: [
+            ["topic_set_id", state.activeSet.topic_set_id],
+            ["topic_id", state.activeTopic.topic_id],
+          ],
+        });
+        const rows = (payload && payload.rows) ? payload.rows : [];
+        state.positions = rows;
+        renderPositions();
+      }
+
+      async function loadEvidenceForActivePosition() {
+        if (!state.activePosition || !state.activePosition.row) return;
+        const p = state.activePosition.row.preview || {};
+        const personId = p.person_id;
+        const topicId = p.topic_id;
+        const topicSetId = p.topic_set_id;
+        if (!personId || !topicId) return;
+        const where = [["person_id", personId], ["topic_id", topicId]];
+        if (topicSetId) where.push(["topic_set_id", topicSetId]);
+        const payload = await apiRows("topic_evidence", { limit: 250, offset: 0, where });
+        renderEvidence((payload && payload.rows) ? payload.rows : []);
+      }
+
+      function openInSqlExplorer() {
+        if (!state.activeSet) {
+          window.location.href = "/explorer?t=topic_sets&tf=topic_";
+          return;
+        }
+        if (state.activeTopic) {
+          const url =
+            "/explorer?t=topic_positions&tf=topic_&wc=topic_set_id&wv=" +
+            encodeURIComponent(String(state.activeSet.topic_set_id)) +
+            "&wc=topic_id&wv=" +
+            encodeURIComponent(String(state.activeTopic.topic_id));
+          window.location.href = url;
+          return;
+        }
+        const url =
+          "/explorer?t=topic_set_topics&tf=topic_&wc=topic_set_id&wv=" +
+          encodeURIComponent(String(state.activeSet.topic_set_id));
+        window.location.href = url;
+      }
+
+      async function reloadAll() {
+        setStatus("Cargando…");
+        state.sets = [];
+        state.topics = [];
+        state.positions = [];
+        state.activeSet = null;
+        state.activeTopic = null;
+        state.activePosition = null;
+        els.sets.innerHTML = "<div class='muted mono'>Cargando…</div>";
+        els.topics.innerHTML = "<div class='muted mono'>—</div>";
+        renderDetailEmpty();
+        await loadSets();
+      }
+
+      els.reload.addEventListener("click", () => reloadAll());
+      els.setFilter.addEventListener("input", () => renderSets());
+      els.topicFilter.addEventListener("input", () => renderTopics());
+      els.topicMode.addEventListener("change", () => renderTopics());
+      els.stanceFilter.addEventListener("change", () => renderPositions());
+      els.openInSql.addEventListener("click", openInSqlExplorer);
+
+      reloadAll();
+    </script>
+  </body>
+</html>
+

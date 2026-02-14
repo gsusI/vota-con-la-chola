@@ -81,10 +81,84 @@
         color: var(--muted);
       }
 
+      .global-progress {
+        margin-top: 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .global-progress-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .global-progress-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .meter {
+        height: 14px;
+        border-radius: 999px;
+        background: #e5e7eb;
+        overflow: hidden;
+        border: 1px solid #dbeafe;
+      }
+
+      .meter > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #22c55e, #38bdf8, #2563eb);
+      }
+
+      .kpis {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        min-width: 0;
+      }
+
+      .kpi {
+        border: 1px solid #dbeafe;
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 8px 10px;
+        min-width: 0;
+      }
+
+      .kpi .label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #1e3a8a;
+        font-weight: 800;
+        margin: 0 0 4px;
+      }
+
+      .kpi .value {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .kpi .value strong {
+        font-size: 1.05rem;
+      }
+
       .toolbar {
         margin-top: 10px;
         display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 8px;
       }
 
@@ -96,6 +170,7 @@
         padding: 8px 10px;
         background: #fff;
         width: 100%;
+        min-width: 0;
         font: inherit;
       }
 
@@ -146,6 +221,18 @@
         font-size: 0.8rem;
       }
 
+      /* Lists inside cards/details should not overflow. */
+      .details-body ul {
+        margin: 0;
+        padding-left: 18px;
+        max-width: 100%;
+      }
+
+      .details-body li {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
       .row {
         display: flex;
         align-items: baseline;
@@ -193,10 +280,65 @@
         grid-template-columns: 1fr 1.2fr;
       }
 
+      .scope-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        min-width: 0;
+      }
+
+      .scope-card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 10px;
+        min-width: 0;
+      }
+
+      .scope-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .scope-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .scope-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .scope-card details {
+        margin-top: 8px;
+      }
+
+      #panel-filters {
+        margin-top: 10px;
+        padding: 10px;
+        background: #ffffff;
+      }
+
+      #panel-filters .details-body {
+        padding-top: 8px;
+      }
+
       .actions-grid {
         display: grid;
         gap: 8px;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .next-actions {
+        margin: 0 0 8px;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        min-width: 0;
       }
 
       .superheader {
@@ -220,13 +362,6 @@
         text-decoration: none;
         font-size: 0.82rem;
         font-weight: 700;
-      }
-
-      .superlink svg {
-        width: 16px;
-        height: 16px;
-        fill: currentColor;
-        flex: 0 0 auto;
       }
 
       .action {
@@ -399,6 +534,53 @@
         color: var(--err);
       }
 
+      .details-block {
+        padding: 0;
+      }
+
+      .details-block > summary {
+        cursor: pointer;
+        list-style: none;
+        margin: 0;
+        padding: 10px 12px;
+        border: 0;
+      }
+
+      .details-block > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .details-block > summary::marker {
+        content: "";
+      }
+
+      .details-block summary:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .details-title {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .details-body {
+        padding: 0 12px 12px;
+      }
+
+      .details-title strong {
+        color: var(--ink);
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .details-title small {
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
       @media (max-width: 1120px) {
         .toolbar {
           grid-template-columns: 1fr 1fr;
@@ -429,167 +611,172 @@
     </style>
   </head>
   <body>
-      <main class="app">
-        <div class="superheader">
-          <a class="superlink" href="/">← Índice</a>
-          <a
-            class="superlink"
-            href="https://github.com/gsusI/vota-con-la-chola"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Ver el código en GitHub"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-            </svg>
-            Ver el código
-          </a>
-        </div>
+    <main class="app">
+      <div class="superheader">
+        <a class="superlink" href="/">← Índice</a>
+      </div>
       <section class="top">
         <p class="eyebrow">Panel operativo</p>
         <h1>
           Estado de fuentes y conectores de datos
-          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.0.0</span>
+          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.0.2</span>
         </h1>
         <p class="subtitle">
           Compara lo que el proyecto necesita (<span class="mono">SOURCE_CONFIG</span>) con lo que ya está cargado en la BD, y ve qué queda por hacer para avanzar.
         </p>
+        <div id="global-progress" class="global-progress" aria-live="polite">
+          <div class="muted">Cargando progreso...</div>
+        </div>
         <div class="toolbar">
+          <select id="view-mode">
+            <option value="ops">Vista: Operación (hoy)</option>
+            <option value="all">Vista: Inventario completo</option>
+          </select>
           <input id="search" type="search" placeholder="Buscar por nombre de fuente, source_id o ámbito..." />
-          <select id="filter-state">
-            <option value="">Estado operativo: Todos</option>
-          </select>
-          <select id="filter-scope">
-            <option value="">Ámbito: Todos</option>
-          </select>
-          <select id="filter-desired">
-            <option value="">Tipo de fuente: Todos</option>
-            <option value="desired">Fuentes objetivo (obligatorias)</option>
-            <option value="extra">Fuentes adicionales</option>
-          </select>
-          <select id="filter-roadmap">
-            <option value="">Ruta de trabajo: Todos</option>
-            <option value="TODO">Pendientes</option>
-            <option value="PARTIAL">Parcial</option>
-            <option value="DONE">Completadas</option>
-            <option value="N/A">N/A</option>
-          </select>
           <button id="refresh">Actualizar vista</button>
         </div>
-        <p class="sub">Resumen rápido: una fuente aparece aquí si existe como objetivo, extra o tracker; el estado indica si ya se ejecuta bien o qué falta para que sea fiable.</p>
-      </section>
-
-      <section class="content">
-        <h2>Cómo leer el tablero</h2>
-        <div class="grid2">
-          <ul class="list">
-            <li><strong>Estado operativo:</strong> dice si la ingesta está bien hoy (Completada, Parcial, Error, Sin correr...).</li>
-            <li><strong>Roadmap:</strong> indica el estado del plan: Pendiente, Parcial o Completado.</li>
-            <li><strong>Estado SQL:</strong> comprueba si la parte de escritura en BD cumple el mínimo esperado.</li>
-          </ul>
-          <ul class="list">
-            <li><strong>Fuentes objetivo:</strong> conectores definidos en la configuración como obligatorios.</li>
-            <li><strong>Fuentes extras:</strong> conectores útiles que no rompen el flujo principal.</li>
-            <li><strong>Acciones:</strong> trabajos recomendados para sacar una fuente de pendiente o parcial a completada.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="summary" id="summary"></section>
-
-      <section class="content">
-        <h2>Plan de trabajo prioritario</h2>
-        <p class="sub">Acciones recomendadas (mezcla de config + tracker) para convertir fuentes parciales o incompletas en producto usable.</p>
-        <div id="actions" class="actions-grid"></div>
-      </section>
-
-      <section class="content">
-        <h2>Control de prioridad (no completadas)</h2>
-        <p class="sub">
-          Aquí se muestran los items del tracker que aún no están en <strong>DONE</strong>. Si una fuente está en DONE sin evidencia reproducible, se prioriza aquí como acción.
-        </p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Estado roadmap</th>
-                <th>Área</th>
-                <th>Tipo de dato</th>
-                <th>Cobertura objetivo</th>
-                <th>Qué falta para completar</th>
-                <th>IDs de fuente</th>
-              </tr>
-            </thead>
-            <tbody id="tracker-rows"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="grid2">
-        <article class="content">
-          <h2>Fuentes faltantes en base</h2>
-          <p class="sub">Fuentes que <strong>deberían</strong> existir según config y hoy no están presentes en BD.</p>
-          <div class="list">
-            <ul id="missing-list">
-              <li class="muted">Cargando...</li>
-            </ul>
+        <details class="content details-block" id="panel-filters">
+          <summary>
+            <span class="details-title">
+              <strong>Filtros avanzados</strong>
+              <small>Úsalos para inspección puntual; la vista principal está agrupada por ámbito.</small>
+            </span>
+          </summary>
+          <div class="details-body">
+            <div class="toolbar" style="margin-top:0">
+              <select id="filter-state">
+                <option value="">Estado operativo: Todos</option>
+              </select>
+              <select id="filter-scope">
+                <option value="">Ámbito: Todos</option>
+              </select>
+              <select id="filter-desired">
+                <option value="">Tipo de fuente: Todos</option>
+                <option value="desired">Fuentes objetivo (obligatorias)</option>
+                <option value="extra">Fuentes adicionales</option>
+              </select>
+              <select id="filter-tracker-domain">
+                <option value="">Dominio (roadmap): Todos</option>
+              </select>
+              <select id="filter-roadmap">
+                <option value="">Ruta de trabajo: Todos</option>
+                <option value="TODO">Pendientes</option>
+                <option value="PARTIAL">Parcial</option>
+                <option value="DONE">Completadas</option>
+                <option value="N/A">N/A</option>
+              </select>
+            </div>
           </div>
-        </article>
-
-        <article class="content">
-          <h2>Vista agregada</h2>
-          <p class="sub">Indicadores globales para saber si la canalización de datos está estable y qué parte del inventario está funcionando.</p>
-          <div id="progress-summary"></div>
-        </article>
+        </details>
+        <p class="sub">La pantalla se organiza por <span class="mono">ámbito</span>. En “Operación (hoy)” se prioriza lo pendiente o degradado.</p>
       </section>
 
       <section class="content">
-        <div class="row">
-          <h2>Detalle técnico por fuente</h2>
-          <p id="refresh-at" class="sub"></p>
+        <div class="row" style="align-items:center; margin-bottom:6px">
+          <h2 style="margin:0; font-size:1rem; letter-spacing:-0.01em">Ámbitos</h2>
+          <p id="refresh-at" class="sub" style="margin:0"></p>
         </div>
-        <p class="sub">Filtra por tipo de fuente, estado o ámbito para encontrar exactamente lo que quieres revisar.</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Fuente</th>
-                <th>Roadmap</th>
-                <th>Estado SQL</th>
-                <th>Estado operativo</th>
-                <th>Cobertura</th>
-                <th>Progreso</th>
-                <th>Última corrida</th>
-                <th>Info</th>
-              </tr>
-            </thead>
-            <tbody id="rows"></tbody>
-          </table>
-        </div>
+        <p class="sub">
+          Cada tarjeta representa un ámbito y agrupa: progreso mínimo, estado operativo, fuentes en configuración, elementos de roadmap sin conector y pendientes accionables.
+        </p>
+        <div id="scope-dashboard" class="scope-grid"></div>
       </section>
+
+      <details class="content details-block" id="panel-ideal">
+        <summary>
+          <span class="details-title">
+            <strong>Inventario ideal (Says vs Does)</strong>
+            <small>Lista ambiciosa de fuentes programáticas (oficiales y no oficiales) para comparar “lo que dicen” vs “lo que hacen”.</small>
+          </span>
+        </summary>
+        <div class="details-body">
+          <div class="toolbar" style="margin-top:0">
+            <select id="ideal-evidence">
+              <option value="">Evidencia: Todas</option>
+              <option value="does">does (hecho)</option>
+              <option value="says">says (dicho)</option>
+              <option value="both">both</option>
+            </select>
+            <select id="ideal-min-confidence">
+              <option value="0">Fiabilidad mínima: 0</option>
+              <option value="1">Fiabilidad mínima: 1</option>
+              <option value="2">Fiabilidad mínima: 2</option>
+              <option value="3" selected>Fiabilidad mínima: 3</option>
+              <option value="4">Fiabilidad mínima: 4</option>
+              <option value="5">Fiabilidad mínima: 5</option>
+            </select>
+          </div>
+          <div id="ideal-sources" class="list" style="margin-top:10px"></div>
+          <p class="sub" style="margin:10px 0 0">
+            Fuente de verdad: <span class="mono">docs/ideal_sources_say_do.json</span>.
+          </p>
+        </div>
+      </details>
+
+      <details class="content details-block" id="panel-howto">
+        <summary>
+          <span class="details-title">
+            <strong>Notas</strong>
+            <small>Definiciones rápidas.</small>
+          </span>
+        </summary>
+        <div class="details-body">
+          <ul class="list">
+            <li><strong>Progreso (metas mínimas):</strong> suma de <span class="mono">min_records_loaded_strict</span> por fuente objetivo (si aplica).</li>
+            <li><strong>Estado operativo:</strong> deriva de ejecuciones registradas y umbral mínimo (ok, partial, error, not_run...).</li>
+            <li><strong>Roadmap (sin conector):</strong> items del tracker sin <span class="mono">source_id</span> todavía, con ámbito inferido cuando es posible.</li>
+            <li><strong>Analítica (temas/posiciones):</strong> contadores y % de calidad para <span class="mono">topics</span>, <span class="mono">topic_evidence</span> y <span class="mono">topic_positions</span> (si existen en la BD).</li>
+            <li><strong>Regla de “doble entrada” (calidad):</strong> cuando exista, cruzar “comunicado oficial” con “registro con efectos”. Ejemplos: Consejo de Ministros → BOE; anuncio de adjudicación → PLACSP; anuncio de subvención → BDNS.</li>
+            <li><strong>Fiabilidad de fuente (0-5):</strong> 5=registro/boletín con efectos, 4=open data oficial estructurado, 3=comunicación oficial (RSS/agenda), 2=reutilizador, 1=señal, 0=sin trazabilidad.</li>
+          </ul>
+        </div>
+      </details>
     </main>
 
     <script>
       const state = {
         data: null,
-        rows: [],
+        ideal: null,
       };
 
       const nodes = {
+        viewMode: document.getElementById("view-mode"),
         search: document.getElementById("search"),
         filterState: document.getElementById("filter-state"),
         filterScope: document.getElementById("filter-scope"),
         filterDesired: document.getElementById("filter-desired"),
+        filterTrackerDomain: document.getElementById("filter-tracker-domain"),
         filterRoadmap: document.getElementById("filter-roadmap"),
         refresh: document.getElementById("refresh"),
-        summary: document.getElementById("summary"),
-        missingList: document.getElementById("missing-list"),
-        actions: document.getElementById("actions"),
-        trackerRows: document.getElementById("tracker-rows"),
-        rows: document.getElementById("rows"),
+        globalProgress: document.getElementById("global-progress"),
+        scopeDashboard: document.getElementById("scope-dashboard"),
         refreshAt: document.getElementById("refresh-at"),
-        progressSummary: document.getElementById("progress-summary"),
+        idealEvidence: document.getElementById("ideal-evidence"),
+        idealMinConfidence: document.getElementById("ideal-min-confidence"),
+        idealSources: document.getElementById("ideal-sources"),
       };
+
+      function getParam(key) {
+        try {
+          return new URL(window.location.href).searchParams.get(key);
+        } catch (_err) {
+          return null;
+        }
+      }
+
+      function setParam(key, value) {
+        try {
+          const url = new URL(window.location.href);
+          if (!value) {
+            url.searchParams.delete(key);
+          } else {
+            url.searchParams.set(key, value);
+          }
+          window.history.replaceState({}, "", url.toString());
+        } catch (_err) {
+          // ignore
+        }
+      }
 
       function formatDate(val) {
         if (!val) {
@@ -691,7 +878,7 @@
 
       function actionKindLabel(value) {
         const map = {
-          done_zero_real: "En BD sin corrida real verificable (strict-network)",
+          done_zero_real: "En BD sin ejecución real verificable (strict-network)",
           ingest_error: "Error en la ingesta",
           tracker_item: "Requiere trabajo del roadmap",
         };
@@ -708,11 +895,15 @@
           width + "% (" + progress.loaded + "/" + progress.target + ")</span>";
       }
 
-      function renderSummary(data) {
+      function renderGlobalProgress(data) {
         const summary = data.summary || {};
         const desiredProgress = (summary.desired_progress && summary.desired_progress.percent) || 0;
         const tracker = summary.tracker || {};
         const sql = summary.sql || {};
+        const analytics = data.analytics || {};
+        const aTopics = analytics.topics || {};
+        const aEvidence = analytics.evidence || {};
+        const aPositions = analytics.positions || {};
         const actionCount = Array.isArray(data.actions) ? data.actions.length : 0;
         const cards = [
           {title: "Fuentes esperadas (config)", value: summary.desired || 0},
@@ -724,244 +915,527 @@
           {title: "Tracker completados", value: tracker.done || 0},
           {title: "Acciones sugeridas", value: actionCount},
         ];
-        nodes.summary.innerHTML = cards
-          .map((card) => {
-            return (
-              "<article class='card'>" +
-              "<h2>" + card.title + "</h2>" +
-              "<p class='big'>" + card.value + "</p>" +
-              "</article>"
-            );
-          })
-          .join("");
 
         const target = summary.desired_progress && summary.desired_progress.target ? summary.desired_progress.target : 0;
         const loaded = summary.desired_progress && summary.desired_progress.loaded ? summary.desired_progress.loaded : 0;
-        nodes.progressSummary.innerHTML =
-          "<div class='row'><strong>Avance objetivo</strong><span class='mono'>" + loaded + " / " + target + " registros</span></div>" +
-          "<div class='progress-wrap'><span class='progress-inner' style='width:" + desiredProgress + "%'></span></div>" +
-          "<p class='small'>" + desiredProgress + "% de metas mínimas cubiertas para fuentes esperadas.</p>";
+        const percent = Math.max(0, Math.min(100, Number.isFinite(desiredProgress) ? desiredProgress : 0));
+        const present = summary.present || 0;
+        const desired = summary.desired || 0;
+        const missing = summary.missing || 0;
+        const extra = summary.extra || 0;
+        const todo = tracker.todo || 0;
+        const partial = tracker.partial || 0;
+        const done = tracker.done || 0;
+        const sqlDone = sql.done || 0;
+        const sqlPartial = sql.partial || 0;
 
-        nodes.refreshAt.textContent = "Actualizado: " + formatDate(data.generated_at || "");
+        const topicsTotal = Number(aTopics.topics_total || 0);
+        const topicSetsTotal = Number(aTopics.topic_sets_total || 0);
+        const highStakesTotal = Number(aTopics.high_stakes_total || 0);
+        const evidenceTotal = Number(aEvidence.topic_evidence_total || 0);
+        const evidenceTopicPct = Number(aEvidence.topic_evidence_with_topic_pct || 0);
+        const evidenceDatePct = Number(aEvidence.topic_evidence_with_date_pct || 0);
+        const positionsTotal = Number(aPositions.topic_positions_total || 0);
+        const positionsWithEvidencePct = Number(aPositions.topic_positions_with_evidence_pct || 0);
+
+        function fmtPct(x) {
+          if (!Number.isFinite(x)) return "—";
+          return Math.round(x * 100) + "%";
+        }
+
+        nodes.globalProgress.innerHTML =
+          "<div class='global-progress-head'>" +
+          "<div class='global-progress-title'>Progreso global de cobertura (metas mínimas)</div>" +
+          "<div class='mono muted'>" + percent + "%</div>" +
+          "</div>" +
+          "<div class='meter'><span style='width:" + percent + "%'></span></div>" +
+          "<div class='row'><span class='muted'>Registros mínimos cubiertos</span><span class='mono'>" + loaded + " / " + target + "</span></div>" +
+          "<div class='kpis'>" +
+          "<div class='kpi'><p class='label'>Inventario</p><div class='value'><strong>" + present + "</strong><span class='muted'>en BD</span></div><div class='small'>Esperadas: " + desired + " · Extras: " + extra + " · Faltan: " + missing + "</div></div>" +
+          "<div class='kpi'><p class='label'>Tracker</p><div class='value'><strong>" + (todo + partial) + "</strong><span class='muted'>por resolver</span></div><div class='small'>Pendientes: " + todo + " · Parciales: " + partial + " · Completadas: " + done + "</div></div>" +
+          "<div class='kpi'><p class='label'>Checks SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + "</div></div>" +
+          "<div class='kpi'><p class='label'>Analítica (temas)</p><div class='value'><strong>" + positionsTotal + "</strong><span class='muted'>posiciones</span></div><div class='small'>Temas: " + topicsTotal + " · Sets: " + topicSetsTotal + " · High-stakes: " + highStakesTotal + "</div></div>" +
+          "<div class='kpi'><p class='label'>Analítica (evidencia)</p><div class='value'><strong>" + evidenceTotal + "</strong><span class='muted'>evidencias</span></div><div class='small'>Con topic: " + fmtPct(evidenceTopicPct) + " · Con fecha: " + fmtPct(evidenceDatePct) + " · Pos con evidencia: " + fmtPct(positionsWithEvidencePct) + "</div></div>" +
+          "</div>";
       }
 
-      function renderActions(data) {
-        const actions = Array.isArray(data.actions) ? data.actions : [];
-        if (!actions.length) {
-          nodes.actions.innerHTML = "<div class='muted'>No hay acciones generadas (o no hay tracker/config cargados).</div>";
+      function safeNum(x, fallback = 0) {
+        const n = Number(x);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function renderIdealSources() {
+        if (!nodes.idealSources) return;
+        const data = state.ideal || {};
+        const sources = Array.isArray(data.sources) ? data.sources : [];
+        if (!sources.length) {
+          nodes.idealSources.innerHTML = "<div class='muted'>Sin inventario ideal (o endpoint no disponible).</div>";
           return;
         }
-        const top = actions.slice(0, 24);
-        nodes.actions.innerHTML = top
-          .map((action) => {
-            const prio = (action.priority || "P2").toUpperCase();
-            const prioClass = prio === "P0" ? "err" : prio === "P1" ? "warn" : "muted";
-            const sources = (action.source_ids || []).join(", ");
-            const details = action.details || "";
-            const cmds = (action.commands || []).filter(Boolean);
-            const cmdBlock = cmds.length ? "<pre class='cmd'>" + cmds.join("\n") + "</pre>" : "";
+
+        const search = nodes.search ? nodes.search.value : "";
+        const ev = nodes.idealEvidence ? String(nodes.idealEvidence.value || "") : "";
+        const minConf = nodes.idealMinConfidence ? safeNum(nodes.idealMinConfidence.value, 0) : 0;
+
+        const filtered = sources
+          .filter((s) => {
+            const c = safeNum(s.confidence, 0);
+            if (c < minConf) return false;
+            if (ev) {
+              const sev = String(s.evidence || "").toLowerCase();
+              if (sev !== String(ev).toLowerCase()) return false;
+            }
+            if (!matchSearch(search, s.name, s.id, s.jurisdiction, s.scope, (s.domains || []).join(" "), s.url, s.notes)) {
+              return false;
+            }
+            return true;
+          })
+          .sort((a, b) => {
+            const da = safeNum(b.confidence, 0) - safeNum(a.confidence, 0);
+            if (da !== 0) return da;
+            return String(a.name || a.id || "").localeCompare(String(b.name || b.id || ""));
+          });
+
+        const countBy = (pred) => filtered.filter(pred).length;
+        const nDoes = countBy((s) => String(s.evidence || "").toLowerCase() === "does");
+        const nSays = countBy((s) => String(s.evidence || "").toLowerCase() === "says");
+        const nBoth = countBy((s) => String(s.evidence || "").toLowerCase() === "both");
+
+        const head =
+          "<div class='row' style='align-items:baseline; margin-bottom:8px'>" +
+          "<div><strong>" +
+          filtered.length +
+          "</strong> fuentes · <span class='muted'>does:</span> <span class='mono'>" +
+          nDoes +
+          "</span> · <span class='muted'>says:</span> <span class='mono'>" +
+          nSays +
+          "</span> · <span class='muted'>both:</span> <span class='mono'>" +
+          nBoth +
+          "</span></div>" +
+          "<div class='mono muted'>/api/sources/ideal</div>" +
+          "</div>";
+
+        const rows = filtered
+          .slice(0, 120)
+          .map((s) => {
+            const conf = safeNum(s.confidence, 0);
+            const ev2 = String(s.evidence || "").toLowerCase();
+            const evBadge = ev2 === "does" ? "ok" : ev2 === "says" ? "warn" : "";
+            const badge = "<span class='pill " + (evBadge || "muted") + "'>" + (ev2 || "—") + "</span>";
+            const url = s.url ? "<a class='mono' href='" + String(s.url) + "' target='_blank' rel='noopener'>url</a>" : "<span class='muted'>url: —</span>";
+            const dom = Array.isArray(s.domains) ? s.domains.slice(0, 6).join(", ") : "";
+            const access = Array.isArray(s.access) ? s.access.join(", ") : "";
+            const fmt = Array.isArray(s.formats) ? s.formats.join(", ") : "";
+            const meta = [
+              "id=" + String(s.id || ""),
+              "conf=" + String(conf),
+              s.jurisdiction ? "jur=" + String(s.jurisdiction) : "",
+              s.scope ? "scope=" + String(s.scope) : "",
+              access ? "access=" + access : "",
+              fmt ? "fmt=" + fmt : "",
+            ].filter(Boolean).join(" · ");
+            const notes = s.notes ? "<div class='small muted'>" + String(s.notes) + "</div>" : "";
+            const domLine = dom ? "<div class='small muted'>dominios: " + String(dom) + "</div>" : "";
             return (
-              "<div class='action'>" +
-              "<div class='action-head'>" +
-              "<span class='pill " + prioClass + "'>" + prio + "</span>" +
-              "<span class='mono muted'>" + actionKindLabel(action.kind || "") + "</span>" +
-              "</div>" +
-              "<div class='action-title'>" + (action.title || "") + "</div>" +
-              (sources ? "<p class='action-meta'><span class='mono'>" + sources + "</span></p>" : "") +
-              (details ? "<p class='action-meta'>" + details + "</p>" : "") +
-              cmdBlock +
+              "<div class='card' style='margin-top:8px'>" +
+              "<div class='row'><strong>" + String(s.name || s.id || "—") + "</strong>" + badge + "</div>" +
+              "<div class='mono'>" + meta + "</div>" +
+              "<div class='row' style='margin-top:6px; align-items:baseline'>" + url + "</div>" +
+              domLine +
+              notes +
               "</div>"
             );
           })
           .join("");
+
+        const more = filtered.length > 120 ? "<div class='muted' style='margin-top:10px'>+" + (filtered.length - 120) + " más… (usa filtros/búsqueda)</div>" : "";
+        nodes.idealSources.innerHTML = head + rows + more;
       }
 
-      function renderTracker(data) {
-        const tracker = data.tracker || {};
-        const items = Array.isArray(tracker.items) ? tracker.items : [];
-        const important = items.filter((item) => (item.estado || "").toUpperCase() !== "DONE");
-          if (!important.length) {
-          nodes.trackerRows.innerHTML = "<tr><td colspan='6' class='muted'>No hay pendientes críticos en el tracker.</td></tr>";
-          return;
-        }
-        nodes.trackerRows.innerHTML = important
-          .map((item) => {
-            const estado = (item.estado || "").toUpperCase();
-            const pill = roadmapPill(estado);
-            const sourceIds = (item.source_ids || []).join(", ");
-            const bloque = item.bloque || "";
-            const bloqueShort = bloque.length > 90 ? bloque.slice(0, 90) + "..." : bloque;
-            const fuentes = item.fuentes_objetivo || "";
-            const fuentesShort = fuentes.length > 90 ? fuentes.slice(0, 90) + "..." : fuentes;
-            return (
-              "<tr>" +
-              "<td>" + pill + "</td>" +
-              "<td>" + (item.dominio || "—") + "</td>" +
-              "<td title='" + (item.tipo_dato || "") + "'>" + (item.tipo_dato || "—") + "</td>" +
-              "<td title='" + fuentes + "'>" + fuentesShort + "</td>" +
-              "<td title='" + bloque + "'>" + (bloqueShort || "—") + "</td>" +
-              "<td class='mono'>" + (sourceIds || "—") + "</td>" +
-              "</tr>"
-            );
-          })
-          .join("");
-      }
-
-      function renderMissing(data) {
-        const missing = data.missing || [];
-        if (!missing.length) {
-          nodes.missingList.innerHTML = "<li class='muted'>No hay fuentes faltantes en la configuración objetivo.</li>";
-          return;
-        }
-        nodes.missingList.innerHTML = missing
-          .map((sourceId) => {
-            return "<li>" + sourceId + "</li>";
-          })
-          .join("");
-      }
-
-      function fillFilters(data) {
-        const scopes = [...new Set((data.sources || []).map((s) => s.scope).filter(Boolean))].sort();
+      function fillAdvancedFilters(data) {
+        const sources = Array.isArray(data.sources) ? data.sources : [];
+        const scopes = [...new Set(sources.map((s) => normalizeScope(s.scope)).filter((s) => s && s !== "unknown"))]
+          .sort((a, b) => {
+            const d = scopeSortKey(a) - scopeSortKey(b);
+            if (d !== 0) return d;
+            return String(a).localeCompare(String(b));
+          });
         const statesSource = data && data.summary && Array.isArray(data.summary.states) ? data.summary.states : [];
         const states = [...new Set(statesSource)].filter(Boolean).sort();
-        const scopeNode = nodes.filterScope;
-        const stateNode = nodes.filterState;
-        const existingScopes = new Set(Array.from(scopeNode.options).map((opt) => opt.value));
-        if (scopeNode.childElementCount === 1) {
+        const trackerItems = data && data.tracker && Array.isArray(data.tracker.items) ? data.tracker.items : [];
+        const trackerDomains = [...new Set(trackerItems.map((it) => String(it.dominio || "").trim()).filter(Boolean))]
+          .sort((a, b) => String(a).localeCompare(String(b)));
+
+        if (nodes.filterScope) {
+          const keep = nodes.filterScope.options[0] ? nodes.filterScope.options[0].outerHTML : "<option value=''>Ámbito: Todos</option>";
+          nodes.filterScope.innerHTML = keep;
           scopes.forEach((scope) => {
-            if (!existingScopes.has(scope)) {
-              const option = document.createElement("option");
-              option.value = scope;
-              option.textContent = "Ámbito: " + scope;
-              scopeNode.appendChild(option);
-            }
+            const option = document.createElement("option");
+            option.value = scope;
+            option.textContent = "Ámbito: " + scopeLabel(scope);
+            nodes.filterScope.appendChild(option);
           });
         }
-        if (stateNode.childElementCount === 1) {
-          states.forEach((status) => {
+        if (nodes.filterState) {
+          const keep = nodes.filterState.options[0] ? nodes.filterState.options[0].outerHTML : "<option value=''>Estado operativo: Todos</option>";
+          nodes.filterState.innerHTML = keep;
+          states.forEach((st) => {
             const option = document.createElement("option");
-            option.value = status;
-            option.textContent = "Estado operativo: " + labelState(status);
-            stateNode.appendChild(option);
+            option.value = st;
+            option.textContent = "Estado operativo: " + labelState(st);
+            nodes.filterState.appendChild(option);
+          });
+        }
+
+        if (nodes.filterTrackerDomain) {
+          const keep = nodes.filterTrackerDomain.options[0]
+            ? nodes.filterTrackerDomain.options[0].outerHTML
+            : "<option value=''>Dominio (roadmap): Todos</option>";
+          nodes.filterTrackerDomain.innerHTML = keep;
+          trackerDomains.forEach((d) => {
+            const option = document.createElement("option");
+            option.value = d.toUpperCase();
+            option.textContent = "Dominio: " + d;
+            nodes.filterTrackerDomain.appendChild(option);
           });
         }
       }
 
-      function applyFilters(items) {
-        const search = nodes.search.value.toLowerCase().trim();
-        const scope = nodes.filterScope.value;
-        const st = nodes.filterState.value;
-        const desired = nodes.filterDesired.value;
-        const roadmap = nodes.filterRoadmap.value;
+      function scopeLabel(scope) {
+        const s = String(scope || "").toLowerCase();
+        const map = {
+          nacional: "Nacional",
+          autonomico: "Autonómico",
+          municipal: "Municipal",
+          europeo: "Europeo",
+          territorial: "Territorial (catálogo/población)",
+          multi: "Multi-ámbito",
+          "": "Sin ámbito",
+          unknown: "Sin ámbito",
+        };
+        return map[s] || (s ? s : "Sin ámbito");
+      }
 
-        return items.filter((item) => {
-          const wanted = `${item.source_id || ""} ${item.source_name || ""} ${item.scope || ""} ${(item.format || "")} ${(item.default_url || "")}`.toLowerCase();
-          if (search && !wanted.includes(search)) {
+      function scopeSortKey(scope) {
+        const s = String(scope || "").toLowerCase();
+        const order = {
+          nacional: 0,
+          autonomico: 1,
+          municipal: 2,
+          europeo: 3,
+          territorial: 4,
+          multi: 8,
+          "": 9,
+          unknown: 9,
+        };
+        return order[s] !== undefined ? order[s] : 7;
+      }
+
+      function actionPriorityWeight(action) {
+        const prio = String(action && action.priority ? action.priority : "P2").toUpperCase();
+        if (prio === "P0") return 0;
+        if (prio === "P1") return 1;
+        if (prio === "P2") return 2;
+        return 9;
+      }
+
+      function normalizeScope(scope) {
+        const s = String(scope || "").toLowerCase().trim();
+        return s || "unknown";
+      }
+
+      function matchSearch(search, ...parts) {
+        const s = (search || "").toLowerCase().trim();
+        if (!s) return true;
+        const blob = parts.filter(Boolean).join(" ").toLowerCase();
+        return blob.includes(s);
+      }
+
+      function scopeFromAction(action, byId) {
+        const explicit = normalizeScope(action && action.scope ? action.scope : "");
+        if (explicit && explicit !== "unknown") {
+          return explicit;
+        }
+        const ids = Array.isArray(action && action.source_ids) ? action.source_ids : [];
+        if (!ids.length) {
+          return "unknown";
+        }
+        const scopes = new Set();
+        ids.forEach((sid) => {
+          const row = byId.get(String(sid));
+          if (row) {
+            scopes.add(normalizeScope(row.scope));
+          }
+        });
+        if (scopes.size === 1) return Array.from(scopes)[0];
+        if (scopes.size > 1) return "multi";
+        return "unknown";
+      }
+
+      function scopeCoverageProgress(rows) {
+        let loaded = 0;
+        let target = 0;
+        rows.forEach((r) => {
+          const p = r && r.progress ? r.progress : null;
+          const t = p && Number.isFinite(p.target) ? Number(p.target) : 0;
+          const l = p && Number.isFinite(p.loaded) ? Number(p.loaded) : 0;
+          if (t > 0) {
+            target += t;
+            loaded += Math.min(l, t);
+          }
+        });
+        if (!target) {
+          return { percent: null, loaded: 0, target: 0 };
+        }
+        const percent = Math.max(0, Math.min(100, Math.round((loaded * 100) / target)));
+        return { percent, loaded, target };
+      }
+
+      function renderScopeDashboard(data) {
+        if (!nodes.scopeDashboard) {
+          return;
+        }
+        const mode = (nodes.viewMode && nodes.viewMode.value) ? nodes.viewMode.value : "ops";
+        const search = nodes.search ? nodes.search.value : "";
+        const filterState = nodes.filterState ? nodes.filterState.value : "";
+        const filterScope = nodes.filterScope ? nodes.filterScope.value : "";
+        const filterDesired = nodes.filterDesired ? nodes.filterDesired.value : "";
+        const filterTrackerDomain = nodes.filterTrackerDomain ? nodes.filterTrackerDomain.value : "";
+        const filterRoadmap = nodes.filterRoadmap ? nodes.filterRoadmap.value : "";
+        const actionsAll = Array.isArray(data.actions) ? data.actions : [];
+        const sourcesAll = Array.isArray(data.sources) ? data.sources : [];
+        const sourcesWanted = sourcesAll.filter((r) => {
+          if (!matchSearch(search, r.source_id, r.source_name, r.scope, r.domain, r.format, r.default_url)) {
             return false;
           }
-          if (scope && item.scope !== scope) {
+          if (filterScope && normalizeScope(r.scope) !== normalizeScope(filterScope)) {
             return false;
           }
-          if (st && item.state !== st) {
+          if (filterState && String(r.state || "") !== String(filterState)) {
             return false;
           }
-          if (desired === "desired" && !item.desired) {
+          if (filterDesired === "desired" && !r.desired) {
             return false;
           }
-          if (desired === "extra" && item.desired) {
+          if (filterDesired === "extra" && r.desired) {
             return false;
           }
-          if (roadmap) {
-            const trackerStatus = (item.tracker && item.tracker.status) ? String(item.tracker.status).toUpperCase() : "N/A";
-            if (trackerStatus !== roadmap) {
+          if (filterTrackerDomain) {
+            const td = (r.tracker && r.tracker.dominio) ? String(r.tracker.dominio).toUpperCase() : "";
+            if (String(filterTrackerDomain).toUpperCase() !== td) {
+              return false;
+            }
+          }
+          if (filterRoadmap) {
+            const trackerStatus = (r.tracker && r.tracker.status) ? String(r.tracker.status).toUpperCase() : "N/A";
+            if (String(filterRoadmap).toUpperCase() !== trackerStatus) {
               return false;
             }
           }
           return true;
         });
-      }
+        const tracker = data.tracker || {};
+        const roadmapAll = Array.isArray(tracker.unmapped) ? tracker.unmapped : [];
 
-      function renderRows(items) {
-        if (!items.length) {
-          nodes.rows.innerHTML = "<tr><td colspan='8' class='muted'>No hay fuentes que coincidan con esos filtros.</td></tr>";
+        const byId = new Map();
+        sourcesAll.forEach((r) => {
+          if (r && r.source_id) byId.set(String(r.source_id), r);
+        });
+
+        const roadmap = roadmapAll
+          .filter((it) => ["TODO", "PARTIAL"].includes(String(it.estado || "").toUpperCase()))
+          .filter((it) => matchSearch(search, it.fuentes_objetivo, it.tipo_dato, it.dominio, it.bloque, it.scope))
+          .filter((it) => {
+            if (filterScope && normalizeScope(it.scope) !== normalizeScope(filterScope)) {
+              return false;
+            }
+            if (filterTrackerDomain && String(filterTrackerDomain).toUpperCase() !== String(it.dominio || "").toUpperCase()) {
+              return false;
+            }
+            if (filterRoadmap && String(filterRoadmap).toUpperCase() !== String(it.estado || "").toUpperCase()) {
+              return false;
+            }
+            return true;
+          });
+
+        const byScope = new Map();
+        function ensure(scope) {
+          const key = normalizeScope(scope);
+          if (!byScope.has(key)) {
+            byScope.set(key, { scope: key, sources: [], roadmap: [], actions: [] });
+          }
+          return byScope.get(key);
+        }
+
+        sourcesWanted.forEach((r) => ensure(r.scope).sources.push(r));
+        roadmap.forEach((it) => ensure(it.scope).roadmap.push(it));
+
+        const actionFiltered = mode === "ops"
+          ? actionsAll.filter((a) => ["P0", "P1"].includes(String(a.priority || "").toUpperCase()))
+          : actionsAll.slice();
+
+        actionFiltered.forEach((a) => {
+          const s = scopeFromAction(a, byId);
+          ensure(s).actions.push(a);
+        });
+
+        const scopes = Array.from(byScope.keys()).sort((a, b) => {
+          const da = scopeSortKey(a) - scopeSortKey(b);
+          if (da !== 0) return da;
+          return String(a).localeCompare(String(b));
+        });
+
+        if (!scopes.length) {
+          nodes.scopeDashboard.innerHTML = "<div class='muted'>Sin datos.</div>";
           return;
         }
-        nodes.rows.innerHTML = items
-          .map((row) => {
-            const stateName = row.state || "unknown";
-            const badge = "<span class='pill " + stateClass(stateName) + "'>" + labelState(stateName) + "</span>";
-            const url = row.default_url ? "<a href='" + row.default_url + "' target='_blank' rel='noopener'>link</a>" : "—";
-            const progress = progressBadge(row.progress || {});
-            const lastSeen = row.last_seen_at || row.last_started_at || "";
-            const note = row.last_message || "Sin mensaje reciente";
-            const desiredTag = row.desired ? "<span class='meta'>Objetivo</span>" : "<span class='meta'>Extra</span>";
-            const roadmap = roadmapPill(row.tracker && row.tracker.status ? row.tracker.status : "");
-            const sql = sqlPill(row.sql_status || "");
-            const runs = (row.runs_ok || 0) + "/" + (row.runs_total || 0);
-            const maxNet = row.max_loaded_network || 0;
-            const maxAny = row.max_loaded_any || 0;
-            const fetches = (row.network_fetches || 0) + "/" + (row.fallback_fetches || 0);
-            const wh = row.warehouse || {};
-            const primaryTable = wh.primary_table || "";
-            const primaryRows = wh.primary_rows || 0;
-            const coverage =
-              "<span class='meta'>Ejecuciones exitosas: " + runs + "</span><br>" +
-              "<span class='meta'>Carga máxima red: " + maxNet + " | total: " + maxAny + "</span><br>" +
-              "<span class='meta'>Fetch red/fallback: " + fetches + "</span><br>" +
-              (primaryTable ? "<span class='meta'>Tabla destino: " + primaryTable + " (" + primaryRows + " filas)</span>" : "<span class='muted'>Tabla destino: —</span>");
-            const title = (row.source_name || "") + (row.domain ? " (" + row.domain + ")" : "");
+
+        nodes.scopeDashboard.innerHTML = scopes
+          .map((scopeKey) => {
+            const group = byScope.get(scopeKey);
+            const rows = (group.sources || []).slice();
+            const rowsSorted = rows.sort((a, b) => String(a.source_name || a.source_id || "").localeCompare(String(b.source_name || b.source_id || "")));
+
+            const issues = rowsSorted.filter((r) => String(r.state || "").toLowerCase() !== "ok");
+            const ok = rowsSorted.length - issues.length;
+            const coverage = scopeCoverageProgress(rowsSorted);
+            const roadmapItems = (group.roadmap || []).slice();
+            const actions = (group.actions || []).slice().sort((a, b) => actionPriorityWeight(a) - actionPriorityWeight(b));
+
+            const pendingCount = issues.length + roadmapItems.length + actions.length;
+            if (mode === "ops" && pendingCount === 0) {
+              return "";
+            }
+
+            const opPercent = rowsSorted.length ? Math.round((ok * 100) / rowsSorted.length) : null;
+            const coveragePercent = coverage.percent;
+
+            const issuesBlock = issues.length
+              ? "<details open><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Pendiente / degradado (" + pendingCount + ")</summary>" +
+                "<div class='list' style='margin-top:8px'>" +
+                "<ul>" +
+                issues.slice(0, 24).map((r) => {
+                  const st = String(r.state || "unknown");
+                  const badge = "<span class='pill " + stateClass(st) + "'>" + labelState(st) + "</span>";
+                  const desiredTag = r.desired ? "<span class='meta'>Objetivo</span>" : "<span class='meta'>Extra</span>";
+                  const url = r.default_url ? "<a class='mono' href='" + r.default_url + "' target='_blank' rel='noopener'>fuente</a>" : "<span class='muted'>fuente: —</span>";
+                  const prog = progressBadge(r.progress || {});
+                  return "<li>" + badge + " " + desiredTag + " <strong>" + (r.source_name || r.source_id) + "</strong> <span class='muted'>(" + (r.source_id || "") + ")</span> · " + prog + " · " + url + "</li>";
+                }).join("") +
+                (issues.length > 24 ? "<li class='muted'>+" + (issues.length - 24) + " más… (usa búsqueda)</li>" : "") +
+                "</ul>" +
+                "</div>" +
+                (actions.length ? "<details style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Acciones (" + actions.length + ")</summary><div class='actions-grid' style='margin-top:8px'>" +
+                  actions.slice(0, 12).map((a) => {
+                    const prio = (a.priority || "P2").toUpperCase();
+                    const prioClass = prio === "P0" ? "err" : prio === "P1" ? "warn" : "muted";
+                    const details = a.details || "";
+                    const cmds = (a.commands || []).filter(Boolean);
+                    const cmdBlock = cmds.length
+                      ? "<details style='margin-top:8px'><summary class='muted' style='cursor:pointer; font-weight:700'>Ver comandos</summary><pre class='cmd'>" + cmds.join("\n") + "</pre></details>"
+                      : "";
+                    return "<div class='action'><div class='action-head'><span class='pill " + prioClass + "'>" + prio + "</span><span class='mono muted'>" + actionKindLabel(a.kind || "") + "</span></div><div class='action-title'>" + (a.title || "") + "</div>" + (details ? "<p class='action-meta'>" + details + "</p>" : "") + cmdBlock + "</div>";
+                  }).join("") +
+                  (actions.length > 12 ? "<div class='muted'>+" + (actions.length - 12) + " más…</div>" : "") +
+                  "</div></details>" : "") +
+                (roadmapItems.length ? "<details style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Roadmap sin conector (" + roadmapItems.length + ")</summary><div class='list' style='margin-top:8px'><ul>" +
+                  roadmapItems.slice(0, 24).map((it) => {
+                    const e = String(it.estado || "").toUpperCase();
+                    const pill = roadmapPill(e);
+                    const label = (it.fuentes_objetivo || it.tipo_dato || "—").trim();
+                    const inf = it.scope_inferred ? " · <span class='muted'>ámbito inferido</span>" : "";
+                    const bloque = it.bloque ? " · <span class='muted'>" + String(it.bloque).trim() + "</span>" : "";
+                    return "<li>" + pill + " <strong>" + label + "</strong>" + inf + bloque + "</li>";
+                  }).join("") +
+                  (roadmapItems.length > 24 ? "<li class='muted'>+" + (roadmapItems.length - 24) + " más…</li>" : "") +
+                  "</ul></div></details>" : "") +
+                "</details>"
+              : "<div class='scope-meta'>Sin pendientes.</div>";
+
+            const sourcesBlock = rowsSorted.length
+              ? "<details" + (mode === "all" ? " open" : "") + " style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Fuentes (config) (" + rowsSorted.length + ")</summary><div class='list' style='margin-top:8px'><ul>" +
+                rowsSorted.slice(0, 80).map((r) => {
+                  const st = String(r.state || "unknown");
+                  const badge = "<span class='pill " + stateClass(st) + "'>" + labelState(st) + "</span>";
+                  const prog = progressBadge(r.progress || {});
+                  const url = r.default_url ? "<a class='mono' href='" + r.default_url + "' target='_blank' rel='noopener'>fuente</a>" : "<span class='muted'>fuente: —</span>";
+                  const last = r.last_seen_at || r.last_started_at || "";
+                  const lastTxt = last ? (" · <span class='muted'>última: " + formatDate(last) + "</span>") : "";
+                  const roadmapP = roadmapPill(r.tracker && r.tracker.status ? r.tracker.status : "");
+                  const sqlP = sqlPill(r.sql_status || "");
+                  const desiredTag = r.desired ? "<span class='meta'>Objetivo</span>" : "<span class='meta'>Extra</span>";
+                  return "<li>" + badge + " " + desiredTag + " " + roadmapP + " " + sqlP + " <strong>" + (r.source_name || r.source_id) + "</strong> <span class='muted'>(" + (r.source_id || "") + ")</span> · " + prog + " · " + url + lastTxt + "</li>";
+                }).join("") +
+                (rowsSorted.length > 80 ? "<li class='muted'>+" + (rowsSorted.length - 80) + " más… (usa búsqueda)</li>" : "") +
+                "</ul></div></details>"
+              : "<div class='scope-meta'>Fuentes (config): 0</div>";
+
+            const meters =
+              "<div style='display:grid; gap:8px; margin-top:8px'>" +
+              "<div><div class='row'><span class='muted'>Operativo</span><span class='mono'>" + (opPercent === null ? "—" : (ok + "/" + rowsSorted.length + " (" + opPercent + "%)")) + "</span></div>" +
+              "<div class='meter'><span style='width:" + (opPercent === null ? 0 : opPercent) + "%'></span></div></div>" +
+              "<div><div class='row'><span class='muted'>Cobertura (metas mínimas)</span><span class='mono'>" + (coveragePercent === null ? "—" : (coverage.loaded + "/" + coverage.target + " (" + coveragePercent + "%)")) + "</span></div>" +
+              "<div class='meter'><span style='width:" + (coveragePercent === null ? 0 : coveragePercent) + "%'></span></div></div>" +
+              "</div>";
+
             return (
-              "<tr>" +
-              "<td class='mono' title='" + title + "'>" + row.source_name + " " + desiredTag + "<br><span class='muted'>" + (row.source_id || "") + "</span></td>" +
-              "<td>" + roadmap + "</td>" +
-              "<td>" + sql + "</td>" +
-              "<td>" + badge + "</td>" +
-              "<td class='meta'>" + coverage + "</td>" +
-              "<td>" + progress + "</td>" +
-              "<td class='meta'>" + (formatDate(lastSeen) || "—") + "<br>" + url + "</td>" +
-              "<td class='meta' title='" + note + "'>" +
-              (note.length > 120 ? note.slice(0, 120) + "..." : note || "—") +
-              (row.fallback_file ? "<br><span class='mono muted'>fichero de muestra: " + row.fallback_file + "</span>" : "") +
-              "</td>" +
-              "</tr>"
+              "<article class='scope-card'>" +
+              "<div class='scope-head'>" +
+              "<div class='scope-title'>" + scopeLabel(scopeKey) + "</div>" +
+              "<div class='scope-meta'><span class='mono'>" + rowsSorted.length + "</span> fuentes · <span class='mono'>" + roadmapItems.length + "</span> roadmap</div>" +
+              "</div>" +
+              meters +
+              "<div style='margin-top:10px'>" + issuesBlock + "</div>" +
+              sourcesBlock +
+              "</article>"
             );
           })
-          .join("");
+          .join("") || "<div class='muted'>No hay pendientes para mostrar en Operación (hoy). Cambia a inventario completo.</div>";
       }
 
       async function loadData() {
-        nodes.summary.innerHTML = "<article class='card'><h2>Cargando</h2><p class='small'>...</p></article>";
-        nodes.rows.innerHTML = "<tr><td colspan='8' class='muted'>Actualizando...</td></tr>";
+        if (nodes.scopeDashboard) {
+          nodes.scopeDashboard.innerHTML = "<div class='muted'>Actualizando...</div>";
+        }
         try {
-          const response = await fetch("/api/sources/status");
-          const payload = await response.json();
+          const [statusResp, idealResp] = await Promise.all([
+            fetch("/api/sources/status"),
+            fetch("/api/sources/ideal").catch(() => null),
+          ]);
+          const payload = await statusResp.json();
+          let idealPayload = null;
+          if (idealResp) {
+            try {
+              idealPayload = await idealResp.json();
+            } catch (_err) {
+              idealPayload = null;
+            }
+          }
           if (payload.error) {
-            nodes.summary.innerHTML = "<article class='card'><h2>Error</h2><p class='small'>" + payload.error + "</p></article>";
-            nodes.progressSummary.textContent = "";
-            nodes.missingList.innerHTML = "<li>Sin datos</li>";
-            state.rows = [];
+            if (nodes.scopeDashboard) {
+              nodes.scopeDashboard.innerHTML = "<div class='muted'>" + payload.error + "</div>";
+            }
             return;
           }
           state.data = payload;
-          state.rows = payload.sources || [];
-          renderSummary(payload);
-          renderActions(payload);
-          renderTracker(payload);
-          renderMissing(payload);
-          fillFilters(payload);
-          renderRows(applyFilters(state.rows));
+          state.ideal = idealPayload;
+          renderGlobalProgress(payload);
+          fillAdvancedFilters(payload);
+          nodes.refreshAt.textContent = "Actualizado: " + formatDate(payload.generated_at || "");
+          renderScopeDashboard(payload);
+          renderIdealSources();
         } catch (error) {
-          nodes.summary.innerHTML = "<article class='card'><h2>Error</h2><p class='small'>No se pudo cargar /api/sources/status</p></article>";
-          nodes.progressSummary.textContent = String(error);
-          state.rows = [];
-          nodes.rows.innerHTML = "<tr><td colspan='8' class='muted'>Fallo al cargar el estado.</td></tr>";
-          nodes.actions.innerHTML = "<div class='muted'>Sin acciones (fallo al cargar).</div>";
-          nodes.trackerRows.innerHTML = "<tr><td colspan='6' class='muted'>Sin tracker (fallo al cargar).</td></tr>";
+          if (nodes.scopeDashboard) {
+            nodes.scopeDashboard.innerHTML = "<div class='muted'>No se pudo cargar /api/sources/status: " + String(error) + "</div>";
+          }
         }
       }
 
       function refresh() {
-        renderRows(applyFilters(state.rows));
+        if (state.data) {
+          renderScopeDashboard(state.data);
+          renderIdealSources();
+        }
       }
 
       nodes.refresh.addEventListener("click", loadData);
@@ -969,7 +1443,20 @@
       nodes.filterState.addEventListener("change", refresh);
       nodes.filterScope.addEventListener("change", refresh);
       nodes.filterDesired.addEventListener("change", refresh);
+      nodes.filterTrackerDomain.addEventListener("change", refresh);
       nodes.filterRoadmap.addEventListener("change", refresh);
+      nodes.viewMode.addEventListener("change", () => {
+        setParam("view", nodes.viewMode.value === "all" ? "all" : "ops");
+        refresh();
+      });
+      if (nodes.idealEvidence) nodes.idealEvidence.addEventListener("change", refresh);
+      if (nodes.idealMinConfidence) nodes.idealMinConfidence.addEventListener("change", refresh);
+
+      // Initialize view mode from URL.
+      {
+        const view = (getParam("view") || "").toLowerCase();
+        nodes.viewMode.value = view === "all" ? "all" : "ops";
+      }
 
       loadData();
     </script>

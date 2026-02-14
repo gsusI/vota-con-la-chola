@@ -451,6 +451,12 @@
         cursor: pointer;
       }
 
+      a.pill {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
       .pill.facet {
         border-color: #ffd9c8;
         background: #fff3ec;
@@ -503,7 +509,7 @@
         <header class="topbar card">
           <div class="title-wrap">
             <h1>Data Explorer (Wikidata-like)</h1>
-          <p>Navegacion dinamica por tablas, registros y relaciones inferidas por esquema.</p>
+          <p>Navegacion dinamica por tablas, registros y relaciones (incluye temas/evidencia/posiciones cuando existan).</p>
         </div>
         <nav class="switch">
           <a href="/graph">Graph</a>
@@ -515,11 +521,17 @@
         <section class="panel card">
           <div class="head">
             <h2>1) Tablas</h2>
-            <p>Vista top-level de todo lo disponible en la base actual.</p>
+            <p>Vista top-level de todo lo disponible. Atajo: abre el modelo de posiciones por temas.</p>
           </div>
           <div class="controls">
             <input id="tableFilter" type="text" placeholder="Filtrar tablas..." />
             <button id="reloadSchema" class="secondary">Recargar esquema</button>
+            <div class="pill-row">
+              <a class="pill" href="/explorer-temas">Vista Temas</a>
+              <a class="pill" href="/explorer?t=topic_positions&tf=topic_">Posiciones</a>
+              <a class="pill" href="/explorer?t=topic_evidence&tf=topic_">Evidencia</a>
+              <a class="pill" href="/explorer?t=topics&tf=topic">Temas</a>
+            </div>
           </div>
           <div id="tables" class="list"></div>
         </section>

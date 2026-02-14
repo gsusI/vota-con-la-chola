@@ -27,12 +27,13 @@ UI_INDEX = BASE_DIR / "ui" / "graph" / "index.html"
 UI_EXPLORERS = BASE_DIR / "ui" / "graph" / "explorers.html"
 UI_GRAPH = BASE_DIR / "ui" / "graph" / "index.html"
 UI_EXPLORER = BASE_DIR / "ui" / "graph" / "explorer.html"
-UI_EXPLORER_SPORTS = BASE_DIR / "ui" / "graph" / "explorer-sports.html"
-UI_EXPLORER_POLITICO = UI_EXPLORER_SPORTS
+UI_EXPLORER_POLITICO = BASE_DIR / "ui" / "graph" / "explorer-sports.html"
 UI_EXPLORER_VOTACIONES = BASE_DIR / "ui" / "graph" / "explorer-votaciones.html"
 UI_EXPLORER_SOURCES = BASE_DIR / "ui" / "graph" / "explorer-sources.html"
+UI_EXPLORER_TEMAS = BASE_DIR / "ui" / "graph" / "explorer-temas.html"
 MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblacion_municipios_es.json"
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
+IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
 
 LABEL_COLUMN_CANDIDATES = (
     "full_name",
@@ -430,7 +431,80 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
 
     desired_map = DESIRED_SOURCES
     desired_ids = sorted(desired_map.keys())
-    tracker_items = load_tracker_items(TRACKER_PATH)
+
+    def _infer_scope_from_text(text: str) -> str:
+        t = (text or "").lower()
+        if not t:
+            return ""
+        if (
+            "europarl" in t
+            or "parlamento europeo" in t
+            or "meps" in t
+            or "eur-lex" in t
+            or "cellar" in t
+            or "transparency register" in t
+            or "ted api" in t
+            or "data.europa.eu" in t
+            or "union europea" in t
+            or " ue " in f" {t} "
+        ):
+            return "europeo"
+        if (
+            "congreso" in t
+            or "senado" in t
+            or "jec" in t
+            or "junta electoral" in t
+            or "boe" in t
+            or "placsp" in t
+            or "plataforma de contrataci" in t
+            or "bdns" in t
+            or "infosubvenciones" in t
+            or "lamoncloa" in t
+            or "moncloa" in t
+            or "transparencia.gob" in t
+            or "portal de transparencia" in t
+        ):
+            return "nacional"
+        if "ayuntamiento" in t or "municip" in t:
+            return "municipal"
+        if "parlamento" in t or "asamblea" in t or "cortes" in t or "corts" in t:
+            return "autonomico"
+        if "ine" in t or "ign" in t or "rel" in t or "poblaci" in t or "territor" in t:
+            # Catálogo territorial / población: cruza niveles y no es un conector “político” único.
+            return "territorial"
+        if "partid" in t and ("program" in t or "web" in t):
+            return "nacional"
+        return ""
+
+    def _infer_tracker_item_scope(item: dict[str, Any]) -> tuple[str, bool]:
+        source_ids = [safe_text(s) for s in (item.get("source_ids") or []) if safe_text(s)]
+        scopes = {safe_text((desired_map.get(sid) or {}).get("scope")) for sid in source_ids if safe_text((desired_map.get(sid) or {}).get("scope"))}
+        scopes.discard("")
+        if len(scopes) == 1:
+            return next(iter(scopes)), False
+        if len(scopes) > 1:
+            return "multi", False
+
+        blob = " | ".join(
+            [
+                safe_text(item.get("fuentes_objetivo")),
+                safe_text(item.get("tipo_dato")),
+                safe_text(item.get("dominio")),
+                safe_text(item.get("bloque")),
+            ]
+        )
+        inferred = _infer_scope_from_text(blob)
+        return inferred, bool(inferred)
+
+    tracker_items_raw = load_tracker_items(TRACKER_PATH)
+    tracker_items: list[dict[str, Any]] = []
+    for item in tracker_items_raw:
+        item2 = dict(item)
+        scope, inferred = _infer_tracker_item_scope(item2)
+        item2["scope"] = scope
+        item2["scope_inferred"] = inferred
+        tracker_items.append(item2)
+
     tracker_by_source: dict[str, dict[str, Any]] = {}
     for item in tracker_items:
         for source_id in item.get("source_ids") or []:
@@ -621,6 +695,41 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             info_tipos_by_source = _count_by_source("infoelectoral_convocatoria_tipos")
             info_procesos_by_source = _count_by_source("infoelectoral_procesos")
 
+            def _count_sql(sql: str, params: tuple[Any, ...] = ()) -> int:
+                try:
+                    row = conn.execute(sql, params).fetchone()
+                    if not row:
+                        return 0
+                    # first column
+                    return int(list(row)[0] or 0)
+                except sqlite3.Error:
+                    return 0
+
+            def _count_table(table: str) -> int:
+                try:
+                    row = conn.execute(f"SELECT COUNT(*) AS n FROM {quote_ident(table)}").fetchone()
+                    return int((row["n"] if row else 0) or 0)
+                except sqlite3.Error:
+                    return 0
+
+            topics_total = _count_table("topics")
+            topic_sets_total = _count_table("topic_sets")
+            topic_sets_active = _count_sql("SELECT COUNT(*) FROM topic_sets WHERE is_active = 1")
+            topic_set_topics_total = _count_table("topic_set_topics")
+            high_stakes_total = _count_sql("SELECT COUNT(*) FROM topic_set_topics WHERE is_high_stakes = 1")
+            topic_evidence_total = _count_table("topic_evidence")
+            topic_evidence_with_topic = _count_sql("SELECT COUNT(*) FROM topic_evidence WHERE topic_id IS NOT NULL")
+            topic_evidence_with_date = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE evidence_date IS NOT NULL AND TRIM(evidence_date) <> ''"
+            )
+            topic_positions_total = _count_table("topic_positions")
+            topic_positions_with_evidence = _count_sql("SELECT COUNT(*) FROM topic_positions WHERE evidence_count > 0")
+
+            def _pct(n: int, d: int) -> float:
+                if d <= 0:
+                    return 0.0
+                return float(n) / float(d)
+
             all_sources: list[dict[str, Any]] = []
             missing = []
             actions: list[dict[str, Any]] = []
@@ -648,6 +757,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 title: str,
                 details: str = "",
                 *,
+                scope: str = "",
                 source_ids: list[str] | None = None,
                 commands: list[str] | None = None,
             ) -> None:
@@ -659,6 +769,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     {
                         "kind": kind,
                         "priority": priority,
+                        "scope": safe_text(scope),
                         "title": title,
                         "details": details,
                         "source_ids": source_ids or [],
@@ -676,6 +787,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     priority,
                     f"{estado}: {safe_text(item.get('fuentes_objetivo')) or safe_text(item.get('tipo_dato'))}",
                     safe_text(item.get("bloque")),
+                    scope=safe_text(item.get("scope")),
                     source_ids=[sid for sid in (item.get("source_ids") or []) if sid],
                 )
 
@@ -800,8 +912,8 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     push_action(
                         "done_zero_real",
                         "P0",
-                        f"Tracker DONE pero sin corrida reproducible (strict-network): {source_id}",
-                        "Hay carga en BD pero no hay evidencia de carga desde red (raw_fetches http).",
+                        f"Tracker DONE pero sin ejecución reproducible (strict-network): {source_id}",
+                        "Hay carga en BD pero no hay evidencia de ejecución desde red (raw_fetches http).",
                         source_ids=[source_id],
                         commands=cmds,
                     )
@@ -975,6 +1087,29 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             return {
                 **meta,
                 "summary": summary,
+                "analytics": {
+                    "topics": {
+                        "topics_total": topics_total,
+                        "topic_sets_total": topic_sets_total,
+                        "topic_sets_active": topic_sets_active,
+                        "topic_set_topics_total": topic_set_topics_total,
+                        "high_stakes_total": high_stakes_total,
+                    },
+                    "evidence": {
+                        "topic_evidence_total": topic_evidence_total,
+                        "topic_evidence_with_topic": topic_evidence_with_topic,
+                        "topic_evidence_with_topic_pct": _pct(topic_evidence_with_topic, topic_evidence_total),
+                        "topic_evidence_with_date": topic_evidence_with_date,
+                        "topic_evidence_with_date_pct": _pct(topic_evidence_with_date, topic_evidence_total),
+                    },
+                    "positions": {
+                        "topic_positions_total": topic_positions_total,
+                        "topic_positions_with_evidence": topic_positions_with_evidence,
+                        "topic_positions_with_evidence_pct": _pct(
+                            topic_positions_with_evidence, topic_positions_total
+                        ),
+                    },
+                },
                 "tracker": {
                     "path": str(TRACKER_PATH),
                     "exists": TRACKER_PATH.exists(),
@@ -2797,6 +2932,11 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
             parsed = urlparse(self.path)
             path = parsed.path
 
+            if path == "/favicon.ico":
+                self.send_response(HTTPStatus.NO_CONTENT)
+                self.end_headers()
+                return
+
             if path in ("/", "/index.html"):
                 if not UI_EXPLORERS.exists():
                     self.write_html("<h1>UI no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
@@ -2825,8 +2965,8 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 self.write_html(UI_EXPLORER.read_text(encoding="utf-8"))
                 return
 
-            if path in ("/explorer-politico", "/explorer-politico.html", "/explorer-sports", "/explorer-sports.html"):
-                if not UI_EXPLORER_SPORTS.exists():
+            if path in ("/explorer-politico", "/explorer-politico.html"):
+                if not UI_EXPLORER_POLITICO.exists():
                     self.write_html("<h1>UI explorer-politico no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
                     return
                 self.write_html(UI_EXPLORER_POLITICO.read_text(encoding="utf-8"))
@@ -2844,6 +2984,13 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     self.write_html("<h1>UI explorer-sources no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
                     return
                 self.write_html(UI_EXPLORER_SOURCES.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/explorer-temas", "/explorer-temas.html"):
+                if not UI_EXPLORER_TEMAS.exists():
+                    self.write_html("<h1>UI explorer-temas no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_EXPLORER_TEMAS.read_text(encoding="utf-8"))
                 return
 
             if path == "/api/health":
@@ -3044,6 +3191,26 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     )
                 status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
                 self.write_json(payload, status=status)
+                return
+
+            if path == "/api/sources/ideal":
+                try:
+                    raw = IDEAL_SOURCES_PATH.read_text(encoding="utf-8")
+                    data = json.loads(raw)
+                except FileNotFoundError:
+                    data = {"version": "", "title": "Ideal Sources Inventory", "sources": []}
+                except json.JSONDecodeError as exc:
+                    data = {"error": f"Invalid JSON in {IDEAL_SOURCES_PATH}: {exc}", "sources": []}
+                self.write_json(
+                    {
+                        "meta": {
+                            "path": str(IDEAL_SOURCES_PATH),
+                            "exists": IDEAL_SOURCES_PATH.exists(),
+                            "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                        },
+                        **(data if isinstance(data, dict) else {"sources": []}),
+                    }
+                )
                 return
 
             self.write_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
