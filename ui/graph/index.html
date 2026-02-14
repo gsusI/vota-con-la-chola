@@ -45,6 +45,10 @@
       .page {
         display: grid;
         grid-template-columns: 320px minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-areas:
+          "top top"
+          "side main";
         gap: 14px;
         height: 100%;
         padding: 14px;
@@ -59,6 +63,7 @@
       }
 
       .sidebar {
+        grid-area: side;
         padding: 14px;
         overflow: auto;
       }
@@ -90,6 +95,7 @@
       }
 
       .superheader {
+        grid-area: top;
         margin-bottom: 8px;
         display: flex;
         align-items: center;
@@ -98,7 +104,7 @@
         flex-wrap: wrap;
         position: sticky;
         top: 8px;
-        z-index: 1000;
+        z-index: 2147483647;
         isolation: isolate;
       }
 
@@ -238,6 +244,7 @@
       }
 
       #cyWrap {
+        grid-area: main;
         position: relative;
         overflow: hidden;
       }
@@ -281,7 +288,11 @@
       @media (max-width: 940px) {
         .page {
           grid-template-columns: 1fr;
-          grid-template-rows: auto 1fr;
+          grid-template-rows: auto auto minmax(0, 1fr);
+          grid-template-areas:
+            "top"
+            "side"
+            "main";
           height: auto;
           min-height: 100%;
         }
