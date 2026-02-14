@@ -2931,6 +2931,8 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
         def do_GET(self) -> None:  # noqa: N802
             parsed = urlparse(self.path)
             path = parsed.path
+            if path != "/" and path.endswith("/"):
+                path = path.rstrip("/")
 
             if path == "/favicon.ico":
                 self.send_response(HTTPStatus.NO_CONTENT)
