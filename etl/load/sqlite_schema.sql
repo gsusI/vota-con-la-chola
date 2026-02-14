@@ -327,6 +327,107 @@ CREATE TABLE IF NOT EXISTS parl_vote_event_initiatives (
   PRIMARY KEY (vote_event_id, initiative_id, link_method)
 );
 
+-- Analitica: temas (alto impacto por scope) + evidencia + posicionamiento reproducible.
+-- Modelo: "position" es una agregacion (por persona + scope + tema + ventana) sobre evidencia auditable.
+CREATE TABLE IF NOT EXISTS topic_sets (
+  topic_set_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  description TEXT,
+  -- Scope anchors: cualquier combinacion puede ser NULL (p.ej. set global o set por institucion).
+  institution_id INTEGER REFERENCES institutions(institution_id),
+  admin_level_id INTEGER REFERENCES admin_levels(admin_level_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  legislature TEXT,
+  valid_from TEXT,
+  valid_to TEXT,
+  is_active INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0, 1)),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (name, COALESCE(institution_id, -1), COALESCE(admin_level_id, -1), COALESCE(territory_id, -1), COALESCE(legislature, ''))
+);
+
+CREATE TABLE IF NOT EXISTS topics (
+  topic_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  canonical_key TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  description TEXT,
+  parent_topic_id INTEGER REFERENCES topics(topic_id),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Which topics are considered (and how "high-stakes" they are) inside a topic_set.
+CREATE TABLE IF NOT EXISTS topic_set_topics (
+  topic_set_id INTEGER NOT NULL REFERENCES topic_sets(topic_set_id) ON DELETE CASCADE,
+  topic_id INTEGER NOT NULL REFERENCES topics(topic_id) ON DELETE CASCADE,
+  stakes_score REAL,
+  stakes_rank INTEGER,
+  is_high_stakes INTEGER NOT NULL DEFAULT 0 CHECK (is_high_stakes IN (0, 1)),
+  notes TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (topic_set_id, topic_id)
+);
+
+-- Atomic evidence items supporting a stance (declared or revealed). Must be traceable to raw sources.
+CREATE TABLE IF NOT EXISTS topic_evidence (
+  evidence_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  topic_id INTEGER REFERENCES topics(topic_id),
+  topic_set_id INTEGER REFERENCES topic_sets(topic_set_id),
+  person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
+  mandate_id INTEGER REFERENCES mandates(mandate_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id),
+  admin_level_id INTEGER REFERENCES admin_levels(admin_level_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  evidence_type TEXT NOT NULL,
+  evidence_date TEXT,
+  title TEXT,
+  excerpt TEXT,
+  -- Canonical stance signal produced by the extractor/classifier for this evidence row.
+  stance TEXT CHECK (stance IN ('support', 'oppose', 'mixed', 'unclear', 'no_signal')),
+  polarity INTEGER CHECK (polarity IN (-1, 0, 1)),
+  weight REAL,
+  confidence REAL,
+  topic_method TEXT,
+  stance_method TEXT,
+  -- Optional links to canonico parlamentario evidence.
+  vote_event_id TEXT REFERENCES parl_vote_events(vote_event_id) ON DELETE SET NULL,
+  initiative_id TEXT REFERENCES parl_initiatives(initiative_id) ON DELETE SET NULL,
+  -- Provenance.
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Aggregated stance snapshot (recomputed deterministically from topic_evidence for a given window).
+CREATE TABLE IF NOT EXISTS topic_positions (
+  position_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  topic_id INTEGER NOT NULL REFERENCES topics(topic_id) ON DELETE CASCADE,
+  topic_set_id INTEGER REFERENCES topic_sets(topic_set_id) ON DELETE SET NULL,
+  person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
+  mandate_id INTEGER REFERENCES mandates(mandate_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id),
+  admin_level_id INTEGER REFERENCES admin_levels(admin_level_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  as_of_date TEXT NOT NULL,
+  window_days INTEGER,
+  stance TEXT NOT NULL CHECK (stance IN ('support', 'oppose', 'mixed', 'unclear', 'no_signal')),
+  score REAL,
+  confidence REAL,
+  evidence_count INTEGER NOT NULL DEFAULT 0,
+  last_evidence_date TEXT,
+  computed_method TEXT NOT NULL,
+  computed_version TEXT NOT NULL,
+  computed_at TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (topic_id, person_id, COALESCE(mandate_id, -1), as_of_date, computed_method, computed_version)
+);
+
 CREATE INDEX IF NOT EXISTS idx_runs_source_id ON ingestion_runs(source_id);
 CREATE INDEX IF NOT EXISTS idx_persons_name ON persons(full_name);
 CREATE INDEX IF NOT EXISTS idx_persons_gender_id ON persons(gender_id);
@@ -363,3 +464,18 @@ CREATE INDEX IF NOT EXISTS idx_parl_initiatives_leg ON parl_initiatives(legislat
 CREATE INDEX IF NOT EXISTS idx_parl_initiatives_source ON parl_initiatives(source_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_vote ON parl_vote_event_initiatives(vote_event_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_init ON parl_vote_event_initiatives(initiative_id);
+
+CREATE INDEX IF NOT EXISTS idx_topic_sets_institution_id ON topic_sets(institution_id);
+CREATE INDEX IF NOT EXISTS idx_topic_sets_admin_level_id ON topic_sets(admin_level_id);
+CREATE INDEX IF NOT EXISTS idx_topic_sets_territory_id ON topic_sets(territory_id);
+CREATE INDEX IF NOT EXISTS idx_topics_parent_topic_id ON topics(parent_topic_id);
+CREATE INDEX IF NOT EXISTS idx_topic_set_topics_topic_id ON topic_set_topics(topic_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_topic_id ON topic_evidence(topic_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_person_id ON topic_evidence(person_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_mandate_id ON topic_evidence(mandate_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_vote_event_id ON topic_evidence(vote_event_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_initiative_id ON topic_evidence(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_source_id ON topic_evidence(source_id);
+CREATE INDEX IF NOT EXISTS idx_topic_positions_topic_id ON topic_positions(topic_id);
+CREATE INDEX IF NOT EXISTS idx_topic_positions_person_id ON topic_positions(person_id);
+CREATE INDEX IF NOT EXISTS idx_topic_positions_mandate_id ON topic_positions(mandate_id);
