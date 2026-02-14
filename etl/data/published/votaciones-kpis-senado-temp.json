@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "failures": [
+      {
+        "actual": 0.2923744127213589,
+        "metric": "events_with_date_pct",
+        "threshold": 0.95
+      },
+      {
+        "actual": 0.018070112034694615,
+        "metric": "events_with_theme_pct",
+        "threshold": 0.95
+      },
+      {
+        "actual": 0.2923744127213589,
+        "metric": "events_with_totals_pct",
+        "threshold": 0.95
+      },
+      {
+        "actual": 0.46768749551159805,
+        "metric": "member_votes_with_person_id_pct",
+        "threshold": 0.9
+      }
+    ],
+    "passed": false,
+    "thresholds": {
+      "events_with_date_pct": 0.95,
+      "events_with_initiative_link_pct": 0.0,
+      "events_with_theme_pct": 0.95,
+      "events_with_totals_pct": 0.95,
+      "member_votes_with_person_id_pct": 0.9
+    }
+  },
+  "kpis": {
+    "by_source": {
+      "senado_votaciones": {
+        "events_total": 5534,
+        "events_with_date": 1618,
+        "events_with_date_pct": 0.2923744127213589,
+        "events_with_initiative_link": 100,
+        "events_with_initiative_link_pct": 0.018070112034694615,
+        "events_with_nominal_vote": 1618,
+        "events_with_nominal_vote_pct": 0.2923744127213589,
+        "events_with_theme": 100,
+        "events_with_theme_pct": 0.018070112034694615,
+        "events_with_totals": 1618,
+        "events_with_totals_pct": 0.2923744127213589,
+        "member_votes_total": 250646,
+        "member_votes_with_person_id": 117224,
+        "member_votes_with_person_id_pct": 0.46768749551159805
+      }
+    },
+    "events_total": 5534,
+    "events_with_date": 1618,
+    "events_with_date_pct": 0.2923744127213589,
+    "events_with_initiative_link": 100,
+    "events_with_initiative_link_pct": 0.018070112034694615,
+    "events_with_nominal_vote": 1618,
+    "events_with_nominal_vote_pct": 0.2923744127213589,
+    "events_with_theme": 100,
+    "events_with_theme_pct": 0.018070112034694615,
+    "events_with_totals": 1618,
+    "events_with_totals_pct": 0.2923744127213589,
+    "member_votes_total": 250646,
+    "member_votes_with_person_id": 117224,
+    "member_votes_with_person_id_pct": 0.46768749551159805,
+    "source_ids": [
+      "senado_votaciones"
+    ]
+  },
+  "source_ids": [
+    "senado_votaciones"
+  ]
+}
