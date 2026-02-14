@@ -305,7 +305,7 @@
   <body>
     <div class="page">
       <div class="superheader">
-        <a class="superlink" href="/">← Índice</a>
+        <a class="superlink" href="../">← Índice</a>
         <a
           class="superlink"
           href="https://github.com/gsusI/vota-con-la-chola"
@@ -323,10 +323,10 @@
         <h1>Graph Explorer</h1>
         <p class="subtitle">Politicos, instituciones, partidos y fuentes</p>
         <div class="view-links">
-          <a class="active" href="/graph">Graph</a>
-          <a href="/explorer">Explorer</a>
-          <a href="/explorer-politico">Radar Político</a>
-          <a href="/explorer-sources">Fuentes</a>
+          <a class="active" href="./">Graph</a>
+          <a href="../explorer/">Explorer</a>
+          <a href="../explorer-politico/">Radar</a>
+          <a href="../explorer-sources/">Fuentes</a>
         </div>
 
         <div class="controls">
@@ -627,16 +627,44 @@
         };
       }
 
+      const APP_QUERY = new URLSearchParams(window.location.search);
+      const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
+      const STATIC_DATA_DIR = "data";
+      const STATIC_GRAPH_PATH = `${STATIC_DATA_DIR}/graph.json`;
+
+      const isLocalApiHost = (() => {
+        const host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
+      })();
+
+      const resolveApiPath = (path) => {
+        const endpoint = String(path || "").trim();
+        if (!endpoint) return "";
+        const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\\/$/, "")}${normalized}`;
+        if (isLocalApiHost) return normalized;
+        return "";
+      };
+
+      const readJson = async (url) => {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      };
+
       async function onNodeTap(evt) {
         const data = evt.target.data();
         state.selectedNodeId = data.id || null;
         els.selection.textContent = `Nodo activo: ${data.label || data.id || "?"}`;
 
         if (data.type === "person" && data.person_id) {
-          const personResp = await fetch(`/api/person/${data.person_id}`);
-          const personPayload = await personResp.json();
-          setDetail(data.label || "Persona", JSON.stringify(personPayload, null, 2));
-          return;
+          const apiEndpoint = resolveApiPath(`/api/person/${data.person_id}`);
+          if (apiEndpoint) {
+            const personResp = await fetch(apiEndpoint);
+            const personPayload = await personResp.json();
+            setDetail(data.label || "Persona", JSON.stringify(personPayload, null, 2));
+            return;
+          }
         }
         setDetail(data.label || "Nodo", JSON.stringify(data, null, 2));
       }
@@ -797,9 +825,16 @@
         // Keep the page refreshable and shareable: current graph controls -> URL.
         history.replaceState({}, "", location.pathname + `?${params.toString()}`);
 
-        setDetail("Cargando", "Consultando API...", true);
-        const resp = await fetch(`/api/graph?${params.toString()}`);
-        const payload = await resp.json();
+        const apiEndpoint = resolveApiPath(`/api/graph?${params.toString()}`);
+        let payload = null;
+        if (apiEndpoint) {
+          setDetail("Cargando", "Consultando API...", true);
+          const resp = await fetch(apiEndpoint);
+          payload = await resp.json();
+        } else {
+          setDetail("Cargando", "Cargando snapshot estatico (GitHub Pages)...", true);
+          payload = await readJson(STATIC_GRAPH_PATH);
+        }
         const nodes = payload.nodes || [];
         const edges = payload.edges || [];
         const meta = payload.meta || {};

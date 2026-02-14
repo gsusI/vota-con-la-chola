@@ -3,23 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vota Con La Chola | Data Explorer</title>
+    <title>Vota Con La Chola | Graph Explorer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
     <style>
       :root {
-        --bg-a: #f6f7f4;
-        --bg-b: #dbe8f8;
+        --bg-a: #faf7f1;
+        --bg-b: #dae8ff;
         --ink: #1e1d19;
-        --ink-soft: #55524a;
-        --panel: rgba(255, 255, 255, 0.9);
-        --line: #d9e0ea;
-        --accent: #0b5fff;
-        --accent-2: #ff6b35;
+        --ink-soft: #54524a;
+        --card: rgba(255, 255, 255, 0.78);
+        --accent: #ff6b35;
+        --accent-2: #0b5fff;
+        --source: #ff6b35;
+        --person: #111111;
+        --party: #2f8f54;
+        --inst: #275db3;
       }
 
       * {
@@ -33,68 +37,75 @@
         color: var(--ink);
         font-family: "Space Grotesk", sans-serif;
         background:
-          radial-gradient(900px 420px at 10% 10%, #fef3e3 0%, transparent 72%),
-          radial-gradient(850px 440px at 90% 95%, #dfe9ff 0%, transparent 74%),
+          radial-gradient(1000px 420px at 18% 8%, #fff2d9 0%, transparent 70%),
+          radial-gradient(1000px 500px at 95% 100%, #dce8ff 0%, transparent 74%),
           linear-gradient(120deg, var(--bg-a), var(--bg-b));
       }
 
       .page {
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-areas:
+          "top top"
+          "side main";
+        gap: 14px;
         height: 100%;
         padding: 14px;
-        display: grid;
-        grid-template-rows: auto minmax(0, 1fr);
-        gap: 12px;
       }
 
       .card {
         border: 1px solid rgba(255, 255, 255, 0.85);
         border-radius: 16px;
-        background: var(--panel);
+        background: var(--card);
         backdrop-filter: blur(7px);
         box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
       }
 
-      .topbar {
-        padding: 12px 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+      .sidebar {
+        grid-area: side;
+        padding: 14px;
+        overflow: auto;
       }
 
-      .title-wrap h1 {
-        margin: 0;
-        font-size: 1.08rem;
+      h1 {
+        margin: 0 0 4px 0;
+        font-size: 1.12rem;
       }
 
-      .title-wrap p {
-        margin: 2px 0 0;
-        color: var(--ink-soft);
-        font-size: 0.85rem;
-      }
-
-      .switch {
+      .view-links {
         display: inline-flex;
         gap: 8px;
+        margin: 0 0 8px 0;
       }
 
-      .switch a {
+      .view-links a {
         text-decoration: none;
         border-radius: 999px;
-        padding: 8px 12px;
-        border: 1px solid var(--line);
-        color: #112;
-        font-size: 0.82rem;
+        padding: 5px 10px;
+        border: 1px solid #d7deea;
+        color: #182338;
+        font-size: 0.75rem;
+      }
+
+      .view-links a.active {
+        background: linear-gradient(135deg, var(--accent), #ff9d57);
+        border-color: transparent;
+        font-weight: 700;
       }
 
       .superheader {
+        grid-area: top;
         margin-bottom: 8px;
         display: flex;
-        justify-content: flex-start;
         align-items: center;
+        justify-content: flex-start;
         gap: 8px;
         flex-wrap: wrap;
-        min-height: 34px;
+        position: sticky;
+        top: 8px;
+        z-index: 2147483647;
+        isolation: isolate;
       }
 
       .superlink {
@@ -118,45 +129,35 @@
         flex: 0 0 auto;
       }
 
-      .switch a.active {
-        border-color: transparent;
-        background: linear-gradient(135deg, var(--accent), #3f7cff);
-        color: #fff;
-        font-weight: 700;
-      }
-
-      .layout {
-        min-height: 0;
-        display: grid;
-        grid-template-columns: 320px minmax(0, 1fr) minmax(340px, 1.1fr);
-        gap: 12px;
-      }
-
-      .panel {
-        min-height: 0;
-        display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr);
-      }
-
-      .panel .head {
-        padding: 12px 12px 6px;
-      }
-
-      .panel h2 {
-        margin: 0;
-        font-size: 0.96rem;
-      }
-
-      .panel p {
-        margin: 4px 0 0;
+      .subtitle {
+        margin: 0 0 14px 0;
         color: var(--ink-soft);
-        font-size: 0.8rem;
+        font-size: 0.88rem;
       }
 
       .controls {
-        padding: 0 12px 10px;
         display: grid;
         gap: 8px;
+      }
+
+      .control-group {
+        margin-top: 8px;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
+      }
+
+      .group-title {
+        margin: 0 0 4px 0;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #3f3d36;
+      }
+
+      label {
+        font-size: 0.83rem;
+        color: var(--ink-soft);
       }
 
       input,
@@ -164,1605 +165,756 @@
       button {
         width: 100%;
         border-radius: 10px;
-        border: 1px solid #d6dce5;
-        padding: 8px 10px;
+        border: 1px solid #d8d8d8;
+        padding: 9px 10px;
         font: inherit;
       }
 
       button {
         border: 0;
-        background: linear-gradient(135deg, var(--accent-2), #f7a15b);
-        color: #161311;
+        background: linear-gradient(135deg, var(--accent), #ff9d57);
+        color: #111;
         font-weight: 700;
         cursor: pointer;
       }
 
       button.secondary {
-        background: #edf2fb;
-        color: #1c2a48;
+        background: #eef2fa;
       }
 
-      .list {
-        min-height: 0;
-        overflow: auto;
-        border-top: 1px solid #edf1f7;
-        padding: 10px 10px 14px;
-      }
-
-      .item {
-        width: 100%;
-        text-align: left;
-        display: grid;
-        gap: 6px;
-        padding: 10px 10px;
-        border: 1px solid #e4e9f3;
-        border-radius: 10px;
-        background: #fff;
-        margin-bottom: 7px;
-        cursor: pointer;
-        transition:
-          border-color 120ms ease,
-          box-shadow 120ms ease,
-          transform 120ms ease,
-          background 120ms ease;
-      }
-
-      .item:hover {
-        border-color: #b9cfff;
-        box-shadow: 0 10px 20px rgba(28, 58, 120, 0.08);
-        transform: translateY(-1px);
-        background: #fbfcff;
-      }
-
-      .item:active {
-        transform: translateY(0);
-      }
-
-      .item[disabled] {
-        cursor: default;
-        opacity: 0.6;
-      }
-
-      .item.active {
-        border-color: #9dbcff;
-        box-shadow: 0 0 0 2px #e6efff inset;
-      }
-
-      .item h3 {
-        margin: 0;
-        font-size: 0.92rem;
-        letter-spacing: -0.01em;
-      }
-
-      .meta {
-        color: var(--ink-soft);
-        font-size: 0.77rem;
-        font-family: "IBM Plex Mono", monospace;
-      }
-
-      .item-head {
+      .inline {
         display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 10px;
-      }
-
-      .item-id {
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.72rem;
-        color: #6a6a64;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 56%;
-      }
-
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-      }
-
-      .tag {
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.72rem;
-        padding: 3px 7px;
-        border-radius: 999px;
-        border: 1px solid #d7e3ff;
-        background: #f3f7ff;
-        color: #17376f;
-      }
-
-      .tag b {
-        font-weight: 600;
-        color: #2a2b2a;
-        margin-right: 5px;
-      }
-
-      .row-actions {
-        display: flex;
+        align-items: center;
         gap: 8px;
       }
 
-      .row-actions input,
-      .row-actions select {
-        flex: 1;
-      }
-
-      .row-actions button {
-        flex: 0 0 auto;
-      }
-
-      .row-actions button {
+      .inline input[type="checkbox"] {
         width: auto;
       }
 
-        .detail {
-        min-height: 0;
-        overflow: auto;
-        border-top: 1px solid #edf1f7;
-        padding: 10px;
+      .inline.depth-line input[type="range"] {
+        flex: 1;
       }
 
-      .path {
-        padding: 0 12px 8px;
-        color: #3d4a64;
-        font-size: 0.78rem;
+      .inline.depth-line output {
+        width: 32px;
+        text-align: right;
         font-family: "IBM Plex Mono", monospace;
-      }
-
-      .path .path-btn {
-        display: inline-flex;
-        margin: 0;
-      }
-
-      .path .muted {
-        color: var(--ink-soft);
-      }
-
-      .path-btn {
-        border: 1px solid #d7e3ff;
-        background: #f3f7ff;
-        color: #133a84;
-        cursor: pointer;
-        padding: 3px 8px;
-        font: inherit;
-        border-radius: 999px;
-        text-decoration: none;
-      }
-
-      .path-btn:hover {
-        border-color: #b9cfff;
-        background: #eaf1ff;
-      }
-
-      .kv-table {
-        border: 1px solid #e5ebf4;
-        border-radius: 12px;
-        background: #fff;
-        overflow: hidden;
-      }
-
-      .kv-row {
-        display: grid;
-        grid-template-columns: 180px minmax(0, 1fr);
-        gap: 12px;
-        padding: 8px 10px;
-        border-top: 1px solid #f0f3f9;
-      }
-
-      @media (max-width: 720px) {
-        .kv-row {
-          grid-template-columns: 1fr;
-          gap: 5px;
-        }
-        .item-id {
-          max-width: 100%;
-        }
-      }
-
-      .kv-row:first-child {
-        border-top: 0;
-      }
-
-      .kv-row:nth-child(odd) {
-        background: #fcfdff;
-      }
-
-      .kv-row .k {
-        color: #4e4b44;
-        font-size: 0.78rem;
-        font-family: "IBM Plex Mono", monospace;
-      }
-
-      .kv-row .v {
-        word-break: break-word;
         font-size: 0.84rem;
       }
 
-      .rel-section {
-        margin-top: 14px;
+      .tiny {
+        font-size: 0.76rem;
       }
 
-      .rel-section h3 {
-        margin: 0 0 8px;
-        font-size: 0.88rem;
+      .trail,
+      .hops {
+        margin-top: 4px;
+        font-size: 0.76rem;
+        line-height: 1.35;
       }
 
-      .rel-card {
-        border: 1px solid #e5ebf4;
-        border-radius: 10px;
-        padding: 9px;
-        background: #fff;
-        margin-bottom: 8px;
-      }
-
-      .rel-title-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 4px;
-      }
-
-      .rel-title {
-        font-weight: 700;
-        font-size: 0.88rem;
-      }
-
-      .rel-count {
+      .stats {
+        margin-top: 12px;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
         font-family: "IBM Plex Mono", monospace;
-        font-size: 0.74rem;
-        color: var(--ink-soft);
+        font-size: 0.8rem;
+        line-height: 1.45;
+        color: #2a2a2a;
       }
 
-      .rel-sub {
-        color: var(--ink-soft);
-        font-size: 0.74rem;
-        font-family: "IBM Plex Mono", monospace;
-        margin-bottom: 6px;
-      }
-
-      .rel-items {
+      .legend {
         margin-top: 10px;
         display: grid;
-        gap: 8px;
+        gap: 6px;
+        font-size: 0.8rem;
       }
 
-      .rel-items .item {
-        margin: 0;
-        text-align: left;
-      }
-
-      .pill-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 7px;
-        margin-top: 8px;
-      }
-
-      .pill {
-        border: 1px solid #cfdcf3;
-        background: #f4f8ff;
-        color: #16336b;
-        border-radius: 999px;
-        padding: 5px 9px;
-        font-size: 0.76rem;
-        cursor: pointer;
-      }
-
-      a.pill {
+      .chip {
         display: inline-flex;
         align-items: center;
-        text-decoration: none;
+        gap: 6px;
       }
 
-      .pill.facet {
-        border-color: #ffd9c8;
-        background: #fff3ec;
-        color: #5b2412;
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
       }
 
-      .pill.rel-open {
-        border-color: #b9cfff;
-        background: #eaf1ff;
-        color: #123a80;
-        font-weight: 700;
+      #cyWrap {
+        grid-area: main;
+        position: relative;
+        overflow: hidden;
       }
 
-      .inline-anchor {
-        color: #0b5fff;
-        text-decoration: underline;
-        cursor: pointer;
+      #cy {
+        width: 100%;
+        height: 100%;
       }
 
-      .pill[disabled] {
-        cursor: default;
-        opacity: 0.6;
+      #detail {
+        position: absolute;
+        right: 14px;
+        top: 14px;
+        width: min(380px, calc(100% - 28px));
+        max-height: calc(100% - 28px);
+        overflow: auto;
+        padding: 11px;
+        background: rgba(255, 255, 255, 0.93);
+        border: 1px solid rgba(212, 212, 212, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+        font-size: 0.84rem;
       }
 
-      @media (max-width: 1100px) {
-        .layout {
+      #detail h3 {
+        margin: 0 0 6px 0;
+      }
+
+      #detail pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.75rem;
+      }
+
+      .muted {
+        color: var(--ink-soft);
+      }
+
+      @media (max-width: 940px) {
+        .page {
           grid-template-columns: 1fr;
-          grid-template-rows: minmax(280px, 35vh) minmax(280px, 35vh) minmax(320px, 1fr);
+          grid-template-rows: auto auto minmax(0, 1fr);
+          grid-template-areas:
+            "top"
+            "side"
+            "main";
+          height: auto;
+          min-height: 100%;
+        }
+        #cyWrap {
+          min-height: 74vh;
         }
       }
     </style>
   </head>
   <body>
-      <div class="page">
-        <div class="superheader">
-          <a class="superlink" href="/">← Índice</a>
-          <a
-            class="superlink"
-            href="https://github.com/gsusI/vota-con-la-chola"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Ver el código en GitHub"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-            </svg>
-            Ver el código
-          </a>
+    <div class="page">
+      <div class="superheader">
+        <a class="superlink" href="../">← Índice</a>
+        <a
+          class="superlink"
+          href="https://github.com/gsusI/vota-con-la-chola"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ver el código en GitHub"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          Ver el código
+        </a>
+      </div>
+      <aside class="sidebar card">
+        <h1>Graph Explorer</h1>
+        <p class="subtitle">Politicos, instituciones, partidos y fuentes</p>
+        <div class="view-links">
+          <a class="active" href="./">Graph</a>
+          <a href="../explorer/">Explorer</a>
+          <a href="../explorer-politico/">Radar</a>
+          <a href="../explorer-sources/">Fuentes</a>
         </div>
-        <header class="topbar card">
-          <div class="title-wrap">
-            <h1>Data Explorer (Wikidata-like)</h1>
-          <p>Navegacion dinamica por tablas, registros y relaciones (incluye temas/evidencia/posiciones cuando existan).</p>
+
+        <div class="controls">
+          <p class="group-title">Carga</p>
+          <label for="source">Fuente</label>
+          <select id="source">
+            <option value="">Todas</option>
+          </select>
+
+          <label for="search">Buscar persona</label>
+          <input id="search" type="text" placeholder="apellido, nombre..." />
+
+          <label for="limit">Limite de mandatos</label>
+          <input id="limit" type="number" min="20" max="2000" value="350" />
+
+          <label class="inline">
+            <input id="inactive" type="checkbox" />
+            Incluir inactivos
+          </label>
+
+          <div class="inline">
+            <button id="load">Cargar grafo</button>
+            <button id="fit" class="secondary">Reset vista</button>
+          </div>
+
+          <div class="control-group">
+            <p class="group-title">Navegacion multifaceta</p>
+
+            <label for="lens">Lente</label>
+            <select id="lens">
+              <option value="all">Integral</option>
+              <option value="institutional">Institucional</option>
+              <option value="party">Partidos</option>
+              <option value="provenance">Fuentes</option>
+            </select>
+
+            <label for="depth">Profundidad (saltos)</label>
+            <div class="inline depth-line">
+              <input id="depth" type="range" min="1" max="5" value="2" />
+              <output id="depthValue" for="depth">2</output>
+            </div>
+
+            <div class="inline">
+              <button id="focus">Enfocar nodo</button>
+              <button id="overview" class="secondary">Vista global</button>
+            </div>
+
+            <button id="back" class="secondary">Subir nivel</button>
+
+            <div id="selection" class="muted tiny">Nodo activo: ninguno</div>
+            <div id="trail" class="trail muted">Ruta: global</div>
+            <div id="hops" class="hops muted">Profundidad disponible tras seleccionar un nodo.</div>
+          </div>
         </div>
-        <nav class="switch">
-          <a href="/graph">Graph</a>
-          <a class="active" href="/explorer">Explorer</a>
-        </nav>
-      </header>
 
-      <main class="layout">
-        <section class="panel card">
-          <div class="head">
-            <h2>1) Tablas</h2>
-            <p>Vista top-level de todo lo disponible. Atajo: abre el modelo de posiciones por temas.</p>
-          </div>
-          <div class="controls">
-            <input id="tableFilter" type="text" placeholder="Filtrar tablas..." />
-            <button id="reloadSchema" class="secondary">Recargar esquema</button>
-            <div class="pill-row">
-              <a class="pill" href="/explorer-temas">Vista Temas</a>
-              <a class="pill" href="/explorer?t=topic_positions&tf=topic_">Posiciones</a>
-              <a class="pill" href="/explorer?t=topic_evidence&tf=topic_">Evidencia</a>
-              <a class="pill" href="/explorer?t=topics&tf=topic">Temas</a>
-            </div>
-          </div>
-          <div id="tables" class="list"></div>
-        </section>
+        <div id="stats" class="stats">Cargando...</div>
 
-        <section class="panel card">
-          <div class="head">
-            <h2>2) Registros</h2>
-            <p id="recordsHint">Selecciona una tabla para empezar.</p>
-          </div>
-          <div class="controls">
-            <input id="recordSearch" type="text" placeholder="Buscar en columnas textuales" />
-            <div class="row-actions">
-              <button id="applySearch" class="secondary">Buscar</button>
-              <button id="prevPage" class="secondary">Prev</button>
-              <button id="nextPage" class="secondary">Next</button>
-            </div>
-            <div class="row-actions">
-              <select id="filterCol" title="Columna a filtrar"></select>
-              <input id="filterVal" type="text" placeholder="Valor (=)" />
-              <button id="addFilter" class="secondary" type="button" style="width:auto;">Add</button>
-              <button id="clearFilters" class="secondary" type="button" style="width:auto;">Clear</button>
-            </div>
-            <div id="filtersBar" class="pill-row"></div>
-            <div class="row-actions">
-              <label for="pageSize" class="meta" style="display:flex;align-items:center;">Page size</label>
-              <select id="pageSize">
-                <option value="25">25</option>
-                <option value="50" selected>50</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          </div>
-          <div id="records" class="list"></div>
-        </section>
+        <div class="legend">
+          <span class="chip"><span class="dot" style="background: var(--source)"></span> Fuente</span>
+          <span class="chip"><span class="dot" style="background: var(--person)"></span> Persona</span>
+          <span class="chip"><span class="dot" style="background: var(--party)"></span> Partido</span>
+          <span class="chip"><span class="dot" style="background: var(--inst)"></span> Institucion</span>
+        </div>
+      </aside>
 
-        <section class="panel card">
-          <div class="head">
-            <h2>3) Detalle y relaciones</h2>
-            <p>Cada click abre el siguiente nivel segun claves foraneas salientes/entrantes.</p>
-          </div>
-          <div id="pathTrail" class="path"></div>
-          <div id="detail" class="detail"></div>
+      <main id="cyWrap" class="card">
+        <div id="cy"></div>
+        <section id="detail">
+          <h3>Nodo</h3>
+          <pre class="muted">Haz click sobre un nodo para ver detalles.</pre>
         </section>
       </main>
     </div>
 
     <script>
       const state = {
-        schema: null,
-        tables: [],
-        activeTable: "",
-        routeRootTable: "",
-        activeRecordIdentity: null,
-        whereCols: [],
-        whereVals: [],
-        offset: 0,
-        loaded: 0,
-        total: 0,
-        recordsLoading: false,
-        limit: 50,
-        q: "",
-        navStack: [],
-        lastHistorySig: "",
+        cy: null,
+        sourceOptionsInitialized: false,
+        allNodesById: new Map(),
+        allEdges: [],
+        neighborsById: new Map(),
+        meta: {},
+        selectedNodeId: null,
+        focusNodeId: null,
+        focusHistory: [],
+        viewMode: "overview",
       };
 
       const els = {
-        tableFilter: document.getElementById("tableFilter"),
-        reloadSchema: document.getElementById("reloadSchema"),
-        tables: document.getElementById("tables"),
-        pathTrail: document.getElementById("pathTrail"),
-        recordsHint: document.getElementById("recordsHint"),
-        recordSearch: document.getElementById("recordSearch"),
-        applySearch: document.getElementById("applySearch"),
-        prevPage: document.getElementById("prevPage"),
-        nextPage: document.getElementById("nextPage"),
-        filterCol: document.getElementById("filterCol"),
-        filterVal: document.getElementById("filterVal"),
-        addFilter: document.getElementById("addFilter"),
-        clearFilters: document.getElementById("clearFilters"),
-        filtersBar: document.getElementById("filtersBar"),
-        pageSize: document.getElementById("pageSize"),
-        records: document.getElementById("records"),
+        source: document.getElementById("source"),
+        search: document.getElementById("search"),
+        limit: document.getElementById("limit"),
+        inactive: document.getElementById("inactive"),
+        load: document.getElementById("load"),
+        fit: document.getElementById("fit"),
+        stats: document.getElementById("stats"),
         detail: document.getElementById("detail"),
+        lens: document.getElementById("lens"),
+        depth: document.getElementById("depth"),
+        depthValue: document.getElementById("depthValue"),
+        focus: document.getElementById("focus"),
+        overview: document.getElementById("overview"),
+        back: document.getElementById("back"),
+        selection: document.getElementById("selection"),
+        trail: document.getElementById("trail"),
+        hops: document.getElementById("hops"),
       };
 
-      function toText(value) {
-        if (value === null || value === undefined) return "null";
-        if (typeof value === "object") return JSON.stringify(value);
-        return String(value);
+      function setDetail(title, body, muted = false) {
+        els.detail.textContent = "";
+        const h3 = document.createElement("h3");
+        h3.textContent = title;
+        const pre = document.createElement("pre");
+        if (muted) pre.className = "muted";
+        pre.textContent = body;
+        els.detail.appendChild(h3);
+        els.detail.appendChild(pre);
       }
 
-      function renderBreadcrumbTrail() {
-        const stepCount = Array.isArray(state.navStack) ? state.navStack.length : 0;
-        if (!stepCount || !els.pathTrail) {
-          if (els.pathTrail) {
-            els.pathTrail.innerHTML = "";
+      function fillSourceOptions(sources) {
+        if (state.sourceOptionsInitialized) return;
+        for (const src of sources || []) {
+          const option = document.createElement("option");
+          option.value = src.source_id;
+          option.textContent = `${src.source_id} - ${src.name}`;
+          els.source.appendChild(option);
+        }
+        state.sourceOptionsInitialized = true;
+      }
+
+      function lensAllowedTypes() {
+        if (els.lens.value === "institutional") return new Set(["person", "institution"]);
+        if (els.lens.value === "party") return new Set(["person", "party"]);
+        if (els.lens.value === "provenance") return new Set(["person", "source"]);
+        return new Set(["source", "person", "party", "institution"]);
+      }
+
+      function indexGraph(nodes, edges) {
+        const nodesById = new Map();
+        const neighbors = new Map();
+        for (const node of nodes) {
+          const id = node?.data?.id;
+          if (!id) continue;
+          nodesById.set(id, node);
+          neighbors.set(id, new Set());
+        }
+        for (const edge of edges) {
+          const src = edge?.data?.source;
+          const dst = edge?.data?.target;
+          if (!src || !dst) continue;
+          if (!neighbors.has(src)) neighbors.set(src, new Set());
+          if (!neighbors.has(dst)) neighbors.set(dst, new Set());
+          neighbors.get(src).add(dst);
+          neighbors.get(dst).add(src);
+        }
+        state.allNodesById = nodesById;
+        state.allEdges = edges;
+        state.neighborsById = neighbors;
+      }
+
+      function computeDepthMap(rootId, maxDepth) {
+        const depths = new Map();
+        if (!rootId || !state.neighborsById.has(rootId)) return depths;
+
+        const queue = [rootId];
+        depths.set(rootId, 0);
+        for (let i = 0; i < queue.length; i += 1) {
+          const nodeId = queue[i];
+          const currentDepth = depths.get(nodeId) || 0;
+          if (currentDepth >= maxDepth) continue;
+          const neighbors = state.neighborsById.get(nodeId) || new Set();
+          for (const nextId of neighbors) {
+            if (depths.has(nextId)) continue;
+            depths.set(nextId, currentDepth + 1);
+            queue.push(nextId);
           }
-          return;
+        }
+        return depths;
+      }
+
+      function getSubgraphElements() {
+        const allowedTypes = lensAllowedTypes();
+        const nodeIds = new Set(state.allNodesById.keys());
+        let depthMap = new Map();
+
+        if (state.viewMode === "focus" && state.focusNodeId) {
+          const depth = Number(els.depth.value || 2);
+          depthMap = computeDepthMap(state.focusNodeId, depth);
+          nodeIds.clear();
+          for (const id of depthMap.keys()) nodeIds.add(id);
         }
 
-        const parts = state.navStack.map((step, idx) => {
-          const label = step?.label || step?.table || "registro";
-          const safeLabel = escapeHtml(toText(label));
-          const isLast = idx === stepCount - 1;
-          if (isLast) {
-            return `<span>${safeLabel}</span>`;
-          }
-          return `<button type="button" class="path-btn" data-nav-level="${idx}" title="Volver a ${safeLabel}">${safeLabel}</button>`;
-        });
-
-        const separators = ' <span class="muted">/</span> ';
-        if (!els.pathTrail) return;
-
-        if (!parts.length) {
-          els.pathTrail.innerHTML = "";
-          return;
-        }
-        els.pathTrail.innerHTML = parts.join(separators);
-      }
-
-      function escapeHtml(text) {
-        return String(text)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#39;");
-      }
-
-      function fmtCount(value) {
-        if (value === null || value === undefined) return "?";
-        return new Intl.NumberFormat("es-ES").format(value);
-      }
-
-      function identityToParams(params, identity) {
-        for (const [k, v] of Object.entries(identity || {})) {
-          params.set(k, String(v));
-        }
-      }
-
-      function identityAsText(identity) {
-        return Object.entries(identity || {})
-          .map(([k, v]) => `${k}=${v}`)
-          .join(", ");
-      }
-
-      function prettyKey(key) {
-        const raw = String(key || "");
-        if (raw.endsWith("_id") || raw.endsWith("_pk")) {
-          return raw.slice(0, -3).replaceAll("_", " ");
-        }
-        return raw.replaceAll("_", " ");
-      }
-
-      function shortValue(value, maxLen = 54) {
-        const raw = toText(value);
-        if (raw.length <= maxLen) return raw;
-        return raw.slice(0, Math.max(0, maxLen - 3)) + "...";
-      }
-
-      function renderTags(previewObj) {
-        const entries = Object.entries(previewObj || {});
-        if (!entries.length) return '<div class="meta">sin preview</div>';
-        const tags = entries
-          .map(([k, v]) => {
-            const kk = escapeHtml(prettyKey(k));
-            const vv = escapeHtml(shortValue(v));
-            return `<span class="tag"><b>${kk}</b>${vv}</span>`;
-          })
-          .join("");
-        return `<div class="tags">${tags}</div>`;
-      }
-
-      function setDetailHtml(html) {
-        els.detail.innerHTML = html;
-      }
-
-      function snapshotState() {
-        return {
-          activeTable: state.activeTable || "",
-          routeRootTable: state.routeRootTable || "",
-          activeRecordIdentity: state.activeRecordIdentity || null,
-          whereCols: Array.isArray(state.whereCols) ? state.whereCols : [],
-          whereVals: Array.isArray(state.whereVals) ? state.whereVals : [],
-          offset: Number(state.offset || 0),
-          loaded: Number(state.loaded || 0),
-          limit: Number(state.limit || 50),
-          q: state.q || "",
-          tableFilter: els.tableFilter.value || "",
-          navStack: (state.navStack || []).map((s) => ({
-            table: s.table,
-            identity: s.identity,
-            label: s.label,
-            whereCols: Array.isArray(s.whereCols) ? s.whereCols : [],
-            whereVals: Array.isArray(s.whereVals) ? s.whereVals : [],
-          })),
-        };
-      }
-
-      function applySnapshot(snapshot) {
-        const snap = snapshot || {};
-        state.activeTable = snap.activeTable || "";
-        state.routeRootTable = snap.routeRootTable || "";
-        state.activeRecordIdentity = snap.activeRecordIdentity || null;
-        state.whereCols = Array.isArray(snap.whereCols) ? snap.whereCols : [];
-        state.whereVals = Array.isArray(snap.whereVals) ? snap.whereVals : [];
-        state.offset = Number(snap.offset || 0);
-        state.loaded = Number(snap.loaded || 0);
-        state.limit = Number(snap.limit || 50);
-        state.q = snap.q || "";
-        state.navStack = Array.isArray(snap.navStack)
-          ? snap.navStack.map((s) => ({
-              table: s.table,
-              identity: s.identity,
-              label: s.label,
-              whereCols: Array.isArray(s.whereCols) ? s.whereCols : [],
-              whereVals: Array.isArray(s.whereVals) ? s.whereVals : [],
-            }))
-          : [];
-
-        els.tableFilter.value = snap.tableFilter || "";
-        els.recordSearch.value = state.q;
-        els.pageSize.value = String(state.limit);
-        renderActiveFilters();
-      }
-
-      function pushHistory(mode = "push") {
-        const snap = snapshotState();
-        const params = snapshotToUrlParams(snap);
-        const url = location.pathname + (params.toString() ? `?${params.toString()}` : "");
-        const sig = url;
-        if (sig === state.lastHistorySig) return;
-        if (mode === "replace" || !history.state) {
-          history.replaceState({ explorer: snap }, "", url);
-        } else {
-          history.pushState({ explorer: snap }, "", url);
-        }
-        state.lastHistorySig = sig;
-      }
-
-      async function restoreFromHistory(snapshot) {
-        applySnapshot(snapshot);
-        renderTables();
-        renderFilterOptions();
-        await loadRows({ reset: true, restoreLoaded: true });
-        if (state.activeTable && state.activeRecordIdentity) {
-          const payload = await fetchRecordPayload(state.activeTable, state.activeRecordIdentity);
-          if (payload.error) {
-            setDetailHtml(`<div class="meta">${payload.error}</div>`);
-            renderBreadcrumbTrail();
-          } else {
-            renderDetail(payload);
-            renderBreadcrumbTrail();
-          }
-        } else {
-          renderBreadcrumbTrail();
-          setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
-        }
-      }
-
-      function tableMeta(tableName) {
-        const tables = state.schema?.tables || [];
-        return tables.find((t) => t && t.name === tableName) || null;
-      }
-
-      function renderFilterOptions() {
-        const meta = tableMeta(state.activeTable);
-        els.filterCol.textContent = "";
-        if (!meta) {
-          const opt = document.createElement("option");
-          opt.value = "";
-          opt.textContent = "(no table)";
-          els.filterCol.appendChild(opt);
-          return;
-        }
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = "Filtrar por columna...";
-        els.filterCol.appendChild(placeholder);
-        for (const col of (meta.columns || []).map((c) => c?.name).filter(Boolean)) {
-          const opt = document.createElement("option");
-          opt.value = col;
-          opt.textContent = col;
-          els.filterCol.appendChild(opt);
-        }
-      }
-
-      function renderActiveFilters() {
-        if (!els.filtersBar) return;
-        els.filtersBar.textContent = "";
-        const cols = state.whereCols || [];
-        const vals = state.whereVals || [];
-        for (let i = 0; i < Math.min(cols.length, vals.length); i += 1) {
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "pill";
-          btn.textContent = `${cols[i]}=${toText(vals[i])}  x`;
-          btn.title = "Quitar filtro";
-          btn.addEventListener("click", () => {
-            state.whereCols.splice(i, 1);
-            state.whereVals.splice(i, 1);
-            state.offset = 0;
-            state.loaded = 0;
-            loadRows({ reset: true })
-              .then(() => pushHistory("push"))
-              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-          });
-          els.filtersBar.appendChild(btn);
-        }
-      }
-
-      // Path UI removed. Browser back/forward + URL state is the source of truth.
-
-      function renderTables() {
-        const needle = els.tableFilter.value.trim().toLowerCase();
-        const tables = (state.tables || []).filter((t) => !needle || t.name.toLowerCase().includes(needle));
-
-        els.tables.textContent = "";
-        if (tables.length === 0) {
-          els.tables.textContent = "Sin tablas para mostrar.";
-          return;
-        }
-
-        for (const table of tables) {
-          const item = document.createElement("button");
-          item.type = "button";
-          item.className = `item${table.name === state.activeTable ? " active" : ""}`;
-          item.innerHTML = `
-            <h3>${table.name}</h3>
-            <div class="meta">rows=${fmtCount(table.row_count)} | cols=${table.column_count}</div>
-            <div class="meta">pk=${table.primary_key.length ? table.primary_key.join(",") : "(none)"}</div>
-            <div class="meta">fk out=${table.foreign_keys_out.length} | fk in=${table.foreign_keys_in.length}</div>
-          `;
-          item.addEventListener("click", () => selectTable(table.name));
-          els.tables.appendChild(item);
-        }
-      }
-
-      function renderRows(payload, opts = {}) {
-        const options = { append: false, ...opts };
-        const rows = payload.rows || [];
-        const meta = payload.meta || {};
-        if (!options.append) els.records.textContent = "";
-
-        const where = meta.where || {};
-        const whereText = Object.keys(where).length
-          ? ` | filtro=${Object.entries(where)
-              .map(([k, v]) => `${k}=${toText(v)}`)
-              .join(", ")}`
-          : "";
-        const shown = state.loaded + rows.length;
-        els.recordsHint.textContent = `${meta.table || ""} | ${fmtCount(meta.total || 0)} registros | mostrados=${fmtCount(
-          shown,
-        )}${whereText}`;
-
-        if (rows.length === 0) {
-          if (!options.append) els.records.textContent = "No hay registros para este filtro.";
-          return;
-        }
-
-        for (const row of rows) {
-          const item = document.createElement("button");
-          item.type = "button";
-          item.className = "item";
-
-          const previewObj = row.preview_display || row.preview || {};
-          const identityText = identityAsText(row.identity || {});
-          item.innerHTML = `
-            <div class="item-head">
-              <h3>${escapeHtml(toText(row.label))}</h3>
-              <div class="item-id" title="${escapeHtml(identityText || "")}">${escapeHtml(identityText || "")}</div>
-            </div>
-            ${renderTags(previewObj)}
-          `;
-
-          if (!row.can_open) {
-            item.disabled = true;
-          } else {
-            item.addEventListener("click", () => openRecord(state.activeTable, row.identity, row.label));
-          }
-
-          els.records.appendChild(item);
-        }
-      }
-
-      function renderDetail(payload) {
-        const meta = payload.meta || {};
-        const record = payload.record || {};
-        const relations = payload.relations || {};
-        const outgoingRelations = relations.outgoing || [];
-        const incomingRelations = relations.incoming || [];
-
-        const values = record.values || {};
-        const keys = Object.keys(values).filter((k) => values[k] !== null && values[k] !== undefined && values[k] !== "");
-        const inlineTargets = [];
-        const directFieldLinks = new Map();
-        const prefixFieldLinks = new Map();
-
-        for (const rel of outgoingRelations) {
-          const fromColumns = rel.from_columns || [];
-          if (fromColumns.length !== 1) continue;
-          const sample = (rel.samples || []).find((s) => s && s.can_open && s.identity);
-          if (!sample) continue;
-
-          const fromCol = fromColumns[0];
-          const target = {
-            table: sample.table,
-            identity: sample.identity,
-            label: sample.label || sample.table,
-          };
-
-          if (!directFieldLinks.has(fromCol)) {
-            directFieldLinks.set(fromCol, target);
-          }
-          if (fromCol.endsWith("_id")) {
-            const prefix = fromCol.slice(0, -3);
-            if (prefix && !prefixFieldLinks.has(prefix)) {
-              prefixFieldLinks.set(prefix, target);
-            }
+        const visibleNodeIds = new Set();
+        for (const nodeId of nodeIds) {
+          const node = state.allNodesById.get(nodeId);
+          if (!node) continue;
+          const isFocus = nodeId === state.focusNodeId;
+          const type = node.data?.type || "";
+          if (allowedTypes.has(type) || isFocus) {
+            visibleNodeIds.add(nodeId);
           }
         }
 
-        const findInlineTarget = (fieldName) => {
-          if (directFieldLinks.has(fieldName)) {
-            return directFieldLinks.get(fieldName);
-          }
-          const match = fieldName.match(/^(.*)_(code|name|key)$/);
-          if (!match) return null;
-          const prefix = match[1];
-          return prefixFieldLinks.get(prefix) || null;
-        };
+        const edges = [];
+        const degreeByNode = new Map();
+        for (const edge of state.allEdges) {
+          const src = edge?.data?.source;
+          const dst = edge?.data?.target;
+          if (!src || !dst) continue;
+          if (!visibleNodeIds.has(src) || !visibleNodeIds.has(dst)) continue;
+          edges.push({ data: { ...edge.data } });
+          degreeByNode.set(src, (degreeByNode.get(src) || 0) + 1);
+          degreeByNode.set(dst, (degreeByNode.get(dst) || 0) + 1);
+        }
 
-        const kvRowsHtml = keys
-          .map(
-            (k) => {
-              const fieldTarget = findInlineTarget(k);
-              let inlineLinkHtml = "";
-              const safeValue = escapeHtml(toText(values[k]));
-              if (fieldTarget) {
-                const idx = inlineTargets.push(fieldTarget) - 1;
-                const showLabel =
-                  k.endsWith("_id") || k === "source_id" || k === "canonical_key" || k.endsWith("_pk");
-                const pretty = escapeHtml(toText(fieldTarget.label || "")) || safeValue;
-                const displayText = showLabel ? pretty : safeValue;
-                inlineLinkHtml = ` <span class="inline-anchor" data-lidx="${idx}" title="${escapeHtml(
-                  `${k}=${toText(values[k])} | abrir ${fieldTarget.table}`,
-                )}">${displayText}</span>`;
-              } else {
-                inlineLinkHtml = safeValue;
-              }
-              return `
-          <div class="kv-row">
-            <div class="k">${escapeHtml(k)}</div>
-            <div class="v">${inlineLinkHtml}</div>
-          </div>
-        `;
+        const nodes = [];
+        for (const nodeId of visibleNodeIds) {
+          const node = state.allNodesById.get(nodeId);
+          if (!node) continue;
+          nodes.push({
+            data: {
+              ...node.data,
+              degree: degreeByNode.get(nodeId) || 0,
+              is_focus: nodeId === state.focusNodeId ? 1 : 0,
+              ring: depthMap.get(nodeId) ?? 0,
             },
-          )
-          .join("");
-
-        async function fetchRelatedRows(table, cols, vals, limit = 50, offset = 0) {
-          const params = new URLSearchParams();
-          params.set("table", table);
-          params.set("limit", String(limit));
-          params.set("offset", String(offset));
-          for (const c of cols || []) params.append("col", String(c));
-          for (const v of vals || []) params.append("val", String(v));
-          const resp = await fetch(`/api/explorer/related?${params.toString()}`);
-          return await resp.json();
+          });
         }
 
-        const relationSection = (title, items) => {
-          const cards = (items || [])
-            .map((rel, idx) => {
-              const refs = `${(rel.from_columns || []).join(",")} -> ${(rel.to_columns || []).join(",")}`;
-              const samples = (rel.samples || [])
-                .map((s, sidx) => {
-                  const disabled = !s.can_open ? "disabled" : "";
-                  return `<button class="pill" data-ridx="${idx}" data-sidx="${sidx}" data-dir="${title}" ${disabled}>${toText(s.label)}</button>`;
-                })
-                .join("");
+        return { nodes, edges, depthMap };
+      }
 
-              const sampleCount = (rel.samples || []).length;
-              const facets = rel.facets && Array.isArray(rel.facets.items) && rel.facets.items.length ? rel.facets : null;
-              const canList = rel.count && !rel.nullable && rel.count > sampleCount;
-              const listLabel = facets ? "Ver todos" : "Ver lista";
-              const listControls = canList
-                ? `<div class="pill-row">
-                     <button class="pill rel-open" data-ridx="${idx}" data-dir="${title}">${listLabel} (${fmtCount(rel.count)})</button>
-                   </div>
-                   <div class="rel-items" data-rel-items="${title}:${idx}"></div>`
-                : `<div class="rel-items" data-rel-items="${title}:${idx}"></div>`;
+      function buildStats(visibleNodes, visibleEdges) {
+        const c = state.meta.node_counts || {};
+        return [
+          `db: ${state.meta.db_path || "-"}`,
+          `rows: ${state.meta.rows || 0} | visible nodes: ${visibleNodes} | visible edges: ${visibleEdges}`,
+          `total source=${c.source || 0} person=${c.person || 0} party=${c.party || 0} institution=${c.institution || 0}`,
+          `mode: ${state.viewMode} | lens: ${els.lens.value} | depth: ${els.depth.value}`,
+          `search: ${state.meta.search || "-"} | source: ${state.meta.source_filter || "all"} | limit: ${state.meta.limit || "-"}`,
+        ].join("\n");
+      }
 
-              const headName = title === "outgoing" ? rel.to_table : rel.from_table;
-              const countText = rel.nullable ? "key=null" : `total=${fmtCount(rel.count)}`;
+      function renderTrail() {
+        if (state.viewMode !== "focus" || !state.focusNodeId) {
+          els.trail.textContent = "Ruta: global";
+          return;
+        }
+        const labels = [];
+        for (const nodeId of state.focusHistory) {
+          const label = state.allNodesById.get(nodeId)?.data?.label || nodeId;
+          labels.push(label);
+        }
+        const currentLabel = state.allNodesById.get(state.focusNodeId)?.data?.label || state.focusNodeId;
+        labels.push(currentLabel);
+        els.trail.textContent = `Ruta: ${labels.join(" -> ")}`;
+      }
 
-              let pillsHtml = `<div class="pill-row">${samples || '<span class="meta">sin muestras</span>'}</div>`;
-              if (facets) {
-                const fcol = toText(facets.column || "");
-                const facetPills = (facets.items || [])
-                  .map((it) => {
-                    const rawVal = it.value;
-                    const disp = it.display !== undefined && it.display !== null ? it.display : rawVal;
-                    const valEnc = encodeURIComponent(toText(rawVal));
-                    const txt = `${toText(disp)} (${fmtCount(it.count)})`;
-                    return `<button class="pill facet" data-dir="${title}" data-ridx="${idx}" data-fcol="${escapeHtml(
-                      fcol,
-                    )}" data-fval="${escapeHtml(valEnc)}">${escapeHtml(txt)}</button>`;
-                  })
-                  .join("");
-                pillsHtml = `
-                  <div class="rel-sub">Top por ${escapeHtml(fcol)}</div>
-                  <div class="pill-row">${facetPills}</div>
-                `;
-              }
+      function renderHopSummary(depthMap) {
+        if (state.viewMode !== "focus" || !state.focusNodeId || depthMap.size === 0) {
+          els.hops.textContent = "Profundidad disponible tras seleccionar un nodo.";
+          return;
+        }
 
-              return `
-                <div class="rel-card" data-ridx="${idx}" data-dir="${title}">
-                  <div class="rel-title-row">
-                    <div class="rel-title">${escapeHtml(toText(headName || ""))}</div>
-                    <div class="rel-count">${escapeHtml(countText)}</div>
-                  </div>
-                  <div class="rel-sub">${escapeHtml(refs)}</div>
-                  ${pillsHtml}
-                  ${listControls}
-                </div>
-              `;
-            })
-            .join("");
+        const byDepth = {};
+        for (const depth of depthMap.values()) {
+          const key = String(depth);
+          byDepth[key] = (byDepth[key] || 0) + 1;
+        }
+        const parts = Object.keys(byDepth)
+          .sort((a, b) => Number(a) - Number(b))
+          .map((d) => `salto ${d}: ${byDepth[d]} nodos`);
+        els.hops.textContent = parts.join(" | ");
+      }
 
-          return `
-            <section class="rel-section">
-              <h3>${title === "outgoing" ? "Enlaces salientes" : "Referencias entrantes"}</h3>
-              ${cards || '<div class="meta">sin relaciones</div>'}
-            </section>
-          `;
+      function graphLayout() {
+        if (state.viewMode === "focus" && state.focusNodeId) {
+          return {
+            name: "concentric",
+            animate: true,
+            animationDuration: 320,
+            fit: true,
+            padding: 36,
+            minNodeSpacing: 20,
+            levelWidth: () => 1,
+            concentric: (node) => 200 - (node.data("ring") || 0),
+          };
+        }
+        return {
+          name: "cose",
+          animate: true,
+          animationDuration: 450,
+          fit: true,
+          padding: 40,
+          idealEdgeLength: 100,
+          nodeRepulsion: 450000,
+          gravity: 60,
         };
+      }
 
-        setDetailHtml(`
-          <div class="meta">tabla=${escapeHtml(meta.table || "")} | ${escapeHtml(identityAsText(record.identity || {}))}</div>
-          <div class="meta">label=${escapeHtml(toText(meta.label || ""))}</div>
-          <div style="margin-top:10px">${kvRowsHtml ? `<div class="kv-table">${kvRowsHtml}</div>` : '<div class="meta">sin campos</div>'}</div>
-          ${relationSection("outgoing", outgoingRelations)}
-          ${relationSection("incoming", incomingRelations)}
-        `);
+      const APP_QUERY = new URLSearchParams(window.location.search);
+      const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
+      const STATIC_DATA_DIR = "data";
+      const STATIC_GRAPH_PATH = `${STATIC_DATA_DIR}/graph.json`;
 
-        // Only wire sample pills (they have data-sidx). "Ver lista" is also a .pill with data-dir,
-        // but should expand the list instead of navigating.
-        els.detail.querySelectorAll("button.pill[data-dir][data-sidx]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const direction = btn.getAttribute("data-dir");
-            const ridx = Number(btn.getAttribute("data-ridx"));
-            const sidx = Number(btn.getAttribute("data-sidx"));
-            const relItems = direction === "outgoing" ? outgoingRelations : incomingRelations;
-            const relation = relItems[ridx];
-            if (!relation) return;
-            const sample = (relation.samples || [])[sidx];
-            if (!sample || !sample.can_open || !sample.identity) return;
-            const cfg = relationConfig(direction, ridx);
-            const nextTable = cfg?.tableName || sample.table;
-            selectTable(nextTable, {
-              keepSearch: false,
-              keepOffset: false,
-              whereCols: Array.isArray(cfg?.cols) ? cfg.cols : null,
-              whereVals: Array.isArray(cfg?.vals) ? cfg.vals : null,
-              preserveStack: true,
-              setRoot: false,
-              historyMode: "none",
-            })
-              .then(() => openRecord(nextTable, sample.identity, sample.label, { historyMode: "push" }))
-              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-          });
-        });
+      const isLocalApiHost = (() => {
+        const host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
+      })();
 
-        // Facet pills: navigate to the related table list, pre-filtered by relationship + facet value.
-        els.detail.querySelectorAll("button.pill.facet[data-fcol][data-fval]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const direction = btn.getAttribute("data-dir");
-            const ridx = Number(btn.getAttribute("data-ridx"));
-            const fcol = btn.getAttribute("data-fcol") || "";
-            const fvalEnc = btn.getAttribute("data-fval") || "";
-            if (!direction || !fcol) return;
-            let fval = "";
-            try {
-              fval = decodeURIComponent(fvalEnc);
-            } catch {
-              fval = fvalEnc;
-            }
-            const cfg = relationConfig(direction, ridx);
-            if (!cfg || !cfg.tableName) return;
-            const whereCols = [...(cfg.cols || []), fcol];
-            const whereVals = [...(cfg.vals || []), fval];
-            selectTable(cfg.tableName, {
-              keepSearch: false,
-              keepOffset: false,
-              whereCols,
-              whereVals,
-              preserveStack: true,
-              setRoot: false,
-              historyMode: "push",
-            }).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-          });
-        });
+      const resolveApiPath = (path) => {
+        const endpoint = String(path || "").trim();
+        if (!endpoint) return "";
+        const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\\/$/, "")}${normalized}`;
+        if (isLocalApiHost) return normalized;
+        return "";
+      };
 
-        els.detail.querySelectorAll(".inline-anchor[data-lidx]").forEach((el) => {
-          el.addEventListener("click", () => {
-            const idx = Number(el.getAttribute("data-lidx"));
-            const target = inlineTargets[idx];
-            if (!target || !target.identity) return;
-            const idCols = Object.keys(target.identity || {});
-            const idVals = Object.values(target.identity || {}).map((v) => toText(v));
-            selectTable(target.table, {
-              keepSearch: false,
-              keepOffset: false,
-              whereCols: idCols,
-              whereVals: idVals,
-              preserveStack: true,
-              setRoot: false,
-              historyMode: "none",
-            })
-              .then(() => openRecord(target.table, target.identity, target.label, { historyMode: "push" }))
-              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-          });
-        });
+      const readJson = async (url) => {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      };
 
-        const relStateByKey = {};
+      async function onNodeTap(evt) {
+        const data = evt.target.data();
+        state.selectedNodeId = data.id || null;
+        els.selection.textContent = `Nodo activo: ${data.label || data.id || "?"}`;
 
-        const relationConfig = (direction, ridx) => {
-          const relItems = direction === "outgoing" ? outgoingRelations : incomingRelations;
-          const rel = relItems[ridx];
-          if (!rel) return null;
-
-          let tableName = "";
-          let cols = [];
-          let vals = [];
-          if (direction === "outgoing") {
-            tableName = rel.to_table;
-            cols = rel.to_columns || [];
-            vals = (rel.from_columns || []).map((c) => toText((rel.match || {})[c]));
-          } else {
-            tableName = rel.from_table;
-            cols = rel.from_columns || [];
-            vals = (rel.to_columns || []).map((c) => toText((rel.match || {})[c]));
-          }
-          return { rel, tableName, cols, vals };
-        };
-
-        const relatedItemsHtml = (rows, tableName, relKey) => {
-          return (rows || [])
-            .map((r) => {
-              const previewObj = r.preview_display || r.preview || {};
-              const identEnc = encodeURIComponent(JSON.stringify(r.identity || {}));
-              const identityText = identityAsText(r.identity || {});
-              return `
-                <button type="button" class="item rel-rec" data-table="${escapeHtml(
-                  tableName,
-                )}" data-relkey="${escapeHtml(toText(relKey || ""))}" data-ident="${escapeHtml(identEnc)}" data-label="${escapeHtml(
-                  toText(r.label || ""),
-                )}">
-                  <div class="item-head">
-                    <h3>${escapeHtml(toText(r.label))}</h3>
-                    <div class="item-id" title="${escapeHtml(identityText || "")}">${escapeHtml(identityText || "")}</div>
-                  </div>
-                  ${renderTags(previewObj)}
-                </button>
-              `;
-            })
-            .join("");
-        };
-
-        const renderRelated = (containerEl, relKey, payload, tableName, append = false) => {
-          if (!containerEl) return;
-          if (payload.error) {
-            containerEl.innerHTML = `<div class="meta">${escapeHtml(payload.error)}</div>`;
+        if (data.type === "person" && data.person_id) {
+          const apiEndpoint = resolveApiPath(`/api/person/${data.person_id}`);
+          if (apiEndpoint) {
+            const personResp = await fetch(apiEndpoint);
+            const personPayload = await personResp.json();
+            setDetail(data.label || "Persona", JSON.stringify(personPayload, null, 2));
             return;
           }
-          const rows = payload.rows || [];
-          const metaRel = payload.meta || {};
-          const total = Number(metaRel.total || 0);
-          const nextOffset = Number(metaRel.offset || 0) + Number(metaRel.returned || rows.length);
+        }
+        setDetail(data.label || "Nodo", JSON.stringify(data, null, 2));
+      }
 
-          const items = rows.length ? relatedItemsHtml(rows, tableName, relKey) : `<div class="meta">sin registros</div>`;
-          const more =
-            nextOffset < total
-              ? `<div class="pill-row"><button type="button" class="pill rel-more" data-relkey="${escapeHtml(
-                  relKey,
-                )}" data-next="${nextOffset}">Cargar mas (${fmtCount(total - nextOffset)})</button></div>`
-              : "";
+      function renderGraph(elements) {
+        if (state.cy) state.cy.destroy();
+        state.cy = cytoscape({
+          container: document.getElementById("cy"),
+          elements: [...elements.nodes, ...elements.edges],
+          style: [
+            {
+              selector: "node",
+              style: {
+                label: "data(label)",
+                "font-family": "Space Grotesk",
+                color: "#101010",
+                "text-wrap": "wrap",
+                "text-max-width": 130,
+                "font-size": 10,
+                "text-outline-width": 2,
+                "text-outline-color": "#ffffff",
+              },
+            },
+            {
+              selector: 'node[type="person"]',
+              style: {
+                width: "mapData(degree, 0, 30, 14, 26)",
+                height: "mapData(degree, 0, 30, 14, 26)",
+                "background-color": "#111111",
+                shape: "ellipse",
+              },
+            },
+            {
+              selector: 'node[type="source"]',
+              style: {
+                width: "mapData(degree, 0, 30, 20, 34)",
+                height: "mapData(degree, 0, 30, 20, 34)",
+                "background-color": "#ff6b35",
+                shape: "diamond",
+              },
+            },
+            {
+              selector: 'node[type="party"]',
+              style: {
+                width: "mapData(degree, 0, 30, 18, 30)",
+                height: "mapData(degree, 0, 30, 18, 30)",
+                "background-color": "#2f8f54",
+                shape: "round-rectangle",
+              },
+            },
+            {
+              selector: 'node[type="institution"]',
+              style: {
+                width: "mapData(degree, 0, 30, 20, 32)",
+                height: "mapData(degree, 0, 30, 20, 32)",
+                "background-color": "#275db3",
+                shape: "hexagon",
+              },
+            },
+            {
+              selector: 'node[is_focus = 1]',
+              style: {
+                "border-width": 3,
+                "border-color": "#ffbe0b",
+                "text-outline-color": "#fff7df",
+              },
+            },
+            {
+              selector: "edge",
+              style: {
+                width: 1.2,
+                opacity: 0.72,
+                "line-color": "#b1b1b1",
+                "curve-style": "bezier",
+              },
+            },
+            {
+              selector: 'edge[type="mandate"]',
+              style: {
+                "line-color": "#0b5fff",
+              },
+            },
+            {
+              selector: 'edge[type="source_person"]',
+              style: {
+                "line-color": "#ff6b35",
+                "line-style": "dashed",
+              },
+            },
+            {
+              selector: 'edge[type="party_affiliation"]',
+              style: {
+                "line-color": "#2f8f54",
+              },
+            },
+          ],
+          layout: graphLayout(),
+        });
 
-          if (!append) {
-            containerEl.innerHTML = `${items}${more}`;
-          } else {
-            // Remove existing "more" control before appending.
-            const existingMoreWrap = containerEl.querySelector("button.rel-more")?.closest(".pill-row");
-            if (existingMoreWrap) existingMoreWrap.remove();
-            containerEl.insertAdjacentHTML("beforeend", `${items}${more}`);
-          }
-        };
-
-        const ensureRelatedDelegation = (containerEl) => {
-          if (!containerEl || containerEl.dataset.wired === "1") return;
-          containerEl.dataset.wired = "1";
-          containerEl.addEventListener("click", (ev) => {
-            const recBtn = ev.target.closest("button.rel-rec");
-            if (recBtn) {
-              const tableName = recBtn.getAttribute("data-table");
-              const relKey = recBtn.getAttribute("data-relkey") || "";
-              const identEnc = recBtn.getAttribute("data-ident") || "";
-              const label = recBtn.getAttribute("data-label") || "";
-              let identity = null;
-              try {
-                identity = JSON.parse(decodeURIComponent(identEnc));
-              } catch {
-                identity = null;
-              }
-              if (!tableName || !identity) return;
-
-              const relState = relStateByKey[relKey];
-              const whereCols = relState ? relState.cols : Object.keys(identity || {});
-              const whereVals = relState ? relState.vals : Object.values(identity || {}).map((v) => toText(v));
-              // Keep all panes aligned with the clicked related record's table.
-              // (Without this, the detail could change to a new table while the table/record panes
-              // still reflect the previous table.)
-              selectTable(tableName, {
-                keepSearch: false,
-                keepOffset: false,
-                whereCols,
-                whereVals,
-                preserveStack: true,
-                setRoot: false,
-                historyMode: "none",
-              })
-                .then(() => openRecord(tableName, identity, label, { historyMode: "push" }))
-                .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-              return;
-            }
-
-            const moreBtn = ev.target.closest("button.rel-more");
-            if (moreBtn) {
-              const relKey = moreBtn.getAttribute("data-relkey") || "";
-              const next = Number(moreBtn.getAttribute("data-next") || "0");
-              const relState = relStateByKey[relKey];
-              if (!relState) return;
-              moreBtn.disabled = true;
-              fetchRelatedRows(relState.tableName, relState.cols, relState.vals, 50, next)
-                .then((p) => renderRelated(containerEl, relKey, p, relState.tableName, true))
-                .catch((err) => {
-                  containerEl.insertAdjacentHTML(
-                    "beforeend",
-                    `<div class="meta">Error: ${escapeHtml(toText(err))}</div>`,
-                  );
-                });
-            }
-          });
-        };
-
-        els.detail.querySelectorAll("button.rel-open").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const direction = btn.getAttribute("data-dir");
-            const ridx = Number(btn.getAttribute("data-ridx"));
-            const cfg = relationConfig(direction, ridx);
-            if (!cfg || !cfg.rel || !cfg.rel.count || cfg.rel.nullable) return;
-
-            const relKey = `${direction}:${ridx}`;
-            const containerEl = els.detail.querySelector(`[data-rel-items="${relKey}"]`);
-            if (!containerEl) return;
-            ensureRelatedDelegation(containerEl);
-
-            relStateByKey[relKey] = { tableName: cfg.tableName, cols: cfg.cols, vals: cfg.vals };
-            containerEl.innerHTML = `<div class="meta">Cargando lista...</div>`;
-            const payload = await fetchRelatedRows(cfg.tableName, cfg.cols, cfg.vals, 50, 0);
-            renderRelated(containerEl, relKey, payload, cfg.tableName, false);
-          });
+        state.cy.on("tap", "node", (evt) => onNodeTap(evt).catch((err) => setDetail("Error", String(err))));
+        state.cy.on("dbltap", "node", (evt) => {
+          const nodeId = evt.target?.id();
+          if (!nodeId) return;
+          state.selectedNodeId = nodeId;
+          focusOnSelected();
         });
       }
 
-      async function loadSchema() {
-        setDetailHtml('<div class="meta">Cargando esquema...</div>');
-        const resp = await fetch("/api/explorer/schema");
-        const payload = await resp.json();
-        if (payload.meta?.error) {
-          setDetailHtml(`<div class="meta">${payload.meta.error}</div>`);
+      function renderCurrentView() {
+        const elements = getSubgraphElements();
+        renderGraph(elements);
+        els.stats.textContent = buildStats(elements.nodes.length, elements.edges.length);
+        renderTrail();
+        renderHopSummary(elements.depthMap);
+      }
+
+      function focusOnSelected() {
+        if (!state.selectedNodeId) {
+          setDetail("Navegacion", "Selecciona un nodo y pulsa \"Enfocar nodo\".", true);
           return;
         }
-
-        state.schema = payload;
-        state.tables = payload.tables || [];
-        renderTables();
-
-        if (!state.activeTable && state.tables.length > 0) {
-          await selectTable(state.tables[0].name, { historyMode: "replace" });
+        if (state.focusNodeId && state.focusNodeId !== state.selectedNodeId) {
+          state.focusHistory.push(state.focusNodeId);
         }
+        state.focusNodeId = state.selectedNodeId;
+        state.viewMode = "focus";
+        renderCurrentView();
       }
 
-      function renderRecordsFooter() {
-        const existing = els.records.querySelector("[data-records-footer]");
-        if (existing) existing.remove();
-
-        const wrap = document.createElement("div");
-        wrap.dataset.recordsFooter = "1";
-        wrap.style.padding = "10px 4px 4px";
-
-        if (!state.activeTable) return;
-        if (state.recordsLoading) {
-          wrap.innerHTML = `<div class="meta">Cargando...</div>`;
-        } else if (state.total && state.offset + state.loaded < state.total) {
-          const remaining = state.total - (state.offset + state.loaded);
-          wrap.innerHTML = `<div class="pill-row"><button type="button" class="pill" data-load-more="1">Cargar mas (${fmtCount(
-            remaining,
-          )})</button></div>`;
-        } else {
-          wrap.innerHTML = `<div class="meta">Fin.</div>`;
-        }
-
-        els.records.appendChild(wrap);
-        const btn = wrap.querySelector("button[data-load-more]");
-        if (btn) {
-          btn.addEventListener("click", () => {
-            loadRows({ reset: false })
-              .then(() => pushHistory("replace"))
-              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-          });
-        }
-      }
-
-      async function loadRows(opts = {}) {
-        const options = { reset: false, restoreLoaded: false, ...opts };
-        if (!state.activeTable) {
-          els.records.textContent = "Selecciona una tabla.";
+      function moveFocusUp() {
+        if (state.focusHistory.length === 0) {
+          state.focusNodeId = null;
+          state.viewMode = "overview";
+          renderCurrentView();
           return;
         }
-        if (state.recordsLoading) return;
-
-        const desiredLoaded = options.restoreLoaded ? Number(state.loaded || 0) : 0;
-        if (options.reset) {
-          state.loaded = 0;
-          state.total = 0;
-          els.records.textContent = "";
-        }
-
-        const fetchPage = async (offset) => {
-          const params = new URLSearchParams();
-          params.set("table", state.activeTable);
-          params.set("limit", String(state.limit));
-          params.set("offset", String(offset));
-          if (state.q) params.set("q", state.q);
-          for (let i = 0; i < (state.whereCols || []).length; i += 1) {
-            const c = state.whereCols[i];
-            const v = (state.whereVals || [])[i];
-            if (c === undefined || v === undefined) continue;
-            params.append("col", String(c));
-            params.append("val", String(v));
-          }
-          const resp = await fetch(`/api/explorer/rows?${params.toString()}`);
-          return await resp.json();
-        };
-
-        state.recordsLoading = true;
-        renderRecordsFooter();
-
-        const offsetToFetch = state.offset + state.loaded;
-        const payload = await fetchPage(offsetToFetch);
-        if (payload.error) {
-          state.recordsLoading = false;
-          els.records.textContent = payload.error;
-          return;
-        }
-
-        state.total = Number(payload.meta?.total || 0);
-        const got = (payload.rows || []).length;
-        renderRows(payload, { append: !options.reset });
-        state.loaded += got;
-        state.recordsLoading = false;
-        renderRecordsFooter();
-        renderActiveFilters();
-
-        if (options.restoreLoaded) {
-          const MAX_RESTORE = 300;
-          const target = Math.min(desiredLoaded, MAX_RESTORE);
-          while (state.loaded < target && state.offset + state.loaded < state.total) {
-            // eslint-disable-next-line no-await-in-loop
-            await loadRows({ reset: false, restoreLoaded: false });
-          }
-        }
+        state.focusNodeId = state.focusHistory.pop() || null;
+        state.viewMode = state.focusNodeId ? "focus" : "overview";
+        renderCurrentView();
       }
 
-      async function selectTable(tableName, opts = {}) {
-        const options = {
-          keepSearch: false,
-          keepOffset: false,
-          keepWhere: false,
-          whereCols: null,
-          whereVals: null,
-          preserveStack: false,
-          setRoot: true,
-          historyMode: "push",
-          ...opts,
-        };
-
-        state.activeTable = tableName;
-        state.activeRecordIdentity = null;
-        if (Array.isArray(options.whereCols) && Array.isArray(options.whereVals)) {
-          state.whereCols = options.whereCols;
-          state.whereVals = options.whereVals;
-        } else if (!options.keepWhere) {
-          state.whereCols = [];
-          state.whereVals = [];
-        }
-        if (options.setRoot) {
-          state.routeRootTable = tableName;
-        } else if (!state.routeRootTable) {
-          state.routeRootTable = tableName;
-        }
-        if (!options.keepSearch) {
-          state.q = "";
-          els.recordSearch.value = "";
-        }
-        if (!options.keepOffset) {
-          state.offset = 0;
-        }
-        state.loaded = 0;
-        state.total = 0;
-        if (!options.preserveStack) {
-          state.navStack = [];
-        }
-
-        renderTables();
-        renderFilterOptions();
-        renderActiveFilters();
-        setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
-        renderBreadcrumbTrail();
-        await loadRows({ reset: true });
-        if (options.historyMode !== "none") pushHistory(options.historyMode);
+      function resetToOverview() {
+        state.viewMode = "overview";
+        state.focusNodeId = null;
+        state.focusHistory = [];
+        renderCurrentView();
       }
 
-      async function fetchRecordPayload(tableName, identity) {
+      async function loadGraph() {
         const params = new URLSearchParams();
-        params.set("table", tableName);
-        identityToParams(params, identity);
+        if (els.source.value) params.set("source_id", els.source.value);
+        if (els.search.value.trim()) params.set("q", els.search.value.trim());
+        params.set("limit", String(els.limit.value || 350));
+        params.set("include_inactive", els.inactive.checked ? "1" : "0");
+        params.set("depth", String(els.depth.value || 2));
+        if (els.lens && els.lens.value) params.set("lens", String(els.lens.value));
 
-        const resp = await fetch(`/api/explorer/record?${params.toString()}`);
-        return await resp.json();
-      }
+        // Keep the page refreshable and shareable: current graph controls -> URL.
+        history.replaceState({}, "", location.pathname + `?${params.toString()}`);
 
-      async function navigateToStackLevel(level) {
-        const step = state.navStack[level];
-        if (!step || !step.identity) return;
-        state.navStack = state.navStack.slice(0, level + 1);
-        state.activeRecordIdentity = step.identity;
-
-        state.activeTable = step.table;
-        state.whereCols = Array.isArray(step.whereCols) ? step.whereCols : [];
-        state.whereVals = Array.isArray(step.whereVals) ? step.whereVals : [];
-        state.offset = 0;
-        state.loaded = 0;
-        state.total = 0;
-        renderTables();
-        renderFilterOptions();
-        renderActiveFilters();
-        await loadRows({ reset: true });
-
-        const payload = await fetchRecordPayload(step.table, step.identity);
-        if (payload.error) {
-          setDetailHtml(`<div class="meta">${payload.error}</div>`);
-          renderBreadcrumbTrail();
-          return;
-        }
-        renderDetail(payload);
-        renderBreadcrumbTrail();
-        pushHistory("push");
-      }
-
-      async function openRecord(tableName, identity, label, opts = {}) {
-        const options = {
-          pushStack: true,
-          historyMode: "push",
-          ...opts,
-        };
-
-        const payload = await fetchRecordPayload(tableName, identity);
-        if (payload.error) {
-          setDetailHtml(`<div class="meta">${payload.error}</div>`);
-          renderBreadcrumbTrail();
-          return;
-        }
-
-        // Keep the list panel aligned with the currently open record's table.
-        state.activeTable = tableName;
-        state.activeRecordIdentity = identity;
-        if (options.pushStack) {
-        state.navStack.push({
-            table: tableName,
-            identity,
-            label: toText(label || payload.meta?.label || "record"),
-            whereCols: Array.isArray(state.whereCols) ? state.whereCols : [],
-            whereVals: Array.isArray(state.whereVals) ? state.whereVals : [],
-          });
-          if (state.navStack.length > 14) {
-            state.navStack = state.navStack.slice(state.navStack.length - 14);
-          }
-        }
-
-        renderDetail(payload);
-        renderBreadcrumbTrail();
-        if (options.historyMode !== "none") pushHistory(options.historyMode);
-      }
-
-      if (els.pathTrail) {
-        els.pathTrail.addEventListener("click", (ev) => {
-          const btn = ev.target.closest("button[data-nav-level]");
-          if (!btn) return;
-          const level = Number(btn.getAttribute("data-nav-level"));
-          if (!Number.isFinite(level)) return;
-          const target = state.navStack[level];
-          if (!target || !target.identity) return;
-          if (level >= state.navStack.length - 1) return;
-          navigateToStackLevel(level).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-        });
-      }
-
-      els.tableFilter.addEventListener("input", () => {
-        renderTables();
-        pushHistory("replace");
-      });
-      els.reloadSchema.addEventListener("click", () => {
-        loadSchema().catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.applySearch.addEventListener("click", () => {
-        state.q = els.recordSearch.value.trim();
-        state.offset = 0;
-        state.loaded = 0;
-        state.total = 0;
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.recordSearch.addEventListener("keydown", (ev) => {
-        if (ev.key !== "Enter") return;
-        ev.preventDefault();
-        state.q = els.recordSearch.value.trim();
-        state.offset = 0;
-        state.loaded = 0;
-        state.total = 0;
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.pageSize.addEventListener("change", () => {
-        state.limit = Number(els.pageSize.value || 50);
-        state.offset = 0;
-        state.loaded = 0;
-        state.total = 0;
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.prevPage.addEventListener("click", () => {
-        state.offset = Math.max(0, state.offset - state.limit);
-        state.loaded = 0;
-        state.total = 0;
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.nextPage.addEventListener("click", () => {
-        state.offset += state.limit;
-        state.loaded = 0;
-        state.total = 0;
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.addFilter.addEventListener("click", () => {
-        const col = (els.filterCol.value || "").trim();
-        const val = (els.filterVal.value || "").trim();
-        if (!col || !val) return;
-        const idx = (state.whereCols || []).indexOf(col);
-        if (idx >= 0) {
-          state.whereVals[idx] = val;
+        const apiEndpoint = resolveApiPath(`/api/graph?${params.toString()}`);
+        let payload = null;
+        if (apiEndpoint) {
+          setDetail("Cargando", "Consultando API...", true);
+          const resp = await fetch(apiEndpoint);
+          payload = await resp.json();
         } else {
-          state.whereCols.push(col);
-          state.whereVals.push(val);
+          setDetail("Cargando", "Cargando snapshot estatico (GitHub Pages)...", true);
+          payload = await readJson(STATIC_GRAPH_PATH);
         }
-        state.offset = 0;
-        state.loaded = 0;
-        state.total = 0;
-        els.filterVal.value = "";
-        renderActiveFilters();
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
+        const nodes = payload.nodes || [];
+        const edges = payload.edges || [];
+        const meta = payload.meta || {};
 
-      els.filterVal.addEventListener("keydown", (ev) => {
-        if (ev.key !== "Enter") return;
-        ev.preventDefault();
-        els.addFilter.click();
-      });
+        fillSourceOptions(meta.sources || []);
+        state.meta = meta;
+        state.selectedNodeId = null;
+        state.focusNodeId = null;
+        state.focusHistory = [];
+        state.viewMode = "overview";
+        els.selection.textContent = "Nodo activo: ninguno";
 
-      els.clearFilters.addEventListener("click", () => {
-        state.whereCols = [];
-        state.whereVals = [];
-        state.offset = 0;
-        state.loaded = 0;
-        state.total = 0;
-        renderActiveFilters();
-        loadRows({ reset: true })
-          .then(() => pushHistory("push"))
-          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      els.records.addEventListener("scroll", () => {
-        if (state.recordsLoading) return;
-        if (!state.total) return;
-        if (state.offset + state.loaded >= state.total) return;
-        const remainingPx = els.records.scrollHeight - els.records.scrollTop - els.records.clientHeight;
-        if (remainingPx < 220) {
-          loadRows({ reset: false })
-            .then(() => pushHistory("replace"))
-            .catch(() => {});
-        }
-      });
-
-      window.addEventListener("popstate", (ev) => {
-        const snap = snapshotFromLocation() || (ev.state && ev.state.explorer ? ev.state.explorer : null);
-        restoreFromHistory(snap).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
-      });
-
-      function snapshotToUrlParams(snapshot) {
-        const snap = snapshot || {};
-        const p = new URLSearchParams();
-
-        if (snap.activeTable) p.set("t", String(snap.activeTable));
-        if (snap.routeRootTable) p.set("root", String(snap.routeRootTable));
-        if (snap.q) p.set("q", String(snap.q));
-        if (snap.offset) p.set("o", String(Number(snap.offset) || 0));
-        if (snap.loaded) p.set("n", String(Number(snap.loaded) || 0));
-        if (snap.limit) p.set("l", String(Number(snap.limit) || 50));
-        if (snap.tableFilter) p.set("tf", String(snap.tableFilter));
-
-        const wcols = Array.isArray(snap.whereCols) ? snap.whereCols : [];
-        const wvals = Array.isArray(snap.whereVals) ? snap.whereVals : [];
-        for (let i = 0; i < Math.min(wcols.length, wvals.length); i += 1) {
-          p.append("wc", String(wcols[i]));
-          p.append("wv", String(wvals[i]));
+        if (meta.error) {
+          setDetail("Error", meta.error);
+        } else {
+          setDetail("Nodo", "Click para detalle. Doble click para enfocar por profundidad.", true);
         }
 
-        if (snap.activeRecordIdentity) {
-          try {
-            p.set("rid", JSON.stringify(snap.activeRecordIdentity));
-          } catch {
-            // ignore
-          }
-        }
-
-        if (Array.isArray(snap.navStack) && snap.navStack.length) {
-          try {
-            p.set("s", JSON.stringify(snap.navStack));
-          } catch {
-            // ignore
-          }
-        }
-
-        return p;
+        indexGraph(nodes, edges);
+        renderCurrentView();
       }
 
-      function snapshotFromLocation() {
-        const p = new URLSearchParams(location.search || "");
-        if ([...p.keys()].length === 0) return null;
-
-        let navStack = [];
-        const sRaw = p.get("s");
-        if (sRaw) {
-          try {
-            const parsed = JSON.parse(sRaw);
-            if (Array.isArray(parsed)) navStack = parsed;
-          } catch {
-            navStack = [];
-          }
+      els.load.addEventListener("click", () => loadGraph().catch((err) => setDetail("Error", String(err))));
+      els.fit.addEventListener("click", () => state.cy && state.cy.fit(undefined, 40));
+      els.focus.addEventListener("click", () => focusOnSelected());
+      els.overview.addEventListener("click", () => resetToOverview());
+      els.back.addEventListener("click", () => moveFocusUp());
+      els.depth.addEventListener("input", () => {
+        els.depthValue.textContent = els.depth.value;
+        const params = new URLSearchParams(location.search || "");
+        params.set("depth", String(els.depth.value || 2));
+        history.replaceState({}, "", location.pathname + `?${params.toString()}`);
+        if (state.viewMode === "focus") renderCurrentView();
+      });
+      els.lens.addEventListener("change", () => {
+        const params = new URLSearchParams(location.search || "");
+        if (els.lens.value) params.set("lens", String(els.lens.value));
+        history.replaceState({}, "", location.pathname + `?${params.toString()}`);
+        renderCurrentView();
+      });
+      els.search.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter") {
+          ev.preventDefault();
+          loadGraph().catch((err) => setDetail("Error", String(err)));
         }
+      });
 
-        let activeRecordIdentity = null;
-        const ridRaw = p.get("rid");
-        if (ridRaw) {
-          try {
-            activeRecordIdentity = JSON.parse(ridRaw);
-          } catch {
-            activeRecordIdentity = null;
+      // URL -> controls so refresh/share keeps the same view parameters.
+      (function applyUrlParamsToControls() {
+        const params = new URLSearchParams(location.search || "");
+        const sourceId = params.get("source_id");
+        const q = params.get("q");
+        const limit = params.get("limit");
+        const includeInactive = params.get("include_inactive");
+        const depth = params.get("depth");
+        const lens = params.get("lens");
+
+        if (sourceId !== null) {
+          // If options haven't been populated yet, ensure the URL-provided value is selectable
+          // so the initial API request can still be filtered by source_id.
+          const exists = [...els.source.options].some((opt) => opt.value === sourceId);
+          if (!exists) {
+            const opt = document.createElement("option");
+            opt.value = sourceId;
+            opt.textContent = `${sourceId} (from URL)`;
+            els.source.appendChild(opt);
           }
+          els.source.value = sourceId;
         }
-
-        const activeTable = p.get("t") || (navStack.length ? navStack[navStack.length - 1]?.table : "") || "";
-
-        if (!activeRecordIdentity && navStack.length) {
-          const last = navStack[navStack.length - 1];
-          if (last && last.identity) activeRecordIdentity = last.identity;
+        if (q !== null) els.search.value = q;
+        if (limit !== null) els.limit.value = limit;
+        if (includeInactive !== null) els.inactive.checked = includeInactive === "1";
+        if (depth !== null) {
+          els.depth.value = depth;
+          els.depthValue.textContent = depth;
         }
+        if (lens !== null && els.lens) els.lens.value = lens;
+      })();
 
-        return {
-          activeTable,
-          routeRootTable: p.get("root") || "",
-          activeRecordIdentity,
-          whereCols: p.getAll("wc"),
-          whereVals: p.getAll("wv"),
-          offset: Number(p.get("o") || 0),
-          loaded: Number(p.get("n") || 0),
-          limit: Number(p.get("l") || 50),
-          q: p.get("q") || "",
-          tableFilter: p.get("tf") || "",
-          navStack,
-        };
-      }
-
-      const initialSnap = snapshotFromLocation() || (history.state && history.state.explorer ? history.state.explorer : null);
-      if (initialSnap) applySnapshot(initialSnap);
-
-      loadSchema()
-        .then(() => {
-          if (initialSnap) {
-            return restoreFromHistory(initialSnap);
-          }
-          pushHistory("replace");
-          return null;
-        })
-        .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      loadGraph().catch((err) => setDetail("Error", String(err)));
     </script>
   </body>
 </html>

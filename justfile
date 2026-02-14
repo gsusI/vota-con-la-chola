@@ -377,12 +377,22 @@ explorer-bg-watch:
 
 explorer-gh-pages-build:
   rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico
-  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources
+  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data
   cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
-  cp ui/graph/explorer.html {{gh_pages_dir}}/graph/index.html
+  cp ui/graph/index.html {{gh_pages_dir}}/graph/index.html
   cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-politico/index.html
+  cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/explorer-votaciones/index.html
   cp ui/graph/explorer-sources.html {{gh_pages_dir}}/explorer-sources/index.html
+  python3 scripts/export_graph_snapshot.py \
+    --db "{{db_path}}" \
+    --limit 350 \
+    --include-inactive \
+    --out "{{gh_pages_dir}}/graph/data/graph.json"
+  python3 scripts/export_explorer_votaciones_snapshot.py \
+    --db "{{db_path}}" \
+    --limit 200 \
+    --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
   python3 scripts/export_explorer_sports_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
