@@ -682,13 +682,32 @@
         font-size: 0.82rem;
         font-weight: 700;
       }
+
+      .superlink svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        flex: 0 0 auto;
+      }
     </style>
   </head>
   <body>
-    <main class="app">
-      <div class="superheader">
-        <a class="superlink" href="/">← Índice</a>
-      </div>
+      <main class="app">
+        <div class="superheader">
+          <a class="superlink" href="/">← Índice</a>
+          <a
+            class="superlink"
+            href="https://github.com/gsusI/vota-con-la-chola"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver el código en GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .5C5.65.5 2.5 5.65 2.5 12s5.15 11.5 11.5 11.5 11.5-5.15 11.5-11.5S18.35.5 12 .5Zm0 21a9.5 9.5 0 0 1-3-.47.7.7 0 0 0-.76.34c-.2.36-.61.46-.96.26a8.45 8.45 0 0 1-3.6-2.74.76.76 0 0 0-.14-.77c-.37-.5-.48-1.18-.3-1.87a2.9 2.9 0 0 1 .7-1.18.75.75 0 0 0 .18-.62c-.07-.39-.22-1.15.08-2.4 0 0 .58-.18 1.9.69a6.58 6.58 0 0 1 3.45 0c1.32-.87 1.9-.69 1.9-.69.3 1.25.15 2.01.08 2.4a.75.75 0 0 0 .18.62c.25.3.57.72.7 1.18.18.69.07 1.37-.3 1.87a.76.76 0 0 0-.14.77 8.45 8.45 0 0 1-3.6 2.74c-.35.2-.76.1-.96-.26a.7.7 0 0 0-.76-.34 9.5 9.5 0 0 1-3 .47Z"/>
+            </svg>
+            Ver el código
+          </a>
+        </div>
       <header class="topbar">
         <p class="eyebrow">Explorer 2.0</p>
         <h1>Explorador de votaciones</h1>
