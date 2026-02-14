@@ -41,3 +41,6 @@ etl/data/raw/*
 *.db
 *.sqlite
 *.sqlite3
+
+# Too large for GitHub; regenerate from ETL
+etl/data/published/votaciones-es-*.json
