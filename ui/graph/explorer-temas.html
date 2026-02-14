@@ -284,17 +284,17 @@
   <body>
     <div class="page">
       <div class="superheader">
-        <a class="pilllink" href="/">← Índice</a>
-        <a class="pilllink" href="/explorer">Explorer SQL</a>
-        <a class="pilllink" href="/explorer-sources">Fuentes</a>
+        <a class="pilllink" href="../">← Índice</a>
+        <a class="pilllink" href="../explorer/">Explorer SQL</a>
+        <a class="pilllink" href="../explorer-sources/">Fuentes</a>
       </div>
 
       <header class="card">
         <div>
           <h1>Temas y Posiciones (por scope)</h1>
           <p>
-            Flujo recomendado: <span class="mono">topic_set</span> → temas high-stakes →
-            <span class="mono">topic_positions</span> → evidencia (<span class="mono">topic_evidence</span>).
+            Flujo recomendado: <span class="mono">topic_set</span> (scope) → temas <span class="mono">high-stakes</span> →
+            posiciones (<span class="mono">topic_positions</span>) → evidencia (<span class="mono">topic_evidence</span>) para comparar <strong>says vs does</strong>.
           </p>
         </div>
         <div class="mono" id="status">Cargando…</div>
@@ -387,6 +387,30 @@
           .replaceAll("'", "&#039;");
       }
 
+      const runtime = (() => {
+        const u = new URL(window.location.href);
+        const api = (u.searchParams.get("api") || "").trim();
+        if (api) {
+          const base = api.replace(/\/+$/, "");
+          return { apiBase: base, apiParam: base };
+        }
+        const host = (window.location.hostname || "").toLowerCase();
+        const isLocal = host === "127.0.0.1" || host === "localhost";
+        return { apiBase: isLocal ? "" : null, apiParam: "" };
+      })();
+
+      function apiUrl(path) {
+        if (runtime.apiBase === null) return null;
+        if (runtime.apiBase === "") return path;
+        if (!path.startsWith("/")) path = "/" + path;
+        return runtime.apiBase + path;
+      }
+
+      function withApiParam(url) {
+        if (!runtime.apiParam) return url;
+        return url + (url.includes("?") ? "&" : "?") + "api=" + encodeURIComponent(runtime.apiParam);
+      }
+
       async function apiRows(table, { limit = 200, offset = 0, q = "", where = [] } = {}) {
         const p = new URLSearchParams();
         p.set("table", table);
@@ -397,7 +421,11 @@
           p.append("col", String(col));
           p.append("val", String(val));
         });
-        const resp = await fetch("/api/explorer/rows?" + p.toString());
+        const url = apiUrl("/api/explorer/rows?" + p.toString());
+        if (!url) {
+          throw new Error("API requerido. Abre con ?api=http://127.0.0.1:9010 (o ejecuta el Explorer local).");
+        }
+        const resp = await fetch(url);
         return await resp.json();
       }
 
@@ -557,6 +585,64 @@
           if (blocks[1]) blocks[1].innerHTML = "<h3>Evidencia</h3><div class='muted mono'>Sin evidencia.</div>";
           return;
         }
+
+        const inferEvidenceKind = (p = {}) => {
+          const k = toText(p.evidence_kind || "").toLowerCase().trim();
+          if (k === "says" || k === "said" || k === "declared") return "says";
+          if (k === "does" || k === "did" || k === "revealed") return "does";
+          const et = toText(p.evidence_type || "").toLowerCase();
+          if (et.includes("revealed")) return "does";
+          if (et.includes("vote") || et.includes("vot") || et.includes("decreto") || et.includes("rdl") || et.includes("boe")) return "does";
+          return "says";
+        };
+
+        const polarityFrom = (p = {}) => {
+          const pol = Number(p.polarity);
+          if (Number.isFinite(pol) && (pol === -1 || pol === 0 || pol === 1)) return pol;
+          const st = String(p.stance || "").toLowerCase();
+          if (st === "support") return 1;
+          if (st === "oppose") return -1;
+          return 0;
+        };
+
+        const agg = (kind) => {
+          const rel = rows.filter((r) => inferEvidenceKind((r.preview || {})) === kind);
+          let score = 0;
+          for (const r of rel) {
+            const p = r.preview || {};
+            const w = Number(p.weight);
+            const c = Number(p.confidence);
+            const weight = Number.isFinite(w) ? w : 1;
+            const conf = Number.isFinite(c) ? c : 1;
+            score += polarityFrom(p) * weight * conf;
+          }
+          const stance =
+            rel.length === 0
+              ? "no_signal"
+              : score > 0.2
+              ? "support"
+              : score < -0.2
+              ? "oppose"
+              : "unclear";
+          return { count: rel.length, score, stance };
+        };
+
+        const says = agg("says");
+        const does = agg("does");
+        const diverges =
+          (says.stance === "support" || says.stance === "oppose") &&
+          (does.stance === "support" || does.stance === "oppose") &&
+          says.stance !== does.stance;
+
+        const summary =
+          "<div class='row' style='align-items:baseline; margin-bottom:8px'>" +
+          "<div class='mono'>" +
+          "SAYS: <strong>" + esc(says.stance) + "</strong> (" + esc(String(says.count)) + ") · " +
+          "DOES: <strong>" + esc(does.stance) + "</strong> (" + esc(String(does.count)) + ")" +
+          "</div>" +
+          (diverges ? "<span class='badge warn'>diverge</span>" : "<span class='badge ok'>align/unknown</span>") +
+          "</div>";
+
         const html = rows
           .slice(0, 60)
           .map((r) => {
@@ -565,11 +651,16 @@
             const dt = toText(p.evidence_date || "");
             const ex = toText(p.excerpt || "");
             const src = toText(p.source_id || "");
-            const badge = et.includes("revealed") ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
+            const kind = inferEvidenceKind(r.preview || {});
+            const badge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
+            const conf = p.confidence !== undefined && p.confidence !== null ? "conf=" + toText(p.confidence) : "";
+            const weight = p.weight !== undefined && p.weight !== null ? "w=" + toText(p.weight) : "";
+            const url = p.source_url ? "<a class='mono' href='" + esc(toText(p.source_url)) + "' target='_blank' rel='noopener'>url</a>" : "";
+            const meta2 = [dt, src, conf, weight].filter(Boolean).join(" · ");
             return (
               "<div class='block'>" +
               "<div class='row'><strong>" + esc(et || "evidence") + "</strong>" + badge + "</div>" +
-              "<div class='mono'>" + esc([dt, src].filter(Boolean).join(" · ")) + "</div>" +
+              "<div class='mono'>" + esc(meta2) + (url ? " · " + url : "") + "</div>" +
               (ex ? "<div style='margin-top:8px' class='v'>" + esc(ex) + "</div>" : "") +
               "</div>"
             );
@@ -578,7 +669,11 @@
 
         const blocks = els.detail.querySelectorAll(".block");
         if (blocks[1]) {
-          blocks[1].innerHTML = "<h3>Evidencia</h3>" + html + (rows.length > 60 ? "<div class='muted mono'>+" + (rows.length - 60) + " mas…</div>" : "");
+          blocks[1].innerHTML =
+            "<h3>Evidencia</h3>" +
+            summary +
+            html +
+            (rows.length > 60 ? "<div class='muted mono'>+" + (rows.length - 60) + " mas…</div>" : "");
         }
       }
 
@@ -668,22 +763,22 @@
 
       function openInSqlExplorer() {
         if (!state.activeSet) {
-          window.location.href = "/explorer?t=topic_sets&tf=topic_";
+          window.location.href = withApiParam("../explorer/?t=topic_sets&tf=topic_");
           return;
         }
         if (state.activeTopic) {
           const url =
-            "/explorer?t=topic_positions&tf=topic_&wc=topic_set_id&wv=" +
+            "../explorer/?t=topic_positions&tf=topic_&wc=topic_set_id&wv=" +
             encodeURIComponent(String(state.activeSet.topic_set_id)) +
             "&wc=topic_id&wv=" +
             encodeURIComponent(String(state.activeTopic.topic_id));
-          window.location.href = url;
+          window.location.href = withApiParam(url);
           return;
         }
         const url =
-          "/explorer?t=topic_set_topics&tf=topic_&wc=topic_set_id&wv=" +
+          "../explorer/?t=topic_set_topics&tf=topic_&wc=topic_set_id&wv=" +
           encodeURIComponent(String(state.activeSet.topic_set_id));
-        window.location.href = url;
+        window.location.href = withApiParam(url);
       }
 
       async function reloadAll() {
@@ -697,7 +792,16 @@
         els.sets.innerHTML = "<div class='muted mono'>Cargando…</div>";
         els.topics.innerHTML = "<div class='muted mono'>—</div>";
         renderDetailEmpty();
-        await loadSets();
+        try {
+          await loadSets();
+        } catch (err) {
+          const msg = (err && err.message) ? err.message : String(err);
+          setStatus("Sin API");
+          els.sets.innerHTML =
+            "<div class='muted mono'>Esta vista requiere el API del Explorer.</div>" +
+            "<div class='muted mono' style='margin-top:6px'>Sugerencia: ejecuta <span class='mono'>just explorer</span> y abre este page con <span class='mono'>?api=http://127.0.0.1:9010</span>.</div>" +
+            "<div class='muted mono' style='margin-top:6px'>Detalle: " + esc(msg) + "</div>";
+        }
       }
 
       els.reload.addEventListener("click", () => reloadAll());
@@ -711,4 +815,3 @@
     </script>
   </body>
 </html>
-
