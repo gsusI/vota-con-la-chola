@@ -611,9 +611,9 @@
     </style>
   </head>
   <body>
-    <main class="app">
-      <div class="superheader">
-        <a class="superlink" href="/">← Índice</a>
+      <main class="app">
+        <div class="superheader">
+        <a class="superlink" href="../">← Índice</a>
       </div>
       <section class="top">
         <p class="eyebrow">Panel operativo</p>
@@ -755,6 +755,53 @@
         idealMinConfidence: document.getElementById("ideal-min-confidence"),
         idealSources: document.getElementById("ideal-sources"),
       };
+
+      const APP_QUERY = new URLSearchParams(window.location.search);
+      const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
+      const STATIC_DATA_DIR = "data";
+      const STATIC_STATUS_PATH = `${STATIC_DATA_DIR}/status.json`;
+      const STATIC_IDEAL_PATH = `${STATIC_DATA_DIR}/ideal.json`;
+
+      const isLocalApiHost = (() => {
+        const host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
+      })();
+
+      const resolveApiPath = (path) => {
+        const endpoint = String(path || "").trim();
+        if (!endpoint) return "";
+        const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\\/$/, "")}${normalized}`;
+        if (isLocalApiHost) return normalized;
+        return "";
+      };
+
+      async function readJson(url) {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        return await resp.json();
+      }
+
+      async function fetchPayload({ apiPath, staticPath, allowMissing = false }) {
+        const resolved = resolveApiPath(apiPath);
+        if (resolved) {
+          try {
+            return await readJson(resolved);
+          } catch (err) {
+            if (!staticPath) throw err;
+          }
+        }
+        if (!staticPath) {
+          if (allowMissing) return null;
+          throw new Error(`Sin API disponible para ${apiPath}`);
+        }
+        try {
+          return await readJson(staticPath);
+        } catch (err) {
+          if (allowMissing) return null;
+          throw err;
+        }
+      }
 
       function getParam(key) {
         try {
@@ -964,6 +1011,44 @@
         return Number.isFinite(n) ? n : fallback;
       }
 
+      function renderIdealRequirements(data) {
+        const req = data && data.ideal_data_requirements ? data.ideal_data_requirements : null;
+        if (!req) return "";
+
+        const section = (title, items) => {
+          if (!Array.isArray(items) || items.length === 0) return "";
+          const rows = items
+            .map((it) => {
+              if (typeof it === "string") {
+                return "<li>" + String(it) + "</li>";
+              }
+              const label = String(it.label || it.id || "item");
+              const fields = Array.isArray(it.fields) ? it.fields : [];
+              const body = fields.length ? "<ul class='small muted'>" + fields.map((f) => "<li>" + String(f) + "</li>").join("") + "</ul>" : "";
+              return "<li><strong>" + label + "</strong>" + body + "</li>";
+            })
+            .join("");
+          return (
+            "<div class='card' style='margin-top:10px'>" +
+            "<div class='row'><strong>" + title + "</strong><span class='pill muted'>north-star</span></div>" +
+            "<ul style='margin:8px 0 0; padding-left:18px'>" +
+            rows +
+            "</ul></div>"
+          );
+        };
+
+        return (
+          "<div class='row' style='align-items:baseline; margin-top:14px'>" +
+          "<div><strong>Datos ideales a capturar</strong></div>" +
+          "<div class='mono muted'>docs/ideal_sources_say_do.json</div>" +
+          "</div>" +
+          section("Por político (por scope)", req.per_politician_per_scope) +
+          section("Por topic_set", req.per_topic_set) +
+          section("Por evidencia (atomic)", req.per_evidence_item) +
+          section("Por fuente", req.per_source)
+        );
+      }
+
       function renderIdealSources() {
         if (!nodes.idealSources) return;
         const data = state.ideal || {};
@@ -1049,7 +1134,7 @@
           .join("");
 
         const more = filtered.length > 120 ? "<div class='muted' style='margin-top:10px'>+" + (filtered.length - 120) + " más… (usa filtros/búsqueda)</div>" : "";
-        nodes.idealSources.innerHTML = head + rows + more;
+        nodes.idealSources.innerHTML = head + rows + more + renderIdealRequirements(data);
       }
 
       function fillAdvancedFilters(data) {
@@ -1398,19 +1483,10 @@
           nodes.scopeDashboard.innerHTML = "<div class='muted'>Actualizando...</div>";
         }
         try {
-          const [statusResp, idealResp] = await Promise.all([
-            fetch("/api/sources/status"),
-            fetch("/api/sources/ideal").catch(() => null),
+          const [payload, idealPayload] = await Promise.all([
+            fetchPayload({ apiPath: "/api/sources/status", staticPath: STATIC_STATUS_PATH }),
+            fetchPayload({ apiPath: "/api/sources/ideal", staticPath: STATIC_IDEAL_PATH, allowMissing: true }),
           ]);
-          const payload = await statusResp.json();
-          let idealPayload = null;
-          if (idealResp) {
-            try {
-              idealPayload = await idealResp.json();
-            } catch (_err) {
-              idealPayload = null;
-            }
-          }
           if (payload.error) {
             if (nodes.scopeDashboard) {
               nodes.scopeDashboard.innerHTML = "<div class='muted'>" + payload.error + "</div>";

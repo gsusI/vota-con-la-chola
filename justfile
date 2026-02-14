@@ -376,12 +376,13 @@ explorer-bg-watch:
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico
-  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data
+  rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-sources/data
+  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data
   cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
   cp ui/graph/index.html {{gh_pages_dir}}/graph/index.html
   cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-politico/index.html
+  cp ui/graph/explorer-temas.html {{gh_pages_dir}}/explorer-temas/index.html
   cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/explorer-votaciones/index.html
   cp ui/graph/explorer-sources.html {{gh_pages_dir}}/explorer-sources/index.html
   python3 scripts/export_graph_snapshot.py \
@@ -393,10 +394,10 @@ explorer-gh-pages-build:
     --db "{{db_path}}" \
     --limit 200 \
     --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
-  python3 scripts/export_explorer_sports_snapshot.py \
+  python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
-    --snapshot-date "{{snapshot_date}}" \
-    --out-dir "{{gh_pages_dir}}/explorer-politico/data"
+    --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
+  cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 
 explorer-gh-pages-publish:
