@@ -6,6 +6,8 @@ import base64
 import json
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError
+from urllib.parse import urlencode
 
 from ...politicos_es.http import http_get_bytes, payload_looks_like_html
 from ...politicos_es.raw import raw_output_path
@@ -68,6 +70,100 @@ class InfoelectoralProcesosConnector:
         headers = {"Authorization": basic_auth_header(self._user, self._password)}
         payload, _ct = http_get_bytes(url, timeout, headers=headers, insecure_ssl=True)
         return parse_api_payload(payload)
+
+    def _extract_from_convocatorias(self, timeout: int) -> tuple[list[dict[str, Any]], list[str]]:
+        """Fallback extractor when the historical `/min/procesos/` endpoint is removed.
+
+        We derive a "proceso" per convocatoria and attach available extraction files as datasets.
+        This keeps strict-network runs reproducible while preserving raw source traceability.
+        """
+
+        notes: list[str] = []
+        records: list[dict[str, Any]] = []
+
+        tipos = self._get_json(f"{INFOELECTORAL_BASE}convocatorias/tipos/", timeout)
+        if not tipos:
+            return [], ["sin tipos de convocatoria"]
+
+        # Convocatorias por tipo + archivos de extraccion.
+        for row in tipos:
+            if not isinstance(row, dict):
+                continue
+            tipo = str(row.get("cod") or "").strip()
+            if not tipo:
+                continue
+
+            conv_url = f"{INFOELECTORAL_BASE}convocatorias?{urlencode({'tipoConvocatoria': tipo})}"
+            try:
+                convocatorias = self._get_json(conv_url, timeout)
+            except Exception as exc:  # noqa: BLE001
+                notes.append(f"convocatorias[{tipo}]: {type(exc).__name__}: {exc}")
+                continue
+
+            for c in convocatorias:
+                if not isinstance(c, dict):
+                    continue
+                cod = str(c.get("cod") or "").strip()
+                if not cod:
+                    continue
+
+                proceso_id = f"tipo:{tipo}|conv:{cod}"
+                fecha = str(c.get("fecha") or "").strip() or None
+                descripcion = str(c.get("descripcion") or "").strip() or None
+                ambito = str(c.get("ambitoTerritorio") or "").strip() or None
+
+                records.append(
+                    {
+                        "kind": "proceso",
+                        "proceso_id": proceso_id,
+                        "nombre": descripcion or proceso_id,
+                        "tipo": tipo,
+                        "ambito": ambito,
+                        "estado": None,
+                        "fecha": fecha,
+                        "detalle_url": None,
+                        # Keep the upstream row for traceability/debugging.
+                        "convocatoria": c,
+                    }
+                )
+
+                arch_url = f"{INFOELECTORAL_BASE}archivos/extraccion?{urlencode({'tipoConvocatoria': tipo, 'idConvocatoria': cod})}"
+                try:
+                    archivos = self._get_json(arch_url, timeout)
+                except Exception as exc:  # noqa: BLE001
+                    notes.append(f"archivos[{tipo}:{cod}]: {type(exc).__name__}: {exc}")
+                    continue
+
+                for a in archivos:
+                    if not isinstance(a, dict):
+                        continue
+                    nombre_doc = str(a.get("nombreDoc") or "").strip()
+                    if not nombre_doc:
+                        continue
+                    download_url = str(a.get("url") or "").strip()
+                    if not download_url:
+                        download_url = f"https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/{nombre_doc}"
+
+                    ext = None
+                    if "." in nombre_doc:
+                        ext = nombre_doc.rsplit(".", 1)[-1].strip().lower() or None
+                    ds_name = str(a.get("descripcion") or "").strip() or None
+
+                    records.append(
+                        {
+                            "kind": "proceso_resultado",
+                            "proceso_dataset_id": f"{proceso_id}|doc:{nombre_doc}",
+                            "proceso_id": proceso_id,
+                            "nombre": ds_name or nombre_doc,
+                            "tipo_dato": "archivo_extraccion",
+                            "url": download_url,
+                            "formato": ext,
+                            "fecha": fecha,
+                            "archivo_extraccion": a,
+                        }
+                    )
+
+        return records, notes
 
     @staticmethod
     def _normalize_proceso(row: dict[str, Any]) -> dict[str, Any] | None:
@@ -227,7 +323,15 @@ class InfoelectoralProcesosConnector:
 
         try:
             notes: list[str] = []
-            procesos_rows = self._get_json(resolved_url, timeout)
+            try:
+                procesos_rows = self._get_json(resolved_url, timeout)
+            except HTTPError as exc:
+                # The historical endpoint started returning 404 in this environment.
+                # Keep strict-network behavior (fail on unexpected HTML), but adapt to API drift.
+                if int(getattr(exc, "code", 0) or 0) != 404:
+                    raise
+                procesos_rows = []
+                notes.append(f"default_url_404: {resolved_url}")
             records: list[dict[str, Any]] = []
             for row in procesos_rows:
                 if not isinstance(row, dict):
@@ -237,6 +341,12 @@ class InfoelectoralProcesosConnector:
                     continue
                 records.append(proceso)
                 records.extend(self._extract_dataset_rows(row, proceso["proceso_id"]))
+
+            # Fallback: derive procesos from convocatorias/archivos when /procesos is missing.
+            if not records:
+                derived, derived_notes = self._extract_from_convocatorias(timeout)
+                records.extend(derived)
+                notes.extend(derived_notes)
 
             for rec in [r for r in records if r.get("kind") == "proceso"]:
                 if not any(
