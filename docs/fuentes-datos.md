@@ -103,6 +103,14 @@ Además del inventario operativo (P0/P1/P2), mantenemos un inventario ideal, exh
 
 Ese inventario se muestra también en `explorer-sources` para que el roadmap tenga siempre un “north star”.
 
+## Inventario ideal (ambicioso)
+
+Además del inventario operativo (P0/P1/P2), mantenemos un inventario ideal, exhaustivo y programable, para “lo que dicen vs lo que hacen”:
+
+- `docs/ideal_sources_say_do.json`
+
+Ese inventario se muestra también en `explorer-sources` para que el roadmap tenga siempre un “north star”.
+
 ## Criterio de uso (lean)
 
 1. Empezar solo con `P0` para el MVP.
