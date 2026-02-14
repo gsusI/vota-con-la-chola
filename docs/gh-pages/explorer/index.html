@@ -492,7 +492,7 @@
   <body>
       <div class="page">
         <div class="superheader">
-          <a class="superlink" href="/">← Índice</a>
+          <a class="superlink" href="../">← Índice</a>
           <a
             class="superlink"
             href="https://github.com/gsusI/vota-con-la-chola"
@@ -512,8 +512,8 @@
           <p>Navegacion dinamica por tablas, registros y relaciones (incluye temas/evidencia/posiciones cuando existan).</p>
         </div>
         <nav class="switch">
-          <a href="/graph">Graph</a>
-          <a class="active" href="/explorer">Explorer</a>
+          <a href="../graph/">Graph</a>
+          <a class="active" href="./">Explorer</a>
         </nav>
       </header>
 
@@ -527,10 +527,10 @@
             <input id="tableFilter" type="text" placeholder="Filtrar tablas..." />
             <button id="reloadSchema" class="secondary">Recargar esquema</button>
             <div class="pill-row">
-              <a class="pill" href="/explorer-temas">Vista Temas</a>
-              <a class="pill" href="/explorer?t=topic_positions&tf=topic_">Posiciones</a>
-              <a class="pill" href="/explorer?t=topic_evidence&tf=topic_">Evidencia</a>
-              <a class="pill" href="/explorer?t=topics&tf=topic">Temas</a>
+              <a class="pill" href="../explorer-temas/">Vista Temas</a>
+              <a class="pill" href="./?t=topic_positions&tf=topic_">Posiciones</a>
+              <a class="pill" href="./?t=topic_evidence&tf=topic_">Evidencia</a>
+              <a class="pill" href="./?t=topics&tf=topic">Temas</a>
             </div>
           </div>
           <div id="tables" class="list"></div>
@@ -1754,15 +1754,29 @@
       const initialSnap = snapshotFromLocation() || (history.state && history.state.explorer ? history.state.explorer : null);
       if (initialSnap) applySnapshot(initialSnap);
 
-      loadSchema()
-        .then(() => {
-          if (initialSnap) {
-            return restoreFromHistory(initialSnap);
-          }
-          pushHistory("replace");
-          return null;
-        })
-        .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      const isLocalApiHost = (() => {
+        const host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
+      })();
+
+      if (!isLocalApiHost) {
+        els.tables.innerHTML =
+          "<div class='meta'>Esta vista requiere el API local (SQLite). En GitHub Pages es solo informativa.</div>" +
+          "<div class='meta' style='margin-top:6px'>Ejecuta <span class='mono'>just explorer</span> y abre <span class='mono'>http://127.0.0.1:9010/explorer</span>.</div>";
+        setDetailHtml(
+          "<div class='meta'><strong>Modo snapshot</strong>: el Explorer SQL no se puede ejecutar sin backend.</div>"
+        );
+      } else {
+        loadSchema()
+          .then(() => {
+            if (initialSnap) {
+              return restoreFromHistory(initialSnap);
+            }
+            pushHistory("replace");
+            return null;
+          })
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      }
     </script>
   </body>
 </html>

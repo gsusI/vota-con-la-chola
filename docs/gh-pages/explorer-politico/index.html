@@ -960,7 +960,7 @@
   <body>
     <div class="stadium">
       <div class="superheader">
-        <a class="superlink" href="/">← Índice</a>
+        <a class="superlink" href="../">← Índice</a>
         <a
           class="superlink"
           href="https://github.com/gsusI/vota-con-la-chola"
@@ -1255,7 +1255,7 @@
         names: [row.mandate_territory_name, row.institution_territory_name, row.person_territory_name].join(" | "),
       });
 
-      const EXPLORER_SPORTS_VERSION = "1.1.12";
+      const EXPLORER_POLITICO_VERSION = "1.1.12";
       const APP_QUERY = new URLSearchParams(window.location.search);
       const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
       const STATIC_DATA_DIR = "data";
@@ -1480,7 +1480,7 @@
       };
 
       const updateUiVersion = () => {
-        const versionLabel = `v${EXPLORER_SPORTS_VERSION}`;
+        const versionLabel = `v${EXPLORER_POLITICO_VERSION}`;
         if (refs.appTitle) {
           refs.appTitle.innerHTML = `Explorador político territorial <span class="version-chip">${versionLabel}</span>`;
         }
@@ -3872,11 +3872,11 @@
           renderTeamList();
           return;
         }
-        if (window.__sportsTreemapRaf) {
-          cancelAnimationFrame(window.__sportsTreemapRaf);
+        if (window.__politicoTreemapRaf) {
+          cancelAnimationFrame(window.__politicoTreemapRaf);
         }
-        window.__sportsTreemapRaf = requestAnimationFrame(() => {
-          window.__sportsTreemapRaf = null;
+        window.__politicoTreemapRaf = requestAnimationFrame(() => {
+          window.__politicoTreemapRaf = null;
           if (app.league === "all" && !app.selectedPartyId) {
             renderTeamList();
           }
@@ -4278,7 +4278,19 @@
           renderLeagues();
           await render({ forceReload: true });
         } catch (error) {
-          refs.leagueLoading.textContent = `Error iniciando: ${error.message}`;
+          const msg = error?.message || String(error);
+          const isStatic = !isLocalApiHost && !API_BASE_OVERRIDE;
+          if (isStatic && String(msg).includes("HTTP 404")) {
+            refs.leagueLoading.textContent = "Modo snapshot (limitado)";
+            refs.detailView.innerHTML =
+              "<div style='padding:14px'>" +
+              "<div style='font-weight:800'>Este explorador necesita un backend</div>" +
+              "<div class='muted' style='margin-top:6px'>En GitHub Pages no publicamos el snapshot completo porque es demasiado grande.</div>" +
+              "<div class='muted' style='margin-top:6px'>Ejecuta <span class='mono'>just explorer</span> y abre <span class='mono'>http://127.0.0.1:9010/explorer-politico</span>.</div>" +
+              "</div>";
+            return;
+          }
+          refs.leagueLoading.textContent = `Error iniciando: ${msg}`;
           refs.detailView.textContent = "No se pudo iniciar la UI.";
         }
       };

@@ -170,50 +170,68 @@
           </a>
         </div>
         <h1>Exploradores de Vota Con La Chola</h1>
-        <p class="sub">Vistas disponibles: grafo, explorer, votaciones, fuentes, y (en roadmap) temas/posiciones con evidencia.</p>
+        <p class="sub">
+          Objetivo: comparar <strong>lo que dicen</strong> vs <strong>lo que hacen</strong> por <strong>tema high-stakes</strong> y <strong>scope</strong>, con evidencia auditable y calidad explícita.
+        </p>
 
         <div class="grid">
           <a class="card" href="graph/">
             <p class="title">
               <strong>Graph Explorer</strong>
+              <span class="badge">Snapshot</span>
             </p>
             <p class="desc">Vista de grafo con nodos, vínculos y navegación por entidades.</p>
             <p class="meta">/graph</p>
           </a>
 
           <a class="card" href="explorer/">
-            <p class="title"><strong>Explorer</strong></p>
-            <p class="desc">Navegador tabular tradicional de entidades y relaciones.</p>
+            <p class="title">
+              <strong>Explorer SQL</strong>
+              <span class="badge">Local API</span>
+            </p>
+            <p class="desc">Navegador tabular de tablas/relaciones en SQLite (para inspección y debugging).</p>
             <p class="meta">/explorer</p>
           </a>
 
           <a class="card" href="explorer-temas/">
-            <p class="title"><strong>Temas y Posiciones</strong></p>
-            <p class="desc">Modelo analítico: temas high-stakes, evidencia (dicho/hecho) y posiciones agregadas por scope.</p>
+            <p class="title">
+              <strong>Temas y Posiciones</strong>
+              <span class="badge">Says vs Does</span>
+            </p>
+            <p class="desc">High-stakes topics por scope, evidencia (said/did) y posicionamiento por político con divergencias.</p>
             <p class="meta">/explorer-temas</p>
           </a>
 
           <a class="card" href="explorer-politico/">
-            <p class="title"><strong>Radar Político</strong></p>
-            <p class="desc">Vista jerárquica de territorios, partidos, equipos y políticos por nivel.</p>
+            <p class="title">
+              <strong>Radar Político</strong>
+              <span class="badge">Local API</span>
+            </p>
+            <p class="desc">Navega políticos por territorio/institución/partido (snapshots completos no se publican por tamaño).</p>
             <p class="meta">/explorer-politico</p>
           </a>
 
           <a class="card" href="explorer-votaciones/">
-            <p class="title"><strong>Explorador de Votaciones</strong></p>
+            <p class="title">
+              <strong>Explorador de Votaciones</strong>
+              <span class="badge">Snapshot</span>
+            </p>
             <p class="desc">Consulta y compara votaciones parlamentarias con filtros y detalle.</p>
             <p class="meta">/explorer-votaciones</p>
           </a>
 
           <a class="card" href="explorer-sources/">
-            <p class="title"><strong>Fuente de Datos</strong></p>
-            <p class="desc">Roadmap de ingestas, estado de fuentes y progreso operativo.</p>
+            <p class="title">
+              <strong>Fuentes y Calidad</strong>
+              <span class="badge">Snapshot</span>
+            </p>
+            <p class="desc">Roadmap: fuentes ideales (says vs does), conectores implementados, calidad y progreso reproducible.</p>
             <p class="meta">/explorer-sources</p>
           </a>
         </div>
 
         <p class="note">
-          Cada tarjeta abre una vista específica desde esta página.
+          Nota: <strong>Snapshot</strong> funciona en GitHub Pages. <strong>Local API</strong> requiere ejecutar el servidor local para leer SQLite.
         </p>
       </section>
     </main>
