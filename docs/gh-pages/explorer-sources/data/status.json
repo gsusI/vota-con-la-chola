@@ -1,0 +1,2785 @@
+{
+  "db_path": "etl/data/staging/politicos-es.db",
+  "generated_at": "2026-02-14T17:39:23+00:00",
+  "summary": {
+    "desired": 29,
+    "present": 29,
+    "missing": 0,
+    "extra": 0,
+    "not_run": 0,
+    "running": 0,
+    "ok": 26,
+    "partial": 0,
+    "error": 0,
+    "degraded": 3,
+    "unknown": 0,
+    "not_in_catalog": 0,
+    "desired_progress": {
+      "loaded": 81941,
+      "target": 56458,
+      "percent": 100
+    },
+    "states": [
+      "degraded",
+      "ok"
+    ],
+    "sql": {
+      "todo": 0,
+      "partial": 4,
+      "done": 25
+    },
+    "tracker": {
+      "items_total": 45,
+      "unmapped": 18,
+      "todo": 0,
+      "partial": 5,
+      "done": 23
+    }
+  },
+  "analytics": {
+    "topics": {
+      "topics_total": 0,
+      "topic_sets_total": 0,
+      "topic_sets_active": 0,
+      "topic_set_topics_total": 0,
+      "high_stakes_total": 0
+    },
+    "evidence": {
+      "topic_evidence_total": 0,
+      "topic_evidence_with_topic": 0,
+      "topic_evidence_with_topic_pct": 0.0,
+      "topic_evidence_with_date": 0,
+      "topic_evidence_with_date_pct": 0.0
+    },
+    "positions": {
+      "topic_positions_total": 0,
+      "topic_positions_with_evidence": 0,
+      "topic_positions_with_evidence_pct": 0.0
+    }
+  },
+  "tracker": {
+    "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md",
+    "exists": true,
+    "items": [
+      {
+        "tipo_dato": "Representantes y mandatos (Congreso)",
+        "dominio": "Nacional",
+        "fuentes_objetivo": "Congreso OpenData Diputados",
+        "estado": "DONE",
+        "bloque": "Mejorar calidad de campos opcionales",
+        "source_ids": [
+          "congreso_diputados"
+        ],
+        "scope": "nacional",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Cortes de Aragon)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Cortes de Aragon: diputados (XI)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "cortes_aragon_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Senado)",
+        "dominio": "Nacional",
+        "fuentes_objetivo": "Senado OpenData XML (grupos + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de aliases y umbral minimo",
+        "source_ids": [
+          "senado_senadores"
+        ],
+        "scope": "nacional",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Europarl)",
+        "dominio": "Europeo",
+        "fuentes_objetivo": "Europarl MEP XML",
+        "estado": "DONE",
+        "bloque": "Mejorar completitud de fechas/metadatos",
+        "source_ids": [
+          "europarl_meps"
+        ],
+        "scope": "europeo",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y cargos locales",
+        "dominio": "Municipal",
+        "fuentes_objetivo": "RED SARA Concejales",
+        "estado": "DONE",
+        "bloque": "Definir umbral minimo y criterio de cobertura",
+        "source_ids": [
+          "municipal_concejales"
+        ],
+        "scope": "municipal",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Asamblea de Madrid)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Madrid OpenData Ocupaciones",
+        "estado": "DONE",
+        "bloque": "Definir umbral minimo y aclarar semantica de `is_active`",
+        "source_ids": [
+          "asamblea_madrid_ocupaciones"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Asamblea de Ceuta)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Ceuta: miembros (2023/2027)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "asamblea_ceuta_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Asamblea de Melilla)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Melilla: diputados (2023/2027)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "asamblea_melilla_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Asamblea de Extremadura)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Extremadura (dipslegis + paginacion)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "asamblea_extremadura_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Asamblea Murcia)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea Regional de Murcia: diputados (listado + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "asamblea_murcia_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (JGPA Asturias)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Junta General del Principado de Asturias (diputados)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "jgpa_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento de Canarias)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Canarias: diputados + grupos (API oficial)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlamento_canarias_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento de Cantabria)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Cantabria",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlamento_cantabria_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento de Galicia)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Galicia: deputados (fichas HTML)",
+        "estado": "PARTIAL",
+        "bloque": "Bloqueado por WAF/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>`",
+        "source_ids": [
+          "parlamento_galicia_deputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlament IB)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlament de les Illes Balears: diputats (listado + fichas via webGTP)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlament_balears_diputats"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento de La Rioja)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de La Rioja: diputados (listado + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlamento_larioja_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlament de Catalunya)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlament de Catalunya (composicio actual + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlament_catalunya_diputats"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Corts Valencianes)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Corts Valencianes (listado + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "corts_valencianes_diputats"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Cortes CLM)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Cortes de Castilla-La Mancha (listado + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "cortes_clm_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Cortes CyL)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Cortes de Castilla y Leon (PlenoAlfabetico)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "cortes_cyl_procuradores"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento de Andalucia)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Andalucia (listado + fichas)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlamento_andalucia_diputados"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento de Navarra)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Navarra: parlamentarios forales (fichas HTML)",
+        "estado": "PARTIAL",
+        "bloque": "Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>`",
+        "source_ids": [
+          "parlamento_navarra_parlamentarios_forales"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Representantes y mandatos (Parlamento Vasco)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento Vasco (listado ACT)",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing y umbral minimo",
+        "source_ids": [
+          "parlamento_vasco_parlamentarios"
+        ],
+        "scope": "autonomico",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Procesos electorales y resultados",
+        "dominio": "Electoral",
+        "fuentes_objetivo": "Infoelectoral descargas/procesos",
+        "estado": "DONE",
+        "bloque": "Hardening de parsing de campos opcionales en procesos/resultados",
+        "source_ids": [
+          "infoelectoral_descargas",
+          "infoelectoral_procesos"
+        ],
+        "scope": "electoral",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Convocatorias y estado electoral",
+        "dominio": "Electoral",
+        "fuentes_objetivo": "Junta Electoral Central",
+        "estado": "TODO",
+        "bloque": "Falta scraper y normalizacion",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Marco legal electoral",
+        "dominio": "Legal",
+        "fuentes_objetivo": "BOE API",
+        "estado": "TODO",
+        "bloque": "Falta conector legal y modelo de documentos",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
+        "dominio": "Ejecutivo",
+        "fuentes_objetivo": "La Moncloa: referencias + RSS",
+        "estado": "TODO",
+        "bloque": "Scraper + normalizacion; validar acuerdos y normas contra BOE cuando exista publicacion",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Contratacion publica (Espana)",
+        "dominio": "Dinero",
+        "fuentes_objetivo": "PLACSP: sindicaci\u00f3n/ATOM (CODICE)",
+        "estado": "TODO",
+        "bloque": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Subvenciones y ayudas (Espana)",
+        "dominio": "Dinero",
+        "fuentes_objetivo": "BDNS/SNPSAP: API",
+        "estado": "TODO",
+        "bloque": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Transparencia: agendas altos cargos",
+        "dominio": "Transparencia",
+        "fuentes_objetivo": "La Moncloa + Portal de Transparencia (agendas)",
+        "estado": "TODO",
+        "bloque": "Falta ingesta de agendas; KPI: % con fecha + actor resuelto; no inferir accion sin evidencia",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Transparencia: declaraciones/intereses",
+        "dominio": "Integridad",
+        "fuentes_objetivo": "Portal Transparencia: declaraciones bienes/derechos",
+        "estado": "TODO",
+        "bloque": "Falta modelo y pipeline de declaraciones; KPI: versionado + trazabilidad 100%",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Votaciones Congreso",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Congreso votaciones",
+        "estado": "PARTIAL",
+        "bloque": "Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; publish can\u00f3nico disponible (`scripts/publicar_votaciones_es.py`), pendiente corrida completa + KPIs",
+        "source_ids": [
+          "congreso_votaciones"
+        ],
+        "scope": "nacional",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Iniciativas Congreso",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Congreso iniciativas",
+        "estado": "PARTIAL",
+        "bloque": "Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; linking a `parl_vote_events` mejorado (regex + titulo normalizado), pendiente KPIs globales",
+        "source_ids": [
+          "congreso_iniciativas"
+        ],
+        "scope": "nacional",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Intervenciones Congreso",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Congreso intervenciones",
+        "estado": "TODO",
+        "bloque": "Falta conector y modelo de evidencia textual",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Votaciones Senado y mociones",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Senado votaciones/mociones",
+        "estado": "PARTIAL",
+        "bloque": "`senado_votaciones` carga eventos + totales + roll-call (host `www.senado.es`); `senado_iniciativas` (tipoFich=9) carga temas/expedientes y permite linking determinista `(legislature, expediente)`; publish can\u00f3nico disponible, pendiente KPIs y cobertura `person_id`",
+        "source_ids": [
+          "senado_votaciones"
+        ],
+        "scope": "nacional",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Referencias territoriales",
+        "dominio": "Catalogos",
+        "fuentes_objetivo": "REL, INE, IGN",
+        "estado": "TODO",
+        "bloque": "Falta catalogo canonico territorial",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: legislacion y documentos",
+        "dominio": "UE",
+        "fuentes_objetivo": "EUR-Lex / Cellar (SPARQL/REST)",
+        "estado": "TODO",
+        "bloque": "Falta conector UE legal; linking a expedientes y textos vigentes",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: votaciones (roll-call)",
+        "dominio": "UE",
+        "fuentes_objetivo": "Parlamento Europeo: votes XML/PDF + Open Data Portal",
+        "estado": "TODO",
+        "bloque": "Falta ingesta de votos + mapeo a MEPs; KPI: % con actor resuelto",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: contratacion publica",
+        "dominio": "UE",
+        "fuentes_objetivo": "TED API (notices)",
+        "estado": "TODO",
+        "bloque": "Falta ingesta; KPI: cobertura y trazabilidad por notice",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: lobbying/influencia",
+        "dominio": "UE",
+        "fuentes_objetivo": "EU Transparency Register",
+        "estado": "TODO",
+        "bloque": "Falta ingesta y modelo de entidades; linking cuando existan meetings/agendas publicas",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Posiciones declaradas (programas)",
+        "dominio": "Editorial",
+        "fuentes_objetivo": "Webs/programas de partidos",
+        "estado": "TODO",
+        "bloque": "Falta pipeline semiestructurado + revision humana",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Taxonomia de temas (alto impacto por scope)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Definicion de temas + stake scoring por institucion/territorio/mandato",
+        "estado": "TODO",
+        "bloque": "Falta seed inicial + reglas de versionado + KPI: cobertura de temas high-stakes por scope",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Evidencia textual (para posiciones declaradas)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Diarios de sesiones, intervenciones, preguntas, notas oficiales",
+        "estado": "TODO",
+        "bloque": "Falta conector(es) + modelo canonico de evidencia textual + KPI: % evidencia con `person_id` y timestamp",
+        "source_ids": [],
+        "scope": "",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Clasificacion evidencia -> tema (trazable)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Reglas deterministas + se\u00f1ales ML opcionales (siempre auditables)",
+        "estado": "TODO",
+        "bloque": "Falta pipeline + KPI: % evidencia con `topic_id` + distribucion de confianza/errores",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Posiciones por tema (politico x scope)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Agregacion reproducible + drill-down a evidencia",
+        "estado": "TODO",
+        "bloque": "Falta agregador + KPI: % politicos con se\u00f1al suficiente por tema high-stakes + sesgo por tipo de evidencia",
+        "source_ids": [],
+        "scope": "",
+        "scope_inferred": false
+      }
+    ],
+    "unmapped": [
+      {
+        "tipo_dato": "Convocatorias y estado electoral",
+        "dominio": "Electoral",
+        "fuentes_objetivo": "Junta Electoral Central",
+        "estado": "TODO",
+        "bloque": "Falta scraper y normalizacion",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Marco legal electoral",
+        "dominio": "Legal",
+        "fuentes_objetivo": "BOE API",
+        "estado": "TODO",
+        "bloque": "Falta conector legal y modelo de documentos",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
+        "dominio": "Ejecutivo",
+        "fuentes_objetivo": "La Moncloa: referencias + RSS",
+        "estado": "TODO",
+        "bloque": "Scraper + normalizacion; validar acuerdos y normas contra BOE cuando exista publicacion",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Contratacion publica (Espana)",
+        "dominio": "Dinero",
+        "fuentes_objetivo": "PLACSP: sindicaci\u00f3n/ATOM (CODICE)",
+        "estado": "TODO",
+        "bloque": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Subvenciones y ayudas (Espana)",
+        "dominio": "Dinero",
+        "fuentes_objetivo": "BDNS/SNPSAP: API",
+        "estado": "TODO",
+        "bloque": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Transparencia: agendas altos cargos",
+        "dominio": "Transparencia",
+        "fuentes_objetivo": "La Moncloa + Portal de Transparencia (agendas)",
+        "estado": "TODO",
+        "bloque": "Falta ingesta de agendas; KPI: % con fecha + actor resuelto; no inferir accion sin evidencia",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Transparencia: declaraciones/intereses",
+        "dominio": "Integridad",
+        "fuentes_objetivo": "Portal Transparencia: declaraciones bienes/derechos",
+        "estado": "TODO",
+        "bloque": "Falta modelo y pipeline de declaraciones; KPI: versionado + trazabilidad 100%",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Intervenciones Congreso",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Congreso intervenciones",
+        "estado": "TODO",
+        "bloque": "Falta conector y modelo de evidencia textual",
+        "source_ids": [],
+        "scope": "nacional",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Referencias territoriales",
+        "dominio": "Catalogos",
+        "fuentes_objetivo": "REL, INE, IGN",
+        "estado": "TODO",
+        "bloque": "Falta catalogo canonico territorial",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: legislacion y documentos",
+        "dominio": "UE",
+        "fuentes_objetivo": "EUR-Lex / Cellar (SPARQL/REST)",
+        "estado": "TODO",
+        "bloque": "Falta conector UE legal; linking a expedientes y textos vigentes",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: votaciones (roll-call)",
+        "dominio": "UE",
+        "fuentes_objetivo": "Parlamento Europeo: votes XML/PDF + Open Data Portal",
+        "estado": "TODO",
+        "bloque": "Falta ingesta de votos + mapeo a MEPs; KPI: % con actor resuelto",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: contratacion publica",
+        "dominio": "UE",
+        "fuentes_objetivo": "TED API (notices)",
+        "estado": "TODO",
+        "bloque": "Falta ingesta; KPI: cobertura y trazabilidad por notice",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "UE: lobbying/influencia",
+        "dominio": "UE",
+        "fuentes_objetivo": "EU Transparency Register",
+        "estado": "TODO",
+        "bloque": "Falta ingesta y modelo de entidades; linking cuando existan meetings/agendas publicas",
+        "source_ids": [],
+        "scope": "europeo",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Posiciones declaradas (programas)",
+        "dominio": "Editorial",
+        "fuentes_objetivo": "Webs/programas de partidos",
+        "estado": "TODO",
+        "bloque": "Falta pipeline semiestructurado + revision humana",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Taxonomia de temas (alto impacto por scope)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Definicion de temas + stake scoring por institucion/territorio/mandato",
+        "estado": "TODO",
+        "bloque": "Falta seed inicial + reglas de versionado + KPI: cobertura de temas high-stakes por scope",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Evidencia textual (para posiciones declaradas)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Diarios de sesiones, intervenciones, preguntas, notas oficiales",
+        "estado": "TODO",
+        "bloque": "Falta conector(es) + modelo canonico de evidencia textual + KPI: % evidencia con `person_id` y timestamp",
+        "source_ids": [],
+        "scope": "",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Clasificacion evidencia -> tema (trazable)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Reglas deterministas + se\u00f1ales ML opcionales (siempre auditables)",
+        "estado": "TODO",
+        "bloque": "Falta pipeline + KPI: % evidencia con `topic_id` + distribucion de confianza/errores",
+        "source_ids": [],
+        "scope": "territorial",
+        "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Posiciones por tema (politico x scope)",
+        "dominio": "Analitica",
+        "fuentes_objetivo": "Agregacion reproducible + drill-down a evidencia",
+        "estado": "TODO",
+        "bloque": "Falta agregador + KPI: % politicos con se\u00f1al suficiente por tema high-stakes + sesgo por tipo de evidencia",
+        "source_ids": [],
+        "scope": "",
+        "scope_inferred": false
+      }
+    ]
+  },
+  "actions": [
+    {
+      "kind": "done_zero_real",
+      "priority": "P0",
+      "scope": "",
+      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): cortes_aragon_diputados",
+      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
+      "source_ids": [
+        "cortes_aragon_diputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source cortes_aragon_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "done_zero_real",
+      "priority": "P0",
+      "scope": "",
+      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): infoelectoral_procesos",
+      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
+      "source_ids": [
+        "infoelectoral_procesos"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.db --source infoelectoral_procesos --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "ingest_error",
+      "priority": "P0",
+      "scope": "",
+      "title": "Ingesta en error: asamblea_ceuta_diputados",
+      "details": "Error: foreign key check fallado en asamblea_ceuta_diputados: 44646 violaciones (ej: parl_vote_member_votes.337044 -> persons[1], parl_vote_member_votes.337051 -> persons[1], parl_vote_member_votes.337082 -> persons[1], parl_vote_member_votes.337134 -> persons[1], parl_vote_member_votes.337190 -> persons[1], parl_vote_member_votes.337191 -> persons[1], parl_vote_member_votes.337203 -> persons[1], parl_vote_member_votes.337226 -> persons[1], parl_vote_member_votes.337243 -> persons[1], parl_vote_member_votes.337253 -> persons[1], ... (+44636 more))",
+      "source_ids": [
+        "asamblea_ceuta_diputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source asamblea_ceuta_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "ingest_error",
+      "priority": "P0",
+      "scope": "",
+      "title": "Ingesta en error: congreso_diputados",
+      "details": "Error: foreign key check fallado en congreso_diputados: 44646 violaciones (ej: parl_vote_member_votes.337044 -> persons[1], parl_vote_member_votes.337051 -> persons[1], parl_vote_member_votes.337082 -> persons[1], parl_vote_member_votes.337134 -> persons[1], parl_vote_member_votes.337190 -> persons[1], parl_vote_member_votes.337191 -> persons[1], parl_vote_member_votes.337203 -> persons[1], parl_vote_member_votes.337226 -> persons[1], parl_vote_member_votes.337243 -> persons[1], parl_vote_member_votes.337253 -> persons[1], ... (+44636 more))",
+      "source_ids": [
+        "congreso_diputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source congreso_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "ingest_error",
+      "priority": "P0",
+      "scope": "",
+      "title": "Ingesta en error: senado_votaciones",
+      "details": "manual-abort: senate vote pull too slow/hung",
+      "source_ids": [
+        "senado_votaciones"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db etl/data/staging/politicos-es.db --source senado_votaciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "",
+      "title": "TODO: Agregacion reproducible + drill-down a evidencia",
+      "details": "Falta agregador + KPI: % politicos con se\u00f1al suficiente por tema high-stakes + sesgo por tipo de evidencia",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: BDNS/SNPSAP: API",
+      "details": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: BOE API",
+      "details": "Falta conector legal y modelo de documentos",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: Congreso intervenciones",
+      "details": "Falta conector y modelo de evidencia textual",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "territorial",
+      "title": "TODO: Definicion de temas + stake scoring por institucion/territorio/mandato",
+      "details": "Falta seed inicial + reglas de versionado + KPI: cobertura de temas high-stakes por scope",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "",
+      "title": "TODO: Diarios de sesiones, intervenciones, preguntas, notas oficiales",
+      "details": "Falta conector(es) + modelo canonico de evidencia textual + KPI: % evidencia con `person_id` y timestamp",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "europeo",
+      "title": "TODO: EU Transparency Register",
+      "details": "Falta ingesta y modelo de entidades; linking cuando existan meetings/agendas publicas",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "europeo",
+      "title": "TODO: EUR-Lex / Cellar (SPARQL/REST)",
+      "details": "Falta conector UE legal; linking a expedientes y textos vigentes",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: Junta Electoral Central",
+      "details": "Falta scraper y normalizacion",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: La Moncloa + Portal de Transparencia (agendas)",
+      "details": "Falta ingesta de agendas; KPI: % con fecha + actor resuelto; no inferir accion sin evidencia",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: La Moncloa: referencias + RSS",
+      "details": "Scraper + normalizacion; validar acuerdos y normas contra BOE cuando exista publicacion",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "nacional",
+      "title": "TODO: PLACSP: sindicaci\u00f3n/ATOM (CODICE)",
+      "details": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "europeo",
+      "title": "TODO: Parlamento Europeo: votes XML/PDF + Open Data Portal",
+      "details": "Falta ingesta de votos + mapeo a MEPs; KPI: % con actor resuelto",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "territorial",
+      "title": "TODO: Portal Transparencia: declaraciones bienes/derechos",
+      "details": "Falta modelo y pipeline de declaraciones; KPI: versionado + trazabilidad 100%",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "territorial",
+      "title": "TODO: REL, INE, IGN",
+      "details": "Falta catalogo canonico territorial",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "territorial",
+      "title": "TODO: Reglas deterministas + se\u00f1ales ML opcionales (siempre auditables)",
+      "details": "Falta pipeline + KPI: % evidencia con `topic_id` + distribucion de confianza/errores",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "europeo",
+      "title": "TODO: TED API (notices)",
+      "details": "Falta ingesta; KPI: cobertura y trazabilidad por notice",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P0",
+      "scope": "territorial",
+      "title": "TODO: Webs/programas de partidos",
+      "details": "Falta pipeline semiestructurado + revision humana",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "nacional",
+      "title": "PARTIAL: Congreso iniciativas",
+      "details": "Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; linking a `parl_vote_events` mejorado (regex + titulo normalizado), pendiente KPIs globales",
+      "source_ids": [
+        "congreso_iniciativas"
+      ],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "nacional",
+      "title": "PARTIAL: Congreso votaciones",
+      "details": "Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; publish can\u00f3nico disponible (`scripts/publicar_votaciones_es.py`), pendiente corrida completa + KPIs",
+      "source_ids": [
+        "congreso_votaciones"
+      ],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "autonomico",
+      "title": "PARTIAL: Parlamento de Galicia: deputados (fichas HTML)",
+      "details": "Bloqueado por WAF/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>`",
+      "source_ids": [
+        "parlamento_galicia_deputados"
+      ],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "autonomico",
+      "title": "PARTIAL: Parlamento de Navarra: parlamentarios forales (fichas HTML)",
+      "details": "Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>`",
+      "source_ids": [
+        "parlamento_navarra_parlamentarios_forales"
+      ],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "nacional",
+      "title": "PARTIAL: Senado votaciones/mociones",
+      "details": "`senado_votaciones` carga eventos + totales + roll-call (host `www.senado.es`); `senado_iniciativas` (tipoFich=9) carga temas/expedientes y permite linking determinista `(legislature, expediente)`; publish can\u00f3nico disponible, pendiente KPIs y cobertura `person_id`",
+      "source_ids": [
+        "senado_votaciones"
+      ],
+      "commands": []
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "asamblea_ceuta_diputados",
+      "domain": "politicos",
+      "source_name": "Asamblea de Ceuta - Miembros (Legislatura 2023/2027)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.ceuta.es/gobiernodeceuta/index.php/el-gobierno/la-asamblea",
+      "institution_name": "Asamblea de Ceuta",
+      "role_title": "Diputado/a",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/asamblea_ceuta_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Asamblea de Ceuta)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Ceuta: miembros (2023/2027)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "degraded",
+      "runs_total": 2,
+      "runs_ok": 1,
+      "last_status": "error",
+      "last_loaded": 0,
+      "max_loaded_any": 25,
+      "max_loaded_network": 25,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-14T14:21:54+00:00",
+      "last_seen_at": "2026-02-14T14:22:00+00:00",
+      "last_source_url": "https://www.ceuta.es/gobiernodeceuta/index.php/el-gobierno/la-asamblea",
+      "last_message": "Error: foreign key check fallado en asamblea_ceuta_diputados: 44646 violaciones (ej: parl_vote_member_votes.337044 -> persons[1], parl_vote_member_votes.337051 -> persons[1], parl_vote_member_votes.337082 -> persons[1], parl_vote_member_votes.337134 -> persons[1], parl_vote_member_votes.337190 -> persons[1], parl_vote_member_votes.337191 -> persons[1], parl_vote_member_votes.337203 -> persons[1], parl_vote_member_votes.337226 -> persons[1], parl_vote_member_votes.337243 -> persons[1], parl_vote_member_votes.337253 -> persons[1], ... (+44636 more))",
+      "progress": {
+        "loaded": 0,
+        "target": 20,
+        "percent": 0
+      },
+      "mandates": 25,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 25,
+        "counts": {
+          "mandates": 25,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "asamblea_extremadura_diputados",
+      "domain": "politicos",
+      "source_name": "Asamblea de Extremadura - Diputadas/os (XII Legislatura)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.asambleaex.es/dipslegis",
+      "institution_name": "Asamblea de Extremadura",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/asamblea_extremadura_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Asamblea de Extremadura)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Extremadura (dipslegis + paginacion)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 65,
+      "max_loaded_any": 65,
+      "max_loaded_network": 65,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:46:30+00:00",
+      "last_seen_at": "2026-02-13T07:46:32+00:00",
+      "last_source_url": "https://www.asambleaex.es/dipslegis",
+      "last_message": "Ingesta completada: 65/65 registros validos",
+      "progress": {
+        "loaded": 65,
+        "target": 50,
+        "percent": 100
+      },
+      "mandates": 65,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 65,
+        "counts": {
+          "mandates": 65,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "asamblea_madrid_ocupaciones",
+      "domain": "politicos",
+      "source_name": "Asamblea de Madrid - Ocupaciones (cargos, incluidos diputados)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://ctyp.asambleamadrid.es/static/doc/opendata/SGP_ADMIN.OPENDATA_OCUPACIONES_ASAMBLEA.csv",
+      "institution_name": "Asamblea de Madrid",
+      "role_title": "Cargo",
+      "level": "autonomico",
+      "format": "csv",
+      "fallback_file": "etl/data/raw/samples/asamblea_madrid_ocupaciones_sample.csv",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Asamblea de Madrid)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Madrid OpenData Ocupaciones",
+        "bloque": "Definir umbral minimo y aclarar semantica de `is_active`"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 3,
+      "runs_ok": 3,
+      "last_status": "ok",
+      "last_loaded": 9188,
+      "max_loaded_any": 9188,
+      "max_loaded_network": 9188,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:46:32+00:00",
+      "last_seen_at": "2026-02-13T07:46:35+00:00",
+      "last_source_url": "https://ctyp.asambleamadrid.es/static/doc/opendata/SGP_ADMIN.OPENDATA_OCUPACIONES_ASAMBLEA.csv",
+      "last_message": "Ingesta completada: 9188/9285 registros validos",
+      "progress": {
+        "loaded": 9188,
+        "target": 5000,
+        "percent": 100
+      },
+      "mandates": 9188,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 9188,
+        "counts": {
+          "mandates": 9188,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "asamblea_melilla_diputados",
+      "domain": "politicos",
+      "source_name": "Asamblea de Melilla - Miembros (Legislatura 2023/2027)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
+      "institution_name": "Asamblea de Melilla",
+      "role_title": "Diputado/a",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Asamblea de Melilla)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea de Melilla: diputados (2023/2027)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 3,
+      "runs_ok": 3,
+      "last_status": "ok",
+      "last_loaded": 26,
+      "max_loaded_any": 26,
+      "max_loaded_network": 26,
+      "network_fetches": 1,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T07:46:35+00:00",
+      "last_seen_at": "2026-02-13T07:46:38+00:00",
+      "last_source_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
+      "last_message": "Ingesta completada: 26/26 registros validos",
+      "progress": {
+        "loaded": 26,
+        "target": 20,
+        "percent": 100
+      },
+      "mandates": 26,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 26,
+        "counts": {
+          "mandates": 26,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "asamblea_murcia_diputados",
+      "domain": "politicos",
+      "source_name": "Asamblea Regional de Murcia - Diputados",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.asambleamurcia.es/diputados",
+      "institution_name": "Asamblea Regional de Murcia",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/asamblea_murcia_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Asamblea Murcia)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Asamblea Regional de Murcia: diputados (listado + fichas)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 54,
+      "max_loaded_any": 54,
+      "max_loaded_network": 54,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:46:38+00:00",
+      "last_seen_at": "2026-02-13T07:47:17+00:00",
+      "last_source_url": "https://www.asambleamurcia.es/diputados",
+      "last_message": "Ingesta completada: 54/54 registros validos",
+      "progress": {
+        "loaded": 54,
+        "target": 35,
+        "percent": 100
+      },
+      "mandates": 54,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 54,
+        "counts": {
+          "mandates": 54,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "cortes_aragon_diputados",
+      "domain": "politicos",
+      "source_name": "Cortes de Aragon - Diputados (XI Legislatura)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.cortesaragon.es/Quienes-somos.2250.0.html?no_cache=1&tx_t3comunicacion_pi3%5Bnumleg%5D=11&tx_t3comunicacion_pi3%5Btipinf%5D=3&tx_t3comunicacion_pi3%5Buidcom%5D=-2#verContenido",
+      "institution_name": "Cortes de Aragon",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/cortes_aragon_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Cortes de Aragon)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Cortes de Aragon: diputados (XI)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "PARTIAL",
+      "state": "ok",
+      "runs_total": 8,
+      "runs_ok": 3,
+      "last_status": "ok",
+      "last_loaded": 75,
+      "max_loaded_any": 75,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T12:20:03+00:00",
+      "last_seen_at": "2026-02-13T12:21:04+00:00",
+      "last_source_url": "https://www.cortesaragon.es/Quienes-somos.2250.0.html?no_cache=1&tx_t3comunicacion_pi3%5Bnumleg%5D=11&tx_t3comunicacion_pi3%5Btipinf%5D=3&tx_t3comunicacion_pi3%5Buidcom%5D=-2#verContenido",
+      "last_message": "Ingesta completada: 75/75 registros validos (network-error-fallback: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>)",
+      "progress": {
+        "loaded": 75,
+        "target": 50,
+        "percent": 100
+      },
+      "mandates": 75,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 75,
+        "counts": {
+          "mandates": 75,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": true,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "cortes_cyl_procuradores",
+      "domain": "politicos",
+      "source_name": "Cortes de Castilla y Leon - Procuradores y Procuradoras (XI Legislatura)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.ccyl.es/Organizacion/PlenoAlfabetico",
+      "institution_name": "Cortes de Castilla y Leon",
+      "role_title": "Procurador/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/cortes_cyl_procuradores_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Cortes CyL)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Cortes de Castilla y Leon (PlenoAlfabetico)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 81,
+      "max_loaded_any": 81,
+      "max_loaded_network": 81,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:50:36+00:00",
+      "last_seen_at": "2026-02-13T07:50:36+00:00",
+      "last_source_url": "https://www.ccyl.es/Organizacion/PlenoAlfabetico",
+      "last_message": "Ingesta completada: 81/81 registros validos",
+      "progress": {
+        "loaded": 81,
+        "target": 70,
+        "percent": 100
+      },
+      "mandates": 81,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 81,
+        "counts": {
+          "mandates": 81,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "cortes_clm_diputados",
+      "domain": "politicos",
+      "source_name": "Cortes de Castilla-La Mancha - Diputados (XI Legislatura)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.cortesclm.es/web2/paginas/resul_diputados.php?legislatura=11",
+      "institution_name": "Cortes de Castilla-La Mancha",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/cortes_clm_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Cortes CLM)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Cortes de Castilla-La Mancha (listado + fichas)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 33,
+      "max_loaded_any": 33,
+      "max_loaded_network": 33,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:50:17+00:00",
+      "last_seen_at": "2026-02-13T07:50:36+00:00",
+      "last_source_url": "https://www.cortesclm.es/web2/paginas/resul_diputados.php?legislatura=11",
+      "last_message": "Ingesta completada: 33/33 registros validos",
+      "progress": {
+        "loaded": 33,
+        "target": 25,
+        "percent": 100
+      },
+      "mandates": 33,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 33,
+        "counts": {
+          "mandates": 33,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "jgpa_diputados",
+      "domain": "politicos",
+      "source_name": "Junta General del Principado de Asturias - Diputados y diputadas",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.jgpa.es/diputados-y-diputadas",
+      "institution_name": "Junta General del Principado de Asturias",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/jgpa_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (JGPA Asturias)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Junta General del Principado de Asturias (diputados)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 45,
+      "max_loaded_any": 45,
+      "max_loaded_network": 45,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:55:46+00:00",
+      "last_seen_at": "2026-02-13T07:55:47+00:00",
+      "last_source_url": "https://www.jgpa.es/diputados-y-diputadas?p_p_id=jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&p_r_p_2113237475_diputadoId=0&p_r_p_2113237475_legislaturaId=0&p_r_p_2113237475_grupoParlamentarioId=0&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_redirect=%2Fdiputados-y-diputadas&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_delta=50&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_keywords=&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_advancedSearch=false&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_andOperator=true&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_resetCur=false&cur=1",
+      "last_message": "Ingesta completada: 45/45 registros validos",
+      "progress": {
+        "loaded": 45,
+        "target": 35,
+        "percent": 100
+      },
+      "mandates": 45,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 45,
+        "counts": {
+          "mandates": 45,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "corts_valencianes_diputats",
+      "domain": "politicos",
+      "source_name": "Les Corts Valencianes - Diputados (fichas HTML)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.cortsvalencianes.es/es/composicion/diputados",
+      "institution_name": "Les Corts Valencianes",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/corts_valencianes_diputats_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Corts Valencianes)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Corts Valencianes (listado + fichas)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 2,
+      "runs_ok": 2,
+      "last_status": "ok",
+      "last_loaded": 99,
+      "max_loaded_any": 99,
+      "max_loaded_network": 99,
+      "network_fetches": 1,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T12:16:24+00:00",
+      "last_seen_at": "2026-02-13T12:16:40+00:00",
+      "last_source_url": "https://www.cortsvalencianes.es/es/composicion/diputados",
+      "last_message": "Ingesta completada: 99/99 registros validos",
+      "progress": {
+        "loaded": 99,
+        "target": 70,
+        "percent": 100
+      },
+      "mandates": 99,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 99,
+        "counts": {
+          "mandates": 99,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlament_catalunya_diputats",
+      "domain": "politicos",
+      "source_name": "Parlament de Catalunya - Diputats (composicio actual)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.parlament.cat/web/composicio/ple-parlament/composicio-actual/index.html",
+      "institution_name": "Parlament de Catalunya",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlament_catalunya_diputats_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlament de Catalunya)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlament de Catalunya (composicio actual + fichas)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 135,
+      "max_loaded_any": 135,
+      "max_loaded_network": 135,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:51:52+00:00",
+      "last_seen_at": "2026-02-13T07:53:29+00:00",
+      "last_source_url": "https://www.parlament.cat/web/composicio/ple-parlament/composicio-actual/index.html",
+      "last_message": "Ingesta completada: 135/135 registros validos",
+      "progress": {
+        "loaded": 135,
+        "target": 100,
+        "percent": 100
+      },
+      "mandates": 135,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 135,
+        "counts": {
+          "mandates": 135,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlament_balears_diputats",
+      "domain": "politicos",
+      "source_name": "Parlament de les Illes Balears - Diputats (webGTP)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.parlamentib.es/Representants/Diputats.aspx?criteria=0",
+      "institution_name": "Parlament de les Illes Balears",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlament_balears_diputats_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlament IB)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlament de les Illes Balears: diputats (listado + fichas via webGTP)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 59,
+      "max_loaded_any": 59,
+      "max_loaded_network": 59,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:50:36+00:00",
+      "last_seen_at": "2026-02-13T07:51:52+00:00",
+      "last_source_url": "https://www.parlamentib.es/Representants/Diputats.aspx?criteria=0",
+      "last_message": "Ingesta completada: 59/59 registros validos",
+      "progress": {
+        "loaded": 59,
+        "target": 45,
+        "percent": 100
+      },
+      "mandates": 59,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 59,
+        "counts": {
+          "mandates": 59,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlamento_andalucia_diputados",
+      "domain": "politicos",
+      "source_name": "Parlamento de Andalucia - Diputados (fichas HTML)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/composicionyfuncionamiento/diputadosysenadores.do",
+      "institution_name": "Parlamento de Andalucia",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_andalucia_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlamento de Andalucia)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Andalucia (listado + fichas)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 109,
+      "max_loaded_any": 109,
+      "max_loaded_network": 109,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:53:30+00:00",
+      "last_seen_at": "2026-02-13T07:54:05+00:00",
+      "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/composicionyfuncionamiento/diputadosysenadores.do",
+      "last_message": "Ingesta completada: 109/109 registros validos",
+      "progress": {
+        "loaded": 109,
+        "target": 90,
+        "percent": 100
+      },
+      "mandates": 109,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 109,
+        "counts": {
+          "mandates": 109,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlamento_canarias_diputados",
+      "domain": "politicos",
+      "source_name": "Parlamento de Canarias - Diputados (API)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://parcan.es/api/diputados/por_legislatura/11/?format=json",
+      "institution_name": "Parlamento de Canarias",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_canarias_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlamento de Canarias)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Canarias: diputados + grupos (API oficial)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 79,
+      "max_loaded_any": 79,
+      "max_loaded_network": 79,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:54:05+00:00",
+      "last_seen_at": "2026-02-13T07:54:05+00:00",
+      "last_source_url": "https://parcan.es/api/diputados/por_legislatura/11/?format=json",
+      "last_message": "Ingesta completada: 79/79 registros validos",
+      "progress": {
+        "loaded": 79,
+        "target": 60,
+        "percent": 100
+      },
+      "mandates": 79,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 79,
+        "counts": {
+          "mandates": 79,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlamento_cantabria_diputados",
+      "domain": "politicos",
+      "source_name": "Parlamento de Cantabria - Diputados (XI Legislatura)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://parlamento-cantabria.es/informacion-general/composicion/11l-pleno-del-parlamento-de-cantabria",
+      "institution_name": "Parlamento de Cantabria",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_cantabria_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlamento de Cantabria)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Cantabria",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 2,
+      "runs_ok": 2,
+      "last_status": "ok",
+      "last_loaded": 35,
+      "max_loaded_any": 35,
+      "max_loaded_network": 35,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:54:30+00:00",
+      "last_seen_at": "2026-02-13T07:55:46+00:00",
+      "last_source_url": "https://parlamento-cantabria.es/informacion-general/composicion/11l-pleno-del-parlamento-de-cantabria",
+      "last_message": "Ingesta completada: 35/35 registros validos",
+      "progress": {
+        "loaded": 35,
+        "target": 25,
+        "percent": 100
+      },
+      "mandates": 35,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 35,
+        "counts": {
+          "mandates": 35,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlamento_galicia_deputados",
+      "domain": "politicos",
+      "source_name": "Parlamento de Galicia - Deputados (fichas HTML)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.parlamentodegalicia.gal/Composicion/Deputados",
+      "institution_name": "Parlamento de Galicia",
+      "role_title": "Deputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_galicia_deputados_sample.json",
+      "tracker": {
+        "status": "PARTIAL",
+        "tipo_dato": "Representantes y mandatos (Parlamento de Galicia)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Galicia: deputados (fichas HTML)",
+        "bloque": "Bloqueado por WAF/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>`"
+      },
+      "sql_status": "PARTIAL",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 75,
+      "max_loaded_any": 75,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T06:59:36+00:00",
+      "last_seen_at": "2026-02-13T06:59:37+00:00",
+      "last_source_url": "file:///Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages",
+      "last_message": "Ingesta completada: 75/75 registros validos (from-dir)",
+      "progress": {
+        "loaded": 75,
+        "target": 50,
+        "percent": 100
+      },
+      "mandates": 75,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 75,
+        "counts": {
+          "mandates": 75,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": true
+      }
+    },
+    {
+      "source_id": "parlamento_larioja_diputados",
+      "domain": "politicos",
+      "source_name": "Parlamento de La Rioja - Diputados (XI Legislatura)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://adminweb.parlamento-larioja.org/composicion-y-organos/diputados",
+      "institution_name": "Parlamento de La Rioja",
+      "role_title": "Diputado/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_larioja_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlamento de La Rioja)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de La Rioja: diputados (listado + fichas)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 33,
+      "max_loaded_any": 33,
+      "max_loaded_network": 33,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:55:47+00:00",
+      "last_seen_at": "2026-02-13T07:55:48+00:00",
+      "last_source_url": "https://adminweb.parlamento-larioja.org/composicion-y-organos/diputados",
+      "last_message": "Ingesta completada: 33/33 registros validos",
+      "progress": {
+        "loaded": 33,
+        "target": 25,
+        "percent": 100
+      },
+      "mandates": 33,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 33,
+        "counts": {
+          "mandates": 33,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "parlamento_navarra_parlamentarios_forales",
+      "domain": "politicos",
+      "source_name": "Parlamento de Navarra - Parlamentarios Forales (fichas HTML)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales",
+      "institution_name": "Parlamento de Navarra",
+      "role_title": "Parlamentario/a foral",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
+      "tracker": {
+        "status": "PARTIAL",
+        "tipo_dato": "Representantes y mandatos (Parlamento de Navarra)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento de Navarra: parlamentarios forales (fichas HTML)",
+        "bloque": "Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>`"
+      },
+      "sql_status": "PARTIAL",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 50,
+      "max_loaded_any": 50,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T06:59:36+00:00",
+      "last_seen_at": "2026-02-13T06:59:37+00:00",
+      "last_source_url": "file:///Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages",
+      "last_message": "Ingesta completada: 50/50 registros validos (from-dir)",
+      "progress": {
+        "loaded": 50,
+        "target": 30,
+        "percent": 100
+      },
+      "mandates": 50,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 50,
+        "counts": {
+          "mandates": 50,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": true
+      }
+    },
+    {
+      "source_id": "parlamento_vasco_parlamentarios",
+      "domain": "politicos",
+      "source_name": "Parlamento Vasco - Parlamentarios (listado ACT)",
+      "scope": "autonomico",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
+      "institution_name": "Parlamento Vasco",
+      "role_title": "Parlamentario/a autonomico",
+      "level": "autonomico",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/parlamento_vasco_parlamentarios_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Parlamento Vasco)",
+        "dominio": "Autonomico",
+        "fuentes_objetivo": "Parlamento Vasco (listado ACT)",
+        "bloque": "Hardening de parsing y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 75,
+      "max_loaded_any": 75,
+      "max_loaded_network": 75,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-13T07:55:48+00:00",
+      "last_seen_at": "2026-02-13T07:55:48+00:00",
+      "last_source_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
+      "last_message": "Ingesta completada: 75/75 registros validos",
+      "progress": {
+        "loaded": 75,
+        "target": 60,
+        "percent": 100
+      },
+      "mandates": 75,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 75,
+        "counts": {
+          "mandates": 75,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "infoelectoral_descargas",
+      "domain": "infoelectoral",
+      "source_name": "Infoelectoral - Area de descargas (convocatorias + archivos)",
+      "scope": "electoral",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
+      "institution_name": "",
+      "role_title": "",
+      "level": "",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/infoelectoral_descargas_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Procesos electorales y resultados",
+        "dominio": "Electoral",
+        "fuentes_objetivo": "Infoelectoral descargas/procesos",
+        "bloque": "Hardening de parsing de campos opcionales en procesos/resultados"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 3,
+      "runs_ok": 3,
+      "last_status": "ok",
+      "last_loaded": 263,
+      "max_loaded_any": 263,
+      "max_loaded_network": 263,
+      "network_fetches": 1,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T12:15:57+00:00",
+      "last_seen_at": "2026-02-13T12:16:11+00:00",
+      "last_source_url": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
+      "last_message": "Ingesta completada: 263/263 (network-with-partial-errors (archivos[6:198305]: RuntimeError: Respuesta inesperada (HTML recibido)))",
+      "progress": {
+        "loaded": 263,
+        "target": 3,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "infoelectoral_convocatoria_tipos",
+        "primary_rows": 6,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 6,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "infoelectoral_procesos",
+      "domain": "infoelectoral",
+      "source_name": "Infoelectoral - Procesos electorales celebrados (datos/resultados)",
+      "scope": "electoral",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://infoelectoral.interior.gob.es/min/procesos/",
+      "institution_name": "",
+      "role_title": "",
+      "level": "",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/infoelectoral_procesos_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Procesos electorales y resultados",
+        "dominio": "Electoral",
+        "fuentes_objetivo": "Infoelectoral descargas/procesos",
+        "bloque": "Hardening de parsing de campos opcionales en procesos/resultados"
+      },
+      "sql_status": "PARTIAL",
+      "state": "ok",
+      "runs_total": 5,
+      "runs_ok": 4,
+      "last_status": "ok",
+      "last_loaded": 5,
+      "max_loaded_any": 5,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T12:16:19+00:00",
+      "last_seen_at": "2026-02-13T12:16:20+00:00",
+      "last_source_url": "https://infoelectoral.interior.gob.es/min/procesos/",
+      "last_message": "Ingesta completada: 5/5 (network-error-fallback: HTTPError: HTTP Error 404: )",
+      "progress": {
+        "loaded": 5,
+        "target": 1,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "infoelectoral_procesos",
+        "primary_rows": 2,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 2
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": true,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "europarl_meps",
+      "domain": "politicos",
+      "source_name": "Parlamento Europeo - MEPs",
+      "scope": "europeo",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.europarl.europa.eu/meps/es/full-list/xml",
+      "institution_name": "Parlamento Europeo",
+      "role_title": "Eurodiputado/a",
+      "level": "europeo",
+      "format": "xml",
+      "fallback_file": "etl/data/raw/samples/europarl_meps_sample.xml",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Europarl)",
+        "dominio": "Europeo",
+        "fuentes_objetivo": "Europarl MEP XML",
+        "bloque": "Mejorar completitud de fechas/metadatos"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 4,
+      "runs_ok": 4,
+      "last_status": "ok",
+      "last_loaded": 60,
+      "max_loaded_any": 60,
+      "max_loaded_network": 60,
+      "network_fetches": 1,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-12T06:23:17+00:00",
+      "last_seen_at": "2026-02-12T06:23:17+00:00",
+      "last_source_url": "https://www.europarl.europa.eu/meps/es/full-list/xml",
+      "last_message": "Ingesta completada: 60/60 registros validos",
+      "progress": {
+        "loaded": 60,
+        "target": 40,
+        "percent": 100
+      },
+      "mandates": 62,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 62,
+        "counts": {
+          "mandates": 62,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "municipal_concejales",
+      "domain": "politicos",
+      "source_name": "Ambito municipal - Concejales y cargos locales",
+      "scope": "municipal",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://concejales.redsara.es/consulta/getConcejalesLegislatura",
+      "institution_name": "Ayuntamiento",
+      "role_title": "Cargo municipal",
+      "level": "municipal",
+      "format": "xlsx",
+      "fallback_file": "etl/data/raw/samples/municipal_concejales_sample.csv",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y cargos locales",
+        "dominio": "Municipal",
+        "fuentes_objetivo": "RED SARA Concejales",
+        "bloque": "Definir umbral minimo y criterio de cobertura"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 2,
+      "runs_ok": 2,
+      "last_status": "ok",
+      "last_loaded": 66895,
+      "max_loaded_any": 66895,
+      "max_loaded_network": 66895,
+      "network_fetches": 2,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-02-12T06:23:17+00:00",
+      "last_seen_at": "2026-02-12T06:24:27+00:00",
+      "last_source_url": "https://concejales.redsara.es/consulta/getConcejalesLegislatura",
+      "last_message": "Ingesta completada: 66895/66895 registros validos",
+      "progress": {
+        "loaded": 66895,
+        "target": 50000,
+        "percent": 100
+      },
+      "mandates": 66101,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 66101,
+        "counts": {
+          "mandates": 66101,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "congreso_iniciativas",
+      "domain": "parlamentario",
+      "source_name": "Congreso - Iniciativas (OpenData)",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.congreso.es/es/opendata/iniciativas",
+      "institution_name": "Congreso de los Diputados",
+      "role_title": "",
+      "level": "nacional",
+      "format": "html",
+      "fallback_file": "etl/data/raw/samples/congreso_iniciativas_sample.json",
+      "tracker": {
+        "status": "PARTIAL",
+        "tipo_dato": "Iniciativas Congreso",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Congreso iniciativas",
+        "bloque": "Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; linking a `parl_vote_events` mejorado (regex + titulo normalizado), pendiente KPIs globales"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 4,
+      "runs_ok": 4,
+      "last_status": "ok",
+      "last_loaded": 491,
+      "max_loaded_any": 491,
+      "max_loaded_network": 491,
+      "network_fetches": 1,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T08:08:09+00:00",
+      "last_seen_at": "2026-02-13T08:08:10+00:00",
+      "last_source_url": "https://www.congreso.es/es/opendata/iniciativas",
+      "last_message": "{\"initiatives_loaded\": 491, \"note\": \"network\"}",
+      "progress": {
+        "loaded": 491,
+        "target": 1,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "parl_initiatives",
+        "primary_rows": 429,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 429,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "congreso_votaciones",
+      "domain": "parlamentario",
+      "source_name": "Congreso - Votaciones (pleno, OpenData)",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.congreso.es/es/opendata/votaciones",
+      "institution_name": "Congreso de los Diputados",
+      "role_title": "",
+      "level": "nacional",
+      "format": "html",
+      "fallback_file": "etl/data/raw/samples/congreso_votaciones_sample.json",
+      "tracker": {
+        "status": "PARTIAL",
+        "tipo_dato": "Votaciones Congreso",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Congreso votaciones",
+        "bloque": "Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; publish can\u00f3nico disponible (`scripts/publicar_votaciones_es.py`), pendiente corrida completa + KPIs"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 20,
+      "runs_ok": 12,
+      "last_status": "ok",
+      "last_loaded": 40,
+      "max_loaded_any": 300,
+      "max_loaded_network": 300,
+      "network_fetches": 8,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T12:40:52+00:00",
+      "last_seen_at": "2026-02-13T12:41:05+00:00",
+      "last_source_url": "https://www.congreso.es/es/opendata/votaciones",
+      "last_message": "{\"events_loaded\": 40, \"member_votes_loaded\": 14000, \"note\": \"network\"}",
+      "progress": {
+        "loaded": 40,
+        "target": 1,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "parl_vote_events",
+        "primary_rows": 2823,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 2823,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "senado_iniciativas",
+      "domain": "parlamentario",
+      "source_name": "Senado - Iniciativas y mociones (OpenData)",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+      "institution_name": "Senado de Espana",
+      "role_title": "",
+      "level": "nacional",
+      "format": "xml",
+      "fallback_file": "etl/data/raw/samples/senado_iniciativas_sample.xml",
+      "tracker": {
+        "status": "",
+        "tipo_dato": "",
+        "dominio": "",
+        "fuentes_objetivo": "",
+        "bloque": ""
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 5,
+      "runs_ok": 4,
+      "last_status": "ok",
+      "last_loaded": 3607,
+      "max_loaded_any": 3607,
+      "max_loaded_network": 3607,
+      "network_fetches": 2,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T08:11:00+00:00",
+      "last_seen_at": "2026-02-13T08:11:04+00:00",
+      "last_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+      "last_message": "{\"initiatives_loaded\": 3607, \"note\": \"network\"}",
+      "progress": {
+        "loaded": 3607,
+        "target": 1,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "parl_initiatives",
+        "primary_rows": 3607,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 3607,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "senado_votaciones",
+      "domain": "parlamentario",
+      "source_name": "Senado - Votaciones (OpenData)",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
+      "institution_name": "Senado de Espana",
+      "role_title": "",
+      "level": "nacional",
+      "format": "html",
+      "fallback_file": "etl/data/raw/samples/senado_votaciones_sample.xml",
+      "tracker": {
+        "status": "PARTIAL",
+        "tipo_dato": "Votaciones Senado y mociones",
+        "dominio": "Parlamentario",
+        "fuentes_objetivo": "Senado votaciones/mociones",
+        "bloque": "`senado_votaciones` carga eventos + totales + roll-call (host `www.senado.es`); `senado_iniciativas` (tipoFich=9) carga temas/expedientes y permite linking determinista `(legislature, expediente)`; publish can\u00f3nico disponible, pendiente KPIs y cobertura `person_id`"
+      },
+      "sql_status": "DONE",
+      "state": "degraded",
+      "runs_total": 42,
+      "runs_ok": 27,
+      "last_status": "error",
+      "last_loaded": 0,
+      "max_loaded_any": 5534,
+      "max_loaded_network": 5534,
+      "network_fetches": 16,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-13T12:27:12+00:00",
+      "last_seen_at": "2026-02-13T12:28:53.362599+00:00",
+      "last_source_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
+      "last_message": "manual-abort: senate vote pull too slow/hung",
+      "progress": {
+        "loaded": 0,
+        "target": 1,
+        "percent": 0
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "parl_vote_events",
+        "primary_rows": 5534,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 5534,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "congreso_diputados",
+      "domain": "politicos",
+      "source_name": "Congreso - Diputados Activos",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.congreso.es/es/opendata/diputados",
+      "institution_name": "Congreso de los Diputados",
+      "role_title": "Diputado/a",
+      "level": "nacional",
+      "format": "json",
+      "fallback_file": "etl/data/raw/samples/congreso_diputados_sample.json",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Congreso)",
+        "dominio": "Nacional",
+        "fuentes_objetivo": "Congreso OpenData Diputados",
+        "bloque": "Mejorar calidad de campos opcionales"
+      },
+      "sql_status": "DONE",
+      "state": "degraded",
+      "runs_total": 6,
+      "runs_ok": 5,
+      "last_status": "error",
+      "last_loaded": 0,
+      "max_loaded_any": 350,
+      "max_loaded_network": 350,
+      "network_fetches": 1,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-14T14:24:01+00:00",
+      "last_seen_at": "2026-02-14T14:24:07+00:00",
+      "last_source_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260214050006.json",
+      "last_message": "Error: foreign key check fallado en congreso_diputados: 44646 violaciones (ej: parl_vote_member_votes.337044 -> persons[1], parl_vote_member_votes.337051 -> persons[1], parl_vote_member_votes.337082 -> persons[1], parl_vote_member_votes.337134 -> persons[1], parl_vote_member_votes.337190 -> persons[1], parl_vote_member_votes.337191 -> persons[1], parl_vote_member_votes.337203 -> persons[1], parl_vote_member_votes.337226 -> persons[1], parl_vote_member_votes.337243 -> persons[1], parl_vote_member_votes.337253 -> persons[1], ... (+44636 more))",
+      "progress": {
+        "loaded": 0,
+        "target": 300,
+        "percent": 0
+      },
+      "mandates": 352,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 352,
+        "counts": {
+          "mandates": 352,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "senado_senadores",
+      "domain": "politicos",
+      "source_name": "Senado - Senadores",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15",
+      "institution_name": "Senado de Espana",
+      "role_title": "Senador/a",
+      "level": "nacional",
+      "format": "xml",
+      "fallback_file": "etl/data/raw/samples/senado_senadores_sample.csv",
+      "tracker": {
+        "status": "DONE",
+        "tipo_dato": "Representantes y mandatos (Senado)",
+        "dominio": "Nacional",
+        "fuentes_objetivo": "Senado OpenData XML (grupos + fichas)",
+        "bloque": "Hardening de aliases y umbral minimo"
+      },
+      "sql_status": "DONE",
+      "state": "ok",
+      "runs_total": 5,
+      "runs_ok": 5,
+      "last_status": "ok",
+      "last_loaded": 264,
+      "max_loaded_any": 264,
+      "max_loaded_network": 264,
+      "network_fetches": 2,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-02-12T06:45:44+00:00",
+      "last_seen_at": "2026-02-12T06:46:07+00:00",
+      "last_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15",
+      "last_message": "Ingesta completada: 264/264 registros validos",
+      "progress": {
+        "loaded": 264,
+        "target": 250,
+        "percent": 100
+      },
+      "mandates": 497,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 497,
+        "counts": {
+          "mandates": 497,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    }
+  ],
+  "missing": []
+}
