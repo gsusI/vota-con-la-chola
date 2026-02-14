@@ -3,6 +3,18 @@
 ## Objetivo
 Procesar texto y datos estructurados con trazabilidad, priorizacion clara y controles minimos de calidad.
 
+## Modelo SQLite (posiciones por tema)
+
+El objetivo operativo es poder responder “como se posiciona X sobre el tema T en este scope” siempre con evidencia auditable.
+
+Tablas canonicas (todas en el mismo SQLite):
+
+- `topics`: taxonomia de temas.
+- `topic_sets`: definicion de “set de temas” por `scope` (institucion/territorio/legislatura/ventana).
+- `topic_set_topics`: stake scoring y selecciones “high-stakes” dentro de un `topic_set`.
+- `topic_evidence`: evidencia atómica (dicho/hecho) con `person_id` y provenance (`source_record_pk` + `raw_payload`).
+- `topic_positions`: agregados reproducibles desde `topic_evidence` (stance/score/confidence) con versionado de método.
+
 ## Pipeline minimo para fuentes de texto
 
 1. **Ingesta raw**
@@ -25,6 +37,17 @@ Procesar texto y datos estructurados con trazabilidad, priorizacion clara y cont
   - `source_hash`
   - `fecha_evento`
   - `confianza` (0-1)
+
+Traduccion a columnas (minimo viable) para `topic_evidence`:
+
+- `actor_id` -> `person_id` (y opcional `mandate_id` para contexto).
+- `tema_id` -> `topic_id` (y opcional `topic_set_id` si la asignacion es “en este scope”).
+- `tipo` -> `evidence_type` (ej: `declared:speech`, `declared:press`, `revealed:vote`, `revealed:sponsor`).
+- `fragmento` -> `excerpt` (y `title` si existe).
+- `fecha_evento` -> `evidence_date`.
+- `confianza` -> `confidence`.
+- “direccion” -> `stance` y/o `polarity` (-1/0/+1) con `weight`.
+- Siempre: `source_id`, `source_url`, `source_record_pk` y `raw_payload`.
 
 4. **Validacion**
 - Rechazar registros sin fuente o sin actor/tema.
@@ -71,6 +94,15 @@ Procesar texto y datos estructurados con trazabilidad, priorizacion clara y cont
 
 6. **Revision humana minima**
 - Regla de dos ojos solo para contenido sensible o baja confianza.
+
+## Dimensiones de calidad (para posiciones por tema)
+
+- **Cobertura**: % de politicos con señal (evidencia_count>=N) en temas high-stakes del `topic_set`.
+- **Atribucion**: % de `topic_evidence` con `person_id` y `evidence_date`.
+- **Trazabilidad**: % de evidencia con `source_record_pk` y `raw_payload` (objetivo: 100% en published/derivados).
+- **Consistencia**: duplicados exactos y colisiones de identidad bajo control.
+- **Balance**: distribucion por `evidence_type` (evitar “solo votos” o “solo citas” como unico input en un topic_set).
+- **Incertidumbre**: `stance='unclear'|'no_signal'` como estado explicito, no como ausencia silenciosa.
 
 ## Indicadores operativos semanales
 

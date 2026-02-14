@@ -36,6 +36,7 @@ Comandos ejecutados (DB: `etl/data/staging/politicos-es.e2e19.db`):
 - `municipal_concejales --strict-network`: `66895/66895`
 - `asamblea_madrid_ocupaciones --strict-network`: `9188/9285`
 - `asamblea_ceuta_diputados --strict-network`: `25/25`
+- `asamblea_melilla_diputados --strict-network`: `26/26`
 - `asamblea_extremadura_diputados --strict-network`: `65/65`
 - `asamblea_murcia_diputados --strict-network`: `54/54` (45 activos + 9 bajas)
 - `jgpa_diputados --strict-network`: `45/45`
@@ -58,6 +59,7 @@ Lectura operativa:
 - `municipal_concejales`: operativo con endpoint oficial `getConcejalesLegislatura` (XLSX) y parse robusto.
 - `asamblea_madrid_ocupaciones`: operativo con CSV oficial (ocupaciones/cargos) y `is_active` calculado con `FECHA_FIN` + legislatura maxima.
 - `asamblea_extremadura_diputados`: operativo con scrape HTML (listado `dipslegis` + paginacion) y afiliacion por `Grupo Parlamentario ... (SIGLAS)`.
+- `asamblea_melilla_diputados`: operativo con extracción del dataset `dataset_PTS2_MIEMBROS` embebido en JS (`externString`, `descriptionProc`, `isActive`) y `source_record_id` estable por `dboid`.
 - `asamblea_murcia_diputados`: operativo con scrape HTML (listado + seccion `Han causado baja`) y afiliacion por `Grupo Parlamentario ...` desde ficha individual.
 - `jgpa_diputados`: operativo con scrape HTML (Liferay search container, forzando `delta=50`) y afiliacion por `Grupo Parlamentario ...`.
 - `parlamento_canarias_diputados`: operativo con API oficial JSON (por legislatura 11) incluyendo altas/bajas y circunscripcion.
@@ -89,6 +91,7 @@ Legenda:
 | Representantes y cargos locales | Municipal | RED SARA Concejales | DONE | Definir umbral minimo y criterio de cobertura |
 | Representantes y mandatos (Asamblea de Madrid) | Autonomico | Asamblea de Madrid OpenData Ocupaciones | DONE | Definir umbral minimo y aclarar semantica de `is_active` |
 | Representantes y mandatos (Asamblea de Ceuta) | Autonomico | Asamblea de Ceuta: miembros (2023/2027) | DONE | Hardening de parsing y umbral minimo |
+| Representantes y mandatos (Asamblea de Melilla) | Autonomico | Asamblea de Melilla: diputados (2023/2027) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Asamblea de Extremadura) | Autonomico | Asamblea de Extremadura (dipslegis + paginacion) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Asamblea Murcia) | Autonomico | Asamblea Regional de Murcia: diputados (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (JGPA Asturias) | Autonomico | Junta General del Principado de Asturias (diputados) | DONE | Hardening de parsing y umbral minimo |
@@ -104,26 +107,44 @@ Legenda:
 | Representantes y mandatos (Parlamento de Andalucia) | Autonomico | Parlamento de Andalucia (listado + fichas) | DONE | Hardening de parsing y umbral minimo |
 | Representantes y mandatos (Parlamento de Navarra) | Autonomico | Parlamento de Navarra: parlamentarios forales (fichas HTML) | PARTIAL | Bloqueado por Cloudflare challenge/403 en `--strict-network`; requiere captura manual Playwright + `--from-file <dir>` |
 | Representantes y mandatos (Parlamento Vasco) | Autonomico | Parlamento Vasco (listado ACT) | DONE | Hardening de parsing y umbral minimo |
-| Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | PARTIAL | Ingesta del catalogo de descargas (tipos/convocatorias/archivos) en SQLite; falta publish y cobertura de resultados |
+| Procesos electorales y resultados | Electoral | Infoelectoral descargas/procesos | DONE | Hardening de parsing de campos opcionales en procesos/resultados |
 | Convocatorias y estado electoral | Electoral | Junta Electoral Central | TODO | Falta scraper y normalizacion |
 | Marco legal electoral | Legal | BOE API | TODO | Falta conector legal y modelo de documentos |
-| Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; falta publish y mejorar linkage a expedientes/temas (IDs no presentes en roll-call) |
-| Iniciativas Congreso | Parlamentario | Congreso iniciativas | PARTIAL | Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; falta publish y linkage a `parl_vote_events` |
+| Accion ejecutiva (Consejo de Ministros) | Ejecutivo | La Moncloa: referencias + RSS | TODO | Scraper + normalizacion; validar acuerdos y normas contra BOE cuando exista publicacion |
+| Contratacion publica (Espana) | Dinero | PLACSP: sindicación/ATOM (CODICE) | TODO | Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente |
+| Subvenciones y ayudas (Espana) | Dinero | BDNS/SNPSAP: API | TODO | Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario |
+| Transparencia: agendas altos cargos | Transparencia | La Moncloa + Portal de Transparencia (agendas) | TODO | Falta ingesta de agendas; KPI: % con fecha + actor resuelto; no inferir accion sin evidencia |
+| Transparencia: declaraciones/intereses | Integridad | Portal Transparencia: declaraciones bienes/derechos | TODO | Falta modelo y pipeline de declaraciones; KPI: versionado + trazabilidad 100% |
+| Votaciones Congreso | Parlamentario | Congreso votaciones | PARTIAL | Ingesta de votaciones (OpenData) a `parl_vote_events` + `parl_vote_member_votes`; publish canónico disponible (`scripts/publicar_votaciones_es.py`), pendiente corrida completa + KPIs |
+| Iniciativas Congreso | Parlamentario | Congreso iniciativas | PARTIAL | Ingesta de iniciativas (export JSON en OpenData) a `parl_initiatives`; linking a `parl_vote_events` mejorado (regex + titulo normalizado), pendiente KPIs globales |
 | Intervenciones Congreso | Parlamentario | Congreso intervenciones | TODO | Falta conector y modelo de evidencia textual |
-| Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | `senado_votaciones` carga eventos + totales + roll-call via `videoservlet.senado.es/legis15/votaciones/ses_<n>.xml`; pendiente publish y mejorar linkage `person_id`/cobertura de mociones |
+| Votaciones Senado y mociones | Parlamentario | Senado votaciones/mociones | PARTIAL | `senado_votaciones` carga eventos + totales + roll-call (host `www.senado.es`); `senado_iniciativas` (tipoFich=9) carga temas/expedientes y permite linking determinista `(legislature, expediente)`; publish canónico disponible, pendiente KPIs y cobertura `person_id` |
 | Referencias territoriales | Catalogos | REL, INE, IGN | TODO | Falta catalogo canonico territorial |
+| UE: legislacion y documentos | UE | EUR-Lex / Cellar (SPARQL/REST) | TODO | Falta conector UE legal; linking a expedientes y textos vigentes |
+| UE: votaciones (roll-call) | UE | Parlamento Europeo: votes XML/PDF + Open Data Portal | TODO | Falta ingesta de votos + mapeo a MEPs; KPI: % con actor resuelto |
+| UE: contratacion publica | UE | TED API (notices) | TODO | Falta ingesta; KPI: cobertura y trazabilidad por notice |
+| UE: lobbying/influencia | UE | EU Transparency Register | TODO | Falta ingesta y modelo de entidades; linking cuando existan meetings/agendas publicas |
 | Posiciones declaradas (programas) | Editorial | Webs/programas de partidos | TODO | Falta pipeline semiestructurado + revision humana |
+| Taxonomia de temas (alto impacto por scope) | Analitica | Definicion de temas + stake scoring por institucion/territorio/mandato | TODO | Falta seed inicial + reglas de versionado + KPI: cobertura de temas high-stakes por scope |
+| Evidencia textual (para posiciones declaradas) | Analitica | Diarios de sesiones, intervenciones, preguntas, notas oficiales | TODO | Falta conector(es) + modelo canonico de evidencia textual + KPI: % evidencia con `person_id` y timestamp |
+| Clasificacion evidencia -> tema (trazable) | Analitica | Reglas deterministas + señales ML opcionales (siempre auditables) | TODO | Falta pipeline + KPI: % evidencia con `topic_id` + distribucion de confianza/errores |
+| Posiciones por tema (politico x scope) | Analitica | Agregacion reproducible + drill-down a evidencia | TODO | Falta agregador + KPI: % politicos con señal suficiente por tema high-stakes + sesgo por tipo de evidencia |
 
 ## TODO global (infra y calidad)
 
 - [x] Fallar corrida `strict-network` si `records_seen > 0` y `records_loaded == 0`.
 - [x] Detectar payload HTML cuando se espera CSV/JSON/XML y tratarlo como error de extraccion.
-- [ ] Validar charset real (`latin-1/cp1252`) antes de parse CSV.
-- [ ] Definir umbrales minimos por fuente en codigo (no solo en docs).
-- [ ] Documentar y estandarizar el “camino manual aceptado” para fuentes bloqueadas por WAF/anti-bot (captura Playwright no-headless + ingesta por `--from-file <dir>`), incluyendo receta `just` y evidencia en tracker.
-- [ ] Crear smoke test E2E en CI (`init-db + ingest por fuente + asserts SQL`).
+- [x] Validar charset real (`latin-1/cp1252`) antes de parse CSV.
+- [x] Definir umbrales minimos por fuente en codigo (no solo en docs).  
+  `etl/politicos_es/config.py` define `min_records_loaded_strict` y `etl/politicos_es/pipeline.py` aplica la validación en modo `--strict-network`.
+- [x] Documentar y estandarizar el “camino manual aceptado” para fuentes bloqueadas por WAF/anti-bot (captura Playwright no-headless + ingesta por `--from-file <dir>`), incluyendo receta `just` y evidencia en tracker.
+- [x] Documentar la ventana de backfill histórico (`just etl-backfill-normalized`) como paso de mantenimiento tras cambios de esquema de normalización.
+- [x] Crear smoke test E2E en CI (`init-db + ingest por fuente + asserts SQL`).  
+  Implementado como camino práctico con `just etl-smoke-e2e`.
 - [x] Publicar snapshot canonico de representantes en `etl/data/published/` (ej: `etl/data/published/representantes-es-2026-02-12.json`).
-- [ ] Documentar versionado de snapshots y politica de refresh.
+- [x] Implementar publish canónico de votaciones en `etl/data/published/` (script: `scripts/publicar_votaciones_es.py`).
+- [x] Implementar publish canónico de procesos de Infoelectoral en `etl/data/published/` (script: `scripts/publicar_infoelectoral_es.py`).
+- [x] Documentar versionado de snapshots y politica de refresh.
 
 ## TODO por conector activo
 
@@ -132,7 +153,7 @@ Legenda:
 - [x] Discovery de JSON versionado.
 - [x] Ingesta real `strict-network`.
 - [x] Upsert en esquema actual.
-- [ ] Anadir validacion de `records_loaded >= 300` como regla hard.
+- [x] Anadir validacion de `records_loaded >= 300` como regla hard.
 - [ ] Completar/normalizar campos de fecha de fin y metadata adicional (si disponible).
 
 ### 2) `senado_senadores` (DONE tecnico, calidad pendiente)
@@ -141,16 +162,16 @@ Legenda:
 - [x] Resolucion de `idweb` y `source_record_id` estable por senador activo.
 - [x] Enriquecimiento con ficha individual (`tipoFich=1`) para afiliacion politica (`partidoSiglas`/`partidoNombre`).
 - [x] Ingesta real `strict-network` con carga >0.
-- [ ] Definir umbral hard (`records_loaded >= 250`) en codigo.
-- [ ] Revisar normalizacion de aliases minoritarios de siglas (`INDEP`, `CCPV`, etc.).
+- [x] Definir umbral hard (`records_loaded >= 250`) en codigo.
+- [x] Revisar normalizacion de aliases minoritarios de siglas (`INDEP`, `CCPV`, etc.).
 
 ### 3) `europarl_meps` (DONE tecnico, calidad pendiente)
 
 - [x] Parse XML y filtro por Espana.
 - [x] Ingesta real `strict-network`.
 - [x] Upsert en esquema actual.
-- [ ] Mejorar mapping de `given_name` / `family_name` si el feed lo permite.
-- [ ] Definir umbral hard (`records_loaded >= 40`) en codigo.
+- [x] Mejorar mapping de `given_name` / `family_name` si el feed lo permite.
+- [x] Definir umbral hard (`records_loaded >= 40`) en codigo.
 
 ### 4) `municipal_concejales` (DONE tecnico, calidad pendiente)
 
@@ -167,8 +188,9 @@ Legenda:
 - [x] Parse y normalizacion a esquema canonico (`persons`, `mandates`, `parties`).
 - [x] `is_active` calculado como `legislatura == max(LEGISLATURA)` y `FECHA_FIN` vacia/`-`.
 - [x] Ingesta real `strict-network` con carga >0.
-- [ ] Definir umbral hard (ej: `records_loaded >= 5000`) en codigo.
-- [ ] Documentar consulta recomendada para "diputados actuales" (filtrar `role_title='Diputado/a'` y `is_active=1`).
+- [x] Definir umbral hard (ej: `records_loaded >= 5000`) en codigo.
+- [x] Documentar consulta recomendada para "diputados actuales":
+  - `SELECT * FROM mandates WHERE source_id='asamblea_madrid_ocupaciones' AND role_title='Diputado/a' AND is_active=1;`
 
 ### 6) `parlament_catalunya_diputats` (DONE tecnico, calidad pendiente)
 
@@ -176,7 +198,7 @@ Legenda:
 - [x] Enriquecimiento por ficha individual y parse de `Partit Polític` y `Grup parlamentari`.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 100`) en codigo.
-- [ ] Hardening del parse de fechas de alta (`Alta: dd.mm.yyyy`) y posibles cambios de etiquetas (ca/es).
+- [x] Hardening del parse de fechas de alta (`Alta: dd.mm.yyyy`) y posibles cambios de etiquetas (ca/es).
 
 ### 7) `corts_valencianes_diputats` (DONE tecnico, calidad pendiente)
 
@@ -184,7 +206,7 @@ Legenda:
 - [x] Parse de `Grupo parlamentario` y provincia (circunscripcion) desde ficha.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 70`) en codigo.
-- [ ] Hardening de parsing si el HTML cambia (clases CSS y headings).
+- [x] Hardening de parsing si el HTML cambia (clases CSS y headings).
 
 ### 8) `parlamento_andalucia_diputados` (DONE tecnico, calidad pendiente)
 
@@ -192,7 +214,7 @@ Legenda:
 - [x] Enriquecimiento por ficha de pleno (`codorg=3`) con `G.P.` + `Circunscripción`.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 90`) en codigo.
-- [ ] Hardening de parsing si el HTML cambia (secciones y headings).
+- [x] Hardening de parsing si el HTML cambia (secciones y headings).
 
 ### 9) `parlamento_vasco_parlamentarios` (DONE tecnico, calidad pendiente)
 
@@ -200,7 +222,7 @@ Legenda:
 - [x] Parse de grupo (`GP XXX`) y fechas `(dd.mm.yyyy - ...)`.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 60`) en codigo.
-- [ ] Considerar enriquecer con ficha personal (`/fichas/c_<id>_SM.html`) para metadatos extra.
+- [x] Considerar enriquecer con ficha personal (`/fichas/c_<id>_SM.html`) para metadatos extra.
 
 ### 10) `cortes_clm_diputados` (DONE tecnico, calidad pendiente)
 
@@ -208,7 +230,7 @@ Legenda:
 - [x] Enriquecimiento por ficha individual (`detalle_diputado.php?id=...`) para `GRUPO PARLAMENTARIO ...` y `Fecha Alta` minima.
 - [x] Ingesta real `strict-network` con carga >0.
 - [x] Definir umbral hard (`records_loaded >= 25`) en codigo.
-- [ ] Hardening de parsing si el HTML cambia (estructura de tabla y `id=\"grupo\"`).
+- [x] Hardening de parsing si el HTML cambia (estructura de tabla y `id=\"grupo\"`).
 
 ## TODO nuevos conectores (por prioridad)
 
@@ -216,15 +238,17 @@ Legenda:
 
 - [ ] Parlamento de Galicia: conector `parlamento_galicia_deputados` disponible (muestras + `--from-file <dir>`), pero `--strict-network` sigue bloqueado por WAF/403: `https://www.parlamento.gal/Composicion/Deputados` (2026-02-12 devuelve 403 desde ETL).
 - [ ] Parlamento de Navarra: conector `parlamento_navarra_parlamentarios_forales` disponible (muestras + `--from-file <dir>`), pero `--strict-network` sigue bloqueado por Cloudflare challenge/403: `https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales` (2026-02-12 devuelve 403 cf-mitigated).
-- [ ] Asamblea de Melilla (fuente oficial pendiente): no hay conector; candidato: BOME `https://bomemelilla.es/` (requiere discovery de un listado nominal estable o estrategia incremental).
 
 ### P0 (siguiente ola, obligatoria para MVP de evidencia)
 
-- [ ] Infoelectoral: completar cobertura (resultados/datasets), publish en `etl/data/published/` y recipe `just` para extraccion live.
+- [x] Infoelectoral: completar cobertura de resultados y datasets; publish y recipe `just` implementados; `source` y `resultados` incluidos en `infoelectoral-es-YYYY-MM-DD.json`.
 - [ ] Junta Electoral Central: estado de convocatorias.
 - [ ] BOE API: normativa/convocatorias.
+- [ ] Consejo de Ministros (Moncloa): referencias + RSS (señal comunicacional) con validación por BOE cuando aplique.
+- [ ] BDNS/SNPSAP: subvenciones y ayudas (registro con efectos).
+- [ ] PLACSP: contratación pública (sindicación ATOM/CODICE) (registro con efectos).
 - [ ] Congreso votaciones.
-- [ ] Senado votaciones/mociones.
+- [ ] Senado votaciones/mociones (cerrar publish y cobertura de `person_id`).
 
 ### P1
 
@@ -232,6 +256,8 @@ Legenda:
 - [ ] Congreso intervenciones.
 - [ ] Catalogos territoriales (REL/INE/IGN).
 - [ ] OEIL / EUR-Lex (contexto UE).
+- [ ] Agendas y transparencia (Moncloa + Portal de Transparencia): ingesta de actividad pública.
+- [ ] Declaraciones/intereses (Transparencia y registros parlamentarios): modelo y pipeline (sin inferencias).
 
 ### P2
 

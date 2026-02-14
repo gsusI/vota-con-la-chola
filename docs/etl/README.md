@@ -12,12 +12,41 @@ Estructura minima de `etl/`:
 Actualmente:
 - Snapshot de proximas elecciones: `etl/data/published/proximas-elecciones-espana.json`.
 - Snapshot de representantes (JSON, excluye municipal por defecto): `etl/data/published/representantes-es-<snapshot_date>.json` (ver `scripts/publicar_representantes_es.py`).
+- Snapshot de votaciones parlamentarias (JSON): `etl/data/published/votaciones-es-<snapshot_date>.json` (ver `scripts/publicar_votaciones_es.py`).
+- Snapshot de KPIs de calidad de votaciones: `etl/data/published/votaciones-kpis-es-<snapshot_date>.json`.
 - Esquema SQLite ETL: `etl/load/sqlite_schema.sql`.
+- Esquema analitico (posiciones por temas): `topics`, `topic_sets`, `topic_set_topics`, `topic_evidence`, `topic_positions` (en el mismo SQLite).
 - CLI ingesta politicos: `scripts/ingestar_politicos_es.py`.
 - CLI ingesta Infoelectoral (descargas): `scripts/ingestar_infoelectoral_es.py`.
 - CLI parlamentario (votaciones, iniciativas): `scripts/ingestar_parlamentario_es.py`.
 - Plan de extraccion fuente por fuente: `docs/etl/extraccion-politicos-plan.md`.
 - Tracker E2E scrape/load (TODO operativo): `docs/etl/e2e-scrape-load-tracker.md`.
+- Roadmap de cobertura de votaciones: `docs/etl/vote-coverage-roadmap.md`.
+
+Nota para votaciones:
+- Flujo recomendado: `ingest -> backfill-member-ids -> link-votes -> quality-report -> publish`.
+- Ejecuta `python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>` antes de publicar si quieres maximizar `evento -> tema`.
+- Ejecuta `python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db <db>` después de la ingesta de `congreso_votaciones,senado_votaciones` para resolver `person_id` en votos nominales.
+- Sugerencia operativa: añade `--unmatched-sample-limit 50` para capturar casos sin emparejar y priorizar corrección manual por razón (`no_candidates`, `skipped_no_name`, `ambiguous`, ...).
+- Para publicar y auditar unmatched en un pass sin escribir cambios, usa:
+  - `python3 scripts/publicar_votaciones_es.py --db <db> --snapshot-date <fecha> --include-unmatched --unmatched-sample-limit 100`
+- Para publicar y materializar el emparejado de `person_id` al vuelo (sin paso separado), usa:
+  - `python3 scripts/publicar_votaciones_es.py --db <db> --snapshot-date <fecha> --backfill-member-ids`
+- Revisa KPIs/gate con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --source-ids congreso_votaciones,senado_votaciones` y usa `--enforce-gate` para fallar en CI cuando no se cumpla el minimo.
+- Para incluir diagnóstico de emparejado de persona en seco, usa `--include-unmatched --unmatched-sample-limit <n>`.
+- Exporta KPIs por fecha con `python3 scripts/ingestar_parlamentario_es.py quality-report --db <db> --json-out etl/data/published/votaciones-kpis-es-<snapshot>.json`.
+- El JSON de votaciones puede ser muy grande en corridas completas; para smoke/debug usa `--max-events` y/o `--max-member-votes-per-event`.
+
+Nota para posiciones por temas:
+- La representacion “politico x scope x tema” se construye desde evidencia atómica trazable (`topic_evidence`) y se agrega en snapshots recomputables (`topic_positions`).
+- El roadmap operativo y de calidad vive en `docs/etl/e2e-scrape-load-tracker.md` (filas “Analitica”).
+
+## Política de snapshots publicables
+
+- Los artefactos publicados en `etl/data/published/` llevan la fecha de snapshot en el nombre (`...-<fecha>.json`).
+- El snapshot se produce con `SNAPSHOT_DATE` y es reproducible para una fecha concreta.
+- Política de refresco: re-generar `representantes` y `votaciones` cuando cambie la composición o tras mejoras de parsing/linking de fuente, documentando la fecha en commit y tracker.
+- Mantener al menos un snapshot publicado por nivel operativo tras cambios de formato relevantes.
 
 ## Entorno reproducible con Docker
 
@@ -31,10 +60,21 @@ Prerequisitos:
 just etl-build
 just etl-init
 just etl-samples
+just parl-backfill-member-ids
+just parl-quality-pipeline
+just parl-congreso-votaciones-pipeline
 just parl-samples
+just parl-link-votes
+just parl-quality-report
 just etl-stats
+just etl-backfill-normalized
 just etl-e2e
 just etl-publish-representantes
+just etl-publish-votaciones
+just etl-publish-votaciones-backfill
+just parl-quality-report-json
+just etl-smoke-e2e
+just etl-smoke-votes
 ```
 
 UI de navegacion de grafo (Docker):
@@ -125,6 +165,12 @@ Backfill opcional de normalizacion (una vez, para historico):
 ```bash
 docker compose run --rm etl \
   "python3 scripts/ingestar_politicos_es.py backfill-normalized --db etl/data/staging/politicos-es.db"
+```
+
+Con `just`:
+
+```bash
+just etl-backfill-normalized
 ```
 
 Nota de rendimiento:
