@@ -87,6 +87,30 @@
         font-size: 0.82rem;
       }
 
+      .superheader {
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        min-height: 34px;
+      }
+
+      .superlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
       .switch a.active {
         border-color: transparent;
         background: linear-gradient(135deg, var(--accent), #3f7cff);
@@ -453,14 +477,17 @@
     </style>
   </head>
   <body>
-    <div class="page">
-      <header class="topbar card">
-        <div class="title-wrap">
-          <h1>Data Explorer (Wikidata-like)</h1>
+      <div class="page">
+        <div class="superheader">
+          <a class="superlink" href="/">← Índice</a>
+        </div>
+        <header class="topbar card">
+          <div class="title-wrap">
+            <h1>Data Explorer (Wikidata-like)</h1>
           <p>Navegacion dinamica por tablas, registros y relaciones inferidas por esquema.</p>
         </div>
         <nav class="switch">
-          <a href="/">Graph</a>
+          <a href="/graph">Graph</a>
           <a class="active" href="/explorer">Explorer</a>
         </nav>
       </header>

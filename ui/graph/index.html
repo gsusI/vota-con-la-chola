@@ -89,6 +89,29 @@
         font-weight: 700;
       }
 
+      .superheader {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .superlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
       .subtitle {
         margin: 0 0 14px 0;
         color: var(--ink-soft);
@@ -259,12 +282,17 @@
   </head>
   <body>
     <div class="page">
+      <div class="superheader">
+        <a class="superlink" href="/">← Índice</a>
+      </div>
       <aside class="sidebar card">
         <h1>Graph Explorer</h1>
         <p class="subtitle">Politicos, instituciones, partidos y fuentes</p>
         <div class="view-links">
-          <a class="active" href="/">Graph</a>
+          <a class="active" href="/graph">Graph</a>
           <a href="/explorer">Explorer</a>
+          <a href="/explorer-politico">Radar Político</a>
+          <a href="/explorer-sources">Fuentes</a>
         </div>
 
         <div class="controls">
