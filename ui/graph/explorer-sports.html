@@ -1232,7 +1232,7 @@
         if (!isDebugEnabled()) {
           return;
         }
-        console.debug("[explorer-sports:debug]", ...args);
+        console.debug("[explorer-politico:debug]", ...args);
       };
 
       const isVerboseEnabled = () => app.verbose || app.debug || new URLSearchParams(window.location.search).get("verbose") === "1";
@@ -1240,7 +1240,7 @@
         if (!isVerboseEnabled()) {
           return;
         }
-        console.log("[explorer-sports:verbose]", ...args);
+        console.log("[explorer-politico:verbose]", ...args);
       };
 
       const summarizeRowForDiagnostics = (row) => ({
@@ -1255,7 +1255,7 @@
         names: [row.mandate_territory_name, row.institution_territory_name, row.person_territory_name].join(" | "),
       });
 
-      const EXPLORER_SPORTS_VERSION = "1.1.12";
+      const EXPLORER_POLITICO_VERSION = "1.1.12";
       const APP_QUERY = new URLSearchParams(window.location.search);
       const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
       const STATIC_DATA_DIR = "data";
@@ -1480,7 +1480,7 @@
       };
 
       const updateUiVersion = () => {
-        const versionLabel = `v${EXPLORER_SPORTS_VERSION}`;
+        const versionLabel = `v${EXPLORER_POLITICO_VERSION}`;
         if (refs.appTitle) {
           refs.appTitle.innerHTML = `Explorador político territorial <span class="version-chip">${versionLabel}</span>`;
         }
@@ -2900,7 +2900,7 @@
             league: app.league,
             source: app.source,
           };
-          verboseLog("[explorer-sports] territorio aplicado", payload);
+          verboseLog("[explorer-politico] territorio aplicado", payload);
           if (isVerboseEnabled()) {
             const selectedText = refs.territoryFilter?.options
               ? safeText(refs.territoryFilter.options[refs.territoryFilter.selectedIndex]?.text)
@@ -3872,11 +3872,11 @@
           renderTeamList();
           return;
         }
-        if (window.__sportsTreemapRaf) {
-          cancelAnimationFrame(window.__sportsTreemapRaf);
+        if (window.__politicoTreemapRaf) {
+          cancelAnimationFrame(window.__politicoTreemapRaf);
         }
-        window.__sportsTreemapRaf = requestAnimationFrame(() => {
-          window.__sportsTreemapRaf = null;
+        window.__politicoTreemapRaf = requestAnimationFrame(() => {
+          window.__politicoTreemapRaf = null;
           if (app.league === "all" && !app.selectedPartyId) {
             renderTeamList();
           }

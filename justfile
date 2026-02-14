@@ -349,7 +349,7 @@ graph-ui-stop:
 # UI: explorador directo (localhost, sin Docker)
 # Single app serving:
 # - /explorer -> interfaz clásica
-# - /explorer-sports -> interfaz estilo arena/deportes
+# - /explorer-politico -> vista política jerárquica (radar político)
 # - /explorer-sources -> panel de estado de fuentes
 explorer:
   DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} python3 scripts/watch_graph_ui_server.py
@@ -361,7 +361,7 @@ explorer-bg:
   @just explorer-stop >/tmp/vota-explorer-ui-stop.log 2>&1 || true
   DB_PATH={{db_path}} nohup python3 scripts/graph_ui_server.py --db "{{db_path}}" --host {{explorer_host}} --port {{explorer_port}} >/tmp/vota-explorer-ui.log 2>&1 & echo $! >/tmp/vota-explorer-ui.pid
   @echo "Explorer corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
-  @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
+  @echo "Explorer político en http://{{explorer_host}}:{{explorer_port}}/explorer-politico"
   @echo "Fuentes en http://{{explorer_host}}:{{explorer_port}}/explorer-sources"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
@@ -370,16 +370,15 @@ explorer-bg-watch:
   @just explorer-stop >/tmp/vota-explorer-ui-stop.log 2>&1 || true
   DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} nohup python3 scripts/watch_graph_ui_server.py >/tmp/vota-explorer-ui.log 2>&1 & echo $! >/tmp/vota-explorer-ui.pid
   @echo "Explorer (watch) corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
-  @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
+  @echo "Explorer político en http://{{explorer_host}}:{{explorer_port}}/explorer-politico"
   @echo "Fuentes en http://{{explorer_host}}:{{explorer_port}}/explorer-sources"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/explorer-sports
-  mkdir -p {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources
+  rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico
+  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources
   cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
-  cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-sports/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/graph/index.html
   cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-politico/index.html
@@ -387,7 +386,7 @@ explorer-gh-pages-build:
   python3 scripts/export_explorer_sports_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
-    --out-dir "{{gh_pages_dir}}/explorer-sports/data"
+    --out-dir "{{gh_pages_dir}}/explorer-politico/data"
   @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 
 explorer-gh-pages-publish:
@@ -404,7 +403,7 @@ explorer-gh-pages-publish:
   git init -q; \
   git checkout -b "{{gh_pages_branch}}"; \
   git add .; \
-  git commit --allow-empty -m "Publish explorers landing and static sports snapshot" -q; \
+  git commit --allow-empty -m "Publish explorers landing and explorer-politico static snapshot" -q; \
   git remote add origin "$remote_url"; \
   git push -f "$remote_url" "{{gh_pages_branch}}:{{gh_pages_branch}}"
 
@@ -451,10 +450,10 @@ explore: explorer
 graph-explorer: explorer
 graph-explorer-bg: explorer-bg
 graph-explorer-stop: explorer-stop
-explorer-sports: explorer
-explorer-sports-bg: explorer-bg
-explorer-sports-watch: explorer-watch
-explorer-sports-bg-watch: explorer-bg-watch
+explorer-politico: explorer
+explorer-politico-bg: explorer-bg
+explorer-politico-watch: explorer-watch
+explorer-politico-bg-watch: explorer-bg-watch
 
 # Tracker: estado SQL vs checklist
 etl-tracker-status:
