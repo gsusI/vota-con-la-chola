@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -48,7 +49,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_ing.add_argument("--max-records", type=int, default=None, help="Limita numero de registros (debug)")
     p_ing.add_argument("--congreso-legs", default=None, help="Legislaturas Congreso separadas por coma (ej: 15,14)")
     p_ing.add_argument("--senado-legs", default=None, help="Legislaturas Senado separadas por coma (ej: 15,14)")
-    p_ing.add_argument("--senado-detail-dir", default=None, help="Dir local con ses_<n>.xml para enriquecer votaciones Senado")
+    p_ing.add_argument(
+        "--senado-detail-dir",
+        default=os.getenv("SENADO_DETAIL_DIR") or None,
+        help="Dir local con ses_<n>.xml para enriquecer votaciones Senado",
+    )
     p_ing.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga de detalle Senado (opcional)")
     p_ing.add_argument("--senado-detail-host", default=None, help="Host base para ses_<n>.xml (default videoservlet)")
     p_ing.add_argument("--senado-skip-details", action="store_true", help="No intentar enriquecer detalle por sesion en Senado")
@@ -150,7 +155,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_backfill_senado.add_argument("--legislature", default=None, help="Filtro por legislatura (ej: 15,14)")
     p_backfill_senado.add_argument("--vote-event-ids", default=None, help="CSV de vote_event_id para limitar")
     p_backfill_senado.add_argument("--dry-run", action="store_true", help="Simula cambios sin reescribir DB")
-    p_backfill_senado.add_argument("--senado-detail-dir", default=None, help="Dir local con ses_<n>.xml para enriquecer votos")
+    p_backfill_senado.add_argument(
+        "--senado-detail-dir",
+        default=os.getenv("SENADO_DETAIL_DIR") or None,
+        help="Dir local con ses_<n>.xml para enriquecer votos",
+    )
     p_backfill_senado.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga detalle Senado (opcional)")
     p_backfill_senado.add_argument(
         "--senado-detail-host",

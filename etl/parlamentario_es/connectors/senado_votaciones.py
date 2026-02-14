@@ -128,6 +128,12 @@ def _session_vote_file_url_candidates(
     out: list[str] = []
 
     vote_file = normalize_ws(str(vote_file_url or ""))
+    if vote_file and not vote_file.lower().startswith("http"):
+        # Upstream XML sometimes provides relative URLs.
+        if vote_file.startswith("/") or "/legis" in vote_file:
+            vote_file = urljoin(host + "/", vote_file)
+        else:
+            vote_file = urljoin(base + "/", vote_file)
     if vote_file:
         out.append(vote_file)
 
@@ -363,6 +369,8 @@ def _find_local_session_xml(
     detail_dir: Path,
     session_id: int,
     vote_id: int | None = None,
+    *,
+    session_url: str | None = None,
 ) -> Path | None:
     candidate_names: list[str] = []
     if vote_id is not None:
@@ -370,14 +378,30 @@ def _find_local_session_xml(
         candidate_names.append(f"ses_{vote_id}_{session_id}.xml")
     candidate_names.append(f"ses_{session_id}.xml")
 
-    for name in candidate_names:
-        direct = detail_dir / name
-        if direct.exists() and direct.is_file():
-            return direct
+    preferred_dirs: list[Path] = []
+    if session_url:
+        try:
+            parsed = urlparse(session_url)
+            basename = Path(parsed.path).name
+        except Exception:  # noqa: BLE001
+            basename = ""
+        if basename and basename not in candidate_names:
+            candidate_names.insert(0, basename)
 
-    glob_patterns = [f"**/{name}" for name in candidate_names]
-    for pattern in glob_patterns:
-        matches = sorted(detail_dir.glob(pattern))
+        m = re.search(r"/legis(\d+)/votaciones/", session_url, flags=re.I)
+        if m:
+            preferred_dirs.append(detail_dir / f"legis{m.group(1)}")
+    preferred_dirs.append(detail_dir)
+
+    for root in preferred_dirs:
+        for name in candidate_names:
+            direct = root / name
+            if direct.exists() and direct.is_file():
+                return direct
+
+    # Last resort: recursive search (slower, but keeps backward compat with older folder layouts).
+    for name in candidate_names:
+        matches = sorted(detail_dir.glob(f"**/{name}"))
         if matches:
             return matches[0]
 
@@ -398,8 +422,14 @@ def _load_session_vote_info(
         session_info["error"] = "network-detail: empty-session-url"
         return session_info
 
+    bad_local_path: Path | None = None
     if detail_dir is not None:
-        local_path = _find_local_session_xml(detail_dir, session_id or 0, vote_id)
+        local_path = _find_local_session_xml(
+            detail_dir,
+            session_id or 0,
+            vote_id,
+            session_url=session_url,
+        )
         if local_path is not None:
             try:
                 parsed = _parse_sesion_vote_xml(local_path.read_bytes())
@@ -411,6 +441,7 @@ def _load_session_vote_info(
                     "source": str(local_path),
                 }
             except Exception as exc:  # noqa: BLE001
+                bad_local_path = local_path
                 session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
 
     try:
@@ -422,12 +453,47 @@ def _load_session_vote_info(
         if ct and "xml" not in ct.lower():
             raise RuntimeError(f"content_type inesperado: {ct}")
         parsed = _parse_sesion_vote_xml(session_bytes)
+
+        saved_path: Path | None = None
+        if detail_dir is not None:
+            try:
+                parsed_url = urlparse(session_url)
+                filename = Path(parsed_url.path).name
+                if not filename:
+                    if session_id is not None and vote_id is not None:
+                        filename = f"ses_{session_id}_{vote_id}.xml"
+                    elif session_id is not None:
+                        filename = f"ses_{session_id}.xml"
+                    else:
+                        filename = f"ses_{sha256_bytes(session_url.encode('utf-8'))[:12]}.xml"
+                if not filename.lower().endswith(".xml"):
+                    filename = f"{filename}.xml"
+
+                m = re.search(r"/legis(\d+)/votaciones/", parsed_url.path, flags=re.I)
+                out_dir = detail_dir / (f"legis{m.group(1)}" if m else "legisunknown")
+                out_dir.mkdir(parents=True, exist_ok=True)
+
+                out_path = bad_local_path or (out_dir / filename)
+                if bad_local_path is not None or not out_path.exists():
+                    tmp_path = out_path.with_suffix(out_path.suffix + f".tmp{os.getpid()}")
+                    tmp_path.write_bytes(session_bytes)
+                    try:
+                        tmp_path.replace(out_path)
+                    except FileExistsError:
+                        try:
+                            tmp_path.unlink(missing_ok=True)
+                        except Exception:  # noqa: BLE001
+                            pass
+                saved_path = out_path if out_path.exists() else None
+            except Exception:  # noqa: BLE001
+                saved_path = None
+
         return {
             "ok": True,
             "votes": parsed["votes"],
             "session_date": parsed["session_date"],
             "error": None,
-            "source": session_url,
+            "source": str(saved_path) if saved_path is not None else session_url,
         }
     except Exception as exc:  # noqa: BLE001
         session_info["error"] = f"network-detail: {type(exc).__name__}: {exc}"
@@ -501,6 +567,18 @@ def _enrich_senado_record_with_details(
                 payload["member_votes"] = candidate.get("member_votes") or []
                 return
 
+            session_votes = session_info.get("votes") or []
+            has_nominal_data = any(
+                bool(v.get("member_votes"))
+                or v.get("totals_yes") is not None
+                or v.get("totals_no") is not None
+                or v.get("totals_abstain") is not None
+                or v.get("totals_no_vote") is not None
+                for v in session_votes
+            )
+            if has_nominal_data:
+                break
+
     if first_successful_session_info is None:
         for session_info in session_cache.values():
             err = session_info.get("error")
@@ -566,7 +644,7 @@ class SenadoVotacionesConnector(BaseConnector):
         options = dict(options or {})
         max_votes = options.get("max_votes")
         leg_filter = _parse_leg_filter(options.get("senado_legs"))
-        detail_dir_opt = options.get("senado_detail_dir")
+        detail_dir_opt = options.get("senado_detail_dir") or os.getenv("SENADO_DETAIL_DIR")
         detail_dir = Path(str(detail_dir_opt)) if detail_dir_opt else None
         detail_host = normalize_ws(str(options.get("senado_detail_host") or SENADO_BASE)) or SENADO_BASE
         detail_cookie = normalize_ws(str(options.get("senado_detail_cookie") or "")) or os.getenv("SENADO_DETAIL_COOKIE")
@@ -646,7 +724,10 @@ class SenadoVotacionesConnector(BaseConnector):
                 if strict_network:
                     raise
 
-        target_legs = leg_filter or _extract_legislatures_from_catalog_html(html_text) or [15]
+        target_legs = leg_filter or _extract_legislatures_from_catalog_html(html_text)
+        if not target_legs:
+            # Conservative fallback: try a reasonable range of legislatures (newest first).
+            target_legs = list(range(25, 0, -1))
         target_legs = sorted({int(v) for v in target_legs if int(v) >= 0}, reverse=True)
 
         tipo12_urls: list[str] = []
@@ -676,30 +757,29 @@ class SenadoVotacionesConnector(BaseConnector):
                 seen_tipo12.add(url)
                 tipo12_urls.append(url)
 
-        # Fallback: if catalog pages are flaky/unavailable, derive tipoFich=12 URLs from tipoFich=9 XML.
+        # Also derive tipoFich=12 URLs from tipoFich=9 XML (more complete than HTML in practice).
         tipo9_failures: list[str] = []
         tipo12_from_tipo9 = 0
-        if not tipo12_urls:
-            for leg in target_legs:
-                tipo9_url = SENADO_TIPO9_URL.format(leg=leg)
-                try:
-                    tipo9_bytes, tipo9_ct = http_get_bytes(
-                        tipo9_url,
-                        timeout,
-                        headers={"Accept": "application/xml,text/xml,*/*"},
-                    )
-                    if tipo9_ct and "xml" not in tipo9_ct.lower():
-                        raise RuntimeError(f"content_type inesperado: {tipo9_ct}")
-                    for u in _tipo12_urls_from_tipo9_xml(tipo9_bytes):
-                        if u in seen_tipo12:
-                            continue
-                        seen_tipo12.add(u)
-                        tipo12_urls.append(u)
-                        tipo12_from_tipo9 += 1
-                except Exception as exc:  # noqa: BLE001
-                    tipo9_failures.append(f"{tipo9_url} -> {type(exc).__name__}: {exc}")
-                    if strict_network:
-                        raise
+        for leg in target_legs:
+            tipo9_url = SENADO_TIPO9_URL.format(leg=leg)
+            try:
+                tipo9_bytes, tipo9_ct = http_get_bytes(
+                    tipo9_url,
+                    timeout,
+                    headers={"Accept": "application/xml,text/xml,*/*"},
+                )
+                if tipo9_ct and "xml" not in tipo9_ct.lower():
+                    raise RuntimeError(f"content_type inesperado: {tipo9_ct}")
+                for u in _tipo12_urls_from_tipo9_xml(tipo9_bytes):
+                    if u in seen_tipo12:
+                        continue
+                    seen_tipo12.add(u)
+                    tipo12_urls.append(u)
+                    tipo12_from_tipo9 += 1
+            except Exception as exc:  # noqa: BLE001
+                tipo9_failures.append(f"{tipo9_url} -> {type(exc).__name__}: {exc}")
+                if strict_network:
+                    raise
 
         detail_fetch_failures: list[str] = []
         for u in tipo12_urls:

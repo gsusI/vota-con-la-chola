@@ -5,6 +5,8 @@ import re
 import urllib.request
 import http.cookiejar
 import ssl
+from urllib.parse import urljoin
+from urllib.parse import urlsplit
 from html import unescape
 from pathlib import Path
 from typing import Any
@@ -66,28 +68,41 @@ def get_ca_html_with_bot_cookie(url: str, timeout: int) -> tuple[bytes, str | No
     3) GET url again -> real HTML
     """
     jar = http.cookiejar.CookieJar()
-    # Some endpoints present incomplete chains; use an unverified context for robustness.
-    ctx = ssl._create_unverified_context()  # noqa: S501
-    opener = urllib.request.build_opener(
-        urllib.request.HTTPSHandler(context=ctx),
-        urllib.request.HTTPCookieProcessor(jar),
-    )
+    parsed = urlsplit(url)
+    urls_to_try = [url]
+    if parsed.scheme == "https":
+        urls_to_try.append(f"http://{parsed.netloc}{parsed.path}{'?' + parsed.query if parsed.query else ''}")
 
-    def open_bytes(target: str) -> tuple[bytes, str | None]:
-        req = urllib.request.Request(target, headers=dict(BASE_HEADERS))
-        with opener.open(req, timeout=timeout) as resp:
-            return resp.read(), resp.headers.get("Content-Type")
+    for current_url in urls_to_try:
+        current_scheme = urlsplit(current_url).scheme
+        ctx = ssl._create_unverified_context()  # noqa: S501
+        opener = urllib.request.build_opener(
+            urllib.request.HTTPHandler(),
+            urllib.request.HTTPSHandler(context=ctx),
+            urllib.request.HTTPCookieProcessor(jar),
+        )
 
-    payload, ct = open_bytes(url)
-    html = decode_ca_html(payload, ct)
-    m = re.search(r"window\.location\.href='([^']+)'", html, flags=re.I)
-    if m:
-        redirect_path = m.group(1)
-        if redirect_path.startswith("/redirect_"):
-            # Hit redirect to set the final cookie, then retry original.
-            _ = open_bytes(f"{CA_BASE}{redirect_path}")
-            payload, ct = open_bytes(url)
-    return payload, ct
+        def open_bytes(target: str) -> tuple[bytes, str | None]:
+            req = urllib.request.Request(target, headers=dict(BASE_HEADERS))
+            with opener.open(req, timeout=timeout) as resp:
+                return resp.read(), resp.headers.get("Content-Type")
+
+        try:
+            payload, ct = open_bytes(current_url)
+            html = decode_ca_html(payload, ct)
+            m = re.search(r"window\.location\.href='([^']+)'", html, flags=re.I)
+            if m:
+                redirect_path = m.group(1)
+                if redirect_path.startswith("/redirect_"):
+                    # Hit redirect to set the final cookie, then retry original.
+                    redirect_url = urljoin(current_url, redirect_path)
+                    _ = open_bytes(redirect_url)
+                    payload, ct = open_bytes(current_url)
+            return payload, ct
+        except Exception:
+            if current_url != urls_to_try[-1]:
+                continue
+            raise
 
 
 def normalize_ca_group(label: str) -> str:

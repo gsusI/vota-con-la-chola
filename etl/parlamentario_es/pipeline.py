@@ -440,7 +440,7 @@ def backfill_senado_vote_details(
     detail_blocked = False
     session_cache: dict[str, dict[str, Any]] = {}
     rows_to_enrich: list[tuple[Any, dict[str, Any]]] = []
-    session_urls: dict[str, tuple[int | None, int | None]] = {}
+    first_session_urls: dict[str, tuple[int | None, int | None]] = {}
 
     worker_count = max(1, int(detail_workers or 1))
 
@@ -453,14 +453,15 @@ def backfill_senado_vote_details(
         session_id = _to_int(payload.get("session_id"))
         vote_id = _to_int(payload.get("vote_id"))
         vote_file_url = normalize_ws(str(payload.get("vote_file_url") or ""))
-        for session_url in _session_vote_file_url_candidates(
+        candidate_urls = _session_vote_file_url_candidates(
             detail_host,
             leg,
             session_id,
             vote_id,
             vote_file_url,
-        ):
-            session_urls.setdefault(session_url, (session_id, vote_id))
+        )
+        if candidate_urls:
+            first_session_urls.setdefault(candidate_urls[0], (session_id, vote_id))
 
     def _prefetch_session(args: tuple[str, tuple[int | None, int | None]]) -> tuple[str, dict[str, Any]]:
         session_url, ids = args
@@ -500,8 +501,8 @@ def backfill_senado_vote_details(
             failures.append(f"unexpected-enrich-error: {type(exc).__name__}: {exc}")
         return rec, failures
 
-    if session_urls:
-        prefetch_items = list(session_urls.items())
+    if first_session_urls:
+        prefetch_items = list(first_session_urls.items())
         blocked_error: str | None = None
         probe_budget = min(3, len(prefetch_items))
         probe_403_count = 0

@@ -79,6 +79,10 @@ def compute_vote_quality_kpis(
             vote_event_id,
             source_id,
             vote_date,
+            title,
+            expediente_text,
+            subgroup_title,
+            subgroup_text,
             totals_present,
             totals_yes,
             totals_no,
@@ -95,10 +99,6 @@ def compute_vote_quality_kpis(
           JOIN parl_vote_event_initiatives l
             ON l.vote_event_id = e.vote_event_id
         ),
-        theme_events AS (
-          SELECT DISTINCT vote_event_id
-          FROM parl_vote_event_initiatives
-        ),
         nominal_events AS (
           SELECT DISTINCT vote_event_id
           FROM parl_vote_member_votes
@@ -114,7 +114,12 @@ def compute_vote_quality_kpis(
           ) AS events_with_date,
           SUM(
             CASE
-              WHEN t.vote_event_id IS NOT NULL THEN 1
+              WHEN (
+                (e.title IS NOT NULL AND TRIM(e.title) <> '')
+                OR (e.expediente_text IS NOT NULL AND TRIM(e.expediente_text) <> '')
+                OR (e.subgroup_title IS NOT NULL AND TRIM(e.subgroup_title) <> '')
+                OR (e.subgroup_text IS NOT NULL AND TRIM(e.subgroup_text) <> '')
+              ) THEN 1
               ELSE 0
             END
           ) AS events_with_theme,
@@ -143,7 +148,6 @@ def compute_vote_quality_kpis(
             END
           ) AS events_with_initiative_link
         FROM selected_events e
-        LEFT JOIN theme_events t ON t.vote_event_id = e.vote_event_id
         LEFT JOIN nominal_events n ON n.vote_event_id = e.vote_event_id
         LEFT JOIN initiative_events ie ON ie.vote_event_id = e.vote_event_id
         GROUP BY e.source_id
