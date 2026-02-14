@@ -229,6 +229,92 @@ just etl-cli "stats --db etl/data/staging/politicos-es.db"
 just etl-cli "ingest --db etl/data/staging/politicos-es.db --source congreso_diputados --snapshot-date 2026-02-12 --strict-network"
 ```
 
+## TODO operativo: continuar con votos del Senado (backlog senado_votaciones)
+
+Estado actual del proyecto (válido en esta rama):
+- En `senado_votaciones`, hay mezcla de problemas:
+  - sesiones válidas con detalle accesible,
+  - y casos en los que se generan URLs `ses_<n>.xml` que no existen en host pero sí hay alternativa `ses_<sesion>_<voto>.xml`.
+- `last run` muestra 98 eventos sin `parl_vote_member_votes` (sin fallback viable):
+  - `leg=10`: 61
+  - `leg=12`: 7
+  - `leg=14`: 26
+  - `leg=15`: 4
+- En `votaciones` quedan pendiente de normalización (backlog confirmado en este DB):
+  - `leg=10`: 61 eventos
+  - `leg=12`: 7 eventos
+  - `leg=14`: 26 eventos
+  - `leg=15`: 4 eventos
+  - Total faltante: 98 eventos
+- En una pasada dedicada con `--max-events` exactos por legislatura + `SENADO_DETAIL_DIR` local + 1 worker, no hubo reingestas nuevas (`events_reingested=0` en 10/12/14 y `detail-prefetch` 404 en 15).
+- Hallazgo técnico (2026-02-13): de los 98 pendientes:
+  - 94 `vote_file_url` existen pero no contienen bloque de votos (`resultado` con `VotoSenador`).
+  - 4 URLs de detalle acaban en 404.
+  - Los `ses_<session>.xml` locales de respaldo suelen traer bloques de votos planos (`escano/grupo/nombre/voto`) pero con identificación de votación distinta a la `vote_id` (`num_vot` típicamente 1000+), sin emparejamiento fiable por título/expediente.
+- PIN operativo: `events_without_member_votes` no avanza con el flujo actual sin una fuente alternativa de detalle por senador.
+
+Notas importantes de implementación (ya aplicadas):
+- `etl/parlamentario_es/connectors/senado_votaciones.py`: en `_enrich_senado_record_with_details` ya no sigue intentando URLs de `ses_*.xml` una vez que encuentra una con datos nominales (`member_votes` o totales), para evitar trabajo redundante.
+- `etl/parlamentario_es/pipeline.py`: en `backfill_senado_vote_details` ya prefetch solo de la URL candidata principal por evento (`first_session_urls`), reduciendo peticiones concurrentes innecesarias al mismo contexto.
+- `scripts/export_senado_missing_detail_urls.py`: modo `session` valida candidatos con HEAD antes de exportarlos (TTL de 5s en `justfile`) y hace fallback a `vote_file_url`/otras candidatas cuando `ses_<n>.xml` no es XML válido.
+- `scripts/export_senado_missing_detail_urls.py` ya no asume que `ses_<n>.xml` exista por convención. La URL se construye a partir de `session_id`; si ese patrón no es válido para la legislatura, se intenta `vote_file_url` del payload primero y sólo entonces se guarda.
+- Si hay URL de detalle en XML, puede venir en la forma `ses_<sesion>_<voto>.xml` o `ses_<voto>_<sesion>.xml`; el código conserva la deduplicación de candidatos.
+- Los `vote_event_id` del Senado se construyen como `url:<...>` si no hay `vote_file_url`, por eso al exportar manualmente URLs desde listados hay que manejar ese prefijo con limpieza (`url:`).
+- `scripts/download_senado_missing_detail_urls_headful.py` + receta `parl-senado-download-missing-details`: intenta descarga normal y, si falla, usa navegador visible (Playwright) para resolver bloqueos anti-bot y guardar el XML.
+  - Variables útiles: `SENADO_HEADFUL_TIMEOUT`, `SENADO_HEADFUL_WAIT_SECONDS`, `SENADO_HEADFUL_CHANNEL`, `SENADO_HEADFUL_VIEWPORT`, `SENADO_HEADFUL_USER_DATA_DIR`.
+
+### Origen de las URLs “malas” (no es que el HTML esté roto por sí solo)
+
+- La URL no sale “directamente” de una lista limpia de detalle del Senado.
+- Sale de cómo el evento normalizado guarda `session_id` y de cómo el exportador la “proyecta”:
+  - `session_id=10`, `vote_id=27` + patrón legacy -> `https://www.senado.es/legis14/votaciones/ses_10.xml` (inventada por convención de sesión).
+  - El mismo evento trae `vote_file_url` con valor concreto `https://www.senado.es/legis14/votaciones/ses_10_27.xml` (`payload` del evento).
+- Por eso la acción correcta es:
+  - priorizar siempre `vote_file_url` si existe,
+  - y tratar `ses_<session>.xml` como candidato de ahorro, no como único origen.
+
+Si quieres auditar esto en cualquier DB:
+
+```bash
+python3 - <<'PY'
+import sqlite3, json
+conn = sqlite3.connect("etl/data/staging/politicos-es.db")
+conn.row_factory = sqlite3.Row
+for r in conn.execute(\"\"\"SELECT e.vote_event_id, sr.raw_payload
+FROM parl_vote_events e
+JOIN source_records sr ON sr.source_record_pk=e.source_record_pk
+WHERE e.source_id='senado_votaciones' AND e.legislature='14'
+LIMIT 5\"\"\").fetchall():
+    p=json.loads(r[1] or '{}')
+    print(r[0], p.get('session_id'), p.get('vote_id'), p.get('vote_file_url'))
+PY
+```
+
+Próximos pasos (siguientes acciones recomendadas para retomar):
+- [ ] En manual pipeline, exportar primero la lista con `parl-senado-export-missing-detail-urls` y confirmar que no quedan URLs de sesión no válidas; si aparecen, revisa `session_id` contra `vote_file_url` del mismo evento.
+- [ ] Descargar/centralizar `ses_*.xml` en `etl/data/raw/manual/senado_votaciones_ses` para la lista faltante de URLs (sin prefijo `url:`).
+  - Si una fuente externa de listas ya existe, limpiar con: `sed 's/^url://'` antes de descargar.
+- [ ] Ejecutar backfill en modo `--dry-run` por bloque legislativo:
+  - `--legislature 15 --max-events 4`
+  - `--legislature 10 --max-events 61`
+  - `--legislature 12 --max-events 7`
+  - `--legislature 14 --max-events 26`
+- [ ] Repetir las mismas llamadas sin `--dry-run` cuando exista conectividad real o cache local funcional.
+- [ ] Validar con `quality-report` para confirmar que suben:
+  - `events_with_date_pct`
+  - `events_with_totals_pct`
+  - `member_votes_with_person_id_pct`
+- [ ] Si persiste 0 resultados por red/DNS, seguir con captura manual reproducible de `ses_*.xml` y reintento del backfill con `--senado-detail-dir`.
+
+Comando base de referencia:
+```bash
+python3 scripts/ingestar_parlamentario_es.py backfill-senado-details \\
+  --db etl/data/staging/politicos-es.db \\
+  --snapshot-date 2026-02-12 \\
+  --senado-detail-dir etl/data/raw/manual/senado_votaciones_ses \\
+  --detail-workers 4 --timeout 20 --legislature 14 --max-events 3451 --dry-run
+```
+
 ## Modelo de datos (SQLite)
 
 Esquema fuente de verdad: `etl/load/sqlite_schema.sql`.

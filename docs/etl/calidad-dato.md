@@ -41,8 +41,17 @@ Procesar texto y datos estructurados con trazabilidad, priorizacion clara y cont
 `prioridad = (impacto * fiabilidad_fuente) / esfuerzo`
 
 - `impacto`: 1-5 (cuanto mejora la decision del usuario)
-- `fiabilidad_fuente`: 1-5 (grado de oficialidad/verificabilidad)
+- `fiabilidad_fuente`: 0-5 (grado de oficialidad/verificabilidad)
 - `esfuerzo`: 1-5 (coste tecnico/editorial)
+
+## Escala practica de `fiabilidad_fuente` (0-5)
+
+- `5/5` primaria con efectos: boletin/registro obligatorio con responsabilidad legal (ej: BOE, BDNS, PLACSP, EUR-Lex)
+- `4/5` oficial estructurado: open data/datasets exportables con metadatos consistentes (ej: Congreso/Senado OpenData)
+- `3/5` oficial comunicacional: notas, "referencias", agendas, RSS (hecho de comunicacion, no efecto juridico)
+- `2/5` reutilizador fiable: ONG/academia que deriva de 4-5 (util, pero verificar contra original)
+- `1/5` senal: prensa/redes/rumores (sirve para alertas, no evidencia)
+- `0/5` sin trazabilidad: afirmacion sin fuente verificable
 
 ## Orden recomendado
 1. **P0 (primero)**: convocatorias, resultados oficiales, votaciones Congreso/Senado, BOE.
