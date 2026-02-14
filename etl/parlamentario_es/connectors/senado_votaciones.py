@@ -433,13 +433,18 @@ def _load_session_vote_info(
         if local_path is not None:
             try:
                 parsed = _parse_sesion_vote_xml(local_path.read_bytes())
-                return {
-                    "ok": True,
-                    "votes": parsed["votes"],
-                    "session_date": parsed["session_date"],
-                    "error": None,
-                    "source": str(local_path),
-                }
+                # Some cached files are valid XML but contain zero votes (typically an HTML-ish placeholder
+                # or truncated payload from a previous run). Treat that as cache miss and retry network.
+                if parsed.get("votes"):
+                    return {
+                        "ok": True,
+                        "votes": parsed["votes"],
+                        "session_date": parsed["session_date"],
+                        "error": None,
+                        "source": str(local_path),
+                    }
+                bad_local_path = local_path
+                session_info["error"] = "local-empty: no-votes"
             except Exception as exc:  # noqa: BLE001
                 bad_local_path = local_path
                 session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
@@ -510,15 +515,22 @@ def _enrich_senado_record_with_details(
     detail_cookie: str | None,
     detail_failures: list[str],
 ) -> None:
-    payload = rec.get("payload") or {}
-    if not isinstance(payload, dict):
+    # Backward compat: older stored payloads were "flat" dicts (no {"payload": {...}} wrapper).
+    # In that case, mutate `rec` directly so the caller can persist enriched fields.
+    payload_obj = rec.get("payload")
+    if payload_obj is None:
+        payload: dict[str, Any] = rec
+    elif isinstance(payload_obj, dict):
+        payload = payload_obj
+    else:
         return
+
     leg = normalize_ws(str(payload.get("legislature") or rec.get("legislature") or "")) or None
-    session_id = _to_int(payload.get("session_id"))
+    session_id = _to_int(payload.get("session_id") or rec.get("session_id"))
     if not leg or session_id is None:
         return
 
-    vote_id = _to_int(payload.get("vote_id"))
+    vote_id = _to_int(payload.get("vote_id") or rec.get("vote_id"))
     candidate_urls = _session_vote_file_url_candidates(
         detail_host,
         leg,
@@ -547,7 +559,10 @@ def _enrich_senado_record_with_details(
             session_cache[session_url] = session_info
 
         if session_info.get("ok"):
+            # Prefer a successful session that actually contains votes for fallback parsing.
             if first_successful_session_info is None:
+                first_successful_session_info = session_info
+            elif (not (first_successful_session_info.get("votes") or [])) and (session_info.get("votes") or []):
                 first_successful_session_info = session_info
 
             candidate, method, confidence = _pick_sesion_vote(payload, session_info.get("votes") or [])

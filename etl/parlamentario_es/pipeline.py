@@ -565,7 +565,29 @@ def backfill_senado_vote_details(
                 records.append(rec)
                 detail_failures.extend(row_failures)
 
+    # Re-ingest records when enrichment produced useful fields, even if there is no roll-call.
+    # Many Senado votes are "Por asentimiento" (no member list), but the session XML still provides
+    # a vote date and sometimes totals; we want those columns updated in `parl_vote_events`.
     records_with_votes = [r for r in records if isinstance(r.get("payload"), dict) and r["payload"].get("member_votes")]
+    records_to_reingest: list[dict[str, Any]] = []
+    for r in records:
+        payload = r.get("payload")
+        if not isinstance(payload, dict):
+            continue
+        if payload.get("member_votes"):
+            records_to_reingest.append(r)
+            continue
+        if payload.get("vote_date"):
+            records_to_reingest.append(r)
+            continue
+        if (
+            payload.get("totals_present") is not None
+            or payload.get("totals_yes") is not None
+            or payload.get("totals_no") is not None
+            or payload.get("totals_abstain") is not None
+            or payload.get("totals_no_vote") is not None
+        ):
+            records_to_reingest.append(r)
 
     events_by_error: dict[str, int] = {}
     for rec in records_with_votes:
@@ -591,10 +613,10 @@ def backfill_senado_vote_details(
             "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
             "last_vote_event_id": last_vote_event_id,
             "detail_failures": sorted(set(detail_failures)),
-            "would_reingest": len(records_with_votes),
+            "would_reingest": len(records_to_reingest),
         }
 
-    if not records_with_votes:
+    if not records_to_reingest:
         return {
             "source_id": "senado_votaciones",
             "dry_run": False,
@@ -615,7 +637,7 @@ def backfill_senado_vote_details(
     now_iso = now_utc_iso()
     _, events_reingested, member_votes_loaded = _ingest_senado_votaciones(
         conn,
-        extracted_records=records_with_votes,
+        extracted_records=records_to_reingest,
         source_id="senado_votaciones",
         snapshot_date=snapshot_date,
         now_iso=now_iso,
