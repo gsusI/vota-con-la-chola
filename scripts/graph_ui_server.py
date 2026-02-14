@@ -3,14 +3,17 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import argparse
 import json
+import sys
 import sqlite3
 import unicodedata
 from dataclasses import dataclass
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from functools import lru_cache
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
@@ -18,8 +21,19 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8080
 BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 UI_INDEX = BASE_DIR / "ui" / "graph" / "index.html"
+UI_EXPLORERS = BASE_DIR / "ui" / "graph" / "explorers.html"
+UI_GRAPH = BASE_DIR / "ui" / "graph" / "index.html"
 UI_EXPLORER = BASE_DIR / "ui" / "graph" / "explorer.html"
+UI_EXPLORER_POLITICO = BASE_DIR / "ui" / "graph" / "explorer-sports.html"
+UI_EXPLORER_VOTACIONES = BASE_DIR / "ui" / "graph" / "explorer-votaciones.html"
+UI_EXPLORER_SOURCES = BASE_DIR / "ui" / "graph" / "explorer-sources.html"
+UI_EXPLORER_TEMAS = BASE_DIR / "ui" / "graph" / "explorer-temas.html"
+MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblacion_municipios_es.json"
+TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
+IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
 
 LABEL_COLUMN_CANDIDATES = (
     "full_name",
@@ -31,10 +45,105 @@ LABEL_COLUMN_CANDIDATES = (
     "party_name",
     "display_name",
     "acronym",
+    "source_record_id",
+    "descripcion",
+    "description",
+    "nombre",
     "code",
     "canonical_key",
     "source_id",
 )
+
+
+def safe_text(value: Any) -> str:
+    if value is None:
+        return ""
+    return str(value).strip()
+
+
+def is_municipal_level(level: Any) -> bool:
+    normalized = normalize_key_part(safe_text(level))
+    return bool(normalized) and (
+        "municipal" in normalized or "ayuntamiento" in normalized or "concejal" in normalized or "local" in normalized
+    )
+
+
+def normalize_municipality_code(value: Any) -> str:
+    token = "".join(ch for ch in safe_text(value) if ch.isdigit())
+    if len(token) == 5:
+        return token
+    return ""
+
+
+def row_value(row: Any, key: str) -> Any:
+    try:
+        if hasattr(row, "get"):
+            try:
+                return row.get(key)
+            except Exception:
+                pass
+        return row[key]
+    except Exception:
+        return None
+
+
+def municipality_name_guess(name: Any, level: Any) -> str:
+    text = safe_text(name)
+    if text:
+        return text
+    normalized = normalize_key_part(level)
+    if normalized:
+        return normalized
+    return "Sin municipio"
+
+
+@lru_cache(maxsize=1)
+def load_municipality_population() -> dict[str, int]:
+    if not MUNICIPALITY_POPULATION_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(MUNICIPALITY_POPULATION_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    by_code: dict[str, int] = {}
+    for entry in payload.get("municipalities", []):
+        code = normalize_municipality_code(entry.get("municipality_code"))
+        if not code:
+            continue
+        population = entry.get("population_total")
+        if population is None:
+            continue
+        try:
+            by_code[code] = int(population)
+        except (TypeError, ValueError):
+            continue
+    return by_code
+
+
+def extract_municipality_fields(row: sqlite3.Row, population_by_code: dict[str, int]) -> tuple[str, str, int | None]:
+    candidates = [
+        (row_value(row, "mandate_territory_code"), row_value(row, "mandate_territory_name"), row_value(row, "mandate_territory_level")),
+        (row_value(row, "institution_territory_code"), row_value(row, "institution_territory_name"), row_value(row, "institution_territory_level")),
+        (row_value(row, "person_territory_code"), row_value(row, "person_territory_name"), row_value(row, "person_territory_level")),
+    ]
+
+    for code, name, level in candidates:
+        normalized = normalize_municipality_code(code)
+        if normalized and is_municipal_level(level):
+            return normalized, municipality_name_guess(name, level), population_by_code.get(normalized)
+
+    for code, name, level in candidates:
+        normalized = normalize_municipality_code(code)
+        if normalized and population_by_code.get(normalized) is not None:
+            return normalized, municipality_name_guess(name, level), population_by_code.get(normalized)
+
+    for code, name, level in candidates:
+        normalized = normalize_municipality_code(code)
+        if normalized:
+            return normalized, municipality_name_guess(name, level), population_by_code.get(normalized)
+
+    return "", "", None
 
 FACET_COLUMN_CANDIDATES = (
     # mandates / roles
@@ -139,6 +248,159 @@ def safe_json_value(value: Any) -> Any:
     return value
 
 
+def to_int_or_none(value: Any) -> int | None:
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _coerce_source_config(value: Any, *, domain: str) -> dict[str, dict[str, Any]]:
+    if not isinstance(value, dict):
+        return {}
+
+    plan: dict[str, dict[str, Any]] = {}
+    for source_id, cfg in value.items():
+        if not isinstance(cfg, dict):
+            continue
+        sid = safe_text(source_id)
+        if not sid:
+            continue
+        plan[sid] = {
+            "source_id": sid,
+            "domain": safe_text(domain),
+            "name": safe_text(cfg.get("name")) or sid,
+            "scope": safe_text(cfg.get("scope")),
+            "default_url": safe_text(cfg.get("default_url")),
+            "institution_name": safe_text(cfg.get("institution_name")),
+            "role_title": safe_text(cfg.get("role_title")),
+            "level": safe_text(cfg.get("level")),
+            "format": safe_text(cfg.get("format")),
+            "fallback_file": safe_text(cfg.get("fallback_file")),
+            "min_records_loaded_strict": to_int_or_none(cfg.get("min_records_loaded_strict")),
+        }
+    return plan
+
+
+try:
+    from etl.politicos_es.config import SOURCE_CONFIG as POLITICOS_SOURCE_CONFIG
+except Exception:
+    POLITICOS_SOURCE_CONFIG = {}
+
+try:
+    from etl.parlamentario_es.config import SOURCE_CONFIG as PARLAMENTARIO_SOURCE_CONFIG
+except Exception:
+    PARLAMENTARIO_SOURCE_CONFIG = {}
+
+try:
+    from etl.infoelectoral_es.config import SOURCE_CONFIG as INFOELECTORAL_SOURCE_CONFIG
+except Exception:
+    INFOELECTORAL_SOURCE_CONFIG = {}
+
+
+DESIRED_SOURCES: dict[str, dict[str, Any]] = {}
+DESIRED_SOURCES.update(_coerce_source_config(POLITICOS_SOURCE_CONFIG, domain="politicos"))
+DESIRED_SOURCES.update(_coerce_source_config(PARLAMENTARIO_SOURCE_CONFIG, domain="parlamentario"))
+DESIRED_SOURCES.update(_coerce_source_config(INFOELECTORAL_SOURCE_CONFIG, domain="infoelectoral"))
+
+
+TRACKER_TABLE_HEADER = "| Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |"
+
+# Mapping between tracker table rows and source_id values (docs -> code).
+TRACKER_SOURCE_HINTS = {
+    "Congreso OpenData Diputados": ["congreso_diputados"],
+    "Congreso votaciones": ["congreso_votaciones"],
+    "Congreso iniciativas": ["congreso_iniciativas"],
+    "Senado votaciones/mociones": ["senado_votaciones"],
+    "Senado CSV Senadores": ["senado_senadores"],
+    "Senado OpenData XML": ["senado_senadores"],
+    "Europarl MEP XML": ["europarl_meps"],
+    "RED SARA Concejales": ["municipal_concejales"],
+    "Asamblea de Madrid": ["asamblea_madrid_ocupaciones"],
+    "Asamblea de Ceuta": ["asamblea_ceuta_diputados"],
+    "Asamblea de Melilla": ["asamblea_melilla_diputados"],
+    "Cortes de Aragon": ["cortes_aragon_diputados"],
+    "Asamblea de Extremadura": ["asamblea_extremadura_diputados"],
+    "Asamblea Regional de Murcia": ["asamblea_murcia_diputados"],
+    "Junta General del Principado de Asturias": ["jgpa_diputados"],
+    "Parlament de Catalunya": ["parlament_catalunya_diputats"],
+    "Parlamento de Canarias": ["parlamento_canarias_diputados"],
+    "Parlamento de Cantabria": ["parlamento_cantabria_diputados"],
+    "Parlament de les Illes Balears": ["parlament_balears_diputats"],
+    "Parlamento de La Rioja": ["parlamento_larioja_diputados"],
+    "Corts Valencianes": ["corts_valencianes_diputats"],
+    "Cortes de Castilla-La Mancha": ["cortes_clm_diputados"],
+    "Cortes de Castilla y Leon": ["cortes_cyl_procuradores"],
+    "Parlamento de Andalucia": ["parlamento_andalucia_diputados"],
+    "Parlamento de Galicia": ["parlamento_galicia_deputados"],
+    "Parlamento de Navarra": ["parlamento_navarra_parlamentarios_forales"],
+    "Parlamento Vasco": ["parlamento_vasco_parlamentarios"],
+    "Infoelectoral": ["infoelectoral_descargas", "infoelectoral_procesos"],
+}
+
+
+def _infer_tracker_source_ids(fuentes_objetivo: str) -> list[str]:
+    for hint, source_ids in TRACKER_SOURCE_HINTS.items():
+        if hint in fuentes_objetivo:
+            return list(source_ids)
+
+    fuentes_lower = (fuentes_objetivo or "").lower()
+    matches = []
+    for source_id in DESIRED_SOURCES.keys():
+        if source_id.lower() in fuentes_lower:
+            matches.append(source_id)
+    return matches
+
+
+@lru_cache(maxsize=2)
+def _load_tracker_items_cached(tracker_path_str: str, mtime: float) -> list[dict[str, Any]]:
+    tracker_path = Path(tracker_path_str)
+    if not tracker_path.exists():
+        return []
+
+    items: list[dict[str, Any]] = []
+    lines = tracker_path.read_text(encoding="utf-8").splitlines()
+    in_table = False
+    for line in lines:
+        if line.strip() == TRACKER_TABLE_HEADER:
+            in_table = True
+            continue
+        if not in_table:
+            continue
+        if not line.strip().startswith("|"):
+            break
+        if line.strip().startswith("|---"):
+            continue
+
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) < 5:
+            continue
+        tipo_dato, dominio, fuentes, estado, bloque = cells[:5]
+        estado_up = (estado or "").strip().upper()
+        source_ids = _infer_tracker_source_ids(fuentes)
+        items.append(
+            {
+                "tipo_dato": tipo_dato,
+                "dominio": dominio,
+                "fuentes_objetivo": fuentes,
+                "estado": estado_up,
+                "bloque": bloque,
+                "source_ids": source_ids,
+            }
+        )
+    return items
+
+
+def load_tracker_items(tracker_path: Path) -> list[dict[str, Any]]:
+    try:
+        mtime = tracker_path.stat().st_mtime
+    except FileNotFoundError:
+        mtime = 0.0
+    return _load_tracker_items_cached(str(tracker_path), mtime)
+
+
 def is_id_like_column(column: str) -> bool:
     col = (column or "").strip().lower()
     if not col:
@@ -153,12 +415,735 @@ def is_id_like_column(column: str) -> bool:
 def fetch_sources(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     rows = conn.execute(
         """
-        SELECT source_id, name, scope
+        SELECT source_id, name, scope, default_url, is_active, data_format
         FROM sources
         ORDER BY source_id
         """
     ).fetchall()
     return [dict(row) for row in rows]
+
+
+def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
+    meta = {
+        "db_path": str(db_path),
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    }
+
+    desired_map = DESIRED_SOURCES
+    desired_ids = sorted(desired_map.keys())
+
+    def _infer_scope_from_text(text: str) -> str:
+        t = (text or "").lower()
+        if not t:
+            return ""
+        if (
+            "europarl" in t
+            or "parlamento europeo" in t
+            or "meps" in t
+            or "eur-lex" in t
+            or "cellar" in t
+            or "transparency register" in t
+            or "ted api" in t
+            or "data.europa.eu" in t
+            or "union europea" in t
+            or " ue " in f" {t} "
+        ):
+            return "europeo"
+        if (
+            "congreso" in t
+            or "senado" in t
+            or "jec" in t
+            or "junta electoral" in t
+            or "boe" in t
+            or "placsp" in t
+            or "plataforma de contrataci" in t
+            or "bdns" in t
+            or "infosubvenciones" in t
+            or "lamoncloa" in t
+            or "moncloa" in t
+            or "transparencia.gob" in t
+            or "portal de transparencia" in t
+        ):
+            return "nacional"
+        if "ayuntamiento" in t or "municip" in t:
+            return "municipal"
+        if "parlamento" in t or "asamblea" in t or "cortes" in t or "corts" in t:
+            return "autonomico"
+        if "ine" in t or "ign" in t or "rel" in t or "poblaci" in t or "territor" in t:
+            # Catálogo territorial / población: cruza niveles y no es un conector “político” único.
+            return "territorial"
+        if "partid" in t and ("program" in t or "web" in t):
+            return "nacional"
+        return ""
+
+    def _infer_tracker_item_scope(item: dict[str, Any]) -> tuple[str, bool]:
+        source_ids = [safe_text(s) for s in (item.get("source_ids") or []) if safe_text(s)]
+        scopes = {safe_text((desired_map.get(sid) or {}).get("scope")) for sid in source_ids if safe_text((desired_map.get(sid) or {}).get("scope"))}
+        scopes.discard("")
+        if len(scopes) == 1:
+            return next(iter(scopes)), False
+        if len(scopes) > 1:
+            return "multi", False
+
+        blob = " | ".join(
+            [
+                safe_text(item.get("fuentes_objetivo")),
+                safe_text(item.get("tipo_dato")),
+                safe_text(item.get("dominio")),
+                safe_text(item.get("bloque")),
+            ]
+        )
+        inferred = _infer_scope_from_text(blob)
+        return inferred, bool(inferred)
+
+    tracker_items_raw = load_tracker_items(TRACKER_PATH)
+    tracker_items: list[dict[str, Any]] = []
+    for item in tracker_items_raw:
+        item2 = dict(item)
+        scope, inferred = _infer_tracker_item_scope(item2)
+        item2["scope"] = scope
+        item2["scope_inferred"] = inferred
+        tracker_items.append(item2)
+
+    tracker_by_source: dict[str, dict[str, Any]] = {}
+    for item in tracker_items:
+        for source_id in item.get("source_ids") or []:
+            if source_id:
+                tracker_by_source[source_id] = item
+    tracker_unmapped = [item for item in tracker_items if not (item.get("source_ids") or [])]
+
+    if not db_path.exists():
+        return {
+            **meta,
+            "error": "Base SQLite no encontrada. Ejecuta primero la ingesta ETL.",
+            "summary": {
+                "desired": len(desired_ids),
+                "present": 0,
+                "missing": len(desired_ids),
+                "extra": 0,
+                "tracker": {
+                    "items_total": len(tracker_items),
+                    "unmapped": len(tracker_unmapped),
+                },
+            },
+            "tracker": {
+                "path": str(TRACKER_PATH),
+                "exists": TRACKER_PATH.exists(),
+                "items": tracker_items,
+                "unmapped": tracker_unmapped,
+            },
+            "actions": [],
+            "sources": [],
+            "missing": desired_ids,
+        }
+
+    def sql_status_from_metrics(metrics: dict[str, Any] | None) -> str:
+        if not metrics:
+            return "TODO"
+        runs_total = int(metrics.get("runs_total") or 0)
+        max_loaded_network = int(metrics.get("max_loaded_network") or 0)
+        max_loaded_any = int(metrics.get("max_loaded_any") or 0)
+        if runs_total == 0:
+            return "TODO"
+        if max_loaded_network > 0:
+            return "DONE"
+        if max_loaded_any > 0:
+            return "PARTIAL"
+        return "PARTIAL"
+
+    def ops_state(expected: bool, metrics: dict[str, Any] | None, required: int | None) -> str:
+        if not expected:
+            return "not_in_catalog"
+        if not metrics:
+            return "missing"
+        runs_total = int(metrics.get("runs_total") or 0)
+        if runs_total == 0:
+            return "not_run"
+        last_status = str(metrics.get("last_status", "")).strip().lower()
+        if last_status == "running":
+            return "running"
+        if last_status == "error":
+            if int(metrics.get("runs_ok", 0) or 0) > 0:
+                return "degraded"
+            return "error"
+        if last_status == "ok":
+            loaded = int(metrics.get("last_loaded", 0) or 0)
+            if required and required > 0 and loaded < required:
+                return "partial"
+            return "ok"
+        return "unknown"
+
+    try:
+        with open_db(db_path) as conn:
+            present_rows = fetch_sources(conn)
+            present_map = {str(row["source_id"]): dict(row) for row in present_rows}
+            metrics_rows = conn.execute(
+                """
+                SELECT
+                  s.source_id AS source_id,
+                  COUNT(DISTINCT ir.run_id) AS runs_total,
+                  COUNT(DISTINCT CASE WHEN ir.status = 'ok' THEN ir.run_id END) AS runs_ok,
+                  COALESCE(MAX(ir.records_loaded), 0) AS max_loaded_any,
+                  COALESCE(
+                    MAX(
+                      CASE
+                        WHEN rf.source_url LIKE 'http%' THEN ir.records_loaded
+                        ELSE NULL
+                      END
+                    ),
+                    0
+                  ) AS max_loaded_network,
+                  SUM(CASE WHEN rf.source_url LIKE 'http%' THEN 1 ELSE 0 END) AS network_fetches,
+                  SUM(CASE WHEN rf.source_url LIKE 'file://%' THEN 1 ELSE 0 END) AS fallback_fetches,
+                  COALESCE(
+                    (
+                      SELECT ir2.records_loaded
+                      FROM ingestion_runs ir2
+                      WHERE ir2.source_id = s.source_id
+                      ORDER BY ir2.run_id DESC
+                      LIMIT 1
+                    ),
+                    0
+                  ) AS last_loaded,
+                  COALESCE(
+                    (
+                      SELECT ir2.status
+                      FROM ingestion_runs ir2
+                      WHERE ir2.source_id = s.source_id
+                      ORDER BY ir2.run_id DESC
+                      LIMIT 1
+                    ),
+                    ''
+                  ) AS last_status,
+                  COALESCE(
+                    (
+                      SELECT ir2.started_at
+                      FROM ingestion_runs ir2
+                      WHERE ir2.source_id = s.source_id
+                      ORDER BY ir2.run_id DESC
+                      LIMIT 1
+                    ),
+                    ''
+                  ) AS last_started_at,
+                  COALESCE(
+                    (
+                      SELECT ir2.finished_at
+                      FROM ingestion_runs ir2
+                      WHERE ir2.source_id = s.source_id
+                      ORDER BY ir2.run_id DESC
+                      LIMIT 1
+                    ),
+                    ''
+                  ) AS last_finished_at,
+                  COALESCE(
+                    (
+                      SELECT ir2.source_url
+                      FROM ingestion_runs ir2
+                      WHERE ir2.source_id = s.source_id
+                      ORDER BY ir2.run_id DESC
+                      LIMIT 1
+                    ),
+                    ''
+                  ) AS last_source_url,
+                  COALESCE(
+                    (
+                      SELECT ir2.message
+                      FROM ingestion_runs ir2
+                      WHERE ir2.source_id = s.source_id
+                      ORDER BY ir2.run_id DESC
+                      LIMIT 1
+                    ),
+                    ''
+                  ) AS last_message
+                FROM sources s
+                LEFT JOIN ingestion_runs ir ON ir.source_id = s.source_id
+                LEFT JOIN raw_fetches rf ON rf.run_id = ir.run_id
+                GROUP BY s.source_id
+                """
+            ).fetchall()
+
+            metrics_map = {
+                str(row["source_id"]): {
+                    "runs_total": int(row["runs_total"] or 0),
+                    "runs_ok": int(row["runs_ok"] or 0),
+                    "max_loaded_any": int(row["max_loaded_any"] or 0),
+                    "max_loaded_network": int(row["max_loaded_network"] or 0),
+                    "network_fetches": int(row["network_fetches"] or 0),
+                    "fallback_fetches": int(row["fallback_fetches"] or 0),
+                    "last_loaded": int(row["last_loaded"] or 0),
+                    "last_status": safe_text(row["last_status"]),
+                    "last_started_at": safe_text(row["last_started_at"]),
+                    "last_finished_at": safe_text(row["last_finished_at"]),
+                    "last_source_url": safe_text(row["last_source_url"]),
+                    "last_message": safe_text(row["last_message"]),
+                }
+                for row in metrics_rows
+            }
+
+            def _count_by_source(table: str) -> dict[str, int]:
+                try:
+                    rows = conn.execute(
+                        f"SELECT source_id, COUNT(*) AS n FROM {quote_ident(table)} GROUP BY source_id"
+                    ).fetchall()
+                except sqlite3.Error:
+                    return {}
+                return {str(row["source_id"]): int(row["n"] or 0) for row in rows}
+
+            mandates_by_source = _count_by_source("mandates")
+            vote_events_by_source = _count_by_source("parl_vote_events")
+            initiatives_by_source = _count_by_source("parl_initiatives")
+            info_tipos_by_source = _count_by_source("infoelectoral_convocatoria_tipos")
+            info_procesos_by_source = _count_by_source("infoelectoral_procesos")
+
+            def _count_sql(sql: str, params: tuple[Any, ...] = ()) -> int:
+                try:
+                    row = conn.execute(sql, params).fetchone()
+                    if not row:
+                        return 0
+                    # first column
+                    return int(list(row)[0] or 0)
+                except sqlite3.Error:
+                    return 0
+
+            def _count_table(table: str) -> int:
+                try:
+                    row = conn.execute(f"SELECT COUNT(*) AS n FROM {quote_ident(table)}").fetchone()
+                    return int((row["n"] if row else 0) or 0)
+                except sqlite3.Error:
+                    return 0
+
+            topics_total = _count_table("topics")
+            topic_sets_total = _count_table("topic_sets")
+            topic_sets_active = _count_sql("SELECT COUNT(*) FROM topic_sets WHERE is_active = 1")
+            topic_set_topics_total = _count_table("topic_set_topics")
+            high_stakes_total = _count_sql("SELECT COUNT(*) FROM topic_set_topics WHERE is_high_stakes = 1")
+            topic_evidence_total = _count_table("topic_evidence")
+            topic_evidence_with_topic = _count_sql("SELECT COUNT(*) FROM topic_evidence WHERE topic_id IS NOT NULL")
+            topic_evidence_with_date = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE evidence_date IS NOT NULL AND TRIM(evidence_date) <> ''"
+            )
+            topic_positions_total = _count_table("topic_positions")
+            topic_positions_with_evidence = _count_sql("SELECT COUNT(*) FROM topic_positions WHERE evidence_count > 0")
+
+            def _pct(n: int, d: int) -> float:
+                if d <= 0:
+                    return 0.0
+                return float(n) / float(d)
+
+            all_sources: list[dict[str, Any]] = []
+            missing = []
+            actions: list[dict[str, Any]] = []
+            seen_action_keys: set[tuple[str, str]] = set()
+
+            def ingest_cmd(domain: str, source_id: str) -> str:
+                dom = safe_text(domain).lower()
+                if dom == "politicos":
+                    script = "scripts/ingestar_politicos_es.py"
+                elif dom == "parlamentario":
+                    script = "scripts/ingestar_parlamentario_es.py"
+                elif dom == "infoelectoral":
+                    script = "scripts/ingestar_infoelectoral_es.py"
+                else:
+                    script = ""
+                if not script:
+                    return ""
+                return f"python3 {script} ingest --db {db_path} --source {source_id} --strict-network"
+
+            tracker_cmd = f"python3 scripts/e2e_tracker_status.py --db {db_path} --tracker {TRACKER_PATH}"
+
+            def push_action(
+                kind: str,
+                priority: str,
+                title: str,
+                details: str = "",
+                *,
+                scope: str = "",
+                source_ids: list[str] | None = None,
+                commands: list[str] | None = None,
+            ) -> None:
+                key = (kind, ",".join(source_ids or []) or title)
+                if key in seen_action_keys:
+                    return
+                seen_action_keys.add(key)
+                actions.append(
+                    {
+                        "kind": kind,
+                        "priority": priority,
+                        "scope": safe_text(scope),
+                        "title": title,
+                        "details": details,
+                        "source_ids": source_ids or [],
+                        "commands": commands or [],
+                    }
+                )
+
+            for item in tracker_items:
+                estado = (item.get("estado") or "").upper()
+                if estado not in {"TODO", "PARTIAL"}:
+                    continue
+                priority = "P0" if estado == "TODO" else "P1"
+                push_action(
+                    "tracker_item",
+                    priority,
+                    f"{estado}: {safe_text(item.get('fuentes_objetivo')) or safe_text(item.get('tipo_dato'))}",
+                    safe_text(item.get("bloque")),
+                    scope=safe_text(item.get("scope")),
+                    source_ids=[sid for sid in (item.get("source_ids") or []) if sid],
+                )
+
+            for source_id in desired_ids:
+                cfg = desired_map[source_id]
+                present = present_map.get(source_id)
+                metrics = metrics_map.get(source_id)
+                required = cfg.get("min_records_loaded_strict")
+                loaded = int(metrics.get("last_loaded", 0) if metrics else 0)
+                status = ops_state(True, metrics, required)
+                sql_status = sql_status_from_metrics(metrics)
+                progress = None
+                if required and required > 0:
+                    progress = min(100, round((loaded * 100) / required))
+                tracker = tracker_by_source.get(source_id)
+                tracker_status = safe_text(tracker.get("estado")) if tracker else ""
+                max_net = int(metrics.get("max_loaded_network", 0) if metrics else 0)
+                max_any = int(metrics.get("max_loaded_any", 0) if metrics else 0)
+                net_fetches = int(metrics.get("network_fetches", 0) if metrics else 0)
+                fallback_fetches = int(metrics.get("fallback_fetches", 0) if metrics else 0)
+                under_threshold = bool(required and required > 0 and loaded < required and (metrics or {}).get("last_status") == "ok")
+                done_zero_real = bool(tracker_status == "DONE" and max_net == 0 and max_any > 0)
+                mandates_count = int(mandates_by_source.get(source_id, 0))
+                vote_events_count = int(vote_events_by_source.get(source_id, 0))
+                initiatives_count = int(initiatives_by_source.get(source_id, 0))
+                info_tipos_count = int(info_tipos_by_source.get(source_id, 0))
+                info_procesos_count = int(info_procesos_by_source.get(source_id, 0))
+
+                primary_table = "mandates"
+                primary_rows = mandates_count
+                domain = safe_text(cfg.get("domain", ""))
+                if domain == "parlamentario":
+                    if "votaciones" in source_id:
+                        primary_table = "parl_vote_events"
+                        primary_rows = vote_events_count
+                    elif "iniciativas" in source_id:
+                        primary_table = "parl_initiatives"
+                        primary_rows = initiatives_count
+                elif domain == "infoelectoral":
+                    if "descargas" in source_id:
+                        primary_table = "infoelectoral_convocatoria_tipos"
+                        primary_rows = info_tipos_count
+                    elif "procesos" in source_id:
+                        primary_table = "infoelectoral_procesos"
+                        primary_rows = info_procesos_count
+
+                row: dict[str, Any] = {
+                    "source_id": source_id,
+                    "domain": domain,
+                    "source_name": cfg.get("name", source_id),
+                    "scope": cfg.get("scope", ""),
+                    "desired": True,
+                    "in_db": bool(present),
+                    "active": bool(int(present["is_active"])) if present else False,
+                    "default_url": safe_text(present["default_url"]) if present else cfg.get("default_url", ""),
+                    "institution_name": cfg.get("institution_name", ""),
+                    "role_title": cfg.get("role_title", ""),
+                    "level": cfg.get("level", ""),
+                    "format": cfg.get("format", ""),
+                    "fallback_file": cfg.get("fallback_file", ""),
+                    "tracker": {
+                        "status": tracker_status,
+                        "tipo_dato": safe_text(tracker.get("tipo_dato")) if tracker else "",
+                        "dominio": safe_text(tracker.get("dominio")) if tracker else "",
+                        "fuentes_objetivo": safe_text(tracker.get("fuentes_objetivo")) if tracker else "",
+                        "bloque": safe_text(tracker.get("bloque")) if tracker else "",
+                    },
+                    "sql_status": sql_status,
+                    "state": status,
+                    "runs_total": int(metrics.get("runs_total", 0) if metrics else 0),
+                    "runs_ok": int(metrics.get("runs_ok", 0) if metrics else 0),
+                    "last_status": safe_text(metrics.get("last_status")) if metrics else "",
+                    "last_loaded": loaded,
+                    "max_loaded_any": max_any,
+                    "max_loaded_network": max_net,
+                    "network_fetches": net_fetches,
+                    "fallback_fetches": fallback_fetches,
+                    "last_started_at": safe_text(metrics.get("last_started_at")) if metrics else "",
+                    "last_seen_at": safe_text(metrics.get("last_finished_at")) if metrics else "",
+                    "last_source_url": safe_text(metrics.get("last_source_url")) if metrics else "",
+                    "last_message": safe_text(metrics.get("last_message")) if metrics else "",
+                    "progress": {
+                        "loaded": loaded,
+                        "target": required or 0,
+                        "percent": progress,
+                    },
+                    "mandates": mandates_count,
+                    "warehouse": {
+                        "primary_table": primary_table,
+                        "primary_rows": primary_rows,
+                        "counts": {
+                            "mandates": mandates_count,
+                            "parl_vote_events": vote_events_count,
+                            "parl_initiatives": initiatives_count,
+                            "infoelectoral_convocatoria_tipos": info_tipos_count,
+                            "infoelectoral_procesos": info_procesos_count,
+                        },
+                    },
+                    "flags": {
+                        "under_threshold": under_threshold,
+                        "done_zero_real": done_zero_real,
+                        "has_network": max_net > 0,
+                        "has_any": max_any > 0,
+                        "blocked_note": "bloqueado" in safe_text((tracker or {}).get("bloque", "")).lower(),
+                    },
+                }
+                all_sources.append(row)
+                if not present:
+                    missing.append(source_id)
+                    cmds = [c for c in [ingest_cmd(row.get("domain", ""), source_id), tracker_cmd] if c]
+                    push_action(
+                        "missing_source",
+                        "P0",
+                        f"Fuente deseada no existe en BD: {source_id}",
+                        f"Dominio={row.get('domain','') or 'N/A'} · scope={row.get('scope','') or 'N/A'}",
+                        source_ids=[source_id],
+                        commands=cmds,
+                    )
+
+                if tracker_status == "DONE" and max_net == 0 and max_any > 0:
+                    cmds = [c for c in [ingest_cmd(row.get("domain", ""), source_id), tracker_cmd] if c]
+                    push_action(
+                        "done_zero_real",
+                        "P0",
+                        f"Tracker DONE pero sin ejecución reproducible (strict-network): {source_id}",
+                        "Hay carga en BD pero no hay evidencia de ejecución desde red (raw_fetches http).",
+                        source_ids=[source_id],
+                        commands=cmds,
+                    )
+
+                if status in {"error", "degraded"}:
+                    cmds = [c for c in [ingest_cmd(row.get("domain", ""), source_id), tracker_cmd] if c]
+                    push_action(
+                        "ingest_error",
+                        "P0",
+                        f"Ingesta en error: {source_id}",
+                        safe_text(row.get("last_message")) or "Revisar ingestion_runs.message / raw_fetches.",
+                        source_ids=[source_id],
+                        commands=cmds,
+                    )
+
+                if under_threshold:
+                    cmds = [c for c in [ingest_cmd(row.get("domain", ""), source_id), tracker_cmd] if c]
+                    push_action(
+                        "under_threshold",
+                        "P1",
+                        f"Por debajo del umbral minimo: {source_id}",
+                        f"loaded={loaded} target={required}",
+                        source_ids=[source_id],
+                        commands=cmds,
+                    )
+
+            for source_id, present in present_map.items():
+                if source_id in desired_map:
+                    continue
+                metrics = metrics_map.get(source_id)
+                loaded = int(metrics.get("last_loaded", 0) if metrics else 0)
+                status = ops_state(False, metrics, None)
+                sql_status = sql_status_from_metrics(metrics)
+                tracker = tracker_by_source.get(source_id)
+                tracker_status = safe_text(tracker.get("estado")) if tracker else ""
+                mandates_count = int(mandates_by_source.get(source_id, 0))
+                vote_events_count = int(vote_events_by_source.get(source_id, 0))
+                initiatives_count = int(initiatives_by_source.get(source_id, 0))
+                info_tipos_count = int(info_tipos_by_source.get(source_id, 0))
+                info_procesos_count = int(info_procesos_by_source.get(source_id, 0))
+                row = {
+                    "source_id": source_id,
+                    "domain": "",
+                    "source_name": safe_text(present["name"]) or source_id,
+                    "scope": safe_text(present["scope"]),
+                    "desired": False,
+                    "in_db": True,
+                    "active": bool(int(present["is_active"])),
+                    "default_url": safe_text(present["default_url"]),
+                    "institution_name": "",
+                    "role_title": "",
+                    "level": "",
+                    "format": safe_text(present.get("data_format", "")),
+                    "fallback_file": "",
+                    "tracker": {
+                        "status": tracker_status,
+                        "tipo_dato": safe_text(tracker.get("tipo_dato")) if tracker else "",
+                        "dominio": safe_text(tracker.get("dominio")) if tracker else "",
+                        "fuentes_objetivo": safe_text(tracker.get("fuentes_objetivo")) if tracker else "",
+                        "bloque": safe_text(tracker.get("bloque")) if tracker else "",
+                    },
+                    "sql_status": sql_status,
+                    "state": status,
+                    "runs_total": int(metrics.get("runs_total", 0) if metrics else 0),
+                    "runs_ok": int(metrics.get("runs_ok", 0) if metrics else 0),
+                    "last_status": safe_text(metrics.get("last_status")) if metrics else "",
+                    "last_loaded": loaded,
+                    "max_loaded_any": int(metrics.get("max_loaded_any", 0) if metrics else 0),
+                    "max_loaded_network": int(metrics.get("max_loaded_network", 0) if metrics else 0),
+                    "network_fetches": int(metrics.get("network_fetches", 0) if metrics else 0),
+                    "fallback_fetches": int(metrics.get("fallback_fetches", 0) if metrics else 0),
+                    "last_started_at": safe_text(metrics.get("last_started_at")) if metrics else "",
+                    "last_seen_at": safe_text(metrics.get("last_finished_at")) if metrics else "",
+                    "last_source_url": safe_text(metrics.get("last_source_url")) if metrics else "",
+                    "last_message": safe_text(metrics.get("last_message")) if metrics else "",
+                    "progress": {"loaded": loaded, "target": 0, "percent": None},
+                    "mandates": mandates_count,
+                    "warehouse": {
+                        "primary_table": "mandates" if mandates_count else "",
+                        "primary_rows": mandates_count,
+                        "counts": {
+                            "mandates": mandates_count,
+                            "parl_vote_events": vote_events_count,
+                            "parl_initiatives": initiatives_count,
+                            "infoelectoral_convocatoria_tipos": info_tipos_count,
+                            "infoelectoral_procesos": info_procesos_count,
+                        },
+                    },
+                    "flags": {
+                        "under_threshold": False,
+                        "done_zero_real": False,
+                        "has_network": int(metrics.get("max_loaded_network", 0) if metrics else 0) > 0,
+                        "has_any": int(metrics.get("max_loaded_any", 0) if metrics else 0) > 0,
+                        "blocked_note": "bloqueado" in safe_text((tracker or {}).get("bloque", "")).lower(),
+                    },
+                }
+                all_sources.append(row)
+
+            all_sources.sort(
+                key=lambda x: (
+                    0 if x["desired"] else 1,
+                    safe_text(x["scope"]).lower(),
+                    safe_text(x.get("domain", "")).lower(),
+                    safe_text(x["source_name"]).lower(),
+                    x["source_id"],
+                )
+            )
+
+            states = [item["state"] for item in all_sources]
+            sql_states = [safe_text(item.get("sql_status")) for item in all_sources if safe_text(item.get("sql_status"))]
+            tracker_states = [safe_text(item.get("tracker", {}).get("status")) for item in all_sources if safe_text(item.get("tracker", {}).get("status"))]
+            desired_progress_target = 0
+            desired_progress_loaded = 0
+            for source_id in desired_ids:
+                cfg = desired_map[source_id]
+                target = cfg.get("min_records_loaded_strict")
+                metrics = metrics_map.get(source_id)
+                if not target or target <= 0:
+                    continue
+                desired_progress_target += target
+                desired_progress_loaded += int(metrics.get("last_loaded", 0) if metrics else 0)
+
+            summary = {
+                "desired": len(desired_ids),
+                "present": len(present_rows),
+                "missing": len(missing),
+                "extra": len(all_sources) - len(desired_ids),
+                "not_run": states.count("not_run"),
+                "running": states.count("running"),
+                "ok": states.count("ok"),
+                "partial": states.count("partial"),
+                "error": states.count("error"),
+                "degraded": states.count("degraded"),
+                "unknown": states.count("unknown"),
+                "not_in_catalog": states.count("not_in_catalog"),
+                "desired_progress": {
+                    "loaded": desired_progress_loaded,
+                    "target": desired_progress_target,
+                    "percent": round(min(100, (desired_progress_loaded * 100) / desired_progress_target))
+                    if desired_progress_target > 0
+                    else None,
+                },
+                "states": sorted(set(states)),
+                "sql": {
+                    "todo": sql_states.count("TODO"),
+                    "partial": sql_states.count("PARTIAL"),
+                    "done": sql_states.count("DONE"),
+                },
+                "tracker": {
+                    "items_total": len(tracker_items),
+                    "unmapped": len(tracker_unmapped),
+                    "todo": tracker_states.count("TODO"),
+                    "partial": tracker_states.count("PARTIAL"),
+                    "done": tracker_states.count("DONE"),
+                },
+            }
+
+            def _priority_key(action: dict[str, Any]) -> tuple[int, str, str]:
+                prio = safe_text(action.get("priority"))
+                prio_rank = 9
+                if prio == "P0":
+                    prio_rank = 0
+                elif prio == "P1":
+                    prio_rank = 1
+                elif prio == "P2":
+                    prio_rank = 2
+                return (prio_rank, safe_text(action.get("kind")), safe_text(action.get("title")))
+
+            actions.sort(key=_priority_key)
+
+            return {
+                **meta,
+                "summary": summary,
+                "analytics": {
+                    "topics": {
+                        "topics_total": topics_total,
+                        "topic_sets_total": topic_sets_total,
+                        "topic_sets_active": topic_sets_active,
+                        "topic_set_topics_total": topic_set_topics_total,
+                        "high_stakes_total": high_stakes_total,
+                    },
+                    "evidence": {
+                        "topic_evidence_total": topic_evidence_total,
+                        "topic_evidence_with_topic": topic_evidence_with_topic,
+                        "topic_evidence_with_topic_pct": _pct(topic_evidence_with_topic, topic_evidence_total),
+                        "topic_evidence_with_date": topic_evidence_with_date,
+                        "topic_evidence_with_date_pct": _pct(topic_evidence_with_date, topic_evidence_total),
+                    },
+                    "positions": {
+                        "topic_positions_total": topic_positions_total,
+                        "topic_positions_with_evidence": topic_positions_with_evidence,
+                        "topic_positions_with_evidence_pct": _pct(
+                            topic_positions_with_evidence, topic_positions_total
+                        ),
+                    },
+                },
+                "tracker": {
+                    "path": str(TRACKER_PATH),
+                    "exists": TRACKER_PATH.exists(),
+                    "items": tracker_items,
+                    "unmapped": tracker_unmapped,
+                },
+                "actions": actions[:120],
+                "sources": all_sources,
+                "missing": missing,
+            }
+    except sqlite3.OperationalError as exc:
+        return {
+            **meta,
+            "error": f"SQLite error: {exc}",
+            "summary": {
+                "desired": len(desired_ids),
+                "present": 0,
+                "missing": len(desired_ids),
+                "extra": 0,
+                "tracker": {
+                    "items_total": len(tracker_items),
+                    "unmapped": len(tracker_unmapped),
+                },
+            },
+            "tracker": {
+                "path": str(TRACKER_PATH),
+                "exists": TRACKER_PATH.exists(),
+                "items": tracker_items,
+                "unmapped": tracker_unmapped,
+            },
+            "actions": [],
+            "sources": [],
+            "missing": desired_ids,
+        }
 
 
 def build_graph_payload(
@@ -216,16 +1201,22 @@ def build_graph_payload(
                   p.full_name,
                   p.given_name,
                   p.family_name,
+                  tp.name AS person_territory_name,
                   p.territory_code AS person_territory_code,
                   i.institution_id,
                   i.name AS institution_name,
                   i.level AS institution_level,
+                  i.territory_code AS institution_territory_code,
+                  ti.name AS institution_territory_name,
+                  ti.level AS institution_territory_level,
                   pa.party_id,
                   pa.name AS party_name,
                   pa.acronym AS party_acronym
                 FROM mandates m
                 JOIN persons p ON p.person_id = m.person_id
                 JOIN institutions i ON i.institution_id = m.institution_id
+                LEFT JOIN territories tp ON tp.code = p.territory_code
+                LEFT JOIN territories ti ON ti.code = i.territory_code
                 LEFT JOIN parties pa ON pa.party_id = m.party_id
                 {where_sql}
                 ORDER BY p.full_name, m.mandate_id
@@ -265,6 +1256,7 @@ def build_graph_payload(
                         "given_name": row["given_name"],
                         "family_name": row["family_name"],
                         "territory_code": row["person_territory_code"],
+                        "territory_name": row["person_territory_name"],
                     }
                 }
                 nodes_by_id[institution_node_id] = {
@@ -274,6 +1266,9 @@ def build_graph_payload(
                         "label": row["institution_name"],
                         "institution_id": row["institution_id"],
                         "level": row["institution_level"],
+                        "territory_code": row["institution_territory_code"],
+                        "territory_name": row["institution_territory_name"],
+                        "territory_level": row["institution_territory_level"],
                     }
                 }
 
@@ -361,6 +1356,466 @@ def build_graph_payload(
             "nodes": [],
             "edges": [],
         }
+
+
+def build_arena_mandates_payload(
+    db_path: Path,
+    *,
+    source_filter: str | None,
+    q: str | None,
+    all_data: bool,
+    limit: int,
+    offset: int,
+    include_inactive: bool,
+    include_total: bool,
+) -> dict[str, Any]:
+    if not db_path.exists():
+        return {"error": "Base SQLite no encontrada."}
+
+    try:
+        with open_db(db_path) as conn:
+            municipality_population_by_code = load_municipality_population()
+            where = []
+            params: list[Any] = []
+
+            if source_filter:
+                where.append("m.source_id = ?")
+                params.append(source_filter)
+
+            if not include_inactive:
+                where.append("m.is_active = 1")
+
+            if q:
+                q_norm = f"%{q.strip()}%"
+                where.append(
+                    "("
+                    "p.full_name LIKE ? OR p.given_name LIKE ? OR p.family_name LIKE ? "
+                    "OR pa.name LIKE ? OR pa.acronym LIKE ? "
+                    "OR m.role_title LIKE ? OR i.name LIKE ? OR m.level LIKE ? OR i.level LIKE ?"
+                    ")"
+                )
+                params.extend([q_norm] * 9)
+
+            where_sql = f"WHERE {' AND '.join(where)}" if where else ""
+            total = None
+            if include_total and not all_data:
+                total_row = conn.execute(
+                    f"""
+                    SELECT COUNT(*) AS n
+                    FROM mandates m
+                    JOIN persons p ON p.person_id = m.person_id
+                    JOIN institutions i ON i.institution_id = m.institution_id
+                    LEFT JOIN parties pa ON pa.party_id = m.party_id
+                    {where_sql}
+                    """,
+                    params,
+                ).fetchone()
+                total = int(total_row["n"] if total_row else 0)
+
+            rows_query = f"""
+                SELECT
+                  m.mandate_id,
+                  m.source_id,
+                m.role_title,
+                  m.level,
+                  m.territory_code AS mandate_territory_code,
+                  tm.name AS mandate_territory_name,
+                  tm.level AS mandate_territory_level,
+                  m.start_date,
+                  m.end_date,
+                  m.is_active,
+                  m.person_id,
+                  p.full_name,
+                  p.given_name,
+                  p.family_name,
+                  p.territory_code AS person_territory_code,
+                  ti_p.name AS person_territory_name,
+                  ti_p.level AS person_territory_level,
+                  m.institution_id,
+                  i.name AS institution_name,
+                  i.level AS institution_level,
+                  i.territory_code AS institution_territory_code,
+                  ti_i.name AS institution_territory_name,
+                  ti_i.level AS institution_territory_level,
+                  m.party_id,
+                  pa.name AS party_name,
+                  pa.acronym AS party_acronym
+                FROM mandates m
+                JOIN persons p ON p.person_id = m.person_id
+                JOIN institutions i ON i.institution_id = m.institution_id
+                LEFT JOIN territories tm ON tm.code = m.territory_code
+                LEFT JOIN parties pa ON pa.party_id = m.party_id
+                LEFT JOIN territories ti_p ON ti_p.code = p.territory_code
+                LEFT JOIN territories ti_i ON ti_i.code = i.territory_code
+                {where_sql}
+                ORDER BY p.full_name, m.is_active DESC, m.start_date DESC, m.mandate_id DESC
+                """
+
+            if all_data:
+                rows = conn.execute(rows_query, params).fetchall()
+                total = len(rows) if total is None else total
+            else:
+                rows = conn.execute(
+                    f"{rows_query} LIMIT ? OFFSET ?",
+                    [*params, limit, offset],
+                ).fetchall()
+                if total is None:
+                    total = len(rows)
+
+            hydrated_rows = []
+            for row in rows:
+                payload_row = dict(row)
+                municipality_code, municipality_name, municipality_population = extract_municipality_fields(
+                    row,
+                    municipality_population_by_code,
+                )
+                payload_row["municipality_code"] = municipality_code
+                payload_row["municipality_name"] = municipality_name
+                payload_row["municipality_population"] = municipality_population
+                hydrated_rows.append(payload_row)
+
+            return {
+                "meta": {
+                    "db_path": str(db_path),
+                    "total": total,
+                    "limit": limit,
+                    "offset": offset,
+                    "returned": len(hydrated_rows),
+                    "source_filter": source_filter or "",
+                    "search": q or "",
+                    "include_inactive": include_inactive,
+                },
+                "rows": hydrated_rows,
+            }
+    except sqlite3.Error as exc:
+        return {"error": f"SQLite error: {exc}"}
+
+
+def normalize_vote_choice(value: Any) -> str:
+    raw = normalize_key_part(safe_text(value))
+    if not raw:
+        return "other"
+
+    if raw in {"si", "sí", "sí", "afavor", "a favor", "favorable"}:
+        return "yes"
+    if raw in {"no", "en contra", "voto no"}:
+        return "no"
+    if raw in {"abstencion", "abstención", "abst."}:
+        return "abstain"
+    if raw in {"novota", "no vota", "no vota"}:
+        return "no_vote"
+    return raw if raw else "other"
+
+
+def _build_vote_breakdown_payload(
+    rows: list[sqlite3.Row],
+) -> dict[str, int]:
+    payload = {"yes": 0, "no": 0, "abstain": 0, "no_vote": 0, "other": 0}
+
+    for row in rows:
+        choice = normalize_vote_choice(row["vote_choice"] if isinstance(row, sqlite3.Row) else row.get("vote_choice"))
+        count = int(row["count"] if isinstance(row["count"], int) else row["count"] or 0)
+        if choice == "yes":
+            payload["yes"] += count
+        elif choice == "no":
+            payload["no"] += count
+        elif choice == "abstain":
+            payload["abstain"] += count
+        elif choice == "no_vote":
+            payload["no_vote"] += count
+        else:
+            payload["other"] += count
+    return payload
+
+
+def build_vote_summary_payload(
+    db_path: Path,
+    *,
+    source_filter: str | None,
+    party_filter: str | None,
+    q: str | None,
+    limit: int,
+    offset: int,
+) -> dict[str, Any]:
+    if not db_path.exists():
+        return {"error": "Base SQLite no encontrada."}
+
+    if limit <= 0:
+        limit = 12
+    if offset < 0:
+        offset = 0
+
+    try:
+        with open_db(db_path) as conn:
+            source_rows = fetch_sources(conn)
+            source_lookup = {row["source_id"]: row for row in source_rows}
+
+            where = []
+            params: list[Any] = []
+            if source_filter:
+                where.append("e.source_id = ?")
+                params.append(source_filter)
+
+            if q:
+                q_norm = f"%{q.strip()}%"
+                where.append(
+                    "(e.title LIKE ? OR e.expediente_text LIKE ? OR e.subgroup_title LIKE ? OR e.subgroup_text LIKE ?)"
+                )
+                params.extend([q_norm] * 4)
+
+            where_sql = f"WHERE {' AND '.join(where)}" if where else ""
+            total = conn.execute(
+                f"SELECT COUNT(*) AS n FROM parl_vote_events e {where_sql}",
+                params,
+            ).fetchone()
+
+            events = conn.execute(
+                f"""
+                SELECT
+                  e.vote_event_id,
+                  e.source_id,
+                  e.vote_date,
+                  e.title,
+                  e.expediente_text,
+                  e.subgroup_title,
+                  e.subgroup_text,
+                  e.assentimiento,
+                  e.totals_present,
+                  e.totals_yes,
+                  e.totals_no,
+                  e.totals_abstain,
+                  e.totals_no_vote,
+                  e.source_url
+                FROM parl_vote_events e
+                {where_sql}
+                ORDER BY e.vote_date DESC, e.created_at DESC
+                LIMIT ? OFFSET ?
+                """,
+                [*params, limit, offset],
+            ).fetchall()
+
+            event_rows = [dict(row) for row in events]
+            event_ids = [row["vote_event_id"] for row in event_rows]
+
+            if not event_ids:
+                return {
+                    "meta": {
+                        "db_path": str(db_path),
+                        "total": int(total["n"] if total else 0),
+                        "limit": limit,
+                        "offset": offset,
+                        "returned": 0,
+                        "source_filter": source_filter or "",
+                        "party_filter": party_filter or "",
+                        "search": q or "",
+                    },
+                    "events": [],
+                }
+
+            # Attach initiative metadata when we've linked votes -> initiatives.
+            # This is the main path to get descriptive titles beyond generic bucket labels.
+            event_placeholders = ",".join(["?"] * len(event_ids))
+            initiative_rows = conn.execute(
+                f"""
+                SELECT
+                  vi.vote_event_id,
+                  vi.initiative_id,
+                  COALESCE(vi.confidence, 0) AS confidence,
+                  i.expediente AS initiative_expediente,
+                  i.title AS initiative_title,
+                  i.type AS initiative_type,
+                  i.grouping AS initiative_grouping,
+                  i.supertype AS initiative_supertype,
+                  i.author_text AS initiative_author_text,
+                  i.procedure_type AS initiative_procedure_type,
+                  i.current_status AS initiative_current_status,
+                  i.result_text AS initiative_result_text,
+                  i.source_url AS initiative_url
+                FROM parl_vote_event_initiatives vi
+                JOIN parl_initiatives i ON i.initiative_id = vi.initiative_id
+                WHERE vi.vote_event_id IN ({event_placeholders})
+                ORDER BY vi.vote_event_id, confidence DESC
+                """,
+                event_ids,
+            ).fetchall()
+
+            best_initiative_by_event: dict[str, dict[str, Any]] = {}
+            for row in initiative_rows:
+                event_id = safe_text(row["vote_event_id"])
+                if not event_id or event_id in best_initiative_by_event:
+                    continue
+                best_initiative_by_event[event_id] = {
+                    "initiative_id": safe_text(row["initiative_id"]),
+                    "expediente": safe_text(row["initiative_expediente"]),
+                    "title": safe_text(row["initiative_title"]),
+                    "type": safe_text(row["initiative_type"]),
+                    "grouping": safe_text(row["initiative_grouping"]),
+                    "supertype": safe_text(row["initiative_supertype"]),
+                    "author_text": safe_text(row["initiative_author_text"]),
+                    "procedure_type": safe_text(row["initiative_procedure_type"]),
+                    "current_status": safe_text(row["initiative_current_status"]),
+                    "result_text": safe_text(row["initiative_result_text"]),
+                    "url": safe_text(row["initiative_url"]),
+                    "confidence": float(row["confidence"] or 0),
+                }
+
+            all_breakdown_rows = conn.execute(
+                f"""
+                SELECT
+                  mv.vote_event_id,
+                  COALESCE(mv.group_code, '') AS group_code,
+                  mv.vote_choice,
+                  COUNT(*) AS count
+                FROM parl_vote_member_votes mv
+                WHERE mv.vote_event_id IN ({event_placeholders})
+                GROUP BY mv.vote_event_id, COALESCE(mv.group_code, ''), mv.vote_choice
+                """,
+                event_ids,
+            ).fetchall()
+
+            breakdown_by_event: dict[str, dict[str, dict[str, Any]]] = {}
+            for row in all_breakdown_rows:
+                event_id = safe_text(row["vote_event_id"])
+                group_code = safe_text(row["group_code"]).strip() or "Sin grupo"
+                event_breakdown = breakdown_by_event.setdefault(event_id, {})
+                group_bucket = event_breakdown.setdefault(
+                    group_code,
+                    {"group_code": group_code, "yes": 0, "no": 0, "abstain": 0, "no_vote": 0, "other": 0, "total": 0},
+                )
+                choice_totals = _build_vote_breakdown_payload([row])
+                group_bucket["yes"] += choice_totals["yes"]
+                group_bucket["no"] += choice_totals["no"]
+                group_bucket["abstain"] += choice_totals["abstain"]
+                group_bucket["no_vote"] += choice_totals["no_vote"]
+                group_bucket["other"] += choice_totals["other"]
+                group_bucket["total"] = group_bucket["yes"] + group_bucket["no"] + group_bucket["abstain"] + group_bucket["no_vote"] + group_bucket["other"]
+
+            top_group_breakdown: dict[str, list[dict[str, Any]]] = {}
+            for event_id, groups in breakdown_by_event.items():
+                top_group_breakdown[event_id] = sorted(
+                    groups.values(),
+                    key=lambda item: item["total"],
+                    reverse=True,
+                )[:5]
+
+            party_event_filter = ""
+            party_params: list[Any] = []
+            if party_filter:
+                if party_filter == "__sin_partido__":
+                    party_event_filter = "m.party_id IS NULL"
+                elif party_filter == "__otros__":
+                    party_event_filter = "0 = 1"
+                else:
+                    party_event_filter = "m.party_id = ?"
+                    party_params.append(party_filter)
+
+            party_breakdown: dict[str, dict[str, int]] = {}
+            if party_event_filter:
+                party_rows = conn.execute(
+                    f"""
+                    SELECT
+                      x.vote_event_id,
+                      x.vote_choice,
+                      COUNT(*) AS count
+                    FROM (
+                      SELECT DISTINCT
+                        mv.vote_event_id,
+                        mv.person_id,
+                        mv.vote_choice
+                      FROM parl_vote_member_votes mv
+                      WHERE mv.vote_event_id IN ({event_placeholders})
+                        AND mv.person_id IS NOT NULL
+                    ) x
+                    JOIN mandates m ON m.person_id = x.person_id
+                    WHERE {party_event_filter}
+                    GROUP BY x.vote_event_id, x.vote_choice
+                    """,
+                    [*event_ids, *party_params],
+                ).fetchall()
+                party_grouped = {}
+                for row in party_rows:
+                    event_id = safe_text(row["vote_event_id"])
+                    bucket = party_grouped.setdefault(event_id, {"yes": 0, "no": 0, "abstain": 0, "no_vote": 0, "other": 0})
+                    norm = normalize_vote_choice(row["vote_choice"])
+                    count = int(row["count"] if row["count"] is not None else 0)
+                    if norm == "yes":
+                        bucket["yes"] += count
+                    elif norm == "no":
+                        bucket["no"] += count
+                    elif norm == "abstain":
+                        bucket["abstain"] += count
+                    elif norm == "no_vote":
+                        bucket["no_vote"] += count
+                    else:
+                        bucket["other"] += count
+                    party_grouped[event_id] = bucket
+                party_breakdown = party_grouped
+
+            payload_events = []
+            for row in event_rows:
+                event_id = safe_text(row["vote_event_id"])
+                groups = top_group_breakdown.get(event_id, [])
+                party_payload = party_breakdown.get(event_id)
+                if party_payload:
+                    total_party_votes = (
+                        party_payload["yes"] + party_payload["no"] + party_payload["abstain"] + party_payload["no_vote"] + party_payload["other"]
+                    )
+                else:
+                    total_party_votes = 0
+
+                source_info = source_lookup.get(safe_text(row["source_id"]))
+                initiative_info = best_initiative_by_event.get(event_id)
+                payload_events.append(
+                    {
+                        "vote_event_id": event_id,
+                        "source_id": safe_text(row["source_id"]),
+                        "source_name": safe_text(source_info["name"]) if source_info else safe_text(row["source_id"]),
+                        "source_url": safe_text(row["source_url"]),
+                        "vote_date": safe_text(row["vote_date"]),
+                        "title": safe_text(row["title"]),
+                        "expediente_text": safe_text(row["expediente_text"]),
+                        "subgroup_title": safe_text(row["subgroup_title"]),
+                        "subgroup_text": safe_text(row["subgroup_text"]),
+                        "assentimiento": safe_text(row["assentimiento"]),
+                        "initiative": initiative_info,
+                        "totals": {
+                            "present": int(row["totals_present"] or 0),
+                            "yes": int(row["totals_yes"] or 0),
+                            "no": int(row["totals_no"] or 0),
+                            "abstain": int(row["totals_abstain"] or 0),
+                            "no_vote": int(row["totals_no_vote"] or 0),
+                        },
+                        "group_breakdown": groups,
+                        "party_participation": (
+                            {
+                                "yes": party_payload["yes"],
+                                "no": party_payload["no"],
+                                "abstain": party_payload["abstain"],
+                                "no_vote": party_payload["no_vote"],
+                                "other": party_payload["other"],
+                                "total": total_party_votes,
+                            }
+                            if party_payload is not None
+                            else None
+                        ),
+                    }
+                )
+
+            return {
+                "meta": {
+                    "db_path": str(db_path),
+                    "total": int(total["n"] if total else 0),
+                    "limit": limit,
+                    "offset": offset,
+                    "returned": len(payload_events),
+                    "source_filter": source_filter or "",
+                    "party_filter": party_filter or "",
+                    "search": q or "",
+                },
+                "events": payload_events,
+            }
+    except sqlite3.Error as exc:
+        return {"error": f"SQLite error: {exc}"}
 
 
 def fetch_person_detail(db_path: Path, person_id: int) -> dict[str, Any] | None:
@@ -1037,6 +2492,7 @@ def build_explorer_schema_payload(db_path: Path) -> dict[str, Any]:
                             }
                             for c in meta["columns"]
                         ],
+                        "label_column": choose_label_column(meta),
                         "foreign_keys_out": [
                             {
                                 "to_table": fk["to_table"],
@@ -1269,6 +2725,16 @@ def build_explorer_record_payload(
                     )
                     relation["count"] = total
                     relation["samples"] = samples
+                    facets = relation_facets(
+                        conn,
+                        schema,
+                        table=fk["to_table"],
+                        where_columns=to_cols,
+                        values=values,
+                        total=total,
+                    )
+                    if facets:
+                        relation["facets"] = facets
 
                 outgoing.append(relation)
 
@@ -1466,11 +2932,30 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
             parsed = urlparse(self.path)
             path = parsed.path
 
+            if path == "/favicon.ico":
+                self.send_response(HTTPStatus.NO_CONTENT)
+                self.end_headers()
+                return
+
             if path in ("/", "/index.html"):
-                if not UI_INDEX.exists():
+                if not UI_EXPLORERS.exists():
                     self.write_html("<h1>UI no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
                     return
-                self.write_html(UI_INDEX.read_text(encoding="utf-8"))
+                self.write_html(UI_EXPLORERS.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/graph", "/graph.html"):
+                if not UI_GRAPH.exists():
+                    self.write_html("<h1>Graph UI no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_GRAPH.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/explorers", "/explorers.html"):
+                if not UI_EXPLORERS.exists():
+                    self.write_html("<h1>Landing explorers no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_EXPLORERS.read_text(encoding="utf-8"))
                 return
 
             if path in ("/explorer", "/explorer.html"):
@@ -1478,6 +2963,34 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     self.write_html("<h1>UI explorer no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
                     return
                 self.write_html(UI_EXPLORER.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/explorer-politico", "/explorer-politico.html"):
+                if not UI_EXPLORER_POLITICO.exists():
+                    self.write_html("<h1>UI explorer-politico no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_EXPLORER_POLITICO.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/explorer-votaciones", "/explorer-votaciones.html"):
+                if not UI_EXPLORER_VOTACIONES.exists():
+                    self.write_html("<h1>UI explorer-votaciones no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_EXPLORER_VOTACIONES.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/explorer-sources", "/explorer-sources.html"):
+                if not UI_EXPLORER_SOURCES.exists():
+                    self.write_html("<h1>UI explorer-sources no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_EXPLORER_SOURCES.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/explorer-temas", "/explorer-temas.html"):
+                if not UI_EXPLORER_TEMAS.exists():
+                    self.write_html("<h1>UI explorer-temas no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_EXPLORER_TEMAS.read_text(encoding="utf-8"))
                 return
 
             if path == "/api/health":
@@ -1504,6 +3017,76 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     include_inactive=include_inactive,
                 )
                 self.write_json(payload)
+                return
+
+            if path == "/api/arena/mandates":
+                qs = parse_qs(parsed.query, keep_blank_values=False)
+                source_filter = str_param(qs, "source_id", "") or None
+                search = str_param(qs, "q", "") or None
+                include_inactive = bool_param(qs, "include_inactive", False)
+                all_data = bool_param(qs, "all", False)
+                include_total = bool_param(qs, "include_total", True)
+                debug = bool_param(qs, "debug", False)
+                verbose = bool_param(qs, "verbose", False)
+                limit = int_param(qs, "limit", 1200, min_value=10, max_value=5000)
+                offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
+                payload = build_arena_mandates_payload(
+                    config.db_path,
+                    source_filter=source_filter,
+                    q=search,
+                    limit=limit,
+                    offset=offset,
+                    include_inactive=include_inactive,
+                    all_data=all_data,
+                    include_total=include_total,
+                )
+                if debug or verbose:
+                    sample_row = payload.get("rows", [])
+                    sample = sample_row[0] if sample_row else {}
+                    ua = self.headers.get("User-Agent", "")
+                    print(
+                        "[arena/mandates]",
+                        f"ua={ua}",
+                        f"verb={1 if verbose else 0}",
+                        f"source={source_filter or 'all'}",
+                        f"q={search or ''}",
+                        f"all={all_data}",
+                        f"include_inactive={include_inactive}",
+                        f"include_total={include_total}",
+                        f"limit={limit}",
+                        f"offset={offset}",
+                        f"total={payload.get('meta', {}).get('total')}",
+                        f"returned={payload.get('meta', {}).get('returned')}",
+                        f"ok={'error' not in payload}",
+                        f"sample_party={sample.get('party_name', '')}",
+                        f"sample_level={sample.get('level', '')}",
+                        f"sample_territory={sample.get('mandate_territory_name') or sample.get('mandate_territory_code', '')}",
+                    )
+                status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
+                self.write_json(payload, status=status)
+                return
+
+            if path == "/api/votes/summary":
+                qs = parse_qs(parsed.query, keep_blank_values=False)
+                source_filter = str_param(qs, "source_id", "") or None
+                party_filter = str_param(qs, "party_id", "") or None
+                search = str_param(qs, "q", "") or None
+                limit = int_param(qs, "limit", 8, min_value=1, max_value=50)
+                offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
+                payload = build_vote_summary_payload(
+                    config.db_path,
+                    source_filter=source_filter,
+                    party_filter=party_filter,
+                    q=search,
+                    limit=limit,
+                    offset=offset,
+                )
+                if payload.get("meta"):
+                    payload["meta"]["requested"] = {"source_filter": source_filter or "all", "party_filter": party_filter or "", "search": search or ""}
+                if "error" in payload:
+                    self.write_json(payload, status=HTTPStatus.BAD_REQUEST)
+                else:
+                    self.write_json(payload, status=HTTPStatus.OK)
                 return
 
             if path.startswith("/api/person/"):
@@ -1594,6 +3177,40 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 )
                 status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
                 self.write_json(payload, status=status)
+                return
+
+            if path == "/api/sources/status":
+                qs = parse_qs(parsed.query, keep_blank_values=False)
+                payload = build_sources_status_payload(config.db_path)
+                if qs.get("debug") or qs.get("verbose"):
+                    print(
+                        "[api/sources/status]",
+                        f"desired={payload.get('summary', {}).get('desired', 0)}",
+                        f"present={payload.get('summary', {}).get('present', 0)}",
+                        f"missing={payload.get('summary', {}).get('missing', 0)}",
+                    )
+                status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
+                self.write_json(payload, status=status)
+                return
+
+            if path == "/api/sources/ideal":
+                try:
+                    raw = IDEAL_SOURCES_PATH.read_text(encoding="utf-8")
+                    data = json.loads(raw)
+                except FileNotFoundError:
+                    data = {"version": "", "title": "Ideal Sources Inventory", "sources": []}
+                except json.JSONDecodeError as exc:
+                    data = {"error": f"Invalid JSON in {IDEAL_SOURCES_PATH}: {exc}", "sources": []}
+                self.write_json(
+                    {
+                        "meta": {
+                            "path": str(IDEAL_SOURCES_PATH),
+                            "exists": IDEAL_SOURCES_PATH.exists(),
+                            "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                        },
+                        **(data if isinstance(data, dict) else {"sources": []}),
+                    }
+                )
                 return
 
             self.write_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)

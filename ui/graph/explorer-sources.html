@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vota Con La Chola | Fuentes de Datos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg-a: #edf2ff;
+        --bg-b: #f8fbff;
+        --panel: #ffffff;
+        --line: #dce4fb;
+        --ink: #0f172a;
+        --muted: #5b6578;
+        --accent: #3b82f6;
+        --accent-2: #0ea5e9;
+        --ok: #16a34a;
+        --warn: #d97706;
+        --err: #dc2626;
+        --soft: #f8fafc;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        color: var(--ink);
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background:
+          radial-gradient(940px 420px at 10% 4%, #dbeafe 0%, transparent 65%),
+          radial-gradient(900px 500px at 90% 14%, #c7d2fe 0%, transparent 65%),
+          linear-gradient(130deg, var(--bg-a), var(--bg-b));
+        line-height: 1.4;
+        font-size: 16px;
+      }
+
+      .app {
+        width: min(1320px, calc(100% - 16px));
+        margin: 0 auto;
+        padding: 14px 0 20px;
+        display: grid;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .top {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--panel);
+        padding: 12px;
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.73rem;
+        color: #1d4ed8;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 6px 0 6px;
+        font-size: 1.5rem;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .global-progress {
+        margin-top: 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .global-progress-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .global-progress-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .meter {
+        height: 14px;
+        border-radius: 999px;
+        background: #e5e7eb;
+        overflow: hidden;
+        border: 1px solid #dbeafe;
+      }
+
+      .meter > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #22c55e, #38bdf8, #2563eb);
+      }
+
+      .kpis {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        min-width: 0;
+      }
+
+      .kpi {
+        border: 1px solid #dbeafe;
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 8px 10px;
+        min-width: 0;
+      }
+
+      .kpi .label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #1e3a8a;
+        font-weight: 800;
+        margin: 0 0 4px;
+      }
+
+      .kpi .value {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .kpi .value strong {
+        font-size: 1.05rem;
+      }
+
+      .toolbar {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 8px;
+      }
+
+      .toolbar button,
+      .toolbar input,
+      .toolbar select {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 8px 10px;
+        background: #fff;
+        width: 100%;
+        min-width: 0;
+        font: inherit;
+      }
+
+      .toolbar button {
+        border: 0;
+        background: linear-gradient(130deg, var(--accent), var(--accent-2));
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .toolbar button.secondary {
+        border: 1px solid var(--line);
+        background: #f1f5f9;
+        color: #1e293b;
+        font-weight: 600;
+      }
+
+      .summary {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(4, minmax(150px, 1fr));
+        min-width: 0;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        padding: 10px;
+      }
+
+      .card h2 {
+        margin: 0 0 6px;
+        font-size: 0.75rem;
+        color: #1e3a8a;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+
+      .big {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      /* Lists inside cards/details should not overflow. */
+      .details-body ul {
+        margin: 0;
+        padding-left: 18px;
+        max-width: 100%;
+      }
+
+      .details-body li {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .progress-wrap {
+        margin-top: 6px;
+        border: 1px solid #dbeafe;
+        border-radius: 999px;
+        height: 12px;
+        overflow: hidden;
+        background: #eef2ff;
+      }
+
+      .progress-inner {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #2563eb, #38bdf8);
+      }
+
+      .content {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        padding: 10px;
+        min-width: 0;
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      }
+
+      .content h2 {
+        margin: 2px 0 8px;
+      }
+
+      .sub {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 0.83rem;
+      }
+
+      .grid2 {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 1fr 1.2fr;
+      }
+
+      .scope-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        min-width: 0;
+      }
+
+      .scope-card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 10px;
+        min-width: 0;
+      }
+
+      .scope-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .scope-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .scope-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .scope-card details {
+        margin-top: 8px;
+      }
+
+      #panel-filters {
+        margin-top: 10px;
+        padding: 10px;
+        background: #ffffff;
+      }
+
+      #panel-filters .details-body {
+        padding-top: 8px;
+      }
+
+      .actions-grid {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .next-actions {
+        margin: 0 0 8px;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        min-width: 0;
+      }
+
+      .superheader {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+
+      .superlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .action {
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 10px;
+      }
+
+      .action-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+
+      .action-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        font-size: 0.92rem;
+      }
+
+      .action-meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .cmd {
+        margin: 8px 0 0;
+        background: #0b1220;
+        color: #e2e8f0;
+        border-radius: 10px;
+        padding: 8px 9px;
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.78rem;
+        overflow: auto;
+        white-space: pre;
+      }
+
+      .list {
+        border: 1px solid #dce4fb;
+        border-radius: 12px;
+        background: #f8fbff;
+        padding: 8px;
+      }
+
+      .list ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .list li {
+        margin: 5px 0;
+        font-size: 0.86rem;
+      }
+
+      .table-wrap {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        width: 100%;
+        max-width: 100%;
+        overflow: auto;
+      }
+
+      table {
+        width: 100%;
+        min-width: 640px;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 0.85rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 8px 10px;
+        vertical-align: top;
+        min-width: 0;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      th {
+        background: #f8fbff;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #fcfdff;
+      }
+
+      tbody tr:hover {
+        background: #ecf2ff;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 999px;
+        color: #0f172a;
+        background: #e2e8f0;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .pill.ok {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .pill.warn {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .pill.err {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
+      .pill.muted {
+        background: #e5e7eb;
+        color: #334155;
+      }
+
+      .meta {
+        color: #334155;
+        font-size: 0.77rem;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .small-progress {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mini {
+        width: 130px;
+        height: 8px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        overflow: hidden;
+      }
+
+      .mini > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #2563eb, #0ea5e9);
+      }
+
+      .danger {
+        color: var(--err);
+      }
+
+      .details-block {
+        padding: 0;
+      }
+
+      .details-block > summary {
+        cursor: pointer;
+        list-style: none;
+        margin: 0;
+        padding: 10px 12px;
+        border: 0;
+      }
+
+      .details-block > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .details-block > summary::marker {
+        content: "";
+      }
+
+      .details-block summary:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .details-title {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .details-body {
+        padding: 0 12px 12px;
+      }
+
+      .details-title strong {
+        color: var(--ink);
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .details-title small {
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      @media (max-width: 1120px) {
+        .toolbar {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .summary {
+          grid-template-columns: repeat(2, minmax(150px, 1fr));
+        }
+
+        .grid2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .toolbar {
+          grid-template-columns: 1fr;
+        }
+
+        .summary {
+          grid-template-columns: 1fr;
+        }
+
+        .actions-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <div class="superheader">
+        <a class="superlink" href="/">← Índice</a>
+      </div>
+      <section class="top">
+        <p class="eyebrow">Panel operativo</p>
+        <h1>
+          Estado de fuentes y conectores de datos
+          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.0.2</span>
+        </h1>
+        <p class="subtitle">
+          Compara lo que el proyecto necesita (<span class="mono">SOURCE_CONFIG</span>) con lo que ya está cargado en la BD, y ve qué queda por hacer para avanzar.
+        </p>
+        <div id="global-progress" class="global-progress" aria-live="polite">
+          <div class="muted">Cargando progreso...</div>
+        </div>
+        <div class="toolbar">
+          <select id="view-mode">
+            <option value="ops">Vista: Operación (hoy)</option>
+            <option value="all">Vista: Inventario completo</option>
+          </select>
+          <input id="search" type="search" placeholder="Buscar por nombre de fuente, source_id o ámbito..." />
+          <button id="refresh">Actualizar vista</button>
+        </div>
+        <details class="content details-block" id="panel-filters">
+          <summary>
+            <span class="details-title">
+              <strong>Filtros avanzados</strong>
+              <small>Úsalos para inspección puntual; la vista principal está agrupada por ámbito.</small>
+            </span>
+          </summary>
+          <div class="details-body">
+            <div class="toolbar" style="margin-top:0">
+              <select id="filter-state">
+                <option value="">Estado operativo: Todos</option>
+              </select>
+              <select id="filter-scope">
+                <option value="">Ámbito: Todos</option>
+              </select>
+              <select id="filter-desired">
+                <option value="">Tipo de fuente: Todos</option>
+                <option value="desired">Fuentes objetivo (obligatorias)</option>
+                <option value="extra">Fuentes adicionales</option>
+              </select>
+              <select id="filter-tracker-domain">
+                <option value="">Dominio (roadmap): Todos</option>
+              </select>
+              <select id="filter-roadmap">
+                <option value="">Ruta de trabajo: Todos</option>
+                <option value="TODO">Pendientes</option>
+                <option value="PARTIAL">Parcial</option>
+                <option value="DONE">Completadas</option>
+                <option value="N/A">N/A</option>
+              </select>
+            </div>
+          </div>
+        </details>
+        <p class="sub">La pantalla se organiza por <span class="mono">ámbito</span>. En “Operación (hoy)” se prioriza lo pendiente o degradado.</p>
+      </section>
+
+      <section class="content">
+        <div class="row" style="align-items:center; margin-bottom:6px">
+          <h2 style="margin:0; font-size:1rem; letter-spacing:-0.01em">Ámbitos</h2>
+          <p id="refresh-at" class="sub" style="margin:0"></p>
+        </div>
+        <p class="sub">
+          Cada tarjeta representa un ámbito y agrupa: progreso mínimo, estado operativo, fuentes en configuración, elementos de roadmap sin conector y pendientes accionables.
+        </p>
+        <div id="scope-dashboard" class="scope-grid"></div>
+      </section>
+
+      <details class="content details-block" id="panel-ideal">
+        <summary>
+          <span class="details-title">
+            <strong>Inventario ideal (Says vs Does)</strong>
+            <small>Lista ambiciosa de fuentes programáticas (oficiales y no oficiales) para comparar “lo que dicen” vs “lo que hacen”.</small>
+          </span>
+        </summary>
+        <div class="details-body">
+          <div class="toolbar" style="margin-top:0">
+            <select id="ideal-evidence">
+              <option value="">Evidencia: Todas</option>
+              <option value="does">does (hecho)</option>
+              <option value="says">says (dicho)</option>
+              <option value="both">both</option>
+            </select>
+            <select id="ideal-min-confidence">
+              <option value="0">Fiabilidad mínima: 0</option>
+              <option value="1">Fiabilidad mínima: 1</option>
+              <option value="2">Fiabilidad mínima: 2</option>
+              <option value="3" selected>Fiabilidad mínima: 3</option>
+              <option value="4">Fiabilidad mínima: 4</option>
+              <option value="5">Fiabilidad mínima: 5</option>
+            </select>
+          </div>
+          <div id="ideal-sources" class="list" style="margin-top:10px"></div>
+          <p class="sub" style="margin:10px 0 0">
+            Fuente de verdad: <span class="mono">docs/ideal_sources_say_do.json</span>.
+          </p>
+        </div>
+      </details>
+
+      <details class="content details-block" id="panel-howto">
+        <summary>
+          <span class="details-title">
+            <strong>Notas</strong>
+            <small>Definiciones rápidas.</small>
+          </span>
+        </summary>
+        <div class="details-body">
+          <ul class="list">
+            <li><strong>Progreso (metas mínimas):</strong> suma de <span class="mono">min_records_loaded_strict</span> por fuente objetivo (si aplica).</li>
+            <li><strong>Estado operativo:</strong> deriva de ejecuciones registradas y umbral mínimo (ok, partial, error, not_run...).</li>
+            <li><strong>Roadmap (sin conector):</strong> items del tracker sin <span class="mono">source_id</span> todavía, con ámbito inferido cuando es posible.</li>
+            <li><strong>Analítica (temas/posiciones):</strong> contadores y % de calidad para <span class="mono">topics</span>, <span class="mono">topic_evidence</span> y <span class="mono">topic_positions</span> (si existen en la BD).</li>
+            <li><strong>Regla de “doble entrada” (calidad):</strong> cuando exista, cruzar “comunicado oficial” con “registro con efectos”. Ejemplos: Consejo de Ministros → BOE; anuncio de adjudicación → PLACSP; anuncio de subvención → BDNS.</li>
+            <li><strong>Fiabilidad de fuente (0-5):</strong> 5=registro/boletín con efectos, 4=open data oficial estructurado, 3=comunicación oficial (RSS/agenda), 2=reutilizador, 1=señal, 0=sin trazabilidad.</li>
+          </ul>
+        </div>
+      </details>
+    </main>
+
+    <script>
+      const state = {
+        data: null,
+        ideal: null,
+      };
+
+      const nodes = {
+        viewMode: document.getElementById("view-mode"),
+        search: document.getElementById("search"),
+        filterState: document.getElementById("filter-state"),
+        filterScope: document.getElementById("filter-scope"),
+        filterDesired: document.getElementById("filter-desired"),
+        filterTrackerDomain: document.getElementById("filter-tracker-domain"),
+        filterRoadmap: document.getElementById("filter-roadmap"),
+        refresh: document.getElementById("refresh"),
+        globalProgress: document.getElementById("global-progress"),
+        scopeDashboard: document.getElementById("scope-dashboard"),
+        refreshAt: document.getElementById("refresh-at"),
+        idealEvidence: document.getElementById("ideal-evidence"),
+        idealMinConfidence: document.getElementById("ideal-min-confidence"),
+        idealSources: document.getElementById("ideal-sources"),
+      };
+
+      function getParam(key) {
+        try {
+          return new URL(window.location.href).searchParams.get(key);
+        } catch (_err) {
+          return null;
+        }
+      }
+
+      function setParam(key, value) {
+        try {
+          const url = new URL(window.location.href);
+          if (!value) {
+            url.searchParams.delete(key);
+          } else {
+            url.searchParams.set(key, value);
+          }
+          window.history.replaceState({}, "", url.toString());
+        } catch (_err) {
+          // ignore
+        }
+      }
+
+      function formatDate(val) {
+        if (!val) {
+          return "";
+        }
+      try {
+          const date = new Date(val.replace(" ", "T"));
+          if (Number.isNaN(date.getTime())) {
+            return val;
+          }
+          return date.toLocaleString("es-ES", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
+        } catch (_err) {
+          return val;
+        }
+      }
+
+      function stateClass(stateName) {
+        const map = {
+          ok: "ok",
+          partial: "warn",
+          running: "warn",
+          degraded: "warn",
+          error: "err",
+          not_run: "muted",
+          not_in_catalog: "muted",
+          missing: "err",
+          unknown: "muted",
+        };
+        return map[stateName] || "muted";
+      }
+
+      function labelState(stateName) {
+        const map = {
+          ok: "Completada",
+          partial: "Parcialmente cargada",
+          running: "En ejecución",
+          degraded: "Con errores",
+          error: "Error",
+          not_run: "Sin correr",
+          not_in_catalog: "Extra",
+          missing: "Sin fila en BD",
+          unknown: "Estado desconocido",
+        };
+        return map[stateName] || "Sin estado";
+      }
+
+      function roadmapLabel(value) {
+        const map = {
+          DONE: "Completado",
+          PARTIAL: "Parcial",
+          TODO: "Pendiente",
+          NA: "Sin roadmap",
+          "N/A": "Sin roadmap",
+          "": "Sin roadmap",
+        };
+        return map[value] || value;
+      }
+
+      function roadmapPill(value) {
+        const val = (value || "").toUpperCase().trim();
+        if (!val) {
+          return "<span class='pill muted'>Sin roadmap</span>";
+        }
+        if (val === "DONE") {
+          return "<span class='pill ok'>Completado</span>";
+        }
+        if (val === "PARTIAL") {
+          return "<span class='pill warn'>Parcial</span>";
+        }
+        if (val === "TODO") {
+          return "<span class='pill muted'>Pendiente</span>";
+        }
+        return "<span class='pill muted'>" + roadmapLabel(val) + "</span>";
+      }
+
+      function sqlPill(value) {
+        const val = (value || "").toUpperCase().trim();
+        if (!val) {
+          return "<span class='pill muted'>Sin check SQL</span>";
+        }
+        if (val === "DONE") {
+          return "<span class='pill ok'>OK</span>";
+        }
+        if (val === "PARTIAL") {
+          return "<span class='pill warn'>Parcial</span>";
+        }
+        if (val === "TODO") {
+          return "<span class='pill muted'>Pendiente</span>";
+        }
+        return "<span class='pill muted'>" + val + "</span>";
+      }
+
+      function actionKindLabel(value) {
+        const map = {
+          done_zero_real: "En BD sin ejecución real verificable (strict-network)",
+          ingest_error: "Error en la ingesta",
+          tracker_item: "Requiere trabajo del roadmap",
+        };
+        return map[value] || value;
+      }
+
+      function progressBadge(progress) {
+        const percent = Number.isInteger(progress.percent) ? progress.percent : null;
+        if (!percent && percent !== 0) {
+          return "<span class='muted'>—</span>";
+        }
+        const width = Math.max(0, Math.min(100, percent));
+        return "<span class='small-progress'><span class='mini'><span style='width: " + width + "%'></span></span>" +
+          width + "% (" + progress.loaded + "/" + progress.target + ")</span>";
+      }
+
+      function renderGlobalProgress(data) {
+        const summary = data.summary || {};
+        const desiredProgress = (summary.desired_progress && summary.desired_progress.percent) || 0;
+        const tracker = summary.tracker || {};
+        const sql = summary.sql || {};
+        const analytics = data.analytics || {};
+        const aTopics = analytics.topics || {};
+        const aEvidence = analytics.evidence || {};
+        const aPositions = analytics.positions || {};
+        const actionCount = Array.isArray(data.actions) ? data.actions.length : 0;
+        const cards = [
+          {title: "Fuentes esperadas (config)", value: summary.desired || 0},
+          {title: "Presentes en BD", value: summary.present || 0},
+          {title: "Faltan por cargar", value: summary.missing || 0},
+          {title: "Fuentes extras", value: summary.extra || 0},
+          {title: "Tracker pendientes", value: tracker.todo || 0},
+          {title: "Tracker parciales", value: tracker.partial || 0},
+          {title: "Tracker completados", value: tracker.done || 0},
+          {title: "Acciones sugeridas", value: actionCount},
+        ];
+
+        const target = summary.desired_progress && summary.desired_progress.target ? summary.desired_progress.target : 0;
+        const loaded = summary.desired_progress && summary.desired_progress.loaded ? summary.desired_progress.loaded : 0;
+        const percent = Math.max(0, Math.min(100, Number.isFinite(desiredProgress) ? desiredProgress : 0));
+        const present = summary.present || 0;
+        const desired = summary.desired || 0;
+        const missing = summary.missing || 0;
+        const extra = summary.extra || 0;
+        const todo = tracker.todo || 0;
+        const partial = tracker.partial || 0;
+        const done = tracker.done || 0;
+        const sqlDone = sql.done || 0;
+        const sqlPartial = sql.partial || 0;
+
+        const topicsTotal = Number(aTopics.topics_total || 0);
+        const topicSetsTotal = Number(aTopics.topic_sets_total || 0);
+        const highStakesTotal = Number(aTopics.high_stakes_total || 0);
+        const evidenceTotal = Number(aEvidence.topic_evidence_total || 0);
+        const evidenceTopicPct = Number(aEvidence.topic_evidence_with_topic_pct || 0);
+        const evidenceDatePct = Number(aEvidence.topic_evidence_with_date_pct || 0);
+        const positionsTotal = Number(aPositions.topic_positions_total || 0);
+        const positionsWithEvidencePct = Number(aPositions.topic_positions_with_evidence_pct || 0);
+
+        function fmtPct(x) {
+          if (!Number.isFinite(x)) return "—";
+          return Math.round(x * 100) + "%";
+        }
+
+        nodes.globalProgress.innerHTML =
+          "<div class='global-progress-head'>" +
+          "<div class='global-progress-title'>Progreso global de cobertura (metas mínimas)</div>" +
+          "<div class='mono muted'>" + percent + "%</div>" +
+          "</div>" +
+          "<div class='meter'><span style='width:" + percent + "%'></span></div>" +
+          "<div class='row'><span class='muted'>Registros mínimos cubiertos</span><span class='mono'>" + loaded + " / " + target + "</span></div>" +
+          "<div class='kpis'>" +
+          "<div class='kpi'><p class='label'>Inventario</p><div class='value'><strong>" + present + "</strong><span class='muted'>en BD</span></div><div class='small'>Esperadas: " + desired + " · Extras: " + extra + " · Faltan: " + missing + "</div></div>" +
+          "<div class='kpi'><p class='label'>Tracker</p><div class='value'><strong>" + (todo + partial) + "</strong><span class='muted'>por resolver</span></div><div class='small'>Pendientes: " + todo + " · Parciales: " + partial + " · Completadas: " + done + "</div></div>" +
+          "<div class='kpi'><p class='label'>Checks SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + "</div></div>" +
+          "<div class='kpi'><p class='label'>Analítica (temas)</p><div class='value'><strong>" + positionsTotal + "</strong><span class='muted'>posiciones</span></div><div class='small'>Temas: " + topicsTotal + " · Sets: " + topicSetsTotal + " · High-stakes: " + highStakesTotal + "</div></div>" +
+          "<div class='kpi'><p class='label'>Analítica (evidencia)</p><div class='value'><strong>" + evidenceTotal + "</strong><span class='muted'>evidencias</span></div><div class='small'>Con topic: " + fmtPct(evidenceTopicPct) + " · Con fecha: " + fmtPct(evidenceDatePct) + " · Pos con evidencia: " + fmtPct(positionsWithEvidencePct) + "</div></div>" +
+          "</div>";
+      }
+
+      function safeNum(x, fallback = 0) {
+        const n = Number(x);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function renderIdealSources() {
+        if (!nodes.idealSources) return;
+        const data = state.ideal || {};
+        const sources = Array.isArray(data.sources) ? data.sources : [];
+        if (!sources.length) {
+          nodes.idealSources.innerHTML = "<div class='muted'>Sin inventario ideal (o endpoint no disponible).</div>";
+          return;
+        }
+
+        const search = nodes.search ? nodes.search.value : "";
+        const ev = nodes.idealEvidence ? String(nodes.idealEvidence.value || "") : "";
+        const minConf = nodes.idealMinConfidence ? safeNum(nodes.idealMinConfidence.value, 0) : 0;
+
+        const filtered = sources
+          .filter((s) => {
+            const c = safeNum(s.confidence, 0);
+            if (c < minConf) return false;
+            if (ev) {
+              const sev = String(s.evidence || "").toLowerCase();
+              if (sev !== String(ev).toLowerCase()) return false;
+            }
+            if (!matchSearch(search, s.name, s.id, s.jurisdiction, s.scope, (s.domains || []).join(" "), s.url, s.notes)) {
+              return false;
+            }
+            return true;
+          })
+          .sort((a, b) => {
+            const da = safeNum(b.confidence, 0) - safeNum(a.confidence, 0);
+            if (da !== 0) return da;
+            return String(a.name || a.id || "").localeCompare(String(b.name || b.id || ""));
+          });
+
+        const countBy = (pred) => filtered.filter(pred).length;
+        const nDoes = countBy((s) => String(s.evidence || "").toLowerCase() === "does");
+        const nSays = countBy((s) => String(s.evidence || "").toLowerCase() === "says");
+        const nBoth = countBy((s) => String(s.evidence || "").toLowerCase() === "both");
+
+        const head =
+          "<div class='row' style='align-items:baseline; margin-bottom:8px'>" +
+          "<div><strong>" +
+          filtered.length +
+          "</strong> fuentes · <span class='muted'>does:</span> <span class='mono'>" +
+          nDoes +
+          "</span> · <span class='muted'>says:</span> <span class='mono'>" +
+          nSays +
+          "</span> · <span class='muted'>both:</span> <span class='mono'>" +
+          nBoth +
+          "</span></div>" +
+          "<div class='mono muted'>/api/sources/ideal</div>" +
+          "</div>";
+
+        const rows = filtered
+          .slice(0, 120)
+          .map((s) => {
+            const conf = safeNum(s.confidence, 0);
+            const ev2 = String(s.evidence || "").toLowerCase();
+            const evBadge = ev2 === "does" ? "ok" : ev2 === "says" ? "warn" : "";
+            const badge = "<span class='pill " + (evBadge || "muted") + "'>" + (ev2 || "—") + "</span>";
+            const url = s.url ? "<a class='mono' href='" + String(s.url) + "' target='_blank' rel='noopener'>url</a>" : "<span class='muted'>url: —</span>";
+            const dom = Array.isArray(s.domains) ? s.domains.slice(0, 6).join(", ") : "";
+            const access = Array.isArray(s.access) ? s.access.join(", ") : "";
+            const fmt = Array.isArray(s.formats) ? s.formats.join(", ") : "";
+            const meta = [
+              "id=" + String(s.id || ""),
+              "conf=" + String(conf),
+              s.jurisdiction ? "jur=" + String(s.jurisdiction) : "",
+              s.scope ? "scope=" + String(s.scope) : "",
+              access ? "access=" + access : "",
+              fmt ? "fmt=" + fmt : "",
+            ].filter(Boolean).join(" · ");
+            const notes = s.notes ? "<div class='small muted'>" + String(s.notes) + "</div>" : "";
+            const domLine = dom ? "<div class='small muted'>dominios: " + String(dom) + "</div>" : "";
+            return (
+              "<div class='card' style='margin-top:8px'>" +
+              "<div class='row'><strong>" + String(s.name || s.id || "—") + "</strong>" + badge + "</div>" +
+              "<div class='mono'>" + meta + "</div>" +
+              "<div class='row' style='margin-top:6px; align-items:baseline'>" + url + "</div>" +
+              domLine +
+              notes +
+              "</div>"
+            );
+          })
+          .join("");
+
+        const more = filtered.length > 120 ? "<div class='muted' style='margin-top:10px'>+" + (filtered.length - 120) + " más… (usa filtros/búsqueda)</div>" : "";
+        nodes.idealSources.innerHTML = head + rows + more;
+      }
+
+      function fillAdvancedFilters(data) {
+        const sources = Array.isArray(data.sources) ? data.sources : [];
+        const scopes = [...new Set(sources.map((s) => normalizeScope(s.scope)).filter((s) => s && s !== "unknown"))]
+          .sort((a, b) => {
+            const d = scopeSortKey(a) - scopeSortKey(b);
+            if (d !== 0) return d;
+            return String(a).localeCompare(String(b));
+          });
+        const statesSource = data && data.summary && Array.isArray(data.summary.states) ? data.summary.states : [];
+        const states = [...new Set(statesSource)].filter(Boolean).sort();
+        const trackerItems = data && data.tracker && Array.isArray(data.tracker.items) ? data.tracker.items : [];
+        const trackerDomains = [...new Set(trackerItems.map((it) => String(it.dominio || "").trim()).filter(Boolean))]
+          .sort((a, b) => String(a).localeCompare(String(b)));
+
+        if (nodes.filterScope) {
+          const keep = nodes.filterScope.options[0] ? nodes.filterScope.options[0].outerHTML : "<option value=''>Ámbito: Todos</option>";
+          nodes.filterScope.innerHTML = keep;
+          scopes.forEach((scope) => {
+            const option = document.createElement("option");
+            option.value = scope;
+            option.textContent = "Ámbito: " + scopeLabel(scope);
+            nodes.filterScope.appendChild(option);
+          });
+        }
+        if (nodes.filterState) {
+          const keep = nodes.filterState.options[0] ? nodes.filterState.options[0].outerHTML : "<option value=''>Estado operativo: Todos</option>";
+          nodes.filterState.innerHTML = keep;
+          states.forEach((st) => {
+            const option = document.createElement("option");
+            option.value = st;
+            option.textContent = "Estado operativo: " + labelState(st);
+            nodes.filterState.appendChild(option);
+          });
+        }
+
+        if (nodes.filterTrackerDomain) {
+          const keep = nodes.filterTrackerDomain.options[0]
+            ? nodes.filterTrackerDomain.options[0].outerHTML
+            : "<option value=''>Dominio (roadmap): Todos</option>";
+          nodes.filterTrackerDomain.innerHTML = keep;
+          trackerDomains.forEach((d) => {
+            const option = document.createElement("option");
+            option.value = d.toUpperCase();
+            option.textContent = "Dominio: " + d;
+            nodes.filterTrackerDomain.appendChild(option);
+          });
+        }
+      }
+
+      function scopeLabel(scope) {
+        const s = String(scope || "").toLowerCase();
+        const map = {
+          nacional: "Nacional",
+          autonomico: "Autonómico",
+          municipal: "Municipal",
+          europeo: "Europeo",
+          territorial: "Territorial (catálogo/población)",
+          multi: "Multi-ámbito",
+          "": "Sin ámbito",
+          unknown: "Sin ámbito",
+        };
+        return map[s] || (s ? s : "Sin ámbito");
+      }
+
+      function scopeSortKey(scope) {
+        const s = String(scope || "").toLowerCase();
+        const order = {
+          nacional: 0,
+          autonomico: 1,
+          municipal: 2,
+          europeo: 3,
+          territorial: 4,
+          multi: 8,
+          "": 9,
+          unknown: 9,
+        };
+        return order[s] !== undefined ? order[s] : 7;
+      }
+
+      function actionPriorityWeight(action) {
+        const prio = String(action && action.priority ? action.priority : "P2").toUpperCase();
+        if (prio === "P0") return 0;
+        if (prio === "P1") return 1;
+        if (prio === "P2") return 2;
+        return 9;
+      }
+
+      function normalizeScope(scope) {
+        const s = String(scope || "").toLowerCase().trim();
+        return s || "unknown";
+      }
+
+      function matchSearch(search, ...parts) {
+        const s = (search || "").toLowerCase().trim();
+        if (!s) return true;
+        const blob = parts.filter(Boolean).join(" ").toLowerCase();
+        return blob.includes(s);
+      }
+
+      function scopeFromAction(action, byId) {
+        const explicit = normalizeScope(action && action.scope ? action.scope : "");
+        if (explicit && explicit !== "unknown") {
+          return explicit;
+        }
+        const ids = Array.isArray(action && action.source_ids) ? action.source_ids : [];
+        if (!ids.length) {
+          return "unknown";
+        }
+        const scopes = new Set();
+        ids.forEach((sid) => {
+          const row = byId.get(String(sid));
+          if (row) {
+            scopes.add(normalizeScope(row.scope));
+          }
+        });
+        if (scopes.size === 1) return Array.from(scopes)[0];
+        if (scopes.size > 1) return "multi";
+        return "unknown";
+      }
+
+      function scopeCoverageProgress(rows) {
+        let loaded = 0;
+        let target = 0;
+        rows.forEach((r) => {
+          const p = r && r.progress ? r.progress : null;
+          const t = p && Number.isFinite(p.target) ? Number(p.target) : 0;
+          const l = p && Number.isFinite(p.loaded) ? Number(p.loaded) : 0;
+          if (t > 0) {
+            target += t;
+            loaded += Math.min(l, t);
+          }
+        });
+        if (!target) {
+          return { percent: null, loaded: 0, target: 0 };
+        }
+        const percent = Math.max(0, Math.min(100, Math.round((loaded * 100) / target)));
+        return { percent, loaded, target };
+      }
+
+      function renderScopeDashboard(data) {
+        if (!nodes.scopeDashboard) {
+          return;
+        }
+        const mode = (nodes.viewMode && nodes.viewMode.value) ? nodes.viewMode.value : "ops";
+        const search = nodes.search ? nodes.search.value : "";
+        const filterState = nodes.filterState ? nodes.filterState.value : "";
+        const filterScope = nodes.filterScope ? nodes.filterScope.value : "";
+        const filterDesired = nodes.filterDesired ? nodes.filterDesired.value : "";
+        const filterTrackerDomain = nodes.filterTrackerDomain ? nodes.filterTrackerDomain.value : "";
+        const filterRoadmap = nodes.filterRoadmap ? nodes.filterRoadmap.value : "";
+        const actionsAll = Array.isArray(data.actions) ? data.actions : [];
+        const sourcesAll = Array.isArray(data.sources) ? data.sources : [];
+        const sourcesWanted = sourcesAll.filter((r) => {
+          if (!matchSearch(search, r.source_id, r.source_name, r.scope, r.domain, r.format, r.default_url)) {
+            return false;
+          }
+          if (filterScope && normalizeScope(r.scope) !== normalizeScope(filterScope)) {
+            return false;
+          }
+          if (filterState && String(r.state || "") !== String(filterState)) {
+            return false;
+          }
+          if (filterDesired === "desired" && !r.desired) {
+            return false;
+          }
+          if (filterDesired === "extra" && r.desired) {
+            return false;
+          }
+          if (filterTrackerDomain) {
+            const td = (r.tracker && r.tracker.dominio) ? String(r.tracker.dominio).toUpperCase() : "";
+            if (String(filterTrackerDomain).toUpperCase() !== td) {
+              return false;
+            }
+          }
+          if (filterRoadmap) {
+            const trackerStatus = (r.tracker && r.tracker.status) ? String(r.tracker.status).toUpperCase() : "N/A";
+            if (String(filterRoadmap).toUpperCase() !== trackerStatus) {
+              return false;
+            }
+          }
+          return true;
+        });
+        const tracker = data.tracker || {};
+        const roadmapAll = Array.isArray(tracker.unmapped) ? tracker.unmapped : [];
+
+        const byId = new Map();
+        sourcesAll.forEach((r) => {
+          if (r && r.source_id) byId.set(String(r.source_id), r);
+        });
+
+        const roadmap = roadmapAll
+          .filter((it) => ["TODO", "PARTIAL"].includes(String(it.estado || "").toUpperCase()))
+          .filter((it) => matchSearch(search, it.fuentes_objetivo, it.tipo_dato, it.dominio, it.bloque, it.scope))
+          .filter((it) => {
+            if (filterScope && normalizeScope(it.scope) !== normalizeScope(filterScope)) {
+              return false;
+            }
+            if (filterTrackerDomain && String(filterTrackerDomain).toUpperCase() !== String(it.dominio || "").toUpperCase()) {
+              return false;
+            }
+            if (filterRoadmap && String(filterRoadmap).toUpperCase() !== String(it.estado || "").toUpperCase()) {
+              return false;
+            }
+            return true;
+          });
+
+        const byScope = new Map();
+        function ensure(scope) {
+          const key = normalizeScope(scope);
+          if (!byScope.has(key)) {
+            byScope.set(key, { scope: key, sources: [], roadmap: [], actions: [] });
+          }
+          return byScope.get(key);
+        }
+
+        sourcesWanted.forEach((r) => ensure(r.scope).sources.push(r));
+        roadmap.forEach((it) => ensure(it.scope).roadmap.push(it));
+
+        const actionFiltered = mode === "ops"
+          ? actionsAll.filter((a) => ["P0", "P1"].includes(String(a.priority || "").toUpperCase()))
+          : actionsAll.slice();
+
+        actionFiltered.forEach((a) => {
+          const s = scopeFromAction(a, byId);
+          ensure(s).actions.push(a);
+        });
+
+        const scopes = Array.from(byScope.keys()).sort((a, b) => {
+          const da = scopeSortKey(a) - scopeSortKey(b);
+          if (da !== 0) return da;
+          return String(a).localeCompare(String(b));
+        });
+
+        if (!scopes.length) {
+          nodes.scopeDashboard.innerHTML = "<div class='muted'>Sin datos.</div>";
+          return;
+        }
+
+        nodes.scopeDashboard.innerHTML = scopes
+          .map((scopeKey) => {
+            const group = byScope.get(scopeKey);
+            const rows = (group.sources || []).slice();
+            const rowsSorted = rows.sort((a, b) => String(a.source_name || a.source_id || "").localeCompare(String(b.source_name || b.source_id || "")));
+
+            const issues = rowsSorted.filter((r) => String(r.state || "").toLowerCase() !== "ok");
+            const ok = rowsSorted.length - issues.length;
+            const coverage = scopeCoverageProgress(rowsSorted);
+            const roadmapItems = (group.roadmap || []).slice();
+            const actions = (group.actions || []).slice().sort((a, b) => actionPriorityWeight(a) - actionPriorityWeight(b));
+
+            const pendingCount = issues.length + roadmapItems.length + actions.length;
+            if (mode === "ops" && pendingCount === 0) {
+              return "";
+            }
+
+            const opPercent = rowsSorted.length ? Math.round((ok * 100) / rowsSorted.length) : null;
+            const coveragePercent = coverage.percent;
+
+            const issuesBlock = issues.length
+              ? "<details open><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Pendiente / degradado (" + pendingCount + ")</summary>" +
+                "<div class='list' style='margin-top:8px'>" +
+                "<ul>" +
+                issues.slice(0, 24).map((r) => {
+                  const st = String(r.state || "unknown");
+                  const badge = "<span class='pill " + stateClass(st) + "'>" + labelState(st) + "</span>";
+                  const desiredTag = r.desired ? "<span class='meta'>Objetivo</span>" : "<span class='meta'>Extra</span>";
+                  const url = r.default_url ? "<a class='mono' href='" + r.default_url + "' target='_blank' rel='noopener'>fuente</a>" : "<span class='muted'>fuente: —</span>";
+                  const prog = progressBadge(r.progress || {});
+                  return "<li>" + badge + " " + desiredTag + " <strong>" + (r.source_name || r.source_id) + "</strong> <span class='muted'>(" + (r.source_id || "") + ")</span> · " + prog + " · " + url + "</li>";
+                }).join("") +
+                (issues.length > 24 ? "<li class='muted'>+" + (issues.length - 24) + " más… (usa búsqueda)</li>" : "") +
+                "</ul>" +
+                "</div>" +
+                (actions.length ? "<details style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Acciones (" + actions.length + ")</summary><div class='actions-grid' style='margin-top:8px'>" +
+                  actions.slice(0, 12).map((a) => {
+                    const prio = (a.priority || "P2").toUpperCase();
+                    const prioClass = prio === "P0" ? "err" : prio === "P1" ? "warn" : "muted";
+                    const details = a.details || "";
+                    const cmds = (a.commands || []).filter(Boolean);
+                    const cmdBlock = cmds.length
+                      ? "<details style='margin-top:8px'><summary class='muted' style='cursor:pointer; font-weight:700'>Ver comandos</summary><pre class='cmd'>" + cmds.join("\n") + "</pre></details>"
+                      : "";
+                    return "<div class='action'><div class='action-head'><span class='pill " + prioClass + "'>" + prio + "</span><span class='mono muted'>" + actionKindLabel(a.kind || "") + "</span></div><div class='action-title'>" + (a.title || "") + "</div>" + (details ? "<p class='action-meta'>" + details + "</p>" : "") + cmdBlock + "</div>";
+                  }).join("") +
+                  (actions.length > 12 ? "<div class='muted'>+" + (actions.length - 12) + " más…</div>" : "") +
+                  "</div></details>" : "") +
+                (roadmapItems.length ? "<details style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Roadmap sin conector (" + roadmapItems.length + ")</summary><div class='list' style='margin-top:8px'><ul>" +
+                  roadmapItems.slice(0, 24).map((it) => {
+                    const e = String(it.estado || "").toUpperCase();
+                    const pill = roadmapPill(e);
+                    const label = (it.fuentes_objetivo || it.tipo_dato || "—").trim();
+                    const inf = it.scope_inferred ? " · <span class='muted'>ámbito inferido</span>" : "";
+                    const bloque = it.bloque ? " · <span class='muted'>" + String(it.bloque).trim() + "</span>" : "";
+                    return "<li>" + pill + " <strong>" + label + "</strong>" + inf + bloque + "</li>";
+                  }).join("") +
+                  (roadmapItems.length > 24 ? "<li class='muted'>+" + (roadmapItems.length - 24) + " más…</li>" : "") +
+                  "</ul></div></details>" : "") +
+                "</details>"
+              : "<div class='scope-meta'>Sin pendientes.</div>";
+
+            const sourcesBlock = rowsSorted.length
+              ? "<details" + (mode === "all" ? " open" : "") + " style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Fuentes (config) (" + rowsSorted.length + ")</summary><div class='list' style='margin-top:8px'><ul>" +
+                rowsSorted.slice(0, 80).map((r) => {
+                  const st = String(r.state || "unknown");
+                  const badge = "<span class='pill " + stateClass(st) + "'>" + labelState(st) + "</span>";
+                  const prog = progressBadge(r.progress || {});
+                  const url = r.default_url ? "<a class='mono' href='" + r.default_url + "' target='_blank' rel='noopener'>fuente</a>" : "<span class='muted'>fuente: —</span>";
+                  const last = r.last_seen_at || r.last_started_at || "";
+                  const lastTxt = last ? (" · <span class='muted'>última: " + formatDate(last) + "</span>") : "";
+                  const roadmapP = roadmapPill(r.tracker && r.tracker.status ? r.tracker.status : "");
+                  const sqlP = sqlPill(r.sql_status || "");
+                  const desiredTag = r.desired ? "<span class='meta'>Objetivo</span>" : "<span class='meta'>Extra</span>";
+                  return "<li>" + badge + " " + desiredTag + " " + roadmapP + " " + sqlP + " <strong>" + (r.source_name || r.source_id) + "</strong> <span class='muted'>(" + (r.source_id || "") + ")</span> · " + prog + " · " + url + lastTxt + "</li>";
+                }).join("") +
+                (rowsSorted.length > 80 ? "<li class='muted'>+" + (rowsSorted.length - 80) + " más… (usa búsqueda)</li>" : "") +
+                "</ul></div></details>"
+              : "<div class='scope-meta'>Fuentes (config): 0</div>";
+
+            const meters =
+              "<div style='display:grid; gap:8px; margin-top:8px'>" +
+              "<div><div class='row'><span class='muted'>Operativo</span><span class='mono'>" + (opPercent === null ? "—" : (ok + "/" + rowsSorted.length + " (" + opPercent + "%)")) + "</span></div>" +
+              "<div class='meter'><span style='width:" + (opPercent === null ? 0 : opPercent) + "%'></span></div></div>" +
+              "<div><div class='row'><span class='muted'>Cobertura (metas mínimas)</span><span class='mono'>" + (coveragePercent === null ? "—" : (coverage.loaded + "/" + coverage.target + " (" + coveragePercent + "%)")) + "</span></div>" +
+              "<div class='meter'><span style='width:" + (coveragePercent === null ? 0 : coveragePercent) + "%'></span></div></div>" +
+              "</div>";
+
+            return (
+              "<article class='scope-card'>" +
+              "<div class='scope-head'>" +
+              "<div class='scope-title'>" + scopeLabel(scopeKey) + "</div>" +
+              "<div class='scope-meta'><span class='mono'>" + rowsSorted.length + "</span> fuentes · <span class='mono'>" + roadmapItems.length + "</span> roadmap</div>" +
+              "</div>" +
+              meters +
+              "<div style='margin-top:10px'>" + issuesBlock + "</div>" +
+              sourcesBlock +
+              "</article>"
+            );
+          })
+          .join("") || "<div class='muted'>No hay pendientes para mostrar en Operación (hoy). Cambia a inventario completo.</div>";
+      }
+
+      async function loadData() {
+        if (nodes.scopeDashboard) {
+          nodes.scopeDashboard.innerHTML = "<div class='muted'>Actualizando...</div>";
+        }
+        try {
+          const [statusResp, idealResp] = await Promise.all([
+            fetch("/api/sources/status"),
+            fetch("/api/sources/ideal").catch(() => null),
+          ]);
+          const payload = await statusResp.json();
+          let idealPayload = null;
+          if (idealResp) {
+            try {
+              idealPayload = await idealResp.json();
+            } catch (_err) {
+              idealPayload = null;
+            }
+          }
+          if (payload.error) {
+            if (nodes.scopeDashboard) {
+              nodes.scopeDashboard.innerHTML = "<div class='muted'>" + payload.error + "</div>";
+            }
+            return;
+          }
+          state.data = payload;
+          state.ideal = idealPayload;
+          renderGlobalProgress(payload);
+          fillAdvancedFilters(payload);
+          nodes.refreshAt.textContent = "Actualizado: " + formatDate(payload.generated_at || "");
+          renderScopeDashboard(payload);
+          renderIdealSources();
+        } catch (error) {
+          if (nodes.scopeDashboard) {
+            nodes.scopeDashboard.innerHTML = "<div class='muted'>No se pudo cargar /api/sources/status: " + String(error) + "</div>";
+          }
+        }
+      }
+
+      function refresh() {
+        if (state.data) {
+          renderScopeDashboard(state.data);
+          renderIdealSources();
+        }
+      }
+
+      nodes.refresh.addEventListener("click", loadData);
+      nodes.search.addEventListener("input", refresh);
+      nodes.filterState.addEventListener("change", refresh);
+      nodes.filterScope.addEventListener("change", refresh);
+      nodes.filterDesired.addEventListener("change", refresh);
+      nodes.filterTrackerDomain.addEventListener("change", refresh);
+      nodes.filterRoadmap.addEventListener("change", refresh);
+      nodes.viewMode.addEventListener("change", () => {
+        setParam("view", nodes.viewMode.value === "all" ? "all" : "ops");
+        refresh();
+      });
+      if (nodes.idealEvidence) nodes.idealEvidence.addEventListener("change", refresh);
+      if (nodes.idealMinConfidence) nodes.idealMinConfidence.addEventListener("change", refresh);
+
+      // Initialize view mode from URL.
+      {
+        const view = (getParam("view") || "").toLowerCase();
+        nodes.viewMode.value = view === "all" ? "all" : "ops";
+      }
+
+      loadData();
+    </script>
+  </body>
+</html>

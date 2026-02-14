@@ -87,6 +87,37 @@
         font-size: 0.82rem;
       }
 
+      .superheader {
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        min-height: 34px;
+      }
+
+      .superlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .superlink svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        flex: 0 0 auto;
+      }
+
       .switch a.active {
         border-color: transparent;
         background: linear-gradient(135deg, var(--accent), #3f7cff);
@@ -266,7 +297,7 @@
         width: auto;
       }
 
-      .detail {
+        .detail {
         min-height: 0;
         overflow: auto;
         border-top: 1px solid #edf1f7;
@@ -278,6 +309,11 @@
         color: #3d4a64;
         font-size: 0.78rem;
         font-family: "IBM Plex Mono", monospace;
+      }
+
+      .path .path-btn {
+        display: inline-flex;
+        margin: 0;
       }
 
       .path .muted {
@@ -415,6 +451,12 @@
         cursor: pointer;
       }
 
+      a.pill {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
       .pill.facet {
         border-color: #ffd9c8;
         background: #fff3ec;
@@ -448,14 +490,29 @@
     </style>
   </head>
   <body>
-    <div class="page">
-      <header class="topbar card">
-        <div class="title-wrap">
-          <h1>Data Explorer (Wikidata-like)</h1>
-          <p>Navegacion dinamica por tablas, registros y relaciones inferidas por esquema.</p>
+      <div class="page">
+        <div class="superheader">
+          <a class="superlink" href="/">← Índice</a>
+          <a
+            class="superlink"
+            href="https://github.com/gsusI/vota-con-la-chola"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver el código en GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            Ver el código
+          </a>
+        </div>
+        <header class="topbar card">
+          <div class="title-wrap">
+            <h1>Data Explorer (Wikidata-like)</h1>
+          <p>Navegacion dinamica por tablas, registros y relaciones (incluye temas/evidencia/posiciones cuando existan).</p>
         </div>
         <nav class="switch">
-          <a href="/">Graph</a>
+          <a href="/graph">Graph</a>
           <a class="active" href="/explorer">Explorer</a>
         </nav>
       </header>
@@ -464,11 +521,17 @@
         <section class="panel card">
           <div class="head">
             <h2>1) Tablas</h2>
-            <p>Vista top-level de todo lo disponible en la base actual.</p>
+            <p>Vista top-level de todo lo disponible. Atajo: abre el modelo de posiciones por temas.</p>
           </div>
           <div class="controls">
             <input id="tableFilter" type="text" placeholder="Filtrar tablas..." />
             <button id="reloadSchema" class="secondary">Recargar esquema</button>
+            <div class="pill-row">
+              <a class="pill" href="/explorer-temas">Vista Temas</a>
+              <a class="pill" href="/explorer?t=topic_positions&tf=topic_">Posiciones</a>
+              <a class="pill" href="/explorer?t=topic_evidence&tf=topic_">Evidencia</a>
+              <a class="pill" href="/explorer?t=topics&tf=topic">Temas</a>
+            </div>
           </div>
           <div id="tables" class="list"></div>
         </section>
@@ -509,6 +572,7 @@
             <h2>3) Detalle y relaciones</h2>
             <p>Cada click abre el siguiente nivel segun claves foraneas salientes/entrantes.</p>
           </div>
+          <div id="pathTrail" class="path"></div>
           <div id="detail" class="detail"></div>
         </section>
       </main>
@@ -537,6 +601,7 @@
         tableFilter: document.getElementById("tableFilter"),
         reloadSchema: document.getElementById("reloadSchema"),
         tables: document.getElementById("tables"),
+        pathTrail: document.getElementById("pathTrail"),
         recordsHint: document.getElementById("recordsHint"),
         recordSearch: document.getElementById("recordSearch"),
         applySearch: document.getElementById("applySearch"),
@@ -556,6 +621,35 @@
         if (value === null || value === undefined) return "null";
         if (typeof value === "object") return JSON.stringify(value);
         return String(value);
+      }
+
+      function renderBreadcrumbTrail() {
+        const stepCount = Array.isArray(state.navStack) ? state.navStack.length : 0;
+        if (!stepCount || !els.pathTrail) {
+          if (els.pathTrail) {
+            els.pathTrail.innerHTML = "";
+          }
+          return;
+        }
+
+        const parts = state.navStack.map((step, idx) => {
+          const label = step?.label || step?.table || "registro";
+          const safeLabel = escapeHtml(toText(label));
+          const isLast = idx === stepCount - 1;
+          if (isLast) {
+            return `<span>${safeLabel}</span>`;
+          }
+          return `<button type="button" class="path-btn" data-nav-level="${idx}" title="Volver a ${safeLabel}">${safeLabel}</button>`;
+        });
+
+        const separators = ' <span class="muted">/</span> ';
+        if (!els.pathTrail) return;
+
+        if (!parts.length) {
+          els.pathTrail.innerHTML = "";
+          return;
+        }
+        els.pathTrail.innerHTML = parts.join(separators);
       }
 
       function escapeHtml(text) {
@@ -687,10 +781,13 @@
           const payload = await fetchRecordPayload(state.activeTable, state.activeRecordIdentity);
           if (payload.error) {
             setDetailHtml(`<div class="meta">${payload.error}</div>`);
+            renderBreadcrumbTrail();
           } else {
             renderDetail(payload);
+            renderBreadcrumbTrail();
           }
         } else {
+          renderBreadcrumbTrail();
           setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
         }
       }
@@ -1365,6 +1462,7 @@
         renderFilterOptions();
         renderActiveFilters();
         setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
+        renderBreadcrumbTrail();
         await loadRows({ reset: true });
         if (options.historyMode !== "none") pushHistory(options.historyMode);
       }
@@ -1398,9 +1496,11 @@
         const payload = await fetchRecordPayload(step.table, step.identity);
         if (payload.error) {
           setDetailHtml(`<div class="meta">${payload.error}</div>`);
+          renderBreadcrumbTrail();
           return;
         }
         renderDetail(payload);
+        renderBreadcrumbTrail();
         pushHistory("push");
       }
 
@@ -1414,6 +1514,7 @@
         const payload = await fetchRecordPayload(tableName, identity);
         if (payload.error) {
           setDetailHtml(`<div class="meta">${payload.error}</div>`);
+          renderBreadcrumbTrail();
           return;
         }
 
@@ -1421,7 +1522,7 @@
         state.activeTable = tableName;
         state.activeRecordIdentity = identity;
         if (options.pushStack) {
-          state.navStack.push({
+        state.navStack.push({
             table: tableName,
             identity,
             label: toText(label || payload.meta?.label || "record"),
@@ -1434,7 +1535,21 @@
         }
 
         renderDetail(payload);
+        renderBreadcrumbTrail();
         if (options.historyMode !== "none") pushHistory(options.historyMode);
+      }
+
+      if (els.pathTrail) {
+        els.pathTrail.addEventListener("click", (ev) => {
+          const btn = ev.target.closest("button[data-nav-level]");
+          if (!btn) return;
+          const level = Number(btn.getAttribute("data-nav-level"));
+          if (!Number.isFinite(level)) return;
+          const target = state.navStack[level];
+          if (!target || !target.identity) return;
+          if (level >= state.navStack.length - 1) return;
+          navigateToStackLevel(level).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+        });
       }
 
       els.tableFilter.addEventListener("input", () => {

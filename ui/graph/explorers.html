@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola | Exploradores</title>
+    <style>
+      :root {
+        --bg-a: #eef2ff;
+        --bg-b: #dbeafe;
+        --panel: #ffffff;
+        --ink: #1e293b;
+        --muted: #5b677a;
+        --line: #dbe3f6;
+        --accent: #2563eb;
+        --accent-soft: #93c5fd;
+        --ok: #16a34a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        color: var(--ink);
+        background:
+          radial-gradient(1200px 420px at 0% 0%, #dbeafe 0%, transparent 50%),
+          radial-gradient(900px 420px at 100% 15%, #e0f2fe 0%, transparent 56%),
+          linear-gradient(145deg, var(--bg-a), var(--bg-b));
+        font-family: "Arial", "Segoe UI", sans-serif;
+      }
+
+      .page {
+        width: min(1100px, calc(100% - 24px));
+        margin: 14px auto;
+        overflow-x: hidden;
+      }
+
+      .hero {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        padding: 18px;
+        box-shadow: 0 16px 32px rgba(30, 41, 59, 0.09);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.6rem;
+      }
+
+      .topbar {
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .superlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .superlink svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        flex: 0 0 auto;
+      }
+
+      .sub {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        padding: 14px;
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 24px rgba(30, 41, 59, 0.12);
+      }
+
+      .title {
+        margin: 0;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .badge {
+        font-size: 0.7rem;
+        color: var(--ok);
+        font-weight: 700;
+        border: 1px solid #dcfce7;
+        background: #f0fdf4;
+        border-radius: 999px;
+        padding: 2px 8px;
+      }
+
+      .desc {
+        color: var(--muted);
+        margin: 8px 0 0;
+        font-size: 0.85rem;
+      }
+
+      .meta {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      .note {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.83rem;
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      @media (max-width: 700px) {
+        .page {
+          width: calc(100% - 16px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="topbar">
+          <a
+            class="superlink"
+            href="https://github.com/gsusI/vota-con-la-chola"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver el código en GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            Ver el código
+          </a>
+        </div>
+        <h1>Exploradores de Vota Con La Chola</h1>
+        <p class="sub">Vistas disponibles: grafo, explorer, votaciones, fuentes, y (en roadmap) temas/posiciones con evidencia.</p>
+
+        <div class="grid">
+          <a class="card" href="/graph">
+            <p class="title">
+              <strong>Graph Explorer</strong>
+            </p>
+            <p class="desc">Vista de grafo con nodos, vínculos y navegación por entidades.</p>
+            <p class="meta">/graph</p>
+          </a>
+
+          <a class="card" href="/explorer">
+            <p class="title"><strong>Explorer</strong></p>
+            <p class="desc">Navegador tabular tradicional de entidades y relaciones.</p>
+            <p class="meta">/explorer</p>
+          </a>
+
+          <a class="card" href="/explorer-temas">
+            <p class="title"><strong>Temas y Posiciones</strong></p>
+            <p class="desc">Modelo analítico: temas high-stakes, evidencia (dicho/hecho) y posiciones agregadas por scope.</p>
+            <p class="meta">/explorer-temas</p>
+          </a>
+
+          <a class="card" href="/explorer-politico">
+            <p class="title"><strong>Radar Político</strong></p>
+            <p class="desc">Vista jerárquica de territorios, partidos, equipos y políticos por nivel.</p>
+            <p class="meta">/explorer-politico</p>
+          </a>
+
+          <a class="card" href="/explorer-votaciones">
+            <p class="title"><strong>Explorador de Votaciones</strong></p>
+            <p class="desc">Consulta y compara votaciones parlamentarias con filtros y detalle.</p>
+            <p class="meta">/explorer-votaciones</p>
+          </a>
+
+          <a class="card" href="/explorer-sources">
+            <p class="title"><strong>Fuente de Datos</strong></p>
+            <p class="desc">Roadmap de ingestas, estado de fuentes y progreso operativo.</p>
+            <p class="meta">/explorer-sources</p>
+          </a>
+        </div>
+
+        <p class="note">
+          Cada tarjeta abre una vista específica desde esta página.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
