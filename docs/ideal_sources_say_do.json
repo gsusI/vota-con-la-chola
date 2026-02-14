@@ -10,6 +10,69 @@
     "1": "Signal (media/social/rumors): good for discovery and narrative, not evidence of action.",
     "0": "No traceability."
   },
+  "data_model_north_star": {
+    "scope": "institution_id + admin_level_id + territory_id + legislature + date_range",
+    "topic_sets": "Curated high-stakes topics per scope (with stake scoring + rationale).",
+    "topics": "Stable topic ids (canonical_key) + labels + optional hierarchy/aliases.",
+    "topic_evidence": "Atomic evidence items tagged to topics: said vs did, with stance/polarity/weight/confidence and raw provenance.",
+    "topic_positions": "Deterministic aggregations per person+scope+topic+window, always drill-down to evidence."
+  },
+  "ideal_data_requirements": {
+    "per_politician_per_scope": [
+      {
+        "id": "identity",
+        "label": "Identity and stable ids",
+        "fields": [
+          "person_id (internal)",
+          "full_name (canonical) + name variants",
+          "external ids (where available): wikidata_qid, official chamber ids, gov ids",
+          "source-level ids that allow joins (member id, expediente ids, etc)"
+        ]
+      },
+      {
+        "id": "mandates",
+        "label": "Mandates / roles / scope membership",
+        "fields": [
+          "institution + admin_level + territory",
+          "role_title + role_id (normalized)",
+          "party / group (with alias handling)",
+          "start_date / end_date / is_active",
+          "committees / appointments when available"
+        ]
+      },
+      {
+        "id": "positions_by_topic",
+        "label": "Positions for each high-stakes topic (says vs does)",
+        "fields": [
+          "stance_says + evidence_count_says + confidence_says",
+          "stance_does + evidence_count_does + confidence_does",
+          "divergence_score + divergence_explanation",
+          "as_of_date + computed_method + computed_version"
+        ]
+      }
+    ],
+    "per_topic_set": [
+      "topic_set_id + name + description",
+      "scope anchors (institution/admin_level/territory/legislature/date range)",
+      "stakes methodology and rationale per topic",
+      "high-stakes flags and rank/score"
+    ],
+    "per_evidence_item": [
+      "evidence_kind: says|does (declared vs revealed)",
+      "evidence_type (vote, speech, decree, budget, contract, subsidy, appointment, agenda, press release, social post, etc)",
+      "evidence_date (event time) + publication time when applicable",
+      "excerpt/snippet + optional quote boundaries",
+      "stance/polarity/weight/confidence + methods used",
+      "source_id + source_url + source_record_pk + raw_payload + fetched_at/hash (traceability)"
+    ],
+    "per_source": [
+      "jurisdiction + scope coverage",
+      "evidence coverage: says|does|both",
+      "domains covered (votes, initiatives, speeches, laws, budgets, contracts, subsidies, integrity, lobbying, etc)",
+      "access method (api/opendata/rss/html/pdf) + formats",
+      "quality dimensions: provenance, verifiability, structure, timeliness, coverage, extraction quality, stability, reproducibility"
+    ]
+  },
   "sources": [
     {
       "id": "boe_aeboe",
@@ -194,6 +257,19 @@
       "notes": "Alertas y descubrimiento de publicaciones institucionales."
     },
     {
+      "id": "moncloa_transcripciones",
+      "name": "La Moncloa: Transcripciones y comparecencias (ruedas de prensa)",
+      "jurisdiction": "ES",
+      "scope": "nacional",
+      "evidence": "says",
+      "domains": ["discursos", "comparecencias", "comunicacion"],
+      "access": ["web", "scrape"],
+      "formats": ["html"],
+      "confidence": 3,
+      "url": "https://www.lamoncloa.gob.es/paginas/transcripciones.aspx",
+      "notes": "Evidencia de 'lo que dijeron' miembros del Gobierno en comparecencias. Validar efectos con BOE/registro cuando aplique."
+    },
+    {
       "id": "moncloa_agenda_presidente",
       "name": "La Moncloa: Agenda del Presidente",
       "jurisdiction": "ES",
@@ -244,6 +320,45 @@
       "confidence": 3,
       "url": "https://transparencia.gob.es/publicidad-activa/por-materias/normativa-otras-disposiciones/normas-tramitacion",
       "notes": "Intención/estado, no aprobación final."
+    },
+    {
+      "id": "transparencia_plan_anual_normativo",
+      "name": "Portal de Transparencia: Plan Anual Normativo",
+      "jurisdiction": "ES",
+      "scope": "nacional",
+      "evidence": "says",
+      "domains": ["pre_normativa", "planificacion_normativa"],
+      "access": ["web", "scrape"],
+      "formats": ["html", "pdf"],
+      "confidence": 3,
+      "url": "https://transparencia.gob.es/publicidad-activa/por-materias/normativa-otras-disposiciones/plan-anual",
+      "notes": "Inventario de iniciativas previstas. Señal fuerte de intención (no garantía de aprobación)."
+    },
+    {
+      "id": "transparencia_ejecucion_presupuestaria",
+      "name": "Portal de Transparencia: Ejecución presupuestaria",
+      "jurisdiction": "ES",
+      "scope": "nacional",
+      "evidence": "does",
+      "domains": ["presupuesto", "ejecucion", "dinero_publico"],
+      "access": ["web", "scrape"],
+      "formats": ["html", "csv", "xls", "pdf"],
+      "confidence": 4,
+      "url": "https://transparencia.gob.es/publicidad-activa/por-materias/informacion-economico-presupuestaria/ejecucion",
+      "notes": "Ejecución (hechos con dinero) y series de seguimiento. Formatos varían por sección."
+    },
+    {
+      "id": "transparencia_convenios_encomiendas",
+      "name": "Portal de Transparencia: Convenios y encomiendas",
+      "jurisdiction": "ES",
+      "scope": "nacional",
+      "evidence": "does",
+      "domains": ["convenios", "encomiendas", "dinero_publico"],
+      "access": ["web", "scrape"],
+      "formats": ["html", "pdf"],
+      "confidence": 4,
+      "url": "https://transparencia.gob.es/publicidad-activa/por-materias/tramites/convenios-encomiendas",
+      "notes": "Acción administrativa cuasi-contractual. Útil para mapear redes y ejecución."
     },
     {
       "id": "bdns_api",
@@ -546,4 +661,3 @@
     }
   ]
 }
-
