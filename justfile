@@ -11,6 +11,14 @@ senado_detail_max_events := env_var_or_default("SENADO_DETAIL_MAX_EVENTS", "30")
 senado_detail_max_loops := env_var_or_default("SENADO_DETAIL_MAX_LOOPS", "1")
 senado_detail_legislatures := env_var_or_default("SENADO_DETAIL_LEGISLATURES", "14")
 senado_detail_dir := env_var_or_default("SENADO_DETAIL_DIR", "")
+senado_manual_detail_dir := env_var_or_default("SENADO_MANUAL_DETAIL_DIR", "etl/data/raw/manual/senado_votaciones_ses")
+senado_missing_detail_urls_file := env_var_or_default("SENADO_MISSING_DETAIL_URLS_FILE", "etl/data/raw/manual/senado_votaciones_ses/missing_detail_urls.txt")
+senado_manual_download_timeout := env_var_or_default("SENADO_MANUAL_DOWNLOAD_TIMEOUT", "30")
+senado_headful_channel := env_var_or_default("SENADO_HEADFUL_CHANNEL", "chrome")
+senado_headful_timeout := env_var_or_default("SENADO_HEADFUL_TIMEOUT", "30")
+senado_headful_user_data_dir := env_var_or_default("SENADO_HEADFUL_USER_DATA_DIR", "etl/data/raw/manual/senado_votaciones_ses/.headful-profile")
+senado_headful_viewport := env_var_or_default("SENADO_HEADFUL_VIEWPORT", "1280x800")
+senado_headful_wait_seconds := env_var_or_default("SENADO_HEADFUL_WAIT_SECONDS", "90")
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
 gh_pages_dir := env_var_or_default("GH_PAGES_DIR", "docs/gh-pages")
@@ -107,6 +115,39 @@ parl-extract-senado-iniciativas:
 parl-extract-senado-votaciones:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --strict-network"
 
+parl-senado-export-missing-detail-urls:
+  mkdir -p "{{senado_manual_detail_dir}}"
+  python3 scripts/export_senado_missing_detail_urls.py --db {{db_path}} --mode session --legislature {{senado_detail_legislatures}} --validate --validate-timeout 5 > "{{senado_missing_detail_urls_file}}"
+  @echo "OK wrote {{senado_missing_detail_urls_file}}"
+
+parl-senado-export-missing-detail-urls-vote:
+  mkdir -p "{{senado_manual_detail_dir}}"
+  python3 scripts/export_senado_missing_detail_urls.py --db {{db_path}} --mode vote --legislature {{senado_detail_legislatures}} > "{{senado_missing_detail_urls_file}}"
+  @echo "OK wrote {{senado_missing_detail_urls_file}}"
+
+parl-senado-download-missing-details:
+  test -f "{{senado_missing_detail_urls_file}}" || (echo "Missing SENADO_MISSING_DETAIL_URLS_FILE: {{senado_missing_detail_urls_file}}" && exit 2)
+  mkdir -p "{{senado_manual_detail_dir}}"
+  python3 scripts/download_senado_missing_detail_urls_headful.py \
+    --urls-file "{{senado_missing_detail_urls_file}}" \
+    --out-dir "{{senado_manual_detail_dir}}" \
+    --timeout "{{senado_manual_download_timeout}}" \
+    --headful-timeout "{{senado_headful_timeout}}" \
+    --headful-wait-seconds "{{senado_headful_wait_seconds}}" \
+    --channel "{{senado_headful_channel}}" \
+    --user-data-dir "{{senado_headful_user_data_dir}}" \
+    --cookie "${SENADO_DETAIL_COOKIE:-}" \
+    --viewport "{{senado_headful_viewport}}"
+
+parl-backfill-senado-details-manual:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --db {{db_path}} --auto --legislature {{senado_detail_legislatures}} --max-events {{senado_detail_max_events}} --max-loops {{senado_detail_max_loops}} --timeout {{senado_detail_timeout}} --detail-workers {{senado_detail_workers}} --snapshot-date {{snapshot_date}} --senado-detail-dir {{senado_manual_detail_dir}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids senado_votaciones --json-out etl/data/published/votaciones-kpis-senado-{{snapshot_date}}.json"
+
+parl-senado-manual-pipeline:
+  just parl-senado-export-missing-detail-urls
+  just parl-senado-download-missing-details
+  just parl-backfill-senado-details-manual
+
 parl-backfill-senado-details:
   senado_detail_arg=""; \
   if [ -n "{{senado_detail_dir}}" ]; then \
@@ -138,6 +179,12 @@ parl-congreso-votaciones-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids congreso_votaciones --json-out etl/data/published/votaciones-kpis-congreso-{{snapshot_date}}.json"
   docker compose run --rm --build etl "python3 scripts/publicar_votaciones_es.py --db {{db_path}} --snapshot-date {{snapshot_date}} --source-ids congreso_votaciones --backfill-member-ids --include-unmatched --unmatched-sample-limit 100"
+
+congreso-votaciones-download-zips:
+  python3 scripts/download_congreso_votaciones_zips.py --max-workers 20 --timeout 30
+
+senado-votaciones-download-xmls:
+  python3 scripts/download_senado_votaciones_xmls.py --max-workers 20 --timeout 30
 
 parl-backfill-member-ids:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}}"
@@ -303,6 +350,7 @@ graph-ui-stop:
 # Single app serving:
 # - /explorer -> interfaz clásica
 # - /explorer-sports -> interfaz estilo arena/deportes
+# - /explorer-sources -> panel de estado de fuentes
 explorer:
   DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} python3 scripts/watch_graph_ui_server.py
 
@@ -314,6 +362,7 @@ explorer-bg:
   DB_PATH={{db_path}} nohup python3 scripts/graph_ui_server.py --db "{{db_path}}" --host {{explorer_host}} --port {{explorer_port}} >/tmp/vota-explorer-ui.log 2>&1 & echo $! >/tmp/vota-explorer-ui.pid
   @echo "Explorer corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
   @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
+  @echo "Fuentes en http://{{explorer_host}}:{{explorer_port}}/explorer-sources"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
@@ -322,26 +371,42 @@ explorer-bg-watch:
   DB_PATH={{db_path}} EXPLORER_HOST={{explorer_host}} EXPLORER_PORT={{explorer_port}} nohup python3 scripts/watch_graph_ui_server.py >/tmp/vota-explorer-ui.log 2>&1 & echo $! >/tmp/vota-explorer-ui.pid
   @echo "Explorer (watch) corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
   @echo "Explorer-sports en http://{{explorer_host}}:{{explorer_port}}/explorer-sports"
+  @echo "Fuentes en http://{{explorer_host}}:{{explorer_port}}/explorer-sources"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
   rm -rf {{gh_pages_dir}}/explorer-sports
-  mkdir -p {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer
+  mkdir -p {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources
+  cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
   cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-sports/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
+  cp ui/graph/explorer.html {{gh_pages_dir}}/graph/index.html
+  cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-politico/index.html
+  cp ui/graph/explorer-sources.html {{gh_pages_dir}}/explorer-sources/index.html
   python3 scripts/export_explorer_sports_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
     --out-dir "{{gh_pages_dir}}/explorer-sports/data"
-  @echo "Build GitHub Pages listo en {{gh_pages_dir}}/explorer-sports"
+  @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 
 explorer-gh-pages-publish:
-  just explorer-gh-pages-build
-  git subtree split --prefix {{gh_pages_dir}} -b {{gh_pages_tmp_branch}}
-  git push {{gh_pages_remote}} {{gh_pages_tmp_branch}}:{{gh_pages_branch}} --force
-  git branch -D {{gh_pages_tmp_branch}}
-  @echo "Publicado: {{gh_pages_remote}} {{gh_pages_branch}}"
+  remote_url=$(git config --get remote.origin.url); \
+  if [ -z "$remote_url" ]; then \
+    echo "No se encontró remote.origin.url"; \
+    exit 1; \
+  fi; \
+  just explorer-gh-pages-build; \
+  tmp_dir=$(mktemp -d); \
+  trap 'rm -rf "$tmp_dir"' EXIT; \
+  cp -R {{gh_pages_dir}} "$tmp_dir/site"; \
+  cd "$tmp_dir/site"; \
+  git init -q; \
+  git checkout -b "{{gh_pages_branch}}"; \
+  git add .; \
+  git commit --allow-empty -m "Publish explorers landing and static sports snapshot" -q; \
+  git remote add origin "$remote_url"; \
+  git push -f "$remote_url" "{{gh_pages_branch}}:{{gh_pages_branch}}"
 
 explorer-gh-pages:
   @just explorer-gh-pages-publish
