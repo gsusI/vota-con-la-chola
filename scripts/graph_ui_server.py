@@ -6,6 +6,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import argparse
 import json
+import re
 import sys
 import sqlite3
 import unicodedata
@@ -34,6 +35,130 @@ UI_EXPLORER_TEMAS = BASE_DIR / "ui" / "graph" / "explorer-temas.html"
 MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblacion_municipios_es.json"
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
 IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
+ROADMAP_PATH = BASE_DIR / "docs" / "roadmap.md"
+
+# Dashboard mapping: phases -> tracker rows + explicit untracked items.
+# Keep this small and pragmatic; the tracker remains the single operational backlog.
+ROADMAP_DASHBOARD_TARGETS: dict[int, dict[str, Any]] = {
+    0: {
+        "tracker_tipo_dato": [
+            "Referencias territoriales",
+            "Taxonomia de temas (alto impacto por scope)",
+        ],
+        "manual_items": [
+            {
+                "id": "taxonomy_v1",
+                "label": "Taxonomía (Tier 1/2) definida y versionada",
+                "path": "docs/domain_taxonomy_es.md",
+            },
+            {
+                "id": "codebook_v1",
+                "label": "Codebook Tier 1 (ejes por dominio) versionado",
+                "path": "docs/codebook_tier1_es.md",
+            },
+            {
+                "id": "annotation_protocol",
+                "label": "Protocolo de anotación (doble entrada, acuerdo, arbitraje)",
+                "path": "docs/annotation_protocol_es.md",
+            },
+            {
+                "id": "interventions_template",
+                "label": "Plantilla de intervención (definición de tratamiento)",
+                "path": "docs/intervention_template_es.md",
+            },
+        ],
+    },
+    1: {
+        "tracker_tipo_dato": [
+            "Votaciones Congreso",
+            "Iniciativas Congreso",
+            "Votaciones Senado y mociones",
+            "Intervenciones Congreso",
+            "Marco legal electoral",
+            "Accion ejecutiva (Consejo de Ministros)",
+            "Contratacion publica (Espana)",
+            "Subvenciones y ayudas (Espana)",
+            "Transparencia: agendas altos cargos",
+            "Transparencia: declaraciones/intereses",
+            "Taxonomia de temas (alto impacto por scope)",
+            "Evidencia textual (para posiciones declaradas)",
+            "Clasificacion evidencia -> tema (trazable)",
+            "Posiciones por tema (politico x scope)",
+        ],
+        "manual_items": [
+            {"id": "action_vectors_v1", "label": "Action vectors Tier 1 (vectorial + incertidumbre) con drill-down"},
+            {"id": "incoherence_v1", "label": "Señal de incoherencia v1 (intra-dominio y dicho vs hecho)"},
+        ],
+    },
+    2: {
+        "tracker_tipo_dato": [
+            "Representantes y mandatos (Asamblea de Madrid)",
+            "Representantes y mandatos (Parlament de Catalunya)",
+            "Representantes y mandatos (Parlamento de Andalucia)",
+            "Normativa autonómica (piloto 3 CCAA)",
+            "Contratación autonómica (piloto 3 CCAA)",
+            "Subvenciones autonómicas (piloto 3 CCAA)",
+            "Presupuesto + ejecución autonómica (piloto 3 CCAA)",
+        ],
+        "manual_items": [
+            {"id": "ccaa_vectors", "label": "Action vectors Tier 1 para 3 CCAA (comparables con Estado)"},
+        ],
+    },
+    3: {
+        "tracker_tipo_dato": [
+            "Procesos electorales y resultados",
+            "Convocatorias y estado electoral",
+            "Posiciones declaradas (programas)",
+            "Posiciones por tema (politico x scope)",
+        ],
+        "manual_items": [
+            {"id": "dashboard_public_v1", "label": "Dashboard público v1 (trazabilidad total, modo auditor)"},
+            {"id": "weights_scenarios", "label": "Escenarios de pesos + sensibilidad (sin ranking único por defecto)"},
+            {"id": "replica_mode", "label": "Modo réplica: export dataset procesado + script/consulta reproducible"},
+        ],
+    },
+    4: {
+        "tracker_tipo_dato": [
+            "Indicadores (outcomes): INE",
+            "Indicadores (outcomes): Eurostat",
+            "Indicadores (confusores): Banco de España",
+            "Indicadores (confusores): AEMET",
+            "Indicadores (confusores): ESIOS/REE",
+        ],
+        "manual_items": [
+            {"id": "impact_cards", "label": "Impact cards (efecto + incertidumbre + supuestos + enlaces)"},
+            {"id": "causal_eval_pack", "label": "Evaluaciones causales (diseño + diagnósticos + credibilidad)"},
+        ],
+    },
+    5: {
+        "tracker_tipo_dato": [
+            "UE: legislacion y documentos",
+            "UE: votaciones (roll-call)",
+            "UE: contratacion publica",
+            "UE: lobbying/influencia",
+        ],
+        "manual_items": [
+            {"id": "multilevel_scale", "label": "Escalado multinivel (10-12 CCAA + municipios grandes) sin caer en PDFs por defecto"},
+            {"id": "money_sampling", "label": "Estrategia de muestreo/agregación en contratación/subvenciones (no 'leerlo todo')"},
+        ],
+    },
+}
+
+# Optional command hints for tracker rows that are analytical (no direct source_id ingest command).
+TRACKER_ACTION_COMMANDS: dict[str, list[str]] = {
+    "Intervenciones Congreso": [
+        "just parl-temas-pipeline",
+        "just parl-review-queue",
+    ],
+    "Evidencia textual (para posiciones declaradas)": [
+        "just parl-backfill-text-documents",
+    ],
+    "Posiciones por tema (politico x scope)": [
+        "just parl-backfill-topic-analytics",
+        "just parl-backfill-declared-positions",
+        "just parl-backfill-combined-positions",
+    ],
+}
 
 LABEL_COLUMN_CANDIDATES = (
     "full_name",
@@ -46,6 +171,7 @@ LABEL_COLUMN_CANDIDATES = (
     "display_name",
     "acronym",
     "source_record_id",
+    "source_url",
     "descripcion",
     "description",
     "nombre",
@@ -72,6 +198,9 @@ def normalize_municipality_code(value: Any) -> str:
     token = "".join(ch for ch in safe_text(value) if ch.isdigit())
     if len(token) == 5:
         return token
+    if len(token) == 6:
+        # Some upstream sources append a suffix digit; keep the INE 5-digit prefix.
+        return token[:5]
     return ""
 
 
@@ -401,6 +530,49 @@ def load_tracker_items(tracker_path: Path) -> list[dict[str, Any]]:
     return _load_tracker_items_cached(str(tracker_path), mtime)
 
 
+@lru_cache(maxsize=2)
+def _load_roadmap_phases_cached(roadmap_path_str: str, mtime: float) -> list[dict[str, Any]]:
+    roadmap_path = Path(roadmap_path_str)
+    if not roadmap_path.exists():
+        return []
+
+    phases: list[dict[str, Any]] = []
+    for raw_line in roadmap_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line.startswith("### "):
+            continue
+        # Example: "### Fase 1: ... (`ENG: 21`, `HUM: 8`)"
+        clean = line.replace("`", "")
+        m = re.match(
+            r"^###\s+Fase\s+(\d+)\s*:\s*(.*?)\s*\(ENG:\s*(\d+)\s*,\s*HUM:\s*(\d+)\s*\)\s*$",
+            clean,
+        )
+        if not m:
+            continue
+        phase_num = int(m.group(1))
+        title = f"Fase {phase_num}: {m.group(2).strip()}"
+        phases.append(
+            {
+                "id": f"phase_{phase_num}",
+                "phase": phase_num,
+                "title": title,
+                "points_eng": int(m.group(3)),
+                "points_hum": int(m.group(4)),
+            }
+        )
+
+    phases.sort(key=lambda p: int(p.get("phase") or 0))
+    return phases
+
+
+def load_roadmap_phases(roadmap_path: Path) -> list[dict[str, Any]]:
+    try:
+        mtime = roadmap_path.stat().st_mtime
+    except FileNotFoundError:
+        mtime = 0.0
+    return _load_roadmap_phases_cached(str(roadmap_path), mtime)
+
+
 def is_id_like_column(column: str) -> bool:
     col = (column or "").strip().lower()
     if not col:
@@ -421,6 +593,158 @@ def fetch_sources(conn: sqlite3.Connection) -> list[dict[str, Any]]:
         """
     ).fetchall()
     return [dict(row) for row in rows]
+
+
+def compute_roadmap_status(tracker_items: list[dict[str, Any]]) -> dict[str, Any]:
+    phases_meta = load_roadmap_phases(ROADMAP_PATH)
+    tracker_by_tipo = {safe_text(it.get("tipo_dato")): it for it in tracker_items if safe_text(it.get("tipo_dato"))}
+
+    phases: list[dict[str, Any]] = []
+    for phase in phases_meta:
+        phase_num = int(phase.get("phase") or 0)
+        spec = ROADMAP_DASHBOARD_TARGETS.get(phase_num, {})
+        wanted_tracker = [safe_text(x) for x in (spec.get("tracker_tipo_dato") or []) if safe_text(x)]
+        manual_items = spec.get("manual_items") or []
+
+        items: list[dict[str, Any]] = []
+
+        done = partial = todo = 0
+        untracked = 0
+
+        for tipo in wanted_tracker:
+            it = tracker_by_tipo.get(tipo)
+            if not it:
+                # Keep it visible even if it isn't in the tracker yet.
+                items.append(
+                    {
+                        "kind": "tracker",
+                        "id": normalize_key_part(tipo).replace(" ", "_"),
+                        "label": tipo,
+                        "status": "MISSING",
+                        "dominio": "",
+                        "scope": "",
+                        "bloque": "No existe fila en e2e-scrape-load-tracker",
+                        "source_ids": [],
+                    }
+                )
+                untracked += 1
+                continue
+
+            status = safe_text(it.get("estado")).upper() or "N/A"
+            items.append(
+                {
+                    "kind": "tracker",
+                    "id": normalize_key_part(tipo).replace(" ", "_"),
+                    "label": tipo,
+                    "status": status,
+                    "dominio": safe_text(it.get("dominio")),
+                    "scope": safe_text(it.get("scope")),
+                    "bloque": safe_text(it.get("bloque")),
+                    "source_ids": [safe_text(s) for s in (it.get("source_ids") or []) if safe_text(s)],
+                }
+            )
+            if status == "DONE":
+                done += 1
+            elif status == "PARTIAL":
+                partial += 1
+            elif status == "TODO":
+                todo += 1
+            else:
+                untracked += 1
+
+        for mi in manual_items:
+            label = safe_text(mi.get("label")) or safe_text(mi.get("id")) or "item"
+            manual_id = safe_text(mi.get("id")) or normalize_key_part(label).replace(" ", "_")
+            doc_path = safe_text(mi.get("path"))
+
+            status = "UNTRACKED"
+            if doc_path:
+                # Minimal, KISS tracking for manual deliverables: "exists" == DONE.
+                # This keeps the roadmap dashboard actionable without inventing extra trackers.
+                status = "DONE" if (BASE_DIR / doc_path).exists() else "TODO"
+
+            items.append(
+                {
+                    "kind": "manual",
+                    "id": manual_id,
+                    "label": label,
+                    "status": status,
+                    "path": doc_path,
+                }
+            )
+            if status == "DONE":
+                done += 1
+            elif status == "PARTIAL":
+                partial += 1
+            elif status == "TODO":
+                todo += 1
+            else:
+                untracked += 1
+
+        tracked_total = done + partial + todo
+        overall_total = tracked_total + untracked
+        tracked_percent = round(((done + 0.5 * partial) * 100) / tracked_total) if tracked_total > 0 else None
+        overall_percent = round(((done + 0.5 * partial) * 100) / overall_total) if overall_total > 0 else None
+
+        def _next_rank(status: str) -> int:
+            st = (status or "").upper()
+            if st == "PARTIAL":
+                return 0
+            if st == "TODO":
+                return 1
+            if st in {"MISSING", "UNTRACKED"}:
+                return 2
+            return 9
+
+        next_items = [
+            {"id": it.get("id"), "label": it.get("label"), "status": it.get("status"), "path": it.get("path")}
+            for it in sorted(items, key=lambda x: (_next_rank(safe_text(x.get("status"))), safe_text(x.get("label"))))
+            if safe_text(it.get("status")).upper() not in {"DONE"}
+        ][:5]
+
+        phases.append(
+            {
+                **phase,
+                "progress": {
+                    "done": done,
+                    "partial": partial,
+                    "todo": todo,
+                    "untracked": untracked,
+                    "tracked_total": tracked_total,
+                    "overall_total": overall_total,
+                    "tracked_percent": tracked_percent,
+                    "overall_percent": overall_percent,
+                },
+                "items": items,
+                "next": next_items,
+            }
+        )
+
+    # Summary across phases (counts only; points are informational).
+    sum_done = sum(int(p.get("progress", {}).get("done") or 0) for p in phases)
+    sum_partial = sum(int(p.get("progress", {}).get("partial") or 0) for p in phases)
+    sum_todo = sum(int(p.get("progress", {}).get("todo") or 0) for p in phases)
+    sum_untracked = sum(int(p.get("progress", {}).get("untracked") or 0) for p in phases)
+    sum_tracked_total = sum(int(p.get("progress", {}).get("tracked_total") or 0) for p in phases)
+    sum_overall_total = sum(int(p.get("progress", {}).get("overall_total") or 0) for p in phases)
+    tracked_percent = round(((sum_done + 0.5 * sum_partial) * 100) / sum_tracked_total) if sum_tracked_total > 0 else None
+    overall_percent = round(((sum_done + 0.5 * sum_partial) * 100) / sum_overall_total) if sum_overall_total > 0 else None
+
+    return {
+        "path": str(ROADMAP_PATH),
+        "exists": ROADMAP_PATH.exists(),
+        "phases": phases,
+        "summary": {
+            "done": sum_done,
+            "partial": sum_partial,
+            "todo": sum_todo,
+            "untracked": sum_untracked,
+            "tracked_total": sum_tracked_total,
+            "overall_total": sum_overall_total,
+            "tracked_percent": tracked_percent,
+            "overall_percent": overall_percent,
+        },
+    }
 
 
 def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
@@ -449,6 +773,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             or " ue " in f" {t} "
         ):
             return "europeo"
+        # Explicit autonómico hints should win even if the underlying platform is shared (PLACSP/BDNS).
+        if "bocm" in t or "dogc" in t or "boja" in t or "ccaa" in t or "autonom" in t:
+            return "autonomico"
         if (
             "congreso" in t
             or "senado" in t
@@ -469,7 +796,19 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             return "municipal"
         if "parlamento" in t or "asamblea" in t or "cortes" in t or "corts" in t:
             return "autonomico"
-        if "ine" in t or "ign" in t or "rel" in t or "poblaci" in t or "territor" in t:
+        if (
+            "ine" in t
+            or "eurostat" in t
+            or "oecd" in t
+            or "banco de espa" in t
+            or "aemet" in t
+            or "esios" in t
+            or "cnmc" in t
+            or "ign" in t
+            or "rel" in t
+            or "poblaci" in t
+            or "territor" in t
+        ):
             # Catálogo territorial / población: cruza niveles y no es un conector “político” único.
             return "territorial"
         if "partid" in t and ("program" in t or "web" in t):
@@ -526,6 +865,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     "unmapped": len(tracker_unmapped),
                 },
             },
+            "roadmap": compute_roadmap_status(tracker_items),
             "tracker": {
                 "path": str(TRACKER_PATH),
                 "exists": TRACKER_PATH.exists(),
@@ -575,10 +915,11 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
 
     try:
         with open_db(db_path) as conn:
+            fetch_table = "run_fetches" if table_exists(conn, "run_fetches") else "raw_fetches"
             present_rows = fetch_sources(conn)
             present_map = {str(row["source_id"]): dict(row) for row in present_rows}
             metrics_rows = conn.execute(
-                """
+                f"""
                 SELECT
                   s.source_id AS source_id,
                   COUNT(DISTINCT ir.run_id) AS runs_total,
@@ -657,7 +998,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                   ) AS last_message
                 FROM sources s
                 LEFT JOIN ingestion_runs ir ON ir.source_id = s.source_id
-                LEFT JOIN raw_fetches rf ON rf.run_id = ir.run_id
+                LEFT JOIN {fetch_table} rf ON rf.run_id = ir.run_id
                 GROUP BY s.source_id
                 """
             ).fetchall()
@@ -722,8 +1063,194 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             topic_evidence_with_date = _count_sql(
                 "SELECT COUNT(*) FROM topic_evidence WHERE evidence_date IS NOT NULL AND TRIM(evidence_date) <> ''"
             )
+            topic_evidence_declared_total = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE evidence_type LIKE 'declared:%'"
+            )
+            topic_evidence_revealed_total = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE evidence_type LIKE 'revealed:%'"
+            )
+            topic_evidence_declared_with_date = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE evidence_type LIKE 'declared:%' AND evidence_date IS NOT NULL AND TRIM(evidence_date) <> ''"
+            )
+            topic_evidence_declared_with_signal = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE evidence_type LIKE 'declared:%' AND stance IN ('support','oppose','mixed')"
+            )
+            topic_evidence_reviews_total = _count_table("topic_evidence_reviews")
+            topic_evidence_reviews_pending = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence_reviews WHERE status = 'pending'"
+            )
+            topic_evidence_reviews_resolved = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence_reviews WHERE status = 'resolved'"
+            )
+            topic_evidence_reviews_ignored = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence_reviews WHERE status = 'ignored'"
+            )
+            try:
+                rows = conn.execute(
+                    """
+                    SELECT review_reason AS k, COUNT(*) AS c
+                    FROM topic_evidence_reviews
+                    WHERE status = 'pending'
+                    GROUP BY review_reason
+                    ORDER BY c DESC, k ASC
+                    LIMIT 20
+                    """
+                ).fetchall()
+                topic_evidence_reviews_pending_by_reason: dict[str, int] = {}
+                for r in rows:
+                    k = safe_text(r["k"])
+                    if not k:
+                        continue
+                    topic_evidence_reviews_pending_by_reason[k] = int(r["c"] or 0)
+            except sqlite3.Error:
+                topic_evidence_reviews_pending_by_reason = {}
+            try:
+                rows = conn.execute(
+                    """
+                    SELECT evidence_type, COUNT(*) AS c
+                    FROM topic_evidence
+                    GROUP BY evidence_type
+                    ORDER BY c DESC, evidence_type ASC
+                    LIMIT 20
+                    """
+                ).fetchall()
+                topic_evidence_by_type: dict[str, int] = {}
+                for r in rows:
+                    ev_type = safe_text(r["evidence_type"])
+                    if not ev_type:
+                        continue
+                    topic_evidence_by_type[ev_type] = int(r["c"] or 0)
+            except sqlite3.Error:
+                topic_evidence_by_type = {}
+
+            def _top_counts(column: str, limit: int = 12) -> list[dict[str, Any]]:
+                try:
+                    rows = conn.execute(
+                        f"""
+                        SELECT {quote_ident(column)} AS k, COUNT(*) AS c
+                        FROM topic_evidence
+                        GROUP BY {quote_ident(column)}
+                        ORDER BY c DESC, k ASC
+                        LIMIT ?
+                        """,
+                        (int(limit),),
+                    ).fetchall()
+                except sqlite3.Error:
+                    return []
+                out: list[dict[str, Any]] = []
+                for r in rows:
+                    k = safe_text(r["k"])
+                    if not k:
+                        continue
+                    out.append({"key": k, "count": int(r["c"] or 0)})
+                return out
+
+            topic_method_top = _top_counts("topic_method")
+            stance_method_top = _top_counts("stance_method")
+
+            text_documents_total = _count_table("text_documents")
+            text_documents_with_excerpt = _count_sql(
+                "SELECT COUNT(*) FROM text_documents WHERE text_excerpt IS NOT NULL AND TRIM(text_excerpt) <> ''"
+            )
+            declared_evidence_with_text_excerpt = _count_sql(
+                """
+                SELECT COUNT(*)
+                FROM topic_evidence e
+                JOIN text_documents d ON d.source_record_pk = e.source_record_pk
+                WHERE e.evidence_type LIKE 'declared:%'
+                  AND d.text_excerpt IS NOT NULL
+                  AND TRIM(d.text_excerpt) <> ''
+                """
+            )
             topic_positions_total = _count_table("topic_positions")
             topic_positions_with_evidence = _count_sql("SELECT COUNT(*) FROM topic_positions WHERE evidence_count > 0")
+            try:
+                rows = conn.execute(
+                    """
+                    SELECT computed_method AS k, COUNT(*) AS c
+                    FROM topic_positions
+                    GROUP BY computed_method
+                    ORDER BY c DESC, k ASC
+                    LIMIT 20
+                    """
+                ).fetchall()
+                topic_positions_by_method: dict[str, int] = {}
+                for r in rows:
+                    k = safe_text(r["k"])
+                    if not k:
+                        continue
+                    topic_positions_by_method[k] = int(r["c"] or 0)
+            except sqlite3.Error:
+                topic_positions_by_method = {}
+
+            # Coherence (says vs does): compare declared vs votes positions on the latest as_of_date.
+            try:
+                as_of_row = conn.execute("SELECT MAX(as_of_date) AS d FROM topic_positions").fetchone()
+                as_of_date_latest = safe_text(as_of_row["d"] if as_of_row else "")
+            except sqlite3.Error:
+                as_of_date_latest = ""
+
+            coherence: dict[str, Any] = {
+                "as_of_date": as_of_date_latest,
+                "overlap_total": 0,
+                "explicit_total": 0,
+                "coherent_total": 0,
+                "incoherent_total": 0,
+                "coherence_pct": 0.0,
+                "incoherence_pct": 0.0,
+            }
+            if as_of_date_latest:
+                try:
+                    row = conn.execute(
+                        """
+                        WITH votes AS (
+                          SELECT topic_id, person_id, as_of_date, stance AS does_stance
+                          FROM topic_positions
+                          WHERE computed_method = 'votes' AND as_of_date = ?
+                        ),
+                        decl AS (
+                          SELECT topic_id, person_id, as_of_date, stance AS says_stance
+                          FROM topic_positions
+                          WHERE computed_method = 'declared' AND as_of_date = ?
+                        ),
+                        pairs AS (
+                          SELECT v.topic_id, v.person_id, v.as_of_date, v.does_stance, d.says_stance
+                          FROM votes v
+                          JOIN decl d USING(topic_id, person_id, as_of_date)
+                        )
+                        SELECT
+                          COUNT(*) AS overlap_total,
+                          SUM(CASE WHEN does_stance IN ('support','oppose') AND says_stance IN ('support','oppose') THEN 1 ELSE 0 END) AS explicit_total,
+                          SUM(CASE WHEN (does_stance = 'support' AND says_stance = 'support') OR (does_stance = 'oppose' AND says_stance = 'oppose') THEN 1 ELSE 0 END) AS coherent_total,
+                          SUM(CASE WHEN (does_stance = 'support' AND says_stance = 'oppose') OR (does_stance = 'oppose' AND says_stance = 'support') THEN 1 ELSE 0 END) AS incoherent_total
+                        FROM pairs
+                        """,
+                        (as_of_date_latest, as_of_date_latest),
+                    ).fetchone()
+                except sqlite3.Error:
+                    row = None
+
+                if row is not None:
+                    overlap_total = int(row["overlap_total"] or 0)
+                    explicit_total = int(row["explicit_total"] or 0)
+                    coherent_total = int(row["coherent_total"] or 0)
+                    incoherent_total = int(row["incoherent_total"] or 0)
+                    coherence = {
+                        "as_of_date": as_of_date_latest,
+                        "overlap_total": overlap_total,
+                        "explicit_total": explicit_total,
+                        "coherent_total": coherent_total,
+                        "incoherent_total": incoherent_total,
+                        "coherence_pct": float(coherent_total) / float(explicit_total) if explicit_total > 0 else 0.0,
+                        "incoherence_pct": float(incoherent_total) / float(explicit_total) if explicit_total > 0 else 0.0,
+                    }
+
+            policy_events_total = _count_table("policy_events")
+            policy_event_axis_scores_total = _count_table("policy_event_axis_scores")
+            interventions_total = _count_table("interventions")
+            indicator_series_total = _count_table("indicator_series")
+            indicator_points_total = _count_table("indicator_points")
+            causal_estimates_total = _count_table("causal_estimates")
 
             def _pct(n: int, d: int) -> float:
                 if d <= 0:
@@ -782,13 +1309,30 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 if estado not in {"TODO", "PARTIAL"}:
                     continue
                 priority = "P0" if estado == "TODO" else "P1"
+                source_ids = [sid for sid in (item.get("source_ids") or []) if sid]
+                commands: list[str] = []
+                for sid in source_ids:
+                    cfg = desired_map.get(sid)
+                    if not cfg:
+                        continue
+                    cmd = ingest_cmd(safe_text(cfg.get("domain")), sid)
+                    if cmd:
+                        commands.append(cmd)
+                tipo_dato = safe_text(item.get("tipo_dato"))
+                if tipo_dato in TRACKER_ACTION_COMMANDS:
+                    for cmd in TRACKER_ACTION_COMMANDS[tipo_dato]:
+                        if cmd not in commands:
+                            commands.append(cmd)
+                if commands:
+                    commands.append(tracker_cmd)
                 push_action(
                     "tracker_item",
                     priority,
                     f"{estado}: {safe_text(item.get('fuentes_objetivo')) or safe_text(item.get('tipo_dato'))}",
                     safe_text(item.get("bloque")),
                     scope=safe_text(item.get("scope")),
-                    source_ids=[sid for sid in (item.get("source_ids") or []) if sid],
+                    source_ids=source_ids,
+                    commands=commands,
                 )
 
             for source_id in desired_ids:
@@ -1024,7 +1568,13 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
 
             states = [item["state"] for item in all_sources]
             sql_states = [safe_text(item.get("sql_status")) for item in all_sources if safe_text(item.get("sql_status"))]
-            tracker_states = [safe_text(item.get("tracker", {}).get("status")) for item in all_sources if safe_text(item.get("tracker", {}).get("status"))]
+            # Tracker counts should reflect the operational backlog (rows in the tracker),
+            # not only the subset of tracker rows that map to a configured source_id.
+            tracker_item_states = [
+                safe_text(item.get("estado")).upper()
+                for item in tracker_items
+                if safe_text(item.get("estado"))
+            ]
             desired_progress_target = 0
             desired_progress_loaded = 0
             for source_id in desired_ids:
@@ -1065,9 +1615,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 "tracker": {
                     "items_total": len(tracker_items),
                     "unmapped": len(tracker_unmapped),
-                    "todo": tracker_states.count("TODO"),
-                    "partial": tracker_states.count("PARTIAL"),
-                    "done": tracker_states.count("DONE"),
+                    "todo": tracker_item_states.count("TODO"),
+                    "partial": tracker_item_states.count("PARTIAL"),
+                    "done": tracker_item_states.count("DONE"),
                 },
             }
 
@@ -1083,6 +1633,35 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 return (prio_rank, safe_text(action.get("kind")), safe_text(action.get("title")))
 
             actions.sort(key=_priority_key)
+
+            parl_quality: dict[str, Any] = {}
+            try:
+                if table_exists(conn, "parl_vote_events") and table_exists(conn, "parl_vote_event_initiatives"):
+                    from etl.parlamentario_es.quality import (
+                        DEFAULT_INITIATIVE_QUALITY_THRESHOLDS,
+                        DEFAULT_VOTE_QUALITY_THRESHOLDS,
+                        compute_initiative_quality_kpis,
+                        compute_vote_quality_kpis,
+                        evaluate_initiative_quality_gate,
+                        evaluate_vote_quality_gate,
+                    )
+
+                    vote_kpis = compute_vote_quality_kpis(
+                        conn, source_ids=("congreso_votaciones", "senado_votaciones")
+                    )
+                    vote_gate = evaluate_vote_quality_gate(vote_kpis, thresholds=DEFAULT_VOTE_QUALITY_THRESHOLDS)
+                    initiative_kpis = compute_initiative_quality_kpis(
+                        conn, source_ids=("congreso_iniciativas", "senado_iniciativas")
+                    )
+                    initiative_gate = evaluate_initiative_quality_gate(
+                        initiative_kpis, thresholds=DEFAULT_INITIATIVE_QUALITY_THRESHOLDS
+                    )
+                    parl_quality = {
+                        "votes": {"kpis": vote_kpis, "gate": vote_gate},
+                        "initiatives": {"kpis": initiative_kpis, "gate": initiative_gate},
+                    }
+            except Exception as exc:  # noqa: BLE001
+                parl_quality = {"error": f"{type(exc).__name__}: {exc}"}
 
             return {
                 **meta,
@@ -1101,6 +1680,36 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                         "topic_evidence_with_topic_pct": _pct(topic_evidence_with_topic, topic_evidence_total),
                         "topic_evidence_with_date": topic_evidence_with_date,
                         "topic_evidence_with_date_pct": _pct(topic_evidence_with_date, topic_evidence_total),
+                        "topic_evidence_declared_total": topic_evidence_declared_total,
+                        "topic_evidence_revealed_total": topic_evidence_revealed_total,
+                        "topic_evidence_declared_with_date": topic_evidence_declared_with_date,
+                        "topic_evidence_declared_with_date_pct": _pct(
+                            topic_evidence_declared_with_date, topic_evidence_declared_total
+                        ),
+                        "topic_evidence_declared_with_signal": topic_evidence_declared_with_signal,
+                        "topic_evidence_declared_with_signal_pct": _pct(
+                            topic_evidence_declared_with_signal, topic_evidence_declared_total
+                        ),
+                        "topic_evidence_reviews_total": topic_evidence_reviews_total,
+                        "topic_evidence_reviews_pending": topic_evidence_reviews_pending,
+                        "topic_evidence_reviews_resolved": topic_evidence_reviews_resolved,
+                        "topic_evidence_reviews_ignored": topic_evidence_reviews_ignored,
+                        "topic_evidence_reviews_pending_pct": _pct(
+                            topic_evidence_reviews_pending, topic_evidence_declared_total
+                        ),
+                        "topic_evidence_reviews_pending_by_reason": topic_evidence_reviews_pending_by_reason,
+                        "topic_evidence_by_type": topic_evidence_by_type,
+                        "topic_method_top": topic_method_top,
+                        "stance_method_top": stance_method_top,
+                        "text_documents_total": text_documents_total,
+                        "text_documents_with_excerpt": text_documents_with_excerpt,
+                        "text_documents_with_excerpt_pct": _pct(
+                            text_documents_with_excerpt, text_documents_total
+                        ),
+                        "declared_evidence_with_text_excerpt": declared_evidence_with_text_excerpt,
+                        "declared_evidence_with_text_excerpt_pct": _pct(
+                            declared_evidence_with_text_excerpt, topic_evidence_declared_total
+                        ),
                     },
                     "positions": {
                         "topic_positions_total": topic_positions_total,
@@ -1108,14 +1717,28 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                         "topic_positions_with_evidence_pct": _pct(
                             topic_positions_with_evidence, topic_positions_total
                         ),
+                        "topic_positions_by_method": topic_positions_by_method,
+                    },
+                    "coherence": coherence,
+                    "action": {
+                        "policy_events_total": policy_events_total,
+                        "policy_event_axis_scores_total": policy_event_axis_scores_total,
+                        "interventions_total": interventions_total,
+                    },
+                    "impact": {
+                        "indicator_series_total": indicator_series_total,
+                        "indicator_points_total": indicator_points_total,
+                        "causal_estimates_total": causal_estimates_total,
                     },
                 },
+                "parl_quality": parl_quality,
                 "tracker": {
                     "path": str(TRACKER_PATH),
                     "exists": TRACKER_PATH.exists(),
                     "items": tracker_items,
                     "unmapped": tracker_unmapped,
                 },
+                "roadmap": compute_roadmap_status(tracker_items),
                 "actions": actions[:120],
                 "sources": all_sources,
                 "missing": missing,
@@ -1134,6 +1757,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     "unmapped": len(tracker_unmapped),
                 },
             },
+            "roadmap": compute_roadmap_status(tracker_items),
             "tracker": {
                 "path": str(TRACKER_PATH),
                 "exists": TRACKER_PATH.exists(),
@@ -1870,6 +2494,17 @@ def detect_without_rowid(sql: str | None) -> bool:
     if not sql:
         return False
     return "WITHOUT ROWID" in sql.upper()
+
+
+def table_exists(conn: sqlite3.Connection, table: str) -> bool:
+    try:
+        row = conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name = ?",
+            (table,),
+        ).fetchone()
+        return row is not None
+    except sqlite3.Error:
+        return False
 
 
 def fetch_schema(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
@@ -2928,6 +3563,29 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
             self.end_headers()
             self.wfile.write(body)
 
+        def read_json_body(self, *, max_bytes: int = 1_000_000) -> dict[str, Any]:
+            length_raw = self.headers.get("Content-Length", "").strip()
+            if not length_raw:
+                return {}
+            try:
+                length = int(length_raw)
+            except ValueError as exc:
+                raise ValueError("Content-Length invalido") from exc
+            if length < 0 or length > max_bytes:
+                raise ValueError("payload demasiado grande")
+            raw = self.rfile.read(length) if length > 0 else b""
+            if not raw:
+                return {}
+            try:
+                payload = json.loads(raw.decode("utf-8"))
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise ValueError("JSON invalido") from exc
+            if payload is None:
+                return {}
+            if not isinstance(payload, dict):
+                raise ValueError("JSON debe ser un objeto")
+            return payload
+
         def do_GET(self) -> None:  # noqa: N802
             parsed = urlparse(self.path)
             path = parsed.path
@@ -3214,6 +3872,117 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     }
                 )
                 return
+
+            if path == "/api/topics/reviews":
+                qs = parse_qs(parsed.query, keep_blank_values=False)
+                try:
+                    from etl.parlamentario_es.review_queue import build_topic_evidence_review_report
+
+                    source_id = str_param(qs, "source_id", "") or None
+                    status = str_param(qs, "status", "pending")
+                    review_reason = str_param(qs, "review_reason", "") or None
+                    topic_set_id = int(str_param(qs, "topic_set_id", "")) if str_param(qs, "topic_set_id", "") else None
+                    topic_id = int(str_param(qs, "topic_id", "")) if str_param(qs, "topic_id", "") else None
+                    person_id = int(str_param(qs, "person_id", "")) if str_param(qs, "person_id", "") else None
+                    limit = int_param(qs, "limit", 50, min_value=1, max_value=500)
+                    offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
+
+                    with open_db(config.db_path) as conn:
+                        payload = build_topic_evidence_review_report(
+                            conn,
+                            source_id=source_id,
+                            status=status,
+                            review_reason=review_reason,
+                            topic_set_id=topic_set_id,
+                            topic_id=topic_id,
+                            person_id=person_id,
+                            limit=limit,
+                            offset=offset,
+                        )
+                    self.write_json(payload, status=HTTPStatus.OK)
+                    return
+                except ValueError as exc:
+                    self.write_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                except Exception as exc:  # noqa: BLE001
+                    self.write_json({"error": f"{type(exc).__name__}: {exc}"}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                    return
+
+            self.write_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
+
+        def do_POST(self) -> None:  # noqa: N802
+            parsed = urlparse(self.path)
+            path = parsed.path.rstrip("/") if parsed.path.endswith("/") and parsed.path != "/" else parsed.path
+
+            if path == "/api/topics/reviews/decision":
+                try:
+                    payload = self.read_json_body()
+                    from etl.parlamentario_es.review_queue import (
+                        apply_topic_evidence_review_decision,
+                        resolve_as_of_date,
+                    )
+                    from etl.parlamentario_es.declared_positions import backfill_topic_positions_from_declared_evidence
+                    from etl.parlamentario_es.combined_positions import backfill_topic_positions_combined
+
+                    raw_ids = payload.get("evidence_ids")
+                    if isinstance(raw_ids, list):
+                        evidence_ids = tuple(int(x) for x in raw_ids)
+                    elif isinstance(raw_ids, str):
+                        evidence_ids = tuple(int(x.strip()) for x in raw_ids.split(",") if x.strip())
+                    else:
+                        evidence_ids = tuple()
+
+                    status = str(payload.get("status") or "resolved")
+                    final_stance = payload.get("final_stance")
+                    final_confidence = payload.get("final_confidence")
+                    note = payload.get("note")
+                    source_id = str(payload.get("source_id") or "congreso_intervenciones")
+                    dry_run = bool(payload.get("dry_run"))
+                    recompute = bool(payload.get("recompute"))
+                    as_of_date = payload.get("as_of_date")
+
+                    with open_db(config.db_path) as conn:
+                        decision = apply_topic_evidence_review_decision(
+                            conn,
+                            evidence_ids=evidence_ids,
+                            status=status,
+                            final_stance=str(final_stance) if final_stance is not None else None,
+                            final_confidence=float(final_confidence) if final_confidence is not None else None,
+                            note=str(note) if note is not None else None,
+                            source_id=source_id,
+                            dry_run=dry_run,
+                        )
+                        response: dict[str, Any] = {"decision": decision}
+                        if recompute and not dry_run:
+                            resolved_as_of = resolve_as_of_date(conn, str(as_of_date) if as_of_date is not None else None)
+                            if not resolved_as_of:
+                                raise ValueError(
+                                    "No se pudo resolver as_of_date para recompute (pasa as_of_date o genera topic_positions)"
+                                )
+                            declared = backfill_topic_positions_from_declared_evidence(
+                                conn,
+                                source_id=source_id,
+                                as_of_date=resolved_as_of,
+                                dry_run=False,
+                            )
+                            combined = backfill_topic_positions_combined(
+                                conn,
+                                as_of_date=resolved_as_of,
+                                dry_run=False,
+                            )
+                            response["recompute"] = {
+                                "as_of_date": resolved_as_of,
+                                "declared": declared,
+                                "combined": combined,
+                            }
+                    self.write_json(response, status=HTTPStatus.OK)
+                    return
+                except ValueError as exc:
+                    self.write_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                except Exception as exc:  # noqa: BLE001
+                    self.write_json({"error": f"{type(exc).__name__}: {exc}"}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                    return
 
             self.write_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
 
