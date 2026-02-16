@@ -28,6 +28,19 @@ Una sola app y un solo flujo de datos hasta validar utilidad real.
 3. Se publica snapshot.
 4. La API sirve resultados y evidencias al frontend.
 
+## Capas futuras (sin romper el MVP)
+
+El MVP ya cubre identidad, mandatos y evidencia parlamentaria + analítica por temas. Para llegar a “acción revelada” e “impacto” sin cambiar de arquitectura:
+- Mantener el mismo patrón (ingesta -> normalización -> publicación) en SQLite.
+- Usar las tablas ya presentes en `etl/load/sqlite_schema.sql` (scaffolding) para:
+  - dominios y ejes (`domains`, `policy_axes`)
+  - eventos con efectos (`policy_events`, `policy_instruments`, `policy_event_axis_scores`)
+  - intervenciones (paquetes tratables) (`interventions`, `intervention_events`)
+  - indicadores/outcomes (`indicator_series`, `indicator_points`)
+  - estimaciones y diagnósticos (`causal_estimates`)
+
+Nota KISS: el cuello de botella no es “tener tablas”, es poblarlas con conectores reproducibles + codebook/anotación (ver `docs/roadmap.md`).
+
 ## Reglas de simplificacion
 - Una fuente de verdad para niveles/fechas: `docs/proximas-elecciones-espana.md` y `etl/data/published/proximas-elecciones-espana.json`.
 - Cualquier documento extra debe reducir ambiguedad operativa, no crear proceso.

@@ -19,13 +19,12 @@ Actualmente:
 - CLI ingesta politicos: `scripts/ingestar_politicos_es.py`.
 - CLI ingesta Infoelectoral (descargas): `scripts/ingestar_infoelectoral_es.py`.
 - CLI parlamentario (votaciones, iniciativas): `scripts/ingestar_parlamentario_es.py`.
-- Plan de extraccion fuente por fuente: `docs/etl/extraccion-politicos-plan.md`.
 - Tracker E2E scrape/load (TODO operativo): `docs/etl/e2e-scrape-load-tracker.md`.
-- Roadmap de cobertura de votaciones: `docs/etl/vote-coverage-roadmap.md`.
+- El backlog de conectores y calidad vive solo en el tracker (y el dashboard `/explorer-sources`).
 
 Nota para votaciones:
-- Flujo recomendado: `ingest -> backfill-member-ids -> link-votes -> quality-report -> publish`.
-- Ejecuta `python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>` antes de publicar si quieres maximizar `evento -> tema`.
+- Flujo recomendado: `ingest -> backfill-member-ids -> link-votes -> backfill-topic-analytics -> quality-report -> publish`.
+- Ejecuta `python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>` antes de publicar si quieres maximizar `evento -> iniciativa` (y por extensión el tagging a topics en `backfill-topic-analytics`).
 - Ejecuta `python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db <db>` después de la ingesta de `congreso_votaciones,senado_votaciones` para resolver `person_id` en votos nominales.
 - Sugerencia operativa: añade `--unmatched-sample-limit 50` para capturar casos sin emparejar y priorizar corrección manual por razón (`no_candidates`, `skipped_no_name`, `ambiguous`, ...).
 - Para publicar y auditar unmatched en un pass sin escribir cambios, usa:
@@ -40,6 +39,32 @@ Nota para votaciones:
 Nota para posiciones por temas:
 - La representacion “politico x scope x tema” se construye desde evidencia atómica trazable (`topic_evidence`) y se agrega en snapshots recomputables (`topic_positions`).
 - El roadmap operativo y de calidad vive en `docs/etl/e2e-scrape-load-tracker.md` (filas “Analitica”).
+- Para poblar un MVP desde **votaciones** (hecho, reproducible), ejecuta:
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --as-of-date <YYYY-MM-DD>`
+  - Esto materializa `topic_sets`, `topics`, `topic_set_topics`, `topic_evidence`, `topic_positions` y desbloquea `/explorer-temas`.
+- Seed/versionado del set (parámetros + curación opcional): `etl/data/seeds/topic_taxonomy_es.json`.
+- Para capturar evidencia **textual** (metadata + excerpt) para evidencia declarada (p.ej. intervenciones Congreso):
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-text-documents --db <db> --source-id congreso_intervenciones --only-missing`
+  - Esto materializa `text_documents` y además copia un snippet a `topic_evidence.excerpt` para auditoría en `/explorer-temas`.
+- Para inferir un **stance mínimo** en evidencia declarada (regex v2 conservador sobre excerpts ya capturados):
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id congreso_intervenciones --min-auto-confidence 0.62`
+  - (o `just parl-backfill-declared-stance`)
+  - El comando auto-escribe solo casos de confianza alta y alimenta `topic_evidence_reviews` para casos ambiguos (`missing_text`, `no_signal`, `low_confidence`, `conflicting_signal`).
+- Para inspeccionar la cola de revisión:
+  - `python3 scripts/ingestar_parlamentario_es.py review-queue --db <db> --source-id congreso_intervenciones --status pending --limit 50`
+  - (o `just parl-review-queue`)
+- Si se delega revisión a crowd (MTurk), usar el runbook:
+  - `docs/etl/mechanical-turk-review-instructions.md`
+- Para aplicar decisión manual sobre evidencia pendiente (y opcionalmente recomputar posiciones):
+  - `python3 scripts/ingestar_parlamentario_es.py review-decision --db <db> --source-id congreso_intervenciones --evidence-ids 123,124 --status resolved --final-stance support --recompute --as-of-date <YYYY-MM-DD>`
+  - `python3 scripts/ingestar_parlamentario_es.py review-decision --db <db> --source-id congreso_intervenciones --evidence-ids 130 --status ignored --note \"sin señal accionable\"`
+  - Atajo: `just parl-review-resolve <evidence_id> <stance>`
+- Para materializar **posiciones (says)** desde esa evidencia declarada (en `topic_positions`, `computed_method=declared`):
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id congreso_intervenciones --as-of-date <YYYY-MM-DD>`
+  - (o `just parl-backfill-declared-positions`)
+- Para materializar una **posición combinada** (KISS: `votes` si existe; si no, `declared`) en `topic_positions`, `computed_method=combined`:
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-combined-positions --db <db> --as-of-date <YYYY-MM-DD>`
+  - (o `just parl-backfill-combined-positions`)
 
 ## Política de snapshots publicables
 
@@ -62,16 +87,17 @@ just etl-init
 just etl-samples
 just parl-backfill-member-ids
 just parl-quality-pipeline
+just parl-publish-votaciones
 just parl-congreso-votaciones-pipeline
 just parl-samples
 just parl-link-votes
 just parl-quality-report
 just etl-stats
+just etl-backfill-territories
 just etl-backfill-normalized
 just etl-e2e
 just etl-publish-representantes
 just etl-publish-votaciones
-just etl-publish-votaciones-backfill
 just parl-quality-report-json
 just etl-smoke-e2e
 just etl-smoke-votes
@@ -171,6 +197,12 @@ Con `just`:
 
 ```bash
 just etl-backfill-normalized
+```
+
+Backfill opcional de **referencias territoriales** (enriquece `territories.name/level/parent`):
+
+```bash
+just etl-backfill-territories
 ```
 
 Nota de rendimiento:
