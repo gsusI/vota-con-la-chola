@@ -36,6 +36,7 @@ MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblac
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
 IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
 ROADMAP_PATH = BASE_DIR / "docs" / "roadmap.md"
+ROADMAP_TECNICO_PATH = BASE_DIR / "docs" / "roadmap-tecnico.md"
 
 # Dashboard mapping: phases -> tracker rows + explicit untracked items.
 # Keep this small and pragmatic; the tracker remains the single operational backlog.
@@ -143,6 +144,290 @@ ROADMAP_DASHBOARD_TARGETS: dict[int, dict[str, Any]] = {
         ],
     },
 }
+
+# Roadmap tecnico (ejecucion) mapped to measurable checks.
+# The checks combine tracker rows (operational truth) and KPI gates from the ETL payload.
+TECH_ROADMAP_DASHBOARD_TARGETS: dict[int, dict[str, Any]] = {
+    0: {
+        "tracker_tipo_dato": [
+            "Votaciones Congreso",
+            "Iniciativas Congreso",
+            "Votaciones Senado y mociones",
+            "Taxonomia de temas (alto impacto por scope)",
+            "Clasificacion evidencia -> tema (trazable)",
+            "Posiciones por tema (politico x scope)",
+        ],
+        "metric_checks": [
+            {
+                "id": "fk_check_clean",
+                "label": "PRAGMA foreign_key_check sin filas",
+                "metric": "fk_violations",
+                "kind": "max",
+                "target": 0,
+                "format": "int",
+            },
+            {
+                "id": "votes_quality_gate",
+                "label": "Gate de calidad de votaciones (enforce-gate)",
+                "metric": "vote_gate_passed",
+                "kind": "bool_true",
+                "format": "bool",
+            },
+            {
+                "id": "initiatives_quality_gate",
+                "label": "Gate de calidad de iniciativas",
+                "metric": "initiative_gate_passed",
+                "kind": "bool_true",
+                "format": "bool",
+            },
+            {
+                "id": "done_sources_with_network",
+                "label": "Fuentes tracker=DONE con evidencia de red",
+                "metric": "done_sources_with_network_pct",
+                "kind": "gte",
+                "target": 1.0,
+                "format": "pct",
+            },
+        ],
+    },
+    1: {
+        "tracker_tipo_dato": [
+            "Votaciones Congreso",
+            "Iniciativas Congreso",
+            "Votaciones Senado y mociones",
+            "Intervenciones Congreso",
+        ],
+        "metric_checks": [
+            {
+                "id": "events_with_date_pct",
+                "label": "Eventos con fecha",
+                "metric": "events_with_date_pct",
+                "kind": "gte",
+                "target": 0.95,
+                "format": "pct",
+            },
+            {
+                "id": "events_with_initiative_link_pct",
+                "label": "Eventos con iniciativa enlazada",
+                "metric": "events_with_initiative_link_pct",
+                "kind": "gte",
+                "target": 0.95,
+                "format": "pct",
+            },
+            {
+                "id": "member_votes_with_person_id_pct",
+                "label": "Votos nominales con person_id",
+                "metric": "member_votes_with_person_id_pct",
+                "kind": "gte",
+                "target": 0.90,
+                "format": "pct",
+            },
+            {
+                "id": "latest_events_with_topic_evidence_pct",
+                "label": "Eventos latest con topic_evidence",
+                "metric": "latest_events_with_topic_evidence_pct",
+                "kind": "gte",
+                "target": 0.50,
+                "format": "pct",
+            },
+        ],
+    },
+    2: {
+        "tracker_tipo_dato": [
+            "Intervenciones Congreso",
+            "Evidencia textual (para posiciones declaradas)",
+            "Clasificacion evidencia -> tema (trazable)",
+            "Posiciones por tema (politico x scope)",
+        ],
+        "metric_checks": [
+            {
+                "id": "topic_evidence_declared_total",
+                "label": "Evidencia declarada extraida",
+                "metric": "topic_evidence_declared_total",
+                "kind": "count_gte",
+                "target": 1,
+                "format": "int",
+            },
+            {
+                "id": "topic_evidence_declared_with_signal_pct",
+                "label": "Evidencia declarada con stance util",
+                "metric": "topic_evidence_declared_with_signal_pct",
+                "kind": "gte",
+                "target": 0.50,
+                "format": "pct",
+            },
+            {
+                "id": "topic_evidence_with_topic_pct",
+                "label": "Evidencia con topic_id",
+                "metric": "topic_evidence_with_topic_pct",
+                "kind": "gte",
+                "target": 0.95,
+                "format": "pct",
+            },
+            {
+                "id": "topic_evidence_with_source_url_pct",
+                "label": "Trazabilidad en topic_evidence (source_url)",
+                "metric": "topic_evidence_with_source_url_pct",
+                "kind": "gte",
+                "target": 1.0,
+                "format": "pct",
+            },
+        ],
+    },
+    3: {
+        "tracker_tipo_dato": [
+            "Posiciones por tema (politico x scope)",
+            "Posiciones declaradas (programas)",
+        ],
+        "metric_checks": [
+            {
+                "id": "topic_positions_total",
+                "label": "Posiciones agregadas disponibles",
+                "metric": "topic_positions_total",
+                "kind": "count_gte",
+                "target": 1,
+                "format": "int",
+            },
+            {
+                "id": "topic_positions_with_evidence_pct",
+                "label": "Posiciones con evidencia suficiente",
+                "metric": "topic_positions_with_evidence_pct",
+                "kind": "gte",
+                "target": 0.90,
+                "format": "pct",
+            },
+            {
+                "id": "coherence_explicit_total",
+                "label": "Comparaciones explicitas says/does",
+                "metric": "coherence_explicit_total",
+                "kind": "count_gte",
+                "target": 1,
+                "format": "int",
+            },
+        ],
+    },
+    4: {
+        "tracker_tipo_dato": [
+            "Procesos electorales y resultados",
+            "Convocatorias y estado electoral",
+            "Posiciones declaradas (programas)",
+        ],
+        "metric_checks": [
+            {
+                "id": "review_queue_pending_ratio",
+                "label": "Review queue pendiente / declaradas",
+                "metric": "review_queue_pending_ratio",
+                "kind": "max",
+                "target": 0.25,
+                "format": "pct",
+            },
+            {
+                "id": "published_recommendation_artifacts",
+                "label": "Artefactos publicados (topics/claims/recommendation-kpis)",
+                "metric": "published_recommendation_artifacts",
+                "kind": "count_gte",
+                "target": 3,
+                "format": "int",
+            },
+        ],
+    },
+    5: {
+        "tracker_tipo_dato": [
+            "Normativa autonómica (piloto 3 CCAA)",
+            "Contratación autonómica (piloto 3 CCAA)",
+            "Subvenciones autonómicas (piloto 3 CCAA)",
+            "Presupuesto + ejecución autonómica (piloto 3 CCAA)",
+            "UE: legislacion y documentos",
+            "UE: votaciones (roll-call)",
+            "UE: contratacion publica",
+            "UE: lobbying/influencia",
+        ],
+        "metric_checks": [
+            {
+                "id": "autonomico_sources_ok",
+                "label": "Fuentes autonomicas en estado ok",
+                "metric": "autonomico_sources_ok",
+                "kind": "count_gte",
+                "target": 1,
+                "format": "int",
+            },
+            {
+                "id": "europeo_sources_ok",
+                "label": "Fuentes europeas en estado ok",
+                "metric": "europeo_sources_ok",
+                "kind": "count_gte",
+                "target": 1,
+                "format": "int",
+            },
+        ],
+    },
+}
+
+TECH_PROGRAM_KPI_TARGETS: list[dict[str, Any]] = [
+    {
+        "id": "tracking_sources_ok_pct",
+        "label": "Fuentes objetivo en estado ok",
+        "metric": "desired_sources_ok_pct",
+        "kind": "gte",
+        "target": 0.80,
+        "format": "pct",
+    },
+    {
+        "id": "events_with_initiative_link_pct",
+        "label": "Eventos con iniciativa enlazada",
+        "metric": "events_with_initiative_link_pct",
+        "kind": "gte",
+        "target": 0.95,
+        "format": "pct",
+    },
+    {
+        "id": "member_votes_with_person_id_pct",
+        "label": "Votos nominales con person_id",
+        "metric": "member_votes_with_person_id_pct",
+        "kind": "gte",
+        "target": 0.90,
+        "format": "pct",
+    },
+    {
+        "id": "latest_events_with_topic_evidence_pct",
+        "label": "Eventos latest con topic_evidence",
+        "metric": "latest_events_with_topic_evidence_pct",
+        "kind": "gte",
+        "target": 0.50,
+        "format": "pct",
+    },
+    {
+        "id": "topic_positions_with_evidence_pct",
+        "label": "Posiciones con evidencia suficiente",
+        "metric": "topic_positions_with_evidence_pct",
+        "kind": "gte",
+        "target": 0.90,
+        "format": "pct",
+    },
+    {
+        "id": "ingestion_runs_ok_pct",
+        "label": "Runs ETL en estado ok",
+        "metric": "ingestion_runs_ok_pct",
+        "kind": "gte",
+        "target": 0.80,
+        "format": "pct",
+    },
+    {
+        "id": "retry_rate",
+        "label": "Costo de reintentos ETL",
+        "metric": "retry_rate",
+        "kind": "max",
+        "target": 0.20,
+        "format": "pct",
+    },
+    {
+        "id": "avg_run_seconds",
+        "label": "Duración media por run ETL",
+        "metric": "avg_run_seconds",
+        "kind": "presence",
+        "format": "seconds",
+    },
+]
 
 # Optional command hints for tracker rows that are analytical (no direct source_id ingest command).
 TRACKER_ACTION_COMMANDS: dict[str, list[str]] = {
@@ -573,6 +858,355 @@ def load_roadmap_phases(roadmap_path: Path) -> list[dict[str, Any]]:
     return _load_roadmap_phases_cached(str(roadmap_path), mtime)
 
 
+@lru_cache(maxsize=2)
+def _load_roadmap_technical_phases_cached(roadmap_path_str: str, mtime: float) -> list[dict[str, Any]]:
+    roadmap_path = Path(roadmap_path_str)
+    if not roadmap_path.exists():
+        return []
+
+    phases: list[dict[str, Any]] = []
+    for raw_line in roadmap_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line.startswith("### "):
+            continue
+        # Example: "### Fase 0 — Reforzar base de datos y calidad (`ENG: 8`)"
+        clean = line.replace("`", "")
+        m = re.match(r"^###\s+Fase\s+(\d+)\s*[—-]\s*(.*?)\s*\(ENG:\s*(\d+\+?)\)\s*$", clean)
+        if not m:
+            continue
+        phase_num = int(m.group(1))
+        title = f"Fase {phase_num}: {m.group(2).strip()}"
+        points_eng_raw = m.group(3).strip()
+        try:
+            points_eng = int(points_eng_raw.rstrip("+"))
+        except ValueError:
+            points_eng = 0
+        phases.append(
+            {
+                "id": f"tech_phase_{phase_num}",
+                "phase": phase_num,
+                "title": title,
+                "points_eng": points_eng,
+                "points_eng_raw": points_eng_raw,
+            }
+        )
+
+    phases.sort(key=lambda p: int(p.get("phase") or 0))
+    return phases
+
+
+def load_roadmap_technical_phases(roadmap_path: Path) -> list[dict[str, Any]]:
+    try:
+        mtime = roadmap_path.stat().st_mtime
+    except FileNotFoundError:
+        mtime = 0.0
+    return _load_roadmap_technical_phases_cached(str(roadmap_path), mtime)
+
+
+def _format_metric_value(value: Any, fmt: str) -> str:
+    if value is None:
+        return "—"
+    if fmt == "bool":
+        return "true" if bool(value) else "false"
+    if fmt == "pct":
+        try:
+            v = float(value)
+        except (TypeError, ValueError):
+            return "—"
+        return f"{round(v * 100)}%"
+    if fmt == "seconds":
+        try:
+            v = float(value)
+        except (TypeError, ValueError):
+            return "—"
+        return f"{round(v, 1)}s"
+    if fmt == "int":
+        try:
+            v = int(value)
+        except (TypeError, ValueError):
+            return "—"
+        return str(v)
+    return safe_text(value)
+
+
+def _evaluate_metric_check(value: Any, kind: str, target: Any) -> str:
+    if kind == "bool_true":
+        if value is None:
+            return "UNTRACKED"
+        return "DONE" if bool(value) else "TODO"
+
+    if value is None:
+        return "UNTRACKED"
+
+    try:
+        v = float(value)
+    except (TypeError, ValueError):
+        return "UNTRACKED"
+
+    if kind == "presence":
+        return "DONE" if v > 0 else "TODO"
+
+    try:
+        t = float(target) if target is not None else 0.0
+    except (TypeError, ValueError):
+        t = 0.0
+
+    if kind in {"gte", "count_gte"}:
+        if v >= t:
+            return "DONE"
+        if v > 0:
+            return "PARTIAL"
+        return "TODO"
+
+    if kind == "max":
+        if v <= t:
+            return "DONE"
+        if t > 0 and v <= (t * 1.5):
+            return "PARTIAL"
+        return "TODO"
+
+    return "UNTRACKED"
+
+
+def compute_technical_roadmap_status(
+    tracker_items: list[dict[str, Any]],
+    *,
+    all_sources: list[dict[str, Any]] | None = None,
+    summary: dict[str, Any] | None = None,
+    analytics: dict[str, Any] | None = None,
+    parl_quality: dict[str, Any] | None = None,
+    ops: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    all_sources = all_sources or []
+    summary = summary or {}
+    analytics = analytics or {}
+    parl_quality = parl_quality or {}
+    ops = ops or {}
+
+    phases_meta = load_roadmap_technical_phases(ROADMAP_TECNICO_PATH)
+    tracker_by_tipo = {safe_text(it.get("tipo_dato")): it for it in tracker_items if safe_text(it.get("tipo_dato"))}
+
+    desired_sources = [row for row in all_sources if bool(row.get("desired"))]
+    desired_sources_total = len(desired_sources)
+    desired_sources_ok = sum(1 for row in desired_sources if safe_text(row.get("state")).lower() == "ok")
+
+    done_tracker_sources = [
+        row
+        for row in desired_sources
+        if safe_text((row.get("tracker") or {}).get("status")).upper() == "DONE"
+    ]
+    done_tracker_sources_with_network = sum(1 for row in done_tracker_sources if bool((row.get("flags") or {}).get("has_network")))
+    done_sources_with_network_pct = (
+        float(done_tracker_sources_with_network) / float(len(done_tracker_sources))
+        if len(done_tracker_sources) > 0
+        else None
+    )
+
+    vote_kpis = ((parl_quality.get("votes") or {}).get("kpis") or {}) if isinstance(parl_quality, dict) else {}
+    vote_gate = ((parl_quality.get("votes") or {}).get("gate") or {}) if isinstance(parl_quality, dict) else {}
+    initiative_gate = ((parl_quality.get("initiatives") or {}).get("gate") or {}) if isinstance(parl_quality, dict) else {}
+
+    evidence = (analytics.get("evidence") or {}) if isinstance(analytics, dict) else {}
+    positions = (analytics.get("positions") or {}) if isinstance(analytics, dict) else {}
+    coherence = (analytics.get("coherence") or {}) if isinstance(analytics, dict) else {}
+
+    metrics: dict[str, Any] = {
+        "fk_violations": ((summary.get("sql") or {}).get("foreign_key_violations") if isinstance(summary, dict) else None),
+        "vote_gate_passed": vote_gate.get("passed"),
+        "initiative_gate_passed": initiative_gate.get("passed"),
+        "done_sources_with_network_pct": done_sources_with_network_pct,
+        "events_with_date_pct": vote_kpis.get("events_with_date_pct"),
+        "events_with_initiative_link_pct": vote_kpis.get("events_with_initiative_link_pct"),
+        "member_votes_with_person_id_pct": vote_kpis.get("member_votes_with_person_id_pct"),
+        "latest_events_with_topic_evidence_pct": vote_kpis.get("latest_events_with_topic_evidence_pct"),
+        "topic_evidence_declared_total": evidence.get("topic_evidence_declared_total"),
+        "topic_evidence_declared_with_signal_pct": evidence.get("topic_evidence_declared_with_signal_pct"),
+        "topic_evidence_with_topic_pct": evidence.get("topic_evidence_with_topic_pct"),
+        "topic_evidence_with_source_url_pct": evidence.get("topic_evidence_with_source_url_pct"),
+        "topic_positions_total": positions.get("topic_positions_total"),
+        "topic_positions_with_evidence_pct": positions.get("topic_positions_with_evidence_pct"),
+        "coherence_explicit_total": coherence.get("explicit_total"),
+        "review_queue_pending_ratio": evidence.get("topic_evidence_reviews_pending_pct"),
+        "published_recommendation_artifacts": ops.get("published_recommendation_artifacts"),
+        "autonomico_sources_ok": ops.get("autonomico_sources_ok"),
+        "europeo_sources_ok": ops.get("europeo_sources_ok"),
+        "desired_sources_ok_pct": (
+            float(desired_sources_ok) / float(desired_sources_total) if desired_sources_total > 0 else None
+        ),
+        "ingestion_runs_ok_pct": ops.get("ingestion_runs_ok_pct"),
+        "retry_rate": ops.get("retry_rate"),
+        "avg_run_seconds": ops.get("avg_run_seconds"),
+    }
+
+    phases: list[dict[str, Any]] = []
+    for phase in phases_meta:
+        phase_num = int(phase.get("phase") or 0)
+        spec = TECH_ROADMAP_DASHBOARD_TARGETS.get(phase_num, {})
+        wanted_tracker = [safe_text(x) for x in (spec.get("tracker_tipo_dato") or []) if safe_text(x)]
+        wanted_checks = spec.get("metric_checks") or []
+
+        checks: list[dict[str, Any]] = []
+        done = partial = todo = untracked = 0
+
+        for tipo in wanted_tracker:
+            it = tracker_by_tipo.get(tipo)
+            if not it:
+                status = "MISSING"
+            else:
+                status = safe_text(it.get("estado")).upper() or "UNTRACKED"
+                if status not in {"DONE", "PARTIAL", "TODO"}:
+                    status = "UNTRACKED"
+            checks.append(
+                {
+                    "kind": "tracker",
+                    "id": normalize_key_part(tipo).replace(" ", "_"),
+                    "label": tipo,
+                    "status": status,
+                    "actual_display": status,
+                    "target_display": "DONE",
+                }
+            )
+            if status == "DONE":
+                done += 1
+            elif status == "PARTIAL":
+                partial += 1
+            elif status == "TODO":
+                todo += 1
+            else:
+                untracked += 1
+
+        for check_spec in wanted_checks:
+            metric_key = safe_text(check_spec.get("metric"))
+            if not metric_key:
+                continue
+            kind = safe_text(check_spec.get("kind")) or "presence"
+            fmt = safe_text(check_spec.get("format")) or "int"
+            target = check_spec.get("target")
+            value = metrics.get(metric_key)
+            status = _evaluate_metric_check(value, kind, target)
+            checks.append(
+                {
+                    "kind": "metric",
+                    "id": safe_text(check_spec.get("id")) or normalize_key_part(metric_key),
+                    "label": safe_text(check_spec.get("label")) or metric_key,
+                    "status": status,
+                    "metric": metric_key,
+                    "actual": value,
+                    "target": target,
+                    "format": fmt,
+                    "actual_display": _format_metric_value(value, fmt),
+                    "target_display": _format_metric_value(target, fmt) if target is not None else "—",
+                }
+            )
+            if status == "DONE":
+                done += 1
+            elif status == "PARTIAL":
+                partial += 1
+            elif status == "TODO":
+                todo += 1
+            else:
+                untracked += 1
+
+        tracked_total = done + partial + todo
+        overall_total = tracked_total + untracked
+        tracked_percent = round(((done + 0.5 * partial) * 100) / tracked_total) if tracked_total > 0 else None
+        overall_percent = round(((done + 0.5 * partial) * 100) / overall_total) if overall_total > 0 else None
+
+        def _next_rank(status: str) -> int:
+            st = (status or "").upper()
+            if st == "PARTIAL":
+                return 0
+            if st == "TODO":
+                return 1
+            if st in {"MISSING", "UNTRACKED"}:
+                return 2
+            return 9
+
+        next_items = [
+            {
+                "id": it.get("id"),
+                "label": it.get("label"),
+                "status": it.get("status"),
+                "actual_display": it.get("actual_display"),
+                "target_display": it.get("target_display"),
+            }
+            for it in sorted(checks, key=lambda x: (_next_rank(safe_text(x.get("status"))), safe_text(x.get("label"))))
+            if safe_text(it.get("status")).upper() not in {"DONE"}
+        ][:6]
+
+        phases.append(
+            {
+                **phase,
+                "progress": {
+                    "done": done,
+                    "partial": partial,
+                    "todo": todo,
+                    "untracked": untracked,
+                    "tracked_total": tracked_total,
+                    "overall_total": overall_total,
+                    "tracked_percent": tracked_percent,
+                    "overall_percent": overall_percent,
+                },
+                "checks": checks,
+                "next": next_items,
+            }
+        )
+
+    sum_done = sum(int(p.get("progress", {}).get("done") or 0) for p in phases)
+    sum_partial = sum(int(p.get("progress", {}).get("partial") or 0) for p in phases)
+    sum_todo = sum(int(p.get("progress", {}).get("todo") or 0) for p in phases)
+    sum_untracked = sum(int(p.get("progress", {}).get("untracked") or 0) for p in phases)
+    sum_tracked_total = sum(int(p.get("progress", {}).get("tracked_total") or 0) for p in phases)
+    sum_overall_total = sum(int(p.get("progress", {}).get("overall_total") or 0) for p in phases)
+    tracked_percent = round(((sum_done + 0.5 * sum_partial) * 100) / sum_tracked_total) if sum_tracked_total > 0 else None
+    overall_percent = round(((sum_done + 0.5 * sum_partial) * 100) / sum_overall_total) if sum_overall_total > 0 else None
+
+    program_kpis: list[dict[str, Any]] = []
+    for spec in TECH_PROGRAM_KPI_TARGETS:
+        metric_key = safe_text(spec.get("metric"))
+        if not metric_key:
+            continue
+        kind = safe_text(spec.get("kind")) or "presence"
+        fmt = safe_text(spec.get("format")) or "int"
+        target = spec.get("target")
+        value = metrics.get(metric_key)
+        status = _evaluate_metric_check(value, kind, target)
+        program_kpis.append(
+            {
+                "id": safe_text(spec.get("id")) or normalize_key_part(metric_key),
+                "label": safe_text(spec.get("label")) or metric_key,
+                "status": status,
+                "metric": metric_key,
+                "actual": value,
+                "target": target,
+                "format": fmt,
+                "actual_display": _format_metric_value(value, fmt),
+                "target_display": _format_metric_value(target, fmt) if target is not None else "—",
+            }
+        )
+
+    return {
+        "path": str(ROADMAP_TECNICO_PATH),
+        "exists": ROADMAP_TECNICO_PATH.exists(),
+        "phases": phases,
+        "program_kpis": program_kpis,
+        "summary": {
+            "done": sum_done,
+            "partial": sum_partial,
+            "todo": sum_todo,
+            "untracked": sum_untracked,
+            "tracked_total": sum_tracked_total,
+            "overall_total": sum_overall_total,
+            "tracked_percent": tracked_percent,
+            "overall_percent": overall_percent,
+        },
+        "notes": [
+            "Los checks de fase combinan tracker operativo y KPIs cuantificables.",
+            "Cuando no existe medicion directa, el estado se marca como UNTRACKED.",
+        ],
+    }
+
+
 def is_id_like_column(column: str) -> bool:
     col = (column or "").strip().lower()
     if not col:
@@ -852,20 +1486,45 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
     tracker_unmapped = [item for item in tracker_items if not (item.get("source_ids") or [])]
 
     if not db_path.exists():
+        summary_no_db = {
+            "desired": len(desired_ids),
+            "present": 0,
+            "missing": len(desired_ids),
+            "extra": 0,
+            "tracker": {
+                "items_total": len(tracker_items),
+                "unmapped": len(tracker_unmapped),
+            },
+            "sql": {"todo": 0, "partial": 0, "done": 0, "foreign_key_violations": None},
+        }
+        ops_no_db = {
+            "ingestion_runs_total": 0,
+            "ingestion_runs_ok": 0,
+            "ingestion_runs_error": 0,
+            "ingestion_runs_retry": 0,
+            "ingestion_runs_ok_pct": 0.0,
+            "avg_run_seconds": 0.0,
+            "last_run_seconds": 0.0,
+            "retry_rate": 0.0,
+            "published_recommendation_artifacts": 0,
+            "autonomico_sources_ok": 0,
+            "europeo_sources_ok": 0,
+        }
+        roadmap_macro = compute_roadmap_status(tracker_items)
         return {
             **meta,
             "error": "Base SQLite no encontrada. Ejecuta primero la ingesta ETL.",
-            "summary": {
-                "desired": len(desired_ids),
-                "present": 0,
-                "missing": len(desired_ids),
-                "extra": 0,
-                "tracker": {
-                    "items_total": len(tracker_items),
-                    "unmapped": len(tracker_unmapped),
-                },
-            },
-            "roadmap": compute_roadmap_status(tracker_items),
+            "summary": summary_no_db,
+            "ops": ops_no_db,
+            "roadmap": roadmap_macro,
+            "roadmap_technical": compute_technical_roadmap_status(
+                tracker_items,
+                all_sources=[],
+                summary=summary_no_db,
+                analytics={},
+                parl_quality={},
+                ops=ops_no_db,
+            ),
             "tracker": {
                 "path": str(TRACKER_PATH),
                 "exists": TRACKER_PATH.exists(),
@@ -1053,6 +1712,29 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 except sqlite3.Error:
                     return 0
 
+            def _scalar_sql(sql: str, params: tuple[Any, ...] = (), default: Any = None) -> Any:
+                try:
+                    row = conn.execute(sql, params).fetchone()
+                    if not row:
+                        return default
+                    return list(row)[0]
+                except sqlite3.Error:
+                    return default
+
+            def _foreign_key_violation_count() -> int | None:
+                # Prefer table-valued pragma when available; fallback to regular pragma rows.
+                try:
+                    row = conn.execute("SELECT COUNT(*) AS n FROM pragma_foreign_key_check").fetchone()
+                    if row is not None:
+                        return int(row["n"] or 0)
+                except sqlite3.Error:
+                    pass
+                try:
+                    rows = conn.execute("PRAGMA foreign_key_check").fetchall()
+                    return len(rows)
+                except sqlite3.Error:
+                    return None
+
             topics_total = _count_table("topics")
             topic_sets_total = _count_table("topic_sets")
             topic_sets_active = _count_sql("SELECT COUNT(*) FROM topic_sets WHERE is_active = 1")
@@ -1062,6 +1744,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             topic_evidence_with_topic = _count_sql("SELECT COUNT(*) FROM topic_evidence WHERE topic_id IS NOT NULL")
             topic_evidence_with_date = _count_sql(
                 "SELECT COUNT(*) FROM topic_evidence WHERE evidence_date IS NOT NULL AND TRIM(evidence_date) <> ''"
+            )
+            topic_evidence_with_source_url = _count_sql(
+                "SELECT COUNT(*) FROM topic_evidence WHERE source_url IS NOT NULL AND TRIM(source_url) <> ''"
             )
             topic_evidence_declared_total = _count_sql(
                 "SELECT COUNT(*) FROM topic_evidence WHERE evidence_type LIKE 'declared:%'"
@@ -1164,6 +1849,10 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             )
             topic_positions_total = _count_table("topic_positions")
             topic_positions_with_evidence = _count_sql("SELECT COUNT(*) FROM topic_positions WHERE evidence_count > 0")
+            parl_vote_events_total = _count_table("parl_vote_events")
+            parl_vote_events_with_source_url = _count_sql(
+                "SELECT COUNT(*) FROM parl_vote_events WHERE source_url IS NOT NULL AND TRIM(source_url) <> ''"
+            )
             try:
                 rows = conn.execute(
                     """
@@ -1251,6 +1940,59 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             indicator_series_total = _count_table("indicator_series")
             indicator_points_total = _count_table("indicator_points")
             causal_estimates_total = _count_table("causal_estimates")
+            foreign_key_violations = _foreign_key_violation_count()
+
+            ingestion_runs_total = _count_table("ingestion_runs")
+            ingestion_runs_ok = _count_sql("SELECT COUNT(*) FROM ingestion_runs WHERE status = 'ok'")
+            ingestion_runs_error = _count_sql("SELECT COUNT(*) FROM ingestion_runs WHERE status = 'error'")
+            ingestion_runs_retry = max(0, ingestion_runs_total - ingestion_runs_ok)
+            ingestion_runs_ok_pct = (
+                float(ingestion_runs_ok) / float(ingestion_runs_total) if ingestion_runs_total > 0 else 0.0
+            )
+            avg_run_seconds_raw = _scalar_sql(
+                """
+                SELECT AVG((julianday(finished_at) - julianday(started_at)) * 86400.0)
+                FROM ingestion_runs
+                WHERE finished_at IS NOT NULL
+                  AND started_at IS NOT NULL
+                """,
+                default=0.0,
+            )
+            last_run_seconds_raw = _scalar_sql(
+                """
+                SELECT (julianday(finished_at) - julianday(started_at)) * 86400.0
+                FROM ingestion_runs
+                WHERE finished_at IS NOT NULL
+                  AND started_at IS NOT NULL
+                ORDER BY run_id DESC
+                LIMIT 1
+                """,
+                default=0.0,
+            )
+            try:
+                avg_run_seconds = float(avg_run_seconds_raw or 0.0)
+            except (TypeError, ValueError):
+                avg_run_seconds = 0.0
+            try:
+                last_run_seconds = float(last_run_seconds_raw or 0.0)
+            except (TypeError, ValueError):
+                last_run_seconds = 0.0
+            retry_rate = float(ingestion_runs_retry) / float(ingestion_runs_total) if ingestion_runs_total > 0 else 0.0
+
+            published_dir = BASE_DIR / "etl" / "data" / "published"
+            published_recommendation_artifacts = 0
+            if published_dir.exists():
+                patterns = (
+                    "topics*.json",
+                    "claims*.json",
+                    "recommendation-kpis*.json",
+                )
+                for pattern in patterns:
+                    try:
+                        if any(published_dir.glob(pattern)):
+                            published_recommendation_artifacts += 1
+                    except OSError:
+                        continue
 
             def _pct(n: int, d: int) -> float:
                 if d <= 0:
@@ -1611,6 +2353,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     "todo": sql_states.count("TODO"),
                     "partial": sql_states.count("PARTIAL"),
                     "done": sql_states.count("DONE"),
+                    "foreign_key_violations": foreign_key_violations,
                 },
                 "tracker": {
                     "items_total": len(tracker_items),
@@ -1619,6 +2362,30 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     "partial": tracker_item_states.count("PARTIAL"),
                     "done": tracker_item_states.count("DONE"),
                 },
+            }
+
+            autonomico_sources_ok = sum(
+                1
+                for row in all_sources
+                if bool(row.get("desired")) and safe_text(row.get("scope")).lower() == "autonomico" and safe_text(row.get("state")).lower() == "ok"
+            )
+            europeo_sources_ok = sum(
+                1
+                for row in all_sources
+                if bool(row.get("desired")) and safe_text(row.get("scope")).lower() == "europeo" and safe_text(row.get("state")).lower() == "ok"
+            )
+            ops_metrics = {
+                "ingestion_runs_total": ingestion_runs_total,
+                "ingestion_runs_ok": ingestion_runs_ok,
+                "ingestion_runs_error": ingestion_runs_error,
+                "ingestion_runs_retry": ingestion_runs_retry,
+                "ingestion_runs_ok_pct": ingestion_runs_ok_pct,
+                "avg_run_seconds": avg_run_seconds,
+                "last_run_seconds": last_run_seconds,
+                "retry_rate": retry_rate,
+                "published_recommendation_artifacts": published_recommendation_artifacts,
+                "autonomico_sources_ok": autonomico_sources_ok,
+                "europeo_sources_ok": europeo_sources_ok,
             }
 
             def _priority_key(action: dict[str, Any]) -> tuple[int, str, str]:
@@ -1663,74 +2430,96 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             except Exception as exc:  # noqa: BLE001
                 parl_quality = {"error": f"{type(exc).__name__}: {exc}"}
 
+            analytics_payload = {
+                "topics": {
+                    "topics_total": topics_total,
+                    "topic_sets_total": topic_sets_total,
+                    "topic_sets_active": topic_sets_active,
+                    "topic_set_topics_total": topic_set_topics_total,
+                    "high_stakes_total": high_stakes_total,
+                },
+                "evidence": {
+                    "topic_evidence_total": topic_evidence_total,
+                    "topic_evidence_with_topic": topic_evidence_with_topic,
+                    "topic_evidence_with_topic_pct": _pct(topic_evidence_with_topic, topic_evidence_total),
+                    "topic_evidence_with_date": topic_evidence_with_date,
+                    "topic_evidence_with_date_pct": _pct(topic_evidence_with_date, topic_evidence_total),
+                    "topic_evidence_with_source_url": topic_evidence_with_source_url,
+                    "topic_evidence_with_source_url_pct": _pct(topic_evidence_with_source_url, topic_evidence_total),
+                    "topic_evidence_declared_total": topic_evidence_declared_total,
+                    "topic_evidence_revealed_total": topic_evidence_revealed_total,
+                    "topic_evidence_declared_with_date": topic_evidence_declared_with_date,
+                    "topic_evidence_declared_with_date_pct": _pct(
+                        topic_evidence_declared_with_date, topic_evidence_declared_total
+                    ),
+                    "topic_evidence_declared_with_signal": topic_evidence_declared_with_signal,
+                    "topic_evidence_declared_with_signal_pct": _pct(
+                        topic_evidence_declared_with_signal, topic_evidence_declared_total
+                    ),
+                    "topic_evidence_reviews_total": topic_evidence_reviews_total,
+                    "topic_evidence_reviews_pending": topic_evidence_reviews_pending,
+                    "topic_evidence_reviews_resolved": topic_evidence_reviews_resolved,
+                    "topic_evidence_reviews_ignored": topic_evidence_reviews_ignored,
+                    "topic_evidence_reviews_pending_pct": _pct(
+                        topic_evidence_reviews_pending, topic_evidence_declared_total
+                    ),
+                    "topic_evidence_reviews_pending_by_reason": topic_evidence_reviews_pending_by_reason,
+                    "topic_evidence_by_type": topic_evidence_by_type,
+                    "topic_method_top": topic_method_top,
+                    "stance_method_top": stance_method_top,
+                    "text_documents_total": text_documents_total,
+                    "text_documents_with_excerpt": text_documents_with_excerpt,
+                    "text_documents_with_excerpt_pct": _pct(
+                        text_documents_with_excerpt, text_documents_total
+                    ),
+                    "declared_evidence_with_text_excerpt": declared_evidence_with_text_excerpt,
+                    "declared_evidence_with_text_excerpt_pct": _pct(
+                        declared_evidence_with_text_excerpt, topic_evidence_declared_total
+                    ),
+                },
+                "positions": {
+                    "topic_positions_total": topic_positions_total,
+                    "topic_positions_with_evidence": topic_positions_with_evidence,
+                    "topic_positions_with_evidence_pct": _pct(
+                        topic_positions_with_evidence, topic_positions_total
+                    ),
+                    "topic_positions_by_method": topic_positions_by_method,
+                },
+                "coherence": coherence,
+                "traceability": {
+                    "parl_vote_events_total": parl_vote_events_total,
+                    "parl_vote_events_with_source_url": parl_vote_events_with_source_url,
+                    "parl_vote_events_with_source_url_pct": _pct(
+                        parl_vote_events_with_source_url, parl_vote_events_total
+                    ),
+                },
+                "action": {
+                    "policy_events_total": policy_events_total,
+                    "policy_event_axis_scores_total": policy_event_axis_scores_total,
+                    "interventions_total": interventions_total,
+                },
+                "impact": {
+                    "indicator_series_total": indicator_series_total,
+                    "indicator_points_total": indicator_points_total,
+                    "causal_estimates_total": causal_estimates_total,
+                },
+            }
+
+            roadmap_macro = compute_roadmap_status(tracker_items)
+            roadmap_technical = compute_technical_roadmap_status(
+                tracker_items,
+                all_sources=all_sources,
+                summary=summary,
+                analytics=analytics_payload,
+                parl_quality=parl_quality,
+                ops=ops_metrics,
+            )
+
             return {
                 **meta,
                 "summary": summary,
-                "analytics": {
-                    "topics": {
-                        "topics_total": topics_total,
-                        "topic_sets_total": topic_sets_total,
-                        "topic_sets_active": topic_sets_active,
-                        "topic_set_topics_total": topic_set_topics_total,
-                        "high_stakes_total": high_stakes_total,
-                    },
-                    "evidence": {
-                        "topic_evidence_total": topic_evidence_total,
-                        "topic_evidence_with_topic": topic_evidence_with_topic,
-                        "topic_evidence_with_topic_pct": _pct(topic_evidence_with_topic, topic_evidence_total),
-                        "topic_evidence_with_date": topic_evidence_with_date,
-                        "topic_evidence_with_date_pct": _pct(topic_evidence_with_date, topic_evidence_total),
-                        "topic_evidence_declared_total": topic_evidence_declared_total,
-                        "topic_evidence_revealed_total": topic_evidence_revealed_total,
-                        "topic_evidence_declared_with_date": topic_evidence_declared_with_date,
-                        "topic_evidence_declared_with_date_pct": _pct(
-                            topic_evidence_declared_with_date, topic_evidence_declared_total
-                        ),
-                        "topic_evidence_declared_with_signal": topic_evidence_declared_with_signal,
-                        "topic_evidence_declared_with_signal_pct": _pct(
-                            topic_evidence_declared_with_signal, topic_evidence_declared_total
-                        ),
-                        "topic_evidence_reviews_total": topic_evidence_reviews_total,
-                        "topic_evidence_reviews_pending": topic_evidence_reviews_pending,
-                        "topic_evidence_reviews_resolved": topic_evidence_reviews_resolved,
-                        "topic_evidence_reviews_ignored": topic_evidence_reviews_ignored,
-                        "topic_evidence_reviews_pending_pct": _pct(
-                            topic_evidence_reviews_pending, topic_evidence_declared_total
-                        ),
-                        "topic_evidence_reviews_pending_by_reason": topic_evidence_reviews_pending_by_reason,
-                        "topic_evidence_by_type": topic_evidence_by_type,
-                        "topic_method_top": topic_method_top,
-                        "stance_method_top": stance_method_top,
-                        "text_documents_total": text_documents_total,
-                        "text_documents_with_excerpt": text_documents_with_excerpt,
-                        "text_documents_with_excerpt_pct": _pct(
-                            text_documents_with_excerpt, text_documents_total
-                        ),
-                        "declared_evidence_with_text_excerpt": declared_evidence_with_text_excerpt,
-                        "declared_evidence_with_text_excerpt_pct": _pct(
-                            declared_evidence_with_text_excerpt, topic_evidence_declared_total
-                        ),
-                    },
-                    "positions": {
-                        "topic_positions_total": topic_positions_total,
-                        "topic_positions_with_evidence": topic_positions_with_evidence,
-                        "topic_positions_with_evidence_pct": _pct(
-                            topic_positions_with_evidence, topic_positions_total
-                        ),
-                        "topic_positions_by_method": topic_positions_by_method,
-                    },
-                    "coherence": coherence,
-                    "action": {
-                        "policy_events_total": policy_events_total,
-                        "policy_event_axis_scores_total": policy_event_axis_scores_total,
-                        "interventions_total": interventions_total,
-                    },
-                    "impact": {
-                        "indicator_series_total": indicator_series_total,
-                        "indicator_points_total": indicator_points_total,
-                        "causal_estimates_total": causal_estimates_total,
-                    },
-                },
+                "ops": ops_metrics,
+                "analytics": analytics_payload,
                 "parl_quality": parl_quality,
                 "tracker": {
                     "path": str(TRACKER_PATH),
@@ -1738,26 +2527,52 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     "items": tracker_items,
                     "unmapped": tracker_unmapped,
                 },
-                "roadmap": compute_roadmap_status(tracker_items),
+                "roadmap": roadmap_macro,
+                "roadmap_technical": roadmap_technical,
                 "actions": actions[:120],
                 "sources": all_sources,
                 "missing": missing,
             }
     except sqlite3.OperationalError as exc:
+        summary_sql_error = {
+            "desired": len(desired_ids),
+            "present": 0,
+            "missing": len(desired_ids),
+            "extra": 0,
+            "tracker": {
+                "items_total": len(tracker_items),
+                "unmapped": len(tracker_unmapped),
+            },
+            "sql": {"todo": 0, "partial": 0, "done": 0, "foreign_key_violations": None},
+        }
+        ops_sql_error = {
+            "ingestion_runs_total": 0,
+            "ingestion_runs_ok": 0,
+            "ingestion_runs_error": 0,
+            "ingestion_runs_retry": 0,
+            "ingestion_runs_ok_pct": 0.0,
+            "avg_run_seconds": 0.0,
+            "last_run_seconds": 0.0,
+            "retry_rate": 0.0,
+            "published_recommendation_artifacts": 0,
+            "autonomico_sources_ok": 0,
+            "europeo_sources_ok": 0,
+        }
+        roadmap_macro = compute_roadmap_status(tracker_items)
         return {
             **meta,
             "error": f"SQLite error: {exc}",
-            "summary": {
-                "desired": len(desired_ids),
-                "present": 0,
-                "missing": len(desired_ids),
-                "extra": 0,
-                "tracker": {
-                    "items_total": len(tracker_items),
-                    "unmapped": len(tracker_unmapped),
-                },
-            },
-            "roadmap": compute_roadmap_status(tracker_items),
+            "summary": summary_sql_error,
+            "ops": ops_sql_error,
+            "roadmap": roadmap_macro,
+            "roadmap_technical": compute_technical_roadmap_status(
+                tracker_items,
+                all_sources=[],
+                summary=summary_sql_error,
+                analytics={},
+                parl_quality={},
+                ops=ops_sql_error,
+            ),
             "tracker": {
                 "path": str(TRACKER_PATH),
                 "exists": TRACKER_PATH.exists(),
