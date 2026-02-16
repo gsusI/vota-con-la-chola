@@ -7,7 +7,8 @@ DEFAULT_VOTE_QUALITY_THRESHOLDS: dict[str, float] = {
     "events_with_date_pct": 0.95,
     "events_with_theme_pct": 0.95,
     "events_with_totals_pct": 0.95,
-    "events_with_initiative_link_pct": 0.0,
+    # Linking is part of the canonical pipeline; keep a high bar to avoid silent regressions.
+    "events_with_initiative_link_pct": 0.95,
     "member_votes_with_person_id_pct": 0.90,
 }
 
@@ -32,6 +33,17 @@ def _ratio(numerator: int, denominator: int) -> float:
     return float(numerator) / float(denominator)
 
 
+def _table_exists(conn: sqlite3.Connection, table: str) -> bool:
+    try:
+        row = conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=? LIMIT 1",
+            (str(table),),
+        ).fetchone()
+        return row is not None
+    except sqlite3.Error:
+        return False
+
+
 def _empty_source_kpis() -> dict[str, Any]:
     return {
         "events_total": 0,
@@ -40,11 +52,17 @@ def _empty_source_kpis() -> dict[str, Any]:
         "events_with_totals": 0,
         "events_with_nominal_vote": 0,
         "events_with_initiative_link": 0,
+        "events_with_official_initiative_link": 0,
         "events_with_date_pct": 0.0,
         "events_with_theme_pct": 0.0,
         "events_with_totals_pct": 0.0,
         "events_with_nominal_vote_pct": 0.0,
         "events_with_initiative_link_pct": 0.0,
+        "events_with_official_initiative_link_pct": 0.0,
+        "latest_legislature": None,
+        "latest_events_total": 0,
+        "latest_events_with_topic_evidence": 0,
+        "latest_events_with_topic_evidence_pct": 0.0,
         "member_votes_total": 0,
         "member_votes_with_person_id": 0,
         "member_votes_with_person_id_pct": 0.0,
@@ -99,6 +117,17 @@ def compute_vote_quality_kpis(
           JOIN parl_vote_event_initiatives l
             ON l.vote_event_id = e.vote_event_id
         ),
+        official_initiative_events AS (
+          SELECT DISTINCT
+            e.source_id,
+            l.vote_event_id
+          FROM selected_events e
+          JOIN parl_vote_event_initiatives l
+            ON l.vote_event_id = e.vote_event_id
+          JOIN parl_initiatives i
+            ON i.initiative_id = l.initiative_id
+          WHERE i.supertype IS NULL OR TRIM(i.supertype) <> 'derived'
+        ),
         nominal_events AS (
           SELECT DISTINCT vote_event_id
           FROM parl_vote_member_votes
@@ -147,9 +176,17 @@ def compute_vote_quality_kpis(
               ELSE 0
             END
           ) AS events_with_initiative_link
+          ,
+          SUM(
+            CASE
+              WHEN oie.vote_event_id IS NOT NULL THEN 1
+              ELSE 0
+            END
+          ) AS events_with_official_initiative_link
         FROM selected_events e
         LEFT JOIN nominal_events n ON n.vote_event_id = e.vote_event_id
         LEFT JOIN initiative_events ie ON ie.vote_event_id = e.vote_event_id
+        LEFT JOIN official_initiative_events oie ON oie.vote_event_id = e.vote_event_id
         GROUP BY e.source_id
         ORDER BY e.source_id
         """,
@@ -176,6 +213,88 @@ def compute_vote_quality_kpis(
         source_ids_tuple,
     ).fetchall()
 
+    latest_leg_rows = conn.execute(
+        f"""
+        SELECT
+          source_id,
+          MAX(CAST(legislature AS INTEGER)) AS latest_leg
+        FROM parl_vote_events
+        WHERE source_id IN ({placeholders})
+          AND legislature IS NOT NULL AND TRIM(legislature) <> ''
+        GROUP BY source_id
+        ORDER BY source_id
+        """,
+        source_ids_tuple,
+    ).fetchall()
+    latest_leg_by_source: dict[str, str | None] = {sid: None for sid in source_ids_tuple}
+    for row in latest_leg_rows:
+        sid = str(row["source_id"])
+        leg = row["latest_leg"]
+        latest_leg_by_source[sid] = str(int(leg)) if leg is not None else None
+
+    latest_event_rows = conn.execute(
+        f"""
+        WITH latest AS (
+          SELECT
+            source_id,
+            MAX(CAST(legislature AS INTEGER)) AS latest_leg
+          FROM parl_vote_events
+          WHERE source_id IN ({placeholders})
+            AND legislature IS NOT NULL AND TRIM(legislature) <> ''
+          GROUP BY source_id
+        )
+        SELECT
+          e.source_id,
+          COUNT(*) AS latest_events_total
+        FROM parl_vote_events e
+        JOIN latest l
+          ON l.source_id = e.source_id
+         AND CAST(e.legislature AS INTEGER) = l.latest_leg
+        WHERE e.source_id IN ({placeholders})
+        GROUP BY e.source_id
+        ORDER BY e.source_id
+        """,
+        source_ids_tuple + source_ids_tuple,
+    ).fetchall()
+    latest_events_total_by_source: dict[str, int] = {sid: 0 for sid in source_ids_tuple}
+    for row in latest_event_rows:
+        latest_events_total_by_source[str(row["source_id"])] = int(row["latest_events_total"] or 0)
+
+    latest_topic_events_by_source: dict[str, int] = {sid: 0 for sid in source_ids_tuple}
+    if _table_exists(conn, "topic_evidence"):
+        topic_event_rows = conn.execute(
+            f"""
+            WITH latest AS (
+              SELECT
+                source_id,
+                MAX(CAST(legislature AS INTEGER)) AS latest_leg
+              FROM parl_vote_events
+              WHERE source_id IN ({placeholders})
+                AND legislature IS NOT NULL AND TRIM(legislature) <> ''
+              GROUP BY source_id
+            )
+            SELECT
+              e.source_id,
+              COUNT(DISTINCT e.vote_event_id) AS latest_events_with_topic_evidence
+            FROM parl_vote_events e
+            JOIN latest l
+              ON l.source_id = e.source_id
+             AND CAST(e.legislature AS INTEGER) = l.latest_leg
+            JOIN topic_evidence te
+              ON te.vote_event_id = e.vote_event_id
+            WHERE e.source_id IN ({placeholders})
+              AND te.evidence_type = 'revealed:vote'
+              AND te.topic_id IS NOT NULL
+            GROUP BY e.source_id
+            ORDER BY e.source_id
+            """,
+            source_ids_tuple + source_ids_tuple,
+        ).fetchall()
+        for row in topic_event_rows:
+            latest_topic_events_by_source[str(row["source_id"])] = int(
+                row["latest_events_with_topic_evidence"] or 0
+            )
+
     by_source: dict[str, dict[str, Any]] = {sid: _empty_source_kpis() for sid in source_ids_tuple}
 
     for row in event_rows:
@@ -187,6 +306,7 @@ def compute_vote_quality_kpis(
         data["events_with_totals"] = int(row["events_with_totals"] or 0)
         data["events_with_nominal_vote"] = int(row["events_with_nominal_vote"] or 0)
         data["events_with_initiative_link"] = int(row["events_with_initiative_link"] or 0)
+        data["events_with_official_initiative_link"] = int(row["events_with_official_initiative_link"] or 0)
 
     for row in member_vote_rows:
         sid = str(row["source_id"])
@@ -196,7 +316,11 @@ def compute_vote_quality_kpis(
 
     for sid in source_ids_tuple:
         data = by_source[sid]
+        data["latest_legislature"] = latest_leg_by_source.get(sid)
+        data["latest_events_total"] = int(latest_events_total_by_source.get(sid, 0))
+        data["latest_events_with_topic_evidence"] = int(latest_topic_events_by_source.get(sid, 0))
         events_total = int(data["events_total"])
+        latest_events_total = int(data["latest_events_total"])
         member_votes_total = int(data["member_votes_total"])
         data["events_with_date_pct"] = _ratio(int(data["events_with_date"]), events_total)
         data["events_with_theme_pct"] = _ratio(int(data["events_with_theme"]), events_total)
@@ -204,6 +328,12 @@ def compute_vote_quality_kpis(
         data["events_with_nominal_vote_pct"] = _ratio(int(data["events_with_nominal_vote"]), events_total)
         data["events_with_initiative_link_pct"] = _ratio(
             int(data["events_with_initiative_link"]), events_total
+        )
+        data["events_with_official_initiative_link_pct"] = _ratio(
+            int(data["events_with_official_initiative_link"]), events_total
+        )
+        data["latest_events_with_topic_evidence_pct"] = _ratio(
+            int(data["latest_events_with_topic_evidence"]), latest_events_total
         )
         data["member_votes_with_person_id_pct"] = _ratio(
             int(data["member_votes_with_person_id"]), member_votes_total
@@ -218,6 +348,13 @@ def compute_vote_quality_kpis(
     )
     events_with_initiative_link = sum(
         int(by_source[sid]["events_with_initiative_link"]) for sid in source_ids_tuple
+    )
+    events_with_official_initiative_link = sum(
+        int(by_source[sid]["events_with_official_initiative_link"]) for sid in source_ids_tuple
+    )
+    latest_events_total = sum(int(by_source[sid]["latest_events_total"]) for sid in source_ids_tuple)
+    latest_events_with_topic_evidence = sum(
+        int(by_source[sid]["latest_events_with_topic_evidence"]) for sid in source_ids_tuple
     )
     member_votes_total = sum(int(by_source[sid]["member_votes_total"]) for sid in source_ids_tuple)
     member_votes_with_person_id = sum(
@@ -237,6 +374,15 @@ def compute_vote_quality_kpis(
         "events_with_nominal_vote_pct": _ratio(events_with_nominal_vote, events_total),
         "events_with_initiative_link": events_with_initiative_link,
         "events_with_initiative_link_pct": _ratio(events_with_initiative_link, events_total),
+        "events_with_official_initiative_link": events_with_official_initiative_link,
+        "events_with_official_initiative_link_pct": _ratio(
+            events_with_official_initiative_link, events_total
+        ),
+        "latest_events_total": latest_events_total,
+        "latest_events_with_topic_evidence": latest_events_with_topic_evidence,
+        "latest_events_with_topic_evidence_pct": _ratio(
+            latest_events_with_topic_evidence, latest_events_total
+        ),
         "member_votes_total": member_votes_total,
         "member_votes_with_person_id": member_votes_with_person_id,
         "member_votes_with_person_id_pct": _ratio(member_votes_with_person_id, member_votes_total),

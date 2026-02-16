@@ -1,0 +1,20 @@
+{
+  "taxonomy_id": "topic_taxonomy_es",
+  "taxonomy_version": "v1",
+  "notes": "KISS seed: parameters + optional curation for vote-derived topic_sets. Evidence remains traceable at initiative/vote_event level.",
+  "vote_sets": {
+    "congreso_votaciones": {
+      "max_topics": 200,
+      "high_stakes_top": 60,
+      "pin_canonical_keys": [],
+      "exclude_canonical_keys": []
+    },
+    "senado_votaciones": {
+      "max_topics": 200,
+      "high_stakes_top": 60,
+      "pin_canonical_keys": [],
+      "exclude_canonical_keys": []
+    }
+  }
+}
+

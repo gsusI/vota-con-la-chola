@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import json
 import sys
 from pathlib import Path
 
@@ -47,6 +48,17 @@ def parse_args() -> argparse.Namespace:
         help="Rellena columnas/tablas normalizadas para datos historicos",
     )
     backfill.add_argument("--db", default=str(DEFAULT_DB), help="Ruta al archivo SQLite")
+
+    backfill_territories = subparsers.add_parser(
+        "backfill-territories",
+        help="Carga referencias territoriales (ES) y enriquece territories (level/parent)",
+    )
+    backfill_territories.add_argument("--db", default=str(DEFAULT_DB), help="Ruta al archivo SQLite")
+    backfill_territories.add_argument(
+        "--ref",
+        default="etl/data/published/poblacion_municipios_es.json",
+        help="JSON de referencia (población municipal) usado como catálogo territorial",
+    )
 
     return parser.parse_args()
 
@@ -133,6 +145,31 @@ def cmd_backfill_normalized(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_backfill_territories(args: argparse.Namespace) -> int:
+    from .territories_ref import backfill_territories_reference  # noqa: PLC0415
+
+    db_path = Path(args.db)
+    ref_path = Path(args.ref)
+    if not db_path.exists():
+        print(f"Base no encontrada: {db_path}", file=sys.stderr)
+        return 2
+    if not ref_path.exists():
+        print(f"Ref no encontrada: {ref_path}", file=sys.stderr)
+        return 2
+
+    conn = open_db(db_path)
+    try:
+        apply_schema(conn, DEFAULT_SCHEMA)
+        seed_sources(conn)
+        seed_dimensions(conn)
+        result = backfill_territories_reference(conn, ref_path=ref_path)
+    finally:
+        conn.close()
+
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
 def cmd_stats(args: argparse.Namespace) -> int:
     db_path = Path(args.db)
     if not db_path.exists():
@@ -157,5 +194,7 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_stats(args)
     if args.command == "backfill-normalized":
         return cmd_backfill_normalized(args)
+    if args.command == "backfill-territories":
+        return cmd_backfill_territories(args)
     print(f"Comando no soportado: {args.command}", file=sys.stderr)
     return 2

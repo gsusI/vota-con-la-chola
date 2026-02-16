@@ -72,6 +72,20 @@ CREATE TABLE IF NOT EXISTS raw_fetches (
   UNIQUE (source_id, content_sha256)
 );
 
+-- Per-run fetch metadata (one row per ingestion run).
+-- raw_fetches is de-duped by (source_id, content_sha256) for traceability of payloads;
+-- this table keeps the run_id -> source_url mapping stable for ops dashboards.
+CREATE TABLE IF NOT EXISTS run_fetches (
+  run_id INTEGER PRIMARY KEY REFERENCES ingestion_runs(run_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT NOT NULL,
+  fetched_at TEXT NOT NULL,
+  raw_path TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL,
+  content_type TEXT,
+  bytes INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS persons (
   person_id INTEGER PRIMARY KEY AUTOINCREMENT,
   full_name TEXT NOT NULL,
@@ -343,7 +357,7 @@ CREATE TABLE IF NOT EXISTS topic_sets (
   is_active INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0, 1)),
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  UNIQUE (name, COALESCE(institution_id, -1), COALESCE(admin_level_id, -1), COALESCE(territory_id, -1), COALESCE(legislature, ''))
+  UNIQUE (name, institution_id, admin_level_id, territory_id, legislature)
 );
 
 CREATE TABLE IF NOT EXISTS topics (
@@ -403,6 +417,24 @@ CREATE TABLE IF NOT EXISTS topic_evidence (
   updated_at TEXT NOT NULL
 );
 
+-- Manual review queue for declared evidence rows that remain ambiguous after auto extraction.
+-- Keep one row per evidence_id and track status transitions (pending/resolved/ignored).
+CREATE TABLE IF NOT EXISTS topic_evidence_reviews (
+  review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  evidence_id INTEGER NOT NULL UNIQUE REFERENCES topic_evidence(evidence_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  review_reason TEXT NOT NULL CHECK (review_reason IN ('missing_text', 'no_signal', 'low_confidence', 'conflicting_signal')),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'resolved', 'ignored')) DEFAULT 'pending',
+  suggested_stance TEXT CHECK (suggested_stance IN ('support', 'oppose', 'mixed', 'unclear', 'no_signal')),
+  suggested_polarity INTEGER CHECK (suggested_polarity IN (-1, 0, 1)),
+  suggested_confidence REAL,
+  extractor_version TEXT,
+  note TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
 -- Aggregated stance snapshot (recomputed deterministically from topic_evidence for a given window).
 CREATE TABLE IF NOT EXISTS topic_positions (
   position_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -425,7 +457,163 @@ CREATE TABLE IF NOT EXISTS topic_positions (
   computed_at TEXT NOT NULL,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  UNIQUE (topic_id, person_id, COALESCE(mandate_id, -1), as_of_date, computed_method, computed_version)
+  UNIQUE (topic_id, person_id, mandate_id, as_of_date, computed_method, computed_version)
+);
+
+-- Text documents fetched for declared evidence (HTML/PDF/etc).
+-- Keep raw bytes on disk; store only metadata + small excerpts in SQLite.
+CREATE TABLE IF NOT EXISTS text_documents (
+  text_document_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT NOT NULL,
+  source_record_pk INTEGER UNIQUE REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  fetched_at TEXT,
+  content_type TEXT,
+  content_sha256 TEXT,
+  bytes INTEGER,
+  raw_path TEXT,
+  text_excerpt TEXT,
+  text_chars INTEGER,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Politica publica: dominios, ejes y eventos (accion revelada).
+-- Nota: estas tablas son el "hueco" intencional para evolucionar desde temas/votos
+-- hacia acciones con efectos (BOE, dinero publico, etc.) sin romper Explorer.
+
+CREATE TABLE IF NOT EXISTS domains (
+  domain_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  canonical_key TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  description TEXT,
+  tier INTEGER,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS policy_axes (
+  policy_axis_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  domain_id INTEGER NOT NULL REFERENCES domains(domain_id) ON DELETE CASCADE,
+  canonical_key TEXT NOT NULL,
+  label TEXT NOT NULL,
+  description TEXT,
+  axis_order INTEGER,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (domain_id, canonical_key)
+);
+
+CREATE TABLE IF NOT EXISTS policy_instruments (
+  policy_instrument_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  description TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS policy_events (
+  policy_event_id TEXT PRIMARY KEY,
+  event_date TEXT,
+  published_date TEXT,
+  domain_id INTEGER REFERENCES domains(domain_id),
+  policy_instrument_id INTEGER REFERENCES policy_instruments(policy_instrument_id),
+  title TEXT,
+  summary TEXT,
+  amount_eur REAL,
+  currency TEXT,
+  institution_id INTEGER REFERENCES institutions(institution_id),
+  admin_level_id INTEGER REFERENCES admin_levels(admin_level_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  scope TEXT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS policy_event_axis_scores (
+  policy_event_id TEXT NOT NULL REFERENCES policy_events(policy_event_id) ON DELETE CASCADE,
+  policy_axis_id INTEGER NOT NULL REFERENCES policy_axes(policy_axis_id) ON DELETE CASCADE,
+  direction INTEGER CHECK (direction IN (-1, 0, 1)),
+  intensity REAL,
+  confidence REAL,
+  method TEXT NOT NULL,
+  notes TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (policy_event_id, policy_axis_id, method)
+);
+
+-- Interventions: agrupacion reproducible de eventos en tratamientos evaluables.
+CREATE TABLE IF NOT EXISTS interventions (
+  intervention_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  canonical_key TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  description TEXT,
+  domain_id INTEGER REFERENCES domains(domain_id),
+  start_date TEXT,
+  end_date TEXT,
+  admin_level_id INTEGER REFERENCES admin_levels(admin_level_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS intervention_events (
+  intervention_id INTEGER NOT NULL REFERENCES interventions(intervention_id) ON DELETE CASCADE,
+  policy_event_id TEXT NOT NULL REFERENCES policy_events(policy_event_id) ON DELETE CASCADE,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (intervention_id, policy_event_id)
+);
+
+-- Indicadores (outcomes + confusores) para evaluaciones y contexto.
+CREATE TABLE IF NOT EXISTS indicator_series (
+  indicator_series_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  canonical_key TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  unit TEXT,
+  frequency TEXT,
+  domain_id INTEGER REFERENCES domains(domain_id),
+  admin_level_id INTEGER REFERENCES admin_levels(admin_level_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_snapshot_date TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS indicator_points (
+  indicator_point_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  indicator_series_id INTEGER NOT NULL REFERENCES indicator_series(indicator_series_id) ON DELETE CASCADE,
+  date TEXT NOT NULL,
+  value REAL,
+  value_text TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (indicator_series_id, date)
+);
+
+-- Causal estimates: resultados de evaluacion con diagnosticos y trazabilidad.
+CREATE TABLE IF NOT EXISTS causal_estimates (
+  causal_estimate_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  intervention_id INTEGER NOT NULL REFERENCES interventions(intervention_id) ON DELETE CASCADE,
+  outcome_series_id INTEGER REFERENCES indicator_series(indicator_series_id),
+  method TEXT NOT NULL,
+  estimate_value REAL,
+  estimate_json TEXT,
+  diagnostics_json TEXT,
+  credibility TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_runs_source_id ON ingestion_runs(source_id);
@@ -479,3 +667,24 @@ CREATE INDEX IF NOT EXISTS idx_topic_evidence_source_id ON topic_evidence(source
 CREATE INDEX IF NOT EXISTS idx_topic_positions_topic_id ON topic_positions(topic_id);
 CREATE INDEX IF NOT EXISTS idx_topic_positions_person_id ON topic_positions(person_id);
 CREATE INDEX IF NOT EXISTS idx_topic_positions_mandate_id ON topic_positions(mandate_id);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_set_topic_person ON topic_evidence(topic_set_id, topic_id, person_id);
+CREATE INDEX IF NOT EXISTS idx_topic_positions_set_topic_person ON topic_positions(topic_set_id, topic_id, person_id);
+CREATE INDEX IF NOT EXISTS idx_topic_positions_set_topic_stance ON topic_positions(topic_set_id, topic_id, stance);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_reviews_status ON topic_evidence_reviews(status);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_reviews_reason ON topic_evidence_reviews(review_reason);
+CREATE INDEX IF NOT EXISTS idx_topic_evidence_reviews_source_id ON topic_evidence_reviews(source_id);
+CREATE INDEX IF NOT EXISTS idx_text_documents_source_id ON text_documents(source_id);
+CREATE INDEX IF NOT EXISTS idx_text_documents_source_record_pk ON text_documents(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_text_documents_source_url ON text_documents(source_url);
+
+CREATE INDEX IF NOT EXISTS idx_domains_tier ON domains(tier);
+CREATE INDEX IF NOT EXISTS idx_policy_axes_domain_id ON policy_axes(domain_id);
+CREATE INDEX IF NOT EXISTS idx_policy_events_domain_id ON policy_events(domain_id);
+CREATE INDEX IF NOT EXISTS idx_policy_events_instrument_id ON policy_events(policy_instrument_id);
+CREATE INDEX IF NOT EXISTS idx_policy_events_source_id ON policy_events(source_id);
+CREATE INDEX IF NOT EXISTS idx_policy_event_axis_scores_axis_id ON policy_event_axis_scores(policy_axis_id);
+CREATE INDEX IF NOT EXISTS idx_interventions_domain_id ON interventions(domain_id);
+CREATE INDEX IF NOT EXISTS idx_intervention_events_event_id ON intervention_events(policy_event_id);
+CREATE INDEX IF NOT EXISTS idx_indicator_series_domain_id ON indicator_series(domain_id);
+CREATE INDEX IF NOT EXISTS idx_indicator_points_series_date ON indicator_points(indicator_series_id, date);
+CREATE INDEX IF NOT EXISTS idx_causal_estimates_intervention_id ON causal_estimates(intervention_id);
