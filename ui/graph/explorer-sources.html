@@ -623,7 +623,7 @@
 	          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.0.7</span>
 	        </h1>
         <p class="subtitle">
-          Compara lo que el proyecto necesita (<span class="mono">SOURCE_CONFIG</span>) con lo que ya está cargado en la BD, y ve qué queda por hacer para avanzar.
+          Dashboard integral de progreso: cruza <span class="mono">SOURCE_CONFIG</span>, tracker operativo, roadmap macro y roadmap técnico con KPIs cuantificables.
         </p>
         <div id="global-progress" class="global-progress" aria-live="polite">
           <div class="muted">Cargando progreso...</div>
@@ -643,6 +643,22 @@
 	            </p>
 	          </div>
 	        </details>
+        <details class="content details-block" id="panel-roadmap-tech" open>
+          <summary>
+            <span class="details-title">
+              <strong>Roadmap técnico (fases + KPIs)</strong>
+              <small>Entrega técnica medible: gates, cobertura política, productividad ETL y trazabilidad.</small>
+            </span>
+          </summary>
+          <div class="details-body">
+            <div id="roadmap-tech-summary" class="sub" style="margin:0 0 8px"></div>
+            <div id="roadmap-tech-dashboard" class="scope-grid"></div>
+            <div id="roadmap-tech-kpis" class="kpis" style="margin-top:10px"></div>
+            <p class="sub" style="margin:10px 0 0">
+              Fuente de verdad: <span class="mono">docs/roadmap-tecnico.md</span> y métricas reales de <span class="mono">/api/sources/status</span>.
+            </p>
+          </div>
+        </details>
         <div class="toolbar">
           <select id="view-mode">
             <option value="ops">Vista: Operación (hoy)</option>
@@ -767,6 +783,9 @@
         globalProgress: document.getElementById("global-progress"),
         roadmapSummary: document.getElementById("roadmap-summary"),
         roadmapDashboard: document.getElementById("roadmap-dashboard"),
+        roadmapTechSummary: document.getElementById("roadmap-tech-summary"),
+        roadmapTechDashboard: document.getElementById("roadmap-tech-dashboard"),
+        roadmapTechKpis: document.getElementById("roadmap-tech-kpis"),
         scopeDashboard: document.getElementById("scope-dashboard"),
         refreshAt: document.getElementById("refresh-at"),
         idealEvidence: document.getElementById("ideal-evidence"),
@@ -924,6 +943,17 @@
         return "<span class='pill muted'>" + roadmapLabel(val) + "</span>";
       }
 
+      function statusPill(value) {
+        const val = (value || "").toUpperCase().trim();
+        if (!val) return "<span class='pill muted'>N/A</span>";
+        if (val === "DONE") return "<span class='pill ok'>DONE</span>";
+        if (val === "PARTIAL") return "<span class='pill warn'>PARTIAL</span>";
+        if (val === "TODO") return "<span class='pill muted'>TODO</span>";
+        if (val === "MISSING") return "<span class='pill err'>MISSING</span>";
+        if (val === "UNTRACKED") return "<span class='pill muted'>UNTRACKED</span>";
+        return "<span class='pill muted'>" + val + "</span>";
+      }
+
       function sqlPill(value) {
         const val = (value || "").toUpperCase().trim();
         if (!val) {
@@ -998,6 +1028,9 @@
         const done = tracker.done || 0;
         const sqlDone = sql.done || 0;
         const sqlPartial = sql.partial || 0;
+        const fkViolations = (sql.foreign_key_violations === 0 || sql.foreign_key_violations)
+          ? Number(sql.foreign_key_violations)
+          : null;
 
         const topicsTotal = Number(aTopics.topics_total || 0);
         const topicSetsTotal = Number(aTopics.topic_sets_total || 0);
@@ -1068,7 +1101,7 @@
 	          "<div class='kpis'>" +
 	          "<div class='kpi'><p class='label'>Inventario</p><div class='value'><strong>" + present + "</strong><span class='muted'>en BD</span></div><div class='small'>Esperadas: " + desired + " · Extras: " + extra + " · Faltan: " + missing + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Tracker</p><div class='value'><strong>" + (todo + partial) + "</strong><span class='muted'>por resolver</span></div><div class='small'>Pendientes: " + todo + " · Parciales: " + partial + " · Completadas: " + done + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Checks SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Checks SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + " · FK violations: " + (fkViolations === null ? "—" : fkViolations) + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Votaciones (quality)</p><div class='value'><strong>" + fmtPct(Number(voteLinkPct)) + "</strong><span class='muted'>link</span></div><div class='small'>Oficial: " + fmtPct(Number(voteOfficialLinkPct)) + " · person_id: " + fmtPct(Number(votePersonIdPct)) + " · topic (latest): " + fmtPct(Number(voteTopicPctLatest)) + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Analítica (temas)</p><div class='value'><strong>" + positionsTotal + "</strong><span class='muted'>posiciones</span></div><div class='small'>Temas: " + topicsTotal + " · Sets: " + topicSetsTotal + " · High-stakes: " + highStakesTotal + " · pos(votes): " + positionsVotes + " · pos(declared): " + positionsDeclared + " · pos(combined): " + positionsCombined + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Coherencia (says/does)</p><div class='value'><strong>" + fmtPct(coherencePct) + "</strong><span class='muted'>explicit</span></div><div class='small'>as_of: " + (coherenceAsOf || "—") + " · overlap: " + coherenceOverlap + " · explicit: " + coherenceExplicit + " · incoherent: " + coherenceIncoherent + "</div></div>" +
@@ -1103,16 +1136,6 @@
             "<strong>" + t + "</strong> <span class='muted'>(tracked)</span>" +
             " · <strong>" + o + "</strong> <span class='muted'>(incluye manual/untracked)</span>" +
             " · <span class='mono muted'>" + trackedTotal + "/" + overallTotal + "</span>";
-        }
-
-        function statusPill(st) {
-          const s = String(st || "").toUpperCase();
-          if (s === "DONE") return "<span class='pill ok'>DONE</span>";
-          if (s === "PARTIAL") return "<span class='pill warn'>PARTIAL</span>";
-          if (s === "TODO") return "<span class='pill muted'>TODO</span>";
-          if (s === "MISSING") return "<span class='pill err'>MISSING</span>";
-          if (s === "UNTRACKED") return "<span class='pill muted'>UNTRACKED</span>";
-          return "<span class='pill muted'>" + s + "</span>";
         }
 
         nodes.roadmapDashboard.innerHTML = phases.map((p) => {
@@ -1159,6 +1182,110 @@
             "</article>"
           );
         }).join("");
+      }
+
+      function renderRoadmapTechnicalDashboard(data) {
+        if (!nodes.roadmapTechDashboard || !nodes.roadmapTechSummary || !nodes.roadmapTechKpis) return;
+        const rd = data.roadmap_technical || {};
+        const phases = Array.isArray(rd.phases) ? rd.phases : [];
+        const summary = rd.summary || {};
+        const programKpis = Array.isArray(rd.program_kpis) ? rd.program_kpis : [];
+
+        if (!phases.length) {
+          nodes.roadmapTechDashboard.innerHTML = "<div class='muted'>Roadmap técnico no disponible en /api/sources/status.</div>";
+          nodes.roadmapTechSummary.textContent = "";
+          nodes.roadmapTechKpis.innerHTML = "";
+          return;
+        }
+
+        const trackedPct = (summary.tracked_percent === 0 || summary.tracked_percent) ? summary.tracked_percent : null;
+        const overallPct = (summary.overall_percent === 0 || summary.overall_percent) ? summary.overall_percent : null;
+        const trackedTotal = Number(summary.tracked_total || 0);
+        const overallTotal = Number(summary.overall_total || 0);
+        const notes = Array.isArray(rd.notes) ? rd.notes : [];
+
+        nodes.roadmapTechSummary.innerHTML =
+          "<span class='muted'>Progreso técnico:</span> " +
+          "<strong>" + (trackedPct === null ? "—" : (String(trackedPct) + "%")) + "</strong> <span class='muted'>(tracked)</span>" +
+          " · <strong>" + (overallPct === null ? "—" : (String(overallPct) + "%")) + "</strong> <span class='muted'>(overall)</span>" +
+          " · <span class='mono muted'>" + trackedTotal + "/" + overallTotal + "</span>" +
+          (notes.length ? " · <span class='muted'>" + notes.join(" · ") + "</span>" : "");
+
+        nodes.roadmapTechDashboard.innerHTML = phases.map((p) => {
+          const pr = p.progress || {};
+          const title = String(p.title || p.id || "Fase");
+          const eng = String(p.points_eng_raw || p.points_eng || "");
+          const tracked = (pr.tracked_percent === 0 || pr.tracked_percent) ? pr.tracked_percent : null;
+          const overall = (pr.overall_percent === 0 || pr.overall_percent) ? pr.overall_percent : null;
+          const meter = (tracked === null) ? 0 : Math.max(0, Math.min(100, Number(tracked)));
+          const next = Array.isArray(p.next) ? p.next : [];
+          const checks = Array.isArray(p.checks) ? p.checks : [];
+
+          const nextList = next.length
+            ? "<div class='list' style='margin-top:8px'><ul>" +
+              next.slice(0, 6).map((it) => {
+                const label = String(it.label || it.id || "—");
+                const actual = it.actual_display ? (" · <span class='mono muted'>" + String(it.actual_display) + "</span>") : "";
+                const target = it.target_display && String(it.target_display) !== "—"
+                  ? (" <span class='muted'>/ " + String(it.target_display) + "</span>")
+                  : "";
+                return "<li>" + statusPill(it.status) + " <strong>" + label + "</strong>" + actual + target + "</li>";
+              }).join("") +
+              "</ul></div>"
+            : "<div class='muted' style='margin-top:8px'>Sin pendientes en esta fase.</div>";
+
+          const checksBlock = checks.length
+            ? "<details style='margin-top:8px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Checks (" + checks.length + ")</summary>" +
+              "<div class='list' style='margin-top:8px'><ul>" +
+              checks.slice(0, 16).map((it) => {
+                const label = String(it.label || it.id || "—");
+                const actual = it.actual_display ? (" · <span class='mono'>" + String(it.actual_display) + "</span>") : "";
+                const target = it.target_display && String(it.target_display) !== "—"
+                  ? (" <span class='muted'>/ " + String(it.target_display) + "</span>")
+                  : "";
+                return "<li>" + statusPill(it.status) + " <strong>" + label + "</strong>" + actual + target + "</li>";
+              }).join("") +
+              (checks.length > 16 ? "<li class='muted'>+" + (checks.length - 16) + " checks más...</li>" : "") +
+              "</ul></div></details>"
+            : "";
+
+          return (
+            "<article class='scope-card'>" +
+            "<div class='scope-head'>" +
+            "<div class='scope-title'>" + title + "</div>" +
+            "<div class='scope-meta'><span class='mono'>ENG " + eng + "</span></div>" +
+            "</div>" +
+            "<div class='row'><span class='muted'>Progreso</span><span class='mono'>" +
+              (tracked === null ? "—" : (String(tracked) + "%")) +
+              " · <span class='muted'>overall:</span> " +
+              (overall === null ? "—" : (String(overall) + "%")) +
+            "</span></div>" +
+            "<div class='meter'><span style='width:" + meter + "%'></span></div>" +
+            "<div class='small muted'>DONE: " + Number(pr.done || 0) +
+              " · PARTIAL: " + Number(pr.partial || 0) +
+              " · TODO: " + Number(pr.todo || 0) +
+              " · UNTRACKED: " + Number(pr.untracked || 0) +
+            "</div>" +
+            nextList +
+            checksBlock +
+            "</article>"
+          );
+        }).join("");
+
+        nodes.roadmapTechKpis.innerHTML = programKpis.length
+          ? programKpis.map((kpi) => {
+            const label = String(kpi.label || kpi.id || "KPI");
+            const actual = String(kpi.actual_display || "—");
+            const target = (kpi.target_display && String(kpi.target_display) !== "—") ? String(kpi.target_display) : "";
+            return (
+              "<div class='kpi'>" +
+              "<p class='label'>KPI programa</p>" +
+              "<div class='value'><strong>" + actual + "</strong>" + statusPill(kpi.status) + "</div>" +
+              "<div class='small'>" + label + (target ? (" · target: " + target) : "") + "</div>" +
+              "</div>"
+            );
+          }).join("")
+          : "<div class='muted'>Sin KPIs de programa para mostrar.</div>";
       }
 
       function safeNum(x, fallback = 0) {
@@ -1652,6 +1779,7 @@
           state.ideal = idealPayload;
           renderGlobalProgress(payload);
           renderRoadmapDashboard(payload);
+          renderRoadmapTechnicalDashboard(payload);
           fillAdvancedFilters(payload);
           nodes.refreshAt.textContent = "Actualizado: " + formatDate(payload.generated_at || "");
           renderScopeDashboard(payload);
