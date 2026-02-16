@@ -207,29 +207,45 @@ def _parse_sesion_vote_xml(payload: bytes) -> dict[str, Any]:
 
     votes: list[dict[str, Any]] = []
     for node in root.findall(".//votacion"):
-        tit_vot = normalize_ws(node.findtext("tit_vot")) or None
-        tit_sec = normalize_ws(node.findtext("tit_sec")) or None
+        tit_vot = normalize_ws(str(node.findtext("tit_vot") or "")) or None
+        tit_sec = normalize_ws(str(node.findtext("tit_sec") or "")) or None
         num_vot = _to_int(node.findtext("num_vot"))
         cod_vot = _to_int(node.findtext("CodVotacion"))
-        num_exp = normalize_ws(node.findtext("num_exp")) or None
+        num_exp = normalize_ws(str(node.findtext("num_exp") or "")) or None
         vote_date = _parse_senado_vote_date(node.findtext("fecha_v")) or session_date_iso
 
         members: list[dict[str, Any]] = []
-        for row in node.findall("./resultado/VotoSenador"):
+        # Senado XML uses mixed-case tags (e.g. <Resultado><VotoSenador>...</VotoSenador></Resultado>).
+        # Using ".//VotoSenador" keeps us resilient across legislatures.
+        for row in node.findall(".//VotoSenador"):
+            nombre = normalize_ws(str(row.findtext("nombre") or "")) or None
+            apellidos = normalize_ws(str(row.findtext("apellidos") or "")) or None
+            full_name = None
+            if nombre and apellidos:
+                full_name = normalize_ws(f"{nombre} {apellidos}")
+            else:
+                full_name = nombre or apellidos
             members.append(
                 {
-                    "seat": normalize_ws(row.findtext("escano")) or None,
-                    "group": normalize_ws(row.findtext("grupo")) or None,
-                    "member_name": normalize_ws(row.findtext("nombre")) or None,
-                    "vote_choice": normalize_ws(row.findtext("voto")) or None,
+                    "seat": normalize_ws(str(row.findtext("escano") or "")) or None,
+                    "group": normalize_ws(str(row.findtext("grupo") or "")) or None,
+                    "member_name": full_name,
+                    "vote_choice": normalize_ws(str(row.findtext("voto") or "")) or None,
                 }
             )
         for row in node.findall("./ausentes/ausencia"):
+            nombre = normalize_ws(str(row.findtext("nombre") or "")) or None
+            apellidos = normalize_ws(str(row.findtext("apellidos") or "")) or None
+            full_name = None
+            if nombre and apellidos:
+                full_name = normalize_ws(f"{nombre} {apellidos}")
+            else:
+                full_name = nombre or apellidos
             members.append(
                 {
-                    "seat": normalize_ws(row.findtext("escano")) or None,
-                    "group": normalize_ws(row.findtext("grupo")) or None,
-                    "member_name": normalize_ws(row.findtext("nombre")) or None,
+                    "seat": normalize_ws(str(row.findtext("escano") or "")) or None,
+                    "group": normalize_ws(str(row.findtext("grupo") or "")) or None,
+                    "member_name": full_name,
                     "vote_choice": "AUSENTE",
                 }
             )
@@ -663,7 +679,13 @@ class SenadoVotacionesConnector(BaseConnector):
         detail_dir = Path(str(detail_dir_opt)) if detail_dir_opt else None
         detail_host = normalize_ws(str(options.get("senado_detail_host") or SENADO_BASE)) or SENADO_BASE
         detail_cookie = normalize_ws(str(options.get("senado_detail_cookie") or "")) or os.getenv("SENADO_DETAIL_COOKIE")
-        skip_details = bool(options.get("senado_skip_details"))
+        skip_details_opt = options.get("senado_skip_details", None)
+        if skip_details_opt is None:
+            # Auto mode: details are expensive/fragile over the network; only try them if the
+            # caller provided a reproducible cache dir or an explicit cookie.
+            skip_details = not bool(detail_dir or detail_cookie)
+        else:
+            skip_details = bool(skip_details_opt)
         content_type = None
         records: list[dict[str, Any]] = []
         session_cache: dict[str, dict[str, Any]] = {}
@@ -744,6 +766,9 @@ class SenadoVotacionesConnector(BaseConnector):
             # Conservative fallback: try a reasonable range of legislatures (newest first).
             target_legs = list(range(25, 0, -1))
         target_legs = sorted({int(v) for v in target_legs if int(v) >= 0}, reverse=True)
+        if isinstance(max_votes, int) and max_votes > 0 and not leg_filter and len(target_legs) > 1:
+            # Debug/minimum runs: avoid crawling the full historical catalog just to fetch a few votes.
+            target_legs = target_legs[:1]
 
         tipo12_urls: list[str] = []
         seen_tipo12: set[str] = set()

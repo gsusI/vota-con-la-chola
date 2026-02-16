@@ -50,6 +50,33 @@ def ingest_one_source(
 
         now_iso = now_utc_iso()
 
+        # Keep per-run fetch metadata (used by ops dashboards).
+        conn.execute(
+            """
+            INSERT INTO run_fetches (
+              run_id, source_id, source_url, fetched_at, raw_path, content_sha256, content_type, bytes
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(run_id) DO UPDATE SET
+              source_id=excluded.source_id,
+              source_url=excluded.source_url,
+              fetched_at=excluded.fetched_at,
+              raw_path=excluded.raw_path,
+              content_sha256=excluded.content_sha256,
+              content_type=excluded.content_type,
+              bytes=excluded.bytes
+            """,
+            (
+                run_id,
+                source_id,
+                extracted.source_url,
+                extracted.fetched_at,
+                str(extracted.raw_path),
+                extracted.content_sha256,
+                extracted.content_type,
+                extracted.bytes,
+            ),
+        )
+
         conn.execute(
             """
             INSERT INTO raw_fetches (

@@ -77,16 +77,20 @@ def _candidate_match_key(
     *,
     vote_date_norm: str | None,
     group_norm: str | None,
-) -> tuple[int, int, int, str, str]:
+) -> tuple[int, int, int, int, int, str, str]:
     in_window = _vote_date_in_mandate_window(
         vote_date_norm,
         str(candidate.get("start_date") or ""),
         str(candidate.get("end_date") or ""),
     )
     group_match = 1 if group_norm and group_norm in candidate.get("party_keys", set()) else 0
+    has_dates = 1 if (candidate.get("start_date") or candidate.get("end_date")) else 0
+    has_territory = 1 if str(candidate.get("person_territory_code") or "").strip() else 0
     return (
         1 if in_window else 0,
         group_match,
+        has_dates,
+        has_territory,
         1 if int(candidate.get("is_active") or 0) == 1 else 0,
         str(candidate.get("end_date") or "9999-12-31"),
         str(candidate.get("start_date") or "0000-01-01"),
@@ -102,7 +106,7 @@ def _pick_best_person_id(
     if not candidates:
         return None, "no_candidates"
 
-    best_by_person: dict[int, tuple[int, int, int, str, str]] = {}
+    best_by_person: dict[int, tuple[int, int, int, int, int, str, str]] = {}
     for candidate in candidates:
         key = _candidate_match_key(
             candidate,
@@ -117,7 +121,7 @@ def _pick_best_person_id(
     if not best_by_person:
         return None, "no_candidates"
 
-    key_map: dict[tuple[int, int, int, str, str], list[int]] = {}
+    key_map: dict[tuple[int, int, int, int, int, str, str], list[int]] = {}
     for pid, key in best_by_person.items():
         key_map.setdefault(key, []).append(pid)
 
@@ -163,6 +167,8 @@ def backfill_vote_member_person_ids(
             "unmatched": 0,
             "ambiguous": 0,
             "updated": 0,
+            "orphan": 0,
+            "cleared_orphan": 0,
             "skipped_no_name": 0,
             "no_mandate_map": 0,
             "no_candidates": 0,
@@ -184,17 +190,20 @@ def backfill_vote_member_person_ids(
     cur = conn.execute(
         f"""
         SELECT mv.member_vote_id, mv.source_id, mv.member_name_normalized, mv.member_name,
-               mv.group_code, e.legislature, e.vote_date, mv.vote_event_id
+               mv.group_code, e.legislature, e.vote_date, mv.vote_event_id,
+               mv.person_id AS current_person_id,
+               CASE WHEN mv.person_id IS NOT NULL AND p.person_id IS NULL THEN 1 ELSE 0 END AS is_orphan
         FROM parl_vote_member_votes mv
         JOIN parl_vote_events e ON e.vote_event_id = mv.vote_event_id
+        LEFT JOIN persons p ON p.person_id = mv.person_id
         WHERE mv.source_id IN ({placeholders})
-          AND mv.person_id IS NULL
+          AND (mv.person_id IS NULL OR p.person_id IS NULL)
         ORDER BY mv.source_id, mv.member_vote_id
         """,
         tuple(seen),
     )
 
-    updates: list[tuple[int, int, str]] = []
+    updates: list[tuple[int | None, int, str]] = []
     total_checked = 0
     total_matched = 0
     total_unmatched = 0
@@ -216,12 +225,17 @@ def backfill_vote_member_person_ids(
                     "unmatched": 0,
                     "ambiguous": 0,
                     "updated": 0,
+                    "orphan": 0,
+                    "cleared_orphan": 0,
                     "skipped_no_name": 0,
                     "no_mandate_map": 0,
                     "no_candidates": 0,
                 },
             )
             reason: str | None = None
+            is_orphan = bool(int(row["is_orphan"] or 0))
+            if is_orphan:
+                source_stat["orphan"] += 1
 
             total_checked += 1
             source_stat["checked"] += 1
@@ -259,6 +273,15 @@ def backfill_vote_member_person_ids(
                 if reason == "ambiguous":
                     source_stat["ambiguous"] += 1
                     total_ambiguous += 1
+                if is_orphan:
+                    # Keep DB consistent: if we have a dangling FK to persons, clear it even when
+                    # we can't rematch right now (best-effort).
+                    source_stat["cleared_orphan"] += 1
+                    if dry_run:
+                        source_stat["updated"] += 1
+                        total_updated += 1
+                    else:
+                        updates.append((None, int(row["member_vote_id"]), sid))
                 if (
                     unmatched_samples_left > 0
                     and len(unmatched_sample) < unmatched_samples_left
@@ -347,6 +370,8 @@ def backfill_senado_vote_details(
     timeout: int,
     snapshot_date: str | None,
     limit: int | None = None,
+    include_existing: bool = False,
+    only_reingest_when_member_votes: bool = False,
     legislature_filter: tuple[str, ...] | list[str] | None = None,
     vote_event_ids: tuple[str, ...] | list[str] | None = None,
     vote_event_min: str | None = None,
@@ -383,11 +408,14 @@ def backfill_senado_vote_details(
     FROM parl_vote_events e
     LEFT JOIN source_records sr ON sr.source_record_pk = e.source_record_pk
     WHERE e.source_id = 'senado_votaciones'
-      AND NOT EXISTS (
-        SELECT 1 FROM parl_vote_member_votes mv
-        WHERE mv.vote_event_id = e.vote_event_id
-      )
     """
+    if not bool(include_existing):
+        query += """
+          AND NOT EXISTS (
+            SELECT 1 FROM parl_vote_member_votes mv
+            WHERE mv.vote_event_id = e.vote_event_id
+          )
+        """
     params: list[Any] = []
     if vote_event_min is not None:
         query += " AND e.vote_event_id > ?"
@@ -570,24 +598,27 @@ def backfill_senado_vote_details(
     # a vote date and sometimes totals; we want those columns updated in `parl_vote_events`.
     records_with_votes = [r for r in records if isinstance(r.get("payload"), dict) and r["payload"].get("member_votes")]
     records_to_reingest: list[dict[str, Any]] = []
-    for r in records:
-        payload = r.get("payload")
-        if not isinstance(payload, dict):
-            continue
-        if payload.get("member_votes"):
-            records_to_reingest.append(r)
-            continue
-        if payload.get("vote_date"):
-            records_to_reingest.append(r)
-            continue
-        if (
-            payload.get("totals_present") is not None
-            or payload.get("totals_yes") is not None
-            or payload.get("totals_no") is not None
-            or payload.get("totals_abstain") is not None
-            or payload.get("totals_no_vote") is not None
-        ):
-            records_to_reingest.append(r)
+    if bool(only_reingest_when_member_votes):
+        records_to_reingest = list(records_with_votes)
+    else:
+        for r in records:
+            payload = r.get("payload")
+            if not isinstance(payload, dict):
+                continue
+            if payload.get("member_votes"):
+                records_to_reingest.append(r)
+                continue
+            if payload.get("vote_date"):
+                records_to_reingest.append(r)
+                continue
+            if (
+                payload.get("totals_present") is not None
+                or payload.get("totals_yes") is not None
+                or payload.get("totals_no") is not None
+                or payload.get("totals_abstain") is not None
+                or payload.get("totals_no_vote") is not None
+            ):
+                records_to_reingest.append(r)
 
     events_by_error: dict[str, int] = {}
     for rec in records_with_votes:
@@ -680,6 +711,7 @@ def _load_mandate_name_index(
     rows = conn.execute(
         """
         SELECT m.person_id, p.full_name, p.given_name, p.family_name,
+               p.territory_code AS person_territory_code,
                m.is_active,
                m.start_date, m.end_date,
                par.name AS party_name,
@@ -719,6 +751,7 @@ def _load_mandate_name_index(
                 "is_active": 1 if int(r["is_active"] or 0) == 1 else 0,
                 "start_date": start_date,
                 "end_date": end_date,
+                "person_territory_code": normalize_ws(str(r["person_territory_code"] or "")).strip(),
                 "party_keys": set[str](),
             }
             candidate_by_term[term_key] = person
@@ -795,6 +828,46 @@ def _parse_congreso_date(value: str | None) -> str | None:
         return parse_date_flexible(normalize_ws(str(value)))
     except Exception:  # noqa: BLE001
         return None
+
+
+def _split_trailing_parenthetical(text: str) -> tuple[str, str | None]:
+    """Split 'Name (Group)' while supporting nested parentheses in the group.
+
+    Examples:
+    - 'Foo, Bar (GP)' -> ('Foo, Bar', 'GP')
+    - 'Foo, Bar (GV (EAJ-PNV))' -> ('Foo, Bar', 'GV (EAJ-PNV)')
+    """
+    s = normalize_ws(text)
+    if not s.endswith(")"):
+        return s, None
+    depth = 0
+    for i in range(len(s) - 1, -1, -1):
+        ch = s[i]
+        if ch == ")":
+            depth += 1
+            continue
+        if ch == "(":
+            depth -= 1
+            if depth == 0:
+                name = s[:i].rstrip()
+                grp = s[i + 1 : -1].strip()
+                if name and grp:
+                    return name, grp
+                break
+    return s, None
+
+
+def _normalize_orador(raw: str | None) -> tuple[str | None, str | None, str | None, str | None]:
+    """Return (full_name, name_key, group_raw, group_key)."""
+    if not raw:
+        return None, None, None, None
+    text = normalize_ws(str(raw))
+    if not text:
+        return None, None, None, None
+    base, grp = _split_trailing_parenthetical(text)
+    full, name_key = _normalize_vote_member_name(base)
+    grp_key = normalize_key_part(grp) if grp else None
+    return full, name_key, grp, grp_key
 
 
 def _ingest_congreso_iniciativas(
@@ -904,6 +977,345 @@ def _ingest_congreso_iniciativas(
     upsert_parl_initiatives(conn, source_id=source_id, rows=upsert_rows)
     loaded = len(upsert_rows)
     return seen, loaded
+
+
+def _resolve_congreso_topic_set(
+    conn: sqlite3.Connection,
+    *,
+    legislature: str,
+) -> tuple[int, int | None, int | None, int | None] | None:
+    """Return (topic_set_id, institution_id, admin_level_id, territory_id) for Congreso/leg."""
+    row = conn.execute(
+        """
+        SELECT ts.topic_set_id, ts.institution_id, ts.admin_level_id, ts.territory_id
+        FROM topic_sets ts
+        JOIN institutions i ON i.institution_id = ts.institution_id
+        WHERE i.name = 'Congreso de los Diputados'
+          AND ts.legislature = ?
+        ORDER BY ts.is_active DESC, ts.topic_set_id DESC
+        LIMIT 1
+        """,
+        (legislature,),
+    ).fetchone()
+    if not row:
+        return None
+    return (
+        int(row["topic_set_id"]),
+        int(row["institution_id"]) if row["institution_id"] is not None else None,
+        int(row["admin_level_id"]) if row["admin_level_id"] is not None else None,
+        int(row["territory_id"]) if row["territory_id"] is not None else None,
+    )
+
+
+def _topic_id_map_for_set(conn: sqlite3.Connection, *, topic_set_id: int) -> dict[str, int]:
+    rows = conn.execute(
+        """
+        SELECT t.canonical_key, t.topic_id
+        FROM topic_set_topics st
+        JOIN topics t ON t.topic_id = st.topic_id
+        WHERE st.topic_set_id = ?
+        """,
+        (int(topic_set_id),),
+    ).fetchall()
+    out: dict[str, int] = {}
+    for r in rows:
+        key = normalize_ws(str(r["canonical_key"] or ""))
+        if not key:
+            continue
+        out[key] = int(r["topic_id"])
+    return out
+
+
+def _ingest_congreso_intervenciones(
+    conn: sqlite3.Connection,
+    *,
+    extracted_records: list[dict[str, Any]],
+    source_id: str,
+    snapshot_date: str | None,
+    now_iso: str,
+) -> tuple[int, int, dict[str, Any]]:
+    """Materialize 'says' evidence rows from Congreso interventions OpenData.
+
+    Contract: we only attach interventions to topics that are already present in an existing Congreso topic_set
+    (typically built via backfill-topic-analytics). This keeps Explorer navigation stable and avoids flooding
+    topic_set_topics beyond UI limits.
+    """
+    seen = 0
+    inserted = 0
+
+    skip: dict[str, int] = {
+        "bad_payload": 0,
+        "no_leg": 0,
+        "no_expediente": 0,
+        "no_topic_set": 0,
+        "topic_not_in_set": 0,
+        "no_orador": 0,
+        "no_person_match": 0,
+    }
+
+    # Discover legislatures in payloads (usually only Leg.15).
+    legs: list[str] = []
+    seen_legs: set[str] = set()
+    for rec in extracted_records:
+        payload = rec.get("payload") or {}
+        if not isinstance(payload, dict):
+            continue
+        leg = _congreso_leg_num(payload.get("LEGISLATURA"))
+        if not leg or leg in seen_legs:
+            continue
+        seen_legs.add(leg)
+        legs.append(leg)
+
+    leg_to_set: dict[str, tuple[int, int | None, int | None, int | None]] = {}
+    leg_to_topic_id: dict[str, dict[str, int]] = {}
+    for leg in legs:
+        resolved = _resolve_congreso_topic_set(conn, legislature=str(leg))
+        if not resolved:
+            continue
+        topic_set_id, inst_id, admin_id, terr_id = resolved
+        leg_to_set[str(leg)] = (topic_set_id, inst_id, admin_id, terr_id)
+        leg_to_topic_id[str(leg)] = _topic_id_map_for_set(conn, topic_set_id=topic_set_id)
+
+    mandate_index = _load_mandate_name_index(conn, "congreso_diputados")
+
+    evidence_type = "declared:intervention"
+    sr_payload_by_id: dict[str, str] = {}
+    ev_by_id: dict[str, dict[str, Any]] = {}
+
+    for rec in extracted_records:
+        seen += 1
+        payload = rec.get("payload") or {}
+        if not isinstance(payload, dict):
+            skip["bad_payload"] += 1
+            continue
+
+        leg = _congreso_leg_num(payload.get("LEGISLATURA"))
+        if not leg:
+            skip["no_leg"] += 1
+            continue
+
+        ts_info = leg_to_set.get(str(leg))
+        if not ts_info:
+            skip["no_topic_set"] += 1
+            continue
+        topic_set_id, institution_id, admin_level_id, territory_id = ts_info
+
+        expediente = normalize_ws(str(payload.get("NUMEXPEDIENTE") or "")) or None
+        if not expediente:
+            skip["no_expediente"] += 1
+            continue
+
+        initiative_id = f"congreso:leg{leg}:exp:{expediente}"
+        topic_id = leg_to_topic_id.get(str(leg), {}).get(initiative_id)
+        if not topic_id:
+            skip["topic_not_in_set"] += 1
+            continue
+
+        session_date = _parse_congreso_date(payload.get("SESION"))
+
+        orador_full, orador_key, orador_group, orador_group_key = _normalize_orador(payload.get("ORADOR"))
+        if not orador_key:
+            skip["no_orador"] += 1
+            continue
+        candidates = mandate_index.get(orador_key, [])
+        person_id, _reason = _pick_best_person_id(
+            candidates,
+            vote_date_norm=session_date,
+            group_norm=orador_group_key,
+        )
+        if person_id is None:
+            skip["no_person_match"] += 1
+            continue
+
+        enlace_diferido = normalize_ws(str(payload.get("ENLACEDIFERIDO") or "")) or None
+        interv_id = enlace_diferido.rsplit("/", 1)[-1] if enlace_diferido else None
+        if not interv_id:
+            interv_id = sha256_bytes(stable_json(payload).encode("utf-8"))[:24]
+
+        source_record_id = f"congreso:interv:{interv_id}:leg{leg}:exp:{expediente}"
+        sr_payload_by_id[source_record_id] = stable_json(payload)
+
+        source_url = (
+            normalize_ws(str(payload.get("ENLACETEXTOINTEGRO") or "")) or None
+        ) or (normalize_ws(str(payload.get("ENLACEPDF") or "")) or None) or enlace_diferido
+
+        start = normalize_ws(str(payload.get("INICIOINTERVENCION") or "")) or None
+        end = normalize_ws(str(payload.get("FININTERVENCION") or "")) or None
+        organo = normalize_ws(str(payload.get("ORGANO") or "")) or None
+        fase = normalize_ws(str(payload.get("FASE") or "")) or None
+        tipo = normalize_ws(str(payload.get("TIPOINTERVENCION") or "")) or None
+
+        excerpt_bits: list[str] = []
+        if orador_full:
+            excerpt_bits.append(orador_full)
+        elif payload.get("ORADOR"):
+            excerpt_bits.append(normalize_ws(str(payload.get("ORADOR"))))
+        if orador_group:
+            excerpt_bits.append(f"({orador_group})")
+        if organo:
+            excerpt_bits.append(organo)
+        if tipo:
+            excerpt_bits.append(tipo)
+        if fase:
+            excerpt_bits.append(f"fase:{fase}")
+        if start or end:
+            excerpt_bits.append(f"{start or ''}-{end or ''}".strip("-"))
+        excerpt = " | ".join([b for b in excerpt_bits if b])
+
+        ev_raw_payload = stable_json(
+            {
+                "intervencion_id": interv_id,
+                "initiative_id": initiative_id,
+                "numexpediente": expediente,
+                "session_date": session_date,
+                "start": start,
+                "end": end,
+                "orador_raw": normalize_ws(str(payload.get("ORADOR") or "")) or None,
+                "orador_name": orador_full,
+                "orador_group": orador_group,
+                "organo": organo,
+                "fase": fase,
+                "tipo": tipo,
+                "enlace_pdf": normalize_ws(str(payload.get("ENLACEPDF") or "")) or None,
+                "enlace_texto_integro": normalize_ws(str(payload.get("ENLACETEXTOINTEGRO") or "")) or None,
+                "enlace_diferido": enlace_diferido,
+                "enlace_video": normalize_ws(str(payload.get("ENLACEDESCARGADIRECTA") or "")) or None,
+            }
+        )
+
+        title = normalize_ws(str(payload.get("OBJETOINICIATIVA") or "")) or None
+        ev_by_id[source_record_id] = {
+            "topic_id": int(topic_id),
+            "topic_set_id": int(topic_set_id),
+            "person_id": int(person_id),
+            "institution_id": int(institution_id) if institution_id is not None else None,
+            "admin_level_id": int(admin_level_id) if admin_level_id is not None else None,
+            "territory_id": int(territory_id) if territory_id is not None else None,
+            "evidence_type": evidence_type,
+            "evidence_date": session_date,
+            "title": title,
+            "excerpt": excerpt,
+            # No stance classification yet; keep a neutral signal so the UI counts it as "says".
+            "stance": "unclear",
+            "polarity": 0,
+            "weight": 0.5,
+            "confidence": 0.2,
+            "topic_method": "initiative:expediente",
+            "stance_method": "intervention_metadata",
+            "initiative_id": initiative_id,
+            "source_url": source_url,
+            "source_record_id": source_record_id,
+            "raw_payload": ev_raw_payload,
+        }
+
+    evidence_rows = list(ev_by_id.values())
+    if not evidence_rows:
+        return seen, 0, {"skipped": skip, "evidence_type": evidence_type, "topic_sets": sorted(set(leg_to_set.keys()))}
+
+    # Idempotence: rebuild evidence for this source + each touched topic_set.
+    touched_set_ids = sorted({int(r["topic_set_id"]) for r in evidence_rows})
+
+    with conn:
+        for set_id in touched_set_ids:
+            conn.execute(
+                """
+                DELETE FROM topic_evidence
+                WHERE source_id = ?
+                  AND topic_set_id = ?
+                  AND evidence_type = ?
+                """,
+                (source_id, int(set_id), evidence_type),
+            )
+
+        sr_rows = [{"source_record_id": sid, "raw_payload": raw} for sid, raw in sr_payload_by_id.items()]
+        pk_map = upsert_source_records(conn, source_id=source_id, rows=sr_rows, snapshot_date=snapshot_date, now_iso=now_iso)
+
+        # If we already fetched Diario excerpts for some interventions, surface them in topic_evidence.excerpt.
+        # This keeps /explorer-temas auditable without extra joins or N+1 calls.
+        text_excerpt_by_pk: dict[int, str] = {}
+        sr_pks = sorted({int(pk) for pk in pk_map.values() if pk is not None})
+        if sr_pks:
+            chunk = 400
+            for i in range(0, len(sr_pks), chunk):
+                batch = sr_pks[i : i + chunk]
+                qmarks = ",".join("?" for _ in batch)
+                fetched = conn.execute(
+                    f"""
+                    SELECT source_record_pk, text_excerpt
+                    FROM text_documents
+                    WHERE source_id = ?
+                      AND source_record_pk IN ({qmarks})
+                      AND text_excerpt IS NOT NULL
+                      AND TRIM(text_excerpt) <> ''
+                    """,
+                    (source_id, *batch),
+                ).fetchall()
+                for row in fetched:
+                    try:
+                        pk = int(row["source_record_pk"])
+                    except Exception:  # noqa: BLE001
+                        continue
+                    ex = normalize_ws(str(row["text_excerpt"] or ""))
+                    if not ex:
+                        continue
+                    text_excerpt_by_pk[pk] = ex
+
+        params: list[tuple[Any, ...]] = []
+        for r in evidence_rows:
+            sr_pk = pk_map.get(str(r["source_record_id"]))
+            if sr_pk is None:
+                continue
+            excerpt = text_excerpt_by_pk.get(int(sr_pk)) or r.get("excerpt")
+            params.append(
+                (
+                    int(r["topic_id"]),
+                    int(r["topic_set_id"]),
+                    int(r["person_id"]),
+                    None,  # mandate_id
+                    r["institution_id"],
+                    r["admin_level_id"],
+                    r["territory_id"],
+                    evidence_type,
+                    r.get("evidence_date"),
+                    r.get("title"),
+                    excerpt[:800] if isinstance(excerpt, str) else excerpt,
+                    r.get("stance"),
+                    r.get("polarity"),
+                    r.get("weight"),
+                    r.get("confidence"),
+                    r.get("topic_method"),
+                    r.get("stance_method"),
+                    None,  # vote_event_id
+                    r.get("initiative_id"),
+                    source_id,
+                    r.get("source_url"),
+                    int(sr_pk),
+                    snapshot_date,
+                    r.get("raw_payload") or "{}",
+                    now_iso,
+                    now_iso,
+                )
+            )
+
+        conn.executemany(
+            """
+            INSERT INTO topic_evidence (
+              topic_id, topic_set_id,
+              person_id, mandate_id,
+              institution_id, admin_level_id, territory_id,
+              evidence_type, evidence_date, title, excerpt,
+              stance, polarity, weight, confidence,
+              topic_method, stance_method,
+              vote_event_id, initiative_id,
+              source_id, source_url, source_record_pk, source_snapshot_date,
+              raw_payload, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            params,
+        )
+        inserted = len(params)
+
+    return seen, inserted, {"skipped": skip, "topic_sets_touched": touched_set_ids, "evidence_type": evidence_type}
 
 
 def _ingest_senado_iniciativas(
@@ -1101,7 +1513,6 @@ def _ingest_senado_votaciones(
         loaded += 1
 
         member_votes = payload.get("member_votes") or []
-        conn.execute("DELETE FROM parl_vote_member_votes WHERE vote_event_id = ?", (vote_event_id,))
         member_rows: list[tuple[Any, ...]] = []
         vote_date_norm = _normalize_mandate_date(str(payload.get("vote_date") or ""))
         for mv in member_votes:
@@ -1148,6 +1559,10 @@ def _ingest_senado_votaciones(
                 )
             )
 
+        # We intentionally avoid deleting existing member votes here:
+        # - Refresh/backfills want to preserve previously resolved `person_id` values.
+        # - In partial/failed detail runs (404/no-match/etc.), deleting would wipe previously ingested data.
+        # The UPSERT below updates names/choices while keeping old person_id when the new one is NULL.
         if member_rows:
             conn.executemany(
                 """
@@ -1200,6 +1615,33 @@ def ingest_one_source(
             url_override=url_override,
             strict_network=strict_network,
             options=options,
+        )
+
+        # Keep per-run fetch metadata (used by ops dashboards).
+        conn.execute(
+            """
+            INSERT INTO run_fetches (
+              run_id, source_id, source_url, fetched_at, raw_path, content_sha256, content_type, bytes
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(run_id) DO UPDATE SET
+              source_id=excluded.source_id,
+              source_url=excluded.source_url,
+              fetched_at=excluded.fetched_at,
+              raw_path=excluded.raw_path,
+              content_sha256=excluded.content_sha256,
+              content_type=excluded.content_type,
+              bytes=excluded.bytes
+            """,
+            (
+                run_id,
+                source_id,
+                extracted.source_url,
+                extracted.fetched_at,
+                str(extracted.raw_path),
+                extracted.content_sha256,
+                extracted.content_type,
+                extracted.bytes,
+            ),
         )
 
         conn.execute(
@@ -1261,6 +1703,54 @@ def ingest_one_source(
                 {
                     "note": extracted.note,
                     "initiatives_loaded": rec_loaded,
+                },
+                ensure_ascii=True,
+                sort_keys=True,
+            )
+            finish_run(
+                conn,
+                run_id=run_id,
+                status="ok",
+                message=message,
+                records_seen=rec_seen,
+                records_loaded=rec_loaded,
+                fetched_at=extracted.fetched_at,
+                raw_path=extracted.raw_path,
+            )
+            return rec_seen, rec_loaded, message
+
+        if source_id == "congreso_intervenciones":
+            rec_seen, rec_loaded, info = _ingest_congreso_intervenciones(
+                conn,
+                extracted_records=extracted.records,
+                source_id=source_id,
+                snapshot_date=snapshot_date,
+                now_iso=now_iso,
+            )
+            if strict_network and rec_seen > 0 and rec_loaded == 0:
+                raise RuntimeError(
+                    "strict-network abortado: records_seen > 0 y records_loaded == 0 "
+                    f"({source_id}: seen={rec_seen}, loaded={rec_loaded})"
+                )
+
+            min_loaded = SOURCE_CONFIG.get(source_id, {}).get("min_records_loaded_strict")
+            if (
+                strict_network
+                and extracted.note.startswith("network")
+                and isinstance(min_loaded, int)
+                and rec_loaded < min_loaded
+            ):
+                raise RuntimeError(
+                    f"strict-network abortado: records_loaded < min_records_loaded_strict "
+                    f"({source_id}: loaded={rec_loaded}, min={min_loaded})"
+                )
+
+            conn.commit()
+            message = json.dumps(
+                {
+                    "note": extracted.note,
+                    "evidence_inserted": rec_loaded,
+                    "info": info,
                 },
                 ensure_ascii=True,
                 sort_keys=True,

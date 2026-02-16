@@ -6,7 +6,9 @@ import sqlite3
 import unicodedata
 from typing import Any
 
-from etl.politicos_es.util import normalize_ws, now_utc_iso, stable_json
+from etl.politicos_es.util import normalize_ws, now_utc_iso, sha256_bytes, stable_json
+
+from .db import upsert_parl_initiatives, upsert_source_records
 
 
 EXPEDIENTE_RE = re.compile(r"\b(?P<tipo>\d{3})\s*/\s*(?P<num>\d{1,6})(?:\s*/\s*(?P<sub>\d{1,4}))?\b")
@@ -18,6 +20,13 @@ CONGRESO_LEY_EXPEDIENTE_RE = re.compile(
 )
 TITLE_PREFIX_INDEX_CHARS = 24
 TITLE_PREFIX_MIN_CHARS = 40
+DERIVED_INITIATIVE_SUPERTYPE = "derived"
+
+
+def _congreso_derived_initiative_id(*, legislature: str | None, title_key: str) -> str:
+    leg = normalize_ws(str(legislature or "")) or "unknown"
+    digest = sha256_bytes(title_key.encode("utf-8"))[:24]
+    return f"congreso:leg{leg}:derived:{digest}"
 
 
 def _asciify(value: str | None) -> str:
@@ -164,7 +173,7 @@ def link_congreso_votes_to_initiatives(
             init_title_key[initiative_id] = title_key
 
     q = """
-    SELECT vote_event_id, legislature, expediente_text, subgroup_title, subgroup_text, title
+    SELECT vote_event_id, legislature, source_url, expediente_text, subgroup_title, subgroup_text, title
     FROM parl_vote_events
     WHERE source_id = 'congreso_votaciones'
     ORDER BY vote_date, session_number, vote_number
@@ -177,6 +186,9 @@ def link_congreso_votes_to_initiatives(
     inserted = 0
     now_iso = now_utc_iso()
     link_rows: list[dict[str, Any]] = []
+    derived_by_id: dict[str, dict[str, Any]] = {}
+    derived_sr_rows: list[dict[str, Any]] = []
+    derived_created = 0
 
     for row in vote_rows:
         seen += 1
@@ -347,7 +359,107 @@ def link_congreso_votes_to_initiatives(
                             "updated_at": now_iso,
                         }
 
+        # If we couldn't link to an official initiative, derive a stable "initiative" key from
+        # the most descriptive text available. This is explicit (supertype='derived') and exists
+        # mainly to keep votes groupable/topic-able when Congreso OpenData doesn't publish the
+        # underlying initiative dataset (e.g., PNLs, certain motions).
+        if len(best_links) == 0:
+            source_field = None
+            best_title_key = None
+            best_raw_title = None
+            for field, text in haystacks:
+                if not text:
+                    continue
+                keys = _congreso_vote_title_key_variants(text)
+                if not keys:
+                    continue
+                source_field = field
+                best_title_key = keys[0]
+                best_raw_title = normalize_ws(str(text).split("\n", 1)[0])
+                break
+
+            if best_title_key:
+                derived_id = _congreso_derived_initiative_id(legislature=leg, title_key=best_title_key)
+                if derived_id not in derived_by_id:
+                    source_url = normalize_ws(str(row["source_url"] or "")) or None
+                    if not source_url:
+                        if vote_event_id.startswith("url:"):
+                            source_url = vote_event_id[4:]
+                        elif vote_event_id.lower().startswith("http"):
+                            source_url = vote_event_id
+
+                    raw_payload = stable_json(
+                        {
+                            "derived_from": "congreso_votaciones",
+                            "legislature": leg,
+                            "source_field": source_field,
+                            "title_key": best_title_key,
+                        }
+                    )
+                    derived_sr_rows.append({"source_record_id": derived_id, "raw_payload": raw_payload})
+                    derived_by_id[derived_id] = {
+                        "initiative_id": derived_id,
+                        "legislature": leg,
+                        "expediente": f"derived:{sha256_bytes(best_title_key.encode('utf-8'))[:24]}",
+                        "supertype": DERIVED_INITIATIVE_SUPERTYPE,
+                        "grouping": "Derived from Congreso votaciones",
+                        "type": None,
+                        "title": best_raw_title or derived_id,
+                        "presented_date": None,
+                        "qualified_date": None,
+                        "author_text": None,
+                        "procedure_type": None,
+                        "result_text": None,
+                        "current_status": None,
+                        "competent_committee": None,
+                        "deadlines_text": None,
+                        "rapporteurs_text": None,
+                        "processing_text": None,
+                        "related_initiatives_text": None,
+                        "links_bocg_json": None,
+                        "links_ds_json": None,
+                        "source_id": "congreso_votaciones",
+                        "source_url": source_url,
+                        "source_record_pk": None,  # resolved below via source_records
+                        "source_snapshot_date": None,
+                        "raw_payload": raw_payload,
+                        "created_at": now_iso,
+                        "updated_at": now_iso,
+                    }
+
+                evidence = stable_json(
+                    {
+                        "field": source_field,
+                        "title_key": best_title_key,
+                        "legislature": leg,
+                        "derived": True,
+                    }
+                )
+                best_links[derived_id] = {
+                    "vote_event_id": vote_event_id,
+                    "initiative_id": derived_id,
+                    "link_method": "derived_title_key",
+                    "confidence": 1.0,
+                    "evidence_json": evidence,
+                    "created_at": now_iso,
+                    "updated_at": now_iso,
+                }
+
         link_rows.extend(best_links.values())
+
+    if not dry_run and derived_by_id:
+        rows = list(derived_by_id.values())
+        pk_map = upsert_source_records(
+            conn,
+            source_id="congreso_votaciones",
+            rows=derived_sr_rows,
+            snapshot_date=None,
+            now_iso=now_iso,
+        )
+        for row in rows:
+            row["source_record_pk"] = pk_map.get(row["initiative_id"])
+        upsert_parl_initiatives(conn, source_id="congreso_votaciones", rows=rows)
+        derived_created = len(rows)
 
     if not dry_run and link_rows:
         conn.executemany(
@@ -371,6 +483,7 @@ def link_congreso_votes_to_initiatives(
         "events_seen": seen,
         "links_prepared": len(link_rows),
         "links_written": 0 if dry_run else inserted,
+        "derived_initiatives": 0 if dry_run else derived_created,
         "dry_run": bool(dry_run),
     }
 

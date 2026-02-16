@@ -17,6 +17,16 @@ from .pipeline import (
     backfill_vote_member_person_ids,
     ingest_one_source,
 )
+from .topic_analytics import backfill_topic_analytics_from_votes
+from .text_documents import backfill_text_documents_from_topic_evidence
+from .declared_stance import backfill_declared_stance_from_topic_evidence
+from .declared_positions import backfill_topic_positions_from_declared_evidence
+from .combined_positions import backfill_topic_positions_combined
+from .review_queue import (
+    apply_topic_evidence_review_decision,
+    build_topic_evidence_review_report,
+    resolve_as_of_date,
+)
 from etl.politicos_es.util import normalize_ws
 from .quality import (
     compute_initiative_quality_kpis,
@@ -56,14 +66,23 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p_ing.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga de detalle Senado (opcional)")
     p_ing.add_argument("--senado-detail-host", default=None, help="Host base para ses_<n>.xml (default videoservlet)")
-    p_ing.add_argument("--senado-skip-details", action="store_true", help="No intentar enriquecer detalle por sesion en Senado")
+    p_ing.add_argument(
+        "--senado-skip-details",
+        action="store_true",
+        default=None,
+        help=(
+            "No intentar enriquecer detalle por sesion en Senado. "
+            "Por defecto (si no se pasa), se activa modo auto: "
+            "solo se intenta detalle si hay --senado-detail-dir o --senado-detail-cookie."
+        ),
+    )
     p_ing.add_argument("--since-date", default=None, help="Filtra por fecha >= YYYY-MM-DD (usa path yyyymmdd)")
     p_ing.add_argument("--until-date", default=None, help="Filtra por fecha <= YYYY-MM-DD (usa path yyyymmdd)")
 
     p_stats = sub.add_parser("stats", help="Metricas rapidas")
     p_stats.add_argument("--db", default=str(DEFAULT_DB))
 
-    p_link = sub.add_parser("link-votes", help="Link votes -> initiatives/topics (best-effort)")
+    p_link = sub.add_parser("link-votes", help="Link votes -> initiatives (best-effort)")
     p_link.add_argument("--db", default=str(DEFAULT_DB))
     p_link.add_argument("--max-events", type=int, default=None)
     p_link.add_argument("--dry-run", action="store_true")
@@ -154,6 +173,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p_backfill_senado.add_argument("--legislature", default=None, help="Filtro por legislatura (ej: 15,14)")
     p_backfill_senado.add_argument("--vote-event-ids", default=None, help="CSV de vote_event_id para limitar")
+    p_backfill_senado.add_argument(
+        "--include-existing",
+        action="store_true",
+        help="Reprocesar también eventos que ya tienen member_votes (refresh de nombres/IDs)",
+    )
     p_backfill_senado.add_argument("--dry-run", action="store_true", help="Simula cambios sin reescribir DB")
     p_backfill_senado.add_argument(
         "--senado-detail-dir",
@@ -176,6 +200,198 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         type=int,
         default=8,
         help="Workers paralelos para descargar/parsear detalles Senado (>=1)",
+    )
+
+    p_refresh_senado = sub.add_parser(
+        "refresh-senado-member-votes",
+        help="Refrescar member_votes del Senado re-parseando ses_<n>_<m>.xml en paginas (corrige nombres/apellidos).",
+    )
+    p_refresh_senado.add_argument("--db", default=str(DEFAULT_DB))
+    p_refresh_senado.add_argument("--timeout", type=int, default=int(DEFAULT_TIMEOUT))
+    p_refresh_senado.add_argument("--snapshot-date", default=None, help="YYYY-MM-DD")
+    p_refresh_senado.add_argument("--legislature", default=None, help="Filtro por legislatura (ej: 14)")
+    p_refresh_senado.add_argument(
+        "--page-size",
+        type=int,
+        default=200,
+        help="Numero de eventos por pagina (controla memoria/tiempo)",
+    )
+    p_refresh_senado.add_argument(
+        "--max-pages",
+        type=int,
+        default=0,
+        help="Maximo de paginas (0 = sin limite)",
+    )
+    p_refresh_senado.add_argument(
+        "--start-after",
+        default=None,
+        help="vote_event_id para paginar (procesa > este valor)",
+    )
+    p_refresh_senado.add_argument(
+        "--senado-detail-dir",
+        default=os.getenv("SENADO_DETAIL_DIR") or None,
+        help="Dir local con ses_<n>.xml para enriquecer votos (cache)",
+    )
+    p_refresh_senado.add_argument("--senado-detail-cookie", default=None, help="Cookie para descarga detalle Senado (opcional)")
+    p_refresh_senado.add_argument(
+        "--senado-detail-host",
+        default=None,
+        help="Host base para ses_<n>.xml (default https://www.senado.es)",
+    )
+    p_refresh_senado.add_argument(
+        "--detail-workers",
+        type=int,
+        default=8,
+        help="Workers paralelos para descargar/parsear detalles Senado (>=1)",
+    )
+    p_refresh_senado.add_argument("--dry-run", action="store_true", help="Simula cambios sin reescribir DB")
+
+    p_topics = sub.add_parser(
+        "backfill-topic-analytics",
+        help="Materializar topic_sets/topics/evidence/positions desde votaciones (auto, reproducible)",
+    )
+    p_topics.add_argument("--db", default=str(DEFAULT_DB))
+    p_topics.add_argument(
+        "--vote-source-ids",
+        default="congreso_votaciones,senado_votaciones",
+        help="CSV de source_id de votaciones para construir topic_sets",
+    )
+    p_topics.add_argument(
+        "--legislature",
+        default="latest",
+        help="Legislatura a usar (ej: 15) o 'latest' (por source_id)",
+    )
+    p_topics.add_argument("--as-of-date", default=None, help="YYYY-MM-DD (default: $SNAPSHOT_DATE o max vote_date)")
+    p_topics.add_argument("--max-topics", type=int, default=200, help="Max temas por topic_set (top stakes_score)")
+    p_topics.add_argument("--high-stakes-top", type=int, default=60, help="Top N marcados is_high_stakes=1")
+    p_topics.add_argument(
+        "--taxonomy-seed",
+        default="etl/data/seeds/topic_taxonomy_es.json",
+        help="Ruta opcional a un JSON de seed/curation para topic_sets (si no existe, se ignora)",
+    )
+    p_topics.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
+    p_text = sub.add_parser(
+        "backfill-text-documents",
+        help="Descargar y materializar evidencia textual (metadata + excerpt) desde topic_evidence (declared:*)",
+    )
+    p_text.add_argument("--db", default=str(DEFAULT_DB))
+    p_text.add_argument("--source-id", default="congreso_intervenciones", help="source_id que genero la evidencia declarada")
+    p_text.add_argument("--raw-dir", default=str(DEFAULT_RAW_DIR), help="Directorio raw (para guardar HTML/PDF)")
+    p_text.add_argument("--timeout", type=int, default=int(DEFAULT_TIMEOUT))
+    p_text.add_argument("--limit", type=int, default=200)
+    p_text.add_argument(
+        "--only-missing",
+        action="store_true",
+        help="Solo procesa source_record_pk que no existan aun en text_documents",
+    )
+    p_text.add_argument(
+        "--from-dir",
+        default=None,
+        help="Directorio local con ficheros textdoc_<source_record_pk>.(html|pdf) para reproducibilidad (opcional)",
+    )
+    p_text.add_argument("--strict-network", action="store_true", help="Abortar en el primer fallo de red/parse")
+    p_text.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
+    p_stance = sub.add_parser(
+        "backfill-declared-stance",
+        help="Inferir stance para evidencia declarada (regex v2 conservador) y alimentar cola de revision",
+    )
+    p_stance.add_argument("--db", default=str(DEFAULT_DB))
+    p_stance.add_argument("--source-id", default="congreso_intervenciones", help="source_id que genero la evidencia declarada")
+    p_stance.add_argument("--limit", type=int, default=0, help="0 = sin limite")
+    p_stance.add_argument(
+        "--min-auto-confidence",
+        type=float,
+        default=0.62,
+        help="Umbral minimo para auto-escribir stance (casos por debajo van a review queue)",
+    )
+    p_stance.add_argument(
+        "--skip-review-queue",
+        action="store_true",
+        help="No escribir/actualizar topic_evidence_reviews en esta corrida",
+    )
+    p_stance.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
+    p_decl_pos = sub.add_parser(
+        "backfill-declared-positions",
+        help="Computar topic_positions desde evidencia declarada con stance signal (says)",
+    )
+    p_decl_pos.add_argument("--db", default=str(DEFAULT_DB))
+    p_decl_pos.add_argument("--source-id", default="congreso_intervenciones")
+    p_decl_pos.add_argument("--as-of-date", default=None, help="YYYY-MM-DD (default: $SNAPSHOT_DATE)")
+    p_decl_pos.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
+    p_comb_pos = sub.add_parser(
+        "backfill-combined-positions",
+        help="Computar topic_positions combinadas (KISS: votes si existe; si no, declared)",
+    )
+    p_comb_pos.add_argument("--db", default=str(DEFAULT_DB))
+    p_comb_pos.add_argument("--as-of-date", default=None, help="YYYY-MM-DD (default: $SNAPSHOT_DATE)")
+    p_comb_pos.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
+    p_review_queue = sub.add_parser(
+        "review-queue",
+        help="Ver cola de revision de evidencia declarada (topic_evidence_reviews)",
+    )
+    p_review_queue.add_argument("--db", default=str(DEFAULT_DB))
+    p_review_queue.add_argument("--source-id", default="congreso_intervenciones")
+    p_review_queue.add_argument(
+        "--status",
+        default="pending",
+        choices=("pending", "resolved", "ignored", "all"),
+        help="Filtrar por estado de revision",
+    )
+    p_review_queue.add_argument(
+        "--review-reason",
+        default="",
+        help="Filtro opcional por review_reason (missing_text|no_signal|low_confidence|conflicting_signal)",
+    )
+    p_review_queue.add_argument("--topic-set-id", type=int, default=None)
+    p_review_queue.add_argument("--topic-id", type=int, default=None)
+    p_review_queue.add_argument("--person-id", type=int, default=None)
+    p_review_queue.add_argument("--limit", type=int, default=50)
+    p_review_queue.add_argument("--offset", type=int, default=0)
+
+    p_review_decision = sub.add_parser(
+        "review-decision",
+        help="Aplicar decision manual (resolved/ignored) sobre topic_evidence_reviews por evidence_id",
+    )
+    p_review_decision.add_argument("--db", default=str(DEFAULT_DB))
+    p_review_decision.add_argument("--source-id", default="congreso_intervenciones")
+    p_review_decision.add_argument(
+        "--evidence-ids",
+        required=True,
+        help="CSV de evidence_id (ej: 123,124,130)",
+    )
+    p_review_decision.add_argument(
+        "--status",
+        default="resolved",
+        choices=("resolved", "ignored"),
+    )
+    p_review_decision.add_argument(
+        "--final-stance",
+        default=None,
+        choices=("support", "oppose", "mixed", "unclear", "no_signal"),
+        help="Stance final (solo cuando status=resolved). Si se omite, usa suggested_stance/evidence_stance",
+    )
+    p_review_decision.add_argument(
+        "--final-confidence",
+        type=float,
+        default=None,
+        help="Confidence final 0..1 (solo status=resolved)",
+    )
+    p_review_decision.add_argument("--note", default="", help="Nota opcional de revision")
+    p_review_decision.add_argument("--dry-run", action="store_true", help="Simula sin escribir")
+    p_review_decision.add_argument(
+        "--recompute",
+        action="store_true",
+        help="Recalcula topic_positions declared+combined al finalizar (requiere --as-of-date o $SNAPSHOT_DATE o existente)",
+    )
+    p_review_decision.add_argument(
+        "--as-of-date",
+        default=None,
+        help="YYYY-MM-DD para recompute (si no se pasa, usa $SNAPSHOT_DATE o MAX(topic_positions.as_of_date))",
     )
 
     return p.parse_args(argv)
@@ -221,6 +437,24 @@ def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
             continue
         seen.add(v)
         out.append(v)
+    return tuple(out)
+
+
+def _parse_int_ids(csv_value: str) -> tuple[int, ...]:
+    vals = [x.strip() for x in str(csv_value).split(",")]
+    out: list[int] = []
+    seen: set[int] = set()
+    for v in vals:
+        if not v:
+            continue
+        try:
+            n = int(v)
+        except ValueError:
+            continue
+        if n <= 0 or n in seen:
+            continue
+        seen.add(n)
+        out.append(n)
     return tuple(out)
 
 
@@ -454,6 +688,7 @@ def main(argv: list[str] | None = None) -> int:
                     timeout=int(args.timeout),
                     snapshot_date=args.snapshot_date,
                     limit=max_events,
+                    include_existing=bool(args.include_existing),
                     legislature_filter=legislation,
                     vote_event_ids=event_ids,
                     senado_detail_dir=args.senado_detail_dir,
@@ -500,6 +735,7 @@ def main(argv: list[str] | None = None) -> int:
                         timeout=int(args.timeout),
                         snapshot_date=args.snapshot_date,
                         limit=call_limit,
+                        include_existing=bool(args.include_existing),
                         vote_event_min=cursor_after,
                         legislature_filter=legislation,
                         vote_event_ids=event_ids,
@@ -567,6 +803,279 @@ def main(argv: list[str] | None = None) -> int:
                     stop_reason = "unknown"
                 aggregate["stop_reason"] = stop_reason
                 result = aggregate
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "refresh-senado-member-votes":
+        page_size = int(args.page_size)
+        if page_size <= 0:
+            raise SystemExit("page-size debe ser > 0")
+        max_pages = int(args.max_pages)
+        if max_pages < 0:
+            raise SystemExit("max-pages debe ser >= 0")
+        detail_workers = int(args.detail_workers)
+        if detail_workers <= 0:
+            raise SystemExit("detail-workers debe ser > 0")
+
+        legislation = (
+            _parse_source_ids(str(args.legislature))
+            if args.legislature is not None and str(args.legislature).strip()
+            else tuple()
+        )
+        cursor_after = normalize_ws(str(args.start_after or "")) or None
+
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+
+            aggregate: dict[str, Any] = {
+                "source_id": "senado_votaciones",
+                "dry_run": bool(args.dry_run),
+                "include_existing": True,
+                "page_size": page_size,
+                "max_pages": max_pages,
+                "pages_run": 0,
+                "cursor_after_start": cursor_after,
+                "cursor_after_end": cursor_after,
+                "events_considered": 0,
+                "events_reingested": 0,
+                "member_votes_loaded": 0,
+                "detail_blocked": False,
+                "detail_failures": [],
+                "errors_summary": {},
+                "last_vote_event_id": None,
+            }
+            details_seen: set[str] = set()
+            pages_run = 0
+
+            while True:
+                if max_pages and pages_run >= max_pages:
+                    break
+                pages_run += 1
+
+                page = backfill_senado_vote_details(
+                    conn,
+                    timeout=int(args.timeout),
+                    snapshot_date=args.snapshot_date,
+                    limit=page_size,
+                    include_existing=True,
+                    only_reingest_when_member_votes=True,
+                    vote_event_min=cursor_after,
+                    legislature_filter=legislation,
+                    senado_detail_dir=args.senado_detail_dir,
+                    senado_detail_host=args.senado_detail_host,
+                    senado_detail_cookie=args.senado_detail_cookie,
+                    senado_skip_details=False,
+                    dry_run=bool(args.dry_run),
+                    detail_workers=detail_workers,
+                )
+
+                aggregate["pages_run"] = pages_run
+                aggregate["detail_blocked"] = bool(aggregate["detail_blocked"] or page.get("detail_blocked"))
+                aggregate["events_considered"] += int(page.get("events_considered", 0))
+                aggregate["events_reingested"] += int(page.get("events_reingested", 0))
+                aggregate["member_votes_loaded"] += int(page.get("member_votes_loaded", 0))
+                aggregate["last_vote_event_id"] = page.get("last_vote_event_id")
+
+                for key, value in (page.get("errors_summary") or {}).items():
+                    aggregate["errors_summary"][str(key)] = int(aggregate["errors_summary"].get(str(key), 0)) + int(value)
+                for item in page.get("detail_failures", []) or []:
+                    normalized = normalize_ws(str(item))
+                    if normalized:
+                        details_seen.add(normalized)
+
+                next_cursor = page.get("last_vote_event_id")
+                if isinstance(next_cursor, str) and next_cursor.strip():
+                    cursor_after = next_cursor
+                    aggregate["cursor_after_end"] = cursor_after
+                else:
+                    break
+
+                if int(page.get("events_considered", 0)) <= 0:
+                    break
+                if bool(page.get("detail_blocked")) and int(page.get("events_reingested", 0)) <= 0:
+                    break
+
+            aggregate["detail_failures"] = sorted(details_seen)
+            result = aggregate
+        finally:
+            conn.close()
+
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-topic-analytics":
+        vote_source_ids = _validate_vote_source_ids(
+            _parse_source_ids(str(args.vote_source_ids)),
+            for_command="backfill-topic-analytics",
+        )
+        as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
+        seed_path = str(getattr(args, "taxonomy_seed", "") or "").strip()
+        seed = Path(seed_path) if seed_path else None
+        if seed is not None and not seed.exists():
+            seed = None
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_topic_analytics_from_votes(
+                conn,
+                vote_source_ids=vote_source_ids,
+                legislature=str(args.legislature or "latest"),
+                as_of_date=str(as_of_date) if as_of_date else None,
+                max_topics=int(args.max_topics),
+                high_stakes_top=int(args.high_stakes_top),
+                taxonomy_seed_path=seed,
+                dry_run=bool(args.dry_run),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-text-documents":
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_text_documents_from_topic_evidence(
+                conn,
+                source_id=str(args.source_id),
+                raw_dir=Path(args.raw_dir),
+                timeout=int(args.timeout),
+                limit=int(args.limit),
+                only_missing=bool(args.only_missing),
+                from_dir=Path(args.from_dir) if args.from_dir else None,
+                strict_network=bool(args.strict_network),
+                dry_run=bool(args.dry_run),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-declared-stance":
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_declared_stance_from_topic_evidence(
+                conn,
+                source_id=str(args.source_id),
+                limit=int(args.limit),
+                min_auto_confidence=float(args.min_auto_confidence),
+                enable_review_queue=not bool(args.skip_review_queue),
+                dry_run=bool(args.dry_run),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-declared-positions":
+        as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
+        if not as_of_date:
+            raise SystemExit("backfill-declared-positions: falta --as-of-date o $SNAPSHOT_DATE")
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_topic_positions_from_declared_evidence(
+                conn,
+                source_id=str(args.source_id),
+                as_of_date=str(as_of_date),
+                dry_run=bool(args.dry_run),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-combined-positions":
+        as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
+        if not as_of_date:
+            raise SystemExit("backfill-combined-positions: falta --as-of-date o $SNAPSHOT_DATE")
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_topic_positions_combined(
+                conn,
+                as_of_date=str(as_of_date),
+                dry_run=bool(args.dry_run),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "review-queue":
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = build_topic_evidence_review_report(
+                conn,
+                source_id=str(args.source_id),
+                status=str(args.status),
+                review_reason=str(args.review_reason),
+                topic_set_id=int(args.topic_set_id) if args.topic_set_id is not None else None,
+                topic_id=int(args.topic_id) if args.topic_id is not None else None,
+                person_id=int(args.person_id) if args.person_id is not None else None,
+                limit=int(args.limit),
+                offset=int(args.offset),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "review-decision":
+        evidence_ids = _parse_int_ids(str(args.evidence_ids))
+        if not evidence_ids:
+            raise SystemExit("review-decision: evidence-ids vacio o invalido")
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = apply_topic_evidence_review_decision(
+                conn,
+                evidence_ids=evidence_ids,
+                status=str(args.status),
+                final_stance=str(args.final_stance) if args.final_stance is not None else None,
+                final_confidence=float(args.final_confidence) if args.final_confidence is not None else None,
+                note=str(args.note),
+                source_id=str(args.source_id),
+                dry_run=bool(args.dry_run),
+            )
+            if bool(args.recompute) and not bool(args.dry_run):
+                as_of_date = resolve_as_of_date(
+                    conn,
+                    args.as_of_date or os.getenv("SNAPSHOT_DATE") or None,
+                )
+                if not as_of_date:
+                    raise SystemExit(
+                        "review-decision --recompute: no se pudo resolver as_of_date (pasa --as-of-date o genera topic_positions)"
+                    )
+                recompute_declared = backfill_topic_positions_from_declared_evidence(
+                    conn,
+                    source_id=str(args.source_id),
+                    as_of_date=str(as_of_date),
+                    dry_run=False,
+                )
+                recompute_combined = backfill_topic_positions_combined(
+                    conn,
+                    as_of_date=str(as_of_date),
+                    dry_run=False,
+                )
+                result["recompute"] = {
+                    "as_of_date": str(as_of_date),
+                    "declared": recompute_declared,
+                    "combined": recompute_combined,
+                }
         finally:
             conn.close()
         print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
