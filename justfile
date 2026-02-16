@@ -25,6 +25,10 @@ gh_pages_dir := env_var_or_default("GH_PAGES_DIR", "docs/gh-pages")
 gh_pages_remote := env_var_or_default("GH_PAGES_REMOTE", "origin")
 gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
 gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
+topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds/topic_taxonomy_es.json")
+textdoc_limit := env_var_or_default("TEXTDOC_LIMIT", "900")
+textdoc_timeout := env_var_or_default("TEXTDOC_TIMEOUT", "25")
+declared_min_auto_confidence := env_var_or_default("DECLARED_MIN_AUTO_CONFIDENCE", "0.62")
 
 default:
   @just --list
@@ -82,6 +86,9 @@ etl-stats:
 etl-backfill-normalized:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-normalized --db {{db_path}}"
 
+etl-backfill-territories:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-territories --db {{db_path}}"
+
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 
@@ -108,6 +115,9 @@ parl-extract-congreso-votaciones:
 
 parl-extract-congreso-iniciativas:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_iniciativas --snapshot-date {{snapshot_date}} --strict-network"
+
+parl-extract-congreso-intervenciones:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_intervenciones --snapshot-date {{snapshot_date}} --strict-network"
 
 parl-extract-senado-iniciativas:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_iniciativas --snapshot-date {{snapshot_date}} --strict-network"
@@ -159,6 +169,36 @@ parl-backfill-senado-details:
 parl-link-votes:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
 
+parl-backfill-topic-analytics:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db {{db_path}} --as-of-date {{snapshot_date}} --taxonomy-seed {{topic_taxonomy_seed}}"
+
+parl-backfill-text-documents:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-text-documents --db {{db_path}} --source-id congreso_intervenciones --limit {{textdoc_limit}} --only-missing --timeout {{textdoc_timeout}}"
+
+parl-backfill-declared-stance:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db {{db_path}} --source-id congreso_intervenciones --min-auto-confidence {{declared_min_auto_confidence}}"
+
+parl-backfill-declared-positions:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db {{db_path}} --source-id congreso_intervenciones --as-of-date {{snapshot_date}}"
+
+parl-backfill-combined-positions:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-combined-positions --db {{db_path}} --as-of-date {{snapshot_date}}"
+
+parl-review-queue:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py review-queue --db {{db_path}} --source-id congreso_intervenciones --status pending --limit 50"
+
+parl-review-resolve evidence_id stance:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py review-decision --db {{db_path}} --source-id congreso_intervenciones --evidence-ids {{evidence_id}} --status resolved --final-stance {{stance}} --recompute --as-of-date {{snapshot_date}}"
+
+parl-temas-pipeline:
+  just parl-link-votes
+  just parl-backfill-topic-analytics
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_intervenciones --snapshot-date {{snapshot_date}} --strict-network"
+  just parl-backfill-text-documents
+  just parl-backfill-declared-stance
+  just parl-backfill-declared-positions
+  just parl-backfill-combined-positions
+
 parl-quality-report:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}}"
 
@@ -171,7 +211,12 @@ parl-quality-report-unmatched:
 parl-quality-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --unmatched-sample-limit 50"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db {{db_path}} --as-of-date {{snapshot_date}} --taxonomy-seed {{topic_taxonomy_seed}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --enforce-gate --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
+
+parl-publish-votaciones:
+  just parl-quality-pipeline
+  just etl-publish-votaciones
 
 parl-congreso-votaciones-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --strict-network"
@@ -377,7 +422,7 @@ explorer-bg-watch:
 
 explorer-gh-pages-build:
   rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-sources/data
-  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data
+  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data
   cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
   cp ui/graph/index.html {{gh_pages_dir}}/graph/index.html
@@ -385,6 +430,10 @@ explorer-gh-pages-build:
   cp ui/graph/explorer-temas.html {{gh_pages_dir}}/explorer-temas/index.html
   cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/explorer-votaciones/index.html
   cp ui/graph/explorer-sources.html {{gh_pages_dir}}/explorer-sources/index.html
+  python3 scripts/export_explorer_sports_snapshot.py \
+    --db "{{db_path}}" \
+    --snapshot-date {{snapshot_date}} \
+    --out-dir "{{gh_pages_dir}}/explorer-politico/data"
   python3 scripts/export_graph_snapshot.py \
     --db "{{db_path}}" \
     --limit 350 \
@@ -397,6 +446,9 @@ explorer-gh-pages-build:
   python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
+  python3 scripts/export_explorer_temas_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/explorer-temas/data/temas-preview.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 
