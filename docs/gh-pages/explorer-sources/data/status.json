@@ -1,6 +1,6 @@
 {
   "db_path": "etl/data/staging/politicos-es.db",
-  "generated_at": "2026-02-16T03:03:01+00:00",
+  "generated_at": "2026-02-16T08:27:30+00:00",
   "summary": {
     "desired": 30,
     "present": 30,
@@ -25,7 +25,8 @@
     "sql": {
       "todo": 0,
       "partial": 2,
-      "done": 28
+      "done": 28,
+      "foreign_key_violations": 0
     },
     "tracker": {
       "items_total": 54,
@@ -34,6 +35,19 @@
       "partial": 4,
       "done": 29
     }
+  },
+  "ops": {
+    "ingestion_runs_total": 140,
+    "ingestion_runs_ok": 105,
+    "ingestion_runs_error": 32,
+    "ingestion_runs_retry": 35,
+    "ingestion_runs_ok_pct": 0.75,
+    "avg_run_seconds": 264.6739570002486,
+    "last_run_seconds": 4.000018537044525,
+    "retry_rate": 0.25,
+    "published_recommendation_artifacts": 0,
+    "autonomico_sources_ok": 19,
+    "europeo_sources_ok": 1
   },
   "analytics": {
     "topics": {
@@ -49,22 +63,20 @@
       "topic_evidence_with_topic_pct": 1.0,
       "topic_evidence_with_date": 431650,
       "topic_evidence_with_date_pct": 1.0,
+      "topic_evidence_with_source_url": 431650,
+      "topic_evidence_with_source_url_pct": 1.0,
       "topic_evidence_declared_total": 614,
       "topic_evidence_revealed_total": 431036,
       "topic_evidence_declared_with_date": 614,
       "topic_evidence_declared_with_date_pct": 1.0,
-      "topic_evidence_declared_with_signal": 93,
-      "topic_evidence_declared_with_signal_pct": 0.15146579804560262,
+      "topic_evidence_declared_with_signal": 91,
+      "topic_evidence_declared_with_signal_pct": 0.1482084690553746,
       "topic_evidence_reviews_total": 524,
-      "topic_evidence_reviews_pending": 523,
-      "topic_evidence_reviews_resolved": 1,
-      "topic_evidence_reviews_ignored": 0,
-      "topic_evidence_reviews_pending_pct": 0.8517915309446255,
-      "topic_evidence_reviews_pending_by_reason": {
-        "no_signal": 474,
-        "low_confidence": 45,
-        "conflicting_signal": 4
-      },
+      "topic_evidence_reviews_pending": 0,
+      "topic_evidence_reviews_resolved": 50,
+      "topic_evidence_reviews_ignored": 474,
+      "topic_evidence_reviews_pending_pct": 0.0,
+      "topic_evidence_reviews_pending_by_reason": {},
       "topic_evidence_by_type": {
         "revealed:vote": 431036,
         "declared:intervention": 614
@@ -102,19 +114,15 @@
         },
         {
           "key": "intervention_metadata",
-          "count": 521
+          "count": 474
         },
         {
           "key": "declared:regex_v2",
           "count": 90
         },
         {
-          "key": "declared:regex_v1",
-          "count": 2
-        },
-        {
           "key": "declared:manual_review_v1",
-          "count": 1
+          "count": 50
         }
       ],
       "text_documents_total": 614,
@@ -124,23 +132,28 @@
       "declared_evidence_with_text_excerpt_pct": 1.0
     },
     "positions": {
-      "topic_positions_total": 137138,
-      "topic_positions_with_evidence": 137138,
+      "topic_positions_total": 137302,
+      "topic_positions_with_evidence": 137302,
       "topic_positions_with_evidence_pct": 1.0,
       "topic_positions_by_method": {
-        "combined": 68528,
+        "combined": 68610,
         "votes": 68528,
-        "declared": 82
+        "declared": 164
       }
     },
     "coherence": {
-      "as_of_date": "2026-02-12",
-      "overlap_total": 82,
-      "explicit_total": 58,
-      "coherent_total": 33,
-      "incoherent_total": 25,
-      "coherence_pct": 0.5689655172413793,
-      "incoherence_pct": 0.43103448275862066
+      "as_of_date": "2026-02-16",
+      "overlap_total": 0,
+      "explicit_total": 0,
+      "coherent_total": 0,
+      "incoherent_total": 0,
+      "coherence_pct": 0.0,
+      "incoherence_pct": 0.0
+    },
+    "traceability": {
+      "parl_vote_events_total": 8357,
+      "parl_vote_events_with_source_url": 8357,
+      "parl_vote_events_with_source_url_pct": 1.0
     },
     "action": {
       "policy_events_total": 0,
@@ -1926,6 +1939,805 @@
       "tracked_percent": 44,
       "overall_percent": 35
     }
+  },
+  "roadmap_technical": {
+    "path": "REPO_ROOT/vota-con-la-chola/docs/roadmap-tecnico.md",
+    "exists": true,
+    "phases": [
+      {
+        "id": "tech_phase_0",
+        "phase": 0,
+        "title": "Fase 0: Reforzar base de datos y calidad",
+        "points_eng": 8,
+        "points_eng_raw": "8",
+        "progress": {
+          "done": 9,
+          "partial": 1,
+          "todo": 0,
+          "untracked": 0,
+          "tracked_total": 10,
+          "overall_total": 10,
+          "tracked_percent": 95,
+          "overall_percent": 95
+        },
+        "checks": [
+          {
+            "kind": "tracker",
+            "id": "votaciones_congreso",
+            "label": "Votaciones Congreso",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "iniciativas_congreso",
+            "label": "Iniciativas Congreso",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "votaciones_senado_y_mociones",
+            "label": "Votaciones Senado y mociones",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "taxonomia_de_temas_alto_impacto_por_scope",
+            "label": "Taxonomia de temas (alto impacto por scope)",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "clasificacion_evidencia_tema_trazable",
+            "label": "Clasificacion evidencia -> tema (trazable)",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "posiciones_por_tema_politico_x_scope",
+            "label": "Posiciones por tema (politico x scope)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "metric",
+            "id": "fk_check_clean",
+            "label": "PRAGMA foreign_key_check sin filas",
+            "status": "DONE",
+            "metric": "fk_violations",
+            "actual": 0,
+            "target": 0,
+            "format": "int",
+            "actual_display": "0",
+            "target_display": "0"
+          },
+          {
+            "kind": "metric",
+            "id": "votes_quality_gate",
+            "label": "Gate de calidad de votaciones (enforce-gate)",
+            "status": "DONE",
+            "metric": "vote_gate_passed",
+            "actual": true,
+            "target": null,
+            "format": "bool",
+            "actual_display": "true",
+            "target_display": "\u2014"
+          },
+          {
+            "kind": "metric",
+            "id": "initiatives_quality_gate",
+            "label": "Gate de calidad de iniciativas",
+            "status": "DONE",
+            "metric": "initiative_gate_passed",
+            "actual": true,
+            "target": null,
+            "format": "bool",
+            "actual_display": "true",
+            "target_display": "\u2014"
+          },
+          {
+            "kind": "metric",
+            "id": "done_sources_with_network",
+            "label": "Fuentes tracker=DONE con evidencia de red",
+            "status": "DONE",
+            "metric": "done_sources_with_network_pct",
+            "actual": 1.0,
+            "target": 1.0,
+            "format": "pct",
+            "actual_display": "100%",
+            "target_display": "100%"
+          }
+        ],
+        "next": [
+          {
+            "id": "posiciones_por_tema_politico_x_scope",
+            "label": "Posiciones por tema (politico x scope)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          }
+        ]
+      },
+      {
+        "id": "tech_phase_1",
+        "phase": 1,
+        "title": "Fase 1: Cerrar loop de \u201clo que hacen\u201d",
+        "points_eng": 8,
+        "points_eng_raw": "8",
+        "progress": {
+          "done": 7,
+          "partial": 1,
+          "todo": 0,
+          "untracked": 0,
+          "tracked_total": 8,
+          "overall_total": 8,
+          "tracked_percent": 94,
+          "overall_percent": 94
+        },
+        "checks": [
+          {
+            "kind": "tracker",
+            "id": "votaciones_congreso",
+            "label": "Votaciones Congreso",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "iniciativas_congreso",
+            "label": "Iniciativas Congreso",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "votaciones_senado_y_mociones",
+            "label": "Votaciones Senado y mociones",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "intervenciones_congreso",
+            "label": "Intervenciones Congreso",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "metric",
+            "id": "events_with_date_pct",
+            "label": "Eventos con fecha",
+            "status": "DONE",
+            "metric": "events_with_date_pct",
+            "actual": 1.0,
+            "target": 0.95,
+            "format": "pct",
+            "actual_display": "100%",
+            "target_display": "95%"
+          },
+          {
+            "kind": "metric",
+            "id": "events_with_initiative_link_pct",
+            "label": "Eventos con iniciativa enlazada",
+            "status": "DONE",
+            "metric": "events_with_initiative_link_pct",
+            "actual": 1.0,
+            "target": 0.95,
+            "format": "pct",
+            "actual_display": "100%",
+            "target_display": "95%"
+          },
+          {
+            "kind": "metric",
+            "id": "member_votes_with_person_id_pct",
+            "label": "Votos nominales con person_id",
+            "status": "DONE",
+            "metric": "member_votes_with_person_id_pct",
+            "actual": 0.980442765003908,
+            "target": 0.9,
+            "format": "pct",
+            "actual_display": "98%",
+            "target_display": "90%"
+          },
+          {
+            "kind": "metric",
+            "id": "latest_events_with_topic_evidence_pct",
+            "label": "Eventos latest con topic_evidence",
+            "status": "DONE",
+            "metric": "latest_events_with_topic_evidence_pct",
+            "actual": 0.7518413597733711,
+            "target": 0.5,
+            "format": "pct",
+            "actual_display": "75%",
+            "target_display": "50%"
+          }
+        ],
+        "next": [
+          {
+            "id": "intervenciones_congreso",
+            "label": "Intervenciones Congreso",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          }
+        ]
+      },
+      {
+        "id": "tech_phase_2",
+        "phase": 2,
+        "title": "Fase 2: Posiciones p\u00fablicas y se\u00f1al de coherencia",
+        "points_eng": 13,
+        "points_eng_raw": "13",
+        "progress": {
+          "done": 5,
+          "partial": 3,
+          "todo": 0,
+          "untracked": 0,
+          "tracked_total": 8,
+          "overall_total": 8,
+          "tracked_percent": 81,
+          "overall_percent": 81
+        },
+        "checks": [
+          {
+            "kind": "tracker",
+            "id": "intervenciones_congreso",
+            "label": "Intervenciones Congreso",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "evidencia_textual_para_posiciones_declaradas",
+            "label": "Evidencia textual (para posiciones declaradas)",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "clasificacion_evidencia_tema_trazable",
+            "label": "Clasificacion evidencia -> tema (trazable)",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "posiciones_por_tema_politico_x_scope",
+            "label": "Posiciones por tema (politico x scope)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "metric",
+            "id": "topic_evidence_declared_total",
+            "label": "Evidencia declarada extraida",
+            "status": "DONE",
+            "metric": "topic_evidence_declared_total",
+            "actual": 614,
+            "target": 1,
+            "format": "int",
+            "actual_display": "614",
+            "target_display": "1"
+          },
+          {
+            "kind": "metric",
+            "id": "topic_evidence_declared_with_signal_pct",
+            "label": "Evidencia declarada con stance util",
+            "status": "PARTIAL",
+            "metric": "topic_evidence_declared_with_signal_pct",
+            "actual": 0.1482084690553746,
+            "target": 0.5,
+            "format": "pct",
+            "actual_display": "15%",
+            "target_display": "50%"
+          },
+          {
+            "kind": "metric",
+            "id": "topic_evidence_with_topic_pct",
+            "label": "Evidencia con topic_id",
+            "status": "DONE",
+            "metric": "topic_evidence_with_topic_pct",
+            "actual": 1.0,
+            "target": 0.95,
+            "format": "pct",
+            "actual_display": "100%",
+            "target_display": "95%"
+          },
+          {
+            "kind": "metric",
+            "id": "topic_evidence_with_source_url_pct",
+            "label": "Trazabilidad en topic_evidence (source_url)",
+            "status": "DONE",
+            "metric": "topic_evidence_with_source_url_pct",
+            "actual": 1.0,
+            "target": 1.0,
+            "format": "pct",
+            "actual_display": "100%",
+            "target_display": "100%"
+          }
+        ],
+        "next": [
+          {
+            "id": "topic_evidence_declared_with_signal_pct",
+            "label": "Evidencia declarada con stance util",
+            "status": "PARTIAL",
+            "actual_display": "15%",
+            "target_display": "50%"
+          },
+          {
+            "id": "intervenciones_congreso",
+            "label": "Intervenciones Congreso",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "id": "posiciones_por_tema_politico_x_scope",
+            "label": "Posiciones por tema (politico x scope)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          }
+        ]
+      },
+      {
+        "id": "tech_phase_3",
+        "phase": 3,
+        "title": "Fase 3: Motor de recomendaci\u00f3n y fiabilidad",
+        "points_eng": 13,
+        "points_eng_raw": "13",
+        "progress": {
+          "done": 2,
+          "partial": 1,
+          "todo": 2,
+          "untracked": 0,
+          "tracked_total": 5,
+          "overall_total": 5,
+          "tracked_percent": 50,
+          "overall_percent": 50
+        },
+        "checks": [
+          {
+            "kind": "tracker",
+            "id": "posiciones_por_tema_politico_x_scope",
+            "label": "Posiciones por tema (politico x scope)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "metric",
+            "id": "topic_positions_total",
+            "label": "Posiciones agregadas disponibles",
+            "status": "DONE",
+            "metric": "topic_positions_total",
+            "actual": 137302,
+            "target": 1,
+            "format": "int",
+            "actual_display": "137302",
+            "target_display": "1"
+          },
+          {
+            "kind": "metric",
+            "id": "topic_positions_with_evidence_pct",
+            "label": "Posiciones con evidencia suficiente",
+            "status": "DONE",
+            "metric": "topic_positions_with_evidence_pct",
+            "actual": 1.0,
+            "target": 0.9,
+            "format": "pct",
+            "actual_display": "100%",
+            "target_display": "90%"
+          },
+          {
+            "kind": "metric",
+            "id": "coherence_explicit_total",
+            "label": "Comparaciones explicitas says/does",
+            "status": "TODO",
+            "metric": "coherence_explicit_total",
+            "actual": 0,
+            "target": 1,
+            "format": "int",
+            "actual_display": "0",
+            "target_display": "1"
+          }
+        ],
+        "next": [
+          {
+            "id": "posiciones_por_tema_politico_x_scope",
+            "label": "Posiciones por tema (politico x scope)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
+            "id": "coherence_explicit_total",
+            "label": "Comparaciones explicitas says/does",
+            "status": "TODO",
+            "actual_display": "0",
+            "target_display": "1"
+          },
+          {
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          }
+        ]
+      },
+      {
+        "id": "tech_phase_4",
+        "phase": 4,
+        "title": "Fase 4: UX + comunidad + operaciones",
+        "points_eng": 8,
+        "points_eng_raw": "8",
+        "progress": {
+          "done": 2,
+          "partial": 0,
+          "todo": 3,
+          "untracked": 0,
+          "tracked_total": 5,
+          "overall_total": 5,
+          "tracked_percent": 40,
+          "overall_percent": 40
+        },
+        "checks": [
+          {
+            "kind": "tracker",
+            "id": "procesos_electorales_y_resultados",
+            "label": "Procesos electorales y resultados",
+            "status": "DONE",
+            "actual_display": "DONE",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "convocatorias_y_estado_electoral",
+            "label": "Convocatorias y estado electoral",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "metric",
+            "id": "review_queue_pending_ratio",
+            "label": "Review queue pendiente / declaradas",
+            "status": "DONE",
+            "metric": "review_queue_pending_ratio",
+            "actual": 0.0,
+            "target": 0.25,
+            "format": "pct",
+            "actual_display": "0%",
+            "target_display": "25%"
+          },
+          {
+            "kind": "metric",
+            "id": "published_recommendation_artifacts",
+            "label": "Artefactos publicados (topics/claims/recommendation-kpis)",
+            "status": "TODO",
+            "metric": "published_recommendation_artifacts",
+            "actual": 0,
+            "target": 3,
+            "format": "int",
+            "actual_display": "0",
+            "target_display": "3"
+          }
+        ],
+        "next": [
+          {
+            "id": "published_recommendation_artifacts",
+            "label": "Artefactos publicados (topics/claims/recommendation-kpis)",
+            "status": "TODO",
+            "actual_display": "0",
+            "target_display": "3"
+          },
+          {
+            "id": "convocatorias_y_estado_electoral",
+            "label": "Convocatorias y estado electoral",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          }
+        ]
+      },
+      {
+        "id": "tech_phase_5",
+        "phase": 5,
+        "title": "Fase 5: Cobertura multinivel",
+        "points_eng": 21,
+        "points_eng_raw": "21+",
+        "progress": {
+          "done": 2,
+          "partial": 0,
+          "todo": 8,
+          "untracked": 0,
+          "tracked_total": 10,
+          "overall_total": 10,
+          "tracked_percent": 20,
+          "overall_percent": 20
+        },
+        "checks": [
+          {
+            "kind": "tracker",
+            "id": "normativa_autonomica_piloto_3_ccaa",
+            "label": "Normativa auton\u00f3mica (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "contratacion_autonomica_piloto_3_ccaa",
+            "label": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "subvenciones_autonomicas_piloto_3_ccaa",
+            "label": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "presupuesto_ejecucion_autonomica_piloto_3_ccaa",
+            "label": "Presupuesto + ejecuci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "ue_legislacion_y_documentos",
+            "label": "UE: legislacion y documentos",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "ue_votaciones_roll_call",
+            "label": "UE: votaciones (roll-call)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "ue_contratacion_publica",
+            "label": "UE: contratacion publica",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "tracker",
+            "id": "ue_lobbying_influencia",
+            "label": "UE: lobbying/influencia",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "kind": "metric",
+            "id": "autonomico_sources_ok",
+            "label": "Fuentes autonomicas en estado ok",
+            "status": "DONE",
+            "metric": "autonomico_sources_ok",
+            "actual": 19,
+            "target": 1,
+            "format": "int",
+            "actual_display": "19",
+            "target_display": "1"
+          },
+          {
+            "kind": "metric",
+            "id": "europeo_sources_ok",
+            "label": "Fuentes europeas en estado ok",
+            "status": "DONE",
+            "metric": "europeo_sources_ok",
+            "actual": 1,
+            "target": 1,
+            "format": "int",
+            "actual_display": "1",
+            "target_display": "1"
+          }
+        ],
+        "next": [
+          {
+            "id": "contratacion_autonomica_piloto_3_ccaa",
+            "label": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "normativa_autonomica_piloto_3_ccaa",
+            "label": "Normativa auton\u00f3mica (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "presupuesto_ejecucion_autonomica_piloto_3_ccaa",
+            "label": "Presupuesto + ejecuci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "subvenciones_autonomicas_piloto_3_ccaa",
+            "label": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "ue_contratacion_publica",
+            "label": "UE: contratacion publica",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "ue_legislacion_y_documentos",
+            "label": "UE: legislacion y documentos",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          }
+        ]
+      }
+    ],
+    "program_kpis": [
+      {
+        "id": "tracking_sources_ok_pct",
+        "label": "Fuentes objetivo en estado ok",
+        "status": "DONE",
+        "metric": "desired_sources_ok_pct",
+        "actual": 1.0,
+        "target": 0.8,
+        "format": "pct",
+        "actual_display": "100%",
+        "target_display": "80%"
+      },
+      {
+        "id": "events_with_initiative_link_pct",
+        "label": "Eventos con iniciativa enlazada",
+        "status": "DONE",
+        "metric": "events_with_initiative_link_pct",
+        "actual": 1.0,
+        "target": 0.95,
+        "format": "pct",
+        "actual_display": "100%",
+        "target_display": "95%"
+      },
+      {
+        "id": "member_votes_with_person_id_pct",
+        "label": "Votos nominales con person_id",
+        "status": "DONE",
+        "metric": "member_votes_with_person_id_pct",
+        "actual": 0.980442765003908,
+        "target": 0.9,
+        "format": "pct",
+        "actual_display": "98%",
+        "target_display": "90%"
+      },
+      {
+        "id": "latest_events_with_topic_evidence_pct",
+        "label": "Eventos latest con topic_evidence",
+        "status": "DONE",
+        "metric": "latest_events_with_topic_evidence_pct",
+        "actual": 0.7518413597733711,
+        "target": 0.5,
+        "format": "pct",
+        "actual_display": "75%",
+        "target_display": "50%"
+      },
+      {
+        "id": "topic_positions_with_evidence_pct",
+        "label": "Posiciones con evidencia suficiente",
+        "status": "DONE",
+        "metric": "topic_positions_with_evidence_pct",
+        "actual": 1.0,
+        "target": 0.9,
+        "format": "pct",
+        "actual_display": "100%",
+        "target_display": "90%"
+      },
+      {
+        "id": "ingestion_runs_ok_pct",
+        "label": "Runs ETL en estado ok",
+        "status": "PARTIAL",
+        "metric": "ingestion_runs_ok_pct",
+        "actual": 0.75,
+        "target": 0.8,
+        "format": "pct",
+        "actual_display": "75%",
+        "target_display": "80%"
+      },
+      {
+        "id": "retry_rate",
+        "label": "Costo de reintentos ETL",
+        "status": "PARTIAL",
+        "metric": "retry_rate",
+        "actual": 0.25,
+        "target": 0.2,
+        "format": "pct",
+        "actual_display": "25%",
+        "target_display": "20%"
+      },
+      {
+        "id": "avg_run_seconds",
+        "label": "Duraci\u00f3n media por run ETL",
+        "status": "DONE",
+        "metric": "avg_run_seconds",
+        "actual": 264.6739570002486,
+        "target": null,
+        "format": "seconds",
+        "actual_display": "264.7s",
+        "target_display": "\u2014"
+      }
+    ],
+    "summary": {
+      "done": 27,
+      "partial": 6,
+      "todo": 13,
+      "untracked": 0,
+      "tracked_total": 46,
+      "overall_total": 46,
+      "tracked_percent": 65,
+      "overall_percent": 65
+    },
+    "notes": [
+      "Los checks de fase combinan tracker operativo y KPIs cuantificables.",
+      "Cuando no existe medicion directa, el estado se marca como UNTRACKED."
+    ]
   },
   "actions": [
     {
