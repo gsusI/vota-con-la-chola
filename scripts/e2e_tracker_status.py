@@ -107,9 +107,18 @@ def open_db(path: Path) -> sqlite3.Connection:
     return conn
 
 
+def table_exists(conn: sqlite3.Connection, table: str) -> bool:
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name = ?",
+        (table,),
+    ).fetchone()
+    return row is not None
+
+
 def fetch_source_metrics(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
+    fetch_table = "run_fetches" if table_exists(conn, "run_fetches") else "raw_fetches"
     rows = conn.execute(
-        """
+        f"""
         SELECT
           s.source_id AS source_id,
           COUNT(ir.run_id) AS runs_total,
@@ -142,7 +151,7 @@ def fetch_source_metrics(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
           ), '') AS last_status
         FROM sources s
         LEFT JOIN ingestion_runs ir ON ir.source_id = s.source_id
-        LEFT JOIN raw_fetches rf ON rf.run_id = ir.run_id
+        LEFT JOIN {fetch_table} rf ON rf.run_id = ir.run_id
         GROUP BY s.source_id
         ORDER BY s.source_id
         """
