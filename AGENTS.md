@@ -6,6 +6,51 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 - Fast ingestion (avoid N+1 DB roundtrips)
 - Schema-driven navigation (Explorer UI should work as schema/data evolve)
 
+## Execution Philosophy (KISS + Delivery)
+
+### Documentation Philosophy
+- One source of truth per layer:
+  - Strategy and destination: `docs/roadmap.md`
+  - Near-term execution: `docs/roadmap-tecnico.md`
+  - Operational backlog and real status: `docs/etl/e2e-scrape-load-tracker.md`
+- Do not duplicate roadmaps in random docs. Link instead of copy.
+- Every non-trivial change must answer three questions in docs or tracker:
+  - where we are now
+  - where we are going
+  - what is next
+- Keep docs lean and operational:
+  - decisions, constraints, commands, DoD
+  - avoid long narrative that does not change implementation choices
+
+### Structuring Complexity
+- Build in thin vertical slices, not big-bang layers.
+- Keep boundaries explicit:
+  - ingest (raw + traceability)
+  - normalize (ids + FKs)
+  - enrich (topic/action semantics)
+  - aggregate (positions/vectors)
+  - publish (snapshot + KPIs)
+  - UI/API (drill-down to evidence)
+- Prefer additive schema evolution (new tables/columns/indexes) over rewrites.
+- Keep manual work explicit and bounded (codebook, arbitration, intervention definition). Never hide it behind fake automation.
+- Preserve explainability by default:
+  - every score/position should be traceable to evidence rows
+  - uncertainty and "no_signal" are valid outputs
+
+### Get-Shit-Done Operating Loop
+- Ship the smallest useful slice that improves user-visible truth.
+- For each slice:
+  - define the gate (quality KPI or integrity check)
+  - implement end-to-end
+  - publish snapshot/artifact
+  - update tracker/roadmap status
+- Prefer "boring and reliable" over clever and fragile.
+- If blocked (WAF, broken upstream, missing contract), do not fake DONE:
+  - record evidence of the block
+  - mark status honestly
+  - move to next highest-leverage task
+- Finish before expanding scope: close loops (`pending -> resolved/ignored`) before opening new surfaces.
+
 ## Working Agreement
 
 ### Source Of Truth
