@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vota Con La Chola | Graph Explorer</title>
+    <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -86,6 +87,12 @@
         border: 1px solid #d7deea;
         color: #182338;
         font-size: 0.75rem;
+      }
+
+      .local-api-disabled {
+        opacity: 0.53;
+        filter: grayscale(1);
+        cursor: not-allowed;
       }
 
       .view-links a.active {
@@ -324,7 +331,7 @@
         <p class="subtitle">Politicos, instituciones, partidos y fuentes</p>
         <div class="view-links">
           <a class="active" href="./">Graph</a>
-          <a href="../explorer/">Explorer</a>
+          <a href="../explorer/" data-local-api="explorer-sql">Explorer</a>
           <a href="../explorer-politico/">Radar</a>
           <a href="../explorer-sources/">Fuentes</a>
         </div>
@@ -631,6 +638,8 @@
       const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
       const STATIC_DATA_DIR = "data";
       const STATIC_GRAPH_PATH = `${STATIC_DATA_DIR}/graph.json`;
+      const LOCAL_API_NOTICE = "El Explorer SQL requiere API local y no funciona en GitHub Pages.";
+      const isGitHubPages = /(^|\.)github\.io$/i.test(window.location.hostname);
 
       const isLocalApiHost = (() => {
         const host = window.location.hostname;
@@ -641,7 +650,7 @@
         const endpoint = String(path || "").trim();
         if (!endpoint) return "";
         const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\\/$/, "")}${normalized}`;
+        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\/$/, "")}${normalized}`;
         if (isLocalApiHost) return normalized;
         return "";
       };
@@ -650,6 +659,17 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
+      };
+
+      const applyLocalApiGate = () => {
+        if (!isGitHubPages) return;
+        document.querySelectorAll('[data-local-api="explorer-sql"]').forEach((link) => {
+          link.classList.add("local-api-disabled");
+          link.setAttribute("aria-disabled", "true");
+          link.setAttribute("tabindex", "-1");
+          link.setAttribute("title", LOCAL_API_NOTICE);
+          link.addEventListener("click", (event) => event.preventDefault());
+        });
       };
 
       async function onNodeTap(evt) {
@@ -914,6 +934,7 @@
         if (lens !== null && els.lens) els.lens.value = lens;
       })();
 
+      applyLocalApiGate();
       loadGraph().catch((err) => setDetail("Error", String(err)));
     </script>
   </body>

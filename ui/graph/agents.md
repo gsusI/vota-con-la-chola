@@ -37,14 +37,18 @@
 
 ## Versión activa
 - Archivo: `ui/graph/explorer-sources.html`
-- Versión actual: `1.0.2`
-- Última actualización: `2026-02-14`
+- Versión actual: `1.0.6`
+- Última actualización: `2026-02-15`
 
 ## Cambios incluidos en esta versión
 - Reestructuración del dashboard para que todo esté organizado por `scope` (ámbito): progreso mínimo, estado operativo, fuentes configuradas, roadmap sin conector y pendientes.
 - Reducción de ruido: se elimina el “detalle técnico por fuente” como tabla global; ahora está dentro de cada ámbito como listas colapsables.
 - “Filtros avanzados” quedan colapsables y se aplican al dashboard por ámbito.
 - Acciones del tracker sin `source_id` se agrupan por ámbito usando `scope` inferido desde el tracker (servidor).
+- Panel nuevo: **Roadmap por fases** (ENG/HUM puntos) con progreso agregado (tracker + manual/untracked) y “siguientes” visibles.
+- Copia: la sección de roadmap referencia explícitamente `docs/roadmap-tecnico.md` además de `docs/roadmap.md`.
+- Panel global: muestra KPIs de votaciones (linking + person_id) desde `/api/sources/status` para ver progreso real vs roadmap.
+- Panel global: añade KPI real de cobertura de `topic_evidence` para votaciones (legislatura activa): `topic (latest)`.
 
 ## Proceso de versionado
 - Antes de cada cambio funcional en `explorer-sources.html`, actualizar:
