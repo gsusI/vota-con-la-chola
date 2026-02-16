@@ -50,4 +50,14 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 1,
         "fallback_file": "etl/data/raw/samples/congreso_iniciativas_sample.json",
     },
+    "congreso_intervenciones": {
+        "name": "Congreso - Intervenciones (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://www.congreso.es/es/opendata/intervenciones",
+        "format": "html",  # catalog page is HTML; exports are JSON
+        "level": "nacional",
+        "institution_name": "Congreso de los Diputados",
+        "min_records_loaded_strict": 1,
+        "fallback_file": "etl/data/raw/samples/congreso_intervenciones_sample.json",
+    },
 }

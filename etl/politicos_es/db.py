@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import re
 import sqlite3
 from pathlib import Path
 from typing import Any
 
 from .config import SOURCE_CONFIG
 from .util import canonical_key, normalize_key_part, normalize_ws, now_utc_iso
+
+
+_UNIQUE_SOURCE_URL_RE = re.compile(r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.I)
 
 
 def open_db(path: Path) -> sqlite3.Connection:
@@ -29,6 +33,14 @@ def table_exists(conn: sqlite3.Connection, table: str) -> bool:
     return row is not None
 
 
+def table_create_sql(conn: sqlite3.Connection, table: str) -> str:
+    row = conn.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name = ?",
+        (table,),
+    ).fetchone()
+    return str(row[0] or "") if row is not None else ""
+
+
 def ensure_column(conn: sqlite3.Connection, table: str, column: str, definition_sql: str) -> None:
     if not table_exists(conn, table):
         return
@@ -36,6 +48,102 @@ def ensure_column(conn: sqlite3.Connection, table: str, column: str, definition_
     if column in cols:
         return
     conn.execute(f'ALTER TABLE "{table}" ADD COLUMN {definition_sql}')
+
+
+def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None:
+    """Fix early schema bug: text_documents must allow repeated source_url.
+
+    Some sources (e.g. Congreso interventions) legitimately reuse the same URL for multiple
+    records, so UNIQUE(source_id, source_url) breaks backfills.
+
+    We keep the table shape but rebuild it without that UNIQUE constraint.
+    """
+    if not table_exists(conn, "text_documents"):
+        return
+    sql = table_create_sql(conn, "text_documents")
+    if not _UNIQUE_SOURCE_URL_RE.search(sql or ""):
+        return
+    # Avoid clobbering if a previous migration failed halfway.
+    if table_exists(conn, "text_documents_old"):
+        raise RuntimeError("Schema migration blocked: found unexpected table 'text_documents_old'")
+
+    # PRAGMA foreign_keys can't be toggled mid-transaction.
+    if conn.in_transaction:
+        conn.commit()
+
+    fk_on = int(conn.execute("PRAGMA foreign_keys").fetchone()[0] or 0)
+    if fk_on:
+        conn.execute("PRAGMA foreign_keys = OFF;")
+    try:
+        conn.execute("BEGIN;")
+        conn.execute('ALTER TABLE "text_documents" RENAME TO "text_documents_old";')
+        conn.execute(
+            """
+            CREATE TABLE text_documents (
+              text_document_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              source_id TEXT NOT NULL REFERENCES sources(source_id),
+              source_url TEXT NOT NULL,
+              source_record_pk INTEGER UNIQUE REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+              fetched_at TEXT,
+              content_type TEXT,
+              content_sha256 TEXT,
+              bytes INTEGER,
+              raw_path TEXT,
+              text_excerpt TEXT,
+              text_chars INTEGER,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL
+            )
+            """
+        )
+        conn.execute(
+            """
+            INSERT INTO text_documents (
+              text_document_id,
+              source_id,
+              source_url,
+              source_record_pk,
+              fetched_at,
+              content_type,
+              content_sha256,
+              bytes,
+              raw_path,
+              text_excerpt,
+              text_chars,
+              created_at,
+              updated_at
+            )
+            SELECT
+              text_document_id,
+              source_id,
+              source_url,
+              source_record_pk,
+              fetched_at,
+              content_type,
+              content_sha256,
+              bytes,
+              raw_path,
+              text_excerpt,
+              text_chars,
+              created_at,
+              updated_at
+            FROM text_documents_old
+            """
+        )
+        conn.execute('DROP TABLE "text_documents_old";')
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_text_documents_source_id ON text_documents(source_id);")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_text_documents_source_record_pk ON text_documents(source_record_pk);")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_text_documents_source_url ON text_documents(source_url);")
+        conn.execute("COMMIT;")
+    except Exception:
+        try:
+            conn.execute("ROLLBACK;")
+        except sqlite3.Error:
+            pass
+        raise
+    finally:
+        if fk_on:
+            conn.execute("PRAGMA foreign_keys = ON;")
 
 
 def ensure_schema_compat(conn: sqlite3.Connection) -> None:
@@ -74,7 +182,35 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
         for column, definition_sql in columns.items():
             ensure_column(conn, table, column, definition_sql)
 
+    ensure_text_documents_allow_duplicate_urls(conn)
     conn.commit()
+
+
+def backfill_run_fetches(conn: sqlite3.Connection) -> None:
+    """Populate per-run fetch metadata from legacy raw_fetches rows (best-effort).
+
+    raw_fetches is de-duped by (source_id, content_sha256), so it may not contain a row for every run_id.
+    This backfill only covers run_ids present in raw_fetches; current pipelines also write run_fetches
+    directly for new runs.
+    """
+    if not table_exists(conn, "run_fetches") or not table_exists(conn, "raw_fetches"):
+        return
+    try:
+        conn.execute(
+            """
+            INSERT INTO run_fetches (
+              run_id, source_id, source_url, fetched_at, raw_path, content_sha256, content_type, bytes
+            )
+            SELECT
+              rf.run_id, rf.source_id, rf.source_url, rf.fetched_at, rf.raw_path, rf.content_sha256, rf.content_type, rf.bytes
+            FROM raw_fetches rf
+            WHERE rf.run_id IS NOT NULL
+            ON CONFLICT(run_id) DO NOTHING
+            """
+        )
+    except sqlite3.Error:
+        # Keep apply_schema resilient for old DBs or partial schemas.
+        return
 
 
 def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
@@ -91,6 +227,7 @@ def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
         conn.executescript(sql)
 
     ensure_schema_compat(conn)
+    backfill_run_fetches(conn)
     conn.commit()
 
 
