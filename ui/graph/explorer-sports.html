@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vota Con La Chola | Explorador Político Territorial</title>
+    <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -166,6 +167,8 @@
         border: 1px solid transparent !important;
         border-radius: 11px !important;
         background: rgba(255, 255, 255, 0.98) !important;
+        overflow: hidden;
+        max-width: 100%;
       }
 
       .select2-container--default .select2-selection--single {
@@ -176,6 +179,10 @@
         color: var(--ink);
         line-height: 38px !important;
         padding-left: 10px !important;
+        padding-right: 34px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .select2-container .select2-selection__arrow {
@@ -188,8 +195,9 @@
       }
 
       .select2-dropdown {
-        width: 100% !important;
-        max-width: 100vw;
+        /* Select2 sets an inline width; do not force full-viewport width. */
+        max-width: calc(100vw - 24px);
+        box-sizing: border-box;
       }
 
       .select2-container--default .select2-results > .select2-results__options {
@@ -198,6 +206,15 @@
 
       .select2-container {
         width: 100% !important;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+      }
+
+      .select2-container--default .select2-results__option {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .select2-dropdown,
@@ -1261,7 +1278,6 @@
       const STATIC_DATA_DIR = "data";
       const STATIC_MANDATES_PATH = `${STATIC_DATA_DIR}/arena-mandates.json`;
       const STATIC_SOURCES_PATH = `${STATIC_DATA_DIR}/sources.json`;
-      const STATIC_PEOPLE_PATH = `${STATIC_DATA_DIR}/people.json`;
       const MUNICIPALITY_LEADERBOARD_LIMIT = 10;
       const VOTE_SUMMARY_LIMIT = 6;
 
@@ -1288,7 +1304,6 @@
       const staticPayloadCache = {
         mandates: null,
         sources: null,
-        people: null,
       };
 
       const readJson = async (url) => {
@@ -1450,7 +1465,14 @@
 
       const isNumericOrCodeLike = (value = "") => {
         const n = safeText(value).trim().toLowerCase();
-        return /^([0-9]{2,}|es|e.?c\.?)$/.test(n);
+        if (!n) {
+          return false;
+        }
+        if (/^([0-9]{2,}|es|e.?c\.?)$/.test(n)) {
+          return true;
+        }
+        // ISO-ish territory codes (e.g. ES-GA, ES-C, ES-08). Treat as code, not a human label.
+        return /^[a-z]{2}[-_\s][a-z0-9]{1,3}$/.test(n);
       };
 
       const normalizeTerritoryCodeToken = (value = "") => {
@@ -2102,6 +2124,9 @@
           party_id: r.party_id == null ? null : String(r.party_id),
           party_name: safeText(r.party_name) || "Sin partido",
           party_acronym: safeText(r.party_acronym),
+          municipality_code: safeText(r.municipality_code),
+          municipality_name: safeText(r.municipality_name),
+          municipality_population: r.municipality_population,
           is_active: Number(r.is_active) === 1,
           start_date: safeText(r.start_date),
           end_date: safeText(r.end_date),
@@ -2122,6 +2147,29 @@
           hydrated.territory_display_name = deduceTerritoryName(hydrated);
           return hydrated;
         });
+      };
+
+      const expandMandatePayloadRows = (payload = {}) => {
+        const columns = Array.isArray(payload?.columns) ? payload.columns : null;
+        const rows = Array.isArray(payload?.rows) ? payload.rows : [];
+        if (!columns || columns.length === 0) {
+          return rows;
+        }
+        if (rows.length === 0) {
+          return rows;
+        }
+        if (!Array.isArray(rows[0])) {
+          return rows;
+        }
+        const expanded = [];
+        for (const row of rows) {
+          const obj = {};
+          for (let i = 0; i < columns.length; i += 1) {
+            obj[String(columns[i])] = row[i];
+          }
+          expanded.push(obj);
+        }
+        return expanded;
       };
 
       const fetchSources = async () => {
@@ -2486,6 +2534,7 @@
             if (!apiEndpoint || !response || !response.ok) {
               const staticPayload = await getStaticPayload("mandates", STATIC_MANDATES_PATH);
               const staticRows = Array.isArray(staticPayload?.rows) ? staticPayload.rows : [];
+              const staticColumns = Array.isArray(staticPayload?.columns) ? staticPayload.columns : null;
               const staticLimit = Number(limit || 0);
               const staticOffset = Number(offset || 0);
               payload = {
@@ -2496,6 +2545,7 @@
                   returned: useAll ? staticRows.length : Math.min(staticLimit, Math.max(0, staticRows.length - staticOffset)),
                   include_inactive: true,
                 },
+                columns: staticColumns,
                 rows: useAll ? staticRows : staticRows.slice(staticOffset, staticOffset + staticLimit),
               };
               response = { ok: true, status: "static", toString: () => staticPayload };
@@ -2509,7 +2559,8 @@
               });
             }
             if (isVerboseEnabled()) {
-              const sample = (payload?.rows || []).slice(0, 2).map((row) => ({
+              const previewRows = expandMandatePayloadRows(payload || {});
+              const sample = (previewRows || []).slice(0, 2).map((row) => ({
                 full_name: row.full_name,
                 party: row.party_name,
                 role_title: row.role_title,
@@ -2550,7 +2601,7 @@
           };
 
           const allPayload = await loadPayload({ useAll: true });
-          const allRows = allPayload.rows || [];
+          const allRows = expandMandatePayloadRows(allPayload || {});
           const allTotal = Number(allPayload.meta?.total || allRows.length || 0);
           if (isVerboseEnabled()) {
             verboseLog("fetchAllMandates /all", {
@@ -2592,7 +2643,7 @@
 
           const chunk = 5000;
           const firstPayload = await loadPayload({ useAll: false, limit: chunk, offset: 0 });
-          const collected = firstPayload.rows ? [...firstPayload.rows] : [];
+          const collected = [...expandMandatePayloadRows(firstPayload || {})];
           const total = Number(firstPayload.meta?.total || collected.length || 0);
 
           if (collected.length >= total || total <= 0) {
@@ -2623,7 +2674,7 @@
           let offset = chunk;
           while (collected.length < total && collected.length < 60_000) {
             const payload = await loadPayload({ useAll: false, limit: chunk, offset });
-            const rows = payload.rows || [];
+            const rows = expandMandatePayloadRows(payload || {});
             if (rows.length === 0) {
               break;
             }
@@ -2946,12 +2997,14 @@
       };
 
       const renderTerritorySelect = () => {
-        if (!refs.territoryFilter) {
-          return false;
-        }
-
-        const seen = new Set();
-        const territories = new Map();
+	        if (!refs.territoryFilter) {
+	          return false;
+	        }
+	
+	        const seen = new Set();
+	        const territories = new Map();
+	        const displayToKeys = new Map();
+	        const displayBlankKey = new Map();
 
         const territoryLabel = (value, institutionName = "") => {
           const direct = safeText(value).trim();
@@ -2962,48 +3015,85 @@
           return cleanedInstitution || direct || "Sin territorio";
         };
 
-        const addTerritory = (name, code, level) => {
-          const key = territoryOptionKey(name, code, level);
-          const normalizedLevel = normalizeTerritoryLevel(level);
-          const n = safeText(name).trim();
-          const c = safeText(code).trim();
-          if (!n && !c) {
-            return;
-          }
-
-          if (seen.has(key)) {
-            return;
-          }
-          seen.add(key);
-          territories.set(key, {
-            key,
-            name: n || (c ? `Código ${c}` : "Sin territorio"),
-            code: c || "Sin código",
-            level: normalizedLevel || "otra",
-          });
-        };
+	        const addTerritory = (name, code, level) => {
+	          const key = territoryOptionKey(name, code, level);
+	          const normalizedLevel = normalizeTerritoryLevel(level);
+	          const n = safeText(name).trim();
+	          const c = safeText(code).trim();
+	          if (!n && !c) {
+	            return;
+	          }
+	
+	          const lvl = normalizedLevel || "otra";
+	          const displayKey = `${lvl}||${normalize(n || c) || "sin_nombre"}`;
+	
+	          // If we have a label but no stable code, don't create duplicates of the same label.
+	          // If later we see the same label with a real code, replace the blank-code entry.
+	          if (!c && displayToKeys.has(displayKey)) {
+	            return;
+	          }
+	          if (c && displayBlankKey.has(displayKey)) {
+	            const blankKey = displayBlankKey.get(displayKey);
+	            if (blankKey) {
+	              territories.delete(blankKey);
+	              const keySet = displayToKeys.get(displayKey);
+	              if (keySet) {
+	                keySet.delete(blankKey);
+	                if (keySet.size === 0) {
+	                  displayToKeys.delete(displayKey);
+	                }
+	              }
+	            }
+	            displayBlankKey.delete(displayKey);
+	          }
+	
+	          if (seen.has(key)) {
+	            return;
+	          }
+	          seen.add(key);
+	          if (!displayToKeys.has(displayKey)) {
+	            displayToKeys.set(displayKey, new Set());
+	          }
+	          displayToKeys.get(displayKey).add(key);
+	          if (!c) {
+	            displayBlankKey.set(displayKey, key);
+	          }
+	          territories.set(key, {
+	            key,
+	            name: n || (c ? `Código ${c}` : "Sin territorio"),
+	            code: c || "Sin código",
+	            level: lvl,
+	          });
+	        };
 
         for (const row of app.rawRows) {
           addTerritory(
-            territoryLabel(row.territory_display_name || row.mandate_territory_name, row.institution_name),
+            territoryLabel(row.mandate_territory_name || row.mandate_territory_code, row.institution_name),
             row.mandate_territory_code,
             normalizeTerritoryLevel(row.mandate_territory_level) || row.teamLeague
           );
           addTerritory(
-            territoryLabel(row.territory_display_name || row.institution_territory_name, row.institution_name),
+            territoryLabel(row.institution_territory_name || row.institution_territory_code, row.institution_name),
             row.institution_territory_code,
             normalizeTerritoryLevel(row.institution_territory_level) || row.teamLeague
           );
           addTerritory(
-            territoryLabel(row.territory_display_name || row.person_territory_name, row.institution_name),
+            territoryLabel(row.person_territory_name || row.person_territory_code, row.institution_name),
             row.person_territory_code,
             normalizeTerritoryLevel(row.person_territory_level) || row.teamLeague
           );
         }
 
-        const options = Array.from(territories.values()).sort((a, b) =>
-          a.name.localeCompare(b.name, "es")
-        );
+	        const needsCodeSuffix = new Set();
+	        displayToKeys.forEach((keys) => {
+	          if (keys.size > 1) {
+	            keys.forEach((key) => needsCodeSuffix.add(key));
+	          }
+	        });
+	
+	        const options = Array.from(territories.values()).sort((a, b) =>
+	          a.name.localeCompare(b.name, "es")
+	        );
         const was = app.territoryFilter;
         if (isVerboseEnabled()) {
           verboseLog("territorios renderizados", {
@@ -3023,15 +3113,15 @@
           app.territoryFilter = "";
         }
 
-        refs.territoryFilter.innerHTML = `
-          <option value="">Todos los territorios</option>
-          ${options
-            .map(
-              (entry) =>
-                `<option value="${entry.key}" ${app.territoryFilter === entry.key ? "selected" : ""}>${entry.name} (${LEVEL_DEFINITIONS[entry.level]?.label || entry.level})</option>`
-            )
-            .join("")}
-        `;
+	        refs.territoryFilter.innerHTML = `
+	          <option value="">Todos los territorios</option>
+	          ${options
+		            .map(
+		              (entry) =>
+		                `<option value="${entry.key}" ${app.territoryFilter === entry.key ? "selected" : ""}>${entry.name}${needsCodeSuffix.has(entry.key) && entry.code && entry.code !== "Sin código" ? " · " + entry.code : ""} (${LEVEL_DEFINITIONS[entry.level]?.label || entry.level})</option>`
+		            )
+		            .join("")}
+		        `;
         initTerritorySelect2();
         syncTerritorySelectValue();
 
@@ -3901,9 +3991,46 @@
                 return personPayload;
               }
             }
-            const peopleSnapshot = await getStaticPayload("people", STATIC_PEOPLE_PATH);
-            const people = peopleSnapshot?.people || {};
-            return people[String(personId)] || people[Number(personId)] || {};
+            // Static (GitHub Pages): derive from already-loaded mandates snapshot.
+            const mandates = (app.rawRows || []).filter((row) => Number(row.person_id) === Number(personId));
+            if (!mandates.length) {
+              return {};
+            }
+            const head = mandates[0] || {};
+            const person = {
+              person_id: Number(personId),
+              full_name: head.full_name || "",
+              given_name: head.given_name || "",
+              family_name: head.family_name || "",
+              birth_date: head.birth_date || null,
+              gender: head.gender || null,
+              territory_code: head.person_territory_code || head.territory_code || null,
+            };
+            const mappedMandates = mandates
+              .map((m) => ({
+                mandate_id: m.mandate_id,
+                source_id: m.source_id,
+                role_title: m.role_title,
+                level: m.level,
+                mandate_territory_code: m.mandate_territory_code,
+                start_date: m.start_date,
+                end_date: m.end_date,
+                is_active: m.is_active,
+                institution_name: m.institution_name,
+                party_id: m.party_id,
+                party_name: m.party_name,
+                party_acronym: m.party_acronym,
+              }))
+              .sort((a, b) => {
+                const aActive = Number(a.is_active) === 1 ? 1 : 0;
+                const bActive = Number(b.is_active) === 1 ? 1 : 0;
+                if (aActive !== bActive) return bActive - aActive;
+                const aStart = safeText(a.start_date);
+                const bStart = safeText(b.start_date);
+                if (aStart !== bStart) return bStart.localeCompare(aStart);
+                return Number(b.mandate_id || 0) - Number(a.mandate_id || 0);
+              });
+            return { person, mandates: mappedMandates };
           })();
 
           const person = payload?.person || {};

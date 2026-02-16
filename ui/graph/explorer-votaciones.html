@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vota Con La Chola | Explorador de Votaciones</title>
+    <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -820,7 +821,10 @@
         const endpoint = String(path || "").trim();
         if (!endpoint) return "";
         const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\\/$/, "")}${normalized}`;
+        if (API_BASE_OVERRIDE) {
+          const base = API_BASE_OVERRIDE.endsWith("/") ? API_BASE_OVERRIDE.slice(0, -1) : API_BASE_OVERRIDE;
+          return `${base}${normalized}`;
+        }
         if (isLocalApiHost) return normalized;
         return "";
       };

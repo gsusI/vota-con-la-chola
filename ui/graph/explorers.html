@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vota Con La Chola | Exploradores</title>
+    <link rel="icon" href="data:," />
     <style>
       :root {
         --bg-a: #eef2ff;
@@ -145,6 +146,17 @@
         padding-top: 12px;
       }
 
+      .local-api-disabled {
+        opacity: 0.53;
+        filter: grayscale(1);
+        cursor: not-allowed;
+      }
+
+      .local-api-disabled:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
       @media (max-width: 700px) {
         .page {
           width: calc(100% - 16px);
@@ -184,7 +196,7 @@
             <p class="meta">/graph</p>
           </a>
 
-          <a class="card" href="explorer/">
+          <a class="card" href="explorer/" data-local-api="explorer-sql">
             <p class="title">
               <strong>Explorer SQL</strong>
               <span class="badge">Local API</span>
@@ -235,5 +247,20 @@
         </p>
       </section>
     </main>
+    <script>
+      (function() {
+        if (!/(^|\.)github\.io$/i.test(window.location.hostname)) return;
+
+        const tooltip = "El Explorer SQL requiere API local y no funciona en GitHub Pages.";
+        const links = document.querySelectorAll('[data-local-api="explorer-sql"]');
+        links.forEach((link) => {
+          link.classList.add("local-api-disabled");
+          link.setAttribute("title", tooltip);
+          link.setAttribute("aria-disabled", "true");
+          link.setAttribute("tabindex", "-1");
+          link.addEventListener("click", (event) => event.preventDefault());
+        });
+      })();
+    </script>
   </body>
 </html>
