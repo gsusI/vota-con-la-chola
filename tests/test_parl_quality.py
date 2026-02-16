@@ -105,13 +105,14 @@ class TestParlVoteQuality(unittest.TestCase):
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_date_pct"], 0.95)
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_theme_pct"], 0.95)
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_totals_pct"], 0.95)
-        self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_initiative_link_pct"], 0.0)
+        self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["events_with_initiative_link_pct"], 0.95)
         self.assertEqual(DEFAULT_VOTE_QUALITY_THRESHOLDS["member_votes_with_person_id_pct"], 0.90)
 
         kpis = {
             "events_with_date_pct": 0.96,
             "events_with_theme_pct": 0.94,
             "events_with_totals_pct": 0.97,
+            "events_with_initiative_link_pct": 0.96,
             "member_votes_with_person_id_pct": 0.91,
         }
 

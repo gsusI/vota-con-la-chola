@@ -14,11 +14,44 @@ from datetime import datetime, timezone
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 POPULATION_DATA_PATH = Path("etl/data/published/poblacion_municipios_es.json")
+MANDATE_COLUMNS = [
+    "mandate_id",
+    "source_id",
+    "role_title",
+    "level",
+    "mandate_territory_code",
+    "mandate_territory_name",
+    "mandate_territory_level",
+    "start_date",
+    "end_date",
+    "is_active",
+    "person_id",
+    "full_name",
+    "given_name",
+    "family_name",
+    "birth_date",
+    "gender",
+    "person_territory_code",
+    "person_territory_name",
+    "person_territory_level",
+    "institution_id",
+    "institution_name",
+    "institution_level",
+    "institution_territory_code",
+    "institution_territory_name",
+    "institution_territory_level",
+    "party_id",
+    "party_name",
+    "party_acronym",
+    "municipality_code",
+    "municipality_name",
+    "municipality_population",
+]
 MANDATES_QUERY = """
-SELECT
-  m.mandate_id,
-  m.source_id,
-  m.role_title,
+	SELECT
+	  m.mandate_id,
+	  m.source_id,
+	  m.role_title,
   m.level,
   m.territory_code AS mandate_territory_code,
   tm.name AS mandate_territory_name,
@@ -30,6 +63,8 @@ SELECT
   p.full_name,
   p.given_name,
   p.family_name,
+  p.birth_date,
+  p.gender,
   p.territory_code AS person_territory_code,
   ti_p.name AS person_territory_name,
   ti_p.level AS person_territory_level,
@@ -47,41 +82,9 @@ JOIN persons p ON p.person_id = m.person_id
 JOIN institutions i ON i.institution_id = m.institution_id
 LEFT JOIN territories tm ON tm.code = m.territory_code
 LEFT JOIN parties pa ON pa.party_id = m.party_id
-LEFT JOIN territories ti_p ON ti_p.code = p.territory_code
-LEFT JOIN territories ti_i ON ti_i.code = i.territory_code
-"""
-
-PERSONS_WITH_MANDATES_QUERY = """
-SELECT
-  p.person_id,
-  p.full_name,
-  p.given_name,
-  p.family_name,
-  p.birth_date,
-  p.gender,
-  p.territory_code,
-  m.mandate_id,
-  m.source_id,
-  m.role_title,
-  m.level,
-  m.territory_code AS mandate_territory_code,
-  m.start_date,
-  m.end_date,
-  m.is_active,
-  i.name AS institution_name,
-  m.party_id AS party_id,
-  pa.name AS party_name,
-  pa.acronym AS party_acronym
-FROM persons p
-LEFT JOIN mandates m ON m.person_id = p.person_id
-LEFT JOIN institutions i ON i.institution_id = m.institution_id
-LEFT JOIN parties pa ON pa.party_id = m.party_id
-ORDER BY
-  p.person_id,
-  CASE WHEN m.is_active = 1 THEN 0 ELSE 1 END,
-  COALESCE(m.start_date, ''),
-  COALESCE(m.mandate_id, 0) DESC
-"""
+	LEFT JOIN territories ti_p ON ti_p.code = p.territory_code
+	LEFT JOIN territories ti_i ON ti_i.code = i.territory_code
+	"""
 
 
 def parse_args() -> argparse.Namespace:
@@ -108,6 +111,9 @@ def normalize_municipality_code(value: Any) -> str:
     token = "".join(ch for ch in str(value or "") if ch.isdigit())
     if len(token) == 5:
         return token
+    if len(token) == 6:
+        # Some upstream sources append a suffix digit; keep the INE 5-digit prefix.
+        return token[:5]
     return ""
 
 
@@ -200,13 +206,11 @@ def main() -> int:
         ).fetchall()
 
         mandates_raw = conn.execute(MANDATES_QUERY).fetchall()
-
-        people_raw = conn.execute(PERSONS_WITH_MANDATES_QUERY).fetchall()
     finally:
         conn.close()
 
     sources = [row_to_dict(row) for row in sources_raw]
-    mandates = []
+    mandates_rows: List[List[Any]] = []
     for row in mandates_raw:
         row_dict = row_to_dict(row)
         municipality_code, municipality_name, municipality_population_value = extract_municipality_fields(
@@ -216,71 +220,19 @@ def main() -> int:
         row_dict["municipality_code"] = municipality_code
         row_dict["municipality_name"] = municipality_name
         row_dict["municipality_population"] = municipality_population_value
-        mandates.append(row_dict)
-    total_person_rows = len(people_raw)
-
-    people: Dict[str, Dict[str, Any]] = {}
-    for row in people_raw:
-        row_dict = row_to_dict(row)
-        person_id = row["person_id"]
-        if person_id is None:
-            continue
-
-        person_municipality_code, person_municipality_name, person_municipality_population = extract_municipality_fields(
-            row_dict,
-            municipality_population,
-        )
-
-        person_key = str(person_id)
-        person = people.setdefault(
-            person_key,
-            {
-                "person": {
-                    "person_id": person_id,
-                    "full_name": row_dict["full_name"],
-                    "given_name": row_dict["given_name"],
-                    "family_name": row_dict["family_name"],
-                    "birth_date": row_dict["birth_date"],
-                    "gender": row_dict["gender"],
-                    "territory_code": row_dict["territory_code"],
-                },
-                "mandates": [],
-            },
-        )
-
-        mandate_id = row["mandate_id"]
-        if mandate_id is None:
-            continue
-
-        person["mandates"].append(
-            {
-                "mandate_id": mandate_id,
-                "source_id": row["source_id"],
-                "role_title": row["role_title"],
-                "level": row["level"],
-                "mandate_territory_code": row["mandate_territory_code"],
-                "start_date": row["start_date"],
-                "end_date": row["end_date"],
-                "is_active": row["is_active"],
-                "institution_name": row["institution_name"],
-                "party_id": row["party_id"],
-                "party_name": row["party_name"],
-                "party_acronym": row["party_acronym"],
-                "municipality_code": person_municipality_code,
-                "municipality_name": person_municipality_name,
-                "municipality_population": person_municipality_population,
-            }
-        )
+        mandates_rows.append([row_dict.get(col) for col in MANDATE_COLUMNS])
 
     mandates_snapshot = {
         "meta": {
             "snapshot_date": str(args.snapshot_date),
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "db_path": str(db_path),
-            "rows": len(mandates),
+            "rows": len(mandates_rows),
             "include_inactive": True,
         },
-        "rows": mandates,
+        # Columnar encoding: shrink static JSON by avoiding per-row key repetition.
+        "columns": list(MANDATE_COLUMNS),
+        "rows": mandates_rows,
     }
     sources_snapshot = {
         "meta": {
@@ -290,29 +242,23 @@ def main() -> int:
         },
         "sources": sources,
     }
-    people_snapshot = {
-        "meta": {
-            "snapshot_date": str(args.snapshot_date),
-            "generated_at": datetime.now(timezone.utc).isoformat(),
-            "persons": len(people),
-            "raw_rows": total_person_rows,
-        },
-        "people": people,
-    }
 
     mandates_path = out_dir / "arena-mandates.json"
     sources_path = out_dir / "sources.json"
-    people_path = out_dir / "people.json"
-
-    mandates_path.write_text(json.dumps(mandates_snapshot, ensure_ascii=True, indent=2), encoding="utf-8")
-    sources_path.write_text(json.dumps(sources_snapshot, ensure_ascii=True, indent=2), encoding="utf-8")
-    people_path.write_text(json.dumps(people_snapshot, ensure_ascii=True, indent=2), encoding="utf-8")
+    # Keep static payloads small: no pretty-print, and keep UTF-8 chars unescaped.
+    mandates_path.write_text(
+        json.dumps(mandates_snapshot, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    sources_path.write_text(
+        json.dumps(sources_snapshot, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8",
+    )
 
     print(
         "OK snapshot explorer-sports exportado: "
-        f"{mandates_path} ({len(mandates)} rows), "
-        f"{sources_path} ({len(sources)}), "
-        f"{people_path} ({len(people)} personas)"
+        f"{mandates_path} ({len(mandates_rows)} rows), "
+        f"{sources_path} ({len(sources)})"
     )
     return 0
 
