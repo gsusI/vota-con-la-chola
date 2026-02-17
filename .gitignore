@@ -8,6 +8,19 @@
 # Keep local notes in the working tree, never in git
 intro.md
 
+# Local Codex agent config (keep out of git)
+.codex/
+
+# Local scratch/build outputs
+dist/
+
+# Accidental command artifacts (created by mis-quoted CLI runs)
+/-
+/from-file
+/replay
+/strict-network
+/python3 scripts/
+
 # Cloudflare Wrangler local state (may contain sensitive tokens/state)
 .wrangler/
 
