@@ -31,6 +31,7 @@ Current sprint pointer:
 | AI-OPS-20 | PASS | Citizen Dashboard v3: multi-concern synthesis + shareable URLs + method toggle (static GH Pages, bounded artifacts, audit-first) | `docs/etl/sprints/AI-OPS-20/sprint-ai-agents.md` | `docs/etl/sprints/AI-OPS-20/kickoff.md` | `docs/etl/sprints/AI-OPS-20/closeout.md` |
 | AI-OPS-21 | PASS | Citizen Coverage + Coherence v1: make method coverage explicit and surface conservative "dice vs hace" only when comparable (static GH Pages, audit-first) | `docs/etl/sprints/AI-OPS-21/sprint-ai-agents.md` | `docs/etl/sprints/AI-OPS-21/kickoff.md` | `docs/etl/sprints/AI-OPS-21/closeout.md` |
 | AI-OPS-22 | PASS | Citizen Alignment + Onboarding v0: local preferences -> transparent match/mismatch/unknown per party (static GH Pages, audit-first, privacy-first) | `docs/etl/sprints/AI-OPS-22/sprint-ai-agents.md` | `docs/etl/sprints/AI-OPS-22/kickoff.md` | `docs/etl/sprints/AI-OPS-22/closeout.md` |
+| AI-OPS-23 | PLANNED | Citizen Onboarding v1: \"start here\" flow to reach a defensible answer fast (static GH Pages, audit-first, privacy-first) | `docs/etl/sprints/AI-OPS-23/sprint-ai-agents.md` | `docs/etl/sprints/AI-OPS-23/kickoff.md` | `docs/etl/sprints/AI-OPS-23/closeout.md` |
 
 ## Folder contract (per sprint)
 
