@@ -1,0 +1,3 @@
+series_id,series_label,dataset,dimensions,frequency,unit,source_url,points_count,status,apply_set,source_record_id
+PARO.TASA.ES.M,Tasa de paro registrada,bde_series_api,series_code=PARO.TASA.ES.M|freq=M|unit=PERCENT,M,PERCENT,https://api.bde.es/datos/series/PARO.TASA.ES.M,3,OK,TRUE,series:parotasaesm
+TI.TMM.T.4F.EUR.4F.N.M,Tipo de interes de prestamos hipotecarios (media mensual),bde_series_api,series_code=TI.TMM.T.4F.EUR.4F.N.M|freq=M|unit=%,M,%,https://api.bde.es/datos/series/TI.TMM.T.4F.EUR.4F.N.M,3,OK,TRUE,series:titmmt4feur4fnm

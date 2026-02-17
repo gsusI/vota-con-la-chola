@@ -6,6 +6,17 @@ Herramienta abierta y orientada a la evidencia para ayudar a decidir el voto: cr
 
 Este repo es intencionalmente **ultraligero**: un solo SQLite, snapshots reproducibles y trazabilidad por defecto.
 
+## Visión y misión
+
+Visión:
+- Que cualquier persona en España pueda decidir su voto con la misma exigencia con la que audita una cuenta pública: comparando **lo que se promete, lo que se ejecuta y lo que impacta**, con evidencia verificable en su nivel territorial (Estado, CCAA, municipal, UE).
+
+Misión:
+- Construir y operar una infraestructura cívica abierta, reproducible y auditable que transforme datos públicos fragmentados en explicaciones claras y trazables para:
+  1. medir alineamiento ciudadano-político,
+  2. contrastar “dicen vs hacen”,
+  3. estimar impacto cuando sea metodológicamente defendible.
+
 ## Leer primero
 
 - Índice de docs: `docs/README.md`
@@ -20,6 +31,7 @@ Este repo es intencionalmente **ultraligero**: un solo SQLite, snapshots reprodu
 - Ingesta parlamentaria (Congreso/Senado) para votaciones e iniciativas (con pipeline de calidad en curso).
 - Ingesta inicial de Infoelectoral (procesos/descargas/resultados).
 - Publicación de snapshots canónicos en `etl/data/published/`.
+- Espejo público de snapshots en Hugging Face Datasets (`just etl-publish-hf`).
 - UI local para explorar el esquema y la evidencia: `just graph-ui` (ver `docs/etl/README.md`).
 
 ## Fuente de verdad (código)

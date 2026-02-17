@@ -13,6 +13,7 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - Strategy and destination: `docs/roadmap.md`
   - Near-term execution: `docs/roadmap-tecnico.md`
   - Operational backlog and real status: `docs/etl/e2e-scrape-load-tracker.md`
+  - Public accountability log for blocked access to public data: `docs/etl/name-and-shame-access-blockers.md`
 - Do not duplicate roadmaps in random docs. Link instead of copy.
 - Every non-trivial change must answer three questions in docs or tracker:
   - where we are now
@@ -50,6 +51,27 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - mark status honestly
   - move to next highest-leverage task
 - Finish before expanding scope: close loops (`pending -> resolved/ignored`) before opening new surfaces.
+
+### Name & Shame Protocol (Public-Data Access Obstruction)
+- Policy basis: this project treats official public-data blocking against transparency obligations as a democratic accountability incident.
+- Every confirmed blocking case MUST be recorded in `docs/etl/name-and-shame-access-blockers.md`.
+- Required evidence for each incident:
+  - organism/institution name and source/endpoint URL
+  - first/last seen timestamps (UTC)
+  - exact reproducible command used (prefer `--strict-network`)
+  - machine-verifiable failure signal (`HTTP 403`, `cf-mitigated: challenge`, anti-bot HTML, persistent timeout pattern)
+  - links to immutable evidence artifacts (logs/reports under `docs/etl/sprints/*/evidence` or equivalent)
+  - impacted tracker row(s) in `docs/etl/e2e-scrape-load-tracker.md`
+  - explicit next escalation action
+- Editorial rule:
+  - Name institutions clearly, but keep entries factual and evidence-first.
+  - No insults, speculation, or motive claims beyond what evidence supports.
+  - Append-only history; if resolved, mark resolution with proof and keep the original incident visible.
+
+## Project Skills
+
+- MTurk manual review workflow: `skills/mturk-review-loop/SKILL.md`
+- Use this skill for batch prep/apply/progress on `topic_evidence_reviews` (`congreso_intervenciones`).
 
 ## Working Agreement
 
@@ -155,6 +177,32 @@ Explorer uses `history.pushState` / `popstate`.
 - Tracker gate (SQL vs checklist):
   - `DB_PATH=etl/data/staging/politicos-es.e2e19.db just etl-tracker-status`
 
+### Public Snapshot Distribution (Hugging Face)
+- Public data mirror lives in Hugging Face Datasets (free/public access for collaborators).
+- Credentials are loaded from `.env`:
+  - `HF_TOKEN`
+  - `HF_USERNAME`
+  - `HF_DATASET_REPO_ID` (default `<HF_USERNAME>/vota-con-la-chola-data`)
+- Canonical publish command:
+  - `just etl-publish-hf`
+  - Use `just etl-publish-hf-dry-run` before first publish or when changing packaging logic.
+- Current HF packaging contract:
+  - `just etl-publish-hf` exports public-safe metadata + Parquet tables for Data Studio browsing.
+  - Parquet tuning env vars:
+    - `HF_PARQUET_BATCH_ROWS` (default `50000`)
+    - `HF_PARQUET_COMPRESSION` (default `zstd`)
+    - `HF_PARQUET_TABLES` (optional subset; empty means all non-excluded tables)
+    - `HF_PARQUET_EXCLUDE_TABLES` (default `raw_fetches,run_fetches,source_records,lost_and_found`)
+    - `HF_ALLOW_SENSITIVE_PARQUET` (`0` by default; set `1` only for private repos)
+    - `HF_INCLUDE_SQLITE_GZ` (`0` by default; set `1` only for private repos)
+- Significant data change checklist (required):
+  - Run `just etl-publish-hf-dry-run` and verify non-zero `Parquet tables`/`Parquet files`.
+  - Run `just etl-publish-hf` to push the new snapshot to `HF_DATASET_REPO_ID`.
+  - Confirm `latest.json` points to the new `snapshot_date`.
+  - If publish fails, record blocker evidence in `docs/etl/e2e-scrape-load-tracker.md` (do not mark DONE).
+- Completion rule for snapshot slices:
+  - A slice that claims published artifacts is not complete until HF publish succeeds or the blocker is recorded with evidence in `docs/etl/e2e-scrape-load-tracker.md`.
+
 ### Idempotence Contract (Must Preserve)
 - DB upserts are keyed by `(source_id, source_record_id)` for mandates.
 - Samples-based test enforces idempotence across all connectors:
@@ -180,6 +228,7 @@ As of `2026-02-12` from this environment:
 - Parlamento de Navarra endpoints return `403` with `cf-mitigated: challenge`.
 Guideline:
 - Do not "fake DONE". Mark as blocked in tracker + document the failure mode and evidence URL/status.
+- Add/update the corresponding incident in `docs/etl/name-and-shame-access-blockers.md` with evidence links and the planned escalation action.
 - If a bypass requires interactive browser challenges/cookies, it is not reproducible by default; only add optional cookie injection if explicitly accepted as a tradeoff.
 
 ### Connector-Specific Notes (Hard-Won)

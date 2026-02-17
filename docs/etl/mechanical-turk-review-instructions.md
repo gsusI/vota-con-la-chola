@@ -86,7 +86,32 @@ Mapping rule:
 - `proposed_status=resolved` when stance is actionable and agreement threshold is met.
 - `proposed_status=ignored` when consensus is `no_signal` or evidence is malformed/off-topic.
 
-## 7) Internal handoff to DB
+## 7) Export files contract (required)
+
+Batch id format:
+- `mturk-YYYYMMDD-<short_slug>` (example: `mturk-20260216-congreso-a1`)
+
+Required folder per batch:
+- `etl/data/raw/manual/mturk_reviews/<batch_id>/`
+
+Required files:
+- `tasks_input.csv`: the exact rows sent to workers (immutable once launched).
+- `workers_raw.csv`: raw platform export from MTurk (immutable; no edits).
+- `decisions_adjudicated.csv`: final internal decisions to apply to DB.
+
+Minimum columns:
+- `tasks_input.csv`:
+  - `batch_id`, `evidence_id`, `person_name`, `topic_label`, `evidence_excerpt`, `evidence_date`, `source_url`, `review_reason`
+- `workers_raw.csv`:
+  - `batch_id`, `evidence_id`, `worker_id`, `worker_stance`, `worker_confidence`, `worker_note`
+- `decisions_adjudicated.csv`:
+  - `batch_id`, `evidence_id`, `proposed_status`, `proposed_final_stance`, `agreement_ratio`, `adjudicator_note`
+
+Immutability rule:
+- Never overwrite `tasks_input.csv` or `workers_raw.csv`.
+- If adjudication changes, append a new `decisions_adjudicated_v2.csv` (or higher) and keep prior versions.
+
+## 8) Internal handoff to DB
 
 Internal reviewer applies accepted proposals with:
 
@@ -113,14 +138,37 @@ python3 scripts/ingestar_parlamentario_es.py review-decision \
   --note "mturk batch <batch_id>: no actionable signal"
 ```
 
-## 8) Out-of-scope (do not delegate)
+## 9) Progress checks (live)
+
+Before apply:
+- `wc -l etl/data/raw/manual/mturk_reviews/<batch_id>/workers_raw.csv`
+- `wc -l etl/data/raw/manual/mturk_reviews/<batch_id>/decisions_adjudicated.csv`
+
+After apply (DB progress):
+
+```bash
+sqlite3 etl/data/staging/politicos-es.db "
+SELECT status, COUNT(*) AS c
+FROM topic_evidence_reviews
+GROUP BY status
+ORDER BY status;"
+```
+
+```bash
+sqlite3 etl/data/staging/politicos-es.db "
+SELECT COUNT(*) AS c
+FROM topic_evidence_reviews
+WHERE LOWER(COALESCE(note,'')) LIKE '%mturk%';"
+```
+
+## 10) Out-of-scope (do not delegate)
 
 - Codebook changes.
 - Final arbitration for disputed or politically sensitive items.
 - Intervention definition for causal analysis.
 - Any public narrative/scoring decision.
 
-## 9) Auditability requirements
+## 11) Auditability requirements
 
 - Keep raw MTurk export files immutable by batch.
 - Preserve row-level mapping `evidence_id -> worker labels -> final proposal`.

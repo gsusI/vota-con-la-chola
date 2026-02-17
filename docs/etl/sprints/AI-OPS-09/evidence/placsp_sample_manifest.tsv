@@ -1,0 +1,3 @@
+source_id	source_name	sample_path	exists	status	min_records_loaded_strict	sample_size_bytes	sample_sha256	sample_records
+placsp_sindicacion	PLACSP - Contratacion publica Espana (ATOM/CODICE)	etl/data/raw/samples/placsp_sindicacion_sample.xml	TRUE	OK	10	1556	e50c039757bc7a67f8db8db87af36ac5bd24d8ea66b9a0b504ca1b772bc08197	3
+placsp_autonomico	PLACSP - Contratacion autonómica (piloto 3 CCAA)	etl/data/raw/samples/placsp_autonomico_sample.xml	TRUE	OK	3	1051	a9a076a0a5a832c7a32b17e83449cf41410edaab7faad6cc84d1bc44e36b1f57	2

@@ -1,0 +1,15 @@
+metric,value
+source_id,placsp_autonomico
+mode,from-file
+command,python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_autonomico --from-file etl/data/raw/samples/placsp_autonomico_sample.xml --snapshot-date 2026-02-17 --timeout 30
+exit_code,0
+before_records,106
+after_records,108
+delta_records,2
+run_id,196
+run_status,ok
+run_records_seen,2
+run_records_loaded,2
+run_started_at,2026-02-17T08:43:11+00:00
+run_finished_at,2026-02-17T08:43:13+00:00
+snapshot,20260217

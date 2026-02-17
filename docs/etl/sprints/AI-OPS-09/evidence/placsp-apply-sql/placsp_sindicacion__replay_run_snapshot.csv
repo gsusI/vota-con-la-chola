@@ -1,0 +1,15 @@
+metric,value
+source_id,placsp_sindicacion
+mode,replay
+command,python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_sindicacion --from-file docs/etl/sprints/AI-OPS-09/evidence/placsp-replay-inputs/placsp_sindicacion/placsp_sindicacion_replay_20260217.xml --snapshot-date 2026-02-17 --timeout 30
+exit_code,1
+before_records,109
+after_records,109
+delta_records,0
+run_id,194
+run_status,error
+run_records_seen,0
+run_records_loaded,0
+run_started_at,2026-02-17T08:42:58+00:00
+run_finished_at,2026-02-17T08:42:58+00:00
+snapshot,20260217

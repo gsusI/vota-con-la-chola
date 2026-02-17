@@ -1,0 +1,10 @@
+source_id,payload_tracker_status,tracker_status,payload_sql_status,computed_sql_status,payload_mismatch_state,computed_mismatch_state,payload_mismatch_waived,computed_mismatch_waived,payload_waiver_expiry,payload_tracker_blocked,db_runs_ok,db_runs_total,db_max_loaded_network,db_max_loaded_any,db_last_loaded,db_tracker_blocked
+placsp_autonomico,TODO,TODO,DONE,DONE,MISMATCH,MISMATCH,False,False,,True,2,3,106,106,0,False
+placsp_sindicacion,TODO,TODO,DONE,DONE,MISMATCH,MISMATCH,False,False,,True,5,7,106,106,0,False
+placsp_contratacion,,N/A,TODO,TODO,UNTRACKED,UNTRACKED,False,False,,False,0,0,0,0,0,False
+bdns_api_subvenciones,TODO,TODO,PARTIAL,PARTIAL,MISMATCH,MISMATCH,False,False,,True,2,6,0,3,0,False
+bdns_autonomico,TODO,TODO,PARTIAL,PARTIAL,MISMATCH,MISMATCH,False,False,,True,1,3,0,2,0,False
+bdns_subvenciones,,N/A,TODO,TODO,UNTRACKED,UNTRACKED,False,False,,False,0,0,0,0,0,False
+eurostat_sdmx,TODO,TODO,DONE,DONE,MISMATCH,MISMATCH,False,False,,True,6,11,2394,2394,0,False
+bde_series_api,TODO,TODO,PARTIAL,PARTIAL,MISMATCH,MISMATCH,False,False,,True,1,5,0,2,0,False
+aemet_opendata_series,TODO,TODO,PARTIAL,PARTIAL,MISMATCH,MISMATCH,False,False,,True,1,5,0,2,0,False
