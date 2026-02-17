@@ -52,6 +52,23 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - move to next highest-leverage task
 - Finish before expanding scope: close loops (`pending -> resolved/ignored`) before opening new surfaces.
 
+### Anti-Loop Sprint Policy (Mandatory)
+- Every sprint MUST deliver at least one visible, user-facing delta that is under repo control (schema/data/UI/API/artifact), even if external sources remain blocked.
+- Default sprint capacity split:
+  - `>=70%` controllable work (can ship without upstream behavior change)
+  - `<=30%` unblock/probe work (external dependency risk)
+- Do not repeat the same blocker probe pattern unless there is a new lever. Valid new levers include:
+  - new credential/token available,
+  - changed endpoint/contract with evidence,
+  - approved reproducible bypass policy,
+  - upstream status change with fresh signal.
+- Per blocked source, run at most one strict-network retry per sprint when no new lever exists; otherwise log `no_new_lever` and move on.
+- Sprint closeout must include a `visible_progress` check with evidence. Examples:
+  - tracker row improved with measurable KPI delta,
+  - new reproducible artifact published and linked in UI/status payload,
+  - new drill-down capability or parity check added and passing.
+- If a proposed objective depends only on external unblock, recast it as a secondary lane and set a controllable primary objective.
+
 ### Name & Shame Protocol (Public-Data Access Obstruction)
 - Policy basis: this project treats official public-data blocking against transparency obligations as a democratic accountability incident.
 - Every confirmed blocking case MUST be recorded in `docs/etl/name-and-shame-access-blockers.md`.

@@ -1,0 +1,8 @@
+family,source_id,strict_run_id,strict_status,strict_records_seen,strict_records_loaded,replay_run_id,replay_status,replay_records_seen,replay_records_loaded,loaded_delta_strict_minus_replay,status_pair,parity_flag
+aemet,aemet_opendata_series,245,error,0,0,247,ok,2,2,-2,error/ok,DIFF
+bde,bde_series_api,242,error,0,0,244,ok,2,2,-2,error/ok,DIFF
+bdns,bdns_api_subvenciones,233,error,0,0,238,ok,3,3,-3,error/ok,DIFF
+bdns,bdns_autonomico,234,error,0,0,236,ok,2,2,-2,error/ok,DIFF
+eurostat,eurostat_sdmx,239,ok,2394,2394,241,ok,2,2,2392,ok/ok,DIFF
+placsp,placsp_autonomico,224,error,0,0,230,ok,2,2,-2,error/ok,DIFF
+placsp,placsp_sindicacion,223,error,0,0,232,ok,3,3,-3,error/ok,DIFF
