@@ -60,4 +60,14 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 1,
         "fallback_file": "etl/data/raw/samples/congreso_intervenciones_sample.json",
     },
+    "programas_partidos": {
+        "name": "Programas de partidos (manifest-driven)",
+        "scope": "nacional",
+        "default_url": "manifest://programas_partidos",
+        "format": "csv",
+        "level": "nacional",
+        "institution_name": "Programas de partidos",
+        "min_records_loaded_strict": 1,
+        "fallback_file": "etl/data/raw/samples/programas_partidos_sample.csv",
+    },
 }
