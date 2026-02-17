@@ -1,0 +1,168 @@
+{
+  "generated_at": "2026-02-17T19:24:24+00:00",
+  "inputs": {
+    "concerns_path": "ui/citizen/concerns_v1.json",
+    "combined": "docs/gh-pages/citizen/data/citizen.json",
+    "votes": "docs/gh-pages/citizen/data/citizen_votes.json",
+    "declared": "docs/gh-pages/citizen/data/citizen_declared.json"
+  },
+  "parties_total": 16,
+  "topics_total": 111,
+  "topics_tagged_total": 111,
+  "coherence_by_concern": [
+    {
+      "concern_id": "vivienda",
+      "label": "Vivienda",
+      "topics_total": 8,
+      "cells_total": 128,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 128
+    },
+    {
+      "concern_id": "empleo",
+      "label": "Empleo",
+      "topics_total": 14,
+      "cells_total": 224,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 224
+    },
+    {
+      "concern_id": "sanidad",
+      "label": "Sanidad",
+      "topics_total": 3,
+      "cells_total": 48,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 48
+    },
+    {
+      "concern_id": "educacion",
+      "label": "Educacion",
+      "topics_total": 9,
+      "cells_total": 144,
+      "comparable_cells": 1,
+      "comparable_pct": 0.006944444444444444,
+      "match_cells": 1,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0.0,
+      "not_comparable_cells": 143
+    },
+    {
+      "concern_id": "coste_vida",
+      "label": "Coste de vida",
+      "topics_total": 8,
+      "cells_total": 128,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 128
+    },
+    {
+      "concern_id": "energia",
+      "label": "Energia",
+      "topics_total": 11,
+      "cells_total": 176,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 176
+    },
+    {
+      "concern_id": "transporte",
+      "label": "Transporte",
+      "topics_total": 11,
+      "cells_total": 176,
+      "comparable_cells": 1,
+      "comparable_pct": 0.005681818181818182,
+      "match_cells": 0,
+      "mismatch_cells": 1,
+      "mismatch_pct_of_comparable": 1.0,
+      "not_comparable_cells": 175
+    },
+    {
+      "concern_id": "seguridad_justicia",
+      "label": "Seguridad y justicia",
+      "topics_total": 37,
+      "cells_total": 592,
+      "comparable_cells": 2,
+      "comparable_pct": 0.0033783783783783786,
+      "match_cells": 1,
+      "mismatch_cells": 1,
+      "mismatch_pct_of_comparable": 0.5,
+      "not_comparable_cells": 590
+    },
+    {
+      "concern_id": "inmigracion",
+      "label": "Inmigracion",
+      "topics_total": 6,
+      "cells_total": 96,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 96
+    },
+    {
+      "concern_id": "corrupcion",
+      "label": "Corrupcion",
+      "topics_total": 10,
+      "cells_total": 160,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 160
+    },
+    {
+      "concern_id": "campo_rural",
+      "label": "Campo y mundo rural",
+      "topics_total": 9,
+      "cells_total": 144,
+      "comparable_cells": 0,
+      "comparable_pct": 0.0,
+      "match_cells": 0,
+      "mismatch_cells": 0,
+      "mismatch_pct_of_comparable": 0,
+      "not_comparable_cells": 144
+    },
+    {
+      "concern_id": "igualdad",
+      "label": "Igualdad",
+      "topics_total": 6,
+      "cells_total": 96,
+      "comparable_cells": 1,
+      "comparable_pct": 0.010416666666666666,
+      "match_cells": 0,
+      "mismatch_cells": 1,
+      "mismatch_pct_of_comparable": 1.0,
+      "not_comparable_cells": 95
+    }
+  ],
+  "coherence_overall_tagged": {
+    "topics_total": 111,
+    "cells_total": 1776,
+    "comparable_cells": 5,
+    "comparable_pct": 0.002815315315315315,
+    "match_cells": 2,
+    "mismatch_cells": 3,
+    "mismatch_pct_of_comparable": 0.6,
+    "not_comparable_cells": 1771
+  }
+}

@@ -69,6 +69,25 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - new drill-down capability or parity check added and passing.
 - If a proposed objective depends only on external unblock, recast it as a secondary lane and set a controllable primary objective.
 
+### Citizen-First Product Rules (Static, Evidence-First)
+- Treat `/citizen` (GH Pages) as the default user-facing surface for “what happened on what you care about”.
+- Keep it **static-first**:
+  - prefer bounded JSON artifacts + client-side rendering
+  - avoid server requirements unless explicitly approved
+- Prefer shareable state:
+  - encode meaningful view state in URL params (concerns, party focus, method) so a link reproduces the view
+  - use `localStorage` only as a convenience fallback when URL state is absent
+- Privacy exception (user preferences):
+  - citizen preference inputs are **local-first by default** (store in `localStorage`)
+  - never write preferences into URL query params automatically
+  - if a share link is provided, it must be explicit opt-in and should use URL **fragment** (`#...`) over query (`?...`) to avoid server log leakage
+- Preserve auditability:
+  - every stance shown in the citizen UI must link to a concrete explorer drill-down (SQL/evidence/tema)
+  - render `unknown/no_signal` explicitly (never silently impute)
+- Enforce performance budgets:
+  - citizen snapshot JSON must remain bounded (target <= `5MB`), validated in `just explorer-gh-pages-build`
+  - prefer pre-aggregation (small grids) over shipping raw evidence blobs to the browser
+
 ### Name & Shame Protocol (Public-Data Access Obstruction)
 - Policy basis: this project treats official public-data blocking against transparency obligations as a democratic accountability incident.
 - Every confirmed blocking case MUST be recorded in `docs/etl/name-and-shame-access-blockers.md`.
@@ -97,6 +116,8 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 - ETL entrypoint is `scripts/ingestar_politicos_es.py`.
 - UI server is `scripts/graph_ui_server.py`.
 - Explorer UI is `ui/graph/explorer.html`.
+- Citizen UI is `ui/citizen/index.html` (static GH Pages).
+- Citizen snapshot export + validation are `scripts/export_citizen_snapshot.py` and `scripts/validate_citizen_snapshot.py`.
 
 ### Schema Evolution Rules (SQLite)
 - Prefer additive changes: new tables, new columns, new indexes.

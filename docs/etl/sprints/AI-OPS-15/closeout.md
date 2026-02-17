@@ -64,6 +64,11 @@ AI-OPS-16 should start when at least one of the following is true:
 2. Strict gate/parity regresses (`mismatches>0`, `waivers_expired>0`, `done_zero_real>0`, or status/SQL impact drift).
 3. Next controllable roadmap slice is selected for visible delivery (for example, declared-positions quality/review throughput or recommendation explainability), keeping anti-loop policy in force.
 
+Operational note:
+- Sprint triggers in closeouts are historical. For the current active sprint plan and status, use:
+  - `docs/etl/sprints/README.md`
+  - `docs/etl/sprint-ai-agents.md`
+
 ## Escalation rule check
 
 T7 escalation condition:

@@ -1,0 +1,101 @@
+   860	      function prefsToStorageValue(prefsMap) {
+   861	        const items = {};
+   862	        const keys = Array.from((prefsMap && prefsMap.keys ? prefsMap.keys() : [])).map((x) => Number(x || 0));
+   863	        keys.sort((a, b) => a - b);
+   864	        for (const tid of keys) {
+   865	          const pref = normalizePrefValue(prefsMap.get(tid));
+   866	          if (!pref) continue;
+   867	          items[String(tid)] = pref;
+   868	        }
+   869	        return JSON.stringify({ version: "v1", updated_at: new Date().toISOString(), items });
+   870	      }
+   871	
+   872	      function prefsFromStorageValue(raw) {
+   873	        const txt = String(raw || "").trim();
+   874	        if (!txt) return new Map();
+   875	        try {
+   876	          const obj = JSON.parse(txt);
+   877	          const items = obj && obj.items && typeof obj.items === "object" ? obj.items : {};
+   878	          const out = new Map();
+   879	          for (const [k, v] of Object.entries(items)) {
+   880	            const tid = Number(k || 0);
+   881	            if (!Number.isFinite(tid) || tid <= 0) continue;
+   882	            const pref = normalizePrefValue(v);
+   883	            if (!pref) continue;
+   884	            out.set(tid, pref);
+   885	          }
+   886	          return out;
+   887	        } catch {
+   888	          return new Map();
+   889	        }
+   890	      }
+   891	
+   892	      function encodePrefsPayload(prefsMap) {
+   893	        // Compact v1: topic_id=<s|o> pairs joined by commas.
+   894	        const keys = Array.from((prefsMap && prefsMap.keys ? prefsMap.keys() : [])).map((x) => Number(x || 0));
+   895	        keys.sort((a, b) => a - b);
+   896	        const parts = [];
+   897	        for (const tid of keys) {
+   898	          const pref = normalizePrefValue(prefsMap.get(tid));
+   899	          if (!pref) continue;
+   900	          parts.push(`${tid}=${pref === "support" ? "s" : "o"}`);
+   901	        }
+   902	        return parts.join(",");
+   903	      }
+   904	
+   905	      function decodePrefsPayload(payload) {
+   906	        const txt = String(payload || "").trim();
+   907	        const out = new Map();
+   908	        if (!txt) return out;
+   909	        for (const part of txt.split(",")) {
+   910	          const p = String(part || "").trim();
+   911	          if (!p) continue;
+   912	          const [k, v] = p.split("=");
+   913	          const tid = Number(String(k || "").trim() || 0);
+   914	          if (!Number.isFinite(tid) || tid <= 0) continue;
+   915	          const vv = String(v || "").trim().toLowerCase();
+   916	          const pref = vv === "s" ? "support" : vv === "o" ? "oppose" : "";
+   917	          if (!pref) continue;
+   918	          out.set(tid, pref);
+   919	        }
+   920	        return out;
+   921	      }
+   922	
+   923	      function readPrefsFromHash() {
+   924	        const h = String(location.hash || "");
+   925	        if (!h || h.length < 2) return { prefs: null, error: "" };
+   926	        // Expect: #prefs=v1:<payload>
+   927	        if (!h.startsWith("#prefs=")) return { prefs: null, error: "" };
+   928	        const raw = h.slice("#prefs=".length);
+   929	        const decoded = decodeURIComponent(raw);
+   930	        if (!decoded.startsWith("v1:")) return { prefs: null, error: "prefs hash version no soportada" };
+   931	        const payload = decoded.slice(3);
+   932	        return { prefs: decodePrefsPayload(payload), error: "" };
+   933	      }
+   934	
+   935	      function buildShareUrlWithPrefs(prefsMap) {
+   936	        const base = new URL(String(location.href || ""), String(location.origin || undefined));
+   937	        const p = new URLSearchParams(base.search || "");
+   938	        // Ensure alignment view is explicit in shared links.
+   939	        p.set("view", "alignment");
+   940	        base.search = `?${p.toString()}`;
+   941	        base.hash = `#prefs=${encodeURIComponent("v1:" + encodePrefsPayload(prefsMap))}`;
+   942	        return base.toString();
+   943	      }
+   944	
+   945	      function persistPrefs() {
+   946	        try {
+   947	          lsSet(LS_PREFS, prefsToStorageValue(state.prefs));
+   948	        } catch {
+   949	          // ignore
+   950	        }
+   951	      }
+   952	
+   953	      function setPrefForTopic(topicId, pref) {
+   954	        const tid = Number(topicId || 0);
+   955	        if (!Number.isFinite(tid) || tid <= 0) return;
+   956	        const v = normalizePrefValue(pref);
+   957	        if (!v) return;
+   958	        const cur = String(state.prefs.get(tid) || "");
+   959	        if (cur === v) state.prefs.delete(tid);
+   960	        else state.prefs.set(tid, v);

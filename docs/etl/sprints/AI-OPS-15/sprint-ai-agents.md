@@ -3,6 +3,17 @@
 ## Objective
 - Deliver visible, controllable progress in analytics/product truth while time-boxing external blocker probes and preserving strict gate/parity.
 
+## Note (post-hoc metadata)
+- This sprint predates the LONG_10X prompt-pack template used in later sprints (AI-OPS-17+).
+- The "no blind retries" blocker policy is now canonical in `AGENTS.md` under **Anti-Loop Sprint Policy**.
+- Any points metadata here is an estimate for planning only (do not treat as an executed measurement).
+
+## Scale Metadata (post-hoc, estimated)
+- `scale_mode`: `STANDARD_1X`
+- `planned_points_estimate`: `15`
+- `planned_task_count`: `7`
+- `horizon_weeks`: `1`
+
 ## Tasks
 
 1. Baseline capture

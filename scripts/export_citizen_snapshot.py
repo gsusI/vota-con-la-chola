@@ -7,7 +7,7 @@ Goal:
 - Preserve honesty: expose coverage and avoid silent imputation.
 
 Output:
-- JSON file matching `docs/etl/sprints/AI-OPS-17/reports/citizen-data-contract.md`.
+- JSON file matching `docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md`.
 
 This exporter is intentionally conservative: it exports aggregated party stances per topic
 (with coverage) and only links out to the existing explorers for audit/evidence drill-down.
@@ -20,6 +20,7 @@ import json
 import math
 import sqlite3
 import sys
+import unicodedata
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -45,6 +46,13 @@ class Scope:
     computed_version: str
 
 
+@dataclass(frozen=True)
+class ConcernDef:
+    id: str
+    label: str
+    keywords_norm: tuple[str, ...]
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Exporta snapshot JSON para app ciudadana (GH Pages)")
     p.add_argument("--db", default=str(DEFAULT_DB), help="Ruta a la base SQLite")
@@ -62,8 +70,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--computed-method",
         default="auto",
-        choices=("auto", "combined", "votes"),
-        help="Metodo de posiciones a usar (auto=combined si existe, si no votes)",
+        choices=("auto", "combined", "votes", "declared"),
+        help="Metodo de posiciones a usar (auto=combined si existe, si no votes; declared=solo evidencia declarada)",
     )
     p.add_argument("--institution-id", type=int, default=DEFAULT_INSTITUTION_ID)
     p.add_argument("--max-topics", type=int, default=200)
@@ -83,6 +91,71 @@ def open_db(path: Path) -> sqlite3.Connection:
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
+
+
+def strip_diacritics(s: str) -> str:
+    # Keep consistent with ui/citizen/index.html (NFD + strip combining marks).
+    return "".join(ch for ch in unicodedata.normalize("NFD", str(s or "")) if not unicodedata.combining(ch))
+
+
+def norm(s: str) -> str:
+    return strip_diacritics(str(s or "")).lower().strip()
+
+
+def load_concerns(path: Path) -> list[ConcernDef]:
+    if not path.exists():
+        return []
+    obj = json.loads(path.read_text(encoding="utf-8"))
+    concerns = obj.get("concerns") or []
+    if not isinstance(concerns, list):
+        return []
+
+    out: list[ConcernDef] = []
+    for c in concerns:
+        if not isinstance(c, dict):
+            continue
+        cid = str(c.get("id") or "").strip()
+        if not cid:
+            continue
+        label = str(c.get("label") or cid).strip()
+        kws = c.get("keywords") or []
+        if not isinstance(kws, list):
+            kws = []
+        kws_norm = tuple(sorted({k for k in (norm(x) for x in kws) if k}))
+        out.append(ConcernDef(id=cid, label=label, keywords_norm=kws_norm))
+    return out
+
+
+def compute_topic_concern_ids(label: str, concerns: list[ConcernDef]) -> list[str]:
+    ln = norm(label)
+    if not ln:
+        return []
+    ids: set[str] = set()
+    for c in concerns:
+        if not c.id or not c.keywords_norm:
+            continue
+        if any(k in ln for k in c.keywords_norm):
+            ids.add(c.id)
+    return sorted(ids)
+
+
+def methods_available(conn: sqlite3.Connection, *, topic_set_id: int, institution_id: int, as_of_date: str) -> list[str]:
+    rows = conn.execute(
+        """
+        SELECT computed_method, COUNT(*) AS c
+        FROM topic_positions
+        WHERE topic_set_id = ?
+          AND institution_id = ?
+          AND as_of_date = ?
+        GROUP BY computed_method
+        HAVING COUNT(*) > 0
+        ORDER BY computed_method ASC
+        """,
+        (int(topic_set_id), int(institution_id), str(as_of_date)),
+    ).fetchall()
+    out = [str(r["computed_method"] or "").strip() for r in rows]
+    out = [m for m in out if m]
+    return sorted(set(out))
 
 
 def _max_as_of_date(conn: sqlite3.Connection, *, topic_set_id: int, institution_id: int, computed_method: str) -> str:
@@ -185,7 +258,14 @@ def resolve_scope(conn: sqlite3.Connection, *, args: argparse.Namespace) -> Scop
     )
 
 
-def export_topics(conn: sqlite3.Connection, *, scope: Scope, max_topics: int) -> list[dict[str, Any]]:
+def export_topics(
+    conn: sqlite3.Connection,
+    *,
+    scope: Scope,
+    concerns: list[ConcernDef],
+    max_topics: int,
+    max_items_per_concern: int,
+) -> list[dict[str, Any]]:
     rows = conn.execute(
         """
         SELECT st.topic_id,
@@ -198,20 +278,23 @@ def export_topics(conn: sqlite3.Connection, *, scope: Scope, max_topics: int) ->
         ORDER BY st.is_high_stakes DESC,
                  COALESCE(st.stakes_rank, 999999) ASC,
                  st.topic_id ASC
-        LIMIT ?
         """,
-        (int(scope.topic_set_id), int(max(1, max_topics))),
+        (int(scope.topic_set_id),),
     ).fetchall()
 
-    topics: list[dict[str, Any]] = []
+    topics_all: list[dict[str, Any]] = []
     for r in rows:
         topic_id = int(r["topic_id"])
-        topics.append(
+        label = str(r["label"] or "")
+        concern_ids = compute_topic_concern_ids(label, concerns)
+        topics_all.append(
             {
                 "topic_id": topic_id,
-                "label": str(r["label"] or ""),
+                "label": label,
                 "stakes_rank": int(r["stakes_rank"]) if r["stakes_rank"] is not None else None,
                 "is_high_stakes": bool(int(r["is_high_stakes"] or 0)),
+                # Optional v2 extension: server-side topic tags for concerns navigation.
+                "concern_ids": concern_ids,
                 "source": {"topic_set_id": int(scope.topic_set_id)},
                 "links": {
                     "explorer_temas": f"../explorer-temas/?topic_set_id={scope.topic_set_id}&topic_id={topic_id}",
@@ -232,7 +315,26 @@ def export_topics(conn: sqlite3.Connection, *, scope: Scope, max_topics: int) ->
                 },
             }
         )
-    return topics
+
+    # Forward-compatible bounded selection: limit per concern, then take the union.
+    topics_selected = topics_all
+    if int(max_items_per_concern) > 0 and concerns:
+        selected_ids: set[int] = set()
+        for c in concerns:
+            if not c.id:
+                continue
+            picked = 0
+            for t in topics_all:
+                if picked >= int(max_items_per_concern):
+                    break
+                if c.id in (t.get("concern_ids") or []):
+                    selected_ids.add(int(t["topic_id"]))
+                    picked += 1
+        topics_selected = [t for t in topics_all if int(t["topic_id"]) in selected_ids]
+
+    # Always enforce a global cap for static budgets.
+    topics_selected = topics_selected[: int(max(1, max_topics))]
+    return topics_selected
 
 
 def export_parties(conn: sqlite3.Connection, *, scope: Scope, max_parties: int) -> list[dict[str, Any]]:
@@ -700,7 +802,14 @@ def main() -> int:
     try:
         scope = resolve_scope(conn, args=args)
 
-        topics = export_topics(conn, scope=scope, max_topics=int(args.max_topics))
+        concerns = load_concerns(DEFAULT_CONCERNS_CONFIG)
+        topics = export_topics(
+            conn,
+            scope=scope,
+            concerns=concerns,
+            max_topics=int(args.max_topics),
+            max_items_per_concern=int(args.max_items_per_concern),
+        )
         parties = export_parties(conn, scope=scope, max_parties=int(args.max_parties))
         party_topic_positions = export_party_topic_positions(conn, scope=scope, topics=topics, parties=parties)
         programas_meta, party_concern_programas = export_party_concern_programas(
@@ -718,6 +827,13 @@ def main() -> int:
                 "as_of_date": str(scope.as_of_date),
                 "computed_method": str(scope.computed_method),
                 "computed_version": str(scope.computed_version),
+                # Optional v2 extension: allow honest labeling and future method toggles.
+                "methods_available": methods_available(
+                    conn,
+                    topic_set_id=int(scope.topic_set_id),
+                    institution_id=int(scope.institution_id),
+                    as_of_date=str(scope.as_of_date),
+                ),
                 "limits": {
                     "max_topics": int(args.max_topics),
                     "max_parties": int(args.max_parties),

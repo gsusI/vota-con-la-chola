@@ -1,141 +1,117 @@
-# AI-OPS-17 Task 1: Scope Lock (Citizen-First GH Pages)
+# AI-OPS-17 Scope Lock (Citizen UI/UX v2)
 
 Date: 2026-02-17  
-Owner: L3 Orchestrator
+Decision owner: `L3 Orchestrator`
 
-## Why This Sprint Exists
+## Problem Statement
+We already have meaningful national-level data and evidence drill-down tools, but the citizen surface does not yet answer the fastest user question:
 
-We already have a lot of national data (Congreso/Senado votes, topic positions, traceable evidence) but the current GH Pages surface is optimized for engineers (explorers), not citizens.
+> "Que hizo cada partido sobre esta preocupacion?"
 
-This sprint ships a **citizen-first static webapp** (GH Pages) that answers common concerns with **auditable “dice vs hace”** outputs, without inventing claims or hiding uncertainty.
+Today, users must click into many items to infer a concern-level picture. This sprint closes that product gap without adding new sources.
 
-## Product Scope (MVP)
+## Single Sprint Objective
+Ship a citizen-first GH Pages UI iteration (`/citizen`) that:
+- provides **concern-level party summaries** ("hechos" + "programa") without requiring topic-by-topic clicking,
+- preserves **auditability** (links to Explorer/Temas for every claim),
+- stays **static + bounded** (small JSON, fast load, deterministic exports),
+- keeps strict gate/parity green.
 
-Deliver a new GH Pages route:
-- `/citizen/` (static app)
+## User Journeys (Max 3)
 
-The MVP lets a citizen:
-1. pick a **concern** (e.g. vivienda, empleo, sanidad)
-2. see the most relevant **items** (today: high-salience initiatives/topics derived from existing `topic_set_id=1`)
-3. compare **party stances** per item with explicit coverage/uncertainty
-4. drill down to **evidence** using the existing explorers (no black box)
+### J1: Quick Answer (Concern -> Party Summary)
+1. User picks a concern (e.g. `vivienda`).
+2. App immediately shows a list of parties with:
+   - **Hechos**: summary stance derived from aggregated positions for the selected concern items.
+   - **Cobertura**: what fraction of party members have signal in the underlying items.
+   - **Programa**: (if available) declared stance extracted from party program text for that concern.
+3. User can sort/filter (by stance / coverage / confidence).
 
-### What “Concern” Means (Operational Definition)
+### J2: Drill Down (Party -> Top Items)
+1. From a party summary card, user opens "ver top items".
+2. App shows the most relevant items for the concern (high-stakes first) and the party stance for each item.
+3. User can click an item to enter the existing per-topic compare view.
 
-For this sprint, a “concern” is a **navigation layer** built from deterministic keyword/tag rules over initiative/topic labels.
+### J3: Audit (No Black Box)
+1. From any stance display (summary, item view, program view), user clicks an audit link.
+2. App opens:
+   - `Temas` (topic-level context), or
+   - `Explorer SQL` filtered to the exact rows (`topic_positions` or `topic_evidence`).
+3. User can verify where the stance came from.
 
-Non-negotiables:
-- it is NOT a substantive classifier and must not be presented as one
-- it can be imperfect; the UI must expose that it is a convenience layer
+## Definitions (Honesty)
+
+### "Hechos"
+- Meaning: aggregated stance derived from `topic_positions` for active Congress mandates (party members).
+- Default method: `computed_method=combined` when available; fallback `votes`.
+- Must be labeled as a derived summary, and always show coverage.
+
+### "Programa"
+- Meaning: stance extracted from party program text (`programas_partidos`) for the selected concern.
+- Default stance vocabulary: `support|oppose|mixed|unclear|no_signal`.
+- Must be labeled as "promesas/texto" and treated as higher-uncertainty by default.
 
 ## Non-Goals (Explicit)
+- No new upstream connectors or unblock campaigns.
+- No server backend requirement; keep GH Pages static.
+- No "ranking magico", no personalization weights, no ML-based alignment claims.
+- No rewriting core ETL semantics (only additive export/UX improvements).
+- No attempt to infer voter preferences beyond selecting a concern.
 
-- No new upstream connectors.
-- No heavyweight backfills or schema rewrites.
-- No backend/API requirement (must work as static GH Pages).
-- No “alignment ranking” that implies knowing user values.
-- No causal impact claims.
+## Must-Pass Gates (PASS/FAIL)
 
-## Primary User Journeys (3 max)
+### G1 Visible UX (Concern-Level Summary)
+PASS if `/citizen` supports:
+- concern selected + no topic selected => party summary view is shown and usable
+- at least one party drill-down to top items works
 
-### J1: Concern -> Compare Parties
-- User selects a concern.
-- App shows a curated list of items (high-stakes first).
-- For each item, the app shows party stances with coverage signals.
+Evidence:
+- walkthrough + screenshots or recorded steps under `docs/etl/sprints/AI-OPS-17/reports/`.
 
-Success = citizen can answer: “¿Qué hicieron los partidos sobre X?”
+### G2 Audit Drill-Down
+PASS if every stance display includes at least one working audit link:
+- hechos summary -> Explorer SQL (positions) and/or Temas
+- program stance -> Explorer SQL (topic_evidence filtered)
 
-### J2: Trust -> Drill Down to Evidence
-- User clicks a stance card.
-- App links to existing explorers (topic/person/evidence) to audit how it was computed.
+Evidence:
+- `docs/etl/sprints/AI-OPS-17/reports/link-check.md` with `broken_targets=0`.
 
-Success = every displayed claim has a concrete drill-down URL.
+### G3 Honesty
+PASS if:
+- method labels are accurate (votes vs combined)
+- `unclear/no_signal` render explicitly (no silent imputation)
+- coverage rule is shown in UI copy (or in a help panel)
 
-### J3: Coverage Honesty
-- User sees when data is missing (`no_signal`) and why (coverage/uncertainty).
+Evidence:
+- UI copy excerpts + validator outputs.
 
-Success = “no data” is visible, not silently hidden.
+### G4 Static Budget
+PASS if citizen JSON artifact(s) remain bounded:
+- target `<= 5MB` each (hard fail if vastly over without an explicit waiver)
+- page remains usable on mobile widths
 
-## Must-Pass Gates (G1-G6)
+Evidence:
+- size report under `docs/etl/sprints/AI-OPS-17/evidence/`.
 
-### G1 Visible Product (Citizen Route)
-PASS when:
-- `docs/gh-pages/citizen/index.html` exists after build, and landing links to it.
-- The citizen app loads without a local API.
+### G5 Reproducibility
+PASS if:
+- export + validation are deterministic given `--db` + `--as-of-date` + config
+- `just explorer-gh-pages-build` runs exporter + validator successfully
 
-FAIL when:
-- route not present, not linked, or requires server runtime.
+Evidence:
+- build log + validator JSON output.
 
-### G2 Evidence Drill-Down
-PASS when:
-- every item card includes at least one drill-down URL to:
-  - `/explorer-temas` (topic/person filters), and/or
-  - `/explorer` (topic_evidence / topic_positions drill-down)
+### G6 Strict Gate/Parity
+PASS if strict tracker gate + status parity remain green post-change:
+- strict tracker gate exit `0`
+- parity `overall_match=true`
 
-FAIL when:
-- stance cards cannot be traced to evidence via links.
+Evidence:
+- gate/parity artifacts under `docs/etl/sprints/AI-OPS-17/evidence/`.
 
-### G3 Honesty (No Silent Imputation)
-PASS when:
-- unknown/no-signal is rendered as unknown
-- coverage is shown (counts and/or confidence)
+## Out-of-Scope Sources/Rows
+All external blockers remain out of scope unless a new lever appears. This sprint's primary objective is fully controllable under repo control.
 
-FAIL when:
-- UI implies a stance where there is no signal.
+## Next Step
+Write the baseline query pack and UX spec, then implement minimal contract/export changes needed for the concern-level summary view.
 
-### G4 Size/Performance Guardrail
-PASS when:
-- citizen snapshot JSON is bounded and documented.
-- hard limit (initial): `citizen.json <= 5 MB`.
-
-FAIL when:
-- export grows unbounded or slows GH Pages load significantly.
-
-### G5 Ops Truth Unchanged (Strict Gate + Parity)
-PASS when:
-- strict tracker gate remains green (`mismatches=0`, `waivers_expired=0`, `done_zero_real=0`).
-- status parity remains `overall_match=true` after GH Pages build.
-
-FAIL when:
-- any strict gate regression is introduced by this sprint.
-
-### G6 Reproducibility
-PASS when:
-- citizen snapshot export is deterministic from `--db` + `--topic-set-id` + `--as-of-date`.
-- ordering is stable and output contract is versioned.
-
-FAIL when:
-- export is non-deterministic or depends on network without an explicit manifest.
-
-## PASS/FAIL Decision Rule
-
-PASS requires:
-- G1, G2, G3, G5, G6 are PASS.
-- G4 is PASS (or explicit exception approved in scope-lock addendum; default is NO).
-
-FAIL if:
-- any of G1/G2/G3/G5/G6 fails.
-
-## Stop Conditions (Don’t Spin)
-
-Stop and escalate to scope adjustment if any occurs:
-- citizen JSON exceeds size guardrail and cannot be reduced by dropping non-MVP fields.
-- concern tagging yields near-empty results for common concerns (vivienda/empleo/sanidad) and requires semantic ML/arbitration.
-- drill-down links are systematically broken due to explorer constraints.
-
-## Output Artifacts (Sprint Contract)
-
-Citizen app (static):
-- `ui/citizen/index.html` -> built to `docs/gh-pages/citizen/index.html`
-
-Citizen data + config:
-- `docs/gh-pages/citizen/data/citizen.json`
-- `docs/gh-pages/citizen/data/concerns_v1.json`
-
-Evidence packets:
-- `docs/etl/sprints/AI-OPS-17/reports/citizen-walkthrough.md`
-- `docs/etl/sprints/AI-OPS-17/reports/link-check.md`
-- `docs/etl/sprints/AI-OPS-17/reports/a11y-mobile-checklist.md`
-
-Ops invariants:
-- strict tracker gate/parity artifacts under `docs/etl/sprints/AI-OPS-17/evidence/`

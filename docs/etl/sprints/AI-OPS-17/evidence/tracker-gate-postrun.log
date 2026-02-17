@@ -5,7 +5,7 @@ docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db 
 #1 DONE 0.0s
 
 #2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 604B done
+#2 transferring dockerfile: 604B 0.0s done
 #2 DONE 0.0s
 
 #3 [internal] load metadata for docker.io/library/python:3.12-slim
@@ -20,8 +20,8 @@ docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db 
 #5 DONE 0.0s
 
 #6 [internal] load build context
-#6 transferring context: 37.40MB 1.5s done
-#6 DONE 1.6s
+#6 transferring context: 34.89MB 1.5s done
+#6 DONE 1.5s
 
 #7 [4/6] COPY requirements.txt /tmp/requirements.txt
 #7 CACHED
@@ -36,25 +36,25 @@ docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db 
 #10 CACHED
 
 #11 [6/6] COPY . /workspace
-#11 DONE 2.3s
+#11 DONE 2.4s
 
 #12 exporting to image
 #12 exporting layers
-#12 exporting layers 9.1s done
-#12 exporting manifest sha256:e1a0d036a253c06caa1cd96926f32ad823b754c266ca5e9775aec8d8dedb4fb4 done
-#12 exporting config sha256:3cdf9eba8530aae2629398386ef563ae1fd10242962d2eaef4b337f4372eb1e9 done
-#12 exporting attestation manifest sha256:ec6fd4872ecd5ba94cc85d7ff687a0f1e07c4cc46916edb0275170f9fbb95944 done
-#12 exporting manifest list sha256:abe3f0bc41743f8c6500df03538c5677894c65f5ca8d5db038d6e5ac2cf70673 done
+#12 exporting layers 8.5s done
+#12 exporting manifest sha256:a7a6fb5c14888b0b7794367d383149f56ff747ef34c399cdc404dca539934ef1 done
+#12 exporting config sha256:b46da3499c782661b41e5424e7dbe41d82b54cb7d7f877a0752ae1dcc4176daa done
+#12 exporting attestation manifest sha256:335c539e37b3a630209771f9b93c00cf559beac0cad6bedcb155c30f9229743f done
+#12 exporting manifest list sha256:16547e07cf378c65da55c601d82dfa955f7c879946013c8b233e89b29ece8f03 done
 #12 naming to docker.io/library/vota-con-la-chola-etl:local done
 #12 unpacking to docker.io/library/vota-con-la-chola-etl:local
 #12 unpacking to docker.io/library/vota-con-la-chola-etl:local 1.8s done
-#12 DONE 10.9s
+#12 DONE 10.3s
 
 #13 resolving provenance for metadata file
 #13 DONE 0.0s
  Image vota-con-la-chola-etl:local Built 
- Container vota-con-la-chola-etl-run-eeafd336b9c7 Creating 
- Container vota-con-la-chola-etl-run-eeafd336b9c7 Created 
+ Container vota-con-la-chola-etl-run-f69be31ddec1 Creating 
+ Container vota-con-la-chola-etl-run-f69be31ddec1 Created 
 source_id                                 | checklist | sql     | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result
 ------------------------------------------+-----------+---------+---------------+---------+---------+-------------+----------------------+-------
 aemet_opendata_series                     | PARTIAL   | PARTIAL | 3/12          | 0       | 2       | 0           | 0/3                  | OK    
@@ -96,12 +96,13 @@ parlamento_vasco_parlamentarios           | DONE      | DONE    | 1/1           
 placsp_autonomico                         | DONE      | DONE    | 6/9           | 106     | 106     | 106         | 2/4                  | OK    
 placsp_contratacion                       | N/A       | TODO    | 0/0           | 0       | 0       | 0           | 0/0                  | OK    
 placsp_sindicacion                        | DONE      | DONE    | 9/13          | 106     | 106     | 106         | 3/6                  | OK    
+programas_partidos                        | N/A       | PARTIAL | 6/6           | 0       | 3       | 3           | 0/6                  | OK    
 senado_iniciativas                        | N/A       | DONE    | 4/5           | 3607    | 3607    | 3607        | 2/1                  | OK    
 senado_senadores                          | DONE      | DONE    | 6/8           | 1560    | 1560    | 1560        | 3/1                  | OK    
 senado_votaciones                         | N/A       | DONE    | 28/43         | 5534    | 5534    | 1           | 16/1                 | OK    
 
 tracker_sources: 35
-sources_in_db: 42
+sources_in_db: 43
 mismatches: 0
 waived_mismatches: 0
 waivers_active: 0

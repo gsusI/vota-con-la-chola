@@ -1,0 +1,697 @@
+{
+  "generated_at": "2026-02-17T19:24:24+00:00",
+  "inputs": {
+    "concerns_path": "ui/citizen/concerns_v1.json",
+    "combined": "docs/gh-pages/citizen/data/citizen.json",
+    "votes": "docs/gh-pages/citizen/data/citizen_votes.json",
+    "declared": "docs/gh-pages/citizen/data/citizen_declared.json"
+  },
+  "methods": {
+    "combined": {
+      "path": "docs/gh-pages/citizen/data/citizen.json",
+      "computed_method": "combined",
+      "as_of_date": "2026-02-16",
+      "topics": 111,
+      "parties": 16,
+      "ptp": 1776
+    },
+    "votes": {
+      "path": "docs/gh-pages/citizen/data/citizen_votes.json",
+      "computed_method": "votes",
+      "as_of_date": "2026-02-16",
+      "topics": 111,
+      "parties": 16,
+      "ptp": 1776
+    },
+    "declared": {
+      "path": "docs/gh-pages/citizen/data/citizen_declared.json",
+      "computed_method": "declared",
+      "as_of_date": "2026-02-16",
+      "topics": 111,
+      "parties": 16,
+      "ptp": 1776
+    }
+  },
+  "consistency": {
+    "topics": {
+      "combined_vs_votes": {
+        "missing_in_b": [],
+        "extra_in_b": []
+      },
+      "combined_vs_declared": {
+        "missing_in_b": [],
+        "extra_in_b": []
+      }
+    },
+    "parties": {
+      "combined_vs_votes": {
+        "missing_in_b": [],
+        "extra_in_b": []
+      },
+      "combined_vs_declared": {
+        "missing_in_b": [],
+        "extra_in_b": []
+      }
+    }
+  },
+  "parties_total": 16,
+  "topics_total": 111,
+  "topics_tagged_total": 111,
+  "coverage_by_concern": [
+    {
+      "concern_id": "vivienda",
+      "label": "Vivienda",
+      "topics_total": 8,
+      "methods": {
+        "combined": {
+          "cells_total": 128,
+          "cells_any_signal": 125,
+          "cells_any_signal_pct": 0.9765625,
+          "cells_clear": 110,
+          "cells_clear_pct": 0.859375,
+          "cells_by_stance": {
+            "support": 38,
+            "oppose": 72,
+            "mixed": 0,
+            "unclear": 15,
+            "no_signal": 3
+          }
+        },
+        "votes": {
+          "cells_total": 128,
+          "cells_any_signal": 125,
+          "cells_any_signal_pct": 0.9765625,
+          "cells_clear": 110,
+          "cells_clear_pct": 0.859375,
+          "cells_by_stance": {
+            "support": 38,
+            "oppose": 72,
+            "mixed": 0,
+            "unclear": 15,
+            "no_signal": 3
+          }
+        },
+        "declared": {
+          "cells_total": 128,
+          "cells_any_signal": 3,
+          "cells_any_signal_pct": 0.0234375,
+          "cells_clear": 1,
+          "cells_clear_pct": 0.0078125,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 1,
+            "unclear": 2,
+            "no_signal": 125
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "empleo",
+      "label": "Empleo",
+      "topics_total": 14,
+      "methods": {
+        "combined": {
+          "cells_total": 224,
+          "cells_any_signal": 222,
+          "cells_any_signal_pct": 0.9910714285714286,
+          "cells_clear": 190,
+          "cells_clear_pct": 0.8482142857142857,
+          "cells_by_stance": {
+            "support": 88,
+            "oppose": 102,
+            "mixed": 0,
+            "unclear": 32,
+            "no_signal": 2
+          }
+        },
+        "votes": {
+          "cells_total": 224,
+          "cells_any_signal": 222,
+          "cells_any_signal_pct": 0.9910714285714286,
+          "cells_clear": 190,
+          "cells_clear_pct": 0.8482142857142857,
+          "cells_by_stance": {
+            "support": 88,
+            "oppose": 102,
+            "mixed": 0,
+            "unclear": 32,
+            "no_signal": 2
+          }
+        },
+        "declared": {
+          "cells_total": 224,
+          "cells_any_signal": 3,
+          "cells_any_signal_pct": 0.013392857142857142,
+          "cells_clear": 1,
+          "cells_clear_pct": 0.004464285714285714,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 1,
+            "unclear": 2,
+            "no_signal": 221
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "sanidad",
+      "label": "Sanidad",
+      "topics_total": 3,
+      "methods": {
+        "combined": {
+          "cells_total": 48,
+          "cells_any_signal": 47,
+          "cells_any_signal_pct": 0.9791666666666666,
+          "cells_clear": 43,
+          "cells_clear_pct": 0.8958333333333334,
+          "cells_by_stance": {
+            "support": 8,
+            "oppose": 35,
+            "mixed": 0,
+            "unclear": 4,
+            "no_signal": 1
+          }
+        },
+        "votes": {
+          "cells_total": 48,
+          "cells_any_signal": 47,
+          "cells_any_signal_pct": 0.9791666666666666,
+          "cells_clear": 43,
+          "cells_clear_pct": 0.8958333333333334,
+          "cells_by_stance": {
+            "support": 8,
+            "oppose": 35,
+            "mixed": 0,
+            "unclear": 4,
+            "no_signal": 1
+          }
+        },
+        "declared": {
+          "cells_total": 48,
+          "cells_any_signal": 0,
+          "cells_any_signal_pct": 0.0,
+          "cells_clear": 0,
+          "cells_clear_pct": 0.0,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 0,
+            "no_signal": 48
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "educacion",
+      "label": "Educacion",
+      "topics_total": 9,
+      "methods": {
+        "combined": {
+          "cells_total": 144,
+          "cells_any_signal": 144,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 122,
+          "cells_clear_pct": 0.8472222222222222,
+          "cells_by_stance": {
+            "support": 69,
+            "oppose": 53,
+            "mixed": 0,
+            "unclear": 22,
+            "no_signal": 0
+          }
+        },
+        "votes": {
+          "cells_total": 144,
+          "cells_any_signal": 144,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 122,
+          "cells_clear_pct": 0.8472222222222222,
+          "cells_by_stance": {
+            "support": 69,
+            "oppose": 53,
+            "mixed": 0,
+            "unclear": 22,
+            "no_signal": 0
+          }
+        },
+        "declared": {
+          "cells_total": 144,
+          "cells_any_signal": 9,
+          "cells_any_signal_pct": 0.0625,
+          "cells_clear": 2,
+          "cells_clear_pct": 0.013888888888888888,
+          "cells_by_stance": {
+            "support": 1,
+            "oppose": 1,
+            "mixed": 0,
+            "unclear": 7,
+            "no_signal": 135
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "coste_vida",
+      "label": "Coste de vida",
+      "topics_total": 8,
+      "methods": {
+        "combined": {
+          "cells_total": 128,
+          "cells_any_signal": 128,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 114,
+          "cells_clear_pct": 0.890625,
+          "cells_by_stance": {
+            "support": 40,
+            "oppose": 74,
+            "mixed": 0,
+            "unclear": 14,
+            "no_signal": 0
+          }
+        },
+        "votes": {
+          "cells_total": 128,
+          "cells_any_signal": 128,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 114,
+          "cells_clear_pct": 0.890625,
+          "cells_by_stance": {
+            "support": 40,
+            "oppose": 74,
+            "mixed": 0,
+            "unclear": 14,
+            "no_signal": 0
+          }
+        },
+        "declared": {
+          "cells_total": 128,
+          "cells_any_signal": 7,
+          "cells_any_signal_pct": 0.0546875,
+          "cells_clear": 0,
+          "cells_clear_pct": 0.0,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 7,
+            "no_signal": 121
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "energia",
+      "label": "Energia",
+      "topics_total": 11,
+      "methods": {
+        "combined": {
+          "cells_total": 176,
+          "cells_any_signal": 160,
+          "cells_any_signal_pct": 0.9090909090909091,
+          "cells_clear": 139,
+          "cells_clear_pct": 0.7897727272727273,
+          "cells_by_stance": {
+            "support": 71,
+            "oppose": 68,
+            "mixed": 0,
+            "unclear": 21,
+            "no_signal": 16
+          }
+        },
+        "votes": {
+          "cells_total": 176,
+          "cells_any_signal": 160,
+          "cells_any_signal_pct": 0.9090909090909091,
+          "cells_clear": 139,
+          "cells_clear_pct": 0.7897727272727273,
+          "cells_by_stance": {
+            "support": 71,
+            "oppose": 68,
+            "mixed": 0,
+            "unclear": 21,
+            "no_signal": 16
+          }
+        },
+        "declared": {
+          "cells_total": 176,
+          "cells_any_signal": 0,
+          "cells_any_signal_pct": 0.0,
+          "cells_clear": 0,
+          "cells_clear_pct": 0.0,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 0,
+            "no_signal": 176
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "transporte",
+      "label": "Transporte",
+      "topics_total": 11,
+      "methods": {
+        "combined": {
+          "cells_total": 176,
+          "cells_any_signal": 176,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 155,
+          "cells_clear_pct": 0.8806818181818182,
+          "cells_by_stance": {
+            "support": 86,
+            "oppose": 69,
+            "mixed": 0,
+            "unclear": 21,
+            "no_signal": 0
+          }
+        },
+        "votes": {
+          "cells_total": 176,
+          "cells_any_signal": 176,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 155,
+          "cells_clear_pct": 0.8806818181818182,
+          "cells_by_stance": {
+            "support": 86,
+            "oppose": 69,
+            "mixed": 0,
+            "unclear": 21,
+            "no_signal": 0
+          }
+        },
+        "declared": {
+          "cells_total": 176,
+          "cells_any_signal": 13,
+          "cells_any_signal_pct": 0.07386363636363637,
+          "cells_clear": 2,
+          "cells_clear_pct": 0.011363636363636364,
+          "cells_by_stance": {
+            "support": 2,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 11,
+            "no_signal": 163
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "seguridad_justicia",
+      "label": "Seguridad y justicia",
+      "topics_total": 37,
+      "methods": {
+        "combined": {
+          "cells_total": 592,
+          "cells_any_signal": 527,
+          "cells_any_signal_pct": 0.8902027027027027,
+          "cells_clear": 462,
+          "cells_clear_pct": 0.7804054054054054,
+          "cells_by_stance": {
+            "support": 211,
+            "oppose": 251,
+            "mixed": 0,
+            "unclear": 65,
+            "no_signal": 65
+          }
+        },
+        "votes": {
+          "cells_total": 592,
+          "cells_any_signal": 527,
+          "cells_any_signal_pct": 0.8902027027027027,
+          "cells_clear": 462,
+          "cells_clear_pct": 0.7804054054054054,
+          "cells_by_stance": {
+            "support": 211,
+            "oppose": 251,
+            "mixed": 0,
+            "unclear": 65,
+            "no_signal": 65
+          }
+        },
+        "declared": {
+          "cells_total": 592,
+          "cells_any_signal": 39,
+          "cells_any_signal_pct": 0.06587837837837837,
+          "cells_clear": 4,
+          "cells_clear_pct": 0.006756756756756757,
+          "cells_by_stance": {
+            "support": 2,
+            "oppose": 0,
+            "mixed": 2,
+            "unclear": 35,
+            "no_signal": 553
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "inmigracion",
+      "label": "Inmigracion",
+      "topics_total": 6,
+      "methods": {
+        "combined": {
+          "cells_total": 96,
+          "cells_any_signal": 95,
+          "cells_any_signal_pct": 0.9895833333333334,
+          "cells_clear": 87,
+          "cells_clear_pct": 0.90625,
+          "cells_by_stance": {
+            "support": 24,
+            "oppose": 63,
+            "mixed": 0,
+            "unclear": 8,
+            "no_signal": 1
+          }
+        },
+        "votes": {
+          "cells_total": 96,
+          "cells_any_signal": 95,
+          "cells_any_signal_pct": 0.9895833333333334,
+          "cells_clear": 87,
+          "cells_clear_pct": 0.90625,
+          "cells_by_stance": {
+            "support": 24,
+            "oppose": 63,
+            "mixed": 0,
+            "unclear": 8,
+            "no_signal": 1
+          }
+        },
+        "declared": {
+          "cells_total": 96,
+          "cells_any_signal": 0,
+          "cells_any_signal_pct": 0.0,
+          "cells_clear": 0,
+          "cells_clear_pct": 0.0,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 0,
+            "no_signal": 96
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "corrupcion",
+      "label": "Corrupcion",
+      "topics_total": 10,
+      "methods": {
+        "combined": {
+          "cells_total": 160,
+          "cells_any_signal": 160,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 147,
+          "cells_clear_pct": 0.91875,
+          "cells_by_stance": {
+            "support": 45,
+            "oppose": 102,
+            "mixed": 0,
+            "unclear": 13,
+            "no_signal": 0
+          }
+        },
+        "votes": {
+          "cells_total": 160,
+          "cells_any_signal": 160,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 147,
+          "cells_clear_pct": 0.91875,
+          "cells_by_stance": {
+            "support": 45,
+            "oppose": 102,
+            "mixed": 0,
+            "unclear": 13,
+            "no_signal": 0
+          }
+        },
+        "declared": {
+          "cells_total": 160,
+          "cells_any_signal": 0,
+          "cells_any_signal_pct": 0.0,
+          "cells_clear": 0,
+          "cells_clear_pct": 0.0,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 0,
+            "no_signal": 160
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "campo_rural",
+      "label": "Campo y mundo rural",
+      "topics_total": 9,
+      "methods": {
+        "combined": {
+          "cells_total": 144,
+          "cells_any_signal": 130,
+          "cells_any_signal_pct": 0.9027777777777778,
+          "cells_clear": 111,
+          "cells_clear_pct": 0.7708333333333334,
+          "cells_by_stance": {
+            "support": 24,
+            "oppose": 87,
+            "mixed": 0,
+            "unclear": 19,
+            "no_signal": 14
+          }
+        },
+        "votes": {
+          "cells_total": 144,
+          "cells_any_signal": 128,
+          "cells_any_signal_pct": 0.8888888888888888,
+          "cells_clear": 111,
+          "cells_clear_pct": 0.7708333333333334,
+          "cells_by_stance": {
+            "support": 24,
+            "oppose": 87,
+            "mixed": 0,
+            "unclear": 17,
+            "no_signal": 16
+          }
+        },
+        "declared": {
+          "cells_total": 144,
+          "cells_any_signal": 11,
+          "cells_any_signal_pct": 0.0763888888888889,
+          "cells_clear": 0,
+          "cells_clear_pct": 0.0,
+          "cells_by_stance": {
+            "support": 0,
+            "oppose": 0,
+            "mixed": 0,
+            "unclear": 11,
+            "no_signal": 133
+          }
+        }
+      }
+    },
+    {
+      "concern_id": "igualdad",
+      "label": "Igualdad",
+      "topics_total": 6,
+      "methods": {
+        "combined": {
+          "cells_total": 96,
+          "cells_any_signal": 96,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 83,
+          "cells_clear_pct": 0.8645833333333334,
+          "cells_by_stance": {
+            "support": 26,
+            "oppose": 57,
+            "mixed": 0,
+            "unclear": 13,
+            "no_signal": 0
+          }
+        },
+        "votes": {
+          "cells_total": 96,
+          "cells_any_signal": 96,
+          "cells_any_signal_pct": 1.0,
+          "cells_clear": 83,
+          "cells_clear_pct": 0.8645833333333334,
+          "cells_by_stance": {
+            "support": 26,
+            "oppose": 57,
+            "mixed": 0,
+            "unclear": 13,
+            "no_signal": 0
+          }
+        },
+        "declared": {
+          "cells_total": 96,
+          "cells_any_signal": 7,
+          "cells_any_signal_pct": 0.07291666666666667,
+          "cells_clear": 2,
+          "cells_clear_pct": 0.020833333333333332,
+          "cells_by_stance": {
+            "support": 1,
+            "oppose": 0,
+            "mixed": 1,
+            "unclear": 5,
+            "no_signal": 89
+          }
+        }
+      }
+    }
+  ],
+  "coverage_overall_tagged": {
+    "topics_total": 111,
+    "methods": {
+      "combined": {
+        "cells_total": 1776,
+        "cells_any_signal": 1675,
+        "cells_any_signal_pct": 0.9431306306306306,
+        "cells_clear": 1464,
+        "cells_clear_pct": 0.8243243243243243,
+        "cells_by_stance": {
+          "support": 605,
+          "oppose": 859,
+          "mixed": 0,
+          "unclear": 211,
+          "no_signal": 101
+        }
+      },
+      "votes": {
+        "cells_total": 1776,
+        "cells_any_signal": 1673,
+        "cells_any_signal_pct": 0.9420045045045045,
+        "cells_clear": 1464,
+        "cells_clear_pct": 0.8243243243243243,
+        "cells_by_stance": {
+          "support": 605,
+          "oppose": 859,
+          "mixed": 0,
+          "unclear": 209,
+          "no_signal": 103
+        }
+      },
+      "declared": {
+        "cells_total": 1776,
+        "cells_any_signal": 87,
+        "cells_any_signal_pct": 0.048986486486486486,
+        "cells_clear": 11,
+        "cells_clear_pct": 0.006193693693693694,
+        "cells_by_stance": {
+          "support": 6,
+          "oppose": 1,
+          "mixed": 4,
+          "unclear": 76,
+          "no_signal": 1689
+        }
+      }
+    }
+  }
+}

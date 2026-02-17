@@ -1,0 +1,84 @@
+{
+  "datasets_checked": [
+    "docs/gh-pages/citizen/data/citizen.json",
+    "docs/gh-pages/citizen/data/citizen_declared.json",
+    "docs/gh-pages/citizen/data/citizen_votes.json"
+  ],
+  "results": [
+    {
+      "file": "docs/gh-pages/citizen/data/citizen.json",
+      "links_total": 3937,
+      "missing_required_links_total": 0,
+      "non_relative_total": 0,
+      "unique_targets_total": 3,
+      "missing_targets_total": 0,
+      "missing_examples": [],
+      "unique_targets": [
+        [
+          "docs/gh-pages/explorer-politico/index.html",
+          16
+        ],
+        [
+          "docs/gh-pages/explorer-temas/index.html",
+          1887
+        ],
+        [
+          "docs/gh-pages/explorer/index.html",
+          2034
+        ]
+      ]
+    },
+    {
+      "file": "docs/gh-pages/citizen/data/citizen_declared.json",
+      "links_total": 3937,
+      "missing_required_links_total": 0,
+      "non_relative_total": 0,
+      "unique_targets_total": 3,
+      "missing_targets_total": 0,
+      "missing_examples": [],
+      "unique_targets": [
+        [
+          "docs/gh-pages/explorer-politico/index.html",
+          16
+        ],
+        [
+          "docs/gh-pages/explorer-temas/index.html",
+          1887
+        ],
+        [
+          "docs/gh-pages/explorer/index.html",
+          2034
+        ]
+      ]
+    },
+    {
+      "file": "docs/gh-pages/citizen/data/citizen_votes.json",
+      "links_total": 3937,
+      "missing_required_links_total": 0,
+      "non_relative_total": 0,
+      "unique_targets_total": 3,
+      "missing_targets_total": 0,
+      "missing_examples": [],
+      "unique_targets": [
+        [
+          "docs/gh-pages/explorer-politico/index.html",
+          16
+        ],
+        [
+          "docs/gh-pages/explorer-temas/index.html",
+          1887
+        ],
+        [
+          "docs/gh-pages/explorer/index.html",
+          2034
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "datasets": 3,
+    "missing_required_links_total": 0,
+    "non_relative_total": 0,
+    "missing_targets_total": 0
+  }
+}

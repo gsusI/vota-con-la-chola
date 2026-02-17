@@ -1,0 +1,65 @@
+{
+  "datasets": {
+    "combined": {
+      "as_of_date": "2026-02-16",
+      "computed_method": "combined",
+      "pairs_total": 1776,
+      "parties_total": 16,
+      "path": "docs/gh-pages/citizen/data/citizen.json",
+      "stance_counts": {
+        "no_signal": 101,
+        "oppose": 859,
+        "support": 605,
+        "unclear": 211
+      },
+      "topic_set_id": 1,
+      "topics_total": 111
+    },
+    "declared": {
+      "as_of_date": "2026-02-16",
+      "computed_method": "declared",
+      "pairs_total": 1776,
+      "parties_total": 16,
+      "path": "docs/gh-pages/citizen/data/citizen_declared.json",
+      "stance_counts": {
+        "mixed": 4,
+        "no_signal": 1689,
+        "oppose": 1,
+        "support": 6,
+        "unclear": 76
+      },
+      "topic_set_id": 1,
+      "topics_total": 111
+    },
+    "votes": {
+      "as_of_date": "2026-02-16",
+      "computed_method": "votes",
+      "pairs_total": 1776,
+      "parties_total": 16,
+      "path": "docs/gh-pages/citizen/data/citizen_votes.json",
+      "stance_counts": {
+        "no_signal": 103,
+        "oppose": 859,
+        "support": 605,
+        "unclear": 209
+      },
+      "topic_set_id": 1,
+      "topics_total": 111
+    }
+  },
+  "generated_at": "2026-02-17",
+  "topics_per_concern": {
+    "campo_rural": 9,
+    "corrupcion": 10,
+    "coste_vida": 8,
+    "educacion": 9,
+    "empleo": 14,
+    "energia": 11,
+    "igualdad": 6,
+    "inmigracion": 6,
+    "sanidad": 3,
+    "seguridad_justicia": 37,
+    "transporte": 11,
+    "vivienda": 8
+  }
+}
