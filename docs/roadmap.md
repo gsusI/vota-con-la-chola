@@ -7,6 +7,17 @@ Fuente de verdad para ejecucion y estado (no duplicar roadmaps en otros docs):
 - `docs/etl/e2e-scrape-load-tracker.md` (backlog operativo de conectores/quality).
 - Dashboard local: `/explorer-sources` (progreso vs roadmap).
 
+## Visión y misión
+
+Visión:
+- Que cualquier persona en España pueda decidir su voto con la misma exigencia con la que audita una cuenta pública: comparando **lo que se promete, lo que se ejecuta y lo que impacta**, con evidencia verificable en su nivel territorial (Estado, CCAA, municipal, UE).
+
+Misión:
+- Construir y operar una infraestructura cívica abierta, reproducible y auditable que transforme datos públicos fragmentados en explicaciones claras y trazables para:
+  1. medir alineamiento ciudadano-político,
+  2. contrastar "dicen vs hacen",
+  3. estimar impacto cuando sea metodológicamente defendible.
+
 ## Cómo estimamos esfuerzo (puntos)
 
 Este roadmap no usa fechas. Priorizamos por valor, dependencia y esfuerzo.
@@ -100,6 +111,7 @@ Esta es la traducción práctica del pseudocódigo a piezas del repo (sin meter 
 - Agregación reproducible de posiciones por tema: `topic_evidence` -> `topic_positions`.
 - Agregación reproducible de acción revelada por dominio/eje: `policy_events`/scores -> snapshots vectoriales por actor/partido y `scope`.
 - Publicación de artefactos canónicos: `etl/data/published/*-<snapshot_date>.json` + KPIs por snapshot.
+- Distribución pública gratuita de snapshots en Hugging Face Datasets: `snapshots/<snapshot_date>/...` + `latest.json` para colaboración externa y réplica.
 - UI/API: `scripts/graph_ui_server.py` + `ui/graph/*` para explorar esquema, evidencia y resultados.
 
 ## 4.2) Estado actual (baseline)
@@ -243,3 +255,4 @@ Reglas:
 - Todo conector nuevo o cambio relevante se refleja en `docs/etl/e2e-scrape-load-tracker.md` con evidencia de verificación.
 - Los KPIs publicados por snapshot son la base para decidir si se avanza de fase.
 - `docs/roadmap-tecnico.md` se mantiene como plan de ejecución de corto plazo y debe enlazar a esta visión macro.
+- Cada snapshot operativo debe publicarse también en Hugging Face (`just etl-publish-hf`) o registrarse explícitamente como bloqueo en tracker.

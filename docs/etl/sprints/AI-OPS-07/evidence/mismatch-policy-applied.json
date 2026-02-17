@@ -1,0 +1,18 @@
+{
+  "applied_at": "2026-02-16",
+  "applied_for": [
+    "AI-OPS-07 waiver burn-down (Moncloa waivers removed after tracker reconciliation)"
+  ],
+  "as_of_date": "2026-02-16",
+  "approver": "L3",
+  "waivers": [
+    {
+      "source_id": "parlamento_navarra_parlamentarios_forales",
+      "reason": "TEMP_WAIVER_CANDIDATE: blocked network replay semantics despite fallback load and tracker PARTIAL; confirm policy action path.",
+      "owner": "L2",
+      "approved_by": "L3",
+      "expires_on": "2026-02-20",
+      "evidence_path": "docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md;docs/etl/sprints/AI-OPS-07/evidence/post_apply_strict_checker_final.log"
+    }
+  ]
+}

@@ -6,6 +6,11 @@ Nota:
 - Estimación de esfuerzo en puntos (misma escala que `docs/roadmap.md`).
 - Backlog operativo + estado real: `docs/etl/e2e-scrape-load-tracker.md` y dashboard `/explorer-sources`.
 
+## Alineación visión/misión
+
+- Visión (canónica en `docs/roadmap.md`): decidir el voto comparando promesa, ejecución e impacto con evidencia verificable por nivel territorial.
+- Misión operativa de este roadmap técnico: convertir esa visión en una cadena reproducible de ejecución (`ingesta -> evidencia -> posiciones -> fiabilidad -> publicación`) con trazabilidad extremo a extremo.
+
 ## 1) Objetivo del roadmap
 
 Entregar una versión técnica robusta de Vota Con La Chola que permita:
@@ -13,6 +18,7 @@ Entregar una versión técnica robusta de Vota Con La Chola que permita:
 - Comparar esas preferencias con posiciones públicas y trazables.
 - Calcular fiabilidad por actor y tema con evidencia verificable.
 - Publicar resultados reproducibles por snapshot.
+- Mantener distribución pública gratuita de snapshots en Hugging Face para colaboración externa.
 - Mantener trazabilidad completa por defecto en SQLite y en JSON publicado.
 
 ## 2) Estado base actual
@@ -105,6 +111,7 @@ Entregables:
 - Página de “cómo se calculó” con links a evidencias.
 - Integración de revisión comunitaria de claims (PR + checklist 2ª mirada).
 - Pipeline de publicación canónica para `topics.json`, `claims.json`, `recommendation-kpis.json`.
+- Pipeline de publicación externa por snapshot en Hugging Face (`just etl-publish-hf`) con `manifest.json` y `checksums.sha256`.
 
 ### Fase 5 — Cobertura multinivel (`ENG: 21+`)
 
@@ -151,3 +158,4 @@ Pendiente (siguiente foco):
 - Materializar `computed_method=combined` (`just parl-backfill-combined-positions`) y usarlo como vista por defecto en producto para evitar mezclar “says/does” en tiempo real.
 - Siguiente bloque técnico: drill-down de coherencia por `topic_set/topic/scope` para priorizar revisión donde la incoherencia sea material.
 - Cerrar loop de revisión (KISS): `review-queue` + `review-decision` para pasar `pending -> resolved/ignored` con nota y recompute determinista (`declared` + `combined`).
+- Operativizar rutina post-snapshot: `just etl-publish-hf` y verificación de `latest.json` en el dataset público.

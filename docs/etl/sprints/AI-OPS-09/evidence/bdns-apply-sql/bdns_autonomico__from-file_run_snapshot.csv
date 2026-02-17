@@ -1,0 +1,15 @@
+metric,value
+source_id,bdns_autonomico
+mode,from-file
+command,python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_autonomico --from-file etl/data/raw/samples/bdns_autonomico_sample.json --snapshot-date 2026-02-17 --timeout 30
+exit_code,0
+before_records,0
+after_records,2
+delta_records,2
+run_id,203
+run_status,ok
+run_records_seen,2
+run_records_loaded,2
+run_started_at,2026-02-17T08:45:09+00:00
+run_finished_at,2026-02-17T08:45:12+00:00
+snapshot,2026-02-17
