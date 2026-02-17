@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import argparse
 import json
 import re
@@ -34,6 +34,7 @@ UI_EXPLORER_SOURCES = BASE_DIR / "ui" / "graph" / "explorer-sources.html"
 UI_EXPLORER_TEMAS = BASE_DIR / "ui" / "graph" / "explorer-temas.html"
 MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblacion_municipios_es.json"
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
+MISMATCH_WAIVERS_PATH = BASE_DIR / "docs" / "etl" / "mismatch-waivers.json"
 IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
 ROADMAP_PATH = BASE_DIR / "docs" / "roadmap.md"
 ROADMAP_TECNICO_PATH = BASE_DIR / "docs" / "roadmap-tecnico.md"
@@ -122,7 +123,7 @@ ROADMAP_DASHBOARD_TARGETS: dict[int, dict[str, Any]] = {
         "tracker_tipo_dato": [
             "Indicadores (outcomes): INE",
             "Indicadores (outcomes): Eurostat",
-            "Indicadores (confusores): Banco de España",
+            "Indicadores (confusores): Banco de Espana",
             "Indicadores (confusores): AEMET",
             "Indicadores (confusores): ESIOS/REE",
         ],
@@ -465,6 +466,9 @@ LABEL_COLUMN_CANDIDATES = (
     "source_id",
 )
 
+COHERENCE_BUCKETS = {"overlap", "explicit", "coherent", "incoherent"}
+ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
 
 def safe_text(value: Any) -> str:
     if value is None:
@@ -713,6 +717,11 @@ try:
 except Exception:
     INFOELECTORAL_SOURCE_CONFIG = {}
 
+try:
+    from scripts.e2e_tracker_status import load_mismatch_waivers as _load_mismatch_waivers_from_tracker
+except Exception:
+    _load_mismatch_waivers_from_tracker = None
+
 
 DESIRED_SOURCES: dict[str, dict[str, Any]] = {}
 DESIRED_SOURCES.update(_coerce_source_config(POLITICOS_SOURCE_CONFIG, domain="politicos"))
@@ -721,6 +730,23 @@ DESIRED_SOURCES.update(_coerce_source_config(INFOELECTORAL_SOURCE_CONFIG, domain
 
 
 TRACKER_TABLE_HEADER = "| Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |"
+
+# Explicit tracker row -> source_id contract.
+# Row-label mapping has precedence over fuentes hint matching to avoid drift when
+# free-text "Fuentes objetivo" wording changes.
+TRACKER_TIPO_SOURCE_HINTS = {
+    "Marco legal electoral": ["boe_api_legal"],
+    # AI-OPS-09: explicit row-level contracts for money/outcomes families.
+    # Keep these exact tracker labels in sync with e2e_tracker_status.py.
+    "Contratación autonómica (piloto 3 CCAA)": ["placsp_autonomico"],
+    "Subvenciones autonómicas (piloto 3 CCAA)": ["bdns_autonomico"],
+    "Contratacion publica (Espana)": ["placsp_sindicacion"],
+    "Subvenciones y ayudas (Espana)": ["bdns_api_subvenciones"],
+    "Indicadores (outcomes): Eurostat": ["eurostat_sdmx"],
+    "Indicadores (confusores): Banco de España": ["bde_series_api"],
+    "Indicadores (confusores): Banco de Espana": ["bde_series_api"],
+    "Indicadores (confusores): AEMET": ["aemet_opendata_series"],
+}
 
 # Mapping between tracker table rows and source_id values (docs -> code).
 TRACKER_SOURCE_HINTS = {
@@ -751,11 +777,61 @@ TRACKER_SOURCE_HINTS = {
     "Parlamento de Galicia": ["parlamento_galicia_deputados"],
     "Parlamento de Navarra": ["parlamento_navarra_parlamentarios_forales"],
     "Parlamento Vasco": ["parlamento_vasco_parlamentarios"],
+    "La Moncloa: referencias + RSS": ["moncloa_referencias", "moncloa_rss_referencias"],
     "Infoelectoral": ["infoelectoral_descargas", "infoelectoral_procesos"],
+    "BOE API": ["boe_api_legal"],
+    # AI-OPS-09 source families (fallback matching when Tipo de dato wording changes).
+    "PLACSP: sindicación/ATOM (CODICE)": ["placsp_sindicacion"],
+    "PLACSP (filtrado por órganos autonómicos)": ["placsp_autonomico"],
+    "BDNS/SNPSAP: API": ["bdns_api_subvenciones"],
+    "BDNS/SNPSAP (filtrado por órgano convocante/territorio)": ["bdns_autonomico"],
+    "Eurostat (API/SDMX)": ["eurostat_sdmx"],
+    "Banco de España (API series)": ["bde_series_api"],
+    "Banco de Espana (API series)": ["bde_series_api"],
+    "AEMET OpenData": ["aemet_opendata_series"],
 }
 
 
-def _infer_tracker_source_ids(fuentes_objetivo: str) -> list[str]:
+def _tracker_note_is_blocked(note: str) -> bool:
+    return "bloquead" in (note or "").strip().lower()
+
+
+def _load_mismatch_waivers_for_dashboard(
+    waivers_path: Path,
+    *,
+    as_of_date: date,
+) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], str]:
+    if _load_mismatch_waivers_from_tracker is None:
+        return {}, {}, "waiver_loader_unavailable"
+    try:
+        active, expired = _load_mismatch_waivers_from_tracker(waivers_path, as_of_date=as_of_date)
+        return active, expired, ""
+    except Exception as exc:  # noqa: BLE001
+        return {}, {}, f"{type(exc).__name__}: {exc}"
+
+
+def _compute_tracker_mismatch_state(
+    *,
+    tracker_status: str,
+    sql_status: str,
+    done_zero_real: bool,
+    waiver_active: bool,
+) -> str:
+    tracker_up = safe_text(tracker_status).upper()
+    sql_up = safe_text(sql_status).upper()
+    if not tracker_up:
+        return "UNTRACKED"
+    if done_zero_real:
+        return "DONE_ZERO_REAL"
+    if tracker_up != sql_up:
+        return "WAIVED_MISMATCH" if waiver_active else "MISMATCH"
+    return "MATCH"
+
+
+def _infer_tracker_source_ids(fuentes_objetivo: str, *, tipo_dato: str = "") -> list[str]:
+    if tipo_dato in TRACKER_TIPO_SOURCE_HINTS:
+        return list(TRACKER_TIPO_SOURCE_HINTS[tipo_dato])
+
     for hint, source_ids in TRACKER_SOURCE_HINTS.items():
         if hint in fuentes_objetivo:
             return list(source_ids)
@@ -793,7 +869,7 @@ def _load_tracker_items_cached(tracker_path_str: str, mtime: float) -> list[dict
             continue
         tipo_dato, dominio, fuentes, estado, bloque = cells[:5]
         estado_up = (estado or "").strip().upper()
-        source_ids = _infer_tracker_source_ids(fuentes)
+        source_ids = _infer_tracker_source_ids(fuentes, tipo_dato=tipo_dato)
         items.append(
             {
                 "tipo_dato": tipo_dato,
@@ -1389,6 +1465,10 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
 
     desired_map = DESIRED_SOURCES
     desired_ids = sorted(desired_map.keys())
+    waivers_active, waivers_expired, waivers_error = _load_mismatch_waivers_for_dashboard(
+        MISMATCH_WAIVERS_PATH,
+        as_of_date=datetime.now(timezone.utc).date(),
+    )
 
     def _infer_scope_from_text(text: str) -> str:
         t = (text or "").lower()
@@ -1494,6 +1574,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "tracker": {
                 "items_total": len(tracker_items),
                 "unmapped": len(tracker_unmapped),
+                "waivers_active": len(waivers_active),
+                "waivers_expired": len(waivers_expired),
+                "waivers_error": waivers_error,
             },
             "sql": {"todo": 0, "partial": 0, "done": 0, "foreign_key_violations": None},
         }
@@ -1536,14 +1619,17 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "missing": desired_ids,
         }
 
-    def sql_status_from_metrics(metrics: dict[str, Any] | None) -> str:
+    def sql_status_from_metrics(metrics: dict[str, Any] | None, *, tracker_blocked: bool = False) -> str:
         if not metrics:
             return "TODO"
         runs_total = int(metrics.get("runs_total") or 0)
         max_loaded_network = int(metrics.get("max_loaded_network") or 0)
         max_loaded_any = int(metrics.get("max_loaded_any") or 0)
+        last_loaded = int(metrics.get("last_loaded") or 0)
         if runs_total == 0:
             return "TODO"
+        if tracker_blocked and last_loaded == 0 and max_loaded_network > 0:
+            return "PARTIAL"
         if max_loaded_network > 0:
             return "DONE"
         if max_loaded_any > 0:
@@ -1872,10 +1958,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             except sqlite3.Error:
                 topic_positions_by_method = {}
 
-            # Coherence (says vs does): compare declared vs votes positions on the latest as_of_date.
+            # Coherence (says vs does): use overlap-aware as_of_date resolution for stable exports.
             try:
-                as_of_row = conn.execute("SELECT MAX(as_of_date) AS d FROM topic_positions").fetchone()
-                as_of_date_latest = safe_text(as_of_row["d"] if as_of_row else "")
+                as_of_date_latest = _resolve_topic_coherence_as_of_date(conn)
             except sqlite3.Error:
                 as_of_date_latest = ""
 
@@ -2084,18 +2169,27 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 required = cfg.get("min_records_loaded_strict")
                 loaded = int(metrics.get("last_loaded", 0) if metrics else 0)
                 status = ops_state(True, metrics, required)
-                sql_status = sql_status_from_metrics(metrics)
+                tracker = tracker_by_source.get(source_id)
+                tracker_status = safe_text(tracker.get("estado")).upper() if tracker else ""
+                tracker_blocked = _tracker_note_is_blocked(safe_text((tracker or {}).get("bloque", "")))
+                sql_status = sql_status_from_metrics(metrics, tracker_blocked=tracker_blocked)
                 progress = None
                 if required and required > 0:
                     progress = min(100, round((loaded * 100) / required))
-                tracker = tracker_by_source.get(source_id)
-                tracker_status = safe_text(tracker.get("estado")) if tracker else ""
                 max_net = int(metrics.get("max_loaded_network", 0) if metrics else 0)
                 max_any = int(metrics.get("max_loaded_any", 0) if metrics else 0)
                 net_fetches = int(metrics.get("network_fetches", 0) if metrics else 0)
                 fallback_fetches = int(metrics.get("fallback_fetches", 0) if metrics else 0)
                 under_threshold = bool(required and required > 0 and loaded < required and (metrics or {}).get("last_status") == "ok")
                 done_zero_real = bool(tracker_status == "DONE" and max_net == 0 and max_any > 0)
+                waiver_active = waivers_active.get(source_id)
+                waiver_any = waiver_active or waivers_expired.get(source_id)
+                mismatch_state = _compute_tracker_mismatch_state(
+                    tracker_status=tracker_status,
+                    sql_status=sql_status,
+                    done_zero_real=done_zero_real,
+                    waiver_active=bool(waiver_active),
+                )
                 mandates_count = int(mandates_by_source.get(source_id, 0))
                 vote_events_count = int(vote_events_by_source.get(source_id, 0))
                 initiatives_count = int(initiatives_by_source.get(source_id, 0))
@@ -2142,6 +2236,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                         "bloque": safe_text(tracker.get("bloque")) if tracker else "",
                     },
                     "sql_status": sql_status,
+                    "mismatch_state": mismatch_state,
+                    "mismatch_waived": mismatch_state == "WAIVED_MISMATCH",
+                    "waiver_expiry": safe_text((waiver_any or {}).get("expires_on")),
                     "state": status,
                     "runs_total": int(metrics.get("runs_total", 0) if metrics else 0),
                     "runs_ok": int(metrics.get("runs_ok", 0) if metrics else 0),
@@ -2177,7 +2274,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                         "done_zero_real": done_zero_real,
                         "has_network": max_net > 0,
                         "has_any": max_any > 0,
-                        "blocked_note": "bloqueado" in safe_text((tracker or {}).get("bloque", "")).lower(),
+                        "blocked_note": tracker_blocked,
                     },
                 }
                 all_sources.append(row)
@@ -2232,9 +2329,21 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 metrics = metrics_map.get(source_id)
                 loaded = int(metrics.get("last_loaded", 0) if metrics else 0)
                 status = ops_state(False, metrics, None)
-                sql_status = sql_status_from_metrics(metrics)
                 tracker = tracker_by_source.get(source_id)
-                tracker_status = safe_text(tracker.get("estado")) if tracker else ""
+                tracker_status = safe_text(tracker.get("estado")).upper() if tracker else ""
+                tracker_blocked = _tracker_note_is_blocked(safe_text((tracker or {}).get("bloque", "")))
+                sql_status = sql_status_from_metrics(metrics, tracker_blocked=tracker_blocked)
+                max_loaded_any = int(metrics.get("max_loaded_any", 0) if metrics else 0)
+                max_loaded_network = int(metrics.get("max_loaded_network", 0) if metrics else 0)
+                done_zero_real = bool(tracker_status == "DONE" and max_loaded_network == 0 and max_loaded_any > 0)
+                waiver_active = waivers_active.get(source_id)
+                waiver_any = waiver_active or waivers_expired.get(source_id)
+                mismatch_state = _compute_tracker_mismatch_state(
+                    tracker_status=tracker_status,
+                    sql_status=sql_status,
+                    done_zero_real=done_zero_real,
+                    waiver_active=bool(waiver_active),
+                )
                 mandates_count = int(mandates_by_source.get(source_id, 0))
                 vote_events_count = int(vote_events_by_source.get(source_id, 0))
                 initiatives_count = int(initiatives_by_source.get(source_id, 0))
@@ -2262,13 +2371,16 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                         "bloque": safe_text(tracker.get("bloque")) if tracker else "",
                     },
                     "sql_status": sql_status,
+                    "mismatch_state": mismatch_state,
+                    "mismatch_waived": mismatch_state == "WAIVED_MISMATCH",
+                    "waiver_expiry": safe_text((waiver_any or {}).get("expires_on")),
                     "state": status,
                     "runs_total": int(metrics.get("runs_total", 0) if metrics else 0),
                     "runs_ok": int(metrics.get("runs_ok", 0) if metrics else 0),
                     "last_status": safe_text(metrics.get("last_status")) if metrics else "",
                     "last_loaded": loaded,
-                    "max_loaded_any": int(metrics.get("max_loaded_any", 0) if metrics else 0),
-                    "max_loaded_network": int(metrics.get("max_loaded_network", 0) if metrics else 0),
+                    "max_loaded_any": max_loaded_any,
+                    "max_loaded_network": max_loaded_network,
                     "network_fetches": int(metrics.get("network_fetches", 0) if metrics else 0),
                     "fallback_fetches": int(metrics.get("fallback_fetches", 0) if metrics else 0),
                     "last_started_at": safe_text(metrics.get("last_started_at")) if metrics else "",
@@ -2290,10 +2402,10 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     },
                     "flags": {
                         "under_threshold": False,
-                        "done_zero_real": False,
-                        "has_network": int(metrics.get("max_loaded_network", 0) if metrics else 0) > 0,
-                        "has_any": int(metrics.get("max_loaded_any", 0) if metrics else 0) > 0,
-                        "blocked_note": "bloqueado" in safe_text((tracker or {}).get("bloque", "")).lower(),
+                        "done_zero_real": done_zero_real,
+                        "has_network": max_loaded_network > 0,
+                        "has_any": max_loaded_any > 0,
+                        "blocked_note": tracker_blocked,
                     },
                 }
                 all_sources.append(row)
@@ -2310,6 +2422,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
 
             states = [item["state"] for item in all_sources]
             sql_states = [safe_text(item.get("sql_status")) for item in all_sources if safe_text(item.get("sql_status"))]
+            mismatch_states = [safe_text(item.get("mismatch_state")) for item in all_sources if safe_text(item.get("mismatch_state"))]
             # Tracker counts should reflect the operational backlog (rows in the tracker),
             # not only the subset of tracker rows that map to a configured source_id.
             tracker_item_states = [
@@ -2361,6 +2474,13 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     "todo": tracker_item_states.count("TODO"),
                     "partial": tracker_item_states.count("PARTIAL"),
                     "done": tracker_item_states.count("DONE"),
+                    "mismatch": mismatch_states.count("MISMATCH"),
+                    "waived_mismatch": mismatch_states.count("WAIVED_MISMATCH"),
+                    "done_zero_real": mismatch_states.count("DONE_ZERO_REAL"),
+                    "untracked_sources": mismatch_states.count("UNTRACKED"),
+                    "waivers_active": len(waivers_active),
+                    "waivers_expired": len(waivers_expired),
+                    "waivers_error": waivers_error,
                 },
             }
 
@@ -2542,6 +2662,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "tracker": {
                 "items_total": len(tracker_items),
                 "unmapped": len(tracker_unmapped),
+                "waivers_active": len(waivers_active),
+                "waivers_expired": len(waivers_expired),
+                "waivers_error": waivers_error,
             },
             "sql": {"todo": 0, "partial": 0, "done": 0, "foreign_key_violations": None},
         }
@@ -2582,6 +2705,664 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "actions": [],
             "sources": [],
             "missing": desired_ids,
+        }
+
+
+def _resolve_topic_coherence_as_of_date(conn: sqlite3.Connection, *, as_of_date: str | None = None) -> str:
+    candidate = safe_text(as_of_date)
+    if candidate:
+        if not ISO_DATE_RE.match(candidate):
+            raise ValueError("Parametro 'as_of_date' debe ser YYYY-MM-DD")
+        return candidate
+    row = conn.execute(
+        """
+        WITH votes AS (
+          SELECT DISTINCT
+            COALESCE(topic_set_id, -1) AS topic_set_key,
+            topic_id,
+            person_id,
+            COALESCE(mandate_id, -1) AS mandate_key,
+            as_of_date
+          FROM topic_positions
+          WHERE computed_method = 'votes'
+        ),
+        decl AS (
+          SELECT DISTINCT
+            COALESCE(topic_set_id, -1) AS topic_set_key,
+            topic_id,
+            person_id,
+            COALESCE(mandate_id, -1) AS mandate_key,
+            as_of_date
+          FROM topic_positions
+          WHERE computed_method = 'declared'
+        )
+        SELECT MAX(v.as_of_date) AS d
+        FROM votes v
+        JOIN decl d
+          ON d.topic_set_key = v.topic_set_key
+         AND d.topic_id = v.topic_id
+         AND d.person_id = v.person_id
+         AND d.mandate_key = v.mandate_key
+         AND d.as_of_date = v.as_of_date
+        """
+    ).fetchone()
+    resolved = safe_text(row["d"] if row else "")
+    if resolved:
+        return resolved
+    fallback = conn.execute(
+        """
+        SELECT MAX(as_of_date) AS d
+        FROM topic_positions
+        WHERE computed_method IN ('votes', 'declared')
+        """
+    ).fetchone()
+    return safe_text(fallback["d"] if fallback else "")
+
+
+def _build_topic_coherence_pair_filter_clauses(
+    *,
+    alias: str,
+    topic_set_id: int | None = None,
+    topic_id: int | None = None,
+    scope: str | None = None,
+    person_id: int | None = None,
+) -> tuple[list[str], list[Any]]:
+    clauses: list[str] = []
+    params: list[Any] = []
+
+    if topic_set_id is not None:
+        clauses.append(f"{alias}.topic_set_id = ?")
+        params.append(int(topic_set_id))
+    if topic_id is not None:
+        clauses.append(f"{alias}.topic_id = ?")
+        params.append(int(topic_id))
+    scope_token = safe_text(scope).lower()
+    if scope_token:
+        clauses.append(f"LOWER({alias}.scope) = ?")
+        params.append(scope_token)
+    if person_id is not None:
+        clauses.append(f"{alias}.person_id = ?")
+        params.append(int(person_id))
+    return clauses, params
+
+
+def build_topics_coherence_payload(
+    db_path: Path,
+    *,
+    as_of_date: str | None = None,
+    topic_set_id: int | None = None,
+    topic_id: int | None = None,
+    scope: str | None = None,
+    limit: int = 200,
+    offset: int = 0,
+) -> dict[str, Any]:
+    meta = {
+        "db_path": str(db_path),
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    }
+    if not db_path.exists():
+        return {
+            "meta": {**meta, "error": "Base SQLite no encontrada. Ejecuta primero la ingesta ETL."},
+            "summary": {
+                "groups_total": 0,
+                "overlap_total": 0,
+                "explicit_total": 0,
+                "coherent_total": 0,
+                "incoherent_total": 0,
+                "coherence_pct": 0.0,
+                "incoherence_pct": 0.0,
+            },
+            "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+            "groups": [],
+        }
+
+    pairs_cte_sql = """
+        WITH votes_ranked AS (
+          SELECT
+            topic_set_id,
+            COALESCE(topic_set_id, -1) AS topic_set_key,
+            topic_id,
+            person_id,
+            COALESCE(mandate_id, -1) AS mandate_key,
+            as_of_date,
+            stance AS does_stance,
+            admin_level_id,
+            ROW_NUMBER() OVER (
+              PARTITION BY COALESCE(topic_set_id, -1), topic_id, person_id, COALESCE(mandate_id, -1), as_of_date
+              ORDER BY computed_at DESC, position_id DESC
+            ) AS rn
+          FROM topic_positions
+          WHERE computed_method = 'votes' AND as_of_date = ?
+        ),
+        best_votes AS (
+          SELECT topic_set_id, topic_set_key, topic_id, person_id, mandate_key, as_of_date, does_stance, admin_level_id
+          FROM votes_ranked
+          WHERE rn = 1
+        ),
+        decl_ranked AS (
+          SELECT
+            topic_set_id,
+            COALESCE(topic_set_id, -1) AS topic_set_key,
+            topic_id,
+            person_id,
+            COALESCE(mandate_id, -1) AS mandate_key,
+            as_of_date,
+            stance AS says_stance,
+            admin_level_id,
+            ROW_NUMBER() OVER (
+              PARTITION BY COALESCE(topic_set_id, -1), topic_id, person_id, COALESCE(mandate_id, -1), as_of_date
+              ORDER BY computed_at DESC, position_id DESC
+            ) AS rn
+          FROM topic_positions
+          WHERE computed_method = 'declared' AND as_of_date = ?
+        ),
+        best_decl AS (
+          SELECT topic_set_id, topic_set_key, topic_id, person_id, mandate_key, as_of_date, says_stance, admin_level_id
+          FROM decl_ranked
+          WHERE rn = 1
+        ),
+        pairs AS (
+          SELECT
+            CASE WHEN v.topic_set_key = -1 THEN NULL ELSE v.topic_set_id END AS topic_set_id,
+            v.topic_set_key,
+            v.topic_id,
+            v.person_id,
+            v.mandate_key,
+            v.as_of_date,
+            v.does_stance,
+            d.says_stance,
+            COALESCE(v.admin_level_id, d.admin_level_id) AS pair_admin_level_id
+          FROM best_votes v
+          JOIN best_decl d
+            ON d.topic_set_key = v.topic_set_key
+           AND d.topic_id = v.topic_id
+           AND d.person_id = v.person_id
+           AND d.mandate_key = v.mandate_key
+           AND d.as_of_date = v.as_of_date
+        ),
+        pairs_scoped AS (
+          SELECT
+            p.topic_set_id,
+            p.topic_set_key,
+            p.topic_id,
+            p.person_id,
+            p.mandate_key,
+            p.as_of_date,
+            p.does_stance,
+            p.says_stance,
+            COALESCE(ap.code, aset.code, '') AS scope
+          FROM pairs p
+          LEFT JOIN topic_sets ts ON ts.topic_set_id = p.topic_set_id
+          LEFT JOIN admin_levels ap ON ap.admin_level_id = p.pair_admin_level_id
+          LEFT JOIN admin_levels aset ON aset.admin_level_id = ts.admin_level_id
+        )
+    """
+
+    try:
+        with open_db(db_path) as conn:
+            resolved_as_of = _resolve_topic_coherence_as_of_date(conn, as_of_date=as_of_date)
+            if not resolved_as_of:
+                return {
+                    "meta": {**meta, "as_of_date": ""},
+                    "filters": {
+                        "topic_set_id": topic_set_id,
+                        "topic_id": topic_id,
+                        "scope": safe_text(scope),
+                    },
+                    "summary": {
+                        "groups_total": 0,
+                        "overlap_total": 0,
+                        "explicit_total": 0,
+                        "coherent_total": 0,
+                        "incoherent_total": 0,
+                        "coherence_pct": 0.0,
+                        "incoherence_pct": 0.0,
+                    },
+                    "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+                    "groups": [],
+                }
+
+            filter_clauses, filter_params = _build_topic_coherence_pair_filter_clauses(
+                alias="p",
+                topic_set_id=topic_set_id,
+                topic_id=topic_id,
+                scope=scope,
+                person_id=None,
+            )
+            where_sql = f"WHERE {' AND '.join(filter_clauses)}" if filter_clauses else ""
+            common_params: list[Any] = [resolved_as_of, resolved_as_of, *filter_params]
+
+            summary_row = conn.execute(
+                pairs_cte_sql
+                + f"""
+                SELECT
+                  COUNT(*) AS groups_total,
+                  SUM(g.overlap_total) AS overlap_total,
+                  SUM(g.explicit_total) AS explicit_total,
+                  SUM(g.coherent_total) AS coherent_total,
+                  SUM(g.incoherent_total) AS incoherent_total
+                FROM (
+                  SELECT
+                    p.topic_set_id,
+                    p.topic_id,
+                    p.scope,
+                    COUNT(*) AS overlap_total,
+                    SUM(CASE WHEN p.does_stance IN ('support', 'oppose') AND p.says_stance IN ('support', 'oppose') THEN 1 ELSE 0 END) AS explicit_total,
+                    SUM(CASE WHEN (p.does_stance = 'support' AND p.says_stance = 'support') OR (p.does_stance = 'oppose' AND p.says_stance = 'oppose') THEN 1 ELSE 0 END) AS coherent_total,
+                    SUM(CASE WHEN (p.does_stance = 'support' AND p.says_stance = 'oppose') OR (p.does_stance = 'oppose' AND p.says_stance = 'support') THEN 1 ELSE 0 END) AS incoherent_total
+                  FROM pairs_scoped p
+                  {where_sql}
+                  GROUP BY p.topic_set_id, p.topic_id, p.scope
+                ) g
+                """,
+                common_params,
+            ).fetchone()
+
+            rows = conn.execute(
+                pairs_cte_sql
+                + f"""
+                SELECT
+                  p.topic_set_id,
+                  ts.name AS topic_set_name,
+                  p.topic_id,
+                  t.label AS topic_label,
+                  p.scope,
+                  COUNT(*) AS overlap_total,
+                  SUM(CASE WHEN p.does_stance IN ('support', 'oppose') AND p.says_stance IN ('support', 'oppose') THEN 1 ELSE 0 END) AS explicit_total,
+                  SUM(CASE WHEN (p.does_stance = 'support' AND p.says_stance = 'support') OR (p.does_stance = 'oppose' AND p.says_stance = 'oppose') THEN 1 ELSE 0 END) AS coherent_total,
+                  SUM(CASE WHEN (p.does_stance = 'support' AND p.says_stance = 'oppose') OR (p.does_stance = 'oppose' AND p.says_stance = 'support') THEN 1 ELSE 0 END) AS incoherent_total
+                FROM pairs_scoped p
+                LEFT JOIN topic_sets ts ON ts.topic_set_id = p.topic_set_id
+                LEFT JOIN topics t ON t.topic_id = p.topic_id
+                {where_sql}
+                GROUP BY p.topic_set_id, ts.name, p.topic_id, t.label, p.scope
+                ORDER BY overlap_total DESC, incoherent_total DESC, p.topic_set_id ASC, p.topic_id ASC, p.scope ASC
+                LIMIT ? OFFSET ?
+                """,
+                [*common_params, int(limit), int(offset)],
+            ).fetchall()
+
+            groups: list[dict[str, Any]] = []
+            for row in rows:
+                explicit_total = int(row["explicit_total"] or 0)
+                coherent_total = int(row["coherent_total"] or 0)
+                incoherent_total = int(row["incoherent_total"] or 0)
+                groups.append(
+                    {
+                        "topic_set_id": to_int_or_none(row["topic_set_id"]),
+                        "topic_set_name": safe_text(row["topic_set_name"]),
+                        "topic_id": to_int_or_none(row["topic_id"]),
+                        "topic_label": safe_text(row["topic_label"]),
+                        "scope": safe_text(row["scope"]),
+                        "overlap_total": int(row["overlap_total"] or 0),
+                        "explicit_total": explicit_total,
+                        "coherent_total": coherent_total,
+                        "incoherent_total": incoherent_total,
+                        "coherence_pct": float(coherent_total) / float(explicit_total) if explicit_total > 0 else 0.0,
+                        "incoherence_pct": float(incoherent_total) / float(explicit_total) if explicit_total > 0 else 0.0,
+                    }
+                )
+
+            groups_total = int((summary_row["groups_total"] if summary_row is not None else 0) or 0)
+            overlap_total = int((summary_row["overlap_total"] if summary_row is not None else 0) or 0)
+            explicit_total = int((summary_row["explicit_total"] if summary_row is not None else 0) or 0)
+            coherent_total = int((summary_row["coherent_total"] if summary_row is not None else 0) or 0)
+            incoherent_total = int((summary_row["incoherent_total"] if summary_row is not None else 0) or 0)
+
+            return {
+                "meta": {**meta, "as_of_date": resolved_as_of},
+                "filters": {
+                    "topic_set_id": topic_set_id,
+                    "topic_id": topic_id,
+                    "scope": safe_text(scope),
+                },
+                "summary": {
+                    "groups_total": groups_total,
+                    "overlap_total": overlap_total,
+                    "explicit_total": explicit_total,
+                    "coherent_total": coherent_total,
+                    "incoherent_total": incoherent_total,
+                    "coherence_pct": float(coherent_total) / float(explicit_total) if explicit_total > 0 else 0.0,
+                    "incoherence_pct": float(incoherent_total) / float(explicit_total) if explicit_total > 0 else 0.0,
+                },
+                "page": {
+                    "limit": int(limit),
+                    "offset": int(offset),
+                    "returned": len(groups),
+                },
+                "groups": groups,
+            }
+    except ValueError:
+        raise
+    except sqlite3.Error as exc:
+        return {
+            "meta": {**meta, "as_of_date": safe_text(as_of_date)},
+            "error": f"SQLite error: {exc}",
+            "summary": {
+                "groups_total": 0,
+                "overlap_total": 0,
+                "explicit_total": 0,
+                "coherent_total": 0,
+                "incoherent_total": 0,
+                "coherence_pct": 0.0,
+                "incoherence_pct": 0.0,
+            },
+            "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+            "groups": [],
+        }
+
+
+def build_topics_coherence_evidence_payload(
+    db_path: Path,
+    *,
+    bucket: str,
+    as_of_date: str | None = None,
+    topic_set_id: int | None = None,
+    topic_id: int | None = None,
+    scope: str | None = None,
+    person_id: int | None = None,
+    limit: int = 100,
+    offset: int = 0,
+) -> dict[str, Any]:
+    normalized_bucket = safe_text(bucket).lower()
+    if normalized_bucket not in COHERENCE_BUCKETS:
+        allowed = ", ".join(sorted(COHERENCE_BUCKETS))
+        return {
+            "error": f"Parametro 'bucket' invalido: {normalized_bucket!r}. Valores validos: {allowed}",
+            "rows": [],
+            "summary": {"pairs_total": 0, "evidence_total": 0},
+            "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+        }
+
+    meta = {
+        "db_path": str(db_path),
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    }
+    if not db_path.exists():
+        return {
+            "meta": {**meta, "error": "Base SQLite no encontrada. Ejecuta primero la ingesta ETL."},
+            "rows": [],
+            "summary": {"pairs_total": 0, "evidence_total": 0},
+            "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+        }
+
+    bucket_clause = {
+        "overlap": "1 = 1",
+        "explicit": "p.does_stance IN ('support', 'oppose') AND p.says_stance IN ('support', 'oppose')",
+        "coherent": "(p.does_stance = 'support' AND p.says_stance = 'support') OR (p.does_stance = 'oppose' AND p.says_stance = 'oppose')",
+        "incoherent": "(p.does_stance = 'support' AND p.says_stance = 'oppose') OR (p.does_stance = 'oppose' AND p.says_stance = 'support')",
+    }[normalized_bucket]
+
+    pairs_cte_sql = """
+        WITH votes_ranked AS (
+          SELECT
+            topic_set_id,
+            COALESCE(topic_set_id, -1) AS topic_set_key,
+            topic_id,
+            person_id,
+            COALESCE(mandate_id, -1) AS mandate_key,
+            as_of_date,
+            stance AS does_stance,
+            admin_level_id,
+            ROW_NUMBER() OVER (
+              PARTITION BY COALESCE(topic_set_id, -1), topic_id, person_id, COALESCE(mandate_id, -1), as_of_date
+              ORDER BY computed_at DESC, position_id DESC
+            ) AS rn
+          FROM topic_positions
+          WHERE computed_method = 'votes' AND as_of_date = ?
+        ),
+        best_votes AS (
+          SELECT topic_set_id, topic_set_key, topic_id, person_id, mandate_key, as_of_date, does_stance, admin_level_id
+          FROM votes_ranked
+          WHERE rn = 1
+        ),
+        decl_ranked AS (
+          SELECT
+            topic_set_id,
+            COALESCE(topic_set_id, -1) AS topic_set_key,
+            topic_id,
+            person_id,
+            COALESCE(mandate_id, -1) AS mandate_key,
+            as_of_date,
+            stance AS says_stance,
+            admin_level_id,
+            ROW_NUMBER() OVER (
+              PARTITION BY COALESCE(topic_set_id, -1), topic_id, person_id, COALESCE(mandate_id, -1), as_of_date
+              ORDER BY computed_at DESC, position_id DESC
+            ) AS rn
+          FROM topic_positions
+          WHERE computed_method = 'declared' AND as_of_date = ?
+        ),
+        best_decl AS (
+          SELECT topic_set_id, topic_set_key, topic_id, person_id, mandate_key, as_of_date, says_stance, admin_level_id
+          FROM decl_ranked
+          WHERE rn = 1
+        ),
+        pairs AS (
+          SELECT
+            CASE WHEN v.topic_set_key = -1 THEN NULL ELSE v.topic_set_id END AS topic_set_id,
+            v.topic_set_key,
+            v.topic_id,
+            v.person_id,
+            v.mandate_key,
+            v.as_of_date,
+            v.does_stance,
+            d.says_stance,
+            COALESCE(v.admin_level_id, d.admin_level_id) AS pair_admin_level_id
+          FROM best_votes v
+          JOIN best_decl d
+            ON d.topic_set_key = v.topic_set_key
+           AND d.topic_id = v.topic_id
+           AND d.person_id = v.person_id
+           AND d.mandate_key = v.mandate_key
+           AND d.as_of_date = v.as_of_date
+        ),
+        pairs_scoped AS (
+          SELECT
+            p.topic_set_id,
+            p.topic_set_key,
+            p.topic_id,
+            p.person_id,
+            p.mandate_key,
+            p.as_of_date,
+            p.does_stance,
+            p.says_stance,
+            COALESCE(ap.code, aset.code, '') AS scope
+          FROM pairs p
+          LEFT JOIN topic_sets ts ON ts.topic_set_id = p.topic_set_id
+          LEFT JOIN admin_levels ap ON ap.admin_level_id = p.pair_admin_level_id
+          LEFT JOIN admin_levels aset ON aset.admin_level_id = ts.admin_level_id
+        ),
+        ranked_pairs AS (
+          SELECT
+            p.topic_set_id,
+            p.topic_set_key,
+            p.topic_id,
+            p.person_id,
+            p.scope,
+            p.does_stance,
+            p.says_stance,
+            ROW_NUMBER() OVER (
+              PARTITION BY p.topic_set_key, p.topic_id, p.person_id
+              ORDER BY p.mandate_key DESC
+            ) AS pair_rank
+          FROM pairs_scoped p
+    """
+
+    try:
+        with open_db(db_path) as conn:
+            resolved_as_of = _resolve_topic_coherence_as_of_date(conn, as_of_date=as_of_date)
+            if not resolved_as_of:
+                return {
+                    "meta": {**meta, "as_of_date": ""},
+                    "filters": {
+                        "bucket": normalized_bucket,
+                        "topic_set_id": topic_set_id,
+                        "topic_id": topic_id,
+                        "scope": safe_text(scope),
+                        "person_id": person_id,
+                    },
+                    "summary": {"pairs_total": 0, "evidence_total": 0},
+                    "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+                    "rows": [],
+                }
+
+            filter_clauses, filter_params = _build_topic_coherence_pair_filter_clauses(
+                alias="p",
+                topic_set_id=topic_set_id,
+                topic_id=topic_id,
+                scope=scope,
+                person_id=person_id,
+            )
+            where_clauses = [bucket_clause, *filter_clauses]
+            where_sql = f"WHERE {' AND '.join(where_clauses)}"
+            ranked_pairs_cte_sql = (
+                pairs_cte_sql
+                + f"""
+                  {where_sql}
+                ),
+                best_pairs AS (
+                  SELECT topic_set_id, topic_set_key, topic_id, person_id, scope, does_stance, says_stance
+                  FROM ranked_pairs
+                  WHERE pair_rank = 1
+                )
+                """
+            )
+            common_params: list[Any] = [resolved_as_of, resolved_as_of, *filter_params]
+
+            pair_total_row = conn.execute(
+                ranked_pairs_cte_sql
+                + """
+                SELECT COUNT(*) AS c
+                FROM best_pairs
+                """,
+                common_params,
+            ).fetchone()
+            pairs_total = int((pair_total_row["c"] if pair_total_row is not None else 0) or 0)
+
+            evidence_total_row = conn.execute(
+                ranked_pairs_cte_sql
+                + """
+                SELECT COUNT(DISTINCT e.evidence_id) AS c
+                FROM best_pairs b
+                JOIN topic_evidence e
+                  ON (
+                    ((e.topic_set_id = b.topic_set_id) OR (e.topic_set_id IS NULL AND b.topic_set_id IS NULL))
+                    AND e.topic_id = b.topic_id
+                    AND e.person_id = b.person_id
+                  )
+                """,
+                common_params,
+            ).fetchone()
+            evidence_total = int((evidence_total_row["c"] if evidence_total_row is not None else 0) or 0)
+
+            rows = conn.execute(
+                ranked_pairs_cte_sql
+                + """
+                SELECT
+                  e.evidence_id,
+                  e.topic_set_id,
+                  ts.name AS topic_set_name,
+                  e.topic_id,
+                  t.label AS topic_label,
+                  e.person_id,
+                  per.full_name AS person_name,
+                  b.scope,
+                  b.does_stance,
+                  b.says_stance,
+                  e.evidence_type,
+                  e.evidence_date,
+                  e.stance AS evidence_stance,
+                  e.polarity AS evidence_polarity,
+                  e.confidence AS evidence_confidence,
+                  e.topic_method,
+                  e.stance_method,
+                  e.source_id,
+                  e.source_url,
+                  e.source_record_pk,
+                  e.excerpt
+                FROM best_pairs b
+                JOIN topic_evidence e
+                  ON (
+                    ((e.topic_set_id = b.topic_set_id) OR (e.topic_set_id IS NULL AND b.topic_set_id IS NULL))
+                    AND e.topic_id = b.topic_id
+                    AND e.person_id = b.person_id
+                  )
+                LEFT JOIN topic_sets ts ON ts.topic_set_id = e.topic_set_id
+                LEFT JOIN topics t ON t.topic_id = e.topic_id
+                LEFT JOIN persons per ON per.person_id = e.person_id
+                ORDER BY COALESCE(e.evidence_date, '') DESC, e.evidence_id DESC
+                LIMIT ? OFFSET ?
+                """,
+                [*common_params, int(limit), int(offset)],
+            ).fetchall()
+
+            out_rows: list[dict[str, Any]] = []
+            for row in rows:
+                out_rows.append(
+                    {
+                        "evidence_id": to_int_or_none(row["evidence_id"]),
+                        "topic_set_id": to_int_or_none(row["topic_set_id"]),
+                        "topic_set_name": safe_text(row["topic_set_name"]),
+                        "topic_id": to_int_or_none(row["topic_id"]),
+                        "topic_label": safe_text(row["topic_label"]),
+                        "person_id": to_int_or_none(row["person_id"]),
+                        "person_name": safe_text(row["person_name"]),
+                        "scope": safe_text(row["scope"]),
+                        "does_stance": safe_text(row["does_stance"]),
+                        "says_stance": safe_text(row["says_stance"]),
+                        "evidence_type": safe_text(row["evidence_type"]),
+                        "evidence_date": safe_text(row["evidence_date"]),
+                        "evidence_stance": safe_text(row["evidence_stance"]),
+                        "evidence_polarity": to_int_or_none(row["evidence_polarity"]),
+                        "evidence_confidence": float(row["evidence_confidence"] or 0.0)
+                        if row["evidence_confidence"] is not None
+                        else None,
+                        "topic_method": safe_text(row["topic_method"]),
+                        "stance_method": safe_text(row["stance_method"]),
+                        "source_id": safe_text(row["source_id"]),
+                        "source_url": safe_text(row["source_url"]),
+                        "source_record_pk": to_int_or_none(row["source_record_pk"]),
+                        "excerpt": safe_text(safe_json_value(row["excerpt"])),
+                    }
+                )
+
+            return {
+                "meta": {**meta, "as_of_date": resolved_as_of},
+                "filters": {
+                    "bucket": normalized_bucket,
+                    "topic_set_id": topic_set_id,
+                    "topic_id": topic_id,
+                    "scope": safe_text(scope),
+                    "person_id": person_id,
+                },
+                "summary": {
+                    "pairs_total": pairs_total,
+                    "evidence_total": evidence_total,
+                },
+                "page": {
+                    "limit": int(limit),
+                    "offset": int(offset),
+                    "returned": len(out_rows),
+                },
+                "rows": out_rows,
+            }
+    except ValueError:
+        raise
+    except sqlite3.Error as exc:
+        return {
+            "meta": {**meta, "as_of_date": safe_text(as_of_date)},
+            "error": f"SQLite error: {exc}",
+            "filters": {
+                "bucket": normalized_bucket,
+                "topic_set_id": topic_set_id,
+                "topic_id": topic_id,
+                "scope": safe_text(scope),
+                "person_id": person_id,
+            },
+            "summary": {"pairs_total": 0, "evidence_total": 0},
+            "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
+            "rows": [],
         }
 
 
@@ -4687,6 +5468,66 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     }
                 )
                 return
+
+            if path == "/api/topics/coherence":
+                qs = parse_qs(parsed.query, keep_blank_values=False)
+                try:
+                    as_of_date = str_param(qs, "as_of_date", "") or None
+                    topic_set_id = int(str_param(qs, "topic_set_id", "")) if str_param(qs, "topic_set_id", "") else None
+                    topic_id = int(str_param(qs, "topic_id", "")) if str_param(qs, "topic_id", "") else None
+                    scope = str_param(qs, "scope", "") or None
+                    limit = int_param(qs, "limit", 200, min_value=1, max_value=5000)
+                    offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
+                    payload = build_topics_coherence_payload(
+                        config.db_path,
+                        as_of_date=as_of_date,
+                        topic_set_id=topic_set_id,
+                        topic_id=topic_id,
+                        scope=scope,
+                        limit=limit,
+                        offset=offset,
+                    )
+                    status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
+                    self.write_json(payload, status=status)
+                    return
+                except ValueError as exc:
+                    self.write_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                except Exception as exc:  # noqa: BLE001
+                    self.write_json({"error": f"{type(exc).__name__}: {exc}"}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                    return
+
+            if path == "/api/topics/coherence/evidence":
+                qs = parse_qs(parsed.query, keep_blank_values=False)
+                try:
+                    bucket = str_param(qs, "bucket", "incoherent")
+                    as_of_date = str_param(qs, "as_of_date", "") or None
+                    topic_set_id = int(str_param(qs, "topic_set_id", "")) if str_param(qs, "topic_set_id", "") else None
+                    topic_id = int(str_param(qs, "topic_id", "")) if str_param(qs, "topic_id", "") else None
+                    scope = str_param(qs, "scope", "") or None
+                    person_id = int(str_param(qs, "person_id", "")) if str_param(qs, "person_id", "") else None
+                    limit = int_param(qs, "limit", 100, min_value=1, max_value=5000)
+                    offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
+                    payload = build_topics_coherence_evidence_payload(
+                        config.db_path,
+                        bucket=bucket,
+                        as_of_date=as_of_date,
+                        topic_set_id=topic_set_id,
+                        topic_id=topic_id,
+                        scope=scope,
+                        person_id=person_id,
+                        limit=limit,
+                        offset=offset,
+                    )
+                    status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
+                    self.write_json(payload, status=status)
+                    return
+                except ValueError as exc:
+                    self.write_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                    return
+                except Exception as exc:  # noqa: BLE001
+                    self.write_json({"error": f"{type(exc).__name__}: {exc}"}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                    return
 
             if path == "/api/topics/reviews":
                 qs = parse_qs(parsed.query, keep_blank_values=False)

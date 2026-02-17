@@ -35,7 +35,7 @@ def backfill_topic_positions_from_declared_evidence(
         for m in (
             stance_methods
             if stance_methods is not None
-            else ("declared:regex_v2", "declared:regex_v1")
+            else ("declared:regex_v3", "declared:regex_v2", "declared:regex_v1")
         )
         if normalize_ws(m)
     )
