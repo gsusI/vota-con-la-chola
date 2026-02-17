@@ -1,0 +1,6 @@
+family,source_count,strict_ok_count,strict_error_count,strict_records_loaded_total,replay_ok_count,replay_error_count,replay_records_loaded_total,loaded_delta_strict_minus_replay_total,parity_match_sources,parity_diff_sources,parity_missing_sources
+aemet,1,0,1,0,1,0,2,-2,0,1,0
+bde,1,0,1,0,1,0,2,-2,0,1,0
+bdns,2,0,2,0,2,0,5,-5,0,2,0
+eurostat,1,1,0,2394,1,0,2,2392,0,1,0
+placsp,2,0,2,0,2,0,5,-5,0,2,0

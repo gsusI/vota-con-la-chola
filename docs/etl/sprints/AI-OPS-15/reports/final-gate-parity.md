@@ -1,0 +1,164 @@
+# AI-OPS-15 T6 Final Gate + Parity
+
+Date:
+- `2026-02-17`
+
+Objective:
+- Re-run strict tracker gate and verify status export parity against SQL totals after delivery-lane reconciliation.
+
+## Inputs used
+
+- `docs/etl/sprints/AI-OPS-15/reports/topic_positions_reconciliation.md`
+- `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_baseline.log`
+- `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_recompute.log`
+- `docs/etl/sprints/AI-OPS-15/evidence/blocker-probe-refresh.log`
+- `docs/etl/e2e-scrape-load-tracker.md`
+- `etl/data/staging/politicos-es.db`
+
+## Commands run
+
+1. Final status checker:
+
+```bash
+python3 scripts/e2e_tracker_status.py \
+  --db etl/data/staging/politicos-es.db \
+  --tracker docs/etl/e2e-scrape-load-tracker.md \
+  --waivers docs/etl/mismatch-waivers.json \
+  --as-of-date 2026-02-17
+```
+
+2. Final strict gate:
+
+```bash
+python3 scripts/e2e_tracker_status.py \
+  --db etl/data/staging/politicos-es.db \
+  --tracker docs/etl/e2e-scrape-load-tracker.md \
+  --waivers docs/etl/mismatch-waivers.json \
+  --as-of-date 2026-02-17 \
+  --fail-on-mismatch \
+  --fail-on-done-zero-real
+```
+
+3. Final status export snapshots:
+
+```bash
+python3 scripts/export_explorer_sources_snapshot.py \
+  --db etl/data/staging/politicos-es.db \
+  --out docs/etl/sprints/AI-OPS-15/evidence/status-final.json
+
+python3 scripts/export_explorer_sources_snapshot.py \
+  --db etl/data/staging/politicos-es.db \
+  --out docs/gh-pages/explorer-sources/data/status.json
+```
+
+4. Final integrity and queue snapshots:
+
+```bash
+python3 - <<'PY'
+import csv, sqlite3
+conn = sqlite3.connect('etl/data/staging/politicos-es.db')
+def exists(name): return conn.execute(
+    "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
+    (name,),
+).fetchone() is not None
+def count(name): return 0 if not exists(name) else conn.execute(f"SELECT COUNT(*) FROM {name}").fetchone()[0]
+row = {
+  'fk_violations': conn.execute("SELECT COUNT(*) FROM pragma_foreign_key_check").fetchone()[0],
+  'indicator_series_total': count('indicator_series'),
+  'indicator_points_total': count('indicator_points'),
+  'indicator_observation_records_total': count('observation_records'),
+  'policy_events_total': count('policy_events'),
+  'topic_positions_total': count('topic_positions'),
+}
+with open('docs/etl/sprints/AI-OPS-15/evidence/final-integrity-metrics.csv', 'w', newline='', encoding='utf-8') as f:
+    w = csv.DictWriter(f, fieldnames=list(row.keys())); w.writeheader(); w.writerow(row)
+conn.close()
+PY
+
+sqlite3 -csv -header etl/data/staging/politicos-es.db "SELECT COUNT(*) AS topic_evidence_reviews_pending FROM topic_evidence_reviews WHERE lower(status)='pending';" > docs/etl/sprints/AI-OPS-15/evidence/final-review-queue.csv
+```
+
+## Evidence artifacts
+
+- `docs/etl/sprints/AI-OPS-15/evidence/tracker-status-final.log`
+- `docs/etl/sprints/AI-OPS-15/evidence/tracker-status-final.exit`
+- `docs/etl/sprints/AI-OPS-15/evidence/tracker-gate-final.log`
+- `docs/etl/sprints/AI-OPS-15/evidence/tracker-gate-final.exit`
+- `docs/etl/sprints/AI-OPS-15/evidence/status-final.json`
+- `docs/etl/sprints/AI-OPS-15/evidence/status-parity-summary.txt`
+- `docs/etl/sprints/AI-OPS-15/evidence/final-integrity-metrics.csv`
+- `docs/etl/sprints/AI-OPS-15/evidence/final-review-queue.csv`
+
+## Final metrics
+
+Tracker/gate:
+- status checker exit code: `0`
+- strict gate exit code: `0`
+- `mismatches=0`
+- `waived_mismatches=0`
+- `waivers_expired=0`
+- `done_zero_real=0`
+
+Integrity/queue:
+- `fk_violations=0`
+- `topic_evidence_reviews_pending=0`
+
+Impact totals (SQL):
+- `indicator_series_total=2400`
+- `indicator_points_total=37431`
+- `indicator_observation_records_total=0`
+- `policy_events_total=548`
+
+Status payload (`status-final.json`):
+- `summary.tracker.mismatch=0`
+- `summary.tracker.waived_mismatch=0`
+- `summary.tracker.done_zero_real=0`
+- `summary.tracker.waivers_expired=0`
+- `analytics.impact.indicator_series_total=2400`
+- `analytics.impact.indicator_points_total=37431`
+
+Published parity (`status-parity-summary.txt`):
+- `overall_match=true` for tracker summary keys and impact counters between:
+  - `docs/etl/sprints/AI-OPS-15/evidence/status-final.json`
+  - `docs/gh-pages/explorer-sources/data/status.json`
+
+## Baseline -> final delta (AI-OPS-15)
+
+Compared with Task 1 baseline (`baseline-gate.log`):
+- strict gate exit: `0 -> 0`
+- `mismatches`: `0 -> 0`
+- `waivers_expired`: `0 -> 0`
+- `done_zero_real`: `0 -> 0`
+
+Delivery lane visible delta (Task 2 -> Task 3):
+- `topic_positions_total`: `137379 -> 205907`
+- `computed_method_votes`: `68528 -> 137056`
+- `topic_set_1_high_stakes_coverage_pct`: `20.00 -> 100.00`
+- `topic_set_1_high_stakes_pairs_with_position`: `12 -> 60`
+- `topic_set_2_latest_as_of_date`: `2026-02-12 -> 2026-02-16`
+
+Tracker reconciliation outcome:
+- line `78` (`Posiciones por tema (politico x scope)`): `PARTIAL -> DONE`.
+
+Blocker lane policy outcome:
+- `strict_probes_executed=0`
+- `no_new_lever_count=4`
+- reason: all four blockers lacked a new lever, so repeated retries were intentionally skipped per AI-OPS-15 anti-loop policy.
+
+## Final parity verdict
+
+- Gate `G3` is green with strict checker exit `0`.
+- Gate `G4` parity is green: status impact counters are non-null and SQL-aligned.
+- Gate `G1`/`G2` remain green (`fk_violations=0`, pending review queue `0`).
+- Gate `G5` (visible progress) is green via tracker line `78` promotion to `DONE` with measured KPI deltas.
+
+## Escalation rule check
+
+T6 escalation condition:
+- escalate if strict gate is green but status export tracker/impact keys are out of parity with SQL or published payload.
+
+Observed:
+- strict gate green and parity checks all matched.
+
+Decision:
+- `NO_ESCALATION`.
