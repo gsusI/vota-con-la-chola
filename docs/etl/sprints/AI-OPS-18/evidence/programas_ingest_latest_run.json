@@ -1,0 +1,38 @@
+{
+  "fetched_at": "2026-02-17T15:53:08+00:00",
+  "finished_at": "2026-02-17T15:53:08+00:00",
+  "message": {
+    "documents_loaded": 3,
+    "note": "from-file",
+    "out": {
+      "evidence_inserted": 11,
+      "info": {
+        "concerns_count": 12,
+        "election_cycles": [
+          "es_generales_2023"
+        ],
+        "failures": [],
+        "skipped": {
+          "bad_payload": 0,
+          "doc_fetch_failed": 0,
+          "missing_required": 0,
+          "no_concerns_config": 0,
+          "no_matching_topics": 0,
+          "party_missing_in_db": 0
+        },
+        "topic_set_ids": [
+          11
+        ]
+      }
+    }
+  },
+  "message_raw": "{\"documents_loaded\": 3, \"note\": \"from-file\", \"out\": {\"evidence_inserted\": 11, \"info\": {\"concerns_count\": 12, \"election_cycles\": [\"es_generales_2023\"], \"failures\": [], \"skipped\": {\"bad_payload\": 0, \"doc_fetch_failed\": 0, \"missing_required\": 0, \"no_concerns_config\": 0, \"no_matching_topics\": 0, \"party_missing_in_db\": 0}, \"topic_set_ids\": [11]}}}",
+  "raw_path": "etl/data/raw/programas_partidos/2026/02/17/programas_partidos_20260217T155308Z.csv",
+  "records_loaded": 3,
+  "records_seen": 3,
+  "run_id": 272,
+  "source_id": "programas_partidos",
+  "source_url": "file:///Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/programas_partidos_sample.csv",
+  "started_at": "2026-02-17T15:53:08+00:00",
+  "status": "ok"
+}

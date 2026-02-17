@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
+import html as html_lib
 import json
 import re
 import sqlite3
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 from etl.politicos_es.db import finish_run, start_run
 from etl.politicos_es.util import (
@@ -25,13 +27,18 @@ from .db import (
     upsert_parl_vote_event,
     upsert_source_record_for_event,
     upsert_source_records,
+    upsert_source_records_with_content_sha256,
 )
+from .http import http_get_bytes, payload_looks_like_html
 
 
 VOTE_SOURCE_TO_MANDATE_SOURCE: dict[str, str] = {
     "congreso_votaciones": "congreso_diputados",
     "senado_votaciones": "senado_senadores",
 }
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_PROGRAMAS_CONCERNS_PATH = _REPO_ROOT / "ui" / "citizen" / "concerns_v1.json"
 
 
 def _load_person_map_for_mandate_source(conn: sqlite3.Connection, mandate_source_id: str) -> dict[str, int]:
@@ -60,6 +67,321 @@ def _normalize_mandate_date(value: str | None) -> str | None:
 
 def _normalize_group_key(value: str | None) -> str | None:
     return normalize_key_part(str(value or "")) or None
+
+
+def _strip_html(text: str) -> str:
+    if not text:
+        return ""
+    cleaned = re.sub(r"<script\b.*?</script>", " ", text, flags=re.I | re.S)
+    cleaned = re.sub(r"<style\b.*?</style>", " ", cleaned, flags=re.I | re.S)
+    cleaned = html_lib.unescape(cleaned)
+    cleaned = re.sub(r"<[^>]+>", " ", cleaned)
+    return normalize_ws(cleaned)
+
+
+_H2_SECTION_RE = re.compile(
+    r"<h2\b[^>]*>(?P<title>.*?)</h2>(?P<body>.*?)(?=(?:<h2\b|</main\b|</body\b|</html\b|\Z))",
+    re.I | re.S,
+)
+
+
+def _extract_h2_sections_from_html(html: str) -> dict[str, str]:
+    """Return {normalized_title -> stripped_body_text} for <h2> sections (best-effort)."""
+    out: dict[str, str] = {}
+    if not html:
+        return out
+    for m in _H2_SECTION_RE.finditer(html):
+        title = _strip_html(m.group("title") or "")
+        body = _strip_html(m.group("body") or "")
+        title_key = normalize_key_part(title)
+        if not title_key:
+            continue
+        if title_key in out:
+            # Avoid losing content if the doc repeats headings.
+            out[title_key] = normalize_ws(out[title_key] + " " + body)
+        else:
+            out[title_key] = body
+    return out
+
+
+def _load_concerns_v1(path: Path) -> list[dict[str, Any]]:
+    obj = json.loads(path.read_text(encoding="utf-8"))
+    concerns = obj.get("concerns") or []
+    out: list[dict[str, Any]] = []
+    if not isinstance(concerns, list):
+        return out
+    for c in concerns:
+        if not isinstance(c, dict):
+            continue
+        cid = normalize_ws(str(c.get("id") or ""))
+        label = normalize_ws(str(c.get("label") or cid))
+        if not cid:
+            continue
+        keywords_raw = c.get("keywords") or []
+        keywords: list[str] = []
+        if isinstance(keywords_raw, list):
+            for k in keywords_raw:
+                kk = normalize_ws(str(k or ""))
+                if kk:
+                    keywords.append(kk)
+        out.append(
+            {
+                "id": cid,
+                "label": label or cid,
+                "keywords": keywords,
+                "keywords_norm": [normalize_key_part(k) for k in keywords if normalize_key_part(k)],
+                "title_norm": normalize_key_part(label or cid),
+            }
+        )
+    return out
+
+
+def _upsert_programas_topic_set(conn: sqlite3.Connection, *, election_cycle: str, now_iso: str) -> int:
+    name = "Programas de partidos"
+    legislature = normalize_ws(election_cycle) or None
+    description = f"Temas (concerns_v1) para programas de partidos. cycle={election_cycle}"
+    # NOTE: SQLite UNIQUE constraints treat NULLs as distinct; we anchor the topic_set to a stable
+    # institution_id to avoid duplicate topic_sets on repeated ingests.
+    institution_level = "editorial"
+    conn.execute(
+        """
+        INSERT INTO institutions (name, level, territory_code, created_at, updated_at)
+        VALUES (?, ?, '', ?, ?)
+        ON CONFLICT(name, level, territory_code) DO UPDATE SET
+          updated_at=excluded.updated_at
+        """,
+        (name, institution_level, now_iso, now_iso),
+    )
+    inst_row = conn.execute(
+        """
+        SELECT institution_id
+        FROM institutions
+        WHERE name = ? AND level = ? AND territory_code = ''
+        ORDER BY institution_id DESC
+        LIMIT 1
+        """,
+        (name, institution_level),
+    ).fetchone()
+    if not inst_row:
+        raise RuntimeError("No se pudo resolver institution_id para Programas de partidos")
+    institution_id = int(inst_row["institution_id"])
+
+    # Anchor remaining UNIQUE columns to non-NULL values so the upsert is truly idempotent in SQLite.
+    admin_row = conn.execute(
+        "SELECT admin_level_id FROM admin_levels WHERE code = 'nacional' ORDER BY admin_level_id ASC LIMIT 1"
+    ).fetchone()
+    if not admin_row:
+        raise RuntimeError("Falta admin_levels.code='nacional' (requerido para topic_set de programas)")
+    admin_level_id = int(admin_row["admin_level_id"])
+
+    terr_row = conn.execute(
+        "SELECT territory_id FROM territories WHERE code = 'ES' ORDER BY territory_id ASC LIMIT 1"
+    ).fetchone()
+    if not terr_row:
+        raise RuntimeError("Falta territories.code='ES' (requerido para topic_set de programas)")
+    territory_id = int(terr_row["territory_id"])
+
+    conn.execute(
+        """
+        INSERT INTO topic_sets (
+          name, description,
+          institution_id, admin_level_id, territory_id,
+          legislature, valid_from, valid_to,
+          is_active, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, 1, ?, ?)
+        ON CONFLICT(name, institution_id, admin_level_id, territory_id, legislature) DO UPDATE SET
+          description=excluded.description,
+          is_active=1,
+          updated_at=excluded.updated_at
+        """,
+        (name, description, institution_id, admin_level_id, territory_id, legislature, now_iso, now_iso),
+    )
+    row = conn.execute(
+        """
+        SELECT topic_set_id
+        FROM topic_sets
+        WHERE name = ?
+          AND institution_id = ?
+          AND admin_level_id = ?
+          AND territory_id = ?
+          AND legislature IS ?
+        ORDER BY topic_set_id DESC
+        LIMIT 1
+        """,
+        (name, institution_id, admin_level_id, territory_id, legislature),
+    ).fetchone()
+    if not row:
+        raise RuntimeError("No se pudo resolver topic_set_id para programas_partidos")
+    return int(row["topic_set_id"])
+
+
+def _upsert_programas_concern_topics(
+    conn: sqlite3.Connection,
+    *,
+    topic_set_id: int,
+    concerns: list[dict[str, Any]],
+    now_iso: str,
+) -> dict[str, int]:
+    if not concerns:
+        return {}
+    # Upsert topics.
+    params: list[tuple[Any, ...]] = []
+    canonical_keys: list[str] = []
+    for c in concerns:
+        cid = normalize_ws(str(c.get("id") or ""))
+        label = normalize_ws(str(c.get("label") or cid))
+        if not cid:
+            continue
+        ckey = f"concern:v1:{cid}"
+        canonical_keys.append(ckey)
+        params.append((ckey, label or cid, None, None, now_iso, now_iso))
+
+    if params:
+        conn.executemany(
+            """
+            INSERT INTO topics (
+              canonical_key, label, description, parent_topic_id, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(canonical_key) DO UPDATE SET
+              label=excluded.label,
+              description=excluded.description,
+              updated_at=excluded.updated_at
+            """,
+            params,
+        )
+
+    # Resolve topic_ids.
+    out: dict[str, int] = {}
+    if canonical_keys:
+        qmarks = ",".join("?" for _ in canonical_keys)
+        rows = conn.execute(
+            f"""
+            SELECT canonical_key, topic_id
+            FROM topics
+            WHERE canonical_key IN ({qmarks})
+            """,
+            tuple(canonical_keys),
+        ).fetchall()
+        for r in rows:
+            key = normalize_ws(str(r["canonical_key"] or ""))
+            if not key:
+                continue
+            out[key] = int(r["topic_id"])
+
+    # Refresh topic_set_topics deterministically.
+    with conn:
+        conn.execute("DELETE FROM topic_set_topics WHERE topic_set_id = ?", (int(topic_set_id),))
+        insert_params: list[tuple[Any, ...]] = []
+        for idx, c in enumerate(concerns, start=1):
+            cid = normalize_ws(str(c.get("id") or ""))
+            ckey = f"concern:v1:{cid}"
+            topic_id = out.get(ckey)
+            if topic_id is None:
+                continue
+            insert_params.append(
+                (
+                    int(topic_set_id),
+                    int(topic_id),
+                    None,  # stakes_score
+                    int(idx),  # stakes_rank (stable order)
+                    1,  # is_high_stakes
+                    "concerns_v1",
+                    now_iso,
+                    now_iso,
+                )
+            )
+        if insert_params:
+            conn.executemany(
+                """
+                INSERT INTO topic_set_topics (
+                  topic_set_id, topic_id,
+                  stakes_score, stakes_rank, is_high_stakes, notes,
+                  created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                insert_params,
+            )
+
+    return {k.split(":", 2)[-1]: v for k, v in out.items() if k.startswith("concern:v1:")}
+
+
+def _upsert_party_proxy_person(conn: sqlite3.Connection, *, party_id: int, party_name: str, now_iso: str) -> int:
+    canonical_key = f"party:{int(party_id)}"
+    full_name = normalize_ws(party_name) or canonical_key
+    row = conn.execute(
+        """
+        INSERT INTO persons (
+          full_name, given_name, family_name, gender, gender_id, birth_date, territory_code,
+          territory_id, canonical_key, created_at, updated_at
+        ) VALUES (?, NULL, NULL, NULL, NULL, NULL, '', NULL, ?, ?, ?)
+        ON CONFLICT(canonical_key) DO UPDATE SET
+          full_name=excluded.full_name,
+          updated_at=excluded.updated_at
+        RETURNING person_id
+        """,
+        (full_name, canonical_key, now_iso, now_iso),
+    ).fetchone()
+    if not row:
+        raise RuntimeError("No se pudo resolver person_id para proxy party")
+    person_id = int(row["person_id"])
+
+    # Link stable party_id identifier for reversibility.
+    conn.execute(
+        """
+        INSERT INTO person_identifiers (person_id, namespace, value, created_at)
+        VALUES (?, 'party_id', ?, ?)
+        ON CONFLICT(namespace, value) DO UPDATE SET
+          person_id=excluded.person_id
+        """,
+        (person_id, str(int(party_id)), now_iso),
+    )
+    return person_id
+
+
+def _raw_path_for_program_doc(raw_dir: Path, *, source_id: str, content_sha: str, ext: str) -> Path:
+    out_dir = raw_dir / "text_documents" / source_id
+    out_dir.mkdir(parents=True, exist_ok=True)
+    return out_dir / f"{content_sha}.{ext}"
+
+
+def _guess_program_doc_ext(payload: bytes, format_hint: str) -> str:
+    hint = normalize_ws(format_hint).lower()
+    if hint in {"html", "pdf", "txt", "md"}:
+        return hint
+    if payload[:5] == b"%PDF-":
+        return "pdf"
+    if payload_looks_like_html(payload):
+        return "html"
+    return "bin"
+
+
+def _read_program_doc_bytes(
+    *,
+    local_path: str | None,
+    source_url: str | None,
+    timeout: int,
+    strict_network: bool,
+) -> tuple[bytes, str | None]:
+    if local_path:
+        path = Path(local_path)
+        if not path.is_absolute():
+            path = _REPO_ROOT / path
+        return path.read_bytes(), f"file://{path.resolve()}"
+
+    url = normalize_ws(str(source_url or ""))
+    if not url:
+        raise RuntimeError("programa sin local_path ni source_url")
+
+    parsed = urlparse(url)
+    if parsed.scheme == "file":
+        p = Path(parsed.path)
+        return p.read_bytes(), url
+
+    if parsed.scheme in {"http", "https"}:
+        payload, _ct = http_get_bytes(url, timeout, headers={"Accept": "*/*"})
+        return payload, url
+
+    raise RuntimeError(f"source_url no soportada: {url}")
 
 
 def _vote_date_in_mandate_window(vote_date: str | None, start_date: str | None, end_date: str | None) -> bool:
@@ -130,6 +452,423 @@ def _pick_best_person_id(
     if len(winners) != 1:
         return None, "ambiguous"
     return winners[0], "matched"
+
+
+def _ingest_programas_partidos(
+    conn: sqlite3.Connection,
+    *,
+    extracted_records: list[dict[str, Any]],
+    source_id: str,
+    raw_dir: Path,
+    timeout: int,
+    snapshot_date: str | None,
+    strict_network: bool,
+    now_iso: str,
+) -> tuple[int, int, dict[str, Any]]:
+    """Ingest manifest-driven party programs into source_records/text_documents/topic_evidence.
+
+    v1 modeling stopgap:
+    - Party programs are party-level statements but topic_evidence requires person_id (NOT NULL).
+    - We upsert a reversible proxy person per party_id: persons.canonical_key = 'party:<party_id>',
+      plus person_identifiers(namespace='party_id', value='<party_id>').
+    """
+    seen = 0
+    docs_loaded = 0
+    evidence_inserted = 0
+
+    skip: dict[str, int] = {
+        "bad_payload": 0,
+        "missing_required": 0,
+        "party_missing_in_db": 0,
+        "doc_fetch_failed": 0,
+        "no_concerns_config": 0,
+        "no_matching_topics": 0,
+    }
+
+    concerns: list[dict[str, Any]] = []
+    if _PROGRAMAS_CONCERNS_PATH.exists():
+        try:
+            concerns = _load_concerns_v1(_PROGRAMAS_CONCERNS_PATH)
+        except Exception:  # noqa: BLE001
+            concerns = []
+    if not concerns:
+        skip["no_concerns_config"] += 1
+
+    # Group manifest rows by election_cycle so we can build one topic_set per cycle.
+    by_cycle: dict[str, list[dict[str, Any]]] = {}
+    for rec in extracted_records:
+        payload = rec.get("payload") or {}
+        if not isinstance(payload, dict):
+            skip["bad_payload"] += 1
+            continue
+        election_cycle = normalize_ws(str(payload.get("election_cycle") or ""))
+        if not election_cycle:
+            skip["missing_required"] += 1
+            continue
+        by_cycle.setdefault(election_cycle, []).append(payload)
+
+    touched_sets: list[int] = []
+    failures: list[str] = []
+
+    for election_cycle, rows in sorted(by_cycle.items(), key=lambda kv: kv[0]):
+        topic_set_id = _upsert_programas_topic_set(conn, election_cycle=election_cycle, now_iso=now_iso)
+        touched_sets.append(int(topic_set_id))
+        topic_id_by_concern: dict[str, int] = {}
+        if concerns:
+            topic_id_by_concern = _upsert_programas_concern_topics(
+                conn, topic_set_id=topic_set_id, concerns=concerns, now_iso=now_iso
+            )
+
+        # Idempotence (derived rows): rebuild evidence for this source + cycle topic_set.
+        # Also guard against historical duplicates created when topic_set scope anchors were NULL.
+        leg_key = normalize_ws(election_cycle) or None
+        cycle_set_ids = [
+            int(r["topic_set_id"])
+            for r in conn.execute(
+                """
+                SELECT topic_set_id
+                FROM topic_sets
+                WHERE name = 'Programas de partidos'
+                  AND legislature IS ?
+                ORDER BY topic_set_id ASC
+                """,
+                (leg_key,),
+            ).fetchall()
+            if r["topic_set_id"] is not None
+        ]
+        with conn:
+            for sid in cycle_set_ids or [int(topic_set_id)]:
+                conn.execute(
+                    """
+                    DELETE FROM topic_evidence
+                    WHERE source_id = ?
+                      AND topic_set_id = ?
+                      AND evidence_type = 'declared:programa'
+                    """,
+                    (source_id, int(sid)),
+                )
+
+        sr_rows: list[dict[str, Any]] = []
+        text_doc_rows: list[tuple[Any, ...]] = []
+        evidence_rows: list[tuple[Any, ...]] = []
+
+        for payload in rows:
+            seen += 1
+            party_id_raw = normalize_ws(str(payload.get("party_id") or ""))
+            party_name = normalize_ws(str(payload.get("party_name") or "")) or party_id_raw
+            kind = normalize_ws(str(payload.get("kind") or "")) or "programa"
+            source_url = normalize_ws(str(payload.get("source_url") or "")) or None
+            format_hint = normalize_ws(str(payload.get("format_hint") or "")) or None
+            language = normalize_ws(str(payload.get("language") or "")) or None
+            scope = normalize_ws(str(payload.get("scope") or "")) or None
+            row_snapshot = normalize_ws(str(payload.get("snapshot_date") or "")) or None
+            local_path = normalize_ws(str(payload.get("local_path") or "")) or None
+            notes = normalize_ws(str(payload.get("notes") or "")) or None
+
+            if not party_id_raw or not election_cycle:
+                skip["missing_required"] += 1
+                continue
+            try:
+                party_id = int(party_id_raw)
+            except ValueError:
+                skip["missing_required"] += 1
+                continue
+
+            party_exists = conn.execute("SELECT 1 FROM parties WHERE party_id = ? LIMIT 1", (party_id,)).fetchone()
+            if not party_exists:
+                skip["party_missing_in_db"] += 1
+                if strict_network:
+                    raise RuntimeError(f"party_id no existe en DB: {party_id}")
+                continue
+
+            # Read doc bytes (local or network).
+            try:
+                doc_bytes, resolved_doc_url = _read_program_doc_bytes(
+                    local_path=local_path,
+                    source_url=source_url,
+                    timeout=timeout,
+                    strict_network=strict_network,
+                )
+            except Exception as exc:  # noqa: BLE001
+                skip["doc_fetch_failed"] += 1
+                failures.append(
+                    f"party_id={party_id} cycle={election_cycle} kind={kind} url={source_url or ''} path={local_path or ''} -> {type(exc).__name__}: {exc}"
+                )
+                if strict_network:
+                    raise
+                continue
+
+            doc_sha = sha256_bytes(doc_bytes)
+            ext = _guess_program_doc_ext(doc_bytes, format_hint or "")
+            raw_path = _raw_path_for_program_doc(raw_dir, source_id=source_id, content_sha=doc_sha, ext=ext)
+            if not raw_path.exists():
+                raw_path.write_bytes(doc_bytes)
+
+            text_excerpt = ""
+            html_sections: dict[str, str] = {}
+            if ext == "html" or payload_looks_like_html(doc_bytes):
+                html = doc_bytes.decode("utf-8", errors="replace")
+                text_excerpt = _strip_html(html)[:4000]
+                html_sections = _extract_h2_sections_from_html(html)
+            else:
+                text_excerpt = doc_bytes.decode("utf-8", errors="replace")
+                text_excerpt = normalize_ws(text_excerpt)[:4000]
+
+            # Upsert proxy person (reversible).
+            person_id = _upsert_party_proxy_person(conn, party_id=party_id, party_name=party_name, now_iso=now_iso)
+
+            source_record_id = f"programas_partidos:{election_cycle}:{party_id}:{kind}"
+            sr_payload = stable_json(
+                {
+                    "party_id": party_id,
+                    "party_name": party_name,
+                    "election_cycle": election_cycle,
+                    "kind": kind,
+                    "source_url": source_url,
+                    "resolved_doc_url": resolved_doc_url,
+                    "format_hint": format_hint,
+                    "language": language,
+                    "scope": scope,
+                    "snapshot_date": row_snapshot or snapshot_date,
+                    "local_path": local_path,
+                    "notes": notes,
+                    "document": {
+                        "content_sha256": doc_sha,
+                        "bytes": len(doc_bytes),
+                        "raw_path": str(raw_path),
+                        "text_chars": len(text_excerpt),
+                    },
+                }
+            )
+            sr_rows.append(
+                {
+                    "source_record_id": source_record_id,
+                    "raw_payload": sr_payload,
+                    "content_sha256": doc_sha,
+                }
+            )
+
+            # Prepare text_documents upsert (keyed by source_record_pk, filled after pk_map).
+            text_doc_rows.append(
+                (
+                    source_id,
+                    str(source_url or resolved_doc_url or ""),
+                    source_record_id,  # placeholder for pk_map lookup
+                    now_iso,
+                    "text/html" if ext == "html" else None,
+                    doc_sha,
+                    len(doc_bytes),
+                    str(raw_path),
+                    text_excerpt,
+                    len(text_excerpt),
+                    now_iso,
+                    now_iso,
+                )
+            )
+
+            # Build declared evidence rows for concern topics (best-effort).
+            if not topic_id_by_concern:
+                skip["no_matching_topics"] += 1
+                continue
+
+            # Use section text when possible to keep stance extraction topic-scoped.
+            full_norm = normalize_key_part(text_excerpt)
+            for c in concerns:
+                cid = normalize_ws(str(c.get("id") or ""))
+                if not cid:
+                    continue
+                topic_id = topic_id_by_concern.get(cid)
+                if not topic_id:
+                    continue
+
+                section_text = ""
+                title_norm = normalize_ws(str(c.get("title_norm") or ""))
+                if title_norm:
+                    section_text = html_sections.get(title_norm, "")
+
+                # Fallback: keyword hit anywhere in the excerpt.
+                if not section_text:
+                    hit_kw = None
+                    for kw in c.get("keywords_norm") or []:
+                        if kw and kw in full_norm:
+                            hit_kw = kw
+                            break
+                    if not hit_kw:
+                        continue
+                    # Keep the excerpt topic-scoped: take a window around the first keyword hit
+                    # instead of using the whole document (avoids cross-topic leakage).
+                    idx = full_norm.find(str(hit_kw))
+                    if idx < 0:
+                        continue
+                    start = max(0, idx - 180)
+                    end = min(len(full_norm), idx + 180)
+                    section_text = full_norm[start:end]
+
+                section_text = normalize_ws(section_text)
+                if not section_text:
+                    continue
+
+                title = f"Programa {party_name} ({election_cycle}) - {c.get('label') or cid}"
+                ev_raw = stable_json(
+                    {
+                        "programa": {
+                            "party_id": party_id,
+                            "party_name": party_name,
+                            "election_cycle": election_cycle,
+                            "kind": kind,
+                            "source_url": source_url,
+                            "snapshot_date": row_snapshot or snapshot_date,
+                        },
+                        "topic": {"concern_id": cid, "label": c.get("label") or cid},
+                        "document": {"content_sha256": doc_sha, "raw_path": str(raw_path)},
+                        "excerpt": section_text[:1200],
+                    }
+                )
+
+                evidence_rows.append(
+                    (
+                        int(topic_id),
+                        int(topic_set_id),
+                        int(person_id),
+                        None,  # mandate_id
+                        None,  # institution_id
+                        None,  # admin_level_id
+                        None,  # territory_id
+                        "declared:programa",
+                        (row_snapshot or snapshot_date),
+                        title,
+                        section_text[:4000],
+                        "unclear",
+                        0,
+                        0.5,
+                        0.2,
+                        "programa:concern:v1",
+                        "programa_metadata",
+                        None,  # vote_event_id
+                        None,  # initiative_id
+                        source_id,
+                        source_url,
+                        source_record_id,  # placeholder for pk_map lookup
+                        (row_snapshot or snapshot_date),
+                        ev_raw,
+                        now_iso,
+                        now_iso,
+                    )
+                )
+
+        # Persist rows (source_records -> pk_map).
+        if not sr_rows:
+            continue
+
+        pk_map = upsert_source_records_with_content_sha256(
+            conn, source_id=source_id, rows=sr_rows, snapshot_date=snapshot_date, now_iso=now_iso
+        )
+        docs_loaded += len(pk_map)
+
+        # Upsert text_documents keyed by source_record_pk.
+        if text_doc_rows:
+            td_params: list[tuple[Any, ...]] = []
+            for (
+                td_source_id,
+                td_source_url,
+                td_source_record_id,
+                fetched_at,
+                content_type,
+                content_sha,
+                bytes_len,
+                raw_path,
+                excerpt,
+                text_chars,
+                created_at,
+                updated_at,
+            ) in text_doc_rows:
+                sr_pk = pk_map.get(str(td_source_record_id))
+                if sr_pk is None:
+                    continue
+                td_params.append(
+                    (
+                        td_source_id,
+                        td_source_url,
+                        int(sr_pk),
+                        fetched_at,
+                        content_type,
+                        content_sha,
+                        int(bytes_len),
+                        raw_path,
+                        excerpt,
+                        int(text_chars),
+                        created_at,
+                        updated_at,
+                    )
+                )
+            if td_params:
+                with conn:
+                    conn.executemany(
+                        """
+                        INSERT INTO text_documents (
+                          source_id, source_url, source_record_pk,
+                          fetched_at, content_type, content_sha256, bytes, raw_path,
+                          text_excerpt, text_chars,
+                          created_at, updated_at
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(source_record_pk) DO UPDATE SET
+                          source_url = excluded.source_url,
+                          fetched_at = excluded.fetched_at,
+                          content_type = excluded.content_type,
+                          content_sha256 = excluded.content_sha256,
+                          bytes = excluded.bytes,
+                          raw_path = excluded.raw_path,
+                          text_excerpt = CASE
+                            WHEN excluded.text_excerpt IS NOT NULL AND TRIM(excluded.text_excerpt) <> '' THEN excluded.text_excerpt
+                            ELSE text_documents.text_excerpt
+                          END,
+                          text_chars = CASE
+                            WHEN excluded.text_chars IS NOT NULL AND excluded.text_chars > 0 THEN excluded.text_chars
+                            ELSE text_documents.text_chars
+                          END,
+                          updated_at = excluded.updated_at
+                        """,
+                        td_params,
+                    )
+
+        # Insert topic_evidence rows (source_record_pk resolved via pk_map).
+        if evidence_rows:
+            ev_params: list[tuple[Any, ...]] = []
+            for row in evidence_rows:
+                # row[21] is placeholder source_record_id (see tuple above)
+                sr_id = str(row[21])
+                sr_pk = pk_map.get(sr_id)
+                if sr_pk is None:
+                    continue
+                ev_params.append((*row[:21], int(sr_pk), *row[22:]))
+            if ev_params:
+                with conn:
+                    conn.executemany(
+                        """
+                        INSERT INTO topic_evidence (
+                          topic_id, topic_set_id,
+                          person_id, mandate_id,
+                          institution_id, admin_level_id, territory_id,
+                          evidence_type, evidence_date, title, excerpt,
+                          stance, polarity, weight, confidence,
+                          topic_method, stance_method,
+                          vote_event_id, initiative_id,
+                          source_id, source_url, source_record_pk, source_snapshot_date,
+                          raw_payload, created_at, updated_at
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        ev_params,
+                    )
+                evidence_inserted += len(ev_params)
+
+    info = {
+        "election_cycles": sorted(by_cycle.keys()),
+        "topic_set_ids": touched_sets,
+        "failures": failures[:30],
+        "skipped": skip,
+        "concerns_count": len(concerns),
+    }
+    return seen, docs_loaded, {"evidence_inserted": evidence_inserted, "info": info}
 
 
 def backfill_vote_member_person_ids(
@@ -1751,6 +2490,57 @@ def ingest_one_source(
                     "note": extracted.note,
                     "evidence_inserted": rec_loaded,
                     "info": info,
+                },
+                ensure_ascii=True,
+                sort_keys=True,
+            )
+            finish_run(
+                conn,
+                run_id=run_id,
+                status="ok",
+                message=message,
+                records_seen=rec_seen,
+                records_loaded=rec_loaded,
+                fetched_at=extracted.fetched_at,
+                raw_path=extracted.raw_path,
+            )
+            return rec_seen, rec_loaded, message
+
+        if source_id == "programas_partidos":
+            rec_seen, rec_loaded, out = _ingest_programas_partidos(
+                conn,
+                extracted_records=extracted.records,
+                source_id=source_id,
+                raw_dir=raw_dir,
+                timeout=timeout,
+                snapshot_date=snapshot_date,
+                strict_network=strict_network,
+                now_iso=now_iso,
+            )
+            if strict_network and rec_seen > 0 and rec_loaded == 0:
+                raise RuntimeError(
+                    "strict-network abortado: records_seen > 0 y records_loaded == 0 "
+                    f"({source_id}: seen={rec_seen}, loaded={rec_loaded})"
+                )
+
+            min_loaded = SOURCE_CONFIG.get(source_id, {}).get("min_records_loaded_strict")
+            if (
+                strict_network
+                and extracted.note.startswith("network")
+                and isinstance(min_loaded, int)
+                and rec_loaded < min_loaded
+            ):
+                raise RuntimeError(
+                    f"strict-network abortado: records_loaded < min_records_loaded_strict "
+                    f"({source_id}: loaded={rec_loaded}, min={min_loaded})"
+                )
+
+            conn.commit()
+            message = json.dumps(
+                {
+                    "note": extracted.note,
+                    "documents_loaded": rec_loaded,
+                    "out": out,
                 },
                 ensure_ascii=True,
                 sort_keys=True,
