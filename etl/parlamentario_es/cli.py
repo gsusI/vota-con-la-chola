@@ -319,7 +319,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p_decl_pos.add_argument("--db", default=str(DEFAULT_DB))
     p_decl_pos.add_argument("--source-id", default="congreso_intervenciones")
-    p_decl_pos.add_argument("--as-of-date", default=None, help="YYYY-MM-DD (default: $SNAPSHOT_DATE)")
+    p_decl_pos.add_argument(
+        "--as-of-date",
+        default=None,
+        help="YYYY-MM-DD (default: $SNAPSHOT_DATE o max votes.as_of_date alineado por topic_set)",
+    )
     p_decl_pos.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
 
     p_comb_pos = sub.add_parser(
@@ -327,7 +331,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         help="Computar topic_positions combinadas (KISS: votes si existe; si no, declared)",
     )
     p_comb_pos.add_argument("--db", default=str(DEFAULT_DB))
-    p_comb_pos.add_argument("--as-of-date", default=None, help="YYYY-MM-DD (default: $SNAPSHOT_DATE)")
+    p_comb_pos.add_argument(
+        "--as-of-date",
+        default=None,
+        help="YYYY-MM-DD (default: $SNAPSHOT_DATE o max votes.as_of_date)",
+    )
     p_comb_pos.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
 
     p_review_queue = sub.add_parser(
@@ -456,6 +464,165 @@ def _parse_int_ids(csv_value: str) -> tuple[int, ...]:
         seen.add(n)
         out.append(n)
     return tuple(out)
+
+
+def _normalize_as_of_date_candidate(value: str | None) -> str | None:
+    token = normalize_ws(value or "")
+    return token or None
+
+
+def _resolve_latest_votes_as_of_date(
+    conn: sqlite3.Connection,
+    *,
+    vote_source_ids: tuple[str, ...],
+    legislature: str,
+) -> str | None:
+    if not vote_source_ids:
+        return None
+    placeholders = ",".join("?" for _ in vote_source_ids)
+    legislature_token = normalize_ws(legislature).lower()
+    if legislature_token == "latest":
+        row = conn.execute(
+            f"""
+            WITH latest_legs AS (
+              SELECT source_id, MAX(CAST(legislature AS INTEGER)) AS leg
+              FROM parl_vote_events
+              WHERE source_id IN ({placeholders})
+                AND legislature IS NOT NULL
+                AND TRIM(legislature) <> ''
+              GROUP BY source_id
+            )
+            SELECT MAX(e.vote_date) AS d
+            FROM parl_vote_events e
+            JOIN latest_legs l
+              ON l.source_id = e.source_id
+             AND CAST(e.legislature AS INTEGER) = l.leg
+            WHERE e.vote_date IS NOT NULL
+              AND TRIM(e.vote_date) <> ''
+            """,
+            vote_source_ids,
+        ).fetchone()
+        resolved = _normalize_as_of_date_candidate(str(row["d"]) if row and row["d"] is not None else None)
+        if resolved:
+            return resolved
+        row_any = conn.execute(
+            f"""
+            SELECT MAX(vote_date) AS d
+            FROM parl_vote_events
+            WHERE source_id IN ({placeholders})
+              AND vote_date IS NOT NULL
+              AND TRIM(vote_date) <> ''
+            """,
+            vote_source_ids,
+        ).fetchone()
+        return _normalize_as_of_date_candidate(str(row_any["d"]) if row_any and row_any["d"] is not None else None)
+
+    row = conn.execute(
+        f"""
+        SELECT MAX(vote_date) AS d
+        FROM parl_vote_events
+        WHERE source_id IN ({placeholders})
+          AND legislature = ?
+          AND vote_date IS NOT NULL
+          AND TRIM(vote_date) <> ''
+        """,
+        (*vote_source_ids, legislature),
+    ).fetchone()
+    return _normalize_as_of_date_candidate(str(row["d"]) if row and row["d"] is not None else None)
+
+
+def _resolve_backfill_topic_analytics_as_of_date(
+    conn: sqlite3.Connection,
+    *,
+    explicit_as_of_date: str | None,
+    vote_source_ids: tuple[str, ...],
+    legislature: str,
+) -> str | None:
+    explicit = _normalize_as_of_date_candidate(explicit_as_of_date)
+    if explicit:
+        return explicit
+    return _resolve_latest_votes_as_of_date(conn, vote_source_ids=vote_source_ids, legislature=legislature)
+
+
+def _resolve_backfill_declared_positions_as_of_date(
+    conn: sqlite3.Connection,
+    *,
+    explicit_as_of_date: str | None,
+    source_id: str,
+) -> str | None:
+    explicit = _normalize_as_of_date_candidate(explicit_as_of_date)
+    if explicit:
+        return explicit
+
+    row = conn.execute(
+        """
+        WITH declared_sets AS (
+          SELECT DISTINCT topic_set_id
+          FROM topic_evidence
+          WHERE source_id = ?
+            AND evidence_type LIKE 'declared:%'
+            AND topic_set_id IS NOT NULL
+        )
+        SELECT MAX(p.as_of_date) AS d
+        FROM topic_positions p
+        JOIN declared_sets ds ON ds.topic_set_id = p.topic_set_id
+        WHERE p.computed_method = 'votes'
+          AND p.as_of_date IS NOT NULL
+          AND TRIM(p.as_of_date) <> ''
+        """,
+        (source_id,),
+    ).fetchone()
+    resolved = _normalize_as_of_date_candidate(str(row["d"]) if row and row["d"] is not None else None)
+    if resolved:
+        return resolved
+
+    row_global_votes = conn.execute(
+        """
+        SELECT MAX(as_of_date) AS d
+        FROM topic_positions
+        WHERE computed_method = 'votes'
+          AND as_of_date IS NOT NULL
+          AND TRIM(as_of_date) <> ''
+        """
+    ).fetchone()
+    resolved_global = _normalize_as_of_date_candidate(
+        str(row_global_votes["d"]) if row_global_votes and row_global_votes["d"] is not None else None
+    )
+    if resolved_global:
+        return resolved_global
+
+    return _resolve_latest_votes_as_of_date(
+        conn,
+        vote_source_ids=("congreso_votaciones", "senado_votaciones"),
+        legislature="latest",
+    )
+
+
+def _resolve_backfill_combined_positions_as_of_date(
+    conn: sqlite3.Connection,
+    *,
+    explicit_as_of_date: str | None,
+) -> str | None:
+    explicit = _normalize_as_of_date_candidate(explicit_as_of_date)
+    if explicit:
+        return explicit
+    row = conn.execute(
+        """
+        SELECT MAX(as_of_date) AS d
+        FROM topic_positions
+        WHERE computed_method = 'votes'
+          AND as_of_date IS NOT NULL
+          AND TRIM(as_of_date) <> ''
+        """
+    ).fetchone()
+    resolved = _normalize_as_of_date_candidate(str(row["d"]) if row and row["d"] is not None else None)
+    if resolved:
+        return resolved
+    return _resolve_latest_votes_as_of_date(
+        conn,
+        vote_source_ids=("congreso_votaciones", "senado_votaciones"),
+        legislature="latest",
+    )
 
 
 def _quality_report(conn: sqlite3.Connection, *, source_ids: tuple[str, ...]) -> dict[str, Any]:
@@ -912,7 +1079,7 @@ def main(argv: list[str] | None = None) -> int:
             _parse_source_ids(str(args.vote_source_ids)),
             for_command="backfill-topic-analytics",
         )
-        as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
+        explicit_as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
         seed_path = str(getattr(args, "taxonomy_seed", "") or "").strip()
         seed = Path(seed_path) if seed_path else None
         if seed is not None and not seed.exists():
@@ -921,6 +1088,12 @@ def main(argv: list[str] | None = None) -> int:
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
             seed_sources(conn)
+            as_of_date = _resolve_backfill_topic_analytics_as_of_date(
+                conn,
+                explicit_as_of_date=explicit_as_of_date,
+                vote_source_ids=vote_source_ids,
+                legislature=str(args.legislature or "latest"),
+            )
             result = backfill_topic_analytics_from_votes(
                 conn,
                 vote_source_ids=vote_source_ids,
@@ -976,13 +1149,20 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.cmd == "backfill-declared-positions":
-        as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
-        if not as_of_date:
-            raise SystemExit("backfill-declared-positions: falta --as-of-date o $SNAPSHOT_DATE")
         conn = open_db(Path(args.db))
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
             seed_sources(conn)
+            as_of_date = _resolve_backfill_declared_positions_as_of_date(
+                conn,
+                explicit_as_of_date=args.as_of_date or os.getenv("SNAPSHOT_DATE") or None,
+                source_id=str(args.source_id),
+            )
+            if not as_of_date:
+                raise SystemExit(
+                    "backfill-declared-positions: falta --as-of-date/$SNAPSHOT_DATE y no se pudo resolver "
+                    "desde votes.as_of_date (ejecuta backfill-topic-analytics primero)"
+                )
             result = backfill_topic_positions_from_declared_evidence(
                 conn,
                 source_id=str(args.source_id),
@@ -995,13 +1175,19 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.cmd == "backfill-combined-positions":
-        as_of_date = args.as_of_date or os.getenv("SNAPSHOT_DATE") or None
-        if not as_of_date:
-            raise SystemExit("backfill-combined-positions: falta --as-of-date o $SNAPSHOT_DATE")
         conn = open_db(Path(args.db))
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
             seed_sources(conn)
+            as_of_date = _resolve_backfill_combined_positions_as_of_date(
+                conn,
+                explicit_as_of_date=args.as_of_date or os.getenv("SNAPSHOT_DATE") or None,
+            )
+            if not as_of_date:
+                raise SystemExit(
+                    "backfill-combined-positions: falta --as-of-date/$SNAPSHOT_DATE y no se pudo resolver "
+                    "desde votes.as_of_date (ejecuta backfill-topic-analytics primero)"
+                )
             result = backfill_topic_positions_combined(
                 conn,
                 as_of_date=str(as_of_date),

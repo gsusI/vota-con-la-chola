@@ -8,6 +8,9 @@ from typing import Any
 from etl.politicos_es.util import normalize_ws, now_utc_iso
 
 
+DECLARED_REGEX_VERSION = "declared:regex_v3"
+
+
 def _normalize_for_match(text: str) -> str:
     t = normalize_ws(text).lower()
     # Remove accents/diacritics to keep regexes ASCII-only.
@@ -18,19 +21,51 @@ def _normalize_for_match(text: str) -> str:
 
 _SUPPORT_EXPLICIT_PATTERNS = (
     re.compile(r"\bvotaremos\s+(a\s+)?favor\b"),
+    re.compile(r"\bvotaremos(?:\s*,\s*\w+){0,4}\s*,?\s+(a\s+)?favor\b"),
     re.compile(r"\bvotare(mos)?\s+(que\s+)?si\b"),
     re.compile(r"\bvotara(mos|n)?\s+(a\s+)?favor\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+votar\s+(a\s+)?favor\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+votar\s+(que\s+)?si\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+votar\s+(favorable|afirmativa|positiva)mente\b"),
+    re.compile(r"\bvotaremos\s+favorablemente\b"),
+    re.compile(r"\bvotamos\s+(a\s+)?favor\b"),
+    re.compile(r"\bvotamos\s+favorablemente\b"),
+    re.compile(r"\bhemos\s+votado\s+(a\s+)?favor\b"),
+    re.compile(r"\bvotarem\s+(a\s+)?favor\b"),
+    re.compile(r"\bvotarem\s+(que\s+)?si\b"),
+    re.compile(r"\bvotarem\s+favorablement\b"),
     re.compile(r"\bnuestro\s+voto\s+sera\s+(favorable|positivo|afirmativo)\b"),
     re.compile(r"\bmi\s+voto\s+sera\s+(favorable|positivo|afirmativo)\b"),
+    re.compile(r"\bnuestro\s+voto\s+sea\s+(favorable|positivo|afirmativo)\b"),
+    re.compile(r"\bmi\s+voto\s+sea\s+(favorable|positivo|afirmativo)\b"),
     re.compile(r"\bvoto\s+(favorable|positivo|afirmativo)\b"),
 )
 
 _OPPOSE_EXPLICIT_PATTERNS = (
     re.compile(r"\bvotaremos\s+en\s+contra\b"),
+    re.compile(r"\bvotaremos(?:\s*,\s*\w+){0,4}\s*,?\s+en\s+contra\b"),
     re.compile(r"\bvotare(mos)?\s+(que\s+)?no\b"),
     re.compile(r"\bvotara(mos|n)?\s+en\s+contra\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+votar\s+en\s+contra\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+votar\s+(que\s+)?no\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+votar\s+negativamente\b"),
+    re.compile(r"\bvotaremos\s+negativamente\b"),
+    re.compile(r"\bvotamos\s+en\s+contra\b"),
+    re.compile(r"\bvotamos\s+negativamente\b"),
+    re.compile(r"\bhemos\s+votado\s+en\s+contra\b"),
+    re.compile(r"\bno\s+votaremos\s+(a\s+)?favor\b"),
+    re.compile(r"\bno\s+votaremos\s+en\s+absoluto\s+(a\s+)?favor\b"),
+    re.compile(r"\bno\s+(vamos|voy|iremos)\s+a\s+votar\s+(a\s+)?favor\b"),
+    re.compile(r"\bno\s+(vamos|voy|iremos)\s+a\s+votar\s+en\s+absoluto\s+(a\s+)?favor\b"),
+    re.compile(r"\bno\s+(vamos|voy|iremos)\s+a\s+votar\s+favorablemente\b"),
+    re.compile(r"\bvotarem\s+en\s+contra\b"),
+    re.compile(r"\bvotarem\s+(que\s+)?no\b"),
+    re.compile(r"\bvotarem\s+negativament\b"),
+    re.compile(r"\bno\s+votarem\s+(a\s+)?favor\b"),
     re.compile(r"\bnuestro\s+voto\s+sera\s+(negativo|desfavorable)\b"),
     re.compile(r"\bmi\s+voto\s+sera\s+(negativo|desfavorable)\b"),
+    re.compile(r"\bnuestro\s+voto\s+sea\s+(negativo|desfavorable)\b"),
+    re.compile(r"\bmi\s+voto\s+sea\s+(negativo|desfavorable)\b"),
     re.compile(r"\bvoto\s+(negativo|desfavorable)\b"),
 )
 
@@ -39,19 +74,26 @@ _ABSTAIN_EXPLICIT_PATTERNS = (
     re.compile(r"\bme\s+abstendre\b"),
     re.compile(r"\bmi\s+voto\s+sera\s+abstencion\b"),
     re.compile(r"\babstencion\b"),
+    re.compile(r"\babstencio\b"),
     re.compile(r"\babstener(nos|se)\b"),
 )
 
 _SUPPORT_DECLARED_PATTERNS = (
     re.compile(r"\bapoyamos\b"),
+    re.compile(r"\bapoyaremos\b"),
+    re.compile(r"\b(vamos|voy|iremos)\s+a\s+apoyar\b"),
     re.compile(r"\brespaldamos\b"),
     re.compile(r"\bdefendemos\b"),
 )
 
 _OPPOSE_DECLARED_PATTERNS = (
     re.compile(r"\brechazamos\b"),
+    re.compile(r"\brechazaremos\b"),
     re.compile(r"\bnos\s+oponemos\b"),
     re.compile(r"\bnos\s+opondremos\b"),
+    re.compile(r"\bno\s+apoyamos\b"),
+    re.compile(r"\bno\s+apoyaremos\b"),
+    re.compile(r"\bno\s+(vamos|voy|iremos)\s+a\s+apoyar\b"),
 )
 
 
@@ -83,9 +125,9 @@ def _infer_declared_stance_detail(text: str) -> tuple[str, int, float, str] | No
     oppose_declared_hits = _count_hits(_OPPOSE_DECLARED_PATTERNS, t)
 
     if abst_hits > 0 and (support_explicit_hits + oppose_explicit_hits + support_declared_hits + oppose_declared_hits) > 0:
-        return ("mixed", 0, 0.5, "conflicting_signal")
+        return ("mixed", 0, 0.64, "conflicting_signal")
     if support_explicit_hits > 0 and oppose_explicit_hits > 0:
-        return ("mixed", 0, 0.5, "conflicting_signal")
+        return ("mixed", 0, 0.64, "conflicting_signal")
     if support_explicit_hits > 0:
         return ("support", 1, 0.72, "explicit_vote_intent")
     if oppose_explicit_hits > 0:
@@ -93,11 +135,11 @@ def _infer_declared_stance_detail(text: str) -> tuple[str, int, float, str] | No
     if abst_hits > 0:
         return ("mixed", 0, 0.66, "abstention_intent")
     if support_declared_hits > 0 and oppose_declared_hits > 0:
-        return ("mixed", 0, 0.5, "conflicting_signal")
+        return ("mixed", 0, 0.64, "conflicting_signal")
     if support_declared_hits > 0:
-        return ("support", 1, 0.58, "declared_support")
+        return ("support", 1, 0.64, "declared_support")
     if oppose_declared_hits > 0:
-        return ("oppose", -1, 0.58, "declared_oppose")
+        return ("oppose", -1, 0.64, "declared_oppose")
     return None
 
 
@@ -142,7 +184,7 @@ def backfill_declared_stance_from_topic_evidence(
 ) -> dict[str, Any]:
     """Populate topic_evidence stance/polarity for declared evidence using text excerpts.
 
-    v2 behavior:
+    v3 behavior:
     - conservative auto-updates when confidence >= min_auto_confidence
     - optional review queue rows for missing/ambiguous/low-confidence cases
     - never touches rows with non-auto/manual stance_method values
@@ -174,7 +216,7 @@ def backfill_declared_stance_from_topic_evidence(
           AND e.evidence_type LIKE 'declared:%'
           AND (
             e.stance_method IS NULL
-            OR e.stance_method IN ('intervention_metadata', 'declared:regex_v1', 'declared:regex_v2')
+            OR e.stance_method IN ('intervention_metadata', 'declared:regex_v1', 'declared:regex_v2', 'declared:regex_v3')
             OR e.stance IS NULL
             OR e.stance IN ('unclear', 'no_signal')
           )
@@ -217,7 +259,7 @@ def backfill_declared_stance_from_topic_evidence(
                         None,
                         None,
                         None,
-                        "declared:regex_v2",
+                        DECLARED_REGEX_VERSION,
                         "declared evidence without text_excerpt",
                         now_iso,
                         now_iso,
@@ -239,7 +281,7 @@ def backfill_declared_stance_from_topic_evidence(
                         None,
                         None,
                         None,
-                        "declared:regex_v2",
+                        DECLARED_REGEX_VERSION,
                         "no explicit declared stance pattern found",
                         now_iso,
                         now_iso,
@@ -266,7 +308,7 @@ def backfill_declared_stance_from_topic_evidence(
                         stance,
                         int(polarity),
                         float(confidence),
-                        "declared:regex_v2",
+                        DECLARED_REGEX_VERSION,
                         reason,
                         now_iso,
                         now_iso,
@@ -287,14 +329,14 @@ def backfill_declared_stance_from_topic_evidence(
         unchanged = (
             current_stance == stance
             and current_polarity == int(polarity)
-            and current_method == "declared:regex_v2"
+            and current_method == DECLARED_REGEX_VERSION
             and current_confidence is not None
             and abs(current_confidence - float(confidence)) <= 1e-9
         )
         if unchanged:
             resolve_review_ids.append(ev_id)
             continue
-        updates.append((stance, int(polarity), float(confidence), "declared:regex_v2", now_iso, ev_id))
+        updates.append((stance, int(polarity), float(confidence), DECLARED_REGEX_VERSION, now_iso, ev_id))
         resolve_review_ids.append(ev_id)
 
     if dry_run:

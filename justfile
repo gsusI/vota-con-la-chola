@@ -1,6 +1,7 @@
 db_path := env_var_or_default("DB_PATH", "etl/data/staging/politicos-es.db")
 snapshot_date := env_var_or_default("SNAPSHOT_DATE", "2026-02-12")
 tracker_path := env_var_or_default("TRACKER_PATH", "docs/etl/e2e-scrape-load-tracker.md")
+tracker_waivers_path := env_var_or_default("TRACKER_WAIVERS_PATH", "docs/etl/mismatch-waivers.json")
 municipal_timeout := env_var_or_default("MUNICIPAL_TIMEOUT", "240")
 galicia_manual_dir := env_var_or_default("GALICIA_MANUAL_DIR", "etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages")
 navarra_manual_dir := env_var_or_default("NAVARRA_MANUAL_DIR", "etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages")
@@ -29,9 +30,28 @@ topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds
 textdoc_limit := env_var_or_default("TEXTDOC_LIMIT", "900")
 textdoc_timeout := env_var_or_default("TEXTDOC_TIMEOUT", "25")
 declared_min_auto_confidence := env_var_or_default("DECLARED_MIN_AUTO_CONFIDENCE", "0.62")
+code_zip_name := env_var_or_default("CODE_ZIP_NAME", "vota-con-la-chola-code.zip")
+hf_dataset_repo_id := env_var_or_default("HF_DATASET_REPO_ID", "vota-con-la-chola-data")
+hf_parquet_batch_rows := env_var_or_default("HF_PARQUET_BATCH_ROWS", "50000")
+hf_parquet_compression := env_var_or_default("HF_PARQUET_COMPRESSION", "zstd")
+hf_parquet_tables := env_var_or_default("HF_PARQUET_TABLES", "")
+hf_parquet_exclude_tables := env_var_or_default("HF_PARQUET_EXCLUDE_TABLES", "raw_fetches,run_fetches,source_records,lost_and_found")
+hf_allow_sensitive_parquet := env_var_or_default("HF_ALLOW_SENSITIVE_PARQUET", "0")
+hf_include_sqlite_gz := env_var_or_default("HF_INCLUDE_SQLITE_GZ", "0")
 
 default:
   @just --list
+
+zip-code output='':
+  out="{{output}}"; \
+  if [ -z "$out" ]; then out="dist/{{code_zip_name}}"; fi; \
+  mkdir -p "$(dirname "$out")"; \
+  rm -f "$out"; \
+  git ls-files \
+    | rg '^(scripts/|etl/|ui/|tests/|justfile$|docker-compose\.ya?ml$|Dockerfile$|pyproject\.toml$|requirements[^/]*\.txt$)' \
+    | rg -v '^etl/data/' \
+    | zip -q "$out" -@; \
+  echo "OK wrote $out"
 
 etl-cli cmd:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py {{cmd}}"
@@ -89,6 +109,12 @@ etl-backfill-normalized:
 etl-backfill-territories:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-territories --db {{db_path}}"
 
+etl-backfill-policy-events-moncloa:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-policy-events-moncloa --db {{db_path}}"
+
+etl-backfill-policy-events-boe:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-policy-events-boe --db {{db_path}}"
+
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 
@@ -109,6 +135,20 @@ etl-publish-votaciones-unmatched:
 
 etl-publish-infoelectoral:
   docker compose run --rm --build etl "python3 scripts/publicar_infoelectoral_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
+
+etl-publish-hf:
+  sqlite_arg="--skip-sqlite-gz"; \
+  sensitive_arg=""; \
+  if [ "{{hf_include_sqlite_gz}}" = "1" ]; then sqlite_arg=""; fi; \
+  if [ "{{hf_allow_sensitive_parquet}}" = "1" ]; then sensitive_arg="--allow-sensitive-parquet"; fi; \
+  docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db {{db_path}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --parquet-compression {{hf_parquet_compression}} --parquet-batch-rows {{hf_parquet_batch_rows}} --parquet-tables '{{hf_parquet_tables}}' --parquet-exclude-tables '{{hf_parquet_exclude_tables}}' ${sqlite_arg} ${sensitive_arg}"
+
+etl-publish-hf-dry-run:
+  sqlite_arg="--skip-sqlite-gz"; \
+  sensitive_arg=""; \
+  if [ "{{hf_include_sqlite_gz}}" = "1" ]; then sqlite_arg=""; fi; \
+  if [ "{{hf_allow_sensitive_parquet}}" = "1" ]; then sensitive_arg="--allow-sensitive-parquet"; fi; \
+  docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db {{db_path}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --parquet-compression {{hf_parquet_compression}} --parquet-batch-rows {{hf_parquet_batch_rows}} --parquet-tables '{{hf_parquet_tables}}' --parquet-exclude-tables '{{hf_parquet_exclude_tables}}' --dry-run ${sqlite_arg} ${sensitive_arg}"
 
 parl-extract-congreso-votaciones:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --strict-network"
@@ -520,7 +560,15 @@ explorer-politico-bg-watch: explorer-bg-watch
 
 # Tracker: estado SQL vs checklist
 etl-tracker-status:
-  docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker {{tracker_path}}"
+  docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker {{tracker_path}} --waivers {{tracker_waivers_path}}"
 
+# Gate default estricto:
+# - fail-on-mismatch (solo mismatches no waived o waivers expiradas)
+# - fail-on-done-zero-real
+# Usa registro canonico de waivers en docs/etl/mismatch-waivers.json (override via TRACKER_WAIVERS_PATH).
 etl-tracker-gate:
+  docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker {{tracker_path}} --waivers {{tracker_waivers_path}} --fail-on-mismatch --fail-on-done-zero-real"
+
+# Compatibilidad: gate histórico (solo DONE sin red real)
+etl-tracker-gate-legacy:
   docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker {{tracker_path}} --fail-on-done-zero-real"
