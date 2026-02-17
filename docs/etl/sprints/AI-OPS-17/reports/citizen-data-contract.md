@@ -103,6 +103,31 @@ Top-level shape:
 }
 ```
 
+### Optional: Programas (Promesas) Per Concern (v1 extension)
+
+If present, the snapshot MAY include an additional lane derived from party programs (`source_id=programas_partidos`):
+
+- `meta.programas` (object):
+  - `source_id`: `"programas_partidos"`
+  - `topic_set_id`: programas topic_set id (per `election_cycle`)
+  - `election_cycle`: string (e.g. `es_generales_2023`)
+  - `as_of_date`: max evidence_date observed for that programas set (best-effort)
+  - `evidence_total`, `signal_total`, `review_pending`: compact KPIs for UI status chips
+
+- `party_concern_programas[]` (array):
+  - Full grid of `concerns_v1.json` x `parties[]` (missing combos => `no_signal`)
+  - Shape:
+    - `concern_id` (string): must match concerns config ids (e.g. `vivienda`)
+    - `party_id` (int): must exist in `parties[]`
+    - `stance` (string): `support|oppose|mixed|unclear|no_signal`
+    - `confidence` (number): best evidence confidence (0..1) if signal exists, else `0`
+    - `evidence` (object): best evidence pointers (`evidence_id`, `evidence_date`, `source_record_pk`, `source_url`)
+    - `links.explorer_evidence` (string): Explorer SQL link to program evidence rows
+
+Semantics:
+- This is a *promises* lane (text-derived). It is expected to be sparser and more uncertain than votes.
+- It is keyed by citizen concerns (not initiative topics) and is meant to be shown alongside “hechos”.
+
 ### Field Semantics
 
 - `topics[]`:
