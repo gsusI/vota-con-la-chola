@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "series_code": "TI.TMM.T.4F.EUR.4F.N.M",
+      "descripcion": "Tipo de interes de prestamos hipotecarios (media mensual)",
+      "frecuencia": "M",
+      "unidad": "%",
+      "updated_at": "2026-02-16T08:30:00Z",
+      "points": [
+        {"period": "2025-11", "value": "3.98"},
+        {"period": "2025-12", "value": "4.02"},
+        {"period": "2026-01", "value": "4.10"}
+      ],
+      "source_url": "https://api.bde.es/datos/series/TI.TMM.T.4F.EUR.4F.N.M"
+    },
+    {
+      "codigo": "PARO.TASA.ES.M",
+      "title": "Tasa de paro registrada",
+      "frequency": "M",
+      "unit": "PERCENT",
+      "actualizado": "2026-02-15",
+      "observations": [
+        {"fecha": "2025-11", "valor": "11,7"},
+        {"fecha": "2025-12", "valor": "11,5"},
+        {"fecha": "2026-01", "valor": "11,4"}
+      ],
+      "source_url": "https://api.bde.es/datos/series/PARO.TASA.ES.M"
+    }
+  ]
+}

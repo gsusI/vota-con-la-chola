@@ -1,0 +1,34 @@
+{
+  "applied_at": "2026-02-16",
+  "applied_for": [
+    "AI-OPS-06 mismatch policy recompute"
+  ],
+  "as_of_date": "2026-02-16",
+  "approver": "L3",
+  "waivers": [
+    {
+      "source_id": "moncloa_referencias",
+      "reason": "TEMP_WAIVER_CANDIDATE: tracker remains PARTIAL while SQL reports DONE; requires explicit policy decision (reconcile vs waive).",
+      "owner": "L2",
+      "approved_by": "L3",
+      "expires_on": "2026-02-20",
+      "evidence_path": "docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-tracker-status.log;docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-mismatch-only-metrics.csv;docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-mismatch-fetches.csv;docs/etl/sprints/AI-OPS-05/evidence/tracker-reconciliation.md"
+    },
+    {
+      "source_id": "moncloa_rss_referencias",
+      "reason": "TEMP_WAIVER_CANDIDATE: tracker remains PARTIAL while SQL reports DONE; requires explicit policy decision (reconcile vs waive).",
+      "owner": "L2",
+      "approved_by": "L3",
+      "expires_on": "2026-02-20",
+      "evidence_path": "docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-tracker-status.log;docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-mismatch-only-metrics.csv;docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-mismatch-fetches.csv;docs/etl/sprints/AI-OPS-05/evidence/tracker-reconciliation.md"
+    },
+    {
+      "source_id": "parlamento_navarra_parlamentarios_forales",
+      "reason": "TEMP_WAIVER_CANDIDATE: blocked network replay semantics despite fallback load and tracker PARTIAL; confirm policy action path.",
+      "owner": "L2",
+      "approved_by": "L3",
+      "expires_on": "2026-02-20",
+      "evidence_path": "docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-tracker-status.log;docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-mismatch-only-metrics.csv;docs/etl/sprints/AI-OPS-06/evidence/mismatch-batch-prep-mismatch-fetches.csv;docs/etl/sprints/AI-OPS-05/evidence/tracker-reconciliation.md"
+    }
+  ]
+}

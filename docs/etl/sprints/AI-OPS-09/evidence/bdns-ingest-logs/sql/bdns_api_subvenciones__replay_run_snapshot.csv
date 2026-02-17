@@ -1,0 +1,15 @@
+metric,value
+source_id,bdns_api_subvenciones
+mode,replay
+command,python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_api_subvenciones --from-file docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_api_subvenciones/bdns_api_subvenciones_replay_20260217.json --snapshot-date 2026-02-17 --timeout 30
+exit_code,1
+before_records,3
+after_records,3
+delta_records,0
+run_id,201
+run_status,error
+run_records_seen,0
+run_records_loaded,0
+run_started_at,2026-02-17T08:45:08+00:00
+run_finished_at,2026-02-17T08:45:08+00:00
+snapshot,2026-02-17

@@ -3,6 +3,9 @@
 ## Principio
 Una sola app y un solo flujo de datos hasta validar utilidad real.
 
+Diagrama E2E consolidado:
+- `docs/flow-diagram.md`
+
 ## Componentes minimos
 
 1. **Frontend web**

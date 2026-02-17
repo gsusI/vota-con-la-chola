@@ -21,6 +21,9 @@ Actualmente:
 - CLI parlamentario (votaciones, iniciativas): `scripts/ingestar_parlamentario_es.py`.
 - Tracker E2E scrape/load (TODO operativo): `docs/etl/e2e-scrape-load-tracker.md`.
 - El backlog de conectores y calidad vive solo en el tracker (y el dashboard `/explorer-sources`).
+- Artefactos de sprint (canónicos): `docs/etl/sprints/`.
+- Índice de sprints: `docs/etl/sprints/README.md`.
+- Puntero al prompt pack de sprint activo: `docs/etl/sprint-ai-agents.md`.
 
 Nota para votaciones:
 - Flujo recomendado: `ingest -> backfill-member-ids -> link-votes -> backfill-topic-analytics -> quality-report -> publish`.
@@ -72,6 +75,30 @@ Nota para posiciones por temas:
 - El snapshot se produce con `SNAPSHOT_DATE` y es reproducible para una fecha concreta.
 - Política de refresco: re-generar `representantes` y `votaciones` cuando cambie la composición o tras mejoras de parsing/linking de fuente, documentando la fecha en commit y tracker.
 - Mantener al menos un snapshot publicado por nivel operativo tras cambios de formato relevantes.
+
+## Publicación abierta en Hugging Face
+
+- Decisión: el espejo público de snapshots vive en un dataset de Hugging Face.
+- Credenciales en `.env`:
+  - `HF_TOKEN`
+  - `HF_USERNAME`
+  - `HF_DATASET_REPO_ID` (opcional, por defecto `<HF_USERNAME>/vota-con-la-chola-data`)
+- Comandos:
+  - `just etl-publish-hf-dry-run` para validar paquete local sin subir.
+  - `just etl-publish-hf` para subir snapshot real.
+- Estructura remota por snapshot:
+  - `snapshots/<snapshot_date>/politicos-es.sqlite.gz` (solo si `HF_INCLUDE_SQLITE_GZ=1`; no recomendado en público)
+  - `snapshots/<snapshot_date>/published/*`
+  - `snapshots/<snapshot_date>/ingestion_runs.csv`
+  - `snapshots/<snapshot_date>/source_records_by_source.csv`
+  - `snapshots/<snapshot_date>/manifest.json`
+  - `snapshots/<snapshot_date>/checksums.sha256`
+  - `latest.json` en la raíz del dataset.
+- Guardas de privacidad por defecto:
+  - `HF_PARQUET_EXCLUDE_TABLES=raw_fetches,run_fetches,source_records,lost_and_found`
+  - `HF_ALLOW_SENSITIVE_PARQUET=0` (activar solo en datasets privados)
+  - `HF_INCLUDE_SQLITE_GZ=0` (activar solo en datasets privados)
+- Regla operativa: después de publicar artefactos locales por snapshot, ejecutar `just etl-publish-hf` o registrar bloqueo con evidencia en tracker.
 
 ## Entorno reproducible con Docker
 

@@ -1,6 +1,18 @@
 # Objetivo del proyecto
 
-Construir una herramienta abierta y orientada a la evidencia para ayudar a decidir el voto mediante:
+## Visión
+
+Que cualquier persona en España pueda decidir su voto con la misma exigencia con la que audita una cuenta pública: comparando **lo que se promete, lo que se ejecuta y lo que impacta**, con evidencia verificable en su nivel territorial (Estado, CCAA, municipal, UE).
+
+## Misión
+
+Construir y operar una infraestructura cívica abierta, reproducible y auditable que transforme datos públicos fragmentados en explicaciones claras y trazables para:
+
+- Medir alineamiento ciudadano-político.
+- Contrastar "dicen vs hacen".
+- Estimar impacto cuando sea metodológicamente defendible.
+
+## Objetivo operativo
 
 - El cruce entre prioridades de cada persona (sociales y personales) y posiciones de partidos/candidaturas.
 - La comparación entre lo que los actores políticos dicen y lo que realmente han hecho.

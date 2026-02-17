@@ -1,0 +1,34 @@
+source_id	tracker_status	strict_checker.checklist	tracker_match_strict	sql_status	strict_checker.sql	sql_match_strict	mismatch_state	expected_mismatch_state	mismatch_state_match	mismatch_waived	expected_mismatch_waived	waiver_aware_result	waiver_aware_match	waiver_expiry	expected_waiver_expiry
+asamblea_ceuta_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+asamblea_extremadura_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+asamblea_madrid_ocupaciones	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+asamblea_melilla_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+asamblea_murcia_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+cortes_aragon_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+cortes_cyl_procuradores	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+cortes_clm_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+jgpa_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+corts_valencianes_diputats	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlament_catalunya_diputats	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlament_balears_diputats	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlamento_andalucia_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlamento_canarias_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlamento_cantabria_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlamento_galicia_deputados	PARTIAL	PARTIAL	True	PARTIAL	PARTIAL	True	MATCH	MATCH	True	false	false	OK	True		
+parlamento_larioja_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+parlamento_navarra_parlamentarios_forales	PARTIAL	PARTIAL	True	DONE	DONE	True	MISMATCH	MISMATCH	True	false	true	WAIVED_MISMATCH	False		2026-02-20
+parlamento_vasco_parlamentarios	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+moncloa_referencias	PARTIAL	PARTIAL	True	DONE	DONE	True	MISMATCH	MISMATCH	True	false	true	WAIVED_MISMATCH	False		2026-02-20
+moncloa_rss_referencias	PARTIAL	PARTIAL	True	DONE	DONE	True	MISMATCH	MISMATCH	True	false	true	WAIVED_MISMATCH	False		2026-02-20
+infoelectoral_descargas	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+infoelectoral_procesos	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+europarl_meps	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+boe_api_legal	N/A	N/A	True	DONE	DONE	True	UNTRACKED	UNTRACKED	True	false	false	OK	True		
+municipal_concejales	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+congreso_iniciativas	N/A	DONE	False	DONE	DONE	True	UNTRACKED	MATCH	False	false	false	OK	True		
+congreso_intervenciones	N/A	N/A	True	DONE	DONE	True	UNTRACKED	UNTRACKED	True	false	false	OK	True		
+congreso_votaciones	N/A	DONE	False	DONE	DONE	True	UNTRACKED	MATCH	False	false	false	OK	True		
+senado_iniciativas	N/A	N/A	True	DONE	DONE	True	UNTRACKED	UNTRACKED	True	false	false	OK	True		
+senado_votaciones	N/A	DONE	False	DONE	DONE	True	UNTRACKED	MATCH	False	false	false	OK	True		
+congreso_diputados	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		
+senado_senadores	DONE	DONE	True	DONE	DONE	True	MATCH	MATCH	True	false	false	OK	True		

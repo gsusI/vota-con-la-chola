@@ -1,0 +1,5 @@
+source_id,payload_tracker_status,payload_sql_status,payload_mismatch_state,payload_mismatch_waived,payload_waiver_expiry,checker_tracker_status,checker_sql_status,checker_mismatch_state,checker_mismatch_waived,parity_tracker_status,parity_sql_status,parity_mismatch_state,parity_mismatch_waived,parity_overall,field_diff
+boe_api_legal,DONE,DONE,MATCH,false,,DONE,DONE,OK,false,TRUE,TRUE,TRUE,TRUE,TRUE,
+moncloa_referencias,DONE,DONE,MATCH,false,,DONE,DONE,OK,false,TRUE,TRUE,TRUE,TRUE,TRUE,
+moncloa_rss_referencias,DONE,DONE,MATCH,false,,DONE,DONE,OK,false,TRUE,TRUE,TRUE,TRUE,TRUE,
+parlamento_navarra_parlamentarios_forales,PARTIAL,PARTIAL,MATCH,false,,PARTIAL,PARTIAL,OK,false,TRUE,TRUE,TRUE,TRUE,TRUE,
