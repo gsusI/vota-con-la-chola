@@ -32,6 +32,10 @@ UI_EXPLORER_POLITICO = BASE_DIR / "ui" / "graph" / "explorer-sports.html"
 UI_EXPLORER_VOTACIONES = BASE_DIR / "ui" / "graph" / "explorer-votaciones.html"
 UI_EXPLORER_SOURCES = BASE_DIR / "ui" / "graph" / "explorer-sources.html"
 UI_EXPLORER_TEMAS = BASE_DIR / "ui" / "graph" / "explorer-temas.html"
+UI_CITIZEN = BASE_DIR / "ui" / "citizen" / "index.html"
+UI_CITIZEN_CONCERNS = BASE_DIR / "ui" / "citizen" / "concerns_v1.json"
+GH_PAGES_DIR = BASE_DIR / "docs" / "gh-pages"
+GH_CITIZEN_DATA_DIR = GH_PAGES_DIR / "citizen" / "data"
 MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblacion_municipios_es.json"
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
 MISMATCH_WAIVERS_PATH = BASE_DIR / "docs" / "etl" / "mismatch-waivers.json"
@@ -5159,6 +5163,13 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
             self.end_headers()
             self.wfile.write(body)
 
+        def write_bytes(self, body: bytes, *, content_type: str, status: HTTPStatus = HTTPStatus.OK) -> None:
+            self.send_response(status)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+
         def read_json_body(self, *, max_bytes: int = 1_000_000) -> dict[str, Any]:
             length_raw = self.headers.get("Content-Length", "").strip()
             if not length_raw:
@@ -5247,6 +5258,45 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     self.write_html("<h1>UI explorer-temas no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
                     return
                 self.write_html(UI_EXPLORER_TEMAS.read_text(encoding="utf-8"))
+                return
+
+            if path in ("/citizen", "/citizen/index.html"):
+                if not UI_CITIZEN.exists():
+                    self.write_html("<h1>UI citizen no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_html(UI_CITIZEN.read_text(encoding="utf-8"))
+                return
+
+            if path == "/citizen/data/concerns_v1.json":
+                if not UI_CITIZEN_CONCERNS.exists():
+                    self.write_json({"error": "concerns_v1.json no encontrado"}, status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_CONCERNS.read_bytes(),
+                    content_type="application/json; charset=utf-8",
+                )
+                return
+
+            if path in (
+                "/citizen/data/citizen.json",
+                "/citizen/data/citizen_votes.json",
+                "/citizen/data/citizen_declared.json",
+            ):
+                filename = path.rsplit("/", 1)[-1]
+                src_path = GH_CITIZEN_DATA_DIR / filename
+                if not src_path.exists():
+                    self.write_json(
+                        {
+                            "error": f"{filename} no encontrado. Ejecuta `just explorer-gh-pages-build` para generarlo.",
+                            "expected_path": str(src_path),
+                        },
+                        status=HTTPStatus.NOT_FOUND,
+                    )
+                    return
+                self.write_bytes(
+                    src_path.read_bytes(),
+                    content_type="application/json; charset=utf-8",
+                )
                 return
 
             if path == "/api/health":
