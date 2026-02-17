@@ -60,7 +60,7 @@ python3 scripts/ingestar_parlamentario_es.py backfill-combined-positions --db et
 
 ## next sprint trigger
 
-AI-OPS-17 should start when at least one of these is true:
+AI-OPS-18 should start when at least one of these is true:
 1. Product/roadmap priority moves to line `74` (`Posiciones declaradas (programas)`) to build the missing semistructured + human-review pipeline and reduce that `TODO` surface.
 2. A new unblock lever appears for any carryover blocker (AEMET key provision, BDE DNS/endpoint restoration, or approved reproducible non-interactive bypass policy for Galicia/Navarra).
 3. Strict gate/parity regresses (`mismatches>0`, `waivers_expired>0`, `done_zero_real>0`, or `overall_match=false`).
