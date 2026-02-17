@@ -6,7 +6,11 @@ from pathlib import Path
 
 from etl.parlamentario_es.config import DEFAULT_SCHEMA
 from etl.parlamentario_es.db import apply_schema, open_db, seed_sources as seed_parl_sources
-from etl.parlamentario_es.declared_stance import backfill_declared_stance_from_topic_evidence, infer_declared_stance
+from etl.parlamentario_es.declared_stance import (
+    _infer_declared_stance_detail,
+    backfill_declared_stance_from_topic_evidence,
+    infer_declared_stance,
+)
 from etl.politicos_es.util import canonical_key, now_utc_iso, sha256_bytes
 
 
@@ -108,6 +112,192 @@ class TestParlDeclaredStance(unittest.TestCase):
         for text in false_positive_cases:
             inferred = infer_declared_stance(text)
             self.assertIsNone(inferred, msg=text)
+
+    def test_infer_declared_stance_regex_v3_reason_confidence_policy(self) -> None:
+        explicit_support = _infer_declared_stance_detail("Votaremos a favor de esta iniciativa.")
+        abstention = _infer_declared_stance_detail("Nos abstendremos en esta votación.")
+        declared_support_strong = _infer_declared_stance_detail("Apoyamos esta iniciativa.")
+        declared_oppose_strong = _infer_declared_stance_detail("Rechazamos esta propuesta.")
+        declared_support_weak = _infer_declared_stance_detail("Defendemos este modelo social.")
+        declared_oppose_weak = _infer_declared_stance_detail("Nos oponemos totalmente.")
+        conflicting = _infer_declared_stance_detail("Votaremos a favor, pero no apoyamos esta ley.")
+
+        self.assertEqual(explicit_support, ("support", 1, 0.74, "explicit_vote_intent"))
+        self.assertEqual(abstention, ("mixed", 0, 0.68, "abstention_intent"))
+        self.assertEqual(declared_support_strong, ("support", 1, 0.66, "declared_support"))
+        self.assertEqual(declared_oppose_strong, ("oppose", -1, 0.66, "declared_oppose"))
+        self.assertEqual(declared_support_weak, ("support", 1, 0.58, "weak_declared_support"))
+        self.assertEqual(declared_oppose_weak, ("oppose", -1, 0.58, "weak_declared_oppose"))
+        self.assertEqual(conflicting, ("mixed", 0, 0.58, "conflicting_signal"))
+
+    def test_backfill_declared_stance_regex_v3_queues_low_confidence_and_conflicts(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            db_path = td_path / "declared-stance-v3-reviews.db"
+
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_parl_sources(conn)
+                now = now_utc_iso()
+
+                ckey = canonical_key(full_name="Persona Demo", birth_date=None, territory_code="")
+                conn.execute(
+                    """
+                    INSERT INTO persons (full_name, canonical_key, created_at, updated_at)
+                    VALUES (?, ?, ?, ?)
+                    """,
+                    ("Persona Demo", ckey, now, now),
+                )
+                person_id = int(
+                    conn.execute(
+                        "SELECT person_id FROM persons WHERE canonical_key = ?",
+                        (ckey,),
+                    ).fetchone()["person_id"]
+                )
+
+                sr_payload = '{"kind":"intervention","id":"test"}'
+                sr_sha = sha256_bytes(sr_payload.encode("utf-8"))
+                conn.execute(
+                    """
+                    INSERT INTO source_records (
+                      source_id, source_record_id, source_snapshot_date,
+                      raw_payload, content_sha256, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    ("congreso_intervenciones", "v3:weak", "2026-02-12", sr_payload, sr_sha, now, now),
+                )
+                sr_pk_weak = int(
+                    conn.execute(
+                        "SELECT source_record_pk FROM source_records WHERE source_id = ? AND source_record_id = ?",
+                        ("congreso_intervenciones", "v3:weak"),
+                    ).fetchone()["source_record_pk"]
+                )
+                conn.execute(
+                    """
+                    INSERT INTO source_records (
+                      source_id, source_record_id, source_snapshot_date,
+                      raw_payload, content_sha256, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    ("congreso_intervenciones", "v3:conflict", "2026-02-12", sr_payload, sr_sha, now, now),
+                )
+                sr_pk_conflict = int(
+                    conn.execute(
+                        "SELECT source_record_pk FROM source_records WHERE source_id = ? AND source_record_id = ?",
+                        ("congreso_intervenciones", "v3:conflict"),
+                    ).fetchone()["source_record_pk"]
+                )
+
+                conn.execute(
+                    """
+                    INSERT INTO topic_evidence (
+                      topic_id, topic_set_id,
+                      person_id, mandate_id,
+                      institution_id, admin_level_id, territory_id,
+                      evidence_type, evidence_date, title, excerpt,
+                      stance, polarity, weight, confidence,
+                      topic_method, stance_method,
+                      vote_event_id, initiative_id,
+                      source_id, source_url, source_record_pk, source_snapshot_date,
+                      raw_payload, created_at, updated_at
+                    ) VALUES (
+                      NULL, NULL,
+                      ?, NULL,
+                      NULL, NULL, NULL,
+                      'declared:intervention', '2026-02-12', NULL, ?,
+                      'unclear', 0, 0.5, 0.2,
+                      NULL, 'intervention_metadata',
+                      NULL, NULL,
+                      'congreso_intervenciones', 'https://example.invalid', ?, '2026-02-12',
+                      '{}', ?, ?
+                    )
+                    """,
+                    (person_id, "Defendemos este modelo social.", sr_pk_weak, now, now),
+                )
+                conn.execute(
+                    """
+                    INSERT INTO topic_evidence (
+                      topic_id, topic_set_id,
+                      person_id, mandate_id,
+                      institution_id, admin_level_id, territory_id,
+                      evidence_type, evidence_date, title, excerpt,
+                      stance, polarity, weight, confidence,
+                      topic_method, stance_method,
+                      vote_event_id, initiative_id,
+                      source_id, source_url, source_record_pk, source_snapshot_date,
+                      raw_payload, created_at, updated_at
+                    ) VALUES (
+                      NULL, NULL,
+                      ?, NULL,
+                      NULL, NULL, NULL,
+                      'declared:intervention', '2026-02-12', NULL, ?,
+                      'unclear', 0, 0.5, 0.2,
+                      NULL, 'intervention_metadata',
+                      NULL, NULL,
+                      'congreso_intervenciones', 'https://example.invalid', ?, '2026-02-12',
+                      '{}', ?, ?
+                    )
+                    """,
+                    (
+                        person_id,
+                        "Votaremos a favor, pero no apoyamos esta ley.",
+                        sr_pk_conflict,
+                        now,
+                        now,
+                    ),
+                )
+                conn.commit()
+
+                result = backfill_declared_stance_from_topic_evidence(
+                    conn,
+                    source_id="congreso_intervenciones",
+                    limit=0,
+                    min_auto_confidence=0.62,
+                    dry_run=False,
+                )
+
+                self.assertEqual(int(result.get("updated", 0)), 0)
+                self.assertEqual(int(result.get("review_pending", 0)), 2)
+                by_reason = result.get("review_pending_by_reason", {})
+                self.assertEqual(int(by_reason.get("low_confidence", 0)), 1)
+                self.assertEqual(int(by_reason.get("conflicting_signal", 0)), 1)
+
+                evidence_rows = conn.execute(
+                    """
+                    SELECT source_record_pk, stance, polarity, confidence, stance_method
+                    FROM topic_evidence
+                    WHERE source_record_pk IN (?, ?)
+                    ORDER BY source_record_pk ASC
+                    """,
+                    (sr_pk_weak, sr_pk_conflict),
+                ).fetchall()
+                self.assertEqual(len(evidence_rows), 2)
+                for row in evidence_rows:
+                    self.assertEqual(str(row["stance"]), "unclear")
+                    self.assertEqual(int(row["polarity"]), 0)
+                    self.assertEqual(str(row["stance_method"]), "intervention_metadata")
+
+                review_rows = conn.execute(
+                    """
+                    SELECT source_record_pk, review_reason, suggested_stance, suggested_confidence, status
+                    FROM topic_evidence_reviews
+                    WHERE source_record_pk IN (?, ?)
+                    ORDER BY source_record_pk ASC
+                    """,
+                    (sr_pk_weak, sr_pk_conflict),
+                ).fetchall()
+                self.assertEqual(len(review_rows), 2)
+                self.assertEqual(str(review_rows[0]["review_reason"]), "low_confidence")
+                self.assertEqual(str(review_rows[0]["suggested_stance"]), "support")
+                self.assertAlmostEqual(float(review_rows[0]["suggested_confidence"]), 0.58, places=6)
+                self.assertEqual(str(review_rows[0]["status"]), "pending")
+                self.assertEqual(str(review_rows[1]["review_reason"]), "conflicting_signal")
+                self.assertEqual(str(review_rows[1]["suggested_stance"]), "mixed")
+                self.assertAlmostEqual(float(review_rows[1]["suggested_confidence"]), 0.58, places=6)
+                self.assertEqual(str(review_rows[1]["status"]), "pending")
+            finally:
+                conn.close()
 
     def test_backfill_declared_stance_from_topic_evidence_is_idempotent(self) -> None:
         with tempfile.TemporaryDirectory() as td:
