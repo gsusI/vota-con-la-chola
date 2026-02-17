@@ -1,7 +1,7 @@
 # Sprint Prompt Pack Pointer
 
 Canonical active sprint prompt pack:
-- `docs/etl/sprints/AI-OPS-22/sprint-ai-agents.md`
+- `docs/etl/sprints/AI-OPS-23/sprint-ai-agents.md`
 
 Sprint index:
 - `docs/etl/sprints/README.md`
