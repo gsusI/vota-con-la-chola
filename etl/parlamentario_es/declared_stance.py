@@ -241,7 +241,10 @@ def backfill_declared_stance_from_topic_evidence(
         SELECT
           e.evidence_id,
           e.source_record_pk,
-          COALESCE(d.text_excerpt, e.excerpt, '') AS text,
+          CASE
+            WHEN e.evidence_type = 'declared:programa' THEN COALESCE(NULLIF(TRIM(e.excerpt), ''), d.text_excerpt, '')
+            ELSE COALESCE(d.text_excerpt, e.excerpt, '')
+          END AS text,
           e.stance AS current_stance,
           e.polarity AS current_polarity,
           e.confidence AS current_confidence,

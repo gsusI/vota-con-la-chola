@@ -6,7 +6,7 @@ from typing import Any
 
 from etl.politicos_es.db import apply_schema as _apply_schema
 from etl.politicos_es.db import open_db as _open_db
-from etl.politicos_es.util import now_utc_iso, sha256_bytes
+from etl.politicos_es.util import normalize_ws, now_utc_iso, sha256_bytes
 
 from .config import SOURCE_CONFIG
 
@@ -133,6 +133,77 @@ def upsert_source_records(
     )
 
     # Resolve PKs in chunks to avoid hitting SQLite variable limits.
+    out: dict[str, int] = {}
+    chunk = 400
+    for i in range(0, len(record_ids), chunk):
+        batch = record_ids[i : i + chunk]
+        qmarks = ",".join("?" for _ in batch)
+        fetched = conn.execute(
+            f"""
+            SELECT source_record_id, source_record_pk
+            FROM source_records
+            WHERE source_id = ? AND source_record_id IN ({qmarks})
+            """,
+            (source_id, *batch),
+        ).fetchall()
+        for row in fetched:
+            out[str(row["source_record_id"])] = int(row["source_record_pk"])
+    return out
+
+
+def upsert_source_records_with_content_sha256(
+    conn: sqlite3.Connection,
+    *,
+    source_id: str,
+    rows: list[dict[str, Any]],
+    snapshot_date: str | None,
+    now_iso: str,
+) -> dict[str, int]:
+    """Batch upsert into source_records with caller-provided content_sha256.
+
+    Contract:
+    - Each row must include: source_record_id, raw_payload, content_sha256
+    - Returns mapping source_record_id -> source_record_pk
+    """
+    if not rows:
+        return {}
+
+    params: list[tuple[Any, ...]] = []
+    record_ids: list[str] = []
+    for r in rows:
+        sid = str(r["source_record_id"])
+        payload = str(r["raw_payload"])
+        content_sha = normalize_ws(str(r.get("content_sha256") or ""))
+        if not content_sha:
+            # Keep a stable fallback rather than failing the whole batch.
+            content_sha = sha256_bytes(payload.encode("utf-8"))
+        record_ids.append(sid)
+        params.append(
+            (
+                source_id,
+                sid,
+                snapshot_date,
+                payload,
+                content_sha,
+                now_iso,
+                now_iso,
+            )
+        )
+
+    conn.executemany(
+        """
+        INSERT INTO source_records (
+          source_id, source_record_id, source_snapshot_date, raw_payload, content_sha256, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(source_id, source_record_id) DO UPDATE SET
+          source_snapshot_date=COALESCE(excluded.source_snapshot_date, source_records.source_snapshot_date),
+          raw_payload=excluded.raw_payload,
+          content_sha256=excluded.content_sha256,
+          updated_at=excluded.updated_at
+        """,
+        params,
+    )
+
     out: dict[str, int] = {}
     chunk = 400
     for i in range(0, len(record_ids), chunk):

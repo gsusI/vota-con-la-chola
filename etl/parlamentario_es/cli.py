@@ -47,7 +47,7 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
 
     p_ing = sub.add_parser("ingest", help="Ingesta de una fuente")
     p_ing.add_argument("--db", default=str(DEFAULT_DB))
-    p_ing.add_argument("--source", default="all", help="source_id o 'all'")
+    p_ing.add_argument("--source", default="all", help="source_id o 'all' (incluye programas_partidos)")
     p_ing.add_argument("--raw-dir", default=str(DEFAULT_RAW_DIR))
     p_ing.add_argument("--timeout", type=int, default=int(DEFAULT_TIMEOUT))
     p_ing.add_argument("--snapshot-date", default=None, help="YYYY-MM-DD")

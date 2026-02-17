@@ -4,6 +4,7 @@ from .connectors import (
     CongresoIntervencionesConnector,
     CongresoIniciativasConnector,
     CongresoVotacionesConnector,
+    ProgramasPartidosConnector,
     SenadoIniciativasConnector,
     SenadoVotacionesConnector,
 )
@@ -15,6 +16,7 @@ def get_connectors() -> dict[str, BaseConnector]:
         CongresoVotacionesConnector(),
         CongresoIniciativasConnector(),
         CongresoIntervencionesConnector(),
+        ProgramasPartidosConnector(),
         SenadoIniciativasConnector(),
         SenadoVotacionesConnector(),
     ]
