@@ -461,8 +461,8 @@ explorer-bg-watch:
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-sources/data
-  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data
+  rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/citizen
+  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data
   cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
   cp ui/graph/index.html {{gh_pages_dir}}/graph/index.html
@@ -470,6 +470,8 @@ explorer-gh-pages-build:
   cp ui/graph/explorer-temas.html {{gh_pages_dir}}/explorer-temas/index.html
   cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/explorer-votaciones/index.html
   cp ui/graph/explorer-sources.html {{gh_pages_dir}}/explorer-sources/index.html
+  cp ui/citizen/index.html {{gh_pages_dir}}/citizen/index.html
+  cp ui/citizen/concerns_v1.json {{gh_pages_dir}}/citizen/data/concerns_v1.json
   python3 scripts/export_explorer_sports_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date {{snapshot_date}} \
@@ -489,6 +491,16 @@ explorer-gh-pages-build:
   python3 scripts/export_explorer_temas_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-temas/data/temas-preview.json"
+  python3 scripts/export_citizen_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/citizen/data/citizen.json" \
+    --topic-set-id 1 \
+    --computed-method auto \
+    --max-bytes 5000000
+  python3 scripts/validate_citizen_snapshot.py \
+    --path "{{gh_pages_dir}}/citizen/data/citizen.json" \
+    --max-bytes 5000000 \
+    --strict-grid
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 

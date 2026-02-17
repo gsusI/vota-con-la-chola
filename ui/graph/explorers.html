@@ -146,17 +146,6 @@
         padding-top: 12px;
       }
 
-      .local-api-disabled {
-        opacity: 0.53;
-        filter: grayscale(1);
-        cursor: not-allowed;
-      }
-
-      .local-api-disabled:hover {
-        transform: none;
-        box-shadow: none;
-      }
-
       @media (max-width: 700px) {
         .page {
           width: calc(100% - 16px);
@@ -187,6 +176,15 @@
         </p>
 
         <div class="grid">
+          <a class="card" href="citizen/">
+            <p class="title">
+              <strong>Ciudadanía</strong>
+              <span class="badge">Nuevo</span>
+            </p>
+            <p class="desc">Elige una preocupación y compara posturas por partido con enlaces a evidencia.</p>
+            <p class="meta">/citizen</p>
+          </a>
+
           <a class="card" href="graph/">
             <p class="title">
               <strong>Graph Explorer</strong>
@@ -196,12 +194,12 @@
             <p class="meta">/graph</p>
           </a>
 
-          <a class="card" href="explorer/" data-local-api="explorer-sql">
+          <a class="card" href="explorer/">
             <p class="title">
               <strong>Explorer SQL</strong>
-              <span class="badge">Local API</span>
+              <span class="badge">Browser + HF</span>
             </p>
-            <p class="desc">Navegador tabular de tablas/relaciones en SQLite (para inspección y debugging).</p>
+            <p class="desc">Navegador tabular de tablas/relaciones en navegador (API local si existe; si no, snapshot HF).</p>
             <p class="meta">/explorer</p>
           </a>
 
@@ -242,25 +240,8 @@
           </a>
         </div>
 
-        <p class="note">
-          Nota: <strong>Snapshot</strong> funciona en GitHub Pages. <strong>Local API</strong> requiere ejecutar el servidor local para leer SQLite.
-        </p>
+        <p class="note">Nota: los exploradores usan snapshot; `Explorer SQL` cambia a API local automáticamente si está disponible.</p>
       </section>
     </main>
-    <script>
-      (function() {
-        if (!/(^|\.)github\.io$/i.test(window.location.hostname)) return;
-
-        const tooltip = "El Explorer SQL requiere API local y no funciona en GitHub Pages.";
-        const links = document.querySelectorAll('[data-local-api="explorer-sql"]');
-        links.forEach((link) => {
-          link.classList.add("local-api-disabled");
-          link.setAttribute("title", tooltip);
-          link.setAttribute("aria-disabled", "true");
-          link.setAttribute("tabindex", "-1");
-          link.addEventListener("click", (event) => event.preventDefault());
-        });
-      })();
-    </script>
   </body>
 </html>
