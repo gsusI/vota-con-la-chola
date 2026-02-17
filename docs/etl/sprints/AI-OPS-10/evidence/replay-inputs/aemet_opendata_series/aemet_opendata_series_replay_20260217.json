@@ -1,0 +1,49 @@
+{
+  "descripcion": "AEMET OpenData sample for confounder series",
+  "metadatos": "https://opendata.aemet.es/opendata/sh/sample-metadatos",
+  "updated": "2026-02-16T09:00:00Z",
+  "stations": [
+    {
+      "indicativo": "3195",
+      "nombre": "MADRID, RETIRO",
+      "provincia": "MADRID",
+      "latitud": "40.408",
+      "longitud": "-3.684",
+      "altitud": "667"
+    },
+    {
+      "indicativo": "0076",
+      "nombre": "BARCELONA AEROPUERTO",
+      "provincia": "BARCELONA",
+      "latitud": "41.297",
+      "longitud": "2.083",
+      "altitud": "4"
+    }
+  ],
+  "series": [
+    {
+      "dataset": "aemet_daily_climate",
+      "indicativo": "3195",
+      "variable": "tmed",
+      "frequency": "D",
+      "unit": "degC",
+      "values": [
+        {"fecha": "2026-02-13", "tmed": "9,2"},
+        {"fecha": "2026-02-14", "tmed": "8,7"},
+        {"fecha": "2026-02-15", "tmed": "10,1"}
+      ]
+    },
+    {
+      "dataset": "aemet_daily_climate",
+      "indicativo": "0076",
+      "variable": "prec",
+      "frequency": "D",
+      "unit": "mm",
+      "values": [
+        {"fecha": "2026-02-13", "prec": "0,0"},
+        {"fecha": "2026-02-14", "prec": "1,2"},
+        {"fecha": "2026-02-15", "prec": "0,0"}
+      ]
+    }
+  ]
+}
