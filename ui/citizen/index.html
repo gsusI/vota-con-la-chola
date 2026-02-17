@@ -618,7 +618,9 @@
         <section class="panel card">
           <div class="head">
             <h2>3) Comparar por partido</h2>
-            <p class="hint">Resumen derivado de votos/posiciones. Siempre con cobertura y links de auditoria.</p>
+            <p class="hint">
+              Hechos: resumen derivado de votos/posiciones (con cobertura). Programa: promesas (si existe) por la preocupacion actual.
+            </p>
           </div>
           <div class="controls">
             <select id="stanceFilter" aria-label="Filtro por stance">
@@ -642,7 +644,7 @@
       <footer class="foot card fadeIn" style="animation-delay: 0.14s">
         <strong>Como leer esto:</strong> “A favor / En contra / Mixto” viene de agregar posiciones de diputados del partido.
         Si la cobertura es baja, mostramos <strong>Incierto</strong>. Si no hay datos, mostramos <strong>Sin senal</strong>.
-        Usa los links de auditoria para ver filas y evidencia.
+        “Programa” viene de textos (promesas) y es mas incierto por defecto. Usa los links de auditoria para ver filas y evidencia.
       </footer>
     </div>
 
@@ -717,10 +719,12 @@
         topicById: new Map(),
         partyById: new Map(),
         posByKey: new Map(),
+        progByKey: new Map(),
         topicTags: new Map(),
         countsByConcern: new Map(),
         activeConcernId: "",
         activeTopicId: 0,
+        programasMeta: null,
       };
 
       function readUrlState() {
@@ -792,12 +796,18 @@
         const method = String(meta.computed_method || "");
         const setId = String(meta.topic_set_id || "");
         const version = String(meta.computed_version || "");
+        const prog = meta.programas || null;
 
         el.innerHTML =
           `<span class="chip"><span class="dot ok"></span><span>as_of</span><span class="mono">${esc(asOf)}</span></span>` +
           `<span class="chip"><span class="dot ok"></span><span>metodo</span><span class="mono">${esc(method)}</span></span>` +
           `<span class="chip"><span class="dot ok"></span><span>topic_set</span><span class="mono">${esc(setId)}</span></span>` +
-          `<span class="chip"><span class="dot ok"></span><span>version</span><span class="mono">${esc(version)}</span></span>`;
+          `<span class="chip"><span class="dot ok"></span><span>version</span><span class="mono">${esc(version)}</span></span>` +
+          (prog && prog.topic_set_id
+            ? `<span class="chip"><span class="dot ${Number(prog.signal_total || 0) > 0 ? "ok" : "warn"}"></span><span>programa</span><span class="mono">${esc(
+                String(prog.election_cycle || "?")
+              )}</span></span>`
+            : "");
       }
 
       function renderConcernList() {
@@ -1050,6 +1060,12 @@
                   const linkPos = (r.links || {}).explorer_positions || "";
                   const linkTemas = (r.links || {}).explorer_temas || "";
 
+                  const progKey = `${String(state.activeConcernId || "")}:${pid}`;
+                  const prog = state.progByKey.get(progKey) || null;
+                  const progStance = prog ? String(prog.stance || "no_signal") : "no_signal";
+                  const progConf = prog ? Number(prog.confidence || 0) : 0;
+                  const progLink = prog && prog.links ? String(prog.links.explorer_evidence || "") : "";
+
                   return (
                     `<div class="partyCard">` +
                     `<div class="partyHead">` +
@@ -1073,6 +1089,16 @@
                     (lastEv ? `<span class="tag">ultima=${esc(lastEv)}</span>` : `<span class="tag">ultima=?</span>`) +
                     (linkPos ? `<a class="smallLink" href="${esc(String(linkPos))}" target="_blank" rel="noopener noreferrer">Ver posiciones</a>` : "") +
                     (linkTemas ? `<a class="smallLink" href="${esc(String(linkTemas))}" target="_blank" rel="noopener noreferrer">Ver en Temas</a>` : "") +
+                    `</div>` +
+                    `<div class="partyMeta">` +
+                    `<span class="tag">Programa</span>` +
+                    `<span class="stanceChip ${esc(progStance)}" style="padding:4px 8px; font-size:0.74rem">` +
+                    `<span class="dot ${esc(dotClassForStance(progStance))}"></span>${esc(stanceLabel(progStance))}` +
+                    `</span>` +
+                    `<span class="tag">conf=${esc(fmtPct01(progConf))}</span>` +
+                    (progLink
+                      ? `<a class="smallLink" href="${esc(String(progLink))}" target="_blank" rel="noopener noreferrer">Evidencia (programa)</a>`
+                      : `<span class="tag">sin evidencia</span>`) +
                     `</div>` +
                     `</div>`
                   );
@@ -1137,6 +1163,13 @@
             state.posByKey.set(key, r);
           }
 
+          state.progByKey = new Map();
+          for (const r of citizen.party_concern_programas || []) {
+            const key = `${String(r.concern_id || "")}:${Number(r.party_id || 0)}`;
+            state.progByKey.set(key, r);
+          }
+          state.programasMeta = (citizen.meta || {}).programas || null;
+
           computeTags();
           renderStatus();
 
@@ -1168,7 +1201,7 @@
           renderCompare();
 
           setBanner(
-            `<div><strong>Nota:</strong> esto es una vista ciudadana. Para auditoria completa, abre <a class="smallLink" href="../explorer-temas/">Temas</a> y <a class="smallLink" href="../explorer/">Explorer SQL</a>.</div>`
+            `<div><strong>Nota:</strong> esto es una vista ciudadana. “Programa” es una capa adicional (promesas) derivada de textos y puede requerir revision. Para auditoria completa, abre <a class="smallLink" href="../explorer-temas/">Temas</a> y <a class="smallLink" href="../explorer/">Explorer SQL</a>.</div>`
           );
         } catch (err) {
           setBanner(`<div><strong>Error al cargar datos</strong>: <span class="mono">${esc(String(err))}</span></div>`);

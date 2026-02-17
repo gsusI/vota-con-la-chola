@@ -30,6 +30,10 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 DEFAULT_MAX_BYTES = 5_000_000
 DEFAULT_TOPIC_SET_ID = 1
 DEFAULT_INSTITUTION_ID = 7  # Congreso de los Diputados
+DEFAULT_PROGRAMAS_SOURCE_ID = "programas_partidos"
+DEFAULT_CONCERNS_CONFIG = Path("ui/citizen/concerns_v1.json")
+
+_PROGRAMAS_STANCE_METHODS = ("declared:regex_v3", "declared:regex_v2", "declared:regex_v1")
 
 
 @dataclass(frozen=True)
@@ -440,6 +444,240 @@ def export_party_topic_positions(
     return out
 
 
+def _load_concern_ids(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+    obj = json.loads(path.read_text(encoding="utf-8"))
+    concerns = obj.get("concerns") or []
+    out: list[str] = []
+    if not isinstance(concerns, list):
+        return out
+    for c in concerns:
+        if not isinstance(c, dict):
+            continue
+        cid = str(c.get("id") or "").strip()
+        if cid:
+            out.append(cid)
+    return out
+
+
+def export_party_concern_programas(
+    conn: sqlite3.Connection,
+    *,
+    parties: list[dict[str, Any]],
+    concerns_config_path: Path,
+    source_id: str = DEFAULT_PROGRAMAS_SOURCE_ID,
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]]]:
+    """Export per-party stances from party programs (programas_partidos) keyed by concern_id.
+
+    Output is a full grid of concerns x parties (missing combos => no_signal).
+    This avoids coupling program lane to Congreso mandates or initiative topic_sets.
+    """
+    concern_ids = _load_concern_ids(concerns_config_path)
+    party_ids = [int(p["party_id"]) for p in parties]
+    if not concern_ids or not party_ids:
+        return None, []
+
+    # Find the latest programas topic_set that has evidence rows.
+    row = conn.execute(
+        """
+        SELECT e.topic_set_id AS topic_set_id,
+               ts.legislature AS election_cycle,
+               MAX(COALESCE(e.evidence_date, '')) AS max_evidence_date
+        FROM topic_evidence e
+        JOIN topic_sets ts ON ts.topic_set_id = e.topic_set_id
+        WHERE e.source_id = ?
+          AND e.evidence_type = 'declared:programa'
+          AND e.topic_set_id IS NOT NULL
+        GROUP BY e.topic_set_id, ts.legislature
+        ORDER BY e.topic_set_id DESC
+        LIMIT 1
+        """,
+        (str(source_id),),
+    ).fetchone()
+    if not row:
+        return None, []
+
+    topic_set_id = int(row["topic_set_id"])
+    election_cycle = str(row["election_cycle"] or "") or None
+    programas_as_of_date = str(row["max_evidence_date"] or "") or None
+
+    # Map concern_id -> topic_id inside that programas topic_set.
+    topic_id_by_concern: dict[str, int] = {}
+    trows = conn.execute(
+        """
+        SELECT t.topic_id, t.canonical_key
+        FROM topic_set_topics st
+        JOIN topics t ON t.topic_id = st.topic_id
+        WHERE st.topic_set_id = ?
+        ORDER BY COALESCE(st.stakes_rank, 999999) ASC, t.topic_id ASC
+        """,
+        (int(topic_set_id),),
+    ).fetchall()
+    for r in trows:
+        key = str(r["canonical_key"] or "").strip()
+        if not key.startswith("concern:v1:"):
+            continue
+        cid = key.split(":", 2)[-1].strip()
+        if cid:
+            topic_id_by_concern[cid] = int(r["topic_id"])
+
+    # Map party_id -> proxy person_id via person_identifiers(namespace='party_id').
+    party_person_id: dict[int, int] = {}
+    prows = conn.execute(
+        """
+        SELECT person_id, value
+        FROM person_identifiers
+        WHERE namespace = 'party_id'
+        """,
+    ).fetchall()
+    for r in prows:
+        try:
+            pid = int(str(r["value"] or "").strip())
+        except ValueError:
+            continue
+        try:
+            party_person_id[pid] = int(r["person_id"])
+        except Exception:  # noqa: BLE001
+            continue
+
+    # Pick the strongest evidence per (topic_id, person_id) deterministically.
+    stance_ph = ",".join("?" for _ in _PROGRAMAS_STANCE_METHODS)
+    erows = conn.execute(
+        f"""
+        SELECT
+          evidence_id,
+          topic_id,
+          person_id,
+          stance,
+          confidence,
+          evidence_date,
+          source_url,
+          source_record_pk
+        FROM topic_evidence
+        WHERE source_id = ?
+          AND topic_set_id = ?
+          AND evidence_type = 'declared:programa'
+          AND stance IN ('support', 'oppose', 'mixed')
+          AND stance_method IN ({stance_ph})
+        ORDER BY
+          topic_id ASC,
+          person_id ASC,
+          COALESCE(confidence, 0) DESC,
+          COALESCE(evidence_date, '') DESC,
+          evidence_id ASC
+        """,
+        (str(source_id), int(topic_set_id), *_PROGRAMAS_STANCE_METHODS),
+    ).fetchall()
+
+    best_by_key: dict[tuple[int, int], dict[str, Any]] = {}
+    for r in erows:
+        try:
+            k = (int(r["topic_id"]), int(r["person_id"]))
+        except Exception:  # noqa: BLE001
+            continue
+        if k in best_by_key:
+            continue  # ordered query => first is best
+        best_by_key[k] = {
+            "evidence_id": int(r["evidence_id"]),
+            "stance": str(r["stance"] or ""),
+            "confidence": float(r["confidence"] or 0.0),
+            "evidence_date": str(r["evidence_date"] or "") or None,
+            "source_url": str(r["source_url"] or "") or None,
+            "source_record_pk": int(r["source_record_pk"]) if r["source_record_pk"] is not None else None,
+        }
+
+    # Build full grid for UI convenience.
+    out: list[dict[str, Any]] = []
+    for cid in concern_ids:
+        topic_id = topic_id_by_concern.get(cid)
+        for party_id in party_ids:
+            person_id = party_person_id.get(int(party_id))
+            best = best_by_key.get((int(topic_id), int(person_id))) if (topic_id and person_id) else None
+            stance = str(best["stance"]) if best else "no_signal"
+            conf = float(best["confidence"]) if best else 0.0
+            link = ""
+            if topic_id and person_id:
+                link = (
+                    "../explorer/?t=topic_evidence&tf=topic_"
+                    f"&wc=source_id&wv={source_id}"
+                    f"&wc=topic_set_id&wv={topic_set_id}"
+                    f"&wc=topic_id&wv={topic_id}"
+                    f"&wc=person_id&wv={person_id}"
+                )
+            out.append(
+                {
+                    "concern_id": str(cid),
+                    "party_id": int(party_id),
+                    "stance": stance,
+                    "confidence": round(float(conf), 6),
+                    "evidence": {
+                        "evidence_id": int(best["evidence_id"]) if best else None,
+                        "evidence_date": str(best["evidence_date"]) if best and best.get("evidence_date") else None,
+                        "source_record_pk": int(best["source_record_pk"]) if best and best.get("source_record_pk") else None,
+                        "source_url": str(best["source_url"]) if best and best.get("source_url") else None,
+                    },
+                    "links": {
+                        "explorer_evidence": link,
+                    },
+                }
+            )
+
+    # Meta/KPIs for status chips (keep it compact).
+    evidence_total = int(
+        (
+            conn.execute(
+                """
+                SELECT COUNT(*) AS c
+                FROM topic_evidence
+                WHERE source_id = ?
+                  AND topic_set_id = ?
+                  AND evidence_type = 'declared:programa'
+                """,
+                (str(source_id), int(topic_set_id)),
+            ).fetchone()
+            or {"c": 0}
+        )["c"]
+    )
+    signal_total = int(
+        (
+            conn.execute(
+                f"""
+                SELECT COUNT(*) AS c
+                FROM topic_evidence
+                WHERE source_id = ?
+                  AND topic_set_id = ?
+                  AND evidence_type = 'declared:programa'
+                  AND stance IN ('support','oppose','mixed')
+                  AND stance_method IN ({stance_ph})
+                """,
+                (str(source_id), int(topic_set_id), *_PROGRAMAS_STANCE_METHODS),
+            ).fetchone()
+            or {"c": 0}
+        )["c"]
+    )
+    review_pending = int(
+        (
+            conn.execute(
+                "SELECT COUNT(*) AS c FROM topic_evidence_reviews WHERE source_id = ? AND status = 'pending'",
+                (str(source_id),),
+            ).fetchone()
+            or {"c": 0}
+        )["c"]
+    )
+
+    meta = {
+        "source_id": str(source_id),
+        "topic_set_id": int(topic_set_id),
+        "election_cycle": election_cycle,
+        "as_of_date": programas_as_of_date,
+        "evidence_total": evidence_total,
+        "signal_total": signal_total,
+        "review_pending": review_pending,
+    }
+    return meta, out
+
+
 def strip_private_fields(obj: Any) -> Any:
     if isinstance(obj, dict):
         return {k: strip_private_fields(v) for k, v in obj.items() if not str(k).startswith("_")}
@@ -465,6 +703,12 @@ def main() -> int:
         topics = export_topics(conn, scope=scope, max_topics=int(args.max_topics))
         parties = export_parties(conn, scope=scope, max_parties=int(args.max_parties))
         party_topic_positions = export_party_topic_positions(conn, scope=scope, topics=topics, parties=parties)
+        programas_meta, party_concern_programas = export_party_concern_programas(
+            conn,
+            parties=parties,
+            concerns_config_path=DEFAULT_CONCERNS_CONFIG,
+            source_id=DEFAULT_PROGRAMAS_SOURCE_ID,
+        )
 
         payload = {
             "meta": {
@@ -490,7 +734,11 @@ def main() -> int:
             "topics": topics,
             "parties": parties,
             "party_topic_positions": party_topic_positions,
+            # Optional v1 extension: party programs (promises) per citizen concern.
+            "party_concern_programas": party_concern_programas,
         }
+        if programas_meta:
+            payload["meta"]["programas"] = programas_meta
 
         payload = strip_private_fields(payload)
 
