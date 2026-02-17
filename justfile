@@ -448,6 +448,7 @@ explorer-bg:
   @echo "Explorer corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
   @echo "Explorer político en http://{{explorer_host}}:{{explorer_port}}/explorer-politico"
   @echo "Fuentes en http://{{explorer_host}}:{{explorer_port}}/explorer-sources"
+  @echo "Ciudadanía en http://{{explorer_host}}:{{explorer_port}}/citizen"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
@@ -457,6 +458,7 @@ explorer-bg-watch:
   @echo "Explorer (watch) corriendo en http://{{explorer_host}}:{{explorer_port}}/explorer"
   @echo "Explorer político en http://{{explorer_host}}:{{explorer_port}}/explorer-politico"
   @echo "Fuentes en http://{{explorer_host}}:{{explorer_port}}/explorer-sources"
+  @echo "Ciudadanía en http://{{explorer_host}}:{{explorer_port}}/citizen"
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
