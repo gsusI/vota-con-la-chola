@@ -91,6 +91,7 @@ Nota para posiciones por temas:
   - `snapshots/<snapshot_date>/published/*`
   - `snapshots/<snapshot_date>/ingestion_runs.csv`
   - `snapshots/<snapshot_date>/source_records_by_source.csv`
+  - `snapshots/<snapshot_date>/explorer_schema.json`
   - `snapshots/<snapshot_date>/manifest.json`
   - `snapshots/<snapshot_date>/checksums.sha256`
   - `latest.json` en la raíz del dataset.
