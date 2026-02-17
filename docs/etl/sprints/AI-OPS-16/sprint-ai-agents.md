@@ -843,7 +843,7 @@ Objective:
 
 Concrete tasks:
 - Write closeout PASS/FAIL with gate table and objective delta.
-- Define AI-OPS-17 trigger conditions.
+- Define AI-OPS-18 trigger conditions.
 
 Output contract:
 - docs/etl/sprints/AI-OPS-16/closeout.md
