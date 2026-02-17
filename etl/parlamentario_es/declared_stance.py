@@ -78,15 +78,37 @@ _ABSTAIN_EXPLICIT_PATTERNS = (
     re.compile(r"\babstener(nos|se)\b"),
 )
 
-_SUPPORT_DECLARED_PATTERNS = (
+_DECLARED_OBJECT_NOUNS = (
+    r"iniciativa(?:s)?|enmienda(?:s)?|proposicion(?:es)?|propuesta(?:s)?|"
+    r"proyecto(?:s)?|texto(?:s)?|ley(?:es)?|dictamen(?:es)?|"
+    r"medida(?:s)?|articulo(?:s)?|reforma(?:s)?"
+)
+
+_SUPPORT_DECLARED_STRONG_PATTERNS = (
+    re.compile(rf"\bapoy(?:amos|aremos)\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(rf"\b(vamos|voy|iremos)\s+a\s+apoyar\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(rf"\brespald(?:amos|aremos)\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(rf"\bdefend(?:emos|eremos)\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+)
+
+_OPPOSE_DECLARED_STRONG_PATTERNS = (
+    re.compile(rf"\brechaz(?:amos|aremos)\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(rf"\bnos\s+opon(?:emos|dremos)\s+(?:a\s+)?(?:\w+\s+){{0,6}}(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(rf"\bno\s+apoy(?:amos|aremos)\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(rf"\bno\s+(vamos|voy|iremos)\s+a\s+apoyar\b(?:\s+\w+){{0,8}}\s+\b(?:{_DECLARED_OBJECT_NOUNS})\b"),
+    re.compile(r"\b(mantenemos|reafirmamos)\b(?:\s+\w+){0,6}\senmienda(?:s)?\s+a\s+la\s+totalidad\b"),
+)
+
+_SUPPORT_DECLARED_WEAK_PATTERNS = (
     re.compile(r"\bapoyamos\b"),
     re.compile(r"\bapoyaremos\b"),
     re.compile(r"\b(vamos|voy|iremos)\s+a\s+apoyar\b"),
     re.compile(r"\brespaldamos\b"),
     re.compile(r"\bdefendemos\b"),
+    re.compile(r"\bdefenderemos\b"),
 )
 
-_OPPOSE_DECLARED_PATTERNS = (
+_OPPOSE_DECLARED_WEAK_PATTERNS = (
     re.compile(r"\brechazamos\b"),
     re.compile(r"\brechazaremos\b"),
     re.compile(r"\bnos\s+oponemos\b"),
@@ -121,25 +143,41 @@ def _infer_declared_stance_detail(text: str) -> tuple[str, int, float, str] | No
     abst_hits = _count_hits(_ABSTAIN_EXPLICIT_PATTERNS, t)
     support_explicit_hits = _count_hits(_SUPPORT_EXPLICIT_PATTERNS, t)
     oppose_explicit_hits = _count_hits(_OPPOSE_EXPLICIT_PATTERNS, t)
-    support_declared_hits = _count_hits(_SUPPORT_DECLARED_PATTERNS, t)
-    oppose_declared_hits = _count_hits(_OPPOSE_DECLARED_PATTERNS, t)
+    support_declared_strong_hits = _count_hits(_SUPPORT_DECLARED_STRONG_PATTERNS, t)
+    oppose_declared_strong_hits = _count_hits(_OPPOSE_DECLARED_STRONG_PATTERNS, t)
+    support_declared_weak_hits = _count_hits(_SUPPORT_DECLARED_WEAK_PATTERNS, t)
+    oppose_declared_weak_hits = _count_hits(_OPPOSE_DECLARED_WEAK_PATTERNS, t)
+    support_declared_hits = support_declared_strong_hits + support_declared_weak_hits
+    oppose_declared_hits = oppose_declared_strong_hits + oppose_declared_weak_hits
 
+    # Confidence policy:
+    # - explicit vote intent: high confidence
+    # - abstention and contextual declared intent: medium confidence
+    # - weak declared verbs and any conflicting signal: low confidence (review-first by default)
     if abst_hits > 0 and (support_explicit_hits + oppose_explicit_hits + support_declared_hits + oppose_declared_hits) > 0:
-        return ("mixed", 0, 0.64, "conflicting_signal")
-    if support_explicit_hits > 0 and oppose_explicit_hits > 0:
-        return ("mixed", 0, 0.64, "conflicting_signal")
+        return ("mixed", 0, 0.58, "conflicting_signal")
+    if support_explicit_hits > 0 and (oppose_explicit_hits + oppose_declared_hits) > 0:
+        return ("mixed", 0, 0.58, "conflicting_signal")
+    if oppose_explicit_hits > 0 and (support_explicit_hits + support_declared_hits) > 0:
+        return ("mixed", 0, 0.58, "conflicting_signal")
     if support_explicit_hits > 0:
-        return ("support", 1, 0.72, "explicit_vote_intent")
+        return ("support", 1, 0.74, "explicit_vote_intent")
     if oppose_explicit_hits > 0:
-        return ("oppose", -1, 0.72, "explicit_vote_intent")
+        return ("oppose", -1, 0.74, "explicit_vote_intent")
     if abst_hits > 0:
-        return ("mixed", 0, 0.66, "abstention_intent")
-    if support_declared_hits > 0 and oppose_declared_hits > 0:
-        return ("mixed", 0, 0.64, "conflicting_signal")
-    if support_declared_hits > 0:
-        return ("support", 1, 0.64, "declared_support")
-    if oppose_declared_hits > 0:
-        return ("oppose", -1, 0.64, "declared_oppose")
+        return ("mixed", 0, 0.68, "abstention_intent")
+    if support_declared_strong_hits > 0 and oppose_declared_strong_hits > 0:
+        return ("mixed", 0, 0.58, "conflicting_signal")
+    if support_declared_strong_hits > 0:
+        return ("support", 1, 0.66, "declared_support")
+    if oppose_declared_strong_hits > 0:
+        return ("oppose", -1, 0.66, "declared_oppose")
+    if support_declared_weak_hits > 0 and oppose_declared_weak_hits > 0:
+        return ("mixed", 0, 0.58, "conflicting_signal")
+    if support_declared_weak_hits > 0:
+        return ("support", 1, 0.58, "weak_declared_support")
+    if oppose_declared_weak_hits > 0:
+        return ("oppose", -1, 0.58, "weak_declared_oppose")
     return None
 
 
