@@ -2,53 +2,56 @@
 
 ## Scale Metadata
 - `scale_mode`: `LONG_10X`
-- `baseline_reference`: `docs/etl/sprints/AI-OPS-15/sprint-ai-agents.md` (points not explicit; inferred baseline proxy)
-- `baseline_points`: `13`
+- `baseline_reference`: `docs/etl/sprints/AI-OPS-16/sprint-ai-agents.md` (LONG_10X pattern)
+- `baseline_points`: `125`
 - `target_points`: `130`
 - `planned_points`: `131`
 - `target_task_count`: `24`
 - `planned_task_count`: `24`
-- `horizon_weeks`: `8`
+- `horizon_weeks`: `6`
 
-## Baseline Snapshot
-- Tracker mix (`2026-02-17`): `DONE=34`, `PARTIAL=4`, `TODO=9`
-- Carryover blockers (strict-network): `parlamento_galicia_deputados`, `parlamento_navarra_parlamentarios_forales`, `bde_series_api`, `aemet_opendata_series`
-- Declared signal (`congreso_intervenciones`): `204/614` (`0.332248`)
-- Global review queue: `topic_evidence_reviews_total=531`, `pending=0`
-- Program lane baseline (`source_id=programas_partidos`):
-  - `programas_declared_total=0`
-  - `programas_text_documents_total=0`
-  - `programas_review_pending=0`
-- Tracker focus line: `docs/etl/e2e-scrape-load-tracker.md:74` (`Posiciones declaradas (programas)` currently `TODO`)
+## Baseline Snapshot (2026-02-17)
+- GH Pages today: explorers landing + schema-first tools (`/explorer-temas`, `/explorer-votaciones`, `/explorer-politico`, `/explorer-sources`, `/graph`).
+- Data available (national):
+  - Congreso mandates: `350` active (`institution_id=7`).
+  - Topic set: `topic_set_id=1` (Congreso leg 15).
+  - Topics in set: `200` total, `60` flagged `is_high_stakes=1`.
+  - Positions present for Congreso at `as_of_date=2026-02-16` for `votes` and `combined`.
+- Declared signal (interventions): `204/614` (`0.332248`), review queue pending `0`.
 
-## Sprint Objective
-- Deliver the first reproducible `programas_partidos` pipeline slice (`ingest -> text_documents -> declared stance -> topic_positions -> evidence visibility`) and move tracker line `74` out of `TODO` with strict gate/parity preserved.
+## Sprint Objective (Citizen-first)
+- Ship a citizen-first webapp (static GH Pages) that turns the existing data into answers people care about:
+  - pick a concern (vivienda, empleo, sanidad, etc.)
+  - see the most relevant/high-salience items (today: initiative-level "topics")
+  - compare party stances (derived from member positions) with clear coverage/uncertainty
+  - drill down to evidence via existing explorers (no black box)
+
+Non-goals (explicit):
+- no new upstream connectors
+- no backfills that change core ETL behavior
+- no "alignment ranking" pretending to read user values
 
 ## Bottleneck Class
-- Primary: `product bottleneck` (missing source-to-product slice for party programs)
-- Secondary: `signal bottleneck` (declared stance extraction/review for new source)
+- Primary: `product bottleneck` (we have data; citizens can't use it)
+- Secondary: `presentation bottleneck` (initiative-level topics need citizen-friendly grouping)
 
 ## Lane Packing Plan
-- `HI` setup wave: Tasks `1-7`
-- `FAST` throughput wave: Tasks `8-20`
+- `HI` setup wave: Tasks `1-8`
+- `FAST` throughput wave: Tasks `9-20`
 - `HI` closeout wave: Tasks `21-24`
 - Lane switches: `2` (`HI -> FAST -> HI`)
 
 ## Workload Balance
 - Points split: `L1=74 (56.49%)`, `L2=46 (35.11%)`, `L3=11 (8.40%)`
-- Task split: `L1=13/24 (54.17%)`, `L2=8/24 (33.33%)`, `L3=3/24 (12.50%)`
-- L1 throughput obligations satisfied:
-  - batch prep: Task `17`
-  - apply/recompute: Tasks `18-19`
-  - evidence/tracker reconciliation support: Task `20`
+- Task split: `L1=12/24 (50.00%)`, `L2=9/24 (37.50%)`, `L3=3/24 (12.50%)`
 
 ## Must-Pass Gates
-- `G1 Integrity`: `PRAGMA foreign_key_check` returns zero rows.
-- `G2 Queue health`: pending reviews for `programas_partidos` are controlled (`pending_ratio <= 0.35`) and globally non-explosive.
-- `G3 Visible progress`: tracker line `74` must move from `TODO` to evidence-backed `PARTIAL` or `DONE`.
-- `G4 Signal floor`: `programas_declared_with_signal > 0` with explicit confidence/reason breakdown.
-- `G5 Strict gate/parity`: strict tracker gate exit `0` and `overall_match=true` for status parity keys.
-- `G6 Workload evidence`: FAST wave artifacts demonstrate L1 executed the majority of deterministic throughput.
+- `G1 Visible product`: a citizen-first page exists under GH Pages and is linked from the landing.
+- `G2 Evidence drill-down`: every stance card links to a concrete explorer drill-down (topic/person/evidence).
+- `G3 Honesty`: unknown/no-signal is rendered as unknown (not silently imputed).
+- `G4 Size/perf`: exported citizen snapshot JSON(s) are bounded (documented sizes; no multi-100MB blobs).
+- `G5 Strict gate/parity`: strict tracker gate stays green and status parity remains `overall_match=true`.
+- `G6 Reproducibility`: citizen snapshot export is deterministic from a given `--db` + `--as-of-date`.
 
 ## Prompt Pack
 
@@ -62,27 +65,26 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Lock AI-OPS-18 scope, gate contract, and anti-loop policy for external blockers.
+- Lock the citizen-first product scope, user journeys, and must-pass gates.
 
 Concrete tasks:
-- Define objective boundary to tracker line 74 (programas) plus strict gate/parity invariants.
-- Confirm what qualifies as PARTIAL vs DONE for this sprint.
-- Freeze escalation rules for blocked external connectors (no blind retries).
+- Define the primary citizen journeys (3 flows max) and what the MVP answers.
+- Define what "concern" means given current initiative-level topics.
+- Freeze gate contract G1-G6 and define PASS/FAIL criteria.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/kickoff.md
 - docs/etl/sprints/AI-OPS-18/reports/scope-lock.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/kickoff.md
-- rg -n "Scope Lock|Must-pass gates|Escalation rules" docs/etl/sprints/AI-OPS-18/kickoff.md
+- test -f docs/etl/sprints/AI-OPS-18/reports/scope-lock.md
+- rg -n "User journeys|MVP|Must-pass gates|PASS/FAIL" docs/etl/sprints/AI-OPS-18/reports/scope-lock.md
 
 Task packet:
-goal: Scope lock and gate contract for the sprint.
-inputs: docs/roadmap.md; docs/roadmap-tecnico.md; docs/etl/e2e-scrape-load-tracker.md; docs/etl/sprints/AI-OPS-16/closeout.md
-output_contract: kickoff + scope-lock docs with explicit G1-G6 and no-loop policy.
-acceptance_query: kickoff/scope-lock docs include objective boundary and gate table.
-escalation_rule: Escalate if scope requires non-reproducible ingestion policy.
+goal: Scope lock and gate contract.
+inputs: docs/roadmap.md; docs/roadmap-tecnico.md; docs/etl/e2e-scrape-load-tracker.md; docs/gh-pages/index.html
+output_contract: scope-lock report with flows + gate table.
+acceptance_query: grep for journey + gates headers.
+escalation_rule: Escalate if MVP implies building a server (not static GH pages).
 depends_on: []
 parallel_group: P1
 artifact_path: docs/etl/sprints/AI-OPS-18/reports/scope-lock.md
@@ -98,33 +100,33 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Produce baseline SQL/CLI query pack for the new programas lane.
+- Define the citizen snapshot data contract and the minimal pages/components.
 
 Concrete tasks:
-- Define baseline metrics SQL for source_id=programas_partidos (declared total/signal/review/text docs).
-- Define strict gate + status parity command pack.
-- Define pass1/pass2 threshold comparison query snippets.
+- Specify the JSON schema for the citizen app: meta, topics, parties, party_positions, and drill-down links.
+- Decide which scope we ship first (default: Congreso / topic_set_id=1 / as_of=max).
+- Write the contract as a short spec.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/reports/query-pack-baseline.md
+- docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/reports/query-pack-baseline.md
-- rg -n "programas_declared_total|strict gate|overall_match" docs/etl/sprints/AI-OPS-18/reports/query-pack-baseline.md
+- test -f docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md
+- rg -n "schema|topic_set_id=1|as_of_date|party_positions|drill" docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md
 
 Task packet:
-goal: Baseline KPI and gate query scaffolding.
-inputs: etl/data/staging/politicos-es.db; docs/etl/e2e-scrape-load-tracker.md; docs/etl/mismatch-waivers.json
-output_contract: runnable query/command pack for setup and FAST wave.
-acceptance_query: query pack includes SQL + shell blocks for baseline and postrun.
-escalation_rule: Escalate if required tables/columns are missing.
+goal: Stable data contract for the static citizen app.
+inputs: SQLite schema (etl/load/sqlite_schema.sql); existing GH pages explorers.
+output_contract: contract doc with example JSON snippet.
+acceptance_query: contract includes required top-level keys and constraints.
+escalation_rule: Escalate if contract requires shipping full raw evidence tables to GH pages.
 depends_on: [1]
 parallel_group: P2
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/query-pack-baseline.md
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md
 ```
 
 3. Agent: L2 Specialist Builder
-- `depends_on`: `[1]`
+- `depends_on`: `[2]`
 - `parallel_group`: `P3`
 - `model_lane`: `HI`
 - `points`: `8`
@@ -133,77 +135,39 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Define the canonical source contract and manifest schema for party programs.
+- Implement a deterministic export script for the citizen snapshot.
 
 Concrete tasks:
-- Add/confirm source_id contract: programas_partidos.
-- Define deterministic manifest schema (party_id, party_name, election_cycle, source_url, format_hint, language, scope, snapshot_date).
-- Define dedupe/identity key policy and strict-network behavior.
+- Add `scripts/export_citizen_snapshot.py`.
+- Export (bounded) JSON for:
+  - topic_set_id=1 topics (include stakes_rank + is_high_stakes)
+  - parties present in active Congreso mandates
+  - aggregated party stance per topic (from latest topic_positions by as_of_date + computed_method=votes/combined)
+  - drill-down URLs pointing to existing explorers (`/explorer-temas` and `/explorer`)
+- Include `--db`, `--out`, `--topic-set-id`, `--as-of-date` args.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/reports/programas-source-contract.md
-- etl/data/raw/samples/programas_partidos_sample.csv
+- scripts/export_citizen_snapshot.py
+- docs/etl/sprints/AI-OPS-18/reports/citizen-export-design.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/reports/programas-source-contract.md
-- test -f etl/data/raw/samples/programas_partidos_sample.csv
-- rg -n "source_id=programas_partidos|identity key|manifest" docs/etl/sprints/AI-OPS-18/reports/programas-source-contract.md
+- test -f scripts/export_citizen_snapshot.py
+- python3 scripts/export_citizen_snapshot.py --help
 
 Task packet:
-goal: Source and manifest contract for program ingestion.
-inputs: docs/etl/e2e-scrape-load-tracker.md; etl/parlamentario_es/config.py; etl/load/sqlite_schema.sql
-output_contract: source-contract report + deterministic sample manifest.
-acceptance_query: contract defines schema, constraints, and strict behavior.
-escalation_rule: Escalate if contract implies destructive schema changes.
-depends_on: [1]
+goal: Create the data artifact the webapp consumes.
+inputs: etl/data/staging/politicos-es.db; docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md
+output_contract: export script + design note.
+acceptance_query: running the script produces JSON with the contract keys.
+escalation_rule: Escalate if export requires multi-minute runtime or huge memory.
+depends_on: [2]
 parallel_group: P3
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/programas-source-contract.md
+artifact_path: scripts/export_citizen_snapshot.py
 ```
 
 4. Agent: L2 Specialist Builder
-- `depends_on`: `[1,3]`
+- `depends_on`: `[2]`
 - `parallel_group`: `P4`
-- `model_lane`: `HI`
-- `points`: `8`
-```text
-Repository path/context:
-- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
-
-Objective:
-- Implement the first reproducible programas ingestion + extraction pipeline slice.
-
-Concrete tasks:
-- Add source config + ingest routing for programas_partidos.
-- Implement connector/parser module for manifest-driven fetch/parse (HTML/PDF text extraction fallback-safe).
-- Persist source_records with traceability and generate declared topic_evidence stubs linked by source_record_pk.
-- Add CLI surface for deterministic run (`ingest --source programas_partidos --from-file/--manifest`).
-
-Output contract:
-- etl/parlamentario_es/config.py
-- etl/parlamentario_es/pipeline.py
-- etl/parlamentario_es/cli.py
-- etl/parlamentario_es/connectors/programas_partidos.py
-- docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md
-
-Acceptance checks:
-- rg -n "programas_partidos" etl/parlamentario_es/config.py etl/parlamentario_es/pipeline.py etl/parlamentario_es/cli.py
-- test -f etl/parlamentario_es/connectors/programas_partidos.py
-- test -f docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md
-
-Task packet:
-goal: Build ingestable program source slice with traceable records.
-inputs: task 3 contract; existing parl pipeline patterns; sqlite schema.
-output_contract: code changes + design report + runnable CLI path.
-acceptance_query: source can be invoked by CLI and writes source_records/topic_evidence rows.
-escalation_rule: Escalate if parser requires non-deterministic browser automation.
-depends_on: [1,3]
-parallel_group: P4
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md
-```
-
-5. Agent: L2 Specialist Builder
-- `depends_on`: `[4]`
-- `parallel_group`: `P5`
 - `model_lane`: `HI`
 - `points`: `5`
 ```text
@@ -211,35 +175,77 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Add deterministic tests for programas ingestion and idempotence contracts.
+- Define citizen-friendly concern groupings over the existing initiative-level topics.
 
 Concrete tasks:
-- Add tests for manifest validation, stable source_record_id generation, and idempotent upsert behavior.
-- Add at least one sample-based E2E path for programas_partidos source.
-- Document expected deterministic output counts from sample.
+- Create a deterministic concern taxonomy v1 (keyword/tag rules, not ML): vivienda, empleo, sanidad, educacion, coste_vida, seguridad_justicia, corrupcion, clima_campo, transporte, inmigracion (10-14 total).
+- Implement tagging logic either in export script or as a small JSON config consumed by export/UI.
+- Document limitations: this is a navigational aid, not a substantive classifier.
 
 Output contract:
-- tests/test_parl_programas_partidos.py
-- docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-tests.md
+- docs/etl/sprints/AI-OPS-18/reports/concern-taxonomy-v1.md
+- ui/citizen/concerns_v1.json
 
 Acceptance checks:
-- test -f tests/test_parl_programas_partidos.py
-- test -f docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-tests.md
-- rg -n "programas_partidos|idempot" tests/test_parl_programas_partidos.py
+- test -f ui/citizen/concerns_v1.json
+- test -f docs/etl/sprints/AI-OPS-18/reports/concern-taxonomy-v1.md
 
 Task packet:
-goal: Protect new source behavior with deterministic tests.
-inputs: task 4 code changes; etl/data/raw/samples/programas_partidos_sample.csv
-output_contract: tests + test report with run command.
-acceptance_query: targeted tests pass and assert idempotence.
-escalation_rule: Escalate if tests require unrelated fixture rewrites.
-depends_on: [4]
+goal: Make the data navigable by citizen concerns.
+inputs: topics labels for topic_set_id=1; citizen data contract.
+output_contract: concern taxonomy config + report.
+acceptance_query: config includes ids/labels and keyword rules.
+escalation_rule: Escalate if taxonomy requires subjective political arbitration beyond keyword tagging.
+depends_on: [2]
+parallel_group: P4
+artifact_path: ui/citizen/concerns_v1.json
+```
+
+5. Agent: L2 Specialist Builder
+- `depends_on`: `[2,4]`
+- `parallel_group`: `P5`
+- `model_lane`: `HI`
+- `points`: `8`
+```text
+Repository path/context:
+- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+
+Objective:
+- Implement the citizen-first GH Pages webapp UI (static, no backend).
+
+Concrete tasks:
+- Create `ui/citizen/index.html` (single-file app is OK) with:
+  - concern picker
+  - topic list per concern (high-stakes first)
+  - party comparison panel with stance + coverage + confidence
+  - drill-down links to explorers
+  - explicit "no signal" UX
+- Design constraints:
+  - mobile-first
+  - accessible contrast
+  - copy that speaks to citizens (not engineers)
+
+Output contract:
+- ui/citizen/index.html
+- docs/etl/sprints/AI-OPS-18/reports/citizen-ui-design.md
+
+Acceptance checks:
+- test -f ui/citizen/index.html
+- rg -n "concern|evidence|no_signal|explorer-temas" ui/citizen/index.html
+
+Task packet:
+goal: A citizen-facing UI that consumes the exported snapshot.
+inputs: concerns_v1.json; citizen snapshot JSON; GH Pages structure under docs/gh-pages.
+output_contract: citizen UI + design note.
+acceptance_query: UI loads JSON via fetch and renders at least one concern end-to-end.
+escalation_rule: Escalate if UI requires a bundler/server to run.
+depends_on: [2,4]
 parallel_group: P5
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-tests.md
+artifact_path: ui/citizen/index.html
 ```
 
 6. Agent: L2 Specialist Builder
-- `depends_on`: `[2,5]`
+- `depends_on`: `[3,5]`
 - `parallel_group`: `P6`
 - `model_lane`: `HI`
 - `points`: `5`
@@ -248,34 +254,76 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Build deterministic FAST-wave execution checklist for tasks 8-20.
+- Wire the citizen app + export into the existing GH Pages build pipeline.
 
 Concrete tasks:
-- Sequence commands, expected files, and pass/fail conditions.
-- Include explicit no-op branch when review input is not available.
-- Include required env vars and snapshot date handling.
+- Update `justfile` recipe `explorer-gh-pages-build` to:
+  - create `docs/gh-pages/citizen/` + `data/`
+  - copy `ui/citizen/index.html` to GH pages
+  - copy `ui/citizen/concerns_v1.json` to GH pages data
+  - run `scripts/export_citizen_snapshot.py` to produce `docs/gh-pages/citizen/data/citizen.json`
+- Update landing navigation so citizens can find the app.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/reports/fast-wave-checklist.md
+- justfile
+- docs/etl/sprints/AI-OPS-18/reports/gh-pages-integration.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/reports/fast-wave-checklist.md
-- rg -n "Task 8|Task 20|no-op|snapshot" docs/etl/sprints/AI-OPS-18/reports/fast-wave-checklist.md
+- rg -n "citizen" justfile
+- test -f docs/etl/sprints/AI-OPS-18/reports/gh-pages-integration.md
 
 Task packet:
-goal: Operational runbook for FAST lane.
-inputs: task 2 query pack; task 5 test report; kickoff gate contract.
-output_contract: checklist with deterministic acceptance steps.
-acceptance_query: checklist enumerates all FAST tasks and artifacts.
-escalation_rule: Escalate if any FAST task lacks deterministic acceptance criteria.
-depends_on: [2,5]
+goal: One-command reproducible build of the citizen app.
+inputs: existing explorer-gh-pages-build; export script; UI files.
+output_contract: updated justfile + integration report.
+acceptance_query: `just explorer-gh-pages-build` produces citizen files.
+escalation_rule: Escalate if build step breaks existing explorers.
+depends_on: [3,5]
 parallel_group: P6
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/fast-wave-checklist.md
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/gh-pages-integration.md
 ```
 
-7. Agent: L3 Orchestrator
-- `depends_on`: `[2,5,6]`
+7. Agent: L2 Specialist Builder
+- `depends_on`: `[3]`
 - `parallel_group`: `P7`
+- `model_lane`: `HI`
+- `points`: `5`
+```text
+Repository path/context:
+- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+
+Objective:
+- Add a deterministic validator for the citizen snapshot and a size guardrail.
+
+Concrete tasks:
+- Add `scripts/validate_citizen_snapshot.py` that:
+  - validates required keys/types
+  - checks file size thresholds
+  - prints a compact KPI summary (topics, parties, positions counts)
+- (Optional) add a minimal unit test if it fits the repo.
+
+Output contract:
+- scripts/validate_citizen_snapshot.py
+- docs/etl/sprints/AI-OPS-18/reports/citizen-validator.md
+
+Acceptance checks:
+- test -f scripts/validate_citizen_snapshot.py
+- python3 scripts/validate_citizen_snapshot.py --help
+
+Task packet:
+goal: Prevent accidental giant/unusable exports.
+inputs: citizen.json output.
+output_contract: validator script + report.
+acceptance_query: validator exits 0 on valid snapshot and reports KPIs.
+escalation_rule: Escalate if contract cannot be validated without brittle heuristics.
+depends_on: [3]
+parallel_group: P7
+artifact_path: scripts/validate_citizen_snapshot.py
+```
+
+8. Agent: L3 Orchestrator
+- `depends_on`: `[1,2,3,4,5,6,7]`
+- `parallel_group`: `P8`
 - `model_lane`: `HI`
 - `points`: `3`
 ```text
@@ -283,113 +331,67 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Approve HI setup completion and lock FAST execution order.
+- Setup wave signoff: confirm we can run FAST lane deterministically.
 
 Concrete tasks:
-- Validate setup artifacts from tasks 1-6.
-- Publish GO/NO-GO decision with blocker handling policy.
+- Verify the existence of required files and that the lane plan is runnable.
+- Freeze acceptance gates and stop conditions.
 
 Output contract:
 - docs/etl/sprints/AI-OPS-18/reports/setup-wave-signoff.md
 
 Acceptance checks:
 - test -f docs/etl/sprints/AI-OPS-18/reports/setup-wave-signoff.md
-- rg -n "GO|NO-GO|lane order|blocker policy" docs/etl/sprints/AI-OPS-18/reports/setup-wave-signoff.md
+- rg -n "GO|NO-GO|gates|FAST" docs/etl/sprints/AI-OPS-18/reports/setup-wave-signoff.md
 
 Task packet:
-goal: Setup wave signoff.
-inputs: tasks 1-6 outputs.
-output_contract: signed readiness note with lane lock.
-acceptance_query: signoff includes GO/NO-GO and escalation path.
-escalation_rule: Escalate if setup artifacts are incomplete.
-depends_on: [2,5,6]
-parallel_group: P7
+goal: Setup readiness signoff.
+inputs: tasks 1-7 outputs.
+output_contract: GO/NO-GO signoff.
+acceptance_query: signoff includes a runnable command list.
+escalation_rule: Escalate if any setup artifact is missing.
+depends_on: [1,2,3,4,5,6,7]
+parallel_group: P8
 artifact_path: docs/etl/sprints/AI-OPS-18/reports/setup-wave-signoff.md
 ```
 
-8. Agent: L1 Mechanical Executor
-- `depends_on`: `[2,6,7]`
-- `parallel_group`: `P8`
-- `model_lane`: `FAST`
-- `points`: `5`
-```text
-Repository path/context:
-- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
-
-Objective:
-- Capture baseline status and KPI packet before programas ingestion.
-
-Concrete tasks:
-- Run tracker status and strict gate baseline commands.
-- Run baseline SQL for programas source metrics.
-- Save logs and normalized CSVs.
-
-Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/tracker-status-baseline.log
-- docs/etl/sprints/AI-OPS-18/evidence/baseline-gate.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_kpi_baseline.csv
-
-Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/tracker-status-baseline.log
-- test -f docs/etl/sprints/AI-OPS-18/evidence/baseline-gate.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_kpi_baseline.csv
-
-Task packet:
-goal: Baseline evidence capture.
-inputs: task 2 query pack; task 6 checklist.
-output_contract: baseline logs + KPI csv.
-acceptance_query: baseline csv includes programas_declared_total/programas_text_documents_total.
-escalation_rule: Escalate if strict gate baseline fails.
-depends_on: [2,6,7]
-parallel_group: P8
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_kpi_baseline.csv
-```
-
 9. Agent: L1 Mechanical Executor
-- `depends_on`: `[6,7]`
+- `depends_on`: `[8]`
 - `parallel_group`: `P9`
 - `model_lane`: `FAST`
-- `points`: `5`
+- `points`: `1`
 ```text
 Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Prepare first deterministic party-program manifest input batch.
+- Capture baseline GH Pages build outputs (pre-citizen) for comparison.
 
 Concrete tasks:
-- Build/refresh manifest CSV from approved official program URLs.
-- Ensure required columns and snapshot_date are present.
-- Save manifest under sprint exports for traceability.
+- Run `just explorer-gh-pages-build` using the canonical DB and snapshot date.
+- Record file tree and sizes under docs/gh-pages.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/exports/program_manifest_input.csv
+- docs/etl/sprints/AI-OPS-18/evidence/gh-pages-baseline-tree.txt
+- docs/etl/sprints/AI-OPS-18/evidence/gh-pages-baseline-sizes.txt
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/exports/program_manifest_input.csv
-- python3 - <<'PY'
-import csv
-from pathlib import Path
-p=Path('docs/etl/sprints/AI-OPS-18/exports/program_manifest_input.csv')
-with p.open(encoding='utf-8') as f:
-    h=next(csv.reader(f))
-required={'party_name','source_url','snapshot_date','scope'}
-print('ok' if required.issubset(set(h)) else 'missing')
-PY
+- test -f docs/etl/sprints/AI-OPS-18/evidence/gh-pages-baseline-tree.txt
+- test -f docs/etl/sprints/AI-OPS-18/evidence/gh-pages-baseline-sizes.txt
 
 Task packet:
-goal: Batch input preparation for programas ingestion.
-inputs: task 3 manifest schema; approved source list.
-output_contract: manifest csv with required fields.
-acceptance_query: header/schema validation passes.
-escalation_rule: Escalate if required official URLs are unavailable.
-depends_on: [6,7]
+goal: Baseline evidence for visible progress.
+inputs: justfile explorer-gh-pages-build.
+output_contract: baseline tree + size evidence.
+acceptance_query: files exist and are non-empty.
+escalation_rule: Escalate if baseline build fails.
+depends_on: [8]
 parallel_group: P9
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/program_manifest_input.csv
+artifact_path: docs/etl/sprints/AI-OPS-18/evidence/gh-pages-baseline-tree.txt
 ```
 
 10. Agent: L1 Mechanical Executor
-- `depends_on`: `[9]`
+- `depends_on`: `[8]`
 - `parallel_group`: `P10`
 - `model_lane`: `FAST`
 - `points`: `5`
@@ -398,35 +400,35 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Validate manifest quality before any network fetch.
+- Generate the citizen snapshot JSON and capture export evidence.
 
 Concrete tasks:
-- Run manifest validator command (duplicates, malformed URLs, missing fields).
-- Capture validation log and error counts.
-- Produce short validation report with remediation notes if needed.
+- Run `python3 scripts/export_citizen_snapshot.py ...` to write into:
+  - docs/gh-pages/citizen/data/citizen.json
+  - docs/etl/sprints/AI-OPS-18/evidence/citizen-export.log
+- Capture file size and a KPI summary.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/program-manifest-validate.log
-- docs/etl/sprints/AI-OPS-18/reports/program-manifest-validation.md
+- docs/etl/sprints/AI-OPS-18/evidence/citizen-export.log
+- docs/etl/sprints/AI-OPS-18/evidence/citizen-json-size.txt
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/program-manifest-validate.log
-- test -f docs/etl/sprints/AI-OPS-18/reports/program-manifest-validation.md
-- rg -n "duplicates|malformed|missing|status" docs/etl/sprints/AI-OPS-18/reports/program-manifest-validation.md
+- test -f docs/gh-pages/citizen/data/citizen.json
+- test -f docs/etl/sprints/AI-OPS-18/evidence/citizen-export.log
 
 Task packet:
-goal: Manifest QA gate.
-inputs: task 9 manifest; validator from task 4.
-output_contract: validation log + report.
-acceptance_query: report includes pass/fail summary and row counts.
-escalation_rule: Escalate if critical schema errors remain unresolved.
-depends_on: [9]
+goal: Produce the data file the UI consumes.
+inputs: scripts/export_citizen_snapshot.py; DB.
+output_contract: citizen.json + log + size evidence.
+acceptance_query: JSON exists and is valid JSON.
+escalation_rule: Escalate if JSON is empty or huge.
+depends_on: [8]
 parallel_group: P10
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/program-manifest-validation.md
+artifact_path: docs/gh-pages/citizen/data/citizen.json
 ```
 
 11. Agent: L1 Mechanical Executor
-- `depends_on`: `[4,10]`
+- `depends_on`: `[8]`
 - `parallel_group`: `P11`
 - `model_lane`: `FAST`
 - `points`: `5`
@@ -435,35 +437,33 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Execute first programas ingestion run from manifest.
+- Build GH Pages outputs including the citizen app and capture build evidence.
 
 Concrete tasks:
-- Run ingest command for source programas_partidos with strict-network and manifest input.
-- Capture run log and emitted metrics.
-- Export run summary (seen/loaded/errors).
+- Run `just explorer-gh-pages-build`.
+- Verify citizen files exist under docs/gh-pages/citizen.
+- Record build log output.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_ingest.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_ingest_metrics.csv
+- docs/etl/sprints/AI-OPS-18/evidence/gh-pages-build-citizen.log
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_ingest.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_ingest_metrics.csv
-- rg -n "records_loaded|source_id=programas_partidos" docs/etl/sprints/AI-OPS-18/evidence/programas_ingest.log
+- test -f docs/etl/sprints/AI-OPS-18/evidence/gh-pages-build-citizen.log
+- test -f docs/gh-pages/citizen/index.html
 
 Task packet:
-goal: First reproducible ingest pass for programas source.
-inputs: task 10 validated manifest; task 4 ingest implementation.
-output_contract: ingest log + metrics csv.
-acceptance_query: records_loaded > 0 or explicit blocker evidence documented.
-escalation_rule: Escalate if ingest yields seen>0 and loaded=0 without explainable blocker.
-depends_on: [4,10]
+goal: Ensure one-command build creates the app.
+inputs: justfile; ui/citizen; export scripts.
+output_contract: build log.
+acceptance_query: citizen index + citizen.json exist.
+escalation_rule: Escalate if build breaks explorers.
+depends_on: [8]
 parallel_group: P11
-artifact_path: docs/etl/sprints/AI-OPS-18/evidence/programas_ingest.log
+artifact_path: docs/etl/sprints/AI-OPS-18/evidence/gh-pages-build-citizen.log
 ```
 
 12. Agent: L1 Mechanical Executor
-- `depends_on`: `[11]`
+- `depends_on`: `[10]`
 - `parallel_group`: `P12`
 - `model_lane`: `FAST`
 - `points`: `5`
@@ -472,34 +472,32 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Materialize text_documents coverage for programas_partidos evidence.
+- Validate the citizen snapshot contract + size guardrails.
 
 Concrete tasks:
-- Run backfill-text-documents for source programas_partidos.
-- Capture log and text document metrics (total, excerpt coverage).
+- Run `python3 scripts/validate_citizen_snapshot.py --path docs/gh-pages/citizen/data/citizen.json`.
+- Save validator output.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_textdocs_backfill.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_textdocs_metrics.csv
+- docs/etl/sprints/AI-OPS-18/evidence/citizen-validate.txt
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_textdocs_backfill.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_textdocs_metrics.csv
-- rg -n "text_documents_total|with_excerpt" docs/etl/sprints/AI-OPS-18/exports/programas_textdocs_metrics.csv
+- test -f docs/etl/sprints/AI-OPS-18/evidence/citizen-validate.txt
+- rg -n "OK|topics|parties" docs/etl/sprints/AI-OPS-18/evidence/citizen-validate.txt
 
 Task packet:
-goal: Create textual evidence substrate for stance extraction.
-inputs: task 11 source_records; existing backfill-text-documents CLI.
-output_contract: textdoc backfill log + metrics.
-acceptance_query: text_documents_total for programas_partidos is non-zero.
-escalation_rule: Escalate if text extraction repeatedly fails on dominant format.
-depends_on: [11]
+goal: Contract validation.
+inputs: citizen.json; validator script.
+output_contract: validator output text.
+acceptance_query: validator exit 0 and KPIs printed.
+escalation_rule: Escalate if validator fails.
+depends_on: [10]
 parallel_group: P12
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_textdocs_metrics.csv
+artifact_path: docs/etl/sprints/AI-OPS-18/evidence/citizen-validate.txt
 ```
 
 13. Agent: L1 Mechanical Executor
-- `depends_on`: `[2,4,12]`
+- `depends_on`: `[11]`
 - `parallel_group`: `P13`
 - `model_lane`: `FAST`
 - `points`: `5`
@@ -508,70 +506,33 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Run declared-stance pass1 (higher confidence threshold) for programas_partidos.
+- Local smoke test: citizen app renders and links are not broken.
 
 Concrete tasks:
-- Execute backfill-declared-stance with pass1 threshold.
-- Export pass1 metrics and reason breakdown.
+- Serve docs/gh-pages locally (python http.server).
+- Fetch the citizen page and the JSON via curl.
+- Record a short smoke report (what loaded, what failed).
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_stance_pass1.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass1_metrics.csv
+- docs/etl/sprints/AI-OPS-18/reports/smoke-test.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_stance_pass1.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass1_metrics.csv
-- rg -n "declared_with_signal|review_pending" docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass1_metrics.csv
+- test -f docs/etl/sprints/AI-OPS-18/reports/smoke-test.md
+- rg -n "PASS|FAIL|loaded" docs/etl/sprints/AI-OPS-18/reports/smoke-test.md
 
 Task packet:
-goal: Conservative declared-stance extraction baseline.
-inputs: task 2 query pack; task 12 text documents.
-output_contract: pass1 log + metrics.
-acceptance_query: metrics include signal and review counts for programas_partidos.
-escalation_rule: Escalate if command errors or metrics file is empty.
-depends_on: [2,4,12]
+goal: Basic runnable proof.
+inputs: docs/gh-pages/citizen/index.html; citizen.json.
+output_contract: smoke-test report.
+acceptance_query: report includes at least one rendered concern and one drill-down link.
+escalation_rule: Escalate if app fails to load JSON due to CORS/path issues.
+depends_on: [11]
 parallel_group: P13
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass1_metrics.csv
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/smoke-test.md
 ```
 
 14. Agent: L1 Mechanical Executor
-- `depends_on`: `[2,4,12]`
-- `parallel_group`: `P13`
-- `model_lane`: `FAST`
-- `points`: `5`
-```text
-Repository path/context:
-- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
-
-Objective:
-- Run declared-stance pass2 (broader threshold) for programas_partidos.
-
-Concrete tasks:
-- Execute backfill-declared-stance with pass2 threshold.
-- Export pass2 metrics and reason breakdown.
-
-Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_stance_pass2.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass2_metrics.csv
-
-Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_stance_pass2.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass2_metrics.csv
-- rg -n "declared_with_signal|review_pending" docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass2_metrics.csv
-
-Task packet:
-goal: Broader extraction candidate for deterministic selection.
-inputs: task 2 query pack; task 12 text documents.
-output_contract: pass2 log + metrics.
-acceptance_query: pass2 metrics generated successfully.
-escalation_rule: Escalate if pass2 fails hard gates or outputs invalid counts.
-depends_on: [2,4,12]
-parallel_group: P13
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_stance_pass2_metrics.csv
-```
-
-15. Agent: L1 Mechanical Executor
-- `depends_on`: `[13,14]`
+- `depends_on`: `[11]`
 - `parallel_group`: `P14`
 - `model_lane`: `FAST`
 - `points`: `8`
@@ -580,35 +541,35 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Select deterministic threshold winner and apply selected stance state.
+- Create a citizen walkthrough evidence packet (3 concerns).
 
 Concrete tasks:
-- Compare pass1/pass2 with deterministic tie-break policy.
-- Apply selected run if winner differs from last applied state.
-- Export selected metrics and decision note.
+- For 3 concerns (e.g. vivienda, empleo, sanidad):
+  - list the top 5 items shown
+  - list party stance summaries
+  - include one drill-down URL per item
+- Keep it purely mechanical from app outputs.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/reports/programas_threshold_selection.md
-- docs/etl/sprints/AI-OPS-18/exports/programas_stance_selected_metrics.csv
+- docs/etl/sprints/AI-OPS-18/reports/citizen-walkthrough.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/reports/programas_threshold_selection.md
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_stance_selected_metrics.csv
-- rg -n "selected_threshold|tie-break|decision" docs/etl/sprints/AI-OPS-18/reports/programas_threshold_selection.md
+- test -f docs/etl/sprints/AI-OPS-18/reports/citizen-walkthrough.md
+- rg -n "vivienda|empleo|sanidad" docs/etl/sprints/AI-OPS-18/reports/citizen-walkthrough.md
 
 Task packet:
-goal: Deterministic selection and application of extraction threshold.
-inputs: tasks 13-14 metrics.
-output_contract: selection report + selected metrics csv.
-acceptance_query: selected metrics meet non-regression and signal floor conditions.
-escalation_rule: Escalate if neither candidate satisfies hard gates.
-depends_on: [13,14]
+goal: Visible, auditable demonstration.
+inputs: citizen app outputs.
+output_contract: walkthrough report.
+acceptance_query: each concern section includes items + stance + drill-down links.
+escalation_rule: Escalate if app cannot surface any items for a common concern.
+depends_on: [11]
 parallel_group: P14
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/programas_threshold_selection.md
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/citizen-walkthrough.md
 ```
 
-16. Agent: L1 Mechanical Executor
-- `depends_on`: `[15]`
+15. Agent: L1 Mechanical Executor
+- `depends_on`: `[10,11]`
 - `parallel_group`: `P15`
 - `model_lane`: `FAST`
 - `points`: `8`
@@ -617,35 +578,36 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Snapshot review queue state after threshold selection.
+- Export citizen KPIs (counts + coverage) to keep us honest.
 
 Concrete tasks:
-- Export pending review rows for source programas_partidos.
-- Export pending-by-reason metrics and pending ratio.
-- Capture queue inspection log.
+- From citizen.json compute:
+  - number of topics
+  - number of high-stakes topics
+  - number of parties
+  - number of party_positions rows
+  - number of topics per concern tag
+- Save as CSV.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_review_queue.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_review_queue_snapshot.csv
+- docs/etl/sprints/AI-OPS-18/exports/citizen_kpis.csv
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_review_queue.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_review_queue_snapshot.csv
-- rg -n "review_reason|pending" docs/etl/sprints/AI-OPS-18/exports/programas_review_queue_snapshot.csv
+- test -f docs/etl/sprints/AI-OPS-18/exports/citizen_kpis.csv
 
 Task packet:
-goal: Queue observability for adjudication planning.
-inputs: selected stance state from task 15.
-output_contract: queue log + snapshot csv.
-acceptance_query: snapshot includes status/reason/confidence columns.
-escalation_rule: Escalate if queue query fails or snapshot is malformed.
-depends_on: [15]
+goal: Quantify what the citizen app actually covers.
+inputs: citizen.json.
+output_contract: kpi csv.
+acceptance_query: csv exists and has non-zero totals.
+escalation_rule: Escalate if coverage is near-zero.
+depends_on: [10,11]
 parallel_group: P15
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_review_queue_snapshot.csv
+artifact_path: docs/etl/sprints/AI-OPS-18/exports/citizen_kpis.csv
 ```
 
-17. Agent: L1 Mechanical Executor
-- `depends_on`: `[16]`
+16. Agent: L1 Mechanical Executor
+- `depends_on`: `[11]`
 - `parallel_group`: `P16`
 - `model_lane`: `FAST`
 - `points`: `5`
@@ -654,110 +616,102 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Prepare deterministic review batch A input for manual/adjudicated loop.
+- Check that drill-down links resolve to existing explorers.
 
 Concrete tasks:
-- Build `programas_review_batch_a_input.csv` from pending queue with fixed ordering and cap.
-- Include required fields for adjudication (`evidence_id`, `suggested_stance`, `suggested_confidence`, `excerpt`).
-- Document prep counts and filters.
+- Parse citizen.json for drill-down URLs.
+- Verify referenced target paths exist under docs/gh-pages.
+- Save a link-check report listing broken links (if any).
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/exports/programas_review_batch_a_input.csv
-- docs/etl/sprints/AI-OPS-18/reports/programas_review_batch_prep.md
+- docs/etl/sprints/AI-OPS-18/reports/link-check.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_review_batch_a_input.csv
-- test -f docs/etl/sprints/AI-OPS-18/reports/programas_review_batch_prep.md
-- rg -n "batch_size|filter|ordering" docs/etl/sprints/AI-OPS-18/reports/programas_review_batch_prep.md
+- test -f docs/etl/sprints/AI-OPS-18/reports/link-check.md
 
 Task packet:
-goal: Batch-prep artifact for human review throughput.
-inputs: task 16 queue snapshot.
-output_contract: batch input csv + prep report.
-acceptance_query: csv headers/ordering deterministic and documented.
-escalation_rule: Escalate if pending queue is empty but metrics indicate otherwise.
-depends_on: [16]
+goal: Guarantee evidence drill-down is real.
+inputs: citizen.json; docs/gh-pages tree.
+output_contract: link-check report.
+acceptance_query: broken_link_count=0 (or explicitly listed).
+escalation_rule: Escalate if drill-down links are systematically broken.
+depends_on: [11]
 parallel_group: P16
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_review_batch_a_input.csv
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/link-check.md
+```
+
+17. Agent: L1 Mechanical Executor
+- `depends_on`: `[11]`
+- `parallel_group`: `P17`
+- `model_lane`: `FAST`
+- `points`: `8`
+```text
+Repository path/context:
+- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+
+Objective:
+- Accessibility + mobile sanity checklist (manual, deterministic checklist output).
+
+Concrete tasks:
+- Run through the page at two viewports (mobile + desktop) and fill a checklist:
+  - no horizontal scroll
+  - keyboard focus visible
+  - headings structure exists
+  - contrast is acceptable for primary interactions
+- Save results with PASS/FAIL per item.
+
+Output contract:
+- docs/etl/sprints/AI-OPS-18/reports/a11y-mobile-checklist.md
+
+Acceptance checks:
+- test -f docs/etl/sprints/AI-OPS-18/reports/a11y-mobile-checklist.md
+
+Task packet:
+goal: Citizen usability guardrails.
+inputs: citizen page.
+output_contract: checklist report.
+acceptance_query: checklist includes viewport notes and PASS/FAIL.
+escalation_rule: Escalate if core flow is unusable on mobile.
+depends_on: [11]
+parallel_group: P17
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/a11y-mobile-checklist.md
 ```
 
 18. Agent: L1 Mechanical Executor
-- `depends_on`: `[17]`
-- `parallel_group`: `P17`
+- `depends_on`: `[11]`
+- `parallel_group`: `P18`
 - `model_lane`: `FAST`
-- `points`: `5`
+- `points`: `8`
 ```text
 Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Apply adjudicated review decisions for batch A (or execute deterministic no-op path).
+- Landing integration evidence: citizens can discover the app.
 
 Concrete tasks:
-- If adjudicated file exists, apply review decisions via CLI with recompute disabled in this step.
-- If adjudicated file is missing, run no-op path and capture explicit carryover evidence.
-- Export apply metrics.
+- Verify the GH pages landing links to the citizen app.
+- Save an excerpt of the landing HTML showing the link.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_review_batch_apply.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_review_batch_apply_metrics.csv
+- docs/etl/sprints/AI-OPS-18/evidence/landing-link.txt
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_review_batch_apply.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_review_batch_apply_metrics.csv
-- rg -n "applied|resolved|ignored|no-op" docs/etl/sprints/AI-OPS-18/evidence/programas_review_batch_apply.log
+- test -f docs/etl/sprints/AI-OPS-18/evidence/landing-link.txt
 
 Task packet:
-goal: Review decision apply stage.
-inputs: task 17 batch input; optional adjudicated decisions file.
-output_contract: apply log + metrics csv.
-acceptance_query: explicit applied/no-op status captured.
-escalation_rule: Escalate if decision import format is invalid.
-depends_on: [17]
-parallel_group: P17
-artifact_path: docs/etl/sprints/AI-OPS-18/evidence/programas_review_batch_apply.log
+goal: Ensure discoverability.
+inputs: docs/gh-pages/index.html.
+output_contract: landing link evidence.
+acceptance_query: file contains href to /citizen/.
+escalation_rule: Escalate if landing cannot be adjusted without breaking explorers.
+depends_on: [11]
+parallel_group: P18
+artifact_path: docs/etl/sprints/AI-OPS-18/evidence/landing-link.txt
 ```
 
 19. Agent: L1 Mechanical Executor
-- `depends_on`: `[15,18]`
-- `parallel_group`: `P18`
-- `model_lane`: `FAST`
-- `points`: `5`
-```text
-Repository path/context:
-- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
-
-Objective:
-- Recompute declared and combined positions after selection/review apply.
-
-Concrete tasks:
-- Run backfill-declared-positions for source programas_partidos.
-- Run backfill-combined-positions for aligned as_of_date.
-- Export postrun topic/coherence metrics.
-
-Output contract:
-- docs/etl/sprints/AI-OPS-18/evidence/programas_positions_recompute.log
-- docs/etl/sprints/AI-OPS-18/exports/programas_topic_positions_post.csv
-- docs/etl/sprints/AI-OPS-18/exports/programas_coherence_post.csv
-
-Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/evidence/programas_positions_recompute.log
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_topic_positions_post.csv
-- test -f docs/etl/sprints/AI-OPS-18/exports/programas_coherence_post.csv
-
-Task packet:
-goal: Position recompute and coherence visibility.
-inputs: selected stance state; review apply state.
-output_contract: recompute log + postrun metrics csvs.
-acceptance_query: postrun csvs include latest as_of_date and non-null counts.
-escalation_rule: Escalate if recompute fails or produces empty snapshot unexpectedly.
-depends_on: [15,18]
-parallel_group: P18
-artifact_path: docs/etl/sprints/AI-OPS-18/exports/programas_topic_positions_post.csv
-```
-
-20. Agent: L1 Mechanical Executor
-- `depends_on`: `[8,19]`
+- `depends_on`: `[11,12,15,16]`
 - `parallel_group`: `P19`
 - `model_lane`: `FAST`
 - `points`: `8`
@@ -766,74 +720,68 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Run FAST-wave final gates and parity exports.
+- Run strict tracker gate + status parity after UI export/build.
 
 Concrete tasks:
-- Execute strict tracker gate and capture exit code.
-- Export status snapshot and parity comparison against published status.
-- Build FAST-wave gate/parity report and summarize deltas vs baseline.
+- Run strict gate (`just etl-tracker-gate` or equivalent) and record exit.
+- Export status snapshot and parity check against published status JSON.
 
 Output contract:
 - docs/etl/sprints/AI-OPS-18/evidence/tracker-gate-postrun.log
 - docs/etl/sprints/AI-OPS-18/evidence/tracker-gate-postrun.exit
 - docs/etl/sprints/AI-OPS-18/evidence/status-postrun.json
 - docs/etl/sprints/AI-OPS-18/evidence/status-parity-postrun.txt
-- docs/etl/sprints/AI-OPS-18/reports/final-gate-parity.md
 
 Acceptance checks:
 - test -f docs/etl/sprints/AI-OPS-18/evidence/tracker-gate-postrun.exit
-- test -f docs/etl/sprints/AI-OPS-18/evidence/status-postrun.json
-- test -f docs/etl/sprints/AI-OPS-18/evidence/status-parity-postrun.txt
-- rg -n "overall_match=true|mismatches=0|waivers_expired=0|done_zero_real=0" docs/etl/sprints/AI-OPS-18/reports/final-gate-parity.md
+- rg -n "overall_match=true" docs/etl/sprints/AI-OPS-18/evidence/status-parity-postrun.txt
 
 Task packet:
-goal: FAST wave final gate + parity evidence.
-inputs: baseline pack from task 8; postrun metrics from task 19.
-output_contract: strict gate artifacts + parity report.
-acceptance_query: gate exit 0 and overall_match true.
-escalation_rule: Escalate immediately on strict gate or parity failure.
-depends_on: [8,19]
+goal: Prove we did not regress core ops truth.
+inputs: DB; tracker; mismatch waivers.
+output_contract: strict gate + parity artifacts.
+acceptance_query: strict gate exit 0 and parity overall_match true.
+escalation_rule: Escalate immediately on mismatch or parity failure.
+depends_on: [11,12,15,16]
 parallel_group: P19
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/final-gate-parity.md
+artifact_path: docs/etl/sprints/AI-OPS-18/evidence/tracker-gate-postrun.exit
 ```
 
-21. Agent: L2 Specialist Builder
-- `depends_on`: `[20]`
+20. Agent: L1 Mechanical Executor
+- `depends_on`: `[11]`
 - `parallel_group`: `P20`
-- `model_lane`: `HI`
-- `points`: `5`
+- `model_lane`: `FAST`
+- `points`: `8`
 ```text
 Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Draft reconciliation decision for tracker line 74 using postrun evidence.
+- Publish the updated GH Pages site (citizen app included) using the canonical publish workflow.
 
 Concrete tasks:
-- Compare baseline vs postrun metrics for programas lane.
-- Decide whether line 74 qualifies for PARTIAL or DONE according to DoD.
-- Produce explicit reconciliation draft with rationale.
+- Run `just explorer-gh-pages-publish`.
+- Capture the publish output and the resulting URL/branch state.
 
 Output contract:
-- docs/etl/sprints/AI-OPS-18/reports/tracker-row74-reconciliation-draft.md
+- docs/etl/sprints/AI-OPS-18/evidence/gh-pages-publish.log
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/reports/tracker-row74-reconciliation-draft.md
-- rg -n "line 74|TODO|PARTIAL|DONE|evidence" docs/etl/sprints/AI-OPS-18/reports/tracker-row74-reconciliation-draft.md
+- test -f docs/etl/sprints/AI-OPS-18/evidence/gh-pages-publish.log
 
 Task packet:
-goal: Evidence-backed status decision draft for tracker line 74.
-inputs: tasks 8 and 20 artifacts; tracker DoD rules.
-output_contract: reconciliation draft with decision criteria table.
-acceptance_query: draft maps each DoD criterion to evidence file.
-escalation_rule: Escalate if evidence is insufficient to justify status change.
-depends_on: [20]
+goal: Make the citizen app visible on GH Pages.
+inputs: explorer-gh-pages-publish.
+output_contract: publish log.
+acceptance_query: log shows push to gh-pages branch succeeded.
+escalation_rule: Escalate if publish would overwrite unrelated gh-pages content.
+depends_on: [11]
 parallel_group: P20
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/tracker-row74-reconciliation-draft.md
+artifact_path: docs/etl/sprints/AI-OPS-18/evidence/gh-pages-publish.log
 ```
 
-22. Agent: L2 Specialist Builder
-- `depends_on`: `[20,21]`
+21. Agent: L2 Specialist Builder
+- `depends_on`: `[13,14,15,16,17,18]`
 - `parallel_group`: `P21`
 - `model_lane`: `HI`
 - `points`: `5`
@@ -842,73 +790,33 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Apply tracker/doc updates and capture exact diff rationale.
+- Fix any issues found in FAST wave evidence (polish pass), without expanding scope.
 
 Concrete tasks:
-- Update docs/etl/e2e-scrape-load-tracker.md line 74 status/notes based on approved reconciliation.
-- Update sprint index pointer if needed for active sprint continuity.
-- Record applied changes and linked evidence.
+- Apply minimal UI/UX fixes for the biggest citizen friction points.
+- Adjust export/validator only if needed to meet gates.
 
 Output contract:
-- docs/etl/e2e-scrape-load-tracker.md
-- docs/etl/sprints/AI-OPS-18/reports/tracker-row74-apply.md
+- ui/citizen/index.html (updated if needed)
+- docs/etl/sprints/AI-OPS-18/reports/polish-notes.md
 
 Acceptance checks:
-- rg -n "Posiciones declaradas \(programas\)" docs/etl/e2e-scrape-load-tracker.md
-- test -f docs/etl/sprints/AI-OPS-18/reports/tracker-row74-apply.md
-- rg -n "before|after|evidence" docs/etl/sprints/AI-OPS-18/reports/tracker-row74-apply.md
+- test -f docs/etl/sprints/AI-OPS-18/reports/polish-notes.md
 
 Task packet:
-goal: Apply approved tracker/documentation reconciliation.
-inputs: task 21 decision draft; final evidence set.
-output_contract: updated tracker row + apply report.
-acceptance_query: tracker status and notes match reconciliation decision.
-escalation_rule: Escalate if proposed update overstates evidence quality.
-depends_on: [20,21]
+goal: Close UX gaps surfaced by deterministic checks.
+inputs: FAST wave reports.
+output_contract: small fixes + polish note.
+acceptance_query: fixes map directly to reported failures.
+escalation_rule: Escalate if meeting gates requires significant redesign.
+depends_on: [13,14,15,16,17,18]
 parallel_group: P21
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/tracker-row74-apply.md
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/polish-notes.md
 ```
 
-23. Agent: L2 Specialist Builder
-- `depends_on`: `[20,22]`
+22. Agent: L2 Specialist Builder
+- `depends_on`: `[21]`
 - `parallel_group`: `P22`
-- `model_lane`: `HI`
-- `points`: `5`
-```text
-Repository path/context:
-- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
-
-Objective:
-- Assemble final gate adjudication packet and closeout draft.
-
-Concrete tasks:
-- Compile gate-by-gate verdict matrix (G1-G6) with evidence links.
-- Draft closeout with objective delta, carryover blockers, and next-sprint trigger options.
-- Ensure anti-loop blocker policy outcome is explicit.
-
-Output contract:
-- docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
-- docs/etl/sprints/AI-OPS-18/closeout.md
-
-Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
-- test -f docs/etl/sprints/AI-OPS-18/closeout.md
-- rg -n "Sprint Verdict|G1|G6|next sprint trigger|NO_ESCALATION" docs/etl/sprints/AI-OPS-18/closeout.md
-
-Task packet:
-goal: Prepare final decision packet for L3 signoff.
-inputs: tasks 20-22 artifacts; kickoff gate contract.
-output_contract: adjudication report + closeout draft.
-acceptance_query: every gate has PASS/FAIL and source evidence.
-escalation_rule: Escalate if any gate status cannot be justified with artifacts.
-depends_on: [20,22]
-parallel_group: P22
-artifact_path: docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
-```
-
-24. Agent: L3 Orchestrator
-- `depends_on`: `[23]`
-- `parallel_group`: `P23`
 - `model_lane`: `HI`
 - `points`: `3`
 ```text
@@ -916,28 +824,97 @@ Repository path/context:
 - /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
 
 Objective:
-- Issue final PASS/FAIL verdict and lock AI-OPS-18 carryover policy.
+- Add a citizen-facing "How this works" section (short, honest, link-heavy).
 
 Concrete tasks:
-- Validate gate adjudication and tracker reconciliation integrity.
-- Finalize closeout verdict and escalation status.
-- Publish next sprint trigger with explicit objective ordering.
+- Explain:
+  - what data is used (votes + interventions)
+  - what is computed (positions from evidence)
+  - what we do NOT claim
+- Link to explorers for audit.
+
+Output contract:
+- docs/etl/sprints/AI-OPS-18/reports/how-this-works.md
+
+Acceptance checks:
+- test -f docs/etl/sprints/AI-OPS-18/reports/how-this-works.md
+
+Task packet:
+goal: Trust-building without overclaiming.
+inputs: UI and export design.
+output_contract: short methodology note.
+acceptance_query: note includes limitations and audit links.
+escalation_rule: Escalate if copy implies causal claims.
+depends_on: [21]
+parallel_group: P22
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/how-this-works.md
+```
+
+23. Agent: L2 Specialist Builder
+- `depends_on`: `[19,20,22]`
+- `parallel_group`: `P23`
+- `model_lane`: `HI`
+- `points`: `2`
+```text
+Repository path/context:
+- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+
+Objective:
+- Assemble gate adjudication packet + closeout draft.
+
+Concrete tasks:
+- Fill a gate-by-gate table for G1-G6 with evidence links.
+- Draft closeout with objective delta and next sprint trigger.
+
+Output contract:
+- docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
+- docs/etl/sprints/AI-OPS-18/closeout.md
+
+Acceptance checks:
+- test -f docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
+- rg -n "G1|G6" docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
+
+Task packet:
+goal: Decision packet for L3.
+inputs: FAST artifacts + scope-lock.
+output_contract: adjudication report + closeout draft.
+acceptance_query: every gate references an artifact path.
+escalation_rule: Escalate if any gate cannot be justified.
+depends_on: [19,20,22]
+parallel_group: P23
+artifact_path: docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
+```
+
+24. Agent: L3 Orchestrator
+- `depends_on`: `[23]`
+- `parallel_group`: `P24`
+- `model_lane`: `HI`
+- `points`: `3`
+```text
+Repository path/context:
+- /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+
+Objective:
+- Final PASS/FAIL verdict.
+
+Concrete tasks:
+- Validate G1-G6 adjudication.
+- Finalize closeout verdict and next-sprint trigger.
 
 Output contract:
 - docs/etl/sprints/AI-OPS-18/closeout.md
 
 Acceptance checks:
-- test -f docs/etl/sprints/AI-OPS-18/closeout.md
-- rg -n "Sprint Verdict|Gate Evaluation|next sprint trigger|NO_ESCALATION" docs/etl/sprints/AI-OPS-18/closeout.md
+- rg -n "Sprint Verdict|PASS|FAIL" docs/etl/sprints/AI-OPS-18/closeout.md
 
 Task packet:
-goal: Final sprint arbitration and closure.
-inputs: task 23 closeout draft + gate adjudication.
-output_contract: final signed closeout verdict.
-acceptance_query: verdict and triggers are explicit and evidence-backed.
-escalation_rule: Escalate if verdict cannot be supported by artifacts.
+goal: Final arbitration.
+inputs: gate-adjudication.
+output_contract: final closeout verdict.
+acceptance_query: verdict is evidence-backed and scope-consistent.
+escalation_rule: Escalate if verdict cannot be supported.
 depends_on: [23]
-parallel_group: P23
+parallel_group: P24
 artifact_path: docs/etl/sprints/AI-OPS-18/closeout.md
 ```
 
@@ -945,42 +922,45 @@ artifact_path: docs/etl/sprints/AI-OPS-18/closeout.md
 
 ```mermaid
 flowchart TD
-  T1["1 L3 Scope lock"] --> T2["2 L2 Query pack"]
-  T1 --> T3["3 L2 Program source contract"]
-  T3 --> T4["4 L2 Implement programas pipeline"]
-  T4 --> T5["5 L2 Tests"]
-  T2 --> T6["6 L2 FAST checklist"]
+  T1["1 Scope lock"] --> T2["2 Data contract"]
+  T2 --> T3["3 Export script"]
+  T2 --> T4["4 Concern taxonomy"]
+  T4 --> T5["5 Citizen UI"]
+  T3 --> T6["6 GH Pages integration"]
   T5 --> T6
-  T2 --> T7["7 L3 Setup signoff"]
-  T6 --> T7
+  T3 --> T7["7 Validator"]
+  T1 --> T8["8 Setup signoff"]
+  T2 --> T8
+  T3 --> T8
+  T4 --> T8
+  T5 --> T8
+  T6 --> T8
+  T7 --> T8
 
-  T7 --> T8["8 L1 Baseline capture"]
-  T7 --> T9["9 L1 Manifest prep"]
-  T9 --> T10["10 L1 Manifest validation"]
-  T4 --> T11["11 L1 Programas ingest"]
-  T10 --> T11
-  T11 --> T12["12 L1 Text docs backfill"]
-  T12 --> T13["13 L1 Stance pass1"]
-  T12 --> T14["14 L1 Stance pass2"]
-  T13 --> T15["15 L1 Threshold select/apply"]
-  T14 --> T15
-  T15 --> T16["16 L1 Review queue snapshot"]
-  T16 --> T17["17 L1 Review batch prep"]
-  T17 --> T18["18 L1 Review apply/no-op"]
-  T15 --> T19["19 L1 Recompute positions"]
-  T18 --> T19
-  T8 --> T20["20 L1 Final gate/parity"]
-  T19 --> T20
+  T8 --> T9["9 Baseline GH pages"]
+  T8 --> T10["10 Export citizen.json"]
+  T8 --> T11["11 Build GH pages"]
+  T10 --> T12["12 Validate snapshot"]
+  T11 --> T13["13 Smoke test"]
+  T11 --> T14["14 Walkthrough"]
+  T10 --> T15["15 Citizen KPIs"]
+  T11 --> T16["16 Link check"]
+  T11 --> T17["17 A11y/mobile"]
+  T11 --> T18["18 Landing evidence"]
+  T11 --> T19["19 Strict gate/parity"]
+  T11 --> T20["20 Publish"]
 
-  T20 --> T21["21 L2 Reconciliation draft"]
-  T21 --> T22["22 L2 Apply tracker/docs"]
-  T20 --> T22
-  T22 --> T23["23 L2 Gate adjudication + closeout draft"]
-  T23 --> T24["24 L3 Final verdict"]
+  T13 --> T21["21 Polish"]
+  T14 --> T21
+  T17 --> T21
+  T19 --> T23["23 Gate adjudication"]
+  T20 --> T23
+  T22["22 How this works"] --> T23
+  T21 --> T22
+  T23 --> T24["24 Final verdict"]
 ```
 
 ## Runnable Queue Order
-- `HI`: `1,2,3,4,5,6,7`
-- `FAST`: `8,9,10,11,12,13,14,15,16,17,18,19,20`
+- `HI`: `1,2,3,4,5,6,7,8`
+- `FAST`: `9,10,11,12,13,14,15,16,17,18,19,20`
 - `HI`: `21,22,23,24`
-

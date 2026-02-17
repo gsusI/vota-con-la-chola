@@ -82,6 +82,23 @@ def main() -> int:
     for k in ("topic_set_id", "as_of_date", "computed_method", "computed_version", "generated_at"):
         require_key(meta, k, "meta")
 
+    # Optional v2 extension: list of methods available for the exported scope/as_of_date.
+    methods_available = meta.get("methods_available")
+    if methods_available is not None:
+        require_type(methods_available, list, "meta.methods_available")
+        meths: list[str] = []
+        for i, m in enumerate(methods_available):
+            require_type(m, str, f"meta.methods_available[{i}]")
+            token = str(m).strip()
+            if not token:
+                die("meta.methods_available contains empty string")
+            meths.append(token)
+        # Determinism guardrail: sorted unique.
+        if meths != sorted(set(meths)):
+            die("meta.methods_available must be sorted unique")
+        if str(meta.get("computed_method") or "") not in set(meths):
+            die("meta.computed_method must be included in meta.methods_available")
+
     topic_ids = []
     for i, t in enumerate(topics):
         ctx = f"topics[{i}]"
@@ -93,6 +110,20 @@ def main() -> int:
         require_type(t["stakes_rank"], int, f"{ctx}.stakes_rank")
         require_type(t["is_high_stakes"], bool, f"{ctx}.is_high_stakes")
         require_type(t["links"], dict, f"{ctx}.links")
+
+        # Optional v2 extension: server-side concern tags.
+        if "concern_ids" in t:
+            require_type(t["concern_ids"], list, f"{ctx}.concern_ids")
+            cids: list[str] = []
+            for j, cid in enumerate(t["concern_ids"]):
+                require_type(cid, str, f"{ctx}.concern_ids[{j}]")
+                token = str(cid).strip()
+                if not token:
+                    die(f"Empty concern_id at {ctx}.concern_ids[{j}]")
+                cids.append(token)
+            if cids != sorted(set(cids)):
+                die(f"{ctx}.concern_ids must be sorted unique")
+
         topic_ids.append(t["topic_id"])
 
     if len(set(topic_ids)) != len(topic_ids):

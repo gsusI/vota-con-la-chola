@@ -4221,7 +4221,8 @@
         app.searchTerm = p.get("search") || "";
         app.source = p.get("source") || "all";
         app.territoryFilter = p.get("territory") || "";
-        app.selectedPartyId = p.get("team") || null;
+        // Backward-compatible: accept `party_id` as an alias for `team` (party focus links from citizen app).
+        app.selectedPartyId = p.get("team") || p.get("party_id") || null;
         app.aggregateMode = p.get("agg") === "1";
         app.includeInactive = p.get("inc") === "1";
 

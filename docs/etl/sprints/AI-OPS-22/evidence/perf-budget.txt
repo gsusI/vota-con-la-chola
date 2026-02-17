@@ -1,0 +1,9 @@
+# AI-OPS-22 perf budget (static downloads)
+citizen.json: bytes=949773
+citizen_votes.json: bytes=944087
+citizen_declared.json: bytes=934514
+---
+combined+votes+declared total bytes=2828374
+---
+Alignment view policy: no new artifacts; uses the currently loaded dataset only.
+Budget: each citizen*.json <= 5MB; total remains mobile-friendly.

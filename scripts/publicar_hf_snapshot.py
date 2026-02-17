@@ -371,6 +371,150 @@ def sqlite_declared_kind(type_name: str | None) -> str:
     return "string"
 
 
+def is_text_like_sqlite(type_name: str | None) -> bool:
+    text = (type_name or "").upper()
+    if any(token in text for token in ("CHAR", "CLOB", "TEXT", "JSON")):
+        return True
+    return text == ""
+
+
+def build_explorer_schema_payload(db_path: Path) -> dict[str, Any]:
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    try:
+        table_rows = conn.execute(
+            """
+            SELECT name, sql
+            FROM sqlite_master
+            WHERE type = 'table'
+              AND name NOT LIKE 'sqlite_%'
+            ORDER BY name
+            """
+        ).fetchall()
+
+        schema_by_table: dict[str, dict[str, Any]] = {}
+        for tr in table_rows:
+            table_name = str(tr["name"])
+            table_q = quote_ident(table_name)
+
+            columns_raw = conn.execute(f"PRAGMA table_info({table_q})").fetchall()
+            columns: list[dict[str, Any]] = []
+            for c in columns_raw:
+                columns.append(
+                    {
+                        "name": str(c["name"]),
+                        "type": str(c["type"] or ""),
+                        "notnull": bool(c["notnull"]),
+                        "default": c["dflt_value"],
+                        "pk_order": int(c["pk"] or 0),
+                    }
+                )
+
+            pk_columns = [
+                col["name"]
+                for col in sorted(columns, key=lambda item: int(item["pk_order"]))
+                if int(col["pk_order"]) > 0
+            ]
+
+            try:
+                row_count = int(conn.execute(f"SELECT COUNT(*) AS n FROM {table_q}").fetchone()["n"])
+            except sqlite3.Error:
+                row_count = None
+
+            fk_rows = conn.execute(f"PRAGMA foreign_key_list({table_q})").fetchall()
+            fk_groups: dict[int, dict[str, Any]] = {}
+            for fk in fk_rows:
+                group_id = int(fk["id"])
+                group = fk_groups.setdefault(
+                    group_id,
+                    {
+                        "id": group_id,
+                        "to_table": str(fk["table"]),
+                        "from_columns": [],
+                        "to_columns": [],
+                        "on_update": str(fk["on_update"]),
+                        "on_delete": str(fk["on_delete"]),
+                        "match": str(fk["match"]),
+                    },
+                )
+                group["from_columns"].append(str(fk["from"]))
+                group["to_columns"].append(str(fk["to"]))
+
+            foreign_keys_out = [fk_groups[key] for key in sorted(fk_groups)]
+            search_columns = [col["name"] for col in columns if is_text_like_sqlite(str(col["type"]))]
+            if not search_columns:
+                search_columns = [col["name"] for col in columns]
+
+            create_sql = str(tr["sql"] or "")
+            schema_by_table[table_name] = {
+                "name": table_name,
+                "row_count": row_count,
+                "column_count": len(columns),
+                "columns": [
+                    {
+                        "name": col["name"],
+                        "type": col["type"],
+                        "notnull": col["notnull"],
+                        "pk_order": col["pk_order"],
+                    }
+                    for col in columns
+                ],
+                "primary_key": pk_columns,
+                "without_rowid": "WITHOUT ROWID" in create_sql.upper(),
+                "search_columns": search_columns[:8],
+                "foreign_keys_out": [
+                    {
+                        "to_table": fk["to_table"],
+                        "from_columns": fk["from_columns"],
+                        "to_columns": fk["to_columns"],
+                    }
+                    for fk in foreign_keys_out
+                ],
+                "foreign_keys_in": [],
+            }
+
+        for source_table, meta in schema_by_table.items():
+            for fk in meta["foreign_keys_out"]:
+                target_table = str(fk["to_table"])
+                target = schema_by_table.get(target_table)
+                if not target:
+                    continue
+                target["foreign_keys_in"].append(
+                    {
+                        "from_table": source_table,
+                        "from_columns": list(fk["from_columns"]),
+                        "to_columns": list(fk["to_columns"]),
+                    }
+                )
+
+        tables = list(schema_by_table.values())
+        for table_meta in tables:
+            table_meta["foreign_keys_in"] = sorted(
+                table_meta["foreign_keys_in"],
+                key=lambda fk: (str(fk["from_table"]), str(fk["to_columns"])),
+            )
+        tables.sort(key=lambda t: ((t["row_count"] is None), -(int(t["row_count"] or 0)), str(t["name"])))
+
+        return {
+            "meta": {
+                "db_path": str(db_path),
+                "table_count": len(tables),
+                "source": "sqlite_schema_snapshot",
+            },
+            "tables": tables,
+        }
+    finally:
+        conn.close()
+
+
+def export_explorer_schema_snapshot(db_path: Path, snapshot_dir: Path) -> Path:
+    payload = build_explorer_schema_payload(db_path)
+    rel_path = Path("explorer_schema.json")
+    out_path = snapshot_dir / rel_path
+    out_path.write_text(json.dumps(payload, ensure_ascii=True, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    return rel_path
+
+
 def coerce_parquet_value(value: Any, kind: str) -> Any:
     if value is None:
         return None
@@ -651,6 +795,7 @@ def build_dataset_readme(
             "- `published/*`: artefactos canónicos JSON/JSON.GZ.",
             "- `ingestion_runs.csv`: historial de corridas de ingesta.",
             "- `source_records_by_source.csv`: conteos por fuente para la fecha del snapshot.",
+            "- `explorer_schema.json`: contrato de esquema (tablas/PK/FK) para exploración en navegador.",
             "- `manifest.json` y `checksums.sha256`: trazabilidad e integridad.",
             "",
             "Ruta del último snapshot publicado en este commit:",
@@ -754,6 +899,9 @@ def main() -> int:
             db_path, snapshot_date, source_records_csv
         )
         tracked_files.append(Path("source_records_by_source.csv"))
+
+        explorer_schema_rel = export_explorer_schema_snapshot(db_path, snapshot_dir)
+        tracked_files.append(explorer_schema_rel)
 
         published_dst_dir = snapshot_dir / "published"
         published_dst_dir.mkdir(parents=True, exist_ok=True)

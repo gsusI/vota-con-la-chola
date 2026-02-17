@@ -1,0 +1,7 @@
+case_id,url,expected_prefs_source,expected_no_prefs_in_query,notes,verified_by
+U1,?view=alignment,localStorage,yes,"No fragment; prefs load from localStorage (or empty).",code+docs
+U2,?view=alignment#prefs=v1:1=s,hash,yes,"Hash has prefs; app should load hash prefs and store locally.",code+docs
+U3,?view=alignment&method=votes#prefs=v1:1=s,hash,yes,"Method param is non-sensitive; prefs remain in fragment.",code+docs
+U4,?view=alignment&party_id=1#prefs=v1:1=s,hash,yes,"Party focus is shareable in query; prefs remain in fragment.",code+docs
+U5,?view=detail&topic_id=1#prefs=v1:1=s,hash,yes,"Prefs hash should still load; view can be changed without leaking prefs to query.",code+docs
+

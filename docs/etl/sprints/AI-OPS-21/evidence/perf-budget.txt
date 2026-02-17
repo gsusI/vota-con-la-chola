@@ -1,0 +1,10 @@
+# AI-OPS-21 perf budget (static downloads)
+citizen.json: bytes=949773
+citizen_votes.json: bytes=944087
+citizen_declared.json: bytes=934514
+---
+votes+declared total bytes=1878601
+combined+votes+declared total bytes=2828374
+---
+Coherence view policy: lazy-load votes+declared (+combined if base method is not combined).
+Target: <= ~3MB total JSON download for coherence view entry path.

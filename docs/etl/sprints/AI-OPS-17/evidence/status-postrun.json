@@ -1,22 +1,22 @@
 {
   "db_path": "etl/data/staging/politicos-es.db",
-  "generated_at": "2026-02-17T15:01:12+00:00",
+  "generated_at": "2026-02-17T17:45:58+00:00",
   "summary": {
-    "desired": 42,
-    "present": 42,
+    "desired": 43,
+    "present": 43,
     "missing": 0,
     "extra": 0,
     "not_run": 2,
     "running": 0,
-    "ok": 36,
+    "ok": 37,
     "partial": 0,
     "error": 0,
     "degraded": 4,
     "unknown": 0,
     "not_in_catalog": 0,
     "desired_progress": {
-      "loaded": 84972,
-      "target": 56497,
+      "loaded": 84975,
+      "target": 56498,
       "percent": 100
     },
     "states": [
@@ -26,69 +26,72 @@
     ],
     "sql": {
       "todo": 2,
-      "partial": 4,
+      "partial": 5,
       "done": 36,
       "foreign_key_violations": 0
     },
     "tracker": {
       "items_total": 47,
       "unmapped": 14,
-      "todo": 9,
-      "partial": 4,
+      "todo": 8,
+      "partial": 5,
       "done": 34,
       "mismatch": 0,
       "waived_mismatch": 0,
       "done_zero_real": 0,
-      "untracked_sources": 7,
+      "untracked_sources": 8,
       "waivers_active": 0,
       "waivers_expired": 0,
       "waivers_error": ""
     }
   },
   "ops": {
-    "ingestion_runs_total": 266,
-    "ingestion_runs_ok": 171,
+    "ingestion_runs_total": 272,
+    "ingestion_runs_ok": 177,
     "ingestion_runs_error": 88,
     "ingestion_runs_retry": 95,
-    "ingestion_runs_ok_pct": 0.6428571428571429,
-    "avg_run_seconds": 144.12483548795853,
-    "last_run_seconds": 1.9999891519546509,
-    "retry_rate": 0.35714285714285715,
+    "ingestion_runs_ok_pct": 0.6507352941176471,
+    "avg_run_seconds": 140.86163166558967,
+    "last_run_seconds": 0.0,
+    "retry_rate": 0.3492647058823529,
     "published_recommendation_artifacts": 0,
     "autonomico_sources_ok": 17,
     "europeo_sources_ok": 1
   },
   "analytics": {
     "topics": {
-      "topics_total": 389,
-      "topic_sets_total": 2,
-      "topic_sets_active": 2,
-      "topic_set_topics_total": 224,
-      "high_stakes_total": 84
+      "topics_total": 401,
+      "topic_sets_total": 5,
+      "topic_sets_active": 5,
+      "topic_set_topics_total": 260,
+      "high_stakes_total": 120
     },
     "evidence": {
-      "topic_evidence_total": 431650,
-      "topic_evidence_with_topic": 431650,
+      "topic_evidence_total": 431661,
+      "topic_evidence_with_topic": 431661,
       "topic_evidence_with_topic_pct": 1.0,
-      "topic_evidence_with_date": 431650,
+      "topic_evidence_with_date": 431661,
       "topic_evidence_with_date_pct": 1.0,
-      "topic_evidence_with_source_url": 431650,
+      "topic_evidence_with_source_url": 431661,
       "topic_evidence_with_source_url_pct": 1.0,
-      "topic_evidence_declared_total": 614,
+      "topic_evidence_declared_total": 625,
       "topic_evidence_revealed_total": 431036,
-      "topic_evidence_declared_with_date": 614,
+      "topic_evidence_declared_with_date": 625,
       "topic_evidence_declared_with_date_pct": 1.0,
-      "topic_evidence_declared_with_signal": 204,
-      "topic_evidence_declared_with_signal_pct": 0.3322475570032573,
-      "topic_evidence_reviews_total": 531,
-      "topic_evidence_reviews_pending": 0,
+      "topic_evidence_declared_with_signal": 209,
+      "topic_evidence_declared_with_signal_pct": 0.3344,
+      "topic_evidence_reviews_total": 537,
+      "topic_evidence_reviews_pending": 6,
       "topic_evidence_reviews_resolved": 57,
       "topic_evidence_reviews_ignored": 474,
-      "topic_evidence_reviews_pending_pct": 0.0,
-      "topic_evidence_reviews_pending_by_reason": {},
+      "topic_evidence_reviews_pending_pct": 0.0096,
+      "topic_evidence_reviews_pending_by_reason": {
+        "no_signal": 6
+      },
       "topic_evidence_by_type": {
         "revealed:vote": 431036,
-        "declared:intervention": 614
+        "declared:intervention": 614,
+        "declared:programa": 11
       },
       "topic_method_top": [
         {
@@ -114,6 +117,10 @@
         {
           "key": "initiative:expediente",
           "count": 614
+        },
+        {
+          "key": "programa:concern:v1",
+          "count": 11
         }
       ],
       "stance_method_top": [
@@ -127,27 +134,31 @@
         },
         {
           "key": "declared:regex_v3",
-          "count": 203
+          "count": 208
+        },
+        {
+          "key": "programa_metadata",
+          "count": 6
         },
         {
           "key": "declared:manual_review_v1",
           "count": 1
         }
       ],
-      "text_documents_total": 614,
-      "text_documents_with_excerpt": 614,
+      "text_documents_total": 617,
+      "text_documents_with_excerpt": 617,
       "text_documents_with_excerpt_pct": 1.0,
-      "declared_evidence_with_text_excerpt": 614,
+      "declared_evidence_with_text_excerpt": 625,
       "declared_evidence_with_text_excerpt_pct": 1.0
     },
     "positions": {
-      "topic_positions_total": 274430,
-      "topic_positions_with_evidence": 274430,
+      "topic_positions_total": 274435,
+      "topic_positions_with_evidence": 274435,
       "topic_positions_with_evidence_pct": 1.0,
       "topic_positions_by_method": {
         "combined": 137060,
         "votes": 137056,
-        "declared": 314
+        "declared": 319
       }
     },
     "coherence": {
@@ -808,8 +819,8 @@
         "tipo_dato": "Posiciones declaradas (programas)",
         "dominio": "Editorial",
         "fuentes_objetivo": "Webs/programas de partidos",
-        "estado": "TODO",
-        "bloque": "Falta pipeline semiestructurado + revision humana",
+        "estado": "PARTIAL",
+        "bloque": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
         "source_ids": [],
         "scope": "territorial",
         "scope_inferred": true
@@ -950,8 +961,8 @@
         "tipo_dato": "Posiciones declaradas (programas)",
         "dominio": "Editorial",
         "fuentes_objetivo": "Webs/programas de partidos",
-        "estado": "TODO",
-        "bloque": "Falta pipeline semiestructurado + revision humana",
+        "estado": "PARTIAL",
+        "bloque": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
         "source_ids": [],
         "scope": "territorial",
         "scope_inferred": true
@@ -1425,13 +1436,13 @@
         "points_hum": 5,
         "progress": {
           "done": 2,
-          "partial": 0,
-          "todo": 2,
+          "partial": 1,
+          "todo": 1,
           "untracked": 3,
           "tracked_total": 4,
           "overall_total": 7,
-          "tracked_percent": 50,
-          "overall_percent": 29
+          "tracked_percent": 62,
+          "overall_percent": 36
         },
         "items": [
           {
@@ -1461,10 +1472,10 @@
             "kind": "tracker",
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
+            "status": "PARTIAL",
             "dominio": "Editorial",
             "scope": "territorial",
-            "bloque": "Falta pipeline semiestructurado + revision humana",
+            "bloque": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
             "source_ids": []
           },
           {
@@ -1501,14 +1512,14 @@
         ],
         "next": [
           {
-            "id": "convocatorias_y_estado_electoral",
-            "label": "Convocatorias y estado electoral",
-            "status": "TODO",
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "PARTIAL",
             "path": null
           },
           {
-            "id": "posiciones_declaradas_programas",
-            "label": "Posiciones declaradas (programas)",
+            "id": "convocatorias_y_estado_electoral",
+            "label": "Convocatorias y estado electoral",
             "status": "TODO",
             "path": null
           },
@@ -1761,13 +1772,13 @@
     ],
     "summary": {
       "done": 21,
-      "partial": 2,
-      "todo": 9,
+      "partial": 3,
+      "todo": 8,
       "untracked": 18,
       "tracked_total": 32,
       "overall_total": 50,
-      "tracked_percent": 69,
-      "overall_percent": 44
+      "tracked_percent": 70,
+      "overall_percent": 45
     }
   },
   "roadmap_technical": {
@@ -2096,10 +2107,10 @@
             "label": "Evidencia declarada extraida",
             "status": "DONE",
             "metric": "topic_evidence_declared_total",
-            "actual": 614,
+            "actual": 625,
             "target": 1,
             "format": "int",
-            "actual_display": "614",
+            "actual_display": "625",
             "target_display": "1"
           },
           {
@@ -2108,7 +2119,7 @@
             "label": "Evidencia declarada con stance util",
             "status": "PARTIAL",
             "metric": "topic_evidence_declared_with_signal_pct",
-            "actual": 0.3322475570032573,
+            "actual": 0.3344,
             "target": 0.5,
             "format": "pct",
             "actual_display": "33%",
@@ -2164,13 +2175,13 @@
         "points_eng_raw": "13",
         "progress": {
           "done": 4,
-          "partial": 0,
-          "todo": 1,
+          "partial": 1,
+          "todo": 0,
           "untracked": 0,
           "tracked_total": 5,
           "overall_total": 5,
-          "tracked_percent": 80,
-          "overall_percent": 80
+          "tracked_percent": 90,
+          "overall_percent": 90
         },
         "checks": [
           {
@@ -2185,8 +2196,8 @@
             "kind": "tracker",
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
             "target_display": "DONE"
           },
           {
@@ -2195,10 +2206,10 @@
             "label": "Posiciones agregadas disponibles",
             "status": "DONE",
             "metric": "topic_positions_total",
-            "actual": 274430,
+            "actual": 274435,
             "target": 1,
             "format": "int",
-            "actual_display": "274430",
+            "actual_display": "274435",
             "target_display": "1"
           },
           {
@@ -2230,8 +2241,8 @@
           {
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
             "target_display": "DONE"
           }
         ]
@@ -2244,13 +2255,13 @@
         "points_eng_raw": "8",
         "progress": {
           "done": 2,
-          "partial": 0,
-          "todo": 3,
+          "partial": 1,
+          "todo": 2,
           "untracked": 0,
           "tracked_total": 5,
           "overall_total": 5,
-          "tracked_percent": 40,
-          "overall_percent": 40
+          "tracked_percent": 50,
+          "overall_percent": 50
         },
         "checks": [
           {
@@ -2273,8 +2284,8 @@
             "kind": "tracker",
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
             "target_display": "DONE"
           },
           {
@@ -2283,10 +2294,10 @@
             "label": "Review queue pendiente / declaradas",
             "status": "DONE",
             "metric": "review_queue_pending_ratio",
-            "actual": 0.0,
+            "actual": 0.0096,
             "target": 0.25,
             "format": "pct",
-            "actual_display": "0%",
+            "actual_display": "1%",
             "target_display": "25%"
           },
           {
@@ -2304,6 +2315,13 @@
         ],
         "next": [
           {
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
             "id": "published_recommendation_artifacts",
             "label": "Artefactos publicados (topics/claims/recommendation-kpis)",
             "status": "TODO",
@@ -2313,13 +2331,6 @@
           {
             "id": "convocatorias_y_estado_electoral",
             "label": "Convocatorias y estado electoral",
-            "status": "TODO",
-            "actual_display": "TODO",
-            "target_display": "DONE"
-          },
-          {
-            "id": "posiciones_declaradas_programas",
-            "label": "Posiciones declaradas (programas)",
             "status": "TODO",
             "actual_display": "TODO",
             "target_display": "DONE"
@@ -2484,7 +2495,7 @@
         "label": "Fuentes objetivo en estado ok",
         "status": "DONE",
         "metric": "desired_sources_ok_pct",
-        "actual": 0.8571428571428571,
+        "actual": 0.8604651162790697,
         "target": 0.8,
         "format": "pct",
         "actual_display": "86%",
@@ -2539,10 +2550,10 @@
         "label": "Runs ETL en estado ok",
         "status": "PARTIAL",
         "metric": "ingestion_runs_ok_pct",
-        "actual": 0.6428571428571429,
+        "actual": 0.6507352941176471,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "64%",
+        "actual_display": "65%",
         "target_display": "80%"
       },
       {
@@ -2550,10 +2561,10 @@
         "label": "Costo de reintentos ETL",
         "status": "TODO",
         "metric": "retry_rate",
-        "actual": 0.35714285714285715,
+        "actual": 0.3492647058823529,
         "target": 0.2,
         "format": "pct",
-        "actual_display": "36%",
+        "actual_display": "35%",
         "target_display": "20%"
       },
       {
@@ -2561,22 +2572,22 @@
         "label": "Duraci\u00f3n media por run ETL",
         "status": "DONE",
         "metric": "avg_run_seconds",
-        "actual": 144.12483548795853,
+        "actual": 140.86163166558967,
         "target": null,
         "format": "seconds",
-        "actual_display": "144.1s",
+        "actual_display": "140.9s",
         "target_display": "\u2014"
       }
     ],
     "summary": {
       "done": 27,
-      "partial": 1,
-      "todo": 10,
+      "partial": 3,
+      "todo": 8,
       "untracked": 8,
       "tracked_total": 38,
       "overall_total": 46,
-      "tracked_percent": 72,
-      "overall_percent": 60
+      "tracked_percent": 75,
+      "overall_percent": 62
     },
     "notes": [
       "Los checks de fase combinan tracker operativo y KPIs cuantificables.",
@@ -2714,15 +2725,6 @@
     },
     {
       "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "territorial",
-      "title": "TODO: Webs/programas de partidos",
-      "details": "Falta pipeline semiestructurado + revision humana",
-      "source_ids": [],
-      "commands": []
-    },
-    {
-      "kind": "tracker_item",
       "priority": "P1",
       "scope": "outcomes",
       "title": "PARTIAL: AEMET OpenData",
@@ -2776,6 +2778,15 @@
         "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --strict-network",
         "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker /Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
       ]
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "territorial",
+      "title": "PARTIAL: Webs/programas de partidos",
+      "details": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
+      "source_ids": [],
+      "commands": []
     }
   ],
   "sources": [
@@ -4980,6 +4991,69 @@
         "under_threshold": false,
         "done_zero_real": false,
         "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
+      "source_id": "programas_partidos",
+      "domain": "parlamentario",
+      "source_name": "Programas de partidos (manifest-driven)",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "manifest://programas_partidos",
+      "institution_name": "Programas de partidos",
+      "role_title": "",
+      "level": "nacional",
+      "format": "csv",
+      "fallback_file": "etl/data/raw/samples/programas_partidos_sample.csv",
+      "tracker": {
+        "status": "",
+        "tipo_dato": "",
+        "dominio": "",
+        "fuentes_objetivo": "",
+        "bloque": ""
+      },
+      "sql_status": "PARTIAL",
+      "mismatch_state": "UNTRACKED",
+      "mismatch_waived": false,
+      "waiver_expiry": "",
+      "state": "ok",
+      "runs_total": 6,
+      "runs_ok": 6,
+      "last_status": "ok",
+      "last_loaded": 3,
+      "max_loaded_any": 3,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 6,
+      "last_started_at": "2026-02-17T15:53:08+00:00",
+      "last_seen_at": "2026-02-17T15:53:08+00:00",
+      "last_source_url": "file:///Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/programas_partidos_sample.csv",
+      "last_message": "{\"documents_loaded\": 3, \"note\": \"from-file\", \"out\": {\"evidence_inserted\": 11, \"info\": {\"concerns_count\": 12, \"election_cycles\": [\"es_generales_2023\"], \"failures\": [], \"skipped\": {\"bad_payload\": 0, \"doc_fetch_failed\": 0, \"missing_required\": 0, \"no_concerns_config\": 0, \"no_matching_topics\": 0, \"party_missing_in_db\": 0}, \"topic_set_ids\": [11]}}}",
+      "progress": {
+        "loaded": 3,
+        "target": 1,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
         "has_any": true,
         "blocked_note": false
       }
