@@ -37,6 +37,9 @@ def ingest_one_source(
     strict_network: bool,
 ) -> tuple[int, int, str]:
     source_id = connector.source_id
+    ingest_mode = getattr(connector, "ingest_mode", "mandates")
+    if ingest_mode not in {"mandates", "source_records_only"}:
+        raise RuntimeError(f"ingest_mode no soportado para {source_id}: {ingest_mode}")
     resolved_url = f"file://{from_file.resolve()}" if from_file else connector.resolve_url(url_override, timeout)
     run_id = start_run(conn, source_id, resolved_url)
     try:
@@ -241,6 +244,14 @@ def ingest_one_source(
             if normalized is None:
                 continue
 
+            if ingest_mode == "source_records_only":
+                # Traceability-only ingest path: persist canonical source records without person/mandate writes.
+                # This is used for non-representative sources that are mapped later (for example policy_events).
+                _ = cached_source_record(normalized)
+                seen_ids.append(normalized["source_record_id"])
+                loaded += 1
+                continue
+
             source_record_pk = cached_source_record(normalized)
             role_id = cached_role(normalized["role_title"])
             admin_level_id = cached_admin_level(normalized["level"])
@@ -284,9 +295,13 @@ def ingest_one_source(
             )
 
         min_loaded = SOURCE_CONFIG.get(source_id, {}).get("min_records_loaded_strict")
+        note = extracted.note or ""
+        # Strict network threshold must also apply to partial network successes
+        # (for example "network-with-partial-errors (...)"), not only pure "network".
+        network_strict_candidate = note == "network" or note.startswith("network-with-partial-errors")
         if (
             strict_network
-            and extracted.note == "network"
+            and network_strict_candidate
             and isinstance(min_loaded, int)
             and loaded < min_loaded
         ):
@@ -295,11 +310,11 @@ def ingest_one_source(
                 f"({source_id}: loaded={loaded}, min={min_loaded})"
             )
 
-        close_missing_mandates(conn, source_id, seen_ids, snapshot_date, now_iso)
+        if ingest_mode == "mandates":
+            close_missing_mandates(conn, source_id, seen_ids, snapshot_date, now_iso)
         assert_foreign_key_integrity()
         conn.commit()
 
-        note = extracted.note or ""
         message = f"Ingesta completada: {loaded}/{records_seen} registros validos"
         if note and note != "network":
             message = f"{message} ({note})"

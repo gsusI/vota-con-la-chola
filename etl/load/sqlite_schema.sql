@@ -549,6 +549,64 @@ CREATE TABLE IF NOT EXISTS policy_event_axis_scores (
   PRIMARY KEY (policy_event_id, policy_axis_id, method)
 );
 
+-- Dinero publico (staging normalizado, previo al mapeo a policy_events).
+-- Contrato explicito AI-OPS-09:
+-- - PLACSP nacional: source_id = placsp_sindicacion
+-- - PLACSP piloto CCAA: source_id = placsp_autonomico
+CREATE TABLE IF NOT EXISTS money_contract_records (
+  contract_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id)
+      CHECK (source_id LIKE 'placsp_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  source_url TEXT,
+  contract_id TEXT,
+  lot_id TEXT,
+  notice_type TEXT,
+  cpv_code TEXT,
+  cpv_label TEXT,
+  contracting_authority TEXT,
+  procedure_type TEXT,
+  territory_code TEXT,
+  published_date TEXT,
+  awarded_date TEXT,
+  amount_eur REAL,
+  currency TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_pk)
+);
+
+-- Contrato explicito AI-OPS-09:
+-- - BDNS nacional: source_id = bdns_api_subvenciones
+-- - BDNS piloto CCAA: source_id = bdns_autonomico
+CREATE TABLE IF NOT EXISTS money_subsidy_records (
+  subsidy_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id)
+      CHECK (source_id LIKE 'bdns_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  source_url TEXT,
+  call_id TEXT,
+  grant_id TEXT,
+  granting_body TEXT,
+  beneficiary_name TEXT,
+  beneficiary_identifier TEXT,
+  program_code TEXT,
+  territory_code TEXT,
+  published_date TEXT,
+  concession_date TEXT,
+  amount_eur REAL,
+  currency TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_pk)
+);
+
 -- Interventions: agrupacion reproducible de eventos en tratamientos evaluables.
 CREATE TABLE IF NOT EXISTS interventions (
   intervention_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -600,6 +658,37 @@ CREATE TABLE IF NOT EXISTS indicator_points (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
   UNIQUE (indicator_series_id, date)
+);
+
+-- Outcomes/confusores (staging trazable por observacion fuente).
+-- Contrato explicito AI-OPS-09:
+-- - Eurostat: source_id = eurostat_sdmx
+-- - Banco de Espana: source_id = bde_series_api
+-- - AEMET: source_id = aemet_opendata_series
+CREATE TABLE IF NOT EXISTS indicator_observation_records (
+  observation_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id)
+      CHECK (
+        source_id LIKE 'eurostat_%'
+        OR source_id LIKE 'bde_%'
+        OR source_id LIKE 'aemet_%'
+      ),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  source_record_id TEXT,
+  source_snapshot_date TEXT,
+  source_url TEXT,
+  series_code TEXT NOT NULL,
+  point_date TEXT NOT NULL,
+  value REAL,
+  value_text TEXT,
+  unit TEXT,
+  frequency TEXT,
+  dimensions_json TEXT,
+  methodology_version TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, series_code, point_date, source_record_id)
 );
 
 -- Causal estimates: resultados de evaluacion con diagnosticos y trazabilidad.
@@ -683,8 +772,21 @@ CREATE INDEX IF NOT EXISTS idx_policy_events_domain_id ON policy_events(domain_i
 CREATE INDEX IF NOT EXISTS idx_policy_events_instrument_id ON policy_events(policy_instrument_id);
 CREATE INDEX IF NOT EXISTS idx_policy_events_source_id ON policy_events(source_id);
 CREATE INDEX IF NOT EXISTS idx_policy_event_axis_scores_axis_id ON policy_event_axis_scores(policy_axis_id);
+CREATE INDEX IF NOT EXISTS idx_money_contract_records_source_id ON money_contract_records(source_id);
+CREATE INDEX IF NOT EXISTS idx_money_contract_records_contract_id ON money_contract_records(contract_id);
+CREATE INDEX IF NOT EXISTS idx_money_contract_records_cpv_code ON money_contract_records(cpv_code);
+CREATE INDEX IF NOT EXISTS idx_money_contract_records_published_date ON money_contract_records(published_date);
+CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_source_id ON money_subsidy_records(source_id);
+CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_call_id ON money_subsidy_records(call_id);
+CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_beneficiary_id
+    ON money_subsidy_records(beneficiary_identifier);
+CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_published_date ON money_subsidy_records(published_date);
 CREATE INDEX IF NOT EXISTS idx_interventions_domain_id ON interventions(domain_id);
 CREATE INDEX IF NOT EXISTS idx_intervention_events_event_id ON intervention_events(policy_event_id);
 CREATE INDEX IF NOT EXISTS idx_indicator_series_domain_id ON indicator_series(domain_id);
 CREATE INDEX IF NOT EXISTS idx_indicator_points_series_date ON indicator_points(indicator_series_id, date);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_source_series
+    ON indicator_observation_records(source_id, series_code);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_point_date
+    ON indicator_observation_records(point_date);
 CREATE INDEX IF NOT EXISTS idx_causal_estimates_intervention_id ON causal_estimates(intervention_id);

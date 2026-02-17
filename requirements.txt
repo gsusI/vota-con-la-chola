@@ -1,2 +1,4 @@
 # Dependencias Python del entorno ETL.
 # Mantener vacio si se usa solo libreria estandar.
+huggingface_hub>=0.24,<1.0
+pyarrow>=18,<21
