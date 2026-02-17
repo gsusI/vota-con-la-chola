@@ -278,4 +278,112 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 30,
         "fallback_file": "etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
     },
+    "boe_api_legal": {
+        "name": "BOE API - Marco legal (RSS diario)",
+        "scope": "legal",
+        "default_url": "https://www.boe.es/rss/boe.php",
+        "format": "xml",
+        "min_records_loaded_strict": 5,
+        "fallback_file": "etl/data/raw/samples/boe_api_legal_sample.xml",
+    },
+    "moncloa_referencias": {
+        "name": "La Moncloa - Referencias del Consejo de Ministros",
+        "scope": "ejecutivo",
+        "default_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
+        "format": "html",
+        "min_records_loaded_strict": 2,
+        "fallback_file": "etl/data/raw/samples/moncloa_referencias_sample.html",
+    },
+    "moncloa_rss_referencias": {
+        "name": "La Moncloa - RSS Referencias/Resumenes del Consejo de Ministros",
+        "scope": "ejecutivo",
+        "default_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
+        "format": "xml",
+        "min_records_loaded_strict": 2,
+        "fallback_file": "etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
+    },
+    # AI-OPS-09 source_id naming contract (money/outcomes expansion).
+    # Keep these ids stable: tracker mapping and strict-gate reconciliation depend on them.
+    "placsp_sindicacion": {
+        "name": "PLACSP - Contratacion publica Espana (ATOM/CODICE)",
+        "scope": "dinero",
+        "default_url": (
+            "https://contrataciondelestado.es/sindicacion/sindicacion_643/"
+            "licitacionesPerfilesContratanteCompleto3.atom"
+        ),
+        "format": "xml",
+        "min_records_loaded_strict": 10,
+        "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
+    },
+    "placsp_autonomico": {
+        "name": "PLACSP - Contratacion autonómica (piloto 3 CCAA)",
+        "scope": "dinero",
+        "default_url": (
+            "https://contrataciondelestado.es/sindicacion/sindicacion_643/"
+            "licitacionesPerfilesContratanteCompleto3.atom"
+        ),
+        "format": "xml",
+        "min_records_loaded_strict": 3,
+        "fallback_file": "etl/data/raw/samples/placsp_autonomico_sample.xml",
+    },
+    "bdns_api_subvenciones": {
+        "name": "BDNS/SNPSAP - Subvenciones y ayudas Espana (API)",
+        "scope": "dinero",
+        "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+        "format": "json",
+        "min_records_loaded_strict": 10,
+        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+    },
+    "bdns_autonomico": {
+        "name": "BDNS/SNPSAP - Subvenciones autonomicas (piloto 3 CCAA)",
+        "scope": "dinero",
+        "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+        "format": "json",
+        "min_records_loaded_strict": 3,
+        "fallback_file": "etl/data/raw/samples/bdns_autonomico_sample.json",
+    },
+    # Canonical mapped action sources for policy_events (output layer, no direct connector).
+    "placsp_contratacion": {
+        "name": "Contratacion publica (canonico policy_events)",
+        "scope": "dinero",
+        "default_url": "https://contrataciondelestado.es/",
+        "format": "json",
+        "min_records_loaded_strict": 0,
+        "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
+    },
+    "bdns_subvenciones": {
+        "name": "Subvenciones publicas (canonico policy_events)",
+        "scope": "dinero",
+        "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+        "format": "json",
+        "min_records_loaded_strict": 0,
+        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+    },
+    "eurostat_sdmx": {
+        "name": "Eurostat - Indicadores outcomes (API/SDMX)",
+        "scope": "outcomes",
+        "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+        "format": "json",
+        "min_records_loaded_strict": 1,
+        # Keep this as raw JSON-stat payload (not run snapshot CSV) so strict/from-file/replay stay parser-compatible.
+        "fallback_file": "etl/data/raw/samples/eurostat_sdmx_sample.json",
+    },
+    "bde_series_api": {
+        "name": "Banco de Espana - Indicadores confusores (API series)",
+        "scope": "outcomes",
+        "default_url": "https://api.bde.es/datos/series",
+        "format": "json",
+        "min_records_loaded_strict": 1,
+        # Keep this as raw BDE payload shape (results/series records), not run snapshot CSV.
+        "fallback_file": "etl/data/raw/samples/bde_series_api_sample.json",
+    },
+    "aemet_opendata_series": {
+        "name": "AEMET OpenData - Indicadores confusores",
+        "scope": "outcomes",
+        "default_url": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
+        "format": "json",
+        "min_records_loaded_strict": 1,
+        # Keep this as raw AEMET payload shape (series/stations), not run snapshot CSV.
+        "fallback_file": "etl/data/raw/samples/aemet_opendata_series_sample.json",
+    },
 }

@@ -1,18 +1,26 @@
 from __future__ import annotations
 
 from .connectors import (
+    AemetOpenDataSeriesConnector,
     AsambleaCeutaDiputadosConnector,
     AsambleaExtremaduraDiputadosConnector,
     AsambleaMelillaDiputadosConnector,
     AsambleaMadridOcupacionesConnector,
     AsambleaMurciaDiputadosConnector,
+    BdnsApiSubvencionesConnector,
+    BdnsAutonomicoConnector,
+    BdeSeriesApiConnector,
+    BoeApiLegalConnector,
     CongresoDiputadosConnector,
     CortesAragonDiputadosConnector,
     CortesClmDiputadosConnector,
     CortesCylProcuradoresConnector,
     CortsValencianesDiputatsConnector,
+    EurostatSdmxConnector,
     EuroparlMepsConnector,
     JuntaGeneralAsturiasDiputadosConnector,
+    MoncloaReferenciasConnector,
+    MoncloaRssReferenciasConnector,
     MunicipalConcejalesConnector,
     ParlamentBalearsDiputatsConnector,
     ParlamentoCanariasDiputadosConnector,
@@ -23,6 +31,8 @@ from .connectors import (
     ParlamentCatalunyaDiputatsConnector,
     ParlamentoAndaluciaDiputadosConnector,
     ParlamentoVascoParlamentariosConnector,
+    PlacspAutonomicoConnector,
+    PlacspSindicacionConnector,
     SenadoSenadoresConnector,
 )
 from .connectors.base import BaseConnector
@@ -39,6 +49,7 @@ def get_connectors() -> dict[str, BaseConnector]:
         AsambleaMelillaDiputadosConnector(),
         AsambleaExtremaduraDiputadosConnector(),
         AsambleaMurciaDiputadosConnector(),
+        BoeApiLegalConnector(),
         JuntaGeneralAsturiasDiputadosConnector(),
         CortesAragonDiputadosConnector(),
         ParlamentBalearsDiputatsConnector(),
@@ -53,5 +64,14 @@ def get_connectors() -> dict[str, BaseConnector]:
         ParlamentoAndaluciaDiputadosConnector(),
         ParlamentoNavarraParlamentariosForalesConnector(),
         ParlamentoVascoParlamentariosConnector(),
+        MoncloaReferenciasConnector(),
+        MoncloaRssReferenciasConnector(),
+        PlacspSindicacionConnector(),
+        PlacspAutonomicoConnector(),
+        BdnsApiSubvencionesConnector(),
+        BdnsAutonomicoConnector(),
+        EurostatSdmxConnector(),
+        BdeSeriesApiConnector(),
+        AemetOpenDataSeriesConnector(),
     ]
     return {c.source_id: c for c in connectors}
