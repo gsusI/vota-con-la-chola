@@ -4,13 +4,39 @@
 from __future__ import annotations
 
 import argparse
+from datetime import date
+import json
 import sqlite3
 import sys
 from pathlib import Path
 from typing import Any
 
+# Ensure repo root is importable when executing this file directly.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from etl.politicos_es.run_snapshot_schema import normalize_run_snapshot_file
+
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 DEFAULT_TRACKER = Path("docs/etl/e2e-scrape-load-tracker.md")
+DEFAULT_WAIVERS = Path("docs/etl/mismatch-waivers.json")
+
+# Explicit tracker row -> source_id contract.
+# Row-label mapping has precedence over fuentes hint matching to avoid drift when
+# free-text "Fuentes objetivo" wording changes.
+TRACKER_TIPO_SOURCE_HINTS = {
+    "Marco legal electoral": ["boe_api_legal"],
+    # AI-OPS-09: explicit row-level contracts (avoid ambiguity between national and pilot rows).
+    "Contratación autonómica (piloto 3 CCAA)": ["placsp_autonomico"],
+    "Subvenciones autonómicas (piloto 3 CCAA)": ["bdns_autonomico"],
+    "Contratacion publica (Espana)": ["placsp_sindicacion"],
+    "Subvenciones y ayudas (Espana)": ["bdns_api_subvenciones"],
+    "Indicadores (outcomes): Eurostat": ["eurostat_sdmx"],
+    "Indicadores (confusores): Banco de España": ["bde_series_api"],
+    "Indicadores (confusores): Banco de Espana": ["bde_series_api"],
+    "Indicadores (confusores): AEMET": ["aemet_opendata_series"],
+}
 
 # Mapping between tracker table rows and source_id values.
 TRACKER_SOURCE_HINTS = {
@@ -41,7 +67,18 @@ TRACKER_SOURCE_HINTS = {
     "Parlamento de Galicia": ["parlamento_galicia_deputados"],
     "Parlamento de Navarra": ["parlamento_navarra_parlamentarios_forales"],
     "Parlamento Vasco": ["parlamento_vasco_parlamentarios"],
+    "La Moncloa: referencias + RSS": ["moncloa_referencias", "moncloa_rss_referencias"],
     "Infoelectoral": ["infoelectoral_descargas", "infoelectoral_procesos"],
+    "BOE API": ["boe_api_legal"],
+    # AI-OPS-09 source families (fallback hint matching when Tipo de dato text changes).
+    "PLACSP: sindicación/ATOM (CODICE)": ["placsp_sindicacion"],
+    "PLACSP (filtrado por órganos autonómicos)": ["placsp_autonomico"],
+    "BDNS/SNPSAP: API": ["bdns_api_subvenciones"],
+    "BDNS/SNPSAP (filtrado por órgano convocante/territorio)": ["bdns_autonomico"],
+    "Eurostat (API/SDMX)": ["eurostat_sdmx"],
+    "Banco de España (API series)": ["bde_series_api"],
+    "Banco de Espana (API series)": ["bde_series_api"],
+    "AEMET OpenData": ["aemet_opendata_series"],
 }
 
 
@@ -49,6 +86,16 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Tracker status checker (SQL vs checklist).")
     parser.add_argument("--db", default=str(DEFAULT_DB), help="SQLite path")
     parser.add_argument("--tracker", default=str(DEFAULT_TRACKER), help="Tracker markdown path")
+    parser.add_argument(
+        "--waivers",
+        default=str(DEFAULT_WAIVERS),
+        help="Waivers JSON path (optional; missing file means no active waivers)",
+    )
+    parser.add_argument(
+        "--as-of-date",
+        default="",
+        help="Date used to evaluate waiver expiry (YYYY-MM-DD). Defaults to today's date.",
+    )
     parser.add_argument(
         "--print-done-sources",
         action="store_true",
@@ -64,10 +111,63 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Exit non-zero if a DONE source has zero records loaded from real network runs",
     )
+    parser.add_argument(
+        "--normalize-run-snapshot-in",
+        default="",
+        help=(
+            "Normaliza un *_run_snapshot.csv (legacy metric,value o tabular) al esquema "
+            "canonico y termina"
+        ),
+    )
+    parser.add_argument(
+        "--normalize-run-snapshot-out",
+        default="",
+        help="Ruta de salida del snapshot canonico (por defecto, sobrescribe --normalize-run-snapshot-in)",
+    )
+    parser.add_argument(
+        "--normalize-run-snapshot-legacy-out",
+        default="",
+        help="Opcional: ruta de salida adicional en formato legacy metric,value",
+    )
+    parser.add_argument(
+        "--normalize-run-snapshot-source-id",
+        default="",
+        help="Override opcional para source_id durante normalizacion",
+    )
+    parser.add_argument(
+        "--normalize-run-snapshot-mode",
+        default="",
+        help="Override opcional para mode durante normalizacion",
+    )
+    parser.add_argument(
+        "--normalize-run-snapshot-snapshot-date",
+        default="",
+        help="Override opcional para snapshot_date (YYYY-MM-DD)",
+    )
     return parser.parse_args()
 
 
 def parse_tracker_statuses(tracker_path: Path) -> dict[str, str]:
+    rows = parse_tracker_rows(tracker_path)
+    return {source_id: str(meta.get("status") or "N/A") for source_id, meta in rows.items()}
+
+
+def _is_explicitly_blocked(block_text: str) -> bool:
+    # Keep this deterministic and conservative: only explicit "bloquead*" wording
+    # in the tracker row activates blocked-aware status semantics.
+    return "bloquead" in (block_text or "").strip().lower()
+
+
+def _infer_tracker_source_ids(tipo_dato: str, fuente: str) -> list[str]:
+    if tipo_dato in TRACKER_TIPO_SOURCE_HINTS:
+        return list(TRACKER_TIPO_SOURCE_HINTS[tipo_dato])
+    for hint, source_ids in TRACKER_SOURCE_HINTS.items():
+        if hint in fuente:
+            return list(source_ids)
+    return []
+
+
+def parse_tracker_rows(tracker_path: Path) -> dict[str, dict[str, Any]]:
     if not tracker_path.exists():
         raise FileNotFoundError(f"Tracker not found: {tracker_path}")
 
@@ -75,7 +175,7 @@ def parse_tracker_statuses(tracker_path: Path) -> dict[str, str]:
     header = "| Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |"
 
     in_table = False
-    statuses: dict[str, str] = {}
+    rows: dict[str, dict[str, Any]] = {}
     for line in lines:
         if line.strip() == header:
             in_table = True
@@ -90,14 +190,91 @@ def parse_tracker_statuses(tracker_path: Path) -> dict[str, str]:
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
         if len(cells) < 5:
             continue
+        tipo_dato = cells[0]
         fuente = cells[2]
         estado = cells[3].upper()
-        for hint, source_ids in TRACKER_SOURCE_HINTS.items():
-            if hint in fuente:
-                for source_id in source_ids:
-                    statuses[source_id] = estado
-                break
-    return statuses
+        bloque = cells[4]
+        blocked = _is_explicitly_blocked(bloque)
+        source_ids = _infer_tracker_source_ids(tipo_dato, fuente)
+        for source_id in source_ids:
+            rows[source_id] = {
+                "status": estado,
+                "blocked": blocked,
+                "bloque": bloque,
+                "fuente": fuente,
+            }
+    return rows
+
+
+def _parse_as_of_date(value: str) -> date:
+    token = (value or "").strip()
+    if not token:
+        return date.today()
+    try:
+        return date.fromisoformat(token)
+    except ValueError as exc:
+        raise ValueError("Parametro '--as-of-date' debe tener formato YYYY-MM-DD") from exc
+
+
+def load_mismatch_waivers(
+    waivers_path: Path,
+    *,
+    as_of_date: date,
+) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+    if not waivers_path.exists():
+        return {}, {}
+
+    raw = json.loads(waivers_path.read_text(encoding="utf-8"))
+    entries: list[Any]
+    if isinstance(raw, dict):
+        entries = list(raw.get("waivers") or [])
+    elif isinstance(raw, list):
+        entries = list(raw)
+    else:
+        raise ValueError("Waivers JSON invalido: se esperaba objeto con 'waivers' o lista")
+
+    active: dict[str, dict[str, Any]] = {}
+    expired: dict[str, dict[str, Any]] = {}
+    seen: set[str] = set()
+    for idx, item in enumerate(entries):
+        if not isinstance(item, dict):
+            raise ValueError(f"Waiver invalido en indice {idx}: se esperaba objeto")
+
+        source_id = str(item.get("source_id") or "").strip()
+        reason = str(item.get("reason") or "").strip()
+        owner = str(item.get("owner") or "").strip()
+        expires_on_str = str(item.get("expires_on") or "").strip()
+
+        if not source_id:
+            raise ValueError(f"Waiver invalido en indice {idx}: falta 'source_id'")
+        if not reason:
+            raise ValueError(f"Waiver invalido para {source_id}: falta 'reason'")
+        if not owner:
+            raise ValueError(f"Waiver invalido para {source_id}: falta 'owner'")
+        if not expires_on_str:
+            raise ValueError(f"Waiver invalido para {source_id}: falta 'expires_on'")
+
+        try:
+            expires_on = date.fromisoformat(expires_on_str)
+        except ValueError as exc:
+            raise ValueError(f"Waiver invalido para {source_id}: 'expires_on' debe ser YYYY-MM-DD") from exc
+
+        if source_id in seen:
+            raise ValueError(f"Waiver duplicado para source_id={source_id}")
+        seen.add(source_id)
+
+        payload = {
+            "source_id": source_id,
+            "reason": reason,
+            "owner": owner,
+            "expires_on": expires_on.isoformat(),
+        }
+        if as_of_date <= expires_on:
+            active[source_id] = payload
+        else:
+            expired[source_id] = payload
+
+    return active, expired
 
 
 def open_db(path: Path) -> sqlite3.Connection:
@@ -163,12 +340,18 @@ def fetch_source_metrics(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
     return result
 
 
-def sql_status_from_metrics(metrics: dict[str, Any]) -> str:
+def sql_status_from_metrics(metrics: dict[str, Any], *, tracker_blocked: bool = False) -> str:
     runs_total = int(metrics.get("runs_total") or 0)
     max_loaded_network = int(metrics.get("max_loaded_network") or 0)
     max_loaded_any = int(metrics.get("max_loaded_any") or 0)
+    last_loaded = int(metrics.get("last_loaded") or 0)
     if runs_total == 0:
         return "TODO"
+    # Blocked-aware guard: if tracker explicitly marks the source as blocked and the
+    # latest run loaded 0, don't auto-promote to DONE just because an older network
+    # run once loaded records.
+    if tracker_blocked and last_loaded == 0 and max_loaded_network > 0:
+        return "PARTIAL"
     if max_loaded_network > 0:
         return "DONE"
     if max_loaded_any > 0:
@@ -184,8 +367,12 @@ def format_row(cols: list[str], widths: list[int]) -> str:
 
 
 def print_report(
-    tracker_status: dict[str, str], metrics_by_source: dict[str, dict[str, Any]]
-) -> tuple[list[str], list[str]]:
+    tracker_rows: dict[str, dict[str, Any]],
+    metrics_by_source: dict[str, dict[str, Any]],
+    *,
+    waivers_active: dict[str, dict[str, Any]],
+    waivers_expired: dict[str, dict[str, Any]],
+) -> tuple[list[str], list[str], list[str]]:
     headers = [
         "source_id",
         "checklist",
@@ -199,13 +386,16 @@ def print_report(
     ]
     table_rows: list[list[str]] = []
     mismatches: list[str] = []
+    waived_mismatches: list[str] = []
     done_zero_real: list[str] = []
 
-    source_ids = sorted(set(metrics_by_source.keys()) | set(tracker_status.keys()))
+    source_ids = sorted(set(metrics_by_source.keys()) | set(tracker_rows.keys()))
     for source_id in source_ids:
         metrics = metrics_by_source.get(source_id, {})
-        checklist = tracker_status.get(source_id, "N/A")
-        sql_status = sql_status_from_metrics(metrics) if metrics else "TODO"
+        tracker_meta = tracker_rows.get(source_id, {})
+        checklist = str(tracker_meta.get("status") or "N/A")
+        tracker_blocked = bool(tracker_meta.get("blocked"))
+        sql_status = sql_status_from_metrics(metrics, tracker_blocked=tracker_blocked) if metrics else "TODO"
 
         runs_ok = int(metrics.get("runs_ok") or 0)
         runs_total = int(metrics.get("runs_total") or 0)
@@ -216,9 +406,14 @@ def print_report(
         fallback_fetches = int(metrics.get("fallback_fetches") or 0)
 
         result = "OK"
-        if checklist != "N/A" and checklist != sql_status:
-            result = "MISMATCH"
-            mismatches.append(source_id)
+        has_mismatch = checklist != "N/A" and checklist != sql_status
+        if has_mismatch:
+            if source_id in waivers_active:
+                result = "WAIVED_MISMATCH"
+                waived_mismatches.append(source_id)
+            else:
+                result = "MISMATCH"
+                mismatches.append(source_id)
         if checklist == "DONE" and max_net == 0:
             result = "DONE_ZERO_REAL"
             done_zero_real.append(source_id)
@@ -248,26 +443,86 @@ def print_report(
         print(format_row(row, widths))
 
     print()
-    print(f"tracker_sources: {len(tracker_status)}")
+    print(f"tracker_sources: {len(tracker_rows)}")
     print(f"sources_in_db: {len(metrics_by_source)}")
     print(f"mismatches: {len(mismatches)}")
+    print(f"waived_mismatches: {len(waived_mismatches)}")
+    print(f"waivers_active: {len(waivers_active)}")
+    print(f"waivers_expired: {len(waivers_expired)}")
     print(f"done_zero_real: {len(done_zero_real)}")
-    return mismatches, done_zero_real
+    return mismatches, done_zero_real, waived_mismatches
+
+
+def normalize_run_snapshot_cli(args: argparse.Namespace) -> int:
+    input_raw = str(args.normalize_run_snapshot_in or "").strip()
+    if not input_raw:
+        print("ERROR: falta --normalize-run-snapshot-in", file=sys.stderr)
+        return 2
+    input_path = Path(input_raw)
+
+    output_raw = str(args.normalize_run_snapshot_out or "").strip()
+    output_path = Path(output_raw) if output_raw else input_path
+
+    defaults: dict[str, str] = {}
+    source_id_override = str(args.normalize_run_snapshot_source_id or "").strip()
+    if source_id_override:
+        defaults["source_id"] = source_id_override
+    mode_override = str(args.normalize_run_snapshot_mode or "").strip()
+    if mode_override:
+        defaults["mode"] = mode_override
+    snapshot_override = str(args.normalize_run_snapshot_snapshot_date or "").strip()
+    if snapshot_override:
+        defaults["snapshot_date"] = snapshot_override
+
+    legacy_output_raw = str(args.normalize_run_snapshot_legacy_out or "").strip()
+    legacy_output = Path(legacy_output_raw) if legacy_output_raw else None
+
+    try:
+        normalized_path, legacy_path, normalized = normalize_run_snapshot_file(
+            input_path=input_path,
+            output_path=output_path,
+            defaults=defaults,
+            legacy_output_path=legacy_output,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"ERROR normalizando run snapshot: {exc}", file=sys.stderr)
+        return 2
+
+    print(f"OK normalized run snapshot -> {normalized_path}")
+    if legacy_path is not None:
+        print(f"OK legacy metric,value snapshot -> {legacy_path}")
+    print(f"source_id: {normalized.get('source_id', '')}")
+    print(f"mode: {normalized.get('mode', '')}")
+    print(f"exit_code: {normalized.get('exit_code', '')}")
+    print(f"run_records_loaded: {normalized.get('run_records_loaded', '')}")
+    print(f"snapshot_date: {normalized.get('snapshot_date', '')}")
+    return 0
 
 
 def main() -> int:
     args = parse_args()
+
+    if str(args.normalize_run_snapshot_in or "").strip():
+        return normalize_run_snapshot_cli(args)
+
     tracker_path = Path(args.tracker)
     db_path = Path(args.db)
+    waivers_path = Path(args.waivers)
 
     try:
-        tracker_status = parse_tracker_statuses(tracker_path)
+        as_of_date = _parse_as_of_date(args.as_of_date)
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
+
+    try:
+        tracker_rows = parse_tracker_rows(tracker_path)
     except Exception as exc:  # noqa: BLE001
         print(f"ERROR parsing tracker: {exc}", file=sys.stderr)
         return 2
 
     if args.print_done_sources:
-        done_sources = sorted(s for s, st in tracker_status.items() if st == "DONE")
+        done_sources = sorted(s for s, meta in tracker_rows.items() if str(meta.get("status") or "") == "DONE")
         for source_id in done_sources:
             print(source_id)
         return 0
@@ -283,7 +538,18 @@ def main() -> int:
         print(f"ERROR reading SQLite: {exc}", file=sys.stderr)
         return 2
 
-    mismatches, done_zero_real = print_report(tracker_status, metrics_by_source)
+    try:
+        waivers_active, waivers_expired = load_mismatch_waivers(waivers_path, as_of_date=as_of_date)
+    except Exception as exc:  # noqa: BLE001
+        print(f"ERROR loading waivers: {exc}", file=sys.stderr)
+        return 2
+
+    mismatches, done_zero_real, _waived_mismatches = print_report(
+        tracker_rows,
+        metrics_by_source,
+        waivers_active=waivers_active,
+        waivers_expired=waivers_expired,
+    )
 
     if args.fail_on_mismatch and mismatches:
         print("FAIL: checklist/sql mismatches detected.", file=sys.stderr)
