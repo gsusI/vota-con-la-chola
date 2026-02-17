@@ -9,6 +9,9 @@ from ..types import Extracted
 
 class BaseConnector(ABC):
     source_id: str
+    # Default ingest behavior writes source_records + mandates.
+    # Connectors can override this with "source_records_only" when they do not map to persons/mandates.
+    ingest_mode: str = "mandates"
 
     @abstractmethod
     def resolve_url(self, url_override: str | None, timeout: int) -> str:
@@ -28,4 +31,3 @@ class BaseConnector(ABC):
     @abstractmethod
     def normalize(self, record: dict[str, Any], snapshot_date: str | None) -> dict[str, Any] | None:
         raise NotImplementedError
-
