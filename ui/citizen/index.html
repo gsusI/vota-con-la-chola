@@ -1,0 +1,1224 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola | Ciudadania</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+
+        --ink: #0b1020;
+        --ink-2: #24324a;
+        --muted: #5b6b85;
+        --muted-2: #7b8ba8;
+        --panel: rgba(255, 255, 255, 0.92);
+        --panel-2: rgba(255, 255, 255, 0.78);
+        --line: rgba(15, 23, 42, 0.12);
+        --shadow: 0 18px 52px rgba(15, 23, 42, 0.12);
+
+        --accent: #1d4ed8;
+        --accent-2: #0891b2;
+
+        --ok: #059669;
+        --warn: #d97706;
+        --bad: #dc2626;
+
+        --chip: rgba(248, 250, 252, 0.86);
+
+        --sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        color: var(--ink);
+        background:
+          radial-gradient(980px 520px at 10% -10%, #dbeafe 0%, transparent 62%),
+          radial-gradient(980px 520px at 92% 12%, #cffafe 0%, transparent 58%),
+          radial-gradient(980px 520px at 80% 110%, #fef3c7 0%, transparent 62%),
+          linear-gradient(130deg, #f6f8ff, #ffffff);
+        line-height: 1.35;
+        font-size: 16px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .app {
+        min-height: 100%;
+        padding: 14px;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 12px;
+        width: min(1560px, calc(100% - 28px));
+        margin: 0 auto;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        min-width: 0;
+      }
+
+      .top {
+        padding: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .top::before {
+        content: "";
+        position: absolute;
+        inset: -120px -200px auto auto;
+        width: 520px;
+        height: 520px;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(29, 78, 216, 0.22), transparent 56%),
+          radial-gradient(circle at 55% 55%, rgba(8, 145, 178, 0.18), transparent 62%),
+          radial-gradient(circle at 75% 25%, rgba(217, 119, 6, 0.16), transparent 62%);
+        transform: rotate(12deg);
+        pointer-events: none;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(29, 78, 216, 0.22);
+        background: rgba(219, 234, 254, 0.58);
+        border-radius: 999px;
+        padding: 6px 10px;
+        text-decoration: none;
+        color: #0b1b3a;
+        font-weight: 800;
+        font-size: 0.82rem;
+      }
+
+      .pill.secondary {
+        border-color: rgba(8, 145, 178, 0.22);
+        background: rgba(207, 250, 254, 0.45);
+      }
+
+      .pill.neutral {
+        border-color: rgba(15, 23, 42, 0.14);
+        background: rgba(248, 250, 252, 0.82);
+      }
+
+      .pill:focus,
+      .pill:hover {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.18);
+      }
+
+      .hero {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 6px 0 4px;
+        font-size: 1.9rem;
+        line-height: 1.05;
+      }
+
+      .sub {
+        margin: 0;
+        color: var(--ink-2);
+        max-width: 92ch;
+      }
+
+      .mono {
+        font-family: var(--mono);
+      }
+
+      .status {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .chip {
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        background: var(--chip);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--ink-2);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: rgba(100, 116, 139, 0.55);
+        flex: 0 0 auto;
+      }
+
+      .dot.ok {
+        background: rgba(5, 150, 105, 0.9);
+      }
+
+      .dot.warn {
+        background: rgba(217, 119, 6, 0.9);
+      }
+
+      .dot.bad {
+        background: rgba(220, 38, 38, 0.9);
+      }
+
+      .banner {
+        margin-top: 10px;
+        border: 1px dashed rgba(15, 23, 42, 0.22);
+        border-radius: 14px;
+        padding: 10px 12px;
+        background: rgba(255, 255, 255, 0.55);
+        color: var(--muted);
+        display: none;
+        position: relative;
+        z-index: 1;
+      }
+
+      .layout {
+        min-height: 0;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 320px 420px minmax(0, 1fr);
+      }
+
+      @media (max-width: 1180px) {
+        .layout {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto minmax(0, 1fr);
+        }
+      }
+
+      .panel {
+        min-height: 0;
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
+      }
+
+      .panel .head {
+        padding: 14px 14px 8px;
+      }
+
+      .panel h2 {
+        margin: 0;
+        font-size: 1.02rem;
+      }
+
+      .panel .hint {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .controls {
+        padding: 0 14px 12px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      input[type="text"],
+      select {
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        border-radius: 12px;
+        padding: 9px 10px;
+        font: inherit;
+        background: rgba(255, 255, 255, 0.92);
+        min-width: 0;
+      }
+
+      input[type="text"] {
+        flex: 1 1 200px;
+      }
+
+      .btn {
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        border-radius: 12px;
+        padding: 9px 11px;
+        font-weight: 800;
+        background: rgba(248, 250, 252, 0.88);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .btn:hover,
+      .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.16);
+      }
+
+      .list {
+        min-height: 0;
+        overflow: auto;
+        padding: 0 10px 12px;
+      }
+
+      .row {
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 14px;
+        padding: 12px;
+        margin: 10px 4px;
+        display: grid;
+        gap: 8px;
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .row:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.10);
+        border-color: rgba(29, 78, 216, 0.18);
+      }
+
+      .row.active {
+        border-color: rgba(29, 78, 216, 0.35);
+        background: rgba(219, 234, 254, 0.32);
+      }
+
+      .rowTitle {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .rowTitle strong {
+        font-size: 0.95rem;
+      }
+
+      .tags {
+        display: inline-flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .tag {
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        background: rgba(248, 250, 252, 0.86);
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 0.74rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .tag.hot {
+        border-color: rgba(217, 119, 6, 0.25);
+        background: rgba(254, 243, 199, 0.75);
+        color: #92400e;
+        font-weight: 800;
+      }
+
+      .rowMeta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .smallLink {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      .smallLink:hover {
+        text-decoration: underline;
+      }
+
+      .compare {
+        padding: 0 14px 14px;
+        overflow: auto;
+      }
+
+      .empty {
+        padding: 14px;
+        color: var(--muted);
+        border: 1px dashed rgba(15, 23, 42, 0.18);
+        background: rgba(255, 255, 255, 0.55);
+        border-radius: 14px;
+      }
+
+      .summaryGrid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      @media (max-width: 760px) {
+        .summaryGrid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .kpi {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 14px;
+        background: rgba(248, 250, 252, 0.82);
+        padding: 10px;
+      }
+
+      .kpi .k {
+        font-size: 0.74rem;
+        color: var(--muted);
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .kpi .v {
+        margin-top: 4px;
+        font-size: 1.05rem;
+        font-weight: 900;
+        color: var(--ink);
+      }
+
+      .partyCard {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.72);
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+        margin: 10px 0;
+      }
+
+      .partyHead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .partyName {
+        font-weight: 900;
+      }
+
+      .stanceChip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 6px 10px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: rgba(248, 250, 252, 0.86);
+        font-size: 0.78rem;
+        font-weight: 900;
+        color: var(--ink-2);
+        white-space: nowrap;
+      }
+
+      .stanceChip.support {
+        border-color: rgba(5, 150, 105, 0.25);
+        background: rgba(236, 253, 245, 0.95);
+        color: #065f46;
+      }
+
+      .stanceChip.oppose {
+        border-color: rgba(220, 38, 38, 0.22);
+        background: rgba(254, 242, 242, 0.95);
+        color: #7f1d1d;
+      }
+
+      .stanceChip.mixed {
+        border-color: rgba(217, 119, 6, 0.22);
+        background: rgba(255, 251, 235, 0.95);
+        color: #92400e;
+      }
+
+      .stanceChip.unclear,
+      .stanceChip.no_signal {
+        border-color: rgba(100, 116, 139, 0.2);
+        background: rgba(248, 250, 252, 0.86);
+        color: var(--muted);
+      }
+
+      .barWrap {
+        display: grid;
+        gap: 6px;
+      }
+
+      .barLabel {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .bar {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.08);
+        overflow: hidden;
+      }
+
+      .bar > div {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(29, 78, 216, 0.75), rgba(8, 145, 178, 0.75));
+        width: 0;
+        transition: width 0.35s ease;
+      }
+
+      .partyMeta {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .foot {
+        padding: 14px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .foot strong {
+        color: var(--ink-2);
+      }
+
+      .fadeIn {
+        animation: fadeInUp 0.35s ease both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="top card fadeIn">
+        <div class="nav">
+          <a class="pill" href="../">Exploradores</a>
+          <a class="pill secondary" href="../explorer-temas/">Temas</a>
+          <a class="pill neutral" href="../explorer/">Explorer SQL</a>
+          <a class="pill neutral" href="../explorer-sources/">Fuentes</a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Ciudadania</p>
+            <h1>Que hicieron sobre lo que te importa</h1>
+            <p class="sub">
+              Elige una preocupacion. Veras items concretos (hoy: iniciativas/votaciones) y un resumen por partido.
+              Cada tarjeta enlaza a evidencia para auditar.
+              <strong>No hay ranking magico</strong>.
+            </p>
+          </div>
+          <div class="status" id="statusChips">
+            <span class="chip"><span class="dot warn"></span><span class="mono">cargando datos…</span></span>
+          </div>
+        </div>
+
+        <div class="banner" id="banner"></div>
+      </header>
+
+      <main class="layout fadeIn" style="animation-delay: 0.08s">
+        <section class="panel card">
+          <div class="head">
+            <h2>1) Preocupacion</h2>
+            <p class="hint">Etiquetas deterministas (keywords). Sirven para navegar, no para “clasificar verdad”.</p>
+          </div>
+          <div class="controls">
+            <input id="concernSearch" type="text" placeholder="Filtra preocupaciones…" />
+            <button class="btn" id="btnClear" type="button">Limpiar</button>
+          </div>
+          <div class="list" id="concernList"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>2) Items</h2>
+            <p class="hint">High-stakes primero. Si un item no tiene suficiente cobertura, se marca “incierto”.</p>
+          </div>
+          <div class="controls">
+            <input id="topicSearch" type="text" placeholder="Busca en el titulo…" />
+            <select id="topicLimit" aria-label="Limite de items">
+              <option value="20">20</option>
+              <option value="40">40</option>
+              <option value="60" selected>60</option>
+            </select>
+          </div>
+          <div class="list" id="topicList"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>3) Comparar por partido</h2>
+            <p class="hint">Resumen derivado de votos/posiciones. Siempre con cobertura y links de auditoria.</p>
+          </div>
+          <div class="controls">
+            <select id="stanceFilter" aria-label="Filtro por stance">
+              <option value="all" selected>Todos</option>
+              <option value="support">A favor</option>
+              <option value="oppose">En contra</option>
+              <option value="mixed">Mixto</option>
+              <option value="unclear">Incierto</option>
+              <option value="no_signal">Sin senal</option>
+            </select>
+            <select id="partySort" aria-label="Orden de partidos">
+              <option value="name" selected>Orden: nombre</option>
+              <option value="coverage">Orden: cobertura</option>
+              <option value="confidence">Orden: confianza</option>
+            </select>
+          </div>
+          <div class="compare" id="compare"></div>
+        </section>
+      </main>
+
+      <footer class="foot card fadeIn" style="animation-delay: 0.14s">
+        <strong>Como leer esto:</strong> “A favor / En contra / Mixto” viene de agregar posiciones de diputados del partido.
+        Si la cobertura es baja, mostramos <strong>Incierto</strong>. Si no hay datos, mostramos <strong>Sin senal</strong>.
+        Usa los links de auditoria para ver filas y evidencia.
+      </footer>
+    </div>
+
+    <script>
+      "use strict";
+
+      const qs = (sel) => document.querySelector(sel);
+      const esc = (s) =>
+        String(s || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+
+      function stripDiacritics(s) {
+        // Compatible with most browsers (avoid \p{Diacritic}).
+        return String(s || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+      }
+
+      function norm(s) {
+        return stripDiacritics(String(s || "").toLowerCase()).trim();
+      }
+
+      function fmtInt(n) {
+        const x = Number(n || 0);
+        if (!Number.isFinite(x)) return "0";
+        return x.toLocaleString("es-ES");
+      }
+
+      function fmtPct01(x) {
+        const v = Number(x || 0);
+        if (!Number.isFinite(v)) return "0%";
+        return `${Math.round(v * 100)}%`;
+      }
+
+      function stanceLabel(s) {
+        const k = String(s || "");
+        if (k === "support") return "A favor";
+        if (k === "oppose") return "En contra";
+        if (k === "mixed") return "Mixto";
+        if (k === "unclear") return "Incierto";
+        if (k === "no_signal") return "Sin senal";
+        return "Incierto";
+      }
+
+      function dotClassForStance(s) {
+        const k = String(s || "");
+        if (k === "support") return "ok";
+        if (k === "oppose") return "bad";
+        if (k === "mixed") return "warn";
+        if (k === "unclear") return "warn";
+        if (k === "no_signal") return "";
+        return "";
+      }
+
+      async function fetchJson(path) {
+        const res = await fetch(path, { cache: "no-store" });
+        if (!res.ok) {
+          const txt = await res.text().catch(() => "");
+          throw new Error(`HTTP ${res.status} al cargar ${path}: ${txt.slice(0, 120)}`);
+        }
+        return await res.json();
+      }
+
+      const state = {
+        citizen: null,
+        concernsCfg: null,
+        concerns: [],
+        topicById: new Map(),
+        partyById: new Map(),
+        posByKey: new Map(),
+        topicTags: new Map(),
+        countsByConcern: new Map(),
+        activeConcernId: "",
+        activeTopicId: 0,
+      };
+
+      function readUrlState() {
+        const p = new URLSearchParams(location.search || "");
+        const concern = String(p.get("concern") || "").trim();
+        const topicId = Number(p.get("topic_id") || 0);
+        if (concern) state.activeConcernId = concern;
+        if (Number.isFinite(topicId) && topicId > 0) state.activeTopicId = topicId;
+      }
+
+      function writeUrlState(push) {
+        const p = new URLSearchParams(location.search || "");
+        if (state.activeConcernId) p.set("concern", state.activeConcernId);
+        else p.delete("concern");
+        if (state.activeTopicId) p.set("topic_id", String(state.activeTopicId));
+        else p.delete("topic_id");
+        const next = `?${p.toString()}`;
+        if (push) history.pushState({}, "", next);
+        else history.replaceState({}, "", next);
+      }
+
+      function setBanner(html) {
+        const el = qs("#banner");
+        if (!el) return;
+        if (!html) {
+          el.style.display = "none";
+          el.innerHTML = "";
+          return;
+        }
+        el.style.display = "block";
+        el.innerHTML = html;
+      }
+
+      function computeTags() {
+        state.topicTags = new Map();
+        state.countsByConcern = new Map();
+
+        const concernDefs = state.concerns.map((c) => {
+          const kws = Array.isArray(c.keywords) ? c.keywords : [];
+          return {
+            id: String(c.id || ""),
+            label: String(c.label || ""),
+            keywords: kws.map((k) => norm(k)).filter((k) => k),
+          };
+        });
+
+        for (const t of state.citizen.topics || []) {
+          const tid = Number(t.topic_id || 0);
+          const labelN = norm(t.label || "");
+          const tags = [];
+          for (const c of concernDefs) {
+            if (!c.id) continue;
+            if (c.keywords.some((k) => k && labelN.includes(k))) {
+              tags.push(c.id);
+            }
+          }
+          state.topicTags.set(tid, tags);
+          for (const cid of tags) {
+            state.countsByConcern.set(cid, (state.countsByConcern.get(cid) || 0) + 1);
+          }
+        }
+      }
+
+      function renderStatus() {
+        const el = qs("#statusChips");
+        if (!el || !state.citizen) return;
+        const meta = state.citizen.meta || {};
+        const asOf = String(meta.as_of_date || "");
+        const method = String(meta.computed_method || "");
+        const setId = String(meta.topic_set_id || "");
+        const version = String(meta.computed_version || "");
+
+        el.innerHTML =
+          `<span class="chip"><span class="dot ok"></span><span>as_of</span><span class="mono">${esc(asOf)}</span></span>` +
+          `<span class="chip"><span class="dot ok"></span><span>metodo</span><span class="mono">${esc(method)}</span></span>` +
+          `<span class="chip"><span class="dot ok"></span><span>topic_set</span><span class="mono">${esc(setId)}</span></span>` +
+          `<span class="chip"><span class="dot ok"></span><span>version</span><span class="mono">${esc(version)}</span></span>`;
+      }
+
+      function renderConcernList() {
+        const list = qs("#concernList");
+        if (!list) return;
+
+        const needle = norm(qs("#concernSearch")?.value || "");
+
+        const rows = (state.concerns || [])
+          .map((c) => {
+            const cid = String(c.id || "");
+            const label = String(c.label || cid);
+            const count = Number(state.countsByConcern.get(cid) || 0);
+            const labelN = norm(label);
+            if (needle && !labelN.includes(needle) && !norm(cid).includes(needle)) return null;
+            return { cid, label, count };
+          })
+          .filter(Boolean)
+          .sort((a, b) => {
+            if (b.count !== a.count) return b.count - a.count;
+            return a.label.localeCompare(b.label);
+          });
+
+        if (!rows.length) {
+          list.innerHTML = `<div class="empty">No hay coincidencias para el filtro.</div>`;
+          return;
+        }
+
+        list.innerHTML = rows
+          .map((r) => {
+            const active = state.activeConcernId && r.cid === state.activeConcernId;
+            return (
+              `<div class="row ${active ? "active" : ""}" data-cid="${esc(r.cid)}" role="button" tabindex="0">` +
+              `<div class="rowTitle"><strong>${esc(r.label)}</strong><span class="tags"><span class="tag">${fmtInt(
+                r.count
+              )} items</span></span></div>` +
+              `<div class="rowMeta">` +
+              `<span class="tag">id=${esc(r.cid)}</span>` +
+              `<span class="tag">navegacion</span>` +
+              `</div>` +
+              `</div>`
+            );
+          })
+          .join("");
+
+        for (const el of list.querySelectorAll("[data-cid]")) {
+          el.addEventListener("click", () => {
+            selectConcern(String(el.getAttribute("data-cid") || ""), true);
+          });
+          el.addEventListener("keydown", (ev) => {
+            if (ev.key === "Enter" || ev.key === " ") {
+              ev.preventDefault();
+              selectConcern(String(el.getAttribute("data-cid") || ""), true);
+            }
+          });
+        }
+      }
+
+      function topicsForActiveConcern() {
+        const cid = String(state.activeConcernId || "");
+        const needle = norm(qs("#topicSearch")?.value || "");
+        const limit = Number(qs("#topicLimit")?.value || 60);
+
+        const out = [];
+        for (const t of state.citizen.topics || []) {
+          const tid = Number(t.topic_id || 0);
+          const tags = state.topicTags.get(tid) || [];
+          if (!cid || !tags.includes(cid)) continue;
+          const label = String(t.label || "");
+          if (needle && !norm(label).includes(needle) && !norm(String(tid)).includes(needle)) continue;
+          out.push(t);
+        }
+
+        out.sort((a, b) => {
+          const ah = a.is_high_stakes ? 1 : 0;
+          const bh = b.is_high_stakes ? 1 : 0;
+          if (bh !== ah) return bh - ah;
+          const ar = a.stakes_rank == null ? 999999 : Number(a.stakes_rank);
+          const br = b.stakes_rank == null ? 999999 : Number(b.stakes_rank);
+          if (ar !== br) return ar - br;
+          return Number(a.topic_id) - Number(b.topic_id);
+        });
+
+        return out.slice(0, Math.max(1, Math.min(200, Number.isFinite(limit) ? limit : 60)));
+      }
+
+      function renderTopicList() {
+        const list = qs("#topicList");
+        if (!list) return;
+        if (!state.activeConcernId) {
+          list.innerHTML = `<div class="empty">Elige una preocupacion para ver items.</div>`;
+          return;
+        }
+
+        const topics = topicsForActiveConcern();
+        if (!topics.length) {
+          list.innerHTML = `<div class="empty">No hay items que coincidan con esta preocupacion (o con el filtro).</div>`;
+          return;
+        }
+
+        list.innerHTML = topics
+          .map((t) => {
+            const tid = Number(t.topic_id || 0);
+            const active = state.activeTopicId && tid === state.activeTopicId;
+            const tags = [];
+            if (t.is_high_stakes) tags.push(`<span class="tag hot">high-stakes</span>`);
+            if (t.stakes_rank != null) tags.push(`<span class="tag">rank #${esc(String(t.stakes_rank))}</span>`);
+            tags.push(`<span class="tag">topic_id=${esc(String(tid))}</span>`);
+
+            return (
+              `<div class="row ${active ? "active" : ""}" data-tid="${esc(String(tid))}" role="button" tabindex="0">` +
+              `<div class="rowTitle"><strong>${esc(String(t.label || ""))}</strong><span class="tags">${tags.join(
+                ""
+              )}</span></div>` +
+              `<div class="rowMeta">` +
+              `<a class="smallLink" href="${esc(String((t.links || {}).explorer_temas || ""))}" target="_blank" rel="noopener noreferrer">Ver en Temas</a>` +
+              `<span>·</span>` +
+              `<a class="smallLink" href="${esc(String((t.links || {}).explorer_positions || ""))}" target="_blank" rel="noopener noreferrer">Posiciones (SQL)</a>` +
+              `</div>` +
+              `</div>`
+            );
+          })
+          .join("");
+
+        for (const el of list.querySelectorAll("[data-tid]")) {
+          el.addEventListener("click", () => {
+            selectTopic(Number(el.getAttribute("data-tid") || 0), true);
+          });
+          el.addEventListener("keydown", (ev) => {
+            if (ev.key === "Enter" || ev.key === " ") {
+              ev.preventDefault();
+              selectTopic(Number(el.getAttribute("data-tid") || 0), true);
+            }
+          });
+        }
+      }
+
+      function positionsForTopic(topicId) {
+        const out = [];
+        for (const party of state.citizen.parties || []) {
+          const pid = Number(party.party_id || 0);
+          const key = `${Number(topicId)}:${pid}`;
+          const row = state.posByKey.get(key) || null;
+          if (row) out.push(row);
+        }
+        return out;
+      }
+
+      function stanceCounts(rows) {
+        const c = {
+          support: 0,
+          oppose: 0,
+          mixed: 0,
+          unclear: 0,
+          no_signal: 0,
+        };
+        for (const r of rows) {
+          const s = String(r.stance || "unclear");
+          if (c[s] == null) continue;
+          c[s] += 1;
+        }
+        return c;
+      }
+
+      function partyName(pid) {
+        const p = state.partyById.get(Number(pid)) || null;
+        if (!p) return `party_id=${pid}`;
+        const a = String(p.acronym || "").trim();
+        const n = String(p.name || "").trim();
+        return a ? `${a} · ${n}` : n;
+      }
+
+      function renderCompare() {
+        const el = qs("#compare");
+        if (!el) return;
+        const tid = Number(state.activeTopicId || 0);
+        if (!tid) {
+          el.innerHTML = `<div class="empty">Elige un item para ver comparacion por partido.</div>`;
+          return;
+        }
+
+        const topic = state.topicById.get(tid) || null;
+        const rows = positionsForTopic(tid);
+        const counts = stanceCounts(rows);
+
+        const filter = String(qs("#stanceFilter")?.value || "all");
+        const sortMode = String(qs("#partySort")?.value || "name");
+
+        let filtered = rows.slice();
+        if (filter && filter !== "all") {
+          filtered = filtered.filter((r) => String(r.stance || "") === filter);
+        }
+
+        filtered.sort((a, b) => {
+          if (sortMode === "coverage") {
+            const ac = Number((a.coverage || {}).members_with_signal || 0) / Math.max(1, Number((a.coverage || {}).members_total || 0));
+            const bc = Number((b.coverage || {}).members_with_signal || 0) / Math.max(1, Number((b.coverage || {}).members_total || 0));
+            if (bc !== ac) return bc - ac;
+          }
+          if (sortMode === "confidence") {
+            const acf = Number(a.confidence || 0);
+            const bcf = Number(b.confidence || 0);
+            if (bcf !== acf) return bcf - acf;
+          }
+          const an = partyName(a.party_id);
+          const bn = partyName(b.party_id);
+          return an.localeCompare(bn);
+        });
+
+        const topicLinks = topic && topic.links ? topic.links : {};
+
+        el.innerHTML =
+          `<div class="summaryGrid">` +
+          `<div class="kpi"><div class="k">A favor</div><div class="v">${fmtInt(counts.support)}</div></div>` +
+          `<div class="kpi"><div class="k">En contra</div><div class="v">${fmtInt(counts.oppose)}</div></div>` +
+          `<div class="kpi"><div class="k">Mixto</div><div class="v">${fmtInt(counts.mixed)}</div></div>` +
+          `<div class="kpi"><div class="k">Incierto</div><div class="v">${fmtInt(counts.unclear)}</div></div>` +
+          `<div class="kpi"><div class="k">Sin senal</div><div class="v">${fmtInt(counts.no_signal)}</div></div>` +
+          `</div>` +
+          `<div class="empty" style="margin-bottom: 12px">` +
+          `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">` +
+          `<div><strong>${esc(String(topic ? topic.label : `topic_id=${tid}`))}</strong></div>` +
+          `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">` +
+          (topicLinks.explorer_temas
+            ? `<a class="smallLink" href="${esc(String(topicLinks.explorer_temas))}" target="_blank" rel="noopener noreferrer">Abrir en Temas</a>`
+            : "") +
+          (topicLinks.explorer_evidence
+            ? `<a class="smallLink" href="${esc(String(topicLinks.explorer_evidence))}" target="_blank" rel="noopener noreferrer">Evidencia (SQL)</a>`
+            : "") +
+          `</div>` +
+          `</div>` +
+          `<div class="rowMeta" style="margin-top:8px">` +
+          `<span class="tag">Regla: si cobertura < 20%, mostramos Incierto</span>` +
+          `<span class="tag">Cobertura = diputados con senal / total del partido</span>` +
+          `</div>` +
+          `</div>` +
+          (filtered.length
+            ? filtered
+                .map((r) => {
+                  const pid = Number(r.party_id || 0);
+                  const stance = String(r.stance || "unclear");
+                  const cov = r.coverage || {};
+                  const membersTotal = Number(cov.members_total || 0);
+                  const membersSignal = Number(cov.members_with_signal || 0);
+                  const coverageRatio = membersTotal > 0 ? membersSignal / membersTotal : 0;
+                  const conf = Number(r.confidence || 0);
+                  const evCount = Number(cov.evidence_count_total || 0);
+                  const lastEv = String(cov.last_evidence_date || "");
+
+                  const linkPos = (r.links || {}).explorer_positions || "";
+                  const linkTemas = (r.links || {}).explorer_temas || "";
+
+                  return (
+                    `<div class="partyCard">` +
+                    `<div class="partyHead">` +
+                    `<div class="partyName">${esc(partyName(pid))}</div>` +
+                    `<div class="stanceChip ${esc(stance)}"><span class="dot ${esc(dotClassForStance(stance))}"></span>${esc(
+                      stanceLabel(stance)
+                    )}</div>` +
+                    `</div>` +
+                    `<div class="barWrap">` +
+                    `<div class="barLabel"><span>Cobertura</span><span class="mono">${esc(membersSignal)}/${esc(
+                      membersTotal
+                    )} (${esc(fmtPct01(coverageRatio))})</span></div>` +
+                    `<div class="bar"><div style="width:${Math.round(coverageRatio * 100)}%"></div></div>` +
+                    `</div>` +
+                    `<div class="barWrap">` +
+                    `<div class="barLabel"><span>Confianza (conservadora)</span><span class="mono">${esc(fmtPct01(conf))}</span></div>` +
+                    `<div class="bar"><div style="width:${Math.round(conf * 100)}%"></div></div>` +
+                    `</div>` +
+                    `<div class="partyMeta">` +
+                    `<span class="tag">evidence_count=${esc(fmtInt(evCount))}</span>` +
+                    (lastEv ? `<span class="tag">ultima=${esc(lastEv)}</span>` : `<span class="tag">ultima=?</span>`) +
+                    (linkPos ? `<a class="smallLink" href="${esc(String(linkPos))}" target="_blank" rel="noopener noreferrer">Ver posiciones</a>` : "") +
+                    (linkTemas ? `<a class="smallLink" href="${esc(String(linkTemas))}" target="_blank" rel="noopener noreferrer">Ver en Temas</a>` : "") +
+                    `</div>` +
+                    `</div>`
+                  );
+                })
+                .join("")
+            : `<div class="empty">No hay partidos que coincidan con el filtro actual.</div>`);
+      }
+
+      function selectConcern(cid, push) {
+        const next = String(cid || "").trim();
+        if (!next) return;
+        state.activeConcernId = next;
+
+        // Reset topic unless it still belongs.
+        const topics = topicsForActiveConcern();
+        const tids = new Set(topics.map((t) => Number(t.topic_id || 0)));
+        if (state.activeTopicId && !tids.has(Number(state.activeTopicId))) {
+          state.activeTopicId = 0;
+        }
+
+        writeUrlState(Boolean(push));
+        renderConcernList();
+        renderTopicList();
+        renderCompare();
+      }
+
+      function selectTopic(tid, push) {
+        const next = Number(tid || 0);
+        if (!Number.isFinite(next) || next <= 0) return;
+        state.activeTopicId = next;
+        writeUrlState(Boolean(push));
+        renderTopicList();
+        renderCompare();
+      }
+
+      async function load() {
+        readUrlState();
+
+        const p = new URLSearchParams(location.search || "");
+        const citizenPath = String(p.get("citizen") || "./data/citizen.json");
+        const concernsPath = String(p.get("concerns") || "./data/concerns_v1.json");
+
+        try {
+          const [citizen, concernsCfg] = await Promise.all([fetchJson(citizenPath), fetchJson(concernsPath)]);
+          state.citizen = citizen;
+          state.concernsCfg = concernsCfg;
+          state.concerns = Array.isArray(concernsCfg.concerns) ? concernsCfg.concerns : [];
+
+          state.topicById = new Map();
+          for (const t of citizen.topics || []) {
+            state.topicById.set(Number(t.topic_id || 0), t);
+          }
+
+          state.partyById = new Map();
+          for (const party of citizen.parties || []) {
+            state.partyById.set(Number(party.party_id || 0), party);
+          }
+
+          state.posByKey = new Map();
+          for (const r of citizen.party_topic_positions || []) {
+            const key = `${Number(r.topic_id || 0)}:${Number(r.party_id || 0)}`;
+            state.posByKey.set(key, r);
+          }
+
+          computeTags();
+          renderStatus();
+
+          // Default concern if none.
+          if (!state.activeConcernId) {
+            let best = "";
+            let bestCount = -1;
+            for (const c of state.concerns) {
+              const cid = String(c.id || "");
+              const cnt = Number(state.countsByConcern.get(cid) || 0);
+              if (cnt > bestCount) {
+                best = cid;
+                bestCount = cnt;
+              }
+            }
+            state.activeConcernId = best;
+          }
+
+          // Validate initial topic.
+          if (state.activeTopicId) {
+            const tags = state.topicTags.get(Number(state.activeTopicId)) || [];
+            if (!tags.includes(String(state.activeConcernId))) state.activeTopicId = 0;
+          }
+
+          writeUrlState(false);
+
+          renderConcernList();
+          renderTopicList();
+          renderCompare();
+
+          setBanner(
+            `<div><strong>Nota:</strong> esto es una vista ciudadana. Para auditoria completa, abre <a class="smallLink" href="../explorer-temas/">Temas</a> y <a class="smallLink" href="../explorer/">Explorer SQL</a>.</div>`
+          );
+        } catch (err) {
+          setBanner(`<div><strong>Error al cargar datos</strong>: <span class="mono">${esc(String(err))}</span></div>`);
+          qs("#statusChips").innerHTML = `<span class="chip"><span class="dot bad"></span><span class="mono">fallo carga</span></span>`;
+          qs("#concernList").innerHTML = `<div class="empty">No se pudieron cargar datos.</div>`;
+          qs("#topicList").innerHTML = `<div class="empty">No se pudieron cargar datos.</div>`;
+          qs("#compare").innerHTML = `<div class="empty">No se pudieron cargar datos.</div>`;
+        }
+      }
+
+      function wire() {
+        qs("#btnClear")?.addEventListener("click", () => {
+          qs("#concernSearch").value = "";
+          qs("#topicSearch").value = "";
+          renderConcernList();
+          renderTopicList();
+        });
+
+        qs("#concernSearch")?.addEventListener("input", () => {
+          renderConcernList();
+        });
+
+        qs("#topicSearch")?.addEventListener("input", () => {
+          renderTopicList();
+        });
+
+        qs("#topicLimit")?.addEventListener("change", () => {
+          renderTopicList();
+        });
+
+        qs("#stanceFilter")?.addEventListener("change", () => {
+          renderCompare();
+        });
+
+        qs("#partySort")?.addEventListener("change", () => {
+          renderCompare();
+        });
+
+        window.addEventListener("popstate", () => {
+          state.activeConcernId = "";
+          state.activeTopicId = 0;
+          readUrlState();
+          renderConcernList();
+          renderTopicList();
+          renderCompare();
+        });
+      }
+
+      wire();
+      load();
+    </script>
+  </body>
+</html>
