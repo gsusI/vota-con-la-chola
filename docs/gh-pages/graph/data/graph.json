@@ -14,6 +14,14 @@
     },
     "sources": [
       {
+        "source_id": "aemet_opendata_series",
+        "name": "AEMET OpenData - Indicadores confusores",
+        "scope": "outcomes",
+        "default_url": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
         "source_id": "asamblea_ceuta_diputados",
         "name": "Asamblea de Ceuta - Miembros (Legislatura 2023/2027)",
         "scope": "autonomico",
@@ -52,6 +60,46 @@
         "default_url": "https://www.asambleamurcia.es/diputados",
         "is_active": 1,
         "data_format": "json"
+      },
+      {
+        "source_id": "bde_series_api",
+        "name": "Banco de Espana - Indicadores confusores (API series)",
+        "scope": "outcomes",
+        "default_url": "https://api.bde.es/datos/series",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
+        "source_id": "bdns_api_subvenciones",
+        "name": "BDNS/SNPSAP - Subvenciones y ayudas Espana (API)",
+        "scope": "dinero",
+        "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
+        "source_id": "bdns_autonomico",
+        "name": "BDNS/SNPSAP - Subvenciones autonomicas (piloto 3 CCAA)",
+        "scope": "dinero",
+        "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
+        "source_id": "bdns_subvenciones",
+        "name": "Subvenciones publicas (canonico policy_events)",
+        "scope": "dinero",
+        "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
+        "source_id": "boe_api_legal",
+        "name": "BOE API - Marco legal (RSS diario)",
+        "scope": "legal",
+        "default_url": "https://www.boe.es/rss/boe.php",
+        "is_active": 1,
+        "data_format": "xml"
       },
       {
         "source_id": "congreso_diputados",
@@ -126,6 +174,14 @@
         "data_format": "xml"
       },
       {
+        "source_id": "eurostat_sdmx",
+        "name": "Eurostat - Indicadores outcomes (API/SDMX)",
+        "scope": "outcomes",
+        "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
         "source_id": "infoelectoral_descargas",
         "name": "Infoelectoral - Area de descargas (convocatorias + archivos)",
         "scope": "electoral",
@@ -148,6 +204,22 @@
         "default_url": "https://www.jgpa.es/diputados-y-diputadas",
         "is_active": 1,
         "data_format": "json"
+      },
+      {
+        "source_id": "moncloa_referencias",
+        "name": "La Moncloa - Referencias del Consejo de Ministros",
+        "scope": "ejecutivo",
+        "default_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
+        "is_active": 1,
+        "data_format": "html"
+      },
+      {
+        "source_id": "moncloa_rss_referencias",
+        "name": "La Moncloa - RSS Referencias/Resumenes del Consejo de Ministros",
+        "scope": "ejecutivo",
+        "default_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
+        "is_active": 1,
+        "data_format": "xml"
       },
       {
         "source_id": "municipal_concejales",
@@ -228,6 +300,38 @@
         "default_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
         "is_active": 1,
         "data_format": "json"
+      },
+      {
+        "source_id": "placsp_autonomico",
+        "name": "PLACSP - Contratacion auton\u00f3mica (piloto 3 CCAA)",
+        "scope": "dinero",
+        "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+        "is_active": 1,
+        "data_format": "xml"
+      },
+      {
+        "source_id": "placsp_contratacion",
+        "name": "Contratacion publica (canonico policy_events)",
+        "scope": "dinero",
+        "default_url": "https://contrataciondelestado.es/",
+        "is_active": 1,
+        "data_format": "json"
+      },
+      {
+        "source_id": "placsp_sindicacion",
+        "name": "PLACSP - Contratacion publica Espana (ATOM/CODICE)",
+        "scope": "dinero",
+        "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+        "is_active": 1,
+        "data_format": "xml"
+      },
+      {
+        "source_id": "programas_partidos",
+        "name": "Programas de partidos (manifest-driven)",
+        "scope": "nacional",
+        "default_url": "manifest://programas_partidos",
+        "is_active": 1,
+        "data_format": "csv"
       },
       {
         "source_id": "senado_iniciativas",

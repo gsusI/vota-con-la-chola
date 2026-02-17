@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from scripts.publicar_hf_snapshot import (
+    build_explorer_schema_payload,
     collect_published_files,
     export_ingestion_runs_csv,
     load_dotenv,
@@ -137,6 +138,38 @@ class PublicarHFSnapshotTests(unittest.TestCase):
     def test_sanitize_url_for_public_removes_credentials(self) -> None:
         safe = sanitize_url_for_public("https://user:pass@example.org/x?token=123&ok=1")
         self.assertEqual(safe, "https://example.org/x?token=REDACTED&ok=1")
+
+    def test_build_explorer_schema_payload_includes_fk_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            db_path = Path(tmp) / "schema.db"
+            conn = sqlite3.connect(str(db_path))
+            try:
+                conn.executescript(
+                    """
+                    CREATE TABLE institutions (
+                      institution_id INTEGER PRIMARY KEY,
+                      name TEXT
+                    );
+                    CREATE TABLE mandates (
+                      mandate_id INTEGER PRIMARY KEY,
+                      institution_id INTEGER NOT NULL,
+                      role_title TEXT,
+                      FOREIGN KEY (institution_id) REFERENCES institutions(institution_id)
+                    );
+                    """
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
+            payload = build_explorer_schema_payload(db_path)
+            self.assertIn("tables", payload)
+            tables = {row["name"]: row for row in payload["tables"]}
+            self.assertIn("mandates", tables)
+            self.assertIn("institutions", tables)
+            self.assertEqual(tables["mandates"]["primary_key"], ["mandate_id"])
+            self.assertEqual(tables["mandates"]["foreign_keys_out"][0]["to_table"], "institutions")
+            self.assertEqual(tables["institutions"]["foreign_keys_in"][0]["from_table"], "mandates")
 
 
 if __name__ == "__main__":

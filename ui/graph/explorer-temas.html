@@ -766,8 +766,6 @@
         const host = window.location.hostname;
         return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
       })();
-      const isGitHubPages = /(^|\.)github\.io$/i.test(window.location.hostname);
-      const LOCAL_API_NOTICE = "El Explorer SQL requiere API local y no funciona en GitHub Pages.";
 
       const resolveApiPath = (path) => {
         const endpoint = String(path || "").trim();
@@ -781,22 +779,6 @@
       const withApiParam = (url) => {
         if (!API_BASE_OVERRIDE) return url;
         return url + (url.includes("?") ? "&" : "?") + "api=" + encodeURIComponent(API_BASE_OVERRIDE);
-      };
-
-      const applyLocalApiGate = () => {
-        if (!isGitHubPages) return;
-        document.querySelectorAll('[data-local-api="explorer-sql"]').forEach((el) => {
-          el.classList.add("local-api-disabled");
-          el.setAttribute("aria-disabled", "true");
-          el.setAttribute("title", LOCAL_API_NOTICE);
-          if (el.tagName === "A") {
-            el.setAttribute("tabindex", "-1");
-            el.addEventListener("click", (event) => event.preventDefault());
-          }
-          if (el.tagName === "BUTTON") {
-            el.disabled = true;
-          }
-        });
       };
 
       async function readJson(url) {
@@ -991,9 +973,11 @@
       }
 
       function applyInitialSelection() {
-        const setId = paramGet("set");
-        const topicId = paramGet("topic");
-        const personId = paramGet("person");
+        // Backward-compatible: accept both short params (set/topic/person) and
+        // explicit ids (topic_set_id/topic_id/person_id) used by some exporters.
+        const setId = paramGet("set") || paramGet("topic_set_id");
+        const topicId = paramGet("topic") || paramGet("topic_id");
+        const personId = paramGet("person") || paramGet("person_id");
         if (setId) state.activeSetId = setId;
         if (topicId) state.activeTopicId = topicId;
         if (personId) state.activePersonId = personId;
@@ -1952,7 +1936,6 @@
       }
 
       async function reloadAll() {
-        applyLocalApiGate();
         setModeUI();
         await loadSnapshotIfNeeded();
         await loadHealth();

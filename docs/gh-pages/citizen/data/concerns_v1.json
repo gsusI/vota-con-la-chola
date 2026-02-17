@@ -1,0 +1,184 @@
+{
+  "version": "v1",
+  "notes": "Navigation-only concern tags (deterministic keywords). Not a substantive classifier.",
+  "normalization": {
+    "lowercase": true,
+    "strip_diacritics": true
+  },
+  "concerns": [
+    {
+      "id": "vivienda",
+      "label": "Vivienda",
+      "keywords": [
+        "vivienda",
+        "alquiler",
+        "arrend",
+        "hipotec",
+        "desahuc",
+        "okup",
+        "ocupacion",
+        "habitacion",
+        "suelo",
+        "urban"
+      ]
+    },
+    {
+      "id": "empleo",
+      "label": "Empleo",
+      "keywords": [
+        "empleo",
+        "trabaj",
+        "paro",
+        "desemple",
+        "salari",
+        "jornada",
+        "contrat",
+        "autonom",
+        "empresa",
+        "erte"
+      ]
+    },
+    {
+      "id": "sanidad",
+      "label": "Sanidad",
+      "keywords": [
+        "sanidad",
+        "salud",
+        "hospital",
+        "medic",
+        "farmac",
+        "vacun",
+        "atencion primaria",
+        "dependenc"
+      ]
+    },
+    {
+      "id": "educacion",
+      "label": "Educacion",
+      "keywords": [
+        "educacion",
+        "universidad",
+        "escuela",
+        "docent",
+        "beca",
+        "fp",
+        "formacion",
+        "ensenanz"
+      ]
+    },
+    {
+      "id": "coste_vida",
+      "label": "Coste de vida",
+      "keywords": [
+        "inflacion",
+        "precios",
+        "precio",
+        "coste",
+        "cesta",
+        "desperdicio alimentario",
+        "alimentari",
+        "energia",
+        "combustibl"
+      ]
+    },
+    {
+      "id": "energia",
+      "label": "Energia",
+      "keywords": [
+        "energia",
+        "electric",
+        "gas",
+        "renovable",
+        "nuclear",
+        "hidrogeno",
+        "carbon",
+        "petroleo",
+        "clima"
+      ]
+    },
+    {
+      "id": "transporte",
+      "label": "Transporte",
+      "keywords": [
+        "movilidad",
+        "transporte",
+        "ferrovi",
+        "tren",
+        "renfe",
+        "carretera",
+        "aviacion",
+        "aeropuerto",
+        "autobus"
+      ]
+    },
+    {
+      "id": "seguridad_justicia",
+      "label": "Seguridad y justicia",
+      "keywords": [
+        "justicia",
+        "seguridad",
+        "policia",
+        "penal",
+        "delit",
+        "violencia",
+        "tribunal",
+        "carcel",
+        "terror"
+      ]
+    },
+    {
+      "id": "inmigracion",
+      "label": "Inmigracion",
+      "keywords": [
+        "inmigr",
+        "migr",
+        "frontera",
+        "asilo",
+        "refugiad",
+        "regulariz",
+        "expulsion"
+      ]
+    },
+    {
+      "id": "corrupcion",
+      "label": "Corrupcion",
+      "keywords": [
+        "corrup",
+        "transpar",
+        "fraud",
+        "malvers",
+        "cohech",
+        "cloaca",
+        "conflicto de interes"
+      ]
+    },
+    {
+      "id": "campo_rural",
+      "label": "Campo y mundo rural",
+      "keywords": [
+        "campo",
+        "rural",
+        "agric",
+        "ganader",
+        "pesca",
+        "forestal",
+        "incend",
+        "agua",
+        "regadio"
+      ]
+    },
+    {
+      "id": "igualdad",
+      "label": "Igualdad",
+      "keywords": [
+        "igualdad",
+        "mujer",
+        "hombres",
+        "genero",
+        "lgtb",
+        "paritari",
+        "violencia machista"
+      ]
+    }
+  ]
+}

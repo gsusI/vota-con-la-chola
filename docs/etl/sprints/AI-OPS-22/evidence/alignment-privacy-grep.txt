@@ -1,0 +1,9 @@
+694:              <option value="alignment">Vista: alineamiento</option>
+836:      const LS_PREFS = "vclc_citizen_prefs_v1";
+926:        // Expect: #prefs=v1:<payload>
+927:        if (!h.startsWith("#prefs=")) return { prefs: null, error: "" };
+928:        const raw = h.slice("#prefs=".length);
+941:        base.hash = `#prefs=${encodeURIComponent("v1:" + encodePrefsPayload(prefsMap))}`;
+2105:      function renderAlignmentCompare(el, { sortMode } = {}) {
+2462:          renderAlignmentCompare(el, { sortMode });
+2912:        // Preferences: local-first by default. Opt-in share uses URL fragment (#prefs=...).

@@ -638,8 +638,6 @@
       const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
       const STATIC_DATA_DIR = "data";
       const STATIC_GRAPH_PATH = `${STATIC_DATA_DIR}/graph.json`;
-      const LOCAL_API_NOTICE = "El Explorer SQL requiere API local y no funciona en GitHub Pages.";
-      const isGitHubPages = /(^|\.)github\.io$/i.test(window.location.hostname);
 
       const isLocalApiHost = (() => {
         const host = window.location.hostname;
@@ -659,17 +657,6 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
-      };
-
-      const applyLocalApiGate = () => {
-        if (!isGitHubPages) return;
-        document.querySelectorAll('[data-local-api="explorer-sql"]').forEach((link) => {
-          link.classList.add("local-api-disabled");
-          link.setAttribute("aria-disabled", "true");
-          link.setAttribute("tabindex", "-1");
-          link.setAttribute("title", LOCAL_API_NOTICE);
-          link.addEventListener("click", (event) => event.preventDefault());
-        });
       };
 
       async function onNodeTap(evt) {
@@ -934,7 +921,6 @@
         if (lens !== null && els.lens) els.lens.value = lens;
       })();
 
-      applyLocalApiGate();
       loadGraph().catch((err) => setDetail("Error", String(err)));
     </script>
   </body>

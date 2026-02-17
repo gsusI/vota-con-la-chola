@@ -1,22 +1,22 @@
 {
   "db_path": "etl/data/staging/politicos-es.db",
-  "generated_at": "2026-02-17T08:52:12+00:00",
+  "generated_at": "2026-02-17T20:35:50+00:00",
   "summary": {
-    "desired": 42,
-    "present": 42,
+    "desired": 43,
+    "present": 43,
     "missing": 0,
     "extra": 0,
     "not_run": 2,
     "running": 0,
-    "ok": 31,
+    "ok": 37,
     "partial": 0,
     "error": 0,
-    "degraded": 9,
+    "degraded": 4,
     "unknown": 0,
     "not_in_catalog": 0,
     "desired_progress": {
-      "loaded": 84658,
-      "target": 56497,
+      "loaded": 84975,
+      "target": 56498,
       "percent": 100
     },
     "states": [
@@ -26,69 +26,72 @@
     ],
     "sql": {
       "todo": 2,
-      "partial": 6,
-      "done": 34,
+      "partial": 5,
+      "done": 36,
       "foreign_key_violations": 0
     },
     "tracker": {
-      "items_total": 46,
-      "unmapped": 13,
-      "todo": 16,
-      "partial": 3,
-      "done": 27,
-      "mismatch": 7,
+      "items_total": 47,
+      "unmapped": 14,
+      "todo": 8,
+      "partial": 5,
+      "done": 34,
+      "mismatch": 0,
       "waived_mismatch": 0,
       "done_zero_real": 0,
-      "untracked_sources": 7,
+      "untracked_sources": 8,
       "waivers_active": 0,
       "waivers_expired": 0,
       "waivers_error": ""
     }
   },
   "ops": {
-    "ingestion_runs_total": 222,
-    "ingestion_runs_ok": 150,
-    "ingestion_runs_error": 65,
-    "ingestion_runs_retry": 72,
-    "ingestion_runs_ok_pct": 0.6756756756756757,
-    "avg_run_seconds": 172.58759194335272,
+    "ingestion_runs_total": 272,
+    "ingestion_runs_ok": 177,
+    "ingestion_runs_error": 88,
+    "ingestion_runs_retry": 95,
+    "ingestion_runs_ok_pct": 0.6507352941176471,
+    "avg_run_seconds": 140.86163166558967,
     "last_run_seconds": 0.0,
-    "retry_rate": 0.32432432432432434,
+    "retry_rate": 0.3492647058823529,
     "published_recommendation_artifacts": 0,
     "autonomico_sources_ok": 17,
     "europeo_sources_ok": 1
   },
   "analytics": {
     "topics": {
-      "topics_total": 389,
-      "topic_sets_total": 2,
-      "topic_sets_active": 2,
-      "topic_set_topics_total": 224,
-      "high_stakes_total": 84
+      "topics_total": 401,
+      "topic_sets_total": 5,
+      "topic_sets_active": 5,
+      "topic_set_topics_total": 260,
+      "high_stakes_total": 120
     },
     "evidence": {
-      "topic_evidence_total": 431650,
-      "topic_evidence_with_topic": 431650,
+      "topic_evidence_total": 431661,
+      "topic_evidence_with_topic": 431661,
       "topic_evidence_with_topic_pct": 1.0,
-      "topic_evidence_with_date": 431650,
+      "topic_evidence_with_date": 431661,
       "topic_evidence_with_date_pct": 1.0,
-      "topic_evidence_with_source_url": 431650,
+      "topic_evidence_with_source_url": 431661,
       "topic_evidence_with_source_url_pct": 1.0,
-      "topic_evidence_declared_total": 614,
+      "topic_evidence_declared_total": 625,
       "topic_evidence_revealed_total": 431036,
-      "topic_evidence_declared_with_date": 614,
+      "topic_evidence_declared_with_date": 625,
       "topic_evidence_declared_with_date_pct": 1.0,
-      "topic_evidence_declared_with_signal": 202,
-      "topic_evidence_declared_with_signal_pct": 0.3289902280130293,
-      "topic_evidence_reviews_total": 524,
-      "topic_evidence_reviews_pending": 0,
-      "topic_evidence_reviews_resolved": 50,
+      "topic_evidence_declared_with_signal": 209,
+      "topic_evidence_declared_with_signal_pct": 0.3344,
+      "topic_evidence_reviews_total": 537,
+      "topic_evidence_reviews_pending": 6,
+      "topic_evidence_reviews_resolved": 57,
       "topic_evidence_reviews_ignored": 474,
-      "topic_evidence_reviews_pending_pct": 0.0,
-      "topic_evidence_reviews_pending_by_reason": {},
+      "topic_evidence_reviews_pending_pct": 0.0096,
+      "topic_evidence_reviews_pending_by_reason": {
+        "no_signal": 6
+      },
       "topic_evidence_by_type": {
         "revealed:vote": 431036,
-        "declared:intervention": 614
+        "declared:intervention": 614,
+        "declared:programa": 11
       },
       "topic_method_top": [
         {
@@ -114,6 +117,10 @@
         {
           "key": "initiative:expediente",
           "count": 614
+        },
+        {
+          "key": "programa:concern:v1",
+          "count": 11
         }
       ],
       "stance_method_top": [
@@ -123,41 +130,45 @@
         },
         {
           "key": "intervention_metadata",
-          "count": 412
+          "count": 410
         },
         {
           "key": "declared:regex_v3",
-          "count": 201
+          "count": 208
+        },
+        {
+          "key": "programa_metadata",
+          "count": 6
         },
         {
           "key": "declared:manual_review_v1",
           "count": 1
         }
       ],
-      "text_documents_total": 614,
-      "text_documents_with_excerpt": 614,
+      "text_documents_total": 617,
+      "text_documents_with_excerpt": 617,
       "text_documents_with_excerpt_pct": 1.0,
-      "declared_evidence_with_text_excerpt": 614,
+      "declared_evidence_with_text_excerpt": 625,
       "declared_evidence_with_text_excerpt_pct": 1.0
     },
     "positions": {
-      "topic_positions_total": 137379,
-      "topic_positions_with_evidence": 137379,
+      "topic_positions_total": 274435,
+      "topic_positions_with_evidence": 274435,
       "topic_positions_with_evidence_pct": 1.0,
       "topic_positions_by_method": {
-        "combined": 68612,
-        "votes": 68528,
-        "declared": 239
+        "combined": 137060,
+        "votes": 137056,
+        "declared": 319
       }
     },
     "coherence": {
-      "as_of_date": "2026-02-12",
+      "as_of_date": "2026-02-16",
       "overlap_total": 155,
-      "explicit_total": 100,
+      "explicit_total": 99,
       "coherent_total": 52,
-      "incoherent_total": 48,
-      "coherence_pct": 0.52,
-      "incoherence_pct": 0.48
+      "incoherent_total": 47,
+      "coherence_pct": 0.5252525252525253,
+      "incoherence_pct": 0.47474747474747475
     },
     "traceability": {
       "parl_vote_events_total": 8357,
@@ -477,7 +488,7 @@
         "dominio": "Autonomico",
         "fuentes_objetivo": "Parlamento de Galicia: deputados (fichas HTML)",
         "estado": "PARTIAL",
-        "bloque": "Done now: NO. Blocker: `--strict-network` en `parlamento_galicia_deputados` sigue bloqueado con HTTP 403 en este entorno, sin cierre de estado operativo. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md` y `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-galicia-strict.log`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-16 --strict-network --timeout 30`.",
+        "bloque": "Done now: NO. Blocker: `parlamento_galicia_deputados` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=265`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
         "source_ids": [
           "parlamento_galicia_deputados"
         ],
@@ -573,7 +584,7 @@
         "dominio": "Autonomico",
         "fuentes_objetivo": "Parlamento de Navarra: parlamentarios forales (fichas HTML)",
         "estado": "PARTIAL",
-        "bloque": "Done now: NO. Blocker: `--strict-network` en `parlamento_navarra_parlamentarios_forales` sigue bloqueado con HTTP 403; la fila permanece `PARTIAL` con carga SQL `PARTIAL` (sin mismatch activo). Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md` y `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-navarra-strict.log`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --snapshot-date 2026-02-16 --strict-network --timeout 30`.",
+        "bloque": "Done now: NO. Blocker: `parlamento_navarra_parlamentarios_forales` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=266`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
         "source_ids": [
           "parlamento_navarra_parlamentarios_forales"
         ],
@@ -606,8 +617,8 @@
         "tipo_dato": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
         "dominio": "Dinero",
         "fuentes_objetivo": "PLACSP (filtrado por \u00f3rganos auton\u00f3micos)",
-        "estado": "TODO",
-        "bloque": "Falta estrategia reproducible: ingesta incremental + agregaci\u00f3n CPV/\u00f3rgano/importe; no intentar \u201cleerlo todo\u201d",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `placsp_autonomico` recuper\u00f3 `strict-network` con red real (`run_id=248`, `run_status=ok`, `run_records_loaded=106`) y el mismatch restante era solo desfase tracker/SQL, por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-11/evidence/placsp-strict-refresh.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-status.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-gate.log`, `docs/etl/sprints/AI-OPS-11/exports/placsp_waiver_decision.csv`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [
           "placsp_autonomico"
         ],
@@ -618,8 +629,8 @@
         "tipo_dato": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
         "dominio": "Dinero",
         "fuentes_objetivo": "BDNS/SNPSAP (filtrado por \u00f3rgano convocante/territorio)",
-        "estado": "TODO",
-        "bloque": "Falta ingesta y normalizaci\u00f3n; entity resolution de beneficiario cuando no haya ID estable",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `bdns_autonomico` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/busqueda`) y red real (`run_id=257`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [
           "bdns_autonomico"
         ],
@@ -647,6 +658,16 @@
           "infoelectoral_procesos"
         ],
         "scope": "electoral",
+        "scope_inferred": false
+      },
+      {
+        "tipo_dato": "Publicacion abierta de snapshots ETL",
+        "dominio": "Operaciones",
+        "fuentes_objetivo": "Hugging Face Datasets (dataset publico)",
+        "estado": "DONE",
+        "bloque": "Done now: YES. Snapshot p\u00fablico reproducible disponible en HF con paquete por fecha (`snapshots/<snapshot_date>/`) que incluye `published/*`, `manifest.json`, `checksums.sha256`, `latest.json` y Parquet navegable; por privacidad se excluyen por defecto `raw_fetches,run_fetches,source_records,lost_and_found` y `politicos-es.sqlite.gz` queda desactivado salvo override expl\u00edcito. Comando: `just etl-publish-hf` (dry-run: `just etl-publish-hf-dry-run`). Siguiente comando: `SNAPSHOT_DATE=2026-02-12 just etl-publish-hf`.",
+        "source_ids": [],
+        "scope": "",
         "scope_inferred": false
       },
       {
@@ -688,8 +709,8 @@
         "tipo_dato": "Contratacion publica (Espana)",
         "dominio": "Dinero",
         "fuentes_objetivo": "PLACSP: sindicaci\u00f3n/ATOM (CODICE)",
-        "estado": "TODO",
-        "bloque": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `placsp_sindicacion` recuper\u00f3 `strict-network` con red real (`run_id=249`, `run_status=ok`, `run_records_loaded=106`) y el mismatch restante era solo desfase tracker/SQL, por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-11/evidence/placsp-strict-refresh.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-status.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-gate.log`, `docs/etl/sprints/AI-OPS-11/exports/placsp_waiver_decision.csv`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [
           "placsp_sindicacion"
         ],
@@ -700,8 +721,8 @@
         "tipo_dato": "Subvenciones y ayudas (Espana)",
         "dominio": "Dinero",
         "fuentes_objetivo": "BDNS/SNPSAP: API",
-        "estado": "TODO",
-        "bloque": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `bdns_api_subvenciones` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/ultimas`) y red real (`run_id=256`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [
           "bdns_api_subvenciones"
         ],
@@ -712,8 +733,8 @@
         "tipo_dato": "Indicadores (outcomes): Eurostat",
         "dominio": "Outcomes",
         "fuentes_objetivo": "Eurostat (API/SDMX)",
-        "estado": "TODO",
-        "bloque": "Falta conector SDMX/JSON; normalizar dimensiones/codelists y documentar mapeos sem\u00e1nticos",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `eurostat_sdmx` tiene `strict-network` exitoso (`run_records_loaded=2394`) y replay no-cero (`run_records_loaded=2`), por lo que el mismatch actual era desfase tracker/SQL y se reconcilia a `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__strict-network_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__replay_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/reports/eurostat-apply.md`, `docs/etl/sprints/AI-OPS-10/evidence/tracker-gate-postrun.log`, `docs/etl/sprints/AI-OPS-10/evidence/status-postrun.json`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [
           "eurostat_sdmx"
         ],
@@ -721,11 +742,11 @@
         "scope_inferred": false
       },
       {
-        "tipo_dato": "Indicadores (confusores): Banco de Espa\u00f1a",
+        "tipo_dato": "Indicadores (confusores): Banco de Espana",
         "dominio": "Outcomes",
-        "fuentes_objetivo": "Banco de Espa\u00f1a (API series)",
-        "estado": "TODO",
-        "bloque": "Falta conector; normalizar c\u00f3digos y unidades; versionar definiciones por snapshot",
+        "fuentes_objetivo": "Banco de Espana (API series)",
+        "estado": "PARTIAL",
+        "bloque": "Done now: NO. Blocker: `bde_series_api` en `strict-network` sigue fallando por DNS (`Errno 8`, `run_id=264`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --url https://api.bde.es/datos/series/PARO.TASA.ES.M --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
         "source_ids": [
           "bde_series_api"
         ],
@@ -736,8 +757,8 @@
         "tipo_dato": "Indicadores (confusores): AEMET",
         "dominio": "Outcomes",
         "fuentes_objetivo": "AEMET OpenData",
-        "estado": "TODO",
-        "bloque": "Falta conector; mapeo geogr\u00e1fico estaci\u00f3n->territorio; cambios de cobertura/metodolog\u00eda",
+        "estado": "PARTIAL",
+        "bloque": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
         "source_ids": [
           "aemet_opendata_series"
         ],
@@ -798,8 +819,8 @@
         "tipo_dato": "Posiciones declaradas (programas)",
         "dominio": "Editorial",
         "fuentes_objetivo": "Webs/programas de partidos",
-        "estado": "TODO",
-        "bloque": "Falta pipeline semiestructurado + revision humana",
+        "estado": "PARTIAL",
+        "bloque": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
         "source_ids": [],
         "scope": "territorial",
         "scope_inferred": true
@@ -838,8 +859,8 @@
         "tipo_dato": "Posiciones por tema (politico x scope)",
         "dominio": "Analitica",
         "fuentes_objetivo": "Agregacion reproducible + drill-down a evidencia",
-        "estado": "PARTIAL",
-        "bloque": "Evidencia reproducible en `docs/etl/sprints/AI-OPS-03/evidence/analytics-partials.md` (\u00a71.4) y `docs/etl/sprints/AI-OPS-03/reports/asof-alignment.md`: SQL reporta `topic_positions_total=137379`, `computed_method_combined=68612`, `computed_method_declared=239`, `computed_method_votes=68528`; cobertura high-stakes latest por set `topic_set_id=1: 12/60 (20.0%)`, `topic_set_id=2: 23/24 (95.83%)`; y en corrida alineada AI-OPS-03 `as_of_date=2026-02-12` sin mezcla por m\u00e9todo/set. Aporte a roadmap t\u00e9cnico: avance de Fase 2 (coherencia says-vs-does con drill-down). Bloqueador: latest de Congreso sigue anclado en `as_of_date=2026-02-16` con cobertura `20.0%`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db etl/data/staging/politicos-es.db --as-of-date 2026-02-16 --taxonomy-seed etl/data/seeds/topic_taxonomy_es.json`.",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `backfill-topic-analytics` en `as_of_date=2026-02-16` dej\u00f3 ambos sets en latest alineado y cerr\u00f3 el blocker de cobertura en Congreso: `topic_set_id=1` pas\u00f3 de `12/60 (20.0%)` a `60/60 (100.0%)`, mientras `topic_set_id=2` qued\u00f3 en `23/24 (95.83%)` con latest tambi\u00e9n en `2026-02-16`; adem\u00e1s, `topic_positions_total` subi\u00f3 de `137379` a `205907` y `computed_method_votes` de `68528` a `137056` (`combined=68612`, `declared=239`). Evidencia: `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_baseline.csv`, `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_post.csv`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_baseline.log`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_recompute.log`, `docs/etl/sprints/AI-OPS-15/reports/topic_positions_reconciliation.md`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [],
         "scope": "nacional",
         "scope_inferred": true
@@ -865,6 +886,16 @@
         "source_ids": [],
         "scope": "autonomico",
         "scope_inferred": true
+      },
+      {
+        "tipo_dato": "Publicacion abierta de snapshots ETL",
+        "dominio": "Operaciones",
+        "fuentes_objetivo": "Hugging Face Datasets (dataset publico)",
+        "estado": "DONE",
+        "bloque": "Done now: YES. Snapshot p\u00fablico reproducible disponible en HF con paquete por fecha (`snapshots/<snapshot_date>/`) que incluye `published/*`, `manifest.json`, `checksums.sha256`, `latest.json` y Parquet navegable; por privacidad se excluyen por defecto `raw_fetches,run_fetches,source_records,lost_and_found` y `politicos-es.sqlite.gz` queda desactivado salvo override expl\u00edcito. Comando: `just etl-publish-hf` (dry-run: `just etl-publish-hf-dry-run`). Siguiente comando: `SNAPSHOT_DATE=2026-02-12 just etl-publish-hf`.",
+        "source_ids": [],
+        "scope": "",
+        "scope_inferred": false
       },
       {
         "tipo_dato": "Convocatorias y estado electoral",
@@ -930,8 +961,8 @@
         "tipo_dato": "Posiciones declaradas (programas)",
         "dominio": "Editorial",
         "fuentes_objetivo": "Webs/programas de partidos",
-        "estado": "TODO",
-        "bloque": "Falta pipeline semiestructurado + revision humana",
+        "estado": "PARTIAL",
+        "bloque": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
         "source_ids": [],
         "scope": "territorial",
         "scope_inferred": true
@@ -970,8 +1001,8 @@
         "tipo_dato": "Posiciones por tema (politico x scope)",
         "dominio": "Analitica",
         "fuentes_objetivo": "Agregacion reproducible + drill-down a evidencia",
-        "estado": "PARTIAL",
-        "bloque": "Evidencia reproducible en `docs/etl/sprints/AI-OPS-03/evidence/analytics-partials.md` (\u00a71.4) y `docs/etl/sprints/AI-OPS-03/reports/asof-alignment.md`: SQL reporta `topic_positions_total=137379`, `computed_method_combined=68612`, `computed_method_declared=239`, `computed_method_votes=68528`; cobertura high-stakes latest por set `topic_set_id=1: 12/60 (20.0%)`, `topic_set_id=2: 23/24 (95.83%)`; y en corrida alineada AI-OPS-03 `as_of_date=2026-02-12` sin mezcla por m\u00e9todo/set. Aporte a roadmap t\u00e9cnico: avance de Fase 2 (coherencia says-vs-does con drill-down). Bloqueador: latest de Congreso sigue anclado en `as_of_date=2026-02-16` con cobertura `20.0%`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db etl/data/staging/politicos-es.db --as-of-date 2026-02-16 --taxonomy-seed etl/data/seeds/topic_taxonomy_es.json`.",
+        "estado": "DONE",
+        "bloque": "Done now: YES. `backfill-topic-analytics` en `as_of_date=2026-02-16` dej\u00f3 ambos sets en latest alineado y cerr\u00f3 el blocker de cobertura en Congreso: `topic_set_id=1` pas\u00f3 de `12/60 (20.0%)` a `60/60 (100.0%)`, mientras `topic_set_id=2` qued\u00f3 en `23/24 (95.83%)` con latest tambi\u00e9n en `2026-02-16`; adem\u00e1s, `topic_positions_total` subi\u00f3 de `137379` a `205907` y `computed_method_votes` de `68528` a `137056` (`combined=68612`, `declared=239`). Evidencia: `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_baseline.csv`, `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_post.csv`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_baseline.log`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_recompute.log`, `docs/etl/sprints/AI-OPS-15/reports/topic_positions_reconciliation.md`. Siguiente comando: `just etl-tracker-gate`.",
         "source_ids": [],
         "scope": "nacional",
         "scope_inferred": true
@@ -1064,14 +1095,14 @@
         "points_eng": 21,
         "points_hum": 8,
         "progress": {
-          "done": 5,
-          "partial": 1,
-          "todo": 2,
+          "done": 8,
+          "partial": 0,
+          "todo": 0,
           "untracked": 8,
           "tracked_total": 8,
           "overall_total": 16,
-          "tracked_percent": 69,
-          "overall_percent": 34
+          "tracked_percent": 100,
+          "overall_percent": 50
         },
         "items": [
           {
@@ -1143,10 +1174,10 @@
             "kind": "tracker",
             "id": "contratacion_publica_espana",
             "label": "Contratacion publica (Espana)",
-            "status": "TODO",
+            "status": "DONE",
             "dominio": "Dinero",
             "scope": "dinero",
-            "bloque": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente",
+            "bloque": "Done now: YES. `placsp_sindicacion` recuper\u00f3 `strict-network` con red real (`run_id=249`, `run_status=ok`, `run_records_loaded=106`) y el mismatch restante era solo desfase tracker/SQL, por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-11/evidence/placsp-strict-refresh.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-status.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-gate.log`, `docs/etl/sprints/AI-OPS-11/exports/placsp_waiver_decision.csv`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": [
               "placsp_sindicacion"
             ]
@@ -1155,10 +1186,10 @@
             "kind": "tracker",
             "id": "subvenciones_y_ayudas_espana",
             "label": "Subvenciones y ayudas (Espana)",
-            "status": "TODO",
+            "status": "DONE",
             "dominio": "Dinero",
             "scope": "dinero",
-            "bloque": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario",
+            "bloque": "Done now: YES. `bdns_api_subvenciones` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/ultimas`) y red real (`run_id=256`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": [
               "bdns_api_subvenciones"
             ]
@@ -1217,10 +1248,10 @@
             "kind": "tracker",
             "id": "posiciones_por_tema_politico_x_scope",
             "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
+            "status": "DONE",
             "dominio": "Analitica",
             "scope": "nacional",
-            "bloque": "Evidencia reproducible en `docs/etl/sprints/AI-OPS-03/evidence/analytics-partials.md` (\u00a71.4) y `docs/etl/sprints/AI-OPS-03/reports/asof-alignment.md`: SQL reporta `topic_positions_total=137379`, `computed_method_combined=68612`, `computed_method_declared=239`, `computed_method_votes=68528`; cobertura high-stakes latest por set `topic_set_id=1: 12/60 (20.0%)`, `topic_set_id=2: 23/24 (95.83%)`; y en corrida alineada AI-OPS-03 `as_of_date=2026-02-12` sin mezcla por m\u00e9todo/set. Aporte a roadmap t\u00e9cnico: avance de Fase 2 (coherencia says-vs-does con drill-down). Bloqueador: latest de Congreso sigue anclado en `as_of_date=2026-02-16` con cobertura `20.0%`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db etl/data/staging/politicos-es.db --as-of-date 2026-02-16 --taxonomy-seed etl/data/seeds/topic_taxonomy_es.json`.",
+            "bloque": "Done now: YES. `backfill-topic-analytics` en `as_of_date=2026-02-16` dej\u00f3 ambos sets en latest alineado y cerr\u00f3 el blocker de cobertura en Congreso: `topic_set_id=1` pas\u00f3 de `12/60 (20.0%)` a `60/60 (100.0%)`, mientras `topic_set_id=2` qued\u00f3 en `23/24 (95.83%)` con latest tambi\u00e9n en `2026-02-16`; adem\u00e1s, `topic_positions_total` subi\u00f3 de `137379` a `205907` y `computed_method_votes` de `68528` a `137056` (`combined=68612`, `declared=239`). Evidencia: `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_baseline.csv`, `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_post.csv`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_baseline.log`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_recompute.log`, `docs/etl/sprints/AI-OPS-15/reports/topic_positions_reconciliation.md`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": []
           },
           {
@@ -1240,24 +1271,6 @@
         ],
         "next": [
           {
-            "id": "posiciones_por_tema_politico_x_scope",
-            "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "path": null
-          },
-          {
-            "id": "contratacion_publica_espana",
-            "label": "Contratacion publica (Espana)",
-            "status": "TODO",
-            "path": null
-          },
-          {
-            "id": "subvenciones_y_ayudas_espana",
-            "label": "Subvenciones y ayudas (Espana)",
-            "status": "TODO",
-            "path": null
-          },
-          {
             "id": "action_vectors_v1",
             "label": "Action vectors Tier 1 (vectorial + incertidumbre) con drill-down",
             "status": "UNTRACKED",
@@ -1266,6 +1279,24 @@
           {
             "id": "iniciativas_congreso",
             "label": "Iniciativas Congreso",
+            "status": "MISSING",
+            "path": null
+          },
+          {
+            "id": "intervenciones_congreso",
+            "label": "Intervenciones Congreso",
+            "status": "MISSING",
+            "path": null
+          },
+          {
+            "id": "incoherence_v1",
+            "label": "Se\u00f1al de incoherencia v1 (intra-dominio y dicho vs hecho)",
+            "status": "UNTRACKED",
+            "path": ""
+          },
+          {
+            "id": "transparencia_agendas_altos_cargos",
+            "label": "Transparencia: agendas altos cargos",
             "status": "MISSING",
             "path": null
           }
@@ -1278,14 +1309,14 @@
         "points_eng": 21,
         "points_hum": 8,
         "progress": {
-          "done": 3,
+          "done": 5,
           "partial": 0,
-          "todo": 4,
+          "todo": 2,
           "untracked": 1,
           "tracked_total": 7,
           "overall_total": 8,
-          "tracked_percent": 43,
-          "overall_percent": 38
+          "tracked_percent": 71,
+          "overall_percent": 62
         },
         "items": [
           {
@@ -1338,10 +1369,10 @@
             "kind": "tracker",
             "id": "contratacion_autonomica_piloto_3_ccaa",
             "label": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
-            "status": "TODO",
+            "status": "DONE",
             "dominio": "Dinero",
             "scope": "dinero",
-            "bloque": "Falta estrategia reproducible: ingesta incremental + agregaci\u00f3n CPV/\u00f3rgano/importe; no intentar \u201cleerlo todo\u201d",
+            "bloque": "Done now: YES. `placsp_autonomico` recuper\u00f3 `strict-network` con red real (`run_id=248`, `run_status=ok`, `run_records_loaded=106`) y el mismatch restante era solo desfase tracker/SQL, por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-11/evidence/placsp-strict-refresh.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-status.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-gate.log`, `docs/etl/sprints/AI-OPS-11/exports/placsp_waiver_decision.csv`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": [
               "placsp_autonomico"
             ]
@@ -1350,10 +1381,10 @@
             "kind": "tracker",
             "id": "subvenciones_autonomicas_piloto_3_ccaa",
             "label": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
-            "status": "TODO",
+            "status": "DONE",
             "dominio": "Dinero",
             "scope": "dinero",
-            "bloque": "Falta ingesta y normalizaci\u00f3n; entity resolution de beneficiario cuando no haya ID estable",
+            "bloque": "Done now: YES. `bdns_autonomico` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/busqueda`) y red real (`run_id=257`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": [
               "bdns_autonomico"
             ]
@@ -1378,12 +1409,6 @@
         ],
         "next": [
           {
-            "id": "contratacion_autonomica_piloto_3_ccaa",
-            "label": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
-            "status": "TODO",
-            "path": null
-          },
-          {
             "id": "normativa_autonomica_piloto_3_ccaa",
             "label": "Normativa auton\u00f3mica (piloto 3 CCAA)",
             "status": "TODO",
@@ -1392,12 +1417,6 @@
           {
             "id": "presupuesto_ejecucion_autonomica_piloto_3_ccaa",
             "label": "Presupuesto + ejecuci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
-            "status": "TODO",
-            "path": null
-          },
-          {
-            "id": "subvenciones_autonomicas_piloto_3_ccaa",
-            "label": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
             "status": "TODO",
             "path": null
           },
@@ -1416,14 +1435,14 @@
         "points_eng": 13,
         "points_hum": 5,
         "progress": {
-          "done": 1,
+          "done": 2,
           "partial": 1,
-          "todo": 2,
+          "todo": 1,
           "untracked": 3,
           "tracked_total": 4,
           "overall_total": 7,
-          "tracked_percent": 38,
-          "overall_percent": 21
+          "tracked_percent": 62,
+          "overall_percent": 36
         },
         "items": [
           {
@@ -1453,20 +1472,20 @@
             "kind": "tracker",
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
+            "status": "PARTIAL",
             "dominio": "Editorial",
             "scope": "territorial",
-            "bloque": "Falta pipeline semiestructurado + revision humana",
+            "bloque": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
             "source_ids": []
           },
           {
             "kind": "tracker",
             "id": "posiciones_por_tema_politico_x_scope",
             "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
+            "status": "DONE",
             "dominio": "Analitica",
             "scope": "nacional",
-            "bloque": "Evidencia reproducible en `docs/etl/sprints/AI-OPS-03/evidence/analytics-partials.md` (\u00a71.4) y `docs/etl/sprints/AI-OPS-03/reports/asof-alignment.md`: SQL reporta `topic_positions_total=137379`, `computed_method_combined=68612`, `computed_method_declared=239`, `computed_method_votes=68528`; cobertura high-stakes latest por set `topic_set_id=1: 12/60 (20.0%)`, `topic_set_id=2: 23/24 (95.83%)`; y en corrida alineada AI-OPS-03 `as_of_date=2026-02-12` sin mezcla por m\u00e9todo/set. Aporte a roadmap t\u00e9cnico: avance de Fase 2 (coherencia says-vs-does con drill-down). Bloqueador: latest de Congreso sigue anclado en `as_of_date=2026-02-16` con cobertura `20.0%`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db etl/data/staging/politicos-es.db --as-of-date 2026-02-16 --taxonomy-seed etl/data/seeds/topic_taxonomy_es.json`.",
+            "bloque": "Done now: YES. `backfill-topic-analytics` en `as_of_date=2026-02-16` dej\u00f3 ambos sets en latest alineado y cerr\u00f3 el blocker de cobertura en Congreso: `topic_set_id=1` pas\u00f3 de `12/60 (20.0%)` a `60/60 (100.0%)`, mientras `topic_set_id=2` qued\u00f3 en `23/24 (95.83%)` con latest tambi\u00e9n en `2026-02-16`; adem\u00e1s, `topic_positions_total` subi\u00f3 de `137379` a `205907` y `computed_method_votes` de `68528` a `137056` (`combined=68612`, `declared=239`). Evidencia: `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_baseline.csv`, `docs/etl/sprints/AI-OPS-15/exports/topic_positions_kpi_post.csv`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_baseline.log`, `docs/etl/sprints/AI-OPS-15/evidence/topic_positions_recompute.log`, `docs/etl/sprints/AI-OPS-15/reports/topic_positions_reconciliation.md`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": []
           },
           {
@@ -1493,20 +1512,14 @@
         ],
         "next": [
           {
-            "id": "posiciones_por_tema_politico_x_scope",
-            "label": "Posiciones por tema (politico x scope)",
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
             "status": "PARTIAL",
             "path": null
           },
           {
             "id": "convocatorias_y_estado_electoral",
             "label": "Convocatorias y estado electoral",
-            "status": "TODO",
-            "path": null
-          },
-          {
-            "id": "posiciones_declaradas_programas",
-            "label": "Posiciones declaradas (programas)",
             "status": "TODO",
             "path": null
           },
@@ -1521,6 +1534,12 @@
             "label": "Escenarios de pesos + sensibilidad (sin ranking \u00fanico por defecto)",
             "status": "UNTRACKED",
             "path": ""
+          },
+          {
+            "id": "replica_mode",
+            "label": "Modo r\u00e9plica: export dataset procesado + script/consulta reproducible",
+            "status": "UNTRACKED",
+            "path": ""
           }
         ]
       },
@@ -1531,14 +1550,14 @@
         "points_eng": 13,
         "points_hum": 13,
         "progress": {
-          "done": 0,
-          "partial": 0,
-          "todo": 4,
+          "done": 1,
+          "partial": 2,
+          "todo": 1,
           "untracked": 3,
           "tracked_total": 4,
           "overall_total": 7,
-          "tracked_percent": 0,
-          "overall_percent": 0
+          "tracked_percent": 50,
+          "overall_percent": 29
         },
         "items": [
           {
@@ -1555,10 +1574,10 @@
             "kind": "tracker",
             "id": "indicadores_outcomes_eurostat",
             "label": "Indicadores (outcomes): Eurostat",
-            "status": "TODO",
+            "status": "DONE",
             "dominio": "Outcomes",
             "scope": "outcomes",
-            "bloque": "Falta conector SDMX/JSON; normalizar dimensiones/codelists y documentar mapeos sem\u00e1nticos",
+            "bloque": "Done now: YES. `eurostat_sdmx` tiene `strict-network` exitoso (`run_records_loaded=2394`) y replay no-cero (`run_records_loaded=2`), por lo que el mismatch actual era desfase tracker/SQL y se reconcilia a `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__strict-network_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__replay_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/reports/eurostat-apply.md`, `docs/etl/sprints/AI-OPS-10/evidence/tracker-gate-postrun.log`, `docs/etl/sprints/AI-OPS-10/evidence/status-postrun.json`. Siguiente comando: `just etl-tracker-gate`.",
             "source_ids": [
               "eurostat_sdmx"
             ]
@@ -1566,11 +1585,11 @@
           {
             "kind": "tracker",
             "id": "indicadores_confusores_banco_de_espana",
-            "label": "Indicadores (confusores): Banco de Espa\u00f1a",
-            "status": "TODO",
+            "label": "Indicadores (confusores): Banco de Espana",
+            "status": "PARTIAL",
             "dominio": "Outcomes",
             "scope": "outcomes",
-            "bloque": "Falta conector; normalizar c\u00f3digos y unidades; versionar definiciones por snapshot",
+            "bloque": "Done now: NO. Blocker: `bde_series_api` en `strict-network` sigue fallando por DNS (`Errno 8`, `run_id=264`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --url https://api.bde.es/datos/series/PARO.TASA.ES.M --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
             "source_ids": [
               "bde_series_api"
             ]
@@ -1579,10 +1598,10 @@
             "kind": "tracker",
             "id": "indicadores_confusores_aemet",
             "label": "Indicadores (confusores): AEMET",
-            "status": "TODO",
+            "status": "PARTIAL",
             "dominio": "Outcomes",
             "scope": "outcomes",
-            "bloque": "Falta conector; mapeo geogr\u00e1fico estaci\u00f3n->territorio; cambios de cobertura/metodolog\u00eda",
+            "bloque": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
             "source_ids": [
               "aemet_opendata_series"
             ]
@@ -1616,13 +1635,13 @@
           {
             "id": "indicadores_confusores_aemet",
             "label": "Indicadores (confusores): AEMET",
-            "status": "TODO",
+            "status": "PARTIAL",
             "path": null
           },
           {
             "id": "indicadores_confusores_banco_de_espana",
-            "label": "Indicadores (confusores): Banco de Espa\u00f1a",
-            "status": "TODO",
+            "label": "Indicadores (confusores): Banco de Espana",
+            "status": "PARTIAL",
             "path": null
           },
           {
@@ -1632,14 +1651,14 @@
             "path": null
           },
           {
-            "id": "indicadores_outcomes_eurostat",
-            "label": "Indicadores (outcomes): Eurostat",
-            "status": "TODO",
-            "path": null
-          },
-          {
             "id": "causal_eval_pack",
             "label": "Evaluaciones causales (dise\u00f1o + diagn\u00f3sticos + credibilidad)",
+            "status": "UNTRACKED",
+            "path": ""
+          },
+          {
+            "id": "impact_cards",
+            "label": "Impact cards (efecto + incertidumbre + supuestos + enlaces)",
             "status": "UNTRACKED",
             "path": ""
           }
@@ -1752,14 +1771,14 @@
       }
     ],
     "summary": {
-      "done": 14,
-      "partial": 2,
-      "todo": 16,
+      "done": 21,
+      "partial": 3,
+      "todo": 8,
       "untracked": 18,
       "tracked_total": 32,
       "overall_total": 50,
-      "tracked_percent": 47,
-      "overall_percent": 30
+      "tracked_percent": 70,
+      "overall_percent": 45
     }
   },
   "roadmap_technical": {
@@ -1773,14 +1792,14 @@
         "points_eng": 8,
         "points_eng_raw": "8",
         "progress": {
-          "done": 6,
-          "partial": 1,
+          "done": 7,
+          "partial": 0,
           "todo": 0,
           "untracked": 3,
           "tracked_total": 7,
           "overall_total": 10,
-          "tracked_percent": 93,
-          "overall_percent": 65
+          "tracked_percent": 100,
+          "overall_percent": 70
         },
         "checks": [
           {
@@ -1827,8 +1846,8 @@
             "kind": "tracker",
             "id": "posiciones_por_tema_politico_x_scope",
             "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "actual_display": "PARTIAL",
+            "status": "DONE",
+            "actual_display": "DONE",
             "target_display": "DONE"
           },
           {
@@ -1881,13 +1900,6 @@
           }
         ],
         "next": [
-          {
-            "id": "posiciones_por_tema_politico_x_scope",
-            "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "actual_display": "PARTIAL",
-            "target_display": "DONE"
-          },
           {
             "id": "iniciativas_congreso",
             "label": "Iniciativas Congreso",
@@ -2047,14 +2059,14 @@
         "points_eng": 13,
         "points_eng_raw": "13",
         "progress": {
-          "done": 5,
-          "partial": 2,
+          "done": 6,
+          "partial": 1,
           "todo": 0,
           "untracked": 1,
           "tracked_total": 7,
           "overall_total": 8,
-          "tracked_percent": 86,
-          "overall_percent": 75
+          "tracked_percent": 93,
+          "overall_percent": 81
         },
         "checks": [
           {
@@ -2085,8 +2097,8 @@
             "kind": "tracker",
             "id": "posiciones_por_tema_politico_x_scope",
             "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "actual_display": "PARTIAL",
+            "status": "DONE",
+            "actual_display": "DONE",
             "target_display": "DONE"
           },
           {
@@ -2095,10 +2107,10 @@
             "label": "Evidencia declarada extraida",
             "status": "DONE",
             "metric": "topic_evidence_declared_total",
-            "actual": 614,
+            "actual": 625,
             "target": 1,
             "format": "int",
-            "actual_display": "614",
+            "actual_display": "625",
             "target_display": "1"
           },
           {
@@ -2107,7 +2119,7 @@
             "label": "Evidencia declarada con stance util",
             "status": "PARTIAL",
             "metric": "topic_evidence_declared_with_signal_pct",
-            "actual": 0.3289902280130293,
+            "actual": 0.3344,
             "target": 0.5,
             "format": "pct",
             "actual_display": "33%",
@@ -2147,13 +2159,6 @@
             "target_display": "50%"
           },
           {
-            "id": "posiciones_por_tema_politico_x_scope",
-            "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "actual_display": "PARTIAL",
-            "target_display": "DONE"
-          },
-          {
             "id": "intervenciones_congreso",
             "label": "Intervenciones Congreso",
             "status": "MISSING",
@@ -2169,30 +2174,30 @@
         "points_eng": 13,
         "points_eng_raw": "13",
         "progress": {
-          "done": 3,
+          "done": 4,
           "partial": 1,
-          "todo": 1,
+          "todo": 0,
           "untracked": 0,
           "tracked_total": 5,
           "overall_total": 5,
-          "tracked_percent": 70,
-          "overall_percent": 70
+          "tracked_percent": 90,
+          "overall_percent": 90
         },
         "checks": [
           {
             "kind": "tracker",
             "id": "posiciones_por_tema_politico_x_scope",
             "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "actual_display": "PARTIAL",
+            "status": "DONE",
+            "actual_display": "DONE",
             "target_display": "DONE"
           },
           {
             "kind": "tracker",
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
             "target_display": "DONE"
           },
           {
@@ -2201,10 +2206,10 @@
             "label": "Posiciones agregadas disponibles",
             "status": "DONE",
             "metric": "topic_positions_total",
-            "actual": 137379,
+            "actual": 274435,
             "target": 1,
             "format": "int",
-            "actual_display": "137379",
+            "actual_display": "274435",
             "target_display": "1"
           },
           {
@@ -2225,26 +2230,19 @@
             "label": "Comparaciones explicitas says/does",
             "status": "DONE",
             "metric": "coherence_explicit_total",
-            "actual": 100,
+            "actual": 99,
             "target": 1,
             "format": "int",
-            "actual_display": "100",
+            "actual_display": "99",
             "target_display": "1"
           }
         ],
         "next": [
           {
-            "id": "posiciones_por_tema_politico_x_scope",
-            "label": "Posiciones por tema (politico x scope)",
-            "status": "PARTIAL",
-            "actual_display": "PARTIAL",
-            "target_display": "DONE"
-          },
-          {
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
             "target_display": "DONE"
           }
         ]
@@ -2257,13 +2255,13 @@
         "points_eng_raw": "8",
         "progress": {
           "done": 2,
-          "partial": 0,
-          "todo": 3,
+          "partial": 1,
+          "todo": 2,
           "untracked": 0,
           "tracked_total": 5,
           "overall_total": 5,
-          "tracked_percent": 40,
-          "overall_percent": 40
+          "tracked_percent": 50,
+          "overall_percent": 50
         },
         "checks": [
           {
@@ -2286,8 +2284,8 @@
             "kind": "tracker",
             "id": "posiciones_declaradas_programas",
             "label": "Posiciones declaradas (programas)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
             "target_display": "DONE"
           },
           {
@@ -2296,10 +2294,10 @@
             "label": "Review queue pendiente / declaradas",
             "status": "DONE",
             "metric": "review_queue_pending_ratio",
-            "actual": 0.0,
+            "actual": 0.0096,
             "target": 0.25,
             "format": "pct",
-            "actual_display": "0%",
+            "actual_display": "1%",
             "target_display": "25%"
           },
           {
@@ -2317,6 +2315,13 @@
         ],
         "next": [
           {
+            "id": "posiciones_declaradas_programas",
+            "label": "Posiciones declaradas (programas)",
+            "status": "PARTIAL",
+            "actual_display": "PARTIAL",
+            "target_display": "DONE"
+          },
+          {
             "id": "published_recommendation_artifacts",
             "label": "Artefactos publicados (topics/claims/recommendation-kpis)",
             "status": "TODO",
@@ -2326,13 +2331,6 @@
           {
             "id": "convocatorias_y_estado_electoral",
             "label": "Convocatorias y estado electoral",
-            "status": "TODO",
-            "actual_display": "TODO",
-            "target_display": "DONE"
-          },
-          {
-            "id": "posiciones_declaradas_programas",
-            "label": "Posiciones declaradas (programas)",
             "status": "TODO",
             "actual_display": "TODO",
             "target_display": "DONE"
@@ -2346,14 +2344,14 @@
         "points_eng": 21,
         "points_eng_raw": "21+",
         "progress": {
-          "done": 2,
+          "done": 4,
           "partial": 0,
-          "todo": 8,
+          "todo": 6,
           "untracked": 0,
           "tracked_total": 10,
           "overall_total": 10,
-          "tracked_percent": 20,
-          "overall_percent": 20
+          "tracked_percent": 40,
+          "overall_percent": 40
         },
         "checks": [
           {
@@ -2368,16 +2366,16 @@
             "kind": "tracker",
             "id": "contratacion_autonomica_piloto_3_ccaa",
             "label": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "DONE",
+            "actual_display": "DONE",
             "target_display": "DONE"
           },
           {
             "kind": "tracker",
             "id": "subvenciones_autonomicas_piloto_3_ccaa",
             "label": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
-            "status": "TODO",
-            "actual_display": "TODO",
+            "status": "DONE",
+            "actual_display": "DONE",
             "target_display": "DONE"
           },
           {
@@ -2447,13 +2445,6 @@
         ],
         "next": [
           {
-            "id": "contratacion_autonomica_piloto_3_ccaa",
-            "label": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
-            "status": "TODO",
-            "actual_display": "TODO",
-            "target_display": "DONE"
-          },
-          {
             "id": "normativa_autonomica_piloto_3_ccaa",
             "label": "Normativa auton\u00f3mica (piloto 3 CCAA)",
             "status": "TODO",
@@ -2463,13 +2454,6 @@
           {
             "id": "presupuesto_ejecucion_autonomica_piloto_3_ccaa",
             "label": "Presupuesto + ejecuci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
-            "status": "TODO",
-            "actual_display": "TODO",
-            "target_display": "DONE"
-          },
-          {
-            "id": "subvenciones_autonomicas_piloto_3_ccaa",
-            "label": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
             "status": "TODO",
             "actual_display": "TODO",
             "target_display": "DONE"
@@ -2487,6 +2471,20 @@
             "status": "TODO",
             "actual_display": "TODO",
             "target_display": "DONE"
+          },
+          {
+            "id": "ue_lobbying_influencia",
+            "label": "UE: lobbying/influencia",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
+          },
+          {
+            "id": "ue_votaciones_roll_call",
+            "label": "UE: votaciones (roll-call)",
+            "status": "TODO",
+            "actual_display": "TODO",
+            "target_display": "DONE"
           }
         ]
       }
@@ -2495,12 +2493,12 @@
       {
         "id": "tracking_sources_ok_pct",
         "label": "Fuentes objetivo en estado ok",
-        "status": "PARTIAL",
+        "status": "DONE",
         "metric": "desired_sources_ok_pct",
-        "actual": 0.7380952380952381,
+        "actual": 0.8604651162790697,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "74%",
+        "actual_display": "86%",
         "target_display": "80%"
       },
       {
@@ -2552,10 +2550,10 @@
         "label": "Runs ETL en estado ok",
         "status": "PARTIAL",
         "metric": "ingestion_runs_ok_pct",
-        "actual": 0.6756756756756757,
+        "actual": 0.6507352941176471,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "68%",
+        "actual_display": "65%",
         "target_display": "80%"
       },
       {
@@ -2563,10 +2561,10 @@
         "label": "Costo de reintentos ETL",
         "status": "TODO",
         "metric": "retry_rate",
-        "actual": 0.32432432432432434,
+        "actual": 0.3492647058823529,
         "target": 0.2,
         "format": "pct",
-        "actual_display": "32%",
+        "actual_display": "35%",
         "target_display": "20%"
       },
       {
@@ -2574,22 +2572,22 @@
         "label": "Duraci\u00f3n media por run ETL",
         "status": "DONE",
         "metric": "avg_run_seconds",
-        "actual": 172.58759194335272,
+        "actual": 140.86163166558967,
         "target": null,
         "format": "seconds",
-        "actual_display": "172.6s",
+        "actual_display": "140.9s",
         "target_display": "\u2014"
       }
     ],
     "summary": {
-      "done": 22,
-      "partial": 4,
-      "todo": 12,
+      "done": 27,
+      "partial": 3,
+      "todo": 8,
       "untracked": 8,
       "tracked_total": 38,
       "overall_total": 46,
-      "tracked_percent": 63,
-      "overall_percent": 52
+      "tracked_percent": 75,
+      "overall_percent": 62
     },
     "notes": [
       "Los checks de fase combinan tracker operativo y KPIs cuantificables.",
@@ -2602,7 +2600,7 @@
       "priority": "P0",
       "scope": "",
       "title": "Ingesta en error: aemet_opendata_series",
-      "details": "Error: [Errno 2] No such file or directory: 'docs/etl/sprints/AI-OPS-09/evidence/aemet-replay-inputs/station_0076_prec/station_0076_prec_replay_20260217.json'",
+      "details": "Error: aemet_blocker=contract; error_type=RuntimeError; detail=JSON invalido para AEMET (Expecting value: line 1 column 1 (char 0); payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)",
       "source_ids": [
         "aemet_opendata_series"
       ],
@@ -2616,54 +2614,12 @@
       "priority": "P0",
       "scope": "",
       "title": "Ingesta en error: bde_series_api",
-      "details": "Error: No se encontraron series parseables en BDE (ececac201e2977b98fedc5789d2f75c0f85e882fc6655245faa6f7aab20cfaca)",
+      "details": "Error: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
       "source_ids": [
         "bde_series_api"
       ],
       "commands": [
         "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "ingest_error",
-      "priority": "P0",
-      "scope": "",
-      "title": "Ingesta en error: bdns_api_subvenciones",
-      "details": "Error: [Errno 2] No such file or directory: 'docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_api_subvenciones/bdns_api_subvenciones_replay_20260217.json'",
-      "source_ids": [
-        "bdns_api_subvenciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "ingest_error",
-      "priority": "P0",
-      "scope": "",
-      "title": "Ingesta en error: bdns_autonomico",
-      "details": "Error: [Errno 2] No such file or directory: 'docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_autonomico/bdns_autonomico_replay_20260217.json'",
-      "source_ids": [
-        "bdns_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "ingest_error",
-      "priority": "P0",
-      "scope": "",
-      "title": "Ingesta en error: eurostat_sdmx",
-      "details": "Error: JSON invalido para Eurostat (Expecting value: line 1 column 1 (char 0); payload_sig=8aca00b3870471d167feaca919bc53a5fa01c564805e1e84b676e680de812e89)",
-      "source_ids": [
-        "eurostat_sdmx"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source eurostat_sdmx --strict-network",
         "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
@@ -2696,76 +2652,6 @@
       ]
     },
     {
-      "kind": "ingest_error",
-      "priority": "P0",
-      "scope": "",
-      "title": "Ingesta en error: placsp_autonomico",
-      "details": "Error: Feed XML invalido para PLACSP (no element found: line 1, column 0; payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)",
-      "source_ids": [
-        "placsp_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "ingest_error",
-      "priority": "P0",
-      "scope": "",
-      "title": "Ingesta en error: placsp_sindicacion",
-      "details": "Error: Feed XML invalido para PLACSP (no element found: line 1, column 0; payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)",
-      "source_ids": [
-        "placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "outcomes",
-      "title": "TODO: AEMET OpenData",
-      "details": "Falta conector; mapeo geogr\u00e1fico estaci\u00f3n->territorio; cambios de cobertura/metodolog\u00eda",
-      "source_ids": [
-        "aemet_opendata_series"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "dinero",
-      "title": "TODO: BDNS/SNPSAP (filtrado por \u00f3rgano convocante/territorio)",
-      "details": "Falta ingesta y normalizaci\u00f3n; entity resolution de beneficiario cuando no haya ID estable",
-      "source_ids": [
-        "bdns_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "dinero",
-      "title": "TODO: BDNS/SNPSAP: API",
-      "details": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario",
-      "source_ids": [
-        "bdns_api_subvenciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
       "kind": "tracker_item",
       "priority": "P0",
       "scope": "autonomico",
@@ -2773,20 +2659,6 @@
       "details": "Falta conector y modelo can\u00f3nico de normas auton\u00f3micas (con efectos) con trazabilidad y dedupe por versi\u00f3n",
       "source_ids": [],
       "commands": []
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "outcomes",
-      "title": "TODO: Banco de Espa\u00f1a (API series)",
-      "details": "Falta conector; normalizar c\u00f3digos y unidades; versionar definiciones por snapshot",
-      "source_ids": [
-        "bde_series_api"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
     },
     {
       "kind": "tracker_item",
@@ -2818,53 +2690,11 @@
     {
       "kind": "tracker_item",
       "priority": "P0",
-      "scope": "outcomes",
-      "title": "TODO: Eurostat (API/SDMX)",
-      "details": "Falta conector SDMX/JSON; normalizar dimensiones/codelists y documentar mapeos sem\u00e1nticos",
-      "source_ids": [
-        "eurostat_sdmx"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source eurostat_sdmx --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
       "scope": "nacional",
       "title": "TODO: Junta Electoral Central",
       "details": "Falta scraper y normalizacion",
       "source_ids": [],
       "commands": []
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "dinero",
-      "title": "TODO: PLACSP (filtrado por \u00f3rganos auton\u00f3micos)",
-      "details": "Falta estrategia reproducible: ingesta incremental + agregaci\u00f3n CPV/\u00f3rgano/importe; no intentar \u201cleerlo todo\u201d",
-      "source_ids": [
-        "placsp_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "dinero",
-      "title": "TODO: PLACSP: sindicaci\u00f3n/ATOM (CODICE)",
-      "details": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente",
-      "source_ids": [
-        "placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
-      ]
     },
     {
       "kind": "tracker_item",
@@ -2895,24 +2725,29 @@
     },
     {
       "kind": "tracker_item",
-      "priority": "P0",
-      "scope": "territorial",
-      "title": "TODO: Webs/programas de partidos",
-      "details": "Falta pipeline semiestructurado + revision humana",
-      "source_ids": [],
-      "commands": []
+      "priority": "P1",
+      "scope": "outcomes",
+      "title": "PARTIAL: AEMET OpenData",
+      "details": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
+      "source_ids": [
+        "aemet_opendata_series"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
+      ]
     },
     {
       "kind": "tracker_item",
       "priority": "P1",
-      "scope": "nacional",
-      "title": "PARTIAL: Agregacion reproducible + drill-down a evidencia",
-      "details": "Evidencia reproducible en `docs/etl/sprints/AI-OPS-03/evidence/analytics-partials.md` (\u00a71.4) y `docs/etl/sprints/AI-OPS-03/reports/asof-alignment.md`: SQL reporta `topic_positions_total=137379`, `computed_method_combined=68612`, `computed_method_declared=239`, `computed_method_votes=68528`; cobertura high-stakes latest por set `topic_set_id=1: 12/60 (20.0%)`, `topic_set_id=2: 23/24 (95.83%)`; y en corrida alineada AI-OPS-03 `as_of_date=2026-02-12` sin mezcla por m\u00e9todo/set. Aporte a roadmap t\u00e9cnico: avance de Fase 2 (coherencia says-vs-does con drill-down). Bloqueador: latest de Congreso sigue anclado en `as_of_date=2026-02-16` con cobertura `20.0%`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db etl/data/staging/politicos-es.db --as-of-date 2026-02-16 --taxonomy-seed etl/data/seeds/topic_taxonomy_es.json`.",
-      "source_ids": [],
+      "scope": "outcomes",
+      "title": "PARTIAL: Banco de Espana (API series)",
+      "details": "Done now: NO. Blocker: `bde_series_api` en `strict-network` sigue fallando por DNS (`Errno 8`, `run_id=264`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --url https://api.bde.es/datos/series/PARO.TASA.ES.M --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
+      "source_ids": [
+        "bde_series_api"
+      ],
       "commands": [
-        "just parl-backfill-topic-analytics",
-        "just parl-backfill-declared-positions",
-        "just parl-backfill-combined-positions",
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --strict-network",
         "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
@@ -2921,7 +2756,7 @@
       "priority": "P1",
       "scope": "autonomico",
       "title": "PARTIAL: Parlamento de Galicia: deputados (fichas HTML)",
-      "details": "Done now: NO. Blocker: `--strict-network` en `parlamento_galicia_deputados` sigue bloqueado con HTTP 403 en este entorno, sin cierre de estado operativo. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md` y `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-galicia-strict.log`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-16 --strict-network --timeout 30`.",
+      "details": "Done now: NO. Blocker: `parlamento_galicia_deputados` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=265`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
       "source_ids": [
         "parlamento_galicia_deputados"
       ],
@@ -2935,7 +2770,7 @@
       "priority": "P1",
       "scope": "autonomico",
       "title": "PARTIAL: Parlamento de Navarra: parlamentarios forales (fichas HTML)",
-      "details": "Done now: NO. Blocker: `--strict-network` en `parlamento_navarra_parlamentarios_forales` sigue bloqueado con HTTP 403; la fila permanece `PARTIAL` con carga SQL `PARTIAL` (sin mismatch activo). Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md` y `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-navarra-strict.log`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --snapshot-date 2026-02-16 --strict-network --timeout 30`.",
+      "details": "Done now: NO. Blocker: `parlamento_navarra_parlamentarios_forales` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=266`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
       "source_ids": [
         "parlamento_navarra_parlamentarios_forales"
       ],
@@ -2943,6 +2778,15 @@
         "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --strict-network",
         "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker REPO_ROOT/vota-con-la-chola/docs/etl/e2e-scrape-load-tracker.md"
       ]
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "territorial",
+      "title": "PARTIAL: Webs/programas de partidos",
+      "details": "Done now: YES (MVP reproducible). Nuevo source `programas_partidos` (manifest-driven) ingesta `source_records` + `text_documents` + `topic_evidence` (`declared:programa`) con topics basados en `ui/citizen/concerns_v1.json` (topic_set por `election_cycle`). Stance auto: `support=4`, `oppose=1`, `review_pending=6` (sample); posiciones declaradas: `positions_total=5` (`topic_set_id=11`, `as_of_date=2026-02-17`). Evidencia: `docs/etl/sprints/AI-OPS-18/reports/programas-pipeline-design.md`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_stance_post.json`, `docs/etl/sprints/AI-OPS-18/evidence/programas_declared_positions_post.json`, `docs/etl/sprints/AI-OPS-18/exports/programas_kpi_post.csv`. Siguiente comando: `python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --from-file <manifest.csv> --snapshot-date <YYYY-MM-DD>` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db <db> --source-id programas_partidos` + `python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db <db> --source-id programas_partidos --as-of-date <YYYY-MM-DD>`.",
+      "source_ids": [],
+      "commands": []
     }
   ],
   "sources": [
@@ -3910,14 +3754,14 @@
         "tipo_dato": "Representantes y mandatos (Parlamento de Galicia)",
         "dominio": "Autonomico",
         "fuentes_objetivo": "Parlamento de Galicia: deputados (fichas HTML)",
-        "bloque": "Done now: NO. Blocker: `--strict-network` en `parlamento_galicia_deputados` sigue bloqueado con HTTP 403 en este entorno, sin cierre de estado operativo. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md` y `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-galicia-strict.log`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-16 --strict-network --timeout 30`."
+        "bloque": "Done now: NO. Blocker: `parlamento_galicia_deputados` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=265`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-17 --strict-network --timeout 30`."
       },
       "sql_status": "PARTIAL",
       "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "degraded",
-      "runs_total": 9,
+      "runs_total": 12,
       "runs_ok": 5,
       "last_status": "error",
       "last_loaded": 0,
@@ -3925,8 +3769,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 5,
-      "last_started_at": "2026-02-16T21:14:53+00:00",
-      "last_seen_at": "2026-02-16T21:14:54+00:00",
+      "last_started_at": "2026-02-17T11:54:20+00:00",
+      "last_seen_at": "2026-02-17T11:54:20+00:00",
       "last_source_url": "https://www.parlamentodegalicia.gal/Composicion/Deputados",
       "last_message": "Error: HTTP Error 403: Forbidden",
       "progress": {
@@ -4036,14 +3880,14 @@
         "tipo_dato": "Representantes y mandatos (Parlamento de Navarra)",
         "dominio": "Autonomico",
         "fuentes_objetivo": "Parlamento de Navarra: parlamentarios forales (fichas HTML)",
-        "bloque": "Done now: NO. Blocker: `--strict-network` en `parlamento_navarra_parlamentarios_forales` sigue bloqueado con HTTP 403; la fila permanece `PARTIAL` con carga SQL `PARTIAL` (sin mismatch activo). Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md` y `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-navarra-strict.log`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --snapshot-date 2026-02-16 --strict-network --timeout 30`."
+        "bloque": "Done now: NO. Blocker: `parlamento_navarra_parlamentarios_forales` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=266`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --snapshot-date 2026-02-17 --strict-network --timeout 30`."
       },
       "sql_status": "PARTIAL",
       "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "degraded",
-      "runs_total": 9,
+      "runs_total": 12,
       "runs_ok": 3,
       "last_status": "error",
       "last_loaded": 0,
@@ -4051,8 +3895,8 @@
       "max_loaded_network": 50,
       "network_fetches": 1,
       "fallback_fetches": 2,
-      "last_started_at": "2026-02-16T21:14:30+00:00",
-      "last_seen_at": "2026-02-16T21:14:52+00:00",
+      "last_started_at": "2026-02-17T11:54:20+00:00",
+      "last_seen_at": "2026-02-17T11:54:22+00:00",
       "last_source_url": "https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales",
       "last_message": "Error: HTTP Error 403: Forbidden",
       "progress": {
@@ -4158,33 +4002,33 @@
       "format": "json",
       "fallback_file": "etl/data/raw/samples/bdns_autonomico_sample.json",
       "tracker": {
-        "status": "TODO",
+        "status": "DONE",
         "tipo_dato": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
         "dominio": "Dinero",
         "fuentes_objetivo": "BDNS/SNPSAP (filtrado por \u00f3rgano convocante/territorio)",
-        "bloque": "Falta ingesta y normalizaci\u00f3n; entity resolution de beneficiario cuando no haya ID estable"
+        "bloque": "Done now: YES. `bdns_autonomico` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/busqueda`) y red real (`run_id=257`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "DONE",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "degraded",
-      "runs_total": 3,
-      "runs_ok": 1,
-      "last_status": "error",
-      "last_loaded": 0,
-      "max_loaded_any": 2,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-17T08:45:12+00:00",
-      "last_seen_at": "2026-02-17T08:45:12+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_autonomico/bdns_autonomico_replay_20260217.json",
-      "last_message": "Error: [Errno 2] No such file or directory: 'docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_autonomico/bdns_autonomico_replay_20260217.json'",
+      "state": "ok",
+      "runs_total": 8,
+      "runs_ok": 4,
+      "last_status": "ok",
+      "last_loaded": 50,
+      "max_loaded_any": 50,
+      "max_loaded_network": 50,
+      "network_fetches": 1,
+      "fallback_fetches": 3,
+      "last_started_at": "2026-02-17T11:43:24+00:00",
+      "last_seen_at": "2026-02-17T11:43:34+00:00",
+      "last_source_url": "https://www.pap.hacienda.gob.es/bdnstrans/api/convocatorias/busqueda",
+      "last_message": "Ingesta completada: 50/50 registros validos",
       "progress": {
-        "loaded": 0,
+        "loaded": 50,
         "target": 3,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -4201,7 +4045,7 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -4221,33 +4065,33 @@
       "format": "json",
       "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
       "tracker": {
-        "status": "TODO",
+        "status": "DONE",
         "tipo_dato": "Subvenciones y ayudas (Espana)",
         "dominio": "Dinero",
         "fuentes_objetivo": "BDNS/SNPSAP: API",
-        "bloque": "Falta ingesta y modelo de convocatorias/concesiones; KPI: % con importe, organo y beneficiario"
+        "bloque": "Done now: YES. `bdns_api_subvenciones` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/ultimas`) y red real (`run_id=256`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "DONE",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "degraded",
-      "runs_total": 6,
-      "runs_ok": 2,
-      "last_status": "error",
-      "last_loaded": 0,
-      "max_loaded_any": 3,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 2,
-      "last_started_at": "2026-02-17T08:45:08+00:00",
-      "last_seen_at": "2026-02-17T08:45:08+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_api_subvenciones/bdns_api_subvenciones_replay_20260217.json",
-      "last_message": "Error: [Errno 2] No such file or directory: 'docs/etl/sprints/AI-OPS-09/evidence/bdns-replay-inputs/bdns_api_subvenciones/bdns_api_subvenciones_replay_20260217.json'",
+      "state": "ok",
+      "runs_total": 11,
+      "runs_ok": 5,
+      "last_status": "ok",
+      "last_loaded": 50,
+      "max_loaded_any": 50,
+      "max_loaded_network": 50,
+      "network_fetches": 1,
+      "fallback_fetches": 4,
+      "last_started_at": "2026-02-17T11:43:15+00:00",
+      "last_seen_at": "2026-02-17T11:43:24+00:00",
+      "last_source_url": "https://www.pap.hacienda.gob.es/bdnstrans/api/convocatorias/ultimas",
+      "last_message": "Ingesta completada: 50/50 registros validos",
       "progress": {
-        "loaded": 0,
+        "loaded": 50,
         "target": 10,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -4264,7 +4108,7 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -4347,33 +4191,33 @@
       "format": "xml",
       "fallback_file": "etl/data/raw/samples/placsp_autonomico_sample.xml",
       "tracker": {
-        "status": "TODO",
+        "status": "DONE",
         "tipo_dato": "Contrataci\u00f3n auton\u00f3mica (piloto 3 CCAA)",
         "dominio": "Dinero",
         "fuentes_objetivo": "PLACSP (filtrado por \u00f3rganos auton\u00f3micos)",
-        "bloque": "Falta estrategia reproducible: ingesta incremental + agregaci\u00f3n CPV/\u00f3rgano/importe; no intentar \u201cleerlo todo\u201d"
+        "bloque": "Done now: YES. `placsp_autonomico` recuper\u00f3 `strict-network` con red real (`run_id=248`, `run_status=ok`, `run_records_loaded=106`) y el mismatch restante era solo desfase tracker/SQL, por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-11/evidence/placsp-strict-refresh.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-status.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-gate.log`, `docs/etl/sprints/AI-OPS-11/exports/placsp_waiver_decision.csv`. Siguiente comando: `just etl-tracker-gate`."
       },
       "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "degraded",
-      "runs_total": 3,
-      "runs_ok": 2,
-      "last_status": "error",
-      "last_loaded": 0,
+      "state": "ok",
+      "runs_total": 9,
+      "runs_ok": 6,
+      "last_status": "ok",
+      "last_loaded": 106,
       "max_loaded_any": 106,
       "max_loaded_network": 106,
-      "network_fetches": 1,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-17T08:43:13+00:00",
-      "last_seen_at": "2026-02-17T08:43:13+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/placsp-replay-inputs/placsp_autonomico/placsp_autonomico_replay_20260217.xml",
-      "last_message": "Error: Feed XML invalido para PLACSP (no element found: line 1, column 0; payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)",
+      "network_fetches": 2,
+      "fallback_fetches": 4,
+      "last_started_at": "2026-02-17T11:13:41+00:00",
+      "last_seen_at": "2026-02-17T11:13:55+00:00",
+      "last_source_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+      "last_message": "Ingesta completada: 106/106 registros validos",
       "progress": {
-        "loaded": 0,
+        "loaded": 106,
         "target": 3,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -4410,33 +4254,33 @@
       "format": "xml",
       "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
       "tracker": {
-        "status": "TODO",
+        "status": "DONE",
         "tipo_dato": "Contratacion publica (Espana)",
         "dominio": "Dinero",
         "fuentes_objetivo": "PLACSP: sindicaci\u00f3n/ATOM (CODICE)",
-        "bloque": "Falta ingesta y modelo de licitacion/adjudicacion; KPI: cobertura + trazabilidad por expediente"
+        "bloque": "Done now: YES. `placsp_sindicacion` recuper\u00f3 `strict-network` con red real (`run_id=249`, `run_status=ok`, `run_records_loaded=106`) y el mismatch restante era solo desfase tracker/SQL, por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-11/evidence/placsp-strict-refresh.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-status.log`, `docs/etl/sprints/AI-OPS-11/evidence/post-strict-gate.log`, `docs/etl/sprints/AI-OPS-11/exports/placsp_waiver_decision.csv`. Siguiente comando: `just etl-tracker-gate`."
       },
       "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "degraded",
-      "runs_total": 7,
-      "runs_ok": 5,
-      "last_status": "error",
-      "last_loaded": 0,
+      "state": "ok",
+      "runs_total": 13,
+      "runs_ok": 9,
+      "last_status": "ok",
+      "last_loaded": 106,
       "max_loaded_any": 106,
       "max_loaded_network": 106,
-      "network_fetches": 2,
-      "fallback_fetches": 3,
-      "last_started_at": "2026-02-17T08:42:58+00:00",
-      "last_seen_at": "2026-02-17T08:42:58+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/placsp-replay-inputs/placsp_sindicacion/placsp_sindicacion_replay_20260217.xml",
-      "last_message": "Error: Feed XML invalido para PLACSP (no element found: line 1, column 0; payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)",
+      "network_fetches": 3,
+      "fallback_fetches": 6,
+      "last_started_at": "2026-02-17T11:13:55+00:00",
+      "last_seen_at": "2026-02-17T11:14:08+00:00",
+      "last_source_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+      "last_message": "Ingesta completada: 106/106 registros validos",
       "progress": {
-        "loaded": 0,
+        "loaded": 106,
         "target": 10,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -5152,6 +4996,69 @@
       }
     },
     {
+      "source_id": "programas_partidos",
+      "domain": "parlamentario",
+      "source_name": "Programas de partidos (manifest-driven)",
+      "scope": "nacional",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "default_url": "manifest://programas_partidos",
+      "institution_name": "Programas de partidos",
+      "role_title": "",
+      "level": "nacional",
+      "format": "csv",
+      "fallback_file": "etl/data/raw/samples/programas_partidos_sample.csv",
+      "tracker": {
+        "status": "",
+        "tipo_dato": "",
+        "dominio": "",
+        "fuentes_objetivo": "",
+        "bloque": ""
+      },
+      "sql_status": "PARTIAL",
+      "mismatch_state": "UNTRACKED",
+      "mismatch_waived": false,
+      "waiver_expiry": "",
+      "state": "ok",
+      "runs_total": 6,
+      "runs_ok": 6,
+      "last_status": "ok",
+      "last_loaded": 3,
+      "max_loaded_any": 3,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 6,
+      "last_started_at": "2026-02-17T15:53:08+00:00",
+      "last_seen_at": "2026-02-17T15:53:08+00:00",
+      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/etl/data/raw/samples/programas_partidos_sample.csv",
+      "last_message": "{\"documents_loaded\": 3, \"note\": \"from-file\", \"out\": {\"evidence_inserted\": 11, \"info\": {\"concerns_count\": 12, \"election_cycles\": [\"es_generales_2023\"], \"failures\": [], \"skipped\": {\"bad_payload\": 0, \"doc_fetch_failed\": 0, \"missing_required\": 0, \"no_concerns_config\": 0, \"no_matching_topics\": 0, \"party_missing_in_db\": 0}, \"topic_set_ids\": [11]}}}",
+      "progress": {
+        "loaded": 3,
+        "target": 1,
+        "percent": 100
+      },
+      "mandates": 0,
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      }
+    },
+    {
       "source_id": "senado_iniciativas",
       "domain": "parlamentario",
       "source_name": "Senado - Iniciativas y mociones (OpenData)",
@@ -5418,29 +5325,29 @@
       "format": "json",
       "fallback_file": "etl/data/raw/samples/aemet_opendata_series_sample.json",
       "tracker": {
-        "status": "TODO",
+        "status": "PARTIAL",
         "tipo_dato": "Indicadores (confusores): AEMET",
         "dominio": "Outcomes",
         "fuentes_objetivo": "AEMET OpenData",
-        "bloque": "Falta conector; mapeo geogr\u00e1fico estaci\u00f3n->territorio; cambios de cobertura/metodolog\u00eda"
+        "bloque": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`."
       },
       "sql_status": "PARTIAL",
-      "mismatch_state": "MISMATCH",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "degraded",
-      "runs_total": 5,
-      "runs_ok": 1,
+      "runs_total": 12,
+      "runs_ok": 3,
       "last_status": "error",
       "last_loaded": 0,
       "max_loaded_any": 2,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-17T08:48:22+00:00",
-      "last_seen_at": "2026-02-17T08:48:22+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/aemet-replay-inputs/station_0076_prec/station_0076_prec_replay_20260217.json",
-      "last_message": "Error: [Errno 2] No such file or directory: 'docs/etl/sprints/AI-OPS-09/evidence/aemet-replay-inputs/station_0076_prec/station_0076_prec_replay_20260217.json'",
+      "fallback_fetches": 3,
+      "last_started_at": "2026-02-17T11:54:16+00:00",
+      "last_seen_at": "2026-02-17T11:54:16+00:00",
+      "last_source_url": "https://opendata.aemet.es/opendata/api/observacion/convencional/todas",
+      "last_message": "Error: aemet_blocker=contract; error_type=RuntimeError; detail=JSON invalido para AEMET (Expecting value: line 1 column 1 (char 0); payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855)",
       "progress": {
         "loaded": 0,
         "target": 1,
@@ -5463,7 +5370,7 @@
         "done_zero_real": false,
         "has_network": false,
         "has_any": true,
-        "blocked_note": false
+        "blocked_note": true
       }
     },
     {
@@ -5481,29 +5388,29 @@
       "format": "json",
       "fallback_file": "etl/data/raw/samples/bde_series_api_sample.json",
       "tracker": {
-        "status": "TODO",
-        "tipo_dato": "Indicadores (confusores): Banco de Espa\u00f1a",
+        "status": "PARTIAL",
+        "tipo_dato": "Indicadores (confusores): Banco de Espana",
         "dominio": "Outcomes",
-        "fuentes_objetivo": "Banco de Espa\u00f1a (API series)",
-        "bloque": "Falta conector; normalizar c\u00f3digos y unidades; versionar definiciones por snapshot"
+        "fuentes_objetivo": "Banco de Espana (API series)",
+        "bloque": "Done now: NO. Blocker: `bde_series_api` en `strict-network` sigue fallando por DNS (`Errno 8`, `run_id=264`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bde_series_api --url https://api.bde.es/datos/series/PARO.TASA.ES.M --snapshot-date 2026-02-17 --strict-network --timeout 30`."
       },
       "sql_status": "PARTIAL",
-      "mismatch_state": "MISMATCH",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "degraded",
-      "runs_total": 5,
-      "runs_ok": 1,
+      "runs_total": 11,
+      "runs_ok": 3,
       "last_status": "error",
       "last_loaded": 0,
       "max_loaded_any": 2,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-17T08:47:48+00:00",
-      "last_seen_at": "2026-02-17T08:47:48+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/bde-replay-inputs/TI_TMM_T_4F_EUR_4F_N_M/TI_TMM_T_4F_EUR_4F_N_M_replay_20260217.json",
-      "last_message": "Error: No se encontraron series parseables en BDE (ececac201e2977b98fedc5789d2f75c0f85e882fc6655245faa6f7aab20cfaca)",
+      "fallback_fetches": 3,
+      "last_started_at": "2026-02-17T11:54:16+00:00",
+      "last_seen_at": "2026-02-17T11:54:19+00:00",
+      "last_source_url": "https://api.bde.es/datos/series/PARO.TASA.ES.M",
+      "last_message": "Error: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
       "progress": {
         "loaded": 0,
         "target": 1,
@@ -5544,33 +5451,33 @@
       "format": "json",
       "fallback_file": "etl/data/raw/samples/eurostat_sdmx_sample.json",
       "tracker": {
-        "status": "TODO",
+        "status": "DONE",
         "tipo_dato": "Indicadores (outcomes): Eurostat",
         "dominio": "Outcomes",
         "fuentes_objetivo": "Eurostat (API/SDMX)",
-        "bloque": "Falta conector SDMX/JSON; normalizar dimensiones/codelists y documentar mapeos sem\u00e1nticos"
+        "bloque": "Done now: YES. `eurostat_sdmx` tiene `strict-network` exitoso (`run_records_loaded=2394`) y replay no-cero (`run_records_loaded=2`), por lo que el mismatch actual era desfase tracker/SQL y se reconcilia a `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__strict-network_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__replay_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/reports/eurostat-apply.md`, `docs/etl/sprints/AI-OPS-10/evidence/tracker-gate-postrun.log`, `docs/etl/sprints/AI-OPS-10/evidence/status-postrun.json`. Siguiente comando: `just etl-tracker-gate`."
       },
       "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "degraded",
-      "runs_total": 11,
-      "runs_ok": 6,
-      "last_status": "error",
-      "last_loaded": 0,
+      "state": "ok",
+      "runs_total": 14,
+      "runs_ok": 9,
+      "last_status": "ok",
+      "last_loaded": 2,
       "max_loaded_any": 2394,
       "max_loaded_network": 2394,
-      "network_fetches": 5,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-17T08:47:08+00:00",
-      "last_seen_at": "2026-02-17T08:47:08+00:00",
-      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-09/evidence/eurostat-replay-inputs/une_rt_a_freq_A_geo_PT_unit_PC_ACT/une_rt_a_freq_A_geo_PT_unit_PC_ACT_replay_20260217.json",
-      "last_message": "Error: JSON invalido para Eurostat (Expecting value: line 1 column 1 (char 0); payload_sig=8aca00b3870471d167feaca919bc53a5fa01c564805e1e84b676e680de812e89)",
+      "network_fetches": 6,
+      "fallback_fetches": 3,
+      "last_started_at": "2026-02-17T10:37:10+00:00",
+      "last_seen_at": "2026-02-17T10:37:16+00:00",
+      "last_source_url": "file://REPO_ROOT/vota-con-la-chola/docs/etl/sprints/AI-OPS-10/evidence/replay-inputs/eurostat_sdmx/eurostat_sdmx_replay_20260217.json",
+      "last_message": "Ingesta completada: 2/2 registros validos (from-file)",
       "progress": {
-        "loaded": 0,
+        "loaded": 2,
         "target": 1,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {

@@ -467,6 +467,73 @@
         flex-wrap: wrap;
         align-items: center;
       }
+
+      .coherence {
+        margin: 0 14px 12px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.62);
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .coherence .headrow {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .coherence .headrow h3 {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      .coh-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      @media (max-width: 860px) {
+        .coh-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .coh-btn {
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        border-radius: 12px;
+        background: rgba(248, 250, 252, 0.92);
+        color: var(--ink);
+        padding: 10px 11px;
+        text-align: left;
+        display: grid;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .coh-btn strong {
+        font-family: var(--mono);
+        font-size: 1rem;
+      }
+
+      .coh-btn.active {
+        border-color: rgba(29, 78, 216, 0.42);
+        box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.12);
+      }
+
+      .coh-btn.ok {
+        border-color: rgba(5, 150, 105, 0.28);
+        background: rgba(5, 150, 105, 0.08);
+      }
+
+      .coh-btn.bad {
+        border-color: rgba(220, 38, 38, 0.28);
+        background: rgba(220, 38, 38, 0.08);
+      }
     </style>
   </head>
   <body>
@@ -549,6 +616,29 @@
             <button class="btn primary" id="open-sql" type="button" data-local-api="explorer-sql">
               Abrir en Explorer SQL
             </button>
+          </div>
+
+          <div class="coherence">
+            <div class="headrow">
+              <h3>Coherencia (says vs does)</h3>
+              <span class="badge mono" id="coherence-scope">scope: -</span>
+            </div>
+            <div class="panemeta mono" id="coherence-meta">Selecciona un tema para calcular overlap/coherent/incoherent.</div>
+            <div class="coh-grid">
+              <button class="coh-btn" id="coh-overlap" type="button">
+                <span>overlap</span>
+                <strong id="coh-overlap-count">0</strong>
+              </button>
+              <button class="coh-btn ok" id="coh-coherent" type="button">
+                <span>coherent</span>
+                <strong id="coh-coherent-count">0</strong>
+              </button>
+              <button class="coh-btn bad" id="coh-incoherent" type="button">
+                <span>incoherent</span>
+                <strong id="coh-incoherent-count">0</strong>
+              </button>
+            </div>
+            <div class="meta" id="coherence-foot">Click en un bucket para drill-down a filas de evidencia.</div>
           </div>
 
           <div class="split">
@@ -650,6 +740,16 @@
         positionsMore: document.getElementById("positions-more"),
         positionsFoot: document.getElementById("positions-foot"),
 
+        coherenceScope: document.getElementById("coherence-scope"),
+        coherenceMeta: document.getElementById("coherence-meta"),
+        coherenceFoot: document.getElementById("coherence-foot"),
+        cohOverlap: document.getElementById("coh-overlap"),
+        cohCoherent: document.getElementById("coh-coherent"),
+        cohIncoherent: document.getElementById("coh-incoherent"),
+        cohOverlapCount: document.getElementById("coh-overlap-count"),
+        cohCoherentCount: document.getElementById("coh-coherent-count"),
+        cohIncoherentCount: document.getElementById("coh-incoherent-count"),
+
         evidenceKind: document.getElementById("evidence-kind"),
         reviewOpenSql: document.getElementById("review-open-sql"),
         evidenceMeta: document.getElementById("evidence-meta"),
@@ -666,8 +766,6 @@
         const host = window.location.hostname;
         return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
       })();
-      const isGitHubPages = /(^|\.)github\.io$/i.test(window.location.hostname);
-      const LOCAL_API_NOTICE = "El Explorer SQL requiere API local y no funciona en GitHub Pages.";
 
       const resolveApiPath = (path) => {
         const endpoint = String(path || "").trim();
@@ -681,22 +779,6 @@
       const withApiParam = (url) => {
         if (!API_BASE_OVERRIDE) return url;
         return url + (url.includes("?") ? "&" : "?") + "api=" + encodeURIComponent(API_BASE_OVERRIDE);
-      };
-
-      const applyLocalApiGate = () => {
-        if (!isGitHubPages) return;
-        document.querySelectorAll('[data-local-api="explorer-sql"]').forEach((el) => {
-          el.classList.add("local-api-disabled");
-          el.setAttribute("aria-disabled", "true");
-          el.setAttribute("title", LOCAL_API_NOTICE);
-          if (el.tagName === "A") {
-            el.setAttribute("tabindex", "-1");
-            el.addEventListener("click", (event) => event.preventDefault());
-          }
-          if (el.tagName === "BUTTON") {
-            el.disabled = true;
-          }
-        });
       };
 
       async function readJson(url) {
@@ -731,8 +813,17 @@
         counts: {},
         sets: [],
         setTopics: [],
+        coherence: {
+          groups: [],
+          summary: null,
+          asOfDate: "",
+          loading: false,
+          selectedBucket: "",
+          scope: "",
+          pairsTotal: 0,
+        },
         positions: { rows: [], meta: null, offset: 0, limit: 250, total: 0, loading: false },
-        evidence: { rows: [], meta: null, offset: 0, limit: 250, total: 0, loading: false },
+        evidence: { rows: [], meta: null, offset: 0, limit: 250, total: 0, loading: false, mode: "person", bucket: "" },
         activeSetId: null,
         activeTopicId: null,
         activePersonId: null,
@@ -826,6 +917,39 @@
         return await readJson(url);
       }
 
+      async function apiCoherence({ topicSetId, topicId, limit = 200, offset = 0 } = {}) {
+        const p = new URLSearchParams();
+        if (topicSetId) p.set("topic_set_id", String(topicSetId));
+        if (topicId) p.set("topic_id", String(topicId));
+        p.set("limit", String(limit));
+        p.set("offset", String(offset));
+        const url = resolveApiPath(`/api/topics/coherence?${p.toString()}`);
+        if (!url) throw new Error("Sin API para /api/topics/coherence.");
+        return await readJson(url);
+      }
+
+      async function apiCoherenceEvidence({
+        bucket,
+        topicSetId,
+        topicId,
+        scope,
+        personId,
+        limit = 200,
+        offset = 0,
+      } = {}) {
+        const p = new URLSearchParams();
+        p.set("bucket", String(bucket || "incoherent"));
+        if (topicSetId) p.set("topic_set_id", String(topicSetId));
+        if (topicId) p.set("topic_id", String(topicId));
+        if (scope) p.set("scope", String(scope));
+        if (personId) p.set("person_id", String(personId));
+        p.set("limit", String(limit));
+        p.set("offset", String(offset));
+        const url = resolveApiPath(`/api/topics/coherence/evidence?${p.toString()}`);
+        if (!url) throw new Error("Sin API para /api/topics/coherence/evidence.");
+        return await readJson(url);
+      }
+
       async function rows(table, opts) {
         if (state.mode === "live") return await apiRows(table, opts);
         return snapshotRows(table, opts);
@@ -849,9 +973,11 @@
       }
 
       function applyInitialSelection() {
-        const setId = paramGet("set");
-        const topicId = paramGet("topic");
-        const personId = paramGet("person");
+        // Backward-compatible: accept both short params (set/topic/person) and
+        // explicit ids (topic_set_id/topic_id/person_id) used by some exporters.
+        const setId = paramGet("set") || paramGet("topic_set_id");
+        const topicId = paramGet("topic") || paramGet("topic_id");
+        const personId = paramGet("person") || paramGet("person_id");
         if (setId) state.activeSetId = setId;
         if (topicId) state.activeTopicId = topicId;
         if (personId) state.activePersonId = personId;
@@ -1040,6 +1166,181 @@
           });
       }
 
+      function resetCoherenceState() {
+        state.coherence.groups = [];
+        state.coherence.summary = null;
+        state.coherence.asOfDate = "";
+        state.coherence.loading = false;
+        state.coherence.selectedBucket = "";
+        state.coherence.scope = "";
+        state.coherence.pairsTotal = 0;
+      }
+
+      function setCoherenceBucketActive(bucket) {
+        const active = norm(bucket);
+        [
+          ["overlap", nodes.cohOverlap],
+          ["coherent", nodes.cohCoherent],
+          ["incoherent", nodes.cohIncoherent],
+        ].forEach(([k, el]) => {
+          if (!el) return;
+          el.classList.toggle("active", active && active === k);
+        });
+      }
+
+      function renderCoherence() {
+        const hasSelection = Boolean(state.activeSetId && state.activeTopicId);
+        const summary = state.coherence.summary || {};
+        const groups = Array.isArray(state.coherence.groups) ? state.coherence.groups : [];
+        const overlap = Number(summary.overlap_total || 0);
+        const coherent = Number(summary.coherent_total || 0);
+        const incoherent = Number(summary.incoherent_total || 0);
+        const explicit = Number(summary.explicit_total || 0);
+        const scopeValues = Array.from(new Set(groups.map((g) => norm(g.scope || "")).filter(Boolean)));
+        const scopeLabel = scopeValues.length === 0 ? "-" : scopeValues.length === 1 ? scopeValues[0] : `${scopeValues.length} scopes`;
+
+        nodes.cohOverlapCount.textContent = String(overlap);
+        nodes.cohCoherentCount.textContent = String(coherent);
+        nodes.cohIncoherentCount.textContent = String(incoherent);
+        nodes.coherenceScope.textContent = `scope: ${scopeLabel}`;
+
+        if (!hasSelection) {
+          nodes.coherenceMeta.textContent = "Selecciona un tema para calcular overlap/coherent/incoherent.";
+          nodes.coherenceFoot.textContent = "Click en un bucket para drill-down a filas de evidencia.";
+          nodes.cohOverlap.disabled = true;
+          nodes.cohCoherent.disabled = true;
+          nodes.cohIncoherent.disabled = true;
+          setCoherenceBucketActive("");
+          return;
+        }
+
+        if (state.mode !== "live") {
+          nodes.coherenceMeta.textContent = "Coherencia interactiva requiere API live (no disponible en preview).";
+          nodes.coherenceFoot.textContent = "Arranca just explorer y abre con ?api=http://127.0.0.1:9010.";
+          nodes.cohOverlap.disabled = true;
+          nodes.cohCoherent.disabled = true;
+          nodes.cohIncoherent.disabled = true;
+          setCoherenceBucketActive("");
+          return;
+        }
+
+        if (state.coherence.loading) {
+          nodes.coherenceMeta.textContent = "Cargando coherencia...";
+          nodes.coherenceFoot.textContent = "";
+          nodes.cohOverlap.disabled = true;
+          nodes.cohCoherent.disabled = true;
+          nodes.cohIncoherent.disabled = true;
+          return;
+        }
+
+        const asOf = state.coherence.asOfDate ? `as_of=${state.coherence.asOfDate}` : "as_of=-";
+        nodes.coherenceMeta.textContent = `overlap=${overlap} explicit=${explicit} coherent=${coherent} incoherent=${incoherent}`;
+        nodes.coherenceFoot.textContent =
+          `${asOf} | groups=${groups.length}. Click en un bucket para drill-down a evidence rows.`;
+        nodes.cohOverlap.disabled = overlap <= 0;
+        nodes.cohCoherent.disabled = coherent <= 0;
+        nodes.cohIncoherent.disabled = incoherent <= 0;
+        setCoherenceBucketActive(state.coherence.selectedBucket || "");
+      }
+
+      async function loadCoherenceSummary() {
+        if (!state.activeSetId || !state.activeTopicId) {
+          resetCoherenceState();
+          renderCoherence();
+          return;
+        }
+        if (state.mode !== "live") {
+          resetCoherenceState();
+          renderCoherence();
+          return;
+        }
+
+        state.coherence.loading = true;
+        renderCoherence();
+        try {
+          const payload = await apiCoherence({
+            topicSetId: state.activeSetId,
+            topicId: state.activeTopicId,
+            limit: 200,
+            offset: 0,
+          });
+          const groups = Array.isArray(payload && payload.groups) ? payload.groups : [];
+          const summary = (payload && payload.summary) ? payload.summary : {};
+          state.coherence.groups = groups;
+          state.coherence.summary = summary;
+          state.coherence.asOfDate = toText(payload && payload.meta ? payload.meta.as_of_date : "");
+          const scopeValues = Array.from(new Set(groups.map((g) => norm(g.scope || "")).filter(Boolean)));
+          state.coherence.scope = scopeValues.length === 1 ? scopeValues[0] : "";
+          state.coherence.pairsTotal = Number(summary.overlap_total || 0);
+        } catch (err) {
+          state.coherence.groups = [];
+          state.coherence.summary = { overlap_total: 0, explicit_total: 0, coherent_total: 0, incoherent_total: 0 };
+          state.coherence.asOfDate = "";
+          state.coherence.scope = "";
+          state.coherence.pairsTotal = 0;
+          nodes.coherenceMeta.textContent = `Error de coherencia: ${toText(err && err.message ? err.message : err)}`;
+        } finally {
+          state.coherence.loading = false;
+          renderCoherence();
+        }
+      }
+
+      async function loadCoherenceEvidencePage({ reset, bucket }) {
+        if (state.evidence.loading) return;
+        if (!state.activeSetId || !state.activeTopicId) return;
+        if (state.mode !== "live") return;
+
+        const useBucket = norm(bucket || state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
+        state.evidence.loading = true;
+        state.evidence.mode = "coherence";
+        state.evidence.bucket = useBucket;
+        state.coherence.selectedBucket = useBucket;
+        setCoherenceBucketActive(useBucket);
+        if (reset) {
+          state.evidence.offset = 0;
+          state.evidence.rows = [];
+          state.evidence.total = 0;
+        }
+        nodes.evidence.innerHTML = "<div class='empty'>Cargando...</div>";
+
+        const scope = state.coherence.scope || "";
+        try {
+          const payload = await apiCoherenceEvidence({
+            bucket: useBucket,
+            topicSetId: state.activeSetId,
+            topicId: state.activeTopicId,
+            scope: scope || "",
+            limit: state.evidence.limit,
+            offset: state.evidence.offset + state.evidence.rows.length,
+          });
+          const got = Array.isArray(payload && payload.rows) ? payload.rows : [];
+          state.evidence.meta = payload || null;
+          const total = Number(payload && payload.summary ? payload.summary.evidence_total : 0);
+          state.evidence.total = Number.isFinite(total) ? total : 0;
+          state.evidence.rows = reset ? got : state.evidence.rows.concat(got);
+          renderEvidence();
+          renderCoherence();
+        } catch (err) {
+          state.evidence.rows = [];
+          state.evidence.total = 0;
+          state.evidence.meta = null;
+          nodes.evidence.innerHTML = `<div class='empty'>${esc(toText(err && err.message ? err.message : err))}</div>`;
+          nodes.evidenceMeta.textContent = `Error en drill-down: ${toText(err && err.message ? err.message : err)}`;
+          nodes.evidenceMore.disabled = true;
+        } finally {
+          state.evidence.loading = false;
+        }
+      }
+
+      async function drillCoherenceBucket(bucket) {
+        if (!state.activeSetId || !state.activeTopicId) return;
+        if (state.mode !== "live") return;
+        state.activePersonId = null;
+        paramSet("person", "");
+        await loadCoherenceEvidencePage({ reset: true, bucket });
+        renderPositions();
+      }
+
       function renderPositions() {
         if (!state.activeSetId || !state.activeTopicId) {
           nodes.positions.innerHTML = "<div class='empty'>Selecciona un tema.</div>";
@@ -1151,7 +1452,76 @@
         return { count: rel.length, score, stance };
       }
 
+      function renderCoherenceEvidence() {
+        const payload = state.evidence.meta || {};
+        const summary = payload.summary || {};
+        const bucket = toText(state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
+        const all = Array.isArray(state.evidence.rows) ? state.evidence.rows : [];
+        const kindFilter = norm(nodes.evidenceKind.value);
+        const filtered = kindFilter ? all.filter((r) => inferEvidenceKind(r || {}) === kindFilter) : all;
+        const pairsTotal = Number(summary.pairs_total || state.coherence.pairsTotal || 0);
+        const evidenceTotal = Number(summary.evidence_total || state.evidence.total || 0);
+        const asOf = state.coherence.asOfDate || toText(payload && payload.meta ? payload.meta.as_of_date : "");
+
+        nodes.evidenceMeta.innerHTML =
+          `COHERENCE bucket: <strong>${esc(bucket)}</strong> | ` +
+          `pairs=${esc(String(pairsTotal))} evidence=${esc(String(evidenceTotal))}` +
+          (asOf ? ` | as_of=${esc(asOf)}` : "");
+
+        if (!filtered.length) {
+          nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia para este bucket/filtro.</div>";
+        } else {
+          nodes.evidence.innerHTML = "";
+          filtered.slice(0, 90).forEach((raw) => {
+            const kind = inferEvidenceKind(raw || {});
+            const kindBadge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
+            const et = toText(raw.evidence_type || "evidence");
+            const personName = toText(raw.person_name || (raw.person_id ? `person_id=${raw.person_id}` : ""));
+            const pair = `does=${toText(raw.does_stance || "-")} says=${toText(raw.says_stance || "-")}`;
+            const dt = toText(raw.evidence_date || "");
+            const src = toText(raw.source_id || "");
+            const conf = raw.evidence_confidence !== undefined && raw.evidence_confidence !== null ? `conf=${raw.evidence_confidence}` : "";
+            const url = raw.source_url
+              ? `<a class="link mono" href="${esc(toText(raw.source_url))}" target="_blank" rel="noopener">url</a>`
+              : "";
+            const evidenceId = raw.evidence_id;
+            const openSql = evidenceId
+              ? `<a class="link mono" href="${esc(
+                  withApiParam(`../explorer/?t=topic_evidence&tf=topic_&wc=evidence_id&wv=${encodeURIComponent(String(evidenceId))}`)
+                )}">sql</a>`
+              : "";
+            const ex = toText(raw.excerpt || "");
+
+            const div = document.createElement("div");
+            div.className = "ev";
+            div.innerHTML =
+              `<div class="row"><strong>${esc(et)}</strong>${kindBadge}</div>` +
+              `<div class="meta">${esc(personName)}  |  ${esc(pair)}</div>` +
+              `<div class="meta">${esc([dt, src, conf].filter(Boolean).join("  |  "))}${url ? "  |  " + url : ""}${openSql ? "  |  " + openSql : ""}</div>` +
+              (ex ? `<div class="excerpt">${esc(ex)}</div>` : "");
+            nodes.evidence.appendChild(div);
+          });
+          if (filtered.length > 90) {
+            const more = document.createElement("div");
+            more.className = "empty";
+            more.textContent = `+${filtered.length - 90} mas (filtrado local).`;
+            nodes.evidence.appendChild(more);
+          }
+        }
+
+        const canMore = state.evidence.total && state.evidence.offset + state.evidence.rows.length < state.evidence.total;
+        nodes.evidenceMore.disabled = !canMore || state.evidence.loading;
+        nodes.evidenceFoot.textContent = canMore
+          ? `bucket=${bucket} offset=${state.evidence.offset} limit=${state.evidence.limit}`
+          : `bucket=${bucket}`;
+      }
+
       function renderEvidence() {
+        if (state.evidence.mode === "coherence") {
+          renderCoherenceEvidence();
+          return;
+        }
+
         if (!state.activePersonId) {
           nodes.evidence.innerHTML = "<div class='empty'>Selecciona una posicion.</div>";
           nodes.evidenceMeta.textContent = "Selecciona una posicion.";
@@ -1299,6 +1669,8 @@
         nodes.topics.innerHTML = "<div class='empty'>Cargando...</div>";
         nodes.positions.innerHTML = "<div class='empty'>Selecciona un tema.</div>";
         nodes.evidence.innerHTML = "<div class='empty'>Selecciona una posicion.</div>";
+        resetCoherenceState();
+        renderCoherence();
 
         if (!state.activeSetId) {
           renderTopics();
@@ -1361,6 +1733,10 @@
       async function loadEvidencePage({ reset }) {
         if (state.evidence.loading) return;
         if (!state.activePersonId || !state.activeTopicId) return;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        setCoherenceBucketActive("");
         state.evidence.loading = true;
         if (reset) {
           state.evidence.offset = 0;
@@ -1414,6 +1790,17 @@
           return;
         }
         if (state.activeTopicId) {
+          if (state.evidence.mode === "coherence" && state.evidence.bucket) {
+            const bucket = encodeURIComponent(String(state.evidence.bucket));
+            const url =
+              "../explorer/?t=topic_evidence&tf=topic_" +
+              "&wc=topic_set_id&wv=" +
+              encodeURIComponent(String(state.activeSetId)) +
+              "&wc=topic_id&wv=" +
+              encodeURIComponent(String(state.activeTopicId));
+            window.location.href = withApiParam(url) + `#coherence-bucket=${bucket}`;
+            return;
+          }
           const methodNeedle = norm(nodes.method && nodes.method.value ? nodes.method.value : "");
           const url =
             "../explorer/?t=topic_positions&tf=topic_" +
@@ -1484,7 +1871,7 @@
               String(decision.matched || 0)
             )} · evidence_updated=${esc(String(changed))}</div>`
           );
-          await Promise.all([loadCounts(), loadPositionsPage({ reset: true }), loadEvidencePage({ reset: true })]);
+          await Promise.all([loadCounts(), loadPositionsPage({ reset: true }), loadCoherenceSummary(), loadEvidencePage({ reset: true })]);
         } catch (err) {
           window.alert(`No se pudo guardar decision: ${String(err)}`);
         } finally {
@@ -1501,12 +1888,16 @@
         state.positions.total = 0;
         state.evidence.rows = [];
         state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        resetCoherenceState();
         paramSet("set", state.activeSetId);
         paramSet("topic", "");
         paramSet("person", "");
         await loadTopicsForSet();
         renderSets();
         renderTopics();
+        renderCoherence();
         renderPositions();
         renderEvidence();
       }
@@ -1521,22 +1912,30 @@
         state.positions.total = 0;
         state.evidence.rows = [];
         state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
         renderTopics();
+        renderCoherence();
         renderPositions();
         renderEvidence();
-        await loadPositionsPage({ reset: true });
+        await Promise.all([loadPositionsPage({ reset: true }), loadCoherenceSummary()]);
       }
 
       async function selectPerson(personId) {
         if (!personId) return;
         state.activePersonId = String(personId);
         paramSet("person", state.activePersonId);
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        setCoherenceBucketActive("");
+        renderCoherence();
         renderPositions();
         await loadEvidencePage({ reset: true });
       }
 
       async function reloadAll() {
-        applyLocalApiGate();
         setModeUI();
         await loadSnapshotIfNeeded();
         await loadHealth();
@@ -1560,11 +1959,14 @@
           renderTopics();
         }
         if (state.activeSetId && state.activeTopicId) {
-          await loadPositionsPage({ reset: true });
+          await Promise.all([loadPositionsPage({ reset: true }), loadCoherenceSummary()]);
         }
         if (state.activeSetId && state.activeTopicId && state.activePersonId) {
           await loadEvidencePage({ reset: true });
+        } else {
+          renderEvidence();
         }
+        renderCoherence();
       }
 
       // Wire events.
@@ -1578,8 +1980,12 @@
         state.activePersonId = null;
         state.evidence.rows = [];
         state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
         paramSet("person", "");
         loadPositionsPage({ reset: true }).catch(() => {});
+        renderCoherence();
         renderEvidence();
       });
       nodes.stance.addEventListener("change", () => {
@@ -1587,19 +1993,35 @@
         state.activePersonId = null;
         state.evidence.rows = [];
         state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
         paramSet("person", "");
         loadPositionsPage({ reset: true }).catch(() => {});
+        renderCoherence();
         renderEvidence();
       });
       nodes.openSql.addEventListener("click", openInSql);
       nodes.positionsMore.addEventListener("click", () => loadPositionsPage({ reset: false }));
       nodes.evidenceKind.addEventListener("change", () => renderEvidence());
       nodes.reviewOpenSql.addEventListener("click", openReviewQueueSql);
-      nodes.evidenceMore.addEventListener("click", () => loadEvidencePage({ reset: false }));
+      nodes.cohOverlap.addEventListener("click", () => drillCoherenceBucket("overlap").catch(() => {}));
+      nodes.cohCoherent.addEventListener("click", () => drillCoherenceBucket("coherent").catch(() => {}));
+      nodes.cohIncoherent.addEventListener("click", () => drillCoherenceBucket("incoherent").catch(() => {}));
+      nodes.evidenceMore.addEventListener("click", () => {
+        if (state.evidence.mode === "coherence") {
+          loadCoherenceEvidencePage({ reset: false, bucket: state.evidence.bucket || state.coherence.selectedBucket }).catch(() => {});
+          return;
+        }
+        loadEvidencePage({ reset: false }).catch(() => {});
+      });
       nodes.reload.addEventListener("click", () => {
         state.activeSetId = null;
         state.activeTopicId = null;
         state.activePersonId = null;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        resetCoherenceState();
         paramSet("set", "");
         paramSet("topic", "");
         paramSet("person", "");

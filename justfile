@@ -495,10 +495,30 @@ explorer-gh-pages-build:
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --topic-set-id 1 \
-    --computed-method auto \
+    --computed-method combined \
+    --max-bytes 5000000
+  python3 scripts/export_citizen_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
+    --topic-set-id 1 \
+    --computed-method votes \
+    --max-bytes 5000000
+  python3 scripts/export_citizen_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
+    --topic-set-id 1 \
+    --computed-method declared \
     --max-bytes 5000000
   python3 scripts/validate_citizen_snapshot.py \
     --path "{{gh_pages_dir}}/citizen/data/citizen.json" \
+    --max-bytes 5000000 \
+    --strict-grid
+  python3 scripts/validate_citizen_snapshot.py \
+    --path "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
+    --max-bytes 5000000 \
+    --strict-grid
+  python3 scripts/validate_citizen_snapshot.py \
+    --path "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
     --max-bytes 5000000 \
     --strict-grid
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"

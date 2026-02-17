@@ -1,0 +1,42 @@
+{
+  "datasets_checked": [
+    "docs/gh-pages/citizen/data/citizen.json",
+    "docs/gh-pages/citizen/data/citizen_declared.json",
+    "docs/gh-pages/citizen/data/citizen_votes.json"
+  ],
+  "results": [
+    {
+      "file": "docs/gh-pages/citizen/data/citizen.json",
+      "links_total": 3901,
+      "missing_required_links_total": 0,
+      "non_relative_total": 0,
+      "unique_targets_total": 3,
+      "missing_targets_total": 0,
+      "missing_examples": []
+    },
+    {
+      "file": "docs/gh-pages/citizen/data/citizen_declared.json",
+      "links_total": 3901,
+      "missing_required_links_total": 0,
+      "non_relative_total": 0,
+      "unique_targets_total": 3,
+      "missing_targets_total": 0,
+      "missing_examples": []
+    },
+    {
+      "file": "docs/gh-pages/citizen/data/citizen_votes.json",
+      "links_total": 3901,
+      "missing_required_links_total": 0,
+      "non_relative_total": 0,
+      "unique_targets_total": 3,
+      "missing_targets_total": 0,
+      "missing_examples": []
+    }
+  ],
+  "summary": {
+    "datasets": 3,
+    "missing_required_links_total": 0,
+    "non_relative_total": 0,
+    "missing_targets_total": 0
+  }
+}
