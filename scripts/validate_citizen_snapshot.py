@@ -69,12 +69,15 @@ def main() -> int:
     parties = data["parties"]
     positions = data["party_topic_positions"]
     concerns = data["concerns"]
+    programas = data.get("party_concern_programas")
 
     require_type(meta, dict, "meta")
     require_type(topics, list, "topics")
     require_type(parties, list, "parties")
     require_type(positions, list, "party_topic_positions")
     require_type(concerns, dict, "concerns")
+    if programas is not None:
+        require_type(programas, list, "party_concern_programas")
 
     for k in ("topic_set_id", "as_of_date", "computed_method", "computed_version", "generated_at"):
         require_key(meta, k, "meta")
@@ -150,6 +153,37 @@ def main() -> int:
             die(msg)
         warn(msg)
 
+    # Optional programas grid: stances by (concern_id, party_id).
+    programas_stances: Counter[str] = Counter()
+    if programas is not None:
+        seen_keys: set[tuple[str, int]] = set()
+        bad_prog_party = 0
+        for i, row in enumerate(programas):
+            ctx = f"party_concern_programas[{i}]"
+            require_type(row, dict, ctx)
+            for k in ("concern_id", "party_id", "stance", "confidence", "links"):
+                require_key(row, k, ctx)
+            require_type(row["concern_id"], str, f"{ctx}.concern_id")
+            require_type(row["party_id"], int, f"{ctx}.party_id")
+            require_type(row["stance"], str, f"{ctx}.stance")
+            if row["stance"] not in ALLOWED_STANCES:
+                die(f"Invalid stance {row['stance']!r} at {ctx}")
+            if not isinstance(row["confidence"], (int, float)):
+                die(f"Expected {ctx}.confidence to be number, got {type(row['confidence']).__name__}")
+            require_type(row["links"], dict, f"{ctx}.links")
+
+            key = (str(row["concern_id"]), int(row["party_id"]))
+            if key in seen_keys:
+                die(f"Duplicate (concern_id, party_id) in party_concern_programas: {key}")
+            seen_keys.add(key)
+
+            if int(row["party_id"]) not in party_id_set:
+                bad_prog_party += 1
+            programas_stances[row["stance"]] += 1
+
+        if bad_prog_party:
+            die(f"{bad_prog_party} rows in party_concern_programas reference missing party_id")
+
     # Size guardrail: prefer explicit CLI; fallback to meta.guards.max_bytes; otherwise no check.
     meta_max = None
     guards = meta.get("guards")
@@ -172,6 +206,7 @@ def main() -> int:
             "parties": len(party_ids),
             "party_topic_positions": len(positions),
             "stances": dict(stance_counts),
+            "programas_stances": dict(programas_stances) if programas is not None else None,
         },
         ensure_ascii=True,
         separators=(",", ":"),
@@ -181,4 +216,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
