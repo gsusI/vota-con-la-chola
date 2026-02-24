@@ -1,0 +1,250 @@
+{
+  "schema_version": "v2",
+  "description": "Citizen preset hash examples for QA and deterministic codec tests.",
+  "config": {
+    "knownConcernIds": ["vivienda", "empleo", "sanidad"],
+    "maxConcerns": 6
+  },
+  "hash_cases": [
+    {
+      "id": "hash_missing_preset_prefix",
+      "hash": "#view=alignment",
+      "expect": {
+        "preset": null,
+        "error_code": "",
+        "error": ""
+      }
+    },
+    {
+      "id": "hash_valid_minimal_alignment",
+      "hash": "#preset=v1%3Aview%3Dalignment",
+      "expect": {
+        "preset": {
+          "view": "alignment"
+        },
+        "error_code": "",
+        "error": ""
+      }
+    },
+    {
+      "id": "hash_valid_votes_pack_and_concerns",
+      "hash": "#preset=v1%3Aview%3Dalignment%26method%3Dvotes%26pack%3DHogar%20y%20Bolsillo%26concerns%3Dvivienda%2Cempleo%2Cotro%26concern%3Dsanidad",
+      "expect": {
+        "preset": {
+          "view": "alignment",
+          "method": "votes",
+          "concern_pack": "hogar_y_bolsillo",
+          "concerns_ids": ["vivienda", "empleo"],
+          "concern": "sanidad"
+        },
+        "error_code": "",
+        "error": ""
+      }
+    },
+    {
+      "id": "hash_valid_repeated_keys_and_plus_pack",
+      "hash": "#preset=v1%3Aview%3Dalignment%26method%3Dcombined%26method%3Dvotes%26pack%3DHogar%2By%2BBolsillo%26concerns%3Dvivienda%2Cvivienda%2Cempleo%26concerns%3Dsanidad%26concern%3D%20sanidad%20",
+      "expect": {
+        "preset": {
+          "view": "alignment",
+          "method": "combined",
+          "concern_pack": "hogar_y_bolsillo",
+          "concerns_ids": ["vivienda", "empleo"],
+          "concern": "sanidad"
+        },
+        "error_code": "",
+        "error": ""
+      }
+    },
+    {
+      "id": "hash_valid_whitespace_value_normalization",
+      "hash": "#preset=v1%3Aview%3Dalignment%26method%3D%20votes%20%26pack%3D%20Casa%20y%20trabajo%20%26concerns%3D%20vivienda%20%2C%20empleo%20%2C%20otro%20",
+      "expect": {
+        "preset": {
+          "view": "alignment",
+          "method": "votes",
+          "concern_pack": "casa_y_trabajo",
+          "concerns_ids": ["vivienda", "empleo"]
+        },
+        "error_code": "",
+        "error": ""
+      }
+    },
+    {
+      "id": "hash_valid_raw_unencoded_payload",
+      "hash": "#preset=v1:view=alignment&method=votes&concerns=vivienda,empleo",
+      "expect": {
+        "preset": {
+          "view": "alignment",
+          "method": "votes",
+          "concerns_ids": ["vivienda", "empleo"]
+        },
+        "error_code": "",
+        "error": "",
+        "canonical_hash_prefix": "#preset="
+      }
+    },
+    {
+      "id": "hash_valid_double_encoded_payload",
+      "hash": "#preset=v1%253Aview%253Dalignment%2526method%253Ddeclared%2526concern%253Dsanidad",
+      "expect": {
+        "preset": {
+          "view": "alignment",
+          "method": "declared",
+          "concern": "sanidad"
+        },
+        "error_code": "",
+        "error": "",
+        "canonical_hash_prefix": "#preset="
+      }
+    },
+    {
+      "id": "hash_legacy_no_version_payload_recovery",
+      "hash": "#preset=view=dashboard&method=combined&pack=Hogar%20y%20Bolsillo&concerns=vivienda,empleo",
+      "expect": {
+        "preset": {
+          "view": "dashboard",
+          "method": "combined",
+          "concern_pack": "hogar_y_bolsillo",
+          "concerns_ids": ["vivienda", "empleo"]
+        },
+        "error_code": "",
+        "error": "",
+        "recovered_from": "legacy_no_version",
+        "canonical_hash_prefix": "#preset="
+      }
+    },
+    {
+      "id": "hash_valid_uppercase_prefix",
+      "hash": "#PRESET=v1%3Aview%3Dalignment%26method%3Dvotes",
+      "expect": {
+        "preset": {
+          "view": "alignment",
+          "method": "votes"
+        },
+        "error_code": "",
+        "error": "",
+        "canonical_hash_prefix": "#preset="
+      }
+    },
+    {
+      "id": "hash_unknown_version",
+      "hash": "#preset=v2%3Aview%3Dalignment%26method%3Dvotes",
+      "expect": {
+        "preset": null,
+        "error_code": "unsupported_version",
+        "error_contains": "version"
+      }
+    },
+    {
+      "id": "hash_malformed_encoding",
+      "hash": "#preset=%E0%A4%A",
+      "expect": {
+        "preset": null,
+        "error_code": "decode_error",
+        "error_contains": "URI|invalido|malformed"
+      }
+    },
+    {
+      "id": "hash_empty_payload",
+      "hash": "#preset=v1%3A",
+      "expect": {
+        "preset": null,
+        "error_code": "empty_payload",
+        "error_contains": "vacio"
+      }
+    },
+    {
+      "id": "hash_no_supported_fields",
+      "hash": "#preset=v1%3Afoo%3Dbar%26abc%3D1",
+      "expect": {
+        "preset": null,
+        "error_code": "no_supported_fields",
+        "error_contains": "campos validos"
+      }
+    }
+  ],
+  "share_cases": [
+    {
+      "id": "share_strips_query_and_legacy_hash",
+      "input": {
+        "options": {
+          "method": "declared",
+          "concerns_ids": ["vivienda"],
+          "concern_id": "vivienda"
+        },
+        "href": "https://example.org/citizen/?view=dashboard&method=votes#old",
+        "origin": "https://example.org"
+      },
+      "expect": {
+        "search": "",
+        "hash_prefix": "#preset=",
+        "hash": "#preset=v1%3Aview%3Dalignment%26method%3Ddeclared%26concerns%3Dvivienda%26concern%3Dvivienda",
+        "decoded": {
+          "preset": {
+            "view": "alignment",
+            "method": "declared",
+            "concerns_ids": ["vivienda"],
+            "concern": "vivienda"
+          },
+          "error_code": "",
+          "error": ""
+        }
+      }
+    },
+    {
+      "id": "share_normalizes_pack_and_dedupes_concerns",
+      "input": {
+        "options": {
+          "method": "votes",
+          "pack_id": "  Hogar y bolsillo  ",
+          "concerns_ids": ["vivienda", "vivienda", "otro", "empleo"],
+          "concern_id": " sanidad "
+        },
+        "href": "https://example.org/citizen/?foo=1",
+        "origin": "https://example.org"
+      },
+      "expect": {
+        "search": "",
+        "hash_prefix": "#preset=",
+        "hash": "#preset=v1%3Aview%3Dalignment%26method%3Dvotes%26pack%3Dhogar_y_bolsillo%26concerns%3Dvivienda%252Cempleo%26concern%3Dsanidad",
+        "decoded": {
+          "preset": {
+            "view": "alignment",
+            "method": "votes",
+            "concern_pack": "hogar_y_bolsillo",
+            "concerns_ids": ["vivienda", "empleo"],
+            "concern": "sanidad"
+          },
+          "error_code": "",
+          "error": ""
+        }
+      }
+    },
+    {
+      "id": "share_minimal_payload_when_optional_empty",
+      "input": {
+        "options": {
+          "method": "",
+          "pack_id": "",
+          "concerns_ids": [],
+          "concern_id": ""
+        },
+        "href": "https://example.org/citizen/?foo=1#legacy",
+        "origin": "https://example.org"
+      },
+      "expect": {
+        "search": "",
+        "hash_prefix": "#preset=",
+        "hash": "#preset=v1%3Aview%3Dalignment",
+        "decoded": {
+          "preset": {
+            "view": "alignment"
+          },
+          "error_code": "",
+          "error": ""
+        }
+      }
+    }
+  ]
+}
