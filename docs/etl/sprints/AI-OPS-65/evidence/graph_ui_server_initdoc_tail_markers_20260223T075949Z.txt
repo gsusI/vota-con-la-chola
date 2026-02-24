@@ -1,0 +1,15 @@
+46:DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS = ("senado_iniciativas",)
+47:DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING = 0
+48:DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING_PCT = 0.0
+1468:def _build_initdoc_actionable_tail_payload(
+1471:    source_ids: tuple[str, ...] = DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS,
+1472:    max_actionable_missing: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING,
+1473:    max_actionable_missing_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING_PCT,
+1479:        from scripts.report_initdoc_actionable_tail_contract import build_actionable_report
+1480:        from scripts.report_initdoc_actionable_tail_digest import build_digest
+1670:            "initdoc_actionable_tail": {
+1671:                "source_ids": list(DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS),
+2607:            initdoc_actionable_tail = _build_initdoc_actionable_tail_payload(conn)
+2700:                "initdoc_actionable_tail": initdoc_actionable_tail,
+2765:            "initdoc_actionable_tail": {
+2766:                "source_ids": list(DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS),

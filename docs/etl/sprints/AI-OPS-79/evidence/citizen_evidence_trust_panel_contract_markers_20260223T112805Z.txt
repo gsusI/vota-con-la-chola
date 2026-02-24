@@ -1,0 +1,57 @@
+# ui markers
+843:    <script src="./evidence_trust_panel.js"></script>
+2218:        if (!mod || typeof mod.buildEvidenceTrustPanel !== "function") return null;
+2231:      function buildEvidenceTrustPanel(input) {
+2234:        if (mod) return mod.buildEvidenceTrustPanel(i);
+2284:      function renderEvidenceTrustPanel(input, kind) {
+2285:        const x = buildEvidenceTrustPanel(input || {});
+2298:          `<div class="${cls}" data-evidence-trust-panel="1">` +
+2299:          `<span class="tag" data-evidence-trust-freshness="${esc(tier)}">fuente_${esc(tier)}</span>` +
+2300:          `<span class="tag">edad_fuente=${esc(age)}</span>` +
+2301:          `<span class="tag">metodo=${esc(methodLabel)}</span>` +
+2876:      function trustCoverageForPartyTopics(partyId, topics) {
+3786:                      const trustCov = trustCoverageForPartyTopics(pid, sum.topics || []);
+3792:                      const trustPanel = renderEvidenceTrustPanel(
+3981:                    const trustCov = trustCoverageForPartyTopics(pid, sum.topics || []);
+3987:                    const trustPanel = renderEvidenceTrustPanel(
+4161:                  const trustPanel = renderEvidenceTrustPanel(
+
+# module markers
+9:  const METHOD_LABELS = {
+53:  function sourceAgeDays(asOf, lastEvidenceDate) {
+63:  function freshnessTier(ageDays) {
+79:  function trustLevel({ tier, coverageRatio, hasDrilldown }) {
+97:  function buildEvidenceTrustPanel(input) {
+101:    const methodLabel = METHOD_LABELS[method] || method;
+112:    const ageDays = sourceAgeDays(asOf, lastEvidenceDate);
+113:    const tier = freshnessTier(ageDays);
+123:    const level = trustLevel({
+136:      panel_version: "evidence_trust_panel_v1",
+149:      trust_reasons: reasons,
+151:      drilldown_total: drilldownTotal,
+152:      has_drilldown: hasDrilldown,
+158:    buildEvidenceTrustPanel,
+
+# just markers
+202:citizen_mobile_perf_ui_assets := env_var_or_default("CITIZEN_MOBILE_PERF_UI_ASSETS", "ui/citizen/preset_codec.js,ui/citizen/onboarding_funnel.js,ui/citizen/first_answer_accelerator.js,ui/citizen/unknown_explainability.js,ui/citizen/evidence_trust_panel.js")
+893:  cp ui/citizen/evidence_trust_panel.js {{gh_pages_dir}}/citizen/evidence_trust_panel.js
+965:citizen-test-evidence-trust-panel:
+966:  node --test tests/test_citizen_evidence_trust_panel.js tests/test_citizen_evidence_trust_panel_ui_contract.js
+1006:  python3 scripts/report_citizen_mobile_performance_budget.py --ui-html "{{citizen_mobile_perf_ui_html}}" --ui-assets "{{citizen_mobile_perf_ui_assets}}" --snapshot "{{citizen_mobile_perf_snapshot}}" --max-ui-html-bytes "{{citizen_mobile_perf_max_ui_html_bytes}}" --max-ui-assets-total-bytes "{{citizen_mobile_perf_max_ui_assets_total_bytes}}" --max-snapshot-bytes "{{citizen_mobile_perf_max_snapshot_bytes}}" ${out_arg}
+1011:  python3 scripts/report_citizen_mobile_performance_budget.py --ui-html "{{citizen_mobile_perf_ui_html}}" --ui-assets "{{citizen_mobile_perf_ui_assets}}" --snapshot "{{citizen_mobile_perf_snapshot}}" --max-ui-html-bytes "{{citizen_mobile_perf_max_ui_html_bytes}}" --max-ui-assets-total-bytes "{{citizen_mobile_perf_max_ui_assets_total_bytes}}" --max-snapshot-bytes "{{citizen_mobile_perf_max_snapshot_bytes}}" --strict ${out_arg}
+
+# server markers
+40:UI_CITIZEN_EVIDENCE_TRUST_PANEL = BASE_DIR / "ui" / "citizen" / "evidence_trust_panel.js"
+5709:            if path == "/citizen/evidence_trust_panel.js":
+5710:                if not UI_CITIZEN_EVIDENCE_TRUST_PANEL.exists():
+5714:                    UI_CITIZEN_EVIDENCE_TRUST_PANEL.read_bytes(),
+5733:                "/citizen/data/concern_pack_quality.json",
+
+# test markers
+tests/test_graph_ui_server_citizen_assets.py:13:        self.assertIn('"/citizen/evidence_trust_panel.js"', src)
+tests/test_citizen_evidence_trust_panel_ui_contract.js:11:test("citizen UI loads evidence trust panel module", () => {
+tests/test_citizen_evidence_trust_panel_ui_contract.js:18:test("citizen UI renders evidence trust panel markers in party cards", () => {
+tests/test_citizen_evidence_trust_panel_ui_contract.js:20:  assert.match(html, /data-evidence-trust-panel/i);
+tests/test_citizen_evidence_trust_panel.js:4:const trust = require("../ui/citizen/evidence_trust_panel.js");
+tests/test_citizen_evidence_trust_panel.js:6:test("evidence trust panel computes freshness, trust level, and drilldown metadata", () => {
+tests/test_citizen_evidence_trust_panel.js:36:test("evidence trust panel handles missing dates and links deterministically", () => {

@@ -1,0 +1,104 @@
+{
+  "generated_at": "2026-02-23T21:08:30+00:00",
+  "status": "failed",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "methodologies_total": 0,
+    "right_categories_total": 0,
+    "right_categories_with_data_total": 0,
+    "assessments_total": 0,
+    "norms_with_irlc_total": 0,
+    "fragments_with_irlc_total": 0,
+    "fragments_with_accountability_total": 8,
+    "fragments_with_dual_coverage_total": 0,
+    "accountability_edges_total": 15,
+    "accountability_edges_with_primary_evidence_total": 15,
+    "sources_total": 1,
+    "sources_with_assessments_total": 0,
+    "scopes_total": 1,
+    "scopes_with_assessments_total": 0,
+    "sources_with_dual_coverage_total": 0,
+    "scopes_with_dual_coverage_total": 0
+  },
+  "coverage": {
+    "norms_classified_pct": 0.0,
+    "fragments_with_irlc_pct": 0.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 0.0,
+    "accountability_edges_with_primary_evidence_pct": 1.0,
+    "right_categories_with_data_pct": 0.0,
+    "sources_with_assessments_pct": 0.0,
+    "scopes_with_assessments_pct": 0.0,
+    "sources_with_dual_coverage_pct": 0.0,
+    "scopes_with_dual_coverage_pct": 0.0
+  },
+  "checks": {
+    "irlc_started": false,
+    "restriction_map_started": false,
+    "norms_classified_gate": false,
+    "fragments_irlc_gate": false,
+    "fragments_accountability_gate": true,
+    "rights_with_data_gate": false,
+    "source_representativity_gate": false,
+    "scope_representativity_gate": false,
+    "source_dual_coverage_gate": false,
+    "scope_dual_coverage_gate": false,
+    "accountability_primary_evidence_gate": true
+  },
+  "focus_gate": {
+    "passed": false,
+    "thresholds": {
+      "norms_classified_min": 0.8,
+      "fragments_irlc_min": 0.6,
+      "fragments_accountability_min": 0.6,
+      "rights_with_data_min": 1.0,
+      "sources_with_assessments_min_pct": 1.0,
+      "scopes_with_assessments_min_pct": 1.0,
+      "min_assessment_sources": 1,
+      "min_assessment_scopes": 1,
+      "sources_with_dual_coverage_min_pct": 1.0,
+      "scopes_with_dual_coverage_min_pct": 1.0,
+      "min_dual_coverage_sources": 1,
+      "min_dual_coverage_scopes": 1,
+      "accountability_primary_evidence_min_pct": 1.0,
+      "min_accountability_primary_evidence_edges": 1
+    }
+  },
+  "coverage_by_source": [
+    {
+      "source_key": "unknown",
+      "norms_total": 8,
+      "norms_with_irlc_total": 0,
+      "norms_with_irlc_pct": 0.0,
+      "fragments_total": 8,
+      "fragments_with_irlc_total": 0,
+      "fragments_with_irlc_pct": 0.0,
+      "fragments_with_accountability_total": 8,
+      "fragments_with_accountability_pct": 1.0,
+      "fragments_with_accountability_primary_evidence_total": 8,
+      "fragments_with_accountability_primary_evidence_pct": 1.0,
+      "fragments_with_dual_coverage_total": 0,
+      "fragments_with_dual_coverage_pct": 0.0
+    }
+  ],
+  "coverage_by_scope": [
+    {
+      "scope_key": "nacional",
+      "norms_total": 8,
+      "norms_with_irlc_total": 0,
+      "norms_with_irlc_pct": 0.0,
+      "fragments_total": 8,
+      "fragments_with_irlc_total": 0,
+      "fragments_with_irlc_pct": 0.0,
+      "fragments_with_accountability_total": 8,
+      "fragments_with_accountability_pct": 1.0,
+      "fragments_with_accountability_primary_evidence_total": 8,
+      "fragments_with_accountability_primary_evidence_pct": 1.0,
+      "fragments_with_dual_coverage_total": 0,
+      "fragments_with_dual_coverage_pct": 0.0
+    }
+  ],
+  "restriction_map_by_right": [],
+  "top_restrictions": []
+}

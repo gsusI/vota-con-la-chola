@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-02-23T21:26:46+00:00",
+  "db_path": "etl/data/staging/politicos-es.ai_ops_137.db",
+  "seed_path": "etl/data/seeds/liberty_indirect_accountability_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "indirect_chain_v1",
+    "edges_total": 12
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "method_version": "indirect_chain_v1",
+    "counts": {
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "edges_inserted": 12,
+      "edges_updated": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "edges_total": 12,
+      "fragments_with_edges_total": 8
+    }
+  }
+}

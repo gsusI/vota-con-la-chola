@@ -1,0 +1,20 @@
+49:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_PATH = (
+52:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_LAST = 20
+53:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED = 0
+54:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT = 0.0
+55:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED = 0
+56:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT = 0.0
+1486:    heartbeat_window = _build_initdoc_actionable_tail_heartbeat_window_payload()
+1493:            "heartbeat_window": heartbeat_window,
+1512:            "heartbeat_window": heartbeat_window,
+1517:            "heartbeat_window": heartbeat_window,
+1522:def _build_initdoc_actionable_tail_heartbeat_window_payload(
+1525:    window_last: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_LAST,
+1526:    max_failed: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED,
+1527:    max_failed_rate_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT,
+1528:    max_degraded: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED,
+1529:    max_degraded_rate_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT,
+1531:    target_heartbeat_path = heartbeat_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_PATH
+1533:        from scripts.report_initdoc_actionable_tail_digest_heartbeat_window import build_window_report_from_path
+1719:                "heartbeat_window": _build_initdoc_actionable_tail_heartbeat_window_payload(),
+2815:                "heartbeat_window": _build_initdoc_actionable_tail_heartbeat_window_payload(),

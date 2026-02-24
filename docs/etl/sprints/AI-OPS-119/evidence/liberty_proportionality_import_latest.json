@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-02-23T21:12:30+00:00",
+  "db_path": "etl/data/staging/politicos-es.ai_ops_135.db",
+  "seed_path": "etl/data/seeds/liberty_proportionality_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "proportionality_v1",
+    "reviews_total": 8
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "method_version": "proportionality_v1",
+    "counts": {
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "reviews_inserted": 8,
+      "reviews_updated": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "reviews_total": 8,
+      "fragments_with_reviews_total": 8
+    }
+  }
+}

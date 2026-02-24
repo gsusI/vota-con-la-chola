@@ -1,0 +1,75 @@
+ui markers
+ui/citizen/concerns_v1.json:12:      "description": "Acceso a alquiler/compra y estabilidad residencial.",
+ui/citizen/concerns_v1.json:29:      "description": "Calidad del trabajo, paro, salarios y condiciones laborales.",
+ui/citizen/concerns_v1.json:46:      "description": "Sistema sanitario, listas de espera y atencion de salud.",
+ui/citizen/concerns_v1.json:61:      "description": "Escuela, universidad, becas y formacion a lo largo de la vida.",
+ui/citizen/concerns_v1.json:76:      "description": "Precios cotidianos: cesta, energia y poder adquisitivo.",
+ui/citizen/concerns_v1.json:92:      "description": "Modelo energetico, factura y seguridad de suministro.",
+ui/citizen/concerns_v1.json:108:      "description": "Movilidad diaria, red ferroviaria y acceso territorial.",
+ui/citizen/concerns_v1.json:124:      "description": "Convivencia, sistema penal y funcionamiento de la justicia.",
+ui/citizen/concerns_v1.json:140:      "description": "Gestion migratoria, fronteras, asilo e integracion.",
+ui/citizen/concerns_v1.json:154:      "description": "Integridad institucional, control del fraude y transparencia.",
+ui/citizen/concerns_v1.json:168:      "description": "Agenda agraria y equilibrio territorial fuera de grandes ciudades.",
+ui/citizen/concerns_v1.json:184:      "description": "Derechos y no discriminacion por genero, orientacion u origen.",
+ui/citizen/index.html:1047:        if (pack) out.concern_pack = pack;
+ui/citizen/index.html:1055:      function readPresetFromHash() {
+ui/citizen/index.html:1058:        if (!h.startsWith("#preset=")) return { preset: null, error: "" };
+ui/citizen/index.html:1060:          const raw = h.slice("#preset=".length);
+ui/citizen/index.html:1072:      function buildAlignmentPresetShareUrl(opts) {
+ui/citizen/index.html:1077:        base.hash = `#preset=${encodeURIComponent("v1:" + payload)}`;
+ui/citizen/index.html:1211:        const concernPack = String(p.get("concern_pack") || "").trim();
+ui/citizen/index.html:1249:        if (state.activeConcernPackId) p.set("concern_pack", String(state.activeConcernPackId));
+ui/citizen/index.html:1250:        else p.delete("concern_pack");
+ui/citizen/index.html:1380:        return cobj ? String(cobj.description || "").trim() : "";
+ui/citizen/index.html:1517:          (activePack ? `<button class="tag tagbtn" type="button" data-pack-share="1">Link alineamiento</button>` : "") +
+ui/citizen/index.html:1533:        for (const btn of el.querySelectorAll("[data-pack-share]")) {
+ui/citizen/index.html:1536:            const url = buildAlignmentPresetShareUrl(payload);
+ui/citizen/index.html:1541:                `<div style="margin-top:8px">Este enlace usa <span class="mono">#preset=...</span> (fragmento) para evitar filtrar preferencias en query.</div>`
+ui/citizen/index.html:1562:        const wantsPackId = normalizeConcernPackId(String(state.activeConcernPackId || p.get("concern_pack") || ""));
+ui/citizen/index.html:1781:            const desc = String(c.description || "").trim();
+ui/citizen/index.html:1950:            const url = buildAlignmentPresetShareUrl(payload);
+ui/citizen/index.html:3048:              `<button class="btn" data-dashboard-share-preset="1" type="button">Compartir preset</button>` +
+ui/citizen/index.html:3156:            for (const btn of el.querySelectorAll("[data-dashboard-share-preset]")) {
+ui/citizen/index.html:3159:                const url = buildAlignmentPresetShareUrl(payload);
+ui/citizen/index.html:3173:          const concernDescription = cobj ? String(cobj.description || "").trim() : "";
+ui/citizen/index.html:3480:        const presetFromHash = readPresetFromHash();
+ui/citizen/index.html:3487:          if (preset.concern_pack) state.activeConcernPackId = preset.concern_pack;
+ui/citizen/index.html:3613:            banner += `<div style="margin-top:8px"><strong>Preset:</strong> cargado desde enlace compartido de alineamiento (<span class="mono">#preset=...</span>).</div>`;
+
+gh-pages markers
+docs/gh-pages/citizen/data/concerns_v1.json:12:      "description": "Acceso a alquiler/compra y estabilidad residencial.",
+docs/gh-pages/citizen/data/concerns_v1.json:29:      "description": "Calidad del trabajo, paro, salarios y condiciones laborales.",
+docs/gh-pages/citizen/data/concerns_v1.json:46:      "description": "Sistema sanitario, listas de espera y atencion de salud.",
+docs/gh-pages/citizen/data/concerns_v1.json:61:      "description": "Escuela, universidad, becas y formacion a lo largo de la vida.",
+docs/gh-pages/citizen/data/concerns_v1.json:76:      "description": "Precios cotidianos: cesta, energia y poder adquisitivo.",
+docs/gh-pages/citizen/data/concerns_v1.json:92:      "description": "Modelo energetico, factura y seguridad de suministro.",
+docs/gh-pages/citizen/data/concerns_v1.json:108:      "description": "Movilidad diaria, red ferroviaria y acceso territorial.",
+docs/gh-pages/citizen/data/concerns_v1.json:124:      "description": "Convivencia, sistema penal y funcionamiento de la justicia.",
+docs/gh-pages/citizen/data/concerns_v1.json:140:      "description": "Gestion migratoria, fronteras, asilo e integracion.",
+docs/gh-pages/citizen/data/concerns_v1.json:154:      "description": "Integridad institucional, control del fraude y transparencia.",
+docs/gh-pages/citizen/data/concerns_v1.json:168:      "description": "Agenda agraria y equilibrio territorial fuera de grandes ciudades.",
+docs/gh-pages/citizen/data/concerns_v1.json:184:      "description": "Derechos y no discriminacion por genero, orientacion u origen.",
+docs/gh-pages/citizen/index.html:1047:        if (pack) out.concern_pack = pack;
+docs/gh-pages/citizen/index.html:1055:      function readPresetFromHash() {
+docs/gh-pages/citizen/index.html:1058:        if (!h.startsWith("#preset=")) return { preset: null, error: "" };
+docs/gh-pages/citizen/index.html:1060:          const raw = h.slice("#preset=".length);
+docs/gh-pages/citizen/index.html:1072:      function buildAlignmentPresetShareUrl(opts) {
+docs/gh-pages/citizen/index.html:1077:        base.hash = `#preset=${encodeURIComponent("v1:" + payload)}`;
+docs/gh-pages/citizen/index.html:1211:        const concernPack = String(p.get("concern_pack") || "").trim();
+docs/gh-pages/citizen/index.html:1249:        if (state.activeConcernPackId) p.set("concern_pack", String(state.activeConcernPackId));
+docs/gh-pages/citizen/index.html:1250:        else p.delete("concern_pack");
+docs/gh-pages/citizen/index.html:1380:        return cobj ? String(cobj.description || "").trim() : "";
+docs/gh-pages/citizen/index.html:1517:          (activePack ? `<button class="tag tagbtn" type="button" data-pack-share="1">Link alineamiento</button>` : "") +
+docs/gh-pages/citizen/index.html:1533:        for (const btn of el.querySelectorAll("[data-pack-share]")) {
+docs/gh-pages/citizen/index.html:1536:            const url = buildAlignmentPresetShareUrl(payload);
+docs/gh-pages/citizen/index.html:1541:                `<div style="margin-top:8px">Este enlace usa <span class="mono">#preset=...</span> (fragmento) para evitar filtrar preferencias en query.</div>`
+docs/gh-pages/citizen/index.html:1562:        const wantsPackId = normalizeConcernPackId(String(state.activeConcernPackId || p.get("concern_pack") || ""));
+docs/gh-pages/citizen/index.html:1781:            const desc = String(c.description || "").trim();
+docs/gh-pages/citizen/index.html:1950:            const url = buildAlignmentPresetShareUrl(payload);
+docs/gh-pages/citizen/index.html:3048:              `<button class="btn" data-dashboard-share-preset="1" type="button">Compartir preset</button>` +
+docs/gh-pages/citizen/index.html:3156:            for (const btn of el.querySelectorAll("[data-dashboard-share-preset]")) {
+docs/gh-pages/citizen/index.html:3159:                const url = buildAlignmentPresetShareUrl(payload);
+docs/gh-pages/citizen/index.html:3173:          const concernDescription = cobj ? String(cobj.description || "").trim() : "";
+docs/gh-pages/citizen/index.html:3480:        const presetFromHash = readPresetFromHash();
+docs/gh-pages/citizen/index.html:3487:          if (preset.concern_pack) state.activeConcernPackId = preset.concern_pack;
+docs/gh-pages/citizen/index.html:3613:            banner += `<div style="margin-top:8px"><strong>Preset:</strong> cargado desde enlace compartido de alineamiento (<span class="mono">#preset=...</span>).</div>`;

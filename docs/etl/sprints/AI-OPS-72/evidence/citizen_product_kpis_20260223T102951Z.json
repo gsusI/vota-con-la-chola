@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-02-23T10:29:51+00:00",
+  "snapshot_path": "docs/gh-pages/citizen/data/citizen.json",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [],
+  "telemetry": {
+    "sessions_total": null,
+    "sessions_with_first_answer": null,
+    "sessions_with_drilldown_click": null,
+    "events_total": null,
+    "parse_errors": null
+  },
+  "metrics": {
+    "unknown_rate": 0.175676,
+    "unknown_rate_source": "meta.quality.unknown_pct",
+    "time_to_first_answer_seconds": null,
+    "drilldown_click_rate": null
+  },
+  "thresholds": {
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2
+  },
+  "checks": {
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": null,
+    "drilldown_click_rate_within_threshold": null,
+    "telemetry_available": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "drilldown_click_rate",
+    "time_to_first_answer_seconds"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}

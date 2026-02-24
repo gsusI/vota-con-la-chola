@@ -1,0 +1,21 @@
+{
+  "seed_path": "etl/data/seeds/liberty_person_identity_resolution_seed_v1.json",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "out_path": "docs/etl/sprints/AI-OPS-153/exports/liberty_person_identity_official_upgrade_review_queue_full_20260223T234425Z.csv",
+  "source_record_lookup_rows_total": 173070,
+  "only_actionable": false,
+  "strict_empty_actionable": false,
+  "rows_exported_total": 0,
+  "summary": {
+    "rows_total": 0,
+    "manual_upgrade_rows_total": 0,
+    "official_evidence_gap_rows_total": 0,
+    "official_source_record_gap_rows_total": 0,
+    "missing_seed_mapping_total": 0,
+    "source_record_pk_lookup_keys_total": 0,
+    "source_record_pk_lookup_prefilled_total": 0,
+    "source_record_pk_lookup_miss_total": 0,
+    "actionable_rows_total": 0,
+    "likely_not_actionable_rows_total": 0
+  }
+}

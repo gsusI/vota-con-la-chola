@@ -1,0 +1,125 @@
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T12:00:27+00:00",
+  "telemetry_json_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpm_taieza/summary.json",
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [
+    "telemetry_json"
+  ],
+  "telemetry": {
+    "sample_count": null,
+    "events_total": null,
+    "parse_errors": null,
+    "source_breakdown": {}
+  },
+  "metrics": {
+    "input_to_render_p50_ms": null,
+    "input_to_render_p90_ms": null,
+    "input_to_render_p95_ms": null
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 180.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": false,
+    "sample_count_meets_minimum": null,
+    "input_to_render_p50_within_threshold": null,
+    "input_to_render_p90_within_threshold": null,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "input_to_render_p50_ms",
+    "input_to_render_p90_ms",
+    "input_to_render_p95_ms"
+  ],
+  "degraded_reasons": [
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T12:00:27+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp72yp4wz9/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 148.5,
+    "input_to_render_p90_ms": 284.0,
+    "input_to_render_p95_ms": 322.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 200.0,
+    "max_input_to_render_p90_ms": 330.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": true,
+    "input_to_render_p90_within_threshold": true,
+    "contract_complete": true
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T12:00:27+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp7dgsbc62/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 175.0,
+    "input_to_render_p90_ms": 512.0,
+    "input_to_render_p95_ms": 626.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 150.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": false,
+    "input_to_render_p90_within_threshold": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "input_to_render_p50_above_threshold",
+    "input_to_render_p90_above_threshold"
+  ],
+  "status": "failed"
+}

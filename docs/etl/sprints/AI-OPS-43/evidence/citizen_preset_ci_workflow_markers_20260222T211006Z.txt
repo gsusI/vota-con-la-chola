@@ -1,0 +1,14 @@
+.github/workflows/etl-tracker-gate.yml:10:  citizen-preset-contract:
+.github/workflows/etl-tracker-gate.yml:18:      - name: Setup Node
+.github/workflows/etl-tracker-gate.yml:23:      - name: Run citizen preset contract tests
+.github/workflows/etl-tracker-gate.yml:27:      - name: Generate strict citizen preset contract report
+.github/workflows/etl-tracker-gate.yml:32:            --json-out citizen_preset_contract_ci.json
+.github/workflows/etl-tracker-gate.yml:34:      - name: Upload citizen preset contract artifact
+.github/workflows/etl-tracker-gate.yml:37:          name: citizen-preset-contract
+.github/workflows/etl-tracker-gate.yml:38:          path: citizen_preset_contract_ci.json
+docs/etl/sprints/AI-OPS-43/evidence/citizen_preset_contract_report_20260222T211006Z.json:8:    "hash_cases_total": 9,
+docs/etl/sprints/AI-OPS-43/evidence/citizen_preset_contract_report_20260222T211006Z.json:11:    "share_cases_total": 3,
+docs/etl/sprints/AI-OPS-43/evidence/citizen_preset_contract_report_20260222T211006Z.json:16:    "total_fail": 0,
+docs/etl/sprints/AI-OPS-43/evidence/citizen_preset_contract_report_20260222T211006Z.json:17:    "failed_ids": []
+justfile:730:citizen-test-preset-codec:
+justfile:733:citizen-report-preset-contract:

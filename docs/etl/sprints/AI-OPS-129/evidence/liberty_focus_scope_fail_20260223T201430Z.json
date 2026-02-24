@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-02-23T20:13:33+00:00",
+  "strict": true,
+  "input": {
+    "status_json": "docs/etl/sprints/AI-OPS-129/evidence/liberty_focus_gate_fail_20260223T201430Z.json",
+    "changed_paths_file": "docs/etl/sprints/AI-OPS-129/evidence/liberty_focus_changed_paths_fail_20260223T201430Z.txt"
+  },
+  "status_doc_status": "degraded",
+  "focus_gate_passed": false,
+  "focus_gate_state": "degraded",
+  "changed_paths_total": 1,
+  "allowed_paths_total": 0,
+  "non_rights_paths_total": 1,
+  "changed_paths": [
+    "ui/citizen/index.html"
+  ],
+  "allowed_paths": [],
+  "non_rights_paths": [
+    {
+      "path": "ui/citizen/index.html",
+      "reason": "outside_rights_scope"
+    }
+  ],
+  "checks": {
+    "status_json_exists_ok": true,
+    "status_json_valid_ok": true,
+    "changed_paths_file_exists_ok": true,
+    "focus_gate_known_ok": true,
+    "degraded_scope_ok": false
+  },
+  "strict_fail_reasons": [
+    "non_rights_changes_under_degraded_focus"
+  ],
+  "status": "failed"
+}

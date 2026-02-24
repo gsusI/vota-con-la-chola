@@ -1,0 +1,51 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-86/evidence/citizen_trust_action_nudges_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-86/evidence/citizen_trust_action_nudges_latest.json"; fi; python3 scripts/report_citizen_trust_action_nudges.py --events-jsonl "tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl" --min-nudge-shown-events "8" --min-nudge-shown-sessions "5" --min-nudge-clickthrough-rate "0.40" ${out_arg}
+{
+  "generated_at": "2026-02-23T12:37:36+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 13,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8
+  },
+  "metrics": {
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 5,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 5,
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": true,
+    "nudge_shown_events_meet_minimum": true,
+    "nudge_shown_sessions_meet_minimum": true,
+    "nudge_clickthrough_meets_minimum": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_source_view": [
+    {
+      "source_view": "concern",
+      "nudge_shown_events": 3,
+      "nudge_clicked_events": 2,
+      "nudge_clickthrough_event_rate": 0.666667
+    },
+    {
+      "source_view": "topic",
+      "nudge_shown_events": 5,
+      "nudge_clicked_events": 3,
+      "nudge_clickthrough_event_rate": 0.6
+    }
+  ]
+}

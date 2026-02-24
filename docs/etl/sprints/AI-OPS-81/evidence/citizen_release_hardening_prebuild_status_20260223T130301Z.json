@@ -1,0 +1,26 @@
+{
+  "summary": {
+    "total_checks": 17,
+    "total_pass": 10,
+    "total_fail": 7,
+    "failed_ids": [
+      "asset_parity:index.html",
+      "asset_parity:preset_codec.js",
+      "asset_published:onboarding_funnel.js",
+      "asset_published:first_answer_accelerator.js",
+      "asset_published:unknown_explainability.js",
+      "asset_published:evidence_trust_panel.js",
+      "snapshot:shape"
+    ]
+  },
+  "readiness": {
+    "status": "failed",
+    "release_ready": false,
+    "parity_ok_assets": 4,
+    "parity_total_assets": 6,
+    "parity_failed_assets": [
+      "index.html",
+      "preset_codec.js"
+    ]
+  }
+}

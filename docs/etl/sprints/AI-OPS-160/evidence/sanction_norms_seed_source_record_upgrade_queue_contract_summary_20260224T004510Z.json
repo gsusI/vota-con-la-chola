@@ -1,0 +1,29 @@
+{
+  "status": {
+    "lane_status": "ok",
+    "queue_status": "degraded"
+  },
+  "totals": {
+    "responsibility_evidence_items_total": 15,
+    "responsibility_evidence_items_with_source_record_total": 15,
+    "responsibility_evidence_items_with_seed_source_record_total": 15,
+    "responsibility_evidence_items_with_non_seed_source_record_total": 0,
+    "seed_upgrade_queue_rows_total": 15,
+    "seed_upgrade_queue_norms_total": 8,
+    "seed_upgrade_queue_fragments_total": 8,
+    "seed_upgrade_queue_responsibilities_total": 15,
+    "responsibility_evidence_source_record_pk_auto_resolved": 15,
+    "responsibility_evidence_source_record_seed_rows_inserted": 0,
+    "responsibility_evidence_source_record_pk_auto_resolve_missed": 0
+  },
+  "coverage": {
+    "responsibility_evidence_item_source_record_coverage_pct": 1.0,
+    "responsibility_evidence_item_non_seed_source_record_coverage_pct": 0.0
+  },
+  "checks": {
+    "responsibility_evidence_source_record_chain_started": true,
+    "responsibility_evidence_non_seed_source_record_chain_started": false,
+    "seed_upgrade_queue_visible": true,
+    "seed_upgrade_queue_empty": false
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-02-23T18:35:09+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops120.db",
+  "seed_path": "etl/data/seeds/liberty_enforcement_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "enforcement_variation_v1",
+    "observations_total": 16
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "method_version": "enforcement_variation_v1",
+    "counts": {
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "observations_inserted": 16,
+      "observations_updated": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "observations_total": 16,
+      "fragments_with_observations_total": 8
+    }
+  }
+}

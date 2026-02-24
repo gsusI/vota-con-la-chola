@@ -1,0 +1,52 @@
+814:            <span class="chip md3-chip"><span class="dot warn"></span><span class="mono">cargando datos…</span></span>
+833:            <button class="btn md3-button" id="btnResetSelected" type="button">Reset</button>
+844:            <button class="btn md3-button" id="btnClear" type="button">Limpiar</button>
+861:            <button class="btn md3-button" id="btnPartyFocusClear" type="button" style="display: none">
+864:            <span class="chip md3-chip" id="partyFocusChip" style="display: none">
+921:            <select class="md3-tab" id="viewMode" aria-label="Vista">
+927:            <select class="md3-tab" id="methodSelect" aria-label="Metodo">
+932:            <select class="md3-tab" id="stanceFilter" aria-label="Filtro por stance">
+940:            <select class="md3-tab" id="partySort" aria-label="Orden de partidos">
+2031:          `<span class="chip md3-chip"><span class="dot ok"></span><span>as_of</span><span class="mono">${esc(asOf)}</span></span>` +
+2032:          `<span class="chip md3-chip"><span class="dot ok"></span><span>metodo</span><span class="mono">${esc(method)}</span></span>` +
+2033:          `<span class="chip md3-chip"><span class="dot ok"></span><span>topic_set</span><span class="mono">${esc(setId)}</span></span>` +
+2034:          `<span class="chip md3-chip"><span class="dot ok"></span><span>version</span><span class="mono">${esc(version)}</span></span>` +
+2036:            ? `<span class="chip md3-chip"><span class="dot ok"></span><span>pack</span><span class="mono">${esc(
+2041:            ? `<span class="chip md3-chip"><span class="dot ${weakPacksTotal > 0 ? "warn" : "ok"}"></span><span>packs_weak</span><span class="mono">${esc(
+2046:            ? `<span class="chip md3-chip"><span class="dot ${activePackQuality.weak ? "warn" : "ok"}"></span><span>pack_quality</span><span class="mono">${esc(
+2051:            ? `<span class="chip md3-chip"><span class="dot ${weakFollowDot}"></span><span>pack_follow</span><span class="mono">${esc(
+2056:            ? `<span class="chip md3-chip"><span class="dot ${trustNudgeDot}"></span><span>nudge_ctr</span><span class="mono">${esc(
+2061:            ? `<span class="chip md3-chip"><span class="dot ${clearDot}"></span><span>senal_clara</span><span class="mono">${esc(fmtPct01(clearPct))}</span></span>`
+2064:            ? `<span class="chip md3-chip"><span class="dot ${unknownDot}"></span><span>unknown</span><span class="mono">${esc(fmtPct01(unknownPct))}</span></span>`
+2067:            ? `<span class="chip md3-chip"><span class="dot ${confDot}"></span><span>conf_media</span><span class="mono">${esc(fmtPct01(confAvg))}</span></span>`
+2070:            ? `<span class="chip md3-chip"><span class="dot ${Number(prog.signal_total || 0) > 0 ? "ok" : "warn"}"></span><span>programa</span><span class="mono">${esc(
+2264:                `<button class="tag tagbtn md3-tab ${active ? "active" : ""}" type="button" data-pack-id="${esc(String(pack.id || ""))}"${
+2274:          (activePack ? `<button class="tag tagbtn md3-tab" type="button" data-pack-share="1">Link alineamiento</button>` : "") +
+2275:          (activePack ? `<button class="tag tagbtn md3-tab" type="button" data-pack-clear="1">Personalizado</button>` : "");
+2511:              `<button class="tag tagbtn md3-tab ${active ? "active" : ""}" type="button" data-sel-cid="${esc(cid)}">` +
+3351:          `<button class="btn md3-button" type="button" data-onboard-next="${esc(String(nextAction.id || ""))}" ${String(nextAction.id || "") === "done" ? "disabled" : ""}>${esc(
+3354:          `<button class="btn md3-button" type="button" data-first-answer-run="1" ${accelConcernId && accelTid > 0 ? "" : "disabled"}>${esc(
+3369:          `<button class="btn md3-button" type="button" data-onboard-pack="${esc(recPackId)}" ${recPackId ? "" : "disabled"}>` +
+3375:          `<button class="btn md3-button" type="button" data-onboard-pack-share="1" ${recPackId ? "" : "disabled"}>Link pack</button>` +
+3376:          `<button class="btn md3-button" type="button" data-onboard-topic="${esc(String(recTid || 0))}" ${recTid ? "" : "disabled"}>` +
+3382:          `<button class="btn md3-button" type="button" data-onboard-alignment="1">${esc(
+3385:          `<button class="btn md3-button" type="button" data-onboard-dismiss="1">Ocultar guia</button>` +
+4085:          (state.activePartyId ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>` : "") +
+4161:                    `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Foco partido</button>` +
+4244:            `<button class="btn md3-button" type="button" data-pref-clear="1" data-tid="${esc(String(tid))}">Quitar</button>` +
+4264:          (state.activePartyId ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>` : "") +
+4276:          `<button class="btn md3-button" type="button" data-prefs-clear-all="1" ${prefsItems.length ? "" : "disabled"}>Borrar preferencias</button>` +
+4277:          `<button class="btn md3-button" type="button" data-prefs-share="1" ${prefsItems.length ? "" : "disabled"}>Generar link</button>` +
+4278:          `<button class="btn md3-button" type="button" data-prefs-download="1" ${prefsItems.length ? "" : "disabled"}>Descargar JSON</button>` +
+4279:          `<label class="btn md3-button" style="display:inline-flex; align-items:center; gap:8px; cursor:pointer">` +
+4285:          `<button class="btn md3-button" type="button" data-prefs-copy="1">Copiar</button>` +
+4382:                      `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Foco</button>` +
+4571:              `<button class="btn md3-button" type="button" data-first-answer-run-inline="1">Usar recomendacion</button>` +
+4707:              `<button class="btn md3-button" data-dashboard-share-preset="1" type="button">Compartir preset</button>` +
+4710:                ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>`
+4809:                        `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Ver top items</button>` +
+4946:              ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>`
+5042:                      `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Ver top items</button>` +
+5500:              `<div style="margin-top:8px"><button class="btn md3-button" type="button" data-preset-copy-canonical="1">Copiar enlace canonico</button></div>`;
+5515:              ? `<div style="margin-top:8px"><button class="btn md3-button" type="button" data-preset-clear-hash="1">Limpiar hash preset</button></div>`
+5526:          qs("#statusChips").innerHTML = `<span class="chip md3-chip"><span class="dot bad"></span><span class="mono">fallo carga</span></span>`;

@@ -1,0 +1,14 @@
+justfile:734:  node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js
+justfile:741:citizen-report-preset-codec-parity:
+justfile:744:  node scripts/report_citizen_preset_codec_parity.js --source "{{citizen_preset_parity_source}}" --published "{{citizen_preset_parity_published}}" --strict ${out_arg}
+scripts/report_citizen_preset_codec_parity.js:15:    "  node scripts/report_citizen_preset_codec_parity.js [options]",
+.github/workflows/etl-tracker-gate.yml:10:  citizen-preset-contract:
+.github/workflows/etl-tracker-gate.yml:25:          node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js
+.github/workflows/etl-tracker-gate.yml:36:          node scripts/report_citizen_preset_codec_parity.js \
+.github/workflows/etl-tracker-gate.yml:46:          name: citizen-preset-contract
+.github/workflows/etl-tracker-gate.yml:54:          name: citizen-preset-codec-parity
+9:    "total_fail": 0,
+10:    "failed_ids": []
+20:      "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+21:      "published_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+22:      "first_diff_line": 0,

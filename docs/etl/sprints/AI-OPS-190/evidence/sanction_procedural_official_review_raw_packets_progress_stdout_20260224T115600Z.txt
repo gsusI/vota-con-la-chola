@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-02-24T11:56:00+00:00",
+  "status": "degraded",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "packets_dir": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest",
+  "metric_scope": {
+    "period_date": "2025-12-31",
+    "period_granularity": "year",
+    "label": "period"
+  },
+  "statuses_filter": [
+    "missing_metric"
+  ],
+  "include_ready": false,
+  "queue_report_status": "ok",
+  "queue_totals": {
+    "official_review_sources_expected_total": 4,
+    "official_review_sources_seeded_total": 4,
+    "official_review_kpis_expected_total": 3,
+    "expected_pairs_total": 12,
+    "pairs_ready_total": 0,
+    "pairs_missing_source_total": 0,
+    "pairs_missing_metric_total": 12,
+    "pairs_missing_source_record_total": 0,
+    "pairs_missing_evidence_total": 0,
+    "actionable_pairs_total": 12,
+    "queue_rows_total": 12
+  },
+  "totals": {
+    "queue_rows_seen_total": 12,
+    "sources_actionable_total": 4,
+    "packets_expected_total": 4,
+    "packets_found_total": 0,
+    "packets_missing_total": 4,
+    "packets_extra_total": 4,
+    "packets_ready_total": 0,
+    "packets_not_ready_total": 4,
+    "packets_status_counts": {
+      "missing_packet_file": 4
+    }
+  },
+  "checks": {
+    "packet_directory_exists": true,
+    "queue_report_not_failed": true,
+    "packet_coverage_complete": false,
+    "all_expected_packets_ready": false
+  },
+  "missing_packet_files": [
+    "es-sanctions-contencioso-sentencias__2025-12-31__year.csv",
+    "es-sanctions-defensor-pueblo-quejas__2025-12-31__year.csv",
+    "es-sanctions-teac-resolutions__2025-12-31__year.csv",
+    "es-sanctions-tear-resolutions__2025-12-31__year.csv"
+  ],
+  "extra_packet_files": [
+    "es-sanctions-contencioso-sentencias__2026-02-12__year.csv",
+    "es-sanctions-defensor-pueblo-quejas__2026-02-12__year.csv",
+    "es-sanctions-teac-resolutions__2026-02-12__year.csv",
+    "es-sanctions-tear-resolutions__2026-02-12__year.csv"
+  ],
+  "packets_preview": [
+    {
+      "sanction_source_id": "es:sanctions:contencioso_sentencias",
+      "packet_filename": "es-sanctions-contencioso-sentencias__2025-12-31__year.csv",
+      "packet_path": "",
+      "packet_exists": false,
+      "packet_status": "missing_packet_file",
+      "rows_found": 0,
+      "missing_headers": "sanction_source_id|period_date|period_granularity|source_url|evidence_date|evidence_quote|recurso_presentado_count|recurso_estimado_count|anulaciones_formales_count|resolution_delay_p90_days|source_id|source_record_id|source_label|organismo|expected_metrics|procedural_kpis_expected|procedural_kpis_covered_total|procedural_metric_rows_total",
+      "missing_required_fields": "",
+      "row_reject_reasons": "",
+      "row_reject_priority": "",
+      "kpis_missing_total": 3,
+      "kpis_missing": "kpi:formal_annulment_rate|kpi:recurso_estimation_rate|kpi:resolution_delay_p90_days",
+      "ready_for_transform": false
+    },
+    {
+      "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+      "packet_filename": "es-sanctions-defensor-pueblo-quejas__2025-12-31__year.csv",
+      "packet_path": "",
+      "packet_exists": false,
+      "packet_status": "missing_packet_file",
+      "rows_found": 0,
+      "missing_headers": "sanction_source_id|period_date|period_granularity|source_url|evidence_date|evidence_quote|recurso_presentado_count|recurso_estimado_count|anulaciones_formales_count|resolution_delay_p90_days|source_id|source_record_id|source_label|organismo|expected_metrics|procedural_kpis_expected|procedural_kpis_covered_total|procedural_metric_rows_total",
+      "missing_required_fields": "",
+      "row_reject_reasons": "",
+      "row_reject_priority": "",
+      "kpis_missing_total": 3,
+      "kpis_missing": "kpi:formal_annulment_rate|kpi:recurso_estimation_rate|kpi:resolution_delay_p90_days",
+      "ready_for_transform": false
+    },
+    {
+      "sanction_source_id": "es:sanctions:teac_resolutions",
+      "packet_filename": "es-sanctions-teac-resolutions__2025-12-31__year.csv",
+      "packet_path": "",
+      "packet_exists": false,
+      "packet_status": "missing_packet_file",
+      "rows_found": 0,
+      "missing_headers": "sanction_source_id|period_date|period_granularity|source_url|evidence_date|evidence_quote|recurso_presentado_count|recurso_estimado_count|anulaciones_formales_count|resolution_delay_p90_days|source_id|source_record_id|source_label|organismo|expected_metrics|procedural_kpis_expected|procedural_kpis_covered_total|procedural_metric_rows_total",
+      "missing_required_fields": "",
+      "row_reject_reasons": "",
+      "row_reject_priority": "",
+      "kpis_missing_total": 3,
+      "kpis_missing": "kpi:formal_annulment_rate|kpi:recurso_estimation_rate|kpi:resolution_delay_p90_days",
+      "ready_for_transform": false
+    },
+    {
+      "sanction_source_id": "es:sanctions:tear_resolutions",
+      "packet_filename": "es-sanctions-tear-resolutions__2025-12-31__year.csv",
+      "packet_path": "",
+      "packet_exists": false,
+      "packet_status": "missing_packet_file",
+      "rows_found": 0,
+      "missing_headers": "sanction_source_id|period_date|period_granularity|source_url|evidence_date|evidence_quote|recurso_presentado_count|recurso_estimado_count|anulaciones_formales_count|resolution_delay_p90_days|source_id|source_record_id|source_label|organismo|expected_metrics|procedural_kpis_expected|procedural_kpis_covered_total|procedural_metric_rows_total",
+      "missing_required_fields": "",
+      "row_reject_reasons": "",
+      "row_reject_priority": "",
+      "kpis_missing_total": 3,
+      "kpis_missing": "kpi:formal_annulment_rate|kpi:recurso_estimation_rate|kpi:resolution_delay_p90_days",
+      "ready_for_transform": false
+    }
+  ],
+  "strict_actionable": false,
+  "strict_ready": false
+}

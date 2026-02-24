@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-02-23T08:24:14+00:00",
+  "strict": true,
+  "input_path": "docs/etl/sprints/AI-OPS-67/evidence/initdoc_actionable_tail_digest_check_20260223T082414Z.json",
+  "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
+  "history_size_before": 3,
+  "history_size_after": 4,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T08:24:14+00:00",
+    "heartbeat_id": "2026-02-23T08:24:14+00:00|2026-02-23T08:24:14+00:00|ok|senado_iniciativas|0|0.000000",
+    "digest_path": "docs/etl/sprints/AI-OPS-67/evidence/initdoc_actionable_tail_digest_check_20260223T082414Z.json",
+    "digest_generated_at": "2026-02-23T08:24:14+00:00",
+    "contract_generated_at": "2026-02-23T08:24:14+00:00",
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "status": "ok",
+    "total_missing": 119,
+    "redundant_missing": 119,
+    "actionable_missing": 0,
+    "actionable_missing_pct": 0.0,
+    "actionable_queue_empty": true,
+    "max_actionable_missing": 0,
+    "max_actionable_missing_pct": 0.0,
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  }
+}

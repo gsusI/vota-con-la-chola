@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-02-24T10:54:55+00:00",
+  "status": "ok",
+  "input_csv": "docs/etl/sprints/AI-OPS-182/exports/sanction_procedural_official_review_apply_prepared_from_raw_cycle_20260224T105455Z.csv",
+  "required_headers": [
+    "sanction_source_id",
+    "kpi_id",
+    "period_date",
+    "source_url",
+    "evidence_date",
+    "evidence_quote",
+    "value"
+  ],
+  "headers_present": [
+    "sanction_source_id",
+    "kpi_id",
+    "period_date",
+    "period_granularity",
+    "value",
+    "numerator",
+    "denominator",
+    "source_url",
+    "evidence_date",
+    "evidence_quote",
+    "source_id",
+    "source_record_id",
+    "metric_key",
+    "raw_row_key"
+  ],
+  "missing_headers": [],
+  "tolerance": 0.01,
+  "totals": {
+    "rows_seen": 12,
+    "rows_ready": 12,
+    "rows_blocked": 0,
+    "rows_missing_required_fields": 0,
+    "rows_invalid_sanction_source_id": 0,
+    "rows_invalid_kpi_id": 0,
+    "rows_invalid_source_id": 0,
+    "rows_invalid_source_url": 0,
+    "rows_invalid_numeric": 0,
+    "rows_invalid_evidence_date": 0,
+    "rows_short_evidence_quote": 0,
+    "rows_duplicate_metric_key": 0,
+    "rows_missing_ratio_components": 0,
+    "rows_rate_out_of_range": 0,
+    "rows_zero_denominator": 0,
+    "rows_formula_mismatch": 0,
+    "rows_non_positive_p90_days": 0
+  },
+  "coverage": {
+    "rows_ready_pct": 1.0,
+    "rows_blocked_pct": 0.0
+  },
+  "checks": {
+    "input_file_has_rows": true,
+    "headers_complete": true,
+    "rows_ready_present": true,
+    "rows_blocked_zero": true
+  },
+  "queue": []
+}

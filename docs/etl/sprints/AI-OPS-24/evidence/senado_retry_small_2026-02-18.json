@@ -1,0 +1,38 @@
+{
+  "documents": {
+    "candidate_urls": 10,
+    "doc_links_seen": 10,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000004 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=600&id2=000001 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=610&id2=000002 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=610&id2=000003 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=621&id2=000001 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000004 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=600&numEx=000001 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=610&numEx=000002 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=610&numEx=000003 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=621&numEx=000001 -> HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 10,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 5,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 10
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

@@ -1,0 +1,498 @@
+{
+  "generated_at": "2026-02-24T11:28:31+00:00",
+  "db_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpv5wqz0hb/fixture.db",
+  "strict_actionable": true,
+  "strict_readiness": true,
+  "dry_run": false,
+  "gap_export": {
+    "generated_at": "2026-02-24T11:28:31+00:00",
+    "status": "ok",
+    "default_source_id": "boe_api_legal",
+    "metric_scope": {
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "label": "period"
+    },
+    "statuses_filter": [
+      "missing_source_record"
+    ],
+    "include_ready": false,
+    "queue_report_status": "degraded",
+    "queue_totals": {
+      "official_review_sources_expected_total": 4,
+      "official_review_sources_seeded_total": 4,
+      "official_review_kpis_expected_total": 3,
+      "expected_pairs_total": 12,
+      "pairs_ready_total": 0,
+      "pairs_missing_source_total": 0,
+      "pairs_missing_metric_total": 11,
+      "pairs_missing_source_record_total": 1,
+      "pairs_missing_evidence_total": 0,
+      "actionable_pairs_total": 12,
+      "queue_rows_total": 12
+    },
+    "totals": {
+      "queue_rows_seen_total": 12,
+      "rows_emitted_total": 1,
+      "rows_skipped_missing_source_total": 0,
+      "rows_skipped_filtered_status_total": 11,
+      "rows_emitted_by_status": {
+        "missing_source_record": 1
+      },
+      "rows_skipped_by_status": {
+        "missing_metric": 11
+      }
+    },
+    "checks": {
+      "gap_queue_not_failed": true,
+      "rows_emitted_present": true,
+      "filtered_statuses_valid": true
+    },
+    "rows_preview": [
+      {
+        "sanction_source_id": "es:sanctions:teac_resolutions",
+        "kpi_id": "kpi:formal_annulment_rate",
+        "period_date": "2025-12-31",
+        "period_granularity": "year",
+        "value": "0.05",
+        "numerator": "5.0",
+        "denominator": "100.0",
+        "source_url": "https://sede.agenciatributaria.gob.es/",
+        "evidence_date": "2025-12-31",
+        "evidence_quote": "Memoria oficial TEAC 2025 con datos de anulaciones formales.",
+        "source_id": "boe_api_legal",
+        "source_record_id": "official_review:es-sanctions-teac-resolutions:kpi-formal-annulment-rate:2025-12-31:year",
+        "source_record_pk": "",
+        "metric_key": "kpi:formal_annulment_rate|es:sanctions:teac_resolutions|2025-12-31|year",
+        "source_label": "TEAC resolutions",
+        "organismo": "Tribunal Economico-Administrativo Central",
+        "kpi_label": "Formal annulment rate",
+        "metric_formula": "anulaciones_formales_count / recurso_presentado_count",
+        "target_direction": "lower_is_better",
+        "expected_metrics": "recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_days",
+        "queue_key": "es:sanctions:teac_resolutions|kpi:formal_annulment_rate|2025-12-31|year",
+        "queue_status": "missing_source_record",
+        "queue_priority": 70,
+        "queue_next_action": "backfill_source_record_pk_for_official_review_metric"
+      }
+    ],
+    "db_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpv5wqz0hb/fixture.db",
+    "output_apply_csv": "docs/etl/sprints/AI-OPS-187/exports/sanction_procedural_official_review_apply_from_gap_cycle_fixture_missing_source_record_20260224T112750Z.csv",
+    "rows_emitted_total": 1
+  },
+  "cycle": {
+    "generated_at": "2026-02-24T11:28:31+00:00",
+    "db_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpv5wqz0hb/fixture.db",
+    "input_csv": "docs/etl/sprints/AI-OPS-187/exports/sanction_procedural_official_review_apply_from_gap_cycle_fixture_missing_source_record_20260224T112750Z.csv",
+    "strict_readiness": true,
+    "dry_run": false,
+    "readiness": {
+      "generated_at": "2026-02-24T11:28:31+00:00",
+      "status": "ok",
+      "input_csv": "docs/etl/sprints/AI-OPS-187/exports/sanction_procedural_official_review_apply_from_gap_cycle_fixture_missing_source_record_20260224T112750Z.csv",
+      "required_headers": [
+        "sanction_source_id",
+        "kpi_id",
+        "period_date",
+        "source_url",
+        "evidence_date",
+        "evidence_quote",
+        "value"
+      ],
+      "headers_present": [
+        "sanction_source_id",
+        "kpi_id",
+        "period_date",
+        "period_granularity",
+        "value",
+        "numerator",
+        "denominator",
+        "source_url",
+        "evidence_date",
+        "evidence_quote",
+        "source_id",
+        "source_record_id",
+        "source_record_pk",
+        "metric_key",
+        "source_label",
+        "organismo",
+        "kpi_label",
+        "metric_formula",
+        "target_direction",
+        "expected_metrics",
+        "queue_key",
+        "queue_status",
+        "queue_priority",
+        "queue_next_action"
+      ],
+      "missing_headers": [],
+      "tolerance": 0.01,
+      "totals": {
+        "rows_seen": 1,
+        "rows_ready": 1,
+        "rows_blocked": 0,
+        "rows_missing_required_fields": 0,
+        "rows_invalid_sanction_source_id": 0,
+        "rows_invalid_kpi_id": 0,
+        "rows_invalid_source_id": 0,
+        "rows_invalid_source_url": 0,
+        "rows_invalid_numeric": 0,
+        "rows_invalid_evidence_date": 0,
+        "rows_short_evidence_quote": 0,
+        "rows_duplicate_metric_key": 0,
+        "rows_missing_ratio_components": 0,
+        "rows_rate_out_of_range": 0,
+        "rows_zero_denominator": 0,
+        "rows_formula_mismatch": 0,
+        "rows_non_positive_p90_days": 0
+      },
+      "coverage": {
+        "rows_ready_pct": 1.0,
+        "rows_blocked_pct": 0.0
+      },
+      "checks": {
+        "input_file_has_rows": true,
+        "headers_complete": true,
+        "rows_ready_present": true,
+        "rows_blocked_zero": true
+      },
+      "queue": []
+    },
+    "status_before": {
+      "generated_at": "2026-02-24T11:28:31+00:00",
+      "status": "degraded",
+      "official_review_source_ids": [
+        "es:sanctions:tear_resolutions",
+        "es:sanctions:teac_resolutions",
+        "es:sanctions:contencioso_sentencias",
+        "es:sanctions:defensor_pueblo_quejas"
+      ],
+      "totals": {
+        "official_review_sources_expected_total": 4,
+        "official_review_sources_seeded_total": 4,
+        "official_review_sources_missing_total": 0,
+        "official_review_sources_with_metrics_total": 1,
+        "official_review_sources_with_all_kpis_total": 0,
+        "official_review_sources_with_missing_kpis_total": 1,
+        "official_review_sources_seeded_without_metrics_total": 3,
+        "official_review_procedural_metrics_total": 1,
+        "official_review_metric_rows_with_source_record_total": 0,
+        "official_review_metric_rows_missing_source_record_total": 1,
+        "official_review_metric_rows_with_evidence_total": 1,
+        "official_review_metric_rows_missing_evidence_total": 0,
+        "official_review_kpis_expected_total": 3,
+        "official_review_kpis_covered_total": 1,
+        "official_review_missing_kpi_pairs_total": 11
+      },
+      "metric_scope": {
+        "period_date": null,
+        "period_granularity": null,
+        "label": "all_time"
+      },
+      "coverage": {
+        "official_review_source_seed_coverage_pct": 1.0,
+        "official_review_source_metric_coverage_pct": 0.25,
+        "official_review_source_full_kpi_coverage_pct": 0.0,
+        "official_review_source_record_coverage_pct": 0.0,
+        "official_review_evidence_coverage_pct": 1.0
+      },
+      "checks": {
+        "official_review_sources_seeded": true,
+        "official_review_metrics_started": true,
+        "official_review_kpi_coverage_started": true,
+        "official_review_all_seeded_have_all_kpis": false,
+        "official_review_source_record_chain_started": false,
+        "official_review_evidence_chain_started": true,
+        "official_review_all_seeded_have_metrics": false
+      },
+      "queue": [
+        {
+          "sanction_source_id": "es:sanctions:contencioso_sentencias",
+          "label": "Contentious-administrative judgments",
+          "organismo": "Poder Judicial",
+          "admin_scope": "mixto",
+          "territory_scope": "nacional",
+          "publication_frequency": "yearly",
+          "source_url": "https://www.poderjudicial.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 0,
+          "kpis_covered_total": 0,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 3,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 0,
+          "status": "no_metrics",
+          "priority": 80,
+          "next_action": "ingest_official_review_procedural_metrics"
+        },
+        {
+          "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+          "label": "Defensor del Pueblo complaints",
+          "organismo": "Defensor del Pueblo",
+          "admin_scope": "estado",
+          "territory_scope": "nacional",
+          "publication_frequency": "yearly",
+          "source_url": "https://www.defensordelpueblo.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 0,
+          "kpis_covered_total": 0,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 3,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 0,
+          "status": "no_metrics",
+          "priority": 80,
+          "next_action": "ingest_official_review_procedural_metrics"
+        },
+        {
+          "sanction_source_id": "es:sanctions:tear_resolutions",
+          "label": "TEAR tax claims resolutions",
+          "organismo": "Tribunales Economico-Administrativos Regionales",
+          "admin_scope": "autonomico",
+          "territory_scope": "ccaa",
+          "publication_frequency": "yearly",
+          "source_url": "https://sede.agenciatributaria.gob.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 0,
+          "kpis_covered_total": 0,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 3,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 0,
+          "status": "no_metrics",
+          "priority": 80,
+          "next_action": "ingest_official_review_procedural_metrics"
+        },
+        {
+          "sanction_source_id": "es:sanctions:teac_resolutions",
+          "label": "TEAC resolutions",
+          "organismo": "Tribunal Economico-Administrativo Central",
+          "admin_scope": "estado",
+          "territory_scope": "nacional",
+          "publication_frequency": "yearly",
+          "source_url": "https://sede.agenciatributaria.gob.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 1,
+          "kpis_covered_total": 1,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 2,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 1,
+          "status": "no_source_record_chain",
+          "priority": 60,
+          "next_action": "backfill_source_record_pk_for_official_review_metrics"
+        }
+      ]
+    },
+    "apply": {
+      "dry_run": false,
+      "snapshot_date": "2026-02-24",
+      "default_source_id": "boe_api_legal",
+      "counts": {
+        "rows_seen": 1,
+        "rows_ready": 1,
+        "rows_upserted": 1,
+        "inserted_rows": 0,
+        "updated_rows": 1,
+        "skipped_missing_required": 0,
+        "skipped_invalid_sanction_source_id": 0,
+        "skipped_invalid_kpi_id": 0,
+        "skipped_invalid_source_id": 0,
+        "skipped_invalid_numeric": 0,
+        "skipped_invalid_evidence_date": 0,
+        "skipped_short_evidence_quote": 0,
+        "source_record_pk_existing": 0,
+        "source_record_pk_auto_resolved": 0,
+        "source_record_pk_auto_created": 1,
+        "source_record_pk_would_create": 0
+      },
+      "samples": [
+        {
+          "csv_line": 2,
+          "metric_key": "kpi:formal_annulment_rate|es:sanctions:teac_resolutions|2025-12-31|year",
+          "sanction_source_id": "es:sanctions:teac_resolutions",
+          "kpi_id": "kpi:formal_annulment_rate",
+          "period_date": "2025-12-31",
+          "source_record_pk": 1,
+          "would_insert": false
+        }
+      ],
+      "skipped": false,
+      "skip_reason": ""
+    },
+    "status_after": {
+      "generated_at": "2026-02-24T11:28:31+00:00",
+      "status": "degraded",
+      "official_review_source_ids": [
+        "es:sanctions:tear_resolutions",
+        "es:sanctions:teac_resolutions",
+        "es:sanctions:contencioso_sentencias",
+        "es:sanctions:defensor_pueblo_quejas"
+      ],
+      "totals": {
+        "official_review_sources_expected_total": 4,
+        "official_review_sources_seeded_total": 4,
+        "official_review_sources_missing_total": 0,
+        "official_review_sources_with_metrics_total": 1,
+        "official_review_sources_with_all_kpis_total": 0,
+        "official_review_sources_with_missing_kpis_total": 1,
+        "official_review_sources_seeded_without_metrics_total": 3,
+        "official_review_procedural_metrics_total": 1,
+        "official_review_metric_rows_with_source_record_total": 1,
+        "official_review_metric_rows_missing_source_record_total": 0,
+        "official_review_metric_rows_with_evidence_total": 1,
+        "official_review_metric_rows_missing_evidence_total": 0,
+        "official_review_kpis_expected_total": 3,
+        "official_review_kpis_covered_total": 1,
+        "official_review_missing_kpi_pairs_total": 11
+      },
+      "metric_scope": {
+        "period_date": null,
+        "period_granularity": null,
+        "label": "all_time"
+      },
+      "coverage": {
+        "official_review_source_seed_coverage_pct": 1.0,
+        "official_review_source_metric_coverage_pct": 0.25,
+        "official_review_source_full_kpi_coverage_pct": 0.0,
+        "official_review_source_record_coverage_pct": 1.0,
+        "official_review_evidence_coverage_pct": 1.0
+      },
+      "checks": {
+        "official_review_sources_seeded": true,
+        "official_review_metrics_started": true,
+        "official_review_kpi_coverage_started": true,
+        "official_review_all_seeded_have_all_kpis": false,
+        "official_review_source_record_chain_started": true,
+        "official_review_evidence_chain_started": true,
+        "official_review_all_seeded_have_metrics": false
+      },
+      "queue": [
+        {
+          "sanction_source_id": "es:sanctions:contencioso_sentencias",
+          "label": "Contentious-administrative judgments",
+          "organismo": "Poder Judicial",
+          "admin_scope": "mixto",
+          "territory_scope": "nacional",
+          "publication_frequency": "yearly",
+          "source_url": "https://www.poderjudicial.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 0,
+          "kpis_covered_total": 0,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 3,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 0,
+          "status": "no_metrics",
+          "priority": 80,
+          "next_action": "ingest_official_review_procedural_metrics"
+        },
+        {
+          "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+          "label": "Defensor del Pueblo complaints",
+          "organismo": "Defensor del Pueblo",
+          "admin_scope": "estado",
+          "territory_scope": "nacional",
+          "publication_frequency": "yearly",
+          "source_url": "https://www.defensordelpueblo.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 0,
+          "kpis_covered_total": 0,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 3,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 0,
+          "status": "no_metrics",
+          "priority": 80,
+          "next_action": "ingest_official_review_procedural_metrics"
+        },
+        {
+          "sanction_source_id": "es:sanctions:tear_resolutions",
+          "label": "TEAR tax claims resolutions",
+          "organismo": "Tribunales Economico-Administrativos Regionales",
+          "admin_scope": "autonomico",
+          "territory_scope": "ccaa",
+          "publication_frequency": "yearly",
+          "source_url": "https://sede.agenciatributaria.gob.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 0,
+          "kpis_covered_total": 0,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 3,
+          "source_record_rows_total": 0,
+          "evidence_rows_total": 0,
+          "status": "no_metrics",
+          "priority": 80,
+          "next_action": "ingest_official_review_procedural_metrics"
+        },
+        {
+          "sanction_source_id": "es:sanctions:teac_resolutions",
+          "label": "TEAC resolutions",
+          "organismo": "Tribunal Economico-Administrativo Central",
+          "admin_scope": "estado",
+          "territory_scope": "nacional",
+          "publication_frequency": "yearly",
+          "source_url": "https://sede.agenciatributaria.gob.es/",
+          "expected_metrics": [
+            "recurso_presentado_count",
+            "recurso_estimado_count",
+            "anulaciones_formales_count",
+            "resolution_days"
+          ],
+          "source_seeded": true,
+          "procedural_metric_rows_total": 1,
+          "kpis_covered_total": 1,
+          "kpis_expected_total": 3,
+          "kpis_missing_total": 2,
+          "source_record_rows_total": 1,
+          "evidence_rows_total": 1,
+          "status": "partial_kpi_coverage",
+          "priority": 40,
+          "next_action": "ingest_missing_kpis_for_source_scope"
+        }
+      ]
+    }
+  }
+}

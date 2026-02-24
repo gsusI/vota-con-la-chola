@@ -1,0 +1,17 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "congreso_iniciativas",
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v1",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 0,
+  "upserted": 0,
+  "needs_review": 0,
+  "by_method": {},
+  "by_doc_format": {},
+  "sample": [],
+  "db": "etl/data/staging/politicos-es.db"
+}

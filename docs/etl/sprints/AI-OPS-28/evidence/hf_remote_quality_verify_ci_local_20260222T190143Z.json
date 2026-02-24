@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "initiative_gate_passed": null,
+    "initiative_gate_passed_present": false,
+    "latest_has_quality_report": true,
+    "manifest_has_quality_report": true,
+    "quality_file_name": "votaciones-kpis-es-2026-02-12.json",
+    "quality_mismatch_keys": [],
+    "quality_shared_keys": [
+      "events_total",
+      "file_name",
+      "member_votes_with_person_id_pct",
+      "vote_gate_passed"
+    ],
+    "readme_has_quality_section": true,
+    "readme_has_vote_gate_line": true,
+    "readme_mentions_quality_file": true,
+    "snapshot_date_expected": "2026-02-12",
+    "snapshot_date_latest": "2026-02-12",
+    "snapshot_date_manifest": "2026-02-12",
+    "vote_gate_passed": true
+  },
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "errors": [],
+  "passed": true,
+  "snapshot_date": "2026-02-12",
+  "urls": {
+    "latest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/latest.json",
+    "manifest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/snapshots/2026-02-12/manifest.json",
+    "readme": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/README.md"
+  }
+}

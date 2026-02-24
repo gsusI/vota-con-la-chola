@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-02-24T15:12:07+00:00",
+  "strict": true,
+  "input": {
+    "compaction_window_json_path": "docs/etl/sprints/AI-OPS-214/evidence/ai_ops_214_heartbeat_compaction_window_latest.json",
+    "compaction_window_generated_at": "2026-02-24T15:03:32+00:00",
+    "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+    "compacted_path": "docs/etl/runs/ai_ops_214_heartbeat_compacted.jsonl"
+  },
+  "status": "ok",
+  "risk_level": "green",
+  "risk_reasons": [],
+  "strict_fail_reasons": [],
+  "strict_fail_count": 0,
+  "risk_reason_count": 0,
+  "key_metrics": {
+    "entries_total_raw": 4,
+    "entries_total_compacted": 4,
+    "window_raw_entries": 4,
+    "raw_window_incidents": 0,
+    "present_in_compacted_in_window": 4,
+    "missing_in_compacted_in_window": 0,
+    "incident_missing_in_compacted": 0,
+    "raw_window_coverage_pct": 100.0,
+    "incident_coverage_pct": 0.0
+  },
+  "key_checks": {
+    "window_nonempty_ok": true,
+    "raw_window_malformed_ok": true,
+    "compacted_malformed_ok": true,
+    "latest_present_ok": true,
+    "incident_parity_ok": true,
+    "failed_parity_ok": true,
+    "degraded_parity_ok": true,
+    "strict_rows_parity_ok": true,
+    "malformed_parity_ok": true
+  },
+  "thresholds": {
+    "max_missing_in_compacted_window_for_ok": 0,
+    "min_raw_window_coverage_pct_for_ok": 100.0,
+    "min_incident_coverage_pct_for_ok": 100.0
+  },
+  "validation_errors": []
+}

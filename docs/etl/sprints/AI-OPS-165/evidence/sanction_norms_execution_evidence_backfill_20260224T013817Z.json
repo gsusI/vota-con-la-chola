@@ -1,0 +1,180 @@
+{
+  "generated_at": "2026-02-24T01:38:17+00:00",
+  "roles": [
+    "enforce",
+    "approve",
+    "propose",
+    "delegate"
+  ],
+  "limit": 0,
+  "counts": {
+    "observations_scanned_total": 7,
+    "observations_with_responsibility_total": 7,
+    "observations_without_responsibility_total": 0,
+    "source_record_pk_resolved_total": 7,
+    "source_record_pk_missing_total": 0,
+    "evidence_inserted": 11,
+    "evidence_updated": 2
+  },
+  "by_norm": {
+    "es:boe-a-2015-11722": 4,
+    "es:boe-a-2003-23514": 2,
+    "es:boe-a-2003-23186": 1,
+    "es:boe-a-2015-11724": 3,
+    "es:boe-a-2000-15060": 2,
+    "es:boe-a-2015-3442": 1
+  },
+  "by_role": {
+    "propose": 4,
+    "approve": 7,
+    "enforce": 2
+  },
+  "by_source": {
+    "boe_api_legal": 13
+  },
+  "samples": [
+    {
+      "observation_id": 1,
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 1,
+      "role": "propose",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/#observation_id=1",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "observation_id": 1,
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 2,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/#observation_id=1",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "observation_id": 2,
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 1,
+      "role": "propose",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/#observation_id=2",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "observation_id": 2,
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 2,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/#observation_id=2",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "observation_id": 3,
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 3,
+      "role": "propose",
+      "source_id": "boe_api_legal",
+      "source_url": "https://sede.agenciatributaria.gob.es/#observation_id=3",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "observation_id": 3,
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 4,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://sede.agenciatributaria.gob.es/#observation_id=3",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "observation_id": 4,
+      "norm_id": "es:boe-a-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 7,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://sede.agenciatributaria.gob.es/#observation_id=4",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23186"
+    },
+    {
+      "observation_id": 5,
+      "norm_id": "es:boe-a-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "responsibility_id": 10,
+      "role": "propose",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.seg-social.es/#observation_id=5",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "observation_id": 5,
+      "norm_id": "es:boe-a-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "responsibility_id": 11,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.seg-social.es/#observation_id=5",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "observation_id": 5,
+      "norm_id": "es:boe-a-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "responsibility_id": 12,
+      "role": "enforce",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.seg-social.es/#observation_id=5",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "observation_id": 6,
+      "norm_id": "es:boe-a-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "responsibility_id": 13,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.mites.gob.es/itss/#observation_id=6",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2000-15060"
+    },
+    {
+      "observation_id": 6,
+      "norm_id": "es:boe-a-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "responsibility_id": 14,
+      "role": "enforce",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.mites.gob.es/itss/#observation_id=6",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2000-15060"
+    },
+    {
+      "observation_id": 7,
+      "norm_id": "es:boe-a-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 15,
+      "role": "approve",
+      "source_id": "boe_api_legal",
+      "source_url": "https://www.interior.gob.es/#observation_id=7",
+      "evidence_date": "2025-12-31",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-3442"
+    }
+  ]
+}

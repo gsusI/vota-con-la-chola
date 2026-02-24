@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-02-24T01:19:40+00:00",
+  "seed_schema_version": "sanction_norms_seed_v1",
+  "status": "ok",
+  "totals": {
+    "queue_rows_total": 0,
+    "queue_norms_total": 0,
+    "queue_fragments_total": 0,
+    "queue_responsibilities_total": 0,
+    "queue_evidence_types_total": 0
+  },
+  "checks": {
+    "queue_visible": false,
+    "queue_empty": true
+  },
+  "queue_rows": [],
+  "db_path": "etl/data/staging/politicos-es.db",
+  "limit": 0,
+  "strict_empty": false
+}

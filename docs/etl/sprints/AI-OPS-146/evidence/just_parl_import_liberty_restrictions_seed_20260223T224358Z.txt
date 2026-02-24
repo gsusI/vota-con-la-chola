@@ -1,0 +1,35 @@
+PYTHONPATH=. python3 scripts/import_liberty_restrictions_seed.py --db tmp/liberty_person_identity_official_evidence_20260223T224358Z.db --seed etl/data/seeds/liberty_restrictions_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-146/evidence/liberty_restrictions_import_20260223T224358Z.json
+{
+  "generated_at": "2026-02-23T22:42:52+00:00",
+  "db_path": "tmp/liberty_person_identity_official_evidence_20260223T224358Z.db",
+  "seed_path": "etl/data/seeds/liberty_restrictions_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "right_categories_total": 6,
+    "fragment_assessments_total": 11,
+    "method_version": "irlc_v1"
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "method_version": "irlc_v1",
+    "scale_max": 100.0,
+    "counts": {
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "right_categories_inserted": 6,
+      "right_categories_updated": 0,
+      "assessments_inserted": 11,
+      "assessments_updated": 0,
+      "unresolved_fragment_refs": 0,
+      "unresolved_right_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "right_categories_total": 6,
+      "assessments_total": 11,
+      "fragments_with_irlc_total": 8
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "dry_run": true,
+  "snapshot_date": "2026-02-24",
+  "default_source_id": "boe_api_legal",
+  "counts": {
+    "rows_seen": 4,
+    "rows_ready": 4,
+    "rows_upserted": 0,
+    "inserted_rows": 0,
+    "updated_rows": 0,
+    "skipped_missing_required": 0,
+    "skipped_invalid_sanction_source_id": 0,
+    "skipped_invalid_kpi_id": 0,
+    "skipped_invalid_source_id": 0,
+    "skipped_invalid_numeric": 0,
+    "source_record_pk_existing": 0,
+    "source_record_pk_auto_resolved": 0,
+    "source_record_pk_auto_created": 0,
+    "source_record_pk_would_create": 4
+  },
+  "samples": [
+    {
+      "csv_line": 2,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:contencioso_sentencias|2025-12-31|year",
+      "sanction_source_id": "es:sanctions:contencioso_sentencias",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "source_record_pk": null,
+      "would_insert": true
+    },
+    {
+      "csv_line": 3,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:defensor_pueblo_quejas|2025-12-31|year",
+      "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "source_record_pk": null,
+      "would_insert": true
+    },
+    {
+      "csv_line": 4,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:teac_resolutions|2025-12-31|year",
+      "sanction_source_id": "es:sanctions:teac_resolutions",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "source_record_pk": null,
+      "would_insert": true
+    },
+    {
+      "csv_line": 5,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:tear_resolutions|2025-12-31|year",
+      "sanction_source_id": "es:sanctions:tear_resolutions",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "source_record_pk": null,
+      "would_insert": true
+    }
+  ],
+  "db_path": "etl/data/staging/politicos-es.db",
+  "input_csv": "docs/etl/sprints/AI-OPS-174/inputs/sanction_procedural_official_review_metrics_apply_fixture_20260224T100608Z.csv",
+  "strict": true
+}

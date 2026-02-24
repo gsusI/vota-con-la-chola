@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-02-23T18:35:09+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "reviews_total": 8,
+    "fragments_with_reviews_total": 8,
+    "target_fragments_total": 8,
+    "reviews_below_threshold_total": 2
+  },
+  "coverage": {
+    "target_fragments_coverage_pct": 1.0,
+    "objective_defined_pct": 1.0,
+    "indicator_defined_pct": 0.75,
+    "alternatives_considered_pct": 0.5,
+    "sunset_present_pct": 0.0,
+    "proportionality_score_avg": 64.05,
+    "proportionality_score_min": 42.95,
+    "proportionality_score_max": 80.3
+  },
+  "checks": {
+    "proportionality_started": true,
+    "target_coverage_gate": true,
+    "objective_defined_gate": true,
+    "indicator_defined_gate": true,
+    "alternatives_considered_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_coverage_min": 0.6,
+      "objective_defined_min": 0.8,
+      "indicator_defined_min": 0.6,
+      "alternatives_considered_min": 0.4,
+      "low_score_threshold": 50.0
+    }
+  },
+  "by_assessment_label": {
+    "supported": 3,
+    "weak": 3,
+    "insufficient_evidence": 2
+  },
+  "low_score_sample": [
+    {
+      "review_key": "proportionality_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "proportionality_score": 42.95,
+      "assessment_label": "insufficient_evidence"
+    },
+    {
+      "review_key": "proportionality_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "proportionality_score": 44.05,
+      "assessment_label": "insufficient_evidence"
+    }
+  ],
+  "target_missing_sample": []
+}

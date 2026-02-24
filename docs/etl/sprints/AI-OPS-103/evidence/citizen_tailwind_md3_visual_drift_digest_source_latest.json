@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-02-23T15:27:49+00:00",
+  "status": "ok",
+  "paths": {
+    "tailwind_contract_json": "docs/etl/sprints/AI-OPS-96/evidence/citizen_tailwind_md3_contract_latest.json",
+    "source_tokens": "ui/citizen/tailwind_md3.tokens.json",
+    "source_css": "ui/citizen/tailwind_md3.generated.css",
+    "source_ui_html": "ui/citizen/index.html",
+    "published_tokens": "docs/gh-pages/citizen/tailwind_md3.tokens.json",
+    "published_data_tokens": "docs/gh-pages/citizen/data/tailwind_md3.tokens.json",
+    "published_css": "docs/gh-pages/citizen/tailwind_md3.generated.css",
+    "published_ui_html": "docs/gh-pages/citizen/index.html"
+  },
+  "tailwind_contract": {
+    "status": "ok",
+    "failure_reasons": [],
+    "checks_all_ok": true
+  },
+  "parity": {
+    "tokens": {
+      "source_path": "ui/citizen/tailwind_md3.tokens.json",
+      "published_path": "docs/gh-pages/citizen/tailwind_md3.tokens.json",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 1154,
+      "published_bytes": 1154,
+      "source_sha256": "c5c6f4aabcb9b25d2127e68f09bd1155160b1116b72c133576b0275d16dfd332",
+      "published_sha256": "c5c6f4aabcb9b25d2127e68f09bd1155160b1116b72c133576b0275d16dfd332",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "tokens_data": {
+      "source_path": "ui/citizen/tailwind_md3.tokens.json",
+      "published_path": "docs/gh-pages/citizen/data/tailwind_md3.tokens.json",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 1154,
+      "published_bytes": 1154,
+      "source_sha256": "c5c6f4aabcb9b25d2127e68f09bd1155160b1116b72c133576b0275d16dfd332",
+      "published_sha256": "c5c6f4aabcb9b25d2127e68f09bd1155160b1116b72c133576b0275d16dfd332",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "css": {
+      "source_path": "ui/citizen/tailwind_md3.generated.css",
+      "published_path": "docs/gh-pages/citizen/tailwind_md3.generated.css",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 6533,
+      "published_bytes": 6533,
+      "source_sha256": "c8339f19df96b996e6bffcb2310357c831853024d4319fe532e87d0585a66af9",
+      "published_sha256": "c8339f19df96b996e6bffcb2310357c831853024d4319fe532e87d0585a66af9",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "ui_html": {
+      "source_path": "ui/citizen/index.html",
+      "published_path": "docs/gh-pages/citizen/index.html",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 253845,
+      "published_bytes": 253845,
+      "source_sha256": "ed2382314b57fdf6081a29ab5c40c3a3851078c9de627996fc594970a1103194",
+      "published_sha256": "ed2382314b57fdf6081a29ab5c40c3a3851078c9de627996fc594970a1103194",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    }
+  },
+  "markers": {
+    "source": {
+      "md3-card": 10,
+      "md3-chip": 16,
+      "md3-button": 28,
+      "md3-tab": 9
+    },
+    "published": {
+      "md3-card": 10,
+      "md3-chip": 16,
+      "md3-button": 28,
+      "md3-tab": 9
+    },
+    "contract_snapshot": {
+      "md3-card": 10,
+      "md3-chip": 16,
+      "md3-button": 28,
+      "md3-tab": 9
+    }
+  },
+  "checks": {
+    "tailwind_contract_exists": true,
+    "tailwind_contract_status_ok": true,
+    "tailwind_contract_checks_ok": true,
+    "tokens_parity_ok": true,
+    "tokens_data_parity_ok": true,
+    "css_parity_ok": true,
+    "ui_html_parity_ok": true,
+    "source_published_marker_counts_match": true,
+    "source_markers_match_contract_snapshot": true,
+    "published_markers_match_contract_snapshot": true
+  },
+  "strict_fail_reasons": []
+}

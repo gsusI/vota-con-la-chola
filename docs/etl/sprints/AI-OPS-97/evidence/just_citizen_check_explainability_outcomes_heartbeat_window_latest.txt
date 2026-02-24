@@ -1,0 +1,63 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-97/evidence/citizen_explainability_outcomes_heartbeat_window_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-97/evidence/citizen_explainability_outcomes_heartbeat_window_latest.json"; fi; python3 scripts/report_citizen_explainability_outcomes_heartbeat_window.py --heartbeat-jsonl "docs/etl/runs/citizen_explainability_outcomes_heartbeat.jsonl" --last "20" --max-failed "0" --max-failed-rate-pct "0" --max-degraded "0" --max-degraded-rate-pct "0" --max-contract-incomplete "0" --max-contract-incomplete-rate-pct "0" --strict ${out_arg}
+{
+  "generated_at": "2026-02-23T14:22:41+00:00",
+  "strict": true,
+  "heartbeat_path": "docs/etl/runs/citizen_explainability_outcomes_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0
+  },
+  "entries_total": 1,
+  "entries_in_window": 1,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "contract_incomplete_in_window": 0,
+  "contract_incomplete_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_contract_incomplete_run_at": "",
+  "last_contract_incomplete_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T13:35:44+00:00",
+    "heartbeat_id": "2026-02-23T13:35:44+00:00|ok|2026-02-23T13:35:44+00:00|9|5|6|4|0.666667|0.600000|1||",
+    "status": "ok",
+    "line_no": 1,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T13:35:44+00:00",
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "contract_complete": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_contract_incomplete_ok": true,
+    "max_contract_incomplete_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

@@ -1,0 +1,1060 @@
+{
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "db_source_path": "etl/data/staging/politicos-es.db",
+  "files": [
+    {
+      "bytes": 77173,
+      "path": "ingestion_runs.csv",
+      "sha256": "a12bcf60f1f58b0e36ef2aed7dcceb3d72f337937e02704dc7cafea40a91932b"
+    },
+    {
+      "bytes": 794,
+      "path": "source_records_by_source.csv",
+      "sha256": "baa56c1f244549f182bb57e951956e4956ba7f1319545c92267f22797585b2d6"
+    },
+    {
+      "bytes": 1042,
+      "path": "sources/asamblea_ceuta_diputados.json",
+      "sha256": "9e8b1f7b32f9062c384b8f526e455cdb4e27f075ab295833ade96d9ccb2a9dee"
+    },
+    {
+      "bytes": 982,
+      "path": "sources/asamblea_extremadura_diputados.json",
+      "sha256": "58fa825c688aa2ea0f779787299bcd6bb95200aedb021bd2e5e6144c40164a37"
+    },
+    {
+      "bytes": 919,
+      "path": "sources/asamblea_madrid_ocupaciones.json",
+      "sha256": "a1be18fafa47089f1f9bfbcd2f7d97d4f329e10d56458c49f78377143c9f3de1"
+    },
+    {
+      "bytes": 1078,
+      "path": "sources/asamblea_melilla_diputados.json",
+      "sha256": "30a0f4d7e3b51013940c4480e8399630c2f5da98a92a0553e299d1acfd888878"
+    },
+    {
+      "bytes": 968,
+      "path": "sources/asamblea_murcia_diputados.json",
+      "sha256": "81b5cdf2298365a50ea2d233e3693d8209aa5a62ec2cf16567310c76e11d7456"
+    },
+    {
+      "bytes": 1150,
+      "path": "sources/congreso_diputados.json",
+      "sha256": "e6924f32d9b3667a00144c6028f647dd2765c6096e51c2aea13505d18bc34913"
+    },
+    {
+      "bytes": 1159,
+      "path": "sources/congreso_iniciativas.json",
+      "sha256": "1438d4213548084d1ce00d92581d47eaeba83ab66b849f3211ae4828947e575b"
+    },
+    {
+      "bytes": 1168,
+      "path": "sources/congreso_intervenciones.json",
+      "sha256": "dafbd364a995bd2ef62ebd971351d57a7d11a15ed309b198d8e906088661f49d"
+    },
+    {
+      "bytes": 1164,
+      "path": "sources/congreso_votaciones.json",
+      "sha256": "4bc6224926aa2943855eada7a39f043e96ac8604e2559664c4e8e5b30122f1fb"
+    },
+    {
+      "bytes": 1242,
+      "path": "sources/cortes_aragon_diputados.json",
+      "sha256": "f86808c7b7e3b178d3ccb82dce03ea59d77190abbcf1987944d0a60467817755"
+    },
+    {
+      "bytes": 1047,
+      "path": "sources/cortes_clm_diputados.json",
+      "sha256": "7a67c9d637cada7a47305ace815030f1333d7f64a2c9cf180fdb9130ec4fc07b"
+    },
+    {
+      "bytes": 1017,
+      "path": "sources/cortes_cyl_procuradores.json",
+      "sha256": "ea8b50c8336733d8d670e67fad5fc406d4b4a5fe701fcfd39d54a01d11498632"
+    },
+    {
+      "bytes": 919,
+      "path": "sources/europarl_meps.json",
+      "sha256": "d030e2a6ba5491daf3439b9ee65d59f69e2e33d69870e7045969ae79ddf0172d"
+    },
+    {
+      "bytes": 1186,
+      "path": "sources/infoelectoral_procesos.json",
+      "sha256": "3eb3913b665c715130b12f011a36d98de322144bf1372e96fe8dd12d82448ccf"
+    },
+    {
+      "bytes": 986,
+      "path": "sources/jgpa_diputados.json",
+      "sha256": "706dbb0a8139aad9260fe64c5d4ff40c16e5d406056e0d081e8e4ff2c0dfec1a"
+    },
+    {
+      "bytes": 1151,
+      "path": "sources/municipal_concejales.json",
+      "sha256": "b4db1be7d18b185862542444c03db8558b84be61b5011dc05832222124d436b9"
+    },
+    {
+      "bytes": 971,
+      "path": "sources/parl_initiative_docs.json",
+      "sha256": "2d243516961328a9c51507bea590b879d969115112aa940bdcd4d9f234f997ef"
+    },
+    {
+      "bytes": 1032,
+      "path": "sources/parlament_balears_diputats.json",
+      "sha256": "4a2e533be611cd2f5878662c518ad42fdd3e337d27c78e8b7829c67fba6c16ef"
+    },
+    {
+      "bytes": 1074,
+      "path": "sources/parlament_catalunya_diputats.json",
+      "sha256": "7fd61055f4b70cd328c8d804ed902c5c25a1e390d5488aeecb5c8028094eca17"
+    },
+    {
+      "bytes": 1146,
+      "path": "sources/parlamento_andalucia_diputados.json",
+      "sha256": "4ef7cef4431a18332f187f465a224cdc767cbb5f44c3c8c597b603f32a3d97e1"
+    },
+    {
+      "bytes": 1021,
+      "path": "sources/parlamento_canarias_diputados.json",
+      "sha256": "bb121327f463cc5097b62516fb401d728741eea7e89e51d0dca685f7e4893a7e"
+    },
+    {
+      "bytes": 1110,
+      "path": "sources/parlamento_cantabria_diputados.json",
+      "sha256": "387411a9c07668f375e89667534c70c839522cb5edbde3733f37d4b200990793"
+    },
+    {
+      "bytes": 1047,
+      "path": "sources/parlamento_larioja_diputados.json",
+      "sha256": "d8793aebe383b8499e0a5e2153882045fccd5696afb36fbc9dbbcd36e87573c2"
+    },
+    {
+      "bytes": 1028,
+      "path": "sources/parlamento_vasco_parlamentarios.json",
+      "sha256": "bf80d2e2afb794553d9f21579368396d987bf46b768bff658b945c9d835d9023"
+    },
+    {
+      "bytes": 926,
+      "path": "sources/senado_iniciativas.json",
+      "sha256": "f9dcd5e09e8d096e5f5812e2d2dbb60427bd463edb647b4b6c4f446a2345eadb"
+    },
+    {
+      "bytes": 900,
+      "path": "sources/senado_senadores.json",
+      "sha256": "3bcbedda49f1c25e2f2b7db2512bcafc499c4070fac4c4ec9d20847e942e339f"
+    },
+    {
+      "bytes": 954,
+      "path": "sources/senado_votaciones.json",
+      "sha256": "33929682926d8fa7e63d50600898cb57b1d23534b5d4c1f05f0612236815eb28"
+    },
+    {
+      "bytes": 137853,
+      "path": "explorer_schema.json",
+      "sha256": "4cabafcab48c95bd1c90eebb5c703222a6fe8cb51526b7727c87b6c50d2c3db8"
+    },
+    {
+      "bytes": 10687,
+      "path": "published/infoelectoral-es-2026-02-12.json",
+      "sha256": "3c24d4fd4eb96155b68df1bb5e4ec5120b39e11c0d90ad2d1cc2a9800a99627a"
+    },
+    {
+      "bytes": 1921365,
+      "path": "published/poblacion_municipios_es.json",
+      "sha256": "138343d66b390842e06876f3855e76c84badc4dd8820fba9788c3748c8638e6b"
+    },
+    {
+      "bytes": 3320,
+      "path": "published/proximas-elecciones-espana.json",
+      "sha256": "91bca0ecfc6d39ba9d84b6559e56c14876d15fe588100a213c100a566320562b"
+    },
+    {
+      "bytes": 3323784,
+      "path": "published/representantes-es-2026-02-12.json",
+      "sha256": "e06ca7ca55eb6e83a105f44ad40f0bd5b41b805f5343751eceb853c26e0718cf"
+    },
+    {
+      "bytes": 17083809,
+      "path": "published/votaciones-es-2026-02-12.json.gz",
+      "sha256": "dfb3f7a4210078d66636ef0da65ace778123a3a51ba2bee526951358a83e4018"
+    },
+    {
+      "bytes": 3153,
+      "path": "published/votaciones-kpis-es-2026-02-12.json",
+      "sha256": "9f10e1c7bdd3e769cc7b411c7e6a511077f12f5467813acdecf314d5d7ed3f62"
+    },
+    {
+      "bytes": 1772,
+      "path": "published/votaciones-kpis-senado-2026-02-12.json",
+      "sha256": "a3ace3aa57263fd98ec2eff636fea5a4a2e5793c4124c048833e7a66414d85f3"
+    },
+    {
+      "bytes": 1901,
+      "path": "parquet/admin_levels/part-00000.parquet",
+      "sha256": "3d2128a1b7cdb0b328908cc05144cf2c8948ad382c5938409aa97d74c7a95760"
+    },
+    {
+      "bytes": 1930,
+      "path": "parquet/causal_estimates/part-00000.parquet",
+      "sha256": "290fea6fb902a800f500217df76ab2dcbbca4ecd7d0713a98a01d9b54241cb35"
+    },
+    {
+      "bytes": 727232,
+      "path": "parquet/document_fetches/part-00000.parquet",
+      "sha256": "a6aa3774b2b1fb1e0ba3875bfb48f0256a7af072f8462f0ee89907c573b162c4"
+    },
+    {
+      "bytes": 1313,
+      "path": "parquet/domains/part-00000.parquet",
+      "sha256": "07184ab1995bdeec07851dc9ff935a00327dea4d7291a6277b4408975f60d726"
+    },
+    {
+      "bytes": 1798,
+      "path": "parquet/genders/part-00000.parquet",
+      "sha256": "439ad35a5e01618fea7faa017c2a1761434f6dd467be45f3c1bb05c0854860ce"
+    },
+    {
+      "bytes": 661629,
+      "path": "parquet/indicator_observation_records/part-00000.parquet",
+      "sha256": "6a514321a094e4821646c5080068f4c56d12abd9a7ffdcf3c0895a223c11fd2a"
+    },
+    {
+      "bytes": 184274,
+      "path": "parquet/indicator_points/part-00000.parquet",
+      "sha256": "d6cf91b899cae09c325dc650d6ff193f05480d03850a4ca04016225048a9c2df"
+    },
+    {
+      "bytes": 382961,
+      "path": "parquet/indicator_series/part-00000.parquet",
+      "sha256": "95e99df537c5b2a9e405f75b52f30886934e158ca9e5b2a3a093b6b80a239b37"
+    },
+    {
+      "bytes": 15005,
+      "path": "parquet/infoelectoral_archivos_extraccion/part-00000.parquet",
+      "sha256": "6c0ef27fbd0e5b1b13ee95cd5aa039e9c7eccbaa1199cd9bf52ef5ce4ab2ca78"
+    },
+    {
+      "bytes": 3349,
+      "path": "parquet/infoelectoral_convocatoria_tipos/part-00000.parquet",
+      "sha256": "9269d8dd4deaa5d073d8c2ce3093c40475d5e3a6276071900576bfa4c5e30438"
+    },
+    {
+      "bytes": 6937,
+      "path": "parquet/infoelectoral_convocatorias/part-00000.parquet",
+      "sha256": "ee3a690a41d6d0c170ed9f2578f6d80e8ce18ca8f3204474a27d64cb2975b51b"
+    },
+    {
+      "bytes": 17461,
+      "path": "parquet/infoelectoral_proceso_resultados/part-00000.parquet",
+      "sha256": "8457b739222c451b5c6da855e5602eab43a3edb6f8c860378b9a3017abba0927"
+    },
+    {
+      "bytes": 8815,
+      "path": "parquet/infoelectoral_procesos/part-00000.parquet",
+      "sha256": "a03095b2d15e848d6ae21c220d8df37aa1dc219a21675b4856003fb27d5c2dfa"
+    },
+    {
+      "bytes": 18133,
+      "path": "parquet/ingestion_runs/part-00000.parquet",
+      "sha256": "7e453eda90b4ae96ecf891dfb8203f1c22674356ca6f1344f187ac65facdb6e0"
+    },
+    {
+      "bytes": 156828,
+      "path": "parquet/institutions/part-00000.parquet",
+      "sha256": "ef1b10d9155a467bdf5e88ded029b3079b3912430779c21a2ba1fb177ba58f25"
+    },
+    {
+      "bytes": 889,
+      "path": "parquet/intervention_events/part-00000.parquet",
+      "sha256": "255fe8fb48fbb21078035fbe9074d8c071d15f6b7ec0c4ac2201d301d2d3fdd7"
+    },
+    {
+      "bytes": 2011,
+      "path": "parquet/interventions/part-00000.parquet",
+      "sha256": "bc69c0d0ee06e5727f47f9500998182023b7134ca5fef04cf5c5d154f2abb37f"
+    },
+    {
+      "bytes": 2691192,
+      "path": "parquet/mandates/part-00000.parquet",
+      "sha256": "44a762e596ae412dc797f2474edbed6a67a9ec03feff77634c74b563c6c1a779"
+    },
+    {
+      "bytes": 1468354,
+      "path": "parquet/mandates/part-00001.parquet",
+      "sha256": "914d72c5586ea4937c5a8b3a113b969403eb54396dd5398f5bd4417e980b6d21"
+    },
+    {
+      "bytes": 3756,
+      "path": "parquet/money_contract_records/part-00000.parquet",
+      "sha256": "cd187470b2fc144a7c7f6789fa282bea029cfd8224682e80277424dd3362d0ac"
+    },
+    {
+      "bytes": 3629,
+      "path": "parquet/money_subsidy_records/part-00000.parquet",
+      "sha256": "a44a8c3d1da43d7be33e66ca2c2f961f124f11e1e53c21f06dc6909850699d01"
+    },
+    {
+      "bytes": 1368325,
+      "path": "parquet/parl_initiative_doc_extractions/part-00000.parquet",
+      "sha256": "1f41b1db096d612254525370f786559890ceb71ddbdbb5f4281b1f39ae6d9c78"
+    },
+    {
+      "bytes": 123679,
+      "path": "parquet/parl_initiative_documents/part-00000.parquet",
+      "sha256": "12922fc3f2e0bf10edd68ff42b8260651f8b5e1705b68b9f9e76e4fda4efa5b2"
+    },
+    {
+      "bytes": 973658,
+      "path": "parquet/parl_initiatives/part-00000.parquet",
+      "sha256": "d5b62e98081fb7f87bd124d1c77d8ffca3e6cbfa1dff211dbb761dc9b809319c"
+    },
+    {
+      "bytes": 103961,
+      "path": "parquet/parl_vote_event_initiatives/part-00000.parquet",
+      "sha256": "90c189748501ba7c44fc7ce36b8b40fd08fde8f645dcf0308f6d2714a9207f64"
+    },
+    {
+      "bytes": 7636751,
+      "path": "parquet/parl_vote_events/part-00000.parquet",
+      "sha256": "743bea96afe08d6a490c79e86d4b839ccb67087c43218910b3a6d0219329b836"
+    },
+    {
+      "bytes": 315903,
+      "path": "parquet/parl_vote_member_votes/part-00000.parquet",
+      "sha256": "f9c4122f17ff62d1fd90ef77feb39603a7d931f243859fc5ad77a8b26b97e2a3"
+    },
+    {
+      "bytes": 272246,
+      "path": "parquet/parl_vote_member_votes/part-00001.parquet",
+      "sha256": "dbf1220c8251a8a1606ae452b7ef9fc99b17b9433f5c7ed892d01813038b95a7"
+    },
+    {
+      "bytes": 196453,
+      "path": "parquet/parl_vote_member_votes/part-00002.parquet",
+      "sha256": "c7b4d857e55923b9e052060b89f556e8d14fd0e7142deed318b21088aab85535"
+    },
+    {
+      "bytes": 264929,
+      "path": "parquet/parl_vote_member_votes/part-00003.parquet",
+      "sha256": "0be25987a35eff4eda44dd4e26d9d283800be066d7e0b8fdef72f8f4d7cb6b6d"
+    },
+    {
+      "bytes": 372160,
+      "path": "parquet/parl_vote_member_votes/part-00004.parquet",
+      "sha256": "30ef81e9e0c873f475111dea5f55c8efa2cbad655ff903cff039656a8e2aff22"
+    },
+    {
+      "bytes": 326805,
+      "path": "parquet/parl_vote_member_votes/part-00005.parquet",
+      "sha256": "f3c6b651bdf54f9937c4b49dd2a0a6c56adeb69deda3607437b24a4a787eebed"
+    },
+    {
+      "bytes": 290181,
+      "path": "parquet/parl_vote_member_votes/part-00006.parquet",
+      "sha256": "fb86ca9295bb140b224038786b2548e56b678843d743fb577e351d0aa5584f82"
+    },
+    {
+      "bytes": 307444,
+      "path": "parquet/parl_vote_member_votes/part-00007.parquet",
+      "sha256": "316e597bc3fa5794b178c136eb9dd713876b52e4d8b89a9c342ddd2d60e0374c"
+    },
+    {
+      "bytes": 301615,
+      "path": "parquet/parl_vote_member_votes/part-00008.parquet",
+      "sha256": "fef8b34757f61c71fec7b69463b7ea352c6674e7f47b0bf1fa6c74e4a98bbb1b"
+    },
+    {
+      "bytes": 280170,
+      "path": "parquet/parl_vote_member_votes/part-00009.parquet",
+      "sha256": "a8575569caa13156f6c46c6664cdb004ca84268fd575e8617a8c4b5e83b70a55"
+    },
+    {
+      "bytes": 294328,
+      "path": "parquet/parl_vote_member_votes/part-00010.parquet",
+      "sha256": "f56ef0007881368c7bebb24fec257d40c3bcc7d567071a5d839ed95dbc9231c5"
+    },
+    {
+      "bytes": 300433,
+      "path": "parquet/parl_vote_member_votes/part-00011.parquet",
+      "sha256": "88672715f8934353eeb0d334b4cb30f4a0f0dcb991009375a7a133437709f284"
+    },
+    {
+      "bytes": 306360,
+      "path": "parquet/parl_vote_member_votes/part-00012.parquet",
+      "sha256": "ed81316db2fb66ad7a87c999478164bf392d97b16173a9b0e0621db2ac73acec"
+    },
+    {
+      "bytes": 303195,
+      "path": "parquet/parl_vote_member_votes/part-00013.parquet",
+      "sha256": "ee38eb00299e2eb76722b0a9629085857cf9bb61bcd32cc774201987db49d90b"
+    },
+    {
+      "bytes": 302857,
+      "path": "parquet/parl_vote_member_votes/part-00014.parquet",
+      "sha256": "23c07b98049f14b9da4584955eadefe2763714616fa493817bfe912271f99170"
+    },
+    {
+      "bytes": 300345,
+      "path": "parquet/parl_vote_member_votes/part-00015.parquet",
+      "sha256": "6e4d30f21c49b6f021fa971532976813713862703d12fd5e1ad876204a7f1741"
+    },
+    {
+      "bytes": 208334,
+      "path": "parquet/parl_vote_member_votes/part-00016.parquet",
+      "sha256": "9986ceed05935e8119e738002e808a931a2d3279c6a28736c118aded28b413ef"
+    },
+    {
+      "bytes": 212372,
+      "path": "parquet/parl_vote_member_votes/part-00017.parquet",
+      "sha256": "c68eb2239351e1286e43bd5e761511680e0da51003b38dcf2351ef453d6c1add"
+    },
+    {
+      "bytes": 226380,
+      "path": "parquet/parl_vote_member_votes/part-00018.parquet",
+      "sha256": "07f1a014a8811278fe766c4a016a722e9164611b986ed1d0162a80f92b1ecc8e"
+    },
+    {
+      "bytes": 212644,
+      "path": "parquet/parl_vote_member_votes/part-00019.parquet",
+      "sha256": "5b20d3d56cf5efeb4fc3bca1ac67fe7c7bd89f54757b9bb8ebe80351a120585b"
+    },
+    {
+      "bytes": 229655,
+      "path": "parquet/parl_vote_member_votes/part-00020.parquet",
+      "sha256": "6f728bdb70ac78a5060d84257f112760303b4a710c67bd550ae8b3f3e7b5ea65"
+    },
+    {
+      "bytes": 211207,
+      "path": "parquet/parl_vote_member_votes/part-00021.parquet",
+      "sha256": "b37f063495e3ed6acc19d885594250b8f014341fab3c44cf65a8d9a8ee69b2d5"
+    },
+    {
+      "bytes": 335379,
+      "path": "parquet/parl_vote_member_votes/part-00022.parquet",
+      "sha256": "db95842b01a6b17b92610d72e901ad71d9d86915165f3f90a6fe230712be3a34"
+    },
+    {
+      "bytes": 385962,
+      "path": "parquet/parl_vote_member_votes/part-00023.parquet",
+      "sha256": "6d6ae09c1195da774186c01dbbaf0a43039393587ef05f48efce50391683d18d"
+    },
+    {
+      "bytes": 450057,
+      "path": "parquet/parl_vote_member_votes/part-00024.parquet",
+      "sha256": "038fb890975784d86751181674ea3ef145b2ed3e0123251fff0b121b03a1eaf9"
+    },
+    {
+      "bytes": 392640,
+      "path": "parquet/parl_vote_member_votes/part-00025.parquet",
+      "sha256": "a9dd5f08df1811ef55e448b3904b50733563b69ba467993c90c0c3dcb4ae0b51"
+    },
+    {
+      "bytes": 419934,
+      "path": "parquet/parl_vote_member_votes/part-00026.parquet",
+      "sha256": "435e46f2131afc0dfbee2a8fa5388f0b026e9bf3225783e4173fa490467187c4"
+    },
+    {
+      "bytes": 414812,
+      "path": "parquet/parl_vote_member_votes/part-00027.parquet",
+      "sha256": "540a4de965451b0f2a5e8b891630210d0b7a66809f4c1ec0894dfb8e716af253"
+    },
+    {
+      "bytes": 394124,
+      "path": "parquet/parl_vote_member_votes/part-00028.parquet",
+      "sha256": "b2fa6393609a3ca67ccfa4d3b22a65f2c2dab8282cc661ee3e1d34d8aede9285"
+    },
+    {
+      "bytes": 401130,
+      "path": "parquet/parl_vote_member_votes/part-00029.parquet",
+      "sha256": "ba9f236e39b56478387ee531f49245394f262cca77b9c5e13d542f891ec0e471"
+    },
+    {
+      "bytes": 401980,
+      "path": "parquet/parl_vote_member_votes/part-00030.parquet",
+      "sha256": "1d3286d87dd54c6ce34cf4095b4c032ccab58cee652be89a6a588368c8fb2f46"
+    },
+    {
+      "bytes": 410005,
+      "path": "parquet/parl_vote_member_votes/part-00031.parquet",
+      "sha256": "8ab5844869d83aac740a027534bfab6867ece2fc3207e5f117629d6cfc43ed28"
+    },
+    {
+      "bytes": 420511,
+      "path": "parquet/parl_vote_member_votes/part-00032.parquet",
+      "sha256": "62864318ebcbe3632ad822eb9fbb86aea9b5cc229806bb7b88c1be8929db0e4b"
+    },
+    {
+      "bytes": 415859,
+      "path": "parquet/parl_vote_member_votes/part-00033.parquet",
+      "sha256": "3884c0f74bc0239253903488d632e334931446911abca85b957db5c9de0d6c2a"
+    },
+    {
+      "bytes": 336413,
+      "path": "parquet/parl_vote_member_votes/part-00034.parquet",
+      "sha256": "0ae0206ef7dc56f4144eae496109f2a45e7244850e683e1462754882b9576c4a"
+    },
+    {
+      "bytes": 200246,
+      "path": "parquet/parl_vote_member_votes/part-00035.parquet",
+      "sha256": "9befe4f231efc64e7807e30aae60e5adad6c8d32ff980b49e3d19cb976520493"
+    },
+    {
+      "bytes": 32934,
+      "path": "parquet/parties/part-00000.parquet",
+      "sha256": "f5479c6282cb6497ce47f32434e1eaa81b976a6544286f69c2c28f2d9f3f9348"
+    },
+    {
+      "bytes": 63199,
+      "path": "parquet/party_aliases/part-00000.parquet",
+      "sha256": "b3dae83d8bd8fce184a2428a2e13ea9daaac45a90c71c9982976c769f8c62510"
+    },
+    {
+      "bytes": 868841,
+      "path": "parquet/person_identifiers/part-00000.parquet",
+      "sha256": "940bbb5be92bb87cd7600ca3374530f23eb5eed8da629b22355ec864b5ec7477"
+    },
+    {
+      "bytes": 681738,
+      "path": "parquet/person_identifiers/part-00001.parquet",
+      "sha256": "77122537e1fa9f738bb6e8c9a598a2d41df29614510e63ee13357b4ebeb41f2b"
+    },
+    {
+      "bytes": 1385838,
+      "path": "parquet/persons/part-00000.parquet",
+      "sha256": "5aaeab25849165b436268f04f99d18938ff05b4ee03e1f5152800dc5e95e8306"
+    },
+    {
+      "bytes": 562817,
+      "path": "parquet/persons/part-00001.parquet",
+      "sha256": "d54c24e911eba9b21be4e6a6fe57ffdc85c3945bb72ea99283752deee51c136e"
+    },
+    {
+      "bytes": 1510,
+      "path": "parquet/policy_axes/part-00000.parquet",
+      "sha256": "0adbe6b207521ffdf0552e21f795b990a253a43c64e18a42ae3071a79c839030"
+    },
+    {
+      "bytes": 1655,
+      "path": "parquet/policy_event_axis_scores/part-00000.parquet",
+      "sha256": "da47942400095137f7e32479495ac5700d28a0a3ab398fd9907087db67fa60ee"
+    },
+    {
+      "bytes": 103415,
+      "path": "parquet/policy_events/part-00000.parquet",
+      "sha256": "176fca1f7982670f76f57c2b5340e636c305bf1dafa77bb939cd2e867bf5d4dc"
+    },
+    {
+      "bytes": 2885,
+      "path": "parquet/policy_instruments/part-00000.parquet",
+      "sha256": "6486ce5e2cf0204b61bd2f805fc7f63b664ab1212af4ffb766227b74d0b487f3"
+    },
+    {
+      "bytes": 3919,
+      "path": "parquet/roles/part-00000.parquet",
+      "sha256": "824573b593a9dbc30a0329d756bdc92f2902775c9728ecccf71e598ce7c85f67"
+    },
+    {
+      "bytes": 6057,
+      "path": "parquet/sources/part-00000.parquet",
+      "sha256": "65aa94691b6549e6a9916b72c873a8d9d05620c6b9e51b2e200754900de1fed1"
+    },
+    {
+      "bytes": 178900,
+      "path": "parquet/territories/part-00000.parquet",
+      "sha256": "d7a6e055233747d0c149194d5728791ed8640eceedea3fb1a03ee864547e2c81"
+    },
+    {
+      "bytes": 4613840,
+      "path": "parquet/text_documents/part-00000.parquet",
+      "sha256": "85df17a64e9e1e51f585235363147b4b6274b933c22e359ea93bb4ec97d404a9"
+    },
+    {
+      "bytes": 841065,
+      "path": "parquet/topic_evidence/part-00000.parquet",
+      "sha256": "85fa6279191759d4d38e69810ea7ba33537243186745e18f6c33db555373db3d"
+    },
+    {
+      "bytes": 672155,
+      "path": "parquet/topic_evidence/part-00001.parquet",
+      "sha256": "f2bdba2c3549951a1400128d52bd6fd03a9a0cf3f5a83660417bd8a077e1aff5"
+    },
+    {
+      "bytes": 616708,
+      "path": "parquet/topic_evidence/part-00002.parquet",
+      "sha256": "1f7051f0b37b71a2b493997868332300a183bb79a6e03338e2ac33637dbac330"
+    },
+    {
+      "bytes": 643824,
+      "path": "parquet/topic_evidence/part-00003.parquet",
+      "sha256": "0891f76f6c9fb3b1156a80967db57db81b00915aa313c23b9c7bc1485ac34363"
+    },
+    {
+      "bytes": 623616,
+      "path": "parquet/topic_evidence/part-00004.parquet",
+      "sha256": "4bc94af3805440a01c211f54c0b0cd32c91794749704820ddfe236d4a675ebf3"
+    },
+    {
+      "bytes": 636641,
+      "path": "parquet/topic_evidence/part-00005.parquet",
+      "sha256": "79d7b095f66dafb274e2bf827193b7c9e369223dd77755ed092c4457ca8e7dc9"
+    },
+    {
+      "bytes": 656064,
+      "path": "parquet/topic_evidence/part-00006.parquet",
+      "sha256": "4768e4e4d87f991d441b80775f1e592e5f25e047ee743abf5c0c755aa9a22a70"
+    },
+    {
+      "bytes": 659071,
+      "path": "parquet/topic_evidence/part-00007.parquet",
+      "sha256": "142db26143e39fc4dbf1e2e2b46d36c64d49c00fc82197025dfedd8d3dbd5058"
+    },
+    {
+      "bytes": 465710,
+      "path": "parquet/topic_evidence/part-00008.parquet",
+      "sha256": "6674ad2649a5eb99608b28c779a4ef46bb939694f9d04b347ab90af3a48b372d"
+    },
+    {
+      "bytes": 9768,
+      "path": "parquet/topic_evidence_reviews/part-00000.parquet",
+      "sha256": "c110ad2c1c45bb4e64eec6162f2f706ea69d6cb577bdd4fdfe634a9b54ea940f"
+    },
+    {
+      "bytes": 194163,
+      "path": "parquet/topic_positions/part-00000.parquet",
+      "sha256": "d3166cec14c27f0f060212caca864b7d1180a82bdd502e7b0fcd183e910bf918"
+    },
+    {
+      "bytes": 200740,
+      "path": "parquet/topic_positions/part-00001.parquet",
+      "sha256": "e001c13c50759df1038966be48a76507125f21527258ab4538d1ee083859b467"
+    },
+    {
+      "bytes": 191511,
+      "path": "parquet/topic_positions/part-00002.parquet",
+      "sha256": "b478886cdbda2201bde230114c83eefb52be4654ddb685ad9a46c3fd1147060b"
+    },
+    {
+      "bytes": 189084,
+      "path": "parquet/topic_positions/part-00003.parquet",
+      "sha256": "53fac0877cdf782dd95004d0b5bc7f00a8e8a269faed26e34dbcec6bcee67f7e"
+    },
+    {
+      "bytes": 205098,
+      "path": "parquet/topic_positions/part-00004.parquet",
+      "sha256": "b35c5aca22905e5cf97e5804ca9ab062fe36520e66fd62bbbb9f23621204732a"
+    },
+    {
+      "bytes": 91280,
+      "path": "parquet/topic_positions/part-00005.parquet",
+      "sha256": "97d71c14cb16599e5afaf01c1127de2caa6147c995412040776bf57539c6edc7"
+    },
+    {
+      "bytes": 5689,
+      "path": "parquet/topic_set_topics/part-00000.parquet",
+      "sha256": "40f52fd636056b644596d1cb592f42f2b59ce61b3254ff6dcb26f841c1ac7d40"
+    },
+    {
+      "bytes": 4959,
+      "path": "parquet/topic_sets/part-00000.parquet",
+      "sha256": "7b553c28041c0e317c6b2202c2de99b7f7c01522c099e4bf038424d8c61ed161"
+    },
+    {
+      "bytes": 23440,
+      "path": "parquet/topics/part-00000.parquet",
+      "sha256": "70ef9266dcc5e9d31a4d451bee9c7e405e5030cc863509430badcd43d9c6dca2"
+    }
+  ],
+  "generated_at": "2026-02-22T18:47:12Z",
+  "parquet": {
+    "batch_rows": 50000,
+    "compression": "zstd",
+    "enabled": true,
+    "prefix": "parquet",
+    "sensitive_guard_enabled": true,
+    "tables": [
+      {
+        "columns": 5,
+        "files": 1,
+        "order_by": "admin_level_id",
+        "path_glob": "parquet/admin_levels/*.parquet",
+        "rows": 4,
+        "table": "admin_levels"
+      },
+      {
+        "columns": 10,
+        "files": 1,
+        "order_by": "causal_estimate_id",
+        "path_glob": "parquet/causal_estimates/*.parquet",
+        "rows": 0,
+        "table": "causal_estimates"
+      },
+      {
+        "columns": 12,
+        "files": 1,
+        "order_by": "doc_url",
+        "path_glob": "parquet/document_fetches/*.parquet",
+        "rows": 9390,
+        "table": "document_fetches"
+      },
+      {
+        "columns": 7,
+        "files": 1,
+        "order_by": "domain_id",
+        "path_glob": "parquet/domains/*.parquet",
+        "rows": 0,
+        "table": "domains"
+      },
+      {
+        "columns": 5,
+        "files": 1,
+        "order_by": "gender_id",
+        "path_glob": "parquet/genders/*.parquet",
+        "rows": 3,
+        "table": "genders"
+      },
+      {
+        "columns": 17,
+        "files": 1,
+        "order_by": "observation_record_id",
+        "path_glob": "parquet/indicator_observation_records/*.parquet",
+        "rows": 37431,
+        "table": "indicator_observation_records"
+      },
+      {
+        "columns": 7,
+        "files": 1,
+        "order_by": "indicator_point_id",
+        "path_glob": "parquet/indicator_points/*.parquet",
+        "rows": 37431,
+        "table": "indicator_points"
+      },
+      {
+        "columns": 15,
+        "files": 1,
+        "order_by": "indicator_series_id",
+        "path_glob": "parquet/indicator_series/*.parquet",
+        "rows": 2400,
+        "table": "indicator_series"
+      },
+      {
+        "columns": 14,
+        "files": 1,
+        "order_by": "archivo_id",
+        "path_glob": "parquet/infoelectoral_archivos_extraccion/*.parquet",
+        "rows": 188,
+        "table": "infoelectoral_archivos_extraccion"
+      },
+      {
+        "columns": 8,
+        "files": 1,
+        "order_by": "tipo_convocatoria",
+        "path_glob": "parquet/infoelectoral_convocatoria_tipos/*.parquet",
+        "rows": 6,
+        "table": "infoelectoral_convocatoria_tipos"
+      },
+      {
+        "columns": 12,
+        "files": 1,
+        "order_by": "convocatoria_id",
+        "path_glob": "parquet/infoelectoral_convocatorias/*.parquet",
+        "rows": 69,
+        "table": "infoelectoral_convocatorias"
+      },
+      {
+        "columns": 13,
+        "files": 1,
+        "order_by": "proceso_dataset_id",
+        "path_glob": "parquet/infoelectoral_proceso_resultados/*.parquet",
+        "rows": 191,
+        "table": "infoelectoral_proceso_resultados"
+      },
+      {
+        "columns": 13,
+        "files": 1,
+        "order_by": "proceso_id",
+        "path_glob": "parquet/infoelectoral_procesos/*.parquet",
+        "rows": 71,
+        "table": "infoelectoral_procesos"
+      },
+      {
+        "columns": 11,
+        "files": 1,
+        "order_by": "run_id",
+        "path_glob": "parquet/ingestion_runs/*.parquet",
+        "rows": 276,
+        "table": "ingestion_runs"
+      },
+      {
+        "columns": 8,
+        "files": 1,
+        "order_by": "institution_id",
+        "path_glob": "parquet/institutions/*.parquet",
+        "rows": 8160,
+        "table": "institutions"
+      },
+      {
+        "columns": 4,
+        "files": 1,
+        "order_by": "intervention_id, policy_event_id",
+        "path_glob": "parquet/intervention_events/*.parquet",
+        "rows": 0,
+        "table": "intervention_events"
+      },
+      {
+        "columns": 11,
+        "files": 1,
+        "order_by": "intervention_id",
+        "path_glob": "parquet/interventions/*.parquet",
+        "rows": 0,
+        "table": "interventions"
+      },
+      {
+        "columns": 20,
+        "files": 2,
+        "order_by": "mandate_id",
+        "path_glob": "parquet/mandates/*.parquet",
+        "rows": 78649,
+        "table": "mandates"
+      },
+      {
+        "columns": 21,
+        "files": 1,
+        "order_by": "contract_record_id",
+        "path_glob": "parquet/money_contract_records/*.parquet",
+        "rows": 0,
+        "table": "money_contract_records"
+      },
+      {
+        "columns": 20,
+        "files": 1,
+        "order_by": "subsidy_record_id",
+        "path_glob": "parquet/money_subsidy_records/*.parquet",
+        "rows": 0,
+        "table": "money_subsidy_records"
+      },
+      {
+        "columns": 17,
+        "files": 1,
+        "order_by": "source_record_pk",
+        "path_glob": "parquet/parl_initiative_doc_extractions/*.parquet",
+        "rows": 8932,
+        "table": "parl_initiative_doc_extractions"
+      },
+      {
+        "columns": 7,
+        "files": 1,
+        "order_by": "initiative_document_id",
+        "path_glob": "parquet/parl_initiative_documents/*.parquet",
+        "rows": 9135,
+        "table": "parl_initiative_documents"
+      },
+      {
+        "columns": 27,
+        "files": 1,
+        "order_by": "initiative_id",
+        "path_glob": "parquet/parl_initiatives/*.parquet",
+        "rows": 4715,
+        "table": "parl_initiatives"
+      },
+      {
+        "columns": 7,
+        "files": 1,
+        "order_by": "vote_event_id, initiative_id, link_method",
+        "path_glob": "parquet/parl_vote_event_initiatives/*.parquet",
+        "rows": 8358,
+        "table": "parl_vote_event_initiatives"
+      },
+      {
+        "columns": 22,
+        "files": 1,
+        "order_by": "vote_event_id",
+        "path_glob": "parquet/parl_vote_events/*.parquet",
+        "rows": 8357,
+        "table": "parl_vote_events"
+      },
+      {
+        "columns": 14,
+        "files": 36,
+        "order_by": "member_vote_id",
+        "path_glob": "parquet/parl_vote_member_votes/*.parquet",
+        "rows": 1778370,
+        "table": "parl_vote_member_votes"
+      },
+      {
+        "columns": 5,
+        "files": 1,
+        "order_by": "party_id",
+        "path_glob": "parquet/parties/*.parquet",
+        "rows": 2703,
+        "table": "parties"
+      },
+      {
+        "columns": 6,
+        "files": 1,
+        "order_by": "party_alias_id",
+        "path_glob": "parquet/party_aliases/*.parquet",
+        "rows": 2701,
+        "table": "party_aliases"
+      },
+      {
+        "columns": 4,
+        "files": 2,
+        "order_by": "namespace, value",
+        "path_glob": "parquet/person_identifiers/*.parquet",
+        "rows": 87398,
+        "table": "person_identifiers"
+      },
+      {
+        "columns": 12,
+        "files": 2,
+        "order_by": "person_id",
+        "path_glob": "parquet/persons/*.parquet",
+        "rows": 69534,
+        "table": "persons"
+      },
+      {
+        "columns": 8,
+        "files": 1,
+        "order_by": "policy_axis_id",
+        "path_glob": "parquet/policy_axes/*.parquet",
+        "rows": 0,
+        "table": "policy_axes"
+      },
+      {
+        "columns": 9,
+        "files": 1,
+        "order_by": "policy_event_id, policy_axis_id, method",
+        "path_glob": "parquet/policy_event_axis_scores/*.parquet",
+        "rows": 0,
+        "table": "policy_event_axis_scores"
+      },
+      {
+        "columns": 20,
+        "files": 1,
+        "order_by": "policy_event_id",
+        "path_glob": "parquet/policy_events/*.parquet",
+        "rows": 548,
+        "table": "policy_events"
+      },
+      {
+        "columns": 6,
+        "files": 1,
+        "order_by": "policy_instrument_id",
+        "path_glob": "parquet/policy_instruments/*.parquet",
+        "rows": 6,
+        "table": "policy_instruments"
+      },
+      {
+        "columns": 5,
+        "files": 1,
+        "order_by": "role_id",
+        "path_glob": "parquet/roles/*.parquet",
+        "rows": 88,
+        "table": "roles"
+      },
+      {
+        "columns": 8,
+        "files": 1,
+        "order_by": "source_id",
+        "path_glob": "parquet/sources/*.parquet",
+        "rows": 44,
+        "table": "sources"
+      },
+      {
+        "columns": 7,
+        "files": 1,
+        "order_by": "territory_id",
+        "path_glob": "parquet/territories/*.parquet",
+        "rows": 15402,
+        "table": "territories"
+      },
+      {
+        "columns": 13,
+        "files": 1,
+        "order_by": "text_document_id",
+        "path_glob": "parquet/text_documents/*.parquet",
+        "rows": 9549,
+        "table": "text_documents"
+      },
+      {
+        "columns": 27,
+        "files": 9,
+        "order_by": "evidence_id",
+        "path_glob": "parquet/topic_evidence/*.parquet",
+        "rows": 431661,
+        "table": "topic_evidence"
+      },
+      {
+        "columns": 13,
+        "files": 1,
+        "order_by": "review_id",
+        "path_glob": "parquet/topic_evidence_reviews/*.parquet",
+        "rows": 537,
+        "table": "topic_evidence_reviews"
+      },
+      {
+        "columns": 20,
+        "files": 6,
+        "order_by": "position_id",
+        "path_glob": "parquet/topic_positions/*.parquet",
+        "rows": 274440,
+        "table": "topic_positions"
+      },
+      {
+        "columns": 8,
+        "files": 1,
+        "order_by": "topic_set_id, topic_id",
+        "path_glob": "parquet/topic_set_topics/*.parquet",
+        "rows": 260,
+        "table": "topic_set_topics"
+      },
+      {
+        "columns": 12,
+        "files": 1,
+        "order_by": "topic_set_id",
+        "path_glob": "parquet/topic_sets/*.parquet",
+        "rows": 5,
+        "table": "topic_sets"
+      },
+      {
+        "columns": 7,
+        "files": 1,
+        "order_by": "topic_id",
+        "path_glob": "parquet/topics/*.parquet",
+        "rows": 401,
+        "table": "topics"
+      }
+    ],
+    "tables_excluded": [
+      "lost_and_found",
+      "raw_fetches",
+      "run_fetches",
+      "source_records"
+    ],
+    "tables_filter": []
+  },
+  "project": "vota-con-la-chola",
+  "quality_report": {
+    "events_total": 8357,
+    "file_name": "votaciones-kpis-es-2026-02-12.json",
+    "member_votes_with_person_id_pct": 0.980442765003908,
+    "vote_gate_passed": true
+  },
+  "snapshot_date": "2026-02-12",
+  "snapshot_dir": "snapshots/2026-02-12",
+  "stats": {
+    "ingestion_runs_rows": 276,
+    "parquet_files_count": 95,
+    "parquet_rows_total": 2887413,
+    "parquet_tables_count": 44,
+    "published_files_count": 7,
+    "source_legal_files_count": 27,
+    "source_legal_status_counts": {
+      "not_verified": 1,
+      "partially_verified": 1,
+      "pending_review": 16,
+      "verified": 9
+    },
+    "source_records_by_source_rows": 27,
+    "source_records_snapshot_total": 91924
+  }
+}

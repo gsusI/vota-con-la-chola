@@ -1,0 +1,53 @@
+UI source markers
+233:      .onboard {
+246:      .onboardHead {
+254:      .onboardTitle {
+261:      .onboardHint {
+267:      .onboardSteps {
+275:      .onboardActions {
+692:        <div class="onboard" id="onboard"></div>
+916:      const LS_ONBOARD_DISMISSED = "vclc_citizen_onboard_dismissed_v1";
+1181:      function onboardingDismissed() {
+1182:        return String(lsGet(LS_ONBOARD_DISMISSED) || "") === "1";
+1186:        lsSet(LS_ONBOARD_DISMISSED, v ? "1" : "0");
+1590:        const box = qs("#onboard");
+1594:        if (prefsReady || onboardingDismissed()) {
+1609:          `<div class="onboardHead">` +
+1611:          `<p class="onboardTitle">Empieza aqui: primer resultado en 90 segundos</p>` +
+1612:          `<p class="onboardHint">Sin ranking magico: eliges una preocupacion, revisas un item y luego marcas tu postura para ver match/mismatch/unknown por partido.</p>` +
+1616:          `<div class="onboardSteps">` +
+1622:          `<div class="onboardActions">` +
+1623:          `<button class="btn" type="button" data-onboard-topic="${esc(String(recTid || 0))}" ${recTid ? "" : "disabled"}>` +
+1629:          `<button class="btn" type="button" data-onboard-alignment="1">${esc(
+1632:          `<button class="btn" type="button" data-onboard-dismiss="1">Ocultar guia</button>` +
+1635:        for (const btn of box.querySelectorAll("[data-onboard-topic]")) {
+1637:            const tid = Number(btn.getAttribute("data-onboard-topic") || 0);
+1648:        for (const btn of box.querySelectorAll("[data-onboard-alignment]")) {
+1663:        for (const btn of box.querySelectorAll("[data-onboard-dismiss]")) {
+
+GH pages markers
+233:      .onboard {
+246:      .onboardHead {
+254:      .onboardTitle {
+261:      .onboardHint {
+267:      .onboardSteps {
+275:      .onboardActions {
+692:        <div class="onboard" id="onboard"></div>
+916:      const LS_ONBOARD_DISMISSED = "vclc_citizen_onboard_dismissed_v1";
+1181:      function onboardingDismissed() {
+1182:        return String(lsGet(LS_ONBOARD_DISMISSED) || "") === "1";
+1186:        lsSet(LS_ONBOARD_DISMISSED, v ? "1" : "0");
+1590:        const box = qs("#onboard");
+1594:        if (prefsReady || onboardingDismissed()) {
+1609:          `<div class="onboardHead">` +
+1611:          `<p class="onboardTitle">Empieza aqui: primer resultado en 90 segundos</p>` +
+1612:          `<p class="onboardHint">Sin ranking magico: eliges una preocupacion, revisas un item y luego marcas tu postura para ver match/mismatch/unknown por partido.</p>` +
+1616:          `<div class="onboardSteps">` +
+1622:          `<div class="onboardActions">` +
+1623:          `<button class="btn" type="button" data-onboard-topic="${esc(String(recTid || 0))}" ${recTid ? "" : "disabled"}>` +
+1629:          `<button class="btn" type="button" data-onboard-alignment="1">${esc(
+1632:          `<button class="btn" type="button" data-onboard-dismiss="1">Ocultar guia</button>` +
+1635:        for (const btn of box.querySelectorAll("[data-onboard-topic]")) {
+1637:            const tid = Number(btn.getAttribute("data-onboard-topic") || 0);
+1648:        for (const btn of box.querySelectorAll("[data-onboard-alignment]")) {
+1663:        for (const btn of box.querySelectorAll("[data-onboard-dismiss]")) {

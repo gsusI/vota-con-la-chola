@@ -1,0 +1,94 @@
+# script markers
+15:    "  node scripts/report_citizen_release_hardening.js [options]",
+18:    "  --source-root <path>         Source citizen dir (default: ui/citizen)",
+19:    "  --published-root <path>      Published citizen dir (default: docs/gh-pages/citizen)",
+20:    "  --snapshot <path>            Published snapshot path (default: docs/gh-pages/citizen/data/citizen.json)",
+21:    "  --concerns <path>            Concerns config path (default: ui/citizen/concerns_v1.json)",
+22:    "  --assets <csv>               Relative asset paths CSV",
+25:    "  --strict                     Exit non-zero when release checklist fails",
+50:    if (a === "--strict") {
+54:    if (a === "--source-root") {
+59:    if (a === "--published-root") {
+64:    if (a === "--snapshot") {
+69:    if (a === "--concerns") {
+74:    if (a === "--assets") {
+177:function snapshotShapeCheck(snapshotJson) {
+195:function concernsShapeCheck(concernsJson) {
+238:      status: "failed",
+239:      release_ready: false,
+270:      pushResult(report.results, "asset_parity", assetRel, same, "asset_parity_mismatch", {
+309:        const shape = snapshotShapeCheck(snapshotJson);
+326:        const shape = concernsShapeCheck(concernsJson);
+341:  const parityFailures = report.results.filter((r) => r.section === "asset_parity" && !r.ok).length;
+345:    new Set(report.results.filter((r) => r.section === "asset_parity" && !r.ok).map((r) => r.id)),
+347:  report.readiness.release_ready = report.summary.total_fail === 0;
+348:  report.readiness.status = report.readiness.release_ready ? "ok" : "failed";
+
+# just markers
+208:citizen_release_source_root := env_var_or_default("CITIZEN_RELEASE_SOURCE_ROOT", "ui/citizen")
+209:citizen_release_published_root := env_var_or_default("CITIZEN_RELEASE_PUBLISHED_ROOT", "docs/gh-pages/citizen")
+210:citizen_release_snapshot := env_var_or_default("CITIZEN_RELEASE_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+211:citizen_release_concerns := env_var_or_default("CITIZEN_RELEASE_CONCERNS", "ui/citizen/concerns_v1.json")
+212:citizen_release_assets := env_var_or_default("CITIZEN_RELEASE_ASSETS", "index.html,preset_codec.js,onboarding_funnel.js,first_answer_accelerator.js,unknown_explainability.js,evidence_trust_panel.js")
+213:citizen_release_max_snapshot_bytes := env_var_or_default("CITIZEN_RELEASE_MAX_SNAPSHOT_BYTES", "5000000")
+214:citizen_release_out := env_var_or_default("CITIZEN_RELEASE_OUT", "docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_latest.json")
+986:citizen-test-release-hardening:
+987:  node --test tests/test_report_citizen_release_hardening.js
+989:citizen-release-regression-suite:
+1045:citizen-report-release-hardening:
+1047:  if [ -n "{{citizen_release_out}}" ]; then out_arg="--json-out {{citizen_release_out}}"; fi; \
+1048:  node scripts/report_citizen_release_hardening.js --source-root "{{citizen_release_source_root}}" --published-root "{{citizen_release_published_root}}" --snapshot "{{citizen_release_snapshot}}" --concerns "{{citizen_release_concerns}}" --assets "{{citizen_release_assets}}" --max-snapshot-bytes "{{citizen_release_max_snapshot_bytes}}" ${out_arg}
+1050:citizen-check-release-hardening:
+1052:  if [ -n "{{citizen_release_out}}" ]; then out_arg="--json-out {{citizen_release_out}}"; fi; \
+1053:  node scripts/report_citizen_release_hardening.js --source-root "{{citizen_release_source_root}}" --published-root "{{citizen_release_published_root}}" --snapshot "{{citizen_release_snapshot}}" --concerns "{{citizen_release_concerns}}" --assets "{{citizen_release_assets}}" --max-snapshot-bytes "{{citizen_release_max_snapshot_bytes}}" --strict ${out_arg}
+
+# test markers
+51:    meta: { as_of_date: "2026-02-23", quality: { status: "ok" } },
+54:    party_topic_positions: [{ topic_id: 1, party_id: "p1", stance: "support" }],
+74:test("release hardening reporter passes strict mode on aligned source/published assets", () => {
+104:test("release hardening reporter fails strict mode on parity drift and exposes failed asset id", () => {
+
+# readiness before build
+{
+  "summary": {
+    "total_checks": 17,
+    "total_pass": 10,
+    "total_fail": 7,
+    "failed_ids": [
+      "asset_parity:index.html",
+      "asset_parity:preset_codec.js",
+      "asset_published:onboarding_funnel.js",
+      "asset_published:first_answer_accelerator.js",
+      "asset_published:unknown_explainability.js",
+      "asset_published:evidence_trust_panel.js",
+      "snapshot:shape"
+    ]
+  },
+  "readiness": {
+    "status": "failed",
+    "release_ready": false,
+    "parity_ok_assets": 4,
+    "parity_total_assets": 6,
+    "parity_failed_assets": [
+      "index.html",
+      "preset_codec.js"
+    ]
+  }
+}
+
+# readiness after build
+{
+  "summary": {
+    "total_checks": 21,
+    "total_pass": 21,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "readiness": {
+    "status": "ok",
+    "release_ready": true,
+    "parity_ok_assets": 6,
+    "parity_total_assets": 6,
+    "parity_failed_assets": []
+  }
+}

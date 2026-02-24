@@ -1,0 +1,57 @@
+# ui markers
+1250:        concernPackQualityById: new Map(),
+1469:            ? `<span class="chip"><span class="dot ${weakPacksTotal > 0 ? "warn" : "ok"}"></span><span>packs_weak</span><span class="mono">${esc(
+1474:            ? `<span class="chip"><span class="dot ${activePackQuality.weak ? "warn" : "ok"}"></span><span>pack_quality</span><span class="mono">${esc(
+1475:                fmtPct01(Number(activePackQuality.quality_score || 0))
+1550:        return state.concernPackQualityById.get(token) || null;
+1555:        state.concernPackQualityById = new Map();
+1561:          state.concernPackQualityById.set(pid, raw);
+1586:          const score = Number((quality || {}).quality_score || 0);
+1669:              const scoreTxt = quality ? fmtPct01(Number(quality.quality_score || 0)) : "";
+1676:                  weak ? ' data-pack-weak="1"' : ""
+1718:            const qualityScore = quality ? fmtPct01(Number(quality.quality_score || 0)) : "";
+1727:              (weak ? ` <span class="tag hot" data-pack-weak-hint="1">pack_debil</span>` : "") +
+4092:        state.concernPackQualityById = new Map();
+4168:          const packQualityP = fetchJson("./data/concern_pack_quality.json").catch((err) => {
+
+# script markers
+10:The output is designed for static publication and optional strict gating.
+82:    ap.add_argument("--strict", action="store_true", help="Fail with exit 4 when status is failed")
+195:def _quality_score(
+215:    min_high_stakes_share: float,
+216:    max_weak_packs: int,
+263:        weak_reasons: list[str] = []
+265:            weak_reasons.append("topics_below_min")
+267:            weak_reasons.append("clear_cells_pct_below_min")
+269:            weak_reasons.append("unknown_cells_pct_above_max")
+272:            weak_reasons.append("confidence_avg_signal_below_min")
+273:        if high_stakes_share < float(min_high_stakes_share):
+274:            weak_reasons.append("high_stakes_share_below_min")
+276:        weak = bool(weak_reasons)
+305:            "quality_score": _quality_score(
+312:            "weak_reasons": weak_reasons,
+319:        "weak_packs_within_threshold": bool(weak_packs_total <= int(max_weak_packs)),
+328:    status = "ok" if not failure_reasons else "failed"
+329:    pack_rows.sort(key=lambda x: (-float(x.get("quality_score") or 0.0), str(x.get("pack_id") or "")))
+333:        "status": status,
+343:            "min_high_stakes_share": round(float(min_high_stakes_share), 6),
+344:            "max_weak_packs": int(max_weak_packs),
+373:    if int(args.min_topics_per_pack) < 0 or int(args.max_weak_packs) < 0:
+387:            min_high_stakes_share=float(args.min_high_stakes_share),
+388:            max_weak_packs=int(args.max_weak_packs),
+404:    if bool(args.strict) and str(report.get("status") or "") == "failed":
+
+# just markers
+208:citizen_pack_quality_snapshot := env_var_or_default("CITIZEN_PACK_QUALITY_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+209:citizen_pack_quality_concerns := env_var_or_default("CITIZEN_PACK_QUALITY_CONCERNS", "ui/citizen/concerns_v1.json")
+210:citizen_pack_quality_out := env_var_or_default("CITIZEN_PACK_QUALITY_OUT", "docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_latest.json")
+211:citizen_pack_quality_min_topics_per_pack := env_var_or_default("CITIZEN_PACK_QUALITY_MIN_TOPICS_PER_PACK", "10")
+212:citizen_pack_quality_min_clear_cells_pct := env_var_or_default("CITIZEN_PACK_QUALITY_MIN_CLEAR_CELLS_PCT", "0.70")
+213:citizen_pack_quality_max_unknown_cells_pct := env_var_or_default("CITIZEN_PACK_QUALITY_MAX_UNKNOWN_CELLS_PCT", "0.30")
+214:citizen_pack_quality_min_confidence_avg_signal := env_var_or_default("CITIZEN_PACK_QUALITY_MIN_CONFIDENCE_AVG_SIGNAL", "0.50")
+215:citizen_pack_quality_min_high_stakes_share := env_var_or_default("CITIZEN_PACK_QUALITY_MIN_HIGH_STAKES_SHARE", "0.12")
+216:citizen_pack_quality_max_weak_packs := env_var_or_default("CITIZEN_PACK_QUALITY_MAX_WEAK_PACKS", "1")
+948:    --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json"
+968:citizen-test-concern-pack-quality:
+1009:citizen-report-concern-pack-quality:
+1014:citizen-check-concern-pack-quality:

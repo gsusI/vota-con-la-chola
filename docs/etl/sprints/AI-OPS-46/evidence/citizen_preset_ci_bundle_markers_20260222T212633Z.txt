@@ -1,0 +1,28 @@
+scripts/report_citizen_preset_contract_bundle.js:15:    "  node scripts/report_citizen_preset_contract_bundle.js [options]",
+justfile:738:  node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js
+justfile:755:citizen-report-preset-contract-bundle:
+justfile:758:  node scripts/report_citizen_preset_contract_bundle.js --fixture "{{citizen_preset_contract_fixture}}" --source "{{citizen_preset_parity_source}}" --published "{{citizen_preset_parity_published}}" --strict ${out_arg}
+.github/workflows/etl-tracker-gate.yml:10:  citizen-preset-contract:
+.github/workflows/etl-tracker-gate.yml:25:          node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js
+.github/workflows/etl-tracker-gate.yml:52:          node scripts/report_citizen_preset_contract_bundle.js \
+.github/workflows/etl-tracker-gate.yml:63:          name: citizen-preset-contract
+.github/workflows/etl-tracker-gate.yml:71:          name: citizen-preset-codec-parity
+.github/workflows/etl-tracker-gate.yml:79:          name: citizen-preset-codec-sync
+.github/workflows/etl-tracker-gate.yml:87:          name: citizen-preset-contract-bundle
+12:    "sections_fail": 0,
+13:    "failed_sections": [],
+16:    "total_fail": 0,
+17:    "failed_ids": []
+34:        "total_fail": 0,
+35:        "failed_ids": []
+46:        "total_fail": 0,
+47:        "failed_ids": []
+58:        "total_fail": 0,
+59:        "failed_ids": []
+79:        "total_fail": 0,
+80:        "failed_ids": []
+165:        "total_fail": 0,
+166:        "failed_ids": []
+192:        "total_fail": 0,
+193:        "failed_ids": []
+201:          "would_change": false,

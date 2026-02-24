@@ -1,0 +1,20 @@
+TAP version 13
+# Subtest: citizen UI loads optional concern-pack quality artifact
+ok 1 - citizen UI loads optional concern-pack quality artifact
+  ---
+  duration_ms: 2.071958
+  ...
+# Subtest: citizen UI exposes weak-pack markers in tags and hints
+ok 2 - citizen UI exposes weak-pack markers in tags and hints
+  ---
+  duration_ms: 0.463583
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.214709

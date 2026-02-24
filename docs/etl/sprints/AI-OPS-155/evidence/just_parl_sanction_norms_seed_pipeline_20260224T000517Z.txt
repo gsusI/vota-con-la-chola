@@ -1,0 +1,114 @@
+just parl-validate-sanction-norms-seed
+PYTHONPATH=. python3 scripts/validate_sanction_norms_seed.py --seed etl/data/seeds/sanction_norms_seed_v1.json --out docs/etl/sprints/AI-OPS-155/evidence/sanction_norms_seed_validate_20260224T000517Z.json
+{
+  "generated_at": "2026-02-24T00:05:18+00:00",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "valid": true,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "norms_total": 8,
+  "norms_valid": 8,
+  "fragments_total": 8,
+  "responsibility_hints_total": 15,
+  "lineage_hints_total": 8,
+  "duplicate_norm_id_count": 0,
+  "duplicate_boe_id_count": 0,
+  "schema_version": "sanction_norms_seed_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-norms-seed
+PYTHONPATH=. python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-24 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-155/evidence/sanction_norms_seed_import_20260224T000517Z.json
+{
+  "generated_at": "2026-02-24T00:05:18+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibility_hints_total": 15,
+    "lineage_hints_total": 8
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-24",
+    "source_id_used": "boe_api_legal",
+    "seed_schema_version": "sanction_norms_seed_v1",
+    "counts": {
+      "norms_inserted": 0,
+      "norms_updated": 8,
+      "catalog_inserted": 0,
+      "catalog_updated": 8,
+      "fragments_inserted": 0,
+      "fragments_updated": 8,
+      "fragment_links_inserted": 0,
+      "fragment_links_updated": 8,
+      "responsibilities_inserted": 0,
+      "responsibilities_updated": 15,
+      "lineage_related_norms_inserted": 4,
+      "lineage_edges_inserted": 8,
+      "lineage_edges_updated": 0
+    },
+    "totals": {
+      "legal_norms_total": 12,
+      "legal_norm_fragments_total": 8,
+      "legal_fragment_responsibilities_total": 15,
+      "sanction_norm_catalog_total": 8,
+      "sanction_norm_fragment_links_total": 8,
+      "legal_norm_lineage_edges_total": 8
+    }
+  }
+}
+just parl-report-sanction-norms-seed-status
+PYTHONPATH=. python3 scripts/report_sanction_norms_seed_status.py --db etl/data/staging/politicos-es.db --sample-limit 20 --out docs/etl/sprints/AI-OPS-155/evidence/sanction_norms_seed_status_20260224T000517Z.json
+{
+  "generated_at": "2026-02-24T00:05:18+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibilities_total": 15,
+    "responsibilities_with_primary_evidence_total": 15,
+    "responsibilities_missing_primary_evidence": 0,
+    "lineage_edges_total": 8,
+    "lineage_edges_with_primary_evidence_total": 8,
+    "lineage_edges_missing_primary_evidence": 0,
+    "fragments_with_responsibility": 8,
+    "fragments_with_responsibility_primary_evidence": 8,
+    "fragments_missing_primary_evidence": 0,
+    "fragments_missing_responsibility": 0,
+    "norms_with_lineage": 8,
+    "norms_missing_lineage": 0
+  },
+  "coverage": {
+    "responsibility_coverage_pct": 1.0,
+    "responsibility_primary_evidence_coverage_pct": 1.0,
+    "lineage_coverage_pct": 1.0,
+    "lineage_primary_evidence_coverage_pct": 1.0
+  },
+  "by_role": {
+    "approve": 6,
+    "enforce": 4,
+    "propose": 3,
+    "delegate": 2
+  },
+  "by_relation_type": {
+    "deroga": 4,
+    "desarrolla": 4
+  },
+  "checks": {
+    "seed_loaded": true,
+    "fragment_catalog_loaded": true,
+    "responsibility_chain_started": true,
+    "all_fragments_with_responsibility": true,
+    "primary_evidence_chain_started": true,
+    "all_responsibilities_with_primary_evidence": true,
+    "lineage_chain_started": true,
+    "all_norms_with_lineage": true,
+    "lineage_primary_evidence_chain_started": true,
+    "all_lineage_edges_with_primary_evidence": true
+  },
+  "missing_responsibility_sample": [],
+  "missing_lineage_sample": []
+}

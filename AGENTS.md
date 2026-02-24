@@ -23,6 +23,27 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - decisions, constraints, commands, DoD
   - avoid long narrative that does not change implementation choices
 
+### Privacy & Publication Hygiene (Mandatory)
+- Never commit workstation-identifying strings in artifacts/docs:
+  - absolute local paths (`/Users/...`, `file:///...`, `/home/...`)
+  - personal emails/usernames in local path segments
+  - browser profile state dumps, local cookie jars, or local session files
+- For sprint evidence under `docs/etl/sprints/**`, prefer repo-relative paths (for example `docs/etl/sprints/...`) over absolute filesystem paths.
+- Treat credentials/secrets as hard-blockers for commit/publish:
+  - API tokens, Bearer headers, cookies, `.env` values, private keys
+  - if they appear in logs/evidence, redact before commit
+- Public artifact gate is mandatory before publish:
+  - run `just privacy-check-public-artifacts`
+  - this check must pass before `just explorer-gh-pages-build`, `just etl-publish-hf-dry-run`, and `just etl-publish-hf`
+- If a leak is detected in public outputs (`docs/gh-pages` or `etl/data/published`):
+  - stop the publish
+  - fix the generator/sanitizer (not just the generated file)
+  - regenerate artifacts and re-run the privacy gate
+  - record the incident + remediation in tracker/sprint evidence when applicable
+- If sensitive data was already committed, do not ignore it:
+  - open a follow-up to scrub affected files
+  - if needed, plan history rewrite (`git filter-repo`) with explicit maintainer approval
+
 ### Structuring Complexity
 - Build in thin vertical slices, not big-bang layers.
 - Keep boundaries explicit:
@@ -114,6 +135,7 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 ### Source Of Truth
 - SQLite schema lives in `etl/load/sqlite_schema.sql`.
 - ETL entrypoint is `scripts/ingestar_politicos_es.py`.
+- Parlamentario ETL entrypoint is `scripts/ingestar_parlamentario_es.py`.
 - UI server is `scripts/graph_ui_server.py`.
 - Explorer UI is `ui/graph/explorer.html`.
 - Citizen UI is `ui/citizen/index.html` (static GH Pages).
@@ -151,6 +173,16 @@ Do not run full-table backfills inside the normal `ingest` command.
   - or `just etl-backfill-normalized`
 
 This keeps the regular ETL runs quick.
+
+Parlamentario evidence backfills (votes -> "what was voted"):
+- Backfill missing initiative links (historical rows):
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-initiative-links --db <path> --source-ids congreso_iniciativas`
+- Download the actual BOCG/Diario de Sesiones PDFs/HTML for initiatives linked to votes:
+  - `python3 scripts/ingestar_parlamentario_es.py backfill-initiative-documents --db <path> --limit-initiatives 200 --max-docs-per-initiative 3`
+- Storage model:
+  - URLs live in `parl_initiatives.links_bocg_json` / `parl_initiatives.links_ds_json`
+  - Downloaded bytes + metadata live in `text_documents` with `source_id='parl_initiative_docs'`
+  - Initiative->doc mapping lives in `parl_initiative_documents`
 
 ### Migrations On Existing DBs
 Old DBs may be missing columns that new schema indexes reference.

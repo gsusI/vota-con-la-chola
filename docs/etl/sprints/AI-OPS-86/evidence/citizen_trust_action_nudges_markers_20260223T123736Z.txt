@@ -1,0 +1,22 @@
+909:      const TRUST_ACTION_NUDGE_TELEMETRY_VERSION = "v1";
+910:      const TRUST_ACTION_NUDGE_STORAGE_KEY = "vclc_trust_action_nudge_events_v1";
+911:      const TRUST_ACTION_NUDGE_MAX_EVENTS = 1200;
+912:      const TRUST_ACTION_NUDGE_SESSION_ID = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+1219:          const raw = localStorage.getItem(TRUST_ACTION_NUDGE_STORAGE_KEY);
+1231:          localStorage.setItem(TRUST_ACTION_NUDGE_STORAGE_KEY, JSON.stringify(trustActionNudgeTelemetry.events));
+1235:      function recordTrustActionNudgeEvent(eventType, payload) {
+1240:          telemetry_version: TRUST_ACTION_NUDGE_TELEMETRY_VERSION,
+1243:          session_id: String(p.session_id || TRUST_ACTION_NUDGE_SESSION_ID),
+1255:        if (trustActionNudgeTelemetry.events.length > TRUST_ACTION_NUDGE_MAX_EVENTS) {
+1256:          trustActionNudgeTelemetry.events = trustActionNudgeTelemetry.events.slice(-TRUST_ACTION_NUDGE_MAX_EVENTS);
+1278:          telemetry_version: TRUST_ACTION_NUDGE_TELEMETRY_VERSION,
+1318:      if (trustActionNudgeTelemetry.events.length > TRUST_ACTION_NUDGE_MAX_EVENTS) {
+1319:        trustActionNudgeTelemetry.events = trustActionNudgeTelemetry.events.slice(-TRUST_ACTION_NUDGE_MAX_EVENTS);
+2915:        const sid = TRUST_ACTION_NUDGE_SESSION_ID;
+2918:          recordTrustActionNudgeEvent("trust_action_nudge_shown", {
+2933:          `<div class="rowMeta" data-trust-action-nudge="1">` +
+2934:          `<span class="tag">trust_next_evidence</span>` +
+2938:          `<a class="smallLink" data-trust-action-nudge-link="1" data-nudge-id="${esc(String(nudgeId))}" data-source-view="${esc(
+2952:        for (const link of el.querySelectorAll("[data-trust-action-nudge-link]")) {
+2954:            recordTrustActionNudgeEvent("trust_action_nudge_clicked", {
+2963:              session_id: TRUST_ACTION_NUDGE_SESSION_ID,

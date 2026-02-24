@@ -1,0 +1,71 @@
+sqlite_arg="--skip-sqlite-gz"; sensitive_arg=""; quality_arg=""; liberty_atlas_arg=""; if [ "0" = "1" ]; then sqlite_arg=""; fi; if [ "0" = "1" ]; then sensitive_arg="--allow-sensitive-parquet"; fi; if [ "1" = "1" ]; then quality_arg="--require-quality-report"; fi; if [ "1" = "1" ]; then liberty_atlas_arg="--require-liberty-atlas-release-latest"; fi; docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db etl/data/staging/politicos-es.db --snapshot-date 2026-02-23 --dataset-repo vota-con-la-chola-data --parquet-compression zstd --parquet-batch-rows 50000 --parquet-tables '' --parquet-exclude-tables 'raw_fetches,run_fetches,source_records,lost_and_found' --dry-run ${sqlite_arg} ${sensitive_arg} ${quality_arg} ${liberty_atlas_arg}"
+ Image vota-con-la-chola-etl:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.97MB 1.9s done
+#6 DONE 1.9s
+
+#7 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#7 CACHED
+
+#8 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [3/6] WORKDIR /workspace
+#9 CACHED
+
+#10 [4/6] COPY requirements.txt /tmp/requirements.txt
+#10 CACHED
+
+#11 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#11 CACHED
+
+#12 [6/6] COPY . /workspace
+#12 DONE 3.2s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 11.0s done
+#13 exporting manifest sha256:7c9ce2f23d44892d76a9df26a1f5d90a84376af00b067a491ee747ecdd970980 done
+#13 exporting config sha256:657e37d5304e73e631d0b2a5fd12dc449010654ffcf5ff0e7a80b0e688c32dd1 done
+#13 exporting attestation manifest sha256:91eb66625ee01393a72bcbb1ed0165b5bcfc82b18cfceda554bd23cf2dd8ddf2 0.0s done
+#13 exporting manifest list sha256:7ea563448daeec236fb529cedc057ba4c1bbddff409fb2db44a46e3c31374be1 0.0s done
+#13 naming to docker.io/library/vota-con-la-chola-etl:local done
+#13 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#13 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.8s done
+#13 DONE 13.9s
+
+#14 resolving provenance for metadata file
+#14 DONE 0.0s
+ Image vota-con-la-chola-etl:local Built 
+ Container vota-con-la-chola-etl-run-c32722f131c8 Creating 
+ Container vota-con-la-chola-etl-run-c32722f131c8 Created 
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot bundle: snapshots/2026-02-23
+Published files: 11
+Ingestion runs rows: 459
+Source records rows (by source): 35
+Source legal files: 35
+Parquet tables: 68
+Parquet files: 126
+Parquet excluded tables: lost_and_found, raw_fetches, run_fetches, source_records
+Dry run: no se subió nada a Hugging Face
+Bundle local: /tmp/hf_snapshot_publish_52bq3m17

@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-02-23T13:21:56+00:00",
+  "status": "ok",
+  "paths": {
+    "tokens": "ui/citizen/tailwind_md3.tokens.json",
+    "generated_css": "ui/citizen/tailwind_md3.generated.css",
+    "ui_html": "ui/citizen/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 6533,
+    "token_colors_count": 15,
+    "token_spacing_count": 6,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": [],
+    "md3_card_markers": 10,
+    "md3_chip_markers": 16,
+    "md3_button_markers": 28,
+    "md3_tab_markers": 9
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000,
+    "min_md3_card_markers": 6,
+    "min_md3_chip_markers": 8,
+    "min_md3_button_markers": 20,
+    "min_md3_tab_markers": 6
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": true,
+    "md3_card_markers_meet_minimum": true,
+    "md3_chip_markers_meet_minimum": true,
+    "md3_button_markers_meet_minimum": true,
+    "md3_tab_markers_meet_minimum": true
+  },
+  "failure_reasons": []
+}

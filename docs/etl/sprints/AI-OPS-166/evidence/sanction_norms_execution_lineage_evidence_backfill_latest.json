@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-02-24T01:49:04+00:00",
+  "roles": [
+    "delegate"
+  ],
+  "limit": 0,
+  "counts": {
+    "responsibilities_scanned_total": 2,
+    "observations_scanned_total": 7,
+    "responsibilities_with_lineage_match_total": 2,
+    "responsibilities_without_lineage_match_total": 0,
+    "observation_links_total": 4,
+    "source_record_pk_resolved_total": 4,
+    "source_record_pk_missing_total": 0,
+    "evidence_inserted": 4,
+    "evidence_updated": 0
+  },
+  "by_role": {
+    "delegate": 4
+  },
+  "by_delegate_norm": {
+    "es:boe-a-1994-8985": 2,
+    "es:boe-a-2004-18398": 2
+  },
+  "by_observed_norm": {
+    "es:boe-a-2015-11722": 2,
+    "es:boe-a-2003-23514": 1,
+    "es:boe-a-2003-23186": 1
+  },
+  "by_match_method": {
+    "shared_related_norm": 3,
+    "delegate_to_observed_direct": 1
+  },
+  "samples": [
+    {
+      "responsibility_id": 5,
+      "role": "delegate",
+      "delegate_norm_id": "es:boe-a-1994-8985",
+      "observed_norm_id": "es:boe-a-2015-11722",
+      "anchor_norm_id": "es:boe-a-1990-6396",
+      "match_method": "shared_related_norm",
+      "observation_id": 1,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "responsibility_id": 5,
+      "role": "delegate",
+      "delegate_norm_id": "es:boe-a-1994-8985",
+      "observed_norm_id": "es:boe-a-2015-11722",
+      "anchor_norm_id": "es:boe-a-1990-6396",
+      "match_method": "shared_related_norm",
+      "observation_id": 2,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "responsibility_id": 8,
+      "role": "delegate",
+      "delegate_norm_id": "es:boe-a-2004-18398",
+      "observed_norm_id": "es:boe-a-2003-23514",
+      "anchor_norm_id": "es:boe-a-2003-23514",
+      "match_method": "delegate_to_observed_direct",
+      "observation_id": 3,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "responsibility_id": 8,
+      "role": "delegate",
+      "delegate_norm_id": "es:boe-a-2004-18398",
+      "observed_norm_id": "es:boe-a-2003-23186",
+      "anchor_norm_id": "es:boe-a-2003-23514",
+      "match_method": "shared_related_norm",
+      "observation_id": 4,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23186"
+    }
+  ]
+}

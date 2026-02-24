@@ -1,0 +1,37 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-90/evidence/citizen_mobile_observability_heartbeat_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-90/evidence/citizen_mobile_observability_heartbeat_latest.json"; fi; python3 scripts/report_citizen_mobile_observability_heartbeat.py --observability-json "docs/etl/sprints/AI-OPS-83/evidence/citizen_mobile_observability_latest.json" --heartbeat-jsonl "docs/etl/runs/citizen_mobile_observability_heartbeat.jsonl" --strict ${out_arg}
+{
+  "generated_at": "2026-02-23T13:14:07+00:00",
+  "strict": true,
+  "input_path": "docs/etl/sprints/AI-OPS-83/evidence/citizen_mobile_observability_latest.json",
+  "heartbeat_path": "docs/etl/runs/citizen_mobile_observability_heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:14:07+00:00",
+    "heartbeat_id": "2026-02-23T13:14:07+00:00|ok|30|423.000000|450.000000|1|",
+    "observability_path": "docs/etl/sprints/AI-OPS-83/evidence/citizen_mobile_observability_latest.json",
+    "observability_generated_at": "2026-02-23T13:14:07+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 147.5,
+    "input_to_render_p90_ms": 423.0,
+    "input_to_render_p95_ms": 466.5,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 27.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}

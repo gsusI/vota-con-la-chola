@@ -1,0 +1,158 @@
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.005s
+
+OK
+{
+  "generated_at": "2026-02-23T10:29:51+00:00",
+  "snapshot_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmps7qxq5v4/citizen.json",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [],
+  "telemetry": {
+    "sessions_total": null,
+    "sessions_with_first_answer": null,
+    "sessions_with_drilldown_click": null,
+    "events_total": null,
+    "parse_errors": null
+  },
+  "metrics": {
+    "unknown_rate": 0.2,
+    "unknown_rate_source": "meta.quality.unknown_pct",
+    "time_to_first_answer_seconds": null,
+    "drilldown_click_rate": null
+  },
+  "thresholds": {
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2
+  },
+  "checks": {
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": null,
+    "drilldown_click_rate_within_threshold": null,
+    "telemetry_available": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "drilldown_click_rate",
+    "time_to_first_answer_seconds"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T10:29:51+00:00",
+  "snapshot_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmps7qxq5v4/citizen.json",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [],
+  "telemetry": {
+    "sessions_total": null,
+    "sessions_with_first_answer": null,
+    "sessions_with_drilldown_click": null,
+    "events_total": null,
+    "parse_errors": null
+  },
+  "metrics": {
+    "unknown_rate": 0.2,
+    "unknown_rate_source": "meta.quality.unknown_pct",
+    "time_to_first_answer_seconds": null,
+    "drilldown_click_rate": null
+  },
+  "thresholds": {
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2
+  },
+  "checks": {
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": null,
+    "drilldown_click_rate_within_threshold": null,
+    "telemetry_available": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "drilldown_click_rate",
+    "time_to_first_answer_seconds"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T10:29:51+00:00",
+  "snapshot_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpfqlexr9n/citizen.json",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpfqlexr9n/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sessions_total": 2,
+    "sessions_with_first_answer": 2,
+    "sessions_with_drilldown_click": 1,
+    "events_total": 5,
+    "parse_errors": 0
+  },
+  "metrics": {
+    "unknown_rate": 0.25,
+    "unknown_rate_source": "meta.quality.unknown_pct",
+    "time_to_first_answer_seconds": 30.0,
+    "drilldown_click_rate": 0.5
+  },
+  "thresholds": {
+    "max_unknown_rate": 0.3,
+    "max_time_to_first_answer_seconds": 40.0,
+    "min_drilldown_click_rate": 0.5
+  },
+  "checks": {
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": true,
+    "drilldown_click_rate_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true
+  },
+  "missing_metrics": [],
+  "failure_reasons": [],
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T10:29:51+00:00",
+  "snapshot_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpp1vivxeb/citizen.json",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [],
+  "telemetry": {
+    "sessions_total": null,
+    "sessions_with_first_answer": null,
+    "sessions_with_drilldown_click": null,
+    "events_total": null,
+    "parse_errors": null
+  },
+  "metrics": {
+    "unknown_rate": 0.666667,
+    "unknown_rate_source": "party_topic_positions.stance",
+    "time_to_first_answer_seconds": null,
+    "drilldown_click_rate": null
+  },
+  "thresholds": {
+    "max_unknown_rate": 0.5,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2
+  },
+  "checks": {
+    "unknown_rate_within_threshold": false,
+    "time_to_first_answer_within_threshold": null,
+    "drilldown_click_rate_within_threshold": null,
+    "telemetry_available": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "drilldown_click_rate",
+    "time_to_first_answer_seconds"
+  ],
+  "failure_reasons": [
+    "unknown_rate_above_threshold"
+  ],
+  "status": "failed"
+}

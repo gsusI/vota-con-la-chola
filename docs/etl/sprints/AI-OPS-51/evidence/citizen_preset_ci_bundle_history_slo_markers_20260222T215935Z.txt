@@ -1,0 +1,35 @@
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:9:  const script = path.join(__dirname, "..", "scripts", "report_citizen_preset_contract_bundle_history_slo.js");
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:64:  assert.equal(out.previous_window.available, false);
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:65:  assert.equal(out.deltas.regressions_in_window_delta, null);
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:66:  assert.equal(out.risk_level, "green");
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:113:  assert.equal(out.previous_window.available, true);
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:114:  assert.equal(out.previous_window.regressions_in_window, 0);
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:116:  assert.equal(out.deltas.regressions_in_window_delta, 1);
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:119:  assert.equal(out.risk_level, "amber");
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:121:  assert.ok(out.risk_reasons.includes("regressions_worsened_vs_previous_window"));
+tests/test_report_citizen_preset_contract_bundle_history_slo.js:167:  assert.equal(out.risk_level, "red");
+docs/etl/README.md:42:- Reporte SLO de histórico (ventana + thresholds): `just citizen-report-preset-contract-bundle-history-slo` (JSON con `regressions_in_window`, `regression_rate_pct`, `green_streak_latest`, `latest_entry_clean`, `previous_window`, `deltas`, `risk_level`, `risk_reasons`, `checks`, `strict_fail_reasons`; configurable con `CITIZEN_PRESET_BUNDLE_HISTORY_SLO_*`).
+docs/etl/README.md:43:- CI del contrato preset: `.github/workflows/etl-tracker-gate.yml` incluye job `citizen-preset-contract` (tests + reportes estrictos + artifacts `citizen-preset-contract`, `citizen-preset-codec-parity`, `citizen-preset-codec-sync`, `citizen-preset-contract-bundle`, `citizen-preset-contract-bundle-history`, `citizen-preset-contract-bundle-history-window`, `citizen-preset-contract-bundle-history-compaction` y `citizen-preset-contract-bundle-history-slo`).
+docs/etl/README.md:270:just citizen-report-preset-contract-bundle-history-slo
+.github/workflows/etl-tracker-gate.yml:25:          node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js
+.github/workflows/etl-tracker-gate.yml:90:          node scripts/report_citizen_preset_contract_bundle_history_slo.js \
+.github/workflows/etl-tracker-gate.yml:163:          name: citizen-preset-contract-bundle-history-slo
+scripts/report_citizen_preset_contract_bundle_history_slo.js:14:    "  node scripts/report_citizen_preset_contract_bundle_history_slo.js [options]",
+scripts/report_citizen_preset_contract_bundle_history_slo.js:307:  const deltas = safeObj(report.deltas);
+scripts/report_citizen_preset_contract_bundle_history_slo.js:327:    if (toFloat(deltas.regressions_in_window_delta) > 0) {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:328:      reasons.push("regressions_worsened_vs_previous_window");
+scripts/report_citizen_preset_contract_bundle_history_slo.js:330:    if (toFloat(deltas.regression_rate_pct_delta) > 0) {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:331:      reasons.push("regression_rate_worsened_vs_previous_window");
+scripts/report_citizen_preset_contract_bundle_history_slo.js:333:    if (toFloat(deltas.green_streak_latest_delta) < 0) {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:334:      reasons.push("green_streak_worsened_vs_previous_window");
+scripts/report_citizen_preset_contract_bundle_history_slo.js:351:    risk_level: risk,
+scripts/report_citizen_preset_contract_bundle_history_slo.js:392:    previous_window: {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:404:    deltas: {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:415:    risk_level: "red",
+scripts/report_citizen_preset_contract_bundle_history_slo.js:442:    report.previous_window = {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:455:    report.deltas = {
+scripts/report_citizen_preset_contract_bundle_history_slo.js:483:    report.risk_level = risk.risk_level;
+scripts/report_citizen_preset_contract_bundle_history_slo.js:487:    report.risk_level = "red";
+justfile:754:  node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js
+justfile:794:citizen-report-preset-contract-bundle-history-slo:
+justfile:797:  node scripts/report_citizen_preset_contract_bundle_history_slo.js --history-jsonl "{{citizen_preset_bundle_history_path}}" --last "{{citizen_preset_bundle_history_slo_window}}" --max-regressions "{{citizen_preset_bundle_history_slo_max_regressions}}" --max-regression-rate-pct "{{citizen_preset_bundle_history_slo_max_regression_rate_pct}}" --min-green-streak "{{citizen_preset_bundle_history_slo_min_green_streak}}" --strict ${out_arg}

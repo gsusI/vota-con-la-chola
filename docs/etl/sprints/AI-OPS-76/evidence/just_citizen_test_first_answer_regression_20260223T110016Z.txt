@@ -1,0 +1,36 @@
+node --test tests/test_citizen_first_answer_accelerator.js tests/test_citizen_first_answer_ui_contract.js
+TAP version 13
+# Subtest: first-answer accelerator ranks concerns/topics and preserves evidence links
+ok 1 - first-answer accelerator ranks concerns/topics and preserves evidence links
+  ---
+  duration_ms: 1.098708
+  ...
+# Subtest: first-answer accelerator uses deterministic fallback when concern ranking is empty
+ok 2 - first-answer accelerator uses deterministic fallback when concern ranking is empty
+  ---
+  duration_ms: 0.139042
+  ...
+# Subtest: first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+ok 3 - first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+  ---
+  duration_ms: 0.14275
+  ...
+# Subtest: citizen UI loads first-answer accelerator module
+ok 4 - citizen UI loads first-answer accelerator module
+  ---
+  duration_ms: 0.962875
+  ...
+# Subtest: citizen onboarding exposes first-answer CTA markers
+ok 5 - citizen onboarding exposes first-answer CTA markers
+  ---
+  duration_ms: 0.419125
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 47.656

@@ -1,0 +1,7 @@
+55:initdoc_actionable_digest_out := env_var_or_default("INITDOC_ACTIONABLE_DIGEST_OUT", "docs/etl/sprints/AI-OPS-64/evidence/initdoc_actionable_tail_digest_latest.json")
+56:initdoc_actionable_digest_max_missing := env_var_or_default("INITDOC_ACTIONABLE_DIGEST_MAX_MISSING", "0")
+57:initdoc_actionable_digest_max_missing_pct := env_var_or_default("INITDOC_ACTIONABLE_DIGEST_MAX_MISSING_PCT", "0")
+425:parl-report-initdoc-actionable-tail-digest:
+427:  python3 scripts/report_initdoc_actionable_tail_digest.py --contract-json {{initdoc_actionable_contract_out}} --max-actionable-missing {{initdoc_actionable_digest_max_missing}} --max-actionable-missing-pct {{initdoc_actionable_digest_max_missing_pct}} --out {{initdoc_actionable_digest_out}}
+429:parl-check-initdoc-actionable-tail-digest:
+431:  python3 scripts/report_initdoc_actionable_tail_digest.py --contract-json {{initdoc_actionable_contract_out}} --max-actionable-missing {{initdoc_actionable_digest_max_missing}} --max-actionable-missing-pct {{initdoc_actionable_digest_max_missing_pct}} --strict --out {{initdoc_actionable_digest_out}}

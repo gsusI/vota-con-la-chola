@@ -1,0 +1,41 @@
+# AI-OPS-38 markers (postroute)
+
+## citizen ui includes preset codec
+789:    <script src="./preset_codec.js"></script>
+1023:      function presetCodec() {
+1036:      function encodePresetPayload(opts) {
+1048:      function readPresetFromHash() {
+
+## preset codec module exports
+7:  root.CitizenPresetCodec = factory();
+58:  function encodePresetPayload(opts, cfg) {
+73:  function decodePresetPayload(payload, cfg) {
+91:  function readPresetFromHash(hash, cfg) {
+100:      const preset = decodePresetPayload(payload, cfg);
+108:  function buildAlignmentPresetShareUrl(opts, href, origin, cfg) {
+111:    const payload = encodePresetPayload(opts, cfg);
+120:    encodePresetPayload,
+121:    decodePresetPayload,
+122:    readPresetFromHash,
+123:    buildAlignmentPresetShareUrl,
+
+## graph ui server route + redirect
+36:UI_CITIZEN_PRESET_CODEC = BASE_DIR / "ui" / "citizen" / "preset_codec.js"
+5321:            if path == "/citizen":
+5328:            if path in ("/citizen/", "/citizen/index.html"):
+5335:            if path == "/citizen/preset_codec.js":
+5336:                if not UI_CITIZEN_PRESET_CODEC.exists():
+5340:                    UI_CITIZEN_PRESET_CODEC.read_bytes(),
+
+## justfile hook
+672:  cp ui/citizen/preset_codec.js {{gh_pages_dir}}/citizen/preset_codec.js
+728:citizen-test-preset-codec:
+729:  node --test tests/test_citizen_preset_codec.js
+
+## node tests
+6:test("preset codec encodes and decodes with normalization", () => {
+28:test("readPresetFromHash rejects unknown version", () => {
+30:  const got = codec.readPresetFromHash(hash, { knownConcernIds: ["vivienda"] });
+35:test("buildAlignmentPresetShareUrl strips query and emits #preset", () => {
+36:  const url = codec.buildAlignmentPresetShareUrl(
+51:  const decoded = codec.readPresetFromHash(parsed.hash, { knownConcernIds: ["vivienda"], maxConcerns: 6 });

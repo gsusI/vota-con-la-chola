@@ -1,0 +1,79 @@
+{
+  "generated_at_utc": "20260223T112805Z",
+  "status": "ok",
+  "sprint": "AI-OPS-79",
+  "objective": "Evidence trust panel in /citizen with method tag, source age freshness, trust level, and drill-down links",
+  "checks": {
+    "node_contract_tests": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/node_test_citizen_evidence_trust_panel_20260223T112805Z.txt"
+    },
+    "just_test_lane": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/just_citizen_test_evidence_trust_panel_20260223T112805Z.txt"
+    },
+    "graph_server_asset_routes": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/python_unittest_graph_ui_server_citizen_assets_20260223T112805Z.txt"
+    },
+    "inline_script_syntax": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/node_check_citizen_inline_script_20260223T112805Z.txt"
+    },
+    "module_syntax": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/node_check_evidence_trust_panel_20260223T112805Z.txt"
+    },
+    "python_compile": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/py_compile_graph_ui_server_and_mobile_perf_20260223T112805Z.txt"
+    },
+    "preset_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/just_citizen_test_preset_regression_20260223T112805Z.txt"
+    },
+    "mobile_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/just_citizen_test_mobile_performance_regression_20260223T112805Z.txt"
+    },
+    "first_answer_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/just_citizen_test_first_answer_regression_20260223T112805Z.txt"
+    },
+    "unknown_explainability_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/just_citizen_test_unknown_explainability_regression_20260223T112805Z.txt"
+    },
+    "concern_pack_quality_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-79/evidence/just_citizen_test_concern_pack_quality_regression_20260223T112805Z.txt"
+    }
+  },
+  "contract_surface": {
+    "panel_version": "evidence_trust_panel_v1",
+    "required_markers": [
+      "data-evidence-trust-panel",
+      "data-evidence-trust-freshness",
+      "fuente_<tier>",
+      "edad_fuente=<days>",
+      "metodo=<label>"
+    ],
+    "freshness_tiers": [
+      "fresh",
+      "aging",
+      "stale",
+      "unknown"
+    ],
+    "trust_levels": [
+      "high",
+      "medium",
+      "low"
+    ],
+    "test_subtests_total": 4,
+    "test_subtests_passed": 4
+  },
+  "artifacts": {
+    "markers": "docs/etl/sprints/AI-OPS-79/evidence/citizen_evidence_trust_panel_contract_markers_20260223T112805Z.txt",
+    "summary_json": "docs/etl/sprints/AI-OPS-79/evidence/citizen_evidence_trust_panel_contract_summary_20260223T112805Z.json"
+  }
+}

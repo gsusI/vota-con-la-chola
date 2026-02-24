@@ -1,0 +1,13 @@
+tests/fixtures/citizen_preset_hash_matrix.json:2:  "schema_version": "v2",
+tests/fixtures/citizen_preset_hash_matrix.json:8:  "hash_cases": [
+tests/fixtures/citizen_preset_hash_matrix.json:45:      "id": "hash_valid_repeated_keys_and_plus_pack",
+tests/fixtures/citizen_preset_hash_matrix.json:110:  "share_cases": [
+tests/fixtures/citizen_preset_hash_matrix.json:139:      "id": "share_normalizes_pack_and_dedupes_concerns",
+tests/test_citizen_preset_codec.js:52:  assert.equal(matrix.schema_version, "v2");
+tests/test_citizen_preset_codec.js:53:  assert.ok(Array.isArray(matrix.hash_cases));
+tests/test_citizen_preset_codec.js:54:  assert.ok(matrix.hash_cases.length > 0);
+tests/test_citizen_preset_codec.js:56:  for (const c of matrix.hash_cases) {
+tests/test_citizen_preset_codec.js:64:test("buildAlignmentPresetShareUrl follows fixture roundtrip contract", () => {
+tests/test_citizen_preset_codec.js:66:  assert.ok(Array.isArray(matrix.share_cases));
+tests/test_citizen_preset_codec.js:67:  assert.ok(matrix.share_cases.length > 0);
+tests/test_citizen_preset_codec.js:69:  for (const c of matrix.share_cases) {

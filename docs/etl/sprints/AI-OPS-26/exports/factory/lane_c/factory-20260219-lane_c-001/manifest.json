@@ -1,0 +1,12 @@
+{
+  "contract_version": "factory_contract_v2",
+  "batch_id": "factory-20260219-lane_c-001",
+  "lane_id": "lane_c",
+  "generated_at_utc": "2026-02-19T16:13:42+00:00",
+  "generator": "ai_ops_26_factory_generator_v2",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "source_sql": "SELECT\n  td.source_url AS doc_url,\n  td.source_record_pk,\n  td.content_type,\n  td.raw_path,\n  i.initiative_id,\n  CASE\n    WHEN td.content_type LIKE 'application/pdf%' THEN 'pdf'\n    WHEN td.content_type LIKE 'text/html%' THEN 'html'\n    ELSE 'other'\n  END AS doc_kind\nFROM text_documents td\nLEFT JOIN parl_initiative_documents pid ON pid.source_record_pk = td.source_record_pk\nLEFT JOIN parl_initiatives i ON i.initiative_id = pid.initiative_id\nWHERE td.source_id = 'parl_initiative_docs'\n  AND (td.text_excerpt IS NULL OR trim(td.text_excerpt) = '')\nORDER BY td.source_record_pk\nLIMIT 120;",
+  "source_sql_sha256": "977afead8d8dd8790d3227838791ba57be93064783fb21e93798e8f14948029d",
+  "tasks_row_count": 120,
+  "notes": "Missing text_excerpt docs batch."
+}

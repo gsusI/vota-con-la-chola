@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 1.437917
+  ...
+# Subtest: readPresetFromHash rejects unknown version
+ok 2 - readPresetFromHash rejects unknown version
+  ---
+  duration_ms: 0.143958
+  ...
+# Subtest: readPresetFromHash rejects malformed encoding
+ok 3 - readPresetFromHash rejects malformed encoding
+  ---
+  duration_ms: 0.101791
+  ...
+# Subtest: readPresetFromHash rejects hash with no supported fields
+ok 4 - readPresetFromHash rejects hash with no supported fields
+  ---
+  duration_ms: 0.175667
+  ...
+# Subtest: buildAlignmentPresetShareUrl strips query and emits \#preset
+ok 5 - buildAlignmentPresetShareUrl strips query and emits \#preset
+  ---
+  duration_ms: 0.259417
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 6 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.077208
+  ...
+# Subtest: readPresetFromHash accepts minimal valid preset
+ok 7 - readPresetFromHash accepts minimal valid preset
+  ---
+  duration_ms: 0.076583
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.651791

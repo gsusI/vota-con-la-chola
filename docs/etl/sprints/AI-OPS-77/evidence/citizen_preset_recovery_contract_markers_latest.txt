@@ -1,0 +1,43 @@
+# index.html markers
+1270:        presetCanonicalHash: "",
+1271:        presetRecoveredFrom: "",
+1272:        presetHashWasNormalized: false,
+1359:        for (const btn of el.querySelectorAll("[data-preset-clear-hash]")) {
+1367:            state.presetCanonicalHash = "";
+1368:            state.presetRecoveredFrom = "";
+1369:            state.presetHashWasNormalized = false;
+1373:        for (const btn of el.querySelectorAll("[data-preset-copy-canonical]")) {
+1375:            const canonical = String(state.presetCanonicalHash || "").trim();
+4018:        state.presetCanonicalHash = "";
+4019:        state.presetRecoveredFrom = "";
+4020:        state.presetHashWasNormalized = false;
+4034:          state.presetCanonicalHash = String(presetFromHash.canonical_hash || "");
+4035:          state.presetRecoveredFrom = String(presetFromHash.recovered_from || "");
+4038:          if (state.presetCanonicalHash && state.presetCanonicalHash !== String(location.hash || "")) {
+4040:            u.hash = state.presetCanonicalHash;
+4041:            history.replaceState({}, "", `${u.pathname}${u.search}${u.hash}`);
+4042:            state.presetHashWasNormalized = true;
+4167:          if (state.presetRecoveredFrom) {
+4170:              `<div style="margin-top:6px"><span class="tag">recovery=${esc(String(state.presetRecoveredFrom))}</span></div>`;
+4172:          if (state.presetHashWasNormalized && state.presetCanonicalHash) {
+4175:              `<div style="margin-top:8px"><button class="btn" type="button" data-preset-copy-canonical="1">Copiar enlace canonico</button></div>`;
+4190:              ? `<div style="margin-top:8px"><button class="btn" type="button" data-preset-clear-hash="1">Limpiar hash preset</button></div>`
+4301:          state.presetCanonicalHash = "";
+4302:          state.presetRecoveredFrom = "";
+4303:          state.presetHashWasNormalized = false;
+
+# preset_codec markers
+103:  function decodePayloadWithRecovery(raw) {
+119:  function parseVersionAndPayload(decoded) {
+142:    if (!/^#preset=/i.test(h)) return resultOk(null);
+147:      decoded = decodePayloadWithRecovery(raw);
+152:    const parsed = parseVersionAndPayload(decoded);
+179:    const canonicalHash = `#preset=${encodeURIComponent(`v1:${canonicalPayload}`)}`;
+181:    out.canonical_hash = canonicalHash;
+182:    out.recovered_from = String(parsed.recovery || "");
+190:    base.hash = `#preset=${encodeURIComponent(`v1:${payload}`)}`;
+
+# fixture markers
+2:  "schema_version": "v2",
+102:      "id": "hash_legacy_no_version_payload_recovery",
+118:      "id": "hash_valid_uppercase_prefix",

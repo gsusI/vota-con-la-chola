@@ -1,0 +1,232 @@
+{
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "db_source_path": "etl/data/staging/politicos-es.db",
+  "files": [
+    {
+      "bytes": 77173,
+      "path": "ingestion_runs.csv",
+      "sha256": "a12bcf60f1f58b0e36ef2aed7dcceb3d72f337937e02704dc7cafea40a91932b"
+    },
+    {
+      "bytes": 794,
+      "path": "source_records_by_source.csv",
+      "sha256": "baa56c1f244549f182bb57e951956e4956ba7f1319545c92267f22797585b2d6"
+    },
+    {
+      "bytes": 1042,
+      "path": "sources/asamblea_ceuta_diputados.json",
+      "sha256": "9e8b1f7b32f9062c384b8f526e455cdb4e27f075ab295833ade96d9ccb2a9dee"
+    },
+    {
+      "bytes": 982,
+      "path": "sources/asamblea_extremadura_diputados.json",
+      "sha256": "58fa825c688aa2ea0f779787299bcd6bb95200aedb021bd2e5e6144c40164a37"
+    },
+    {
+      "bytes": 919,
+      "path": "sources/asamblea_madrid_ocupaciones.json",
+      "sha256": "a1be18fafa47089f1f9bfbcd2f7d97d4f329e10d56458c49f78377143c9f3de1"
+    },
+    {
+      "bytes": 1078,
+      "path": "sources/asamblea_melilla_diputados.json",
+      "sha256": "30a0f4d7e3b51013940c4480e8399630c2f5da98a92a0553e299d1acfd888878"
+    },
+    {
+      "bytes": 968,
+      "path": "sources/asamblea_murcia_diputados.json",
+      "sha256": "81b5cdf2298365a50ea2d233e3693d8209aa5a62ec2cf16567310c76e11d7456"
+    },
+    {
+      "bytes": 1150,
+      "path": "sources/congreso_diputados.json",
+      "sha256": "e6924f32d9b3667a00144c6028f647dd2765c6096e51c2aea13505d18bc34913"
+    },
+    {
+      "bytes": 1159,
+      "path": "sources/congreso_iniciativas.json",
+      "sha256": "1438d4213548084d1ce00d92581d47eaeba83ab66b849f3211ae4828947e575b"
+    },
+    {
+      "bytes": 1168,
+      "path": "sources/congreso_intervenciones.json",
+      "sha256": "dafbd364a995bd2ef62ebd971351d57a7d11a15ed309b198d8e906088661f49d"
+    },
+    {
+      "bytes": 1164,
+      "path": "sources/congreso_votaciones.json",
+      "sha256": "4bc6224926aa2943855eada7a39f043e96ac8604e2559664c4e8e5b30122f1fb"
+    },
+    {
+      "bytes": 1242,
+      "path": "sources/cortes_aragon_diputados.json",
+      "sha256": "f86808c7b7e3b178d3ccb82dce03ea59d77190abbcf1987944d0a60467817755"
+    },
+    {
+      "bytes": 1047,
+      "path": "sources/cortes_clm_diputados.json",
+      "sha256": "7a67c9d637cada7a47305ace815030f1333d7f64a2c9cf180fdb9130ec4fc07b"
+    },
+    {
+      "bytes": 1017,
+      "path": "sources/cortes_cyl_procuradores.json",
+      "sha256": "ea8b50c8336733d8d670e67fad5fc406d4b4a5fe701fcfd39d54a01d11498632"
+    },
+    {
+      "bytes": 919,
+      "path": "sources/europarl_meps.json",
+      "sha256": "d030e2a6ba5491daf3439b9ee65d59f69e2e33d69870e7045969ae79ddf0172d"
+    },
+    {
+      "bytes": 1186,
+      "path": "sources/infoelectoral_procesos.json",
+      "sha256": "3eb3913b665c715130b12f011a36d98de322144bf1372e96fe8dd12d82448ccf"
+    },
+    {
+      "bytes": 986,
+      "path": "sources/jgpa_diputados.json",
+      "sha256": "706dbb0a8139aad9260fe64c5d4ff40c16e5d406056e0d081e8e4ff2c0dfec1a"
+    },
+    {
+      "bytes": 1151,
+      "path": "sources/municipal_concejales.json",
+      "sha256": "b4db1be7d18b185862542444c03db8558b84be61b5011dc05832222124d436b9"
+    },
+    {
+      "bytes": 971,
+      "path": "sources/parl_initiative_docs.json",
+      "sha256": "2d243516961328a9c51507bea590b879d969115112aa940bdcd4d9f234f997ef"
+    },
+    {
+      "bytes": 1032,
+      "path": "sources/parlament_balears_diputats.json",
+      "sha256": "4a2e533be611cd2f5878662c518ad42fdd3e337d27c78e8b7829c67fba6c16ef"
+    },
+    {
+      "bytes": 1074,
+      "path": "sources/parlament_catalunya_diputats.json",
+      "sha256": "7fd61055f4b70cd328c8d804ed902c5c25a1e390d5488aeecb5c8028094eca17"
+    },
+    {
+      "bytes": 1146,
+      "path": "sources/parlamento_andalucia_diputados.json",
+      "sha256": "4ef7cef4431a18332f187f465a224cdc767cbb5f44c3c8c597b603f32a3d97e1"
+    },
+    {
+      "bytes": 1021,
+      "path": "sources/parlamento_canarias_diputados.json",
+      "sha256": "bb121327f463cc5097b62516fb401d728741eea7e89e51d0dca685f7e4893a7e"
+    },
+    {
+      "bytes": 1110,
+      "path": "sources/parlamento_cantabria_diputados.json",
+      "sha256": "387411a9c07668f375e89667534c70c839522cb5edbde3733f37d4b200990793"
+    },
+    {
+      "bytes": 1047,
+      "path": "sources/parlamento_larioja_diputados.json",
+      "sha256": "d8793aebe383b8499e0a5e2153882045fccd5696afb36fbc9dbbcd36e87573c2"
+    },
+    {
+      "bytes": 1028,
+      "path": "sources/parlamento_vasco_parlamentarios.json",
+      "sha256": "bf80d2e2afb794553d9f21579368396d987bf46b768bff658b945c9d835d9023"
+    },
+    {
+      "bytes": 926,
+      "path": "sources/senado_iniciativas.json",
+      "sha256": "f9dcd5e09e8d096e5f5812e2d2dbb60427bd463edb647b4b6c4f446a2345eadb"
+    },
+    {
+      "bytes": 900,
+      "path": "sources/senado_senadores.json",
+      "sha256": "3bcbedda49f1c25e2f2b7db2512bcafc499c4070fac4c4ec9d20847e942e339f"
+    },
+    {
+      "bytes": 954,
+      "path": "sources/senado_votaciones.json",
+      "sha256": "33929682926d8fa7e63d50600898cb57b1d23534b5d4c1f05f0612236815eb28"
+    },
+    {
+      "bytes": 137853,
+      "path": "explorer_schema.json",
+      "sha256": "4cabafcab48c95bd1c90eebb5c703222a6fe8cb51526b7727c87b6c50d2c3db8"
+    },
+    {
+      "bytes": 10687,
+      "path": "published/infoelectoral-es-2026-02-12.json",
+      "sha256": "3c24d4fd4eb96155b68df1bb5e4ec5120b39e11c0d90ad2d1cc2a9800a99627a"
+    },
+    {
+      "bytes": 1921365,
+      "path": "published/poblacion_municipios_es.json",
+      "sha256": "138343d66b390842e06876f3855e76c84badc4dd8820fba9788c3748c8638e6b"
+    },
+    {
+      "bytes": 3320,
+      "path": "published/proximas-elecciones-espana.json",
+      "sha256": "91bca0ecfc6d39ba9d84b6559e56c14876d15fe588100a213c100a566320562b"
+    },
+    {
+      "bytes": 3323784,
+      "path": "published/representantes-es-2026-02-12.json",
+      "sha256": "e06ca7ca55eb6e83a105f44ad40f0bd5b41b805f5343751eceb853c26e0718cf"
+    },
+    {
+      "bytes": 17083809,
+      "path": "published/votaciones-es-2026-02-12.json.gz",
+      "sha256": "dfb3f7a4210078d66636ef0da65ace778123a3a51ba2bee526951358a83e4018"
+    },
+    {
+      "bytes": 3153,
+      "path": "published/votaciones-kpis-es-2026-02-12.json",
+      "sha256": "9f10e1c7bdd3e769cc7b411c7e6a511077f12f5467813acdecf314d5d7ed3f62"
+    },
+    {
+      "bytes": 1772,
+      "path": "published/votaciones-kpis-senado-2026-02-12.json",
+      "sha256": "a3ace3aa57263fd98ec2eff636fea5a4a2e5793c4124c048833e7a66414d85f3"
+    }
+  ],
+  "generated_at": "2026-02-22T18:43:13Z",
+  "parquet": {
+    "batch_rows": 50000,
+    "compression": "zstd",
+    "enabled": false,
+    "prefix": "parquet",
+    "sensitive_guard_enabled": true,
+    "tables": [],
+    "tables_excluded": [
+      "lost_and_found",
+      "raw_fetches",
+      "run_fetches",
+      "source_records"
+    ],
+    "tables_filter": []
+  },
+  "project": "vota-con-la-chola",
+  "quality_report": {
+    "events_total": 8357,
+    "file_name": "votaciones-kpis-es-2026-02-12.json",
+    "member_votes_with_person_id_pct": 0.980442765003908,
+    "vote_gate_passed": true
+  },
+  "snapshot_date": "2026-02-12",
+  "snapshot_dir": "snapshots/2026-02-12",
+  "stats": {
+    "ingestion_runs_rows": 276,
+    "parquet_files_count": 0,
+    "parquet_rows_total": 0,
+    "parquet_tables_count": 0,
+    "published_files_count": 7,
+    "source_legal_files_count": 27,
+    "source_legal_status_counts": {
+      "not_verified": 1,
+      "partially_verified": 1,
+      "pending_review": 16,
+      "verified": 9
+    },
+    "source_records_by_source_rows": 27,
+    "source_records_snapshot_total": 91924
+  }
+}

@@ -1,0 +1,106 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 59.53MB 2.0s done
+#6 DONE 2.0s
+
+#7 [4/6] COPY requirements.txt /tmp/requirements.txt
+#7 CACHED
+
+#8 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [3/6] WORKDIR /workspace
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 2.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.7s done
+#12 exporting manifest sha256:ed9fe473ca9e09a6f51f30e3fd3e4bfd833636a21a68b14ccc39d2e101e7f9ac done
+#12 exporting config sha256:43e3adec3141f8e64c7f4aa2f15b13b465e37ca457b0f9f34a534d795151f25a done
+#12 exporting attestation manifest sha256:4ee6cf8a7d3a8f2ecfd5f844a618f06df92309c6e45dee3dfad710c971707785 0.0s done
+#12 exporting manifest list sha256:a17cf3e38456b9e01620a0efd8377be5429e8ccec136a46d73f49055fb78c040 done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.5s done
+#12 DONE 13.2s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+source_id                                 | checklist | sql     | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result
+------------------------------------------+-----------+---------+---------------+---------+---------+-------------+----------------------+-------
+aemet_opendata_series                     | PARTIAL   | PARTIAL | 34/54         | 0       | 2       | 2           | 0/34                 | OK    
+asamblea_ceuta_diputados                  | DONE      | DONE    | 18/19         | 25      | 25      | 25          | 17/0                 | OK    
+asamblea_extremadura_diputados            | DONE      | DONE    | 17/17         | 65      | 65      | 65          | 17/0                 | OK    
+asamblea_madrid_ocupaciones               | DONE      | DONE    | 18/19         | 9192    | 9192    | 9192        | 16/0                 | OK    
+asamblea_melilla_diputados                | DONE      | DONE    | 18/18         | 26      | 26      | 26          | 16/1                 | OK    
+asamblea_murcia_diputados                 | DONE      | DONE    | 17/17         | 54      | 54      | 54          | 17/0                 | OK    
+bde_series_api                            | PARTIAL   | PARTIAL | 33/51         | 0       | 2       | 2           | 0/33                 | OK    
+bdns_api_subvenciones                     | DONE      | DONE    | 21/27         | 50      | 50      | 3           | 1/20                 | OK    
+bdns_autonomico                           | DONE      | DONE    | 18/23         | 50      | 50      | 2           | 1/17                 | OK    
+bdns_subvenciones                         | N/A       | TODO    | 0/0           | 0       | 0       | 0           | 0/0                  | OK    
+boe_api_legal                             | DONE      | DONE    | 18/18         | 334     | 334     | 334         | 16/2                 | OK    
+congreso_diputados                        | DONE      | DONE    | 23/24         | 350     | 350     | 350         | 18/1                 | OK    
+congreso_iniciativas                      | N/A       | DONE    | 4/4           | 491     | 491     | 491         | 1/1                  | OK    
+congreso_intervenciones                   | N/A       | DONE    | 4/5           | 635     | 635     | 635         | 4/0                  | OK    
+congreso_votaciones                       | N/A       | DONE    | 13/23         | 300     | 300     | 1           | 8/2                  | OK    
+cortes_aragon_diputados                   | DONE      | DONE    | 19/26         | 75      | 75      | 75          | 1/15                 | OK    
+cortes_clm_diputados                      | DONE      | DONE    | 16/16         | 33      | 33      | 33          | 16/0                 | OK    
+cortes_cyl_procuradores                   | DONE      | DONE    | 16/16         | 81      | 81      | 81          | 16/0                 | OK    
+corts_valencianes_diputats                | DONE      | DONE    | 16/17         | 99      | 99      | 2           | 1/15                 | OK    
+europarl_meps                             | DONE      | DONE    | 20/20         | 60      | 60      | 60          | 17/1                 | OK    
+eurostat_sdmx                             | DONE      | DONE    | 22/28         | 2394    | 2394    | 2           | 6/16                 | OK    
+infoelectoral_descargas                   | DONE      | DONE    | 3/3           | 263     | 263     | 263         | 1/1                  | OK    
+infoelectoral_procesos                    | DONE      | DONE    | 5/6           | 257     | 257     | 257         | 1/1                  | OK    
+jgpa_diputados                            | DONE      | DONE    | 14/14         | 45      | 45      | 45          | 1/13                 | OK    
+moncloa_referencias                       | DONE      | DONE    | 21/23         | 3       | 20      | 3           | 15/6                 | OK    
+moncloa_rss_referencias                   | DONE      | DONE    | 22/25         | 8       | 8       | 8           | 15/7                 | OK    
+municipal_concejales                      | DONE      | DONE    | 16/16         | 66907   | 66907   | 66907       | 16/0                 | OK    
+parl_initiative_docs                      | N/A       | TODO    | 0/0           | 0       | 0       | 0           | 0/0                  | OK    
+parlament_balears_diputats                | DONE      | DONE    | 15/15         | 59      | 59      | 59          | 15/0                 | OK    
+parlament_catalunya_diputats              | DONE      | DONE    | 15/16         | 135     | 135     | 135         | 14/1                 | OK    
+parlamento_andalucia_diputados            | DONE      | DONE    | 16/19         | 109     | 109     | 109         | 16/0                 | OK    
+parlamento_canarias_diputados             | DONE      | DONE    | 15/16         | 79      | 79      | 79          | 15/0                 | OK    
+parlamento_cantabria_diputados            | DONE      | DONE    | 14/14         | 35      | 35      | 35          | 13/0                 | OK    
+parlamento_galicia_deputados              | PARTIAL   | PARTIAL | 37/50         | 0       | 75      | 3           | 0/37                 | OK    
+parlamento_larioja_diputados              | DONE      | DONE    | 13/13         | 33      | 33      | 33          | 13/0                 | OK    
+parlamento_navarra_parlamentarios_forales | DONE      | DONE    | 33/48         | 50      | 50      | 3           | 1/32                 | OK    
+parlamento_vasco_parlamentarios           | DONE      | DONE    | 12/14         | 75      | 75      | 2           | 1/11                 | OK    
+placsp_autonomico                         | DONE      | DONE    | 17/20         | 470     | 470     | 470         | 13/4                 | OK    
+placsp_contratacion                       | N/A       | TODO    | 0/0           | 0       | 0       | 0           | 0/0                  | OK    
+placsp_sindicacion                        | DONE      | DONE    | 20/24         | 470     | 470     | 470         | 14/6                 | OK    
+programas_partidos                        | N/A       | PARTIAL | 16/16         | 0       | 3       | 3           | 0/16                 | OK    
+senado_iniciativas                        | N/A       | DONE    | 4/5           | 3607    | 3607    | 3607        | 2/1                  | OK    
+senado_senadores                          | DONE      | DONE    | 17/21         | 1560    | 1560    | 2           | 3/12                 | OK    
+senado_votaciones                         | N/A       | DONE    | 29/44         | 5534    | 5534    | 1           | 16/2                 | OK    
+
+tracker_sources: 35
+sources_in_db: 44
+mismatches: 0
+waived_mismatches: 0
+waivers_active: 0
+waivers_expired: 0
+done_zero_real: 0

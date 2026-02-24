@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-02-23T12:00:29+00:00",
+  "status": "ok",
+  "sample_count": 30,
+  "p50_ms": 147.5,
+  "p90_ms": 423.0,
+  "p95_ms": 466.5,
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": true,
+    "input_to_render_p90_within_threshold": true,
+    "contract_complete": true
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 180.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "failure_reasons": [],
+  "degraded_reasons": []
+}

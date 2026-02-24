@@ -1,0 +1,60 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.49MB 1.0s done
+#6 DONE 1.0s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 2.2s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 11.3s done
+#12 exporting manifest sha256:55d9dc0bb021bf4d327b516b2048c6b6ed8d143754f6b5118456124965f27122
+#12 exporting manifest sha256:55d9dc0bb021bf4d327b516b2048c6b6ed8d143754f6b5118456124965f27122 done
+#12 exporting config sha256:e5f121243e95dac99bb8a250f5ae53b259535ed57dc3251af004cbfea1d3d226 done
+#12 exporting attestation manifest sha256:efd579922e17ee3568fb8ce8c454a8f96d233403a1a0f060f0a6c68549a7e4c2 done
+#12 exporting manifest list sha256:3eba97f4926d4edbb3b372a32544b4a6c0eed219384d4b7936bfe7c8c2b7b0fb done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.6s done
+#12 DONE 14.0s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot date: 2026-02-23
+Latest quality_report: yes
+Manifest quality_report: yes
+Quality file: votaciones-kpis-es-2026-02-23.json
+Readme check: enabled
+OK: contrato de quality_report verificado

@@ -1,0 +1,11 @@
+408:          python3 -m unittest tests.test_export_missing_initiative_doc_urls tests.test_report_initdoc_actionable_tail_contract -q
+498:          python3 scripts/report_initdoc_actionable_tail_contract.py \
+502:            --out initdoc_actionable_nonempty_contract.json \
+503:            > initdoc_actionable_nonempty_contract.log 2>&1
+545:          python3 scripts/report_initdoc_actionable_tail_contract.py \
+549:            --out initdoc_actionable_empty_contract.json \
+550:            > initdoc_actionable_empty_contract.log 2>&1
+560:            initdoc_actionable_nonempty_contract.json
+561:            initdoc_actionable_nonempty_contract.log
+564:            initdoc_actionable_empty_contract.json
+565:            initdoc_actionable_empty_contract.log

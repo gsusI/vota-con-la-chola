@@ -1,0 +1,11 @@
+ui/graph/explorer-sources.html:1007:        const initdocTail = data.initdoc_actionable_tail || {};
+ui/graph/explorer-sources.html:1014:        const initdocStatus = String(initdocDigest.status || "").toLowerCase();
+ui/graph/explorer-sources.html:1015:        const initdocStatusClass = initdocStatus === "ok" ? "ok" : initdocStatus === "degraded" ? "warn" : initdocStatus === "failed" ? "err" : "muted";
+ui/graph/explorer-sources.html:1016:        const initdocStatusLabel = initdocStatus === "ok" ? "OK" : initdocStatus === "degraded" ? "DEGRADED" : initdocStatus === "failed" ? "FAILED" : "N/A";
+ui/graph/explorer-sources.html:1119:	          "<div class='kpi'><p class='label'>Iniciativas Senado (tail)</p><div class='value'><strong>" + initdocActionableMissing + "</strong><span class='pill " + initdocStatusClass + "'>" + initdocStatusLabel + "</span></div><div class='small'>actionable: " + initdocActionableMissing + " · redundant: " + initdocRedundantMissing + " · total_missing: " + initdocTotalMissing + "</div></div>" +
+docs/gh-pages/explorer-sources/data/status.json:428:  "initdoc_actionable_tail": {
+docs/gh-pages/explorer-sources/index.html:1007:        const initdocTail = data.initdoc_actionable_tail || {};
+docs/gh-pages/explorer-sources/index.html:1014:        const initdocStatus = String(initdocDigest.status || "").toLowerCase();
+docs/gh-pages/explorer-sources/index.html:1015:        const initdocStatusClass = initdocStatus === "ok" ? "ok" : initdocStatus === "degraded" ? "warn" : initdocStatus === "failed" ? "err" : "muted";
+docs/gh-pages/explorer-sources/index.html:1016:        const initdocStatusLabel = initdocStatus === "ok" ? "OK" : initdocStatus === "degraded" ? "DEGRADED" : initdocStatus === "failed" ? "FAILED" : "N/A";
+docs/gh-pages/explorer-sources/index.html:1119:	          "<div class='kpi'><p class='label'>Iniciativas Senado (tail)</p><div class='value'><strong>" + initdocActionableMissing + "</strong><span class='pill " + initdocStatusClass + "'>" + initdocStatusLabel + "</span></div><div class='small'>actionable: " + initdocActionableMissing + " · redundant: " + initdocRedundantMissing + " · total_missing: " + initdocTotalMissing + "</div></div>" +

@@ -1,0 +1,52 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_budget_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_budget_latest.json"; fi; python3 scripts/report_citizen_mobile_performance_budget.py --ui-html "ui/citizen/index.html" --ui-assets "ui/citizen/preset_codec.js,ui/citizen/onboarding_funnel.js,ui/citizen/first_answer_accelerator.js,ui/citizen/unknown_explainability.js" --snapshot "docs/gh-pages/citizen/data/citizen.json" --max-ui-html-bytes "220000" --max-ui-assets-total-bytes "60000" --max-snapshot-bytes "5000000" --strict ${out_arg}
+{
+  "generated_at": "2026-02-23T11:00:17+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "ui/citizen/index.html",
+    "ui_assets": [
+      "ui/citizen/preset_codec.js",
+      "ui/citizen/onboarding_funnel.js",
+      "ui/citizen/first_answer_accelerator.js",
+      "ui/citizen/unknown_explainability.js"
+    ],
+    "snapshot": "docs/gh-pages/citizen/data/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 176329,
+    "ui_assets_total_bytes": 27961,
+    "snapshot_bytes": 950181,
+    "ui_assets_count": 4,
+    "interaction_markers_missing": []
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 220000,
+    "max_ui_assets_total_bytes": 60000,
+    "max_snapshot_bytes": 5000000
+  },
+  "checks": {
+    "ui_html_within_budget": true,
+    "ui_assets_total_within_budget": true,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": true
+  },
+  "failure_reasons": [],
+  "ui_assets": [
+    {
+      "path": "ui/citizen/preset_codec.js",
+      "bytes": 5036
+    },
+    {
+      "path": "ui/citizen/onboarding_funnel.js",
+      "bytes": 4322
+    },
+    {
+      "path": "ui/citizen/first_answer_accelerator.js",
+      "bytes": 13758
+    },
+    {
+      "path": "ui/citizen/unknown_explainability.js",
+      "bytes": 4845
+    }
+  ]
+}

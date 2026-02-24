@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-02-23T18:21:17+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibilities_total": 15,
+    "fragments_with_responsibility": 8,
+    "fragments_missing_responsibility": 0
+  },
+  "coverage": {
+    "responsibility_coverage_pct": 1.0
+  },
+  "by_role": {
+    "approve": 6,
+    "enforce": 4,
+    "propose": 3,
+    "delegate": 2
+  },
+  "checks": {
+    "seed_loaded": true,
+    "fragment_catalog_loaded": true,
+    "responsibility_chain_started": true,
+    "all_fragments_with_responsibility": true
+  },
+  "missing_responsibility_sample": []
+}

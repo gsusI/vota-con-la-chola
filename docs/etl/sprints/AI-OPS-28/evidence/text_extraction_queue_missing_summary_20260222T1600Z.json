@@ -1,0 +1,33 @@
+{
+  "rows_scanned": 9549,
+  "queue_items_total": 0,
+  "queue_items_written": 0,
+  "queue_items_pending": 0,
+  "refs_total_written": 0,
+  "refs_missing_excerpt_written": 0,
+  "refs_missing_raw_file_written": 0,
+  "refs_missing_excerpt_all": 0,
+  "refs_missing_raw_file_all": 0,
+  "skipped_by_format": 10,
+  "skipped_has_excerpt": 9539,
+  "dedupe_by": "content_sha256",
+  "formats": [
+    "html",
+    "pdf",
+    "xml"
+  ],
+  "source_ids": [
+    "congreso_intervenciones",
+    "parl_initiative_docs",
+    "programas_partidos"
+  ],
+  "only_missing_excerpt": true,
+  "limit": 0,
+  "db": "etl/data/staging/politicos-es.db",
+  "out": "docs/etl/sprints/AI-OPS-28/exports/text_extraction_queue_missing_20260222T1600Z.csv",
+  "source_ids_filter": [
+    "congreso_intervenciones",
+    "parl_initiative_docs",
+    "programas_partidos"
+  ]
+}

@@ -1,0 +1,35 @@
+# ui markers
+60:        line-height: 1.45;
+68:      .skipLink {
+83:      .skipLink:focus {
+337:        line-height: 1.45;
+414:      .row:focus-visible {
+511:      .smallLink:focus-visible {
+760:      <a class="skipLink" href="#citizenMain">Saltar al contenido principal</a>
+779:          <div class="status" id="statusChips" role="status" aria-live="polite" aria-atomic="true">
+784:        <div class="banner" id="banner" role="status" aria-live="polite" aria-atomic="true"></div>
+788:      <main class="layout fadeIn" style="animation-delay: 0.08s" id="citizenMain" tabindex="-1" aria-label="Panel principal de comparacion">
+789:        <section class="panel card" aria-labelledby="concernSectionHeading">
+809:            <input id="concernSearch" type="text" aria-label="Buscar preocupaciones" placeholder="Filtra preocupaciones…" />
+815:        <section class="panel card" aria-labelledby="itemsSectionHeading">
+821:            <input id="topicSearch" type="text" aria-label="Buscar items por titulo" placeholder="Busca en el titulo…" />
+837:        <section class="panel card" aria-labelledby="compareSectionHeading">
+870:          <div class="compare" id="compare" role="region" aria-label="Resultados por partido"></div>
+1482:        const el = qs("#statusChips");
+4515:          qs("#statusChips").innerHTML = `<span class="chip"><span class="dot bad"></span><span class="mono">fallo carga</span></span>`;
+
+# test markers
+11:test("citizen UI includes skip link and main landmark focus target", () => {
+13:  assert.match(html, /class="skipLink"\s+href="#citizenMain"/i);
+14:  assert.match(html, /id="citizenMain"/i);
+15:  assert.match(html, /id="citizenMain"[^>]*tabindex="-1"/i);
+16:  assert.match(html, /id="citizenMain"[^>]*aria-label="Panel principal de comparacion"/i);
+21:  assert.match(html, /id="statusChips"[^>]*role="status"[^>]*aria-live="polite"/i);
+23:  assert.match(html, /aria-labelledby="concernSectionHeading"/i);
+24:  assert.match(html, /aria-labelledby="itemsSectionHeading"/i);
+25:  assert.match(html, /aria-labelledby="compareSectionHeading"/i);
+29:  assert.match(html, /\.row:focus-visible/i);
+30:  assert.match(html, /\.skipLink:focus/i);
+
+# just markers
+968:citizen-test-accessibility-readability:

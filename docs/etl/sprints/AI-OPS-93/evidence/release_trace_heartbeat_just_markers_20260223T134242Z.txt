@@ -1,0 +1,17 @@
+243:citizen_release_trace_heartbeat_digest := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_DIGEST", "docs/etl/sprints/AI-OPS-88/evidence/citizen_release_trace_digest_latest.json")
+244:citizen_release_trace_heartbeat_path := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_PATH", "docs/etl/runs/citizen_release_trace_digest_heartbeat.jsonl")
+245:citizen_release_trace_heartbeat_out := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_OUT", "docs/etl/sprints/AI-OPS-93/evidence/citizen_release_trace_digest_heartbeat_latest.json")
+246:citizen_release_trace_heartbeat_window_last := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_LAST", "20")
+247:citizen_release_trace_heartbeat_window_max_failed := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_MAX_FAILED", "0")
+248:citizen_release_trace_heartbeat_window_max_failed_rate_pct := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT", "0")
+249:citizen_release_trace_heartbeat_window_max_degraded := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_MAX_DEGRADED", "0")
+250:citizen_release_trace_heartbeat_window_max_degraded_rate_pct := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT", "0")
+251:citizen_release_trace_heartbeat_window_max_stale := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_MAX_STALE", "0")
+252:citizen_release_trace_heartbeat_window_max_stale_rate_pct := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_MAX_STALE_RATE_PCT", "0")
+253:citizen_release_trace_heartbeat_window_out := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-93/evidence/citizen_release_trace_digest_heartbeat_window_latest.json")
+1093:citizen-test-release-trace-heartbeat:
+1103:  just citizen-test-release-trace-heartbeat
+1281:citizen-report-release-trace-heartbeat:
+1286:citizen-check-release-trace-heartbeat:
+1291:citizen-report-release-trace-heartbeat-window:
+1296:citizen-check-release-trace-heartbeat-window:

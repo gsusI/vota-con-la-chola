@@ -1,0 +1,63 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.59MB 1.0s done
+#6 DONE 1.0s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.8s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.3s done
+#12 exporting manifest sha256:62b519e5b4b80525e1dfbbccd3cd1710f4bdf313d80198caf10d26a2ef955082 done
+#12 exporting config sha256:697d06e3bec90ca4fa5dcc3a5ef2a9f86529ac8dbab1d1407197105ccf4094b8 done
+#12 exporting attestation manifest sha256:2e3fd2a609b89576cc64d74f44a62e82f4b3a542cf01a0e5066e472495fafe69 done
+#12 exporting manifest list sha256:a630b8a183b6d6dca4b181046d896ed6b26650f305f34d8ac0d6f9a7092cdf7c done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.2s done
+#12 DONE 12.5s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot bundle: snapshots/2026-02-23
+Published files: 10
+Ingestion runs rows: 410
+Source records rows (by source): 35
+Source legal files: 35
+Parquet tables: 68
+Parquet files: 126
+Parquet excluded tables: lost_and_found, raw_fetches, run_fetches, source_records
+Dry run: no se subió nada a Hugging Face
+Bundle local: /tmp/hf_snapshot_publish_rvdrgux8

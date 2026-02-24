@@ -1,0 +1,106 @@
+{
+  "generated_at": "2026-02-24T10:38:25+00:00",
+  "status": "ok",
+  "required_fields": [
+    "sanction_source_id",
+    "kpi_id",
+    "period_date",
+    "source_url",
+    "evidence_date",
+    "evidence_quote",
+    "value"
+  ],
+  "headers_present": [
+    "sanction_source_id",
+    "kpi_id",
+    "period_date",
+    "period_granularity",
+    "value",
+    "numerator",
+    "denominator",
+    "source_url",
+    "evidence_date",
+    "evidence_quote",
+    "source_id",
+    "source_record_id"
+  ],
+  "missing_headers": [],
+  "totals": {
+    "rows_seen": 4,
+    "rows_kept": 4,
+    "rows_rejected": 0,
+    "rows_rejected_missing_value": 0,
+    "rows_rejected_missing_required_metadata": 0
+  },
+  "coverage": {
+    "rows_kept_pct": 1.0,
+    "rows_rejected_pct": 0.0
+  },
+  "checks": {
+    "headers_complete": true,
+    "rows_kept_present": true,
+    "rows_rejected_visible": false
+  },
+  "input_csv": "docs/etl/sprints/AI-OPS-180/inputs/sanction_procedural_official_review_metrics_apply_fixture_20260224T103753Z.csv",
+  "prepared_csv": "docs/etl/sprints/AI-OPS-180/exports/sanction_procedural_official_review_apply_prepared_fixture_20260224T103753Z.csv",
+  "strict_prepare": true,
+  "rows_kept_preview": [
+    {
+      "sanction_source_id": "es:sanctions:contencioso_sentencias",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": "0.21",
+      "numerator": "21",
+      "denominator": "100",
+      "source_url": "https://www.poderjudicial.es/",
+      "evidence_date": "2025-12-31",
+      "evidence_quote": "Memoria anual 2025 del CGPJ con porcentaje de recursos estimados en vía contencioso-administrativa.",
+      "source_id": "boe_api_legal",
+      "source_record_id": "contencioso:2025:recurso_estimation_rate"
+    },
+    {
+      "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": "0.18",
+      "numerator": "18",
+      "denominator": "100",
+      "source_url": "https://www.defensordelpueblo.es/",
+      "evidence_date": "2025-12-31",
+      "evidence_quote": "Informe anual 2025 del Defensor del Pueblo con detalle de estimación de quejas y recursos admitidos.",
+      "source_id": "boe_api_legal",
+      "source_record_id": "defensor:2025:recurso_estimation_rate"
+    },
+    {
+      "sanction_source_id": "es:sanctions:teac_resolutions",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": "0.24",
+      "numerator": "24",
+      "denominator": "100",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "evidence_date": "2025-12-31",
+      "evidence_quote": "Memoria del TEAC 2025 con tabla oficial de recursos estimados sobre total de resoluciones revisadas.",
+      "source_id": "boe_api_legal",
+      "source_record_id": "teac:2025:recurso_estimation_rate"
+    },
+    {
+      "sanction_source_id": "es:sanctions:tear_resolutions",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": "0.22",
+      "numerator": "22",
+      "denominator": "100",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "evidence_date": "2025-12-31",
+      "evidence_quote": "Memoria agregada de TEAR 2025 con cálculo anual de recursos estimados sobre expedientes resueltos.",
+      "source_id": "boe_api_legal",
+      "source_record_id": "tear:2025:recurso_estimation_rate"
+    }
+  ],
+  "rows_rejected_preview": []
+}

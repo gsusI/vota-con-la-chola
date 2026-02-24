@@ -1,0 +1,225 @@
+node --test tests/test_citizen_concern_pack_quality_ui_contract.js
+TAP version 13
+# Subtest: citizen UI loads optional concern-pack quality artifact
+ok 1 - citizen UI loads optional concern-pack quality artifact
+  ---
+  duration_ms: 1.331292
+  ...
+# Subtest: citizen UI exposes weak-pack markers in tags and hints
+ok 2 - citizen UI exposes weak-pack markers in tags and hints
+  ---
+  duration_ms: 0.505666
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.213792
+python3 -m unittest tests/test_report_citizen_concern_pack_quality.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T11:20:46+00:00",
+  "status": "ok",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpy_00haob/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpy_00haob/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": true
+  },
+  "failure_reasons": [],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T11:20:46+00:00",
+  "status": "failed",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg7879cmu/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg7879cmu/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 0
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": false
+  },
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}

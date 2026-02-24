@@ -1,0 +1,6 @@
+python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_import_liberty_restrictions_seed.py tests/test_report_liberty_restrictions_status.py tests/test_validate_liberty_proportionality_seed.py tests/test_import_liberty_proportionality_seed.py tests/test_report_liberty_proportionality_status.py tests/test_report_liberty_direct_accountability_scores.py tests/test_validate_liberty_enforcement_seed.py tests/test_import_liberty_enforcement_seed.py tests/test_report_liberty_enforcement_variation_status.py tests/test_validate_liberty_indirect_accountability_seed.py tests/test_import_liberty_indirect_accountability_seed.py tests/test_report_liberty_indirect_accountability_status.py tests/test_validate_liberty_delegated_enforcement_seed.py tests/test_import_liberty_delegated_enforcement_seed.py tests/test_report_liberty_delegated_enforcement_status.py tests/test_export_liberty_restrictions_snapshot.py
+............................
+----------------------------------------------------------------------
+Ran 28 tests in 1.424s
+
+OK

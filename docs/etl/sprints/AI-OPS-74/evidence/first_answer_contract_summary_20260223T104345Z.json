@@ -1,0 +1,18 @@
+{
+  "sprint": "AI-OPS-74",
+  "generated_at": "2026-02-23T10:43:45Z",
+  "contract": {
+    "module": "ui/citizen/first_answer_accelerator.js",
+    "ui_markers": [
+      "data-first-answer-run",
+      "data-first-answer-run-inline"
+    ],
+    "local_server_route": "/citizen/first_answer_accelerator.js",
+    "gh_pages_copy": "docs/gh-pages/citizen/first_answer_accelerator.js",
+    "tests": [
+      "tests/test_citizen_first_answer_accelerator.js",
+      "tests/test_citizen_first_answer_ui_contract.js"
+    ],
+    "just_target": "citizen-test-first-answer-accelerator"
+  }
+}

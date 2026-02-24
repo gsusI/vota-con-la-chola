@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-02-23T13:42:42+00:00",
+  "status": "ok",
+  "entries_in_window": 1,
+  "failed_in_window": 0,
+  "degraded_in_window": 0,
+  "stale_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_rate_pct": 0.0,
+  "stale_rate_pct": 0.0,
+  "latest": {
+    "run_at": "2026-02-23T12:54:45.459Z",
+    "heartbeat_id": "2026-02-23T12:54:45.459Z|ok|2026-02-23T12:54:45.361Z|0.002000|360.000000|1|1|0|0|",
+    "status": "ok",
+    "line_no": 1,
+    "malformed_line": false,
+    "release_generated_at": "2026-02-23T12:54:45.361Z",
+    "release_age_minutes": 0.002,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": true,
+    "stale_detected": false,
+    "release_ready": true,
+    "release_total_fail": 0
+  },
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_stale_ok": true,
+    "max_stale_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_freshness_within_sla_ok": true
+  },
+  "strict_fail_reasons": []
+}

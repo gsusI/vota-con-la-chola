@@ -1,0 +1,29 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-84/evidence/citizen_tailwind_md3_contract_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-84/evidence/citizen_tailwind_md3_contract_latest.json"; fi; python3 scripts/report_citizen_tailwind_md3_contract.py --tokens "ui/citizen/tailwind_md3.tokens.json" --generated-css "ui/citizen/tailwind_md3.generated.css" --ui-html "ui/citizen/index.html" --max-generated-css-bytes "40000" ${out_arg}
+{
+  "generated_at": "2026-02-23T12:12:35+00:00",
+  "status": "ok",
+  "paths": {
+    "tokens": "ui/citizen/tailwind_md3.tokens.json",
+    "generated_css": "ui/citizen/tailwind_md3.generated.css",
+    "ui_html": "ui/citizen/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 5582,
+    "token_colors_count": 15,
+    "token_spacing_count": 6,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": []
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": true
+  },
+  "failure_reasons": []
+}

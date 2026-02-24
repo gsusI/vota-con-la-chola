@@ -1,0 +1,832 @@
+just parl-sanction-norms-seed-pipeline
+just parl-validate-sanction-norms-seed
+PYTHONPATH=. python3 scripts/validate_sanction_norms_seed.py --seed etl/data/seeds/sanction_norms_seed_v1.json --out docs/etl/sprints/AI-OPS-118/evidence/sanction_norms_seed_validate_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:35+00:00",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "valid": true,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "norms_total": 8,
+  "norms_valid": 8,
+  "fragments_total": 8,
+  "responsibility_hints_total": 15,
+  "duplicate_norm_id_count": 0,
+  "duplicate_boe_id_count": 0,
+  "schema_version": "sanction_norms_seed_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-norms-seed
+PYTHONPATH=. python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.aiops118.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-118/evidence/sanction_norms_seed_import_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:36+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops118.db",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibility_hints_total": 15
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_norms_seed_v1",
+    "counts": {
+      "norms_inserted": 8,
+      "norms_updated": 0,
+      "catalog_inserted": 8,
+      "catalog_updated": 0,
+      "fragments_inserted": 8,
+      "fragments_updated": 0,
+      "fragment_links_inserted": 8,
+      "fragment_links_updated": 0,
+      "responsibilities_inserted": 15,
+      "responsibilities_updated": 0
+    },
+    "totals": {
+      "legal_norms_total": 8,
+      "legal_norm_fragments_total": 8,
+      "legal_fragment_responsibilities_total": 15,
+      "sanction_norm_catalog_total": 8,
+      "sanction_norm_fragment_links_total": 8
+    }
+  }
+}
+just parl-report-sanction-norms-seed-status
+PYTHONPATH=. python3 scripts/report_sanction_norms_seed_status.py --db etl/data/staging/politicos-es.aiops118.db --sample-limit 20 --out docs/etl/sprints/AI-OPS-118/evidence/sanction_norms_seed_status_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:36+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibilities_total": 15,
+    "fragments_with_responsibility": 8,
+    "fragments_missing_responsibility": 0
+  },
+  "coverage": {
+    "responsibility_coverage_pct": 1.0
+  },
+  "by_role": {
+    "approve": 6,
+    "enforce": 4,
+    "propose": 3,
+    "delegate": 2
+  },
+  "checks": {
+    "seed_loaded": true,
+    "fragment_catalog_loaded": true,
+    "responsibility_chain_started": true,
+    "all_fragments_with_responsibility": true
+  },
+  "missing_responsibility_sample": []
+}
+just parl-validate-liberty-restrictions-seed
+PYTHONPATH=. python3 scripts/validate_liberty_restrictions_seed.py --seed etl/data/seeds/liberty_restrictions_seed_v1.json --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_validate_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:36+00:00",
+  "seed_path": "etl/data/seeds/liberty_restrictions_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_restrictions_seed_v1",
+  "errors_count": 0,
+  "warnings_count": 0,
+  "right_categories_total": 6,
+  "fragment_assessments_total": 8,
+  "method_version": "irlc_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-liberty-restrictions-seed
+PYTHONPATH=. python3 scripts/import_liberty_restrictions_seed.py --db etl/data/staging/politicos-es.aiops118.db --seed etl/data/seeds/liberty_restrictions_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_import_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:36+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops118.db",
+  "seed_path": "etl/data/seeds/liberty_restrictions_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "right_categories_total": 6,
+    "fragment_assessments_total": 8,
+    "method_version": "irlc_v1"
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "method_version": "irlc_v1",
+    "scale_max": 100.0,
+    "counts": {
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "right_categories_inserted": 6,
+      "right_categories_updated": 0,
+      "assessments_inserted": 8,
+      "assessments_updated": 0,
+      "unresolved_fragment_refs": 0,
+      "unresolved_right_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "right_categories_total": 6,
+      "assessments_total": 8,
+      "fragments_with_irlc_total": 8
+    }
+  }
+}
+just parl-report-liberty-restrictions-status
+PYTHONPATH=. python3 scripts/report_liberty_restrictions_status.py --db etl/data/staging/politicos-es.aiops118.db --top-n 20 --norms-classified-min 0.8 --fragments-irlc-min 0.6 --fragments-accountability-min 0.6 --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:36+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "methodologies_total": 1,
+    "right_categories_total": 6,
+    "assessments_total": 8,
+    "norms_with_irlc_total": 8,
+    "fragments_with_irlc_total": 8,
+    "fragments_with_accountability_total": 8,
+    "fragments_with_dual_coverage_total": 8
+  },
+  "coverage": {
+    "norms_classified_pct": 1.0,
+    "fragments_with_irlc_pct": 1.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 1.0
+  },
+  "checks": {
+    "irlc_started": true,
+    "restriction_map_started": true,
+    "norms_classified_gate": true,
+    "fragments_irlc_gate": true,
+    "fragments_accountability_gate": true
+  },
+  "focus_gate": {
+    "passed": true,
+    "thresholds": {
+      "norms_classified_min": 0.8,
+      "fragments_irlc_min": 0.6,
+      "fragments_accountability_min": 0.6
+    }
+  },
+  "restriction_map_by_right": [
+    {
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "assessments_total": 4,
+      "fragments_total": 4,
+      "irlc_avg": 59.325,
+      "irlc_min": 56.85,
+      "irlc_max": 64.55
+    },
+    {
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 65.275,
+      "irlc_min": 63.1,
+      "irlc_max": 67.45
+    },
+    {
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 53.95,
+      "irlc_min": 49.4,
+      "irlc_max": 58.5
+    }
+  ],
+  "top_restrictions": [
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 67.45,
+      "confidence": 0.81
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 64.55,
+      "confidence": 0.84
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 63.1,
+      "confidence": 0.75
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 58.55,
+      "confidence": 0.79
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 58.5,
+      "confidence": 0.82
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 57.35,
+      "confidence": 0.7
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 56.85,
+      "confidence": 0.8
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 49.4,
+      "confidence": 0.78
+    }
+  ]
+}
+just parl-check-liberty-focus-gate
+PYTHONPATH=. python3 scripts/report_liberty_restrictions_status.py --db etl/data/staging/politicos-es.aiops118.db --top-n 20 --norms-classified-min 0.8 --fragments-irlc-min 0.6 --fragments-accountability-min 0.6 --enforce-gate --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:36+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "methodologies_total": 1,
+    "right_categories_total": 6,
+    "assessments_total": 8,
+    "norms_with_irlc_total": 8,
+    "fragments_with_irlc_total": 8,
+    "fragments_with_accountability_total": 8,
+    "fragments_with_dual_coverage_total": 8
+  },
+  "coverage": {
+    "norms_classified_pct": 1.0,
+    "fragments_with_irlc_pct": 1.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 1.0
+  },
+  "checks": {
+    "irlc_started": true,
+    "restriction_map_started": true,
+    "norms_classified_gate": true,
+    "fragments_irlc_gate": true,
+    "fragments_accountability_gate": true
+  },
+  "focus_gate": {
+    "passed": true,
+    "thresholds": {
+      "norms_classified_min": 0.8,
+      "fragments_irlc_min": 0.6,
+      "fragments_accountability_min": 0.6
+    }
+  },
+  "restriction_map_by_right": [
+    {
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "assessments_total": 4,
+      "fragments_total": 4,
+      "irlc_avg": 59.325,
+      "irlc_min": 56.85,
+      "irlc_max": 64.55
+    },
+    {
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 65.275,
+      "irlc_min": 63.1,
+      "irlc_max": 67.45
+    },
+    {
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 53.95,
+      "irlc_min": 49.4,
+      "irlc_max": 58.5
+    }
+  ],
+  "top_restrictions": [
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 67.45,
+      "confidence": 0.81
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 64.55,
+      "confidence": 0.84
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 63.1,
+      "confidence": 0.75
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 58.55,
+      "confidence": 0.79
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 58.5,
+      "confidence": 0.82
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 57.35,
+      "confidence": 0.7
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 56.85,
+      "confidence": 0.8
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 49.4,
+      "confidence": 0.78
+    }
+  ]
+}
+just parl-export-liberty-restrictions-snapshot
+PYTHONPATH=. python3 scripts/export_liberty_restrictions_snapshot.py --db etl/data/staging/politicos-es.aiops118.db --snapshot-date 2026-02-23 --out docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_20260223T181035Z.json
+{
+  "generated_at": "2026-02-23T18:10:37+00:00",
+  "snapshot_date": "2026-02-23",
+  "schema_version": "liberty_restrictions_snapshot_v1",
+  "totals": {
+    "restrictions_total": 8,
+    "accountability_edges_total": 15
+  },
+  "restrictions": [
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "competent_body": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+      "appeal_path": "Alzada/reposicion y contencioso-administrativo",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.72,
+        "intensity_score": 0.88,
+        "due_process_risk_score": 0.5,
+        "reversibility_risk_score": 0.58,
+        "discretionality_score": 0.67,
+        "compliance_cost_score": 0.52,
+        "irlc_score": 67.45
+      },
+      "confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "competent_body": "AEAT y organos tributarios autonómicos/locales segun competencia",
+      "appeal_path": "Reposicion y reclamacion economico-administrativa",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.85,
+        "intensity_score": 0.8,
+        "due_process_risk_score": 0.4,
+        "reversibility_risk_score": 0.5,
+        "discretionality_score": 0.45,
+        "compliance_cost_score": 0.78,
+        "irlc_score": 64.55
+      },
+      "confidence": 0.84,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque sancionador principal",
+      "competent_body": "Organo competente segun distribucion legal",
+      "appeal_path": "Recursos administrativos y via contenciosa",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.67,
+        "intensity_score": 0.82,
+        "due_process_risk_score": 0.52,
+        "reversibility_risk_score": 0.5,
+        "discretionality_score": 0.62,
+        "compliance_cost_score": 0.45,
+        "irlc_score": 63.1
+      },
+      "confidence": 0.75,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "competent_body": "AEAT",
+      "appeal_path": "Reclamacion economico-administrativa y contencioso-administrativo",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.74,
+        "intensity_score": 0.65,
+        "due_process_risk_score": 0.45,
+        "reversibility_risk_score": 0.42,
+        "discretionality_score": 0.5,
+        "compliance_cost_score": 0.68,
+        "irlc_score": 58.55
+      },
+      "confidence": 0.79,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque sancionador principal",
+      "competent_body": "DGT y jefaturas provinciales de trafico",
+      "appeal_path": "Reposicion administrativa y contencioso-administrativo",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.9,
+        "intensity_score": 0.7,
+        "due_process_risk_score": 0.35,
+        "reversibility_risk_score": 0.45,
+        "discretionality_score": 0.4,
+        "compliance_cost_score": 0.55,
+        "irlc_score": 58.5
+      },
+      "confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque sancionador principal",
+      "competent_body": "Organo competente segun reparto legal",
+      "appeal_path": "Recursos administrativos y via contenciosa",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.62,
+        "intensity_score": 0.69,
+        "due_process_risk_score": 0.47,
+        "reversibility_risk_score": 0.48,
+        "discretionality_score": 0.5,
+        "compliance_cost_score": 0.6,
+        "irlc_score": 57.35
+      },
+      "confidence": 0.7,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "competent_body": "ITSS y autoridad laboral competente",
+      "appeal_path": "Alzada/reposicion y contencioso-administrativo",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.7,
+        "intensity_score": 0.7,
+        "due_process_risk_score": 0.38,
+        "reversibility_risk_score": 0.44,
+        "discretionality_score": 0.41,
+        "compliance_cost_score": 0.72,
+        "irlc_score": 56.85
+      },
+      "confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_type": "articulo",
+      "fragment_label": "Bloque procedimental sancionador",
+      "competent_body": "DGT y organos instructores/resolutores competentes",
+      "appeal_path": "Recursos administrativos y contencioso-administrativos",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "method_version": "irlc_v1",
+      "scores": {
+        "reach_score": 0.75,
+        "intensity_score": 0.55,
+        "due_process_risk_score": 0.42,
+        "reversibility_risk_score": 0.3,
+        "discretionality_score": 0.35,
+        "compliance_cost_score": 0.4,
+        "irlc_score": 49.4
+      },
+      "confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    }
+  ],
+  "accountability_edges": [
+    {
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "role": "delegate",
+      "actor_label": "Ministerio competente en trafico",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "role": "enforce",
+      "actor_label": "DGT",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "role": "approve",
+      "actor_label": "Cortes Generales",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "role": "enforce",
+      "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "role": "approve",
+      "actor_label": "Cortes Generales",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "role": "approve",
+      "actor_label": "Cortes Generales",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "role": "propose",
+      "actor_label": "Gobierno de Espana",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "role": "delegate",
+      "actor_label": "Ministerio de Hacienda",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+    },
+    {
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "role": "enforce",
+      "actor_label": "AEAT",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "role": "approve",
+      "actor_label": "Cortes Generales",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "role": "propose",
+      "actor_label": "Gobierno de Espana",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "role": "approve",
+      "actor_label": "Cortes Generales",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "role": "enforce",
+      "actor_label": "Ministerio del Interior",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "role": "propose",
+      "actor_label": "Gobierno de Espana",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "role": "approve",
+      "actor_label": "Cortes Generales",
+      "evidence_date": "",
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+scripts/report_citizen_explainability_copy.py:21:    r"<(?P<tag>[a-z0-9]+)\b(?P<attrs>[^>]*\bdata-explainability-term=(?P<q>['\"])(?P<term>[^'\"]+)(?P=q)[^>]*)>(?P<body>.*?)</(?P=tag)\s*>",
+scripts/report_citizen_explainability_copy.py:25:    r"<(?P<tag>[a-z0-9]+)\b(?P<attrs>[^>]*\bdata-explainability-copy=(?P<q>['\"])1(?P=q)[^>]*)>(?P<body>.*?)</(?P=tag)\s*>",
+scripts/report_citizen_explainability_copy.py:28:_MARKER_RE = re.compile(r"data-explainability-glossary=(['\"])1\1", flags=re.IGNORECASE)
+scripts/report_citizen_explainability_copy.py:130:        tooltip_flag = _safe_text(_attr_value(attrs, "data-explainability-tooltip")) == "1"
+scripts/report_citizen_explainability_copy.py:132:        definition = _attr_value(attrs, "data-term-definition") or title_copy
+tests/test_citizen_explainability_copy_ui_contract.js:13:  assert.match(html, /data-explainability-glossary=["']1["']/i);
+tests/test_citizen_explainability_copy_ui_contract.js:14:  assert.match(html, /data-explainability-term=["']unknown["']/i);
+tests/test_citizen_explainability_copy_ui_contract.js:15:  assert.match(html, /data-explainability-term=["']cobertura["']/i);
+tests/test_citizen_explainability_copy_ui_contract.js:16:  assert.match(html, /data-explainability-term=["']confianza["']/i);
+tests/test_citizen_explainability_copy_ui_contract.js:17:  assert.match(html, /data-explainability-term=["']evidencia["']/i);
+tests/test_citizen_explainability_copy_ui_contract.js:18:  assert.match(html, /data-explainability-tooltip=["']1["']/i);
+tests/test_citizen_explainability_copy_ui_contract.js:19:  assert.match(html, /data-term-definition=/i);
+tests/test_citizen_explainability_copy_ui_contract.js:21:  const termMarkers = html.match(/data-explainability-term=/gi) || [];
+tests/test_citizen_explainability_copy_ui_contract.js:22:  const tooltipMarkers = html.match(/data-explainability-tooltip=["']1["']/gi) || [];
+tests/test_citizen_explainability_copy_ui_contract.js:23:  const definitionMarkers = html.match(/data-term-definition=/gi) || [];
+tests/test_citizen_explainability_copy_ui_contract.js:31:  assert.match(html, /data-explainability-copy=["']1["']/i);
+ui/citizen/index.html:877:            <details class="explainGlossary" data-explainability-glossary="1" aria-label="Glosario rapido para leer resultados">
+ui/citizen/index.html:878:              <summary data-explainability-copy="1">Glosario rapido: primero mira cobertura y luego abre evidencia.</summary>
+ui/citizen/index.html:879:              <div class="rowMeta" data-explainability-glossary-tags="1">
+ui/citizen/index.html:882:                  data-explainability-term="unknown"
+ui/citizen/index.html:883:                  data-explainability-tooltip="1"
+ui/citizen/index.html:884:                  data-term-definition="Unknown significa incierto mas sin senal."
+ui/citizen/index.html:890:                  data-explainability-term="cobertura"
+ui/citizen/index.html:891:                  data-explainability-tooltip="1"
+ui/citizen/index.html:892:                  data-term-definition="Cobertura es cuantos casos tienen postura clara."
+ui/citizen/index.html:898:                  data-explainability-term="confianza"
+ui/citizen/index.html:899:                  data-explainability-tooltip="1"
+ui/citizen/index.html:900:                  data-term-definition="Confianza indica cuanta evidencia respalda el resumen."
+ui/citizen/index.html:906:                  data-explainability-term="evidencia"
+ui/citizen/index.html:907:                  data-explainability-tooltip="1"
+ui/citizen/index.html:908:                  data-term-definition="Evidencia abre la fuente original para auditoria."
+ui/citizen/index.html:913:              <ul class="explainGlossaryList" data-explainability-glossary-list="1">
+ui/citizen/index.html:914:                <li data-explainability-copy="1">Unknown: incierto mas sin senal. No implica apoyo ni rechazo.</li>
+ui/citizen/index.html:915:                <li data-explainability-copy="1">Cobertura alta reduce dudas. Cobertura baja exige revisar links.</li>
+ui/citizen/index.html:916:                <li data-explainability-copy="1">Confianza alta no reemplaza auditoria. Siempre puedes abrir evidencia.</li>

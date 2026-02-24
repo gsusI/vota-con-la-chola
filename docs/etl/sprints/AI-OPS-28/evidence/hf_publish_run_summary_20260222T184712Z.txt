@@ -1,0 +1,19 @@
+Command:
+SNAPSHOT_DATE=2026-02-12 DB_PATH=etl/data/staging/politicos-es.db just etl-publish-hf
+
+Observed output summary:
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot bundle: snapshots/2026-02-12
+Published files: 7
+Ingestion runs rows: 276
+Source records rows (by source): 27
+Source legal files: 27
+Parquet tables: 44
+Parquet files: 95
+Parquet excluded tables: lost_and_found, raw_fetches, run_fetches, source_records
+OK published to https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
+
+Post-publish remote checks:
+- docs/etl/sprints/AI-OPS-28/evidence/hf_remote_latest_post_publish_20260222T184735Z.json
+- docs/etl/sprints/AI-OPS-28/evidence/hf_remote_manifest_post_publish_20260222T184743Z.json
+- docs/etl/sprints/AI-OPS-28/evidence/hf_remote_readme_post_publish_20260222T184749Z.md

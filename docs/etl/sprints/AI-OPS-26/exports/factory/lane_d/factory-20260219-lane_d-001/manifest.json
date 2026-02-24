@@ -1,0 +1,15 @@
+{
+  "contract_version": "factory_contract_v2",
+  "batch_id": "factory-20260219-lane_d-001",
+  "lane_id": "lane_d",
+  "generated_at_utc": "2026-02-19T16:13:42+00:00",
+  "generator": "ai_ops_26_factory_generator_v2",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "source_sql": "SELECT td.source_record_pk AS unit_id, td.source_url, COALESCE(pi.title, 'Iniciativa sin titulo') AS title, td.text_excerpt AS excerpt\nFROM text_documents td\nLEFT JOIN parl_initiative_documents pid ON pid.source_record_pk = td.source_record_pk\nLEFT JOIN parl_initiatives pi ON pi.initiative_id = pid.initiative_id\nWHERE td.source_id='parl_initiative_docs' AND td.text_excerpt IS NOT NULL AND trim(td.text_excerpt) <> ''\nORDER BY td.source_record_pk DESC LIMIT 120;",
+  "source_sql_sha256": "b57783656525e11e849c6ae9e796c13444cd4be1a8167b2e17b1d83efd830b55",
+  "tasks_row_count": 120,
+  "notes": "Concern-tagging batch derived from lane_c adjudicated excerpts.",
+  "input_artifacts": [
+    "docs/etl/sprints/AI-OPS-26/exports/factory/lane_c/factory-20260219-lane_c-001/decisions_adjudicated.csv"
+  ]
+}

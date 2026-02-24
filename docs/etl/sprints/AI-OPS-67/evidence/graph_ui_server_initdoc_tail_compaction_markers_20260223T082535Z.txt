@@ -1,0 +1,10 @@
+57:DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACTED_PATH = (
+1491:    heartbeat_compaction_window = _build_initdoc_actionable_tail_heartbeat_compaction_window_payload()
+1499:            "heartbeat_compaction_window": heartbeat_compaction_window,
+1519:            "heartbeat_compaction_window": heartbeat_compaction_window,
+1525:            "heartbeat_compaction_window": heartbeat_compaction_window,
+1565:def _build_initdoc_actionable_tail_heartbeat_compaction_window_payload(
+1572:    target_compacted_path = compacted_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACTED_PATH
+1574:        from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction_window import (
+1762:                "heartbeat_compaction_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_payload(),
+2859:                "heartbeat_compaction_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_payload(),

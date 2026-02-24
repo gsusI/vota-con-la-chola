@@ -1,0 +1,268 @@
+{
+  "generated_at": "2026-02-23T21:56:35+00:00",
+  "status": "degraded",
+  "totals": {
+    "indirect_person_edges_valid_window_total": 9,
+    "indirect_person_edges_identity_resolved_total": 0,
+    "indirect_person_edges_unresolved_total": 9,
+    "unresolved_actor_names_total": 9,
+    "queue_rows_total": 9,
+    "queue_truncated": false
+  },
+  "coverage": {
+    "indirect_identity_resolution_pct": 0.0,
+    "indirect_identity_unresolved_pct": 1.0
+  },
+  "checks": {
+    "queue_generated": true,
+    "unresolved_backlog_visible": true,
+    "identity_resolution_gate": false
+  },
+  "gate": {
+    "passed": false,
+    "thresholds": {
+      "personal_confidence_min": 0.55,
+      "personal_max_causal_distance": 2,
+      "identity_resolution_min_pct": 1.0,
+      "min_indirect_person_edges": 1
+    }
+  },
+  "queue_preview": [
+    {
+      "queue_rank": 1,
+      "queue_key": "actor_name:25a876344b1b3a9c",
+      "actor_person_name": "Persona seed empleo nombramientos",
+      "actor_role_titles": [
+        "Secretaria de Estado de Empleo"
+      ],
+      "actor_role_titles_csv": "Secretaria de Estado de Empleo",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-09-03",
+      "last_evidence_date": "2024-09-03"
+    },
+    {
+      "queue_rank": 2,
+      "queue_key": "actor_name:797e5e2599d5bd51",
+      "actor_person_name": "Persona seed hacienda delegacion",
+      "actor_role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "actor_role_titles_csv": "Titular del Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-10-14",
+      "last_evidence_date": "2024-10-14"
+    },
+    {
+      "queue_rank": 3,
+      "queue_key": "actor_name:804988cce31df067",
+      "actor_person_name": "Persona seed hacienda diseno",
+      "actor_role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "actor_role_titles_csv": "Titular del Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-10-14",
+      "last_evidence_date": "2024-10-14"
+    },
+    {
+      "queue_rank": 4,
+      "queue_key": "actor_name:d9cf7ea0c21a3d1a",
+      "actor_person_name": "Persona seed movilidad estrategica",
+      "actor_role_titles": [
+        "Direccion politica de movilidad"
+      ],
+      "actor_role_titles_csv": "Direccion politica de movilidad",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-11-08",
+      "last_evidence_date": "2024-11-08"
+    },
+    {
+      "queue_rank": 5,
+      "queue_key": "actor_name:f785ca8f997d2ebd",
+      "actor_person_name": "Persona seed secretaria hacienda",
+      "actor_role_titles": [
+        "Secretaria de Estado de Hacienda"
+      ],
+      "actor_role_titles_csv": "Secretaria de Estado de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-10-14",
+      "last_evidence_date": "2024-10-14"
+    },
+    {
+      "queue_rank": 6,
+      "queue_key": "actor_name:e072f4aa4a3272f6",
+      "actor_person_name": "Persona seed seguridad instrucciones",
+      "actor_role_titles": [
+        "Secretaria de Estado de Seguridad"
+      ],
+      "actor_role_titles_csv": "Secretaria de Estado de Seguridad",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2025-01-20",
+      "last_evidence_date": "2025-01-20"
+    },
+    {
+      "queue_rank": 7,
+      "queue_key": "actor_name:9fd3b178275f9e24",
+      "actor_person_name": "Persona seed trabajo diseno",
+      "actor_role_titles": [
+        "Titular del Ministerio de Trabajo"
+      ],
+      "actor_role_titles_csv": "Titular del Ministerio de Trabajo",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-09-03",
+      "last_evidence_date": "2024-09-03"
+    },
+    {
+      "queue_rank": 8,
+      "queue_key": "actor_name:3a7f27373031c779",
+      "actor_person_name": "Persona seed trafico ministerio",
+      "actor_role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "actor_role_titles_csv": "Titular ministerial de trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-11-08",
+      "last_evidence_date": "2024-11-08"
+    },
+    {
+      "queue_rank": 9,
+      "queue_key": "actor_name:ff96e893a3ff951e",
+      "actor_person_name": "Persona seed trafico procedimiento",
+      "actor_role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "actor_role_titles_csv": "Titular ministerial de trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-05-03",
+      "last_evidence_date": "2024-05-03"
+    }
+  ],
+  "queue_rows": [
+    {
+      "queue_rank": 1,
+      "queue_key": "actor_name:25a876344b1b3a9c",
+      "actor_person_name": "Persona seed empleo nombramientos",
+      "actor_role_titles": [
+        "Secretaria de Estado de Empleo"
+      ],
+      "actor_role_titles_csv": "Secretaria de Estado de Empleo",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-09-03",
+      "last_evidence_date": "2024-09-03"
+    },
+    {
+      "queue_rank": 2,
+      "queue_key": "actor_name:797e5e2599d5bd51",
+      "actor_person_name": "Persona seed hacienda delegacion",
+      "actor_role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "actor_role_titles_csv": "Titular del Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-10-14",
+      "last_evidence_date": "2024-10-14"
+    },
+    {
+      "queue_rank": 3,
+      "queue_key": "actor_name:804988cce31df067",
+      "actor_person_name": "Persona seed hacienda diseno",
+      "actor_role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "actor_role_titles_csv": "Titular del Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-10-14",
+      "last_evidence_date": "2024-10-14"
+    },
+    {
+      "queue_rank": 4,
+      "queue_key": "actor_name:d9cf7ea0c21a3d1a",
+      "actor_person_name": "Persona seed movilidad estrategica",
+      "actor_role_titles": [
+        "Direccion politica de movilidad"
+      ],
+      "actor_role_titles_csv": "Direccion politica de movilidad",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-11-08",
+      "last_evidence_date": "2024-11-08"
+    },
+    {
+      "queue_rank": 5,
+      "queue_key": "actor_name:f785ca8f997d2ebd",
+      "actor_person_name": "Persona seed secretaria hacienda",
+      "actor_role_titles": [
+        "Secretaria de Estado de Hacienda"
+      ],
+      "actor_role_titles_csv": "Secretaria de Estado de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-10-14",
+      "last_evidence_date": "2024-10-14"
+    },
+    {
+      "queue_rank": 6,
+      "queue_key": "actor_name:e072f4aa4a3272f6",
+      "actor_person_name": "Persona seed seguridad instrucciones",
+      "actor_role_titles": [
+        "Secretaria de Estado de Seguridad"
+      ],
+      "actor_role_titles_csv": "Secretaria de Estado de Seguridad",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2025-01-20",
+      "last_evidence_date": "2025-01-20"
+    },
+    {
+      "queue_rank": 7,
+      "queue_key": "actor_name:9fd3b178275f9e24",
+      "actor_person_name": "Persona seed trabajo diseno",
+      "actor_role_titles": [
+        "Titular del Ministerio de Trabajo"
+      ],
+      "actor_role_titles_csv": "Titular del Ministerio de Trabajo",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-09-03",
+      "last_evidence_date": "2024-09-03"
+    },
+    {
+      "queue_rank": 8,
+      "queue_key": "actor_name:3a7f27373031c779",
+      "actor_person_name": "Persona seed trafico ministerio",
+      "actor_role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "actor_role_titles_csv": "Titular ministerial de trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-11-08",
+      "last_evidence_date": "2024-11-08"
+    },
+    {
+      "queue_rank": 9,
+      "queue_key": "actor_name:ff96e893a3ff951e",
+      "actor_person_name": "Persona seed trafico procedimiento",
+      "actor_role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "actor_role_titles_csv": "Titular ministerial de trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "first_evidence_date": "2024-05-03",
+      "last_evidence_date": "2024-05-03"
+    }
+  ]
+}

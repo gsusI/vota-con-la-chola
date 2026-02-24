@@ -1,0 +1,9 @@
+3930:      function resolveConcernIdForTopic(topicId, selectedConcernIds) {
+3943:      function buildCoherenceDrilldownLink(rawLink, opts) {
+3959:          u.searchParams.set("source", "citizen_coherence");
+3969:          p.set("source", "citizen_coherence");
+4122:                  const drillConcernId = resolveConcernIdForTopic(auditTid, cids);
+4123:                  const drilldownLink = buildCoherenceDrilldownLink(temasLink, {
+4130:                  const drilldownLabel = auditIsMismatch ? "Auditar mismatch" : "Auditar coherencia";
+4163:                      ? `<a class="smallLink" data-coherence-drilldown-link="1" data-party-id="${esc(String(pid))}" data-topic-id="${esc(
+4384:                        ? `<a class="smallLink" href="${esc(mismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar mismatch</a>`

@@ -1,0 +1,65 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-28/evidence/hf_remote_quality_verify_20260222T185350Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-28/evidence/hf_remote_quality_verify_20260222T185350Z.json"; fi; docker compose run --rm --build etl "python3 scripts/verify_hf_snapshot_quality.py --dataset-repo vota-con-la-chola-data --snapshot-date 2026-02-12 --timeout 20 ${out_arg}"
+ Image vota-con-la-chola-etl:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.26MB 1.2s done
+#6 DONE 1.2s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.5s done
+#12 exporting manifest sha256:c4a89cf2a53beff81630f2480c9b225a5d6f83bc530ddcf2871e32fece07aaea
+#12 exporting manifest sha256:c4a89cf2a53beff81630f2480c9b225a5d6f83bc530ddcf2871e32fece07aaea done
+#12 exporting config sha256:07a9921fb5a1864b7fbe7c35533373415cf9808cc41a5e77db32ede6b57dfd59 done
+#12 exporting attestation manifest sha256:83e0546f734e9a592df0a602a29e47d1f79acbf51ba209cf73e5ce89520a326d done
+#12 exporting manifest list sha256:eadec2aa7e3e768b75f1c93794d569d4e4682cca86d5a667281caa907e5e244e done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 1.8s done
+#12 DONE 11.3s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image vota-con-la-chola-etl:local Built 
+ Container vota-con-la-chola-etl-run-70ec3be63219 Creating 
+ Container vota-con-la-chola-etl-run-70ec3be63219 Created 
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot date: 2026-02-12
+Latest quality_report: yes
+Manifest quality_report: yes
+Quality file: votaciones-kpis-es-2026-02-12.json
+Readme check: enabled
+OK: contrato de quality_report verificado

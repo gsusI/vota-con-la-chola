@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-02-24T13:20:30+00:00",
+  "strict": true,
+  "input_path": "docs/etl/sprints/AI-OPS-199/evidence/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_latest.json",
+  "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "heartbeat": {
+    "run_at": "2026-02-24T13:20:13+00:00",
+    "heartbeat_id": "2026-02-24T13:20:13+00:00|2026-02-24T13:20:13+00:00|ok|green|0|7",
+    "digest_path": "docs/etl/sprints/AI-OPS-199/evidence/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_latest.json",
+    "digest_generated_at": "2026-02-24T13:20:13+00:00",
+    "compaction_window_generated_at": "2026-02-24T13:20:13+00:00",
+    "status": "ok",
+    "risk_level": "green",
+    "window_raw_entries": 7,
+    "raw_window_incidents": 0,
+    "missing_in_compacted_in_window": 0,
+    "incident_missing_in_compacted": 0,
+    "raw_window_coverage_pct": 100.0,
+    "incident_coverage_pct": 0.0,
+    "strict_fail_count": 0,
+    "risk_reason_count": 0,
+    "strict_fail_reasons": [],
+    "risk_reasons": []
+  }
+}

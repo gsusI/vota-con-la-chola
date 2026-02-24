@@ -1,0 +1,10 @@
+justfile:730:citizen-test-preset-codec:
+justfile:731:  node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js
+justfile:733:citizen-report-preset-contract:
+justfile:736:  node scripts/report_citizen_preset_fixture_contract.js --fixture "{{citizen_preset_contract_fixture}}" --strict ${out_arg}
+docs/etl/sprints/AI-OPS-42/evidence/citizen_preset_contract_report_20260222T210553Z.json:7:  "summary": {
+docs/etl/sprints/AI-OPS-42/evidence/citizen_preset_contract_report_20260222T210553Z.json:8:    "hash_cases_total": 9,
+docs/etl/sprints/AI-OPS-42/evidence/citizen_preset_contract_report_20260222T210553Z.json:11:    "share_cases_total": 3,
+docs/etl/sprints/AI-OPS-42/evidence/citizen_preset_contract_report_20260222T210553Z.json:17:    "failed_ids": []
+tests/test_report_citizen_preset_fixture_contract.js:21:test("preset fixture reporter passes strict mode for canonical fixture", () => {
+tests/test_report_citizen_preset_fixture_contract.js:36:test("preset fixture reporter surfaces failed ids in strict drift run", () => {

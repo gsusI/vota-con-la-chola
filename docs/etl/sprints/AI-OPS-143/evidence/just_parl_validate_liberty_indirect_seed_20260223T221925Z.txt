@@ -1,0 +1,13 @@
+PYTHONPATH=. python3 scripts/validate_liberty_indirect_accountability_seed.py --seed etl/data/seeds/liberty_indirect_accountability_seed_v1.json --out docs/etl/sprints/AI-OPS-143/evidence/liberty_indirect_validate_20260223T221925Z.json
+{
+  "generated_at": "2026-02-23T22:19:26+00:00",
+  "seed_path": "etl/data/seeds/liberty_indirect_accountability_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_indirect_accountability_seed_v1",
+  "method_version": "indirect_chain_v1",
+  "edges_total": 12,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "errors": [],
+  "warnings": []
+}

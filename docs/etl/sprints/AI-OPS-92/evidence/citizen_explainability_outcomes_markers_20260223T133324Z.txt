@@ -1,0 +1,34 @@
+877:            <details class="explainGlossary" data-explainability-glossary="1" aria-label="Glosario rapido para leer resultados">
+878:              <summary data-explainability-copy="1">Glosario rapido: primero mira cobertura y luego abre evidencia.</summary>
+879:              <div class="rowMeta" data-explainability-glossary-tags="1">
+882:                  data-explainability-term="unknown"
+890:                  data-explainability-term="cobertura"
+898:                  data-explainability-term="confianza"
+906:                  data-explainability-term="evidencia"
+913:              <ul class="explainGlossaryList" data-explainability-glossary-list="1">
+914:                <li data-explainability-copy="1">Unknown: incierto mas sin senal. No implica apoyo ni rechazo.</li>
+915:                <li data-explainability-copy="1">Cobertura alta reduce dudas. Cobertura baja exige revisar links.</li>
+916:                <li data-explainability-copy="1">Confianza alta no reemplaza auditoria. Siempre puedes abrir evidencia.</li>
+984:      const EXPLAINABILITY_OUTCOME_TELEMETRY_VERSION = "v1";
+985:      const EXPLAINABILITY_OUTCOME_STORAGE_KEY = "vclc_explainability_outcome_events_v1";
+986:      const EXPLAINABILITY_OUTCOME_MAX_EVENTS = 1200;
+987:      const EXPLAINABILITY_OUTCOME_SESSION_ID = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+1302:          const raw = localStorage.getItem(EXPLAINABILITY_OUTCOME_STORAGE_KEY);
+1314:          localStorage.setItem(EXPLAINABILITY_OUTCOME_STORAGE_KEY, JSON.stringify(explainabilityOutcomeTelemetry.events));
+1339:      function recordExplainabilityOutcomeEvent(eventType, payload) {
+1344:          telemetry_version: EXPLAINABILITY_OUTCOME_TELEMETRY_VERSION,
+1347:          session_id: String(p.session_id || EXPLAINABILITY_OUTCOME_SESSION_ID),
+1359:        if (explainabilityOutcomeTelemetry.events.length > EXPLAINABILITY_OUTCOME_MAX_EVENTS) {
+1360:          explainabilityOutcomeTelemetry.events = explainabilityOutcomeTelemetry.events.slice(-EXPLAINABILITY_OUTCOME_MAX_EVENTS);
+1417:          telemetry_version: EXPLAINABILITY_OUTCOME_TELEMETRY_VERSION,
+1460:      function installExplainabilityOutcomeTelemetry() {
+1461:        const root = qs("[data-explainability-glossary='1']");
+1466:          recordExplainabilityOutcomeEvent("explainability_glossary_opened", {
+1472:        for (const node of root.querySelectorAll("[data-explainability-term]")) {
+1474:            recordExplainabilityOutcomeEvent("explainability_glossary_term_interacted", {
+1476:              term: String(node.getAttribute("data-explainability-term") || "").trim().toLowerCase(),
+1484:        for (const node of root.querySelectorAll("[data-explainability-copy='1']")) {
+1487:            recordExplainabilityOutcomeEvent("explainability_help_copy_interacted", {
+1499:      if (explainabilityOutcomeTelemetry.events.length > EXPLAINABILITY_OUTCOME_MAX_EVENTS) {
+1500:        explainabilityOutcomeTelemetry.events = explainabilityOutcomeTelemetry.events.slice(-EXPLAINABILITY_OUTCOME_MAX_EVENTS);
+1504:      installExplainabilityOutcomeTelemetry();

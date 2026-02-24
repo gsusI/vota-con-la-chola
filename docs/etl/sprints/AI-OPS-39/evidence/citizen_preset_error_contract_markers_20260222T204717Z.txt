@@ -1,0 +1,31 @@
+# AI-OPS-39 markers
+
+## preset codec error contract
+10:    return { preset, error: "", error_code: "" };
+13:  function resultError(errorCode, message) {
+17:      error_code: String(errorCode || ""),
+113:      return resultError("decode_error", String((err && err.message) || err || "preset hash invalido"));
+116:    if (!decoded.startsWith("v1:")) return resultError("unsupported_version", "preset hash version no soportada");
+118:    if (!String(payload || "").trim()) return resultError("empty_payload", "preset hash vacio");
+121:    if (!preset) return resultError("empty_payload", "preset hash vacio");
+124:      return resultError("no_supported_fields", "preset hash sin campos validos");
+
+## citizen ui preset error hint
+1050:        if (!codec) return { preset: null, error: "preset codec no disponible", error_code: "codec_missing" };
+1054:      function presetErrorHint(errorCode) {
+1061:        if (code === "codec_missing") return "No se pudo cargar el modulo de preset. Recarga la pagina y prueba otra vez.";
+1186:        presetLoadErrorCode: "",
+3474:        state.presetLoadErrorCode = "";
+3480:          state.presetLoadErrorCode = String(presetFromHash.error_code || "");
+3619:            const presetHint = presetErrorHint(state.presetLoadErrorCode);
+3620:            banner += `<div style="margin-top:8px"><strong>Aviso preset:</strong> <span class="mono">${esc(
+3730:          state.presetLoadErrorCode = "";
+
+## preset codec tests for malformed hash
+32:  assert.equal(got.error_code, "unsupported_version");
+36:test("readPresetFromHash rejects malformed encoding", () => {
+39:  assert.equal(got.error_code, "decode_error");
+43:test("readPresetFromHash rejects hash with no supported fields", () => {
+47:  assert.equal(got.error_code, "no_supported_fields");
+85:test("readPresetFromHash accepts minimal valid preset", () => {
+89:  assert.equal(got.error_code, "");

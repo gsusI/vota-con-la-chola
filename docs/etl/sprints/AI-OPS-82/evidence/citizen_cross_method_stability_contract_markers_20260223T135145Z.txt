@@ -1,0 +1,45 @@
+# ui module markers
+ui/citizen/cross_method_stability.js:144:  function buildCrossMethodStability(input) {
+ui/citizen/cross_method_stability.js:228:    buildCrossMethodStability,
+ui/citizen/index.html:886:    <script src="./cross_method_stability.js"></script>
+ui/citizen/index.html:2357:        if (!mod || typeof mod.buildCrossMethodStability !== "function") return null;
+ui/citizen/index.html:2361:      function buildCrossMethodStability(input) {
+ui/citizen/index.html:2364:        if (mod) return mod.buildCrossMethodStability(i);
+ui/citizen/index.html:2425:      function renderCrossMethodStabilityPanel(input, kind) {
+ui/citizen/index.html:2426:        const x = buildCrossMethodStability(input || {});
+ui/citizen/index.html:2434:          `<div class="${cls}" data-cross-method-stability="1" data-cross-method-status="${esc(String(x.status || ""))}">` +
+ui/citizen/index.html:2441:          `<span class="tag" data-cross-method-uncertainty="${esc(String(x.uncertainty_level || ""))}">incertidumbre=${esc(
+ui/citizen/index.html:3056:      function crossMethodRowsForTopics(topics, votesPosByKey, declaredPosByKey, combinedPosByKey) {
+ui/citizen/index.html:3274:        const stabilityRows = crossMethodRowsForTopics(topicsUnion, coh.votesPosByKey, coh.declaredPosByKey, coh.combinedPosByKey);
+ui/citizen/index.html:3275:        const stabilityPanel = renderCrossMethodStabilityPanel(
+ui/citizen/index.html:3277:            rows: stabilityRows,
+
+# just markers
+202:citizen_mobile_perf_ui_assets := env_var_or_default("CITIZEN_MOBILE_PERF_UI_ASSETS", "ui/citizen/preset_codec.js,ui/citizen/onboarding_funnel.js,ui/citizen/first_answer_accelerator.js,ui/citizen/unknown_explainability.js,ui/citizen/cross_method_stability.js,ui/citizen/evidence_trust_panel.js")
+212:citizen_release_assets := env_var_or_default("CITIZEN_RELEASE_ASSETS", "index.html,preset_codec.js,onboarding_funnel.js,first_answer_accelerator.js,unknown_explainability.js,cross_method_stability.js,evidence_trust_panel.js")
+900:  cp ui/citizen/cross_method_stability.js {{gh_pages_dir}}/citizen/cross_method_stability.js
+976:citizen-test-cross-method-stability:
+977:  node --test tests/test_citizen_cross_method_stability.js tests/test_citizen_cross_method_stability_ui_contract.js
+993:citizen-release-regression-suite:
+997:  just citizen-test-cross-method-stability
+1033:  python3 scripts/report_citizen_mobile_performance_budget.py --ui-html "{{citizen_mobile_perf_ui_html}}" --ui-assets "{{citizen_mobile_perf_ui_assets}}" --snapshot "{{citizen_mobile_perf_snapshot}}" --max-ui-html-bytes "{{citizen_mobile_perf_max_ui_html_bytes}}" --max-ui-assets-total-bytes "{{citizen_mobile_perf_max_ui_assets_total_bytes}}" --max-snapshot-bytes "{{citizen_mobile_perf_max_snapshot_bytes}}" ${out_arg}
+1038:  python3 scripts/report_citizen_mobile_performance_budget.py --ui-html "{{citizen_mobile_perf_ui_html}}" --ui-assets "{{citizen_mobile_perf_ui_assets}}" --snapshot "{{citizen_mobile_perf_snapshot}}" --max-ui-html-bytes "{{citizen_mobile_perf_max_ui_html_bytes}}" --max-ui-assets-total-bytes "{{citizen_mobile_perf_max_ui_assets_total_bytes}}" --max-snapshot-bytes "{{citizen_mobile_perf_max_snapshot_bytes}}" --strict ${out_arg}
+1053:  node scripts/report_citizen_release_hardening.js --source-root "{{citizen_release_source_root}}" --published-root "{{citizen_release_published_root}}" --snapshot "{{citizen_release_snapshot}}" --concerns "{{citizen_release_concerns}}" --assets "{{citizen_release_assets}}" --max-snapshot-bytes "{{citizen_release_max_snapshot_bytes}}" ${out_arg}
+1058:  node scripts/report_citizen_release_hardening.js --source-root "{{citizen_release_source_root}}" --published-root "{{citizen_release_published_root}}" --snapshot "{{citizen_release_snapshot}}" --concerns "{{citizen_release_concerns}}" --assets "{{citizen_release_assets}}" --max-snapshot-bytes "{{citizen_release_max_snapshot_bytes}}" --strict ${out_arg}
+
+# server markers
+40:UI_CITIZEN_CROSS_METHOD_STABILITY = BASE_DIR / "ui" / "citizen" / "cross_method_stability.js"
+5710:            if path == "/citizen/cross_method_stability.js":
+5711:                if not UI_CITIZEN_CROSS_METHOD_STABILITY.exists():
+5715:                    UI_CITIZEN_CROSS_METHOD_STABILITY.read_bytes(),
+
+# test markers
+tests/test_graph_ui_server_citizen_assets.py:18:        self.assertIn("UI_CITIZEN_CROSS_METHOD_STABILITY", src)
+tests/test_citizen_cross_method_stability_ui_contract.js:11:test("citizen UI loads cross-method stability module", () => {
+tests/test_citizen_cross_method_stability_ui_contract.js:18:test("citizen coherence view includes cross-method stability contract markers", () => {
+tests/test_citizen_cross_method_stability_ui_contract.js:20:  assert.match(html, /data-cross-method-stability/i);
+tests/test_citizen_cross_method_stability_ui_contract.js:21:  assert.match(html, /data-cross-method-status/i);
+tests/test_citizen_cross_method_stability_ui_contract.js:22:  assert.match(html, /data-cross-method-uncertainty/i);
+tests/test_citizen_cross_method_stability.js:6:test("cross-method stability reports stable on aligned comparable stances", () => {
+tests/test_citizen_cross_method_stability.js:23:test("cross-method stability reports uncertain when declared signal is mostly unknown", () => {
+tests/test_citizen_cross_method_stability.js:40:test("cross-method stability reports unstable on high votes-vs-declared mismatch", () => {

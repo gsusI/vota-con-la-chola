@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-02-23T19:09:21+00:00",
+  "snapshot_date": "2026-02-12",
+  "previous_snapshot_date": "2026-02-12",
+  "schema_version": "liberty_restrictions_snapshot_v1",
+  "previous_snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+  "status": "unchanged",
+  "sections": {
+    "accountability_edges": {
+      "current_total": 15,
+      "previous_total": 15,
+      "added_total": 0,
+      "removed_total": 0,
+      "unchanged_total": 15,
+      "added_ids_sample": [],
+      "removed_ids_sample": []
+    },
+    "accountability_scores": {
+      "current_total": 8,
+      "previous_total": 8,
+      "added_total": 0,
+      "removed_total": 0,
+      "unchanged_total": 8,
+      "added_ids_sample": [],
+      "removed_ids_sample": []
+    },
+    "delegated_enforcement_links": {
+      "current_total": 8,
+      "previous_total": 8,
+      "added_total": 0,
+      "removed_total": 0,
+      "unchanged_total": 8,
+      "added_ids_sample": [],
+      "removed_ids_sample": []
+    },
+    "indirect_accountability_edges": {
+      "current_total": 12,
+      "previous_total": 12,
+      "added_total": 0,
+      "removed_total": 0,
+      "unchanged_total": 12,
+      "added_ids_sample": [],
+      "removed_ids_sample": []
+    },
+    "proportionality_reviews": {
+      "current_total": 8,
+      "previous_total": 8,
+      "added_total": 0,
+      "removed_total": 0,
+      "unchanged_total": 8,
+      "added_ids_sample": [],
+      "removed_ids_sample": []
+    },
+    "restrictions": {
+      "current_total": 8,
+      "previous_total": 8,
+      "added_total": 0,
+      "removed_total": 0,
+      "unchanged_total": 8,
+      "added_ids_sample": [],
+      "removed_ids_sample": []
+    }
+  },
+  "changed_sections": [],
+  "changed_sections_total": 0,
+  "items_added_total": 0,
+  "items_removed_total": 0,
+  "totals_current": {
+    "restrictions_total": 8,
+    "accountability_edges_total": 15,
+    "proportionality_reviews_total": 8,
+    "actors_scored_total": 8,
+    "enforcement_observations_total": 16,
+    "indirect_edges_total": 12,
+    "indirect_attributable_edges_total": 9,
+    "delegated_links_total": 8,
+    "fragments_with_delegated_chain_total": 8
+  },
+  "totals_previous": {
+    "restrictions_total": 8,
+    "accountability_edges_total": 15,
+    "proportionality_reviews_total": 8,
+    "actors_scored_total": 8,
+    "enforcement_observations_total": 16,
+    "indirect_edges_total": 12,
+    "indirect_attributable_edges_total": 9,
+    "delegated_links_total": 8,
+    "fragments_with_delegated_chain_total": 8
+  },
+  "totals_delta": {
+    "accountability_edges_total": 0,
+    "actors_scored_total": 0,
+    "delegated_links_total": 0,
+    "enforcement_observations_total": 0,
+    "fragments_with_delegated_chain_total": 0,
+    "indirect_attributable_edges_total": 0,
+    "indirect_edges_total": 0,
+    "proportionality_reviews_total": 0,
+    "restrictions_total": 0
+  },
+  "totals_changed": []
+}

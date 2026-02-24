@@ -1,0 +1,198 @@
+out_arg=""; skip_arg=""; if [ -n "docs/etl/sprints/AI-OPS-32/evidence/quality_declared_gate_skip_vote_enforce_20260222T194957Z.json" ]; then out_arg=" --json-out docs/etl/sprints/AI-OPS-32/evidence/quality_declared_gate_skip_vote_enforce_20260222T194957Z.json"; fi; if [ "1" = "1" ]; then skip_arg=" --skip-vote-gate"; fi; docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db etl/data/staging/politicos-es.db --source-ids congreso_votaciones,senado_votaciones --include-declared --declared-source-ids programas_partidos --enforce-gate${skip_arg}${out_arg}"
+ Image vota-con-la-chola-etl:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.56MB 1.0s done
+#6 DONE 1.0s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.2s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.0s done
+#12 exporting manifest sha256:67edbe85d9a159fece1919b9513219fa0ecbb1db076459a60d3509ab4aa63db2
+#12 exporting manifest sha256:67edbe85d9a159fece1919b9513219fa0ecbb1db076459a60d3509ab4aa63db2 done
+#12 exporting config sha256:21862434559346f10411d500c752e466d55340b188d6682b4a9e12474538bc5f done
+#12 exporting attestation manifest sha256:36f1ee0565fda182f33e4defed1d4c7a5fb4790de60147c61ef3cc507f1bc1c1 done
+#12 exporting manifest list sha256:ef4531f82e6b45480f550b58111b971ee8d9fac4058450f863c410ed0488e9f6 done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 1.9s done
+#12 DONE 11.9s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image vota-con-la-chola-etl:local Built 
+ Container vota-con-la-chola-etl-run-a7247c559c72 Creating 
+ Container vota-con-la-chola-etl-run-a7247c559c72 Created 
+{
+  "declared": {
+    "gate": {
+      "failures": [],
+      "passed": true,
+      "thresholds": {
+        "declared_positions_coverage_pct": 0.95,
+        "review_closed_pct": 0.95,
+        "topic_evidence_with_nonempty_stance_pct": 0.99
+      }
+    },
+    "kpis": {
+      "by_source": {
+        "programas_partidos": {
+          "declared_positions_coverage_pct": 1.0,
+          "declared_positions_scope_total": 5,
+          "declared_positions_total": 5,
+          "review_closed_pct": 1.0,
+          "review_ignored": 6,
+          "review_pending": 0,
+          "review_resolved": 0,
+          "review_total": 6,
+          "source_records": 3,
+          "text_documents": 3,
+          "topic_evidence_total": 11,
+          "topic_evidence_with_nonempty_stance": 11,
+          "topic_evidence_with_nonempty_stance_pct": 1.0,
+          "topic_evidence_with_supported_stance": 5
+        }
+      },
+      "declared_positions_coverage_pct": 1.0,
+      "declared_positions_scope_total": 5,
+      "declared_positions_total": 5,
+      "review_closed_pct": 1.0,
+      "review_ignored": 6,
+      "review_pending": 0,
+      "review_resolved": 0,
+      "review_total": 6,
+      "source_ids": [
+        "programas_partidos"
+      ],
+      "source_records": 3,
+      "text_documents": 3,
+      "topic_evidence_total": 11,
+      "topic_evidence_with_nonempty_stance": 11,
+      "topic_evidence_with_nonempty_stance_pct": 1.0,
+      "topic_evidence_with_supported_stance": 5
+    },
+    "source_ids": [
+      "programas_partidos"
+    ]
+  },
+  "gate": {
+    "failures": [],
+    "passed": true,
+    "thresholds": {
+      "events_with_date_pct": 0.95,
+      "events_with_initiative_link_pct": 0.95,
+      "events_with_theme_pct": 0.95,
+      "events_with_totals_pct": 0.95,
+      "member_votes_with_person_id_pct": 0.9
+    }
+  },
+  "kpis": {
+    "by_source": {
+      "congreso_votaciones": {
+        "events_total": 2823,
+        "events_with_date": 2823,
+        "events_with_date_pct": 1.0,
+        "events_with_initiative_link": 2823,
+        "events_with_initiative_link_pct": 1.0,
+        "events_with_nominal_vote": 1602,
+        "events_with_nominal_vote_pct": 0.5674814027630181,
+        "events_with_official_initiative_link": 685,
+        "events_with_official_initiative_link_pct": 0.2426496634785689,
+        "events_with_theme": 2823,
+        "events_with_theme_pct": 1.0,
+        "events_with_totals": 2823,
+        "events_with_totals_pct": 1.0,
+        "latest_events_total": 1665,
+        "latest_events_with_topic_evidence": 1230,
+        "latest_events_with_topic_evidence_pct": 0.7387387387387387,
+        "latest_legislature": "15",
+        "member_votes_total": 557922,
+        "member_votes_with_person_id": 531812,
+        "member_votes_with_person_id_pct": 0.9532013435569847
+      },
+      "senado_votaciones": {
+        "events_total": 5534,
+        "events_with_date": 5534,
+        "events_with_date_pct": 1.0,
+        "events_with_initiative_link": 5534,
+        "events_with_initiative_link_pct": 1.0,
+        "events_with_nominal_vote": 5412,
+        "events_with_nominal_vote_pct": 0.9779544633176726,
+        "events_with_official_initiative_link": 5534,
+        "events_with_official_initiative_link_pct": 1.0,
+        "events_with_theme": 5534,
+        "events_with_theme_pct": 1.0,
+        "events_with_totals": 5534,
+        "events_with_totals_pct": 1.0,
+        "latest_events_total": 100,
+        "latest_events_with_topic_evidence": 97,
+        "latest_events_with_topic_evidence_pct": 0.97,
+        "latest_legislature": "15",
+        "member_votes_total": 1220448,
+        "member_votes_with_person_id": 1211778,
+        "member_votes_with_person_id_pct": 0.9928960512860852
+      }
+    },
+    "events_total": 8357,
+    "events_with_date": 8357,
+    "events_with_date_pct": 1.0,
+    "events_with_initiative_link": 8357,
+    "events_with_initiative_link_pct": 1.0,
+    "events_with_nominal_vote": 7014,
+    "events_with_nominal_vote_pct": 0.8392963982290296,
+    "events_with_official_initiative_link": 6219,
+    "events_with_official_initiative_link_pct": 0.7441665669498624,
+    "events_with_theme": 8357,
+    "events_with_theme_pct": 1.0,
+    "events_with_totals": 8357,
+    "events_with_totals_pct": 1.0,
+    "latest_events_total": 1765,
+    "latest_events_with_topic_evidence": 1327,
+    "latest_events_with_topic_evidence_pct": 0.7518413597733711,
+    "member_votes_total": 1778370,
+    "member_votes_with_person_id": 1743590,
+    "member_votes_with_person_id_pct": 0.980442765003908,
+    "source_ids": [
+      "congreso_votaciones",
+      "senado_votaciones"
+    ]
+  },
+  "source_ids": [
+    "congreso_votaciones",
+    "senado_votaciones"
+  ]
+}
+OK wrote: docs/etl/sprints/AI-OPS-32/evidence/quality_declared_gate_skip_vote_enforce_20260222T194957Z.json

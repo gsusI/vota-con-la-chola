@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-02-23T21:08:30+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibilities_total": 15,
+    "responsibilities_with_primary_evidence_total": 15,
+    "responsibilities_missing_primary_evidence": 0,
+    "fragments_with_responsibility": 8,
+    "fragments_with_responsibility_primary_evidence": 8,
+    "fragments_missing_primary_evidence": 0,
+    "fragments_missing_responsibility": 0
+  },
+  "coverage": {
+    "responsibility_coverage_pct": 1.0,
+    "responsibility_primary_evidence_coverage_pct": 1.0
+  },
+  "by_role": {
+    "approve": 6,
+    "enforce": 4,
+    "propose": 3,
+    "delegate": 2
+  },
+  "checks": {
+    "seed_loaded": true,
+    "fragment_catalog_loaded": true,
+    "responsibility_chain_started": true,
+    "all_fragments_with_responsibility": true,
+    "primary_evidence_chain_started": true,
+    "all_responsibilities_with_primary_evidence": true
+  },
+  "missing_responsibility_sample": []
+}

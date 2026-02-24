@@ -1,0 +1,61 @@
+node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 1.321917
+  ...
+# Subtest: readPresetFromHash follows fixture matrix contract
+ok 2 - readPresetFromHash follows fixture matrix contract
+  ---
+  duration_ms: 0.398042
+  ...
+# Subtest: buildAlignmentPresetShareUrl follows fixture roundtrip contract
+ok 3 - buildAlignmentPresetShareUrl follows fixture roundtrip contract
+  ---
+  duration_ms: 0.46075
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 4 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.101083
+  ...
+# Subtest: preset codec parity reporter passes strict mode on identical files
+ok 5 - preset codec parity reporter passes strict mode on identical files
+  ---
+  duration_ms: 38.823916
+  ...
+# Subtest: preset codec parity reporter fails strict mode on mismatch and exposes first diff
+ok 6 - preset codec parity reporter fails strict mode on mismatch and exposes first diff
+  ---
+  duration_ms: 36.848958
+  ...
+# Subtest: preset codec sync-state reporter passes strict mode when already synchronized
+ok 7 - preset codec sync-state reporter passes strict mode when already synchronized
+  ---
+  duration_ms: 39.242792
+  ...
+# Subtest: preset codec sync-state reporter fails strict mode when published copy is stale
+ok 8 - preset codec sync-state reporter fails strict mode when published copy is stale
+  ---
+  duration_ms: 37.138042
+  ...
+# Subtest: preset fixture reporter passes strict mode for canonical fixture
+ok 9 - preset fixture reporter passes strict mode for canonical fixture
+  ---
+  duration_ms: 40.079
+  ...
+# Subtest: preset fixture reporter surfaces failed ids in strict drift run
+ok 10 - preset fixture reporter surfaces failed ids in strict drift run
+  ---
+  duration_ms: 36.742584
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 126.558667

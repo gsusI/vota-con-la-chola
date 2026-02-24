@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-02-24T10:59:32+00:00",
+  "status": "degraded",
+  "official_review_source_ids": [
+    "es:sanctions:tear_resolutions",
+    "es:sanctions:teac_resolutions",
+    "es:sanctions:contencioso_sentencias",
+    "es:sanctions:defensor_pueblo_quejas"
+  ],
+  "totals": {
+    "official_review_sources_expected_total": 4,
+    "official_review_sources_seeded_total": 4,
+    "official_review_sources_missing_total": 0,
+    "official_review_sources_with_metrics_total": 0,
+    "official_review_sources_seeded_without_metrics_total": 4,
+    "official_review_procedural_metrics_total": 0,
+    "official_review_metric_rows_with_source_record_total": 0,
+    "official_review_metric_rows_missing_source_record_total": 0,
+    "official_review_metric_rows_with_evidence_total": 0,
+    "official_review_metric_rows_missing_evidence_total": 0,
+    "official_review_kpis_covered_total": 0
+  },
+  "coverage": {
+    "official_review_source_seed_coverage_pct": 1.0,
+    "official_review_source_metric_coverage_pct": 0.0,
+    "official_review_source_record_coverage_pct": 0.0,
+    "official_review_evidence_coverage_pct": 0.0
+  },
+  "checks": {
+    "official_review_sources_seeded": true,
+    "official_review_metrics_started": false,
+    "official_review_kpi_coverage_started": false,
+    "official_review_source_record_chain_started": false,
+    "official_review_evidence_chain_started": false,
+    "official_review_all_seeded_have_metrics": false
+  },
+  "queue": [
+    {
+      "sanction_source_id": "es:sanctions:contencioso_sentencias",
+      "label": "Contentious-administrative judgments",
+      "organismo": "Poder Judicial",
+      "admin_scope": "mixto",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.poderjudicial.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "source_seeded": true,
+      "procedural_metric_rows_total": 0,
+      "kpis_covered_total": 0,
+      "source_record_rows_total": 0,
+      "evidence_rows_total": 0,
+      "status": "no_metrics",
+      "priority": 80,
+      "next_action": "ingest_official_review_procedural_metrics"
+    },
+    {
+      "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+      "label": "Defensor del Pueblo complaints",
+      "organismo": "Defensor del Pueblo",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.defensordelpueblo.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "source_seeded": true,
+      "procedural_metric_rows_total": 0,
+      "kpis_covered_total": 0,
+      "source_record_rows_total": 0,
+      "evidence_rows_total": 0,
+      "status": "no_metrics",
+      "priority": 80,
+      "next_action": "ingest_official_review_procedural_metrics"
+    },
+    {
+      "sanction_source_id": "es:sanctions:teac_resolutions",
+      "label": "TEAC resolutions",
+      "organismo": "Tribunal Economico-Administrativo Central",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "source_seeded": true,
+      "procedural_metric_rows_total": 0,
+      "kpis_covered_total": 0,
+      "source_record_rows_total": 0,
+      "evidence_rows_total": 0,
+      "status": "no_metrics",
+      "priority": 80,
+      "next_action": "ingest_official_review_procedural_metrics"
+    },
+    {
+      "sanction_source_id": "es:sanctions:tear_resolutions",
+      "label": "TEAR tax claims resolutions",
+      "organismo": "Tribunales Economico-Administrativos Regionales",
+      "admin_scope": "autonomico",
+      "territory_scope": "ccaa",
+      "publication_frequency": "yearly",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "source_seeded": true,
+      "procedural_metric_rows_total": 0,
+      "kpis_covered_total": 0,
+      "source_record_rows_total": 0,
+      "evidence_rows_total": 0,
+      "status": "no_metrics",
+      "priority": 80,
+      "next_action": "ingest_official_review_procedural_metrics"
+    }
+  ]
+}

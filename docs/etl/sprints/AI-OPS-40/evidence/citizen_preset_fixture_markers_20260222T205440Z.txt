@@ -1,0 +1,7 @@
+tests/test_citizen_preset_codec.js:9:  const p = path.join(__dirname, "fixtures", "citizen_preset_hash_matrix.json");
+tests/test_citizen_preset_codec.js:36:test("readPresetFromHash follows fixture matrix contract", () => {
+tests/fixtures/citizen_preset_hash_matrix.json:2:  "schema_version": "v1",
+tests/fixtures/citizen_preset_hash_matrix.json:19:      "id": "hash_valid_minimal_alignment",
+tests/fixtures/citizen_preset_hash_matrix.json:30:      "id": "hash_valid_votes_pack_and_concerns",
+tests/fixtures/citizen_preset_hash_matrix.json:45:      "id": "hash_unknown_version",
+tests/fixtures/citizen_preset_hash_matrix.json:54:      "id": "hash_malformed_encoding",

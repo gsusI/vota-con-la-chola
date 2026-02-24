@@ -1,0 +1,208 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "congreso_iniciativas",
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": false,
+  "dry_run": false,
+  "seen": 8932,
+  "upserted": 8932,
+  "needs_review": 590,
+  "by_method": {
+    "keyword_sentence": 13,
+    "keyword_window": 5197,
+    "title_hint": 218,
+    "title_hint_strong": 3504
+  },
+  "by_doc_format": {
+    "html": 3887,
+    "other": 10,
+    "pdf": 778,
+    "xml": 4257
+  },
+  "sample": [
+    {
+      "source_record_pk": 141746,
+      "sample_initiative_id": "congreso:leg15:exp:121/000030/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "MOCIONES CONSECUENCIA DE INTERPELACIÓN 4"
+    },
+    {
+      "source_record_pk": 142149,
+      "sample_initiative_id": "congreso:leg15:exp:121/000022/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 1,
+      "extracted_subject": "PROYECTOS DE LEY 7 de junio de 2024 Núm"
+    },
+    {
+      "source_record_pk": 142150,
+      "sample_initiative_id": "congreso:leg15:exp:121/000022/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "PROYECTOS DE LEY 10 de abril de 2025 Núm"
+    },
+    {
+      "source_record_pk": 150578,
+      "sample_initiative_id": "senado:leg15:exp:621/000008",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 1,
+      "extracted_subject": "PROYECTOS Y PROPOSICIONES DE LEY 3"
+    },
+    {
+      "source_record_pk": 142629,
+      "sample_initiative_id": "congreso:leg15:exp:124/000022/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "MOCIONES CONSECUENCIA DE INTERPELACIÓN 5"
+    },
+    {
+      "source_record_pk": 142630,
+      "sample_initiative_id": "congreso:leg15:exp:124/000024/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 1,
+      "extracted_subject": "PROYECTOS Y PROPOSICIONES DE LEY 2"
+    },
+    {
+      "source_record_pk": 142252,
+      "sample_initiative_id": "congreso:leg15:exp:121/000002/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 1,
+      "extracted_subject": "PROYECTOS DE LEY 1 de abril de 2024 Núm"
+    },
+    {
+      "source_record_pk": 150534,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49"
+    },
+    {
+      "source_record_pk": 150536,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49"
+    },
+    {
+      "source_record_pk": 150537,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49"
+    },
+    {
+      "source_record_pk": 150533,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49"
+    },
+    {
+      "source_record_pk": 150535,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49"
+    },
+    {
+      "source_record_pk": 150538,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49"
+    },
+    {
+      "source_record_pk": 142254,
+      "sample_initiative_id": "congreso:leg15:exp:121/000003/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "PROYECTOS DE LEY 18 de marzo de 2024 Núm"
+    },
+    {
+      "source_record_pk": 142628,
+      "sample_initiative_id": "congreso:leg15:exp:124/000012/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "MOCIONES CONSECUENCIA DE INTERPELACIÓN 4"
+    },
+    {
+      "source_record_pk": 150580,
+      "sample_initiative_id": "senado:leg15:exp:626/000009",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Pregunta sobre si el Presidente del Gobierno ha trasladado a su núcleo de confianza la fecha para presentar su dimisión"
+    },
+    {
+      "source_record_pk": 150581,
+      "sample_initiative_id": "senado:leg15:exp:624/000003",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "MOCIONES CONSECUENCIA DE INTERPELACIÓN 6"
+    },
+    {
+      "source_record_pk": 142627,
+      "sample_initiative_id": "congreso:leg15:exp:124/000004/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "MOCIONES CONSECUENCIA DE INTERPELACIÓN 4"
+    },
+    {
+      "source_record_pk": 142236,
+      "sample_initiative_id": "congreso:leg15:exp:121/000074/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "PROYECTOS DE LEY 14 de noviembre de 2025 Núm"
+    },
+    {
+      "source_record_pk": 142160,
+      "sample_initiative_id": "congreso:leg15:exp:121/000031/0000",
+      "doc_format": "pdf",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 1,
+      "extracted_subject": "PROYECTOS DE LEY 4 de marzo de 2025 Núm"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

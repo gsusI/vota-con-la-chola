@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-02-23T13:33:24+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 14,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 6
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 5,
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": true,
+    "adoption_sessions_meet_minimum": true,
+    "adoption_completeness_meets_minimum": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 2
+    }
+  ]
+}

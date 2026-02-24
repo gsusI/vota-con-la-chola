@@ -1,0 +1,36 @@
+node --test tests/test_citizen_cross_method_stability.js tests/test_citizen_cross_method_stability_ui_contract.js
+TAP version 13
+# Subtest: cross-method stability reports stable on aligned comparable stances
+ok 1 - cross-method stability reports stable on aligned comparable stances
+  ---
+  duration_ms: 0.94475
+  ...
+# Subtest: cross-method stability reports uncertain when declared signal is mostly unknown
+ok 2 - cross-method stability reports uncertain when declared signal is mostly unknown
+  ---
+  duration_ms: 0.18375
+  ...
+# Subtest: cross-method stability reports unstable on high votes-vs-declared mismatch
+ok 3 - cross-method stability reports unstable on high votes-vs-declared mismatch
+  ---
+  duration_ms: 0.126917
+  ...
+# Subtest: citizen UI loads cross-method stability module
+ok 4 - citizen UI loads cross-method stability module
+  ---
+  duration_ms: 1.08775
+  ...
+# Subtest: citizen coherence view includes cross-method stability contract markers
+ok 5 - citizen coherence view includes cross-method stability contract markers
+  ---
+  duration_ms: 0.492875
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.843833

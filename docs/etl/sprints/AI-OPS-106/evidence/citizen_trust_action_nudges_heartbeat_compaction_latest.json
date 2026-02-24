@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-02-23T15:59:11+00:00",
+  "strict": true,
+  "heartbeat_path": "docs/etl/runs/citizen_trust_action_nudges_heartbeat.jsonl",
+  "compacted_path": "docs/etl/runs/citizen_trust_action_nudges_heartbeat.compacted.jsonl",
+  "strategy": {
+    "keep_recent": 20,
+    "keep_mid_span": 100,
+    "keep_mid_every": 5,
+    "keep_old_every": 20
+  },
+  "min_raw_for_dropped_check": 25,
+  "entries_total": 2,
+  "selected_entries": 2,
+  "dropped_entries": 0,
+  "dropped_rate_pct": 0.0,
+  "tiers": {
+    "recent": {
+      "raw_entries": 2,
+      "selected_entries": 2,
+      "cadence_every": 1
+    },
+    "mid": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 5
+    },
+    "old": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 20
+    }
+  },
+  "malformed_total": 0,
+  "malformed_selected": 0,
+  "malformed_dropped": 0,
+  "incidents_total": 0,
+  "incidents_selected": 0,
+  "incidents_dropped": 0,
+  "failed_total": 0,
+  "failed_selected": 0,
+  "failed_dropped": 0,
+  "degraded_total": 0,
+  "degraded_selected": 0,
+  "degraded_dropped": 0,
+  "strict_rows_total": 0,
+  "strict_rows_selected": 0,
+  "strict_rows_dropped": 0,
+  "contract_incomplete_total": 0,
+  "contract_incomplete_selected": 0,
+  "contract_incomplete_dropped": 0,
+  "nudge_clickthrough_violations_total": 0,
+  "nudge_clickthrough_violations_selected": 0,
+  "nudge_clickthrough_violations_dropped": 0,
+  "anchors": {
+    "oldest_selected": true,
+    "latest_selected": true
+  },
+  "raw_first_run_at": "2026-02-23T12:37:36+00:00",
+  "raw_last_run_at": "2026-02-23T15:56:45+00:00",
+  "selected_first_run_at": "2026-02-23T12:37:36+00:00",
+  "selected_last_run_at": "2026-02-23T15:56:45+00:00",
+  "selected_indices_sample": [
+    0,
+    1
+  ],
+  "selected_reasons_sample": [
+    {
+      "index": 0,
+      "line_no": 1,
+      "run_at": "2026-02-23T12:37:36+00:00",
+      "status": "ok",
+      "reasons": [
+        "anchor_oldest",
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 1,
+      "line_no": 2,
+      "run_at": "2026-02-23T15:56:45+00:00",
+      "status": "ok",
+      "reasons": [
+        "anchor_latest",
+        "cadence_recent"
+      ]
+    }
+  ],
+  "checks": {
+    "latest_selected_ok": true,
+    "incidents_preserved_ok": true,
+    "failed_preserved_ok": true,
+    "degraded_preserved_ok": true,
+    "malformed_preserved_ok": true,
+    "strict_rows_preserved_ok": true,
+    "contract_incomplete_preserved_ok": true,
+    "nudge_clickthrough_violations_preserved_ok": true,
+    "dropped_when_above_threshold_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "degraded"
+}

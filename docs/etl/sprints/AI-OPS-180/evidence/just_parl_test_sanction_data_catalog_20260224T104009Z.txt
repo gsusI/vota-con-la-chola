@@ -1,0 +1,6 @@
+python3 -m unittest tests/test_validate_sanction_data_catalog_seed.py tests/test_import_sanction_data_catalog_seed.py tests/test_report_sanction_data_catalog_status.py tests/test_report_sanction_procedural_official_review_status.py tests/test_apply_sanction_procedural_official_review_metrics.py tests/test_export_sanction_procedural_official_review_apply_template.py tests/test_prepare_sanction_procedural_official_review_apply_input.py tests/test_report_sanction_procedural_official_review_apply_readiness.py tests/test_run_sanction_procedural_official_review_apply_cycle.py tests/test_run_sanction_procedural_official_review_prepare_apply_cycle.py
+.......................
+----------------------------------------------------------------------
+Ran 23 tests in 2.671s
+
+OK

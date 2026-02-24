@@ -1,0 +1,21 @@
+node --test tests/test_citizen_coherence_drilldown_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines coherence drilldown link builders
+ok 1 - citizen UI defines coherence drilldown link builders
+  ---
+  duration_ms: 1.820792
+  ...
+# Subtest: coherence cards expose strict drilldown markers for mismatch trace links
+ok 2 - coherence cards expose strict drilldown markers for mismatch trace links
+  ---
+  duration_ms: 0.852292
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 52.059208

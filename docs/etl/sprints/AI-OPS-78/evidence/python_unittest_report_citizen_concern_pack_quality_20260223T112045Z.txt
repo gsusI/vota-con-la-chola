@@ -1,0 +1,203 @@
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T11:20:46+00:00",
+  "status": "ok",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpy_lmx895/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpy_lmx895/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": true
+  },
+  "failure_reasons": [],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T11:20:46+00:00",
+  "status": "failed",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyztxr48u/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyztxr48u/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 0
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": false
+  },
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "status": "ok",
+  "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+  "entry_id": "2026-02-12|2026-02-12|76f80fb2a1da503e54c6ebb093202c9b6208aa322a6ee9d794a6b69c9fe9f146",
+  "appended": true,
+  "history_entries_total": 3,
+  "history_malformed_lines_total": 0,
+  "entry": {
+    "run_at": "2026-02-23T19:09:21+00:00",
+    "entry_id": "2026-02-12|2026-02-12|76f80fb2a1da503e54c6ebb093202c9b6208aa322a6ee9d794a6b69c9fe9f146",
+    "snapshot_date": "2026-02-12",
+    "previous_snapshot_date": "2026-02-12",
+    "schema_version": "liberty_restrictions_snapshot_v1",
+    "snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+    "previous_snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+    "diff_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json",
+    "fingerprint": "76f80fb2a1da503e54c6ebb093202c9b6208aa322a6ee9d794a6b69c9fe9f146",
+    "totals": {
+      "restrictions_total": 8,
+      "accountability_edges_total": 15,
+      "proportionality_reviews_total": 8,
+      "actors_scored_total": 8,
+      "enforcement_observations_total": 16,
+      "indirect_edges_total": 12,
+      "indirect_attributable_edges_total": 9,
+      "delegated_links_total": 8,
+      "fragments_with_delegated_chain_total": 8
+    },
+    "change_summary": {
+      "status": "unchanged",
+      "changed_sections_total": 0,
+      "changed_sections": [],
+      "items_added_total": 0,
+      "items_removed_total": 0,
+      "totals_changed": []
+    }
+  }
+}

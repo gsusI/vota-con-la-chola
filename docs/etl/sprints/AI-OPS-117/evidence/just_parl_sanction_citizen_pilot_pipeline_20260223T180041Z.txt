@@ -1,0 +1,735 @@
+just parl-sanction-foundation-pipeline
+just parl-sanction-norms-seed-pipeline
+just parl-validate-sanction-norms-seed
+PYTHONPATH=. python3 scripts/validate_sanction_norms_seed.py --seed etl/data/seeds/sanction_norms_seed_v1.json --out docs/etl/sprints/AI-OPS-117/evidence/sanction_norms_seed_validate_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:41+00:00",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "valid": true,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "norms_total": 8,
+  "norms_valid": 8,
+  "fragments_total": 8,
+  "responsibility_hints_total": 15,
+  "duplicate_norm_id_count": 0,
+  "duplicate_boe_id_count": 0,
+  "schema_version": "sanction_norms_seed_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-norms-seed
+PYTHONPATH=. python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.aiops117.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-117/evidence/sanction_norms_seed_import_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:41+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops117.db",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibility_hints_total": 15
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_norms_seed_v1",
+    "counts": {
+      "norms_inserted": 8,
+      "norms_updated": 0,
+      "catalog_inserted": 8,
+      "catalog_updated": 0,
+      "fragments_inserted": 8,
+      "fragments_updated": 0,
+      "fragment_links_inserted": 8,
+      "fragment_links_updated": 0,
+      "responsibilities_inserted": 15,
+      "responsibilities_updated": 0
+    },
+    "totals": {
+      "legal_norms_total": 8,
+      "legal_norm_fragments_total": 8,
+      "legal_fragment_responsibilities_total": 15,
+      "sanction_norm_catalog_total": 8,
+      "sanction_norm_fragment_links_total": 8
+    }
+  }
+}
+just parl-report-sanction-norms-seed-status
+PYTHONPATH=. python3 scripts/report_sanction_norms_seed_status.py --db etl/data/staging/politicos-es.aiops117.db --sample-limit 20 --out docs/etl/sprints/AI-OPS-117/evidence/sanction_norms_seed_status_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:41+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibilities_total": 15,
+    "fragments_with_responsibility": 8,
+    "fragments_missing_responsibility": 0
+  },
+  "coverage": {
+    "responsibility_coverage_pct": 1.0
+  },
+  "by_role": {
+    "approve": 6,
+    "enforce": 4,
+    "propose": 3,
+    "delegate": 2
+  },
+  "checks": {
+    "seed_loaded": true,
+    "fragment_catalog_loaded": true,
+    "responsibility_chain_started": true,
+    "all_fragments_with_responsibility": true
+  },
+  "missing_responsibility_sample": []
+}
+just parl-sanction-data-catalog-pipeline
+just parl-validate-sanction-data-catalog-seed
+PYTHONPATH=. python3 scripts/validate_sanction_data_catalog_seed.py --seed etl/data/seeds/sanction_data_catalog_seed_v1.json --out docs/etl/sprints/AI-OPS-117/evidence/sanction_data_catalog_validate_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "seed_path": "etl/data/seeds/sanction_data_catalog_seed_v1.json",
+  "valid": true,
+  "schema_version": "sanction_data_catalog_seed_v1",
+  "errors_count": 0,
+  "warnings_count": 0,
+  "volume_sources_total": 5,
+  "infraction_types_total": 10,
+  "infraction_mappings_total": 10,
+  "procedural_kpis_total": 3,
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-data-catalog-seed
+PYTHONPATH=. python3 scripts/import_sanction_data_catalog_seed.py --db etl/data/staging/politicos-es.aiops117.db --seed etl/data/seeds/sanction_data_catalog_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-117/evidence/sanction_data_catalog_import_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops117.db",
+  "seed_path": "etl/data/seeds/sanction_data_catalog_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "volume_sources_total": 5,
+    "infraction_types_total": 10,
+    "infraction_mappings_total": 10,
+    "procedural_kpis_total": 3
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_data_catalog_seed_v1",
+    "counts": {
+      "volume_sources_inserted": 5,
+      "volume_sources_updated": 0,
+      "infraction_types_inserted": 10,
+      "infraction_types_updated": 0,
+      "infraction_mappings_inserted": 10,
+      "infraction_mappings_updated": 0,
+      "procedural_kpis_inserted": 3,
+      "procedural_kpis_updated": 0,
+      "unresolved_norm_refs": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "sanction_volume_sources_total": 5,
+      "sanction_infraction_types_total": 10,
+      "sanction_infraction_type_mappings_total": 10,
+      "sanction_procedural_kpi_definitions_total": 3
+    }
+  }
+}
+just parl-report-sanction-data-catalog-status
+PYTHONPATH=. python3 scripts/report_sanction_data_catalog_status.py --db etl/data/staging/politicos-es.aiops117.db --sample-limit 20 --out docs/etl/sprints/AI-OPS-117/evidence/sanction_data_catalog_status_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "status": "ok",
+  "totals": {
+    "volume_sources_total": 5,
+    "infraction_types_total": 10,
+    "infraction_mappings_total": 10,
+    "mappings_with_norm_total": 8,
+    "mappings_with_fragment_total": 8,
+    "procedural_kpis_total": 3,
+    "volume_observations_total": 0,
+    "procedural_metric_rows_total": 0
+  },
+  "coverage": {
+    "mapping_fragment_coverage_pct": 0.8,
+    "mapping_norm_coverage_pct": 0.8
+  },
+  "checks": {
+    "volume_sources_seeded": true,
+    "infraction_types_seeded": true,
+    "infraction_mappings_seeded": true,
+    "mappings_with_fragment_seeded": true,
+    "procedural_kpis_seeded": true,
+    "volume_observations_started": false,
+    "procedural_metrics_started": false
+  },
+  "by_domain": {
+    "traffic": 3,
+    "municipal": 2,
+    "tax": 2,
+    "labor": 1,
+    "public_order": 1,
+    "social_security": 1
+  },
+  "by_scope": {
+    "estado": 4,
+    "municipal": 1
+  },
+  "missing_fragment_sample": [
+    {
+      "mapping_key": "inf:municipal_civism|municipal|civismo||",
+      "infraction_type_id": "inf:municipal_civism",
+      "source_system": "municipal",
+      "source_code": "civismo",
+      "source_label": "Ordenanza de civismo"
+    },
+    {
+      "mapping_key": "inf:municipal_waste_noise|municipal|residuos_ruido||",
+      "infraction_type_id": "inf:municipal_waste_noise",
+      "source_system": "municipal",
+      "source_code": "residuos_ruido",
+      "source_label": "Residuos y ruido"
+    }
+  ]
+}
+just parl-sanction-volume-pilot-pipeline
+just parl-validate-sanction-volume-pilot-seed
+PYTHONPATH=. python3 scripts/validate_sanction_volume_pilot_seed.py --seed etl/data/seeds/sanction_volume_pilot_seed_v1.json --out docs/etl/sprints/AI-OPS-117/evidence/sanction_volume_pilot_validate_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "seed_path": "etl/data/seeds/sanction_volume_pilot_seed_v1.json",
+  "valid": true,
+  "schema_version": "sanction_volume_pilot_seed_v1",
+  "errors_count": 0,
+  "warnings_count": 0,
+  "volume_observations_total": 9,
+  "procedural_metrics_total": 6,
+  "municipal_ordinances_total": 20,
+  "municipal_fragments_total": 3,
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-volume-pilot-seed
+PYTHONPATH=. python3 scripts/import_sanction_volume_pilot_seed.py --db etl/data/staging/politicos-es.aiops117.db --seed etl/data/seeds/sanction_volume_pilot_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-117/evidence/sanction_volume_pilot_import_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops117.db",
+  "seed_path": "etl/data/seeds/sanction_volume_pilot_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "volume_observations_total": 9,
+    "procedural_metrics_total": 6,
+    "municipal_ordinances_total": 20,
+    "municipal_fragments_total": 3
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_volume_pilot_seed_v1",
+    "counts": {
+      "volume_observations_inserted": 9,
+      "volume_observations_updated": 0,
+      "procedural_metrics_inserted": 6,
+      "procedural_metrics_updated": 0,
+      "municipal_ordinances_inserted": 20,
+      "municipal_ordinances_updated": 0,
+      "municipal_fragments_inserted": 3,
+      "municipal_fragments_updated": 0,
+      "unresolved_sanction_source_refs": 0,
+      "unresolved_infraction_type_refs": 0,
+      "unresolved_kpi_refs": 0,
+      "unresolved_norm_refs": 0,
+      "unresolved_fragment_refs": 0,
+      "unresolved_ordinance_refs": 0
+    },
+    "totals": {
+      "sanction_volume_observations_total": 9,
+      "sanction_procedural_metrics_total": 6,
+      "sanction_municipal_ordinances_total": 20,
+      "sanction_municipal_ordinance_fragments_total": 3
+    }
+  }
+}
+just parl-report-sanction-volume-pilot-status
+PYTHONPATH=. python3 scripts/report_sanction_volume_pilot_status.py --db etl/data/staging/politicos-es.aiops117.db --top-n 10 --dossier-limit 5 --sample-limit 20 --out docs/etl/sprints/AI-OPS-117/evidence/sanction_volume_pilot_status_20260223T180041Z.json
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "status": "ok",
+  "methodology": {
+    "ranking": {
+      "primary_metric": "expediente_count",
+      "secondary_metric": "importe_total_eur",
+      "incidence_proxy": "incidence_per_1000_observed_cases",
+      "population_incidence": "pending_population_denominator"
+    },
+    "dossier_fields": [
+      "conducta_sancionada (tipologias)",
+      "volumen",
+      "importe",
+      "base_legal (norma+fragmentos)",
+      "drilldown_sources"
+    ]
+  },
+  "totals": {
+    "observations_total": 9,
+    "observations_with_norm_total": 7,
+    "observations_without_norm_total": 2,
+    "observations_with_norm_expediente_total": 3181000,
+    "procedural_metrics_total": 6,
+    "top_norms_total": 6,
+    "norm_dossiers_total": 5
+  },
+  "coverage": {
+    "observations_with_norm_pct": 0.777778,
+    "municipal_normalized_pct": 0.15
+  },
+  "checks": {
+    "observations_loaded": true,
+    "ranking_top_norms_ready": true,
+    "dossiers_top_norms_ready": true,
+    "dossiers_with_legal_drilldown": true,
+    "municipal_pilot_catalog_seeded": true,
+    "municipal_normalization_started": true,
+    "municipal_fragment_rows_loaded": true
+  },
+  "top_normas_sancion_ciudadana": [
+    {
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "expediente_count": 2150000,
+      "importe_total_eur": 279000000.0,
+      "importe_medio_eur": 129.77,
+      "observation_rows": 2,
+      "source_count": 1,
+      "incidence_per_1000_observed_cases": 675.888086,
+      "incidence_per_1000_population": null
+    },
+    {
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "expediente_count": 380000,
+      "importe_total_eur": 420000000.0,
+      "importe_medio_eur": 1105.26,
+      "observation_rows": 1,
+      "source_count": 1,
+      "incidence_per_1000_observed_cases": 119.45929,
+      "incidence_per_1000_population": null
+    },
+    {
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "expediente_count": 230000,
+      "importe_total_eur": 160000000.0,
+      "importe_medio_eur": 695.65,
+      "observation_rows": 1,
+      "source_count": 1,
+      "incidence_per_1000_observed_cases": 72.304307,
+      "incidence_per_1000_population": null
+    },
+    {
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "expediente_count": 210000,
+      "importe_total_eur": 370000000.0,
+      "importe_medio_eur": 1761.9,
+      "observation_rows": 1,
+      "source_count": 1,
+      "incidence_per_1000_observed_cases": 66.016976,
+      "incidence_per_1000_population": null
+    },
+    {
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "expediente_count": 124000,
+      "importe_total_eur": 240000000.0,
+      "importe_medio_eur": 1935.48,
+      "observation_rows": 1,
+      "source_count": 1,
+      "incidence_per_1000_observed_cases": 38.981452,
+      "incidence_per_1000_population": null
+    },
+    {
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "expediente_count": 87000,
+      "importe_total_eur": 310000000.0,
+      "importe_medio_eur": 3563.22,
+      "observation_rows": 1,
+      "source_count": 1,
+      "incidence_per_1000_observed_cases": 27.34989,
+      "incidence_per_1000_population": null
+    }
+  ],
+  "norm_dossiers": [
+    {
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "scope": "nacional",
+      "organismo_competente": "DGT y jefaturas provinciales de trafico",
+      "incidence_hypothesis": "Alta incidencia por volumen de sanciones de trafico en uso diario.",
+      "volumen": {
+        "expediente_count": 2150000,
+        "importe_total_eur": 279000000.0,
+        "observation_rows": 2
+      },
+      "procedural": {
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0,
+        "recurso_estimation_rate": null
+      },
+      "top_infraction_types": [
+        {
+          "infraction_type_id": "inf:traffic_speed",
+          "infraction_label": "Traffic speed",
+          "expediente_count": 1200000,
+          "importe_total_eur": 181000000.0
+        },
+        {
+          "infraction_type_id": "inf:traffic_parking",
+          "infraction_label": "Traffic parking",
+          "expediente_count": 950000,
+          "importe_total_eur": 98000000.0
+        }
+      ],
+      "legal_drilldown_fragments": [
+        {
+          "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque sancionador principal",
+          "competent_body": "DGT y jefaturas provinciales de trafico"
+        }
+      ],
+      "source_lanes": [
+        {
+          "sanction_source_id": "es:sanctions:dgt_anuario",
+          "source_label": "DGT annual sanction volume",
+          "expediente_count": 2150000
+        }
+      ],
+      "municipal_links": {
+        "ordinance_fragment_links_total": 2,
+        "municipal_ordinances_total": 2
+      }
+    },
+    {
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "scope": "nacional",
+      "organismo_competente": "AEAT y administraciones tributarias competentes",
+      "incidence_hypothesis": "Alta incidencia por sanciones tributarias sobre personas fisicas y pymes.",
+      "volumen": {
+        "expediente_count": 380000,
+        "importe_total_eur": 420000000.0,
+        "observation_rows": 1
+      },
+      "procedural": {
+        "recurso_presentado_count": 102000,
+        "recurso_estimado_count": 27000,
+        "recurso_desestimado_count": 75000,
+        "recurso_estimation_rate": 0.264706
+      },
+      "top_infraction_types": [
+        {
+          "infraction_type_id": "inf:tax_formal_noncompliance",
+          "infraction_label": "Tax formal noncompliance",
+          "expediente_count": 380000,
+          "importe_total_eur": 420000000.0
+        }
+      ],
+      "legal_drilldown_fragments": [
+        {
+          "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque de infracciones tributarias",
+          "competent_body": "AEAT y organos tributarios autonómicos/locales segun competencia"
+        }
+      ],
+      "source_lanes": [
+        {
+          "sanction_source_id": "es:sanctions:aeat_memoria",
+          "source_label": "AEAT sanction memory",
+          "expediente_count": 380000
+        }
+      ],
+      "municipal_links": {
+        "ordinance_fragment_links_total": 0,
+        "municipal_ordinances_total": 0
+      }
+    },
+    {
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "scope": "nacional",
+      "organismo_competente": "Organismo competente segun materia",
+      "incidence_hypothesis": "Referencia normativa de incidencia recurrente en expedientes sancionadores.",
+      "volumen": {
+        "expediente_count": 230000,
+        "importe_total_eur": 160000000.0,
+        "observation_rows": 1
+      },
+      "procedural": {
+        "recurso_presentado_count": 76000,
+        "recurso_estimado_count": 18500,
+        "recurso_desestimado_count": 57500,
+        "recurso_estimation_rate": 0.243421
+      },
+      "top_infraction_types": [
+        {
+          "infraction_type_id": "inf:public_order_minor",
+          "infraction_label": "Public order minor",
+          "expediente_count": 230000,
+          "importe_total_eur": 160000000.0
+        }
+      ],
+      "legal_drilldown_fragments": [
+        {
+          "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque sancionador principal",
+          "competent_body": "Organo competente segun distribucion legal"
+        }
+      ],
+      "source_lanes": [
+        {
+          "sanction_source_id": "es:sanctions:interior_lo4_2015",
+          "source_label": "Interior sanctions under LO 4/2015",
+          "expediente_count": 230000
+        }
+      ],
+      "municipal_links": {
+        "ordinance_fragment_links_total": 0,
+        "municipal_ordinances_total": 0
+      }
+    },
+    {
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "scope": "nacional",
+      "organismo_competente": "Organismo estatal competente segun materia",
+      "incidence_hypothesis": "Referencia frecuente en flujos sancionadores de alta recurrencia ciudadana.",
+      "volumen": {
+        "expediente_count": 210000,
+        "importe_total_eur": 370000000.0,
+        "observation_rows": 1
+      },
+      "procedural": {
+        "recurso_presentado_count": 51000,
+        "recurso_estimado_count": 13000,
+        "recurso_desestimado_count": 38000,
+        "recurso_estimation_rate": 0.254902
+      },
+      "top_infraction_types": [
+        {
+          "infraction_type_id": "inf:tax_payment_default",
+          "infraction_label": "Tax payment default",
+          "expediente_count": 210000,
+          "importe_total_eur": 370000000.0
+        }
+      ],
+      "legal_drilldown_fragments": [
+        {
+          "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque sancionador principal",
+          "competent_body": "Organo competente segun reparto legal"
+        }
+      ],
+      "source_lanes": [
+        {
+          "sanction_source_id": "es:sanctions:aeat_memoria",
+          "source_label": "AEAT sanction memory",
+          "expediente_count": 210000
+        }
+      ],
+      "municipal_links": {
+        "ordinance_fragment_links_total": 0,
+        "municipal_ordinances_total": 0
+      }
+    },
+    {
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "scope": "nacional",
+      "organismo_competente": "Ministerio del Interior y delegaciones/subdelegaciones",
+      "incidence_hypothesis": "Alta incidencia por sanciones administrativas en seguridad ciudadana.",
+      "volumen": {
+        "expediente_count": 124000,
+        "importe_total_eur": 240000000.0,
+        "observation_rows": 1
+      },
+      "procedural": {
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0,
+        "recurso_estimation_rate": null
+      },
+      "top_infraction_types": [
+        {
+          "infraction_type_id": "inf:ss_contribution_default",
+          "infraction_label": "Social security contribution default",
+          "expediente_count": 124000,
+          "importe_total_eur": 240000000.0
+        }
+      ],
+      "legal_drilldown_fragments": [
+        {
+          "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque de infracciones y sanciones",
+          "competent_body": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados"
+        }
+      ],
+      "source_lanes": [
+        {
+          "sanction_source_id": "es:sanctions:tgss_itss",
+          "source_label": "TGSS and ITSS sanction bulletin",
+          "expediente_count": 124000
+        }
+      ],
+      "municipal_links": {
+        "ordinance_fragment_links_total": 0,
+        "municipal_ordinances_total": 0
+      }
+    }
+  ],
+  "municipal_normalization_progress": {
+    "target_pilot_cities": 20,
+    "totals": {
+      "ordinances_total": 20,
+      "normalized_total": 3,
+      "identified_total": 17,
+      "blocked_total": 0,
+      "ordinance_fragments_total": 3,
+      "mapped_norm_total": 2,
+      "mapped_fragment_total": 2
+    },
+    "coverage": {
+      "pilot_catalog_coverage_pct": 1.0,
+      "normalized_coverage_pct": 0.15,
+      "fragment_norm_mapping_pct": 0.666667,
+      "fragment_fragment_mapping_pct": 0.666667
+    },
+    "normalized_sample": [
+      {
+        "ordinance_id": "es:mun:barcelona:civisme_2025",
+        "city_name": "Barcelona",
+        "ordinance_label": "Ordenança de mesures per fomentar i garantir la convivencia ciutadana"
+      },
+      {
+        "ordinance_id": "es:mun:madrid:movilidad_2025",
+        "city_name": "Madrid",
+        "ordinance_label": "Ordenanza de movilidad sostenible"
+      },
+      {
+        "ordinance_id": "es:mun:valencia:movilidad_2025",
+        "city_name": "Valencia",
+        "ordinance_label": "Ordenanza de movilidad urbana"
+      }
+    ],
+    "normalization_backlog_sample": [
+      {
+        "ordinance_id": "es:mun:acoruna:pilot",
+        "city_name": "A Coruna",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:alicante:pilot",
+        "city_name": "Alicante",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:bilbao:pilot",
+        "city_name": "Bilbao",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:cordoba:pilot",
+        "city_name": "Cordoba",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:elche:pilot",
+        "city_name": "Elche",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:gijon:pilot",
+        "city_name": "Gijon",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:granada:pilot",
+        "city_name": "Granada",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:hospitalet:pilot",
+        "city_name": "L'Hospitalet de Llobregat",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:las-palmas:pilot",
+        "city_name": "Las Palmas de Gran Canaria",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:malaga:pilot",
+        "city_name": "Malaga",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:murcia:pilot",
+        "city_name": "Murcia",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:palma:pilot",
+        "city_name": "Palma",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:sevilla:pilot",
+        "city_name": "Sevilla",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:valladolid:pilot",
+        "city_name": "Valladolid",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:vigo:pilot",
+        "city_name": "Vigo",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:vitoria:pilot",
+        "city_name": "Vitoria-Gasteiz",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      },
+      {
+        "ordinance_id": "es:mun:zaragoza:pilot",
+        "city_name": "Zaragoza",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 2,
+    "pages": [
+      {
+        "candidate_urls": 825,
+        "doc_links_seen": 833,
+        "dry_run": false,
+        "failures": [
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000002.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000003.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000004.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000005.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000006.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000007.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000008.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000009.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000010.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000011.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000012.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000013.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000014.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000015.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000016.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000017.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000018.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000019.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000020.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000021.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000022.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000023.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000024.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000025.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000026.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000027.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000028.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000029.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000030.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000031.xml -> HTTPError: HTTP Error 403: Forbidden"
+        ],
+        "fetched_ok": 78,
+        "initiative_documents_upserted": 833,
+        "initiative_source_ids": [
+          "congreso_iniciativas",
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 200,
+        "skipped_existing": 4,
+        "text_documents_upserted": 78
+      },
+      {
+        "candidate_urls": 864,
+        "doc_links_seen": 864,
+        "dry_run": false,
+        "failures": [
+          "url=http://www.senado.es/legis10/expedientes/626/xml/INI-3-626000003.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=http://www.senado.es/legis12/expedientes/624/enmiendas/global_enmiendas_vetos_12_624000014.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/620/enmiendas/global_enmiendas_vetos_14_620000007.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000047.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000048.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000049.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000050.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000051.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000052.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000053.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000054.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000055.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000056.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000057.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000060.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000010.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000012.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000013.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000014.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000015.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/legis14/expedientes/625/enmiendas/global_enmiendas_vetos_14_625000001.xml -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=626&id2=000003 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=624&id2=000014 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=610&id2=000082 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=610&id2=000083 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=610&id2=000084 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=610&id2=000099 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=610&id2=000100 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=620&id2=000007 -> HTTPError: HTTP Error 403: Forbidden",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000047 -> HTTPError: HTTP Error 403: Forbidden"
+        ],
+        "fetched_ok": 0,
+        "initiative_documents_upserted": 864,
+        "initiative_source_ids": [
+          "congreso_iniciativas",
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 200,
+        "skipped_existing": 743,
+        "text_documents_upserted": 0
+      }
+    ],
+    "stop_reason": "no_progress"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 287,
+    "source_ids": [
+      "congreso_iniciativas",
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}
