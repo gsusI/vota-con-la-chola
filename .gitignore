@@ -13,6 +13,9 @@ intro.md
 
 # Local scratch/build outputs
 dist/
+.next/
+out/
+node_modules/
 
 # Accidental command artifacts (created by mis-quoted CLI runs)
 /-
