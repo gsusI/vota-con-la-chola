@@ -210,8 +210,8 @@
 
       .panel {
         min-height: 0;
-        display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr);
+        display: flex;
+        flex-direction: column;
       }
 
       .panel .head {
@@ -285,6 +285,7 @@
         padding: 0 14px 14px;
         overflow: auto;
         min-height: 0;
+        flex: 1 1 auto;
         display: grid;
         gap: 10px;
       }
@@ -365,8 +366,9 @@
         color: #7f1d1d;
       }
 
-      .wide {
-        grid-template-rows: auto auto minmax(0, 1fr);
+      .wide .split {
+        flex: 1 1 auto;
+        min-height: 0;
       }
 
       .split {
@@ -827,6 +829,7 @@
         activeSetId: null,
         activeTopicId: null,
         activePersonId: null,
+        activePartyId: null,
         reviewBusy: false,
       };
 
@@ -917,10 +920,11 @@
         return await readJson(url);
       }
 
-      async function apiCoherence({ topicSetId, topicId, limit = 200, offset = 0 } = {}) {
+      async function apiCoherence({ topicSetId, topicId, partyId, limit = 200, offset = 0 } = {}) {
         const p = new URLSearchParams();
         if (topicSetId) p.set("topic_set_id", String(topicSetId));
         if (topicId) p.set("topic_id", String(topicId));
+        if (partyId) p.set("party_id", String(partyId));
         p.set("limit", String(limit));
         p.set("offset", String(offset));
         const url = resolveApiPath(`/api/topics/coherence?${p.toString()}`);
@@ -934,6 +938,7 @@
         topicId,
         scope,
         personId,
+        partyId,
         limit = 200,
         offset = 0,
       } = {}) {
@@ -943,6 +948,7 @@
         if (topicId) p.set("topic_id", String(topicId));
         if (scope) p.set("scope", String(scope));
         if (personId) p.set("person_id", String(personId));
+        if (partyId) p.set("party_id", String(partyId));
         p.set("limit", String(limit));
         p.set("offset", String(offset));
         const url = resolveApiPath(`/api/topics/coherence/evidence?${p.toString()}`);
@@ -978,9 +984,19 @@
         const setId = paramGet("set") || paramGet("topic_set_id");
         const topicId = paramGet("topic") || paramGet("topic_id");
         const personId = paramGet("person") || paramGet("person_id");
+        const partyId = paramGet("party") || paramGet("party_id");
+        const source = norm(paramGet("source"));
+        const view = norm(paramGet("view"));
+        const bucket = norm(paramGet("bucket"));
         if (setId) state.activeSetId = setId;
         if (topicId) state.activeTopicId = topicId;
         if (personId) state.activePersonId = personId;
+        if (partyId) state.activePartyId = partyId;
+        if ((source === "citizen_coherence" || view === "coherence" || bucket) && state.activeTopicId) {
+          state.evidence.mode = "coherence";
+          state.evidence.bucket = bucket || "incoherent";
+          state.coherence.selectedBucket = state.evidence.bucket;
+        }
 
         const method = paramGet("method");
         if (method && nodes.method) nodes.method.value = method;
@@ -1189,7 +1205,7 @@
       }
 
       function renderCoherence() {
-        const hasSelection = Boolean(state.activeSetId && state.activeTopicId);
+        const hasSelection = Boolean(state.activeTopicId);
         const summary = state.coherence.summary || {};
         const groups = Array.isArray(state.coherence.groups) ? state.coherence.groups : [];
         const overlap = Number(summary.overlap_total || 0);
@@ -1234,7 +1250,8 @@
         }
 
         const asOf = state.coherence.asOfDate ? `as_of=${state.coherence.asOfDate}` : "as_of=-";
-        nodes.coherenceMeta.textContent = `overlap=${overlap} explicit=${explicit} coherent=${coherent} incoherent=${incoherent}`;
+        const partyMeta = state.activePartyId ? ` party_id=${state.activePartyId}` : "";
+        nodes.coherenceMeta.textContent = `overlap=${overlap} explicit=${explicit} coherent=${coherent} incoherent=${incoherent}${partyMeta}`;
         nodes.coherenceFoot.textContent =
           `${asOf} | groups=${groups.length}. Click en un bucket para drill-down a evidence rows.`;
         nodes.cohOverlap.disabled = overlap <= 0;
@@ -1244,7 +1261,7 @@
       }
 
       async function loadCoherenceSummary() {
-        if (!state.activeSetId || !state.activeTopicId) {
+        if (!state.activeTopicId) {
           resetCoherenceState();
           renderCoherence();
           return;
@@ -1261,6 +1278,7 @@
           const payload = await apiCoherence({
             topicSetId: state.activeSetId,
             topicId: state.activeTopicId,
+            partyId: state.activePartyId,
             limit: 200,
             offset: 0,
           });
@@ -1272,6 +1290,13 @@
           const scopeValues = Array.from(new Set(groups.map((g) => norm(g.scope || "")).filter(Boolean)));
           state.coherence.scope = scopeValues.length === 1 ? scopeValues[0] : "";
           state.coherence.pairsTotal = Number(summary.overlap_total || 0);
+          if (!state.activeSetId) {
+            const firstWithSet = groups.find((g) => g && g.topic_set_id);
+            if (firstWithSet && firstWithSet.topic_set_id) {
+              state.activeSetId = String(firstWithSet.topic_set_id);
+              paramSet("set", state.activeSetId);
+            }
+          }
         } catch (err) {
           state.coherence.groups = [];
           state.coherence.summary = { overlap_total: 0, explicit_total: 0, coherent_total: 0, incoherent_total: 0 };
@@ -1287,7 +1312,7 @@
 
       async function loadCoherenceEvidencePage({ reset, bucket }) {
         if (state.evidence.loading) return;
-        if (!state.activeSetId || !state.activeTopicId) return;
+        if (!state.activeTopicId) return;
         if (state.mode !== "live") return;
 
         const useBucket = norm(bucket || state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
@@ -1310,6 +1335,7 @@
             topicSetId: state.activeSetId,
             topicId: state.activeTopicId,
             scope: scope || "",
+            partyId: state.activePartyId,
             limit: state.evidence.limit,
             offset: state.evidence.offset + state.evidence.rows.length,
           });
@@ -1333,16 +1359,21 @@
       }
 
       async function drillCoherenceBucket(bucket) {
-        if (!state.activeSetId || !state.activeTopicId) return;
+        if (!state.activeTopicId) return;
         if (state.mode !== "live") return;
         state.activePersonId = null;
         paramSet("person", "");
+        paramSet("party", state.activePartyId || "");
+        paramSet("party_id", state.activePartyId || "");
+        paramSet("view", "coherence");
+        paramSet("bucket", bucket || "incoherent");
+        paramSet("source", "citizen_coherence");
         await loadCoherenceEvidencePage({ reset: true, bucket });
         renderPositions();
       }
 
       function renderPositions() {
-        if (!state.activeSetId || !state.activeTopicId) {
+        if (!state.activeTopicId) {
           nodes.positions.innerHTML = "<div class='empty'>Selecciona un tema.</div>";
           nodes.positionsMeta.textContent = "Selecciona un tema.";
           nodes.positionsMore.disabled = true;
@@ -1477,6 +1508,7 @@
             const kindBadge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
             const et = toText(raw.evidence_type || "evidence");
             const personName = toText(raw.person_name || (raw.person_id ? `person_id=${raw.person_id}` : ""));
+            const partyName = toText(raw.party_name || (raw.party_id ? `party_id=${raw.party_id}` : ""));
             const pair = `does=${toText(raw.does_stance || "-")} says=${toText(raw.says_stance || "-")}`;
             const dt = toText(raw.evidence_date || "");
             const src = toText(raw.source_id || "");
@@ -1496,7 +1528,7 @@
             div.className = "ev";
             div.innerHTML =
               `<div class="row"><strong>${esc(et)}</strong>${kindBadge}</div>` +
-              `<div class="meta">${esc(personName)}  |  ${esc(pair)}</div>` +
+              `<div class="meta">${esc([personName, partyName].filter(Boolean).join("  | "))}  |  ${esc(pair)}</div>` +
               `<div class="meta">${esc([dt, src, conf].filter(Boolean).join("  |  "))}${url ? "  |  " + url : ""}${openSql ? "  |  " + openSql : ""}</div>` +
               (ex ? `<div class="excerpt">${esc(ex)}</div>` : "");
             nodes.evidence.appendChild(div);
@@ -1691,7 +1723,7 @@
 
       async function loadPositionsPage({ reset }) {
         if (state.positions.loading) return;
-        if (!state.activeSetId || !state.activeTopicId) return;
+        if (!state.activeTopicId) return;
         state.positions.loading = true;
         if (reset) {
           state.positions.offset = 0;
@@ -1700,10 +1732,9 @@
         }
         nodes.positions.innerHTML = "<div class='empty'>Cargando...</div>";
 
-        const where = [
-          ["topic_set_id", state.activeSetId],
-          ["topic_id", state.activeTopicId],
-        ];
+        const where = [["topic_id", state.activeTopicId]];
+        if (state.activeSetId) where.push(["topic_set_id", state.activeSetId]);
+        if (state.activePartyId && state.mode === "live") where.push(["party_id", state.activePartyId]);
         const methodNeedle = norm(nodes.method && nodes.method.value ? nodes.method.value : "");
         if (methodNeedle && methodNeedle !== "all") where.push(["computed_method", methodNeedle]);
         const stanceNeedle = norm(nodes.stance.value);
@@ -1773,15 +1804,14 @@
       }
 
       function openInSql() {
-        if (!state.activeSetId) {
+        if (!state.activeSetId && !state.activeTopicId) {
           window.location.href = withApiParam("../explorer/?t=topic_sets&tf=topic_");
           return;
         }
         if (state.activeTopicId && state.activePersonId) {
           const url =
             "../explorer/?t=topic_evidence&tf=topic_" +
-            "&wc=topic_set_id&wv=" +
-            encodeURIComponent(String(state.activeSetId)) +
+            (state.activeSetId ? "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId)) : "") +
             "&wc=topic_id&wv=" +
             encodeURIComponent(String(state.activeTopicId)) +
             "&wc=person_id&wv=" +
@@ -1794,8 +1824,7 @@
             const bucket = encodeURIComponent(String(state.evidence.bucket));
             const url =
               "../explorer/?t=topic_evidence&tf=topic_" +
-              "&wc=topic_set_id&wv=" +
-              encodeURIComponent(String(state.activeSetId)) +
+              (state.activeSetId ? "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId)) : "") +
               "&wc=topic_id&wv=" +
               encodeURIComponent(String(state.activeTopicId));
             window.location.href = withApiParam(url) + `#coherence-bucket=${bucket}`;
@@ -1804,10 +1833,10 @@
           const methodNeedle = norm(nodes.method && nodes.method.value ? nodes.method.value : "");
           const url =
             "../explorer/?t=topic_positions&tf=topic_" +
-            "&wc=topic_set_id&wv=" +
-            encodeURIComponent(String(state.activeSetId)) +
+            (state.activeSetId ? "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId)) : "") +
             "&wc=topic_id&wv=" +
             encodeURIComponent(String(state.activeTopicId)) +
+            (state.activePartyId ? ("&wc=party_id&wv=" + encodeURIComponent(String(state.activePartyId))) : "") +
             (methodNeedle && methodNeedle !== "all"
               ? ("&wc=computed_method&wv=" + encodeURIComponent(String(nodes.method.value)))
               : "");
@@ -1894,6 +1923,9 @@
         paramSet("set", state.activeSetId);
         paramSet("topic", "");
         paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
         await loadTopicsForSet();
         renderSets();
         renderTopics();
@@ -1908,6 +1940,9 @@
         state.activePersonId = null;
         paramSet("topic", state.activeTopicId);
         paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
         state.positions.rows = [];
         state.positions.total = 0;
         state.evidence.rows = [];
@@ -1926,6 +1961,9 @@
         if (!personId) return;
         state.activePersonId = String(personId);
         paramSet("person", state.activePersonId);
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
         state.evidence.mode = "person";
         state.evidence.bucket = "";
         state.coherence.selectedBucket = "";
@@ -1958,10 +1996,12 @@
           renderSets();
           renderTopics();
         }
-        if (state.activeSetId && state.activeTopicId) {
+        if (state.activeTopicId) {
           await Promise.all([loadPositionsPage({ reset: true }), loadCoherenceSummary()]);
         }
-        if (state.activeSetId && state.activeTopicId && state.activePersonId) {
+        if (state.activeTopicId && state.evidence.mode === "coherence" && (state.evidence.bucket || state.coherence.selectedBucket)) {
+          await loadCoherenceEvidencePage({ reset: true, bucket: state.evidence.bucket || state.coherence.selectedBucket });
+        } else if (state.activeTopicId && state.activePersonId) {
           await loadEvidencePage({ reset: true });
         } else {
           renderEvidence();
@@ -1984,6 +2024,9 @@
         state.evidence.bucket = "";
         state.coherence.selectedBucket = "";
         paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
         loadPositionsPage({ reset: true }).catch(() => {});
         renderCoherence();
         renderEvidence();
@@ -1997,6 +2040,9 @@
         state.evidence.bucket = "";
         state.coherence.selectedBucket = "";
         paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
         loadPositionsPage({ reset: true }).catch(() => {});
         renderCoherence();
         renderEvidence();
@@ -2019,12 +2065,18 @@
         state.activeSetId = null;
         state.activeTopicId = null;
         state.activePersonId = null;
+        state.activePartyId = null;
         state.evidence.mode = "person";
         state.evidence.bucket = "";
         resetCoherenceState();
         paramSet("set", "");
         paramSet("topic", "");
         paramSet("person", "");
+        paramSet("party", "");
+        paramSet("party_id", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
         reloadAll().catch((err) => setBanner(`<div class="mono">Error: ${esc(toText(err && err.message ? err.message : err))}</div>`));
       });
 

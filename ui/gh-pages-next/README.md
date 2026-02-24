@@ -12,7 +12,7 @@ npm run dev
 ## Static export
 
 ```bash
-NEXT_PUBLIC_BASE_PATH="" npm run export:gh
+NEXT_PUBLIC_BASE_PATH="/vota-con-la-chola" npm run export:gh
 ```
 
 Build output is written to `out/` and then copied into `docs/gh-pages/` by `just explorer-gh-pages-build`.

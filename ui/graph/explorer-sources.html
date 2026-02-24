@@ -582,6 +582,276 @@
         font-size: 0.76rem;
       }
 
+      .campaign-shell {
+        border: 1px solid #d8e0f6;
+        border-radius: 16px;
+        background:
+          radial-gradient(900px 360px at 8% 0%, #dbeafe 0%, transparent 68%),
+          radial-gradient(800px 420px at 92% 10%, #d1fae5 0%, transparent 65%),
+          linear-gradient(160deg, #f8fbff, #f2f7ff);
+        padding: 12px;
+      }
+
+      .campaign-hud {
+        border: 1px solid #d3def7;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+      }
+
+      .campaign-hud-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .campaign-hud-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .campaign-hud-kpis {
+        margin-top: 8px;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .campaign-hud-kpi {
+        border: 1px solid #dbe7ff;
+        border-radius: 10px;
+        background: #ffffff;
+        padding: 8px;
+      }
+
+      .campaign-hud-kpi .label {
+        margin: 0 0 4px;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #1e3a8a;
+      }
+
+      .campaign-hud-kpi strong {
+        font-size: 1rem;
+      }
+
+      .campaign-board {
+        margin-top: 10px;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .campaign-territory {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #d3def7;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        padding: 10px;
+        min-height: 220px;
+      }
+
+      .campaign-territory::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.22;
+        background:
+          radial-gradient(460px 170px at 8% 0%, #dbeafe 0%, transparent 68%),
+          repeating-linear-gradient(
+            24deg,
+            transparent 0px,
+            transparent 11px,
+            rgba(59, 130, 246, 0.08) 11px,
+            rgba(59, 130, 246, 0.08) 14px
+          );
+      }
+
+      .campaign-territory[data-tier="captured"] {
+        border-color: #86efac;
+      }
+
+      .campaign-territory[data-tier="captured"]::before {
+        background:
+          radial-gradient(500px 180px at 8% 0%, #bbf7d0 0%, transparent 70%),
+          repeating-linear-gradient(
+            24deg,
+            transparent 0px,
+            transparent 10px,
+            rgba(34, 197, 94, 0.1) 10px,
+            rgba(34, 197, 94, 0.1) 13px
+          );
+      }
+
+      .campaign-territory[data-tier="contested"] {
+        border-color: #fdba74;
+      }
+
+      .campaign-territory[data-tier="contested"]::before {
+        background:
+          radial-gradient(500px 180px at 8% 0%, #fde68a 0%, transparent 70%),
+          repeating-linear-gradient(
+            24deg,
+            transparent 0px,
+            transparent 10px,
+            rgba(245, 158, 11, 0.11) 10px,
+            rgba(245, 158, 11, 0.11) 13px
+          );
+      }
+
+      .campaign-territory[data-tier="frontier"] {
+        border-color: #fca5a5;
+      }
+
+      .campaign-territory[data-tier="frontier"]::before {
+        background:
+          radial-gradient(500px 180px at 8% 0%, #fecaca 0%, transparent 70%),
+          repeating-linear-gradient(
+            24deg,
+            transparent 0px,
+            transparent 10px,
+            rgba(220, 38, 38, 0.1) 10px,
+            rgba(220, 38, 38, 0.1) 13px
+          );
+      }
+
+      .campaign-territory > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .campaign-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .campaign-name {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .campaign-percent {
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 1.02rem;
+        font-weight: 700;
+      }
+
+      .campaign-meter {
+        margin-top: 8px;
+        height: 12px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        border: 1px solid #d7e1f6;
+        overflow: hidden;
+      }
+
+      .campaign-meter > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #16a34a, #0ea5e9, #2563eb);
+      }
+
+      .campaign-meter.secondary > span {
+        background: linear-gradient(90deg, #f59e0b, #0ea5e9);
+      }
+
+      .campaign-statline {
+        margin-top: 6px;
+        font-size: 0.8rem;
+        color: #334155;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .campaign-legend {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .campaign-chip {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 3px 7px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+
+      .campaign-chip.ok {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .campaign-chip.warn {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .campaign-chip.err {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
+      .campaign-tags {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .campaign-tag {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #dbe7ff;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #1e293b;
+        padding: 2px 7px;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .campaign-list {
+        margin-top: 8px;
+        border: 1px solid #dbe7ff;
+        border-radius: 10px;
+        background: #ffffff;
+        padding: 7px 8px;
+      }
+
+      .campaign-list summary {
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .campaign-list ul {
+        margin: 6px 0 0;
+        padding-left: 16px;
+      }
+
+      .campaign-list li {
+        margin: 4px 0;
+        font-size: 0.78rem;
+      }
+
       @media (max-width: 1120px) {
         .toolbar {
           grid-template-columns: 1fr 1fr;
@@ -608,6 +878,10 @@
         .actions-grid {
           grid-template-columns: 1fr;
         }
+
+        .campaign-board {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -618,9 +892,9 @@
       </div>
       <section class="top">
         <p class="eyebrow">Panel operativo</p>
-	        <h1>
+		        <h1>
 	          Estado de fuentes y conectores de datos
-	          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.0.7</span>
+	          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.1.0</span>
 	        </h1>
         <p class="subtitle">
           Dashboard integral de progreso: cruza <span class="mono">SOURCE_CONFIG</span>, tracker operativo, roadmap macro y roadmap técnico con KPIs cuantificables.
@@ -701,11 +975,24 @@
           </div>
         </details>
         <p class="sub">La pantalla se organiza por <span class="mono">ámbito</span>. En “Operación (hoy)” se prioriza lo pendiente o degradado.</p>
-      </section>
+	      </section>
 
-      <section class="content">
-        <div class="row" style="align-items:center; margin-bottom:6px">
-          <h2 style="margin:0; font-size:1rem; letter-spacing:-0.01em">Ámbitos</h2>
+	      <section class="content">
+	        <div class="row" style="align-items:center; margin-bottom:6px">
+	          <h2 style="margin:0; font-size:1rem; letter-spacing:-0.01em">Mapa de Conquista</h2>
+	          <p id="campaign-at" class="sub" style="margin:0"></p>
+	        </div>
+	        <p class="sub">
+	          Territorios por tipo de dato. La conquista se calcula en vivo usando <span class="mono">status.json</span> (estado real de conectores) + <span class="mono">ideal.json</span> (backlog de territorio por cubrir).
+	        </p>
+	        <div id="campaign-map" class="campaign-shell" aria-live="polite">
+	          <div class="muted">Cargando mapa de conquista...</div>
+	        </div>
+	      </section>
+
+	      <section class="content">
+	        <div class="row" style="align-items:center; margin-bottom:6px">
+	          <h2 style="margin:0; font-size:1rem; letter-spacing:-0.01em">Ámbitos</h2>
           <p id="refresh-at" class="sub" style="margin:0"></p>
         </div>
         <p class="sub">
@@ -786,6 +1073,8 @@
         roadmapTechSummary: document.getElementById("roadmap-tech-summary"),
         roadmapTechDashboard: document.getElementById("roadmap-tech-dashboard"),
         roadmapTechKpis: document.getElementById("roadmap-tech-kpis"),
+        campaignMap: document.getElementById("campaign-map"),
+        campaignAt: document.getElementById("campaign-at"),
         scopeDashboard: document.getElementById("scope-dashboard"),
         refreshAt: document.getElementById("refresh-at"),
         idealEvidence: document.getElementById("ideal-evidence"),
@@ -798,6 +1087,76 @@
       const STATIC_DATA_DIR = "data";
       const STATIC_STATUS_PATH = `${STATIC_DATA_DIR}/status.json`;
       const STATIC_IDEAL_PATH = `${STATIC_DATA_DIR}/ideal.json`;
+      const CAMPAIGN_STATE_WEIGHT = {
+        ok: 1.0,
+        partial: 0.55,
+        running: 0.4,
+        not_run: 0.08,
+        degraded: 0.25,
+        error: 0.0,
+        missing: 0.0,
+        unknown: 0.0,
+        not_in_catalog: 0.2,
+      };
+
+      const CAMPAIGN_TERRITORIES = [
+        {
+          id: "representation",
+          name: "Representacion institucional",
+          flavor: "Quien ocupa cada asiento: camaras, parlamentos y cargos.",
+          status_tokens: ["diputad", "senador", "parlamentari", "procurador", "concejal", "meps", "ocupaciones", "miembros", "activos"],
+          ideal_tokens: ["actores", "mandatos", "declaraciones", "ids", "quien_es_quien", "wikidata", "profiles"],
+          domain_hints: ["actores", "mandatos", "declaraciones", "ids"],
+        },
+        {
+          id: "parliament",
+          name: "Actividad parlamentaria",
+          flavor: "Votaciones, iniciativas, intervenciones y documentos oficiales.",
+          status_tokens: ["votacion", "iniciativa", "intervencion", "initiative_docs", "senado", "congreso", "diario"],
+          ideal_tokens: ["votos", "votaciones", "roll_call", "iniciativas", "expedientes", "intervenciones", "diario_sesiones", "dossiers", "procedimiento", "documentos", "texto_oficial"],
+          domain_hints: ["votos", "iniciativas", "intervenciones", "diario_sesiones"],
+        },
+        {
+          id: "public_money",
+          name: "Dinero publico",
+          flavor: "Contratacion, subvenciones y ejecucion de gasto.",
+          status_tokens: ["placsp", "bdns", "contrat", "subvencion", "ayuda", "sindicacion", "dinero"],
+          ideal_tokens: ["contratacion", "licitaciones", "adjudicaciones", "subvenciones", "ayudas", "dinero_publico", "presupuesto", "ejecucion", "convenios", "encomiendas", "finanzas_publicas", "auditoria", "ted"],
+          domain_hints: ["contratacion", "subvenciones", "presupuesto", "dinero_publico"],
+        },
+        {
+          id: "executive",
+          name: "Ejecutivo y comunicacion",
+          flavor: "Consejo de ministros, agendas, comparecencias y comunicados.",
+          status_tokens: ["moncloa", "rss", "referencias", "ejecutivo", "agenda"],
+          ideal_tokens: ["consejo_ministros", "acuerdos", "agenda", "actividad_publica", "comunicacion", "comparecencias", "alertas", "transparencia", "integridad", "conflictos_interes", "patrimonio", "lobby", "influencia"],
+          domain_hints: ["agenda", "comunicacion", "acuerdos", "integridad"],
+        },
+        {
+          id: "electoral",
+          name: "Ciclo electoral",
+          flavor: "Convocatorias, resultados y promesas de partido.",
+          status_tokens: ["infoelectoral", "electoral", "programas", "partidos"],
+          ideal_tokens: ["programas", "promesas", "posiciones_declaradas", "narrativa", "cobertura_mediatica", "convocatorias"],
+          domain_hints: ["programas", "promesas", "posiciones_declaradas", "convocatorias"],
+        },
+        {
+          id: "legal",
+          name: "Marco legal",
+          flavor: "Normativa, boletines y textos con efectos juridicos.",
+          status_tokens: ["boe", "legal", "norma", "sancion", "borme", "boletin"],
+          ideal_tokens: ["normativa", "nombramientos", "resoluciones", "sumario", "publicacion", "legislacion", "texto_vigente", "pre_normativa", "planificacion_normativa", "boe", "eurlex"],
+          domain_hints: ["normativa", "sumario", "legislacion", "texto_vigente"],
+        },
+        {
+          id: "context",
+          name: "Contexto e impacto",
+          flavor: "Series para outcomes, comparacion territorial y contexto.",
+          status_tokens: ["eurostat", "aemet", "bde", "series", "outcomes", "indicadores"],
+          ideal_tokens: ["estadistica", "contexto", "geografia", "territorio", "codigos", "catalogo", "descubrimiento", "opendata", "tempus", "ign"],
+          domain_hints: ["estadistica", "contexto", "territorio", "geografia"],
+        },
+      ];
 
       const isLocalApiHost = (() => {
         const host = window.location.hostname;
@@ -1004,6 +1363,93 @@
 	        const aImpact = analytics.impact || {};
 	        const parlQuality = data.parl_quality || {};
 	        const voteQ = (parlQuality.votes && parlQuality.votes.kpis) ? parlQuality.votes.kpis : {};
+        const initdocTail = data.initdoc_actionable_tail || {};
+        const initdocDigest = initdocTail && typeof initdocTail === "object" && initdocTail.digest
+          ? initdocTail.digest
+          : {};
+        const initdocTotals = initdocDigest && typeof initdocDigest === "object" && initdocDigest.totals
+          ? initdocDigest.totals
+          : {};
+        const initdocTrend = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_window
+          ? initdocTail.heartbeat_window
+          : {};
+        const initdocCompactTrend = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_compaction_window
+          ? initdocTail.heartbeat_compaction_window
+          : {};
+        const initdocCompactTrendDigest = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_compaction_window_digest
+          ? initdocTail.heartbeat_compaction_window_digest
+          : {};
+        const initdocCompactTrendDigestHeartbeatWindow = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_compaction_window_digest_heartbeat_window
+          ? initdocTail.heartbeat_compaction_window_digest_heartbeat_window
+          : {};
+        const initdocCompactTrendDigestHeartbeatCompactionWindow = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_compaction_window_digest_heartbeat_compaction_window
+          ? initdocTail.heartbeat_compaction_window_digest_heartbeat_compaction_window
+          : {};
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigest = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_compaction_window_digest_heartbeat_compaction_window_digest
+          ? initdocTail.heartbeat_compaction_window_digest_heartbeat_compaction_window_digest
+          : {};
+        const initdocCompactTrendStatus = String(initdocCompactTrend.status || "").toLowerCase();
+        const initdocCompactTrendStatusClass = initdocCompactTrendStatus === "ok" ? "ok" : initdocCompactTrendStatus === "degraded" ? "warn" : initdocCompactTrendStatus === "failed" ? "err" : "muted";
+        const initdocCompactTrendStatusLabel = initdocCompactTrendStatus ? initdocCompactTrendStatus.toUpperCase() : "N/A";
+        const initdocCompactTrendDigestStatus = String(initdocCompactTrendDigest.status || "").toLowerCase();
+        const initdocCompactTrendDigestStatusClass = initdocCompactTrendDigestStatus === "ok" ? "ok" : initdocCompactTrendDigestStatus === "degraded" ? "warn" : initdocCompactTrendDigestStatus === "failed" ? "err" : "muted";
+        const initdocCompactTrendDigestStatusLabel = initdocCompactTrendDigestStatus ? initdocCompactTrendDigestStatus.toUpperCase() : "N/A";
+        const initdocCompactTrendDigestRisk = String(initdocCompactTrendDigest.risk_level || "").toLowerCase();
+        const initdocCompactTrendDigestRiskLabel = initdocCompactTrendDigestRisk ? initdocCompactTrendDigestRisk.toUpperCase() : "N/A";
+        const initdocCompactTrendDigestRiskReasons = Array.isArray(initdocCompactTrendDigest.risk_reasons)
+          ? initdocCompactTrendDigest.risk_reasons.map((x) => String(x || "")).filter(Boolean)
+          : [];
+        const initdocCompactTrendDigestHeartbeatWindowStatus = String(initdocCompactTrendDigestHeartbeatWindow.status || "").toLowerCase();
+        const initdocCompactTrendDigestHeartbeatWindowStatusClass = initdocCompactTrendDigestHeartbeatWindowStatus === "ok" ? "ok" : initdocCompactTrendDigestHeartbeatWindowStatus === "degraded" ? "warn" : initdocCompactTrendDigestHeartbeatWindowStatus === "failed" ? "err" : "muted";
+        const initdocCompactTrendDigestHeartbeatWindowStatusLabel = initdocCompactTrendDigestHeartbeatWindowStatus ? initdocCompactTrendDigestHeartbeatWindowStatus.toUpperCase() : "N/A";
+        const initdocCompactTrendDigestHeartbeatCompactionWindowStatus = String(initdocCompactTrendDigestHeartbeatCompactionWindow.status || "").toLowerCase();
+        const initdocCompactTrendDigestHeartbeatCompactionWindowStatusClass = initdocCompactTrendDigestHeartbeatCompactionWindowStatus === "ok" ? "ok" : initdocCompactTrendDigestHeartbeatCompactionWindowStatus === "degraded" ? "warn" : initdocCompactTrendDigestHeartbeatCompactionWindowStatus === "failed" ? "err" : "muted";
+        const initdocCompactTrendDigestHeartbeatCompactionWindowStatusLabel = initdocCompactTrendDigestHeartbeatCompactionWindowStatus ? initdocCompactTrendDigestHeartbeatCompactionWindowStatus.toUpperCase() : "N/A";
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatus = String(initdocCompactTrendDigestHeartbeatCompactionWindowDigest.status || "").toLowerCase();
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusClass = initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatus === "ok" ? "ok" : initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatus === "degraded" ? "warn" : initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatus === "failed" ? "err" : "muted";
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusLabel = initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatus ? initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatus.toUpperCase() : "N/A";
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigestRisk = String(initdocCompactTrendDigestHeartbeatCompactionWindowDigest.risk_level || "").toLowerCase();
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigestRiskLabel = initdocCompactTrendDigestHeartbeatCompactionWindowDigestRisk ? initdocCompactTrendDigestHeartbeatCompactionWindowDigestRisk.toUpperCase() : "N/A";
+        const initdocTrendCounts = initdocTrend && typeof initdocTrend === "object" && initdocTrend.status_counts
+          ? initdocTrend.status_counts
+          : {};
+        const initdocTrendEntries = Number(initdocTrend.entries_in_window || 0);
+        const initdocTrendFailed = Number(initdocTrendCounts.failed || 0);
+        const initdocTrendDegraded = Number(initdocTrendCounts.degraded || 0);
+        const initdocTrendFailedRatePct = Number(initdocTrend.failed_rate_pct || 0);
+        const initdocTrendFailedRatePctDisplay = Number.isFinite(initdocTrendFailedRatePct)
+          ? (Math.round(initdocTrendFailedRatePct * 10) / 10).toFixed(1)
+          : "0.0";
+        const initdocTrendLatest = initdocTrend && typeof initdocTrend === "object" && initdocTrend.latest
+          ? initdocTrend.latest
+          : {};
+        const initdocTrendLatestStatus = String(initdocTrendLatest.status || "").toLowerCase();
+        const initdocTrendLatestLabel = initdocTrendLatestStatus ? initdocTrendLatestStatus.toUpperCase() : "N/A";
+        const initdocTrendStatus = String(initdocTrend.status || "").toLowerCase();
+        const initdocTrendStatusClass = initdocTrendStatus === "ok" ? "ok" : initdocTrendStatus === "degraded" ? "warn" : initdocTrendStatus === "failed" ? "err" : "muted";
+        const initdocTrendStatusLabel = initdocTrendStatus ? initdocTrendStatus.toUpperCase() : "N/A";
+        const initdocTrendSummary = initdocTrendEntries > 0
+          ? "trend last " + initdocTrendEntries + ": failed " + initdocTrendFailed + " (" + initdocTrendFailedRatePctDisplay + "%) · degraded " + initdocTrendDegraded + " · latest " + initdocTrendLatestLabel
+          : "trend: no heartbeat rows";
+        const initdocCompactTrendSummary = "compact parity: " + initdocCompactTrendStatusLabel;
+        const initdocCompactTrendDigestSummary = "compact digest: " + initdocCompactTrendDigestStatusLabel + " · risk " + initdocCompactTrendDigestRiskLabel + (initdocCompactTrendDigestRiskReasons.length > 0 ? " · " + initdocCompactTrendDigestRiskReasons.slice(0, 2).join(", ") : "");
+        const initdocCompactTrendDigestHeartbeatWindowEntries = Number(initdocCompactTrendDigestHeartbeatWindow.entries_in_window || 0);
+        const initdocCompactTrendDigestHeartbeatWindowCounts = initdocCompactTrendDigestHeartbeatWindow && typeof initdocCompactTrendDigestHeartbeatWindow === "object" && initdocCompactTrendDigestHeartbeatWindow.status_counts
+          ? initdocCompactTrendDigestHeartbeatWindow.status_counts
+          : {};
+        const initdocCompactTrendDigestHeartbeatWindowFailed = Number(initdocCompactTrendDigestHeartbeatWindowCounts.failed || 0);
+        const initdocCompactTrendDigestHeartbeatWindowDegraded = Number(initdocCompactTrendDigestHeartbeatWindowCounts.degraded || 0);
+        const initdocCompactTrendDigestHeartbeatWindowSummary = initdocCompactTrendDigestHeartbeatWindowEntries > 0
+          ? "compact digest trend last " + initdocCompactTrendDigestHeartbeatWindowEntries + ": failed " + initdocCompactTrendDigestHeartbeatWindowFailed + " · degraded " + initdocCompactTrendDigestHeartbeatWindowDegraded
+          : "compact digest trend: no heartbeat rows";
+        const initdocCompactTrendDigestHeartbeatCompactionWindowSummary = "cd compact parity: " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusLabel;
+        const initdocCompactTrendDigestHeartbeatCompactionWindowDigestSummary = "cd compact digest: " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusLabel + " · risk " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestRiskLabel;
+        const initdocStatus = String(initdocDigest.status || "").toLowerCase();
+        const initdocStatusClass = initdocStatus === "ok" ? "ok" : initdocStatus === "degraded" ? "warn" : initdocStatus === "failed" ? "err" : "muted";
+        const initdocStatusLabel = initdocStatus === "ok" ? "OK" : initdocStatus === "degraded" ? "DEGRADED" : initdocStatus === "failed" ? "FAILED" : "N/A";
+        const initdocActionableMissing = Number(initdocTotals.actionable_missing || 0);
+        const initdocRedundantMissing = Number(initdocTotals.redundant_missing || 0);
+        const initdocTotalMissing = Number(initdocTotals.total_missing || 0);
         const actionCount = Array.isArray(data.actions) ? data.actions.length : 0;
         const cards = [
           {title: "Fuentes esperadas (config)", value: summary.desired || 0},
@@ -1103,6 +1549,7 @@
 	          "<div class='kpi'><p class='label'>Tracker</p><div class='value'><strong>" + (todo + partial) + "</strong><span class='muted'>por resolver</span></div><div class='small'>Pendientes: " + todo + " · Parciales: " + partial + " · Completadas: " + done + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Checks SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + " · FK violations: " + (fkViolations === null ? "—" : fkViolations) + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Votaciones (quality)</p><div class='value'><strong>" + fmtPct(Number(voteLinkPct)) + "</strong><span class='muted'>link</span></div><div class='small'>Oficial: " + fmtPct(Number(voteOfficialLinkPct)) + " · person_id: " + fmtPct(Number(votePersonIdPct)) + " · topic (latest): " + fmtPct(Number(voteTopicPctLatest)) + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Iniciativas Senado (tail)</p><div class='value'><strong>" + initdocActionableMissing + "</strong><span class='pill " + initdocStatusClass + "'>" + initdocStatusLabel + "</span></div><div class='small'>actionable: " + initdocActionableMissing + " · redundant: " + initdocRedundantMissing + " · total_missing: " + initdocTotalMissing + " · <span class='pill " + initdocTrendStatusClass + "'>trend " + initdocTrendStatusLabel + "</span> · <span class='pill " + initdocCompactTrendStatusClass + "'>compact " + initdocCompactTrendStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestStatusClass + "'>compact-digest " + initdocCompactTrendDigestStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatWindowStatusClass + "'>cd-trend " + initdocCompactTrendDigestHeartbeatWindowStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusClass + "'>cd-compact " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusClass + "'>cd-digest " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusLabel + "</span></div><div class='small'>" + initdocTrendSummary + " · " + initdocCompactTrendSummary + " · " + initdocCompactTrendDigestSummary + " · " + initdocCompactTrendDigestHeartbeatWindowSummary + " · " + initdocCompactTrendDigestHeartbeatCompactionWindowSummary + " · " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestSummary + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Analítica (temas)</p><div class='value'><strong>" + positionsTotal + "</strong><span class='muted'>posiciones</span></div><div class='small'>Temas: " + topicsTotal + " · Sets: " + topicSetsTotal + " · High-stakes: " + highStakesTotal + " · pos(votes): " + positionsVotes + " · pos(declared): " + positionsDeclared + " · pos(combined): " + positionsCombined + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Coherencia (says/does)</p><div class='value'><strong>" + fmtPct(coherencePct) + "</strong><span class='muted'>explicit</span></div><div class='small'>as_of: " + (coherenceAsOf || "—") + " · overlap: " + coherenceOverlap + " · explicit: " + coherenceExplicit + " · incoherent: " + coherenceIncoherent + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Analítica (evidencia)</p><div class='value'><strong>" + evidenceTotal + "</strong><span class='muted'>evidencias</span></div><div class='small'>does: " + evidenceRevealedTotal + " · says: " + evidenceDeclaredTotal + " · says(text): " + fmtPct(evidenceDeclaredTextPct) + " · says(fecha): " + fmtPct(evidenceDeclaredDatePct) + " · says(stance): " + fmtPct(evidenceDeclaredSignalPct) + " · pos(evid): " + fmtPct(positionsWithEvidencePct) + " · docs: " + textDocsTotal + " · tm: " + topicMethodKey + " · sm: " + stanceMethodKey + "</div></div>" +
@@ -1518,6 +1965,332 @@
         return blob.includes(s);
       }
 
+      function campaignTokenScore(text, tokens) {
+        if (!text || !Array.isArray(tokens) || !tokens.length) return 0;
+        return tokens.reduce((acc, token) => acc + (text.includes(String(token || "").toLowerCase()) ? 1 : 0), 0);
+      }
+
+      function selectCampaignTerritory(text, tokenField) {
+        let bestId = "";
+        let bestScore = 0;
+        CAMPAIGN_TERRITORIES.forEach((territory) => {
+          const score = campaignTokenScore(text, territory[tokenField]);
+          if (score > bestScore) {
+            bestScore = score;
+            bestId = territory.id;
+          }
+        });
+        return bestScore > 0 ? bestId : "";
+      }
+
+      function classifyCampaignStatusSource(row) {
+        const text = [row && row.source_id, row && row.source_name, row && row.scope, row && row.domain, row && row.format]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        const selected = selectCampaignTerritory(text, "status_tokens");
+        if (selected) return selected;
+
+        const scope = normalizeScope(row && row.scope ? row.scope : "");
+        if (scope === "dinero") return "public_money";
+        if (scope === "electoral") return "electoral";
+        if (scope === "legal") return "legal";
+        if (scope === "outcomes" || scope === "territorial") return "context";
+
+        const domain = String(row && row.domain ? row.domain : "").toLowerCase();
+        if (domain === "parlamentario") return "parliament";
+        if (domain === "infoelectoral") return "electoral";
+        return "unknown";
+      }
+
+      function classifyCampaignIdealSource(row) {
+        const text = [row && row.id, row && row.name, row && row.evidence, row && row.scope, Array.isArray(row && row.domains) ? row.domains.join(" ") : ""]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        const selected = selectCampaignTerritory(text, "ideal_tokens");
+        if (selected) return selected;
+        return "unknown";
+      }
+
+      function createCampaignBucket(definition) {
+        return {
+          id: definition.id,
+          name: definition.name,
+          flavor: definition.flavor,
+          domain_hints: Array.isArray(definition.domain_hints) ? definition.domain_hints.slice() : [],
+          source_rows: [],
+          ideal_rows: [],
+          desired_count: 0,
+          extra_count: 0,
+          capture_points: 0,
+          bonus_points: 0,
+          ok: 0,
+          partial: 0,
+          running: 0,
+          pending: 0,
+          failed: 0,
+          blocked: 0,
+          progress_loaded: 0,
+          progress_target: 0,
+        };
+      }
+
+      function campaignTierFromPercent(percent) {
+        if (percent >= 80) return "captured";
+        if (percent >= 45) return "contested";
+        return "frontier";
+      }
+
+      function formatOneDecimal(value) {
+        const rounded = Math.round(safeNum(value, 0) * 10) / 10;
+        if (Number.isInteger(rounded)) return String(rounded);
+        return rounded.toFixed(1);
+      }
+
+      function buildCampaignModel(data, idealData) {
+        const buckets = new Map();
+        CAMPAIGN_TERRITORIES.forEach((def) => buckets.set(def.id, createCampaignBucket(def)));
+        buckets.set("unknown", createCampaignBucket({
+          id: "unknown",
+          name: "Frontera no clasificada",
+          flavor: "Conectores o fuentes ideales que aun no encajan en una clase.",
+          domain_hints: ["pendiente", "clasificacion"],
+        }));
+
+        const sources = Array.isArray(data && data.sources) ? data.sources : [];
+        sources.forEach((row) => {
+          const territoryId = classifyCampaignStatusSource(row);
+          const bucket = buckets.get(territoryId) || buckets.get("unknown");
+          if (!bucket) return;
+          bucket.source_rows.push(row);
+
+          const stateName = String(row && row.state ? row.state : "unknown").toLowerCase();
+          if (stateName === "ok") bucket.ok += 1;
+          else if (stateName === "partial") bucket.partial += 1;
+          else if (stateName === "running") bucket.running += 1;
+          else if (stateName === "not_run") bucket.pending += 1;
+          else bucket.failed += 1;
+
+          if (row && row.tracker && row.tracker.blocked_note) {
+            bucket.blocked += 1;
+          }
+
+          const weight = CAMPAIGN_STATE_WEIGHT[stateName] !== undefined ? CAMPAIGN_STATE_WEIGHT[stateName] : CAMPAIGN_STATE_WEIGHT.unknown;
+          const isDesired = row && row.desired !== false;
+          if (isDesired) {
+            bucket.desired_count += 1;
+            bucket.capture_points += weight;
+          } else {
+            bucket.extra_count += 1;
+            bucket.bonus_points += weight;
+          }
+
+          const progress = row && row.progress ? row.progress : {};
+          const target = safeNum(progress.target, 0);
+          const loaded = safeNum(progress.loaded, 0);
+          if (isDesired && target > 0) {
+            bucket.progress_target += target;
+            bucket.progress_loaded += Math.min(Math.max(loaded, 0), target);
+          }
+        });
+
+        const idealSources = Array.isArray(idealData && idealData.sources) ? idealData.sources : [];
+        idealSources.forEach((row) => {
+          const territoryId = classifyCampaignIdealSource(row);
+          const bucket = buckets.get(territoryId) || buckets.get("unknown");
+          if (!bucket) return;
+          bucket.ideal_rows.push(row);
+        });
+
+        const territories = Array.from(buckets.values())
+          .map((bucket) => {
+            const domainCounts = {};
+            bucket.ideal_rows.forEach((item) => {
+              const domains = Array.isArray(item && item.domains) ? item.domains : [];
+              domains.forEach((domain) => {
+                const key = String(domain || "").trim();
+                if (!key) return;
+                domainCounts[key] = safeNum(domainCounts[key], 0) + 1;
+              });
+            });
+
+            let domainTags = Object.keys(domainCounts)
+              .sort((a, b) => safeNum(domainCounts[b], 0) - safeNum(domainCounts[a], 0) || String(a).localeCompare(String(b)))
+              .slice(0, 5);
+            if (!domainTags.length) {
+              domainTags = bucket.domain_hints.slice(0, 5);
+            }
+
+            const targetSlots = Math.max(bucket.ideal_rows.length, bucket.desired_count);
+            const conquestPercent = targetSlots > 0
+              ? Math.max(0, Math.min(100, Math.round((bucket.capture_points * 100) / targetSlots)))
+              : 0;
+            const progressPercent = bucket.progress_target > 0
+              ? Math.max(0, Math.min(100, Math.round((bucket.progress_loaded * 100) / bucket.progress_target)))
+              : null;
+            const unmappedBacklog = Math.max(0, bucket.ideal_rows.length - bucket.desired_count);
+
+            const sourceRowsSorted = bucket.source_rows
+              .slice()
+              .sort((a, b) => {
+                const stateWeight = (row) => {
+                  const st = String(row && row.state ? row.state : "unknown").toLowerCase();
+                  const w = CAMPAIGN_STATE_WEIGHT[st];
+                  return w === undefined ? 0 : w;
+                };
+                const dw = stateWeight(b) - stateWeight(a);
+                if (dw !== 0) return dw;
+                return String(a.source_name || a.source_id || "").localeCompare(String(b.source_name || b.source_id || ""));
+              });
+
+            return {
+              id: bucket.id,
+              name: bucket.name,
+              flavor: bucket.flavor,
+              source_rows: sourceRowsSorted,
+              ideal_rows: bucket.ideal_rows.slice(),
+              desired_count: bucket.desired_count,
+              extra_count: bucket.extra_count,
+              capture_points: bucket.capture_points,
+              bonus_points: bucket.bonus_points,
+              target_slots: targetSlots,
+              conquest_percent: conquestPercent,
+              progress_loaded: bucket.progress_loaded,
+              progress_target: bucket.progress_target,
+              progress_percent: progressPercent,
+              blocked: bucket.blocked,
+              ok: bucket.ok,
+              partial: bucket.partial,
+              running: bucket.running,
+              pending: bucket.pending,
+              failed: bucket.failed,
+              unmapped_backlog: unmappedBacklog,
+              domain_tags: domainTags,
+              tier: campaignTierFromPercent(conquestPercent),
+            };
+          })
+          .filter((bucket) => bucket.source_rows.length > 0 || bucket.ideal_rows.length > 0);
+
+        const campaignTerritories = territories.filter((item) => item.id !== "unknown");
+        const targetTotal = campaignTerritories.reduce((acc, item) => acc + item.target_slots, 0);
+        const captureTotal = campaignTerritories.reduce((acc, item) => acc + item.capture_points, 0);
+        const sourceTotal = campaignTerritories.reduce((acc, item) => acc + item.source_rows.length, 0);
+        const idealTotal = campaignTerritories.reduce((acc, item) => acc + item.ideal_rows.length, 0);
+        const blockedTotal = campaignTerritories.reduce((acc, item) => acc + item.blocked, 0);
+        const unresolvedTotal = campaignTerritories.reduce((acc, item) => acc + item.partial + item.running + item.pending + item.failed, 0);
+        const unmappedTotal = campaignTerritories.reduce((acc, item) => acc + item.unmapped_backlog, 0);
+        const percent = targetTotal > 0 ? Math.max(0, Math.min(100, Math.round((captureTotal * 100) / targetTotal))) : 0;
+
+        return {
+          territories,
+          summary: {
+            percent,
+            target_total: targetTotal,
+            capture_total: captureTotal,
+            source_total: sourceTotal,
+            ideal_total: idealTotal,
+            blocked_total: blockedTotal,
+            unresolved_total: unresolvedTotal,
+            unmapped_total: unmappedTotal,
+          },
+        };
+      }
+
+      function renderCampaignMap(data, idealData) {
+        if (!nodes.campaignMap) return;
+        const model = buildCampaignModel(data || {}, idealData || {});
+        const territories = model.territories || [];
+        if (!territories.length) {
+          nodes.campaignMap.innerHTML = "<div class='muted'>Sin datos para construir el mapa de conquista.</div>";
+          if (nodes.campaignAt) nodes.campaignAt.textContent = "";
+          return;
+        }
+
+        const summary = model.summary || {};
+        const globalPercent = safeNum(summary.percent, 0);
+        const hud =
+          "<div class='campaign-hud'>" +
+            "<div class='campaign-hud-head'>" +
+              "<div class='campaign-hud-title'>Conquista global del territorio de datos</div>" +
+              "<div class='mono muted'>" + globalPercent + "%</div>" +
+            "</div>" +
+            "<div class='campaign-meter'><span style='width:" + globalPercent + "%'></span></div>" +
+            "<div class='campaign-statline'><span>Nodos conquistados</span><span class='mono'>" + formatOneDecimal(summary.capture_total || 0) + " / " + safeNum(summary.target_total, 0) + "</span></div>" +
+            "<div class='campaign-hud-kpis'>" +
+              "<div class='campaign-hud-kpi'><p class='label'>Territorios activos</p><strong>" + territories.length + "</strong></div>" +
+              "<div class='campaign-hud-kpi'><p class='label'>Fuentes conectadas</p><strong>" + safeNum(summary.source_total, 0) + "</strong></div>" +
+              "<div class='campaign-hud-kpi'><p class='label'>Inventario ideal</p><strong>" + safeNum(summary.ideal_total, 0) + "</strong></div>" +
+              "<div class='campaign-hud-kpi'><p class='label'>Pendiente/Degradado</p><strong>" + safeNum(summary.unresolved_total, 0) + "</strong></div>" +
+              "<div class='campaign-hud-kpi'><p class='label'>Sin conector</p><strong>" + safeNum(summary.unmapped_total, 0) + "</strong></div>" +
+              "<div class='campaign-hud-kpi'><p class='label'>Bloqueadas</p><strong>" + safeNum(summary.blocked_total, 0) + "</strong></div>" +
+            "</div>" +
+          "</div>";
+
+        const cards = territories
+          .map((territory) => {
+            const sourceRows = Array.isArray(territory.source_rows) ? territory.source_rows : [];
+            const domains = Array.isArray(territory.domain_tags) ? territory.domain_tags : [];
+            const tagsHtml = domains.length
+              ? domains.map((domain) => "<span class='campaign-tag'>" + String(domain) + "</span>").join("")
+              : "<span class='campaign-tag'>sin etiquetas</span>";
+
+            const chips = [
+              "<span class='campaign-chip ok'>OK " + safeNum(territory.ok, 0) + "</span>",
+              "<span class='campaign-chip warn'>PARCIAL/RUN " + (safeNum(territory.partial, 0) + safeNum(territory.running, 0)) + "</span>",
+              "<span class='campaign-chip'>PENDIENTE " + safeNum(territory.pending, 0) + "</span>",
+              "<span class='campaign-chip err'>ERROR " + safeNum(territory.failed, 0) + "</span>",
+            ];
+            if (territory.blocked > 0) {
+              chips.push("<span class='campaign-chip err'>BLOCKED " + territory.blocked + "</span>");
+            }
+            if (territory.unmapped_backlog > 0) {
+              chips.push("<span class='campaign-chip warn'>SIN CONECTOR " + territory.unmapped_backlog + "</span>");
+            }
+
+            const sourceRowsHtml = sourceRows.length
+              ? "<details class='campaign-list'><summary>Ver fuentes (" + sourceRows.length + ")</summary><ul>" +
+                sourceRows.slice(0, 8).map((row) => {
+                  const stateName = String(row && row.state ? row.state : "unknown");
+                  const stateBadge = "<span class='pill " + stateClass(String(stateName).toLowerCase()) + "'>" + labelState(String(stateName).toLowerCase()) + "</span>";
+                  const sourceName = row.source_name || row.source_id || "source";
+                  const sourceId = row.source_id ? (" <span class='mono muted'>(" + String(row.source_id) + ")</span>") : "";
+                  return "<li>" + stateBadge + " <strong>" + String(sourceName) + "</strong>" + sourceId + "</li>";
+                }).join("") +
+                (sourceRows.length > 8 ? "<li class='muted'>+" + (sourceRows.length - 8) + " mas...</li>" : "") +
+                "</ul></details>"
+              : "<div class='small muted' style='margin-top:8px'>Sin conectores en este territorio todavia.</div>";
+
+            const progressLine = territory.progress_percent === null
+              ? "<div class='campaign-statline'><span>Metas minimas</span><span class='mono'>sin objetivo cuantificable</span></div>"
+              : "<div class='campaign-statline'><span>Metas minimas</span><span class='mono'>" +
+                safeNum(territory.progress_loaded, 0) + " / " + safeNum(territory.progress_target, 0) + " (" + territory.progress_percent + "%)</span></div>" +
+                "<div class='campaign-meter secondary'><span style='width:" + territory.progress_percent + "%'></span></div>";
+
+            return (
+              "<article class='campaign-territory' data-tier='" + territory.tier + "'>" +
+                "<div class='campaign-head'>" +
+                  "<div><div class='campaign-name'>" + territory.name + "</div><div class='small'>" + territory.flavor + "</div></div>" +
+                  "<div class='campaign-percent'>" + territory.conquest_percent + "%</div>" +
+                "</div>" +
+                "<div class='campaign-meter'><span style='width:" + territory.conquest_percent + "%'></span></div>" +
+                "<div class='campaign-statline'><span>Conquista</span><span class='mono'>" +
+                  formatOneDecimal(territory.capture_points) + " / " + safeNum(territory.target_slots, 0) + " nodos</span></div>" +
+                progressLine +
+                "<div class='campaign-legend'>" + chips.join("") + "</div>" +
+                "<div class='campaign-tags'>" + tagsHtml + "</div>" +
+                sourceRowsHtml +
+              "</article>"
+            );
+          })
+          .join("");
+
+        nodes.campaignMap.innerHTML = hud + "<div class='campaign-board'>" + cards + "</div>";
+        if (nodes.campaignAt) {
+          nodes.campaignAt.textContent = "Actualizado: " + formatDate((data && data.generated_at) || "");
+        }
+      }
+
       function scopeFromAction(action, byId) {
         const explicit = normalizeScope(action && action.scope ? action.scope : "");
         if (explicit && explicit !== "unknown") {
@@ -1764,6 +2537,9 @@
         if (nodes.scopeDashboard) {
           nodes.scopeDashboard.innerHTML = "<div class='muted'>Actualizando...</div>";
         }
+        if (nodes.campaignMap) {
+          nodes.campaignMap.innerHTML = "<div class='muted'>Actualizando mapa de conquista...</div>";
+        }
         try {
           const [payload, idealPayload] = await Promise.all([
             fetchPayload({ apiPath: "/api/sources/status", staticPath: STATIC_STATUS_PATH }),
@@ -1773,6 +2549,9 @@
             if (nodes.scopeDashboard) {
               nodes.scopeDashboard.innerHTML = "<div class='muted'>" + payload.error + "</div>";
             }
+            if (nodes.campaignMap) {
+              nodes.campaignMap.innerHTML = "<div class='muted'>" + payload.error + "</div>";
+            }
             return;
           }
           state.data = payload;
@@ -1780,6 +2559,7 @@
           renderGlobalProgress(payload);
           renderRoadmapDashboard(payload);
           renderRoadmapTechnicalDashboard(payload);
+          renderCampaignMap(payload, idealPayload);
           fillAdvancedFilters(payload);
           nodes.refreshAt.textContent = "Actualizado: " + formatDate(payload.generated_at || "");
           renderScopeDashboard(payload);
@@ -1788,11 +2568,15 @@
           if (nodes.scopeDashboard) {
             nodes.scopeDashboard.innerHTML = "<div class='muted'>No se pudo cargar /api/sources/status: " + String(error) + "</div>";
           }
+          if (nodes.campaignMap) {
+            nodes.campaignMap.innerHTML = "<div class='muted'>No se pudo construir el mapa de conquista: " + String(error) + "</div>";
+          }
         }
       }
 
       function refresh() {
         if (state.data) {
+          renderCampaignMap(state.data, state.ideal);
           renderScopeDashboard(state.data);
           renderIdealSources();
         }
