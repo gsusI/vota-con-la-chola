@@ -9,6 +9,7 @@
     {
       "id": "vivienda",
       "label": "Vivienda",
+      "description": "Acceso a alquiler/compra y estabilidad residencial.",
       "keywords": [
         "vivienda",
         "alquiler",
@@ -25,6 +26,7 @@
     {
       "id": "empleo",
       "label": "Empleo",
+      "description": "Calidad del trabajo, paro, salarios y condiciones laborales.",
       "keywords": [
         "empleo",
         "trabaj",
@@ -41,6 +43,7 @@
     {
       "id": "sanidad",
       "label": "Sanidad",
+      "description": "Sistema sanitario, listas de espera y atencion de salud.",
       "keywords": [
         "sanidad",
         "salud",
@@ -55,6 +58,7 @@
     {
       "id": "educacion",
       "label": "Educacion",
+      "description": "Escuela, universidad, becas y formacion a lo largo de la vida.",
       "keywords": [
         "educacion",
         "universidad",
@@ -69,6 +73,7 @@
     {
       "id": "coste_vida",
       "label": "Coste de vida",
+      "description": "Precios cotidianos: cesta, energia y poder adquisitivo.",
       "keywords": [
         "inflacion",
         "precios",
@@ -84,6 +89,7 @@
     {
       "id": "energia",
       "label": "Energia",
+      "description": "Modelo energetico, factura y seguridad de suministro.",
       "keywords": [
         "energia",
         "electric",
@@ -99,6 +105,7 @@
     {
       "id": "transporte",
       "label": "Transporte",
+      "description": "Movilidad diaria, red ferroviaria y acceso territorial.",
       "keywords": [
         "movilidad",
         "transporte",
@@ -114,6 +121,7 @@
     {
       "id": "seguridad_justicia",
       "label": "Seguridad y justicia",
+      "description": "Convivencia, sistema penal y funcionamiento de la justicia.",
       "keywords": [
         "justicia",
         "seguridad",
@@ -129,6 +137,7 @@
     {
       "id": "inmigracion",
       "label": "Inmigracion",
+      "description": "Gestion migratoria, fronteras, asilo e integracion.",
       "keywords": [
         "inmigr",
         "migr",
@@ -142,6 +151,7 @@
     {
       "id": "corrupcion",
       "label": "Corrupcion",
+      "description": "Integridad institucional, control del fraude y transparencia.",
       "keywords": [
         "corrup",
         "transpar",
@@ -155,6 +165,7 @@
     {
       "id": "campo_rural",
       "label": "Campo y mundo rural",
+      "description": "Agenda agraria y equilibrio territorial fuera de grandes ciudades.",
       "keywords": [
         "campo",
         "rural",
@@ -170,6 +181,7 @@
     {
       "id": "igualdad",
       "label": "Igualdad",
+      "description": "Derechos y no discriminacion por genero, orientacion u origen.",
       "keywords": [
         "igualdad",
         "mujer",
@@ -179,6 +191,52 @@
         "paritari",
         "violencia machista"
       ]
+    }
+  ],
+  "packs": [
+    {
+      "id": "hogar_bolsillo",
+      "label": "Hogar y bolsillo",
+      "concern_ids": [
+        "vivienda",
+        "coste_vida",
+        "empleo",
+        "energia"
+      ],
+      "tradeoff": "Prioriza precio y empleo. Puede dejar en segundo plano instituciones y seguridad."
+    },
+    {
+      "id": "servicios_publicos",
+      "label": "Servicios publicos",
+      "concern_ids": [
+        "sanidad",
+        "educacion",
+        "vivienda",
+        "transporte"
+      ],
+      "tradeoff": "Prioriza bienestar cotidiano. Puede cubrir menos agenda productiva y rural."
+    },
+    {
+      "id": "seguridad_estado",
+      "label": "Seguridad y Estado",
+      "concern_ids": [
+        "seguridad_justicia",
+        "inmigracion",
+        "corrupcion",
+        "igualdad"
+      ],
+      "tradeoff": "Prioriza orden institucional y convivencia. Puede reducir foco en coste de vida."
+    },
+    {
+      "id": "campo_industria",
+      "label": "Campo e industria",
+      "concern_ids": [
+        "campo_rural",
+        "energia",
+        "transporte",
+        "empleo"
+      ],
+      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion."
     }
   ]
 }

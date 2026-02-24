@@ -135,8 +135,8 @@
 
       .panel {
         min-height: 0;
-        display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr);
+        display: flex;
+        flex-direction: column;
       }
 
       .panel .head {
@@ -185,6 +185,7 @@
 
       .list {
         min-height: 0;
+        flex: 1 1 auto;
         overflow: auto;
         border-top: 1px solid #edf1f7;
         padding: 10px 10px 14px;
@@ -298,8 +299,9 @@
         width: auto;
       }
 
-        .detail {
+      .detail {
         min-height: 0;
+        flex: 1 1 auto;
         overflow: auto;
         border-top: 1px solid #edf1f7;
         padding: 10px;

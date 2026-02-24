@@ -55,7 +55,8 @@ const artifacts = [
 ];
 
 function withBasePath(path) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const basePath =
+    process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
   return `${basePath}${path}`;
 }
 

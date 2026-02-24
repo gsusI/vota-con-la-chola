@@ -3,19 +3,31 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vota Con La Chola | Exploradores</title>
+    <title>Vota Con La Chola | Data Explorer</title>
+    <meta
+      name="description"
+      content="Compara lo que dicen y lo que hacen. Explora ciudadania, temas, votaciones y calidad de fuentes con evidencia trazable."
+    />
     <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --bg-a: #eef2ff;
-        --bg-b: #dbeafe;
-        --panel: #ffffff;
-        --ink: #1e293b;
-        --muted: #5b677a;
-        --line: #dbe3f6;
-        --accent: #2563eb;
-        --accent-soft: #93c5fd;
-        --ok: #16a34a;
+        color-scheme: light;
+        --bg-a: #f5f1ea;
+        --bg-b: #fdf9f2;
+        --ink: #132033;
+        --muted: #566275;
+        --panel: rgba(255, 255, 255, 0.9);
+        --line: #e5dbcf;
+        --accent: #ef5b3f;
+        --accent-2: #0f8f88;
+        --accent-3: #f4a940;
+        --ok: #177245;
       }
 
       * {
@@ -26,222 +38,682 @@
       body {
         margin: 0;
         min-height: 100%;
+      }
+
+      body {
         color: var(--ink);
+        font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
         background:
-          radial-gradient(1200px 420px at 0% 0%, #dbeafe 0%, transparent 50%),
-          radial-gradient(900px 420px at 100% 15%, #e0f2fe 0%, transparent 56%),
-          linear-gradient(145deg, var(--bg-a), var(--bg-b));
-        font-family: "Arial", "Segoe UI", sans-serif;
+          radial-gradient(840px 420px at -6% -6%, #ffd8bf 0%, transparent 65%),
+          radial-gradient(920px 460px at 102% 2%, #bcefe8 0%, transparent 64%),
+          radial-gradient(900px 520px at 50% 108%, #ffe7ba 0%, transparent 66%),
+          linear-gradient(160deg, var(--bg-a), var(--bg-b));
+        line-height: 1.45;
       }
 
-      .page {
-        width: min(1100px, calc(100% - 24px));
-        margin: 14px auto;
-        overflow-x: hidden;
-      }
-
-      .hero {
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: var(--panel);
-        padding: 18px;
-        box-shadow: 0 16px 32px rgba(30, 41, 59, 0.09);
-      }
-
-      h1 {
-        margin: 0;
-        font-size: 1.6rem;
+      .shell {
+        width: min(1160px, calc(100% - 28px));
+        margin: 18px auto 24px;
+        display: grid;
+        gap: 16px;
       }
 
       .topbar {
-        margin-bottom: 12px;
-        display: flex;
-        justify-content: flex-start;
-      }
-
-      .superlink {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid #d0def8;
-        background: #eff6ff;
-        border-radius: 999px;
-        padding: 6px 10px;
-        color: #102a5c;
-        text-decoration: none;
-        font-size: 0.82rem;
-        font-weight: 700;
-      }
-
-      .superlink svg {
-        width: 16px;
-        height: 16px;
-        fill: currentColor;
-        flex: 0 0 auto;
-      }
-
-      .sub {
-        margin: 6px 0 0;
-        color: var(--muted);
-      }
-
-      .grid {
-        margin-top: 16px;
-        display: grid;
-        gap: 12px;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-
-      .card {
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: var(--panel);
-        padding: 14px;
-        display: block;
-        color: inherit;
-        text-decoration: none;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 24px rgba(30, 41, 59, 0.12);
-      }
-
-      .title {
-        margin: 0;
-        font-size: 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
       }
 
-      .badge {
-        font-size: 0.7rem;
-        color: var(--ok);
-        font-weight: 700;
-        border: 1px solid #dcfce7;
-        background: #f0fdf4;
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(145deg, var(--accent), var(--accent-3));
+        box-shadow: 0 10px 24px rgba(239, 91, 63, 0.34);
+      }
+
+      .brand-text {
+        display: grid;
+        gap: 2px;
+      }
+
+      .brand-text strong {
+        font-size: 0.94rem;
+        letter-spacing: 0.01em;
+      }
+
+      .brand-text span {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .top-actions {
+        display: inline-flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .pill-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
         border-radius: 999px;
-        padding: 2px 8px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.82);
+        color: #1d2c41;
+        padding: 8px 12px;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
       }
 
-      .desc {
-        color: var(--muted);
-        margin: 8px 0 0;
-        font-size: 0.85rem;
+      .pill-link.primary {
+        border-color: transparent;
+        color: #ffffff;
+        background: linear-gradient(125deg, var(--accent), #c73820);
+        box-shadow: 0 12px 28px rgba(199, 56, 32, 0.35);
       }
 
-      .meta {
-        margin-top: 12px;
-        color: var(--muted);
+      .hero {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--panel);
+        backdrop-filter: blur(2px);
+        padding: clamp(18px, 3vw, 30px);
+        box-shadow: 0 24px 60px rgba(18, 31, 50, 0.14);
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 18px;
+        animation: rise-in 680ms ease both;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -40% -20% auto auto;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(239, 91, 63, 0.14), transparent 70%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #7f2f1f;
+      }
+
+      h1 {
+        margin: 10px 0 8px;
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.9rem, 3.8vw, 3rem);
+        line-height: 1.06;
+        letter-spacing: -0.01em;
+      }
+
+      .hero-sub {
+        margin: 0;
+        max-width: 63ch;
+        color: #33465d;
+        font-size: clamp(0.95rem, 1.4vw, 1.04rem);
+      }
+
+      .hero-ctas {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.9rem;
+        padding: 11px 15px;
+        border: 1px solid transparent;
+      }
+
+      .btn.primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent), #cb3b24);
+        box-shadow: 0 12px 26px rgba(203, 59, 36, 0.34);
+      }
+
+      .btn.secondary {
+        color: #15314f;
+        border-color: #d6e4ef;
+        background: #eef8ff;
+      }
+
+      .hero-trust {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .trust-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        border: 1px solid #d9e5dc;
+        background: #f5fbf6;
+        color: #1f4a34;
         font-size: 0.76rem;
+        font-weight: 700;
+        padding: 6px 9px;
       }
 
-      .note {
-        margin-top: 14px;
+      .hero-panel {
+        border-radius: 18px;
+        border: 1px solid #e1d7ca;
+        background: linear-gradient(170deg, #fffdf8, #fff5e6);
+        padding: 14px;
+      }
+
+      .hero-panel h2 {
+        margin: 0;
+        font-size: 0.84rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: #7a6043;
+      }
+
+      .hero-panel ul {
+        margin: 11px 0 0;
+        padding-left: 17px;
+      }
+
+      .hero-panel li {
+        margin: 8px 0;
+        font-size: 0.86rem;
+        color: #3b4b60;
+      }
+
+      .hero-panel strong {
+        color: #1f2f45;
+      }
+
+      .section {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--panel);
+        backdrop-filter: blur(2px);
+        box-shadow: 0 16px 44px rgba(18, 31, 50, 0.1);
+        padding: clamp(16px, 2.2vw, 22px);
+      }
+
+      .map-launch {
+        display: grid;
+        gap: 12px;
+      }
+
+      .map-shell {
+        border: 1px solid #d9cdbe;
+        border-radius: 18px;
+        background: #fff8ef;
+        padding: 8px;
+        overflow: hidden;
+      }
+
+      .map-shell iframe {
+        width: 100%;
+        min-height: 560px;
+        border: 0;
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .map-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.3rem, 2.3vw, 1.8rem);
+        letter-spacing: -0.01em;
+      }
+
+      .section-head p {
+        margin: 0;
         color: var(--muted);
-        font-size: 0.83rem;
-        border-top: 1px solid var(--line);
-        padding-top: 12px;
+        font-size: 0.9rem;
       }
 
-      @media (max-width: 700px) {
-        .page {
+      .cards {
+        margin-top: 14px;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #e7ddd1;
+        border-radius: 20px;
+        background: #fffefb;
+        text-decoration: none;
+        color: inherit;
+        padding: 14px;
+        display: grid;
+        gap: 10px;
+        min-height: 168px;
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+        opacity: 0;
+        transform: translateY(12px);
+        animation: rise-in 620ms ease forwards;
+      }
+
+      .cards .card:nth-child(1) {
+        animation-delay: 110ms;
+      }
+
+      .cards .card:nth-child(2) {
+        animation-delay: 150ms;
+      }
+
+      .cards .card:nth-child(3) {
+        animation-delay: 190ms;
+      }
+
+      .cards .card:nth-child(4) {
+        animation-delay: 230ms;
+      }
+
+      .cards .card:nth-child(5) {
+        animation-delay: 270ms;
+      }
+
+      .cards .card:nth-child(6) {
+        animation-delay: 310ms;
+      }
+
+      .cards .card:nth-child(7) {
+        animation-delay: 350ms;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        border-color: #d9c7b5;
+        box-shadow: 0 20px 36px rgba(25, 37, 58, 0.14);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: auto -80px -120px auto;
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(15, 143, 136, 0.15), transparent 68%);
+      }
+
+      .card.featured::before {
+        background: radial-gradient(circle, rgba(239, 91, 63, 0.18), transparent 70%);
+      }
+
+      .card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card.featured {
+        grid-column: span 6;
+        min-height: 210px;
+        background: linear-gradient(160deg, #fff9ee, #fff4f0);
+      }
+
+      .card.span-3 {
+        grid-column: span 3;
+      }
+
+      .card .kicker {
+        margin: 0;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #7c664a;
+        font-weight: 800;
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 1.02rem;
+        letter-spacing: -0.01em;
+      }
+
+      .card.featured h3 {
+        font-size: 1.28rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: #42566e;
+        font-size: 0.88rem;
+      }
+
+      .card-foot {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 9px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        background: #fff;
+        border: 1px solid #e4d6c6;
+        color: #634a2d;
+      }
+
+      .jump {
+        color: #15314f;
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+
+      .steps {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .step {
+        border: 1px solid #e8ded1;
+        border-radius: 16px;
+        background: #fffdfa;
+        padding: 12px;
+      }
+
+      .step strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+      }
+
+      .step p {
+        margin: 0;
+        color: #465770;
+        font-size: 0.84rem;
+      }
+
+      .footer-note {
+        margin: 0;
+        text-align: center;
+        color: #4f6178;
+        font-size: 0.82rem;
+      }
+
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 960px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .map-shell iframe {
+          min-height: 500px;
+        }
+
+        .card.featured {
+          grid-column: span 12;
+        }
+
+        .card.span-3 {
+          grid-column: span 6;
+        }
+      }
+
+      @media (max-width: 660px) {
+        .shell {
           width: calc(100% - 16px);
+          margin-top: 12px;
+        }
+
+        .map-shell iframe {
+          min-height: 420px;
+        }
+
+        .card.span-3 {
+          grid-column: span 12;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero,
+        .card {
+          animation: none;
+          transform: none;
+          opacity: 1;
+        }
+
+        .card,
+        .card:hover {
+          transition: none;
+          transform: none;
         }
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <section class="hero">
-        <div class="topbar">
-          <a
-            class="superlink"
-            href="https://github.com/gsusI/vota-con-la-chola"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Ver el código en GitHub"
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Inicio">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <strong>Vota Con La Chola</strong>
+            <span>Decision intelligence para ciudadania</span>
+          </span>
+        </a>
+        <div class="top-actions">
+          <a class="pill-link" href="https://github.com/gsusI/vota-con-la-chola" target="_blank" rel="noopener noreferrer"
+            >GitHub</a
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-            </svg>
-            Ver el código
-          </a>
+          <a class="pill-link primary" href="citizen/">Abrir Ciudadania</a>
         </div>
-        <h1>Exploradores de Vota Con La Chola</h1>
-        <p class="sub">
-          Objetivo: comparar <strong>lo que dicen</strong> vs <strong>lo que hacen</strong> por <strong>tema high-stakes</strong> y <strong>scope</strong>, con evidencia auditable y calidad explícita.
-        </p>
+      </header>
 
-        <div class="grid">
-          <a class="card" href="citizen/">
-            <p class="title">
-              <strong>Ciudadanía</strong>
-              <span class="badge">Nuevo</span>
-            </p>
-            <p class="desc">Elige una preocupación y compara posturas por partido con enlaces a evidencia.</p>
-            <p class="meta">/citizen</p>
-          </a>
-
-          <a class="card" href="graph/">
-            <p class="title">
-              <strong>Graph Explorer</strong>
-              <span class="badge">Snapshot</span>
-            </p>
-            <p class="desc">Vista de grafo con nodos, vínculos y navegación por entidades.</p>
-            <p class="meta">/graph</p>
-          </a>
-
-          <a class="card" href="explorer/">
-            <p class="title">
-              <strong>Explorer SQL</strong>
-              <span class="badge">Browser + HF</span>
-            </p>
-            <p class="desc">Navegador tabular de tablas/relaciones en navegador (API local si existe; si no, snapshot HF).</p>
-            <p class="meta">/explorer</p>
-          </a>
-
-          <a class="card" href="explorer-temas/">
-            <p class="title">
-              <strong>Temas y Posiciones</strong>
-              <span class="badge">Says vs Does</span>
-            </p>
-            <p class="desc">High-stakes topics por scope, evidencia (said/did) y posicionamiento por político con divergencias.</p>
-            <p class="meta">/explorer-temas</p>
-          </a>
-
-          <a class="card" href="explorer-politico/">
-            <p class="title">
-              <strong>Radar Político</strong>
-              <span class="badge">Local API</span>
-            </p>
-            <p class="desc">Navega políticos por territorio/institución/partido (snapshots completos no se publican por tamaño).</p>
-            <p class="meta">/explorer-politico</p>
-          </a>
-
-          <a class="card" href="explorer-votaciones/">
-            <p class="title">
-              <strong>Explorador de Votaciones</strong>
-              <span class="badge">Snapshot</span>
-            </p>
-            <p class="desc">Consulta y compara votaciones parlamentarias con filtros y detalle.</p>
-            <p class="meta">/explorer-votaciones</p>
-          </a>
-
-          <a class="card" href="explorer-sources/">
-            <p class="title">
-              <strong>Fuentes y Calidad</strong>
-              <span class="badge">Snapshot</span>
-            </p>
-            <p class="desc">Roadmap: fuentes ideales (says vs does), conectores implementados, calidad y progreso reproducible.</p>
-            <p class="meta">/explorer-sources</p>
-          </a>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Data product, no solo dashboard</p>
+          <h1>Entiende la politica con señales reales, no solo titulares.</h1>
+          <p class="hero-sub">
+            Este hub conecta experiencias para comparar <strong>lo que se promete</strong> y <strong>lo que se vota o ejecuta</strong>,
+            con trazabilidad hasta la evidencia original.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn primary" href="citizen/">Empezar en modo ciudadania</a>
+            <a class="btn secondary" href="explorer-temas/">Ir a temas y posiciones</a>
+          </div>
+          <div class="hero-trust">
+            <span class="trust-item">Snapshot-first para GH Pages</span>
+            <span class="trust-item">Drilldown a evidencia por registro</span>
+            <span class="trust-item">Vista local API cuando esta disponible</span>
+          </div>
         </div>
-
-        <p class="note">Nota: los exploradores usan snapshot; `Explorer SQL` cambia a API local automáticamente si está disponible.</p>
+        <aside class="hero-panel" aria-label="Resumen de producto">
+          <h2>Que incluye esta release</h2>
+          <ul>
+            <li><strong>7 superficies navegables</strong> entre consumo ciudadano y exploracion tecnica.</li>
+            <li><strong>Ruta rapida</strong> para pasar de preocupacion personal a evidencia concreta.</li>
+            <li><strong>Calidad visible</strong> de fuentes, cobertura y bloqueos, sin maquillar pendientes.</li>
+            <li><strong>Links compartibles</strong> y estado reproducible en un sitio 100% estatico.</li>
+          </ul>
+        </aside>
       </section>
+
+      <section class="section map-launch" id="mapa-conquista">
+        <div class="section-head">
+          <h2>Mapa de conquista de datos</h2>
+          <p>Territorios conquistados, en disputa y pendientes, actualizado desde estado real de conectores.</p>
+        </div>
+        <div class="map-shell">
+          <iframe
+            src="explorer-sources/#campaign-map"
+            title="Mapa de conquista de datos"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>
+        <div class="map-actions">
+          <a class="btn primary" href="explorer-sources/#campaign-map">Abrir mapa interactivo completo</a>
+          <a class="btn secondary" href="explorer-sources/">Ver panel operativo</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Elige tu ruta</h2>
+          <p>Desde experiencia consumer hasta exploracion analitica.</p>
+        </div>
+        <div class="cards">
+          <a class="card featured" href="citizen/">
+            <p class="kicker">Ruta recomendada</p>
+            <h3>Ciudadania</h3>
+            <p>Selecciona lo que te preocupa, compara partidos y abre evidencia en segundos.</p>
+            <div class="card-foot">
+              <span class="tag">Producto principal</span>
+              <span class="jump">Entrar</span>
+            </div>
+          </a>
+
+          <a class="card span-3" href="explorer-temas/">
+            <p class="kicker">Says vs Does</p>
+            <h3>Temas y Posiciones</h3>
+            <p>Mapa por temas high-stakes con divergencias entre declaracion y voto.</p>
+            <div class="card-foot">
+              <span class="tag">Analitica</span>
+              <span class="jump">Abrir</span>
+            </div>
+          </a>
+
+          <a class="card span-3" href="explorer-votaciones/">
+            <p class="kicker">Legislativo</p>
+            <h3>Votaciones</h3>
+            <p>Filtros por camara y evento con detalle de votos y contexto parlamentario.</p>
+            <div class="card-foot">
+              <span class="tag">Snapshot</span>
+              <span class="jump">Abrir</span>
+            </div>
+          </a>
+
+          <a class="card span-3" href="explorer-sources/">
+            <p class="kicker">Operacion</p>
+            <h3>Fuentes y Calidad</h3>
+            <p>Conectores implementados, cobertura, bloqueos y roadmap de conquista de datos.</p>
+            <div class="card-foot">
+              <span class="tag">Observabilidad</span>
+              <span class="jump">Abrir</span>
+            </div>
+          </a>
+
+          <a class="card span-3" href="explorer/">
+            <p class="kicker">Modelo relacional</p>
+            <h3>Explorer SQL</h3>
+            <p>Navega tablas y relaciones. Usa API local cuando existe; fallback a snapshot cuando no.</p>
+            <div class="card-foot">
+              <span class="tag">Power users</span>
+              <span class="jump">Abrir</span>
+            </div>
+          </a>
+
+          <a class="card span-3" href="explorer-politico/">
+            <p class="kicker">Directorio</p>
+            <h3>Radar Politico</h3>
+            <p>Busqueda por territorio, institucion y partido para explorar actores rapidamente.</p>
+            <div class="card-foot">
+              <span class="tag">Personas</span>
+              <span class="jump">Abrir</span>
+            </div>
+          </a>
+
+          <a class="card span-3" href="graph/">
+            <p class="kicker">Relacion entre entidades</p>
+            <h3>Graph Explorer</h3>
+            <p>Vista de nodos y enlaces para inspeccionar la estructura del conocimiento.</p>
+            <div class="card-foot">
+              <span class="tag">Graph</span>
+              <span class="jump">Abrir</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Empieza en 60 segundos</h2>
+          <p>Flujo sugerido para usuarios nuevos.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <strong>1. Define tu preocupacion</strong>
+            <p>Entra a Ciudadania y elige un pack de inquietudes para recibir una comparativa accionable.</p>
+          </article>
+          <article class="step">
+            <strong>2. Verifica postura y comportamiento</strong>
+            <p>Profundiza en Temas y Posiciones para contrastar discurso declarado contra evidencia observada.</p>
+          </article>
+          <article class="step">
+            <strong>3. Audita calidad de datos</strong>
+            <p>Usa Fuentes y Calidad para entender cobertura, bloqueos y estado real de cada conector.</p>
+          </article>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Nota: GH Pages funciona en modo estatico por defecto. Las vistas que soportan API local se conectan automaticamente cuando detectan backend.
+      </p>
     </main>
   </body>
 </html>
