@@ -1,0 +1,2604 @@
+just parl-sanction-norms-seed-pipeline
+just parl-validate-sanction-norms-seed
+PYTHONPATH=. python3 scripts/validate_sanction_norms_seed.py --seed etl/data/seeds/sanction_norms_seed_v1.json --out docs/etl/sprints/AI-OPS-115/evidence/sanction_norms_seed_validate_latest.json
+{
+  "generated_at": "2026-02-23T19:58:40+00:00",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "valid": true,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "norms_total": 8,
+  "norms_valid": 8,
+  "fragments_total": 8,
+  "responsibility_hints_total": 15,
+  "duplicate_norm_id_count": 0,
+  "duplicate_boe_id_count": 0,
+  "schema_version": "sanction_norms_seed_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-norms-seed
+PYTHONPATH=. python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-115/evidence/sanction_norms_seed_import_latest.json
+{
+  "generated_at": "2026-02-23T19:58:40+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibility_hints_total": 15
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "boe_api_legal",
+    "seed_schema_version": "sanction_norms_seed_v1",
+    "counts": {
+      "norms_inserted": 0,
+      "norms_updated": 8,
+      "catalog_inserted": 0,
+      "catalog_updated": 8,
+      "fragments_inserted": 0,
+      "fragments_updated": 8,
+      "fragment_links_inserted": 0,
+      "fragment_links_updated": 8,
+      "responsibilities_inserted": 0,
+      "responsibilities_updated": 15
+    },
+    "totals": {
+      "legal_norms_total": 8,
+      "legal_norm_fragments_total": 8,
+      "legal_fragment_responsibilities_total": 15,
+      "sanction_norm_catalog_total": 8,
+      "sanction_norm_fragment_links_total": 8
+    }
+  }
+}
+just parl-report-sanction-norms-seed-status
+PYTHONPATH=. python3 scripts/report_sanction_norms_seed_status.py --db etl/data/staging/politicos-es.db --sample-limit 20 --out docs/etl/sprints/AI-OPS-115/evidence/sanction_norms_seed_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:40+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibilities_total": 15,
+    "fragments_with_responsibility": 8,
+    "fragments_missing_responsibility": 0
+  },
+  "coverage": {
+    "responsibility_coverage_pct": 1.0
+  },
+  "by_role": {
+    "approve": 6,
+    "enforce": 4,
+    "propose": 3,
+    "delegate": 2
+  },
+  "checks": {
+    "seed_loaded": true,
+    "fragment_catalog_loaded": true,
+    "responsibility_chain_started": true,
+    "all_fragments_with_responsibility": true
+  },
+  "missing_responsibility_sample": []
+}
+just parl-validate-liberty-restrictions-seed
+PYTHONPATH=. python3 scripts/validate_liberty_restrictions_seed.py --seed etl/data/seeds/liberty_restrictions_seed_v1.json --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_validate_latest.json
+{
+  "generated_at": "2026-02-23T19:58:40+00:00",
+  "seed_path": "etl/data/seeds/liberty_restrictions_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_restrictions_seed_v1",
+  "errors_count": 0,
+  "warnings_count": 0,
+  "right_categories_total": 6,
+  "fragment_assessments_total": 8,
+  "method_version": "irlc_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-liberty-restrictions-seed
+PYTHONPATH=. python3 scripts/import_liberty_restrictions_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_restrictions_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_import_latest.json
+{
+  "generated_at": "2026-02-23T19:58:40+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_restrictions_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "right_categories_total": 6,
+    "fragment_assessments_total": 8,
+    "method_version": "irlc_v1"
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "boe_api_legal",
+    "method_version": "irlc_v1",
+    "scale_max": 100.0,
+    "counts": {
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "right_categories_inserted": 0,
+      "right_categories_updated": 6,
+      "assessments_inserted": 0,
+      "assessments_updated": 8,
+      "unresolved_fragment_refs": 0,
+      "unresolved_right_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "right_categories_total": 6,
+      "assessments_total": 8,
+      "fragments_with_irlc_total": 8
+    }
+  }
+}
+just parl-report-liberty-restrictions-status
+PYTHONPATH=. python3 scripts/report_liberty_restrictions_status.py --db etl/data/staging/politicos-es.db --top-n 20 --norms-classified-min 0.8 --fragments-irlc-min 0.6 --fragments-accountability-min 0.6 --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:40+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "methodologies_total": 1,
+    "right_categories_total": 6,
+    "assessments_total": 8,
+    "norms_with_irlc_total": 8,
+    "fragments_with_irlc_total": 8,
+    "fragments_with_accountability_total": 8,
+    "fragments_with_dual_coverage_total": 8
+  },
+  "coverage": {
+    "norms_classified_pct": 1.0,
+    "fragments_with_irlc_pct": 1.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 1.0
+  },
+  "checks": {
+    "irlc_started": true,
+    "restriction_map_started": true,
+    "norms_classified_gate": true,
+    "fragments_irlc_gate": true,
+    "fragments_accountability_gate": true
+  },
+  "focus_gate": {
+    "passed": true,
+    "thresholds": {
+      "norms_classified_min": 0.8,
+      "fragments_irlc_min": 0.6,
+      "fragments_accountability_min": 0.6
+    }
+  },
+  "restriction_map_by_right": [
+    {
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "assessments_total": 4,
+      "fragments_total": 4,
+      "irlc_avg": 59.325,
+      "irlc_min": 56.85,
+      "irlc_max": 64.55
+    },
+    {
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 65.275,
+      "irlc_min": 63.1,
+      "irlc_max": 67.45
+    },
+    {
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 53.95,
+      "irlc_min": 49.4,
+      "irlc_max": 58.5
+    }
+  ],
+  "top_restrictions": [
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 67.45,
+      "confidence": 0.81
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 64.55,
+      "confidence": 0.84
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 63.1,
+      "confidence": 0.75
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 58.55,
+      "confidence": 0.79
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 58.5,
+      "confidence": 0.82
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 57.35,
+      "confidence": 0.7
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 56.85,
+      "confidence": 0.8
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 49.4,
+      "confidence": 0.78
+    }
+  ]
+}
+just parl-report-liberty-restrictions-status-heartbeat
+PYTHONPATH=. python3 scripts/report_liberty_restrictions_status_heartbeat.py --status-json docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_latest.json --heartbeat-jsonl docs/etl/runs/liberty_restrictions_status_heartbeat.jsonl --strict --out docs/etl/sprints/AI-OPS-123/evidence/liberty_restrictions_status_heartbeat_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "strict": true,
+  "input_path": "docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_latest.json",
+  "heartbeat_path": "docs/etl/runs/liberty_restrictions_status_heartbeat.jsonl",
+  "history_size_before": 3,
+  "history_size_after": 4,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T19:58:40+00:00",
+    "heartbeat_id": "2026-02-23T19:58:40+00:00|ok|1.000000|1.000000|1.000000|1.000000|1|8|8|",
+    "status_path": "docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_latest.json",
+    "status_generated_at": "2026-02-23T19:58:40+00:00",
+    "status": "ok",
+    "norms_total": 8,
+    "fragments_total": 8,
+    "assessments_total": 8,
+    "norms_classified_pct": 1.0,
+    "fragments_with_irlc_pct": 1.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 1.0,
+    "focus_gate_passed": true,
+    "norms_classified_gate_passed": true,
+    "fragments_irlc_gate_passed": true,
+    "fragments_accountability_gate_passed": true,
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+just parl-check-liberty-restrictions-status-heartbeat-window
+PYTHONPATH=. python3 scripts/report_liberty_restrictions_status_heartbeat_window.py --heartbeat-jsonl docs/etl/runs/liberty_restrictions_status_heartbeat.jsonl --last 20 --max-failed 0 --max-failed-rate-pct 0 --max-focus-gate-failed 0 --max-focus-gate-failed-rate-pct 0 --max-norms-classified-gate-failed 0 --max-fragments-irlc-gate-failed 0 --max-fragments-accountability-gate-failed 0 --strict --out docs/etl/sprints/AI-OPS-123/evidence/liberty_restrictions_status_heartbeat_window_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "strict": true,
+  "heartbeat_path": "docs/etl/runs/liberty_restrictions_status_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_focus_gate_failed": 0,
+    "max_focus_gate_failed_rate_pct": 0.0,
+    "max_norms_classified_gate_failed": 0,
+    "max_fragments_irlc_gate_failed": 0,
+    "max_fragments_accountability_gate_failed": 0
+  },
+  "entries_total": 4,
+  "entries_in_window": 4,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 4,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "focus_gate_failed_in_window": 0,
+  "focus_gate_failed_rate_pct": 0.0,
+  "norms_classified_gate_failed_in_window": 0,
+  "fragments_irlc_gate_failed_in_window": 0,
+  "fragments_accountability_gate_failed_in_window": 0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_focus_gate_failed_run_at": "",
+  "last_focus_gate_failed_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T19:58:40+00:00",
+    "heartbeat_id": "2026-02-23T19:58:40+00:00|ok|1.000000|1.000000|1.000000|1.000000|1|8|8|",
+    "status": "ok",
+    "line_no": 4,
+    "malformed_line": false,
+    "status_generated_at": "2026-02-23T19:58:40+00:00",
+    "focus_gate_passed": true,
+    "norms_classified_gate_passed": true,
+    "fragments_irlc_gate_passed": true,
+    "fragments_accountability_gate_passed": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_focus_gate_failed_ok": true,
+    "max_focus_gate_failed_rate_ok": true,
+    "max_norms_classified_gate_failed_ok": true,
+    "max_fragments_irlc_gate_failed_ok": true,
+    "max_fragments_accountability_gate_failed_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_focus_gate_passed_ok": true,
+    "latest_norms_classified_gate_ok": true,
+    "latest_fragments_irlc_gate_ok": true,
+    "latest_fragments_accountability_gate_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}
+just parl-check-liberty-focus-gate
+PYTHONPATH=. python3 scripts/report_liberty_restrictions_status.py --db etl/data/staging/politicos-es.db --top-n 20 --norms-classified-min 0.8 --fragments-irlc-min 0.6 --fragments-accountability-min 0.6 --enforce-gate --out docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "methodologies_total": 1,
+    "right_categories_total": 6,
+    "assessments_total": 8,
+    "norms_with_irlc_total": 8,
+    "fragments_with_irlc_total": 8,
+    "fragments_with_accountability_total": 8,
+    "fragments_with_dual_coverage_total": 8
+  },
+  "coverage": {
+    "norms_classified_pct": 1.0,
+    "fragments_with_irlc_pct": 1.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 1.0
+  },
+  "checks": {
+    "irlc_started": true,
+    "restriction_map_started": true,
+    "norms_classified_gate": true,
+    "fragments_irlc_gate": true,
+    "fragments_accountability_gate": true
+  },
+  "focus_gate": {
+    "passed": true,
+    "thresholds": {
+      "norms_classified_min": 0.8,
+      "fragments_irlc_min": 0.6,
+      "fragments_accountability_min": 0.6
+    }
+  },
+  "restriction_map_by_right": [
+    {
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "assessments_total": 4,
+      "fragments_total": 4,
+      "irlc_avg": 59.325,
+      "irlc_min": 56.85,
+      "irlc_max": 64.55
+    },
+    {
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 65.275,
+      "irlc_min": 63.1,
+      "irlc_max": 67.45
+    },
+    {
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 53.95,
+      "irlc_min": 49.4,
+      "irlc_max": 58.5
+    }
+  ],
+  "top_restrictions": [
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 67.45,
+      "confidence": 0.81
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 64.55,
+      "confidence": 0.84
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 63.1,
+      "confidence": 0.75
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 58.55,
+      "confidence": 0.79
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 58.5,
+      "confidence": 0.82
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 57.35,
+      "confidence": 0.7
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 56.85,
+      "confidence": 0.8
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 49.4,
+      "confidence": 0.78
+    }
+  ]
+}
+just parl-validate-liberty-proportionality-seed
+PYTHONPATH=. python3 scripts/validate_liberty_proportionality_seed.py --seed etl/data/seeds/liberty_proportionality_seed_v1.json --out docs/etl/sprints/AI-OPS-119/evidence/liberty_proportionality_validate_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "seed_path": "etl/data/seeds/liberty_proportionality_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_proportionality_seed_v1",
+  "method_version": "proportionality_v1",
+  "reviews_total": 8,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "errors": [],
+  "warnings": []
+}
+just parl-import-liberty-proportionality-seed
+PYTHONPATH=. python3 scripts/import_liberty_proportionality_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_proportionality_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-119/evidence/liberty_proportionality_import_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_proportionality_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "proportionality_v1",
+    "reviews_total": 8
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "boe_api_legal",
+    "method_version": "proportionality_v1",
+    "counts": {
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "reviews_inserted": 0,
+      "reviews_updated": 8,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "reviews_total": 8,
+      "fragments_with_reviews_total": 8
+    }
+  }
+}
+just parl-report-liberty-proportionality-status
+PYTHONPATH=. python3 scripts/report_liberty_proportionality_status.py --db etl/data/staging/politicos-es.db --low-score-threshold 50 --target-coverage-min 0.6 --objective-defined-min 0.8 --indicator-defined-min 0.6 --alternatives-considered-min 0.4 --out docs/etl/sprints/AI-OPS-119/evidence/liberty_proportionality_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "reviews_total": 8,
+    "fragments_with_reviews_total": 8,
+    "target_fragments_total": 8,
+    "reviews_below_threshold_total": 2
+  },
+  "coverage": {
+    "target_fragments_coverage_pct": 1.0,
+    "objective_defined_pct": 1.0,
+    "indicator_defined_pct": 0.75,
+    "alternatives_considered_pct": 0.5,
+    "sunset_present_pct": 0.0,
+    "proportionality_score_avg": 64.05,
+    "proportionality_score_min": 42.95,
+    "proportionality_score_max": 80.3
+  },
+  "checks": {
+    "proportionality_started": true,
+    "target_coverage_gate": true,
+    "objective_defined_gate": true,
+    "indicator_defined_gate": true,
+    "alternatives_considered_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_coverage_min": 0.6,
+      "objective_defined_min": 0.8,
+      "indicator_defined_min": 0.6,
+      "alternatives_considered_min": 0.4,
+      "low_score_threshold": 50.0
+    }
+  },
+  "by_assessment_label": {
+    "supported": 3,
+    "weak": 3,
+    "insufficient_evidence": 2
+  },
+  "low_score_sample": [
+    {
+      "review_key": "proportionality_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "proportionality_score": 42.95,
+      "assessment_label": "insufficient_evidence"
+    },
+    {
+      "review_key": "proportionality_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "proportionality_score": 44.05,
+      "assessment_label": "insufficient_evidence"
+    }
+  ],
+  "target_missing_sample": []
+}
+just parl-check-liberty-proportionality-gate
+PYTHONPATH=. python3 scripts/report_liberty_proportionality_status.py --db etl/data/staging/politicos-es.db --low-score-threshold 50 --target-coverage-min 0.6 --objective-defined-min 0.8 --indicator-defined-min 0.6 --alternatives-considered-min 0.4 --enforce-gate --out docs/etl/sprints/AI-OPS-119/evidence/liberty_proportionality_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "reviews_total": 8,
+    "fragments_with_reviews_total": 8,
+    "target_fragments_total": 8,
+    "reviews_below_threshold_total": 2
+  },
+  "coverage": {
+    "target_fragments_coverage_pct": 1.0,
+    "objective_defined_pct": 1.0,
+    "indicator_defined_pct": 0.75,
+    "alternatives_considered_pct": 0.5,
+    "sunset_present_pct": 0.0,
+    "proportionality_score_avg": 64.05,
+    "proportionality_score_min": 42.95,
+    "proportionality_score_max": 80.3
+  },
+  "checks": {
+    "proportionality_started": true,
+    "target_coverage_gate": true,
+    "objective_defined_gate": true,
+    "indicator_defined_gate": true,
+    "alternatives_considered_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_coverage_min": 0.6,
+      "objective_defined_min": 0.8,
+      "indicator_defined_min": 0.6,
+      "alternatives_considered_min": 0.4,
+      "low_score_threshold": 50.0
+    }
+  },
+  "by_assessment_label": {
+    "supported": 3,
+    "weak": 3,
+    "insufficient_evidence": 2
+  },
+  "low_score_sample": [
+    {
+      "review_key": "proportionality_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "proportionality_score": 42.95,
+      "assessment_label": "insufficient_evidence"
+    },
+    {
+      "review_key": "proportionality_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "proportionality_score": 44.05,
+      "assessment_label": "insufficient_evidence"
+    }
+  ],
+  "target_missing_sample": []
+}
+just parl-report-liberty-direct-accountability-scores
+PYTHONPATH=. python3 scripts/report_liberty_direct_accountability_scores.py --db etl/data/staging/politicos-es.db --top-n 20 --direct-coverage-min 0.6 --out docs/etl/sprints/AI-OPS-119/evidence/liberty_direct_accountability_scores_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "fragments_with_irlc_total": 8,
+    "fragments_with_any_accountability_total": 8,
+    "fragments_with_direct_chain_total": 8,
+    "accountability_edges_total": 15,
+    "direct_edges_total": 13,
+    "actors_scored_total": 8
+  },
+  "coverage": {
+    "fragments_with_any_accountability_pct": 1.0,
+    "fragments_with_direct_chain_pct": 1.0
+  },
+  "checks": {
+    "direct_chain_started": true,
+    "responsibility_score_available": true,
+    "direct_coverage_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "direct_coverage_min": 0.6
+    }
+  },
+  "methodology": {
+    "role_weights": {
+      "propose": 0.25,
+      "approve": 0.3,
+      "delegate": 0.15,
+      "enforce": 0.25,
+      "audit": 0.05
+    },
+    "direct_roles": [
+      "propose",
+      "approve",
+      "enforce"
+    ],
+    "score_formula": "responsibility_score = actor_total_weighted_score / max_actor_total_weighted_score * 100",
+    "role_weights_json": "{\"approve\": 0.3, \"audit\": 0.05, \"delegate\": 0.15, \"enforce\": 0.25, \"propose\": 0.25}"
+  },
+  "top_actor_scores": [
+    {
+      "actor_label": "Cortes Generales",
+      "edges_total": 6,
+      "fragments_total": 6,
+      "direct_edges_total": 6,
+      "direct_weighted_score": 110.34,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 110.34,
+      "responsibility_score": 100.0
+    },
+    {
+      "actor_label": "Gobierno de Espana",
+      "edges_total": 3,
+      "fragments_total": 3,
+      "direct_edges_total": 3,
+      "direct_weighted_score": 47.625,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 47.625,
+      "responsibility_score": 43.162045
+    },
+    {
+      "actor_label": "Ministerio del Interior",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 16.8625,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 16.8625,
+      "responsibility_score": 15.282309
+    },
+    {
+      "actor_label": "AEAT",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 14.6375,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 14.6375,
+      "responsibility_score": 13.265815
+    },
+    {
+      "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 14.2125,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 14.2125,
+      "responsibility_score": 12.880642
+    },
+    {
+      "actor_label": "DGT",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 12.35,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 12.35,
+      "responsibility_score": 11.192677
+    },
+    {
+      "actor_label": "Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 0,
+      "direct_weighted_score": 0.0,
+      "indirect_weighted_score": 8.7825,
+      "total_weighted_score": 8.7825,
+      "responsibility_score": 7.959489
+    },
+    {
+      "actor_label": "Ministerio competente en trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 0,
+      "direct_weighted_score": 0.0,
+      "indirect_weighted_score": 7.41,
+      "total_weighted_score": 7.41,
+      "responsibility_score": 6.715606
+    }
+  ],
+  "direct_chain_missing_sample": []
+}
+just parl-check-liberty-direct-accountability-gate
+PYTHONPATH=. python3 scripts/report_liberty_direct_accountability_scores.py --db etl/data/staging/politicos-es.db --top-n 20 --direct-coverage-min 0.6 --enforce-gate --out docs/etl/sprints/AI-OPS-119/evidence/liberty_direct_accountability_scores_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "fragments_with_irlc_total": 8,
+    "fragments_with_any_accountability_total": 8,
+    "fragments_with_direct_chain_total": 8,
+    "accountability_edges_total": 15,
+    "direct_edges_total": 13,
+    "actors_scored_total": 8
+  },
+  "coverage": {
+    "fragments_with_any_accountability_pct": 1.0,
+    "fragments_with_direct_chain_pct": 1.0
+  },
+  "checks": {
+    "direct_chain_started": true,
+    "responsibility_score_available": true,
+    "direct_coverage_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "direct_coverage_min": 0.6
+    }
+  },
+  "methodology": {
+    "role_weights": {
+      "propose": 0.25,
+      "approve": 0.3,
+      "delegate": 0.15,
+      "enforce": 0.25,
+      "audit": 0.05
+    },
+    "direct_roles": [
+      "propose",
+      "approve",
+      "enforce"
+    ],
+    "score_formula": "responsibility_score = actor_total_weighted_score / max_actor_total_weighted_score * 100",
+    "role_weights_json": "{\"approve\": 0.3, \"audit\": 0.05, \"delegate\": 0.15, \"enforce\": 0.25, \"propose\": 0.25}"
+  },
+  "top_actor_scores": [
+    {
+      "actor_label": "Cortes Generales",
+      "edges_total": 6,
+      "fragments_total": 6,
+      "direct_edges_total": 6,
+      "direct_weighted_score": 110.34,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 110.34,
+      "responsibility_score": 100.0
+    },
+    {
+      "actor_label": "Gobierno de Espana",
+      "edges_total": 3,
+      "fragments_total": 3,
+      "direct_edges_total": 3,
+      "direct_weighted_score": 47.625,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 47.625,
+      "responsibility_score": 43.162045
+    },
+    {
+      "actor_label": "Ministerio del Interior",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 16.8625,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 16.8625,
+      "responsibility_score": 15.282309
+    },
+    {
+      "actor_label": "AEAT",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 14.6375,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 14.6375,
+      "responsibility_score": 13.265815
+    },
+    {
+      "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 14.2125,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 14.2125,
+      "responsibility_score": 12.880642
+    },
+    {
+      "actor_label": "DGT",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 12.35,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 12.35,
+      "responsibility_score": 11.192677
+    },
+    {
+      "actor_label": "Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 0,
+      "direct_weighted_score": 0.0,
+      "indirect_weighted_score": 8.7825,
+      "total_weighted_score": 8.7825,
+      "responsibility_score": 7.959489
+    },
+    {
+      "actor_label": "Ministerio competente en trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 0,
+      "direct_weighted_score": 0.0,
+      "indirect_weighted_score": 7.41,
+      "total_weighted_score": 7.41,
+      "responsibility_score": 6.715606
+    }
+  ],
+  "direct_chain_missing_sample": []
+}
+just parl-validate-liberty-enforcement-seed
+PYTHONPATH=. python3 scripts/validate_liberty_enforcement_seed.py --seed etl/data/seeds/liberty_enforcement_seed_v1.json --out docs/etl/sprints/AI-OPS-120/evidence/liberty_enforcement_validate_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "seed_path": "etl/data/seeds/liberty_enforcement_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_enforcement_seed_v1",
+  "method_version": "enforcement_variation_v1",
+  "observations_total": 16,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "errors": [],
+  "warnings": []
+}
+just parl-import-liberty-enforcement-seed
+PYTHONPATH=. python3 scripts/import_liberty_enforcement_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_enforcement_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-120/evidence/liberty_enforcement_import_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_enforcement_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "enforcement_variation_v1",
+    "observations_total": 16
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "boe_api_legal",
+    "method_version": "enforcement_variation_v1",
+    "counts": {
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "observations_inserted": 0,
+      "observations_updated": 16,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "observations_total": 16,
+      "fragments_with_observations_total": 8
+    }
+  }
+}
+just parl-report-liberty-enforcement-variation-status
+PYTHONPATH=. python3 scripts/report_liberty_enforcement_variation_status.py --db etl/data/staging/politicos-es.db --top-n 20 --sanction-rate-spread-pct-min 0.35 --annulment-rate-spread-pp-min 0.08 --delay-spread-days-min 45 --target-coverage-min 0.6 --multi-territory-coverage-min 0.6 --out docs/etl/sprints/AI-OPS-120/evidence/liberty_enforcement_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "observations_total": 16,
+    "fragments_with_observations_total": 8,
+    "target_fragments_total": 8,
+    "fragments_with_multi_territory_total": 8,
+    "high_variation_fragments_total": 3
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "multi_territory_coverage_pct": 1.0,
+    "high_variation_fragment_pct": 0.375,
+    "avg_sanction_rate_spread_pct": 0.20894,
+    "avg_annulment_rate_spread_pp": 0.045,
+    "avg_resolution_delay_spread_days": 29.125
+  },
+  "checks": {
+    "enforcement_variation_started": true,
+    "target_coverage_gate": true,
+    "multi_territory_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_coverage_min": 0.6,
+      "multi_territory_coverage_min": 0.6,
+      "sanction_rate_spread_pct_min": 0.35,
+      "annulment_rate_spread_pp_min": 0.08,
+      "delay_spread_days_min": 45.0
+    }
+  },
+  "high_variation_sample": [
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "territories_total": 2,
+      "sanction_rate_min": 4.4,
+      "sanction_rate_max": 7.1,
+      "sanction_rate_spread_pct": 0.380282,
+      "annulment_rate_min": 0.13,
+      "annulment_rate_max": 0.22,
+      "annulment_rate_spread_pp": 0.09,
+      "resolution_delay_p90_min_days": 141.0,
+      "resolution_delay_p90_max_days": 195.0,
+      "resolution_delay_spread_days": 54.0,
+      "sample_size_total": 113000,
+      "high_variation": true
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "territories_total": 2,
+      "sanction_rate_min": 3.1,
+      "sanction_rate_max": 4.8,
+      "sanction_rate_spread_pct": 0.354167,
+      "annulment_rate_min": 0.06,
+      "annulment_rate_max": 0.09,
+      "annulment_rate_spread_pp": 0.03,
+      "resolution_delay_p90_min_days": 172.0,
+      "resolution_delay_p90_max_days": 228.0,
+      "resolution_delay_spread_days": 56.0,
+      "sample_size_total": 69000,
+      "high_variation": true
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "territories_total": 2,
+      "sanction_rate_min": 12.1,
+      "sanction_rate_max": 18.7,
+      "sanction_rate_spread_pct": 0.352941,
+      "annulment_rate_min": 0.11,
+      "annulment_rate_max": 0.23,
+      "annulment_rate_spread_pp": 0.12,
+      "resolution_delay_p90_min_days": 142.0,
+      "resolution_delay_p90_max_days": 214.0,
+      "resolution_delay_spread_days": 72.0,
+      "sample_size_total": 218000,
+      "high_variation": true
+    }
+  ],
+  "missing_fragment_sample": []
+}
+just parl-check-liberty-enforcement-variation-gate
+PYTHONPATH=. python3 scripts/report_liberty_enforcement_variation_status.py --db etl/data/staging/politicos-es.db --top-n 20 --sanction-rate-spread-pct-min 0.35 --annulment-rate-spread-pp-min 0.08 --delay-spread-days-min 45 --target-coverage-min 0.6 --multi-territory-coverage-min 0.6 --enforce-gate --out docs/etl/sprints/AI-OPS-120/evidence/liberty_enforcement_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "observations_total": 16,
+    "fragments_with_observations_total": 8,
+    "target_fragments_total": 8,
+    "fragments_with_multi_territory_total": 8,
+    "high_variation_fragments_total": 3
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "multi_territory_coverage_pct": 1.0,
+    "high_variation_fragment_pct": 0.375,
+    "avg_sanction_rate_spread_pct": 0.20894,
+    "avg_annulment_rate_spread_pp": 0.045,
+    "avg_resolution_delay_spread_days": 29.125
+  },
+  "checks": {
+    "enforcement_variation_started": true,
+    "target_coverage_gate": true,
+    "multi_territory_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_coverage_min": 0.6,
+      "multi_territory_coverage_min": 0.6,
+      "sanction_rate_spread_pct_min": 0.35,
+      "annulment_rate_spread_pp_min": 0.08,
+      "delay_spread_days_min": 45.0
+    }
+  },
+  "high_variation_sample": [
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "territories_total": 2,
+      "sanction_rate_min": 4.4,
+      "sanction_rate_max": 7.1,
+      "sanction_rate_spread_pct": 0.380282,
+      "annulment_rate_min": 0.13,
+      "annulment_rate_max": 0.22,
+      "annulment_rate_spread_pp": 0.09,
+      "resolution_delay_p90_min_days": 141.0,
+      "resolution_delay_p90_max_days": 195.0,
+      "resolution_delay_spread_days": 54.0,
+      "sample_size_total": 113000,
+      "high_variation": true
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "territories_total": 2,
+      "sanction_rate_min": 3.1,
+      "sanction_rate_max": 4.8,
+      "sanction_rate_spread_pct": 0.354167,
+      "annulment_rate_min": 0.06,
+      "annulment_rate_max": 0.09,
+      "annulment_rate_spread_pp": 0.03,
+      "resolution_delay_p90_min_days": 172.0,
+      "resolution_delay_p90_max_days": 228.0,
+      "resolution_delay_spread_days": 56.0,
+      "sample_size_total": 69000,
+      "high_variation": true
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "territories_total": 2,
+      "sanction_rate_min": 12.1,
+      "sanction_rate_max": 18.7,
+      "sanction_rate_spread_pct": 0.352941,
+      "annulment_rate_min": 0.11,
+      "annulment_rate_max": 0.23,
+      "annulment_rate_spread_pp": 0.12,
+      "resolution_delay_p90_min_days": 142.0,
+      "resolution_delay_p90_max_days": 214.0,
+      "resolution_delay_spread_days": 72.0,
+      "sample_size_total": 218000,
+      "high_variation": true
+    }
+  ],
+  "missing_fragment_sample": []
+}
+just parl-validate-liberty-indirect-accountability-seed
+PYTHONPATH=. python3 scripts/validate_liberty_indirect_accountability_seed.py --seed etl/data/seeds/liberty_indirect_accountability_seed_v1.json --out docs/etl/sprints/AI-OPS-120/evidence/liberty_indirect_validate_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "seed_path": "etl/data/seeds/liberty_indirect_accountability_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_indirect_accountability_seed_v1",
+  "method_version": "indirect_chain_v1",
+  "edges_total": 12,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "errors": [],
+  "warnings": []
+}
+just parl-import-liberty-indirect-accountability-seed
+PYTHONPATH=. python3 scripts/import_liberty_indirect_accountability_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_indirect_accountability_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-120/evidence/liberty_indirect_import_latest.json
+{
+  "generated_at": "2026-02-23T19:58:41+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_indirect_accountability_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "indirect_chain_v1",
+    "edges_total": 12
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "boe_api_legal",
+    "method_version": "indirect_chain_v1",
+    "counts": {
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "edges_inserted": 0,
+      "edges_updated": 12,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "edges_total": 12,
+      "fragments_with_edges_total": 8
+    }
+  }
+}
+just parl-report-liberty-indirect-accountability-status
+PYTHONPATH=. python3 scripts/report_liberty_indirect_accountability_status.py --db etl/data/staging/politicos-es.db --top-n 20 --attributable-confidence-min 0.55 --attributable-max-causal-distance 2 --attributable-fragment-coverage-min 0.5 --out docs/etl/sprints/AI-OPS-120/evidence/liberty_indirect_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:42+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "edges_total": 12,
+    "fragments_with_edges_total": 8,
+    "target_fragments_total": 8,
+    "attributable_edges_total": 9,
+    "fragments_with_attributable_edges_total": 7,
+    "direct_fragments_total": 8,
+    "high_confidence_far_edges_total": 0
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "attributable_fragment_coverage_pct": 0.875,
+    "attributable_edges_pct": 0.75,
+    "direct_and_indirect_overlap_pct": 0.875
+  },
+  "checks": {
+    "indirect_chain_started": true,
+    "attributable_filter_applied": true,
+    "attributable_fragment_gate": true,
+    "anti_overattribution_guard": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "attributable_confidence_min": 0.55,
+      "attributable_max_causal_distance": 2,
+      "attributable_fragment_coverage_min": 0.5
+    }
+  },
+  "attributable_edges_sample": [
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|delegate|DGT|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Ministerio competente en trafico",
+      "role": "delegate",
+      "direct_actor_label": "DGT",
+      "causal_distance": 1,
+      "edge_confidence": 0.74,
+      "evidence_date": "2024-11-08",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|delegate|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "actor_label": "Ministerio de Hacienda",
+      "role": "delegate",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 1,
+      "edge_confidence": 0.73,
+      "evidence_date": "2024-10-14",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|instruct|DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "actor_label": "Ministerio competente en trafico",
+      "role": "instruct",
+      "direct_actor_label": "DGT",
+      "causal_distance": 1,
+      "edge_confidence": 0.7,
+      "evidence_date": "2024-05-03",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Secretaria de Estado de Seguridad|instruct|Delegaciones/Subdelegaciones del Gobierno y organos habilitados|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Secretaria de Estado de Seguridad",
+      "role": "instruct",
+      "direct_actor_label": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+      "causal_distance": 2,
+      "edge_confidence": 0.62,
+      "evidence_date": "2025-01-20",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Direccion politica de movilidad|design|Ministerio competente en trafico|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Direccion politica de movilidad",
+      "role": "design",
+      "direct_actor_label": "Ministerio competente en trafico",
+      "causal_distance": 2,
+      "edge_confidence": 0.61,
+      "evidence_date": "2024-11-08",
+      "source_url": "https://www.boe.es/"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|design|Inspeccion de Trabajo y Seguridad Social|https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "actor_label": "Ministerio de Trabajo",
+      "role": "design",
+      "direct_actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "causal_distance": 2,
+      "edge_confidence": 0.6,
+      "evidence_date": "2024-09-03",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Secretaria de Estado de Hacienda|instruct|AEAT|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "actor_label": "Secretaria de Estado de Hacienda",
+      "role": "instruct",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 2,
+      "edge_confidence": 0.58,
+      "evidence_date": "2024-10-14",
+      "source_url": "https://www.boe.es/"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|design|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Ministerio de Hacienda",
+      "role": "design",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 2,
+      "edge_confidence": 0.57,
+      "evidence_date": "2024-10-14",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Secretaria de Estado de Empleo|appoint|Inspeccion de Trabajo y Seguridad Social|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "actor_label": "Secretaria de Estado de Empleo",
+      "role": "appoint",
+      "direct_actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "causal_distance": 2,
+      "edge_confidence": 0.56,
+      "evidence_date": "2024-09-03",
+      "source_url": "https://www.boe.es/"
+    }
+  ],
+  "excluded_edges_sample": [
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Comision interterritorial de trafico|design|DGT|https://www.boe.es/",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "actor_label": "Comision interterritorial de trafico",
+      "role": "design",
+      "direct_actor_label": "DGT",
+      "causal_distance": 3,
+      "edge_confidence": 0.44,
+      "exclusion_reason": "low_confidence"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Gabinete de coordinacion territorial|appoint|Delegaciones/Subdelegaciones del Gobierno y organos habilitados|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "actor_label": "Gabinete de coordinacion territorial",
+      "role": "appoint",
+      "direct_actor_label": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+      "causal_distance": 3,
+      "edge_confidence": 0.49,
+      "exclusion_reason": "low_confidence"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Secretaria de Estado de Hacienda|instruct|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "actor_label": "Secretaria de Estado de Hacienda",
+      "role": "instruct",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 3,
+      "edge_confidence": 0.52,
+      "exclusion_reason": "low_confidence"
+    }
+  ],
+  "missing_fragment_sample": []
+}
+just parl-check-liberty-indirect-accountability-gate
+PYTHONPATH=. python3 scripts/report_liberty_indirect_accountability_status.py --db etl/data/staging/politicos-es.db --top-n 20 --attributable-confidence-min 0.55 --attributable-max-causal-distance 2 --attributable-fragment-coverage-min 0.5 --enforce-gate --out docs/etl/sprints/AI-OPS-120/evidence/liberty_indirect_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:42+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "edges_total": 12,
+    "fragments_with_edges_total": 8,
+    "target_fragments_total": 8,
+    "attributable_edges_total": 9,
+    "fragments_with_attributable_edges_total": 7,
+    "direct_fragments_total": 8,
+    "high_confidence_far_edges_total": 0
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "attributable_fragment_coverage_pct": 0.875,
+    "attributable_edges_pct": 0.75,
+    "direct_and_indirect_overlap_pct": 0.875
+  },
+  "checks": {
+    "indirect_chain_started": true,
+    "attributable_filter_applied": true,
+    "attributable_fragment_gate": true,
+    "anti_overattribution_guard": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "attributable_confidence_min": 0.55,
+      "attributable_max_causal_distance": 2,
+      "attributable_fragment_coverage_min": 0.5
+    }
+  },
+  "attributable_edges_sample": [
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|delegate|DGT|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Ministerio competente en trafico",
+      "role": "delegate",
+      "direct_actor_label": "DGT",
+      "causal_distance": 1,
+      "edge_confidence": 0.74,
+      "evidence_date": "2024-11-08",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|delegate|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "actor_label": "Ministerio de Hacienda",
+      "role": "delegate",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 1,
+      "edge_confidence": 0.73,
+      "evidence_date": "2024-10-14",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|instruct|DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "actor_label": "Ministerio competente en trafico",
+      "role": "instruct",
+      "direct_actor_label": "DGT",
+      "causal_distance": 1,
+      "edge_confidence": 0.7,
+      "evidence_date": "2024-05-03",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Secretaria de Estado de Seguridad|instruct|Delegaciones/Subdelegaciones del Gobierno y organos habilitados|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Secretaria de Estado de Seguridad",
+      "role": "instruct",
+      "direct_actor_label": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+      "causal_distance": 2,
+      "edge_confidence": 0.62,
+      "evidence_date": "2025-01-20",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Direccion politica de movilidad|design|Ministerio competente en trafico|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Direccion politica de movilidad",
+      "role": "design",
+      "direct_actor_label": "Ministerio competente en trafico",
+      "causal_distance": 2,
+      "edge_confidence": 0.61,
+      "evidence_date": "2024-11-08",
+      "source_url": "https://www.boe.es/"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|design|Inspeccion de Trabajo y Seguridad Social|https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "actor_label": "Ministerio de Trabajo",
+      "role": "design",
+      "direct_actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "causal_distance": 2,
+      "edge_confidence": 0.6,
+      "evidence_date": "2024-09-03",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Secretaria de Estado de Hacienda|instruct|AEAT|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "actor_label": "Secretaria de Estado de Hacienda",
+      "role": "instruct",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 2,
+      "edge_confidence": 0.58,
+      "evidence_date": "2024-10-14",
+      "source_url": "https://www.boe.es/"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|design|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "actor_label": "Ministerio de Hacienda",
+      "role": "design",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 2,
+      "edge_confidence": 0.57,
+      "evidence_date": "2024-10-14",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Secretaria de Estado de Empleo|appoint|Inspeccion de Trabajo y Seguridad Social|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "actor_label": "Secretaria de Estado de Empleo",
+      "role": "appoint",
+      "direct_actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "causal_distance": 2,
+      "edge_confidence": 0.56,
+      "evidence_date": "2024-09-03",
+      "source_url": "https://www.boe.es/"
+    }
+  ],
+  "excluded_edges_sample": [
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Comision interterritorial de trafico|design|DGT|https://www.boe.es/",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "actor_label": "Comision interterritorial de trafico",
+      "role": "design",
+      "direct_actor_label": "DGT",
+      "causal_distance": 3,
+      "edge_confidence": 0.44,
+      "exclusion_reason": "low_confidence"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Gabinete de coordinacion territorial|appoint|Delegaciones/Subdelegaciones del Gobierno y organos habilitados|https://www.boe.es/",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "actor_label": "Gabinete de coordinacion territorial",
+      "role": "appoint",
+      "direct_actor_label": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+      "causal_distance": 3,
+      "edge_confidence": 0.49,
+      "exclusion_reason": "low_confidence"
+    },
+    {
+      "edge_key": "indirect_chain_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Secretaria de Estado de Hacienda|instruct|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "actor_label": "Secretaria de Estado de Hacienda",
+      "role": "instruct",
+      "direct_actor_label": "AEAT",
+      "causal_distance": 3,
+      "edge_confidence": 0.52,
+      "exclusion_reason": "low_confidence"
+    }
+  ],
+  "missing_fragment_sample": []
+}
+just parl-validate-liberty-delegated-enforcement-seed
+PYTHONPATH=. python3 scripts/validate_liberty_delegated_enforcement_seed.py --seed etl/data/seeds/liberty_delegated_enforcement_seed_v1.json --out docs/etl/sprints/AI-OPS-121/evidence/liberty_delegated_validate_latest.json
+{
+  "generated_at": "2026-02-23T19:58:42+00:00",
+  "seed_path": "etl/data/seeds/liberty_delegated_enforcement_seed_v1.json",
+  "valid": true,
+  "schema_version": "liberty_delegated_enforcement_seed_v1",
+  "method_version": "delegated_enforcement_v1",
+  "links_total": 8,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "errors": [],
+  "warnings": []
+}
+just parl-import-liberty-delegated-enforcement-seed
+PYTHONPATH=. python3 scripts/import_liberty_delegated_enforcement_seed.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_delegated_enforcement_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-121/evidence/liberty_delegated_import_latest.json
+{
+  "generated_at": "2026-02-23T19:58:42+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_delegated_enforcement_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "delegated_enforcement_v1",
+    "links_total": 8
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "boe_api_legal",
+    "method_version": "delegated_enforcement_v1",
+    "counts": {
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "links_inserted": 0,
+      "links_updated": 8,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "links_total": 8,
+      "fragments_with_links_total": 8
+    }
+  }
+}
+just parl-report-liberty-delegated-enforcement-status
+PYTHONPATH=. python3 scripts/report_liberty_delegated_enforcement_status.py --db etl/data/staging/politicos-es.db --top-n 20 --target-fragment-coverage-min 0.6 --designated-actor-coverage-min 0.5 --enforcement-evidence-coverage-min 0.7 --out docs/etl/sprints/AI-OPS-121/evidence/liberty_delegated_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:42+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "links_total": 8,
+    "fragments_with_links_total": 8,
+    "target_fragments_total": 8,
+    "fragments_with_designated_actor_total": 6,
+    "links_with_enforcement_evidence_total": 7,
+    "weak_links_total": 2
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "designated_actor_coverage_pct": 0.75,
+    "enforcement_evidence_coverage_pct": 0.875
+  },
+  "checks": {
+    "delegated_chain_started": true,
+    "target_coverage_gate": true,
+    "designated_actor_gate": true,
+    "enforcement_evidence_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_fragment_coverage_min": 0.6,
+      "designated_actor_coverage_min": 0.5,
+      "enforcement_evidence_coverage_min": 0.7
+    }
+  },
+  "by_delegated_institution": [
+    {
+      "delegated_institution_label": "AEAT",
+      "links_total": 3,
+      "fragments_total": 3,
+      "avg_confidence": 0.72
+    },
+    {
+      "delegated_institution_label": "DGT",
+      "links_total": 2,
+      "fragments_total": 2,
+      "avg_confidence": 0.8
+    },
+    {
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "links_total": 2,
+      "fragments_total": 2,
+      "avg_confidence": 0.685
+    },
+    {
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "links_total": 1,
+      "fragments_total": 1,
+      "avg_confidence": 0.8
+    }
+  ],
+  "delegated_links_sample": [
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "designated_actor_label": "Direccion General de Trafico",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "designated_actor_label": "Agencia Estatal de Administracion Tributaria",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio del Interior",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "designated_actor_label": "Delegaciones del Gobierno",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Unidad sancionadora DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Subdireccion de Gestion de Sanciones",
+      "designated_actor_label": "Unidad sancionadora DGT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "designated_actor_label": "Delegaciones AEAT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "designated_actor_label": "Organismo Estatal ITSS",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.74,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Unidad procedimental sancionadora",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Graduacion y tramitacion procedimental",
+      "enforcement_evidence_date": "",
+      "chain_confidence": 0.59,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+    }
+  ],
+  "weak_links_sample": [
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_actor_label": "",
+      "enforcement_evidence_date": "",
+      "chain_confidence": 0.59
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_actor_label": "",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63
+    }
+  ],
+  "missing_fragment_sample": []
+}
+just parl-check-liberty-delegated-enforcement-gate
+PYTHONPATH=. python3 scripts/report_liberty_delegated_enforcement_status.py --db etl/data/staging/politicos-es.db --top-n 20 --target-fragment-coverage-min 0.6 --designated-actor-coverage-min 0.5 --enforcement-evidence-coverage-min 0.7 --enforce-gate --out docs/etl/sprints/AI-OPS-121/evidence/liberty_delegated_status_latest.json
+{
+  "generated_at": "2026-02-23T19:58:42+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "links_total": 8,
+    "fragments_with_links_total": 8,
+    "target_fragments_total": 8,
+    "fragments_with_designated_actor_total": 6,
+    "links_with_enforcement_evidence_total": 7,
+    "weak_links_total": 2
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "designated_actor_coverage_pct": 0.75,
+    "enforcement_evidence_coverage_pct": 0.875
+  },
+  "checks": {
+    "delegated_chain_started": true,
+    "target_coverage_gate": true,
+    "designated_actor_gate": true,
+    "enforcement_evidence_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_fragment_coverage_min": 0.6,
+      "designated_actor_coverage_min": 0.5,
+      "enforcement_evidence_coverage_min": 0.7
+    }
+  },
+  "by_delegated_institution": [
+    {
+      "delegated_institution_label": "AEAT",
+      "links_total": 3,
+      "fragments_total": 3,
+      "avg_confidence": 0.72
+    },
+    {
+      "delegated_institution_label": "DGT",
+      "links_total": 2,
+      "fragments_total": 2,
+      "avg_confidence": 0.8
+    },
+    {
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "links_total": 2,
+      "fragments_total": 2,
+      "avg_confidence": 0.685
+    },
+    {
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "links_total": 1,
+      "fragments_total": 1,
+      "avg_confidence": 0.8
+    }
+  ],
+  "delegated_links_sample": [
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "designated_actor_label": "Direccion General de Trafico",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "designated_actor_label": "Agencia Estatal de Administracion Tributaria",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio del Interior",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "designated_actor_label": "Delegaciones del Gobierno",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Unidad sancionadora DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Subdireccion de Gestion de Sanciones",
+      "designated_actor_label": "Unidad sancionadora DGT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "designated_actor_label": "Delegaciones AEAT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "designated_actor_label": "Organismo Estatal ITSS",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.74,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Unidad procedimental sancionadora",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Graduacion y tramitacion procedimental",
+      "enforcement_evidence_date": "",
+      "chain_confidence": 0.59,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+    }
+  ],
+  "weak_links_sample": [
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_actor_label": "",
+      "enforcement_evidence_date": "",
+      "chain_confidence": 0.59
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_actor_label": "",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63
+    }
+  ],
+  "missing_fragment_sample": []
+}
+just parl-export-liberty-restrictions-snapshot
+ Image vota-con-la-chola-etl:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.67MB 1.0s done
+#6 DONE 1.1s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 2.2s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 11.5s done
+#12 exporting manifest sha256:a682a133e81761bd225772f406af240d607672eac0f829f4ef3eb435d3472218 done
+#12 exporting config sha256:b718a0c70d6189bd97368e46dc89a7f1df480cc684efa2f2c22b8468bae2a87c done
+#12 exporting attestation manifest sha256:a4908ccc6bd510210d4295a8aa1f4088a8acf8a463c0307cb7ae823e81b5fb43 done
+#12 exporting manifest list sha256:5c1a61fa7e948f1c29b95176d031d00f3c160b73573e549155e1a95ebfdc7a4a done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.5s done
+#12 DONE 14.1s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image vota-con-la-chola-etl:local Built 
+ Container vota-con-la-chola-etl-run-bf414b155178 Creating 
+ Container vota-con-la-chola-etl-run-bf414b155178 Created 
+{
+  "status": "ok",
+  "snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+  "snapshot_schema_version": "liberty_restrictions_snapshot_v1",
+  "snapshot_totals": {
+    "restrictions_total": 8,
+    "accountability_edges_total": 15,
+    "proportionality_reviews_total": 8,
+    "actors_scored_total": 8,
+    "enforcement_observations_total": 16,
+    "indirect_edges_total": 12,
+    "indirect_attributable_edges_total": 9,
+    "delegated_links_total": 8,
+    "fragments_with_delegated_chain_total": 8
+  },
+  "irlc_by_fragment_parquet": {
+    "path": "docs/etl/sprints/AI-OPS-124/exports/irlc_by_fragment_latest.parquet",
+    "rows": 8,
+    "columns": [
+      "assessment_key",
+      "fragment_id",
+      "norm_id",
+      "boe_id",
+      "norm_title",
+      "fragment_type",
+      "fragment_label",
+      "competent_body",
+      "appeal_path",
+      "right_category_id",
+      "right_label",
+      "method_version",
+      "reach_score",
+      "intensity_score",
+      "due_process_risk_score",
+      "reversibility_risk_score",
+      "discretionality_score",
+      "compliance_cost_score",
+      "irlc_score",
+      "confidence",
+      "source_url"
+    ],
+    "compression": "zstd"
+  },
+  "accountability_edges_parquet": {
+    "path": "docs/etl/sprints/AI-OPS-124/exports/accountability_edges_latest.parquet",
+    "rows": 15,
+    "columns": [
+      "fragment_id",
+      "norm_id",
+      "boe_id",
+      "norm_title",
+      "role",
+      "actor_label",
+      "evidence_date",
+      "source_url"
+    ],
+    "compression": "zstd"
+  },
+  "snapshot_diff": {
+    "status": "baseline",
+    "changed_sections_total": 6,
+    "items_added_total": 59,
+    "items_removed_total": 0,
+    "diff_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json"
+  },
+  "snapshot_changelog": {
+    "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+    "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+    "appended": false
+  }
+}
+just parl-publish-liberty-atlas-artifacts
+{
+  "generated_at": "2026-02-23T19:59:05+00:00",
+  "status": "ok",
+  "snapshot_date": "2026-02-23",
+  "schema_version": "liberty_restrictions_snapshot_v1",
+  "snapshot_restrictions_total": 8,
+  "release_path": "etl/data/published/liberty-restrictions-atlas-release-2026-02-23.json",
+  "release_latest_path": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
+  "published_files": {
+    "snapshot_json": {
+      "source_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+      "path": "etl/data/published/liberty-restrictions-atlas-2026-02-23.json",
+      "bytes": 71959,
+      "sha256": "87b3c0968ea2bc876879ea13406b240fa45c9e263ddc622e14eabbd44412739c"
+    },
+    "irlc_parquet": {
+      "source_path": "docs/etl/sprints/AI-OPS-124/exports/irlc_by_fragment_latest.parquet",
+      "path": "etl/data/published/liberty-restrictions-irlc-by-fragment-2026-02-23.parquet",
+      "bytes": 9842,
+      "sha256": "3ee54a8baa66d7f1e5bba8c1a4771891c453a74a8af7bf947748b24b43fdfc53"
+    },
+    "accountability_parquet": {
+      "source_path": "docs/etl/sprints/AI-OPS-124/exports/accountability_edges_latest.parquet",
+      "path": "etl/data/published/liberty-restrictions-accountability-edges-2026-02-23.parquet",
+      "bytes": 3898,
+      "sha256": "57a3fb5219b8cb4fbde434665dd984118c939a85ba4af2f322a9c6dadec7b8b1"
+    },
+    "diff_json": {
+      "source_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json",
+      "path": "etl/data/published/liberty-restrictions-diff-2026-02-23.json",
+      "bytes": 12001,
+      "sha256": "745ec0d655829fb4eb4c4b3a92bec4198854992ae65bbb0a3c4b454d0dd0d78c"
+    },
+    "changelog_entry_json": {
+      "source_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_changelog_latest.json",
+      "path": "etl/data/published/liberty-restrictions-changelog-entry-2026-02-23.json",
+      "bytes": 2041,
+      "sha256": "68d8cb4d3c39929b5d9947cdec84e406fda035aa1b9411c29b412cc37a4b273a"
+    },
+    "changelog_history_jsonl": {
+      "source_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+      "path": "etl/data/published/liberty-restrictions-changelog-history-2026-02-23.jsonl",
+      "bytes": 6262,
+      "sha256": "821ec1bc9dcc0c356e4c5584f46886bc6c09fddabe6e32488d8f638e0fd854f7"
+    }
+  },
+  "changelog": {
+    "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+    "appended": false,
+    "history_entries_total": 5,
+    "history_malformed_lines_total": 0,
+    "history_latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+    "history_latest_snapshot_date": "2026-02-23"
+  },
+  "diff": {
+    "status": "baseline",
+    "changed_sections_total": 6,
+    "items_added_total": 59,
+    "items_removed_total": 0,
+    "totals_changed": [
+      "accountability_edges_total",
+      "actors_scored_total",
+      "delegated_links_total",
+      "enforcement_observations_total",
+      "fragments_with_delegated_chain_total",
+      "indirect_attributable_edges_total",
+      "indirect_edges_total",
+      "proportionality_reviews_total",
+      "restrictions_total"
+    ]
+  }
+}
+just parl-check-liberty-atlas-changelog-continuity
+python3 scripts/report_liberty_atlas_changelog_continuity.py --changelog-jsonl docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl --snapshot-date 2026-02-23 --release-json etl/data/published/liberty-restrictions-atlas-release-latest.json --strict --out docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json
+{
+  "generated_at": "2026-02-23T19:59:05+00:00",
+  "status": "ok",
+  "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+  "expected_snapshot_date": "2026-02-23",
+  "entries_total": 5,
+  "malformed_lines_total": 0,
+  "latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+  "latest_snapshot_date": "2026-02-23",
+  "checks": {
+    "history_nonempty": true,
+    "malformed_lines_ok": true,
+    "entry_ids_unique": true,
+    "run_at_monotonic": true,
+    "previous_snapshot_chain_ok": true,
+    "latest_snapshot_matches_expected": true,
+    "release_consistent": true
+  },
+  "continuity_breaks": [],
+  "self_referential_previous_snapshot_entries": 1,
+  "release_checks": {
+    "provided": true,
+    "path": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+    "history_latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef"
+  },
+  "strict_fail_reasons": []
+}
+just parl-report-liberty-atlas-release-heartbeat
+{
+  "generated_at": "2026-02-23T19:59:05+00:00",
+  "strict": true,
+  "input": {
+    "published_release_json": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
+    "gh_pages_release_json": "docs/gh-pages/explorer-sources/data/liberty-atlas-release.json",
+    "continuity_json": "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json",
+    "heartbeat_jsonl": "docs/etl/runs/liberty_atlas_release_heartbeat.jsonl"
+  },
+  "history_size_before": 26,
+  "history_size_after": 27,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "warnings": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T19:59:07+00:00",
+    "heartbeat_id": "2026-02-23T19:59:07+00:00|2026-02-23|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|0",
+    "status": "ok",
+    "snapshot_date_expected": "2026-02-23",
+    "max_snapshot_age_days": 14,
+    "allow_hf_unavailable": true,
+    "published": {
+      "source": "published",
+      "status": "ok",
+      "snapshot_date": "2026-02-23",
+      "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+      "history_latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+      "schema_version": "liberty_restrictions_snapshot_v1",
+      "snapshot_restrictions_total": 8,
+      "snapshot_age_days": 0,
+      "fingerprint": "6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596"
+    },
+    "gh_pages": {
+      "source": "gh_pages",
+      "status": "ok",
+      "snapshot_date": "2026-02-23",
+      "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+      "history_latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+      "schema_version": "liberty_restrictions_snapshot_v1",
+      "snapshot_restrictions_total": 8,
+      "snapshot_age_days": 0,
+      "fingerprint": "6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596"
+    },
+    "hf": {
+      "source": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/snapshots/2026-02-23/published/liberty-restrictions-atlas-release-2026-02-23.json",
+      "dataset_repo": "JesusIC/vota-con-la-chola-data",
+      "latest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/latest.json",
+      "latest_snapshot_date": "2026-02-23",
+      "url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/snapshots/2026-02-23/published/liberty-restrictions-atlas-release-2026-02-23.json",
+      "available": true,
+      "fetch_error": "",
+      "release": {
+        "source": "hf",
+        "status": "ok",
+        "snapshot_date": "2026-02-23",
+        "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+        "history_latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+        "schema_version": "liberty_restrictions_snapshot_v1",
+        "snapshot_restrictions_total": 8,
+        "snapshot_age_days": 0,
+        "fingerprint": "6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596"
+      }
+    },
+    "continuity": {
+      "path": "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json",
+      "status": "ok",
+      "latest_snapshot_date": "2026-02-23",
+      "latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+      "previous_snapshot_chain_ok": true,
+      "strict_fail_reasons": []
+    },
+    "checks": {
+      "published_release_ok": true,
+      "gh_pages_release_ok": true,
+      "continuity_ok": true,
+      "published_gh_parity_ok": true,
+      "hf_available": true,
+      "hf_release_ok_or_allowed": true,
+      "published_hf_parity_ok": true,
+      "gh_pages_hf_parity_ok": true,
+      "expected_snapshot_match_ok": true,
+      "stale_snapshot_ok": true,
+      "continuity_entry_matches_published_ok": true
+    },
+    "stale_surfaces": [],
+    "stale_alerts_count": 0,
+    "drift_alerts_count": 0,
+    "hf_unavailable": false,
+    "warning_count": 0,
+    "warnings": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+just parl-check-liberty-atlas-release-heartbeat-window
+python3 scripts/report_liberty_atlas_release_heartbeat_window.py --heartbeat-jsonl docs/etl/runs/liberty_atlas_release_heartbeat.jsonl --last 20 --max-failed 0 --max-degraded 20 --max-stale-alerts 0 --max-drift-alerts 0 --max-hf-unavailable 0 --strict --out docs/etl/sprints/AI-OPS-126/evidence/liberty_atlas_release_heartbeat_window_latest.json
+{
+  "generated_at": "2026-02-23T19:59:07+00:00",
+  "strict": true,
+  "heartbeat_path": "docs/etl/runs/liberty_atlas_release_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_degraded": 20,
+    "max_stale_alerts": 0,
+    "max_drift_alerts": 0,
+    "max_hf_unavailable": 0
+  },
+  "entries_total": 27,
+  "entries_in_window": 20,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 20,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "stale_alerts_in_window": 0,
+  "drift_alerts_in_window": 0,
+  "hf_unavailable_in_window": 0,
+  "latest": {
+    "run_at": "2026-02-23T19:59:07+00:00",
+    "heartbeat_id": "2026-02-23T19:59:07+00:00|2026-02-23|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|0",
+    "status": "ok",
+    "line_no": 27,
+    "malformed_line": false,
+    "snapshot_date_expected": "2026-02-23",
+    "stale_alerts_count": 0,
+    "drift_alerts_count": 0,
+    "hf_unavailable": false,
+    "checks": {
+      "published_release_ok": true,
+      "gh_pages_release_ok": true,
+      "continuity_ok": true,
+      "published_gh_parity_ok": true,
+      "hf_available": true,
+      "hf_release_ok_or_allowed": true,
+      "published_hf_parity_ok": true,
+      "gh_pages_hf_parity_ok": true,
+      "expected_snapshot_match_ok": true,
+      "stale_snapshot_ok": true,
+      "continuity_entry_matches_published_ok": true
+    }
+  },
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_degraded_ok": true,
+    "max_stale_alerts_ok": true,
+    "max_drift_alerts_ok": true,
+    "max_hf_unavailable_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_no_stale_alerts_ok": true,
+    "latest_no_drift_alerts_ok": true,
+    "latest_continuity_ok": true,
+    "latest_published_gh_parity_ok": true,
+    "latest_expected_snapshot_match_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

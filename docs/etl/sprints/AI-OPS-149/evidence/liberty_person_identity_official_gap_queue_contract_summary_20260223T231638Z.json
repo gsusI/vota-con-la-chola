@@ -1,0 +1,29 @@
+{
+  "ts": "20260223T231638Z",
+  "pass": {
+    "status": "ok",
+    "gate_passed": true,
+    "official_alias_rows_total": 0,
+    "official_alias_evidence_upgrade_queue_rows_total": 0,
+    "official_alias_source_record_upgrade_queue_rows_total": 0,
+    "official_alias_evidence_backlog_visible": true,
+    "official_alias_source_record_backlog_visible": true
+  },
+  "fail": {
+    "status": "degraded",
+    "gate_passed": false,
+    "official_alias_rows_total": 1,
+    "official_alias_rows_missing_evidence_total": 1,
+    "official_alias_rows_missing_source_record_total": 1,
+    "official_alias_evidence_upgrade_queue_rows_total": 1,
+    "official_alias_source_record_upgrade_queue_rows_total": 1,
+    "official_alias_evidence_backlog_visible": true,
+    "official_alias_source_record_backlog_visible": true
+  },
+  "csv_rows": {
+    "identity_queue_rows": 0,
+    "manual_upgrade_rows": 8,
+    "official_evidence_upgrade_rows": 1,
+    "official_source_record_upgrade_rows": 1
+  }
+}

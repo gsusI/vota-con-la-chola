@@ -1,0 +1,251 @@
+node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 1.436125
+  ...
+# Subtest: readPresetFromHash follows fixture matrix contract
+ok 2 - readPresetFromHash follows fixture matrix contract
+  ---
+  duration_ms: 0.427459
+  ...
+# Subtest: buildAlignmentPresetShareUrl follows fixture roundtrip contract
+ok 3 - buildAlignmentPresetShareUrl follows fixture roundtrip contract
+  ---
+  duration_ms: 0.511666
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 4 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.108917
+  ...
+# Subtest: preset codec parity reporter passes strict mode on identical files
+ok 5 - preset codec parity reporter passes strict mode on identical files
+  ---
+  duration_ms: 33.961542
+  ...
+# Subtest: preset codec parity reporter fails strict mode on mismatch and exposes first diff
+ok 6 - preset codec parity reporter fails strict mode on mismatch and exposes first diff
+  ---
+  duration_ms: 68.051834
+  ...
+# Subtest: preset codec sync-state reporter passes strict mode when already synchronized
+ok 7 - preset codec sync-state reporter passes strict mode when already synchronized
+  ---
+  duration_ms: 83.210625
+  ...
+# Subtest: preset codec sync-state reporter fails strict mode when published copy is stale
+ok 8 - preset codec sync-state reporter fails strict mode when published copy is stale
+  ---
+  duration_ms: 81.66
+  ...
+# Subtest: preset contract bundle passes strict mode when all subcontracts pass
+ok 9 - preset contract bundle passes strict mode when all subcontracts pass
+  ---
+  duration_ms: 236.365583
+  ...
+# Subtest: preset contract bundle fails strict mode when published asset is stale
+ok 10 - preset contract bundle fails strict mode when published asset is stale
+  ---
+  duration_ms: 139.766667
+  ...
+# Subtest: preset contract bundle history reporter appends baseline without regression
+ok 11 - preset contract bundle history reporter appends baseline without regression
+  ---
+  duration_ms: 84.163709
+  ...
+# Subtest: preset contract bundle history reporter fails strict on regression
+ok 12 - preset contract bundle history reporter fails strict on regression
+  ---
+  duration_ms: 144.362167
+  ...
+# Subtest: history compaction reporter keeps incident entries and writes compacted JSONL
+ok 13 - history compaction reporter keeps incident entries and writes compacted JSONL
+  ---
+  duration_ms: 83.772042
+  ...
+# Subtest: history compaction reporter fails strict when compaction does not drop rows above threshold
+ok 14 - history compaction reporter fails strict when compaction does not drop rows above threshold
+  ---
+  duration_ms: 81.809083
+  ...
+# Subtest: history SLO reporter passes strict on clean streak with zero regressions
+ok 15 - history SLO reporter passes strict on clean streak with zero regressions
+  ---
+  duration_ms: 84.445584
+  ...
+# Subtest: history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+ok 16 - history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+  ---
+  duration_ms: 78.671292
+  ...
+# Subtest: history SLO reporter fails strict when regression and latest dirty break thresholds
+ok 17 - history SLO reporter fails strict when regression and latest dirty break thresholds
+  ---
+  duration_ms: 63.183
+  ...
+# Subtest: SLO digest reporter emits compact ok digest in strict mode
+ok 18 - SLO digest reporter emits compact ok digest in strict mode
+  ---
+  duration_ms: 79.300708
+  ...
+# Subtest: SLO digest reporter fails strict mode when digest is failed
+ok 19 - SLO digest reporter fails strict mode when digest is failed
+  ---
+  duration_ms: 47.1555
+  ...
+# Subtest: SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 20 - SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 83.451583
+  ...
+# Subtest: SLO digest heartbeat reporter deduplicates identical heartbeat ids
+ok 21 - SLO digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 123.500667
+  ...
+# Subtest: SLO digest heartbeat reporter fails strict when status is failed but still appends row
+ok 22 - SLO digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 30.967834
+  ...
+# Subtest: heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+ok 23 - heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+  ---
+  duration_ms: 84.093625
+  ...
+# Subtest: heartbeat compaction reporter fails strict when no rows are dropped above threshold
+ok 24 - heartbeat compaction reporter fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 82.401083
+  ...
+# Subtest: heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+ok 25 - heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+  ---
+  duration_ms: 93.230958
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+ok 26 - heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+  ---
+  duration_ms: 76.823125
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+ok 27 - heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 62.925292
+  ...
+# Subtest: compaction-window digest reporter emits ok status in strict mode when parity is complete
+ok 28 - compaction-window digest reporter emits ok status in strict mode when parity is complete
+  ---
+  duration_ms: 86.086541
+  ...
+# Subtest: compaction-window digest reporter emits degraded status when non-incident rows are missing
+ok 29 - compaction-window digest reporter emits degraded status when non-incident rows are missing
+  ---
+  duration_ms: 80.757583
+  ...
+# Subtest: compaction-window digest reporter fails strict mode when parity report has strict failures
+ok 30 - compaction-window digest reporter fails strict mode when parity report has strict failures
+  ---
+  duration_ms: 68.677125
+  ...
+# Subtest: compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 31 - compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 84.625375
+  ...
+# Subtest: compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+ok 32 - compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 144.579333
+  ...
+# Subtest: compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+ok 33 - compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 46.4075
+  ...
+# Subtest: compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+ok 34 - compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+  ---
+  duration_ms: 86.210083
+  ...
+# Subtest: compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+ok 35 - compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 80.088
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+ok 36 - compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+  ---
+  duration_ms: 167.052459
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+ok 37 - compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+  ---
+  duration_ms: 64.161292
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+ok 38 - compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 48.709583
+  ...
+# Subtest: compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+ok 39 - compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+  ---
+  duration_ms: 76.702209
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+ok 40 - compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+  ---
+  duration_ms: 78.895334
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict on malformed entries
+ok 41 - compact-window digest heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 64.106583
+  ...
+# Subtest: heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+ok 42 - heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+  ---
+  duration_ms: 64.887667
+  ...
+# Subtest: heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+ok 43 - heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+  ---
+  duration_ms: 46.659791
+  ...
+# Subtest: heartbeat window reporter fails strict on malformed entries
+ok 44 - heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 33.323208
+  ...
+# Subtest: bundle history window reporter passes strict when window has no regressions
+ok 45 - bundle history window reporter passes strict when window has no regressions
+  ---
+  duration_ms: 66.843375
+  ...
+# Subtest: bundle history window reporter fails strict when window contains regressions
+ok 46 - bundle history window reporter fails strict when window contains regressions
+  ---
+  duration_ms: 46.778042
+  ...
+# Subtest: preset fixture reporter passes strict mode for canonical fixture
+ok 47 - preset fixture reporter passes strict mode for canonical fixture
+  ---
+  duration_ms: 51.293542
+  ...
+# Subtest: preset fixture reporter surfaces failed ids in strict drift run
+ok 48 - preset fixture reporter surfaces failed ids in strict drift run
+  ---
+  duration_ms: 32.599792
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 477.946208

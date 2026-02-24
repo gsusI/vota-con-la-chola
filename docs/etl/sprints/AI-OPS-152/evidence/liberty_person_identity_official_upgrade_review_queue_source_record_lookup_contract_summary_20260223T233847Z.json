@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-02-23T23:38:47Z",
+  "status": "ok",
+  "summary": {
+    "rows_total": 1,
+    "manual_upgrade_rows_total": 0,
+    "official_evidence_gap_rows_total": 0,
+    "official_source_record_gap_rows_total": 1,
+    "missing_seed_mapping_total": 0,
+    "source_record_pk_lookup_keys_total": 1,
+    "source_record_pk_lookup_prefilled_total": 1,
+    "source_record_pk_lookup_miss_total": 0
+  },
+  "row_assertions": {
+    "rows_total": 1,
+    "source_record_pk": "125908",
+    "source_record_pk_lookup_status": "prefilled_from_db",
+    "source_record_id": "boe_ref:BOE-A-2026-3482",
+    "source_id": "boe_api_legal"
+  }
+}

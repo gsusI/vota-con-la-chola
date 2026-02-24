@@ -1,0 +1,264 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_latest.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_latest.json"; fi; node scripts/report_citizen_release_hardening.js --source-root "ui/citizen" --published-root "docs/gh-pages/citizen" --snapshot "docs/gh-pages/citizen/data/citizen.json" --concerns "ui/citizen/concerns_v1.json" --assets "index.html,preset_codec.js,onboarding_funnel.js,first_answer_accelerator.js,unknown_explainability.js,cross_method_stability.js,evidence_trust_panel.js" --max-snapshot-bytes "5000000" --strict ${out_arg}
+{
+  "generated_at": "2026-02-23T12:04:00.089Z",
+  "source_root": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen",
+  "published_root": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen",
+  "snapshot_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/data/citizen.json",
+  "concerns_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/concerns_v1.json",
+  "assets": [
+    "index.html",
+    "preset_codec.js",
+    "onboarding_funnel.js",
+    "first_answer_accelerator.js",
+    "unknown_explainability.js",
+    "cross_method_stability.js",
+    "evidence_trust_panel.js"
+  ],
+  "strict": true,
+  "max_snapshot_bytes": 5000000,
+  "summary": {
+    "total_checks": 24,
+    "total_pass": 24,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "readiness": {
+    "status": "ok",
+    "release_ready": true,
+    "parity_ok_assets": 7,
+    "parity_total_assets": 7,
+    "parity_failed_assets": []
+  },
+  "results": [
+    {
+      "section": "asset_source",
+      "id": "index.html",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/index.html"
+    },
+    {
+      "section": "asset_published",
+      "id": "index.html",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/index.html"
+    },
+    {
+      "section": "asset_parity",
+      "id": "index.html",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/index.html",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/index.html",
+      "source_bytes": 207634,
+      "published_bytes": 207634,
+      "source_sha256": "2b8d286b74d2598c094d2a1636204b9af4e3392f3937b5726e1018b145cd40f0",
+      "published_sha256": "2b8d286b74d2598c094d2a1636204b9af4e3392f3937b5726e1018b145cd40f0",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "asset_source",
+      "id": "preset_codec.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js"
+    },
+    {
+      "section": "asset_published",
+      "id": "preset_codec.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js"
+    },
+    {
+      "section": "asset_parity",
+      "id": "preset_codec.js",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "source_bytes": 7406,
+      "published_bytes": 7406,
+      "source_sha256": "db68847af5ed756225401c8bfc701d753b30c4383ca35dd8a91147e90780f0dd",
+      "published_sha256": "db68847af5ed756225401c8bfc701d753b30c4383ca35dd8a91147e90780f0dd",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "asset_source",
+      "id": "onboarding_funnel.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/onboarding_funnel.js"
+    },
+    {
+      "section": "asset_published",
+      "id": "onboarding_funnel.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/onboarding_funnel.js"
+    },
+    {
+      "section": "asset_parity",
+      "id": "onboarding_funnel.js",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/onboarding_funnel.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/onboarding_funnel.js",
+      "source_bytes": 4322,
+      "published_bytes": 4322,
+      "source_sha256": "4f85a46ef286cb8d3f871c674429cae99f6f3ac0ef2cdb04f6ea9f3517c4424b",
+      "published_sha256": "4f85a46ef286cb8d3f871c674429cae99f6f3ac0ef2cdb04f6ea9f3517c4424b",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "asset_source",
+      "id": "first_answer_accelerator.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/first_answer_accelerator.js"
+    },
+    {
+      "section": "asset_published",
+      "id": "first_answer_accelerator.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/first_answer_accelerator.js"
+    },
+    {
+      "section": "asset_parity",
+      "id": "first_answer_accelerator.js",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/first_answer_accelerator.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/first_answer_accelerator.js",
+      "source_bytes": 13758,
+      "published_bytes": 13758,
+      "source_sha256": "81f7d0d0f05606b619380db31587299733f65773ae188680520ed8b6694ff20a",
+      "published_sha256": "81f7d0d0f05606b619380db31587299733f65773ae188680520ed8b6694ff20a",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "asset_source",
+      "id": "unknown_explainability.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/unknown_explainability.js"
+    },
+    {
+      "section": "asset_published",
+      "id": "unknown_explainability.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/unknown_explainability.js"
+    },
+    {
+      "section": "asset_parity",
+      "id": "unknown_explainability.js",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/unknown_explainability.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/unknown_explainability.js",
+      "source_bytes": 4845,
+      "published_bytes": 4845,
+      "source_sha256": "39780cf5489fa116e19df39b87166f0b4b6a8c876973e2dc04afc2ab1a3670b7",
+      "published_sha256": "39780cf5489fa116e19df39b87166f0b4b6a8c876973e2dc04afc2ab1a3670b7",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "asset_source",
+      "id": "cross_method_stability.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/cross_method_stability.js"
+    },
+    {
+      "section": "asset_published",
+      "id": "cross_method_stability.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/cross_method_stability.js"
+    },
+    {
+      "section": "asset_parity",
+      "id": "cross_method_stability.js",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/cross_method_stability.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/cross_method_stability.js",
+      "source_bytes": 8243,
+      "published_bytes": 8243,
+      "source_sha256": "a98d94dfe73fc0b664fcf6f8720d146952e3a75b117debe01361daf59dd4d984",
+      "published_sha256": "a98d94dfe73fc0b664fcf6f8720d146952e3a75b117debe01361daf59dd4d984",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "asset_source",
+      "id": "evidence_trust_panel.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/evidence_trust_panel.js"
+    },
+    {
+      "section": "asset_published",
+      "id": "evidence_trust_panel.js",
+      "ok": true,
+      "error": "",
+      "path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/evidence_trust_panel.js"
+    },
+    {
+      "section": "asset_parity",
+      "id": "evidence_trust_panel.js",
+      "ok": true,
+      "error": "",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/evidence_trust_panel.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/evidence_trust_panel.js",
+      "source_bytes": 5368,
+      "published_bytes": 5368,
+      "source_sha256": "2a3b931c8474cd53536175dcebe651d260f45b1370d2526d09752f85b5dc957d",
+      "published_sha256": "2a3b931c8474cd53536175dcebe651d260f45b1370d2526d09752f85b5dc957d",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    {
+      "section": "snapshot",
+      "id": "bytes_budget",
+      "ok": true,
+      "error": "",
+      "snapshot_bytes": 950181,
+      "max_snapshot_bytes": 5000000
+    },
+    {
+      "section": "snapshot",
+      "id": "shape",
+      "ok": true,
+      "error": "",
+      "topics_total": 111,
+      "parties_total": 16,
+      "party_topic_positions_total": 1776,
+      "as_of_date": "2026-02-16",
+      "has_meta_quality": true
+    },
+    {
+      "section": "concerns",
+      "id": "shape",
+      "ok": true,
+      "error": "",
+      "concerns_total": 12,
+      "packs_total": 4
+    }
+  ]
+}

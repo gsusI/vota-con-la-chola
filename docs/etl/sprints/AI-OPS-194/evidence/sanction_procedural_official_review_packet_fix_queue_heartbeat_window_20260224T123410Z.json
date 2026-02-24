@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-02-24T12:34:17+00:00",
+  "status": "ok",
+  "strict": true,
+  "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 1000000,
+    "max_degraded_rate_pct": 100.0,
+    "max_nonempty_queue_runs": 1000000,
+    "max_nonempty_queue_rate_pct": 100.0,
+    "max_malformed": 0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 0,
+    "degraded": 2,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 2,
+  "degraded_rate_pct": 100.0,
+  "nonempty_queue_runs_in_window": 2,
+  "nonempty_queue_rate_pct": 100.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-24T12:33:16+00:00",
+  "last_degraded_run_at": "2026-02-24T12:34:17+00:00",
+  "latest": {
+    "line_no": 2,
+    "malformed_line": false,
+    "run_at": "2026-02-24T12:34:17+00:00",
+    "heartbeat_id": "2026-02-24T12:34:17+00:00|degraded|4|4|0|4|invalid_row:4|0|1",
+    "status": "degraded",
+    "queue_rows_total": 4
+  },
+  "checks": {
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_nonempty_queue_runs_ok": true,
+    "max_nonempty_queue_rate_ok": true,
+    "max_malformed_ok": true
+  },
+  "strict_fail_count": 0,
+  "strict_fail_reasons": []
+}

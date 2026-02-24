@@ -1,0 +1,20 @@
+1014:        const initdocTrend = initdocTail && typeof initdocTail === "object" && initdocTail.heartbeat_window
+1015:          ? initdocTail.heartbeat_window
+1017:        const initdocTrendCounts = initdocTrend && typeof initdocTrend === "object" && initdocTrend.status_counts
+1018:          ? initdocTrend.status_counts
+1020:        const initdocTrendEntries = Number(initdocTrend.entries_in_window || 0);
+1021:        const initdocTrendFailed = Number(initdocTrendCounts.failed || 0);
+1022:        const initdocTrendDegraded = Number(initdocTrendCounts.degraded || 0);
+1023:        const initdocTrendFailedRatePct = Number(initdocTrend.failed_rate_pct || 0);
+1024:        const initdocTrendFailedRatePctDisplay = Number.isFinite(initdocTrendFailedRatePct)
+1025:          ? (Math.round(initdocTrendFailedRatePct * 10) / 10).toFixed(1)
+1027:        const initdocTrendLatest = initdocTrend && typeof initdocTrend === "object" && initdocTrend.latest
+1028:          ? initdocTrend.latest
+1030:        const initdocTrendLatestStatus = String(initdocTrendLatest.status || "").toLowerCase();
+1031:        const initdocTrendLatestLabel = initdocTrendLatestStatus ? initdocTrendLatestStatus.toUpperCase() : "N/A";
+1032:        const initdocTrendStatus = String(initdocTrend.status || "").toLowerCase();
+1033:        const initdocTrendStatusClass = initdocTrendStatus === "ok" ? "ok" : initdocTrendStatus === "degraded" ? "warn" : initdocTrendStatus === "failed" ? "err" : "muted";
+1034:        const initdocTrendStatusLabel = initdocTrendStatus ? initdocTrendStatus.toUpperCase() : "N/A";
+1035:        const initdocTrendSummary = initdocTrendEntries > 0
+1036:          ? "trend last " + initdocTrendEntries + ": failed " + initdocTrendFailed + " (" + initdocTrendFailedRatePctDisplay + "%) · degraded " + initdocTrendDegraded + " · latest " + initdocTrendLatestLabel
+1143:	          "<div class='kpi'><p class='label'>Iniciativas Senado (tail)</p><div class='value'><strong>" + initdocActionableMissing + "</strong><span class='pill " + initdocStatusClass + "'>" + initdocStatusLabel + "</span></div><div class='small'>actionable: " + initdocActionableMissing + " · redundant: " + initdocRedundantMissing + " · total_missing: " + initdocTotalMissing + " · <span class='pill " + initdocTrendStatusClass + "'>trend " + initdocTrendStatusLabel + "</span></div><div class='small'>" + initdocTrendSummary + "</div></div>" +

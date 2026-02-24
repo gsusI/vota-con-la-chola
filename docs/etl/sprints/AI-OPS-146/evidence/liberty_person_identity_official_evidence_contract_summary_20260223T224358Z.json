@@ -1,0 +1,13 @@
+{
+  "ts": "20260223T224358Z",
+  "db_path_main": "tmp/liberty_person_identity_official_evidence_20260223T224358Z.db",
+  "db_path_contract": "tmp/liberty_person_identity_official_evidence_contract_20260223T224358Z.db",
+  "check_rc": {
+    "personal_non_manual_alias_gate_fail": 2,
+    "personal_manual_alias_share_gate_fail": 2,
+    "queue_non_manual_alias_gate_fail": 2,
+    "queue_manual_alias_share_gate_fail": 2,
+    "personal_official_alias_evidence_gate_fail": 2,
+    "queue_official_alias_evidence_gate_fail": 2
+  }
+}

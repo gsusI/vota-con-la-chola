@@ -1,0 +1,12 @@
+{
+  "contract_version": "factory_contract_v2",
+  "batch_id": "factory-20260219-lane_a-001",
+  "lane_id": "lane_a",
+  "generated_at_utc": "2026-02-19T16:13:42+00:00",
+  "generator": "ai_ops_26_factory_generator_v2",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "source_sql": "SELECT\n  r.evidence_id,\n  p.full_name AS person_name,\n  t.label AS topic_label,\n  e.excerpt AS evidence_excerpt,\n  e.evidence_date,\n  COALESCE(e.source_url,'') AS source_url,\n  r.review_reason\nFROM topic_evidence_reviews r\nJOIN topic_evidence e ON e.evidence_id = r.evidence_id\nLEFT JOIN persons p ON p.person_id = e.person_id\nLEFT JOIN topics t ON t.topic_id = e.topic_id\nWHERE r.source_id = 'programas_partidos'\n  AND r.status = 'pending'\nORDER BY r.evidence_id;",
+  "source_sql_sha256": "bde0fcd8107e9ffad8f122811f68d2f5e65d7c4ef1e8f255f9df27b6babce2dd",
+  "tasks_row_count": 6,
+  "notes": "Pending programas_partidos review queue batch."
+}

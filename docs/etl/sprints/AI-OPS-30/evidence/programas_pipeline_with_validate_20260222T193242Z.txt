@@ -1,0 +1,237 @@
+OK wrote: docs/etl/sprints/AI-OPS-30/evidence/programas_manifest_validate_pipeline_20260222T193242Z.json
+{
+  "duplicate_key_count": 0,
+  "election_cycles": [
+    "es_generales_2023"
+  ],
+  "errors": [],
+  "errors_count": 0,
+  "generated_at": "2026-02-22T19:32:42+00:00",
+  "manifest_path": "etl/data/raw/samples/programas_partidos_sample.csv",
+  "party_ids_distinct": 3,
+  "rows_total": 3,
+  "rows_valid": 3,
+  "valid": true,
+  "warnings": [],
+  "warnings_count": 0
+}
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.25MB 0.9s done
+#6 DONE 0.9s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.3s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.7s done
+#12 exporting manifest sha256:a1fbf5fd667a220ee5108ed2f169e97f1f9ca75d59651118c71c0f454fe7a667 done
+#12 exporting config sha256:cf15f2d197d9f008e2d707614b6fc1864738222e90c84d95692c9d75334acedb done
+#12 exporting attestation manifest sha256:02abb4dae7675f9175f2ac4e9e1b9f22e5afdcab6a8ad2ad262d9f27d213d82d done
+#12 exporting manifest list sha256:f207a1b675c57d879e46ea3c6811cef71bea21b2240c67b6f67a8ccd2b764791 done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.5s done
+#12 DONE 12.3s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+OK ingest
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.25MB 0.9s done
+#6 DONE 0.9s
+
+#7 [3/6] WORKDIR /workspace
+#7 CACHED
+
+#8 [4/6] COPY requirements.txt /tmp/requirements.txt
+#8 CACHED
+
+#9 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.7s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.8s done
+#12 exporting manifest sha256:b63014ce96708c76c48bbf08d92716d897a0f06fbd24ca4d04607afa0d2f1c84
+#12 exporting manifest sha256:b63014ce96708c76c48bbf08d92716d897a0f06fbd24ca4d04607afa0d2f1c84 done
+#12 exporting config sha256:21dc33d99c151b2f9121f095dbc5dcc6662d16b44b352f7fa8aa99c29593bdd4 done
+#12 exporting attestation manifest sha256:d03b9d9589019aa367c5926079697e0c90525c8643b56d69d15133f797de38f8 done
+#12 exporting manifest list sha256:6d76211095e463849918d2d40787739c012cd440163de2d162a26366eebea8ba done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 1.9s done
+#12 DONE 11.8s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+{
+  "dry_run": false,
+  "mixed": 0,
+  "oppose": 1,
+  "review_pending": 0,
+  "review_pending_by_reason": {},
+  "review_queue_enabled": true,
+  "review_rows_resolved": 0,
+  "review_total": 6,
+  "seen": 11,
+  "source_id": "programas_partidos",
+  "support": 4,
+  "updated": 5
+}
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.25MB 0.8s done
+#6 DONE 0.8s
+
+#7 [3/6] WORKDIR /workspace
+#7 CACHED
+
+#8 [4/6] COPY requirements.txt /tmp/requirements.txt
+#8 CACHED
+
+#9 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 2.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.3s done
+#12 exporting manifest sha256:307e59d338fadde0d93bd1d051a1009bb7984f26feceb2b80edcdfef9b4723d2 done
+#12 exporting config sha256:795e53ef04a24f7b8db04104819e3647436bb526cb66ceab221d640400d35f69 done
+#12 exporting attestation manifest sha256:4249d9e902e02fd698ed2bcee20ce8fbef3fa8529cfde3f5baeb2ba1a87ef1e6 done
+#12 exporting manifest list sha256:70aa1ca3d32dbb691dc9b0beacb227ff2229ee2292ff0e970069793c577874b5 done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.1s done
+#12 DONE 12.4s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+{
+  "as_of_date": "2026-02-17",
+  "computed_method": "declared",
+  "computed_version": "v1",
+  "dry_run": false,
+  "positions_total": 5,
+  "source_id": "programas_partidos",
+  "stance_methods": [
+    "declared:regex_v3",
+    "declared:regex_v2",
+    "declared:regex_v1"
+  ],
+  "topic_sets": [
+    {
+      "inserted": 5,
+      "topic_set_id": 11
+    }
+  ]
+}
+OK wrote: docs/etl/sprints/AI-OPS-30/evidence/programas_status_pipeline_20260222T193242Z.json
+{
+  "declared_positions_by_stance": {
+    "oppose": 1,
+    "support": 4
+  },
+  "declared_positions_latest_as_of_date": "2026-02-17",
+  "declared_positions_total": 5,
+  "generated_at": "2026-02-22T19:33:33+00:00",
+  "party_proxy_count": 3,
+  "review_ignored": 6,
+  "review_pending": 0,
+  "review_pending_by_reason": {},
+  "review_resolved": 0,
+  "review_total": 6,
+  "source_id": "programas_partidos",
+  "source_records": 3,
+  "source_snapshot_dates": [
+    "2026-02-17"
+  ],
+  "text_documents": 3,
+  "topic_evidence_by_stance": {
+    "oppose": 1,
+    "support": 4,
+    "unclear": 6
+  },
+  "topic_evidence_total": 11,
+  "topic_sets_touched": 1
+}

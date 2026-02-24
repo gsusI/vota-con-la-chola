@@ -1,0 +1,192 @@
+{
+  "status": "ok",
+  "tokens_path": "ui/citizen/tailwind_md3.tokens.json",
+  "out_path": "ui/citizen/tailwind_md3.generated.css",
+  "bytes": 6533,
+  "would_change": false
+}
+{
+  "concerns_total": 12,
+  "errors": [],
+  "errors_count": 0,
+  "generated_at": "2026-02-23T14:14:01+00:00",
+  "keywords_total": 102,
+  "packs_total": 4,
+  "path": "docs/gh-pages/citizen/data/concerns_v1.json",
+  "valid": true,
+  "version": "v1",
+  "warnings": [],
+  "warnings_count": 0
+}
+OK snapshot explorer-sports exportado: docs/gh-pages/explorer-politico/data/arena-mandates.json (78649 rows), docs/gh-pages/explorer-politico/data/sources.json (44)
+OK graph snapshot -> docs/gh-pages/graph/data/graph.json (nodes=767 edges=1042 rows=350)
+OK votes preview -> docs/gh-pages/explorer-votaciones/data/votes-preview.json (events=200 total=8357 limit=200 offset=0)
+OK sources status snapshot -> docs/gh-pages/explorer-sources/data/status.json
+OK temas preview -> docs/gh-pages/explorer-temas/data/temas-preview.json (generated_at=2026-02-23T14:14:22+00:00)
+OK citizen snapshot -> docs/gh-pages/citizen/data/citizen.json (topic_set_id=1 as_of_date=2026-02-16 method=combined version=v1 bytes=950181)
+OK citizen snapshot -> docs/gh-pages/citizen/data/citizen_votes.json (topic_set_id=1 as_of_date=2026-02-16 method=votes version=v1 bytes=944495)
+OK citizen snapshot -> docs/gh-pages/citizen/data/citizen_declared.json (topic_set_id=1 as_of_date=2026-02-16 method=declared version=v1 bytes=934911)
+{"path":"docs/gh-pages/citizen/data/citizen.json","bytes":950181,"topic_set_id":1,"as_of_date":"2026-02-16","computed_method":"combined","computed_version":"v1","topics":111,"parties":16,"party_topic_positions":1776,"stances":{"oppose":859,"support":605,"unclear":211,"no_signal":101},"programas_stances":{"no_signal":187,"oppose":1,"support":4}}
+{"path":"docs/gh-pages/citizen/data/citizen_votes.json","bytes":944495,"topic_set_id":1,"as_of_date":"2026-02-16","computed_method":"votes","computed_version":"v1","topics":111,"parties":16,"party_topic_positions":1776,"stances":{"oppose":859,"support":605,"unclear":209,"no_signal":103},"programas_stances":{"no_signal":187,"oppose":1,"support":4}}
+{"path":"docs/gh-pages/citizen/data/citizen_declared.json","bytes":934911,"topic_set_id":1,"as_of_date":"2026-02-16","computed_method":"declared","computed_version":"v1","topics":111,"parties":16,"party_topic_positions":1776,"stances":{"unclear":76,"no_signal":1689,"support":6,"oppose":1,"mixed":4},"programas_stances":{"no_signal":187,"oppose":1,"support":4}}
+{
+  "generated_at": "2026-02-23T14:14:26+00:00",
+  "status": "ok",
+  "paths": {
+    "snapshot": "docs/gh-pages/citizen/data/citizen.json",
+    "concerns_config": "docs/gh-pages/citizen/data/concerns_v1.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 10,
+    "min_clear_cells_pct": 0.7,
+    "max_unknown_cells_pct": 0.3,
+    "min_confidence_avg_signal": 0.5,
+    "min_high_stakes_share": 0.12,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 4,
+    "weak_packs_total": 0,
+    "weak_pack_ids": [],
+    "parties_total": 16,
+    "topics_total": 111,
+    "high_stakes_topics_total": 41,
+    "topic_party_cells_total": 1776
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": true
+  },
+  "failure_reasons": [],
+  "packs": [
+    {
+      "pack_id": "servicios_publicos",
+      "pack_label": "Servicios publicos",
+      "concern_ids": [
+        "sanidad",
+        "educacion",
+        "vivienda",
+        "transporte"
+      ],
+      "tradeoff": "Prioriza bienestar cotidiano. Puede cubrir menos agenda productiva y rural.",
+      "topics_total": 30,
+      "high_stakes_topics_total": 12,
+      "high_stakes_share": 0.4,
+      "cells_total": 480,
+      "stance_counts": {
+        "support": 197,
+        "oppose": 220,
+        "mixed": 0,
+        "unclear": 59,
+        "no_signal": 4
+      },
+      "clear_cells_total": 417,
+      "clear_cells_pct": 0.86875,
+      "unknown_cells_total": 63,
+      "unknown_cells_pct": 0.13125,
+      "any_signal_cells_total": 476,
+      "any_signal_cells_pct": 0.991667,
+      "confidence_avg_signal": 0.672195,
+      "quality_score": 0.755345,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "hogar_bolsillo",
+      "pack_label": "Hogar y bolsillo",
+      "concern_ids": [
+        "vivienda",
+        "coste_vida",
+        "empleo",
+        "energia"
+      ],
+      "tradeoff": "Prioriza precio y empleo. Puede dejar en segundo plano instituciones y seguridad.",
+      "topics_total": 38,
+      "high_stakes_topics_total": 13,
+      "high_stakes_share": 0.342105,
+      "cells_total": 608,
+      "stance_counts": {
+        "support": 218,
+        "oppose": 291,
+        "mixed": 0,
+        "unclear": 78,
+        "no_signal": 21
+      },
+      "clear_cells_total": 509,
+      "clear_cells_pct": 0.837171,
+      "unknown_cells_total": 99,
+      "unknown_cells_pct": 0.162829,
+      "any_signal_cells_total": 587,
+      "any_signal_cells_pct": 0.965461,
+      "confidence_avg_signal": 0.611266,
+      "quality_score": 0.715567,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "campo_industria",
+      "pack_label": "Campo e industria",
+      "concern_ids": [
+        "campo_rural",
+        "energia",
+        "transporte",
+        "empleo"
+      ],
+      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion.",
+      "topics_total": 43,
+      "high_stakes_topics_total": 14,
+      "high_stakes_share": 0.325581,
+      "cells_total": 688,
+      "stance_counts": {
+        "support": 259,
+        "oppose": 308,
+        "mixed": 0,
+        "unclear": 89,
+        "no_signal": 32
+      },
+      "clear_cells_total": 567,
+      "clear_cells_pct": 0.824128,
+      "unknown_cells_total": 121,
+      "unknown_cells_pct": 0.175872,
+      "any_signal_cells_total": 656,
+      "any_signal_cells_pct": 0.953488,
+      "confidence_avg_signal": 0.581323,
+      "quality_score": 0.700138,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "seguridad_estado",
+      "pack_label": "Seguridad y Estado",
+      "concern_ids": [
+        "seguridad_justicia",
+        "inmigracion",
+        "corrupcion",
+        "igualdad"
+      ],
+      "tradeoff": "Prioriza orden institucional y convivencia. Puede reducir foco en coste de vida.",
+      "topics_total": 56,
+      "high_stakes_topics_total": 17,
+      "high_stakes_share": 0.303571,
+      "cells_total": 896,
+      "stance_counts": {
+        "support": 298,
+        "oppose": 441,
+        "mixed": 0,
+        "unclear": 91,
+        "no_signal": 66
+      },
+      "clear_cells_total": 739,
+      "clear_cells_pct": 0.824777,
+      "unknown_cells_total": 157,
+      "unknown_cells_pct": 0.175223,
+      "any_signal_cells_total": 830,
+      "any_signal_cells_pct": 0.926339,
+      "confidence_avg_signal": 0.50205,
+      "quality_score": 0.688263,
+      "weak": false,
+      "weak_reasons": []
+    }
+  ]
+}
+Build GitHub Pages listo en docs/gh-pages

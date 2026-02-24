@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-02-23T13:33:24+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpbk6rbtb4/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0
+  },
+  "metrics": {
+    "glossary_opened_events_total": 0,
+    "glossary_term_interaction_events_total": 0,
+    "glossary_interaction_events_total": 0,
+    "help_copy_interaction_events_total": 0,
+    "adoption_sessions_total": 0,
+    "complete_adoption_sessions_total": 0,
+    "adoption_completeness_rate": null,
+    "interacted_terms_total": 0
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": false,
+    "glossary_interactions_meet_minimum": false,
+    "help_copy_interactions_meet_minimum": false,
+    "adoption_sessions_meet_minimum": false,
+    "adoption_completeness_meets_minimum": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "adoption_sessions_below_minimum",
+    "glossary_interactions_below_minimum",
+    "help_copy_interactions_below_minimum",
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "by_term": []
+}
+{
+  "generated_at": "2026-02-23T13:33:24+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 14,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 6
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 5,
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": true,
+    "adoption_sessions_meet_minimum": true,
+    "adoption_completeness_meets_minimum": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 2
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:33:24+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpe53mosgo/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 8,
+    "recognized_events_total": 8,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 4
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 4,
+    "glossary_interaction_events_total": 8,
+    "help_copy_interaction_events_total": 0,
+    "adoption_sessions_total": 4,
+    "complete_adoption_sessions_total": 0,
+    "adoption_completeness_rate": 0.0,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": false,
+    "adoption_sessions_meet_minimum": false,
+    "adoption_completeness_meets_minimum": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "adoption_sessions_below_minimum",
+    "help_copy_interactions_below_minimum"
+  ],
+  "failure_reasons": [],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 1
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:33:24+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 14,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 6
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 5,
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.9
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": true,
+    "adoption_sessions_meet_minimum": true,
+    "adoption_completeness_meets_minimum": false,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "adoption_completeness_below_threshold"
+  ],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 2
+    }
+  ]
+}

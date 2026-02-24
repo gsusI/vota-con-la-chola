@@ -1,0 +1,7 @@
+python3 scripts/build_citizen_tailwind_md3_css.py --tokens "ui/citizen/tailwind_md3.tokens.json" --out "ui/citizen/tailwind_md3.generated.css" --check
+{
+  "status": "ok",
+  "tokens_path": "ui/citizen/tailwind_md3.tokens.json",
+  "out_path": "ui/citizen/tailwind_md3.generated.css",
+  "would_change": false
+}

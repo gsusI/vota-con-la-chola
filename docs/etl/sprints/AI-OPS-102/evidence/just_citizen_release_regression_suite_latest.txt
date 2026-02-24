@@ -1,0 +1,5100 @@
+just citizen-test-preset-codec
+node --test tests/test_citizen_preset_codec.js tests/test_citizen_preset_recovery_ui_contract.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 1.980208
+  ...
+# Subtest: readPresetFromHash follows fixture matrix contract
+ok 2 - readPresetFromHash follows fixture matrix contract
+  ---
+  duration_ms: 1.110166
+  ...
+# Subtest: buildAlignmentPresetShareUrl follows fixture roundtrip contract
+ok 3 - buildAlignmentPresetShareUrl follows fixture roundtrip contract
+  ---
+  duration_ms: 0.882208
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 4 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.074459
+  ...
+# Subtest: citizen UI exposes preset recovery banner actions
+ok 5 - citizen UI exposes preset recovery banner actions
+  ---
+  duration_ms: 4.866166
+  ...
+# Subtest: citizen UI normalizes canonical preset hash when needed
+ok 6 - citizen UI normalizes canonical preset hash when needed
+  ---
+  duration_ms: 4.861
+  ...
+# Subtest: preset codec parity reporter passes strict mode on identical files
+ok 7 - preset codec parity reporter passes strict mode on identical files
+  ---
+  duration_ms: 100.647625
+  ...
+# Subtest: preset codec parity reporter fails strict mode on mismatch and exposes first diff
+ok 8 - preset codec parity reporter fails strict mode on mismatch and exposes first diff
+  ---
+  duration_ms: 92.233084
+  ...
+# Subtest: preset codec sync-state reporter passes strict mode when already synchronized
+ok 9 - preset codec sync-state reporter passes strict mode when already synchronized
+  ---
+  duration_ms: 106.397416
+  ...
+# Subtest: preset codec sync-state reporter fails strict mode when published copy is stale
+ok 10 - preset codec sync-state reporter fails strict mode when published copy is stale
+  ---
+  duration_ms: 93.975959
+  ...
+# Subtest: preset contract bundle passes strict mode when all subcontracts pass
+ok 11 - preset contract bundle passes strict mode when all subcontracts pass
+  ---
+  duration_ms: 286.74525
+  ...
+# Subtest: preset contract bundle fails strict mode when published asset is stale
+ok 12 - preset contract bundle fails strict mode when published asset is stale
+  ---
+  duration_ms: 146.840083
+  ...
+# Subtest: preset contract bundle history reporter appends baseline without regression
+ok 13 - preset contract bundle history reporter appends baseline without regression
+  ---
+  duration_ms: 109.359292
+  ...
+# Subtest: preset contract bundle history reporter fails strict on regression
+ok 14 - preset contract bundle history reporter fails strict on regression
+  ---
+  duration_ms: 160.797583
+  ...
+# Subtest: history compaction reporter keeps incident entries and writes compacted JSONL
+ok 15 - history compaction reporter keeps incident entries and writes compacted JSONL
+  ---
+  duration_ms: 104.0535
+  ...
+# Subtest: history compaction reporter fails strict when compaction does not drop rows above threshold
+ok 16 - history compaction reporter fails strict when compaction does not drop rows above threshold
+  ---
+  duration_ms: 89.301583
+  ...
+# Subtest: history SLO reporter passes strict on clean streak with zero regressions
+ok 17 - history SLO reporter passes strict on clean streak with zero regressions
+  ---
+  duration_ms: 105.823625
+  ...
+# Subtest: history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+ok 18 - history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+  ---
+  duration_ms: 95.391625
+  ...
+# Subtest: history SLO reporter fails strict when regression and latest dirty break thresholds
+ok 19 - history SLO reporter fails strict when regression and latest dirty break thresholds
+  ---
+  duration_ms: 65.652167
+  ...
+# Subtest: SLO digest reporter emits compact ok digest in strict mode
+ok 20 - SLO digest reporter emits compact ok digest in strict mode
+  ---
+  duration_ms: 100.402375
+  ...
+# Subtest: SLO digest reporter fails strict mode when digest is failed
+ok 21 - SLO digest reporter fails strict mode when digest is failed
+  ---
+  duration_ms: 89.847834
+  ...
+# Subtest: SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 22 - SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 103.76475
+  ...
+# Subtest: SLO digest heartbeat reporter deduplicates identical heartbeat ids
+ok 23 - SLO digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 125.613541
+  ...
+# Subtest: SLO digest heartbeat reporter fails strict when status is failed but still appends row
+ok 24 - SLO digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 41.385875
+  ...
+# Subtest: heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+ok 25 - heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+  ---
+  duration_ms: 102.737333
+  ...
+# Subtest: heartbeat compaction reporter fails strict when no rows are dropped above threshold
+ok 26 - heartbeat compaction reporter fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 91.201042
+  ...
+# Subtest: heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+ok 27 - heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+  ---
+  duration_ms: 197.423834
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+ok 28 - heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+  ---
+  duration_ms: 69.608667
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+ok 29 - heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 48.245666
+  ...
+# Subtest: compaction-window digest reporter emits ok status in strict mode when parity is complete
+ok 30 - compaction-window digest reporter emits ok status in strict mode when parity is complete
+  ---
+  duration_ms: 97.772208
+  ...
+# Subtest: compaction-window digest reporter emits degraded status when non-incident rows are missing
+ok 31 - compaction-window digest reporter emits degraded status when non-incident rows are missing
+  ---
+  duration_ms: 92.714708
+  ...
+# Subtest: compaction-window digest reporter fails strict mode when parity report has strict failures
+ok 32 - compaction-window digest reporter fails strict mode when parity report has strict failures
+  ---
+  duration_ms: 66.484
+  ...
+# Subtest: compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 33 - compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 74.552041
+  ...
+# Subtest: compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+ok 34 - compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 132.135041
+  ...
+# Subtest: compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+ok 35 - compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 64.21775
+  ...
+# Subtest: compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+ok 36 - compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+  ---
+  duration_ms: 100.653167
+  ...
+# Subtest: compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+ok 37 - compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 90.855417
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+ok 38 - compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+  ---
+  duration_ms: 189.8405
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+ok 39 - compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+  ---
+  duration_ms: 68.272042
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+ok 40 - compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 49.38625
+  ...
+# Subtest: compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+ok 41 - compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+  ---
+  duration_ms: 69.581333
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+ok 42 - compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+  ---
+  duration_ms: 94.761208
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict on malformed entries
+ok 43 - compact-window digest heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 65.992416
+  ...
+# Subtest: heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+ok 44 - heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+  ---
+  duration_ms: 50.743834
+  ...
+# Subtest: heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+ok 45 - heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+  ---
+  duration_ms: 45.875625
+  ...
+# Subtest: heartbeat window reporter fails strict on malformed entries
+ok 46 - heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 36.556208
+  ...
+# Subtest: bundle history window reporter passes strict when window has no regressions
+ok 47 - bundle history window reporter passes strict when window has no regressions
+  ---
+  duration_ms: 48.352125
+  ...
+# Subtest: bundle history window reporter fails strict when window contains regressions
+ok 48 - bundle history window reporter fails strict when window contains regressions
+  ---
+  duration_ms: 46.201083
+  ...
+# Subtest: preset fixture reporter passes strict mode for canonical fixture
+ok 49 - preset fixture reporter passes strict mode for canonical fixture
+  ---
+  duration_ms: 49.509166
+  ...
+# Subtest: preset fixture reporter surfaces failed ids in strict drift run
+ok 50 - preset fixture reporter surfaces failed ids in strict drift run
+  ---
+  duration_ms: 45.857458
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 576.925625
+just citizen-test-tailwind-md3
+node --test tests/test_citizen_tailwind_md3_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes generated tailwind+md3 stylesheet and primitive class markers
+ok 1 - citizen UI includes generated tailwind+md3 stylesheet and primitive class markers
+  ---
+  duration_ms: 1.502625
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44.935834
+python3 -m unittest tests/test_build_citizen_tailwind_md3_css.py tests/test_report_citizen_tailwind_md3_contract.py tests/test_report_citizen_tailwind_md3_visual_drift_digest.py tests/test_graph_ui_server_citizen_assets.py
+....{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpgxwzp97i/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpgxwzp97i/generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp9v7vpgyu/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp9v7vpgyu/generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "status": "drift",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp9v7vpgyu/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp9v7vpgyu/generated.css",
+  "would_change": true
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp6hexlut9/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp6hexlut9/tailwind_md3.generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "failed",
+  "paths": {
+    "tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp6hexlut9/tokens.json",
+    "generated_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp6hexlut9/tailwind_md3.generated.css",
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp6hexlut9/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 5723,
+    "token_colors_count": 15,
+    "token_spacing_count": 3,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": [
+      "./tailwind_md3.generated.css",
+      "md3-card",
+      "md3-chip",
+      "md3-button",
+      "md3-tab"
+    ],
+    "md3_card_markers": 0,
+    "md3_chip_markers": 0,
+    "md3_button_markers": 0,
+    "md3_tab_markers": 0
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000,
+    "min_md3_card_markers": 1,
+    "min_md3_chip_markers": 1,
+    "min_md3_button_markers": 1,
+    "min_md3_tab_markers": 1
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": false,
+    "md3_card_markers_meet_minimum": false,
+    "md3_chip_markers_meet_minimum": false,
+    "md3_button_markers_meet_minimum": false,
+    "md3_tab_markers_meet_minimum": false
+  },
+  "failure_reasons": [
+    "ui_html_markers_missing",
+    "md3_card_markers_below_minimum",
+    "md3_chip_markers_below_minimum",
+    "md3_button_markers_below_minimum",
+    "md3_tab_markers_below_minimum"
+  ]
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplsll4jhi/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplsll4jhi/tailwind_md3.generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "ok",
+  "paths": {
+    "tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplsll4jhi/tokens.json",
+    "generated_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplsll4jhi/tailwind_md3.generated.css",
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplsll4jhi/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 5723,
+    "token_colors_count": 15,
+    "token_spacing_count": 3,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": [],
+    "md3_card_markers": 1,
+    "md3_chip_markers": 1,
+    "md3_button_markers": 1,
+    "md3_tab_markers": 1
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000,
+    "min_md3_card_markers": 1,
+    "min_md3_chip_markers": 1,
+    "min_md3_button_markers": 1,
+    "min_md3_tab_markers": 1
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": true,
+    "md3_card_markers_meet_minimum": true,
+    "md3_chip_markers_meet_minimum": true,
+    "md3_button_markers_meet_minimum": true,
+    "md3_tab_markers_meet_minimum": true
+  },
+  "failure_reasons": []
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "failed",
+  "paths": {
+    "tailwind_contract_json": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/contract.json",
+    "source_tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/tailwind_md3.tokens.json",
+    "source_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/tailwind_md3.generated.css",
+    "source_ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/index.html",
+    "published_tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/tailwind_md3.tokens.json",
+    "published_data_tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/data/tailwind_md3.tokens.json",
+    "published_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/tailwind_md3.generated.css",
+    "published_ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/index.html"
+  },
+  "tailwind_contract": {
+    "status": "ok",
+    "failure_reasons": [],
+    "checks_all_ok": true
+  },
+  "parity": {
+    "tokens": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/tailwind_md3.tokens.json",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/tailwind_md3.tokens.json",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 42,
+      "published_bytes": 42,
+      "source_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "published_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "tokens_data": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/tailwind_md3.tokens.json",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/data/tailwind_md3.tokens.json",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 42,
+      "published_bytes": 42,
+      "source_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "published_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "css": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/tailwind_md3.generated.css",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/tailwind_md3.generated.css",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 79,
+      "published_bytes": 78,
+      "source_sha256": "db00c95d83967dbe746fbd1571af8a3346908dddb28afed7c0188bd04b6c10ad",
+      "published_sha256": "2088f369664ffa6c9d04af16c1b05c3df973e7f3833292058357d87b48c16e67",
+      "parity_ok": false,
+      "first_diff_line": 2,
+      "first_diff_source_line": ".md3-card{display:block;}",
+      "first_diff_published_line": ".md3-card{display:grid;}"
+    },
+    "ui_html": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/ui/index.html",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp09zwvgtx/pub/index.html",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 224,
+      "published_bytes": 224,
+      "source_sha256": "5bba7a14587d06086f69b82a825d61056094aba9a95b8809e089437eeef40718",
+      "published_sha256": "5bba7a14587d06086f69b82a825d61056094aba9a95b8809e089437eeef40718",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    }
+  },
+  "markers": {
+    "source": {
+      "md3-card": 1,
+      "md3-chip": 1,
+      "md3-button": 1,
+      "md3-tab": 1
+    },
+    "published": {
+      "md3-card": 1,
+      "md3-chip": 1,
+      "md3-button": 1,
+      "md3-tab": 1
+    },
+    "contract_snapshot": {
+      "md3-card": 1,
+      "md3-chip": 1,
+      "md3-button": 1,
+      "md3-tab": 1
+    }
+  },
+  "checks": {
+    "tailwind_contract_exists": true,
+    "tailwind_contract_status_ok": true,
+    "tailwind_contract_checks_ok": true,
+    "tokens_parity_ok": true,
+    "tokens_data_parity_ok": true,
+    "css_parity_ok": false,
+    "ui_html_parity_ok": true,
+    "source_published_marker_counts_match": true,
+    "source_markers_match_contract_snapshot": true,
+    "published_markers_match_contract_snapshot": true
+  },
+  "strict_fail_reasons": [
+    "css_parity_mismatch"
+  ]
+}....
+----------------------------------------------------------------------
+Ran 8 tests in 0.012s
+
+OK
+
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "ok",
+  "paths": {
+    "tailwind_contract_json": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/contract.json",
+    "source_tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/tailwind_md3.tokens.json",
+    "source_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/tailwind_md3.generated.css",
+    "source_ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/index.html",
+    "published_tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/tailwind_md3.tokens.json",
+    "published_data_tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/data/tailwind_md3.tokens.json",
+    "published_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/tailwind_md3.generated.css",
+    "published_ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/index.html"
+  },
+  "tailwind_contract": {
+    "status": "ok",
+    "failure_reasons": [],
+    "checks_all_ok": true
+  },
+  "parity": {
+    "tokens": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/tailwind_md3.tokens.json",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/tailwind_md3.tokens.json",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 42,
+      "published_bytes": 42,
+      "source_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "published_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "tokens_data": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/tailwind_md3.tokens.json",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/data/tailwind_md3.tokens.json",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 42,
+      "published_bytes": 42,
+      "source_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "published_sha256": "25f204c533d0a805965cac3e57cb293935bec0f3d1aa1616c3e86b0bcd9eed9f",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "css": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/tailwind_md3.generated.css",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/tailwind_md3.generated.css",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 79,
+      "published_bytes": 79,
+      "source_sha256": "db00c95d83967dbe746fbd1571af8a3346908dddb28afed7c0188bd04b6c10ad",
+      "published_sha256": "db00c95d83967dbe746fbd1571af8a3346908dddb28afed7c0188bd04b6c10ad",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    },
+    "ui_html": {
+      "source_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/ui/index.html",
+      "published_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplx3kmgvu/pub/index.html",
+      "source_exists": true,
+      "published_exists": true,
+      "source_bytes": 224,
+      "published_bytes": 224,
+      "source_sha256": "5bba7a14587d06086f69b82a825d61056094aba9a95b8809e089437eeef40718",
+      "published_sha256": "5bba7a14587d06086f69b82a825d61056094aba9a95b8809e089437eeef40718",
+      "parity_ok": true,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    }
+  },
+  "markers": {
+    "source": {
+      "md3-card": 1,
+      "md3-chip": 1,
+      "md3-button": 1,
+      "md3-tab": 1
+    },
+    "published": {
+      "md3-card": 1,
+      "md3-chip": 1,
+      "md3-button": 1,
+      "md3-tab": 1
+    },
+    "contract_snapshot": {
+      "md3-card": 1,
+      "md3-chip": 1,
+      "md3-button": 1,
+      "md3-tab": 1
+    }
+  },
+  "checks": {
+    "tailwind_contract_exists": true,
+    "tailwind_contract_status_ok": true,
+    "tailwind_contract_checks_ok": true,
+    "tokens_parity_ok": true,
+    "tokens_data_parity_ok": true,
+    "css_parity_ok": true,
+    "ui_html_parity_ok": true,
+    "source_published_marker_counts_match": true,
+    "source_markers_match_contract_snapshot": true,
+    "published_markers_match_contract_snapshot": true
+  },
+  "strict_fail_reasons": []
+}
+just citizen-test-accessibility-readability
+node --test tests/test_citizen_accessibility_readability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes skip link and main landmark focus target
+ok 1 - citizen UI includes skip link and main landmark focus target
+  ---
+  duration_ms: 1.294334
+  ...
+# Subtest: citizen UI includes accessibility/readability markers for status and sections
+ok 2 - citizen UI includes accessibility/readability markers for status and sections
+  ---
+  duration_ms: 0.657417
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 45.816167
+just citizen-test-explainability-copy
+node --test tests/test_citizen_explainability_copy_ui_contract.js
+TAP version 13
+# Subtest: citizen UI exposes explainability glossary with tooltip metadata
+ok 1 - citizen UI exposes explainability glossary with tooltip metadata
+  ---
+  duration_ms: 1.917542
+  ...
+# Subtest: citizen UI includes plain-language explainability copy hints
+ok 2 - citizen UI includes plain-language explainability copy hints
+  ---
+  duration_ms: 0.917917
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.640042
+python3 -m unittest tests/test_report_citizen_explainability_copy.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "degraded",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmptpoplnmf/citizen_degraded.html"
+  },
+  "metrics": {
+    "glossary_terms_total": 4,
+    "glossary_terms_with_tooltip": 4,
+    "glossary_terms_with_definition": 4,
+    "help_copy_blocks_total": 0,
+    "help_copy_sentences_total": 0,
+    "max_definition_words_seen": 6,
+    "max_help_copy_sentence_words_seen": 0,
+    "long_definition_terms_total": 0,
+    "long_help_copy_sentences_total": 0,
+    "jargon_hits_total": 0
+  },
+  "thresholds": {
+    "min_glossary_terms": 4,
+    "max_definition_words": 12,
+    "max_copy_sentence_words": 16,
+    "forbidden_jargon": [
+      "embedding",
+      "ontologia",
+      "bayesiano",
+      "vectorizacion",
+      "heuristica"
+    ]
+  },
+  "checks": {
+    "glossary_marker_present": true,
+    "glossary_terms_meet_minimum": true,
+    "tooltip_present_for_all_terms": true,
+    "definitions_present_for_all_terms": true,
+    "definition_words_within_limit": true,
+    "help_copy_present": false,
+    "help_copy_sentence_words_within_limit": true,
+    "jargon_free_copy": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "help_copy_missing"
+  ],
+  "failure_reasons": [],
+  "terms": [
+    {
+      "term": "unknown",
+      "label": "unknown",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "cobertura",
+      "label": "cobertura",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "confianza",
+      "label": "confianza",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    },
+    {
+      "term": "evidencia",
+      "label": "evidencia",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    }
+  ],
+  "long_definition_terms": [],
+  "long_help_copy_sentences": [],
+  "jargon_hits": []
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplscgssc8/citizen.html"
+  },
+  "metrics": {
+    "glossary_terms_total": 4,
+    "glossary_terms_with_tooltip": 4,
+    "glossary_terms_with_definition": 4,
+    "help_copy_blocks_total": 2,
+    "help_copy_sentences_total": 2,
+    "max_definition_words_seen": 6,
+    "max_help_copy_sentence_words_seen": 7,
+    "long_definition_terms_total": 0,
+    "long_help_copy_sentences_total": 0,
+    "jargon_hits_total": 0
+  },
+  "thresholds": {
+    "min_glossary_terms": 4,
+    "max_definition_words": 12,
+    "max_copy_sentence_words": 16,
+    "forbidden_jargon": [
+      "embedding",
+      "ontologia",
+      "bayesiano",
+      "vectorizacion",
+      "heuristica"
+    ]
+  },
+  "checks": {
+    "glossary_marker_present": true,
+    "glossary_terms_meet_minimum": true,
+    "tooltip_present_for_all_terms": true,
+    "definitions_present_for_all_terms": true,
+    "definition_words_within_limit": true,
+    "help_copy_present": true,
+    "help_copy_sentence_words_within_limit": true,
+    "jargon_free_copy": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "terms": [
+    {
+      "term": "unknown",
+      "label": "unknown",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "cobertura",
+      "label": "cobertura",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "confianza",
+      "label": "confianza",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    },
+    {
+      "term": "evidencia",
+      "label": "evidencia",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    }
+  ],
+  "long_definition_terms": [],
+  "long_help_copy_sentences": [],
+  "jargon_hits": []
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "failed",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpqgz5qu03/citizen_long_def.html"
+  },
+  "metrics": {
+    "glossary_terms_total": 4,
+    "glossary_terms_with_tooltip": 4,
+    "glossary_terms_with_definition": 4,
+    "help_copy_blocks_total": 1,
+    "help_copy_sentences_total": 1,
+    "max_definition_words_seen": 21,
+    "max_help_copy_sentence_words_seen": 3,
+    "long_definition_terms_total": 1,
+    "long_help_copy_sentences_total": 0,
+    "jargon_hits_total": 0
+  },
+  "thresholds": {
+    "min_glossary_terms": 4,
+    "max_definition_words": 12,
+    "max_copy_sentence_words": 16,
+    "forbidden_jargon": [
+      "embedding",
+      "ontologia",
+      "bayesiano",
+      "vectorizacion",
+      "heuristica"
+    ]
+  },
+  "checks": {
+    "glossary_marker_present": true,
+    "glossary_terms_meet_minimum": true,
+    "tooltip_present_for_all_terms": true,
+    "definitions_present_for_all_terms": true,
+    "definition_words_within_limit": false,
+    "help_copy_present": true,
+    "help_copy_sentence_words_within_limit": true,
+    "jargon_free_copy": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "definition_words_over_limit"
+  ],
+  "terms": [
+    {
+      "term": "unknown",
+      "label": "unknown",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 21
+    },
+    {
+      "term": "cobertura",
+      "label": "cobertura",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 2
+    },
+    {
+      "term": "confianza",
+      "label": "confianza",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 2
+    },
+    {
+      "term": "evidencia",
+      "label": "evidencia",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 2
+    }
+  ],
+  "long_definition_terms": [
+    {
+      "term": "unknown",
+      "definition_words": 21
+    }
+  ],
+  "long_help_copy_sentences": [],
+  "jargon_hits": []
+}
+just citizen-test-explainability-outcomes
+node --test tests/test_citizen_explainability_outcomes_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines explainability outcomes telemetry markers
+ok 1 - citizen UI defines explainability outcomes telemetry markers
+  ---
+  duration_ms: 1.290708
+  ...
+# Subtest: citizen UI wires glossary and help-copy interactions to explainability outcomes telemetry
+ok 2 - citizen UI wires glossary and help-copy interactions to explainability outcomes telemetry
+  ---
+  duration_ms: 0.523042
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.216
+python3 -m unittest tests/test_report_citizen_explainability_outcomes.py
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyu21fkxo/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0
+  },
+  "metrics": {
+    "glossary_opened_events_total": 0,
+    "glossary_term_interaction_events_total": 0,
+    "glossary_interaction_events_total": 0,
+    "help_copy_interaction_events_total": 0,
+    "adoption_sessions_total": 0,
+    "complete_adoption_sessions_total": 0,
+    "adoption_completeness_rate": null,
+    "interacted_terms_total": 0
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": false,
+    "glossary_interactions_meet_minimum": false,
+    "help_copy_interactions_meet_minimum": false,
+    "adoption_sessions_meet_minimum": false,
+    "adoption_completeness_meets_minimum": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "adoption_sessions_below_minimum",
+    "glossary_interactions_below_minimum",
+    "help_copy_interactions_below_minimum",
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "by_term": []
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 14,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 6
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 5,
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": true,
+    "adoption_sessions_meet_minimum": true,
+    "adoption_completeness_meets_minimum": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 2
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpgg58too4/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 8,
+    "recognized_events_total": 8,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 4
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 4,
+    "glossary_interaction_events_total": 8,
+    "help_copy_interaction_events_total": 0,
+    "adoption_sessions_total": 4,
+    "complete_adoption_sessions_total": 0,
+    "adoption_completeness_rate": 0.0,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": false,
+    "adoption_sessions_meet_minimum": false,
+    "adoption_completeness_meets_minimum": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "adoption_sessions_below_minimum",
+    "help_copy_interactions_below_minimum"
+  ],
+  "failure_reasons": [],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 1
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 14,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 6
+  },
+  "metrics": {
+    "glossary_opened_events_total": 4,
+    "glossary_term_interaction_events_total": 5,
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "interacted_terms_total": 4
+  },
+  "thresholds": {
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.9
+  },
+  "checks": {
+    "telemetry_available": true,
+    "glossary_interactions_meet_minimum": true,
+    "help_copy_interactions_meet_minimum": true,
+    "adoption_sessions_meet_minimum": true,
+    "adoption_completeness_meets_minimum": false,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "adoption_completeness_below_threshold"
+  ],
+  "by_term": [
+    {
+      "term": "cobertura",
+      "events_total": 1
+    },
+    {
+      "term": "confianza",
+      "events_total": 1
+    },
+    {
+      "term": "evidencia",
+      "events_total": 1
+    },
+    {
+      "term": "unknown",
+      "events_total": 2
+    }
+  ]
+}
+just citizen-test-explainability-outcomes-heartbeat
+python3 -m unittest tests/test_report_citizen_explainability_outcomes_heartbeat.py tests/test_report_citizen_explainability_outcomes_heartbeat_window.py
+....{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzk6oftal/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzk6oftal/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T15:40:00+00:00",
+    "heartbeat_id": "2026-02-23T15:40:00+00:00|ok|2026-02-23T15:40:00+00:00|9|5|6|4|0.666667|0.600000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzk6oftal/digest_ok.json",
+    "digest_generated_at": "2026-02-23T15:40:00+00:00",
+    "status": "ok",
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzk6oftal/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzk6oftal/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T15:40:00+00:00",
+    "heartbeat_id": "2026-02-23T15:40:00+00:00|ok|2026-02-23T15:40:00+00:00|9|5|6|4|0.666667|0.600000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzk6oftal/digest_ok.json",
+    "digest_generated_at": "2026-02-23T15:40:00+00:00",
+    "status": "ok",
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjrhc1m1g/digest_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjrhc1m1g/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T15:40:00+00:00",
+    "heartbeat_id": "2026-02-23T15:40:00+00:00|degraded|2026-02-23T15:40:00+00:00|2|1|6|4|0.666667|0.600000|0||glossary_interactions_below_minimum,help_copy_interactions_below_minimum",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjrhc1m1g/digest_degraded.json",
+    "digest_generated_at": "2026-02-23T15:40:00+00:00",
+    "status": "degraded",
+    "glossary_interaction_events_total": 2,
+    "help_copy_interaction_events_total": 1,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "degraded_reasons": [
+      "glossary_interactions_below_minimum",
+      "help_copy_interactions_below_minimum"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp30oothpo/digest_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp30oothpo/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "adoption_completeness_below_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T15:40:00+00:00",
+    "heartbeat_id": "2026-02-23T15:40:00+00:00|failed|2026-02-23T15:40:00+00:00|9|5|6|4|0.400000|0.600000|0|adoption_completeness_below_threshold|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp30oothpo/digest_failed.json",
+    "digest_generated_at": "2026-02-23T15:40:00+00:00",
+    "status": "failed",
+    "glossary_interaction_events_total": 9,
+    "help_copy_interaction_events_total": 5,
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.4,
+    "min_glossary_interaction_events": 8,
+    "min_help_copy_interaction_events": 5,
+    "min_adoption_sessions": 5,
+    "min_adoption_completeness_rate": 0.6,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "adoption_completeness_below_threshold"
+    ],
+    "strict_fail_count": 1,
+    "strict_fail_reasons": [
+      "adoption_completeness_below_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp8c4ote9o/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 1,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 1,
+  "degraded_rate_pct": 50.0,
+  "contract_incomplete_in_window": 1,
+  "contract_incomplete_rate_pct": 50.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-23T15:02:00+00:00",
+  "last_degraded_run_at": "2026-02-23T15:02:00+00:00",
+  "first_contract_incomplete_run_at": "2026-02-23T15:02:00+00:00",
+  "last_contract_incomplete_run_at": "2026-02-23T15:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T15:02:00+00:00",
+    "heartbeat_id": "2026-02-23T15:02:00+00:00|degraded|2",
+    "status": "degraded",
+    "line_no": 2,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T15:02:00+00:00",
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "contract_complete": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 1,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": false,
+    "max_degraded_rate_ok": false,
+    "max_contract_incomplete_ok": false,
+    "max_contract_incomplete_rate_ok": false,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_degraded_exceeded",
+    "max_degraded_rate_exceeded",
+    "max_contract_incomplete_exceeded",
+    "max_contract_incomplete_rate_exceeded",
+    "latest_contract_incomplete"
+  ],
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpgwecdevg/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "contract_incomplete_in_window": 0,
+  "contract_incomplete_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_contract_incomplete_run_at": "",
+  "last_contract_incomplete_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T15:03:00+00:00",
+    "heartbeat_id": "2026-02-23T15:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T15:03:00+00:00",
+    "adoption_sessions_total": 6,
+    "complete_adoption_sessions_total": 4,
+    "adoption_completeness_rate": 0.666667,
+    "contract_complete": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_contract_incomplete_ok": true,
+    "max_contract_incomplete_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}..
+----------------------------------------------------------------------
+Ran 6 tests in 0.007s
+
+OK
+
+{"error": "window_last must be >= 1"}
+just citizen-test-product-kpis-heartbeat
+python3 -m unittest tests/test_report_citizen_product_kpis_heartbeat.py tests/test_report_citizen_product_kpis_heartbeat_window.py
+...{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1f58kr8s/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1f58kr8s/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T16:00:00+00:00",
+    "heartbeat_id": "2026-02-23T16:00:00+00:00|ok|2026-02-23T16:00:00+00:00|0.250000|30.000000|0.500000|0.450000|120.000000|0.200000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1f58kr8s/digest_ok.json",
+    "digest_generated_at": "2026-02-23T16:00:00+00:00",
+    "status": "ok",
+    "unknown_rate": 0.25,
+    "time_to_first_answer_seconds": 30.0,
+    "drilldown_click_rate": 0.5,
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2,
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": true,
+    "drilldown_click_rate_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "missing_metrics": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1f58kr8s/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1f58kr8s/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T16:00:00+00:00",
+    "heartbeat_id": "2026-02-23T16:00:00+00:00|ok|2026-02-23T16:00:00+00:00|0.250000|30.000000|0.500000|0.450000|120.000000|0.200000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1f58kr8s/digest_ok.json",
+    "digest_generated_at": "2026-02-23T16:00:00+00:00",
+    "status": "ok",
+    "unknown_rate": 0.25,
+    "time_to_first_answer_seconds": 30.0,
+    "drilldown_click_rate": 0.5,
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2,
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": true,
+    "drilldown_click_rate_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "missing_metrics": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpajtithoc/digest_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpajtithoc/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T16:00:00+00:00",
+    "heartbeat_id": "2026-02-23T16:00:00+00:00|degraded|2026-02-23T16:00:00+00:00|0.250000|||0.450000|120.000000|0.200000|0||time_to_first_answer_seconds,drilldown_click_rate",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpajtithoc/digest_degraded.json",
+    "digest_generated_at": "2026-02-23T16:00:00+00:00",
+    "status": "degraded",
+    "unknown_rate": 0.25,
+    "time_to_first_answer_seconds": null,
+    "drilldown_click_rate": null,
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2,
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": null,
+    "drilldown_click_rate_within_threshold": null,
+    "telemetry_available": false,
+    "contract_complete": false,
+    "missing_metrics": [
+      "time_to_first_answer_seconds",
+      "drilldown_click_rate"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmphtjkmyz_/digest_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmphtjkmyz_/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "time_to_first_answer_above_threshold",
+    "drilldown_click_rate_below_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T16:00:00+00:00",
+    "heartbeat_id": "2026-02-23T16:00:00+00:00|failed|2026-02-23T16:00:00+00:00|0.250000|30.000000|0.500000|0.450000|120.000000|0.200000|0|time_to_first_answer_above_threshold,drilldown_click_rate_below_threshold|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmphtjkmyz_/digest_failed.json",
+    "digest_generated_at": "2026-02-23T16:00:00+00:00",
+    "status": "failed",
+    "unknown_rate": 0.25,
+    "time_to_first_answer_seconds": 30.0,
+    "drilldown_click_rate": 0.5,
+    "max_unknown_rate": 0.45,
+    "max_time_to_first_answer_seconds": 120.0,
+    "min_drilldown_click_rate": 0.2,
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": false,
+    "drilldown_click_rate_within_threshold": false,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "missing_metrics": [],
+    "failure_reasons": [
+      "time_to_first_answer_above_threshold",
+      "drilldown_click_rate_below_threshold"
+    ],
+    "strict_fail_count": 2,
+    "strict_fail_reasons": [
+      "time_to_first_answer_above_threshold",
+      "drilldown_click_rate_below_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2xty304q/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_unknown_rate_violations": 0,
+    "max_unknown_rate_violation_rate_pct": 0.0,
+    "max_tfa_violations": 0,
+    "max_tfa_violation_rate_pct": 0.0,
+    "max_drilldown_violations": 0,
+    "max_drilldown_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 1,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 1,
+  "degraded_rate_pct": 50.0,
+  "contract_incomplete_in_window": 1,
+  "contract_incomplete_rate_pct": 50.0,
+  "unknown_rate_violations_in_window": 1,
+  "unknown_rate_violation_rate_pct": 50.0,
+  "tfa_violations_in_window": 1,
+  "tfa_violation_rate_pct": 50.0,
+  "drilldown_violations_in_window": 1,
+  "drilldown_violation_rate_pct": 50.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-23T16:02:00+00:00",
+  "last_degraded_run_at": "2026-02-23T16:02:00+00:00",
+  "first_contract_incomplete_run_at": "2026-02-23T16:02:00+00:00",
+  "last_contract_incomplete_run_at": "2026-02-23T16:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T16:02:00+00:00",
+    "heartbeat_id": "2026-02-23T16:02:00+00:00|degraded|2",
+    "status": "degraded",
+    "line_no": 2,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T16:02:00+00:00",
+    "unknown_rate": 0.25,
+    "time_to_first_answer_seconds": 30.0,
+    "drilldown_click_rate": 0.5,
+    "contract_complete": false,
+    "unknown_rate_within_threshold": false,
+    "time_to_first_answer_within_threshold": false,
+    "drilldown_click_rate_within_threshold": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 1,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": false,
+    "max_degraded_rate_ok": false,
+    "max_contract_incomplete_ok": false,
+    "max_contract_incomplete_rate_ok": false,
+    "max_unknown_rate_violations_ok": false,
+    "max_unknown_rate_violation_rate_ok": false,
+    "max_tfa_violations_ok": false,
+    "max_tfa_violation_rate_ok": false,
+    "max_drilldown_violations_ok": false,
+    "max_drilldown_violation_rate_ok": false,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": false,
+    "latest_thresholds_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_degraded_exceeded",
+    "max_degraded_rate_exceeded",
+    "max_contract_incomplete_exceeded",
+    "max_contract_incomplete_rate_exceeded",
+    "max_unknown_rate_violations_exceeded",
+    "max_unknown_rate_violation_rate_exceeded",
+    "max_tfa_violations_exceeded",
+    "max_tfa_violation_rate_exceeded",
+    "max_drilldown_violations_exceeded",
+    "max_drilldown_violation_rate_exceeded",
+    "latest_contract_incomplete",
+    "latest_threshold_violation"
+  ],
+  "status": "failed"
+}...
+----------------------------------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmprufjeabh/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_unknown_rate_violations": 0,
+    "max_unknown_rate_violation_rate_pct": 0.0,
+    "max_tfa_violations": 0,
+    "max_tfa_violation_rate_pct": 0.0,
+    "max_drilldown_violations": 0,
+    "max_drilldown_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "contract_incomplete_in_window": 0,
+  "contract_incomplete_rate_pct": 0.0,
+  "unknown_rate_violations_in_window": 0,
+  "unknown_rate_violation_rate_pct": 0.0,
+  "tfa_violations_in_window": 0,
+  "tfa_violation_rate_pct": 0.0,
+  "drilldown_violations_in_window": 0,
+  "drilldown_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_contract_incomplete_run_at": "",
+  "last_contract_incomplete_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T16:03:00+00:00",
+    "heartbeat_id": "2026-02-23T16:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T16:03:00+00:00",
+    "unknown_rate": 0.25,
+    "time_to_first_answer_seconds": 30.0,
+    "drilldown_click_rate": 0.5,
+    "contract_complete": true,
+    "unknown_rate_within_threshold": true,
+    "time_to_first_answer_within_threshold": true,
+    "drilldown_click_rate_within_threshold": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_contract_incomplete_ok": true,
+    "max_contract_incomplete_rate_ok": true,
+    "max_unknown_rate_violations_ok": true,
+    "max_unknown_rate_violation_rate_ok": true,
+    "max_tfa_violations_ok": true,
+    "max_tfa_violation_rate_ok": true,
+    "max_drilldown_violations_ok": true,
+    "max_drilldown_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": true,
+    "latest_thresholds_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}
+{"error": "window_last must be >= 1"}
+just citizen-test-mobile-observability-heartbeat
+python3 -m unittest tests/test_report_citizen_mobile_observability_heartbeat.py tests/test_report_citizen_mobile_observability_heartbeat_window.py tests/test_report_citizen_mobile_observability_heartbeat_compaction.py tests/test_report_citizen_mobile_observability_heartbeat_compaction_window.py
+....{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyysjje6n/observability_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyysjje6n/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|ok|30|420.000000|450.000000|1|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyysjje6n/observability_ok.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyysjje6n/observability_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyysjje6n/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|ok|30|420.000000|450.000000|1|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyysjje6n/observability_ok.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4de9tkai/observability_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4de9tkai/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|degraded|10|420.000000|450.000000|0|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4de9tkai/observability_degraded.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "degraded",
+    "sample_count": 10,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": false,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [
+      "sample_count_below_minimum"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpww1hmz_i/observability_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpww1hmz_i/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "input_to_render_p90_above_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|failed|30|620.000000|450.000000|0|input_to_render_p90_above_threshold",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpww1hmz_i/observability_failed.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "failed",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 620.0,
+    "input_to_render_p95_ms": 680.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": false,
+    "input_to_render_p90_margin_ms": -170.0,
+    "contract_complete": false,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "input_to_render_p90_above_threshold"
+    ],
+    "strict_fail_count": 1,
+    "strict_fail_reasons": [
+      "input_to_render_p90_above_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdjkuocww/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 1
+  },
+  "failed_in_window": 1,
+  "failed_rate_pct": 50.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 1,
+  "p90_threshold_violation_rate_pct": 50.0,
+  "first_failed_run_at": "2026-02-23T13:02:00+00:00",
+  "last_failed_run_at": "2026-02-23T13:02:00+00:00",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "2026-02-23T13:02:00+00:00",
+  "last_p90_threshold_violation_run_at": "2026-02-23T13:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T13:02:00+00:00",
+    "heartbeat_id": "2026-02-23T13:02:00+00:00|failed|2",
+    "status": "failed",
+    "line_no": 2,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 620.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": false,
+    "input_to_render_p90_margin_ms": -170.0
+  },
+  "failed_streak_latest": 1,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": -170.0,
+  "p90_margin_max_ms": 40.0,
+  "latest_p90_margin_ms": -170.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": false,
+    "max_failed_rate_ok": false,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": false,
+    "max_p90_threshold_violation_rate_ok": false,
+    "latest_not_failed_ok": false,
+    "latest_p90_within_threshold_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_failed_exceeded",
+    "max_failed_rate_exceeded",
+    "max_p90_threshold_violations_exceeded",
+    "max_p90_threshold_violation_rate_exceeded",
+    "latest_status_failed",
+    "latest_p90_threshold_violation"
+  ],
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:33+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp3almxpz2/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 0,
+  "p90_threshold_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "",
+  "last_p90_threshold_violation_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T13:03:00+00:00",
+    "heartbeat_id": "2026-02-23T13:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 418.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 32.0
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": 32.0,
+  "p90_margin_max_ms": 60.0,
+  "latest_p90_margin_ms": 32.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": true,
+    "max_p90_threshold_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_p90_within_threshold_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}.......
+----------------------------------------------------------------------
+Ran 11 tests in 0.010s
+
+OK
+
+{"error": "window_last must be >= 1"}
+just citizen-test-release-trace-digest
+node --test tests/test_report_citizen_release_trace_digest.js
+TAP version 13
+# Subtest: release-trace digest passes strict complete when release hardening is fresh and ready
+ok 1 - release-trace digest passes strict complete when release hardening is fresh and ready
+  ---
+  duration_ms: 36.335667
+  ...
+# Subtest: release-trace digest degrades on stale release and strict-complete fails
+ok 2 - release-trace digest degrades on stale release and strict-complete fails
+  ---
+  duration_ms: 35.871166
+  ...
+# Subtest: release-trace digest fails strict when release hardening is not ready
+ok 3 - release-trace digest fails strict when release hardening is not ready
+  ---
+  duration_ms: 31.8365
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 148.449958
+just citizen-test-release-trace-heartbeat
+python3 -m unittest tests/test_report_citizen_release_trace_digest_heartbeat.py tests/test_report_citizen_release_trace_digest_heartbeat_window.py tests/test_report_citizen_release_trace_digest_heartbeat_compaction.py tests/test_report_citizen_release_trace_digest_heartbeat_compaction_window.py
+....{
+  "generated_at": "2026-02-23T15:17:34+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo6q26qfi/release_trace_digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo6q26qfi/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T14:00:00+00:00",
+    "heartbeat_id": "2026-02-23T14:00:00+00:00|ok|2026-02-23T13:55:00+00:00|5.000000|360.000000|1|1|0|0|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo6q26qfi/release_trace_digest_ok.json",
+    "digest_generated_at": "2026-02-23T14:00:00+00:00",
+    "release_generated_at": "2026-02-23T13:55:00+00:00",
+    "status": "ok",
+    "release_age_minutes": 5.0,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": true,
+    "stale_detected": false,
+    "release_ready": true,
+    "release_total_fail": 0,
+    "release_failed_ids_total": 0,
+    "parity_ok_assets": 9,
+    "parity_total_assets": 9,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:34+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo6q26qfi/release_trace_digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo6q26qfi/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T14:00:00+00:00",
+    "heartbeat_id": "2026-02-23T14:00:00+00:00|ok|2026-02-23T13:55:00+00:00|5.000000|360.000000|1|1|0|0|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo6q26qfi/release_trace_digest_ok.json",
+    "digest_generated_at": "2026-02-23T14:00:00+00:00",
+    "release_generated_at": "2026-02-23T13:55:00+00:00",
+    "status": "ok",
+    "release_age_minutes": 5.0,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": true,
+    "stale_detected": false,
+    "release_ready": true,
+    "release_total_fail": 0,
+    "release_failed_ids_total": 0,
+    "parity_ok_assets": 9,
+    "parity_total_assets": 9,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:34+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp82se6mot/release_trace_digest_stale.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp82se6mot/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T14:00:00+00:00",
+    "heartbeat_id": "2026-02-23T14:00:00+00:00|degraded|2026-02-23T13:55:00+00:00|900.000000|360.000000|0|1|0|1|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp82se6mot/release_trace_digest_stale.json",
+    "digest_generated_at": "2026-02-23T14:00:00+00:00",
+    "release_generated_at": "2026-02-23T13:55:00+00:00",
+    "status": "degraded",
+    "release_age_minutes": 900.0,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": false,
+    "stale_detected": true,
+    "release_ready": true,
+    "release_total_fail": 0,
+    "release_failed_ids_total": 0,
+    "parity_ok_assets": 9,
+    "parity_total_assets": 9,
+    "contract_complete": false,
+    "degraded_reasons": [
+      "release_trace_stale"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:34+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpao1jb3hg/release_trace_digest_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpao1jb3hg/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "release_not_ready",
+    "release_failures_present"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T14:00:00+00:00",
+    "heartbeat_id": "2026-02-23T14:00:00+00:00|failed|2026-02-23T13:55:00+00:00|5.000000|360.000000|1|0|1|0|release_not_ready,release_failures_present",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpao1jb3hg/release_trace_digest_failed.json",
+    "digest_generated_at": "2026-02-23T14:00:00+00:00",
+    "release_generated_at": "2026-02-23T13:55:00+00:00",
+    "status": "failed",
+    "release_age_minutes": 5.0,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": true,
+    "stale_detected": false,
+    "release_ready": false,
+    "release_total_fail": 1,
+    "release_failed_ids_total": 1,
+    "parity_ok_assets": 8,
+    "parity_total_assets": 9,
+    "contract_complete": false,
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "release_not_ready",
+      "release_failures_present"
+    ],
+    "strict_fail_count": 2,
+    "strict_fail_reasons": [
+      "release_not_ready",
+      "release_failures_present"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:34+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpmtiuac3s/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_stale": 0,
+    "max_stale_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 1,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 1,
+  "degraded_rate_pct": 50.0,
+  "stale_in_window": 1,
+  "stale_rate_pct": 50.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-23T14:02:00+00:00",
+  "last_degraded_run_at": "2026-02-23T14:02:00+00:00",
+  "first_stale_run_at": "2026-02-23T14:02:00+00:00",
+  "last_stale_run_at": "2026-02-23T14:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T14:02:00+00:00",
+    "heartbeat_id": "2026-02-23T14:02:00+00:00|degraded|2",
+    "status": "degraded",
+    "line_no": 2,
+    "malformed_line": false,
+    "release_generated_at": "2026-02-23T13:55:00+00:00",
+    "release_age_minutes": 900.0,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": false,
+    "stale_detected": true,
+    "release_ready": true,
+    "release_total_fail": 0
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 1,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": false,
+    "max_degraded_rate_ok": false,
+    "max_stale_ok": false,
+    "max_stale_rate_ok": false,
+    "latest_not_failed_ok": true,
+    "latest_freshness_within_sla_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_degraded_exceeded",
+    "max_degraded_rate_exceeded",
+    "max_stale_exceeded",
+    "max_stale_rate_exceeded",
+    "latest_release_trace_stale"
+  ],
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:34+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp35_cli3k/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_stale": 0,
+    "max_stale_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "stale_in_window": 0,
+  "stale_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_stale_run_at": "",
+  "last_stale_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T14:03:00+00:00",
+    "heartbeat_id": "2026-02-23T14:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "release_generated_at": "2026-02-23T13:55:00+00:00",
+    "release_age_minutes": 30.0,
+    "max_age_minutes": 360.0,
+    "freshness_within_sla": true,
+    "stale_detected": false,
+    "release_ready": true,
+    "release_total_fail": 0
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_stale_ok": true,
+    "max_stale_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_freshness_within_sla_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}.......
+----------------------------------------------------------------------
+Ran 11 tests in 0.017s
+
+OK
+
+{"error": "window_last must be >= 1"}
+just citizen-test-evidence-trust-panel
+node --test tests/test_citizen_evidence_trust_panel.js tests/test_citizen_evidence_trust_panel_ui_contract.js
+TAP version 13
+# Subtest: evidence trust panel computes freshness, trust level, and drilldown metadata
+ok 1 - evidence trust panel computes freshness, trust level, and drilldown metadata
+  ---
+  duration_ms: 0.927125
+  ...
+# Subtest: evidence trust panel handles missing dates and links deterministically
+ok 2 - evidence trust panel handles missing dates and links deterministically
+  ---
+  duration_ms: 0.122333
+  ...
+# Subtest: citizen UI loads evidence trust panel module
+ok 3 - citizen UI loads evidence trust panel module
+  ---
+  duration_ms: 1.789458
+  ...
+# Subtest: citizen UI renders evidence trust panel markers in party cards
+ok 4 - citizen UI renders evidence trust panel markers in party cards
+  ---
+  duration_ms: 0.694334
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 50.463833
+just citizen-test-cross-method-stability
+node --test tests/test_citizen_cross_method_stability.js tests/test_citizen_cross_method_stability_ui_contract.js
+TAP version 13
+# Subtest: cross-method stability reports stable on aligned comparable stances
+ok 1 - cross-method stability reports stable on aligned comparable stances
+  ---
+  duration_ms: 0.916917
+  ...
+# Subtest: cross-method stability reports uncertain when declared signal is mostly unknown
+ok 2 - cross-method stability reports uncertain when declared signal is mostly unknown
+  ---
+  duration_ms: 0.149292
+  ...
+# Subtest: cross-method stability reports unstable on high votes-vs-declared mismatch
+ok 3 - cross-method stability reports unstable on high votes-vs-declared mismatch
+  ---
+  duration_ms: 0.119792
+  ...
+# Subtest: citizen UI loads cross-method stability module
+ok 4 - citizen UI loads cross-method stability module
+  ---
+  duration_ms: 1.262375
+  ...
+# Subtest: citizen coherence view includes cross-method stability contract markers
+ok 5 - citizen coherence view includes cross-method stability contract markers
+  ---
+  duration_ms: 0.649041
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 51.950125
+just citizen-test-coherence-drilldown
+node --test tests/test_citizen_coherence_drilldown_ui_contract.js tests/test_explorer_temas_coherence_drilldown_url_contract.js
+TAP version 13
+# Subtest: citizen UI defines coherence drilldown link builders
+ok 1 - citizen UI defines coherence drilldown link builders
+  ---
+  duration_ms: 2.10875
+  ...
+# Subtest: coherence cards expose strict drilldown markers for mismatch trace links
+ok 2 - coherence cards expose strict drilldown markers for mismatch trace links
+  ---
+  duration_ms: 0.894916
+  ...
+# Subtest: explorer-temas accepts citizen coherence URL params
+ok 3 - explorer-temas accepts citizen coherence URL params
+  ---
+  duration_ms: 2.36425
+  ...
+# Subtest: explorer-temas forwards party filter to coherence APIs
+ok 4 - explorer-temas forwards party filter to coherence APIs
+  ---
+  duration_ms: 0.506625
+  ...
+# Subtest: explorer-temas auto-opens coherence evidence mode from URL intent
+ok 5 - explorer-temas auto-opens coherence evidence mode from URL intent
+  ---
+  duration_ms: 0.734958
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53.289333
+python3 -m unittest tests/test_graph_ui_server_coherence.py
+....
+----------------------------------------------------------------------
+Ran 4 tests in 2.341s
+
+OK
+just citizen-test-coherence-drilldown-outcomes
+python3 -m unittest tests/test_report_citizen_coherence_drilldown_outcomes.py tests/test_report_citizen_coherence_drilldown_outcomes_heartbeat.py tests/test_report_citizen_coherence_drilldown_outcomes_heartbeat_window.py
+...{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp52mr2h0w/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0,
+    "click_sessions_total": 0,
+    "replay_success_sessions_total": 0,
+    "replay_failure_sessions_total": 0
+  },
+  "metrics": {
+    "drilldown_click_events_total": 0,
+    "replay_attempt_events_total": 0,
+    "replay_success_events_total": 0,
+    "replay_failure_events_total": 0,
+    "contract_complete_click_events_total": 0,
+    "replay_success_rate": null,
+    "replay_failure_rate": null,
+    "contract_complete_click_rate": null
+  },
+  "thresholds": {
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15
+  },
+  "checks": {
+    "telemetry_available": false,
+    "drilldown_click_events_meet_minimum": false,
+    "replay_attempt_events_meet_minimum": false,
+    "replay_success_rate_meets_minimum": null,
+    "contract_complete_click_rate_meets_minimum": null,
+    "replay_failure_rate_within_threshold": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "drilldown_click_events_below_minimum",
+    "replay_attempt_events_below_minimum",
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "by_bucket": []
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 22,
+    "recognized_events_total": 20,
+    "ignored_events_total": 1,
+    "parse_errors": 1,
+    "sessions_total": 5,
+    "click_sessions_total": 5,
+    "replay_success_sessions_total": 5,
+    "replay_failure_sessions_total": 1
+  },
+  "metrics": {
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 9,
+    "replay_failure_events_total": 1,
+    "contract_complete_click_events_total": 9,
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9
+  },
+  "thresholds": {
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15
+  },
+  "checks": {
+    "telemetry_available": true,
+    "drilldown_click_events_meet_minimum": true,
+    "replay_attempt_events_meet_minimum": true,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": true,
+    "replay_failure_rate_within_threshold": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_bucket": [
+    {
+      "bucket": "coherent",
+      "click_events_total": 5
+    },
+    {
+      "bucket": "incoherent",
+      "click_events_total": 5
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 22,
+    "recognized_events_total": 20,
+    "ignored_events_total": 1,
+    "parse_errors": 1,
+    "sessions_total": 5,
+    "click_sessions_total": 5,
+    "replay_success_sessions_total": 5,
+    "replay_failure_sessions_total": 1
+  },
+  "metrics": {
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 9,
+    "replay_failure_events_total": 1,
+    "contract_complete_click_events_total": 9,
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9
+  },
+  "thresholds": {
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.95,
+    "max_replay_failure_rate": 0.15
+  },
+  "checks": {
+    "telemetry_available": true,
+    "drilldown_click_events_meet_minimum": true,
+    "replay_attempt_events_meet_minimum": true,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": false,
+    "replay_failure_rate_within_threshold": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "contract_complete_click_rate_below_threshold"
+  ],
+  "by_bucket": [
+    {
+      "bucket": "coherent",
+      "click_events_total": 5
+    },
+    {
+      "bucket": "incoherent",
+      "click_events_total": 5
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyywih596/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyywih596/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|ok|2026-02-23T17:00:00+00:00|10|10|9|1|9|0.900000|0.100000|0.900000|0.850000|0.900000|0.150000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyywih596/digest_ok.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "ok",
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 9,
+    "replay_failure_events_total": 1,
+    "contract_complete_click_events_total": 9,
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9,
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": true,
+    "replay_failure_rate_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyywih596/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyywih596/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|ok|2026-02-23T17:00:00+00:00|10|10|9|1|9|0.900000|0.100000|0.900000|0.850000|0.900000|0.150000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpyywih596/digest_ok.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "ok",
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 9,
+    "replay_failure_events_total": 1,
+    "contract_complete_click_events_total": 9,
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9,
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": true,
+    "replay_failure_rate_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}....
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpfvxi18ig/digest_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpfvxi18ig/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|degraded|2026-02-23T17:00:00+00:00|10|10|9|1|7|0.900000|0.100000|0.700000|0.850000|0.900000|0.150000|0||contract_complete_click_rate_below_minimum",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpfvxi18ig/digest_degraded.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "degraded",
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 9,
+    "replay_failure_events_total": 1,
+    "contract_complete_click_events_total": 7,
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.7,
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": false,
+    "replay_failure_rate_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "degraded_reasons": [
+      "contract_complete_click_rate_below_minimum"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdwsq435f/digest_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdwsq435f/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "replay_success_rate_below_threshold",
+    "replay_failure_rate_above_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|failed|2026-02-23T17:00:00+00:00|10|10|7|3|9|0.700000|0.300000|0.900000|0.850000|0.900000|0.150000|0|replay_success_rate_below_threshold,replay_failure_rate_above_threshold|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdwsq435f/digest_failed.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "failed",
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 7,
+    "replay_failure_events_total": 3,
+    "contract_complete_click_events_total": 9,
+    "replay_success_rate": 0.7,
+    "replay_failure_rate": 0.3,
+    "contract_complete_click_rate": 0.9,
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15,
+    "replay_success_rate_meets_minimum": false,
+    "contract_complete_click_rate_meets_minimum": true,
+    "replay_failure_rate_within_threshold": false,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "replay_success_rate_below_threshold",
+      "replay_failure_rate_above_threshold"
+    ],
+    "strict_fail_count": 2,
+    "strict_fail_reasons": [
+      "replay_success_rate_below_threshold",
+      "replay_failure_rate_above_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpj1qymizj/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_replay_success_rate_violations": 0,
+    "max_replay_success_rate_violation_rate_pct": 0.0,
+    "max_contract_click_rate_violations": 0,
+    "max_contract_click_rate_violation_rate_pct": 0.0,
+    "max_replay_failure_rate_violations": 0,
+    "max_replay_failure_rate_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 1,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 1,
+  "degraded_rate_pct": 50.0,
+  "contract_incomplete_in_window": 1,
+  "contract_incomplete_rate_pct": 50.0,
+  "replay_success_rate_violations_in_window": 1,
+  "replay_success_rate_violation_rate_pct": 50.0,
+  "contract_click_rate_violations_in_window": 1,
+  "contract_click_rate_violation_rate_pct": 50.0,
+  "replay_failure_rate_violations_in_window": 1,
+  "replay_failure_rate_violation_rate_pct": 50.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-23T17:02:00+00:00",
+  "last_degraded_run_at": "2026-02-23T17:02:00+00:00",
+  "first_contract_incomplete_run_at": "2026-02-23T17:02:00+00:00",
+  "last_contract_incomplete_run_at": "2026-02-23T17:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T17:02:00+00:00",
+    "heartbeat_id": "2026-02-23T17:02:00+00:00|degraded|2",
+    "status": "degraded",
+    "line_no": 2,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T17:02:00+00:00",
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9,
+    "contract_complete": false,
+    "replay_success_rate_meets_minimum": false,
+    "contract_complete_click_rate_meets_minimum": false,
+    "replay_failure_rate_within_threshold": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 1,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": false,
+    "max_degraded_rate_ok": false,
+    "max_contract_incomplete_ok": false,
+    "max_contract_incomplete_rate_ok": false,
+    "max_replay_success_rate_violations_ok": false,
+    "max_replay_success_rate_violation_rate_ok": false,
+    "max_contract_click_rate_violations_ok": false,
+    "max_contract_click_rate_violation_rate_ok": false,
+    "max_replay_failure_rate_violations_ok": false,
+    "max_replay_failure_rate_violation_rate_ok": false,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": false,
+    "latest_thresholds_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_degraded_exceeded",
+    "max_degraded_rate_exceeded",
+    "max_contract_incomplete_exceeded",
+    "max_contract_incomplete_rate_exceeded",
+    "max_replay_success_rate_violations_exceeded",
+    "max_replay_success_rate_violation_rate_exceeded",
+    "max_contract_click_rate_violations_exceeded",
+    "max_contract_click_rate_violation_rate_exceeded",
+    "max_replay_failure_rate_violations_exceeded",
+    "max_replay_failure_rate_violation_rate_exceeded",
+    "latest_contract_incomplete",
+    "latest_threshold_violation"
+  ],
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:36+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmphgmhhtu4/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_replay_success_rate_violations": 0,
+    "max_replay_success_rate_violation_rate_pct": 0.0,
+    "max_contract_click_rate_violations": 0,
+    "max_contract_click_rate_violation_rate_pct": 0.0,
+    "max_replay_failure_rate_violations": 0,
+    "max_replay_failure_rate_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "contract_incomplete_in_window": 0,
+  "contract_incomplete_rate_pct": 0.0,
+  "replay_success_rate_violations_in_window": 0,
+  "replay_success_rate_violation_rate_pct": 0.0,
+  "contract_click_rate_violations_in_window": 0,
+  "contract_click_rate_violation_rate_pct": 0.0,
+  "replay_failure_rate_violations_in_window": 0,
+  "replay_failure_rate_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_contract_incomplete_run_at": "",
+  "last_contract_incomplete_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T17:03:00+00:00",
+    "heartbeat_id": "2026-02-23T17:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T17:03:00+00:00",
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9,
+    "contract_complete": true,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": true,
+    "replay_failure_rate_within_threshold": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_contract_incomplete_ok": true,
+    "max_contract_incomplete_rate_ok": true,
+    "max_replay_success_rate_violations_ok": true,
+    "max_replay_success_rate_violation_rate_ok": true,
+    "max_contract_click_rate_violations_ok": true,
+    "max_contract_click_rate_violation_rate_ok": true,
+    "max_replay_failure_rate_violations_ok": true,
+    "max_replay_failure_rate_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": true,
+    "latest_thresholds_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}..
+----------------------------------------------------------------------
+Ran 9 tests in 0.010s
+
+OK
+
+{"error": "window_last must be >= 1"}
+just citizen-test-mobile-performance
+node --test tests/test_citizen_mobile_performance_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile interaction latency markers
+ok 1 - citizen UI defines mobile interaction latency markers
+  ---
+  duration_ms: 1.495167
+  ...
+# Subtest: citizen UI includes mobile-friendly rendering and reduced-motion guards
+ok 2 - citizen UI includes mobile-friendly rendering and reduced-motion guards
+  ---
+  duration_ms: 0.38425
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.703041
+python3 -m unittest tests/test_report_citizen_mobile_performance_budget.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdrh1s4si/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdrh1s4si/a.js",
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdrh1s4si/b.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdrh1s4si/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 379,
+    "ui_assets_total_bytes": 36,
+    "snapshot_bytes": 12,
+    "ui_assets_count": 2,
+    "interaction_markers_missing": []
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 1000,
+    "max_ui_assets_total_bytes": 1000,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": true,
+    "ui_assets_total_within_budget": true,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": true
+  },
+  "failure_reasons": [],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdrh1s4si/a.js",
+      "bytes": 18
+    },
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdrh1s4si/b.js",
+      "bytes": 18
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "failed",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdyqe_9sx/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdyqe_9sx/a.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdyqe_9sx/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 13,
+    "ui_assets_total_bytes": 401,
+    "snapshot_bytes": 3,
+    "ui_assets_count": 1,
+    "interaction_markers_missing": [
+      "SEARCH_INPUT_DEBOUNCE_MS",
+      "RENDER_COMPARE_SCHEDULE",
+      "scheduleRenderCompare",
+      "MOBILE_LATENCY_OBS_VERSION",
+      "markInputLatencySampleStart",
+      "commitInputLatencySample",
+      "addEventListener(\"input\", onConcernSearchInputRaw)",
+      "addEventListener(\"input\", onTopicSearchInputRaw)"
+    ]
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 10,
+    "max_ui_assets_total_bytes": 100,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": false,
+    "ui_assets_total_within_budget": false,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": false
+  },
+  "failure_reasons": [
+    "ui_html_over_budget",
+    "ui_assets_total_over_budget",
+    "interaction_markers_missing"
+  ],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdyqe_9sx/a.js",
+      "bytes": 401
+    }
+  ]
+}
+just citizen-test-mobile-observability
+node --test tests/test_citizen_mobile_observability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile latency observability markers
+ok 1 - citizen UI defines mobile latency observability markers
+  ---
+  duration_ms: 1.728625
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44.738291
+python3 -m unittest tests/test_report_citizen_mobile_observability.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "telemetry_json_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpn5qx7viw/summary.json",
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [
+    "telemetry_json"
+  ],
+  "telemetry": {
+    "sample_count": null,
+    "events_total": null,
+    "parse_errors": null,
+    "source_breakdown": {}
+  },
+  "metrics": {
+    "input_to_render_p50_ms": null,
+    "input_to_render_p90_ms": null,
+    "input_to_render_p95_ms": null
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 180.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": false,
+    "sample_count_meets_minimum": null,
+    "input_to_render_p50_within_threshold": null,
+    "input_to_render_p90_within_threshold": null,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "input_to_render_p50_ms",
+    "input_to_render_p90_ms",
+    "input_to_render_p95_ms"
+  ],
+  "degraded_reasons": [
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmptszo8cfq/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 148.5,
+    "input_to_render_p90_ms": 284.0,
+    "input_to_render_p95_ms": 322.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 200.0,
+    "max_input_to_render_p90_ms": 330.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": true,
+    "input_to_render_p90_within_threshold": true,
+    "contract_complete": true
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpx7f3zo_1/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 175.0,
+    "input_to_render_p90_ms": 512.0,
+    "input_to_render_p95_ms": 626.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 150.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": false,
+    "input_to_render_p90_within_threshold": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "input_to_render_p50_above_threshold",
+    "input_to_render_p90_above_threshold"
+  ],
+  "status": "failed"
+}
+just citizen-test-mobile-observability-heartbeat
+python3 -m unittest tests/test_report_citizen_mobile_observability_heartbeat.py tests/test_report_citizen_mobile_observability_heartbeat_window.py tests/test_report_citizen_mobile_observability_heartbeat_compaction.py tests/test_report_citizen_mobile_observability_heartbeat_compaction_window.py
+....{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpd0bk16os/observability_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpd0bk16os/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|ok|30|420.000000|450.000000|1|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpd0bk16os/observability_ok.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpd0bk16os/observability_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpd0bk16os/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|ok|30|420.000000|450.000000|1|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpd0bk16os/observability_ok.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpv1p0p44_/observability_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpv1p0p44_/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|degraded|10|420.000000|450.000000|0|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpv1p0p44_/observability_degraded.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "degraded",
+    "sample_count": 10,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": false,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [
+      "sample_count_below_minimum"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2kr7v1o3/observability_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2kr7v1o3/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "input_to_render_p90_above_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|failed|30|620.000000|450.000000|0|input_to_render_p90_above_threshold",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2kr7v1o3/observability_failed.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "failed",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 620.0,
+    "input_to_render_p95_ms": 680.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": false,
+    "input_to_render_p90_margin_ms": -170.0,
+    "contract_complete": false,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "input_to_render_p90_above_threshold"
+    ],
+    "strict_fail_count": 1,
+    "strict_fail_reasons": [
+      "input_to_render_p90_above_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplh00zy0g/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 1
+  },
+  "failed_in_window": 1,
+  "failed_rate_pct": 50.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 1,
+  "p90_threshold_violation_rate_pct": 50.0,
+  "first_failed_run_at": "2026-02-23T13:02:00+00:00",
+  "last_failed_run_at": "2026-02-23T13:02:00+00:00",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "2026-02-23T13:02:00+00:00",
+  "last_p90_threshold_violation_run_at": "2026-02-23T13:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T13:02:00+00:00",
+    "heartbeat_id": "2026-02-23T13:02:00+00:00|failed|2",
+    "status": "failed",
+    "line_no": 2,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 620.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": false,
+    "input_to_render_p90_margin_ms": -170.0
+  },
+  "failed_streak_latest": 1,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": -170.0,
+  "p90_margin_max_ms": 40.0,
+  "latest_p90_margin_ms": -170.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": false,
+    "max_failed_rate_ok": false,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": false,
+    "max_p90_threshold_violation_rate_ok": false,
+    "latest_not_failed_ok": false,
+    "latest_p90_within_threshold_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_failed_exceeded",
+    "max_failed_rate_exceeded",
+    "max_p90_threshold_violations_exceeded",
+    "max_p90_threshold_violation_rate_exceeded",
+    "latest_status_failed",
+    "latest_p90_threshold_violation"
+  ],
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp3ep_bbg3/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 0,
+  "p90_threshold_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "",
+  "last_p90_threshold_violation_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T13:03:00+00:00",
+    "heartbeat_id": "2026-02-23T13:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 418.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 32.0
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": 32.0,
+  "p90_margin_max_ms": 60.0,
+  "latest_p90_margin_ms": 32.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": true,
+    "max_p90_threshold_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_p90_within_threshold_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}.......
+----------------------------------------------------------------------
+Ran 11 tests in 0.014s
+
+OK
+
+{"error": "window_last must be >= 1"}
+just citizen-test-first-answer-accelerator
+node --test tests/test_citizen_first_answer_accelerator.js tests/test_citizen_first_answer_ui_contract.js
+TAP version 13
+# Subtest: first-answer accelerator ranks concerns/topics and preserves evidence links
+ok 1 - first-answer accelerator ranks concerns/topics and preserves evidence links
+  ---
+  duration_ms: 1.193084
+  ...
+# Subtest: first-answer accelerator uses deterministic fallback when concern ranking is empty
+ok 2 - first-answer accelerator uses deterministic fallback when concern ranking is empty
+  ---
+  duration_ms: 0.146709
+  ...
+# Subtest: first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+ok 3 - first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+  ---
+  duration_ms: 0.1495
+  ...
+# Subtest: citizen UI loads first-answer accelerator module
+ok 4 - citizen UI loads first-answer accelerator module
+  ---
+  duration_ms: 1.274625
+  ...
+# Subtest: citizen onboarding exposes first-answer CTA markers
+ok 5 - citizen onboarding exposes first-answer CTA markers
+  ---
+  duration_ms: 0.624166
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.473292
+just citizen-test-unknown-explainability
+node --test tests/test_citizen_unknown_explainability.js tests/test_citizen_unknown_explainability_ui_contract.js
+TAP version 13
+# Subtest: unknown explainability flags no_signal-dominant uncertainty
+ok 1 - unknown explainability flags no_signal-dominant uncertainty
+  ---
+  duration_ms: 0.818083
+  ...
+# Subtest: unknown explainability flags low-coverage unclear dominance
+ok 2 - unknown explainability flags low-coverage unclear dominance
+  ---
+  duration_ms: 0.089625
+  ...
+# Subtest: unknown explainability flags mixed uncertainty when no cause dominates
+ok 3 - unknown explainability flags mixed uncertainty when no cause dominates
+  ---
+  duration_ms: 0.063875
+  ...
+# Subtest: unknown explainability hides hint when no unknown cells exist
+ok 4 - unknown explainability hides hint when no unknown cells exist
+  ---
+  duration_ms: 0.062459
+  ...
+# Subtest: citizen UI loads unknown explainability module
+ok 5 - citizen UI loads unknown explainability module
+  ---
+  duration_ms: 1.1005
+  ...
+# Subtest: citizen UI includes unknown explainability contract markers
+ok 6 - citizen UI includes unknown explainability contract markers
+  ---
+  duration_ms: 0.469208
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.968625
+just citizen-test-concern-pack-quality
+node --test tests/test_citizen_concern_pack_quality_ui_contract.js
+TAP version 13
+# Subtest: citizen UI loads optional concern-pack quality artifact
+ok 1 - citizen UI loads optional concern-pack quality artifact
+  ---
+  duration_ms: 1.32425
+  ...
+# Subtest: citizen UI exposes weak-pack markers in tags and hints
+ok 2 - citizen UI exposes weak-pack markers in tags and hints
+  ---
+  duration_ms: 0.48775
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 45.195542
+python3 -m unittest tests/test_report_citizen_concern_pack_quality.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "ok",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp0yp_c7n3/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp0yp_c7n3/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": true
+  },
+  "failure_reasons": [],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "failed",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmppo5g4c5j/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmppo5g4c5j/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 0
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": false
+  },
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+just citizen-test-concern-pack-outcomes
+node --test tests/test_citizen_concern_pack_outcomes_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines concern-pack outcome telemetry markers
+ok 1 - citizen UI defines concern-pack outcome telemetry markers
+  ---
+  duration_ms: 1.361084
+  ...
+# Subtest: citizen UI records key concern-pack outcome events
+ok 2 - citizen UI records key concern-pack outcome events
+  ---
+  duration_ms: 0.553541
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 43.806625
+python3 -m unittest tests/test_report_citizen_concern_pack_outcomes.py
+...{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpze2_zubt/events.jsonl",
+    "concern_pack_quality_json": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpze2_zubt/quality.json"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0,
+    "selected_pack_ids_total": 0
+  },
+  "metrics": {
+    "pack_selected_events_total": 0,
+    "topic_open_with_pack_events_total": 0,
+    "weak_pack_selected_events_total": 0,
+    "weak_pack_followthrough_events_total": 0,
+    "unknown_pack_selected_events_total": 0,
+    "pack_selected_sessions_total": 0,
+    "weak_pack_selected_sessions_total": 0,
+    "weak_pack_followthrough_sessions_total": 0,
+    "weak_pack_followthrough_rate": null,
+    "unknown_pack_select_share": null
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": false,
+    "pack_select_events_meet_minimum": false,
+    "weak_pack_select_sessions_meet_minimum": false,
+    "weak_pack_followthrough_rate_meets_minimum": null,
+    "unknown_pack_select_share_within_threshold": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "pack_select_events_below_minimum",
+    "telemetry_missing",
+    "weak_pack_select_sessions_below_minimum"
+  ],
+  "failure_reasons": [],
+  "by_pack": []
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+  },
+  "telemetry": {
+    "events_total": 33,
+    "recognized_events_total": 32,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8,
+    "selected_pack_ids_total": 5
+  },
+  "metrics": {
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 7,
+    "weak_pack_selected_events_total": 11,
+    "weak_pack_followthrough_events_total": 7,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 8,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 7,
+    "weak_pack_followthrough_rate": 1.0,
+    "unknown_pack_select_share": 0.083333
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 8,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "mystery_pack",
+      "pack_selected_events": 2,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "sanidad",
+      "pack_selected_events": 5,
+      "topic_open_with_pack_events": 3,
+      "weak_pack_selected_events": 5,
+      "weak_pack_followthrough_events": 3
+    },
+    {
+      "pack_id": "transparencia",
+      "pack_selected_events": 3,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 4,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 4
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+  },
+  "telemetry": {
+    "events_total": 33,
+    "recognized_events_total": 32,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8,
+    "selected_pack_ids_total": 5
+  },
+  "metrics": {
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 7,
+    "weak_pack_selected_events_total": 11,
+    "weak_pack_followthrough_events_total": 7,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 8,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 7,
+    "weak_pack_followthrough_rate": 1.0,
+    "unknown_pack_select_share": 0.083333
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.05
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": false,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "unknown_pack_select_share_above_threshold"
+  ],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 8,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "mystery_pack",
+      "pack_selected_events": 2,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "sanidad",
+      "pack_selected_events": 5,
+      "topic_open_with_pack_events": 3,
+      "weak_pack_selected_events": 5,
+      "weak_pack_followthrough_events": 3
+    },
+    {
+      "pack_id": "transparencia",
+      "pack_selected_events": 3,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 4,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 4
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp3e_q1rv4/events.jsonl",
+    "concern_pack_quality_json": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp3e_q1rv4/quality.json"
+  },
+  "telemetry": {
+    "events_total": 20,
+    "recognized_events_total": 20,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 10,
+    "selected_pack_ids_total": 2
+  },
+  "metrics": {
+    "pack_selected_events_total": 20,
+    "topic_open_with_pack_events_total": 0,
+    "weak_pack_selected_events_total": 6,
+    "weak_pack_followthrough_events_total": 0,
+    "unknown_pack_selected_events_total": 0,
+    "pack_selected_sessions_total": 10,
+    "weak_pack_selected_sessions_total": 6,
+    "weak_pack_followthrough_sessions_total": 0,
+    "weak_pack_followthrough_rate": 0.0,
+    "unknown_pack_select_share": 0.0
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": false,
+    "unknown_pack_select_share_within_threshold": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "weak_pack_followthrough_below_threshold"
+  ],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 14,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 0
+    }
+  ]
+}.
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK
+
+just citizen-test-concern-pack-outcomes-heartbeat
+python3 -m unittest tests/test_report_citizen_concern_pack_outcomes_heartbeat.py tests/test_report_citizen_concern_pack_outcomes_heartbeat_window.py
+...{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg0m0mw_4/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg0m0mw_4/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|ok|2026-02-23T17:00:00+00:00|24|7|5|0.714286|0.083333|20|5|0.300000|0.200000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg0m0mw_4/digest_ok.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "ok",
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 14,
+    "weak_pack_selected_events_total": 7,
+    "weak_pack_followthrough_events_total": 5,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 12,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 5,
+    "weak_pack_followthrough_rate": 0.714286,
+    "unknown_pack_select_share": 0.083333,
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg0m0mw_4/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg0m0mw_4/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|ok|2026-02-23T17:00:00+00:00|24|7|5|0.714286|0.083333|20|5|0.300000|0.200000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpg0m0mw_4/digest_ok.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "ok",
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 14,
+    "weak_pack_selected_events_total": 7,
+    "weak_pack_followthrough_events_total": 5,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 12,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 5,
+    "weak_pack_followthrough_rate": 0.714286,
+    "unknown_pack_select_share": 0.083333,
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp5w4ght75/digest_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp5w4ght75/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|degraded|2026-02-23T17:00:00+00:00|24|7|5|0.714286|0.083333|20|5|0.300000|0.200000|0||telemetry_missing",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp5w4ght75/digest_degraded.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "degraded",
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 14,
+    "weak_pack_selected_events_total": 7,
+    "weak_pack_followthrough_events_total": 5,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 12,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 5,
+    "weak_pack_followthrough_rate": 0.714286,
+    "unknown_pack_select_share": 0.083333,
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2,
+    "weak_pack_followthrough_rate_meets_minimum": null,
+    "unknown_pack_select_share_within_threshold": null,
+    "telemetry_available": false,
+    "contract_complete": false,
+    "degraded_reasons": [
+      "telemetry_missing"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpeoevqhf_/digest_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpeoevqhf_/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "weak_pack_followthrough_below_threshold",
+    "unknown_pack_select_share_above_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T17:00:00+00:00",
+    "heartbeat_id": "2026-02-23T17:00:00+00:00|failed|2026-02-23T17:00:00+00:00|24|7|2|0.285714|0.250000|20|5|0.300000|0.200000|0|weak_pack_followthrough_below_threshold,unknown_pack_select_share_above_threshold|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpeoevqhf_/digest_failed.json",
+    "digest_generated_at": "2026-02-23T17:00:00+00:00",
+    "status": "failed",
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 14,
+    "weak_pack_selected_events_total": 7,
+    "weak_pack_followthrough_events_total": 2,
+    "unknown_pack_selected_events_total": 6,
+    "pack_selected_sessions_total": 12,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 2,
+    "weak_pack_followthrough_rate": 0.285714,
+    "unknown_pack_select_share": 0.25,
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2,
+    "weak_pack_followthrough_rate_meets_minimum": false,
+    "unknown_pack_select_share_within_threshold": false,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "weak_pack_followthrough_below_threshold",
+      "unknown_pack_select_share_above_threshold"
+    ],
+    "strict_fail_count": 2,
+    "strict_fail_reasons": [
+      "weak_pack_followthrough_below_threshold",
+      "unknown_pack_select_share_above_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_prpbx68/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_weak_pack_followthrough_violations": 0,
+    "max_weak_pack_followthrough_violation_rate_pct": 0.0,
+    "max_unknown_pack_select_share_violations": 0,
+    "max_unknown_pack_select_share_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 1,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 1,
+  "degraded_rate_pct": 50.0,
+  "contract_incomplete_in_window": 1,
+  "contract_incomplete_rate_pct": 50.0,
+  "weak_pack_followthrough_violations_in_window": 1,
+  "weak_pack_followthrough_violation_rate_pct": 50.0,
+  "unknown_pack_select_share_violations_in_window": 1,
+  "unknown_pack_select_share_violation_rate_pct": 50.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-23T17:02:00+00:00",
+  "last_degraded_run_at": "2026-02-23T17:02:00+00:00",
+  "first_contract_incomplete_run_at": "2026-02-23T17:02:00+00:00",
+  "last_contract_incomplete_run_at": "2026-02-23T17:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T17:02:00+00:00",
+    "heartbeat_id": "2026-02-23T17:02:00+00:00|degraded|2",
+    "status": "degraded",
+    "line_no": 2,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T17:02:00+00:00",
+    "weak_pack_followthrough_rate": 0.714286,
+    "unknown_pack_select_share": 0.083333,
+    "contract_complete": false,
+    "weak_pack_followthrough_rate_meets_minimum": false,
+    "unknown_pack_select_share_within_threshold": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 1,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": false,
+    "max_degraded_rate_ok": false,
+    "max_contract_incomplete_ok": false,
+    "max_contract_incomplete_rate_ok": false,
+    "max_weak_pack_followthrough_violations_ok": false,
+    "max_weak_pack_followthrough_violation_rate_ok": false,
+    "max_unknown_pack_select_share_violations_ok": false,
+    "max_unknown_pack_select_share_violation_rate_ok": false,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": false,
+    "latest_thresholds_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_degraded_exceeded",
+    "max_degraded_rate_exceeded",
+    "max_contract_incomplete_exceeded",
+    "max_contract_incomplete_rate_exceeded",
+    "max_weak_pack_followthrough_violations_exceeded",
+    "max_weak_pack_followthrough_violation_rate_exceeded",
+    "max_unknown_pack_select_share_violations_exceeded",
+    "max_unknown_pack_select_share_violation_rate_exceeded",
+    "latest_contract_incomplete",
+    "latest_threshold_violation"
+  ],
+  "status": "failed"
+}...
+----------------------------------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+
+{
+  "generated_at": "2026-02-23T15:17:37+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpqgmj1bx4/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_weak_pack_followthrough_violations": 0,
+    "max_weak_pack_followthrough_violation_rate_pct": 0.0,
+    "max_unknown_pack_select_share_violations": 0,
+    "max_unknown_pack_select_share_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "contract_incomplete_in_window": 0,
+  "contract_incomplete_rate_pct": 0.0,
+  "weak_pack_followthrough_violations_in_window": 0,
+  "weak_pack_followthrough_violation_rate_pct": 0.0,
+  "unknown_pack_select_share_violations_in_window": 0,
+  "unknown_pack_select_share_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_contract_incomplete_run_at": "",
+  "last_contract_incomplete_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T17:03:00+00:00",
+    "heartbeat_id": "2026-02-23T17:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T17:03:00+00:00",
+    "weak_pack_followthrough_rate": 0.714286,
+    "unknown_pack_select_share": 0.083333,
+    "contract_complete": true,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_contract_incomplete_ok": true,
+    "max_contract_incomplete_rate_ok": true,
+    "max_weak_pack_followthrough_violations_ok": true,
+    "max_weak_pack_followthrough_violation_rate_ok": true,
+    "max_unknown_pack_select_share_violations_ok": true,
+    "max_unknown_pack_select_share_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": true,
+    "latest_thresholds_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}
+{"error": "window_last must be >= 1"}
+just citizen-test-trust-action-nudges
+node --test tests/test_citizen_trust_action_nudges.js tests/test_citizen_trust_action_nudges_ui_contract.js
+TAP version 13
+# Subtest: trust-action nudge picks low-trust unknown candidate with evidence link
+ok 1 - trust-action nudge picks low-trust unknown candidate with evidence link
+  ---
+  duration_ms: 0.970666
+  ...
+# Subtest: trust-action nudge tie-breaks deterministically by party label
+ok 2 - trust-action nudge tie-breaks deterministically by party label
+  ---
+  duration_ms: 6.089041
+  ...
+# Subtest: trust-action nudge hides when no evidence links are available
+ok 3 - trust-action nudge hides when no evidence links are available
+  ---
+  duration_ms: 0.077959
+  ...
+# Subtest: citizen UI defines trust-action nudge telemetry markers
+ok 4 - citizen UI defines trust-action nudge telemetry markers
+  ---
+  duration_ms: 1.410333
+  ...
+# Subtest: citizen UI exposes next-evidence nudge markers and click wiring
+ok 5 - citizen UI exposes next-evidence nudge markers and click wiring
+  ---
+  duration_ms: 0.819083
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 52.845291
+python3 -m unittest tests/test_report_citizen_trust_action_nudges.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+OK
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpz31yz8fs/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0
+  },
+  "metrics": {
+    "nudge_shown_events_total": 0,
+    "nudge_clicked_events_total": 0,
+    "nudge_shown_sessions_total": 0,
+    "nudge_clicked_sessions_total": 0,
+    "nudge_clickthrough_session_rate": null,
+    "nudge_clickthrough_event_rate": null
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": false,
+    "nudge_shown_events_meet_minimum": false,
+    "nudge_shown_sessions_meet_minimum": false,
+    "nudge_clickthrough_meets_minimum": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "nudge_shown_events_below_minimum",
+    "nudge_shown_sessions_below_minimum",
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "by_source_view": []
+}
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 13,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8
+  },
+  "metrics": {
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 5,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 5,
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": true,
+    "nudge_shown_events_meet_minimum": true,
+    "nudge_shown_sessions_meet_minimum": true,
+    "nudge_clickthrough_meets_minimum": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_source_view": [
+    {
+      "source_view": "concern",
+      "nudge_shown_events": 3,
+      "nudge_clicked_events": 2,
+      "nudge_clickthrough_event_rate": 0.666667
+    },
+    {
+      "source_view": "topic",
+      "nudge_shown_events": 5,
+      "nudge_clicked_events": 3,
+      "nudge_clickthrough_event_rate": 0.6
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp5twv66v0/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 9,
+    "recognized_events_total": 9,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 8
+  },
+  "metrics": {
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 1,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 1,
+    "nudge_clickthrough_session_rate": 0.125,
+    "nudge_clickthrough_event_rate": 0.125
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": true,
+    "nudge_shown_events_meet_minimum": true,
+    "nudge_shown_sessions_meet_minimum": true,
+    "nudge_clickthrough_meets_minimum": false,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "nudge_clickthrough_below_threshold"
+  ],
+  "by_source_view": [
+    {
+      "source_view": "concern",
+      "nudge_shown_events": 2,
+      "nudge_clicked_events": 0,
+      "nudge_clickthrough_event_rate": 0.0
+    },
+    {
+      "source_view": "topic",
+      "nudge_shown_events": 6,
+      "nudge_clicked_events": 1,
+      "nudge_clickthrough_event_rate": 0.166667
+    }
+  ]
+}
+just citizen-test-trust-action-nudges-heartbeat
+python3 -m unittest tests/test_report_citizen_trust_action_nudges_heartbeat.py tests/test_report_citizen_trust_action_nudges_heartbeat_window.py
+...{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpasmk0h0t/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpasmk0h0t/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T18:00:00+00:00",
+    "heartbeat_id": "2026-02-23T18:00:00+00:00|ok|2026-02-23T18:00:00+00:00|8|5|8|5|0.625000|0.625000|8|5|0.400000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpasmk0h0t/digest_ok.json",
+    "digest_generated_at": "2026-02-23T18:00:00+00:00",
+    "status": "ok",
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 5,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 5,
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625,
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4,
+    "nudge_clickthrough_meets_minimum": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpasmk0h0t/digest_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpasmk0h0t/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T18:00:00+00:00",
+    "heartbeat_id": "2026-02-23T18:00:00+00:00|ok|2026-02-23T18:00:00+00:00|8|5|8|5|0.625000|0.625000|8|5|0.400000|1||",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpasmk0h0t/digest_ok.json",
+    "digest_generated_at": "2026-02-23T18:00:00+00:00",
+    "status": "ok",
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 5,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 5,
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625,
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4,
+    "nudge_clickthrough_meets_minimum": true,
+    "telemetry_available": true,
+    "contract_complete": true,
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpxmqqk7lu/digest_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpxmqqk7lu/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T18:00:00+00:00",
+    "heartbeat_id": "2026-02-23T18:00:00+00:00|degraded|2026-02-23T18:00:00+00:00|8|5|8|5|0.625000|0.625000|8|5|0.400000|0||telemetry_missing",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpxmqqk7lu/digest_degraded.json",
+    "digest_generated_at": "2026-02-23T18:00:00+00:00",
+    "status": "degraded",
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 5,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 5,
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625,
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4,
+    "nudge_clickthrough_meets_minimum": null,
+    "telemetry_available": false,
+    "contract_complete": false,
+    "degraded_reasons": [
+      "telemetry_missing"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpljbofvgt/digest_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpljbofvgt/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "nudge_clickthrough_below_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T18:00:00+00:00",
+    "heartbeat_id": "2026-02-23T18:00:00+00:00|failed|2026-02-23T18:00:00+00:00|8|1|8|1|0.125000|0.125000|8|5|0.400000|0|nudge_clickthrough_below_threshold|",
+    "digest_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpljbofvgt/digest_failed.json",
+    "digest_generated_at": "2026-02-23T18:00:00+00:00",
+    "status": "failed",
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 1,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 1,
+    "nudge_clickthrough_session_rate": 0.125,
+    "nudge_clickthrough_event_rate": 0.125,
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4,
+    "nudge_clickthrough_meets_minimum": false,
+    "telemetry_available": true,
+    "contract_complete": false,
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "nudge_clickthrough_below_threshold"
+    ],
+    "strict_fail_count": 1,
+    "strict_fail_reasons": [
+      "nudge_clickthrough_below_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpox1ial6r/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_nudge_clickthrough_violations": 0,
+    "max_nudge_clickthrough_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 1,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 1,
+  "degraded_rate_pct": 50.0,
+  "contract_incomplete_in_window": 1,
+  "contract_incomplete_rate_pct": 50.0,
+  "nudge_clickthrough_violations_in_window": 1,
+  "nudge_clickthrough_violation_rate_pct": 50.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "2026-02-23T18:02:00+00:00",
+  "last_degraded_run_at": "2026-02-23T18:02:00+00:00",
+  "first_contract_incomplete_run_at": "2026-02-23T18:02:00+00:00",
+  "last_contract_incomplete_run_at": "2026-02-23T18:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T18:02:00+00:00",
+    "heartbeat_id": "2026-02-23T18:02:00+00:00|degraded|2",
+    "status": "degraded",
+    "line_no": 2,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T18:02:00+00:00",
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625,
+    "contract_complete": false,
+    "nudge_clickthrough_meets_minimum": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 1,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": false,
+    "max_degraded_rate_ok": false,
+    "max_contract_incomplete_ok": false,
+    "max_contract_incomplete_rate_ok": false,
+    "max_nudge_clickthrough_violations_ok": false,
+    "max_nudge_clickthrough_violation_rate_ok": false,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": false,
+    "latest_thresholds_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_degraded_exceeded",
+    "max_degraded_rate_exceeded",
+    "max_contract_incomplete_exceeded",
+    "max_contract_incomplete_rate_exceeded",
+    "max_nudge_clickthrough_violations_exceeded",
+    "max_nudge_clickthrough_violation_rate_exceeded",
+    "latest_contract_incomplete",
+    "latest_threshold_violation"
+  ],
+  "status": "failed"
+}...
+----------------------------------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+
+{
+  "generated_at": "2026-02-23T15:17:38+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpbkpt3vec/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_contract_incomplete": 0,
+    "max_contract_incomplete_rate_pct": 0.0,
+    "max_nudge_clickthrough_violations": 0,
+    "max_nudge_clickthrough_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "contract_incomplete_in_window": 0,
+  "contract_incomplete_rate_pct": 0.0,
+  "nudge_clickthrough_violations_in_window": 0,
+  "nudge_clickthrough_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_contract_incomplete_run_at": "",
+  "last_contract_incomplete_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T18:03:00+00:00",
+    "heartbeat_id": "2026-02-23T18:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "digest_generated_at": "2026-02-23T18:03:00+00:00",
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625,
+    "contract_complete": true,
+    "nudge_clickthrough_meets_minimum": true
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_contract_incomplete_ok": true,
+    "max_contract_incomplete_rate_ok": true,
+    "max_nudge_clickthrough_violations_ok": true,
+    "max_nudge_clickthrough_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_contract_complete_ok": true,
+    "latest_thresholds_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}
+{"error": "window_last must be >= 1"}

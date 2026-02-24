@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-02-22T22:30:22.570Z",
+  "strict": true,
+  "input_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-55/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T223021Z.json",
+  "digest": {
+    "generated_at": "2026-02-22T22:30:22.571Z",
+    "strict": true,
+    "input": {
+      "slo_json_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-55/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T223021Z.json",
+      "slo_generated_at": "2026-02-22T22:30:22.529Z"
+    },
+    "status": "ok",
+    "risk_level": "green",
+    "risk_reasons": [],
+    "strict_fail_reasons": [],
+    "key_metrics": {
+      "entries_in_window": 9,
+      "regressions_in_window": 0,
+      "regression_rate_pct": 0,
+      "green_streak_latest": 9,
+      "latest_entry_clean": true
+    },
+    "key_checks": {
+      "max_regressions_ok": true,
+      "max_regression_rate_ok": true,
+      "min_green_streak_ok": true,
+      "latest_entry_clean_ok": true
+    },
+    "thresholds": {
+      "max_regressions": 0,
+      "max_regression_rate_pct": 0,
+      "min_green_streak": 1
+    },
+    "previous_window": {
+      "available": false,
+      "regressions_in_window": 0,
+      "regression_rate_pct": 0,
+      "green_streak_latest": 0
+    },
+    "deltas": {
+      "regressions_in_window_delta": null,
+      "regression_rate_pct_delta": null,
+      "green_streak_latest_delta": null
+    }
+  },
+  "validation_errors": []
+}

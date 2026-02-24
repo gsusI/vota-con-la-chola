@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-02-24T01:53:16+00:00",
+  "roles": [
+    "enforce"
+  ],
+  "limit": 0,
+  "counts": {
+    "responsibilities_scanned_total": 4,
+    "observations_scanned_total": 7,
+    "responsibilities_with_lineage_match_total": 4,
+    "responsibilities_without_lineage_match_total": 0,
+    "observation_links_total": 7,
+    "source_record_pk_resolved_total": 7,
+    "source_record_pk_missing_total": 0,
+    "evidence_inserted": 7,
+    "evidence_updated": 0
+  },
+  "by_role": {
+    "enforce": 7
+  },
+  "by_delegate_norm": {
+    "es:boe-a-1994-8985": 2,
+    "es:boe-a-2004-18398": 2,
+    "es:boe-a-2015-11724": 2,
+    "es:boe-a-2000-15060": 1
+  },
+  "by_observed_norm": {
+    "es:boe-a-2015-11722": 2,
+    "es:boe-a-2003-23514": 1,
+    "es:boe-a-2003-23186": 1,
+    "es:boe-a-2015-11724": 1,
+    "es:boe-a-2015-3442": 1,
+    "es:boe-a-2000-15060": 1
+  },
+  "by_match_method": {
+    "shared_related_norm": 4,
+    "delegate_to_observed_direct": 1,
+    "direct_norm_match": 2
+  },
+  "samples": [
+    {
+      "responsibility_id": 6,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-1994-8985",
+      "observed_norm_id": "es:boe-a-2015-11722",
+      "anchor_norm_id": "es:boe-a-1990-6396",
+      "match_method": "shared_related_norm",
+      "observation_id": 1,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "responsibility_id": 6,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-1994-8985",
+      "observed_norm_id": "es:boe-a-2015-11722",
+      "anchor_norm_id": "es:boe-a-1990-6396",
+      "match_method": "shared_related_norm",
+      "observation_id": 2,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "responsibility_id": 9,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-2004-18398",
+      "observed_norm_id": "es:boe-a-2003-23514",
+      "anchor_norm_id": "es:boe-a-2003-23514",
+      "match_method": "delegate_to_observed_direct",
+      "observation_id": 3,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "responsibility_id": 9,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-2004-18398",
+      "observed_norm_id": "es:boe-a-2003-23186",
+      "anchor_norm_id": "es:boe-a-2003-23514",
+      "match_method": "shared_related_norm",
+      "observation_id": 4,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23186"
+    },
+    {
+      "responsibility_id": 12,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-2015-11724",
+      "observed_norm_id": "es:boe-a-2015-11724",
+      "anchor_norm_id": "es:boe-a-2015-11724",
+      "match_method": "direct_norm_match",
+      "observation_id": 5,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "responsibility_id": 12,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-2015-11724",
+      "observed_norm_id": "es:boe-a-2015-3442",
+      "anchor_norm_id": "es:boe-a-1992-6209",
+      "match_method": "shared_related_norm",
+      "observation_id": 7,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-3442"
+    },
+    {
+      "responsibility_id": 14,
+      "role": "enforce",
+      "delegate_norm_id": "es:boe-a-2000-15060",
+      "observed_norm_id": "es:boe-a-2000-15060",
+      "anchor_norm_id": "es:boe-a-2000-15060",
+      "match_method": "direct_norm_match",
+      "observation_id": 6,
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2000-15060"
+    }
+  ]
+}

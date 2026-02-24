@@ -1,0 +1,35 @@
+TAP version 13
+# Subtest: release hardening reporter passes strict mode on aligned source/published assets
+ok 1 - release hardening reporter passes strict mode on aligned source/published assets
+  ---
+  duration_ms: 38.30175
+  ...
+# Subtest: release hardening reporter fails strict mode on parity drift and exposes failed asset id
+not ok 2 - release hardening reporter fails strict mode on parity drift and exposes failed asset id
+  ---
+  duration_ms: 35.3785
+  location: '/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_citizen_release_hardening.js:100:1'
+  failureType: 'testCodeFailure'
+  error: 'Unterminated string in JSON at position 8192'
+  code: 'ERR_TEST_FAILURE'
+  name: 'SyntaxError'
+  stack: |-
+    JSON.parse (<anonymous>)
+    parseStdoutJson (/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_citizen_release_hardening.js:18:15)
+    TestContext.<anonymous> (/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_citizen_release_hardening.js:121:15)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 116.639875

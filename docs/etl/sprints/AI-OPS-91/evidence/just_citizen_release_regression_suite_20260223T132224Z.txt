@@ -1,0 +1,2170 @@
+just citizen-test-preset-codec
+node --test tests/test_citizen_preset_codec.js tests/test_citizen_preset_recovery_ui_contract.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 2.283916
+  ...
+# Subtest: readPresetFromHash follows fixture matrix contract
+ok 2 - readPresetFromHash follows fixture matrix contract
+  ---
+  duration_ms: 1.082958
+  ...
+# Subtest: buildAlignmentPresetShareUrl follows fixture roundtrip contract
+ok 3 - buildAlignmentPresetShareUrl follows fixture roundtrip contract
+  ---
+  duration_ms: 0.99975
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 4 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.097792
+  ...
+# Subtest: citizen UI exposes preset recovery banner actions
+ok 5 - citizen UI exposes preset recovery banner actions
+  ---
+  duration_ms: 1.458791
+  ...
+# Subtest: citizen UI normalizes canonical preset hash when needed
+ok 6 - citizen UI normalizes canonical preset hash when needed
+  ---
+  duration_ms: 2.122583
+  ...
+# Subtest: preset codec parity reporter passes strict mode on identical files
+ok 7 - preset codec parity reporter passes strict mode on identical files
+  ---
+  duration_ms: 114.424
+  ...
+# Subtest: preset codec parity reporter fails strict mode on mismatch and exposes first diff
+ok 8 - preset codec parity reporter fails strict mode on mismatch and exposes first diff
+  ---
+  duration_ms: 104.568334
+  ...
+# Subtest: preset codec sync-state reporter passes strict mode when already synchronized
+ok 9 - preset codec sync-state reporter passes strict mode when already synchronized
+  ---
+  duration_ms: 109.963084
+  ...
+# Subtest: preset codec sync-state reporter fails strict mode when published copy is stale
+ok 10 - preset codec sync-state reporter fails strict mode when published copy is stale
+  ---
+  duration_ms: 103.108666
+  ...
+# Subtest: preset contract bundle passes strict mode when all subcontracts pass
+ok 11 - preset contract bundle passes strict mode when all subcontracts pass
+  ---
+  duration_ms: 359.55175
+  ...
+# Subtest: preset contract bundle fails strict mode when published asset is stale
+ok 12 - preset contract bundle fails strict mode when published asset is stale
+  ---
+  duration_ms: 152.342625
+  ...
+# Subtest: preset contract bundle history reporter appends baseline without regression
+ok 13 - preset contract bundle history reporter appends baseline without regression
+  ---
+  duration_ms: 111.741375
+  ...
+# Subtest: preset contract bundle history reporter fails strict on regression
+ok 14 - preset contract bundle history reporter fails strict on regression
+  ---
+  duration_ms: 179.884709
+  ...
+# Subtest: history compaction reporter keeps incident entries and writes compacted JSONL
+ok 15 - history compaction reporter keeps incident entries and writes compacted JSONL
+  ---
+  duration_ms: 110.618708
+  ...
+# Subtest: history compaction reporter fails strict when compaction does not drop rows above threshold
+ok 16 - history compaction reporter fails strict when compaction does not drop rows above threshold
+  ---
+  duration_ms: 99.499791
+  ...
+# Subtest: history SLO reporter passes strict on clean streak with zero regressions
+ok 17 - history SLO reporter passes strict on clean streak with zero regressions
+  ---
+  duration_ms: 110.371125
+  ...
+# Subtest: history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+ok 18 - history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+  ---
+  duration_ms: 103.360209
+  ...
+# Subtest: history SLO reporter fails strict when regression and latest dirty break thresholds
+ok 19 - history SLO reporter fails strict when regression and latest dirty break thresholds
+  ---
+  duration_ms: 74.31625
+  ...
+# Subtest: SLO digest reporter emits compact ok digest in strict mode
+ok 20 - SLO digest reporter emits compact ok digest in strict mode
+  ---
+  duration_ms: 111.813792
+  ...
+# Subtest: SLO digest reporter fails strict mode when digest is failed
+ok 21 - SLO digest reporter fails strict mode when digest is failed
+  ---
+  duration_ms: 97.937167
+  ...
+# Subtest: SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 22 - SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 106.097666
+  ...
+# Subtest: SLO digest heartbeat reporter deduplicates identical heartbeat ids
+ok 23 - SLO digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 168.947958
+  ...
+# Subtest: SLO digest heartbeat reporter fails strict when status is failed but still appends row
+ok 24 - SLO digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 34.803583
+  ...
+# Subtest: heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+ok 25 - heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+  ---
+  duration_ms: 112.769625
+  ...
+# Subtest: heartbeat compaction reporter fails strict when no rows are dropped above threshold
+ok 26 - heartbeat compaction reporter fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 101.747833
+  ...
+# Subtest: heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+ok 27 - heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+  ---
+  duration_ms: 221.974834
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+ok 28 - heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+  ---
+  duration_ms: 70.598834
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+ok 29 - heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 58.884167
+  ...
+# Subtest: compaction-window digest reporter emits ok status in strict mode when parity is complete
+ok 30 - compaction-window digest reporter emits ok status in strict mode when parity is complete
+  ---
+  duration_ms: 108.104458
+  ...
+# Subtest: compaction-window digest reporter emits degraded status when non-incident rows are missing
+ok 31 - compaction-window digest reporter emits degraded status when non-incident rows are missing
+  ---
+  duration_ms: 105.488458
+  ...
+# Subtest: compaction-window digest reporter fails strict mode when parity report has strict failures
+ok 32 - compaction-window digest reporter fails strict mode when parity report has strict failures
+  ---
+  duration_ms: 74.699584
+  ...
+# Subtest: compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 33 - compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 104.250916
+  ...
+# Subtest: compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+ok 34 - compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 111.919959
+  ...
+# Subtest: compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+ok 35 - compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 76.950334
+  ...
+# Subtest: compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+ok 36 - compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+  ---
+  duration_ms: 108.08375
+  ...
+# Subtest: compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+ok 37 - compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 104.428
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+ok 38 - compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+  ---
+  duration_ms: 200.96225
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+ok 39 - compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+  ---
+  duration_ms: 75.0075
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+ok 40 - compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 58.760584
+  ...
+# Subtest: compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+ok 41 - compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+  ---
+  duration_ms: 108.558584
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+ok 42 - compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+  ---
+  duration_ms: 74.631875
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict on malformed entries
+ok 43 - compact-window digest heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 59.144667
+  ...
+# Subtest: heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+ok 44 - heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+  ---
+  duration_ms: 61.615833
+  ...
+# Subtest: heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+ok 45 - heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+  ---
+  duration_ms: 43.127625
+  ...
+# Subtest: heartbeat window reporter fails strict on malformed entries
+ok 46 - heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 40.012209
+  ...
+# Subtest: bundle history window reporter passes strict when window has no regressions
+ok 47 - bundle history window reporter passes strict when window has no regressions
+  ---
+  duration_ms: 63.066125
+  ...
+# Subtest: bundle history window reporter fails strict when window contains regressions
+ok 48 - bundle history window reporter fails strict when window contains regressions
+  ---
+  duration_ms: 48.616417
+  ...
+# Subtest: preset fixture reporter passes strict mode for canonical fixture
+ok 49 - preset fixture reporter passes strict mode for canonical fixture
+  ---
+  duration_ms: 65.787459
+  ...
+# Subtest: preset fixture reporter surfaces failed ids in strict drift run
+ok 50 - preset fixture reporter surfaces failed ids in strict drift run
+  ---
+  duration_ms: 47.106375
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 632.775792
+just citizen-test-tailwind-md3
+node --test tests/test_citizen_tailwind_md3_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes generated tailwind+md3 stylesheet and primitive class markers
+ok 1 - citizen UI includes generated tailwind+md3 stylesheet and primitive class markers
+  ---
+  duration_ms: 1.357208
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 42.532583
+python3 -m unittest tests/test_build_citizen_tailwind_md3_css.py tests/test_report_citizen_tailwind_md3_contract.py tests/test_graph_ui_server_citizen_assets.py
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.007s
+
+OK
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo87ldixp/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpo87ldixp/generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4ub4i5kz/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4ub4i5kz/generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "status": "drift",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4ub4i5kz/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4ub4i5kz/generated.css",
+  "would_change": true
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmph27wzwet/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmph27wzwet/tailwind_md3.generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "generated_at": "2026-02-23T13:22:25+00:00",
+  "status": "failed",
+  "paths": {
+    "tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmph27wzwet/tokens.json",
+    "generated_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmph27wzwet/tailwind_md3.generated.css",
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmph27wzwet/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 5723,
+    "token_colors_count": 15,
+    "token_spacing_count": 3,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": [
+      "./tailwind_md3.generated.css",
+      "md3-card",
+      "md3-chip",
+      "md3-button",
+      "md3-tab"
+    ],
+    "md3_card_markers": 0,
+    "md3_chip_markers": 0,
+    "md3_button_markers": 0,
+    "md3_tab_markers": 0
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000,
+    "min_md3_card_markers": 1,
+    "min_md3_chip_markers": 1,
+    "min_md3_button_markers": 1,
+    "min_md3_tab_markers": 1
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": false,
+    "md3_card_markers_meet_minimum": false,
+    "md3_chip_markers_meet_minimum": false,
+    "md3_button_markers_meet_minimum": false,
+    "md3_tab_markers_meet_minimum": false
+  },
+  "failure_reasons": [
+    "ui_html_markers_missing",
+    "md3_card_markers_below_minimum",
+    "md3_chip_markers_below_minimum",
+    "md3_button_markers_below_minimum",
+    "md3_tab_markers_below_minimum"
+  ]
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_n6bojrc/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_n6bojrc/tailwind_md3.generated.css",
+  "bytes": 5723,
+  "would_change": true
+}
+{
+  "generated_at": "2026-02-23T13:22:25+00:00",
+  "status": "ok",
+  "paths": {
+    "tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_n6bojrc/tokens.json",
+    "generated_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_n6bojrc/tailwind_md3.generated.css",
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_n6bojrc/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 5723,
+    "token_colors_count": 15,
+    "token_spacing_count": 3,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": [],
+    "md3_card_markers": 1,
+    "md3_chip_markers": 1,
+    "md3_button_markers": 1,
+    "md3_tab_markers": 1
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000,
+    "min_md3_card_markers": 1,
+    "min_md3_chip_markers": 1,
+    "min_md3_button_markers": 1,
+    "min_md3_tab_markers": 1
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": true,
+    "md3_card_markers_meet_minimum": true,
+    "md3_chip_markers_meet_minimum": true,
+    "md3_button_markers_meet_minimum": true,
+    "md3_tab_markers_meet_minimum": true
+  },
+  "failure_reasons": []
+}
+just citizen-test-accessibility-readability
+node --test tests/test_citizen_accessibility_readability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes skip link and main landmark focus target
+ok 1 - citizen UI includes skip link and main landmark focus target
+  ---
+  duration_ms: 1.354875
+  ...
+# Subtest: citizen UI includes accessibility/readability markers for status and sections
+ok 2 - citizen UI includes accessibility/readability markers for status and sections
+  ---
+  duration_ms: 0.627791
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 50.788125
+just citizen-test-explainability-copy
+node --test tests/test_citizen_explainability_copy_ui_contract.js
+TAP version 13
+# Subtest: citizen UI exposes explainability glossary with tooltip metadata
+ok 1 - citizen UI exposes explainability glossary with tooltip metadata
+  ---
+  duration_ms: 2.268125
+  ...
+# Subtest: citizen UI includes plain-language explainability copy hints
+ok 2 - citizen UI includes plain-language explainability copy hints
+  ---
+  duration_ms: 1.090417
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 50.834416
+python3 -m unittest tests/test_report_citizen_explainability_copy.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "status": "degraded",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcs4tir2l/citizen_degraded.html"
+  },
+  "metrics": {
+    "glossary_terms_total": 4,
+    "glossary_terms_with_tooltip": 4,
+    "glossary_terms_with_definition": 4,
+    "help_copy_blocks_total": 0,
+    "help_copy_sentences_total": 0,
+    "max_definition_words_seen": 6,
+    "max_help_copy_sentence_words_seen": 0,
+    "long_definition_terms_total": 0,
+    "long_help_copy_sentences_total": 0,
+    "jargon_hits_total": 0
+  },
+  "thresholds": {
+    "min_glossary_terms": 4,
+    "max_definition_words": 12,
+    "max_copy_sentence_words": 16,
+    "forbidden_jargon": [
+      "embedding",
+      "ontologia",
+      "bayesiano",
+      "vectorizacion",
+      "heuristica"
+    ]
+  },
+  "checks": {
+    "glossary_marker_present": true,
+    "glossary_terms_meet_minimum": true,
+    "tooltip_present_for_all_terms": true,
+    "definitions_present_for_all_terms": true,
+    "definition_words_within_limit": true,
+    "help_copy_present": false,
+    "help_copy_sentence_words_within_limit": true,
+    "jargon_free_copy": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "help_copy_missing"
+  ],
+  "failure_reasons": [],
+  "terms": [
+    {
+      "term": "unknown",
+      "label": "unknown",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "cobertura",
+      "label": "cobertura",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "confianza",
+      "label": "confianza",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    },
+    {
+      "term": "evidencia",
+      "label": "evidencia",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    }
+  ],
+  "long_definition_terms": [],
+  "long_help_copy_sentences": [],
+  "jargon_hits": []
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpec8ijara/citizen.html"
+  },
+  "metrics": {
+    "glossary_terms_total": 4,
+    "glossary_terms_with_tooltip": 4,
+    "glossary_terms_with_definition": 4,
+    "help_copy_blocks_total": 2,
+    "help_copy_sentences_total": 2,
+    "max_definition_words_seen": 6,
+    "max_help_copy_sentence_words_seen": 7,
+    "long_definition_terms_total": 0,
+    "long_help_copy_sentences_total": 0,
+    "jargon_hits_total": 0
+  },
+  "thresholds": {
+    "min_glossary_terms": 4,
+    "max_definition_words": 12,
+    "max_copy_sentence_words": 16,
+    "forbidden_jargon": [
+      "embedding",
+      "ontologia",
+      "bayesiano",
+      "vectorizacion",
+      "heuristica"
+    ]
+  },
+  "checks": {
+    "glossary_marker_present": true,
+    "glossary_terms_meet_minimum": true,
+    "tooltip_present_for_all_terms": true,
+    "definitions_present_for_all_terms": true,
+    "definition_words_within_limit": true,
+    "help_copy_present": true,
+    "help_copy_sentence_words_within_limit": true,
+    "jargon_free_copy": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "terms": [
+    {
+      "term": "unknown",
+      "label": "unknown",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "cobertura",
+      "label": "cobertura",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 6
+    },
+    {
+      "term": "confianza",
+      "label": "confianza",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    },
+    {
+      "term": "evidencia",
+      "label": "evidencia",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 5
+    }
+  ],
+  "long_definition_terms": [],
+  "long_help_copy_sentences": [],
+  "jargon_hits": []
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "status": "failed",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpeorz845u/citizen_long_def.html"
+  },
+  "metrics": {
+    "glossary_terms_total": 4,
+    "glossary_terms_with_tooltip": 4,
+    "glossary_terms_with_definition": 4,
+    "help_copy_blocks_total": 1,
+    "help_copy_sentences_total": 1,
+    "max_definition_words_seen": 21,
+    "max_help_copy_sentence_words_seen": 3,
+    "long_definition_terms_total": 1,
+    "long_help_copy_sentences_total": 0,
+    "jargon_hits_total": 0
+  },
+  "thresholds": {
+    "min_glossary_terms": 4,
+    "max_definition_words": 12,
+    "max_copy_sentence_words": 16,
+    "forbidden_jargon": [
+      "embedding",
+      "ontologia",
+      "bayesiano",
+      "vectorizacion",
+      "heuristica"
+    ]
+  },
+  "checks": {
+    "glossary_marker_present": true,
+    "glossary_terms_meet_minimum": true,
+    "tooltip_present_for_all_terms": true,
+    "definitions_present_for_all_terms": true,
+    "definition_words_within_limit": false,
+    "help_copy_present": true,
+    "help_copy_sentence_words_within_limit": true,
+    "jargon_free_copy": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "definition_words_over_limit"
+  ],
+  "terms": [
+    {
+      "term": "unknown",
+      "label": "unknown",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 21
+    },
+    {
+      "term": "cobertura",
+      "label": "cobertura",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 2
+    },
+    {
+      "term": "confianza",
+      "label": "confianza",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 2
+    },
+    {
+      "term": "evidencia",
+      "label": "evidencia",
+      "has_tooltip": true,
+      "has_definition": true,
+      "definition_words": 2
+    }
+  ],
+  "long_definition_terms": [
+    {
+      "term": "unknown",
+      "definition_words": 21
+    }
+  ],
+  "long_help_copy_sentences": [],
+  "jargon_hits": []
+}
+just citizen-test-release-trace-digest
+node --test tests/test_report_citizen_release_trace_digest.js
+TAP version 13
+# Subtest: release-trace digest passes strict complete when release hardening is fresh and ready
+ok 1 - release-trace digest passes strict complete when release hardening is fresh and ready
+  ---
+  duration_ms: 43.608042
+  ...
+# Subtest: release-trace digest degrades on stale release and strict-complete fails
+ok 2 - release-trace digest degrades on stale release and strict-complete fails
+  ---
+  duration_ms: 36.122042
+  ...
+# Subtest: release-trace digest fails strict when release hardening is not ready
+ok 3 - release-trace digest fails strict when release hardening is not ready
+  ---
+  duration_ms: 33.763959
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 157.956791
+just citizen-test-evidence-trust-panel
+node --test tests/test_citizen_evidence_trust_panel.js tests/test_citizen_evidence_trust_panel_ui_contract.js
+TAP version 13
+# Subtest: evidence trust panel computes freshness, trust level, and drilldown metadata
+ok 1 - evidence trust panel computes freshness, trust level, and drilldown metadata
+  ---
+  duration_ms: 0.905
+  ...
+# Subtest: evidence trust panel handles missing dates and links deterministically
+ok 2 - evidence trust panel handles missing dates and links deterministically
+  ---
+  duration_ms: 0.286292
+  ...
+# Subtest: citizen UI loads evidence trust panel module
+ok 3 - citizen UI loads evidence trust panel module
+  ---
+  duration_ms: 1.395625
+  ...
+# Subtest: citizen UI renders evidence trust panel markers in party cards
+ok 4 - citizen UI renders evidence trust panel markers in party cards
+  ---
+  duration_ms: 0.714458
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 52.001666
+just citizen-test-cross-method-stability
+node --test tests/test_citizen_cross_method_stability.js tests/test_citizen_cross_method_stability_ui_contract.js
+TAP version 13
+# Subtest: cross-method stability reports stable on aligned comparable stances
+ok 1 - cross-method stability reports stable on aligned comparable stances
+  ---
+  duration_ms: 0.932667
+  ...
+# Subtest: cross-method stability reports uncertain when declared signal is mostly unknown
+ok 2 - cross-method stability reports uncertain when declared signal is mostly unknown
+  ---
+  duration_ms: 0.141667
+  ...
+# Subtest: cross-method stability reports unstable on high votes-vs-declared mismatch
+ok 3 - cross-method stability reports unstable on high votes-vs-declared mismatch
+  ---
+  duration_ms: 0.115
+  ...
+# Subtest: citizen UI loads cross-method stability module
+ok 4 - citizen UI loads cross-method stability module
+  ---
+  duration_ms: 1.642083
+  ...
+# Subtest: citizen coherence view includes cross-method stability contract markers
+ok 5 - citizen coherence view includes cross-method stability contract markers
+  ---
+  duration_ms: 0.641667
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 67.650542
+just citizen-test-coherence-drilldown
+node --test tests/test_citizen_coherence_drilldown_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines coherence drilldown link builders
+ok 1 - citizen UI defines coherence drilldown link builders
+  ---
+  duration_ms: 2.217625
+  ...
+# Subtest: coherence cards expose strict drilldown markers for mismatch trace links
+ok 2 - coherence cards expose strict drilldown markers for mismatch trace links
+  ---
+  duration_ms: 0.974042
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 49.941583
+just citizen-test-mobile-performance
+node --test tests/test_citizen_mobile_performance_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile interaction latency markers
+ok 1 - citizen UI defines mobile interaction latency markers
+  ---
+  duration_ms: 1.799458
+  ...
+# Subtest: citizen UI includes mobile-friendly rendering and reduced-motion guards
+ok 2 - citizen UI includes mobile-friendly rendering and reduced-motion guards
+  ---
+  duration_ms: 0.605041
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.984375
+python3 -m unittest tests/test_report_citizen_mobile_performance_budget.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1wdm8ter/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1wdm8ter/a.js",
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1wdm8ter/b.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1wdm8ter/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 379,
+    "ui_assets_total_bytes": 36,
+    "snapshot_bytes": 12,
+    "ui_assets_count": 2,
+    "interaction_markers_missing": []
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 1000,
+    "max_ui_assets_total_bytes": 1000,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": true,
+    "ui_assets_total_within_budget": true,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": true
+  },
+  "failure_reasons": [],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1wdm8ter/a.js",
+      "bytes": 18
+    },
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp1wdm8ter/b.js",
+      "bytes": 18
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "status": "failed",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpa_5x96v6/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpa_5x96v6/a.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpa_5x96v6/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 13,
+    "ui_assets_total_bytes": 401,
+    "snapshot_bytes": 3,
+    "ui_assets_count": 1,
+    "interaction_markers_missing": [
+      "SEARCH_INPUT_DEBOUNCE_MS",
+      "RENDER_COMPARE_SCHEDULE",
+      "scheduleRenderCompare",
+      "MOBILE_LATENCY_OBS_VERSION",
+      "markInputLatencySampleStart",
+      "commitInputLatencySample",
+      "addEventListener(\"input\", onConcernSearchInputRaw)",
+      "addEventListener(\"input\", onTopicSearchInputRaw)"
+    ]
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 10,
+    "max_ui_assets_total_bytes": 100,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": false,
+    "ui_assets_total_within_budget": false,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": false
+  },
+  "failure_reasons": [
+    "ui_html_over_budget",
+    "ui_assets_total_over_budget",
+    "interaction_markers_missing"
+  ],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpa_5x96v6/a.js",
+      "bytes": 401
+    }
+  ]
+}
+just citizen-test-mobile-observability
+node --test tests/test_citizen_mobile_observability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile latency observability markers
+ok 1 - citizen UI defines mobile latency observability markers
+  ---
+  duration_ms: 1.579625
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 47.866083
+python3 -m unittest tests/test_report_citizen_mobile_observability.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "telemetry_json_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp5zygd53_/summary.json",
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [
+    "telemetry_json"
+  ],
+  "telemetry": {
+    "sample_count": null,
+    "events_total": null,
+    "parse_errors": null,
+    "source_breakdown": {}
+  },
+  "metrics": {
+    "input_to_render_p50_ms": null,
+    "input_to_render_p90_ms": null,
+    "input_to_render_p95_ms": null
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 180.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": false,
+    "sample_count_meets_minimum": null,
+    "input_to_render_p50_within_threshold": null,
+    "input_to_render_p90_within_threshold": null,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "input_to_render_p50_ms",
+    "input_to_render_p90_ms",
+    "input_to_render_p95_ms"
+  ],
+  "degraded_reasons": [
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpkcdpuqbk/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 148.5,
+    "input_to_render_p90_ms": 284.0,
+    "input_to_render_p95_ms": 322.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 200.0,
+    "max_input_to_render_p90_ms": 330.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": true,
+    "input_to_render_p90_within_threshold": true,
+    "contract_complete": true
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpr7gmv9uq/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 175.0,
+    "input_to_render_p90_ms": 512.0,
+    "input_to_render_p95_ms": 626.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 150.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": false,
+    "input_to_render_p90_within_threshold": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "input_to_render_p50_above_threshold",
+    "input_to_render_p90_above_threshold"
+  ],
+  "status": "failed"
+}
+just citizen-test-mobile-observability-heartbeat
+python3 -m unittest tests/test_report_citizen_mobile_observability_heartbeat.py tests/test_report_citizen_mobile_observability_heartbeat_window.py
+....{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpoe2wi7cy/observability_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpoe2wi7cy/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|ok|30|420.000000|450.000000|1|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpoe2wi7cy/observability_ok.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpoe2wi7cy/observability_ok.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpoe2wi7cy/heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": false,
+  "duplicate_detected": true,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|ok|30|420.000000|450.000000|1|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpoe2wi7cy/observability_ok.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "ok",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": true,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpi7gc1rzq/observability_degraded.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpi7gc1rzq/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|degraded|10|420.000000|450.000000|0|",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpi7gc1rzq/observability_degraded.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "degraded",
+    "sample_count": 10,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 420.0,
+    "input_to_render_p95_ms": 440.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 30.0,
+    "contract_complete": false,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [
+      "sample_count_below_minimum"
+    ],
+    "failure_reasons": [],
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "strict": true,
+  "input_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpqgwdzfrs/observability_failed.json",
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpqgwdzfrs/heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "heartbeat_status_failed",
+    "input_to_render_p90_above_threshold"
+  ],
+  "heartbeat": {
+    "run_at": "2026-02-23T13:20:00+00:00",
+    "heartbeat_id": "2026-02-23T13:20:00+00:00|failed|30|620.000000|450.000000|0|input_to_render_p90_above_threshold",
+    "observability_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpqgwdzfrs/observability_failed.json",
+    "observability_generated_at": "2026-02-23T13:20:00+00:00",
+    "status": "failed",
+    "sample_count": 30,
+    "min_samples": 20,
+    "input_to_render_p50_ms": 150.0,
+    "input_to_render_p90_ms": 620.0,
+    "input_to_render_p95_ms": 680.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": false,
+    "input_to_render_p90_margin_ms": -170.0,
+    "contract_complete": false,
+    "telemetry_available": true,
+    "missing_metrics": [],
+    "degraded_reasons": [],
+    "failure_reasons": [
+      "input_to_render_p90_above_threshold"
+    ],
+    "strict_fail_count": 1,
+    "strict_fail_reasons": [
+      "input_to_render_p90_above_threshold"
+    ]
+  },
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpf_1m8v7_/heartbeat.jsonl",
+  "window_last": 2,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 1
+  },
+  "failed_in_window": 1,
+  "failed_rate_pct": 50.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 1,
+  "p90_threshold_violation_rate_pct": 50.0,
+  "first_failed_run_at": "2026-02-23T13:02:00+00:00",
+  "last_failed_run_at": "2026-02-23T13:02:00+00:00",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "2026-02-23T13:02:00+00:00",
+  "last_p90_threshold_violation_run_at": "2026-02-23T13:02:00+00:00",
+  "latest": {
+    "run_at": "2026-02-23T13:02:00+00:00",
+    "heartbeat_id": "2026-02-23T13:02:00+00:00|failed|2",
+    "status": "failed",
+    "line_no": 2,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 620.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": false,
+    "input_to_render_p90_margin_ms": -170.0
+  },
+  "failed_streak_latest": 1,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": -170.0,
+  "p90_margin_max_ms": 40.0,
+  "latest_p90_margin_ms": -170.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": false,
+    "max_failed_rate_ok": false,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": false,
+    "max_p90_threshold_violation_rate_ok": false,
+    "latest_not_failed_ok": false,
+    "latest_p90_within_threshold_ok": false
+  },
+  "strict_fail_reasons": [
+    "max_failed_exceeded",
+    "max_failed_rate_exceeded",
+    "max_p90_threshold_violations_exceeded",
+    "max_p90_threshold_violation_rate_exceeded",
+    "latest_status_failed",
+    "latest_p90_threshold_violation"
+  ],
+  "status": "failed"
+}
+{
+  "generated_at": "2026-02-23T13:22:26+00:00",
+  "strict": true,
+  "heartbeat_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpdwqfixff/heartbeat.jsonl",
+  "window_last": 3,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 3,
+  "entries_in_window": 3,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 3,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 0,
+  "p90_threshold_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "",
+  "last_p90_threshold_violation_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T13:03:00+00:00",
+    "heartbeat_id": "2026-02-23T13:03:00+00:00|ok|3",
+    "status": "ok",
+    "line_no": 3,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 418.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 32.0
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": 32.0,
+  "p90_margin_max_ms": 60.0,
+  "latest_p90_margin_ms": 32.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": true,
+    "max_p90_threshold_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_p90_within_threshold_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}..
+----------------------------------------------------------------------
+Ran 6 tests in 0.011s
+
+OK
+
+{"error": "window_last must be >= 1"}
+just citizen-test-first-answer-accelerator
+node --test tests/test_citizen_first_answer_accelerator.js tests/test_citizen_first_answer_ui_contract.js
+TAP version 13
+# Subtest: first-answer accelerator ranks concerns/topics and preserves evidence links
+ok 1 - first-answer accelerator ranks concerns/topics and preserves evidence links
+  ---
+  duration_ms: 1.35625
+  ...
+# Subtest: first-answer accelerator uses deterministic fallback when concern ranking is empty
+ok 2 - first-answer accelerator uses deterministic fallback when concern ranking is empty
+  ---
+  duration_ms: 0.154834
+  ...
+# Subtest: first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+ok 3 - first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+  ---
+  duration_ms: 0.150125
+  ...
+# Subtest: citizen UI loads first-answer accelerator module
+ok 4 - citizen UI loads first-answer accelerator module
+  ---
+  duration_ms: 1.668208
+  ...
+# Subtest: citizen onboarding exposes first-answer CTA markers
+ok 5 - citizen onboarding exposes first-answer CTA markers
+  ---
+  duration_ms: 0.734375
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 59.293875
+just citizen-test-unknown-explainability
+node --test tests/test_citizen_unknown_explainability.js tests/test_citizen_unknown_explainability_ui_contract.js
+TAP version 13
+# Subtest: unknown explainability flags no_signal-dominant uncertainty
+ok 1 - unknown explainability flags no_signal-dominant uncertainty
+  ---
+  duration_ms: 1.33525
+  ...
+# Subtest: unknown explainability flags low-coverage unclear dominance
+ok 2 - unknown explainability flags low-coverage unclear dominance
+  ---
+  duration_ms: 0.145708
+  ...
+# Subtest: unknown explainability flags mixed uncertainty when no cause dominates
+ok 3 - unknown explainability flags mixed uncertainty when no cause dominates
+  ---
+  duration_ms: 0.0705
+  ...
+# Subtest: unknown explainability hides hint when no unknown cells exist
+ok 4 - unknown explainability hides hint when no unknown cells exist
+  ---
+  duration_ms: 0.066875
+  ...
+# Subtest: citizen UI loads unknown explainability module
+ok 5 - citizen UI loads unknown explainability module
+  ---
+  duration_ms: 1.467958
+  ...
+# Subtest: citizen UI includes unknown explainability contract markers
+ok 6 - citizen UI includes unknown explainability contract markers
+  ---
+  duration_ms: 0.690542
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54.489458
+just citizen-test-concern-pack-quality
+node --test tests/test_citizen_concern_pack_quality_ui_contract.js
+TAP version 13
+# Subtest: citizen UI loads optional concern-pack quality artifact
+ok 1 - citizen UI loads optional concern-pack quality artifact
+  ---
+  duration_ms: 1.805917
+  ...
+# Subtest: citizen UI exposes weak-pack markers in tags and hints
+ok 2 - citizen UI exposes weak-pack markers in tags and hints
+  ---
+  duration_ms: 0.629042
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.209209
+python3 -m unittest tests/test_report_citizen_concern_pack_quality.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "ok",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpy7gu84to/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpy7gu84to/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": true
+  },
+  "failure_reasons": [],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "failed",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpflo07gub/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpflo07gub/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 0
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": false
+  },
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+just citizen-test-concern-pack-outcomes
+node --test tests/test_citizen_concern_pack_outcomes_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines concern-pack outcome telemetry markers
+ok 1 - citizen UI defines concern-pack outcome telemetry markers
+  ---
+  duration_ms: 1.6885
+  ...
+# Subtest: citizen UI records key concern-pack outcome events
+ok 2 - citizen UI records key concern-pack outcome events
+  ---
+  duration_ms: 0.585166
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 47.348125
+python3 -m unittest tests/test_report_citizen_concern_pack_outcomes.py
+...{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpq9duiisv/events.jsonl",
+    "concern_pack_quality_json": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpq9duiisv/quality.json"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0,
+    "selected_pack_ids_total": 0
+  },
+  "metrics": {
+    "pack_selected_events_total": 0,
+    "topic_open_with_pack_events_total": 0,
+    "weak_pack_selected_events_total": 0,
+    "weak_pack_followthrough_events_total": 0,
+    "unknown_pack_selected_events_total": 0,
+    "pack_selected_sessions_total": 0,
+    "weak_pack_selected_sessions_total": 0,
+    "weak_pack_followthrough_sessions_total": 0,
+    "weak_pack_followthrough_rate": null,
+    "unknown_pack_select_share": null
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": false,
+    "pack_select_events_meet_minimum": false,
+    "weak_pack_select_sessions_meet_minimum": false,
+    "weak_pack_followthrough_rate_meets_minimum": null,
+    "unknown_pack_select_share_within_threshold": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "pack_select_events_below_minimum",
+    "telemetry_missing",
+    "weak_pack_select_sessions_below_minimum"
+  ],
+  "failure_reasons": [],
+  "by_pack": []
+}
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+  },
+  "telemetry": {
+    "events_total": 33,
+    "recognized_events_total": 32,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8,
+    "selected_pack_ids_total": 5
+  },
+  "metrics": {
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 7,
+    "weak_pack_selected_events_total": 11,
+    "weak_pack_followthrough_events_total": 7,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 8,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 7,
+    "weak_pack_followthrough_rate": 1.0,
+    "unknown_pack_select_share": 0.083333
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 8,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "mystery_pack",
+      "pack_selected_events": 2,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "sanidad",
+      "pack_selected_events": 5,
+      "topic_open_with_pack_events": 3,
+      "weak_pack_selected_events": 5,
+      "weak_pack_followthrough_events": 3
+    },
+    {
+      "pack_id": "transparencia",
+      "pack_selected_events": 3,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 4,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 4
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+  },
+  "telemetry": {
+    "events_total": 33,
+    "recognized_events_total": 32,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8,
+    "selected_pack_ids_total": 5
+  },
+  "metrics": {
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 7,
+    "weak_pack_selected_events_total": 11,
+    "weak_pack_followthrough_events_total": 7,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 8,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 7,
+    "weak_pack_followthrough_rate": 1.0,
+    "unknown_pack_select_share": 0.083333
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.05
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": false,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "unknown_pack_select_share_above_threshold"
+  ],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 8,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "mystery_pack",
+      "pack_selected_events": 2,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "sanidad",
+      "pack_selected_events": 5,
+      "topic_open_with_pack_events": 3,
+      "weak_pack_selected_events": 5,
+      "weak_pack_followthrough_events": 3
+    },
+    {
+      "pack_id": "transparencia",
+      "pack_selected_events": 3,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 4,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 4
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp0afgaf_x/events.jsonl",
+    "concern_pack_quality_json": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp0afgaf_x/quality.json"
+  },
+  "telemetry": {
+    "events_total": 20,
+    "recognized_events_total": 20,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 10,
+    "selected_pack_ids_total": 2
+  },
+  "metrics": {
+    "pack_selected_events_total": 20,
+    "topic_open_with_pack_events_total": 0,
+    "weak_pack_selected_events_total": 6,
+    "weak_pack_followthrough_events_total": 0,
+    "unknown_pack_selected_events_total": 0,
+    "pack_selected_sessions_total": 10,
+    "weak_pack_selected_sessions_total": 6,
+    "weak_pack_followthrough_sessions_total": 0,
+    "weak_pack_followthrough_rate": 0.0,
+    "unknown_pack_select_share": 0.0
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": false,
+    "unknown_pack_select_share_within_threshold": true,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "weak_pack_followthrough_below_threshold"
+  ],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 14,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 0
+    }
+  ]
+}.
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK
+
+just citizen-test-trust-action-nudges
+node --test tests/test_citizen_trust_action_nudges.js tests/test_citizen_trust_action_nudges_ui_contract.js
+TAP version 13
+# Subtest: trust-action nudge picks low-trust unknown candidate with evidence link
+ok 1 - trust-action nudge picks low-trust unknown candidate with evidence link
+  ---
+  duration_ms: 0.839333
+  ...
+# Subtest: trust-action nudge tie-breaks deterministically by party label
+ok 2 - trust-action nudge tie-breaks deterministically by party label
+  ---
+  duration_ms: 6.898708
+  ...
+# Subtest: trust-action nudge hides when no evidence links are available
+ok 3 - trust-action nudge hides when no evidence links are available
+  ---
+  duration_ms: 0.144042
+  ...
+# Subtest: citizen UI defines trust-action nudge telemetry markers
+ok 4 - citizen UI defines trust-action nudge telemetry markers
+  ---
+  duration_ms: 1.398916
+  ...
+# Subtest: citizen UI exposes next-evidence nudge markers and click wiring
+ok 5 - citizen UI exposes next-evidence nudge markers and click wiring
+  ---
+  duration_ms: 0.754458
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 59.181708
+python3 -m unittest tests/test_report_citizen_trust_action_nudges.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "degraded",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpbtp30ve1/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 0,
+    "recognized_events_total": 0,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 0
+  },
+  "metrics": {
+    "nudge_shown_events_total": 0,
+    "nudge_clicked_events_total": 0,
+    "nudge_shown_sessions_total": 0,
+    "nudge_clicked_sessions_total": 0,
+    "nudge_clickthrough_session_rate": null,
+    "nudge_clickthrough_event_rate": null
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": false,
+    "nudge_shown_events_meet_minimum": false,
+    "nudge_shown_sessions_meet_minimum": false,
+    "nudge_clickthrough_meets_minimum": null,
+    "contract_complete": false
+  },
+  "degraded_reasons": [
+    "nudge_shown_events_below_minimum",
+    "nudge_shown_sessions_below_minimum",
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "by_source_view": []
+}
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 14,
+    "recognized_events_total": 13,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8
+  },
+  "metrics": {
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 5,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 5,
+    "nudge_clickthrough_session_rate": 0.625,
+    "nudge_clickthrough_event_rate": 0.625
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": true,
+    "nudge_shown_events_meet_minimum": true,
+    "nudge_shown_sessions_meet_minimum": true,
+    "nudge_clickthrough_meets_minimum": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_source_view": [
+    {
+      "source_view": "concern",
+      "nudge_shown_events": 3,
+      "nudge_clicked_events": 2,
+      "nudge_clickthrough_event_rate": 0.666667
+    },
+    {
+      "source_view": "topic",
+      "nudge_shown_events": 5,
+      "nudge_clicked_events": 3,
+      "nudge_clickthrough_event_rate": 0.6
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T13:22:27+00:00",
+  "status": "failed",
+  "paths": {
+    "events_jsonl": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpvh2r309y/events.jsonl"
+  },
+  "telemetry": {
+    "events_total": 9,
+    "recognized_events_total": 9,
+    "ignored_events_total": 0,
+    "parse_errors": 0,
+    "sessions_total": 8
+  },
+  "metrics": {
+    "nudge_shown_events_total": 8,
+    "nudge_clicked_events_total": 1,
+    "nudge_shown_sessions_total": 8,
+    "nudge_clicked_sessions_total": 1,
+    "nudge_clickthrough_session_rate": 0.125,
+    "nudge_clickthrough_event_rate": 0.125
+  },
+  "thresholds": {
+    "min_nudge_shown_events": 8,
+    "min_nudge_shown_sessions": 5,
+    "min_nudge_clickthrough_rate": 0.4
+  },
+  "checks": {
+    "telemetry_available": true,
+    "nudge_shown_events_meet_minimum": true,
+    "nudge_shown_sessions_meet_minimum": true,
+    "nudge_clickthrough_meets_minimum": false,
+    "contract_complete": false
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "nudge_clickthrough_below_threshold"
+  ],
+  "by_source_view": [
+    {
+      "source_view": "concern",
+      "nudge_shown_events": 2,
+      "nudge_clicked_events": 0,
+      "nudge_clickthrough_event_rate": 0.0
+    },
+    {
+      "source_view": "topic",
+      "nudge_shown_events": 6,
+      "nudge_clicked_events": 1,
+      "nudge_clickthrough_event_rate": 0.166667
+    }
+  ]
+}

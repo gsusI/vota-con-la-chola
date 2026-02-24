@@ -1,0 +1,84 @@
+{
+  "generated_at_utc": "20260223T135145Z",
+  "status": "ok",
+  "sprint": "AI-OPS-82",
+  "objective": "Cross-method answer stability panel in /citizen coherence mode with explicit uncertainty attribution",
+  "checks": {
+    "node_contract_tests": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/node_test_citizen_cross_method_stability_20260223T133738Z.txt"
+    },
+    "just_test_lane": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_cross_method_stability_20260223T133738Z.txt"
+    },
+    "graph_server_asset_routes": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/python_unittest_graph_ui_server_citizen_assets_20260223T133738Z.txt"
+    },
+    "mobile_perf_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_mobile_performance_regression_20260223T133738Z.txt"
+    },
+    "evidence_trust_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_evidence_trust_panel_regression_20260223T133738Z.txt"
+    },
+    "accessibility_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_accessibility_readability_regression_20260223T133738Z.txt"
+    },
+    "first_answer_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_first_answer_regression_20260223T133738Z.txt"
+    },
+    "unknown_explainability_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_unknown_explainability_regression_20260223T133738Z.txt"
+    },
+    "concern_pack_quality_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_concern_pack_quality_regression_20260223T133738Z.txt"
+    },
+    "release_hardening_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_test_release_hardening_regression_20260223T135145Z.txt"
+    },
+    "gh_pages_build": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_explorer_gh_pages_build_20260223T135145Z.txt"
+    },
+    "release_hardening_strict_after_build": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/just_citizen_check_release_hardening_20260223T135145Z.txt"
+    },
+    "syntax_checks": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-82/evidence/node_check_cross_method_stability_20260223T133738Z.txt"
+    }
+  },
+  "contract_surface": {
+    "stability_version": "cross_method_stability_v1",
+    "pairs": [
+      "votes_declared",
+      "combined_votes",
+      "combined_declared"
+    ],
+    "required_markers": [
+      "data-cross-method-stability",
+      "data-cross-method-status",
+      "data-cross-method-uncertainty"
+    ],
+    "node_subtests_total": 5,
+    "node_subtests_passed": 5
+  },
+  "release_readiness_after_build": {
+    "status": "ok",
+    "release_ready": true,
+    "summary_evidence": "docs/etl/sprints/AI-OPS-82/evidence/citizen_release_hardening_after_build_status_20260223T135145Z.json"
+  },
+  "artifacts": {
+    "markers": "docs/etl/sprints/AI-OPS-82/evidence/citizen_cross_method_stability_contract_markers_20260223T135145Z.txt",
+    "summary_json": "docs/etl/sprints/AI-OPS-82/evidence/citizen_cross_method_stability_contract_summary_20260223T135145Z.json"
+  }
+}

@@ -1,0 +1,41 @@
+node --test tests/test_citizen_unknown_explainability.js tests/test_citizen_unknown_explainability_ui_contract.js
+TAP version 13
+# Subtest: unknown explainability flags no_signal-dominant uncertainty
+ok 1 - unknown explainability flags no_signal-dominant uncertainty
+  ---
+  duration_ms: 0.791291
+  ...
+# Subtest: unknown explainability flags low-coverage unclear dominance
+ok 2 - unknown explainability flags low-coverage unclear dominance
+  ---
+  duration_ms: 0.089416
+  ...
+# Subtest: unknown explainability flags mixed uncertainty when no cause dominates
+ok 3 - unknown explainability flags mixed uncertainty when no cause dominates
+  ---
+  duration_ms: 0.066417
+  ...
+# Subtest: unknown explainability hides hint when no unknown cells exist
+ok 4 - unknown explainability hides hint when no unknown cells exist
+  ---
+  duration_ms: 0.065166
+  ...
+# Subtest: citizen UI loads unknown explainability module
+ok 5 - citizen UI loads unknown explainability module
+  ---
+  duration_ms: 1.01
+  ...
+# Subtest: citizen UI includes unknown explainability contract markers
+ok 6 - citizen UI includes unknown explainability contract markers
+  ---
+  duration_ms: 0.423625
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 43.054167

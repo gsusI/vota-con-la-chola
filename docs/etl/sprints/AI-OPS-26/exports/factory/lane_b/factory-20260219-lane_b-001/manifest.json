@@ -1,0 +1,12 @@
+{
+  "contract_version": "factory_contract_v2",
+  "batch_id": "factory-20260219-lane_b-001",
+  "lane_id": "lane_b",
+  "generated_at_utc": "2026-02-19T16:13:42+00:00",
+  "generator": "ai_ops_26_factory_generator_v2",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "source_sql": "WITH unresolved AS (\n  SELECT\n    source_id,\n    lower(trim(member_name)) AS member_name_normalized,\n    MIN(member_name) AS member_name_example,\n    MIN(group_code) AS group_code_example,\n    COUNT(*) AS unresolved_rows\n  FROM parl_vote_member_votes\n  WHERE person_id IS NULL\n  GROUP BY source_id, lower(trim(member_name))\n)\nSELECT *\nFROM unresolved\nORDER BY unresolved_rows DESC, source_id, member_name_normalized\nLIMIT 120;",
+  "source_sql_sha256": "2b2ed10fc2039127e6ec733bf92ecbaa0cf4351fff0422900ab060b6f0aeec2e",
+  "tasks_row_count": 120,
+  "notes": "Top unresolved name clusters from member votes."
+}

@@ -1,0 +1,44 @@
+{
+  "documents": {
+    "archive_fallback": false,
+    "archive_fetched_ok": 0,
+    "archive_first_urls": 0,
+    "archive_hits": 0,
+    "archive_lookup_attempted": 0,
+    "archive_lookup_failures": [],
+    "candidate_urls": 119,
+    "derived_ini_candidates": 8,
+    "derived_ini_selected": 8,
+    "doc_links_seen": 119,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis12/expedientes/626/xml/INI-3-626000002.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis14/expedientes/605/xml/INI-3-605000004.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis14/expedientes/620/xml/INI-3-620000001.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis14/expedientes/626/xml/INI-3-626000008.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis15/expedientes/600/xml/INI-3-600000001.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis15/expedientes/621/xml/INI-3-621000008.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis15/expedientes/624/xml/INI-3-624000003.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis15/expedientes/626/xml/INI-3-626000009.xml -> HTTPError: HTTP Error 404: Not Found"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 119,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 119,
+    "skipped_existing": 111,
+    "skipped_forbidden": 111,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 8
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

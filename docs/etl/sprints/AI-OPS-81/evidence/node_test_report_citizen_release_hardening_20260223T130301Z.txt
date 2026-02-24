@@ -1,0 +1,20 @@
+TAP version 13
+# Subtest: release hardening reporter passes strict mode on aligned source/published assets
+ok 1 - release hardening reporter passes strict mode on aligned source/published assets
+  ---
+  duration_ms: 36.111709
+  ...
+# Subtest: release hardening reporter fails strict mode on parity drift and exposes failed asset id
+ok 2 - release hardening reporter fails strict mode on parity drift and exposes failed asset id
+  ---
+  duration_ms: 35.801333
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 114.9895

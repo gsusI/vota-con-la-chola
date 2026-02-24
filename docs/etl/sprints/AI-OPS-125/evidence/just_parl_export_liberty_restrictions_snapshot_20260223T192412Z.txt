@@ -1,0 +1,124 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.64MB 3.3s done
+#6 DONE 3.3s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 2.2s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.1s done
+#12 exporting manifest sha256:34b4e766dd08d2ddbc37c0e1186417b61e3423034d382684c518b4b0e422318c
+#12 exporting manifest sha256:34b4e766dd08d2ddbc37c0e1186417b61e3423034d382684c518b4b0e422318c done
+#12 exporting config sha256:c9220017ccdd6f1c8f5af63d7743e22f77ab28562eb324bdf2760b35a3846a95 done
+#12 exporting attestation manifest sha256:5a315e97b16c4de05d60fc41c00aa35650d3761972c665d0966d1cce053f9166 done
+#12 exporting manifest list sha256:e1f3238d9594d5cb4987790e815b0d0e4d02ca2fd0239f408ae0c81cb61e34db done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.3s done
+#12 DONE 12.4s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+{
+  "status": "ok",
+  "snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+  "snapshot_schema_version": "liberty_restrictions_snapshot_v1",
+  "snapshot_totals": {
+    "restrictions_total": 8,
+    "accountability_edges_total": 15,
+    "proportionality_reviews_total": 8,
+    "actors_scored_total": 8,
+    "enforcement_observations_total": 16,
+    "indirect_edges_total": 12,
+    "indirect_attributable_edges_total": 9,
+    "delegated_links_total": 8,
+    "fragments_with_delegated_chain_total": 8
+  },
+  "irlc_by_fragment_parquet": {
+    "path": "docs/etl/sprints/AI-OPS-124/exports/irlc_by_fragment_latest.parquet",
+    "rows": 8,
+    "columns": [
+      "assessment_key",
+      "fragment_id",
+      "norm_id",
+      "boe_id",
+      "norm_title",
+      "fragment_type",
+      "fragment_label",
+      "competent_body",
+      "appeal_path",
+      "right_category_id",
+      "right_label",
+      "method_version",
+      "reach_score",
+      "intensity_score",
+      "due_process_risk_score",
+      "reversibility_risk_score",
+      "discretionality_score",
+      "compliance_cost_score",
+      "irlc_score",
+      "confidence",
+      "source_url"
+    ],
+    "compression": "zstd"
+  },
+  "accountability_edges_parquet": {
+    "path": "docs/etl/sprints/AI-OPS-124/exports/accountability_edges_latest.parquet",
+    "rows": 15,
+    "columns": [
+      "fragment_id",
+      "norm_id",
+      "boe_id",
+      "norm_title",
+      "role",
+      "actor_label",
+      "evidence_date",
+      "source_url"
+    ],
+    "compression": "zstd"
+  },
+  "snapshot_diff": {
+    "status": "unchanged",
+    "changed_sections_total": 0,
+    "items_added_total": 0,
+    "items_removed_total": 0,
+    "diff_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json"
+  },
+  "snapshot_changelog": {
+    "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+    "entry_id": "2026-02-23|2026-02-23|4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
+    "appended": false
+  }
+}

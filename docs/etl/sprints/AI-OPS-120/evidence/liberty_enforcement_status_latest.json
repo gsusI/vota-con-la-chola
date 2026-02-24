@@ -1,0 +1,95 @@
+{
+  "generated_at": "2026-02-23T21:12:30+00:00",
+  "status": "ok",
+  "totals": {
+    "methodologies_total": 1,
+    "observations_total": 16,
+    "fragments_with_observations_total": 8,
+    "target_fragments_total": 8,
+    "fragments_with_multi_territory_total": 8,
+    "high_variation_fragments_total": 3
+  },
+  "coverage": {
+    "target_fragment_coverage_pct": 1.0,
+    "multi_territory_coverage_pct": 1.0,
+    "high_variation_fragment_pct": 0.375,
+    "avg_sanction_rate_spread_pct": 0.20894,
+    "avg_annulment_rate_spread_pp": 0.045,
+    "avg_resolution_delay_spread_days": 29.125
+  },
+  "checks": {
+    "enforcement_variation_started": true,
+    "target_coverage_gate": true,
+    "multi_territory_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "target_coverage_min": 0.6,
+      "multi_territory_coverage_min": 0.6,
+      "sanction_rate_spread_pct_min": 0.35,
+      "annulment_rate_spread_pp_min": 0.08,
+      "delay_spread_days_min": 45.0
+    }
+  },
+  "high_variation_sample": [
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "territories_total": 2,
+      "sanction_rate_min": 4.4,
+      "sanction_rate_max": 7.1,
+      "sanction_rate_spread_pct": 0.380282,
+      "annulment_rate_min": 0.13,
+      "annulment_rate_max": 0.22,
+      "annulment_rate_spread_pp": 0.09,
+      "resolution_delay_p90_min_days": 141.0,
+      "resolution_delay_p90_max_days": 195.0,
+      "resolution_delay_spread_days": 54.0,
+      "sample_size_total": 113000,
+      "high_variation": true
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "territories_total": 2,
+      "sanction_rate_min": 3.1,
+      "sanction_rate_max": 4.8,
+      "sanction_rate_spread_pct": 0.354167,
+      "annulment_rate_min": 0.06,
+      "annulment_rate_max": 0.09,
+      "annulment_rate_spread_pp": 0.03,
+      "resolution_delay_p90_min_days": 172.0,
+      "resolution_delay_p90_max_days": 228.0,
+      "resolution_delay_spread_days": 56.0,
+      "sample_size_total": 69000,
+      "high_variation": true
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "territories_total": 2,
+      "sanction_rate_min": 12.1,
+      "sanction_rate_max": 18.7,
+      "sanction_rate_spread_pct": 0.352941,
+      "annulment_rate_min": 0.11,
+      "annulment_rate_max": 0.23,
+      "annulment_rate_spread_pp": 0.12,
+      "resolution_delay_p90_min_days": 142.0,
+      "resolution_delay_p90_max_days": 214.0,
+      "resolution_delay_spread_days": 72.0,
+      "sample_size_total": 218000,
+      "high_variation": true
+    }
+  ],
+  "missing_fragment_sample": []
+}

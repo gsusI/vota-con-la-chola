@@ -1,0 +1,20 @@
+25:          node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
+116:          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js \
+122:            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_window_ci.json
+163:          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js \
+171:            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window_ci.json
+286:          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_window_ci.json
+330:          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window_ci.json
+408:          python3 -m unittest tests.test_export_missing_initiative_doc_urls tests.test_report_initdoc_actionable_tail_contract tests.test_report_initdoc_actionable_tail_digest tests.test_report_initdoc_actionable_tail_digest_heartbeat tests.test_report_initdoc_actionable_tail_digest_heartbeat_window tests.test_graph_ui_server_initdoc_tail -q
+517:          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat.py \
+527:          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_window.py \
+530:            --out initdoc_actionable_nonempty_heartbeat_window.json \
+531:            > initdoc_actionable_nonempty_heartbeat_window.log 2>&1
+584:          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat.py \
+590:          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_window.py \
+593:            --out initdoc_actionable_empty_heartbeat_window.json \
+594:            > initdoc_actionable_empty_heartbeat_window.log 2>&1
+611:            initdoc_actionable_nonempty_heartbeat_window.json
+612:            initdoc_actionable_nonempty_heartbeat_window.log
+622:            initdoc_actionable_empty_heartbeat_window.json
+623:            initdoc_actionable_empty_heartbeat_window.log

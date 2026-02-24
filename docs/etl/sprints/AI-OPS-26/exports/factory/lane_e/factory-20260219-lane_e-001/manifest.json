@@ -1,0 +1,12 @@
+{
+  "contract_version": "factory_contract_v2",
+  "batch_id": "factory-20260219-lane_e-001",
+  "lane_id": "lane_e",
+  "generated_at_utc": "2026-02-19T16:13:42+00:00",
+  "generator": "ai_ops_26_factory_generator_v2",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "source_sql": "SELECT pe.policy_event_id, pe.event_date, pe.title, pe.summary, pe.source_id, pe.source_url\nFROM policy_events pe\nLEFT JOIN policy_event_axis_scores s ON s.policy_event_id = pe.policy_event_id\nWHERE s.policy_event_id IS NULL\nORDER BY pe.event_date DESC, pe.policy_event_id DESC\nLIMIT 120;",
+  "source_sql_sha256": "4d7ca9dc6f1e79e329b0762ad1164e5f1c7183625cce754ee1b07157b879a8c6",
+  "tasks_row_count": 120,
+  "notes": "Policy events without axis scores."
+}

@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-02-23T22:19:26+00:00",
+  "db_path": "tmp/liberty_person_identity_provenance_20260223T221925Z.db",
+  "seed_path": "etl/data/seeds/liberty_person_identity_resolution_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "identity_resolution_v1",
+    "mappings_total": 9
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "counts": {
+      "mappings_total": 9,
+      "persons_created": 5,
+      "persons_reused": 4,
+      "aliases_inserted": 9,
+      "aliases_updated": 0,
+      "aliases_retargeted": 0,
+      "manual_mappings_total": 9,
+      "official_mappings_total": 0
+    },
+    "totals": {
+      "aliases_total": 9,
+      "persons_with_aliases_total": 5,
+      "manual_aliases_total": 9,
+      "official_aliases_total": 0
+    }
+  }
+}

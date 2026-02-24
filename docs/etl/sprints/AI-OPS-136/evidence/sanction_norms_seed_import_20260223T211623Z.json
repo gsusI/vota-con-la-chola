@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-02-23T21:16:24+00:00",
+  "db_path": "etl/data/staging/politicos-es.ai_ops_136.db",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibility_hints_total": 15
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_norms_seed_v1",
+    "counts": {
+      "norms_inserted": 8,
+      "norms_updated": 0,
+      "catalog_inserted": 8,
+      "catalog_updated": 0,
+      "fragments_inserted": 8,
+      "fragments_updated": 0,
+      "fragment_links_inserted": 8,
+      "fragment_links_updated": 0,
+      "responsibilities_inserted": 15,
+      "responsibilities_updated": 0
+    },
+    "totals": {
+      "legal_norms_total": 8,
+      "legal_norm_fragments_total": 8,
+      "legal_fragment_responsibilities_total": 15,
+      "sanction_norm_catalog_total": 8,
+      "sanction_norm_fragment_links_total": 8
+    }
+  }
+}

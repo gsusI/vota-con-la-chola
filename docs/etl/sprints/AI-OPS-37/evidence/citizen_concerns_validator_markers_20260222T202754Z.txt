@@ -1,0 +1,25 @@
+# validate_citizen_concerns markers
+
+## justfile hook
+672:  cp ui/citizen/concerns_v1.json {{gh_pages_dir}}/citizen/data/concerns_v1.json
+673:  python3 scripts/validate_citizen_concerns.py \
+674:    --path "{{gh_pages_dir}}/citizen/data/concerns_v1.json"
+
+## validator contract markers
+13:ROOT_REQUIRED_KEYS = ("version", "concerns", "packs")
+16:CONCERN_REQUIRED_KEYS = ("id", "label", "description", "keywords")
+17:PACK_REQUIRED_KEYS = ("id", "label", "concern_ids", "tradeoff")
+112:    missing_root = [k for k in ROOT_REQUIRED_KEYS if k not in root_keys]
+122:    allowed_root = set(ROOT_REQUIRED_KEYS + ROOT_OPTIONAL_KEYS)
+220:        missing = [k for k in CONCERN_REQUIRED_KEYS if k not in keys]
+229:        unknown = sorted(str(k) for k in keys if k not in set(CONCERN_REQUIRED_KEYS))
+370:        missing = [k for k in PACK_REQUIRED_KEYS if k not in keys]
+379:        unknown = sorted(str(k) for k in keys if k not in set(PACK_REQUIRED_KEYS))
+481:                    code="unknown_pack_concern_id",
+491:            code="concerns_without_pack",
+
+## tests markers
+11:class TestValidateCitizenConcerns(unittest.TestCase):
+102:            self.assertIn("duplicate_concern_id", codes)
+103:            self.assertIn("unknown_pack_concern_id", codes)
+107:    def test_repo_concerns_v1_is_valid(self) -> None:

@@ -1,0 +1,13 @@
+tests/test_citizen_onboarding_ui_contract.js:13:  assert.match(html, /<script\s+src=["']\.\/onboarding_funnel\.js["']><\/script>/i);
+tests/test_citizen_onboarding_ui_contract.js:18:  assert.match(html, /data-onboard-next/i);
+tests/test_citizen_onboarding_funnel.js:4:const funnel = require("../ui/citizen/onboarding_funnel.js");
+justfile:874:  cp ui/citizen/onboarding_funnel.js {{gh_pages_dir}}/citizen/onboarding_funnel.js
+justfile:933:citizen-test-onboarding-funnel:
+justfile:934:  node --test tests/test_citizen_onboarding_funnel.js tests/test_citizen_onboarding_ui_contract.js
+ui/citizen/index.html:790:    <script src="./onboarding_funnel.js"></script>
+ui/citizen/index.html:2051:          `<button class="btn" type="button" data-onboard-next="${esc(String(nextAction.id || ""))}" ${String(nextAction.id || "") === "done" ? "disabled" : ""}>${esc(
+ui/citizen/index.html:2078:        for (const btn of box.querySelectorAll("[data-onboard-next]")) {
+ui/citizen/index.html:2080:            const action = String(btn.getAttribute("data-onboard-next") || "");
+scripts/graph_ui_server.py:37:UI_CITIZEN_ONBOARDING_FUNNEL = BASE_DIR / "ui" / "citizen" / "onboarding_funnel.js"
+scripts/graph_ui_server.py:5676:            if path == "/citizen/onboarding_funnel.js":
+scripts/graph_ui_server.py:5678:                    self.write_html("<h1>onboarding_funnel.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)

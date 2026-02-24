@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-23T08:24:14+00:00",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "total_missing": 119,
+  "redundant_missing": 119,
+  "actionable_missing": 0,
+  "redundant_missing_pct": 1.0,
+  "actionable_missing_pct": 0.0,
+  "checks": {
+    "actionable_queue_empty": true
+  },
+  "status_buckets_total_missing": [
+    {
+      "status": 404,
+      "count": 119
+    }
+  ],
+  "status_buckets_actionable_missing": [],
+  "actionable_sample": [],
+  "db": "etl/data/staging/politicos-es.db"
+}

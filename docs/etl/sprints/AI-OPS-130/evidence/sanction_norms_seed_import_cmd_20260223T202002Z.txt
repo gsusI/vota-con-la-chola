@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/import_sanction_norms_seed.py", line 13, in <module>
+    from etl.parlamentario_es.db import apply_schema, open_db
+ModuleNotFoundError: No module named 'etl'

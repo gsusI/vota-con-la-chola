@@ -1,0 +1,285 @@
+{
+  "generated_at": "2026-02-23T23:05:27+00:00",
+  "status": "degraded",
+  "totals": {
+    "target_fragments_total": 8,
+    "fragments_with_personal_accountability_total": 7,
+    "personal_edges_total": 13,
+    "personal_edges_with_primary_evidence_total": 13,
+    "direct_person_edges_total": 0,
+    "indirect_attributable_edges_total": 9,
+    "indirect_person_edges_total": 9,
+    "indirect_person_edges_valid_window_total": 9,
+    "indirect_person_edges_identity_resolved_total": 9,
+    "indirect_person_edges_identity_resolved_exact_name_total": 0,
+    "indirect_person_edges_identity_resolved_alias_total": 9,
+    "indirect_person_edges_identity_resolved_alias_non_manual_total": 1,
+    "indirect_person_edges_identity_resolved_alias_manual_total": 8,
+    "aliases_total": 9,
+    "manual_alias_rows_total": 8,
+    "manual_alias_rows_with_edge_impact_total": 8,
+    "manual_alias_edges_with_impact_total": 8,
+    "official_alias_rows_total": 1,
+    "official_alias_rows_with_evidence_total": 1,
+    "official_alias_rows_missing_evidence_total": 0,
+    "official_alias_rows_with_source_record_total": 0,
+    "official_alias_rows_missing_source_record_total": 1,
+    "persons_scored_total": 5,
+    "top_person_scores_total": 5
+  },
+  "coverage": {
+    "fragments_with_personal_accountability_pct": 0.875,
+    "personal_edges_with_primary_evidence_pct": 1.0,
+    "indirect_person_edges_with_valid_window_pct": 1.0,
+    "indirect_identity_resolution_pct": 1.0,
+    "indirect_non_manual_alias_resolution_pct": 0.111111,
+    "manual_alias_share_pct": 0.888889,
+    "manual_alias_upgrade_edge_impact_pct": 0.888889,
+    "official_alias_share_pct": 0.111111,
+    "official_alias_evidence_coverage_pct": 1.0,
+    "official_alias_source_record_coverage_pct": 0.0
+  },
+  "checks": {
+    "personal_scores_available": true,
+    "min_persons_scored_gate": true,
+    "personal_fragment_coverage_gate": true,
+    "personal_primary_evidence_gate": true,
+    "indirect_person_window_gate": true,
+    "indirect_identity_resolution_gate": true,
+    "indirect_non_manual_alias_resolution_gate": true,
+    "manual_alias_share_gate": true,
+    "official_alias_share_gate": true,
+    "official_alias_evidence_gate": true,
+    "official_alias_source_record_gate": false
+  },
+  "gate": {
+    "passed": false,
+    "thresholds": {
+      "personal_confidence_min": 0.55,
+      "personal_max_causal_distance": 2,
+      "personal_fragment_coverage_min": 0.5,
+      "personal_primary_evidence_min_pct": 1.0,
+      "min_personal_primary_evidence_edges": 1,
+      "indirect_person_window_min_pct": 1.0,
+      "min_indirect_person_window_edges": 1,
+      "indirect_identity_resolution_min_pct": 0.0,
+      "min_indirect_identity_resolution_edges": 1,
+      "indirect_non_manual_alias_resolution_min_pct": 0.0,
+      "min_indirect_non_manual_alias_resolution_edges": 1,
+      "manual_alias_share_max": 1.0,
+      "min_alias_rows_for_manual_share_gate": 1,
+      "official_alias_share_min_pct": 0.0,
+      "min_alias_rows_for_official_share_gate": 1,
+      "official_alias_evidence_min_pct": 1.0,
+      "min_official_alias_rows_for_evidence_gate": 1,
+      "official_alias_source_record_min_pct": 1.0,
+      "min_official_alias_rows_for_source_record_gate": 1,
+      "min_persons_scored": 1
+    }
+  },
+  "methodology": {
+    "score_formula": "sum(irlc_score * role_weight * edge_confidence * primary_evidence_factor), normalized 0-100 by max person",
+    "ranking_note": "top_person_scores is a display cap (top_n); gate checks always use full persons_scored_total",
+    "identity_resolution_method": "exact normalized full_name match OR alias match on person_name_aliases.canonical_alias",
+    "identity_provenance_note": "alias source quality is tracked via source_kind (manual_seed vs official_*) and source_record_pk coverage for official aliases.",
+    "primary_evidence_factor": {
+      "with_primary_evidence": 1.0,
+      "without_primary_evidence": 0.5
+    },
+    "role_weights": {
+      "propose": 0.25,
+      "approve": 0.3,
+      "delegate": 0.15,
+      "enforce": 0.25,
+      "audit": 0.05,
+      "appoint": 0.15,
+      "instruct": 0.15,
+      "design": 0.1
+    }
+  },
+  "top_person_scores": [
+    {
+      "person_name": "Diego Blanco Vega",
+      "actor_labels": [
+        "Ministerio competente en trafico"
+      ],
+      "role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 3,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 3,
+      "fragments_total": 2,
+      "primary_evidence_edges_total": 3,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.726667,
+      "mean_probative_strength": 0.726667,
+      "weighted_score_raw": 17.619,
+      "responsibility_score_personal": 100.0,
+      "role_breakdown": [
+        {
+          "role": "delegate",
+          "edges_total": 2,
+          "weighted_score_raw": 12.432,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        },
+        {
+          "role": "instruct",
+          "edges_total": 1,
+          "weighted_score_raw": 5.187,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Carlos Rivas Soto",
+      "actor_labels": [
+        "Ministerio de Hacienda"
+      ],
+      "role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 3,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 3,
+      "fragments_total": 2,
+      "primary_evidence_edges_total": 3,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.623333,
+      "mean_probative_strength": 0.623333,
+      "weighted_score_raw": 13.295475,
+      "responsibility_score_personal": 75.461008,
+      "role_breakdown": [
+        {
+          "role": "delegate",
+          "edges_total": 1,
+          "weighted_score_raw": 7.068225,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        },
+        {
+          "role": "design",
+          "edges_total": 2,
+          "weighted_score_raw": 6.22725,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Laura Nieto Ruiz",
+      "actor_labels": [
+        "Direccion politica de movilidad",
+        "Secretaria de Estado de Seguridad"
+      ],
+      "role_titles": [
+        "Direccion politica de movilidad",
+        "Secretaria de Estado de Seguridad"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 3,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 3,
+      "fragments_total": 2,
+      "primary_evidence_edges_total": 3,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.613333,
+      "mean_probative_strength": 0.613333,
+      "weighted_score_raw": 12.7003,
+      "responsibility_score_personal": 72.082979,
+      "role_breakdown": [
+        {
+          "role": "design",
+          "edges_total": 2,
+          "weighted_score_raw": 6.832,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        },
+        {
+          "role": "instruct",
+          "edges_total": 1,
+          "weighted_score_raw": 5.8683,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Alicia Martin Gomez",
+      "actor_labels": [
+        "Secretaria de Estado de Empleo"
+      ],
+      "role_titles": [
+        "Secretaria de Estado de Empleo"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 2,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 2,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 2,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.56,
+      "mean_probative_strength": 0.56,
+      "weighted_score_raw": 10.3782,
+      "responsibility_score_personal": 58.903456,
+      "role_breakdown": [
+        {
+          "role": "appoint",
+          "edges_total": 2,
+          "weighted_score_raw": 10.3782,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Marta Jimenez Cano",
+      "actor_labels": [
+        "Ministerio de Trabajo",
+        "Secretaria de Estado de Hacienda"
+      ],
+      "role_titles": [
+        "Secretaria de Estado de Hacienda",
+        "Titular del Ministerio de Trabajo"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 2,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 2,
+      "fragments_total": 2,
+      "primary_evidence_edges_total": 2,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.59,
+      "mean_probative_strength": 0.59,
+      "weighted_score_raw": 9.02685,
+      "responsibility_score_personal": 51.233611,
+      "role_breakdown": [
+        {
+          "role": "instruct",
+          "edges_total": 1,
+          "weighted_score_raw": 5.61585,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        },
+        {
+          "role": "design",
+          "edges_total": 1,
+          "weighted_score_raw": 3.411,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    }
+  ],
+  "indirect_identity_unresolved_sample": []
+}

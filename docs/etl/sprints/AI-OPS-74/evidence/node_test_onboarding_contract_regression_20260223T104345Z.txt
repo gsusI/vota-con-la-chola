@@ -1,0 +1,41 @@
+node --test tests/test_citizen_onboarding_funnel.js tests/test_citizen_onboarding_ui_contract.js
+TAP version 13
+# Subtest: funnel picks apply_pack first when suggested pack exists
+ok 1 - funnel picks apply_pack first when suggested pack exists
+  ---
+  duration_ms: 0.631
+  ...
+# Subtest: funnel skips pack when no recommendation and advances to concern
+ok 2 - funnel skips pack when no recommendation and advances to concern
+  ---
+  duration_ms: 0.094
+  ...
+# Subtest: funnel action order after concern is topic then alignment then preference
+ok 3 - funnel action order after concern is topic then alignment then preference
+  ---
+  duration_ms: 0.089291
+  ...
+# Subtest: funnel returns done when all required steps are complete
+ok 4 - funnel returns done when all required steps are complete
+  ---
+  duration_ms: 0.061458
+  ...
+# Subtest: citizen UI loads onboarding funnel module
+ok 5 - citizen UI loads onboarding funnel module
+  ---
+  duration_ms: 0.974542
+  ...
+# Subtest: citizen onboarding includes next-action CTA contract markers
+ok 6 - citizen onboarding includes next-action CTA contract markers
+  ---
+  duration_ms: 0.366417
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.996667

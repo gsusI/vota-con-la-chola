@@ -1,0 +1,21 @@
+node --test tests/test_citizen_accessibility_readability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes skip link and main landmark focus target
+ok 1 - citizen UI includes skip link and main landmark focus target
+  ---
+  duration_ms: 1.496792
+  ...
+# Subtest: citizen UI includes accessibility/readability markers for status and sections
+ok 2 - citizen UI includes accessibility/readability markers for status and sections
+  ---
+  duration_ms: 1.232958
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 43.835041

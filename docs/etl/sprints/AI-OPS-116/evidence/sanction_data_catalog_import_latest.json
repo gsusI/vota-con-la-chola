@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-02-24T15:24:31+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/sanction_data_catalog_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "volume_sources_total": 9,
+    "infraction_types_total": 10,
+    "infraction_mappings_total": 10,
+    "procedural_kpis_total": 3
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-24",
+    "source_id_used": "boe_api_legal",
+    "seed_schema_version": "sanction_data_catalog_seed_v1",
+    "counts": {
+      "volume_sources_inserted": 0,
+      "volume_sources_updated": 9,
+      "infraction_types_inserted": 0,
+      "infraction_types_updated": 10,
+      "infraction_mappings_inserted": 0,
+      "infraction_mappings_updated": 10,
+      "procedural_kpis_inserted": 0,
+      "procedural_kpis_updated": 3,
+      "unresolved_norm_refs": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "sanction_volume_sources_total": 9,
+      "sanction_infraction_types_total": 10,
+      "sanction_infraction_type_mappings_total": 10,
+      "sanction_procedural_kpi_definitions_total": 3
+    }
+  }
+}

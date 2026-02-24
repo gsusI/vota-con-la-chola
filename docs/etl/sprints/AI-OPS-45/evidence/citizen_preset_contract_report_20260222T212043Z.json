@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-02-22T21:20:43.874Z",
+  "fixture_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
+  "codec_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+  "schema_version": "v2",
+  "strict": true,
+  "summary": {
+    "hash_cases_total": 9,
+    "hash_cases_pass": 9,
+    "hash_cases_fail": 0,
+    "share_cases_total": 3,
+    "share_cases_pass": 3,
+    "share_cases_fail": 0,
+    "total_cases": 12,
+    "total_pass": 12,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "results": [
+    {
+      "section": "hash_cases",
+      "id": "hash_missing_preset_prefix",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_minimal_alignment",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_votes_pack_and_concerns",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_repeated_keys_and_plus_pack",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_whitespace_value_normalization",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_unknown_version",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_malformed_encoding",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_empty_payload",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_no_supported_fields",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "share_cases",
+      "id": "share_strips_query_and_legacy_hash",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "share_cases",
+      "id": "share_normalizes_pack_and_dedupes_concerns",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "share_cases",
+      "id": "share_minimal_payload_when_optional_empty",
+      "ok": true,
+      "error": ""
+    }
+  ]
+}

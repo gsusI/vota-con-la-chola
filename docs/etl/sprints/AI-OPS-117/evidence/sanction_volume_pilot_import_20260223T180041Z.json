@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops117.db",
+  "seed_path": "etl/data/seeds/sanction_volume_pilot_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "volume_observations_total": 9,
+    "procedural_metrics_total": 6,
+    "municipal_ordinances_total": 20,
+    "municipal_fragments_total": 3
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_volume_pilot_seed_v1",
+    "counts": {
+      "volume_observations_inserted": 9,
+      "volume_observations_updated": 0,
+      "procedural_metrics_inserted": 6,
+      "procedural_metrics_updated": 0,
+      "municipal_ordinances_inserted": 20,
+      "municipal_ordinances_updated": 0,
+      "municipal_fragments_inserted": 3,
+      "municipal_fragments_updated": 0,
+      "unresolved_sanction_source_refs": 0,
+      "unresolved_infraction_type_refs": 0,
+      "unresolved_kpi_refs": 0,
+      "unresolved_norm_refs": 0,
+      "unresolved_fragment_refs": 0,
+      "unresolved_ordinance_refs": 0
+    },
+    "totals": {
+      "sanction_volume_observations_total": 9,
+      "sanction_procedural_metrics_total": 6,
+      "sanction_municipal_ordinances_total": 20,
+      "sanction_municipal_ordinance_fragments_total": 3
+    }
+  }
+}

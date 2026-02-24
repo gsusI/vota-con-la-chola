@@ -1,0 +1,919 @@
+just citizen-test-preset-codec
+node --test tests/test_citizen_preset_codec.js tests/test_citizen_preset_recovery_ui_contract.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 1.700583
+  ...
+# Subtest: readPresetFromHash follows fixture matrix contract
+ok 2 - readPresetFromHash follows fixture matrix contract
+  ---
+  duration_ms: 1.313667
+  ...
+# Subtest: buildAlignmentPresetShareUrl follows fixture roundtrip contract
+ok 3 - buildAlignmentPresetShareUrl follows fixture roundtrip contract
+  ---
+  duration_ms: 1.16675
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 4 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.132833
+  ...
+# Subtest: citizen UI exposes preset recovery banner actions
+ok 5 - citizen UI exposes preset recovery banner actions
+  ---
+  duration_ms: 3.048666
+  ...
+# Subtest: citizen UI normalizes canonical preset hash when needed
+ok 6 - citizen UI normalizes canonical preset hash when needed
+  ---
+  duration_ms: 0.604583
+  ...
+# Subtest: preset codec parity reporter passes strict mode on identical files
+ok 7 - preset codec parity reporter passes strict mode on identical files
+  ---
+  duration_ms: 130.03125
+  ...
+# Subtest: preset codec parity reporter fails strict mode on mismatch and exposes first diff
+ok 8 - preset codec parity reporter fails strict mode on mismatch and exposes first diff
+  ---
+  duration_ms: 94.411208
+  ...
+# Subtest: preset codec sync-state reporter passes strict mode when already synchronized
+ok 9 - preset codec sync-state reporter passes strict mode when already synchronized
+  ---
+  duration_ms: 132.286625
+  ...
+# Subtest: preset codec sync-state reporter fails strict mode when published copy is stale
+ok 10 - preset codec sync-state reporter fails strict mode when published copy is stale
+  ---
+  duration_ms: 97.003625
+  ...
+# Subtest: preset contract bundle passes strict mode when all subcontracts pass
+ok 11 - preset contract bundle passes strict mode when all subcontracts pass
+  ---
+  duration_ms: 319.121541
+  ...
+# Subtest: preset contract bundle fails strict mode when published asset is stale
+ok 12 - preset contract bundle fails strict mode when published asset is stale
+  ---
+  duration_ms: 155.499875
+  ...
+# Subtest: preset contract bundle history reporter appends baseline without regression
+ok 13 - preset contract bundle history reporter appends baseline without regression
+  ---
+  duration_ms: 129.027417
+  ...
+# Subtest: preset contract bundle history reporter fails strict on regression
+ok 14 - preset contract bundle history reporter fails strict on regression
+  ---
+  duration_ms: 175.807583
+  ...
+# Subtest: history compaction reporter keeps incident entries and writes compacted JSONL
+ok 15 - history compaction reporter keeps incident entries and writes compacted JSONL
+  ---
+  duration_ms: 129.977041
+  ...
+# Subtest: history compaction reporter fails strict when compaction does not drop rows above threshold
+ok 16 - history compaction reporter fails strict when compaction does not drop rows above threshold
+  ---
+  duration_ms: 93.785
+  ...
+# Subtest: history SLO reporter passes strict on clean streak with zero regressions
+ok 17 - history SLO reporter passes strict on clean streak with zero regressions
+  ---
+  duration_ms: 127.676167
+  ...
+# Subtest: history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+ok 18 - history SLO reporter emits amber when current window worsens vs previous but stays under thresholds
+  ---
+  duration_ms: 90.824333
+  ...
+# Subtest: history SLO reporter fails strict when regression and latest dirty break thresholds
+ok 19 - history SLO reporter fails strict when regression and latest dirty break thresholds
+  ---
+  duration_ms: 82.393167
+  ...
+# Subtest: SLO digest reporter emits compact ok digest in strict mode
+ok 20 - SLO digest reporter emits compact ok digest in strict mode
+  ---
+  duration_ms: 125.278125
+  ...
+# Subtest: SLO digest reporter fails strict mode when digest is failed
+ok 21 - SLO digest reporter fails strict mode when digest is failed
+  ---
+  duration_ms: 89.30675
+  ...
+# Subtest: SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 22 - SLO digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 132.071834
+  ...
+# Subtest: SLO digest heartbeat reporter deduplicates identical heartbeat ids
+ok 23 - SLO digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 172.044
+  ...
+# Subtest: SLO digest heartbeat reporter fails strict when status is failed but still appends row
+ok 24 - SLO digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 57.370375
+  ...
+# Subtest: heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+ok 25 - heartbeat compaction reporter keeps failed/red incident entries and writes compacted JSONL
+  ---
+  duration_ms: 129.678333
+  ...
+# Subtest: heartbeat compaction reporter fails strict when no rows are dropped above threshold
+ok 26 - heartbeat compaction reporter fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 96.482417
+  ...
+# Subtest: heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+ok 27 - heartbeat compaction window parity reporter passes strict when compacted preserves raw last-N parity
+  ---
+  duration_ms: 225.525375
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+ok 28 - heartbeat compaction window parity reporter fails strict when compacted misses incident rows
+  ---
+  duration_ms: 78.349708
+  ...
+# Subtest: heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+ok 29 - heartbeat compaction window parity reporter fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 57.047625
+  ...
+# Subtest: compaction-window digest reporter emits ok status in strict mode when parity is complete
+ok 30 - compaction-window digest reporter emits ok status in strict mode when parity is complete
+  ---
+  duration_ms: 128.573542
+  ...
+# Subtest: compaction-window digest reporter emits degraded status when non-incident rows are missing
+ok 31 - compaction-window digest reporter emits degraded status when non-incident rows are missing
+  ---
+  duration_ms: 95.17325
+  ...
+# Subtest: compaction-window digest reporter fails strict mode when parity report has strict failures
+ok 32 - compaction-window digest reporter fails strict mode when parity report has strict failures
+  ---
+  duration_ms: 80.485541
+  ...
+# Subtest: compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+ok 33 - compact-window digest heartbeat reporter appends one heartbeat in strict pass mode
+  ---
+  duration_ms: 132.398666
+  ...
+# Subtest: compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+ok 34 - compact-window digest heartbeat reporter deduplicates identical heartbeat ids
+  ---
+  duration_ms: 169.796042
+  ...
+# Subtest: compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+ok 35 - compact-window digest heartbeat reporter fails strict when status is failed but still appends row
+  ---
+  duration_ms: 57.117791
+  ...
+# Subtest: compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+ok 36 - compact-window digest heartbeat compaction keeps degraded/failed/red incidents and writes compacted JSONL
+  ---
+  duration_ms: 133.486583
+  ...
+# Subtest: compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+ok 37 - compact-window digest heartbeat compaction fails strict when no rows are dropped above threshold
+  ---
+  duration_ms: 92.606875
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+ok 38 - compact-window digest heartbeat compaction-window parity passes strict when compacted preserves raw last-N incidents
+  ---
+  duration_ms: 215.370208
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+ok 39 - compact-window digest heartbeat compaction-window parity fails strict when compacted misses degraded incident rows
+  ---
+  duration_ms: 83.274916
+  ...
+# Subtest: compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+ok 40 - compact-window digest heartbeat compaction-window parity fails strict when latest raw entry is missing from compacted
+  ---
+  duration_ms: 54.338833
+  ...
+# Subtest: compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+ok 41 - compact-window digest heartbeat window reporter passes strict on all-ok/latest-ok with thresholds satisfied
+  ---
+  duration_ms: 50.622708
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+ok 42 - compact-window digest heartbeat window reporter fails strict when degraded exceeds thresholds
+  ---
+  duration_ms: 59.432333
+  ...
+# Subtest: compact-window digest heartbeat window reporter fails strict on malformed entries
+ok 43 - compact-window digest heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 81.65775
+  ...
+# Subtest: heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+ok 44 - heartbeat window reporter passes strict on non-failed latest with thresholds satisfied
+  ---
+  duration_ms: 55.83425
+  ...
+# Subtest: heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+ok 45 - heartbeat window reporter fails strict when failed rows exceed threshold and latest is failed
+  ---
+  duration_ms: 36.16975
+  ...
+# Subtest: heartbeat window reporter fails strict on malformed entries
+ok 46 - heartbeat window reporter fails strict on malformed entries
+  ---
+  duration_ms: 34.731541
+  ...
+# Subtest: bundle history window reporter passes strict when window has no regressions
+ok 47 - bundle history window reporter passes strict when window has no regressions
+  ---
+  duration_ms: 49.305
+  ...
+# Subtest: bundle history window reporter fails strict when window contains regressions
+ok 48 - bundle history window reporter fails strict when window contains regressions
+  ---
+  duration_ms: 32.1635
+  ...
+# Subtest: preset fixture reporter passes strict mode for canonical fixture
+ok 49 - preset fixture reporter passes strict mode for canonical fixture
+  ---
+  duration_ms: 57.039458
+  ...
+# Subtest: preset fixture reporter surfaces failed ids in strict drift run
+ok 50 - preset fixture reporter surfaces failed ids in strict drift run
+  ---
+  duration_ms: 33.4835
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 608.311333
+just citizen-test-accessibility-readability
+node --test tests/test_citizen_accessibility_readability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes skip link and main landmark focus target
+ok 1 - citizen UI includes skip link and main landmark focus target
+  ---
+  duration_ms: 1.265334
+  ...
+# Subtest: citizen UI includes accessibility/readability markers for status and sections
+ok 2 - citizen UI includes accessibility/readability markers for status and sections
+  ---
+  duration_ms: 0.54425
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 45.209666
+just citizen-test-evidence-trust-panel
+node --test tests/test_citizen_evidence_trust_panel.js tests/test_citizen_evidence_trust_panel_ui_contract.js
+TAP version 13
+# Subtest: evidence trust panel computes freshness, trust level, and drilldown metadata
+ok 1 - evidence trust panel computes freshness, trust level, and drilldown metadata
+  ---
+  duration_ms: 0.9115
+  ...
+# Subtest: evidence trust panel handles missing dates and links deterministically
+ok 2 - evidence trust panel handles missing dates and links deterministically
+  ---
+  duration_ms: 0.12475
+  ...
+# Subtest: citizen UI loads evidence trust panel module
+ok 3 - citizen UI loads evidence trust panel module
+  ---
+  duration_ms: 1.2875
+  ...
+# Subtest: citizen UI renders evidence trust panel markers in party cards
+ok 4 - citizen UI renders evidence trust panel markers in party cards
+  ---
+  duration_ms: 0.5065
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 49.8275
+just citizen-test-cross-method-stability
+node --test tests/test_citizen_cross_method_stability.js tests/test_citizen_cross_method_stability_ui_contract.js
+TAP version 13
+# Subtest: cross-method stability reports stable on aligned comparable stances
+ok 1 - cross-method stability reports stable on aligned comparable stances
+  ---
+  duration_ms: 0.8865
+  ...
+# Subtest: cross-method stability reports uncertain when declared signal is mostly unknown
+ok 2 - cross-method stability reports uncertain when declared signal is mostly unknown
+  ---
+  duration_ms: 0.146834
+  ...
+# Subtest: cross-method stability reports unstable on high votes-vs-declared mismatch
+ok 3 - cross-method stability reports unstable on high votes-vs-declared mismatch
+  ---
+  duration_ms: 0.11975
+  ...
+# Subtest: citizen UI loads cross-method stability module
+ok 4 - citizen UI loads cross-method stability module
+  ---
+  duration_ms: 1.384084
+  ...
+# Subtest: citizen coherence view includes cross-method stability contract markers
+ok 5 - citizen coherence view includes cross-method stability contract markers
+  ---
+  duration_ms: 0.57025
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.5025
+just citizen-test-mobile-performance
+node --test tests/test_citizen_mobile_performance_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile interaction latency markers
+ok 1 - citizen UI defines mobile interaction latency markers
+  ---
+  duration_ms: 1.538
+  ...
+# Subtest: citizen UI includes mobile-friendly rendering and reduced-motion guards
+ok 2 - citizen UI includes mobile-friendly rendering and reduced-motion guards
+  ---
+  duration_ms: 0.388375
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 43.507
+python3 -m unittest tests/test_report_citizen_mobile_performance_budget.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T12:00:28+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjv79t5gt/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjv79t5gt/a.js",
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjv79t5gt/b.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjv79t5gt/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 379,
+    "ui_assets_total_bytes": 36,
+    "snapshot_bytes": 12,
+    "ui_assets_count": 2,
+    "interaction_markers_missing": []
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 1000,
+    "max_ui_assets_total_bytes": 1000,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": true,
+    "ui_assets_total_within_budget": true,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": true
+  },
+  "failure_reasons": [],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjv79t5gt/a.js",
+      "bytes": 18
+    },
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjv79t5gt/b.js",
+      "bytes": 18
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T12:00:28+00:00",
+  "status": "failed",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwl9jkf36/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwl9jkf36/a.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwl9jkf36/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 13,
+    "ui_assets_total_bytes": 401,
+    "snapshot_bytes": 3,
+    "ui_assets_count": 1,
+    "interaction_markers_missing": [
+      "SEARCH_INPUT_DEBOUNCE_MS",
+      "RENDER_COMPARE_SCHEDULE",
+      "scheduleRenderCompare",
+      "MOBILE_LATENCY_OBS_VERSION",
+      "markInputLatencySampleStart",
+      "commitInputLatencySample",
+      "addEventListener(\"input\", onConcernSearchInputRaw)",
+      "addEventListener(\"input\", onTopicSearchInputRaw)"
+    ]
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 10,
+    "max_ui_assets_total_bytes": 100,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": false,
+    "ui_assets_total_within_budget": false,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": false
+  },
+  "failure_reasons": [
+    "ui_html_over_budget",
+    "ui_assets_total_over_budget",
+    "interaction_markers_missing"
+  ],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwl9jkf36/a.js",
+      "bytes": 401
+    }
+  ]
+}
+just citizen-test-mobile-observability
+node --test tests/test_citizen_mobile_observability_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile latency observability markers
+ok 1 - citizen UI defines mobile latency observability markers
+  ---
+  duration_ms: 1.429375
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44.52975
+python3 -m unittest tests/test_report_citizen_mobile_observability.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T12:00:28+00:00",
+  "telemetry_json_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpzjzzlty6/summary.json",
+  "telemetry_events_jsonl_path": null,
+  "telemetry_sources": [
+    "telemetry_json"
+  ],
+  "telemetry": {
+    "sample_count": null,
+    "events_total": null,
+    "parse_errors": null,
+    "source_breakdown": {}
+  },
+  "metrics": {
+    "input_to_render_p50_ms": null,
+    "input_to_render_p90_ms": null,
+    "input_to_render_p95_ms": null
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 180.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": false,
+    "sample_count_meets_minimum": null,
+    "input_to_render_p50_within_threshold": null,
+    "input_to_render_p90_within_threshold": null,
+    "contract_complete": false
+  },
+  "missing_metrics": [
+    "input_to_render_p50_ms",
+    "input_to_render_p90_ms",
+    "input_to_render_p95_ms"
+  ],
+  "degraded_reasons": [
+    "telemetry_missing"
+  ],
+  "failure_reasons": [],
+  "status": "degraded"
+}
+{
+  "generated_at": "2026-02-23T12:00:28+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpaa1o7ahq/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 148.5,
+    "input_to_render_p90_ms": 284.0,
+    "input_to_render_p95_ms": 322.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 200.0,
+    "max_input_to_render_p90_ms": 330.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": true,
+    "input_to_render_p90_within_threshold": true,
+    "contract_complete": true
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "status": "ok"
+}
+{
+  "generated_at": "2026-02-23T12:00:28+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpvwhhtn_n/events.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 20,
+    "events_total": 20,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "stance_filter_change": 10,
+      "topic_search_input": 10
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 175.0,
+    "input_to_render_p90_ms": 512.0,
+    "input_to_render_p95_ms": 626.0
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 150.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": false,
+    "input_to_render_p90_within_threshold": false,
+    "contract_complete": false
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [
+    "input_to_render_p50_above_threshold",
+    "input_to_render_p90_above_threshold"
+  ],
+  "status": "failed"
+}
+just citizen-test-first-answer-accelerator
+node --test tests/test_citizen_first_answer_accelerator.js tests/test_citizen_first_answer_ui_contract.js
+TAP version 13
+# Subtest: first-answer accelerator ranks concerns/topics and preserves evidence links
+ok 1 - first-answer accelerator ranks concerns/topics and preserves evidence links
+  ---
+  duration_ms: 1.316
+  ...
+# Subtest: first-answer accelerator uses deterministic fallback when concern ranking is empty
+ok 2 - first-answer accelerator uses deterministic fallback when concern ranking is empty
+  ---
+  duration_ms: 0.157125
+  ...
+# Subtest: first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+ok 3 - first-answer accelerator tie-breaks equal-scored topics deterministically by topic order
+  ---
+  duration_ms: 0.157416
+  ...
+# Subtest: citizen UI loads first-answer accelerator module
+ok 4 - citizen UI loads first-answer accelerator module
+  ---
+  duration_ms: 1.164833
+  ...
+# Subtest: citizen onboarding exposes first-answer CTA markers
+ok 5 - citizen onboarding exposes first-answer CTA markers
+  ---
+  duration_ms: 0.526708
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.229959
+just citizen-test-unknown-explainability
+node --test tests/test_citizen_unknown_explainability.js tests/test_citizen_unknown_explainability_ui_contract.js
+TAP version 13
+# Subtest: unknown explainability flags no_signal-dominant uncertainty
+ok 1 - unknown explainability flags no_signal-dominant uncertainty
+  ---
+  duration_ms: 0.810417
+  ...
+# Subtest: unknown explainability flags low-coverage unclear dominance
+ok 2 - unknown explainability flags low-coverage unclear dominance
+  ---
+  duration_ms: 0.088958
+  ...
+# Subtest: unknown explainability flags mixed uncertainty when no cause dominates
+ok 3 - unknown explainability flags mixed uncertainty when no cause dominates
+  ---
+  duration_ms: 0.064792
+  ...
+# Subtest: unknown explainability hides hint when no unknown cells exist
+ok 4 - unknown explainability hides hint when no unknown cells exist
+  ---
+  duration_ms: 0.06425
+  ...
+# Subtest: citizen UI loads unknown explainability module
+ok 5 - citizen UI loads unknown explainability module
+  ---
+  duration_ms: 1.140625
+  ...
+# Subtest: citizen UI includes unknown explainability contract markers
+ok 6 - citizen UI includes unknown explainability contract markers
+  ---
+  duration_ms: 0.432792
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 45.871375
+just citizen-test-concern-pack-quality
+node --test tests/test_citizen_concern_pack_quality_ui_contract.js
+TAP version 13
+# Subtest: citizen UI loads optional concern-pack quality artifact
+ok 1 - citizen UI loads optional concern-pack quality artifact
+  ---
+  duration_ms: 1.366208
+  ...
+# Subtest: citizen UI exposes weak-pack markers in tags and hints
+ok 2 - citizen UI exposes weak-pack markers in tags and hints
+  ---
+  duration_ms: 0.434458
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44.655292
+python3 -m unittest tests/test_report_citizen_concern_pack_quality.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
+{
+  "generated_at": "2026-02-23T12:00:29+00:00",
+  "status": "ok",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpmjca3zzu/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpmjca3zzu/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": true
+  },
+  "failure_reasons": [],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T12:00:29+00:00",
+  "status": "failed",
+  "paths": {
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpk5y8jdpb/citizen.json",
+    "concerns_config": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpk5y8jdpb/concerns.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 2,
+    "min_clear_cells_pct": 0.6,
+    "max_unknown_cells_pct": 0.4,
+    "min_confidence_avg_signal": 0.6,
+    "min_high_stakes_share": 0.0,
+    "max_weak_packs": 0
+  },
+  "summary": {
+    "packs_total": 2,
+    "weak_packs_total": 1,
+    "weak_pack_ids": [
+      "pack_weak"
+    ],
+    "parties_total": 2,
+    "topics_total": 3,
+    "high_stakes_topics_total": 1,
+    "topic_party_cells_total": 6
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": false
+  },
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
+  "packs": [
+    {
+      "pack_id": "pack_ok",
+      "pack_label": "Pack OK",
+      "concern_ids": [
+        "a",
+        "b"
+      ],
+      "tradeoff": "x",
+      "topics_total": 2,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.5,
+      "cells_total": 4,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0
+      },
+      "clear_cells_total": 4,
+      "clear_cells_pct": 1.0,
+      "unknown_cells_total": 0,
+      "unknown_cells_pct": 0.0,
+      "any_signal_cells_total": 4,
+      "any_signal_cells_pct": 1.0,
+      "confidence_avg_signal": 0.85,
+      "quality_score": 0.885,
+      "weak": false,
+      "weak_reasons": []
+    },
+    {
+      "pack_id": "pack_weak",
+      "pack_label": "Pack weak",
+      "concern_ids": [
+        "c"
+      ],
+      "tradeoff": "y",
+      "topics_total": 1,
+      "high_stakes_topics_total": 0,
+      "high_stakes_share": 0.0,
+      "cells_total": 2,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 2
+      },
+      "clear_cells_total": 0,
+      "clear_cells_pct": 0.0,
+      "unknown_cells_total": 2,
+      "unknown_cells_pct": 1.0,
+      "any_signal_cells_total": 0,
+      "any_signal_cells_pct": 0.0,
+      "confidence_avg_signal": null,
+      "quality_score": 0.0,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-02-22T22:47:08.342Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-57/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_tail_20260222T224707Z.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-57/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compacted_20260222T224707Z.jsonl",
+  "window_last": 20,
+  "entries_total_raw": 1,
+  "entries_total_compacted": 1,
+  "window_raw_entries": 1,
+  "window_raw_malformed_entries": 0,
+  "compacted_malformed_entries": 0,
+  "raw_window_status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 0
+  },
+  "raw_window_risk_level_counts": {
+    "green": 1,
+    "amber": 0,
+    "red": 0
+  },
+  "raw_window_incidents": 0,
+  "raw_window_failed": 0,
+  "raw_window_red": 0,
+  "present_in_compacted_in_window": 1,
+  "missing_in_compacted_in_window": 0,
+  "incident_present_in_compacted": 0,
+  "incident_missing_in_compacted": 0,
+  "failed_present_in_compacted": 0,
+  "red_present_in_compacted": 0,
+  "raw_window_coverage_pct": 100,
+  "incident_coverage_pct": 0,
+  "latest_raw": {
+    "id": "2026-02-22T22:47:08.138Z|2026-02-22T22:47:08.180Z|ok|green|0|1",
+    "heartbeat_id": "2026-02-22T22:47:08.138Z|2026-02-22T22:47:08.180Z|ok|green|0|1",
+    "run_at": "2026-02-22T22:47:08.180Z",
+    "line_no": 1,
+    "status": "ok",
+    "risk_level": "green",
+    "malformed_line": false,
+    "present_in_compacted": true
+  },
+  "missing_raw_ids_sample": [],
+  "missing_incident_ids_sample": [],
+  "checks": {
+    "window_nonempty_ok": true,
+    "raw_window_malformed_ok": true,
+    "compacted_malformed_ok": true,
+    "latest_present_ok": true,
+    "incident_parity_ok": true,
+    "failed_parity_ok": true,
+    "red_parity_ok": true
+  },
+  "strict_fail_reasons": []
+}

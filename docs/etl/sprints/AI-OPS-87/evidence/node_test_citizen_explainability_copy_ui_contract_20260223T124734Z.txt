@@ -1,0 +1,20 @@
+TAP version 13
+# Subtest: citizen UI exposes explainability glossary with tooltip metadata
+ok 1 - citizen UI exposes explainability glossary with tooltip metadata
+  ---
+  duration_ms: 1.642833
+  ...
+# Subtest: citizen UI includes plain-language explainability copy hints
+ok 2 - citizen UI includes plain-language explainability copy hints
+  ---
+  duration_ms: 0.8275
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 45.515792

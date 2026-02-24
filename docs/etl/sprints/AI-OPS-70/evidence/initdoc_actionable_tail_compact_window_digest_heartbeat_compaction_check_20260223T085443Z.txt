@@ -1,0 +1,7 @@
+INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_OUT=docs/etl/sprints/AI-OPS-70/evidence/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_20260223T085443Z.json just parl-check-initdoc-actionable-tail-digest-heartbeat-compact-window-digest-heartbeat-compact
+python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction.py --heartbeat-jsonl docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl --compacted-jsonl docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl --keep-recent 20 --keep-mid-span 100 --keep-mid-every 5 --keep-old-every 20 --min-raw-for-dropped-check 25 --strict --out docs/etl/sprints/AI-OPS-70/evidence/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_20260223T085443Z.json
+Traceback (most recent call last):
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction.py", line 10, in <module>
+    from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction import (
+ModuleNotFoundError: No module named 'scripts'
+error: Recipe `parl-check-initdoc-actionable-tail-digest-heartbeat-compact-window-digest-heartbeat-compact` failed on line 524 with exit code 1

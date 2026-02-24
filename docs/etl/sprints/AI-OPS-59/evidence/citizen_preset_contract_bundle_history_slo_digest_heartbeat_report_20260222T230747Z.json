@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-02-22T23:08:51.710Z",
+  "strict": true,
+  "input_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-59/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T230747Z.json",
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "history_size_before": 4,
+  "history_size_after": 5,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "heartbeat": {
+    "run_at": "2026-02-22T23:08:51.672Z",
+    "heartbeat_id": "2026-02-22T23:08:51.629Z|2026-02-22T23:08:51.672Z|ok|green|0|11",
+    "digest_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-59/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T230747Z.json",
+    "digest_generated_at": "2026-02-22T23:08:51.672Z",
+    "slo_generated_at": "2026-02-22T23:08:51.629Z",
+    "status": "ok",
+    "risk_level": "green",
+    "entries_in_window": 11,
+    "regressions_in_window": 0,
+    "regression_rate_pct": 0,
+    "green_streak_latest": 11,
+    "latest_entry_clean": true,
+    "strict_fail_count": 0,
+    "risk_reason_count": 0,
+    "strict_fail_reasons": [],
+    "risk_reasons": []
+  }
+}

@@ -1,0 +1,114 @@
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmplr_hiryo/queue.csv (rows=1) [excluded_redundant_senado_global=1]
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpt3axjp0w/queue.txt (urls=0) [excluded_redundant_senado_global=1]
+{
+  "generated_at": "2026-02-23T07:58:24+00:00",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "total_missing": 1,
+  "redundant_missing": 0,
+  "actionable_missing": 1,
+  "redundant_missing_pct": 0.0,
+  "actionable_missing_pct": 1.0,
+  "checks": {
+    "actionable_queue_empty": false
+  },
+  "status_buckets_total_missing": [
+    {
+      "status": 0,
+      "count": 1
+    }
+  ],
+  "status_buckets_actionable_missing": [
+    {
+      "status": 0,
+      "count": 1
+    }
+  ],
+  "actionable_sample": [
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg15:exp:600/000801",
+      "doc_kind": "bocg",
+      "doc_url": "https://www.senado.es/legis15/expedientes/600/enmiendas/global_enmiendas_vetos_15_600000801.xml",
+      "last_http_status": 0,
+      "attempts": 0,
+      "last_attempt_at": ""
+    }
+  ],
+  "db": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpakgp97pm/gate_strict.db"
+}
+{
+  "generated_at": "2026-02-23T07:58:24+00:00",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "total_missing": 1,
+  "redundant_missing": 1,
+  "actionable_missing": 0,
+  "redundant_missing_pct": 1.0,
+  "actionable_missing_pct": 0.0,
+  "checks": {
+    "actionable_queue_empty": true
+  },
+  "status_buckets_total_missing": [
+    {
+      "status": 0,
+      "count": 1
+    }
+  ],
+  "status_buckets_actionable_missing": [],
+  "actionable_sample": [],
+  "db": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpakgp97pm/gate_strict.db"
+}
+{
+  "generated_at": "2026-02-23T07:58:24+00:00",
+  "contract_generated_at": "2026-02-22T23:00:00+00:00",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "status": "failed",
+  "totals": {
+    "total_missing": 10,
+    "redundant_missing": 8,
+    "actionable_missing": 2,
+    "actionable_missing_pct": 0.2
+  },
+  "thresholds": {
+    "max_actionable_missing": 0,
+    "max_actionable_missing_pct": 0.0
+  },
+  "checks": {
+    "actionable_queue_empty": false,
+    "actionable_missing_within_threshold": false,
+    "actionable_missing_pct_within_threshold": false
+  },
+  "strict_fail_reasons": [
+    "actionable_missing_exceeds_threshold:2>0",
+    "actionable_missing_pct_exceeds_threshold:0.200000>0.000000"
+  ]
+}
+{
+  "generated_at": "2026-02-23T07:58:24+00:00",
+  "contract_generated_at": "2026-02-22T23:00:00+00:00",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "status": "degraded",
+  "totals": {
+    "total_missing": 10,
+    "redundant_missing": 8,
+    "actionable_missing": 2,
+    "actionable_missing_pct": 0.2
+  },
+  "thresholds": {
+    "max_actionable_missing": 2,
+    "max_actionable_missing_pct": 0.2
+  },
+  "checks": {
+    "actionable_queue_empty": false,
+    "actionable_missing_within_threshold": true,
+    "actionable_missing_pct_within_threshold": true
+  },
+  "strict_fail_reasons": []
+}

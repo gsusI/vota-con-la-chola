@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-02-23T17:46:56+00:00",
+  "status": "ok",
+  "totals": {
+    "volume_sources_total": 5,
+    "infraction_types_total": 10,
+    "infraction_mappings_total": 10,
+    "mappings_with_norm_total": 8,
+    "mappings_with_fragment_total": 8,
+    "procedural_kpis_total": 3,
+    "volume_observations_total": 0,
+    "procedural_metric_rows_total": 0
+  },
+  "coverage": {
+    "mapping_fragment_coverage_pct": 0.8,
+    "mapping_norm_coverage_pct": 0.8
+  },
+  "checks": {
+    "volume_sources_seeded": true,
+    "infraction_types_seeded": true,
+    "infraction_mappings_seeded": true,
+    "mappings_with_fragment_seeded": true,
+    "procedural_kpis_seeded": true,
+    "volume_observations_started": false,
+    "procedural_metrics_started": false
+  },
+  "by_domain": {
+    "traffic": 3,
+    "municipal": 2,
+    "tax": 2,
+    "labor": 1,
+    "public_order": 1,
+    "social_security": 1
+  },
+  "by_scope": {
+    "estado": 4,
+    "municipal": 1
+  },
+  "missing_fragment_sample": [
+    {
+      "mapping_key": "inf:municipal_civism|municipal|civismo||",
+      "infraction_type_id": "inf:municipal_civism",
+      "source_system": "municipal",
+      "source_code": "civismo",
+      "source_label": "Ordenanza de civismo"
+    },
+    {
+      "mapping_key": "inf:municipal_waste_noise|municipal|residuos_ruido||",
+      "infraction_type_id": "inf:municipal_waste_noise",
+      "source_system": "municipal",
+      "source_code": "residuos_ruido",
+      "source_label": "Residuos y ruido"
+    }
+  ]
+}

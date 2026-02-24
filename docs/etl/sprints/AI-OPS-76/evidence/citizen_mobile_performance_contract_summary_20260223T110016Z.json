@@ -1,0 +1,24 @@
+{
+  "sprint": "AI-OPS-76",
+  "timestamp_utc": "2026-02-23T11:00:16Z",
+  "status": "pass",
+  "gates": {
+    "mobile_ui_rendering_pass": "pass",
+    "interaction_latency_contract": "pass",
+    "mobile_budget_script": "pass",
+    "mobile_budget_strict_check": "pass",
+    "regression_unknown_first_answer": "pass",
+    "syntax_compile": "pass"
+  },
+  "evidence_files": [
+    "docs/etl/sprints/AI-OPS-76/evidence/node_check_citizen_inline_script_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/node_check_test_citizen_mobile_performance_ui_contract_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/py_compile_report_citizen_mobile_performance_budget_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/just_citizen_test_mobile_performance_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/just_citizen_check_mobile_performance_budget_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_budget_20260223T110016Z.json",
+    "docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_contract_markers_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/just_citizen_test_unknown_explainability_regression_20260223T110016Z.txt",
+    "docs/etl/sprints/AI-OPS-76/evidence/just_citizen_test_first_answer_regression_20260223T110016Z.txt"
+  ]
+}

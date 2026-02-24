@@ -1,0 +1,41 @@
+events_arg=""; if [ -n "tests/fixtures/citizen_mobile_latency_events_sample.jsonl" ]; then events_arg="--telemetry-events-jsonl tests/fixtures/citizen_mobile_latency_events_sample.jsonl"; fi; summary_arg=""; if [ -n "" ]; then summary_arg="--telemetry-json "; fi; out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-83/evidence/citizen_mobile_observability_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-83/evidence/citizen_mobile_observability_latest.json"; fi; python3 scripts/report_citizen_mobile_observability.py --min-samples "20" --max-input-to-render-p50-ms "180" --max-input-to-render-p90-ms "450" ${summary_arg} ${events_arg} ${out_arg}
+{
+  "generated_at": "2026-02-23T13:14:07+00:00",
+  "telemetry_json_path": null,
+  "telemetry_events_jsonl_path": "tests/fixtures/citizen_mobile_latency_events_sample.jsonl",
+  "telemetry_sources": [
+    "telemetry_events_jsonl"
+  ],
+  "telemetry": {
+    "sample_count": 30,
+    "events_total": 30,
+    "parse_errors": 0,
+    "source_breakdown": {
+      "concern_search_input": 8,
+      "party_sort_change": 7,
+      "stance_filter_change": 7,
+      "topic_search_input": 8
+    }
+  },
+  "metrics": {
+    "input_to_render_p50_ms": 147.5,
+    "input_to_render_p90_ms": 423.0,
+    "input_to_render_p95_ms": 466.5
+  },
+  "thresholds": {
+    "min_samples": 20,
+    "max_input_to_render_p50_ms": 180.0,
+    "max_input_to_render_p90_ms": 450.0
+  },
+  "checks": {
+    "telemetry_available": true,
+    "sample_count_meets_minimum": true,
+    "input_to_render_p50_within_threshold": true,
+    "input_to_render_p90_within_threshold": true,
+    "contract_complete": true
+  },
+  "missing_metrics": [],
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "status": "ok"
+}

@@ -1,0 +1,22 @@
+# ui/citizen/index.html markers
+792:    <script src="./unknown_explainability.js"></script>
+2015:      function renderUnknownExplainabilityHint(input, kind) {
+2020:        const attr = mode === "summary" ? ' data-unknown-explainability-summary="1"' : ' data-unknown-explainability="1"';
+3369:            const dashboardUnknownSummary = renderUnknownExplainabilityHint(
+3454:                      const unknownHint = renderUnknownExplainabilityHint(
+3565:          const concernUnknownSummary = renderUnknownExplainabilityHint(
+3630:                    const unknownHint = renderUnknownExplainabilityHint(
+3742:        const topicUnknownSummary = renderUnknownExplainabilityHint(
+3794:                  const unknownHint = renderUnknownExplainabilityHint(
+
+# scripts/graph_ui_server.py markers
+39:UI_CITIZEN_UNKNOWN_EXPLAINABILITY = BASE_DIR / "ui" / "citizen" / "unknown_explainability.js"
+5698:            if path == "/citizen/unknown_explainability.js":
+5699:                if not UI_CITIZEN_UNKNOWN_EXPLAINABILITY.exists():
+5700:                    self.write_html("<h1>unknown_explainability.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+5703:                    UI_CITIZEN_UNKNOWN_EXPLAINABILITY.read_bytes(),
+
+# justfile markers
+876:  cp ui/citizen/unknown_explainability.js {{gh_pages_dir}}/citizen/unknown_explainability.js
+941:citizen-test-unknown-explainability:
+942:  node --test tests/test_citizen_unknown_explainability.js tests/test_citizen_unknown_explainability_ui_contract.js

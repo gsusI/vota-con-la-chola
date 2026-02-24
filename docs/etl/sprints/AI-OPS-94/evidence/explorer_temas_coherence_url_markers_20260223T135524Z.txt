@@ -1,0 +1,53 @@
+643:            <div class="meta" id="coherence-foot">Click en un bucket para drill-down a filas de evidencia.</div>
+828:        evidence: { rows: [], meta: null, offset: 0, limit: 250, total: 0, loading: false, mode: "person", bucket: "" },
+927:        if (partyId) p.set("party_id", String(partyId));
+936:        bucket,
+946:        p.set("bucket", String(bucket || "incoherent"));
+951:        if (partyId) p.set("party_id", String(partyId));
+987:        const partyId = paramGet("party") || paramGet("party_id");
+990:        const bucket = norm(paramGet("bucket"));
+995:        if ((source === "citizen_coherence" || view === "coherence" || bucket) && state.activeTopicId) {
+997:          state.evidence.bucket = bucket || "incoherent";
+998:          state.coherence.selectedBucket = state.evidence.bucket;
+1195:      function setCoherenceBucketActive(bucket) {
+1196:        const active = norm(bucket);
+1225:          nodes.coherenceFoot.textContent = "Click en un bucket para drill-down a filas de evidencia.";
+1253:        const partyMeta = state.activePartyId ? ` party_id=${state.activePartyId}` : "";
+1256:          `${asOf} | groups=${groups.length}. Click en un bucket para drill-down a evidence rows.`;
+1313:      async function loadCoherenceEvidencePage({ reset, bucket }) {
+1318:        const useBucket = norm(bucket || state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
+1321:        state.evidence.bucket = useBucket;
+1334:            bucket: useBucket,
+1361:      async function drillCoherenceBucket(bucket) {
+1367:        paramSet("party_id", state.activePartyId || "");
+1369:        paramSet("bucket", bucket || "incoherent");
+1370:        paramSet("source", "citizen_coherence");
+1371:        await loadCoherenceEvidencePage({ reset: true, bucket });
+1489:        const bucket = toText(state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
+1498:          `COHERENCE bucket: <strong>${esc(bucket)}</strong> | ` +
+1503:          nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia para este bucket/filtro.</div>";
+1511:            const partyName = toText(raw.party_name || (raw.party_id ? `party_id=${raw.party_id}` : ""));
+1547:          ? `bucket=${bucket} offset=${state.evidence.offset} limit=${state.evidence.limit}`
+1548:          : `bucket=${bucket}`;
+1737:        if (state.activePartyId && state.mode === "live") where.push(["party_id", state.activePartyId]);
+1768:        state.evidence.bucket = "";
+1823:          if (state.evidence.mode === "coherence" && state.evidence.bucket) {
+1824:            const bucket = encodeURIComponent(String(state.evidence.bucket));
+1830:            window.location.href = withApiParam(url) + `#coherence-bucket=${bucket}`;
+1839:            (state.activePartyId ? ("&wc=party_id&wv=" + encodeURIComponent(String(state.activePartyId))) : "") +
+1921:        state.evidence.bucket = "";
+1926:        paramSet("bucket", "");
+1943:        paramSet("bucket", "");
+1951:        state.evidence.bucket = "";
+1964:        paramSet("bucket", "");
+1968:        state.evidence.bucket = "";
+2002:        if (state.activeTopicId && state.evidence.mode === "coherence" && (state.evidence.bucket || state.coherence.selectedBucket)) {
+2003:          await loadCoherenceEvidencePage({ reset: true, bucket: state.evidence.bucket || state.coherence.selectedBucket });
+2024:        state.evidence.bucket = "";
+2027:        paramSet("bucket", "");
+2040:        state.evidence.bucket = "";
+2043:        paramSet("bucket", "");
+2059:          loadCoherenceEvidencePage({ reset: false, bucket: state.evidence.bucket || state.coherence.selectedBucket }).catch(() => {});
+2070:        state.evidence.bucket = "";
+2076:        paramSet("party_id", "");
+2077:        paramSet("bucket", "");

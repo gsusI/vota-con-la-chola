@@ -1,0 +1,103 @@
+# AI-OPS-28 Closeout
+
+Status:
+- `PASS`
+
+Progress notes:
+- 2026-02-22: shipped `scripts/export_text_extraction_queue.py` (dedupe by `content_sha256` with fallback path/pk, deterministic ordering, CSV + JSON summary).
+- 2026-02-22: added tests `tests/test_export_text_extraction_queue.py` (`Ran 2 tests ... OK`).
+- 2026-02-22: wired shortcuts `just parl-export-text-extraction-queue` and `just parl-export-text-extraction-queue-missing`.
+- 2026-02-22: emitted real artifacts on `etl/data/staging/politicos-es.db`:
+  - full queue: `rows_scanned=9549`, `queue_items_total=8975`, `refs_total_written=9539`, `queue_items_pending=0`
+  - missing-only queue: `queue_items_total=0`
+- Evidence/report:
+  - `docs/etl/sprints/AI-OPS-28/reports/text-extraction-queue-bootstrap-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/text_extraction_queue_full_summary_20260222T1600Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/text_extraction_queue_missing_summary_20260222T1600Z.json`
+- 2026-02-22: shipped additive semantic extraction table `parl_initiative_doc_extractions` + backfill `scripts/backfill_initiative_doc_extractions.py` (`extractor_version=heuristic_subject_v1`) and review export `scripts/export_initdoc_extraction_review_queue.py`.
+- 2026-02-22: real DB backfill (`etl/data/staging/politicos-es.db`) processed `8932` docs with `8932` non-empty extracted subjects; `needs_review=4094`. Missing-only rerun is idempotent (`seen=0`, `upserted=0`).
+- 2026-02-22: review packet exported (`4094` rows): `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_queue.csv`.
+- 2026-02-22: `scripts/report_initiative_doc_status.py` extended with extraction KPIs (`downloaded_with_extraction`, `downloaded_missing_extraction`, `extraction_coverage_pct`, `extraction_needs_review`, `extraction_needs_review_pct`); baseline `9016/9016 (100%)` con extracción y `4096` doc-links en review (`4094` documentos únicos).
+- 2026-02-22: closed review-loop tooling for extractions with `scripts/apply_initdoc_extraction_reviews.py` (CSV decisions -> SQLite) and queue round-trip columns in `scripts/export_initdoc_extraction_review_queue.py`; shipped first adjudication batch template (`200` rows) + dry-run apply evidence.
+- 2026-02-22: extraction heuristic upgraded to `heuristic_subject_v2` with `title_hint_strong` auto-resolution path for explicit legal titles; real DB rerun updated `8932` rows and reduced extraction review debt from `4096` to `592` doc-links (`45.43% -> 6.57%`), leaving `590` unique docs in review queue.
+- 2026-02-22: review queue exporter gained deterministic paging (`--limit/--offset`) + `subject_method` column; generated full 3-batch packet for remaining queue (`200 + 200 + 190 = 590` rows).
+- 2026-02-22: `title_hint_strong` refinado (patterns ampliados + umbral de longitud) y reruns reales sucesivos redujeron deuda de extracción desde `592` a `374` doc-links (`6.57% -> 4.15%`), dejando cola residual `372` docs (`keyword_window` puro) empaquetada en `2` batches (`200 + 172`).
+- 2026-02-22: mejora determinista en extractor (`title_hint_strong_from_short_window`) reemplazó `keyword_window` corto/ruidoso con título fuerte cuando existe; deuda bajó de `374` a `1` doc-link (`4.15% -> 0.01%`).
+- 2026-02-22: cierre final de cola con pipeline canónico de revisión (CSV 1 fila -> apply): `extraction_needs_review=0` (`0.0%`) y review queue en `0` filas.
+- 2026-02-22: `quality-report --include-initiatives` ahora incorpora KPIs de extracción y umbrales de gate (`extraction_coverage_pct>=0.95`, `extraction_review_closed_pct>=0.95`); corrida real sobre `etl/data/staging/politicos-es.db` quedó `passed=true` en ambas gates (votos + iniciativas).
+- 2026-02-22: hardening de enforce-gate + pipeline: tests CLI cubren fail/pass de gate de extracción, `parl-quality-pipeline` ahora ejecuta `quality-report --include-initiatives --enforce-gate` y se valida corrida real `exit=0`.
+- 2026-02-22: `scripts/publicar_hf_snapshot.py` ahora propaga resumen de calidad (`votaciones-kpis`) a artefactos de publicación HF (`manifest.json`, `latest.json`, `README.md`) para trazabilidad pública del gate en el dataset.
+- 2026-02-22: publicación real HF ejecutada (`just etl-publish-hf`) y verificada en remoto: `latest.json`/`manifest.json` ya contienen `quality_report` y el dataset card incluye "Resumen de calidad del snapshot".
+- 2026-02-22: nuevo gate remoto reproducible `scripts/verify_hf_snapshot_quality.py` + `just etl-verify-hf-quality` valida `quality_report` consistente en `latest.json`/`manifest.json`/`README.md` con exit code de CI y JSON de salida para evidencia; `just etl-publish-hf-verify` encadena publish+verify en un solo comando.
+- 2026-02-22: guardrail de publish HF reforzado: `scripts/publicar_hf_snapshot.py` añade `--require-quality-report`; `just etl-publish-hf*` lo activa por defecto vía `HF_REQUIRE_QUALITY_REPORT=1` para evitar publish sin `votaciones-kpis`.
+- 2026-02-22: CI hook añadido en `.github/workflows/etl-tracker-gate.yml` (`job: hf-quality-contract`, push `main`) para ejecutar tests HF (`test_publicar_hf_snapshot` + `test_verify_hf_snapshot_quality`), correr verificación remota y publicar artifact JSON.
+- 2026-02-22: gate de iniciativas endurecido con criterio accionable explícito (`actionable_doc_links_closed_pct>=1.0`) en `quality-report --include-initiatives --enforce-gate`; corrida real en `etl/data/staging/politicos-es.db` queda en `1.0` y `missing_doc_links_actionable=0`.
+- 2026-02-22: re-validación posterior del mismo gate y suite (`tests.test_parl_quality` + `tests.test_cli_quality_report`) mantiene `passed=true` y confirma estabilidad del criterio accionable.
+- 2026-02-22: `just etl-tracker-gate` re-ejecutado tras los cambios del sprint, con `mismatches=0`, `waivers_active=0` y `done_zero_real=0`.
+- Additional evidence/report:
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-doc-extractions-bootstrap-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-doc-extraction-review-loop-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_20260222T1625Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_missing_post_20260222T1628Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_20260222T1635Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_apply_dryrun_20260222T1640Z.json`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_batch_0001_20260222T1640Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-doc-extractions-title-hint-strong-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_title_hint_strong_20260222T151026Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_before_title_hint_strong_20260222T151026Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_after_title_hint_strong_20260222T151026Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_queue_after_title_hint_strong_20260222T151026Z.json`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_queue_after_title_hint_strong_20260222T151026Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-doc-extraction-review-batch-pack-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_batches_queued_latest.json`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_batch_0001_of_0003_20260222T151410Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_batch_0002_of_0003_20260222T151410Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_batch_0003_of_0003_20260222T151410Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-doc-extractions-title-hint-strong-v2d-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_title_hint_strong_v2b_20260222T151814Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_after_title_hint_strong_v2b_20260222T151814Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_title_hint_strong_v2c_20260222T151902Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_after_title_hint_strong_v2c_20260222T151902Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_title_hint_strong_v2d_20260222T152006Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_after_title_hint_strong_v2d_20260222T152006Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_queue_after_title_hint_strong_v2d_20260222T152006Z.json`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_queue_after_title_hint_strong_v2d_20260222T152006Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_batches_queued_after_title_hint_strong_v2d_latest.json`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_batch_0001_of_0002_20260222T152034Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_batch_0002_of_0002_20260222T152034Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_short_window_title_override_20260222T152222Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_after_short_window_title_override_20260222T152222Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extractions_backfill_short_window_title_override_v2f_20260222T152304Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_after_short_window_title_override_v2f_20260222T152304Z.json`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-doc-extraction-zero-queue-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_autoresolve_singleton_20260222T152337Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_apply_autoresolve_singleton_20260222T152337Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_doc_status_with_extraction_post_singleton_apply_20260222T152337Z.json`
+  - `docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_queue_post_singleton_apply_20260222T152337Z.csv`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_queue_post_singleton_apply_20260222T152337Z.json`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-quality-extraction-gate-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/quality_initiatives_extraction_kpis_20260222T152859Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/quality_initiatives_extraction_gate_enforce_20260222T153541Z.json`
+  - `docs/etl/sprints/AI-OPS-28/reports/hf-publish-quality-summary-propagation-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_publish_dryrun_quality_summary_20260222T184311Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_publish_run_summary_20260222T184712Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_publish_dryrun_quality_summary_bundle_20260222T184311Z/manifest.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_publish_dryrun_quality_summary_bundle_20260222T184311Z/latest.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_publish_dryrun_quality_summary_bundle_20260222T184311Z/README.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_latest_20260222T1848Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_latest_post_publish_20260222T184735Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_manifest_post_publish_20260222T184743Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_readme_post_publish_20260222T184749Z.md`
+  - `docs/etl/sprints/AI-OPS-28/reports/hf-remote-quality-verifier-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_quality_verify_20260222T185350Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_quality_verify_20260222T185350Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_quality_verify_ci_local_20260222T190143Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_remote_quality_verify_ci_local_20260222T190143Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/reports/hf-publish-require-quality-guard-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_publish_dryrun_require_quality_20260222T185920Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/evidence/hf_quality_hardening_tests_20260222T190403Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/reports/initiative-quality-actionable-gate-20260222.md`
+  - `docs/etl/sprints/AI-OPS-28/evidence/quality_initiatives_actionable_gate_enforce_20260222T190825Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/quality_initiatives_actionable_gate_enforce_20260222T191055Z.json`
+  - `docs/etl/sprints/AI-OPS-28/evidence/initiative_quality_gate_tests_20260222T191055Z.txt`
+  - `docs/etl/sprints/AI-OPS-28/evidence/tracker_gate_20260222T191229Z.txt`

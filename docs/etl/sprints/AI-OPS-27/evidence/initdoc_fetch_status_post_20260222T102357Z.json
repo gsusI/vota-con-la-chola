@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-02-22T10:24:58+00:00",
+  "db": "etl/data/staging/politicos-es.db",
+  "by_source": [
+    {
+      "source_id": "congreso_iniciativas",
+      "total_links": 812,
+      "ok_links": 812,
+      "missing_links": 0,
+      "ok_pct": 100.0
+    },
+    {
+      "source_id": "senado_iniciativas",
+      "total_links": 8273,
+      "ok_links": 8154,
+      "missing_links": 119,
+      "ok_pct": 98.56
+    }
+  ],
+  "overall": {
+    "total_links": 9085,
+    "ok_links": 8966,
+    "missing_links": 119,
+    "ok_pct": 98.69
+  },
+  "senado_missing_status_buckets": [
+    {
+      "status": 404,
+      "count": 119
+    }
+  ]
+}

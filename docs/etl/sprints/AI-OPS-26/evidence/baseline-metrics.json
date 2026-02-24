@@ -1,0 +1,117 @@
+{
+  "generated_at_utc": "2026-02-19T13:10:53+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "tracker_path": "docs/etl/e2e-scrape-load-tracker.md",
+  "waivers_path": "docs/etl/mismatch-waivers.json",
+  "summary": {
+    "topic_evidence_reviews_total": 537,
+    "topic_evidence_reviews_pending": 6,
+    "topic_evidence_reviews_resolved": 57,
+    "topic_evidence_reviews_ignored": 474,
+    "unresolved_vote_rows": 34780,
+    "unresolved_vote_names": 321,
+    "initiative_docs_total": 555,
+    "initiative_docs_missing_excerpt": 456,
+    "policy_events_total": 548,
+    "policy_event_axis_scores_total": 0,
+    "topic_positions_declared_total": 319,
+    "topic_positions_combined_total": 137060,
+    "max_topic_positions_as_of_date": "2026-02-17"
+  },
+  "pending_reviews_by_reason": [
+    {
+      "review_reason": "no_signal",
+      "pending_count": 6
+    }
+  ],
+  "unresolved_votes_by_source": [
+    {
+      "source_id": "congreso_votaciones",
+      "unresolved_rows": 26110,
+      "unresolved_names": 263
+    },
+    {
+      "source_id": "senado_votaciones",
+      "unresolved_rows": 8670,
+      "unresolved_names": 58
+    }
+  ],
+  "policy_events_by_source": [
+    {
+      "source_id": "boe_api_legal",
+      "policy_events": 298
+    },
+    {
+      "source_id": "placsp_contratacion",
+      "policy_events": 217
+    },
+    {
+      "source_id": "moncloa_referencias",
+      "policy_events": 20
+    },
+    {
+      "source_id": "moncloa_rss_referencias",
+      "policy_events": 8
+    },
+    {
+      "source_id": "bdns_subvenciones",
+      "policy_events": 5
+    }
+  ],
+  "document_fetches": {
+    "by_http_status": [
+      {
+        "last_http_status": 403,
+        "count": 1364
+      },
+      {
+        "last_http_status": 200,
+        "count": 482
+      },
+      {
+        "last_http_status": 500,
+        "count": 294
+      },
+      {
+        "last_http_status": 404,
+        "count": 188
+      }
+    ],
+    "by_fetched_ok": [
+      {
+        "fetched_ok": 1,
+        "count": 862
+      },
+      {
+        "fetched_ok": 0,
+        "count": 1466
+      }
+    ]
+  },
+  "review_status_by_source": [
+    {
+      "source_id": "congreso_intervenciones",
+      "status": "ignored",
+      "count": 474
+    },
+    {
+      "source_id": "congreso_intervenciones",
+      "status": "resolved",
+      "count": 57
+    },
+    {
+      "source_id": "programas_partidos",
+      "status": "pending",
+      "count": 6
+    }
+  ],
+  "tracker_parity": {
+    "tracker_sources": 35,
+    "sources_in_db": 44,
+    "mismatches": 0,
+    "waived_mismatches": 0,
+    "waivers_active": 0,
+    "waivers_expired": 0,
+    "done_zero_real": 0
+  }
+}

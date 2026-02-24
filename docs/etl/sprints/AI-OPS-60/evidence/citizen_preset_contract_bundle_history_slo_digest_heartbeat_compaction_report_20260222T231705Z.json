@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-02-22T23:17:42.778Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
+  "policy": {
+    "keep_recent": 20,
+    "keep_mid_span": 100,
+    "keep_mid_every": 5,
+    "keep_old_every": 20,
+    "min_raw_for_dropped_check": 25
+  },
+  "entries_total": 6,
+  "selected_entries": 6,
+  "dropped_entries": 0,
+  "selected_ratio": 1,
+  "malformed_total": 0,
+  "malformed_selected": 0,
+  "malformed_dropped": 0,
+  "incidents_total": 0,
+  "incidents_selected": 0,
+  "incidents_dropped": 0,
+  "failed_total": 0,
+  "failed_selected": 0,
+  "red_total": 0,
+  "red_selected": 0,
+  "tiers": {
+    "recent": {
+      "raw_entries": 6,
+      "selected_entries": 6,
+      "cadence_every": 1
+    },
+    "mid": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 5
+    },
+    "old": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 20
+    }
+  },
+  "anchors": {
+    "oldest_selected": true,
+    "latest_selected": true
+  },
+  "first_run_at": "2026-02-22T22:15:36.438Z",
+  "last_run_at": "2026-02-22T23:17:42.657Z",
+  "selected_first_run_at": "2026-02-22T22:15:36.438Z",
+  "selected_last_run_at": "2026-02-22T23:17:42.657Z",
+  "selected_indices_sample": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "selected_reasons_sample": [
+    {
+      "index": 0,
+      "line_no": 1,
+      "run_at": "2026-02-22T22:15:36.438Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "anchor_oldest",
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 1,
+      "line_no": 2,
+      "run_at": "2026-02-22T22:22:13.591Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 2,
+      "line_no": 3,
+      "run_at": "2026-02-22T22:30:22.571Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 3,
+      "line_no": 4,
+      "run_at": "2026-02-22T22:39:45.510Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 4,
+      "line_no": 5,
+      "run_at": "2026-02-22T23:08:51.672Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 5,
+      "line_no": 6,
+      "run_at": "2026-02-22T23:17:42.657Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "anchor_latest",
+        "cadence_recent"
+      ]
+    }
+  ],
+  "strict_fail_reasons": []
+}

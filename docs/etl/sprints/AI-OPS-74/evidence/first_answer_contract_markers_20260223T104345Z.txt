@@ -1,0 +1,15 @@
+tests/test_citizen_first_answer_accelerator.js:4:const accelerator = require("../ui/citizen/first_answer_accelerator.js");
+scripts/graph_ui_server.py:38:UI_CITIZEN_FIRST_ANSWER_ACCELERATOR = BASE_DIR / "ui" / "citizen" / "first_answer_accelerator.js"
+scripts/graph_ui_server.py:5687:            if path == "/citizen/first_answer_accelerator.js":
+scripts/graph_ui_server.py:5689:                    self.write_html("<h1>first_answer_accelerator.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+justfile:875:  cp ui/citizen/first_answer_accelerator.js {{gh_pages_dir}}/citizen/first_answer_accelerator.js
+justfile:937:citizen-test-first-answer-accelerator:
+justfile:938:  node --test tests/test_citizen_first_answer_accelerator.js tests/test_citizen_first_answer_ui_contract.js
+ui/citizen/index.html:791:    <script src="./first_answer_accelerator.js"></script>
+ui/citizen/index.html:2156:          `<button class="btn" type="button" data-first-answer-run="1" ${accelConcernId && accelTid > 0 ? "" : "disabled"}>${esc(
+ui/citizen/index.html:2195:        for (const btn of box.querySelectorAll("[data-first-answer-run]")) {
+ui/citizen/index.html:3242:              `<button class="btn" type="button" data-first-answer-run-inline="1">Usar recomendacion</button>` +
+ui/citizen/index.html:3251:            for (const btn of el.querySelectorAll("[data-first-answer-run-inline]")) {
+tests/test_citizen_first_answer_ui_contract.js:13:  assert.match(html, /<script\s+src=["']\.\/first_answer_accelerator\.js["']><\/script>/i);
+tests/test_citizen_first_answer_ui_contract.js:18:  assert.match(html, /data-first-answer-run/i);
+tests/test_citizen_first_answer_ui_contract.js:19:  assert.match(html, /data-first-answer-run-inline/i);

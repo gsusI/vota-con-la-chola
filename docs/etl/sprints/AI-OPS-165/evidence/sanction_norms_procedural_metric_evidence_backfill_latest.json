@@ -1,0 +1,172 @@
+{
+  "generated_at": "2026-02-24T01:42:43+00:00",
+  "roles": [
+    "enforce",
+    "approve",
+    "propose",
+    "delegate"
+  ],
+  "limit": 0,
+  "counts": {
+    "metrics_scanned_total": 6,
+    "metrics_with_fragment_candidates_total": 6,
+    "metrics_without_fragment_candidates_total": 0,
+    "metrics_with_responsibility_total": 6,
+    "metrics_without_responsibility_total": 0,
+    "source_record_pk_resolved_total": 12,
+    "source_record_pk_missing_total": 0,
+    "evidence_inserted": 0,
+    "evidence_updated": 12
+  },
+  "by_kpi": {
+    "kpi:recurso_estimation_rate": 2,
+    "kpi:formal_annulment_rate": 2,
+    "kpi:resolution_delay_p90_days": 2
+  },
+  "by_norm": {
+    "es:boe-a-2003-23186": 3,
+    "es:boe-a-2003-23514": 6,
+    "es:boe-a-2015-3442": 3
+  },
+  "by_role": {
+    "approve": 9,
+    "propose": 3
+  },
+  "by_source": {
+    "boe_api_legal": 12
+  },
+  "samples": [
+    {
+      "metric_observation_id": 1,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 7,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23186"
+    },
+    {
+      "metric_observation_id": 1,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 3,
+      "role": "propose",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "metric_observation_id": 1,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 4,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "metric_observation_id": 2,
+      "metric_key": "kpi:recurso_estimation_rate|es:sanctions:interior_lo4_2015|2025-12-31|year",
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "norm_id": "es:boe-a-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 15,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-3442"
+    },
+    {
+      "metric_observation_id": 3,
+      "metric_key": "kpi:formal_annulment_rate|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:formal_annulment_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 7,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23186"
+    },
+    {
+      "metric_observation_id": 3,
+      "metric_key": "kpi:formal_annulment_rate|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:formal_annulment_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 3,
+      "role": "propose",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "metric_observation_id": 3,
+      "metric_key": "kpi:formal_annulment_rate|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:formal_annulment_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 4,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "metric_observation_id": 4,
+      "metric_key": "kpi:formal_annulment_rate|es:sanctions:interior_lo4_2015|2025-12-31|year",
+      "kpi_id": "kpi:formal_annulment_rate",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "norm_id": "es:boe-a-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 15,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-3442"
+    },
+    {
+      "metric_observation_id": 5,
+      "metric_key": "kpi:resolution_delay_p90_days|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 7,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23186"
+    },
+    {
+      "metric_observation_id": 5,
+      "metric_key": "kpi:resolution_delay_p90_days|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 3,
+      "role": "propose",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "metric_observation_id": 5,
+      "metric_key": "kpi:resolution_delay_p90_days|es:sanctions:aeat_memoria|2025-12-31|year",
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "responsibility_id": 4,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "metric_observation_id": 6,
+      "metric_key": "kpi:resolution_delay_p90_days|es:sanctions:interior_lo4_2015|2025-12-31|year",
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "norm_id": "es:boe-a-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "responsibility_id": 15,
+      "role": "approve",
+      "source_record_pk_resolution": "resolved:boe_ref:BOE-A-2015-3442"
+    }
+  ]
+}

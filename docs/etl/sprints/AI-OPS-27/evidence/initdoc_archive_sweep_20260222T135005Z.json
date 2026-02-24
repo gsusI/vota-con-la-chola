@@ -1,0 +1,64 @@
+{
+  "documents": {
+    "archive_fallback": true,
+    "archive_fetched_ok": 0,
+    "archive_first_urls": 119,
+    "archive_hits": 0,
+    "archive_lookup_attempted": 119,
+    "archive_lookup_failures": [],
+    "candidate_urls": 119,
+    "doc_links_seen": 119,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000056.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000057.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000058.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000059.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000060.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000061.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000062.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000063.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000064.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000065.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000066.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000067.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000068.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/621/enmiendas/global_enmiendas_vetos_10_621000094.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/621/enmiendas/global_enmiendas_vetos_10_621000111.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000069.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000070.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000071.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000072.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000073.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000074.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000076.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000077.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000079.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000080.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000081.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000082.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000083.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000084.xml -> HTTPStatusError: archive fallback: no snapshot candidates",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000085.xml -> HTTPStatusError: archive fallback: no snapshot candidates"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 119,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 119,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 119
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

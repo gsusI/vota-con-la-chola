@@ -1,0 +1,29 @@
+{
+  "documents": {
+    "candidate_urls": 1,
+    "doc_links_seen": 1,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/legis15/expedientes/600/enmiendas/global_enmiendas_vetos_15_600000001.xml -> HTTPError: HTTP Error 404: Not Found"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 1,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 1,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 1
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

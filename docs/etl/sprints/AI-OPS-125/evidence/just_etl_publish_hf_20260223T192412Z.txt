@@ -1,0 +1,62 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 2.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.63MB 1.5s done
+#6 DONE 1.5s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 2.5s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.6s done
+#12 exporting manifest sha256:2784f6abc719c641dda427b0b3afe34fe511996919020a48d2f471bc0cb1ed1f done
+#12 exporting config sha256:1c525a0a8786e619b894548251b36fbadfea60297b9d5e673ea141db691ff258 done
+#12 exporting attestation manifest sha256:5b241f3cfaddb433d70d3446445e4dec0387b234271d46a7a7be2f44bbaa0004 done
+#12 exporting manifest list sha256:d76d8811dd69ae52ca1782d1b392ac67777e6955a47186c90e8d1b11c945e5eb done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.6s done
+#12 DONE 13.3s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.3s
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot bundle: snapshots/2026-02-23
+Published files: 10
+Ingestion runs rows: 426
+Source records rows (by source): 35
+Source legal files: 35
+Parquet tables: 68
+Parquet files: 126
+Parquet excluded tables: lost_and_found, raw_fetches, run_fetches, source_records
+OK published to https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data

@@ -1,0 +1,68 @@
+sqlite_arg="--skip-sqlite-gz"; sensitive_arg=""; quality_arg=""; if [ "0" = "1" ]; then sqlite_arg=""; fi; if [ "0" = "1" ]; then sensitive_arg="--allow-sensitive-parquet"; fi; if [ "1" = "1" ]; then quality_arg="--require-quality-report"; fi; docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db etl/data/staging/politicos-es.db --snapshot-date 2026-02-12 --dataset-repo vota-con-la-chola-data --parquet-compression zstd --parquet-batch-rows 50000 --parquet-tables '' --parquet-exclude-tables 'raw_fetches,run_fetches,source_records,lost_and_found' --dry-run ${sqlite_arg} ${sensitive_arg} ${quality_arg}"
+ Image vota-con-la-chola-etl:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.57MB 0.9s done
+#6 DONE 0.9s
+
+#7 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/6] WORKDIR /workspace
+#8 CACHED
+
+#9 [4/6] COPY requirements.txt /tmp/requirements.txt
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.4s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.6s done
+#12 exporting manifest sha256:aa5e537b89eb2209b02c4c9b2f22bc9d6764c077d9c9e1094b3c3e5c043671cf done
+#12 exporting config sha256:4a06baef436c2e9cfe4d69a8519c9cb06041be040c46df4bfa74900cf650b8c9 done
+#12 exporting attestation manifest sha256:7d504143c6c437633b4b1acd1a4d43d473ef31dc53fcea75930b869674efaafc done
+#12 exporting manifest list sha256:a0bc86be6a03ff9e62636d14c61e6c0a600577dbdc5d195ff538d4ce0c674625 done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 1.9s done
+#12 DONE 11.5s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image vota-con-la-chola-etl:local Built 
+ Container vota-con-la-chola-etl-run-b010c44d44b4 Creating 
+ Container vota-con-la-chola-etl-run-b010c44d44b4 Created 
+HF dataset repo: JesusIC/vota-con-la-chola-data
+Snapshot bundle: snapshots/2026-02-12
+Published files: 7
+Ingestion runs rows: 276
+Source records rows (by source): 27
+Source legal files: 27
+Parquet tables: 44
+Parquet files: 95
+Parquet excluded tables: lost_and_found, raw_fetches, run_fetches, source_records
+Dry run: no se subió nada a Hugging Face
+Bundle local: /tmp/hf_snapshot_publish_tn5euanv

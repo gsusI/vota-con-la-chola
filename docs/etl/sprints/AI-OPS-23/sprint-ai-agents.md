@@ -41,7 +41,7 @@ Non-goals (explicit):
 - No black-box ranking that hides unknown/coverage.
 
 ## Bottleneck Class
-- Primary: `product bottleneck` (new citizens don't reach an answer fast enough).
+- Primary: `product bottleneck` (new citizens don't reach an answer fast en   ough).
 - Secondary: `UX bottleneck` (state is powerful but not guided; onboarding needs a safe default path).
 
 ## Lane Packing Plan

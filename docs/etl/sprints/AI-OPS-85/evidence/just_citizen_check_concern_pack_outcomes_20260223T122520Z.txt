@@ -1,0 +1,82 @@
+quality_arg=""; if [ -n "tests/fixtures/citizen_concern_pack_quality_sample.json" ]; then quality_arg="--concern-pack-quality-json tests/fixtures/citizen_concern_pack_quality_sample.json"; fi; out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-85/evidence/citizen_concern_pack_outcomes_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-85/evidence/citizen_concern_pack_outcomes_latest.json"; fi; python3 scripts/report_citizen_concern_pack_outcomes.py --events-jsonl "tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl" --min-pack-select-events "20" --min-weak-pack-select-sessions "5" --min-weak-pack-followthrough-rate "0.30" --max-unknown-pack-select-share "0.20" --strict --strict-require-complete ${quality_arg} ${out_arg}
+{
+  "generated_at": "2026-02-23T12:25:20+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "tests/fixtures/citizen_concern_pack_quality_sample.json"
+  },
+  "telemetry": {
+    "events_total": 33,
+    "recognized_events_total": 32,
+    "ignored_events_total": 1,
+    "parse_errors": 0,
+    "sessions_total": 8,
+    "selected_pack_ids_total": 5
+  },
+  "metrics": {
+    "pack_selected_events_total": 24,
+    "topic_open_with_pack_events_total": 7,
+    "weak_pack_selected_events_total": 11,
+    "weak_pack_followthrough_events_total": 7,
+    "unknown_pack_selected_events_total": 2,
+    "pack_selected_sessions_total": 8,
+    "weak_pack_selected_sessions_total": 7,
+    "weak_pack_followthrough_sessions_total": 7,
+    "weak_pack_followthrough_rate": 1.0,
+    "unknown_pack_select_share": 0.083333
+  },
+  "thresholds": {
+    "min_pack_select_events": 20,
+    "min_weak_pack_select_sessions": 5,
+    "min_weak_pack_followthrough_rate": 0.3,
+    "max_unknown_pack_select_share": 0.2
+  },
+  "checks": {
+    "telemetry_available": true,
+    "pack_select_events_meet_minimum": true,
+    "weak_pack_select_sessions_meet_minimum": true,
+    "weak_pack_followthrough_rate_meets_minimum": true,
+    "unknown_pack_select_share_within_threshold": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_pack": [
+    {
+      "pack_id": "economia",
+      "pack_selected_events": 8,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "mystery_pack",
+      "pack_selected_events": 2,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "sanidad",
+      "pack_selected_events": 5,
+      "topic_open_with_pack_events": 3,
+      "weak_pack_selected_events": 5,
+      "weak_pack_followthrough_events": 3
+    },
+    {
+      "pack_id": "transparencia",
+      "pack_selected_events": 3,
+      "topic_open_with_pack_events": 0,
+      "weak_pack_selected_events": 0,
+      "weak_pack_followthrough_events": 0
+    },
+    {
+      "pack_id": "vivienda",
+      "pack_selected_events": 6,
+      "topic_open_with_pack_events": 4,
+      "weak_pack_selected_events": 6,
+      "weak_pack_followthrough_events": 4
+    }
+  ]
+}

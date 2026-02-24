@@ -1,0 +1,217 @@
+{
+  "generated_at": "2026-02-22T22:47:07.980Z",
+  "strict": true,
+  "inputs": {
+    "fixture_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
+    "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+    "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js"
+  },
+  "summary": {
+    "sections_total": 3,
+    "sections_pass": 3,
+    "sections_fail": 0,
+    "failed_sections": [],
+    "total_cases": 14,
+    "total_pass": 14,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "contracts": {
+    "fixture_contract": {
+      "ok": true,
+      "status": 0,
+      "signal": "",
+      "error": "",
+      "summary": {
+        "hash_cases_total": 9,
+        "hash_cases_pass": 9,
+        "hash_cases_fail": 0,
+        "share_cases_total": 3,
+        "share_cases_pass": 3,
+        "share_cases_fail": 0,
+        "total_cases": 12,
+        "total_pass": 12,
+        "total_fail": 0,
+        "failed_ids": []
+      }
+    },
+    "codec_parity": {
+      "ok": true,
+      "status": 0,
+      "signal": "",
+      "error": "",
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      }
+    },
+    "codec_sync_state": {
+      "ok": true,
+      "status": 0,
+      "signal": "",
+      "error": "",
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      }
+    }
+  },
+  "reports": {
+    "fixture_contract": {
+      "generated_at": "2026-02-22T22:47:07.916Z",
+      "fixture_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
+      "codec_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "schema_version": "v2",
+      "strict": false,
+      "summary": {
+        "hash_cases_total": 9,
+        "hash_cases_pass": 9,
+        "hash_cases_fail": 0,
+        "share_cases_total": 3,
+        "share_cases_pass": 3,
+        "share_cases_fail": 0,
+        "total_cases": 12,
+        "total_pass": 12,
+        "total_fail": 0,
+        "failed_ids": []
+      },
+      "results": [
+        {
+          "section": "hash_cases",
+          "id": "hash_missing_preset_prefix",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_minimal_alignment",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_votes_pack_and_concerns",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_repeated_keys_and_plus_pack",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_whitespace_value_normalization",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_unknown_version",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_malformed_encoding",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_empty_payload",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_no_supported_fields",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "share_cases",
+          "id": "share_strips_query_and_legacy_hash",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "share_cases",
+          "id": "share_normalizes_pack_and_dedupes_concerns",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "share_cases",
+          "id": "share_minimal_payload_when_optional_empty",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    "codec_parity": {
+      "generated_at": "2026-02-22T22:47:07.946Z",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "strict": false,
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      },
+      "results": [
+        {
+          "section": "parity",
+          "id": "source_vs_published",
+          "ok": true,
+          "error": "",
+          "source_bytes": 5036,
+          "published_bytes": 5036,
+          "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "published_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "first_diff_line": 0,
+          "first_diff_source_line": "",
+          "first_diff_published_line": ""
+        }
+      ]
+    },
+    "codec_sync_state": {
+      "generated_at": "2026-02-22T22:47:07.974Z",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "strict": false,
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      },
+      "results": [
+        {
+          "section": "sync_state",
+          "id": "source_to_published",
+          "ok": true,
+          "error": "",
+          "would_change": false,
+          "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "published_before_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "published_after_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "source_bytes": 5036,
+          "published_before_bytes": 5036,
+          "published_after_bytes": 5036,
+          "bytes_delta_after_sync": 0,
+          "first_diff_line": 0,
+          "first_diff_source_line": "",
+          "first_diff_published_line": "",
+          "recommended_command": ""
+        }
+      ]
+    }
+  }
+}

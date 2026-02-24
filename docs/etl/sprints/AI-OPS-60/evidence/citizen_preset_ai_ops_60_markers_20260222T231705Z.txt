@@ -1,0 +1,1267 @@
+TS=20260222T231705Z
+Running citizen-test-preset-codec
+OK citizen-test-preset-codec
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_fixture_contract.js --fixture "tests/fixtures/citizen_preset_hash_matrix.json" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.208Z",
+  "fixture_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
+  "codec_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+  "schema_version": "v2",
+  "strict": true,
+  "summary": {
+    "hash_cases_total": 9,
+    "hash_cases_pass": 9,
+    "hash_cases_fail": 0,
+    "share_cases_total": 3,
+    "share_cases_pass": 3,
+    "share_cases_fail": 0,
+    "total_cases": 12,
+    "total_pass": 12,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "results": [
+    {
+      "section": "hash_cases",
+      "id": "hash_missing_preset_prefix",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_minimal_alignment",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_votes_pack_and_concerns",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_repeated_keys_and_plus_pack",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_valid_whitespace_value_normalization",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_unknown_version",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_malformed_encoding",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_empty_payload",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "hash_cases",
+      "id": "hash_no_supported_fields",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "share_cases",
+      "id": "share_strips_query_and_legacy_hash",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "share_cases",
+      "id": "share_normalizes_pack_and_dedupes_concerns",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "section": "share_cases",
+      "id": "share_minimal_payload_when_optional_empty",
+      "ok": true,
+      "error": ""
+    }
+  ]
+}
+OK citizen-report-preset-contract
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_parity_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_parity_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_codec_parity.js --source "ui/citizen/preset_codec.js" --published "docs/gh-pages/citizen/preset_codec.js" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.254Z",
+  "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+  "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+  "strict": true,
+  "summary": {
+    "total_cases": 1,
+    "total_pass": 1,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "results": [
+    {
+      "section": "parity",
+      "id": "source_vs_published",
+      "ok": true,
+      "error": "",
+      "source_bytes": 5036,
+      "published_bytes": 5036,
+      "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+      "published_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": ""
+    }
+  ]
+}
+OK citizen-report-preset-codec-parity
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_sync_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_sync_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_codec_sync_state.js --source "ui/citizen/preset_codec.js" --published "docs/gh-pages/citizen/preset_codec.js" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.307Z",
+  "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+  "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+  "strict": true,
+  "summary": {
+    "total_cases": 1,
+    "total_pass": 1,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "results": [
+    {
+      "section": "sync_state",
+      "id": "source_to_published",
+      "ok": true,
+      "error": "",
+      "would_change": false,
+      "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+      "published_before_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+      "published_after_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+      "source_bytes": 5036,
+      "published_before_bytes": 5036,
+      "published_after_bytes": 5036,
+      "bytes_delta_after_sync": 0,
+      "first_diff_line": 0,
+      "first_diff_source_line": "",
+      "first_diff_published_line": "",
+      "recommended_command": ""
+    }
+  ]
+}
+OK citizen-report-preset-codec-sync
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle.js --fixture "tests/fixtures/citizen_preset_hash_matrix.json" --source "ui/citizen/preset_codec.js" --published "docs/gh-pages/citizen/preset_codec.js" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.446Z",
+  "strict": true,
+  "inputs": {
+    "fixture_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
+    "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+    "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js"
+  },
+  "summary": {
+    "sections_total": 3,
+    "sections_pass": 3,
+    "sections_fail": 0,
+    "failed_sections": [],
+    "total_cases": 14,
+    "total_pass": 14,
+    "total_fail": 0,
+    "failed_ids": []
+  },
+  "contracts": {
+    "fixture_contract": {
+      "ok": true,
+      "status": 0,
+      "signal": "",
+      "error": "",
+      "summary": {
+        "hash_cases_total": 9,
+        "hash_cases_pass": 9,
+        "hash_cases_fail": 0,
+        "share_cases_total": 3,
+        "share_cases_pass": 3,
+        "share_cases_fail": 0,
+        "total_cases": 12,
+        "total_pass": 12,
+        "total_fail": 0,
+        "failed_ids": []
+      }
+    },
+    "codec_parity": {
+      "ok": true,
+      "status": 0,
+      "signal": "",
+      "error": "",
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      }
+    },
+    "codec_sync_state": {
+      "ok": true,
+      "status": 0,
+      "signal": "",
+      "error": "",
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      }
+    }
+  },
+  "reports": {
+    "fixture_contract": {
+      "generated_at": "2026-02-22T23:17:42.375Z",
+      "fixture_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
+      "codec_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "schema_version": "v2",
+      "strict": false,
+      "summary": {
+        "hash_cases_total": 9,
+        "hash_cases_pass": 9,
+        "hash_cases_fail": 0,
+        "share_cases_total": 3,
+        "share_cases_pass": 3,
+        "share_cases_fail": 0,
+        "total_cases": 12,
+        "total_pass": 12,
+        "total_fail": 0,
+        "failed_ids": []
+      },
+      "results": [
+        {
+          "section": "hash_cases",
+          "id": "hash_missing_preset_prefix",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_minimal_alignment",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_votes_pack_and_concerns",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_repeated_keys_and_plus_pack",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_valid_whitespace_value_normalization",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_unknown_version",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_malformed_encoding",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_empty_payload",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "hash_cases",
+          "id": "hash_no_supported_fields",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "share_cases",
+          "id": "share_strips_query_and_legacy_hash",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "share_cases",
+          "id": "share_normalizes_pack_and_dedupes_concerns",
+          "ok": true,
+          "error": ""
+        },
+        {
+          "section": "share_cases",
+          "id": "share_minimal_payload_when_optional_empty",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    "codec_parity": {
+      "generated_at": "2026-02-22T23:17:42.409Z",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "strict": false,
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      },
+      "results": [
+        {
+          "section": "parity",
+          "id": "source_vs_published",
+          "ok": true,
+          "error": "",
+          "source_bytes": 5036,
+          "published_bytes": 5036,
+          "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "published_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "first_diff_line": 0,
+          "first_diff_source_line": "",
+          "first_diff_published_line": ""
+        }
+      ]
+    },
+    "codec_sync_state": {
+      "generated_at": "2026-02-22T23:17:42.441Z",
+      "source_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "published_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "strict": false,
+      "summary": {
+        "total_cases": 1,
+        "total_pass": 1,
+        "total_fail": 0,
+        "failed_ids": []
+      },
+      "results": [
+        {
+          "section": "sync_state",
+          "id": "source_to_published",
+          "ok": true,
+          "error": "",
+          "would_change": false,
+          "source_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "published_before_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "published_after_sha256": "b46c39f8c048f33064b083015bacfa5e4f75f2cb905e280c98e4281065d71c58",
+          "source_bytes": 5036,
+          "published_before_bytes": 5036,
+          "published_after_bytes": 5036,
+          "bytes_delta_after_sync": 0,
+          "first_diff_line": 0,
+          "first_diff_source_line": "",
+          "first_diff_published_line": "",
+          "recommended_command": ""
+        }
+      ]
+    }
+  }
+}
+OK citizen-report-preset-contract-bundle
+test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json" || (echo "Set CITIZEN_PRESET_BUNDLE_OUT=<bundle_json_path> before running history report" && exit 2); out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history.js --bundle-json "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json" --history-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.487Z",
+  "strict": true,
+  "bundle_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json",
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "history_size_before": 11,
+  "history_size_after": 12,
+  "regression_detected": false,
+  "regression_reasons": [],
+  "previous_entry": {
+    "run_at": "2026-02-22T23:08:51.466Z",
+    "summary": {
+      "sections_total": 3,
+      "sections_pass": 3,
+      "sections_fail": 0,
+      "failed_sections": [],
+      "total_cases": 14,
+      "total_pass": 14,
+      "total_fail": 0,
+      "failed_ids": []
+    },
+    "contracts": {
+      "fixture_contract_ok": true,
+      "codec_parity_ok": true,
+      "codec_sync_state_ok": true
+    },
+    "sync_state": {
+      "would_change": false
+    }
+  },
+  "current_entry": {
+    "run_at": "2026-02-22T23:17:42.446Z",
+    "summary": {
+      "sections_total": 3,
+      "sections_pass": 3,
+      "sections_fail": 0,
+      "failed_sections": [],
+      "total_cases": 14,
+      "total_pass": 14,
+      "total_fail": 0,
+      "failed_ids": []
+    },
+    "contracts": {
+      "fixture_contract_ok": true,
+      "codec_parity_ok": true,
+      "codec_sync_state_ok": true
+    },
+    "sync_state": {
+      "would_change": false
+    }
+  }
+}
+OK citizen-report-preset-contract-bundle-history
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_window_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_window_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_window.js --history-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl" --last "20" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.528Z",
+  "strict": true,
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "window_last": 20,
+  "entries_total": 12,
+  "entries_in_window": 12,
+  "malformed_entries_in_window": 0,
+  "regressions_in_window": 0,
+  "regression_events": [],
+  "first_run_at_in_window": "2026-02-22T21:31:45.402Z",
+  "last_run_at_in_window": "2026-02-22T23:17:42.446Z",
+  "latest_entry": {
+    "run_at": "2026-02-22T23:17:42.446Z",
+    "sections_fail": 0,
+    "total_fail": 0,
+    "failed_sections": [],
+    "would_change": false
+  }
+}
+OK citizen-report-preset-contract-bundle-history-window
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_compaction_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_compaction_report_20260222T231705Z.json"; fi; compact_arg=""; if [ -n "docs/etl/runs/citizen_preset_contract_bundle_history.compacted.jsonl" ]; then compact_arg="--compacted-jsonl docs/etl/runs/citizen_preset_contract_bundle_history.compacted.jsonl"; fi; node scripts/report_citizen_preset_contract_bundle_history_compaction.js --history-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl" --keep-recent "20" --keep-mid-span "100" --keep-mid-every "5" --keep-old-every "20" --min-raw-for-dropped-check "25" --strict ${compact_arg} ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.572Z",
+  "strict": true,
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.compacted.jsonl",
+  "cadence": {
+    "keep_recent": 20,
+    "keep_mid_span": 100,
+    "keep_mid_every": 5,
+    "keep_old_every": 20,
+    "min_raw_for_dropped_check": 25
+  },
+  "entries_total": 12,
+  "selected_entries": 12,
+  "dropped_entries": 0,
+  "compaction_ratio_selected_pct": 100,
+  "malformed_entries_total": 0,
+  "incidents_total": 0,
+  "incidents_selected": 0,
+  "incidents_dropped": 0,
+  "anchors": {
+    "oldest_selected": true,
+    "latest_selected": true
+  },
+  "first_run_at": "2026-02-22T21:31:45.402Z",
+  "last_run_at": "2026-02-22T23:17:42.446Z",
+  "selected_first_run_at": "2026-02-22T21:31:45.402Z",
+  "selected_last_run_at": "2026-02-22T23:17:42.446Z",
+  "tiers": {
+    "recent": {
+      "raw_entries": 12,
+      "selected_entries": 12,
+      "cadence_every": 1
+    },
+    "mid": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 5
+    },
+    "old": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 20
+    }
+  },
+  "selected_indices_sample": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "selected_reasons_sample": [
+    {
+      "index": 0,
+      "line_no": 1,
+      "run_at": "2026-02-22T21:31:45.402Z",
+      "reasons": [
+        "anchor_oldest",
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 1,
+      "line_no": 2,
+      "run_at": "2026-02-22T21:35:58.660Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 2,
+      "line_no": 3,
+      "run_at": "2026-02-22T21:44:10.601Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 3,
+      "line_no": 4,
+      "run_at": "2026-02-22T21:53:13.779Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 4,
+      "line_no": 5,
+      "run_at": "2026-02-22T21:59:45.774Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 5,
+      "line_no": 6,
+      "run_at": "2026-02-22T22:05:09.290Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 6,
+      "line_no": 7,
+      "run_at": "2026-02-22T22:15:36.296Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 7,
+      "line_no": 8,
+      "run_at": "2026-02-22T22:22:13.434Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 8,
+      "line_no": 9,
+      "run_at": "2026-02-22T22:30:22.361Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 9,
+      "line_no": 10,
+      "run_at": "2026-02-22T22:39:45.311Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 10,
+      "line_no": 11,
+      "run_at": "2026-02-22T23:08:51.466Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 11,
+      "line_no": 12,
+      "run_at": "2026-02-22T23:17:42.446Z",
+      "reasons": [
+        "anchor_latest",
+        "cadence_recent"
+      ]
+    }
+  ],
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-compact
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo.js --history-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl" --last "20" --max-regressions "0" --max-regression-rate-pct "0" --min-green-streak "1" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.614Z",
+  "strict": true,
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "thresholds": {
+    "max_regressions": 0,
+    "max_regression_rate_pct": 0,
+    "min_green_streak": 1
+  },
+  "window_last": 20,
+  "entries_total": 12,
+  "entries_in_window": 12,
+  "transitions_in_window": 11,
+  "malformed_entries_in_window": 0,
+  "regressions_in_window": 0,
+  "regression_rate_pct": 0,
+  "regression_events": [],
+  "latest_entry_clean": true,
+  "latest_run_at": "2026-02-22T23:17:42.446Z",
+  "green_streak_latest": 12,
+  "previous_window": {
+    "available": false,
+    "entries_in_window": 0,
+    "transitions_in_window": 0,
+    "malformed_entries_in_window": 0,
+    "regressions_in_window": 0,
+    "regression_rate_pct": 0,
+    "latest_entry_clean": false,
+    "latest_run_at": "",
+    "green_streak_latest": 0,
+    "first_run_at": ""
+  },
+  "deltas": {
+    "regressions_in_window_delta": null,
+    "regression_rate_pct_delta": null,
+    "green_streak_latest_delta": null
+  },
+  "checks": {
+    "max_regressions_ok": true,
+    "max_regression_rate_ok": true,
+    "min_green_streak_ok": true,
+    "latest_entry_clean_ok": true
+  },
+  "risk_level": "green",
+  "risk_reasons": [],
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo
+test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json" || (echo "Set CITIZEN_PRESET_BUNDLE_HISTORY_SLO_OUT=<slo_json_path> before running slo digest" && exit 2); out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest.js --slo-json "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.656Z",
+  "strict": true,
+  "input_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json",
+  "digest": {
+    "generated_at": "2026-02-22T23:17:42.657Z",
+    "strict": true,
+    "input": {
+      "slo_json_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json",
+      "slo_generated_at": "2026-02-22T23:17:42.614Z"
+    },
+    "status": "ok",
+    "risk_level": "green",
+    "risk_reasons": [],
+    "strict_fail_reasons": [],
+    "key_metrics": {
+      "entries_in_window": 12,
+      "regressions_in_window": 0,
+      "regression_rate_pct": 0,
+      "green_streak_latest": 12,
+      "latest_entry_clean": true
+    },
+    "key_checks": {
+      "max_regressions_ok": true,
+      "max_regression_rate_ok": true,
+      "min_green_streak_ok": true,
+      "latest_entry_clean_ok": true
+    },
+    "thresholds": {
+      "max_regressions": 0,
+      "max_regression_rate_pct": 0,
+      "min_green_streak": 1
+    },
+    "previous_window": {
+      "available": false,
+      "regressions_in_window": 0,
+      "regression_rate_pct": 0,
+      "green_streak_latest": 0
+    },
+    "deltas": {
+      "regressions_in_window_delta": null,
+      "regression_rate_pct_delta": null,
+      "green_streak_latest_delta": null
+    }
+  },
+  "validation_errors": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest
+test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json" || (echo "Set CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_OUT=<slo_digest_json_path> before running slo digest heartbeat" && exit 2); out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js --digest-json "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json" --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.697Z",
+  "strict": true,
+  "input_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json",
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "history_size_before": 5,
+  "history_size_after": 6,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "heartbeat": {
+    "run_at": "2026-02-22T23:17:42.657Z",
+    "heartbeat_id": "2026-02-22T23:17:42.614Z|2026-02-22T23:17:42.657Z|ok|green|0|12",
+    "digest_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json",
+    "digest_generated_at": "2026-02-22T23:17:42.657Z",
+    "slo_generated_at": "2026-02-22T23:17:42.614Z",
+    "status": "ok",
+    "risk_level": "green",
+    "entries_in_window": 12,
+    "regressions_in_window": 0,
+    "regression_rate_pct": 0,
+    "green_streak_latest": 12,
+    "latest_entry_clean": true,
+    "strict_fail_count": 0,
+    "risk_reason_count": 0,
+    "strict_fail_reasons": [],
+    "risk_reasons": []
+  }
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_window_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_window_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl" --last "20" --max-failed "0" --max-failed-rate-pct "0" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.736Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0
+  },
+  "entries_total": 6,
+  "entries_in_window": 6,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 6,
+    "degraded": 0,
+    "failed": 0
+  },
+  "risk_level_counts": {
+    "green": 6,
+    "amber": 0,
+    "red": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_red_risk_run_at": "",
+  "last_red_risk_run_at": "",
+  "latest": {
+    "run_at": "2026-02-22T23:17:42.657Z",
+    "heartbeat_id": "2026-02-22T23:17:42.614Z|2026-02-22T23:17:42.657Z|ok|green|0|12",
+    "status": "ok",
+    "risk_level": "green",
+    "line_no": 6,
+    "malformed_line": false
+  },
+  "failed_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "latest_not_failed_ok": true
+  },
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-window
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_report_20260222T231705Z.json"; fi; compact_arg=""; if [ -n "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl" ]; then compact_arg="--compacted-jsonl docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl" --keep-recent "20" --keep-mid-span "100" --keep-mid-every "5" --keep-old-every "20" --min-raw-for-dropped-check "25" --strict ${compact_arg} ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.778Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
+  "policy": {
+    "keep_recent": 20,
+    "keep_mid_span": 100,
+    "keep_mid_every": 5,
+    "keep_old_every": 20,
+    "min_raw_for_dropped_check": 25
+  },
+  "entries_total": 6,
+  "selected_entries": 6,
+  "dropped_entries": 0,
+  "selected_ratio": 1,
+  "malformed_total": 0,
+  "malformed_selected": 0,
+  "malformed_dropped": 0,
+  "incidents_total": 0,
+  "incidents_selected": 0,
+  "incidents_dropped": 0,
+  "failed_total": 0,
+  "failed_selected": 0,
+  "red_total": 0,
+  "red_selected": 0,
+  "tiers": {
+    "recent": {
+      "raw_entries": 6,
+      "selected_entries": 6,
+      "cadence_every": 1
+    },
+    "mid": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 5
+    },
+    "old": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 20
+    }
+  },
+  "anchors": {
+    "oldest_selected": true,
+    "latest_selected": true
+  },
+  "first_run_at": "2026-02-22T22:15:36.438Z",
+  "last_run_at": "2026-02-22T23:17:42.657Z",
+  "selected_first_run_at": "2026-02-22T22:15:36.438Z",
+  "selected_last_run_at": "2026-02-22T23:17:42.657Z",
+  "selected_indices_sample": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "selected_reasons_sample": [
+    {
+      "index": 0,
+      "line_no": 1,
+      "run_at": "2026-02-22T22:15:36.438Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "anchor_oldest",
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 1,
+      "line_no": 2,
+      "run_at": "2026-02-22T22:22:13.591Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 2,
+      "line_no": 3,
+      "run_at": "2026-02-22T22:30:22.571Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 3,
+      "line_no": 4,
+      "run_at": "2026-02-22T22:39:45.510Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 4,
+      "line_no": 5,
+      "run_at": "2026-02-22T23:08:51.672Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 5,
+      "line_no": 6,
+      "run_at": "2026-02-22T23:17:42.657Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "anchor_latest",
+        "cadence_recent"
+      ]
+    }
+  ],
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl" --compacted-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl" --last "20" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.818Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
+  "window_last": 20,
+  "entries_total_raw": 6,
+  "entries_total_compacted": 6,
+  "window_raw_entries": 6,
+  "window_raw_malformed_entries": 0,
+  "compacted_malformed_entries": 0,
+  "raw_window_status_counts": {
+    "ok": 6,
+    "degraded": 0,
+    "failed": 0
+  },
+  "raw_window_risk_level_counts": {
+    "green": 6,
+    "amber": 0,
+    "red": 0
+  },
+  "raw_window_incidents": 0,
+  "raw_window_failed": 0,
+  "raw_window_red": 0,
+  "present_in_compacted_in_window": 6,
+  "missing_in_compacted_in_window": 0,
+  "incident_present_in_compacted": 0,
+  "incident_missing_in_compacted": 0,
+  "failed_present_in_compacted": 0,
+  "red_present_in_compacted": 0,
+  "raw_window_coverage_pct": 100,
+  "incident_coverage_pct": 0,
+  "latest_raw": {
+    "id": "2026-02-22T23:17:42.614Z|2026-02-22T23:17:42.657Z|ok|green|0|12",
+    "heartbeat_id": "2026-02-22T23:17:42.614Z|2026-02-22T23:17:42.657Z|ok|green|0|12",
+    "run_at": "2026-02-22T23:17:42.657Z",
+    "line_no": 6,
+    "status": "ok",
+    "risk_level": "green",
+    "malformed_line": false,
+    "present_in_compacted": true
+  },
+  "missing_raw_ids_sample": [],
+  "missing_incident_ids_sample": [],
+  "checks": {
+    "window_nonempty_ok": true,
+    "raw_window_malformed_ok": true,
+    "compacted_malformed_ok": true,
+    "latest_present_ok": true,
+    "incident_parity_ok": true,
+    "failed_parity_ok": true,
+    "red_parity_ok": true
+  },
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-window
+test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json" || (echo "Set CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_OUT=<compaction_window_json_path> before running compact-window digest" && exit 2); out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js --compaction-window-json "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.859Z",
+  "strict": true,
+  "input_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json",
+  "digest": {
+    "generated_at": "2026-02-22T23:17:42.860Z",
+    "strict": true,
+    "input": {
+      "compaction_window_json_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json",
+      "compaction_window_generated_at": "2026-02-22T23:17:42.818Z",
+      "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+      "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl"
+    },
+    "status": "ok",
+    "risk_level": "green",
+    "risk_reasons": [],
+    "strict_fail_reasons": [],
+    "strict_fail_count": 0,
+    "risk_reason_count": 0,
+    "key_metrics": {
+      "entries_total_raw": 6,
+      "entries_total_compacted": 6,
+      "window_raw_entries": 6,
+      "raw_window_incidents": 0,
+      "present_in_compacted_in_window": 6,
+      "missing_in_compacted_in_window": 0,
+      "incident_missing_in_compacted": 0,
+      "raw_window_coverage_pct": 100,
+      "incident_coverage_pct": 0
+    },
+    "key_checks": {
+      "window_nonempty_ok": true,
+      "raw_window_malformed_ok": true,
+      "compacted_malformed_ok": true,
+      "latest_present_ok": true,
+      "incident_parity_ok": true,
+      "failed_parity_ok": true,
+      "red_parity_ok": true
+    },
+    "thresholds": {
+      "max_missing_in_compacted_window_for_ok": 0,
+      "min_raw_window_coverage_pct_for_ok": 100,
+      "min_incident_coverage_pct_for_ok": 100
+    }
+  },
+  "validation_errors": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-window-digest
+test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json" || (echo "Set CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_OUT=<compact_window_digest_json_path> before running compact-window digest heartbeat" && exit 2); out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js --digest-json "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json" --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.899Z",
+  "strict": true,
+  "input_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json",
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "history_size_before": 1,
+  "history_size_after": 2,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "heartbeat": {
+    "run_at": "2026-02-22T23:17:42.860Z",
+    "heartbeat_id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
+    "digest_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json",
+    "digest_generated_at": "2026-02-22T23:17:42.860Z",
+    "compaction_window_generated_at": "2026-02-22T23:17:42.818Z",
+    "status": "ok",
+    "risk_level": "green",
+    "window_raw_entries": 6,
+    "raw_window_incidents": 0,
+    "missing_in_compacted_in_window": 0,
+    "incident_missing_in_compacted": 0,
+    "raw_window_coverage_pct": 100,
+    "incident_coverage_pct": 0,
+    "strict_fail_count": 0,
+    "risk_reason_count": 0,
+    "strict_fail_reasons": [],
+    "risk_reasons": []
+  }
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-window-digest-heartbeat
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl" --last "20" --max-failed "0" --max-failed-rate-pct "0" --max-degraded "0" --max-degraded-rate-pct "0" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.941Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 2,
+    "degraded": 0,
+    "failed": 0
+  },
+  "risk_level_counts": {
+    "green": 2,
+    "amber": 0,
+    "red": 0
+  },
+  "failed_in_window": 0,
+  "degraded_in_window": 0,
+  "failed_rate_pct": 0,
+  "degraded_rate_pct": 0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_red_risk_run_at": "",
+  "last_red_risk_run_at": "",
+  "latest": {
+    "run_at": "2026-02-22T23:17:42.860Z",
+    "heartbeat_id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
+    "status": "ok",
+    "risk_level": "green",
+    "line_no": 2,
+    "malformed_line": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "latest_not_failed_ok": true
+  },
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-window-digest-heartbeat-window
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_report_20260222T231705Z.json"; fi; compact_arg=""; if [ -n "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl" ]; then compact_arg="--compacted-jsonl docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl" --keep-recent "20" --keep-mid-span "100" --keep-mid-every "5" --keep-old-every "20" --min-raw-for-dropped-check "25" --strict ${compact_arg} ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:42.981Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
+  "policy": {
+    "keep_recent": 20,
+    "keep_mid_span": 100,
+    "keep_mid_every": 5,
+    "keep_old_every": 20,
+    "min_raw_for_dropped_check": 25
+  },
+  "entries_total": 2,
+  "selected_entries": 2,
+  "dropped_entries": 0,
+  "selected_ratio": 1,
+  "malformed_total": 0,
+  "malformed_selected": 0,
+  "malformed_dropped": 0,
+  "incidents_total": 0,
+  "incidents_selected": 0,
+  "incidents_dropped": 0,
+  "failed_total": 0,
+  "failed_selected": 0,
+  "degraded_total": 0,
+  "degraded_selected": 0,
+  "red_total": 0,
+  "red_selected": 0,
+  "tiers": {
+    "recent": {
+      "raw_entries": 2,
+      "selected_entries": 2,
+      "cadence_every": 1
+    },
+    "mid": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 5
+    },
+    "old": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 20
+    }
+  },
+  "anchors": {
+    "oldest_selected": true,
+    "latest_selected": true
+  },
+  "first_run_at": "2026-02-22T23:08:51.877Z",
+  "last_run_at": "2026-02-22T23:17:42.860Z",
+  "selected_first_run_at": "2026-02-22T23:08:51.877Z",
+  "selected_last_run_at": "2026-02-22T23:17:42.860Z",
+  "selected_indices_sample": [
+    0,
+    1
+  ],
+  "selected_reasons_sample": [
+    {
+      "index": 0,
+      "line_no": 1,
+      "run_at": "2026-02-22T23:08:51.877Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "anchor_oldest",
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 1,
+      "line_no": 2,
+      "run_at": "2026-02-22T23:17:42.860Z",
+      "status": "ok",
+      "risk_level": "green",
+      "reasons": [
+        "anchor_latest",
+        "cadence_recent"
+      ]
+    }
+  ],
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-window-digest-heartbeat-compact
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js --heartbeat-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl" --compacted-jsonl "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl" --last "20" --strict ${out_arg}
+{
+  "generated_at": "2026-02-22T23:17:43.023Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
+  "window_last": 20,
+  "entries_total_raw": 2,
+  "entries_total_compacted": 2,
+  "window_raw_entries": 2,
+  "window_raw_malformed_entries": 0,
+  "compacted_malformed_entries": 0,
+  "raw_window_status_counts": {
+    "ok": 2,
+    "degraded": 0,
+    "failed": 0
+  },
+  "raw_window_risk_level_counts": {
+    "green": 2,
+    "amber": 0,
+    "red": 0
+  },
+  "raw_window_incidents": 0,
+  "raw_window_failed": 0,
+  "raw_window_degraded": 0,
+  "raw_window_red": 0,
+  "present_in_compacted_in_window": 2,
+  "missing_in_compacted_in_window": 0,
+  "incident_present_in_compacted": 0,
+  "incident_missing_in_compacted": 0,
+  "failed_present_in_compacted": 0,
+  "degraded_present_in_compacted": 0,
+  "red_present_in_compacted": 0,
+  "raw_window_coverage_pct": 100,
+  "incident_coverage_pct": 0,
+  "latest_raw": {
+    "id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
+    "heartbeat_id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
+    "run_at": "2026-02-22T23:17:42.860Z",
+    "line_no": 2,
+    "status": "ok",
+    "risk_level": "green",
+    "malformed_line": false,
+    "present_in_compacted": true
+  },
+  "missing_raw_ids_sample": [],
+  "missing_incident_ids_sample": [],
+  "checks": {
+    "window_nonempty_ok": true,
+    "raw_window_malformed_ok": true,
+    "compacted_malformed_ok": true,
+    "latest_present_ok": true,
+    "incident_parity_ok": true,
+    "failed_parity_ok": true,
+    "degraded_parity_ok": true,
+    "red_parity_ok": true
+  },
+  "strict_fail_reasons": []
+}
+OK citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-window-digest-heartbeat-compact-window
+OK history/heartbeat tail + compacted captures
+OK explorer-gh-pages-build
+OK etl-tracker-gate
+DONE

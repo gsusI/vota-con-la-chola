@@ -1,0 +1,66 @@
+{
+  "generated_at_utc": "20260223T112045Z",
+  "status": "ok",
+  "sprint": "AI-OPS-78",
+  "objective": "Concern-pack quality loop with heuristic scoring and weak-pack flags",
+  "checks": {
+    "ui_contract": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/node_test_citizen_concern_pack_quality_ui_contract_20260223T112045Z.txt"
+    },
+    "python_unittest": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/python_unittest_report_citizen_concern_pack_quality_20260223T112045Z.txt"
+    },
+    "just_test_lane": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/just_citizen_test_concern_pack_quality_20260223T112045Z.txt"
+    },
+    "strict_pack_quality_gate": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/just_citizen_check_concern_pack_quality_20260223T112045Z.txt"
+    },
+    "preset_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/just_citizen_test_preset_regression_20260223T112045Z.txt"
+    },
+    "mobile_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/just_citizen_test_mobile_performance_regression_20260223T112045Z.txt"
+    },
+    "first_answer_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/just_citizen_test_first_answer_regression_20260223T112045Z.txt"
+    },
+    "inline_script_syntax": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/node_check_citizen_inline_script_20260223T112045Z.txt"
+    },
+    "py_compile_script": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-78/evidence/py_compile_report_citizen_concern_pack_quality_20260223T112045Z.txt"
+    }
+  },
+  "pack_quality_summary": {
+    "packs_total": 4,
+    "weak_packs_total": 0,
+    "weak_pack_ids": [],
+    "parties_total": 16,
+    "topics_total": 111,
+    "high_stakes_topics_total": 41,
+    "topic_party_cells_total": 1776
+  },
+  "thresholds": {
+    "min_topics_per_pack": 10,
+    "min_clear_cells_pct": 0.7,
+    "max_unknown_cells_pct": 0.3,
+    "min_confidence_avg_signal": 0.5,
+    "min_high_stakes_share": 0.12,
+    "max_weak_packs": 1
+  },
+  "artifacts": {
+    "contract_markers": "docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_contract_markers_20260223T112045Z.txt",
+    "pack_quality_report": "docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_20260223T112045Z.json",
+    "summary_json": "docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_contract_summary_20260223T112045Z.json"
+  }
+}

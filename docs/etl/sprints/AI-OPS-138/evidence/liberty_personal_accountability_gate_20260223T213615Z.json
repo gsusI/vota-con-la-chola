@@ -1,0 +1,329 @@
+{
+  "generated_at": "2026-02-23T21:36:15+00:00",
+  "status": "ok",
+  "totals": {
+    "target_fragments_total": 8,
+    "fragments_with_personal_accountability_total": 7,
+    "personal_edges_total": 13,
+    "personal_edges_with_primary_evidence_total": 13,
+    "direct_person_edges_total": 0,
+    "indirect_attributable_edges_total": 9,
+    "indirect_person_edges_total": 9,
+    "indirect_person_edges_valid_window_total": 9,
+    "persons_scored_total": 9
+  },
+  "coverage": {
+    "fragments_with_personal_accountability_pct": 0.875,
+    "personal_edges_with_primary_evidence_pct": 1.0,
+    "indirect_person_edges_with_valid_window_pct": 1.0
+  },
+  "checks": {
+    "personal_scores_available": true,
+    "min_persons_scored_gate": true,
+    "personal_fragment_coverage_gate": true,
+    "personal_primary_evidence_gate": true,
+    "indirect_person_window_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "personal_confidence_min": 0.55,
+      "personal_max_causal_distance": 2,
+      "personal_fragment_coverage_min": 0.5,
+      "personal_primary_evidence_min_pct": 1.0,
+      "min_personal_primary_evidence_edges": 1,
+      "indirect_person_window_min_pct": 1.0,
+      "min_indirect_person_window_edges": 1,
+      "min_persons_scored": 1
+    }
+  },
+  "methodology": {
+    "score_formula": "sum(irlc_score * role_weight * edge_confidence * primary_evidence_factor), normalized 0-100 by max person",
+    "primary_evidence_factor": {
+      "with_primary_evidence": 1.0,
+      "without_primary_evidence": 0.5
+    },
+    "role_weights": {
+      "propose": 0.25,
+      "approve": 0.3,
+      "delegate": 0.15,
+      "enforce": 0.25,
+      "audit": 0.05,
+      "appoint": 0.15,
+      "instruct": 0.15,
+      "design": 0.1
+    }
+  },
+  "top_person_scores": [
+    {
+      "person_name": "Persona seed trafico ministerio",
+      "actor_labels": [
+        "Ministerio competente en trafico"
+      ],
+      "role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 2,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 2,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 2,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.74,
+      "mean_probative_strength": 0.74,
+      "weighted_score_raw": 12.432,
+      "responsibility_score_personal": 100.0,
+      "role_breakdown": [
+        {
+          "role": "delegate",
+          "edges_total": 2,
+          "weighted_score_raw": 12.432,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed empleo nombramientos",
+      "actor_labels": [
+        "Secretaria de Estado de Empleo"
+      ],
+      "role_titles": [
+        "Secretaria de Estado de Empleo"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 2,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 2,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 2,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.56,
+      "mean_probative_strength": 0.56,
+      "weighted_score_raw": 10.3782,
+      "responsibility_score_personal": 83.47973,
+      "role_breakdown": [
+        {
+          "role": "appoint",
+          "edges_total": 2,
+          "weighted_score_raw": 10.3782,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed hacienda delegacion",
+      "actor_labels": [
+        "Ministerio de Hacienda"
+      ],
+      "role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 1,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 1,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 1,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.73,
+      "mean_probative_strength": 0.73,
+      "weighted_score_raw": 7.068225,
+      "responsibility_score_personal": 56.855092,
+      "role_breakdown": [
+        {
+          "role": "delegate",
+          "edges_total": 1,
+          "weighted_score_raw": 7.068225,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed movilidad estrategica",
+      "actor_labels": [
+        "Direccion politica de movilidad"
+      ],
+      "role_titles": [
+        "Direccion politica de movilidad"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 2,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 2,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 2,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.61,
+      "mean_probative_strength": 0.61,
+      "weighted_score_raw": 6.832,
+      "responsibility_score_personal": 54.954955,
+      "role_breakdown": [
+        {
+          "role": "design",
+          "edges_total": 2,
+          "weighted_score_raw": 6.832,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed hacienda diseno",
+      "actor_labels": [
+        "Ministerio de Hacienda"
+      ],
+      "role_titles": [
+        "Titular del Ministerio de Hacienda"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 2,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 2,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 2,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.57,
+      "mean_probative_strength": 0.57,
+      "weighted_score_raw": 6.22725,
+      "responsibility_score_personal": 50.090492,
+      "role_breakdown": [
+        {
+          "role": "design",
+          "edges_total": 2,
+          "weighted_score_raw": 6.22725,
+          "primary_evidence_edges_total": 2,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed seguridad instrucciones",
+      "actor_labels": [
+        "Secretaria de Estado de Seguridad"
+      ],
+      "role_titles": [
+        "Secretaria de Estado de Seguridad"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 1,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 1,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 1,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.62,
+      "mean_probative_strength": 0.62,
+      "weighted_score_raw": 5.8683,
+      "responsibility_score_personal": 47.203185,
+      "role_breakdown": [
+        {
+          "role": "instruct",
+          "edges_total": 1,
+          "weighted_score_raw": 5.8683,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed secretaria hacienda",
+      "actor_labels": [
+        "Secretaria de Estado de Hacienda"
+      ],
+      "role_titles": [
+        "Secretaria de Estado de Hacienda"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 1,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 1,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 1,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.58,
+      "mean_probative_strength": 0.58,
+      "weighted_score_raw": 5.61585,
+      "responsibility_score_personal": 45.172539,
+      "role_breakdown": [
+        {
+          "role": "instruct",
+          "edges_total": 1,
+          "weighted_score_raw": 5.61585,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed trafico procedimiento",
+      "actor_labels": [
+        "Ministerio competente en trafico"
+      ],
+      "role_titles": [
+        "Titular ministerial de trafico"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 1,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 1,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 1,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.7,
+      "mean_probative_strength": 0.7,
+      "weighted_score_raw": 5.187,
+      "responsibility_score_personal": 41.722973,
+      "role_breakdown": [
+        {
+          "role": "instruct",
+          "edges_total": 1,
+          "weighted_score_raw": 5.187,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    },
+    {
+      "person_name": "Persona seed trabajo diseno",
+      "actor_labels": [
+        "Ministerio de Trabajo"
+      ],
+      "role_titles": [
+        "Titular del Ministerio de Trabajo"
+      ],
+      "period_start_date": "2023-01-01",
+      "period_end_date": "2026-12-31",
+      "edges_total": 1,
+      "direct_edges_total": 0,
+      "indirect_edges_total": 1,
+      "fragments_total": 1,
+      "primary_evidence_edges_total": 1,
+      "primary_evidence_pct": 1.0,
+      "mean_edge_confidence": 0.6,
+      "mean_probative_strength": 0.6,
+      "weighted_score_raw": 3.411,
+      "responsibility_score_personal": 27.437259,
+      "role_breakdown": [
+        {
+          "role": "design",
+          "edges_total": 1,
+          "weighted_score_raw": 3.411,
+          "primary_evidence_edges_total": 1,
+          "primary_evidence_pct": 1.0
+        }
+      ]
+    }
+  ]
+}

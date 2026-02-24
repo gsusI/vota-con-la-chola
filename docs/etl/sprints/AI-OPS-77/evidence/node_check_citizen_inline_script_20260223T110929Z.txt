@@ -1,0 +1,12 @@
+node:internal/modules/esm/get_format:189
+  throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);
+        ^
+
+TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".6f1AboOypQ" for /private/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp.6f1AboOypQ
+    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:189:9)
+    at defaultGetFormat (node:internal/modules/esm/get_format:232:36)
+    at checkSyntax (node:internal/main/check_syntax:69:20) {
+  code: 'ERR_UNKNOWN_FILE_EXTENSION'
+}
+
+Node.js v20.19.5

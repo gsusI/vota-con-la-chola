@@ -1,0 +1,62 @@
+{
+  "generated_at_utc": "20260223T131323Z",
+  "status": "ok",
+  "sprint": "AI-OPS-81",
+  "objective": "Citizen release hardening baseline with regression-suite gate and source-vs-published parity checklist",
+  "checks": {
+    "node_release_hardening_tests": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/node_test_report_citizen_release_hardening_20260223T131323Z.txt"
+    },
+    "just_release_hardening_tests": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/just_citizen_test_release_hardening_20260223T131323Z.txt"
+    },
+    "citizen_regression_suite": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/just_citizen_release_regression_suite_20260223T130301Z.txt"
+    },
+    "gh_pages_build": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/just_explorer_gh_pages_build_20260223T130812Z.txt"
+    },
+    "release_hardening_strict_check": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/just_citizen_check_release_hardening_20260223T131323Z.txt"
+    },
+    "release_hardening_report_after_build": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/just_citizen_report_release_hardening_20260223T131323Z.txt"
+    }
+  },
+  "readiness_transition": {
+    "before_build": {
+      "status": "failed",
+      "release_ready": false,
+      "total_fail": 7,
+      "failed_ids": [
+        "asset_parity:index.html",
+        "asset_parity:preset_codec.js",
+        "asset_published:onboarding_funnel.js",
+        "asset_published:first_answer_accelerator.js",
+        "asset_published:unknown_explainability.js",
+        "asset_published:evidence_trust_panel.js",
+        "snapshot:shape"
+      ],
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_prebuild_status_20260223T130301Z.json"
+    },
+    "after_build": {
+      "status": "ok",
+      "release_ready": true,
+      "total_fail": 0,
+      "failed_ids": [],
+      "parity_ok_assets": 6,
+      "parity_total_assets": 6,
+      "evidence": "docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_latest.json"
+    }
+  },
+  "artifacts": {
+    "markers": "docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_contract_markers_20260223T131323Z.txt",
+    "summary_json": "docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_contract_summary_20260223T131323Z.json"
+  }
+}

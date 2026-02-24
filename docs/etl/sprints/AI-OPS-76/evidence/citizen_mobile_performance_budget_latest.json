@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-02-23T12:00:27+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "ui/citizen/index.html",
+    "ui_assets": [
+      "ui/citizen/preset_codec.js",
+      "ui/citizen/onboarding_funnel.js",
+      "ui/citizen/first_answer_accelerator.js",
+      "ui/citizen/unknown_explainability.js",
+      "ui/citizen/cross_method_stability.js",
+      "ui/citizen/evidence_trust_panel.js"
+    ],
+    "snapshot": "docs/gh-pages/citizen/data/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 207634,
+    "ui_assets_total_bytes": 43942,
+    "snapshot_bytes": 950181,
+    "ui_assets_count": 6,
+    "interaction_markers_missing": []
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 220000,
+    "max_ui_assets_total_bytes": 60000,
+    "max_snapshot_bytes": 5000000
+  },
+  "checks": {
+    "ui_html_within_budget": true,
+    "ui_assets_total_within_budget": true,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": true
+  },
+  "failure_reasons": [],
+  "ui_assets": [
+    {
+      "path": "ui/citizen/preset_codec.js",
+      "bytes": 7406
+    },
+    {
+      "path": "ui/citizen/onboarding_funnel.js",
+      "bytes": 4322
+    },
+    {
+      "path": "ui/citizen/first_answer_accelerator.js",
+      "bytes": 13758
+    },
+    {
+      "path": "ui/citizen/unknown_explainability.js",
+      "bytes": 4845
+    },
+    {
+      "path": "ui/citizen/cross_method_stability.js",
+      "bytes": 8243
+    },
+    {
+      "path": "ui/citizen/evidence_trust_panel.js",
+      "bytes": 5368
+    }
+  ]
+}

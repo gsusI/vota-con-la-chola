@@ -1,0 +1,52 @@
+{
+  "documents": {
+    "candidate_urls": 24,
+    "doc_links_seen": 24,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000277.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000278.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000279.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000001.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000002.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000003.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000004.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000005.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000006.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000007.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000008.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=http://www.senado.es/legis9/expedientes/620/xml/INI-3-620000009.xml -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000277 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000278 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000279 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000001 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000002 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000003 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000004 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000005 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000006 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000007 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000008 -> HTTPStatusError: HTTP 500 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=620&id2=000009 -> HTTPStatusError: HTTP 500 (playwright)"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 24,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 12,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 24
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

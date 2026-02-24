@@ -1,0 +1,30 @@
+TAP version 13
+# Subtest: evidence trust panel computes freshness, trust level, and drilldown metadata
+ok 1 - evidence trust panel computes freshness, trust level, and drilldown metadata
+  ---
+  duration_ms: 0.919334
+  ...
+# Subtest: evidence trust panel handles missing dates and links deterministically
+ok 2 - evidence trust panel handles missing dates and links deterministically
+  ---
+  duration_ms: 0.124042
+  ...
+# Subtest: citizen UI loads evidence trust panel module
+ok 3 - citizen UI loads evidence trust panel module
+  ---
+  duration_ms: 3.68175
+  ...
+# Subtest: citizen UI renders evidence trust panel markers in party cards
+ok 4 - citizen UI renders evidence trust panel markers in party cards
+  ---
+  duration_ms: 0.543833
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53.347417

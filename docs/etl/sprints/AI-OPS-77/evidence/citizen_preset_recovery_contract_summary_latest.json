@@ -1,0 +1,47 @@
+{
+  "generated_at_utc": "20260223T110953Z",
+  "status": "ok",
+  "sprint": "AI-OPS-77",
+  "objective": "Share-flow clarity v2 with #preset recovery and canonicalization UX",
+  "checks": {
+    "preset_codec_recovery_tests": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-77/evidence/node_test_preset_codec_recovery_20260223T110929Z.txt"
+    },
+    "preset_codec_full_contract_suite": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-77/evidence/just_citizen_test_preset_codec_20260223T110953Z.txt"
+    },
+    "mobile_performance_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-77/evidence/just_citizen_test_mobile_performance_20260223T110953Z.txt"
+    },
+    "first_answer_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-77/evidence/just_citizen_test_first_answer_accelerator_20260223T110953Z.txt"
+    },
+    "inline_script_syntax": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-77/evidence/node_check_citizen_inline_script_20260223T110953Z.txt"
+    },
+    "preset_codec_syntax": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-77/evidence/node_check_preset_codec_20260223T110953Z.txt"
+    }
+  },
+  "fixture_contract": {
+    "schema_version": "v2",
+    "hash_cases": 13,
+    "share_cases": 3,
+    "recovery_case_ids": [
+      "hash_raw_payload_unencoded",
+      "hash_double_encoded_payload",
+      "hash_legacy_no_version_payload_recovery",
+      "hash_valid_uppercase_prefix"
+    ]
+  },
+  "artifacts": {
+    "markers": "docs/etl/sprints/AI-OPS-77/evidence/citizen_preset_recovery_contract_markers_20260223T110953Z.txt",
+    "summary_json": "docs/etl/sprints/AI-OPS-77/evidence/citizen_preset_recovery_contract_summary_20260223T110953Z.json"
+  }
+}

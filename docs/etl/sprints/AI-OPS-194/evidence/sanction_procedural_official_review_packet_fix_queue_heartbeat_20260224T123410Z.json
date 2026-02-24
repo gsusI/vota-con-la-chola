@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-02-24T12:34:17+00:00",
+  "status": "degraded",
+  "strict": true,
+  "fix_queue_json": "docs/etl/sprints/AI-OPS-193/evidence/sanction_procedural_official_review_packet_fix_ready_cycle_fix_queue_latest.json",
+  "heartbeat_jsonl": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat.jsonl",
+  "heartbeat": {
+    "run_at": "2026-02-24T12:34:17+00:00",
+    "heartbeat_id": "2026-02-24T12:34:17+00:00|degraded|4|4|0|4|invalid_row:4|0|1",
+    "fix_queue_path": "docs/etl/sprints/AI-OPS-193/evidence/sanction_procedural_official_review_packet_fix_ready_cycle_fix_queue_latest.json",
+    "fix_queue_generated_at": "2026-02-24T12:34:17+00:00",
+    "status": "degraded",
+    "queue_rows_total": 4,
+    "packets_expected_total": 4,
+    "packets_ready_total": 0,
+    "packets_not_ready_total": 4,
+    "queue_rows_by_packet_status": {
+      "invalid_row": 4
+    },
+    "fix_queue_empty": false,
+    "progress_report_not_failed": true,
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "validation_errors": [],
+  "strict_fail_count": 0,
+  "strict_fail_reasons": [],
+  "history_rows_before": 1,
+  "history_rows_after": 2,
+  "malformed_history_rows": 0,
+  "already_present": false,
+  "appended": true,
+  "checks": {
+    "heartbeat_valid": true,
+    "history_append_succeeded": true
+  }
+}

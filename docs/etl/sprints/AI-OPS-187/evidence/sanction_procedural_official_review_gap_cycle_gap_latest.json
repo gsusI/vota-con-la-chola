@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-02-24T15:24:35+00:00",
+  "status": "degraded",
+  "default_source_id": "boe_api_legal",
+  "metric_scope": {
+    "period_date": null,
+    "period_granularity": null,
+    "label": "all_time"
+  },
+  "statuses_filter": [
+    "missing_source_record"
+  ],
+  "include_ready": false,
+  "queue_report_status": "degraded",
+  "queue_totals": {
+    "official_review_sources_expected_total": 4,
+    "official_review_sources_seeded_total": 4,
+    "official_review_kpis_expected_total": 3,
+    "expected_pairs_total": 12,
+    "pairs_ready_total": 0,
+    "pairs_missing_source_total": 0,
+    "pairs_missing_metric_total": 12,
+    "pairs_missing_source_record_total": 0,
+    "pairs_missing_evidence_total": 0,
+    "actionable_pairs_total": 12,
+    "queue_rows_total": 12
+  },
+  "totals": {
+    "queue_rows_seen_total": 12,
+    "rows_emitted_total": 0,
+    "rows_skipped_missing_source_total": 0,
+    "rows_skipped_filtered_status_total": 12,
+    "rows_emitted_by_status": {},
+    "rows_skipped_by_status": {
+      "missing_metric": 12
+    }
+  },
+  "checks": {
+    "gap_queue_not_failed": true,
+    "rows_emitted_present": false,
+    "filtered_statuses_valid": true
+  },
+  "rows_preview": [],
+  "db_path": "etl/data/staging/politicos-es.db",
+  "output_apply_csv": "docs/etl/sprints/AI-OPS-187/exports/sanction_procedural_official_review_apply_from_gap_cycle_latest.csv",
+  "rows_emitted_total": 0
+}

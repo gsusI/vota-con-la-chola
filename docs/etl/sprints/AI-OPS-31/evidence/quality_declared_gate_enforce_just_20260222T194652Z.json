@@ -1,0 +1,139 @@
+{
+  "declared": {
+    "gate": {
+      "failures": [],
+      "passed": true,
+      "thresholds": {
+        "declared_positions_coverage_pct": 0.95,
+        "review_closed_pct": 0.95,
+        "topic_evidence_with_nonempty_stance_pct": 0.99
+      }
+    },
+    "kpis": {
+      "by_source": {
+        "programas_partidos": {
+          "declared_positions_coverage_pct": 1.0,
+          "declared_positions_scope_total": 5,
+          "declared_positions_total": 5,
+          "review_closed_pct": 1.0,
+          "review_ignored": 6,
+          "review_pending": 0,
+          "review_resolved": 0,
+          "review_total": 6,
+          "source_records": 3,
+          "text_documents": 3,
+          "topic_evidence_total": 11,
+          "topic_evidence_with_nonempty_stance": 11,
+          "topic_evidence_with_nonempty_stance_pct": 1.0,
+          "topic_evidence_with_supported_stance": 5
+        }
+      },
+      "declared_positions_coverage_pct": 1.0,
+      "declared_positions_scope_total": 5,
+      "declared_positions_total": 5,
+      "review_closed_pct": 1.0,
+      "review_ignored": 6,
+      "review_pending": 0,
+      "review_resolved": 0,
+      "review_total": 6,
+      "source_ids": [
+        "programas_partidos"
+      ],
+      "source_records": 3,
+      "text_documents": 3,
+      "topic_evidence_total": 11,
+      "topic_evidence_with_nonempty_stance": 11,
+      "topic_evidence_with_nonempty_stance_pct": 1.0,
+      "topic_evidence_with_supported_stance": 5
+    },
+    "source_ids": [
+      "programas_partidos"
+    ]
+  },
+  "gate": {
+    "failures": [],
+    "passed": true,
+    "thresholds": {
+      "events_with_date_pct": 0.95,
+      "events_with_initiative_link_pct": 0.95,
+      "events_with_theme_pct": 0.95,
+      "events_with_totals_pct": 0.95,
+      "member_votes_with_person_id_pct": 0.9
+    }
+  },
+  "kpis": {
+    "by_source": {
+      "congreso_votaciones": {
+        "events_total": 2823,
+        "events_with_date": 2823,
+        "events_with_date_pct": 1.0,
+        "events_with_initiative_link": 2823,
+        "events_with_initiative_link_pct": 1.0,
+        "events_with_nominal_vote": 1602,
+        "events_with_nominal_vote_pct": 0.5674814027630181,
+        "events_with_official_initiative_link": 685,
+        "events_with_official_initiative_link_pct": 0.2426496634785689,
+        "events_with_theme": 2823,
+        "events_with_theme_pct": 1.0,
+        "events_with_totals": 2823,
+        "events_with_totals_pct": 1.0,
+        "latest_events_total": 1665,
+        "latest_events_with_topic_evidence": 1230,
+        "latest_events_with_topic_evidence_pct": 0.7387387387387387,
+        "latest_legislature": "15",
+        "member_votes_total": 557922,
+        "member_votes_with_person_id": 531812,
+        "member_votes_with_person_id_pct": 0.9532013435569847
+      },
+      "senado_votaciones": {
+        "events_total": 5534,
+        "events_with_date": 5534,
+        "events_with_date_pct": 1.0,
+        "events_with_initiative_link": 5534,
+        "events_with_initiative_link_pct": 1.0,
+        "events_with_nominal_vote": 5412,
+        "events_with_nominal_vote_pct": 0.9779544633176726,
+        "events_with_official_initiative_link": 5534,
+        "events_with_official_initiative_link_pct": 1.0,
+        "events_with_theme": 5534,
+        "events_with_theme_pct": 1.0,
+        "events_with_totals": 5534,
+        "events_with_totals_pct": 1.0,
+        "latest_events_total": 100,
+        "latest_events_with_topic_evidence": 97,
+        "latest_events_with_topic_evidence_pct": 0.97,
+        "latest_legislature": "15",
+        "member_votes_total": 1220448,
+        "member_votes_with_person_id": 1211778,
+        "member_votes_with_person_id_pct": 0.9928960512860852
+      }
+    },
+    "events_total": 8357,
+    "events_with_date": 8357,
+    "events_with_date_pct": 1.0,
+    "events_with_initiative_link": 8357,
+    "events_with_initiative_link_pct": 1.0,
+    "events_with_nominal_vote": 7014,
+    "events_with_nominal_vote_pct": 0.8392963982290296,
+    "events_with_official_initiative_link": 6219,
+    "events_with_official_initiative_link_pct": 0.7441665669498624,
+    "events_with_theme": 8357,
+    "events_with_theme_pct": 1.0,
+    "events_with_totals": 8357,
+    "events_with_totals_pct": 1.0,
+    "latest_events_total": 1765,
+    "latest_events_with_topic_evidence": 1327,
+    "latest_events_with_topic_evidence_pct": 0.7518413597733711,
+    "member_votes_total": 1778370,
+    "member_votes_with_person_id": 1743590,
+    "member_votes_with_person_id_pct": 0.980442765003908,
+    "source_ids": [
+      "congreso_votaciones",
+      "senado_votaciones"
+    ]
+  },
+  "source_ids": [
+    "congreso_votaciones",
+    "senado_votaciones"
+  ]
+}

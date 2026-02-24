@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-02-23T15:40:42+00:00",
+  "status": "ok",
+  "paths": {
+    "events_jsonl": "tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+  },
+  "telemetry": {
+    "events_total": 22,
+    "recognized_events_total": 20,
+    "ignored_events_total": 1,
+    "parse_errors": 1,
+    "sessions_total": 5,
+    "click_sessions_total": 5,
+    "replay_success_sessions_total": 5,
+    "replay_failure_sessions_total": 1
+  },
+  "metrics": {
+    "drilldown_click_events_total": 10,
+    "replay_attempt_events_total": 10,
+    "replay_success_events_total": 9,
+    "replay_failure_events_total": 1,
+    "contract_complete_click_events_total": 9,
+    "replay_success_rate": 0.9,
+    "replay_failure_rate": 0.1,
+    "contract_complete_click_rate": 0.9
+  },
+  "thresholds": {
+    "min_drilldown_click_events": 8,
+    "min_replay_attempt_events": 8,
+    "min_replay_success_rate": 0.85,
+    "min_contract_complete_click_rate": 0.9,
+    "max_replay_failure_rate": 0.15
+  },
+  "checks": {
+    "telemetry_available": true,
+    "drilldown_click_events_meet_minimum": true,
+    "replay_attempt_events_meet_minimum": true,
+    "replay_success_rate_meets_minimum": true,
+    "contract_complete_click_rate_meets_minimum": true,
+    "replay_failure_rate_within_threshold": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "by_bucket": [
+    {
+      "bucket": "coherent",
+      "click_events_total": 5
+    },
+    {
+      "bucket": "incoherent",
+      "click_events_total": 5
+    }
+  ]
+}

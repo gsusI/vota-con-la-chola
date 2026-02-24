@@ -1,0 +1,61 @@
+just parl-export-liberty-person-identity-official-upgrade-review-queue-actionable
+PYTHONPATH=. python3 scripts/export_liberty_person_identity_official_upgrade_review_queue.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_person_identity_resolution_seed_v1.json --personal-confidence-min 0.55 --personal-max-causal-distance 2 --limit 0 --only-actionable --out docs/etl/sprints/AI-OPS-153/exports/liberty_person_identity_official_upgrade_review_queue_actionable_latest.csv --summary-out docs/etl/sprints/AI-OPS-153/evidence/liberty_person_identity_official_upgrade_review_queue_actionable_latest.json
+{
+  "seed_path": "etl/data/seeds/liberty_person_identity_resolution_seed_v1.json",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "out_path": "docs/etl/sprints/AI-OPS-153/exports/liberty_person_identity_official_upgrade_review_queue_actionable_latest.csv",
+  "source_record_lookup_rows_total": 173070,
+  "only_actionable": true,
+  "strict_empty_actionable": false,
+  "rows_exported_total": 0,
+  "summary": {
+    "rows_total": 0,
+    "manual_upgrade_rows_total": 0,
+    "official_evidence_gap_rows_total": 0,
+    "official_source_record_gap_rows_total": 0,
+    "missing_seed_mapping_total": 0,
+    "source_record_pk_lookup_keys_total": 0,
+    "source_record_pk_lookup_prefilled_total": 0,
+    "source_record_pk_lookup_miss_total": 0,
+    "actionable_rows_total": 0,
+    "likely_not_actionable_rows_total": 0
+  }
+}
+PYTHONPATH=. python3 scripts/report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat.py --summary-json docs/etl/sprints/AI-OPS-153/evidence/liberty_person_identity_official_upgrade_review_queue_actionable_latest.json --heartbeat-jsonl docs/etl/runs/liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat.jsonl --out docs/etl/sprints/AI-OPS-154/evidence/liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat_latest.json
+{
+  "generated_at": "2026-02-23T23:55:29+00:00",
+  "strict": false,
+  "input_path": "docs/etl/sprints/AI-OPS-153/evidence/liberty_person_identity_official_upgrade_review_queue_actionable_latest.json",
+  "heartbeat_path": "docs/etl/runs/liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [],
+  "heartbeat": {
+    "run_at": "2026-02-23T23:55:29+00:00",
+    "heartbeat_id": "ok|0|0|0|0|0|0|0|1|",
+    "summary_path": "docs/etl/sprints/AI-OPS-153/evidence/liberty_person_identity_official_upgrade_review_queue_actionable_latest.json",
+    "status": "ok",
+    "rows_total": 0,
+    "rows_exported_total": 0,
+    "actionable_rows_total": 0,
+    "likely_not_actionable_rows_total": 0,
+    "manual_upgrade_rows_total": 0,
+    "official_evidence_gap_rows_total": 0,
+    "official_source_record_gap_rows_total": 0,
+    "missing_seed_mapping_total": 0,
+    "source_record_lookup_rows_total": 173070,
+    "source_record_pk_lookup_keys_total": 0,
+    "source_record_pk_lookup_prefilled_total": 0,
+    "source_record_pk_lookup_miss_total": 0,
+    "only_actionable": true,
+    "strict_empty_actionable": false,
+    "actionable_queue_empty": true,
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
+  },
+  "status": "ok"
+}

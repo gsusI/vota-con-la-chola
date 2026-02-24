@@ -1,0 +1,67 @@
+ui markers
+710:              <div class="hint" style="margin: 0 0 6px">Packs rapidos (multi-concern)</div>
+1101:        concernPacks: [],
+1138:        const concernPack = String(p.get("concern_pack") || "").trim();
+1164:        if (state.activeConcernPackId) p.set("concern_pack", String(state.activeConcernPackId));
+1165:        else p.delete("concern_pack");
+1328:        return (state.concernPacks || []).find((p) => String(p.id || "") === token) || null;
+1334:        for (const pack of state.concernPacks || []) {
+1344:      function recommendedConcernPack() {
+1345:        const packs = Array.isArray(state.concernPacks) ? state.concernPacks : [];
+1363:      function applyConcernPack(packId, push, opts) {
+1387:      function renderConcernPackTags() {
+1393:        const packs = Array.isArray(state.concernPacks) ? state.concernPacks : [];
+1418:            applyConcernPack(pid, true, { switchToDashboard: true });
+1425:            renderConcernPackTags();
+1445:        const wantsPackId = normalizeConcernPackId(String(state.activeConcernPackId || p.get("concern_pack") || ""));
+1610:          renderConcernPackTags();
+1633:        renderConcernPackTags();
+1780:        const recPack = recommendedConcernPack();
+1824:            applyConcernPack(pid, true, { switchToDashboard: true });
+3375:          state.concernPacks = [];
+3379:            if (state.concernPacks.some((p) => String(p.id || "") === String(pack.id || ""))) continue;
+3380:            state.concernPacks.push(pack);
+
+gh-pages markers
+710:              <div class="hint" style="margin: 0 0 6px">Packs rapidos (multi-concern)</div>
+1101:        concernPacks: [],
+1138:        const concernPack = String(p.get("concern_pack") || "").trim();
+1164:        if (state.activeConcernPackId) p.set("concern_pack", String(state.activeConcernPackId));
+1165:        else p.delete("concern_pack");
+1328:        return (state.concernPacks || []).find((p) => String(p.id || "") === token) || null;
+1334:        for (const pack of state.concernPacks || []) {
+1344:      function recommendedConcernPack() {
+1345:        const packs = Array.isArray(state.concernPacks) ? state.concernPacks : [];
+1363:      function applyConcernPack(packId, push, opts) {
+1387:      function renderConcernPackTags() {
+1393:        const packs = Array.isArray(state.concernPacks) ? state.concernPacks : [];
+1418:            applyConcernPack(pid, true, { switchToDashboard: true });
+1425:            renderConcernPackTags();
+1445:        const wantsPackId = normalizeConcernPackId(String(state.activeConcernPackId || p.get("concern_pack") || ""));
+1610:          renderConcernPackTags();
+1633:        renderConcernPackTags();
+1780:        const recPack = recommendedConcernPack();
+1824:            applyConcernPack(pid, true, { switchToDashboard: true });
+3375:          state.concernPacks = [];
+3379:            if (state.concernPacks.some((p) => String(p.id || "") === String(pack.id || ""))) continue;
+3380:            state.concernPacks.push(pack);
+
+concerns packs
+ui/citizen/concerns_v1.json:184:  "packs": [
+ui/citizen/concerns_v1.json:186:      "id": "hogar_bolsillo",
+ui/citizen/concerns_v1.json:194:      "tradeoff": "Prioriza precio y empleo. Puede dejar en segundo plano instituciones y seguridad."
+ui/citizen/concerns_v1.json:197:      "id": "servicios_publicos",
+ui/citizen/concerns_v1.json:205:      "tradeoff": "Prioriza bienestar cotidiano. Puede cubrir menos agenda productiva y rural."
+ui/citizen/concerns_v1.json:208:      "id": "seguridad_estado",
+ui/citizen/concerns_v1.json:216:      "tradeoff": "Prioriza orden institucional y convivencia. Puede reducir foco en coste de vida."
+ui/citizen/concerns_v1.json:219:      "id": "campo_industria",
+ui/citizen/concerns_v1.json:227:      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion."
+docs/gh-pages/citizen/data/concerns_v1.json:184:  "packs": [
+docs/gh-pages/citizen/data/concerns_v1.json:186:      "id": "hogar_bolsillo",
+docs/gh-pages/citizen/data/concerns_v1.json:194:      "tradeoff": "Prioriza precio y empleo. Puede dejar en segundo plano instituciones y seguridad."
+docs/gh-pages/citizen/data/concerns_v1.json:197:      "id": "servicios_publicos",
+docs/gh-pages/citizen/data/concerns_v1.json:205:      "tradeoff": "Prioriza bienestar cotidiano. Puede cubrir menos agenda productiva y rural."
+docs/gh-pages/citizen/data/concerns_v1.json:208:      "id": "seguridad_estado",
+docs/gh-pages/citizen/data/concerns_v1.json:216:      "tradeoff": "Prioriza orden institucional y convivencia. Puede reducir foco en coste de vida."
+docs/gh-pages/citizen/data/concerns_v1.json:219:      "id": "campo_industria",
+docs/gh-pages/citizen/data/concerns_v1.json:227:      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion."

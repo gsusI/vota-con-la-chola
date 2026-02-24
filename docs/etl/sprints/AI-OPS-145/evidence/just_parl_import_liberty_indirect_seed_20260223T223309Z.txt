@@ -1,0 +1,29 @@
+PYTHONPATH=. python3 scripts/import_liberty_indirect_accountability_seed.py --db tmp/liberty_person_identity_source_guard_20260223T223309Z.db --seed etl/data/seeds/liberty_indirect_accountability_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-145/evidence/liberty_indirect_import_20260223T223309Z.json
+{
+  "generated_at": "2026-02-23T22:34:11+00:00",
+  "db_path": "tmp/liberty_person_identity_source_guard_20260223T223309Z.db",
+  "seed_path": "etl/data/seeds/liberty_indirect_accountability_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "indirect_chain_v1",
+    "edges_total": 12
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "method_version": "indirect_chain_v1",
+    "counts": {
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "edges_inserted": 12,
+      "edges_updated": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "edges_total": 12,
+      "fragments_with_edges_total": 8
+    }
+  }
+}

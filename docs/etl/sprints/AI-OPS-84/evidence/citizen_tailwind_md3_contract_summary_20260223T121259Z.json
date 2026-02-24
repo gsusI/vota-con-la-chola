@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-02-23T12:12:59+00:00",
+  "status": "ok",
+  "generated_css_bytes": 5582,
+  "token_colors_count": 15,
+  "token_spacing_count": 6,
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": true
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000
+  },
+  "failure_reasons": []
+}

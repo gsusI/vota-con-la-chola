@@ -1,0 +1,25 @@
+{
+  "concerns_total": 12,
+  "errors": [],
+  "errors_count": 0,
+  "generated_at": "2026-02-22T22:30:22+00:00",
+  "keywords_total": 102,
+  "packs_total": 4,
+  "path": "docs/gh-pages/citizen/data/concerns_v1.json",
+  "valid": true,
+  "version": "v1",
+  "warnings": [],
+  "warnings_count": 0
+}
+OK snapshot explorer-sports exportado: docs/gh-pages/explorer-politico/data/arena-mandates.json (78649 rows), docs/gh-pages/explorer-politico/data/sources.json (44)
+OK graph snapshot -> docs/gh-pages/graph/data/graph.json (nodes=767 edges=1042 rows=350)
+OK votes preview -> docs/gh-pages/explorer-votaciones/data/votes-preview.json (events=200 total=8357 limit=200 offset=0)
+OK sources status snapshot -> docs/gh-pages/explorer-sources/data/status.json
+OK temas preview -> docs/gh-pages/explorer-temas/data/temas-preview.json (generated_at=2026-02-22T22:30:39+00:00)
+OK citizen snapshot -> docs/gh-pages/citizen/data/citizen.json (topic_set_id=1 as_of_date=2026-02-16 method=combined version=v1 bytes=950181)
+OK citizen snapshot -> docs/gh-pages/citizen/data/citizen_votes.json (topic_set_id=1 as_of_date=2026-02-16 method=votes version=v1 bytes=944495)
+OK citizen snapshot -> docs/gh-pages/citizen/data/citizen_declared.json (topic_set_id=1 as_of_date=2026-02-16 method=declared version=v1 bytes=934911)
+{"path":"docs/gh-pages/citizen/data/citizen.json","bytes":950181,"topic_set_id":1,"as_of_date":"2026-02-16","computed_method":"combined","computed_version":"v1","topics":111,"parties":16,"party_topic_positions":1776,"stances":{"oppose":859,"support":605,"unclear":211,"no_signal":101},"programas_stances":{"no_signal":187,"oppose":1,"support":4}}
+{"path":"docs/gh-pages/citizen/data/citizen_votes.json","bytes":944495,"topic_set_id":1,"as_of_date":"2026-02-16","computed_method":"votes","computed_version":"v1","topics":111,"parties":16,"party_topic_positions":1776,"stances":{"oppose":859,"support":605,"unclear":209,"no_signal":103},"programas_stances":{"no_signal":187,"oppose":1,"support":4}}
+{"path":"docs/gh-pages/citizen/data/citizen_declared.json","bytes":934911,"topic_set_id":1,"as_of_date":"2026-02-16","computed_method":"declared","computed_version":"v1","topics":111,"parties":16,"party_topic_positions":1776,"stances":{"unclear":76,"no_signal":1689,"support":6,"oppose":1,"mixed":4},"programas_stances":{"no_signal":187,"oppose":1,"support":4}}
+Build GitHub Pages listo en docs/gh-pages

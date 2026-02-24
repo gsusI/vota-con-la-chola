@@ -1,0 +1,120 @@
+{
+  "seed_schema_version": "sanction_norms_seed_v1",
+  "dry_run": false,
+  "counts": {
+    "queue_rows_seen": 15,
+    "upgraded_rows": 15,
+    "already_non_seed_rows": 0,
+    "missing_boe_id_rows": 0,
+    "missing_candidate_rows": 0,
+    "candidate_seed_rows": 0
+  },
+  "upgraded_samples": [
+    {
+      "responsibility_evidence_id": 1,
+      "boe_id": "BOE-A-2015-11722",
+      "from_source_record_pk": 1428802,
+      "to_source_record_pk": 1428815,
+      "to_source_record_id": "boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "responsibility_evidence_id": 2,
+      "boe_id": "BOE-A-2015-11722",
+      "from_source_record_pk": 1428802,
+      "to_source_record_pk": 1428815,
+      "to_source_record_id": "boe_ref:BOE-A-2015-11722"
+    },
+    {
+      "responsibility_evidence_id": 3,
+      "boe_id": "BOE-A-2003-23514",
+      "from_source_record_pk": 1428803,
+      "to_source_record_pk": 1428813,
+      "to_source_record_id": "boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "responsibility_evidence_id": 4,
+      "boe_id": "BOE-A-2003-23514",
+      "from_source_record_pk": 1428803,
+      "to_source_record_pk": 1428813,
+      "to_source_record_id": "boe_ref:BOE-A-2003-23514"
+    },
+    {
+      "responsibility_evidence_id": 5,
+      "boe_id": "BOE-A-1994-8985",
+      "from_source_record_pk": 1428804,
+      "to_source_record_pk": 1428810,
+      "to_source_record_id": "boe_ref:BOE-A-1994-8985"
+    },
+    {
+      "responsibility_evidence_id": 6,
+      "boe_id": "BOE-A-1994-8985",
+      "from_source_record_pk": 1428804,
+      "to_source_record_pk": 1428810,
+      "to_source_record_id": "boe_ref:BOE-A-1994-8985"
+    },
+    {
+      "responsibility_evidence_id": 7,
+      "boe_id": "BOE-A-2003-23186",
+      "from_source_record_pk": 1428805,
+      "to_source_record_pk": 1428812,
+      "to_source_record_id": "boe_ref:BOE-A-2003-23186"
+    },
+    {
+      "responsibility_evidence_id": 8,
+      "boe_id": "BOE-A-2004-18398",
+      "from_source_record_pk": 1428806,
+      "to_source_record_pk": 1428814,
+      "to_source_record_id": "boe_ref:BOE-A-2004-18398"
+    },
+    {
+      "responsibility_evidence_id": 9,
+      "boe_id": "BOE-A-2004-18398",
+      "from_source_record_pk": 1428806,
+      "to_source_record_pk": 1428814,
+      "to_source_record_id": "boe_ref:BOE-A-2004-18398"
+    },
+    {
+      "responsibility_evidence_id": 10,
+      "boe_id": "BOE-A-2015-11724",
+      "from_source_record_pk": 1428807,
+      "to_source_record_pk": 1428816,
+      "to_source_record_id": "boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "responsibility_evidence_id": 11,
+      "boe_id": "BOE-A-2015-11724",
+      "from_source_record_pk": 1428807,
+      "to_source_record_pk": 1428816,
+      "to_source_record_id": "boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "responsibility_evidence_id": 12,
+      "boe_id": "BOE-A-2015-11724",
+      "from_source_record_pk": 1428807,
+      "to_source_record_pk": 1428816,
+      "to_source_record_id": "boe_ref:BOE-A-2015-11724"
+    },
+    {
+      "responsibility_evidence_id": 13,
+      "boe_id": "BOE-A-2000-15060",
+      "from_source_record_pk": 1428808,
+      "to_source_record_pk": 1428811,
+      "to_source_record_id": "boe_ref:BOE-A-2000-15060"
+    },
+    {
+      "responsibility_evidence_id": 14,
+      "boe_id": "BOE-A-2000-15060",
+      "from_source_record_pk": 1428808,
+      "to_source_record_pk": 1428811,
+      "to_source_record_id": "boe_ref:BOE-A-2000-15060"
+    },
+    {
+      "responsibility_evidence_id": 15,
+      "boe_id": "BOE-A-2015-3442",
+      "from_source_record_pk": 1428809,
+      "to_source_record_pk": 1428817,
+      "to_source_record_id": "boe_ref:BOE-A-2015-3442"
+    }
+  ],
+  "missing_samples": []
+}

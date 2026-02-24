@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-02-22T22:55:15.342Z",
+  "strict": true,
+  "bundle_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-58/evidence/citizen_preset_contract_bundle_report_20260222T225515Z.json",
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-58/evidence/citizen_preset_contract_bundle_history_tail_20260222T225515Z.jsonl",
+  "history_size_before": 0,
+  "history_size_after": 1,
+  "regression_detected": false,
+  "regression_reasons": [],
+  "previous_entry": {
+    "run_at": "",
+    "summary": {},
+    "contracts": {},
+    "sync_state": {}
+  },
+  "current_entry": {
+    "run_at": "2026-02-22T22:55:15.303Z",
+    "summary": {
+      "sections_total": 3,
+      "sections_pass": 3,
+      "sections_fail": 0,
+      "failed_sections": [],
+      "total_cases": 14,
+      "total_pass": 14,
+      "total_fail": 0,
+      "failed_ids": []
+    },
+    "contracts": {
+      "fixture_contract_ok": true,
+      "codec_parity_ok": true,
+      "codec_sync_state_ok": true
+    },
+    "sync_state": {
+      "would_change": false
+    }
+  }
+}

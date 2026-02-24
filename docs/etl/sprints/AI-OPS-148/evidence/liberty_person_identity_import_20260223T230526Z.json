@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-02-23T23:05:26+00:00",
+  "db_path": "tmp/liberty_person_identity_source_record_20260223T230526Z.db",
+  "seed_path": "etl/data/seeds/liberty_person_identity_resolution_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "identity_resolution_v1",
+    "mappings_total": 9
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "counts": {
+      "mappings_total": 9,
+      "persons_created": 5,
+      "persons_reused": 4,
+      "aliases_inserted": 9,
+      "aliases_updated": 0,
+      "aliases_retargeted": 0,
+      "aliases_retarget_downgrade_prevented": 0,
+      "aliases_source_kind_downgrade_prevented": 0,
+      "manual_mappings_total": 9,
+      "official_mappings_total": 0,
+      "official_mappings_with_source_record_total": 0,
+      "official_mappings_missing_source_record_total": 0,
+      "source_record_pk_resolved_total": 0,
+      "source_record_pk_unresolved_total": 0
+    },
+    "totals": {
+      "aliases_total": 9,
+      "persons_with_aliases_total": 5,
+      "manual_aliases_total": 9,
+      "official_aliases_total": 0,
+      "official_aliases_with_source_record_total": 0,
+      "official_aliases_missing_source_record_total": 0
+    }
+  }
+}

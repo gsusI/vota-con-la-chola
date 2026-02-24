@@ -1,0 +1,15 @@
+{
+  "sprint": "AI-OPS-73",
+  "generated_at": "2026-02-23T10:36:16Z",
+  "onboarding_contract": {
+    "module": "ui/citizen/onboarding_funnel.js",
+    "ui_next_action_cta": "data-onboard-next",
+    "local_server_route": "/citizen/onboarding_funnel.js",
+    "gh_pages_copy": "docs/gh-pages/citizen/onboarding_funnel.js",
+    "tests": [
+      "tests/test_citizen_onboarding_funnel.js",
+      "tests/test_citizen_onboarding_ui_contract.js"
+    ],
+    "just_target": "citizen-test-onboarding-funnel"
+  }
+}

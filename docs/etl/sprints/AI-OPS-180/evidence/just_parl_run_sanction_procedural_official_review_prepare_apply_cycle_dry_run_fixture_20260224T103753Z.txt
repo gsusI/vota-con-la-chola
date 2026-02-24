@@ -1,0 +1,17 @@
+test -n "docs/etl/sprints/AI-OPS-180/inputs/sanction_procedural_official_review_metrics_apply_fixture_20260224T103753Z.csv" || (echo "Set SANCTION_PROCEDURAL_OFFICIAL_REVIEW_PREPARE_IN=<csv_path>" && exit 2)
+strict_prepare_arg=""; if [ "1" = "1" ]; then strict_prepare_arg=" --strict-prepare"; fi; PYTHONPATH=. python3 scripts/run_sanction_procedural_official_review_prepare_apply_cycle.py --db etl/data/staging/politicos-es.db --in "docs/etl/sprints/AI-OPS-180/inputs/sanction_procedural_official_review_metrics_apply_fixture_20260224T103753Z.csv" --prepare-out docs/etl/sprints/AI-OPS-180/exports/sanction_procedural_official_review_apply_prepared_fixture_20260224T103753Z.csv --prepare-rejected-csv-out docs/etl/sprints/AI-OPS-180/exports/sanction_procedural_official_review_apply_rejected_fixture_20260224T103753Z.csv --prepare-out-json docs/etl/sprints/AI-OPS-180/evidence/sanction_procedural_official_review_apply_prepare_fixture_20260224T103753Z.json --source-id boe_api_legal --snapshot-date 2026-02-12 --readiness-tolerance 0.01 --readiness-queue-limit 0 --readiness-csv-out docs/etl/sprints/AI-OPS-180/exports/sanction_procedural_official_review_apply_readiness_fixture_queue_20260224T103753Z.csv --readiness-out docs/etl/sprints/AI-OPS-180/evidence/sanction_procedural_official_review_apply_readiness_fixture_20260224T103753Z.json --strict-readiness --dry-run --status-out docs/etl/sprints/AI-OPS-180/evidence/sanction_procedural_official_review_prepare_apply_cycle_status_fixture_20260224T103753Z.json --cycle-out docs/etl/sprints/AI-OPS-180/evidence/sanction_procedural_official_review_prepare_apply_cycle_cycle_fixture_20260224T103753Z.json --out docs/etl/sprints/AI-OPS-180/evidence/sanction_procedural_official_review_prepare_apply_cycle_fixture_20260224T103753Z.json${strict_prepare_arg}
+Traceback (most recent call last):
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/run_sanction_procedural_official_review_prepare_apply_cycle.py", line 229, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/run_sanction_procedural_official_review_prepare_apply_cycle.py", line 193, in main
+    cycle_exit_code, cycle_payload = run_cycle(
+                                     ^^^^^^^^^^
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/run_sanction_procedural_official_review_apply_cycle.py", line 100, in run_cycle
+    status_before = build_official_review_status_report(conn, queue_limit=int(status_queue_limit))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/report_sanction_procedural_official_review_status.py", line 116, in build_status_report
+    metric_rows = conn.execute(
+                  ^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: evidence_date
+error: Recipe `parl-run-sanction-procedural-official-review-prepare-apply-cycle-dry-run` failed on line 1208 with exit code 1

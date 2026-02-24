@@ -1,0 +1,57 @@
+PYTHONPATH=. python3 scripts/report_sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_window.py --heartbeat-jsonl docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl --last 20 --max-failed 0 --max-failed-rate-pct 0 --max-degraded 0 --max-degraded-rate-pct 0 --out docs/etl/sprints/AI-OPS-213/evidence/ai_ops_213_heartbeat_window_latest.json
+{
+  "generated_at": "2026-02-24T14:54:55+00:00",
+  "strict": false,
+  "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0
+  },
+  "entries_total": 2,
+  "entries_in_window": 2,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 2,
+    "degraded": 0,
+    "failed": 0
+  },
+  "risk_level_counts": {
+    "green": 2,
+    "amber": 0,
+    "red": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_red_risk_run_at": "",
+  "last_red_risk_run_at": "",
+  "latest": {
+    "run_at": "2026-02-24T14:47:26+00:00",
+    "heartbeat_id": "2026-02-24T14:47:26+00:00|2026-02-24T14:47:26+00:00|ok|green|0|6",
+    "status": "ok",
+    "risk_level": "green",
+    "line_no": 2,
+    "malformed_line": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "latest_not_failed_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

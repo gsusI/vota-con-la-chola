@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-02-23T12:54:45.459Z",
+  "status": "ok",
+  "paths": {
+    "release_hardening_json": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-81/evidence/citizen_release_hardening_latest.json"
+  },
+  "release_trace": {
+    "release_generated_at": "2026-02-23T12:54:45.361Z",
+    "release_age_minutes": 0.002,
+    "release_ready": true,
+    "release_readiness_status": "ok",
+    "release_total_checks": 30,
+    "release_total_fail": 0,
+    "release_failed_ids_total": 0,
+    "parity_ok_assets": 9,
+    "parity_total_assets": 9,
+    "parity_failed_assets_total": 0,
+    "snapshot_as_of_date": "2026-02-16",
+    "snapshot_topics_total": 111,
+    "snapshot_parties_total": 16,
+    "snapshot_party_topic_positions_total": 1776,
+    "snapshot_has_meta_quality": true
+  },
+  "thresholds": {
+    "max_age_minutes": 360
+  },
+  "checks": {
+    "release_generated_at_present": true,
+    "release_checks_present": true,
+    "release_no_failures": true,
+    "release_ready": true,
+    "freshness_within_sla": true,
+    "parity_assets_complete": true,
+    "contract_complete": true
+  },
+  "degraded_reasons": [],
+  "failure_reasons": [],
+  "failed_ids": [],
+  "parity_failed_assets": []
+}

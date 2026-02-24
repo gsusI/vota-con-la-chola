@@ -1,0 +1,16 @@
+{
+  "source_id": "parl_initiative_docs",
+  "dry_run": false,
+  "rows_seen": 1,
+  "rows_with_decision": 1,
+  "updated": 1,
+  "skipped_blank_status": 0,
+  "skipped_invalid_status": 0,
+  "skipped_missing_pk": 0,
+  "skipped_not_found": 0,
+  "skipped_source_mismatch": 0,
+  "invalid_confidence_values": 0,
+  "failures": [],
+  "db": "etl/data/staging/politicos-es.db",
+  "input_csv": "docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_autoresolve_singleton_20260222T152337Z.csv"
+}

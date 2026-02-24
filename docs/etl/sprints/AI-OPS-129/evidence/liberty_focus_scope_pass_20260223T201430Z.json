@@ -1,0 +1,289 @@
+{
+  "generated_at": "2026-02-23T20:13:33+00:00",
+  "strict": true,
+  "input": {
+    "status_json": "docs/etl/sprints/AI-OPS-129/evidence/liberty_focus_gate_pass_20260223T201430Z.json",
+    "changed_paths_file": "docs/etl/sprints/AI-OPS-129/evidence/liberty_focus_changed_paths_ci_20260223T201430Z.txt"
+  },
+  "status_doc_status": "ok",
+  "focus_gate_passed": true,
+  "focus_gate_state": "ok",
+  "changed_paths_total": 52,
+  "allowed_paths_total": 5,
+  "non_rights_paths_total": 47,
+  "changed_paths": [
+    ".github/workflows/etl-tracker-gate.yml",
+    "AGENTS.md",
+    "docs/etl/README.md",
+    "docs/etl/e2e-scrape-load-tracker.md",
+    "docs/etl/name-and-shame-access-blockers.md",
+    "docs/etl/sprint-ai-agents.md",
+    "docs/etl/sprints/AI-OPS-23/sprint-ai-agents.md",
+    "docs/etl/sprints/README.md",
+    "docs/gh-pages/citizen/data/citizen.json",
+    "docs/gh-pages/citizen/data/citizen_declared.json",
+    "docs/gh-pages/citizen/data/citizen_votes.json",
+    "docs/gh-pages/citizen/data/concerns_v1.json",
+    "docs/gh-pages/citizen/index.html",
+    "docs/gh-pages/explorer-politico/data/arena-mandates.json",
+    "docs/gh-pages/explorer-politico/data/sources.json",
+    "docs/gh-pages/explorer-politico/index.html",
+    "docs/gh-pages/explorer-sources/data/status.json",
+    "docs/gh-pages/explorer-sources/index.html",
+    "docs/gh-pages/explorer-temas/data/temas-preview.json",
+    "docs/gh-pages/explorer-temas/index.html",
+    "docs/gh-pages/explorer-votaciones/data/votes-preview.json",
+    "docs/gh-pages/explorer-votaciones/index.html",
+    "docs/gh-pages/explorer/index.html",
+    "docs/gh-pages/graph/data/graph.json",
+    "docs/roadmap-tecnico.md",
+    "etl/load/sqlite_schema.sql",
+    "etl/parlamentario_es/cli.py",
+    "etl/parlamentario_es/config.py",
+    "etl/parlamentario_es/db.py",
+    "etl/parlamentario_es/http.py",
+    "etl/parlamentario_es/pipeline.py",
+    "etl/parlamentario_es/quality.py",
+    "etl/parlamentario_es/text_documents.py",
+    "justfile",
+    "scripts/export_citizen_snapshot.py",
+    "scripts/graph_ui_server.py",
+    "scripts/publicar_hf_snapshot.py",
+    "scripts/validate_citizen_snapshot.py",
+    "tests/test_cli_quality_report.py",
+    "tests/test_export_citizen_snapshot.py",
+    "tests/test_graph_ui_server_coherence.py",
+    "tests/test_parl_programas_partidos.py",
+    "tests/test_parl_quality.py",
+    "tests/test_parl_text_documents.py",
+    "tests/test_publicar_hf_snapshot.py",
+    "ui/citizen/concerns_v1.json",
+    "ui/citizen/index.html",
+    "ui/graph/explorer-sources.html",
+    "ui/graph/explorer-sports.html",
+    "ui/graph/explorer-temas.html",
+    "ui/graph/explorer-votaciones.html",
+    "ui/graph/explorer.html"
+  ],
+  "allowed_paths": [
+    {
+      "path": ".github/workflows/etl-tracker-gate.yml",
+      "reason": "always_allowed"
+    },
+    {
+      "path": "docs/etl/e2e-scrape-load-tracker.md",
+      "reason": "always_allowed"
+    },
+    {
+      "path": "docs/etl/name-and-shame-access-blockers.md",
+      "reason": "always_allowed"
+    },
+    {
+      "path": "docs/roadmap-tecnico.md",
+      "reason": "always_allowed"
+    },
+    {
+      "path": "justfile",
+      "reason": "always_allowed"
+    }
+  ],
+  "non_rights_paths": [
+    {
+      "path": "AGENTS.md",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/etl/README.md",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/etl/sprint-ai-agents.md",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/etl/sprints/AI-OPS-23/sprint-ai-agents.md",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/etl/sprints/README.md",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/citizen/data/citizen.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/citizen/data/citizen_declared.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/citizen/data/citizen_votes.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/citizen/data/concerns_v1.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/citizen/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-politico/data/arena-mandates.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-politico/data/sources.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-politico/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-sources/data/status.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-sources/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-temas/data/temas-preview.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-temas/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-votaciones/data/votes-preview.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer-votaciones/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/explorer/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "docs/gh-pages/graph/data/graph.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/load/sqlite_schema.sql",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/cli.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/config.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/db.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/http.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/pipeline.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/quality.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "etl/parlamentario_es/text_documents.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "scripts/export_citizen_snapshot.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "scripts/graph_ui_server.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "scripts/publicar_hf_snapshot.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "scripts/validate_citizen_snapshot.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_cli_quality_report.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_export_citizen_snapshot.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_graph_ui_server_coherence.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_parl_programas_partidos.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_parl_quality.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_parl_text_documents.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "tests/test_publicar_hf_snapshot.py",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/citizen/concerns_v1.json",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/citizen/index.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/graph/explorer-sources.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/graph/explorer-sports.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/graph/explorer-temas.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/graph/explorer-votaciones.html",
+      "reason": "outside_rights_scope"
+    },
+    {
+      "path": "ui/graph/explorer.html",
+      "reason": "outside_rights_scope"
+    }
+  ],
+  "checks": {
+    "status_json_exists_ok": true,
+    "status_json_valid_ok": true,
+    "changed_paths_file_exists_ok": true,
+    "focus_gate_known_ok": true,
+    "degraded_scope_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

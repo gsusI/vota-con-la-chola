@@ -18,6 +18,10 @@ Contexto mínimo (sin duplicar roadmaps):
 - `docs/principios-operativos.md`
 - `docs/arquitectura.md`
 - `docs/flow-diagram.md`
+- `docs/personas-y-flujos-ideales.md` (north-star de actores, objetivos y flujos ideales)
+- `docs/flujos-ui-especificacion.md` (pantallas, botones, interacciones, charts y `URGENT TODO` de datos por flujo)
+- `docs/preguntas-metodologia-citizen.md` (Q&A metodologico: preocupaciones, evidencia primaria, hipotesis, dice-vs-hace, granularidad y cambios de postura)
+- `docs/database-inventory.md` (inventario de bases de datos del repo y schema por familia/archivo)
 - `docs/fuentes-datos.md`
 - `docs/domain_taxonomy_es.md`
 - `docs/codebook_tier1_es.md`
@@ -26,4 +30,5 @@ Contexto mínimo (sin duplicar roadmaps):
 
 Otros:
 - `docs/proximas-elecciones-espana.md` (se genera junto a `etl/data/published/proximas-elecciones-espana.json`).
+- `ui/gh-pages-next/` es la app Next.js estática que genera el landing de `docs/gh-pages/` en `just explorer-gh-pages-build`.
 - `docs/gh-pages/` es salida generada (no editar a mano).

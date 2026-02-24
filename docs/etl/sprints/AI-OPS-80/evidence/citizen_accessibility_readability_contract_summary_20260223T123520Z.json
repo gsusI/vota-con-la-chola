@@ -1,0 +1,63 @@
+{
+  "generated_at_utc": "20260223T123520Z",
+  "status": "ok",
+  "sprint": "AI-OPS-80",
+  "objective": "Accessibility and readability hardening in /citizen with keyboard-first landmarks and strict static contract checks",
+  "checks": {
+    "node_ui_contract": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/node_test_citizen_accessibility_readability_ui_contract_20260223T123520Z.txt"
+    },
+    "just_test_lane": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/just_citizen_test_accessibility_readability_20260223T123520Z.txt"
+    },
+    "evidence_trust_panel_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/just_citizen_test_evidence_trust_panel_regression_20260223T123520Z.txt"
+    },
+    "mobile_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/just_citizen_test_mobile_performance_regression_20260223T123520Z.txt"
+    },
+    "first_answer_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/just_citizen_test_first_answer_regression_20260223T123520Z.txt"
+    },
+    "unknown_explainability_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/just_citizen_test_unknown_explainability_regression_20260223T123520Z.txt"
+    },
+    "concern_pack_quality_regression": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/just_citizen_test_concern_pack_quality_regression_20260223T123520Z.txt"
+    },
+    "inline_script_syntax": {
+      "status": "pass",
+      "evidence": "docs/etl/sprints/AI-OPS-80/evidence/node_check_citizen_inline_script_20260223T123520Z.txt"
+    }
+  },
+  "contract_surface": {
+    "skip_link": "#citizenMain",
+    "main_focus_target": "id=citizenMain tabindex=-1",
+    "status_live_regions": [
+      "#statusChips",
+      "#banner"
+    ],
+    "section_aria_labels": [
+      "concernSectionHeading",
+      "itemsSectionHeading",
+      "compareSectionHeading"
+    ],
+    "focus_styles": [
+      "row:focus-visible",
+      "skipLink:focus"
+    ],
+    "node_subtests_total": 2,
+    "node_subtests_passed": 2
+  },
+  "artifacts": {
+    "markers": "docs/etl/sprints/AI-OPS-80/evidence/citizen_accessibility_readability_contract_markers_20260223T123520Z.txt",
+    "summary_json": "docs/etl/sprints/AI-OPS-80/evidence/citizen_accessibility_readability_contract_summary_20260223T123520Z.json"
+  }
+}

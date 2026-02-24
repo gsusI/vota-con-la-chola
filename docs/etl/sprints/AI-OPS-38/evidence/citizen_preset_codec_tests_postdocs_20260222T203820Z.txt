@@ -1,0 +1,30 @@
+TAP version 13
+# Subtest: preset codec encodes and decodes with normalization
+ok 1 - preset codec encodes and decodes with normalization
+  ---
+  duration_ms: 1.255042
+  ...
+# Subtest: readPresetFromHash rejects unknown version
+ok 2 - readPresetFromHash rejects unknown version
+  ---
+  duration_ms: 0.118792
+  ...
+# Subtest: buildAlignmentPresetShareUrl strips query and emits \#preset
+ok 3 - buildAlignmentPresetShareUrl strips query and emits \#preset
+  ---
+  duration_ms: 0.305
+  ...
+# Subtest: decodePresetPayload returns empty object when fields are unsupported
+ok 4 - decodePresetPayload returns empty object when fields are unsupported
+  ---
+  duration_ms: 0.068417
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.258708

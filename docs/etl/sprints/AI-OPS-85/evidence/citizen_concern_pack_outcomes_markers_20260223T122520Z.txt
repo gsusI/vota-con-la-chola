@@ -1,0 +1,23 @@
+905:      const CONCERN_PACK_OUTCOME_TELEMETRY_VERSION = "v1";
+906:      const CONCERN_PACK_OUTCOME_STORAGE_KEY = "vclc_concern_pack_outcome_events_v1";
+907:      const CONCERN_PACK_OUTCOME_MAX_EVENTS = 1200;
+908:      const CONCERN_PACK_OUTCOME_SESSION_ID = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+1051:          const raw = localStorage.getItem(CONCERN_PACK_OUTCOME_STORAGE_KEY);
+1063:          localStorage.setItem(CONCERN_PACK_OUTCOME_STORAGE_KEY, JSON.stringify(concernPackOutcomeTelemetry.events));
+1078:      function recordConcernPackOutcomeEvent(eventType, payload) {
+1087:          telemetry_version: CONCERN_PACK_OUTCOME_TELEMETRY_VERSION,
+1090:          session_id: String(p.session_id || CONCERN_PACK_OUTCOME_SESSION_ID),
+1103:        if (concernPackOutcomeTelemetry.events.length > CONCERN_PACK_OUTCOME_MAX_EVENTS) {
+1104:          concernPackOutcomeTelemetry.events = concernPackOutcomeTelemetry.events.slice(-CONCERN_PACK_OUTCOME_MAX_EVENTS);
+1159:          telemetry_version: CONCERN_PACK_OUTCOME_TELEMETRY_VERSION,
+1165:          weak_pack_followthrough_events_total: weakPackFollowthrough.length,
+1169:          weak_pack_followthrough_sessions_total: weakFollowthroughSessions,
+1170:          weak_pack_followthrough_rate: weakPackFollowthroughRate,
+1204:      if (concernPackOutcomeTelemetry.events.length > CONCERN_PACK_OUTCOME_MAX_EVENTS) {
+1205:        concernPackOutcomeTelemetry.events = concernPackOutcomeTelemetry.events.slice(-CONCERN_PACK_OUTCOME_MAX_EVENTS);
+1808:        const weakFollowRate = Number((packOutcome || {}).weak_pack_followthrough_rate || 0);
+1845:            ? `<span class="chip"><span class="dot ${weakFollowDot}"></span><span>pack_follow</span><span class="mono">${esc(
+2000:        recordConcernPackOutcomeEvent("pack_selected", {
+2076:            recordConcernPackOutcomeEvent("pack_cleared", {
+2846:          recordConcernPackOutcomeEvent("topic_open_with_pack", {
+4794:          recordConcernPackOutcomeEvent("topic_open_with_pack", {

@@ -1,0 +1,30 @@
+just parl-sanction-foundation-pipeline
+just parl-sanction-norms-seed-pipeline
+just parl-validate-sanction-norms-seed
+python3 scripts/validate_sanction_norms_seed.py --seed etl/data/seeds/sanction_norms_seed_v1.json --out docs/etl/sprints/AI-OPS-117/evidence/sanction_norms_seed_validate_20260223T175951Z.json
+{
+  "generated_at": "2026-02-23T17:59:51+00:00",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "valid": true,
+  "errors_count": 0,
+  "warnings_count": 0,
+  "norms_total": 8,
+  "norms_valid": 8,
+  "fragments_total": 8,
+  "responsibility_hints_total": 15,
+  "duplicate_norm_id_count": 0,
+  "duplicate_boe_id_count": 0,
+  "schema_version": "sanction_norms_seed_v1",
+  "errors": [],
+  "warnings": []
+}
+just parl-import-sanction-norms-seed
+python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.aiops117.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-117/evidence/sanction_norms_seed_import_20260223T175951Z.json
+Traceback (most recent call last):
+  File "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/import_sanction_norms_seed.py", line 13, in <module>
+    from etl.parlamentario_es.db import apply_schema, open_db
+ModuleNotFoundError: No module named 'etl'
+error: Recipe `parl-import-sanction-norms-seed` failed on line 864 with exit code 1
+error: Recipe `parl-sanction-norms-seed-pipeline` failed on line 871 with exit code 1
+error: Recipe `parl-sanction-foundation-pipeline` failed on line 892 with exit code 1
+error: Recipe `parl-sanction-citizen-pilot-pipeline` failed on line 913 with exit code 1

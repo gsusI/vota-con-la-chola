@@ -1,0 +1,58 @@
+ Image vota-con-la-chola-etl:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 690B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 604B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 348B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab
+#5 resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 3.67MB 1.0s done
+#6 DONE 1.0s
+
+#7 [3/6] WORKDIR /workspace
+#7 CACHED
+
+#8 [4/6] COPY requirements.txt /tmp/requirements.txt
+#8 CACHED
+
+#9 [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     curl     sqlite3   && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [5/6] RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+#10 CACHED
+
+#11 [6/6] COPY . /workspace
+#11 DONE 1.8s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 10.4s done
+#12 exporting manifest sha256:c74bc8d2600ab38bb29d4f2b58d6bc98122aa15972238140680de0d3dfc6d1d0 done
+#12 exporting config sha256:905992c8688d9849d54f769a628d374823ecc88d0c5e7b2678747de3a240fb8c done
+#12 exporting attestation manifest sha256:f9b2fff62e81b12c34c9851e4f260044a9e650a1796ddc501ebdf8aa414e2093 done
+#12 exporting manifest list sha256:bd9ef529dd3f623f1ad0929468cff1d0e3ffdbf3d17f610f49e9c07bfea74eab done
+#12 naming to docker.io/library/vota-con-la-chola-etl:local done
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local
+#12 unpacking to docker.io/library/vota-con-la-chola-etl:local 2.1s done
+#12 DONE 12.6s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image vota-con-la-chola-etl:local Built 
+ Container vota-con-la-chola-etl-run-91c0886127d1 Creating 
+ Container vota-con-la-chola-etl-run-91c0886127d1 Created 
+docs/etl/sprints/AI-OPS-124/exports/irlc_by_fragment_latest.parquet rows= 8 cols= 21
+docs/etl/sprints/AI-OPS-124/exports/accountability_edges_latest.parquet rows= 15 cols= 8

@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-02-22T22:30:22.405Z",
+  "strict": true,
+  "bundle_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-55/evidence/citizen_preset_contract_bundle_report_20260222T223021Z.json",
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "history_size_before": 8,
+  "history_size_after": 9,
+  "regression_detected": false,
+  "regression_reasons": [],
+  "previous_entry": {
+    "run_at": "2026-02-22T22:22:13.434Z",
+    "summary": {
+      "sections_total": 3,
+      "sections_pass": 3,
+      "sections_fail": 0,
+      "failed_sections": [],
+      "total_cases": 14,
+      "total_pass": 14,
+      "total_fail": 0,
+      "failed_ids": []
+    },
+    "contracts": {
+      "fixture_contract_ok": true,
+      "codec_parity_ok": true,
+      "codec_sync_state_ok": true
+    },
+    "sync_state": {
+      "would_change": false
+    }
+  },
+  "current_entry": {
+    "run_at": "2026-02-22T22:30:22.361Z",
+    "summary": {
+      "sections_total": 3,
+      "sections_pass": 3,
+      "sections_fail": 0,
+      "failed_sections": [],
+      "total_cases": 14,
+      "total_pass": 14,
+      "total_fail": 0,
+      "failed_ids": []
+    },
+    "contracts": {
+      "fixture_contract_ok": true,
+      "codec_parity_ok": true,
+      "codec_sync_state_ok": true
+    },
+    "sync_state": {
+      "would_change": false
+    }
+  }
+}

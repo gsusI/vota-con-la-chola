@@ -1,0 +1,9 @@
+Workflow header and job keys from .github/workflows/etl-tracker-gate.yml
+1:name: ETL Tracker Gate
+4:  pull_request:
+5:  push:
+10:  citizen-preset-contract:
+351:  tracker-gate:
+393:  initdoc-actionable-tail-contract:
+778:  vote-smoke:
+815:  hf-quality-contract:

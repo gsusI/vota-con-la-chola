@@ -1,0 +1,11 @@
+408:          python3 -m unittest tests.test_export_missing_initiative_doc_urls tests.test_report_initdoc_actionable_tail_contract tests.test_report_initdoc_actionable_tail_digest -q
+508:          python3 scripts/report_initdoc_actionable_tail_digest.py \
+511:            --out initdoc_actionable_nonempty_digest.json \
+512:            > initdoc_actionable_nonempty_digest.log 2>&1
+560:          python3 scripts/report_initdoc_actionable_tail_digest.py \
+563:            --out initdoc_actionable_empty_digest.json \
+564:            > initdoc_actionable_empty_digest.log 2>&1
+576:            initdoc_actionable_nonempty_digest.json
+577:            initdoc_actionable_nonempty_digest.log
+582:            initdoc_actionable_empty_digest.json
+583:            initdoc_actionable_empty_digest.log

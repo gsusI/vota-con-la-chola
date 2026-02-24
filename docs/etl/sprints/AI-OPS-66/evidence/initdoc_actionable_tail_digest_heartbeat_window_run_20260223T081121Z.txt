@@ -1,0 +1,49 @@
+python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_window.py --heartbeat-jsonl docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl --last 20 --max-failed 0 --max-failed-rate-pct 0 --max-degraded 0 --max-degraded-rate-pct 0 --out docs/etl/sprints/AI-OPS-66/evidence/initdoc_actionable_tail_digest_heartbeat_window_20260223T081121Z.json
+{
+  "generated_at": "2026-02-23T08:11:21+00:00",
+  "strict": false,
+  "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0
+  },
+  "entries_total": 1,
+  "entries_in_window": 1,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T08:11:21+00:00",
+    "heartbeat_id": "2026-02-23T08:11:21+00:00|2026-02-23T08:11:21+00:00|ok|senado_iniciativas|0|0.000000",
+    "status": "ok",
+    "line_no": 1,
+    "malformed_line": false
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "latest_not_failed_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

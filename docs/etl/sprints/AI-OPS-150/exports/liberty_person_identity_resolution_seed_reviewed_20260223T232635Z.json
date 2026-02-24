@@ -1,0 +1,88 @@
+{
+  "schema_version": "liberty_person_identity_resolution_seed_v1",
+  "generated_at": "2026-02-23T23:26:35+00:00",
+  "methodology": {
+    "method_version": "identity_resolution_v1",
+    "method_label": "Resolucion manual persona-cargo v1",
+    "notes": "Alias revisados manualmente para convertir actor_person_name indirecto en person_id reproducible."
+  },
+  "mappings": [
+    {
+      "actor_person_name": "Persona seed empleo nombramientos",
+      "person_full_name": "Alicia Martin Gomez",
+      "source_kind": "official_nombramiento",
+      "person_canonical_key": "liberty_person_demo:alicia_martin_gomez",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141. | review:approved in AI-OPS-150 contract run",
+      "source_url": "https://www.boe.es/boe/dias/2024/01/02/",
+      "evidence_date": "2024-01-02",
+      "evidence_quote": "Nombramiento oficial publicado en BOE.",
+      "source_id": "boe_api_legal",
+      "source_record_id": "BOE-A-2024-15000"
+    },
+    {
+      "actor_person_name": "Persona seed hacienda delegacion",
+      "person_full_name": "Carlos Rivas Soto",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:carlos_rivas_soto",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed hacienda diseno",
+      "person_full_name": "Carlos Rivas Soto",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:carlos_rivas_soto",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed movilidad estrategica",
+      "person_full_name": "Laura Nieto Ruiz",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:laura_nieto_ruiz",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed seguridad instrucciones",
+      "person_full_name": "Laura Nieto Ruiz",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:laura_nieto_ruiz",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed secretaria hacienda",
+      "person_full_name": "Marta Jimenez Cano",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:marta_jimenez_cano",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed trabajo diseno",
+      "person_full_name": "Marta Jimenez Cano",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:marta_jimenez_cano",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed trafico ministerio",
+      "person_full_name": "Diego Blanco Vega",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:diego_blanco_vega",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    },
+    {
+      "actor_person_name": "Persona seed trafico procedimiento",
+      "person_full_name": "Diego Blanco Vega",
+      "source_kind": "manual_seed",
+      "person_canonical_key": "liberty_person_demo:diego_blanco_vega",
+      "confidence": 0.95,
+      "note": "Alias manual desde cola AI-OPS-141."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-02-22T23:17:43.023Z",
+  "strict": true,
+  "heartbeat_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
+  "window_last": 20,
+  "entries_total_raw": 2,
+  "entries_total_compacted": 2,
+  "window_raw_entries": 2,
+  "window_raw_malformed_entries": 0,
+  "compacted_malformed_entries": 0,
+  "raw_window_status_counts": {
+    "ok": 2,
+    "degraded": 0,
+    "failed": 0
+  },
+  "raw_window_risk_level_counts": {
+    "green": 2,
+    "amber": 0,
+    "red": 0
+  },
+  "raw_window_incidents": 0,
+  "raw_window_failed": 0,
+  "raw_window_degraded": 0,
+  "raw_window_red": 0,
+  "present_in_compacted_in_window": 2,
+  "missing_in_compacted_in_window": 0,
+  "incident_present_in_compacted": 0,
+  "incident_missing_in_compacted": 0,
+  "failed_present_in_compacted": 0,
+  "degraded_present_in_compacted": 0,
+  "red_present_in_compacted": 0,
+  "raw_window_coverage_pct": 100,
+  "incident_coverage_pct": 0,
+  "latest_raw": {
+    "id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
+    "heartbeat_id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
+    "run_at": "2026-02-22T23:17:42.860Z",
+    "line_no": 2,
+    "status": "ok",
+    "risk_level": "green",
+    "malformed_line": false,
+    "present_in_compacted": true
+  },
+  "missing_raw_ids_sample": [],
+  "missing_incident_ids_sample": [],
+  "checks": {
+    "window_nonempty_ok": true,
+    "raw_window_malformed_ok": true,
+    "compacted_malformed_ok": true,
+    "latest_present_ok": true,
+    "incident_parity_ok": true,
+    "failed_parity_ok": true,
+    "degraded_parity_ok": true,
+    "red_parity_ok": true
+  },
+  "strict_fail_reasons": []
+}

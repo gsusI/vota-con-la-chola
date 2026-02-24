@@ -1,0 +1,50 @@
+{
+  "db": "etl/data/staging/politicos-es.db",
+  "source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "dry_run": false,
+  "only_initiatives_with_missing_docs": true,
+  "limit": 0,
+  "initiatives_seen": 8,
+  "initiatives_updated": 7,
+  "bocg_links_added": 35,
+  "ds_links_added": 15,
+  "parse_failures": [],
+  "sample_updates": [
+    {
+      "initiative_id": "senado:leg12:exp:626/000002",
+      "added_bocg": 6,
+      "added_ds": 3
+    },
+    {
+      "initiative_id": "senado:leg14:exp:605/000004",
+      "added_bocg": 3,
+      "added_ds": 1
+    },
+    {
+      "initiative_id": "senado:leg14:exp:626/000008",
+      "added_bocg": 5,
+      "added_ds": 3
+    },
+    {
+      "initiative_id": "senado:leg15:exp:600/000001",
+      "added_bocg": 8,
+      "added_ds": 2
+    },
+    {
+      "initiative_id": "senado:leg15:exp:621/000008",
+      "added_bocg": 3,
+      "added_ds": 2
+    },
+    {
+      "initiative_id": "senado:leg15:exp:624/000003",
+      "added_bocg": 3,
+      "added_ds": 1
+    },
+    {
+      "initiative_id": "senado:leg15:exp:626/000009",
+      "added_bocg": 7,
+      "added_ds": 3
+    }
+  ]
+}

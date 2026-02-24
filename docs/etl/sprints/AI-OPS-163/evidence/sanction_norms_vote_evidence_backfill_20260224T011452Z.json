@@ -1,0 +1,274 @@
+{
+  "generated_at": "2026-02-24T01:14:52+00:00",
+  "roles": [
+    "approve",
+    "propose"
+  ],
+  "limit_events": 0,
+  "counts": {
+    "vote_link_rows_scanned_total": 8358,
+    "vote_events_scanned_total": 8357,
+    "vote_rows_with_candidate_total": 26,
+    "candidate_matches_total": 26,
+    "candidates_without_responsibility_total": 0,
+    "evidence_inserted": 20,
+    "evidence_updated": 32
+  },
+  "by_boe_id": {
+    "BOE-A-2015-11724": 5,
+    "BOE-A-2003-23514": 19,
+    "BOE-A-2015-11722": 2
+  },
+  "by_method": {
+    "title_rule:lo_4_2015_seguridad_ciudadana": 1,
+    "title_rule:proteccion_libertades_seguridad_ciudadana": 4,
+    "title_rule:ley_58_2003_general_tributaria": 19,
+    "title_rule:rdl_6_2015_trafico_seguridad_vial": 2
+  },
+  "by_evidence_type": {
+    "congreso_vote": 14,
+    "senado_vote": 38
+  },
+  "samples": [
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 10,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion045/20200929/Votacion001/VOT_20201120110031.json",
+      "initiative_id": "congreso:leg14:derived:91680291da88a6793caeca95",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:lo_4_2015_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion045/20200929/Votacion001/VOT_20201120110031.json",
+      "evidence_date": "2020-09-29"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 11,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion045/20200929/Votacion001/VOT_20201120110031.json",
+      "initiative_id": "congreso:leg14:derived:91680291da88a6793caeca95",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:lo_4_2015_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion045/20200929/Votacion001/VOT_20201120110031.json",
+      "evidence_date": "2020-09-29"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 10,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion059/20201117/Votacion002/VOT_20201117203153.json",
+      "initiative_id": "congreso:leg15:exp:122/000131/0000",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion059/20201117/Votacion002/VOT_20201117203153.json",
+      "evidence_date": "2020-11-17"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 11,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion059/20201117/Votacion002/VOT_20201117203153.json",
+      "initiative_id": "congreso:leg15:exp:122/000131/0000",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion059/20201117/Votacion002/VOT_20201117203153.json",
+      "evidence_date": "2020-11-17"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 10,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion071/20241029/Votacion001/VOT_20241029212331.json",
+      "initiative_id": "congreso:leg15:derived:e921b8a29bebb1bd0f483f18",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion071/20241029/Votacion001/VOT_20241029212331.json",
+      "evidence_date": "2024-10-29"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 11,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion071/20241029/Votacion001/VOT_20241029212331.json",
+      "initiative_id": "congreso:leg15:derived:e921b8a29bebb1bd0f483f18",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion071/20241029/Votacion001/VOT_20241029212331.json",
+      "evidence_date": "2024-10-29"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 10,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion008/VOT_20241212130551.json",
+      "initiative_id": "congreso:leg15:exp:122/000131/0000",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion008/VOT_20241212130551.json",
+      "evidence_date": "2024-12-12"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 11,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion008/VOT_20241212130551.json",
+      "initiative_id": "congreso:leg15:exp:122/000131/0000",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion008/VOT_20241212130551.json",
+      "evidence_date": "2024-12-12"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 10,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion009/VOT_20241212130552.json",
+      "initiative_id": "congreso:leg15:exp:122/000131/0000",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion009/VOT_20241212130552.json",
+      "evidence_date": "2024-12-12"
+    },
+    {
+      "boe_id": "BOE-A-2015-11724",
+      "norm_id": "es:boe-a-2015-11724",
+      "responsibility_id": 11,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion009/VOT_20241212130552.json",
+      "initiative_id": "congreso:leg15:exp:122/000131/0000",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:proteccion_libertades_seguridad_ciudadana",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion009/VOT_20241212130552.json",
+      "evidence_date": "2024-12-12"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 3,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion018/VOT_20251016123512.json",
+      "initiative_id": "congreso:leg15:derived:7ae732b147d0e478b46a3972",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion018/VOT_20251016123512.json",
+      "evidence_date": "2025-10-16"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 4,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion018/VOT_20251016123512.json",
+      "initiative_id": "congreso:leg15:derived:7ae732b147d0e478b46a3972",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion018/VOT_20251016123512.json",
+      "evidence_date": "2025-10-16"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 3,
+      "role": "propose",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion013/VOT_20251127124104.json",
+      "initiative_id": "congreso:leg15:derived:40bee40cb06d53616f70b7b3",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion013/VOT_20251127124104.json",
+      "evidence_date": "2025-11-27"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 4,
+      "role": "approve",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion013/VOT_20251127124104.json",
+      "initiative_id": "congreso:leg15:derived:40bee40cb06d53616f70b7b3",
+      "evidence_type": "congreso_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion013/VOT_20251127124104.json",
+      "evidence_date": "2025-11-27"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 3,
+      "role": "propose",
+      "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_21_237.xml",
+      "initiative_id": "senado:leg14:exp:621/000009",
+      "evidence_type": "senado_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.senado.es/legis14/votaciones/ses_21.xml",
+      "evidence_date": "2020-12-02"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 4,
+      "role": "approve",
+      "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_21_237.xml",
+      "initiative_id": "senado:leg14:exp:621/000009",
+      "evidence_type": "senado_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.senado.es/legis14/votaciones/ses_21.xml",
+      "evidence_date": "2020-12-02"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 3,
+      "role": "propose",
+      "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_21_238.xml",
+      "initiative_id": "senado:leg14:exp:621/000009",
+      "evidence_type": "senado_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.senado.es/legis14/votaciones/ses_21.xml",
+      "evidence_date": "2020-12-02"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 4,
+      "role": "approve",
+      "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_21_238.xml",
+      "initiative_id": "senado:leg14:exp:621/000009",
+      "evidence_type": "senado_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.senado.es/legis14/votaciones/ses_21.xml",
+      "evidence_date": "2020-12-02"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 3,
+      "role": "propose",
+      "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_21_239.xml",
+      "initiative_id": "senado:leg14:exp:621/000009",
+      "evidence_type": "senado_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.senado.es/legis14/votaciones/ses_21.xml",
+      "evidence_date": "2020-12-02"
+    },
+    {
+      "boe_id": "BOE-A-2003-23514",
+      "norm_id": "es:boe-a-2003-23514",
+      "responsibility_id": 4,
+      "role": "approve",
+      "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_21_239.xml",
+      "initiative_id": "senado:leg14:exp:621/000009",
+      "evidence_type": "senado_vote",
+      "match_method": "title_rule:ley_58_2003_general_tributaria",
+      "source_url": "https://www.senado.es/legis14/votaciones/ses_21.xml",
+      "evidence_date": "2020-12-02"
+    }
+  ]
+}

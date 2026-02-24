@@ -1,0 +1,13 @@
+66:initdoc_actionable_heartbeat_compact_path := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_PATH", "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl")
+67:initdoc_actionable_heartbeat_compact_recent := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_RECENT", "20")
+68:initdoc_actionable_heartbeat_compact_mid_span := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_MID_SPAN", "100")
+69:initdoc_actionable_heartbeat_compact_mid_every := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_MID_EVERY", "5")
+70:initdoc_actionable_heartbeat_compact_old_every := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_OLD_EVERY", "20")
+71:initdoc_actionable_heartbeat_compact_min_raw := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_MIN_RAW", "25")
+72:initdoc_actionable_heartbeat_compact_out := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_OUT", "docs/etl/sprints/AI-OPS-67/evidence/initdoc_actionable_tail_digest_heartbeat_compaction_latest.json")
+73:initdoc_actionable_heartbeat_compact_window_last := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_WINDOW_LAST", "20")
+74:initdoc_actionable_heartbeat_compact_window_out := env_var_or_default("INITDOC_ACTIONABLE_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-67/evidence/initdoc_actionable_tail_digest_heartbeat_compaction_window_latest.json")
+466:parl-report-initdoc-actionable-tail-digest-heartbeat-compact:
+469:parl-check-initdoc-actionable-tail-digest-heartbeat-compact:
+472:parl-report-initdoc-actionable-tail-digest-heartbeat-compact-window:
+475:parl-check-initdoc-actionable-tail-digest-heartbeat-compact-window:

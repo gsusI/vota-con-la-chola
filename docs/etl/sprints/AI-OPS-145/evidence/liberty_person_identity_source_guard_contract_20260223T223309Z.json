@@ -1,0 +1,11 @@
+{
+  "ts": "20260223T223309Z",
+  "db_path_main": "tmp/liberty_person_identity_source_guard_20260223T223309Z.db",
+  "db_path_contract": "tmp/liberty_person_identity_source_guard_contract_20260223T223309Z.db",
+  "check_rc": {
+    "personal_non_manual_alias_gate_fail": 2,
+    "personal_manual_alias_share_gate_fail": 2,
+    "queue_non_manual_alias_gate_fail": 2,
+    "queue_manual_alias_share_gate_fail": 2
+  }
+}

@@ -1,0 +1,292 @@
+{
+  "generated_at": "2026-02-23T21:12:30+00:00",
+  "status": "ok",
+  "totals": {
+    "norms_total": 8,
+    "fragments_total": 8,
+    "methodologies_total": 1,
+    "right_categories_total": 6,
+    "right_categories_with_data_total": 6,
+    "assessments_total": 11,
+    "norms_with_irlc_total": 8,
+    "fragments_with_irlc_total": 8,
+    "fragments_with_accountability_total": 8,
+    "fragments_with_dual_coverage_total": 8,
+    "accountability_edges_total": 15,
+    "accountability_edges_with_primary_evidence_total": 15,
+    "sources_total": 1,
+    "sources_with_assessments_total": 1,
+    "scopes_total": 1,
+    "scopes_with_assessments_total": 1,
+    "sources_with_dual_coverage_total": 1,
+    "scopes_with_dual_coverage_total": 1
+  },
+  "coverage": {
+    "norms_classified_pct": 1.0,
+    "fragments_with_irlc_pct": 1.0,
+    "fragments_with_accountability_pct": 1.0,
+    "fragments_with_dual_coverage_pct": 1.0,
+    "accountability_edges_with_primary_evidence_pct": 1.0,
+    "right_categories_with_data_pct": 1.0,
+    "sources_with_assessments_pct": 1.0,
+    "scopes_with_assessments_pct": 1.0,
+    "sources_with_dual_coverage_pct": 1.0,
+    "scopes_with_dual_coverage_pct": 1.0
+  },
+  "checks": {
+    "irlc_started": true,
+    "restriction_map_started": true,
+    "norms_classified_gate": true,
+    "fragments_irlc_gate": true,
+    "fragments_accountability_gate": true,
+    "rights_with_data_gate": true,
+    "source_representativity_gate": true,
+    "scope_representativity_gate": true,
+    "source_dual_coverage_gate": true,
+    "scope_dual_coverage_gate": true,
+    "accountability_primary_evidence_gate": true
+  },
+  "focus_gate": {
+    "passed": true,
+    "thresholds": {
+      "norms_classified_min": 0.8,
+      "fragments_irlc_min": 0.6,
+      "fragments_accountability_min": 0.6,
+      "rights_with_data_min": 1.0,
+      "sources_with_assessments_min_pct": 1.0,
+      "scopes_with_assessments_min_pct": 1.0,
+      "min_assessment_sources": 1,
+      "min_assessment_scopes": 1,
+      "sources_with_dual_coverage_min_pct": 1.0,
+      "scopes_with_dual_coverage_min_pct": 1.0,
+      "min_dual_coverage_sources": 1,
+      "min_dual_coverage_scopes": 1,
+      "accountability_primary_evidence_min_pct": 1.0,
+      "min_accountability_primary_evidence_edges": 1
+    }
+  },
+  "coverage_by_source": [
+    {
+      "source_key": "unknown",
+      "norms_total": 8,
+      "norms_with_irlc_total": 8,
+      "norms_with_irlc_pct": 1.0,
+      "fragments_total": 8,
+      "fragments_with_irlc_total": 8,
+      "fragments_with_irlc_pct": 1.0,
+      "fragments_with_accountability_total": 8,
+      "fragments_with_accountability_pct": 1.0,
+      "fragments_with_accountability_primary_evidence_total": 8,
+      "fragments_with_accountability_primary_evidence_pct": 1.0,
+      "fragments_with_dual_coverage_total": 8,
+      "fragments_with_dual_coverage_pct": 1.0
+    }
+  ],
+  "coverage_by_scope": [
+    {
+      "scope_key": "nacional",
+      "norms_total": 8,
+      "norms_with_irlc_total": 8,
+      "norms_with_irlc_pct": 1.0,
+      "fragments_total": 8,
+      "fragments_with_irlc_total": 8,
+      "fragments_with_irlc_pct": 1.0,
+      "fragments_with_accountability_total": 8,
+      "fragments_with_accountability_pct": 1.0,
+      "fragments_with_accountability_primary_evidence_total": 8,
+      "fragments_with_accountability_primary_evidence_pct": 1.0,
+      "fragments_with_dual_coverage_total": 8,
+      "fragments_with_dual_coverage_pct": 1.0
+    }
+  ],
+  "restriction_map_by_right": [
+    {
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "assessments_total": 4,
+      "fragments_total": 4,
+      "irlc_avg": 59.325,
+      "irlc_min": 56.85,
+      "irlc_max": 64.55
+    },
+    {
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 65.275,
+      "irlc_min": 63.1,
+      "irlc_max": 67.45
+    },
+    {
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "assessments_total": 2,
+      "fragments_total": 2,
+      "irlc_avg": 53.95,
+      "irlc_min": 49.4,
+      "irlc_max": 58.5
+    },
+    {
+      "right_category_id": "right:acceso_servicios",
+      "right_label": "Acceso a servicios",
+      "assessments_total": 1,
+      "fragments_total": 1,
+      "irlc_avg": 51.9,
+      "irlc_min": 51.9,
+      "irlc_max": 51.9
+    },
+    {
+      "right_category_id": "right:privacidad",
+      "right_label": "Privacidad",
+      "assessments_total": 1,
+      "fragments_total": 1,
+      "irlc_avg": 56.1,
+      "irlc_min": 56.1,
+      "irlc_max": 56.1
+    },
+    {
+      "right_category_id": "right:propiedad_uso",
+      "right_label": "Propiedad y uso",
+      "assessments_total": 1,
+      "fragments_total": 1,
+      "irlc_avg": 53.5,
+      "irlc_min": 53.5,
+      "irlc_max": 53.5
+    }
+  ],
+  "top_restrictions": [
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 67.45,
+      "confidence": 0.81
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 64.55,
+      "confidence": 0.84
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:expresion_reunion",
+      "right_label": "Expresion y reunion",
+      "irlc_score": 63.1,
+      "confidence": 0.75
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 58.55,
+      "confidence": 0.79
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 58.5,
+      "confidence": 0.82
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 57.35,
+      "confidence": 0.7
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "right_category_id": "right:actividad_economica",
+      "right_label": "Actividad economica",
+      "irlc_score": 56.85,
+      "confidence": 0.8
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:privacidad",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "right_category_id": "right:privacidad",
+      "right_label": "Privacidad",
+      "irlc_score": 56.1,
+      "confidence": 0.76
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:propiedad_uso",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:propiedad_uso",
+      "right_label": "Propiedad y uso",
+      "irlc_score": 53.5,
+      "confidence": 0.75
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:acceso_servicios",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "right_category_id": "right:acceso_servicios",
+      "right_label": "Acceso a servicios",
+      "irlc_score": 51.9,
+      "confidence": 0.72
+    },
+    {
+      "assessment_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "right_category_id": "right:movilidad",
+      "right_label": "Movilidad",
+      "irlc_score": 49.4,
+      "confidence": 0.78
+    }
+  ]
+}

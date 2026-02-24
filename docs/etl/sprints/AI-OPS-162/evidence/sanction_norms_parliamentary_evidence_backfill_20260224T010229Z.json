@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-02-24T01:02:29+00:00",
+  "roles": [
+    "approve",
+    "propose"
+  ],
+  "limit": 0,
+  "counts": {
+    "docs_scanned_total": 9016,
+    "docs_with_boe_token_total": 1497,
+    "candidate_matches_total": 2,
+    "candidates_without_responsibility_total": 0,
+    "evidence_inserted": 2,
+    "evidence_updated": 0
+  },
+  "by_evidence_type": {
+    "senado_diario": 2
+  },
+  "by_boe_id": {
+    "BOE-A-2003-23186": 1,
+    "BOE-A-2015-3442": 1
+  },
+  "samples": [
+    {
+      "boe_id": "BOE-A-2003-23186",
+      "norm_id": "es:boe-a-2003-23186",
+      "responsibility_id": 7,
+      "role": "approve",
+      "initiative_id": "senado:leg7:exp:621/000157",
+      "evidence_type": "senado_diario",
+      "source_url": "http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000157.xml",
+      "evidence_date": ""
+    },
+    {
+      "boe_id": "BOE-A-2015-3442",
+      "norm_id": "es:boe-a-2015-3442",
+      "responsibility_id": 15,
+      "role": "approve",
+      "initiative_id": "senado:leg10:exp:621/000102",
+      "evidence_type": "senado_diario",
+      "source_url": "http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000102.xml",
+      "evidence_date": ""
+    }
+  ]
+}

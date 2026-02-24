@@ -1,0 +1,117 @@
+node --test tests/test_citizen_mobile_performance_ui_contract.js
+TAP version 13
+# Subtest: citizen UI defines mobile interaction latency markers
+ok 1 - citizen UI defines mobile interaction latency markers
+  ---
+  duration_ms: 1.740875
+  ...
+# Subtest: citizen UI includes mobile-friendly rendering and reduced-motion guards
+ok 2 - citizen UI includes mobile-friendly rendering and reduced-motion guards
+  ---
+  duration_ms: 0.413541
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.060208
+python3 -m unittest tests/test_report_citizen_mobile_performance_budget.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+OK
+{
+  "generated_at": "2026-02-23T12:00:27+00:00",
+  "status": "ok",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpriwfgy_k/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpriwfgy_k/a.js",
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpriwfgy_k/b.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpriwfgy_k/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 379,
+    "ui_assets_total_bytes": 36,
+    "snapshot_bytes": 12,
+    "ui_assets_count": 2,
+    "interaction_markers_missing": []
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 1000,
+    "max_ui_assets_total_bytes": 1000,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": true,
+    "ui_assets_total_within_budget": true,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": true
+  },
+  "failure_reasons": [],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpriwfgy_k/a.js",
+      "bytes": 18
+    },
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpriwfgy_k/b.js",
+      "bytes": 18
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-23T12:00:27+00:00",
+  "status": "failed",
+  "paths": {
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcpc8w4qr/index.html",
+    "ui_assets": [
+      "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcpc8w4qr/a.js"
+    ],
+    "snapshot": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcpc8w4qr/citizen.json"
+  },
+  "metrics": {
+    "ui_html_bytes": 13,
+    "ui_assets_total_bytes": 401,
+    "snapshot_bytes": 3,
+    "ui_assets_count": 1,
+    "interaction_markers_missing": [
+      "SEARCH_INPUT_DEBOUNCE_MS",
+      "RENDER_COMPARE_SCHEDULE",
+      "scheduleRenderCompare",
+      "MOBILE_LATENCY_OBS_VERSION",
+      "markInputLatencySampleStart",
+      "commitInputLatencySample",
+      "addEventListener(\"input\", onConcernSearchInputRaw)",
+      "addEventListener(\"input\", onTopicSearchInputRaw)"
+    ]
+  },
+  "thresholds": {
+    "max_ui_html_bytes": 10,
+    "max_ui_assets_total_bytes": 100,
+    "max_snapshot_bytes": 1000
+  },
+  "checks": {
+    "ui_html_within_budget": false,
+    "ui_assets_total_within_budget": false,
+    "snapshot_within_budget": true,
+    "interaction_markers_present": false
+  },
+  "failure_reasons": [
+    "ui_html_over_budget",
+    "ui_assets_total_over_budget",
+    "interaction_markers_missing"
+  ],
+  "ui_assets": [
+    {
+      "path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcpc8w4qr/a.js",
+      "bytes": 401
+    }
+  ]
+}

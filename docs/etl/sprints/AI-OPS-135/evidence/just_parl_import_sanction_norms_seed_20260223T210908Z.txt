@@ -1,0 +1,37 @@
+PYTHONPATH=. python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.ai_ops_135.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-135/evidence/sanction_norms_seed_import_20260223T210908Z.json
+{
+  "generated_at": "2026-02-23T21:09:08+00:00",
+  "db_path": "etl/data/staging/politicos-es.ai_ops_135.db",
+  "seed_path": "etl/data/seeds/sanction_norms_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "norms_total": 8,
+    "fragments_total": 8,
+    "responsibility_hints_total": 15
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_norms_seed_v1",
+    "counts": {
+      "norms_inserted": 0,
+      "norms_updated": 8,
+      "catalog_inserted": 0,
+      "catalog_updated": 8,
+      "fragments_inserted": 0,
+      "fragments_updated": 8,
+      "fragment_links_inserted": 0,
+      "fragment_links_updated": 8,
+      "responsibilities_inserted": 0,
+      "responsibilities_updated": 15
+    },
+    "totals": {
+      "legal_norms_total": 8,
+      "legal_norm_fragments_total": 8,
+      "legal_fragment_responsibilities_total": 15,
+      "sanction_norm_catalog_total": 8,
+      "sanction_norm_fragment_links_total": 8
+    }
+  }
+}

@@ -1,0 +1,6 @@
+lane_id,batch_id,readiness,action,tasks_rows,decisions_rows,rows_rejected,reason,artifact_path
+lane_a,factory-20260219-lane_a-001,ready_for_apply,applied,6,6,0,lane_a decisions already applied with recompute evidence.,docs/etl/sprints/AI-OPS-26/exports/factory/lane_a/factory-20260219-lane_a-001
+lane_b,factory-20260219-lane_b-001,hold_for_review,proposal_ready,120,120,56,import-ready proposals require HI review before DB apply.,docs/etl/sprints/AI-OPS-26/exports/factory/lane_b/factory-20260219-lane_b-001
+lane_c,factory-20260219-lane_c-001,hold_for_review,preview_ready,120,120,0,sql_patch generated; apply deferred per sprint gate.,docs/etl/sprints/AI-OPS-26/exports/factory/lane_c/factory-20260219-lane_c-001
+lane_d,factory-20260219-lane_d-001,hold_for_review,proposal_ready,120,120,0,import-ready proposals require HI review before DB apply.,docs/etl/sprints/AI-OPS-26/exports/factory/lane_d/factory-20260219-lane_d-001
+lane_e,factory-20260219-lane_e-001,hold_for_review,proposal_ready,120,120,52,import-ready proposals require HI review before DB apply.,docs/etl/sprints/AI-OPS-26/exports/factory/lane_e/factory-20260219-lane_e-001

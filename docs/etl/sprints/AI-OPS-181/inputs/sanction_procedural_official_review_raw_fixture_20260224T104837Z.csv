@@ -1,0 +1,5 @@
+sanction_source_id,period_date,period_granularity,source_url,evidence_date,evidence_quote,recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_delay_p90_days,source_id,source_record_id
+es:sanctions:tear_resolutions,2025-12-31,year,https://example.org/tear/2025,2025-12-31,"Fixture contractual TEAR 2025 para validar transformacion raw->kpi en pipeline reproducible.",1200,300,90,160,boe_api_legal,fixture:tear:2025
+es:sanctions:teac_resolutions,2025-12-31,year,https://example.org/teac/2025,2025-12-31,"Fixture contractual TEAC 2025 para validar calculo de ratios y trazabilidad de evidencia.",900,270,72,145,boe_api_legal,fixture:teac:2025
+es:sanctions:contencioso_sentencias,2025-12-31,year,https://example.org/contencioso/2025,2025-12-31,"Fixture contractual contencioso 2025 para validar salida apply sin edicion manual de KPIs.",640,192,38,220,boe_api_legal,fixture:contencioso:2025
+es:sanctions:defensor_pueblo_quejas,2025-12-31,year,https://example.org/defensor/2025,2025-12-31,"Fixture contractual Defensor 2025 para validar pipeline estricto de carga procedural oficial.",450,99,27,98,boe_api_legal,fixture:defensor:2025

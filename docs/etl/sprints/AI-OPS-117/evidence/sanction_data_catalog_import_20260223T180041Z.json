@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-02-23T18:00:42+00:00",
+  "db_path": "etl/data/staging/politicos-es.aiops117.db",
+  "seed_path": "etl/data/seeds/sanction_data_catalog_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "volume_sources_total": 5,
+    "infraction_types_total": 10,
+    "infraction_mappings_total": 10,
+    "procedural_kpis_total": 3
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-23",
+    "source_id_used": "",
+    "seed_schema_version": "sanction_data_catalog_seed_v1",
+    "counts": {
+      "volume_sources_inserted": 5,
+      "volume_sources_updated": 0,
+      "infraction_types_inserted": 10,
+      "infraction_types_updated": 0,
+      "infraction_mappings_inserted": 10,
+      "infraction_mappings_updated": 0,
+      "procedural_kpis_inserted": 3,
+      "procedural_kpis_updated": 0,
+      "unresolved_norm_refs": 0,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "sanction_volume_sources_total": 5,
+      "sanction_infraction_types_total": 10,
+      "sanction_infraction_type_mappings_total": 10,
+      "sanction_procedural_kpi_definitions_total": 3
+    }
+  }
+}

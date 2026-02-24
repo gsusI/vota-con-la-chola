@@ -1,0 +1,65 @@
+out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-90/evidence/citizen_mobile_observability_heartbeat_window_latest.json" ]; then out_arg="--out docs/etl/sprints/AI-OPS-90/evidence/citizen_mobile_observability_heartbeat_window_latest.json"; fi; python3 scripts/report_citizen_mobile_observability_heartbeat_window.py --heartbeat-jsonl "docs/etl/runs/citizen_mobile_observability_heartbeat.jsonl" --last "20" --max-failed "0" --max-failed-rate-pct "0" --max-degraded "0" --max-degraded-rate-pct "0" --max-p90-threshold-violations "0" --max-p90-threshold-violation-rate-pct "0" ${out_arg}
+{
+  "generated_at": "2026-02-23T13:14:07+00:00",
+  "strict": false,
+  "heartbeat_path": "docs/etl/runs/citizen_mobile_observability_heartbeat.jsonl",
+  "window_last": 20,
+  "thresholds": {
+    "max_failed": 0,
+    "max_failed_rate_pct": 0.0,
+    "max_degraded": 0,
+    "max_degraded_rate_pct": 0.0,
+    "max_p90_threshold_violations": 0,
+    "max_p90_threshold_violation_rate_pct": 0.0
+  },
+  "entries_total": 1,
+  "entries_in_window": 1,
+  "malformed_entries_in_window": 0,
+  "status_counts": {
+    "ok": 1,
+    "degraded": 0,
+    "failed": 0
+  },
+  "failed_in_window": 0,
+  "failed_rate_pct": 0.0,
+  "degraded_in_window": 0,
+  "degraded_rate_pct": 0.0,
+  "p90_threshold_violations_in_window": 0,
+  "p90_threshold_violation_rate_pct": 0.0,
+  "first_failed_run_at": "",
+  "last_failed_run_at": "",
+  "first_degraded_run_at": "",
+  "last_degraded_run_at": "",
+  "first_p90_threshold_violation_run_at": "",
+  "last_p90_threshold_violation_run_at": "",
+  "latest": {
+    "run_at": "2026-02-23T13:14:07+00:00",
+    "heartbeat_id": "2026-02-23T13:14:07+00:00|ok|30|423.000000|450.000000|1|",
+    "status": "ok",
+    "line_no": 1,
+    "malformed_line": false,
+    "input_to_render_p90_ms": 423.0,
+    "max_input_to_render_p90_ms": 450.0,
+    "input_to_render_p90_within_threshold": true,
+    "input_to_render_p90_margin_ms": 27.0
+  },
+  "failed_streak_latest": 0,
+  "degraded_streak_latest": 0,
+  "p90_margin_min_ms": 27.0,
+  "p90_margin_max_ms": 27.0,
+  "latest_p90_margin_ms": 27.0,
+  "checks": {
+    "window_nonempty_ok": true,
+    "malformed_entries_ok": true,
+    "max_failed_ok": true,
+    "max_failed_rate_ok": true,
+    "max_degraded_ok": true,
+    "max_degraded_rate_ok": true,
+    "max_p90_threshold_violations_ok": true,
+    "max_p90_threshold_violation_rate_ok": true,
+    "latest_not_failed_ok": true,
+    "latest_p90_within_threshold_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

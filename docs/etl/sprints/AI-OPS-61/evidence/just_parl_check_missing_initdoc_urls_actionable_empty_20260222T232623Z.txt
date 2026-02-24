@@ -1,0 +1,2 @@
+python3 scripts/export_missing_initiative_doc_urls.py --db etl/data/staging/politicos-es.db --initiative-source-ids 'senado_iniciativas' --only-actionable-missing --strict-empty --format csv --out docs/etl/sprints/AI-OPS-61/exports/senado_tail_actionable_just_strict_20260222T232623Z.csv
+OK wrote docs/etl/sprints/AI-OPS-61/exports/senado_tail_actionable_just_strict_20260222T232623Z.csv (rows=0) [excluded_redundant_senado_global=119]

@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-02-22T23:08:51.629Z",
+  "strict": true,
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "thresholds": {
+    "max_regressions": 0,
+    "max_regression_rate_pct": 0,
+    "min_green_streak": 1
+  },
+  "window_last": 20,
+  "entries_total": 11,
+  "entries_in_window": 11,
+  "transitions_in_window": 10,
+  "malformed_entries_in_window": 0,
+  "regressions_in_window": 0,
+  "regression_rate_pct": 0,
+  "regression_events": [],
+  "latest_entry_clean": true,
+  "latest_run_at": "2026-02-22T23:08:51.466Z",
+  "green_streak_latest": 11,
+  "previous_window": {
+    "available": false,
+    "entries_in_window": 0,
+    "transitions_in_window": 0,
+    "malformed_entries_in_window": 0,
+    "regressions_in_window": 0,
+    "regression_rate_pct": 0,
+    "latest_entry_clean": false,
+    "latest_run_at": "",
+    "green_streak_latest": 0,
+    "first_run_at": ""
+  },
+  "deltas": {
+    "regressions_in_window_delta": null,
+    "regression_rate_pct_delta": null,
+    "green_streak_latest_delta": null
+  },
+  "checks": {
+    "max_regressions_ok": true,
+    "max_regression_rate_ok": true,
+    "min_green_streak_ok": true,
+    "latest_entry_clean_ok": true
+  },
+  "risk_level": "green",
+  "risk_reasons": [],
+  "strict_fail_reasons": []
+}

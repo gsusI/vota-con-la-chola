@@ -1,0 +1,2 @@
+sanction_source_id,period_date,period_granularity,source_url,evidence_date,evidence_quote,recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_delay_p90_days,source_id,source_record_id,_csv_line,_reason,_priority
+es:sanctions:teac_resolutions,2025-12-31,year,https://example.org/teac/2025,31-12-2025,short,0,10,1,120,boe_api_legal,fixture:teac:bad:2025,2,invalid_evidence_date|non_positive_recurso_presentado_count|short_evidence_quote,90

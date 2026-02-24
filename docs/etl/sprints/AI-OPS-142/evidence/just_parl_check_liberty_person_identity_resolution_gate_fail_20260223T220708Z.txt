@@ -1,0 +1,36 @@
+PYTHONPATH=. python3 scripts/report_liberty_person_identity_resolution_queue.py --db tmp/liberty_person_identity_apply_20260223T220708Z.db --personal-confidence-min 0.55 --personal-max-causal-distance 2 --identity-resolution-min-pct 1.1 --min-indirect-person-edges 1 --limit 0 --queue-csv-out docs/etl/sprints/AI-OPS-142/exports/liberty_person_identity_resolution_queue_fail_20260223T220708Z.csv --enforce-gate --out docs/etl/sprints/AI-OPS-142/evidence/liberty_person_identity_resolution_queue_fail_20260223T220708Z.json
+{
+  "generated_at": "2026-02-23T22:07:08+00:00",
+  "status": "degraded",
+  "totals": {
+    "indirect_person_edges_valid_window_total": 9,
+    "indirect_person_edges_identity_resolved_total": 9,
+    "indirect_person_edges_identity_resolved_exact_name_total": 0,
+    "indirect_person_edges_identity_resolved_alias_total": 9,
+    "indirect_person_edges_unresolved_total": 0,
+    "unresolved_actor_names_total": 0,
+    "queue_rows_total": 0,
+    "queue_truncated": false
+  },
+  "coverage": {
+    "indirect_identity_resolution_pct": 1.0,
+    "indirect_identity_unresolved_pct": 0.0
+  },
+  "checks": {
+    "queue_generated": true,
+    "unresolved_backlog_visible": true,
+    "identity_resolution_gate": false
+  },
+  "gate": {
+    "passed": false,
+    "thresholds": {
+      "personal_confidence_min": 0.55,
+      "personal_max_causal_distance": 2,
+      "identity_resolution_min_pct": 1.1,
+      "min_indirect_person_edges": 1
+    }
+  },
+  "queue_preview": [],
+  "queue_rows": []
+}
+error: Recipe `parl-check-liberty-person-identity-resolution-gate` failed on line 1125 with exit code 2

@@ -1,0 +1,22 @@
+{
+  "sprint": "AI-OPS-75",
+  "timestamp_utc": "20260223T105432Z",
+  "status": "pass",
+  "gates": {
+    "module": "pass",
+    "ui_contract": "pass",
+    "server_asset_route": "pass",
+    "gh_pages_copy_and_test_target": "pass",
+    "regression_first_answer": "pass",
+    "syntax_and_compile": "pass"
+  },
+  "evidence_files": [
+    "docs/etl/sprints/AI-OPS-75/evidence/node_check_unknown_explainability_20260223T105432Z.txt",
+    "docs/etl/sprints/AI-OPS-75/evidence/node_check_citizen_inline_script_20260223T105432Z.txt",
+    "docs/etl/sprints/AI-OPS-75/evidence/node_test_unknown_explainability_20260223T105432Z.txt",
+    "docs/etl/sprints/AI-OPS-75/evidence/node_test_first_answer_regression_20260223T105432Z.txt",
+    "docs/etl/sprints/AI-OPS-75/evidence/python_unittest_graph_ui_server_citizen_assets_20260223T105432Z.txt",
+    "docs/etl/sprints/AI-OPS-75/evidence/py_compile_graph_ui_server_20260223T105432Z.txt",
+    "docs/etl/sprints/AI-OPS-75/evidence/unknown_explainability_contract_markers_20260223T105432Z.txt"
+  ]
+}

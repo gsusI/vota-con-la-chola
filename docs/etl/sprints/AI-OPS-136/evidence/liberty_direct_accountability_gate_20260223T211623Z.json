@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-02-23T21:16:24+00:00",
+  "status": "ok",
+  "totals": {
+    "fragments_with_irlc_total": 8,
+    "fragments_with_any_accountability_total": 8,
+    "fragments_with_direct_chain_total": 8,
+    "accountability_edges_total": 21,
+    "direct_edges_total": 19,
+    "direct_edges_with_primary_evidence_total": 19,
+    "actors_scored_total": 8
+  },
+  "coverage": {
+    "fragments_with_any_accountability_pct": 1.0,
+    "fragments_with_direct_chain_pct": 1.0,
+    "direct_edges_with_primary_evidence_pct": 1.0
+  },
+  "checks": {
+    "direct_chain_started": true,
+    "responsibility_score_available": true,
+    "direct_coverage_gate": true,
+    "direct_primary_evidence_gate": true
+  },
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "direct_coverage_min": 0.6,
+      "direct_primary_evidence_min_pct": 1.0,
+      "min_direct_primary_evidence_edges": 1
+    }
+  },
+  "methodology": {
+    "role_weights": {
+      "propose": 0.25,
+      "approve": 0.3,
+      "delegate": 0.15,
+      "enforce": 0.25,
+      "audit": 0.05
+    },
+    "direct_roles": [
+      "propose",
+      "approve",
+      "enforce"
+    ],
+    "score_formula": "responsibility_score = actor_total_weighted_score / max_actor_total_weighted_score * 100",
+    "role_weights_json": "{\"approve\": 0.3, \"audit\": 0.05, \"delegate\": 0.15, \"enforce\": 0.25, \"propose\": 0.25}"
+  },
+  "top_actor_scores": [
+    {
+      "actor_label": "Cortes Generales",
+      "edges_total": 9,
+      "fragments_total": 6,
+      "direct_edges_total": 9,
+      "direct_weighted_score": 158.79,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 158.79,
+      "responsibility_score": 100.0
+    },
+    {
+      "actor_label": "Gobierno de Espana",
+      "edges_total": 5,
+      "fragments_total": 3,
+      "direct_edges_total": 5,
+      "direct_weighted_score": 75.025,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 75.025,
+      "responsibility_score": 47.247938
+    },
+    {
+      "actor_label": "Ministerio del Interior",
+      "edges_total": 2,
+      "fragments_total": 1,
+      "direct_edges_total": 2,
+      "direct_weighted_score": 30.8875,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 30.8875,
+      "responsibility_score": 19.451792
+    },
+    {
+      "actor_label": "AEAT",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 14.6375,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 14.6375,
+      "responsibility_score": 9.21815
+    },
+    {
+      "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 14.2125,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 14.2125,
+      "responsibility_score": 8.950501
+    },
+    {
+      "actor_label": "DGT",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 1,
+      "direct_weighted_score": 12.35,
+      "indirect_weighted_score": 0.0,
+      "total_weighted_score": 12.35,
+      "responsibility_score": 7.777568
+    },
+    {
+      "actor_label": "Ministerio de Hacienda",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 0,
+      "direct_weighted_score": 0.0,
+      "indirect_weighted_score": 8.7825,
+      "total_weighted_score": 8.7825,
+      "responsibility_score": 5.53089
+    },
+    {
+      "actor_label": "Ministerio competente en trafico",
+      "edges_total": 1,
+      "fragments_total": 1,
+      "direct_edges_total": 0,
+      "direct_weighted_score": 0.0,
+      "indirect_weighted_score": 7.41,
+      "total_weighted_score": 7.41,
+      "responsibility_score": 4.666541
+    }
+  ],
+  "direct_chain_missing_sample": []
+}

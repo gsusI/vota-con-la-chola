@@ -1,0 +1,43 @@
+# ui/citizen/index.html mobile perf markers
+375:        content-visibility: auto;
+498:      @media (max-width: 760px) {
+569:        content-visibility: auto;
+704:      @media (prefers-reduced-motion: reduce) {
+854:      const SEARCH_INPUT_DEBOUNCE_MS = 120;
+855:      const RENDER_COMPARE_SCHEDULE = "raf";
+893:      function scheduleRenderCompare() {
+900:        if (RENDER_COMPARE_SCHEDULE === "raf" && typeof window.requestAnimationFrame === "function") {
+4155:        const onConcernSearchInput = debounce(() => {
+4157:        }, SEARCH_INPUT_DEBOUNCE_MS);
+4158:        const onTopicSearchInput = debounce(() => {
+4160:        }, SEARCH_INPUT_DEBOUNCE_MS);
+4220:        qs("#concernSearch")?.addEventListener("input", onConcernSearchInput);
+4222:        qs("#topicSearch")?.addEventListener("input", onTopicSearchInput);
+4229:          scheduleRenderCompare();
+4233:          scheduleRenderCompare();
+
+# scripts/report_citizen_mobile_performance_budget.py markers
+28:DEFAULT_MAX_UI_HTML_BYTES = 220_000
+29:DEFAULT_MAX_UI_ASSETS_TOTAL_BYTES = 60_000
+30:DEFAULT_MAX_SNAPSHOT_BYTES = 5_000_000
+32:REQUIRED_INTERACTION_MARKERS = [
+54:    ap.add_argument("--max-ui-html-bytes", type=int, default=DEFAULT_MAX_UI_HTML_BYTES)
+55:    ap.add_argument("--max-ui-assets-total-bytes", type=int, default=DEFAULT_MAX_UI_ASSETS_TOTAL_BYTES)
+56:    ap.add_argument("--max-snapshot-bytes", type=int, default=DEFAULT_MAX_SNAPSHOT_BYTES)
+106:    missing_markers = [m for m in REQUIRED_INTERACTION_MARKERS if m not in html_text]
+110:        "ui_assets_total_within_budget": bool(ui_assets_total_bytes <= int(max_ui_assets_total_bytes)),
+112:        "interaction_markers_present": bool(not missing_markers),
+118:    if not checks["ui_assets_total_within_budget"]:
+122:    if not checks["interaction_markers_present"]:
+
+# justfile markers
+201:citizen_mobile_perf_ui_html := env_var_or_default("CITIZEN_MOBILE_PERF_UI_HTML", "ui/citizen/index.html")
+202:citizen_mobile_perf_ui_assets := env_var_or_default("CITIZEN_MOBILE_PERF_UI_ASSETS", "ui/citizen/preset_codec.js,ui/citizen/onboarding_funnel.js,ui/citizen/first_answer_accelerator.js,ui/citizen/unknown_explainability.js")
+203:citizen_mobile_perf_snapshot := env_var_or_default("CITIZEN_MOBILE_PERF_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+204:citizen_mobile_perf_out := env_var_or_default("CITIZEN_MOBILE_PERF_OUT", "docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_budget_latest.json")
+205:citizen_mobile_perf_max_ui_html_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_UI_HTML_BYTES", "220000")
+206:citizen_mobile_perf_max_ui_assets_total_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_UI_ASSETS_TOTAL_BYTES", "60000")
+207:citizen_mobile_perf_max_snapshot_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_SNAPSHOT_BYTES", "5000000")
+951:citizen-test-mobile-performance:
+982:citizen-report-mobile-performance-budget:
+987:citizen-check-mobile-performance-budget:

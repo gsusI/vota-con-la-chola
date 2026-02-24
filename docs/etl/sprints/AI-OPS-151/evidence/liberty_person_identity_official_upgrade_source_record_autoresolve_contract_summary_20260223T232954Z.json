@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-02-23T23:30:49Z",
+  "sprint": "AI-OPS-151",
+  "source_record_lookup": {
+    "enabled": true,
+    "db_path": "etl/data/staging/politicos-es.db",
+    "loaded": true,
+    "rows_total": 173070,
+    "error": ""
+  },
+  "apply_counts": {
+    "rows_seen": 1,
+    "rows_with_decision": 1,
+    "approved_rows": 1,
+    "ignored_rows": 0,
+    "pending_rows": 0,
+    "updated_rows": 1,
+    "skipped_blank_decision": 0,
+    "skipped_invalid_decision": 0,
+    "skipped_missing_actor": 0,
+    "skipped_actor_not_found": 0,
+    "skipped_downgrade_prevented": 0,
+    "invalid_confidence_values": 0,
+    "source_record_pk_auto_resolved": 1,
+    "source_record_pk_auto_resolve_missed": 0,
+    "source_record_pk_auto_resolve_skipped_missing_keys": 0
+  },
+  "validation": {
+    "valid": true,
+    "errors_count": 0,
+    "warnings_count": 0,
+    "errors": [],
+    "warnings": []
+  }
+}

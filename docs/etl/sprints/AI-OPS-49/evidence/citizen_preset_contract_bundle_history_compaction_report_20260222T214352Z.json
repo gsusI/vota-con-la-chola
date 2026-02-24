@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-02-22T21:44:23.156Z",
+  "strict": true,
+  "history_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "compacted_path": "/Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-49/evidence/citizen_preset_contract_bundle_history_compacted_20260222T214352Z.jsonl",
+  "cadence": {
+    "keep_recent": 20,
+    "keep_mid_span": 100,
+    "keep_mid_every": 5,
+    "keep_old_every": 20,
+    "min_raw_for_dropped_check": 25
+  },
+  "entries_total": 3,
+  "selected_entries": 3,
+  "dropped_entries": 0,
+  "compaction_ratio_selected_pct": 100,
+  "malformed_entries_total": 0,
+  "incidents_total": 0,
+  "incidents_selected": 0,
+  "incidents_dropped": 0,
+  "anchors": {
+    "oldest_selected": true,
+    "latest_selected": true
+  },
+  "first_run_at": "2026-02-22T21:31:45.402Z",
+  "last_run_at": "2026-02-22T21:44:10.601Z",
+  "selected_first_run_at": "2026-02-22T21:31:45.402Z",
+  "selected_last_run_at": "2026-02-22T21:44:10.601Z",
+  "tiers": {
+    "recent": {
+      "raw_entries": 3,
+      "selected_entries": 3,
+      "cadence_every": 1
+    },
+    "mid": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 5
+    },
+    "old": {
+      "raw_entries": 0,
+      "selected_entries": 0,
+      "cadence_every": 20
+    }
+  },
+  "selected_indices_sample": [
+    0,
+    1,
+    2
+  ],
+  "selected_reasons_sample": [
+    {
+      "index": 0,
+      "line_no": 1,
+      "run_at": "2026-02-22T21:31:45.402Z",
+      "reasons": [
+        "anchor_oldest",
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 1,
+      "line_no": 2,
+      "run_at": "2026-02-22T21:35:58.660Z",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 2,
+      "line_no": 3,
+      "run_at": "2026-02-22T21:44:10.601Z",
+      "reasons": [
+        "anchor_latest",
+        "cadence_recent"
+      ]
+    }
+  ],
+  "strict_fail_reasons": []
+}

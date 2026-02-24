@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-02-24T12:14:47+00:00",
+  "status": "ok",
+  "packets_dir": "docs/etl/sprints/AI-OPS-189/exports/sanction_procedural_official_review_raw_packets_fixture_20260224T114814Z",
+  "metric_scope": {
+    "period_date": "2025-12-31",
+    "period_granularity": "year",
+    "label": "period"
+  },
+  "statuses_filter": [
+    "missing_metric"
+  ],
+  "progress_status": "ok",
+  "progress_totals": {
+    "queue_rows_seen_total": 12,
+    "sources_actionable_total": 4,
+    "packets_expected_total": 4,
+    "packets_found_total": 4,
+    "packets_missing_total": 0,
+    "packets_extra_total": 0,
+    "packets_ready_total": 4,
+    "packets_not_ready_total": 0,
+    "packets_status_counts": {
+      "ready": 4
+    }
+  },
+  "totals": {
+    "queue_rows_total": 0,
+    "queue_rows_by_packet_status": {},
+    "packets_expected_total": 4,
+    "packets_ready_total": 4,
+    "packets_not_ready_total": 0
+  },
+  "checks": {
+    "progress_report_not_failed": true,
+    "fix_queue_empty": true
+  },
+  "queue_preview": [],
+  "db_path": "etl/data/staging/politicos-es.db"
+}

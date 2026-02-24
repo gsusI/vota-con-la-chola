@@ -1,0 +1,118 @@
+node --test tests/test_citizen_tailwind_md3_ui_contract.js
+TAP version 13
+# Subtest: citizen UI includes generated tailwind+md3 stylesheet and primitive class markers
+ok 1 - citizen UI includes generated tailwind+md3 stylesheet and primitive class markers
+  ---
+  duration_ms: 1.296666
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 42.873375
+python3 -m unittest tests/test_build_citizen_tailwind_md3_css.py tests/test_report_citizen_tailwind_md3_contract.py tests/test_graph_ui_server_citizen_assets.py
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwlidg9jd/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwlidg9jd/generated.css",
+  "bytes": 4772,
+  "would_change": true
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4t5yueic/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4t5yueic/generated.css",
+  "bytes": 4772,
+  "would_change": true
+}
+{
+  "status": "drift",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4t5yueic/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4t5yueic/generated.css",
+  "would_change": true
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2hgcvdd1/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2hgcvdd1/tailwind_md3.generated.css",
+  "bytes": 4772,
+  "would_change": true
+}
+{
+  "generated_at": "2026-02-23T12:12:35+00:00",
+  "status": "failed",
+  "paths": {
+    "tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2hgcvdd1/tokens.json",
+    "generated_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2hgcvdd1/tailwind_md3.generated.css",
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp2hgcvdd1/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 4772,
+    "token_colors_count": 15,
+    "token_spacing_count": 3,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": [
+      "./tailwind_md3.generated.css",
+      "md3-card",
+      "md3-chip"
+    ]
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": false
+  },
+  "failure_reasons": [
+    "ui_html_markers_missing"
+  ]
+}
+{
+  "status": "ok",
+  "tokens_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcz70y6rh/tokens.json",
+  "out_path": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcz70y6rh/tailwind_md3.generated.css",
+  "bytes": 4772,
+  "would_change": true
+}
+{
+  "generated_at": "2026-02-23T12:12:35+00:00",
+  "status": "ok",
+  "paths": {
+    "tokens": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcz70y6rh/tokens.json",
+    "generated_css": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcz70y6rh/tailwind_md3.generated.css",
+    "ui_html": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpcz70y6rh/index.html"
+  },
+  "metrics": {
+    "generated_css_bytes": 4772,
+    "token_colors_count": 15,
+    "token_spacing_count": 3,
+    "token_missing_sections": [],
+    "generated_css_missing_markers": [],
+    "ui_html_missing_markers": []
+  },
+  "thresholds": {
+    "max_generated_css_bytes": 40000
+  },
+  "checks": {
+    "token_sections_present": true,
+    "token_schema_version_valid": true,
+    "generated_css_within_budget": true,
+    "generated_css_markers_present": true,
+    "ui_html_markers_present": true
+  },
+  "failure_reasons": []
+}

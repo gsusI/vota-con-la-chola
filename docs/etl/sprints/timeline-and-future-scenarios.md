@@ -1,0 +1,260 @@
+# Sprint Timeline And Future Scenarios
+
+As of: 2026-02-24
+
+## Timeline (One Line Per Sprint)
+
+- `AI-OPS-02` [PASS]: Stabilize says-vs-does baseline, coherence drill-down, and MTurk loop traceability
+- `AI-OPS-03` [PASS]: Improve declared signal, align as_of, and enforce publish parity for congreso_intervenciones
+- `AI-OPS-04` [FAIL]: Bootstrap Moncloa (Consejo de Ministros) ingest + normalization to policy_events with publish visibility
+- `AI-OPS-05` [FAIL]: Reconcile tracker + SQL + dashboard truth for Moncloa and blocked sources, then harden tracker gates
+- `AI-OPS-06` [PASS]: Close strict tracker-gate mismatches via explicit mismatch-policy contract and evidence-backed tracker reconciliation
+- `AI-OPS-07` [PASS]: Add BOE legal corroboration slice for Moncloa dual-entry and burn down mismatch waivers before expiry
+- `AI-OPS-08` [PASS]: Eliminate tracker-contract drift for BOE/Navarra and burn down remaining mismatch waiver debt
+- `AI-OPS-09` [PLANNED]: Build an impact-ready source spine for money/outcomes (PLACSP, BDNS, Eurostat, BDE, AEMET) with tracker-aligned evidence and publish parity
+- `AI-OPS-10` [FAIL]: Close carryover strict/replay contract debt for money/outcomes sources with deterministic parity evidence and tracker/dashboard reconciliation
+- `AI-OPS-11` [PASS]: Resolve remaining PLACSP mismatch debt and recover strict tracker gate with evidence-backed policy/reconciliation
+- `AI-OPS-12` [FAIL]: Burn down remaining blocked PARTIAL source debt with evidence-backed tracker refresh while preserving strict gate green
+- `AI-OPS-13` [PASS]: Convert at least one blocked PARTIAL source to evidence-backed DONE while preserving strict gate and publish parity
+- `AI-OPS-14` [FAIL]: Convert at least one remaining blocked PARTIAL source to evidence-backed DONE while preserving strict gate and publish parity
+- `AI-OPS-15` [PASS]: Deliver visible controllable progress on topic positions while keeping blocker retries time-boxed and evidence-driven
+- `AI-OPS-16` [PASS]: Raise declared-position signal quality/coverage for congreso_intervenciones with strict gate/parity and anti-loop blocker policy
+- `AI-OPS-17` [PASS]: Citizen UI/UX v2: concern-level summaries (dice vs hace), audit-friendly drill-down, and bounded static artifacts for GH Pages
+- `AI-OPS-18` [PASS]: Ship a citizen-first GH Pages webapp that answers top concerns with evidence-backed \"dice vs hace\" using the data we already have
+- `AI-OPS-19` [PASS]: Deliver the first reproducible programas-partidos declared-positions slice (programas_partidos) and integrate it into the citizen app (Programa lane) while preserving strict gate/parity
+- `AI-OPS-20` [PASS]: Citizen Dashboard v3: multi-concern synthesis + shareable URLs + method toggle (static GH Pages, bounded artifacts, audit-first)
+- `AI-OPS-21` [PASS]: Citizen Coverage + Coherence v1: make method coverage explicit and surface conservative "dice vs hace" only when comparable (static GH Pages, audit-first)
+- `AI-OPS-22` [PASS]: Citizen Alignment + Onboarding v0: local preferences -> transparent match/mismatch/unknown per party (static GH Pages, audit-first, privacy-first)
+- `AI-OPS-23` [PLANNED]: Citizen Onboarding v1: \"start here\" flow to reach a defensible answer fast (static GH Pages, audit-first, privacy-first)
+- `AI-OPS-24` [PLANNED]: Download and index “qué se votó”: initiative documents (BOCG/Diario) for votes, with audit links and blocker logging
+- `AI-OPS-25` [PLANNED]: Manual Labour Factory route map: end-to-end prompt-pack contracts for stance review, entity resolution, excerpt/quote extraction, concern tagging, policy-axis coding, manifest expansion, and blocker capture
+- `AI-OPS-26` [PASS]: Execute factory cycle v1 with applied Lane A delta and import-ready packets for lanes B/C/D/E, plus bounded blocker evidence refresh
+- `AI-OPS-27` [IN_PROGRESS]: Senate tail closeout (evidence-first) + 10-sprint execution runway (AI-OPS-27..AI-OPS-36) with controllable-first policy
+- `AI-OPS-28` [PASS]: Deterministic offline extraction queue + persisted semantic `parl_initiative_doc_extractions` layer for subagent review batches
+- `AI-OPS-29` [PASS]: Programas rerun stability: preserve declared review adjudication across ingest/backfill reruns + declared-source status artifact
+- `AI-OPS-30` [PASS]: Programas manifest preflight gate: strict CSV validation before ingest/backfill, integrated into canonical pipeline
+- `AI-OPS-31` [PASS]: Programas declared-quality gate in canonical `quality-report` (declared KPIs + enforce path + operational targets)
+- `AI-OPS-32` [PASS]: Declared enforce decoupling: `--skip-vote-gate` + declared just targets resilient to vote-lane state
+- `AI-OPS-33` [PASS]: Citizen quality semantics: bounded `meta.quality` contract + explicit unknown/confidence UX in static GH Pages
+- `AI-OPS-34` [PASS]: Citizen onboarding v1: first-run “Empieza aqui” flow with local-first state and alignment jump
+- `AI-OPS-35` [PASS]: Citizen concern packs: preset multi-concern bundles with `concern_pack` URL state and explicit tradeoff hints
+- `AI-OPS-36` [PASS]: Citizen alignment preset links via URL fragment (`#preset`) + concern explainers in selection/comparison flows
+- `AI-OPS-37` [PASS]: Citizen config hardening: strict `concerns_v1` validator + tests + GH Pages build gate for concern/packs integrity
+- `AI-OPS-38` [PASS]: Citizen preset codec hardening: shared `#preset=v1` module + deterministic tests + local/GH Pages asset parity
+- `AI-OPS-39` [PASS]: Citizen malformed `#preset` hardening: deterministic error-code contract + UI hints + hash-failure tests
+- `AI-OPS-40` [PASS]: Citizen preset fixtures: canonical good/bad hash matrix consumed by tests for collaborator QA parity
+- `AI-OPS-41` [PASS]: Citizen preset roundtrip fixtures: schema v2 (`hash_cases` + `share_cases`) with deterministic share-link decode parity
+- `AI-OPS-42` [PASS]: Citizen preset contract drift reporter: strict JSON summary (`failed_ids`, section totals) for rapid QA triage
+- `AI-OPS-43` [PASS]: Citizen preset CI contract job: strict drift check + uploaded JSON artifact in tracker workflow
+- `AI-OPS-44` [PASS]: Citizen preset codec publication parity: strict hash/first-diff reporter + CI parity artifact upload
+- `AI-OPS-45` [PASS]: Citizen preset codec publish-sync contract: strict `would_change` + before/after hash artifact in CI
+- `AI-OPS-46` [PASS]: Citizen preset contract bundle: one strict JSON envelope aggregating contract/parity/sync + CI artifact upload
+- `AI-OPS-47` [PASS]: Citizen preset bundle history: strict regression detection + persisted JSONL trend artifact in CI
+- `AI-OPS-48` [PASS]: Citizen preset history window: strict last-N regression summary + CI window artifact upload
+- `AI-OPS-49` [PASS]: Citizen preset history compaction: strict cadence summary + compacted artifact contract in CI
+- `AI-OPS-50` [PASS]: Citizen preset history SLO: strict regression-rate + green-streak threshold contract in CI
+- `AI-OPS-51` [PASS]: Citizen preset history SLO trends: previous-window deltas + `risk_level` (`green/amber/red`) for triage
+- `AI-OPS-52` [PASS]: Citizen preset history SLO digest: compact strict `status` (`ok/degraded/failed`) + CI artifact for lightweight polling
+- `AI-OPS-53` [PASS]: Citizen preset SLO digest heartbeat: append-only NDJSON stream with strict dedupe + CI artifact for trend polling
+- `AI-OPS-54` [PASS]: Citizen preset digest heartbeat window: strict last-N counts + first/last failed(red) timestamps + CI artifact
+- `AI-OPS-55` [PASS]: Citizen preset heartbeat compaction: strict incident-preserving cadence summary + compacted CI artifact
+- `AI-OPS-56` [PASS]: Citizen preset compaction-window parity: strict raw-vs-compacted last-N guard for latest/incident rows + CI artifact
+- `AI-OPS-57` [PASS]: Citizen preset compact-window digest: single-file `ok/degraded/failed` alert status derived from parity checks + CI artifact
+- `AI-OPS-58` [PASS]: Citizen preset compact-window digest heartbeat lane: append-only NDJSON + strict last-N window guard for `failed/degraded` + CI artifacts
+- `AI-OPS-59` [PASS]: Citizen preset compact-window digest heartbeat compaction: bounded NDJSON cadence with strict incident preservation + CI artifact
+- `AI-OPS-60` [PASS]: Citizen preset compact-window digest heartbeat compaction-window parity: strict raw-vs-compacted last-N guard including degraded incidents + CI artifact
+- `AI-OPS-61` [PASS]: Senado initiative-doc actionable tail contract: actionable-only export + strict empty-queue gate + operational just targets
+- `AI-OPS-62` [PASS]: CI contract lane for Senado actionable-tail queue: deterministic strict-empty fail/pass checks + artifacts
+- `AI-OPS-63` [PASS]: Initiative-doc actionable-tail JSON contract (`actionable_missing`) + strict CI fail/pass validation + just wrappers
+- `AI-OPS-64` [PASS]: Initiative-doc actionable-tail digest contract (`ok|degraded|failed`) + strict CI fail/pass validation + just wrappers
+- `AI-OPS-65` [PASS]: Explorer-sources publication parity for initiative-doc tail: embed actionable-tail contract+digest in status payload + UI card + CI payload test
+- `AI-OPS-66` [PASS]: Initiative-doc tail trend lane: digest heartbeat JSONL + last-N window summary + explorer-sources/CI integration
+- `AI-OPS-67` [PASS]: Initiative-doc tail trend hardening: incident-preserving heartbeat compaction + raw-vs-compacted parity in explorer-sources/CI
+- `AI-OPS-68` [PASS]: Initiative-doc tail compact parity digest: single-file `ok/degraded/failed` + `risk_level` integrated in explorer-sources/CI
+- `AI-OPS-69` [PASS]: Initiative-doc tail compact-digest trend lane: append-only heartbeat + strict last-N window integrated in explorer-sources/CI
+- `AI-OPS-70` [PASS]: Initiative-doc tail cd-trend hardening: retention compaction + strict last-N raw-vs-compacted parity (`cd-compact`) in explorer-sources/CI
+- `AI-OPS-71` [PASS]: Initiative-doc tail cd-compact digest: single-file `ok/degraded/failed` + `risk_level` (`cd-digest`) in explorer-sources/CI
+- `AI-OPS-72` [PASS]: Citizen KPI contract v1 (`unknown_rate`, `time_to_first_answer_seconds`, `drilldown_click_rate`) with reproducible status artifact and strict gates
+- `AI-OPS-73` [PASS]: Citizen onboarding funnel hardening with deterministic `next_action` CTA, strict UX contract tests, and local/GH wiring
+- `AI-OPS-74` [PASS]: Citizen first-answer accelerator with deterministic recommendation ranking, explicit evidence links, and fallback contract
+- `AI-OPS-75` [PASS]: Citizen unknown/no_signal explainability v2 with deterministic cause labels and explicit \"reduce uncertainty\" hints in summary/compare cards
+- `AI-OPS-76` [PASS]: Citizen mobile-first performance pass with debounced interaction markers, reduced-motion/mobile CSS, and strict bundle/snapshot budget gate
+- `AI-OPS-77` [PASS]: Share-flow clarity v2 with robust `#preset` recovery, canonical hash normalization, and banner remediation actions
+- `AI-OPS-78` [PASS]: Concern-pack quality loop with heuristic `quality_score`, strict weak-pack gate, and UI weak-pack surfacing
+- `AI-OPS-79` [PASS]: Evidence trust panel in `/citizen` with method/source-age trust signals and direct audit drill-down links
+- `AI-OPS-80` [PASS]: Accessibility/readability pass with skip-link, live-region/landmark semantics, and strict UI contract checks
+- `AI-OPS-81` [PASS]: Release hardening baseline with regression suite + strict source/published parity + release readiness checklist
+- `AI-OPS-82` [PASS]: Cross-method stability panel with votes/declared/combined deltas and explicit uncertainty attribution
+- `AI-OPS-83` [PASS]: Mobile observability v1 with input-to-render sampling, strict p50/p90 gates, and release regression integration
+- `AI-OPS-84` [PASS]: Tailwind+MD3 UI-system slice with deterministic token->CSS build, strict contract gate, and release parity integration
+- `AI-OPS-85` [PASS]: Concern-pack outcome telemetry v1 with local event instrumentation, static digest, and strict gate wiring
+- `AI-OPS-86` [PASS]: Trust-to-action nudges v1 with deterministic next-evidence guidance, local telemetry, and strict clickthrough gates
+- `AI-OPS-87` [PASS]: Explainability copy audit v1 with plain-language glossary/tooltips and strict readability contract lane
+- `AI-OPS-88` [PASS]: Release-trace digest v1 with single JSON release card and strict freshness/readiness checks
+- `AI-OPS-89` [PASS]: Coherence drilldown links v1 with party+topic+concern trace URLs and strict UI contract lane
+- `AI-OPS-90` [PASS]: Mobile latency trend digest v1 with append-only heartbeat and strict last-N p90 stability window
+- `AI-OPS-91` [PASS]: Tailwind+MD3 component parity v2 with cards/chips/buttons/tabs normalization and strict marker-count checks
+- `AI-OPS-92` [PASS]: Explainability outcomes digest v1 with glossary/help-copy interaction counters and strict adoption completeness gate
+- `AI-OPS-93` [PASS]: Release-trace freshness heartbeat v1 with append-only digest trend and strict stale-window alert contract
+- `AI-OPS-94` [PASS]: Coherence drilldown backend parity v2 with party-filtered coherence endpoints and explorer-temas URL-intent alignment
+- `AI-OPS-95` [PASS]: Mobile observability heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted parity window
+- `AI-OPS-96` [PASS]: Tailwind+MD3 visual drift digest v1 with strict source/published parity and marker snapshot checks
+- `AI-OPS-97` [PASS]: Explainability outcomes heartbeat v1 with append-only trend and strict last-N completeness window checks
+- `AI-OPS-98` [PASS]: Citizen product KPI heartbeat v1 with append-only trend and strict last-N threshold checks
+- `AI-OPS-99` [PASS]: Coherence drilldown observability v1 with outcomes digest + heartbeat + strict last-N replay/contract window checks
+- `AI-OPS-100` [PASS]: Concern-pack outcomes heartbeat v1 with append-only trend and strict last-N followthrough/unknown-share window checks
+- `AI-OPS-101` [PASS]: Trust-action nudges outcomes heartbeat v1 with append-only trend and strict last-N clickthrough window checks
+- `AI-OPS-102` [PASS]: Release-trace heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted last-N parity checks
+- `AI-OPS-103` [PASS]: Tailwind+MD3 visual drift heartbeat v1 with append-only trend and strict last-N source/published parity window checks
+- `AI-OPS-104` [PASS]: Coherence drilldown heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted last-N parity checks
+- `AI-OPS-105` [PASS]: Concern-pack outcomes heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted last-N parity checks
+- `AI-OPS-106` [PASS]: Trust-action nudges heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted last-N parity checks
+- `AI-OPS-107` [PASS]: Product KPI heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted last-N parity checks
+- `AI-OPS-108` [PASS]: Tailwind+MD3 drift heartbeat retention v1 with incident-preserving compaction and strict raw-vs-compacted last-N parity checks
+- `AI-OPS-109` [PASS]: Citizen Decision Brief v1 to translate dashboard data into a short consumer-facing decision artifact
+- `AI-OPS-110` [PASS]: Consumer Alignment Explainability v1 to clarify why party alignments appear as match/mismatch/unknown
+- `AI-OPS-111` [PASS]: Consumer Mismatch Diagnostics v1 to surface mismatch causes and uncertainty drivers
+- `AI-OPS-112` [PASS]: Consumer Disambiguation Guide v1 to reduce confusion between concern, case, and party-level outputs
+- `AI-OPS-113` [PASS]: Consumer Confidence Bands v1 to expose confidence tiers and uncertainty boundaries in plain language
+- `AI-OPS-114` [PASS]: Consumer Readiness + Next Actions v1 to operationalize “what to do next” from current evidence
+- `AI-OPS-115` [PASS]: Sanction accountability foundation (schema + seed + pipeline) for `norma -> fragmento -> responsabilidad`
+- `AI-OPS-116` [PASS]: Sanction data catalog lane (sources, infraction types, KPI definitions) with reproducible pipeline contracts
+- `AI-OPS-117` [PASS]: Sanction pilot lane (ranking + dossiers + municipal pilot) to produce first citizen-facing sanction impact outputs
+- `AI-OPS-118` [PASS]: Liberty restrictions IRLC foundation with status gates and snapshot export contract
+- `AI-OPS-119` [PASS]: Proportionality + direct accountability scoring lane for rights restrictions
+- `AI-OPS-120` [PASS]: Territorial enforcement variance + indirect accountability lane for causal attribution
+- `AI-OPS-121` [PASS]: Delegated enforcement chain lane (`norma habilitante -> organismo -> cargo -> acto`)
+- `AI-OPS-122` [PASS]: Focus-gate CI policy to block scope drift when rights lane is degraded
+- `AI-OPS-123` [PASS]: Coverage heartbeat + strict window checks for periodic rights-lane observability
+- `AI-OPS-124` [PASS]: Atlas publication contract with parquet exports, snapshot diff, and append-only changelog
+- `AI-OPS-125` [PASS]: Public Atlas distribution lane with continuity checks across published/GH artifacts
+- `AI-OPS-126` [PASS]: Atlas release freshness/drift heartbeat for published, GH Pages, and HF surfaces
+- `AI-OPS-127` [PASS]: HF release-alias contract hardening for `liberty-restrictions-atlas-release-latest.json`
+- `AI-OPS-128` [PASS]: Release-window strictness upgrade (`max_degraded=0`) after stability validation
+- `AI-OPS-129` [PASS]: Focus-scope guard to prevent non-rights edits under degraded rights focus state
+- `AI-OPS-130` [PASS]: Rights-map gate (`rights_with_data`) hardening with category coverage expansion
+- `AI-OPS-131` [PASS]: Heartbeat-window integration for `rights_with_data` gating
+- `AI-OPS-132` [PASS]: Source/scope representativity gates to enforce coverage quality by provenance and territory
+- `AI-OPS-133` [PASS]: Dual-coverage gates requiring both IRLC and accountability signal by source/scope
+- `AI-OPS-134` [PASS]: Accountability primary-evidence gate (`source_url/evidence_date/evidence_quote`) in rights status lane
+- `AI-OPS-135` [PASS]: Primary-evidence population hardening for sanction responsibilities under strict focus defaults
+- `AI-OPS-136` [PASS]: Direct-accountability primary-evidence gate hardening
+- `AI-OPS-137` [PASS]: Indirect-accountability person/time-window gate for temporal attribution coherence
+- `AI-OPS-138` [PASS]: Personal accountability scoring lane with reproducible person-level score output
+- `AI-OPS-139` [PASS]: Top-N contract fix to keep scoring totals stable regardless of visualization cap
+- `AI-OPS-140` [PASS]: Identity-resolution observability gate for indirect personal accountability edges
+- `AI-OPS-141` [PASS]: Actionable identity-resolution queue lane for unresolved indirect actors
+- `AI-OPS-142` [PASS]: Identity apply lane (`person_name_aliases`) to materialize actor->person resolution in DB
+- `AI-OPS-143` [PASS]: Alias provenance contract (`manual` vs `official_*`) for identity quality control
+- `AI-OPS-144` [PASS]: Manual->official alias-upgrade backlog gate and queue visibility
+- `AI-OPS-145` [PASS]: Source-guard lane preventing official->manual downgrade in alias updates
+- `AI-OPS-146` [PASS]: Official-alias evidence-required gate hardening
+- `AI-OPS-147` [PASS]: Official-alias share gate to force measurable migration progress
+- `AI-OPS-148` [PASS]: Official-alias source-record traceability gate (`source_record_pk`) hardening
+- `AI-OPS-149` [PASS]: Official-gap actionable queues (missing evidence and missing source_record) with priority outputs
+- `AI-OPS-150` [PASS]: Review/apply loop for manual->official alias upgrades
+- `AI-OPS-151` [PASS]: Apply-lane auto-resolution of `source_record_pk` via DB lookup
+- `AI-OPS-152` [PASS]: Export-lane prefill of `source_record_pk` for review queue efficiency
+- `AI-OPS-153` [PASS]: Actionability classification + strict-empty gate for review queue operations
+- `AI-OPS-154` [PASS]: Actionable review queue heartbeat + strict window lane
+- `AI-OPS-155` [PASS]: Legal norm lineage lane (`deroga/modifica/desarrolla`) with full seed coverage
+- `AI-OPS-156` [PASS]: Responsibility multipath evidence lane (`legal_fragment_responsibility_evidence`)
+- `AI-OPS-157` [PASS]: Source-record autoresolution lane for responsibility evidence items
+- `AI-OPS-158` [PASS]: Source-record coverage closure to `100%` for responsibility evidence
+- `AI-OPS-159` [PASS]: Seed vs non-seed source-record provenance split observability
+- `AI-OPS-160` [PASS]: Actionable queue lane for migrating evidence from seed to non-seed source records
+- `AI-OPS-161` [PASS]: Seed->non-seed migration apply lane closure with queue emptied
+- `AI-OPS-162` [PASS]: Parliamentary diario evidence lane start (`congreso_diario/senado_diario`)
+- `AI-OPS-163` [PASS]: Parliamentary vote evidence lane (`congreso_vote/senado_vote`) with conservative matching
+- `AI-OPS-164` [PASS]: Execution evidence lane from sanction observations (`record_kind=sanction_norm_execution_evidence_backfill`)
+- `AI-OPS-165` [PASS]: Execution expansion across roles + procedural-metric evidence lane
+- `AI-OPS-166` [PASS]: Delegate execution gap closure via lineage bridge lane
+- `AI-OPS-167` [PASS]: Enforce execution gap closure; execution coverage reaches `15/15` responsibilities
+- `AI-OPS-168` [PASS]: Parliamentary/vote rerun across full responsibility roles; coverage rises to `9/15` parliamentary and `7/15` vote
+- `AI-OPS-169` [PASS]: Conservative vote-lineage bridges lift parliamentary/vote coverage to `11/15` while keeping execution `15/15`
+- `AI-OPS-170` [PASS]: Mixed-lineage vote bridge closes `BOE-A-1994-8985` vote gaps and lifts parliamentary/vote coverage to `13/15`
+- `AI-OPS-171` [PASS]: LISOS title-rule parliamentary bridge closes parliamentary coverage to `15/15` while vote remains `13/15`
+- `AI-OPS-172` [PASS]: Deterministic residual vote-gap diagnosis confirms upstream link absence (`senado:leg5:exp:621/000026`) as current blocker
+- `AI-OPS-173` [PASS]: Official procedural-review lane bootstrap seeds `TEAR/TEAC/contencioso/defensor` sources with actionable queue export (`4` no-metrics rows)
+- `AI-OPS-174` [PASS]: Official procedural-review apply loop (`CSV -> strict validation -> upsert-ready`) is now wired under `just`, with dry-run evidence over all 4 official sources
+- `AI-OPS-175` [PASS]: Official procedural-review template export lane now emits prefilled `4 x 3` capture matrix (`only-missing` aware) directly consumable by the strict apply loop
+- `AI-OPS-176` [PASS]: Official procedural-review readiness gate now blocks incomplete/inconsistent CSV input and exports actionable row-level error queues before apply
+- `AI-OPS-177` [PASS]: Official procedural-review strict cycle (`readiness -> apply -> status`) is now the default apply path, with enforced `exit=4` block on non-ready CSV
+- `AI-OPS-178` [PASS]: Official procedural-review prepare lane now filters template empties into `prepared/rejected` CSV artifacts so incremental loads are reproducible
+- `AI-OPS-179` [PASS]: Official procedural-review unified `prepare -> cycle` lane is now available in one command with strict prepare gating (`exit=4` on non-actionable input)
+- `AI-OPS-180` [PASS]: Official procedural-review metrics now require explicit evidence traceability (`evidence_date/evidence_quote`) across template, readiness, apply, and status lanes
+- `AI-OPS-181` [PASS]: Official procedural-review raw-to-KPI transformer now converts per-source raw counts into strict `apply-ready` KPI rows (`4 -> 12`) with rejection queue and traceability fields
+- `AI-OPS-182` [PASS]: Official procedural-review raw cycle now runs end-to-end (`raw -> prepare -> readiness -> apply -> status`) in one command with strict early block on invalid raw input
+- `AI-OPS-183` [PASS]: Official procedural-review raw template lane now exports one-row-per-source capture sheets with coverage context (`only-missing`) and direct compatibility with strict raw cycle
+- `AI-OPS-184` [PASS]: Official procedural-review status now supports period-scoped KPI completeness (`partial_kpi_coverage`, `sources_with_all_kpis`) to prevent false progress from partial source coverage
+- `AI-OPS-185` [PASS]: Official procedural-review now has a deterministic pair-level (`source x KPI`) actionable queue with strict status taxonomy (`missing_metric/source_record/evidence`) and reproducible next actions
+- `AI-OPS-186` [PASS]: Official procedural-review now exports `apply-ready` remediation CSV directly from KPI-gap queue, with automatic prefill for `missing_source_record/missing_evidence` rows
+- `AI-OPS-187` [PASS]: Official procedural-review now runs one-command `gap -> readiness/apply/status` cycle for targeted KPI-gap statuses (default `missing_source_record`) with explicit no-actionable skip semantics
+- `AI-OPS-188` [PASS]: Official procedural-review now exports per-source raw capture packets directly from KPI-gap queue (`missing_metric`) so each source can be completed and reloaded through the strict raw cycle
+- `AI-OPS-189` [PASS]: Official procedural-review now runs one-command `packet-dir -> raw merge -> raw/prepare/apply cycle`, including packet-coverage gating and deterministic skip reasons for non-actionable/missing packets
+- `AI-OPS-190` [PASS]: Official procedural-review now reports packet readiness by source (`missing/invalid/ready`) before load cycle, with strict-ready gate to block incomplete official capture packets
+- `AI-OPS-191` [PASS]: Official procedural-review now runs incremental `ready-packets` cycle so completed sources can load without waiting for all packet files to be ready
+- `AI-OPS-192` [PASS]: Official procedural-review now exports a prioritized non-ready packet fix queue with explicit next actions per source/status to accelerate closure of missing metrics
+- `AI-OPS-193` [PASS]: Official procedural-review now runs a unified `fix-queue -> ready-cycle` bridge lane so remediation and incremental load execute together with deterministic skip/pass semantics
+- `AI-OPS-194` [PASS]: Official procedural-review now tracks packet-fix backlog behavior with append-only heartbeat JSONL + strict window checks integrated in the main sanction pipeline
+- `AI-OPS-195` [PASS]: Official procedural-review now compacts packet-fix heartbeat history deterministically and verifies raw-vs-compacted parity in-window before continuing the pipeline
+- `AI-OPS-196` [PASS]: Official procedural-review now emits a compact compaction-window digest (`status/risk_level/key_metrics`) with strict gating in the main sanction pipeline
+- `AI-OPS-197` [PASS]: Official procedural-review now tracks compaction-window digest health via append-only heartbeat + strict last-N window checks in the main sanction pipeline
+- `AI-OPS-198` [PASS]: Official procedural-review now compacts compaction-window digest-heartbeat history deterministically and enforces strict raw-vs-compacted parity checks in-window
+- `AI-OPS-199` [PASS]: Official procedural-review now emits a compact strict digest over digest-heartbeat compaction-window parity for low-noise risk gating in the main sanction pipeline
+- `AI-OPS-200` [PASS]: Official procedural-review now records append-only deduplicated heartbeat over the compact parity digest for temporal continuity in the main sanction pipeline
+- `AI-OPS-201` [PASS]: Official procedural-review now enforces strict last-N failure/degradation thresholds over the compact parity digest-heartbeat continuity stream
+- `AI-OPS-202` [PASS]: Official procedural-review now compacts the compact-parity digest-heartbeat continuity stream and enforces strict raw-vs-compacted parity in-window
+- `AI-OPS-203` [PASS]: Official procedural-review now emits a compact strict digest over the AI-OPS-202 continuity compaction-window parity signal
+- `AI-OPS-204` [PASS]: Official procedural-review now records append-only deduplicated heartbeat continuity over the AI-OPS-203 compact strict digest signal
+- `AI-OPS-205` [PASS]: Official procedural-review now enforces strict last-N failure/degradation thresholds over the AI-OPS-204 digest-heartbeat continuity stream
+- `AI-OPS-206` [PASS]: Official procedural-review now compacts the AI-OPS-204/205 digest-heartbeat continuity stream and enforces strict raw-vs-compacted parity in-window
+- `AI-OPS-207` [PASS]: Official procedural-review now emits a compact strict digest over the AI-OPS-206 continuity compaction-window parity signal
+- `AI-OPS-208` [PASS]: Official procedural-review now records append-only deduplicated heartbeat continuity over the AI-OPS-207 compact strict digest signal
+- `AI-OPS-209` [PASS]: Official procedural-review now enforces strict last-N failure/degradation thresholds over the AI-OPS-208 digest-heartbeat continuity stream
+- `AI-OPS-210` [PASS]: Official procedural-review now compacts the AI-OPS-208/209 digest-heartbeat continuity stream and enforces strict raw-vs-compacted parity in-window
+- `AI-OPS-211` [PASS]: Official procedural-review now emits a compact strict digest over the AI-OPS-210 continuity compaction-window parity signal
+- `AI-OPS-212` [PASS]: Official procedural-review now records append-only deduplicated heartbeat continuity over the AI-OPS-211 compact strict digest signal
+- `AI-OPS-213` [PASS]: Official procedural-review now enforces strict last-N failure/degradation thresholds over the AI-OPS-212 digest-heartbeat continuity stream
+- `AI-OPS-214` [PASS]: Official procedural-review now compacts the AI-OPS-212/213 digest-heartbeat continuity stream and enforces strict raw-vs-compacted parity in-window
+- `AI-OPS-215` [PASS]: Official procedural-review now emits a compact strict digest over the AI-OPS-214 continuity compaction-window parity signal
+
+## Future Scenarios (Direction Options)
+
+### Scenario A (Recommended): Rights Accountability Completion
+- Direction: stay focused on `Derechos` and complete the end-to-end accountability chain quality for rows `65/66/104`.
+- Next 10 sprint shape: residual vote coverage closure when a new linkage lever appears, official procedural evidence ingestion (TEAR/TEAC/contencioso/defensores) from the actionable queue, and stronger role-by-role attribution quality.
+- Target outcome by sprint +10: execution/parliamentary remain `15/15`, vote coverage reaches >= `14/15` (current `13/15`), and procedural lane is no longer seed-only.
+- Main risk: low-yield retries on blocked/non-standard sources.
+
+### Scenario B: Consumer Product Expansion
+- Direction: pivot effort to consumer value on `/citizen` while reusing the accountability base already built.
+- Next 10 sprint shape: faster first answer, clearer comparison narratives, confidence/unknown UX improvements, and guided flows from concern to auditable decision.
+- Target outcome by sprint +10: higher completion of concern->case->comparison flow and higher evidence drill-down usage.
+- Main risk: UX improvements outrun data depth if accountability lane pauses too long.
+
+### Scenario C: Sector Expansion (Agro/Vivienda/Sanidad)
+- Direction: branch into new high-impact domains already listed in tracker TODO rows.
+- Next 10 sprint shape: reproducible scoring methodology per domain, first top-N dossiers with accountability by fragment, and strict quality gates per lane.
+- Target outcome by sprint +10: at least one domain reaches PARTIAL with auditable ranking + chain-of-responsibility output.
+- Main risk: scope explosion and dilution of current momentum in `Derechos`.
+
+### Scenario D: Access-Blocker And Public-Data Enforcement
+- Direction: prioritize unblock/escalation work, blocker telemetry, and institution-facing reproducibility artifacts.
+- Next 10 sprint shape: blocker incident hardening, legal/evidence packs, and watchdog surfaces tied to tracker status.
+- Target outcome by sprint +10: reduced blocker dwell time and stronger external reproducibility for blocked public endpoints.
+- Main risk: high dependency on upstream behavior with lower guaranteed in-repo visible progress.
+
+## Scenario Selection Guide
+
+- Choose `Scenario A` if the priority is defensible accountability quality and completing current rights commitments.
+- Choose `Scenario B` if the priority is user adoption and decision utility in the citizen app now.
+- Choose `Scenario C` if the priority is policy breadth and entering new citizen-impact domains.
+- Choose `Scenario D` if the priority is institutional pressure and source accessibility recovery.
+
+## Recommended Next Block (AI-OPS-216..AI-OPS-225)
+
+- Primary: `Scenario A` (`70%` capacity).
+- Secondary: `Scenario B` (`20%` capacity).
+- Exploratory: `Scenario D` (`10%` capacity, only with new unblock lever).
+- Rationale: diagnostics already isolate the vote blocker to missing upstream linkage (`AI-OPS-172`), official procedural sources are seeded (`AI-OPS-173`), strict apply is operational (`AI-OPS-174`), capture template export is standardized (`AI-OPS-175`), readiness gating prevents invalid loads (`AI-OPS-176`), strict apply cycle is default (`AI-OPS-177`), prepare filtering is reproducible (`AI-OPS-178`), `prepare -> cycle` is one lane (`AI-OPS-179`), evidence traceability is enforced (`AI-OPS-180`), raw capture maps automatically to KPI rows (`AI-OPS-181`), one-command raw cycle enforces stage-by-stage gating (`AI-OPS-182`), raw template export provides the reproducible entrypoint per source/period (`AI-OPS-183`), status enforces period-scoped KPI completeness (`AI-OPS-184`), pair-level KPI gap queueing operationalizes remediation order (`AI-OPS-185`), remediation export bridges queue-to-apply without manual reshaping (`AI-OPS-186`), targeted gap-cycle automation closes `missing_source_record` opportunities (`AI-OPS-187`), per-source raw packetization operationalizes `missing_metric` capture (`AI-OPS-188`), packet-dir cycle orchestration removes manual merge work (`AI-OPS-189`), packet-level readiness diagnostics expose exact per-source missing fields (`AI-OPS-190`), ready-subset cycle execution enables incremental loading when any source packet is complete (`AI-OPS-191`), prioritized packet-fix queueing provides deterministic remediation order per source/status (`AI-OPS-192`), the bridge lane executes `fix-queue -> ready-cycle` end-to-end without manual handoffs (`AI-OPS-193`), heartbeat/window observability tracks packet-fix backlog trend (`AI-OPS-194`), compaction preserves retention determinism with parity checks (`AI-OPS-195`), compaction-window digest gating provides a compact operational signal (`AI-OPS-196`), digest-heartbeat windowing provides temporal guardrails over that signal (`AI-OPS-197`), digest-heartbeat compaction/parity now preserves long-run signal with deterministic retention (`AI-OPS-198`), compaction-window parity over that compacted heartbeat now has a strict low-noise digest contract (`AI-OPS-199`), that compact contract now has append-only deduplicated heartbeat continuity (`AI-OPS-200`), that continuity stream now has strict last-N failure/degradation gating (`AI-OPS-201`), continuity retention+parity is now extended with deterministic compaction and strict in-window parity checks (`AI-OPS-202`), that continuity parity layer emits a compact strict digest for low-noise gating (`AI-OPS-203`), the digest layer now has append-only deduplicated heartbeat continuity (`AI-OPS-204`), that continuity stream now has strict last-N failure/degradation gating (`AI-OPS-205`), that layer now adds deterministic continuity compaction + strict in-window parity (`AI-OPS-206`), that continuity parity now emits a compact strict digest contract (`AI-OPS-207`), that contract now has append-only deduplicated heartbeat continuity (`AI-OPS-208`), and that continuity stream now has strict last-N failure/degradation gating (`AI-OPS-209`), and that continuity stream now adds deterministic compaction + strict in-window parity (`AI-OPS-210`), and that continuity compaction-window parity now emits a compact strict digest contract (`AI-OPS-211`), and that compact contract now has append-only deduplicated heartbeat continuity (`AI-OPS-212`), and that continuity stream now has strict last-N failure/degradation gating (`AI-OPS-213`), and that continuity stream now adds deterministic compaction + strict in-window parity (`AI-OPS-214`), and that continuity compaction-window parity now emits a compact strict digest contract (`AI-OPS-215`); highest leverage remains loading validated official metrics while probing vote-link unblock only with a new lever.

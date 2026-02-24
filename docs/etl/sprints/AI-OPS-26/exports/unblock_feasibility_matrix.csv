@@ -1,0 +1,5 @@
+source_id,snapshot_date,strict_retry_count,lever_status,return_code,status,failure_signal,started_at_utc,ended_at_utc
+aemet_opendata_series,2026-02-19,1,no_new_lever,1,blocked,Error: Expecting value: line 1 column 1 (char 0),2026-02-19T16:15:09.525218+00:00,2026-02-19T16:15:10.422537+00:00
+bde_series_api,2026-02-19,1,no_new_lever,1,blocked,"error: [Errno 8] nodename nor servname provided, or not known",2026-02-19T16:15:10.422994+00:00,2026-02-19T16:15:13.614956+00:00
+parlamento_galicia_deputados,2026-02-19,1,no_new_lever,1,blocked,HTTP Error 403: Forbidden,2026-02-19T16:15:13.615238+00:00,2026-02-19T16:15:14.114826+00:00
+parlamento_navarra_parlamentarios_forales,2026-02-19,1,no_new_lever,1,blocked,HTTP Error 403: Forbidden,2026-02-19T16:15:14.114941+00:00,2026-02-19T16:15:15.433719+00:00

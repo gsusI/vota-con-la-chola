@@ -1,0 +1,80 @@
+{
+  "citizen.json": {
+    "as_of_date": "2026-02-16",
+    "bytes": 950181,
+    "computed_method": "combined",
+    "parties": 16,
+    "party_topic_positions": 1776,
+    "quality": {
+      "cells_total": 1776,
+      "clear_pct": 0.824324,
+      "clear_total": 1464,
+      "confidence_avg_signal": 0.594253,
+      "confidence_thresholds": {
+        "high_min": 0.66,
+        "medium_min": 0.33
+      },
+      "confidence_tiers": {
+        "high": 846,
+        "low": 631,
+        "medium": 198,
+        "none": 101
+      },
+      "unknown_pct": 0.175676,
+      "unknown_total": 312
+    },
+    "topics": 111
+  },
+  "citizen_declared.json": {
+    "as_of_date": "2026-02-16",
+    "bytes": 934911,
+    "computed_method": "declared",
+    "parties": 16,
+    "party_topic_positions": 1776,
+    "quality": {
+      "cells_total": 1776,
+      "clear_pct": 0.006194,
+      "clear_total": 11,
+      "confidence_avg_signal": 0.090323,
+      "confidence_thresholds": {
+        "high_min": 0.66,
+        "medium_min": 0.33
+      },
+      "confidence_tiers": {
+        "high": 2,
+        "low": 76,
+        "medium": 9,
+        "none": 1689
+      },
+      "unknown_pct": 0.993806,
+      "unknown_total": 1765
+    },
+    "topics": 111
+  },
+  "citizen_votes.json": {
+    "as_of_date": "2026-02-16",
+    "bytes": 944495,
+    "computed_method": "votes",
+    "parties": 16,
+    "party_topic_positions": 1776,
+    "quality": {
+      "cells_total": 1776,
+      "clear_pct": 0.824324,
+      "clear_total": 1464,
+      "confidence_avg_signal": 0.594902,
+      "confidence_thresholds": {
+        "high_min": 0.66,
+        "medium_min": 0.33
+      },
+      "confidence_tiers": {
+        "high": 846,
+        "low": 629,
+        "medium": 198,
+        "none": 103
+      },
+      "unknown_pct": 0.175676,
+      "unknown_total": 312
+    },
+    "topics": 111
+  }
+}
