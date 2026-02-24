@@ -1,57 +1,60 @@
-const sections = [
+const personas = [
   {
     href: "/citizen/",
-    title: "Ciudadania",
-    note: "Compara prioridades personales contra posturas por partido.",
+    title: "Ciudadanía - respuesta rápida",
+    note: "Decide en menos de 5 minutos con un tema concreto y compara partidos.",
+    target: "¿Qué partido está más alineado conmigo?",
+    cta: "Empezar consulta",
+  },
+  {
+    href: "/citizen/?mode=audit",
+    title: "Ciudadanía escéptica",
+    note: "Verifica resúmenes con evidencia primaria y señales de incertidumbre.",
+    target: "Audita el resultado, trazabilidad y evidencia.",
+    cta: "Abrir modo auditoría",
   },
   {
     href: "/citizen/leaderboards/",
-    title: "Leaderboards",
-    note: "Rankings transparentes por hipotesis y cobertura.",
+    title: "Leaderboards cívicos",
+    note: "Prueba hipótesis públicas con resultados comparables y auditable.",
+    target: "Ranking por hipótesis y cobertura.",
+    cta: "Entrar a leaderboard",
   },
   {
     href: "/explorer-temas/",
-    title: "Temas",
-    note: "Drill-down dice vs hace por tema y partido.",
-  },
-  {
-    href: "/explorer/",
-    title: "Explorer SQL",
-    note: "Navegacion esquema/filas/FKs sobre snapshot SQLite.",
-  },
-  {
-    href: "/explorer-sources/",
-    title: "Fuentes",
-    note: "Estado operativo, bloqueos y cobertura por conector.",
-  },
-  {
-    href: "/explorer-politico/",
-    title: "Explorer Politico",
-    note: "Mapa politico y cobertura por arena institucional.",
+    title: "Analista de políticas",
+    note: "Analiza ‘dicen vs hacen’ por tema/ámbito con evidencia trazable.",
+    target: "Briefing temático y seguimiento de postura.",
+    cta: "Abrir explorador de temas",
   },
   {
     href: "/explorer-votaciones/",
-    title: "Votaciones",
-    note: "Vista compacta de eventos y trazabilidad inicial.",
+    title: "Monitor legislativo",
+    note: "Sigue actividad parlamentaria y detecta cambios de postura.",
+    target: "Eventos, grupos y seguimiento temporal.",
+    cta: "Ver actividad parlamentaria",
   },
   {
-    href: "/graph/",
-    title: "Graph",
-    note: "Exploracion de red y relaciones entre entidades.",
+    href: "/explorer-politico/",
+    title: "Explorador territorial",
+    note: "Encuentra actores por territorio, partido y trayectoria.",
+    target: "Mapa político y cobertura institucional.",
+    cta: "Explorar actores",
   },
-];
-
-const artifacts = [
-  { href: "/citizen/data/citizen.json", label: "citizen.json", kind: "combined" },
-  { href: "/citizen/data/citizen_votes.json", label: "citizen_votes.json", kind: "votes" },
-  { href: "/citizen/data/citizen_declared.json", label: "citizen_declared.json", kind: "declared" },
-  { href: "/citizen/data/concern_pack_quality.json", label: "concern_pack_quality.json", kind: "quality" },
-  { href: "/explorer-sources/data/status.json", label: "status.json", kind: "sources" },
-  { href: "/explorer-temas/data/temas-preview.json", label: "temas-preview.json", kind: "temas" },
-  { href: "/explorer-votaciones/data/votes-preview.json", label: "votes-preview.json", kind: "votes-preview" },
-  { href: "/graph/data/graph.json", label: "graph.json", kind: "graph" },
-  { href: "/explorer-politico/data/arena-mandates.json", label: "arena-mandates.json", kind: "mandates" },
-  { href: "/explorer-politico/data/sources.json", label: "sources.json", kind: "sources-meta" },
+  {
+    href: "/explorer-sources/",
+    title: "Operador de calidad de datos",
+    note: "Prioriza bloqueos externos, cobertura y estado técnico.",
+    target: "Backlog operativo y trazabilidad de fuentes.",
+    cta: "Ver estado de fuentes",
+  },
+  {
+    href: "/explorer/",
+    title: "Power user SQL",
+    note: "Audita métricas, cruza tablas y baja a evidencias puntuales.",
+    target: "Explorador de esquema, FK y registros.",
+    cta: "Entrar al explorer",
+  },
 ];
 
 function withBasePath(path) {
@@ -64,45 +67,34 @@ export default function HomePage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">STATIC NEXT.JS EXPORT</p>
+        <p className="eyebrow">Selección por perfil</p>
         <h1>Vota Con La Chola - GH Pages</h1>
         <p className="sub">
-          Este portal se publica como app estatico de Next.js y mantiene los mismos artefactos JSON trazables por
-          snapshot para ciudadania y explorers.
+          Elige tu perfil de uso para entrar directo al flujo más útil para tu objetivo.
         </p>
         <div className="chips">
-          <span className="chip">single SQLite snapshot</span>
-          <span className="chip">JSON bounded artifacts</span>
-          <span className="chip">privacy gate before publish</span>
+          <span className="chip">UI pública en Next.js estático</span>
+          <span className="chip">Estado reproducible por snapshot</span>
+          <span className="chip">Trazabilidad prioritaria</span>
         </div>
       </section>
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Superficies</h2>
+          <h2>¿Quién eres?</h2>
         </div>
         <div className="grid">
-          {sections.map((item) => (
+          {personas.map((item) => (
             <a className="tile" key={item.href} href={withBasePath(item.href)}>
               <span className="tileTitle">{item.title}</span>
               <span className="tileNote">{item.note}</span>
+              <span className="tileNote" style={{ marginTop: "2px", color: "#7b2f20", fontWeight: 700 }}>
+                {item.target}
+              </span>
+              <span className="chip">{item.cta}</span>
             </a>
           ))}
         </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Artefactos JSON</h2>
-        </div>
-        <ul className="artifactList">
-          {artifacts.map((item) => (
-            <li key={item.href}>
-              <a href={withBasePath(item.href)}>{item.label}</a>
-              <span>{item.kind}</span>
-            </li>
-          ))}
-        </ul>
       </section>
     </main>
   );
