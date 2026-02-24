@@ -1,0 +1,43 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 1,
+    "pages": [
+      {
+        "candidate_urls": 400,
+        "doc_links_seen": 400,
+        "dry_run": false,
+        "failures": [
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000198 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000199 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000200 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000201 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000202 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000203 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=620&id2=000001 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=620&id2=000002 -> HTTPError: HTTP Error 500: Internal Server Error"
+        ],
+        "fetched_ok": 192,
+        "initiative_documents_upserted": 400,
+        "initiative_source_ids": [
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 200,
+        "skipped_existing": 200,
+        "skipped_forbidden": 200,
+        "text_documents_upserted": 192,
+        "urls_to_fetch": 200
+      }
+    ],
+    "stop_reason": "max_loops"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

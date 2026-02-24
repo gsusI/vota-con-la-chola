@@ -1,0 +1,34 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 1,
+    "pages": [
+      {
+        "candidate_urls": 0,
+        "doc_links_seen": 0,
+        "dry_run": false,
+        "failures": [],
+        "fetched_ok": 0,
+        "initiative_documents_upserted": 0,
+        "initiative_source_ids": [
+          "congreso_iniciativas"
+        ],
+        "initiatives_seen": 0,
+        "skipped_existing": 0,
+        "skipped_forbidden": 0,
+        "text_documents_upserted": 0,
+        "urls_to_fetch": 0
+      }
+    ],
+    "stop_reason": "done"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 287,
+    "source_ids": [
+      "congreso_iniciativas"
+    ],
+    "updated": 0
+  }
+}

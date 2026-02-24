@@ -1,0 +1,48 @@
+{
+  "documents": {
+    "candidate_urls": 40,
+    "doc_links_seen": 40,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000031 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000032 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000033 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000034 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000035 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000036 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000037 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000038 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000039 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000040 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000041 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000042 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000043 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000044 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000045 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000046 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000047 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000048 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000049 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=621&id2=000050 -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 20,
+    "initiative_documents_upserted": 40,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 20,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 20,
+    "urls_to_fetch": 40
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

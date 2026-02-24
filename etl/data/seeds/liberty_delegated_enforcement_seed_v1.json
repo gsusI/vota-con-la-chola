@@ -1,0 +1,128 @@
+{
+  "schema_version": "liberty_delegated_enforcement_seed_v1",
+  "generated_at": "2026-02-23T00:00:00Z",
+  "methodology": {
+    "method_version": "delegated_enforcement_v1",
+    "method_label": "Cadena delegada de enforcement v1",
+    "rules": {
+      "target_fragment_coverage_min": 0.6,
+      "designated_actor_coverage_min": 0.5,
+      "enforcement_evidence_coverage_min": 0.7
+    },
+    "notes": "Piloto reproducible para cadena norma habilitante -> organismo delegado -> cargo/acto de enforcement."
+  },
+  "links": [
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "designated_actor_label": "Direccion General de Trafico",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "evidence_quote": "El organismo competente en trafico tramita y ejecuta el regimen sancionador."
+    },
+    {
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Subdireccion de Gestion de Sanciones",
+      "designated_actor_label": "Unidad sancionadora DGT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "evidence_quote": "El procedimiento sancionador se ejecuta por los organos de trafico competentes."
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "designated_actor_label": "Agencia Estatal de Administracion Tributaria",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "evidence_quote": "La AEAT ejerce competencias sancionadoras en el ambito tributario estatal."
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "designated_actor_label": "Delegaciones AEAT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "evidence_quote": "La gestion recaudatoria se ejerce por organos de la Administracion Tributaria competente."
+    },
+    {
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Unidad procedimental sancionadora",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Graduacion y tramitacion procedimental",
+      "enforcement_evidence_date": "",
+      "chain_confidence": 0.59,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "evidence_quote": "La aplicacion procedimental depende de organos delegados con instrucciones ministeriales."
+    },
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio del Interior",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "designated_actor_label": "Delegaciones del Gobierno",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "evidence_quote": "La autoridad gubernativa competente instruye y resuelve las sanciones previstas."
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "designated_actor_label": "Organismo Estatal ITSS",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.74,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "evidence_quote": "Las actuaciones inspectoras desembocan en propuestas sancionadoras en su ambito competencial."
+    },
+    {
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "evidence_quote": "La inspeccion ejerce funciones de vigilancia y propuesta en infracciones laborales."
+    }
+  ]
+}

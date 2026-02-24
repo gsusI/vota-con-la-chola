@@ -1,0 +1,65 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 1,
+    "pages": [
+      {
+        "candidate_urls": 42,
+        "doc_links_seen": 42,
+        "dry_run": false,
+        "failures": [
+          "url=http://www.senado.es/legis12/expedientes/624/enmiendas/global_enmiendas_vetos_12_624000015.xml -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=622&id2=000036 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=622&id2=000037 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=622&id2=000038 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=622&id2=000039 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=624&id2=000015 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=626&id2=000007 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=605&id2=000001 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000001 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000002 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000003 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000004 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000005 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=621&id2=000001 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000001 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000002 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000003 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000004 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000005 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000006 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000007 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000015&legis=12 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000036 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000037 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000038 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000039 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=624&numEx=000015 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=626&numEx=000007 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=13&tipoFich=3&tipoEx=605&numEx=000001 -> HTTPStatusError: warmup failed (playwright) status=403",
+          "url=https://www.senado.es/web/ficopendataservlet?legis=13&tipoFich=3&tipoEx=620&numEx=000001 -> HTTPStatusError: warmup failed (playwright) status=403"
+        ],
+        "fetched_ok": 0,
+        "initiative_documents_upserted": 42,
+        "initiative_source_ids": [
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 20,
+        "skipped_existing": 0,
+        "skipped_forbidden": 0,
+        "text_documents_upserted": 0,
+        "urls_to_fetch": 42
+      }
+    ],
+    "stop_reason": "no_progress"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

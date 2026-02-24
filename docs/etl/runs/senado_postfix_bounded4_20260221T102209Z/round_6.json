@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 220,
+    "doc_links_seen": 220,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000084.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000085.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000086.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000087.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000088.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000089.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000090.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000091.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000092.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000093.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000094.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000095.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000096.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000097.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000098.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000099.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000100.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000101.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000102.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000103.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000104.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000105.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000106.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000107.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000108.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000111.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000169.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000170.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000172.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000173.xml -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 220,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 220,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 220
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

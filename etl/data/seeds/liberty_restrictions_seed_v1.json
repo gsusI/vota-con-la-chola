@@ -1,0 +1,184 @@
+{
+  "schema_version": "liberty_restrictions_seed_v1",
+  "generated_at": "2026-02-23T00:00:00Z",
+  "methodology": {
+    "method_version": "irlc_v1",
+    "method_label": "Indice de Restriccion de Libertad Ciudadana v1",
+    "scale_max": 100.0,
+    "weights": {
+      "reach_score": 0.2,
+      "intensity_score": 0.25,
+      "due_process_risk_score": 0.2,
+      "reversibility_risk_score": 0.1,
+      "discretionality_score": 0.15,
+      "compliance_cost_score": 0.1
+    },
+    "notes": "Escala 0-100. Valores por componente en [0,1]. Mayor score implica mayor restriccion potencial."
+  },
+  "right_categories": [
+    {
+      "right_category_id": "right:movilidad",
+      "label": "Movilidad",
+      "description": "Restricciones sobre desplazamiento, circulacion y uso de vias publicas."
+    },
+    {
+      "right_category_id": "right:propiedad_uso",
+      "label": "Propiedad y uso",
+      "description": "Restricciones sobre uso o disposicion de bienes y espacios."
+    },
+    {
+      "right_category_id": "right:actividad_economica",
+      "label": "Actividad economica",
+      "description": "Restricciones y cargas sobre actividad productiva, fiscal o laboral."
+    },
+    {
+      "right_category_id": "right:expresion_reunion",
+      "label": "Expresion y reunion",
+      "description": "Restricciones sobre conductas en espacio publico con componente civico o de orden publico."
+    },
+    {
+      "right_category_id": "right:privacidad",
+      "label": "Privacidad",
+      "description": "Restricciones relacionadas con control, trazabilidad o acceso a datos personales."
+    },
+    {
+      "right_category_id": "right:acceso_servicios",
+      "label": "Acceso a servicios",
+      "description": "Restricciones que condicionan acceso o permanencia en servicios esenciales."
+    }
+  ],
+  "fragment_assessments": [
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "right_category_id": "right:movilidad",
+      "reach_score": 0.9,
+      "intensity_score": 0.7,
+      "due_process_risk_score": 0.35,
+      "reversibility_risk_score": 0.45,
+      "discretionality_score": 0.4,
+      "compliance_cost_score": 0.55,
+      "confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "right_category_id": "right:movilidad",
+      "reach_score": 0.75,
+      "intensity_score": 0.55,
+      "due_process_risk_score": 0.42,
+      "reversibility_risk_score": 0.3,
+      "discretionality_score": 0.35,
+      "compliance_cost_score": 0.4,
+      "confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "right_category_id": "right:actividad_economica",
+      "reach_score": 0.85,
+      "intensity_score": 0.8,
+      "due_process_risk_score": 0.4,
+      "reversibility_risk_score": 0.5,
+      "discretionality_score": 0.45,
+      "compliance_cost_score": 0.78,
+      "confidence": 0.84,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "right_category_id": "right:actividad_economica",
+      "reach_score": 0.74,
+      "intensity_score": 0.65,
+      "due_process_risk_score": 0.45,
+      "reversibility_risk_score": 0.42,
+      "discretionality_score": 0.5,
+      "compliance_cost_score": 0.68,
+      "confidence": 0.79,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+    },
+    {
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "right_category_id": "right:actividad_economica",
+      "reach_score": 0.7,
+      "intensity_score": 0.7,
+      "due_process_risk_score": 0.38,
+      "reversibility_risk_score": 0.44,
+      "discretionality_score": 0.41,
+      "compliance_cost_score": 0.72,
+      "confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "right_category_id": "right:expresion_reunion",
+      "reach_score": 0.72,
+      "intensity_score": 0.88,
+      "due_process_risk_score": 0.5,
+      "reversibility_risk_score": 0.58,
+      "discretionality_score": 0.67,
+      "compliance_cost_score": 0.52,
+      "confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "right_category_id": "right:expresion_reunion",
+      "reach_score": 0.67,
+      "intensity_score": 0.82,
+      "due_process_risk_score": 0.52,
+      "reversibility_risk_score": 0.5,
+      "discretionality_score": 0.62,
+      "compliance_cost_score": 0.45,
+      "confidence": 0.75,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "right_category_id": "right:actividad_economica",
+      "reach_score": 0.62,
+      "intensity_score": 0.69,
+      "due_process_risk_score": 0.47,
+      "reversibility_risk_score": 0.48,
+      "discretionality_score": 0.5,
+      "compliance_cost_score": 0.6,
+      "confidence": 0.7,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "right_category_id": "right:privacidad",
+      "reach_score": 0.58,
+      "intensity_score": 0.71,
+      "due_process_risk_score": 0.44,
+      "reversibility_risk_score": 0.52,
+      "discretionality_score": 0.63,
+      "compliance_cost_score": 0.33,
+      "confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "right_category_id": "right:acceso_servicios",
+      "reach_score": 0.54,
+      "intensity_score": 0.65,
+      "due_process_risk_score": 0.41,
+      "reversibility_risk_score": 0.57,
+      "discretionality_score": 0.49,
+      "compliance_cost_score": 0.36,
+      "confidence": 0.72,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "right_category_id": "right:propiedad_uso",
+      "reach_score": 0.69,
+      "intensity_score": 0.62,
+      "due_process_risk_score": 0.37,
+      "reversibility_risk_score": 0.46,
+      "discretionality_score": 0.42,
+      "compliance_cost_score": 0.59,
+      "confidence": 0.75,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    }
+  ]
+}

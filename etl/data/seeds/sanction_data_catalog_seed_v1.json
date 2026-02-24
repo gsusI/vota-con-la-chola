@@ -1,0 +1,367 @@
+{
+  "schema_version": "sanction_data_catalog_seed_v1",
+  "generated_at": "2026-02-23T00:00:00Z",
+  "volume_sources": [
+    {
+      "sanction_source_id": "es:sanctions:dgt_anuario",
+      "label": "DGT annual sanction volume",
+      "organismo": "Direccion General de Trafico",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/",
+      "expected_metrics": [
+        "expediente_count",
+        "importe_total_eur",
+        "importe_medio_eur",
+        "infraction_type_id"
+      ],
+      "notes": "Traffic sanctions aggregate lane."
+    },
+    {
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "label": "AEAT sanction memory",
+      "organismo": "Agencia Tributaria",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "expected_metrics": [
+        "expediente_count",
+        "importe_total_eur",
+        "recurso_presentado_count",
+        "recurso_estimado_count"
+      ],
+      "notes": "Tax sanction volume lane."
+    },
+    {
+      "sanction_source_id": "es:sanctions:tgss_itss",
+      "label": "TGSS and ITSS sanction bulletin",
+      "organismo": "TGSS/ITSS",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.seg-social.es/ and https://www.mites.gob.es/itss/",
+      "expected_metrics": [
+        "expediente_count",
+        "importe_total_eur",
+        "infraction_type_id"
+      ],
+      "notes": "Social security and labor inspection sanctions."
+    },
+    {
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "label": "Interior sanctions under LO 4/2015",
+      "organismo": "Ministerio del Interior",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.interior.gob.es/",
+      "expected_metrics": [
+        "expediente_count",
+        "importe_total_eur",
+        "recurso_estimado_count",
+        "recurso_desestimado_count"
+      ],
+      "notes": "Public order sanctions lane."
+    },
+    {
+      "sanction_source_id": "es:sanctions:tear_resolutions",
+      "label": "TEAR tax claims resolutions",
+      "organismo": "Tribunales Economico-Administrativos Regionales",
+      "admin_scope": "autonomico",
+      "territory_scope": "ccaa",
+      "publication_frequency": "yearly",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "notes": "Official review lane for regional economic-administrative courts."
+    },
+    {
+      "sanction_source_id": "es:sanctions:teac_resolutions",
+      "label": "TEAC resolutions",
+      "organismo": "Tribunal Economico-Administrativo Central",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "notes": "Official review lane for central economic-administrative appeals."
+    },
+    {
+      "sanction_source_id": "es:sanctions:contencioso_sentencias",
+      "label": "Contentious-administrative judgments",
+      "organismo": "Poder Judicial",
+      "admin_scope": "mixto",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.poderjudicial.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "notes": "Official judicial review lane for sanction appeals."
+    },
+    {
+      "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
+      "label": "Defensor del Pueblo complaints",
+      "organismo": "Defensor del Pueblo",
+      "admin_scope": "estado",
+      "territory_scope": "nacional",
+      "publication_frequency": "yearly",
+      "source_url": "https://www.defensordelpueblo.es/",
+      "expected_metrics": [
+        "recurso_presentado_count",
+        "recurso_estimado_count",
+        "anulaciones_formales_count",
+        "resolution_days"
+      ],
+      "notes": "Official ombudsman lane for sanction-related complaints and recommendations."
+    },
+    {
+      "sanction_source_id": "es:sanctions:municipal_open_data_pilot20",
+      "label": "Municipal open data sanctions pilot (20 cities)",
+      "organismo": "Municipal portals",
+      "admin_scope": "municipal",
+      "territory_scope": "pilot_20_cities",
+      "publication_frequency": "mixed",
+      "source_url": "https://datos.gob.es/",
+      "expected_metrics": [
+        "expediente_count",
+        "importe_total_eur",
+        "infraction_type_id",
+        "norm_fragment_id"
+      ],
+      "notes": "Municipal comparability lane."
+    }
+  ],
+  "infraction_types": [
+    {
+      "infraction_type_id": "inf:traffic_speed",
+      "label": "Traffic speed",
+      "domain": "traffic",
+      "description": "Speed limit violations.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:traffic_parking",
+      "label": "Traffic parking",
+      "domain": "traffic",
+      "description": "Parking and stopping violations.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:traffic_signal_noncompliance",
+      "label": "Traffic signal noncompliance",
+      "domain": "traffic",
+      "description": "Signal and priority violations.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:tax_formal_noncompliance",
+      "label": "Tax formal noncompliance",
+      "domain": "tax",
+      "description": "Tax filing and formal duty violations.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:tax_payment_default",
+      "label": "Tax payment default",
+      "domain": "tax",
+      "description": "Tax payment and debt default sanctions.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:ss_contribution_default",
+      "label": "Social security contribution default",
+      "domain": "social_security",
+      "description": "Contribution underpayment or nonpayment.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:labor_compliance_breach",
+      "label": "Labor compliance breach",
+      "domain": "labor",
+      "description": "Labor inspection sanction categories.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:public_order_minor",
+      "label": "Public order minor",
+      "domain": "public_order",
+      "description": "Minor public order sanctions.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:municipal_civism",
+      "label": "Municipal civism",
+      "domain": "municipal",
+      "description": "Civism ordinance sanctions.",
+      "canonical_unit": "case"
+    },
+    {
+      "infraction_type_id": "inf:municipal_waste_noise",
+      "label": "Municipal waste and noise",
+      "domain": "municipal",
+      "description": "Waste, noise, and coexistence sanctions.",
+      "canonical_unit": "case"
+    }
+  ],
+  "infraction_mappings": [
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:traffic_speed",
+      "source_system": "dgt",
+      "source_code": "velocidad",
+      "source_label": "Exceso de velocidad",
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "confidence": 0.9,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:traffic_parking",
+      "source_system": "dgt",
+      "source_code": "estacionamiento",
+      "source_label": "Estacionamiento indebido",
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:traffic_signal_noncompliance",
+      "source_system": "dgt",
+      "source_code": "senales",
+      "source_label": "Incumplimiento de senales",
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "confidence": 0.75,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:tax_formal_noncompliance",
+      "source_system": "aeat",
+      "source_code": "formalidad",
+      "source_label": "Incumplimiento formal tributario",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:tax_payment_default",
+      "source_system": "aeat",
+      "source_code": "impago",
+      "source_label": "Impago de deuda tributaria",
+      "norm_id": "es:boe-a-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "confidence": 0.75,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:ss_contribution_default",
+      "source_system": "tgss",
+      "source_code": "cotizacion",
+      "source_label": "Incumplimiento de cotizacion",
+      "norm_id": "es:boe-a-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:labor_compliance_breach",
+      "source_system": "itss",
+      "source_code": "tipificacion_laboral",
+      "source_label": "Infracciones en el orden social",
+      "norm_id": "es:boe-a-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "confidence": 0.75,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+    },
+    {
+      "mapping_scope": "norm_fragment",
+      "infraction_type_id": "inf:public_order_minor",
+      "source_system": "interior",
+      "source_code": "orden_publico_leve",
+      "source_label": "Orden publico leve",
+      "norm_id": "es:boe-a-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "confidence": 0.85,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    },
+    {
+      "mapping_scope": "source_only",
+      "infraction_type_id": "inf:municipal_civism",
+      "source_system": "municipal",
+      "source_code": "civismo",
+      "source_label": "Ordenanza de civismo",
+      "norm_id": "",
+      "fragment_id": "",
+      "confidence": 0.6,
+      "source_url": "https://datos.gob.es/"
+    },
+    {
+      "mapping_scope": "source_only",
+      "infraction_type_id": "inf:municipal_waste_noise",
+      "source_system": "municipal",
+      "source_code": "residuos_ruido",
+      "source_label": "Residuos y ruido",
+      "norm_id": "",
+      "fragment_id": "",
+      "confidence": 0.6,
+      "source_url": "https://datos.gob.es/"
+    }
+  ],
+  "procedural_kpis": [
+    {
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "label": "Resource estimation rate",
+      "metric_formula": "recurso_estimado_count / recurso_presentado_count",
+      "interpretation": "Higher values can indicate over-sanctioning or poor first-pass quality.",
+      "target_direction": "lower_is_better",
+      "source_requirements": [
+        "recurso_presentado_count",
+        "recurso_estimado_count"
+      ]
+    },
+    {
+      "kpi_id": "kpi:formal_annulment_rate",
+      "label": "Formal annulment rate",
+      "metric_formula": "anulaciones_formales_count / recurso_presentado_count",
+      "interpretation": "Measures procedural defects in sanction processing.",
+      "target_direction": "lower_is_better",
+      "source_requirements": [
+        "anulaciones_formales_count",
+        "recurso_presentado_count"
+      ]
+    },
+    {
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "label": "Resolution delay p90 (days)",
+      "metric_formula": "percentile_90(resolution_days)",
+      "interpretation": "Tracks long-tail delays in appeals and resolution.",
+      "target_direction": "lower_is_better",
+      "source_requirements": [
+        "resolution_days"
+      ]
+    }
+  ]
+}

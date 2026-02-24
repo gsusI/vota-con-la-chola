@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 259,
+    "doc_links_seen": 259,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000104 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000105 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000001.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000002.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000121 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000122 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000123 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000124 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000125 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000126 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000127 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000128 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000129 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000130 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000131 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000132 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000133 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000134 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000135 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000136 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000137 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000138 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000139 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000140 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000141 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000280 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000281 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000283 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000284 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000098&legis=10 -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 43,
+    "initiative_documents_upserted": 259,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 220,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 43,
+    "urls_to_fetch": 259
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

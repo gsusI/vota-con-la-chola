@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 422,
+    "doc_links_seen": 422,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000120 -> RemoteDisconnected: Remote end closed connection without response",
+      "url=http://www.senado.es/legis10/expedientes/621/enmiendas/global_enmiendas_vetos_10_621000094.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/621/enmiendas/global_enmiendas_vetos_10_621000111.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/621/enmiendas/global_enmiendas_vetos_10_621000084.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/legis14/expedientes/620/enmiendas/global_enmiendas_vetos_14_620000001.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/legis14/expedientes/626/enmiendas/global_enmiendas_vetos_14_626000008.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/legis15/expedientes/621/enmiendas/global_enmiendas_vetos_15_621000008.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/legis15/expedientes/624/enmiendas/global_enmiendas_vetos_15_624000003.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/legis15/expedientes/626/enmiendas/global_enmiendas_vetos_15_626000009.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/621/enmiendas/global_enmiendas_vetos_10_621000014.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000022.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000023.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000024.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000025.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000026.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000027.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000028.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000029.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000030.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000031.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000032.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000033.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000109.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000110.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000111.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000112.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000113.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000114.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000115.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000116.xml -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 341,
+    "initiative_documents_upserted": 422,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 220,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 341,
+    "urls_to_fetch": 422
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

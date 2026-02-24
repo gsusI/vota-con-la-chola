@@ -1,0 +1,49 @@
+{
+  "documents": {
+    "candidate_urls": 240,
+    "doc_links_seen": 240,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000045 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000046 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000047 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=621&numEx=000001 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000004 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=624&numEx=000014 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000045 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000046 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=620&numEx=000007 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000047 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000142 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000143 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000144 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000145 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000146 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000147 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=622&id2=000002 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=626&id2=000003 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000006 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=626&numEx=000002 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=626&numEx=000005 -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 240,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 120,
+    "skipped_existing": 219,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 21
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

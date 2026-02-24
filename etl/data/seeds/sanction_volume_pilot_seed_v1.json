@@ -1,0 +1,411 @@
+{
+  "schema_version": "sanction_volume_pilot_seed_v1",
+  "generated_at": "2026-02-23T00:00:00Z",
+  "volume_observations": [
+    {
+      "sanction_source_id": "es:sanctions:dgt_anuario",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "infraction_type_id": "inf:traffic_speed",
+      "expediente_count": 1200000,
+      "importe_total_eur": 181000000.0,
+      "importe_medio_eur": 150.83,
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:dgt_anuario",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "infraction_type_id": "inf:traffic_parking",
+      "expediente_count": 950000,
+      "importe_total_eur": 98000000.0,
+      "importe_medio_eur": 103.16,
+      "source_url": "https://www.dgt.es/conoce-la-dgt/que-hacemos/estadisticas-e-indicadores/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "infraction_type_id": "inf:tax_formal_noncompliance",
+      "expediente_count": 380000,
+      "importe_total_eur": 420000000.0,
+      "importe_medio_eur": 1105.26,
+      "recurso_presentado_count": 102000,
+      "recurso_estimado_count": 27000,
+      "recurso_desestimado_count": 75000,
+      "source_url": "https://sede.agenciatributaria.gob.es/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "infraction_type_id": "inf:tax_payment_default",
+      "expediente_count": 210000,
+      "importe_total_eur": 370000000.0,
+      "importe_medio_eur": 1761.9,
+      "recurso_presentado_count": 51000,
+      "recurso_estimado_count": 13000,
+      "recurso_desestimado_count": 38000,
+      "source_url": "https://sede.agenciatributaria.gob.es/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:tgss_itss",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "infraction_type_id": "inf:ss_contribution_default",
+      "expediente_count": 124000,
+      "importe_total_eur": 240000000.0,
+      "importe_medio_eur": 1935.48,
+      "source_url": "https://www.seg-social.es/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:tgss_itss",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "infraction_type_id": "inf:labor_compliance_breach",
+      "expediente_count": 87000,
+      "importe_total_eur": 310000000.0,
+      "importe_medio_eur": 3563.22,
+      "source_url": "https://www.mites.gob.es/itss/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "es:boe-a-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "infraction_type_id": "inf:public_order_minor",
+      "expediente_count": 230000,
+      "importe_total_eur": 160000000.0,
+      "importe_medio_eur": 695.65,
+      "recurso_presentado_count": 76000,
+      "recurso_estimado_count": 18500,
+      "recurso_desestimado_count": 57500,
+      "source_url": "https://www.interior.gob.es/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:municipal_open_data_pilot20",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "",
+      "fragment_id": "",
+      "infraction_type_id": "inf:municipal_civism",
+      "expediente_count": 145000,
+      "importe_total_eur": 25500000.0,
+      "importe_medio_eur": 175.86,
+      "source_url": "https://datos.gob.es/"
+    },
+    {
+      "sanction_source_id": "es:sanctions:municipal_open_data_pilot20",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "norm_id": "",
+      "fragment_id": "",
+      "infraction_type_id": "inf:municipal_waste_noise",
+      "expediente_count": 98000,
+      "importe_total_eur": 19500000.0,
+      "importe_medio_eur": 198.98,
+      "source_url": "https://datos.gob.es/"
+    }
+  ],
+  "procedural_metrics": [
+    {
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": 0.264706,
+      "numerator": 27000,
+      "denominator": 102000,
+      "source_url": "https://sede.agenciatributaria.gob.es/"
+    },
+    {
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": 0.243421,
+      "numerator": 18500,
+      "denominator": 76000,
+      "source_url": "https://www.interior.gob.es/"
+    },
+    {
+      "kpi_id": "kpi:formal_annulment_rate",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": 0.041176,
+      "numerator": 4200,
+      "denominator": 102000,
+      "source_url": "https://sede.agenciatributaria.gob.es/"
+    },
+    {
+      "kpi_id": "kpi:formal_annulment_rate",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": 0.052632,
+      "numerator": 4000,
+      "denominator": 76000,
+      "source_url": "https://www.interior.gob.es/"
+    },
+    {
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": 210,
+      "numerator": 210,
+      "denominator": 1,
+      "source_url": "https://sede.agenciatributaria.gob.es/"
+    },
+    {
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "period_date": "2025-12-31",
+      "period_granularity": "year",
+      "value": 185,
+      "numerator": 185,
+      "denominator": 1,
+      "source_url": "https://www.interior.gob.es/"
+    }
+  ],
+  "municipal_ordinances": [
+    {
+      "ordinance_id": "es:mun:madrid:movilidad_2025",
+      "city_name": "Madrid",
+      "province_name": "Madrid",
+      "ordinance_label": "Ordenanza de movilidad sostenible",
+      "ordinance_status": "normalized",
+      "ordinance_url": "https://www.madrid.es/",
+      "publication_date": "2025-01-15",
+      "source_url": "https://www.madrid.es/"
+    },
+    {
+      "ordinance_id": "es:mun:barcelona:civisme_2025",
+      "city_name": "Barcelona",
+      "province_name": "Barcelona",
+      "ordinance_label": "Ordenança de mesures per fomentar i garantir la convivencia ciutadana",
+      "ordinance_status": "normalized",
+      "ordinance_url": "https://ajuntament.barcelona.cat/",
+      "publication_date": "2025-02-10",
+      "source_url": "https://ajuntament.barcelona.cat/"
+    },
+    {
+      "ordinance_id": "es:mun:valencia:movilidad_2025",
+      "city_name": "Valencia",
+      "province_name": "Valencia",
+      "ordinance_label": "Ordenanza de movilidad urbana",
+      "ordinance_status": "normalized",
+      "ordinance_url": "https://www.valencia.es/",
+      "publication_date": "2025-03-01",
+      "source_url": "https://www.valencia.es/"
+    },
+    {
+      "ordinance_id": "es:mun:sevilla:pilot",
+      "city_name": "Sevilla",
+      "province_name": "Sevilla",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.sevilla.org/",
+      "source_url": "https://www.sevilla.org/"
+    },
+    {
+      "ordinance_id": "es:mun:zaragoza:pilot",
+      "city_name": "Zaragoza",
+      "province_name": "Zaragoza",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.zaragoza.es/",
+      "source_url": "https://www.zaragoza.es/"
+    },
+    {
+      "ordinance_id": "es:mun:malaga:pilot",
+      "city_name": "Malaga",
+      "province_name": "Malaga",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.malaga.eu/",
+      "source_url": "https://www.malaga.eu/"
+    },
+    {
+      "ordinance_id": "es:mun:murcia:pilot",
+      "city_name": "Murcia",
+      "province_name": "Murcia",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.murcia.es/",
+      "source_url": "https://www.murcia.es/"
+    },
+    {
+      "ordinance_id": "es:mun:palma:pilot",
+      "city_name": "Palma",
+      "province_name": "Illes Balears",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.palma.cat/",
+      "source_url": "https://www.palma.cat/"
+    },
+    {
+      "ordinance_id": "es:mun:las-palmas:pilot",
+      "city_name": "Las Palmas de Gran Canaria",
+      "province_name": "Las Palmas",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.laspalmasgc.es/",
+      "source_url": "https://www.laspalmasgc.es/"
+    },
+    {
+      "ordinance_id": "es:mun:bilbao:pilot",
+      "city_name": "Bilbao",
+      "province_name": "Bizkaia",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.bilbao.eus/",
+      "source_url": "https://www.bilbao.eus/"
+    },
+    {
+      "ordinance_id": "es:mun:alicante:pilot",
+      "city_name": "Alicante",
+      "province_name": "Alicante",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.alicante.es/",
+      "source_url": "https://www.alicante.es/"
+    },
+    {
+      "ordinance_id": "es:mun:cordoba:pilot",
+      "city_name": "Cordoba",
+      "province_name": "Cordoba",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.cordoba.es/",
+      "source_url": "https://www.cordoba.es/"
+    },
+    {
+      "ordinance_id": "es:mun:valladolid:pilot",
+      "city_name": "Valladolid",
+      "province_name": "Valladolid",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.valladolid.es/",
+      "source_url": "https://www.valladolid.es/"
+    },
+    {
+      "ordinance_id": "es:mun:vigo:pilot",
+      "city_name": "Vigo",
+      "province_name": "Pontevedra",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.vigo.org/",
+      "source_url": "https://www.vigo.org/"
+    },
+    {
+      "ordinance_id": "es:mun:gijon:pilot",
+      "city_name": "Gijon",
+      "province_name": "Asturias",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.gijon.es/",
+      "source_url": "https://www.gijon.es/"
+    },
+    {
+      "ordinance_id": "es:mun:hospitalet:pilot",
+      "city_name": "L'Hospitalet de Llobregat",
+      "province_name": "Barcelona",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.l-h.cat/",
+      "source_url": "https://www.l-h.cat/"
+    },
+    {
+      "ordinance_id": "es:mun:vitoria:pilot",
+      "city_name": "Vitoria-Gasteiz",
+      "province_name": "Araba",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.vitoria-gasteiz.org/",
+      "source_url": "https://www.vitoria-gasteiz.org/"
+    },
+    {
+      "ordinance_id": "es:mun:acoruna:pilot",
+      "city_name": "A Coruna",
+      "province_name": "A Coruna",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.coruna.gal/",
+      "source_url": "https://www.coruna.gal/"
+    },
+    {
+      "ordinance_id": "es:mun:granada:pilot",
+      "city_name": "Granada",
+      "province_name": "Granada",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.granada.org/",
+      "source_url": "https://www.granada.org/"
+    },
+    {
+      "ordinance_id": "es:mun:elche:pilot",
+      "city_name": "Elche",
+      "province_name": "Alicante",
+      "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+      "ordinance_status": "identified",
+      "ordinance_url": "https://www.elche.es/",
+      "source_url": "https://www.elche.es/"
+    }
+  ],
+  "municipal_fragments": [
+    {
+      "ordinance_fragment_id": "es:mun:madrid:movilidad_2025:f1",
+      "ordinance_id": "es:mun:madrid:movilidad_2025",
+      "fragment_label": "Velocidad y prioridad",
+      "conduct": "Incumplimiento de normas de velocidad y señalizacion urbana",
+      "amount_min_eur": 90,
+      "amount_max_eur": 600,
+      "competent_body": "Agencia de Gestion de la Movilidad",
+      "appeal_path": "Reposicion y contencioso",
+      "mapped_norm_id": "es:boe-a-2015-11722",
+      "mapped_fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "source_url": "https://www.madrid.es/"
+    },
+    {
+      "ordinance_fragment_id": "es:mun:barcelona:civisme_2025:f1",
+      "ordinance_id": "es:mun:barcelona:civisme_2025",
+      "fragment_label": "Convivencia y espacio publico",
+      "conduct": "Conductas de incivismo en espacio publico",
+      "amount_min_eur": 100,
+      "amount_max_eur": 750,
+      "competent_body": "Area de Convivencia",
+      "appeal_path": "Reposicion",
+      "mapped_norm_id": "",
+      "mapped_fragment_id": "",
+      "source_url": "https://ajuntament.barcelona.cat/"
+    },
+    {
+      "ordinance_fragment_id": "es:mun:valencia:movilidad_2025:f1",
+      "ordinance_id": "es:mun:valencia:movilidad_2025",
+      "fragment_label": "Estacionamiento y carga-descarga",
+      "conduct": "Incumplimientos de estacionamiento en zonas reguladas",
+      "amount_min_eur": 80,
+      "amount_max_eur": 300,
+      "competent_body": "Servicio de Movilidad",
+      "appeal_path": "Reposicion y via economico-administrativa",
+      "mapped_norm_id": "es:boe-a-2015-11722",
+      "mapped_fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "source_url": "https://www.valencia.es/"
+    }
+  ]
+}

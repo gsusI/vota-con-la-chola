@@ -1,0 +1,36 @@
+{
+  "documents": {
+    "candidate_urls": 80,
+    "doc_links_seen": 80,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis5/expedientes/605/xml/INI-3-605000001.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=http://www.senado.es/legis5/expedientes/605/xml/INI-3-605000002.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=605&id2=000001 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=605&id2=000002 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=624&numEx=000002 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=624&numEx=000003 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=624&numEx=000004 -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=624&numEx=000006 -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 72,
+    "initiative_documents_upserted": 80,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 40,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 72,
+    "urls_to_fetch": 80
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

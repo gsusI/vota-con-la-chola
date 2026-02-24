@@ -1,0 +1,30 @@
+{
+  "documents": {
+    "candidate_urls": 4792,
+    "doc_links_seen": 4792,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis8/expedientes/621/xml/INI-3-621000013.xml -> HTTPError: HTTP Error 500: Internal Server Error",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=8&id1=621&id2=000021 -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 1,
+    "initiative_documents_upserted": 4792,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 2396,
+    "skipped_existing": 4789,
+    "skipped_forbidden": 2912,
+    "text_documents_upserted": 1,
+    "urls_to_fetch": 3
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}
