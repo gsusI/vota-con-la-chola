@@ -70,4 +70,15 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 1,
         "fallback_file": "etl/data/raw/samples/programas_partidos_sample.csv",
     },
+    # Derived/backfill source: documents referenced by initiatives (BOCG/DS PDFs/HTML).
+    "parl_initiative_docs": {
+        "name": "Parlamento - Documentos de iniciativas (BOCG/Diario de Sesiones)",
+        "scope": "nacional",
+        "default_url": "manifest://parl_initiative_docs",
+        "format": "bin",
+        "level": "nacional",
+        "institution_name": "Cortes Generales",
+        "min_records_loaded_strict": 1,
+        "fallback_file": "",
+    },
 }

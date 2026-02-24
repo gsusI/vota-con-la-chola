@@ -10,7 +10,7 @@ from email.utils import parsedate_to_datetime
 
 from etl.politicos_es.config import BASE_HEADERS
 
-_MAX_ATTEMPTS = 3
+_MAX_ATTEMPTS = 1
 _RETRYABLE_HTTP_CODES = {408, 429, 500, 502, 503, 504}
 _BASE_BACKOFF_SECONDS = 1.0
 _JITTER_MAX_SECONDS = 0.25

@@ -519,8 +519,9 @@ def _ingest_programas_partidos(
                 conn, topic_set_id=topic_set_id, concerns=concerns, now_iso=now_iso
             )
 
-        # Idempotence (derived rows): rebuild evidence for this source + cycle topic_set.
-        # Also guard against historical duplicates created when topic_set scope anchors were NULL.
+        # Idempotence (derived rows): keep a stable keyset per cycle so reruns preserve
+        # existing `evidence_id` when `(source_record_pk, topic_id, evidence_type)` is unchanged.
+        # This avoids reopening manual review rows through FK cascades.
         leg_key = normalize_ws(election_cycle) or None
         cycle_set_ids = [
             int(r["topic_set_id"])
@@ -536,17 +537,6 @@ def _ingest_programas_partidos(
             ).fetchall()
             if r["topic_set_id"] is not None
         ]
-        with conn:
-            for sid in cycle_set_ids or [int(topic_set_id)]:
-                conn.execute(
-                    """
-                    DELETE FROM topic_evidence
-                    WHERE source_id = ?
-                      AND topic_set_id = ?
-                      AND evidence_type = 'declared:programa'
-                    """,
-                    (source_id, int(sid)),
-                )
 
         sr_rows: list[dict[str, Any]] = []
         text_doc_rows: list[tuple[Any, ...]] = []
@@ -831,7 +821,8 @@ def _ingest_programas_partidos(
                         td_params,
                     )
 
-        # Insert topic_evidence rows (source_record_pk resolved via pk_map).
+        # Upsert topic_evidence rows (source_record_pk resolved via pk_map).
+        # We intentionally preserve evidence_id when natural keys are unchanged.
         if evidence_rows:
             ev_params: list[tuple[Any, ...]] = []
             for row in evidence_rows:
@@ -842,24 +833,148 @@ def _ingest_programas_partidos(
                     continue
                 ev_params.append((*row[:21], int(sr_pk), *row[22:]))
             if ev_params:
-                with conn:
-                    conn.executemany(
-                        """
-                        INSERT INTO topic_evidence (
-                          topic_id, topic_set_id,
-                          person_id, mandate_id,
-                          institution_id, admin_level_id, territory_id,
-                          evidence_type, evidence_date, title, excerpt,
-                          stance, polarity, weight, confidence,
-                          topic_method, stance_method,
-                          vote_event_id, initiative_id,
-                          source_id, source_url, source_record_pk, source_snapshot_date,
-                          raw_payload, created_at, updated_at
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                        """,
-                        ev_params,
+                cycle_scope = cycle_set_ids or [int(topic_set_id)]
+                placeholders = ",".join("?" for _ in cycle_scope)
+                existing_rows = conn.execute(
+                    f"""
+                    SELECT
+                      evidence_id,
+                      source_record_pk,
+                      topic_id,
+                      evidence_type
+                    FROM topic_evidence
+                    WHERE source_id = ?
+                      AND evidence_type = 'declared:programa'
+                      AND topic_set_id IN ({placeholders})
+                    ORDER BY evidence_id ASC
+                    """,
+                    (source_id, *cycle_scope),
+                ).fetchall()
+
+                existing_by_key: dict[tuple[int, int, str], int] = {}
+                duplicate_ids: list[int] = []
+                for er in existing_rows:
+                    sr_pk_existing = er["source_record_pk"]
+                    topic_id_existing = er["topic_id"]
+                    evidence_type_existing = normalize_ws(str(er["evidence_type"] or ""))
+                    if sr_pk_existing is None or topic_id_existing is None or not evidence_type_existing:
+                        continue
+                    key = (int(sr_pk_existing), int(topic_id_existing), evidence_type_existing)
+                    if key in existing_by_key:
+                        duplicate_ids.append(int(er["evidence_id"]))
+                        continue
+                    existing_by_key[key] = int(er["evidence_id"])
+
+                matched_ids: set[int] = set()
+                ev_updates: list[tuple[Any, ...]] = []
+                ev_inserts: list[tuple[Any, ...]] = []
+                for ev in ev_params:
+                    key = (int(ev[21]), int(ev[0]), normalize_ws(str(ev[7] or "")))
+                    existing_id = existing_by_key.get(key)
+                    if existing_id is None:
+                        ev_inserts.append(ev)
+                        continue
+                    matched_ids.add(existing_id)
+                    ev_updates.append(
+                        (
+                            ev[0],   # topic_id
+                            ev[1],   # topic_set_id
+                            ev[2],   # person_id
+                            ev[3],   # mandate_id
+                            ev[4],   # institution_id
+                            ev[5],   # admin_level_id
+                            ev[6],   # territory_id
+                            ev[7],   # evidence_type
+                            ev[8],   # evidence_date
+                            ev[9],   # title
+                            ev[10],  # excerpt
+                            ev[11],  # stance
+                            ev[12],  # polarity
+                            ev[13],  # weight
+                            ev[14],  # confidence
+                            ev[15],  # topic_method
+                            ev[16],  # stance_method
+                            ev[17],  # vote_event_id
+                            ev[18],  # initiative_id
+                            ev[19],  # source_id
+                            ev[20],  # source_url
+                            ev[21],  # source_record_pk
+                            ev[22],  # source_snapshot_date
+                            ev[23],  # raw_payload
+                            ev[25],  # updated_at
+                            int(existing_id),
+                        )
                     )
-                evidence_inserted += len(ev_params)
+
+                stale_ids = [
+                    int(er["evidence_id"])
+                    for er in existing_rows
+                    if int(er["evidence_id"]) not in matched_ids
+                ]
+                if duplicate_ids:
+                    stale_ids.extend(duplicate_ids)
+                stale_ids = sorted(set(stale_ids))
+
+                with conn:
+                    if ev_updates:
+                        conn.executemany(
+                            """
+                            UPDATE topic_evidence
+                            SET topic_id = ?,
+                                topic_set_id = ?,
+                                person_id = ?,
+                                mandate_id = ?,
+                                institution_id = ?,
+                                admin_level_id = ?,
+                                territory_id = ?,
+                                evidence_type = ?,
+                                evidence_date = ?,
+                                title = ?,
+                                excerpt = ?,
+                                stance = ?,
+                                polarity = ?,
+                                weight = ?,
+                                confidence = ?,
+                                topic_method = ?,
+                                stance_method = ?,
+                                vote_event_id = ?,
+                                initiative_id = ?,
+                                source_id = ?,
+                                source_url = ?,
+                                source_record_pk = ?,
+                                source_snapshot_date = ?,
+                                raw_payload = ?,
+                                updated_at = ?
+                            WHERE evidence_id = ?
+                            """,
+                            ev_updates,
+                        )
+
+                    if ev_inserts:
+                        conn.executemany(
+                            """
+                            INSERT INTO topic_evidence (
+                              topic_id, topic_set_id,
+                              person_id, mandate_id,
+                              institution_id, admin_level_id, territory_id,
+                              evidence_type, evidence_date, title, excerpt,
+                              stance, polarity, weight, confidence,
+                              topic_method, stance_method,
+                              vote_event_id, initiative_id,
+                              source_id, source_url, source_record_pk, source_snapshot_date,
+                              raw_payload, created_at, updated_at
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            """,
+                            ev_inserts,
+                        )
+
+                    if stale_ids:
+                        conn.executemany(
+                            "DELETE FROM topic_evidence WHERE evidence_id = ?",
+                            [(int(eid),) for eid in stale_ids],
+                        )
+
+                evidence_inserted += len(ev_inserts)
 
     info = {
         "election_cycles": sorted(by_cycle.keys()),
@@ -1534,7 +1649,7 @@ def _congreso_leg_num(value: str | None) -> str | None:
 def _urls_to_json_list(text: str | None) -> str | None:
     if not text:
         return None
-    urls = re.findall(r"https?://\\S+", str(text))
+    urls = re.findall(r"https?://\S+", str(text))
     urls = [u.strip() for u in urls if u.strip()]
     if not urls:
         return None

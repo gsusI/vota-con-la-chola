@@ -401,8 +401,14 @@ def upsert_parl_initiatives(
           rapporteurs_text=excluded.rapporteurs_text,
           processing_text=excluded.processing_text,
           related_initiatives_text=excluded.related_initiatives_text,
-          links_bocg_json=excluded.links_bocg_json,
-          links_ds_json=excluded.links_ds_json,
+          links_bocg_json=CASE
+            WHEN excluded.links_bocg_json IS NOT NULL AND TRIM(excluded.links_bocg_json) <> '' THEN excluded.links_bocg_json
+            ELSE parl_initiatives.links_bocg_json
+          END,
+          links_ds_json=CASE
+            WHEN excluded.links_ds_json IS NOT NULL AND TRIM(excluded.links_ds_json) <> '' THEN excluded.links_ds_json
+            ELSE parl_initiatives.links_ds_json
+          END,
           source_url=COALESCE(excluded.source_url, parl_initiatives.source_url),
           source_record_pk=COALESCE(excluded.source_record_pk, parl_initiatives.source_record_pk),
           source_snapshot_date=COALESCE(excluded.source_snapshot_date, parl_initiatives.source_snapshot_date),

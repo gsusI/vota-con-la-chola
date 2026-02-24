@@ -81,6 +81,67 @@ class TestGraphUiServerCoherenceApi(unittest.TestCase):
                     ).fetchone()["person_id"]
                 )
 
+            conn.execute(
+                """
+                INSERT INTO parties (name, acronym, created_at, updated_at)
+                VALUES (?, ?, ?, ?)
+                """,
+                ("Partido Incoherente", "PI", now_iso, now_iso),
+            )
+            conn.execute(
+                """
+                INSERT INTO parties (name, acronym, created_at, updated_at)
+                VALUES (?, ?, ?, ?)
+                """,
+                ("Partido Coherente", "PC", now_iso, now_iso),
+            )
+            party_ids = {
+                "Persona Incoherente": int(
+                    conn.execute("SELECT party_id FROM parties WHERE name = 'Partido Incoherente'").fetchone()["party_id"]
+                ),
+                "Persona Coherente": int(
+                    conn.execute("SELECT party_id FROM parties WHERE name = 'Partido Coherente'").fetchone()["party_id"]
+                ),
+            }
+
+            conn.execute(
+                """
+                INSERT INTO institutions (name, level, admin_level_id, territory_code, created_at, updated_at)
+                VALUES (?, ?, ?, '', ?, ?)
+                """,
+                ("Congreso Demo", "nacional", admin_level_id, now_iso, now_iso),
+            )
+            institution_id = int(
+                conn.execute(
+                    "SELECT institution_id FROM institutions WHERE name = 'Congreso Demo'"
+                ).fetchone()["institution_id"]
+            )
+
+            for person_name, person_id in person_ids.items():
+                conn.execute(
+                    """
+                    INSERT INTO mandates (
+                      person_id, institution_id, party_id, role_title, level, admin_level_id,
+                      source_id, source_record_id, source_snapshot_date,
+                      first_seen_at, last_seen_at, raw_payload
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        int(person_id),
+                        institution_id,
+                        int(party_ids[person_name]),
+                        "Diputado",
+                        "nacional",
+                        admin_level_id,
+                        "congreso_votaciones",
+                        f"fixture-mandate:{person_id}",
+                        as_of_date,
+                        now_iso,
+                        now_iso,
+                        "{}",
+                    ),
+                )
+
             def _insert_position(person_id: int, computed_method: str, stance: str, score: float) -> None:
                 conn.execute(
                     """
@@ -200,6 +261,8 @@ class TestGraphUiServerCoherenceApi(unittest.TestCase):
                 "topic_id": topic_id,
                 "as_of_date": as_of_date,
                 "incoherent_person_id": person_ids["Persona Incoherente"],
+                "incoherent_party_id": party_ids["Persona Incoherente"],
+                "coherent_party_id": party_ids["Persona Coherente"],
             }
         finally:
             conn.close()
@@ -290,6 +353,53 @@ class TestGraphUiServerCoherenceApi(unittest.TestCase):
                 bad_status, bad_payload = self._get_json(port, "/api/topics/coherence/evidence?bucket=unknown")
                 self.assertEqual(bad_status, 400)
                 self.assertIn("bucket", str(bad_payload.get("error", "")))
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=5)
+
+    def test_topics_coherence_endpoints_filter_party_id(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "coherence.db"
+            fixture = self._seed_fixture(db_path)
+            server, thread = self._start_server(db_path)
+            try:
+                port = int(server.server_address[1])
+                summary_query = (
+                    "/api/topics/coherence"
+                    f"?as_of_date={fixture['as_of_date']}"
+                    f"&topic_set_id={fixture['topic_set_id']}"
+                    f"&topic_id={fixture['topic_id']}"
+                    "&scope=nacional"
+                    f"&party_id={fixture['incoherent_party_id']}"
+                )
+                status, payload = self._get_json(port, summary_query)
+                self.assertEqual(status, 200)
+                self.assertEqual(int(payload["summary"]["overlap_total"]), 1)
+                self.assertEqual(int(payload["summary"]["explicit_total"]), 1)
+                self.assertEqual(int(payload["summary"]["coherent_total"]), 0)
+                self.assertEqual(int(payload["summary"]["incoherent_total"]), 1)
+
+                evidence_query = (
+                    "/api/topics/coherence/evidence"
+                    f"?bucket=incoherent&as_of_date={fixture['as_of_date']}"
+                    f"&topic_set_id={fixture['topic_set_id']}"
+                    f"&topic_id={fixture['topic_id']}"
+                    "&scope=nacional"
+                    f"&party_id={fixture['incoherent_party_id']}"
+                )
+                ev_status, ev_payload = self._get_json(port, evidence_query)
+                self.assertEqual(ev_status, 200)
+                self.assertEqual(int(ev_payload["summary"]["pairs_total"]), 1)
+                self.assertEqual(int(ev_payload["summary"]["evidence_total"]), 2)
+                self.assertEqual(
+                    {int(r["person_id"]) for r in ev_payload["rows"]},
+                    {int(fixture["incoherent_person_id"])},
+                )
+                self.assertEqual(
+                    {int(r["party_id"] or 0) for r in ev_payload["rows"]},
+                    {int(fixture["incoherent_party_id"])},
+                )
             finally:
                 server.shutdown()
                 server.server_close()

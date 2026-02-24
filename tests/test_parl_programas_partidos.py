@@ -214,6 +214,22 @@ class TestParlProgramasPartidos(unittest.TestCase):
                     ).fetchall()
                 }
                 self.assertEqual(len(ev_keys_1), evidence_total_1)
+                ev_id_map_1 = {
+                    (
+                        int(r["topic_id"]),
+                        int(r["person_id"]),
+                        str(r["title"] or ""),
+                        int(r["source_record_pk"]),
+                    ): int(r["evidence_id"])
+                    for r in conn.execute(
+                        """
+                        SELECT evidence_id, topic_id, person_id, title, source_record_pk
+                        FROM topic_evidence
+                        WHERE source_id = 'programas_partidos'
+                          AND evidence_type = 'declared:programa'
+                        """
+                    ).fetchall()
+                }
 
                 # Re-run ingest: counts and key sets remain stable; no duplicated topic_sets/institutions.
                 ingest_parl_source(
@@ -273,6 +289,23 @@ class TestParlProgramasPartidos(unittest.TestCase):
                     ).fetchall()
                 }
                 self.assertEqual(ev_keys_1, ev_keys_2)
+                ev_id_map_2 = {
+                    (
+                        int(r["topic_id"]),
+                        int(r["person_id"]),
+                        str(r["title"] or ""),
+                        int(r["source_record_pk"]),
+                    ): int(r["evidence_id"])
+                    for r in conn.execute(
+                        """
+                        SELECT evidence_id, topic_id, person_id, title, source_record_pk
+                        FROM topic_evidence
+                        WHERE source_id = 'programas_partidos'
+                          AND evidence_type = 'declared:programa'
+                        """
+                    ).fetchall()
+                }
+                self.assertEqual(ev_id_map_1, ev_id_map_2)
 
                 rows2 = conn.execute(
                     """
@@ -309,6 +342,64 @@ class TestParlProgramasPartidos(unittest.TestCase):
                 )
                 self.assertGreaterEqual(int(stance_res.get("support", 0)), 1)
                 self.assertGreaterEqual(int(stance_res.get("oppose", 0)), 1)
+                self.assertGreaterEqual(int(stance_res.get("review_pending", 0)), 1)
+
+                # Mark pending rows as ignored to emulate manual closeout.
+                conn.execute(
+                    """
+                    UPDATE topic_evidence_reviews
+                    SET status = 'ignored',
+                        updated_at = ?
+                    WHERE source_id = 'programas_partidos'
+                      AND status = 'pending'
+                    """,
+                    (now_utc_iso(),),
+                )
+                conn.commit()
+                ignored_before = int(
+                    conn.execute(
+                        """
+                        SELECT COUNT(*) AS c
+                        FROM topic_evidence_reviews
+                        WHERE source_id = 'programas_partidos'
+                          AND status = 'ignored'
+                        """
+                    ).fetchone()["c"]
+                )
+                self.assertGreaterEqual(ignored_before, 1)
+
+                # Re-run ingest + declared stance: ignored decisions must persist.
+                ingest_parl_source(
+                    conn=conn,
+                    connector=connector,
+                    raw_dir=raw_dir,
+                    timeout=5,
+                    from_file=manifest_path,
+                    url_override=None,
+                    snapshot_date=snapshot_date,
+                    strict_network=True,
+                    options={},
+                )
+                stance_res_rerun = backfill_declared_stance_from_topic_evidence(
+                    conn,
+                    source_id="programas_partidos",
+                    limit=0,
+                    min_auto_confidence=0.62,
+                    enable_review_queue=True,
+                    dry_run=False,
+                )
+                self.assertEqual(int(stance_res_rerun.get("review_pending", 0)), 0)
+                ignored_after = int(
+                    conn.execute(
+                        """
+                        SELECT COUNT(*) AS c
+                        FROM topic_evidence_reviews
+                        WHERE source_id = 'programas_partidos'
+                          AND status = 'ignored'
+                        """
+                    ).fetchone()["c"]
+                )
+                self.assertEqual(ignored_after, ignored_before)
 
                 # Declared positions should be computable from the signaled rows.
                 pos_res = backfill_topic_positions_from_declared_evidence(
@@ -329,4 +420,3 @@ class TestParlProgramasPartidos(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
