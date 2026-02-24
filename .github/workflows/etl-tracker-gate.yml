@@ -7,6 +7,347 @@ on:
       - main
 
 jobs:
+  citizen-preset-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run citizen preset contract tests
+        run: |
+          node --test tests/test_citizen_preset_codec.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
+
+      - name: Generate strict citizen preset contract report
+        run: |
+          node scripts/report_citizen_preset_fixture_contract.js \
+            --fixture tests/fixtures/citizen_preset_hash_matrix.json \
+            --strict \
+            --json-out citizen_preset_contract_ci.json
+
+      - name: Generate strict citizen preset codec parity report
+        run: |
+          node scripts/report_citizen_preset_codec_parity.js \
+            --source ui/citizen/preset_codec.js \
+            --published docs/gh-pages/citizen/preset_codec.js \
+            --strict \
+            --json-out citizen_preset_codec_parity_ci.json
+
+      - name: Generate strict citizen preset codec sync-state report
+        run: |
+          node scripts/report_citizen_preset_codec_sync_state.js \
+            --source ui/citizen/preset_codec.js \
+            --published docs/gh-pages/citizen/preset_codec.js \
+            --strict \
+            --json-out citizen_preset_codec_sync_ci.json
+
+      - name: Generate strict citizen preset contract bundle report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle.js \
+            --fixture tests/fixtures/citizen_preset_hash_matrix.json \
+            --source ui/citizen/preset_codec.js \
+            --published docs/gh-pages/citizen/preset_codec.js \
+            --strict \
+            --json-out citizen_preset_contract_bundle_ci.json
+
+      - name: Generate strict citizen preset contract bundle history report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history.js \
+            --bundle-json citizen_preset_contract_bundle_ci.json \
+            --history-jsonl citizen_preset_contract_bundle_history_ci.jsonl \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_ci.json
+
+      - name: Generate strict citizen preset contract bundle history window report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_window.js \
+            --history-jsonl citizen_preset_contract_bundle_history_ci.jsonl \
+            --last 20 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_window_ci.json
+
+      - name: Generate strict citizen preset contract bundle history compaction report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_compaction.js \
+            --history-jsonl citizen_preset_contract_bundle_history_ci.jsonl \
+            --compacted-jsonl citizen_preset_contract_bundle_history_ci.compacted.jsonl \
+            --keep-recent 20 \
+            --keep-mid-span 100 \
+            --keep-mid-every 5 \
+            --keep-old-every 20 \
+            --min-raw-for-dropped-check 25 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_compaction_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo.js \
+            --history-jsonl citizen_preset_contract_bundle_history_ci.jsonl \
+            --last 20 \
+            --max-regressions 0 \
+            --max-regression-rate-pct 0 \
+            --min-green-streak 1 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest.js \
+            --slo-json citizen_preset_contract_bundle_history_slo_ci.json \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js \
+            --digest-json citizen_preset_contract_bundle_history_slo_digest_ci.json \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.jsonl \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat window report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.jsonl \
+            --last 20 \
+            --max-failed 0 \
+            --max-failed-rate-pct 0 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_window_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.jsonl \
+            --compacted-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.compacted.jsonl \
+            --keep-recent 20 \
+            --keep-mid-span 100 \
+            --keep-mid-every 5 \
+            --keep-old-every 20 \
+            --min-raw-for-dropped-check 25 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction window report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.jsonl \
+            --compacted-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.compacted.jsonl \
+            --last 20 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction window digest report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js \
+            --compaction-window-json citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_ci.json \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js \
+            --digest-json citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_ci.json \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.jsonl \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat window report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.jsonl \
+            --last 20 \
+            --max-failed 0 \
+            --max-failed-rate-pct 0 \
+            --max-degraded 0 \
+            --max-degraded-rate-pct 0 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat compaction report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.jsonl \
+            --compacted-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.compacted.jsonl \
+            --keep-recent 20 \
+            --keep-mid-span 100 \
+            --keep-mid-every 5 \
+            --keep-old-every 20 \
+            --min-raw-for-dropped-check 25 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_ci.json
+
+      - name: Generate strict citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat compaction window report
+        run: |
+          node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js \
+            --heartbeat-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.jsonl \
+            --compacted-jsonl citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.compacted.jsonl \
+            --last 20 \
+            --strict \
+            --json-out citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_ci.json
+
+      - name: Upload citizen preset contract artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract
+          path: citizen_preset_contract_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset codec parity artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-codec-parity
+          path: citizen_preset_codec_parity_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset codec sync-state artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-codec-sync
+          path: citizen_preset_codec_sync_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle
+          path: citizen_preset_contract_bundle_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history
+          path: |
+            citizen_preset_contract_bundle_history_ci.json
+            citizen_preset_contract_bundle_history_ci.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history window artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-window
+          path: citizen_preset_contract_bundle_history_window_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history compaction artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-compaction
+          path: |
+            citizen_preset_contract_bundle_history_compaction_ci.json
+            citizen_preset_contract_bundle_history_ci.compacted.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo
+          path: citizen_preset_contract_bundle_history_slo_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest
+          path: citizen_preset_contract_bundle_history_slo_digest_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat
+          path: |
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.json
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat window artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-window
+          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_window_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction
+          path: |
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_ci.json
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_ci.compacted.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction window artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction-window
+          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction window digest artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction-window-digest
+          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction-window-digest-heartbeat
+          path: |
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.json
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat window artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction-window-digest-heartbeat-window
+          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window_ci.json
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat compaction artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction-window-digest-heartbeat-compaction
+          path: |
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_ci.json
+            citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_ci.compacted.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload citizen preset contract bundle history SLO digest heartbeat compaction window digest heartbeat compaction window artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: citizen-preset-contract-bundle-history-slo-digest-heartbeat-compaction-window-digest-heartbeat-compaction-window
+          path: citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_ci.json
+          if-no-files-found: ignore
+
   tracker-gate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -49,6 +390,551 @@ jobs:
             --tracker docs/etl/e2e-scrape-load-tracker.md \
             --fail-on-done-zero-real
 
+  liberty-focus-gate-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run liberty focus gate unit tests
+        run: |
+          python3 -m unittest tests.test_report_liberty_restrictions_status tests.test_report_liberty_focus_scope_guard tests.test_report_liberty_restrictions_status_heartbeat tests.test_report_liberty_restrictions_status_heartbeat_window tests.test_report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat tests.test_report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat_window -q
+
+      - name: Build liberty-focus fixture DB
+        env:
+          DB_PATH: etl/data/staging/politicos-es.ci-liberty-focus.db
+          SNAPSHOT_DATE: 2026-02-23
+        run: |
+          rm -f "$DB_PATH"
+          PYTHONPATH=. python3 scripts/ingestar_parlamentario_es.py init-db --db "$DB_PATH"
+          PYTHONPATH=. python3 scripts/import_sanction_norms_seed.py \
+            --db "$DB_PATH" \
+            --snapshot-date "$SNAPSHOT_DATE" \
+            --out liberty_focus_seed_import_norms_ci.json
+          PYTHONPATH=. python3 scripts/import_liberty_restrictions_seed.py \
+            --db "$DB_PATH" \
+            --snapshot-date "$SNAPSHOT_DATE" \
+            --out liberty_focus_seed_import_restrictions_ci.json
+
+      - name: Assert focus gate strict failure path
+        env:
+          DB_PATH: etl/data/staging/politicos-es.ci-liberty-focus.db
+        run: |
+          set +e
+          PYTHONPATH=. python3 scripts/report_liberty_restrictions_status.py \
+            --db "$DB_PATH" \
+            --enforce-gate \
+            --norms-classified-min 1.1 \
+            --out liberty_focus_gate_fail_ci.json \
+            > liberty_focus_gate_fail_ci.log 2>&1
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+
+      - name: Enforce liberty focus gate
+        env:
+          DB_PATH: etl/data/staging/politicos-es.ci-liberty-focus.db
+        run: |
+          PYTHONPATH=. python3 scripts/report_liberty_restrictions_status.py \
+            --db "$DB_PATH" \
+            --enforce-gate \
+            --out liberty_focus_gate_pass_ci.json
+
+      - name: Build changed paths file for focus scope guard
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+          else
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          fi
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ]; then
+            base="$(git rev-list --max-parents=0 HEAD | tail -n 1)"
+          fi
+          git diff --name-only "$base" "$head" > liberty_focus_changed_paths_ci.txt || true
+
+      - name: Assert focus scope guard strict failure path
+        run: |
+          cat > liberty_focus_changed_paths_fail_ci.txt <<'EOF'
+          ui/citizen/index.html
+          EOF
+          set +e
+          PYTHONPATH=. python3 scripts/report_liberty_focus_scope_guard.py \
+            --status-json liberty_focus_gate_fail_ci.json \
+            --changed-paths-file liberty_focus_changed_paths_fail_ci.txt \
+            --strict \
+            --out liberty_focus_scope_fail_ci.json \
+            > liberty_focus_scope_fail_ci.log 2>&1
+          rc=$?
+          set -e
+          test "$rc" -eq 4
+
+      - name: Enforce liberty focus scope guard
+        run: |
+          PYTHONPATH=. python3 scripts/report_liberty_focus_scope_guard.py \
+            --status-json liberty_focus_gate_pass_ci.json \
+            --changed-paths-file liberty_focus_changed_paths_ci.txt \
+            --strict \
+            --out liberty_focus_scope_pass_ci.json
+
+      - name: Append liberty focus gate heartbeat
+        run: |
+          PYTHONPATH=. python3 scripts/report_liberty_restrictions_status_heartbeat.py \
+            --status-json liberty_focus_gate_pass_ci.json \
+            --heartbeat-jsonl liberty_focus_gate_heartbeat_ci.jsonl \
+            --strict \
+            --out liberty_focus_gate_heartbeat_ci.json
+
+      - name: Enforce liberty focus gate heartbeat window
+        run: |
+          PYTHONPATH=. python3 scripts/report_liberty_restrictions_status_heartbeat_window.py \
+            --heartbeat-jsonl liberty_focus_gate_heartbeat_ci.jsonl \
+            --last 20 \
+            --max-failed 0 \
+            --max-failed-rate-pct 0 \
+            --max-focus-gate-failed 0 \
+            --max-focus-gate-failed-rate-pct 0 \
+            --max-norms-classified-gate-failed 0 \
+            --max-fragments-irlc-gate-failed 0 \
+            --max-fragments-accountability-gate-failed 0 \
+            --strict \
+            --out liberty_focus_gate_heartbeat_window_ci.json
+
+      - name: Upload liberty focus gate artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: liberty-focus-gate-contract
+          path: |
+            liberty_focus_seed_import_norms_ci.json
+            liberty_focus_seed_import_restrictions_ci.json
+            liberty_focus_gate_fail_ci.json
+            liberty_focus_gate_fail_ci.log
+            liberty_focus_gate_pass_ci.json
+            liberty_focus_changed_paths_ci.txt
+            liberty_focus_changed_paths_fail_ci.txt
+            liberty_focus_scope_fail_ci.json
+            liberty_focus_scope_fail_ci.log
+            liberty_focus_scope_pass_ci.json
+            liberty_focus_gate_heartbeat_ci.jsonl
+            liberty_focus_gate_heartbeat_ci.json
+            liberty_focus_gate_heartbeat_window_ci.json
+          if-no-files-found: ignore
+
+  initdoc-actionable-tail-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run initdoc actionable export unit tests
+        run: |
+          python3 -m unittest tests.test_export_missing_initiative_doc_urls tests.test_report_initdoc_actionable_tail_contract tests.test_report_initdoc_actionable_tail_digest tests.test_report_initdoc_actionable_tail_digest_heartbeat tests.test_report_initdoc_actionable_tail_digest_heartbeat_window tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_window tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window tests.test_report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest tests.test_graph_ui_server_initdoc_tail -q
+
+      - name: Build actionable-tail fixture DB
+        run: |
+          python3 - <<'PY'
+          import sqlite3
+
+          conn = sqlite3.connect("initdoc_actionable_contract.db")
+          conn.executescript(
+              """
+              CREATE TABLE parl_initiatives (
+                initiative_id TEXT PRIMARY KEY,
+                source_id TEXT
+              );
+              CREATE TABLE parl_initiative_documents (
+                initiative_document_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                initiative_id TEXT,
+                doc_kind TEXT,
+                doc_url TEXT,
+                source_record_pk INTEGER
+              );
+              CREATE TABLE text_documents (
+                source_record_pk INTEGER,
+                source_id TEXT
+              );
+              CREATE TABLE document_fetches (
+                doc_url TEXT,
+                last_http_status INTEGER,
+                attempts INTEGER,
+                fetched_ok INTEGER,
+                last_attempt_at TEXT
+              );
+              """
+          )
+          conn.executemany(
+              "INSERT INTO parl_initiatives(initiative_id, source_id) VALUES (?, ?)",
+              [
+                  ("senado:leg15:exp:600/000901", "senado_iniciativas"),
+                  ("senado:leg15:exp:600/000902", "senado_iniciativas"),
+              ],
+          )
+          conn.executemany(
+              """
+              INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+              VALUES (?, ?, ?, ?)
+              """,
+              [
+                  (
+                      "senado:leg15:exp:600/000901",
+                      "bocg",
+                      "https://www.senado.es/legis15/expedientes/600/enmiendas/global_enmiendas_vetos_15_600000901.xml",
+                      None,
+                  ),
+                  (
+                      "senado:leg15:exp:600/000902",
+                      "bocg",
+                      "https://www.senado.es/legis15/expedientes/600/enmiendas/global_enmiendas_vetos_15_600000902.xml",
+                      None,
+                  ),
+                  (
+                      "senado:leg15:exp:600/000902",
+                      "bocg",
+                      "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=600&numEx=000902",
+                      902,
+                  ),
+              ],
+          )
+          conn.execute(
+              "INSERT INTO text_documents(source_record_pk, source_id) VALUES (?, ?)",
+              (902, "parl_initiative_docs"),
+          )
+          conn.commit()
+          conn.close()
+          PY
+
+      - name: Assert strict-empty fails when actionable rows exist
+        run: |
+          set +e
+          python3 scripts/export_missing_initiative_doc_urls.py \
+            --db initdoc_actionable_contract.db \
+            --initiative-source-ids senado_iniciativas \
+            --only-actionable-missing \
+            --strict-empty \
+            --format csv \
+            --out initdoc_actionable_nonempty.csv \
+            > initdoc_actionable_nonempty.log 2>&1
+          rc=$?
+          set -e
+          test "$rc" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_contract.py \
+            --db initdoc_actionable_contract.db \
+            --initiative-source-ids senado_iniciativas \
+            --strict \
+            --out initdoc_actionable_nonempty_contract.json \
+            > initdoc_actionable_nonempty_contract.log 2>&1
+          rc_contract=$?
+          set -e
+          test "$rc_contract" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest.py \
+            --contract-json initdoc_actionable_nonempty_contract.json \
+            --strict \
+            --out initdoc_actionable_nonempty_digest.json \
+            > initdoc_actionable_nonempty_digest.log 2>&1
+          rc_digest=$?
+          set -e
+          test "$rc_digest" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat.py \
+            --digest-json initdoc_actionable_nonempty_digest.json \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat.json \
+            > initdoc_actionable_nonempty_heartbeat.log 2>&1
+          rc_hb=$?
+          set -e
+          test "$rc_hb" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_window.py \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_window.json \
+            > initdoc_actionable_nonempty_heartbeat_window.log 2>&1
+          rc_hb_window=$?
+          set -e
+          test "$rc_hb_window" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction.py \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_nonempty_heartbeat.compacted.jsonl \
+            --keep-recent 100 \
+            --keep-mid-span 0 \
+            --keep-mid-every 5 \
+            --keep-old-every 20 \
+            --min-raw-for-dropped-check 1 \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction.log 2>&1
+          rc_hb_compact=$?
+          set -e
+          test "$rc_hb_compact" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window.py \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_nonempty_missing.compacted.jsonl \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window.log 2>&1
+          rc_hb_compact_window=$?
+          set -e
+          test "$rc_hb_compact_window" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest.py \
+            --compaction-window-json initdoc_actionable_nonempty_heartbeat_compaction_window.json \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window_digest.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window_digest.log 2>&1
+          rc_hb_compact_window_digest=$?
+          set -e
+          test "$rc_hb_compact_window_digest" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.py \
+            --digest-json initdoc_actionable_nonempty_heartbeat_compaction_window_digest.json \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.log 2>&1
+          rc_hb_compact_window_digest_heartbeat=$?
+          set -e
+          test "$rc_hb_compact_window_digest_heartbeat" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_window.py \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_window.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_window.log 2>&1
+          rc_hb_compact_window_digest_heartbeat_window=$?
+          set -e
+          test "$rc_hb_compact_window_digest_heartbeat_window" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction.py \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl \
+            --keep-recent 100 \
+            --keep-mid-span 0 \
+            --keep-mid-every 5 \
+            --keep-old-every 20 \
+            --min-raw-for-dropped-check 1 \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction.log 2>&1
+          rc_hb_compact_window_digest_heartbeat_compaction=$?
+          set -e
+          test "$rc_hb_compact_window_digest_heartbeat_compaction" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.py \
+            --heartbeat-jsonl initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_missing.compacted.jsonl \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window.log 2>&1
+          rc_hb_compact_window_digest_heartbeat_compaction_window=$?
+          set -e
+          test "$rc_hb_compact_window_digest_heartbeat_compaction_window" -eq 4
+          set +e
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.py \
+            --compaction-window-json initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window.json \
+            --strict \
+            --out initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.json \
+            > initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.log 2>&1
+          rc_hb_compact_window_digest_heartbeat_compaction_window_digest=$?
+          set -e
+          test "$rc_hb_compact_window_digest_heartbeat_compaction_window_digest" -eq 4
+
+      - name: Convert remaining actionable row into redundant-global case
+        run: |
+          python3 - <<'PY'
+          import sqlite3
+
+          conn = sqlite3.connect("initdoc_actionable_contract.db")
+          conn.execute(
+              """
+              INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+              VALUES (?, ?, ?, ?)
+              """,
+              (
+                  "senado:leg15:exp:600/000901",
+                  "bocg",
+                  "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=600&numEx=000901",
+                  901,
+              ),
+          )
+          conn.execute(
+              "INSERT INTO text_documents(source_record_pk, source_id) VALUES (?, ?)",
+              (901, "parl_initiative_docs"),
+          )
+          conn.commit()
+          conn.close()
+          PY
+
+      - name: Assert strict-empty passes when actionable queue is empty
+        run: |
+          python3 scripts/export_missing_initiative_doc_urls.py \
+            --db initdoc_actionable_contract.db \
+            --initiative-source-ids senado_iniciativas \
+            --only-actionable-missing \
+            --strict-empty \
+            --format csv \
+            --out initdoc_actionable_empty.csv \
+            > initdoc_actionable_empty.log 2>&1
+          test "$(wc -l < initdoc_actionable_empty.csv)" -eq 1
+          python3 scripts/report_initdoc_actionable_tail_contract.py \
+            --db initdoc_actionable_contract.db \
+            --initiative-source-ids senado_iniciativas \
+            --strict \
+            --out initdoc_actionable_empty_contract.json \
+            > initdoc_actionable_empty_contract.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest.py \
+            --contract-json initdoc_actionable_empty_contract.json \
+            --strict \
+            --out initdoc_actionable_empty_digest.json \
+            > initdoc_actionable_empty_digest.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat.py \
+            --digest-json initdoc_actionable_empty_digest.json \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat.json \
+            > initdoc_actionable_empty_heartbeat.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_window.py \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_window.json \
+            > initdoc_actionable_empty_heartbeat_window.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction.py \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_empty_heartbeat.compacted.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction.json \
+            > initdoc_actionable_empty_heartbeat_compaction.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window.py \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_empty_heartbeat.compacted.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest.py \
+            --compaction-window-json initdoc_actionable_empty_heartbeat_compaction_window.json \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window_digest.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window_digest.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.py \
+            --digest-json initdoc_actionable_empty_heartbeat_compaction_window_digest.json \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_window.py \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_window.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_window.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction.py \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.py \
+            --heartbeat-jsonl initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.jsonl \
+            --compacted-jsonl initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window.log 2>&1
+          python3 scripts/report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.py \
+            --compaction-window-json initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window.json \
+            --strict \
+            --out initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.json \
+            > initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.log 2>&1
+
+      - name: Upload initdoc actionable-tail contract artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: initdoc-actionable-tail-contract
+          path: |
+            initdoc_actionable_nonempty.csv
+            initdoc_actionable_nonempty.log
+            initdoc_actionable_nonempty_contract.json
+            initdoc_actionable_nonempty_contract.log
+            initdoc_actionable_nonempty_digest.json
+            initdoc_actionable_nonempty_digest.log
+            initdoc_actionable_nonempty_heartbeat.jsonl
+            initdoc_actionable_nonempty_heartbeat.json
+            initdoc_actionable_nonempty_heartbeat.log
+            initdoc_actionable_nonempty_heartbeat_window.json
+            initdoc_actionable_nonempty_heartbeat_window.log
+            initdoc_actionable_nonempty_heartbeat.compacted.jsonl
+            initdoc_actionable_nonempty_heartbeat_compaction.json
+            initdoc_actionable_nonempty_heartbeat_compaction.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.jsonl
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_window.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_window.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window.log
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.json
+            initdoc_actionable_nonempty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.log
+            initdoc_actionable_empty.csv
+            initdoc_actionable_empty.log
+            initdoc_actionable_empty_contract.json
+            initdoc_actionable_empty_contract.log
+            initdoc_actionable_empty_digest.json
+            initdoc_actionable_empty_digest.log
+            initdoc_actionable_empty_heartbeat.jsonl
+            initdoc_actionable_empty_heartbeat.json
+            initdoc_actionable_empty_heartbeat.log
+            initdoc_actionable_empty_heartbeat_window.json
+            initdoc_actionable_empty_heartbeat_window.log
+            initdoc_actionable_empty_heartbeat.compacted.jsonl
+            initdoc_actionable_empty_heartbeat_compaction.json
+            initdoc_actionable_empty_heartbeat_compaction.log
+            initdoc_actionable_empty_heartbeat_compaction_window.json
+            initdoc_actionable_empty_heartbeat_compaction_window.log
+            initdoc_actionable_empty_heartbeat_compaction_window_digest.json
+            initdoc_actionable_empty_heartbeat_compaction_window_digest.log
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.jsonl
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.json
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.log
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_window.json
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_window.log
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction.json
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction.log
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window.json
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window.log
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.json
+            initdoc_actionable_empty_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest.log
+          if-no-files-found: ignore
+
   vote-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -85,3 +971,34 @@ jobs:
           DB_PATH: etl/data/staging/politicos-es.ci-votes-smoke.db
         run: |
           python3 scripts/etl_smoke_votes.py --db "$DB_PATH"
+
+  hf-quality-contract:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run HF publish/verify unit tests
+        run: |
+          python3 -m unittest tests.test_publicar_hf_snapshot tests.test_verify_hf_snapshot_quality -q
+
+      - name: Verify HF remote quality contract
+        run: |
+          python3 scripts/verify_hf_snapshot_quality.py \
+            --dataset-repo JesusIC/vota-con-la-chola-data \
+            --timeout 25 \
+            --json-out hf_remote_quality_verify_ci.json
+
+      - name: Upload HF quality verification artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hf-remote-quality-verify
+          path: hf_remote_quality_verify_ci.json
