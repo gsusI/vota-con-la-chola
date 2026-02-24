@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 436,
+    "doc_links_seen": 436,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000153&legis=10 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000154&legis=10 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000155&legis=10 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000156&legis=10 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000072 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000073 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000074 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000076 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000077 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000079 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000080 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000081 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000082 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000083 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000084 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000085 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000086 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000096 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000097 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000099 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000100 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000101 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000102 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000103 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000104 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000105 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000098&legis=10 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000056 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000057 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000058 -> HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 436,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 350,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 436
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

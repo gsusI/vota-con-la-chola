@@ -1,0 +1,27 @@
+{
+  "documents": {
+    "candidate_urls": 4228,
+    "doc_links_seen": 4228,
+    "dry_run": false,
+    "failures": [],
+    "fetched_ok": 2,
+    "initiative_documents_upserted": 4228,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 2114,
+    "skipped_existing": 4226,
+    "skipped_forbidden": 2258,
+    "text_documents_upserted": 2,
+    "urls_to_fetch": 2
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

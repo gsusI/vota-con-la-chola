@@ -1,0 +1,29 @@
+{
+  "documents": {
+    "candidate_urls": 120,
+    "doc_links_seen": 120,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000063 -> TimeoutError: The read operation timed out"
+    ],
+    "fetched_ok": 119,
+    "initiative_documents_upserted": 120,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 60,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 119,
+    "urls_to_fetch": 120
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

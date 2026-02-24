@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 400,
+    "doc_links_seen": 400,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000001.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000002.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000003.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000004.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000006.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000007.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000008.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000009.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000010.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000011.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000012.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000013.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000014.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000015.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000016.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000017.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000018.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000019.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/620/xml/INI-3-620000020.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000001.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000002.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000003.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000004.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000005.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000006.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000007.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000008.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000009.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000010.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=http://www.senado.es/legis10/expedientes/621/xml/INI-3-621000011.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 400,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 200,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 400
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

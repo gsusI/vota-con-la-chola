@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 436,
+    "doc_links_seen": 436,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000005.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000006.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000007.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000008.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000009.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000010.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000011.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000012.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000013.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000014.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000015.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000016.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000017.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000018.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000019.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000020.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000021.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000022.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000023.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000024.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000025.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000026.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000027.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000028.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000029.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000030.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000031.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000032.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000033.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000034.xml -> HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 436,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 350,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 436
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

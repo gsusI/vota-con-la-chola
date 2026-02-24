@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "failures": [],
+    "passed": true,
+    "thresholds": {
+      "events_with_date_pct": 0.95,
+      "events_with_initiative_link_pct": 0.95,
+      "events_with_theme_pct": 0.95,
+      "events_with_totals_pct": 0.95,
+      "member_votes_with_person_id_pct": 0.9
+    }
+  },
+  "initiatives": {
+    "gate": {
+      "failures": [],
+      "passed": true,
+      "thresholds": {
+        "initiatives_linked_to_votes_pct": 0.0,
+        "initiatives_with_expediente_pct": 0.7,
+        "initiatives_with_legislature_pct": 0.5,
+        "initiatives_with_title_pct": 0.9
+      }
+    },
+    "kpis": {
+      "by_source": {
+        "congreso_iniciativas": {
+          "initiatives_linked_to_votes": 104,
+          "initiatives_linked_to_votes_pct": 0.24242424242424243,
+          "initiatives_linked_to_votes_with_downloaded_docs": 104,
+          "initiatives_linked_to_votes_with_downloaded_docs_pct": 1.0,
+          "initiatives_total": 429,
+          "initiatives_with_doc_links": 399,
+          "initiatives_with_doc_links_pct": 0.9300699300699301,
+          "initiatives_with_downloaded_docs": 399,
+          "initiatives_with_downloaded_docs_pct": 0.9300699300699301,
+          "initiatives_with_expediente": 429,
+          "initiatives_with_expediente_pct": 1.0,
+          "initiatives_with_legislature": 394,
+          "initiatives_with_legislature_pct": 0.9184149184149184,
+          "initiatives_with_title": 429,
+          "initiatives_with_title_pct": 1.0
+        },
+        "senado_iniciativas": {
+          "initiatives_linked_to_votes": 647,
+          "initiatives_linked_to_votes_pct": 0.1793734405322983,
+          "initiatives_linked_to_votes_with_downloaded_docs": 647,
+          "initiatives_linked_to_votes_with_downloaded_docs_pct": 1.0,
+          "initiatives_total": 3607,
+          "initiatives_with_doc_links": 3607,
+          "initiatives_with_doc_links_pct": 1.0,
+          "initiatives_with_downloaded_docs": 3607,
+          "initiatives_with_downloaded_docs_pct": 1.0,
+          "initiatives_with_expediente": 3607,
+          "initiatives_with_expediente_pct": 1.0,
+          "initiatives_with_legislature": 3607,
+          "initiatives_with_legislature_pct": 1.0,
+          "initiatives_with_title": 3607,
+          "initiatives_with_title_pct": 1.0
+        }
+      },
+      "initiatives_linked_to_votes": 751,
+      "initiatives_linked_to_votes_pct": 0.18607532210109018,
+      "initiatives_linked_to_votes_with_downloaded_docs": 751,
+      "initiatives_linked_to_votes_with_downloaded_docs_pct": 1.0,
+      "initiatives_total": 4036,
+      "initiatives_with_doc_links": 4006,
+      "initiatives_with_doc_links_pct": 0.9925668979187314,
+      "initiatives_with_downloaded_docs": 4006,
+      "initiatives_with_downloaded_docs_pct": 0.9925668979187314,
+      "initiatives_with_expediente": 4036,
+      "initiatives_with_expediente_pct": 1.0,
+      "initiatives_with_legislature": 4001,
+      "initiatives_with_legislature_pct": 0.9913280475718533,
+      "initiatives_with_title": 4036,
+      "initiatives_with_title_pct": 1.0,
+      "source_ids": [
+        "congreso_iniciativas",
+        "senado_iniciativas"
+      ]
+    },
+    "source_ids": [
+      "congreso_iniciativas",
+      "senado_iniciativas"
+    ]
+  },
+  "kpis": {
+    "by_source": {
+      "congreso_votaciones": {
+        "events_total": 2823,
+        "events_with_date": 2823,
+        "events_with_date_pct": 1.0,
+        "events_with_initiative_link": 2823,
+        "events_with_initiative_link_pct": 1.0,
+        "events_with_nominal_vote": 1602,
+        "events_with_nominal_vote_pct": 0.5674814027630181,
+        "events_with_official_initiative_link": 685,
+        "events_with_official_initiative_link_pct": 0.2426496634785689,
+        "events_with_theme": 2823,
+        "events_with_theme_pct": 1.0,
+        "events_with_totals": 2823,
+        "events_with_totals_pct": 1.0,
+        "latest_events_total": 1665,
+        "latest_events_with_topic_evidence": 1230,
+        "latest_events_with_topic_evidence_pct": 0.7387387387387387,
+        "latest_legislature": "15",
+        "member_votes_total": 557922,
+        "member_votes_with_person_id": 531812,
+        "member_votes_with_person_id_pct": 0.9532013435569847
+      },
+      "senado_votaciones": {
+        "events_total": 5534,
+        "events_with_date": 5534,
+        "events_with_date_pct": 1.0,
+        "events_with_initiative_link": 5534,
+        "events_with_initiative_link_pct": 1.0,
+        "events_with_nominal_vote": 5412,
+        "events_with_nominal_vote_pct": 0.9779544633176726,
+        "events_with_official_initiative_link": 5534,
+        "events_with_official_initiative_link_pct": 1.0,
+        "events_with_theme": 5534,
+        "events_with_theme_pct": 1.0,
+        "events_with_totals": 5534,
+        "events_with_totals_pct": 1.0,
+        "latest_events_total": 100,
+        "latest_events_with_topic_evidence": 97,
+        "latest_events_with_topic_evidence_pct": 0.97,
+        "latest_legislature": "15",
+        "member_votes_total": 1220448,
+        "member_votes_with_person_id": 1211778,
+        "member_votes_with_person_id_pct": 0.9928960512860852
+      }
+    },
+    "events_total": 8357,
+    "events_with_date": 8357,
+    "events_with_date_pct": 1.0,
+    "events_with_initiative_link": 8357,
+    "events_with_initiative_link_pct": 1.0,
+    "events_with_nominal_vote": 7014,
+    "events_with_nominal_vote_pct": 0.8392963982290296,
+    "events_with_official_initiative_link": 6219,
+    "events_with_official_initiative_link_pct": 0.7441665669498624,
+    "events_with_theme": 8357,
+    "events_with_theme_pct": 1.0,
+    "events_with_totals": 8357,
+    "events_with_totals_pct": 1.0,
+    "latest_events_total": 1765,
+    "latest_events_with_topic_evidence": 1327,
+    "latest_events_with_topic_evidence_pct": 0.7518413597733711,
+    "member_votes_total": 1778370,
+    "member_votes_with_person_id": 1743590,
+    "member_votes_with_person_id_pct": 0.980442765003908,
+    "source_ids": [
+      "congreso_votaciones",
+      "senado_votaciones"
+    ]
+  },
+  "source_ids": [
+    "congreso_votaciones",
+    "senado_votaciones"
+  ]
+}

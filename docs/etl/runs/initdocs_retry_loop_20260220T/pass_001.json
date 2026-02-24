@@ -1,0 +1,34 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 1,
+    "pages": [
+      {
+        "candidate_urls": 240,
+        "doc_links_seen": 240,
+        "dry_run": false,
+        "failures": [],
+        "fetched_ok": 120,
+        "initiative_documents_upserted": 240,
+        "initiative_source_ids": [
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 120,
+        "skipped_existing": 120,
+        "skipped_forbidden": 120,
+        "text_documents_upserted": 120,
+        "urls_to_fetch": 120
+      }
+    ],
+    "stop_reason": "max_loops"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

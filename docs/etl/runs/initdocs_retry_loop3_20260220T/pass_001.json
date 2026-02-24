@@ -1,0 +1,55 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 1,
+    "pages": [
+      {
+        "candidate_urls": 40,
+        "doc_links_seen": 40,
+        "dry_run": false,
+        "failures": [
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000141 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000142 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000143 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000144 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000145 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000146 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000147 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000148 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000149 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000150 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000151 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000152 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000153 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000154 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000155 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000156 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000157 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000158 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000159 -> HTTPError: HTTP Error 500: Internal Server Error",
+          "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000160 -> HTTPError: HTTP Error 500: Internal Server Error"
+        ],
+        "fetched_ok": 0,
+        "initiative_documents_upserted": 40,
+        "initiative_source_ids": [
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 20,
+        "skipped_existing": 20,
+        "skipped_forbidden": 20,
+        "text_documents_upserted": 0,
+        "urls_to_fetch": 20
+      }
+    ],
+    "stop_reason": "no_progress"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

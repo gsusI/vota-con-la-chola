@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 366,
+    "doc_links_seen": 366,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000005&legis=12 -> TimeoutError: The read operation timed out",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000098 -> RemoteDisconnected: Remote end closed connection without response",
+      "url=https://www.senado.es/legis14/expedientes/620/enmiendas/global_enmiendas_vetos_14_620000001.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000069.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000070.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000071.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000072.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000073.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000074.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000076.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000077.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000079.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000080.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000081.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000082.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000083.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000084.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000085.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000086.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000096.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000097.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000098.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000099.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000100.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000101.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000102.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000103.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000104.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000105.xml -> HTTPError: HTTP Error 404: Not Found",
+      "url=https://www.senado.es/legis14/expedientes/626/enmiendas/global_enmiendas_vetos_14_626000008.xml -> HTTPError: HTTP Error 404: Not Found"
+    ],
+    "fetched_ok": 262,
+    "initiative_documents_upserted": 366,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 220,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 262,
+    "urls_to_fetch": 366
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

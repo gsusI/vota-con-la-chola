@@ -1,0 +1,29 @@
+{
+  "documents": {
+    "candidate_urls": 780,
+    "doc_links_seen": 780,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis6/expedientes/621/xml/INI-3-621000171.xml -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 780,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 761,
+    "skipped_existing": 779,
+    "skipped_forbidden": 779,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 1
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

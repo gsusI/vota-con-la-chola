@@ -1,0 +1,29 @@
+{
+  "documents": {
+    "candidate_urls": 4792,
+    "doc_links_seen": 4792,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=8&id1=621&id2=000085 -> HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "fetched_ok": 1,
+    "initiative_documents_upserted": 4792,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 2396,
+    "skipped_existing": 4790,
+    "skipped_forbidden": 2906,
+    "text_documents_upserted": 1,
+    "urls_to_fetch": 2
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "documents": {
+    "candidate_urls": 10,
+    "doc_links_seen": 10,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000044 -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000045 -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000046 -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000047 -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=5&id1=610&id2=000048 -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 10,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 5,
+    "skipped_existing": 5,
+    "skipped_forbidden": 5,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 5
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

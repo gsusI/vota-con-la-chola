@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 436,
+    "doc_links_seen": 436,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis7/expedientes/610/xml/INI-3-610000285.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/610/xml/INI-3-610000286.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/610/xml/INI-3-610000287.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/610/xml/INI-3-610000288.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/610/xml/INI-3-610000289.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000003.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000004.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000005.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000006.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000007.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/620/xml/INI-3-620000008.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000001.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000002.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000003.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000004.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000041.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis7/expedientes/621/xml/INI-3-621000042.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000269 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000270 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000271 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000272 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000273 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000274 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000275 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000276 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000277 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000278 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000279 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=610&id2=000282 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=7&id1=621&id2=000099 -> HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 436,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 350,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 436
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

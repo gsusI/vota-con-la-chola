@@ -1,0 +1,570 @@
+{
+  "schema_version": "sanction_norms_seed_v1",
+  "generated_at": "2026-02-23T00:00:00Z",
+  "notes": "Semilla cerrada inicial de normas sancionadoras frecuentes. Base legal exacta por boe_id; detalle fino de articulado se completa en siguientes iteraciones.",
+  "norms": [
+    {
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "scope": "nacional",
+      "organismo_competente": "DGT y jefaturas provinciales de trafico",
+      "incidence_hypothesis": "Alta incidencia por volumen de sanciones de trafico en uso diario.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso",
+        "rango_importe"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque sancionador principal",
+          "fragment_title": "Infracciones y sanciones",
+          "conducta_sancionada": "Infracciones de circulacion, seguridad vial y obligaciones de conductores.",
+          "organo_competente": "DGT y jefaturas provinciales de trafico",
+          "via_recurso": "Reposicion administrativa y contencioso-administrativo",
+          "importe_min_eur": 0,
+          "importe_max_eur": 1000
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "propose",
+          "actor_label": "Gobierno de Espana",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+          "evidence_date": "2015-10-31",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 6/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley sobre Tráfico, Circulación de Vehículos a Motor y Seguridad Vial.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor proponente en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2015-11722",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+              "evidence_date": "2015-10-31",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 6/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley sobre Tráfico, Circulación de Vehículos a Motor y Seguridad Vial.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor proponente en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "approve",
+          "actor_label": "Cortes Generales",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+          "evidence_date": "2015-10-31",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 6/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley sobre Tráfico, Circulación de Vehículos a Motor y Seguridad Vial.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2015-11722",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+              "evidence_date": "2015-10-31",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 6/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley sobre Tráfico, Circulación de Vehículos a Motor y Seguridad Vial.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "deroga",
+          "relation_scope": "total",
+          "target_boe_id": "BOE-A-1990-6396",
+          "target_title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+          "evidence_date": "2015-10-31",
+          "evidence_quote": "Fuente BOE del texto refundido 2015 que reemplaza el texto articulado previo en materia de trafico."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "title": "Ley General Tributaria",
+      "scope": "nacional",
+      "organismo_competente": "AEAT y administraciones tributarias competentes",
+      "incidence_hypothesis": "Alta incidencia por sanciones tributarias sobre personas fisicas y pymes.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso",
+        "rango_importe"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque de infracciones tributarias",
+          "fragment_title": "Infracciones y sanciones tributarias",
+          "conducta_sancionada": "Incumplimientos de obligaciones tributarias materiales y formales.",
+          "organo_competente": "AEAT y organos tributarios autonómicos/locales segun competencia",
+          "via_recurso": "Reposicion y reclamacion economico-administrativa",
+          "importe_min_eur": 0,
+          "importe_max_eur": 100000
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "propose",
+          "actor_label": "Gobierno de Espana",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+          "evidence_date": "2003-12-23",
+          "evidence_quote": "Fuente BOE: \"Real Decreto 1428/2003, de 21 de noviembre, por el que se aprueba el Reglamento General de Circulación para la aplicación y desarrollo del texto articulado de la Ley sobre tráfico, circulación de vehículos a motor y seguridad vial, aprobado por el Real Decreto Legislativo 339/1990, de 2 de marzo.\" (publicada 2003-12-23); se usa como evidencia primaria del marco normativo atribuido al actor proponente en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2003-23514",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+              "evidence_date": "2003-12-23",
+              "evidence_quote": "Fuente BOE: \"Real Decreto 1428/2003, de 21 de noviembre, por el que se aprueba el Reglamento General de Circulación para la aplicación y desarrollo del texto articulado de la Ley sobre tráfico, circulación de vehículos a motor y seguridad vial, aprobado por el Real Decreto Legislativo 339/1990, de 2 de marzo.\" (publicada 2003-12-23); se usa como evidencia primaria del marco normativo atribuido al actor proponente en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "approve",
+          "actor_label": "Cortes Generales",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+          "evidence_date": "2003-12-23",
+          "evidence_quote": "Fuente BOE: \"Real Decreto 1428/2003, de 21 de noviembre, por el que se aprueba el Reglamento General de Circulación para la aplicación y desarrollo del texto articulado de la Ley sobre tráfico, circulación de vehículos a motor y seguridad vial, aprobado por el Real Decreto Legislativo 339/1990, de 2 de marzo.\" (publicada 2003-12-23); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2003-23514",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+              "evidence_date": "2003-12-23",
+              "evidence_quote": "Fuente BOE: \"Real Decreto 1428/2003, de 21 de noviembre, por el que se aprueba el Reglamento General de Circulación para la aplicación y desarrollo del texto articulado de la Ley sobre tráfico, circulación de vehículos a motor y seguridad vial, aprobado por el Real Decreto Legislativo 339/1990, de 2 de marzo.\" (publicada 2003-12-23); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "deroga",
+          "relation_scope": "total",
+          "target_boe_id": "BOE-A-1963-2490",
+          "target_title": "Ley General Tributaria de 1963.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+          "evidence_date": "2003-12-18",
+          "evidence_quote": "Fuente BOE de la Ley General Tributaria 58/2003, publicada con sustitucion del marco tributario previo."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "scope": "nacional",
+      "organismo_competente": "DGT y administraciones con competencia en trafico",
+      "incidence_hypothesis": "Incidencia recurrente en tramitacion de expedientes sancionadores de trafico.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque procedimental sancionador",
+          "fragment_title": "Instruccion y resolucion de expedientes",
+          "conducta_sancionada": "Reglas de tramitacion de sanciones de trafico.",
+          "organo_competente": "DGT y organos instructores/resolutores competentes",
+          "via_recurso": "Recursos administrativos y contencioso-administrativos"
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "delegate",
+          "actor_label": "Ministerio competente en trafico",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+          "evidence_date": "1994-04-21",
+          "evidence_quote": "Fuente BOE: \"Real Decreto 320/1994, de 25 de febrero, por el que se aprueba el Reglamento de procedimiento sancionador en materia de tráfico, circulación de vehículos a motor y seguridad vial.\" (publicada 1994-04-21); se usa como evidencia primaria de la habilitacion/delegacion competencial atribuida en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-1994-8985",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+              "evidence_date": "1994-04-21",
+              "evidence_quote": "Fuente BOE: \"Real Decreto 320/1994, de 25 de febrero, por el que se aprueba el Reglamento de procedimiento sancionador en materia de tráfico, circulación de vehículos a motor y seguridad vial.\" (publicada 1994-04-21); se usa como evidencia primaria de la habilitacion/delegacion competencial atribuida en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "enforce",
+          "actor_label": "DGT",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+          "evidence_date": "1994-04-21",
+          "evidence_quote": "Fuente BOE: \"Real Decreto 320/1994, de 25 de febrero, por el que se aprueba el Reglamento de procedimiento sancionador en materia de tráfico, circulación de vehículos a motor y seguridad vial.\" (publicada 1994-04-21); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-1994-8985",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+              "evidence_date": "1994-04-21",
+              "evidence_quote": "Fuente BOE: \"Real Decreto 320/1994, de 25 de febrero, por el que se aprueba el Reglamento de procedimiento sancionador en materia de tráfico, circulación de vehículos a motor y seguridad vial.\" (publicada 1994-04-21); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "desarrolla",
+          "relation_scope": "parcial",
+          "target_boe_id": "BOE-A-1990-6396",
+          "target_title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+          "evidence_date": "1994-04-21",
+          "evidence_quote": "Fuente BOE del reglamento de procedimiento sancionador dictado para aplicar y desarrollar la ley de trafico."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "title": "Referencia sancionadora BOE-A-2003-23186",
+      "scope": "nacional",
+      "organismo_competente": "Organismo estatal competente segun materia",
+      "incidence_hypothesis": "Referencia frecuente en flujos sancionadores de alta recurrencia ciudadana.",
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque sancionador principal",
+          "fragment_title": "Tipificacion y sanciones",
+          "conducta_sancionada": "Conductas sancionables definidas por la norma.",
+          "organo_competente": "Organo competente segun reparto legal",
+          "via_recurso": "Recursos administrativos y via contenciosa"
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "approve",
+          "actor_label": "Cortes Generales",
+          "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+          "evidence_date": "2003-12-18",
+          "evidence_quote": "Fuente BOE: \"Ley 58/2003, de 17 de diciembre, General Tributaria.\" (publicada 2003-12-18); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2003-23186",
+              "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+              "evidence_date": "2003-12-18",
+              "evidence_quote": "Fuente BOE: \"Ley 58/2003, de 17 de diciembre, General Tributaria.\" (publicada 2003-12-18); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "desarrolla",
+          "relation_scope": "parcial",
+          "target_boe_id": "BOE-A-2003-23514",
+          "target_title": "Ley General Tributaria.",
+          "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+          "evidence_date": "2003-12-18",
+          "evidence_quote": "Fuente BOE de la Ley 58/2003 usada como base legal directa de desarrollo en este lane semilla."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "title": "Regimen sancionador tributario (reglamento)",
+      "scope": "nacional",
+      "organismo_competente": "AEAT y administraciones tributarias competentes",
+      "incidence_hypothesis": "Incidencia relevante por desarrollo reglamentario de sanciones tributarias.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque procedimental y de graduacion",
+          "fragment_title": "Criterios y procedimiento",
+          "conducta_sancionada": "Aplicacion y graduacion de sanciones tributarias.",
+          "organo_competente": "AEAT",
+          "via_recurso": "Reclamacion economico-administrativa y contencioso-administrativo"
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "delegate",
+          "actor_label": "Ministerio de Hacienda",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+          "evidence_date": "2004-10-28",
+          "evidence_quote": "Fuente BOE: \"Real Decreto 2063/2004, de 15 de octubre, por el que se aprueba el Reglamento general del régimen sancionador tributario.\" (publicada 2004-10-28); se usa como evidencia primaria de la habilitacion/delegacion competencial atribuida en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2004-18398",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+              "evidence_date": "2004-10-28",
+              "evidence_quote": "Fuente BOE: \"Real Decreto 2063/2004, de 15 de octubre, por el que se aprueba el Reglamento general del régimen sancionador tributario.\" (publicada 2004-10-28); se usa como evidencia primaria de la habilitacion/delegacion competencial atribuida en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "enforce",
+          "actor_label": "AEAT",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+          "evidence_date": "2004-10-28",
+          "evidence_quote": "Fuente BOE: \"Real Decreto 2063/2004, de 15 de octubre, por el que se aprueba el Reglamento general del régimen sancionador tributario.\" (publicada 2004-10-28); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2004-18398",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+              "evidence_date": "2004-10-28",
+              "evidence_quote": "Fuente BOE: \"Real Decreto 2063/2004, de 15 de octubre, por el que se aprueba el Reglamento general del régimen sancionador tributario.\" (publicada 2004-10-28); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "desarrolla",
+          "relation_scope": "parcial",
+          "target_boe_id": "BOE-A-2003-23514",
+          "target_title": "Ley General Tributaria.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+          "evidence_date": "2004-10-28",
+          "evidence_quote": "Fuente BOE del reglamento general del regimen sancionador tributario dictado para desarrollo de la LGT."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "scope": "nacional",
+      "organismo_competente": "Ministerio del Interior y delegaciones/subdelegaciones",
+      "incidence_hypothesis": "Alta incidencia por sanciones administrativas en seguridad ciudadana.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso",
+        "rango_importe"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque de infracciones y sanciones",
+          "fragment_title": "Tipificacion y tramos de sancion",
+          "conducta_sancionada": "Conductas de seguridad ciudadana tipificadas como infraccion.",
+          "organo_competente": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+          "via_recurso": "Alzada/reposicion y contencioso-administrativo",
+          "importe_min_eur": 100,
+          "importe_max_eur": 600000
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "propose",
+          "actor_label": "Gobierno de Espana",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+          "evidence_date": "2015-10-31",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor proponente en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2015-11724",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+              "evidence_date": "2015-10-31",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor proponente en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "approve",
+          "actor_label": "Cortes Generales",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+          "evidence_date": "2015-10-31",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2015-11724",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+              "evidence_date": "2015-10-31",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.\" (publicada 2015-10-31); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "enforce",
+          "actor_label": "Ministerio del Interior",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+          "evidence_date": "2015-10-31",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.\" (publicada 2015-10-31); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2015-11724",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+              "evidence_date": "2015-10-31",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.\" (publicada 2015-10-31); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "deroga",
+          "relation_scope": "total",
+          "target_boe_id": "BOE-A-1992-6209",
+          "target_title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+          "evidence_date": "2015-03-31",
+          "evidence_quote": "Fuente BOE de la LO 4/2015, publicada para sustituir el marco organico previo de seguridad ciudadana."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "scope": "nacional",
+      "organismo_competente": "Inspeccion de Trabajo y Seguridad Social",
+      "incidence_hypothesis": "Incidencia relevante en materia laboral y de seguridad social.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso",
+        "rango_importe"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque de tipificacion laboral",
+          "fragment_title": "Infracciones y sanciones en el orden social",
+          "conducta_sancionada": "Incumplimientos empresariales en materia laboral y de seguridad social.",
+          "organo_competente": "ITSS y autoridad laboral competente",
+          "via_recurso": "Alzada/reposicion y contencioso-administrativo",
+          "importe_min_eur": 60,
+          "importe_max_eur": 225018
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "approve",
+          "actor_label": "Cortes Generales",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+          "evidence_date": "2000-08-08",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 5/2000, de 4 de agosto, por el que se aprueba el texto refundido de la Ley sobre Infracciones y Sanciones en el Orden Social.\" (publicada 2000-08-08); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2000-15060",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+              "evidence_date": "2000-08-08",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 5/2000, de 4 de agosto, por el que se aprueba el texto refundido de la Ley sobre Infracciones y Sanciones en el Orden Social.\" (publicada 2000-08-08); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla."
+            }
+          ]
+        },
+        {
+          "role": "enforce",
+          "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+          "evidence_date": "2000-08-08",
+          "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 5/2000, de 4 de agosto, por el que se aprueba el texto refundido de la Ley sobre Infracciones y Sanciones en el Orden Social.\" (publicada 2000-08-08); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2000-15060",
+              "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+              "evidence_date": "2000-08-08",
+              "evidence_quote": "Fuente BOE: \"Real Decreto Legislativo 5/2000, de 4 de agosto, por el que se aprueba el texto refundido de la Ley sobre Infracciones y Sanciones en el Orden Social.\" (publicada 2000-08-08); se usa como evidencia primaria de la competencia de enforcement atribuida en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "desarrolla",
+          "relation_scope": "parcial",
+          "target_boe_id": "BOE-A-1995-24292",
+          "target_title": "Ley 31/1995 de Prevencion de Riesgos Laborales.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+          "evidence_date": "2000-08-08",
+          "evidence_quote": "Fuente BOE del texto refundido sancionador laboral utilizado como desarrollo del bloque laboral-preventivo en este piloto."
+        }
+      ]
+    },
+    {
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "title": "Referencia sancionadora BOE-A-2015-3442",
+      "scope": "nacional",
+      "organismo_competente": "Organismo competente segun materia",
+      "incidence_hypothesis": "Referencia normativa de incidencia recurrente en expedientes sancionadores.",
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+      "evidence_required": [
+        "base_legal_fragment",
+        "organo_competente",
+        "via_recurso"
+      ],
+      "key_fragments": [
+        {
+          "fragment_type": "articulo",
+          "fragment_label": "Bloque sancionador principal",
+          "fragment_title": "Tipificacion y procedimiento",
+          "conducta_sancionada": "Conductas sancionables definidas en la norma.",
+          "organo_competente": "Organo competente segun distribucion legal",
+          "via_recurso": "Recursos administrativos y via contenciosa"
+        }
+      ],
+      "responsibility_hints": [
+        {
+          "role": "approve",
+          "actor_label": "Cortes Generales",
+          "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+          "evidence_date": "2015-03-31",
+          "evidence_quote": "Fuente BOE: \"Ley Orgánica 4/2015, de 30 de marzo, de protección de la seguridad ciudadana.\" (publicada 2015-03-31); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla.",
+          "evidence_items": [
+            {
+              "evidence_type": "boe_publicacion",
+              "source_id": "boe_api_legal",
+              "source_record_id": "BOE-A-2015-3442",
+              "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+              "evidence_date": "2015-03-31",
+              "evidence_quote": "Fuente BOE: \"Ley Orgánica 4/2015, de 30 de marzo, de protección de la seguridad ciudadana.\" (publicada 2015-03-31); se usa como evidencia primaria del marco normativo atribuido al actor aprobador en esta semilla."
+            }
+          ]
+        }
+      ],
+      "lineage_hints": [
+        {
+          "relation_type": "deroga",
+          "relation_scope": "total",
+          "target_boe_id": "BOE-A-1992-6209",
+          "target_title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+          "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+          "evidence_date": "2015-03-31",
+          "evidence_quote": "Fuente BOE de la LO 4/2015 usada como referencia de reemplazo del marco organico previo."
+        }
+      ]
+    }
+  ]
+}

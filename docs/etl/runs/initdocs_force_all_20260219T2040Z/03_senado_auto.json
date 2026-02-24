@@ -1,0 +1,65 @@
+{
+  "documents": {
+    "dry_run": false,
+    "loops_run": 1,
+    "pages": [
+      {
+        "candidate_urls": 8646,
+        "doc_links_seen": 8646,
+        "dry_run": false,
+        "failures": [
+          "url=http://www.senado.es/legis10/expedientes/605/enmiendas/global_enmiendas_vetos_10_605000002.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/605/xml/INI-3-605000001.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/605/xml/INI-3-605000002.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000001.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000002.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000003.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000004.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000005.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000006.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000007.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000008.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000009.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000010.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000011.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000012.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000013.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000014.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000015.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000016.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000017.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000018.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000019.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000020.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000021.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000022.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000023.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000024.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000025.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000026.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+          "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000027.xml -> URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+        ],
+        "fetched_ok": 0,
+        "initiative_documents_upserted": 8646,
+        "initiative_source_ids": [
+          "senado_iniciativas"
+        ],
+        "initiatives_seen": 3588,
+        "skipped_existing": 242,
+        "skipped_forbidden": 0,
+        "text_documents_upserted": 0,
+        "urls_to_fetch": 8404
+      }
+    ],
+    "stop_reason": "no_progress"
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "documents": {
+    "candidate_urls": 3586,
+    "doc_links_seen": 3586,
+    "dry_run": false,
+    "failures": [
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000019 -> HTTPError: HTTP Error 500: Internal Server Error"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 3586,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 1793,
+    "skipped_existing": 3585,
+    "skipped_forbidden": 1576,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 1
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}
