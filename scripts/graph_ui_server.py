@@ -33,6 +33,14 @@ UI_EXPLORER_VOTACIONES = BASE_DIR / "ui" / "graph" / "explorer-votaciones.html"
 UI_EXPLORER_SOURCES = BASE_DIR / "ui" / "graph" / "explorer-sources.html"
 UI_EXPLORER_TEMAS = BASE_DIR / "ui" / "graph" / "explorer-temas.html"
 UI_CITIZEN = BASE_DIR / "ui" / "citizen" / "index.html"
+UI_CITIZEN_PRESET_CODEC = BASE_DIR / "ui" / "citizen" / "preset_codec.js"
+UI_CITIZEN_ONBOARDING_FUNNEL = BASE_DIR / "ui" / "citizen" / "onboarding_funnel.js"
+UI_CITIZEN_FIRST_ANSWER_ACCELERATOR = BASE_DIR / "ui" / "citizen" / "first_answer_accelerator.js"
+UI_CITIZEN_UNKNOWN_EXPLAINABILITY = BASE_DIR / "ui" / "citizen" / "unknown_explainability.js"
+UI_CITIZEN_CROSS_METHOD_STABILITY = BASE_DIR / "ui" / "citizen" / "cross_method_stability.js"
+UI_CITIZEN_EVIDENCE_TRUST_PANEL = BASE_DIR / "ui" / "citizen" / "evidence_trust_panel.js"
+UI_CITIZEN_TAILWIND_MD3_CSS = BASE_DIR / "ui" / "citizen" / "tailwind_md3.generated.css"
+UI_CITIZEN_TAILWIND_MD3_TOKENS = BASE_DIR / "ui" / "citizen" / "tailwind_md3.tokens.json"
 UI_CITIZEN_CONCERNS = BASE_DIR / "ui" / "citizen" / "concerns_v1.json"
 GH_PAGES_DIR = BASE_DIR / "docs" / "gh-pages"
 GH_CITIZEN_DATA_DIR = GH_PAGES_DIR / "citizen" / "data"
@@ -42,6 +50,37 @@ MISMATCH_WAIVERS_PATH = BASE_DIR / "docs" / "etl" / "mismatch-waivers.json"
 IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
 ROADMAP_PATH = BASE_DIR / "docs" / "roadmap.md"
 ROADMAP_TECNICO_PATH = BASE_DIR / "docs" / "roadmap-tecnico.md"
+DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS = ("senado_iniciativas",)
+DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING = 0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING_PCT = 0.0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_PATH = (
+    BASE_DIR / "docs" / "etl" / "runs" / "initdoc_actionable_tail_digest_heartbeat.jsonl"
+)
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_LAST = 20
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED = 0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT = 0.0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED = 0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT = 0.0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACTED_PATH = (
+    BASE_DIR / "docs" / "etl" / "runs" / "initdoc_actionable_tail_digest_heartbeat.compacted.jsonl"
+)
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_LAST = 20
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_PATH = (
+    BASE_DIR / "docs" / "etl" / "runs" / "initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl"
+)
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_LAST = 20
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_FAILED = 0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT = 0.0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_DEGRADED = 0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT = 0.0
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACTED_PATH = (
+    BASE_DIR
+    / "docs"
+    / "etl"
+    / "runs"
+    / "initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl"
+)
+DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_WINDOW_LAST = 20
 
 # Dashboard mapping: phases -> tracker rows + explicit untracked items.
 # Keep this small and pragmatic; the tracker remains the single operational backlog.
@@ -472,12 +511,62 @@ LABEL_COLUMN_CANDIDATES = (
 
 COHERENCE_BUCKETS = {"overlap", "explicit", "coherent", "incoherent"}
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
+LOCAL_USER_SEGMENT_RE = re.compile(r"/Users/[^/\s]+")
+LOCAL_HOME_SEGMENT_RE = re.compile(r"/home/[^/\s]+")
 
 
 def safe_text(value: Any) -> str:
     if value is None:
         return ""
     return str(value).strip()
+
+
+def public_path_text(value: Any) -> str:
+    text = safe_text(value)
+    if not text:
+        return ""
+    path = Path(text)
+    if path.is_absolute():
+        try:
+            return path.relative_to(BASE_DIR).as_posix()
+        except ValueError:
+            # Keep external absolute paths out of public static payloads.
+            return "<redacted-path>"
+    return path.as_posix()
+
+
+def sanitize_public_text(value: Any) -> str:
+    text = safe_text(value)
+    if not text:
+        return ""
+    if text.lower().startswith("file://"):
+        # Local file-system provenance can leak workstation paths/usernames.
+        return ""
+
+    base_text = str(BASE_DIR)
+    if text.startswith(base_text):
+        text = public_path_text(text)
+    else:
+        text = text.replace(f"{base_text}/", "")
+        text = text.replace(base_text, ".")
+
+    text = EMAIL_RE.sub("<redacted-email>", text)
+    text = LOCAL_USER_SEGMENT_RE.sub("/Users/<redacted-user>", text)
+    text = LOCAL_HOME_SEGMENT_RE.sub("/home/<redacted-user>", text)
+    return text
+
+
+def sanitize_public_payload(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: sanitize_public_payload(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [sanitize_public_payload(item) for item in value]
+    if isinstance(value, tuple):
+        return [sanitize_public_payload(item) for item in value]
+    if isinstance(value, str):
+        return sanitize_public_text(value)
+    return value
 
 
 def is_municipal_level(level: Any) -> bool:
@@ -1461,6 +1550,282 @@ def compute_roadmap_status(tracker_items: list[dict[str, Any]]) -> dict[str, Any
     }
 
 
+def _build_initdoc_actionable_tail_payload(
+    conn: sqlite3.Connection,
+    *,
+    source_ids: tuple[str, ...] = DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS,
+    max_actionable_missing: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING,
+    max_actionable_missing_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_MAX_MISSING_PCT,
+) -> dict[str, Any]:
+    normalized_source_ids = [safe_text(sid) for sid in source_ids if safe_text(sid)]
+    if not normalized_source_ids:
+        return {"error": "initdoc actionable source ids empty"}
+    heartbeat_window = _build_initdoc_actionable_tail_heartbeat_window_payload()
+    heartbeat_compaction_window = _build_initdoc_actionable_tail_heartbeat_compaction_window_payload()
+    heartbeat_compaction_window_digest = _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_payload(
+        compaction_window_payload=heartbeat_compaction_window,
+    )
+    heartbeat_compaction_window_digest_heartbeat_window = (
+        _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_window_payload()
+    )
+    heartbeat_compaction_window_digest_heartbeat_compaction_window = (
+        _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_payload()
+    )
+    heartbeat_compaction_window_digest_heartbeat_compaction_window_digest = (
+        _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_payload(
+            compaction_window_payload=heartbeat_compaction_window_digest_heartbeat_compaction_window,
+        )
+    )
+    try:
+        from scripts.report_initdoc_actionable_tail_contract import build_actionable_report
+        from scripts.report_initdoc_actionable_tail_digest import build_digest
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "source_ids": normalized_source_ids,
+            "heartbeat_window": heartbeat_window,
+            "heartbeat_compaction_window": heartbeat_compaction_window,
+            "heartbeat_compaction_window_digest": heartbeat_compaction_window_digest,
+            "heartbeat_compaction_window_digest_heartbeat_window": heartbeat_compaction_window_digest_heartbeat_window,
+            "heartbeat_compaction_window_digest_heartbeat_compaction_window": heartbeat_compaction_window_digest_heartbeat_compaction_window,
+            "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": heartbeat_compaction_window_digest_heartbeat_compaction_window_digest,
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        contract = build_actionable_report(
+            conn,
+            source_ids=normalized_source_ids,
+            sample_limit=0,
+        )
+        digest = build_digest(
+            contract,
+            max_actionable_missing=int(max_actionable_missing),
+            max_actionable_missing_pct=float(max_actionable_missing_pct),
+        )
+        return {
+            "source_ids": normalized_source_ids,
+            "contract": contract,
+            "digest": digest,
+            "heartbeat_window": heartbeat_window,
+            "heartbeat_compaction_window": heartbeat_compaction_window,
+            "heartbeat_compaction_window_digest": heartbeat_compaction_window_digest,
+            "heartbeat_compaction_window_digest_heartbeat_window": heartbeat_compaction_window_digest_heartbeat_window,
+            "heartbeat_compaction_window_digest_heartbeat_compaction_window": heartbeat_compaction_window_digest_heartbeat_compaction_window,
+            "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": heartbeat_compaction_window_digest_heartbeat_compaction_window_digest,
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "source_ids": normalized_source_ids,
+            "heartbeat_window": heartbeat_window,
+            "heartbeat_compaction_window": heartbeat_compaction_window,
+            "heartbeat_compaction_window_digest": heartbeat_compaction_window_digest,
+            "heartbeat_compaction_window_digest_heartbeat_window": heartbeat_compaction_window_digest_heartbeat_window,
+            "heartbeat_compaction_window_digest_heartbeat_compaction_window": heartbeat_compaction_window_digest_heartbeat_compaction_window,
+            "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": heartbeat_compaction_window_digest_heartbeat_compaction_window_digest,
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
+def _build_initdoc_actionable_tail_heartbeat_window_payload(
+    *,
+    heartbeat_path: Path | None = None,
+    window_last: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_LAST,
+    max_failed: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED,
+    max_failed_rate_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT,
+    max_degraded: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED,
+    max_degraded_rate_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT,
+) -> dict[str, Any]:
+    target_heartbeat_path = heartbeat_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_PATH
+    try:
+        from scripts.report_initdoc_actionable_tail_digest_heartbeat_window import build_window_report_from_path
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        return build_window_report_from_path(
+            target_heartbeat_path,
+            window_last=int(window_last),
+            max_failed=int(max_failed),
+            max_failed_rate_pct=float(max_failed_rate_pct),
+            max_degraded=int(max_degraded),
+            max_degraded_rate_pct=float(max_degraded_rate_pct),
+            strict=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
+def _build_initdoc_actionable_tail_heartbeat_compaction_window_payload(
+    *,
+    heartbeat_path: Path | None = None,
+    compacted_path: Path | None = None,
+    window_last: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_LAST,
+) -> dict[str, Any]:
+    target_heartbeat_path = heartbeat_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_PATH
+    target_compacted_path = compacted_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACTED_PATH
+    try:
+        from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction_window import (
+            build_compaction_window_report_from_paths,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "compacted_path": str(target_compacted_path),
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        return build_compaction_window_report_from_paths(
+            target_heartbeat_path,
+            target_compacted_path,
+            window_last=int(window_last),
+            strict=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "compacted_path": str(target_compacted_path),
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
+def _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_payload(
+    *,
+    compaction_window_payload: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    parity_payload = (
+        compaction_window_payload
+        if isinstance(compaction_window_payload, dict)
+        else _build_initdoc_actionable_tail_heartbeat_compaction_window_payload()
+    )
+    try:
+        from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest import (
+            build_compaction_window_digest,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        return build_compaction_window_digest(
+            parity_payload,
+            compaction_window_json_path="",
+            strict=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
+def _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_window_payload(
+    *,
+    heartbeat_path: Path | None = None,
+    window_last: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_LAST,
+    max_failed: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_FAILED,
+    max_failed_rate_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_FAILED_RATE_PCT,
+    max_degraded: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_DEGRADED,
+    max_degraded_rate_pct: float = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_WINDOW_MAX_DEGRADED_RATE_PCT,
+) -> dict[str, Any]:
+    target_heartbeat_path = heartbeat_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_PATH
+    try:
+        from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_window import (
+            build_window_report_from_path,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        return build_window_report_from_path(
+            target_heartbeat_path,
+            window_last=int(window_last),
+            max_failed=int(max_failed),
+            max_failed_rate_pct=float(max_failed_rate_pct),
+            max_degraded=int(max_degraded),
+            max_degraded_rate_pct=float(max_degraded_rate_pct),
+            strict=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
+def _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_payload(
+    *,
+    heartbeat_path: Path | None = None,
+    compacted_path: Path | None = None,
+    window_last: int = DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_WINDOW_LAST,
+) -> dict[str, Any]:
+    target_heartbeat_path = heartbeat_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_PATH
+    target_compacted_path = compacted_path or DEFAULT_INITDOC_ACTIONABLE_TAIL_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACTED_PATH
+    try:
+        from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction_window import (
+            build_compaction_window_report_from_paths,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "compacted_path": str(target_compacted_path),
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        return build_compaction_window_report_from_paths(
+            target_heartbeat_path,
+            target_compacted_path,
+            window_last=int(window_last),
+            strict=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "heartbeat_path": str(target_heartbeat_path),
+            "compacted_path": str(target_compacted_path),
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
+def _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_payload(
+    *,
+    compaction_window_payload: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    parity_payload = (
+        compaction_window_payload
+        if isinstance(compaction_window_payload, dict)
+        else _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_payload()
+    )
+    try:
+        from scripts.report_initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest import (
+            build_compaction_window_digest,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "error": f"import error: {type(exc).__name__}: {exc}",
+        }
+
+    try:
+        return build_compaction_window_digest(
+            parity_payload,
+            compaction_window_json_path="",
+            strict=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "error": f"build error: {type(exc).__name__}: {exc}",
+        }
+
+
 def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
     meta = {
         "db_path": str(db_path),
@@ -1598,7 +1963,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "europeo_sources_ok": 0,
         }
         roadmap_macro = compute_roadmap_status(tracker_items)
-        return {
+        payload = {
             **meta,
             "error": "Base SQLite no encontrada. Ejecuta primero la ingesta ETL.",
             "summary": summary_no_db,
@@ -1621,7 +1986,18 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "actions": [],
             "sources": [],
             "missing": desired_ids,
+            "initdoc_actionable_tail": {
+                "source_ids": list(DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS),
+                "heartbeat_window": _build_initdoc_actionable_tail_heartbeat_window_payload(),
+                "heartbeat_compaction_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_payload(),
+                "heartbeat_compaction_window_digest": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_payload(),
+                "heartbeat_compaction_window_digest_heartbeat_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_window_payload(),
+                "heartbeat_compaction_window_digest_heartbeat_compaction_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_payload(),
+                "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_payload(),
+                "error": "db_not_found",
+            },
         }
+        return sanitize_public_payload(payload)
 
     def sql_status_from_metrics(metrics: dict[str, Any] | None, *, tracker_blocked: bool = False) -> str:
         if not metrics:
@@ -2554,6 +2930,8 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             except Exception as exc:  # noqa: BLE001
                 parl_quality = {"error": f"{type(exc).__name__}: {exc}"}
 
+            initdoc_actionable_tail = _build_initdoc_actionable_tail_payload(conn)
+
             analytics_payload = {
                 "topics": {
                     "topics_total": topics_total,
@@ -2639,12 +3017,13 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 ops=ops_metrics,
             )
 
-            return {
+            payload = {
                 **meta,
                 "summary": summary,
                 "ops": ops_metrics,
                 "analytics": analytics_payload,
                 "parl_quality": parl_quality,
+                "initdoc_actionable_tail": initdoc_actionable_tail,
                 "tracker": {
                     "path": str(TRACKER_PATH),
                     "exists": TRACKER_PATH.exists(),
@@ -2657,6 +3036,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 "sources": all_sources,
                 "missing": missing,
             }
+            return sanitize_public_payload(payload)
     except sqlite3.OperationalError as exc:
         summary_sql_error = {
             "desired": len(desired_ids),
@@ -2686,7 +3066,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "europeo_sources_ok": 0,
         }
         roadmap_macro = compute_roadmap_status(tracker_items)
-        return {
+        payload = {
             **meta,
             "error": f"SQLite error: {exc}",
             "summary": summary_sql_error,
@@ -2709,7 +3089,18 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             "actions": [],
             "sources": [],
             "missing": desired_ids,
+            "initdoc_actionable_tail": {
+                "source_ids": list(DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS),
+                "heartbeat_window": _build_initdoc_actionable_tail_heartbeat_window_payload(),
+                "heartbeat_compaction_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_payload(),
+                "heartbeat_compaction_window_digest": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_payload(),
+                "heartbeat_compaction_window_digest_heartbeat_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_window_payload(),
+                "heartbeat_compaction_window_digest_heartbeat_compaction_window": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_payload(),
+                "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": _build_initdoc_actionable_tail_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_payload(),
+                "error": f"sqlite_error: {exc}",
+            },
         }
+        return sanitize_public_payload(payload)
 
 
 def _resolve_topic_coherence_as_of_date(conn: sqlite3.Connection, *, as_of_date: str | None = None) -> str:
@@ -2770,6 +3161,7 @@ def _build_topic_coherence_pair_filter_clauses(
     topic_id: int | None = None,
     scope: str | None = None,
     person_id: int | None = None,
+    party_id: int | None = None,
 ) -> tuple[list[str], list[Any]]:
     clauses: list[str] = []
     params: list[Any] = []
@@ -2787,6 +3179,9 @@ def _build_topic_coherence_pair_filter_clauses(
     if person_id is not None:
         clauses.append(f"{alias}.person_id = ?")
         params.append(int(person_id))
+    if party_id is not None:
+        clauses.append(f"{alias}.party_id = ?")
+        params.append(int(party_id))
     return clauses, params
 
 
@@ -2797,6 +3192,7 @@ def build_topics_coherence_payload(
     topic_set_id: int | None = None,
     topic_id: int | None = None,
     scope: str | None = None,
+    party_id: int | None = None,
     limit: int = 200,
     offset: int = 0,
 ) -> dict[str, Any]:
@@ -2884,6 +3280,24 @@ def build_topics_coherence_payload(
            AND d.mandate_key = v.mandate_key
            AND d.as_of_date = v.as_of_date
         ),
+        person_party_ranked AS (
+          SELECT
+            m.person_id,
+            m.party_id,
+            pa.name AS party_name,
+            ROW_NUMBER() OVER (
+              PARTITION BY m.person_id
+              ORDER BY COALESCE(m.is_active, 0) DESC, COALESCE(m.end_date, '9999-12-31') DESC, COALESCE(m.start_date, '') DESC, m.mandate_id DESC
+            ) AS rn
+          FROM mandates m
+          LEFT JOIN parties pa ON pa.party_id = m.party_id
+          WHERE m.party_id IS NOT NULL
+        ),
+        person_party AS (
+          SELECT person_id, party_id, party_name
+          FROM person_party_ranked
+          WHERE rn = 1
+        ),
         pairs_scoped AS (
           SELECT
             p.topic_set_id,
@@ -2894,11 +3308,14 @@ def build_topics_coherence_payload(
             p.as_of_date,
             p.does_stance,
             p.says_stance,
-            COALESCE(ap.code, aset.code, '') AS scope
+            COALESCE(ap.code, aset.code, '') AS scope,
+            pp.party_id,
+            pp.party_name
           FROM pairs p
           LEFT JOIN topic_sets ts ON ts.topic_set_id = p.topic_set_id
           LEFT JOIN admin_levels ap ON ap.admin_level_id = p.pair_admin_level_id
           LEFT JOIN admin_levels aset ON aset.admin_level_id = ts.admin_level_id
+          LEFT JOIN person_party pp ON pp.person_id = p.person_id
         )
     """
 
@@ -2912,6 +3329,7 @@ def build_topics_coherence_payload(
                         "topic_set_id": topic_set_id,
                         "topic_id": topic_id,
                         "scope": safe_text(scope),
+                        "party_id": party_id,
                     },
                     "summary": {
                         "groups_total": 0,
@@ -2932,6 +3350,7 @@ def build_topics_coherence_payload(
                 topic_id=topic_id,
                 scope=scope,
                 person_id=None,
+                party_id=party_id,
             )
             where_sql = f"WHERE {' AND '.join(filter_clauses)}" if filter_clauses else ""
             common_params: list[Any] = [resolved_as_of, resolved_as_of, *filter_params]
@@ -3019,6 +3438,7 @@ def build_topics_coherence_payload(
                     "topic_set_id": topic_set_id,
                     "topic_id": topic_id,
                     "scope": safe_text(scope),
+                    "party_id": party_id,
                 },
                 "summary": {
                     "groups_total": groups_total,
@@ -3065,6 +3485,7 @@ def build_topics_coherence_evidence_payload(
     topic_id: int | None = None,
     scope: str | None = None,
     person_id: int | None = None,
+    party_id: int | None = None,
     limit: int = 100,
     offset: int = 0,
 ) -> dict[str, Any]:
@@ -3161,6 +3582,24 @@ def build_topics_coherence_evidence_payload(
            AND d.mandate_key = v.mandate_key
            AND d.as_of_date = v.as_of_date
         ),
+        person_party_ranked AS (
+          SELECT
+            m.person_id,
+            m.party_id,
+            pa.name AS party_name,
+            ROW_NUMBER() OVER (
+              PARTITION BY m.person_id
+              ORDER BY COALESCE(m.is_active, 0) DESC, COALESCE(m.end_date, '9999-12-31') DESC, COALESCE(m.start_date, '') DESC, m.mandate_id DESC
+            ) AS rn
+          FROM mandates m
+          LEFT JOIN parties pa ON pa.party_id = m.party_id
+          WHERE m.party_id IS NOT NULL
+        ),
+        person_party AS (
+          SELECT person_id, party_id, party_name
+          FROM person_party_ranked
+          WHERE rn = 1
+        ),
         pairs_scoped AS (
           SELECT
             p.topic_set_id,
@@ -3171,11 +3610,14 @@ def build_topics_coherence_evidence_payload(
             p.as_of_date,
             p.does_stance,
             p.says_stance,
-            COALESCE(ap.code, aset.code, '') AS scope
+            COALESCE(ap.code, aset.code, '') AS scope,
+            pp.party_id,
+            pp.party_name
           FROM pairs p
           LEFT JOIN topic_sets ts ON ts.topic_set_id = p.topic_set_id
           LEFT JOIN admin_levels ap ON ap.admin_level_id = p.pair_admin_level_id
           LEFT JOIN admin_levels aset ON aset.admin_level_id = ts.admin_level_id
+          LEFT JOIN person_party pp ON pp.person_id = p.person_id
         ),
         ranked_pairs AS (
           SELECT
@@ -3184,6 +3626,8 @@ def build_topics_coherence_evidence_payload(
             p.topic_id,
             p.person_id,
             p.scope,
+            p.party_id,
+            p.party_name,
             p.does_stance,
             p.says_stance,
             ROW_NUMBER() OVER (
@@ -3205,6 +3649,7 @@ def build_topics_coherence_evidence_payload(
                         "topic_id": topic_id,
                         "scope": safe_text(scope),
                         "person_id": person_id,
+                        "party_id": party_id,
                     },
                     "summary": {"pairs_total": 0, "evidence_total": 0},
                     "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
@@ -3217,6 +3662,7 @@ def build_topics_coherence_evidence_payload(
                 topic_id=topic_id,
                 scope=scope,
                 person_id=person_id,
+                party_id=party_id,
             )
             where_clauses = [bucket_clause, *filter_clauses]
             where_sql = f"WHERE {' AND '.join(where_clauses)}"
@@ -3226,7 +3672,7 @@ def build_topics_coherence_evidence_payload(
                   {where_sql}
                 ),
                 best_pairs AS (
-                  SELECT topic_set_id, topic_set_key, topic_id, person_id, scope, does_stance, says_stance
+                  SELECT topic_set_id, topic_set_key, topic_id, person_id, scope, party_id, party_name, does_stance, says_stance
                   FROM ranked_pairs
                   WHERE pair_rank = 1
                 )
@@ -3272,6 +3718,8 @@ def build_topics_coherence_evidence_payload(
                   e.person_id,
                   per.full_name AS person_name,
                   b.scope,
+                  b.party_id,
+                  b.party_name,
                   b.does_stance,
                   b.says_stance,
                   e.evidence_type,
@@ -3313,6 +3761,8 @@ def build_topics_coherence_evidence_payload(
                         "person_id": to_int_or_none(row["person_id"]),
                         "person_name": safe_text(row["person_name"]),
                         "scope": safe_text(row["scope"]),
+                        "party_id": to_int_or_none(row["party_id"]),
+                        "party_name": safe_text(row["party_name"]),
                         "does_stance": safe_text(row["does_stance"]),
                         "says_stance": safe_text(row["says_stance"]),
                         "evidence_type": safe_text(row["evidence_type"]),
@@ -3339,6 +3789,7 @@ def build_topics_coherence_evidence_payload(
                     "topic_id": topic_id,
                     "scope": safe_text(scope),
                     "person_id": person_id,
+                    "party_id": party_id,
                 },
                 "summary": {
                     "pairs_total": pairs_total,
@@ -3363,6 +3814,7 @@ def build_topics_coherence_evidence_payload(
                 "topic_id": topic_id,
                 "scope": safe_text(scope),
                 "person_id": person_id,
+                "party_id": party_id,
             },
             "summary": {"pairs_total": 0, "evidence_total": 0},
             "page": {"limit": int(limit), "offset": int(offset), "returned": 0},
@@ -3762,7 +4214,7 @@ def build_vote_summary_payload(
     offset: int,
 ) -> dict[str, Any]:
     if not db_path.exists():
-        return {"error": "Base SQLite no encontrada."}
+        return sanitize_public_payload({"error": "Base SQLite no encontrada."})
 
     if limit <= 0:
         limit = 12
@@ -3822,7 +4274,7 @@ def build_vote_summary_payload(
             event_ids = [row["vote_event_id"] for row in event_rows]
 
             if not event_ids:
-                return {
+                payload_empty = {
                     "meta": {
                         "db_path": str(db_path),
                         "total": int(total["n"] if total else 0),
@@ -3835,6 +4287,7 @@ def build_vote_summary_payload(
                     },
                     "events": [],
                 }
+                return sanitize_public_payload(payload_empty)
 
             # Attach initiative metadata when we've linked votes -> initiatives.
             # This is the main path to get descriptive titles beyond generic bucket labels.
@@ -3882,6 +4335,63 @@ def build_vote_summary_payload(
                     "url": safe_text(row["initiative_url"]),
                     "confidence": float(row["confidence"] or 0),
                 }
+
+            # Attach initiative documents (BOCG/DS/etc) when present.
+            initiative_ids = [
+                safe_text(meta.get("initiative_id"))
+                for meta in best_initiative_by_event.values()
+                if safe_text(meta.get("initiative_id"))
+            ]
+            doc_summary_by_initiative: dict[str, dict[str, Any]] = {}
+            if initiative_ids:
+                init_placeholders = ",".join(["?"] * len(initiative_ids))
+                try:
+                    doc_rows = conn.execute(
+                        f"""
+                        SELECT
+                          d.initiative_id,
+                          d.doc_kind,
+                          d.doc_url,
+                          d.source_record_pk,
+                          td.raw_path
+                        FROM parl_initiative_documents d
+                        LEFT JOIN text_documents td ON td.source_record_pk = d.source_record_pk
+                        WHERE d.initiative_id IN ({init_placeholders})
+                        ORDER BY d.initiative_id, d.doc_kind, d.doc_url
+                        """,
+                        initiative_ids,
+                    ).fetchall()
+                except sqlite3.Error:
+                    doc_rows = []
+
+                for dr in doc_rows:
+                    iid = safe_text(dr["initiative_id"])
+                    kind = safe_text(dr["doc_kind"]) or "doc"
+                    url = safe_text(dr["doc_url"])
+                    if not iid or not url:
+                        continue
+                    bucket = doc_summary_by_initiative.setdefault(
+                        iid,
+                        {"total": 0, "by_kind": {}, "docs": []},
+                    )
+                    bucket["total"] += 1
+                    by_kind = bucket["by_kind"]
+                    by_kind[kind] = int(by_kind.get(kind) or 0) + 1
+                    if len(bucket["docs"]) < 4:
+                        bucket["docs"].append(
+                            {
+                                "kind": kind,
+                                "url": url,
+                                "downloaded": bool(safe_text(dr["raw_path"])),
+                            }
+                        )
+
+                # Attach to the best initiative per event.
+                for event_id, meta in best_initiative_by_event.items():
+                    iid = safe_text(meta.get("initiative_id"))
+                    docs = doc_summary_by_initiative.get(iid)
+                    if iid and docs:
+                        meta["documents"] = docs
 
             all_breakdown_rows = conn.execute(
                 f"""
@@ -4025,7 +4535,7 @@ def build_vote_summary_payload(
                     }
                 )
 
-            return {
+            payload = {
                 "meta": {
                     "db_path": str(db_path),
                     "total": int(total["n"] if total else 0),
@@ -4038,8 +4548,9 @@ def build_vote_summary_payload(
                 },
                 "events": payload_events,
             }
+            return sanitize_public_payload(payload)
     except sqlite3.Error as exc:
-        return {"error": f"SQLite error: {exc}"}
+        return sanitize_public_payload({"error": f"SQLite error: {exc}"})
 
 
 def fetch_person_detail(db_path: Path, person_id: int) -> dict[str, Any] | None:
@@ -5196,7 +5707,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
         def do_GET(self) -> None:  # noqa: N802
             parsed = urlparse(self.path)
             path = parsed.path
-            if path != "/" and path.endswith("/"):
+            if path != "/" and path.endswith("/") and path != "/citizen/":
                 path = path.rstrip("/")
 
             if path == "/favicon.ico":
@@ -5260,11 +5771,98 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 self.write_html(UI_EXPLORER_TEMAS.read_text(encoding="utf-8"))
                 return
 
-            if path in ("/citizen", "/citizen/index.html"):
+            if path == "/citizen":
+                self.send_response(HTTPStatus.FOUND)
+                self.send_header("Location", "/citizen/")
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return
+
+            if path in ("/citizen/", "/citizen/index.html"):
                 if not UI_CITIZEN.exists():
                     self.write_html("<h1>UI citizen no encontrada</h1>", status=HTTPStatus.NOT_FOUND)
                     return
                 self.write_html(UI_CITIZEN.read_text(encoding="utf-8"))
+                return
+
+            if path == "/citizen/preset_codec.js":
+                if not UI_CITIZEN_PRESET_CODEC.exists():
+                    self.write_html("<h1>preset_codec.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_PRESET_CODEC.read_bytes(),
+                    content_type="text/javascript; charset=utf-8",
+                )
+                return
+
+            if path == "/citizen/onboarding_funnel.js":
+                if not UI_CITIZEN_ONBOARDING_FUNNEL.exists():
+                    self.write_html("<h1>onboarding_funnel.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_ONBOARDING_FUNNEL.read_bytes(),
+                    content_type="text/javascript; charset=utf-8",
+                )
+                return
+
+            if path == "/citizen/first_answer_accelerator.js":
+                if not UI_CITIZEN_FIRST_ANSWER_ACCELERATOR.exists():
+                    self.write_html("<h1>first_answer_accelerator.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_FIRST_ANSWER_ACCELERATOR.read_bytes(),
+                    content_type="text/javascript; charset=utf-8",
+                )
+                return
+
+            if path == "/citizen/unknown_explainability.js":
+                if not UI_CITIZEN_UNKNOWN_EXPLAINABILITY.exists():
+                    self.write_html("<h1>unknown_explainability.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_UNKNOWN_EXPLAINABILITY.read_bytes(),
+                    content_type="text/javascript; charset=utf-8",
+                )
+                return
+
+            if path == "/citizen/cross_method_stability.js":
+                if not UI_CITIZEN_CROSS_METHOD_STABILITY.exists():
+                    self.write_html("<h1>cross_method_stability.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_CROSS_METHOD_STABILITY.read_bytes(),
+                    content_type="text/javascript; charset=utf-8",
+                )
+                return
+
+            if path == "/citizen/evidence_trust_panel.js":
+                if not UI_CITIZEN_EVIDENCE_TRUST_PANEL.exists():
+                    self.write_html("<h1>evidence_trust_panel.js no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_EVIDENCE_TRUST_PANEL.read_bytes(),
+                    content_type="text/javascript; charset=utf-8",
+                )
+                return
+
+            if path == "/citizen/tailwind_md3.generated.css":
+                if not UI_CITIZEN_TAILWIND_MD3_CSS.exists():
+                    self.write_html("<h1>tailwind_md3.generated.css no encontrado</h1>", status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_TAILWIND_MD3_CSS.read_bytes(),
+                    content_type="text/css; charset=utf-8",
+                )
+                return
+
+            if path in ("/citizen/tailwind_md3.tokens.json", "/citizen/data/tailwind_md3.tokens.json"):
+                if not UI_CITIZEN_TAILWIND_MD3_TOKENS.exists():
+                    self.write_json({"error": "tailwind_md3.tokens.json no encontrado"}, status=HTTPStatus.NOT_FOUND)
+                    return
+                self.write_bytes(
+                    UI_CITIZEN_TAILWIND_MD3_TOKENS.read_bytes(),
+                    content_type="application/json; charset=utf-8",
+                )
                 return
 
             if path == "/citizen/data/concerns_v1.json":
@@ -5281,6 +5879,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 "/citizen/data/citizen.json",
                 "/citizen/data/citizen_votes.json",
                 "/citizen/data/citizen_declared.json",
+                "/citizen/data/concern_pack_quality.json",
             ):
                 filename = path.rsplit("/", 1)[-1]
                 src_path = GH_CITIZEN_DATA_DIR / filename
@@ -5526,6 +6125,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     topic_set_id = int(str_param(qs, "topic_set_id", "")) if str_param(qs, "topic_set_id", "") else None
                     topic_id = int(str_param(qs, "topic_id", "")) if str_param(qs, "topic_id", "") else None
                     scope = str_param(qs, "scope", "") or None
+                    party_id = int(str_param(qs, "party_id", "")) if str_param(qs, "party_id", "") else None
                     limit = int_param(qs, "limit", 200, min_value=1, max_value=5000)
                     offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
                     payload = build_topics_coherence_payload(
@@ -5534,6 +6134,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                         topic_set_id=topic_set_id,
                         topic_id=topic_id,
                         scope=scope,
+                        party_id=party_id,
                         limit=limit,
                         offset=offset,
                     )
@@ -5556,6 +6157,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                     topic_id = int(str_param(qs, "topic_id", "")) if str_param(qs, "topic_id", "") else None
                     scope = str_param(qs, "scope", "") or None
                     person_id = int(str_param(qs, "person_id", "")) if str_param(qs, "person_id", "") else None
+                    party_id = int(str_param(qs, "party_id", "")) if str_param(qs, "party_id", "") else None
                     limit = int_param(qs, "limit", 100, min_value=1, max_value=5000)
                     offset = int_param(qs, "offset", 0, min_value=0, max_value=5_000_000)
                     payload = build_topics_coherence_evidence_payload(
@@ -5566,6 +6168,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                         topic_id=topic_id,
                         scope=scope,
                         person_id=person_id,
+                        party_id=party_id,
                         limit=limit,
                         offset=offset,
                     )
