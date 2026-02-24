@@ -33,6 +33,8 @@ DEFAULT_TOPIC_SET_ID = 1
 DEFAULT_INSTITUTION_ID = 7  # Congreso de los Diputados
 DEFAULT_PROGRAMAS_SOURCE_ID = "programas_partidos"
 DEFAULT_CONCERNS_CONFIG = Path("ui/citizen/concerns_v1.json")
+CONF_TIER_HIGH_MIN = 0.66
+CONF_TIER_MEDIUM_MIN = 0.33
 
 _PROGRAMAS_STANCE_METHODS = ("declared:regex_v3", "declared:regex_v2", "declared:regex_v1")
 
@@ -788,6 +790,77 @@ def strip_private_fields(obj: Any) -> Any:
     return obj
 
 
+def _confidence_tier(*, stance: str, confidence: float) -> str:
+    if str(stance or "") == "no_signal":
+        return "none"
+    conf = float(confidence or 0.0)
+    if conf <= 0.0:
+        return "none"
+    if conf >= float(CONF_TIER_HIGH_MIN):
+        return "high"
+    if conf >= float(CONF_TIER_MEDIUM_MIN):
+        return "medium"
+    return "low"
+
+
+def summarize_snapshot_quality(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    stance_counts = {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 0,
+        "unclear": 0,
+        "no_signal": 0,
+    }
+    confidence_tiers = {
+        "high": 0,
+        "medium": 0,
+        "low": 0,
+        "none": 0,
+    }
+
+    confidence_sum_signal = 0.0
+    confidence_n_signal = 0
+
+    for row in rows:
+        stance = str((row or {}).get("stance") or "no_signal")
+        if stance not in stance_counts:
+            stance = "no_signal"
+        stance_counts[stance] += 1
+
+        confidence = float((row or {}).get("confidence") or 0.0)
+        if stance != "no_signal":
+            confidence_sum_signal += confidence
+            confidence_n_signal += 1
+
+        tier = _confidence_tier(stance=stance, confidence=confidence)
+        if tier not in confidence_tiers:
+            tier = "none"
+        confidence_tiers[tier] += 1
+
+    cells_total = int(len(rows))
+    clear_total = int(stance_counts["support"] + stance_counts["oppose"] + stance_counts["mixed"])
+    any_signal_total = int(cells_total - stance_counts["no_signal"])
+    unknown_total = int(stance_counts["unclear"] + stance_counts["no_signal"])
+    confidence_avg_signal = (confidence_sum_signal / float(confidence_n_signal)) if confidence_n_signal > 0 else 0.0
+
+    return {
+        "cells_total": int(cells_total),
+        "stance_counts": stance_counts,
+        "clear_total": int(clear_total),
+        "clear_pct": round(clamp01(clear_total / float(cells_total)) if cells_total > 0 else 0.0, 6),
+        "any_signal_total": int(any_signal_total),
+        "any_signal_pct": round(clamp01(any_signal_total / float(cells_total)) if cells_total > 0 else 0.0, 6),
+        "unknown_total": int(unknown_total),
+        "unknown_pct": round(clamp01(unknown_total / float(cells_total)) if cells_total > 0 else 0.0, 6),
+        "confidence_avg_signal": round(clamp01(float(confidence_avg_signal)), 6),
+        "confidence_tiers": confidence_tiers,
+        "confidence_thresholds": {
+            "high_min": float(CONF_TIER_HIGH_MIN),
+            "medium_min": float(CONF_TIER_MEDIUM_MIN),
+        },
+    }
+
+
 def main() -> int:
     args = parse_args()
     db_path = Path(args.db)
@@ -842,6 +915,8 @@ def main() -> int:
                 "guards": {
                     "max_bytes": int(args.max_bytes),
                 },
+                # Optional v3 extension: explicit quality semantics for citizen rendering.
+                "quality": summarize_snapshot_quality(party_topic_positions),
             },
             "concerns": {
                 "version": "v1",

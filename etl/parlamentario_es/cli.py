@@ -18,7 +18,11 @@ from .pipeline import (
     ingest_one_source,
 )
 from .topic_analytics import backfill_topic_analytics_from_votes
-from .text_documents import backfill_text_documents_from_topic_evidence
+from .text_documents import (
+    backfill_initiative_documents_from_parl_initiatives,
+    backfill_initiative_links_from_raw_payload,
+    backfill_text_documents_from_topic_evidence,
+)
 from .declared_stance import backfill_declared_stance_from_topic_evidence
 from .declared_positions import backfill_topic_positions_from_declared_evidence
 from .combined_positions import backfill_topic_positions_combined
@@ -29,8 +33,10 @@ from .review_queue import (
 )
 from etl.politicos_es.util import normalize_ws
 from .quality import (
+    compute_declared_quality_kpis,
     compute_initiative_quality_kpis,
     compute_vote_quality_kpis,
+    evaluate_declared_quality_gate,
     evaluate_initiative_quality_gate,
     evaluate_vote_quality_gate,
 )
@@ -127,6 +133,24 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         "--initiative-source-ids",
         default="congreso_iniciativas,senado_iniciativas",
         help="Lista CSV de source_id de iniciativas para incluir",
+    )
+    p_quality.add_argument(
+        "--include-declared",
+        action="store_true",
+        help="Incluye KPIs de fuentes declaradas (intervenciones/programas) en el reporte.",
+    )
+    p_quality.add_argument(
+        "--declared-source-ids",
+        default="congreso_intervenciones,programas_partidos",
+        help="Lista CSV de source_id declarados para incluir",
+    )
+    p_quality.add_argument(
+        "--skip-vote-gate",
+        action="store_true",
+        help=(
+            "No fallar --enforce-gate por el gate base de votaciones; "
+            "útil para validar solo lanes de iniciativas/declaradas."
+        ),
     )
 
     p_backfill = sub.add_parser(
@@ -293,6 +317,93 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p_text.add_argument("--strict-network", action="store_true", help="Abortar en el primer fallo de red/parse")
     p_text.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
 
+    p_init_links = sub.add_parser(
+        "backfill-initiative-links",
+        help="Rellenar links_bocg_json/links_ds_json en parl_initiatives desde raw_payload (repara historicos)",
+    )
+    p_init_links.add_argument("--db", default=str(DEFAULT_DB))
+    p_init_links.add_argument(
+        "--source-ids",
+        default="congreso_iniciativas",
+        help="Lista CSV de source_id de iniciativas a reparar",
+    )
+    p_init_links.add_argument("--limit", type=int, default=0, help="0 = sin limite")
+    p_init_links.add_argument(
+        "--overwrite-existing",
+        action="store_true",
+        help="Sobrescribe links existentes (por defecto solo rellena valores faltantes)",
+    )
+    p_init_links.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
+    p_init_docs = sub.add_parser(
+        "backfill-initiative-documents",
+        help="Descargar documentos (BOCG/DS/PDF/HTML) referenciados por iniciativas (para saber 'que se voto')",
+    )
+    p_init_docs.add_argument("--db", default=str(DEFAULT_DB))
+    p_init_docs.add_argument(
+        "--initiative-source-ids",
+        default="congreso_iniciativas,senado_iniciativas",
+        help="Lista CSV de source_id de iniciativas a procesar",
+    )
+    p_init_docs.add_argument("--raw-dir", default=str(DEFAULT_RAW_DIR), help="Directorio raw (para guardar HTML/PDF)")
+    p_init_docs.add_argument("--timeout", type=int, default=int(DEFAULT_TIMEOUT))
+    p_init_docs.add_argument("--snapshot-date", default=None, help="YYYY-MM-DD (opcional, para source_records)")
+    p_init_docs.add_argument("--limit-initiatives", type=int, default=200, help="Numero de iniciativas a inspeccionar")
+    p_init_docs.add_argument("--max-docs-per-initiative", type=int, default=3, help="Max docs por iniciativa y kind (bocg/ds)")
+    p_init_docs.add_argument("--sleep-seconds", type=float, default=0.0, help="Sleep fijo entre requests (anti-WAF)")
+    p_init_docs.add_argument("--sleep-jitter-seconds", type=float, default=0.0, help="Jitter adicional 0..N entre requests")
+    p_init_docs.add_argument("--cookie", default=None, help="Cookie header para descargar docs (opcional, p.ej. para senado.es)")
+    p_init_docs.add_argument("--cookie-file", default=None, help="Ruta a cookies.json (Playwright) para construir Cookie header")
+    p_init_docs.add_argument("--cookie-domain", default="senado.es", help="Dominio para filtrar cookies cuando se usa --cookie-file")
+    p_init_docs.add_argument(
+        "--playwright-user-data-dir",
+        default=None,
+        help=(
+            "Ruta a un perfil persistente de Playwright (carpeta *_profile) "
+            "para descargar docs protegidos usando la red del navegador (senado.es)."
+        ),
+    )
+    p_init_docs.add_argument("--playwright-channel", default="chrome", help="Canal Playwright (chrome/chromium)")
+    p_init_docs.add_argument("--playwright-headless", action="store_true", help="Ejecuta Playwright en headless (default: no)")
+    p_init_docs.add_argument(
+        "--archive-fallback",
+        action="store_true",
+        help=(
+            "Si una URL falla con 404 (o ya tenia 404 historico), intenta obtener snapshot "
+            "desde Wayback (archive.org) y guarda el documento bajo la URL original."
+        ),
+    )
+    p_init_docs.add_argument(
+        "--archive-timeout",
+        type=int,
+        default=12,
+        help="Timeout (segundos) para lookup/fetch de archive fallback",
+    )
+    p_init_docs.add_argument(
+        "--include-unlinked",
+        action="store_true",
+        help="Incluye iniciativas no linkeadas a votaciones (por defecto solo las vinculadas a votes)",
+    )
+    p_init_docs.add_argument(
+        "--refetch-existing",
+        action="store_true",
+        help="Reintenta URLs ya presentes en text_documents (por defecto solo baja faltantes)",
+    )
+    p_init_docs.add_argument(
+        "--retry-forbidden",
+        action="store_true",
+        help="Reintenta URLs con status historico 403/404 (por defecto se saltan para evitar loops)",
+    )
+    p_init_docs.add_argument(
+        "--skip-link-backfill",
+        action="store_true",
+        help="No ejecutar backfill de links desde raw_payload antes de descargar docs",
+    )
+    p_init_docs.add_argument("--auto", action="store_true", help="Auto-loop hasta agotar faltantes o max-loops")
+    p_init_docs.add_argument("--max-loops", type=int, default=25, help="Maximo de rondas cuando --auto está activo")
+    p_init_docs.add_argument("--strict-network", action="store_true", help="Abortar en el primer fallo de red/parse")
+    p_init_docs.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
+
     p_stance = sub.add_parser(
         "backfill-declared-stance",
         help="Inferir stance para evidencia declarada (regex v2 conservador) y alimentar cola de revision",
@@ -435,6 +546,23 @@ def _validate_initiative_source_ids(
     return requested
 
 
+def _validate_declared_source_ids(
+    requested: tuple[str, ...],
+    *,
+    for_command: str,
+) -> tuple[str, ...]:
+    allowed = ("congreso_intervenciones", "programas_partidos")
+    if not requested:
+        raise SystemExit(f"{for_command}: source-ids declarados vacio")
+    unknown = sorted({sid for sid in requested if sid not in allowed})
+    if unknown:
+        raise SystemExit(
+            f"{for_command}: source-ids declarados desconocidos: {', '.join(unknown)} "
+            f"(esperados: {', '.join(allowed)})"
+        )
+    return requested
+
+
 def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
     vals = [x.strip() for x in str(csv_value).split(",")]
     vals = [x for x in vals if x]
@@ -446,6 +574,45 @@ def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
         seen.add(v)
         out.append(v)
     return tuple(out)
+
+
+def _cookie_header_from_playwright_cookies(path: Path, *, domain_contains: str) -> str:
+    """Build a Cookie header string from Playwright cookies.json.
+
+    The input is the raw JSON saved by Playwright (a list of cookie dicts).
+    We filter by domain substring to reduce cross-site leakage.
+    """
+    if not path.exists():
+        raise SystemExit(f"cookie-file no existe: {path}")
+    try:
+        obj = json.loads(path.read_text(encoding="utf-8", errors="replace"))
+    except Exception as exc:  # noqa: BLE001
+        raise SystemExit(f"cookie-file JSON invalido: {path} -> {type(exc).__name__}: {exc}") from exc
+    if not isinstance(obj, list):
+        raise SystemExit(f"cookie-file debe ser lista JSON (Playwright cookies): {path}")
+
+    domain_hint = str(domain_contains or "").strip().lower()
+    pairs: list[str] = []
+    for c in obj:
+        if not isinstance(c, dict):
+            continue
+        name = str(c.get("name") or "").strip()
+        value = str(c.get("value") or "").strip()
+        domain = str(c.get("domain") or "").strip().lower()
+        if not name or not value:
+            continue
+        if domain_hint and domain_hint not in domain:
+            continue
+        pairs.append(f"{name}={value}")
+
+    # De-dupe by name, keep last.
+    dedup: dict[str, str] = {}
+    for p in pairs:
+        if "=" not in p:
+            continue
+        k, v = p.split("=", 1)
+        dedup[k] = v
+    return "; ".join([f"{k}={v}" for k, v in dedup.items()])
 
 
 def _parse_int_ids(csv_value: str) -> tuple[int, ...]:
@@ -649,6 +816,20 @@ def _initiative_quality_report(
     }
 
 
+def _declared_quality_report(
+    conn: sqlite3.Connection,
+    *,
+    source_ids: tuple[str, ...],
+) -> dict[str, Any]:
+    kpis = compute_declared_quality_kpis(conn, source_ids=source_ids)
+    gate = evaluate_declared_quality_gate(kpis)
+    return {
+        "source_ids": list(source_ids),
+        "kpis": kpis,
+        "gate": gate,
+    }
+
+
 def _quality_report_with_unmatched_people(
     conn: sqlite3.Connection,
     *,
@@ -748,6 +929,11 @@ def main(argv: list[str] | None = None) -> int:
             _parse_source_ids(str(args.initiative_source_ids)),
             for_command="quality-report",
         )
+        include_declared = bool(args.include_declared)
+        declared_source_ids = _validate_declared_source_ids(
+            _parse_source_ids(str(args.declared_source_ids)),
+            for_command="quality-report",
+        )
 
         conn = open_db(Path(args.db))
         try:
@@ -768,6 +954,10 @@ def main(argv: list[str] | None = None) -> int:
                 result["initiatives"] = _initiative_quality_report(
                     conn, source_ids=initiative_source_ids
                 )
+            if include_declared:
+                result["declared"] = _declared_quality_report(
+                    conn, source_ids=declared_source_ids
+                )
         finally:
             conn.close()
 
@@ -779,12 +969,22 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"OK wrote: {out_path}")
             else:
                 print(f"OK unchanged: {out_path}")
-        if bool(args.enforce_gate) and not bool(result.get("gate", {}).get("passed")):
+        if (
+            bool(args.enforce_gate)
+            and not bool(args.skip_vote_gate)
+            and not bool(result.get("gate", {}).get("passed"))
+        ):
             return 1
         if (
             bool(args.enforce_gate)
             and include_initiatives
             and not bool(result.get("initiatives", {}).get("gate", {}).get("passed"))
+        ):
+            return 1
+        if (
+            bool(args.enforce_gate)
+            and include_declared
+            and not bool(result.get("declared", {}).get("gate", {}).get("passed"))
         ):
             return 1
         return 0
@@ -1125,6 +1325,135 @@ def main(argv: list[str] | None = None) -> int:
                 strict_network=bool(args.strict_network),
                 dry_run=bool(args.dry_run),
             )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-initiative-links":
+        initiative_source_ids = _validate_initiative_source_ids(
+            _parse_source_ids(str(args.source_ids)),
+            for_command="backfill-initiative-links",
+        )
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            result = backfill_initiative_links_from_raw_payload(
+                conn,
+                source_ids=initiative_source_ids,
+                limit=int(args.limit),
+                only_missing=not bool(args.overwrite_existing),
+                dry_run=bool(args.dry_run),
+            )
+        finally:
+            conn.close()
+        print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))
+        return 0
+
+    if args.cmd == "backfill-initiative-documents":
+        initiative_source_ids = _validate_initiative_source_ids(
+            _parse_source_ids(str(args.initiative_source_ids)),
+            for_command="backfill-initiative-documents",
+        )
+        conn = open_db(Path(args.db))
+        try:
+            apply_schema(conn, DEFAULT_SCHEMA)
+            seed_sources(conn)
+            cookie = str(args.cookie).strip() if getattr(args, "cookie", None) else ""
+            cookie_file = str(getattr(args, "cookie_file", "") or "").strip()
+            if cookie_file:
+                built = _cookie_header_from_playwright_cookies(
+                    Path(cookie_file),
+                    domain_contains=str(getattr(args, "cookie_domain", "") or "senado.es"),
+                )
+                if built:
+                    cookie = built
+            link_backfill = None
+            if not bool(args.skip_link_backfill):
+                link_backfill = backfill_initiative_links_from_raw_payload(
+                    conn,
+                    source_ids=initiative_source_ids,
+                    limit=0,
+                    only_missing=True,
+                    dry_run=bool(args.dry_run),
+                )
+            if bool(args.auto):
+                max_loops = int(args.max_loops)
+                if max_loops <= 0:
+                    raise SystemExit("max-loops debe ser > 0")
+                loops = 0
+                agg: dict[str, Any] = {
+                    "dry_run": bool(args.dry_run),
+                    "loops_run": 0,
+                    "stop_reason": "",
+                    "pages": [],
+                }
+                while loops < max_loops:
+                    page = backfill_initiative_documents_from_parl_initiatives(
+                        conn,
+                        initiative_source_ids=initiative_source_ids,
+                        raw_dir=Path(args.raw_dir),
+                        timeout=int(args.timeout),
+                        snapshot_date=str(args.snapshot_date) if args.snapshot_date else None,
+                        limit_initiatives=int(args.limit_initiatives),
+                        max_docs_per_initiative=int(args.max_docs_per_initiative),
+                        only_linked_to_votes=not bool(args.include_unlinked),
+                        only_missing=not bool(args.refetch_existing),
+                        retry_forbidden=bool(args.retry_forbidden),
+                        sleep_seconds=float(args.sleep_seconds),
+                        sleep_jitter_seconds=float(args.sleep_jitter_seconds),
+                        cookie=cookie or None,
+                        playwright_user_data_dir=str(args.playwright_user_data_dir) if args.playwright_user_data_dir else None,
+                        playwright_channel=str(args.playwright_channel or "chrome"),
+                        playwright_headless=bool(args.playwright_headless),
+                        archive_fallback=bool(args.archive_fallback),
+                        archive_timeout=int(args.archive_timeout),
+                        strict_network=bool(args.strict_network),
+                        dry_run=bool(args.dry_run),
+                    )
+                    agg["pages"].append(page)
+                    loops += 1
+                    agg["loops_run"] = loops
+
+                    initiatives_seen = int(page.get("initiatives_seen") or 0)
+                    candidate_urls = int(page.get("candidate_urls") or 0)
+                    fetched_ok = int(page.get("fetched_ok") or 0)
+                    if initiatives_seen <= 0 and candidate_urls <= 0:
+                        agg["stop_reason"] = "done"
+                        break
+                    if fetched_ok <= 0:
+                        agg["stop_reason"] = "no_progress"
+                        break
+
+                if not agg.get("stop_reason"):
+                    agg["stop_reason"] = "max_loops"
+                result = agg
+            else:
+                result = backfill_initiative_documents_from_parl_initiatives(
+                    conn,
+                    initiative_source_ids=initiative_source_ids,
+                    raw_dir=Path(args.raw_dir),
+                    timeout=int(args.timeout),
+                    snapshot_date=str(args.snapshot_date) if args.snapshot_date else None,
+                    limit_initiatives=int(args.limit_initiatives),
+                    max_docs_per_initiative=int(args.max_docs_per_initiative),
+                    only_linked_to_votes=not bool(args.include_unlinked),
+                    only_missing=not bool(args.refetch_existing),
+                    retry_forbidden=bool(args.retry_forbidden),
+                    sleep_seconds=float(args.sleep_seconds),
+                    sleep_jitter_seconds=float(args.sleep_jitter_seconds),
+                    cookie=cookie or None,
+                    playwright_user_data_dir=str(args.playwright_user_data_dir) if args.playwright_user_data_dir else None,
+                    playwright_channel=str(args.playwright_channel or "chrome"),
+                    playwright_headless=bool(args.playwright_headless),
+                    archive_fallback=bool(args.archive_fallback),
+                    archive_timeout=int(args.archive_timeout),
+                    strict_network=bool(args.strict_network),
+                    dry_run=bool(args.dry_run),
+                )
+            if link_backfill is not None:
+                result = {"link_backfill": link_backfill, "documents": result}
         finally:
             conn.close()
         print(json.dumps(result, ensure_ascii=True, sort_keys=True, indent=2))

@@ -99,6 +99,87 @@ def main() -> int:
         if str(meta.get("computed_method") or "") not in set(meths):
             die("meta.computed_method must be included in meta.methods_available")
 
+    # Optional v3 extension: aggregate quality semantics used by citizen UI status chips.
+    quality = meta.get("quality")
+    if quality is not None:
+        require_type(quality, dict, "meta.quality")
+        for k in (
+            "cells_total",
+            "stance_counts",
+            "clear_total",
+            "clear_pct",
+            "any_signal_total",
+            "any_signal_pct",
+            "unknown_total",
+            "unknown_pct",
+            "confidence_avg_signal",
+            "confidence_tiers",
+            "confidence_thresholds",
+        ):
+            require_key(quality, k, "meta.quality")
+
+        if not isinstance(quality["cells_total"], int):
+            die(f"Expected meta.quality.cells_total to be int, got {type(quality['cells_total']).__name__}")
+        if not isinstance(quality["clear_total"], int):
+            die(f"Expected meta.quality.clear_total to be int, got {type(quality['clear_total']).__name__}")
+        if not isinstance(quality["any_signal_total"], int):
+            die(
+                f"Expected meta.quality.any_signal_total to be int, got {type(quality['any_signal_total']).__name__}"
+            )
+        if not isinstance(quality["unknown_total"], int):
+            die(f"Expected meta.quality.unknown_total to be int, got {type(quality['unknown_total']).__name__}")
+        if quality["cells_total"] < 0 or quality["clear_total"] < 0 or quality["any_signal_total"] < 0 or quality["unknown_total"] < 0:
+            die("meta.quality integer counters must be >= 0")
+
+        for k in ("clear_pct", "any_signal_pct", "unknown_pct", "confidence_avg_signal"):
+            if not isinstance(quality[k], (int, float)):
+                die(f"Expected meta.quality.{k} to be number, got {type(quality[k]).__name__}")
+            x = float(quality[k])
+            if x < 0.0 or x > 1.0:
+                die(f"meta.quality.{k} must be in [0,1], got {x}")
+
+        require_type(quality["stance_counts"], dict, "meta.quality.stance_counts")
+        stance_counts = quality["stance_counts"]
+        for s in ALLOWED_STANCES:
+            if s not in stance_counts:
+                die(f"meta.quality.stance_counts missing key {s!r}")
+            if not isinstance(stance_counts[s], int):
+                die(
+                    f"Expected meta.quality.stance_counts[{s!r}] to be int, got {type(stance_counts[s]).__name__}"
+                )
+            if int(stance_counts[s]) < 0:
+                die(f"meta.quality.stance_counts[{s!r}] must be >= 0")
+        if sum(int(stance_counts[s]) for s in ALLOWED_STANCES) != int(quality["cells_total"]):
+            die("meta.quality.stance_counts must sum to meta.quality.cells_total")
+
+        require_type(quality["confidence_tiers"], dict, "meta.quality.confidence_tiers")
+        tiers = quality["confidence_tiers"]
+        for t in ("high", "medium", "low", "none"):
+            if t not in tiers:
+                die(f"meta.quality.confidence_tiers missing key {t!r}")
+            if not isinstance(tiers[t], int):
+                die(
+                    f"Expected meta.quality.confidence_tiers[{t!r}] to be int, got {type(tiers[t]).__name__}"
+                )
+            if int(tiers[t]) < 0:
+                die(f"meta.quality.confidence_tiers[{t!r}] must be >= 0")
+        if sum(int(tiers[t]) for t in ("high", "medium", "low", "none")) != int(quality["cells_total"]):
+            die("meta.quality.confidence_tiers must sum to meta.quality.cells_total")
+
+        require_type(quality["confidence_thresholds"], dict, "meta.quality.confidence_thresholds")
+        thresholds = quality["confidence_thresholds"]
+        for k in ("high_min", "medium_min"):
+            if k not in thresholds:
+                die(f"meta.quality.confidence_thresholds missing key {k!r}")
+            if not isinstance(thresholds[k], (int, float)):
+                die(
+                    f"Expected meta.quality.confidence_thresholds[{k!r}] to be number, got {type(thresholds[k]).__name__}"
+                )
+        high_min = float(thresholds["high_min"])
+        medium_min = float(thresholds["medium_min"])
+        if not (0.0 <= medium_min <= high_min <= 1.0):
+            die("meta.quality.confidence_thresholds must satisfy 0 <= medium_min <= high_min <= 1")
+
     topic_ids = []
     for i, t in enumerate(topics):
         ctx = f"topics[{i}]"

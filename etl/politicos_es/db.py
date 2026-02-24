@@ -176,6 +176,22 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             "created_at": "created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))",
             "updated_at": "updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))",
         },
+        "person_name_aliases": {
+            "source_kind": "source_kind TEXT NOT NULL DEFAULT 'manual_seed'",
+            "source_record_pk": "source_record_pk INTEGER REFERENCES source_records(source_record_pk)",
+            "evidence_date": "evidence_date TEXT",
+            "evidence_quote": "evidence_quote TEXT",
+        },
+        "liberty_indirect_responsibility_edges": {
+            "actor_person_name": "actor_person_name TEXT",
+            "actor_role_title": "actor_role_title TEXT",
+            "appointment_start_date": "appointment_start_date TEXT",
+            "appointment_end_date": "appointment_end_date TEXT",
+        },
+        "sanction_procedural_metrics": {
+            "evidence_date": "evidence_date TEXT",
+            "evidence_quote": "evidence_quote TEXT",
+        },
     }
 
     for table, columns in compat_columns.items():

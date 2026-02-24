@@ -228,6 +228,25 @@ class TestExportCitizenSnapshot(unittest.TestCase):
             self.assertEqual(meta["computed_method"], "combined")
             self.assertIn("methods_available", meta)
             self.assertEqual(meta["methods_available"], ["combined", "votes"])
+            self.assertIn("quality", meta)
+            quality = meta["quality"]
+            self.assertEqual(int(quality["cells_total"]), 4)
+            self.assertEqual(int(quality["clear_total"]), 4)
+            self.assertEqual(int(quality["any_signal_total"]), 4)
+            self.assertEqual(int(quality["unknown_total"]), 0)
+            self.assertAlmostEqual(float(quality["clear_pct"]), 1.0, places=6)
+            self.assertAlmostEqual(float(quality["any_signal_pct"]), 1.0, places=6)
+            self.assertAlmostEqual(float(quality["unknown_pct"]), 0.0, places=6)
+            self.assertAlmostEqual(float(quality["confidence_avg_signal"]), 0.775, places=6)
+            self.assertEqual(quality["confidence_tiers"], {"high": 4, "medium": 0, "low": 0, "none": 0})
+            self.assertEqual(
+                quality["stance_counts"],
+                {"support": 3, "oppose": 1, "mixed": 0, "unclear": 0, "no_signal": 0},
+            )
+            self.assertEqual(
+                quality["confidence_thresholds"],
+                {"high_min": 0.66, "medium_min": 0.33},
+            )
 
             topics = data["topics"]
             # vivienda + empleo => 2 topics selected, vivienda has 2 candidates but max=1 should pick the first.
