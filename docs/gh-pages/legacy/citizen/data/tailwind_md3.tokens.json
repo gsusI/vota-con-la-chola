@@ -1,0 +1,47 @@
+{
+  "schema_version": "md3-tailwind-v1",
+  "meta": {
+    "name": "citizen-md3-baseline",
+    "owner": "ai-ops-84",
+    "updated_at": "2026-02-23"
+  },
+  "colors": {
+    "primary": "#0b57d0",
+    "on_primary": "#ffffff",
+    "secondary": "#146c94",
+    "on_secondary": "#ffffff",
+    "surface": "#fefbff",
+    "surface_container": "#f3edf7",
+    "surface_variant": "#e7e0ec",
+    "on_surface": "#1d1b20",
+    "on_surface_variant": "#49454f",
+    "outline": "#79747e",
+    "error": "#b3261e",
+    "on_error": "#ffffff",
+    "success": "#0f766e",
+    "warning": "#b45309",
+    "info": "#1d4ed8"
+  },
+  "radii": {
+    "sm": "10px",
+    "md": "14px",
+    "lg": "18px",
+    "full": "999px"
+  },
+  "shadows": {
+    "sm": "0 4px 14px rgba(17, 24, 39, 0.08)",
+    "md": "0 12px 34px rgba(17, 24, 39, 0.12)"
+  },
+  "spacing": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px"
+  },
+  "typography": {
+    "sans": "\"Space Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "mono": "\"IBM Plex Mono\", ui-monospace, \"SFMono-Regular\", Menlo, Monaco, Consolas, \"Liberation Mono\", monospace"
+  }
+}
