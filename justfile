@@ -37,6 +37,9 @@ gh_pages_dir := env_var_or_default("GH_PAGES_DIR", "docs/gh-pages")
 gh_pages_remote := env_var_or_default("GH_PAGES_REMOTE", "origin")
 gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
 gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
+gh_pages_next_app_dir := env_var_or_default("GH_PAGES_NEXT_APP_DIR", "ui/gh-pages-next")
+gh_pages_next_out_dir := env_var_or_default("GH_PAGES_NEXT_OUT_DIR", "ui/gh-pages-next/out")
+gh_pages_next_base_path := env_var_or_default("GH_PAGES_NEXT_BASE_PATH", "")
 topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds/topic_taxonomy_es.json")
 textdoc_limit := env_var_or_default("TEXTDOC_LIMIT", "900")
 textdoc_timeout := env_var_or_default("TEXTDOC_TIMEOUT", "25")
@@ -2345,10 +2348,13 @@ explorer-bg-watch:
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/citizen
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
   mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
-  cp ui/graph/explorers.html {{gh_pages_dir}}/index.html
+  npm --prefix "{{gh_pages_next_app_dir}}" ci --no-audit --no-fund
+  NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" npm --prefix "{{gh_pages_next_app_dir}}" run export:gh
+  cp -R "{{gh_pages_next_out_dir}}"/. "{{gh_pages_dir}}"/
+  touch "{{gh_pages_dir}}/.nojekyll"
   cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
   cp ui/graph/index.html {{gh_pages_dir}}/graph/index.html
   cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-politico/index.html
