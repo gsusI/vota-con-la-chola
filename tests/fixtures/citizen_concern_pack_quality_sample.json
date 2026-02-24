@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "summary": {
+    "packs_total": 4,
+    "weak_packs_total": 2
+  },
+  "packs": [
+    {
+      "pack_id": "economia",
+      "weak": false,
+      "quality_score": 0.82
+    },
+    {
+      "pack_id": "vivienda",
+      "weak": true,
+      "quality_score": 0.41,
+      "weak_reasons": [
+        "unknown_cells_pct_high"
+      ]
+    },
+    {
+      "pack_id": "sanidad",
+      "weak": true,
+      "quality_score": 0.46,
+      "weak_reasons": [
+        "clear_cells_pct_low"
+      ]
+    },
+    {
+      "pack_id": "transparencia",
+      "weak": false,
+      "quality_score": 0.79
+    }
+  ]
+}
