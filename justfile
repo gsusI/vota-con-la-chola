@@ -2551,29 +2551,32 @@ explorer-bg-watch:
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/explorer-sports {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
-  mkdir -p {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  mkdir -p \
+    {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
+    {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
+    {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data \
+    {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data \
+    {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data \
+    {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data \
+    {{gh_pages_dir}}/legacy {{gh_pages_dir}}/legacy/citizen {{gh_pages_dir}}/legacy/citizen/data \
+    {{gh_pages_dir}}/legacy/graph {{gh_pages_dir}}/legacy/graph/data \
+    {{gh_pages_dir}}/legacy/explorer {{gh_pages_dir}}/legacy/explorer-sources \
+    {{gh_pages_dir}}/legacy/explorer-temas {{gh_pages_dir}}/legacy/explorer-votaciones \
+    {{gh_pages_dir}}/legacy/explorer-politico
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
   npm --prefix "{{gh_pages_next_app_dir}}" ci --no-audit --no-fund
   NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" npm --prefix "{{gh_pages_next_app_dir}}" run export:gh
   cp -R "{{gh_pages_next_out_dir}}"/. "{{gh_pages_dir}}"/
   touch "{{gh_pages_dir}}/.nojekyll"
-  cp ui/graph/explorer.html {{gh_pages_dir}}/explorer/index.html
-  cp ui/graph/index.html {{gh_pages_dir}}/graph/index.html
-  cp ui/graph/explorer-sports.html {{gh_pages_dir}}/explorer-politico/index.html
-  cp ui/graph/explorer-temas.html {{gh_pages_dir}}/explorer-temas/index.html
-  cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/explorer-votaciones/index.html
-  cp ui/graph/explorer-sources.html {{gh_pages_dir}}/explorer-sources/index.html
-  cp ui/citizen/index.html {{gh_pages_dir}}/citizen/index.html
-  cp ui/citizen/leaderboards.html {{gh_pages_dir}}/citizen/leaderboards.html
-  cp ui/citizen/preset_codec.js {{gh_pages_dir}}/citizen/preset_codec.js
-  cp ui/citizen/onboarding_funnel.js {{gh_pages_dir}}/citizen/onboarding_funnel.js
-  cp ui/citizen/first_answer_accelerator.js {{gh_pages_dir}}/citizen/first_answer_accelerator.js
-  cp ui/citizen/unknown_explainability.js {{gh_pages_dir}}/citizen/unknown_explainability.js
-  cp ui/citizen/cross_method_stability.js {{gh_pages_dir}}/citizen/cross_method_stability.js
-  cp ui/citizen/evidence_trust_panel.js {{gh_pages_dir}}/citizen/evidence_trust_panel.js
-  cp ui/citizen/tailwind_md3.generated.css {{gh_pages_dir}}/citizen/tailwind_md3.generated.css
-  cp ui/citizen/tailwind_md3.tokens.json {{gh_pages_dir}}/citizen/tailwind_md3.tokens.json
+  cp -R ui/citizen/. {{gh_pages_dir}}/legacy/citizen/
+  cp ui/graph/index.html {{gh_pages_dir}}/legacy/graph/index.html
+  cp ui/graph/explorer.html {{gh_pages_dir}}/legacy/explorer/index.html
+  cp ui/graph/explorer-sources.html {{gh_pages_dir}}/legacy/explorer-sources/index.html
+  cp ui/graph/explorer-temas.html {{gh_pages_dir}}/legacy/explorer-temas/index.html
+  cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/legacy/explorer-votaciones/index.html
+  cp ui/graph/explorer-sports.html {{gh_pages_dir}}/legacy/explorer-politico/index.html
+  cp ui/gh-pages-next/public/legacy/index.html {{gh_pages_dir}}/legacy/index.html
   cp ui/citizen/tailwind_md3.tokens.json {{gh_pages_dir}}/citizen/data/tailwind_md3.tokens.json
   cp ui/citizen/concerns_v1.json {{gh_pages_dir}}/citizen/data/concerns_v1.json
   python3 scripts/validate_citizen_concerns.py \
@@ -2615,6 +2618,12 @@ explorer-gh-pages-build:
     --topic-set-id 1 \
     --computed-method declared \
     --max-bytes 5000000
+  cp -R "{{gh_pages_dir}}/citizen/data/." "{{gh_pages_dir}}/legacy/citizen/data/"
+  cp -R "{{gh_pages_dir}}/graph/data/." "{{gh_pages_dir}}/legacy/graph/data/"
+  cp -R "{{gh_pages_dir}}/explorer-temas/data/." "{{gh_pages_dir}}/legacy/graph/data/"
+  cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{gh_pages_dir}}/legacy/graph/data/"
+  cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{gh_pages_dir}}/legacy/graph/data/"
+  cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{gh_pages_dir}}/legacy/graph/data/"
   python3 scripts/validate_citizen_snapshot.py \
     --path "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --max-bytes 5000000 \
@@ -2631,7 +2640,9 @@ explorer-gh-pages-build:
     --snapshot "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
     --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json"
+  cp "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json" "{{gh_pages_dir}}/legacy/citizen/data/concern_pack_quality.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
+  cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/legacy/graph/data/ideal.json"
   just privacy-check-public-artifacts
   @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 

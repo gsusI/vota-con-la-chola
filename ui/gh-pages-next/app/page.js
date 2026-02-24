@@ -5,7 +5,7 @@ const sections = [
     note: "Compara prioridades personales contra posturas por partido.",
   },
   {
-    href: "/citizen/leaderboards.html",
+    href: "/citizen/leaderboards/",
     title: "Leaderboards",
     note: "Rankings transparentes por hipotesis y cobertura.",
   },
