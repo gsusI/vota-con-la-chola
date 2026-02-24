@@ -26,9 +26,11 @@ DEFAULT_ENV_FILE = Path(".env")
 DEFAULT_DATASET_NAME = "vota-con-la-chola-data"
 DEFAULT_SOURCE_REPO_URL = "https://github.com/gsusI/vota-con-la-chola"
 STATIC_PUBLISHED_FILES = ("proximas-elecciones-espana.json", "poblacion_municipios_es.json")
+LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 PLACEHOLDER_VALUES = {"", "your_hf_token_here", "your_hf_username_here"}
 DEFAULT_PARQUET_EXCLUDE_TABLES = ("raw_fetches", "run_fetches", "source_records", "lost_and_found")
 DEFAULT_SENSITIVE_PARQUET_TABLES = frozenset(DEFAULT_PARQUET_EXCLUDE_TABLES)
+LEGAL_REVIEWED_ON = "2026-02-21"
 SENSITIVE_QUERY_KEY_TOKENS = (
     "token",
     "secret",
@@ -49,6 +51,248 @@ SENSITIVE_KV_RE = re.compile(
     r"(?i)\b(token|api[_-]?key|password|passwd|secret|cookie|access_token|refresh_token|client_secret)\b\s*[:=]\s*([^\s,;]+)"
 )
 AUTH_KV_RE = re.compile(r"(?i)\bauthorization\b\s*[:=]\s*(?!bearer\b)([^\s,;]+)")
+EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
+LOCAL_USER_SEGMENT_RE = re.compile(r"/Users/[^/\s]+")
+LOCAL_HOME_SEGMENT_RE = re.compile(r"/home/[^/\s]+")
+
+
+DEFAULT_LEGAL_OBLIGATIONS = (
+    "No desnaturalizar ni tergiversar la información de origen.",
+    "Citar la fuente institucional de forma visible.",
+    "Indicar fecha de última actualización/extracción cuando conste.",
+    "No sugerir patrocinio o respaldo institucional.",
+    "Conservar metadatos relevantes de actualización y condiciones de reutilización.",
+)
+
+CC_BY_4_OBLIGATIONS = (
+    "Atribuir la fuente conforme a CC BY 4.0.",
+    "Indicar si hubo cambios, transformaciones o elaboración propia.",
+)
+
+CC_BY_3_ES_OBLIGATIONS = (
+    "Atribuir la fuente conforme a CC BY 3.0 ES.",
+    "Indicar públicamente cambios/adaptaciones cuando existan.",
+)
+
+BDE_OBLIGATIONS = (
+    "No alterar contenido ni metadatos de origen cuando se redistribuyen como mirror.",
+    "Atribuir la fuente (Banco de España) e indicar fecha de actualización.",
+    "Si hay elaboración propia, indicarla explícitamente.",
+    "No intentar reidentificación de personas ni circular datos personales identificables.",
+)
+
+EUROSTAT_OBLIGATIONS = (
+    "Reconocer la fuente Eurostat en redistribución/transformación.",
+    "Indicar cambios/adaptaciones cuando existan.",
+    "Revisar excepciones de material de terceros antes de habilitar reutilización comercial.",
+)
+
+DEFAULT_LEGAL_PROFILE = {
+    "verification_status": "pending_review",
+    "reuse_basis": "Sin verificación documental específica en este snapshot",
+    "terms_url": "",
+    "obligations": (
+        "Verificar aviso legal/licencia del dominio de origen antes de redistribución comercial.",
+    ),
+    "notes": "Estado pendiente: falta evidencia legal consolidada por fuente.",
+    "personal_data_notes": (
+        "Si existen datos personales, aplicar minimización, evitar reidentificación y atender solicitudes de derechos."
+    ),
+}
+
+LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
+    "congreso_diputados": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal del Congreso (reutilización autorizada con condiciones)",
+        "terms_url": "https://www.congreso.es/es/avisoLegal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "congreso_votaciones": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal del Congreso (reutilización autorizada con condiciones)",
+        "terms_url": "https://www.congreso.es/es/avisoLegal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "congreso_iniciativas": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal del Congreso (reutilización autorizada con condiciones)",
+        "terms_url": "https://www.congreso.es/es/avisoLegal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "congreso_intervenciones": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal del Congreso (reutilización autorizada con condiciones)",
+        "terms_url": "https://www.congreso.es/es/avisoLegal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "senado_senadores": {
+        "verification_status": "verified",
+        "reuse_basis": "CC BY 4.0 (datos abiertos del Senado)",
+        "terms_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html",
+        "obligations": CC_BY_4_OBLIGATIONS,
+        "notes": "Redistribución y transformación permitidas con atribución.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "senado_votaciones": {
+        "verification_status": "verified",
+        "reuse_basis": "CC BY 4.0 (datos abiertos del Senado)",
+        "terms_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html",
+        "obligations": CC_BY_4_OBLIGATIONS,
+        "notes": "Redistribución y transformación permitidas con atribución.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "senado_iniciativas": {
+        "verification_status": "verified",
+        "reuse_basis": "CC BY 4.0 (datos abiertos del Senado)",
+        "terms_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html",
+        "obligations": CC_BY_4_OBLIGATIONS,
+        "notes": "Redistribución y transformación permitidas con atribución.",
+        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+    },
+    "boe_api_legal": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal BOE (reutilización autorizada con condiciones y excepciones de terceros)",
+        "terms_url": "https://www.boe.es",
+        "obligations": (
+            "Atribuir la fuente BOE y enlazar al origen cuando sea posible.",
+            "Indicar cambios/adaptaciones cuando existan.",
+            "Excluir o segregar materiales con restricciones de terceros (p. ej. NC/ND).",
+        ),
+        "notes": "Aplicar exclusiones de terceros cuando correspondan.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "moncloa_referencias": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal La Moncloa (reproducción/modificación/distribución autorizadas)",
+        "terms_url": "https://www.lamoncloa.gob.es/Paginas/avisolegal.aspx",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Atribución explícita a La Moncloa/Ministerio de la Presidencia.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "moncloa_rss_referencias": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal La Moncloa (reproducción/modificación/distribución autorizadas)",
+        "terms_url": "https://www.lamoncloa.gob.es/Paginas/avisolegal.aspx",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Atribución explícita a La Moncloa/Ministerio de la Presidencia.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "bdns_api_subvenciones": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones)",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Riesgo adicional GDPR cuando haya beneficiarios personas físicas.",
+        "personal_data_notes": "Aplicar minimización; considerar segregación/anonimización de beneficiarios personas físicas.",
+    },
+    "bdns_autonomico": {
+        "verification_status": "verified",
+        "reuse_basis": "Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones)",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Riesgo adicional GDPR cuando haya beneficiarios personas físicas.",
+        "personal_data_notes": "Aplicar minimización; considerar segregación/anonimización de beneficiarios personas físicas.",
+    },
+    "placsp_sindicacion": {
+        "verification_status": "verified",
+        "reuse_basis": "PLACSP: reproducción autorizada con cita de origen; datasets vinculados a datos abiertos de Hacienda",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": (
+            "Citar el origen de la información.",
+            "No desnaturalizar el contenido de origen.",
+            "Conservar metadatos/condiciones de reutilización cuando existan.",
+        ),
+        "notes": "Si se mezcla con datasets de Hacienda, aplican además condiciones del aviso legal tipo.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "placsp_autonomico": {
+        "verification_status": "verified",
+        "reuse_basis": "PLACSP: reproducción autorizada con cita de origen; datasets vinculados a datos abiertos de Hacienda",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": (
+            "Citar el origen de la información.",
+            "No desnaturalizar el contenido de origen.",
+            "Conservar metadatos/condiciones de reutilización cuando existan.",
+        ),
+        "notes": "Si se mezcla con datasets de Hacienda, aplican además condiciones del aviso legal tipo.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "municipal_concejales": {
+        "verification_status": "verified",
+        "reuse_basis": "Portal concejales.redsara: condiciones alineadas con aviso legal tipo AGE",
+        "terms_url": "https://concejales.redsara.es",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "Datos de cargos electos con finalidad de transparencia.",
+        "personal_data_notes": "Minimizar campos no necesarios y evitar exposición de datos de contacto personal.",
+    },
+    "asamblea_madrid_ocupaciones": {
+        "verification_status": "verified",
+        "reuse_basis": "CC BY 3.0 ES (Asamblea de Madrid, salvo indicación en contrario)",
+        "terms_url": "https://www.asambleamadrid.es/datos-abiertos",
+        "obligations": CC_BY_3_ES_OBLIGATIONS,
+        "notes": "Atribuir explícitamente a Asamblea de Madrid.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "aemet_opendata_series": {
+        "verification_status": "verified",
+        "reuse_basis": "CC BY 4.0 (distribuciones AEMET en catálogo datos.gob.es)",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": CC_BY_4_OBLIGATIONS,
+        "notes": "Confirmado vía catálogo oficial; mantener atribución de fuente.",
+        "personal_data_notes": "No aplica normalmente (series agregadas).",
+    },
+    "bde_series_api": {
+        "verification_status": "verified",
+        "reuse_basis": "Términos de uso estadísticos Banco de España (reutilización con integridad/atribución)",
+        "terms_url": "https://www.bde.es",
+        "obligations": BDE_OBLIGATIONS,
+        "notes": "Cuando haya tratamiento, indicar elaboración propia con datos extraídos.",
+        "personal_data_notes": "Difundir solo resultados agregados cuando exista riesgo de identificación.",
+    },
+    "eurostat_sdmx": {
+        "verification_status": "partially_verified",
+        "reuse_basis": "Política de reutilización Eurostat (permitida con reconocimiento de fuente, con excepciones)",
+        "terms_url": "https://ec.europa.eu/eurostat/about/policies/copyright/",
+        "obligations": EUROSTAT_OBLIGATIONS,
+        "notes": "Revisar excepciones de terceros por dataset antes de etiquetar como libre comercial sin reservas.",
+        "personal_data_notes": "No aplica normalmente (series agregadas).",
+    },
+    "infoelectoral_descargas": {
+        "verification_status": "partially_verified",
+        "reuse_basis": "Indicio fuerte de adopción de aviso legal tipo AGE (datos.gob.es/aviso-legal)",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "No se pudo abrir el aviso legal del portal en este entorno; confirmar en próxima revisión.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "infoelectoral_procesos": {
+        "verification_status": "partially_verified",
+        "reuse_basis": "Indicio fuerte de adopción de aviso legal tipo AGE (datos.gob.es/aviso-legal)",
+        "terms_url": "https://datos.gob.es/es/aviso-legal",
+        "obligations": DEFAULT_LEGAL_OBLIGATIONS,
+        "notes": "No se pudo abrir el aviso legal del portal en este entorno; confirmar en próxima revisión.",
+        "personal_data_notes": "No publicar campos personales innecesarios.",
+    },
+    "europarl_meps": {
+        "verification_status": "not_verified",
+        "reuse_basis": "No verificado: falta evidencia documental específica del recurso XML de MEPs",
+        "terms_url": "https://www.europarl.europa.eu/legal-notice/es/",
+        "obligations": (
+            "No asumir reutilización comercial hasta verificar licencia específica del recurso.",
+            "Conservar evidencia de la revisión legal cuando se confirme.",
+        ),
+        "notes": "Estado no confirmado en esta revisión.",
+        "personal_data_notes": "Aplicar minimización al redistribuir datos personales de representantes.",
+    },
+}
 
 
 def now_utc_iso() -> str:
@@ -125,6 +369,22 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Permitir snapshot sin artefactos publicados por fecha",
     )
+    p.add_argument(
+        "--require-quality-report",
+        action="store_true",
+        help=(
+            "Falla si no se encuentra quality report de votaciones-kpis para el snapshot "
+            "(guardrail recomendado para publish reproducible)."
+        ),
+    )
+    p.add_argument(
+        "--require-liberty-atlas-release-latest",
+        action="store_true",
+        help=(
+            "Falla si no existe `published/liberty-restrictions-atlas-release-latest.json` "
+            "o si su `snapshot_date` no coincide con el snapshot a publicar."
+        ),
+    )
     return p.parse_args()
 
 
@@ -183,6 +443,19 @@ def yaml_q(value: str) -> str:
     return json.dumps(value, ensure_ascii=True)
 
 
+def md_escape_table(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ").strip()
+
+
+def format_terms_cell(value: str) -> str:
+    terms_url = value.strip()
+    if not terms_url:
+        return "-"
+    if terms_url.startswith("http://") or terms_url.startswith("https://"):
+        return f"[link]({terms_url})"
+    return f"`{md_escape_table(terms_url)}`"
+
+
 def sha256_file(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as fh:
@@ -211,6 +484,9 @@ def collect_published_files(published_dir: Path, snapshot_date: str) -> list[Pat
         static_path = published_dir / static_name
         if static_path.exists() and static_path.is_file():
             filtered.append(static_path)
+    atlas_release_latest_path = published_dir / LIBERTY_ATLAS_RELEASE_LATEST_FILE
+    if atlas_release_latest_path.exists() and atlas_release_latest_path.is_file():
+        filtered.append(atlas_release_latest_path)
     # Preserve deterministic ordering and avoid accidental duplicates.
     unique: list[Path] = []
     seen: set[str] = set()
@@ -220,6 +496,151 @@ def collect_published_files(published_dir: Path, snapshot_date: str) -> list[Pat
         seen.add(path.name)
         unique.append(path)
     return unique
+
+
+def _read_json_or_gz(path: Path) -> dict[str, Any]:
+    try:
+        if path.suffix == ".gz":
+            with gzip.open(path, "rt", encoding="utf-8") as fh:
+                obj = json.load(fh)
+        else:
+            obj = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return obj if isinstance(obj, dict) else {}
+
+
+def extract_quality_report_summary(
+    published_files: list[Path],
+    snapshot_date: str,
+) -> dict[str, Any]:
+    date_token = str(snapshot_date).strip()
+    preferred_names = (
+        f"votaciones-kpis-es-{date_token}.json",
+        f"votaciones-kpis-es-{date_token}.json.gz",
+    )
+    by_name = {p.name: p for p in published_files}
+    candidate: Path | None = None
+    for name in preferred_names:
+        p = by_name.get(name)
+        if p is not None:
+            candidate = p
+            break
+    if candidate is None:
+        fallback = [
+            p
+            for p in published_files
+            if "votaciones-kpis" in p.name and date_token in p.name and p.suffix in {".json", ".gz"}
+        ]
+        if fallback:
+            candidate = sorted(fallback, key=lambda p: p.name)[0]
+    if candidate is None:
+        return {}
+
+    payload = _read_json_or_gz(candidate)
+    if not payload:
+        return {}
+
+    summary: dict[str, Any] = {
+        "file_name": candidate.name,
+        "vote_gate_passed": bool(payload.get("gate", {}).get("passed")),
+    }
+    vote_kpis = payload.get("kpis", {})
+    if isinstance(vote_kpis, dict):
+        if "events_total" in vote_kpis:
+            summary["events_total"] = int(vote_kpis.get("events_total") or 0)
+        if "member_votes_with_person_id_pct" in vote_kpis:
+            summary["member_votes_with_person_id_pct"] = float(
+                vote_kpis.get("member_votes_with_person_id_pct") or 0.0
+            )
+
+    initiatives = payload.get("initiatives")
+    if isinstance(initiatives, dict):
+        summary["initiative_gate_passed"] = bool(initiatives.get("gate", {}).get("passed"))
+        init_kpis = initiatives.get("kpis", {})
+        if isinstance(init_kpis, dict):
+            if "downloaded_doc_links" in init_kpis:
+                summary["downloaded_doc_links"] = int(init_kpis.get("downloaded_doc_links") or 0)
+            if "missing_doc_links_actionable" in init_kpis:
+                summary["missing_doc_links_actionable"] = int(
+                    init_kpis.get("missing_doc_links_actionable") or 0
+                )
+            if "extraction_coverage_pct" in init_kpis:
+                summary["extraction_coverage_pct"] = float(
+                    init_kpis.get("extraction_coverage_pct") or 0.0
+                )
+            if "extraction_review_closed_pct" in init_kpis:
+                summary["extraction_review_closed_pct"] = float(
+                    init_kpis.get("extraction_review_closed_pct") or 0.0
+                )
+    return summary
+
+
+def ensure_quality_report_for_publish(
+    quality_summary: dict[str, Any],
+    *,
+    require_quality_report: bool,
+    snapshot_date: str,
+    published_dir: Path,
+) -> None:
+    if not require_quality_report:
+        return
+    if not quality_summary:
+        raise ValueError(
+            "No se encontró quality_report (votaciones-kpis) para snapshot "
+            f"{snapshot_date} en {published_dir}. "
+            "Genera `votaciones-kpis-es-<snapshot>.json` o desactiva --require-quality-report."
+        )
+    file_name = str(quality_summary.get("file_name") or "")
+    if not file_name:
+        raise ValueError("quality_report encontrado pero sin `file_name`.")
+    if not file_name.startswith("votaciones-kpis-es-"):
+        raise ValueError(f"quality_report.file_name inesperado: {file_name!r}")
+    if "vote_gate_passed" not in quality_summary:
+        raise ValueError("quality_report encontrado pero sin `vote_gate_passed`.")
+
+
+def ensure_liberty_atlas_release_latest_for_publish(
+    *,
+    published_dir: Path,
+    snapshot_date: str,
+    require_release_latest: bool,
+) -> dict[str, Any]:
+    if not require_release_latest:
+        return {}
+
+    latest_path = published_dir / LIBERTY_ATLAS_RELEASE_LATEST_FILE
+    if not latest_path.exists():
+        raise ValueError(
+            "No se encontró `published/liberty-restrictions-atlas-release-latest.json` "
+            f"en {published_dir} para snapshot {snapshot_date}. "
+            "Ejecuta `just parl-publish-liberty-atlas-artifacts` antes de publicar a HF."
+        )
+
+    payload = _read_json_or_gz(latest_path)
+    if not payload:
+        raise ValueError(
+            f"`{LIBERTY_ATLAS_RELEASE_LATEST_FILE}` no contiene JSON válido."
+        )
+
+    release_status = str(payload.get("status") or "").strip().lower()
+    if release_status and release_status != "ok":
+        raise ValueError(
+            f"`{LIBERTY_ATLAS_RELEASE_LATEST_FILE}` tiene status no válido: {release_status!r}."
+        )
+
+    release_snapshot_date = str(payload.get("snapshot_date") or "").strip()
+    if release_snapshot_date != snapshot_date:
+        raise ValueError(
+            f"`{LIBERTY_ATLAS_RELEASE_LATEST_FILE}` apunta a snapshot_date={release_snapshot_date!r} "
+            f"y no coincide con el snapshot a publicar {snapshot_date!r}."
+        )
+
+    return {
+        "file_name": latest_path.name,
+        "snapshot_date": release_snapshot_date,
+        "status": release_status or "ok",
+    }
 
 
 def export_ingestion_runs_csv(db_path: Path, out_csv: Path) -> int:
@@ -263,7 +684,7 @@ def export_ingestion_runs_csv(db_path: Path, out_csv: Path) -> int:
     return len(rows)
 
 
-def export_source_records_by_source(db_path: Path, snapshot_date: str, out_csv: Path) -> tuple[int, int]:
+def export_source_records_by_source(db_path: Path, snapshot_date: str, out_csv: Path) -> tuple[int, int, dict[str, int]]:
     query = """
         SELECT
             source_id,
@@ -284,8 +705,121 @@ def export_source_records_by_source(db_path: Path, snapshot_date: str, out_csv: 
         writer = csv.writer(fh)
         writer.writerow(("source_id", "records"))
         writer.writerows(rows)
-    total = sum(int(row[1]) for row in rows)
-    return len(rows), total
+    counts = {str(row[0]): int(row[1]) for row in rows}
+    total = sum(counts.values())
+    return len(rows), total, counts
+
+
+def fetch_sources_catalog(db_path: Path) -> dict[str, dict[str, str]]:
+    query = """
+        SELECT source_id, name, scope, default_url
+        FROM sources
+        ORDER BY source_id
+    """
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    try:
+        try:
+            rows = conn.execute(query).fetchall()
+        except sqlite3.OperationalError:
+            return {}
+    finally:
+        conn.close()
+    out: dict[str, dict[str, str]] = {}
+    for row in rows:
+        source_id = str(row["source_id"])
+        out[source_id] = {
+            "name": str(row["name"] or source_id),
+            "scope": str(row["scope"] or ""),
+            "default_url": str(row["default_url"] or ""),
+        }
+    return out
+
+
+def legal_status_label(status: str) -> str:
+    mapping = {
+        "verified": "verificado",
+        "partially_verified": "parcial",
+        "pending_review": "pendiente",
+        "not_verified": "no verificado",
+    }
+    return mapping.get(status, status)
+
+
+def clone_legal_profile(template: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "verification_status": str(template.get("verification_status") or "pending_review"),
+        "reuse_basis": str(template.get("reuse_basis") or ""),
+        "terms_url": str(template.get("terms_url") or ""),
+        "obligations": [str(item) for item in template.get("obligations", ()) if str(item).strip()],
+        "notes": str(template.get("notes") or ""),
+        "personal_data_notes": str(template.get("personal_data_notes") or ""),
+        "reviewed_on": LEGAL_REVIEWED_ON,
+    }
+
+
+def resolve_source_legal_profile(source_id: str, default_url: str) -> dict[str, Any]:
+    template = LEGAL_PROFILE_BY_SOURCE.get(source_id)
+    if template is None:
+        profile = clone_legal_profile(DEFAULT_LEGAL_PROFILE)
+        profile["terms_url"] = default_url or profile["terms_url"]
+        profile["notes"] = (
+            "Fuente sin ficha legal específica en esta versión. "
+            "Revisión manual requerida antes de redistribución comercial."
+        )
+        return profile
+    profile = clone_legal_profile(template)
+    if not profile["terms_url"]:
+        profile["terms_url"] = default_url
+    return profile
+
+
+def export_source_legal_metadata(
+    snapshot_dir: Path,
+    snapshot_date: str,
+    source_records_counts: dict[str, int],
+    sources_catalog: dict[str, dict[str, str]],
+) -> tuple[list[Path], list[dict[str, Any]]]:
+    out_dir = snapshot_dir / "sources"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    rel_paths: list[Path] = []
+    readme_entries: list[dict[str, Any]] = []
+
+    for source_id in sorted(source_records_counts):
+        records = int(source_records_counts[source_id])
+        source_meta = sources_catalog.get(source_id, {})
+        source_name = str(source_meta.get("name") or source_id)
+        scope = str(source_meta.get("scope") or "")
+        default_url = sanitize_url_for_public(str(source_meta.get("default_url") or ""))
+        legal_profile = resolve_source_legal_profile(source_id, default_url)
+
+        payload = {
+            "source_id": source_id,
+            "source_name": source_name,
+            "scope": scope,
+            "default_url": default_url,
+            "snapshot_date": snapshot_date,
+            "records_in_snapshot": records,
+            "licensing": legal_profile,
+            "no_institutional_endorsement": True,
+        }
+        rel = Path("sources") / f"{source_id}.json"
+        (snapshot_dir / rel).write_text(
+            json.dumps(payload, ensure_ascii=True, sort_keys=True, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        rel_paths.append(rel)
+        readme_entries.append(
+            {
+                "source_id": source_id,
+                "records": records,
+                "status": legal_profile["verification_status"],
+                "reuse_basis": legal_profile["reuse_basis"],
+                "terms_url": legal_profile["terms_url"],
+            }
+        )
+
+    return rel_paths, readme_entries
 
 
 def write_checksums(snapshot_dir: Path, relative_paths: list[Path]) -> None:
@@ -331,13 +865,19 @@ def redact_sensitive_text(value: str) -> str:
     def repl(match: re.Match[str]) -> str:
         return f"{match.group(1)}=REDACTED"
 
-    return SENSITIVE_KV_RE.sub(repl, redacted)
+    redacted = SENSITIVE_KV_RE.sub(repl, redacted)
+    redacted = EMAIL_RE.sub("<redacted-email>", redacted)
+    redacted = LOCAL_USER_SEGMENT_RE.sub("/Users/<redacted-user>", redacted)
+    redacted = LOCAL_HOME_SEGMENT_RE.sub("/home/<redacted-user>", redacted)
+    return redacted
 
 
 def sanitize_url_for_public(raw_url: str) -> str:
     text = raw_url.strip()
     if not text:
         return text
+    if text.lower().startswith("file://"):
+        return ""
     try:
         parsed = urlsplit(text)
     except ValueError:
@@ -741,8 +1281,10 @@ def build_dataset_readme(
     snapshot_rel_dir: Path,
     parquet_tables: list[dict[str, Any]],
     parquet_excluded_tables: list[str],
+    source_legal_entries: list[dict[str, Any]],
     include_sqlite_gz: bool,
     source_repo_url: str,
+    quality_summary: dict[str, Any] | None = None,
 ) -> str:
     lines: list[str] = [
         "---",
@@ -778,8 +1320,10 @@ def build_dataset_readme(
             "",
             f"Repositorio fuente: [{source_repo_url}]({source_repo_url})",
             "",
-            "Contenido por snapshot:",
+            "Contenido por snapshot (capas raw + processed):",
+            f"- `{snapshot_rel_dir.as_posix()}/published/*`: capa raw reproducible (artefactos canónicos JSON/JSON.GZ).",
             f"- `{snapshot_rel_dir.as_posix()}/parquet/<tabla>/part-*.parquet`: tablas navegables en Data Studio.",
+            f"- `{snapshot_rel_dir.as_posix()}/sources/<source_id>.json`: procedencia legal por fuente (licencia/aviso, obligaciones, terms_url, estado de verificación).",
         ]
     )
     if include_sqlite_gz:
@@ -792,11 +1336,47 @@ def build_dataset_readme(
         )
     lines.extend(
         [
-            "- `published/*`: artefactos canónicos JSON/JSON.GZ.",
             "- `ingestion_runs.csv`: historial de corridas de ingesta.",
             "- `source_records_by_source.csv`: conteos por fuente para la fecha del snapshot.",
             "- `explorer_schema.json`: contrato de esquema (tablas/PK/FK) para exploración en navegador.",
             "- `manifest.json` y `checksums.sha256`: trazabilidad e integridad.",
+            "",
+            "Licencia del repo Hugging Face:",
+            "- `license: other` porque el snapshot mezcla múltiples licencias/avisos por fuente.",
+            "- La licencia/condiciones aplicables están detalladas por `source_id` en `sources/*.json`.",
+        ]
+    )
+    if quality_summary:
+        quality_file_name = str(quality_summary.get("file_name") or "")
+        if quality_file_name:
+            lines.append(
+                f"- `published/{quality_file_name}`: reporte de calidad (votos/iniciativas) usado para gates del snapshot."
+            )
+    if source_legal_entries:
+        lines.extend(
+            [
+                "",
+                "Resumen legal por fuente (snapshot actual):",
+                "| source_id | registros | verificación | base legal/licencia | terms_url |",
+                "|---|---:|---|---|---|",
+            ]
+        )
+        for row in sorted(source_legal_entries, key=lambda item: str(item["source_id"])):
+            source_id = str(row["source_id"])
+            records = int(row["records"])
+            status = legal_status_label(str(row["status"]))
+            reuse_basis = md_escape_table(str(row["reuse_basis"]))
+            terms_url = str(row["terms_url"] or "")
+            terms_cell = format_terms_cell(terms_url)
+            lines.append(f"| `{source_id}` | {records} | {status} | {reuse_basis} | {terms_cell} |")
+    lines.extend(
+        [
+            "",
+            "Cautelas de cumplimiento:",
+            "- Este dataset no implica respaldo institucional de las fuentes.",
+            "- Cuando una fuente exige integridad/no alteración para mirror, mantener `published/*` como capa raw y declarar transformaciones en derivados.",
+            "- Si hay datos personales, aplicar minimización, evitar reidentificación y revisar compatibilidad de finalidad (GDPR).",
+            "- Fuentes con estado `parcial`, `pendiente` o `no verificado` requieren revisión legal adicional antes de reutilización comercial sensible.",
             "",
             "Ruta del último snapshot publicado en este commit:",
             f"- `{snapshot_rel_dir.as_posix()}` (snapshot_date={snapshot_date})",
@@ -806,6 +1386,32 @@ def build_dataset_readme(
             "- `just etl-publish-hf` para publicar actualización.",
         ]
     )
+    if quality_summary:
+        lines.extend(["", "Resumen de calidad del snapshot:"])
+        lines.append(f"- Vote gate: {'PASS' if bool(quality_summary.get('vote_gate_passed')) else 'FAIL'}")
+        if "initiative_gate_passed" in quality_summary:
+            lines.append(
+                f"- Initiative gate: {'PASS' if bool(quality_summary.get('initiative_gate_passed')) else 'FAIL'}"
+            )
+        if "events_total" in quality_summary:
+            lines.append(f"- Eventos analizados: {int(quality_summary.get('events_total') or 0)}")
+        if "downloaded_doc_links" in quality_summary:
+            lines.append(f"- Initiative doc links descargados: {int(quality_summary.get('downloaded_doc_links') or 0)}")
+        if "missing_doc_links_actionable" in quality_summary:
+            lines.append(
+                "- Initiative doc links pendientes accionables: "
+                f"{int(quality_summary.get('missing_doc_links_actionable') or 0)}"
+            )
+        if "extraction_coverage_pct" in quality_summary:
+            lines.append(
+                "- Cobertura de extracción en docs descargados: "
+                f"{float(quality_summary.get('extraction_coverage_pct') or 0.0) * 100:.1f}%"
+            )
+        if "extraction_review_closed_pct" in quality_summary:
+            lines.append(
+                "- Cierre de cola de revisión de extracción: "
+                f"{float(quality_summary.get('extraction_review_closed_pct') or 0.0) * 100:.1f}%"
+            )
     return "\n".join(lines) + "\n"
 
 
@@ -828,6 +1434,22 @@ def main() -> int:
 
     published_dir = Path(args.published_dir)
     published_files = collect_published_files(published_dir, snapshot_date)
+    quality_summary = extract_quality_report_summary(published_files, snapshot_date)
+    try:
+        ensure_quality_report_for_publish(
+            quality_summary,
+            require_quality_report=bool(args.require_quality_report),
+            snapshot_date=snapshot_date,
+            published_dir=published_dir,
+        )
+        liberty_atlas_release_latest_summary = ensure_liberty_atlas_release_latest_for_publish(
+            published_dir=published_dir,
+            snapshot_date=snapshot_date,
+            require_release_latest=bool(args.require_liberty_atlas_release_latest),
+        )
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
     if not published_files and not args.allow_empty_published:
         print(
             "ERROR: no se encontraron artefactos publicados para el snapshot "
@@ -895,10 +1517,19 @@ def main() -> int:
         tracked_files.append(Path("ingestion_runs.csv"))
 
         source_records_csv = snapshot_dir / "source_records_by_source.csv"
-        source_records_rows, source_records_total = export_source_records_by_source(
+        source_records_rows, source_records_total, source_records_counts = export_source_records_by_source(
             db_path, snapshot_date, source_records_csv
         )
         tracked_files.append(Path("source_records_by_source.csv"))
+
+        sources_catalog = fetch_sources_catalog(db_path)
+        source_legal_rel_paths, source_legal_entries = export_source_legal_metadata(
+            snapshot_dir=snapshot_dir,
+            snapshot_date=snapshot_date,
+            source_records_counts=source_records_counts,
+            sources_catalog=sources_catalog,
+        )
+        tracked_files.extend(source_legal_rel_paths)
 
         explorer_schema_rel = export_explorer_schema_snapshot(db_path, snapshot_dir)
         tracked_files.append(explorer_schema_rel)
@@ -939,6 +1570,10 @@ def main() -> int:
 
         manifest_rel = Path("manifest.json")
         manifest_path = snapshot_dir / manifest_rel
+        legal_status_counts: dict[str, int] = {}
+        for row in source_legal_entries:
+            status = str(row["status"])
+            legal_status_counts[status] = legal_status_counts.get(status, 0) + 1
         manifest = {
             "project": "vota-con-la-chola",
             "snapshot_date": snapshot_date,
@@ -952,6 +1587,8 @@ def main() -> int:
                 "ingestion_runs_rows": ingestion_runs_rows,
                 "source_records_by_source_rows": source_records_rows,
                 "source_records_snapshot_total": source_records_total,
+                "source_legal_files_count": len(source_legal_rel_paths),
+                "source_legal_status_counts": legal_status_counts,
                 "parquet_files_count": len(parquet_rel_paths),
                 "parquet_tables_count": len(parquet_tables),
                 "parquet_rows_total": sum(int(item["rows"]) for item in parquet_tables),
@@ -967,6 +1604,10 @@ def main() -> int:
                 "tables": parquet_tables,
             },
         }
+        if quality_summary:
+            manifest["quality_report"] = quality_summary
+        if liberty_atlas_release_latest_summary:
+            manifest["liberty_atlas_release_latest"] = liberty_atlas_release_latest_summary
         for rel in tracked_files:
             abs_path = snapshot_dir / rel
             manifest["files"].append(
@@ -990,6 +1631,10 @@ def main() -> int:
             "parquet_files_count": len(parquet_rel_paths),
             "updated_at": now_utc_iso(),
         }
+        if quality_summary:
+            latest_payload["quality_report"] = quality_summary
+        if liberty_atlas_release_latest_summary:
+            latest_payload["liberty_atlas_release_latest"] = liberty_atlas_release_latest_summary
         (build_root / "latest.json").write_text(
             json.dumps(latest_payload, ensure_ascii=True, sort_keys=True, indent=2) + "\n",
             encoding="utf-8",
@@ -1003,8 +1648,10 @@ def main() -> int:
                 snapshot_rel_dir=snapshot_rel_dir,
                 parquet_tables=parquet_tables,
                 parquet_excluded_tables=sorted(parquet_exclude_filter),
+                source_legal_entries=source_legal_entries,
                 include_sqlite_gz=(not args.skip_sqlite_gz),
                 source_repo_url=source_repo_url,
+                quality_summary=quality_summary,
             ),
             encoding="utf-8",
         )
@@ -1014,6 +1661,7 @@ def main() -> int:
         print(f"Published files: {len(published_rel_paths)}")
         print(f"Ingestion runs rows: {ingestion_runs_rows}")
         print(f"Source records rows (by source): {source_records_rows}")
+        print(f"Source legal files: {len(source_legal_rel_paths)}")
         print(f"Parquet tables: {len(parquet_tables)}")
         print(f"Parquet files: {len(parquet_rel_paths)}")
         if parquet_exclude_filter:
