@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T09:02:36+00:00",
+  "generated_at": "2026-02-26T09:10:45+00:00",
   "status": "ok",
   "snapshot_date": "2026-02-26",
   "schema_version": "liberty_restrictions_snapshot_v1",
@@ -35,19 +35,19 @@
     ]
   },
   "changelog": {
-    "entry_id": "2026-02-26||ab41b8f851409bb36a65380e6a52d71ce238467a22c5c77acfd88d17c4820788",
-    "appended": false,
-    "history_entries_total": 0,
+    "entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+    "appended": true,
+    "history_entries_total": 9,
     "history_malformed_lines_total": 0,
     "history_latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
     "history_latest_snapshot_date": "2026-03-05"
   },
   "published_files": {
     "snapshot_json": {
-      "source_path": "docs/etl/sprints/AI-OPS-217/exports/liberty_restrictions_snapshot_20260226T090221Z.json",
+      "source_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
       "path": "etl/data/published/liberty-restrictions-atlas-2026-02-26.json",
       "bytes": 97669,
-      "sha256": "1fad636efcdba7be904a269cb89b6dc1ab0a2e71c165b69a222d92c0a2159cdd"
+      "sha256": "8f8e18d333c812b4a3a842aadfd6f7613769ed3a45fcc5259585606efd23ff6c"
     },
     "irlc_parquet": {
       "source_path": "docs/etl/sprints/AI-OPS-124/exports/irlc_by_fragment_latest.parquet",
@@ -62,16 +62,16 @@
       "sha256": "acc4ec6cd6ba02892a4bea54b4799a26a22639e9609b35172913de0c8e056bf0"
     },
     "diff_json": {
-      "source_path": "docs/etl/sprints/AI-OPS-217/evidence/liberty_restrictions_snapshot_diff_20260226T090221Z.json",
+      "source_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json",
       "path": "etl/data/published/liberty-restrictions-diff-2026-02-26.json",
       "bytes": 13232,
-      "sha256": "c463e363e4980c8731dbfb54e2de3cdbedb29c759b63f2a87913ed54634f0692"
+      "sha256": "74d7234b71c75f6d60ff4609e3a50b2b37ddba2fb45e420a1159ced14fc3e6f4"
     },
     "changelog_entry_json": {
-      "source_path": "docs/etl/sprints/AI-OPS-217/exports/liberty_restrictions_snapshot_changelog_20260226T090221Z.jsonl",
+      "source_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_changelog_latest.json",
       "path": "etl/data/published/liberty-restrictions-changelog-entry-2026-02-26.json",
-      "bytes": 1562,
-      "sha256": "8983bf2754b8fb99146ac70b22115a518cdbd50d57b694632044f1c8032fa70c"
+      "bytes": 2148,
+      "sha256": "4fd1f2901c7865082482e4d0596bdf3635d63e9506cd20275a8c9f679f53b30b"
     },
     "changelog_history_jsonl": {
       "source_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
