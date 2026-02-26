@@ -1,0 +1,162 @@
+/* generated_by=build_citizen_tailwind_md3_css.py */
+/* source=ui/citizen/tailwind_md3.tokens.json */
+
+:root {
+  --md3-color-primary: #0b57d0;
+  --md3-color-on-primary: #ffffff;
+  --md3-color-secondary: #146c94;
+  --md3-color-on-secondary: #ffffff;
+  --md3-color-surface: #fefbff;
+  --md3-color-surface-container: #f3edf7;
+  --md3-color-surface-variant: #e7e0ec;
+  --md3-color-on-surface: #1d1b20;
+  --md3-color-on-surface-variant: #49454f;
+  --md3-color-outline: #79747e;
+  --md3-color-error: #b3261e;
+  --md3-color-on-error: #ffffff;
+  --md3-color-success: #0f766e;
+  --md3-color-warning: #b45309;
+  --md3-color-info: #1d4ed8;
+  --md3-radius-sm: 10px;
+  --md3-radius-md: 14px;
+  --md3-radius-lg: 18px;
+  --md3-radius-full: 999px;
+  --md3-shadow-sm: 0 4px 14px rgba(17, 24, 39, 0.08);
+  --md3-shadow-md: 0 12px 34px rgba(17, 24, 39, 0.12);
+  --md3-font-sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --md3-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --md3-space-1: 4px;
+  --md3-space-2: 8px;
+  --md3-space-3: 12px;
+  --md3-space-4: 16px;
+  --md3-space-5: 20px;
+  --md3-space-6: 24px;
+
+  --ink: var(--md3-color-on-surface);
+  --ink-2: var(--md3-color-on-surface-variant);
+  --muted: var(--md3-color-on-surface-variant);
+  --muted-2: var(--md3-color-outline);
+  --panel: var(--md3-color-surface);
+  --panel-2: var(--md3-color-surface-container);
+  --line: color-mix(in srgb, var(--md3-color-outline) 35%, transparent);
+  --shadow: var(--md3-shadow-md);
+  --accent: var(--md3-color-primary);
+  --accent-2: var(--md3-color-secondary);
+  --ok: var(--md3-color-success);
+  --warn: var(--md3-color-warning);
+  --bad: var(--md3-color-error);
+  --chip: color-mix(in srgb, var(--md3-color-surface-container) 88%, white);
+  --sans: var(--md3-font-sans);
+  --mono: var(--md3-font-mono);
+  --radius: var(--md3-radius-lg);
+}
+
+body {
+  font-family: var(--md3-font-sans);
+}
+.mono {
+  font-family: var(--md3-font-mono);
+}
+.card {
+  border-radius: var(--md3-radius-lg);
+  box-shadow: var(--md3-shadow-md);
+}
+.chip, .tag, .stanceChip {
+  border-radius: var(--md3-radius-full);
+}
+.btn {
+  border-radius: var(--md3-radius-md);
+  border-color: color-mix(in srgb, var(--md3-color-outline) 42%, transparent);
+  background: color-mix(in srgb, var(--md3-color-surface-container) 70%, white);
+}
+.btn:hover, .btn:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--md3-color-primary) 16%, transparent);
+}
+
+.tw-font-sans { font-family: var(--md3-font-sans); }
+.tw-font-mono { font-family: var(--md3-font-mono); }
+.tw-bg-surface { background: var(--md3-color-surface); }
+.tw-bg-surface-container { background: var(--md3-color-surface-container); }
+.tw-bg-primary { background: var(--md3-color-primary); }
+.tw-text-primary { color: var(--md3-color-primary); }
+.tw-text-on-surface { color: var(--md3-color-on-surface); }
+.tw-text-muted { color: var(--md3-color-on-surface-variant); }
+.tw-border-outline { border-color: var(--md3-color-outline); }
+.tw-rounded-sm { border-radius: var(--md3-radius-sm); }
+.tw-rounded-md { border-radius: var(--md3-radius-md); }
+.tw-rounded-lg { border-radius: var(--md3-radius-lg); }
+.tw-rounded-full { border-radius: var(--md3-radius-full); }
+.tw-shadow-sm { box-shadow: var(--md3-shadow-sm); }
+.tw-shadow-md { box-shadow: var(--md3-shadow-md); }
+.tw-flex { display: flex; }
+.tw-grid { display: grid; }
+.tw-items-center { align-items: center; }
+.tw-justify-between { justify-content: space-between; }
+.tw-gap-2 { gap: var(--md3-space-2); }
+.tw-gap-3 { gap: var(--md3-space-3); }
+.tw-gap-4 { gap: var(--md3-space-4); }
+
+.tw-p-1 { padding: var(--md3-space-1); }
+.tw-px-1 { padding-left: var(--md3-space-1); padding-right: var(--md3-space-1); }
+.tw-py-1 { padding-top: var(--md3-space-1); padding-bottom: var(--md3-space-1); }
+.tw-p-2 { padding: var(--md3-space-2); }
+.tw-px-2 { padding-left: var(--md3-space-2); padding-right: var(--md3-space-2); }
+.tw-py-2 { padding-top: var(--md3-space-2); padding-bottom: var(--md3-space-2); }
+.tw-p-3 { padding: var(--md3-space-3); }
+.tw-px-3 { padding-left: var(--md3-space-3); padding-right: var(--md3-space-3); }
+.tw-py-3 { padding-top: var(--md3-space-3); padding-bottom: var(--md3-space-3); }
+.tw-p-4 { padding: var(--md3-space-4); }
+.tw-px-4 { padding-left: var(--md3-space-4); padding-right: var(--md3-space-4); }
+.tw-py-4 { padding-top: var(--md3-space-4); padding-bottom: var(--md3-space-4); }
+.tw-p-5 { padding: var(--md3-space-5); }
+.tw-px-5 { padding-left: var(--md3-space-5); padding-right: var(--md3-space-5); }
+.tw-py-5 { padding-top: var(--md3-space-5); padding-bottom: var(--md3-space-5); }
+.tw-p-6 { padding: var(--md3-space-6); }
+.tw-px-6 { padding-left: var(--md3-space-6); padding-right: var(--md3-space-6); }
+.tw-py-6 { padding-top: var(--md3-space-6); padding-bottom: var(--md3-space-6); }
+
+.md3-card {
+  background: var(--md3-color-surface);
+  border: 1px solid color-mix(in srgb, var(--md3-color-outline) 28%, transparent);
+  border-radius: var(--md3-radius-lg);
+  box-shadow: var(--md3-shadow-md);
+}
+.md3-chip {
+  background: var(--md3-color-surface-container);
+  color: var(--md3-color-on-surface-variant);
+  border: 1px solid color-mix(in srgb, var(--md3-color-outline) 24%, transparent);
+  border-radius: var(--md3-radius-full);
+}
+.md3-button {
+  background: color-mix(in srgb, var(--md3-color-surface-container) 76%, white);
+  color: var(--md3-color-on-surface);
+  border: 1px solid color-mix(in srgb, var(--md3-color-outline) 34%, transparent);
+  border-radius: var(--md3-radius-md);
+}
+.md3-button:hover, .md3-button:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--md3-color-primary) 16%, transparent);
+}
+.md3-button-primary {
+  background: var(--md3-color-primary);
+  color: var(--md3-color-on-primary);
+  border: 1px solid color-mix(in srgb, var(--md3-color-primary) 55%, black);
+}
+.md3-button-primary:hover, .md3-button-primary:focus {
+  filter: brightness(0.96);
+}
+.md3-tab {
+  border: 1px solid color-mix(in srgb, var(--md3-color-outline) 34%, transparent);
+  border-radius: var(--md3-radius-full);
+  background: var(--md3-color-surface-container);
+  color: var(--md3-color-on-surface-variant);
+  font-weight: 700;
+}
+select.md3-tab {
+  min-height: 40px;
+  padding: 8px 12px;
+}
+.md3-tab.active, .md3-tab[aria-selected="true"], .md3-tab[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--md3-color-primary) 18%, white);
+  color: var(--md3-color-primary);
+  border-color: color-mix(in srgb, var(--md3-color-primary) 42%, transparent);
+}

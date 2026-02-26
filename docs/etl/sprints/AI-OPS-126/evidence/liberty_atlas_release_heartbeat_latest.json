@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T08:58:25+00:00",
+  "generated_at": "2026-02-26T09:21:19+00:00",
   "strict": true,
   "input": {
     "published_release_json": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
@@ -7,22 +7,20 @@
     "continuity_json": "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json",
     "heartbeat_jsonl": "docs/etl/runs/liberty_atlas_release_heartbeat.jsonl"
   },
-  "history_size_before": 35,
-  "history_size_after": 36,
+  "history_size_before": 40,
+  "history_size_after": 41,
   "history_malformed_lines_before": 0,
   "appended": true,
   "duplicate_detected": false,
   "validation_errors": [],
-  "strict_fail_reasons": [
-    "published_gh_pages_drift_detected"
-  ],
+  "strict_fail_reasons": [],
   "warnings": [
     "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known"
   ],
   "heartbeat": {
-    "run_at": "2026-02-26T08:58:25+00:00",
-    "heartbeat_id": "2026-02-26T08:58:25+00:00|2026-03-05|b7b87517853a65682427d1fd4de58ff1253d45c72d4f596467140d9013cfeb55|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80||1",
-    "status": "failed",
+    "run_at": "2026-02-26T09:21:19+00:00",
+    "heartbeat_id": "2026-02-26T09:21:19+00:00|2026-03-05|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80||0",
+    "status": "degraded",
     "snapshot_date_expected": "2026-03-05",
     "max_snapshot_age_days": 14,
     "allow_hf_unavailable": true,
@@ -35,7 +33,7 @@
       "schema_version": "liberty_restrictions_snapshot_v1",
       "snapshot_restrictions_total": 11,
       "snapshot_age_days": -7,
-      "fingerprint": "b7b87517853a65682427d1fd4de58ff1253d45c72d4f596467140d9013cfeb55"
+      "fingerprint": "eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80"
     },
     "gh_pages": {
       "source": "gh_pages",
@@ -70,7 +68,7 @@
       "published_release_ok": true,
       "gh_pages_release_ok": true,
       "continuity_ok": true,
-      "published_gh_parity_ok": false,
+      "published_gh_parity_ok": true,
       "hf_available": false,
       "hf_release_ok_or_allowed": true,
       "published_hf_parity_ok": null,
@@ -81,16 +79,14 @@
     },
     "stale_surfaces": [],
     "stale_alerts_count": 0,
-    "drift_alerts_count": 1,
+    "drift_alerts_count": 0,
     "hf_unavailable": true,
     "warning_count": 1,
     "warnings": [
       "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known"
     ],
-    "strict_fail_count": 1,
-    "strict_fail_reasons": [
-      "published_gh_pages_drift_detected"
-    ]
+    "strict_fail_count": 0,
+    "strict_fail_reasons": []
   },
-  "status": "failed"
+  "status": "degraded"
 }

@@ -42,6 +42,13 @@ const personas = [
     cta: "Explorar actores",
   },
   {
+    href: "/people/",
+    title: "Directorio de personas",
+    note: "Perfil xray por persona: qué hizo, qué cargos tuvo y qué falta por completar.",
+    target: "Historial de posiciones + cola de datos públicos faltantes.",
+    cta: "Abrir directorio",
+  },
+  {
     href: "/explorer-sources/",
     title: "Operador de calidad de datos",
     note: "Prioriza bloqueos externos, cobertura y estado técnico.",
@@ -49,11 +56,53 @@ const personas = [
     cta: "Ver estado de fuentes",
   },
   {
+    href: "/parliamentary-accountability/",
+    title: "Accountability parlamentaria",
+    note: "Disciplina, rebeldía, coaliciones, asistencia y pivotes con membresía temporal.",
+    target: "Análiza cómo votan los grupos y qué tan coherentes son en el tiempo.",
+    cta: "Explorar accountability",
+  },
+  {
+    href: "/initiative-lifecycle/",
+    title: "Lifecycle legislativo",
+    note: "Tiempos de tramitación, cuellos de botella y secuencia de votos por iniciativa.",
+    target: "Consulta trazabilidad de iniciativas con confianza de enlace.",
+    cta: "Explorar ciclo de vida",
+  },
+  {
+    href: "/elections-behavior/",
+    title: "Conexión elecciones-comportamiento",
+    note: "Relación entre ciclos electorales, cambios de cohesión y comportamiento territorial.",
+    target: "Compara pre/post elección por partido, tema y territorio.",
+    cta: "Abrir análisis de elección",
+  },
+  {
+    href: "/political-positions/",
+    title: "Posturas explicables",
+    note: "Comparación persona/partido con evidencia rastreable y estado de revisión.",
+    target: "Rastrea cada postura con soportes y trazabilidad.",
+    cta: "Abrir scoring político",
+  },
+  {
     href: "/explorer/",
     title: "Power user SQL",
     note: "Audita métricas, cruza tablas y baja a evidencias puntuales.",
     target: "Explorador de esquema, FK y registros.",
     cta: "Entrar al explorer",
+  },
+  {
+    href: "/legal-sanctions/",
+    title: "Cumplimiento legal y sanciones",
+    note: "Mapea relación entre normas, infracciones, volúmenes sancionadores y monitoreo municipal.",
+    target: "Sigue trazabilidad de responsabilidad jurídica y ejecución.",
+    cta: "Abrir legal + sanciones",
+  },
+  {
+    href: "/policy-outcomes/",
+    title: "Resultados de política pública",
+    note: "Indicadores económicos/sociales con asociaciones descriptivas a eventos de política.",
+    target: "Detecta cambios posteriores a eventos y posibles señales de impacto.",
+    cta: "Abrir resultados",
   },
 ];
 
