@@ -414,7 +414,7 @@ Sprint 3 — 2026-03-11 -> 2026-03-17 — limpieza, resumen y publicación (Fase
 
 ## Checklist operativo diario (hoy -> 7 días)
 
-- Día 1 (2026-02-26): ejecutar secuencia base completa de `Foco operativo actual`; validar `parl-liberty-restrictions-pipeline`.
+- Día 1 (2026-03-05): ejecutar secuencia base completa de `Foco operativo actual`; validar `parl-liberty-restrictions-pipeline`.
 - Día 2 (2026-02-27): cerrar faltantes de `liberty_restriction_assessments` + `assessment_items`; validar `parl-check-liberty-restrictions-status`.
 - Día 3 (2026-02-28): elevar calidad de proporcionalidad (`methodologies`/`reviews`); validar evidencia documental.
 - Día 4 (2026-03-01): extender responsabilidad directa/indirecta/delegada (fase C); validar doble cobertura y representatividad.
@@ -446,7 +446,7 @@ Semana 3:
 Criterio de avance de fase:
 - No abrir nuevas fases si queda un gate de `focus_gate` en degradado o `done_zero_real>0` en el tracker.
 
-## Foco operativo actual (2026-02-26): ejecución repetible y bloqueos confirmados
+## Foco operativo actual (2026-03-05): ejecución repetible y bloqueos confirmados
 
 Objetivo del bloque activo:
 - Mantener `Derechos` como único flujo de expansión funcional hasta cumplir el gate de cobertura y calidad.
@@ -455,9 +455,9 @@ Objetivo del bloque activo:
 Estado observado en el último ciclo:
 - ✅ Base de atlas/coverage y publicación local de artefactos: ejecución funcional (`export_liberty_restrictions_snapshot.py`, `publish_liberty_atlas_artifacts.py`).
 - ✅ Heartbeat de cobertura y continuidad: ejecución funcional con `report_liberty_restrictions_status_heartbeat.py` y `report_liberty_restrictions_status_heartbeat_window.py`.
-- ⚠️ Atlas release parity: riesgo repetido de drift en entorno actual en `report_liberty_atlas_release_heartbeat.py` cuando `published`/GH Pages/HF no están alineados o no hay red.
-- ⚠️ Detalle de contratos PLACSP: bloqueo operativo (`nodename nor servname provided, or not known`) al ejecutar `backfill-placsp-contract-details --limit 5`.
-- ⚠️ Bloqueos externos existentes siguen vigentes para `parlamento_galicia_deputados` y `congreso_votaciones` (403).
+- ✅ AI-OPS-218: continuidad de cobertura y snapshot cerrada (`status=ok`) para `SNAPSHOT_DATE=2026-03-05`, incluyendo continuidad de changelog y artefactos base.
+- ⚠️ AI-OPS-219 pendiente: `parl-report-liberty-atlas-release-heartbeat` aún reporta `published_release_error:missing_file:etl/data/published/liberty-restrictions-atlas-latest.json` y la ventana strict sigue con alertas de `hf_unavailable` y `drift` en un bloque.
+- ⚠️ Bloqueos externos fuera de ciclo principal siguen vigentes para `parlamento_galicia_deputados` y `congreso_votaciones` (403); registrarlos en nombre y pasar sólo con evidencia.
 - ✅ Tracker de e2e sin desalineaciones en la corrida consultada (`mismatches: 0`, `done_zero_real: 0`).
 
 Secuencia repetible diaria/semanal (en este orden):
@@ -466,9 +466,14 @@ Secuencia repetible diaria/semanal (en este orden):
 - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-focus-gate`
 - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-restrictions-status-heartbeat`
 - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-restrictions-status-heartbeat-window`
-- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-atlas-release-heartbeat`
-- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-atlas-release-heartbeat-window`
-- `DB_PATH=etl/data/staging/politicos-es.db just etl-publish-hf`
+  - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-atlas-release-heartbeat --allow-hf-unavailable`
+  - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-atlas-release-heartbeat-window`
+  - `DB_PATH=etl/data/staging/politicos-es.db just etl-publish-hf`
+
+Mini-acción prioritaria (AI-OPS-219):
+- Ejecutar un ciclo de release-closure para cerrar la ventana strict:
+  - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-report-liberty-atlas-release-heartbeat --allow-hf-unavailable`
+  - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-atlas-release-heartbeat-window`
 
 Regla de continuación (si hay fallo):
 - Si cualquier gate de derechos cae de `ok` a `degraded`, abrir mini-acción en `docs/etl/e2e-scrape-load-tracker.md` en el mismo día; sin eso, no avanzar a nuevas adquisiciones externas.

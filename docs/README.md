@@ -6,8 +6,8 @@ Fuente de verdad (roadmaps):
 - Visión y misión canónicas: sección `Visión y misión` en `docs/roadmap.md`.
 
 Backlog operativo (una sola lista):
-- `docs/etl/e2e-scrape-load-tracker.md` (conectores + Definition of Done + estado `DONE/PARTIAL/TODO`).
-- Indice unico de TODO: `docs/todo/README.md` (entrypoint; sin duplicar backlog).
+- `docs/etl/e2e-scrape-load-tracker.md` (conectores + criterio de cierre (Definition of Done, DoD) + estado `DONE/PARTIAL/TODO`).
+- Índice único de TODO: `docs/todo/README.md` (punto de entrada; sin duplicar backlog).
 
 Cómo correr el ETL y la UI:
 - `docs/etl/README.md`
@@ -19,10 +19,10 @@ Contexto mínimo (sin duplicar roadmaps):
 - `docs/principios-operativos.md`
 - `docs/arquitectura.md`
 - `docs/flow-diagram.md`
-- `docs/personas-y-flujos-ideales.md` (north-star de actores, objetivos y flujos ideales)
-- `docs/flujos-ui-especificacion.md` (pantallas, botones, interacciones, charts y `URGENT TODO` de datos por flujo)
-- `docs/preguntas-metodologia-citizen.md` (Q&A metodologico: preocupaciones, evidencia primaria, hipotesis, dice-vs-hace, granularidad y cambios de postura)
-- `docs/database-inventory.md` (inventario de bases de datos del repo y schema por familia/archivo)
+- `docs/personas-y-flujos-ideales.md` (visión north star de actores, objetivos y flujos ideales)
+- `docs/flujos-ui-especificacion.md` (pantallas, botones, interacciones, gráficas y `URGENT TODO` de datos por flujo)
+- `docs/preguntas-metodologia-citizen.md` (Q&A metodológico: preocupaciones, evidencia primaria, hipótesis, dice-vs-hace, granularidad y cambios de postura)
+- `docs/database-inventory.md` (inventario de bases de datos del repo y esquema por familia/archivo)
 - `docs/fuentes-datos.md`
 - `docs/domain_taxonomy_es.md`
 - `docs/codebook_tier1_es.md`
