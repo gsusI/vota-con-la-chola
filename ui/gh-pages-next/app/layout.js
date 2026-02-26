@@ -1,4 +1,6 @@
 import "./globals.css";
+import Breadcrumbs from "./components/Breadcrumbs";
+import { Suspense } from "react";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
 
@@ -14,7 +16,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body>
+        <Suspense fallback={null}>
+          <Breadcrumbs />
+        </Suspense>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,18 +1,18 @@
-# GH Pages Next App
+# App Next de GH Pages
 
-Static Next.js app used to generate the root landing page for GH Pages.
+App estática en Next.js usada para generar el landing principal de GH Pages.
 
-## Local usage
+## Uso local
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Static export
+## Export estático
 
 ```bash
 NEXT_PUBLIC_BASE_PATH="/vota-con-la-chola" npm run export:gh
 ```
 
-Build output is written to `out/` and then copied into `docs/gh-pages/` by `just explorer-gh-pages-build`.
+La salida de build se escribe en `out/` y luego `just explorer-gh-pages-build` la copia a `docs/gh-pages/`.
