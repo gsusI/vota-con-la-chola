@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T16:08:05+00:00",
+    "generated_at": "2026-02-24T21:23:49+00:00",
     "db_path": "etl/data/staging/politicos-es.db",
     "limits": {
       "topic_sets": 250,
@@ -7816,11 +7816,11 @@
         "total": 260,
         "returned": 260,
         "primary_key": [
-          "topic_set_id",
-          "topic_id"
+          "topic_set_topic_id"
         ],
         "without_rowid": false,
         "column_names": [
+          "topic_set_topic_id",
           "topic_set_id",
           "topic_id",
           "stakes_score",
@@ -7834,11 +7834,838 @@
       "rows": [
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 1
+            "topic_set_topic_id": 1
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=1",
+          "preview": {
+            "topic_id": 897,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 1,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Vivienda",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 1,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 2
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=2",
+          "preview": {
+            "topic_id": 898,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 2,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Empleo",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 2,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 3
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=3",
+          "preview": {
+            "topic_id": 899,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 3,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Sanidad",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 3,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 4
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=4",
+          "preview": {
+            "topic_id": 900,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 4,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Educacion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 4,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 5
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=5",
+          "preview": {
+            "topic_id": 901,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 5,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Coste de vida",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 5,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 6
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=6",
+          "preview": {
+            "topic_id": 902,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 6,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Energia",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 6,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 7
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=7",
+          "preview": {
+            "topic_id": 903,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 7,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Transporte",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 7,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 8
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=8",
+          "preview": {
+            "topic_id": 904,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 8,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Seguridad y justicia",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 8,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 9
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=9",
+          "preview": {
+            "topic_id": 905,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 9,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Inmigracion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 9,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 10
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=10",
+          "preview": {
+            "topic_id": 906,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 10,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Corrupcion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 10,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 11
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=11",
+          "preview": {
+            "topic_id": 907,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 11,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Campo y mundo rural",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 11,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 12
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=12",
+          "preview": {
+            "topic_id": 908,
+            "topic_set_id": 9,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 12,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Igualdad",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 12,
+            "created_at": "2026-02-17T15:42:47+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 13
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=13",
+          "preview": {
+            "topic_id": 897,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 1,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Vivienda",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 1,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 14
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=14",
+          "preview": {
+            "topic_id": 898,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 2,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Empleo",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 2,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 15
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=15",
+          "preview": {
+            "topic_id": 899,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 3,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Sanidad",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 3,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 16
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=16",
+          "preview": {
+            "topic_id": 900,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 4,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Educacion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 4,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 17
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=17",
+          "preview": {
+            "topic_id": 901,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 5,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Coste de vida",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 5,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 18
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=18",
+          "preview": {
+            "topic_id": 902,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 6,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Energia",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 6,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 19
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=19",
+          "preview": {
+            "topic_id": 903,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 7,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Transporte",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 7,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 20
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=20",
+          "preview": {
+            "topic_id": 904,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 8,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Seguridad y justicia",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 8,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 21
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=21",
+          "preview": {
+            "topic_id": 905,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 9,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Inmigracion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 9,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 22
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=22",
+          "preview": {
+            "topic_id": 906,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 10,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Corrupcion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 10,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 23
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=23",
+          "preview": {
+            "topic_id": 907,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 11,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Campo y mundo rural",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 11,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 24
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=24",
+          "preview": {
+            "topic_id": 908,
+            "topic_set_id": 10,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 12,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Igualdad",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 12,
+            "created_at": "2026-02-17T15:44:39+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 25
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=25",
+          "preview": {
+            "topic_id": 897,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 1,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Vivienda",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 1,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 26
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=26",
+          "preview": {
+            "topic_id": 898,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 2,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Empleo",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 2,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 27
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=27",
+          "preview": {
+            "topic_id": 899,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 3,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Sanidad",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 3,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 28
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=28",
+          "preview": {
+            "topic_id": 900,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 4,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Educacion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 4,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 29
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=29",
+          "preview": {
+            "topic_id": 901,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 5,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Coste de vida",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 5,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 30
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=30",
+          "preview": {
+            "topic_id": 902,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 6,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Energia",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 6,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 31
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=31",
+          "preview": {
+            "topic_id": 903,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 7,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Transporte",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 7,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 32
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=32",
+          "preview": {
+            "topic_id": 904,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 8,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Seguridad y justicia",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 8,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 33
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=33",
+          "preview": {
+            "topic_id": 905,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 9,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Inmigracion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 9,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 34
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=34",
+          "preview": {
+            "topic_id": 906,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 10,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Corrupcion",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 10,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 35
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=35",
+          "preview": {
+            "topic_id": 907,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 11,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Campo y mundo rural",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 11,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 36
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=36",
+          "preview": {
+            "topic_id": 908,
+            "topic_set_id": 11,
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 12,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          },
+          "preview_display": {
+            "topic_id": "Igualdad",
+            "topic_set_id": "Programas de partidos",
+            "is_high_stakes": 1,
+            "notes": "concerns_v1",
+            "stakes_rank": 12,
+            "created_at": "2026-02-23T20:14:27+00:00"
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 37
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=37",
           "preview": {
             "topic_id": 1,
             "topic_set_id": 1,
@@ -7858,11 +8685,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 2
+            "topic_set_topic_id": 38
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=38",
           "preview": {
             "topic_id": 2,
             "topic_set_id": 1,
@@ -7882,11 +8708,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 3
+            "topic_set_topic_id": 39
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=39",
           "preview": {
             "topic_id": 3,
             "topic_set_id": 1,
@@ -7906,11 +8731,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 4
+            "topic_set_topic_id": 40
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=40",
           "preview": {
             "topic_id": 4,
             "topic_set_id": 1,
@@ -7930,11 +8754,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 5
+            "topic_set_topic_id": 41
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=41",
           "preview": {
             "topic_id": 5,
             "topic_set_id": 1,
@@ -7954,11 +8777,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 6
+            "topic_set_topic_id": 42
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=42",
           "preview": {
             "topic_id": 6,
             "topic_set_id": 1,
@@ -7978,11 +8800,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 7
+            "topic_set_topic_id": 43
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=43",
           "preview": {
             "topic_id": 7,
             "topic_set_id": 1,
@@ -8002,683 +8823,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 8
+            "topic_set_topic_id": 44
           },
           "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 8,
-            "topic_set_id": 1,
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 9,
-            "stakes_score": 4430.487442932441
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley b\u00e1sica de agentes forestales y medioambientales.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 9,
-            "stakes_score": 4430.487442932441
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 9
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 9,
-            "topic_set_id": 1,
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 19,
-            "stakes_score": 2379.4216905655844
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley por la que se modifican la Ley 48/1960, de 21 de julio, sobre Navegaci\u00f3n A\u00e9rea, y la Ley 21/2003, de 7 de julio, de Seguridad A\u00e9rea.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 19,
-            "stakes_score": 2379.4216905655844
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 10
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 10,
-            "topic_set_id": 1,
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 33,
-            "stakes_score": 1772.4706005014016
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley b\u00e1sica de bomberos forestales.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 33,
-            "stakes_score": 1772.4706005014016
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 11
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 11,
-            "topic_set_id": 1,
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 38,
-            "stakes_score": 1675.3458547515684
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 1/2002, de 22 de marzo, reguladora del derecho de asociaci\u00f3n.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 38,
-            "stakes_score": 1675.3458547515684
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 12
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 12,
-            "topic_set_id": 1,
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 51,
-            "stakes_score": 1359.5967427138592
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica de amnist\u00eda para la normalizaci\u00f3n institucional, pol\u00edtica y social en Catalu\u00f1a.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 51,
-            "stakes_score": 1359.5967427138592
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 13
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 13,
-            "topic_set_id": 1,
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 60,
-            "stakes_score": 1231.3222284494934
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley de creaci\u00f3n de la Autoridad Administrativa Independiente para la Investigaci\u00f3n T\u00e9cnica de Accidentes e Incidentes ferroviarios, mar\u00edtimos y de aviaci\u00f3n civil.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 60,
-            "stakes_score": 1231.3222284494934
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 14
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 14,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 70,
-            "stakes_score": 1016.5858338969273
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley Org\u00e1nica del derecho de defensa.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 70,
-            "stakes_score": 1016.5858338969273
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 15
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 15,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 93,
-            "stakes_score": 609.7521613832853
-          },
-          "preview_display": {
-            "topic_id": "Resoluci\u00f3n de 8 de octubre de 2025, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de convalidaci\u00f3n del Real Decreto-ley 10/2025, de 23 de septiembre, por el que se adoptan medidas urgentes contra el genocidio en Gaza y de apoyo a la poblaci\u00f3n palestina.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 93,
-            "stakes_score": 609.7521613832853
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 16
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 16,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_prefix_unique",
-            "stakes_rank": 98,
-            "stakes_score": 455.5569475869105
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica en materia de multirreincidencia, por la que se modifica la Ley Org\u00e1nica 10/1995, de 23 de noviembre, del C\u00f3digo Penal y la Ley de Enjuiciamiento Criminal, aprobada por Real Decreto de 14 de septiembre de 1882.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_prefix_unique",
-            "stakes_rank": 98,
-            "stakes_score": 455.5569475869105
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 17
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 17,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 101,
-            "stakes_score": 447.2631578947368
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica de protecci\u00f3n de las libertades y seguridad ciudadana.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 101,
-            "stakes_score": 447.2631578947368
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 18
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 18,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 108,
-            "stakes_score": 354.9770114942529
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley por la que se crea la Autoridad Administrativa Independiente de Defensa del Cliente Financiero para la resoluci\u00f3n extrajudicial de conflictos entre las entidades financieras y sus clientes.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 108,
-            "stakes_score": 354.9770114942529
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 19
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 19,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 109,
-            "stakes_score": 347.33658536585364
-          },
-          "preview_display": {
-            "topic_id": "Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan medidas para afrontar las consecuencias econ\u00f3micas y sociales derivadas de los conflictos en Ucrania y Oriente Pr\u00f3ximo, as\u00ed como para paliar los efectos de la sequ\u00eda.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 109,
-            "stakes_score": 347.33658536585364
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 20
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 20,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 113,
-            "stakes_score": 344.97076023391816
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica para el impulso de la aplicaci\u00f3n de la Ley Org\u00e1nica 10/2022, de 6 de septiembre, de garant\u00eda integral de la libertad sexual, y la plena protecci\u00f3n de las v\u00edctimas de violencias sexuales.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 113,
-            "stakes_score": 344.97076023391816
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 21
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 21,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 114,
-            "stakes_score": 344.0
-          },
-          "preview_display": {
-            "topic_id": "Real Decreto-ley 6/2023, de 19 de diciembre, por el que se aprueban medidas urgentes para la ejecuci\u00f3n del Plan de Recuperaci\u00f3n, Transformaci\u00f3n y Resiliencia en materia de servicio p\u00fablico de justicia, funci\u00f3n p\u00fablica, r\u00e9gimen local y mecenazgo.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 114,
-            "stakes_score": 344.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 22
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 22,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 115,
-            "stakes_score": 344.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley relativa a la regulaci\u00f3n de los contratos de alquiler de vivienda por temporada y alquiler de habitaciones.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 115,
-            "stakes_score": 344.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 23
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 23,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 122,
-            "stakes_score": 342.98275862068965
-          },
-          "preview_display": {
-            "topic_id": "Resoluci\u00f3n de 22 de enero de 2025, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de derogaci\u00f3n del Real Decreto-ley 9/2024, de 23 de diciembre, por el que se adoptan medidas urgentes en materia econ\u00f3mica, tributaria, de transporte, y de Seguridad Social, y se prorrogan determinadas medidas para hacer frente a situaciones de vulnerabilidad social.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 122,
-            "stakes_score": 342.98275862068965
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 24
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 24,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 127,
-            "stakes_score": 342.9380530973451
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley relativa a la modificaci\u00f3n de la Ley 50/1981, de 30 de diciembre, por la que se regula el Estatuto Org\u00e1nico del Ministerio Fiscal.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 127,
-            "stakes_score": 342.9380530973451
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 25
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 25,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 143,
-            "stakes_score": 342.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 10/1995, de 23 de noviembre, del C\u00f3digo Penal, al objeto de tipificar penalmente el transporte y almacenamiento de combustibles l\u00edquidos predeterminados al narcotr\u00e1fico.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 143,
-            "stakes_score": 342.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 26
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 26,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 144,
-            "stakes_score": 342.0
-          },
-          "preview_display": {
-            "topic_id": "Real Decreto-ley 16/2025, de 23 de diciembre, por el que se prorrogan determinadas medidas para hacer frente a situaciones de vulnerabilidad social, y se adoptan medidas urgentes en materia tributaria y de Seguridad Social.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 144,
-            "stakes_score": 342.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 27
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 27,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 145,
-            "stakes_score": 341.91884057971015
-          },
-          "preview_display": {
-            "topic_id": "Resoluci\u00f3n de 8 de mayo de 2025, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de convalidaci\u00f3n del Real Decreto-ley 4/2025, de 8 de abril, de medidas urgentes de respuesta a la amenaza arancelaria y de relanzamiento comercial.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 145,
-            "stakes_score": 341.91884057971015
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 28
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 28,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 153,
-            "stakes_score": 340.97982708933716
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica de modificaci\u00f3n de la Ley Org\u00e1nica 5/1985, de 19 de junio, del R\u00e9gimen Electoral General, relativa a las elecciones al Parlamento Europeo.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 153,
-            "stakes_score": 340.97982708933716
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 29
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 29,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 154,
-            "stakes_score": 340.974212034384
-          },
-          "preview_display": {
-            "topic_id": "Ley Org\u00e1nica 2/2025, de 3 de junio, por la que se autoriza la ratificaci\u00f3n de cuatro enmiendas al art\u00edculo 8.2 del Estatuto de Roma de la Corte Penal Internacional.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:congreso_law_expediente",
-            "stakes_rank": 154,
-            "stakes_score": 340.974212034384
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 30
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 30,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 175,
-            "stakes_score": 340.0
-          },
-          "preview_display": {
-            "topic_id": "Proyecto de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 13/1982, de 10 de agosto, de reintegraci\u00f3n y amejoramiento del R\u00e9gimen Foral de Navarra, en cuanto a tr\u00e1fico, circulaci\u00f3n de veh\u00edculos de motor y seguridad vial.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 175,
-            "stakes_score": 340.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 31
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 31,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 176,
-            "stakes_score": 340.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 6/1985, de 1 de julio, del Poder Judicial, para la reforma del procedimiento de elecci\u00f3n de los vocales del Consejo General del Poder Judicial.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 176,
-            "stakes_score": 340.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 32
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 32,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 177,
-            "stakes_score": 340.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley por la que se modifica el art\u00edculo 274 del texto refundido de la Ley General de la Seguridad Social, aprobado por Real Decreto Legislativo 8/2015, de 30 de octubre, para eliminar el subsidio previsto para los menores que no ostenten la nacionalidad espa\u00f1ola privados de libertad por cumplimiento de medida de internamiento en centro.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 177,
-            "stakes_score": 340.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 33
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 33,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 178,
-            "stakes_score": 340.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley para garantizar la representaci\u00f3n internacional de las federaciones deportivas espa\u00f1olas en las actividades y competiciones deportivas de car\u00e1cter internacional.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 178,
-            "stakes_score": 340.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 34
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 34,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 179,
-            "stakes_score": 340.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley para garantizar la prestaci\u00f3n de los servicios p\u00fablicos esenciales a los municipios rurales de peque\u00f1o tama\u00f1o en situaciones de emergencia de inter\u00e9s nacional.",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 179,
-            "stakes_score": 340.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 35
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
-          "preview": {
-            "topic_id": 35,
-            "topic_set_id": 1,
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 180,
-            "stakes_score": 340.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Ley relativa a la escolarizaci\u00f3n del alumnado con necesidades educativas especiales (Org\u00e1nica).",
-            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
-            "is_high_stakes": 0,
-            "notes": "initiative:title_norm_exact_unique",
-            "stakes_rank": 180,
-            "stakes_score": 340.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 1,
-            "topic_id": 232
-          },
-          "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=44",
           "preview": {
             "topic_id": 232,
             "topic_set_id": 1,
@@ -8698,11 +8846,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 234
+            "topic_set_topic_id": 45
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=45",
+          "preview": {
+            "topic_id": 8,
+            "topic_set_id": 1,
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 9,
+            "stakes_score": 4430.487442932441
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley b\u00e1sica de agentes forestales y medioambientales.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 9,
+            "stakes_score": 4430.487442932441
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 46
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=46",
           "preview": {
             "topic_id": 234,
             "topic_set_id": 1,
@@ -8722,11 +8892,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 235
+            "topic_set_topic_id": 47
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=47",
           "preview": {
             "topic_id": 235,
             "topic_set_id": 1,
@@ -8746,11 +8915,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 236
+            "topic_set_topic_id": 48
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=48",
           "preview": {
             "topic_id": 236,
             "topic_set_id": 1,
@@ -8770,11 +8938,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 237
+            "topic_set_topic_id": 49
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=49",
           "preview": {
             "topic_id": 237,
             "topic_set_id": 1,
@@ -8794,11 +8961,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 238
+            "topic_set_topic_id": 50
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=50",
           "preview": {
             "topic_id": 238,
             "topic_set_id": 1,
@@ -8818,11 +8984,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 239
+            "topic_set_topic_id": 51
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=51",
           "preview": {
             "topic_id": 239,
             "topic_set_id": 1,
@@ -8842,11 +9007,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 240
+            "topic_set_topic_id": 52
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=52",
           "preview": {
             "topic_id": 240,
             "topic_set_id": 1,
@@ -8866,11 +9030,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 241
+            "topic_set_topic_id": 53
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=53",
           "preview": {
             "topic_id": 241,
             "topic_set_id": 1,
@@ -8890,11 +9053,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 242
+            "topic_set_topic_id": 54
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=54",
           "preview": {
             "topic_id": 242,
             "topic_set_id": 1,
@@ -8914,11 +9076,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 244
+            "topic_set_topic_id": 55
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=55",
+          "preview": {
+            "topic_id": 9,
+            "topic_set_id": 1,
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 19,
+            "stakes_score": 2379.4216905655844
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley por la que se modifican la Ley 48/1960, de 21 de julio, sobre Navegaci\u00f3n A\u00e9rea, y la Ley 21/2003, de 7 de julio, de Seguridad A\u00e9rea.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 19,
+            "stakes_score": 2379.4216905655844
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 56
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=56",
           "preview": {
             "topic_id": 244,
             "topic_set_id": 1,
@@ -8938,11 +9122,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 245
+            "topic_set_topic_id": 57
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=57",
           "preview": {
             "topic_id": 245,
             "topic_set_id": 1,
@@ -8962,11 +9145,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 246
+            "topic_set_topic_id": 58
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=58",
           "preview": {
             "topic_id": 246,
             "topic_set_id": 1,
@@ -8986,11 +9168,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 247
+            "topic_set_topic_id": 59
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=59",
           "preview": {
             "topic_id": 247,
             "topic_set_id": 1,
@@ -9010,11 +9191,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 248
+            "topic_set_topic_id": 60
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=60",
           "preview": {
             "topic_id": 248,
             "topic_set_id": 1,
@@ -9034,11 +9214,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 249
+            "topic_set_topic_id": 61
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=61",
           "preview": {
             "topic_id": 249,
             "topic_set_id": 1,
@@ -9058,11 +9237,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 250
+            "topic_set_topic_id": 62
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=62",
           "preview": {
             "topic_id": 250,
             "topic_set_id": 1,
@@ -9082,11 +9260,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 251
+            "topic_set_topic_id": 63
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=63",
           "preview": {
             "topic_id": 251,
             "topic_set_id": 1,
@@ -9106,11 +9283,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 252
+            "topic_set_topic_id": 64
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=64",
           "preview": {
             "topic_id": 252,
             "topic_set_id": 1,
@@ -9130,11 +9306,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 253
+            "topic_set_topic_id": 65
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=65",
           "preview": {
             "topic_id": 253,
             "topic_set_id": 1,
@@ -9154,11 +9329,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 254
+            "topic_set_topic_id": 66
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=66",
           "preview": {
             "topic_id": 254,
             "topic_set_id": 1,
@@ -9178,11 +9352,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 255
+            "topic_set_topic_id": 67
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=67",
           "preview": {
             "topic_id": 255,
             "topic_set_id": 1,
@@ -9202,11 +9375,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 256
+            "topic_set_topic_id": 68
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=68",
           "preview": {
             "topic_id": 256,
             "topic_set_id": 1,
@@ -9226,11 +9398,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 258
+            "topic_set_topic_id": 69
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=69",
+          "preview": {
+            "topic_id": 10,
+            "topic_set_id": 1,
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 33,
+            "stakes_score": 1772.4706005014016
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley b\u00e1sica de bomberos forestales.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 33,
+            "stakes_score": 1772.4706005014016
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 70
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=70",
           "preview": {
             "topic_id": 258,
             "topic_set_id": 1,
@@ -9250,11 +9444,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 259
+            "topic_set_topic_id": 71
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=71",
           "preview": {
             "topic_id": 259,
             "topic_set_id": 1,
@@ -9274,11 +9467,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 260
+            "topic_set_topic_id": 72
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=72",
           "preview": {
             "topic_id": 260,
             "topic_set_id": 1,
@@ -9298,11 +9490,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 261
+            "topic_set_topic_id": 73
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=73",
           "preview": {
             "topic_id": 261,
             "topic_set_id": 1,
@@ -9322,11 +9513,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 263
+            "topic_set_topic_id": 74
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=74",
+          "preview": {
+            "topic_id": 11,
+            "topic_set_id": 1,
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 38,
+            "stakes_score": 1675.3458547515684
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 1/2002, de 22 de marzo, reguladora del derecho de asociaci\u00f3n.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 38,
+            "stakes_score": 1675.3458547515684
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 75
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=75",
           "preview": {
             "topic_id": 263,
             "topic_set_id": 1,
@@ -9346,11 +9559,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 264
+            "topic_set_topic_id": 76
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=76",
           "preview": {
             "topic_id": 264,
             "topic_set_id": 1,
@@ -9370,11 +9582,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 265
+            "topic_set_topic_id": 77
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=77",
           "preview": {
             "topic_id": 265,
             "topic_set_id": 1,
@@ -9394,11 +9605,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 266
+            "topic_set_topic_id": 78
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=78",
           "preview": {
             "topic_id": 266,
             "topic_set_id": 1,
@@ -9418,11 +9628,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 267
+            "topic_set_topic_id": 79
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=79",
           "preview": {
             "topic_id": 267,
             "topic_set_id": 1,
@@ -9442,11 +9651,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 268
+            "topic_set_topic_id": 80
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=80",
           "preview": {
             "topic_id": 268,
             "topic_set_id": 1,
@@ -9466,11 +9674,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 269
+            "topic_set_topic_id": 81
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=81",
           "preview": {
             "topic_id": 269,
             "topic_set_id": 1,
@@ -9490,11 +9697,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 270
+            "topic_set_topic_id": 82
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=82",
           "preview": {
             "topic_id": 270,
             "topic_set_id": 1,
@@ -9514,11 +9720,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 271
+            "topic_set_topic_id": 83
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=83",
           "preview": {
             "topic_id": 271,
             "topic_set_id": 1,
@@ -9538,11 +9743,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 272
+            "topic_set_topic_id": 84
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=84",
           "preview": {
             "topic_id": 272,
             "topic_set_id": 1,
@@ -9562,11 +9766,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 273
+            "topic_set_topic_id": 85
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=85",
           "preview": {
             "topic_id": 273,
             "topic_set_id": 1,
@@ -9586,11 +9789,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 274
+            "topic_set_topic_id": 86
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=86",
           "preview": {
             "topic_id": 274,
             "topic_set_id": 1,
@@ -9610,11 +9812,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 276
+            "topic_set_topic_id": 87
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=87",
+          "preview": {
+            "topic_id": 12,
+            "topic_set_id": 1,
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 51,
+            "stakes_score": 1359.5967427138592
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica de amnist\u00eda para la normalizaci\u00f3n institucional, pol\u00edtica y social en Catalu\u00f1a.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 51,
+            "stakes_score": 1359.5967427138592
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 88
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=88",
           "preview": {
             "topic_id": 276,
             "topic_set_id": 1,
@@ -9634,11 +9858,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 277
+            "topic_set_topic_id": 89
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=89",
           "preview": {
             "topic_id": 277,
             "topic_set_id": 1,
@@ -9658,11 +9881,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 278
+            "topic_set_topic_id": 90
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=90",
           "preview": {
             "topic_id": 278,
             "topic_set_id": 1,
@@ -9682,11 +9904,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 279
+            "topic_set_topic_id": 91
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=91",
           "preview": {
             "topic_id": 279,
             "topic_set_id": 1,
@@ -9706,11 +9927,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 280
+            "topic_set_topic_id": 92
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=92",
           "preview": {
             "topic_id": 280,
             "topic_set_id": 1,
@@ -9730,11 +9950,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 281
+            "topic_set_topic_id": 93
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=93",
           "preview": {
             "topic_id": 281,
             "topic_set_id": 1,
@@ -9754,11 +9973,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 282
+            "topic_set_topic_id": 94
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=94",
           "preview": {
             "topic_id": 282,
             "topic_set_id": 1,
@@ -9778,11 +9996,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 283
+            "topic_set_topic_id": 95
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=95",
           "preview": {
             "topic_id": 283,
             "topic_set_id": 1,
@@ -9802,11 +10019,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 285
+            "topic_set_topic_id": 96
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=96",
+          "preview": {
+            "topic_id": 13,
+            "topic_set_id": 1,
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 60,
+            "stakes_score": 1231.3222284494934
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley de creaci\u00f3n de la Autoridad Administrativa Independiente para la Investigaci\u00f3n T\u00e9cnica de Accidentes e Incidentes ferroviarios, mar\u00edtimos y de aviaci\u00f3n civil.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 60,
+            "stakes_score": 1231.3222284494934
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 97
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=97",
           "preview": {
             "topic_id": 285,
             "topic_set_id": 1,
@@ -9826,11 +10065,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 286
+            "topic_set_topic_id": 98
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=98",
           "preview": {
             "topic_id": 286,
             "topic_set_id": 1,
@@ -9850,11 +10088,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 287
+            "topic_set_topic_id": 99
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=99",
           "preview": {
             "topic_id": 287,
             "topic_set_id": 1,
@@ -9874,11 +10111,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 288
+            "topic_set_topic_id": 100
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=100",
           "preview": {
             "topic_id": 288,
             "topic_set_id": 1,
@@ -9898,11 +10134,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 289
+            "topic_set_topic_id": 101
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=101",
           "preview": {
             "topic_id": 289,
             "topic_set_id": 1,
@@ -9922,11 +10157,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 290
+            "topic_set_topic_id": 102
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=102",
           "preview": {
             "topic_id": 290,
             "topic_set_id": 1,
@@ -9946,11 +10180,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 291
+            "topic_set_topic_id": 103
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=103",
           "preview": {
             "topic_id": 291,
             "topic_set_id": 1,
@@ -9970,11 +10203,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 292
+            "topic_set_topic_id": 104
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=104",
           "preview": {
             "topic_id": 292,
             "topic_set_id": 1,
@@ -9994,11 +10226,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 293
+            "topic_set_topic_id": 105
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=105",
           "preview": {
             "topic_id": 293,
             "topic_set_id": 1,
@@ -10018,11 +10249,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 295
+            "topic_set_topic_id": 106
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=106",
+          "preview": {
+            "topic_id": 14,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 70,
+            "stakes_score": 1016.5858338969273
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley Org\u00e1nica del derecho de defensa.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 70,
+            "stakes_score": 1016.5858338969273
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 107
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=107",
           "preview": {
             "topic_id": 295,
             "topic_set_id": 1,
@@ -10042,11 +10295,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 296
+            "topic_set_topic_id": 108
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=108",
           "preview": {
             "topic_id": 296,
             "topic_set_id": 1,
@@ -10066,11 +10318,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 297
+            "topic_set_topic_id": 109
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=109",
           "preview": {
             "topic_id": 297,
             "topic_set_id": 1,
@@ -10090,11 +10341,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 298
+            "topic_set_topic_id": 110
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=110",
           "preview": {
             "topic_id": 298,
             "topic_set_id": 1,
@@ -10114,11 +10364,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 299
+            "topic_set_topic_id": 111
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=111",
           "preview": {
             "topic_id": 299,
             "topic_set_id": 1,
@@ -10138,11 +10387,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 300
+            "topic_set_topic_id": 112
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=112",
           "preview": {
             "topic_id": 300,
             "topic_set_id": 1,
@@ -10162,11 +10410,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 301
+            "topic_set_topic_id": 113
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=113",
           "preview": {
             "topic_id": 301,
             "topic_set_id": 1,
@@ -10186,11 +10433,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 302
+            "topic_set_topic_id": 114
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=114",
           "preview": {
             "topic_id": 302,
             "topic_set_id": 1,
@@ -10210,11 +10456,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 303
+            "topic_set_topic_id": 115
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=115",
           "preview": {
             "topic_id": 303,
             "topic_set_id": 1,
@@ -10234,11 +10479,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 304
+            "topic_set_topic_id": 116
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=116",
           "preview": {
             "topic_id": 304,
             "topic_set_id": 1,
@@ -10258,11 +10502,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 305
+            "topic_set_topic_id": 117
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=117",
           "preview": {
             "topic_id": 305,
             "topic_set_id": 1,
@@ -10282,11 +10525,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 306
+            "topic_set_topic_id": 118
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=118",
           "preview": {
             "topic_id": 306,
             "topic_set_id": 1,
@@ -10306,11 +10548,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 307
+            "topic_set_topic_id": 119
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=119",
           "preview": {
             "topic_id": 307,
             "topic_set_id": 1,
@@ -10330,11 +10571,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 308
+            "topic_set_topic_id": 120
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=120",
           "preview": {
             "topic_id": 308,
             "topic_set_id": 1,
@@ -10354,11 +10594,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 309
+            "topic_set_topic_id": 121
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=121",
           "preview": {
             "topic_id": 309,
             "topic_set_id": 1,
@@ -10378,11 +10617,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 310
+            "topic_set_topic_id": 122
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=122",
           "preview": {
             "topic_id": 310,
             "topic_set_id": 1,
@@ -10402,11 +10640,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 311
+            "topic_set_topic_id": 123
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=123",
           "preview": {
             "topic_id": 311,
             "topic_set_id": 1,
@@ -10426,11 +10663,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 312
+            "topic_set_topic_id": 124
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=124",
           "preview": {
             "topic_id": 312,
             "topic_set_id": 1,
@@ -10450,11 +10686,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 313
+            "topic_set_topic_id": 125
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=125",
           "preview": {
             "topic_id": 313,
             "topic_set_id": 1,
@@ -10474,11 +10709,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 314
+            "topic_set_topic_id": 126
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=126",
           "preview": {
             "topic_id": 314,
             "topic_set_id": 1,
@@ -10498,11 +10732,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 315
+            "topic_set_topic_id": 127
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=127",
           "preview": {
             "topic_id": 315,
             "topic_set_id": 1,
@@ -10522,11 +10755,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 316
+            "topic_set_topic_id": 128
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=128",
           "preview": {
             "topic_id": 316,
             "topic_set_id": 1,
@@ -10546,11 +10778,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 318
+            "topic_set_topic_id": 129
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=129",
+          "preview": {
+            "topic_id": 15,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 93,
+            "stakes_score": 609.7521613832853
+          },
+          "preview_display": {
+            "topic_id": "Resoluci\u00f3n de 8 de octubre de 2025, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de convalidaci\u00f3n del Real Decreto-ley 10/2025, de 23 de septiembre, por el que se adoptan medidas urgentes contra el genocidio en Gaza y de apoyo a la poblaci\u00f3n palestina.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 93,
+            "stakes_score": 609.7521613832853
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 130
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=130",
           "preview": {
             "topic_id": 318,
             "topic_set_id": 1,
@@ -10570,11 +10824,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 319
+            "topic_set_topic_id": 131
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=131",
           "preview": {
             "topic_id": 319,
             "topic_set_id": 1,
@@ -10594,11 +10847,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 320
+            "topic_set_topic_id": 132
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=132",
           "preview": {
             "topic_id": 320,
             "topic_set_id": 1,
@@ -10618,11 +10870,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 321
+            "topic_set_topic_id": 133
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=133",
           "preview": {
             "topic_id": 321,
             "topic_set_id": 1,
@@ -10642,11 +10893,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 323
+            "topic_set_topic_id": 134
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=134",
+          "preview": {
+            "topic_id": 16,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_prefix_unique",
+            "stakes_rank": 98,
+            "stakes_score": 455.5569475869105
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica en materia de multirreincidencia, por la que se modifica la Ley Org\u00e1nica 10/1995, de 23 de noviembre, del C\u00f3digo Penal y la Ley de Enjuiciamiento Criminal, aprobada por Real Decreto de 14 de septiembre de 1882.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_prefix_unique",
+            "stakes_rank": 98,
+            "stakes_score": 455.5569475869105
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 135
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=135",
           "preview": {
             "topic_id": 323,
             "topic_set_id": 1,
@@ -10666,11 +10939,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 324
+            "topic_set_topic_id": 136
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=136",
           "preview": {
             "topic_id": 324,
             "topic_set_id": 1,
@@ -10690,11 +10962,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 326
+            "topic_set_topic_id": 137
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=137",
+          "preview": {
+            "topic_id": 17,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 101,
+            "stakes_score": 447.2631578947368
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica de protecci\u00f3n de las libertades y seguridad ciudadana.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 101,
+            "stakes_score": 447.2631578947368
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 138
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=138",
           "preview": {
             "topic_id": 326,
             "topic_set_id": 1,
@@ -10714,11 +11008,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 327
+            "topic_set_topic_id": 139
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=139",
           "preview": {
             "topic_id": 327,
             "topic_set_id": 1,
@@ -10738,11 +11031,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 328
+            "topic_set_topic_id": 140
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=140",
           "preview": {
             "topic_id": 328,
             "topic_set_id": 1,
@@ -10762,11 +11054,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 329
+            "topic_set_topic_id": 141
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=141",
           "preview": {
             "topic_id": 329,
             "topic_set_id": 1,
@@ -10786,11 +11077,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 330
+            "topic_set_topic_id": 142
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=142",
           "preview": {
             "topic_id": 330,
             "topic_set_id": 1,
@@ -10810,11 +11100,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 331
+            "topic_set_topic_id": 143
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=143",
           "preview": {
             "topic_id": 331,
             "topic_set_id": 1,
@@ -10834,11 +11123,56 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 334
+            "topic_set_topic_id": 144
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=144",
+          "preview": {
+            "topic_id": 18,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 108,
+            "stakes_score": 354.9770114942529
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley por la que se crea la Autoridad Administrativa Independiente de Defensa del Cliente Financiero para la resoluci\u00f3n extrajudicial de conflictos entre las entidades financieras y sus clientes.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 108,
+            "stakes_score": 354.9770114942529
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 145
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=145",
+          "preview": {
+            "topic_id": 19,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 109,
+            "stakes_score": 347.33658536585364
+          },
+          "preview_display": {
+            "topic_id": "Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan medidas para afrontar las consecuencias econ\u00f3micas y sociales derivadas de los conflictos en Ucrania y Oriente Pr\u00f3ximo, as\u00ed como para paliar los efectos de la sequ\u00eda.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 109,
+            "stakes_score": 347.33658536585364
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 146
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=146",
           "preview": {
             "topic_id": 334,
             "topic_set_id": 1,
@@ -10858,11 +11192,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 335
+            "topic_set_topic_id": 147
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=147",
           "preview": {
             "topic_id": 335,
             "topic_set_id": 1,
@@ -10882,11 +11215,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 336
+            "topic_set_topic_id": 148
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=148",
           "preview": {
             "topic_id": 336,
             "topic_set_id": 1,
@@ -10906,11 +11238,79 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 340
+            "topic_set_topic_id": 149
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=149",
+          "preview": {
+            "topic_id": 20,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 113,
+            "stakes_score": 344.97076023391816
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica para el impulso de la aplicaci\u00f3n de la Ley Org\u00e1nica 10/2022, de 6 de septiembre, de garant\u00eda integral de la libertad sexual, y la plena protecci\u00f3n de las v\u00edctimas de violencias sexuales.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 113,
+            "stakes_score": 344.97076023391816
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 150
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=150",
+          "preview": {
+            "topic_id": 21,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 114,
+            "stakes_score": 344.0
+          },
+          "preview_display": {
+            "topic_id": "Real Decreto-ley 6/2023, de 19 de diciembre, por el que se aprueban medidas urgentes para la ejecuci\u00f3n del Plan de Recuperaci\u00f3n, Transformaci\u00f3n y Resiliencia en materia de servicio p\u00fablico de justicia, funci\u00f3n p\u00fablica, r\u00e9gimen local y mecenazgo.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 114,
+            "stakes_score": 344.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 151
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=151",
+          "preview": {
+            "topic_id": 22,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 115,
+            "stakes_score": 344.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley relativa a la regulaci\u00f3n de los contratos de alquiler de vivienda por temporada y alquiler de habitaciones.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 115,
+            "stakes_score": 344.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 152
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=152",
           "preview": {
             "topic_id": 340,
             "topic_set_id": 1,
@@ -10930,11 +11330,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 341
+            "topic_set_topic_id": 153
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=153",
           "preview": {
             "topic_id": 341,
             "topic_set_id": 1,
@@ -10954,11 +11353,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 342
+            "topic_set_topic_id": 154
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=154",
           "preview": {
             "topic_id": 342,
             "topic_set_id": 1,
@@ -10978,11 +11376,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 343
+            "topic_set_topic_id": 155
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=155",
           "preview": {
             "topic_id": 343,
             "topic_set_id": 1,
@@ -11002,11 +11399,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 344
+            "topic_set_topic_id": 156
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=156",
           "preview": {
             "topic_id": 344,
             "topic_set_id": 1,
@@ -11026,11 +11422,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 345
+            "topic_set_topic_id": 157
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=157",
           "preview": {
             "topic_id": 345,
             "topic_set_id": 1,
@@ -11050,11 +11445,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 347
+            "topic_set_topic_id": 158
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=158",
+          "preview": {
+            "topic_id": 23,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 122,
+            "stakes_score": 342.98275862068965
+          },
+          "preview_display": {
+            "topic_id": "Resoluci\u00f3n de 22 de enero de 2025, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de derogaci\u00f3n del Real Decreto-ley 9/2024, de 23 de diciembre, por el que se adoptan medidas urgentes en materia econ\u00f3mica, tributaria, de transporte, y de Seguridad Social, y se prorrogan determinadas medidas para hacer frente a situaciones de vulnerabilidad social.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 122,
+            "stakes_score": 342.98275862068965
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 159
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=159",
           "preview": {
             "topic_id": 347,
             "topic_set_id": 1,
@@ -11074,11 +11491,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 348
+            "topic_set_topic_id": 160
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=160",
           "preview": {
             "topic_id": 348,
             "topic_set_id": 1,
@@ -11098,11 +11514,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 349
+            "topic_set_topic_id": 161
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=161",
           "preview": {
             "topic_id": 349,
             "topic_set_id": 1,
@@ -11122,11 +11537,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 350
+            "topic_set_topic_id": 162
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=162",
           "preview": {
             "topic_id": 350,
             "topic_set_id": 1,
@@ -11146,11 +11560,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 352
+            "topic_set_topic_id": 163
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=163",
+          "preview": {
+            "topic_id": 24,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 127,
+            "stakes_score": 342.9380530973451
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley relativa a la modificaci\u00f3n de la Ley 50/1981, de 30 de diciembre, por la que se regula el Estatuto Org\u00e1nico del Ministerio Fiscal.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 127,
+            "stakes_score": 342.9380530973451
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 164
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=164",
           "preview": {
             "topic_id": 352,
             "topic_set_id": 1,
@@ -11170,11 +11606,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 353
+            "topic_set_topic_id": 165
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=165",
           "preview": {
             "topic_id": 353,
             "topic_set_id": 1,
@@ -11194,11 +11629,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 354
+            "topic_set_topic_id": 166
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=166",
           "preview": {
             "topic_id": 354,
             "topic_set_id": 1,
@@ -11218,11 +11652,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 355
+            "topic_set_topic_id": 167
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=167",
           "preview": {
             "topic_id": 355,
             "topic_set_id": 1,
@@ -11242,11 +11675,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 356
+            "topic_set_topic_id": 168
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=168",
           "preview": {
             "topic_id": 356,
             "topic_set_id": 1,
@@ -11266,11 +11698,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 357
+            "topic_set_topic_id": 169
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=169",
           "preview": {
             "topic_id": 357,
             "topic_set_id": 1,
@@ -11290,11 +11721,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 358
+            "topic_set_topic_id": 170
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=170",
           "preview": {
             "topic_id": 358,
             "topic_set_id": 1,
@@ -11314,11 +11744,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 359
+            "topic_set_topic_id": 171
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=171",
           "preview": {
             "topic_id": 359,
             "topic_set_id": 1,
@@ -11338,11 +11767,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 360
+            "topic_set_topic_id": 172
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=172",
           "preview": {
             "topic_id": 360,
             "topic_set_id": 1,
@@ -11362,11 +11790,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 361
+            "topic_set_topic_id": 173
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=173",
           "preview": {
             "topic_id": 361,
             "topic_set_id": 1,
@@ -11386,11 +11813,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 362
+            "topic_set_topic_id": 174
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=174",
           "preview": {
             "topic_id": 362,
             "topic_set_id": 1,
@@ -11410,11 +11836,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 363
+            "topic_set_topic_id": 175
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=175",
           "preview": {
             "topic_id": 363,
             "topic_set_id": 1,
@@ -11434,11 +11859,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 364
+            "topic_set_topic_id": 176
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=176",
           "preview": {
             "topic_id": 364,
             "topic_set_id": 1,
@@ -11458,11 +11882,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 365
+            "topic_set_topic_id": 177
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=177",
           "preview": {
             "topic_id": 365,
             "topic_set_id": 1,
@@ -11482,11 +11905,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 366
+            "topic_set_topic_id": 178
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=178",
           "preview": {
             "topic_id": 366,
             "topic_set_id": 1,
@@ -11506,11 +11928,79 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 370
+            "topic_set_topic_id": 179
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=179",
+          "preview": {
+            "topic_id": 25,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 143,
+            "stakes_score": 342.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 10/1995, de 23 de noviembre, del C\u00f3digo Penal, al objeto de tipificar penalmente el transporte y almacenamiento de combustibles l\u00edquidos predeterminados al narcotr\u00e1fico.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 143,
+            "stakes_score": 342.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 180
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=180",
+          "preview": {
+            "topic_id": 26,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 144,
+            "stakes_score": 342.0
+          },
+          "preview_display": {
+            "topic_id": "Real Decreto-ley 16/2025, de 23 de diciembre, por el que se prorrogan determinadas medidas para hacer frente a situaciones de vulnerabilidad social, y se adoptan medidas urgentes en materia tributaria y de Seguridad Social.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 144,
+            "stakes_score": 342.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 181
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=181",
+          "preview": {
+            "topic_id": 27,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 145,
+            "stakes_score": 341.91884057971015
+          },
+          "preview_display": {
+            "topic_id": "Resoluci\u00f3n de 8 de mayo de 2025, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de convalidaci\u00f3n del Real Decreto-ley 4/2025, de 8 de abril, de medidas urgentes de respuesta a la amenaza arancelaria y de relanzamiento comercial.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 145,
+            "stakes_score": 341.91884057971015
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 182
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=182",
           "preview": {
             "topic_id": 370,
             "topic_set_id": 1,
@@ -11530,11 +12020,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 371
+            "topic_set_topic_id": 183
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=183",
           "preview": {
             "topic_id": 371,
             "topic_set_id": 1,
@@ -11554,11 +12043,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 372
+            "topic_set_topic_id": 184
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=184",
           "preview": {
             "topic_id": 372,
             "topic_set_id": 1,
@@ -11578,11 +12066,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 373
+            "topic_set_topic_id": 185
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=185",
           "preview": {
             "topic_id": 373,
             "topic_set_id": 1,
@@ -11602,11 +12089,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 374
+            "topic_set_topic_id": 186
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=186",
           "preview": {
             "topic_id": 374,
             "topic_set_id": 1,
@@ -11626,11 +12112,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 375
+            "topic_set_topic_id": 187
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=187",
           "preview": {
             "topic_id": 375,
             "topic_set_id": 1,
@@ -11650,11 +12135,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 376
+            "topic_set_topic_id": 188
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=188",
           "preview": {
             "topic_id": 376,
             "topic_set_id": 1,
@@ -11674,11 +12158,56 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 379
+            "topic_set_topic_id": 189
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=189",
+          "preview": {
+            "topic_id": 28,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 153,
+            "stakes_score": 340.97982708933716
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica de modificaci\u00f3n de la Ley Org\u00e1nica 5/1985, de 19 de junio, del R\u00e9gimen Electoral General, relativa a las elecciones al Parlamento Europeo.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 153,
+            "stakes_score": 340.97982708933716
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 190
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=190",
+          "preview": {
+            "topic_id": 29,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 154,
+            "stakes_score": 340.974212034384
+          },
+          "preview_display": {
+            "topic_id": "Ley Org\u00e1nica 2/2025, de 3 de junio, por la que se autoriza la ratificaci\u00f3n de cuatro enmiendas al art\u00edculo 8.2 del Estatuto de Roma de la Corte Penal Internacional.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:congreso_law_expediente",
+            "stakes_rank": 154,
+            "stakes_score": 340.974212034384
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 191
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=191",
           "preview": {
             "topic_id": 379,
             "topic_set_id": 1,
@@ -11698,11 +12227,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 380
+            "topic_set_topic_id": 192
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=192",
           "preview": {
             "topic_id": 380,
             "topic_set_id": 1,
@@ -11722,11 +12250,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 381
+            "topic_set_topic_id": 193
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=193",
           "preview": {
             "topic_id": 381,
             "topic_set_id": 1,
@@ -11746,11 +12273,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 382
+            "topic_set_topic_id": 194
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=194",
           "preview": {
             "topic_id": 382,
             "topic_set_id": 1,
@@ -11770,11 +12296,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 383
+            "topic_set_topic_id": 195
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=195",
           "preview": {
             "topic_id": 383,
             "topic_set_id": 1,
@@ -11794,11 +12319,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 384
+            "topic_set_topic_id": 196
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=196",
           "preview": {
             "topic_id": 384,
             "topic_set_id": 1,
@@ -11818,11 +12342,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 385
+            "topic_set_topic_id": 197
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=197",
           "preview": {
             "topic_id": 385,
             "topic_set_id": 1,
@@ -11842,11 +12365,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 386
+            "topic_set_topic_id": 198
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=198",
           "preview": {
             "topic_id": 386,
             "topic_set_id": 1,
@@ -11866,11 +12388,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 387
+            "topic_set_topic_id": 199
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=199",
           "preview": {
             "topic_id": 387,
             "topic_set_id": 1,
@@ -11890,11 +12411,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 388
+            "topic_set_topic_id": 200
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=200",
           "preview": {
             "topic_id": 388,
             "topic_set_id": 1,
@@ -11914,11 +12434,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 389
+            "topic_set_topic_id": 201
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=201",
           "preview": {
             "topic_id": 389,
             "topic_set_id": 1,
@@ -11938,11 +12457,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 390
+            "topic_set_topic_id": 202
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=202",
           "preview": {
             "topic_id": 390,
             "topic_set_id": 1,
@@ -11962,11 +12480,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 391
+            "topic_set_topic_id": 203
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=203",
           "preview": {
             "topic_id": 391,
             "topic_set_id": 1,
@@ -11986,11 +12503,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 392
+            "topic_set_topic_id": 204
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=204",
           "preview": {
             "topic_id": 392,
             "topic_set_id": 1,
@@ -12010,11 +12526,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 393
+            "topic_set_topic_id": 205
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=205",
           "preview": {
             "topic_id": 393,
             "topic_set_id": 1,
@@ -12034,11 +12549,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 394
+            "topic_set_topic_id": 206
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=206",
           "preview": {
             "topic_id": 394,
             "topic_set_id": 1,
@@ -12058,11 +12572,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 395
+            "topic_set_topic_id": 207
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=207",
           "preview": {
             "topic_id": 395,
             "topic_set_id": 1,
@@ -12082,11 +12595,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 396
+            "topic_set_topic_id": 208
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=208",
           "preview": {
             "topic_id": 396,
             "topic_set_id": 1,
@@ -12106,11 +12618,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 397
+            "topic_set_topic_id": 209
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=209",
           "preview": {
             "topic_id": 397,
             "topic_set_id": 1,
@@ -12130,11 +12641,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 398
+            "topic_set_topic_id": 210
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=210",
           "preview": {
             "topic_id": 398,
             "topic_set_id": 1,
@@ -12154,11 +12664,148 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 405
+            "topic_set_topic_id": 211
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=211",
+          "preview": {
+            "topic_id": 30,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 175,
+            "stakes_score": 340.0
+          },
+          "preview_display": {
+            "topic_id": "Proyecto de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 13/1982, de 10 de agosto, de reintegraci\u00f3n y amejoramiento del R\u00e9gimen Foral de Navarra, en cuanto a tr\u00e1fico, circulaci\u00f3n de veh\u00edculos de motor y seguridad vial.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 175,
+            "stakes_score": 340.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 212
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=212",
+          "preview": {
+            "topic_id": 31,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 176,
+            "stakes_score": 340.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley Org\u00e1nica por la que se modifica la Ley Org\u00e1nica 6/1985, de 1 de julio, del Poder Judicial, para la reforma del procedimiento de elecci\u00f3n de los vocales del Consejo General del Poder Judicial.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 176,
+            "stakes_score": 340.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 213
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=213",
+          "preview": {
+            "topic_id": 32,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 177,
+            "stakes_score": 340.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley por la que se modifica el art\u00edculo 274 del texto refundido de la Ley General de la Seguridad Social, aprobado por Real Decreto Legislativo 8/2015, de 30 de octubre, para eliminar el subsidio previsto para los menores que no ostenten la nacionalidad espa\u00f1ola privados de libertad por cumplimiento de medida de internamiento en centro.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 177,
+            "stakes_score": 340.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 214
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=214",
+          "preview": {
+            "topic_id": 33,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 178,
+            "stakes_score": 340.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley para garantizar la representaci\u00f3n internacional de las federaciones deportivas espa\u00f1olas en las actividades y competiciones deportivas de car\u00e1cter internacional.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 178,
+            "stakes_score": 340.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 215
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=215",
+          "preview": {
+            "topic_id": 34,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 179,
+            "stakes_score": 340.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley para garantizar la prestaci\u00f3n de los servicios p\u00fablicos esenciales a los municipios rurales de peque\u00f1o tama\u00f1o en situaciones de emergencia de inter\u00e9s nacional.",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 179,
+            "stakes_score": 340.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 216
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=216",
+          "preview": {
+            "topic_id": 35,
+            "topic_set_id": 1,
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 180,
+            "stakes_score": 340.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Ley relativa a la escolarizaci\u00f3n del alumnado con necesidades educativas especiales (Org\u00e1nica).",
+            "topic_set_id": "Congreso de los Diputados / leg 15 / votaciones (auto)",
+            "is_high_stakes": 0,
+            "notes": "initiative:title_norm_exact_unique",
+            "stakes_rank": 180,
+            "stakes_score": 340.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 217
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=217",
           "preview": {
             "topic_id": 405,
             "topic_set_id": 1,
@@ -12178,11 +12825,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 406
+            "topic_set_topic_id": 218
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=218",
           "preview": {
             "topic_id": 406,
             "topic_set_id": 1,
@@ -12202,11 +12848,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 407
+            "topic_set_topic_id": 219
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=219",
           "preview": {
             "topic_id": 407,
             "topic_set_id": 1,
@@ -12226,11 +12871,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 408
+            "topic_set_topic_id": 220
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=220",
           "preview": {
             "topic_id": 408,
             "topic_set_id": 1,
@@ -12250,11 +12894,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 409
+            "topic_set_topic_id": 221
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=221",
           "preview": {
             "topic_id": 409,
             "topic_set_id": 1,
@@ -12274,11 +12917,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 410
+            "topic_set_topic_id": 222
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=222",
           "preview": {
             "topic_id": 410,
             "topic_set_id": 1,
@@ -12298,11 +12940,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 411
+            "topic_set_topic_id": 223
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=223",
           "preview": {
             "topic_id": 411,
             "topic_set_id": 1,
@@ -12322,11 +12963,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 412
+            "topic_set_topic_id": 224
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=224",
           "preview": {
             "topic_id": 412,
             "topic_set_id": 1,
@@ -12346,11 +12986,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 413
+            "topic_set_topic_id": 225
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=225",
           "preview": {
             "topic_id": 413,
             "topic_set_id": 1,
@@ -12370,11 +13009,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 414
+            "topic_set_topic_id": 226
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=226",
           "preview": {
             "topic_id": 414,
             "topic_set_id": 1,
@@ -12394,11 +13032,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 415
+            "topic_set_topic_id": 227
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=227",
           "preview": {
             "topic_id": 415,
             "topic_set_id": 1,
@@ -12418,11 +13055,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 416
+            "topic_set_topic_id": 228
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=228",
           "preview": {
             "topic_id": 416,
             "topic_set_id": 1,
@@ -12442,11 +13078,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 417
+            "topic_set_topic_id": 229
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=229",
           "preview": {
             "topic_id": 417,
             "topic_set_id": 1,
@@ -12466,11 +13101,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 418
+            "topic_set_topic_id": 230
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=230",
           "preview": {
             "topic_id": 418,
             "topic_set_id": 1,
@@ -12490,11 +13124,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 419
+            "topic_set_topic_id": 231
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=231",
           "preview": {
             "topic_id": 419,
             "topic_set_id": 1,
@@ -12514,11 +13147,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 420
+            "topic_set_topic_id": 232
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=232",
           "preview": {
             "topic_id": 420,
             "topic_set_id": 1,
@@ -12538,11 +13170,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 421
+            "topic_set_topic_id": 233
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=233",
           "preview": {
             "topic_id": 421,
             "topic_set_id": 1,
@@ -12562,11 +13193,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 422
+            "topic_set_topic_id": 234
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=234",
           "preview": {
             "topic_id": 422,
             "topic_set_id": 1,
@@ -12586,11 +13216,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 423
+            "topic_set_topic_id": 235
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=235",
           "preview": {
             "topic_id": 423,
             "topic_set_id": 1,
@@ -12610,11 +13239,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 1,
-            "topic_id": 424
+            "topic_set_topic_id": 236
           },
           "can_open": true,
-          "label": "topic_set_id=1",
+          "label": "topic_set_topic_id=236",
           "preview": {
             "topic_id": 424,
             "topic_set_id": 1,
@@ -12634,11 +13262,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 201
+            "topic_set_topic_id": 237
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=237",
           "preview": {
             "topic_id": 201,
             "topic_set_id": 2,
@@ -12658,11 +13285,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 202
+            "topic_set_topic_id": 238
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=238",
           "preview": {
             "topic_id": 202,
             "topic_set_id": 2,
@@ -12682,11 +13308,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 203
+            "topic_set_topic_id": 239
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=239",
           "preview": {
             "topic_id": 203,
             "topic_set_id": 2,
@@ -12706,11 +13331,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 204
+            "topic_set_topic_id": 240
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=240",
           "preview": {
             "topic_id": 204,
             "topic_set_id": 2,
@@ -12730,11 +13354,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 205
+            "topic_set_topic_id": 241
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=241",
           "preview": {
             "topic_id": 205,
             "topic_set_id": 2,
@@ -12754,35 +13377,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 206
+            "topic_set_topic_id": 242
           },
           "can_open": true,
-          "label": "topic_set_id=2",
-          "preview": {
-            "topic_id": 206,
-            "topic_set_id": 2,
-            "is_high_stakes": 1,
-            "notes": "initiative:leg_expediente_payload_exact",
-            "stakes_rank": 15,
-            "stakes_score": 0.0
-          },
-          "preview_display": {
-            "topic_id": "Proposici\u00f3n de Reforma del art\u00edculo 49 de la Constituci\u00f3n Espa\u00f1ola. (600/000001)",
-            "topic_set_id": "Senado de Espana / leg 15 / votaciones (auto)",
-            "is_high_stakes": 1,
-            "notes": "initiative:leg_expediente_payload_exact",
-            "stakes_rank": 15,
-            "stakes_score": 0.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 2,
-            "topic_id": 207
-          },
-          "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=242",
           "preview": {
             "topic_id": 207,
             "topic_set_id": 2,
@@ -12802,11 +13400,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 208
+            "topic_set_topic_id": 243
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=243",
           "preview": {
             "topic_id": 208,
             "topic_set_id": 2,
@@ -12826,11 +13423,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 209
+            "topic_set_topic_id": 244
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=244",
           "preview": {
             "topic_id": 209,
             "topic_set_id": 2,
@@ -12850,11 +13446,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 210
+            "topic_set_topic_id": 245
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=245",
           "preview": {
             "topic_id": 210,
             "topic_set_id": 2,
@@ -12874,11 +13469,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 211
+            "topic_set_topic_id": 246
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=246",
           "preview": {
             "topic_id": 211,
             "topic_set_id": 2,
@@ -12898,11 +13492,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 212
+            "topic_set_topic_id": 247
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=247",
           "preview": {
             "topic_id": 212,
             "topic_set_id": 2,
@@ -12922,11 +13515,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 213
+            "topic_set_topic_id": 248
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=248",
           "preview": {
             "topic_id": 213,
             "topic_set_id": 2,
@@ -12946,11 +13538,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 214
+            "topic_set_topic_id": 249
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=249",
           "preview": {
             "topic_id": 214,
             "topic_set_id": 2,
@@ -12970,11 +13561,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 215
+            "topic_set_topic_id": 250
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=250",
           "preview": {
             "topic_id": 215,
             "topic_set_id": 2,
@@ -12994,11 +13584,33 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 216
+            "topic_set_topic_id": 251
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=251",
+          "preview": {
+            "topic_id": 206,
+            "topic_set_id": 2,
+            "is_high_stakes": 1,
+            "notes": "initiative:leg_expediente_payload_exact",
+            "stakes_rank": 15,
+            "stakes_score": 0.0
+          },
+          "preview_display": {
+            "topic_id": "Proposici\u00f3n de Reforma del art\u00edculo 49 de la Constituci\u00f3n Espa\u00f1ola. (600/000001)",
+            "topic_set_id": "Senado de Espana / leg 15 / votaciones (auto)",
+            "is_high_stakes": 1,
+            "notes": "initiative:leg_expediente_payload_exact",
+            "stakes_rank": 15,
+            "stakes_score": 0.0
+          }
+        },
+        {
+          "identity": {
+            "topic_set_topic_id": 252
+          },
+          "can_open": true,
+          "label": "topic_set_topic_id=252",
           "preview": {
             "topic_id": 216,
             "topic_set_id": 2,
@@ -13018,11 +13630,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 217
+            "topic_set_topic_id": 253
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=253",
           "preview": {
             "topic_id": 217,
             "topic_set_id": 2,
@@ -13042,11 +13653,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 218
+            "topic_set_topic_id": 254
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=254",
           "preview": {
             "topic_id": 218,
             "topic_set_id": 2,
@@ -13066,11 +13676,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 219
+            "topic_set_topic_id": 255
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=255",
           "preview": {
             "topic_id": 219,
             "topic_set_id": 2,
@@ -13090,11 +13699,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 220
+            "topic_set_topic_id": 256
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=256",
           "preview": {
             "topic_id": 220,
             "topic_set_id": 2,
@@ -13114,11 +13722,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 221
+            "topic_set_topic_id": 257
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=257",
           "preview": {
             "topic_id": 221,
             "topic_set_id": 2,
@@ -13138,11 +13745,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 222
+            "topic_set_topic_id": 258
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=258",
           "preview": {
             "topic_id": 222,
             "topic_set_id": 2,
@@ -13162,11 +13768,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 223
+            "topic_set_topic_id": 259
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=259",
           "preview": {
             "topic_id": 223,
             "topic_set_id": 2,
@@ -13186,11 +13791,10 @@
         },
         {
           "identity": {
-            "topic_set_id": 2,
-            "topic_id": 224
+            "topic_set_topic_id": 260
           },
           "can_open": true,
-          "label": "topic_set_id=2",
+          "label": "topic_set_topic_id=260",
           "preview": {
             "topic_id": 224,
             "topic_set_id": 2,
@@ -13206,870 +13810,6 @@
             "notes": "initiative:leg_expediente_payload_exact",
             "stakes_rank": 24,
             "stakes_score": 0.0
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 897
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 897,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 1,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Vivienda",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 1,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 898
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 898,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 2,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Empleo",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 2,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 899
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 899,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 3,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Sanidad",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 3,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 900
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 900,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 4,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Educacion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 4,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 901
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 901,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 5,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Coste de vida",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 5,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 902
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 902,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 6,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Energia",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 6,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 903
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 903,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 7,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Transporte",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 7,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 904
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 904,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 8,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Seguridad y justicia",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 8,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 905
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 905,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 9,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Inmigracion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 9,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 906
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 906,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 10,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Corrupcion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 10,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 907
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 907,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 11,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Campo y mundo rural",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 11,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 9,
-            "topic_id": 908
-          },
-          "can_open": true,
-          "label": "topic_set_id=9",
-          "preview": {
-            "topic_id": 908,
-            "topic_set_id": 9,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 12,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Igualdad",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 12,
-            "created_at": "2026-02-17T15:42:47+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 897
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 897,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 1,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Vivienda",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 1,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 898
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 898,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 2,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Empleo",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 2,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 899
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 899,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 3,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Sanidad",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 3,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 900
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 900,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 4,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Educacion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 4,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 901
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 901,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 5,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Coste de vida",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 5,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 902
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 902,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 6,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Energia",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 6,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 903
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 903,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 7,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Transporte",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 7,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 904
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 904,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 8,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Seguridad y justicia",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 8,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 905
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 905,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 9,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Inmigracion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 9,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 906
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 906,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 10,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Corrupcion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 10,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 907
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 907,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 11,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Campo y mundo rural",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 11,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 10,
-            "topic_id": 908
-          },
-          "can_open": true,
-          "label": "topic_set_id=10",
-          "preview": {
-            "topic_id": 908,
-            "topic_set_id": 10,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 12,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Igualdad",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 12,
-            "created_at": "2026-02-17T15:44:39+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 897
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 897,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 1,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Vivienda",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 1,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 898
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 898,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 2,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Empleo",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 2,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 899
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 899,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 3,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Sanidad",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 3,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 900
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 900,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 4,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Educacion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 4,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 901
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 901,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 5,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Coste de vida",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 5,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 902
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 902,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 6,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Energia",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 6,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 903
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 903,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 7,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Transporte",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 7,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 904
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 904,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 8,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Seguridad y justicia",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 8,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 905
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 905,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 9,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Inmigracion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 9,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 906
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 906,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 10,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Corrupcion",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 10,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 907
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 907,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 11,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Campo y mundo rural",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 11,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          }
-        },
-        {
-          "identity": {
-            "topic_set_id": 11,
-            "topic_id": 908
-          },
-          "can_open": true,
-          "label": "topic_set_id=11",
-          "preview": {
-            "topic_id": 908,
-            "topic_set_id": 11,
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 12,
-            "created_at": "2026-02-23T20:14:27+00:00"
-          },
-          "preview_display": {
-            "topic_id": "Igualdad",
-            "topic_set_id": "Programas de partidos",
-            "is_high_stakes": 1,
-            "notes": "concerns_v1",
-            "stakes_rank": 12,
-            "created_at": "2026-02-23T20:14:27+00:00"
           }
         }
       ]
