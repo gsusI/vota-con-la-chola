@@ -456,7 +456,8 @@ Estado observado en el último ciclo:
 - ✅ Base de atlas/coverage y publicación local de artefactos: ejecución funcional (`export_liberty_restrictions_snapshot.py`, `publish_liberty_atlas_artifacts.py`).
 - ✅ Heartbeat de cobertura y continuidad: ejecución funcional con `report_liberty_restrictions_status_heartbeat.py` y `report_liberty_restrictions_status_heartbeat_window.py`.
 - ✅ AI-OPS-218: continuidad de cobertura y snapshot cerrada (`status=ok`) para `SNAPSHOT_DATE=2026-03-05`, incluyendo continuidad de changelog y artefactos base.
-- ⚠️ AI-OPS-219 pendiente: `parl-report-liberty-atlas-release-heartbeat` aún reporta `published_release_error:missing_file:etl/data/published/liberty-restrictions-atlas-latest.json` y la ventana strict sigue con alertas de `hf_unavailable` y `drift` en un bloque.
+- ✅ AI-OPS-219 ejecutado: contract-path correcto confirmado en `AI-OPS-219/evidence/liberty_atlas_release_heartbeat_20260226T092333Z.json` (`status=degraded`, `published_release_ok=true`, `hf_unavailable=true`, `strict_fail_reasons=[]`).
+- ⚠️ AI-OPS-219 residual: la ventana strict de release heartbeat sigue `failed` en `AI-OPS-219/evidence/liberty_atlas_release_heartbeat_window_20260226T092333Z.json` por histórico de `failed/degraded/drift/hf_unavailable`; no se han ajustado umbrales en esta iteración.
 - ⚠️ Bloqueos externos fuera de ciclo principal siguen vigentes para `parlamento_galicia_deputados` y `congreso_votaciones` (403); registrarlos en nombre y pasar sólo con evidencia.
 - ✅ Tracker de e2e sin desalineaciones en la corrida consultada (`mismatches: 0`, `done_zero_real: 0`).
 
@@ -466,14 +467,17 @@ Secuencia repetible diaria/semanal (en este orden):
 - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-focus-gate`
 - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-restrictions-status-heartbeat`
 - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-restrictions-status-heartbeat-window`
-  - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-atlas-release-heartbeat --allow-hf-unavailable`
-  - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-atlas-release-heartbeat-window`
-  - `DB_PATH=etl/data/staging/politicos-es.db just etl-publish-hf`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-atlas-release-heartbeat --allow-hf-unavailable`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-atlas-release-heartbeat-window`
+- `DB_PATH=etl/data/staging/politicos-es.db just etl-publish-hf`
 
 Mini-acción prioritaria (AI-OPS-219):
-- Ejecutar un ciclo de release-closure para cerrar la ventana strict:
+- Cierre ya ejecutado (estado residual):
   - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-report-liberty-atlas-release-heartbeat --allow-hf-unavailable`
   - `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-atlas-release-heartbeat-window`
+
+Próximo micro-objetivo:
+- Mantener `Derechos` estable hasta que se decida un nuevo `window` policy para `AI-OPS-219` o se limpie historial histórico de degradación con comando de continuidad explícita (sin nuevos cambios de fuente).
 
 Regla de continuación (si hay fallo):
 - Si cualquier gate de derechos cae de `ok` a `degraded`, abrir mini-acción en `docs/etl/e2e-scrape-load-tracker.md` en el mismo día; sin eso, no avanzar a nuevas adquisiciones externas.
