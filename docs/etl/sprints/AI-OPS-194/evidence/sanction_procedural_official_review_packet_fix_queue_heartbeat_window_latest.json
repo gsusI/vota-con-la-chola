@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:32+00:00",
+  "generated_at": "2026-02-25T13:45:13+00:00",
   "status": "ok",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat.jsonl",
@@ -13,7 +13,7 @@
     "max_nonempty_queue_rate_pct": 100.0,
     "max_malformed": 0
   },
-  "entries_total": 31,
+  "entries_total": 32,
   "entries_in_window": 20,
   "malformed_entries_in_window": 0,
   "status_counts": {
@@ -29,13 +29,13 @@
   "nonempty_queue_rate_pct": 100.0,
   "first_failed_run_at": "",
   "last_failed_run_at": "",
-  "first_degraded_run_at": "2026-02-24T13:12:13+00:00",
-  "last_degraded_run_at": "2026-02-24T15:24:32+00:00",
+  "first_degraded_run_at": "2026-02-24T13:20:12+00:00",
+  "last_degraded_run_at": "2026-02-25T13:45:13+00:00",
   "latest": {
-    "line_no": 31,
+    "line_no": 32,
     "malformed_line": false,
-    "run_at": "2026-02-24T15:24:32+00:00",
-    "heartbeat_id": "2026-02-24T15:24:32+00:00|degraded|4|4|0|4|invalid_row:4|0|1",
+    "run_at": "2026-02-25T13:45:13+00:00",
+    "heartbeat_id": "2026-02-25T13:45:13+00:00|degraded|4|4|0|4|invalid_row:4|0|1",
     "status": "degraded",
     "queue_rows_total": 4
   },

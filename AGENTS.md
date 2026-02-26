@@ -43,6 +43,7 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 - If sensitive data was already committed, do not ignore it:
   - open a follow-up to scrub affected files
   - if needed, plan history rewrite (`git filter-repo`) with explicit maintainer approval
+- Frontend publish rule: when you modify any frontend artifact (`ui/**` or static/public UI files), run `just explorer-gh-pages-publish` immediately after merge-ready changes, so `main` and published `gh-pages` stay in sync.
 
 ### Structuring Complexity
 - Build in thin vertical slices, not big-bang layers.

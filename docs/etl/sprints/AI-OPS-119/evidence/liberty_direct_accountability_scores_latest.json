@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T21:12:30+00:00",
+  "generated_at": "2026-02-26T08:58:18+00:00",
   "status": "ok",
   "totals": {
     "fragments_with_irlc_total": 8,
@@ -7,21 +7,26 @@
     "fragments_with_direct_chain_total": 8,
     "accountability_edges_total": 21,
     "direct_edges_total": 19,
+    "direct_edges_with_primary_evidence_total": 19,
     "actors_scored_total": 8
   },
   "coverage": {
     "fragments_with_any_accountability_pct": 1.0,
-    "fragments_with_direct_chain_pct": 1.0
+    "fragments_with_direct_chain_pct": 1.0,
+    "direct_edges_with_primary_evidence_pct": 1.0
   },
   "checks": {
     "direct_chain_started": true,
     "responsibility_score_available": true,
-    "direct_coverage_gate": true
+    "direct_coverage_gate": true,
+    "direct_primary_evidence_gate": true
   },
   "gate": {
     "passed": true,
     "thresholds": {
-      "direct_coverage_min": 0.6
+      "direct_coverage_min": 0.6,
+      "direct_primary_evidence_min_pct": 1.0,
+      "min_direct_primary_evidence_edges": 1
     }
   },
   "methodology": {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:34+00:00",
+  "generated_at": "2026-02-25T13:45:15+00:00",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
   "compacted_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
@@ -10,14 +10,14 @@
     "keep_old_every": 20
   },
   "min_raw_for_dropped_check": 25,
-  "entries_total": 10,
-  "selected_entries": 10,
+  "entries_total": 11,
+  "selected_entries": 11,
   "dropped_entries": 0,
   "dropped_rate_pct": 0.0,
   "tiers": {
     "recent": {
-      "raw_entries": 10,
-      "selected_entries": 10,
+      "raw_entries": 11,
+      "selected_entries": 11,
       "cadence_every": 1
     },
     "mid": {
@@ -51,9 +51,9 @@
     "latest_selected": true
   },
   "raw_first_run_at": "2026-02-24T14:07:34+00:00",
-  "raw_last_run_at": "2026-02-24T15:24:33+00:00",
+  "raw_last_run_at": "2026-02-25T13:45:15+00:00",
   "selected_first_run_at": "2026-02-24T14:07:34+00:00",
-  "selected_last_run_at": "2026-02-24T15:24:33+00:00",
+  "selected_last_run_at": "2026-02-25T13:45:15+00:00",
   "selected_indices_sample": [
     0,
     1,
@@ -64,7 +64,8 @@
     6,
     7,
     8,
-    9
+    9,
+    10
   ],
   "selected_reasons_sample": [
     {
@@ -153,6 +154,15 @@
       "index": 9,
       "line_no": 10,
       "run_at": "2026-02-24T15:24:33+00:00",
+      "status": "ok",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 10,
+      "line_no": 11,
+      "run_at": "2026-02-25T13:45:15+00:00",
       "status": "ok",
       "reasons": [
         "anchor_latest",

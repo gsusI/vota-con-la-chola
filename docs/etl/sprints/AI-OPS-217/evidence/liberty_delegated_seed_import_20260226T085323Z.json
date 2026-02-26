@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-02-26T08:53:32+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_delegated_enforcement_seed_v1.json",
+  "validation": {
+    "valid": true,
+    "method_version": "delegated_enforcement_v1",
+    "links_total": 8
+  },
+  "import": {
+    "status": "ok",
+    "snapshot_date": "2026-02-26",
+    "source_id_used": "",
+    "method_version": "delegated_enforcement_v1",
+    "counts": {
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "links_inserted": 0,
+      "links_updated": 8,
+      "unresolved_fragment_refs": 0
+    },
+    "totals": {
+      "methodologies_total": 1,
+      "links_total": 8,
+      "fragments_with_links_total": 8
+    }
+  }
+}

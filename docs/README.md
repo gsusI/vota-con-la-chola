@@ -7,6 +7,7 @@ Fuente de verdad (roadmaps):
 
 Backlog operativo (una sola lista):
 - `docs/etl/e2e-scrape-load-tracker.md` (conectores + Definition of Done + estado `DONE/PARTIAL/TODO`).
+- Indice unico de TODO: `docs/todo/README.md` (entrypoint; sin duplicar backlog).
 
 Cómo correr el ETL y la UI:
 - `docs/etl/README.md`

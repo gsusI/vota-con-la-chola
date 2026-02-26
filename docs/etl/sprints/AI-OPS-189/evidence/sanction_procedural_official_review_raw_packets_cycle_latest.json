@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:35+00:00",
+  "generated_at": "2026-02-25T13:45:16+00:00",
   "db_path": "etl/data/staging/politicos-es.db",
   "packets_dir": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest",
   "strict_actionable": false,
@@ -9,11 +9,11 @@
   "strict_readiness": false,
   "dry_run": true,
   "packet_input": {
-    "generated_at": "2026-02-24T15:24:34+00:00",
+    "generated_at": "2026-02-25T13:45:16+00:00",
     "status": "ok",
     "queue_report_status": "ok",
     "metric_scope": {
-      "period_date": "2026-02-24",
+      "period_date": "2026-02-23",
       "period_granularity": "year",
       "label": "period"
     },
@@ -42,7 +42,7 @@
       "packet_files_missing_total": 0,
       "packet_files_empty_total": 0,
       "packet_files_invalid_header_total": 0,
-      "packet_files_extra_total": 4,
+      "packet_files_extra_total": 8,
       "packet_rows_loaded_total": 4
     },
     "checks": {
@@ -57,15 +57,19 @@
     "invalid_packet_headers": [],
     "extra_packet_files": [
       "es-sanctions-contencioso-sentencias__2026-02-12__year.csv",
+      "es-sanctions-contencioso-sentencias__2026-02-24__year.csv",
       "es-sanctions-defensor-pueblo-quejas__2026-02-12__year.csv",
+      "es-sanctions-defensor-pueblo-quejas__2026-02-24__year.csv",
       "es-sanctions-teac-resolutions__2026-02-12__year.csv",
-      "es-sanctions-tear-resolutions__2026-02-12__year.csv"
+      "es-sanctions-teac-resolutions__2026-02-24__year.csv",
+      "es-sanctions-tear-resolutions__2026-02-12__year.csv",
+      "es-sanctions-tear-resolutions__2026-02-24__year.csv"
     ],
     "packet_files_loaded": [
-      "es-sanctions-contencioso-sentencias__2026-02-24__year.csv",
-      "es-sanctions-defensor-pueblo-quejas__2026-02-24__year.csv",
-      "es-sanctions-teac-resolutions__2026-02-24__year.csv",
-      "es-sanctions-tear-resolutions__2026-02-24__year.csv"
+      "es-sanctions-contencioso-sentencias__2026-02-23__year.csv",
+      "es-sanctions-defensor-pueblo-quejas__2026-02-23__year.csv",
+      "es-sanctions-teac-resolutions__2026-02-23__year.csv",
+      "es-sanctions-tear-resolutions__2026-02-23__year.csv"
     ],
     "packets_preview": [
       {
@@ -76,7 +80,7 @@
           "kpi:recurso_estimation_rate",
           "kpi:resolution_delay_p90_days"
         ],
-        "packet_filename": "es-sanctions-contencioso-sentencias__2026-02-24__year.csv"
+        "packet_filename": "es-sanctions-contencioso-sentencias__2026-02-23__year.csv"
       },
       {
         "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
@@ -86,7 +90,7 @@
           "kpi:recurso_estimation_rate",
           "kpi:resolution_delay_p90_days"
         ],
-        "packet_filename": "es-sanctions-defensor-pueblo-quejas__2026-02-24__year.csv"
+        "packet_filename": "es-sanctions-defensor-pueblo-quejas__2026-02-23__year.csv"
       },
       {
         "sanction_source_id": "es:sanctions:teac_resolutions",
@@ -96,7 +100,7 @@
           "kpi:recurso_estimation_rate",
           "kpi:resolution_delay_p90_days"
         ],
-        "packet_filename": "es-sanctions-teac-resolutions__2026-02-24__year.csv"
+        "packet_filename": "es-sanctions-teac-resolutions__2026-02-23__year.csv"
       },
       {
         "sanction_source_id": "es:sanctions:tear_resolutions",
@@ -106,7 +110,7 @@
           "kpi:recurso_estimation_rate",
           "kpi:resolution_delay_p90_days"
         ],
-        "packet_filename": "es-sanctions-tear-resolutions__2026-02-24__year.csv"
+        "packet_filename": "es-sanctions-tear-resolutions__2026-02-23__year.csv"
       }
     ],
     "db_path": "etl/data/staging/politicos-es.db",
@@ -114,7 +118,7 @@
     "raw_input_csv": "docs/etl/sprints/AI-OPS-189/exports/sanction_procedural_official_review_raw_from_packets_latest.csv"
   },
   "cycle": {
-    "generated_at": "2026-02-24T15:24:35+00:00",
+    "generated_at": "2026-02-25T13:45:16+00:00",
     "db_path": "etl/data/staging/politicos-es.db",
     "raw_input_csv": "docs/etl/sprints/AI-OPS-189/exports/sanction_procedural_official_review_raw_from_packets_latest.csv",
     "strict_raw": false,
@@ -122,7 +126,7 @@
     "strict_readiness": false,
     "dry_run": true,
     "raw": {
-      "generated_at": "2026-02-24T15:24:35+00:00",
+      "generated_at": "2026-02-25T13:45:16+00:00",
       "status": "degraded",
       "required_headers": [
         "sanction_source_id",
@@ -185,13 +189,13 @@
         "rows_rejected_zero": false
       },
       "raw_input_csv": "docs/etl/sprints/AI-OPS-189/exports/sanction_procedural_official_review_raw_from_packets_latest.csv",
-      "output_apply_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_raw_apply_mjzq8zhp/apply_ready.csv",
+      "output_apply_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_raw_apply_wpklt4b4/apply_ready.csv",
       "strict_raw": false,
       "apply_rows_preview": [],
       "rejected_rows_preview": [
         {
           "sanction_source_id": "es:sanctions:contencioso_sentencias",
-          "period_date": "2026-02-24",
+          "period_date": "2026-02-23",
           "period_granularity": "year",
           "source_url": "https://www.poderjudicial.es/",
           "evidence_date": "",
@@ -201,7 +205,7 @@
           "anulaciones_formales_count": "",
           "resolution_delay_p90_days": "",
           "source_id": "boe_api_legal",
-          "source_record_id": "official_review_raw:es-sanctions-contencioso-sentencias:2026-02-24:year",
+          "source_record_id": "official_review_raw:es-sanctions-contencioso-sentencias:2026-02-23:year",
           "source_label": "Contentious-administrative judgments",
           "organismo": "Poder Judicial",
           "expected_metrics": "recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_days",
@@ -214,7 +218,7 @@
         },
         {
           "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
-          "period_date": "2026-02-24",
+          "period_date": "2026-02-23",
           "period_granularity": "year",
           "source_url": "https://www.defensordelpueblo.es/",
           "evidence_date": "",
@@ -224,7 +228,7 @@
           "anulaciones_formales_count": "",
           "resolution_delay_p90_days": "",
           "source_id": "boe_api_legal",
-          "source_record_id": "official_review_raw:es-sanctions-defensor-pueblo-quejas:2026-02-24:year",
+          "source_record_id": "official_review_raw:es-sanctions-defensor-pueblo-quejas:2026-02-23:year",
           "source_label": "Defensor del Pueblo complaints",
           "organismo": "Defensor del Pueblo",
           "expected_metrics": "recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_days",
@@ -237,7 +241,7 @@
         },
         {
           "sanction_source_id": "es:sanctions:teac_resolutions",
-          "period_date": "2026-02-24",
+          "period_date": "2026-02-23",
           "period_granularity": "year",
           "source_url": "https://sede.agenciatributaria.gob.es/",
           "evidence_date": "",
@@ -247,7 +251,7 @@
           "anulaciones_formales_count": "",
           "resolution_delay_p90_days": "",
           "source_id": "boe_api_legal",
-          "source_record_id": "official_review_raw:es-sanctions-teac-resolutions:2026-02-24:year",
+          "source_record_id": "official_review_raw:es-sanctions-teac-resolutions:2026-02-23:year",
           "source_label": "TEAC resolutions",
           "organismo": "Tribunal Economico-Administrativo Central",
           "expected_metrics": "recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_days",
@@ -260,7 +264,7 @@
         },
         {
           "sanction_source_id": "es:sanctions:tear_resolutions",
-          "period_date": "2026-02-24",
+          "period_date": "2026-02-23",
           "period_granularity": "year",
           "source_url": "https://sede.agenciatributaria.gob.es/",
           "evidence_date": "",
@@ -270,7 +274,7 @@
           "anulaciones_formales_count": "",
           "resolution_delay_p90_days": "",
           "source_id": "boe_api_legal",
-          "source_record_id": "official_review_raw:es-sanctions-tear-resolutions:2026-02-24:year",
+          "source_record_id": "official_review_raw:es-sanctions-tear-resolutions:2026-02-23:year",
           "source_label": "TEAR tax claims resolutions",
           "organismo": "Tribunales Economico-Administrativos Regionales",
           "expected_metrics": "recurso_presentado_count,recurso_estimado_count,anulaciones_formales_count,resolution_days",
@@ -284,7 +288,7 @@
       ]
     },
     "prepare": {
-      "generated_at": "2026-02-24T15:24:35+00:00",
+      "generated_at": "2026-02-25T13:45:16+00:00",
       "status": "degraded",
       "required_fields": [
         "sanction_source_id",
@@ -328,22 +332,22 @@
         "rows_kept_present": false,
         "rows_rejected_visible": false
       },
-      "input_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_raw_apply_mjzq8zhp/apply_ready.csv",
-      "prepared_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_prepare_63nuj2ou/prepared.csv",
+      "input_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_raw_apply_wpklt4b4/apply_ready.csv",
+      "prepared_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_prepare_361w0_x0/prepared.csv",
       "strict_prepare": false,
       "rows_kept_preview": [],
       "rows_rejected_preview": []
     },
     "cycle": {
-      "generated_at": "2026-02-24T15:24:35+00:00",
+      "generated_at": "2026-02-25T13:45:16+00:00",
       "db_path": "etl/data/staging/politicos-es.db",
-      "input_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_prepare_63nuj2ou/prepared.csv",
+      "input_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_prepare_361w0_x0/prepared.csv",
       "strict_readiness": false,
       "dry_run": true,
       "readiness": {
-        "generated_at": "2026-02-24T15:24:35+00:00",
+        "generated_at": "2026-02-25T13:45:16+00:00",
         "status": "failed",
-        "input_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_prepare_63nuj2ou/prepared.csv",
+        "input_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/sanction_proc_prepare_361w0_x0/prepared.csv",
         "required_headers": [
           "sanction_source_id",
           "kpi_id",
@@ -403,7 +407,7 @@
         "queue": []
       },
       "status_before": {
-        "generated_at": "2026-02-24T15:24:35+00:00",
+        "generated_at": "2026-02-25T13:45:16+00:00",
         "status": "degraded",
         "official_review_source_ids": [
           "es:sanctions:tear_resolutions",
@@ -554,7 +558,7 @@
       },
       "apply": {
         "dry_run": true,
-        "snapshot_date": "2026-02-24",
+        "snapshot_date": "2026-02-23",
         "default_source_id": "boe_api_legal",
         "counts": {
           "rows_seen": 0,
@@ -579,7 +583,7 @@
         "skip_reason": ""
       },
       "status_after": {
-        "generated_at": "2026-02-24T15:24:35+00:00",
+        "generated_at": "2026-02-25T13:45:16+00:00",
         "status": "degraded",
         "official_review_source_ids": [
           "es:sanctions:tear_resolutions",
@@ -730,6 +734,6 @@
       }
     }
   },
-  "raw_cycle_stdout_excerpt": "{\n  \"generated_at\": \"2026-02-24T15:24:35+00:00\",\n  \"db_path\": \"etl/data/staging/politicos-es.db\",\n  \"raw_input_csv\": \"docs/etl/sprints/AI-OPS-189/exports/sanction_procedural_official_review_raw_from_packets_latest.csv\",\n  \"strict_raw\": false,\n  \"strict_prepare\": false,\n  \"strict_readiness\": false,\n  \"dry_run\": true,\n  \"raw\": {\n    \"generated_at\": \"2026-02-24T15:24:35+00:00\",\n    \"status\": \"degraded\",\n    \"required_headers\": [\n      \"sanction_source_id\",\n      \"period_date\",\n      \"source_url\",\n      \"evidence_date\",\n      \"evidence_quote\",\n      \"recurso_presentado_count\",\n      \"recurso_estimado_count\",\n      \"anulaciones_formales_count\",\n      \"resolution_delay_p90_days\"\n    ],\n    \"headers_present\": [\n      \"sanction_source_id\",\n      \"period_date\",\n      \"period_granularity\",\n      \"source_url\",\n      \"evidence_date\",\n      \"evidence_quote\",\n      \"recurso_presentado_count\",\n      \"recurso_estimado_count\",\n      \"anulaciones_formales_count\",\n      \"resolution_delay_p90_days\",\n      \"source_id\",\n      \"source_record_id\",\n      \"source_label\",\n      \"organismo\",\n      \"expected_metrics\",\n      \"procedural_kpis_expected\",\n      \"procedural_kpis_covered_total\",\n      \"procedural_metric_rows_total\"\n    ],\n    \"missing_headers\": [],\n    \"default_source_id\": \"boe_api_legal\",\n    \"default_period_granularity\": \"year\",\n    \"totals\": {\n      \"rows_seen\": 4,\n      \"rows_emitted\": 0,\n      \"rows_rejected\": 4,\n      \"kpi_rows_emitted\": 0,\n      \"rows_rejected_missing_required_metadata\": 4,\n      \"rows_rejected_invalid_evidence_date\": 0,\n      \"rows_rejected_short_evidence_quote\": 0,\n      \"rows_rejected_invalid_numeric\": 4,\n      \"rows_rejected_non_positive_recurso_presentado_count\": 0,\n      \"rows_rejected_negative_component_count\": 0,\n      \"rows_rejected_non_positive_resolution_delay_p90_days\": 0,\n      \"rows_rejected_rate_out_of_range\": 0,\n      \"rows_rejected_duplicate_metric_key\": 0\n    },\n    \"coverage\": {\n      \"rows_emitted_pct\": 0.0,\n      \"rows_rejected_pct\": 1.0,\n",
+  "raw_cycle_stdout_excerpt": "{\n  \"generated_at\": \"2026-02-25T13:45:16+00:00\",\n  \"db_path\": \"etl/data/staging/politicos-es.db\",\n  \"raw_input_csv\": \"docs/etl/sprints/AI-OPS-189/exports/sanction_procedural_official_review_raw_from_packets_latest.csv\",\n  \"strict_raw\": false,\n  \"strict_prepare\": false,\n  \"strict_readiness\": false,\n  \"dry_run\": true,\n  \"raw\": {\n    \"generated_at\": \"2026-02-25T13:45:16+00:00\",\n    \"status\": \"degraded\",\n    \"required_headers\": [\n      \"sanction_source_id\",\n      \"period_date\",\n      \"source_url\",\n      \"evidence_date\",\n      \"evidence_quote\",\n      \"recurso_presentado_count\",\n      \"recurso_estimado_count\",\n      \"anulaciones_formales_count\",\n      \"resolution_delay_p90_days\"\n    ],\n    \"headers_present\": [\n      \"sanction_source_id\",\n      \"period_date\",\n      \"period_granularity\",\n      \"source_url\",\n      \"evidence_date\",\n      \"evidence_quote\",\n      \"recurso_presentado_count\",\n      \"recurso_estimado_count\",\n      \"anulaciones_formales_count\",\n      \"resolution_delay_p90_days\",\n      \"source_id\",\n      \"source_record_id\",\n      \"source_label\",\n      \"organismo\",\n      \"expected_metrics\",\n      \"procedural_kpis_expected\",\n      \"procedural_kpis_covered_total\",\n      \"procedural_metric_rows_total\"\n    ],\n    \"missing_headers\": [],\n    \"default_source_id\": \"boe_api_legal\",\n    \"default_period_granularity\": \"year\",\n    \"totals\": {\n      \"rows_seen\": 4,\n      \"rows_emitted\": 0,\n      \"rows_rejected\": 4,\n      \"kpi_rows_emitted\": 0,\n      \"rows_rejected_missing_required_metadata\": 4,\n      \"rows_rejected_invalid_evidence_date\": 0,\n      \"rows_rejected_short_evidence_quote\": 0,\n      \"rows_rejected_invalid_numeric\": 4,\n      \"rows_rejected_non_positive_recurso_presentado_count\": 0,\n      \"rows_rejected_negative_component_count\": 0,\n      \"rows_rejected_non_positive_resolution_delay_p90_days\": 0,\n      \"rows_rejected_rate_out_of_range\": 0,\n      \"rows_rejected_duplicate_metric_key\": 0\n    },\n    \"coverage\": {\n      \"rows_emitted_pct\": 0.0,\n      \"rows_rejected_pct\": 1.0,\n",
   "raw_cycle_stderr_excerpt": ""
 }

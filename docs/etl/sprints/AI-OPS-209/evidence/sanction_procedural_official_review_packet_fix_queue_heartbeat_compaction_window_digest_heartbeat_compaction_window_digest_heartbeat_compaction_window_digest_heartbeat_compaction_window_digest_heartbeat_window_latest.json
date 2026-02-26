@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:34+00:00",
+  "generated_at": "2026-02-25T13:45:15+00:00",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
   "window_last": 20,
@@ -9,16 +9,16 @@
     "max_degraded": 0,
     "max_degraded_rate_pct": 0.0
   },
-  "entries_total": 10,
-  "entries_in_window": 10,
+  "entries_total": 11,
+  "entries_in_window": 11,
   "malformed_entries_in_window": 0,
   "status_counts": {
-    "ok": 10,
+    "ok": 11,
     "degraded": 0,
     "failed": 0
   },
   "risk_level_counts": {
-    "green": 10,
+    "green": 11,
     "amber": 0,
     "red": 0
   },
@@ -33,11 +33,11 @@
   "first_red_risk_run_at": "",
   "last_red_risk_run_at": "",
   "latest": {
-    "run_at": "2026-02-24T15:24:33+00:00",
-    "heartbeat_id": "2026-02-24T15:24:33+00:00|2026-02-24T15:24:33+00:00|ok|green|0|14",
+    "run_at": "2026-02-25T13:45:15+00:00",
+    "heartbeat_id": "2026-02-25T13:45:15+00:00|2026-02-25T13:45:15+00:00|ok|green|0|15",
     "status": "ok",
     "risk_level": "green",
-    "line_no": 10,
+    "line_no": 11,
     "malformed_line": false
   },
   "failed_streak_latest": 0,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:32+00:00",
+  "generated_at": "2026-02-25T13:45:13+00:00",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat.jsonl",
   "compacted_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat.compacted.jsonl",
@@ -10,8 +10,8 @@
     "keep_old_every": 20
   },
   "min_raw_for_dropped_check": 25,
-  "entries_total": 31,
-  "selected_entries": 31,
+  "entries_total": 32,
+  "selected_entries": 32,
   "dropped_entries": 0,
   "dropped_rate_pct": 0.0,
   "drop_candidates_total": 0,
@@ -23,8 +23,8 @@
       "cadence_every": 1
     },
     "mid": {
-      "raw_entries": 11,
-      "selected_entries": 11,
+      "raw_entries": 12,
+      "selected_entries": 12,
       "cadence_every": 5
     },
     "old": {
@@ -36,14 +36,14 @@
   "malformed_total": 0,
   "malformed_selected": 0,
   "malformed_dropped": 0,
-  "incidents_total": 31,
-  "incidents_selected": 31,
+  "incidents_total": 32,
+  "incidents_selected": 32,
   "incidents_dropped": 0,
   "failed_total": 0,
   "failed_selected": 0,
   "failed_dropped": 0,
-  "degraded_total": 31,
-  "degraded_selected": 31,
+  "degraded_total": 32,
+  "degraded_selected": 32,
   "degraded_dropped": 0,
   "strict_rows_total": 0,
   "strict_rows_selected": 0,
@@ -53,9 +53,9 @@
     "latest_selected": true
   },
   "raw_first_run_at": "2026-02-24T12:33:16+00:00",
-  "raw_last_run_at": "2026-02-24T15:24:32+00:00",
+  "raw_last_run_at": "2026-02-25T13:45:13+00:00",
   "selected_first_run_at": "2026-02-24T12:33:16+00:00",
-  "selected_last_run_at": "2026-02-24T15:24:32+00:00",
+  "selected_last_run_at": "2026-02-25T13:45:13+00:00",
   "selected_indices_sample": [
     0,
     1,
@@ -86,8 +86,7 @@
       "status": "degraded",
       "reasons": [
         "anchor_oldest",
-        "incident_entry",
-        "cadence_mid"
+        "incident_entry"
       ]
     },
     {
@@ -96,7 +95,8 @@
       "run_at": "2026-02-24T12:34:17+00:00",
       "status": "degraded",
       "reasons": [
-        "incident_entry"
+        "incident_entry",
+        "cadence_mid"
       ]
     },
     {
@@ -132,8 +132,7 @@
       "run_at": "2026-02-24T12:48:05+00:00",
       "status": "degraded",
       "reasons": [
-        "incident_entry",
-        "cadence_mid"
+        "incident_entry"
       ]
     },
     {
@@ -142,7 +141,8 @@
       "run_at": "2026-02-24T12:55:34+00:00",
       "status": "degraded",
       "reasons": [
-        "incident_entry"
+        "incident_entry",
+        "cadence_mid"
       ]
     },
     {
@@ -178,8 +178,7 @@
       "run_at": "2026-02-24T13:10:55+00:00",
       "status": "degraded",
       "reasons": [
-        "incident_entry",
-        "cadence_mid"
+        "incident_entry"
       ]
     },
     {
@@ -189,7 +188,7 @@
       "status": "degraded",
       "reasons": [
         "incident_entry",
-        "cadence_recent"
+        "cadence_mid"
       ]
     },
     {

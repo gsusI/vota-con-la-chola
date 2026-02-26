@@ -23,6 +23,7 @@ Misión:
 - Roadmap (macro): `docs/roadmap.md`
 - Roadmap técnico (ejecución): `docs/roadmap-tecnico.md`
 - Backlog operativo (conectores + DoD): `docs/etl/e2e-scrape-load-tracker.md`
+- Indice unico de TODO: `docs/todo/README.md`
 - Cómo correr ETL/UI: `docs/etl/README.md`
 - GitHub Pages (sitio público): https://gsusI.github.io/vota-con-la-chola/
 - Hugging Face (dataset público): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data

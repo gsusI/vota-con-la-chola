@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:34+00:00",
+  "generated_at": "2026-02-25T13:45:15+00:00",
   "db_path": "etl/data/staging/politicos-es.db",
   "packets_dir": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest",
   "raw_input_csv": "docs/etl/sprints/AI-OPS-191/exports/sanction_procedural_official_review_raw_from_ready_packets_latest.csv",
@@ -11,12 +11,12 @@
   "strict_readiness": false,
   "dry_run": true,
   "progress": {
-    "generated_at": "2026-02-24T15:24:34+00:00",
+    "generated_at": "2026-02-25T13:45:15+00:00",
     "status": "degraded",
     "db_path": "etl/data/staging/politicos-es.db",
     "packets_dir": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest",
     "metric_scope": {
-      "period_date": "2026-02-24",
+      "period_date": "2026-02-23",
       "period_granularity": "year",
       "label": "period"
     },
@@ -44,7 +44,7 @@
       "packets_expected_total": 4,
       "packets_found_total": 4,
       "packets_missing_total": 0,
-      "packets_extra_total": 4,
+      "packets_extra_total": 8,
       "packets_ready_total": 0,
       "packets_not_ready_total": 4,
       "packets_status_counts": {
@@ -60,15 +60,19 @@
     "missing_packet_files": [],
     "extra_packet_files": [
       "es-sanctions-contencioso-sentencias__2026-02-12__year.csv",
+      "es-sanctions-contencioso-sentencias__2026-02-24__year.csv",
       "es-sanctions-defensor-pueblo-quejas__2026-02-12__year.csv",
+      "es-sanctions-defensor-pueblo-quejas__2026-02-24__year.csv",
       "es-sanctions-teac-resolutions__2026-02-12__year.csv",
-      "es-sanctions-tear-resolutions__2026-02-12__year.csv"
+      "es-sanctions-teac-resolutions__2026-02-24__year.csv",
+      "es-sanctions-tear-resolutions__2026-02-12__year.csv",
+      "es-sanctions-tear-resolutions__2026-02-24__year.csv"
     ],
     "packets_preview": [
       {
         "sanction_source_id": "es:sanctions:contencioso_sentencias",
-        "packet_filename": "es-sanctions-contencioso-sentencias__2026-02-24__year.csv",
-        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-contencioso-sentencias__2026-02-24__year.csv",
+        "packet_filename": "es-sanctions-contencioso-sentencias__2026-02-23__year.csv",
+        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-contencioso-sentencias__2026-02-23__year.csv",
         "packet_exists": true,
         "packet_status": "invalid_row",
         "rows_found": 1,
@@ -82,8 +86,8 @@
       },
       {
         "sanction_source_id": "es:sanctions:defensor_pueblo_quejas",
-        "packet_filename": "es-sanctions-defensor-pueblo-quejas__2026-02-24__year.csv",
-        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-defensor-pueblo-quejas__2026-02-24__year.csv",
+        "packet_filename": "es-sanctions-defensor-pueblo-quejas__2026-02-23__year.csv",
+        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-defensor-pueblo-quejas__2026-02-23__year.csv",
         "packet_exists": true,
         "packet_status": "invalid_row",
         "rows_found": 1,
@@ -97,8 +101,8 @@
       },
       {
         "sanction_source_id": "es:sanctions:teac_resolutions",
-        "packet_filename": "es-sanctions-teac-resolutions__2026-02-24__year.csv",
-        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-teac-resolutions__2026-02-24__year.csv",
+        "packet_filename": "es-sanctions-teac-resolutions__2026-02-23__year.csv",
+        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-teac-resolutions__2026-02-23__year.csv",
         "packet_exists": true,
         "packet_status": "invalid_row",
         "rows_found": 1,
@@ -112,8 +116,8 @@
       },
       {
         "sanction_source_id": "es:sanctions:tear_resolutions",
-        "packet_filename": "es-sanctions-tear-resolutions__2026-02-24__year.csv",
-        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-tear-resolutions__2026-02-24__year.csv",
+        "packet_filename": "es-sanctions-tear-resolutions__2026-02-23__year.csv",
+        "packet_path": "docs/etl/sprints/AI-OPS-188/exports/sanction_procedural_official_review_raw_packets_latest/es-sanctions-tear-resolutions__2026-02-23__year.csv",
         "packet_exists": true,
         "packet_status": "invalid_row",
         "rows_found": 1,
@@ -130,7 +134,7 @@
   "ready_packets_selected_total": 0,
   "ready_packets_selected_preview": [],
   "cycle": {
-    "generated_at": "2026-02-24T15:24:34+00:00",
+    "generated_at": "2026-02-25T13:45:15+00:00",
     "db_path": "etl/data/staging/politicos-es.db",
     "raw_input_csv": "",
     "strict_readiness": false,
@@ -138,14 +142,14 @@
     "raw": {},
     "prepare": {},
     "cycle": {
-      "generated_at": "2026-02-24T15:24:34+00:00",
+      "generated_at": "2026-02-25T13:45:15+00:00",
       "db_path": "etl/data/staging/politicos-es.db",
       "input_csv": "",
       "strict_readiness": false,
       "dry_run": true,
       "readiness": {},
       "status_before": {
-        "generated_at": "2026-02-24T15:24:34+00:00",
+        "generated_at": "2026-02-25T13:45:15+00:00",
         "status": "degraded",
         "official_review_source_ids": [
           "es:sanctions:tear_resolutions",
@@ -305,7 +309,7 @@
         }
       },
       "status_after": {
-        "generated_at": "2026-02-24T15:24:34+00:00",
+        "generated_at": "2026-02-25T13:45:15+00:00",
         "status": "degraded",
         "official_review_source_ids": [
           "es:sanctions:tear_resolutions",

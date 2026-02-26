@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-23T21:12:30+00:00",
-  "db_path": "etl/data/staging/politicos-es.ai_ops_135.db",
+  "generated_at": "2026-02-26T08:57:35+00:00",
+  "db_path": "etl/data/staging/politicos-es.db",
   "seed_path": "etl/data/seeds/liberty_enforcement_seed_v1.json",
   "validation": {
     "valid": true,
@@ -9,14 +9,14 @@
   },
   "import": {
     "status": "ok",
-    "snapshot_date": "2026-02-23",
-    "source_id_used": "",
+    "snapshot_date": "2026-02-26",
+    "source_id_used": "boe_api_legal",
     "method_version": "enforcement_variation_v1",
     "counts": {
-      "methodology_inserted": 1,
-      "methodology_updated": 0,
-      "observations_inserted": 16,
-      "observations_updated": 0,
+      "methodology_inserted": 0,
+      "methodology_updated": 1,
+      "observations_inserted": 0,
+      "observations_updated": 16,
       "unresolved_fragment_refs": 0
     },
     "totals": {

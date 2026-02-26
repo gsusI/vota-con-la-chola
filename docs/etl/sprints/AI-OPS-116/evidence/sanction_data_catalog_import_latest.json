@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:31+00:00",
+  "generated_at": "2026-02-25T13:45:13+00:00",
   "db_path": "etl/data/staging/politicos-es.db",
   "seed_path": "etl/data/seeds/sanction_data_catalog_seed_v1.json",
   "validation": {
@@ -11,7 +11,7 @@
   },
   "import": {
     "status": "ok",
-    "snapshot_date": "2026-02-24",
+    "snapshot_date": "2026-02-23",
     "source_id_used": "boe_api_legal",
     "seed_schema_version": "sanction_data_catalog_seed_v1",
     "counts": {

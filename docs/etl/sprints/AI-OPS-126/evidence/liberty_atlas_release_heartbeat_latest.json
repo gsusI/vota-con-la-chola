@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T21:12:54+00:00",
+  "generated_at": "2026-02-26T08:58:25+00:00",
   "strict": true,
   "input": {
     "published_release_json": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
@@ -7,71 +7,62 @@
     "continuity_json": "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json",
     "heartbeat_jsonl": "docs/etl/runs/liberty_atlas_release_heartbeat.jsonl"
   },
-  "history_size_before": 30,
-  "history_size_after": 31,
+  "history_size_before": 35,
+  "history_size_after": 36,
   "history_malformed_lines_before": 0,
   "appended": true,
   "duplicate_detected": false,
   "validation_errors": [],
   "strict_fail_reasons": [
-    "published_hf_drift_detected",
-    "gh_pages_hf_drift_detected"
+    "published_gh_pages_drift_detected"
   ],
-  "warnings": [],
+  "warnings": [
+    "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known"
+  ],
   "heartbeat": {
-    "run_at": "2026-02-23T21:12:56+00:00",
-    "heartbeat_id": "2026-02-23T21:12:56+00:00|2026-02-23|582c3f641d1a8cb74196f21454f6022abac042ddb7bcbdd5918c3c5161a26a08|582c3f641d1a8cb74196f21454f6022abac042ddb7bcbdd5918c3c5161a26a08|6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596|2",
+    "run_at": "2026-02-26T08:58:25+00:00",
+    "heartbeat_id": "2026-02-26T08:58:25+00:00|2026-03-05|b7b87517853a65682427d1fd4de58ff1253d45c72d4f596467140d9013cfeb55|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80||1",
     "status": "failed",
-    "snapshot_date_expected": "2026-02-23",
+    "snapshot_date_expected": "2026-03-05",
     "max_snapshot_age_days": 14,
     "allow_hf_unavailable": true,
     "published": {
       "source": "published",
       "status": "ok",
-      "snapshot_date": "2026-02-23",
-      "entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
-      "history_latest_entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
+      "snapshot_date": "2026-03-05",
+      "entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+      "history_latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
       "schema_version": "liberty_restrictions_snapshot_v1",
       "snapshot_restrictions_total": 11,
-      "snapshot_age_days": 0,
-      "fingerprint": "582c3f641d1a8cb74196f21454f6022abac042ddb7bcbdd5918c3c5161a26a08"
+      "snapshot_age_days": -7,
+      "fingerprint": "b7b87517853a65682427d1fd4de58ff1253d45c72d4f596467140d9013cfeb55"
     },
     "gh_pages": {
       "source": "gh_pages",
       "status": "ok",
-      "snapshot_date": "2026-02-23",
-      "entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
-      "history_latest_entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
+      "snapshot_date": "2026-03-05",
+      "entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+      "history_latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
       "schema_version": "liberty_restrictions_snapshot_v1",
       "snapshot_restrictions_total": 11,
-      "snapshot_age_days": 0,
-      "fingerprint": "582c3f641d1a8cb74196f21454f6022abac042ddb7bcbdd5918c3c5161a26a08"
+      "snapshot_age_days": -7,
+      "fingerprint": "eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80"
     },
     "hf": {
-      "source": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/snapshots/2026-02-23/published/liberty-restrictions-atlas-release-2026-02-23.json",
+      "source": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/latest.json",
       "dataset_repo": "JesusIC/vota-con-la-chola-data",
       "latest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/latest.json",
-      "latest_snapshot_date": "2026-02-23",
-      "url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/snapshots/2026-02-23/published/liberty-restrictions-atlas-release-2026-02-23.json",
-      "available": true,
-      "fetch_error": "",
-      "release": {
-        "source": "hf",
-        "status": "ok",
-        "snapshot_date": "2026-02-23",
-        "entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
-        "history_latest_entry_id": "2026-02-23||4d5769bf5cecf40fa62cf888de39d92f18c30b87f78afdafc1c91045c2789bef",
-        "schema_version": "liberty_restrictions_snapshot_v1",
-        "snapshot_restrictions_total": 8,
-        "snapshot_age_days": 0,
-        "fingerprint": "6aec7d7cf05b8dd35411981e842adfdccbd6534c0ffc4fbd6754428c59008596"
-      }
+      "latest_snapshot_date": "",
+      "url": "",
+      "available": false,
+      "fetch_error": "latest_error:url_error:[Errno 8] nodename nor servname provided, or not known",
+      "release": {}
     },
     "continuity": {
       "path": "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json",
       "status": "ok",
-      "latest_snapshot_date": "2026-02-23",
-      "latest_entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
+      "latest_snapshot_date": "2026-03-05",
+      "latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
       "previous_snapshot_chain_ok": true,
       "strict_fail_reasons": []
     },
@@ -79,25 +70,26 @@
       "published_release_ok": true,
       "gh_pages_release_ok": true,
       "continuity_ok": true,
-      "published_gh_parity_ok": true,
-      "hf_available": true,
+      "published_gh_parity_ok": false,
+      "hf_available": false,
       "hf_release_ok_or_allowed": true,
-      "published_hf_parity_ok": false,
-      "gh_pages_hf_parity_ok": false,
+      "published_hf_parity_ok": null,
+      "gh_pages_hf_parity_ok": null,
       "expected_snapshot_match_ok": true,
       "stale_snapshot_ok": true,
       "continuity_entry_matches_published_ok": true
     },
     "stale_surfaces": [],
     "stale_alerts_count": 0,
-    "drift_alerts_count": 2,
-    "hf_unavailable": false,
-    "warning_count": 0,
-    "warnings": [],
-    "strict_fail_count": 2,
+    "drift_alerts_count": 1,
+    "hf_unavailable": true,
+    "warning_count": 1,
+    "warnings": [
+      "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known"
+    ],
+    "strict_fail_count": 1,
     "strict_fail_reasons": [
-      "published_hf_drift_detected",
-      "gh_pages_hf_drift_detected"
+      "published_gh_pages_drift_detected"
     ]
   },
   "status": "failed"
