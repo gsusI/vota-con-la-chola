@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T09:21:19+00:00",
+  "generated_at": "2026-02-26T09:23:47+00:00",
   "strict": true,
   "input": {
     "published_release_json": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
@@ -7,8 +7,8 @@
     "continuity_json": "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json",
     "heartbeat_jsonl": "docs/etl/runs/liberty_atlas_release_heartbeat.jsonl"
   },
-  "history_size_before": 40,
-  "history_size_after": 41,
+  "history_size_before": 42,
+  "history_size_after": 43,
   "history_malformed_lines_before": 0,
   "appended": true,
   "duplicate_detected": false,
@@ -18,8 +18,8 @@
     "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known"
   ],
   "heartbeat": {
-    "run_at": "2026-02-26T09:21:19+00:00",
-    "heartbeat_id": "2026-02-26T09:21:19+00:00|2026-03-05|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80||0",
+    "run_at": "2026-02-26T09:23:47+00:00",
+    "heartbeat_id": "2026-02-26T09:23:47+00:00|2026-03-05|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80|eee278b3322f381c970e8ccd7f1818581be92feaca010b0683605233fa553e80||0",
     "status": "degraded",
     "snapshot_date_expected": "2026-03-05",
     "max_snapshot_age_days": 14,
