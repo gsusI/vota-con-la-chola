@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-24T15:24:35+00:00",
+  "generated_at": "2026-02-25T13:45:16+00:00",
   "db_path": "etl/data/staging/politicos-es.db",
   "input_csv": "",
   "strict_readiness": true,
   "dry_run": true,
   "readiness": {},
   "status_before": {
-    "generated_at": "2026-02-24T15:24:35+00:00",
+    "generated_at": "2026-02-25T13:45:16+00:00",
     "status": "degraded",
     "official_review_source_ids": [
       "es:sanctions:tear_resolutions",
@@ -166,7 +166,7 @@
     }
   },
   "status_after": {
-    "generated_at": "2026-02-24T15:24:35+00:00",
+    "generated_at": "2026-02-25T13:45:16+00:00",
     "status": "degraded",
     "official_review_source_ids": [
       "es:sanctions:tear_resolutions",

@@ -1,0 +1,398 @@
+erDiagram
+  admin_levels {
+    int admin_level_id PK
+  }
+  causal_estimates {
+    int causal_estimate_id PK
+  }
+  document_fetches {
+    int doc_url PK
+  }
+  domains {
+    int domain_id PK
+  }
+  genders {
+    int gender_id PK
+  }
+  indicator_observation_records {
+    int observation_record_id PK
+  }
+  indicator_points {
+    int indicator_point_id PK
+  }
+  indicator_series {
+    int indicator_series_id PK
+  }
+  infoelectoral_archivos_extraccion {
+    int archivo_id PK
+  }
+  infoelectoral_convocatoria_tipos {
+    int tipo_convocatoria PK
+  }
+  infoelectoral_convocatorias {
+    int convocatoria_id PK
+  }
+  infoelectoral_proceso_resultados {
+    int proceso_dataset_id PK
+  }
+  infoelectoral_procesos {
+    int proceso_id PK
+  }
+  ingestion_runs {
+    int run_id PK
+  }
+  institutions {
+    int institution_id PK
+  }
+  intervention_events {
+    int intervention_event_id PK
+  }
+  interventions {
+    int intervention_id PK
+  }
+  legal_fragment_responsibilities {
+    int responsibility_id PK
+  }
+  legal_fragment_responsibility_evidence {
+    int responsibility_evidence_id PK
+  }
+  legal_norm_fragments {
+    int fragment_id PK
+  }
+  legal_norm_lineage_edges {
+    int lineage_edge_id PK
+  }
+  legal_norms {
+    int norm_id PK
+  }
+  liberty_delegated_enforcement_links {
+    int link_id PK
+  }
+  liberty_delegated_enforcement_methodologies {
+    int method_version PK
+  }
+  liberty_enforcement_methodologies {
+    int method_version PK
+  }
+  liberty_enforcement_observations {
+    int observation_id PK
+  }
+  liberty_indirect_methodologies {
+    int method_version PK
+  }
+  liberty_indirect_responsibility_edges {
+    int edge_id PK
+  }
+  liberty_irlc_methodologies {
+    int method_version PK
+  }
+  liberty_proportionality_methodologies {
+    int method_version PK
+  }
+  liberty_proportionality_reviews {
+    int review_id PK
+  }
+  liberty_restriction_assessments {
+    int assessment_id PK
+  }
+  liberty_right_categories {
+    int right_category_id PK
+  }
+  lost_and_found {
+    int <rowid> PK
+  }
+  mandates {
+    int mandate_id PK
+  }
+  money_contract_records {
+    int contract_record_id PK
+  }
+  money_subsidy_records {
+    int subsidy_record_id PK
+  }
+  parl_initiative_doc_extractions {
+    int source_record_pk PK
+  }
+  parl_initiative_documents {
+    int initiative_document_id PK
+  }
+  parl_initiatives {
+    int initiative_id PK
+  }
+  parl_vote_event_initiatives {
+    int parl_vote_event_initiative_id PK
+  }
+  parl_vote_events {
+    int vote_event_id PK
+  }
+  parl_vote_member_votes {
+    int member_vote_id PK
+  }
+  parties {
+    int party_id PK
+  }
+  party_aliases {
+    int party_alias_id PK
+  }
+  person_identifiers {
+    int person_identifier_id PK
+  }
+  person_name_aliases {
+    int person_name_alias_id PK
+  }
+  persons {
+    int person_id PK
+  }
+  policy_axes {
+    int policy_axis_id PK
+  }
+  policy_event_axis_scores {
+    int policy_event_axis_score_id PK
+  }
+  policy_events {
+    int policy_event_id PK
+  }
+  policy_instruments {
+    int policy_instrument_id PK
+  }
+  raw_fetches {
+    int fetch_id PK
+  }
+  roles {
+    int role_id PK
+  }
+  run_fetches {
+    int run_id PK
+  }
+  sanction_infraction_type_mappings {
+    int mapping_id PK
+  }
+  sanction_infraction_types {
+    int infraction_type_id PK
+  }
+  sanction_municipal_ordinance_fragments {
+    int ordinance_fragment_id PK
+  }
+  sanction_municipal_ordinances {
+    int ordinance_id PK
+  }
+  sanction_norm_catalog {
+    int norm_id PK
+  }
+  sanction_norm_fragment_links {
+    int sanction_norm_fragment_link_id PK
+  }
+  sanction_procedural_kpi_definitions {
+    int kpi_id PK
+  }
+  sanction_procedural_metrics {
+    int metric_observation_id PK
+  }
+  sanction_volume_observations {
+    int observation_id PK
+  }
+  sanction_volume_sources {
+    int sanction_source_id PK
+  }
+  source_records {
+    int source_record_pk PK
+  }
+  sources {
+    int source_id PK
+  }
+  territories {
+    int territory_id PK
+  }
+  text_documents {
+    int text_document_id PK
+  }
+  topic_evidence {
+    int evidence_id PK
+  }
+  topic_evidence_reviews {
+    int review_id PK
+  }
+  topic_positions {
+    int position_id PK
+  }
+  topic_set_topics {
+    int topic_set_topic_id PK
+  }
+  topic_sets {
+    int topic_set_id PK
+  }
+  topics {
+    int topic_id PK
+  }
+  admin_levels ||--o{ indicator_series : admin_level_id
+  admin_levels ||--o{ institutions : admin_level_id
+  admin_levels ||--o{ interventions : admin_level_id
+  admin_levels ||--o{ mandates : admin_level_id
+  admin_levels ||--o{ policy_events : admin_level_id
+  admin_levels ||--o{ topic_evidence : admin_level_id
+  admin_levels ||--o{ topic_positions : admin_level_id
+  admin_levels ||--o{ topic_sets : admin_level_id
+  domains ||--o{ indicator_series : domain_id
+  domains ||--o{ interventions : domain_id
+  domains ||--o{ policy_axes : domain_id
+  domains ||--o{ policy_events : domain_id
+  genders ||--o{ persons : gender_id
+  indicator_series ||--o{ causal_estimates : outcome_series_id
+  indicator_series ||--o{ indicator_points : indicator_series_id
+  infoelectoral_convocatoria_tipos ||--o{ infoelectoral_archivos_extraccion : tipo_convocatoria
+  infoelectoral_convocatoria_tipos ||--o{ infoelectoral_convocatorias : tipo_convocatoria
+  infoelectoral_convocatorias ||--o{ infoelectoral_archivos_extraccion : convocatoria_id
+  infoelectoral_procesos ||--o{ infoelectoral_proceso_resultados : proceso_id
+  ingestion_runs ||--o{ raw_fetches : run_id
+  ingestion_runs ||--o{ run_fetches : run_id
+  institutions ||--o{ legal_fragment_responsibilities : institution_id
+  institutions ||--o{ mandates : institution_id
+  institutions ||--o{ policy_events : institution_id
+  institutions ||--o{ topic_evidence : institution_id
+  institutions ||--o{ topic_positions : institution_id
+  institutions ||--o{ topic_sets : institution_id
+  interventions ||--o{ causal_estimates : intervention_id
+  interventions ||--o{ intervention_events : intervention_id
+  legal_fragment_responsibilities ||--o{ legal_fragment_responsibility_evidence : responsibility_id
+  legal_norm_fragments ||--o{ legal_fragment_responsibilities : fragment_id
+  legal_norm_fragments ||--o{ liberty_delegated_enforcement_links : fragment_id
+  legal_norm_fragments ||--o{ liberty_enforcement_observations : fragment_id
+  legal_norm_fragments ||--o{ liberty_indirect_responsibility_edges : fragment_id
+  legal_norm_fragments ||--o{ liberty_proportionality_reviews : fragment_id
+  legal_norm_fragments ||--o{ liberty_restriction_assessments : fragment_id
+  legal_norm_fragments ||--o{ sanction_infraction_type_mappings : fragment_id
+  legal_norm_fragments ||--o{ sanction_municipal_ordinance_fragments : mapped_fragment_id
+  legal_norm_fragments ||--o{ sanction_norm_fragment_links : fragment_id
+  legal_norm_fragments ||--o{ sanction_volume_observations : fragment_id
+  legal_norms ||--o{ legal_norm_fragments : norm_id
+  legal_norms ||--o{ legal_norm_lineage_edges : related_norm_id
+  legal_norms ||--o{ legal_norm_lineage_edges : norm_id
+  legal_norms ||--o{ sanction_infraction_type_mappings : norm_id
+  legal_norms ||--o{ sanction_municipal_ordinance_fragments : mapped_norm_id
+  legal_norms ||--o{ sanction_norm_catalog : norm_id
+  legal_norms ||--o{ sanction_volume_observations : norm_id
+  liberty_delegated_enforcement_methodologies ||--o{ liberty_delegated_enforcement_links : method_version
+  liberty_enforcement_methodologies ||--o{ liberty_enforcement_observations : method_version
+  liberty_indirect_methodologies ||--o{ liberty_indirect_responsibility_edges : method_version
+  liberty_irlc_methodologies ||--o{ liberty_restriction_assessments : method_version
+  liberty_proportionality_methodologies ||--o{ liberty_proportionality_reviews : method_version
+  liberty_right_categories ||--o{ liberty_restriction_assessments : right_category_id
+  mandates ||--o{ topic_evidence : mandate_id
+  mandates ||--o{ topic_positions : mandate_id
+  parl_initiatives ||--o{ parl_initiative_doc_extractions : sample_initiative_id
+  parl_initiatives ||--o{ parl_initiative_documents : initiative_id
+  parl_initiatives ||--o{ parl_vote_event_initiatives : initiative_id
+  parl_initiatives ||--o{ topic_evidence : initiative_id
+  parl_vote_events ||--o{ parl_vote_event_initiatives : vote_event_id
+  parl_vote_events ||--o{ parl_vote_member_votes : vote_event_id
+  parl_vote_events ||--o{ topic_evidence : vote_event_id
+  parties ||--o{ mandates : party_id
+  parties ||--o{ party_aliases : party_id
+  persons ||--o{ legal_fragment_responsibilities : person_id
+  persons ||--o{ mandates : person_id
+  persons ||--o{ parl_vote_member_votes : person_id
+  persons ||--o{ person_identifiers : person_id
+  persons ||--o{ person_name_aliases : person_id
+  persons ||--o{ topic_evidence : person_id
+  persons ||--o{ topic_positions : person_id
+  policy_axes ||--o{ policy_event_axis_scores : policy_axis_id
+  policy_events ||--o{ intervention_events : policy_event_id
+  policy_events ||--o{ policy_event_axis_scores : policy_event_id
+  policy_instruments ||--o{ policy_events : policy_instrument_id
+  roles ||--o{ mandates : role_id
+  sanction_infraction_types ||--o{ sanction_infraction_type_mappings : infraction_type_id
+  sanction_infraction_types ||--o{ sanction_volume_observations : infraction_type_id
+  sanction_municipal_ordinances ||--o{ sanction_municipal_ordinance_fragments : ordinance_id
+  sanction_norm_catalog ||--o{ sanction_norm_fragment_links : norm_id
+  sanction_procedural_kpi_definitions ||--o{ sanction_procedural_metrics : kpi_id
+  sanction_volume_sources ||--o{ sanction_procedural_metrics : sanction_source_id
+  sanction_volume_sources ||--o{ sanction_volume_observations : sanction_source_id
+  source_records ||--o{ indicator_observation_records : source_record_pk
+  source_records ||--o{ indicator_series : source_record_pk
+  source_records ||--o{ infoelectoral_archivos_extraccion : source_record_pk
+  source_records ||--o{ infoelectoral_convocatoria_tipos : source_record_pk
+  source_records ||--o{ infoelectoral_convocatorias : source_record_pk
+  source_records ||--o{ infoelectoral_proceso_resultados : source_record_pk
+  source_records ||--o{ infoelectoral_procesos : source_record_pk
+  source_records ||--o{ legal_fragment_responsibilities : source_record_pk
+  source_records ||--o{ legal_fragment_responsibility_evidence : source_record_pk
+  source_records ||--o{ legal_norm_fragments : source_record_pk
+  source_records ||--o{ legal_norm_lineage_edges : source_record_pk
+  source_records ||--o{ legal_norms : source_record_pk
+  source_records ||--o{ liberty_delegated_enforcement_links : source_record_pk
+  source_records ||--o{ liberty_enforcement_observations : source_record_pk
+  source_records ||--o{ liberty_indirect_responsibility_edges : source_record_pk
+  source_records ||--o{ liberty_proportionality_reviews : source_record_pk
+  source_records ||--o{ liberty_restriction_assessments : source_record_pk
+  source_records ||--o{ mandates : source_record_pk
+  source_records ||--o{ money_contract_records : source_record_pk
+  source_records ||--o{ money_subsidy_records : source_record_pk
+  source_records ||--o{ parl_initiative_doc_extractions : source_record_pk
+  source_records ||--o{ parl_initiative_documents : source_record_pk
+  source_records ||--o{ parl_initiatives : source_record_pk
+  source_records ||--o{ parl_vote_events : source_record_pk
+  source_records ||--o{ person_name_aliases : source_record_pk
+  source_records ||--o{ policy_events : source_record_pk
+  source_records ||--o{ sanction_municipal_ordinances : source_record_pk
+  source_records ||--o{ sanction_procedural_metrics : source_record_pk
+  source_records ||--o{ sanction_volume_observations : source_record_pk
+  source_records ||--o{ text_documents : source_record_pk
+  source_records ||--o{ topic_evidence : source_record_pk
+  source_records ||--o{ topic_evidence_reviews : source_record_pk
+  sources ||--o{ indicator_observation_records : source_id
+  sources ||--o{ indicator_series : source_id
+  sources ||--o{ infoelectoral_archivos_extraccion : source_id
+  sources ||--o{ infoelectoral_convocatoria_tipos : source_id
+  sources ||--o{ infoelectoral_convocatorias : source_id
+  sources ||--o{ infoelectoral_proceso_resultados : source_id
+  sources ||--o{ infoelectoral_procesos : source_id
+  sources ||--o{ ingestion_runs : source_id
+  sources ||--o{ legal_fragment_responsibilities : source_id
+  sources ||--o{ legal_fragment_responsibility_evidence : source_id
+  sources ||--o{ legal_norm_lineage_edges : source_id
+  sources ||--o{ legal_norms : source_id
+  sources ||--o{ liberty_delegated_enforcement_links : source_id
+  sources ||--o{ liberty_enforcement_observations : source_id
+  sources ||--o{ liberty_indirect_responsibility_edges : source_id
+  sources ||--o{ liberty_proportionality_reviews : source_id
+  sources ||--o{ liberty_restriction_assessments : source_id
+  sources ||--o{ mandates : source_id
+  sources ||--o{ money_contract_records : source_id
+  sources ||--o{ money_subsidy_records : source_id
+  sources ||--o{ parl_initiative_doc_extractions : source_id
+  sources ||--o{ parl_initiatives : source_id
+  sources ||--o{ parl_vote_events : source_id
+  sources ||--o{ parl_vote_member_votes : source_id
+  sources ||--o{ person_name_aliases : source_id
+  sources ||--o{ policy_events : source_id
+  sources ||--o{ raw_fetches : source_id
+  sources ||--o{ run_fetches : source_id
+  sources ||--o{ sanction_municipal_ordinances : source_id
+  sources ||--o{ sanction_norm_catalog : source_id
+  sources ||--o{ sanction_procedural_metrics : source_id
+  sources ||--o{ sanction_volume_observations : source_id
+  sources ||--o{ sanction_volume_sources : source_id
+  sources ||--o{ source_records : source_id
+  sources ||--o{ text_documents : source_id
+  sources ||--o{ topic_evidence : source_id
+  sources ||--o{ topic_evidence_reviews : source_id
+  territories ||--o{ indicator_series : territory_id
+  territories ||--o{ institutions : territory_id
+  territories ||--o{ interventions : territory_id
+  territories ||--o{ mandates : territory_id
+  territories ||--o{ persons : territory_id
+  territories ||--o{ policy_events : territory_id
+  territories ||--o{ sanction_procedural_metrics : territory_id
+  territories ||--o{ sanction_volume_observations : territory_id
+  territories ||--o{ territories : parent_territory_id
+  territories ||--o{ topic_evidence : territory_id
+  territories ||--o{ topic_positions : territory_id
+  territories ||--o{ topic_sets : territory_id
+  topic_evidence ||--o{ topic_evidence_reviews : evidence_id
+  topic_sets ||--o{ topic_evidence : topic_set_id
+  topic_sets ||--o{ topic_positions : topic_set_id
+  topic_sets ||--o{ topic_set_topics : topic_set_id
+  topics ||--o{ topic_evidence : topic_id
+  topics ||--o{ topic_positions : topic_id
+  topics ||--o{ topic_set_topics : topic_id
+  topics ||--o{ topics : parent_topic_id

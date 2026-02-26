@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-02-26T08:59:06+00:00",
+  "strict": true,
+  "input": {
+    "status_json": "docs/etl/sprints/AI-OPS-118/evidence/liberty_restrictions_status_latest.json",
+    "changed_paths_file": "docs/etl/runs/liberty_focus_changed_paths.txt"
+  },
+  "status_doc_status": "ok",
+  "focus_gate_passed": true,
+  "focus_gate_state": "ok",
+  "changed_paths_total": 0,
+  "allowed_paths_total": 0,
+  "non_rights_paths_total": 0,
+  "changed_paths": [],
+  "allowed_paths": [],
+  "non_rights_paths": [],
+  "checks": {
+    "status_json_exists_ok": true,
+    "status_json_valid_ok": true,
+    "changed_paths_file_exists_ok": true,
+    "focus_gate_known_ok": true,
+    "degraded_scope_ok": true
+  },
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

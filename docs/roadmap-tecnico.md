@@ -256,6 +256,39 @@ Hecho:
 
 Pendiente (siguiente foco):
 - PRIORIDAD ACTIVA: foco exclusivo en restricciones objetivas de libertad ciudadana (`Derechos`) hasta cumplir los umbrales de cobertura/gating definidos; el resto de lanes queda en espera salvo mantenimiento crítico.
+- Horizonte de scraping activo (siguiente 7 días): completar la malla de evidencia faltante por derecho/ámbito y reforzar atribución causal con trazabilidad.
+- Hoja de ruta operativa de scraping (Derechos, orden recomendado):
+  1. Completar cobertura IRLC faltante por (`right_category_id`, `scope_id`) y persistir items faltantes en `liberty_restriction_assessment_items`.
+  2. Consolidar trazabilidad de proporcionalidad en metodología + revisión documental con evidencia fechada.
+  3. Cerrar contratos de responsabilidad directa/indirecta/delegada con cadena rol→acto→evidencia primaria.
+  4. Aplicar limpieza de identidad/alias y deduplicación de edges para evitar atribución duplicada o ambigua.
+  5. Materializar vistas de resumen (`*_by_fragment`, `accountability_edges`) antes de exportar snapshot.
+  6. Ejecutar heartbeat + ventana + publish y registrar drift de release para `published`/GH-Pages/HF.
+
+¿Qué datos sacar a continuación? 1) Cobertura completa IRLC + accountability por derecho/territorio 2) Evidencia de proporcionalidad cuando exista restricción 3) Cadena de responsabilidad indirecta y delegada en contexto territorial 4) Calidad de evidencia primaria (source_url/evidence_quote/evidence_date) en todos los edges nuevos.
+- Cartera de scraping objetivo (iterable por lote y repetible):
+- Fase A — Cierre de cobertura: `liberty_restriction_assessments` (faltantes por `right_category_id` + `scope_id`) + `liberty_restriction_assessment_items`.
+- Fase B — Calidad de procedimiento: `liberty_proportionality_methodologies`/`liberty_proportionality_reviews` y validación de fecha/origen documental.
+- Fase C — Responsabilidad y cadena de mando: `liberty_direct_accountability_scores`, `liberty_enforcement_methodologies`, `liberty_enforcement_observations`, `liberty_indirect_methodologies`, `liberty_indirect_responsibility_edges`, `liberty_delegated_enforcement_links`.
+- Fase D — Limpieza/reproducibilidad: normalizar claves/aliases nuevos, deduplicar edges ambiguos y materializar resumenes en `*_by_fragment`/`accountability_edges` antes de export.
+
+- Comando base (idéntico a cada corrida para reproducibilidad):
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-liberty-restrictions-pipeline`
+- Cadencia de controles posterior (en orden):
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-restrictions-status`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-focus-gate`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-report-liberty-restrictions-status-heartbeat`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-restrictions-status-heartbeat-window`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-export-liberty-restrictions-snapshot`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-publish-liberty-atlas-artifacts`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-report-liberty-atlas-release-heartbeat`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-atlas-release-heartbeat-window`
+
+- Regla de continuidad entre ciclos:
+- Cualquier corrida que baje `status=degraded` en `rights_with_data`, `source_dual_coverage`, `scope_representativity` o `accountability_primary_evidence` debe ir a una mini-acción visible del backlog (sin abrir nuevas dependencias externas) antes de la siguiente corrida de foco.
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-check-liberty-focus-gate`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just parl-report-liberty-restrictions-status-heartbeat`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=2026-03-05 just etl-publish-hf`
 - Normativa/Accountability: ampliar el slice ya abierto (`ley -> fragmentos` + lineage seed `deroga/modifica/desarrolla`) a cobertura BOE completa por `artículo/disposición/anexo` y lineage histórico por versión/fecha (sin depender de semilla cerrada).
 - Normativa/Accountability: evolucionar la cadena por rol (`propose`, `approve`, `delegate`, `enforce`) desde hints de semilla a edges con evidencia primaria fechada (`source_url`, cita legal, `evidence_date`, `evidence_quote`).
 - Normativa/Accountability: escalar lane ya abierto de organismos delegados (p.ej. DGT/AEAT/ITSS) desde seed a evidencia primaria fechada y resolución persona/cargo: `norma habilitante -> órgano -> cargo designado -> acto de enforcement`.
@@ -303,3 +336,140 @@ Pendiente (siguiente foco):
 - Siguiente bloque técnico: drill-down de coherencia por `topic_set/topic/scope` para priorizar revisión donde la incoherencia sea material.
 - Mantener cierre operativo del loop de revisión de fila `103` ya integrado al pipeline: conservar en verde `parl-check-liberty-person-identity-official-upgrade-review-queue-actionable-empty` y la ventana `parl-check-liberty-person-identity-official-upgrade-review-queue-actionable-heartbeat-window`; reabrir `review-decision` solo cuando `actionable_rows_total` vuelva a ser `>=1`.
 - Operativizar rutina post-snapshot: `just etl-publish-hf` y verificación de `latest.json` en el dataset público.
+
+## TODO operativo: convergencia a ingesta real robusta (2026-02-27 -> 2026-05-29)
+
+Referencias canónicas:
+- Operación y estado real por fila: `docs/etl/e2e-scrape-load-tracker.md`
+- Bloqueos de acceso público: `docs/etl/name-and-shame-access-blockers.md`
+
+Baseline (2026-02-26):
+- `PARTIAL=25`
+- `TODO=27`
+- `DONE=38`
+
+### Fase 0: hardening transversal (2026-02-27 -> 2026-03-06)
+- [ ] Consolidar contrato único de ingesta real por lane: `strict-network`, `records_loaded > 0`, upsert idempotente, `PRAGMA foreign_key_check` limpio.
+- [ ] Asegurar gates CI por lane con KPIs mínimos de frescura/cobertura/calidad.
+- [ ] Mantener semillas solo como bootstrap (no como estado final de producción).
+- [ ] Cerrar corrida de verificación: `just etl-tracker-gate`.
+
+### Fase 1: foco exclusivo Derechos (2026-03-07 -> 2026-04-03)
+- [ ] Escalar `Derechos` desde seed a ingesta continua real (Estado + CCAA + municipal + jurisprudencia).
+- [ ] Completar `ley -> fragmentos` y lineage histórico multi-versión/fecha en BOE.
+- [ ] Escalar cadena de responsabilidad por rol (`propose/approve/delegate/enforce`) con evidencia primaria fechada.
+- [ ] Escalar lane de organismos delegados (`norma -> organo -> cargo -> acto`) con resolución persona/cargo.
+- [ ] Cerrar rutina semanal en verde:
+  - `DB_PATH=<db> SNAPSHOT_DATE=<date> just parl-liberty-restrictions-pipeline`
+  - `DB_PATH=<db> just parl-check-liberty-focus-gate`
+
+### Fase 2: bloqueos críticos (paralelo; max 1 retry estricto por sprint sin nuevo lever)
+- [ ] Mantener probes reproducibles para `parlamento_galicia_deputados` (403).
+- [ ] Mantener probes reproducibles para `congreso_votaciones` (403).
+- [ ] Resolver o documentar bloqueo de `bde_series_api` (DNS).
+- [ ] Resolver o documentar bloqueo de `aemet_opendata_series` (contract/token).
+- [ ] En cada caso: o recuperación real, o evidencia append-only en `name-and-shame` + tracker (sin fake DONE).
+
+### Fase 3: cierre de gaps principales fuera de Derechos (2026-04-04 -> 2026-05-29)
+- [ ] JEC: scraper y normalización de convocatorias/estado electoral.
+- [ ] Normativa autonómica: BOCM/DOGC/BOJA con dedupe por versión y trazabilidad.
+- [ ] Presupuesto + ejecución autonómica: conectores + crosswalk reproducible.
+- [ ] Ciudadanía sancionadora: pasar de piloto a series oficiales recurrentes (DGT/AEAT/TGSS/Interior + municipal).
+- [ ] Garantías procedimentales: poblar con datos reales TEAR/TEAC/contencioso/defensores.
+- [ ] Abrir/avanzar lanes de mayor impacto social pendientes (vivienda, sanidad, energía, fiscalidad/consumo) con vertical slices entregables.
+
+### Metas de salida (programa)
+- [ ] Hito 2026-04-03: `PARTIAL <= 18` y sin crecimiento de `TODO`.
+- [ ] Hito 2026-05-29: `PARTIAL <= 8` y `TODO <= 15`.
+- [ ] Mantener `DONE` solo con evidencia real reproducible de red o bloqueo documentado.
+- [ ] Publicar snapshot verificable por ciclo con `just etl-publish-hf` + comprobación de `latest.json`.
+
+### Reglas de ejecución
+- [ ] Respetar política anti-loop: `>=70%` trabajo controlable y `<=30%` unblock/probe por sprint.
+- [ ] Entregar al menos un delta visible por sprint (schema/data/UI/artifact).
+- [ ] No repetir probe sin nuevo lever explícito.
+
+## Sprint operativo recomendado (3 bloques de ejecución)
+
+Sprint 1 — 2026-02-26 -> 2026-03-03 — estabilizar cobertura básica de `Derechos` (Fase A-B):
+- Entregable: malla `liberty_restriction_assessments` + `liberty_restriction_assessment_items` completa por vacío de derecho/ámbito; proporcionalidad con metodología y evidencia temporal valida.
+- DoD: `parl-liberty-restrictions-pipeline` en verde + `rights_with_data_gate_passed=true` en status.
+- Evidencia:
+  - `docs/etl/e2e-scrape-load-tracker.md` actualizada al mismo ciclo.
+  - `docs/etl/runs/*` del día ejecutado con reporte de status y heartbeat.
+
+Sprint 2 — 2026-03-04 -> 2026-03-10 — cerrar trazabilidad de responsabilidad (Fase C):
+- Entregable: expansión controlada de responsabilidad directa/indirecta/delegada con fuentes primarias (`source_url`, `evidence_date`, `evidence_quote`) en edges.
+- DoD: gates de dual-coverage/scope representativity sin degradación y sin saltos duplicados en cadena causal.
+- Evidencia:
+  - `docs/etl/sprints/AI-OPS-13x/reports/*` del slice activado.
+  - `report_liberty_restrictions_status_heartbeat_window.py` sin reintentos fantasma en ventana `last N`.
+
+Sprint 3 — 2026-03-11 -> 2026-03-17 — limpieza, resumen y publicación (Fase D + release):
+- Entregable: deduplicación de edges ambiguos, materialización de vistas `*_by_fragment`/`accountability_edges` y snapshot exportado.
+- DoD: release heartbeat window `ok` en los 2 checks principales y `etl-publish-hf` exitoso con `latest.json` coherente.
+- Evidencia:
+  - `docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl` actualizado.
+  - `etl/data/published/liberty-restrictions-atlas-release-latest.json` y `scripts/report_liberty_atlas_release_heartbeat.py` con estado `ok`.
+
+## Checklist operativo diario (hoy -> 7 días)
+
+- Día 1 (2026-02-26): ejecutar secuencia base completa de `Foco operativo actual`; validar `parl-liberty-restrictions-pipeline`.
+- Día 2 (2026-02-27): cerrar faltantes de `liberty_restriction_assessments` + `assessment_items`; validar `parl-check-liberty-restrictions-status`.
+- Día 3 (2026-02-28): elevar calidad de proporcionalidad (`methodologies`/`reviews`); validar evidencia documental.
+- Día 4 (2026-03-01): extender responsabilidad directa/indirecta/delegada (fase C); validar doble cobertura y representatividad.
+- Día 5 (2026-03-02): limpieza de aliases/edges ambiguos y normalización de llaves para `*_by_fragment` y `accountability_edges`.
+- Día 6 (2026-03-03): snapshot + release heartbeat y window; registrar drift en `name-and-shame` si aplica.
+- Día 7 (2026-03-04): publicar HF (`etl-publish-hf`) y validar `latest.json`; solo avanzar a nuevos slices si `focus-gate` y tracker quedan en verde.
+
+## Foco táctico próximo (7 días corridos)
+
+Línea base:
+- Mantener `Derechos` como único bloque de expansión funcional hasta que `focus_gate` permanezca verde dos ciclos consecutivos.
+
+Semana 1:
+- Ejecutar los comandos base de `Foco operativo actual` sin variaciones.
+- Cerrar backlog de mini-acciones con prioridad alta: continuidad de cadena IRLC + dual-coverage + evidencia primaria.
+- Validar que `snapshot_date` avance y quede reflejado en:
+  - `docs/etl/sprints/AI-OPS-12x/*/reports/*` del ciclo actual.
+  - `docs/etl/e2e-scrape-load-tracker.md`.
+
+Semana 2:
+- Avanzar Fase A-D de scraping con lotes de tamaño acotado y trazabilidad por `source_record_id`.
+- Ejecutar heartbeat-window en modo estricto para `status` y `release`.
+- Publicar/validar `latest.json` en HF en cada snapshot estable.
+
+Semana 3:
+- Resolver o aislar bloqueos externos repetidos (`bde_series_api`, `aemet_opendata_series`, PLACSP details).
+- Si persisten bloqueos, registrar evidencia y pasar a siguiente slice interna sin abrir nuevas dependencias.
+
+Criterio de avance de fase:
+- No abrir nuevas fases si queda un gate de `focus_gate` en degradado o `done_zero_real>0` en el tracker.
+
+## Foco operativo actual (2026-02-26): ejecución repetible y bloqueos confirmados
+
+Objetivo del bloque activo:
+- Mantener `Derechos` como único flujo de expansión funcional hasta cumplir el gate de cobertura y calidad.
+- No cerrar ni marcar como `DONE` ningún row sin evidencia reproducible o bloqueo documentado.
+
+Estado observado en el último ciclo:
+- ✅ Base de atlas/coverage y publicación local de artefactos: ejecución funcional (`export_liberty_restrictions_snapshot.py`, `publish_liberty_atlas_artifacts.py`).
+- ✅ Heartbeat de cobertura y continuidad: ejecución funcional con `report_liberty_restrictions_status_heartbeat.py` y `report_liberty_restrictions_status_heartbeat_window.py`.
+- ⚠️ Atlas release parity: riesgo repetido de drift en entorno actual en `report_liberty_atlas_release_heartbeat.py` cuando `published`/GH Pages/HF no están alineados o no hay red.
+- ⚠️ Detalle de contratos PLACSP: bloqueo operativo (`nodename nor servname provided, or not known`) al ejecutar `backfill-placsp-contract-details --limit 5`.
+- ⚠️ Bloqueos externos existentes siguen vigentes para `parlamento_galicia_deputados` y `congreso_votaciones` (403).
+- ✅ Tracker de e2e sin desalineaciones en la corrida consultada (`mismatches: 0`, `done_zero_real: 0`).
+
+Secuencia repetible diaria/semanal (en este orden):
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-liberty-restrictions-pipeline`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-restrictions-status`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-focus-gate`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-restrictions-status-heartbeat`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-restrictions-status-heartbeat-window`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-report-liberty-atlas-release-heartbeat`
+- `DB_PATH=etl/data/staging/politicos-es.db SNAPSHOT_DATE=<YYYY-MM-DD> just parl-check-liberty-atlas-release-heartbeat-window`
+- `DB_PATH=etl/data/staging/politicos-es.db just etl-publish-hf`
+
+Regla de continuación (si hay fallo):
+- Si cualquier gate de derechos cae de `ok` a `degraded`, abrir mini-acción en `docs/etl/e2e-scrape-load-tracker.md` en el mismo día; sin eso, no avanzar a nuevas adquisiciones externas.
+- Si `placsp`/`aemet_opendata_series`/`bde_series_api` vuelven a fallar con el mismo patrón, registrar evidencia append-only en `docs/etl/name-and-shame-access-blockers.md` y pasar.

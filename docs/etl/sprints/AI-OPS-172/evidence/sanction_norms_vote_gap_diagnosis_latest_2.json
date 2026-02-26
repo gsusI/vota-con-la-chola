@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-02-25T21:19:35+00:00",
+  "status": "degraded",
+  "roles": [
+    "approve",
+    "propose",
+    "enforce",
+    "delegate"
+  ],
+  "totals": {
+    "vote_link_rows_scanned_total": 8376,
+    "vote_linked_docs_scanned_total": 2197,
+    "responsibilities_missing_vote_total": 2,
+    "boe_ids_missing_vote_total": 1,
+    "missing_with_vote_title_candidates_total": 0,
+    "missing_with_vote_doc_candidates_total": 0,
+    "missing_with_parliamentary_initiatives_with_vote_link_total": 0,
+    "unreachable_missing_total": 2
+  },
+  "checks": {
+    "missing_vote_visible": true,
+    "all_missing_have_vote_candidates": false,
+    "all_missing_have_vote_doc_candidates": false
+  },
+  "missing_vote_responsibilities": [
+    {
+      "responsibility_id": 13,
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "role": "approve",
+      "has_parliamentary": true,
+      "has_vote": false,
+      "vote_title_candidates": {
+        "boe_token_hits": 0,
+        "title_rule_hits": 0,
+        "has_candidate": false
+      },
+      "vote_doc_candidates": {
+        "boe_token_hits": 0,
+        "title_rule_hits": 0,
+        "has_candidate": false
+      },
+      "parliamentary_initiatives": [
+        "senado:leg5:exp:621/000026"
+      ],
+      "parliamentary_initiatives_with_vote_link": [],
+      "diagnosis_reason": "no_vote_event_link_for_parliamentary_initiatives"
+    },
+    {
+      "responsibility_id": 14,
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "role": "enforce",
+      "has_parliamentary": true,
+      "has_vote": false,
+      "vote_title_candidates": {
+        "boe_token_hits": 0,
+        "title_rule_hits": 0,
+        "has_candidate": false
+      },
+      "vote_doc_candidates": {
+        "boe_token_hits": 0,
+        "title_rule_hits": 0,
+        "has_candidate": false
+      },
+      "parliamentary_initiatives": [
+        "senado:leg5:exp:621/000026"
+      ],
+      "parliamentary_initiatives_with_vote_link": [],
+      "diagnosis_reason": "no_vote_event_link_for_parliamentary_initiatives"
+    }
+  ]
+}

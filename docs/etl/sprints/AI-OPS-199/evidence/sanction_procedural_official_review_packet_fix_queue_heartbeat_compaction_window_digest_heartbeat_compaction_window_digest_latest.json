@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-02-24T15:24:33+00:00",
+  "generated_at": "2026-02-25T13:45:14+00:00",
   "strict": true,
   "input": {
     "compaction_window_json_path": "docs/etl/sprints/AI-OPS-198/evidence/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_latest.json",
-    "compaction_window_generated_at": "2026-02-24T15:24:33+00:00",
+    "compaction_window_generated_at": "2026-02-25T13:45:14+00:00",
     "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat.jsonl",
     "compacted_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl"
   },
@@ -14,7 +14,7 @@
   "strict_fail_count": 0,
   "risk_reason_count": 0,
   "key_metrics": {
-    "entries_total_raw": 24,
+    "entries_total_raw": 25,
     "entries_total_compacted": 22,
     "window_raw_entries": 20,
     "raw_window_incidents": 0,

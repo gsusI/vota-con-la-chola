@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T23:55:29+00:00",
+  "generated_at": "2026-02-26T08:57:48+00:00",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat.jsonl",
   "window_last": 20,
@@ -9,11 +9,11 @@
     "max_actionable_nonempty_runs": 0,
     "max_actionable_nonempty_runs_rate_pct": 0.0
   },
-  "entries_total": 1,
-  "entries_in_window": 1,
+  "entries_total": 2,
+  "entries_in_window": 2,
   "malformed_entries_in_window": 0,
   "status_counts": {
-    "ok": 1,
+    "ok": 2,
     "degraded": 0,
     "failed": 0
   },
@@ -26,10 +26,10 @@
   "first_actionable_nonempty_run_at": "",
   "last_actionable_nonempty_run_at": "",
   "latest": {
-    "run_at": "2026-02-23T23:55:29+00:00",
-    "heartbeat_id": "ok|0|0|0|0|0|0|0|1|",
+    "run_at": "2026-02-25T17:37:10+00:00",
+    "heartbeat_id": "ok|9|0|9|9|0|0|0|1|",
     "status": "ok",
-    "line_no": 1,
+    "line_no": 2,
     "malformed_line": false,
     "actionable_rows_total": 0,
     "actionable_queue_empty": true

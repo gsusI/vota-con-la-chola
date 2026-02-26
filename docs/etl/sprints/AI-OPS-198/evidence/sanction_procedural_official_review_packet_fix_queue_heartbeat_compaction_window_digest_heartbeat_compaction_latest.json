@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:24:33+00:00",
+  "generated_at": "2026-02-25T13:45:14+00:00",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat.jsonl",
   "compacted_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
@@ -10,10 +10,10 @@
     "keep_old_every": 20
   },
   "min_raw_for_dropped_check": 25,
-  "entries_total": 24,
+  "entries_total": 25,
   "selected_entries": 22,
-  "dropped_entries": 2,
-  "dropped_rate_pct": 8.3333,
+  "dropped_entries": 3,
+  "dropped_rate_pct": 12.0,
   "tiers": {
     "recent": {
       "raw_entries": 20,
@@ -21,7 +21,7 @@
       "cadence_every": 1
     },
     "mid": {
-      "raw_entries": 4,
+      "raw_entries": 5,
       "selected_entries": 2,
       "cadence_every": 5
     },
@@ -51,12 +51,11 @@
     "latest_selected": true
   },
   "raw_first_run_at": "2026-02-24T12:55:34+00:00",
-  "raw_last_run_at": "2026-02-24T15:24:32+00:00",
+  "raw_last_run_at": "2026-02-25T13:45:14+00:00",
   "selected_first_run_at": "2026-02-24T12:55:34+00:00",
-  "selected_last_run_at": "2026-02-24T15:24:32+00:00",
+  "selected_last_run_at": "2026-02-25T13:45:14+00:00",
   "selected_indices_sample": [
     0,
-    3,
     4,
     5,
     6,
@@ -74,7 +73,8 @@
     18,
     19,
     20,
-    21
+    21,
+    22
   ],
   "selected_reasons_sample": [
     {
@@ -87,21 +87,12 @@
       ]
     },
     {
-      "index": 3,
-      "line_no": 4,
-      "run_at": "2026-02-24T13:04:29+00:00",
-      "status": "ok",
-      "reasons": [
-        "cadence_mid"
-      ]
-    },
-    {
       "index": 4,
       "line_no": 5,
       "run_at": "2026-02-24T13:10:55+00:00",
       "status": "ok",
       "reasons": [
-        "cadence_recent"
+        "cadence_mid"
       ]
     },
     {
@@ -252,6 +243,15 @@
       "index": 21,
       "line_no": 22,
       "run_at": "2026-02-24T15:03:30+00:00",
+      "status": "ok",
+      "reasons": [
+        "cadence_recent"
+      ]
+    },
+    {
+      "index": 22,
+      "line_no": 23,
+      "run_at": "2026-02-24T15:12:18+00:00",
       "status": "ok",
       "reasons": [
         "cadence_recent"

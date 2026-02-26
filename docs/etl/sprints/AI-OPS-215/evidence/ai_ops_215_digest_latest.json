@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-02-24T15:24:34+00:00",
+  "generated_at": "2026-02-25T13:45:15+00:00",
   "strict": true,
   "input": {
     "compaction_window_json_path": "docs/etl/sprints/AI-OPS-214/evidence/ai_ops_214_heartbeat_compaction_window_latest.json",
-    "compaction_window_generated_at": "2026-02-24T15:24:34+00:00",
+    "compaction_window_generated_at": "2026-02-25T13:45:15+00:00",
     "heartbeat_path": "docs/etl/runs/sanction_procedural_official_review_packet_fix_queue_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
     "compacted_path": "docs/etl/runs/ai_ops_214_heartbeat_compacted.jsonl"
   },
@@ -14,11 +14,11 @@
   "strict_fail_count": 0,
   "risk_reason_count": 0,
   "key_metrics": {
-    "entries_total_raw": 6,
-    "entries_total_compacted": 6,
-    "window_raw_entries": 6,
+    "entries_total_raw": 7,
+    "entries_total_compacted": 7,
+    "window_raw_entries": 7,
     "raw_window_incidents": 0,
-    "present_in_compacted_in_window": 6,
+    "present_in_compacted_in_window": 7,
     "missing_in_compacted_in_window": 0,
     "incident_missing_in_compacted": 0,
     "raw_window_coverage_pct": 100.0,

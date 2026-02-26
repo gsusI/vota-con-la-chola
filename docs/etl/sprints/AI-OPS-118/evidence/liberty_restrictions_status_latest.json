@@ -1,38 +1,104 @@
 {
-  "generated_at": "2026-02-23T20:18:10+00:00",
+  "generated_at": "2026-02-26T08:58:07+00:00",
   "status": "ok",
   "totals": {
     "norms_total": 8,
     "fragments_total": 8,
     "methodologies_total": 1,
     "right_categories_total": 6,
+    "right_categories_with_data_total": 6,
     "assessments_total": 11,
     "norms_with_irlc_total": 8,
     "fragments_with_irlc_total": 8,
     "fragments_with_accountability_total": 8,
-    "fragments_with_dual_coverage_total": 8
+    "fragments_with_dual_coverage_total": 8,
+    "accountability_edges_total": 15,
+    "accountability_edges_with_primary_evidence_total": 15,
+    "sources_total": 1,
+    "sources_with_assessments_total": 1,
+    "scopes_total": 1,
+    "scopes_with_assessments_total": 1,
+    "sources_with_dual_coverage_total": 1,
+    "scopes_with_dual_coverage_total": 1
   },
   "coverage": {
     "norms_classified_pct": 1.0,
     "fragments_with_irlc_pct": 1.0,
     "fragments_with_accountability_pct": 1.0,
-    "fragments_with_dual_coverage_pct": 1.0
+    "fragments_with_dual_coverage_pct": 1.0,
+    "accountability_edges_with_primary_evidence_pct": 1.0,
+    "right_categories_with_data_pct": 1.0,
+    "sources_with_assessments_pct": 1.0,
+    "scopes_with_assessments_pct": 1.0,
+    "sources_with_dual_coverage_pct": 1.0,
+    "scopes_with_dual_coverage_pct": 1.0
   },
   "checks": {
     "irlc_started": true,
     "restriction_map_started": true,
     "norms_classified_gate": true,
     "fragments_irlc_gate": true,
-    "fragments_accountability_gate": true
+    "fragments_accountability_gate": true,
+    "rights_with_data_gate": true,
+    "source_representativity_gate": true,
+    "scope_representativity_gate": true,
+    "source_dual_coverage_gate": true,
+    "scope_dual_coverage_gate": true,
+    "accountability_primary_evidence_gate": true
   },
   "focus_gate": {
     "passed": true,
     "thresholds": {
       "norms_classified_min": 0.8,
       "fragments_irlc_min": 0.6,
-      "fragments_accountability_min": 0.6
+      "fragments_accountability_min": 0.6,
+      "rights_with_data_min": 1.0,
+      "sources_with_assessments_min_pct": 1.0,
+      "scopes_with_assessments_min_pct": 1.0,
+      "min_assessment_sources": 1,
+      "min_assessment_scopes": 1,
+      "sources_with_dual_coverage_min_pct": 1.0,
+      "scopes_with_dual_coverage_min_pct": 1.0,
+      "min_dual_coverage_sources": 1,
+      "min_dual_coverage_scopes": 1,
+      "accountability_primary_evidence_min_pct": 1.0,
+      "min_accountability_primary_evidence_edges": 1
     }
   },
+  "coverage_by_source": [
+    {
+      "source_key": "boe_api_legal",
+      "norms_total": 8,
+      "norms_with_irlc_total": 8,
+      "norms_with_irlc_pct": 1.0,
+      "fragments_total": 8,
+      "fragments_with_irlc_total": 8,
+      "fragments_with_irlc_pct": 1.0,
+      "fragments_with_accountability_total": 8,
+      "fragments_with_accountability_pct": 1.0,
+      "fragments_with_accountability_primary_evidence_total": 8,
+      "fragments_with_accountability_primary_evidence_pct": 1.0,
+      "fragments_with_dual_coverage_total": 8,
+      "fragments_with_dual_coverage_pct": 1.0
+    }
+  ],
+  "coverage_by_scope": [
+    {
+      "scope_key": "nacional",
+      "norms_total": 8,
+      "norms_with_irlc_total": 8,
+      "norms_with_irlc_pct": 1.0,
+      "fragments_total": 8,
+      "fragments_with_irlc_total": 8,
+      "fragments_with_irlc_pct": 1.0,
+      "fragments_with_accountability_total": 8,
+      "fragments_with_accountability_pct": 1.0,
+      "fragments_with_accountability_primary_evidence_total": 8,
+      "fragments_with_accountability_primary_evidence_pct": 1.0,
+      "fragments_with_dual_coverage_total": 8,
+      "fragments_with_dual_coverage_pct": 1.0
+    }
+  ],
   "restriction_map_by_right": [
     {
       "right_category_id": "right:actividad_economica",

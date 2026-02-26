@@ -1,25 +1,26 @@
 {
   "status": "ok",
   "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
-  "entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
+  "entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
   "appended": true,
-  "history_entries_total": 7,
+  "history_entries_total": 9,
   "history_malformed_lines_total": 0,
   "entry": {
-    "run_at": "2026-02-23T21:12:53+00:00",
-    "entry_id": "2026-02-23||4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
-    "snapshot_date": "2026-02-23",
+    "run_at": "2026-02-26T07:36:40+00:00",
+    "entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+    "snapshot_date": "2026-03-05",
     "previous_snapshot_date": "",
     "schema_version": "liberty_restrictions_snapshot_v1",
     "snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
     "previous_snapshot_path": "",
     "diff_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json",
-    "fingerprint": "4ffbf0dfb26348c122be3aafc792e9ff2da2f6365f39e45e19820dfe83e3594a",
+    "fingerprint": "5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
     "totals": {
       "restrictions_total": 11,
       "accountability_edges_total": 15,
       "proportionality_reviews_total": 8,
       "actors_scored_total": 8,
+      "persons_scored_total": 5,
       "enforcement_observations_total": 16,
       "indirect_edges_total": 12,
       "indirect_attributable_edges_total": 9,
@@ -28,16 +29,17 @@
     },
     "change_summary": {
       "status": "baseline",
-      "changed_sections_total": 6,
+      "changed_sections_total": 7,
       "changed_sections": [
         "accountability_edges",
         "accountability_scores",
         "delegated_enforcement_links",
         "indirect_accountability_edges",
+        "personal_accountability_scores",
         "proportionality_reviews",
         "restrictions"
       ],
-      "items_added_total": 62,
+      "items_added_total": 67,
       "items_removed_total": 0,
       "totals_changed": [
         "accountability_edges_total",
@@ -47,6 +49,7 @@
         "fragments_with_delegated_chain_total",
         "indirect_attributable_edges_total",
         "indirect_edges_total",
+        "persons_scored_total",
         "proportionality_reviews_total",
         "restrictions_total"
       ]
