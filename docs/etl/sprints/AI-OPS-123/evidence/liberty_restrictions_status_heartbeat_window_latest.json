@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T08:57:34+00:00",
+  "generated_at": "2026-02-26T09:23:58+00:00",
   "strict": true,
   "heartbeat_path": "docs/etl/runs/liberty_restrictions_status_heartbeat.jsonl",
   "window_last": 20,
@@ -18,11 +18,11 @@
     "max_scope_dual_coverage_gate_failed": 0,
     "max_accountability_primary_evidence_gate_failed": 0
   },
-  "entries_total": 12,
-  "entries_in_window": 12,
+  "entries_total": 14,
+  "entries_in_window": 14,
   "malformed_entries_in_window": 0,
   "status_counts": {
-    "ok": 12,
+    "ok": 14,
     "degraded": 0,
     "failed": 0
   },
@@ -46,12 +46,12 @@
   "first_focus_gate_failed_run_at": "",
   "last_focus_gate_failed_run_at": "",
   "latest": {
-    "run_at": "2026-02-26T08:57:34+00:00",
-    "heartbeat_id": "2026-02-26T08:57:34+00:00|ok|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1|8|8|1|1|1|1|",
+    "run_at": "2026-02-26T09:23:57+00:00",
+    "heartbeat_id": "2026-02-26T09:23:57+00:00|ok|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1.000000|1|8|8|1|1|1|1|",
     "status": "ok",
-    "line_no": 12,
+    "line_no": 14,
     "malformed_line": false,
-    "status_generated_at": "2026-02-26T08:57:34+00:00",
+    "status_generated_at": "2026-02-26T09:23:57+00:00",
     "focus_gate_passed": true,
     "norms_classified_gate_passed": true,
     "fragments_irlc_gate_passed": true,
