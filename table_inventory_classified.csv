@@ -1,0 +1,77 @@
+table_name,row_count,table_class,description,size_mb
+parl_vote_member_votes,1778370,Core Fact/Event,Per-member vote position within a voting event.,877.559
+lost_and_found,1724076,Internal,Temporary/internal staging artifacts captured during load/parse exceptions.,367.082
+topic_positions,480175,Derived Analytics,Computed stance/position aggregates per person and topic.,71.672
+topic_evidence,431682,Core Fact/Event,Raw evidence rows supporting topic stances.,375.918
+source_records,173087,Raw Source/ETL,Canonical hash/record inventory of ingested raw source payloads.,381.668
+person_identifiers,154331,Junction,Cross-system person identifier assignments per person.,15.215
+mandates,145582,Core Fact/Event,Person-to-institution/period mandate assignments and roles.,72.762
+persons,136447,Core Entity,"""""""People registry (persons used across mandates""",19.648
+indicator_observation_records,37431,Core Fact/Event,Generic observational records for indicator values.,36.766
+indicator_points,37431,Core Fact/Event,Time-series datapoints per indicator series.,2.941
+territories,15402,Reference,"""""""Territory registry used by institutions""",1.453
+person_public_data_queue,10640,Unknown,,6.230
+text_documents,9570,Raw Source/ETL,Fetched and normalized text blobs extracted from documents.,36.082
+document_fetches,9390,Raw Source/ETL,Document fetch cache metadata and status details.,4.012
+parl_initiative_documents,9135,Junction,Document artifacts linked to initiatives.,1.777
+parl_initiative_doc_extractions,8932,Derived Analytics,Extraction jobs/results for initiative documents.,18.375
+parl_vote_event_initiatives,8358,Junction,Mapping between vote events and initiatives with method/confidence.,2.828
+parl_vote_events,8357,Core Fact/Event,Parliamentary voting sessions/events.,287.270
+institutions,8160,Core Entity,Political institutions and bodies.,0.984
+parl_initiatives,4715,Core Fact/Event,Parliamentary initiatives with source evidence and status metadata.,14.680
+party_aliases,4006,Junction,Party alias/synonym alternatives.,0.379
+parties,2704,Core Entity,Party lookup and canonical party names.,0.223
+indicator_series,2400,Reference,Indicator catalog used for outcome tracking.,9.391
+policy_events,1821,Core Fact/Event,Policy and budgetary events ingested for analysis.,3.719
+ingestion_runs,864,Raw Source/ETL,Pipeline execution ledger and ingest run status.,0.336
+run_fetches,682,Raw Source/ETL,Per-run fetch summary for pipeline executions.,0.234
+topic_evidence_reviews,487,Quality/Audit,Manual review state and adjudication for topic evidence rows.,0.090
+topics,401,Reference,Canonical issue/topic catalog.,0.117
+topic_set_topics,260,Junction,Membership matrix linking topic sets to topics with stake metadata.,0.031
+infoelectoral_proceso_resultados,191,Core Fact/Event,Result rows for electoral processes.,0.191
+infoelectoral_archivos_extraccion,188,Junction,Files attached to convocatoria entries.,0.152
+raw_fetches,132,Raw Source/ETL,"""""""Per-fetch HTTP fetch logs""",0.055
+legal_fragment_responsibility_evidence,99,Legal/Sanctions,Evidence backing each legal responsibility claim.,0.172
+roles,88,Reference,Normalized political roles for mandate participants.,0.016
+infoelectoral_procesos,71,Core Fact/Event,Electoral process metadata and progress snapshots.,0.039
+infoelectoral_convocatorias,69,Core Fact/Event,Election calls/procedural convocatorias.,0.031
+sources,44,Reference,Configured data providers and ingest endpoints.,0.016
+sanction_municipal_ordinances,20,Legal/Sanctions,Municipal sanction ordinances from regional sources.,0.020
+liberty_enforcement_observations,16,Core Fact/Event,Enforcement assessment observations.,0.023
+legal_fragment_responsibilities,15,Legal/Sanctions,Responsibility assertions tied to legal fragments.,0.035
+legal_norms,12,Legal/Sanctions,"""""""Base legal norm catalog (laws""",0.047
+liberty_indirect_responsibility_edges,12,Junction,Inferred indirect responsibility link graph between actors/institutions.,0.023
+liberty_restriction_assessments,11,Legal/Sanctions,Liberty and enforcement assessment table.,0.027
+sanction_infraction_type_mappings,10,Junction,Mappings between infraction types and legal references.,0.016
+sanction_infraction_types,10,Reference,Sanction infraction type dictionary.,0.004
+sanction_volume_observations,9,Core Fact/Event,"""""""Observed sanction metrics by source""",0.016
+sanction_volume_sources,9,Reference,Data source dictionary for sanction volume snapshots.,0.016
+legal_norm_fragments,8,Legal/Sanctions,Fragmented sections/units of legal norms.,0.012
+legal_norm_lineage_edges,8,Junction,Legal-lineage relationships between norms (deroga/modifica/desarrolla).,0.012
+liberty_delegated_enforcement_links,8,Junction,Delegated enforcement responsibility links between institutions and actors.,0.020
+liberty_proportionality_reviews,8,Core Fact/Event,Review outputs using proportionality methodology.,0.020
+sanction_norm_catalog,8,Legal/Sanctions,Norm catalog for sanctioning logic and expected compliance checks.,0.043
+sanction_norm_fragment_links,8,Junction,Bridge between sanction catalog entries and legal fragments.,0.004
+infoelectoral_convocatoria_tipos,6,Reference,Election-call type lookup from Infoelectoral.,0.004
+liberty_right_categories,6,Reference,Right categories used by liberty/restriction assessments.,0.004
+policy_instruments,6,Reference,Policy instrument dictionary.,0.004
+sanction_procedural_metrics,6,Derived Analytics,Computed KPI values and audit metadata for sanction processes.,0.004
+topic_sets,5,Reference,Configurable topic bundles/scopes for scoring and analysis.,0.004
+admin_levels,4,Reference,Administrative level hierarchy for territories and institutions.,0.004
+genders,3,Reference,Canonical person gender labels.,0.004
+sanction_municipal_ordinance_fragments,3,Legal/Sanctions,Fragment-level mapping from municipal ordinances to legal references.,0.004
+sanction_procedural_kpi_definitions,3,Reference,KPI dictionary for sanction process quality checks.,0.004
+liberty_delegated_enforcement_methodologies,1,Reference,Methodology metadata for delegated enforcement assessments.,0.004
+liberty_enforcement_methodologies,1,Reference,Methodology metadata for enforcement assessments.,0.004
+liberty_indirect_methodologies,1,Reference,Methodology metadata for indirect responsibility.,0.004
+liberty_irlc_methodologies,1,Reference,Methodology metadata for IRLC assessments.,0.004
+liberty_proportionality_methodologies,1,Reference,Methodology metadata for proportionality analyses.,0.004
+causal_estimates,0,Derived Analytics,Model-backed causal estimate artifacts for interventions and outcomes.,0.004
+domains,0,Reference,Issue/policy domains for policy/economic/legal topics.,0.004
+intervention_events,0,Junction,Intervention → policy-event linkage.,0.004
+interventions,0,Core Fact/Event,Intervention abstractions over policy events.,0.004
+money_contract_records,0,Procurement,PLACSP contract-side normalized records for monitoring spending and awarded amounts.,0.004
+money_subsidy_records,0,Procurement,BDNS subsidy/grant records for public aid and beneficiary tracking.,0.004
+person_name_aliases,0,Junction,Canonicalized name alias variants for a person.,0.004
+policy_axes,0,Reference,Policy axis schema used for directional scoring.,0.004
+policy_event_axis_scores,0,Derived Analytics,Policy-event directional scores by axis and method.,0.004

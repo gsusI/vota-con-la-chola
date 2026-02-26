@@ -1,0 +1,196 @@
+{
+  "generated_at": "2026-02-26T07:36:40+00:00",
+  "snapshot_date": "2026-03-05",
+  "previous_snapshot_date": "",
+  "schema_version": "liberty_restrictions_snapshot_v1",
+  "previous_snapshot_path": "",
+  "status": "baseline",
+  "sections": {
+    "accountability_edges": {
+      "current_total": 15,
+      "previous_total": 0,
+      "added_total": 15,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|delegate|Ministerio competente en trafico|1994-04-21|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|enforce|DGT|1994-04-21|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|approve|Cortes Generales|2000-08-08|https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|enforce|Inspeccion de Trabajo y Seguridad Social|2000-08-08|https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|approve|Cortes Generales|2003-12-18|https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+        "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|approve|Cortes Generales|2003-12-23|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|propose|Gobierno de Espana|2003-12-23|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|delegate|Ministerio de Hacienda|2004-10-28|https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|enforce|AEAT|2004-10-28|https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|approve|Cortes Generales|2015-10-31|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|propose|Gobierno de Espana|2015-10-31|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|approve|Cortes Generales|2015-10-31|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|enforce|Ministerio del Interior|2015-10-31|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|propose|Gobierno de Espana|2015-10-31|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|approve|Cortes Generales|2015-03-31|https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442"
+      ],
+      "removed_ids_sample": []
+    },
+    "accountability_scores": {
+      "current_total": 8,
+      "previous_total": 0,
+      "added_total": 8,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "07066f787d471f72240d64ca0adaeda2e2846a47284982ec4dcd0cdd8a344dc1",
+        "0b3fc431872797adddee815999294087cf939cbfaf8cffc03992876e33252533",
+        "25b06d4d3f22db582dea531935b3b0fc0ac20d8c2da5405355d6ee80d8515ecf",
+        "40c51489e1ab02c936b31c58b2e803ea5b1ef93ed97ade127aa2345ad48ff519",
+        "438c955abca7c6fd40ceea5c9e3999783855bc8dc9a7e58c3fbc1a6d43292a77",
+        "96714e56910e936628d54e5ac5e72a496d8dd164d8137d2da53dec741329d1d5",
+        "cf01d9c2436ded2bef6ae234573959b3369b6572dccc57cc7d56d12468bc506f",
+        "e0c28b92beb0d814e3fc266d771f5038a34e569496972c2d96bccac54e51597f"
+      ],
+      "removed_ids_sample": []
+    },
+    "delegated_enforcement_links": {
+      "current_total": 8,
+      "previous_total": 0,
+      "added_total": 8,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Unidad sancionadora DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+        "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+      ],
+      "removed_ids_sample": []
+    },
+    "indirect_accountability_edges": {
+      "current_total": 12,
+      "previous_total": 0,
+      "added_total": 12,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "indirect_chain_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Comision interterritorial de trafico|design|DGT|https://www.boe.es/",
+        "indirect_chain_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|instruct|DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "indirect_chain_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|design|Inspeccion de Trabajo y Seguridad Social|https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "indirect_chain_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|design|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+        "indirect_chain_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|delegate|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "indirect_chain_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Secretaria de Estado de Hacienda|instruct|AEAT|https://www.boe.es/",
+        "indirect_chain_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Secretaria de Estado de Hacienda|instruct|AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "indirect_chain_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Direccion politica de movilidad|design|Ministerio competente en trafico|https://www.boe.es/",
+        "indirect_chain_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|delegate|DGT|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "indirect_chain_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Secretaria de Estado de Empleo|appoint|Inspeccion de Trabajo y Seguridad Social|https://www.boe.es/",
+        "indirect_chain_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Gabinete de coordinacion territorial|appoint|Delegaciones/Subdelegaciones del Gobierno y organos habilitados|https://www.boe.es/",
+        "indirect_chain_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Secretaria de Estado de Seguridad|instruct|Delegaciones/Subdelegaciones del Gobierno y organos habilitados|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+      ],
+      "removed_ids_sample": []
+    },
+    "personal_accountability_scores": {
+      "current_total": 5,
+      "previous_total": 0,
+      "added_total": 5,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "2a44244cfaa9fde8aa7fb6b81d1de096f26f3f7e33cdea9c0d06fc4007d2254b",
+        "416195c0e7dc0c36c7c1f5e3ca2d62c25d60c5fa8a14aa47ec60fef215bcb69e",
+        "a53badf9eae130b559286be70747325aa43b304d6d34a79321260c9145673c99",
+        "b3191a6162dfcb61d3478bffa6f586ea5362cd10fff8b1e17fbd967905757969",
+        "cd9bd3086b9c223c56dceb2320f7e6d44ff8f238d26f83fe335750dc15c24ba5"
+      ],
+      "removed_ids_sample": []
+    },
+    "proportionality_reviews": {
+      "current_total": 8,
+      "previous_total": 0,
+      "added_total": 8,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "proportionality_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+        "proportionality_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+        "proportionality_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+        "proportionality_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+        "proportionality_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+        "proportionality_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "proportionality_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+        "proportionality_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal"
+      ],
+      "removed_ids_sample": []
+    },
+    "restrictions": {
+      "current_total": 11,
+      "previous_total": 0,
+      "added_total": 11,
+      "removed_total": 0,
+      "unchanged_total": 0,
+      "added_ids_sample": [
+        "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+        "irlc_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|right:actividad_economica",
+        "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:acceso_servicios",
+        "irlc_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|right:actividad_economica",
+        "irlc_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|right:actividad_economica",
+        "irlc_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|right:actividad_economica",
+        "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:movilidad",
+        "irlc_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|right:propiedad_uso",
+        "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:expresion_reunion",
+        "irlc_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|right:privacidad",
+        "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion"
+      ],
+      "removed_ids_sample": []
+    }
+  },
+  "changed_sections": [
+    "accountability_edges",
+    "accountability_scores",
+    "delegated_enforcement_links",
+    "indirect_accountability_edges",
+    "personal_accountability_scores",
+    "proportionality_reviews",
+    "restrictions"
+  ],
+  "changed_sections_total": 7,
+  "items_added_total": 67,
+  "items_removed_total": 0,
+  "totals_current": {
+    "restrictions_total": 11,
+    "accountability_edges_total": 15,
+    "proportionality_reviews_total": 8,
+    "actors_scored_total": 8,
+    "persons_scored_total": 5,
+    "enforcement_observations_total": 16,
+    "indirect_edges_total": 12,
+    "indirect_attributable_edges_total": 9,
+    "delegated_links_total": 8,
+    "fragments_with_delegated_chain_total": 8
+  },
+  "totals_previous": {},
+  "totals_delta": {
+    "accountability_edges_total": 15,
+    "actors_scored_total": 8,
+    "delegated_links_total": 8,
+    "enforcement_observations_total": 16,
+    "fragments_with_delegated_chain_total": 8,
+    "indirect_attributable_edges_total": 9,
+    "indirect_edges_total": 12,
+    "persons_scored_total": 5,
+    "proportionality_reviews_total": 8,
+    "restrictions_total": 11
+  },
+  "totals_changed": [
+    "accountability_edges_total",
+    "actors_scored_total",
+    "delegated_links_total",
+    "enforcement_observations_total",
+    "fragments_with_delegated_chain_total",
+    "indirect_attributable_edges_total",
+    "indirect_edges_total",
+    "persons_scored_total",
+    "proportionality_reviews_total",
+    "restrictions_total"
+  ]
+}

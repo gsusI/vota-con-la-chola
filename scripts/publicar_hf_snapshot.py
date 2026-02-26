@@ -1320,9 +1320,9 @@ def build_dataset_readme(
             "",
             f"Repositorio fuente: [{source_repo_url}]({source_repo_url})",
             "",
-            "Contenido por snapshot (capas raw + processed):",
+            "Contenido por snapshot (capa raw + capa procesada):",
             f"- `{snapshot_rel_dir.as_posix()}/published/*`: capa raw reproducible (artefactos canónicos JSON/JSON.GZ).",
-            f"- `{snapshot_rel_dir.as_posix()}/parquet/<tabla>/part-*.parquet`: tablas navegables en Data Studio.",
+            f"- `{snapshot_rel_dir.as_posix()}/parquet/<tabla>/part-*.parquet`: tablas navegables en el visor Data Studio.",
             f"- `{snapshot_rel_dir.as_posix()}/sources/<source_id>.json`: procedencia legal por fuente (licencia/aviso, obligaciones, terms_url, estado de verificación).",
         ]
     )
@@ -1350,7 +1350,7 @@ def build_dataset_readme(
         quality_file_name = str(quality_summary.get("file_name") or "")
         if quality_file_name:
             lines.append(
-                f"- `published/{quality_file_name}`: reporte de calidad (votos/iniciativas) usado para gates del snapshot."
+                f"- `published/{quality_file_name}`: reporte de calidad (votos/iniciativas) usado para los gates del snapshot."
             )
     if source_legal_entries:
         lines.extend(
@@ -1388,10 +1388,10 @@ def build_dataset_readme(
     )
     if quality_summary:
         lines.extend(["", "Resumen de calidad del snapshot:"])
-        lines.append(f"- Vote gate: {'PASS' if bool(quality_summary.get('vote_gate_passed')) else 'FAIL'}")
+        lines.append(f"- Gate de votos: {'PASS' if bool(quality_summary.get('vote_gate_passed')) else 'FAIL'}")
         if "initiative_gate_passed" in quality_summary:
             lines.append(
-                f"- Initiative gate: {'PASS' if bool(quality_summary.get('initiative_gate_passed')) else 'FAIL'}"
+                f"- Gate de iniciativas: {'PASS' if bool(quality_summary.get('initiative_gate_passed')) else 'FAIL'}"
             )
         if "events_total" in quality_summary:
             lines.append(f"- Eventos analizados: {int(quality_summary.get('events_total') or 0)}")
