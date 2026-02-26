@@ -1,6 +1,6 @@
 {
   "db_path": "etl/data/staging/politicos-es.db",
-  "generated_at": "2026-02-24T16:07:52+00:00",
+  "generated_at": "2026-02-24T21:23:37+00:00",
   "summary": {
     "desired": 44,
     "present": 44,
@@ -430,7 +430,7 @@
       "senado_iniciativas"
     ],
     "contract": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "initiative_source_ids": [
         "senado_iniciativas"
       ],
@@ -452,8 +452,8 @@
       "actionable_sample": []
     },
     "digest": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
-      "contract_generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
+      "contract_generated_at": "2026-02-24T21:23:49+00:00",
       "initiative_source_ids": [
         "senado_iniciativas"
       ],
@@ -476,7 +476,7 @@
       "strict_fail_reasons": []
     },
     "heartbeat_window": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
       "window_last": 20,
@@ -524,7 +524,7 @@
       "status": "ok"
     },
     "heartbeat_compaction_window": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
       "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl",
@@ -579,11 +579,11 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "strict": false,
       "input": {
         "compaction_window_json_path": "",
-        "compaction_window_generated_at": "2026-02-24T16:08:05+00:00",
+        "compaction_window_generated_at": "2026-02-24T21:23:49+00:00",
         "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
         "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl"
       },
@@ -623,7 +623,7 @@
       "validation_errors": []
     },
     "heartbeat_compaction_window_digest_heartbeat_window": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
       "window_last": 20,
@@ -679,7 +679,7 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest_heartbeat_compaction_window": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
       "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
@@ -734,11 +734,11 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": {
-      "generated_at": "2026-02-24T16:08:05+00:00",
+      "generated_at": "2026-02-24T21:23:49+00:00",
       "strict": false,
       "input": {
         "compaction_window_json_path": "",
-        "compaction_window_generated_at": "2026-02-24T16:08:05+00:00",
+        "compaction_window_generated_at": "2026-02-24T21:23:49+00:00",
         "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
         "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl"
       },

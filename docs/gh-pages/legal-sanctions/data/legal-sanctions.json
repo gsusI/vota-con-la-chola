@@ -1,0 +1,1475 @@
+{
+  "generated_at": "2026-02-24T21:23:02+00:00",
+  "snapshot_date": "2026-02-24",
+  "schema_version": "legal_sanctions_snapshot_v1",
+  "meta": {
+    "norm_nodes": 12,
+    "lineage_edges": 8,
+    "infraction_type_count": 10,
+    "infraction_mappings": 10,
+    "volume_rows": 5,
+    "kpi_rows": 6,
+    "municipal_rows": 20
+  },
+  "filters": {
+    "source_ids": [
+      "aeat",
+      "dgt",
+      "es:sanctions:aeat_memoria",
+      "es:sanctions:dgt_anuario",
+      "es:sanctions:interior_lo4_2015",
+      "es:sanctions:municipal_open_data_pilot20",
+      "es:sanctions:tgss_itss",
+      "interior",
+      "itss",
+      "municipal",
+      "tgss"
+    ],
+    "relation_types": [
+      "deroga",
+      "desarrolla"
+    ],
+    "infraction_type_ids": [
+      "inf:labor_compliance_breach",
+      "inf:municipal_civism",
+      "inf:municipal_waste_noise",
+      "inf:public_order_minor",
+      "inf:ss_contribution_default",
+      "inf:tax_formal_noncompliance",
+      "inf:tax_payment_default",
+      "inf:traffic_parking",
+      "inf:traffic_signal_noncompliance",
+      "inf:traffic_speed"
+    ],
+    "kpi_ids": [
+      "kpi:formal_annulment_rate",
+      "kpi:recurso_estimation_rate",
+      "kpi:resolution_delay_p90_days"
+    ],
+    "periods": [
+      {
+        "period_granularity": "year",
+        "period_date": "2025-12-31"
+      }
+    ]
+  },
+  "legal_graph": {
+    "nodes": [
+      {
+        "norm_id": "es:boe-a-1995-24292",
+        "boe_id": "BOE-A-1995-24292",
+        "title": "Ley 31/1995 de Prevencion de Riesgos Laborales.",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-24",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-2003-23514",
+        "boe_id": "BOE-A-2003-23514",
+        "title": "Ley General Tributaria",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque de infracciones tributarias",
+            "fragment_title": "Infracciones y sanciones tributarias",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 100000.0,
+            "competent_body": "AEAT y organos tributarios autonómicos/locales segun competencia",
+            "appeal_path": "Reposicion y reclamacion economico-administrativa"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-1963-2490",
+        "boe_id": "BOE-A-1963-2490",
+        "title": "Ley General Tributaria de 1963.",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-24",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-1992-6209",
+        "boe_id": "BOE-A-1992-6209",
+        "title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-24",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-2015-11724",
+        "boe_id": "BOE-A-2015-11724",
+        "title": "Ley Organica de proteccion de la seguridad ciudadana",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque de infracciones y sanciones",
+            "fragment_title": "Tipificacion y tramos de sancion",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 100.0,
+            "sanction_amount_max_eur": 600000.0,
+            "competent_body": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+            "appeal_path": "Alzada/reposicion y contencioso-administrativo"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2015-11722",
+        "boe_id": "BOE-A-2015-11722",
+        "title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque sancionador principal",
+            "fragment_title": "Infracciones y sanciones",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 1000.0,
+            "competent_body": "DGT y jefaturas provinciales de trafico",
+            "appeal_path": "Reposicion administrativa y contencioso-administrativo"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2003-23186",
+        "boe_id": "BOE-A-2003-23186",
+        "title": "Referencia sancionadora BOE-A-2003-23186",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque sancionador principal",
+            "fragment_title": "Tipificacion y sanciones",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "Organo competente segun reparto legal",
+            "appeal_path": "Recursos administrativos y via contenciosa"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2015-3442",
+        "boe_id": "BOE-A-2015-3442",
+        "title": "Referencia sancionadora BOE-A-2015-3442",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque sancionador principal",
+            "fragment_title": "Tipificacion y procedimiento",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "Organo competente segun distribucion legal",
+            "appeal_path": "Recursos administrativos y via contenciosa"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2004-18398",
+        "boe_id": "BOE-A-2004-18398",
+        "title": "Regimen sancionador tributario (reglamento)",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque procedimental y de graduacion",
+            "fragment_title": "Criterios y procedimiento",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "AEAT",
+            "appeal_path": "Reclamacion economico-administrativa y contencioso-administrativo"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-1994-8985",
+        "boe_id": "BOE-A-1994-8985",
+        "title": "Reglamento del procedimiento sancionador en materia de trafico",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque procedimental sancionador",
+            "fragment_title": "Instruccion y resolucion de expedientes",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "DGT y organos instructores/resolutores competentes",
+            "appeal_path": "Recursos administrativos y contencioso-administrativos"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-1990-6396",
+        "boe_id": "BOE-A-1990-6396",
+        "title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-24",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-2000-15060",
+        "boe_id": "BOE-A-2000-15060",
+        "title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-02-12",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque de tipificacion laboral",
+            "fragment_title": "Infracciones y sanciones en el orden social",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 60.0,
+            "sanction_amount_max_eur": 225018.0,
+            "competent_body": "ITSS y autoridad laboral competente",
+            "appeal_path": "Alzada/reposicion y contencioso-administrativo"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "lineage_edge_id": 3,
+        "source_norm_id": "es:boe-a-1994-8985",
+        "source_norm_boe_id": "BOE-A-1994-8985",
+        "source_norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+        "related_norm_id": "es:boe-a-1990-6396",
+        "related_norm_boe_id": "BOE-A-1990-6396",
+        "related_norm_title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "1994-04-21",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "evidence_quote": "Fuente BOE del reglamento de procedimiento sancionador dictado para aplicar y desarrollar la ley de trafico."
+      },
+      {
+        "lineage_edge_id": 7,
+        "source_norm_id": "es:boe-a-2000-15060",
+        "source_norm_boe_id": "BOE-A-2000-15060",
+        "source_norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+        "related_norm_id": "es:boe-a-1995-24292",
+        "related_norm_boe_id": "BOE-A-1995-24292",
+        "related_norm_title": "Ley 31/1995 de Prevencion de Riesgos Laborales.",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "2000-08-08",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "evidence_quote": "Fuente BOE del texto refundido sancionador laboral utilizado como desarrollo del bloque laboral-preventivo en este piloto."
+      },
+      {
+        "lineage_edge_id": 4,
+        "source_norm_id": "es:boe-a-2003-23186",
+        "source_norm_boe_id": "BOE-A-2003-23186",
+        "source_norm_title": "Referencia sancionadora BOE-A-2003-23186",
+        "related_norm_id": "es:boe-a-2003-23514",
+        "related_norm_boe_id": "BOE-A-2003-23514",
+        "related_norm_title": "Ley General Tributaria",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "2003-12-18",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+        "evidence_quote": "Fuente BOE de la Ley 58/2003 usada como base legal directa de desarrollo en este lane semilla."
+      },
+      {
+        "lineage_edge_id": 2,
+        "source_norm_id": "es:boe-a-2003-23514",
+        "source_norm_boe_id": "BOE-A-2003-23514",
+        "source_norm_title": "Ley General Tributaria",
+        "related_norm_id": "es:boe-a-1963-2490",
+        "related_norm_boe_id": "BOE-A-1963-2490",
+        "related_norm_title": "Ley General Tributaria de 1963.",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2003-12-18",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "evidence_quote": "Fuente BOE de la Ley General Tributaria 58/2003, publicada con sustitucion del marco tributario previo."
+      },
+      {
+        "lineage_edge_id": 5,
+        "source_norm_id": "es:boe-a-2004-18398",
+        "source_norm_boe_id": "BOE-A-2004-18398",
+        "source_norm_title": "Regimen sancionador tributario (reglamento)",
+        "related_norm_id": "es:boe-a-2003-23514",
+        "related_norm_boe_id": "BOE-A-2003-23514",
+        "related_norm_title": "Ley General Tributaria",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "2004-10-28",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "evidence_quote": "Fuente BOE del reglamento general del regimen sancionador tributario dictado para desarrollo de la LGT."
+      },
+      {
+        "lineage_edge_id": 1,
+        "source_norm_id": "es:boe-a-2015-11722",
+        "source_norm_boe_id": "BOE-A-2015-11722",
+        "source_norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+        "related_norm_id": "es:boe-a-1990-6396",
+        "related_norm_boe_id": "BOE-A-1990-6396",
+        "related_norm_title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2015-10-31",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "evidence_quote": "Fuente BOE del texto refundido 2015 que reemplaza el texto articulado previo en materia de trafico."
+      },
+      {
+        "lineage_edge_id": 6,
+        "source_norm_id": "es:boe-a-2015-11724",
+        "source_norm_boe_id": "BOE-A-2015-11724",
+        "source_norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+        "related_norm_id": "es:boe-a-1992-6209",
+        "related_norm_boe_id": "BOE-A-1992-6209",
+        "related_norm_title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2015-03-31",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "evidence_quote": "Fuente BOE de la LO 4/2015, publicada para sustituir el marco organico previo de seguridad ciudadana."
+      },
+      {
+        "lineage_edge_id": 8,
+        "source_norm_id": "es:boe-a-2015-3442",
+        "source_norm_boe_id": "BOE-A-2015-3442",
+        "source_norm_title": "Referencia sancionadora BOE-A-2015-3442",
+        "related_norm_id": "es:boe-a-1992-6209",
+        "related_norm_boe_id": "BOE-A-1992-6209",
+        "related_norm_title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2015-03-31",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+        "evidence_quote": "Fuente BOE de la LO 4/2015 usada como referencia de reemplazo del marco organico previo."
+      }
+    ],
+    "node_count": 12,
+    "edge_count": 8,
+    "relation_types": [
+      "deroga",
+      "desarrolla"
+    ],
+    "nodes_with_fragments": 8
+  },
+  "infraction_network": {
+    "infraction_types": [
+      {
+        "infraction_type_id": "inf:labor_compliance_breach",
+        "infraction_label": "Labor compliance breach",
+        "infraction_domain": "labor",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 87000,
+        "obs_importe_total_eur": 310000000.0
+      },
+      {
+        "infraction_type_id": "inf:municipal_civism",
+        "infraction_label": "Municipal civism",
+        "infraction_domain": "municipal",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 0,
+        "fragments_covered": 0,
+        "obs_expediente_total": 145000,
+        "obs_importe_total_eur": 25500000.0
+      },
+      {
+        "infraction_type_id": "inf:municipal_waste_noise",
+        "infraction_label": "Municipal waste and noise",
+        "infraction_domain": "municipal",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 0,
+        "fragments_covered": 0,
+        "obs_expediente_total": 98000,
+        "obs_importe_total_eur": 19500000.0
+      },
+      {
+        "infraction_type_id": "inf:public_order_minor",
+        "infraction_label": "Public order minor",
+        "infraction_domain": "public_order",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 230000,
+        "obs_importe_total_eur": 160000000.0
+      },
+      {
+        "infraction_type_id": "inf:ss_contribution_default",
+        "infraction_label": "Social security contribution default",
+        "infraction_domain": "social_security",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 124000,
+        "obs_importe_total_eur": 240000000.0
+      },
+      {
+        "infraction_type_id": "inf:tax_formal_noncompliance",
+        "infraction_label": "Tax formal noncompliance",
+        "infraction_domain": "tax",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 380000,
+        "obs_importe_total_eur": 420000000.0
+      },
+      {
+        "infraction_type_id": "inf:tax_payment_default",
+        "infraction_label": "Tax payment default",
+        "infraction_domain": "tax",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 210000,
+        "obs_importe_total_eur": 370000000.0
+      },
+      {
+        "infraction_type_id": "inf:traffic_parking",
+        "infraction_label": "Traffic parking",
+        "infraction_domain": "traffic",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 950000,
+        "obs_importe_total_eur": 98000000.0
+      },
+      {
+        "infraction_type_id": "inf:traffic_signal_noncompliance",
+        "infraction_label": "Traffic signal noncompliance",
+        "infraction_domain": "traffic",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 0,
+        "obs_importe_total_eur": 0.0
+      },
+      {
+        "infraction_type_id": "inf:traffic_speed",
+        "infraction_label": "Traffic speed",
+        "infraction_domain": "traffic",
+        "canonical_unit": "case",
+        "mapping_rows": 1,
+        "norms_covered": 1,
+        "fragments_covered": 1,
+        "obs_expediente_total": 1200000,
+        "obs_importe_total_eur": 181000000.0
+      }
+    ],
+    "mappings": [
+      {
+        "mapping_id": 1,
+        "mapping_key": "inf:traffic_speed|dgt|velocidad|es:boe-a-2015-11722|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "norm_id": "es:boe-a-2015-11722",
+        "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "source_system": "dgt",
+        "source_code": "velocidad",
+        "source_label": "Exceso de velocidad",
+        "confidence": 0.9,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "infraction_type_id": "inf:traffic_speed",
+        "infraction_label": "Traffic speed"
+      },
+      {
+        "mapping_id": 3,
+        "mapping_key": "inf:traffic_signal_noncompliance|dgt|senales|es:boe-a-2015-11722|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "norm_id": "es:boe-a-2015-11722",
+        "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "source_system": "dgt",
+        "source_code": "senales",
+        "source_label": "Incumplimiento de senales",
+        "confidence": 0.75,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "infraction_type_id": "inf:traffic_signal_noncompliance",
+        "infraction_label": "Traffic signal noncompliance"
+      },
+      {
+        "mapping_id": 2,
+        "mapping_key": "inf:traffic_parking|dgt|estacionamiento|es:boe-a-2015-11722|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "norm_id": "es:boe-a-2015-11722",
+        "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+        "source_system": "dgt",
+        "source_code": "estacionamiento",
+        "source_label": "Estacionamiento indebido",
+        "confidence": 0.8,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "infraction_type_id": "inf:traffic_parking",
+        "infraction_label": "Traffic parking"
+      },
+      {
+        "mapping_id": 5,
+        "mapping_key": "inf:tax_payment_default|aeat|impago|es:boe-a-2003-23186|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+        "norm_id": "es:boe-a-2003-23186",
+        "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+        "source_system": "aeat",
+        "source_code": "impago",
+        "source_label": "Impago de deuda tributaria",
+        "confidence": 0.75,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+        "infraction_type_id": "inf:tax_payment_default",
+        "infraction_label": "Tax payment default"
+      },
+      {
+        "mapping_id": 4,
+        "mapping_key": "inf:tax_formal_noncompliance|aeat|formalidad|es:boe-a-2003-23514|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+        "norm_id": "es:boe-a-2003-23514",
+        "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+        "source_system": "aeat",
+        "source_code": "formalidad",
+        "source_label": "Incumplimiento formal tributario",
+        "confidence": 0.8,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "infraction_type_id": "inf:tax_formal_noncompliance",
+        "infraction_label": "Tax formal noncompliance"
+      },
+      {
+        "mapping_id": 6,
+        "mapping_key": "inf:ss_contribution_default|tgss|cotizacion|es:boe-a-2015-11724|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+        "norm_id": "es:boe-a-2015-11724",
+        "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+        "source_system": "tgss",
+        "source_code": "cotizacion",
+        "source_label": "Incumplimiento de cotizacion",
+        "confidence": 0.8,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "infraction_type_id": "inf:ss_contribution_default",
+        "infraction_label": "Social security contribution default"
+      },
+      {
+        "mapping_id": 8,
+        "mapping_key": "inf:public_order_minor|interior|orden_publico_leve|es:boe-a-2015-3442|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+        "norm_id": "es:boe-a-2015-3442",
+        "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+        "source_system": "interior",
+        "source_code": "orden_publico_leve",
+        "source_label": "Orden publico leve",
+        "confidence": 0.85,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+        "infraction_type_id": "inf:public_order_minor",
+        "infraction_label": "Public order minor"
+      },
+      {
+        "mapping_id": 10,
+        "mapping_key": "inf:municipal_waste_noise|municipal|residuos_ruido||",
+        "norm_id": "",
+        "fragment_id": "",
+        "source_system": "municipal",
+        "source_code": "residuos_ruido",
+        "source_label": "Residuos y ruido",
+        "confidence": 0.6,
+        "source_url": "https://datos.gob.es/",
+        "infraction_type_id": "inf:municipal_waste_noise",
+        "infraction_label": "Municipal waste and noise"
+      },
+      {
+        "mapping_id": 9,
+        "mapping_key": "inf:municipal_civism|municipal|civismo||",
+        "norm_id": "",
+        "fragment_id": "",
+        "source_system": "municipal",
+        "source_code": "civismo",
+        "source_label": "Ordenanza de civismo",
+        "confidence": 0.6,
+        "source_url": "https://datos.gob.es/",
+        "infraction_type_id": "inf:municipal_civism",
+        "infraction_label": "Municipal civism"
+      },
+      {
+        "mapping_id": 7,
+        "mapping_key": "inf:labor_compliance_breach|itss|tipificacion_laboral|es:boe-a-2000-15060|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+        "norm_id": "es:boe-a-2000-15060",
+        "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+        "source_system": "itss",
+        "source_code": "tipificacion_laboral",
+        "source_label": "Infracciones en el orden social",
+        "confidence": 0.75,
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "infraction_type_id": "inf:labor_compliance_breach",
+        "infraction_label": "Labor compliance breach"
+      }
+    ]
+  },
+  "sanction_volume_monitoring": {
+    "series": [
+      {
+        "sanction_source_id": "es:sanctions:aeat_memoria",
+        "source_label": "AEAT sanction memory",
+        "admin_scope": "estado",
+        "territory_scope": "nacional",
+        "period_granularity": "year",
+        "period_date": "2025-12-31",
+        "territory_id": 0,
+        "territory_name": "",
+        "expediente_count": 590000,
+        "importe_total_eur": 790000000.0,
+        "importe_medio_eur": 2867.16,
+        "recurso_presentado_count": 153000,
+        "recurso_estimado_count": 40000,
+        "recurso_desestimado_count": 113000,
+        "delta_expediente_count": 0,
+        "delta_expediente_pct": 0.0,
+        "delta_importe_total_eur": 0.0,
+        "delta_importe_total_pct": 0.0
+      },
+      {
+        "sanction_source_id": "es:sanctions:dgt_anuario",
+        "source_label": "DGT annual sanction volume",
+        "admin_scope": "estado",
+        "territory_scope": "nacional",
+        "period_granularity": "year",
+        "period_date": "2025-12-31",
+        "territory_id": 0,
+        "territory_name": "",
+        "expediente_count": 2150000,
+        "importe_total_eur": 279000000.0,
+        "importe_medio_eur": 253.99,
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0,
+        "delta_expediente_count": 0,
+        "delta_expediente_pct": 0.0,
+        "delta_importe_total_eur": 0.0,
+        "delta_importe_total_pct": 0.0
+      },
+      {
+        "sanction_source_id": "es:sanctions:interior_lo4_2015",
+        "source_label": "Interior sanctions under LO 4/2015",
+        "admin_scope": "estado",
+        "territory_scope": "nacional",
+        "period_granularity": "year",
+        "period_date": "2025-12-31",
+        "territory_id": 0,
+        "territory_name": "",
+        "expediente_count": 230000,
+        "importe_total_eur": 160000000.0,
+        "importe_medio_eur": 695.65,
+        "recurso_presentado_count": 76000,
+        "recurso_estimado_count": 18500,
+        "recurso_desestimado_count": 57500,
+        "delta_expediente_count": 0,
+        "delta_expediente_pct": 0.0,
+        "delta_importe_total_eur": 0.0,
+        "delta_importe_total_pct": 0.0
+      },
+      {
+        "sanction_source_id": "es:sanctions:municipal_open_data_pilot20",
+        "source_label": "Municipal open data sanctions pilot (20 cities)",
+        "admin_scope": "municipal",
+        "territory_scope": "pilot_20_cities",
+        "period_granularity": "year",
+        "period_date": "2025-12-31",
+        "territory_id": 0,
+        "territory_name": "",
+        "expediente_count": 243000,
+        "importe_total_eur": 45000000.0,
+        "importe_medio_eur": 374.84,
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0,
+        "delta_expediente_count": 0,
+        "delta_expediente_pct": 0.0,
+        "delta_importe_total_eur": 0.0,
+        "delta_importe_total_pct": 0.0
+      },
+      {
+        "sanction_source_id": "es:sanctions:tgss_itss",
+        "source_label": "TGSS and ITSS sanction bulletin",
+        "admin_scope": "estado",
+        "territory_scope": "nacional",
+        "period_granularity": "year",
+        "period_date": "2025-12-31",
+        "territory_id": 0,
+        "territory_name": "",
+        "expediente_count": 211000,
+        "importe_total_eur": 550000000.0,
+        "importe_medio_eur": 5498.7,
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0,
+        "delta_expediente_count": 0,
+        "delta_expediente_pct": 0.0,
+        "delta_importe_total_eur": 0.0,
+        "delta_importe_total_pct": 0.0
+      }
+    ],
+    "source_totals": [
+      {
+        "source_id": "es:sanctions:dgt_anuario",
+        "label": "DGT annual sanction volume",
+        "admin_scope": "estado",
+        "expediente_count": 2150000,
+        "importe_total_eur": 279000000.0,
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0
+      },
+      {
+        "source_id": "es:sanctions:aeat_memoria",
+        "label": "AEAT sanction memory",
+        "admin_scope": "estado",
+        "expediente_count": 590000,
+        "importe_total_eur": 790000000.0,
+        "recurso_presentado_count": 153000,
+        "recurso_estimado_count": 40000,
+        "recurso_desestimado_count": 113000
+      },
+      {
+        "source_id": "es:sanctions:municipal_open_data_pilot20",
+        "label": "Municipal open data sanctions pilot (20 cities)",
+        "admin_scope": "municipal",
+        "expediente_count": 243000,
+        "importe_total_eur": 45000000.0,
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0
+      },
+      {
+        "source_id": "es:sanctions:interior_lo4_2015",
+        "label": "Interior sanctions under LO 4/2015",
+        "admin_scope": "estado",
+        "expediente_count": 230000,
+        "importe_total_eur": 160000000.0,
+        "recurso_presentado_count": 76000,
+        "recurso_estimado_count": 18500,
+        "recurso_desestimado_count": 57500
+      },
+      {
+        "source_id": "es:sanctions:tgss_itss",
+        "label": "TGSS and ITSS sanction bulletin",
+        "admin_scope": "estado",
+        "expediente_count": 211000,
+        "importe_total_eur": 550000000.0,
+        "recurso_presentado_count": 0,
+        "recurso_estimado_count": 0,
+        "recurso_desestimado_count": 0
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "es:sanctions:aeat_memoria",
+        "label": "AEAT sanction memory",
+        "admin_scope": "estado",
+        "territory_scope": "nacional"
+      },
+      {
+        "source_id": "es:sanctions:dgt_anuario",
+        "label": "DGT annual sanction volume",
+        "admin_scope": "estado",
+        "territory_scope": "nacional"
+      },
+      {
+        "source_id": "es:sanctions:interior_lo4_2015",
+        "label": "Interior sanctions under LO 4/2015",
+        "admin_scope": "estado",
+        "territory_scope": "nacional"
+      },
+      {
+        "source_id": "es:sanctions:municipal_open_data_pilot20",
+        "label": "Municipal open data sanctions pilot (20 cities)",
+        "admin_scope": "municipal",
+        "territory_scope": "pilot_20_cities"
+      },
+      {
+        "source_id": "es:sanctions:tgss_itss",
+        "label": "TGSS and ITSS sanction bulletin",
+        "admin_scope": "estado",
+        "territory_scope": "nacional"
+      }
+    ],
+    "periods": [
+      {
+        "period_granularity": "year",
+        "period_date": "2025-12-31"
+      }
+    ]
+  },
+  "procedural_kpi_drift": [
+    {
+      "kpi_id": "kpi:formal_annulment_rate",
+      "kpi_label": "Formal annulment rate",
+      "target_direction": "lower_is_better",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "source_label": "AEAT sanction memory",
+      "period_granularity": "year",
+      "period_date": "2025-12-31",
+      "territory_id": 0,
+      "territory_name": "",
+      "value": 0.041176,
+      "numerator": 4200.0,
+      "denominator": 102000.0,
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "evidence_date": "",
+      "delta_value": 0.0,
+      "delta_value_pct": 0.0
+    },
+    {
+      "kpi_id": "kpi:formal_annulment_rate",
+      "kpi_label": "Formal annulment rate",
+      "target_direction": "lower_is_better",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "source_label": "Interior sanctions under LO 4/2015",
+      "period_granularity": "year",
+      "period_date": "2025-12-31",
+      "territory_id": 0,
+      "territory_name": "",
+      "value": 0.052632,
+      "numerator": 4000.0,
+      "denominator": 76000.0,
+      "source_url": "https://www.interior.gob.es/",
+      "evidence_date": "",
+      "delta_value": 0.0,
+      "delta_value_pct": 0.0
+    },
+    {
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "kpi_label": "Resource estimation rate",
+      "target_direction": "lower_is_better",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "source_label": "AEAT sanction memory",
+      "period_granularity": "year",
+      "period_date": "2025-12-31",
+      "territory_id": 0,
+      "territory_name": "",
+      "value": 0.264706,
+      "numerator": 27000.0,
+      "denominator": 102000.0,
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "evidence_date": "",
+      "delta_value": 0.0,
+      "delta_value_pct": 0.0
+    },
+    {
+      "kpi_id": "kpi:recurso_estimation_rate",
+      "kpi_label": "Resource estimation rate",
+      "target_direction": "lower_is_better",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "source_label": "Interior sanctions under LO 4/2015",
+      "period_granularity": "year",
+      "period_date": "2025-12-31",
+      "territory_id": 0,
+      "territory_name": "",
+      "value": 0.243421,
+      "numerator": 18500.0,
+      "denominator": 76000.0,
+      "source_url": "https://www.interior.gob.es/",
+      "evidence_date": "",
+      "delta_value": 0.0,
+      "delta_value_pct": 0.0
+    },
+    {
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "kpi_label": "Resolution delay p90 (days)",
+      "target_direction": "lower_is_better",
+      "sanction_source_id": "es:sanctions:aeat_memoria",
+      "source_label": "AEAT sanction memory",
+      "period_granularity": "year",
+      "period_date": "2025-12-31",
+      "territory_id": 0,
+      "territory_name": "",
+      "value": 210.0,
+      "numerator": 210.0,
+      "denominator": 1.0,
+      "source_url": "https://sede.agenciatributaria.gob.es/",
+      "evidence_date": "",
+      "delta_value": 0.0,
+      "delta_value_pct": 0.0
+    },
+    {
+      "kpi_id": "kpi:resolution_delay_p90_days",
+      "kpi_label": "Resolution delay p90 (days)",
+      "target_direction": "lower_is_better",
+      "sanction_source_id": "es:sanctions:interior_lo4_2015",
+      "source_label": "Interior sanctions under LO 4/2015",
+      "period_granularity": "year",
+      "period_date": "2025-12-31",
+      "territory_id": 0,
+      "territory_name": "",
+      "value": 185.0,
+      "numerator": 185.0,
+      "denominator": 1.0,
+      "source_url": "https://www.interior.gob.es/",
+      "evidence_date": "",
+      "delta_value": 0.0,
+      "delta_value_pct": 0.0
+    }
+  ],
+  "municipal_monitoring": {
+    "summary": {
+      "total_ordinances": 20,
+      "normalized_ordinances": 3,
+      "identified_ordinances": 17,
+      "blocked_ordinances": 0,
+      "status_counts": [
+        {
+          "status": "identified",
+          "total": 17
+        },
+        {
+          "status": "normalized",
+          "total": 3
+        }
+      ]
+    },
+    "city_summary": [
+      {
+        "city_name": "A Coruna",
+        "province_name": "A Coruna",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Alicante",
+        "province_name": "Alicante",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Barcelona",
+        "province_name": "Barcelona",
+        "ordinances_total": 1,
+        "normalized_total": 1,
+        "identified_total": 0,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Bilbao",
+        "province_name": "Bizkaia",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Cordoba",
+        "province_name": "Cordoba",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Elche",
+        "province_name": "Alicante",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Gijon",
+        "province_name": "Asturias",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Granada",
+        "province_name": "Granada",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "L'Hospitalet de Llobregat",
+        "province_name": "Barcelona",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Las Palmas de Gran Canaria",
+        "province_name": "Las Palmas",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Madrid",
+        "province_name": "Madrid",
+        "ordinances_total": 1,
+        "normalized_total": 1,
+        "identified_total": 0,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Malaga",
+        "province_name": "Malaga",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Murcia",
+        "province_name": "Murcia",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Palma",
+        "province_name": "Illes Balears",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Sevilla",
+        "province_name": "Sevilla",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Valencia",
+        "province_name": "Valencia",
+        "ordinances_total": 1,
+        "normalized_total": 1,
+        "identified_total": 0,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Valladolid",
+        "province_name": "Valladolid",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Vigo",
+        "province_name": "Pontevedra",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Vitoria-Gasteiz",
+        "province_name": "Araba",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      },
+      {
+        "city_name": "Zaragoza",
+        "province_name": "Zaragoza",
+        "ordinances_total": 1,
+        "normalized_total": 0,
+        "identified_total": 1,
+        "blocked_total": 0
+      }
+    ],
+    "ordinance_rows": [
+      {
+        "ordinance_id": "es:mun:acoruna:pilot",
+        "city_name": "A Coruna",
+        "province_name": "A Coruna",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.coruna.gal/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:alicante:pilot",
+        "city_name": "Alicante",
+        "province_name": "Alicante",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.alicante.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:bilbao:pilot",
+        "city_name": "Bilbao",
+        "province_name": "Bizkaia",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.bilbao.eus/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:cordoba:pilot",
+        "city_name": "Cordoba",
+        "province_name": "Cordoba",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.cordoba.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:elche:pilot",
+        "city_name": "Elche",
+        "province_name": "Alicante",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.elche.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:gijon:pilot",
+        "city_name": "Gijon",
+        "province_name": "Asturias",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.gijon.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:granada:pilot",
+        "city_name": "Granada",
+        "province_name": "Granada",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.granada.org/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:hospitalet:pilot",
+        "city_name": "L'Hospitalet de Llobregat",
+        "province_name": "Barcelona",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.l-h.cat/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:las-palmas:pilot",
+        "city_name": "Las Palmas de Gran Canaria",
+        "province_name": "Las Palmas",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.laspalmasgc.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:malaga:pilot",
+        "city_name": "Malaga",
+        "province_name": "Malaga",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.malaga.eu/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:murcia:pilot",
+        "city_name": "Murcia",
+        "province_name": "Murcia",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.murcia.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:palma:pilot",
+        "city_name": "Palma",
+        "province_name": "Illes Balears",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.palma.cat/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:sevilla:pilot",
+        "city_name": "Sevilla",
+        "province_name": "Sevilla",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.sevilla.org/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:valladolid:pilot",
+        "city_name": "Valladolid",
+        "province_name": "Valladolid",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.valladolid.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:vigo:pilot",
+        "city_name": "Vigo",
+        "province_name": "Pontevedra",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.vigo.org/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:vitoria:pilot",
+        "city_name": "Vitoria-Gasteiz",
+        "province_name": "Araba",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.vitoria-gasteiz.org/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:zaragoza:pilot",
+        "city_name": "Zaragoza",
+        "province_name": "Zaragoza",
+        "ordinance_label": "Ordenanzas sancionadoras municipales (pilot)",
+        "ordinance_status": "identified",
+        "publication_date": "",
+        "ordinance_url": "https://www.zaragoza.es/",
+        "fragments_total": 0,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:barcelona:civisme_2025",
+        "city_name": "Barcelona",
+        "province_name": "Barcelona",
+        "ordinance_label": "Ordenança de mesures per fomentar i garantir la convivencia ciutadana",
+        "ordinance_status": "normalized",
+        "publication_date": "2025-02-10",
+        "ordinance_url": "https://ajuntament.barcelona.cat/",
+        "fragments_total": 1,
+        "mapped_norm_fragments": 0,
+        "mapped_fragment_rows": 0
+      },
+      {
+        "ordinance_id": "es:mun:madrid:movilidad_2025",
+        "city_name": "Madrid",
+        "province_name": "Madrid",
+        "ordinance_label": "Ordenanza de movilidad sostenible",
+        "ordinance_status": "normalized",
+        "publication_date": "2025-01-15",
+        "ordinance_url": "https://www.madrid.es/",
+        "fragments_total": 1,
+        "mapped_norm_fragments": 1,
+        "mapped_fragment_rows": 1
+      },
+      {
+        "ordinance_id": "es:mun:valencia:movilidad_2025",
+        "city_name": "Valencia",
+        "province_name": "Valencia",
+        "ordinance_label": "Ordenanza de movilidad urbana",
+        "ordinance_status": "normalized",
+        "publication_date": "2025-03-01",
+        "ordinance_url": "https://www.valencia.es/",
+        "fragments_total": 1,
+        "mapped_norm_fragments": 1,
+        "mapped_fragment_rows": 1
+      }
+    ]
+  },
+  "responsibility_summary": {
+    "roles": [
+      {
+        "role": "approve",
+        "rows": 6
+      },
+      {
+        "role": "enforce",
+        "rows": 4
+      },
+      {
+        "role": "propose",
+        "rows": 3
+      },
+      {
+        "role": "delegate",
+        "rows": 2
+      }
+    ],
+    "top_actors": [
+      {
+        "actor_label": "Cortes Generales",
+        "rows": 6
+      },
+      {
+        "actor_label": "Gobierno de Espana",
+        "rows": 3
+      },
+      {
+        "actor_label": "AEAT",
+        "rows": 1
+      },
+      {
+        "actor_label": "DGT",
+        "rows": 1
+      },
+      {
+        "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+        "rows": 1
+      },
+      {
+        "actor_label": "Ministerio competente en trafico",
+        "rows": 1
+      },
+      {
+        "actor_label": "Ministerio de Hacienda",
+        "rows": 1
+      },
+      {
+        "actor_label": "Ministerio del Interior",
+        "rows": 1
+      }
+    ],
+    "rows_with_primary_evidence": 15,
+    "rows_total": 15
+  },
+  "liberty_restriction_monitoring": {
+    "enabled": true,
+    "rows": 11,
+    "sample_first_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+    "sample_last_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+    "avg_irlc_score": 57.9318,
+    "avg_confidence": 0.7745,
+    "method_distribution": [
+      {
+        "method_version": "irlc_v1",
+        "total": 11
+      }
+    ]
+  }
+}
