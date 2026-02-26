@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-02-26T09:07:10+00:00",
+  "strict": true,
+  "input": {
+    "published_release_json": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
+    "gh_pages_release_json": "docs/gh-pages/explorer-sources/data/liberty-atlas-release.json",
+    "continuity_json": "docs/etl/sprints/AI-OPS-217/evidence/liberty_atlas_changelog_continuity_20260226T090709Z.json",
+    "heartbeat_jsonl": "docs/etl/runs/liberty_atlas_release_heartbeat.jsonl"
+  },
+  "history_size_before": 36,
+  "history_size_after": 37,
+  "history_malformed_lines_before": 0,
+  "appended": true,
+  "duplicate_detected": false,
+  "validation_errors": [],
+  "strict_fail_reasons": [
+    "continuity_status_not_ok",
+    "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known",
+    "snapshot_date_mismatch:continuity",
+    "continuity_entry_id_mismatch_published"
+  ],
+  "warnings": [],
+  "heartbeat": {
+    "run_at": "2026-02-26T09:07:10+00:00",
+    "heartbeat_id": "2026-02-26T09:07:10+00:00|2026-02-26|6ed61a0aa5421311577ce358c83f5ebcab7579ddccb0b29ccb0cfc1a4b609cfb|6ed61a0aa5421311577ce358c83f5ebcab7579ddccb0b29ccb0cfc1a4b609cfb||4",
+    "status": "failed",
+    "snapshot_date_expected": "2026-02-26",
+    "max_snapshot_age_days": 14,
+    "allow_hf_unavailable": false,
+    "published": {
+      "source": "published",
+      "status": "ok",
+      "snapshot_date": "2026-02-26",
+      "entry_id": "2026-02-26||ab41b8f851409bb36a65380e6a52d71ce238467a22c5c77acfd88d17c4820788",
+      "history_latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+      "schema_version": "liberty_restrictions_snapshot_v1",
+      "snapshot_restrictions_total": 11,
+      "snapshot_age_days": 0,
+      "fingerprint": "6ed61a0aa5421311577ce358c83f5ebcab7579ddccb0b29ccb0cfc1a4b609cfb"
+    },
+    "gh_pages": {
+      "source": "gh_pages",
+      "status": "ok",
+      "snapshot_date": "2026-02-26",
+      "entry_id": "2026-02-26||ab41b8f851409bb36a65380e6a52d71ce238467a22c5c77acfd88d17c4820788",
+      "history_latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+      "schema_version": "liberty_restrictions_snapshot_v1",
+      "snapshot_restrictions_total": 11,
+      "snapshot_age_days": 0,
+      "fingerprint": "6ed61a0aa5421311577ce358c83f5ebcab7579ddccb0b29ccb0cfc1a4b609cfb"
+    },
+    "hf": {
+      "source": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/latest.json",
+      "dataset_repo": "JesusIC/vota-con-la-chola-data",
+      "latest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/latest.json",
+      "latest_snapshot_date": "",
+      "url": "",
+      "available": false,
+      "fetch_error": "latest_error:url_error:[Errno 8] nodename nor servname provided, or not known",
+      "release": {}
+    },
+    "continuity": {
+      "path": "docs/etl/sprints/AI-OPS-217/evidence/liberty_atlas_changelog_continuity_20260226T090709Z.json",
+      "status": "failed",
+      "latest_snapshot_date": "2026-03-05",
+      "latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+      "previous_snapshot_chain_ok": true,
+      "strict_fail_reasons": [
+        "latest_snapshot_date_mismatch",
+        "release_entry_id_mismatch"
+      ]
+    },
+    "checks": {
+      "published_release_ok": true,
+      "gh_pages_release_ok": true,
+      "continuity_ok": false,
+      "published_gh_parity_ok": true,
+      "hf_available": false,
+      "hf_release_ok_or_allowed": false,
+      "published_hf_parity_ok": null,
+      "gh_pages_hf_parity_ok": null,
+      "expected_snapshot_match_ok": false,
+      "stale_snapshot_ok": true,
+      "continuity_entry_matches_published_ok": false
+    },
+    "stale_surfaces": [],
+    "stale_alerts_count": 0,
+    "drift_alerts_count": 0,
+    "hf_unavailable": true,
+    "warning_count": 0,
+    "warnings": [],
+    "strict_fail_count": 4,
+    "strict_fail_reasons": [
+      "continuity_status_not_ok",
+      "hf_unavailable:latest_error:url_error:[Errno 8] nodename nor servname provided, or not known",
+      "snapshot_date_mismatch:continuity",
+      "continuity_entry_id_mismatch_published"
+    ]
+  },
+  "status": "failed"
+}
