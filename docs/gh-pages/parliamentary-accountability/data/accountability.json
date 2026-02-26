@@ -13926,7 +13926,7 @@
       "context": "committee",
       "margin": -240,
       "initiative_id": "congreso:leg15:exp:122/000083/0000",
-      "source_url": "file://~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/congreso_votaciones_sample.json",
+      "source_url": "file:///workspace/vota-con-la-chola/etl/data/raw/samples/congreso_votaciones_sample.json",
       "quality": {
         "has_vote_subject": true,
         "has_initiative_link": true,
@@ -58352,7 +58352,7 @@
         "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_10_52.xml",
         "source_bucket": "senado",
         "source_id": "senado_votaciones",
-        "source_url": "file://~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/senado_votaciones_sample.xml",
+        "source_url": "file:///workspace/vota-con-la-chola/etl/data/raw/samples/senado_votaciones_sample.xml",
         "vote_date": "",
         "legislature": "15",
         "title": "Votación final sobre el conjunto",
