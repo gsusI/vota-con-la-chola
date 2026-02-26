@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-02-26T09:12:41+00:00",
+  "status": "ok",
+  "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+  "expected_snapshot_date": "2026-03-05",
+  "entries_total": 9,
+  "malformed_lines_total": 0,
+  "latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+  "latest_snapshot_date": "2026-03-05",
+  "checks": {
+    "history_nonempty": true,
+    "malformed_lines_ok": true,
+    "entry_ids_unique": true,
+    "run_at_monotonic": true,
+    "previous_snapshot_chain_ok": true,
+    "latest_snapshot_matches_expected": true,
+    "release_consistent": true
+  },
+  "continuity_breaks": [],
+  "self_referential_previous_snapshot_entries": 1,
+  "release_checks": {
+    "provided": true,
+    "path": "etl/data/published/liberty-restrictions-atlas-release-latest.json",
+    "status": "ok",
+    "snapshot_date": "2026-03-05",
+    "entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144",
+    "history_latest_entry_id": "2026-03-05||5ffc8b23ebe89f427ee6a4e8617d4ced63585b4352f0ce64e982835370709144"
+  },
+  "strict_fail_reasons": []
+}
