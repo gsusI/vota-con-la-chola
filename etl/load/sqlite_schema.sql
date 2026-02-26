@@ -102,11 +102,12 @@ CREATE TABLE IF NOT EXISTS persons (
 );
 
 CREATE TABLE IF NOT EXISTS person_identifiers (
+  person_identifier_id INTEGER PRIMARY KEY AUTOINCREMENT,
   person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
   namespace TEXT NOT NULL,
   value TEXT NOT NULL,
   created_at TEXT NOT NULL,
-  PRIMARY KEY (namespace, value)
+  UNIQUE (namespace, value)
 );
 
 CREATE TABLE IF NOT EXISTS person_name_aliases (
@@ -361,6 +362,7 @@ CREATE TABLE IF NOT EXISTS parl_initiative_documents (
 
 -- Link votes to initiatives when we can do it deterministically (or with explicit method+confidence).
 CREATE TABLE IF NOT EXISTS parl_vote_event_initiatives (
+  parl_vote_event_initiative_id INTEGER PRIMARY KEY AUTOINCREMENT,
   vote_event_id TEXT NOT NULL REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
   initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
   link_method TEXT NOT NULL,
@@ -368,7 +370,7 @@ CREATE TABLE IF NOT EXISTS parl_vote_event_initiatives (
   evidence_json TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  PRIMARY KEY (vote_event_id, initiative_id, link_method)
+  UNIQUE (vote_event_id, initiative_id, link_method)
 );
 
 -- Analitica: temas (alto impacto por scope) + evidencia + posicionamiento reproducible.
@@ -402,6 +404,7 @@ CREATE TABLE IF NOT EXISTS topics (
 
 -- Which topics are considered (and how "high-stakes" they are) inside a topic_set.
 CREATE TABLE IF NOT EXISTS topic_set_topics (
+  topic_set_topic_id INTEGER PRIMARY KEY AUTOINCREMENT,
   topic_set_id INTEGER NOT NULL REFERENCES topic_sets(topic_set_id) ON DELETE CASCADE,
   topic_id INTEGER NOT NULL REFERENCES topics(topic_id) ON DELETE CASCADE,
   stakes_score REAL,
@@ -410,7 +413,7 @@ CREATE TABLE IF NOT EXISTS topic_set_topics (
   notes TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  PRIMARY KEY (topic_set_id, topic_id)
+  UNIQUE (topic_set_id, topic_id)
 );
 
 -- Atomic evidence items supporting a stance (declared or revealed). Must be traceable to raw sources.
@@ -463,6 +466,31 @@ CREATE TABLE IF NOT EXISTS topic_evidence_reviews (
   note TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
+);
+
+-- Queue of person-level public-data gaps detected by xray diagnostics.
+-- One row per (person, gap_code, scope_key), with status transitions for manual/ops closure.
+CREATE TABLE IF NOT EXISTS person_public_data_queue (
+  person_public_data_queue_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  queue_key TEXT NOT NULL UNIQUE,
+  person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
+  person_name TEXT NOT NULL,
+  gap_code TEXT NOT NULL,
+  scope_key TEXT NOT NULL DEFAULT '',
+  priority INTEGER NOT NULL DEFAULT 50,
+  is_publicly_available INTEGER NOT NULL DEFAULT 1 CHECK (is_publicly_available IN (0, 1)),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'in_progress', 'resolved', 'ignored')) DEFAULT 'pending',
+  rationale TEXT NOT NULL,
+  next_action TEXT NOT NULL,
+  suggested_source_id TEXT REFERENCES sources(source_id),
+  suggested_source_url TEXT,
+  detection_payload_json TEXT NOT NULL DEFAULT '{}',
+  first_detected_at TEXT NOT NULL,
+  last_detected_at TEXT NOT NULL,
+  resolved_at TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (person_id, gap_code, scope_key)
 );
 
 -- Aggregated stance snapshot (recomputed deterministically from topic_evidence for a given window).
@@ -606,6 +634,7 @@ CREATE TABLE IF NOT EXISTS policy_events (
 );
 
 CREATE TABLE IF NOT EXISTS policy_event_axis_scores (
+  policy_event_axis_score_id INTEGER PRIMARY KEY AUTOINCREMENT,
   policy_event_id TEXT NOT NULL REFERENCES policy_events(policy_event_id) ON DELETE CASCADE,
   policy_axis_id INTEGER NOT NULL REFERENCES policy_axes(policy_axis_id) ON DELETE CASCADE,
   direction INTEGER CHECK (direction IN (-1, 0, 1)),
@@ -615,7 +644,7 @@ CREATE TABLE IF NOT EXISTS policy_event_axis_scores (
   notes TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  PRIMARY KEY (policy_event_id, policy_axis_id, method)
+  UNIQUE (policy_event_id, policy_axis_id, method)
 );
 
 -- Dinero publico (staging normalizado, previo al mapeo a policy_events).
@@ -646,6 +675,59 @@ CREATE TABLE IF NOT EXISTS money_contract_records (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
   UNIQUE (source_id, source_record_pk)
+);
+
+-- Detalle estructurado de licitaciones/cpvs/documentos (scrape puntual PLACSP).
+-- Guardamos evidencia de la página de detalle por contrato para enriquecer
+-- money_contract_records sin forzar una transformación irreversible.
+CREATE TABLE IF NOT EXISTS placsp_contract_detail_records (
+  detail_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id) CHECK (source_id LIKE 'placsp_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  source_url TEXT NOT NULL,
+  source_url_raw TEXT,
+  file_number TEXT,
+  contract_id TEXT,
+  notice_type TEXT,
+  cpv_code TEXT,
+  cpv_label TEXT,
+  contracting_authority TEXT,
+  state TEXT,
+  territory_code TEXT,
+  procedure_type TEXT,
+  processing_type TEXT,
+  method_of_presentation TEXT,
+  submission_deadline TEXT,
+  base_budget_eur REAL,
+  estimated_value_eur REAL,
+  published_at TEXT,
+  awarded_at TEXT,
+  tender_title TEXT,
+  raw_payload TEXT NOT NULL,
+  source_html_sha256 TEXT,
+  raw_path TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_pk)
+);
+
+-- Documentos listados en la página de detalle PLACSP (adjudicacion, pliegos, actas).
+CREATE TABLE IF NOT EXISTS placsp_contract_detail_documents (
+  detail_document_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id) CHECK (source_id LIKE 'placsp_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  source_record_id TEXT NOT NULL,
+  doc_kind TEXT,
+  doc_label TEXT,
+  doc_reference_date TEXT,
+  content_type_hint TEXT,
+  doc_payload_json TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_record_pk, source_url, doc_kind)
 );
 
 -- Contrato explicito AI-OPS-09:
@@ -692,11 +774,12 @@ CREATE TABLE IF NOT EXISTS interventions (
 );
 
 CREATE TABLE IF NOT EXISTS intervention_events (
+  intervention_event_id INTEGER PRIMARY KEY AUTOINCREMENT,
   intervention_id INTEGER NOT NULL REFERENCES interventions(intervention_id) ON DELETE CASCADE,
   policy_event_id TEXT NOT NULL REFERENCES policy_events(policy_event_id) ON DELETE CASCADE,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  PRIMARY KEY (intervention_id, policy_event_id)
+  UNIQUE (intervention_id, policy_event_id)
 );
 
 -- Indicadores (outcomes + confusores) para evaluaciones y contexto.
@@ -871,12 +954,13 @@ CREATE TABLE IF NOT EXISTS sanction_norm_catalog (
 );
 
 CREATE TABLE IF NOT EXISTS sanction_norm_fragment_links (
+  sanction_norm_fragment_link_id INTEGER PRIMARY KEY AUTOINCREMENT,
   norm_id TEXT NOT NULL REFERENCES sanction_norm_catalog(norm_id) ON DELETE CASCADE,
   fragment_id TEXT NOT NULL REFERENCES legal_norm_fragments(fragment_id) ON DELETE CASCADE,
   link_reason TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  PRIMARY KEY (norm_id, fragment_id)
+  UNIQUE (norm_id, fragment_id)
 );
 
 CREATE TABLE IF NOT EXISTS legal_norm_lineage_edges (
@@ -1278,6 +1362,11 @@ CREATE INDEX IF NOT EXISTS idx_topic_positions_set_topic_stance ON topic_positio
 CREATE INDEX IF NOT EXISTS idx_topic_evidence_reviews_status ON topic_evidence_reviews(status);
 CREATE INDEX IF NOT EXISTS idx_topic_evidence_reviews_reason ON topic_evidence_reviews(review_reason);
 CREATE INDEX IF NOT EXISTS idx_topic_evidence_reviews_source_id ON topic_evidence_reviews(source_id);
+CREATE INDEX IF NOT EXISTS idx_person_public_data_queue_person_id ON person_public_data_queue(person_id);
+CREATE INDEX IF NOT EXISTS idx_person_public_data_queue_status ON person_public_data_queue(status);
+CREATE INDEX IF NOT EXISTS idx_person_public_data_queue_priority ON person_public_data_queue(priority);
+CREATE INDEX IF NOT EXISTS idx_person_public_data_queue_gap_code ON person_public_data_queue(gap_code);
+CREATE INDEX IF NOT EXISTS idx_person_public_data_queue_source_id ON person_public_data_queue(suggested_source_id);
 CREATE INDEX IF NOT EXISTS idx_text_documents_source_id ON text_documents(source_id);
 CREATE INDEX IF NOT EXISTS idx_text_documents_source_record_pk ON text_documents(source_record_pk);
 CREATE INDEX IF NOT EXISTS idx_text_documents_source_url ON text_documents(source_url);
@@ -1298,6 +1387,14 @@ CREATE INDEX IF NOT EXISTS idx_money_contract_records_source_id ON money_contrac
 CREATE INDEX IF NOT EXISTS idx_money_contract_records_contract_id ON money_contract_records(contract_id);
 CREATE INDEX IF NOT EXISTS idx_money_contract_records_cpv_code ON money_contract_records(cpv_code);
 CREATE INDEX IF NOT EXISTS idx_money_contract_records_published_date ON money_contract_records(published_date);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_source_id ON placsp_contract_detail_records(source_id);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_contract_id ON placsp_contract_detail_records(contract_id);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_file_number ON placsp_contract_detail_records(file_number);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_cpv_code ON placsp_contract_detail_records(cpv_code);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_state ON placsp_contract_detail_records(state);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_documents_source_id ON placsp_contract_detail_documents(source_id);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_documents_source_record_pk ON placsp_contract_detail_documents(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_documents_doc_date ON placsp_contract_detail_documents(doc_reference_date);
 CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_source_id ON money_subsidy_records(source_id);
 CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_call_id ON money_subsidy_records(call_id);
 CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_beneficiary_id

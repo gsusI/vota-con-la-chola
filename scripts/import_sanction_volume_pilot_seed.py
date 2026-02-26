@@ -436,6 +436,8 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--seed", default="etl/data/seeds/sanction_volume_pilot_seed_v1.json")
     ap.add_argument("--snapshot-date", default=today_utc_date())
     ap.add_argument("--source-id", default="boe_api_legal")
+    ap.add_argument("--schema", default=str(Path(__file__).resolve().parents[1] / "etl" / "load" / "sqlite_schema.sql"))
+    ap.add_argument("--skip-schema", action="store_true", help="Assume schema is already applied to this DB")
     ap.add_argument("--out", default="")
     return ap.parse_args()
 
@@ -456,10 +458,11 @@ def main() -> int:
 
     seed_doc = json.loads(seed_path.read_text(encoding="utf-8"))
     db_path = Path(args.db)
-    schema_path = Path(__file__).resolve().parents[1] / "etl" / "load" / "sqlite_schema.sql"
+    schema_path = Path(args.schema)
     conn = open_db(db_path)
     try:
-        apply_schema(conn, schema_path)
+        if not args.skip_schema:
+            apply_schema(conn, schema_path)
         report = import_seed(
             conn,
             seed_doc=seed_doc,

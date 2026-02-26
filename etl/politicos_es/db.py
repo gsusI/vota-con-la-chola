@@ -146,6 +146,200 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
             conn.execute("PRAGMA foreign_keys = ON;")
 
 
+def _ensure_single_pk_table(conn: sqlite3.Connection, table: str, create_sql: str, copy_columns: list[str], index_sqls: list[str] | None = None) -> None:
+    """Rebuild tables that still use legacy composite PKs into a surrogate ID PK.
+
+    This preserves existing uniqueness constraints and data while making explorer FK
+    label resolution reliable for single-column lookups.
+    """
+    if not table_exists(conn, table):
+        return
+
+    pk_columns = [row["name"] for row in conn.execute(f'PRAGMA table_info("{table}")').fetchall() if int(row["pk"]) > 0]
+    if len(pk_columns) == 1:
+        return
+
+    backup_table = f"{table}_legacy_pk_migrate"
+    if table_exists(conn, backup_table):
+        raise RuntimeError(f"Schema migration blocked: found unexpected table '{backup_table}'")
+
+    if conn.in_transaction:
+        conn.commit()
+
+    fk_on = int(conn.execute("PRAGMA foreign_keys").fetchone()[0] or 0)
+    if fk_on:
+        conn.execute("PRAGMA foreign_keys = OFF;")
+
+    quoted_table = f'"{table}"'
+    quoted_backup = f'"{backup_table}"'
+    col_sql = ", ".join(f'"{col}"' for col in copy_columns)
+
+    try:
+        conn.execute("BEGIN;")
+        conn.execute(f'ALTER TABLE {quoted_table} RENAME TO {quoted_backup};')
+        conn.execute(create_sql)
+        conn.execute(f'INSERT INTO "{table}" ({col_sql}) SELECT {col_sql} FROM {quoted_backup};')
+        conn.execute(f'DROP TABLE {quoted_backup};')
+        for idx_sql in index_sqls or ():
+            conn.execute(idx_sql)
+        conn.execute("COMMIT;")
+    except Exception:
+        try:
+            conn.execute("ROLLBACK;")
+        except sqlite3.Error:
+            pass
+        raise
+    finally:
+        if fk_on:
+            conn.execute("PRAGMA foreign_keys = ON;")
+
+
+def ensure_surrogate_pk_compat(conn: sqlite3.Connection) -> None:
+    migrations: list[dict[str, Any]] = [
+        {
+            "table": "person_identifiers",
+            "create_sql": """
+            CREATE TABLE person_identifiers (
+              person_identifier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
+              namespace TEXT NOT NULL,
+              value TEXT NOT NULL,
+              created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+              UNIQUE (namespace, value)
+            )
+            """,
+            "copy_columns": ["person_id", "namespace", "value", "created_at"],
+        },
+        {
+            "table": "parl_vote_event_initiatives",
+            "create_sql": """
+            CREATE TABLE parl_vote_event_initiatives (
+              parl_vote_event_initiative_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              vote_event_id TEXT NOT NULL REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
+              initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+              link_method TEXT NOT NULL,
+              confidence REAL,
+              evidence_json TEXT,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              UNIQUE (vote_event_id, initiative_id, link_method)
+            )
+            """,
+            "copy_columns": ["vote_event_id", "initiative_id", "link_method", "confidence", "evidence_json", "created_at", "updated_at"],
+            "index_sqls": [
+                "CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_vote ON parl_vote_event_initiatives(vote_event_id);",
+                "CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_init ON parl_vote_event_initiatives(initiative_id);",
+            ],
+        },
+        {
+            "table": "topic_set_topics",
+            "create_sql": """
+            CREATE TABLE topic_set_topics (
+              topic_set_topic_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              topic_set_id INTEGER NOT NULL REFERENCES topic_sets(topic_set_id) ON DELETE CASCADE,
+              topic_id INTEGER NOT NULL REFERENCES topics(topic_id) ON DELETE CASCADE,
+              stakes_score REAL,
+              stakes_rank INTEGER,
+              is_high_stakes INTEGER NOT NULL DEFAULT 0 CHECK (is_high_stakes IN (0, 1)),
+              notes TEXT,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              UNIQUE (topic_set_id, topic_id)
+            )
+            """,
+            "copy_columns": [
+                "topic_set_id",
+                "topic_id",
+                "stakes_score",
+                "stakes_rank",
+                "is_high_stakes",
+                "notes",
+                "created_at",
+                "updated_at",
+            ],
+            "index_sqls": [
+                "CREATE INDEX IF NOT EXISTS idx_topic_set_topics_topic_id ON topic_set_topics(topic_id);",
+            ],
+        },
+        {
+            "table": "policy_event_axis_scores",
+            "create_sql": """
+            CREATE TABLE policy_event_axis_scores (
+              policy_event_axis_score_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              policy_event_id TEXT NOT NULL REFERENCES policy_events(policy_event_id) ON DELETE CASCADE,
+              policy_axis_id INTEGER NOT NULL REFERENCES policy_axes(policy_axis_id) ON DELETE CASCADE,
+              direction INTEGER CHECK (direction IN (-1, 0, 1)),
+              intensity REAL,
+              confidence REAL,
+              method TEXT NOT NULL,
+              notes TEXT,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              UNIQUE (policy_event_id, policy_axis_id, method)
+            )
+            """,
+            "copy_columns": [
+                "policy_event_id",
+                "policy_axis_id",
+                "direction",
+                "intensity",
+                "confidence",
+                "method",
+                "notes",
+                "created_at",
+                "updated_at",
+            ],
+            "index_sqls": [
+                "CREATE INDEX IF NOT EXISTS idx_policy_event_axis_scores_axis_id ON policy_event_axis_scores(policy_axis_id);",
+            ],
+        },
+        {
+            "table": "intervention_events",
+            "create_sql": """
+            CREATE TABLE intervention_events (
+              intervention_event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              intervention_id INTEGER NOT NULL REFERENCES interventions(intervention_id) ON DELETE CASCADE,
+              policy_event_id TEXT NOT NULL REFERENCES policy_events(policy_event_id) ON DELETE CASCADE,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              UNIQUE (intervention_id, policy_event_id)
+            )
+            """,
+            "copy_columns": ["intervention_id", "policy_event_id", "created_at", "updated_at"],
+            "index_sqls": [
+                "CREATE INDEX IF NOT EXISTS idx_intervention_events_event_id ON intervention_events(policy_event_id);",
+            ],
+        },
+        {
+            "table": "sanction_norm_fragment_links",
+            "create_sql": """
+            CREATE TABLE sanction_norm_fragment_links (
+              sanction_norm_fragment_link_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              norm_id TEXT NOT NULL REFERENCES sanction_norm_catalog(norm_id) ON DELETE CASCADE,
+              fragment_id TEXT NOT NULL REFERENCES legal_norm_fragments(fragment_id) ON DELETE CASCADE,
+              link_reason TEXT,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              UNIQUE (norm_id, fragment_id)
+            )
+            """,
+            "copy_columns": ["norm_id", "fragment_id", "link_reason", "created_at", "updated_at"],
+            "index_sqls": [
+                "CREATE INDEX IF NOT EXISTS idx_sanction_norm_fragment_links_fragment_id ON sanction_norm_fragment_links(fragment_id);",
+            ],
+        },
+    ]
+
+    for migration in migrations:
+        _ensure_single_pk_table(
+            conn,
+            table=migration["table"],
+            create_sql=migration["create_sql"].strip(),
+            copy_columns=migration["copy_columns"],
+            index_sqls=migration.get("index_sqls", []),
+        )
+
+
 def ensure_schema_compat(conn: sqlite3.Connection) -> None:
     compat_columns: dict[str, dict[str, str]] = {
         "person_identifiers": {
@@ -199,6 +393,7 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             ensure_column(conn, table, column, definition_sql)
 
     ensure_text_documents_allow_duplicate_urls(conn)
+    ensure_surrogate_pk_compat(conn)
     conn.commit()
 
 
@@ -303,6 +498,85 @@ def seed_dimensions(conn: sqlite3.Connection) -> None:
             (code, label, ts, ts),
         )
     conn.commit()
+
+
+def upsert_domain(
+    conn: sqlite3.Connection,
+    *,
+    canonical_key_value: str,
+    label: str,
+    description: str | None,
+    tier: int | None,
+    now_iso: str,
+) -> int:
+    key = normalize_ws(canonical_key_value)
+    if not key:
+        raise ValueError("canonical_key_value is required")
+
+    row = conn.execute(
+        """
+        INSERT INTO domains (canonical_key, label, description, tier, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?)
+        ON CONFLICT(canonical_key) DO UPDATE SET
+          label=excluded.label,
+          description=excluded.description,
+          tier=excluded.tier,
+          updated_at=excluded.updated_at
+        RETURNING domain_id
+        """,
+        (
+            key,
+            normalize_ws(label) or key,
+            description,
+            tier,
+            now_iso,
+            now_iso,
+        ),
+    ).fetchone()
+    if row is None:
+        raise RuntimeError("No se pudo resolver domain_id")
+    return int(row["domain_id"])
+
+
+def upsert_policy_axis(
+    conn: sqlite3.Connection,
+    *,
+    domain_id: int,
+    canonical_key_value: str,
+    label: str,
+    description: str | None,
+    axis_order: int | None,
+    now_iso: str,
+) -> int:
+    key = normalize_ws(canonical_key_value)
+    if not key:
+        raise ValueError("canonical_key_value is required")
+    axis_label = normalize_ws(label) or key
+
+    row = conn.execute(
+        """
+        INSERT INTO policy_axes (domain_id, canonical_key, label, description, axis_order, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(domain_id, canonical_key) DO UPDATE SET
+          label=excluded.label,
+          description=excluded.description,
+          axis_order=excluded.axis_order,
+          updated_at=excluded.updated_at
+        RETURNING policy_axis_id
+        """,
+        (
+            domain_id,
+            key,
+            axis_label,
+            description,
+            axis_order,
+            now_iso,
+            now_iso,
+        ),
+    ).fetchone()
+    if row is None:
+        raise RuntimeError("No se pudo resolver policy_axis_id")
+    return int(row["policy_axis_id"])
 
 
 def upsert_admin_level(conn: sqlite3.Connection, code: str, now_iso: str) -> int | None:

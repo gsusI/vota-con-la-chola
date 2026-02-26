@@ -113,6 +113,102 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Source IDs money (PLACSP/BDNS) a mapear",
     )
 
+    backfill_money_staging = subparsers.add_parser(
+        "backfill-money-staging",
+        help="Mapea source_records de PLACSP/BDNS a money_contract_records y money_subsidy_records",
+    )
+    backfill_money_staging.add_argument(
+        "--db",
+        default=str(DEFAULT_DB),
+        help="Ruta al archivo SQLite",
+    )
+    backfill_money_staging.add_argument(
+        "--source-ids",
+        nargs="+",
+        default=["placsp_sindicacion", "placsp_autonomico", "bdns_api_subvenciones", "bdns_autonomico"],
+        help="Source IDs money (PLACSP/BDNS) a mapear",
+    )
+
+    backfill_money_contract_records = subparsers.add_parser(
+        "backfill-money-contract-records",
+        help="Mapea source_records de PLACSP a money_contract_records",
+    )
+    backfill_money_contract_records.add_argument(
+        "--db",
+        default=str(DEFAULT_DB),
+        help="Ruta al archivo SQLite",
+    )
+    backfill_money_contract_records.add_argument(
+        "--source-ids",
+        nargs="+",
+        default=["placsp_sindicacion", "placsp_autonomico"],
+        help="Source IDs money de contratos a mapear",
+    )
+
+    backfill_placsp_contract_details = subparsers.add_parser(
+        "backfill-placsp-contract-details",
+        help="Descarga y extrae detalle estructurado de PLACSP desde páginas de detalle de licitación",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--db",
+        default=str(DEFAULT_DB),
+        help="Ruta al archivo SQLite",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--raw-dir",
+        default=str(DEFAULT_RAW_DIR),
+        help="Directorio raw para guardar HTML de detalle PLACSP",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--source-ids",
+        nargs="+",
+        default=["placsp_sindicacion", "placsp_autonomico"],
+        help="Source IDs PLACSP a procesar",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Maximo número de source_records a procesar",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--only-missing",
+        action="store_true",
+        help="Solo procesa source_records sin registro en placsp_contract_detail_records",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--timeout",
+        type=int,
+        default=45,
+        help="Timeout HTTP en segundos para la descarga de detalle",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--strict-network",
+        action="store_true",
+        help="Si falla red o parseo, aborta en vez de saltar filas con warnings",
+    )
+    backfill_placsp_contract_details.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Parsea y reporta sin escribir en DB ni guardar raw",
+    )
+
+    backfill_money_subsidy_records = subparsers.add_parser(
+        "backfill-money-subsidy-records",
+        help="Mapea source_records de BDNS a money_subsidy_records",
+    )
+    backfill_money_subsidy_records.add_argument(
+        "--db",
+        default=str(DEFAULT_DB),
+        help="Ruta al archivo SQLite",
+    )
+    backfill_money_subsidy_records.add_argument(
+        "--source-ids",
+        nargs="+",
+        default=["bdns_api_subvenciones", "bdns_autonomico"],
+        help="Source IDs money de subvenciones a mapear",
+    )
+
     backfill_indicators = subparsers.add_parser(
         "backfill-indicators",
         help="Armoniza source_records de Eurostat/BDE/AEMET hacia indicator_series/indicator_points/observation_records",
@@ -352,6 +448,129 @@ def cmd_backfill_policy_events_money(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_backfill_money_staging(args: argparse.Namespace) -> int:
+    from .policy_events import backfill_money_staging  # noqa: PLC0415
+
+    db_path = Path(args.db)
+    if not db_path.exists():
+        print(f"Base no encontrada: {db_path}", file=sys.stderr)
+        return 2
+
+    source_ids = tuple(str(s).strip() for s in (args.source_ids or []) if str(s).strip())
+    if not source_ids:
+        print("Debe indicar al menos un source_id", file=sys.stderr)
+        return 2
+
+    conn = open_db(db_path)
+    try:
+        apply_schema(conn, DEFAULT_SCHEMA)
+        seed_sources(conn)
+        seed_dimensions(conn)
+        result = backfill_money_staging(conn, source_ids=source_ids)
+    finally:
+        conn.close()
+
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_backfill_money_contract_records(args: argparse.Namespace) -> int:
+    from .policy_events import backfill_money_contract_records  # noqa: PLC0415
+
+    db_path = Path(args.db)
+    if not db_path.exists():
+        print(f"Base no encontrada: {db_path}", file=sys.stderr)
+        return 2
+
+    source_ids = tuple(str(s).strip() for s in (args.source_ids or []) if str(s).strip())
+    if not source_ids:
+        print("Debe indicar al menos un source_id", file=sys.stderr)
+        return 2
+
+    conn = open_db(db_path)
+    try:
+        apply_schema(conn, DEFAULT_SCHEMA)
+        seed_sources(conn)
+        seed_dimensions(conn)
+        result = backfill_money_contract_records(conn, source_ids=source_ids)
+    finally:
+        conn.close()
+
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_backfill_placsp_contract_details(args: argparse.Namespace) -> int:
+    from .policy_events import backfill_placsp_contract_details  # noqa: PLC0415
+
+    db_path = Path(args.db)
+    if not db_path.exists():
+        print(f"Base no encontrada: {db_path}", file=sys.stderr)
+        return 2
+
+    source_ids = tuple(str(s).strip() for s in (args.source_ids or []) if str(s).strip())
+    if not source_ids:
+        print("Debe indicar al menos un source_id", file=sys.stderr)
+        return 2
+
+    raw_dir = Path(args.raw_dir)
+    timeout = int(args.timeout)
+    if timeout <= 0:
+        print("timeout debe ser > 0", file=sys.stderr)
+        return 2
+    limit = args.limit
+    if limit is not None and limit <= 0:
+        print("limit debe ser > 0", file=sys.stderr)
+        return 2
+
+    conn = open_db(db_path)
+    try:
+        apply_schema(conn, DEFAULT_SCHEMA)
+        seed_sources(conn)
+        seed_dimensions(conn)
+        result = backfill_placsp_contract_details(
+            conn,
+            raw_dir=raw_dir,
+            source_ids=source_ids,
+            limit=limit,
+            only_missing=bool(args.only_missing),
+            strict_network=bool(args.strict_network),
+            timeout=timeout,
+            dry_run=bool(args.dry_run),
+        )
+    finally:
+        conn.close()
+
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_backfill_money_subsidy_records(args: argparse.Namespace) -> int:
+    from .policy_events import backfill_money_subsidy_records  # noqa: PLC0415
+
+    db_path = Path(args.db)
+    if not db_path.exists():
+        print(f"Base no encontrada: {db_path}", file=sys.stderr)
+        return 2
+
+    source_ids = tuple(str(s).strip() for s in (args.source_ids or []) if str(s).strip())
+    if not source_ids:
+        print("Debe indicar al menos un source_id", file=sys.stderr)
+        return 2
+
+    conn = open_db(db_path)
+    try:
+        apply_schema(conn, DEFAULT_SCHEMA)
+        seed_sources(conn)
+        seed_dimensions(conn)
+        result = backfill_money_subsidy_records(conn, source_ids=source_ids)
+    finally:
+        conn.close()
+
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
 def cmd_backfill_indicators(args: argparse.Namespace) -> int:
     from .indicator_backfill import backfill_indicator_harmonization  # noqa: PLC0415
 
@@ -556,6 +775,14 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_backfill_policy_events_boe(args)
     if args.command == "backfill-policy-events-money":
         return cmd_backfill_policy_events_money(args)
+    if args.command == "backfill-money-staging":
+        return cmd_backfill_money_staging(args)
+    if args.command == "backfill-money-contract-records":
+        return cmd_backfill_money_contract_records(args)
+    if args.command == "backfill-placsp-contract-details":
+        return cmd_backfill_placsp_contract_details(args)
+    if args.command == "backfill-money-subsidy-records":
+        return cmd_backfill_money_subsidy_records(args)
     if args.command == "backfill-indicators":
         return cmd_backfill_indicators(args)
     if args.command == "export-run-snapshot":

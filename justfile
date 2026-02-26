@@ -39,8 +39,16 @@ gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
 gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
 gh_pages_next_app_dir := env_var_or_default("GH_PAGES_NEXT_APP_DIR", "ui/gh-pages-next")
 gh_pages_next_out_dir := env_var_or_default("GH_PAGES_NEXT_OUT_DIR", "ui/gh-pages-next/out")
+gh_pages_next_port := env_var_or_default("GH_PAGES_NEXT_PORT", "3000")
+gh_pages_next_container := env_var_or_default("GH_PAGES_NEXT_CONTAINER", "vota-gh-pages-next")
+gh_pages_next_docker_image := env_var_or_default("GH_PAGES_NEXT_DOCKER_IMAGE", "node:22-alpine")
+gh_pages_next_node_modules_volume := env_var_or_default("GH_PAGES_NEXT_NODE_MODULES_VOLUME", "vota-gh-pages-next-node_modules")
+gh_pages_next_next_dir_volume := env_var_or_default("GH_PAGES_NEXT_NEXT_DIR_VOLUME", "vota-gh-pages-next-nextdir")
+gh_pages_next_prime_export := env_var_or_default("GH_PAGES_NEXT_PRIME_EXPORT", "1")
 gh_pages_next_base_path := env_var_or_default("GH_PAGES_NEXT_BASE_PATH", "/vota-con-la-chola")
 topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds/topic_taxonomy_es.json")
+domain_taxonomy_seed := env_var_or_default("DOMAIN_TAXONOMY_SEED", "docs/domain_taxonomy_es.md")
+policy_axes_tier1_seed := env_var_or_default("POLICY_AXES_TIER1_SEED", "docs/codebook_tier1_es.md")
 textdoc_limit := env_var_or_default("TEXTDOC_LIMIT", "900")
 textdoc_timeout := env_var_or_default("TEXTDOC_TIMEOUT", "25")
 initdoc_limit := env_var_or_default("INITDOC_LIMIT", "200")
@@ -1040,6 +1048,18 @@ etl-backfill-policy-events-moncloa:
 etl-backfill-policy-events-boe:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-policy-events-boe --db {{db_path}}"
 
+etl-backfill-policy-events-money:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-policy-events-money --db {{db_path}}"
+
+etl-backfill-money-staging:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-money-staging --db {{db_path}}"
+
+etl-backfill-money-contract-records:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-money-contract-records --db {{db_path}}"
+
+etl-backfill-money-subsidy-records:
+  docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-money-subsidy-records --db {{db_path}}"
+
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 
@@ -1410,6 +1430,16 @@ parl-validate-sanction-data-catalog-seed:
 
 parl-import-sanction-data-catalog-seed:
   PYTHONPATH=. python3 scripts/import_sanction_data_catalog_seed.py --db {{db_path}} --seed {{sanction_data_catalog_seed}} --snapshot-date {{snapshot_date}} --source-id {{sanction_data_catalog_source_id}} --out {{sanction_data_catalog_import_out}}
+
+parl-import-domain-taxonomy-seed:
+  PYTHONPATH=. python3 scripts/import_domain_taxonomy_seed.py --db {{db_path}} --doc {{domain_taxonomy_seed}} --snapshot-date {{snapshot_date}}
+
+parl-import-policy-axes-tier1-seed:
+  PYTHONPATH=. python3 scripts/import_policy_axes_seed.py --db {{db_path}} --doc {{policy_axes_tier1_seed}} --snapshot-date {{snapshot_date}}
+
+parl-import-public-policy-taxonomy-seed:
+  just parl-import-domain-taxonomy-seed
+  just parl-import-policy-axes-tier1-seed
 
 parl-report-sanction-data-catalog-status:
   PYTHONPATH=. python3 scripts/report_sanction_data_catalog_status.py --db {{db_path}} --sample-limit {{sanction_data_catalog_status_sample_limit}} --out {{sanction_data_catalog_status_out}}
@@ -2519,6 +2549,165 @@ graph-ui-stop:
   docker compose stop graph-ui
   docker compose rm -f graph-ui
 
+gh-pages-next-stop:
+  docker rm -f {{gh_pages_next_container}} >/tmp/vota-gh-pages-next-stop.log 2>&1 || true
+
+gh-pages-next:
+  @just gh-pages-next-watch
+
+gh-pages-next-watch:
+  @just gh-pages-next-stop
+  @just gh-pages-next-prime
+  docker run --rm \
+    -p "{{gh_pages_next_port}}:{{gh_pages_next_port}}" \
+    -v "${PWD}:/workspace" \
+    -w /workspace/{{gh_pages_next_app_dir}} \
+    --name {{gh_pages_next_container}} \
+    --volume "{{gh_pages_next_node_modules_volume}}:/workspace/{{gh_pages_next_app_dir}}/node_modules" \
+    --volume "{{gh_pages_next_next_dir_volume}}:/workspace/{{gh_pages_next_app_dir}}/.next" \
+    {{gh_pages_next_docker_image}} \
+    sh -lc 'set -eu; \
+      clear_mount_dir() { \
+        target="$1"; \
+        mkdir -p "$target"; \
+        find "$target" -mindepth 1 -maxdepth 1 -exec rm -rf {} +; \
+      }; \
+      hash_file() { \
+        md5sum "$1" | tr -s " " | cut -d " " -f 1; \
+      }; \
+      DEPS_SUM_FILE="node_modules/.deps-sum"; \
+      if [ -f "package-lock.json" ]; then \
+        DEPS_SUM="$(hash_file package-lock.json)"; \
+        if [ ! -d node_modules ] || [ ! -f "$DEPS_SUM_FILE" ] || [ "$DEPS_SUM" != "$(cat "$DEPS_SUM_FILE")" ]; then \
+          clear_mount_dir node_modules; \
+          clear_mount_dir .next; \
+          npm ci --no-audit --no-fund; \
+          printf "%s" "$DEPS_SUM" > "$DEPS_SUM_FILE"; \
+        fi; \
+      else \
+        DEPS_SUM="$(hash_file package.json)"; \
+        if [ ! -d node_modules ] || [ ! -f "$DEPS_SUM_FILE" ] || [ "$DEPS_SUM" != "$(cat "$DEPS_SUM_FILE")" ]; then \
+          clear_mount_dir node_modules; \
+          clear_mount_dir .next; \
+          npm install --no-audit --no-fund; \
+          printf "%s" "$DEPS_SUM" > "$DEPS_SUM_FILE"; \
+        fi; \
+      fi; \
+      npm run dev -- --hostname 0.0.0.0 --port {{gh_pages_next_port}}'
+
+gh-pages-next-prime:
+  mkdir -p "{{gh_pages_dir}}"/parliamentary-accountability/data
+  mkdir -p "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data"
+  mkdir -p "{{gh_pages_dir}}"/people/data
+  mkdir -p "{{gh_pages_next_app_dir}}/public/people/data"
+  mkdir -p "{{gh_pages_dir}}"/initiative-lifecycle/data
+  mkdir -p "{{gh_pages_next_app_dir}}/public/initiative-lifecycle/data"
+  mkdir -p "{{gh_pages_dir}}"/political-positions/data
+  mkdir -p "{{gh_pages_next_app_dir}}/public/political-positions/data"
+  mkdir -p "{{gh_pages_dir}}"/elections-behavior/data
+  mkdir -p "{{gh_pages_next_app_dir}}"/public/elections-behavior/data
+  mkdir -p "{{gh_pages_dir}}"/legal-sanctions/data
+  mkdir -p "{{gh_pages_next_app_dir}}"/public/legal-sanctions/data
+  mkdir -p "{{gh_pages_dir}}"/policy-outcomes/data
+  mkdir -p "{{gh_pages_next_app_dir}}"/public/policy-outcomes/data
+  if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
+    python3 scripts/export_parliamentary_accountability_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
+  elif [ ! -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
+    printf '%s\n' \
+      '{"meta":{"generated_at":"dev-local-stub","total_events":0},"parties":[],"discipline":{"members":[],"parties":[],"parties_by_legislature":[],"attendance_by_member_context":[],"attendance_by_party_context":[]},"outcomes":{"summary":{"passed":0,"failed":0,"tied":0,"no_signal":0},"critical_by_margin":[]},"coalitions":{"pairs":[],"issue_coalitions":[]}}' \
+      > "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
+  fi
+  if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
+    python3 scripts/export_initiative_lifecycle_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+      --max-initiatives 200 \
+      --max-votes-per-initiative 80 \
+      --min-committee-sample 4; \
+  elif [ ! -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
+    printf '%s\n' \
+      '{"meta":{"generated_at":"dev-local-stub","total_initiatives":0,"linked_initiatives":0,"unlinked_initiatives":0,"total_vote_links":0},"filters":{"source_ids":[],"committees":[],"legislatures":[],"status_buckets":[],"link_methods":[]},"initiative_overview":{"linked_initiatives":0,"unlinked_initiatives":0,"confidence_distribution":{"high":0,"medium":0,"low":0,"none":0},"global_confidence":{"high":0,"medium":0,"low":0,"none":0},"link_methods":{}}, "bottlenecks":{"committee_by_throughput":[]}, "initiatives":[]}' \
+      > "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json"; \
+  fi
+  if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
+    mkdir -p "{{gh_pages_dir}}/people/data"; \
+    python3 scripts/export_people_profiles_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/people/data/profiles.json" \
+      --snapshot-date "{{snapshot_date}}"; \
+    python3 scripts/export_people_xray_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/people/data/xray.json" \
+      --snapshot-date "{{snapshot_date}}"; \
+    python3 scripts/export_political_positions_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/political-positions/data/stances.json" \
+      --snapshot-date "{{snapshot_date}}"; \
+    python3 scripts/export_elections_behavior_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
+      --window-days 365 \
+      --min-directional-votes 18; \
+    python3 scripts/export_legal_sanctions_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
+    python3 scripts/export_policy_outcomes_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
+  fi
+  if [ ! -f "{{gh_pages_dir}}/people/data/xray.json" ]; then \
+    printf '%s\n' \
+      '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","source_snapshot":"{{snapshot_date}}","top_members":24,"include_party_proxies":0,"group_count":{"party":0,"institution":0,"ambito":0,"territorio":0,"cargo":0}},"kinds":["party","institution","ambito","territorio","cargo"],"groups":{"party":[],"institution":[],"ambito":[],"territorio":[],"cargo":[]}, "group_index":{"party":{},"institution":{},"ambito":{},"territorio":{},"cargo":{}}}' \
+      > "{{gh_pages_dir}}/people/data/xray.json"; \
+  fi
+  if [ ! -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
+    printf '%s\n' \
+      '{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","schema_version":"legal_sanctions_snapshot_v1","meta":{"norm_nodes":0,"lineage_edges":0,"infraction_type_count":0,"infraction_mappings":0,"volume_rows":0,"kpi_rows":0,"municipal_rows":0},"filters":{"source_ids":[],"relation_types":[],"infraction_type_ids":[],"kpi_ids":[],"periods":[]},"legal_graph":{"nodes":[],"edges":[],"node_count":0,"edge_count":0,"relation_types":[],"nodes_with_fragments":0},"infraction_network":{"infraction_types":[],"mappings":[]},"sanction_volume_monitoring":{"series":[],"source_totals":[],"sources":[],"periods":[]},"procedural_kpi_drift":[],"municipal_monitoring":{"summary":{"total_ordinances":0,"normalized_ordinances":0,"identified_ordinances":0,"blocked_ordinances":0,"status_counts":[]},"city_summary":[],"ordinance_rows":[]},"responsibility_summary":{"roles":[],"top_actors":[],"rows_with_primary_evidence":0,"rows_total":0},"liberty_restriction_monitoring":{"enabled":false,"rows":0}}' \
+      > "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
+  fi
+  if [ ! -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
+    printf '%s\n' \
+      '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","generated_by":"gh-pages-next-prime","filters":{}}, "coverage":{"indicator_series_total":0,"indicator_points_total":0,"interventions_total":0,"intervention_events_total":0,"causal_estimates_total":0,"policy_events_total":0,"series_loaded":0,"events_loaded":0,"events_in_association":0,"associations_total":0,"series_in_association":0,"series_by_source":{},"series_coverage_by_point_count":{"min_points_included":0,"max_points_included":0}}, "series":[],"policy_events":[],"associations":[],"limitations":{"interventions_available":false,"intervention_events_available":false,"causal_estimates_available":false,"description":["Stub temporal: sin snapshot generado en modo local sin export"],"method_note":"Correlación no implica causalidad."},"filters":{"series_source_ids":[],"event_source_ids":[],"domains":[]}}' \
+      > "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
+    cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
+      "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
+    cp -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+      "{{gh_pages_next_app_dir}}/public/initiative-lifecycle/data/lifecycle.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/people/data/profiles.json" ]; then \
+    for src in "{{gh_pages_dir}}"/people/data/*.json; do \
+      [ -f "$src" ] || continue; \
+      cp -f "$src" "{{gh_pages_next_app_dir}}/public/people/data/"; \
+    done; \
+  fi
+  if [ -f "{{gh_pages_dir}}/political-positions/data/stances.json" ]; then \
+    cp -f "{{gh_pages_dir}}/political-positions/data/stances.json" \
+      "{{gh_pages_next_app_dir}}/public/political-positions/data/stances.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" ]; then \
+    cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
+      "{{gh_pages_next_app_dir}}/public/elections-behavior/data/elections-behavior.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
+    cp -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" \
+      "{{gh_pages_next_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
+    cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" \
+      "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"; \
+  fi
+  if [ -d "{{gh_pages_dir}}/legacy" ]; then \
+    mkdir -p "{{gh_pages_next_app_dir}}/public"; \
+    cp -R "{{gh_pages_dir}}"/legacy "{{gh_pages_next_app_dir}}/public/" || true; \
+    cp -R "{{gh_pages_dir}}"/parliamentary-accountability "{{gh_pages_next_app_dir}}/public/" 2>/dev/null || true; \
+  fi
+
 # UI: explorador directo (localhost, sin Docker)
 # Single app serving:
 # - /explorer -> interfaz clásica
@@ -2551,7 +2740,7 @@ explorer-bg-watch:
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
   mkdir -p \
     {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
     {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
@@ -2559,6 +2748,13 @@ explorer-gh-pages-build:
     {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data \
     {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data \
     {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data \
+    {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/parliamentary-accountability/data \
+    {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/initiative-lifecycle/data \
+    {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/political-positions/data \
+    {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elections-behavior/data \
+    {{gh_pages_dir}}/people {{gh_pages_dir}}/people/data \
+    {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/legal-sanctions/data \
+    {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/policy-outcomes/data \
     {{gh_pages_dir}}/legacy {{gh_pages_dir}}/legacy/citizen {{gh_pages_dir}}/legacy/citizen/data \
     {{gh_pages_dir}}/legacy/graph {{gh_pages_dir}}/legacy/graph/data \
     {{gh_pages_dir}}/legacy/explorer {{gh_pages_dir}}/legacy/explorer-sources \
@@ -2594,6 +2790,41 @@ explorer-gh-pages-build:
     --db "{{db_path}}" \
     --limit 200 \
     --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
+  python3 scripts/export_parliamentary_accountability_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
+    --max-rows-events 700 \
+    --min-shared-events 12 \
+    --min-events-per-party 12 \
+    --min-events-topic-pairs 8
+  python3 scripts/export_initiative_lifecycle_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+    --min-committee-sample 6
+  python3 scripts/export_political_positions_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/political-positions/data/stances.json" \
+    --topic-set-id 1 \
+    --snapshot-date "{{snapshot_date}}"
+  python3 scripts/export_elections_behavior_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
+    --window-days 365 \
+    --min-directional-votes 18
+  python3 scripts/export_legal_sanctions_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"
+  python3 scripts/export_policy_outcomes_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"
+  python3 scripts/export_people_profiles_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/people/data/profiles.json" \
+    --snapshot-date {{snapshot_date}}
+  python3 scripts/export_people_xray_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/people/data/xray.json" \
+    --snapshot-date {{snapshot_date}}
   python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
@@ -2641,6 +2872,13 @@ explorer-gh-pages-build:
     --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
     --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json"
   cp "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json" "{{gh_pages_dir}}/legacy/citizen/data/concern_pack_quality.json"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/legal-sanctions/data"
+  cp -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" "{{gh_pages_next_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"
+  cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json"
+  cp -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" "{{gh_pages_next_app_dir}}/public/initiative-lifecycle/data/lifecycle.json"
+  cp -f "{{gh_pages_dir}}/political-positions/data/stances.json" "{{gh_pages_next_app_dir}}/public/political-positions/data/stances.json"
+  cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" "{{gh_pages_next_app_dir}}/public/elections-behavior/data/elections-behavior.json"
+  cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/legacy/graph/data/ideal.json"
   just privacy-check-public-artifacts
