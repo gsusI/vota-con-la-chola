@@ -28,6 +28,16 @@ def _parse_json_maybe(text: str | None) -> Any | None:
         return None
 
 
+def _public_source_url(raw_url: Any) -> str | None:
+    value = str(raw_url or "").strip()
+    if not value:
+        return None
+    # Public snapshots must not leak local filesystem paths from sample/fallback runs.
+    if value.lower().startswith("file://"):
+        return None
+    return value
+
+
 def _event_source_hash(row: sqlite3.Row) -> str:
     source_hash = str(row["event_source_hash"] or "").strip()
     if source_hash:
@@ -168,7 +178,7 @@ def build_votaciones_snapshot(
                     "source_id": source_id,
                     "source_record_id": r["event_source_record_id"],
                     "source_snapshot_date": r["source_snapshot_date"],
-                    "source_url": r["source_url"],
+                    "source_url": _public_source_url(r["source_url"]),
                     "source_hash": _event_source_hash(r),
                     "source_record_pk": r["source_record_pk"],
                 },
@@ -237,7 +247,7 @@ def build_votaciones_snapshot(
                             "source_id": str(r["initiative_source_id"]),
                             "source_record_id": r["initiative_source_record_id"],
                             "source_snapshot_date": r["initiative_source_snapshot_date"],
-                            "source_url": r["initiative_source_url"],
+                            "source_url": _public_source_url(r["initiative_source_url"]),
                             "source_hash": _initiative_source_hash(r),
                             "source_record_pk": r["initiative_source_record_pk"],
                         },
@@ -293,7 +303,7 @@ def build_votaciones_snapshot(
                         "vote_choice": r["vote_choice"],
                         "source": {
                             "source_id": r["source_id"],
-                            "source_url": r["source_url"],
+                            "source_url": _public_source_url(r["source_url"]),
                             "source_snapshot_date": r["source_snapshot_date"],
                             "source_hash": _sha256_text(raw_payload),
                             "source_record_pk": None,

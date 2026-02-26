@@ -7,6 +7,7 @@ import sqlite3
 from typing import Any
 
 from .util import normalize_key_part, normalize_ws, now_utc_iso, parse_date_flexible, sha256_bytes, stable_json
+from .policy_events import _domain_id_by_canonical_key, _infer_policy_event_domain_key
 
 
 INDICATOR_SOURCE_IDS = ("eurostat_sdmx", "bde_series_api", "aemet_opendata_series")
@@ -131,6 +132,39 @@ def _series_methodology_version(metadata_version: str | None, snapshot_date: str
     return "snapshot:unknown"
 
 
+def _infer_indicator_series_domain_key(
+    *,
+    source_id: str,
+    series_label: str,
+    series_code: str,
+    dataset_code: str,
+    raw_payload: dict[str, Any],
+) -> str | None:
+    explicit_key = normalize_ws(
+        str(
+            raw_payload.get("domain_key")
+            or raw_payload.get("domain_canonical_key")
+            or raw_payload.get("policy_domain_key")
+            or ""
+        )
+    )
+    if explicit_key:
+        return explicit_key
+
+    if source_id == "eurostat_sdmx":
+        dataset_key = normalize_ws(str(dataset_code or "")).lower()
+        if dataset_key == "une_rt_a":
+            return "proteccion_social_pensiones"
+
+    return _infer_policy_event_domain_key(
+        source_id=source_id,
+        title=series_label,
+        summary=f"{series_code} {dataset_code}".strip(),
+        source_url=None,
+        raw_payload=raw_payload,
+    )
+
+
 def _series_canonical_key(
     *,
     source_id: str,
@@ -227,6 +261,8 @@ def backfill_indicator_harmonization(
         "source_records_mapped": 0,
         "source_records_skipped": 0,
         "indicator_series_upserted": 0,
+        "indicator_series_with_domain_id": 0,
+        "indicator_series_unresolved_domain": 0,
         "indicator_points_upserted": 0,
         "indicator_points_deleted_stale": 0,
         "observation_records_upserted": 0,
@@ -234,6 +270,7 @@ def backfill_indicator_harmonization(
         "points_skipped_unparseable_date": 0,
         "skips": [],
     }
+    domain_cache: dict[str, int | None] = {}
 
     placeholders = ",".join("?" for _ in source_ids)
     rows = conn.execute(
@@ -361,6 +398,28 @@ def backfill_indicator_harmonization(
             )
             continue
 
+        dataset_code = normalize_ws(str(payload.get("dataset_code") or ""))
+        domain_key = _infer_indicator_series_domain_key(
+            source_id=source_id,
+            series_label=series_label,
+            series_code=series_code,
+            dataset_code=dataset_code,
+            raw_payload=payload,
+        )
+        domain_id = _domain_id_by_canonical_key(conn, domain_cache, domain_key)
+        if domain_id is None:
+            stats["indicator_series_unresolved_domain"] += 1
+            stats["skips"].append(
+                {
+                    "source_id": source_id,
+                    "source_record_id": source_record_id,
+                    "reason": "unresolved_domain",
+                    "domain_key": domain_key,
+                }
+            )
+        else:
+            stats["indicator_series_with_domain_id"] += 1
+
         series_row = conn.execute(
             """
             INSERT INTO indicator_series (
@@ -378,8 +437,9 @@ def backfill_indicator_harmonization(
               raw_payload,
               created_at,
               updated_at
-            ) VALUES (?, ?, ?, ?, NULL, NULL, NULL, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(canonical_key) DO UPDATE SET
+              domain_id=excluded.domain_id,
               label=excluded.label,
               unit=excluded.unit,
               frequency=excluded.frequency,
@@ -396,6 +456,7 @@ def backfill_indicator_harmonization(
                 series_label,
                 unit,
                 frequency,
+                domain_id,
                 source_id,
                 source_url,
                 source_record_pk,
@@ -616,4 +677,3 @@ def backfill_indicator_harmonization(
     stats["indicator_points_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_point_rows}
     stats["observation_records_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_observation_rows}
     return stats
-
