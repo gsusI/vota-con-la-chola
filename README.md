@@ -24,6 +24,8 @@ Misión:
 - Roadmap técnico (ejecución): `docs/roadmap-tecnico.md`
 - Backlog operativo (conectores + DoD): `docs/etl/e2e-scrape-load-tracker.md`
 - Cómo correr ETL/UI: `docs/etl/README.md`
+- GitHub Pages (sitio público): https://gsusI.github.io/vota-con-la-chola/
+- Hugging Face (dataset público): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
 
 ## Qué hay hoy (MVP)
 
@@ -31,7 +33,7 @@ Misión:
 - Ingesta parlamentaria (Congreso/Senado) para votaciones e iniciativas (con pipeline de calidad en curso).
 - Ingesta inicial de Infoelectoral (procesos/descargas/resultados).
 - Publicación de snapshots canónicos en `etl/data/published/`.
-- Espejo público de snapshots en Hugging Face Datasets (`just etl-publish-hf`).
+- Espejo público de snapshots en Hugging Face Datasets (`just etl-publish-hf`): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
 - UI local para explorar el esquema y la evidencia: `just graph-ui` (ver `docs/etl/README.md`).
 
 ## Fuente de verdad (código)
