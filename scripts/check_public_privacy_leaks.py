@@ -4,14 +4,21 @@
 from __future__ import annotations
 
 import argparse
+import mmap
 import re
+import shutil
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
 
-DEFAULT_SCAN_PATHS = (Path("docs/gh-pages"), Path("etl/data/published"))
+DEFAULT_SCAN_PATHS = (
+    Path("docs/gh-pages"),
+    Path("etl/data/published"),
+    Path("ui/gh-pages-next/public"),
+)
 SKIP_SUFFIXES = {
     ".db",
     ".sqlite",
@@ -31,7 +38,19 @@ LEAK_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("local_user_path", re.compile(r"/Users/[^/\s]+/")),
     ("gdrive_email_segment", re.compile(r"GoogleDrive-[^/\s]+@[^\s/]+")),
     ("email", EMAIL_RE),
+    ("internal_db_path", re.compile(r'"db_path"\s*:\s*"[^"\r\n]+"')),
 )
+LEAK_PREFILTERS: dict[str, tuple[str, ...]] = {
+    "local_file_url": ("file:///Users/",),
+    "local_user_path": ("/Users/",),
+    "gdrive_email_segment": ("GoogleDrive-", "@"),
+    "email": ("@",),
+    "internal_db_path": ('"db_path"',),
+}
+LEAK_SENTINELS = tuple(sorted({token for tokens in LEAK_PREFILTERS.values() for token in tokens}))
+LEAK_SENTINEL_BYTES = tuple(token.encode("utf-8") for token in LEAK_SENTINELS)
+LEAK_SENTINEL_BYTES_RE = re.compile(b"|".join(re.escape(token) for token in LEAK_SENTINEL_BYTES))
+LARGE_FILE_PREFILTER_BYTES = 1024 * 1024
 
 
 @dataclass
@@ -80,6 +99,10 @@ def read_text_file(path: Path) -> str | None:
         return None
 
 
+def file_is_scannable(path: Path) -> bool:
+    return path.suffix.lower() not in SKIP_SUFFIXES
+
+
 def build_snippet(text: str, start: int, end: int, radius: int = 64) -> str:
     left = max(0, start - radius)
     right = min(len(text), end + radius)
@@ -89,15 +112,65 @@ def build_snippet(text: str, start: int, end: int, radius: int = 64) -> str:
     return snippet
 
 
+def may_contain_leak_candidate(text: str) -> bool:
+    return any(token in text for token in LEAK_SENTINELS)
+
+
+def should_scan_pattern(text: str, kind: str) -> bool:
+    return all(token in text for token in LEAK_PREFILTERS.get(kind, ()))
+
+
+def collect_rg_candidate_paths(paths: list[Path]) -> set[str] | None:
+    if shutil.which("rg") is None:
+        return None
+    scan_roots = [str(path) for path in paths if path.exists()]
+    if not scan_roots:
+        return set()
+    cmd = ["rg", "--files-with-matches", "--fixed-strings", "--no-messages"]
+    for token in LEAK_SENTINELS:
+        cmd.extend(["-e", token])
+    cmd.extend(["--", *scan_roots])
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    except OSError:
+        return None
+    if result.returncode not in (0, 1):
+        return None
+    return {line.strip() for line in result.stdout.splitlines() if line.strip()}
+
+
+def large_file_may_contain_leak_candidate(path: Path) -> bool:
+    try:
+        if path.stat().st_size <= LARGE_FILE_PREFILTER_BYTES:
+            return True
+        with path.open("rb") as handle:
+            with mmap.mmap(handle.fileno(), 0, access=mmap.ACCESS_READ) as payload:
+                return LEAK_SENTINEL_BYTES_RE.search(payload) is not None
+    except (OSError, ValueError):
+        return False
+
+
 def collect_findings(paths: list[Path]) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     files_scanned = 0
+    rg_candidate_paths = collect_rg_candidate_paths(paths)
     for file_path in iter_files(paths):
+        if not file_is_scannable(file_path):
+            continue
+        files_scanned += 1
+        if rg_candidate_paths is not None:
+            if str(file_path) not in rg_candidate_paths:
+                continue
+        elif not large_file_may_contain_leak_candidate(file_path):
+            continue
         text = read_text_file(file_path)
         if text is None:
             continue
-        files_scanned += 1
+        if not may_contain_leak_candidate(text):
+            continue
         for kind, pattern in LEAK_PATTERNS:
+            if not should_scan_pattern(text, kind):
+                continue
             for match in pattern.finditer(text):
                 line = text.count("\n", 0, match.start()) + 1
                 findings.append(
