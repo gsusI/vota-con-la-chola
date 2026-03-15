@@ -40,6 +40,7 @@ def main() -> int:
         limit=int(args.limit),
         include_inactive=bool(args.include_inactive),
     )
+    payload = g.sanitize_public_payload(payload)
 
     out_path.write_text(json.dumps(payload, ensure_ascii=True, indent=2), encoding="utf-8")
     meta = payload.get("meta") or {}
@@ -51,4 +52,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

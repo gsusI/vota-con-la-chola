@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
+  return process.env.NEXT_PUBLIC_BASE_PATH || "";
 }
 
 function withBasePath(path) {
@@ -385,7 +385,7 @@ export default function PolicyOutcomesPage() {
           frente a eventos de política pública.
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Publicación: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
           <span className="chip">Series exportadas: {formatInt(coverage.series_loaded || 0)}</span>
           <span className="chip">Puntos: {formatInt(coverage.indicator_points_total || 0)}</span>
           <span className="chip">Eventos: {formatInt(coverage.events_loaded || 0)}</span>

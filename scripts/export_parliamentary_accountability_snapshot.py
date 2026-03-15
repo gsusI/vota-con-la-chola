@@ -1408,6 +1408,17 @@ def assemble_output(
     }
 
 
+def sanitize_accountability_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    repo_root = Path(__file__).resolve().parent.parent
+    if str(repo_root) not in sys.path:
+        sys.path.insert(0, str(repo_root))
+
+    from scripts import graph_ui_server as g  # noqa: WPS433
+
+    sanitized = g.sanitize_public_payload(payload)
+    return sanitized if isinstance(sanitized, dict) else {}
+
+
 def main() -> int:
     args = parse_args()
     db_path = Path(args.db)
@@ -1476,6 +1487,7 @@ def main() -> int:
             issue_rows,
             parties,
         )
+        payload = sanitize_accountability_payload(payload)
 
         out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 

@@ -7,6 +7,6 @@ export const metadata = {
 
 export default function ExplorerVotacionesPage() {
   return (
-    <LegacyFrame legacyPath="/legacy/graph/explorer-votaciones.html" title="Votaciones" />
+    <LegacyFrame legacyPath="/legacy/explorer-votaciones/" title="Votaciones" />
   );
 }

@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function ExplorerTemasPage() {
-  return <LegacyFrame legacyPath="/legacy/graph/explorer-temas.html" title="Temas" />;
+  return <LegacyFrame legacyPath="/legacy/explorer-temas/" title="Temas" />;
 }

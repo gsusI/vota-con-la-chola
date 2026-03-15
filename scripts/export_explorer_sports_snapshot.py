@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import sqlite3
+import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -193,6 +194,12 @@ def main() -> int:
         print(f"ERROR: no existe el DB -> {db_path}")
         return 2
 
+    repo_root = Path(__file__).resolve().parent.parent
+    if str(repo_root) not in sys.path:
+        sys.path.insert(0, str(repo_root))
+
+    from scripts import graph_ui_server as g  # noqa: WPS433
+
     conn = sqlite3.connect(db_path)
     try:
         conn.row_factory = sqlite3.Row
@@ -242,6 +249,8 @@ def main() -> int:
         },
         "sources": sources,
     }
+    mandates_snapshot = g.sanitize_public_payload(mandates_snapshot)
+    sources_snapshot = g.sanitize_public_payload(sources_snapshot)
 
     mandates_path = out_dir / "arena-mandates.json"
     sources_path = out_dir / "sources.json"

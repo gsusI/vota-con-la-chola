@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
+  return process.env.NEXT_PUBLIC_BASE_PATH || "";
 }
 
 function withBasePath(path) {
@@ -369,14 +369,14 @@ export default function LegalSanctionsPage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Legal + sanciones</p>
+        <p className="eyebrow">Normas y sanciones</p>
         <h1>Monitor jurídico y de ejecución sancionadora</h1>
         <p className="sub">
           Conecta normas, vínculos de texto, tipos de infracción, volúmenes de sanciones y evolución de KPIs
           procedimentales. También incluye monitor municipal y restricciones de derechos con trazabilidad pública.
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {data.snapshot_date || "—"}</span>
+          <span className="chip">Publicación: {data.snapshot_date || "—"}</span>
           <span className="chip">Nodos normativos: {formatInt(legalGraph.node_count || 0)}</span>
           <span className="chip">Aristas de línea: {formatInt(legalGraph.edge_count || 0)}</span>
           <span className="chip">Tipos de infracción: {formatInt(filteredInfractionTypes.length)}</span>

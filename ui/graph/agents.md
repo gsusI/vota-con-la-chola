@@ -37,8 +37,8 @@
 
 ## Versión activa
 - Archivo: `ui/graph/explorer-sources.html`
-- Versión actual: `1.0.6`
-- Última actualización: `2026-02-15`
+- Versión actual: `1.0.7`
+- Última actualización: `2026-03-14`
 
 ## Cambios incluidos en esta versión
 - Reestructuración del dashboard para que todo esté organizado por `scope` (ámbito): progreso mínimo, estado operativo, fuentes configuradas, roadmap sin conector y pendientes.
@@ -49,6 +49,7 @@
 - Copia: la sección de roadmap referencia explícitamente `docs/roadmap-tecnico.md` además de `docs/roadmap.md`.
 - Panel global: muestra KPIs de votaciones (linking + person_id) desde `/api/sources/status` para ver progreso real vs roadmap.
 - Panel global: añade KPI real de cobertura de `topic_evidence` para votaciones (legislatura activa): `topic (latest)`.
+- Panel nuevo: **North-Star Coverage** con denominadores acotados por dimensión (`docs/coverage_capacity_model.json`) para comparar descubrimiento/descarga/procesado/enlace frente al universo ideal, sin mezclar filas heterogéneas en un único contador bruto.
 
 ## Proceso de versionado
 - Antes de cada cambio funcional en `explorer-sources.html`, actualizar:

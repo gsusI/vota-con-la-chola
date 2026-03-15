@@ -1,148 +1,105 @@
-const personas = [
-  {
-    href: "/citizen/",
-    title: "Ciudadanía - respuesta rápida",
-    note: "Decide en menos de 5 minutos con un tema concreto y compara partidos.",
-    target: "¿Qué partido está más alineado conmigo?",
-    cta: "Empezar consulta",
-  },
-  {
-    href: "/citizen/?mode=audit",
-    title: "Ciudadanía escéptica",
-    note: "Verifica resúmenes con evidencia primaria y señales de incertidumbre.",
-    target: "Audita el resultado, trazabilidad y evidencia.",
-    cta: "Abrir modo auditoría",
-  },
-  {
-    href: "/citizen/leaderboards/",
-    title: "Leaderboards cívicos",
-    note: "Prueba hipótesis públicas con resultados comparables y auditable.",
-    target: "Ranking por hipótesis y cobertura.",
-    cta: "Entrar a leaderboard",
-  },
-  {
-    href: "/explorer-temas/",
-    title: "Analista de políticas",
-    note: "Analiza ‘dicen vs hacen’ por tema/ámbito con evidencia trazable.",
-    target: "Briefing temático y seguimiento de postura.",
-    cta: "Abrir explorador de temas",
-  },
-  {
-    href: "/explorer-votaciones/",
-    title: "Monitor legislativo",
-    note: "Sigue actividad parlamentaria y detecta cambios de postura.",
-    target: "Eventos, grupos y seguimiento temporal.",
-    cta: "Ver actividad parlamentaria",
-  },
-  {
-    href: "/explorer-politico/",
-    title: "Explorador territorial",
-    note: "Encuentra actores por territorio, partido y trayectoria.",
-    target: "Mapa político y cobertura institucional.",
-    cta: "Explorar actores",
-  },
-  {
-    href: "/people/",
-    title: "Directorio de personas",
-    note: "Perfil xray por persona: qué hizo, qué cargos tuvo y qué falta por completar.",
-    target: "Historial de posiciones + cola de datos públicos faltantes.",
-    cta: "Abrir directorio",
-  },
-  {
-    href: "/explorer-sources/",
-    title: "Operador de calidad de datos",
-    note: "Prioriza bloqueos externos, cobertura y estado técnico.",
-    target: "Backlog operativo y trazabilidad de fuentes.",
-    cta: "Ver estado de fuentes",
-  },
-  {
-    href: "/parliamentary-accountability/",
-    title: "Accountability parlamentaria",
-    note: "Disciplina, rebeldía, coaliciones, asistencia y pivotes con membresía temporal.",
-    target: "Análiza cómo votan los grupos y qué tan coherentes son en el tiempo.",
-    cta: "Explorar accountability",
-  },
-  {
-    href: "/initiative-lifecycle/",
-    title: "Lifecycle legislativo",
-    note: "Tiempos de tramitación, cuellos de botella y secuencia de votos por iniciativa.",
-    target: "Consulta trazabilidad de iniciativas con confianza de enlace.",
-    cta: "Explorar ciclo de vida",
-  },
-  {
-    href: "/elections-behavior/",
-    title: "Conexión elecciones-comportamiento",
-    note: "Relación entre ciclos electorales, cambios de cohesión y comportamiento territorial.",
-    target: "Compara pre/post elección por partido, tema y territorio.",
-    cta: "Abrir análisis de elección",
-  },
-  {
-    href: "/political-positions/",
-    title: "Posturas explicables",
-    note: "Comparación persona/partido con evidencia rastreable y estado de revisión.",
-    target: "Rastrea cada postura con soportes y trazabilidad.",
-    cta: "Abrir scoring político",
-  },
-  {
-    href: "/explorer/",
-    title: "Power user SQL",
-    note: "Audita métricas, cruza tablas y baja a evidencias puntuales.",
-    target: "Explorador de esquema, FK y registros.",
-    cta: "Entrar al explorer",
-  },
-  {
-    href: "/legal-sanctions/",
-    title: "Cumplimiento legal y sanciones",
-    note: "Mapea relación entre normas, infracciones, volúmenes sancionadores y monitoreo municipal.",
-    target: "Sigue trazabilidad de responsabilidad jurídica y ejecución.",
-    cta: "Abrir legal + sanciones",
-  },
-  {
-    href: "/policy-outcomes/",
-    title: "Resultados de política pública",
-    note: "Indicadores económicos/sociales con asociaciones descriptivas a eventos de política.",
-    target: "Detecta cambios posteriores a eventos y posibles señales de impacto.",
-    cta: "Abrir resultados",
-  },
-];
-
-function withBasePath(path) {
-  const basePath =
-    process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
-  return `${basePath}${path}`;
-}
+import Link from "next/link";
+import { getHomeQuestionCards, siteSections, withBasePath } from "./siteCatalog.mjs";
 
 export default function HomePage() {
+  const questions = getHomeQuestionCards();
+
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Selección por perfil</p>
-        <h1>Vota Con La Chola - GH Pages</h1>
+        <p className="eyebrow">Explora</p>
+        <h1>Vota Con La Chola</h1>
         <p className="sub">
-          Elige tu perfil de uso para entrar directo al flujo más útil para tu objetivo.
+          Sigue temas, actores, decisiones y resultados con enlaces directos a la evidencia y a los datos publicados.
         </p>
         <div className="chips">
-          <span className="chip">UI pública en Next.js estático</span>
-          <span className="chip">Estado reproducible por snapshot</span>
-          <span className="chip">Trazabilidad prioritaria</span>
+          <span className="chip">Temas</span>
+          <span className="chip">Actores</span>
+          <span className="chip">Datos verificables</span>
         </div>
       </section>
 
       <section className="card block">
         <div className="blockHead">
-          <h2>¿Quién eres?</h2>
+          <h2>Empieza por una pregunta</h2>
         </div>
         <div className="grid">
-          {personas.map((item) => (
-            <a className="tile" key={item.href} href={withBasePath(item.href)}>
+          {questions.map((item) => (
+            <Link className="tile" key={item.id} href={withBasePath(item.href)}>
               <span className="tileTitle">{item.title}</span>
               <span className="tileNote">{item.note}</span>
               <span className="tileNote" style={{ marginTop: "2px", color: "#7b2f20", fontWeight: 700 }}>
-                {item.target}
+                {item.question}
               </span>
-              <span className="chip">{item.cta}</span>
-            </a>
+              <span className="chip">Abrir {item.label}</span>
+            </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="card block">
+        <div className="blockHead">
+          <h2>Secciones principales</h2>
+        </div>
+        <div className="grid">
+          {siteSections.map((section) => (
+            <Link className="tile" key={section.id} href={withBasePath(section.href)}>
+              <span className="tileTitle">{section.navLabel}</span>
+              <span className="tileNote">{section.description}</span>
+              <span className="tileNote" style={{ marginTop: "2px", color: "#7b2f20", fontWeight: 700 }}>
+                {section.question}
+              </span>
+              <span className="chip">Entrar en {section.navLabel}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="card block">
+        <div className="blockHead">
+          <h2>Accesos destacados</h2>
+        </div>
+        <div className="grid">
+          <Link className="tile" href={withBasePath("/citizen/")}>
+            <span className="tileTitle">Ciudadanía</span>
+            <span className="tileNote">Vista resumida para traducción rápida de temas e implicaciones.</span>
+            <span className="chip">Abrir ciudadanía</span>
+          </Link>
+          <Link className="tile" href={withBasePath("/citizen/leaderboards/")}>
+            <span className="tileTitle">Comparativas cívicas</span>
+            <span className="tileNote">Hipótesis públicas, rankings y cobertura comparada.</span>
+            <span className="chip">Abrir comparativas</span>
+          </Link>
+          <Link className="tile" href={withBasePath("/methods/datasets/")}>
+            <span className="tileTitle">Archivos publicados</span>
+            <span className="tileNote">Consulta los archivos disponibles y la sección donde se usan.</span>
+            <span className="chip">Abrir archivos</span>
+          </Link>
+          <Link className="tile" href={withBasePath("/methods/coverage/")}>
+            <span className="tileTitle">Cobertura y calidad</span>
+            <span className="tileNote">Consulta el estado de las fuentes, la cobertura y los bloqueos abiertos.</span>
+            <span className="chip">Abrir cobertura</span>
+          </Link>
+        </div>
+      </section>
+
+      <section className="card block">
+        <div className="blockHead">
+          <h2>Cómo orientarte</h2>
+        </div>
+        <div className="twoCols">
+          <div>
+            <h3>Si empiezas por un asunto</h3>
+            <p className="sub">
+              Entra por <strong>Temas</strong> para ver posiciones, votaciones relacionadas y resultados.
+            </p>
+          </div>
+          <div>
+            <h3>Si empiezas por una persona o partido</h3>
+            <p className="sub">
+              Entra por <strong>Actores</strong> para seguir perfiles, trayectorias y actividad pública.
+            </p>
+          </div>
         </div>
       </section>
     </main>

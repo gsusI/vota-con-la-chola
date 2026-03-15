@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
+  return process.env.NEXT_PUBLIC_BASE_PATH || "";
 }
 
 export default function LegacyFrame({ legacyPath, title }) {
