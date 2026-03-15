@@ -25,7 +25,21 @@ class TestGraphUiServerCitizenAssets(unittest.TestCase):
 
     def test_citizen_data_routes_include_concern_pack_quality_snapshot(self) -> None:
         src = Path("scripts/graph_ui_server.py").read_text(encoding="utf-8")
+        self.assertIn('"/citizen/data/citizen_comparability.json"', src)
+        self.assertIn('"/citizen/data/citizen_comparability_votes.json"', src)
+        self.assertIn('"/citizen/data/citizen_comparability_declared.json"', src)
+        self.assertIn('"/citizen/data/citizen_lineage.json"', src)
+        self.assertIn('"/citizen/data/citizen_lineage_votes.json"', src)
+        self.assertIn('"/citizen/data/citizen_lineage_declared.json"', src)
+        self.assertIn('"/citizen/data/citizen_snapshot_diff.json"', src)
+        self.assertIn('"/citizen/data/citizen_snapshot_diff_votes.json"', src)
+        self.assertIn('"/citizen/data/citizen_snapshot_diff_declared.json"', src)
+        self.assertIn('"/citizen/data/citizen_ranking_robustness.json"', src)
+        self.assertIn('"/citizen/data/citizen_ranking_robustness_votes.json"', src)
+        self.assertIn('"/citizen/data/citizen_ranking_robustness_declared.json"', src)
         self.assertIn('"/citizen/data/concern_pack_quality.json"', src)
+        self.assertIn('"/citizen/data/concern_pack_quality_votes.json"', src)
+        self.assertIn('"/citizen/data/concern_pack_quality_declared.json"', src)
 
 
 if __name__ == "__main__":

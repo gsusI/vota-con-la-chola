@@ -10,7 +10,9 @@ function readCitizenHtml() {
 
 test("citizen UI loads optional concern-pack quality artifact", () => {
   const html = readCitizenHtml();
-  assert.match(html, /fetchJson\(["']\.\/data\/concern_pack_quality\.json["']\)/i);
+  assert.match(html, /function\s+concernPackQualityPathForMethod\s*\(/i);
+  assert.match(html, /concern_pack_quality_votes\.json/i);
+  assert.match(html, /concern_pack_quality_declared\.json/i);
   assert.match(html, /loadConcernPackQualityRows\s*\(/i);
   assert.match(html, /concernPackQualityById/i);
 });
