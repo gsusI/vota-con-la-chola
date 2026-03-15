@@ -8,6 +8,14 @@ from collections import Counter
 
 
 ALLOWED_STANCES = {"support", "oppose", "mixed", "unclear", "no_signal"}
+ALLOWED_FRESHNESS_TIERS = {"fresh", "aging", "stale", "future", "unknown"}
+ALLOWED_FRESHNESS_WARNING_REASONS = {
+    "none",
+    "aging_snapshot",
+    "stale_snapshot",
+    "future_as_of_date",
+    "missing_dates",
+}
 
 
 def die(msg: str) -> None:
@@ -180,6 +188,108 @@ def main() -> int:
         if not (0.0 <= medium_min <= high_min <= 1.0):
             die("meta.quality.confidence_thresholds must satisfy 0 <= medium_min <= high_min <= 1")
 
+    require_key(meta, "freshness", "meta")
+    freshness = meta["freshness"]
+    require_type(freshness, dict, "meta.freshness")
+    for k in (
+        "freshness_version",
+        "as_of_date",
+        "generated_at",
+        "data_age_days",
+        "freshness_tier",
+        "freshness_label",
+        "should_warn",
+        "timeline_delta_days",
+        "date_consistency_ok",
+        "warning_reason",
+    ):
+        require_key(freshness, k, "meta.freshness")
+
+    require_type(freshness["freshness_version"], str, "meta.freshness.freshness_version")
+    if freshness["as_of_date"] is not None:
+        require_type(freshness["as_of_date"], str, "meta.freshness.as_of_date")
+    if freshness["generated_at"] is not None:
+        require_type(freshness["generated_at"], str, "meta.freshness.generated_at")
+    if freshness["data_age_days"] is not None and not isinstance(freshness["data_age_days"], int):
+        die(
+            "Expected meta.freshness.data_age_days to be int|null, "
+            f"got {type(freshness['data_age_days']).__name__}"
+        )
+    if freshness["timeline_delta_days"] is not None and not isinstance(freshness["timeline_delta_days"], int):
+        die(
+            "Expected meta.freshness.timeline_delta_days to be int|null, "
+            f"got {type(freshness['timeline_delta_days']).__name__}"
+        )
+    require_type(freshness["freshness_tier"], str, "meta.freshness.freshness_tier")
+    require_type(freshness["freshness_label"], str, "meta.freshness.freshness_label")
+    require_type(freshness["should_warn"], bool, "meta.freshness.should_warn")
+    require_type(freshness["date_consistency_ok"], bool, "meta.freshness.date_consistency_ok")
+    require_type(freshness["warning_reason"], str, "meta.freshness.warning_reason")
+
+    freshness_tier = str(freshness["freshness_tier"])
+    if freshness_tier not in ALLOWED_FRESHNESS_TIERS:
+        die(f"Invalid meta.freshness.freshness_tier {freshness_tier!r}")
+    warning_reason = str(freshness["warning_reason"])
+    if warning_reason not in ALLOWED_FRESHNESS_WARNING_REASONS:
+        die(f"Invalid meta.freshness.warning_reason {warning_reason!r}")
+
+    data_age_days = freshness["data_age_days"]
+    timeline_delta_days = freshness["timeline_delta_days"]
+    if data_age_days is not None and timeline_delta_days is not None and int(data_age_days) != int(timeline_delta_days):
+        die("meta.freshness.data_age_days must equal meta.freshness.timeline_delta_days when both are present")
+
+    if freshness_tier == "unknown":
+        if bool(freshness["date_consistency_ok"]):
+            die("meta.freshness.date_consistency_ok must be false when freshness_tier='unknown'")
+        if warning_reason != "missing_dates":
+            die("meta.freshness.warning_reason must be 'missing_dates' when freshness_tier='unknown'")
+        if not bool(freshness["should_warn"]):
+            die("meta.freshness.should_warn must be true when freshness_tier='unknown'")
+        if data_age_days is not None or timeline_delta_days is not None:
+            die("meta.freshness unknown state must not expose numeric age deltas")
+    elif freshness_tier == "future":
+        if data_age_days is None or int(data_age_days) >= 0:
+            die("meta.freshness future state must expose negative data_age_days")
+        if timeline_delta_days is None or int(timeline_delta_days) >= 0:
+            die("meta.freshness future state must expose negative timeline_delta_days")
+        if bool(freshness["date_consistency_ok"]):
+            die("meta.freshness.date_consistency_ok must be false when freshness_tier='future'")
+        if warning_reason != "future_as_of_date":
+            die("meta.freshness.warning_reason must be 'future_as_of_date' when freshness_tier='future'")
+        if not bool(freshness["should_warn"]):
+            die("meta.freshness.should_warn must be true when freshness_tier='future'")
+    else:
+        if data_age_days is None or int(data_age_days) < 0:
+            die("meta.freshness non-future state must expose non-negative data_age_days")
+        if timeline_delta_days is None or int(timeline_delta_days) < 0:
+            die("meta.freshness non-future state must expose non-negative timeline_delta_days")
+        if not bool(freshness["date_consistency_ok"]):
+            die("meta.freshness.date_consistency_ok must be true for fresh/aging/stale states")
+        expected_warning_reason = "none" if freshness_tier == "fresh" else f"{freshness_tier}_snapshot"
+        if warning_reason != expected_warning_reason:
+            die(
+                "meta.freshness.warning_reason mismatch for tier "
+                f"{freshness_tier!r}: got {warning_reason!r}, expected {expected_warning_reason!r}"
+            )
+        if bool(freshness["should_warn"]) != (freshness_tier != "fresh"):
+            die("meta.freshness.should_warn must match freshness_tier semantics")
+
+    require_key(meta, "honesty", "meta")
+    honesty = meta["honesty"]
+    require_type(honesty, dict, "meta.honesty")
+    for k in ("honesty_version", "unknown_definition", "match_definition", "no_imputation", "audit_rule", "audit_links"):
+        require_key(honesty, k, "meta.honesty")
+    require_type(honesty["honesty_version"], str, "meta.honesty.honesty_version")
+    require_type(honesty["unknown_definition"], str, "meta.honesty.unknown_definition")
+    require_type(honesty["match_definition"], str, "meta.honesty.match_definition")
+    require_type(honesty["no_imputation"], bool, "meta.honesty.no_imputation")
+    require_type(honesty["audit_rule"], str, "meta.honesty.audit_rule")
+    require_type(honesty["audit_links"], dict, "meta.honesty.audit_links")
+    audit_links = honesty["audit_links"]
+    for k in ("explorer_temas", "explorer_sql"):
+        require_key(audit_links, k, "meta.honesty.audit_links")
+        require_type(audit_links[k], str, f"meta.honesty.audit_links.{k}")
+
     topic_ids = []
     for i, t in enumerate(topics):
         ctx = f"topics[{i}]"
@@ -314,6 +424,9 @@ def main() -> int:
             "as_of_date": meta.get("as_of_date"),
             "computed_method": meta.get("computed_method"),
             "computed_version": meta.get("computed_version"),
+            "freshness_tier": freshness.get("freshness_tier"),
+            "freshness_warning_reason": freshness.get("warning_reason"),
+            "date_consistency_ok": freshness.get("date_consistency_ok"),
             "topics": len(topic_ids),
             "parties": len(party_ids),
             "party_topic_positions": len(positions),

@@ -350,7 +350,7 @@
         <p class="eyebrow">Leaderboards</p>
         <h1>Hipotesis ciudadanas en ranking</h1>
         <p class="sub">
-          Este panel convierte 10 hipotesis de interes publico en tablas comparables por partido y por tema usando snapshots
+          Este panel convierte 11 hipotesis de interes publico en tablas comparables por partido y por tema usando snapshots
           estaticos de GH Pages (<span class="mono">votes</span>, <span class="mono">declared</span> y <span class="mono">combined</span>).
         </p>
         <div class="meta" id="metaChips">
@@ -372,6 +372,9 @@
         votes: "./data/citizen_votes.json",
         declared: "./data/citizen_declared.json",
         concerns: "./data/concerns_v1.json",
+        robustnessCombined: "./data/citizen_ranking_robustness.json",
+        robustnessVotes: "./data/citizen_ranking_robustness_votes.json",
+        robustnessDeclared: "./data/citizen_ranking_robustness_declared.json",
       };
 
       const GOV_REGEX = /(PSOE|SUMAR)/i;
@@ -469,6 +472,11 @@
         const combined = data.combined;
         const votes = data.votes;
         const declared = data.declared;
+        const robustness = {
+          combined: data.robustnessCombined || {},
+          votes: data.robustnessVotes || {},
+          declared: data.robustnessDeclared || {},
+        };
         const concernMeta = new Map((data.concerns.concerns || []).map((c) => [c.id, c]));
         const partyById = new Map((combined.parties || []).map((p) => [p.party_id, p]));
         const topicById = new Map((combined.topics || []).map((t) => [t.topic_id, t]));
@@ -482,6 +490,12 @@
           topicById,
           allPartyIds: [...partyById.keys()],
           allTopicIds: [...topicById.keys()],
+          robustness,
+          robustnessByParty: {
+            combined: new Map(((robustness.combined || {}).rows || []).map((row) => [row.party_id, row])),
+            votes: new Map(((robustness.votes || {}).rows || []).map((row) => [row.party_id, row])),
+            declared: new Map(((robustness.declared || {}).rows || []).map((row) => [row.party_id, row])),
+          },
           maps: {
             combined: mkRowMap(combined.party_topic_positions || []),
             votes: mkRowMap(votes.party_topic_positions || []),
@@ -499,6 +513,50 @@
           },
           asOfDate: combined.meta?.as_of_date || votes.meta?.as_of_date || declared.meta?.as_of_date || null,
         };
+      }
+
+      function rankBandTagClass(id) {
+        if (id === "stable") return "good";
+        if (id === "competitive") return "warn";
+        if (id === "fragile") return "bad";
+        return "";
+      }
+
+      function rankBandChip(row) {
+        const band = row?.rank_band || {};
+        return `<span class="tag ${escapeHtml(rankBandTagClass(band.id || ""))}">${escapeHtml(band.label || "sin base")}</span>`;
+      }
+
+      function rankRangeLabel(ctx, partyId) {
+        const ranks = [];
+        ["combined", "votes", "declared"].forEach((key) => {
+          const row = ctx.robustnessByParty[key]?.get(partyId);
+          const rank = Number(row?.rank || 0);
+          if (rank > 0) ranks.push(rank);
+        });
+        if (!ranks.length) return "—";
+        const lo = Math.min(...ranks);
+        const hi = Math.max(...ranks);
+        if (lo === hi) return `#${fmt.format(lo)}`;
+        return `#${fmt.format(lo)}-#${fmt.format(hi)}`;
+      }
+
+      function renderDriverTopics(row) {
+        const focus = row?.focus_pair || {};
+        const drivers = Array.isArray(focus.driver_topics) ? focus.driver_topics : [];
+        if (!drivers.length) return escapeHtml(focus.reason_label || "Sin temas comparables claros.");
+        const labels = drivers
+          .slice(0, 2)
+          .map((item) => {
+            const suffix = item?.is_high_stakes ? " [HS]" : "";
+            return `${item?.topic_label || ""}${suffix}`;
+          })
+          .join(" · ");
+        const needed = Number(focus.driver_topics_needed || 0);
+        if (needed > 0) {
+          return `${fmt.format(needed)} tema(s): ${escapeHtml(labels)}`;
+        }
+        return escapeHtml(labels);
       }
 
       function partyName(ctx, partyId) {
@@ -1012,17 +1070,62 @@
         };
       }
 
+      function board11WhatChangesRanking(ctx) {
+        const robustnessRows = (ctx.robustness?.combined?.rows || []).map((row) => {
+          const focus = row?.focus_pair || {};
+          const closestGap = Number(row?.closest_gap);
+          const comparable = Number(focus?.comparable_topics_total || 0);
+          return {
+            party: row?.party_name || partyName(ctx, row?.party_id),
+            band: rankBandChip(row),
+            rankRange: rankRangeLabel(ctx, row?.party_id),
+            criticalNeighbor: focus?.against_party_name || "—",
+            gap: Number.isFinite(closestGap) ? closestGap : null,
+            pairComparable: comparable,
+            whatChanges: renderDriverTopics(row),
+            _bandOrder:
+              row?.rank_band?.id === "fragile" ? 0 : row?.rank_band?.id === "competitive" ? 1 : row?.rank_band?.id === "stable" ? 2 : 3,
+          };
+        });
+        robustnessRows.sort((a, b) => {
+          if (a._bandOrder !== b._bandOrder) return a._bandOrder - b._bandOrder;
+          const ag = a.gap === null ? Number.POSITIVE_INFINITY : a.gap;
+          const bg = b.gap === null ? Number.POSITIVE_INFINITY : b.gap;
+          if (ag !== bg) return ag - bg;
+          return String(a.party || "").localeCompare(String(b.party || ""));
+        });
+        return {
+          id: "H11",
+          title: "Que podria mover el ranking",
+          hypothesis: "Las posiciones mas virales del ranking se concentran en margenes estrechos y pocos temas drivers.",
+          notes:
+            "Usa el companion artifact de robustez: vecino critico, gap medio y temas que mas explican la distancia actual.",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "band", label: "Banda", format: (v) => v },
+            { key: "rankRange", label: "Rango metodos" },
+            { key: "criticalNeighbor", label: "Vecino critico" },
+            { key: "gap", label: "Gap medio", align: "right", format: (v) => toNum(v, 3) },
+            { key: "pairComparable", label: "Temas comparables", align: "right", format: (v) => toNum(v, 0) },
+            { key: "whatChanges", label: "Que lo moveria", format: (v) => v },
+          ],
+          rows: robustnessRows,
+        };
+      }
+
       function renderMeta(ctx) {
         const root = document.getElementById("metaChips");
         const combinedMeta = ctx.combined?.meta || {};
         const votesMeta = ctx.votes?.meta || {};
         const declaredMeta = ctx.declared?.meta || {};
+        const robustnessMeta = ctx.robustness?.combined?.meta || {};
         root.innerHTML = [
           `<span class="chip">combined as_of: <span class="mono">${escapeHtml(combinedMeta.as_of_date || "—")}</span></span>`,
           `<span class="chip">votes as_of: <span class="mono">${escapeHtml(votesMeta.as_of_date || "—")}</span></span>`,
           `<span class="chip">declared as_of: <span class="mono">${escapeHtml(declaredMeta.as_of_date || "—")}</span></span>`,
           `<span class="chip">temas: <span class="mono">${fmt.format(ctx.allTopicIds.length)}</span></span>`,
           `<span class="chip">partidos: <span class="mono">${fmt.format(ctx.allPartyIds.length)}</span></span>`,
+          `<span class="chip">robustez: <span class="mono">${escapeHtml(robustnessMeta.artifact_version || "—")}</span></span>`,
         ].join("");
       }
 
@@ -1062,7 +1165,7 @@
         root.innerHTML = boards
           .map(
             (board) => `
-              <article class="card board" id="${escapeHtml(board.id)}">
+              <article class="card board" id="${escapeHtml(board.id)}"${board.id === "H11" ? ` data-ranking-robustness="1" data-ranking-what-changes="1"` : ""}>
                 <div class="board-head">
                   <span class="board-id">${escapeHtml(board.id)}</span>
                   <h2>${escapeHtml(board.title)}</h2>
@@ -1085,13 +1188,24 @@
 
       async function main() {
         try {
-          const [combined, votes, declared, concerns] = await Promise.all([
+          const [combined, votes, declared, concerns, robustnessCombined, robustnessVotes, robustnessDeclared] = await Promise.all([
             fetchJson(DATA_PATHS.combined),
             fetchJson(DATA_PATHS.votes),
             fetchJson(DATA_PATHS.declared),
             fetchJson(DATA_PATHS.concerns),
+            fetchJson(DATA_PATHS.robustnessCombined),
+            fetchJson(DATA_PATHS.robustnessVotes),
+            fetchJson(DATA_PATHS.robustnessDeclared),
           ]);
-          const ctx = buildContext({ combined, votes, declared, concerns });
+          const ctx = buildContext({
+            combined,
+            votes,
+            declared,
+            concerns,
+            robustnessCombined,
+            robustnessVotes,
+            robustnessDeclared,
+          });
           renderMeta(ctx);
 
           const h1 = board1DeclaredVsRevealedGap(ctx);
@@ -1106,6 +1220,7 @@
             board8EvidenceTrust(ctx),
             board9RobustnessHighConfidence(ctx),
             board10FreshnessVsUnknown(ctx),
+            board11WhatChangesRanking(ctx),
           ];
           renderBoards(boards);
         } catch (error) {

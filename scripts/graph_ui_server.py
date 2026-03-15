@@ -48,6 +48,7 @@ MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblac
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
 MISMATCH_WAIVERS_PATH = BASE_DIR / "docs" / "etl" / "mismatch-waivers.json"
 IDEAL_SOURCES_PATH = BASE_DIR / "docs" / "ideal_sources_say_do.json"
+COVERAGE_CAPACITY_MODEL_PATH = BASE_DIR / "docs" / "coverage_capacity_model.json"
 ROADMAP_PATH = BASE_DIR / "docs" / "roadmap.md"
 ROADMAP_TECNICO_PATH = BASE_DIR / "docs" / "roadmap-tecnico.md"
 DEFAULT_INITDOC_ACTIONABLE_TAIL_SOURCE_IDS = ("senado_iniciativas",)
@@ -559,7 +560,12 @@ def sanitize_public_text(value: Any) -> str:
 
 def sanitize_public_payload(value: Any) -> Any:
     if isinstance(value, dict):
-        return {key: sanitize_public_payload(item) for key, item in value.items()}
+        sanitized: dict[str, Any] = {}
+        for key, item in value.items():
+            if safe_text(key) == "db_path":
+                continue
+            sanitized[key] = sanitize_public_payload(item)
+        return sanitized
     if isinstance(value, list):
         return [sanitize_public_payload(item) for item in value]
     if isinstance(value, tuple):
@@ -839,6 +845,8 @@ TRACKER_TIPO_SOURCE_HINTS = {
     "Indicadores (confusores): Banco de España": ["bde_series_api"],
     "Indicadores (confusores): Banco de Espana": ["bde_series_api"],
     "Indicadores (confusores): AEMET": ["aemet_opendata_series"],
+    "Indicadores (confusores): ESIOS/REE": ["ree_esios_indicators"],
+    "Posiciones declaradas (programas)": ["programas_partidos"],
 }
 
 # Mapping between tracker table rows and source_id values (docs -> code).
@@ -882,6 +890,7 @@ TRACKER_SOURCE_HINTS = {
     "Banco de España (API series)": ["bde_series_api"],
     "Banco de Espana (API series)": ["bde_series_api"],
     "AEMET OpenData": ["aemet_opendata_series"],
+    "ESIOS/REE API": ["ree_esios_indicators"],
 }
 
 
@@ -1070,6 +1079,30 @@ def load_roadmap_technical_phases(roadmap_path: Path) -> list[dict[str, Any]]:
     except FileNotFoundError:
         mtime = 0.0
     return _load_roadmap_technical_phases_cached(str(roadmap_path), mtime)
+
+
+@lru_cache(maxsize=2)
+def _load_json_object_cached(path_str: str, mtime: float) -> dict[str, Any]:
+    path = Path(path_str)
+    if not path.exists():
+        return {}
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except OSError:
+        return {}
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def load_json_object(path: Path) -> dict[str, Any]:
+    try:
+        mtime = path.stat().st_mtime
+    except FileNotFoundError:
+        mtime = 0.0
+    return _load_json_object_cached(str(path), mtime)
 
 
 def _format_metric_value(value: Any, fmt: str) -> str:
@@ -3016,6 +3049,12 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 parl_quality=parl_quality,
                 ops=ops_metrics,
             )
+            coverage_capacity = build_coverage_capacity_payload(
+                conn,
+                all_sources=all_sources,
+                analytics_payload=analytics_payload,
+                parl_quality=parl_quality,
+            )
 
             payload = {
                 **meta,
@@ -3023,6 +3062,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                 "ops": ops_metrics,
                 "analytics": analytics_payload,
                 "parl_quality": parl_quality,
+                "coverage_capacity": coverage_capacity,
                 "initdoc_actionable_tail": initdoc_actionable_tail,
                 "tracker": {
                     "path": str(TRACKER_PATH),
@@ -4204,6 +4244,200 @@ def _build_vote_breakdown_payload(
     return payload
 
 
+REVIEWED_VOTE_IMPLICATIONS_LIMIT = 24
+
+
+def _serialize_vote_implication_review_row(
+    row: sqlite3.Row,
+    source_lookup: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    source_id = safe_text(row["source_id"])
+    source_info = source_lookup.get(source_id)
+    confidence: float | None
+    try:
+        confidence = float(row["confidence"]) if row["confidence"] is not None else None
+    except (TypeError, ValueError):
+        confidence = None
+
+    return {
+        "review_key": safe_text(row["review_key"]),
+        "vote_event_id": safe_text(row["vote_event_id"]),
+        "source_id": source_id,
+        "source_name": safe_text(source_info["name"]) if source_info else source_id,
+        "source_url": safe_text(row["source_url"]),
+        "vote_date": safe_text(row["vote_date"]),
+        "event_title": safe_text(row["event_title"]),
+        "event_subgroup": safe_text(row["event_subgroup"]),
+        "initiative_id": safe_text(row["initiative_id"]),
+        "initiative_title": safe_text(row["initiative_title"]),
+        "initiative_expediente": safe_text(row["initiative_expediente"]),
+        "initiative_url": safe_text(row["initiative_url"]),
+        "citizen_title": safe_text(row["citizen_title"]),
+        "citizen_question": safe_text(row["citizen_question"]),
+        "citizen_summary": safe_text(row["citizen_summary"]),
+        "impact_if_approved": safe_text(row["impact_if_approved"]),
+        "impact_if_rejected": safe_text(row["impact_if_rejected"]),
+        "affected_groups": safe_text(row["affected_groups"]),
+        "evidence_quote": safe_text(row["evidence_quote"]),
+        "implication_kind": safe_text(row["final_implication_kind"] or row["heuristic_implication_kind"]),
+        "binding_strength": safe_text(row["final_binding_strength"] or row["heuristic_binding_strength"]),
+        "confidence": confidence,
+        "note": safe_text(row["note"]),
+        "updated_at": safe_text(row["updated_at"]),
+    }
+
+
+def _load_vote_implication_by_event(
+    conn: sqlite3.Connection,
+    source_lookup: dict[str, dict[str, Any]],
+    event_ids: list[str],
+) -> dict[str, dict[str, Any]]:
+    if not event_ids or not table_exists(conn, "parl_vote_implication_reviews"):
+        return {}
+
+    placeholders = ",".join(["?"] * len(event_ids))
+    rows = conn.execute(
+        f"""
+        SELECT
+          r.review_id,
+          r.review_key,
+          r.vote_event_id,
+          COALESCE(e.source_id, r.source_id) AS source_id,
+          e.source_url,
+          e.vote_date,
+          e.title AS event_title,
+          COALESCE(e.subgroup_title, e.subgroup_text) AS event_subgroup,
+          r.initiative_id,
+          i.title AS initiative_title,
+          i.expediente AS initiative_expediente,
+          i.source_url AS initiative_url,
+          r.citizen_title,
+          r.citizen_question,
+          r.citizen_summary,
+          r.impact_if_approved,
+          r.impact_if_rejected,
+          r.affected_groups,
+          r.evidence_quote,
+          r.heuristic_implication_kind,
+          r.final_implication_kind,
+          r.heuristic_binding_strength,
+          r.final_binding_strength,
+          r.confidence,
+          r.note,
+          r.updated_at
+        FROM parl_vote_implication_reviews r
+        JOIN parl_vote_events e ON e.vote_event_id = r.vote_event_id
+        LEFT JOIN parl_initiatives i ON i.initiative_id = r.initiative_id
+        WHERE r.status = 'resolved'
+          AND r.vote_event_id IN ({placeholders})
+        ORDER BY e.vote_date DESC, r.updated_at DESC, r.review_id DESC
+        """,
+        event_ids,
+    ).fetchall()
+
+    by_event: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        event_id = safe_text(row["vote_event_id"])
+        if not event_id or event_id in by_event:
+            continue
+        by_event[event_id] = _serialize_vote_implication_review_row(row, source_lookup)
+    return by_event
+
+
+def _load_reviewed_vote_implications(
+    conn: sqlite3.Connection,
+    source_lookup: dict[str, dict[str, Any]],
+    *,
+    source_filter: str | None,
+    q: str | None,
+    limit: int,
+) -> list[dict[str, Any]]:
+    if not table_exists(conn, "parl_vote_implication_reviews"):
+        return []
+
+    where = ["r.status = 'resolved'"]
+    params: list[Any] = []
+    if source_filter:
+        where.append("e.source_id = ?")
+        params.append(source_filter)
+
+    if q:
+        q_norm = f"%{q.strip()}%"
+        where.append(
+            """
+            (
+              e.title LIKE ?
+              OR e.expediente_text LIKE ?
+              OR e.subgroup_title LIKE ?
+              OR e.subgroup_text LIKE ?
+              OR COALESCE(i.title, '') LIKE ?
+              OR COALESCE(i.expediente, '') LIKE ?
+              OR COALESCE(r.citizen_title, '') LIKE ?
+              OR COALESCE(r.citizen_question, '') LIKE ?
+              OR COALESCE(r.citizen_summary, '') LIKE ?
+              OR COALESCE(r.impact_if_approved, '') LIKE ?
+              OR COALESCE(r.impact_if_rejected, '') LIKE ?
+              OR COALESCE(r.affected_groups, '') LIKE ?
+              OR COALESCE(r.evidence_quote, '') LIKE ?
+              OR COALESCE(r.note, '') LIKE ?
+            )
+            """
+        )
+        params.extend([q_norm] * 14)
+
+    prefetch_limit = max(limit * 4, 64)
+    rows = conn.execute(
+        f"""
+        SELECT
+          r.review_id,
+          r.review_key,
+          r.vote_event_id,
+          COALESCE(e.source_id, r.source_id) AS source_id,
+          e.source_url,
+          e.vote_date,
+          e.title AS event_title,
+          COALESCE(e.subgroup_title, e.subgroup_text) AS event_subgroup,
+          r.initiative_id,
+          i.title AS initiative_title,
+          i.expediente AS initiative_expediente,
+          i.source_url AS initiative_url,
+          r.citizen_title,
+          r.citizen_question,
+          r.citizen_summary,
+          r.impact_if_approved,
+          r.impact_if_rejected,
+          r.affected_groups,
+          r.evidence_quote,
+          r.heuristic_implication_kind,
+          r.final_implication_kind,
+          r.heuristic_binding_strength,
+          r.final_binding_strength,
+          r.confidence,
+          r.note,
+          r.updated_at
+        FROM parl_vote_implication_reviews r
+        JOIN parl_vote_events e ON e.vote_event_id = r.vote_event_id
+        LEFT JOIN parl_initiatives i ON i.initiative_id = r.initiative_id
+        WHERE {' AND '.join(where)}
+        ORDER BY e.vote_date DESC, r.updated_at DESC, r.review_id DESC
+        LIMIT ?
+        """,
+        [*params, prefetch_limit],
+    ).fetchall()
+
+    reviewed: list[dict[str, Any]] = []
+    seen_event_ids: set[str] = set()
+    for row in rows:
+        event_id = safe_text(row["vote_event_id"])
+        if not event_id or event_id in seen_event_ids:
+            continue
+        reviewed.append(_serialize_vote_implication_review_row(row, source_lookup))
+        seen_event_ids.add(event_id)
+        if len(reviewed) >= limit:
+            break
+    return reviewed
+
+
 def build_vote_summary_payload(
     db_path: Path,
     *,
@@ -4225,6 +4459,7 @@ def build_vote_summary_payload(
         with open_db(db_path) as conn:
             source_rows = fetch_sources(conn)
             source_lookup = {row["source_id"]: row for row in source_rows}
+            has_vote_implication_reviews = table_exists(conn, "parl_vote_implication_reviews")
 
             where = []
             params: list[Any] = []
@@ -4234,16 +4469,54 @@ def build_vote_summary_payload(
 
             if q:
                 q_norm = f"%{q.strip()}%"
-                where.append(
-                    "(e.title LIKE ? OR e.expediente_text LIKE ? OR e.subgroup_title LIKE ? OR e.subgroup_text LIKE ?)"
-                )
-                params.extend([q_norm] * 4)
+                search_clauses = [
+                    "e.title LIKE ?",
+                    "e.expediente_text LIKE ?",
+                    "e.subgroup_title LIKE ?",
+                    "e.subgroup_text LIKE ?",
+                ]
+                search_params: list[Any] = [q_norm] * 4
+                if has_vote_implication_reviews:
+                    search_clauses.append(
+                        """
+                        EXISTS (
+                          SELECT 1
+                          FROM parl_vote_implication_reviews r
+                          WHERE r.vote_event_id = e.vote_event_id
+                            AND r.status = 'resolved'
+                            AND (
+                              COALESCE(r.citizen_title, '') LIKE ?
+                              OR COALESCE(r.citizen_question, '') LIKE ?
+                              OR COALESCE(r.citizen_summary, '') LIKE ?
+                              OR COALESCE(r.impact_if_approved, '') LIKE ?
+                              OR COALESCE(r.impact_if_rejected, '') LIKE ?
+                              OR COALESCE(r.affected_groups, '') LIKE ?
+                              OR COALESCE(r.evidence_quote, '') LIKE ?
+                              OR COALESCE(r.note, '') LIKE ?
+                            )
+                        )
+                        """
+                    )
+                    search_params.extend([q_norm] * 8)
+                where.append(f"({' OR '.join(search_clauses)})")
+                params.extend(search_params)
 
             where_sql = f"WHERE {' AND '.join(where)}" if where else ""
             total = conn.execute(
                 f"SELECT COUNT(*) AS n FROM parl_vote_events e {where_sql}",
                 params,
             ).fetchone()
+            reviewed_implications = (
+                _load_reviewed_vote_implications(
+                    conn,
+                    source_lookup,
+                    source_filter=source_filter,
+                    q=q,
+                    limit=max(8, min(limit, REVIEWED_VOTE_IMPLICATIONS_LIMIT)),
+                )
+                if has_vote_implication_reviews
+                else []
+            )
 
             events = conn.execute(
                 f"""
@@ -4281,11 +4554,13 @@ def build_vote_summary_payload(
                         "limit": limit,
                         "offset": offset,
                         "returned": 0,
+                        "reviewed_implications_returned": len(reviewed_implications),
                         "source_filter": source_filter or "",
                         "party_filter": party_filter or "",
                         "search": q or "",
                     },
                     "events": [],
+                    "reviewed_implications": reviewed_implications,
                 }
                 return sanitize_public_payload(payload_empty)
 
@@ -4485,11 +4760,18 @@ def build_vote_summary_payload(
                     party_grouped[event_id] = bucket
                 party_breakdown = party_grouped
 
+            citizen_implication_by_event = (
+                _load_vote_implication_by_event(conn, source_lookup, event_ids)
+                if has_vote_implication_reviews
+                else {}
+            )
+
             payload_events = []
             for row in event_rows:
                 event_id = safe_text(row["vote_event_id"])
                 groups = top_group_breakdown.get(event_id, [])
                 party_payload = party_breakdown.get(event_id)
+                citizen_implication = citizen_implication_by_event.get(event_id)
                 if party_payload:
                     total_party_votes = (
                         party_payload["yes"] + party_payload["no"] + party_payload["abstain"] + party_payload["no_vote"] + party_payload["other"]
@@ -4499,41 +4781,42 @@ def build_vote_summary_payload(
 
                 source_info = source_lookup.get(safe_text(row["source_id"]))
                 initiative_info = best_initiative_by_event.get(event_id)
-                payload_events.append(
-                    {
-                        "vote_event_id": event_id,
-                        "source_id": safe_text(row["source_id"]),
-                        "source_name": safe_text(source_info["name"]) if source_info else safe_text(row["source_id"]),
-                        "source_url": safe_text(row["source_url"]),
-                        "vote_date": safe_text(row["vote_date"]),
-                        "title": safe_text(row["title"]),
-                        "expediente_text": safe_text(row["expediente_text"]),
-                        "subgroup_title": safe_text(row["subgroup_title"]),
-                        "subgroup_text": safe_text(row["subgroup_text"]),
-                        "assentimiento": safe_text(row["assentimiento"]),
-                        "initiative": initiative_info,
-                        "totals": {
-                            "present": int(row["totals_present"] or 0),
-                            "yes": int(row["totals_yes"] or 0),
-                            "no": int(row["totals_no"] or 0),
-                            "abstain": int(row["totals_abstain"] or 0),
-                            "no_vote": int(row["totals_no_vote"] or 0),
-                        },
-                        "group_breakdown": groups,
-                        "party_participation": (
-                            {
-                                "yes": party_payload["yes"],
-                                "no": party_payload["no"],
-                                "abstain": party_payload["abstain"],
-                                "no_vote": party_payload["no_vote"],
-                                "other": party_payload["other"],
-                                "total": total_party_votes,
-                            }
-                            if party_payload is not None
-                            else None
-                        ),
-                    }
-                )
+                payload_row = {
+                    "vote_event_id": event_id,
+                    "source_id": safe_text(row["source_id"]),
+                    "source_name": safe_text(source_info["name"]) if source_info else safe_text(row["source_id"]),
+                    "source_url": safe_text(row["source_url"]),
+                    "vote_date": safe_text(row["vote_date"]),
+                    "title": safe_text(row["title"]),
+                    "expediente_text": safe_text(row["expediente_text"]),
+                    "subgroup_title": safe_text(row["subgroup_title"]),
+                    "subgroup_text": safe_text(row["subgroup_text"]),
+                    "assentimiento": safe_text(row["assentimiento"]),
+                    "initiative": initiative_info,
+                    "totals": {
+                        "present": int(row["totals_present"] or 0),
+                        "yes": int(row["totals_yes"] or 0),
+                        "no": int(row["totals_no"] or 0),
+                        "abstain": int(row["totals_abstain"] or 0),
+                        "no_vote": int(row["totals_no_vote"] or 0),
+                    },
+                    "group_breakdown": groups,
+                    "party_participation": (
+                        {
+                            "yes": party_payload["yes"],
+                            "no": party_payload["no"],
+                            "abstain": party_payload["abstain"],
+                            "no_vote": party_payload["no_vote"],
+                            "other": party_payload["other"],
+                            "total": total_party_votes,
+                        }
+                        if party_payload is not None
+                        else None
+                    ),
+                }
+                if citizen_implication:
+                    payload_row["citizen_implication"] = citizen_implication
+                payload_events.append(payload_row)
 
             payload = {
                 "meta": {
@@ -4542,11 +4825,13 @@ def build_vote_summary_payload(
                     "limit": limit,
                     "offset": offset,
                     "returned": len(payload_events),
+                    "reviewed_implications_returned": len(reviewed_implications),
                     "source_filter": source_filter or "",
                     "party_filter": party_filter or "",
                     "search": q or "",
                 },
                 "events": payload_events,
+                "reviewed_implications": reviewed_implications,
             }
             return sanitize_public_payload(payload)
     except sqlite3.Error as exc:
@@ -4616,6 +4901,662 @@ def table_exists(conn: sqlite3.Connection, table: str) -> bool:
         return row is not None
     except sqlite3.Error:
         return False
+
+
+def _coverage_pct(numerator: int, denominator: int) -> float | None:
+    if denominator <= 0:
+        return None
+    ratio = (max(0, numerator) * 100.0) / max(1, denominator)
+    return round(max(0.0, min(100.0, ratio)), 1)
+
+
+def _coverage_scalar(conn: sqlite3.Connection, query: str, params: tuple[Any, ...] = ()) -> int:
+    try:
+        row = conn.execute(query, params).fetchone()
+    except sqlite3.Error:
+        return 0
+    if row is None:
+        return 0
+    try:
+        value = row[0]
+    except (IndexError, KeyError, TypeError):
+        return 0
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        try:
+            return int(float(value or 0))
+        except (TypeError, ValueError):
+            return 0
+
+
+def _coverage_json_list(raw: Any) -> list[Any]:
+    text = safe_text(raw)
+    if not text:
+        return []
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        return []
+    return data if isinstance(data, list) else []
+
+
+def _coverage_doc_url(item: Any) -> str:
+    if isinstance(item, str):
+        return safe_text(item)
+    if not isinstance(item, dict):
+        return ""
+    for key in ("url", "href", "doc_url", "value"):
+        candidate = safe_text(item.get(key))
+        if candidate:
+            return candidate
+    return ""
+
+
+def _coverage_matches_filter(value: str, allowed: list[str] | None) -> bool:
+    if not allowed:
+        return True
+    normalized = safe_text(value).lower()
+    return normalized in {safe_text(item).lower() for item in allowed if safe_text(item)}
+
+
+def _coverage_matches_ideal_filters(source: dict[str, Any], filters: dict[str, Any]) -> bool:
+    scope_values = filters.get("scope_in") if isinstance(filters, dict) else None
+    evidence_values = filters.get("evidence_in") if isinstance(filters, dict) else None
+    domain_values = filters.get("domain_in") if isinstance(filters, dict) else None
+    if not _coverage_matches_filter(safe_text(source.get("scope")), scope_values):
+        return False
+    if not _coverage_matches_filter(safe_text(source.get("evidence")), evidence_values):
+        return False
+    if domain_values:
+        item_domains = {
+            safe_text(domain).lower()
+            for domain in (source.get("domains") or [])
+            if safe_text(domain)
+        }
+        allowed_domains = {
+            safe_text(domain).lower() for domain in domain_values if safe_text(domain)
+        }
+        if not (item_domains & allowed_domains):
+            return False
+    return True
+
+
+def _coverage_blocked_source_ids(
+    all_sources: list[dict[str, Any]],
+    source_ids: set[str],
+) -> list[str]:
+    blocked: set[str] = set()
+    for row in all_sources:
+        source_id = safe_text(row.get("source_id"))
+        if source_id not in source_ids:
+            continue
+        flags = row.get("flags") if isinstance(row.get("flags"), dict) else {}
+        state_name = safe_text(row.get("state")).lower()
+        if bool(flags.get("blocked_note")) or state_name in {"error", "degraded"}:
+            blocked.add(source_id)
+    return sorted(blocked)
+
+
+def _count_initiative_doc_slots(conn: sqlite3.Connection, source_ids: tuple[str, ...]) -> int:
+    if not table_exists(conn, "parl_initiatives") or not source_ids:
+        return 0
+    placeholders = ",".join("?" for _ in source_ids)
+    try:
+        rows = conn.execute(
+            f"""
+            SELECT initiative_id, links_bocg_json, links_ds_json
+            FROM parl_initiatives
+            WHERE source_id IN ({placeholders})
+            """,
+            source_ids,
+        ).fetchall()
+    except sqlite3.Error:
+        return 0
+
+    slots: set[tuple[str, str, str]] = set()
+    for row in rows:
+        initiative_id = safe_text(row["initiative_id"])
+        for kind, key in (("bocg", "links_bocg_json"), ("ds", "links_ds_json")):
+            for item in _coverage_json_list(row[key]):
+                url = _coverage_doc_url(item)
+                if url:
+                    slots.add((initiative_id, kind, url))
+    return len(slots)
+
+
+def _coverage_cell_base(cell_cfg: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": safe_text(cell_cfg.get("id")),
+        "label": safe_text(cell_cfg.get("label")) or safe_text(cell_cfg.get("id")) or "Coverage cell",
+        "scope": safe_text(cell_cfg.get("scope")),
+        "evidence_kind": safe_text(cell_cfg.get("evidence_kind")),
+        "domain": safe_text(cell_cfg.get("domain")),
+        "source_family": safe_text(cell_cfg.get("source_family")),
+        "unit_family": safe_text(cell_cfg.get("unit_family")),
+        "unit_type": safe_text(cell_cfg.get("unit_type")),
+        "primary_stage": safe_text(cell_cfg.get("primary_stage")) or "processed",
+        "builder_key": safe_text(cell_cfg.get("builder_key")),
+        "estimator_type": safe_text(cell_cfg.get("estimator_type")),
+        "estimator_ref": safe_text(cell_cfg.get("estimator_ref")),
+        "rollup_weight": float(cell_cfg.get("rollup_weight") or 1.0),
+        "notes": safe_text(cell_cfg.get("notes")),
+        "source_ids": [safe_text(item) for item in (cell_cfg.get("source_ids") or []) if safe_text(item)],
+    }
+
+
+def _finalize_coverage_cell(
+    cell: dict[str, Any],
+    *,
+    ideal_total: int,
+    stages: dict[str, int],
+    denominator_status: str,
+    blocked_source_ids: list[str] | None = None,
+    gap_reason: str = "",
+) -> dict[str, Any]:
+    ordered_stages = {
+        "discoverable": int(stages.get("discoverable", 0) or 0),
+        "downloaded": int(stages.get("downloaded", 0) or 0),
+        "processed": int(stages.get("processed", 0) or 0),
+        "linked": int(stages.get("linked", 0) or 0),
+        "published": int(stages.get("published", 0) or 0),
+    }
+    capped_stages = {
+        key: min(max(0, value), max(0, int(ideal_total or 0)))
+        for key, value in ordered_stages.items()
+    }
+    primary_stage = safe_text(cell.get("primary_stage")) or "processed"
+    primary_total = int(capped_stages.get(primary_stage, 0) or 0)
+    primary_percent = _coverage_pct(primary_total, int(ideal_total or 0))
+    blocked_ids = blocked_source_ids or []
+    cell.update(
+        {
+            "ideal_total": int(max(0, int(ideal_total or 0))),
+            "stages": capped_stages,
+            "primary_total": primary_total,
+            "primary_percent": primary_percent,
+            "denominator_status": denominator_status,
+            "blocked": bool(blocked_ids),
+            "blocked_sources": blocked_ids,
+            "gap_reason": gap_reason,
+        }
+    )
+    return cell
+
+
+def _build_inventory_coverage_cell(
+    cell_cfg: dict[str, Any],
+    *,
+    ideal_sources: list[dict[str, Any]],
+    all_sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    cell = _coverage_cell_base(cell_cfg)
+    filters = cell_cfg.get("ideal_filters") if isinstance(cell_cfg.get("ideal_filters"), dict) else {}
+    ideal_rows = [
+        row for row in ideal_sources if isinstance(row, dict) and _coverage_matches_ideal_filters(row, filters)
+    ]
+    ideal_ids = {safe_text(row.get("id")) for row in ideal_rows if safe_text(row.get("id"))}
+    matched_rows = [
+        row for row in all_sources if safe_text(row.get("source_id")) in ideal_ids
+    ]
+    discoverable = len(matched_rows)
+    downloaded = sum(
+        1
+        for row in matched_rows
+        if bool((row.get("flags") or {}).get("has_any")) or int(row.get("last_loaded") or 0) > 0
+    )
+    processed = sum(
+        1
+        for row in matched_rows
+        if safe_text(row.get("sql_status")).upper() == "DONE"
+    )
+    linked = sum(
+        1
+        for row in matched_rows
+        if safe_text(row.get("state")).lower() == "ok"
+    )
+    blocked_ids = _coverage_blocked_source_ids(all_sources, ideal_ids)
+    denominator_status = "ok" if ideal_ids else "missing"
+    gap_reason = "" if ideal_ids else "no_ideal_sources_match"
+    return _finalize_coverage_cell(
+        cell,
+        ideal_total=len(ideal_ids),
+        stages={
+            "discoverable": discoverable,
+            "downloaded": downloaded,
+            "processed": processed,
+            "linked": linked,
+            "published": linked,
+        },
+        denominator_status=denominator_status,
+        blocked_source_ids=blocked_ids,
+        gap_reason=gap_reason,
+    )
+
+
+def _build_votes_coverage_cell(
+    conn: sqlite3.Connection,
+    cell_cfg: dict[str, Any],
+    *,
+    all_sources: list[dict[str, Any]],
+    parl_quality: dict[str, Any],
+) -> dict[str, Any]:
+    cell = _coverage_cell_base(cell_cfg)
+    source_ids = tuple(cell["source_ids"] or ["congreso_votaciones", "senado_votaciones"])
+    if not table_exists(conn, "parl_vote_events"):
+        return _finalize_coverage_cell(
+            cell,
+            ideal_total=0,
+            stages={},
+            denominator_status="missing",
+            blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(source_ids)),
+            gap_reason="table_missing:parl_vote_events",
+        )
+    placeholders = ",".join("?" for _ in source_ids)
+    total = _coverage_scalar(
+        conn,
+        f"SELECT COUNT(*) FROM parl_vote_events WHERE source_id IN ({placeholders})",
+        source_ids,
+    )
+    vote_kpis = (parl_quality.get("votes") or {}).get("kpis") if isinstance(parl_quality, dict) else {}
+    linked = int((vote_kpis or {}).get("events_with_initiative_link") or 0)
+    published = int((vote_kpis or {}).get("events_with_theme") or 0)
+    return _finalize_coverage_cell(
+        cell,
+        ideal_total=total,
+        stages={
+            "discoverable": total,
+            "downloaded": total,
+            "processed": total,
+            "linked": linked or total,
+            "published": published or linked or total,
+        },
+        denominator_status="proxy" if total > 0 else "missing",
+        blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(source_ids)),
+        gap_reason="" if total > 0 else "no_vote_events_loaded",
+    )
+
+
+def _build_initiative_docs_coverage_cell(
+    conn: sqlite3.Connection,
+    cell_cfg: dict[str, Any],
+    *,
+    all_sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    cell = _coverage_cell_base(cell_cfg)
+    source_ids = tuple(cell["source_ids"] or ["congreso_iniciativas", "senado_iniciativas"])
+    ideal_total = _count_initiative_doc_slots(conn, source_ids)
+    if ideal_total <= 0:
+        return _finalize_coverage_cell(
+            cell,
+            ideal_total=0,
+            stages={},
+            denominator_status="missing",
+            blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(source_ids)),
+            gap_reason="no_known_doc_slots",
+        )
+    placeholders = ",".join("?" for _ in source_ids)
+    downloaded = 0
+    processed = 0
+    linked = 0
+    if table_exists(conn, "parl_initiative_documents") and table_exists(conn, "parl_initiatives"):
+        downloaded = _coverage_scalar(
+            conn,
+            f"""
+            SELECT COUNT(*)
+            FROM parl_initiative_documents d
+            JOIN parl_initiatives i ON i.initiative_id = d.initiative_id
+            WHERE i.source_id IN ({placeholders})
+            """,
+            source_ids,
+        )
+        linked = _coverage_scalar(
+            conn,
+            f"""
+            SELECT COUNT(*)
+            FROM parl_initiative_documents d
+            JOIN parl_initiatives i ON i.initiative_id = d.initiative_id
+            WHERE i.source_id IN ({placeholders})
+              AND d.source_record_pk IS NOT NULL
+            """,
+            source_ids,
+        )
+    if table_exists(conn, "parl_initiative_doc_extractions") and table_exists(conn, "parl_initiative_documents") and table_exists(conn, "parl_initiatives"):
+        processed = _coverage_scalar(
+            conn,
+            f"""
+            SELECT COUNT(*)
+            FROM parl_initiative_doc_extractions e
+            JOIN parl_initiative_documents d ON d.source_record_pk = e.source_record_pk
+            JOIN parl_initiatives i ON i.initiative_id = d.initiative_id
+            WHERE i.source_id IN ({placeholders})
+            """,
+            source_ids,
+        )
+    return _finalize_coverage_cell(
+        cell,
+        ideal_total=ideal_total,
+        stages={
+            "discoverable": ideal_total,
+            "downloaded": downloaded,
+            "processed": processed or downloaded,
+            "linked": linked or downloaded,
+            "published": processed or linked or downloaded,
+        },
+        denominator_status="proxy",
+        blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(source_ids)),
+    )
+
+
+def _build_declared_evidence_coverage_cell(
+    cell_cfg: dict[str, Any],
+    *,
+    all_sources: list[dict[str, Any]],
+    analytics_payload: dict[str, Any],
+) -> dict[str, Any]:
+    cell = _coverage_cell_base(cell_cfg)
+    evidence = analytics_payload.get("evidence") if isinstance(analytics_payload, dict) else {}
+    ideal_total = int((evidence or {}).get("topic_evidence_declared_total") or 0)
+    downloaded = int((evidence or {}).get("declared_evidence_with_text_excerpt") or 0)
+    linked = int((evidence or {}).get("topic_evidence_declared_with_signal") or 0)
+    if ideal_total <= 0:
+        return _finalize_coverage_cell(
+            cell,
+            ideal_total=0,
+            stages={},
+            denominator_status="missing",
+            blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(cell["source_ids"])),
+            gap_reason="no_declared_evidence_loaded",
+        )
+    return _finalize_coverage_cell(
+        cell,
+        ideal_total=ideal_total,
+        stages={
+            "discoverable": ideal_total,
+            "downloaded": downloaded,
+            "processed": ideal_total,
+            "linked": linked,
+            "published": linked,
+        },
+        denominator_status="proxy",
+        blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(cell["source_ids"])),
+    )
+
+
+def _build_fragment_review_coverage_cell(
+    conn: sqlite3.Connection,
+    cell_cfg: dict[str, Any],
+    *,
+    all_sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    cell = _coverage_cell_base(cell_cfg)
+    if not table_exists(conn, "parl_text_fragments"):
+        return _finalize_coverage_cell(
+            cell,
+            ideal_total=0,
+            stages={},
+            denominator_status="missing",
+            blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(cell["source_ids"])),
+            gap_reason="table_missing:parl_text_fragments",
+        )
+    total = _coverage_scalar(conn, "SELECT COUNT(*) FROM parl_text_fragments")
+    reviewed = 0
+    resolved = 0
+    if table_exists(conn, "parl_fragment_measure_reviews"):
+        reviewed = _coverage_scalar(
+            conn,
+            "SELECT COUNT(*) FROM parl_fragment_measure_reviews WHERE status <> 'pending'",
+        )
+        resolved = _coverage_scalar(
+            conn,
+            "SELECT COUNT(*) FROM parl_fragment_measure_reviews WHERE status = 'resolved'",
+        )
+    return _finalize_coverage_cell(
+        cell,
+        ideal_total=total,
+        stages={
+            "discoverable": total,
+            "downloaded": total,
+            "processed": total,
+            "linked": reviewed,
+            "published": resolved,
+        },
+        denominator_status="proxy" if total > 0 else "missing",
+        blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(cell["source_ids"])),
+        gap_reason="" if total > 0 else "no_fragments_loaded",
+    )
+
+
+def _build_measure_task_coverage_cell(
+    conn: sqlite3.Connection,
+    cell_cfg: dict[str, Any],
+    *,
+    all_sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    cell = _coverage_cell_base(cell_cfg)
+    if not table_exists(conn, "parl_initiative_measure_review_tasks"):
+        return _finalize_coverage_cell(
+            cell,
+            ideal_total=0,
+            stages={},
+            denominator_status="missing",
+            blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(cell["source_ids"])),
+            gap_reason="table_missing:parl_initiative_measure_review_tasks",
+        )
+    total = _coverage_scalar(conn, "SELECT COUNT(*) FROM parl_initiative_measure_review_tasks")
+    downloaded = _coverage_scalar(
+        conn,
+        "SELECT COUNT(*) FROM parl_initiative_measure_review_tasks WHERE COALESCE(TRIM(evidence_bundle_dir), '') <> ''",
+    )
+    reviewed = _coverage_scalar(
+        conn,
+        "SELECT COUNT(*) FROM parl_initiative_measure_review_tasks WHERE status <> 'pending'",
+    )
+    published = 0
+    if table_exists(conn, "parl_initiative_measure_points"):
+        published = _coverage_scalar(
+            conn,
+            "SELECT COUNT(DISTINCT task_id) FROM parl_initiative_measure_points",
+        )
+    return _finalize_coverage_cell(
+        cell,
+        ideal_total=total,
+        stages={
+            "discoverable": total,
+            "downloaded": downloaded,
+            "processed": total,
+            "linked": reviewed,
+            "published": published or reviewed,
+        },
+        denominator_status="proxy" if total > 0 else "missing",
+        blocked_source_ids=_coverage_blocked_source_ids(all_sources, set(cell["source_ids"])),
+        gap_reason="" if total > 0 else "no_measure_review_tasks_loaded",
+    )
+
+
+def build_coverage_capacity_payload(
+    conn: sqlite3.Connection,
+    *,
+    all_sources: list[dict[str, Any]],
+    analytics_payload: dict[str, Any],
+    parl_quality: dict[str, Any],
+) -> dict[str, Any]:
+    model = load_json_object(COVERAGE_CAPACITY_MODEL_PATH)
+    cells_cfg = model.get("cells") if isinstance(model.get("cells"), list) else []
+    ideal_payload = load_json_object(IDEAL_SOURCES_PATH)
+    ideal_sources = ideal_payload.get("sources") if isinstance(ideal_payload.get("sources"), list) else []
+
+    builder_map = {
+        "ideal_source_inventory": lambda cfg: _build_inventory_coverage_cell(
+            cfg,
+            ideal_sources=ideal_sources,
+            all_sources=all_sources,
+        ),
+        "national_votes": lambda cfg: _build_votes_coverage_cell(
+            conn,
+            cfg,
+            all_sources=all_sources,
+            parl_quality=parl_quality,
+        ),
+        "national_initiative_docs": lambda cfg: _build_initiative_docs_coverage_cell(
+            conn,
+            cfg,
+            all_sources=all_sources,
+        ),
+        "declared_evidence_signal": lambda cfg: _build_declared_evidence_coverage_cell(
+            cfg,
+            all_sources=all_sources,
+            analytics_payload=analytics_payload,
+        ),
+        "fragment_measure_reviews": lambda cfg: _build_fragment_review_coverage_cell(
+            conn,
+            cfg,
+            all_sources=all_sources,
+        ),
+        "initiative_measure_tasks": lambda cfg: _build_measure_task_coverage_cell(
+            conn,
+            cfg,
+            all_sources=all_sources,
+        ),
+    }
+
+    cells: list[dict[str, Any]] = []
+    denominator_gaps: list[dict[str, Any]] = []
+    for raw_cfg in cells_cfg:
+        if not isinstance(raw_cfg, dict):
+            continue
+        builder_key = safe_text(raw_cfg.get("builder_key"))
+        builder = builder_map.get(builder_key)
+        if builder is None:
+            cell = _finalize_coverage_cell(
+                _coverage_cell_base(raw_cfg),
+                ideal_total=0,
+                stages={},
+                denominator_status="missing",
+                gap_reason=f"builder_missing:{builder_key or 'unknown'}",
+            )
+        else:
+            cell = builder(raw_cfg)
+        cells.append(cell)
+        if safe_text(cell.get("denominator_status")) == "missing":
+            denominator_gaps.append(
+                {
+                    "id": safe_text(cell.get("id")),
+                    "label": safe_text(cell.get("label")),
+                    "scope": safe_text(cell.get("scope")),
+                    "domain": safe_text(cell.get("domain")),
+                    "reason": safe_text(cell.get("gap_reason")) or "missing_denominator",
+                }
+            )
+
+    weighted_numerator = 0.0
+    weighted_denominator = 0.0
+    blocked_cells = 0
+    by_scope: dict[str, dict[str, Any]] = {}
+    by_evidence_kind: dict[str, dict[str, Any]] = {}
+    by_domain: dict[str, dict[str, Any]] = {}
+    by_unit_family: dict[str, dict[str, Any]] = {}
+
+    def _bucket_key(value: Any, fallback: str) -> str:
+        text = safe_text(value)
+        return text if text else fallback
+
+    def _add_bucket(
+        buckets: dict[str, dict[str, Any]],
+        *,
+        key: str,
+        label: str,
+        cell: dict[str, Any],
+    ) -> None:
+        bucket = buckets.setdefault(
+            key,
+            {
+                "key": key,
+                "label": label,
+                "cells_total": 0,
+                "cells_with_denominator": 0,
+                "blocked_cells": 0,
+                "weighted_numerator": 0.0,
+                "weighted_denominator": 0.0,
+            },
+        )
+        bucket["cells_total"] += 1
+        if cell.get("blocked"):
+            bucket["blocked_cells"] += 1
+        percent = cell.get("primary_percent")
+        if percent is None:
+            return
+        weight = float(cell.get("rollup_weight") or 1.0)
+        bucket["cells_with_denominator"] += 1
+        bucket["weighted_numerator"] += float(percent) * weight
+        bucket["weighted_denominator"] += weight
+
+    for cell in cells:
+        if cell.get("blocked"):
+            blocked_cells += 1
+        percent = cell.get("primary_percent")
+        if percent is not None:
+            weight = float(cell.get("rollup_weight") or 1.0)
+            weighted_numerator += float(percent) * weight
+            weighted_denominator += weight
+        _add_bucket(
+            by_scope,
+            key=_bucket_key(cell.get("scope"), "unknown"),
+            label=_bucket_key(cell.get("scope"), "unknown"),
+            cell=cell,
+        )
+        _add_bucket(
+            by_evidence_kind,
+            key=_bucket_key(cell.get("evidence_kind"), "unknown"),
+            label=_bucket_key(cell.get("evidence_kind"), "unknown"),
+            cell=cell,
+        )
+        _add_bucket(
+            by_domain,
+            key=_bucket_key(cell.get("domain"), "unknown"),
+            label=_bucket_key(cell.get("domain"), "unknown"),
+            cell=cell,
+        )
+        _add_bucket(
+            by_unit_family,
+            key=_bucket_key(cell.get("unit_family"), "unknown"),
+            label=_bucket_key(cell.get("unit_family"), "unknown"),
+            cell=cell,
+        )
+
+    def _finalize_buckets(buckets: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+        rows: list[dict[str, Any]] = []
+        for bucket in buckets.values():
+            weighted_den = float(bucket.pop("weighted_denominator") or 0.0)
+            weighted_num = float(bucket.pop("weighted_numerator") or 0.0)
+            bucket["weighted_percent"] = round(weighted_num / weighted_den, 1) if weighted_den > 0 else None
+            rows.append(bucket)
+        rows.sort(key=lambda item: safe_text(item.get("label")).lower())
+        return rows
+
+    weighted_percent = round(weighted_numerator / weighted_denominator, 1) if weighted_denominator > 0 else None
+    return {
+        "meta": {
+            "path": public_path_text(COVERAGE_CAPACITY_MODEL_PATH),
+            "exists": COVERAGE_CAPACITY_MODEL_PATH.exists(),
+            "version": safe_text(model.get("version")),
+            "title": safe_text(model.get("title")),
+            "ideal_inventory_version": safe_text(ideal_payload.get("version")),
+        },
+        "summary": {
+            "cells_total": len(cells),
+            "cells_with_denominator": sum(1 for cell in cells if cell.get("primary_percent") is not None),
+            "blocked_cells": blocked_cells,
+            "denominator_gaps": len(denominator_gaps),
+            "weighted_percent": weighted_percent,
+        },
+        "families": _finalize_buckets(by_unit_family),
+        "by_scope": _finalize_buckets(by_scope),
+        "by_evidence_kind": _finalize_buckets(by_evidence_kind),
+        "by_domain": _finalize_buckets(by_domain),
+        "denominator_gaps": denominator_gaps,
+        "cells": cells,
+    }
 
 
 def fetch_schema(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
@@ -5879,7 +6820,21 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 "/citizen/data/citizen.json",
                 "/citizen/data/citizen_votes.json",
                 "/citizen/data/citizen_declared.json",
+                "/citizen/data/citizen_comparability.json",
+                "/citizen/data/citizen_comparability_votes.json",
+                "/citizen/data/citizen_comparability_declared.json",
+                "/citizen/data/citizen_lineage.json",
+                "/citizen/data/citizen_lineage_votes.json",
+                "/citizen/data/citizen_lineage_declared.json",
+                "/citizen/data/citizen_snapshot_diff.json",
+                "/citizen/data/citizen_snapshot_diff_votes.json",
+                "/citizen/data/citizen_snapshot_diff_declared.json",
+                "/citizen/data/citizen_ranking_robustness.json",
+                "/citizen/data/citizen_ranking_robustness_votes.json",
+                "/citizen/data/citizen_ranking_robustness_declared.json",
                 "/citizen/data/concern_pack_quality.json",
+                "/citizen/data/concern_pack_quality_votes.json",
+                "/citizen/data/concern_pack_quality_declared.json",
             ):
                 filename = path.rsplit("/", 1)[-1]
                 src_path = GH_CITIZEN_DATA_DIR / filename
