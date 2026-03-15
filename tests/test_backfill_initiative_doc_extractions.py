@@ -202,6 +202,71 @@ class TestBackfillInitiativeDocExtractions(unittest.TestCase):
             finally:
                 conn.close()
 
+    def test_empty_excerpt_uses_title_fallback_strong(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "extract_empty_excerpt.db"
+            conn = self._open_db(db_path)
+            try:
+                conn.execute(
+                    "INSERT INTO source_records(source_record_pk, source_id, source_record_id) VALUES (3, 'parl_initiative_docs', 'doc-3')"
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiatives(initiative_id, source_id, title)
+                    VALUES (
+                      'congreso:leg15:exp:121/000777',
+                      'congreso_iniciativas',
+                      'Proposición de Ley para reforzar la protección del ahorro familiar'
+                    )
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+                    VALUES ('congreso:leg15:exp:121/000777', 'bocg', 'https://example.org/doc3.pdf', 3)
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, content_sha256, bytes, raw_path, text_excerpt)
+                    VALUES ('parl_initiative_docs', 'https://example.org/doc3.pdf', 3, 'application/pdf', 'sha-doc-3', 80, '/tmp/doc3.pdf', NULL)
+                    """
+                )
+                conn.commit()
+
+                result = backfill_initiative_doc_extractions(
+                    conn,
+                    doc_source_id="parl_initiative_docs",
+                    initiative_source_ids=("congreso_iniciativas",),
+                    extractor_version="heuristic_subject_v2",
+                    limit=0,
+                    only_missing=False,
+                    dry_run=False,
+                )
+
+                self.assertEqual(int(result["seen"]), 1)
+                self.assertEqual(int(result["upserted"]), 1)
+
+                row = conn.execute(
+                    """
+                    SELECT
+                      confidence,
+                      needs_review,
+                      extracted_subject,
+                      extracted_excerpt,
+                      json_extract(analysis_payload_json, '$.subject_method') AS method
+                    FROM parl_initiative_doc_extractions
+                    WHERE source_record_pk = 3
+                    """
+                ).fetchone()
+                self.assertAlmostEqual(float(row["confidence"]), 0.74, places=6)
+                self.assertEqual(int(row["needs_review"]), 0)
+                self.assertEqual(str(row["method"]), "title_fallback_strong")
+                self.assertIn("Proposición de Ley", str(row["extracted_subject"]))
+                self.assertIsNone(row["extracted_excerpt"])
+            finally:
+                conn.close()
+
     def test_title_hint_strong_auto_clears_review(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "extract_title_hint_strong.db"
@@ -483,6 +548,393 @@ class TestBackfillInitiativeDocExtractions(unittest.TestCase):
                 self.assertEqual(int(row["needs_review"]), 0)
                 self.assertEqual(str(row["method"]), "title_hint_strong_from_short_window")
                 self.assertEqual(str(row["extracted_subject"]), "Proyecto de Ley del Deporte. (621/000065)")
+            finally:
+                conn.close()
+
+    def test_noisy_html_keyword_window_falls_back_to_strong_title(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "extract_noisy_html_keyword.db"
+            conn = self._open_db(db_path)
+            try:
+                conn.execute(
+                    "INSERT INTO source_records(source_record_pk, source_id, source_record_id) VALUES (14, 'parl_initiative_docs', 'doc-14')"
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiatives(initiative_id, source_id, title)
+                    VALUES (
+                      'senado:leg12:exp:621/000005',
+                      'senado_iniciativas',
+                      'Proyecto de Ley por la que se modifica la Ley de Enjuiciamiento Civil'
+                    )
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+                    VALUES ('senado:leg12:exp:621/000005', 'ds', 'https://example.org/doc-14.html', 14)
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, content_sha256, bytes, raw_path, text_excerpt)
+                    VALUES (
+                      'parl_initiative_docs',
+                      'https://example.org/doc-14.html',
+                      14,
+                      'text/html',
+                      'sha-doc-14',
+                      222,
+                      '/tmp/doc-14.html',
+                      'Enmiendas | Senado de España !function(a){var e=\"https://www.senado.es\";}'
+                    )
+                    """
+                )
+                conn.commit()
+
+                result = backfill_initiative_doc_extractions(
+                    conn,
+                    doc_source_id="parl_initiative_docs",
+                    initiative_source_ids=("senado_iniciativas",),
+                    extractor_version="heuristic_subject_v2",
+                    limit=0,
+                    only_missing=False,
+                    dry_run=False,
+                )
+                self.assertEqual(int(result["seen"]), 1)
+                self.assertEqual(int(result["upserted"]), 1)
+
+                row = conn.execute(
+                    """
+                    SELECT
+                      confidence,
+                      needs_review,
+                      text_quality,
+                      extracted_subject,
+                      json_extract(analysis_payload_json, '$.subject_method') AS method
+                    FROM parl_initiative_doc_extractions
+                    WHERE source_record_pk = 14
+                    """
+                ).fetchone()
+                self.assertAlmostEqual(float(row["confidence"]), 0.74, places=6)
+                self.assertEqual(int(row["needs_review"]), 1)
+                self.assertEqual(str(row["text_quality"]), "shell_html")
+                self.assertEqual(str(row["method"]), "title_hint_strong")
+                self.assertNotIn("!function(", str(row["extracted_subject"]))
+                self.assertIn("Proyecto de Ley", str(row["extracted_subject"]))
+            finally:
+                conn.close()
+
+    def test_noisy_senado_nav_sentence_falls_back_to_strong_title(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "extract_noisy_senado_nav.db"
+            conn = self._open_db(db_path)
+            try:
+                conn.execute(
+                    "INSERT INTO source_records(source_record_pk, source_id, source_record_id) VALUES (15, 'parl_initiative_docs', 'doc-15')"
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiatives(initiative_id, source_id, title)
+                    VALUES (
+                      'senado:leg14:exp:621/000089',
+                      'senado_iniciativas',
+                      'Proyecto de Ley de pesca sostenible e investigación pesquera'
+                    )
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+                    VALUES ('senado:leg14:exp:621/000089', 'ds', 'https://example.org/doc-15.html', 15)
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, content_sha256, bytes, raw_path, text_excerpt)
+                    VALUES (
+                      'parl_initiative_docs',
+                      'https://example.org/doc-15.html',
+                      15,
+                      'text/html',
+                      'sha-doc-15',
+                      222,
+                      '/tmp/doc-15.html',
+                      'Ir al Contenido (Presione enter) SENADO DE ESPAÑA Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos Actividad parlamentaria Actualidad Pleno y Diputación Permanente'
+                    )
+                    """
+                )
+                conn.commit()
+
+                result = backfill_initiative_doc_extractions(
+                    conn,
+                    doc_source_id="parl_initiative_docs",
+                    initiative_source_ids=("senado_iniciativas",),
+                    extractor_version="heuristic_subject_v2",
+                    limit=0,
+                    only_missing=False,
+                    dry_run=False,
+                )
+                self.assertEqual(int(result["seen"]), 1)
+                self.assertEqual(int(result["upserted"]), 1)
+
+                row = conn.execute(
+                    """
+                    SELECT
+                      confidence,
+                      needs_review,
+                      text_quality,
+                      extracted_subject,
+                      json_extract(analysis_payload_json, '$.subject_method') AS method
+                    FROM parl_initiative_doc_extractions
+                    WHERE source_record_pk = 15
+                    """
+                ).fetchone()
+                self.assertAlmostEqual(float(row["confidence"]), 0.74, places=6)
+                self.assertEqual(int(row["needs_review"]), 1)
+                self.assertEqual(str(row["text_quality"]), "shell_html")
+                self.assertEqual(str(row["method"]), "title_hint_strong")
+                self.assertIn("Proyecto de Ley", str(row["extracted_subject"]))
+                self.assertNotIn("Ir al Contenido", str(row["extracted_subject"]))
+            finally:
+                conn.close()
+
+    def test_materializes_full_text_and_flags_pdf_needs_ocr(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "extract_pdf_needs_ocr.db"
+            raw_path = Path(td) / "doc-20.pdf"
+            raw_path.write_bytes(b"%PDF-1.4 fake pdf without text layer")
+            conn = self._open_db(db_path)
+            try:
+                conn.execute(
+                    "INSERT INTO source_records(source_record_pk, source_id, source_record_id) VALUES (20, 'parl_initiative_docs', 'doc-20')"
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiatives(initiative_id, source_id, title)
+                    VALUES (
+                      'congreso:leg15:exp:121/000020',
+                      'congreso_iniciativas',
+                      'Proyecto de Ley de prueba para extracción OCR'
+                    )
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+                    VALUES ('congreso:leg15:exp:121/000020', 'bocg', 'https://example.org/doc-20.pdf', 20)
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, content_sha256, bytes, raw_path, text_excerpt)
+                    VALUES (
+                      'parl_initiative_docs',
+                      'https://example.org/doc-20.pdf',
+                      20,
+                      'application/pdf',
+                      'sha-doc-20',
+                      512,
+                      ?,
+                      NULL
+                    )
+                    """,
+                    (str(raw_path),),
+                )
+                conn.commit()
+
+                result = backfill_initiative_doc_extractions(
+                    conn,
+                    doc_source_id="parl_initiative_docs",
+                    initiative_source_ids=("congreso_iniciativas",),
+                    extractor_version="heuristic_subject_v3",
+                    text_output_root=Path(td) / "texts",
+                    limit=0,
+                    only_missing=False,
+                    dry_run=False,
+                )
+                self.assertEqual(int(result["seen"]), 1)
+                self.assertEqual(int(result["needs_ocr"]), 1)
+
+                row = conn.execute(
+                    """
+                    SELECT
+                      text_extraction_method,
+                      text_quality,
+                      needs_ocr,
+                      full_text_path,
+                      needs_review,
+                      extracted_subject
+                    FROM parl_initiative_doc_extractions
+                    WHERE source_record_pk = 20
+                    """
+                ).fetchone()
+                self.assertEqual(str(row["text_extraction_method"]), "pdf_text")
+                self.assertEqual(str(row["text_quality"]), "needs_ocr")
+                self.assertEqual(int(row["needs_ocr"]), 1)
+                self.assertEqual(int(row["needs_review"]), 1)
+                self.assertIsNone(row["full_text_path"])
+                self.assertIn("Proyecto de Ley", str(row["extracted_subject"]))
+            finally:
+                conn.close()
+
+    def test_materializes_full_text_artifact_for_structured_xml(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "extract_xml_artifact.db"
+            raw_path = Path(td) / "doc-21.xml"
+            raw_path.write_text(
+                "<root><titulo>Proyecto de Ley de vivienda asequible</titulo><p>Medidas para ampliar parque público y limitar alquileres abusivos.</p></root>",
+                encoding="utf-8",
+            )
+            conn = self._open_db(db_path)
+            try:
+                conn.execute(
+                    "INSERT INTO source_records(source_record_pk, source_id, source_record_id) VALUES (21, 'parl_initiative_docs', 'doc-21')"
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiatives(initiative_id, source_id, title)
+                    VALUES (
+                      'senado:leg15:exp:621/000021',
+                      'senado_iniciativas',
+                      'Proyecto de Ley de vivienda asequible'
+                    )
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+                    VALUES ('senado:leg15:exp:621/000021', 'bocg', 'https://example.org/doc-21.xml', 21)
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, content_sha256, bytes, raw_path, text_excerpt)
+                    VALUES (
+                      'parl_initiative_docs',
+                      'https://example.org/doc-21.xml',
+                      21,
+                      'text/xml',
+                      'sha-doc-21',
+                      321,
+                      ?,
+                      'Proyecto de Ley de vivienda asequible.'
+                    )
+                    """,
+                    (str(raw_path),),
+                )
+                conn.commit()
+
+                result = backfill_initiative_doc_extractions(
+                    conn,
+                    doc_source_id="parl_initiative_docs",
+                    initiative_source_ids=("senado_iniciativas",),
+                    extractor_version="heuristic_subject_v3",
+                    text_output_root=Path(td) / "texts",
+                    limit=0,
+                    only_missing=False,
+                    dry_run=False,
+                )
+                self.assertEqual(int(result["seen"]), 1)
+
+                row = conn.execute(
+                    """
+                    SELECT
+                      text_extraction_method,
+                      text_quality,
+                      needs_ocr,
+                      full_text_path,
+                      full_text_chars,
+                      needs_review
+                    FROM parl_initiative_doc_extractions
+                    WHERE source_record_pk = 21
+                    """
+                ).fetchone()
+                self.assertEqual(str(row["text_extraction_method"]), "xml_structured")
+                self.assertEqual(str(row["text_quality"]), "structured_good")
+                self.assertEqual(int(row["needs_ocr"]), 0)
+                self.assertEqual(int(row["needs_review"]), 0)
+                artifact_path = Path(str(row["full_text_path"]))
+                self.assertTrue(artifact_path.is_file())
+                self.assertGreater(int(row["full_text_chars"] or 0), 50)
+                self.assertIn("limitar alquileres abusivos", artifact_path.read_text(encoding="utf-8"))
+            finally:
+                conn.close()
+
+    def test_iso_8859_xml_is_not_marked_garbled(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "extract_iso_xml.db"
+            raw_path = Path(td) / "doc-22.xml"
+            raw_path.write_bytes(
+                (
+                    "<?xml version='1.0' encoding='ISO-8859-15'?>"
+                    "<root><p>Enmiendas y vetos del Senado. Información sobre tráfico y circulación con señalización específica.</p></root>"
+                ).encode("iso-8859-15")
+            )
+            conn = self._open_db(db_path)
+            try:
+                conn.execute(
+                    "INSERT INTO source_records(source_record_pk, source_id, source_record_id) VALUES (22, 'parl_initiative_docs', 'doc-22')"
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiatives(initiative_id, source_id, title)
+                    VALUES (
+                      'senado:leg15:exp:621/000022',
+                      'senado_iniciativas',
+                      'Proyecto de Ley de prueba con enmiendas del Senado'
+                    )
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
+                    VALUES ('senado:leg15:exp:621/000022', 'bocg', 'https://example.org/doc-22.xml', 22)
+                    """
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, content_sha256, bytes, raw_path, text_excerpt)
+                    VALUES (
+                      'parl_initiative_docs',
+                      'https://example.org/doc-22.xml',
+                      22,
+                      'text/xml',
+                      'sha-doc-22',
+                      333,
+                      ?,
+                      'Enmiendas y vetos del Senado.'
+                    )
+                    """,
+                    (str(raw_path),),
+                )
+                conn.commit()
+
+                result = backfill_initiative_doc_extractions(
+                    conn,
+                    doc_source_id="parl_initiative_docs",
+                    initiative_source_ids=("senado_iniciativas",),
+                    extractor_version="heuristic_subject_v3",
+                    text_output_root=Path(td) / "texts",
+                    limit=0,
+                    only_missing=False,
+                    dry_run=False,
+                )
+                self.assertEqual(int(result["seen"]), 1)
+
+                row = conn.execute(
+                    """
+                    SELECT text_quality, full_text_path
+                    FROM parl_initiative_doc_extractions
+                    WHERE source_record_pk = 22
+                    """
+                ).fetchone()
+                self.assertEqual(str(row["text_quality"]), "structured_good")
+                artifact_path = Path(str(row["full_text_path"]))
+                self.assertTrue(artifact_path.is_file())
+                text = artifact_path.read_text(encoding="utf-8")
+                self.assertIn("tráfico y circulación", text)
+                self.assertNotIn("tr�fico", text)
             finally:
                 conn.close()
 

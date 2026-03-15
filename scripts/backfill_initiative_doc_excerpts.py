@@ -10,6 +10,7 @@ Primary target: `source_id='parl_initiative_docs'` rows with XML/PDF content.
 from __future__ import annotations
 
 import argparse
+import gzip
 import html
 import json
 import re
@@ -24,6 +25,8 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
+XML_ENCODING_RE = re.compile(br"encoding=['\"](?P<encoding>[^'\"]+)['\"]", re.I)
+HTML_CHARSET_RE = re.compile(br"charset=(?P<charset>[A-Za-z0-9._-]+)", re.I)
 
 
 def now_utc_iso() -> str:
@@ -59,8 +62,45 @@ def normalize_text(text: str) -> str:
     return text
 
 
+def _decode_markup_bytes(raw_bytes: bytes) -> str:
+    head = raw_bytes[:2048]
+    candidates: list[str] = []
+    for regex, group_name in ((XML_ENCODING_RE, "encoding"), (HTML_CHARSET_RE, "charset")):
+        m = regex.search(head)
+        if not m:
+            continue
+        try:
+            enc = m.group(group_name).decode("ascii", errors="ignore").strip()
+        except Exception:
+            enc = ""
+        if enc:
+            candidates.append(enc)
+    candidates.extend(["utf-8", "iso-8859-15", "iso-8859-1", "cp1252"])
+    seen: set[str] = set()
+    for encoding in candidates:
+        key = encoding.lower()
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        try:
+            return raw_bytes.decode(encoding)
+        except Exception:
+            continue
+    return raw_bytes.decode("utf-8", errors="replace")
+
+
+def _maybe_decompress_gzip(raw_bytes: bytes) -> bytes:
+    if not raw_bytes.startswith(b"\x1f\x8b"):
+        return raw_bytes
+    try:
+        return gzip.decompress(raw_bytes)
+    except Exception:
+        return raw_bytes
+
+
 def extract_from_xml_or_html(raw_bytes: bytes) -> str:
-    decoded = raw_bytes.decode("utf-8", errors="replace")
+    raw_bytes = _maybe_decompress_gzip(raw_bytes)
+    decoded = _decode_markup_bytes(raw_bytes)
 
     # Prefer XML parsing first so CDATA content is preserved via itertext().
     try:
