@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from datetime import datetime, timezone
 from pathlib import Path
 
 from scripts.report_liberty_atlas_release_heartbeat import main
@@ -76,11 +77,13 @@ class TestReportLibertyAtlasReleaseHeartbeat(unittest.TestCase):
             heartbeat_jsonl = root / "heartbeat.jsonl"
             out = root / "report.json"
 
-            payload = _release_fixture()
+            snapshot_date = datetime.now(timezone.utc).date().isoformat()
+            entry_id = f"snap-{snapshot_date}"
+            payload = _release_fixture(snapshot_date=snapshot_date, entry_id=entry_id)
             _write_json(published_json, payload)
             _write_json(gh_json, payload)
             _write_json(hf_json, payload)
-            _write_json(continuity_json, _continuity_fixture())
+            _write_json(continuity_json, _continuity_fixture(snapshot_date=snapshot_date, entry_id=entry_id))
 
             rc = main(
                 [
@@ -95,7 +98,7 @@ class TestReportLibertyAtlasReleaseHeartbeat(unittest.TestCase):
                     "--heartbeat-jsonl",
                     str(heartbeat_jsonl),
                     "--snapshot-date",
-                    "2026-02-23",
+                    snapshot_date,
                     "--max-snapshot-age-days",
                     "14",
                     "--strict",
