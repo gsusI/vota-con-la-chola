@@ -13,6 +13,7 @@ DEFAULT_HEARTBEAT_JSONL = Path("docs/etl/runs/liberty_atlas_release_heartbeat.js
 DEFAULT_LAST = 20
 DEFAULT_MAX_FAILED = 0
 DEFAULT_MAX_DEGRADED = 20
+DEFAULT_MAX_FUTURE_ALERTS = 0
 DEFAULT_MAX_STALE_ALERTS = 0
 DEFAULT_MAX_DRIFT_ALERTS = 0
 DEFAULT_MAX_HF_UNAVAILABLE = 20
@@ -73,12 +74,39 @@ def _parse_non_negative_int(raw: Any, *, arg_name: str) -> int:
     return value
 
 
+def _parse_run_at(value: Any) -> datetime | None:
+    token = _safe_text(value)
+    if not token:
+        return None
+    if token.endswith("Z"):
+        token = f"{token[:-1]}+00:00"
+    try:
+        dt = datetime.fromisoformat(token)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def _parse_optional_run_at(raw: Any, *, arg_name: str) -> datetime | None:
+    token = _safe_text(raw)
+    if not token:
+        return None
+    parsed = _parse_run_at(token)
+    if parsed is None:
+        raise ValueError(f"{arg_name} must be ISO-8601 datetime")
+    return parsed
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Liberty atlas release heartbeat window report")
     p.add_argument("--heartbeat-jsonl", default=str(DEFAULT_HEARTBEAT_JSONL))
     p.add_argument("--last", type=int, default=DEFAULT_LAST)
+    p.add_argument("--min-run-at", default="")
     p.add_argument("--max-failed", type=int, default=DEFAULT_MAX_FAILED)
     p.add_argument("--max-degraded", type=int, default=DEFAULT_MAX_DEGRADED)
+    p.add_argument("--max-future-alerts", type=int, default=DEFAULT_MAX_FUTURE_ALERTS)
     p.add_argument("--max-stale-alerts", type=int, default=DEFAULT_MAX_STALE_ALERTS)
     p.add_argument("--max-drift-alerts", type=int, default=DEFAULT_MAX_DRIFT_ALERTS)
     p.add_argument("--max-hf-unavailable", type=int, default=DEFAULT_MAX_HF_UNAVAILABLE)
@@ -111,6 +139,7 @@ def _latest_summary(row: dict[str, Any] | None) -> dict[str, Any]:
             "line_no": 0,
             "malformed_line": True,
             "snapshot_date_expected": "",
+            "future_alerts_count": 0,
             "stale_alerts_count": 0,
             "drift_alerts_count": 0,
             "hf_unavailable": True,
@@ -125,6 +154,7 @@ def _latest_summary(row: dict[str, Any] | None) -> dict[str, Any]:
         "line_no": _to_int(row.get("line_no"), 0),
         "malformed_line": malformed,
         "snapshot_date_expected": _safe_text(entry.get("snapshot_date_expected")),
+        "future_alerts_count": _to_int(entry.get("future_alerts_count"), 0),
         "stale_alerts_count": _to_int(entry.get("stale_alerts_count"), 0),
         "drift_alerts_count": _to_int(entry.get("drift_alerts_count"), 0),
         "hf_unavailable": bool(entry.get("hf_unavailable")),
@@ -136,8 +166,10 @@ def build_window_report(
     rows: list[dict[str, Any]],
     *,
     window_last: int = DEFAULT_LAST,
+    min_run_at: str = "",
     max_failed: int = DEFAULT_MAX_FAILED,
     max_degraded: int = DEFAULT_MAX_DEGRADED,
+    max_future_alerts: int = DEFAULT_MAX_FUTURE_ALERTS,
     max_stale_alerts: int = DEFAULT_MAX_STALE_ALERTS,
     max_drift_alerts: int = DEFAULT_MAX_DRIFT_ALERTS,
     max_hf_unavailable: int = DEFAULT_MAX_HF_UNAVAILABLE,
@@ -147,24 +179,47 @@ def build_window_report(
     window_size = _parse_positive_int(window_last, arg_name="window_last")
     max_failed_n = _parse_non_negative_int(max_failed, arg_name="max_failed")
     max_degraded_n = _parse_non_negative_int(max_degraded, arg_name="max_degraded")
+    max_future_alerts_n = _parse_non_negative_int(max_future_alerts, arg_name="max_future_alerts")
     max_stale_alerts_n = _parse_non_negative_int(max_stale_alerts, arg_name="max_stale_alerts")
     max_drift_alerts_n = _parse_non_negative_int(max_drift_alerts, arg_name="max_drift_alerts")
     max_hf_unavailable_n = _parse_non_negative_int(max_hf_unavailable, arg_name="max_hf_unavailable")
+    min_run_at_dt = _parse_optional_run_at(min_run_at, arg_name="min_run_at")
 
-    window_rows = rows[max(0, len(rows) - window_size) :]
+    filtered_rows = list(rows)
+    excluded_before_min_run_at = 0
+    excluded_invalid_run_at = 0
+    if min_run_at_dt is not None:
+        filtered_rows = []
+        for row in rows:
+            entry = _safe_obj(row.get("entry"))
+            run_at_dt = _parse_run_at(entry.get("run_at"))
+            if run_at_dt is None:
+                excluded_invalid_run_at += 1
+                continue
+            if run_at_dt < min_run_at_dt:
+                excluded_before_min_run_at += 1
+                continue
+            filtered_rows.append(row)
+
+    window_rows = filtered_rows[max(0, len(filtered_rows) - window_size) :]
     report: dict[str, Any] = {
         "generated_at": now_utc_iso(),
         "strict": bool(strict),
         "heartbeat_path": heartbeat_path,
         "window_last": int(window_size),
+        "min_run_at": min_run_at_dt.isoformat() if min_run_at_dt is not None else "",
         "thresholds": {
             "max_failed": int(max_failed_n),
             "max_degraded": int(max_degraded_n),
+            "max_future_alerts": int(max_future_alerts_n),
             "max_stale_alerts": int(max_stale_alerts_n),
             "max_drift_alerts": int(max_drift_alerts_n),
             "max_hf_unavailable": int(max_hf_unavailable_n),
         },
         "entries_total": len(rows),
+        "entries_eligible": len(filtered_rows),
+        "excluded_before_min_run_at": int(excluded_before_min_run_at),
+        "excluded_invalid_run_at": int(excluded_invalid_run_at),
         "entries_in_window": len(window_rows),
         "malformed_entries_in_window": 0,
         "status_counts": {"ok": 0, "degraded": 0, "failed": 0},
@@ -172,6 +227,7 @@ def build_window_report(
         "failed_rate_pct": 0.0,
         "degraded_in_window": 0,
         "degraded_rate_pct": 0.0,
+        "future_alerts_in_window": 0,
         "stale_alerts_in_window": 0,
         "drift_alerts_in_window": 0,
         "hf_unavailable_in_window": 0,
@@ -181,10 +237,12 @@ def build_window_report(
             "malformed_entries_ok": False,
             "max_failed_ok": False,
             "max_degraded_ok": False,
+            "max_future_alerts_ok": False,
             "max_stale_alerts_ok": False,
             "max_drift_alerts_ok": False,
             "max_hf_unavailable_ok": False,
             "latest_not_failed_ok": False,
+            "latest_no_future_alerts_ok": False,
             "latest_no_stale_alerts_ok": False,
             "latest_no_drift_alerts_ok": False,
             "latest_continuity_ok": False,
@@ -203,6 +261,9 @@ def build_window_report(
         entry = _safe_obj(row.get("entry"))
         status = _normalize_status(entry.get("status"))
         report["status_counts"][status] = int(report["status_counts"].get(status, 0)) + 1
+        report["future_alerts_in_window"] = int(report["future_alerts_in_window"]) + _to_int(
+            entry.get("future_alerts_count"), 0
+        )
         report["stale_alerts_in_window"] = int(report["stale_alerts_in_window"]) + _to_int(
             entry.get("stale_alerts_count"), 0
         )
@@ -230,6 +291,7 @@ def build_window_report(
     checks["malformed_entries_ok"] = report["malformed_entries_in_window"] == 0
     checks["max_failed_ok"] = report["failed_in_window"] <= max_failed_n
     checks["max_degraded_ok"] = report["degraded_in_window"] <= max_degraded_n
+    checks["max_future_alerts_ok"] = report["future_alerts_in_window"] <= max_future_alerts_n
     checks["max_stale_alerts_ok"] = report["stale_alerts_in_window"] <= max_stale_alerts_n
     checks["max_drift_alerts_ok"] = report["drift_alerts_in_window"] <= max_drift_alerts_n
     checks["max_hf_unavailable_ok"] = report["hf_unavailable_in_window"] <= max_hf_unavailable_n
@@ -238,6 +300,9 @@ def build_window_report(
         and not bool(latest.get("malformed_line"))
         and _normalize_status(latest.get("status")) != "failed"
     )
+    checks["latest_no_future_alerts_ok"] = report["entries_in_window"] > 0 and _to_int(
+        latest.get("future_alerts_count"), 0
+    ) == 0
     checks["latest_no_stale_alerts_ok"] = report["entries_in_window"] > 0 and _to_int(
         latest.get("stale_alerts_count"), 0
     ) == 0
@@ -262,6 +327,8 @@ def build_window_report(
         reasons.append("max_failed_exceeded")
     if not checks["max_degraded_ok"]:
         reasons.append("max_degraded_exceeded")
+    if not checks["max_future_alerts_ok"]:
+        reasons.append("max_future_alerts_exceeded")
     if not checks["max_stale_alerts_ok"]:
         reasons.append("max_stale_alerts_exceeded")
     if not checks["max_drift_alerts_ok"]:
@@ -270,6 +337,8 @@ def build_window_report(
         reasons.append("max_hf_unavailable_exceeded")
     if not checks["latest_not_failed_ok"]:
         reasons.append("latest_status_failed")
+    if not checks["latest_no_future_alerts_ok"]:
+        reasons.append("latest_future_alert_present")
     if not checks["latest_no_stale_alerts_ok"]:
         reasons.append("latest_stale_alert_present")
     if not checks["latest_no_drift_alerts_ok"]:
@@ -301,8 +370,10 @@ def build_window_report_from_path(
     heartbeat_path: Path,
     *,
     window_last: int = DEFAULT_LAST,
+    min_run_at: str = "",
     max_failed: int = DEFAULT_MAX_FAILED,
     max_degraded: int = DEFAULT_MAX_DEGRADED,
+    max_future_alerts: int = DEFAULT_MAX_FUTURE_ALERTS,
     max_stale_alerts: int = DEFAULT_MAX_STALE_ALERTS,
     max_drift_alerts: int = DEFAULT_MAX_DRIFT_ALERTS,
     max_hf_unavailable: int = DEFAULT_MAX_HF_UNAVAILABLE,
@@ -312,8 +383,10 @@ def build_window_report_from_path(
     return build_window_report(
         rows,
         window_last=window_last,
+        min_run_at=min_run_at,
         max_failed=max_failed,
         max_degraded=max_degraded,
+        max_future_alerts=max_future_alerts,
         max_stale_alerts=max_stale_alerts,
         max_drift_alerts=max_drift_alerts,
         max_hf_unavailable=max_hf_unavailable,
@@ -329,8 +402,10 @@ def main(argv: list[str] | None = None) -> int:
         report = build_window_report_from_path(
             Path(str(args.heartbeat_jsonl)),
             window_last=int(args.last),
+            min_run_at=_safe_text(args.min_run_at),
             max_failed=int(args.max_failed),
             max_degraded=int(args.max_degraded),
+            max_future_alerts=int(args.max_future_alerts),
             max_stale_alerts=int(args.max_stale_alerts),
             max_drift_alerts=int(args.max_drift_alerts),
             max_hf_unavailable=int(args.max_hf_unavailable),

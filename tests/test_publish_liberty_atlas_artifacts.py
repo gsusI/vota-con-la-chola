@@ -215,6 +215,107 @@ class TestPublishLibertyAtlasArtifacts(unittest.TestCase):
             pass_payload = json.loads(out_pass.read_text(encoding="utf-8"))
             self.assertEqual(str(pass_payload["status"]), "missing_inputs")
 
+    def test_main_rejects_future_snapshot_date_unless_overridden(self) -> None:
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            inputs_dir = root / "inputs"
+            published_dir = root / "published"
+            out_fail = root / "out_fail.json"
+            out_pass = root / "out_pass.json"
+
+            snapshot_json = inputs_dir / "snapshot.json"
+            irlc_parquet = inputs_dir / "irlc.parquet"
+            accountability_parquet = inputs_dir / "accountability.parquet"
+            diff_json = inputs_dir / "diff.json"
+            changelog_entry_json = inputs_dir / "changelog_entry.json"
+            changelog_history_jsonl = inputs_dir / "changelog_history.jsonl"
+
+            _write_json(
+                snapshot_json,
+                {
+                    "snapshot_date": "2999-01-01",
+                    "schema_version": "liberty_restrictions_snapshot_v1",
+                    "totals": {"restrictions_total": 8},
+                },
+            )
+            irlc_parquet.parent.mkdir(parents=True, exist_ok=True)
+            irlc_parquet.write_bytes(b"PAR1irlc")
+            accountability_parquet.write_bytes(b"PAR1accountability")
+            _write_json(diff_json, {"status": "unchanged", "totals_changed": []})
+            _write_json(
+                changelog_entry_json,
+                {
+                    "entry_id": "snap-2999-01-01",
+                    "snapshot_date": "2999-01-01",
+                    "appended": True,
+                    "history_entries_total": 1,
+                    "history_malformed_lines_total": 0,
+                },
+            )
+            changelog_history_jsonl.write_text(
+                json.dumps(
+                    {
+                        "entry_id": "snap-2999-01-01",
+                        "snapshot_date": "2999-01-01",
+                        "run_at": "2999-01-01T00:00:00+00:00",
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc_fail = main(
+                    [
+                        "--snapshot-json",
+                        str(snapshot_json),
+                        "--irlc-parquet",
+                        str(irlc_parquet),
+                        "--accountability-parquet",
+                        str(accountability_parquet),
+                        "--diff-json",
+                        str(diff_json),
+                        "--changelog-entry-json",
+                        str(changelog_entry_json),
+                        "--changelog-history-jsonl",
+                        str(changelog_history_jsonl),
+                        "--published-dir",
+                        str(published_dir),
+                        "--out",
+                        str(out_fail),
+                    ]
+                )
+            self.assertEqual(rc_fail, 2)
+            fail_payload = json.loads(out_fail.read_text(encoding="utf-8"))
+            self.assertEqual(str(fail_payload["status"]), "future_snapshot_date")
+
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc_pass = main(
+                    [
+                        "--snapshot-json",
+                        str(snapshot_json),
+                        "--irlc-parquet",
+                        str(irlc_parquet),
+                        "--accountability-parquet",
+                        str(accountability_parquet),
+                        "--diff-json",
+                        str(diff_json),
+                        "--changelog-entry-json",
+                        str(changelog_entry_json),
+                        "--changelog-history-jsonl",
+                        str(changelog_history_jsonl),
+                        "--published-dir",
+                        str(published_dir),
+                        "--allow-future-snapshot-date",
+                        "--out",
+                        str(out_pass),
+                    ]
+                )
+            self.assertEqual(rc_pass, 0)
+            pass_payload = json.loads(out_pass.read_text(encoding="utf-8"))
+            self.assertEqual(str(pass_payload["status"]), "ok")
+
 
 if __name__ == "__main__":
     unittest.main()

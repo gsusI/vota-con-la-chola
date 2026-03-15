@@ -24,7 +24,9 @@ from scripts.import_liberty_enforcement_seed import import_seed as import_enforc
 from scripts.import_liberty_indirect_accountability_seed import import_seed as import_indirect_seed
 from scripts.import_liberty_proportionality_seed import import_seed as import_prop_seed
 from scripts.import_liberty_restrictions_seed import import_seed as import_liberty_seed
+from scripts.import_sanction_data_catalog_seed import import_seed as import_data_catalog_seed
 from scripts.import_sanction_norms_seed import import_seed as import_norm_seed
+from scripts.import_sanction_volume_pilot_seed import import_seed as import_volume_pilot_seed
 
 
 class TestExportLibertyRestrictionsSnapshot(unittest.TestCase):
@@ -215,6 +217,43 @@ class TestExportLibertyRestrictionsSnapshot(unittest.TestCase):
             rows = read_jsonl_entries(history_path)
             self.assertTrue(history_has_entry(rows, "snap-1"))
             self.assertFalse(history_has_entry(rows, "snap-2"))
+
+    def test_export_snapshot_contains_municipal_overlay_rows(self) -> None:
+        with TemporaryDirectory() as td:
+            db_path = Path(td) / "export_municipal_overlay.db"
+            conn = open_db(db_path)
+            try:
+                root = Path(__file__).resolve().parents[1]
+                schema_path = root / "etl" / "load" / "sqlite_schema.sql"
+                apply_schema(conn, schema_path)
+
+                norm_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "sanction_norms_seed_v1.json").read_text(encoding="utf-8"))
+                data_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "sanction_data_catalog_seed_v1.json").read_text(encoding="utf-8"))
+                volume_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "sanction_volume_pilot_seed_v1.json").read_text(encoding="utf-8"))
+                liberty_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "liberty_restrictions_seed_v1.json").read_text(encoding="utf-8"))
+
+                import_norm_seed(conn, seed_doc=norm_seed_doc, source_id="", snapshot_date="2026-02-23")
+                import_data_catalog_seed(conn, seed_doc=data_seed_doc, source_id="", snapshot_date="2026-02-23")
+                import_volume_pilot_seed(conn, seed_doc=volume_seed_doc, source_id="", snapshot_date="2026-02-23")
+                import_liberty_seed(conn, seed_doc=liberty_seed_doc, source_id="", snapshot_date="2026-02-23")
+                got = build_snapshot(conn, snapshot_date="2026-02-23")
+            finally:
+                conn.close()
+
+        self.assertEqual(int(got["totals"]["municipal_fragments_total"]), 3)
+        self.assertEqual(int(got["totals"]["municipal_mapped_fragment_total"]), 2)
+        self.assertEqual(int(got["totals"]["municipal_unmapped_fragment_total"]), 1)
+        self.assertEqual(int(got["totals"]["municipal_restrictions_total"]), 5)
+        self.assertEqual(len(got["municipal_restrictions"]), 5)
+        mapped_rows = [row for row in got["municipal_restrictions"] if str(row.get("coverage_mode")) == "derived_from_mapped_fragment"]
+        unmapped_rows = [row for row in got["municipal_restrictions"] if str(row.get("coverage_mode")) == "unmapped_municipal_fragment"]
+        self.assertEqual(len(mapped_rows), 4)
+        self.assertEqual(len(unmapped_rows), 1)
+        self.assertEqual(str(unmapped_rows[0]["city_name"]), "Barcelona")
+        self.assertEqual(str(unmapped_rows[0]["scores"]), "None")
+        self.assertTrue(all(row.get("municipal_restriction_key") for row in got["municipal_restrictions"]))
+        self.assertTrue(all(row.get("right_category_id") for row in mapped_rows))
+        self.assertTrue(all(row.get("scores") for row in mapped_rows))
 
 
 def _as_text(value: object) -> str:

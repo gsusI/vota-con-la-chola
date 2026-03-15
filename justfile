@@ -45,7 +45,9 @@ gh_pages_next_docker_image := env_var_or_default("GH_PAGES_NEXT_DOCKER_IMAGE", "
 gh_pages_next_node_modules_volume := env_var_or_default("GH_PAGES_NEXT_NODE_MODULES_VOLUME", "vota-gh-pages-next-node_modules")
 gh_pages_next_next_dir_volume := env_var_or_default("GH_PAGES_NEXT_NEXT_DIR_VOLUME", "vota-gh-pages-next-nextdir")
 gh_pages_next_prime_export := env_var_or_default("GH_PAGES_NEXT_PRIME_EXPORT", "1")
-gh_pages_next_base_path := env_var_or_default("GH_PAGES_NEXT_BASE_PATH", "/vota-con-la-chola")
+gh_pages_reuse_people_exports := env_var_or_default("GH_PAGES_REUSE_PEOPLE_EXPORTS", "1")
+gh_pages_next_base_path := env_var_or_default("GH_PAGES_NEXT_BASE_PATH", "")
+gh_pages_cname := env_var_or_default("GH_PAGES_CNAME", "")
 topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds/topic_taxonomy_es.json")
 domain_taxonomy_seed := env_var_or_default("DOMAIN_TAXONOMY_SEED", "docs/domain_taxonomy_es.md")
 policy_axes_tier1_seed := env_var_or_default("POLICY_AXES_TIER1_SEED", "docs/codebook_tier1_es.md")
@@ -55,12 +57,83 @@ initdoc_limit := env_var_or_default("INITDOC_LIMIT", "200")
 initdoc_max_per := env_var_or_default("INITDOC_MAX_PER", "3")
 initdoc_timeout := env_var_or_default("INITDOC_TIMEOUT", "25")
 initdoc_archive_timeout := env_var_or_default("INITDOC_ARCHIVE_TIMEOUT", "12")
+initdoc_archive_http_statuses := env_var_or_default("INITDOC_ARCHIVE_HTTP_STATUSES", "404")
 initdoc_excerpt_scope := env_var_or_default("INITDOC_EXCERPT_SCOPE", "senado_iniciativas")
 initdoc_fetch_scope := env_var_or_default("INITDOC_FETCH_SCOPE", "")
 initdoc_status_out := env_var_or_default("INITDOC_STATUS_OUT", "docs/etl/sprints/AI-OPS-27/evidence/initiative_doc_status_latest.json")
 initdoc_status_missing_sample_limit := env_var_or_default("INITDOC_STATUS_MISSING_SAMPLE_LIMIT", "20")
 initdoc_missing_export_source_ids := env_var_or_default("INITDOC_MISSING_EXPORT_SOURCE_IDS", "senado_iniciativas")
 initdoc_missing_export_out := env_var_or_default("INITDOC_MISSING_EXPORT_OUT", "docs/etl/sprints/AI-OPS-61/exports/senado_tail_actionable_latest.csv")
+initdoc_missing_export_max_per_initiative := env_var_or_default("INITDOC_MISSING_EXPORT_MAX_PER_INITIATIVE", "1")
+senado_waf_profile_out := env_var_or_default("SENADO_WAF_PROFILE_OUT", "docs/etl/sprints/AI-OPS-232/evidence/senado_waf_block_profile_latest.json")
+senado_waf_profile_sample_limit := env_var_or_default("SENADO_WAF_PROFILE_SAMPLE_LIMIT", "25")
+senado_waf_packets_out := env_var_or_default("SENADO_WAF_PACKETS_OUT", "docs/etl/sprints/AI-OPS-298/evidence/senado_waf_cohort_packets_latest.json")
+senado_waf_packets_csv_out := env_var_or_default("SENADO_WAF_PACKETS_CSV_OUT", "docs/etl/sprints/AI-OPS-298/exports/senado_waf_cohort_packets_latest.csv")
+senado_waf_packets_cohort_top_n := env_var_or_default("SENADO_WAF_PACKETS_COHORT_TOP_N", "4")
+senado_waf_packets_max_urls_per_cohort := env_var_or_default("SENADO_WAF_PACKETS_MAX_URLS_PER_COHORT", "25")
+senado_waf_packets_max_total_rows := env_var_or_default("SENADO_WAF_PACKETS_MAX_TOTAL_ROWS", "120")
+senado_waf_packets_max_zero_doc_rows := env_var_or_default("SENADO_WAF_PACKETS_MAX_ZERO_DOC_ROWS", "25")
+senado_waf_packets_strict_min_packet_rows := env_var_or_default("SENADO_WAF_PACKETS_STRICT_MIN_PACKET_ROWS", "1")
+senado_waf_packets_strict_min_cohorts := env_var_or_default("SENADO_WAF_PACKETS_STRICT_MIN_COHORTS", "1")
+senado_retry_packet_pool_csv := env_var_or_default("SENADO_RETRY_PACKET_POOL_CSV", "docs/etl/sprints/AI-OPS-332/exports/senado_status403_actionable_pool_latest.csv")
+senado_retry_packet_out := env_var_or_default("SENADO_RETRY_PACKET_OUT", "docs/etl/sprints/AI-OPS-332/evidence/senado_status403_fresh_packet_summary_latest.json")
+senado_retry_packet_csv_out := env_var_or_default("SENADO_RETRY_PACKET_CSV_OUT", "docs/etl/sprints/AI-OPS-332/exports/senado_status403_fresh_packet_latest.csv")
+senado_retry_packet_used_urls_out := env_var_or_default("SENADO_RETRY_PACKET_USED_URLS_OUT", "docs/etl/sprints/AI-OPS-332/evidence/senado_retry_packet_used_urls_latest.txt")
+senado_retry_packet_used_refs_out := env_var_or_default("SENADO_RETRY_PACKET_USED_REFS_OUT", "docs/etl/sprints/AI-OPS-332/evidence/senado_retry_packet_used_refs_latest.txt")
+senado_retry_packet_glob := env_var_or_default("SENADO_RETRY_PACKET_GLOB", "docs/etl/sprints/AI-OPS-*/exports/*fresh_packet*.csv")
+senado_retry_packet_refs_file := env_var_or_default("SENADO_RETRY_PACKET_REFS_FILE", "")
+senado_retry_packet_refs_only := env_var_or_default("SENADO_RETRY_PACKET_REFS_ONLY", "0")
+senado_retry_packet_max_rows := env_var_or_default("SENADO_RETRY_PACKET_MAX_ROWS", "80")
+senado_retry_packet_strict_min_fresh_rows := env_var_or_default("SENADO_RETRY_PACKET_STRICT_MIN_FRESH_ROWS", "1")
+senado_archive_gap_retry_json_glob := env_var_or_default("SENADO_ARCHIVE_GAP_RETRY_JSON_GLOB", "docs/etl/sprints/AI-OPS-*/evidence/senado_retry_status404*.json")
+senado_archive_gap_out := env_var_or_default("SENADO_ARCHIVE_GAP_OUT", "docs/etl/sprints/AI-OPS-340/evidence/senado_archive_gap_urls_latest.json")
+senado_archive_gap_csv_out := env_var_or_default("SENADO_ARCHIVE_GAP_CSV_OUT", "docs/etl/sprints/AI-OPS-340/exports/senado_archive_gap_urls_latest.csv")
+senado_archive_gap_strict_min_rows := env_var_or_default("SENADO_ARCHIVE_GAP_STRICT_MIN_ROWS", "1")
+senado_cookie_lever_out := env_var_or_default("SENADO_COOKIE_LEVER_OUT", "docs/etl/sprints/AI-OPS-234/evidence/senado_cookie_lever_status_latest.json")
+senado_cookie_lever_file := env_var_or_default("SENADO_COOKIE_LEVER_FILE", "etl/data/raw/manual/senado_iniciativas_cookie_seed_refresh_20260218T201301Z.cookies.json")
+senado_cookie_lever_max_age_hours := env_var_or_default("SENADO_COOKIE_LEVER_MAX_AGE_HOURS", "24")
+senado_cookie_lever_min_domain := env_var_or_default("SENADO_COOKIE_LEVER_MIN_DOMAIN_COOKIES", "1")
+senado_cookie_lever_min_persistent := env_var_or_default("SENADO_COOKIE_LEVER_MIN_UNEXPIRED_PERSISTENT_COOKIES", "1")
+senado_capture_validity_out := env_var_or_default("SENADO_CAPTURE_VALIDITY_OUT", "docs/etl/sprints/AI-OPS-236/evidence/senado_manual_capture_validity_latest.json")
+senado_capture_validity_glob := env_var_or_default("SENADO_CAPTURE_VALIDITY_GLOB", "etl/data/raw/manual/senado*_ai_ops_235_*.meta.json")
+senado_capture_validity_min := env_var_or_default("SENADO_CAPTURE_VALIDITY_MIN_CAPTURES", "1")
+senado_capture_targets_packet_json := env_var_or_default("SENADO_CAPTURE_TARGETS_PACKET_JSON", "docs/etl/sprints/AI-OPS-298/evidence/senado_waf_cohort_packets_latest.json")
+senado_capture_targets_packet_csv := env_var_or_default("SENADO_CAPTURE_TARGETS_PACKET_CSV", "docs/etl/sprints/AI-OPS-298/exports/senado_waf_cohort_packets_latest.csv")
+senado_capture_targets_out := env_var_or_default("SENADO_CAPTURE_TARGETS_OUT", "docs/etl/sprints/AI-OPS-299/evidence/senado_manual_capture_targets_latest.json")
+senado_capture_targets_csv_out := env_var_or_default("SENADO_CAPTURE_TARGETS_CSV_OUT", "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv")
+senado_capture_targets_seed_url := env_var_or_default("SENADO_CAPTURE_TARGETS_SEED_URL", "https://www.senado.es/")
+senado_capture_targets_max_targets := env_var_or_default("SENADO_CAPTURE_TARGETS_MAX_TARGETS", "8")
+senado_capture_targets_wait_seconds := env_var_or_default("SENADO_CAPTURE_TARGETS_WAIT_SECONDS", "120")
+senado_capture_targets_label_prefix := env_var_or_default("SENADO_CAPTURE_TARGETS_LABEL_PREFIX", "senado_cookie_refresh_ai_ops_299")
+senado_capture_targets_strict_min_targets := env_var_or_default("SENADO_CAPTURE_TARGETS_STRICT_MIN_TARGETS", "1")
+senado_capture_target_progress_targets_csv := env_var_or_default("SENADO_CAPTURE_TARGET_PROGRESS_TARGETS_CSV", "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv")
+senado_capture_target_progress_captures_glob := env_var_or_default("SENADO_CAPTURE_TARGET_PROGRESS_CAPTURES_GLOB", "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json")
+senado_capture_target_progress_out := env_var_or_default("SENADO_CAPTURE_TARGET_PROGRESS_OUT", "docs/etl/sprints/AI-OPS-300/evidence/senado_manual_capture_target_progress_latest.json")
+senado_capture_target_progress_csv_out := env_var_or_default("SENADO_CAPTURE_TARGET_PROGRESS_CSV_OUT", "docs/etl/sprints/AI-OPS-300/exports/senado_manual_capture_target_progress_latest.csv")
+senado_capture_target_progress_min_covered := env_var_or_default("SENADO_CAPTURE_TARGET_PROGRESS_MIN_COVERED", "1")
+senado_capture_target_progress_min_usable := env_var_or_default("SENADO_CAPTURE_TARGET_PROGRESS_MIN_USABLE", "1")
+senado_capture_retry_cycle_out := env_var_or_default("SENADO_CAPTURE_RETRY_CYCLE_OUT", "docs/etl/sprints/AI-OPS-301/evidence/senado_manual_capture_retry_cycle_latest.json")
+senado_capture_retry_cycle_progress_out := env_var_or_default("SENADO_CAPTURE_RETRY_CYCLE_PROGRESS_OUT", "docs/etl/sprints/AI-OPS-301/evidence/senado_manual_capture_target_progress_latest.json")
+senado_capture_retry_cycle_progress_csv_out := env_var_or_default("SENADO_CAPTURE_RETRY_CYCLE_PROGRESS_CSV_OUT", "docs/etl/sprints/AI-OPS-301/exports/senado_manual_capture_target_progress_latest.csv")
+senado_capture_retry_cycle_limit_initiatives := env_var_or_default("SENADO_CAPTURE_RETRY_CYCLE_LIMIT_INITIATIVES", "25")
+senado_capture_retry_cycle_max_docs_per_initiative := env_var_or_default("SENADO_CAPTURE_RETRY_CYCLE_MAX_DOCS_PER_INITIATIVE", "1")
+senado_capture_retry_cycle_timeout := env_var_or_default("SENADO_CAPTURE_RETRY_CYCLE_TIMEOUT", "15")
+senado_capture_pending_progress_json := env_var_or_default("SENADO_CAPTURE_PENDING_PROGRESS_JSON", "docs/etl/sprints/AI-OPS-301/evidence/senado_manual_capture_target_progress_latest.json")
+senado_capture_pending_progress_csv := env_var_or_default("SENADO_CAPTURE_PENDING_PROGRESS_CSV", "docs/etl/sprints/AI-OPS-301/exports/senado_manual_capture_target_progress_latest.csv")
+senado_capture_pending_out := env_var_or_default("SENADO_CAPTURE_PENDING_OUT", "docs/etl/sprints/AI-OPS-302/evidence/senado_manual_capture_pending_targets_latest.json")
+senado_capture_pending_csv_out := env_var_or_default("SENADO_CAPTURE_PENDING_CSV_OUT", "docs/etl/sprints/AI-OPS-302/exports/senado_manual_capture_pending_targets_latest.csv")
+senado_capture_pending_commands_out := env_var_or_default("SENADO_CAPTURE_PENDING_COMMANDS_OUT", "docs/etl/sprints/AI-OPS-302/exports/senado_manual_capture_pending_targets_commands_latest.sh")
+senado_capture_pending_max_targets := env_var_or_default("SENADO_CAPTURE_PENDING_MAX_TARGETS", "8")
+senado_capture_iteration_out := env_var_or_default("SENADO_CAPTURE_ITERATION_OUT", "docs/etl/sprints/AI-OPS-303/evidence/senado_manual_capture_iteration_cycle_latest.json")
+senado_capture_iteration_retry_out := env_var_or_default("SENADO_CAPTURE_ITERATION_RETRY_OUT", "docs/etl/sprints/AI-OPS-303/evidence/senado_manual_capture_retry_cycle_latest.json")
+senado_capture_iteration_progress_out := env_var_or_default("SENADO_CAPTURE_ITERATION_PROGRESS_OUT", "docs/etl/sprints/AI-OPS-303/evidence/senado_manual_capture_target_progress_latest.json")
+senado_capture_iteration_progress_csv_out := env_var_or_default("SENADO_CAPTURE_ITERATION_PROGRESS_CSV_OUT", "docs/etl/sprints/AI-OPS-303/exports/senado_manual_capture_target_progress_latest.csv")
+senado_capture_iteration_pending_out := env_var_or_default("SENADO_CAPTURE_ITERATION_PENDING_OUT", "docs/etl/sprints/AI-OPS-303/evidence/senado_manual_capture_pending_targets_latest.json")
+senado_capture_iteration_pending_csv_out := env_var_or_default("SENADO_CAPTURE_ITERATION_PENDING_CSV_OUT", "docs/etl/sprints/AI-OPS-303/exports/senado_manual_capture_pending_targets_latest.csv")
+senado_capture_iteration_pending_commands_out := env_var_or_default("SENADO_CAPTURE_ITERATION_PENDING_COMMANDS_OUT", "docs/etl/sprints/AI-OPS-303/exports/senado_manual_capture_pending_targets_commands_latest.sh")
+senado_capture_iteration_pending_max_targets := env_var_or_default("SENADO_CAPTURE_ITERATION_PENDING_MAX_TARGETS", "0")
+senado_capture_iteration_pending_wait_seconds := env_var_or_default("SENADO_CAPTURE_ITERATION_PENDING_WAIT_SECONDS", "120")
+senado_capture_iteration_strict_min_pending_reduction := env_var_or_default("SENADO_CAPTURE_ITERATION_STRICT_MIN_PENDING_REDUCTION", "0")
 initdoc_actionable_contract_source_ids := env_var_or_default("INITDOC_ACTIONABLE_CONTRACT_SOURCE_IDS", "senado_iniciativas")
 initdoc_actionable_contract_out := env_var_or_default("INITDOC_ACTIONABLE_CONTRACT_OUT", "docs/etl/sprints/AI-OPS-63/evidence/initdoc_actionable_tail_contract_latest.json")
 initdoc_actionable_digest_out := env_var_or_default("INITDOC_ACTIONABLE_DIGEST_OUT", "docs/etl/sprints/AI-OPS-64/evidence/initdoc_actionable_tail_digest_latest.json")
@@ -125,10 +198,60 @@ declared_quality_source_ids := env_var_or_default("DECLARED_QUALITY_SOURCE_IDS",
 declared_quality_vote_source_ids := env_var_or_default("DECLARED_QUALITY_VOTE_SOURCE_IDS", "congreso_votaciones,senado_votaciones")
 declared_quality_out := env_var_or_default("DECLARED_QUALITY_OUT", "")
 declared_quality_skip_vote_gate := env_var_or_default("DECLARED_QUALITY_SKIP_VOTE_GATE", "1")
+initiative_quality_actionable_scope := env_var_or_default("INITIATIVE_QUALITY_ACTIONABLE_SCOPE", "global")
 programas_manifest := env_var_or_default("PROGRAMAS_MANIFEST", "etl/data/raw/samples/programas_partidos_sample.csv")
 programas_status_out := env_var_or_default("PROGRAMAS_STATUS_OUT", "docs/etl/sprints/AI-OPS-29/evidence/programas_status_latest.json")
 programas_manifest_validate_out := env_var_or_default("PROGRAMAS_MANIFEST_VALIDATE_OUT", "docs/etl/sprints/AI-OPS-30/evidence/programas_manifest_validate_latest.json")
 programas_manifest_require_local_path := env_var_or_default("PROGRAMAS_MANIFEST_REQUIRE_LOCAL_PATH", "0")
+programas_precision_sample_parties := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_PARTIES", "BNG,VOX,FORO Asturias,PP")
+programas_precision_sample_per_party_limit := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_PER_PARTY_LIMIT", "10")
+programas_precision_sample_limit := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_LIMIT", "0")
+programas_precision_sample_dedupe_key := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_DEDUPE_KEY", "none")
+programas_precision_sample_min_unique_per_party := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_MIN_UNIQUE_PER_PARTY", "0")
+programas_precision_sample_excerpt_window_words := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_EXCERPT_WINDOW_WORDS", "0")
+programas_precision_sample_excerpt_window_stride := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_EXCERPT_WINDOW_STRIDE", "0")
+programas_precision_sample_excerpt_window_min_words := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_EXCERPT_WINDOW_MIN_WORDS", "12")
+programas_precision_sample_out := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_OUT", "docs/etl/sprints/AI-OPS-259/exports/programas_support_precision_sample_latest.csv")
+programas_precision_sample_summary_out := env_var_or_default("PROGRAMAS_PRECISION_SAMPLE_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_support_precision_sample_summary_latest.json")
+programas_unclear_tail_parties := env_var_or_default("PROGRAMAS_UNCLEAR_TAIL_PARTIES", "BNG,VOX")
+programas_unclear_tail_excerpt_len := env_var_or_default("PROGRAMAS_UNCLEAR_TAIL_EXCERPT_LEN", "320")
+programas_unclear_tail_max_duplicate_share := env_var_or_default("PROGRAMAS_UNCLEAR_TAIL_MAX_DUPLICATE_SHARE", "1.0")
+programas_unclear_tail_report_out := env_var_or_default("PROGRAMAS_UNCLEAR_TAIL_REPORT_OUT", "docs/etl/sprints/AI-OPS-268/evidence/programas_unclear_tail_dedupe_report_latest.json")
+programas_unclear_tail_queue_out := env_var_or_default("PROGRAMAS_UNCLEAR_TAIL_QUEUE_OUT", "docs/etl/sprints/AI-OPS-268/exports/programas_unclear_tail_deduped_queue_latest.csv")
+programas_unclear_tail_profile_out := env_var_or_default("PROGRAMAS_UNCLEAR_TAIL_PROFILE_OUT", "docs/etl/sprints/AI-OPS-268/exports/programas_unclear_tail_duplicate_profile_latest.csv")
+programas_unclear_ratio_parties := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_PARTIES", "BNG,VOX")
+programas_unclear_ratio_min := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_MIN", "1.0")
+programas_unclear_ratio_out := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_OUT", "docs/etl/sprints/AI-OPS-269/evidence/programas_support_unclear_unique_ratio_latest.json")
+programas_unclear_ratio_csv_out := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_CSV_OUT", "docs/etl/sprints/AI-OPS-269/exports/programas_support_unclear_unique_ratio_latest.csv")
+programas_unclear_ratio_near_duplicate_jaccard_min := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_NEAR_DUPLICATE_JACCARD_MIN", "0.42")
+programas_unclear_ratio_near_duplicate_containment_min := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_NEAR_DUPLICATE_CONTAINMENT_MIN", "0.40")
+programas_unclear_ratio_near_duplicate_ngram_size := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_NEAR_DUPLICATE_NGRAM_SIZE", "6")
+programas_unclear_ratio_disable_near_duplicate_dedupe := env_var_or_default("PROGRAMAS_UNCLEAR_RATIO_DISABLE_NEAR_DUPLICATE_DEDUPE", "0")
+programas_empleo_fiscal_audit_parties := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_PARTIES", "BNG,CCa,Compromis,EAJ-PNV,VOX")
+programas_empleo_fiscal_audit_topic_key := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_TOPIC_KEY", "concern:v1:empleo")
+programas_empleo_fiscal_audit_terms := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_TERMS", "imposto de sociedades,fiscalidad,fiscalitat,impuesto,impostos,tribut,irpf,iva,sociedades")
+programas_empleo_fiscal_audit_anchor_terms := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_ANCHOR_TERMS", "emple,trabaj,traballo,emprego,laboral,paro,salari,ocupacion,ocupacio")
+programas_empleo_fiscal_audit_max_suspicious_support := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_MAX_SUSPICIOUS_SUPPORT", "0")
+programas_empleo_fiscal_audit_out := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_OUT", "docs/etl/sprints/AI-OPS-275/evidence/programas_empleo_fiscal_snippets_audit_latest.json")
+programas_empleo_fiscal_audit_csv_out := env_var_or_default("PROGRAMAS_EMPLEO_FISCAL_AUDIT_CSV_OUT", "docs/etl/sprints/AI-OPS-275/exports/programas_empleo_fiscal_snippets_audit_latest.csv")
+programas_precision_rotate_labels_in := env_var_or_default("PROGRAMAS_PRECISION_ROTATE_LABELS_IN", "docs/etl/sprints/AI-OPS-258/exports/programas_support_precision_stratified_sample_20260228.csv")
+programas_precision_labeled_out := env_var_or_default("PROGRAMAS_PRECISION_LABELED_OUT", "docs/etl/sprints/AI-OPS-259/exports/programas_support_precision_sample_labeled_latest.csv")
+programas_precision_rotate_summary_out := env_var_or_default("PROGRAMAS_PRECISION_ROTATE_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_support_precision_rotate_summary_latest.json")
+programas_precision_rotate_max_unlabeled := env_var_or_default("PROGRAMAS_PRECISION_ROTATE_MAX_UNLABELED", "-1")
+programas_precision_rotate_strict_max_unlabeled := env_var_or_default("PROGRAMAS_PRECISION_ROTATE_STRICT_MAX_UNLABELED", "0")
+programas_precision_audit_in := env_var_or_default("PROGRAMAS_PRECISION_AUDIT_IN", "docs/etl/sprints/AI-OPS-258/exports/programas_support_precision_stratified_sample_20260228.csv")
+programas_precision_audit_out := env_var_or_default("PROGRAMAS_PRECISION_AUDIT_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_support_precision_audit_latest.json")
+programas_precision_audit_breakdown_out := env_var_or_default("PROGRAMAS_PRECISION_AUDIT_BREAKDOWN_OUT", "docs/etl/sprints/AI-OPS-259/exports/programas_support_precision_audit_breakdown_latest.csv")
+programas_precision_min := env_var_or_default("PROGRAMAS_PRECISION_MIN", "0.90")
+programas_precision_min_reviewed := env_var_or_default("PROGRAMAS_PRECISION_MIN_REVIEWED", "30")
+programas_precision_min_party := env_var_or_default("PROGRAMAS_PRECISION_MIN_PARTY", "0.85")
+programas_precision_required_parties := env_var_or_default("PROGRAMAS_PRECISION_REQUIRED_PARTIES", "BNG,VOX,FORO Asturias,PP")
+programas_precision_reconcile_out := env_var_or_default("PROGRAMAS_PRECISION_RECONCILE_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_backfill_declared_stance_guardrail_latest.json")
+programas_precision_declared_positions_out := env_var_or_default("PROGRAMAS_PRECISION_DECLARED_POSITIONS_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_backfill_declared_positions_guardrail_latest.json")
+programas_precision_combined_positions_out := env_var_or_default("PROGRAMAS_PRECISION_COMBINED_POSITIONS_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_backfill_combined_positions_guardrail_latest.json")
+programas_precision_status_out := env_var_or_default("PROGRAMAS_PRECISION_STATUS_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_declared_status_guardrail_latest.json")
+programas_precision_quality_out := env_var_or_default("PROGRAMAS_PRECISION_QUALITY_OUT", "docs/etl/sprints/AI-OPS-259/evidence/programas_quality_declared_guardrail_latest.json")
+programas_precision_tracker_out := env_var_or_default("PROGRAMAS_PRECISION_TRACKER_OUT", "docs/etl/sprints/AI-OPS-259/evidence/tracker_status_programas_guardrail_latest.log")
 sanction_norms_seed := env_var_or_default("SANCTION_NORMS_SEED", "etl/data/seeds/sanction_norms_seed_v1.json")
 sanction_norms_seed_source_id := env_var_or_default("SANCTION_NORMS_SEED_SOURCE_ID", "boe_api_legal")
 sanction_norms_seed_validate_out := env_var_or_default("SANCTION_NORMS_SEED_VALIDATE_OUT", "docs/etl/sprints/AI-OPS-115/evidence/sanction_norms_seed_validate_latest.json")
@@ -520,6 +643,7 @@ liberty_atlas_release_heartbeat_path := env_var_or_default("LIBERTY_ATLAS_RELEAS
 liberty_atlas_release_heartbeat_out := env_var_or_default("LIBERTY_ATLAS_RELEASE_HEARTBEAT_OUT", "docs/etl/sprints/AI-OPS-126/evidence/liberty_atlas_release_heartbeat_latest.json")
 liberty_atlas_release_heartbeat_window := env_var_or_default("LIBERTY_ATLAS_RELEASE_HEARTBEAT_WINDOW", "20")
 liberty_atlas_release_heartbeat_window_out := env_var_or_default("LIBERTY_ATLAS_RELEASE_HEARTBEAT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-126/evidence/liberty_atlas_release_heartbeat_window_latest.json")
+liberty_atlas_release_heartbeat_window_min_run_at := env_var_or_default("LIBERTY_ATLAS_RELEASE_WINDOW_MIN_RUN_AT", "")
 liberty_atlas_release_max_snapshot_age_days := env_var_or_default("LIBERTY_ATLAS_RELEASE_MAX_SNAPSHOT_AGE_DAYS", "14")
 liberty_atlas_release_expected_snapshot_date := env_var_or_default("LIBERTY_ATLAS_RELEASE_EXPECTED_SNAPSHOT_DATE", "")
 liberty_atlas_release_hf_json := env_var_or_default("LIBERTY_ATLAS_RELEASE_HF_JSON", "")
@@ -638,6 +762,72 @@ liberty_delegated_top_n := env_var_or_default("LIBERTY_DELEGATED_TOP_N", "20")
 liberty_delegated_target_coverage_min := env_var_or_default("LIBERTY_DELEGATED_TARGET_COVERAGE_MIN", "0.6")
 liberty_delegated_designated_actor_min := env_var_or_default("LIBERTY_DELEGATED_DESIGNATED_ACTOR_MIN", "0.5")
 liberty_delegated_enforcement_evidence_min := env_var_or_default("LIBERTY_DELEGATED_ENFORCEMENT_EVIDENCE_MIN", "0.7")
+liberty_delegated_person_queue_out := env_var_or_default("LIBERTY_DELEGATED_PERSON_QUEUE_OUT", "docs/etl/sprints/AI-OPS-277/evidence/liberty_delegated_person_window_queue_latest.json")
+liberty_delegated_person_queue_csv_out := env_var_or_default("LIBERTY_DELEGATED_PERSON_QUEUE_CSV_OUT", "docs/etl/sprints/AI-OPS-277/exports/liberty_delegated_person_window_queue_latest.csv")
+liberty_delegated_person_queue_limit := env_var_or_default("LIBERTY_DELEGATED_PERSON_QUEUE_LIMIT", "0")
+liberty_delegated_person_queue_max_actionable_rows := env_var_or_default("LIBERTY_DELEGATED_PERSON_QUEUE_MAX_ACTIONABLE_ROWS", "-1")
+liberty_delegated_person_queue_institution_terms := env_var_or_default("LIBERTY_DELEGATED_PERSON_QUEUE_INSTITUTION_TERMS", "ministerio,direccion,dirección,agencia,delegacion,delegación,delegaciones,subdelegacion,subdelegación,subdelegaciones,inspeccion,inspección,organismo,gobierno,dgt,aeat,itss")
+liberty_delegated_review_queue_out := env_var_or_default("LIBERTY_DELEGATED_REVIEW_QUEUE_OUT", "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv")
+liberty_delegated_review_summary_out := env_var_or_default("LIBERTY_DELEGATED_REVIEW_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-278/evidence/liberty_delegated_person_window_review_queue_latest.json")
+liberty_delegated_review_limit := env_var_or_default("LIBERTY_DELEGATED_REVIEW_LIMIT", "0")
+liberty_delegated_review_seed_out := env_var_or_default("LIBERTY_DELEGATED_REVIEW_SEED_OUT", "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_enforcement_seed_review_out_latest.json")
+liberty_delegated_review_in := env_var_or_default("LIBERTY_DELEGATED_REVIEW_IN", "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv")
+liberty_delegated_review_apply_out := env_var_or_default("LIBERTY_DELEGATED_REVIEW_APPLY_OUT", "docs/etl/sprints/AI-OPS-278/evidence/liberty_delegated_person_window_review_apply_latest.json")
+liberty_delegated_scrape_targets_out := env_var_or_default("LIBERTY_DELEGATED_SCRAPE_TARGETS_OUT", "docs/etl/sprints/AI-OPS-279/exports/liberty_delegated_person_window_scrape_targets_latest.csv")
+liberty_delegated_scrape_targets_summary_out := env_var_or_default("LIBERTY_DELEGATED_SCRAPE_TARGETS_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-279/evidence/liberty_delegated_person_window_scrape_targets_latest.json")
+liberty_delegated_scrape_targets_limit := env_var_or_default("LIBERTY_DELEGATED_SCRAPE_TARGETS_LIMIT", "0")
+liberty_delegated_scrape_targets_min_priority := env_var_or_default("LIBERTY_DELEGATED_SCRAPE_TARGETS_MIN_PRIORITY", "1")
+liberty_delegated_scrape_targets_strict_min_targets := env_var_or_default("LIBERTY_DELEGATED_SCRAPE_TARGETS_STRICT_MIN_TARGETS", "1")
+liberty_delegated_boe_candidates_targets_csv := env_var_or_default("LIBERTY_DELEGATED_BOE_CANDIDATES_TARGETS_CSV", "docs/etl/sprints/AI-OPS-279/exports/liberty_delegated_person_window_scrape_targets_latest.csv")
+liberty_delegated_boe_candidates_out := env_var_or_default("LIBERTY_DELEGATED_BOE_CANDIDATES_OUT", "docs/etl/sprints/AI-OPS-280/exports/liberty_delegated_person_window_boe_candidates_latest.csv")
+liberty_delegated_boe_candidates_summary_out := env_var_or_default("LIBERTY_DELEGATED_BOE_CANDIDATES_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-280/evidence/liberty_delegated_person_window_boe_candidates_latest.json")
+liberty_delegated_boe_candidates_top_results := env_var_or_default("LIBERTY_DELEGATED_BOE_CANDIDATES_TOP_RESULTS", "5")
+liberty_delegated_boe_candidates_timeout := env_var_or_default("LIBERTY_DELEGATED_BOE_CANDIDATES_TIMEOUT", "30")
+liberty_delegated_boe_candidates_strict_min_candidates := env_var_or_default("LIBERTY_DELEGATED_BOE_CANDIDATES_STRICT_MIN_CANDIDATES", "1")
+liberty_delegated_review_assist_in := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_IN", "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv")
+liberty_delegated_review_assist_boe_candidates := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_BOE_CANDIDATES", "docs/etl/sprints/AI-OPS-280/exports/liberty_delegated_person_window_boe_candidates_latest.csv")
+liberty_delegated_review_assist_out := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_OUT", "docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv")
+liberty_delegated_review_assist_summary_out := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-281/evidence/liberty_delegated_person_window_review_assist_latest.json")
+liberty_delegated_review_assist_min_candidate_score := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_MIN_CANDIDATE_SCORE", "20")
+liberty_delegated_review_assist_max_candidates_per_link := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_MAX_CANDIDATES_PER_LINK", "3")
+liberty_delegated_review_assist_strict_min_rows := env_var_or_default("LIBERTY_DELEGATED_REVIEW_ASSIST_STRICT_MIN_ROWS", "1")
+liberty_delegated_auto_review_queue_csv := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QUEUE_CSV", "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv")
+liberty_delegated_auto_review_assist_csv := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_ASSIST_CSV", "docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv")
+liberty_delegated_auto_review_out := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_OUT", "docs/etl/sprints/AI-OPS-282/exports/liberty_delegated_person_window_auto_review_decisions_latest.csv")
+liberty_delegated_auto_review_summary_out := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-282/evidence/liberty_delegated_person_window_auto_review_decisions_latest.json")
+liberty_delegated_auto_review_min_candidate_score := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_MIN_CANDIDATE_SCORE", "25")
+liberty_delegated_auto_review_max_candidates_per_link := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_MAX_CANDIDATES_PER_LINK", "3")
+liberty_delegated_auto_review_strict_min_approved_rows := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_STRICT_MIN_APPROVED_ROWS", "1")
+liberty_delegated_auto_review_qa_sample_out := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_SAMPLE_OUT", "docs/etl/sprints/AI-OPS-284/exports/liberty_delegated_person_window_auto_review_qa_sample_latest.csv")
+liberty_delegated_auto_review_qa_summary_out := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-284/evidence/liberty_delegated_person_window_auto_review_qa_sample_latest.json")
+liberty_delegated_auto_review_qa_precision_out := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_PRECISION_OUT", "docs/etl/sprints/AI-OPS-284/evidence/liberty_delegated_person_window_auto_review_qa_precision_latest.json")
+liberty_delegated_auto_review_qa_sample_size := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_SAMPLE_SIZE", "8")
+liberty_delegated_auto_review_qa_min_reviewed_rows := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_MIN_REVIEWED_ROWS", "2")
+liberty_delegated_auto_review_qa_min_precision_pct := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_MIN_PRECISION_PCT", "0")
+liberty_delegated_auto_review_qa_decision_scope := env_var_or_default("LIBERTY_DELEGATED_AUTO_REVIEW_QA_DECISION_SCOPE", "approved")
+liberty_delegated_non_nominative_qa_gate_auto_review_summary := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_AUTO_REVIEW_SUMMARY", "docs/etl/sprints/AI-OPS-293/evidence/liberty_delegated_person_window_auto_review_decisions_alternative_latest.json")
+liberty_delegated_non_nominative_qa_gate_sample_summary := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_SAMPLE_SUMMARY", "docs/etl/sprints/AI-OPS-294/evidence/liberty_delegated_non_nominative_auto_review_qa_sample_latest.json")
+liberty_delegated_non_nominative_qa_gate_precision_report := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_PRECISION_REPORT", "docs/etl/sprints/AI-OPS-294/evidence/liberty_delegated_non_nominative_auto_review_qa_precision_latest.json")
+liberty_delegated_non_nominative_qa_gate_review_note_contains := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_REVIEW_NOTE_CONTAINS", "approved_non_nominative_unit")
+liberty_delegated_non_nominative_qa_gate_min_reviewed_rows := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_MIN_REVIEWED_ROWS", "1")
+liberty_delegated_non_nominative_qa_gate_min_precision_pct := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_MIN_PRECISION_PCT", "100")
+liberty_delegated_non_nominative_qa_gate_out := env_var_or_default("LIBERTY_DELEGATED_NON_NOMINATIVE_QA_GATE_OUT", "docs/etl/sprints/AI-OPS-295/evidence/liberty_delegated_non_nominative_qa_gate_latest.json")
+liberty_delegated_pending_resolution_queue_out := env_var_or_default("LIBERTY_DELEGATED_PENDING_RESOLUTION_QUEUE_OUT", "docs/etl/sprints/AI-OPS-286/exports/liberty_delegated_pending_resolution_review_queue_latest.csv")
+liberty_delegated_pending_resolution_queue_summary_out := env_var_or_default("LIBERTY_DELEGATED_PENDING_RESOLUTION_QUEUE_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-286/evidence/liberty_delegated_pending_resolution_review_queue_latest.json")
+liberty_delegated_pending_resolution_top_candidates_per_link := env_var_or_default("LIBERTY_DELEGATED_PENDING_RESOLUTION_TOP_CANDIDATES_PER_LINK", "5")
+liberty_delegated_alternative_capture_in := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_CAPTURE_IN", "docs/etl/sprints/AI-OPS-288/exports/liberty_delegated_pending_resolution_review_queue_targeted_latest.csv")
+liberty_delegated_alternative_capture_out := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_CAPTURE_OUT", "docs/etl/sprints/AI-OPS-289/exports/liberty_delegated_alternative_capture_targets_latest.csv")
+liberty_delegated_alternative_capture_summary_out := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_CAPTURE_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-289/evidence/liberty_delegated_alternative_capture_targets_latest.json")
+liberty_delegated_alternative_capture_max_candidate_docs_per_link := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_CAPTURE_MAX_CANDIDATE_DOCS_PER_LINK", "3")
+liberty_delegated_alternative_capture_strict_min_targets_per_link := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_CAPTURE_STRICT_MIN_TARGETS_PER_LINK", "3")
+liberty_delegated_alternative_boe_targets_in := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_TARGETS_IN", "docs/etl/sprints/AI-OPS-289/exports/liberty_delegated_alternative_capture_targets_latest.csv")
+liberty_delegated_alternative_boe_out := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_OUT", "docs/etl/sprints/AI-OPS-290/exports/liberty_delegated_alternative_boe_candidates_latest.csv")
+liberty_delegated_alternative_boe_summary_out := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-290/evidence/liberty_delegated_alternative_boe_candidates_latest.json")
+liberty_delegated_alternative_boe_top_results_per_query_target := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_TOP_RESULTS_PER_QUERY_TARGET", "6")
+liberty_delegated_alternative_boe_max_queries_per_query_target := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_MAX_QUERIES_PER_QUERY_TARGET", "8")
+liberty_delegated_alternative_boe_timeout := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_TIMEOUT", "30")
+liberty_delegated_alternative_boe_strict_min_candidates := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_STRICT_MIN_CANDIDATES", "1")
+liberty_delegated_alternative_boe_strict_min_links_with_candidates := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_STRICT_MIN_LINKS_WITH_CANDIDATES", "1")
 code_zip_name := env_var_or_default("CODE_ZIP_NAME", "vota-con-la-chola-code.zip")
 hf_dataset_repo_id := env_var_or_default("HF_DATASET_REPO_ID", "vota-con-la-chola-data")
 hf_parquet_batch_rows := env_var_or_default("HF_PARQUET_BATCH_ROWS", "50000")
@@ -1217,7 +1407,7 @@ parl-backfill-initiative-documents-auto:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-initiative-documents --db {{db_path}} --initiative-source-ids congreso_iniciativas,senado_iniciativas --raw-dir etl/data/raw --timeout {{initdoc_timeout}} --snapshot-date {{snapshot_date}} --limit-initiatives {{initdoc_limit}} --max-docs-per-initiative {{initdoc_max_per}} --auto --max-loops 50"
 
 parl-backfill-initiative-documents-archive:
-  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-initiative-documents --db {{db_path}} --initiative-source-ids senado_iniciativas --include-unlinked --retry-forbidden --archive-fallback --archive-timeout {{initdoc_archive_timeout}} --raw-dir etl/data/raw --timeout {{initdoc_timeout}} --snapshot-date {{snapshot_date}} --limit-initiatives {{initdoc_limit}} --max-docs-per-initiative {{initdoc_max_per}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-initiative-documents --db {{db_path}} --initiative-source-ids senado_iniciativas --include-unlinked --retry-forbidden --archive-fallback --archive-timeout {{initdoc_archive_timeout}} --archive-fallback-http-statuses '{{initdoc_archive_http_statuses}}' --raw-dir etl/data/raw --timeout {{initdoc_timeout}} --snapshot-date {{snapshot_date}} --limit-initiatives {{initdoc_limit}} --max-docs-per-initiative {{initdoc_max_per}}"
 
 parl-export-initdoc-analysis-queue:
   docker compose run --rm --build etl "python3 scripts/export_pdf_analysis_queue.py --db {{db_path}} --initiative-source-id {{initdoc_excerpt_scope}} --doc-source-id parl_initiative_docs --only-missing-excerpt --limit {{doc_analysis_limit}} --out {{doc_analysis_out}}"
@@ -1241,14 +1431,109 @@ parl-backfill-initdoc-fetch-status:
   fi; \
   docker compose run --rm --build etl "python3 scripts/backfill_initiative_doc_fetch_status.py --db {{db_path}} --source-id parl_initiative_docs${scope_arg}"
 
+parl-backfill-initdoc-records-from-fetches:
+  scope_arg=""; \
+  if [ -n "{{initdoc_fetch_scope}}" ]; then \
+    scope_arg=" --initiative-source-id {{initdoc_fetch_scope}}"; \
+  fi; \
+  python3 scripts/backfill_initiative_doc_records_from_fetches.py --db {{db_path}} --source-id parl_initiative_docs --snapshot-date {{snapshot_date}}${scope_arg}
+
 parl-report-initdoc-status:
   docker compose run --rm --build etl "python3 scripts/report_initiative_doc_status.py --db {{db_path}} --initiative-source-ids congreso_iniciativas,senado_iniciativas --doc-source-id parl_initiative_docs --missing-sample-limit {{initdoc_status_missing_sample_limit}} --out {{initdoc_status_out}}"
 
 parl-export-missing-initdoc-urls-actionable:
-  python3 scripts/export_missing_initiative_doc_urls.py --db {{db_path}} --initiative-source-ids '{{initdoc_missing_export_source_ids}}' --only-actionable-missing --format csv --out {{initdoc_missing_export_out}}
+  python3 scripts/export_missing_initiative_doc_urls.py --db {{db_path}} --initiative-source-ids '{{initdoc_missing_export_source_ids}}' --only-actionable-missing --only-linked-to-votes --format csv --out {{initdoc_missing_export_out}}
 
 parl-check-missing-initdoc-urls-actionable-empty:
-  python3 scripts/export_missing_initiative_doc_urls.py --db {{db_path}} --initiative-source-ids '{{initdoc_missing_export_source_ids}}' --only-actionable-missing --strict-empty --format csv --out {{initdoc_missing_export_out}}
+  python3 scripts/export_missing_initiative_doc_urls.py --db {{db_path}} --initiative-source-ids '{{initdoc_missing_export_source_ids}}' --only-actionable-missing --only-linked-to-votes --strict-empty --format csv --out {{initdoc_missing_export_out}}
+
+parl-export-missing-initdoc-urls-actionable-zero-doc:
+  python3 scripts/export_missing_initiative_doc_urls.py --db {{db_path}} --initiative-source-ids '{{initdoc_missing_export_source_ids}}' --only-actionable-missing --only-linked-to-votes --only-initiatives-without-any-doc --max-urls-per-initiative {{initdoc_missing_export_max_per_initiative}} --format csv --out {{initdoc_missing_export_out}}
+
+parl-check-missing-initdoc-urls-actionable-zero-doc-empty:
+  python3 scripts/export_missing_initiative_doc_urls.py --db {{db_path}} --initiative-source-ids '{{initdoc_missing_export_source_ids}}' --only-actionable-missing --only-linked-to-votes --only-initiatives-without-any-doc --max-urls-per-initiative {{initdoc_missing_export_max_per_initiative}} --strict-empty --format csv --out {{initdoc_missing_export_out}}
+
+parl-report-senado-waf-block-profile:
+  python3 scripts/report_senado_waf_block_profile.py --db {{db_path}} --initiative-source-id senado_iniciativas --only-linked-to-votes --sample-limit {{senado_waf_profile_sample_limit}} --out {{senado_waf_profile_out}}
+
+parl-check-senado-waf-block-profile:
+  python3 scripts/report_senado_waf_block_profile.py --db {{db_path}} --initiative-source-id senado_iniciativas --only-linked-to-votes --sample-limit {{senado_waf_profile_sample_limit}} --strict --out {{senado_waf_profile_out}}
+
+parl-export-senado-waf-cohort-packets:
+  python3 scripts/export_senado_waf_cohort_packets.py --db {{db_path}} --initiative-source-id senado_iniciativas --doc-source-id parl_initiative_docs --only-linked-to-votes --cohort-top-n {{senado_waf_packets_cohort_top_n}} --max-urls-per-cohort {{senado_waf_packets_max_urls_per_cohort}} --max-total-rows {{senado_waf_packets_max_total_rows}} --include-zero-doc-priority --max-zero-doc-rows {{senado_waf_packets_max_zero_doc_rows}} --strict-min-packet-rows {{senado_waf_packets_strict_min_packet_rows}} --strict-min-cohorts {{senado_waf_packets_strict_min_cohorts}} --out {{senado_waf_packets_out}} --csv-out {{senado_waf_packets_csv_out}}
+
+parl-check-senado-waf-cohort-packets:
+  python3 scripts/export_senado_waf_cohort_packets.py --db {{db_path}} --initiative-source-id senado_iniciativas --doc-source-id parl_initiative_docs --only-linked-to-votes --cohort-top-n {{senado_waf_packets_cohort_top_n}} --max-urls-per-cohort {{senado_waf_packets_max_urls_per_cohort}} --max-total-rows {{senado_waf_packets_max_total_rows}} --include-zero-doc-priority --max-zero-doc-rows {{senado_waf_packets_max_zero_doc_rows}} --strict-min-packet-rows {{senado_waf_packets_strict_min_packet_rows}} --strict-min-cohorts {{senado_waf_packets_strict_min_cohorts}} --strict --out {{senado_waf_packets_out}} --csv-out {{senado_waf_packets_csv_out}}
+
+parl-export-senado-retry-packet-only-dedup:
+  refs_arg=""; \
+  refs_only_arg=""; \
+  if [ -n "{{senado_retry_packet_refs_file}}" ]; then \
+    refs_arg=" --packet-csv-refs-file {{senado_retry_packet_refs_file}}"; \
+  fi; \
+  if [ "{{senado_retry_packet_refs_only}}" = "1" ]; then \
+    refs_only_arg=" --packet-csv-refs-file-only"; \
+  fi; \
+  python3 scripts/export_senado_retry_packet_only_dedup.py --pool-csv {{senado_retry_packet_pool_csv}} --packet-csv-glob '{{senado_retry_packet_glob}}' --max-rows {{senado_retry_packet_max_rows}} --strict-min-fresh-rows {{senado_retry_packet_strict_min_fresh_rows}} --out {{senado_retry_packet_out}} --csv-out {{senado_retry_packet_csv_out}} --used-urls-out {{senado_retry_packet_used_urls_out}} --used-packet-refs-out {{senado_retry_packet_used_refs_out}}${refs_arg}${refs_only_arg}
+
+parl-check-senado-retry-packet-only-dedup:
+  refs_arg=""; \
+  refs_only_arg=""; \
+  if [ -n "{{senado_retry_packet_refs_file}}" ]; then \
+    refs_arg=" --packet-csv-refs-file {{senado_retry_packet_refs_file}}"; \
+  fi; \
+  if [ "{{senado_retry_packet_refs_only}}" = "1" ]; then \
+    refs_only_arg=" --packet-csv-refs-file-only"; \
+  fi; \
+  python3 scripts/export_senado_retry_packet_only_dedup.py --pool-csv {{senado_retry_packet_pool_csv}} --packet-csv-glob '{{senado_retry_packet_glob}}' --max-rows {{senado_retry_packet_max_rows}} --strict-min-fresh-rows {{senado_retry_packet_strict_min_fresh_rows}} --strict --out {{senado_retry_packet_out}} --csv-out {{senado_retry_packet_csv_out}} --used-urls-out {{senado_retry_packet_used_urls_out}} --used-packet-refs-out {{senado_retry_packet_used_refs_out}}${refs_arg}${refs_only_arg}
+
+parl-report-senado-archive-gap-urls:
+  python3 scripts/export_senado_archive_gap_urls.py --retry-json-glob '{{senado_archive_gap_retry_json_glob}}' --strict-min-rows {{senado_archive_gap_strict_min_rows}} --out {{senado_archive_gap_out}} --csv-out {{senado_archive_gap_csv_out}}
+
+parl-check-senado-archive-gap-urls:
+  python3 scripts/export_senado_archive_gap_urls.py --retry-json-glob '{{senado_archive_gap_retry_json_glob}}' --strict-min-rows {{senado_archive_gap_strict_min_rows}} --strict --out {{senado_archive_gap_out}} --csv-out {{senado_archive_gap_csv_out}}
+
+parl-report-senado-cookie-lever-status:
+  python3 scripts/report_senado_cookie_lever_status.py --cookie-file {{senado_cookie_lever_file}} --domain-contains senado.es --max-age-hours {{senado_cookie_lever_max_age_hours}} --min-domain-cookies {{senado_cookie_lever_min_domain}} --min-unexpired-persistent-cookies {{senado_cookie_lever_min_persistent}} --out {{senado_cookie_lever_out}}
+
+parl-check-senado-cookie-lever-status:
+  python3 scripts/report_senado_cookie_lever_status.py --cookie-file {{senado_cookie_lever_file}} --domain-contains senado.es --max-age-hours {{senado_cookie_lever_max_age_hours}} --min-domain-cookies {{senado_cookie_lever_min_domain}} --min-unexpired-persistent-cookies {{senado_cookie_lever_min_persistent}} --strict --out {{senado_cookie_lever_out}}
+
+parl-report-senado-manual-capture-validity:
+  python3 scripts/report_senado_manual_capture_validity.py --captures-glob '{{senado_capture_validity_glob}}' --cookie-domain-contains senado.es --min-captures {{senado_capture_validity_min}} --out {{senado_capture_validity_out}}
+
+parl-check-senado-manual-capture-validity:
+  python3 scripts/report_senado_manual_capture_validity.py --captures-glob '{{senado_capture_validity_glob}}' --cookie-domain-contains senado.es --min-captures {{senado_capture_validity_min}} --strict --out {{senado_capture_validity_out}}
+
+parl-export-senado-manual-capture-targets:
+  python3 scripts/export_senado_manual_capture_targets.py --packet-json {{senado_capture_targets_packet_json}} --packet-csv {{senado_capture_targets_packet_csv}} --include-seed-url --seed-url {{senado_capture_targets_seed_url}} --max-targets {{senado_capture_targets_max_targets}} --wait-seconds {{senado_capture_targets_wait_seconds}} --label-prefix {{senado_capture_targets_label_prefix}} --strict-min-targets {{senado_capture_targets_strict_min_targets}} --out {{senado_capture_targets_out}} --csv-out {{senado_capture_targets_csv_out}}
+
+parl-check-senado-manual-capture-targets:
+  python3 scripts/export_senado_manual_capture_targets.py --packet-json {{senado_capture_targets_packet_json}} --packet-csv {{senado_capture_targets_packet_csv}} --include-seed-url --seed-url {{senado_capture_targets_seed_url}} --max-targets {{senado_capture_targets_max_targets}} --wait-seconds {{senado_capture_targets_wait_seconds}} --label-prefix {{senado_capture_targets_label_prefix}} --strict-min-targets {{senado_capture_targets_strict_min_targets}} --strict --out {{senado_capture_targets_out}} --csv-out {{senado_capture_targets_csv_out}}
+
+parl-report-senado-manual-capture-target-progress:
+  python3 scripts/report_senado_manual_capture_target_progress.py --targets-csv {{senado_capture_target_progress_targets_csv}} --captures-glob '{{senado_capture_target_progress_captures_glob}}' --cookie-domain-contains senado.es --strict-min-covered-targets {{senado_capture_target_progress_min_covered}} --strict-min-usable-targets {{senado_capture_target_progress_min_usable}} --out {{senado_capture_target_progress_out}} --csv-out {{senado_capture_target_progress_csv_out}}
+
+parl-check-senado-manual-capture-target-progress:
+  python3 scripts/report_senado_manual_capture_target_progress.py --targets-csv {{senado_capture_target_progress_targets_csv}} --captures-glob '{{senado_capture_target_progress_captures_glob}}' --cookie-domain-contains senado.es --strict-min-covered-targets {{senado_capture_target_progress_min_covered}} --strict-min-usable-targets {{senado_capture_target_progress_min_usable}} --strict --out {{senado_capture_target_progress_out}} --csv-out {{senado_capture_target_progress_csv_out}}
+
+parl-run-senado-manual-capture-retry-cycle:
+  python3 scripts/run_senado_manual_capture_retry_cycle.py --db {{db_path}} --targets-csv {{senado_capture_target_progress_targets_csv}} --captures-glob '{{senado_capture_target_progress_captures_glob}}' --cookie-domain-contains senado.es --strict-min-covered-targets {{senado_capture_target_progress_min_covered}} --strict-min-usable-targets {{senado_capture_target_progress_min_usable}} --initiative-source-ids senado_iniciativas --limit-initiatives {{senado_capture_retry_cycle_limit_initiatives}} --max-docs-per-initiative {{senado_capture_retry_cycle_max_docs_per_initiative}} --timeout {{senado_capture_retry_cycle_timeout}} --snapshot-date {{snapshot_date}} --progress-out {{senado_capture_retry_cycle_progress_out}} --progress-csv-out {{senado_capture_retry_cycle_progress_csv_out}} --out {{senado_capture_retry_cycle_out}}
+
+parl-check-senado-manual-capture-retry-cycle:
+  python3 scripts/run_senado_manual_capture_retry_cycle.py --db {{db_path}} --targets-csv {{senado_capture_target_progress_targets_csv}} --captures-glob '{{senado_capture_target_progress_captures_glob}}' --cookie-domain-contains senado.es --strict-min-covered-targets {{senado_capture_target_progress_min_covered}} --strict-min-usable-targets {{senado_capture_target_progress_min_usable}} --initiative-source-ids senado_iniciativas --limit-initiatives {{senado_capture_retry_cycle_limit_initiatives}} --max-docs-per-initiative {{senado_capture_retry_cycle_max_docs_per_initiative}} --timeout {{senado_capture_retry_cycle_timeout}} --snapshot-date {{snapshot_date}} --strict-ready --strict-backfill --progress-out {{senado_capture_retry_cycle_progress_out}} --progress-csv-out {{senado_capture_retry_cycle_progress_csv_out}} --out {{senado_capture_retry_cycle_out}}
+
+parl-export-senado-manual-capture-pending-targets:
+  python3 scripts/export_senado_manual_capture_pending_targets.py --progress-json {{senado_capture_pending_progress_json}} --progress-csv {{senado_capture_pending_progress_csv}} --max-targets {{senado_capture_pending_max_targets}} --out {{senado_capture_pending_out}} --csv-out {{senado_capture_pending_csv_out}} --commands-out {{senado_capture_pending_commands_out}}
+
+parl-check-senado-manual-capture-pending-targets-empty:
+  python3 scripts/export_senado_manual_capture_pending_targets.py --progress-json {{senado_capture_pending_progress_json}} --progress-csv {{senado_capture_pending_progress_csv}} --max-targets 0 --out {{senado_capture_pending_out}} --csv-out {{senado_capture_pending_csv_out}} --commands-out {{senado_capture_pending_commands_out}} --strict
+
+parl-run-senado-manual-capture-iteration-cycle:
+  python3 scripts/run_senado_manual_capture_iteration_cycle.py --db {{db_path}} --targets-csv {{senado_capture_target_progress_targets_csv}} --captures-glob '{{senado_capture_target_progress_captures_glob}}' --cookie-domain-contains senado.es --strict-min-covered-targets {{senado_capture_target_progress_min_covered}} --strict-min-usable-targets {{senado_capture_target_progress_min_usable}} --initiative-source-ids senado_iniciativas --limit-initiatives {{senado_capture_retry_cycle_limit_initiatives}} --max-docs-per-initiative {{senado_capture_retry_cycle_max_docs_per_initiative}} --timeout {{senado_capture_retry_cycle_timeout}} --snapshot-date {{snapshot_date}} --pending-max-targets {{senado_capture_iteration_pending_max_targets}} --pending-wait-seconds {{senado_capture_iteration_pending_wait_seconds}} --strict-min-pending-reduction {{senado_capture_iteration_strict_min_pending_reduction}} --retry-out {{senado_capture_iteration_retry_out}} --progress-out {{senado_capture_iteration_progress_out}} --progress-csv-out {{senado_capture_iteration_progress_csv_out}} --pending-out {{senado_capture_iteration_pending_out}} --pending-csv-out {{senado_capture_iteration_pending_csv_out}} --pending-commands-out {{senado_capture_iteration_pending_commands_out}} --out {{senado_capture_iteration_out}}
+
+parl-check-senado-manual-capture-iteration-cycle:
+  python3 scripts/run_senado_manual_capture_iteration_cycle.py --db {{db_path}} --targets-csv {{senado_capture_target_progress_targets_csv}} --captures-glob '{{senado_capture_target_progress_captures_glob}}' --cookie-domain-contains senado.es --strict-min-covered-targets {{senado_capture_target_progress_min_covered}} --strict-min-usable-targets {{senado_capture_target_progress_min_usable}} --initiative-source-ids senado_iniciativas --limit-initiatives {{senado_capture_retry_cycle_limit_initiatives}} --max-docs-per-initiative {{senado_capture_retry_cycle_max_docs_per_initiative}} --timeout {{senado_capture_retry_cycle_timeout}} --snapshot-date {{snapshot_date}} --pending-max-targets {{senado_capture_iteration_pending_max_targets}} --pending-wait-seconds {{senado_capture_iteration_pending_wait_seconds}} --strict-min-pending-reduction {{senado_capture_iteration_strict_min_pending_reduction}} --retry-out {{senado_capture_iteration_retry_out}} --progress-out {{senado_capture_iteration_progress_out}} --progress-csv-out {{senado_capture_iteration_progress_csv_out}} --pending-out {{senado_capture_iteration_pending_out}} --pending-csv-out {{senado_capture_iteration_pending_csv_out}} --pending-commands-out {{senado_capture_iteration_pending_commands_out}} --out {{senado_capture_iteration_out}} --strict
 
 parl-report-initdoc-actionable-tail-contract:
   python3 scripts/report_initdoc_actionable_tail_contract.py --db {{db_path}} --initiative-source-ids '{{initdoc_actionable_contract_source_ids}}' --out {{initdoc_actionable_contract_out}}
@@ -1368,6 +1653,75 @@ parl-report-declared-source-status:
 
 parl-programas-status:
   python3 scripts/report_declared_source_status.py --db {{db_path}} --source-id programas_partidos --out {{programas_status_out}}
+
+parl-export-programas-support-precision-sample:
+  python3 scripts/export_programas_support_precision_sample.py --db {{db_path}} --source-id programas_partidos --parties "{{programas_precision_sample_parties}}" --per-party-limit {{programas_precision_sample_per_party_limit}} --limit {{programas_precision_sample_limit}} --dedupe-key "{{programas_precision_sample_dedupe_key}}" --min-unique-per-party {{programas_precision_sample_min_unique_per_party}} --excerpt-window-words {{programas_precision_sample_excerpt_window_words}} --excerpt-window-stride {{programas_precision_sample_excerpt_window_stride}} --excerpt-window-min-words {{programas_precision_sample_excerpt_window_min_words}} --out "{{programas_precision_sample_out}}" --summary-out "{{programas_precision_sample_summary_out}}"
+
+parl-check-programas-support-precision-sample:
+  python3 scripts/export_programas_support_precision_sample.py --db {{db_path}} --source-id programas_partidos --parties "{{programas_precision_sample_parties}}" --per-party-limit {{programas_precision_sample_per_party_limit}} --limit {{programas_precision_sample_limit}} --dedupe-key "{{programas_precision_sample_dedupe_key}}" --min-unique-per-party {{programas_precision_sample_min_unique_per_party}} --excerpt-window-words {{programas_precision_sample_excerpt_window_words}} --excerpt-window-stride {{programas_precision_sample_excerpt_window_stride}} --excerpt-window-min-words {{programas_precision_sample_excerpt_window_min_words}} --out "{{programas_precision_sample_out}}" --summary-out "{{programas_precision_sample_summary_out}}" --strict
+
+parl-report-programas-unclear-tail-dedupe:
+  python3 scripts/report_programas_unclear_tail_dedupe.py --db {{db_path}} --source-id programas_partidos --parties "{{programas_unclear_tail_parties}}" --excerpt-len {{programas_unclear_tail_excerpt_len}} --max-duplicate-share {{programas_unclear_tail_max_duplicate_share}} --out "{{programas_unclear_tail_report_out}}" --queue-out "{{programas_unclear_tail_queue_out}}" --profile-out "{{programas_unclear_tail_profile_out}}"
+
+parl-check-programas-unclear-tail-dedupe:
+  python3 scripts/report_programas_unclear_tail_dedupe.py --db {{db_path}} --source-id programas_partidos --parties "{{programas_unclear_tail_parties}}" --excerpt-len {{programas_unclear_tail_excerpt_len}} --max-duplicate-share {{programas_unclear_tail_max_duplicate_share}} --out "{{programas_unclear_tail_report_out}}" --queue-out "{{programas_unclear_tail_queue_out}}" --profile-out "{{programas_unclear_tail_profile_out}}" --strict
+
+parl-report-programas-support-unclear-unique-ratio:
+  python3 scripts/report_programas_support_unclear_unique_ratio.py --db {{db_path}} --source-id programas_partidos --parties "{{programas_unclear_ratio_parties}}" --min-support-unclear-unique-ratio {{programas_unclear_ratio_min}} --near-duplicate-jaccard-min {{programas_unclear_ratio_near_duplicate_jaccard_min}} --near-duplicate-containment-min {{programas_unclear_ratio_near_duplicate_containment_min}} --near-duplicate-ngram-size {{programas_unclear_ratio_near_duplicate_ngram_size}} $( [ "{{programas_unclear_ratio_disable_near_duplicate_dedupe}}" = "1" ] && printf '%s' "--disable-near-duplicate-dedupe" ) --out "{{programas_unclear_ratio_out}}" --csv-out "{{programas_unclear_ratio_csv_out}}"
+
+parl-check-programas-support-unclear-unique-ratio:
+  python3 scripts/report_programas_support_unclear_unique_ratio.py --db {{db_path}} --source-id programas_partidos --parties "{{programas_unclear_ratio_parties}}" --min-support-unclear-unique-ratio {{programas_unclear_ratio_min}} --near-duplicate-jaccard-min {{programas_unclear_ratio_near_duplicate_jaccard_min}} --near-duplicate-containment-min {{programas_unclear_ratio_near_duplicate_containment_min}} --near-duplicate-ngram-size {{programas_unclear_ratio_near_duplicate_ngram_size}} $( [ "{{programas_unclear_ratio_disable_near_duplicate_dedupe}}" = "1" ] && printf '%s' "--disable-near-duplicate-dedupe" ) --out "{{programas_unclear_ratio_out}}" --csv-out "{{programas_unclear_ratio_csv_out}}" --strict
+
+parl-report-programas-empleo-fiscal-snippets-audit:
+  python3 scripts/report_programas_empleo_fiscal_snippets_audit.py --db {{db_path}} --source-id programas_partidos --topic-key "{{programas_empleo_fiscal_audit_topic_key}}" --parties "{{programas_empleo_fiscal_audit_parties}}" --fiscal-terms "{{programas_empleo_fiscal_audit_terms}}" --employment-anchor-terms "{{programas_empleo_fiscal_audit_anchor_terms}}" --max-suspicious-support-rows {{programas_empleo_fiscal_audit_max_suspicious_support}} --out "{{programas_empleo_fiscal_audit_out}}" --csv-out "{{programas_empleo_fiscal_audit_csv_out}}"
+
+parl-check-programas-empleo-fiscal-snippets-audit:
+  python3 scripts/report_programas_empleo_fiscal_snippets_audit.py --db {{db_path}} --source-id programas_partidos --topic-key "{{programas_empleo_fiscal_audit_topic_key}}" --parties "{{programas_empleo_fiscal_audit_parties}}" --fiscal-terms "{{programas_empleo_fiscal_audit_terms}}" --employment-anchor-terms "{{programas_empleo_fiscal_audit_anchor_terms}}" --max-suspicious-support-rows {{programas_empleo_fiscal_audit_max_suspicious_support}} --out "{{programas_empleo_fiscal_audit_out}}" --csv-out "{{programas_empleo_fiscal_audit_csv_out}}" --strict
+
+parl-rotate-programas-support-precision-labels:
+  python3 scripts/rotate_programas_precision_labels.py --sample-in "{{programas_precision_sample_out}}" --labels-in "{{programas_precision_rotate_labels_in}}" --out "{{programas_precision_labeled_out}}" --summary-out "{{programas_precision_rotate_summary_out}}" --max-unlabeled {{programas_precision_rotate_max_unlabeled}}
+
+parl-check-programas-support-precision-labels-rotation:
+  python3 scripts/rotate_programas_precision_labels.py --sample-in "{{programas_precision_sample_out}}" --labels-in "{{programas_precision_rotate_labels_in}}" --out "{{programas_precision_labeled_out}}" --summary-out "{{programas_precision_rotate_summary_out}}" --max-unlabeled {{programas_precision_rotate_max_unlabeled}} --strict
+
+parl-check-programas-support-precision-labels-rotation-strict:
+  python3 scripts/rotate_programas_precision_labels.py --sample-in "{{programas_precision_sample_out}}" --labels-in "{{programas_precision_rotate_labels_in}}" --out "{{programas_precision_labeled_out}}" --summary-out "{{programas_precision_rotate_summary_out}}" --max-unlabeled {{programas_precision_rotate_strict_max_unlabeled}} --strict
+
+parl-report-programas-support-precision-audit:
+  python3 scripts/report_programas_support_precision_audit.py --in "{{programas_precision_audit_in}}" --min-precision {{programas_precision_min}} --min-reviewed {{programas_precision_min_reviewed}} --min-party-precision {{programas_precision_min_party}} --required-parties "{{programas_precision_required_parties}}" --out "{{programas_precision_audit_out}}" --breakdown-out "{{programas_precision_audit_breakdown_out}}"
+
+parl-check-programas-support-precision-audit:
+  python3 scripts/report_programas_support_precision_audit.py --in "{{programas_precision_audit_in}}" --min-precision {{programas_precision_min}} --min-reviewed {{programas_precision_min_reviewed}} --min-party-precision {{programas_precision_min_party}} --required-parties "{{programas_precision_required_parties}}" --out "{{programas_precision_audit_out}}" --breakdown-out "{{programas_precision_audit_breakdown_out}}" --strict
+
+parl-programas-precision-guardrail:
+  mkdir -p "$(dirname "{{programas_precision_reconcile_out}}")" "$(dirname "{{programas_precision_declared_positions_out}}")" "$(dirname "{{programas_precision_combined_positions_out}}")" "$(dirname "{{programas_precision_status_out}}")" "$(dirname "{{programas_precision_quality_out}}")" "$(dirname "{{programas_precision_tracker_out}}")"
+  just parl-check-programas-support-precision-audit
+  python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db {{db_path}} --source-id programas_partidos --min-auto-confidence {{declared_min_auto_confidence}} --reconcile-no-signal > "{{programas_precision_reconcile_out}}"
+  python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db {{db_path}} --source-id programas_partidos --as-of-date {{snapshot_date}} > "{{programas_precision_declared_positions_out}}"
+  python3 scripts/ingestar_parlamentario_es.py backfill-combined-positions --db {{db_path}} --as-of-date {{snapshot_date}} > "{{programas_precision_combined_positions_out}}"
+  python3 scripts/report_declared_source_status.py --db {{db_path}} --source-id programas_partidos --out "{{programas_precision_status_out}}"
+  skip_arg=""; \
+  if [ "{{declared_quality_skip_vote_gate}}" = "1" ]; then \
+    skip_arg=" --skip-vote-gate"; \
+  fi; \
+  python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids {{declared_quality_vote_source_ids}} --include-declared --declared-source-ids programas_partidos --enforce-gate${skip_arg} --json-out "{{programas_precision_quality_out}}"
+  python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker docs/etl/e2e-scrape-load-tracker.md --fail-on-mismatch --fail-on-done-zero-real > "{{programas_precision_tracker_out}}"
+
+parl-programas-precision-guardrail-rotated:
+  mkdir -p "$(dirname "{{programas_precision_reconcile_out}}")" "$(dirname "{{programas_precision_declared_positions_out}}")" "$(dirname "{{programas_precision_combined_positions_out}}")" "$(dirname "{{programas_precision_status_out}}")" "$(dirname "{{programas_precision_quality_out}}")" "$(dirname "{{programas_precision_tracker_out}}")"
+  just parl-export-programas-support-precision-sample
+  just parl-check-programas-support-precision-labels-rotation-strict
+  python3 scripts/report_programas_support_precision_audit.py --in "{{programas_precision_labeled_out}}" --min-precision {{programas_precision_min}} --min-reviewed {{programas_precision_min_reviewed}} --min-party-precision {{programas_precision_min_party}} --required-parties "{{programas_precision_required_parties}}" --out "{{programas_precision_audit_out}}" --breakdown-out "{{programas_precision_audit_breakdown_out}}" --strict
+  python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db {{db_path}} --source-id programas_partidos --min-auto-confidence {{declared_min_auto_confidence}} --reconcile-no-signal > "{{programas_precision_reconcile_out}}"
+  python3 scripts/ingestar_parlamentario_es.py backfill-declared-positions --db {{db_path}} --source-id programas_partidos --as-of-date {{snapshot_date}} > "{{programas_precision_declared_positions_out}}"
+  python3 scripts/ingestar_parlamentario_es.py backfill-combined-positions --db {{db_path}} --as-of-date {{snapshot_date}} > "{{programas_precision_combined_positions_out}}"
+  python3 scripts/report_declared_source_status.py --db {{db_path}} --source-id programas_partidos --out "{{programas_precision_status_out}}"
+  skip_arg=""; \
+  if [ "{{declared_quality_skip_vote_gate}}" = "1" ]; then \
+    skip_arg=" --skip-vote-gate"; \
+  fi; \
+  python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids {{declared_quality_vote_source_ids}} --include-declared --declared-source-ids programas_partidos --enforce-gate${skip_arg} --json-out "{{programas_precision_quality_out}}"
+  python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker docs/etl/e2e-scrape-load-tracker.md --fail-on-mismatch --fail-on-done-zero-real > "{{programas_precision_tracker_out}}"
 
 parl-validate-programas-manifest:
   require_local_arg=""; \
@@ -2223,6 +2577,75 @@ parl-report-liberty-delegated-enforcement-status:
 parl-check-liberty-delegated-enforcement-gate:
   PYTHONPATH=. python3 scripts/report_liberty_delegated_enforcement_status.py --db {{db_path}} --top-n {{liberty_delegated_top_n}} --target-fragment-coverage-min {{liberty_delegated_target_coverage_min}} --designated-actor-coverage-min {{liberty_delegated_designated_actor_min}} --enforcement-evidence-coverage-min {{liberty_delegated_enforcement_evidence_min}} --enforce-gate --out {{liberty_delegated_status_out}}
 
+parl-report-liberty-delegated-person-window-queue:
+  PYTHONPATH=. python3 scripts/report_liberty_delegated_person_window_queue.py --db {{db_path}} --limit {{liberty_delegated_person_queue_limit}} --institution-hint-terms '{{liberty_delegated_person_queue_institution_terms}}' --max-actionable-rows {{liberty_delegated_person_queue_max_actionable_rows}} --queue-csv-out {{liberty_delegated_person_queue_csv_out}} --out {{liberty_delegated_person_queue_out}}
+
+parl-check-liberty-delegated-person-window-queue:
+  PYTHONPATH=. python3 scripts/report_liberty_delegated_person_window_queue.py --db {{db_path}} --limit {{liberty_delegated_person_queue_limit}} --institution-hint-terms '{{liberty_delegated_person_queue_institution_terms}}' --max-actionable-rows {{liberty_delegated_person_queue_max_actionable_rows}} --queue-csv-out {{liberty_delegated_person_queue_csv_out}} --strict --out {{liberty_delegated_person_queue_out}}
+
+parl-export-liberty-delegated-person-window-review-queue:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_review_queue.py --db {{db_path}} --seed {{liberty_delegated_seed}} --limit {{liberty_delegated_review_limit}} --institution-hint-terms '{{liberty_delegated_person_queue_institution_terms}}' --out {{liberty_delegated_review_queue_out}} --summary-out {{liberty_delegated_review_summary_out}}
+
+parl-check-liberty-delegated-person-window-review-queue-actionable-empty:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_review_queue.py --db {{db_path}} --seed {{liberty_delegated_seed}} --limit {{liberty_delegated_review_limit}} --institution-hint-terms '{{liberty_delegated_person_queue_institution_terms}}' --only-actionable --strict-empty-actionable --out {{liberty_delegated_review_queue_out}} --summary-out {{liberty_delegated_review_summary_out}}
+
+parl-apply-liberty-delegated-person-window-reviews:
+  PYTHONPATH=. python3 scripts/apply_liberty_delegated_person_window_reviews.py --seed {{liberty_delegated_seed}} --in {{liberty_delegated_review_in}} --seed-out {{liberty_delegated_review_seed_out}} --out {{liberty_delegated_review_apply_out}}
+
+parl-export-liberty-delegated-person-window-scrape-targets:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_scrape_targets.py --db {{db_path}} --seed {{liberty_delegated_seed}} --limit {{liberty_delegated_scrape_targets_limit}} --institution-hint-terms '{{liberty_delegated_person_queue_institution_terms}}' --min-priority-score {{liberty_delegated_scrape_targets_min_priority}} --out {{liberty_delegated_scrape_targets_out}} --summary-out {{liberty_delegated_scrape_targets_summary_out}}
+
+parl-check-liberty-delegated-person-window-scrape-targets:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_scrape_targets.py --db {{db_path}} --seed {{liberty_delegated_seed}} --limit {{liberty_delegated_scrape_targets_limit}} --institution-hint-terms '{{liberty_delegated_person_queue_institution_terms}}' --min-priority-score {{liberty_delegated_scrape_targets_min_priority}} --strict-min-targets {{liberty_delegated_scrape_targets_strict_min_targets}} --out {{liberty_delegated_scrape_targets_out}} --summary-out {{liberty_delegated_scrape_targets_summary_out}}
+
+parl-scrape-liberty-delegated-person-window-boe-candidates:
+  PYTHONPATH=. python3 scripts/scrape_liberty_delegated_person_window_boe_candidates.py --targets-csv {{liberty_delegated_boe_candidates_targets_csv}} --top-results-per-target {{liberty_delegated_boe_candidates_top_results}} --timeout {{liberty_delegated_boe_candidates_timeout}} --out {{liberty_delegated_boe_candidates_out}} --summary-out {{liberty_delegated_boe_candidates_summary_out}}
+
+parl-check-liberty-delegated-person-window-boe-candidates:
+  PYTHONPATH=. python3 scripts/scrape_liberty_delegated_person_window_boe_candidates.py --targets-csv {{liberty_delegated_boe_candidates_targets_csv}} --top-results-per-target {{liberty_delegated_boe_candidates_top_results}} --timeout {{liberty_delegated_boe_candidates_timeout}} --strict-min-candidates {{liberty_delegated_boe_candidates_strict_min_candidates}} --out {{liberty_delegated_boe_candidates_out}} --summary-out {{liberty_delegated_boe_candidates_summary_out}}
+
+parl-export-liberty-delegated-person-window-review-assist:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_review_assist_from_boe_candidates.py --review-queue-csv {{liberty_delegated_review_assist_in}} --boe-candidates-csv {{liberty_delegated_review_assist_boe_candidates}} --min-candidate-score {{liberty_delegated_review_assist_min_candidate_score}} --max-candidates-per-link {{liberty_delegated_review_assist_max_candidates_per_link}} --out {{liberty_delegated_review_assist_out}} --summary-out {{liberty_delegated_review_assist_summary_out}}
+
+parl-check-liberty-delegated-person-window-review-assist:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_review_assist_from_boe_candidates.py --review-queue-csv {{liberty_delegated_review_assist_in}} --boe-candidates-csv {{liberty_delegated_review_assist_boe_candidates}} --min-candidate-score {{liberty_delegated_review_assist_min_candidate_score}} --max-candidates-per-link {{liberty_delegated_review_assist_max_candidates_per_link}} --strict-min-assist-rows {{liberty_delegated_review_assist_strict_min_rows}} --out {{liberty_delegated_review_assist_out}} --summary-out {{liberty_delegated_review_assist_summary_out}}
+
+parl-export-liberty-delegated-person-window-auto-review-decisions:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_auto_review_decisions.py --review-queue-csv {{liberty_delegated_auto_review_queue_csv}} --review-assist-csv {{liberty_delegated_auto_review_assist_csv}} --min-candidate-score {{liberty_delegated_auto_review_min_candidate_score}} --max-candidates-per-link {{liberty_delegated_auto_review_max_candidates_per_link}} --out {{liberty_delegated_auto_review_out}} --summary-out {{liberty_delegated_auto_review_summary_out}}
+
+parl-check-liberty-delegated-person-window-auto-review-decisions:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_auto_review_decisions.py --review-queue-csv {{liberty_delegated_auto_review_queue_csv}} --review-assist-csv {{liberty_delegated_auto_review_assist_csv}} --min-candidate-score {{liberty_delegated_auto_review_min_candidate_score}} --max-candidates-per-link {{liberty_delegated_auto_review_max_candidates_per_link}} --strict-min-approved-rows {{liberty_delegated_auto_review_strict_min_approved_rows}} --out {{liberty_delegated_auto_review_out}} --summary-out {{liberty_delegated_auto_review_summary_out}}
+
+parl-export-liberty-delegated-person-window-auto-review-qa-sample:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_auto_review_qa_sample.py --auto-review-csv {{liberty_delegated_auto_review_out}} --review-assist-csv {{liberty_delegated_auto_review_assist_csv}} --sample-size {{liberty_delegated_auto_review_qa_sample_size}} --out {{liberty_delegated_auto_review_qa_sample_out}} --summary-out {{liberty_delegated_auto_review_qa_summary_out}}
+
+parl-report-liberty-delegated-person-window-auto-review-qa-precision:
+  PYTHONPATH=. python3 scripts/report_liberty_delegated_person_window_auto_review_qa_precision.py --qa-csv {{liberty_delegated_auto_review_qa_sample_out}} --decision-scope {{liberty_delegated_auto_review_qa_decision_scope}} --min-reviewed-rows {{liberty_delegated_auto_review_qa_min_reviewed_rows}} --min-precision-pct {{liberty_delegated_auto_review_qa_min_precision_pct}} --out {{liberty_delegated_auto_review_qa_precision_out}}
+
+parl-check-liberty-delegated-person-window-auto-review-qa-precision:
+  PYTHONPATH=. python3 scripts/report_liberty_delegated_person_window_auto_review_qa_precision.py --qa-csv {{liberty_delegated_auto_review_qa_sample_out}} --decision-scope {{liberty_delegated_auto_review_qa_decision_scope}} --min-reviewed-rows {{liberty_delegated_auto_review_qa_min_reviewed_rows}} --min-precision-pct {{liberty_delegated_auto_review_qa_min_precision_pct}} --strict --out {{liberty_delegated_auto_review_qa_precision_out}}
+
+parl-report-liberty-delegated-non-nominative-qa-gate:
+  PYTHONPATH=. python3 scripts/report_liberty_delegated_non_nominative_qa_gate.py --auto-review-summary {{liberty_delegated_non_nominative_qa_gate_auto_review_summary}} --qa-sample-summary {{liberty_delegated_non_nominative_qa_gate_sample_summary}} --qa-precision-report {{liberty_delegated_non_nominative_qa_gate_precision_report}} --review-note-contains {{liberty_delegated_non_nominative_qa_gate_review_note_contains}} --min-reviewed-rows {{liberty_delegated_non_nominative_qa_gate_min_reviewed_rows}} --min-precision-pct {{liberty_delegated_non_nominative_qa_gate_min_precision_pct}} --out {{liberty_delegated_non_nominative_qa_gate_out}}
+
+parl-check-liberty-delegated-non-nominative-qa-gate:
+  PYTHONPATH=. python3 scripts/report_liberty_delegated_non_nominative_qa_gate.py --auto-review-summary {{liberty_delegated_non_nominative_qa_gate_auto_review_summary}} --qa-sample-summary {{liberty_delegated_non_nominative_qa_gate_sample_summary}} --qa-precision-report {{liberty_delegated_non_nominative_qa_gate_precision_report}} --review-note-contains {{liberty_delegated_non_nominative_qa_gate_review_note_contains}} --min-reviewed-rows {{liberty_delegated_non_nominative_qa_gate_min_reviewed_rows}} --min-precision-pct {{liberty_delegated_non_nominative_qa_gate_min_precision_pct}} --strict --out {{liberty_delegated_non_nominative_qa_gate_out}}
+
+parl-export-liberty-delegated-pending-resolution-review-queue:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_pending_resolution_review_queue.py --auto-review-csv {{liberty_delegated_auto_review_out}} --review-assist-csv {{liberty_delegated_auto_review_assist_csv}} --top-candidates-per-link {{liberty_delegated_pending_resolution_top_candidates_per_link}} --out {{liberty_delegated_pending_resolution_queue_out}} --summary-out {{liberty_delegated_pending_resolution_queue_summary_out}}
+
+parl-export-liberty-delegated-alternative-capture-targets:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_alternative_capture_targets.py --pending-resolution-csv {{liberty_delegated_alternative_capture_in}} --max-candidate-doc-targets-per-link {{liberty_delegated_alternative_capture_max_candidate_docs_per_link}} --out {{liberty_delegated_alternative_capture_out}} --summary-out {{liberty_delegated_alternative_capture_summary_out}}
+
+parl-check-liberty-delegated-alternative-capture-targets:
+  PYTHONPATH=. python3 scripts/export_liberty_delegated_alternative_capture_targets.py --pending-resolution-csv {{liberty_delegated_alternative_capture_in}} --max-candidate-doc-targets-per-link {{liberty_delegated_alternative_capture_max_candidate_docs_per_link}} --strict-min-targets-per-link {{liberty_delegated_alternative_capture_strict_min_targets_per_link}} --out {{liberty_delegated_alternative_capture_out}} --summary-out {{liberty_delegated_alternative_capture_summary_out}}
+
+parl-scrape-liberty-delegated-alternative-boe-candidates:
+  PYTHONPATH=. python3 scripts/scrape_liberty_delegated_alternative_boe_candidates.py --targets-csv {{liberty_delegated_alternative_boe_targets_in}} --top-results-per-query-target {{liberty_delegated_alternative_boe_top_results_per_query_target}} --max-queries-per-query-target {{liberty_delegated_alternative_boe_max_queries_per_query_target}} --timeout {{liberty_delegated_alternative_boe_timeout}} --out {{liberty_delegated_alternative_boe_out}} --summary-out {{liberty_delegated_alternative_boe_summary_out}}
+
+parl-check-liberty-delegated-alternative-boe-candidates:
+  PYTHONPATH=. python3 scripts/scrape_liberty_delegated_alternative_boe_candidates.py --targets-csv {{liberty_delegated_alternative_boe_targets_in}} --top-results-per-query-target {{liberty_delegated_alternative_boe_top_results_per_query_target}} --max-queries-per-query-target {{liberty_delegated_alternative_boe_max_queries_per_query_target}} --timeout {{liberty_delegated_alternative_boe_timeout}} --strict-min-candidates {{liberty_delegated_alternative_boe_strict_min_candidates}} --strict-min-links-with-candidates {{liberty_delegated_alternative_boe_strict_min_links_with_candidates}} --out {{liberty_delegated_alternative_boe_out}} --summary-out {{liberty_delegated_alternative_boe_summary_out}}
+
 parl-export-liberty-restrictions-snapshot:
   @set -euo pipefail; \
   prev_arg=""; \
@@ -2260,10 +2683,13 @@ parl-report-liberty-atlas-release-heartbeat:
   python3 scripts/report_liberty_atlas_release_heartbeat.py --published-release-json {{liberty_atlas_release_latest_json}} --gh-pages-release-json {{liberty_atlas_publish_gh_pages_out}} --continuity-json {{liberty_atlas_changelog_continuity_out}} --heartbeat-jsonl {{liberty_atlas_release_heartbeat_path}} --max-snapshot-age-days {{liberty_atlas_release_max_snapshot_age_days}} --hf-timeout {{liberty_atlas_release_hf_timeout}} --strict --out {{liberty_atlas_release_heartbeat_out}}${allow_hf_unavailable_arg}${expected_snapshot_arg}${hf_json_arg}${hf_url_arg}${hf_repo_arg}${hf_username_arg}
 
 parl-check-liberty-atlas-release-heartbeat-window:
-  python3 scripts/report_liberty_atlas_release_heartbeat_window.py --heartbeat-jsonl {{liberty_atlas_release_heartbeat_path}} --last {{liberty_atlas_release_heartbeat_window}} --max-failed {{liberty_atlas_release_window_max_failed}} --max-degraded {{liberty_atlas_release_window_max_degraded}} --max-stale-alerts {{liberty_atlas_release_window_max_stale_alerts}} --max-drift-alerts {{liberty_atlas_release_window_max_drift_alerts}} --max-hf-unavailable {{liberty_atlas_release_window_max_hf_unavailable}} --strict --out {{liberty_atlas_release_heartbeat_window_out}}
+  @set -euo pipefail; \
+  min_run_at_arg=""; \
+  if [ -n "{{liberty_atlas_release_heartbeat_window_min_run_at}}" ]; then min_run_at_arg=" --min-run-at {{liberty_atlas_release_heartbeat_window_min_run_at}}"; fi; \
+  python3 scripts/report_liberty_atlas_release_heartbeat_window.py --heartbeat-jsonl {{liberty_atlas_release_heartbeat_path}} --last {{liberty_atlas_release_heartbeat_window}} --max-failed {{liberty_atlas_release_window_max_failed}} --max-degraded {{liberty_atlas_release_window_max_degraded}} --max-stale-alerts {{liberty_atlas_release_window_max_stale_alerts}} --max-drift-alerts {{liberty_atlas_release_window_max_drift_alerts}} --max-hf-unavailable {{liberty_atlas_release_window_max_hf_unavailable}} --strict --out {{liberty_atlas_release_heartbeat_window_out}}${min_run_at_arg}
 
 parl-liberty-restrictions-pipeline:
-  just parl-sanction-norms-seed-pipeline
+  just parl-sanction-citizen-pilot-pipeline
   just parl-validate-liberty-restrictions-seed
   just parl-import-liberty-restrictions-seed
   just parl-report-liberty-restrictions-status
@@ -2297,6 +2723,7 @@ parl-liberty-restrictions-pipeline:
   just parl-import-liberty-delegated-enforcement-seed
   just parl-report-liberty-delegated-enforcement-status
   just parl-check-liberty-delegated-enforcement-gate
+  just parl-check-liberty-delegated-non-nominative-qa-gate
   just parl-export-liberty-restrictions-snapshot
   just parl-publish-liberty-atlas-artifacts
   just parl-check-liberty-atlas-changelog-continuity
@@ -2304,7 +2731,7 @@ parl-liberty-restrictions-pipeline:
   just parl-check-liberty-atlas-release-heartbeat-window
 
 parl-test-liberty-restrictions:
-  python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_import_liberty_restrictions_seed.py tests/test_report_liberty_restrictions_status.py tests/test_report_liberty_focus_scope_guard.py tests/test_report_liberty_restrictions_status_heartbeat.py tests/test_report_liberty_restrictions_status_heartbeat_window.py tests/test_validate_liberty_proportionality_seed.py tests/test_import_liberty_proportionality_seed.py tests/test_report_liberty_proportionality_status.py tests/test_report_liberty_direct_accountability_scores.py tests/test_validate_liberty_person_identity_resolution_seed.py tests/test_import_liberty_person_identity_resolution_seed.py tests/test_report_liberty_personal_accountability_scores.py tests/test_report_liberty_person_identity_resolution_queue.py tests/test_export_liberty_person_identity_official_upgrade_review_queue.py tests/test_report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat.py tests/test_report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat_window.py tests/test_apply_liberty_person_identity_official_upgrade_reviews.py tests/test_validate_liberty_enforcement_seed.py tests/test_import_liberty_enforcement_seed.py tests/test_report_liberty_enforcement_variation_status.py tests/test_validate_liberty_indirect_accountability_seed.py tests/test_import_liberty_indirect_accountability_seed.py tests/test_report_liberty_indirect_accountability_status.py tests/test_validate_liberty_delegated_enforcement_seed.py tests/test_import_liberty_delegated_enforcement_seed.py tests/test_report_liberty_delegated_enforcement_status.py tests/test_export_liberty_restrictions_snapshot.py tests/test_publish_liberty_atlas_artifacts.py tests/test_report_liberty_atlas_changelog_continuity.py tests/test_report_liberty_atlas_release_heartbeat.py tests/test_report_liberty_atlas_release_heartbeat_window.py
+  python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_import_liberty_restrictions_seed.py tests/test_report_liberty_restrictions_status.py tests/test_report_liberty_focus_scope_guard.py tests/test_report_liberty_restrictions_status_heartbeat.py tests/test_report_liberty_restrictions_status_heartbeat_window.py tests/test_validate_liberty_proportionality_seed.py tests/test_import_liberty_proportionality_seed.py tests/test_report_liberty_proportionality_status.py tests/test_report_liberty_direct_accountability_scores.py tests/test_validate_liberty_person_identity_resolution_seed.py tests/test_import_liberty_person_identity_resolution_seed.py tests/test_report_liberty_personal_accountability_scores.py tests/test_report_liberty_person_identity_resolution_queue.py tests/test_export_liberty_person_identity_official_upgrade_review_queue.py tests/test_report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat.py tests/test_report_liberty_person_identity_official_upgrade_review_queue_actionable_heartbeat_window.py tests/test_apply_liberty_person_identity_official_upgrade_reviews.py tests/test_validate_liberty_enforcement_seed.py tests/test_import_liberty_enforcement_seed.py tests/test_report_liberty_enforcement_variation_status.py tests/test_validate_liberty_indirect_accountability_seed.py tests/test_import_liberty_indirect_accountability_seed.py tests/test_report_liberty_indirect_accountability_status.py tests/test_validate_liberty_delegated_enforcement_seed.py tests/test_import_liberty_delegated_enforcement_seed.py tests/test_report_liberty_delegated_enforcement_status.py tests/test_report_liberty_delegated_person_window_queue.py tests/test_export_liberty_delegated_person_window_review_queue.py tests/test_apply_liberty_delegated_person_window_reviews.py tests/test_export_liberty_delegated_person_window_scrape_targets.py tests/test_scrape_liberty_delegated_person_window_boe_candidates.py tests/test_export_liberty_delegated_person_window_review_assist_from_boe_candidates.py tests/test_export_liberty_delegated_person_window_auto_review_decisions.py tests/test_export_liberty_delegated_person_window_auto_review_qa_sample.py tests/test_report_liberty_delegated_person_window_auto_review_qa_precision.py tests/test_report_liberty_delegated_non_nominative_qa_gate.py tests/test_export_liberty_delegated_alternative_capture_targets.py tests/test_scrape_liberty_delegated_alternative_boe_candidates.py tests/test_export_liberty_restrictions_snapshot.py tests/test_publish_liberty_atlas_artifacts.py tests/test_report_liberty_atlas_changelog_continuity.py tests/test_report_liberty_atlas_release_heartbeat.py tests/test_report_liberty_atlas_release_heartbeat_window.py
 
 parl-programas-pipeline:
   just parl-validate-programas-manifest
@@ -2338,10 +2765,10 @@ parl-quality-report-json:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
 
 parl-quality-report-initiatives:
-  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --json-out etl/data/published/votaciones-kpis-initiatives-es-{{snapshot_date}}.json"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --initiative-actionable-scope {{initiative_quality_actionable_scope}} --json-out etl/data/published/votaciones-kpis-initiatives-es-{{snapshot_date}}.json"
 
 parl-quality-report-initiatives-enforce:
-  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --enforce-gate --json-out etl/data/published/votaciones-kpis-initiatives-es-{{snapshot_date}}.json"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --initiative-actionable-scope {{initiative_quality_actionable_scope}} --enforce-gate --json-out etl/data/published/votaciones-kpis-initiatives-es-{{snapshot_date}}.json"
 
 parl-quality-report-declared:
   out_arg=""; skip_arg=""; \
@@ -2370,7 +2797,7 @@ parl-quality-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --unmatched-sample-limit 50"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db {{db_path}} --as-of-date {{snapshot_date}} --taxonomy-seed {{topic_taxonomy_seed}}"
-  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --enforce-gate --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --initiative-actionable-scope {{initiative_quality_actionable_scope}} --enforce-gate --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
 
 parl-publish-votaciones:
   just parl-quality-pipeline
@@ -2406,6 +2833,11 @@ etl-smoke-votes:
   python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json --snapshot-date {{snapshot_date}} --strict-network
   python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml --snapshot-date {{snapshot_date}} --strict-network
   python3 scripts/etl_smoke_votes.py --db {{db_path}}
+
+public-route-audit base_url="https://votaconlachola.org" json_out="":
+  json_arg=""; \
+  if [ -n "{{json_out}}" ]; then json_arg="--json-out {{json_out}}"; fi; \
+  node scripts/audit_public_routes.js --base-url "{{base_url}}" ${json_arg}
 
 etl-extract-congreso:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
@@ -2633,14 +3065,20 @@ gh-pages-next-prime:
   fi
   if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
     mkdir -p "{{gh_pages_dir}}/people/data"; \
-    python3 scripts/export_people_profiles_snapshot.py \
-      --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/people/data/profiles.json" \
-      --snapshot-date "{{snapshot_date}}"; \
-    python3 scripts/export_people_xray_snapshot.py \
-      --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/people/data/xray.json" \
-      --snapshot-date "{{snapshot_date}}"; \
+    if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
+      python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
+      python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
+      echo "Reusing existing people exports for snapshot {{snapshot_date}}"; \
+    else \
+      python3 scripts/export_people_profiles_snapshot.py \
+        --db "{{db_path}}" \
+        --out "{{gh_pages_dir}}/people/data/profiles.json" \
+        --snapshot-date "{{snapshot_date}}"; \
+      python3 scripts/export_people_xray_snapshot.py \
+        --db "{{db_path}}" \
+        --out "{{gh_pages_dir}}/people/data/xray.json" \
+        --snapshot-date "{{snapshot_date}}"; \
+    fi; \
     python3 scripts/export_political_positions_snapshot.py \
       --db "{{db_path}}" \
       --out "{{gh_pages_dir}}/political-positions/data/stances.json" \
@@ -2689,6 +3127,42 @@ gh-pages-next-prime:
   if [ -f "{{gh_pages_dir}}/political-positions/data/stances.json" ]; then \
     cp -f "{{gh_pages_dir}}/political-positions/data/stances.json" \
       "{{gh_pages_next_app_dir}}/public/political-positions/data/stances.json"; \
+    if [ -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" ]; then \
+      cp -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/person-default-rows.json"; \
+    fi; \
+    if [ -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" ]; then \
+      cp -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/person-search-index.json"; \
+    fi; \
+    if [ -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" ]; then \
+      cp -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-search-index.json"; \
+    fi; \
+    if [ -d "{{gh_pages_dir}}/political-positions/data/person-sort-previews" ]; then \
+      rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/person-sort-previews"; \
+      cp -R "{{gh_pages_dir}}/political-positions/data/person-sort-previews" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/person-sort-previews"; \
+    fi; \
+    for src in "{{gh_pages_dir}}"/political-positions/data/*-trajectories.json; do \
+      [ -f "$src" ] || continue; \
+      cp -f "$src" "{{gh_pages_next_app_dir}}/public/political-positions/data/"; \
+    done; \
+    if [ -d "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" ]; then \
+      rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
+      cp -R "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
+    fi; \
+    if [ -d "{{gh_pages_dir}}/political-positions/data/person-details" ]; then \
+      rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/person-details"; \
+      cp -R "{{gh_pages_dir}}/political-positions/data/person-details" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/person-details"; \
+    fi; \
+    if [ -d "{{gh_pages_dir}}/political-positions/data/topic-person-rows" ]; then \
+      rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-person-rows"; \
+      cp -R "{{gh_pages_dir}}/political-positions/data/topic-person-rows" \
+        "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-person-rows"; \
+    fi; \
   fi
   if [ -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" ]; then \
     cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
@@ -2740,7 +3214,7 @@ explorer-bg-watch:
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html {{gh_pages_dir}}/CNAME
   mkdir -p \
     {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
     {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
@@ -2761,9 +3235,16 @@ explorer-gh-pages-build:
     {{gh_pages_dir}}/legacy/explorer-temas {{gh_pages_dir}}/legacy/explorer-votaciones \
     {{gh_pages_dir}}/legacy/explorer-politico
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
-  npm --prefix "{{gh_pages_next_app_dir}}" ci --no-audit --no-fund
-  NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" npm --prefix "{{gh_pages_next_app_dir}}" run export:gh
+  mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
+  if [ ! -f "{{gh_pages_next_app_dir}}/node_modules/next/dist/bin/next" ]; then \
+    npm --prefix "{{gh_pages_next_app_dir}}" --cache /tmp/vclc-npm-cache --logs-dir /tmp/vclc-npm-logs ci --no-audit --no-fund; \
+  else \
+    echo "Reusing existing {{gh_pages_next_app_dir}}/node_modules"; \
+  fi
+  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build
   cp -R "{{gh_pages_next_out_dir}}"/. "{{gh_pages_dir}}"/
+  rm -f "{{gh_pages_dir}}/CNAME"
+  if [ -n "{{gh_pages_cname}}" ]; then printf '%s\n' "{{gh_pages_cname}}" > "{{gh_pages_dir}}/CNAME"; fi
   touch "{{gh_pages_dir}}/.nojekyll"
   cp -R ui/citizen/. {{gh_pages_dir}}/legacy/citizen/
   cp ui/graph/index.html {{gh_pages_dir}}/legacy/graph/index.html
@@ -2816,18 +3297,28 @@ explorer-gh-pages-build:
     --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"
   python3 scripts/export_policy_outcomes_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"
-  python3 scripts/export_people_profiles_snapshot.py \
-    --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/people/data/profiles.json" \
-    --snapshot-date {{snapshot_date}}
-  python3 scripts/export_people_xray_snapshot.py \
-    --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/people/data/xray.json" \
-    --snapshot-date {{snapshot_date}}
+    --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" \
+    --snapshot-date "{{snapshot_date}}"
+  if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
+    python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
+    python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
+    echo "Reusing existing people exports for snapshot {{snapshot_date}}"; \
+  else \
+    python3 scripts/export_people_profiles_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/people/data/profiles.json" \
+      --snapshot-date {{snapshot_date}}; \
+    python3 scripts/export_people_xray_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/people/data/xray.json" \
+      --snapshot-date {{snapshot_date}}; \
+  fi
   python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
+  python3 scripts/export_coverage_capacity_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/explorer-sources/data/coverage-capacity.json"
   python3 scripts/export_explorer_temas_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-temas/data/temas-preview.json"
@@ -2867,25 +3358,71 @@ explorer-gh-pages-build:
     --path "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
     --max-bytes 5000000 \
     --strict-grid
+  cp ui/citizen/concerns_v1.json "{{gh_pages_dir}}/citizen/data/concerns_v1.json"
   python3 scripts/report_citizen_concern_pack_quality.py \
     --snapshot "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
     --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json"
+  python3 scripts/report_citizen_concern_pack_quality.py \
+    --snapshot "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
+    --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
+    --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality_votes.json"
+  python3 scripts/report_citizen_concern_pack_quality.py \
+    --snapshot "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
+    --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
+    --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality_declared.json"
   cp "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json" "{{gh_pages_dir}}/legacy/citizen/data/concern_pack_quality.json"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/legacy/citizen" "{{gh_pages_next_app_dir}}/public/legacy/citizen/data"
+  cp -R ui/citizen/. "{{gh_pages_next_app_dir}}/public/legacy/citizen/"
+  cp -R "{{gh_pages_dir}}/citizen/data/." "{{gh_pages_next_app_dir}}/public/legacy/citizen/data/"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/legacy/graph" "{{gh_pages_next_app_dir}}/public/legacy/graph/data"
+  cp ui/graph/index.html "{{gh_pages_next_app_dir}}/public/legacy/graph/index.html"
+  cp -R "{{gh_pages_dir}}/legacy/graph/data/." "{{gh_pages_next_app_dir}}/public/legacy/graph/data/"
   mkdir -p "{{gh_pages_next_app_dir}}/public/legal-sanctions/data"
   cp -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" "{{gh_pages_next_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"
   cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json"
   cp -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" "{{gh_pages_next_app_dir}}/public/initiative-lifecycle/data/lifecycle.json"
   cp -f "{{gh_pages_dir}}/political-positions/data/stances.json" "{{gh_pages_next_app_dir}}/public/political-positions/data/stances.json"
+  if [ -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" ]; then \
+    cp -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" "{{gh_pages_next_app_dir}}/public/political-positions/data/person-default-rows.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" ]; then \
+    cp -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" "{{gh_pages_next_app_dir}}/public/political-positions/data/person-search-index.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" ]; then \
+    cp -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-search-index.json"; \
+  fi
+  if [ -d "{{gh_pages_dir}}/political-positions/data/person-sort-previews" ]; then \
+    rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/person-sort-previews"; \
+    cp -R "{{gh_pages_dir}}/political-positions/data/person-sort-previews" "{{gh_pages_next_app_dir}}/public/political-positions/data/person-sort-previews"; \
+  fi
+  for src in "{{gh_pages_dir}}"/political-positions/data/*-trajectories.json; do \
+    [ -f "$src" ] || continue; \
+    cp -f "$src" "{{gh_pages_next_app_dir}}/public/political-positions/data/"; \
+  done
+  if [ -d "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" ]; then \
+    rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
+    cp -R "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" "{{gh_pages_next_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
+  fi
+  if [ -d "{{gh_pages_dir}}/political-positions/data/person-details" ]; then \
+    rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/person-details"; \
+    cp -R "{{gh_pages_dir}}/political-positions/data/person-details" "{{gh_pages_next_app_dir}}/public/political-positions/data/person-details"; \
+  fi
+  if [ -d "{{gh_pages_dir}}/political-positions/data/topic-person-rows" ]; then \
+    rm -rf "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-person-rows"; \
+    cp -R "{{gh_pages_dir}}/political-positions/data/topic-person-rows" "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-person-rows"; \
+  fi
   cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" "{{gh_pages_next_app_dir}}/public/elections-behavior/data/elections-behavior.json"
   cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/legacy/graph/data/ideal.json"
+  cp docs/coverage_capacity_model.json "{{gh_pages_dir}}/explorer-sources/data/coverage-model.json"
+  cp docs/coverage_capacity_model.json "{{gh_pages_dir}}/legacy/graph/data/coverage-model.json"
   just privacy-check-public-artifacts
   @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
 
 privacy-check-public-artifacts:
-  python3 scripts/check_public_privacy_leaks.py --path "{{gh_pages_dir}}" --path etl/data/published
+  python3 scripts/check_public_privacy_leaks.py --path "{{gh_pages_dir}}" --path etl/data/published --path "{{gh_pages_next_app_dir}}/public"
 
 citizen-test-preset-codec:
   node --test tests/test_citizen_preset_codec.js tests/test_citizen_preset_recovery_ui_contract.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
@@ -3581,6 +4118,14 @@ explorer-gh-pages-publish:
     echo "No se encontró remote.origin.url"; \
     exit 1; \
   fi; \
+  export GIT_TERMINAL_PROMPT=0; \
+  export GIT_ASKPASS=/bin/false; \
+  case "$remote_url" in \
+    git@*|ssh://*) \
+      export GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh -o BatchMode=yes -o ConnectTimeout=15 -o ConnectionAttempts=1 -o StrictHostKeyChecking=accept-new}"; \
+      ;; \
+  esac; \
+  set -e; \
   just explorer-gh-pages-build; \
   tmp_dir=$(mktemp -d); \
   trap 'rm -rf "$tmp_dir"' EXIT; \
@@ -3591,7 +4136,7 @@ explorer-gh-pages-publish:
   git add .; \
   git commit --allow-empty -m "Publish explorers landing and explorer-politico static snapshot" -q; \
   git remote add origin "$remote_url"; \
-  git push -f "$remote_url" "{{gh_pages_branch}}:{{gh_pages_branch}}"
+  git -c credential.interactive=never push -f "$remote_url" "{{gh_pages_branch}}:{{gh_pages_branch}}"
 
 explorer-gh-pages:
   @just explorer-gh-pages-publish

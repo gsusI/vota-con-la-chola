@@ -21,6 +21,165 @@ def _norm(v: Any) -> str:
     return str(v or "").strip()
 
 
+def _table_exists(conn: sqlite3.Connection, table_name: str) -> bool:
+    token = _norm(table_name)
+    if not token:
+        return False
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?",
+        (token,),
+    ).fetchone()
+    return row is not None
+
+
+def _build_municipal_overlay(conn: sqlite3.Connection) -> dict[str, Any]:
+    if not _table_exists(conn, "sanction_municipal_ordinances") or not _table_exists(
+        conn, "sanction_municipal_ordinance_fragments"
+    ):
+        return {
+            "status": "not_started",
+            "included_in_focus_gate": False,
+            "totals": {
+                "municipal_ordinances_total": 0,
+                "municipal_fragments_total": 0,
+                "municipal_mapped_fragment_total": 0,
+                "municipal_unmapped_fragment_total": 0,
+                "municipal_fragments_with_irlc_total": 0,
+                "municipal_fragments_with_accountability_total": 0,
+                "municipal_fragments_with_accountability_primary_evidence_total": 0,
+                "municipal_fragments_with_dual_coverage_total": 0,
+            },
+            "coverage": {
+                "municipal_mapped_fragment_pct": 0.0,
+                "municipal_fragments_with_irlc_pct": 0.0,
+                "municipal_fragments_with_accountability_pct": 0.0,
+                "municipal_fragments_with_accountability_primary_evidence_pct": 0.0,
+                "municipal_fragments_with_dual_coverage_pct": 0.0,
+            },
+            "coverage_by_source": [],
+            "coverage_by_scope": [],
+        }
+
+    row = conn.execute(
+        """
+        SELECT
+          (SELECT COUNT(*) FROM sanction_municipal_ordinances) AS ordinances_total,
+          COUNT(DISTINCT f.ordinance_fragment_id) AS fragments_total,
+          COUNT(DISTINCT CASE
+            WHEN COALESCE(TRIM(f.mapped_fragment_id), '') <> ''
+            THEN f.ordinance_fragment_id
+          END) AS mapped_fragment_total,
+          COUNT(DISTINCT CASE
+            WHEN COALESCE(TRIM(f.mapped_fragment_id), '') = ''
+            THEN f.ordinance_fragment_id
+          END) AS unmapped_fragment_total,
+          COUNT(DISTINCT CASE
+            WHEN a.assessment_key IS NOT NULL
+            THEN f.ordinance_fragment_id
+          END) AS fragments_with_irlc_total,
+          COUNT(DISTINCT CASE
+            WHEN r.fragment_id IS NOT NULL
+            THEN f.ordinance_fragment_id
+          END) AS fragments_with_accountability_total,
+          COUNT(DISTINCT CASE
+            WHEN COALESCE(TRIM(r.source_url), '') <> ''
+             AND COALESCE(TRIM(r.evidence_date), '') <> ''
+             AND COALESCE(TRIM(r.evidence_quote), '') <> ''
+            THEN f.ordinance_fragment_id
+          END) AS fragments_with_accountability_primary_evidence_total,
+          COUNT(DISTINCT CASE
+            WHEN a.assessment_key IS NOT NULL
+             AND r.fragment_id IS NOT NULL
+            THEN f.ordinance_fragment_id
+          END) AS fragments_with_dual_coverage_total
+        FROM sanction_municipal_ordinance_fragments f
+        JOIN sanction_municipal_ordinances o ON o.ordinance_id = f.ordinance_id
+        LEFT JOIN liberty_restriction_assessments a ON a.fragment_id = f.mapped_fragment_id
+        LEFT JOIN legal_fragment_responsibilities r ON r.fragment_id = f.mapped_fragment_id
+        """
+    ).fetchone()
+
+    totals = {
+        "municipal_ordinances_total": int(row["ordinances_total"] or 0),
+        "municipal_fragments_total": int(row["fragments_total"] or 0),
+        "municipal_mapped_fragment_total": int(row["mapped_fragment_total"] or 0),
+        "municipal_unmapped_fragment_total": int(row["unmapped_fragment_total"] or 0),
+        "municipal_fragments_with_irlc_total": int(row["fragments_with_irlc_total"] or 0),
+        "municipal_fragments_with_accountability_total": int(row["fragments_with_accountability_total"] or 0),
+        "municipal_fragments_with_accountability_primary_evidence_total": int(
+            row["fragments_with_accountability_primary_evidence_total"] or 0
+        ),
+        "municipal_fragments_with_dual_coverage_total": int(row["fragments_with_dual_coverage_total"] or 0),
+    }
+    fragments_total = int(totals["municipal_fragments_total"] or 0)
+    coverage = {
+        "municipal_mapped_fragment_pct": (
+            round(totals["municipal_mapped_fragment_total"] / fragments_total, 6) if fragments_total else 0.0
+        ),
+        "municipal_fragments_with_irlc_pct": (
+            round(totals["municipal_fragments_with_irlc_total"] / fragments_total, 6) if fragments_total else 0.0
+        ),
+        "municipal_fragments_with_accountability_pct": (
+            round(totals["municipal_fragments_with_accountability_total"] / fragments_total, 6) if fragments_total else 0.0
+        ),
+        "municipal_fragments_with_accountability_primary_evidence_pct": (
+            round(totals["municipal_fragments_with_accountability_primary_evidence_total"] / fragments_total, 6)
+            if fragments_total
+            else 0.0
+        ),
+        "municipal_fragments_with_dual_coverage_pct": (
+            round(totals["municipal_fragments_with_dual_coverage_total"] / fragments_total, 6) if fragments_total else 0.0
+        ),
+    }
+
+    base_row = {
+        "norms_total": 0,
+        "norms_with_irlc_total": 0,
+        "norms_with_irlc_pct": 0.0,
+        "fragments_total": fragments_total,
+        "fragments_with_irlc_total": totals["municipal_fragments_with_irlc_total"],
+        "fragments_with_irlc_pct": coverage["municipal_fragments_with_irlc_pct"],
+        "fragments_with_accountability_total": totals["municipal_fragments_with_accountability_total"],
+        "fragments_with_accountability_pct": coverage["municipal_fragments_with_accountability_pct"],
+        "fragments_with_accountability_primary_evidence_total": totals[
+            "municipal_fragments_with_accountability_primary_evidence_total"
+        ],
+        "fragments_with_accountability_primary_evidence_pct": coverage[
+            "municipal_fragments_with_accountability_primary_evidence_pct"
+        ],
+        "fragments_with_dual_coverage_total": totals["municipal_fragments_with_dual_coverage_total"],
+        "fragments_with_dual_coverage_pct": coverage["municipal_fragments_with_dual_coverage_pct"],
+        "coverage_mode": "derived_municipal_overlay",
+        "ordinances_total": totals["municipal_ordinances_total"],
+        "mapped_fragments_total": totals["municipal_mapped_fragment_total"],
+        "unmapped_fragments_total": totals["municipal_unmapped_fragment_total"],
+        "included_in_focus_gate": False,
+    }
+
+    return {
+        "status": "started" if fragments_total > 0 else "not_started",
+        "included_in_focus_gate": False,
+        "totals": totals,
+        "coverage": coverage,
+        "coverage_by_source": [
+            {
+                "source_key": "municipal_pilot_derived",
+                **base_row,
+            }
+        ]
+        if fragments_total > 0
+        else [],
+        "coverage_by_scope": [
+            {
+                "scope_key": "municipal",
+                **base_row,
+            }
+        ]
+        if fragments_total > 0
+        else [],
+    }
+
+
 def build_status_report(
     conn: sqlite3.Connection,
     *,
@@ -247,12 +406,28 @@ def build_status_report(
         for row in scope_rows
     ]
 
-    sources_total = len(coverage_by_source)
-    sources_with_assessments_total = sum(1 for row in coverage_by_source if int(row["fragments_with_irlc_total"]) > 0)
-    scopes_total = len(coverage_by_scope)
-    scopes_with_assessments_total = sum(1 for row in coverage_by_scope if int(row["fragments_with_irlc_total"]) > 0)
-    sources_with_dual_coverage_total = sum(1 for row in coverage_by_source if int(row["fragments_with_dual_coverage_total"]) > 0)
-    scopes_with_dual_coverage_total = sum(1 for row in coverage_by_scope if int(row["fragments_with_dual_coverage_total"]) > 0)
+    municipal_overlay = _build_municipal_overlay(conn)
+
+    canonical_coverage_by_source = list(coverage_by_source)
+    canonical_coverage_by_scope = list(coverage_by_scope)
+
+    sources_total = len(canonical_coverage_by_source)
+    sources_with_assessments_total = sum(
+        1 for row in canonical_coverage_by_source if int(row["fragments_with_irlc_total"]) > 0
+    )
+    scopes_total = len(canonical_coverage_by_scope)
+    scopes_with_assessments_total = sum(
+        1 for row in canonical_coverage_by_scope if int(row["fragments_with_irlc_total"]) > 0
+    )
+    sources_with_dual_coverage_total = sum(
+        1 for row in canonical_coverage_by_source if int(row["fragments_with_dual_coverage_total"]) > 0
+    )
+    scopes_with_dual_coverage_total = sum(
+        1 for row in canonical_coverage_by_scope if int(row["fragments_with_dual_coverage_total"]) > 0
+    )
+
+    coverage_by_source = canonical_coverage_by_source + list(municipal_overlay.get("coverage_by_source") or [])
+    coverage_by_scope = canonical_coverage_by_scope + list(municipal_overlay.get("coverage_by_scope") or [])
 
     top_rows = conn.execute(
         """
@@ -383,6 +558,20 @@ def build_status_report(
             "scopes_with_assessments_total": scopes_with_assessments_total,
             "sources_with_dual_coverage_total": sources_with_dual_coverage_total,
             "scopes_with_dual_coverage_total": scopes_with_dual_coverage_total,
+            "municipal_ordinances_total": int(municipal_overlay["totals"]["municipal_ordinances_total"]),
+            "municipal_fragments_total": int(municipal_overlay["totals"]["municipal_fragments_total"]),
+            "municipal_mapped_fragment_total": int(municipal_overlay["totals"]["municipal_mapped_fragment_total"]),
+            "municipal_unmapped_fragment_total": int(municipal_overlay["totals"]["municipal_unmapped_fragment_total"]),
+            "municipal_fragments_with_irlc_total": int(municipal_overlay["totals"]["municipal_fragments_with_irlc_total"]),
+            "municipal_fragments_with_accountability_total": int(
+                municipal_overlay["totals"]["municipal_fragments_with_accountability_total"]
+            ),
+            "municipal_fragments_with_accountability_primary_evidence_total": int(
+                municipal_overlay["totals"]["municipal_fragments_with_accountability_primary_evidence_total"]
+            ),
+            "municipal_fragments_with_dual_coverage_total": int(
+                municipal_overlay["totals"]["municipal_fragments_with_dual_coverage_total"]
+            ),
         },
         "coverage": coverage,
         "checks": checks,
@@ -405,6 +594,7 @@ def build_status_report(
                 "min_accountability_primary_evidence_edges": int(min_accountability_primary_evidence_edges),
             },
         },
+        "municipal_overlay": municipal_overlay,
         "coverage_by_source": coverage_by_source,
         "coverage_by_scope": coverage_by_scope,
         "restriction_map_by_right": by_right,

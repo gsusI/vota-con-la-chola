@@ -232,6 +232,7 @@ Nota para posiciones por temas:
     - estricto: añade `--strict` (exit `4` si el digest queda en `status=failed`)
     - atajos: `just parl-report-initdoc-actionable-tail-digest-heartbeat-compact-window-digest-heartbeat-compact-window-digest` / `just parl-check-initdoc-actionable-tail-digest-heartbeat-compact-window-digest-heartbeat-compact-window-digest`
     - Publicación UI/API: `/api/sources/status` y `docs/gh-pages/explorer-sources/data/status.json` incluyen `initdoc_actionable_tail` (`contract` + `digest` + `heartbeat_window` + `heartbeat_compaction_window` + `heartbeat_compaction_window_digest` + `heartbeat_compaction_window_digest_heartbeat_window` + `heartbeat_compaction_window_digest_heartbeat_compaction_window` + `heartbeat_compaction_window_digest_heartbeat_compaction_window_digest`) y la card \"Iniciativas Senado (tail)\" muestra también `cd-compact` + `cd-digest`.
+    - Cobertura north-star: `/api/sources/status` incluye `coverage_capacity` y el build estático exporta `docs/gh-pages/explorer-sources/data/coverage-capacity.json` + `coverage-model.json` para comparar descubrimiento/descarga/procesado/enlace frente a denominadores acotados por dimensión definidos en `docs/coverage_capacity_model.json`.
   - CI: `.github/workflows/etl-tracker-gate.yml` incluye job `initdoc-actionable-tail-contract` que valida fail/pass con fixture determinista para:
     - `export_missing_initiative_doc_urls.py --strict-empty`
     - `report_initdoc_actionable_tail_contract.py --strict`

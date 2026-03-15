@@ -360,6 +360,64 @@ CREATE TABLE IF NOT EXISTS parl_initiative_documents (
   UNIQUE (initiative_id, doc_kind, doc_url)
 );
 
+-- Versioned initiative texts: explicit snapshots of the bill/dossier text as published.
+-- Minimal contract for "what text existed when this vote happened?" reasoning.
+CREATE TABLE IF NOT EXISTS parl_initiative_text_versions (
+  initiative_text_version_id TEXT PRIMARY KEY,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  chamber TEXT NOT NULL CHECK (chamber IN ('congreso', 'senado', 'boe', 'unknown')),
+  doc_kind TEXT NOT NULL,
+  document_code TEXT,
+  doc_series TEXT,
+  doc_number TEXT,
+  version_order INTEGER,
+  published_date TEXT,
+  stage_kind TEXT NOT NULL CHECK (
+    stage_kind IN (
+      'initial_text',
+      'committee_report',
+      'senate_amendments',
+      'final_text',
+      'subsequent_text',
+      'convalidation_resolution',
+      'derogation_resolution',
+      'unknown'
+    )
+  ),
+  stage_label TEXT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  raw_payload_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (initiative_id, source_record_pk),
+  UNIQUE (initiative_id, source_url)
+);
+
+CREATE TABLE IF NOT EXISTS parl_vote_event_text_versions (
+  parl_vote_event_text_version_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  vote_event_id TEXT NOT NULL REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
+  link_method TEXT NOT NULL CHECK (
+    link_method IN (
+      'single_version',
+      'initial_version_for_intro_vote',
+      'latest_prior_published_version',
+      'latest_prior_stage_match',
+      'fallback_latest_version',
+      'manual'
+    )
+  ),
+  confidence REAL,
+  is_primary INTEGER NOT NULL DEFAULT 1 CHECK (is_primary IN (0, 1)),
+  raw_payload_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (vote_event_id, initiative_id, is_primary)
+);
+
 -- Link votes to initiatives when we can do it deterministically (or with explicit method+confidence).
 CREATE TABLE IF NOT EXISTS parl_vote_event_initiatives (
   parl_vote_event_initiative_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -565,12 +623,256 @@ CREATE TABLE IF NOT EXISTS parl_initiative_doc_extractions (
   content_sha256 TEXT,
   doc_format TEXT,
   extractor_version TEXT NOT NULL,
+  text_extraction_method TEXT,
+  text_quality TEXT,
+  needs_ocr INTEGER NOT NULL DEFAULT 0 CHECK (needs_ocr IN (0, 1)),
+  full_text_chars INTEGER,
+  full_text_path TEXT,
   extracted_title TEXT,
   extracted_subject TEXT,
   extracted_excerpt TEXT,
   confidence REAL,
   needs_review INTEGER NOT NULL DEFAULT 0 CHECK (needs_review IN (0, 1)),
   analysis_payload_json TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Manual/agent review queue for translating parliamentary vote events into
+-- citizen-meaningful implications.
+-- One row per review_key, typically vote_event_id + initiative_id when linked.
+CREATE TABLE IF NOT EXISTS parl_vote_implication_reviews (
+  review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  review_key TEXT NOT NULL UNIQUE,
+  vote_event_id TEXT NOT NULL REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
+  initiative_id TEXT REFERENCES parl_initiatives(initiative_id) ON DELETE SET NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  review_reason TEXT NOT NULL CHECK (
+    review_reason IN (
+      'generic_title',
+      'split_vote_point',
+      'procedural_wrapper',
+      'subject_low_specificity',
+      'missing_excerpt'
+    )
+  ),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'resolved', 'ignored')) DEFAULT 'pending',
+  priority INTEGER NOT NULL DEFAULT 50,
+  heuristic_subject TEXT,
+  heuristic_implication_kind TEXT CHECK (
+    heuristic_implication_kind IN (
+      'binding_law',
+      'budget_tax',
+      'regulation',
+      'non_binding_motion',
+      'oversight',
+      'authorization',
+      'procedural',
+      'unknown'
+    )
+  ),
+  heuristic_binding_strength TEXT CHECK (
+    heuristic_binding_strength IN ('binding', 'non_binding', 'authorization', 'procedural', 'unknown')
+  ),
+  citizen_title TEXT,
+  citizen_question TEXT,
+  citizen_summary TEXT,
+  impact_if_approved TEXT,
+  impact_if_rejected TEXT,
+  affected_groups TEXT,
+  evidence_quote TEXT,
+  final_implication_kind TEXT CHECK (
+    final_implication_kind IN (
+      'binding_law',
+      'budget_tax',
+      'regulation',
+      'non_binding_motion',
+      'oversight',
+      'authorization',
+      'procedural',
+      'unknown'
+    )
+  ),
+  final_binding_strength TEXT CHECK (
+    final_binding_strength IN ('binding', 'non_binding', 'authorization', 'procedural', 'unknown')
+  ),
+  confidence REAL,
+  extractor_version TEXT,
+  note TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Manual/agent review queue for initiative-document bundles that need to be
+-- translated into concrete citizen-facing measures.
+-- One row per official initiative with downloaded dossier text.
+CREATE TABLE IF NOT EXISTS parl_initiative_measure_review_tasks (
+  task_id TEXT PRIMARY KEY,
+  initiative_id TEXT NOT NULL UNIQUE REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  review_reason TEXT NOT NULL CHECK (
+    review_reason IN (
+      'official_docs_bundle',
+      'boe_law_bundle',
+      'keyword_priority'
+    )
+  ),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'resolved', 'ignored')) DEFAULT 'pending',
+  priority INTEGER NOT NULL DEFAULT 50,
+  evidence_bundle_dir TEXT,
+  note TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Normalized measure points extracted from one initiative review task.
+-- A single initiative can yield multiple citizen-searchable measures.
+CREATE TABLE IF NOT EXISTS parl_initiative_measure_points (
+  measure_point_id TEXT PRIMARY KEY,
+  task_id TEXT NOT NULL REFERENCES parl_initiative_measure_review_tasks(task_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  measure_rank INTEGER NOT NULL DEFAULT 1,
+  measure_title TEXT NOT NULL,
+  citizen_summary TEXT NOT NULL,
+  affected_groups TEXT,
+  policy_area TEXT,
+  measure_kind TEXT,
+  measure_status TEXT CHECK (
+    measure_status IN ('proposed', 'approved', 'rejected', 'derogated', 'pending', 'unknown')
+  ),
+  search_terms_json TEXT NOT NULL DEFAULT '[]',
+  primary_vote_event_ids_json TEXT NOT NULL DEFAULT '[]',
+  support_side TEXT CHECK (support_side IN ('yes', 'no', 'mixed', 'unknown')),
+  support_explanation TEXT,
+  evidence_json TEXT NOT NULL DEFAULT '[]',
+  note TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (task_id, measure_rank)
+);
+
+-- Deterministic text fragments over versioned initiative texts.
+-- These are the scalable extraction unit for large-volume measure candidate generation.
+CREATE TABLE IF NOT EXISTS parl_text_fragments (
+  fragment_id TEXT PRIMARY KEY,
+  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  fragment_order INTEGER NOT NULL,
+  fragment_kind TEXT NOT NULL CHECK (
+    fragment_kind IN ('article', 'disposition', 'section', 'chapter', 'paragraph', 'chunk', 'unknown')
+  ),
+  fragment_label TEXT,
+  char_start INTEGER,
+  char_end INTEGER,
+  fragment_text TEXT NOT NULL,
+  text_hash TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (initiative_text_version_id, fragment_order)
+);
+
+CREATE TABLE IF NOT EXISTS parl_fragment_measure_reviews (
+  fragment_id TEXT PRIMARY KEY REFERENCES parl_text_fragments(fragment_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'resolved', 'ignored')),
+  note TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Machine/generated-or-seeded candidate measure claims.
+-- This is the raw scalable layer; reviewed points remain the publish-safe gold layer.
+CREATE TABLE IF NOT EXISTS parl_measure_candidates (
+  measure_candidate_id TEXT PRIMARY KEY,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  initiative_text_version_id TEXT REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE SET NULL,
+  fragment_id TEXT REFERENCES parl_text_fragments(fragment_id) ON DELETE SET NULL,
+  source_measure_point_id TEXT REFERENCES parl_initiative_measure_points(measure_point_id) ON DELETE SET NULL,
+  candidate_origin TEXT NOT NULL CHECK (
+    candidate_origin IN ('reviewed_point', 'fragment_heuristic', 'fragment_model')
+  ),
+  extraction_method TEXT,
+  effect_type TEXT NOT NULL CHECK (
+    effect_type IN ('tax', 'benefit', 'obligation', 'restriction', 'sanction', 'rights', 'institutional', 'competence', 'unknown')
+  ),
+  risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
+  measure_title TEXT NOT NULL,
+  citizen_summary TEXT NOT NULL,
+  normalized_key TEXT NOT NULL,
+  affected_groups TEXT,
+  policy_area TEXT,
+  measure_kind TEXT,
+  search_terms_json TEXT NOT NULL DEFAULT '[]',
+  primary_vote_event_ids_json TEXT NOT NULL DEFAULT '[]',
+  support_side TEXT CHECK (support_side IN ('yes', 'no', 'mixed', 'unknown')),
+  evidence_json TEXT NOT NULL DEFAULT '[]',
+  confidence REAL,
+  status TEXT NOT NULL CHECK (status IN ('candidate', 'promoted', 'rejected')) DEFAULT 'candidate',
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Canonical citizen-facing measure clusters used for dedupe/search/publication.
+CREATE TABLE IF NOT EXISTS parl_measure_clusters (
+  measure_cluster_id TEXT PRIMARY KEY,
+  cluster_slug TEXT NOT NULL UNIQUE,
+  canonical_title TEXT NOT NULL,
+  canonical_summary TEXT NOT NULL,
+  normalized_key TEXT NOT NULL,
+  effect_type TEXT NOT NULL CHECK (
+    effect_type IN ('tax', 'benefit', 'obligation', 'restriction', 'sanction', 'rights', 'institutional', 'competence', 'unknown')
+  ),
+  risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
+  policy_area TEXT,
+  measure_kind TEXT,
+  aliases_json TEXT NOT NULL DEFAULT '[]',
+  search_terms_json TEXT NOT NULL DEFAULT '[]',
+  confidence REAL,
+  publish_status TEXT NOT NULL CHECK (
+    publish_status IN ('candidate', 'review_required', 'published', 'rejected')
+  ) DEFAULT 'candidate',
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS parl_measure_candidate_cluster_links (
+  candidate_cluster_link_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  measure_candidate_id TEXT NOT NULL REFERENCES parl_measure_candidates(measure_candidate_id) ON DELETE CASCADE,
+  measure_cluster_id TEXT NOT NULL REFERENCES parl_measure_clusters(measure_cluster_id) ON DELETE CASCADE,
+  link_method TEXT NOT NULL CHECK (
+    link_method IN ('seed_exact', 'title_norm_exact', 'manual')
+  ),
+  confidence REAL,
+  is_primary INTEGER NOT NULL DEFAULT 1 CHECK (is_primary IN (0, 1)),
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (measure_candidate_id, measure_cluster_id)
+);
+
+CREATE TABLE IF NOT EXISTS parl_measure_candidate_reviews (
+  candidate_review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  review_key TEXT NOT NULL UNIQUE,
+  measure_candidate_id TEXT NOT NULL REFERENCES parl_measure_candidates(measure_candidate_id) ON DELETE CASCADE,
+  measure_cluster_id TEXT REFERENCES parl_measure_clusters(measure_cluster_id) ON DELETE SET NULL,
+  review_reason TEXT NOT NULL CHECK (
+    review_reason IN ('high_risk', 'low_confidence', 'cluster_ambiguous', 'missing_vote_link', 'manual_sampling')
+  ),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'approved', 'edited', 'rejected', 'ignored')) DEFAULT 'pending',
+  note TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
@@ -1339,8 +1641,14 @@ CREATE INDEX IF NOT EXISTS idx_parl_initiatives_source ON parl_initiatives(sourc
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_documents_initiative ON parl_initiative_documents(initiative_id);
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_documents_url ON parl_initiative_documents(doc_url);
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_documents_source_record_pk ON parl_initiative_documents(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_text_versions_initiative ON parl_initiative_text_versions(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_text_versions_pubdate ON parl_initiative_text_versions(published_date);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_text_versions_source_record_pk ON parl_initiative_text_versions(source_record_pk);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_vote ON parl_vote_event_initiatives(vote_event_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_init ON parl_vote_event_initiatives(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_event_text_versions_vote ON parl_vote_event_text_versions(vote_event_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_event_text_versions_init ON parl_vote_event_text_versions(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_event_text_versions_version ON parl_vote_event_text_versions(initiative_text_version_id);
 
 CREATE INDEX IF NOT EXISTS idx_topic_sets_institution_id ON topic_sets(institution_id);
 CREATE INDEX IF NOT EXISTS idx_topic_sets_admin_level_id ON topic_sets(admin_level_id);
@@ -1376,6 +1684,37 @@ CREATE INDEX IF NOT EXISTS idx_document_fetches_last_http_status ON document_fet
 CREATE INDEX IF NOT EXISTS idx_parl_initdoc_extract_source_id ON parl_initiative_doc_extractions(source_id);
 CREATE INDEX IF NOT EXISTS idx_parl_initdoc_extract_needs_review ON parl_initiative_doc_extractions(needs_review);
 CREATE INDEX IF NOT EXISTS idx_parl_initdoc_extract_sample_initiative_id ON parl_initiative_doc_extractions(sample_initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_initdoc_extract_needs_ocr ON parl_initiative_doc_extractions(needs_ocr);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_implication_reviews_status ON parl_vote_implication_reviews(status);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_implication_reviews_reason ON parl_vote_implication_reviews(review_reason);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_implication_reviews_source_id ON parl_vote_implication_reviews(source_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_implication_reviews_priority ON parl_vote_implication_reviews(priority DESC);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_implication_reviews_vote_event_id ON parl_vote_implication_reviews(vote_event_id);
+CREATE INDEX IF NOT EXISTS idx_parl_vote_implication_reviews_initiative_id ON parl_vote_implication_reviews(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_review_tasks_status ON parl_initiative_measure_review_tasks(status);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_review_tasks_source_id ON parl_initiative_measure_review_tasks(source_id);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_review_tasks_priority ON parl_initiative_measure_review_tasks(priority DESC);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_points_task_id ON parl_initiative_measure_points(task_id);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_points_initiative_id ON parl_initiative_measure_points(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_points_support_side ON parl_initiative_measure_points(support_side);
+CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_version_id ON parl_text_fragments(initiative_text_version_id);
+CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_initiative_id ON parl_text_fragments(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_source_record_pk ON parl_text_fragments(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_parl_fragment_measure_reviews_status ON parl_fragment_measure_reviews(status);
+CREATE INDEX IF NOT EXISTS idx_parl_fragment_measure_reviews_initiative_id ON parl_fragment_measure_reviews(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_initiative_id ON parl_measure_candidates(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_fragment_id ON parl_measure_candidates(fragment_id);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_source_measure_point_id
+    ON parl_measure_candidates(source_measure_point_id);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_status ON parl_measure_candidates(status);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_effect_type ON parl_measure_candidates(effect_type);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_clusters_publish_status ON parl_measure_clusters(publish_status);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_clusters_normalized_key ON parl_measure_clusters(normalized_key);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidate_cluster_links_cluster_id
+    ON parl_measure_candidate_cluster_links(measure_cluster_id);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidate_reviews_status ON parl_measure_candidate_reviews(status);
+CREATE INDEX IF NOT EXISTS idx_parl_measure_candidate_reviews_cluster_id
+    ON parl_measure_candidate_reviews(measure_cluster_id);
 
 CREATE INDEX IF NOT EXISTS idx_domains_tier ON domains(tier);
 CREATE INDEX IF NOT EXISTS idx_policy_axes_domain_id ON policy_axes(domain_id);
