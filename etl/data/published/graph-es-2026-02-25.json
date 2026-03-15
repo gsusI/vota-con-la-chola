@@ -1,6 +1,5 @@
 {
   "meta": {
-    "db_path": "etl/data/staging/politicos-es.db",
     "rows": 350,
     "limit": 350,
     "source_filter": "",
@@ -311,7 +310,7 @@
       },
       {
         "source_id": "placsp_autonomico",
-        "name": "PLACSP - Contratacion auton\u00f3mica (piloto 3 CCAA)",
+        "name": "PLACSP - Contratacion autonómica (piloto 3 CCAA)",
         "scope": "dinero",
         "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
         "is_active": 1,
@@ -381,11 +380,11 @@
       "data": {
         "id": "person:70924",
         "type": "person",
-        "label": "Abel Bautista Mor\u00e1n",
+        "label": "Abel Bautista Morán",
         "person_id": 70924,
-        "full_name": "Abel Bautista Mor\u00e1n",
+        "full_name": "Abel Bautista Morán",
         "given_name": "Abel",
-        "family_name": "Bautista Mor\u00e1n",
+        "family_name": "Bautista Morán",
         "territory_code": "BADAJOZ",
         "territory_name": null
       }
@@ -469,9 +468,9 @@
       "data": {
         "id": "person:72986",
         "type": "person",
-        "label": "Adela Casta\u00f1o Di\u00e9guez",
+        "label": "Adela Castaño Diéguez",
         "person_id": 72986,
-        "full_name": "Adela Casta\u00f1o Di\u00e9guez",
+        "full_name": "Adela Castaño Diéguez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Sevilla",
@@ -513,9 +512,9 @@
       "data": {
         "id": "person:69341",
         "type": "person",
-        "label": "Adelaida D\u00edaz Padilla",
+        "label": "Adelaida Díaz Padilla",
         "person_id": 69341,
-        "full_name": "Adelaida D\u00edaz Padilla",
+        "full_name": "Adelaida Díaz Padilla",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -601,12 +600,12 @@
       "data": {
         "id": "person:73589",
         "type": "person",
-        "label": "Adoraci\u00f3n Llop Mont\u00f3n",
+        "label": "Adoración Llop Montón",
         "person_id": 73589,
-        "full_name": "Adoraci\u00f3n Llop Mont\u00f3n",
+        "full_name": "Adoración Llop Montón",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Castell\u00f3n",
+        "territory_code": "Castellón",
         "territory_name": null
       }
     },
@@ -636,11 +635,11 @@
       "data": {
         "id": "person:184",
         "type": "person",
-        "label": "Adriana Maldonado L\u00f3pez",
+        "label": "Adriana Maldonado López",
         "person_id": 184,
-        "full_name": "Adriana Maldonado L\u00f3pez",
+        "full_name": "Adriana Maldonado López",
         "given_name": "Adriana",
-        "family_name": "Maldonado L\u00f3pez",
+        "family_name": "Maldonado López",
         "territory_code": "Navarra",
         "territory_name": null
       }
@@ -668,11 +667,11 @@
       "data": {
         "id": "person:73233",
         "type": "person",
-        "label": "Adri\u00e1n Barb\u00f3n Rodr\u00edguez",
+        "label": "Adrián Barbón Rodríguez",
         "person_id": 73233,
-        "full_name": "Adri\u00e1n Barb\u00f3n Rodr\u00edguez",
-        "given_name": "Adri\u00e1n",
-        "family_name": "Barb\u00f3n Rodr\u00edguez",
+        "full_name": "Adrián Barbón Rodríguez",
+        "given_name": "Adrián",
+        "family_name": "Barbón Rodríguez",
         "territory_code": "",
         "territory_name": null
       }
@@ -702,9 +701,9 @@
       "data": {
         "id": "person:73338",
         "type": "person",
-        "label": "Adri\u00e1n Fern\u00e1ndez Rivas",
+        "label": "Adrián Fernández Rivas",
         "person_id": 73338,
-        "full_name": "Adri\u00e1n Fern\u00e1ndez Rivas",
+        "full_name": "Adrián Fernández Rivas",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -737,11 +736,11 @@
       "data": {
         "id": "person:73266",
         "type": "person",
-        "label": "Adri\u00e1n Pumares Su\u00e1rez",
+        "label": "Adrián Pumares Suárez",
         "person_id": 73266,
-        "full_name": "Adri\u00e1n Pumares Su\u00e1rez",
-        "given_name": "Adri\u00e1n",
-        "family_name": "Pumares Su\u00e1rez",
+        "full_name": "Adrián Pumares Suárez",
+        "given_name": "Adrián",
+        "family_name": "Pumares Suárez",
         "territory_code": "",
         "territory_name": null
       }
@@ -769,9 +768,9 @@
       "data": {
         "id": "person:420",
         "type": "person",
-        "label": "Adri\u00e1n V\u00c1ZQUEZ L\u00c1ZARA",
+        "label": "Adrián VÁZQUEZ LÁZARA",
         "person_id": 420,
-        "full_name": "Adri\u00e1n V\u00c1ZQUEZ L\u00c1ZARA",
+        "full_name": "Adrián VÁZQUEZ LÁZARA",
         "given_name": null,
         "family_name": null,
         "territory_code": "ES",
@@ -794,9 +793,9 @@
       "data": {
         "id": "party:363",
         "type": "party",
-        "label": "Grupo del Partido Popular Europeo (Dem\u00f3crata-Cristianos)",
+        "label": "Grupo del Partido Popular Europeo (Demócrata-Cristianos)",
         "party_id": 363,
-        "party_name": "Grupo del Partido Popular Europeo (Dem\u00f3crata-Cristianos)",
+        "party_name": "Grupo del Partido Popular Europeo (Demócrata-Cristianos)",
         "party_acronym": null
       }
     },
@@ -804,11 +803,11 @@
       "data": {
         "id": "person:85",
         "type": "person",
-        "label": "Agust\u00edn Conde Baj\u00e9n",
+        "label": "Agustín Conde Bajén",
         "person_id": 85,
-        "full_name": "Agust\u00edn Conde Baj\u00e9n",
-        "given_name": "Agust\u00edn",
-        "family_name": "Conde Baj\u00e9n",
+        "full_name": "Agustín Conde Bajén",
+        "given_name": "Agustín",
+        "family_name": "Conde Bajén",
         "territory_code": "Toledo",
         "territory_name": null
       }
@@ -827,10 +826,10 @@
       "data": {
         "id": "person:70936",
         "type": "person",
-        "label": "Agust\u00edn Delgado Donoso",
+        "label": "Agustín Delgado Donoso",
         "person_id": 70936,
-        "full_name": "Agust\u00edn Delgado Donoso",
-        "given_name": "Agust\u00edn",
+        "full_name": "Agustín Delgado Donoso",
+        "given_name": "Agustín",
         "family_name": "Delgado Donoso",
         "territory_code": "BADAJOZ",
         "territory_name": null
@@ -849,9 +848,9 @@
       "data": {
         "id": "person:72782",
         "type": "person",
-        "label": "Agust\u00edn Nicol\u00e1s BUADES I RUL\u00b7L\u00c1N",
+        "label": "Agustín Nicolás BUADES I RUL·LÁN",
         "person_id": 72782,
-        "full_name": "Agust\u00edn Nicol\u00e1s BUADES I RUL\u00b7L\u00c1N",
+        "full_name": "Agustín Nicolás BUADES I RUL·LÁN",
         "given_name": null,
         "family_name": null,
         "territory_code": "MALLORCA",
@@ -884,10 +883,10 @@
       "data": {
         "id": "person:246",
         "type": "person",
-        "label": "Agust\u00edn Parra Gallego",
+        "label": "Agustín Parra Gallego",
         "person_id": 246,
-        "full_name": "Agust\u00edn Parra Gallego",
-        "given_name": "Agust\u00edn",
+        "full_name": "Agustín Parra Gallego",
+        "given_name": "Agustín",
         "family_name": "Parra Gallego",
         "territory_code": "Barcelona",
         "territory_name": null
@@ -897,10 +896,10 @@
       "data": {
         "id": "person:324",
         "type": "person",
-        "label": "Agust\u00edn Santos Maraver",
+        "label": "Agustín Santos Maraver",
         "person_id": 324,
-        "full_name": "Agust\u00edn Santos Maraver",
-        "given_name": "Agust\u00edn",
+        "full_name": "Agustín Santos Maraver",
+        "given_name": "Agustín",
         "family_name": "Santos Maraver",
         "territory_code": "Madrid",
         "territory_name": null
@@ -920,9 +919,9 @@
       "data": {
         "id": "person:69000",
         "type": "person",
-        "label": "Agust\u00edn Vinagre Alc\u00e1zar",
+        "label": "Agustín Vinagre Alcázar",
         "person_id": 69000,
-        "full_name": "Agust\u00edn Vinagre Alc\u00e1zar",
+        "full_name": "Agustín Vinagre Alcázar",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -933,11 +932,11 @@
       "data": {
         "id": "person:361",
         "type": "person",
-        "label": "Aina Vidal S\u00e1ez",
+        "label": "Aina Vidal Sáez",
         "person_id": 361,
-        "full_name": "Aina Vidal S\u00e1ez",
+        "full_name": "Aina Vidal Sáez",
         "given_name": "Aina",
-        "family_name": "Vidal S\u00e1ez",
+        "family_name": "Vidal Sáez",
         "territory_code": "Barcelona",
         "territory_name": null
       }
@@ -969,9 +968,9 @@
       "data": {
         "id": "person:73332",
         "type": "person",
-        "label": "Ainhoa Domaica Go\u00f1i",
+        "label": "Ainhoa Domaica Goñi",
         "person_id": 73332,
-        "full_name": "Ainhoa Domaica Go\u00f1i",
+        "full_name": "Ainhoa Domaica Goñi",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -992,9 +991,9 @@
       "data": {
         "id": "person:69403",
         "type": "person",
-        "label": "Ainhoa Garc\u00eda Jabonero",
+        "label": "Ainhoa García Jabonero",
         "person_id": 69403,
-        "full_name": "Ainhoa Garc\u00eda Jabonero",
+        "full_name": "Ainhoa García Jabonero",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -1015,11 +1014,11 @@
       "data": {
         "id": "person:214",
         "type": "person",
-        "label": "Ainhoa Molina Le\u00f3n",
+        "label": "Ainhoa Molina León",
         "person_id": 214,
-        "full_name": "Ainhoa Molina Le\u00f3n",
+        "full_name": "Ainhoa Molina León",
         "given_name": "Ainhoa",
-        "family_name": "Molina Le\u00f3n",
+        "family_name": "Molina León",
         "territory_code": "S/C Tenerife",
         "territory_name": null
       }
@@ -1041,9 +1040,9 @@
       "data": {
         "id": "party:68018",
         "type": "party",
-        "label": "Grupo Parlamentario M\u00e1s Madrid",
+        "label": "Grupo Parlamentario Más Madrid",
         "party_id": 68018,
-        "party_name": "Grupo Parlamentario M\u00e1s Madrid",
+        "party_name": "Grupo Parlamentario Más Madrid",
         "party_acronym": null
       }
     },
@@ -1064,9 +1063,9 @@
       "data": {
         "id": "party:68220",
         "type": "party",
-        "label": "Comprom\u00eds",
+        "label": "Compromís",
         "party_id": 68220,
-        "party_name": "Comprom\u00eds",
+        "party_name": "Compromís",
         "party_acronym": null
       }
     },
@@ -1144,9 +1143,9 @@
       "data": {
         "id": "party:68059",
         "type": "party",
-        "label": "Coalici\u00f3n por Melilla (CpM)",
+        "label": "Coalición por Melilla (CpM)",
         "party_id": 68059,
-        "party_name": "Coalici\u00f3n por Melilla (CpM)",
+        "party_name": "Coalición por Melilla (CpM)",
         "party_acronym": null
       }
     },
@@ -1190,9 +1189,9 @@
       "data": {
         "id": "person:69342",
         "type": "person",
-        "label": "Alba Mar\u00eda Ortega Alonso",
+        "label": "Alba María Ortega Alonso",
         "person_id": 69342,
-        "full_name": "Alba Mar\u00eda Ortega Alonso",
+        "full_name": "Alba María Ortega Alonso",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -1241,7 +1240,7 @@
         "full_name": "Alba Soto Hortet",
         "given_name": "Alba",
         "family_name": "Soto Hortet",
-        "territory_code": "C\u00c1CERES",
+        "territory_code": "CÁCERES",
         "territory_name": null
       }
     },
@@ -1268,9 +1267,9 @@
       "data": {
         "id": "person:73444",
         "type": "person",
-        "label": "Alba S\u00e1nchez Miedes",
+        "label": "Alba Sánchez Miedes",
         "person_id": 73444,
-        "full_name": "Alba S\u00e1nchez Miedes",
+        "full_name": "Alba Sánchez Miedes",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1293,11 +1292,11 @@
       "data": {
         "id": "person:73231",
         "type": "person",
-        "label": "Alba \u00c1lvarez N\u00fa\u00f1ez",
+        "label": "Alba Álvarez Núñez",
         "person_id": 73231,
-        "full_name": "Alba \u00c1lvarez N\u00fa\u00f1ez",
+        "full_name": "Alba Álvarez Núñez",
         "given_name": "Alba",
-        "family_name": "\u00c1lvarez N\u00fa\u00f1ez",
+        "family_name": "Álvarez Núñez",
         "territory_code": "",
         "territory_name": null
       }
@@ -1311,7 +1310,7 @@
         "full_name": "Alberto Asarta Cuevas",
         "given_name": "Alberto",
         "family_name": "Asarta Cuevas",
-        "territory_code": "Castell\u00f3n/Castell\u00f3",
+        "territory_code": "Castellón/Castelló",
         "territory_name": null
       }
     },
@@ -1319,11 +1318,11 @@
       "data": {
         "id": "person:73",
         "type": "person",
-        "label": "Alberto Catal\u00e1n Higueras",
+        "label": "Alberto Catalán Higueras",
         "person_id": 73,
-        "full_name": "Alberto Catal\u00e1n Higueras",
+        "full_name": "Alberto Catalán Higueras",
         "given_name": "Alberto",
-        "family_name": "Catal\u00e1n Higueras",
+        "family_name": "Catalán Higueras",
         "territory_code": "Navarra",
         "territory_name": null
       }
@@ -1347,7 +1346,7 @@
         "full_name": "Alberto Fabra Part",
         "given_name": "Alberto",
         "family_name": "Fabra Part",
-        "territory_code": "Castell\u00f3n/Castell\u00f3",
+        "territory_code": "Castellón/Castelló",
         "territory_name": null
       }
     },
@@ -1364,9 +1363,9 @@
       "data": {
         "id": "person:70896",
         "type": "person",
-        "label": "Alberto Gait\u00e1n Rodr\u00edguez",
+        "label": "Alberto Gaitán Rodríguez",
         "person_id": 70896,
-        "full_name": "Alberto Gait\u00e1n Rodr\u00edguez",
+        "full_name": "Alberto Gaitán Rodríguez",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1398,9 +1397,9 @@
       "data": {
         "id": "person:73282",
         "type": "person",
-        "label": "Alberto Galiana Garc\u00eda",
+        "label": "Alberto Galiana García",
         "person_id": 73282,
-        "full_name": "Alberto Galiana Garc\u00eda",
+        "full_name": "Alberto Galiana García",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1432,9 +1431,9 @@
       "data": {
         "id": "person:72270",
         "type": "person",
-        "label": "Alberto Garre L\u00f3pez",
+        "label": "Alberto Garre López",
         "person_id": 72270,
-        "full_name": "Alberto Garre L\u00f3pez",
+        "full_name": "Alberto Garre López",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1467,12 +1466,12 @@
       "data": {
         "id": "person:160",
         "type": "person",
-        "label": "Alberto Ib\u00e1\u00f1ez Mezquita",
+        "label": "Alberto Ibáñez Mezquita",
         "person_id": 160,
-        "full_name": "Alberto Ib\u00e1\u00f1ez Mezquita",
+        "full_name": "Alberto Ibáñez Mezquita",
         "given_name": "Alberto",
-        "family_name": "Ib\u00e1\u00f1ez Mezquita",
-        "territory_code": "Valencia/Val\u00e8ncia",
+        "family_name": "Ibáñez Mezquita",
+        "territory_code": "Valencia/València",
         "territory_name": null
       }
     },
@@ -1508,7 +1507,7 @@
         "full_name": "Alberto Mayoral de Lamo",
         "given_name": "Alberto",
         "family_name": "Mayoral de Lamo",
-        "territory_code": "C\u00f3rdoba",
+        "territory_code": "Córdoba",
         "territory_name": null
       }
     },
@@ -1516,11 +1515,11 @@
       "data": {
         "id": "person:233",
         "type": "person",
-        "label": "Alberto N\u00fa\u00f1ez Feij\u00f3o",
+        "label": "Alberto Núñez Feijóo",
         "person_id": 233,
-        "full_name": "Alberto N\u00fa\u00f1ez Feij\u00f3o",
+        "full_name": "Alberto Núñez Feijóo",
         "given_name": "Alberto",
-        "family_name": "N\u00fa\u00f1ez Feij\u00f3o",
+        "family_name": "Núñez Feijóo",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -1555,11 +1554,11 @@
       "data": {
         "id": "person:274",
         "type": "person",
-        "label": "Alda Recas Mart\u00edn",
+        "label": "Alda Recas Martín",
         "person_id": 274,
-        "full_name": "Alda Recas Mart\u00edn",
+        "full_name": "Alda Recas Martín",
         "given_name": "Alda",
-        "family_name": "Recas Mart\u00edn",
+        "family_name": "Recas Martín",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -1568,9 +1567,9 @@
       "data": {
         "id": "person:72994",
         "type": "person",
-        "label": "Alejandra Dur\u00e1n Parra",
+        "label": "Alejandra Durán Parra",
         "person_id": 72994,
-        "full_name": "Alejandra Dur\u00e1n Parra",
+        "full_name": "Alejandra Durán Parra",
         "given_name": null,
         "family_name": null,
         "territory_code": "Granada",
@@ -1581,9 +1580,9 @@
       "data": {
         "id": "party:68165",
         "type": "party",
-        "label": "G.P. Por Andaluc\u00eda",
+        "label": "G.P. Por Andalucía",
         "party_id": 68165,
-        "party_name": "G.P. Por Andaluc\u00eda",
+        "party_name": "G.P. Por Andalucía",
         "party_acronym": null
       }
     },
@@ -1591,12 +1590,12 @@
       "data": {
         "id": "person:73017",
         "type": "person",
-        "label": "Alejandro Hern\u00e1ndez Vald\u00e9s",
+        "label": "Alejandro Hernández Valdés",
         "person_id": 73017,
-        "full_name": "Alejandro Hern\u00e1ndez Vald\u00e9s",
+        "full_name": "Alejandro Hernández Valdés",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00f3rdoba",
+        "territory_code": "Córdoba",
         "territory_name": null
       }
     },
@@ -1604,9 +1603,9 @@
       "data": {
         "id": "party:68164",
         "type": "party",
-        "label": "G.P. Vox en Andaluc\u00eda",
+        "label": "G.P. Vox en Andalucía",
         "party_id": 68164,
-        "party_name": "G.P. Vox en Andaluc\u00eda",
+        "party_name": "G.P. Vox en Andalucía",
         "party_acronym": null
       }
     },
@@ -1671,9 +1670,9 @@
       "data": {
         "id": "person:70897",
         "type": "person",
-        "label": "Alejandro Ram\u00edrez Hurtado",
+        "label": "Alejandro Ramírez Hurtado",
         "person_id": 70897,
-        "full_name": "Alejandro Ram\u00edrez Hurtado",
+        "full_name": "Alejandro Ramírez Hurtado",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1697,9 +1696,9 @@
       "data": {
         "id": "party:68163",
         "type": "party",
-        "label": "G.P. Popular de Andaluc\u00eda",
+        "label": "G.P. Popular de Andalucía",
         "party_id": 68163,
-        "party_name": "G.P. Popular de Andaluc\u00eda",
+        "party_name": "G.P. Popular de Andalucía",
         "party_acronym": null
       }
     },
@@ -1720,9 +1719,9 @@
       "data": {
         "id": "person:72830",
         "type": "person",
-        "label": "Alejandro S\u00c1ENZ DE SAN PEDRO I GARC\u00cdA",
+        "label": "Alejandro SÁENZ DE SAN PEDRO I GARCÍA",
         "person_id": 72830,
-        "full_name": "Alejandro S\u00c1ENZ DE SAN PEDRO I GARC\u00cdA",
+        "full_name": "Alejandro SÁENZ DE SAN PEDRO I GARCÍA",
         "given_name": null,
         "family_name": null,
         "territory_code": "MALLORCA",
@@ -1743,9 +1742,9 @@
       "data": {
         "id": "person:69025",
         "type": "person",
-        "label": "Alejandro S\u00e1nchez P\u00e9rez",
+        "label": "Alejandro Sánchez Pérez",
         "person_id": 69025,
-        "full_name": "Alejandro S\u00e1nchez P\u00e9rez",
+        "full_name": "Alejandro Sánchez Pérez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -1765,9 +1764,9 @@
       "data": {
         "id": "person:72774",
         "type": "person",
-        "label": "Alejandro V\u00e1zquez Ramos",
+        "label": "Alejandro Vázquez Ramos",
         "person_id": 72774,
-        "full_name": "Alejandro V\u00e1zquez Ramos",
+        "full_name": "Alejandro Vázquez Ramos",
         "given_name": null,
         "family_name": null,
         "territory_code": "Burgos",
@@ -1790,12 +1789,12 @@
       "data": {
         "id": "person:73569",
         "type": "person",
-        "label": "Alejo Font de Mora Rull\u00e1n",
+        "label": "Alejo Font de Mora Rullán",
         "person_id": 73569,
-        "full_name": "Alejo Font de Mora Rull\u00e1n",
+        "full_name": "Alejo Font de Mora Rullán",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Castell\u00f3n",
+        "territory_code": "Castellón",
         "territory_name": null
       }
     },
@@ -1803,12 +1802,12 @@
       "data": {
         "id": "person:70927",
         "type": "person",
-        "label": "Alfonso Beltr\u00e1n Mu\u00f1oz",
+        "label": "Alfonso Beltrán Muñoz",
         "person_id": 70927,
-        "full_name": "Alfonso Beltr\u00e1n Mu\u00f1oz",
+        "full_name": "Alfonso Beltrán Muñoz",
         "given_name": "Alfonso",
-        "family_name": "Beltr\u00e1n Mu\u00f1oz",
-        "territory_code": "C\u00c1CERES",
+        "family_name": "Beltrán Muñoz",
+        "territory_code": "CÁCERES",
         "territory_name": null
       }
     },
@@ -1816,11 +1815,11 @@
       "data": {
         "id": "person:181",
         "type": "person",
-        "label": "Alfonso Carlos Mac\u00edas Gata",
+        "label": "Alfonso Carlos Macías Gata",
         "person_id": 181,
-        "full_name": "Alfonso Carlos Mac\u00edas Gata",
+        "full_name": "Alfonso Carlos Macías Gata",
         "given_name": "Alfonso Carlos",
-        "family_name": "Mac\u00edas Gata",
+        "family_name": "Macías Gata",
         "territory_code": "Badajoz",
         "territory_name": null
       }
@@ -1829,9 +1828,9 @@
       "data": {
         "id": "person:68941",
         "type": "person",
-        "label": "Alfonso Carlos Serrano S\u00e1nchez-Capuchino",
+        "label": "Alfonso Carlos Serrano Sánchez-Capuchino",
         "person_id": 68941,
-        "full_name": "Alfonso Carlos Serrano S\u00e1nchez-Capuchino",
+        "full_name": "Alfonso Carlos Serrano Sánchez-Capuchino",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -1842,9 +1841,9 @@
       "data": {
         "id": "person:72268",
         "type": "person",
-        "label": "Alfonso Fernando Cer\u00f3n Morales",
+        "label": "Alfonso Fernando Cerón Morales",
         "person_id": 72268,
-        "full_name": "Alfonso Fernando Cer\u00f3n Morales",
+        "full_name": "Alfonso Fernando Cerón Morales",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1865,9 +1864,9 @@
       "data": {
         "id": "person:72714",
         "type": "person",
-        "label": "Alfonso Fern\u00e1ndez Ma\u00f1ueco",
+        "label": "Alfonso Fernández Mañueco",
         "person_id": 72714,
-        "full_name": "Alfonso Fern\u00e1ndez Ma\u00f1ueco",
+        "full_name": "Alfonso Fernández Mañueco",
         "given_name": null,
         "family_name": null,
         "territory_code": "Salamanca",
@@ -1878,11 +1877,11 @@
       "data": {
         "id": "person:73178",
         "type": "person",
-        "label": "Alfonso Guti\u00e9rrez Roiz",
+        "label": "Alfonso Gutiérrez Roiz",
         "person_id": 73178,
-        "full_name": "Alfonso Guti\u00e9rrez Roiz",
+        "full_name": "Alfonso Gutiérrez Roiz",
         "given_name": "Alfonso",
-        "family_name": "Guti\u00e9rrez Roiz",
+        "family_name": "Gutiérrez Roiz",
         "territory_code": "",
         "territory_name": null
       }
@@ -1891,9 +1890,9 @@
       "data": {
         "id": "person:72280",
         "type": "person",
-        "label": "Alfonso Mart\u00ednez Ba\u00f1os",
+        "label": "Alfonso Martínez Baños",
         "person_id": 72280,
-        "full_name": "Alfonso Mart\u00ednez Ba\u00f1os",
+        "full_name": "Alfonso Martínez Baños",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -1914,11 +1913,11 @@
       "data": {
         "id": "person:287",
         "type": "person",
-        "label": "Alfonso Rodr\u00edguez G\u00f3mez de Celis",
+        "label": "Alfonso Rodríguez Gómez de Celis",
         "person_id": 287,
-        "full_name": "Alfonso Rodr\u00edguez G\u00f3mez de Celis",
+        "full_name": "Alfonso Rodríguez Gómez de Celis",
         "given_name": "Alfonso",
-        "family_name": "Rodr\u00edguez G\u00f3mez de Celis",
+        "family_name": "Rodríguez Gómez de Celis",
         "territory_code": "Sevilla",
         "territory_name": null
       }
@@ -1927,9 +1926,9 @@
       "data": {
         "id": "person:73557",
         "type": "person",
-        "label": "Alfredo Ces\u00e1reo Castell\u00f3 S\u00e1ez",
+        "label": "Alfredo Cesáreo Castelló Sáez",
         "person_id": 73557,
-        "full_name": "Alfredo Ces\u00e1reo Castell\u00f3 S\u00e1ez",
+        "full_name": "Alfredo Cesáreo Castelló Sáez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Valencia",
@@ -1940,12 +1939,12 @@
       "data": {
         "id": "person:70941",
         "type": "person",
-        "label": "Alfredo \u00c1ngel Galavis Melara",
+        "label": "Alfredo Ángel Galavis Melara",
         "person_id": 70941,
-        "full_name": "Alfredo \u00c1ngel Galavis Melara",
-        "given_name": "Alfredo \u00c1ngel",
+        "full_name": "Alfredo Ángel Galavis Melara",
+        "given_name": "Alfredo Ángel",
         "family_name": "Galavis Melara",
-        "territory_code": "C\u00c1CERES",
+        "territory_code": "CÁCERES",
         "territory_name": null
       }
     },
@@ -1963,9 +1962,9 @@
       "data": {
         "id": "person:73543",
         "type": "person",
-        "label": "Alicia And\u00fajar Dur\u00e1",
+        "label": "Alicia Andújar Durá",
         "person_id": 73543,
-        "full_name": "Alicia And\u00fajar Dur\u00e1",
+        "full_name": "Alicia Andújar Durá",
         "given_name": null,
         "family_name": null,
         "territory_code": "Valencia",
@@ -1986,12 +1985,12 @@
       "data": {
         "id": "person:72717",
         "type": "person",
-        "label": "Alicia Gallego Gonz\u00e1lez",
+        "label": "Alicia Gallego González",
         "person_id": 72717,
-        "full_name": "Alicia Gallego Gonz\u00e1lez",
+        "full_name": "Alicia Gallego González",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Le\u00f3n",
+        "territory_code": "León",
         "territory_name": null
       }
     },
@@ -1999,9 +1998,9 @@
       "data": {
         "id": "party:68140",
         "type": "party",
-        "label": "UPL-SORIA \u00a1YA!",
+        "label": "UPL-SORIA ¡YA!",
         "party_id": 68140,
-        "party_name": "UPL-SORIA \u00a1YA!",
+        "party_name": "UPL-SORIA ¡YA!",
         "party_acronym": null
       }
     },
@@ -2022,9 +2021,9 @@
       "data": {
         "id": "party:367",
         "type": "party",
-        "label": "Grupo de la Alianza Progresista de Socialistas y Dem\u00f3cratas en el Parlamento Europeo",
+        "label": "Grupo de la Alianza Progresista de Socialistas y Demócratas en el Parlamento Europeo",
         "party_id": 367,
-        "party_name": "Grupo de la Alianza Progresista de Socialistas y Dem\u00f3cratas en el Parlamento Europeo",
+        "party_name": "Grupo de la Alianza Progresista de Socialistas y Demócratas en el Parlamento Europeo",
         "party_acronym": null
       }
     },
@@ -2032,12 +2031,12 @@
       "data": {
         "id": "person:73045",
         "type": "person",
-        "label": "Alicia Murillo L\u00f3pez",
+        "label": "Alicia Murillo López",
         "person_id": 73045,
-        "full_name": "Alicia Murillo L\u00f3pez",
+        "full_name": "Alicia Murillo López",
         "given_name": null,
         "family_name": null,
-        "territory_code": "M\u00e1laga",
+        "territory_code": "Málaga",
         "territory_name": null
       }
     },
@@ -2045,9 +2044,9 @@
       "data": {
         "id": "person:72746",
         "type": "person",
-        "label": "Alicia Palomo Sebasti\u00e1n",
+        "label": "Alicia Palomo Sebastián",
         "person_id": 72746,
-        "full_name": "Alicia Palomo Sebasti\u00e1n",
+        "full_name": "Alicia Palomo Sebastián",
         "given_name": null,
         "family_name": null,
         "territory_code": "Segovia",
@@ -2067,12 +2066,12 @@
       "data": {
         "id": "person:73139",
         "type": "person",
-        "label": "Alicia P\u00e9rez Hern\u00e1ndez",
+        "label": "Alicia Pérez Hernández",
         "person_id": 73139,
-        "full_name": "Alicia P\u00e9rez Hern\u00e1ndez",
+        "full_name": "Alicia Pérez Hernández",
         "given_name": "Alicia",
-        "family_name": "P\u00e9rez Hern\u00e1ndez",
-        "territory_code": "Auton\u00f3mica",
+        "family_name": "Pérez Hernández",
+        "territory_code": "Autonómica",
         "territory_name": null
       }
     },
@@ -2092,9 +2091,9 @@
       "data": {
         "id": "person:69343",
         "type": "person",
-        "label": "Alicia S\u00e1nchez Infante",
+        "label": "Alicia Sánchez Infante",
         "person_id": 69343,
-        "full_name": "Alicia S\u00e1nchez Infante",
+        "full_name": "Alicia Sánchez Infante",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2105,9 +2104,9 @@
       "data": {
         "id": "person:69170",
         "type": "person",
-        "label": "Alicia S\u00e1nchez-Camacho P\u00e9rez",
+        "label": "Alicia Sánchez-Camacho Pérez",
         "person_id": 69170,
-        "full_name": "Alicia S\u00e1nchez-Camacho P\u00e9rez",
+        "full_name": "Alicia Sánchez-Camacho Pérez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2118,9 +2117,9 @@
       "data": {
         "id": "person:69054",
         "type": "person",
-        "label": "Alicia Torija L\u00f3pez",
+        "label": "Alicia Torija López",
         "person_id": 69054,
-        "full_name": "Alicia Torija L\u00f3pez",
+        "full_name": "Alicia Torija López",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2144,11 +2143,11 @@
       "data": {
         "id": "person:33",
         "type": "person",
-        "label": "Alicia \u00c1lvarez Gonz\u00e1lez",
+        "label": "Alicia Álvarez González",
         "person_id": 33,
-        "full_name": "Alicia \u00c1lvarez Gonz\u00e1lez",
+        "full_name": "Alicia Álvarez González",
         "given_name": "Alicia",
-        "family_name": "\u00c1lvarez Gonz\u00e1lez",
+        "family_name": "Álvarez González",
         "territory_code": "S/C Tenerife",
         "territory_name": null
       }
@@ -2162,7 +2161,7 @@
         "full_name": "Alma Alfonso Silvestre",
         "given_name": "Alma",
         "family_name": "Alfonso Silvestre",
-        "territory_code": "Valencia/Val\u00e8ncia",
+        "territory_code": "Valencia/València",
         "territory_name": null
       }
     },
@@ -2183,9 +2182,9 @@
       "data": {
         "id": "person:69344",
         "type": "person",
-        "label": "Almudena D\u00edaz-Toledo Delgado",
+        "label": "Almudena Díaz-Toledo Delgado",
         "person_id": 69344,
-        "full_name": "Almudena D\u00edaz-Toledo Delgado",
+        "full_name": "Almudena Díaz-Toledo Delgado",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2196,9 +2195,9 @@
       "data": {
         "id": "person:409",
         "type": "person",
-        "label": "Alvise P\u00c9REZ",
+        "label": "Alvise PÉREZ",
         "person_id": 409,
-        "full_name": "Alvise P\u00c9REZ",
+        "full_name": "Alvise PÉREZ",
         "given_name": null,
         "family_name": null,
         "territory_code": "ES",
@@ -2219,11 +2218,11 @@
       "data": {
         "id": "person:189",
         "type": "person",
-        "label": "Amador Marqu\u00e9s At\u00e9s",
+        "label": "Amador Marqués Atés",
         "person_id": 189,
-        "full_name": "Amador Marqu\u00e9s At\u00e9s",
+        "full_name": "Amador Marqués Atés",
         "given_name": "Amador",
-        "family_name": "Marqu\u00e9s At\u00e9s",
+        "family_name": "Marqués Atés",
         "territory_code": "Lleida",
         "territory_name": null
       }
@@ -2232,9 +2231,9 @@
       "data": {
         "id": "person:73356",
         "type": "person",
-        "label": "Amaia Mart\u00ednez Grisale\u00f1a",
+        "label": "Amaia Martínez Grisaleña",
         "person_id": 73356,
-        "full_name": "Amaia Mart\u00ednez Grisale\u00f1a",
+        "full_name": "Amaia Martínez Grisaleña",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -2278,9 +2277,9 @@
       "data": {
         "id": "person:72799",
         "type": "person",
-        "label": "Amanda FERN\u00c1NDEZ I RUB\u00cd",
+        "label": "Amanda FERNÁNDEZ I RUBÍ",
         "person_id": 72799,
-        "full_name": "Amanda FERN\u00c1NDEZ I RUB\u00cd",
+        "full_name": "Amanda FERNÁNDEZ I RUBÍ",
         "given_name": null,
         "family_name": null,
         "territory_code": "MALLORCA",
@@ -2324,9 +2323,9 @@
       "data": {
         "id": "person:70898",
         "type": "person",
-        "label": "Ana Bel\u00e9n Cifuentes C\u00e1novas",
+        "label": "Ana Belén Cifuentes Cánovas",
         "person_id": 70898,
-        "full_name": "Ana Bel\u00e9n Cifuentes C\u00e1novas",
+        "full_name": "Ana Belén Cifuentes Cánovas",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -2337,9 +2336,9 @@
       "data": {
         "id": "person:73586",
         "type": "person",
-        "label": "Ana Bel\u00e9n Ju\u00e1rez Pastor",
+        "label": "Ana Belén Juárez Pastor",
         "person_id": 73586,
-        "full_name": "Ana Bel\u00e9n Ju\u00e1rez Pastor",
+        "full_name": "Ana Belén Juárez Pastor",
         "given_name": null,
         "family_name": null,
         "territory_code": "Alicante",
@@ -2350,9 +2349,9 @@
       "data": {
         "id": "person:73301",
         "type": "person",
-        "label": "Ana Bel\u00e9n Mart\u00ednez S\u00e1nchez",
+        "label": "Ana Belén Martínez Sánchez",
         "person_id": 73301,
-        "full_name": "Ana Bel\u00e9n Mart\u00ednez S\u00e1nchez",
+        "full_name": "Ana Belén Martínez Sánchez",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -2363,11 +2362,11 @@
       "data": {
         "id": "person:351",
         "type": "person",
-        "label": "Ana Bel\u00e9n V\u00e1zquez Blanco",
+        "label": "Ana Belén Vázquez Blanco",
         "person_id": 351,
-        "full_name": "Ana Bel\u00e9n V\u00e1zquez Blanco",
-        "given_name": "Ana Bel\u00e9n",
-        "family_name": "V\u00e1zquez Blanco",
+        "full_name": "Ana Belén Vázquez Blanco",
+        "given_name": "Ana Belén",
+        "family_name": "Vázquez Blanco",
         "territory_code": "Ourense",
         "territory_name": null
       }
@@ -2376,11 +2375,11 @@
       "data": {
         "id": "person:73162",
         "type": "person",
-        "label": "Ana Bel\u00e9n \u00c1lvarez Fern\u00e1ndez",
+        "label": "Ana Belén Álvarez Fernández",
         "person_id": 73162,
-        "full_name": "Ana Bel\u00e9n \u00c1lvarez Fern\u00e1ndez",
-        "given_name": "Ana Bel\u00e9n",
-        "family_name": "\u00c1lvarez Fern\u00e1ndez",
+        "full_name": "Ana Belén Álvarez Fernández",
+        "given_name": "Ana Belén",
+        "family_name": "Álvarez Fernández",
         "territory_code": "",
         "territory_name": null
       }
@@ -2394,7 +2393,7 @@
         "full_name": "Ana Besalduch Besalduch",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Castell\u00f3n",
+        "territory_code": "Castellón",
         "territory_name": null
       }
     },
@@ -2402,9 +2401,9 @@
       "data": {
         "id": "person:72990",
         "type": "person",
-        "label": "Ana Chocano Rom\u00e1n",
+        "label": "Ana Chocano Román",
         "person_id": 72990,
-        "full_name": "Ana Chocano Rom\u00e1n",
+        "full_name": "Ana Chocano Román",
         "given_name": null,
         "family_name": null,
         "territory_code": "Sevilla Perfiles en redes sociales:",
@@ -2420,7 +2419,7 @@
         "full_name": "Ana Cobo Carmona",
         "given_name": "Ana",
         "family_name": "Cobo Carmona",
-        "territory_code": "Ja\u00e9n",
+        "territory_code": "Jaén",
         "territory_name": null
       }
     },
@@ -2428,9 +2427,9 @@
       "data": {
         "id": "person:69429",
         "type": "person",
-        "label": "Ana Coss\u00edo Capdevila",
+        "label": "Ana Cossío Capdevila",
         "person_id": 69429,
-        "full_name": "Ana Coss\u00edo Capdevila",
+        "full_name": "Ana Cossío Capdevila",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2441,9 +2440,9 @@
       "data": {
         "id": "person:69244",
         "type": "person",
-        "label": "Ana D\u00e1vila-Ponce de Le\u00f3n Municio",
+        "label": "Ana Dávila-Ponce de León Municio",
         "person_id": 69244,
-        "full_name": "Ana D\u00e1vila-Ponce de Le\u00f3n Municio",
+        "full_name": "Ana Dávila-Ponce de León Municio",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2488,12 +2487,12 @@
       "data": {
         "id": "person:140",
         "type": "person",
-        "label": "Ana Gonz\u00e1lez Herdaro",
+        "label": "Ana González Herdaro",
         "person_id": 140,
-        "full_name": "Ana Gonz\u00e1lez Herdaro",
+        "full_name": "Ana González Herdaro",
         "given_name": "Ana",
-        "family_name": "Gonz\u00e1lez Herdaro",
-        "territory_code": "Valencia/Val\u00e8ncia",
+        "family_name": "González Herdaro",
+        "territory_code": "Valencia/València",
         "territory_name": null
       }
     },
@@ -2510,9 +2509,9 @@
       "data": {
         "id": "person:72664",
         "type": "person",
-        "label": "Ana Isabel Abeng\u00f3zar Castillo",
+        "label": "Ana Isabel Abengózar Castillo",
         "person_id": 72664,
-        "full_name": "Ana Isabel Abeng\u00f3zar Castillo",
+        "full_name": "Ana Isabel Abengózar Castillo",
         "given_name": null,
         "family_name": null,
         "territory_code": "Ciudad Real",
@@ -2545,11 +2544,11 @@
       "data": {
         "id": "person:30",
         "type": "person",
-        "label": "Ana Isabel Al\u00f3s L\u00f3pez",
+        "label": "Ana Isabel Alós López",
         "person_id": 30,
-        "full_name": "Ana Isabel Al\u00f3s L\u00f3pez",
+        "full_name": "Ana Isabel Alós López",
         "given_name": "Ana Isabel",
-        "family_name": "Al\u00f3s L\u00f3pez",
+        "family_name": "Alós López",
         "territory_code": "Huesca",
         "territory_name": null
       }
@@ -2571,11 +2570,11 @@
       "data": {
         "id": "person:73254",
         "type": "person",
-        "label": "Ana Isabel Gonz\u00e1lez Cachero",
+        "label": "Ana Isabel González Cachero",
         "person_id": 73254,
-        "full_name": "Ana Isabel Gonz\u00e1lez Cachero",
+        "full_name": "Ana Isabel González Cachero",
         "given_name": "Ana Isabel",
-        "family_name": "Gonz\u00e1lez Cachero",
+        "family_name": "González Cachero",
         "territory_code": "",
         "territory_name": null
       }
@@ -2631,11 +2630,11 @@
       "data": {
         "id": "person:73134",
         "type": "person",
-        "label": "Ana M.\u00aa Oramas Gonz\u00e1lez-Moro",
+        "label": "Ana M.ª Oramas González-Moro",
         "person_id": 73134,
-        "full_name": "Ana M.\u00aa Oramas Gonz\u00e1lez-Moro",
-        "given_name": "Ana M.\u00aa",
-        "family_name": "Oramas Gonz\u00e1lez-Moro",
+        "full_name": "Ana M.ª Oramas González-Moro",
+        "given_name": "Ana M.ª",
+        "family_name": "Oramas González-Moro",
         "territory_code": "Tenerife",
         "territory_name": null
       }
@@ -2677,12 +2676,12 @@
       "data": {
         "id": "person:198",
         "type": "person",
-        "label": "Ana Mart\u00ednez Labella",
+        "label": "Ana Martínez Labella",
         "person_id": 198,
-        "full_name": "Ana Mart\u00ednez Labella",
+        "full_name": "Ana Martínez Labella",
         "given_name": "Ana",
-        "family_name": "Mart\u00ednez Labella",
-        "territory_code": "Almer\u00eda",
+        "family_name": "Martínez Labella",
+        "territory_code": "Almería",
         "territory_name": null
       }
     },
@@ -2690,9 +2689,9 @@
       "data": {
         "id": "person:73387",
         "type": "person",
-        "label": "Ana Mar\u00eda Arellano Bad\u00eda",
+        "label": "Ana María Arellano Badía",
         "person_id": 73387,
-        "full_name": "Ana Mar\u00eda Arellano Bad\u00eda",
+        "full_name": "Ana María Arellano Badía",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -2703,9 +2702,9 @@
       "data": {
         "id": "person:73549",
         "type": "person",
-        "label": "Ana Mar\u00eda Bellver Alc\u00e1ntara",
+        "label": "Ana María Bellver Alcántara",
         "person_id": 73549,
-        "full_name": "Ana Mar\u00eda Bellver Alc\u00e1ntara",
+        "full_name": "Ana María Bellver Alcántara",
         "given_name": null,
         "family_name": null,
         "territory_code": "Valencia",
@@ -2726,9 +2725,9 @@
       "data": {
         "id": "person:72673",
         "type": "person",
-        "label": "Ana Mar\u00eda Cantarero Fresneda",
+        "label": "Ana María Cantarero Fresneda",
         "person_id": 72673,
-        "full_name": "Ana Mar\u00eda Cantarero Fresneda",
+        "full_name": "Ana María Cantarero Fresneda",
         "given_name": null,
         "family_name": null,
         "territory_code": "Cuenca",
@@ -2749,9 +2748,9 @@
       "data": {
         "id": "person:69174",
         "type": "person",
-        "label": "Ana Mar\u00eda Cuartero Lorenzo",
+        "label": "Ana María Cuartero Lorenzo",
         "person_id": 69174,
-        "full_name": "Ana Mar\u00eda Cuartero Lorenzo",
+        "full_name": "Ana María Cuartero Lorenzo",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2762,9 +2761,9 @@
       "data": {
         "id": "person:69398",
         "type": "person",
-        "label": "Ana Mar\u00eda G\u00f3mez Rodr\u00edguez",
+        "label": "Ana María Gómez Rodríguez",
         "person_id": 69398,
-        "full_name": "Ana Mar\u00eda G\u00f3mez Rodr\u00edguez",
+        "full_name": "Ana María Gómez Rodríguez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2775,12 +2774,12 @@
       "data": {
         "id": "person:73041",
         "type": "person",
-        "label": "Ana Mar\u00eda Mestre Garc\u00eda",
+        "label": "Ana María Mestre García",
         "person_id": 73041,
-        "full_name": "Ana Mar\u00eda Mestre Garc\u00eda",
+        "full_name": "Ana María Mestre García",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00e1diz Perfiles en redes sociales:",
+        "territory_code": "Cádiz Perfiles en redes sociales:",
         "territory_name": null
       }
     },
@@ -2788,9 +2787,9 @@
       "data": {
         "id": "person:69234",
         "type": "person",
-        "label": "Ana Mar\u00eda Moreno S\u00e1nchez-Capuchino",
+        "label": "Ana María Moreno Sánchez-Capuchino",
         "person_id": 69234,
-        "full_name": "Ana Mar\u00eda Moreno S\u00e1nchez-Capuchino",
+        "full_name": "Ana María Moreno Sánchez-Capuchino",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2801,9 +2800,9 @@
       "data": {
         "id": "person:69462",
         "type": "person",
-        "label": "Ana Mar\u00eda Prados Vega",
+        "label": "Ana María Prados Vega",
         "person_id": 69462,
-        "full_name": "Ana Mar\u00eda Prados Vega",
+        "full_name": "Ana María Prados Vega",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2814,12 +2813,12 @@
       "data": {
         "id": "person:73060",
         "type": "person",
-        "label": "Ana Mar\u00eda Romero Obrero",
+        "label": "Ana María Romero Obrero",
         "person_id": 73060,
-        "full_name": "Ana Mar\u00eda Romero Obrero",
+        "full_name": "Ana María Romero Obrero",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00f3rdoba",
+        "territory_code": "Córdoba",
         "territory_name": null
       }
     },
@@ -2827,9 +2826,9 @@
       "data": {
         "id": "person:73067",
         "type": "person",
-        "label": "Ana Mar\u00eda Ruiz V\u00e1zquez",
+        "label": "Ana María Ruiz Vázquez",
         "person_id": 73067,
-        "full_name": "Ana Mar\u00eda Ruiz V\u00e1zquez",
+        "full_name": "Ana María Ruiz Vázquez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Sevilla Perfiles en redes sociales:",
@@ -2840,9 +2839,9 @@
       "data": {
         "id": "person:69346",
         "type": "person",
-        "label": "Ana Mar\u00eda Velasco Vidal-Abarca",
+        "label": "Ana María Velasco Vidal-Abarca",
         "person_id": 69346,
-        "full_name": "Ana Mar\u00eda Velasco Vidal-Abarca",
+        "full_name": "Ana María Velasco Vidal-Abarca",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2853,9 +2852,9 @@
       "data": {
         "id": "person:69345",
         "type": "person",
-        "label": "Ana Mar\u00eda \u00c1lvarez Rodr\u00edguez",
+        "label": "Ana María Álvarez Rodríguez",
         "person_id": 69345,
-        "full_name": "Ana Mar\u00eda \u00c1lvarez Rodr\u00edguez",
+        "full_name": "Ana María Álvarez Rodríguez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2866,9 +2865,9 @@
       "data": {
         "id": "person:73399",
         "type": "person",
-        "label": "Ana Mar\u00edn P\u00e9rez",
+        "label": "Ana Marín Pérez",
         "person_id": 73399,
-        "full_name": "Ana Mar\u00edn P\u00e9rez",
+        "full_name": "Ana Marín Pérez",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -2879,9 +2878,9 @@
       "data": {
         "id": "party:68197",
         "type": "party",
-        "label": "G.P. Popular de las Cortes de Arag\u00f3n",
+        "label": "G.P. Popular de las Cortes de Aragón",
         "party_id": 68197,
-        "party_name": "G.P. Popular de las Cortes de Arag\u00f3n",
+        "party_name": "G.P. Popular de las Cortes de Aragón",
         "party_acronym": null
       }
     },
@@ -2889,9 +2888,9 @@
       "data": {
         "id": "person:69347",
         "type": "person",
-        "label": "Ana Mill\u00e1n Arroyo",
+        "label": "Ana Millán Arroyo",
         "person_id": 69347,
-        "full_name": "Ana Mill\u00e1n Arroyo",
+        "full_name": "Ana Millán Arroyo",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -2924,12 +2923,12 @@
       "data": {
         "id": "person:70774",
         "type": "person",
-        "label": "Ana Pont\u00f3n Mondelo",
+        "label": "Ana Pontón Mondelo",
         "person_id": 70774,
-        "full_name": "Ana Pont\u00f3n Mondelo",
+        "full_name": "Ana Pontón Mondelo",
         "given_name": null,
         "family_name": null,
-        "territory_code": "A Coru\u00f1a",
+        "territory_code": "A Coruña",
         "territory_name": null
       }
     },
@@ -2982,9 +2981,9 @@
       "data": {
         "id": "person:72764",
         "type": "person",
-        "label": "Ana S\u00e1nchez Hern\u00e1ndez",
+        "label": "Ana Sánchez Hernández",
         "person_id": 72764,
-        "full_name": "Ana S\u00e1nchez Hern\u00e1ndez",
+        "full_name": "Ana Sánchez Hernández",
         "given_name": null,
         "family_name": null,
         "territory_code": "Zamora",
@@ -3008,9 +3007,9 @@
       "data": {
         "id": "person:73299",
         "type": "person",
-        "label": "Ana Victoria del Vigo Garc\u00eda",
+        "label": "Ana Victoria del Vigo García",
         "person_id": 73299,
-        "full_name": "Ana Victoria del Vigo Garc\u00eda",
+        "full_name": "Ana Victoria del Vigo García",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3021,9 +3020,9 @@
       "data": {
         "id": "person:73320",
         "type": "person",
-        "label": "Ander A\u00f1ibarro Maestre",
+        "label": "Ander Añibarro Maestre",
         "person_id": 73320,
-        "full_name": "Ander A\u00f1ibarro Maestre",
+        "full_name": "Ander Añibarro Maestre",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3073,12 +3072,12 @@
       "data": {
         "id": "person:112",
         "type": "person",
-        "label": "Andrea Fern\u00e1ndez Ben\u00e9itez",
+        "label": "Andrea Fernández Benéitez",
         "person_id": 112,
-        "full_name": "Andrea Fern\u00e1ndez Ben\u00e9itez",
+        "full_name": "Andrea Fernández Benéitez",
         "given_name": "Andrea",
-        "family_name": "Fern\u00e1ndez Ben\u00e9itez",
-        "territory_code": "Le\u00f3n",
+        "family_name": "Fernández Benéitez",
+        "territory_code": "León",
         "territory_name": null
       }
     },
@@ -3099,11 +3098,11 @@
       "data": {
         "id": "person:192",
         "type": "person",
-        "label": "Andreu Mart\u00edn Mart\u00ednez",
+        "label": "Andreu Martín Martínez",
         "person_id": 192,
-        "full_name": "Andreu Mart\u00edn Mart\u00ednez",
+        "full_name": "Andreu Martín Martínez",
         "given_name": "Andreu",
-        "family_name": "Mart\u00edn Mart\u00ednez",
+        "family_name": "Martín Martínez",
         "territory_code": "Tarragona",
         "territory_name": null
       }
@@ -3112,11 +3111,11 @@
       "data": {
         "id": "person:284",
         "type": "person",
-        "label": "Andr\u00e9s Alberto Rodr\u00edguez Almeida",
+        "label": "Andrés Alberto Rodríguez Almeida",
         "person_id": 284,
-        "full_name": "Andr\u00e9s Alberto Rodr\u00edguez Almeida",
-        "given_name": "Andr\u00e9s Alberto",
-        "family_name": "Rodr\u00edguez Almeida",
+        "full_name": "Andrés Alberto Rodríguez Almeida",
+        "given_name": "Andrés Alberto",
+        "family_name": "Rodríguez Almeida",
         "territory_code": "Palmas (Las)",
         "territory_name": null
       }
@@ -3125,10 +3124,10 @@
       "data": {
         "id": "person:73269",
         "type": "person",
-        "label": "Andr\u00e9s David Ruiz Riestra",
+        "label": "Andrés David Ruiz Riestra",
         "person_id": 73269,
-        "full_name": "Andr\u00e9s David Ruiz Riestra",
-        "given_name": "Andr\u00e9s David",
+        "full_name": "Andrés David Ruiz Riestra",
+        "given_name": "Andrés David",
         "family_name": "Ruiz Riestra",
         "territory_code": "",
         "territory_name": null
@@ -3138,9 +3137,9 @@
       "data": {
         "id": "person:69399",
         "type": "person",
-        "label": "Andr\u00e9s Navarro Morales",
+        "label": "Andrés Navarro Morales",
         "person_id": 69399,
-        "full_name": "Andr\u00e9s Navarro Morales",
+        "full_name": "Andrés Navarro Morales",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -3160,9 +3159,9 @@
       "data": {
         "id": "person:72876",
         "type": "person",
-        "label": "Anna Erra i Sol\u00e0",
+        "label": "Anna Erra i Solà",
         "person_id": 72876,
-        "full_name": "Anna Erra i Sol\u00e0",
+        "full_name": "Anna Erra i Solà",
         "given_name": null,
         "family_name": null,
         "territory_code": "Barcelona",
@@ -3195,11 +3194,11 @@
       "data": {
         "id": "person:110",
         "type": "person",
-        "label": "Antidio Fag\u00fandez Campo",
+        "label": "Antidio Fagúndez Campo",
         "person_id": 110,
-        "full_name": "Antidio Fag\u00fandez Campo",
+        "full_name": "Antidio Fagúndez Campo",
         "given_name": "Antidio",
-        "family_name": "Fag\u00fandez Campo",
+        "family_name": "Fagúndez Campo",
         "territory_code": "Zamora",
         "territory_name": null
       }
@@ -3260,11 +3259,11 @@
       "data": {
         "id": "person:74",
         "type": "person",
-        "label": "Antonio Cavacasillas Rodr\u00edguez",
+        "label": "Antonio Cavacasillas Rodríguez",
         "person_id": 74,
-        "full_name": "Antonio Cavacasillas Rodr\u00edguez",
+        "full_name": "Antonio Cavacasillas Rodríguez",
         "given_name": "Antonio",
-        "family_name": "Cavacasillas Rodr\u00edguez",
+        "family_name": "Cavacasillas Rodríguez",
         "territory_code": "Badajoz",
         "territory_name": null
       }
@@ -3273,9 +3272,9 @@
       "data": {
         "id": "person:69467",
         "type": "person",
-        "label": "Antonio Coello G\u00f3mez-Rey",
+        "label": "Antonio Coello Gómez-Rey",
         "person_id": 69467,
-        "full_name": "Antonio Coello G\u00f3mez-Rey",
+        "full_name": "Antonio Coello Gómez-Rey",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -3286,9 +3285,9 @@
       "data": {
         "id": "person:73289",
         "type": "person",
-        "label": "Antonio Eguiz\u00e1bal Le\u00f3n",
+        "label": "Antonio Eguizábal León",
         "person_id": 73289,
-        "full_name": "Antonio Eguiz\u00e1bal Le\u00f3n",
+        "full_name": "Antonio Eguizábal León",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3304,7 +3303,7 @@
         "full_name": "Antonio Jaime Mendoza Toribio",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Le\u00f3n",
+        "territory_code": "León",
         "territory_name": null
       }
     },
@@ -3312,12 +3311,12 @@
       "data": {
         "id": "person:73058",
         "type": "person",
-        "label": "Antonio Jes\u00fas Repullo Milla",
+        "label": "Antonio Jesús Repullo Milla",
         "person_id": 73058,
-        "full_name": "Antonio Jes\u00fas Repullo Milla",
+        "full_name": "Antonio Jesús Repullo Milla",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00f3rdoba Perfiles en redes sociales:",
+        "territory_code": "Córdoba Perfiles en redes sociales:",
         "territory_name": null
       }
     },
@@ -3325,9 +3324,9 @@
       "data": {
         "id": "person:72272",
         "type": "person",
-        "label": "Antonio Land\u00e1buru Clares",
+        "label": "Antonio Landáburu Clares",
         "person_id": 72272,
-        "full_name": "Antonio Land\u00e1buru Clares",
+        "full_name": "Antonio Landáburu Clares",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3338,9 +3337,9 @@
       "data": {
         "id": "person:393",
         "type": "person",
-        "label": "Antonio L\u00d3PEZ-IST\u00daRIZ WHITE",
+        "label": "Antonio LÓPEZ-ISTÚRIZ WHITE",
         "person_id": 393,
-        "full_name": "Antonio L\u00d3PEZ-IST\u00daRIZ WHITE",
+        "full_name": "Antonio LÓPEZ-ISTÚRIZ WHITE",
         "given_name": null,
         "family_name": null,
         "territory_code": "ES",
@@ -3351,9 +3350,9 @@
       "data": {
         "id": "person:72811",
         "type": "person",
-        "label": "Antonio MAR\u00cd I MAR\u00cd",
+        "label": "Antonio MARÍ I MARÍ",
         "person_id": 72811,
-        "full_name": "Antonio MAR\u00cd I MAR\u00cd",
+        "full_name": "Antonio MARÍ I MARÍ",
         "given_name": null,
         "family_name": null,
         "territory_code": "EIVISSA",
@@ -3364,9 +3363,9 @@
       "data": {
         "id": "person:73036",
         "type": "person",
-        "label": "Antonio Mart\u00edn Iglesias",
+        "label": "Antonio Martín Iglesias",
         "person_id": 73036,
-        "full_name": "Antonio Mart\u00edn Iglesias",
+        "full_name": "Antonio Martín Iglesias",
         "given_name": null,
         "family_name": null,
         "territory_code": "Sevilla Perfiles en redes sociales:",
@@ -3377,11 +3376,11 @@
       "data": {
         "id": "person:196",
         "type": "person",
-        "label": "Antonio Mart\u00ednez G\u00f3mez",
+        "label": "Antonio Martínez Gómez",
         "person_id": 196,
-        "full_name": "Antonio Mart\u00ednez G\u00f3mez",
+        "full_name": "Antonio Martínez Gómez",
         "given_name": "Antonio",
-        "family_name": "Mart\u00ednez G\u00f3mez",
+        "family_name": "Martínez Gómez",
         "territory_code": "Albacete",
         "territory_name": null
       }
@@ -3390,9 +3389,9 @@
       "data": {
         "id": "person:72283",
         "type": "person",
-        "label": "Antonio Mart\u00ednez Nieto",
+        "label": "Antonio Martínez Nieto",
         "person_id": 72283,
-        "full_name": "Antonio Mart\u00ednez Nieto",
+        "full_name": "Antonio Martínez Nieto",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3413,9 +3412,9 @@
       "data": {
         "id": "person:72284",
         "type": "person",
-        "label": "Antonio Mart\u00ednez Pastor",
+        "label": "Antonio Martínez Pastor",
         "person_id": 72284,
-        "full_name": "Antonio Mart\u00ednez Pastor",
+        "full_name": "Antonio Martínez Pastor",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3439,11 +3438,11 @@
       "data": {
         "id": "person:296",
         "type": "person",
-        "label": "Antonio Rom\u00e1n Jasanada",
+        "label": "Antonio Román Jasanada",
         "person_id": 296,
-        "full_name": "Antonio Rom\u00e1n Jasanada",
+        "full_name": "Antonio Román Jasanada",
         "given_name": "Antonio",
-        "family_name": "Rom\u00e1n Jasanada",
+        "family_name": "Román Jasanada",
         "territory_code": "Guadalajara",
         "territory_name": null
       }
@@ -3452,12 +3451,12 @@
       "data": {
         "id": "person:73066",
         "type": "person",
-        "label": "Antonio Ruiz S\u00e1nchez",
+        "label": "Antonio Ruiz Sánchez",
         "person_id": 73066,
-        "full_name": "Antonio Ruiz S\u00e1nchez",
+        "full_name": "Antonio Ruiz Sánchez",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00f3rdoba",
+        "territory_code": "Córdoba",
         "territory_name": null
       }
     },
@@ -3465,12 +3464,12 @@
       "data": {
         "id": "person:73068",
         "type": "person",
-        "label": "Antonio Salda\u00f1a Moreno",
+        "label": "Antonio Saldaña Moreno",
         "person_id": 73068,
-        "full_name": "Antonio Salda\u00f1a Moreno",
+        "full_name": "Antonio Saldaña Moreno",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00e1diz Perfiles en redes sociales:",
+        "territory_code": "Cádiz Perfiles en redes sociales:",
         "territory_name": null
       }
     },
@@ -3478,12 +3477,12 @@
       "data": {
         "id": "person:73075",
         "type": "person",
-        "label": "Antonio Sevilla Rodr\u00edguez",
+        "label": "Antonio Sevilla Rodríguez",
         "person_id": 73075,
-        "full_name": "Antonio Sevilla Rodr\u00edguez",
+        "full_name": "Antonio Sevilla Rodríguez",
         "given_name": null,
         "family_name": null,
-        "territory_code": "M\u00e1laga",
+        "territory_code": "Málaga",
         "territory_name": null
       }
     },
@@ -3491,9 +3490,9 @@
       "data": {
         "id": "person:69213",
         "type": "person",
-        "label": "Antonio S\u00e1nchez Dom\u00ednguez",
+        "label": "Antonio Sánchez Domínguez",
         "person_id": 69213,
-        "full_name": "Antonio S\u00e1nchez Dom\u00ednguez",
+        "full_name": "Antonio Sánchez Domínguez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -3504,9 +3503,9 @@
       "data": {
         "id": "person:72693",
         "type": "person",
-        "label": "Antonio S\u00e1nchez Requena",
+        "label": "Antonio Sánchez Requena",
         "person_id": 72693,
-        "full_name": "Antonio S\u00e1nchez Requena",
+        "full_name": "Antonio Sánchez Requena",
         "given_name": null,
         "family_name": null,
         "territory_code": "Albacete",
@@ -3517,9 +3516,9 @@
       "data": {
         "id": "person:68648",
         "type": "person",
-        "label": "Antx\u00f3n Sarasqueta Gonz\u00e1lez",
+        "label": "Antxón Sarasqueta González",
         "person_id": 68648,
-        "full_name": "Antx\u00f3n Sarasqueta Gonz\u00e1lez",
+        "full_name": "Antxón Sarasqueta González",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -3535,7 +3534,7 @@
         "full_name": "Araceli Cabello Cabrera",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00f3rdoba",
+        "territory_code": "Córdoba",
         "territory_name": null
       }
     },
@@ -3543,9 +3542,9 @@
       "data": {
         "id": "person:72797",
         "type": "person",
-        "label": "Ares FERN\u00c1NDEZ I LOMBARDO",
+        "label": "Ares FERNÁNDEZ I LOMBARDO",
         "person_id": 72797,
-        "full_name": "Ares FERN\u00c1NDEZ I LOMBARDO",
+        "full_name": "Ares FERNÁNDEZ I LOMBARDO",
         "given_name": null,
         "family_name": null,
         "territory_code": "MALLORCA",
@@ -3595,11 +3594,11 @@
       "data": {
         "id": "person:269",
         "type": "person",
-        "label": "Arnau Ram\u00edrez Carner",
+        "label": "Arnau Ramírez Carner",
         "person_id": 269,
-        "full_name": "Arnau Ram\u00edrez Carner",
+        "full_name": "Arnau Ramírez Carner",
         "given_name": "Arnau",
-        "family_name": "Ram\u00edrez Carner",
+        "family_name": "Ramírez Carner",
         "territory_code": "Barcelona",
         "territory_name": null
       }
@@ -3608,9 +3607,9 @@
       "data": {
         "id": "person:73348",
         "type": "person",
-        "label": "Aroa Jilete Gonz\u00e1lez",
+        "label": "Aroa Jilete González",
         "person_id": 73348,
-        "full_name": "Aroa Jilete Gonz\u00e1lez",
+        "full_name": "Aroa Jilete González",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3626,7 +3625,7 @@
         "full_name": "Artemi Rallo Lombarte",
         "given_name": "Artemi",
         "family_name": "Rallo Lombarte",
-        "territory_code": "Castell\u00f3n/Castell\u00f3",
+        "territory_code": "Castellón/Castelló",
         "territory_name": null
       }
     },
@@ -3634,12 +3633,12 @@
       "data": {
         "id": "person:73019",
         "type": "person",
-        "label": "Ascensi\u00f3n Hita Fern\u00e1ndez",
+        "label": "Ascensión Hita Fernández",
         "person_id": 73019,
-        "full_name": "Ascensi\u00f3n Hita Fern\u00e1ndez",
+        "full_name": "Ascensión Hita Fernández",
         "given_name": null,
         "family_name": null,
-        "territory_code": "C\u00e1diz",
+        "territory_code": "Cádiz",
         "territory_name": null
       }
     },
@@ -3647,11 +3646,11 @@
       "data": {
         "id": "person:73138",
         "type": "person",
-        "label": "Astrid Mar\u00eda P\u00e9rez Batista",
+        "label": "Astrid María Pérez Batista",
         "person_id": 73138,
-        "full_name": "Astrid Mar\u00eda P\u00e9rez Batista",
-        "given_name": "Astrid Mar\u00eda",
-        "family_name": "P\u00e9rez Batista",
+        "full_name": "Astrid María Pérez Batista",
+        "given_name": "Astrid María",
+        "family_name": "Pérez Batista",
         "territory_code": "Lanzarote",
         "territory_name": null
       }
@@ -3660,11 +3659,11 @@
       "data": {
         "id": "person:226",
         "type": "person",
-        "label": "Aurora Nacarino-Brabo Jim\u00e9nez",
+        "label": "Aurora Nacarino-Brabo Jiménez",
         "person_id": 226,
-        "full_name": "Aurora Nacarino-Brabo Jim\u00e9nez",
+        "full_name": "Aurora Nacarino-Brabo Jiménez",
         "given_name": "Aurora",
-        "family_name": "Nacarino-Brabo Jim\u00e9nez",
+        "family_name": "Nacarino-Brabo Jiménez",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -3699,12 +3698,12 @@
       "data": {
         "id": "person:183",
         "type": "person",
-        "label": "Bartolom\u00e9 Madrid Olmo",
+        "label": "Bartolomé Madrid Olmo",
         "person_id": 183,
-        "full_name": "Bartolom\u00e9 Madrid Olmo",
-        "given_name": "Bartolom\u00e9",
+        "full_name": "Bartolomé Madrid Olmo",
+        "given_name": "Bartolomé",
         "family_name": "Madrid Olmo",
-        "territory_code": "C\u00f3rdoba",
+        "territory_code": "Córdoba",
         "territory_name": null
       }
     },
@@ -3712,9 +3711,9 @@
       "data": {
         "id": "person:69349",
         "type": "person",
-        "label": "Beatriz Borr\u00e1s Vergel",
+        "label": "Beatriz Borrás Vergel",
         "person_id": 69349,
-        "full_name": "Beatriz Borr\u00e1s Vergel",
+        "full_name": "Beatriz Borrás Vergel",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -3730,7 +3729,7 @@
         "full_name": "Beatriz Coelho Luna",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Le\u00f3n",
+        "territory_code": "León",
         "territory_name": null
       }
     },
@@ -3738,12 +3737,12 @@
       "data": {
         "id": "person:73574",
         "type": "person",
-        "label": "Beatriz Gasc\u00f3 Enr\u00edquez",
+        "label": "Beatriz Gascó Enríquez",
         "person_id": 73574,
-        "full_name": "Beatriz Gasc\u00f3 Enr\u00edquez",
+        "full_name": "Beatriz Gascó Enríquez",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Castell\u00f3n",
+        "territory_code": "Castellón",
         "territory_name": null
       }
     },
@@ -3764,11 +3763,11 @@
       "data": {
         "id": "person:164",
         "type": "person",
-        "label": "Beatriz Jim\u00e9nez Linuesa",
+        "label": "Beatriz Jiménez Linuesa",
         "person_id": 164,
-        "full_name": "Beatriz Jim\u00e9nez Linuesa",
+        "full_name": "Beatriz Jiménez Linuesa",
         "given_name": "Beatriz",
-        "family_name": "Jim\u00e9nez Linuesa",
+        "family_name": "Jiménez Linuesa",
         "territory_code": "Cuenca",
         "territory_name": null
       }
@@ -3777,12 +3776,12 @@
       "data": {
         "id": "person:70965",
         "type": "person",
-        "label": "Beatriz Mu\u00f1oz Rodr\u00edguez",
+        "label": "Beatriz Muñoz Rodríguez",
         "person_id": 70965,
-        "full_name": "Beatriz Mu\u00f1oz Rodr\u00edguez",
+        "full_name": "Beatriz Muñoz Rodríguez",
         "given_name": "Beatriz",
-        "family_name": "Mu\u00f1oz Rodr\u00edguez",
-        "territory_code": "C\u00c1CERES",
+        "family_name": "Muñoz Rodríguez",
+        "territory_code": "CÁCERES",
         "territory_name": null
       }
     },
@@ -3790,11 +3789,11 @@
       "data": {
         "id": "person:73264",
         "type": "person",
-        "label": "Beatriz Polledo Enr\u00edquez",
+        "label": "Beatriz Polledo Enríquez",
         "person_id": 73264,
-        "full_name": "Beatriz Polledo Enr\u00edquez",
+        "full_name": "Beatriz Polledo Enríquez",
         "given_name": "Beatriz",
-        "family_name": "Polledo Enr\u00edquez",
+        "family_name": "Polledo Enríquez",
         "territory_code": "",
         "territory_name": null
       }
@@ -3803,9 +3802,9 @@
       "data": {
         "id": "person:73423",
         "type": "person",
-        "label": "Beatriz Sanchez Garc\u00e9s",
+        "label": "Beatriz Sanchez Garcés",
         "person_id": 73423,
-        "full_name": "Beatriz Sanchez Garc\u00e9s",
+        "full_name": "Beatriz Sanchez Garcés",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -3829,11 +3828,11 @@
       "data": {
         "id": "person:32",
         "type": "person",
-        "label": "Beatriz \u00c1lvarez Fanjul",
+        "label": "Beatriz Álvarez Fanjul",
         "person_id": 32,
-        "full_name": "Beatriz \u00c1lvarez Fanjul",
+        "full_name": "Beatriz Álvarez Fanjul",
         "given_name": "Beatriz",
-        "family_name": "\u00c1lvarez Fanjul",
+        "family_name": "Álvarez Fanjul",
         "territory_code": "Bizkaia",
         "territory_name": null
       }
@@ -3842,10 +3841,10 @@
       "data": {
         "id": "person:228",
         "type": "person",
-        "label": "Bego\u00f1a Nasarre Oliva",
+        "label": "Begoña Nasarre Oliva",
         "person_id": 228,
-        "full_name": "Bego\u00f1a Nasarre Oliva",
-        "given_name": "Bego\u00f1a",
+        "full_name": "Begoña Nasarre Oliva",
+        "given_name": "Begoña",
         "family_name": "Nasarre Oliva",
         "territory_code": "Huesca",
         "territory_name": null
@@ -3855,11 +3854,11 @@
       "data": {
         "id": "person:357",
         "type": "person",
-        "label": "Bella Verano Dom\u00ednguez",
+        "label": "Bella Verano Domínguez",
         "person_id": 357,
-        "full_name": "Bella Verano Dom\u00ednguez",
+        "full_name": "Bella Verano Domínguez",
         "given_name": "Bella",
-        "family_name": "Verano Dom\u00ednguez",
+        "family_name": "Verano Domínguez",
         "territory_code": "Huelva",
         "territory_name": null
       }
@@ -3868,12 +3867,12 @@
       "data": {
         "id": "person:158",
         "type": "person",
-        "label": "Bel\u00e9n Hoyo Juli\u00e1",
+        "label": "Belén Hoyo Juliá",
         "person_id": 158,
-        "full_name": "Bel\u00e9n Hoyo Juli\u00e1",
-        "given_name": "Bel\u00e9n",
-        "family_name": "Hoyo Juli\u00e1",
-        "territory_code": "Valencia/Val\u00e8ncia",
+        "full_name": "Belén Hoyo Juliá",
+        "given_name": "Belén",
+        "family_name": "Hoyo Juliá",
+        "territory_code": "Valencia/València",
         "territory_name": null
       }
     },
@@ -3886,7 +3885,7 @@
         "full_name": "Benito Morillo Alejo",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Ja\u00e9n",
+        "territory_code": "Jaén",
         "territory_name": null
       }
     },
@@ -3894,9 +3893,9 @@
       "data": {
         "id": "person:73600",
         "type": "person",
-        "label": "Benjam\u00edn Momp\u00f3 Peruga",
+        "label": "Benjamín Mompó Peruga",
         "person_id": 73600,
-        "full_name": "Benjam\u00edn Momp\u00f3 Peruga",
+        "full_name": "Benjamín Mompó Peruga",
         "given_name": null,
         "family_name": null,
         "territory_code": "Valencia",
@@ -3907,9 +3906,9 @@
       "data": {
         "id": "person:72988",
         "type": "person",
-        "label": "Berta Sof\u00eda Centeno Garc\u00eda",
+        "label": "Berta Sofía Centeno García",
         "person_id": 72988,
-        "full_name": "Berta Sof\u00eda Centeno Garc\u00eda",
+        "full_name": "Berta Sofía Centeno García",
         "given_name": null,
         "family_name": null,
         "territory_code": "Huelva",
@@ -3920,12 +3919,12 @@
       "data": {
         "id": "person:42",
         "type": "person",
-        "label": "Blanca Armario Gonz\u00e1lez",
+        "label": "Blanca Armario González",
         "person_id": 42,
-        "full_name": "Blanca Armario Gonz\u00e1lez",
+        "full_name": "Blanca Armario González",
         "given_name": "Blanca",
-        "family_name": "Armario Gonz\u00e1lez",
-        "territory_code": "C\u00e1diz",
+        "family_name": "Armario González",
+        "territory_code": "Cádiz",
         "territory_name": null
       }
     },
@@ -3946,12 +3945,12 @@
       "data": {
         "id": "person:70958",
         "type": "person",
-        "label": "Blanca Mart\u00edn Delgado",
+        "label": "Blanca Martín Delgado",
         "person_id": 70958,
-        "full_name": "Blanca Mart\u00edn Delgado",
+        "full_name": "Blanca Martín Delgado",
         "given_name": "Blanca",
-        "family_name": "Mart\u00edn Delgado",
-        "territory_code": "C\u00c1CERES",
+        "family_name": "Martín Delgado",
+        "territory_code": "CÁCERES",
         "territory_name": null
       }
     },
@@ -3972,9 +3971,9 @@
       "data": {
         "id": "person:382",
         "type": "person",
-        "label": "Borja GIM\u00c9NEZ LARRAZ",
+        "label": "Borja GIMÉNEZ LARRAZ",
         "person_id": 382,
-        "full_name": "Borja GIM\u00c9NEZ LARRAZ",
+        "full_name": "Borja GIMÉNEZ LARRAZ",
         "given_name": null,
         "family_name": null,
         "territory_code": "ES",
@@ -3985,11 +3984,11 @@
       "data": {
         "id": "person:329",
         "type": "person",
-        "label": "Borja S\u00e9mper Pascual",
+        "label": "Borja Sémper Pascual",
         "person_id": 329,
-        "full_name": "Borja S\u00e9mper Pascual",
+        "full_name": "Borja Sémper Pascual",
         "given_name": "Borja",
-        "family_name": "S\u00e9mper Pascual",
+        "family_name": "Sémper Pascual",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -3998,12 +3997,12 @@
       "data": {
         "id": "person:73544",
         "type": "person",
-        "label": "Candela Angl\u00e9s Querol",
+        "label": "Candela Anglés Querol",
         "person_id": 73544,
-        "full_name": "Candela Angl\u00e9s Querol",
+        "full_name": "Candela Anglés Querol",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Castell\u00f3n",
+        "territory_code": "Castellón",
         "territory_name": null
       }
     },
@@ -4011,11 +4010,11 @@
       "data": {
         "id": "person:176",
         "type": "person",
-        "label": "Candela L\u00f3pez Tagliafico",
+        "label": "Candela López Tagliafico",
         "person_id": 176,
-        "full_name": "Candela L\u00f3pez Tagliafico",
+        "full_name": "Candela López Tagliafico",
         "given_name": "Candela",
-        "family_name": "L\u00f3pez Tagliafico",
+        "family_name": "López Tagliafico",
         "territory_code": "Barcelona",
         "territory_name": null
       }
@@ -4037,11 +4036,11 @@
       "data": {
         "id": "person:205",
         "type": "person",
-        "label": "Carina Mej\u00edas S\u00e1nchez",
+        "label": "Carina Mejías Sánchez",
         "person_id": 205,
-        "full_name": "Carina Mej\u00edas S\u00e1nchez",
+        "full_name": "Carina Mejías Sánchez",
         "given_name": "Carina",
-        "family_name": "Mej\u00edas S\u00e1nchez",
+        "family_name": "Mejías Sánchez",
         "territory_code": "Barcelona",
         "territory_name": null
       }
@@ -4050,9 +4049,9 @@
       "data": {
         "id": "person:68898",
         "type": "person",
-        "label": "Carla Delgado G\u00f3mez",
+        "label": "Carla Delgado Gómez",
         "person_id": 68898,
-        "full_name": "Carla Delgado G\u00f3mez",
+        "full_name": "Carla Delgado Gómez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4076,9 +4075,9 @@
       "data": {
         "id": "person:72942",
         "type": "person",
-        "label": "Carles Puigdemont i Casamaj\u00f3",
+        "label": "Carles Puigdemont i Casamajó",
         "person_id": 72942,
-        "full_name": "Carles Puigdemont i Casamaj\u00f3",
+        "full_name": "Carles Puigdemont i Casamajó",
         "given_name": null,
         "family_name": null,
         "territory_code": "Barcelona",
@@ -4089,9 +4088,9 @@
       "data": {
         "id": "person:72261",
         "type": "person",
-        "label": "Carlos Albaladejo Alarc\u00f3n",
+        "label": "Carlos Albaladejo Alarcón",
         "person_id": 72261,
-        "full_name": "Carlos Albaladejo Alarc\u00f3n",
+        "full_name": "Carlos Albaladejo Alarcón",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -4102,11 +4101,11 @@
       "data": {
         "id": "person:73165",
         "type": "person",
-        "label": "Carlos Alberto Caram\u00e9s Luengo",
+        "label": "Carlos Alberto Caramés Luengo",
         "person_id": 73165,
-        "full_name": "Carlos Alberto Caram\u00e9s Luengo",
+        "full_name": "Carlos Alberto Caramés Luengo",
         "given_name": "Carlos Alberto",
-        "family_name": "Caram\u00e9s Luengo",
+        "family_name": "Caramés Luengo",
         "territory_code": "",
         "territory_name": null
       }
@@ -4115,11 +4114,11 @@
       "data": {
         "id": "person:314",
         "type": "person",
-        "label": "Carlos Alberto S\u00e1nchez Ojeda",
+        "label": "Carlos Alberto Sánchez Ojeda",
         "person_id": 314,
-        "full_name": "Carlos Alberto S\u00e1nchez Ojeda",
+        "full_name": "Carlos Alberto Sánchez Ojeda",
         "given_name": "Carlos Alberto",
-        "family_name": "S\u00e1nchez Ojeda",
+        "family_name": "Sánchez Ojeda",
         "territory_code": "Palmas (Las)",
         "territory_name": null
       }
@@ -4128,11 +4127,11 @@
       "data": {
         "id": "person:73104",
         "type": "person",
-        "label": "Carlos Antonio Ester S\u00e1nchez",
+        "label": "Carlos Antonio Ester Sánchez",
         "person_id": 73104,
-        "full_name": "Carlos Antonio Ester S\u00e1nchez",
+        "full_name": "Carlos Antonio Ester Sánchez",
         "given_name": "Carlos Antonio",
-        "family_name": "Ester S\u00e1nchez",
+        "family_name": "Ester Sánchez",
         "territory_code": "Gran Canaria",
         "territory_name": null
       }
@@ -4141,11 +4140,11 @@
       "data": {
         "id": "person:38",
         "type": "person",
-        "label": "Carlos Aragon\u00e9s Mendiguch\u00eda",
+        "label": "Carlos Aragonés Mendiguchía",
         "person_id": 38,
-        "full_name": "Carlos Aragon\u00e9s Mendiguch\u00eda",
+        "full_name": "Carlos Aragonés Mendiguchía",
         "given_name": "Carlos",
-        "family_name": "Aragon\u00e9s Mendiguch\u00eda",
+        "family_name": "Aragonés Mendiguchía",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -4154,9 +4153,9 @@
       "data": {
         "id": "person:73599",
         "type": "person",
-        "label": "Carlos Arturo Maz\u00f3n Guixot",
+        "label": "Carlos Arturo Mazón Guixot",
         "person_id": 73599,
-        "full_name": "Carlos Arturo Maz\u00f3n Guixot",
+        "full_name": "Carlos Arturo Mazón Guixot",
         "given_name": null,
         "family_name": null,
         "territory_code": "Alicante",
@@ -4167,9 +4166,9 @@
       "data": {
         "id": "person:69468",
         "type": "person",
-        "label": "Carlos Cer\u00f3n Hern\u00e1ndez",
+        "label": "Carlos Cerón Hernández",
         "person_id": 69468,
-        "full_name": "Carlos Cer\u00f3n Hern\u00e1ndez",
+        "full_name": "Carlos Cerón Hernández",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4193,9 +4192,9 @@
       "data": {
         "id": "person:69154",
         "type": "person",
-        "label": "Carlos D\u00edaz-Pache Gosende",
+        "label": "Carlos Díaz-Pache Gosende",
         "person_id": 69154,
-        "full_name": "Carlos D\u00edaz-Pache Gosende",
+        "full_name": "Carlos Díaz-Pache Gosende",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4219,9 +4218,9 @@
       "data": {
         "id": "person:72713",
         "type": "person",
-        "label": "Carlos Fern\u00e1ndez Herrera",
+        "label": "Carlos Fernández Herrera",
         "person_id": 72713,
-        "full_name": "Carlos Fern\u00e1ndez Herrera",
+        "full_name": "Carlos Fernández Herrera",
         "given_name": null,
         "family_name": null,
         "territory_code": "Zamora",
@@ -4232,12 +4231,12 @@
       "data": {
         "id": "person:117",
         "type": "person",
-        "label": "Carlos Flores Juber\u00edas",
+        "label": "Carlos Flores Juberías",
         "person_id": 117,
-        "full_name": "Carlos Flores Juber\u00edas",
+        "full_name": "Carlos Flores Juberías",
         "given_name": "Carlos",
-        "family_name": "Flores Juber\u00edas",
-        "territory_code": "Valencia/Val\u00e8ncia",
+        "family_name": "Flores Juberías",
+        "territory_code": "Valencia/València",
         "territory_name": null
       }
     },
@@ -4258,11 +4257,11 @@
       "data": {
         "id": "person:125",
         "type": "person",
-        "label": "Carlos Garc\u00eda Adanero",
+        "label": "Carlos García Adanero",
         "person_id": 125,
-        "full_name": "Carlos Garc\u00eda Adanero",
+        "full_name": "Carlos García Adanero",
         "given_name": "Carlos",
-        "family_name": "Garc\u00eda Adanero",
+        "family_name": "García Adanero",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -4271,9 +4270,9 @@
       "data": {
         "id": "person:69276",
         "type": "person",
-        "label": "Carlos Gonz\u00e1lez Maestre",
+        "label": "Carlos González Maestre",
         "person_id": 69276,
-        "full_name": "Carlos Gonz\u00e1lez Maestre",
+        "full_name": "Carlos González Maestre",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4284,12 +4283,12 @@
       "data": {
         "id": "person:151",
         "type": "person",
-        "label": "Carlos Hern\u00e1ndez Quero",
+        "label": "Carlos Hernández Quero",
         "person_id": 151,
-        "full_name": "Carlos Hern\u00e1ndez Quero",
+        "full_name": "Carlos Hernández Quero",
         "given_name": "Carlos",
-        "family_name": "Hern\u00e1ndez Quero",
-        "territory_code": "M\u00e1laga",
+        "family_name": "Hernández Quero",
+        "territory_code": "Málaga",
         "territory_name": null
       }
     },
@@ -4297,9 +4296,9 @@
       "data": {
         "id": "person:72712",
         "type": "person",
-        "label": "Carlos Javier Amando Fern\u00e1ndez Carriedo",
+        "label": "Carlos Javier Amando Fernández Carriedo",
         "person_id": 72712,
-        "full_name": "Carlos Javier Amando Fern\u00e1ndez Carriedo",
+        "full_name": "Carlos Javier Amando Fernández Carriedo",
         "given_name": null,
         "family_name": null,
         "territory_code": "Palencia",
@@ -4315,7 +4314,7 @@
         "full_name": "Carlos Javier Floriano Corrales",
         "given_name": "Carlos Javier",
         "family_name": "Floriano Corrales",
-        "territory_code": "C\u00e1ceres",
+        "territory_code": "Cáceres",
         "territory_name": null
       }
     },
@@ -4323,11 +4322,11 @@
       "data": {
         "id": "person:194",
         "type": "person",
-        "label": "Carlos Mart\u00edn Urriza",
+        "label": "Carlos Martín Urriza",
         "person_id": 194,
-        "full_name": "Carlos Mart\u00edn Urriza",
+        "full_name": "Carlos Martín Urriza",
         "given_name": "Carlos",
-        "family_name": "Mart\u00edn Urriza",
+        "family_name": "Martín Urriza",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -4336,9 +4335,9 @@
       "data": {
         "id": "person:72740",
         "type": "person",
-        "label": "Carlos Men\u00e9ndez Blanco",
+        "label": "Carlos Menéndez Blanco",
         "person_id": 72740,
-        "full_name": "Carlos Men\u00e9ndez Blanco",
+        "full_name": "Carlos Menéndez Blanco",
         "given_name": null,
         "family_name": null,
         "territory_code": "Salamanca",
@@ -4349,9 +4348,9 @@
       "data": {
         "id": "party:68139",
         "type": "party",
-        "label": "VOX Castilla y Le\u00f3n",
+        "label": "VOX Castilla y León",
         "party_id": 68139,
-        "party_name": "VOX Castilla y Le\u00f3n",
+        "party_name": "VOX Castilla y León",
         "party_acronym": null
       }
     },
@@ -4359,9 +4358,9 @@
       "data": {
         "id": "person:69351",
         "type": "person",
-        "label": "Carlos Moreno Vinu\u00e9s",
+        "label": "Carlos Moreno Vinués",
         "person_id": 69351,
-        "full_name": "Carlos Moreno Vinu\u00e9s",
+        "full_name": "Carlos Moreno Vinués",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4385,9 +4384,9 @@
       "data": {
         "id": "person:73307",
         "type": "person",
-        "label": "Carlos Ollero Vall\u00e9s",
+        "label": "Carlos Ollero Vallés",
         "person_id": 73307,
-        "full_name": "Carlos Ollero Vall\u00e9s",
+        "full_name": "Carlos Ollero Vallés",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -4408,9 +4407,9 @@
       "data": {
         "id": "person:73288",
         "type": "person",
-        "label": "Carlos Pa\u00fal Lapedriza",
+        "label": "Carlos Paúl Lapedriza",
         "person_id": 73288,
-        "full_name": "Carlos Pa\u00fal Lapedriza",
+        "full_name": "Carlos Paúl Lapedriza",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -4434,12 +4433,12 @@
       "data": {
         "id": "person:72751",
         "type": "person",
-        "label": "Carlos Poll\u00e1n Fern\u00e1ndez",
+        "label": "Carlos Pollán Fernández",
         "person_id": 72751,
-        "full_name": "Carlos Poll\u00e1n Fern\u00e1ndez",
+        "full_name": "Carlos Pollán Fernández",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Le\u00f3n",
+        "territory_code": "León",
         "territory_name": null
       }
     },
@@ -4447,9 +4446,9 @@
       "data": {
         "id": "person:73401",
         "type": "person",
-        "label": "Carlos P\u00e9rez Anad\u00f3n",
+        "label": "Carlos Pérez Anadón",
         "person_id": 73401,
-        "full_name": "Carlos P\u00e9rez Anad\u00f3n",
+        "full_name": "Carlos Pérez Anadón",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -4470,11 +4469,11 @@
       "data": {
         "id": "person:293",
         "type": "person",
-        "label": "Carlos Rojas Garc\u00eda",
+        "label": "Carlos Rojas García",
         "person_id": 293,
-        "full_name": "Carlos Rojas Garc\u00eda",
+        "full_name": "Carlos Rojas García",
         "given_name": "Carlos",
-        "family_name": "Rojas Garc\u00eda",
+        "family_name": "Rojas García",
         "territory_code": "Granada",
         "territory_name": null
       }
@@ -4483,9 +4482,9 @@
       "data": {
         "id": "person:68623",
         "type": "person",
-        "label": "Carlos Salgado P\u00e9rez",
+        "label": "Carlos Salgado Pérez",
         "person_id": 68623,
-        "full_name": "Carlos Salgado P\u00e9rez",
+        "full_name": "Carlos Salgado Pérez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4527,7 +4526,7 @@
         "full_name": "Carmelo Barrio Baroja",
         "given_name": "Carmelo",
         "family_name": "Barrio Baroja",
-        "territory_code": "Araba/\u00c1lava",
+        "territory_code": "Araba/Álava",
         "territory_name": null
       }
     },
@@ -4535,11 +4534,11 @@
       "data": {
         "id": "person:36",
         "type": "person",
-        "label": "Carmen Andr\u00e9s A\u00f1\u00f3n",
+        "label": "Carmen Andrés Añón",
         "person_id": 36,
-        "full_name": "Carmen Andr\u00e9s A\u00f1\u00f3n",
+        "full_name": "Carmen Andrés Añón",
         "given_name": "Carmen",
-        "family_name": "Andr\u00e9s A\u00f1\u00f3n",
+        "family_name": "Andrés Añón",
         "territory_code": "Barcelona",
         "territory_name": null
       }
@@ -4548,9 +4547,9 @@
       "data": {
         "id": "person:72785",
         "type": "person",
-        "label": "Carmen CA\u00d1ELLAS I MART\u00cdN",
+        "label": "Carmen CAÑELLAS I MARTÍN",
         "person_id": 72785,
-        "full_name": "Carmen CA\u00d1ELLAS I MART\u00cdN",
+        "full_name": "Carmen CAÑELLAS I MARTÍN",
         "given_name": null,
         "family_name": null,
         "territory_code": "MALLORCA",
@@ -4561,9 +4560,9 @@
       "data": {
         "id": "person:374",
         "type": "person",
-        "label": "Carmen CRESPO D\u00cdAZ",
+        "label": "Carmen CRESPO DÍAZ",
         "person_id": 374,
-        "full_name": "Carmen CRESPO D\u00cdAZ",
+        "full_name": "Carmen CRESPO DÍAZ",
         "given_name": null,
         "family_name": null,
         "territory_code": "ES",
@@ -4587,11 +4586,11 @@
       "data": {
         "id": "person:122",
         "type": "person",
-        "label": "Carmen F\u00fanez de Gregorio",
+        "label": "Carmen Fúnez de Gregorio",
         "person_id": 122,
-        "full_name": "Carmen F\u00fanez de Gregorio",
+        "full_name": "Carmen Fúnez de Gregorio",
         "given_name": "Carmen",
-        "family_name": "F\u00fanez de Gregorio",
+        "family_name": "Fúnez de Gregorio",
         "territory_code": "Ciudad Real",
         "territory_name": null
       }
@@ -4600,12 +4599,12 @@
       "data": {
         "id": "person:199",
         "type": "person",
-        "label": "Carmen Mart\u00ednez Ram\u00edrez",
+        "label": "Carmen Martínez Ramírez",
         "person_id": 199,
-        "full_name": "Carmen Mart\u00ednez Ram\u00edrez",
+        "full_name": "Carmen Martínez Ramírez",
         "given_name": "Carmen",
-        "family_name": "Mart\u00ednez Ram\u00edrez",
-        "territory_code": "Valencia/Val\u00e8ncia",
+        "family_name": "Martínez Ramírez",
+        "territory_code": "Valencia/València",
         "territory_name": null
       }
     },
@@ -4613,9 +4612,9 @@
       "data": {
         "id": "person:73449",
         "type": "person",
-        "label": "Carmen Mar\u00eda Sus\u00edn Gabarre",
+        "label": "Carmen María Susín Gabarre",
         "person_id": 73449,
-        "full_name": "Carmen Mar\u00eda Sus\u00edn Gabarre",
+        "full_name": "Carmen María Susín Gabarre",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -4639,11 +4638,11 @@
       "data": {
         "id": "person:73119",
         "type": "person",
-        "label": "Carmen Rosa Hern\u00e1ndez Jorge",
+        "label": "Carmen Rosa Hernández Jorge",
         "person_id": 73119,
-        "full_name": "Carmen Rosa Hern\u00e1ndez Jorge",
+        "full_name": "Carmen Rosa Hernández Jorge",
         "given_name": "Carmen Rosa",
-        "family_name": "Hern\u00e1ndez Jorge",
+        "family_name": "Hernández Jorge",
         "territory_code": "Gran Canaria",
         "territory_name": null
       }
@@ -4688,9 +4687,9 @@
       "data": {
         "id": "person:72813",
         "type": "person",
-        "label": "Carol MARQU\u00c8S I PORTELLA",
+        "label": "Carol MARQUÈS I PORTELLA",
         "person_id": 72813,
-        "full_name": "Carol MARQU\u00c8S I PORTELLA",
+        "full_name": "Carol MARQUÈS I PORTELLA",
         "given_name": null,
         "family_name": null,
         "territory_code": "MENORCA",
@@ -4714,11 +4713,11 @@
       "data": {
         "id": "person:73259",
         "type": "person",
-        "label": "Carolina L\u00f3pez Fern\u00e1ndez",
+        "label": "Carolina López Fernández",
         "person_id": 73259,
-        "full_name": "Carolina L\u00f3pez Fern\u00e1ndez",
+        "full_name": "Carolina López Fernández",
         "given_name": "Carolina",
-        "family_name": "L\u00f3pez Fern\u00e1ndez",
+        "family_name": "López Fernández",
         "territory_code": "",
         "territory_name": null
       }
@@ -4763,12 +4762,12 @@
       "data": {
         "id": "person:73001",
         "type": "person",
-        "label": "Catalina Montserrat Garc\u00eda Carrasco",
+        "label": "Catalina Montserrat García Carrasco",
         "person_id": 73001,
-        "full_name": "Catalina Montserrat Garc\u00eda Carrasco",
+        "full_name": "Catalina Montserrat García Carrasco",
         "given_name": null,
         "family_name": null,
-        "territory_code": "Ja\u00e9n Perfiles en redes sociales:",
+        "territory_code": "Jaén Perfiles en redes sociales:",
         "territory_name": null
       }
     },
@@ -4776,11 +4775,11 @@
       "data": {
         "id": "person:31",
         "type": "person",
-        "label": "Cayetana \u00c1lvarez de Toledo Peralta-Ramos",
+        "label": "Cayetana Álvarez de Toledo Peralta-Ramos",
         "person_id": 31,
-        "full_name": "Cayetana \u00c1lvarez de Toledo Peralta-Ramos",
+        "full_name": "Cayetana Álvarez de Toledo Peralta-Ramos",
         "given_name": "Cayetana",
-        "family_name": "\u00c1lvarez de Toledo Peralta-Ramos",
+        "family_name": "Álvarez de Toledo Peralta-Ramos",
         "territory_code": "Madrid",
         "territory_name": null
       }
@@ -4789,9 +4788,9 @@
       "data": {
         "id": "person:73073",
         "type": "person",
-        "label": "Celia Santiago Buend\u00eda",
+        "label": "Celia Santiago Buendía",
         "person_id": 73073,
-        "full_name": "Celia Santiago Buend\u00eda",
+        "full_name": "Celia Santiago Buendía",
         "given_name": null,
         "family_name": null,
         "territory_code": "Granada Perfiles en redes sociales:",
@@ -4815,9 +4814,9 @@
       "data": {
         "id": "person:73426",
         "type": "person",
-        "label": "Claudia P\u00e9rez Forni\u00e9s",
+        "label": "Claudia Pérez Forniés",
         "person_id": 73426,
-        "full_name": "Claudia P\u00e9rez Forni\u00e9s",
+        "full_name": "Claudia Pérez Forniés",
         "given_name": null,
         "family_name": null,
         "territory_code": "",
@@ -4828,9 +4827,9 @@
       "data": {
         "id": "person:69417",
         "type": "person",
-        "label": "Concepci\u00f3n Bellor\u00edn Naranjo",
+        "label": "Concepción Bellorín Naranjo",
         "person_id": 69417,
-        "full_name": "Concepci\u00f3n Bellor\u00edn Naranjo",
+        "full_name": "Concepción Bellorín Naranjo",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4841,10 +4840,10 @@
       "data": {
         "id": "person:124",
         "type": "person",
-        "label": "Concepci\u00f3n Gamarra Ruiz-Clavijo",
+        "label": "Concepción Gamarra Ruiz-Clavijo",
         "person_id": 124,
-        "full_name": "Concepci\u00f3n Gamarra Ruiz-Clavijo",
-        "given_name": "Concepci\u00f3n",
+        "full_name": "Concepción Gamarra Ruiz-Clavijo",
+        "given_name": "Concepción",
         "family_name": "Gamarra Ruiz-Clavijo",
         "territory_code": "Rioja (La)",
         "territory_name": null
@@ -4854,9 +4853,9 @@
       "data": {
         "id": "person:69352",
         "type": "person",
-        "label": "Concepci\u00f3n G\u00f3mez Barroeta",
+        "label": "Concepción Gómez Barroeta",
         "person_id": 69352,
-        "full_name": "Concepci\u00f3n G\u00f3mez Barroeta",
+        "full_name": "Concepción Gómez Barroeta",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4867,11 +4866,11 @@
       "data": {
         "id": "person:73272",
         "type": "person",
-        "label": "Covadonga Tom\u00e9 Nestal",
+        "label": "Covadonga Tomé Nestal",
         "person_id": 73272,
-        "full_name": "Covadonga Tom\u00e9 Nestal",
+        "full_name": "Covadonga Tomé Nestal",
         "given_name": "Covadonga",
-        "family_name": "Tom\u00e9 Nestal",
+        "family_name": "Tomé Nestal",
         "territory_code": "",
         "territory_name": null
       }
@@ -4880,9 +4879,9 @@
       "data": {
         "id": "person:69353",
         "type": "person",
-        "label": "Cristian Mart\u00ednez Navarro",
+        "label": "Cristian Martínez Navarro",
         "person_id": 69353,
-        "full_name": "Cristian Mart\u00ednez Navarro",
+        "full_name": "Cristian Martínez Navarro",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4893,11 +4892,11 @@
       "data": {
         "id": "person:13",
         "type": "person",
-        "label": "Cristina Abades Mart\u00ednez",
+        "label": "Cristina Abades Martínez",
         "person_id": 13,
-        "full_name": "Cristina Abades Mart\u00ednez",
+        "full_name": "Cristina Abades Martínez",
         "given_name": "Cristina",
-        "family_name": "Abades Mart\u00ednez",
+        "family_name": "Abades Martínez",
         "territory_code": "Lugo",
         "territory_name": null
       }
@@ -4906,11 +4905,11 @@
       "data": {
         "id": "person:19",
         "type": "person",
-        "label": "Cristina Ag\u00fcera Gago",
+        "label": "Cristina Agüera Gago",
         "person_id": 19,
-        "full_name": "Cristina Ag\u00fcera Gago",
+        "full_name": "Cristina Agüera Gago",
         "given_name": "Cristina",
-        "family_name": "Ag\u00fcera Gago",
+        "family_name": "Agüera Gago",
         "territory_code": "Barcelona",
         "territory_name": null
       }
@@ -4919,9 +4918,9 @@
       "data": {
         "id": "person:73024",
         "type": "person",
-        "label": "Cristina Alejandra Jim\u00e9nez Jim\u00e9nez",
+        "label": "Cristina Alejandra Jiménez Jiménez",
         "person_id": 73024,
-        "full_name": "Cristina Alejandra Jim\u00e9nez Jim\u00e9nez",
+        "full_name": "Cristina Alejandra Jiménez Jiménez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Granada",
@@ -4932,11 +4931,11 @@
       "data": {
         "id": "person:73092",
         "type": "person",
-        "label": "Cristina Calero Garc\u00eda",
+        "label": "Cristina Calero García",
         "person_id": 73092,
-        "full_name": "Cristina Calero Garc\u00eda",
+        "full_name": "Cristina Calero García",
         "given_name": "Cristina",
-        "family_name": "Calero Garc\u00eda",
+        "family_name": "Calero García",
         "territory_code": "Lanzarote",
         "territory_name": null
       }
@@ -4945,9 +4944,9 @@
       "data": {
         "id": "person:69354",
         "type": "person",
-        "label": "Cristina Castillo S\u00e1nchez",
+        "label": "Cristina Castillo Sánchez",
         "person_id": 69354,
-        "full_name": "Cristina Castillo S\u00e1nchez",
+        "full_name": "Cristina Castillo Sánchez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -4971,9 +4970,9 @@
       "data": {
         "id": "person:69178",
         "type": "person",
-        "label": "Cristina Gonz\u00e1lez \u00c1lvarez",
+        "label": "Cristina González Álvarez",
         "person_id": 69178,
-        "full_name": "Cristina Gonz\u00e1lez \u00c1lvarez",
+        "full_name": "Cristina González Álvarez",
         "given_name": null,
         "family_name": null,
         "territory_code": "Comunidad de Madrid",
@@ -5099,7 +5098,7 @@
         "type": "mandate",
         "source": "person:69341",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -6181,7 +6180,7 @@
         "type": "mandate",
         "source": "person:69342",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -7760,7 +7759,7 @@
         "type": "mandate",
         "source": "person:69343",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -8184,7 +8183,7 @@
         "type": "mandate",
         "source": "person:69344",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -9807,7 +9806,7 @@
         "type": "mandate",
         "source": "person:69345",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -12051,7 +12050,7 @@
         "type": "mandate",
         "source": "person:69350",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -14861,7 +14860,7 @@
         "type": "mandate",
         "source": "person:69352",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -14923,7 +14922,7 @@
         "type": "mandate",
         "source": "person:69353",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativo Grupos Parlamentarios",
+        "label": "Técnico/Administrativo Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,
@@ -15078,7 +15077,7 @@
         "type": "mandate",
         "source": "person:69354",
         "target": "institution:68223",
-        "label": "T\u00e9cnico/Administrativa Grupos Parlamentarios",
+        "label": "Técnico/Administrativa Grupos Parlamentarios",
         "source_id": "asamblea_madrid_ocupaciones",
         "start_date": "2023-06-13",
         "end_date": null,

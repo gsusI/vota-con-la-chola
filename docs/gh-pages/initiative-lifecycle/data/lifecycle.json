@@ -1,7 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T21:20:47+00:00",
-    "db_path": "redacted",
+    "generated_at": "2026-03-15T20:47:53+00:00",
     "max_votes_per_initiative": 240,
     "max_initiatives": 0,
     "total_initiatives": 4715,
@@ -122,8 +121,8 @@
     "unlinked_initiatives": 3285,
     "confidence_distribution": {
       "high": 1329,
-      "medium": 96,
-      "low": 5,
+      "medium": 88,
+      "low": 13,
       "none": 3285
     },
     "link_methods": {
@@ -516,10 +515,10 @@
             "p90": 252.0
           },
           "first_to_last_vote_days": {
-            "count": 1380,
+            "count": 1381,
             "min": 0.0,
             "max": 4213.0,
-            "avg": 19.49,
+            "avg": 19.48,
             "median": 0.0,
             "p75": 0.0,
             "p90": 0.0
@@ -50777,7 +50776,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -70408,7 +70407,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -150931,7 +150930,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -160130,7 +160129,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -160832,7 +160831,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -162487,7 +162486,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -166174,7 +166173,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -166475,7 +166474,7 @@
         "link_confidence_max": 0.85,
         "link_confidence_avg": 0.85,
         "link_confidence_median": 0.85,
-        "link_confidence_bucket": "media",
+        "link_confidence_bucket": "baja",
         "low_confidence_links": 0,
         "low_confidence_ratio": 0.0
       },
@@ -200874,82 +200873,6 @@
           "outcome_margin": -3,
           "context": "otro",
           "link_method": "derived_title_key",
-          "link_confidence": 1.0,
-          "link_confidence_band": "alta"
-        }
-      ]
-    },
-    {
-      "initiative_id": "senado:leg15:exp:600/000001",
-      "legislature": "15",
-      "expediente": "600/000001",
-      "type": "600",
-      "title": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
-      "procedure_type": "",
-      "author_text": "",
-      "source_id": "senado_iniciativas",
-      "source_bucket": "senado",
-      "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
-      "presented_date": "",
-      "qualified_date": "",
-      "current_status": "",
-      "result_text": "",
-      "status_date": "",
-      "competent_committee": "Sin comité asignado",
-      "vote_count": 1,
-      "vote_truncated": false,
-      "vote_truncated_count": 0,
-      "first_vote_date": "",
-      "last_vote_date": "",
-      "timeline_days": {
-        "presented_to_qualified_days": null,
-        "presented_to_first_vote_days": null,
-        "qualified_to_first_vote_days": null,
-        "first_to_last_vote_days": null,
-        "presented_to_status_days": null,
-        "last_vote_to_status_days": null
-      },
-      "outcome_summary": {
-        "aprobada": 0,
-        "rechazada": 0,
-        "empate": 0,
-        "sin_señal": 1
-      },
-      "link_summary": {
-        "vote_links": 1,
-        "methods_count": 1,
-        "dominant_method": "leg_expediente_payload_exact",
-        "link_confidence_min": 1.0,
-        "link_confidence_max": 1.0,
-        "link_confidence_avg": 1.0,
-        "link_confidence_median": 1.0,
-        "link_confidence_bucket": "alta",
-        "low_confidence_links": 0,
-        "low_confidence_ratio": 0.0
-      },
-      "votes": [
-        {
-          "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_10_52.xml",
-          "vote_date": "",
-          "vote_legislature": "15",
-          "session_number": 10,
-          "vote_number": 52,
-          "source_id": "senado_votaciones",
-          "source_bucket": "senado",
-          "source_url": "",
-          "vote_title": "Votación final sobre el conjunto",
-          "expediente_text": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
-          "subgroup_title": "",
-          "subgroup_text": "",
-          "assentimiento": "",
-          "totals_yes": 0,
-          "totals_no": 0,
-          "totals_abstain": 0,
-          "totals_no_vote": 0,
-          "outcome": "sin_señal",
-          "outcome_margin": 0,
-          "context": "otro",
-          "link_method": "leg_expediente_payload_exact",
           "link_confidence": 1.0,
           "link_confidence_band": "alta"
         }
@@ -272390,6 +272313,82 @@
           "outcome_margin": 136,
           "context": "otro",
           "link_method": "derived_title_key",
+          "link_confidence": 1.0,
+          "link_confidence_band": "alta"
+        }
+      ]
+    },
+    {
+      "initiative_id": "senado:leg15:exp:600/000001",
+      "legislature": "15",
+      "expediente": "600/000001",
+      "type": "600",
+      "title": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
+      "procedure_type": "",
+      "author_text": "",
+      "source_id": "senado_iniciativas",
+      "source_bucket": "senado",
+      "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+      "presented_date": "",
+      "qualified_date": "",
+      "current_status": "",
+      "result_text": "",
+      "status_date": "",
+      "competent_committee": "Sin comité asignado",
+      "vote_count": 1,
+      "vote_truncated": false,
+      "vote_truncated_count": 0,
+      "first_vote_date": "2025-05-27",
+      "last_vote_date": "2025-05-27",
+      "timeline_days": {
+        "presented_to_qualified_days": null,
+        "presented_to_first_vote_days": null,
+        "qualified_to_first_vote_days": null,
+        "first_to_last_vote_days": 0,
+        "presented_to_status_days": null,
+        "last_vote_to_status_days": null
+      },
+      "outcome_summary": {
+        "aprobada": 1,
+        "rechazada": 0,
+        "empate": 0,
+        "sin_señal": 0
+      },
+      "link_summary": {
+        "vote_links": 1,
+        "methods_count": 1,
+        "dominant_method": "leg_expediente_payload_exact",
+        "link_confidence_min": 1.0,
+        "link_confidence_max": 1.0,
+        "link_confidence_avg": 1.0,
+        "link_confidence_median": 1.0,
+        "link_confidence_bucket": "alta",
+        "low_confidence_links": 0,
+        "low_confidence_ratio": 0.0
+      },
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_10_52.xml",
+          "vote_date": "2025-05-27",
+          "vote_legislature": "15",
+          "session_number": 10,
+          "vote_number": 52,
+          "source_id": "senado_votaciones",
+          "source_bucket": "senado",
+          "source_url": "",
+          "vote_title": "Votación final sobre el conjunto",
+          "expediente_text": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
+          "subgroup_title": "",
+          "subgroup_text": "",
+          "assentimiento": "",
+          "totals_yes": 147,
+          "totals_no": 107,
+          "totals_abstain": 5,
+          "totals_no_vote": 1,
+          "outcome": "aprobada",
+          "outcome_margin": 40,
+          "context": "otro",
+          "link_method": "leg_expediente_payload_exact",
           "link_confidence": 1.0,
           "link_confidence_band": "alta"
         }

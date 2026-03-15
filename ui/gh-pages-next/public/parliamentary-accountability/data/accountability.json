@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T21:20:46+00:00",
+    "generated_at": "2026-03-15T20:47:53+00:00",
     "total_events": 8357,
     "max_rows_events": 700,
     "min_shared_events": 12,
@@ -671,11 +671,6 @@
     {
       "party_id": 61285,
       "name": "ACTIVA CHIVA",
-      "acronym": null
-    },
-    {
-      "party_id": 26286,
-      "name": "ACTIVEM",
       "acronym": null
     },
     {
@@ -1899,11 +1894,6 @@
       "acronym": null
     },
     {
-      "party_id": 22862,
-      "name": "ALTXSOM",
-      "acronym": null
-    },
-    {
       "party_id": 46851,
       "name": "ALXAN-NC",
       "acronym": null
@@ -2819,11 +2809,6 @@
       "acronym": null
     },
     {
-      "party_id": 5640,
-      "name": "AYTAMOS",
-      "acronym": null
-    },
-    {
       "party_id": 12749,
       "name": "AZK",
       "acronym": null
@@ -3069,11 +3054,6 @@
       "acronym": null
     },
     {
-      "party_id": 53453,
-      "name": "BXD",
-      "acronym": null
-    },
-    {
       "party_id": 68136,
       "name": "BrqddF7PEJ7CTcp6qDzUuOpyU6jcWjG06LWXugs8mB1OW6VH4p1dFhitoZAxQ5dgeM0",
       "acronym": null
@@ -3261,11 +3241,6 @@
     {
       "party_id": 25754,
       "name": "CAM - AM",
-      "acronym": null
-    },
-    {
-      "party_id": 47484,
-      "name": "CAMBA PODE",
       "acronym": null
     },
     {
@@ -4136,16 +4111,6 @@
     {
       "party_id": 37714,
       "name": "CXT-CP",
-      "acronym": null
-    },
-    {
-      "party_id": 37770,
-      "name": "CXVM - CP",
-      "acronym": null
-    },
-    {
-      "party_id": 103072,
-      "name": "Candidatura d'Unitat Popular",
       "acronym": null
     },
     {
@@ -5801,11 +5766,6 @@
     {
       "party_id": 29053,
       "name": "GRIAL",
-      "acronym": null
-    },
-    {
-      "party_id": 3762,
-      "name": "GRINPH",
       "acronym": null
     },
     {
@@ -7486,11 +7446,6 @@
     {
       "party_id": 6904,
       "name": "J.U.E.X.",
-      "acronym": null
-    },
-    {
-      "party_id": 28187,
-      "name": "JCM",
       "acronym": null
     },
     {
@@ -13926,7 +13881,7 @@
       "context": "committee",
       "margin": -240,
       "initiative_id": "congreso:leg15:exp:122/000083/0000",
-      "source_url": "file:///Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/congreso_votaciones_sample.json",
+      "source_url": "",
       "quality": {
         "has_vote_subject": true,
         "has_initiative_link": true,
@@ -26036,6 +25991,30 @@
       "no_vote": 4
     },
     {
+      "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_10_52.xml",
+      "source_bucket": "senado",
+      "vote_date": "2025-05-27",
+      "legislature": "15",
+      "outcome": "passed",
+      "vote_subject": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
+      "topic": "Votaciones por iniciativa (Senado)",
+      "context": "other",
+      "margin": 40,
+      "initiative_id": "senado:leg15:exp:600/000001",
+      "source_url": "etl/data/raw/manual/senado_votaciones_ses/legis15/ses_10.xml",
+      "quality": {
+        "has_vote_subject": true,
+        "has_initiative_link": true,
+        "has_source_url": true,
+        "is_interpretable": true,
+        "missing": []
+      },
+      "yes": 147,
+      "no": 107,
+      "abstain": 5,
+      "no_vote": 1
+    },
+    {
       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion114/20250527/Votacion002/VOT_20250527201601.json",
       "source_bucket": "congreso",
       "vote_date": "2025-05-27",
@@ -30090,30 +30069,6 @@
       "no": 176,
       "abstain": 0,
       "no_vote": 4
-    },
-    {
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion005/VOT_20250313133856.json",
-      "source_bucket": "congreso",
-      "vote_date": "2025-03-13",
-      "legislature": "15",
-      "outcome": "failed",
-      "vote_subject": "Proposición no de Ley del Grupo Parlamentario Popular en el Congreso, para que el Gobierno ejerza de manera efectiva y uniforme sus competencias en materia de inmigración en todo el Estado.",
-      "topic": "derived",
-      "context": "other",
-      "margin": -4,
-      "initiative_id": "congreso:leg15:derived:c720566dd30d96280f703400",
-      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion005/VOT_20250313133856.json",
-      "quality": {
-        "has_vote_subject": true,
-        "has_initiative_link": true,
-        "has_source_url": true,
-        "is_interpretable": true,
-        "missing": []
-      },
-      "yes": 171,
-      "no": 175,
-      "abstain": 0,
-      "no_vote": 4
     }
   ],
   "discipline": {
@@ -30795,11 +30750,11 @@
             "votes": 1589
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -30987,11 +30942,11 @@
             "votes": 1590
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -32867,11 +32822,11 @@
             "votes": 1590
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -32919,11 +32874,11 @@
             "votes": 1593
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -33455,11 +33410,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -33691,11 +33646,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -33975,11 +33930,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -34483,11 +34438,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -34887,11 +34842,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -35555,11 +35510,11 @@
             "votes": 1594
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -35607,11 +35562,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -35707,11 +35662,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -35759,11 +35714,11 @@
             "votes": 1594
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -36952,9 +36907,9 @@
       },
       {
         "person_id": 63,
-        "full_name": "Tomás Cabezón Casas",
-        "party_id": 2,
-        "party_name": "PP",
+        "full_name": "TOMÁS CABEZÓN CASAS",
+        "party_id": 68269,
+        "party_name": "GPP",
         "party_acronym": null,
         "total_votes": 1751,
         "directional_votes": 1568,
@@ -37235,11 +37190,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -38615,11 +38570,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -39039,11 +38994,11 @@
             "votes": 1593
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -39391,11 +39346,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -39495,11 +39450,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -39595,11 +39550,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -39647,11 +39602,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -39795,11 +39750,11 @@
             "votes": 1593
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40127,11 +40082,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40179,11 +40134,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40375,11 +40330,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40475,11 +40430,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40527,11 +40482,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40579,11 +40534,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40679,11 +40634,11 @@
             "votes": 1590
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -40979,11 +40934,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41227,11 +41182,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41375,11 +41330,11 @@
             "votes": 1591
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41475,11 +41430,11 @@
             "votes": 1594
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41527,11 +41482,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41579,11 +41534,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41631,11 +41586,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -41831,11 +41786,11 @@
             "votes": 1592
           },
           {
-            "scope": "congreso:14",
+            "scope": "congreso:all",
             "votes": 1
           },
           {
-            "scope": "congreso:all",
+            "scope": "congreso:14",
             "votes": 1
           }
         ],
@@ -43745,14 +43700,14 @@
       },
       {
         "party_id": 68287,
-        "total_votes": 3438,
-        "directional_votes": 3106,
+        "total_votes": 3437,
+        "directional_votes": 3105,
         "yes": 2264,
-        "no": 842,
+        "no": 841,
         "abstain": 84,
         "no_vote": 248,
         "other": 0,
-        "aligned": 3106,
+        "aligned": 3105,
         "rebels": 0,
         "discipline_rate_pct": 100.0,
         "rebellion_rate_pct": 0.0
@@ -43871,14 +43826,14 @@
       },
       {
         "party_id": 68295,
-        "total_votes": 28,
-        "directional_votes": 28,
+        "total_votes": 29,
+        "directional_votes": 29,
         "yes": 24,
-        "no": 4,
+        "no": 5,
         "abstain": 0,
         "no_vote": 0,
         "other": 0,
-        "aligned": 28,
+        "aligned": 29,
         "rebels": 0,
         "discipline_rate_pct": 100.0,
         "rebellion_rate_pct": 0.0
@@ -45128,8 +45083,8 @@
       {
         "party_id": 68287,
         "scope": "senado:15",
-        "directional_votes": 1094,
-        "aligned": 1094,
+        "directional_votes": 1093,
+        "aligned": 1093,
         "rebels": 0,
         "discipline_rate_pct": 100.0,
         "rebellion_rate_pct": 0.0
@@ -45139,6 +45094,15 @@
         "scope": "senado:15",
         "directional_votes": 74,
         "aligned": 74,
+        "rebels": 0,
+        "discipline_rate_pct": 100.0,
+        "rebellion_rate_pct": 0.0
+      },
+      {
+        "party_id": 68295,
+        "scope": "senado:15",
+        "directional_votes": 1,
+        "aligned": 1,
         "rebels": 0,
         "discipline_rate_pct": 100.0,
         "rebellion_rate_pct": 0.0
@@ -45868,8 +45832,8 @@
       {
         "party_id": 68287,
         "topic": "Votaciones por iniciativa (Senado)",
-        "directional_votes": 3106,
-        "aligned": 3106,
+        "directional_votes": 3105,
+        "aligned": 3105,
         "rebels": 0,
         "discipline_rate_pct": 100.0,
         "rebellion_rate_pct": 0.0
@@ -45904,8 +45868,8 @@
       {
         "party_id": 68295,
         "topic": "Votaciones por iniciativa (Senado)",
-        "directional_votes": 28,
-        "aligned": 28,
+        "directional_votes": 29,
+        "aligned": 29,
         "rebels": 0,
         "discipline_rate_pct": 100.0,
         "rebellion_rate_pct": 0.0
@@ -51304,9 +51268,9 @@
       {
         "party_id": 68287,
         "context": "other",
-        "total_votes": 3307,
+        "total_votes": 3306,
         "yes": 2152,
-        "no": 831,
+        "no": 830,
         "abstain": 84,
         "no_vote": 240,
         "presence_rate_pct": 92.74,
@@ -51458,9 +51422,9 @@
       {
         "party_id": 68295,
         "context": "other",
-        "total_votes": 22,
+        "total_votes": 23,
         "yes": 18,
-        "no": 4,
+        "no": 5,
         "abstain": 0,
         "no_vote": 0,
         "presence_rate_pct": 100.0,
@@ -55036,10 +55000,10 @@
   },
   "outcomes": {
     "summary": {
-      "passed": 1888,
+      "passed": 1889,
       "failed": 6381,
       "tied": 15,
-      "no_signal": 73
+      "no_signal": 72
     },
     "samples": [
       {
@@ -55514,7 +55478,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -55552,7 +55516,7 @@
         "initiative_expediente": "624/000005",
         "initiative_type": "624",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000005",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000005.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56046,7 +56010,7 @@
         "initiative_expediente": "610/000183",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000183.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000183.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56084,7 +56048,7 @@
         "initiative_expediente": "610/000184",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000184.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000184.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56122,7 +56086,7 @@
         "initiative_expediente": "610/000182",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000182.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000182.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56160,7 +56124,7 @@
         "initiative_expediente": "610/000185",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000185.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000185.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56274,7 +56238,7 @@
         "initiative_expediente": "610/000165",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000165.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000165.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56312,7 +56276,7 @@
         "initiative_expediente": "610/000166",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000166.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000166.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56350,7 +56314,7 @@
         "initiative_expediente": "610/000167",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000167.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000167.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56388,7 +56352,7 @@
         "initiative_expediente": "610/000168",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000168.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000168.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56426,7 +56390,7 @@
         "initiative_expediente": "610/000169",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000169.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000169.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56464,7 +56428,7 @@
         "initiative_expediente": "610/000171",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000171.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000171.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56502,7 +56466,7 @@
         "initiative_expediente": "610/000172",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000172.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000172.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56540,7 +56504,7 @@
         "initiative_expediente": "610/000173",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000173.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000173.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56578,7 +56542,7 @@
         "initiative_expediente": "610/000174",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000174.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000174.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56616,7 +56580,7 @@
         "initiative_expediente": "610/000175",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000175.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000175.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56654,7 +56618,7 @@
         "initiative_expediente": "610/000148",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000148.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000148.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56692,7 +56656,7 @@
         "initiative_expediente": "610/000149",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000149.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000149.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56730,7 +56694,7 @@
         "initiative_expediente": "610/000150",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000150.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000150.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56768,7 +56732,7 @@
         "initiative_expediente": "610/000151",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000151.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000151.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56806,7 +56770,7 @@
         "initiative_expediente": "610/000152",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000152.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000152.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56844,7 +56808,7 @@
         "initiative_expediente": "610/000153",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000153.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000153.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56882,7 +56846,7 @@
         "initiative_expediente": "610/000154",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000154.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000154.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56920,7 +56884,7 @@
         "initiative_expediente": "610/000155",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000155.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000155.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56958,7 +56922,7 @@
         "initiative_expediente": "610/000156",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000156.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000156.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -56996,7 +56960,7 @@
         "initiative_expediente": "610/000157",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000157.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000157.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57034,7 +56998,7 @@
         "initiative_expediente": "610/000158",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000158.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000158.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57072,7 +57036,7 @@
         "initiative_expediente": "610/000159",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000159.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000159.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57110,7 +57074,7 @@
         "initiative_expediente": "610/000160",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000160.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000160.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57148,7 +57112,7 @@
         "initiative_expediente": "610/000161",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000161.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000161.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57186,7 +57150,7 @@
         "initiative_expediente": "610/000162",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000162.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000162.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57224,7 +57188,7 @@
         "initiative_expediente": "610/000136",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000136.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000136.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57262,7 +57226,7 @@
         "initiative_expediente": "610/000089",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000089.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000089.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57300,7 +57264,7 @@
         "initiative_expediente": "610/000090",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000090.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000090.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57338,7 +57302,7 @@
         "initiative_expediente": "610/000091",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000091.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000091.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57376,7 +57340,7 @@
         "initiative_expediente": "610/000092",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000092.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000092.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57414,7 +57378,7 @@
         "initiative_expediente": "610/000093",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000093.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000093.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57452,7 +57416,7 @@
         "initiative_expediente": "610/000094",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000094.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000094.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57490,7 +57454,7 @@
         "initiative_expediente": "610/000095",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000095.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000095.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57528,7 +57492,7 @@
         "initiative_expediente": "610/000053",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000053.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000053.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57566,7 +57530,7 @@
         "initiative_expediente": "610/000054",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000054.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000054.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57604,7 +57568,7 @@
         "initiative_expediente": "610/000055",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000055.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000055.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57642,7 +57606,7 @@
         "initiative_expediente": "610/000046",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000046.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000046.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57680,7 +57644,7 @@
         "initiative_expediente": "610/000047",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000047.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000047.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57718,7 +57682,7 @@
         "initiative_expediente": "610/000048",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000048.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000048.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57756,7 +57720,7 @@
         "initiative_expediente": "610/000049",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000049.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000049.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57794,7 +57758,7 @@
         "initiative_expediente": "610/000050",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000050.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000050.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57832,7 +57796,7 @@
         "initiative_expediente": "610/000051",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000051.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000051.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57870,7 +57834,7 @@
         "initiative_expediente": "610/000052",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000052.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000052.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57908,7 +57872,7 @@
         "initiative_expediente": "610/000039",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000039.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000039.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57946,7 +57910,7 @@
         "initiative_expediente": "610/000040",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000040.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000040.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -57984,7 +57948,7 @@
         "initiative_expediente": "610/000041",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000041.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000041.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58022,7 +57986,7 @@
         "initiative_expediente": "610/000042",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000042.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58060,7 +58024,7 @@
         "initiative_expediente": "610/000043",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000043.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000043.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58098,7 +58062,7 @@
         "initiative_expediente": "610/000044",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000044.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000044.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58136,7 +58100,7 @@
         "initiative_expediente": "610/000034",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000034.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000034.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58174,7 +58138,7 @@
         "initiative_expediente": "610/000035",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000035.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000035.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58212,7 +58176,7 @@
         "initiative_expediente": "610/000036",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000036.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000036.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58250,7 +58214,7 @@
         "initiative_expediente": "610/000037",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000037.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000037.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58288,7 +58252,7 @@
         "initiative_expediente": "610/000038",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000038.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000038.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -58326,45 +58290,7 @@
         "initiative_expediente": "610/000001",
         "initiative_type": "610",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=10",
-        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/xml/INI-3-610000001.xml",
-        "initiative_link_method": "leg_expediente_payload_exact",
-        "initiative_link_confidence": 1.0,
-        "quality": {
-          "has_vote_subject": true,
-          "has_initiative_link": true,
-          "has_source_url": true,
-          "is_interpretable": true,
-          "missing": []
-        },
-        "outcome": "no_signal",
-        "totals": {
-          "yes": 0,
-          "no": 0,
-          "abstain": 0,
-          "no_vote": 0,
-          "present": 0,
-          "margin": 0,
-          "total_signal": 0
-        },
-        "pivotal_parties": []
-      },
-      {
-        "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_10_52.xml",
-        "source_bucket": "senado",
-        "source_id": "senado_votaciones",
-        "source_url": "file:///Users/jesus/Library/CloudStorage/GoogleDrive-gsus123456@gmail.com/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/senado_votaciones_sample.xml",
-        "vote_date": "",
-        "legislature": "15",
-        "title": "Votación final sobre el conjunto",
-        "vote_subject": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
-        "topic": "Votaciones por iniciativa (Senado)",
-        "context": "other",
-        "initiative_id": "senado:leg15:exp:600/000001",
-        "initiative_title": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
-        "initiative_expediente": "600/000001",
-        "initiative_type": "600",
-        "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
-        "initiative_doc_url": "https://www.senado.es/legis15/expedientes/600/enmiendas/global_enmiendas_vetos_15_600000001.xml",
+        "initiative_doc_url": "http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000001.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -61347,7 +61273,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -61440,7 +61366,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -61524,7 +61450,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -61617,7 +61543,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -61692,7 +61618,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -63773,7 +63699,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -63866,7 +63792,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -63959,7 +63885,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -64052,7 +63978,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -64145,7 +64071,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -64238,7 +64164,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -64331,7 +64257,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66121,7 +66047,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66205,7 +66131,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66280,7 +66206,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66355,7 +66281,7 @@
         "initiative_expediente": "621/000040",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000040",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000040.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66439,7 +66365,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66505,7 +66431,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -66656,7 +66582,7 @@
         "initiative_expediente": "621/000010",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=12",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=621&id2=000010",
+        "initiative_doc_url": "http://www.senado.es/legis12/expedientes/621/enmiendas/global_enmiendas_vetos_12_621000010.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -71628,7 +71554,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -71694,7 +71620,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -71760,7 +71686,7 @@
         "initiative_expediente": "621/000040",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000040",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000040.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -71844,7 +71770,7 @@
         "initiative_expediente": "621/000027",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000027",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000027.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -71928,7 +71854,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -71994,7 +71920,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -72078,7 +72004,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -76602,7 +76528,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -76659,7 +76585,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -76734,7 +76660,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -76809,7 +76735,7 @@
         "initiative_expediente": "621/000013",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000013",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000013.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -84337,7 +84263,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -84412,7 +84338,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -84478,7 +84404,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -84535,7 +84461,7 @@
         "initiative_expediente": "621/000023",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000023",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000023.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -84601,7 +84527,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -91707,7 +91633,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -91773,7 +91699,7 @@
         "initiative_expediente": "621/000010",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000010",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000010.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -95512,7 +95438,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -95578,7 +95504,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -95635,7 +95561,7 @@
         "initiative_expediente": "621/000015",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000015",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000015.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -97520,6 +97446,63 @@
             "no_vote": 2
           }
         ]
+      },
+      {
+        "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_65_3905.xml",
+        "source_bucket": "senado",
+        "source_id": "senado_votaciones",
+        "source_url": "etl/data/raw/manual/senado_votaciones_ses/legis14/ses_65.xml",
+        "vote_date": "2023-02-22",
+        "legislature": "14",
+        "title": "Enmienda número 26. Autor/es: ASSUMPCIÓ CASTELLVÍ AUVÍ, JOSEP LLUÍS CLERIES I GONZÀLEZ (GRUPO PARLAMENTARIO NACIONALISTA EN EL SENADO JUNTS PER CATALUNYA-COALICIÓN CANARIA/PARTIDO NACIONALISTA CANARIO)",
+        "vote_subject": "Proyecto de Ley Orgánica del Sistema Universitario. (621/000080)",
+        "topic": "Votaciones por iniciativa (Senado)",
+        "context": "other",
+        "initiative_id": "senado:leg14:exp:621/000080",
+        "initiative_title": "Proyecto de Ley Orgánica del Sistema Universitario. (621/000080)",
+        "initiative_expediente": "621/000080",
+        "initiative_type": "621",
+        "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000080.xml",
+        "initiative_link_method": "leg_expediente_payload_exact",
+        "initiative_link_confidence": 1.0,
+        "quality": {
+          "has_vote_subject": true,
+          "has_initiative_link": true,
+          "has_source_url": true,
+          "is_interpretable": true,
+          "missing": []
+        },
+        "outcome": "passed",
+        "totals": {
+          "yes": 121,
+          "no": 112,
+          "abstain": 21,
+          "no_vote": 5,
+          "present": 259,
+          "margin": 9,
+          "total_signal": 233
+        },
+        "pivotal_parties": [
+          {
+            "party_id": 68269,
+            "swing_if_removed": 20,
+            "party_diff": 29,
+            "yes": 29,
+            "no": 0,
+            "abstain": 0,
+            "no_vote": 0
+          },
+          {
+            "party_id": 68282,
+            "swing_if_removed": 60,
+            "party_diff": 69,
+            "yes": 69,
+            "no": 0,
+            "abstain": 0,
+            "no_vote": 3
+          }
+        ]
       }
     ],
     "critical_by_margin": [
@@ -97995,7 +97978,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -98033,7 +98016,7 @@
         "initiative_expediente": "624/000005",
         "initiative_type": "624",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000005",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/624/enmiendas/global_enmiendas_vetos_14_624000005.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -101054,7 +101037,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -101147,7 +101130,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -101231,7 +101214,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -101324,7 +101307,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -101399,7 +101382,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -103480,7 +103463,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -103573,7 +103556,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -103666,7 +103649,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -103759,7 +103742,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -103852,7 +103835,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -103945,7 +103928,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -104038,7 +104021,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -105828,7 +105811,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -105912,7 +105895,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -105987,7 +105970,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -106062,7 +106045,7 @@
         "initiative_expediente": "621/000040",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000040",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000040.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -106146,7 +106129,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -106212,7 +106195,7 @@
         "initiative_expediente": "621/000029",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000029",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000029.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -106363,7 +106346,7 @@
         "initiative_expediente": "621/000010",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=12",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=621&id2=000010",
+        "initiative_doc_url": "http://www.senado.es/legis12/expedientes/621/enmiendas/global_enmiendas_vetos_12_621000010.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111335,7 +111318,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111401,7 +111384,7 @@
         "initiative_expediente": "621/000042",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000042",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000042.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111467,7 +111450,7 @@
         "initiative_expediente": "621/000040",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000040",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000040.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111551,7 +111534,7 @@
         "initiative_expediente": "621/000027",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000027",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000027.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111635,7 +111618,7 @@
         "initiative_expediente": "621/000021",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000021",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000021.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111701,7 +111684,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
@@ -111785,7 +111768,7 @@
         "initiative_expediente": "621/000014",
         "initiative_type": "621",
         "initiative_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
-        "initiative_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000014",
+        "initiative_doc_url": "https://www.senado.es/legis14/expedientes/621/enmiendas/global_enmiendas_vetos_14_621000014.xml",
         "initiative_link_method": "leg_expediente_payload_exact",
         "initiative_link_confidence": 1.0,
         "quality": {
