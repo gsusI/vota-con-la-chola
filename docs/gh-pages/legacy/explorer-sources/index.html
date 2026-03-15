@@ -933,6 +933,21 @@
             </p>
           </div>
         </details>
+        <details class="content details-block" id="panel-coverage-capacity" open>
+          <summary>
+            <span class="details-title">
+              <strong>North-Star Coverage</strong>
+              <small>Denominadores acotados por dimensión para medir cuánto del universo ideal ya está descubierto, descargado, procesado o enlazado.</small>
+            </span>
+          </summary>
+          <div class="details-body">
+            <div id="coverage-capacity-summary" class="sub" style="margin:0 0 8px"></div>
+            <div id="coverage-capacity-dashboard" class="scope-grid"></div>
+            <p class="sub" style="margin:10px 0 0">
+              Fuente de verdad: <span class="mono">docs/coverage_capacity_model.json</span> y métricas reales de <span class="mono">/api/sources/status</span>.
+            </p>
+          </div>
+        </details>
         <div class="toolbar">
           <select id="view-mode">
             <option value="ops">Vista: Operación (hoy)</option>
@@ -1042,6 +1057,7 @@
         <div class="details-body">
           <ul class="list">
             <li><strong>Progreso (metas mínimas):</strong> suma de <span class="mono">min_records_loaded_strict</span> por fuente objetivo (si aplica).</li>
+            <li><strong>North-Star coverage:</strong> usa unidades acotadas por dimensión; no suma filas heterogéneas para el % global, sino promedios ponderados por celda.</li>
             <li><strong>Estado operativo:</strong> deriva de ejecuciones registradas y umbral mínimo (ok, partial, error, not_run...).</li>
             <li><strong>Roadmap (sin conector):</strong> items del tracker sin <span class="mono">source_id</span> todavía, con ámbito inferido cuando es posible.</li>
             <li><strong>Analítica (temas/posiciones):</strong> contadores y % de calidad para <span class="mono">topics</span>, <span class="mono">topic_evidence</span>, <span class="mono">topic_evidence_reviews</span> y <span class="mono">topic_positions</span> (si existen en la BD).</li>
@@ -1073,6 +1089,8 @@
         roadmapTechSummary: document.getElementById("roadmap-tech-summary"),
         roadmapTechDashboard: document.getElementById("roadmap-tech-dashboard"),
         roadmapTechKpis: document.getElementById("roadmap-tech-kpis"),
+        coverageCapacitySummary: document.getElementById("coverage-capacity-summary"),
+        coverageCapacityDashboard: document.getElementById("coverage-capacity-dashboard"),
         campaignMap: document.getElementById("campaign-map"),
         campaignAt: document.getElementById("campaign-at"),
         scopeDashboard: document.getElementById("scope-dashboard"),
@@ -1733,6 +1751,144 @@
             );
           }).join("")
           : "<div class='muted'>Sin KPIs de programa para mostrar.</div>";
+      }
+
+      function coverageStageLabel(value) {
+        const normalized = String(value || "").toLowerCase();
+        const map = {
+          discoverable: "discoverable",
+          downloaded: "downloaded",
+          processed: "processed",
+          linked: "linked",
+          published: "published",
+        };
+        return map[normalized] || normalized || "processed";
+      }
+
+      function coverageDenominatorPill(value) {
+        const normalized = String(value || "").toLowerCase();
+        if (normalized === "ok") {
+          return "<span class='pill ok'>denominator: ok</span>";
+        }
+        if (normalized === "proxy") {
+          return "<span class='pill warn'>denominator: proxy</span>";
+        }
+        return "<span class='pill muted'>denominator: missing</span>";
+      }
+
+      function renderCoverageCapacityDashboard(data) {
+        if (!nodes.coverageCapacitySummary || !nodes.coverageCapacityDashboard) return;
+        const payload = data.coverage_capacity || {};
+        const summary = payload.summary || {};
+        const cells = Array.isArray(payload.cells) ? payload.cells : [];
+        const byScope = Array.isArray(payload.by_scope) ? payload.by_scope : [];
+        const byDomain = Array.isArray(payload.by_domain) ? payload.by_domain : [];
+        const families = Array.isArray(payload.families) ? payload.families : [];
+        const weightedPercent = summary.weighted_percent;
+        const cellsWithDenominator = Number(summary.cells_with_denominator || 0);
+        const cellsTotal = Number(summary.cells_total || 0);
+        const blockedCells = Number(summary.blocked_cells || 0);
+        const denominatorGaps = Number(summary.denominator_gaps || 0);
+
+        const scopeSummary = byScope
+          .map((row) => {
+            if (row.weighted_percent === null || row.weighted_percent === undefined) return "";
+            return String(row.label || row.key || "scope") + ": " + String(row.weighted_percent) + "%";
+          })
+          .filter(Boolean)
+          .slice(0, 4)
+          .join(" · ");
+
+        const domainSummary = byDomain
+          .map((row) => {
+            if (row.weighted_percent === null || row.weighted_percent === undefined) return "";
+            return String(row.label || row.key || "domain") + ": " + String(row.weighted_percent) + "%";
+          })
+          .filter(Boolean)
+          .slice(0, 4)
+          .join(" · ");
+
+        const familySummary = families
+          .map((row) => {
+            if (row.weighted_percent === null || row.weighted_percent === undefined) return "";
+            return String(row.label || row.key || "family") + ": " + String(row.weighted_percent) + "%";
+          })
+          .filter(Boolean)
+          .slice(0, 4)
+          .join(" · ");
+
+        nodes.coverageCapacitySummary.innerHTML =
+          "<span class='muted'>Cobertura north-star:</span> " +
+          "<strong>" + (weightedPercent === null || weightedPercent === undefined ? "—" : (String(weightedPercent) + "%")) + "</strong>" +
+          " <span class='muted'>(promedio ponderado por celda)</span>" +
+          " · <span class='mono muted'>" + cellsWithDenominator + "/" + cellsTotal + "</span> celdas con denominador" +
+          " · <span class='muted'>bloqueadas:</span> <strong>" + blockedCells + "</strong>" +
+          " · <span class='muted'>gaps:</span> <strong>" + denominatorGaps + "</strong>" +
+          (scopeSummary ? " · <span class='muted'>" + scopeSummary + "</span>" : "") +
+          (domainSummary ? " · <span class='muted'>" + domainSummary + "</span>" : "") +
+          (familySummary ? " · <span class='muted'>" + familySummary + "</span>" : "");
+
+        if (!cells.length) {
+          nodes.coverageCapacityDashboard.innerHTML = "<div class='muted'>Coverage capacity no disponible en /api/sources/status.</div>";
+          return;
+        }
+
+        nodes.coverageCapacityDashboard.innerHTML = cells
+          .slice()
+          .sort((a, b) => {
+            const ap = (a.primary_percent === null || a.primary_percent === undefined) ? -1 : Number(a.primary_percent);
+            const bp = (b.primary_percent === null || b.primary_percent === undefined) ? -1 : Number(b.primary_percent);
+            if (ap !== bp) return ap - bp;
+            return String(a.label || a.id || "").localeCompare(String(b.label || b.id || ""));
+          })
+          .map((cell) => {
+            const stages = cell.stages || {};
+            const primaryStage = String(cell.primary_stage || "processed");
+            const primaryTotal = Number(cell.primary_total || 0);
+            const idealTotal = Number(cell.ideal_total || 0);
+            const primaryPercent = cell.primary_percent;
+            const meter = (primaryPercent === null || primaryPercent === undefined) ? 0 : Math.max(0, Math.min(100, Number(primaryPercent)));
+            const blockedSources = Array.isArray(cell.blocked_sources) ? cell.blocked_sources : [];
+            const stageLine = [
+              "discoverable: " + Number(stages.discoverable || 0),
+              "downloaded: " + Number(stages.downloaded || 0),
+              "processed: " + Number(stages.processed || 0),
+              "linked: " + Number(stages.linked || 0),
+              "published: " + Number(stages.published || 0),
+            ].join(" · ");
+            const metaBits = [
+              cell.scope ? "<span class='mono'>" + String(cell.scope) + "</span>" : "",
+              cell.evidence_kind ? "<span class='mono'>" + String(cell.evidence_kind) + "</span>" : "",
+              cell.unit_type ? "<span class='mono'>" + String(cell.unit_type) + "</span>" : "",
+            ].filter(Boolean).join(" · ");
+            const blockedLine = blockedSources.length
+              ? "<div class='small muted'>Bloqueadas: " + blockedSources.join(", ") + "</div>"
+              : "";
+            const gapLine = cell.gap_reason
+              ? "<div class='small muted'>Gap: " + String(cell.gap_reason) + "</div>"
+              : "";
+            return (
+              "<article class='scope-card'>" +
+              "<div class='scope-head'>" +
+              "<div class='scope-title'>" + String(cell.label || cell.id || "Coverage cell") + "</div>" +
+              "<div class='scope-meta'>" + metaBits + "</div>" +
+              "</div>" +
+              "<div class='row'><span class='muted'>Stage principal</span><span class='mono'>" +
+              coverageStageLabel(primaryStage) + ": " + primaryTotal + "/" + idealTotal +
+              (primaryPercent === null || primaryPercent === undefined ? "" : (" (" + String(primaryPercent) + "%)")) +
+              "</span></div>" +
+              "<div class='meter'><span style='width:" + meter + "%'></span></div>" +
+              "<div class='small' style='margin-top:8px'>" + coverageDenominatorPill(cell.denominator_status) +
+              (cell.blocked ? " <span class='pill warn'>blocked</span>" : "") +
+              "</div>" +
+              "<div class='small muted' style='margin-top:8px'>" + stageLine + "</div>" +
+              (cell.notes ? "<div class='small muted' style='margin-top:8px'>" + String(cell.notes) + "</div>" : "") +
+              blockedLine +
+              gapLine +
+              "</article>"
+            );
+          })
+          .join("");
       }
 
       function safeNum(x, fallback = 0) {
@@ -2559,6 +2715,7 @@
           renderGlobalProgress(payload);
           renderRoadmapDashboard(payload);
           renderRoadmapTechnicalDashboard(payload);
+          renderCoverageCapacityDashboard(payload);
           renderCampaignMap(payload, idealPayload);
           fillAdvancedFilters(payload);
           nodes.refreshAt.textContent = "Actualizado: " + formatDate(payload.generated_at || "");
