@@ -1,15 +1,19 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import gzip
 import json
 import html as html_lib
+import os
 import random
 import re
+import shutil
 import sqlite3
+import subprocess
 import time
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote, unquote, urlparse
+from urllib.parse import parse_qsl, quote, unquote, urlencode, urlparse, urlunparse
 
 from etl.politicos_es.util import normalize_ws, now_utc_iso, sha256_bytes, stable_json
 
@@ -30,6 +34,11 @@ _SENADO_GLOBAL_ENMIENDAS_RE = re.compile(
     r"global_enmiendas_vetos_\d+_(?P<num>\d{9})\.xml$",
     re.I,
 )
+_SENADO_INI_XML_PATH_RE = re.compile(
+    r"^/(?P<legis>legis\d+)/expedientes/(?P<tipo>\d+)/xml/"
+    r"INI-3-(?P<num>\d{9})\.xml$",
+    re.I,
+)
 
 
 INITIATIVE_DOC_SOURCE_ID = "parl_initiative_docs"
@@ -46,11 +55,127 @@ class HTTPStatusError(RuntimeError):
         self.code = int(code)
 
 
+def _normalize_archive_fallback_http_statuses(
+    values: tuple[int, ...] | list[int] | None,
+) -> tuple[int, ...]:
+    if values is None:
+        return tuple(int(v) for v in _ARCHIVE_FALLBACK_HTTP_STATUSES_DEFAULT)
+    parsed: list[int] = []
+    seen: set[int] = set()
+    for raw in values:
+        try:
+            code = int(raw)
+        except Exception:  # noqa: BLE001
+            continue
+        if code < 100 or code > 599 or code in seen:
+            continue
+        seen.add(code)
+        parsed.append(code)
+    if parsed:
+        return tuple(parsed)
+    return tuple(int(v) for v in _ARCHIVE_FALLBACK_HTTP_STATUSES_DEFAULT)
+
+
+def _normalize_http_status_filter(
+    values: tuple[int, ...] | list[int] | None,
+) -> tuple[int, ...]:
+    if not values:
+        return tuple()
+    parsed: list[int] = []
+    seen: set[int] = set()
+    for raw in values:
+        try:
+            code = int(raw)
+        except Exception:  # noqa: BLE001
+            continue
+        if ((code != 0) and (code < 100 or code > 599)) or code in seen:
+            continue
+        seen.add(code)
+        parsed.append(code)
+    return tuple(parsed)
+
+
 @dataclass(frozen=True)
 class _PlaywrightFetchConfig:
     user_data_dir: str
     channel: str = "chrome"
     headless: bool = False
+
+
+def _command_exit_code(argv: list[str], *, timeout_seconds: int = 10) -> int | None:
+    try:
+        proc = subprocess.run(
+            argv,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=max(1, int(timeout_seconds)),
+            check=False,
+        )
+        return int(proc.returncode)
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _sanitize_runtime_path_for_public(path_value: str) -> str | None:
+    token = normalize_ws(str(path_value or ""))
+    if not token:
+        return None
+    lowered = token.lower()
+    if token.startswith("/") or re.match(r"^[A-Za-z]:[\\\\/]", token):
+        name = Path(token).name or "node"
+        return f"<abs>/{name}"
+    if lowered.startswith("file://"):
+        try:
+            parsed = urlparse(token)
+            name = Path(unquote(parsed.path)).name or "node"
+        except Exception:  # noqa: BLE001
+            name = "node"
+        return f"<uri>/{name}"
+    return token
+
+
+def _ensure_playwright_nodejs_runtime(playwright_pkg_dir: Path) -> dict[str, Any]:
+    """Prefer system Node when bundled Playwright driver is unhealthy.
+
+    Some environments hit `driver/node` crashes (e.g. rc=-9), which then make
+    `sync_playwright().start()` fail with opaque `_playwright` attribute errors.
+    """
+
+    env_node_raw = normalize_ws(str(os.environ.get("PLAYWRIGHT_NODEJS_PATH") or ""))
+    env_node_public = _sanitize_runtime_path_for_public(env_node_raw)
+    meta: dict[str, Any] = {
+        "fallback_applied": False,
+        "effective_nodejs_path": env_node_public,
+        "driver_node_path": "playwright/driver/node",
+        "driver_node_rc": None,
+        "system_node_path": None,
+        "system_cli_rc": None,
+    }
+    if env_node_raw:
+        return meta
+
+    driver_node = playwright_pkg_dir / "driver" / "node"
+    driver_cli = playwright_pkg_dir / "driver" / "package" / "cli.js"
+    system_node_raw = normalize_ws(str(shutil.which("node") or ""))
+    system_node_public = _sanitize_runtime_path_for_public(system_node_raw)
+
+    meta["system_node_path"] = system_node_public
+    driver_rc = _command_exit_code([str(driver_node), "--version"]) if driver_node.exists() else None
+    cli_rc = (
+        _command_exit_code([system_node_raw, str(driver_cli), "--version"])
+        if system_node_raw and driver_cli.exists()
+        else None
+    )
+    meta["driver_node_rc"] = driver_rc
+    meta["system_cli_rc"] = cli_rc
+
+    bundled_unhealthy = (not driver_node.exists()) or (driver_rc is None) or (int(driver_rc) != 0)
+    if bundled_unhealthy and system_node_raw and cli_rc == 0:
+        os.environ["PLAYWRIGHT_NODEJS_PATH"] = system_node_raw
+        meta["fallback_applied"] = True
+        meta["effective_nodejs_path"] = system_node_public
+    return meta
 
 
 class _PlaywrightFetcher:
@@ -66,10 +191,12 @@ class _PlaywrightFetcher:
         self._ctx = None
         self._page = None
         self._warmed = False
+        self.runtime_meta: dict[str, Any] = {}
 
     def __enter__(self) -> "_PlaywrightFetcher":
         try:
             from playwright.sync_api import sync_playwright  # type: ignore
+            import playwright as playwright_pkg  # type: ignore
         except Exception as exc:  # noqa: BLE001
             raise RuntimeError(
                 "Playwright no disponible. Instala:\n"
@@ -77,23 +204,40 @@ class _PlaywrightFetcher:
                 "  python3 -m playwright install chromium\n"
             ) from exc
 
-        self._pw = sync_playwright().start()
-        self._ctx = self._pw.chromium.launch_persistent_context(
-            user_data_dir=self.cfg.user_data_dir,
-            headless=bool(self.cfg.headless),
-            channel=self.cfg.channel or None,
-            accept_downloads=True,
-            locale="es-ES",
-            timezone_id="Europe/Madrid",
-            viewport={"width": 1280, "height": 800},
-            args=["--no-default-browser-check"],
-        )
-        self._page = self._ctx.new_page()
         try:
-            self._page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
-        except Exception:  # noqa: BLE001
-            pass
-        return self
+            pkg_path = Path(str(playwright_pkg.__file__)).resolve().parent
+            self.runtime_meta = _ensure_playwright_nodejs_runtime(pkg_path)
+            self._pw = sync_playwright().start()
+            self._ctx = self._pw.chromium.launch_persistent_context(
+                user_data_dir=self.cfg.user_data_dir,
+                headless=bool(self.cfg.headless),
+                channel=self.cfg.channel or None,
+                accept_downloads=True,
+                locale="es-ES",
+                timezone_id="Europe/Madrid",
+                viewport={"width": 1280, "height": 800},
+                args=["--no-default-browser-check"],
+            )
+            self._page = self._ctx.new_page()
+            try:
+                self._page.set_extra_http_headers({"Accept-Language": "es-ES,es;q=0.9,en;q=0.8"})
+            except Exception:  # noqa: BLE001
+                pass
+            if not self.runtime_meta:
+                self.runtime_meta = {}
+            self.runtime_meta.setdefault(
+                "effective_nodejs_path",
+                _sanitize_runtime_path_for_public(os.environ.get("PLAYWRIGHT_NODEJS_PATH") or ""),
+            )
+            return self
+        except Exception as exc:  # noqa: BLE001
+            # Avoid leaving a half-open Playwright runtime that would break
+            # subsequent fetches with cryptic assertion errors.
+            self.__exit__(None, None, None)
+            if not self.runtime_meta:
+                self.runtime_meta = {}
+            self.runtime_meta["startup_error"] = f"{type(exc).__name__}: {exc}"
+            raise RuntimeError(f"playwright init failed: {type(exc).__name__}: {exc}") from exc
 
     def __exit__(self, exc_type, exc, tb) -> None:  # noqa: ANN001
         try:
@@ -119,19 +263,31 @@ class _PlaywrightFetcher:
         timeout_seconds: int,
         headers: dict[str, str] | None = None,
     ) -> tuple[bytes, str | None]:
-        assert self._ctx is not None
-        assert self._page is not None
+        if self._ctx is None or self._page is None:
+            raise RuntimeError("playwright fetcher no inicializado")
 
         timeout_ms = int(timeout_seconds) * 1000
 
         # Warm the browser session once to establish any clearance cookie/state.
-        # Without this, some senado.es endpoints return 403 even with a persisted profile.
+        # This is best-effort: if warmup fails we still try direct request once.
+        # Some environments return 403 on warmup seed but can still serve target URLs.
         if not self._warmed:
+            self.runtime_meta["warmup_attempted"] = True
             seed = "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=610&id2=000002"
-            resp_seed = self._page.goto(seed, wait_until="domcontentloaded", timeout=timeout_ms)
-            if resp_seed is None or int(resp_seed.status) >= 400:
-                st = int(resp_seed.status) if resp_seed is not None else 0
-                raise HTTPStatusError(st or 599, f"warmup failed (playwright) status={st}")
+            warmup_status: int | None = None
+            warmup_error: str | None = None
+            try:
+                resp_seed = self._page.goto(seed, wait_until="domcontentloaded", timeout=timeout_ms)
+                if resp_seed is not None:
+                    warmup_status = int(resp_seed.status)
+            except Exception as exc:  # noqa: BLE001
+                warmup_error = f"{type(exc).__name__}: {exc}"
+            self.runtime_meta["warmup_status"] = warmup_status
+            self.runtime_meta["warmup_error"] = warmup_error
+            self.runtime_meta["warmup_ok"] = bool(warmup_status is not None and warmup_status < 400)
+            self.runtime_meta["warmup_soft_failed"] = bool(
+                warmup_error is not None or warmup_status is None or warmup_status >= 400
+            )
             self._warmed = True
 
         req_headers = dict(headers or {})
@@ -140,6 +296,7 @@ class _PlaywrightFetcher:
 
         resp = self._ctx.request.get(url, headers=req_headers or None, timeout=timeout_ms)
         status = int(resp.status)
+        self.runtime_meta["last_fetch_status"] = status
         if status >= 400:
             raise HTTPStatusError(status, f"HTTP {status} (playwright)")
         try:
@@ -288,6 +445,15 @@ def _dedupe_keep_order(values: list[str]) -> list[str]:
     return out
 
 
+def _maybe_decompress_gzip_payload(payload: bytes) -> bytes:
+    if not payload.startswith(b"\x1f\x8b"):
+        return payload
+    try:
+        return gzip.decompress(payload)
+    except Exception:
+        return payload
+
+
 def _exception_http_status(exc: Exception) -> int | None:
     if hasattr(exc, "code"):
         try:
@@ -335,6 +501,26 @@ def _derive_senado_ini_url_from_global_enmiendas(url: str) -> str | None:
     return f"{scheme}://www.senado.es/{legis}/expedientes/{tipo}/xml/INI-3-{num}.xml"
 
 
+def _senado_bocg_url_priority(url: str) -> tuple[int, str]:
+    token = _canonical_url(url).lower()
+    if not token:
+        return (9, "")
+    if "/publicaciones/pdf/senado/bocg/" in token:
+        return (0, token)
+    if "/xml/ini-3-" in token:
+        return (1, token)
+    if "global_enmiendas_vetos_" in token:
+        return (2, token)
+    if "ficopendataservlet" in token and "tipofich=3" in token:
+        return (3, token)
+    return (4, token)
+
+
+def _prioritize_senado_bocg_urls(urls: list[str]) -> list[str]:
+    ordered = _dedupe_keep_order(urls)
+    return sorted(ordered, key=_senado_bocg_url_priority)
+
+
 def _lookup_wayback_candidates(
     original_url: str,
     *,
@@ -371,6 +557,141 @@ def _lookup_wayback_candidates(
     if closest_url:
         candidates.append(closest_url)
     return _dedupe_keep_order(candidates), timestamp
+
+
+def _senado_identity_from_url(parsed: Any) -> tuple[str, str, str] | None:
+    if not parsed:
+        return None
+    host = normalize_ws(str(getattr(parsed, "netloc", "") or "")).lower()
+    if not host.endswith("senado.es"):
+        return None
+    try:
+        query = parse_qsl(str(getattr(parsed, "query", "") or ""), keep_blank_values=True)
+    except Exception:  # noqa: BLE001
+        query = []
+    qmap: dict[str, str] = {}
+    for k, v in query:
+        key = normalize_ws(str(k or ""))
+        if not key or key in qmap:
+            continue
+        qmap[key] = normalize_ws(str(v or ""))
+    legis = normalize_ws(str(qmap.get("legis") or ""))
+    tipo_ex = normalize_ws(str(qmap.get("tipoEx") or qmap.get("id1") or ""))
+    num_ex = normalize_ws(str(qmap.get("numEx") or qmap.get("id2") or ""))
+    if not legis or not tipo_ex or not num_ex:
+        path = normalize_ws(str(getattr(parsed, "path", "") or ""))
+        m = _SENADO_INI_XML_PATH_RE.match(path)
+        if m:
+            legis_token = normalize_ws(str(m.group("legis") or ""))
+            tipo_token = normalize_ws(str(m.group("tipo") or ""))
+            num_token = normalize_ws(str(m.group("num") or ""))
+            legis_digits_match = re.search(r"(\d+)$", legis_token)
+            legis = normalize_ws(str(legis_digits_match.group(1) if legis_digits_match else ""))
+            tipo_ex = tipo_token
+            if num_token.startswith(tipo_token) and len(num_token) > len(tipo_token):
+                num_ex = normalize_ws(num_token[len(tipo_token) :])
+            else:
+                num_ex = num_token
+    if not legis or not tipo_ex or not num_ex:
+        return None
+    if not legis.isdigit() or not tipo_ex.isdigit() or not num_ex.isdigit():
+        return None
+    return legis, tipo_ex, num_ex
+
+
+def _senado_family_probe_urls(seed_url: str) -> list[str]:
+    base = _canonical_url(seed_url)
+    if not base:
+        return []
+    parsed = urlparse(base)
+    ident = _senado_identity_from_url(parsed)
+    if ident is None:
+        return []
+    legis, tipo_ex, num_ex = ident
+    scheme = normalize_ws(str(parsed.scheme or "")).lower() or "https"
+    host = normalize_ws(str(parsed.netloc or "")).lower()
+    if not host:
+        return []
+    base_prefix = f"{scheme}://{host}"
+    return _dedupe_keep_order(
+        [
+            (
+                f"{base_prefix}/web/actividadparlamentaria/iniciativas/"
+                f"detalleiniciativa/index.html?legis={legis}&id1={tipo_ex}&id2={num_ex}"
+            ),
+            f"{base_prefix}/web/ficopendataservlet?legis={legis}&tipoFich=3&tipoEx={tipo_ex}&numEx={num_ex}",
+            f"{base_prefix}/web/ficopendataservlet?legis={legis}&tipoFich=12&tipoEx={tipo_ex}&numEx={num_ex}",
+        ]
+    )
+
+
+def _senado_direct_variant_urls(original_url: str) -> list[str]:
+    """Direct-fetch variant URLs for Senado initiative endpoint families."""
+    base = _canonical_url(original_url)
+    if not base:
+        return []
+    parsed = urlparse(base)
+    host = normalize_ws(str(parsed.netloc or "")).lower()
+    if not host.endswith("senado.es"):
+        return []
+    out: list[str] = []
+    for raw in _senado_family_probe_urls(base):
+        candidate = _canonical_url(raw)
+        if not candidate or candidate == base:
+            continue
+        out.append(candidate)
+    return _dedupe_keep_order(out)
+
+
+def _archive_lookup_probe_urls(original_url: str) -> list[str]:
+    """Return deterministic URL probes to improve Wayback hit-rate for Senado URLs."""
+    base = _canonical_url(original_url)
+    if not base:
+        return []
+    parsed = urlparse(base)
+    if not parsed.scheme or not parsed.netloc:
+        return [base]
+
+    out: list[str] = [base]
+    host = normalize_ws(str(parsed.netloc or "")).lower()
+    is_senado = host.endswith("senado.es")
+
+    if is_senado and parsed.scheme in {"http", "https"}:
+        alt_scheme = "https" if parsed.scheme == "http" else "http"
+        out.append(urlunparse(parsed._replace(scheme=alt_scheme)))
+
+    # Keep host/scheme variants bounded and deterministic to avoid noisy probes.
+    if is_senado:
+        base_host = host[4:] if host.startswith("www.") else host
+        host_variants = [base_host]
+        if base_host and not base_host.startswith("www."):
+            host_variants.append(f"www.{base_host}")
+        for hv in host_variants:
+            if not hv:
+                continue
+            if hv != host:
+                out.append(urlunparse(parsed._replace(netloc=hv)))
+            if parsed.scheme in {"http", "https"}:
+                alt_scheme = "https" if parsed.scheme == "http" else "http"
+                out.append(urlunparse(parsed._replace(netloc=hv, scheme=alt_scheme)))
+
+    if parsed.query:
+        try:
+            parts = parse_qsl(parsed.query, keep_blank_values=True)
+        except Exception:  # noqa: BLE001
+            parts = []
+        if parts:
+            sorted_query = urlencode(sorted(parts), doseq=True)
+            if sorted_query and sorted_query != parsed.query:
+                out.append(urlunparse(parsed._replace(query=sorted_query)))
+
+    # For Senado, probe both endpoint families (detalleiniciativa/ficopendataservlet)
+    # because Wayback coverage is often sparse and asymmetric between them.
+    if is_senado:
+        for seed in list(out):
+            out.extend(_senado_family_probe_urls(seed))
+
+    return _dedupe_keep_order(out)
 
 
 def _page_hint_from_url(url: str) -> int | None:
@@ -944,9 +1265,13 @@ def backfill_initiative_documents_from_parl_initiatives(
     snapshot_date: str | None = None,
     limit_initiatives: int = 200,
     max_docs_per_initiative: int = 3,
+    selected_doc_urls: tuple[str, ...] | list[str] | None = None,
+    selected_doc_status_by_url: dict[str, int] | None = None,
+    selected_doc_entry_keys: tuple[tuple[str, str, str], ...] | list[tuple[str, str, str]] | None = None,
     only_linked_to_votes: bool = True,
     only_missing: bool = True,
     retry_forbidden: bool = False,
+    retry_http_statuses: tuple[int, ...] | list[int] | None = None,
     sleep_seconds: float = 0.0,
     sleep_jitter_seconds: float = 0.0,
     cookie: str | None = None,
@@ -954,6 +1279,7 @@ def backfill_initiative_documents_from_parl_initiatives(
     playwright_channel: str = "chrome",
     playwright_headless: bool = False,
     archive_fallback: bool = False,
+    archive_fallback_http_statuses: tuple[int, ...] | list[int] | None = None,
     archive_timeout: int = 12,
     strict_network: bool = False,
     dry_run: bool = False,
@@ -984,11 +1310,72 @@ def backfill_initiative_documents_from_parl_initiatives(
     if max_docs_per_initiative <= 0:
         max_docs_per_initiative = 2
     archive_fallback = bool(archive_fallback)
+    archive_fallback_http_statuses = _normalize_archive_fallback_http_statuses(
+        archive_fallback_http_statuses
+    )
+    retry_http_statuses = _normalize_http_status_filter(retry_http_statuses)
     archive_timeout = max(1, int(archive_timeout))
+
+    selected_doc_urls_list: list[str] = []
+    selected_doc_url_set: set[str] = set()
+    for raw_url in list(selected_doc_urls or []):
+        url = _canonical_url(str(raw_url or ""))
+        if not url or not url.startswith("http") or url in selected_doc_url_set:
+            continue
+        selected_doc_url_set.add(url)
+        selected_doc_urls_list.append(url)
+
+    selected_doc_status_snapshot: dict[str, int] = {}
+    if selected_doc_status_by_url:
+        for raw_url, raw_status in selected_doc_status_by_url.items():
+            url = _canonical_url(str(raw_url or ""))
+            if not url or (selected_doc_url_set and url not in selected_doc_url_set):
+                continue
+            try:
+                status = int(raw_status)
+            except Exception:  # noqa: BLE001
+                continue
+            if status != 0 and (status < 100 or status > 599):
+                continue
+            selected_doc_status_snapshot[url] = status
+
+    selected_doc_entry_key_list: list[tuple[str, str, str]] = []
+    selected_doc_entry_key_set: set[tuple[str, str, str]] = set()
+    for raw_key in list(selected_doc_entry_keys or []):
+        if not isinstance(raw_key, (tuple, list)) or len(raw_key) != 3:
+            continue
+        initiative_id = normalize_ws(str(raw_key[0] or ""))
+        doc_kind = normalize_ws(str(raw_key[1] or "")).lower()
+        url = _canonical_url(str(raw_key[2] or ""))
+        if not initiative_id or not doc_kind or not url or not url.startswith("http"):
+            continue
+        key = (initiative_id, doc_kind, url)
+        if key in selected_doc_entry_key_set:
+            continue
+        selected_doc_entry_key_set.add(key)
+        selected_doc_entry_key_list.append(key)
+
+    selected_initiative_ids: list[str] = []
+    selected_initiative_seen: set[str] = set()
+    for initiative_id, _doc_kind, _url in selected_doc_entry_key_list:
+        iid = normalize_ws(str(initiative_id or ""))
+        if not iid or iid in selected_initiative_seen:
+            continue
+        selected_initiative_seen.add(iid)
+        selected_initiative_ids.append(iid)
+    selected_scope_no_limit = bool(selected_doc_url_set or selected_doc_entry_key_set)
+    selected_initiative_clause = ""
+    selected_initiative_params: tuple[str, ...] = tuple()
+    if selected_initiative_ids:
+        selected_placeholders = ",".join("?" for _ in selected_initiative_ids)
+        selected_initiative_clause = f" AND i.initiative_id IN ({selected_placeholders})"
+        selected_initiative_params = tuple(selected_initiative_ids)
+    limit_clause_sql = "" if selected_scope_no_limit else "LIMIT ?"
+    selected_scope_ignores_doc_cap = bool(selected_scope_no_limit)
 
     placeholders = ",".join("?" for _ in source_list)
     missing_clause = ""
-    if only_missing:
+    if only_missing and not selected_scope_no_limit:
         missing_clause = """
           AND (
             NOT EXISTS (
@@ -1036,6 +1423,7 @@ def backfill_initiative_documents_from_parl_initiatives(
         JOIN parl_vote_event_initiatives vi ON vi.initiative_id = i.initiative_id
         JOIN parl_vote_events e ON e.vote_event_id = vi.vote_event_id
         WHERE i.source_id IN ({placeholders})
+          {selected_initiative_clause}
           AND (
             (i.links_bocg_json IS NOT NULL AND TRIM(i.links_bocg_json) <> '')
             OR (i.links_ds_json IS NOT NULL AND TRIM(i.links_ds_json) <> '')
@@ -1043,7 +1431,7 @@ def backfill_initiative_documents_from_parl_initiatives(
           {missing_clause}
         GROUP BY i.source_id, i.initiative_id
         ORDER BY {order_priority_sql} ASC, last_vote_date DESC, i.initiative_id ASC
-        LIMIT ?
+        {limit_clause_sql}
         """
     else:
         leg_order_sql = """
@@ -1072,13 +1460,14 @@ def backfill_initiative_documents_from_parl_initiatives(
               ) AS oldest_missing_attempt_at
             FROM parl_initiatives i
             WHERE i.source_id IN ({placeholders})
+              {selected_initiative_clause}
               AND (
                 (i.links_bocg_json IS NOT NULL AND TRIM(i.links_bocg_json) <> '')
                 OR (i.links_ds_json IS NOT NULL AND TRIM(i.links_ds_json) <> '')
               )
               {missing_clause}
             ORDER BY {order_priority_sql} ASC, {leg_order_sql} DESC, oldest_missing_attempt_at ASC, i.updated_at DESC, i.initiative_id ASC
-            LIMIT ?
+            {limit_clause_sql}
             """
         else:
             sql = f"""
@@ -1090,16 +1479,19 @@ def backfill_initiative_documents_from_parl_initiatives(
               NULL AS last_vote_date
             FROM parl_initiatives i
             WHERE i.source_id IN ({placeholders})
+              {selected_initiative_clause}
               AND (
                 (i.links_bocg_json IS NOT NULL AND TRIM(i.links_bocg_json) <> '')
                 OR (i.links_ds_json IS NOT NULL AND TRIM(i.links_ds_json) <> '')
               )
               {missing_clause}
             ORDER BY {order_priority_sql} ASC, {leg_order_sql} DESC, i.updated_at DESC, i.initiative_id ASC
-            LIMIT ?
+            {limit_clause_sql}
             """
-
-    rows = conn.execute(sql, (*source_list, int(limit_initiatives))).fetchall()
+    query_params: list[Any] = [*source_list, *selected_initiative_params]
+    if not selected_scope_no_limit:
+        query_params.append(int(limit_initiatives))
+    rows = conn.execute(sql, tuple(query_params)).fetchall()
 
     initiatives_seen = len(rows)
     initiative_ids = [normalize_ws(str(r["initiative_id"] or "")) for r in rows]
@@ -1139,6 +1531,7 @@ def backfill_initiative_documents_from_parl_initiatives(
     derived_ini_candidates = 0
     derived_ini_selected = 0
     skipped_redundant_global_urls = 0
+    doc_links_filtered_by_selected_doc_entry_keys = 0
     doc_entries: list[dict[str, Any]] = []
     for r in rows:
         initiative_id = normalize_ws(str(r["initiative_id"] or ""))
@@ -1181,7 +1574,7 @@ def backfill_initiative_documents_from_parl_initiatives(
                         derived_canon_urls.add(ini_canon)
                         expanded_urls.append(ini_url)
                     expanded_urls.append(u)
-                urls = expanded_urls
+                urls = _prioritize_senado_bocg_urls(expanded_urls)
 
             seen_urls: set[str] = set()
             kept = 0
@@ -1191,7 +1584,7 @@ def backfill_initiative_documents_from_parl_initiatives(
                     downloaded_urls_by_initiative.get(initiative_id, set())
                 )
             for u in urls:
-                if kept >= int(max_docs_per_initiative):
+                if (not selected_scope_ignores_doc_cap) and kept >= int(max_docs_per_initiative):
                     break
                 u_canon = _canonical_url(u)
                 if not u_canon or u_canon in seen_urls:
@@ -1206,6 +1599,11 @@ def backfill_initiative_documents_from_parl_initiatives(
                     # retrying stale global_enmiendas URLs (or their derived probe URLs) only creates churn.
                     skipped_redundant_global_urls += 1
                     continue
+                if selected_doc_entry_key_set:
+                    entry_key = (initiative_id, doc_kind, u_canon)
+                    if entry_key not in selected_doc_entry_key_set:
+                        doc_links_filtered_by_selected_doc_entry_keys += 1
+                        continue
                 seen_urls.add(u_canon)
                 kept += 1
                 if is_derived_probe:
@@ -1229,9 +1627,25 @@ def backfill_initiative_documents_from_parl_initiatives(
         dedup.add(key)
         doc_entries_deduped.append(e)
     doc_entries = doc_entries_deduped
+    all_candidate_urls_before_selected = sorted(
+        {str(e["doc_url"]) for e in doc_entries if str(e.get("doc_url") or "").startswith("http")}
+    )
+    all_candidate_url_set_before_selected = set(all_candidate_urls_before_selected)
+
+    doc_links_filtered_by_selected_doc_urls = 0
+    if selected_doc_url_set:
+        doc_entries_before_selected = len(doc_entries)
+        doc_entries = [e for e in doc_entries if str(e.get("doc_url") or "") in selected_doc_url_set]
+        doc_links_filtered_by_selected_doc_urls = doc_entries_before_selected - len(doc_entries)
 
     doc_links_seen = len(doc_entries)
     candidate_urls = sorted({str(e["doc_url"]) for e in doc_entries if str(e.get("doc_url") or "").startswith("http")})
+    candidate_url_set = set(candidate_urls)
+    selected_doc_urls_not_in_candidates = 0
+    urls_filtered_by_selected_doc_urls = 0
+    if selected_doc_url_set:
+        selected_doc_urls_not_in_candidates = sum(1 for u in selected_doc_urls_list if u not in candidate_url_set)
+        urls_filtered_by_selected_doc_urls = len(all_candidate_url_set_before_selected) - len(candidate_url_set)
 
     # Resolve already-fetched URLs (keyed by canonical URL).
     existing_pk_by_url: dict[str, int] = {}
@@ -1275,23 +1689,54 @@ def backfill_initiative_documents_from_parl_initiatives(
 
         urls_to_fetch = sorted(urls_to_fetch, key=_url_priority)
     skipped_forbidden = 0
+    selected_doc_status_used_for_forbidden_filter = 0
     archive_first_urls: set[str] = set()
+    archive_first_status_by_url: dict[str, int] = {}
     if not retry_forbidden and fetch_status:
         filtered: list[str] = []
         for u in urls_to_fetch:
-            st = fetch_status.get(u) or {}
-            attempts = int(st.get("attempts") or 0)
-            fetched = int(st.get("fetched_ok") or 0)
-            last_http = int(st.get("last_http_status") or 0)
+            snapshot_status = selected_doc_status_snapshot.get(u)
+            if snapshot_status is not None:
+                attempts = 1
+                fetched = 0
+                last_http = int(snapshot_status)
+                selected_doc_status_used_for_forbidden_filter += 1
+            else:
+                st = fetch_status.get(u) or {}
+                attempts = int(st.get("attempts") or 0)
+                fetched = int(st.get("fetched_ok") or 0)
+                last_http = int(st.get("last_http_status") or 0)
             hard_failed = attempts > 0 and fetched == 0 and last_http in _SKIP_HTTP_STATUSES_DEFAULT
             if hard_failed:
-                if archive_fallback and last_http in _ARCHIVE_FALLBACK_HTTP_STATUSES_DEFAULT:
+                if archive_fallback and last_http in archive_fallback_http_statuses:
                     archive_first_urls.add(u)
+                    archive_first_status_by_url[u] = int(last_http)
                     filtered.append(u)
                     continue
                 skipped_forbidden += 1
                 continue
             filtered.append(u)
+        urls_to_fetch = filtered
+
+    skipped_retry_http_statuses = 0
+    selected_doc_status_used_for_retry = 0
+    if retry_http_statuses:
+        filtered: list[str] = []
+        retry_http_status_set = set(int(v) for v in retry_http_statuses)
+        for u in urls_to_fetch:
+            snapshot_status = selected_doc_status_snapshot.get(u)
+            if snapshot_status is not None:
+                attempts = 1
+                last_http = int(snapshot_status)
+                selected_doc_status_used_for_retry += 1
+            else:
+                st = fetch_status.get(u) or {}
+                attempts = int(st.get("attempts") or 0)
+                last_http = int(st.get("last_http_status") or 0)
+            if attempts > 0 and last_http in retry_http_status_set:
+                filtered.append(u)
+                continue
+            skipped_retry_http_statuses += 1
         urls_to_fetch = filtered
 
     failures: list[str] = []
@@ -1302,9 +1747,16 @@ def backfill_initiative_documents_from_parl_initiatives(
 
     archive_lookup_attempted = 0
     archive_hits = 0
+    archive_lookup_probe_requests = 0
+    archive_variant_hits = 0
     archive_fetched_ok = 0
     archive_lookup_failures: list[str] = []
     archive_lookup_cache: dict[str, tuple[list[str], str | None] | None] = {}
+    direct_variant_attempted_urls = 0
+    direct_variant_candidate_urls = 0
+    direct_variant_fetched_ok = 0
+    direct_variant_no_candidate_urls = 0
+    direct_variant_failures: list[str] = []
 
     by_url_cache: dict[str, tuple[bytes, str | None, str, str | None, str]] = {}
 
@@ -1317,9 +1769,13 @@ def backfill_initiative_documents_from_parl_initiatives(
         )
 
     pw_fetcher: _PlaywrightFetcher | None = None
+    pw_init_error: str | None = None
+    pw_runtime_meta: dict[str, Any] = {}
 
     def fetch_one(url: str) -> tuple[bytes, str | None]:
         nonlocal pw_fetcher
+        nonlocal pw_init_error
+        nonlocal pw_runtime_meta
         headers = {"Accept": "application/pdf,text/html,*/*"}
         cookie_value = normalize_ws(str(cookie or ""))
         if cookie_value:
@@ -1328,34 +1784,75 @@ def backfill_initiative_documents_from_parl_initiatives(
         host = (urlparse(url).netloc or "").lower()
         use_playwright = bool(pw_cfg) and (host.endswith("senado.es") or host.endswith("www.senado.es"))
         if use_playwright:
+            if pw_init_error:
+                raise RuntimeError(f"playwright init blocked: {pw_init_error}")
             if pw_fetcher is None:
-                pw_fetcher = _PlaywrightFetcher(pw_cfg)  # type: ignore[arg-type]
-                pw_fetcher.__enter__()
+                # Only assign shared fetcher after a successful __enter__ to avoid
+                # reusing a partially initialized instance.
+                _pw_fetcher = _PlaywrightFetcher(pw_cfg)  # type: ignore[arg-type]
+                try:
+                    _pw_fetcher.__enter__()
+                except Exception as exc:  # noqa: BLE001
+                    pw_runtime_meta = dict(getattr(_pw_fetcher, "runtime_meta", {}) or {})
+                    pw_init_error = f"{type(exc).__name__}: {exc}"
+                    raise
+                pw_fetcher = _pw_fetcher
+                pw_runtime_meta = dict(getattr(pw_fetcher, "runtime_meta", {}) or {})
             # Prefer browser session state (cookies/storage) from the persistent profile.
             # Avoid injecting Cookie header here; it can conflict with browser-managed cookies.
-            return pw_fetcher.get_bytes(url, timeout_seconds=int(timeout), headers={k: v for k, v in headers.items() if k.lower() != "cookie"})
+            try:
+                payload, content_type = pw_fetcher.get_bytes(
+                    url,
+                    timeout_seconds=int(timeout),
+                    headers={k: v for k, v in headers.items() if k.lower() != "cookie"},
+                )
+                pw_runtime_meta = dict(getattr(pw_fetcher, "runtime_meta", {}) or {})
+                return payload, content_type
+            except Exception:  # noqa: BLE001
+                pw_runtime_meta = dict(getattr(pw_fetcher, "runtime_meta", {}) or {})
+                raise
 
         return http_get_bytes(url, timeout=int(timeout), headers=headers)
 
     def _lookup_archive_candidates_cached(url: str) -> tuple[list[str], str | None]:
         nonlocal archive_lookup_attempted
         nonlocal archive_hits
+        nonlocal archive_lookup_probe_requests
+        nonlocal archive_variant_hits
         if url in archive_lookup_cache:
             cached = archive_lookup_cache[url]
             if cached is None:
                 return [], None
             return cached
         archive_lookup_attempted += 1
-        try:
-            candidates, timestamp = _lookup_wayback_candidates(url, timeout=archive_timeout)
-        except Exception as exc:  # noqa: BLE001
-            archive_lookup_failures.append(f"url={url} -> {type(exc).__name__}: {exc}")
-            archive_lookup_cache[url] = None
-            return [], None
-        if candidates:
+        probe_urls = _archive_lookup_probe_urls(url)
+        merged_candidates: list[str] = []
+        merged_timestamp: str | None = None
+        had_direct_hit = False
+        had_variant_hit = False
+        for idx, probe_url in enumerate(probe_urls):
+            archive_lookup_probe_requests += 1
+            try:
+                candidates, timestamp = _lookup_wayback_candidates(probe_url, timeout=archive_timeout)
+            except Exception as exc:  # noqa: BLE001
+                archive_lookup_failures.append(f"url={url} probe={probe_url} -> {type(exc).__name__}: {exc}")
+                continue
+            if not candidates:
+                continue
+            if idx == 0:
+                had_direct_hit = True
+            else:
+                had_variant_hit = True
+            if merged_timestamp is None and timestamp:
+                merged_timestamp = timestamp
+            merged_candidates.extend(candidates)
+        merged_candidates = _dedupe_keep_order(merged_candidates)
+        if merged_candidates:
             archive_hits += 1
-            archive_lookup_cache[url] = (candidates, timestamp)
-            return candidates, timestamp
+            if had_variant_hit and not had_direct_hit:
+                archive_variant_hits += 1
+            archive_lookup_cache[url] = (merged_candidates, merged_timestamp)
+            return merged_candidates, merged_timestamp
         archive_lookup_cache[url] = None
         return [], None
 
@@ -1381,6 +1878,32 @@ def backfill_initiative_documents_from_parl_initiatives(
             raise HTTPStatusError(status, f"archive fallback failed: {type(last_exc).__name__}: {last_exc}")
         raise HTTPStatusError(404, "archive fallback failed: no archived candidates")
 
+    def _fetch_one_senado_direct_variant(url: str) -> tuple[bytes, str | None, str]:
+        nonlocal direct_variant_attempted_urls
+        nonlocal direct_variant_candidate_urls
+        nonlocal direct_variant_no_candidate_urls
+        direct_variant_attempted_urls += 1
+        candidates = _senado_direct_variant_urls(url)
+        if not candidates:
+            direct_variant_no_candidate_urls += 1
+            raise HTTPStatusError(404, "senado direct variants: no candidate urls")
+        direct_variant_candidate_urls += len(candidates)
+        last_exc: Exception | None = None
+        for variant_url in candidates:
+            try:
+                payload, content_type = fetch_one(variant_url)
+                return payload, content_type, variant_url
+            except Exception as exc:  # noqa: BLE001
+                last_exc = exc
+                direct_variant_failures.append(
+                    f"url={url} variant={variant_url} -> {type(exc).__name__}: {exc}"
+                )
+                continue
+        if last_exc is not None:
+            status = _exception_http_status(last_exc) or 599
+            raise HTTPStatusError(status, f"senado direct variants failed: {type(last_exc).__name__}: {last_exc}")
+        raise HTTPStatusError(404, "senado direct variants failed: no candidate urls")
+
     try:
         for url in urls_to_fetch:
             payload_bytes: bytes | None = None
@@ -1394,15 +1917,28 @@ def backfill_initiative_documents_from_parl_initiatives(
                     payload_bytes, content_type, fetched_from_url, archive_timestamp, fetch_method = cached
                 else:
                     if archive_fallback and url in archive_first_urls:
-                        payload_bytes, content_type, fetched_from_url, archive_timestamp = _fetch_one_archive(url)
-                        fetch_method = "archive_wayback"
-                        archive_fetched_ok += 1
+                        try:
+                            payload_bytes, content_type, fetched_from_url, archive_timestamp = _fetch_one_archive(url)
+                            fetch_method = "archive_wayback"
+                            archive_fetched_ok += 1
+                        except Exception as archive_exc:  # noqa: BLE001
+                            archive_first_status = int(archive_first_status_by_url.get(url) or 0)
+                            # Allow a bounded direct-variant attempt for both 404 and 403
+                            # archive-first cohorts. This keeps traceability on the original
+                            # URL while trying the paired Senado endpoint family.
+                            should_try_direct_variant = bool(archive_first_status in {403, 404})
+                            if should_try_direct_variant:
+                                payload_bytes, content_type, fetched_from_url = _fetch_one_senado_direct_variant(url)
+                                fetch_method = "direct_variant"
+                                direct_variant_fetched_ok += 1
+                            else:
+                                raise archive_exc
                     else:
                         try:
                             payload_bytes, content_type = fetch_one(url)
                         except Exception as direct_exc:  # noqa: BLE001
                             direct_status = _exception_http_status(direct_exc)
-                            if archive_fallback and direct_status in _ARCHIVE_FALLBACK_HTTP_STATUSES_DEFAULT:
+                            if archive_fallback and direct_status in archive_fallback_http_statuses:
                                 payload_bytes, content_type, fetched_from_url, archive_timestamp = _fetch_one_archive(url)
                                 fetch_method = "archive_wayback"
                                 archive_fetched_ok += 1
@@ -1417,6 +1953,7 @@ def backfill_initiative_documents_from_parl_initiatives(
                     )
 
                 assert payload_bytes is not None
+                payload_bytes = _maybe_decompress_gzip_payload(payload_bytes)
                 ext = _guess_ext(payload_bytes, content_type)
                 content_sha = sha256_bytes(payload_bytes)
                 raw_path = _raw_path_for_content(
@@ -1628,9 +2165,21 @@ def backfill_initiative_documents_from_parl_initiatives(
         "dry_run": bool(dry_run),
         "initiative_source_ids": source_list,
         "archive_fallback": bool(archive_fallback),
+        "archive_fallback_http_statuses": list(archive_fallback_http_statuses),
+        "retry_http_statuses": list(retry_http_statuses),
         "initiatives_seen": initiatives_seen,
         "doc_links_seen": doc_links_seen,
         "candidate_urls": len(candidate_urls),
+        "selected_doc_urls_total": len(selected_doc_urls_list),
+        "selected_doc_urls_with_snapshot_status": len(selected_doc_status_snapshot),
+        "selected_doc_urls_not_in_candidates": selected_doc_urls_not_in_candidates,
+        "selected_doc_entry_keys_total": len(selected_doc_entry_key_list),
+        "selected_initiatives_total": len(selected_initiative_ids),
+        "selected_scope_no_limit": bool(selected_scope_no_limit),
+        "selected_scope_ignores_doc_cap": bool(selected_scope_ignores_doc_cap),
+        "doc_links_filtered_by_selected_doc_entry_keys": doc_links_filtered_by_selected_doc_entry_keys,
+        "doc_links_filtered_by_selected_doc_urls": doc_links_filtered_by_selected_doc_urls,
+        "urls_filtered_by_selected_doc_urls": urls_filtered_by_selected_doc_urls,
         "urls_to_fetch": len(urls_to_fetch),
         "derived_ini_candidates": derived_ini_candidates,
         "derived_ini_selected": derived_ini_selected,
@@ -1638,11 +2187,23 @@ def backfill_initiative_documents_from_parl_initiatives(
         "skipped_redundant_global_urls": skipped_redundant_global_urls,
         "skipped_existing": skipped_existing,
         "skipped_forbidden": skipped_forbidden,
+        "selected_doc_status_used_for_forbidden_filter": selected_doc_status_used_for_forbidden_filter,
+        "skipped_retry_http_statuses": skipped_retry_http_statuses,
+        "selected_doc_status_used_for_retry": selected_doc_status_used_for_retry,
         "archive_first_urls": len(archive_first_urls),
         "archive_lookup_attempted": archive_lookup_attempted,
+        "archive_lookup_probe_requests": archive_lookup_probe_requests,
         "archive_hits": archive_hits,
+        "archive_variant_hits": archive_variant_hits,
         "archive_fetched_ok": archive_fetched_ok,
         "archive_lookup_failures": archive_lookup_failures[:30],
+        "direct_variant_attempted_urls": direct_variant_attempted_urls,
+        "direct_variant_candidate_urls": direct_variant_candidate_urls,
+        "direct_variant_fetched_ok": direct_variant_fetched_ok,
+        "direct_variant_no_candidate_urls": direct_variant_no_candidate_urls,
+        "direct_variant_failures": direct_variant_failures[:30],
+        "playwright_init_error": pw_init_error,
+        "playwright_runtime": pw_runtime_meta,
         "fetched_ok": fetched_ok,
         "text_documents_upserted": len(pk_map),
         "initiative_documents_upserted": len(mapping_rows) if not dry_run else 0,
