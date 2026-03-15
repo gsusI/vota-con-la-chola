@@ -1,10 +1,10 @@
 import LegacyFrame from "../legacy-frame";
 
 export const metadata = {
-  title: "Graph | Vota Con La Chola",
-  description: "Vista de grafo de relaciones institucionales con fallback de snapshot estático.",
+  title: "Esquema y Relaciones | Vota Con La Chola",
+  description: "Consulta el esquema publicado y las relaciones principales entre tablas y entidades.",
 };
 
 export default function GraphPage() {
-  return <LegacyFrame legacyPath="/legacy/graph/" title="Graph" />;
+  return <LegacyFrame legacyPath="/legacy/graph/" title="Esquema y relaciones" />;
 }

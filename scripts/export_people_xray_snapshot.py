@@ -12,6 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from scripts.sqlite_export_pragmas import tune_sqlite_export_connection
+except ModuleNotFoundError:  # pragma: no cover - direct script execution
+    from sqlite_export_pragmas import tune_sqlite_export_connection
+
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 DEFAULT_OUT = Path("docs/gh-pages/people/data/xray.json")
 DATE_RE = re.compile(r"^[1-2][0-9]{3}-[01][0-9]-[0-3][0-9]")
@@ -390,6 +395,7 @@ def main() -> int:
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     try:
+        tune_sqlite_export_connection(conn)
         snapshot_date = norm(args.snapshot_date) or infer_snapshot_date(conn)
         person_summaries = fetch_person_summaries(conn, include_party_proxies=bool(args.include_party_proxies))
         mandate_rows = fetch_mandate_rows(conn, include_party_proxies=bool(args.include_party_proxies))

@@ -617,7 +617,6 @@ def build_payload(
     return {
         "meta": {
             "generated_at": now_utc_iso(),
-            "db_path": "redacted",
             "max_votes_per_initiative": int(max_votes_per_initiative),
             "max_initiatives": int(max_initiatives or 0),
             "total_initiatives": len(initiatives),

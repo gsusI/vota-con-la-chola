@@ -8,7 +8,7 @@ export const metadata = {
 export default function ExplorerPoliticoPage() {
   return (
     <LegacyFrame
-      legacyPath="/legacy/graph/explorer-sports.html"
+      legacyPath="/legacy/explorer-politico/"
      
       title="Explorer Político"
     />

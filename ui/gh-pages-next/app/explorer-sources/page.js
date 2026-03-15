@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function ExplorerSourcesPage() {
-  return <LegacyFrame legacyPath="/legacy/graph/explorer-sources.html" title="Fuentes" />;
+  return <LegacyFrame legacyPath="/legacy/explorer-sources/" title="Fuentes" />;
 }

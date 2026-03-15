@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { XRAY_KIND_LINKS } from "./xray/xrayKinds.mjs";
 
 function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
+  return process.env.NEXT_PUBLIC_BASE_PATH || "";
 }
 
 function withBasePath(path) {
@@ -157,14 +158,6 @@ function useRowsData(filePath) {
 
   return state;
 }
-
-const XRAY_KIND_LINKS = [
-  { kind: "party", label: "Partidos", href: "/people/xray/party/" },
-  { kind: "institution", label: "Instituciones", href: "/people/xray/institution/" },
-  { kind: "ambito", label: "Ámbitos", href: "/people/xray/ambito/" },
-  { kind: "territorio", label: "Territorios", href: "/people/xray/territorio/" },
-  { kind: "cargo", label: "Cargos", href: "/people/xray/cargo/" },
-];
 
 function rowGetter(columns) {
   const map = {};
@@ -547,7 +540,7 @@ export default function PeoplePage() {
                 ? `Cargando el perfil ${selectedPersonId}…`
                 : selectedPersonId > 0
                 ? `No se encontró el perfil ${selectedPersonId} en esta vista.`
-                : "Selecciona una persona para ver su xray."}
+                : "Selecciona una persona para ver su ficha."}
           </p>
         ) : (
         <>
@@ -641,7 +634,7 @@ export default function PeoplePage() {
           <div style={{ marginTop: 12 }}>
             <h3 style={{ margin: "0 0 8px" }}>Etiquetas del perfil</h3>
             <p className="sub" style={{ marginBottom: 8 }}>
-              Roles, instituciones y partidos (enlace a x-ray de entidad).
+              Roles, instituciones y partidos con acceso directo a sus perfiles agrupados.
             </p>
             <div className="profileTags">
               {xrayProfiles.roles.length ? (
@@ -711,13 +704,13 @@ export default function PeoplePage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Directory + Xray</p>
+        <p className="eyebrow">Personas</p>
         <h1>Personas y trayectoria pública</h1>
         <p className="sub">
           Directorio navegable de personas con resumen de actividad, posiciones que han ocupado y cola de datos públicos faltantes.
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {manifest.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Publicación: {manifest.meta?.snapshot_date || "—"}</span>
           <span className="chip">Personas: {formatInt(manifest.meta?.people_total || 0)}</span>
           <span className="chip">Buckets: {formatInt((manifest.buckets || []).length)}</span>
         </div>
@@ -782,7 +775,7 @@ export default function PeoplePage() {
         </div>
 
         <div className="blockHead" style={{ marginTop: 10 }}>
-          <h2>X-ray por dimensión</h2>
+          <h2>Perfiles por dimensión</h2>
         </div>
         <p className="sub">
           Perfiles agregados por partido, institución, ámbito, territorio y cargo.

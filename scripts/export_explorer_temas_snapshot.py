@@ -105,6 +105,7 @@ def main() -> int:
             "topic_evidence_reviews": rows_payload("topic_evidence_reviews", args.limit_evidence_reviews, latest=True),
         },
     }
+    snapshot = g.sanitize_public_payload(snapshot)
 
     out_path.write_text(json.dumps(snapshot, ensure_ascii=True, indent=2), encoding="utf-8")
     meta = snapshot.get("meta") or {}

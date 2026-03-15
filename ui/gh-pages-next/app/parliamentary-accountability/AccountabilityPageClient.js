@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ColumnFiltersRow, applyColumnFilters } from "../components/column-filters";
 
 function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
+  return process.env.NEXT_PUBLIC_BASE_PATH || "";
 }
 
 function normalizePartySlugValue(value) {
@@ -947,14 +947,14 @@ export default function AccountabilityPageClient({ view = "all" }) {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Accountability parlamentaria</p>
+        <p className="eyebrow">Seguimiento parlamentario</p>
         <h1>Analítica de disciplina y conducta de voto</h1>
         <p className="sub">
-          Snapshot estático para GH Pages. Métricas de disciplina de grupo, asistencia, similitud
+          Publicación estática actualizada. Métricas de disciplina de grupo, asistencia, similitud
           entre bloques y resultados por votación (con membresía temporal).
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {data.meta.generated_at}</span>
+          <span className="chip">Actualizado: {data.meta.generated_at}</span>
           <span className="chip">Votaciones analizadas: {formatInt(totalEvents)}</span>
           <span className="chip">Pares de coalición: {formatInt(data.coalitions?.pairs?.length || 0)}</span>
         </div>
@@ -1026,8 +1026,8 @@ export default function AccountabilityPageClient({ view = "all" }) {
                   { key: "directional_votes", label: "Votos direccionales", type: "number" },
                   { key: "aligned", label: "Alineados", type: "number" },
                   { key: "rebels", label: "Rebeldes", type: "number" },
-                  { key: "discipline_rate_pct", label: "Tasa alineacion", type: "number" },
-                  { key: "rebellion_rate_pct", label: "Tasa rebeldia", type: "number" },
+                  { key: "discipline_rate_pct", label: "Tasa de alineación", type: "number" },
+                  { key: "rebellion_rate_pct", label: "Tasa de rebeldía", type: "number" },
                   { key: "absence_rate_pct", label: "Ausencias", type: "number" },
                 ]}
                 filtersByTable={filtersByTable}
@@ -1087,7 +1087,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
                   { key: "directional_votes", label: "Votos direccionales", type: "number" },
                   { key: "aligned", label: "Alineados", type: "number" },
                   { key: "rebels", label: "Rebeldes", type: "number" },
-                  { key: "rebellion_rate_pct", label: "Tasa rebeldia", type: "number" },
+                  { key: "rebellion_rate_pct", label: "Tasa de rebeldía", type: "number" },
                   { key: "absence_rate_pct", label: "Ausencias", type: "number" },
                 ]}
                 filtersByTable={filtersByTable}
@@ -1146,10 +1146,10 @@ export default function AccountabilityPageClient({ view = "all" }) {
                 tableId="partyScope"
                 columns={[
                   { key: "party", label: "Partido", type: "text" },
-                  { key: "scope", label: "Camara/leg", type: "text" },
+                  { key: "scope", label: "Cámara/leg.", type: "text" },
                   { key: "directional_votes", label: "Votos direccionales", type: "number" },
                   { key: "rebels", label: "Rebeldes", type: "number" },
-                  { key: "rebellion_rate_pct", label: "Tasa rebeldia", type: "number" },
+                  { key: "rebellion_rate_pct", label: "Tasa de rebeldía", type: "number" },
                 ]}
                 filtersByTable={filtersByTable}
                 onFilterChange={onFilterChange}
@@ -1312,7 +1312,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
                 <SortHeader tableId="outcomes" columnKey="vote_date" label="Fecha" sortByTable={sortByTable} onSort={onSort} defaultDirection="desc" />
                 <SortHeader tableId="outcomes" columnKey="source_bucket" label="Cámara" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="legislature" label="Legislatura" sortByTable={sortByTable} onSort={onSort} defaultDirection="desc" />
-                <SortHeader tableId="outcomes" columnKey="vote_subject" label="Que se voto" sortByTable={sortByTable} onSort={onSort} />
+                <SortHeader tableId="outcomes" columnKey="vote_subject" label="Qué se votó" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="initiative" label="Iniciativa" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="interpretability" label="Lectura" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="outcome" label="Resultado" sortByTable={sortByTable} onSort={onSort} />
@@ -1326,9 +1326,9 @@ export default function AccountabilityPageClient({ view = "all" }) {
                 tableId="outcomes"
                 columns={[
                   { key: "vote_date", label: "Fecha", type: "text" },
-                  { key: "source_bucket", label: "Camara", type: "text" },
+                  { key: "source_bucket", label: "Cámara", type: "text" },
                   { key: "legislature", label: "Legislatura", type: "number" },
-                  { key: "vote_subject", label: "Que se voto", type: "text" },
+                  { key: "vote_subject", label: "Qué se votó", type: "text" },
                   { key: "initiative", label: "Iniciativa", type: "text" },
                   { key: "interpretability", label: "Lectura", type: "text" },
                   { key: "outcome", label: "Resultado", type: "text" },
@@ -1349,7 +1349,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
                   <td>{formatChamberLabel(row.source_bucket)}</td>
                   <td>{row.legislature || "-"}</td>
                   <td>
-                    <div>{getOutcomeSubject(row) || "Sin pregunta de votacion"}</div>
+                    <div>{getOutcomeSubject(row) || "Sin pregunta de votación"}</div>
                     {!isOutcomeInterpretable(row) ? (
                       <div style={{ marginTop: "4px", color: "#8a4b3d", fontSize: "0.72rem" }}>
                         Falta: {getOutcomeMissingLabels(row) || "datos esenciales"}
@@ -1409,7 +1409,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
               <ColumnFiltersRow
                 tableId="coalitions"
                 columns={[
-                  { key: "scope", label: "Ambito", type: "text" },
+                  { key: "scope", label: "Ámbito", type: "text" },
                   { key: "party_a", label: "Partido A", type: "text" },
                   { key: "party_b", label: "Partido B", type: "text" },
                   { key: "shared_events", label: "Eventos", type: "number" },
@@ -1487,7 +1487,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
               <ColumnFiltersRow
                 tableId="issues"
                 columns={[
-                  { key: "scope", label: "Ambito", type: "text" },
+                  { key: "scope", label: "Ámbito", type: "text" },
                   { key: "topic", label: "Tema", type: "text" },
                   { key: "party_a", label: "Partido A", type: "text" },
                   { key: "party_b", label: "Partido B", type: "text" },

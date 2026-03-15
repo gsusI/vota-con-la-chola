@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || (process.env.NODE_ENV === "production" ? "/vota-con-la-chola" : "");
+  return process.env.NEXT_PUBLIC_BASE_PATH || "";
 }
 
 function normalizeSegment(value) {
@@ -22,23 +22,36 @@ function decodeLabel(value) {
 
 function formatBreadcrumb(segment, index, segments) {
   const map = {
-    "parliamentary-accountability": "Accountability",
+    topics: "Temas",
+    actors: "Actores",
+    decisions: "Decisiones",
+    outcomes: "Resultados",
+    methods: "Métodos",
+    coverage: "Cobertura",
+    datasets: "Archivos",
+    explorer: "Explorador SQL",
+    graph: "Esquema",
+    "parliamentary-accountability": "Seguimiento",
     discipline: "Disciplina",
     attendance: "Asistencia",
     outcomes: "Resultados",
     coalitions: "Coaliciones",
     people: "Personas",
-    xray: "X-ray",
+    xray: "Perfiles",
     party: "Partido",
     institution: "Institución",
     ambito: "Ámbito",
     territorio: "Territorio",
     cargo: "Cargo",
-    "initiative-lifecycle": "Legislación",
+    "initiative-lifecycle": "Tramitación",
     "initiative-id": "Iniciativa",
     "political-positions": "Posturas",
     "policy-outcomes": "Resultados",
-    "legal-sanctions": "Cumplimiento legal",
+    "legal-sanctions": "Sanciones y cumplimiento",
+    "explorer-votaciones": "Votaciones",
+    "explorer-temas": "Temas",
+    "explorer-politico": "Territorio",
+    "explorer-sources": "Fuentes",
   };
 
   const direct = map[segment];
