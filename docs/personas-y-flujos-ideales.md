@@ -24,6 +24,124 @@ Companion de implementacion UX:
 | Revisor interno / adjudicador | Resolver desacuerdos y cerrar cola pendiente | Mantener SLA de revision y salud de cola |
 | Maintainer / release owner | Publicar artefactos publicos con gates de privacidad/calidad | Responder a incidentes/regresiones con evidencia |
 
+## 1.1) Personas prioritarias con identidad
+
+Estas seis personas concretan el north-star para decisiones de producto, UX y priorizacion. No sustituyen la tabla anterior: la vuelven operativa para las rutas y tradeoffs que mas valor aportan hoy.
+
+### Alba Moreno - Ciudadania de respuesta rapida
+
+- Mapa: `Ciudadania de respuesta rapida`.
+- Flujos clave: `F-01`, `F-02`, `F-05`.
+- Identidad: 29 anos, administrativa en Malaga, sigue la politica lo justo y llega a la plataforma desde movil cuando una conversacion o un titular le obliga a tomar postura.
+- Jobs-to-be-done: decidir rapido sobre vivienda, coste de vida o sanidad; comparar partidos sobre un caso concreto sin leer veinte paginas.
+- Momento activador: ve un enlace compartido o entra dias antes de votar porque quiere una respuesta util en menos de cinco minutos.
+- Exito: sale con una decision provisional clara, entiende que partidos son comparables en ese caso y puede guardar o compartir la vista.
+- Curiosidades que podria encontrar: que un partido habla mucho de vivienda pero apenas tiene senal util en los casos comparables; que dos partidos que ella daba por iguales divergen mucho en un tema concreto; que el caso mas util para decidir no es el mas mediatico.
+- Curiosidades de alto interes y potencial viral:
+  - que el partido que mas habla de alquiler casi no tiene senal comparable cuando se mira precio, desahucio o parque publico por separado.
+  - que dos partidos que su entorno trata como casi iguales votan distinto justo en una medida muy cotidiana, como IVA reducido, dependencia o transporte.
+  - que el partido que mejor le sale en `combined` cae mucho cuando cambia a `votes`, y el que parecia flojo sube.
+  - que una preocupacion menos mediatica, como plazas PMR, cliente financiero o ayudas a suministros, separa mas a los partidos que vivienda o sanidad en general.
+  - que el caso que mas cambia su decision no es una gran ley, sino una votacion pequena con impacto muy directo en bolsillo o servicios.
+- Necesita confiar en: lenguaje directo, badges claros de comparabilidad, y una evidencia representativa accesible sin cambiar de contexto.
+- Se frustra cuando: la UI mezcla promedios con casos concretos, hay demasiados terminos metodologicos al principio, o no queda claro por que un partido sale mejor o peor.
+- El producto no debe: pedirle una curva de aprendizaje de analista ni esconder la incertidumbre detras de una respuesta falsa de alta confianza.
+
+### Sergio Llorente - Ciudadania esceptica en modo auditoria
+
+- Mapa: `Ciudadania esceptica (modo auditoria)`.
+- Flujos clave: `F-03`, `F-04`, `F-17`.
+- Identidad: 41 anos, profesor de instituto en Zaragoza, desconfia de rankings civicos y solo acepta un resumen si puede bajar de la tarjeta a la fuente original.
+- Jobs-to-be-done: comprobar si una postura agregada esta bien fundada; entender si `unknown` significa falta de datos, conflicto real o una decision metodologica debil.
+- Momento activador: detecta una afirmacion fuerte en citizen o en un enlace compartido y quiere desmontarla o validarla por su cuenta.
+- Exito: puede recorrer metrica -> evidencia -> fuente sin perderse, y termina con un veredicto propio de verificado, dudoso o insuficiente.
+- Curiosidades que podria encontrar: cuantos resumenes descansan en `votes` frente a `declared`; por que un `unknown` viene de `no_signal` y no de conflicto; que una conclusion aparentemente solida cambia mucho al mirar cobertura real.
+- Curiosidades de alto interes y potencial viral:
+  - que un ranking muy compartido descansa en solo `2` o `3` temas comparables y cambia por completo al subir un poco el umbral de cobertura.
+  - que un `unknown` enorme no significa falta total de datos, sino una mezcla muy concreta de `mixed`, `unclear` y texto no comparable.
+  - que una postura presentada como firme viene casi toda de `declared` y apenas tiene respaldo en `votes`.
+  - que dos tarjetas opuestas del mismo partido salen del mismo expediente porque una usa texto previo y otra texto votado posterior.
+  - que una diferencia muy vistosa entre partidos se explica por un solo caso con peso desproporcionado.
+- Necesita confiar en: linaje visible, fechas, metodo usado, cobertura y acceso inmediato a `source_url` o drill-down equivalente.
+- Se frustra cuando: la trazabilidad queda escondida, el sistema usa etiquetas cerradas sin explicar la cobertura, o `unknown` se trata como ruido sin causa.
+- El producto no debe: obligarle a confiar en copy interpretativo ni impedirle reconstruir la conclusion con sus propios criterios.
+
+### Irene Campos - Analista de politicas tematicas
+
+- Mapa: `Analista de politicas (Temas)`.
+- Flujos clave: `F-09`, `F-10`, `F-18`.
+- Identidad: 35 anos, consultora de politicas publicas en Madrid, trabaja con briefs y necesita separar lo que es robusto de lo que solo parece una buena historia.
+- Jobs-to-be-done: ejecutar analisis `dice vs hace` por tema y scope; producir un briefing auditable con deltas, unknown y evidencia enlazada.
+- Momento activador: recibe un encargo sobre un tema concreto, por ejemplo vivienda o energia, y necesita una base reproducible antes de redactar conclusiones.
+- Exito: obtiene tablas exportables, puede filtrar por metodo y cobertura, y cada afirmacion relevante queda respaldada por evidencia primaria.
+- Curiosidades que podria encontrar: en que temas `declared` y `votes` chocan mas; que partidos tienen mucha visibilidad pero poca base comparable; que subtemas concentran la mayor parte de incoherencias o `unknown`.
+- Curiosidades de alto interes y potencial viral:
+  - que la mayor incoherencia de un partido no esta en el tema macro de su discurso, sino en un subtema pequeno que se repite mucho en votaciones concretas.
+  - que un partido parece coherente en vivienda hasta que se separan alquiler, desahucio, fiscalidad y suelo.
+  - que el choque mas fuerte entre `declared` y `votes` se concentra en una sola familia de iniciativas, no en el tema entero.
+  - que el partido con mas visibilidad publica sobre un asunto es tambien el que peor denominador comparable tiene.
+  - que la mitad de un briefing aparentemente robusto depende de muy pocos casos con evidencia fuerte, mientras el resto es `unknown` o cobertura fragil.
+- Necesita confiar en: versionado de metodo, filtros por scope/periodo, comparabilidad visible y posibilidad real de exportar datos y referencias.
+- Se frustra cuando: el sistema mezcla `votes`, `declared` y `combined` sin explicar precedencia, o no puede aislar un subconjunto defensible.
+- El producto no debe: empujarla a un ranking unico ni dejar que una narrativa tape la falta de muestra o la baja cobertura.
+
+### Oscar Vidal - Monitor legislativo
+
+- Mapa: `Monitor legislativo (Votaciones)`.
+- Flujos clave: `F-11`, `F-12`.
+- Identidad: 38 anos, periodista freelance en Valencia, sigue varias instituciones a la vez y necesita detectar movimientos relevantes antes de que la conversacion publica se cierre.
+- Jobs-to-be-done: vigilar actividad parlamentaria por tema, partido e institucion; detectar posibles cambios de postura con suficiente contexto para publicar o investigar.
+- Momento activador: se abre una sesion relevante o una watchlist marca un evento nuevo que puede alterar una historia en curso.
+- Exito: identifica rapido que paso, quienes se movieron, y si el aparente cambio de postura es comparable o un falso positivo por contexto distinto.
+- Curiosidades que podria encontrar: que una iniciativa menor explica mejor una fractura interna que una gran votacion mediatica; que ciertos partidos cambian mas por tipo de procedimiento que por tema; que algunos eventos concentran mucha actividad pero muy poca claridad sustantiva.
+- Curiosidades de alto interes y potencial viral:
+  - que la votacion que mejor revela una fractura interna no es el pleno estrella, sino una enmienda o toma en consideracion casi invisible.
+  - que un mismo partido parece girar en una semana, pero el supuesto giro desaparece al comparar version de texto y procedimiento correctos.
+  - que Congreso y Senado cuentan historias distintas sobre el mismo asunto y el conflicto real esta en la cadena iniciativa -> texto -> voto.
+  - que una iniciativa con casi nula cobertura mediatica anticipa mejor una ruptura futura que las votaciones mas comentadas.
+  - que un evento con muchisimos votos emitidos produce poquisima claridad sustantiva porque casi todo el valor esta en el contexto procedimental.
+- Necesita confiar en: feeds claros, linking voto -> iniciativa, ventanas temporales consistentes y explicacion de nivel de confianza en cualquier flip detectado.
+- Se frustra cuando: los eventos llegan sin contexto, los enlaces a iniciativas fallan o la deteccion de cambios confunde votos sobre textos no equivalentes.
+- El producto no debe: vender como giro politico lo que solo es ruido procedimental o falta de normalizacion sustantiva.
+
+### Nadia Ferrer - Operadora de calidad de datos
+
+- Mapa: `Operador de calidad de datos (Fuentes y Calidad)`.
+- Flujos clave: `F-15`, `F-16`, `F-24`.
+- Identidad: 33 anos, ingeniera de datos en Barcelona, vive entre conectores, quality gates y bloqueos de fuentes oficiales; mide su trabajo por impacto ciudadano real, no por volumen de logs.
+- Jobs-to-be-done: priorizar backlog tecnico segun dano visible en producto; registrar bloqueos externos con evidencia y evitar ciclos inutiles de reintento.
+- Momento activador: cae una fuente, baja una cobertura clave o una area de citizen empieza a mostrar mas `unknown` del aceptable.
+- Exito: sabe que issue arreglar primero, deja evidencia publica verificable cuando algo externo bloquea, y puede demostrar mejora en KPI o cobertura tras el fix.
+- Curiosidades que podria encontrar: que una sola fuente bloqueada hunde un concern entero en citizen; que pequenos fixes de linking cambian mucho mas la utilidad publica que grandes backfills; que algunos bloqueos externos afectan mas a la confianza que al volumen de filas.
+- Curiosidades de alto interes y potencial viral:
+  - que un solo `linker` roto explica mas dano ciudadano visible que varios conectores grandes en rojo.
+  - que una fuente bloqueada no baja mucho el total de filas, pero deja ciego justo el concern pack mas compartible en citizen.
+  - que un fix de `text versioning` cambia mas tarjetas publicas que una semana entera de scraping nuevo.
+  - que la peor incidencia no borra datos: dispara falsos `unknown` en partidos que antes eran comparables.
+  - que un bloqueo externo pequeno en apariencia altera mas la confianza publica que una caida tecnica grande pero contenida.
+- Necesita confiar en: paneles de impacto, runbooks claros, incidentes append-only y una relacion directa entre calidad tecnica y dano en flujos de usuario.
+- Se frustra cuando: el backlog tecnico no distingue ruido de problemas con efecto en producto, o se repiten probes sin un lever nuevo.
+- El producto no debe: empujarla a marcar falso DONE, esconder bloqueos externos o separar demasiado la salud del ETL de la experiencia ciudadana.
+
+### Tomas Rivas - Maintainer y release owner
+
+- Mapa: `Maintainer / release owner`.
+- Flujos clave: `F-25`, `F-26`, `F-19`.
+- Identidad: 44 anos, responsable tecnico del proyecto en Sevilla, piensa en snapshots, privacidad, publicacion estatica y reputacion publica del sistema como un solo problema.
+- Jobs-to-be-done: publicar artefactos seguros y reproducibles; responder a incidentes o regresiones con evidencia, no con improvisacion.
+- Momento activador: toca release, aparece una regresion en rutas publicas o falla un gate de privacidad, integridad o calidad.
+- Exito: puede ejecutar el checklist, validar artefactos publicos, publicar GH Pages y snapshot externo, y dejar un rastro claro de lo que cambio.
+- Curiosidades que podria encontrar: que un cambio pequeño en export rompe varias rutas publicas a la vez; que un snapshot nuevo mejora mucho la explicabilidad pero no la cobertura; que las regresiones mas caras no siempre vienen de ETL sino de publish, routing o contratos estaticos.
+- Curiosidades de alto interes y potencial viral:
+  - que un cambio minusculo en naming de artefactos rompe a la vez citizen, explorer y rutas legacy sin tocar el ETL.
+  - que una release mejora mucho la explicabilidad visible pero deja exactamente igual la cobertura real del snapshot.
+  - que el incidente mas caro de una semana viene de publish o routing estatico, no de ingesta ni base de datos.
+  - que una fuga potencial no sale de contenido politico sino de una ruta local o un artefacto tecnico mal sanitizado.
+  - que `main` y la superficie publica parecen sincronizados, pero un solo companion file viejo cambia lo que ve el usuario final.
+- Necesita confiar en: gates automaticos, manifests legibles, artefactos comparables entre snapshots y evidencia suficiente para decidir rollback, hotfix o bloqueo documentado.
+- Se frustra cuando: la publicacion depende de pasos ambiguos, hay riesgo de filtrar datos sensibles o los cambios de producto no llegan acompanados de validacion reproducible.
+- El producto no debe: exigir memoria tribal para publicar ni permitir que una release rompa trazabilidad, privacidad o sincronizacion entre `main` y la superficie publica.
+
 ## 2) Flujos ideales por persona y objetivo
 
 Formato: `F-XX - Persona - Objetivo`.
