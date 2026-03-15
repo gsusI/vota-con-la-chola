@@ -1,0 +1,493 @@
+{
+  "generated_at": "2026-03-15T16:02:24+00:00",
+  "snapshot_date": "2026-03-05",
+  "schema_version": "legal_sanctions_snapshot_v1",
+  "meta": {
+    "norm_nodes": 12,
+    "lineage_edges": 8,
+    "infraction_type_count": 0,
+    "infraction_mappings": 0,
+    "volume_rows": 0,
+    "kpi_rows": 0,
+    "municipal_rows": 0
+  },
+  "filters": {
+    "source_ids": [],
+    "relation_types": [
+      "deroga",
+      "desarrolla"
+    ],
+    "infraction_type_ids": [],
+    "kpi_ids": [],
+    "periods": []
+  },
+  "legal_graph": {
+    "nodes": [
+      {
+        "norm_id": "es:boe-a-1995-24292",
+        "boe_id": "BOE-A-1995-24292",
+        "title": "Ley 31/1995 de Prevencion de Riesgos Laborales.",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-2003-23514",
+        "boe_id": "BOE-A-2003-23514",
+        "title": "Ley General Tributaria",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque de infracciones tributarias",
+            "fragment_title": "Infracciones y sanciones tributarias",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 100000.0,
+            "competent_body": "AEAT y organos tributarios autonómicos/locales segun competencia",
+            "appeal_path": "Reposicion y reclamacion economico-administrativa"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-1963-2490",
+        "boe_id": "BOE-A-1963-2490",
+        "title": "Ley General Tributaria de 1963.",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-1992-6209",
+        "boe_id": "BOE-A-1992-6209",
+        "title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-2015-11724",
+        "boe_id": "BOE-A-2015-11724",
+        "title": "Ley Organica de proteccion de la seguridad ciudadana",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque de infracciones y sanciones",
+            "fragment_title": "Tipificacion y tramos de sancion",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 100.0,
+            "sanction_amount_max_eur": 600000.0,
+            "competent_body": "Delegaciones/Subdelegaciones del Gobierno y organos habilitados",
+            "appeal_path": "Alzada/reposicion y contencioso-administrativo"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2015-11722",
+        "boe_id": "BOE-A-2015-11722",
+        "title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque sancionador principal",
+            "fragment_title": "Infracciones y sanciones",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 1000.0,
+            "competent_body": "DGT y jefaturas provinciales de trafico",
+            "appeal_path": "Reposicion administrativa y contencioso-administrativo"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2003-23186",
+        "boe_id": "BOE-A-2003-23186",
+        "title": "Referencia sancionadora BOE-A-2003-23186",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque sancionador principal",
+            "fragment_title": "Tipificacion y sanciones",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "Organo competente segun reparto legal",
+            "appeal_path": "Recursos administrativos y via contenciosa"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2015-3442",
+        "boe_id": "BOE-A-2015-3442",
+        "title": "Referencia sancionadora BOE-A-2015-3442",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque sancionador principal",
+            "fragment_title": "Tipificacion y procedimiento",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "Organo competente segun distribucion legal",
+            "appeal_path": "Recursos administrativos y via contenciosa"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-2004-18398",
+        "boe_id": "BOE-A-2004-18398",
+        "title": "Regimen sancionador tributario (reglamento)",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque procedimental y de graduacion",
+            "fragment_title": "Criterios y procedimiento",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "AEAT",
+            "appeal_path": "Reclamacion economico-administrativa y contencioso-administrativo"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-1994-8985",
+        "boe_id": "BOE-A-1994-8985",
+        "title": "Reglamento del procedimiento sancionador en materia de trafico",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque procedimental sancionador",
+            "fragment_title": "Instruccion y resolucion de expedientes",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 0.0,
+            "sanction_amount_max_eur": 0.0,
+            "competent_body": "DGT y organos instructores/resolutores competentes",
+            "appeal_path": "Recursos administrativos y contencioso-administrativos"
+          }
+        ]
+      },
+      {
+        "norm_id": "es:boe-a-1990-6396",
+        "boe_id": "BOE-A-1990-6396",
+        "title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+        "scope": "",
+        "topic_hint": "ciudadania_sanciones_lineage_ref",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "fragments_total": 0,
+        "fragments": []
+      },
+      {
+        "norm_id": "es:boe-a-2000-15060",
+        "boe_id": "BOE-A-2000-15060",
+        "title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+        "scope": "nacional",
+        "topic_hint": "ciudadania_sanciones",
+        "effective_date": "",
+        "published_date": "",
+        "source_snapshot_date": "2026-03-05",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "fragments_total": 1,
+        "fragments": [
+          {
+            "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+            "fragment_type": "articulo",
+            "fragment_label": "Bloque de tipificacion laboral",
+            "fragment_title": "Infracciones y sanciones en el orden social",
+            "fragment_order": 1,
+            "sanction_amount_min_eur": 60.0,
+            "sanction_amount_max_eur": 225018.0,
+            "competent_body": "ITSS y autoridad laboral competente",
+            "appeal_path": "Alzada/reposicion y contencioso-administrativo"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "lineage_edge_id": 3,
+        "source_norm_id": "es:boe-a-1994-8985",
+        "source_norm_boe_id": "BOE-A-1994-8985",
+        "source_norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+        "related_norm_id": "es:boe-a-1990-6396",
+        "related_norm_boe_id": "BOE-A-1990-6396",
+        "related_norm_title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "1994-04-21",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "evidence_quote": "Fuente BOE del reglamento de procedimiento sancionador dictado para aplicar y desarrollar la ley de trafico."
+      },
+      {
+        "lineage_edge_id": 7,
+        "source_norm_id": "es:boe-a-2000-15060",
+        "source_norm_boe_id": "BOE-A-2000-15060",
+        "source_norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+        "related_norm_id": "es:boe-a-1995-24292",
+        "related_norm_boe_id": "BOE-A-1995-24292",
+        "related_norm_title": "Ley 31/1995 de Prevencion de Riesgos Laborales.",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "2000-08-08",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "evidence_quote": "Fuente BOE del texto refundido sancionador laboral utilizado como desarrollo del bloque laboral-preventivo en este piloto."
+      },
+      {
+        "lineage_edge_id": 4,
+        "source_norm_id": "es:boe-a-2003-23186",
+        "source_norm_boe_id": "BOE-A-2003-23186",
+        "source_norm_title": "Referencia sancionadora BOE-A-2003-23186",
+        "related_norm_id": "es:boe-a-2003-23514",
+        "related_norm_boe_id": "BOE-A-2003-23514",
+        "related_norm_title": "Ley General Tributaria",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "2003-12-18",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23186",
+        "evidence_quote": "Fuente BOE de la Ley 58/2003 usada como base legal directa de desarrollo en este lane semilla."
+      },
+      {
+        "lineage_edge_id": 2,
+        "source_norm_id": "es:boe-a-2003-23514",
+        "source_norm_boe_id": "BOE-A-2003-23514",
+        "source_norm_title": "Ley General Tributaria",
+        "related_norm_id": "es:boe-a-1963-2490",
+        "related_norm_boe_id": "BOE-A-1963-2490",
+        "related_norm_title": "Ley General Tributaria de 1963.",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2003-12-18",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "evidence_quote": "Fuente BOE de la Ley General Tributaria 58/2003, publicada con sustitucion del marco tributario previo."
+      },
+      {
+        "lineage_edge_id": 5,
+        "source_norm_id": "es:boe-a-2004-18398",
+        "source_norm_boe_id": "BOE-A-2004-18398",
+        "source_norm_title": "Regimen sancionador tributario (reglamento)",
+        "related_norm_id": "es:boe-a-2003-23514",
+        "related_norm_boe_id": "BOE-A-2003-23514",
+        "related_norm_title": "Ley General Tributaria",
+        "relation_type": "desarrolla",
+        "relation_scope": "parcial",
+        "evidence_date": "2004-10-28",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "evidence_quote": "Fuente BOE del reglamento general del regimen sancionador tributario dictado para desarrollo de la LGT."
+      },
+      {
+        "lineage_edge_id": 1,
+        "source_norm_id": "es:boe-a-2015-11722",
+        "source_norm_boe_id": "BOE-A-2015-11722",
+        "source_norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+        "related_norm_id": "es:boe-a-1990-6396",
+        "related_norm_boe_id": "BOE-A-1990-6396",
+        "related_norm_title": "Texto articulado de la Ley sobre Trafico, Circulacion de Vehiculos a Motor y Seguridad Vial (RDL 339/1990).",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2015-10-31",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "evidence_quote": "Fuente BOE del texto refundido 2015 que reemplaza el texto articulado previo en materia de trafico."
+      },
+      {
+        "lineage_edge_id": 6,
+        "source_norm_id": "es:boe-a-2015-11724",
+        "source_norm_boe_id": "BOE-A-2015-11724",
+        "source_norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+        "related_norm_id": "es:boe-a-1992-6209",
+        "related_norm_boe_id": "BOE-A-1992-6209",
+        "related_norm_title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2015-03-31",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "evidence_quote": "Fuente BOE de la LO 4/2015, publicada para sustituir el marco organico previo de seguridad ciudadana."
+      },
+      {
+        "lineage_edge_id": 8,
+        "source_norm_id": "es:boe-a-2015-3442",
+        "source_norm_boe_id": "BOE-A-2015-3442",
+        "source_norm_title": "Referencia sancionadora BOE-A-2015-3442",
+        "related_norm_id": "es:boe-a-1992-6209",
+        "related_norm_boe_id": "BOE-A-1992-6209",
+        "related_norm_title": "Ley Organica 1/1992, de proteccion de la seguridad ciudadana.",
+        "relation_type": "deroga",
+        "relation_scope": "total",
+        "evidence_date": "2015-03-31",
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-3442",
+        "evidence_quote": "Fuente BOE de la LO 4/2015 usada como referencia de reemplazo del marco organico previo."
+      }
+    ],
+    "node_count": 12,
+    "edge_count": 8,
+    "relation_types": [
+      "deroga",
+      "desarrolla"
+    ],
+    "nodes_with_fragments": 8
+  },
+  "infraction_network": {
+    "infraction_types": [],
+    "mappings": []
+  },
+  "sanction_volume_monitoring": {
+    "series": [],
+    "source_totals": [],
+    "sources": [],
+    "periods": []
+  },
+  "procedural_kpi_drift": [],
+  "municipal_monitoring": {
+    "summary": {
+      "total_ordinances": 0,
+      "normalized_ordinances": 0,
+      "identified_ordinances": 0,
+      "blocked_ordinances": 0,
+      "status_counts": []
+    },
+    "city_summary": [],
+    "ordinance_rows": []
+  },
+  "responsibility_summary": {
+    "roles": [
+      {
+        "role": "approve",
+        "rows": 6
+      },
+      {
+        "role": "enforce",
+        "rows": 4
+      },
+      {
+        "role": "propose",
+        "rows": 3
+      },
+      {
+        "role": "delegate",
+        "rows": 2
+      }
+    ],
+    "top_actors": [
+      {
+        "actor_label": "Cortes Generales",
+        "rows": 6
+      },
+      {
+        "actor_label": "Gobierno de Espana",
+        "rows": 3
+      },
+      {
+        "actor_label": "AEAT",
+        "rows": 1
+      },
+      {
+        "actor_label": "DGT",
+        "rows": 1
+      },
+      {
+        "actor_label": "Inspeccion de Trabajo y Seguridad Social",
+        "rows": 1
+      },
+      {
+        "actor_label": "Ministerio competente en trafico",
+        "rows": 1
+      },
+      {
+        "actor_label": "Ministerio de Hacienda",
+        "rows": 1
+      },
+      {
+        "actor_label": "Ministerio del Interior",
+        "rows": 1
+      }
+    ],
+    "rows_with_primary_evidence": 15,
+    "rows_total": 15
+  },
+  "liberty_restriction_monitoring": {
+    "enabled": true,
+    "rows": 11,
+    "sample_first_key": "irlc_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|right:movilidad",
+    "sample_last_key": "irlc_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|right:expresion_reunion",
+    "avg_irlc_score": 57.9318,
+    "avg_confidence": 0.7745,
+    "method_distribution": [
+      {
+        "method_version": "irlc_v1",
+        "total": 11
+      }
+    ]
+  }
+}

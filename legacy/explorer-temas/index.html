@@ -1,0 +1,2090 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola | Temas (dice vs hace)</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #10121a;
+        --ink-2: #334155;
+        --muted: #64748b;
+        --panel: rgba(255, 255, 255, 0.92);
+        --panel-2: rgba(255, 255, 255, 0.78);
+        --line: rgba(15, 23, 42, 0.12);
+        --shadow: 0 18px 46px rgba(15, 23, 42, 0.12);
+        --accent: #1d4ed8;
+        --accent-2: #0891b2;
+        --ok: #059669;
+        --warn: #d97706;
+        --bad: #dc2626;
+        --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        --sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        color: var(--ink);
+        background:
+          radial-gradient(980px 520px at 10% -10%, #dbeafe 0%, transparent 62%),
+          radial-gradient(980px 520px at 92% 12%, #cffafe 0%, transparent 58%),
+          radial-gradient(980px 520px at 80% 110%, #fef3c7 0%, transparent 62%),
+          linear-gradient(130deg, #f6f8ff, #ffffff);
+        line-height: 1.35;
+        font-size: 16px;
+      }
+
+      .app {
+        min-height: 100%;
+        padding: 14px;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 12px;
+        width: min(1560px, calc(100% - 28px));
+        margin: 0 auto;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        min-width: 0;
+      }
+
+      .top {
+        padding: 14px;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(29, 78, 216, 0.22);
+        background: rgba(219, 234, 254, 0.58);
+        border-radius: 999px;
+        padding: 6px 10px;
+        text-decoration: none;
+        color: #0b1b3a;
+        font-weight: 800;
+        font-size: 0.82rem;
+      }
+
+      .local-api-disabled {
+        opacity: 0.53;
+        filter: grayscale(1);
+        cursor: not-allowed;
+      }
+
+      .hero {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 6px 0 4px;
+        font-size: 1.7rem;
+        line-height: 1.05;
+      }
+
+      .sub {
+        margin: 0;
+        color: var(--ink-2);
+        max-width: 92ch;
+      }
+
+      .mono {
+        font-family: var(--mono);
+      }
+
+      .status {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .chip {
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        background: rgba(248, 250, 252, 0.82);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--ink-2);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: rgba(100, 116, 139, 0.55);
+        flex: 0 0 auto;
+      }
+
+      .dot.ok {
+        background: rgba(5, 150, 105, 0.9);
+      }
+
+      .dot.warn {
+        background: rgba(217, 119, 6, 0.9);
+      }
+
+      .dot.bad {
+        background: rgba(220, 38, 38, 0.9);
+      }
+
+      .summary {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .banner {
+        margin-top: 10px;
+        border: 1px dashed rgba(15, 23, 42, 0.22);
+        border-radius: 14px;
+        padding: 10px 12px;
+        background: rgba(255, 255, 255, 0.55);
+        color: var(--muted);
+        display: none;
+      }
+
+      .layout {
+        min-height: 0;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 340px 380px minmax(0, 1fr);
+      }
+
+      @media (max-width: 1180px) {
+        .layout {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto minmax(0, 1fr);
+        }
+      }
+
+      .panel {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .panel .head {
+        padding: 14px 14px 8px;
+      }
+
+      .panel h2 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .panel .hint {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .controls {
+        padding: 0 14px 12px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      input[type="text"],
+      select {
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        border-radius: 12px;
+        padding: 9px 10px;
+        font: inherit;
+        background: rgba(255, 255, 255, 0.92);
+        min-width: 0;
+      }
+
+      input[type="text"] {
+        flex: 1 1 200px;
+      }
+
+      .btn {
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        border-radius: 12px;
+        padding: 9px 11px;
+        font-weight: 800;
+        background: rgba(248, 250, 252, 0.88);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .btn.primary {
+        border-color: rgba(29, 78, 216, 0.32);
+        background: rgba(29, 78, 216, 0.08);
+        color: #0b1b3a;
+      }
+
+      .btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      label.toggle {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 0.84rem;
+        color: var(--ink-2);
+        user-select: none;
+      }
+
+      .list {
+        padding: 0 14px 14px;
+        overflow: auto;
+        min-height: 0;
+        flex: 1 1 auto;
+        display: grid;
+        gap: 10px;
+      }
+
+      .item {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.86);
+        padding: 11px 12px;
+        text-align: left;
+        cursor: pointer;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .item:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 18px rgba(15, 23, 42, 0.1);
+      }
+
+      .item.active {
+        border-color: rgba(29, 78, 216, 0.38);
+        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12), 0 12px 24px rgba(15, 23, 42, 0.12);
+      }
+
+      .row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .row strong {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .meta {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .badge {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: rgba(248, 250, 252, 0.88);
+        color: var(--ink-2);
+        flex: 0 0 auto;
+      }
+
+      .badge.ok {
+        border-color: rgba(5, 150, 105, 0.22);
+        background: rgba(5, 150, 105, 0.08);
+        color: #065f46;
+      }
+
+      .badge.warn {
+        border-color: rgba(217, 119, 6, 0.22);
+        background: rgba(217, 119, 6, 0.08);
+        color: #7c2d12;
+      }
+
+      .badge.bad {
+        border-color: rgba(220, 38, 38, 0.22);
+        background: rgba(220, 38, 38, 0.08);
+        color: #7f1d1d;
+      }
+
+      .wide .split {
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+
+      .split {
+        min-height: 0;
+        padding: 0 14px 14px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 12px;
+      }
+
+      @media (max-width: 1180px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .pane {
+        min-height: 0;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.62);
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr) auto;
+      }
+
+      .pane .panehead {
+        padding: 12px 12px 4px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .pane h3 {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      .pane .panemeta {
+        padding: 0 12px 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .pane .panebody {
+        min-height: 0;
+        overflow: auto;
+        padding: 0 12px 12px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .pane .panefoot {
+        padding: 10px 12px 12px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      a.link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      a.link:hover {
+        text-decoration: underline;
+      }
+
+      .empty {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.86rem;
+      }
+
+      .ev {
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        border-radius: 14px;
+        padding: 10px 10px;
+        background: rgba(255, 255, 255, 0.92);
+        display: grid;
+        gap: 6px;
+      }
+
+      .ev .excerpt {
+        font-size: 0.9rem;
+        color: var(--ink);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .ev .review-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .coherence {
+        margin: 0 14px 12px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.62);
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .coherence .headrow {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .coherence .headrow h3 {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      .coh-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      @media (max-width: 860px) {
+        .coh-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .coh-btn {
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        border-radius: 12px;
+        background: rgba(248, 250, 252, 0.92);
+        color: var(--ink);
+        padding: 10px 11px;
+        text-align: left;
+        display: grid;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .coh-btn strong {
+        font-family: var(--mono);
+        font-size: 1rem;
+      }
+
+      .coh-btn.active {
+        border-color: rgba(29, 78, 216, 0.42);
+        box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.12);
+      }
+
+      .coh-btn.ok {
+        border-color: rgba(5, 150, 105, 0.28);
+        background: rgba(5, 150, 105, 0.08);
+      }
+
+      .coh-btn.bad {
+        border-color: rgba(220, 38, 38, 0.28);
+        background: rgba(220, 38, 38, 0.08);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="top card">
+        <div class="nav">
+          <a class="pill" href="../">Indice</a>
+          <a class="pill" href="../explorer/" data-local-api="explorer-sql">Explorer SQL</a>
+          <a class="pill" href="../explorer-sources/">Fuentes</a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Analitica</p>
+            <h1>Temas: dice vs hace</h1>
+            <p class="sub">
+              Navega por <span class="mono">topic_sets</span> (scope) -&gt; temas (<span class="mono">topic_set_topics</span>) -&gt;
+              posiciones (<span class="mono">topic_positions</span>) -&gt; evidencia (<span class="mono">topic_evidence</span>) y
+              cola de revision (<span class="mono">topic_evidence_reviews</span>).
+            </p>
+          </div>
+          <div class="status">
+            <div class="chip" id="chip-mode"><span class="dot"></span><span>Modo:</span><strong id="mode">...</strong></div>
+            <div class="chip" id="chip-api"><span class="dot"></span><span>API:</span><strong id="api">...</strong></div>
+            <div class="chip mono" id="chip-db" style="display:none"><span>DB:</span><strong id="db">...</strong></div>
+          </div>
+        </div>
+
+        <div class="summary" id="summary"></div>
+        <div class="banner" id="banner"></div>
+      </header>
+
+      <main class="layout">
+        <section class="panel card">
+          <div class="head">
+            <h2>1) Topic sets (scope)</h2>
+            <p class="hint">Scope: institucion / territorio / nivel / legislatura.</p>
+          </div>
+          <div class="controls">
+            <input id="sets-q" type="text" placeholder="Buscar sets..." />
+            <label class="toggle"><input id="sets-active" type="checkbox" checked /> Solo activos</label>
+            <button class="btn" id="reload" type="button">Recargar</button>
+          </div>
+          <div class="list" id="sets"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>2) Temas (en el set)</h2>
+            <p class="hint">Stake scoring: <span class="mono">topic_set_topics</span>.</p>
+          </div>
+          <div class="controls">
+            <label class="toggle"><input id="topics-high" type="checkbox" /> Solo high-stakes</label>
+            <input id="topics-q" type="text" placeholder="Buscar temas..." />
+          </div>
+          <div class="list" id="topics"></div>
+        </section>
+
+        <section class="panel card wide">
+          <div class="head">
+            <h2>3) Posiciones y evidencia</h2>
+            <p class="hint">Selecciona tema y luego una persona. Usa Explorer SQL para auditar la tabla completa.</p>
+          </div>
+          <div class="controls">
+            <select id="method">
+              <option value="votes" selected>Method: votes (does)</option>
+              <option value="declared">Method: declared (says)</option>
+              <option value="combined">Method: combined</option>
+              <option value="all">Method: all</option>
+            </select>
+            <select id="stance">
+              <option value="">Stance: todas</option>
+              <option value="support">support</option>
+              <option value="oppose">oppose</option>
+              <option value="mixed">mixed</option>
+              <option value="unclear">unclear</option>
+              <option value="no_signal">no_signal</option>
+            </select>
+            <input id="positions-q" type="text" placeholder="Filtrar posiciones (cliente)..." />
+            <button class="btn primary" id="open-sql" type="button" data-local-api="explorer-sql">
+              Abrir en Explorer SQL
+            </button>
+          </div>
+
+          <div class="coherence">
+            <div class="headrow">
+              <h3>Coherencia (says vs does)</h3>
+              <span class="badge mono" id="coherence-scope">scope: -</span>
+            </div>
+            <div class="panemeta mono" id="coherence-meta">Selecciona un tema para calcular overlap/coherent/incoherent.</div>
+            <div class="coh-grid">
+              <button class="coh-btn" id="coh-overlap" type="button">
+                <span>overlap</span>
+                <strong id="coh-overlap-count">0</strong>
+              </button>
+              <button class="coh-btn ok" id="coh-coherent" type="button">
+                <span>coherent</span>
+                <strong id="coh-coherent-count">0</strong>
+              </button>
+              <button class="coh-btn bad" id="coh-incoherent" type="button">
+                <span>incoherent</span>
+                <strong id="coh-incoherent-count">0</strong>
+              </button>
+            </div>
+            <div class="meta" id="coherence-foot">Click en un bucket para drill-down a filas de evidencia.</div>
+          </div>
+
+          <div class="split">
+            <div class="pane">
+              <div class="panehead">
+                <h3>Posiciones</h3>
+                <span class="badge" id="positions-badge">---</span>
+              </div>
+              <div class="panemeta mono" id="positions-meta">Selecciona un tema.</div>
+              <div class="panebody" id="positions"></div>
+              <div class="panefoot">
+                <button class="btn" id="positions-more" type="button" disabled>Cargar mas</button>
+                <span class="meta" id="positions-foot"></span>
+              </div>
+            </div>
+
+            <div class="pane">
+              <div class="panehead">
+                <h3>Evidencia</h3>
+                <div class="row" style="gap:8px;">
+                  <select id="evidence-kind">
+                    <option value="">Tipo: todo</option>
+                    <option value="says">dicho</option>
+                    <option value="does">hecho</option>
+                  </select>
+                  <button class="btn" id="review-open-sql" type="button" data-local-api="explorer-sql">
+                    Review queue SQL
+                  </button>
+                </div>
+              </div>
+              <div class="panemeta mono" id="evidence-meta">Selecciona una posicion.</div>
+              <div class="panebody" id="evidence"></div>
+              <div class="panefoot">
+                <button class="btn" id="evidence-more" type="button" disabled>Cargar mas</button>
+                <span class="meta" id="evidence-foot"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      function toText(v) {
+        return v === undefined || v === null ? "" : String(v);
+      }
+
+      function esc(s) {
+        return toText(s)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function norm(s) {
+        return toText(s).trim().toLowerCase();
+      }
+
+      function sameId(a, b) {
+        return String(a) === String(b);
+      }
+
+      function pickPreview(row) {
+        return (row && (row.preview_display || row.preview)) ? (row.preview_display || row.preview) : {};
+      }
+
+      function pickRaw(row) {
+        return (row && row.preview) ? row.preview : {};
+      }
+
+      const nodes = {
+        mode: document.getElementById("mode"),
+        api: document.getElementById("api"),
+        db: document.getElementById("db"),
+        chipMode: document.getElementById("chip-mode"),
+        chipApi: document.getElementById("chip-api"),
+        chipDb: document.getElementById("chip-db"),
+        summary: document.getElementById("summary"),
+        banner: document.getElementById("banner"),
+        reload: document.getElementById("reload"),
+
+        setsQ: document.getElementById("sets-q"),
+        setsActive: document.getElementById("sets-active"),
+        sets: document.getElementById("sets"),
+
+        topicsHigh: document.getElementById("topics-high"),
+        topicsQ: document.getElementById("topics-q"),
+        topics: document.getElementById("topics"),
+
+        method: document.getElementById("method"),
+        stance: document.getElementById("stance"),
+        positionsQ: document.getElementById("positions-q"),
+        openSql: document.getElementById("open-sql"),
+        positionsBadge: document.getElementById("positions-badge"),
+        positionsMeta: document.getElementById("positions-meta"),
+        positions: document.getElementById("positions"),
+        positionsMore: document.getElementById("positions-more"),
+        positionsFoot: document.getElementById("positions-foot"),
+
+        coherenceScope: document.getElementById("coherence-scope"),
+        coherenceMeta: document.getElementById("coherence-meta"),
+        coherenceFoot: document.getElementById("coherence-foot"),
+        cohOverlap: document.getElementById("coh-overlap"),
+        cohCoherent: document.getElementById("coh-coherent"),
+        cohIncoherent: document.getElementById("coh-incoherent"),
+        cohOverlapCount: document.getElementById("coh-overlap-count"),
+        cohCoherentCount: document.getElementById("coh-coherent-count"),
+        cohIncoherentCount: document.getElementById("coh-incoherent-count"),
+
+        evidenceKind: document.getElementById("evidence-kind"),
+        reviewOpenSql: document.getElementById("review-open-sql"),
+        evidenceMeta: document.getElementById("evidence-meta"),
+        evidence: document.getElementById("evidence"),
+        evidenceMore: document.getElementById("evidence-more"),
+        evidenceFoot: document.getElementById("evidence-foot"),
+      };
+
+      const APP_QUERY = new URLSearchParams(window.location.search);
+      const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim();
+      const STATIC_SNAPSHOT_PATH = "data/temas-preview.json";
+
+      const isLocalApiHost = (() => {
+        const host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
+      })();
+
+      const resolveApiPath = (path) => {
+        const endpoint = String(path || "").trim();
+        if (!endpoint) return "";
+        const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+        if (API_BASE_OVERRIDE) return `${API_BASE_OVERRIDE.replace(/\/+$/, "")}${normalized}`;
+        if (isLocalApiHost) return normalized;
+        return "";
+      };
+
+      const withApiParam = (url) => {
+        if (!API_BASE_OVERRIDE) return url;
+        return url + (url.includes("?") ? "&" : "?") + "api=" + encodeURIComponent(API_BASE_OVERRIDE);
+      };
+
+      async function readJson(url) {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        return await resp.json();
+      }
+
+      async function postJson(url, payload) {
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload || {}),
+        });
+        const text = await resp.text();
+        let data = {};
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch (_err) {
+          data = { error: text || `HTTP ${resp.status}` };
+        }
+        if (!resp.ok) {
+          const err = (data && data.error) ? String(data.error) : `HTTP ${resp.status}`;
+          throw new Error(err);
+        }
+        return data;
+      }
+
+      const state = {
+        mode: resolveApiPath("/api/health") ? "live" : "preview",
+        snapshot: null,
+        counts: {},
+        sets: [],
+        setTopics: [],
+        coherence: {
+          groups: [],
+          summary: null,
+          asOfDate: "",
+          loading: false,
+          selectedBucket: "",
+          scope: "",
+          pairsTotal: 0,
+        },
+        positions: { rows: [], meta: null, offset: 0, limit: 250, total: 0, loading: false },
+        evidence: { rows: [], meta: null, offset: 0, limit: 250, total: 0, loading: false, mode: "person", bucket: "" },
+        activeSetId: null,
+        activeTopicId: null,
+        activePersonId: null,
+        activePartyId: null,
+        reviewBusy: false,
+      };
+
+      function dotize(el, kind) {
+        const dot = el.querySelector(".dot");
+        if (!dot) return;
+        dot.className = "dot" + (kind ? " " + kind : "");
+      }
+
+      function setBanner(html) {
+        if (!html) {
+          nodes.banner.style.display = "none";
+          nodes.banner.innerHTML = "";
+          return;
+        }
+        nodes.banner.style.display = "block";
+        nodes.banner.innerHTML = html;
+      }
+
+      function setSummary(counts) {
+        const c = counts || {};
+        const items = [
+          ["topic_sets", c.topic_sets],
+          ["topics", c.topics],
+          ["topic_set_topics", c.topic_set_topics],
+          ["topic_positions", c.topic_positions],
+          ["topic_evidence", c.topic_evidence],
+          ["topic_evidence_reviews", c.topic_evidence_reviews],
+        ];
+        nodes.summary.innerHTML = items
+          .map(([k, v]) => `<span class="chip mono">${esc(k)}: <strong>${esc(v === undefined ? "?" : String(v))}</strong></span>`)
+          .join("");
+      }
+
+      function snapshotTable(table) {
+        const t = state.snapshot && state.snapshot.tables ? state.snapshot.tables[table] : null;
+        if (!t) return { meta: { table, total: 0, returned: 0, limit: 0, offset: 0 }, rows: [] };
+        return t;
+      }
+
+      function snapshotRows(table, { limit = 200, offset = 0, q = "", where = [] } = {}) {
+        const payload = snapshotTable(table);
+        if (payload && payload.error) return payload;
+        const all = Array.isArray(payload.rows) ? payload.rows : [];
+        let rows = all;
+        (where || []).forEach(([col, val]) => {
+          rows = rows.filter((r) => String((pickRaw(r) || {})[col]) === String(val));
+        });
+        const needle = norm(q);
+        if (needle) {
+          rows = rows.filter((r) => {
+            const p = pickPreview(r);
+            if (norm(r.label).includes(needle)) return true;
+            for (const v of Object.values(p || {})) {
+              if (norm(v).includes(needle)) return true;
+            }
+            return false;
+          });
+        }
+        const total = rows.length;
+        const sliced = rows.slice(Math.max(0, offset), Math.max(0, offset) + Math.max(1, limit));
+        return {
+          meta: {
+            table,
+            q: toText(q),
+            limit,
+            offset,
+            total,
+            returned: sliced.length,
+            preview: true,
+          },
+          rows: sliced,
+        };
+      }
+
+      async function apiRows(table, { limit = 200, offset = 0, q = "", where = [] } = {}) {
+        const p = new URLSearchParams();
+        p.set("table", table);
+        p.set("limit", String(limit));
+        p.set("offset", String(offset));
+        if (q) p.set("q", String(q));
+        (where || []).forEach(([col, val]) => {
+          p.append("col", String(col));
+          p.append("val", String(val));
+        });
+        const url = resolveApiPath(`/api/explorer/rows?${p.toString()}`);
+        if (!url) throw new Error("Sin API. Agrega ?api=http://127.0.0.1:9010 o ejecuta just explorer.");
+        return await readJson(url);
+      }
+
+      async function apiCoherence({ topicSetId, topicId, partyId, limit = 200, offset = 0 } = {}) {
+        const p = new URLSearchParams();
+        if (topicSetId) p.set("topic_set_id", String(topicSetId));
+        if (topicId) p.set("topic_id", String(topicId));
+        if (partyId) p.set("party_id", String(partyId));
+        p.set("limit", String(limit));
+        p.set("offset", String(offset));
+        const url = resolveApiPath(`/api/topics/coherence?${p.toString()}`);
+        if (!url) throw new Error("Sin API para /api/topics/coherence.");
+        return await readJson(url);
+      }
+
+      async function apiCoherenceEvidence({
+        bucket,
+        topicSetId,
+        topicId,
+        scope,
+        personId,
+        partyId,
+        limit = 200,
+        offset = 0,
+      } = {}) {
+        const p = new URLSearchParams();
+        p.set("bucket", String(bucket || "incoherent"));
+        if (topicSetId) p.set("topic_set_id", String(topicSetId));
+        if (topicId) p.set("topic_id", String(topicId));
+        if (scope) p.set("scope", String(scope));
+        if (personId) p.set("person_id", String(personId));
+        if (partyId) p.set("party_id", String(partyId));
+        p.set("limit", String(limit));
+        p.set("offset", String(offset));
+        const url = resolveApiPath(`/api/topics/coherence/evidence?${p.toString()}`);
+        if (!url) throw new Error("Sin API para /api/topics/coherence/evidence.");
+        return await readJson(url);
+      }
+
+      async function rows(table, opts) {
+        if (state.mode === "live") return await apiRows(table, opts);
+        return snapshotRows(table, opts);
+      }
+
+      function paramGet(key) {
+        try {
+          return new URL(window.location.href).searchParams.get(key);
+        } catch (_err) {
+          return null;
+        }
+      }
+
+      function paramSet(key, value, { push = false } = {}) {
+        const url = new URL(window.location.href);
+        if (!value) url.searchParams.delete(key);
+        else url.searchParams.set(key, String(value));
+        const next = url.toString();
+        if (push) history.pushState({}, "", next);
+        else history.replaceState({}, "", next);
+      }
+
+      function applyInitialSelection() {
+        // Backward-compatible: accept both short params (set/topic/person) and
+        // explicit ids (topic_set_id/topic_id/person_id) used by some exporters.
+        const setId = paramGet("set") || paramGet("topic_set_id");
+        const topicId = paramGet("topic") || paramGet("topic_id");
+        const personId = paramGet("person") || paramGet("person_id");
+        const partyId = paramGet("party") || paramGet("party_id");
+        const source = norm(paramGet("source"));
+        const view = norm(paramGet("view"));
+        const bucket = norm(paramGet("bucket"));
+        if (setId) state.activeSetId = setId;
+        if (topicId) state.activeTopicId = topicId;
+        if (personId) state.activePersonId = personId;
+        if (partyId) state.activePartyId = partyId;
+        if ((source === "citizen_coherence" || view === "coherence" || bucket) && state.activeTopicId) {
+          state.evidence.mode = "coherence";
+          state.evidence.bucket = bucket || "incoherent";
+          state.coherence.selectedBucket = state.evidence.bucket;
+        }
+
+        const method = paramGet("method");
+        if (method && nodes.method) nodes.method.value = method;
+        const stance = paramGet("stance");
+        if (stance) nodes.stance.value = stance;
+      }
+
+      function setModeUI() {
+        nodes.mode.textContent = state.mode === "live" ? "live" : "preview";
+        dotize(nodes.chipMode, state.mode === "live" ? "ok" : "warn");
+
+        if (state.mode === "live") {
+          nodes.api.textContent = API_BASE_OVERRIDE ? API_BASE_OVERRIDE : "local";
+          dotize(nodes.chipApi, "ok");
+          return;
+        }
+        nodes.api.textContent = API_BASE_OVERRIDE ? "override (fallo)" : "no";
+        dotize(nodes.chipApi, API_BASE_OVERRIDE ? "warn" : "bad");
+      }
+
+      async function loadSnapshotIfNeeded() {
+        if (state.mode !== "preview") return;
+        if (state.snapshot) return;
+        try {
+          state.snapshot = await readJson(STATIC_SNAPSHOT_PATH);
+        } catch (err) {
+          state.snapshot = { meta: {}, tables: {} };
+          setBanner(
+            `<div class="mono"><strong>Preview sin datos</strong>. No se encontro <span class="mono">${esc(
+              STATIC_SNAPSHOT_PATH
+            )}</span>. Ejecuta <span class="mono">just explorer-gh-pages-build</span> o abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
+          );
+        }
+      }
+
+      async function loadHealth() {
+        if (state.mode !== "live") return;
+        const url = resolveApiPath("/api/health");
+        if (!url) return;
+        try {
+          const payload = await readJson(url);
+          if (payload && payload.db_path) {
+            nodes.chipDb.style.display = "";
+            nodes.db.textContent = payload.db_path;
+          }
+        } catch (_err) {
+          // ignore
+        }
+      }
+
+      async function loadCounts() {
+        const tables = ["topic_sets", "topics", "topic_set_topics", "topic_positions", "topic_evidence", "topic_evidence_reviews"];
+        if (state.mode === "preview") {
+          const c = {};
+          tables.forEach((t) => {
+            const p = snapshotTable(t);
+            c[t] = p && p.meta && p.meta.total !== undefined ? Number(p.meta.total) : 0;
+          });
+          state.counts = c;
+          setSummary(c);
+          return;
+        }
+        const results = await Promise.all(
+          tables.map(async (t) => {
+            try {
+              const p = await apiRows(t, { limit: 1, offset: 0 });
+              const total = p && p.meta && p.meta.total !== undefined ? Number(p.meta.total) : 0;
+              return [t, total];
+            } catch (_err) {
+              return [t, null];
+            }
+          })
+        );
+        const c = {};
+        results.forEach(([t, n]) => {
+          c[t] = n;
+        });
+        state.counts = c;
+        setSummary(c);
+      }
+
+      function renderSets() {
+        const needle = norm(nodes.setsQ.value);
+        const onlyActive = Boolean(nodes.setsActive.checked);
+        const rows = (state.sets || []).filter((r) => {
+          const p = pickPreview(r);
+          const raw = pickRaw(r);
+          if (onlyActive) {
+            const active = String(raw.is_active || "1") === "1" || String(raw.is_active || "").toLowerCase() === "true";
+            if (!active) return false;
+          }
+          if (!needle) return true;
+          return (
+            norm(r.label).includes(needle) ||
+            norm(p.name).includes(needle) ||
+            norm(p.description).includes(needle) ||
+            norm(p.institution_id).includes(needle) ||
+            norm(p.territory_id).includes(needle) ||
+            norm(p.legislature).includes(needle)
+          );
+        });
+
+        if (!rows.length) {
+          nodes.sets.innerHTML = "<div class='empty'>Sin topic_sets.</div>";
+          return;
+        }
+
+        nodes.sets.innerHTML = "";
+        rows.forEach((r) => {
+          const p = pickPreview(r);
+          const raw = pickRaw(r);
+          const id = r.identity && r.identity.topic_set_id ? r.identity.topic_set_id : raw.topic_set_id;
+          const active = state.activeSetId && sameId(state.activeSetId, id);
+          const scopeBits = [p.institution_id, p.territory_id, p.admin_level_id, p.legislature].map(toText).filter(Boolean).join("  |  ");
+          const validBits = [toText(raw.valid_from), toText(raw.valid_to)].filter(Boolean).join(" .. ");
+          const isActive = String(raw.is_active || "1") === "1" || String(raw.is_active || "").toLowerCase() === "true";
+          const badge = isActive ? "<span class='badge ok'>active</span>" : "<span class='badge warn'>inactive</span>";
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "item" + (active ? " active" : "");
+          btn.innerHTML =
+            `<div class="row"><strong>${esc(toText(p.name || r.label || `topic_set ${id}`))}</strong>${badge}</div>` +
+            `<div class="meta">${esc(scopeBits || "scope: -")}</div>` +
+            (validBits ? `<div class="meta">${esc("valid: " + validBits)}</div>` : "");
+          btn.addEventListener("click", () => selectSet(id));
+          nodes.sets.appendChild(btn);
+        });
+      }
+
+      function renderTopics() {
+        if (!state.activeSetId) {
+          nodes.topics.innerHTML = "<div class='empty'>Selecciona un set.</div>";
+          return;
+        }
+        const needle = norm(nodes.topicsQ.value);
+        const onlyHigh = Boolean(nodes.topicsHigh.checked);
+
+        const rows = (state.setTopics || []).filter((r) => {
+          const p = pickPreview(r);
+          const raw = pickRaw(r);
+          const isHigh = String(raw.is_high_stakes || "0") === "1" || String(raw.is_high_stakes || "").toLowerCase() === "true";
+          if (onlyHigh && !isHigh) return false;
+          if (!needle) return true;
+          return norm(r.label).includes(needle) || norm(p.topic_id).includes(needle) || norm(p.notes).includes(needle);
+        });
+
+        if (!rows.length) {
+          nodes.topics.innerHTML = "<div class='empty'>Sin temas para este set.</div>";
+          return;
+        }
+
+        nodes.topics.innerHTML = "";
+        rows
+          .sort((a, b) => {
+            const ar = Number((pickRaw(a) || {}).stakes_rank || 999999);
+            const br = Number((pickRaw(b) || {}).stakes_rank || 999999);
+            if (ar !== br) return ar - br;
+            const as = Number((pickRaw(a) || {}).stakes_score || 0);
+            const bs = Number((pickRaw(b) || {}).stakes_score || 0);
+            return bs - as;
+          })
+          .forEach((r) => {
+            const p = pickPreview(r);
+            const raw = pickRaw(r);
+            const topicId = r.identity && r.identity.topic_id ? r.identity.topic_id : raw.topic_id;
+            const active = state.activeTopicId && sameId(state.activeTopicId, topicId);
+            const isHigh = String(raw.is_high_stakes || "0") === "1" || String(raw.is_high_stakes || "").toLowerCase() === "true";
+            const badge = isHigh ? "<span class='badge ok'>high</span>" : "<span class='badge'>topic</span>";
+            const stakes = [raw.stakes_rank !== undefined ? `rank=${raw.stakes_rank}` : "", raw.stakes_score !== undefined ? `score=${raw.stakes_score}` : ""]
+              .filter(Boolean)
+              .join("  ");
+
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "item" + (active ? " active" : "");
+            btn.innerHTML =
+              `<div class="row"><strong>${esc(toText(p.topic_id || `topic_id=${topicId}`))}</strong>${badge}</div>` +
+              `<div class="meta">${esc(stakes || "stakes: -")}</div>` +
+              (raw.notes ? `<div class="meta">${esc(toText(raw.notes))}</div>` : "");
+            btn.addEventListener("click", () => selectTopic(topicId));
+            nodes.topics.appendChild(btn);
+          });
+      }
+
+      function resetCoherenceState() {
+        state.coherence.groups = [];
+        state.coherence.summary = null;
+        state.coherence.asOfDate = "";
+        state.coherence.loading = false;
+        state.coherence.selectedBucket = "";
+        state.coherence.scope = "";
+        state.coherence.pairsTotal = 0;
+      }
+
+      function setCoherenceBucketActive(bucket) {
+        const active = norm(bucket);
+        [
+          ["overlap", nodes.cohOverlap],
+          ["coherent", nodes.cohCoherent],
+          ["incoherent", nodes.cohIncoherent],
+        ].forEach(([k, el]) => {
+          if (!el) return;
+          el.classList.toggle("active", active && active === k);
+        });
+      }
+
+      function renderCoherence() {
+        const hasSelection = Boolean(state.activeTopicId);
+        const summary = state.coherence.summary || {};
+        const groups = Array.isArray(state.coherence.groups) ? state.coherence.groups : [];
+        const overlap = Number(summary.overlap_total || 0);
+        const coherent = Number(summary.coherent_total || 0);
+        const incoherent = Number(summary.incoherent_total || 0);
+        const explicit = Number(summary.explicit_total || 0);
+        const scopeValues = Array.from(new Set(groups.map((g) => norm(g.scope || "")).filter(Boolean)));
+        const scopeLabel = scopeValues.length === 0 ? "-" : scopeValues.length === 1 ? scopeValues[0] : `${scopeValues.length} scopes`;
+
+        nodes.cohOverlapCount.textContent = String(overlap);
+        nodes.cohCoherentCount.textContent = String(coherent);
+        nodes.cohIncoherentCount.textContent = String(incoherent);
+        nodes.coherenceScope.textContent = `scope: ${scopeLabel}`;
+
+        if (!hasSelection) {
+          nodes.coherenceMeta.textContent = "Selecciona un tema para calcular overlap/coherent/incoherent.";
+          nodes.coherenceFoot.textContent = "Click en un bucket para drill-down a filas de evidencia.";
+          nodes.cohOverlap.disabled = true;
+          nodes.cohCoherent.disabled = true;
+          nodes.cohIncoherent.disabled = true;
+          setCoherenceBucketActive("");
+          return;
+        }
+
+        if (state.mode !== "live") {
+          nodes.coherenceMeta.textContent = "Coherencia interactiva requiere API live (no disponible en preview).";
+          nodes.coherenceFoot.textContent = "Arranca just explorer y abre con ?api=http://127.0.0.1:9010.";
+          nodes.cohOverlap.disabled = true;
+          nodes.cohCoherent.disabled = true;
+          nodes.cohIncoherent.disabled = true;
+          setCoherenceBucketActive("");
+          return;
+        }
+
+        if (state.coherence.loading) {
+          nodes.coherenceMeta.textContent = "Cargando coherencia...";
+          nodes.coherenceFoot.textContent = "";
+          nodes.cohOverlap.disabled = true;
+          nodes.cohCoherent.disabled = true;
+          nodes.cohIncoherent.disabled = true;
+          return;
+        }
+
+        const asOf = state.coherence.asOfDate ? `as_of=${state.coherence.asOfDate}` : "as_of=-";
+        const partyMeta = state.activePartyId ? ` party_id=${state.activePartyId}` : "";
+        nodes.coherenceMeta.textContent = `overlap=${overlap} explicit=${explicit} coherent=${coherent} incoherent=${incoherent}${partyMeta}`;
+        nodes.coherenceFoot.textContent =
+          `${asOf} | groups=${groups.length}. Click en un bucket para drill-down a evidence rows.`;
+        nodes.cohOverlap.disabled = overlap <= 0;
+        nodes.cohCoherent.disabled = coherent <= 0;
+        nodes.cohIncoherent.disabled = incoherent <= 0;
+        setCoherenceBucketActive(state.coherence.selectedBucket || "");
+      }
+
+      async function loadCoherenceSummary() {
+        if (!state.activeTopicId) {
+          resetCoherenceState();
+          renderCoherence();
+          return;
+        }
+        if (state.mode !== "live") {
+          resetCoherenceState();
+          renderCoherence();
+          return;
+        }
+
+        state.coherence.loading = true;
+        renderCoherence();
+        try {
+          const payload = await apiCoherence({
+            topicSetId: state.activeSetId,
+            topicId: state.activeTopicId,
+            partyId: state.activePartyId,
+            limit: 200,
+            offset: 0,
+          });
+          const groups = Array.isArray(payload && payload.groups) ? payload.groups : [];
+          const summary = (payload && payload.summary) ? payload.summary : {};
+          state.coherence.groups = groups;
+          state.coherence.summary = summary;
+          state.coherence.asOfDate = toText(payload && payload.meta ? payload.meta.as_of_date : "");
+          const scopeValues = Array.from(new Set(groups.map((g) => norm(g.scope || "")).filter(Boolean)));
+          state.coherence.scope = scopeValues.length === 1 ? scopeValues[0] : "";
+          state.coherence.pairsTotal = Number(summary.overlap_total || 0);
+          if (!state.activeSetId) {
+            const firstWithSet = groups.find((g) => g && g.topic_set_id);
+            if (firstWithSet && firstWithSet.topic_set_id) {
+              state.activeSetId = String(firstWithSet.topic_set_id);
+              paramSet("set", state.activeSetId);
+            }
+          }
+        } catch (err) {
+          state.coherence.groups = [];
+          state.coherence.summary = { overlap_total: 0, explicit_total: 0, coherent_total: 0, incoherent_total: 0 };
+          state.coherence.asOfDate = "";
+          state.coherence.scope = "";
+          state.coherence.pairsTotal = 0;
+          nodes.coherenceMeta.textContent = `Error de coherencia: ${toText(err && err.message ? err.message : err)}`;
+        } finally {
+          state.coherence.loading = false;
+          renderCoherence();
+        }
+      }
+
+      async function loadCoherenceEvidencePage({ reset, bucket }) {
+        if (state.evidence.loading) return;
+        if (!state.activeTopicId) return;
+        if (state.mode !== "live") return;
+
+        const useBucket = norm(bucket || state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
+        state.evidence.loading = true;
+        state.evidence.mode = "coherence";
+        state.evidence.bucket = useBucket;
+        state.coherence.selectedBucket = useBucket;
+        setCoherenceBucketActive(useBucket);
+        if (reset) {
+          state.evidence.offset = 0;
+          state.evidence.rows = [];
+          state.evidence.total = 0;
+        }
+        nodes.evidence.innerHTML = "<div class='empty'>Cargando...</div>";
+
+        const scope = state.coherence.scope || "";
+        try {
+          const payload = await apiCoherenceEvidence({
+            bucket: useBucket,
+            topicSetId: state.activeSetId,
+            topicId: state.activeTopicId,
+            scope: scope || "",
+            partyId: state.activePartyId,
+            limit: state.evidence.limit,
+            offset: state.evidence.offset + state.evidence.rows.length,
+          });
+          const got = Array.isArray(payload && payload.rows) ? payload.rows : [];
+          state.evidence.meta = payload || null;
+          const total = Number(payload && payload.summary ? payload.summary.evidence_total : 0);
+          state.evidence.total = Number.isFinite(total) ? total : 0;
+          state.evidence.rows = reset ? got : state.evidence.rows.concat(got);
+          renderEvidence();
+          renderCoherence();
+        } catch (err) {
+          state.evidence.rows = [];
+          state.evidence.total = 0;
+          state.evidence.meta = null;
+          nodes.evidence.innerHTML = `<div class='empty'>${esc(toText(err && err.message ? err.message : err))}</div>`;
+          nodes.evidenceMeta.textContent = `Error en drill-down: ${toText(err && err.message ? err.message : err)}`;
+          nodes.evidenceMore.disabled = true;
+        } finally {
+          state.evidence.loading = false;
+        }
+      }
+
+      async function drillCoherenceBucket(bucket) {
+        if (!state.activeTopicId) return;
+        if (state.mode !== "live") return;
+        state.activePersonId = null;
+        paramSet("person", "");
+        paramSet("party", state.activePartyId || "");
+        paramSet("party_id", state.activePartyId || "");
+        paramSet("view", "coherence");
+        paramSet("bucket", bucket || "incoherent");
+        paramSet("source", "citizen_coherence");
+        await loadCoherenceEvidencePage({ reset: true, bucket });
+        renderPositions();
+      }
+
+      function renderPositions() {
+        if (!state.activeTopicId) {
+          nodes.positions.innerHTML = "<div class='empty'>Selecciona un tema.</div>";
+          nodes.positionsMeta.textContent = "Selecciona un tema.";
+          nodes.positionsMore.disabled = true;
+          nodes.positionsFoot.textContent = "";
+          nodes.positionsBadge.textContent = "---";
+          return;
+        }
+
+        const needle = norm(nodes.positionsQ.value);
+        const stanceNeedle = norm(nodes.stance.value);
+        const methodNeedle = norm(nodes.method && nodes.method.value ? nodes.method.value : "");
+        const rows = (state.positions.rows || []).filter((r) => {
+          const p = pickPreview(r);
+          const raw = pickRaw(r);
+          if (stanceNeedle && norm(raw.stance) !== stanceNeedle) return false;
+          if (methodNeedle && methodNeedle !== "all" && norm(raw.computed_method) !== methodNeedle) return false;
+          if (!needle) return true;
+          if (norm(r.label).includes(needle)) return true;
+          for (const v of Object.values(p || {})) {
+            if (norm(v).includes(needle)) return true;
+          }
+          return false;
+        });
+
+        nodes.positionsBadge.textContent = `${rows.length}`;
+        nodes.positionsMeta.textContent = `Mostrando ${rows.length} (cargados=${state.positions.rows.length} total=${state.positions.total || 0}).`;
+
+        if (!rows.length) {
+          nodes.positions.innerHTML = "<div class='empty'>Sin posiciones para este filtro.</div>";
+        } else {
+          nodes.positions.innerHTML = "";
+          rows.slice(0, 220).forEach((r) => {
+            const p = pickPreview(r);
+            const raw = pickRaw(r);
+            const personId = raw.person_id;
+            const title = toText(p.person_id || r.label || `person_id=${personId}`);
+            const st = toText(raw.stance || "");
+            const badgeClass = st === "support" || st === "oppose" ? "ok" : st ? "warn" : "";
+            const metaBits = [
+              raw.as_of_date ? `as_of=${raw.as_of_date}` : "",
+              raw.computed_method ? `method=${raw.computed_method}` : "",
+              raw.computed_version ? `ver=${raw.computed_version}` : "",
+              raw.score !== undefined && raw.score !== null ? `score=${raw.score}` : "",
+              raw.evidence_count !== undefined && raw.evidence_count !== null ? `evidence=${raw.evidence_count}` : "",
+            ]
+              .filter(Boolean)
+              .join("  |  ");
+            const active = state.activePersonId && sameId(state.activePersonId, personId);
+
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "item" + (active ? " active" : "");
+            btn.innerHTML =
+              `<div class="row"><strong>${esc(title)}</strong><span class="badge ${badgeClass}">${esc(st || "-")}</span></div>` +
+              `<div class="meta">${esc(metaBits || "")}</div>`;
+            btn.addEventListener("click", () => selectPerson(personId));
+            nodes.positions.appendChild(btn);
+          });
+          if (rows.length > 220) {
+            const more = document.createElement("div");
+            more.className = "empty";
+            more.textContent = `+${rows.length - 220} mas (filtrado local). Usa Explorer SQL para ver todo.`;
+            nodes.positions.appendChild(more);
+          }
+        }
+
+        const canMore = state.positions.total && state.positions.offset + state.positions.rows.length < state.positions.total;
+        nodes.positionsMore.disabled = !canMore || state.positions.loading;
+        nodes.positionsFoot.textContent = canMore ? `offset=${state.positions.offset} limit=${state.positions.limit}` : "";
+      }
+
+      function inferEvidenceKind(p) {
+        const t = norm(p.evidence_type || "");
+        if (t.includes("vote") || t.includes("vot") || t.includes("boe") || t.includes("rdl") || t.includes("decreto")) return "does";
+        if (t.includes("interv") || t.includes("speech") || t.includes("diario") || t.includes("pleno")) return "says";
+        return "says";
+      }
+
+      function polarityFrom(p) {
+        const pol = Number(p.polarity);
+        if (Number.isFinite(pol) && (pol === -1 || pol === 0 || pol === 1)) return pol;
+        const st = norm(p.stance || "");
+        if (st === "support") return 1;
+        if (st === "oppose") return -1;
+        return 0;
+      }
+
+      function aggEvidence(rows, kind) {
+        const rel = rows.filter((r) => inferEvidenceKind(pickRaw(r) || {}) === kind);
+        let score = 0;
+        for (const r of rel) {
+          const p = pickRaw(r) || {};
+          const w = Number(p.weight);
+          const c = Number(p.confidence);
+          const weight = Number.isFinite(w) ? w : 1;
+          const conf = Number.isFinite(c) ? c : 1;
+          score += polarityFrom(p) * weight * conf;
+        }
+        const stance =
+          rel.length === 0
+            ? "no_signal"
+            : score > 0.2
+            ? "support"
+            : score < -0.2
+            ? "oppose"
+            : "unclear";
+        return { count: rel.length, score, stance };
+      }
+
+      function renderCoherenceEvidence() {
+        const payload = state.evidence.meta || {};
+        const summary = payload.summary || {};
+        const bucket = toText(state.evidence.bucket || state.coherence.selectedBucket || "incoherent");
+        const all = Array.isArray(state.evidence.rows) ? state.evidence.rows : [];
+        const kindFilter = norm(nodes.evidenceKind.value);
+        const filtered = kindFilter ? all.filter((r) => inferEvidenceKind(r || {}) === kindFilter) : all;
+        const pairsTotal = Number(summary.pairs_total || state.coherence.pairsTotal || 0);
+        const evidenceTotal = Number(summary.evidence_total || state.evidence.total || 0);
+        const asOf = state.coherence.asOfDate || toText(payload && payload.meta ? payload.meta.as_of_date : "");
+
+        nodes.evidenceMeta.innerHTML =
+          `COHERENCE bucket: <strong>${esc(bucket)}</strong> | ` +
+          `pairs=${esc(String(pairsTotal))} evidence=${esc(String(evidenceTotal))}` +
+          (asOf ? ` | as_of=${esc(asOf)}` : "");
+
+        if (!filtered.length) {
+          nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia para este bucket/filtro.</div>";
+        } else {
+          nodes.evidence.innerHTML = "";
+          filtered.slice(0, 90).forEach((raw) => {
+            const kind = inferEvidenceKind(raw || {});
+            const kindBadge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
+            const et = toText(raw.evidence_type || "evidence");
+            const personName = toText(raw.person_name || (raw.person_id ? `person_id=${raw.person_id}` : ""));
+            const partyName = toText(raw.party_name || (raw.party_id ? `party_id=${raw.party_id}` : ""));
+            const pair = `does=${toText(raw.does_stance || "-")} says=${toText(raw.says_stance || "-")}`;
+            const dt = toText(raw.evidence_date || "");
+            const src = toText(raw.source_id || "");
+            const conf = raw.evidence_confidence !== undefined && raw.evidence_confidence !== null ? `conf=${raw.evidence_confidence}` : "";
+            const url = raw.source_url
+              ? `<a class="link mono" href="${esc(toText(raw.source_url))}" target="_blank" rel="noopener">url</a>`
+              : "";
+            const evidenceId = raw.evidence_id;
+            const openSql = evidenceId
+              ? `<a class="link mono" href="${esc(
+                  withApiParam(`../explorer/?t=topic_evidence&tf=topic_&wc=evidence_id&wv=${encodeURIComponent(String(evidenceId))}`)
+                )}">sql</a>`
+              : "";
+            const ex = toText(raw.excerpt || "");
+
+            const div = document.createElement("div");
+            div.className = "ev";
+            div.innerHTML =
+              `<div class="row"><strong>${esc(et)}</strong>${kindBadge}</div>` +
+              `<div class="meta">${esc([personName, partyName].filter(Boolean).join("  | "))}  |  ${esc(pair)}</div>` +
+              `<div class="meta">${esc([dt, src, conf].filter(Boolean).join("  |  "))}${url ? "  |  " + url : ""}${openSql ? "  |  " + openSql : ""}</div>` +
+              (ex ? `<div class="excerpt">${esc(ex)}</div>` : "");
+            nodes.evidence.appendChild(div);
+          });
+          if (filtered.length > 90) {
+            const more = document.createElement("div");
+            more.className = "empty";
+            more.textContent = `+${filtered.length - 90} mas (filtrado local).`;
+            nodes.evidence.appendChild(more);
+          }
+        }
+
+        const canMore = state.evidence.total && state.evidence.offset + state.evidence.rows.length < state.evidence.total;
+        nodes.evidenceMore.disabled = !canMore || state.evidence.loading;
+        nodes.evidenceFoot.textContent = canMore
+          ? `bucket=${bucket} offset=${state.evidence.offset} limit=${state.evidence.limit}`
+          : `bucket=${bucket}`;
+      }
+
+      function renderEvidence() {
+        if (state.evidence.mode === "coherence") {
+          renderCoherenceEvidence();
+          return;
+        }
+
+        if (!state.activePersonId) {
+          nodes.evidence.innerHTML = "<div class='empty'>Selecciona una posicion.</div>";
+          nodes.evidenceMeta.textContent = "Selecciona una posicion.";
+          nodes.evidenceMore.disabled = true;
+          nodes.evidenceFoot.textContent = "";
+          return;
+        }
+
+        const kindFilter = norm(nodes.evidenceKind.value);
+        const all = state.evidence.rows || [];
+        const filtered = kindFilter ? all.filter((r) => inferEvidenceKind(pickRaw(r) || {}) === kindFilter) : all;
+
+        const says = aggEvidence(all, "says");
+        const does = aggEvidence(all, "does");
+        const diverges =
+          (says.stance === "support" || says.stance === "oppose") &&
+          (does.stance === "support" || does.stance === "oppose") &&
+          says.stance !== does.stance;
+
+        nodes.evidenceMeta.innerHTML =
+          `SAYS: <strong>${esc(says.stance)}</strong> (${esc(String(says.count))})  |  ` +
+          `DOES: <strong>${esc(does.stance)}</strong> (${esc(String(does.count))})  |  ` +
+          (diverges ? `<span class="badge warn">diverge</span>` : `<span class="badge ok">align/unknown</span>`);
+
+        if (!filtered.length) {
+          nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia cargada para este filtro.</div>";
+        } else {
+          nodes.evidence.innerHTML = "";
+          filtered
+            .slice(0, 90)
+            .forEach((r) => {
+              const p = pickPreview(r);
+              const raw = pickRaw(r);
+              const kind = inferEvidenceKind(raw || {});
+              const badge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
+              const dt = toText(p.evidence_date || raw.evidence_date || "");
+              const src = toText(p.source_id || raw.source_id || "");
+              const et = toText(p.evidence_type || raw.evidence_type || "evidence");
+              const conf = raw.confidence !== undefined && raw.confidence !== null ? `conf=${raw.confidence}` : "";
+              const weight = raw.weight !== undefined && raw.weight !== null ? `w=${raw.weight}` : "";
+              const url = p.source_url ? `<a class="link mono" href="${esc(toText(p.source_url))}" target="_blank" rel="noopener">url</a>` : "";
+
+              const evidenceId = r.identity && r.identity.evidence_id ? r.identity.evidence_id : raw.evidence_id;
+              const openSql = evidenceId
+                ? `<a class="link mono" href="${esc(
+                    withApiParam(`../explorer/?t=topic_evidence&tf=topic_&wc=evidence_id&wv=${encodeURIComponent(String(evidenceId))}`)
+                  )}">sql</a>`
+                : "";
+
+              const metaBits = [dt, src, conf, weight].filter(Boolean).join("  |  ");
+              const ex = toText(p.excerpt || raw.excerpt || "");
+
+              const div = document.createElement("div");
+              div.className = "ev";
+              div.innerHTML =
+                `<div class="row"><strong>${esc(et)}</strong>${badge}</div>` +
+                `<div class="meta">${esc(metaBits)}${url ? "  |  " + url : ""}${openSql ? "  |  " + openSql : ""}</div>` +
+                (ex ? `<div class="excerpt">${esc(ex)}</div>` : "");
+
+              if (state.mode === "live" && kind === "says" && evidenceId) {
+                const actions = document.createElement("div");
+                actions.className = "review-actions";
+                const resolveBtn = document.createElement("button");
+                resolveBtn.type = "button";
+                resolveBtn.className = "btn";
+                resolveBtn.textContent = "Resolve";
+                resolveBtn.disabled = state.reviewBusy;
+                resolveBtn.addEventListener("click", async () => {
+                  if (state.reviewBusy) return;
+                  const defaultStance = norm(raw.stance) || "support";
+                  const asked = window.prompt("Stance final (support|oppose|mixed|unclear|no_signal)", defaultStance);
+                  if (asked === null) return;
+                  const stance = norm(asked);
+                  if (!["support", "oppose", "mixed", "unclear", "no_signal"].includes(stance)) {
+                    window.alert("Stance invalido.");
+                    return;
+                  }
+                  const note = window.prompt("Nota de revision (opcional)", "") || "";
+                  await applyReviewDecision({
+                    evidenceIds: [Number(evidenceId)],
+                    status: "resolved",
+                    finalStance: stance,
+                    note,
+                    sourceId: src,
+                    recompute: true,
+                  });
+                });
+                actions.appendChild(resolveBtn);
+
+                const ignoreBtn = document.createElement("button");
+                ignoreBtn.type = "button";
+                ignoreBtn.className = "btn";
+                ignoreBtn.textContent = "Ignore";
+                ignoreBtn.disabled = state.reviewBusy;
+                ignoreBtn.addEventListener("click", async () => {
+                  if (state.reviewBusy) return;
+                  const note = window.prompt("Nota (opcional)", "") || "";
+                  await applyReviewDecision({
+                    evidenceIds: [Number(evidenceId)],
+                    status: "ignored",
+                    note,
+                    sourceId: src,
+                    recompute: false,
+                  });
+                });
+                actions.appendChild(ignoreBtn);
+
+                const reviewSql = document.createElement("a");
+                reviewSql.className = "link mono";
+                reviewSql.href = withApiParam(
+                  `../explorer/?t=topic_evidence_reviews&tf=topic_&wc=evidence_id&wv=${encodeURIComponent(String(evidenceId))}`
+                );
+                reviewSql.textContent = "review-sql";
+                actions.appendChild(reviewSql);
+                div.appendChild(actions);
+              }
+              nodes.evidence.appendChild(div);
+            });
+          if (filtered.length > 90) {
+            const more = document.createElement("div");
+            more.className = "empty";
+            more.textContent = `+${filtered.length - 90} mas (filtrado local).`;
+            nodes.evidence.appendChild(more);
+          }
+        }
+
+        const canMore = state.evidence.total && state.evidence.offset + state.evidence.rows.length < state.evidence.total;
+        nodes.evidenceMore.disabled = !canMore || state.evidence.loading;
+        nodes.evidenceFoot.textContent = canMore ? `offset=${state.evidence.offset} limit=${state.evidence.limit}` : "";
+      }
+
+      async function loadSets() {
+        nodes.sets.innerHTML = "<div class='empty'>Cargando...</div>";
+        const payload = await rows("topic_sets", { limit: 500, offset: 0 });
+        if (payload && payload.error) {
+          nodes.sets.innerHTML = `<div class='empty'>${esc(payload.error)}</div>`;
+          return;
+        }
+        state.sets = payload.rows || [];
+        renderSets();
+      }
+
+      async function loadTopicsForSet() {
+        state.setTopics = [];
+        nodes.topics.innerHTML = "<div class='empty'>Cargando...</div>";
+        nodes.positions.innerHTML = "<div class='empty'>Selecciona un tema.</div>";
+        nodes.evidence.innerHTML = "<div class='empty'>Selecciona una posicion.</div>";
+        resetCoherenceState();
+        renderCoherence();
+
+        if (!state.activeSetId) {
+          renderTopics();
+          return;
+        }
+        const payload = await rows("topic_set_topics", {
+          limit: 500,
+          offset: 0,
+          where: [["topic_set_id", state.activeSetId]],
+        });
+        if (payload && payload.error) {
+          nodes.topics.innerHTML = `<div class='empty'>${esc(payload.error)}</div>`;
+          return;
+        }
+        state.setTopics = payload.rows || [];
+        renderTopics();
+      }
+
+      async function loadPositionsPage({ reset }) {
+        if (state.positions.loading) return;
+        if (!state.activeTopicId) return;
+        state.positions.loading = true;
+        if (reset) {
+          state.positions.offset = 0;
+          state.positions.rows = [];
+          state.positions.total = 0;
+        }
+        nodes.positions.innerHTML = "<div class='empty'>Cargando...</div>";
+
+        const where = [["topic_id", state.activeTopicId]];
+        if (state.activeSetId) where.push(["topic_set_id", state.activeSetId]);
+        if (state.activePartyId && state.mode === "live") where.push(["party_id", state.activePartyId]);
+        const methodNeedle = norm(nodes.method && nodes.method.value ? nodes.method.value : "");
+        if (methodNeedle && methodNeedle !== "all") where.push(["computed_method", methodNeedle]);
+        const stanceNeedle = norm(nodes.stance.value);
+        if (stanceNeedle && state.mode === "live") where.push(["stance", stanceNeedle]);
+
+        const payload = await rows("topic_positions", {
+          limit: state.positions.limit,
+          offset: state.positions.offset + state.positions.rows.length,
+          where,
+        });
+        state.positions.loading = false;
+        if (payload && payload.error) {
+          state.positions.rows = [];
+          state.positions.total = 0;
+          nodes.positions.innerHTML = `<div class='empty'>${esc(payload.error)}</div>`;
+          nodes.positionsMeta.textContent = payload.error;
+          nodes.positionsMore.disabled = true;
+          return;
+        }
+        const got = payload.rows || [];
+        state.positions.meta = payload.meta || null;
+        state.positions.total = Number(payload.meta && payload.meta.total ? payload.meta.total : 0);
+        state.positions.rows = reset ? got : state.positions.rows.concat(got);
+        renderPositions();
+      }
+
+      async function loadEvidencePage({ reset }) {
+        if (state.evidence.loading) return;
+        if (!state.activePersonId || !state.activeTopicId) return;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        setCoherenceBucketActive("");
+        state.evidence.loading = true;
+        if (reset) {
+          state.evidence.offset = 0;
+          state.evidence.rows = [];
+          state.evidence.total = 0;
+        }
+        nodes.evidence.innerHTML = "<div class='empty'>Cargando...</div>";
+
+        const where = [
+          ["person_id", state.activePersonId],
+          ["topic_id", state.activeTopicId],
+        ];
+        if (state.activeSetId) where.push(["topic_set_id", state.activeSetId]);
+
+        const payload = await rows("topic_evidence", {
+          limit: state.evidence.limit,
+          offset: state.evidence.offset + state.evidence.rows.length,
+          where,
+        });
+        state.evidence.loading = false;
+        if (payload && payload.error) {
+          state.evidence.rows = [];
+          state.evidence.total = 0;
+          nodes.evidence.innerHTML = `<div class='empty'>${esc(payload.error)}</div>`;
+          nodes.evidenceMeta.textContent = payload.error;
+          nodes.evidenceMore.disabled = true;
+          return;
+        }
+        const got = payload.rows || [];
+        state.evidence.meta = payload.meta || null;
+        state.evidence.total = Number(payload.meta && payload.meta.total ? payload.meta.total : 0);
+        state.evidence.rows = reset ? got : state.evidence.rows.concat(got);
+        renderEvidence();
+      }
+
+      function openInSql() {
+        if (!state.activeSetId && !state.activeTopicId) {
+          window.location.href = withApiParam("../explorer/?t=topic_sets&tf=topic_");
+          return;
+        }
+        if (state.activeTopicId && state.activePersonId) {
+          const url =
+            "../explorer/?t=topic_evidence&tf=topic_" +
+            (state.activeSetId ? "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId)) : "") +
+            "&wc=topic_id&wv=" +
+            encodeURIComponent(String(state.activeTopicId)) +
+            "&wc=person_id&wv=" +
+            encodeURIComponent(String(state.activePersonId));
+          window.location.href = withApiParam(url);
+          return;
+        }
+        if (state.activeTopicId) {
+          if (state.evidence.mode === "coherence" && state.evidence.bucket) {
+            const bucket = encodeURIComponent(String(state.evidence.bucket));
+            const url =
+              "../explorer/?t=topic_evidence&tf=topic_" +
+              (state.activeSetId ? "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId)) : "") +
+              "&wc=topic_id&wv=" +
+              encodeURIComponent(String(state.activeTopicId));
+            window.location.href = withApiParam(url) + `#coherence-bucket=${bucket}`;
+            return;
+          }
+          const methodNeedle = norm(nodes.method && nodes.method.value ? nodes.method.value : "");
+          const url =
+            "../explorer/?t=topic_positions&tf=topic_" +
+            (state.activeSetId ? "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId)) : "") +
+            "&wc=topic_id&wv=" +
+            encodeURIComponent(String(state.activeTopicId)) +
+            (state.activePartyId ? ("&wc=party_id&wv=" + encodeURIComponent(String(state.activePartyId))) : "") +
+            (methodNeedle && methodNeedle !== "all"
+              ? ("&wc=computed_method&wv=" + encodeURIComponent(String(nodes.method.value)))
+              : "");
+          window.location.href = withApiParam(url);
+          return;
+        }
+        const url = "../explorer/?t=topic_set_topics&tf=topic_&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId));
+        window.location.href = withApiParam(url);
+      }
+
+      function openReviewQueueSql() {
+        let url = "../explorer/?t=topic_evidence_reviews&tf=topic_&wc=status&wv=pending";
+        if (state.activeSetId) {
+          url += "&wc=topic_set_id&wv=" + encodeURIComponent(String(state.activeSetId));
+        }
+        if (state.activeTopicId) {
+          url += "&wc=topic_id&wv=" + encodeURIComponent(String(state.activeTopicId));
+        }
+        if (state.activePersonId) {
+          url += "&wc=person_id&wv=" + encodeURIComponent(String(state.activePersonId));
+        }
+        window.location.href = withApiParam(url);
+      }
+
+      function inferAsOfDateForRecompute() {
+        const rows = state.positions && Array.isArray(state.positions.rows) ? state.positions.rows : [];
+        if (!rows.length) return "";
+        const raw = pickRaw(rows[0]) || {};
+        return toText(raw.as_of_date || "");
+      }
+
+      async function applyReviewDecision({ evidenceIds, status, finalStance, note, sourceId, recompute }) {
+        if (state.mode !== "live") {
+          window.alert("Modo preview no permite escribir.");
+          return;
+        }
+        const endpoint = resolveApiPath("/api/topics/reviews/decision");
+        if (!endpoint) {
+          window.alert("API no disponible.");
+          return;
+        }
+        state.reviewBusy = true;
+        try {
+          const payload = {
+            evidence_ids: (evidenceIds || []).map((x) => Number(x)).filter((x) => Number.isFinite(x) && x > 0),
+            status: String(status || "resolved"),
+            source_id: toText(sourceId || ""),
+            note: toText(note || ""),
+            recompute: Boolean(recompute),
+          };
+          if (finalStance) payload.final_stance = String(finalStance);
+          if (payload.recompute) {
+            const asOf = inferAsOfDateForRecompute();
+            if (asOf) payload.as_of_date = asOf;
+          }
+          const response = await postJson(endpoint, payload);
+          const decision = (response && response.decision) ? response.decision : {};
+          const changed = Number(decision.evidence_rows_updated || 0);
+          setBanner(
+            `<div class="mono"><strong>Review guardada</strong>. status=${esc(payload.status)} · matched=${esc(
+              String(decision.matched || 0)
+            )} · evidence_updated=${esc(String(changed))}</div>`
+          );
+          await Promise.all([loadCounts(), loadPositionsPage({ reset: true }), loadCoherenceSummary(), loadEvidencePage({ reset: true })]);
+        } catch (err) {
+          window.alert(`No se pudo guardar decision: ${String(err)}`);
+        } finally {
+          state.reviewBusy = false;
+        }
+      }
+
+      async function selectSet(id) {
+        if (!id) return;
+        state.activeSetId = String(id);
+        state.activeTopicId = null;
+        state.activePersonId = null;
+        state.positions.rows = [];
+        state.positions.total = 0;
+        state.evidence.rows = [];
+        state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        resetCoherenceState();
+        paramSet("set", state.activeSetId);
+        paramSet("topic", "");
+        paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
+        await loadTopicsForSet();
+        renderSets();
+        renderTopics();
+        renderCoherence();
+        renderPositions();
+        renderEvidence();
+      }
+
+      async function selectTopic(id) {
+        if (!id) return;
+        state.activeTopicId = String(id);
+        state.activePersonId = null;
+        paramSet("topic", state.activeTopicId);
+        paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
+        state.positions.rows = [];
+        state.positions.total = 0;
+        state.evidence.rows = [];
+        state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        renderTopics();
+        renderCoherence();
+        renderPositions();
+        renderEvidence();
+        await Promise.all([loadPositionsPage({ reset: true }), loadCoherenceSummary()]);
+      }
+
+      async function selectPerson(personId) {
+        if (!personId) return;
+        state.activePersonId = String(personId);
+        paramSet("person", state.activePersonId);
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        setCoherenceBucketActive("");
+        renderCoherence();
+        renderPositions();
+        await loadEvidencePage({ reset: true });
+      }
+
+      async function reloadAll() {
+        setModeUI();
+        await loadSnapshotIfNeeded();
+        await loadHealth();
+
+        if (state.mode === "preview") {
+          setBanner(
+            `<div class="mono"><strong>Modo preview</strong>: leyendo ${esc(STATIC_SNAPSHOT_PATH)}. ` +
+              `Para modo live: ejecuta <span class="mono">just explorer</span> y abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
+          );
+        } else {
+          setBanner("");
+        }
+
+        await loadCounts();
+        await loadSets();
+
+        // Restore selection if present in URL.
+        if (state.activeSetId) {
+          await loadTopicsForSet();
+          renderSets();
+          renderTopics();
+        }
+        if (state.activeTopicId) {
+          await Promise.all([loadPositionsPage({ reset: true }), loadCoherenceSummary()]);
+        }
+        if (state.activeTopicId && state.evidence.mode === "coherence" && (state.evidence.bucket || state.coherence.selectedBucket)) {
+          await loadCoherenceEvidencePage({ reset: true, bucket: state.evidence.bucket || state.coherence.selectedBucket });
+        } else if (state.activeTopicId && state.activePersonId) {
+          await loadEvidencePage({ reset: true });
+        } else {
+          renderEvidence();
+        }
+        renderCoherence();
+      }
+
+      // Wire events.
+      nodes.setsQ.addEventListener("input", () => renderSets());
+      nodes.setsActive.addEventListener("change", () => renderSets());
+      nodes.topicsQ.addEventListener("input", () => renderTopics());
+      nodes.topicsHigh.addEventListener("change", () => renderTopics());
+      nodes.positionsQ.addEventListener("input", () => renderPositions());
+      nodes.method.addEventListener("change", () => {
+        paramSet("method", nodes.method.value || "");
+        state.activePersonId = null;
+        state.evidence.rows = [];
+        state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
+        loadPositionsPage({ reset: true }).catch(() => {});
+        renderCoherence();
+        renderEvidence();
+      });
+      nodes.stance.addEventListener("change", () => {
+        paramSet("stance", nodes.stance.value || "");
+        state.activePersonId = null;
+        state.evidence.rows = [];
+        state.evidence.total = 0;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        state.coherence.selectedBucket = "";
+        paramSet("person", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
+        loadPositionsPage({ reset: true }).catch(() => {});
+        renderCoherence();
+        renderEvidence();
+      });
+      nodes.openSql.addEventListener("click", openInSql);
+      nodes.positionsMore.addEventListener("click", () => loadPositionsPage({ reset: false }));
+      nodes.evidenceKind.addEventListener("change", () => renderEvidence());
+      nodes.reviewOpenSql.addEventListener("click", openReviewQueueSql);
+      nodes.cohOverlap.addEventListener("click", () => drillCoherenceBucket("overlap").catch(() => {}));
+      nodes.cohCoherent.addEventListener("click", () => drillCoherenceBucket("coherent").catch(() => {}));
+      nodes.cohIncoherent.addEventListener("click", () => drillCoherenceBucket("incoherent").catch(() => {}));
+      nodes.evidenceMore.addEventListener("click", () => {
+        if (state.evidence.mode === "coherence") {
+          loadCoherenceEvidencePage({ reset: false, bucket: state.evidence.bucket || state.coherence.selectedBucket }).catch(() => {});
+          return;
+        }
+        loadEvidencePage({ reset: false }).catch(() => {});
+      });
+      nodes.reload.addEventListener("click", () => {
+        state.activeSetId = null;
+        state.activeTopicId = null;
+        state.activePersonId = null;
+        state.activePartyId = null;
+        state.evidence.mode = "person";
+        state.evidence.bucket = "";
+        resetCoherenceState();
+        paramSet("set", "");
+        paramSet("topic", "");
+        paramSet("person", "");
+        paramSet("party", "");
+        paramSet("party_id", "");
+        paramSet("bucket", "");
+        paramSet("source", "");
+        paramSet("view", "");
+        reloadAll().catch((err) => setBanner(`<div class="mono">Error: ${esc(toText(err && err.message ? err.message : err))}</div>`));
+      });
+
+      applyInitialSelection();
+      reloadAll().catch((err) => {
+        setModeUI();
+        setBanner(`<div class="mono">Error: ${esc(toText(err && err.message ? err.message : err))}</div>`);
+      });
+    </script>
+  </body>
+</html>

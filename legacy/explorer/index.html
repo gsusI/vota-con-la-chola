@@ -1,0 +1,2789 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola | Data Explorer</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-a: #f6f7f4;
+        --bg-b: #dbe8f8;
+        --ink: #1e1d19;
+        --ink-soft: #55524a;
+        --panel: rgba(255, 255, 255, 0.9);
+        --line: #d9e0ea;
+        --accent: #0b5fff;
+        --accent-2: #ff6b35;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        color: var(--ink);
+        font-family: "Space Grotesk", sans-serif;
+        background:
+          radial-gradient(900px 420px at 10% 10%, #fef3e3 0%, transparent 72%),
+          radial-gradient(850px 440px at 90% 95%, #dfe9ff 0%, transparent 74%),
+          linear-gradient(120deg, var(--bg-a), var(--bg-b));
+      }
+
+      .page {
+        height: 100%;
+        padding: 14px;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 16px;
+        background: var(--panel);
+        backdrop-filter: blur(7px);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      .topbar {
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .title-wrap h1 {
+        margin: 0;
+        font-size: 1.08rem;
+      }
+
+      .title-wrap p {
+        margin: 2px 0 0;
+        color: var(--ink-soft);
+        font-size: 0.85rem;
+      }
+
+      .switch {
+        display: inline-flex;
+        gap: 8px;
+      }
+
+      .switch a {
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        color: #112;
+        font-size: 0.82rem;
+      }
+
+      .superheader {
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        min-height: 34px;
+      }
+
+      .superlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #d0def8;
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #102a5c;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .superlink svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        flex: 0 0 auto;
+      }
+
+      .switch a.active {
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), #3f7cff);
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .layout {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr) minmax(340px, 1.1fr);
+        gap: 12px;
+      }
+
+      .panel {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .panel .head {
+        padding: 12px 12px 6px;
+      }
+
+      .panel h2 {
+        margin: 0;
+        font-size: 0.96rem;
+      }
+
+      .panel p {
+        margin: 4px 0 0;
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+      }
+
+      .controls {
+        padding: 0 12px 10px;
+        display: grid;
+        gap: 8px;
+      }
+
+      input,
+      select,
+      button {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #d6dce5;
+        padding: 8px 10px;
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        background: linear-gradient(135deg, var(--accent-2), #f7a15b);
+        color: #161311;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #edf2fb;
+        color: #1c2a48;
+      }
+
+      .list {
+        min-height: 0;
+        flex: 1 1 auto;
+        overflow: auto;
+        border-top: 1px solid #edf1f7;
+        padding: 10px 10px 14px;
+      }
+
+      .item {
+        width: 100%;
+        text-align: left;
+        display: grid;
+        gap: 6px;
+        padding: 10px 10px;
+        border: 1px solid #e4e9f3;
+        border-radius: 10px;
+        background: #fff;
+        margin-bottom: 7px;
+        cursor: pointer;
+        transition:
+          border-color 120ms ease,
+          box-shadow 120ms ease,
+          transform 120ms ease,
+          background 120ms ease;
+      }
+
+      .item:hover {
+        border-color: #b9cfff;
+        box-shadow: 0 10px 20px rgba(28, 58, 120, 0.08);
+        transform: translateY(-1px);
+        background: #fbfcff;
+      }
+
+      .item:active {
+        transform: translateY(0);
+      }
+
+      .item[disabled] {
+        cursor: default;
+        opacity: 0.6;
+      }
+
+      .item.active {
+        border-color: #9dbcff;
+        box-shadow: 0 0 0 2px #e6efff inset;
+      }
+
+      .item h3 {
+        margin: 0;
+        font-size: 0.92rem;
+        letter-spacing: -0.01em;
+      }
+
+      .meta {
+        color: var(--ink-soft);
+        font-size: 0.77rem;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .item-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .item-id {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        color: #6a6a64;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 56%;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .tag {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        padding: 3px 7px;
+        border-radius: 999px;
+        border: 1px solid #d7e3ff;
+        background: #f3f7ff;
+        color: #17376f;
+      }
+
+      .tag b {
+        font-weight: 600;
+        color: #2a2b2a;
+        margin-right: 5px;
+      }
+
+      .row-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .row-actions input,
+      .row-actions select {
+        flex: 1;
+      }
+
+      .row-actions button {
+        flex: 0 0 auto;
+      }
+
+      .row-actions button {
+        width: auto;
+      }
+
+      .detail {
+        min-height: 0;
+        flex: 1 1 auto;
+        overflow: auto;
+        border-top: 1px solid #edf1f7;
+        padding: 10px;
+      }
+
+      .path {
+        padding: 0 12px 8px;
+        color: #3d4a64;
+        font-size: 0.78rem;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .path .path-btn {
+        display: inline-flex;
+        margin: 0;
+      }
+
+      .path .muted {
+        color: var(--ink-soft);
+      }
+
+      .path-btn {
+        border: 1px solid #d7e3ff;
+        background: #f3f7ff;
+        color: #133a84;
+        cursor: pointer;
+        padding: 3px 8px;
+        font: inherit;
+        border-radius: 999px;
+        text-decoration: none;
+      }
+
+      .path-btn:hover {
+        border-color: #b9cfff;
+        background: #eaf1ff;
+      }
+
+      .kv-table {
+        border: 1px solid #e5ebf4;
+        border-radius: 12px;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .kv-row {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 12px;
+        padding: 8px 10px;
+        border-top: 1px solid #f0f3f9;
+      }
+
+      @media (max-width: 720px) {
+        .kv-row {
+          grid-template-columns: 1fr;
+          gap: 5px;
+        }
+        .item-id {
+          max-width: 100%;
+        }
+      }
+
+      .kv-row:first-child {
+        border-top: 0;
+      }
+
+      .kv-row:nth-child(odd) {
+        background: #fcfdff;
+      }
+
+      .kv-row .k {
+        color: #4e4b44;
+        font-size: 0.78rem;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .kv-row .v {
+        word-break: break-word;
+        font-size: 0.84rem;
+      }
+
+      .rel-section {
+        margin-top: 14px;
+      }
+
+      .rel-section h3 {
+        margin: 0 0 8px;
+        font-size: 0.88rem;
+      }
+
+      .rel-card {
+        border: 1px solid #e5ebf4;
+        border-radius: 10px;
+        padding: 9px;
+        background: #fff;
+        margin-bottom: 8px;
+      }
+
+      .rel-title-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 4px;
+      }
+
+      .rel-title {
+        font-weight: 700;
+        font-size: 0.88rem;
+      }
+
+      .rel-count {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        color: var(--ink-soft);
+      }
+
+      .rel-sub {
+        color: var(--ink-soft);
+        font-size: 0.74rem;
+        font-family: "IBM Plex Mono", monospace;
+        margin-bottom: 6px;
+      }
+
+      .rel-items {
+        margin-top: 10px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .rel-items .item {
+        margin: 0;
+        text-align: left;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 8px;
+      }
+
+      .pill {
+        border: 1px solid #cfdcf3;
+        background: #f4f8ff;
+        color: #16336b;
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-size: 0.76rem;
+        cursor: pointer;
+      }
+
+      a.pill {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .pill.facet {
+        border-color: #ffd9c8;
+        background: #fff3ec;
+        color: #5b2412;
+      }
+
+      .pill.rel-open {
+        border-color: #b9cfff;
+        background: #eaf1ff;
+        color: #123a80;
+        font-weight: 700;
+      }
+
+      .inline-anchor {
+        color: #0b5fff;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .pill[disabled] {
+        cursor: default;
+        opacity: 0.6;
+      }
+
+      @media (max-width: 1100px) {
+        .layout {
+          grid-template-columns: 1fr;
+          grid-template-rows: minmax(280px, 35vh) minmax(280px, 35vh) minmax(320px, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+      <div class="page">
+        <div class="superheader">
+          <a class="superlink" href="../">← Índice</a>
+          <a
+            class="superlink"
+            href="https://github.com/gsusI/vota-con-la-chola"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver el código en GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            Ver el código
+          </a>
+        </div>
+        <header class="topbar card">
+          <div class="title-wrap">
+            <h1>Data Explorer (Wikidata-like)</h1>
+          <p>Navegacion dinamica por tablas, registros y relaciones (incluye temas/evidencia/posiciones cuando existan).</p>
+        </div>
+        <nav class="switch">
+          <a href="../graph/">Graph</a>
+          <a class="active" href="./">Explorer</a>
+        </nav>
+      </header>
+
+      <main class="layout">
+        <section class="panel card">
+          <div class="head">
+            <h2>1) Tablas</h2>
+            <p>Vista top-level de todo lo disponible. Atajo: abre el modelo de posiciones por temas.</p>
+          </div>
+          <div class="controls">
+            <input id="tableFilter" type="text" placeholder="Filtrar tablas..." />
+            <button id="reloadSchema" class="secondary">Recargar esquema</button>
+            <div class="pill-row">
+              <a class="pill" href="../explorer-temas/">Vista Temas</a>
+              <a class="pill" href="./?t=topic_positions&tf=topic_">Posiciones</a>
+              <a class="pill" href="./?t=topic_evidence&tf=topic_">Evidencia</a>
+              <a class="pill" href="./?t=topics&tf=topic">Temas</a>
+            </div>
+          </div>
+          <div id="tables" class="list"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>2) Registros</h2>
+            <p id="recordsHint">Selecciona una tabla para empezar.</p>
+          </div>
+          <div class="controls">
+            <input id="recordSearch" type="text" placeholder="Buscar en columnas textuales" />
+            <div class="row-actions">
+              <button id="applySearch" class="secondary">Buscar</button>
+              <button id="prevPage" class="secondary">Prev</button>
+              <button id="nextPage" class="secondary">Next</button>
+            </div>
+            <div class="row-actions">
+              <select id="filterCol" title="Columna a filtrar"></select>
+              <input id="filterVal" type="text" placeholder="Valor (=)" />
+              <button id="addFilter" class="secondary" type="button" style="width:auto;">Add</button>
+              <button id="clearFilters" class="secondary" type="button" style="width:auto;">Clear</button>
+            </div>
+            <div id="filtersBar" class="pill-row"></div>
+            <div class="row-actions">
+              <label for="pageSize" class="meta" style="display:flex;align-items:center;">Page size</label>
+              <select id="pageSize">
+                <option value="25">25</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
+          <div id="records" class="list"></div>
+        </section>
+
+        <section class="panel card">
+          <div class="head">
+            <h2>3) Detalle y relaciones</h2>
+            <p>Cada click abre el siguiente nivel segun claves foraneas salientes/entrantes.</p>
+          </div>
+          <div id="pathTrail" class="path"></div>
+          <div id="detail" class="detail"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const state = {
+        schema: null,
+        tables: [],
+        activeTable: "",
+        routeRootTable: "",
+        activeRecordIdentity: null,
+        whereCols: [],
+        whereVals: [],
+        offset: 0,
+        loaded: 0,
+        total: 0,
+        recordsLoading: false,
+        limit: 50,
+        q: "",
+        navStack: [],
+        lastHistorySig: "",
+      };
+
+      const els = {
+        tableFilter: document.getElementById("tableFilter"),
+        reloadSchema: document.getElementById("reloadSchema"),
+        tables: document.getElementById("tables"),
+        pathTrail: document.getElementById("pathTrail"),
+        recordsHint: document.getElementById("recordsHint"),
+        recordSearch: document.getElementById("recordSearch"),
+        applySearch: document.getElementById("applySearch"),
+        prevPage: document.getElementById("prevPage"),
+        nextPage: document.getElementById("nextPage"),
+        filterCol: document.getElementById("filterCol"),
+        filterVal: document.getElementById("filterVal"),
+        addFilter: document.getElementById("addFilter"),
+        clearFilters: document.getElementById("clearFilters"),
+        filtersBar: document.getElementById("filtersBar"),
+        pageSize: document.getElementById("pageSize"),
+        records: document.getElementById("records"),
+        detail: document.getElementById("detail"),
+      };
+
+      const APP_QUERY = new URLSearchParams(window.location.search || "");
+      const API_BASE_OVERRIDE = (APP_QUERY.get("api") || "").trim().replace(/\/+$/, "");
+      const HF_DATASET_REPO = (APP_QUERY.get("dataset") || "JesusIC/vota-con-la-chola-data").trim();
+      const HF_REF = (APP_QUERY.get("hf_ref") || "main").trim();
+      const HF_SNAPSHOT_OVERRIDE = (APP_QUERY.get("snapshot") || "").trim();
+      const HF_DUCKDB_ESM = "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm";
+      const LABEL_COLUMN_CANDIDATES = [
+        "full_name",
+        "name",
+        "label",
+        "title",
+        "role_title",
+        "institution_name",
+        "party_name",
+        "display_name",
+        "acronym",
+        "source_record_id",
+        "source_url",
+        "descripcion",
+        "description",
+        "nombre",
+        "code",
+        "canonical_key",
+        "source_id",
+      ];
+      const FACET_COLUMN_CANDIDATES = [
+        "role_id",
+        "role_title",
+        "admin_level_id",
+        "level",
+        "scope",
+        "status",
+        "type",
+        "kind",
+        "category",
+        "territory_code",
+        "territory_id",
+      ];
+      const isLocalApiHost = (() => {
+        const host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "0.0.0.0";
+      })();
+
+      const backend = {
+        mode: "unknown",
+        apiBase: "",
+        sourceLabel: "",
+        hf: null,
+      };
+
+      function quoteIdent(value) {
+        return `"${String(value || "").replaceAll('"', '""')}"`;
+      }
+
+      function quoteLiteral(value) {
+        if (value === null || value === undefined) return "NULL";
+        return `'${String(value).replaceAll("'", "''")}'`;
+      }
+
+      function normalizeCell(value) {
+        if (value === null || value === undefined) return null;
+        if (typeof value === "bigint") {
+          const n = Number(value);
+          return Number.isSafeInteger(n) ? n : String(value);
+        }
+        if (value instanceof Date) return value.toISOString();
+        return value;
+      }
+
+      function normalizeRowObject(row) {
+        const out = {};
+        for (const [k, v] of Object.entries(row || {})) {
+          out[String(k)] = normalizeCell(v);
+        }
+        return out;
+      }
+
+      function clampInt(value, fallback, min = 0, max = 10000) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return fallback;
+        const i = Math.trunc(n);
+        return Math.max(min, Math.min(max, i));
+      }
+
+      function apiUrl(path) {
+        const endpoint = String(path || "").trim();
+        const normalized = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+        if (backend.apiBase) return `${backend.apiBase}${normalized}`;
+        return normalized;
+      }
+
+      function hfUrl(path) {
+        const rel = String(path || "").replace(/^\/+/, "");
+        const ref = encodeURIComponent(HF_REF || "main");
+        return `https://huggingface.co/datasets/${HF_DATASET_REPO}/resolve/${ref}/${rel}`;
+      }
+
+      async function fetchJson(url, opts = {}) {
+        const { allow404 = false } = opts;
+        const resp = await fetch(url);
+        if (allow404 && resp.status === 404) return null;
+        if (!resp.ok) {
+          throw new Error(`HTTP ${resp.status} @ ${url}`);
+        }
+        return await resp.json();
+      }
+
+      async function fetchApiJson(path) {
+        const url = apiUrl(path);
+        try {
+          const resp = await fetch(url);
+          const text = await resp.text();
+          let payload = {};
+          try {
+            payload = text ? JSON.parse(text) : {};
+          } catch {
+            payload = { error: text || `HTTP ${resp.status}` };
+          }
+          if (!resp.ok && !payload.error) {
+            payload.error = `HTTP ${resp.status}`;
+          }
+          return payload;
+        } catch (error) {
+          return { error: String(error) };
+        }
+      }
+
+      async function checkApiHealth(apiBase) {
+        const endpoint = `${apiBase ? apiBase.replace(/\/+$/, "") : ""}/api/health`;
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort("timeout"), 1400);
+        try {
+          const resp = await fetch(endpoint, { signal: ctrl.signal });
+          return resp.ok;
+        } catch {
+          return false;
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+
+      function shapeWhereMap(cols, vals) {
+        const out = {};
+        for (let i = 0; i < Math.min(cols.length, vals.length); i += 1) {
+          out[String(cols[i])] = vals[i];
+        }
+        return out;
+      }
+
+      function isIdLikeColumn(column) {
+        const col = String(column || "").trim().toLowerCase();
+        if (!col) return false;
+        if (col === "id" || col === "rowid" || col === "__rowid") return true;
+        return col.endsWith("_id") || col.endsWith("_pk");
+      }
+
+      function isTextLikeType(typeName) {
+        const text = String(typeName || "").toUpperCase();
+        if (!text) return true;
+        return ["CHAR", "CLOB", "TEXT", "JSON"].some((token) => text.includes(token));
+      }
+
+      function chooseLabelColumn(meta) {
+        for (const cand of LABEL_COLUMN_CANDIDATES) {
+          if ((meta.column_names || []).includes(cand)) return cand;
+        }
+        for (const col of meta.column_names || []) {
+          if (isTextLikeType((meta.column_types || {})[col])) return col;
+        }
+        return null;
+      }
+
+      function rowIdentityFromMeta(meta, row) {
+        const pk = Array.isArray(meta.primary_key) ? meta.primary_key : [];
+        if (!pk.length) return null;
+        const ident = {};
+        for (const col of pk) {
+          if (!(col in row)) return null;
+          if (row[col] === null || row[col] === undefined) return null;
+          ident[col] = normalizeCell(row[col]);
+        }
+        return ident;
+      }
+
+      function inferRowLabel(meta, row) {
+        for (const cand of LABEL_COLUMN_CANDIDATES) {
+          if (cand in row && row[cand] !== null && row[cand] !== undefined && row[cand] !== "") {
+            return String(row[cand]);
+          }
+        }
+        for (const col of meta.primary_key || []) {
+          if (col in row && row[col] !== null && row[col] !== undefined) {
+            return `${col}=${row[col]}`;
+          }
+        }
+        for (const col of meta.column_names || []) {
+          const value = row[col];
+          if (typeof value === "string" && value.trim()) return value.trim();
+        }
+        for (const col of meta.column_names || []) {
+          const value = row[col];
+          if (value !== null && value !== undefined && value !== "") return `${col}=${value}`;
+        }
+        return "(registro vacio)";
+      }
+
+      function enrichRowLabel(meta, row, label, previewDisplay) {
+        if (!previewDisplay) return label;
+        const personDisp = previewDisplay.person_id;
+        const partyDisp = previewDisplay.party_id;
+        const roleTitle = row.role_title || previewDisplay.role_title;
+        const rawPerson = row.person_id;
+        const rawParty = row.party_id;
+        const personResolved =
+          typeof personDisp === "string" &&
+          personDisp.trim() &&
+          rawPerson !== null &&
+          rawPerson !== undefined &&
+          String(rawPerson) !== personDisp;
+        const partyResolved =
+          typeof partyDisp === "string" &&
+          partyDisp.trim() &&
+          rawParty !== null &&
+          rawParty !== undefined &&
+          String(rawParty) !== partyDisp;
+        if (!personResolved) return label;
+        let head = personDisp.trim();
+        if (partyResolved) head = `${head} (${partyDisp.trim()})`;
+        if (typeof roleTitle === "string" && roleTitle.trim() && String(label).trim() === roleTitle.trim()) {
+          return `${head} · ${roleTitle.trim()}`;
+        }
+        return head;
+      }
+
+      function buildRowPreview(meta, row, maxItems = 6) {
+        const preferredHuman = LABEL_COLUMN_CANDIDATES.filter((c) => c in row && !isIdLikeColumn(c));
+        const preferredIds = LABEL_COLUMN_CANDIDATES.filter((c) => c in row && isIdLikeColumn(c));
+
+        const fkCols = [];
+        for (const fk of meta.foreign_keys_out || []) {
+          const fromCols = fk.from_columns || [];
+          if (fromCols.length !== 1) continue;
+          const col = fromCols[0];
+          if (!fkCols.includes(col) && col in row) fkCols.push(col);
+        }
+
+        const rest = (meta.column_names || []).filter(
+          (c) => !preferredHuman.includes(c) && !preferredIds.includes(c) && !fkCols.includes(c),
+        );
+        rest.sort((a, b) => String(a).localeCompare(String(b)));
+        const ordered = [...preferredHuman, ...fkCols, ...rest, ...preferredIds];
+
+        const preview = {};
+        for (const col of ordered) {
+          if (!(col in row)) continue;
+          const value = normalizeCell(row[col]);
+          if (value === null || value === undefined || value === "") continue;
+          if (isIdLikeColumn(col) && !fkCols.includes(col) && Object.keys(preview).length > 0) continue;
+          preview[col] = value;
+          if (Object.keys(preview).length >= maxItems) break;
+        }
+        return preview;
+      }
+
+      function parseOrderByColumns(orderBy, columnNames) {
+        const cols = String(orderBy || "")
+          .split(",")
+          .map((v) => v.trim())
+          .filter(Boolean);
+        if (!cols.length) return [];
+        if (cols.length === 1 && cols[0].toLowerCase() === "rowid") return [];
+        const allowed = new Set(columnNames || []);
+        return cols.filter((c) => allowed.has(c));
+      }
+
+      function pickFkTarget(fromTable, fromCol, candidates) {
+        if (!candidates.length) return "";
+        if (candidates.length === 1) return candidates[0];
+        const colLower = String(fromCol || "").toLowerCase();
+        const prefix = colLower.replace(/_(id|pk|code)$/i, "");
+        const singular = prefix.endsWith("ies")
+          ? `${prefix.slice(0, -3)}y`
+          : prefix.endsWith("s")
+            ? prefix.slice(0, -1)
+            : prefix;
+
+        const scored = candidates
+          .map((name) => {
+            const n = String(name || "").toLowerCase();
+            let score = 0;
+            if (n === prefix || n === `${prefix}s`) score += 6;
+            if (n === singular || n === `${singular}s`) score += 5;
+            if (n.includes(prefix) || prefix.includes(n)) score += 2;
+            if (n.includes(singular) || singular.includes(n)) score += 2;
+            if (n === String(fromTable || "").toLowerCase()) score -= 10;
+            return { name, score };
+          })
+          .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, "es"));
+
+        if (!scored.length || scored[0].score <= 0) return "";
+        if (scored.length > 1 && scored[0].score === scored[1].score) return "";
+        return scored[0].name;
+      }
+
+      function inferForeignKeys(tables) {
+        const pkByColumn = new Map();
+        for (const table of tables) {
+          const pk = table.primary_key || [];
+          if (pk.length !== 1) continue;
+          const col = pk[0];
+          const arr = pkByColumn.get(col) || [];
+          arr.push(table.name);
+          pkByColumn.set(col, arr);
+        }
+
+        for (const table of tables) {
+          const out = [];
+          const seen = new Set();
+          for (const col of table.column_names || []) {
+            if ((table.primary_key || []).includes(col)) continue;
+            if (!/(?:_id|_pk|_code)$/i.test(col)) continue;
+            const candidates = (pkByColumn.get(col) || []).filter((name) => name !== table.name);
+            if (!candidates.length) continue;
+            const target = pickFkTarget(table.name, col, candidates);
+            if (!target) continue;
+            const key = `${col}->${target}`;
+            if (seen.has(key)) continue;
+            seen.add(key);
+            out.push({ to_table: target, from_columns: [col], to_columns: [col] });
+          }
+          table.foreign_keys_out = out;
+          table.foreign_keys_in = [];
+        }
+
+        const byName = new Map(tables.map((table) => [table.name, table]));
+        for (const table of tables) {
+          for (const fk of table.foreign_keys_out || []) {
+            const target = byName.get(fk.to_table);
+            if (!target) continue;
+            target.foreign_keys_in.push({
+              from_table: table.name,
+              from_columns: [...(fk.from_columns || [])],
+              to_columns: [...(fk.to_columns || [])],
+            });
+          }
+        }
+      }
+
+      function normalizeTableMeta(raw, fallback = {}) {
+        const columns = Array.isArray(raw.columns) ? raw.columns : [];
+        const columnNames = columns.map((c) => String(c?.name || "")).filter(Boolean);
+        const columnTypes = {};
+        for (const col of columns) {
+          const name = String(col?.name || "");
+          if (!name) continue;
+          columnTypes[name] = String(col?.type || "");
+        }
+        const primaryKey = Array.isArray(raw.primary_key) ? raw.primary_key.filter((c) => columnNames.includes(c)) : [];
+        const searchColumns = Array.isArray(raw.search_columns) && raw.search_columns.length
+          ? raw.search_columns.filter((c) => columnNames.includes(c))
+          : columnNames.filter((c) => isTextLikeType(columnTypes[c]));
+        const finalSearch = searchColumns.length ? searchColumns : [...columnNames];
+        return {
+          name: String(raw.name || fallback.name || ""),
+          row_count: raw.row_count === null || raw.row_count === undefined ? (fallback.row_count ?? null) : Number(raw.row_count),
+          column_count: Number(raw.column_count || columns.length || fallback.column_count || 0),
+          columns,
+          column_names: columnNames,
+          column_types: columnTypes,
+          primary_key: primaryKey,
+          without_rowid: Boolean(raw.without_rowid),
+          search_columns: finalSearch.slice(0, 8),
+          foreign_keys_out: Array.isArray(raw.foreign_keys_out) ? raw.foreign_keys_out : [],
+          foreign_keys_in: Array.isArray(raw.foreign_keys_in) ? raw.foreign_keys_in : [],
+          label_column: raw.label_column || chooseLabelColumn({ column_names: columnNames, column_types: columnTypes }),
+        };
+      }
+
+      async function initBackend() {
+        const wantApi = Boolean(API_BASE_OVERRIDE) || isLocalApiHost;
+        if (wantApi) {
+          backend.apiBase = API_BASE_OVERRIDE;
+          if (await checkApiHealth(backend.apiBase)) {
+            backend.mode = "api";
+            backend.sourceLabel = backend.apiBase ? `api:${backend.apiBase}` : "api:local";
+            return;
+          }
+        }
+        backend.mode = "hf";
+        await initHfBackend();
+      }
+
+      async function hfQueryRows(sql) {
+        const result = await backend.hf.conn.query(sql);
+        const rows = result && typeof result.toArray === "function" ? result.toArray() : [];
+        return (rows || []).map((row) => normalizeRowObject(row));
+      }
+
+      async function describeHfTable(tableName) {
+        const rows = await hfQueryRows(`DESCRIBE SELECT * FROM ${quoteIdent(tableName)}`);
+        const columns = [];
+        for (const row of rows) {
+          const name = String(row.column_name || row.column || row.name || "").trim();
+          if (!name) continue;
+          const type = String(row.column_type || row.type || row.logical_type || "").trim();
+          columns.push({
+            name,
+            type,
+            notnull: false,
+            pk_order: 0,
+          });
+        }
+        return columns;
+      }
+
+      async function buildHfSchemaPayload(manifestTables, schemaContract, snapshotDir) {
+        const contractMap = new Map(
+          ((schemaContract && Array.isArray(schemaContract.tables)) ? schemaContract.tables : [])
+            .filter((table) => table && table.name)
+            .map((table) => [table.name, table]),
+        );
+
+        const tables = [];
+        for (const mt of manifestTables) {
+          const tableName = String(mt.table || "");
+          if (!tableName) continue;
+
+          const fallbackColumns = await describeHfTable(tableName);
+          const fallbackNames = fallbackColumns.map((col) => col.name);
+          const fallbackMeta = {
+            name: tableName,
+            row_count: Number(mt.rows || 0),
+            column_count: fallbackColumns.length,
+            columns: fallbackColumns,
+            primary_key: parseOrderByColumns(mt.order_by || "", fallbackNames),
+            without_rowid: false,
+            search_columns: fallbackNames.filter((name) => {
+              const col = fallbackColumns.find((item) => item.name === name);
+              return isTextLikeType(col ? col.type : "");
+            }),
+            foreign_keys_out: [],
+            foreign_keys_in: [],
+          };
+
+          const fromContract = contractMap.get(tableName) || {};
+          const merged = {
+            ...fallbackMeta,
+            ...fromContract,
+            columns: Array.isArray(fromContract.columns) && fromContract.columns.length
+              ? fromContract.columns
+              : fallbackColumns,
+            primary_key: Array.isArray(fromContract.primary_key) && fromContract.primary_key.length
+              ? fromContract.primary_key
+              : fallbackMeta.primary_key,
+            foreign_keys_out: Array.isArray(fromContract.foreign_keys_out) ? fromContract.foreign_keys_out : [],
+            foreign_keys_in: Array.isArray(fromContract.foreign_keys_in) ? fromContract.foreign_keys_in : [],
+          };
+          const normalized = normalizeTableMeta(merged, fallbackMeta);
+          if (normalized.row_count === null || normalized.row_count === undefined || Number.isNaN(Number(normalized.row_count))) {
+            normalized.row_count = Number(mt.rows || 0);
+          }
+          normalized.column_count = normalized.columns.length;
+          tables.push(normalized);
+        }
+
+        const hasContractTables = Boolean(schemaContract && Array.isArray(schemaContract.tables) && schemaContract.tables.length);
+        if (!hasContractTables) {
+          inferForeignKeys(tables);
+        }
+
+        tables.sort((a, b) => {
+          const ar = a.row_count === null || a.row_count === undefined ? -1 : Number(a.row_count);
+          const br = b.row_count === null || b.row_count === undefined ? -1 : Number(b.row_count);
+          if (ar !== br) return br - ar;
+          return String(a.name || "").localeCompare(String(b.name || ""), "es");
+        });
+
+        const payloadTables = tables.map((table) => ({
+          name: table.name,
+          row_count: table.row_count,
+          column_count: table.column_count,
+          primary_key: [...(table.primary_key || [])],
+          without_rowid: Boolean(table.without_rowid),
+          search_columns: [...(table.search_columns || [])],
+          columns: table.columns.map((column) => ({
+            name: String(column.name || ""),
+            type: String(column.type || ""),
+            notnull: Boolean(column.notnull),
+            pk_order: Number(column.pk_order || 0),
+          })),
+          label_column: table.label_column || chooseLabelColumn(table),
+          foreign_keys_out: (table.foreign_keys_out || []).map((fk) => ({
+            to_table: String(fk.to_table || ""),
+            from_columns: [...(fk.from_columns || [])],
+            to_columns: [...(fk.to_columns || [])],
+          })),
+          foreign_keys_in: (table.foreign_keys_in || []).map((fk) => ({
+            from_table: String(fk.from_table || ""),
+            from_columns: [...(fk.from_columns || [])],
+            to_columns: [...(fk.to_columns || [])],
+          })),
+        }));
+
+        const schemaMap = new Map(tables.map((table) => [table.name, table]));
+        return {
+          payload: {
+            meta: {
+              db_path: `hf:${HF_DATASET_REPO}/${snapshotDir}`,
+              table_count: payloadTables.length,
+              dataset_repo: HF_DATASET_REPO,
+              snapshot_dir: snapshotDir,
+              mode: "hf-browser",
+            },
+            tables: payloadTables,
+          },
+          schemaMap,
+        };
+      }
+
+      async function initHfBackend() {
+        if (!HF_DATASET_REPO) {
+          throw new Error("dataset HF vacío. Usa ?dataset=owner/name");
+        }
+
+        const latest = await fetchJson(hfUrl("latest.json"));
+        const snapshotDir = HF_SNAPSHOT_OVERRIDE
+          ? `snapshots/${HF_SNAPSHOT_OVERRIDE}`
+          : String(latest?.snapshot_dir || "");
+        if (!snapshotDir) {
+          throw new Error("No se encontró snapshot_dir en latest.json");
+        }
+
+        const manifest = await fetchJson(hfUrl(`${snapshotDir}/manifest.json`));
+        const schemaContract = await fetchJson(hfUrl(`${snapshotDir}/explorer_schema.json`), { allow404: true });
+        const manifestTables = (((manifest || {}).parquet || {}).tables || [])
+          .filter((table) => table && table.table && table.path_glob);
+        if (!manifestTables.length) {
+          throw new Error("manifest.json sin tablas parquet");
+        }
+
+        const duckdb = await import(HF_DUCKDB_ESM);
+        const bundles = duckdb.getJsDelivrBundles();
+        const bundle = await duckdb.selectBundle(bundles);
+        const workerUrl = URL.createObjectURL(new Blob([`importScripts("${bundle.mainWorker}");`], { type: "text/javascript" }));
+        const worker = new Worker(workerUrl);
+        const logger = new duckdb.ConsoleLogger();
+        const db = new duckdb.AsyncDuckDB(logger, worker);
+        await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+        URL.revokeObjectURL(workerUrl);
+        const conn = await db.connect();
+
+        for (const table of manifestTables) {
+          const tableName = String(table.table || "");
+          const files = clampInt(table.files || 1, 1, 1, 10000);
+          const relDir = String(table.path_glob || "")
+            .replace(/\*\.parquet$/i, "")
+            .replace(/\/+$/, "");
+          const urls = [];
+          for (let i = 0; i < files; i += 1) {
+            const relPath = `${relDir}/part-${String(i).padStart(5, "0")}.parquet`;
+            urls.push(hfUrl(`${snapshotDir}/${relPath}`));
+          }
+          const urlsSql = urls.map((url) => quoteLiteral(url)).join(", ");
+          await conn.query(
+            `CREATE OR REPLACE VIEW ${quoteIdent(tableName)} AS SELECT * FROM read_parquet([${urlsSql}])`,
+          );
+        }
+
+        const built = await buildHfSchemaPayload(manifestTables, schemaContract, snapshotDir);
+        backend.hf = {
+          db,
+          conn,
+          latest,
+          manifest,
+          snapshotDir,
+          schemaPayload: built.payload,
+          schemaMap: built.schemaMap,
+        };
+        backend.sourceLabel = `hf:${HF_DATASET_REPO}/${snapshotDir}`;
+      }
+
+      function hfOrderSql(meta) {
+        const pk = Array.isArray(meta.primary_key) ? meta.primary_key : [];
+        if (pk.length) {
+          return `ORDER BY ${pk.map((col) => quoteIdent(col)).join(", ")}`;
+        }
+        const first = (meta.column_names || [])[0];
+        return first ? `ORDER BY ${quoteIdent(first)}` : "";
+      }
+
+      function hfBuildWhere(meta, whereColumns, whereValues, q) {
+        if (whereColumns.length !== whereValues.length) {
+          return { error: "Parametros 'col' y 'val' deben tener la misma longitud", sql: "" };
+        }
+        const known = new Set(meta.column_names || []);
+        const parts = [];
+        for (let i = 0; i < whereColumns.length; i += 1) {
+          const col = String(whereColumns[i] || "");
+          if (!known.has(col)) {
+            return { error: `Columna no encontrada en ${meta.name}: ${col}`, sql: "" };
+          }
+          parts.push(`CAST(${quoteIdent(col)} AS VARCHAR) = ${quoteLiteral(toText(whereValues[i]))}`);
+        }
+        const qNorm = String(q || "").trim();
+        if (qNorm) {
+          const searchCols = (meta.search_columns || meta.column_names || []).slice(0, 8).filter((col) => known.has(col));
+          if (searchCols.length) {
+            const like = quoteLiteral(`%${qNorm}%`);
+            const sub = searchCols.map((col) => `CAST(${quoteIdent(col)} AS VARCHAR) ILIKE ${like}`);
+            parts.push(`(${sub.join(" OR ")})`);
+          }
+        }
+        return { error: "", sql: parts.length ? `WHERE ${parts.join(" AND ")}` : "" };
+      }
+
+      async function hfResolvePreviewDisplays(tableName, items, rowDicts) {
+        const meta = backend.hf.schemaMap.get(tableName);
+        if (!meta) return items.map((item) => ({ ...(item.preview || {}) }));
+
+        const resolvable = [];
+        for (const fk of meta.foreign_keys_out || []) {
+          const fromCols = fk.from_columns || [];
+          const toCols = fk.to_columns || [];
+          if (fromCols.length !== 1 || toCols.length !== 1) continue;
+          const targetMeta = backend.hf.schemaMap.get(String(fk.to_table || ""));
+          if (!targetMeta) continue;
+          if ((targetMeta.primary_key || []).length !== 1) continue;
+          if (targetMeta.primary_key[0] !== toCols[0]) continue;
+          resolvable.push({
+            from_col: fromCols[0],
+            to_table: targetMeta.name,
+            to_pk: targetMeta.primary_key[0],
+            to_label_col: chooseLabelColumn(targetMeta),
+          });
+        }
+        if (!resolvable.length) return items.map((item) => ({ ...(item.preview || {}) }));
+
+        const valuesByCol = new Map();
+        for (const item of items) {
+          const preview = item.preview || {};
+          for (const fk of resolvable) {
+            if (!(fk.from_col in preview)) continue;
+            const value = preview[fk.from_col];
+            if (value === null || value === undefined || typeof value === "object") continue;
+            const key = String(value);
+            if (!valuesByCol.has(fk.from_col)) valuesByCol.set(fk.from_col, new Set());
+            valuesByCol.get(fk.from_col).add(key);
+          }
+        }
+
+        const labelMaps = new Map();
+        for (const fk of resolvable) {
+          const values = [...(valuesByCol.get(fk.from_col) || [])];
+          if (!values.length) continue;
+          const targetMeta = backend.hf.schemaMap.get(fk.to_table);
+          if (!targetMeta) continue;
+          const selectCols = [fk.to_pk];
+          if (fk.to_label_col && fk.to_label_col !== fk.to_pk) selectCols.push(fk.to_label_col);
+          const inList = values.map((v) => quoteLiteral(v)).join(", ");
+          const sql = `
+            SELECT ${selectCols.map((col) => quoteIdent(col)).join(", ")}
+            FROM ${quoteIdent(fk.to_table)}
+            WHERE CAST(${quoteIdent(fk.to_pk)} AS VARCHAR) IN (${inList})
+          `;
+          const rows = await hfQueryRows(sql);
+          const map = new Map();
+          for (const row of rows) {
+            const pkVal = row[fk.to_pk];
+            if (pkVal === null || pkVal === undefined) continue;
+            const key = String(pkVal);
+            if (fk.to_label_col && row[fk.to_label_col] !== null && row[fk.to_label_col] !== undefined && row[fk.to_label_col] !== "") {
+              map.set(key, String(row[fk.to_label_col]));
+            } else {
+              map.set(key, inferRowLabel(targetMeta, row));
+            }
+          }
+          labelMaps.set(fk.from_col, map);
+        }
+
+        const displays = [];
+        for (let i = 0; i < items.length; i += 1) {
+          const preview = { ...(items[i].preview || {}) };
+          for (const fk of resolvable) {
+            if (!(fk.from_col in preview)) continue;
+            const raw = preview[fk.from_col];
+            const key = raw === null || raw === undefined ? "" : String(raw);
+            const label = (labelMaps.get(fk.from_col) || new Map()).get(key);
+            if (label) preview[fk.from_col] = label;
+          }
+          displays.push(preview);
+          items[i].label = enrichRowLabel(meta, rowDicts[i] || {}, items[i].label, preview);
+        }
+        return displays;
+      }
+
+      async function hfDecorateRows(tableName, rowDicts) {
+        const meta = backend.hf.schemaMap.get(tableName);
+        if (!meta) return [];
+        const items = rowDicts.map((row) => {
+          const identity = rowIdentityFromMeta(meta, row);
+          return {
+            identity,
+            can_open: identity !== null,
+            label: inferRowLabel(meta, row),
+            preview: buildRowPreview(meta, row),
+          };
+        });
+        const previewDisplays = await hfResolvePreviewDisplays(tableName, items, rowDicts);
+        for (let i = 0; i < items.length; i += 1) {
+          items[i].preview_display = previewDisplays[i] || { ...(items[i].preview || {}) };
+        }
+        return items;
+      }
+
+      async function hfBuildRowsPayload({ table, q, whereColumns, whereValues, limit, offset }) {
+        const meta = backend.hf.schemaMap.get(table);
+        if (!meta) return { error: `Tabla no encontrada: ${table}` };
+
+        const pageSize = clampInt(limit, 50, 1, 400);
+        const pageOffset = clampInt(offset, 0, 0, 2000000000);
+        const builtWhere = hfBuildWhere(meta, whereColumns, whereValues, q);
+        if (builtWhere.error) return { error: builtWhere.error };
+
+        const totalRows = await hfQueryRows(
+          `SELECT COUNT(*) AS n FROM ${quoteIdent(table)} ${builtWhere.sql}`,
+        );
+        const total = clampInt(totalRows[0] ? totalRows[0].n : 0, 0, 0, 2000000000);
+        const sql = `
+          SELECT *
+          FROM ${quoteIdent(table)}
+          ${builtWhere.sql}
+          ${hfOrderSql(meta)}
+          LIMIT ${pageSize} OFFSET ${pageOffset}
+        `;
+        const rowDicts = await hfQueryRows(sql);
+        const rows = await hfDecorateRows(table, rowDicts);
+        return {
+          meta: {
+            db_path: backend.sourceLabel,
+            table,
+            q: String(q || "").trim(),
+            where: shapeWhereMap(whereColumns, whereValues),
+            limit: pageSize,
+            offset: pageOffset,
+            total,
+            returned: rows.length,
+            primary_key: [...(meta.primary_key || [])],
+            without_rowid: Boolean(meta.without_rowid),
+            column_names: [...(meta.column_names || [])],
+          },
+          rows,
+        };
+      }
+
+      async function hfRelationSamples(table, whereColumns, values, sampleLimit = 8) {
+        const meta = backend.hf.schemaMap.get(table);
+        if (!meta) return [0, []];
+        const clauses = [];
+        for (let i = 0; i < whereColumns.length; i += 1) {
+          clauses.push(`CAST(${quoteIdent(whereColumns[i])} AS VARCHAR) = ${quoteLiteral(toText(values[i]))}`);
+        }
+        const whereSql = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+        const totalRows = await hfQueryRows(
+          `SELECT COUNT(*) AS n FROM ${quoteIdent(table)} ${whereSql}`,
+        );
+        const total = clampInt(totalRows[0] ? totalRows[0].n : 0, 0, 0, 2000000000);
+        const sql = `
+          SELECT *
+          FROM ${quoteIdent(table)}
+          ${whereSql}
+          ${hfOrderSql(meta)}
+          LIMIT ${clampInt(sampleLimit, 8, 1, 100)}
+        `;
+        const rowDicts = await hfQueryRows(sql);
+        const samples = await hfDecorateRows(table, rowDicts);
+        return [total, samples];
+      }
+
+      async function hfRelationFacets(table, whereColumns, values, total, facetLimit = 8) {
+        if (total < Math.max(8, facetLimit)) return null;
+        const meta = backend.hf.schemaMap.get(table);
+        if (!meta) return null;
+
+        const facetCol = FACET_COLUMN_CANDIDATES.find(
+          (col) => (meta.column_names || []).includes(col) && !whereColumns.includes(col),
+        );
+        if (!facetCol) return null;
+
+        const clauses = [];
+        for (let i = 0; i < whereColumns.length; i += 1) {
+          clauses.push(`CAST(${quoteIdent(whereColumns[i])} AS VARCHAR) = ${quoteLiteral(toText(values[i]))}`);
+        }
+        clauses.push(`${quoteIdent(facetCol)} IS NOT NULL`);
+        clauses.push(`TRIM(CAST(${quoteIdent(facetCol)} AS VARCHAR)) <> ''`);
+        const whereSql = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+        const sql = `
+          SELECT ${quoteIdent(facetCol)} AS v, COUNT(*) AS n
+          FROM ${quoteIdent(table)}
+          ${whereSql}
+          GROUP BY ${quoteIdent(facetCol)}
+          ORDER BY n DESC, v
+          LIMIT ${clampInt(facetLimit, 8, 2, 20)}
+        `;
+        const rows = await hfQueryRows(sql);
+        if (!rows.length) return null;
+        const firstCount = clampInt(rows[0].n, 0, 0, 2000000000);
+        if (firstCount <= 1) return null;
+
+        const items = rows
+          .map((row) => ({
+            value: normalizeCell(row.v),
+            count: clampInt(row.n, 0, 0, 2000000000),
+          }))
+          .filter((item) => item.value !== null && item.value !== undefined && item.count > 0);
+        if (!items.length) return null;
+
+        return { column: facetCol, items };
+      }
+
+      async function hfBuildRecordPayload(table, identity) {
+        const meta = backend.hf.schemaMap.get(table);
+        if (!meta) return { error: `Tabla no encontrada: ${table}` };
+
+        const pk = meta.primary_key || [];
+        if (!pk.length) {
+          return { error: "Tabla sin PK navegable en snapshot HF." };
+        }
+
+        const clauses = [];
+        for (const col of pk) {
+          const raw = identity && Object.prototype.hasOwnProperty.call(identity, col) ? identity[col] : "";
+          if (raw === "" || raw === null || raw === undefined) {
+            return { error: `missing pk field '${col}'` };
+          }
+          clauses.push(`CAST(${quoteIdent(col)} AS VARCHAR) = ${quoteLiteral(toText(raw))}`);
+        }
+        const whereSql = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+        const rowSql = `
+          SELECT *
+          FROM ${quoteIdent(table)}
+          ${whereSql}
+          LIMIT 1
+        `;
+        const rows = await hfQueryRows(rowSql);
+        if (!rows.length) return { error: "Registro no encontrado" };
+        const row = rows[0];
+        const identityValue = rowIdentityFromMeta(meta, row);
+
+        const outgoing = [];
+        for (const fk of meta.foreign_keys_out || []) {
+          const fromCols = fk.from_columns || [];
+          const toCols = fk.to_columns || [];
+          if (fromCols.length !== toCols.length || !fromCols.length) continue;
+          const values = fromCols.map((col) => row[col]);
+          const nullable = values.some((v) => v === null || v === undefined || v === "");
+          const relation = {
+            direction: "outgoing",
+            from_table: table,
+            to_table: fk.to_table,
+            from_columns: fromCols,
+            to_columns: toCols,
+            match: Object.fromEntries(fromCols.map((col, idx) => [col, normalizeCell(values[idx])])),
+            count: 0,
+            samples: [],
+            nullable,
+          };
+          if (!nullable) {
+            const [total, samples] = await hfRelationSamples(fk.to_table, toCols, values, 8);
+            relation.count = total;
+            relation.samples = samples;
+            const facets = await hfRelationFacets(fk.to_table, toCols, values, total, 8);
+            if (facets) relation.facets = facets;
+          }
+          outgoing.push(relation);
+        }
+
+        const incoming = [];
+        for (const fk of meta.foreign_keys_in || []) {
+          const fromCols = fk.from_columns || [];
+          const toCols = fk.to_columns || [];
+          if (fromCols.length !== toCols.length || !fromCols.length) continue;
+          const values = toCols.map((col) => row[col]);
+          const nullable = values.some((v) => v === null || v === undefined || v === "");
+          const relation = {
+            direction: "incoming",
+            from_table: fk.from_table,
+            to_table: table,
+            from_columns: fromCols,
+            to_columns: toCols,
+            match: Object.fromEntries(toCols.map((col, idx) => [col, normalizeCell(values[idx])])),
+            count: 0,
+            samples: [],
+            nullable,
+          };
+          if (!nullable) {
+            const [total, samples] = await hfRelationSamples(fk.from_table, fromCols, values, 8);
+            relation.count = total;
+            relation.samples = samples;
+            const facets = await hfRelationFacets(fk.from_table, fromCols, values, total, 8);
+            if (facets) relation.facets = facets;
+          }
+          incoming.push(relation);
+        }
+
+        return {
+          meta: {
+            db_path: backend.sourceLabel,
+            table,
+            primary_key: [...pk],
+            without_rowid: Boolean(meta.without_rowid),
+            label: inferRowLabel(meta, row),
+          },
+          record: {
+            identity: identityValue,
+            values: Object.fromEntries(
+              Object.entries(row).map(([k, v]) => [k, normalizeCell(v)]),
+            ),
+            preview: buildRowPreview(meta, row, 8),
+          },
+          relations: {
+            outgoing,
+            incoming,
+          },
+        };
+      }
+
+      async function hfBuildRelatedRowsPayload({ table, whereColumns, whereValues, limit, offset }) {
+        const meta = backend.hf.schemaMap.get(table);
+        if (!meta) return { error: `Tabla no encontrada: ${table}` };
+        if (whereColumns.length !== whereValues.length) {
+          return { error: "Parametros 'col' y 'val' deben tener la misma longitud" };
+        }
+        const known = new Set(meta.column_names || []);
+        const clauses = [];
+        for (let i = 0; i < whereColumns.length; i += 1) {
+          const col = String(whereColumns[i] || "");
+          if (!known.has(col)) return { error: `Columna no encontrada en ${table}: ${col}` };
+          clauses.push(`CAST(${quoteIdent(col)} AS VARCHAR) = ${quoteLiteral(toText(whereValues[i]))}`);
+        }
+        const whereSql = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+        const pageSize = clampInt(limit, 50, 1, 400);
+        const pageOffset = clampInt(offset, 0, 0, 2000000000);
+        const totalRows = await hfQueryRows(
+          `SELECT COUNT(*) AS n FROM ${quoteIdent(table)} ${whereSql}`,
+        );
+        const total = clampInt(totalRows[0] ? totalRows[0].n : 0, 0, 0, 2000000000);
+        const rowsSql = `
+          SELECT *
+          FROM ${quoteIdent(table)}
+          ${whereSql}
+          ${hfOrderSql(meta)}
+          LIMIT ${pageSize} OFFSET ${pageOffset}
+        `;
+        const rowDicts = await hfQueryRows(rowsSql);
+        const rows = await hfDecorateRows(table, rowDicts);
+        return {
+          meta: {
+            db_path: backend.sourceLabel,
+            table,
+            where: shapeWhereMap(whereColumns, whereValues),
+            limit: pageSize,
+            offset: pageOffset,
+            total,
+            returned: rows.length,
+            primary_key: [...(meta.primary_key || [])],
+            without_rowid: Boolean(meta.without_rowid),
+          },
+          rows,
+        };
+      }
+
+      async function fetchSchemaPayload() {
+        if (backend.mode === "api") {
+          return await fetchApiJson("/api/explorer/schema");
+        }
+        return backend.hf.schemaPayload;
+      }
+
+      async function fetchRowsPayload({ table, q, whereColumns, whereValues, limit, offset }) {
+        if (backend.mode === "api") {
+          const params = new URLSearchParams();
+          params.set("table", table);
+          params.set("limit", String(limit));
+          params.set("offset", String(offset));
+          if (q) params.set("q", String(q));
+          for (let i = 0; i < Math.min(whereColumns.length, whereValues.length); i += 1) {
+            params.append("col", String(whereColumns[i]));
+            params.append("val", String(whereValues[i]));
+          }
+          return await fetchApiJson(`/api/explorer/rows?${params.toString()}`);
+        }
+        return await hfBuildRowsPayload({ table, q, whereColumns, whereValues, limit, offset });
+      }
+
+      async function fetchRelatedRowsPayload({ table, whereColumns, whereValues, limit, offset }) {
+        if (backend.mode === "api") {
+          const params = new URLSearchParams();
+          params.set("table", table);
+          params.set("limit", String(limit));
+          params.set("offset", String(offset));
+          for (let i = 0; i < Math.min(whereColumns.length, whereValues.length); i += 1) {
+            params.append("col", String(whereColumns[i]));
+            params.append("val", String(whereValues[i]));
+          }
+          return await fetchApiJson(`/api/explorer/related?${params.toString()}`);
+        }
+        return await hfBuildRelatedRowsPayload({ table, whereColumns, whereValues, limit, offset });
+      }
+
+      async function fetchRecordPayloadFromBackend(table, identity) {
+        if (backend.mode === "api") {
+          const params = new URLSearchParams();
+          params.set("table", table);
+          for (const [k, v] of Object.entries(identity || {})) {
+            params.set(k, String(v));
+          }
+          return await fetchApiJson(`/api/explorer/record?${params.toString()}`);
+        }
+        return await hfBuildRecordPayload(table, identity || {});
+      }
+
+      function toText(value) {
+        if (value === null || value === undefined) return "null";
+        if (typeof value === "object") return JSON.stringify(value);
+        return String(value);
+      }
+
+      function renderBreadcrumbTrail() {
+        const stepCount = Array.isArray(state.navStack) ? state.navStack.length : 0;
+        if (!stepCount || !els.pathTrail) {
+          if (els.pathTrail) {
+            els.pathTrail.innerHTML = "";
+          }
+          return;
+        }
+
+        const parts = state.navStack.map((step, idx) => {
+          const label = step?.label || step?.table || "registro";
+          const safeLabel = escapeHtml(toText(label));
+          const isLast = idx === stepCount - 1;
+          if (isLast) {
+            return `<span>${safeLabel}</span>`;
+          }
+          return `<button type="button" class="path-btn" data-nav-level="${idx}" title="Volver a ${safeLabel}">${safeLabel}</button>`;
+        });
+
+        const separators = ' <span class="muted">/</span> ';
+        if (!els.pathTrail) return;
+
+        if (!parts.length) {
+          els.pathTrail.innerHTML = "";
+          return;
+        }
+        els.pathTrail.innerHTML = parts.join(separators);
+      }
+
+      function escapeHtml(text) {
+        return String(text)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function fmtCount(value) {
+        if (value === null || value === undefined) return "?";
+        return new Intl.NumberFormat("es-ES").format(value);
+      }
+
+      function identityToParams(params, identity) {
+        for (const [k, v] of Object.entries(identity || {})) {
+          params.set(k, String(v));
+        }
+      }
+
+      function identityAsText(identity) {
+        return Object.entries(identity || {})
+          .map(([k, v]) => `${k}=${v}`)
+          .join(", ");
+      }
+
+      function prettyKey(key) {
+        const raw = String(key || "");
+        if (raw.endsWith("_id") || raw.endsWith("_pk")) {
+          return raw.slice(0, -3).replaceAll("_", " ");
+        }
+        return raw.replaceAll("_", " ");
+      }
+
+      function shortValue(value, maxLen = 54) {
+        const raw = toText(value);
+        if (raw.length <= maxLen) return raw;
+        return raw.slice(0, Math.max(0, maxLen - 3)) + "...";
+      }
+
+      function renderTags(previewObj) {
+        const entries = Object.entries(previewObj || {});
+        if (!entries.length) return '<div class="meta">sin preview</div>';
+        const tags = entries
+          .map(([k, v]) => {
+            const kk = escapeHtml(prettyKey(k));
+            const vv = escapeHtml(shortValue(v));
+            return `<span class="tag"><b>${kk}</b>${vv}</span>`;
+          })
+          .join("");
+        return `<div class="tags">${tags}</div>`;
+      }
+
+      function setDetailHtml(html) {
+        els.detail.innerHTML = html;
+      }
+
+      function snapshotState() {
+        return {
+          activeTable: state.activeTable || "",
+          routeRootTable: state.routeRootTable || "",
+          activeRecordIdentity: state.activeRecordIdentity || null,
+          whereCols: Array.isArray(state.whereCols) ? state.whereCols : [],
+          whereVals: Array.isArray(state.whereVals) ? state.whereVals : [],
+          offset: Number(state.offset || 0),
+          loaded: Number(state.loaded || 0),
+          limit: Number(state.limit || 50),
+          q: state.q || "",
+          tableFilter: els.tableFilter.value || "",
+          navStack: (state.navStack || []).map((s) => ({
+            table: s.table,
+            identity: s.identity,
+            label: s.label,
+            whereCols: Array.isArray(s.whereCols) ? s.whereCols : [],
+            whereVals: Array.isArray(s.whereVals) ? s.whereVals : [],
+          })),
+        };
+      }
+
+      function applySnapshot(snapshot) {
+        const snap = snapshot || {};
+        state.activeTable = snap.activeTable || "";
+        state.routeRootTable = snap.routeRootTable || "";
+        state.activeRecordIdentity = snap.activeRecordIdentity || null;
+        state.whereCols = Array.isArray(snap.whereCols) ? snap.whereCols : [];
+        state.whereVals = Array.isArray(snap.whereVals) ? snap.whereVals : [];
+        state.offset = Number(snap.offset || 0);
+        state.loaded = Number(snap.loaded || 0);
+        state.limit = Number(snap.limit || 50);
+        state.q = snap.q || "";
+        state.navStack = Array.isArray(snap.navStack)
+          ? snap.navStack.map((s) => ({
+              table: s.table,
+              identity: s.identity,
+              label: s.label,
+              whereCols: Array.isArray(s.whereCols) ? s.whereCols : [],
+              whereVals: Array.isArray(s.whereVals) ? s.whereVals : [],
+            }))
+          : [];
+
+        els.tableFilter.value = snap.tableFilter || "";
+        els.recordSearch.value = state.q;
+        els.pageSize.value = String(state.limit);
+        renderActiveFilters();
+      }
+
+      function pushHistory(mode = "push") {
+        const snap = snapshotState();
+        const params = snapshotToUrlParams(snap);
+        const url = location.pathname + (params.toString() ? `?${params.toString()}` : "");
+        const sig = url;
+        if (sig === state.lastHistorySig) return;
+        if (mode === "replace" || !history.state) {
+          history.replaceState({ explorer: snap }, "", url);
+        } else {
+          history.pushState({ explorer: snap }, "", url);
+        }
+        state.lastHistorySig = sig;
+      }
+
+      async function restoreFromHistory(snapshot) {
+        applySnapshot(snapshot);
+        renderTables();
+        renderFilterOptions();
+        await loadRows({ reset: true, restoreLoaded: true });
+        if (state.activeTable && state.activeRecordIdentity) {
+          const payload = await fetchRecordPayload(state.activeTable, state.activeRecordIdentity);
+          if (payload.error) {
+            setDetailHtml(`<div class="meta">${payload.error}</div>`);
+            renderBreadcrumbTrail();
+          } else {
+            renderDetail(payload);
+            renderBreadcrumbTrail();
+          }
+        } else {
+          renderBreadcrumbTrail();
+          setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
+        }
+      }
+
+      function tableMeta(tableName) {
+        const tables = state.schema?.tables || [];
+        return tables.find((t) => t && t.name === tableName) || null;
+      }
+
+      function renderFilterOptions() {
+        const meta = tableMeta(state.activeTable);
+        els.filterCol.textContent = "";
+        if (!meta) {
+          const opt = document.createElement("option");
+          opt.value = "";
+          opt.textContent = "(no table)";
+          els.filterCol.appendChild(opt);
+          return;
+        }
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Filtrar por columna...";
+        els.filterCol.appendChild(placeholder);
+        for (const col of (meta.columns || []).map((c) => c?.name).filter(Boolean)) {
+          const opt = document.createElement("option");
+          opt.value = col;
+          opt.textContent = col;
+          els.filterCol.appendChild(opt);
+        }
+      }
+
+      function renderActiveFilters() {
+        if (!els.filtersBar) return;
+        els.filtersBar.textContent = "";
+        const cols = state.whereCols || [];
+        const vals = state.whereVals || [];
+        for (let i = 0; i < Math.min(cols.length, vals.length); i += 1) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "pill";
+          btn.textContent = `${cols[i]}=${toText(vals[i])}  x`;
+          btn.title = "Quitar filtro";
+          btn.addEventListener("click", () => {
+            state.whereCols.splice(i, 1);
+            state.whereVals.splice(i, 1);
+            state.offset = 0;
+            state.loaded = 0;
+            loadRows({ reset: true })
+              .then(() => pushHistory("push"))
+              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+          });
+          els.filtersBar.appendChild(btn);
+        }
+      }
+
+      // Path UI removed. Browser back/forward + URL state is the source of truth.
+
+      function renderTables() {
+        const needle = els.tableFilter.value.trim().toLowerCase();
+        const tables = (state.tables || []).filter((t) => !needle || t.name.toLowerCase().includes(needle));
+
+        els.tables.textContent = "";
+        if (tables.length === 0) {
+          els.tables.textContent = "Sin tablas para mostrar.";
+          return;
+        }
+
+        for (const table of tables) {
+          const item = document.createElement("button");
+          item.type = "button";
+          item.className = `item${table.name === state.activeTable ? " active" : ""}`;
+          item.innerHTML = `
+            <h3>${table.name}</h3>
+            <div class="meta">rows=${fmtCount(table.row_count)} | cols=${table.column_count}</div>
+            <div class="meta">pk=${table.primary_key.length ? table.primary_key.join(",") : "(none)"}</div>
+            <div class="meta">fk out=${table.foreign_keys_out.length} | fk in=${table.foreign_keys_in.length}</div>
+          `;
+          item.addEventListener("click", () => selectTable(table.name));
+          els.tables.appendChild(item);
+        }
+      }
+
+      function renderRows(payload, opts = {}) {
+        const options = { append: false, ...opts };
+        const rows = payload.rows || [];
+        const meta = payload.meta || {};
+        if (!options.append) els.records.textContent = "";
+
+        const where = meta.where || {};
+        const whereText = Object.keys(where).length
+          ? ` | filtro=${Object.entries(where)
+              .map(([k, v]) => `${k}=${toText(v)}`)
+              .join(", ")}`
+          : "";
+        const shown = state.loaded + rows.length;
+        els.recordsHint.textContent = `${meta.table || ""} | ${fmtCount(meta.total || 0)} registros | mostrados=${fmtCount(
+          shown,
+        )}${whereText}`;
+
+        if (rows.length === 0) {
+          if (!options.append) els.records.textContent = "No hay registros para este filtro.";
+          return;
+        }
+
+        for (const row of rows) {
+          const item = document.createElement("button");
+          item.type = "button";
+          item.className = "item";
+
+          const previewObj = row.preview_display || row.preview || {};
+          const identityText = identityAsText(row.identity || {});
+          item.innerHTML = `
+            <div class="item-head">
+              <h3>${escapeHtml(toText(row.label))}</h3>
+              <div class="item-id" title="${escapeHtml(identityText || "")}">${escapeHtml(identityText || "")}</div>
+            </div>
+            ${renderTags(previewObj)}
+          `;
+
+          if (!row.can_open) {
+            item.disabled = true;
+          } else {
+            item.addEventListener("click", () => openRecord(state.activeTable, row.identity, row.label));
+          }
+
+          els.records.appendChild(item);
+        }
+      }
+
+      function renderDetail(payload) {
+        const meta = payload.meta || {};
+        const record = payload.record || {};
+        const relations = payload.relations || {};
+        const outgoingRelations = relations.outgoing || [];
+        const incomingRelations = relations.incoming || [];
+
+        const values = record.values || {};
+        const keys = Object.keys(values).filter((k) => values[k] !== null && values[k] !== undefined && values[k] !== "");
+        const inlineTargets = [];
+        const directFieldLinks = new Map();
+        const prefixFieldLinks = new Map();
+
+        for (const rel of outgoingRelations) {
+          const fromColumns = rel.from_columns || [];
+          if (fromColumns.length !== 1) continue;
+          const sample = (rel.samples || []).find((s) => s && s.can_open && s.identity);
+          if (!sample) continue;
+
+          const fromCol = fromColumns[0];
+          const target = {
+            table: sample.table,
+            identity: sample.identity,
+            label: sample.label || sample.table,
+          };
+
+          if (!directFieldLinks.has(fromCol)) {
+            directFieldLinks.set(fromCol, target);
+          }
+          if (fromCol.endsWith("_id")) {
+            const prefix = fromCol.slice(0, -3);
+            if (prefix && !prefixFieldLinks.has(prefix)) {
+              prefixFieldLinks.set(prefix, target);
+            }
+          }
+        }
+
+        const findInlineTarget = (fieldName) => {
+          if (directFieldLinks.has(fieldName)) {
+            return directFieldLinks.get(fieldName);
+          }
+          const match = fieldName.match(/^(.*)_(code|name|key)$/);
+          if (!match) return null;
+          const prefix = match[1];
+          return prefixFieldLinks.get(prefix) || null;
+        };
+
+        const kvRowsHtml = keys
+          .map(
+            (k) => {
+              const fieldTarget = findInlineTarget(k);
+              let inlineLinkHtml = "";
+              const safeValue = escapeHtml(toText(values[k]));
+              if (fieldTarget) {
+                const idx = inlineTargets.push(fieldTarget) - 1;
+                const showLabel =
+                  k.endsWith("_id") || k === "source_id" || k === "canonical_key" || k.endsWith("_pk");
+                const pretty = escapeHtml(toText(fieldTarget.label || "")) || safeValue;
+                const displayText = showLabel ? pretty : safeValue;
+                inlineLinkHtml = ` <span class="inline-anchor" data-lidx="${idx}" title="${escapeHtml(
+                  `${k}=${toText(values[k])} | abrir ${fieldTarget.table}`,
+                )}">${displayText}</span>`;
+              } else {
+                inlineLinkHtml = safeValue;
+              }
+              return `
+          <div class="kv-row">
+            <div class="k">${escapeHtml(k)}</div>
+            <div class="v">${inlineLinkHtml}</div>
+          </div>
+        `;
+            },
+          )
+          .join("");
+
+        async function fetchRelatedRows(table, cols, vals, limit = 50, offset = 0) {
+          return await fetchRelatedRowsPayload({
+            table,
+            whereColumns: cols || [],
+            whereValues: vals || [],
+            limit,
+            offset,
+          });
+        }
+
+        const relationSection = (title, items) => {
+          const cards = (items || [])
+            .map((rel, idx) => {
+              const refs = `${(rel.from_columns || []).join(",")} -> ${(rel.to_columns || []).join(",")}`;
+              const samples = (rel.samples || [])
+                .map((s, sidx) => {
+                  const disabled = !s.can_open ? "disabled" : "";
+                  return `<button class="pill" data-ridx="${idx}" data-sidx="${sidx}" data-dir="${title}" ${disabled}>${toText(s.label)}</button>`;
+                })
+                .join("");
+
+              const sampleCount = (rel.samples || []).length;
+              const facets = rel.facets && Array.isArray(rel.facets.items) && rel.facets.items.length ? rel.facets : null;
+              const canList = rel.count && !rel.nullable && rel.count > sampleCount;
+              const listLabel = facets ? "Ver todos" : "Ver lista";
+              const listControls = canList
+                ? `<div class="pill-row">
+                     <button class="pill rel-open" data-ridx="${idx}" data-dir="${title}">${listLabel} (${fmtCount(rel.count)})</button>
+                   </div>
+                   <div class="rel-items" data-rel-items="${title}:${idx}"></div>`
+                : `<div class="rel-items" data-rel-items="${title}:${idx}"></div>`;
+
+              const headName = title === "outgoing" ? rel.to_table : rel.from_table;
+              const countText = rel.nullable ? "key=null" : `total=${fmtCount(rel.count)}`;
+
+              let pillsHtml = `<div class="pill-row">${samples || '<span class="meta">sin muestras</span>'}</div>`;
+              if (facets) {
+                const fcol = toText(facets.column || "");
+                const facetPills = (facets.items || [])
+                  .map((it) => {
+                    const rawVal = it.value;
+                    const disp = it.display !== undefined && it.display !== null ? it.display : rawVal;
+                    const valEnc = encodeURIComponent(toText(rawVal));
+                    const txt = `${toText(disp)} (${fmtCount(it.count)})`;
+                    return `<button class="pill facet" data-dir="${title}" data-ridx="${idx}" data-fcol="${escapeHtml(
+                      fcol,
+                    )}" data-fval="${escapeHtml(valEnc)}">${escapeHtml(txt)}</button>`;
+                  })
+                  .join("");
+                pillsHtml = `
+                  <div class="rel-sub">Top por ${escapeHtml(fcol)}</div>
+                  <div class="pill-row">${facetPills}</div>
+                `;
+              }
+
+              return `
+                <div class="rel-card" data-ridx="${idx}" data-dir="${title}">
+                  <div class="rel-title-row">
+                    <div class="rel-title">${escapeHtml(toText(headName || ""))}</div>
+                    <div class="rel-count">${escapeHtml(countText)}</div>
+                  </div>
+                  <div class="rel-sub">${escapeHtml(refs)}</div>
+                  ${pillsHtml}
+                  ${listControls}
+                </div>
+              `;
+            })
+            .join("");
+
+          return `
+            <section class="rel-section">
+              <h3>${title === "outgoing" ? "Enlaces salientes" : "Referencias entrantes"}</h3>
+              ${cards || '<div class="meta">sin relaciones</div>'}
+            </section>
+          `;
+        };
+
+        setDetailHtml(`
+          <div class="meta">tabla=${escapeHtml(meta.table || "")} | ${escapeHtml(identityAsText(record.identity || {}))}</div>
+          <div class="meta">label=${escapeHtml(toText(meta.label || ""))}</div>
+          <div style="margin-top:10px">${kvRowsHtml ? `<div class="kv-table">${kvRowsHtml}</div>` : '<div class="meta">sin campos</div>'}</div>
+          ${relationSection("outgoing", outgoingRelations)}
+          ${relationSection("incoming", incomingRelations)}
+        `);
+
+        // Only wire sample pills (they have data-sidx). "Ver lista" is also a .pill with data-dir,
+        // but should expand the list instead of navigating.
+        els.detail.querySelectorAll("button.pill[data-dir][data-sidx]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const direction = btn.getAttribute("data-dir");
+            const ridx = Number(btn.getAttribute("data-ridx"));
+            const sidx = Number(btn.getAttribute("data-sidx"));
+            const relItems = direction === "outgoing" ? outgoingRelations : incomingRelations;
+            const relation = relItems[ridx];
+            if (!relation) return;
+            const sample = (relation.samples || [])[sidx];
+            if (!sample || !sample.can_open || !sample.identity) return;
+            const cfg = relationConfig(direction, ridx);
+            const nextTable = cfg?.tableName || sample.table;
+            selectTable(nextTable, {
+              keepSearch: false,
+              keepOffset: false,
+              whereCols: Array.isArray(cfg?.cols) ? cfg.cols : null,
+              whereVals: Array.isArray(cfg?.vals) ? cfg.vals : null,
+              preserveStack: true,
+              setRoot: false,
+              historyMode: "none",
+            })
+              .then(() => openRecord(nextTable, sample.identity, sample.label, { historyMode: "push" }))
+              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+          });
+        });
+
+        // Facet pills: navigate to the related table list, pre-filtered by relationship + facet value.
+        els.detail.querySelectorAll("button.pill.facet[data-fcol][data-fval]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const direction = btn.getAttribute("data-dir");
+            const ridx = Number(btn.getAttribute("data-ridx"));
+            const fcol = btn.getAttribute("data-fcol") || "";
+            const fvalEnc = btn.getAttribute("data-fval") || "";
+            if (!direction || !fcol) return;
+            let fval = "";
+            try {
+              fval = decodeURIComponent(fvalEnc);
+            } catch {
+              fval = fvalEnc;
+            }
+            const cfg = relationConfig(direction, ridx);
+            if (!cfg || !cfg.tableName) return;
+            const whereCols = [...(cfg.cols || []), fcol];
+            const whereVals = [...(cfg.vals || []), fval];
+            selectTable(cfg.tableName, {
+              keepSearch: false,
+              keepOffset: false,
+              whereCols,
+              whereVals,
+              preserveStack: true,
+              setRoot: false,
+              historyMode: "push",
+            }).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+          });
+        });
+
+        els.detail.querySelectorAll(".inline-anchor[data-lidx]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const idx = Number(el.getAttribute("data-lidx"));
+            const target = inlineTargets[idx];
+            if (!target || !target.identity) return;
+            const idCols = Object.keys(target.identity || {});
+            const idVals = Object.values(target.identity || {}).map((v) => toText(v));
+            selectTable(target.table, {
+              keepSearch: false,
+              keepOffset: false,
+              whereCols: idCols,
+              whereVals: idVals,
+              preserveStack: true,
+              setRoot: false,
+              historyMode: "none",
+            })
+              .then(() => openRecord(target.table, target.identity, target.label, { historyMode: "push" }))
+              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+          });
+        });
+
+        const relStateByKey = {};
+
+        const relationConfig = (direction, ridx) => {
+          const relItems = direction === "outgoing" ? outgoingRelations : incomingRelations;
+          const rel = relItems[ridx];
+          if (!rel) return null;
+
+          let tableName = "";
+          let cols = [];
+          let vals = [];
+          if (direction === "outgoing") {
+            tableName = rel.to_table;
+            cols = rel.to_columns || [];
+            vals = (rel.from_columns || []).map((c) => toText((rel.match || {})[c]));
+          } else {
+            tableName = rel.from_table;
+            cols = rel.from_columns || [];
+            vals = (rel.to_columns || []).map((c) => toText((rel.match || {})[c]));
+          }
+          return { rel, tableName, cols, vals };
+        };
+
+        const relatedItemsHtml = (rows, tableName, relKey) => {
+          return (rows || [])
+            .map((r) => {
+              const previewObj = r.preview_display || r.preview || {};
+              const identEnc = encodeURIComponent(JSON.stringify(r.identity || {}));
+              const identityText = identityAsText(r.identity || {});
+              return `
+                <button type="button" class="item rel-rec" data-table="${escapeHtml(
+                  tableName,
+                )}" data-relkey="${escapeHtml(toText(relKey || ""))}" data-ident="${escapeHtml(identEnc)}" data-label="${escapeHtml(
+                  toText(r.label || ""),
+                )}">
+                  <div class="item-head">
+                    <h3>${escapeHtml(toText(r.label))}</h3>
+                    <div class="item-id" title="${escapeHtml(identityText || "")}">${escapeHtml(identityText || "")}</div>
+                  </div>
+                  ${renderTags(previewObj)}
+                </button>
+              `;
+            })
+            .join("");
+        };
+
+        const renderRelated = (containerEl, relKey, payload, tableName, append = false) => {
+          if (!containerEl) return;
+          if (payload.error) {
+            containerEl.innerHTML = `<div class="meta">${escapeHtml(payload.error)}</div>`;
+            return;
+          }
+          const rows = payload.rows || [];
+          const metaRel = payload.meta || {};
+          const total = Number(metaRel.total || 0);
+          const nextOffset = Number(metaRel.offset || 0) + Number(metaRel.returned || rows.length);
+
+          const items = rows.length ? relatedItemsHtml(rows, tableName, relKey) : `<div class="meta">sin registros</div>`;
+          const more =
+            nextOffset < total
+              ? `<div class="pill-row"><button type="button" class="pill rel-more" data-relkey="${escapeHtml(
+                  relKey,
+                )}" data-next="${nextOffset}">Cargar mas (${fmtCount(total - nextOffset)})</button></div>`
+              : "";
+
+          if (!append) {
+            containerEl.innerHTML = `${items}${more}`;
+          } else {
+            // Remove existing "more" control before appending.
+            const existingMoreWrap = containerEl.querySelector("button.rel-more")?.closest(".pill-row");
+            if (existingMoreWrap) existingMoreWrap.remove();
+            containerEl.insertAdjacentHTML("beforeend", `${items}${more}`);
+          }
+        };
+
+        const ensureRelatedDelegation = (containerEl) => {
+          if (!containerEl || containerEl.dataset.wired === "1") return;
+          containerEl.dataset.wired = "1";
+          containerEl.addEventListener("click", (ev) => {
+            const recBtn = ev.target.closest("button.rel-rec");
+            if (recBtn) {
+              const tableName = recBtn.getAttribute("data-table");
+              const relKey = recBtn.getAttribute("data-relkey") || "";
+              const identEnc = recBtn.getAttribute("data-ident") || "";
+              const label = recBtn.getAttribute("data-label") || "";
+              let identity = null;
+              try {
+                identity = JSON.parse(decodeURIComponent(identEnc));
+              } catch {
+                identity = null;
+              }
+              if (!tableName || !identity) return;
+
+              const relState = relStateByKey[relKey];
+              const whereCols = relState ? relState.cols : Object.keys(identity || {});
+              const whereVals = relState ? relState.vals : Object.values(identity || {}).map((v) => toText(v));
+              // Keep all panes aligned with the clicked related record's table.
+              // (Without this, the detail could change to a new table while the table/record panes
+              // still reflect the previous table.)
+              selectTable(tableName, {
+                keepSearch: false,
+                keepOffset: false,
+                whereCols,
+                whereVals,
+                preserveStack: true,
+                setRoot: false,
+                historyMode: "none",
+              })
+                .then(() => openRecord(tableName, identity, label, { historyMode: "push" }))
+                .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+              return;
+            }
+
+            const moreBtn = ev.target.closest("button.rel-more");
+            if (moreBtn) {
+              const relKey = moreBtn.getAttribute("data-relkey") || "";
+              const next = Number(moreBtn.getAttribute("data-next") || "0");
+              const relState = relStateByKey[relKey];
+              if (!relState) return;
+              moreBtn.disabled = true;
+              fetchRelatedRows(relState.tableName, relState.cols, relState.vals, 50, next)
+                .then((p) => renderRelated(containerEl, relKey, p, relState.tableName, true))
+                .catch((err) => {
+                  containerEl.insertAdjacentHTML(
+                    "beforeend",
+                    `<div class="meta">Error: ${escapeHtml(toText(err))}</div>`,
+                  );
+                });
+            }
+          });
+        };
+
+        els.detail.querySelectorAll("button.rel-open").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const direction = btn.getAttribute("data-dir");
+            const ridx = Number(btn.getAttribute("data-ridx"));
+            const cfg = relationConfig(direction, ridx);
+            if (!cfg || !cfg.rel || !cfg.rel.count || cfg.rel.nullable) return;
+
+            const relKey = `${direction}:${ridx}`;
+            const containerEl = els.detail.querySelector(`[data-rel-items="${relKey}"]`);
+            if (!containerEl) return;
+            ensureRelatedDelegation(containerEl);
+
+            relStateByKey[relKey] = { tableName: cfg.tableName, cols: cfg.cols, vals: cfg.vals };
+            containerEl.innerHTML = `<div class="meta">Cargando lista...</div>`;
+            const payload = await fetchRelatedRows(cfg.tableName, cfg.cols, cfg.vals, 50, 0);
+            renderRelated(containerEl, relKey, payload, cfg.tableName, false);
+          });
+        });
+      }
+
+      async function loadSchema() {
+        setDetailHtml('<div class="meta">Cargando esquema...</div>');
+        const payload = await fetchSchemaPayload();
+        if (payload.error || payload.meta?.error) {
+          const msg = payload.error || payload.meta?.error || "No se pudo cargar el esquema";
+          setDetailHtml(`<div class="meta">${escapeHtml(toText(msg))}</div>`);
+          return;
+        }
+
+        state.schema = payload;
+        state.tables = payload.tables || [];
+        renderTables();
+
+        if (!state.activeTable && state.tables.length > 0) {
+          await selectTable(state.tables[0].name, { historyMode: "replace" });
+        }
+      }
+
+      function renderRecordsFooter() {
+        const existing = els.records.querySelector("[data-records-footer]");
+        if (existing) existing.remove();
+
+        const wrap = document.createElement("div");
+        wrap.dataset.recordsFooter = "1";
+        wrap.style.padding = "10px 4px 4px";
+
+        if (!state.activeTable) return;
+        if (state.recordsLoading) {
+          wrap.innerHTML = `<div class="meta">Cargando...</div>`;
+        } else if (state.total && state.offset + state.loaded < state.total) {
+          const remaining = state.total - (state.offset + state.loaded);
+          wrap.innerHTML = `<div class="pill-row"><button type="button" class="pill" data-load-more="1">Cargar mas (${fmtCount(
+            remaining,
+          )})</button></div>`;
+        } else {
+          wrap.innerHTML = `<div class="meta">Fin.</div>`;
+        }
+
+        els.records.appendChild(wrap);
+        const btn = wrap.querySelector("button[data-load-more]");
+        if (btn) {
+          btn.addEventListener("click", () => {
+            loadRows({ reset: false })
+              .then(() => pushHistory("replace"))
+              .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+          });
+        }
+      }
+
+      async function loadRows(opts = {}) {
+        const options = { reset: false, restoreLoaded: false, ...opts };
+        if (!state.activeTable) {
+          els.records.textContent = "Selecciona una tabla.";
+          return;
+        }
+        if (state.recordsLoading) return;
+
+        const desiredLoaded = options.restoreLoaded ? Number(state.loaded || 0) : 0;
+        if (options.reset) {
+          state.loaded = 0;
+          state.total = 0;
+          els.records.textContent = "";
+        }
+
+        const fetchPage = async (offset) => {
+          return await fetchRowsPayload({
+            table: state.activeTable,
+            q: state.q,
+            whereColumns: state.whereCols || [],
+            whereValues: state.whereVals || [],
+            limit: state.limit,
+            offset,
+          });
+        };
+
+        state.recordsLoading = true;
+        renderRecordsFooter();
+
+        const offsetToFetch = state.offset + state.loaded;
+        const payload = await fetchPage(offsetToFetch);
+        if (payload.error) {
+          state.recordsLoading = false;
+          els.records.textContent = payload.error;
+          return;
+        }
+
+        state.total = Number(payload.meta?.total || 0);
+        const got = (payload.rows || []).length;
+        renderRows(payload, { append: !options.reset });
+        state.loaded += got;
+        state.recordsLoading = false;
+        renderRecordsFooter();
+        renderActiveFilters();
+
+        if (options.restoreLoaded) {
+          const MAX_RESTORE = 300;
+          const target = Math.min(desiredLoaded, MAX_RESTORE);
+          while (state.loaded < target && state.offset + state.loaded < state.total) {
+            // eslint-disable-next-line no-await-in-loop
+            await loadRows({ reset: false, restoreLoaded: false });
+          }
+        }
+      }
+
+      async function selectTable(tableName, opts = {}) {
+        const options = {
+          keepSearch: false,
+          keepOffset: false,
+          keepWhere: false,
+          whereCols: null,
+          whereVals: null,
+          preserveStack: false,
+          setRoot: true,
+          historyMode: "push",
+          ...opts,
+        };
+
+        state.activeTable = tableName;
+        state.activeRecordIdentity = null;
+        if (Array.isArray(options.whereCols) && Array.isArray(options.whereVals)) {
+          state.whereCols = options.whereCols;
+          state.whereVals = options.whereVals;
+        } else if (!options.keepWhere) {
+          state.whereCols = [];
+          state.whereVals = [];
+        }
+        if (options.setRoot) {
+          state.routeRootTable = tableName;
+        } else if (!state.routeRootTable) {
+          state.routeRootTable = tableName;
+        }
+        if (!options.keepSearch) {
+          state.q = "";
+          els.recordSearch.value = "";
+        }
+        if (!options.keepOffset) {
+          state.offset = 0;
+        }
+        state.loaded = 0;
+        state.total = 0;
+        if (!options.preserveStack) {
+          state.navStack = [];
+        }
+
+        renderTables();
+        renderFilterOptions();
+        renderActiveFilters();
+        setDetailHtml('<div class="meta">Selecciona un registro para ver detalle y relaciones.</div>');
+        renderBreadcrumbTrail();
+        await loadRows({ reset: true });
+        if (options.historyMode !== "none") pushHistory(options.historyMode);
+      }
+
+      async function fetchRecordPayload(tableName, identity) {
+        return await fetchRecordPayloadFromBackend(tableName, identity);
+      }
+
+      async function navigateToStackLevel(level) {
+        const step = state.navStack[level];
+        if (!step || !step.identity) return;
+        state.navStack = state.navStack.slice(0, level + 1);
+        state.activeRecordIdentity = step.identity;
+
+        state.activeTable = step.table;
+        state.whereCols = Array.isArray(step.whereCols) ? step.whereCols : [];
+        state.whereVals = Array.isArray(step.whereVals) ? step.whereVals : [];
+        state.offset = 0;
+        state.loaded = 0;
+        state.total = 0;
+        renderTables();
+        renderFilterOptions();
+        renderActiveFilters();
+        await loadRows({ reset: true });
+
+        const payload = await fetchRecordPayload(step.table, step.identity);
+        if (payload.error) {
+          setDetailHtml(`<div class="meta">${payload.error}</div>`);
+          renderBreadcrumbTrail();
+          return;
+        }
+        renderDetail(payload);
+        renderBreadcrumbTrail();
+        pushHistory("push");
+      }
+
+      async function openRecord(tableName, identity, label, opts = {}) {
+        const options = {
+          pushStack: true,
+          historyMode: "push",
+          ...opts,
+        };
+
+        const payload = await fetchRecordPayload(tableName, identity);
+        if (payload.error) {
+          setDetailHtml(`<div class="meta">${payload.error}</div>`);
+          renderBreadcrumbTrail();
+          return;
+        }
+
+        // Keep the list panel aligned with the currently open record's table.
+        state.activeTable = tableName;
+        state.activeRecordIdentity = identity;
+        if (options.pushStack) {
+        state.navStack.push({
+            table: tableName,
+            identity,
+            label: toText(label || payload.meta?.label || "record"),
+            whereCols: Array.isArray(state.whereCols) ? state.whereCols : [],
+            whereVals: Array.isArray(state.whereVals) ? state.whereVals : [],
+          });
+          if (state.navStack.length > 14) {
+            state.navStack = state.navStack.slice(state.navStack.length - 14);
+          }
+        }
+
+        renderDetail(payload);
+        renderBreadcrumbTrail();
+        if (options.historyMode !== "none") pushHistory(options.historyMode);
+      }
+
+      if (els.pathTrail) {
+        els.pathTrail.addEventListener("click", (ev) => {
+          const btn = ev.target.closest("button[data-nav-level]");
+          if (!btn) return;
+          const level = Number(btn.getAttribute("data-nav-level"));
+          if (!Number.isFinite(level)) return;
+          const target = state.navStack[level];
+          if (!target || !target.identity) return;
+          if (level >= state.navStack.length - 1) return;
+          navigateToStackLevel(level).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+        });
+      }
+
+      els.tableFilter.addEventListener("input", () => {
+        renderTables();
+        pushHistory("replace");
+      });
+      els.reloadSchema.addEventListener("click", () => {
+        loadSchema().catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.applySearch.addEventListener("click", () => {
+        state.q = els.recordSearch.value.trim();
+        state.offset = 0;
+        state.loaded = 0;
+        state.total = 0;
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.recordSearch.addEventListener("keydown", (ev) => {
+        if (ev.key !== "Enter") return;
+        ev.preventDefault();
+        state.q = els.recordSearch.value.trim();
+        state.offset = 0;
+        state.loaded = 0;
+        state.total = 0;
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.pageSize.addEventListener("change", () => {
+        state.limit = Number(els.pageSize.value || 50);
+        state.offset = 0;
+        state.loaded = 0;
+        state.total = 0;
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.prevPage.addEventListener("click", () => {
+        state.offset = Math.max(0, state.offset - state.limit);
+        state.loaded = 0;
+        state.total = 0;
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.nextPage.addEventListener("click", () => {
+        state.offset += state.limit;
+        state.loaded = 0;
+        state.total = 0;
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.addFilter.addEventListener("click", () => {
+        const col = (els.filterCol.value || "").trim();
+        const val = (els.filterVal.value || "").trim();
+        if (!col || !val) return;
+        const idx = (state.whereCols || []).indexOf(col);
+        if (idx >= 0) {
+          state.whereVals[idx] = val;
+        } else {
+          state.whereCols.push(col);
+          state.whereVals.push(val);
+        }
+        state.offset = 0;
+        state.loaded = 0;
+        state.total = 0;
+        els.filterVal.value = "";
+        renderActiveFilters();
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.filterVal.addEventListener("keydown", (ev) => {
+        if (ev.key !== "Enter") return;
+        ev.preventDefault();
+        els.addFilter.click();
+      });
+
+      els.clearFilters.addEventListener("click", () => {
+        state.whereCols = [];
+        state.whereVals = [];
+        state.offset = 0;
+        state.loaded = 0;
+        state.total = 0;
+        renderActiveFilters();
+        loadRows({ reset: true })
+          .then(() => pushHistory("push"))
+          .catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      els.records.addEventListener("scroll", () => {
+        if (state.recordsLoading) return;
+        if (!state.total) return;
+        if (state.offset + state.loaded >= state.total) return;
+        const remainingPx = els.records.scrollHeight - els.records.scrollTop - els.records.clientHeight;
+        if (remainingPx < 220) {
+          loadRows({ reset: false })
+            .then(() => pushHistory("replace"))
+            .catch(() => {});
+        }
+      });
+
+      window.addEventListener("popstate", (ev) => {
+        const snap = snapshotFromLocation() || (ev.state && ev.state.explorer ? ev.state.explorer : null);
+        restoreFromHistory(snap).catch((err) => setDetailHtml(`<div class="meta">Error: ${toText(err)}</div>`));
+      });
+
+      function snapshotToUrlParams(snapshot) {
+        const snap = snapshot || {};
+        const p = new URLSearchParams();
+
+        if (snap.activeTable) p.set("t", String(snap.activeTable));
+        if (snap.routeRootTable) p.set("root", String(snap.routeRootTable));
+        if (snap.q) p.set("q", String(snap.q));
+        if (snap.offset) p.set("o", String(Number(snap.offset) || 0));
+        if (snap.loaded) p.set("n", String(Number(snap.loaded) || 0));
+        if (snap.limit) p.set("l", String(Number(snap.limit) || 50));
+        if (snap.tableFilter) p.set("tf", String(snap.tableFilter));
+
+        const wcols = Array.isArray(snap.whereCols) ? snap.whereCols : [];
+        const wvals = Array.isArray(snap.whereVals) ? snap.whereVals : [];
+        for (let i = 0; i < Math.min(wcols.length, wvals.length); i += 1) {
+          p.append("wc", String(wcols[i]));
+          p.append("wv", String(wvals[i]));
+        }
+
+        if (snap.activeRecordIdentity) {
+          try {
+            p.set("rid", JSON.stringify(snap.activeRecordIdentity));
+          } catch {
+            // ignore
+          }
+        }
+
+        if (Array.isArray(snap.navStack) && snap.navStack.length) {
+          try {
+            p.set("s", JSON.stringify(snap.navStack));
+          } catch {
+            // ignore
+          }
+        }
+
+        return p;
+      }
+
+      function snapshotFromLocation() {
+        const p = new URLSearchParams(location.search || "");
+        if ([...p.keys()].length === 0) return null;
+
+        let navStack = [];
+        const sRaw = p.get("s");
+        if (sRaw) {
+          try {
+            const parsed = JSON.parse(sRaw);
+            if (Array.isArray(parsed)) navStack = parsed;
+          } catch {
+            navStack = [];
+          }
+        }
+
+        let activeRecordIdentity = null;
+        const ridRaw = p.get("rid");
+        if (ridRaw) {
+          try {
+            activeRecordIdentity = JSON.parse(ridRaw);
+          } catch {
+            activeRecordIdentity = null;
+          }
+        }
+
+        const activeTable = p.get("t") || (navStack.length ? navStack[navStack.length - 1]?.table : "") || "";
+
+        if (!activeRecordIdentity && navStack.length) {
+          const last = navStack[navStack.length - 1];
+          if (last && last.identity) activeRecordIdentity = last.identity;
+        }
+
+        return {
+          activeTable,
+          routeRootTable: p.get("root") || "",
+          activeRecordIdentity,
+          whereCols: p.getAll("wc"),
+          whereVals: p.getAll("wv"),
+          offset: Number(p.get("o") || 0),
+          loaded: Number(p.get("n") || 0),
+          limit: Number(p.get("l") || 50),
+          q: p.get("q") || "",
+          tableFilter: p.get("tf") || "",
+          navStack,
+        };
+      }
+
+      const initialSnap = snapshotFromLocation() || (history.state && history.state.explorer ? history.state.explorer : null);
+      if (initialSnap) applySnapshot(initialSnap);
+
+      async function startExplorer() {
+        await initBackend();
+        const modeLabel = backend.mode === "api" ? "API local" : "HF/browser";
+        els.recordsHint.textContent = `Fuente: ${modeLabel} (${backend.sourceLabel || "desconocida"})`;
+
+        await loadSchema();
+        if (initialSnap) {
+          await restoreFromHistory(initialSnap);
+          return;
+        }
+        pushHistory("replace");
+      }
+
+      startExplorer().catch((err) => {
+        const msg = toText(err && err.message ? err.message : err);
+        els.tables.innerHTML = `<div class="meta">No se pudo inicializar Explorer: ${escapeHtml(msg)}</div>`;
+        setDetailHtml(`<div class="meta">Error: ${escapeHtml(msg)}</div>`);
+      });
+    </script>
+  </body>
+</html>

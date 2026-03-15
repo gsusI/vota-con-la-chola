@@ -1,0 +1,456 @@
+{
+  "meta": {
+    "path": "docs/coverage_capacity_model.json",
+    "exists": true,
+    "version": "2026-03-14",
+    "title": "North-Star Coverage Capacity Model",
+    "ideal_inventory_version": "2026-02-14"
+  },
+  "summary": {
+    "cells_total": 9,
+    "cells_with_denominator": 9,
+    "blocked_cells": 0,
+    "denominator_gaps": 0,
+    "weighted_percent": 29.4
+  },
+  "families": [
+    {
+      "key": "analytics",
+      "label": "analytics",
+      "cells_total": 2,
+      "cells_with_denominator": 2,
+      "blocked_cells": 0,
+      "weighted_percent": 3.8
+    },
+    {
+      "key": "documents",
+      "label": "documents",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 47.2
+    },
+    {
+      "key": "inventory",
+      "label": "inventory",
+      "cells_total": 4,
+      "cells_with_denominator": 4,
+      "blocked_cells": 0,
+      "weighted_percent": 6.0
+    },
+    {
+      "key": "records",
+      "label": "records",
+      "cells_total": 2,
+      "cells_with_denominator": 2,
+      "blocked_cells": 0,
+      "weighted_percent": 76.5
+    }
+  ],
+  "by_scope": [
+    {
+      "key": "europeo",
+      "label": "europeo",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 0.0
+    },
+    {
+      "key": "multi",
+      "label": "multi",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 14.3
+    },
+    {
+      "key": "nacional",
+      "label": "nacional",
+      "cells_total": 6,
+      "cells_with_denominator": 6,
+      "blocked_cells": 0,
+      "weighted_percent": 37.9
+    },
+    {
+      "key": "subnacional",
+      "label": "subnacional",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 0.0
+    }
+  ],
+  "by_evidence_kind": [
+    {
+      "key": "both",
+      "label": "both",
+      "cells_total": 4,
+      "cells_with_denominator": 4,
+      "blocked_cells": 0,
+      "weighted_percent": 6.0
+    },
+    {
+      "key": "does",
+      "label": "does",
+      "cells_total": 4,
+      "cells_with_denominator": 4,
+      "blocked_cells": 0,
+      "weighted_percent": 38.7
+    },
+    {
+      "key": "says",
+      "label": "says",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 52.9
+    }
+  ],
+  "by_domain": [
+    {
+      "key": "declared_evidence",
+      "label": "declared_evidence",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 52.9
+    },
+    {
+      "key": "initiative_docs",
+      "label": "initiative_docs",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 47.2
+    },
+    {
+      "key": "measure_reviews",
+      "label": "measure_reviews",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 5.1
+    },
+    {
+      "key": "measure_scale",
+      "label": "measure_scale",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 2.5
+    },
+    {
+      "key": "source_inventory",
+      "label": "source_inventory",
+      "cells_total": 4,
+      "cells_with_denominator": 4,
+      "blocked_cells": 0,
+      "weighted_percent": 6.0
+    },
+    {
+      "key": "votes",
+      "label": "votes",
+      "cells_total": 1,
+      "cells_with_denominator": 1,
+      "blocked_cells": 0,
+      "weighted_percent": 100.0
+    }
+  ],
+  "denominator_gaps": [],
+  "cells": [
+    {
+      "id": "inventory_national_sources",
+      "label": "Inventario de fuentes nacionales",
+      "scope": "nacional",
+      "evidence_kind": "both",
+      "domain": "source_inventory",
+      "source_family": "mixed",
+      "unit_family": "inventory",
+      "unit_type": "source_slot",
+      "primary_stage": "processed",
+      "builder_key": "ideal_source_inventory",
+      "estimator_type": "ideal_inventory",
+      "estimator_ref": "docs/ideal_sources_say_do.json",
+      "rollup_weight": 0.7,
+      "notes": "North-star source slots for the national layer.",
+      "source_ids": [],
+      "ideal_total": 25,
+      "stages": {
+        "discoverable": 3,
+        "downloaded": 3,
+        "processed": 3,
+        "linked": 3,
+        "published": 3
+      },
+      "primary_total": 3,
+      "primary_percent": 12.0,
+      "denominator_status": "ok",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "inventory_subnational_sources",
+      "label": "Inventario subnacional",
+      "scope": "subnacional",
+      "evidence_kind": "both",
+      "domain": "source_inventory",
+      "source_family": "mixed",
+      "unit_family": "inventory",
+      "unit_type": "source_slot",
+      "primary_stage": "processed",
+      "builder_key": "ideal_source_inventory",
+      "estimator_type": "ideal_inventory",
+      "estimator_ref": "docs/ideal_sources_say_do.json",
+      "rollup_weight": 0.7,
+      "notes": "Future regional and local source-slot backlog.",
+      "source_ids": [],
+      "ideal_total": 6,
+      "stages": {
+        "discoverable": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "linked": 0,
+        "published": 0
+      },
+      "primary_total": 0,
+      "primary_percent": 0.0,
+      "denominator_status": "ok",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "inventory_european_sources",
+      "label": "Inventario europeo",
+      "scope": "europeo",
+      "evidence_kind": "both",
+      "domain": "source_inventory",
+      "source_family": "mixed",
+      "unit_family": "inventory",
+      "unit_type": "source_slot",
+      "primary_stage": "processed",
+      "builder_key": "ideal_source_inventory",
+      "estimator_type": "ideal_inventory",
+      "estimator_ref": "docs/ideal_sources_say_do.json",
+      "rollup_weight": 0.7,
+      "notes": "EU backlog as explicit source slots.",
+      "source_ids": [],
+      "ideal_total": 7,
+      "stages": {
+        "discoverable": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "linked": 0,
+        "published": 0
+      },
+      "primary_total": 0,
+      "primary_percent": 0.0,
+      "denominator_status": "ok",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "inventory_multi_scope_sources",
+      "label": "Inventario multiambito",
+      "scope": "multi",
+      "evidence_kind": "both",
+      "domain": "source_inventory",
+      "source_family": "mixed",
+      "unit_family": "inventory",
+      "unit_type": "source_slot",
+      "primary_stage": "processed",
+      "builder_key": "ideal_source_inventory",
+      "estimator_type": "ideal_inventory",
+      "estimator_ref": "docs/ideal_sources_say_do.json",
+      "rollup_weight": 0.5,
+      "notes": "Cross-scope backlog such as catalogs or multi-jurisdiction sources.",
+      "source_ids": [],
+      "ideal_total": 7,
+      "stages": {
+        "discoverable": 1,
+        "downloaded": 1,
+        "processed": 1,
+        "linked": 1,
+        "published": 1
+      },
+      "primary_total": 1,
+      "primary_percent": 14.3,
+      "denominator_status": "ok",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "national_votes",
+      "label": "Votaciones nacionales",
+      "scope": "nacional",
+      "evidence_kind": "does",
+      "domain": "votes",
+      "source_family": "parlamentario",
+      "unit_family": "records",
+      "unit_type": "vote_event",
+      "primary_stage": "linked",
+      "builder_key": "national_votes",
+      "estimator_type": "derived_sql",
+      "estimator_ref": "parl_vote_events + parl_vote_event_initiatives",
+      "rollup_weight": 1.0,
+      "notes": "Bounded by vote events loaded from the official parliamentary sources.",
+      "source_ids": [
+        "congreso_votaciones",
+        "senado_votaciones"
+      ],
+      "ideal_total": 8357,
+      "stages": {
+        "discoverable": 8357,
+        "downloaded": 8357,
+        "processed": 8357,
+        "linked": 8357,
+        "published": 8357
+      },
+      "primary_total": 8357,
+      "primary_percent": 100.0,
+      "denominator_status": "proxy",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "national_initiative_docs",
+      "label": "Documentos oficiales de iniciativas",
+      "scope": "nacional",
+      "evidence_kind": "does",
+      "domain": "initiative_docs",
+      "source_family": "parlamentario",
+      "unit_family": "documents",
+      "unit_type": "initiative_document_slot",
+      "primary_stage": "processed",
+      "builder_key": "national_initiative_docs",
+      "estimator_type": "derived_sql",
+      "estimator_ref": "parl_initiatives.links_bocg_json + links_ds_json",
+      "rollup_weight": 1.0,
+      "notes": "Known official document slots per initiative vs downloaded and extracted text.",
+      "source_ids": [
+        "congreso_iniciativas",
+        "senado_iniciativas"
+      ],
+      "ideal_total": 13504,
+      "stages": {
+        "discoverable": 13504,
+        "downloaded": 9575,
+        "processed": 6379,
+        "linked": 6382,
+        "published": 6379
+      },
+      "primary_total": 6379,
+      "primary_percent": 47.2,
+      "denominator_status": "proxy",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "declared_evidence_signal",
+      "label": "Evidencia declarada con postura",
+      "scope": "nacional",
+      "evidence_kind": "says",
+      "domain": "declared_evidence",
+      "source_family": "parlamentario",
+      "unit_family": "records",
+      "unit_type": "declared_evidence_row",
+      "primary_stage": "linked",
+      "builder_key": "declared_evidence_signal",
+      "estimator_type": "derived_sql",
+      "estimator_ref": "analytics.evidence.topic_evidence_declared_total",
+      "rollup_weight": 1.0,
+      "notes": "Declared evidence rows become useful only when stance/signal is extracted.",
+      "source_ids": [
+        "congreso_intervenciones"
+      ],
+      "ideal_total": 1182,
+      "stages": {
+        "discoverable": 1182,
+        "downloaded": 1182,
+        "processed": 1182,
+        "linked": 625,
+        "published": 625
+      },
+      "primary_total": 625,
+      "primary_percent": 52.9,
+      "denominator_status": "proxy",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "fragment_measure_reviews",
+      "label": "Revision de fragmentos para medidas",
+      "scope": "nacional",
+      "evidence_kind": "does",
+      "domain": "measure_scale",
+      "source_family": "parlamentario",
+      "unit_family": "analytics",
+      "unit_type": "text_fragment",
+      "primary_stage": "linked",
+      "builder_key": "fragment_measure_reviews",
+      "estimator_type": "derived_sql",
+      "estimator_ref": "parl_text_fragments + parl_fragment_measure_reviews",
+      "rollup_weight": 1.0,
+      "notes": "Scalable measure extraction coverage over deterministic text fragments.",
+      "source_ids": [
+        "congreso_iniciativas",
+        "senado_iniciativas"
+      ],
+      "ideal_total": 4188,
+      "stages": {
+        "discoverable": 4188,
+        "downloaded": 4188,
+        "processed": 4188,
+        "linked": 104,
+        "published": 95
+      },
+      "primary_total": 104,
+      "primary_percent": 2.5,
+      "denominator_status": "proxy",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    },
+    {
+      "id": "initiative_measure_tasks",
+      "label": "Dossiers de medidas ciudadanas",
+      "scope": "nacional",
+      "evidence_kind": "does",
+      "domain": "measure_reviews",
+      "source_family": "parlamentario",
+      "unit_family": "analytics",
+      "unit_type": "initiative_measure_task",
+      "primary_stage": "linked",
+      "builder_key": "initiative_measure_tasks",
+      "estimator_type": "derived_sql",
+      "estimator_ref": "parl_initiative_measure_review_tasks",
+      "rollup_weight": 1.0,
+      "notes": "Official initiative dossiers queued for citizen-facing measure extraction.",
+      "source_ids": [
+        "congreso_iniciativas",
+        "senado_iniciativas"
+      ],
+      "ideal_total": 751,
+      "stages": {
+        "discoverable": 751,
+        "downloaded": 139,
+        "processed": 751,
+        "linked": 38,
+        "published": 38
+      },
+      "primary_total": 38,
+      "primary_percent": 5.1,
+      "denominator_status": "proxy",
+      "blocked": false,
+      "blocked_sources": [],
+      "gap_reason": ""
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fpeople\u002Fxray\u002F[kind]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

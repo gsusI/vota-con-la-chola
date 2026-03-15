@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vota Con La Chola | Leaderboards</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #0b1020;
+        --ink-2: #24324a;
+        --muted: #5b6b85;
+        --panel: rgba(255, 255, 255, 0.92);
+        --line: rgba(15, 23, 42, 0.12);
+        --shadow: 0 18px 52px rgba(15, 23, 42, 0.12);
+        --accent: #1d4ed8;
+        --accent-2: #0891b2;
+        --good: #059669;
+        --warn: #d97706;
+        --bad: #dc2626;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        color: var(--ink);
+        background:
+          radial-gradient(980px 520px at 10% -10%, #dbeafe 0%, transparent 62%),
+          radial-gradient(980px 520px at 92% 12%, #cffafe 0%, transparent 58%),
+          radial-gradient(980px 520px at 80% 110%, #fef3c7 0%, transparent 62%),
+          linear-gradient(130deg, #f6f8ff, #ffffff);
+        line-height: 1.45;
+      }
+
+      .shell {
+        width: min(1400px, calc(100% - 24px));
+        margin: 0 auto;
+        padding: 14px 0 22px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        min-width: 0;
+      }
+
+      .top {
+        padding: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .top::before {
+        content: "";
+        position: absolute;
+        inset: -120px -160px auto auto;
+        width: 460px;
+        height: 460px;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(29, 78, 216, 0.22), transparent 56%),
+          radial-gradient(circle at 55% 55%, rgba(8, 145, 178, 0.18), transparent 62%),
+          radial-gradient(circle at 75% 25%, rgba(217, 119, 6, 0.16), transparent 62%);
+        transform: rotate(10deg);
+        pointer-events: none;
+      }
+
+      .top > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(29, 78, 216, 0.22);
+        background: rgba(219, 234, 254, 0.58);
+        border-radius: 999px;
+        padding: 6px 10px;
+        text-decoration: none;
+        color: #0b1b3a;
+        font-weight: 800;
+        font-size: 0.82rem;
+      }
+
+      .pill.secondary {
+        border-color: rgba(8, 145, 178, 0.22);
+        background: rgba(207, 250, 254, 0.45);
+      }
+
+      .pill.neutral {
+        border-color: rgba(15, 23, 42, 0.14);
+        background: rgba(248, 250, 252, 0.82);
+      }
+
+      .pill:focus,
+      .pill:hover {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.18);
+      }
+
+      .eyebrow {
+        margin: 12px 0 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 6px 0 4px;
+        font-size: clamp(1.5rem, 3.2vw, 2rem);
+        line-height: 1.08;
+      }
+
+      .sub {
+        margin: 0;
+        color: var(--ink-2);
+        max-width: 90ch;
+      }
+
+      .meta {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        background: rgba(248, 250, 252, 0.86);
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 0.76rem;
+        color: #1e2f47;
+      }
+
+      .boards {
+        display: grid;
+        gap: 10px;
+      }
+
+      .board {
+        padding: 12px;
+      }
+
+      .board-head {
+        display: grid;
+        gap: 6px;
+      }
+
+      .board-id {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        border: 1px solid rgba(29, 78, 216, 0.22);
+        background: rgba(219, 234, 254, 0.45);
+        color: #183155;
+        padding: 3px 8px;
+        width: fit-content;
+        font-weight: 800;
+        font-size: 0.74rem;
+        letter-spacing: 0.02em;
+      }
+
+      .board h2 {
+        margin: 0;
+        font-size: 1.08rem;
+      }
+
+      .hyp {
+        margin: 0;
+        color: #2d4260;
+        font-size: 0.89rem;
+      }
+
+      .notes {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .boardAlert {
+        margin: 2px 0 0;
+        border-radius: 10px;
+        border: 1px solid rgba(217, 119, 6, 0.28);
+        background: rgba(255, 251, 235, 0.82);
+        color: #7c2d12;
+        padding: 8px 10px;
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+
+      .tableWrap {
+        margin-top: 10px;
+        overflow: auto;
+        border: 1px solid rgba(15, 23, 42, 0.11);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+      }
+
+      thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: #f3f7ff;
+        color: #274264;
+        text-align: left;
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+        padding: 9px 10px;
+      }
+
+      tbody td {
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        padding: 8px 10px;
+        font-size: 0.83rem;
+        color: #1d3048;
+        vertical-align: top;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      tbody tr.rowMuted td {
+        color: #5f6e84;
+        background: rgba(15, 23, 42, 0.03);
+      }
+
+      td.rank {
+        width: 52px;
+        color: #4d5d75;
+        font-weight: 800;
+      }
+
+      td.right,
+      th.right {
+        text-align: right;
+      }
+
+      .mono {
+        font-family: var(--mono);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 2px 8px;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        background: rgba(248, 250, 252, 0.88);
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .tag.good {
+        color: #065f46;
+        border-color: rgba(5, 150, 105, 0.28);
+        background: rgba(209, 250, 229, 0.62);
+      }
+
+      .tag.warn {
+        color: #7c2d12;
+        border-color: rgba(217, 119, 6, 0.3);
+        background: rgba(254, 243, 199, 0.68);
+      }
+
+      .tag.bad {
+        color: #7f1d1d;
+        border-color: rgba(220, 38, 38, 0.25);
+        background: rgba(254, 226, 226, 0.7);
+      }
+
+      .footer {
+        padding: 12px;
+        font-size: 0.78rem;
+        color: #3f536d;
+      }
+
+      .err {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(220, 38, 38, 0.25);
+        background: rgba(254, 226, 226, 0.72);
+        color: #7f1d1d;
+        font-weight: 700;
+      }
+
+      @media (max-width: 860px) {
+        .shell {
+          width: calc(100% - 14px);
+          padding-top: 10px;
+        }
+
+        .board {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="card top">
+        <nav class="nav" aria-label="Navegacion principal">
+          <a class="pill" href="../">Exploradores</a>
+          <a class="pill secondary" href="./">Ciudadania</a>
+          <a class="pill neutral" href="../explorer-temas/">Temas</a>
+          <a class="pill neutral" href="../explorer-sources/#campaign-map">Mapa de conquista</a>
+        </nav>
+        <p class="eyebrow">Leaderboards</p>
+        <h1>Hipotesis ciudadanas en ranking</h1>
+        <p class="sub">
+          Este panel convierte 10 hipotesis de interes publico en tablas comparables por partido y por tema usando snapshots
+          estaticos de GH Pages (<span class="mono">votes</span>, <span class="mono">declared</span> y <span class="mono">combined</span>).
+        </p>
+        <div class="meta" id="metaChips">
+          <span class="chip">Cargando metadatos...</span>
+        </div>
+      </header>
+
+      <section class="boards" id="boardsRoot" aria-live="polite"></section>
+
+      <footer class="card footer">
+        Interpretacion: no es un ranking electoral final. Son pruebas exploratorias para auditar patrones en datos disponibles.
+        Algunas hipotesis usan proxies porque el snapshot ciudadano no incluye voto nominal por miembro-partido en cada evento.
+      </footer>
+    </main>
+
+    <script>
+      const DATA_PATHS = {
+        combined: "./data/citizen.json",
+        votes: "./data/citizen_votes.json",
+        declared: "./data/citizen_declared.json",
+        concerns: "./data/concerns_v1.json",
+      };
+
+      const GOV_REGEX = /(PSOE|SUMAR)/i;
+      const REGIONALIST_PARTIES = new Set(["BNG", "CCa", "EAJ-PNV", "EH Bildu", "ERC", "JxCAT-JUNTS", "UPN"]);
+      const TERRITORIAL_CONCERNS = new Set(["campo_rural", "transporte", "energia", "vivienda"]);
+      const UNCERTAIN_STANCES = new Set(["unclear", "no_signal"]);
+      const H1_MIN_COMPARABLES = 5;
+      const H1_PRIOR_WEIGHT = 5;
+      const H1_WARN_TOTAL_COMPARABLES = 40;
+
+      const fmt = new Intl.NumberFormat("es-ES");
+      const fmt1 = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+      const fmt2 = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function toPct(value) {
+        if (value === null || value === undefined || Number.isNaN(value)) return "—";
+        return `${fmt1.format(value * 100)}%`;
+      }
+
+      function toNum(value, digits = 2) {
+        if (value === null || value === undefined || Number.isNaN(value)) return "—";
+        if (digits === 0) return fmt.format(Math.round(value));
+        return digits === 1 ? fmt1.format(value) : fmt2.format(value);
+      }
+
+      function stanceSign(stance) {
+        if (stance === "support") return 1;
+        if (stance === "oppose") return -1;
+        return null;
+      }
+
+      function isClear(stance) {
+        return stance === "support" || stance === "oppose";
+      }
+
+      function avg(values) {
+        if (!values.length) return null;
+        return values.reduce((acc, v) => acc + v, 0) / values.length;
+      }
+
+      function median(values) {
+        if (!values.length) return null;
+        const sorted = [...values].sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+        if (sorted.length % 2) return sorted[mid];
+        return (sorted[mid - 1] + sorted[mid]) / 2;
+      }
+
+      function pearson(xs, ys) {
+        if (!xs.length || xs.length !== ys.length) return null;
+        const mx = avg(xs);
+        const my = avg(ys);
+        let num = 0;
+        let dx = 0;
+        let dy = 0;
+        for (let i = 0; i < xs.length; i += 1) {
+          const a = xs[i] - mx;
+          const b = ys[i] - my;
+          num += a * b;
+          dx += a * a;
+          dy += b * b;
+        }
+        if (!dx || !dy) return null;
+        return num / Math.sqrt(dx * dy);
+      }
+
+      function mkRowMap(rows) {
+        const map = new Map();
+        rows.forEach((row) => {
+          map.set(`${row.party_id}|${row.topic_id}`, row);
+        });
+        return map;
+      }
+
+      function groupBy(rows, key) {
+        const map = new Map();
+        rows.forEach((row) => {
+          const id = row[key];
+          if (!map.has(id)) map.set(id, []);
+          map.get(id).push(row);
+        });
+        return map;
+      }
+
+      function buildContext(data) {
+        const combined = data.combined;
+        const votes = data.votes;
+        const declared = data.declared;
+        const concernMeta = new Map((data.concerns.concerns || []).map((c) => [c.id, c]));
+        const partyById = new Map((combined.parties || []).map((p) => [p.party_id, p]));
+        const topicById = new Map((combined.topics || []).map((t) => [t.topic_id, t]));
+
+        return {
+          combined,
+          votes,
+          declared,
+          concernMeta,
+          partyById,
+          topicById,
+          allPartyIds: [...partyById.keys()],
+          allTopicIds: [...topicById.keys()],
+          maps: {
+            combined: mkRowMap(combined.party_topic_positions || []),
+            votes: mkRowMap(votes.party_topic_positions || []),
+            declared: mkRowMap(declared.party_topic_positions || []),
+          },
+          byParty: {
+            combined: groupBy(combined.party_topic_positions || [], "party_id"),
+            votes: groupBy(votes.party_topic_positions || [], "party_id"),
+            declared: groupBy(declared.party_topic_positions || [], "party_id"),
+          },
+          byTopic: {
+            combined: groupBy(combined.party_topic_positions || [], "topic_id"),
+            votes: groupBy(votes.party_topic_positions || [], "topic_id"),
+            declared: groupBy(declared.party_topic_positions || [], "topic_id"),
+          },
+          asOfDate: combined.meta?.as_of_date || votes.meta?.as_of_date || declared.meta?.as_of_date || null,
+        };
+      }
+
+      function partyName(ctx, partyId) {
+        return ctx.partyById.get(partyId)?.name || `party_${partyId}`;
+      }
+
+      function topicLabel(ctx, topicId) {
+        return ctx.topicById.get(topicId)?.label || `topic_${topicId}`;
+      }
+
+      function topicConcernLabels(ctx, topicId) {
+        const ids = ctx.topicById.get(topicId)?.concern_ids || [];
+        return ids.map((id) => ctx.concernMeta.get(id)?.label || id).join(", ");
+      }
+
+      function board1DeclaredVsRevealedGap(ctx) {
+        const baseRows = [];
+        const topicCount = ctx.allTopicIds.length;
+        ctx.allPartyIds.forEach((partyId) => {
+          let overlap = 0;
+          let mismatch = 0;
+          let declaredClear = 0;
+          ctx.allTopicIds.forEach((topicId) => {
+            const v = ctx.maps.votes.get(`${partyId}|${topicId}`);
+            const d = ctx.maps.declared.get(`${partyId}|${topicId}`);
+            if (d && isClear(d.stance)) declaredClear += 1;
+            if (!v || !d) return;
+            if (!isClear(v.stance) || !isClear(d.stance)) return;
+            overlap += 1;
+            if (v.stance !== d.stance) mismatch += 1;
+          });
+          baseRows.push({
+            party: partyName(ctx, partyId),
+            overlap,
+            mismatch,
+            declaredCoverage: topicCount ? declaredClear / topicCount : null,
+          });
+        });
+        const totalComparables = baseRows.reduce((acc, row) => acc + row.overlap, 0);
+        const totalMismatch = baseRows.reduce((acc, row) => acc + row.mismatch, 0);
+        const globalGap = totalComparables ? totalMismatch / totalComparables : 0;
+        const rows = baseRows.map((row) => {
+          const overlap = Number(row.overlap || 0);
+          const mismatch = Number(row.mismatch || 0);
+          const rawGap = overlap ? mismatch / overlap : null;
+          const shrinkGap = overlap ? (mismatch + H1_PRIOR_WEIGHT * globalGap) / (overlap + H1_PRIOR_WEIGHT) : null;
+          const eligible = overlap >= H1_MIN_COMPARABLES;
+          let sampleState = `<span class="tag bad">sin comparables</span>`;
+          if (overlap > 0 && !eligible) sampleState = `<span class="tag warn">n bajo (${toNum(overlap, 0)})</span>`;
+          if (eligible) sampleState = `<span class="tag good">suficiente</span>`;
+          return {
+            ...row,
+            gap: eligible ? shrinkGap : null,
+            rawGap,
+            _eligible: eligible,
+            _sampleState: sampleState,
+          };
+        });
+        rows.sort((a, b) => {
+          if (a._eligible !== b._eligible) return a._eligible ? -1 : 1;
+          if (a._eligible && b._eligible) {
+            if (b.gap !== a.gap) return b.gap - a.gap;
+            if (b.overlap !== a.overlap) return b.overlap - a.overlap;
+          }
+          if (b.overlap !== a.overlap) return b.overlap - a.overlap;
+          if (b.mismatch !== a.mismatch) return b.mismatch - a.mismatch;
+          return String(a.party || "").localeCompare(String(b.party || ""));
+        });
+        let rank = 1;
+        rows.forEach((row) => {
+          if (row._eligible) {
+            row._rankLabel = `#${rank}`;
+            rank += 1;
+            return;
+          }
+          row._rankLabel = "—";
+          row._rowClass = "rowMuted";
+        });
+        const eligibleRows = rows.filter((row) => row._eligible);
+        const sparseRows = rows.length - eligibleRows.length;
+        const lowEvidence = totalComparables < H1_WARN_TOTAL_COMPARABLES;
+        const alert = lowEvidence
+          ? `Muestra insuficiente: solo ${toNum(totalComparables, 0)} comparables globales y ${toNum(
+              eligibleRows.length,
+              0
+            )}/${toNum(rows.length, 0)} partidos con n>=${toNum(H1_MIN_COMPARABLES, 0)}.`
+          : "";
+        return {
+          id: "H1",
+          title: "Brecha entre lo declarado y lo votado",
+          hypothesis: "Las posturas declaradas difieren de forma significativa respecto al comportamiento de voto.",
+          notes:
+            "Solo compara casos con stance claro (support/oppose) en ambos metodos. Brecha robusta = shrinkage hacia tasa global para evitar sobreajuste con n chico.",
+          alert,
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "gap", label: "Brecha (robusta)", align: "right", format: toPct },
+            { key: "overlap", label: "Comparables", align: "right", format: (v) => toNum(v, 0) },
+            { key: "mismatch", label: "Choques", align: "right", format: (v) => toNum(v, 0) },
+            { key: "declaredCoverage", label: "Cobertura declarada", align: "right", format: toPct },
+            { key: "_sampleState", label: "Muestra", format: (v) => v },
+          ],
+          rowsForCoherence: eligibleRows,
+          sparseRows,
+          rows,
+        };
+      }
+
+      function board2CoherenceByParty(ctx, baseRows) {
+        const rows = baseRows
+          .filter((row) => row.gap !== null && row.overlap >= H1_MIN_COMPARABLES)
+          .map((row) => ({
+            party: row.party,
+            coherence: 1 - row.gap,
+            overlap: row.overlap,
+            mismatch: row.mismatch,
+          }))
+          .sort((a, b) => b.coherence - a.coherence || b.overlap - a.overlap);
+        return {
+          id: "H2",
+          title: "Quien es mas coherente (dice vs hace)",
+          hypothesis: "Hay partidos sistematicamente mas coherentes entre discurso y accion.",
+          notes: `Misma base comparativa de H1; excluye partidos con comparables<${toNum(H1_MIN_COMPARABLES, 0)}.`,
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "coherence", label: "Coherencia", align: "right", format: toPct },
+            { key: "overlap", label: "Comparables", align: "right", format: (v) => toNum(v, 0) },
+            { key: "mismatch", label: "Incoherencias", align: "right", format: (v) => toNum(v, 0) },
+          ],
+          rows,
+        };
+      }
+
+      function board3TopicIncoherence(ctx) {
+        const rows = [];
+        ctx.allTopicIds.forEach((topicId) => {
+          let compared = 0;
+          let incoherent = 0;
+          ctx.allPartyIds.forEach((partyId) => {
+            const v = ctx.maps.votes.get(`${partyId}|${topicId}`);
+            const d = ctx.maps.declared.get(`${partyId}|${topicId}`);
+            if (!v || !d) return;
+            if (!isClear(v.stance) || !isClear(d.stance)) return;
+            compared += 1;
+            if (v.stance !== d.stance) incoherent += 1;
+          });
+          rows.push({
+            topic: topicLabel(ctx, topicId),
+            highStakes: Boolean(ctx.topicById.get(topicId)?.is_high_stakes),
+            concerns: topicConcernLabels(ctx, topicId),
+            incoherence: compared ? incoherent / compared : null,
+            compared,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.incoherence === null) return 1;
+          if (b.incoherence === null) return -1;
+          return b.incoherence - a.incoherence || b.compared - a.compared;
+        });
+        return {
+          id: "H3",
+          title: "Donde se concentra la incoherencia",
+          hypothesis: "La incoherencia se acumula en temas concretos de alto impacto.",
+          notes: "Ranking por tema: porcentaje de partidos con choque entre declared y votes.",
+          columns: [
+            { key: "topic", label: "Tema" },
+            {
+              key: "highStakes",
+              label: "High-stakes",
+              format: (v) => (v ? "<span class='tag warn'>SI</span>" : "<span class='tag'>NO</span>"),
+            },
+            { key: "incoherence", label: "Incoherencia", align: "right", format: toPct },
+            { key: "compared", label: "Partidos comparables", align: "right", format: (v) => toNum(v, 0) },
+            { key: "concerns", label: "Concern tags" },
+          ],
+          rows,
+        };
+      }
+
+      function board4GovernmentAlignment(ctx) {
+        const govPartyIds = ctx.allPartyIds.filter((partyId) => GOV_REGEX.test(partyName(ctx, partyId)));
+        const govStanceByTopic = new Map();
+        ctx.allTopicIds.forEach((topicId) => {
+          let net = 0;
+          let seen = 0;
+          govPartyIds.forEach((partyId) => {
+            const row = ctx.maps.votes.get(`${partyId}|${topicId}`);
+            if (!row || !isClear(row.stance)) return;
+            seen += 1;
+            net += stanceSign(row.stance);
+          });
+          if (!seen || !net) return;
+          govStanceByTopic.set(topicId, net > 0 ? "support" : "oppose");
+        });
+
+        const rows = [];
+        ctx.allPartyIds.forEach((partyId) => {
+          let compared = 0;
+          let aligned = 0;
+          ctx.allTopicIds.forEach((topicId) => {
+            const govStance = govStanceByTopic.get(topicId);
+            if (!govStance) return;
+            const row = ctx.maps.votes.get(`${partyId}|${topicId}`);
+            if (!row || !isClear(row.stance)) return;
+            compared += 1;
+            if (row.stance === govStance) aligned += 1;
+          });
+          rows.push({
+            party: partyName(ctx, partyId),
+            bloc: GOV_REGEX.test(partyName(ctx, partyId)) ? "Gobierno (heur.)" : "No gobierno (heur.)",
+            alignment: compared ? aligned / compared : null,
+            compared,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.alignment === null) return 1;
+          if (b.alignment === null) return -1;
+          return b.alignment - a.alignment || b.compared - a.compared;
+        });
+
+        return {
+          id: "H4",
+          title: "Alineacion con el bloque de gobierno (heuristico)",
+          hypothesis: "Partidos de gobierno tienden a votar alineados entre si en mas temas que la oposicion.",
+          notes:
+            "Heuristica de bloque basada en nombre del partido (PSOE/SUMAR). Conviene sustituir por etiqueta institucional cuando exista.",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "bloc", label: "Bloque" },
+            { key: "alignment", label: "Alineacion", align: "right", format: toPct },
+            { key: "compared", label: "Temas comparados", align: "right", format: (v) => toNum(v, 0) },
+          ],
+          rows,
+        };
+      }
+
+      function board5RegionalVsStatewide(ctx) {
+        function isTerritorialTopic(topicId) {
+          const topic = ctx.topicById.get(topicId);
+          const concernIds = topic?.concern_ids || [];
+          return concernIds.some((id) => TERRITORIAL_CONCERNS.has(id));
+        }
+
+        const rows = [];
+        ctx.allPartyIds.forEach((partyId) => {
+          const voteRows = (ctx.byParty.votes.get(partyId) || []).filter((row) => isClear(row.stance));
+          const territorialRows = voteRows.filter((row) => isTerritorialTopic(row.topic_id));
+          const overall = avg(voteRows.map((row) => row.score));
+          const terr = avg(territorialRows.map((row) => row.score));
+          const diff = terr !== null && overall !== null ? terr - overall : null;
+          rows.push({
+            party: partyName(ctx, partyId),
+            class: REGIONALIST_PARTIES.has(partyName(ctx, partyId)) ? "Regionalista/territorial" : "Estatal/federado",
+            diff,
+            terrAvg: terr,
+            overallAvg: overall,
+            terrN: territorialRows.length,
+          });
+        });
+
+        rows.sort((a, b) => {
+          const ax = a.diff === null ? -1 : Math.abs(a.diff);
+          const bx = b.diff === null ? -1 : Math.abs(b.diff);
+          return bx - ax || b.terrN - a.terrN;
+        });
+
+        return {
+          id: "H5",
+          title: "Regionalistas vs estatales en agenda territorial",
+          hypothesis: "Partidos regionalistas muestran patrones distintos en temas territoriales frente a partidos estatales.",
+          notes:
+            "Indice = media score en temas territoriales - media score general. Mayor |indice| = comportamiento mas diferenciado.",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "class", label: "Clase" },
+            { key: "diff", label: "Indice diferencial", align: "right", format: (v) => toNum(v, 2) },
+            { key: "terrAvg", label: "Score territorial", align: "right", format: (v) => toNum(v, 2) },
+            { key: "overallAvg", label: "Score general", align: "right", format: (v) => toNum(v, 2) },
+            { key: "terrN", label: "Temas territoriales", align: "right", format: (v) => toNum(v, 0) },
+          ],
+          rows,
+        };
+      }
+
+      function board6DisciplineProxy(ctx) {
+        const rows = [];
+        ctx.allPartyIds.forEach((partyId) => {
+          const voteRows = ctx.byParty.votes.get(partyId) || [];
+          const proxies = [];
+          const memberRatios = [];
+          const confs = [];
+          let clearN = 0;
+          voteRows.forEach((row) => {
+            if (isClear(row.stance)) clearN += 1;
+            const membersTotal = Number(row.coverage?.members_total || 0);
+            const membersSignal = Number(row.coverage?.members_with_signal || 0);
+            const ratio = membersTotal > 0 ? membersSignal / membersTotal : null;
+            const conf = Number(row.confidence || 0);
+            confs.push(conf);
+            if (ratio !== null) {
+              memberRatios.push(ratio);
+              proxies.push(ratio * conf);
+            }
+          });
+          rows.push({
+            party: partyName(ctx, partyId),
+            discipline: avg(proxies),
+            memberSignalRatio: avg(memberRatios),
+            confidenceAvg: avg(confs),
+            clearRate: voteRows.length ? clearN / voteRows.length : null,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.discipline === null) return 1;
+          if (b.discipline === null) return -1;
+          return b.discipline - a.discipline;
+        });
+        return {
+          id: "H6",
+          title: "Disciplina interna (proxy)",
+          hypothesis: "Algunos partidos muestran mayor disciplina interna que otros.",
+          notes:
+            "Proxy = confianza media x proporcion de miembros con senal por tema. No reemplaza una metrica de disciplina nominal por diputado.",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "discipline", label: "Proxy disciplina", align: "right", format: (v) => toNum(v, 3) },
+            { key: "memberSignalRatio", label: "Miembros con senal", align: "right", format: toPct },
+            { key: "confidenceAvg", label: "Confianza media", align: "right", format: (v) => toNum(v, 3) },
+            { key: "clearRate", label: "Stance claro", align: "right", format: toPct },
+          ],
+          rows,
+        };
+      }
+
+      function board7HighStakesUncertainty(ctx) {
+        const rows = [];
+        ctx.allTopicIds.forEach((topicId) => {
+          const topic = ctx.topicById.get(topicId);
+          if (!topic?.is_high_stakes) return;
+          const topicRows = ctx.byTopic.combined.get(topicId) || [];
+          const unclear = topicRows.filter((row) => row.stance === "unclear").length;
+          const noSignal = topicRows.filter((row) => row.stance === "no_signal").length;
+          const uncertainty = topicRows.length ? (unclear + noSignal) / topicRows.length : null;
+          rows.push({
+            topic: topicLabel(ctx, topicId),
+            uncertainty,
+            noSignal,
+            unclear,
+            parties: topicRows.length,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.uncertainty === null) return 1;
+          if (b.uncertainty === null) return -1;
+          return b.uncertainty - a.uncertainty || b.parties - a.parties;
+        });
+        return {
+          id: "H7",
+          title: "Incertidumbre en temas high-stakes",
+          hypothesis: "Los temas mas sensibles concentran mayor incertidumbre publica (unclear/no_signal).",
+          notes: "Ordenado por tasa de incertidumbre en el metodo combinado.",
+          columns: [
+            { key: "topic", label: "Tema high-stakes" },
+            { key: "uncertainty", label: "Incertidumbre", align: "right", format: toPct },
+            { key: "noSignal", label: "No signal", align: "right", format: (v) => toNum(v, 0) },
+            { key: "unclear", label: "Unclear", align: "right", format: (v) => toNum(v, 0) },
+            { key: "parties", label: "Partidos", align: "right", format: (v) => toNum(v, 0) },
+          ],
+          rows,
+        };
+      }
+
+      function board8EvidenceTrust(ctx) {
+        const rows = [];
+        ctx.allPartyIds.forEach((partyId) => {
+          const partyRows = ctx.byParty.combined.get(partyId) || [];
+          const unknownRate = partyRows.length
+            ? partyRows.filter((row) => row.stance === "no_signal").length / partyRows.length
+            : null;
+          const signalRows = partyRows.filter((row) => row.stance !== "no_signal");
+          const confAvg = avg(signalRows.map((row) => Number(row.confidence || 0)));
+          const evidenceAvg = avg(partyRows.map((row) => Number(row.coverage?.evidence_count_total || 0)));
+          const trustIndex =
+            unknownRate === null || confAvg === null || evidenceAvg === null
+              ? null
+              : (1 - unknownRate) * confAvg * Math.log10(1 + evidenceAvg);
+          rows.push({
+            party: partyName(ctx, partyId),
+            trustIndex,
+            unknownRate,
+            confidenceAvg: confAvg,
+            evidenceAvg,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.trustIndex === null) return 1;
+          if (b.trustIndex === null) return -1;
+          return b.trustIndex - a.trustIndex;
+        });
+        return {
+          id: "H8",
+          title: "Evidencia vs confianza",
+          hypothesis: "Mas evidencia util reduce incertidumbre y aumenta confianza en posiciones.",
+          notes: "Trust index = (1 - no_signal) x confianza media x log10(1 + evidencia media).",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "trustIndex", label: "Trust index", align: "right", format: (v) => toNum(v, 3) },
+            { key: "unknownRate", label: "No signal", align: "right", format: toPct },
+            { key: "confidenceAvg", label: "Confianza media", align: "right", format: (v) => toNum(v, 3) },
+            { key: "evidenceAvg", label: "Evidencia media", align: "right", format: (v) => toNum(v, 1) },
+          ],
+          rows,
+        };
+      }
+
+      function board9RobustnessHighConfidence(ctx) {
+        const rows = [];
+        ctx.allPartyIds.forEach((partyId) => {
+          const partyRows = (ctx.byParty.combined.get(partyId) || []).filter((row) => isClear(row.stance));
+          const allScores = partyRows.map((row) => Number(row.score));
+          const highScores = partyRows.filter((row) => Number(row.confidence || 0) >= 0.66).map((row) => Number(row.score));
+          const allMean = avg(allScores);
+          const highMean = avg(highScores);
+          const drift = allMean === null || highMean === null ? null : Math.abs(highMean - allMean);
+          rows.push({
+            party: partyName(ctx, partyId),
+            drift,
+            allMean,
+            highMean,
+            highN: highScores.length,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.drift === null) return 1;
+          if (b.drift === null) return -1;
+          return a.drift - b.drift || b.highN - a.highN;
+        });
+        return {
+          id: "H9",
+          title: "Robustez al filtrar por alta confianza",
+          hypothesis: "Los patrones de partido se mantienen al exigir solo evidencia de alta confianza.",
+          notes: "Menor drift = mayor robustez del ranking al aplicar confidence >= 0.66.",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "drift", label: "Drift (abs)", align: "right", format: (v) => toNum(v, 3) },
+            { key: "allMean", label: "Score medio (all)", align: "right", format: (v) => toNum(v, 3) },
+            { key: "highMean", label: "Score medio (high conf)", align: "right", format: (v) => toNum(v, 3) },
+            { key: "highN", label: "N high-conf", align: "right", format: (v) => toNum(v, 0) },
+          ],
+          rows,
+        };
+      }
+
+      function board10FreshnessVsUnknown(ctx) {
+        const asOf = ctx.asOfDate ? new Date(`${ctx.asOfDate}T00:00:00Z`) : null;
+        const rows = [];
+        ctx.allPartyIds.forEach((partyId) => {
+          const partyRows = ctx.byParty.combined.get(partyId) || [];
+          const unknownRate = partyRows.length
+            ? partyRows.filter((row) => row.stance === "no_signal").length / partyRows.length
+            : null;
+          const recencyDays = [];
+          partyRows.forEach((row) => {
+            const dateStr = row.coverage?.last_evidence_date;
+            if (!asOf || !dateStr) return;
+            const d = new Date(`${dateStr}T00:00:00Z`);
+            if (Number.isNaN(d.getTime())) return;
+            const diff = Math.max(0, Math.round((asOf.getTime() - d.getTime()) / 86400000));
+            recencyDays.push(diff);
+          });
+          const medianDays = median(recencyDays);
+          const freshnessScore =
+            medianDays === null || unknownRate === null ? null : (1 / (1 + medianDays)) * (1 - unknownRate);
+          rows.push({
+            party: partyName(ctx, partyId),
+            freshnessScore,
+            medianDays,
+            unknownRate,
+          });
+        });
+        rows.sort((a, b) => {
+          if (a.freshnessScore === null) return 1;
+          if (b.freshnessScore === null) return -1;
+          return b.freshnessScore - a.freshnessScore;
+        });
+
+        const corrXs = [];
+        const corrYs = [];
+        rows.forEach((row) => {
+          if (row.medianDays === null || row.unknownRate === null) return;
+          corrXs.push(row.medianDays);
+          corrYs.push(row.unknownRate);
+        });
+        const corr = pearson(corrXs, corrYs);
+
+        return {
+          id: "H10",
+          title: "Recencia de evidencia vs zonas desconocidas",
+          hypothesis: "Cuanto mas reciente la evidencia, menor tasa de no_signal por partido.",
+          notes:
+            corr === null
+              ? "Correlacion no disponible."
+              : `Correlacion (dias desde ultima evidencia vs no_signal): ${toNum(corr, 3)}.`,
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "freshnessScore", label: "Freshness index", align: "right", format: (v) => toNum(v, 4) },
+            { key: "medianDays", label: "Mediana dias sin evidencia", align: "right", format: (v) => toNum(v, 0) },
+            { key: "unknownRate", label: "No signal", align: "right", format: toPct },
+          ],
+          rows,
+        };
+      }
+
+      function renderMeta(ctx) {
+        const root = document.getElementById("metaChips");
+        const combinedMeta = ctx.combined?.meta || {};
+        const votesMeta = ctx.votes?.meta || {};
+        const declaredMeta = ctx.declared?.meta || {};
+        root.innerHTML = [
+          `<span class="chip">combined as_of: <span class="mono">${escapeHtml(combinedMeta.as_of_date || "—")}</span></span>`,
+          `<span class="chip">votes as_of: <span class="mono">${escapeHtml(votesMeta.as_of_date || "—")}</span></span>`,
+          `<span class="chip">declared as_of: <span class="mono">${escapeHtml(declaredMeta.as_of_date || "—")}</span></span>`,
+          `<span class="chip">temas: <span class="mono">${fmt.format(ctx.allTopicIds.length)}</span></span>`,
+          `<span class="chip">partidos: <span class="mono">${fmt.format(ctx.allPartyIds.length)}</span></span>`,
+        ].join("");
+      }
+
+      function renderTable(board) {
+        const headers = board.columns
+          .map(
+            (col) =>
+              `<th class="${col.align === "right" ? "right" : ""}">${escapeHtml(col.label)}</th>`
+          )
+          .join("");
+        const body = board.rows
+          .map((row, index) => {
+            const cols = board.columns
+              .map((col) => {
+                const raw = row[col.key];
+                const val = col.format ? col.format(raw, row) : escapeHtml(raw);
+                return `<td class="${col.align === "right" ? "right" : ""}">${val}</td>`;
+              })
+              .join("");
+            const rankLabel = row._rankLabel || `#${index + 1}`;
+            const rowClass = row._rowClass ? ` class="${escapeHtml(row._rowClass)}"` : "";
+            return `<tr${rowClass}><td class="rank mono">${escapeHtml(rankLabel)}</td>${cols}</tr>`;
+          })
+          .join("");
+        return `
+          <div class="tableWrap">
+            <table>
+              <thead><tr><th class="right">Rank</th>${headers}</tr></thead>
+              <tbody>${body || `<tr><td colspan="${board.columns.length + 1}">Sin datos comparables.</td></tr>`}</tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      function renderBoards(boards) {
+        const root = document.getElementById("boardsRoot");
+        root.innerHTML = boards
+          .map(
+            (board) => `
+              <article class="card board" id="${escapeHtml(board.id)}">
+                <div class="board-head">
+                  <span class="board-id">${escapeHtml(board.id)}</span>
+                  <h2>${escapeHtml(board.title)}</h2>
+                  <p class="hyp">${escapeHtml(board.hypothesis)}</p>
+                  <p class="notes">${escapeHtml(board.notes || "")}</p>
+                  ${board.alert ? `<p class="boardAlert">${escapeHtml(board.alert)}</p>` : ""}
+                </div>
+                ${renderTable(board)}
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      async function fetchJson(url) {
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status} @ ${url}`);
+        return response.json();
+      }
+
+      async function main() {
+        try {
+          const [combined, votes, declared, concerns] = await Promise.all([
+            fetchJson(DATA_PATHS.combined),
+            fetchJson(DATA_PATHS.votes),
+            fetchJson(DATA_PATHS.declared),
+            fetchJson(DATA_PATHS.concerns),
+          ]);
+          const ctx = buildContext({ combined, votes, declared, concerns });
+          renderMeta(ctx);
+
+          const h1 = board1DeclaredVsRevealedGap(ctx);
+          const boards = [
+            h1,
+            board2CoherenceByParty(ctx, h1.rowsForCoherence || h1.rows),
+            board3TopicIncoherence(ctx),
+            board4GovernmentAlignment(ctx),
+            board5RegionalVsStatewide(ctx),
+            board6DisciplineProxy(ctx),
+            board7HighStakesUncertainty(ctx),
+            board8EvidenceTrust(ctx),
+            board9RobustnessHighConfidence(ctx),
+            board10FreshnessVsUnknown(ctx),
+          ];
+          renderBoards(boards);
+        } catch (error) {
+          const root = document.getElementById("boardsRoot");
+          root.innerHTML = `<div class="err">No se pudieron cargar los leaderboards: ${escapeHtml(String(error))}</div>`;
+        }
+      }
+
+      main();
+    </script>
+  </body>
+</html>

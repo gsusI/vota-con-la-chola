@@ -1,0 +1,183 @@
+{
+  "generated_at": "2026-03-15T16:02:38+00:00",
+  "status": "failed",
+  "paths": {
+    "snapshot": "docs/gh-pages/citizen/data/citizen.json",
+    "concerns_config": "docs/gh-pages/citizen/data/concerns_v1.json"
+  },
+  "thresholds": {
+    "min_topics_per_pack": 10,
+    "min_clear_cells_pct": 0.7,
+    "max_unknown_cells_pct": 0.3,
+    "min_confidence_avg_signal": 0.5,
+    "min_high_stakes_share": 0.12,
+    "max_weak_packs": 1
+  },
+  "summary": {
+    "packs_total": 4,
+    "weak_packs_total": 4,
+    "weak_pack_ids": [
+      "campo_industria",
+      "hogar_bolsillo",
+      "seguridad_estado",
+      "servicios_publicos"
+    ],
+    "parties_total": 16,
+    "topics_total": 111,
+    "high_stakes_topics_total": 41,
+    "topic_party_cells_total": 1776
+  },
+  "checks": {
+    "packs_present": true,
+    "weak_packs_within_threshold": false
+  },
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
+  "packs": [
+    {
+      "pack_id": "servicios_publicos",
+      "pack_label": "Servicios publicos",
+      "concern_ids": [
+        "sanidad",
+        "educacion",
+        "vivienda",
+        "transporte"
+      ],
+      "tradeoff": "Prioriza bienestar cotidiano. Puede cubrir menos agenda productiva y rural.",
+      "topics_total": 30,
+      "high_stakes_topics_total": 12,
+      "high_stakes_share": 0.4,
+      "cells_total": 480,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 1,
+        "mixed": 1,
+        "unclear": 20,
+        "no_signal": 455
+      },
+      "clear_cells_total": 5,
+      "clear_cells_pct": 0.010417,
+      "unknown_cells_total": 475,
+      "unknown_cells_pct": 0.989583,
+      "any_signal_cells_total": 25,
+      "any_signal_cells_pct": 0.052083,
+      "confidence_avg_signal": 0.0971,
+      "quality_score": 0.097002,
+      "weak": true,
+      "weak_reasons": [
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    },
+    {
+      "pack_id": "hogar_bolsillo",
+      "pack_label": "Hogar y bolsillo",
+      "concern_ids": [
+        "vivienda",
+        "coste_vida",
+        "empleo",
+        "energia"
+      ],
+      "tradeoff": "Prioriza precio y empleo. Puede dejar en segundo plano instituciones y seguridad.",
+      "topics_total": 38,
+      "high_stakes_topics_total": 13,
+      "high_stakes_share": 0.342105,
+      "cells_total": 608,
+      "stance_counts": {
+        "support": 0,
+        "oppose": 0,
+        "mixed": 1,
+        "unclear": 9,
+        "no_signal": 598
+      },
+      "clear_cells_total": 1,
+      "clear_cells_pct": 0.001645,
+      "unknown_cells_total": 607,
+      "unknown_cells_pct": 0.998355,
+      "any_signal_cells_total": 10,
+      "any_signal_cells_pct": 0.016447,
+      "confidence_avg_signal": 0.07432,
+      "quality_score": 0.077004,
+      "weak": true,
+      "weak_reasons": [
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    },
+    {
+      "pack_id": "campo_industria",
+      "pack_label": "Campo e industria",
+      "concern_ids": [
+        "campo_rural",
+        "energia",
+        "transporte",
+        "empleo"
+      ],
+      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion.",
+      "topics_total": 43,
+      "high_stakes_topics_total": 14,
+      "high_stakes_share": 0.325581,
+      "cells_total": 688,
+      "stance_counts": {
+        "support": 2,
+        "oppose": 0,
+        "mixed": 1,
+        "unclear": 24,
+        "no_signal": 661
+      },
+      "clear_cells_total": 3,
+      "clear_cells_pct": 0.00436,
+      "unknown_cells_total": 685,
+      "unknown_cells_pct": 0.99564,
+      "any_signal_cells_total": 27,
+      "any_signal_cells_pct": 0.039244,
+      "confidence_avg_signal": 0.072763,
+      "quality_score": 0.075445,
+      "weak": true,
+      "weak_reasons": [
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    },
+    {
+      "pack_id": "seguridad_estado",
+      "pack_label": "Seguridad y Estado",
+      "concern_ids": [
+        "seguridad_justicia",
+        "inmigracion",
+        "corrupcion",
+        "igualdad"
+      ],
+      "tradeoff": "Prioriza orden institucional y convivencia. Puede reducir foco en coste de vida.",
+      "topics_total": 56,
+      "high_stakes_topics_total": 17,
+      "high_stakes_share": 0.303571,
+      "cells_total": 896,
+      "stance_counts": {
+        "support": 3,
+        "oppose": 0,
+        "mixed": 3,
+        "unclear": 40,
+        "no_signal": 850
+      },
+      "clear_cells_total": 6,
+      "clear_cells_pct": 0.006696,
+      "unknown_cells_total": 890,
+      "unknown_cells_pct": 0.993304,
+      "any_signal_cells_total": 46,
+      "any_signal_cells_pct": 0.051339,
+      "confidence_avg_signal": 0.098297,
+      "quality_score": 0.075231,
+      "weak": true,
+      "weak_reasons": [
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    }
+  ]
+}
