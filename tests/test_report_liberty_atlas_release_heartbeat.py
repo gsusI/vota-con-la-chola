@@ -205,6 +205,50 @@ class TestReportLibertyAtlasReleaseHeartbeat(unittest.TestCase):
             self.assertIn("stale_snapshot:gh_pages", reasons)
             self.assertGreaterEqual(int(report["heartbeat"]["stale_alerts_count"]), 2)
 
+    def test_main_strict_fails_on_future_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            published_json = root / "published.json"
+            gh_json = root / "gh.json"
+            continuity_json = root / "continuity.json"
+            heartbeat_jsonl = root / "heartbeat.jsonl"
+            out = root / "report_future.json"
+
+            future_payload = _release_fixture(snapshot_date="2999-01-01", entry_id="snap-2999-01-01")
+            _write_json(published_json, future_payload)
+            _write_json(gh_json, future_payload)
+            _write_json(
+                continuity_json,
+                _continuity_fixture(snapshot_date="2999-01-01", entry_id="snap-2999-01-01"),
+            )
+
+            rc = main(
+                [
+                    "--published-release-json",
+                    str(published_json),
+                    "--gh-pages-release-json",
+                    str(gh_json),
+                    "--continuity-json",
+                    str(continuity_json),
+                    "--allow-hf-unavailable",
+                    "--heartbeat-jsonl",
+                    str(heartbeat_jsonl),
+                    "--snapshot-date",
+                    "2999-01-01",
+                    "--strict",
+                    "--out",
+                    str(out),
+                ]
+            )
+            self.assertEqual(rc, 4)
+            report = _read_json(out)
+            self.assertEqual(str(report["status"]), "failed")
+            reasons = set(str(item) for item in report["strict_fail_reasons"])
+            self.assertIn("future_snapshot:published", reasons)
+            self.assertIn("future_snapshot:gh_pages", reasons)
+            self.assertEqual(int(report["heartbeat"]["future_alerts_count"]), 2)
+            self.assertEqual(list(report["heartbeat"]["future_surfaces"]), ["published", "gh_pages"])
+
 
 if __name__ == "__main__":
     unittest.main()

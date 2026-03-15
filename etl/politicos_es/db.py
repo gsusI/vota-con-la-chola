@@ -386,6 +386,13 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             "evidence_date": "evidence_date TEXT",
             "evidence_quote": "evidence_quote TEXT",
         },
+        "parl_initiative_doc_extractions": {
+            "text_extraction_method": "text_extraction_method TEXT",
+            "text_quality": "text_quality TEXT",
+            "needs_ocr": "needs_ocr INTEGER NOT NULL DEFAULT 0 CHECK (needs_ocr IN (0, 1))",
+            "full_text_chars": "full_text_chars INTEGER",
+            "full_text_path": "full_text_path TEXT",
+        },
     }
 
     for table, columns in compat_columns.items():

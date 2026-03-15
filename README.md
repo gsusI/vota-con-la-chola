@@ -22,10 +22,12 @@ Misión:
 - Índice de docs: `docs/README.md`
 - Roadmap (macro): `docs/roadmap.md`
 - Roadmap técnico (ejecución): `docs/roadmap-tecnico.md`
+- Sitio público y despliegue: `docs/public-site.md`
 - Backlog operativo (conectores + DoD): `docs/etl/e2e-scrape-load-tracker.md`
 - Índice único de TODO: `docs/todo/README.md`
 - Cómo correr ETL/UI: `docs/etl/README.md`
-- GitHub Pages (sitio público): https://gsusI.github.io/vota-con-la-chola/
+- Sitio público canónico: https://votaconlachola.org/
+- Fallback GitHub Pages: https://gsusI.github.io/vota-con-la-chola/
 - Hugging Face (dataset público): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
 
 ## Qué hay hoy (MVP)

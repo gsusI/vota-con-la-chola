@@ -7,7 +7,9 @@ from tempfile import TemporaryDirectory
 
 from etl.parlamentario_es.db import apply_schema, open_db
 from scripts.import_liberty_restrictions_seed import import_seed as import_liberty_seed
+from scripts.import_sanction_data_catalog_seed import import_seed as import_data_catalog_seed
 from scripts.import_sanction_norms_seed import import_seed as import_norm_seed
+from scripts.import_sanction_volume_pilot_seed import import_seed as import_volume_pilot_seed
 from scripts.report_liberty_restrictions_status import build_status_report
 
 
@@ -205,6 +207,40 @@ class TestReportLibertyRestrictionsStatus(unittest.TestCase):
         self.assertEqual(str(got["status"]), "degraded")
         self.assertFalse(bool(got["focus_gate"]["passed"]))
         self.assertFalse(bool(got["checks"]["accountability_primary_evidence_gate"]))
+
+    def test_report_exposes_municipal_overlay_without_changing_focus_gate_denominator(self) -> None:
+        with TemporaryDirectory() as td:
+            db_path = Path(td) / "report_municipal_overlay.db"
+            conn = open_db(db_path)
+            try:
+                root = Path(__file__).resolve().parents[1]
+                schema_path = root / "etl" / "load" / "sqlite_schema.sql"
+                apply_schema(conn, schema_path)
+                norm_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "sanction_norms_seed_v1.json").read_text(encoding="utf-8"))
+                data_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "sanction_data_catalog_seed_v1.json").read_text(encoding="utf-8"))
+                volume_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "sanction_volume_pilot_seed_v1.json").read_text(encoding="utf-8"))
+                liberty_seed_doc = json.loads((root / "etl" / "data" / "seeds" / "liberty_restrictions_seed_v1.json").read_text(encoding="utf-8"))
+                import_norm_seed(conn, seed_doc=norm_seed_doc, source_id="", snapshot_date="2026-02-23")
+                import_data_catalog_seed(conn, seed_doc=data_seed_doc, source_id="", snapshot_date="2026-02-23")
+                import_volume_pilot_seed(conn, seed_doc=volume_seed_doc, source_id="", snapshot_date="2026-02-23")
+                import_liberty_seed(conn, seed_doc=liberty_seed_doc, source_id="", snapshot_date="2026-02-23")
+                got = build_status_report(conn, top_n=10)
+            finally:
+                conn.close()
+
+        self.assertEqual(str(got["status"]), "ok")
+        self.assertIn("municipal_overlay", got)
+        self.assertEqual(str(got["municipal_overlay"]["status"]), "started")
+        self.assertFalse(bool(got["municipal_overlay"]["included_in_focus_gate"]))
+        self.assertEqual(int(got["totals"]["municipal_ordinances_total"]), 20)
+        self.assertEqual(int(got["totals"]["municipal_fragments_total"]), 3)
+        self.assertEqual(int(got["totals"]["municipal_mapped_fragment_total"]), 2)
+        self.assertEqual(int(got["totals"]["municipal_unmapped_fragment_total"]), 1)
+        self.assertEqual(int(got["totals"]["municipal_fragments_with_irlc_total"]), 2)
+        self.assertEqual(int(got["totals"]["sources_total"]), 1)
+        self.assertEqual(int(got["totals"]["scopes_total"]), 1)
+        self.assertTrue(any(str(row.get("scope_key")) == "municipal" for row in got["coverage_by_scope"]))
+        self.assertTrue(any(str(row.get("source_key")) == "municipal_pilot_derived" for row in got["coverage_by_source"]))
 
 
 if __name__ == "__main__":

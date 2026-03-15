@@ -363,6 +363,8 @@ def validate_heartbeat(heartbeat: dict[str, Any]) -> list[str]:
         reasons.append("invalid_stale_alerts_count")
     if _to_int(heartbeat.get("drift_alerts_count"), -1) < 0:
         reasons.append("invalid_drift_alerts_count")
+    if _to_int(heartbeat.get("future_alerts_count"), -1) < 0:
+        reasons.append("invalid_future_alerts_count")
 
     return _dedupe_ordered(reasons)
 
@@ -526,11 +528,16 @@ def _build_heartbeat(args: argparse.Namespace) -> tuple[dict[str, Any], list[str
                 strict_fail_reasons.append(f"snapshot_date_mismatch:{surface}")
 
     stale_surfaces: list[str] = []
+    future_surfaces: list[str] = []
     for surface, view in (("published", published_view), ("gh_pages", gh_view), ("hf", hf_view)):
         if not view:
             continue
         age_days = view.get("snapshot_age_days")
         age_n = _to_int(age_days, -1)
+        if age_n < 0:
+            future_surfaces.append(surface)
+            strict_fail_reasons.append(f"future_snapshot:{surface}")
+            continue
         if age_n >= 0 and age_n > max_snapshot_age_days:
             stale_surfaces.append(surface)
             strict_fail_reasons.append(f"stale_snapshot:{surface}")
@@ -576,6 +583,7 @@ def _build_heartbeat(args: argparse.Namespace) -> tuple[dict[str, Any], list[str
         "gh_pages_hf_parity_ok": gh_hf_parity_ok,
         "expected_snapshot_match_ok": bool(expected_snapshot_match_ok),
         "stale_snapshot_ok": len(stale_surfaces) == 0,
+        "future_snapshot_ok": len(future_surfaces) == 0,
         "continuity_entry_matches_published_ok": bool(continuity_entry_matches),
     }
 
@@ -614,6 +622,8 @@ def _build_heartbeat(args: argparse.Namespace) -> tuple[dict[str, Any], list[str
             "strict_fail_reasons": _safe_list_str(continuity_payload.get("strict_fail_reasons")),
         },
         "checks": checks,
+        "future_surfaces": future_surfaces,
+        "future_alerts_count": len(future_surfaces),
         "stale_surfaces": stale_surfaces,
         "stale_alerts_count": len(stale_surfaces),
         "drift_alerts_count": drift_alerts_count,

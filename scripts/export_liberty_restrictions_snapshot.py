@@ -79,6 +79,17 @@ def _to_int(value: Any, default: int = 0) -> int:
         return int(default)
 
 
+def _table_exists(conn: sqlite3.Connection, table_name: str) -> bool:
+    token = _norm(table_name)
+    if not token:
+        return False
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?",
+        (token,),
+    ).fetchone()
+    return row is not None
+
+
 def build_snapshot(conn: sqlite3.Connection, *, snapshot_date: str) -> dict[str, Any]:
     restrictions_rows = conn.execute(
         """
@@ -357,6 +368,118 @@ def build_snapshot(conn: sqlite3.Connection, *, snapshot_date: str) -> dict[str,
         for row in delegated_rows
     ]
 
+    municipal_restrictions_rows: list[sqlite3.Row] = []
+    if _table_exists(conn, "sanction_municipal_ordinances") and _table_exists(conn, "sanction_municipal_ordinance_fragments"):
+        municipal_restrictions_rows = conn.execute(
+            """
+            SELECT
+              mf.ordinance_fragment_id,
+              mf.ordinance_id,
+              COALESCE(o.city_name, '') AS city_name,
+              COALESCE(o.province_name, '') AS province_name,
+              COALESCE(o.ordinance_label, '') AS ordinance_label,
+              COALESCE(o.ordinance_status, '') AS ordinance_status,
+              COALESCE(o.ordinance_url, '') AS ordinance_url,
+              COALESCE(mf.fragment_label, '') AS ordinance_fragment_label,
+              COALESCE(mf.conduct, '') AS conduct,
+              mf.amount_min_eur,
+              mf.amount_max_eur,
+              COALESCE(mf.competent_body, '') AS competent_body,
+              COALESCE(mf.appeal_path, '') AS appeal_path,
+              COALESCE(mf.mapped_norm_id, '') AS mapped_norm_id,
+              COALESCE(mf.mapped_fragment_id, '') AS mapped_fragment_id,
+              COALESCE(lf.norm_id, '') AS inherited_norm_id,
+              COALESCE(n.boe_id, '') AS inherited_boe_id,
+              COALESCE(n.title, '') AS inherited_norm_title,
+              COALESCE(a.assessment_key, '') AS assessment_key,
+              COALESCE(a.right_category_id, '') AS right_category_id,
+              COALESCE(c.label, '') AS right_label,
+              COALESCE(a.method_version, '') AS method_version,
+              a.reach_score,
+              a.intensity_score,
+              a.due_process_risk_score,
+              a.reversibility_risk_score,
+              a.discretionality_score,
+              a.compliance_cost_score,
+              a.irlc_score,
+              a.confidence,
+              COALESCE(a.source_url, '') AS inherited_source_url,
+              COALESCE(mf.source_url, '') AS ordinance_source_url
+            FROM sanction_municipal_ordinance_fragments mf
+            JOIN sanction_municipal_ordinances o ON o.ordinance_id = mf.ordinance_id
+            LEFT JOIN liberty_restriction_assessments a ON a.fragment_id = mf.mapped_fragment_id
+            LEFT JOIN liberty_right_categories c ON c.right_category_id = a.right_category_id
+            LEFT JOIN legal_norm_fragments lf ON lf.fragment_id = mf.mapped_fragment_id
+            LEFT JOIN legal_norms n ON n.norm_id = lf.norm_id
+            ORDER BY o.city_name ASC, mf.ordinance_fragment_id ASC, a.assessment_key ASC
+            """
+        ).fetchall()
+
+    municipal_restrictions = []
+    municipal_fragment_ids: set[str] = set()
+    municipal_mapped_fragment_ids: set[str] = set()
+    municipal_unmapped_fragment_ids: set[str] = set()
+    for row in municipal_restrictions_rows:
+        ordinance_fragment_id = _norm(row["ordinance_fragment_id"])
+        assessment_key = _norm(row["assessment_key"])
+        mapped_fragment_id = _norm(row["mapped_fragment_id"])
+        mapped_norm_id = _norm(row["mapped_norm_id"]) or _norm(row["inherited_norm_id"])
+        municipal_fragment_ids.add(ordinance_fragment_id)
+        if mapped_fragment_id:
+            municipal_mapped_fragment_ids.add(ordinance_fragment_id)
+        else:
+            municipal_unmapped_fragment_ids.add(ordinance_fragment_id)
+        if assessment_key:
+            coverage_mode = "derived_from_mapped_fragment"
+            scores = {
+                "reach_score": float(row["reach_score"] or 0.0),
+                "intensity_score": float(row["intensity_score"] or 0.0),
+                "due_process_risk_score": float(row["due_process_risk_score"] or 0.0),
+                "reversibility_risk_score": float(row["reversibility_risk_score"] or 0.0),
+                "discretionality_score": float(row["discretionality_score"] or 0.0),
+                "compliance_cost_score": float(row["compliance_cost_score"] or 0.0),
+                "irlc_score": float(row["irlc_score"] or 0.0),
+            }
+        elif mapped_fragment_id:
+            coverage_mode = "mapped_without_irlc"
+            scores = None
+        else:
+            coverage_mode = "unmapped_municipal_fragment"
+            scores = None
+        municipal_restrictions.append(
+            {
+                "municipal_restriction_key": (
+                    f"{ordinance_fragment_id}|{assessment_key}" if assessment_key else ordinance_fragment_id
+                ),
+                "coverage_mode": coverage_mode,
+                "assessment_key": assessment_key,
+                "ordinance_fragment_id": ordinance_fragment_id,
+                "ordinance_id": _norm(row["ordinance_id"]),
+                "city_name": _norm(row["city_name"]),
+                "province_name": _norm(row["province_name"]),
+                "ordinance_label": _norm(row["ordinance_label"]),
+                "ordinance_status": _norm(row["ordinance_status"]),
+                "ordinance_url": _norm(row["ordinance_url"]),
+                "fragment_label": _norm(row["ordinance_fragment_label"]),
+                "conduct": _norm(row["conduct"]),
+                "amount_min_eur": float(row["amount_min_eur"]) if row["amount_min_eur"] is not None else None,
+                "amount_max_eur": float(row["amount_max_eur"]) if row["amount_max_eur"] is not None else None,
+                "competent_body": _norm(row["competent_body"]),
+                "appeal_path": _norm(row["appeal_path"]),
+                "mapped_norm_id": mapped_norm_id,
+                "mapped_fragment_id": mapped_fragment_id,
+                "inherited_boe_id": _norm(row["inherited_boe_id"]),
+                "inherited_norm_title": _norm(row["inherited_norm_title"]),
+                "right_category_id": _norm(row["right_category_id"]),
+                "right_label": _norm(row["right_label"]),
+                "method_version": _norm(row["method_version"]),
+                "scores": scores,
+                "confidence": float(row["confidence"]) if row["confidence"] is not None else None,
+                "ordinance_source_url": _norm(row["ordinance_source_url"]),
+                "inherited_source_url": _norm(row["inherited_source_url"]),
+            }
+        )
+
     return {
         "generated_at": now_utc_iso(),
         "snapshot_date": snapshot_date,
@@ -374,8 +497,13 @@ def build_snapshot(conn: sqlite3.Connection, *, snapshot_date: str) -> dict[str,
             "fragments_with_delegated_chain_total": int(
                 delegated_report.get("totals", {}).get("fragments_with_links_total", 0)
             ),
+            "municipal_restrictions_total": len(municipal_restrictions),
+            "municipal_fragments_total": len(municipal_fragment_ids),
+            "municipal_mapped_fragment_total": len(municipal_mapped_fragment_ids),
+            "municipal_unmapped_fragment_total": len(municipal_unmapped_fragment_ids),
         },
         "restrictions": restrictions,
+        "municipal_restrictions": municipal_restrictions,
         "accountability_edges": accountability_edges,
         "proportionality_reviews": proportionality_reviews,
         "accountability_scores": accountability_report.get("top_actor_scores", []),
@@ -523,6 +651,13 @@ def _ids_for_section(snapshot: dict[str, Any], section: str) -> set[str]:
             if token:
                 ids.add(token)
         return ids
+    if section == "municipal_restrictions":
+        for row_any in values:
+            row = _safe_obj(row_any)
+            token = _norm(row.get("municipal_restriction_key"))
+            if token:
+                ids.add(token)
+        return ids
     if section == "accountability_edges":
         for row_any in values:
             row = _safe_obj(row_any)
@@ -581,6 +716,7 @@ def _ids_for_section(snapshot: dict[str, Any], section: str) -> set[str]:
 def _snapshot_contract_sections(snapshot: dict[str, Any]) -> dict[str, set[str]]:
     sections = (
         "restrictions",
+        "municipal_restrictions",
         "accountability_edges",
         "proportionality_reviews",
         "accountability_scores",

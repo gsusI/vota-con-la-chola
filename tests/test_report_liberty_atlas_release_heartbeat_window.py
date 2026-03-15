@@ -21,6 +21,7 @@ def _heartbeat_entry(
     *,
     idx: int,
     status: str,
+    future_alerts_count: int,
     stale_alerts_count: int,
     drift_alerts_count: int,
     hf_unavailable: bool,
@@ -34,6 +35,7 @@ def _heartbeat_entry(
         "heartbeat_id": f"{run_at}|{status}|{idx}",
         "status": status,
         "snapshot_date_expected": "2026-02-23",
+        "future_alerts_count": future_alerts_count,
         "stale_alerts_count": stale_alerts_count,
         "drift_alerts_count": drift_alerts_count,
         "hf_unavailable": hf_unavailable,
@@ -57,6 +59,7 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     _heartbeat_entry(
                         idx=1,
                         status="ok",
+                        future_alerts_count=0,
                         stale_alerts_count=0,
                         drift_alerts_count=0,
                         hf_unavailable=False,
@@ -67,6 +70,7 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     _heartbeat_entry(
                         idx=2,
                         status="ok",
+                        future_alerts_count=0,
                         stale_alerts_count=0,
                         drift_alerts_count=0,
                         hf_unavailable=False,
@@ -87,6 +91,8 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     "0",
                     "--max-degraded",
                     "0",
+                    "--max-future-alerts",
+                    "0",
                     "--max-stale-alerts",
                     "0",
                     "--max-drift-alerts",
@@ -103,6 +109,7 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
             report = _read_json(out)
             self.assertEqual(report["status"], "ok")
             self.assertEqual(int(report["failed_in_window"]), 0)
+            self.assertEqual(int(report["future_alerts_in_window"]), 0)
             self.assertEqual(int(report["stale_alerts_in_window"]), 0)
             self.assertEqual(int(report["drift_alerts_in_window"]), 0)
             self.assertEqual(report["strict_fail_reasons"], [])
@@ -118,6 +125,7 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     _heartbeat_entry(
                         idx=1,
                         status="ok",
+                        future_alerts_count=0,
                         stale_alerts_count=0,
                         drift_alerts_count=0,
                         hf_unavailable=False,
@@ -128,6 +136,7 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     _heartbeat_entry(
                         idx=2,
                         status="failed",
+                        future_alerts_count=1,
                         stale_alerts_count=1,
                         drift_alerts_count=1,
                         hf_unavailable=True,
@@ -148,6 +157,8 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     "0",
                     "--max-degraded",
                     "0",
+                    "--max-future-alerts",
+                    "0",
                     "--max-stale-alerts",
                     "0",
                     "--max-drift-alerts",
@@ -165,13 +176,96 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
             self.assertEqual(report["status"], "failed")
             reasons = set(str(item) for item in report["strict_fail_reasons"])
             self.assertIn("max_failed_exceeded", reasons)
+            self.assertIn("max_future_alerts_exceeded", reasons)
             self.assertIn("max_stale_alerts_exceeded", reasons)
             self.assertIn("max_drift_alerts_exceeded", reasons)
+            self.assertIn("latest_future_alert_present", reasons)
             self.assertIn("latest_stale_alert_present", reasons)
             self.assertIn("latest_drift_alert_present", reasons)
             self.assertIn("latest_continuity_not_ok", reasons)
             self.assertIn("latest_published_gh_parity_not_ok", reasons)
             self.assertIn("latest_expected_snapshot_mismatch", reasons)
+
+    def test_main_passes_strict_with_min_run_at_filter(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            heartbeat_jsonl = td_path / "heartbeat.jsonl"
+            out = td_path / "window_min_run_at_ok.json"
+            _write_jsonl(
+                heartbeat_jsonl,
+                [
+                    _heartbeat_entry(
+                        idx=1,
+                        status="failed",
+                        future_alerts_count=0,
+                        stale_alerts_count=1,
+                        drift_alerts_count=1,
+                        hf_unavailable=True,
+                        continuity_ok=False,
+                        parity_ok=False,
+                        expected_snapshot_match_ok=False,
+                    ),
+                    _heartbeat_entry(
+                        idx=2,
+                        status="failed",
+                        future_alerts_count=0,
+                        stale_alerts_count=1,
+                        drift_alerts_count=1,
+                        hf_unavailable=True,
+                        continuity_ok=False,
+                        parity_ok=False,
+                        expected_snapshot_match_ok=False,
+                    ),
+                    _heartbeat_entry(
+                        idx=3,
+                        status="ok",
+                        future_alerts_count=0,
+                        stale_alerts_count=0,
+                        drift_alerts_count=0,
+                        hf_unavailable=False,
+                        continuity_ok=True,
+                        parity_ok=True,
+                        expected_snapshot_match_ok=True,
+                    ),
+                ],
+            )
+
+            rc = main(
+                [
+                    "--heartbeat-jsonl",
+                    str(heartbeat_jsonl),
+                    "--min-run-at",
+                    "2026-02-23T19:03:00+00:00",
+                    "--last",
+                    "20",
+                    "--max-failed",
+                    "0",
+                    "--max-degraded",
+                    "0",
+                    "--max-future-alerts",
+                    "0",
+                    "--max-stale-alerts",
+                    "0",
+                    "--max-drift-alerts",
+                    "0",
+                    "--max-hf-unavailable",
+                    "0",
+                    "--strict",
+                    "--out",
+                    str(out),
+                ]
+            )
+            self.assertEqual(rc, 0)
+
+            report = _read_json(out)
+            self.assertEqual(report["status"], "ok")
+            self.assertEqual(int(report["entries_total"]), 3)
+            self.assertEqual(int(report["entries_eligible"]), 1)
+            self.assertEqual(int(report["excluded_before_min_run_at"]), 2)
+            self.assertEqual(int(report["excluded_invalid_run_at"]), 0)
+            self.assertEqual(int(report["entries_in_window"]), 1)
+            self.assertEqual(int(report["failed_in_window"]), 0)
+            self.assertEqual(report["strict_fail_reasons"], [])
 
     def test_main_rejects_invalid_window_size(self) -> None:
         with tempfile.TemporaryDirectory() as td:
@@ -183,6 +277,7 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     _heartbeat_entry(
                         idx=1,
                         status="ok",
+                        future_alerts_count=0,
                         stale_alerts_count=0,
                         drift_alerts_count=0,
                         hf_unavailable=False,
@@ -199,6 +294,37 @@ class TestReportLibertyAtlasReleaseHeartbeatWindow(unittest.TestCase):
                     str(heartbeat_jsonl),
                     "--last",
                     "0",
+                ]
+            )
+            self.assertEqual(rc, 2)
+
+    def test_main_rejects_invalid_min_run_at(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            heartbeat_jsonl = td_path / "heartbeat.jsonl"
+            _write_jsonl(
+                heartbeat_jsonl,
+                [
+                    _heartbeat_entry(
+                        idx=1,
+                        status="ok",
+                        future_alerts_count=0,
+                        stale_alerts_count=0,
+                        drift_alerts_count=0,
+                        hf_unavailable=False,
+                        continuity_ok=True,
+                        parity_ok=True,
+                        expected_snapshot_match_ok=True,
+                    )
+                ],
+            )
+
+            rc = main(
+                [
+                    "--heartbeat-jsonl",
+                    str(heartbeat_jsonl),
+                    "--min-run-at",
+                    "not-a-datetime",
                 ]
             )
             self.assertEqual(rc, 2)

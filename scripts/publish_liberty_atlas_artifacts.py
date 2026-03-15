@@ -7,7 +7,7 @@ import argparse
 import hashlib
 import json
 import shutil
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -36,6 +36,16 @@ def _safe_obj(value: Any) -> dict[str, Any]:
 
 def _safe_list(value: Any) -> list[Any]:
     return value if isinstance(value, list) else []
+
+
+def _parse_date(value: str) -> date | None:
+    token = _safe_text(value)
+    if not token:
+        return None
+    try:
+        return date.fromisoformat(token)
+    except ValueError:
+        return None
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -98,6 +108,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--snapshot-date", default="")
     p.add_argument("--published-dir", default=str(DEFAULT_PUBLISHED_DIR))
     p.add_argument("--allow-missing", action="store_true")
+    p.add_argument(
+        "--allow-future-snapshot-date",
+        action="store_true",
+        help="Permite publicar un snapshot_date posterior a la fecha UTC actual.",
+    )
     p.add_argument("--gh-pages-out", default="", help="Optional JSON mirror path (e.g. docs/gh-pages/.../liberty_atlas_release.json)")
     p.add_argument("--out", default="", help="Optional operation report JSON")
     return p.parse_args(argv)
@@ -167,6 +182,33 @@ def main(argv: list[str] | None = None) -> int:
             "status": "invalid_snapshot_date",
             "snapshot_date": "",
             "error": "snapshot_date vacío (ni --snapshot-date ni snapshot_json.snapshot_date).",
+        }
+        if _safe_text(args.out):
+            _write_json(Path(str(args.out)), report)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 2
+
+    parsed_snapshot_date = _parse_date(snapshot_date)
+    if parsed_snapshot_date is None:
+        report = {
+            "generated_at": now_utc_iso(),
+            "status": "invalid_snapshot_date",
+            "snapshot_date": snapshot_date,
+            "error": "snapshot_date debe tener formato YYYY-MM-DD.",
+        }
+        if _safe_text(args.out):
+            _write_json(Path(str(args.out)), report)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 2
+
+    today_utc = datetime.now(timezone.utc).date()
+    if parsed_snapshot_date > today_utc and not bool(args.allow_future_snapshot_date):
+        report = {
+            "generated_at": now_utc_iso(),
+            "status": "future_snapshot_date",
+            "snapshot_date": snapshot_date,
+            "today_utc": today_utc.isoformat(),
+            "error": "snapshot_date es posterior a la fecha UTC actual; usa --allow-future-snapshot-date solo si es intencional.",
         }
         if _safe_text(args.out):
             _write_json(Path(str(args.out)), report)
@@ -256,4 +298,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
