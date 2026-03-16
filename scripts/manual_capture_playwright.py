@@ -16,11 +16,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import re
+import shutil
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
+from typing import Any
 
 
 def now_iso() -> str:
@@ -33,6 +37,57 @@ def sanitize_filename(s: str) -> str:
     return s or "out"
 
 
+def _command_exit_code(argv: list[str], *, timeout_seconds: int = 5) -> int | None:
+    try:
+        proc = subprocess.run(
+            argv,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=max(1, int(timeout_seconds)),
+            check=False,
+        )
+        return int(proc.returncode)
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _ensure_playwright_nodejs_runtime(playwright_pkg_dir: pathlib.Path) -> dict[str, Any]:
+    """Prefer system Node when bundled Playwright driver runtime is unhealthy."""
+    env_node_raw = str(os.environ.get("PLAYWRIGHT_NODEJS_PATH") or "").strip()
+    meta: dict[str, Any] = {
+        "fallback_applied": False,
+        "effective_nodejs_path": env_node_raw or None,
+        "driver_node_path": "playwright/driver/node",
+        "driver_node_rc": None,
+        "system_node_path": None,
+        "system_cli_rc": None,
+    }
+    if env_node_raw:
+        return meta
+
+    driver_node = playwright_pkg_dir / "driver" / "node"
+    driver_cli = playwright_pkg_dir / "driver" / "package" / "cli.js"
+    system_node_raw = str(shutil.which("node") or "").strip()
+
+    meta["system_node_path"] = system_node_raw or None
+    driver_rc = _command_exit_code([str(driver_node), "--version"]) if driver_node.exists() else None
+    cli_rc = (
+        _command_exit_code([system_node_raw, str(driver_cli), "--version"])
+        if system_node_raw and driver_cli.exists()
+        else None
+    )
+    meta["driver_node_rc"] = driver_rc
+    meta["system_cli_rc"] = cli_rc
+
+    bundled_unhealthy = (not driver_node.exists()) or (driver_rc is None) or (int(driver_rc) != 0)
+    if bundled_unhealthy and system_node_raw and cli_rc == 0:
+        os.environ["PLAYWRIGHT_NODEJS_PATH"] = system_node_raw
+        meta["fallback_applied"] = True
+        meta["effective_nodejs_path"] = system_node_raw
+    return meta
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Interactive Playwright page capture")
     ap.add_argument("--url", required=True)
@@ -41,10 +96,12 @@ def main() -> int:
     ap.add_argument("--wait-seconds", type=int, default=180)
     ap.add_argument("--channel", default="chrome", help="Playwright browser channel (e.g. chrome).")
     ap.add_argument("--viewport", default="1280x800")
+    ap.add_argument("--headless", action="store_true", help="Run browser in headless mode.")
     args = ap.parse_args()
 
     try:
         from playwright.sync_api import sync_playwright  # type: ignore
+        import playwright as playwright_pkg  # type: ignore
     except Exception as e:
         print(
             "[pw] Playwright is not installed. Install it with:\n"
@@ -60,6 +117,9 @@ def main() -> int:
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     base = out_dir / f"{sanitize_filename(args.label)}_{stamp}"
+    runtime_meta = _ensure_playwright_nodejs_runtime(
+        pathlib.Path(str(playwright_pkg.__file__)).resolve().parent
+    )
 
     vw, vh = 1280, 800
     try:
@@ -73,7 +133,9 @@ def main() -> int:
         "label": args.label,
         "wait_seconds": args.wait_seconds,
         "channel": args.channel,
+        "headless": bool(args.headless),
         "viewport": {"width": vw, "height": vh},
+        "playwright_runtime": runtime_meta,
         "network": [],
         "result": None,
     }
@@ -89,7 +151,7 @@ def main() -> int:
         user_data_dir = str(base) + "_profile"
         ctx = p.chromium.launch_persistent_context(
             user_data_dir=user_data_dir,
-            headless=False,
+            headless=bool(args.headless),
             channel=args.channel or None,
             locale="es-ES",
             timezone_id="Europe/Madrid",
@@ -196,4 +258,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

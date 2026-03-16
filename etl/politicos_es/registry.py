@@ -33,6 +33,7 @@ from .connectors import (
     ParlamentoVascoParlamentariosConnector,
     PlacspAutonomicoConnector,
     PlacspSindicacionConnector,
+    ReeEsiosIndicatorsConnector,
     SenadoSenadoresConnector,
 )
 from .connectors.base import BaseConnector
@@ -73,5 +74,6 @@ def get_connectors() -> dict[str, BaseConnector]:
         EurostatSdmxConnector(),
         BdeSeriesApiConnector(),
         AemetOpenDataSeriesConnector(),
+        ReeEsiosIndicatorsConnector(),
     ]
     return {c.source_id: c for c in connectors}

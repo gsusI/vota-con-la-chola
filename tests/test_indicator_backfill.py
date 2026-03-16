@@ -13,6 +13,63 @@ from etl.politicos_es.util import now_utc_iso, sha256_bytes, stable_json
 
 
 class TestIndicatorBackfill(unittest.TestCase):
+    def test_indicator_backfill_seeds_domains_for_inferred_keys(self) -> None:
+        snapshot_date = "2026-02-16"
+        samples = (
+            ("eurostat_sdmx", Path("etl/data/raw/samples/eurostat_sdmx_sample.json")),
+            ("bde_series_api", Path("etl/data/raw/samples/bde_series_api_sample.json")),
+            ("aemet_opendata_series", Path("etl/data/raw/samples/aemet_opendata_series_sample.json")),
+        )
+        for source_id, sample_path in samples:
+            self.assertTrue(sample_path.exists(), f"Missing sample for {source_id}: {sample_path}")
+
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "indicator-domain-linkage.db"
+            raw_dir = Path(td) / "raw"
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_sources(conn)
+                seed_dimensions(conn)
+
+                connectors = get_connectors()
+                for source_id, sample_path in samples:
+                    ingest_one_source(
+                        conn=conn,
+                        connector=connectors[source_id],
+                        raw_dir=raw_dir,
+                        timeout=5,
+                        from_file=sample_path,
+                        url_override=None,
+                        snapshot_date=snapshot_date,
+                        strict_network=True,
+                    )
+
+                result = backfill_indicator_harmonization(conn)
+                self.assertGreaterEqual(result["indicator_domains_seeded"], 3)
+                self.assertEqual(result["indicator_series_unresolved_domain"], 0)
+                self.assertEqual(result["indicator_series_with_domain_id"], result["indicator_series_total"])
+
+                unresolved_row = conn.execute(
+                    """
+                    SELECT COUNT(*) AS c
+                    FROM indicator_series
+                    WHERE source_id IN ('eurostat_sdmx','bde_series_api','aemet_opendata_series')
+                      AND domain_id IS NULL
+                    """
+                ).fetchone()
+                self.assertEqual(int(unresolved_row["c"]), 0)
+
+                domain_keys = {
+                    str(row["canonical_key"])
+                    for row in conn.execute("SELECT canonical_key FROM domains").fetchall()
+                }
+                self.assertIn("proteccion_social_pensiones", domain_keys)
+                self.assertIn("vivienda_urbanismo", domain_keys)
+                self.assertIn("energia_medio_ambiente", domain_keys)
+            finally:
+                conn.close()
+
     def test_indicator_backfill_is_idempotent_and_traceable(self) -> None:
         snapshot_date = "2026-02-16"
         samples = (
@@ -202,7 +259,110 @@ class TestIndicatorBackfill(unittest.TestCase):
             finally:
                 conn.close()
 
+    def test_bde_euribor_maps_to_vivienda_domain(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "indicator-backfill-bde-euribor.db"
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_sources(conn)
+                seed_dimensions(conn)
+                now_iso = now_utc_iso()
+
+                payload = {
+                    "record_kind": "bde_series",
+                    "source_feed": "bde_series_api",
+                    "dataset_code": "bde_series_api",
+                    "source_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAF472&rango=30M",
+                    "series_code": "D_1NBAF472",
+                    "series_label": "Euribor a un año",
+                    "frequency": "M",
+                    "unit": "PERCENT",
+                    "series_dimensions": {"source": "bde_api", "series_code": "D_1NBAF472", "freq": "M"},
+                    "points": [{"period": "2026-01-01T09:15:00Z", "value": 2.245}],
+                }
+                raw_payload = stable_json(payload)
+                upsert_source_record(
+                    conn=conn,
+                    source_id="bde_series_api",
+                    source_record_id="series:d_1nbaf472",
+                    snapshot_date="2026-02-27",
+                    raw_payload=raw_payload,
+                    content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
+                    now_iso=now_iso,
+                )
+                conn.commit()
+
+                result = backfill_indicator_harmonization(conn, source_ids=("bde_series_api",))
+                self.assertEqual(result["source_records_mapped"], 1)
+                self.assertEqual(result["indicator_series_unresolved_domain"], 0)
+
+                row = conn.execute(
+                    """
+                    SELECT d.canonical_key
+                    FROM indicator_series s
+                    LEFT JOIN domains d ON d.domain_id = s.domain_id
+                    WHERE s.source_id='bde_series_api'
+                      AND s.label='Euribor a un año'
+                    """
+                ).fetchone()
+                self.assertIsNotNone(row)
+                self.assertEqual(str(row["canonical_key"]), "vivienda_urbanismo")
+            finally:
+                conn.close()
+
+    def test_bde_interest_and_debt_maps_to_fiscal_domain(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "indicator-backfill-bde-interest-domain.db"
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_sources(conn)
+                seed_dimensions(conn)
+                now_iso = now_utc_iso()
+
+                payload = {
+                    "record_kind": "bde_series",
+                    "source_feed": "bde_series_api",
+                    "dataset_code": "bde_series_api",
+                    "source_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBBO572&rango=30M",
+                    "series_code": "D_1NBBO572",
+                    "series_label": "MERCADO SECUNDARIO DE DEUDA PUBLICA RENDIMIENTOS EN EL AREA DEL EURO BENCHMARK A 10 AÑOS",
+                    "frequency": "M",
+                    "unit": "PERCENT",
+                    "series_dimensions": {"source": "bde_api", "series_code": "D_1NBBO572", "freq": "M"},
+                    "points": [{"period": "2026-01-01T09:15:00Z", "value": 3.22}],
+                }
+                raw_payload = stable_json(payload)
+                upsert_source_record(
+                    conn=conn,
+                    source_id="bde_series_api",
+                    source_record_id="series:d_1nbbo572",
+                    snapshot_date="2026-02-27",
+                    raw_payload=raw_payload,
+                    content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
+                    now_iso=now_iso,
+                )
+                conn.commit()
+
+                result = backfill_indicator_harmonization(conn, source_ids=("bde_series_api",))
+                self.assertEqual(result["source_records_mapped"], 1)
+                self.assertEqual(result["indicator_series_unresolved_domain"], 0)
+
+                row = conn.execute(
+                    """
+                    SELECT d.canonical_key
+                    FROM indicator_series s
+                    LEFT JOIN domains d ON d.domain_id = s.domain_id
+                    WHERE s.source_id='bde_series_api'
+                      AND s.label='MERCADO SECUNDARIO DE DEUDA PUBLICA RENDIMIENTOS EN EL AREA DEL EURO BENCHMARK A 10 AÑOS'
+                    """
+                ).fetchone()
+                self.assertIsNotNone(row)
+                self.assertEqual(str(row["canonical_key"]), "impuestos_gasto_fiscalidad")
+            finally:
+                conn.close()
+
 
 if __name__ == "__main__":
     unittest.main()
-

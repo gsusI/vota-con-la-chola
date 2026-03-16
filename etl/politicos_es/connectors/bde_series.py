@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import gzip
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -115,6 +116,32 @@ def _extract_points(points_obj: Any) -> list[dict[str, Any]]:
                 "period_label": period_label,
                 "value": numeric,
                 "value_text": value_text or None,
+            }
+        )
+    return sorted(points, key=lambda item: str(item.get("period") or ""))
+
+
+def _extract_points_from_parallel_arrays(row: dict[str, Any]) -> list[dict[str, Any]]:
+    fechas = row.get("fechas")
+    valores = row.get("valores")
+    if not isinstance(fechas, list) or not isinstance(valores, list):
+        return []
+    points: list[dict[str, Any]] = []
+    for idx, period_raw in enumerate(fechas):
+        if idx >= len(valores):
+            break
+        period = normalize_ws(str(period_raw or ""))
+        if not period:
+            continue
+        raw_value = valores[idx]
+        numeric = _parse_numeric(raw_value)
+        value_text = None if numeric is not None else (normalize_ws(str(raw_value)) or None)
+        points.append(
+            {
+                "period": period,
+                "period_label": period,
+                "value": numeric,
+                "value_text": value_text,
             }
         )
     return sorted(points, key=lambda item: str(item.get("period") or ""))
@@ -309,6 +336,12 @@ def _dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def parse_bde_records(payload: bytes, *, feed_url: str, content_type: str | None) -> list[dict[str, Any]]:
+    if payload[:2] == b"\x1f\x8b":
+        try:
+            payload = gzip.decompress(payload)
+        except OSError:
+            # Keep raw payload if gzip header is malformed; JSON parse below will raise.
+            pass
     payload_sig = sha256_bytes(payload)
     if payload_looks_like_html(payload):
         raise RuntimeError(f"Respuesta HTML inesperada para BDE feed (payload_sig={payload_sig})")
@@ -344,6 +377,8 @@ def parse_bde_records(payload: bytes, *, feed_url: str, content_type: str | None
         if not isinstance(points_obj, list):
             points_obj = row.get("data")
         points = _extract_points(points_obj)
+        if not points:
+            points = _extract_points_from_parallel_arrays(row)
         if not points:
             continue
 

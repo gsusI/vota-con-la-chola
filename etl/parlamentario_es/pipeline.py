@@ -6,6 +6,7 @@ import html as html_lib
 import json
 import re
 import sqlite3
+import subprocess
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -84,6 +85,365 @@ _H2_SECTION_RE = re.compile(
     re.I | re.S,
 )
 
+_PROGRAMA_POLICY_VERBS_NORM = (
+    "proponemos",
+    "proposem",
+    "proposarem",
+    "proponhemos",
+    "propondremos",
+    "propondra",
+    "propora",
+    "impulsaremos",
+    "impulsarem",
+    "impulsar",
+    "promovemos",
+    "promoveremos",
+    "promourem",
+    "apostamos por",
+    "apostem per",
+    "apostar per",
+    "apuesta por",
+    "aposta por",
+    "garantizaremos",
+    "garantirem",
+    "priorizaremos",
+    "prioritzarem",
+    "reduciremos",
+    "reduirem",
+    "actualizaremos",
+    "actualizar",
+    "revisaremos",
+    "revisar",
+    "incrementaremos",
+    "incrementar",
+    "modificaremos",
+    "modificar",
+    "facilitaremos",
+    "facilitar",
+    "incentivaremos",
+    "incentivar",
+    "implicaremos",
+    "implicar",
+    "formaremos",
+    "formar",
+    "realizaremos",
+    "realizar",
+    "limitaremos",
+    "limitar",
+    "deflactaremos",
+    "deflactar",
+    "dotaremos",
+    "dotar",
+    "prohibiremos",
+    "prohibir",
+    "atajaremos",
+    "atajar",
+    "suprimiremos",
+    "suprimira",
+    "suprimir",
+    "velaremos",
+    "velara",
+    "velar",
+    "exigiremos",
+    "exigir",
+    "demandaremos",
+    "demandar",
+    "demanda",
+    "reconoceremos",
+    "reconocer",
+    "reconociendo",
+    "reconecendo",
+    "fomentar",
+    "reformular",
+    "establecer",
+    "estabelecer",
+    "desarrollaremos",
+    "desarrollar",
+    "desenvolver",
+    "mejoraremos",
+    "mejorara",
+    "millorarem",
+    "millorar",
+    "mellorar",
+    "crearemos",
+    "crearem",
+    "crear",
+    "pondremos en marcha",
+    "posarem en marxa",
+    "canviarem",
+    "canviar",
+    "combatiremos",
+    "combataremos",
+    "combatrem",
+    "combatre",
+    "lluita contra",
+    "lluitar contra",
+    "ampliaremos",
+    "ampliarem",
+    "ampliar",
+    "universalizaremos",
+    "universalitzarem",
+    "universalitzar",
+    "desplegaremos",
+    "desplegarem",
+    "desplegar",
+    "reforzaremos",
+    "reforzara",
+    "reforzar",
+    "enfortirem",
+    "enfortir",
+    "expropiaremos",
+    "expropiarem",
+    "expropiar",
+    "potenciaremos",
+    "potenciarem",
+    "potenciar",
+    "coidaremos",
+    "coidar",
+    "we will focus",
+    "we will invest",
+    "we will create",
+    "we will combat",
+    "we will expand",
+    "we will strengthen",
+    "we will improve",
+    "we will develop",
+    "we will support",
+    "we will protect",
+    "we will reduce",
+    "we will tackle",
+    "we will boost",
+    "we will ensure",
+    "we will promote",
+)
+
+_PROGRAMA_URL_POSITIVE_HINTS_NORM = (
+    "programa",
+    "program",
+    "manifesto",
+    "propuestas",
+    "medidas",
+    "elecciones",
+)
+
+_PROGRAMA_URL_NEGATIVE_HINTS_NORM = (
+    "cookie",
+    "privacidad",
+    "privacy",
+    "aviso legal",
+    "transparencia",
+    "actualidad",
+    "noticias",
+    "blog",
+    "prensa",
+    "news",
+    "contacto",
+    "donaciones",
+    "afiliate",
+    "hazte miembro",
+)
+
+_PROGRAMA_TEXT_POSITIVE_HINTS_NORM = (
+    "programa electoral",
+    "programa marco",
+    "manifiesto electoral",
+    "descargar programa",
+)
+
+_PROGRAMA_TEXT_NEGATIVE_HINTS_NORM = (
+    "politica de cookies",
+    "politica cookies",
+    "aviso legal",
+    "politica de privacidad",
+    "proteccion de datos",
+    "condiciones de uso",
+    "este sitio web utiliza cookies",
+)
+
+_PROGRAMA_TEXT_NAV_NOISE_HINTS_NORM = (
+    "noticias",
+    "actualidad",
+    "agenda",
+    "blog",
+    "prensa",
+    "boletin",
+    "suscribete",
+    "afiliate",
+    "hazte miembro",
+    "menu",
+    "search",
+    "buscador",
+    "siguenos",
+    "seguenos",
+    "facebook",
+    "twitter",
+    "instagram",
+    "youtube",
+    "tiktok",
+    "rss",
+    "quienes somos",
+    "quen somos",
+    "qui som",
+    "nuestras sedes",
+    "sedes",
+    "contacto",
+    "etiqueta",
+)
+
+_PROGRAMA_EXCERPT_NOISE_HINTS_NORM = (
+    "paxina",
+    "pagina",
+    "programa economico y de vivienda",
+    "presupuestos",
+    "m 01 20",
+    "ultimo ejercicio",
+    "millones de euros",
+)
+
+
+def _programa_window_verb_hits(text_norm: str) -> int:
+    text = normalize_ws(str(text_norm or ""))
+    if not text:
+        return 0
+    hits = 0
+    for verb in _PROGRAMA_POLICY_VERBS_NORM:
+        vv = normalize_ws(str(verb or ""))
+        if vv and re.search(rf"\b{re.escape(vv)}\b", text, re.I):
+            hits += 1
+    return hits
+
+
+def _is_low_signal_programa_window(text_norm: str) -> bool:
+    text = normalize_ws(str(text_norm or ""))
+    if not text:
+        return True
+    verb_hits = _programa_window_verb_hits(text)
+    if verb_hits > 0:
+        return False
+    text_key = normalize_key_part(text)
+    noise_hits = _count_fragment_hits(text_key, _PROGRAMA_EXCERPT_NOISE_HINTS_NORM)
+    digit_count = sum(1 for ch in text if ch.isdigit())
+    digit_ratio = float(digit_count) / float(len(text)) if text else 0.0
+    page_hits = len(re.findall(r"\bpaxina\b|\bpagina\b", text_key, flags=re.I))
+    if noise_hits >= 2:
+        return True
+    if page_hits >= 2:
+        return True
+    if digit_ratio >= 0.12:
+        return True
+    return False
+
+
+def _contains_any_fragment(text_norm: str, candidates_norm: tuple[str, ...]) -> bool:
+    if not text_norm:
+        return False
+    for c in candidates_norm:
+        cc = normalize_ws(str(c or ""))
+        if cc and cc in text_norm:
+            return True
+    return False
+
+
+def _count_fragment_hits(text_norm: str, candidates_norm: tuple[str, ...]) -> int:
+    text = normalize_ws(str(text_norm or ""))
+    if not text:
+        return 0
+    hits = 0
+    for c in candidates_norm:
+        cc = normalize_ws(str(c or ""))
+        if not cc:
+            continue
+        if cc in text:
+            hits += 1
+    return hits
+
+
+def _programa_policy_pair_hits(text_norm: str, keyword_norms: list[str]) -> int:
+    text = normalize_ws(text_norm)
+    if not text or not keyword_norms:
+        return 0
+    hits = 0
+    seen_keywords: set[str] = set()
+    for kw in keyword_norms:
+        kw_norm = normalize_ws(str(kw or ""))
+        if not kw_norm or kw_norm in seen_keywords:
+            continue
+        seen_keywords.add(kw_norm)
+        matched = False
+        for verb in _PROGRAMA_POLICY_VERBS_NORM:
+            verb_norm = normalize_ws(str(verb or ""))
+            if not verb_norm:
+                continue
+            pair_patterns = (
+                re.compile(
+                    rf"\b{re.escape(verb_norm)}\b(?:\s+\w+){{0,20}}\s+\b{re.escape(kw_norm)}\b",
+                    re.I,
+                ),
+                re.compile(
+                    rf"\b{re.escape(kw_norm)}\b(?:\s+\w+){{0,20}}\s+\b{re.escape(verb_norm)}\b",
+                    re.I,
+                ),
+            )
+            if any(p.search(text) for p in pair_patterns):
+                matched = True
+                break
+        if matched:
+            hits += 1
+    return hits
+
+
+def _is_programmatic_program_doc(
+    *,
+    source_url: str | None,
+    text_for_matching: str,
+    concern_keywords_norm: list[str],
+) -> tuple[bool, str]:
+    """Classify whether a fetched document looks like a policy program page."""
+
+    url_norm = normalize_key_part(source_url or "")
+    text_norm = normalize_key_part(text_for_matching)
+    if not url_norm and not text_norm:
+        return False, "empty_doc"
+
+    url_positive = _contains_any_fragment(url_norm, _PROGRAMA_URL_POSITIVE_HINTS_NORM)
+    text_positive = _contains_any_fragment(text_norm, _PROGRAMA_TEXT_POSITIVE_HINTS_NORM)
+    url_negative = _contains_any_fragment(url_norm, _PROGRAMA_URL_NEGATIVE_HINTS_NORM)
+    legal_hits = _count_fragment_hits(text_norm, _PROGRAMA_TEXT_NEGATIVE_HINTS_NORM)
+    nav_noise_hits = _count_fragment_hits(text_norm, _PROGRAMA_TEXT_NAV_NOISE_HINTS_NORM)
+
+    pair_hits = _programa_policy_pair_hits(text_norm, concern_keywords_norm)
+    if pair_hits > 0:
+        return True, "policy_pair_hit"
+
+    if url_negative:
+        return False, "url_non_program_hint"
+    if legal_hits > 0:
+        return False, "legal_or_cookie_text"
+
+    # Positive URL routes still include many list/index pages.
+    # Force content signal when navigation noise is dominant.
+    if url_positive and nav_noise_hits >= 6:
+        return False, "url_program_but_noisy_listing"
+
+    if text_positive and nav_noise_hits < 10:
+        return True, "text_program_phrase"
+    if url_positive and nav_noise_hits < 6:
+        return True, "url_program_hint"
+
+    verb_hits = 0
+    for verb in _PROGRAMA_POLICY_VERBS_NORM:
+        verb_norm = normalize_ws(str(verb or ""))
+        if not verb_norm:
+            continue
+        if re.search(rf"\b{re.escape(verb_norm)}\b", text_norm, re.I):
+            verb_hits += 1
+    if nav_noise_hits >= 8 and verb_hits == 0:
+        return False, "noise_navigation_text"
+    if verb_hits >= 2:
+        return True, "policy_verb_density"
+
+    return False, "no_programmatic_signal"
+
 
 def _extract_h2_sections_from_html(html: str) -> dict[str, str]:
     """Return {normalized_title -> stripped_body_text} for <h2> sections (best-effort)."""
@@ -102,6 +462,151 @@ def _extract_h2_sections_from_html(html: str) -> dict[str, str]:
         else:
             out[title_key] = body
     return out
+
+
+def _programa_excerpt_signature(text: str) -> str:
+    """Stable short signature used to avoid repeated excerpts per document."""
+
+    normalized = normalize_key_part(normalize_ws(str(text or "")))
+    if not normalized:
+        return ""
+    return normalized[:320]
+
+
+def _programa_keyword_excerpt_window(
+    full_norm: str,
+    keyword_norms: list[str],
+    *,
+    used_signatures: set[str] | None = None,
+) -> str:
+    """Pick a topic-scoped excerpt, preferring proposal-verb + keyword co-occurrence.
+
+    When `used_signatures` is provided, prefer a candidate not already used for the
+    current document to improve per-topic excerpt diversity.
+    """
+
+    text = normalize_ws(full_norm)
+    if not text:
+        return ""
+
+    # Preserve historical behavior unless diversity override is explicitly requested.
+    if not used_signatures:
+        for kw in keyword_norms:
+            kw_norm = normalize_ws(str(kw or ""))
+            if not kw_norm:
+                continue
+            # Prefer windows where programmatic action verbs and concern terms appear close.
+            for verb in _PROGRAMA_POLICY_VERBS_NORM:
+                verb_norm = normalize_ws(str(verb or ""))
+                if not verb_norm:
+                    continue
+                pair_patterns = (
+                    re.compile(
+                        rf"\b{re.escape(verb_norm)}\b(?:\s+\w+){{0,20}}\s+\b{re.escape(kw_norm)}\b",
+                        re.I,
+                    ),
+                    re.compile(
+                        rf"\b{re.escape(kw_norm)}\b(?:\s+\w+){{0,20}}\s+\b{re.escape(verb_norm)}\b",
+                        re.I,
+                    ),
+                )
+                for pattern in pair_patterns:
+                    m = pattern.search(text)
+                    if not m:
+                        continue
+                    start = max(0, m.start() - 220)
+                    end = min(len(text), m.end() + 220)
+                    candidate = text[start:end]
+                    if _is_low_signal_programa_window(candidate):
+                        continue
+                    return candidate
+
+        # Fallback: around first concern keyword hit.
+        for kw in keyword_norms:
+            kw_norm = normalize_ws(str(kw or ""))
+            if not kw_norm:
+                continue
+            idx = text.find(kw_norm)
+            if idx < 0:
+                continue
+            start = max(0, idx - 180)
+            end = min(len(text), idx + 180)
+            candidate = text[start:end]
+            if _is_low_signal_programa_window(candidate):
+                continue
+            return candidate
+        return ""
+
+    candidates: list[tuple[int, int, int, str, str]] = []
+    seen_signatures: set[str] = set()
+
+    def _push_candidate(candidate: str, *, priority: int, keyword_index: int, hit_start: int) -> None:
+        candidate_norm = normalize_ws(candidate)
+        if not candidate_norm:
+            return
+        if _is_low_signal_programa_window(candidate_norm):
+            return
+        sig = _programa_excerpt_signature(candidate_norm)
+        if not sig or sig in seen_signatures:
+            return
+        seen_signatures.add(sig)
+        candidates.append((priority, keyword_index, hit_start, candidate_norm, sig))
+
+    for kw_idx, kw in enumerate(keyword_norms):
+        kw_norm = normalize_ws(str(kw or ""))
+        if not kw_norm:
+            continue
+        # Prefer windows where programmatic action verbs and concern terms appear close.
+        for verb in _PROGRAMA_POLICY_VERBS_NORM:
+            verb_norm = normalize_ws(str(verb or ""))
+            if not verb_norm:
+                continue
+            pair_patterns = (
+                re.compile(
+                    rf"\b{re.escape(verb_norm)}\b(?:\s+\w+){{0,20}}\s+\b{re.escape(kw_norm)}\b",
+                    re.I,
+                ),
+                re.compile(
+                    rf"\b{re.escape(kw_norm)}\b(?:\s+\w+){{0,20}}\s+\b{re.escape(verb_norm)}\b",
+                    re.I,
+                ),
+            )
+            for pattern in pair_patterns:
+                for m in pattern.finditer(text):
+                    start = max(0, m.start() - 220)
+                    end = min(len(text), m.end() + 220)
+                    _push_candidate(
+                        text[start:end],
+                        priority=0,
+                        keyword_index=kw_idx,
+                        hit_start=m.start(),
+                    )
+
+    # Fallback: around first concern keyword hit.
+    for kw_idx, kw in enumerate(keyword_norms):
+        kw_norm = normalize_ws(str(kw or ""))
+        if not kw_norm:
+            continue
+        for m in re.finditer(rf"\b{re.escape(kw_norm)}\b", text, re.I):
+            start = max(0, m.start() - 180)
+            end = min(len(text), m.end() + 180)
+            _push_candidate(
+                text[start:end],
+                priority=1,
+                keyword_index=kw_idx,
+                hit_start=m.start(),
+            )
+
+    if not candidates:
+        return ""
+
+    candidates.sort(key=lambda item: (item[0], item[1], item[2]))
+    if used_signatures:
+        for _priority, _kw_idx, _hit_start, candidate, signature in candidates:
+            if signature in used_signatures:
+                continue
+            return candidate
+    return candidates[0][3]
 
 
 def _load_concerns_v1(path: Path) -> list[dict[str, Any]]:
@@ -355,6 +860,61 @@ def _guess_program_doc_ext(payload: bytes, format_hint: str) -> str:
     return "bin"
 
 
+def _extract_program_pdf_text(raw_bytes: bytes, raw_path: Path) -> str:
+    """Best-effort PDF text extraction for program docs.
+
+    Priority:
+    1) pypdf
+    2) PyPDF2
+    3) `pdftotext` CLI fallback
+    """
+
+    def _pdftotext_fallback() -> str:
+        try:
+            cp = subprocess.run(
+                ["pdftotext", "-enc", "UTF-8", str(raw_path), "-"],
+                check=False,
+                capture_output=True,
+                timeout=30,
+            )
+            if cp.returncode == 0 and cp.stdout:
+                return normalize_ws(cp.stdout.decode("utf-8", errors="replace"))
+        except Exception:
+            pass
+        return ""
+
+    reader = None
+    try:
+        from pypdf import PdfReader  # type: ignore
+        from io import BytesIO
+
+        reader = PdfReader(BytesIO(raw_bytes))
+    except Exception:
+        try:
+            from PyPDF2 import PdfReader  # type: ignore
+            from io import BytesIO
+
+            reader = PdfReader(BytesIO(raw_bytes))
+        except Exception:
+            return _pdftotext_fallback()
+
+    if reader is None:
+        return _pdftotext_fallback()
+
+    chunks: list[str] = []
+    for page in reader.pages:
+        try:
+            txt = page.extract_text() or ""
+        except Exception:
+            txt = ""
+        if txt:
+            chunks.append(txt)
+    out = normalize_ws("\n".join(chunks))
+    if out:
+        return out
+    return _pdftotext_fallback()
+
+
 def _read_program_doc_bytes(
     *,
     local_path: str | None,
@@ -475,12 +1035,16 @@ def _ingest_programas_partidos(
     seen = 0
     docs_loaded = 0
     evidence_inserted = 0
+    network_docs_fetched = 0
+    fallback_docs_fetched = 0
+    first_network_doc_url: str | None = None
 
     skip: dict[str, int] = {
         "bad_payload": 0,
         "missing_required": 0,
         "party_missing_in_db": 0,
         "doc_fetch_failed": 0,
+        "non_program_doc": 0,
         "no_concerns_config": 0,
         "no_matching_topics": 0,
     }
@@ -493,6 +1057,14 @@ def _ingest_programas_partidos(
             concerns = []
     if not concerns:
         skip["no_concerns_config"] += 1
+    concern_keywords_norm: list[str] = sorted(
+        {
+            normalize_ws(str(kw or ""))
+            for c in concerns
+            for kw in (c.get("keywords_norm") or [])
+            if normalize_ws(str(kw or ""))
+        }
+    )
 
     # Group manifest rows by election_cycle so we can build one topic_set per cycle.
     by_cycle: dict[str, list[dict[str, Any]]] = {}
@@ -509,6 +1081,7 @@ def _ingest_programas_partidos(
 
     touched_sets: list[int] = []
     failures: list[str] = []
+    program_doc_signal_counts: dict[str, int] = {}
 
     for election_cycle, rows in sorted(by_cycle.items(), key=lambda kv: kv[0]):
         topic_set_id = _upsert_programas_topic_set(conn, election_cycle=election_cycle, now_iso=now_iso)
@@ -595,14 +1168,35 @@ def _ingest_programas_partidos(
                 raw_path.write_bytes(doc_bytes)
 
             text_excerpt = ""
+            text_for_matching = ""
             html_sections: dict[str, str] = {}
             if ext == "html" or payload_looks_like_html(doc_bytes):
                 html = doc_bytes.decode("utf-8", errors="replace")
-                text_excerpt = _strip_html(html)[:4000]
+                html_text = _strip_html(html)
+                text_for_matching = html_text[:120000]
+                text_excerpt = html_text[:4000]
                 html_sections = _extract_h2_sections_from_html(html)
+            elif ext == "pdf" or doc_bytes[:5] == b"%PDF-":
+                pdf_text = normalize_ws(_extract_program_pdf_text(doc_bytes, raw_path))
+                text_for_matching = pdf_text[:120000]
+                text_excerpt = pdf_text[:4000]
+                if not text_excerpt:
+                    # Final fallback keeps compatibility when extraction libs are unavailable.
+                    fallback_text = normalize_ws(doc_bytes.decode("utf-8", errors="replace"))
+                    text_for_matching = fallback_text[:120000]
+                    text_excerpt = fallback_text[:4000]
             else:
-                text_excerpt = doc_bytes.decode("utf-8", errors="replace")
-                text_excerpt = normalize_ws(text_excerpt)[:4000]
+                raw_text = normalize_ws(doc_bytes.decode("utf-8", errors="replace"))
+                text_for_matching = raw_text[:120000]
+                text_excerpt = raw_text[:4000]
+
+            resolved_doc_url_norm = normalize_ws(str(resolved_doc_url or source_url or ""))
+            if resolved_doc_url_norm.startswith(("http://", "https://")):
+                network_docs_fetched += 1
+                if first_network_doc_url is None:
+                    first_network_doc_url = resolved_doc_url_norm
+            elif resolved_doc_url_norm.startswith("file://"):
+                fallback_docs_fetched += 1
 
             # Upsert proxy person (reversible).
             person_id = _upsert_party_proxy_person(conn, party_id=party_id, party_name=party_name, now_iso=now_iso)
@@ -660,9 +1254,18 @@ def _ingest_programas_partidos(
             if not topic_id_by_concern:
                 skip["no_matching_topics"] += 1
                 continue
+            is_programmatic_doc, program_doc_signal = _is_programmatic_program_doc(
+                source_url=resolved_doc_url_norm or source_url,
+                text_for_matching=text_for_matching,
+                concern_keywords_norm=concern_keywords_norm,
+            )
+            program_doc_signal_counts[program_doc_signal] = program_doc_signal_counts.get(program_doc_signal, 0) + 1
+            if not is_programmatic_doc:
+                skip["non_program_doc"] += 1
+                continue
 
             # Use section text when possible to keep stance extraction topic-scoped.
-            full_norm = normalize_key_part(text_excerpt)
+            full_norm = normalize_key_part(text_for_matching or text_excerpt)
             for c in concerns:
                 cid = normalize_ws(str(c.get("id") or ""))
                 if not cid:
@@ -678,21 +1281,12 @@ def _ingest_programas_partidos(
 
                 # Fallback: keyword hit anywhere in the excerpt.
                 if not section_text:
-                    hit_kw = None
-                    for kw in c.get("keywords_norm") or []:
-                        if kw and kw in full_norm:
-                            hit_kw = kw
-                            break
-                    if not hit_kw:
+                    section_text = _programa_keyword_excerpt_window(
+                        full_norm,
+                        [str(kw) for kw in (c.get("keywords_norm") or []) if str(kw or "").strip()],
+                    )
+                    if not section_text:
                         continue
-                    # Keep the excerpt topic-scoped: take a window around the first keyword hit
-                    # instead of using the whole document (avoids cross-topic leakage).
-                    idx = full_norm.find(str(hit_kw))
-                    if idx < 0:
-                        continue
-                    start = max(0, idx - 180)
-                    end = min(len(full_norm), idx + 180)
-                    section_text = full_norm[start:end]
 
                 section_text = normalize_ws(section_text)
                 if not section_text:
@@ -982,6 +1576,12 @@ def _ingest_programas_partidos(
         "failures": failures[:30],
         "skipped": skip,
         "concerns_count": len(concerns),
+        "program_doc_signals": program_doc_signal_counts,
+        "document_fetch_stats": {
+            "network_docs_fetched": int(network_docs_fetched),
+            "fallback_docs_fetched": int(fallback_docs_fetched),
+            "first_network_doc_url": first_network_doc_url,
+        },
     }
     return seen, docs_loaded, {"evidence_inserted": evidence_inserted, "info": info}
 
@@ -2632,6 +3232,20 @@ def ingest_one_source(
                 strict_network=strict_network,
                 now_iso=now_iso,
             )
+
+            out_info = out.get("info") if isinstance(out, dict) else {}
+            doc_fetch_stats = out_info.get("document_fetch_stats") if isinstance(out_info, dict) else {}
+            first_network_doc_url = normalize_ws(str((doc_fetch_stats or {}).get("first_network_doc_url") or ""))
+            if first_network_doc_url.startswith(("http://", "https://")):
+                conn.execute(
+                    "UPDATE run_fetches SET source_url = ?, fetched_at = ? WHERE run_id = ?",
+                    (first_network_doc_url, now_iso, run_id),
+                )
+                conn.execute(
+                    "UPDATE raw_fetches SET source_url = ?, fetched_at = ? WHERE run_id = ? AND source_id = ?",
+                    (first_network_doc_url, now_iso, run_id, source_id),
+                )
+
             if strict_network and rec_seen > 0 and rec_loaded == 0:
                 raise RuntimeError(
                     "strict-network abortado: records_seen > 0 y records_loaded == 0 "

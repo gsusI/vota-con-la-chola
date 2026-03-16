@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["task_id", "review_status", "candidates"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["resolved", "ignored", "pending"]
+    },
+    "review_note": {
+      "type": "string"
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "measure_title",
+          "citizen_summary",
+          "effect_type",
+          "risk_level",
+          "affected_groups",
+          "policy_area",
+          "measure_kind",
+          "primary_vote_event_ids",
+          "support_side",
+          "search_terms",
+          "evidence"
+        ],
+        "properties": {
+          "measure_title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "citizen_summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "effect_type": {
+            "type": "string",
+            "enum": ["tax", "benefit", "obligation", "restriction", "sanction", "rights", "institutional", "competence", "unknown"]
+          },
+          "risk_level": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "affected_groups": {
+            "type": "string"
+          },
+          "policy_area": {
+            "type": "string"
+          },
+          "measure_kind": {
+            "type": "string"
+          },
+          "primary_vote_event_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "support_side": {
+            "type": "string",
+            "enum": ["yes", "no", "mixed", "unknown"]
+          },
+          "search_terms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["quote", "fragment_id", "fragment_label"],
+              "properties": {
+                "quote": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "fragment_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "fragment_label": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["task_id", "review_status", "review_note", "reviewer", "candidates"],
+  "additionalProperties": false
+}

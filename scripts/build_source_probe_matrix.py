@@ -47,7 +47,7 @@ SOURCE_FAMILY: dict[str, str] = {
 # Tracker-aligned strict probes for carryover blockers.
 STRICT_URL_OVERRIDES: dict[str, str] = {
     "eurostat_sdmx": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_a",
-    "bde_series_api": "https://api.bde.es/datos/series/PARO.TASA.ES.M",
+    "bde_series_api": str(SOURCE_CONFIG["bde_series_api"]["default_url"]),
     "aemet_opendata_series": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
 }
 

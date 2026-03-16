@@ -29,6 +29,7 @@ from .parlament_catalunya import ParlamentCatalunyaDiputatsConnector
 from .parlamento_andalucia import ParlamentoAndaluciaDiputadosConnector
 from .parlamento_vasco import ParlamentoVascoParlamentariosConnector
 from .placsp_contracts import PlacspAutonomicoConnector, PlacspSindicacionConnector
+from .ree_esios_indicators import ReeEsiosIndicatorsConnector
 from .senado import SenadoSenadoresConnector
 
 __all__ = [
@@ -64,5 +65,6 @@ __all__ = [
     "ParlamentoVascoParlamentariosConnector",
     "PlacspAutonomicoConnector",
     "PlacspSindicacionConnector",
+    "ReeEsiosIndicatorsConnector",
     "SenadoSenadoresConnector",
 ]

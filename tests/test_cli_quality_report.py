@@ -28,6 +28,7 @@ class TestParlCliQualityReport(unittest.TestCase):
         *,
         extraction_needs_review: int,
         actionable_missing_doc_links: int = 0,
+        unlinked_missing_doc_links: int = 0,
     ) -> None:
         now = now_utc_iso()
         initiative_id = "congreso:init:test:1"
@@ -156,6 +157,37 @@ class TestParlCliQualityReport(unittest.TestCase):
                     initiative_id,
                     "ds",
                     "https://example.org/congreso/doc-test-missing.xml",
+                    None,
+                    now,
+                    now,
+                )
+            )
+        for idx in range(int(unlinked_missing_doc_links)):
+            unlinked_initiative_id = f"congreso:init:unlinked:{idx+1}"
+            unlinked_url = f"https://example.org/congreso/doc-unlinked-missing-{idx+1}.xml"
+            conn.execute(
+                """
+                INSERT INTO parl_initiatives (
+                  initiative_id, legislature, expediente, title,
+                  source_id, raw_payload, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    unlinked_initiative_id,
+                    "15",
+                    f"121/0099{idx+1:02d}/0000",
+                    f"Proyecto de Ley Unlinked {idx+1}",
+                    "congreso_iniciativas",
+                    "{}",
+                    now,
+                    now,
+                ),
+            )
+            docs_rows.append(
+                (
+                    unlinked_initiative_id,
+                    "ds",
+                    unlinked_url,
                     None,
                     now,
                     now,
@@ -662,14 +694,25 @@ class TestParlCliQualityReport(unittest.TestCase):
             kpis = snapshot["initiatives"]["kpis"]
 
             required_keys = {
+                "actionable_scope",
+                "actionable_metric",
                 "total_doc_links",
                 "downloaded_doc_links",
                 "missing_doc_links",
                 "missing_doc_links_likely_not_expected",
                 "missing_doc_links_actionable",
+                "total_doc_links_linked_to_votes",
+                "downloaded_doc_links_linked_to_votes",
+                "missing_doc_links_linked_to_votes",
+                "missing_doc_links_likely_not_expected_linked_to_votes",
+                "missing_doc_links_actionable_linked_to_votes",
+                "missing_doc_links_actionable_selected",
                 "downloaded_doc_links_pct",
                 "effective_downloaded_doc_links_pct",
                 "actionable_doc_links_closed_pct",
+                "effective_downloaded_doc_links_pct_linked_to_votes",
+                "actionable_doc_links_closed_pct_linked_to_votes",
+                "actionable_doc_links_closed_pct_selected",
                 "doc_links_with_fetch_status",
                 "doc_links_missing_fetch_status",
                 "fetch_status_coverage_pct",
@@ -706,6 +749,14 @@ class TestParlCliQualityReport(unittest.TestCase):
             )
             self.assertIn(
                 "actionable_doc_links_closed_pct",
+                kpis["by_source"]["senado_iniciativas"],
+            )
+            self.assertIn(
+                "actionable_doc_links_closed_pct_linked_to_votes",
+                kpis["by_source"]["senado_iniciativas"],
+            )
+            self.assertIn(
+                "actionable_doc_links_closed_pct_selected",
                 kpis["by_source"]["senado_iniciativas"],
             )
             self.assertIn(
@@ -819,6 +870,61 @@ class TestParlCliQualityReport(unittest.TestCase):
             failures = payload["initiatives"]["gate"]["failures"]
             metrics = {str(f["metric"]) for f in failures}
             self.assertIn("actionable_doc_links_closed_pct", metrics)
+
+    def test_quality_report_include_initiatives_linked_scope_ignores_unlinked_actionable_tail(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "parl-quality-cli-initiatives-enforce-linked-scope-pass.db"
+
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_parl_sources(conn)
+                self._seed_minimal_quality_fixture(
+                    conn,
+                    extraction_needs_review=0,
+                    actionable_missing_doc_links=0,
+                    unlinked_missing_doc_links=1,
+                )
+            finally:
+                conn.close()
+
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                code = main(
+                    [
+                        "quality-report",
+                        "--db",
+                        str(db_path),
+                        "--source-ids",
+                        "congreso_votaciones",
+                        "--include-initiatives",
+                        "--initiative-source-ids",
+                        "congreso_iniciativas",
+                        "--initiative-actionable-scope",
+                        "linked_to_votes",
+                        "--enforce-gate",
+                    ]
+                )
+            self.assertEqual(code, 0)
+            payload = json.loads(stdout.getvalue())
+            self.assertTrue(bool(payload["initiatives"]["gate"]["passed"]))
+            self.assertEqual(
+                str(payload["initiatives"]["gate"]["actionable_metric"]),
+                "actionable_doc_links_closed_pct_linked_to_votes",
+            )
+            self.assertEqual(
+                str(payload["initiatives"]["kpis"]["actionable_scope"]),
+                "linked_to_votes",
+            )
+            self.assertEqual(int(payload["initiatives"]["kpis"]["missing_doc_links_actionable"]), 1)
+            self.assertEqual(
+                int(payload["initiatives"]["kpis"]["missing_doc_links_actionable_linked_to_votes"]),
+                0,
+            )
+            self.assertAlmostEqual(
+                float(payload["initiatives"]["kpis"]["actionable_doc_links_closed_pct_selected"]),
+                1.0,
+            )
 
     def test_quality_report_include_declared_exposes_declared_kpis(self) -> None:
         with tempfile.TemporaryDirectory() as td:

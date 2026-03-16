@@ -34,6 +34,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     p.add_argument("--only-missing", action="store_true", help="Only URLs with d.source_record_pk IS NULL")
     p.add_argument(
+        "--only-linked-to-votes",
+        action="store_true",
+        help="Restrict queue to initiatives linked in parl_vote_event_initiatives.",
+    )
+    p.add_argument(
         "--only-status",
         default="",
         help="Filter by document_fetches.last_http_status (e.g. 403). Empty disables.",
@@ -61,6 +66,20 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "Shortcut for --only-missing + --exclude-redundant-senado-global. "
             "Use this to export only the actionable queue."
         ),
+    )
+    p.add_argument(
+        "--only-initiatives-without-any-doc",
+        action="store_true",
+        help=(
+            "Restrict queue to initiatives with zero downloaded docs "
+            "(no parl_initiative_documents.source_record_pk present)."
+        ),
+    )
+    p.add_argument(
+        "--max-urls-per-initiative",
+        type=int,
+        default=0,
+        help="Optional cap per initiative_id after filtering (0 = no cap).",
     )
     p.add_argument(
         "--strict-empty",
@@ -96,10 +115,9 @@ def _load_redundant_senado_initiatives(conn: sqlite3.Connection) -> set[str]:
             SELECT DISTINCT pid.initiative_id
             FROM parl_initiative_documents pid
             JOIN parl_initiatives i ON i.initiative_id = pid.initiative_id
-            JOIN text_documents td ON td.source_record_pk = pid.source_record_pk
             WHERE i.source_id = 'senado_iniciativas'
               AND pid.doc_kind = 'bocg'
-              AND td.source_id = 'parl_initiative_docs'
+              AND pid.source_record_pk IS NOT NULL
               AND (
                 pid.doc_url LIKE '%/xml/INI-3-%'
                 OR pid.doc_url LIKE '%/publicaciones/pdf/senado/bocg/%'
@@ -110,6 +128,30 @@ def _load_redundant_senado_initiatives(conn: sqlite3.Connection) -> set[str]:
     except sqlite3.Error as exc:
         raise RuntimeError(f"SQLite error while computing redundant Senado set: {exc}") from exc
 
+    return {str(r["initiative_id"] or "") for r in rows if str(r["initiative_id"] or "")}
+
+
+def _load_initiatives_with_any_downloaded_doc(
+    conn: sqlite3.Connection,
+    *,
+    source_ids: list[str],
+) -> set[str]:
+    if not source_ids:
+        return set()
+    placeholders = ",".join("?" for _ in source_ids)
+    try:
+        rows = conn.execute(
+            f"""
+            SELECT DISTINCT i.initiative_id
+            FROM parl_initiatives i
+            JOIN parl_initiative_documents d ON d.initiative_id = i.initiative_id
+            WHERE i.source_id IN ({placeholders})
+              AND d.source_record_pk IS NOT NULL
+            """,
+            source_ids,
+        ).fetchall()
+    except sqlite3.Error as exc:
+        raise RuntimeError(f"SQLite error while loading initiatives with downloaded docs: {exc}") from exc
     return {str(r["initiative_id"] or "") for r in rows if str(r["initiative_id"] or "")}
 
 
@@ -171,10 +213,18 @@ def main(argv: list[str] | None = None) -> int:
 
     if only_missing:
         where.append("d.source_record_pk IS NULL")
+    if bool(args.only_linked_to_votes):
+        where.append(
+            "EXISTS (SELECT 1 FROM parl_vote_event_initiatives vi WHERE vi.initiative_id = d.initiative_id)"
+        )
 
     if status_int is not None:
-        where.append("df.last_http_status = ?")
-        params.append(int(status_int))
+        if int(status_int) == 0:
+            # Treat status=0 as "unknown/no-status" and include rows with no fetch record yet.
+            where.append("COALESCE(df.last_http_status, 0) = 0")
+        else:
+            where.append("df.last_http_status = ?")
+            params.append(int(status_int))
 
     limit_sql = ""
     if int(args.limit or 0) > 0:
@@ -205,7 +255,10 @@ def main(argv: list[str] | None = None) -> int:
     {limit_sql}
     """
 
+    max_urls_per_initiative = max(0, int(args.max_urls_per_initiative or 0))
     filtered_out_redundant = 0
+    filtered_out_has_downloaded_doc = 0
+    filtered_out_per_initiative_cap = 0
     with open_db(db_path) as conn:
         try:
             rows = conn.execute(sql, params).fetchall()
@@ -223,6 +276,28 @@ def main(argv: list[str] | None = None) -> int:
             except RuntimeError as exc:
                 print(f"ERROR: {exc}", file=sys.stderr)
                 return 3
+        if bool(args.only_initiatives_without_any_doc) and rows:
+            try:
+                with_downloaded_doc = _load_initiatives_with_any_downloaded_doc(conn, source_ids=source_ids)
+            except RuntimeError as exc:
+                print(f"ERROR: {exc}", file=sys.stderr)
+                return 3
+            before = len(rows)
+            rows = [r for r in rows if str(r["initiative_id"] or "") not in with_downloaded_doc]
+            filtered_out_has_downloaded_doc = before - len(rows)
+
+    if max_urls_per_initiative > 0 and rows:
+        kept_rows: list[sqlite3.Row] = []
+        per_initiative_counts: dict[str, int] = {}
+        for r in rows:
+            initiative_id = str(r["initiative_id"] or "")
+            count = int(per_initiative_counts.get(initiative_id, 0))
+            if count >= max_urls_per_initiative:
+                filtered_out_per_initiative_cap += 1
+                continue
+            per_initiative_counts[initiative_id] = count + 1
+            kept_rows.append(r)
+        rows = kept_rows
 
     exported_count = 0
     if args.format == "txt":
@@ -239,6 +314,10 @@ def main(argv: list[str] | None = None) -> int:
         msg = f"OK wrote {out_path} (urls={exported_count})"
         if filtered_out_redundant:
             msg += f" [excluded_redundant_senado_global={filtered_out_redundant}]"
+        if filtered_out_has_downloaded_doc:
+            msg += f" [excluded_initiatives_with_downloaded_docs={filtered_out_has_downloaded_doc}]"
+        if filtered_out_per_initiative_cap:
+            msg += f" [excluded_over_per_initiative_cap={filtered_out_per_initiative_cap}]"
     else:
         with out_path.open("w", encoding="utf-8", newline="") as f:
             w = csv.writer(f)
@@ -273,6 +352,10 @@ def main(argv: list[str] | None = None) -> int:
         msg = f"OK wrote {out_path} (rows={exported_count})"
         if filtered_out_redundant:
             msg += f" [excluded_redundant_senado_global={filtered_out_redundant}]"
+        if filtered_out_has_downloaded_doc:
+            msg += f" [excluded_initiatives_with_downloaded_docs={filtered_out_has_downloaded_doc}]"
+        if filtered_out_per_initiative_cap:
+            msg += f" [excluded_over_per_initiative_cap={filtered_out_per_initiative_cap}]"
 
     if bool(args.strict_empty) and exported_count > 0:
         print(
