@@ -23,6 +23,45 @@ node_modules/
 /replay
 /strict-network
 /python3 scripts/
+/after
+/status
+/tmp/
+/{ka*
+/{{ka*
+/fragmentos
+/101
+/1252
+/1253
+/1293
+/1337
+/1343
+/16
+/297
+/3210
+/3260
+/329
+/3529
+/4341
+/5028
+/5212
+/5290
+/5340
+/564
+/952
+/968
+/6
+/666
+/96.89
+
+# ETL sprint sidecar process outputs (keep curated JSON/CSV/TXT/MD evidence instead)
+docs/etl/sprints/**/evidence/*.stdout
+docs/etl/sprints/**/evidence/*.stderr
+docs/etl/sprints/**/evidence/*.rc
+docs/etl/sprints/**/evidence/*.time
+docs/etl/sprints/**/evidence/*.bin
+docs/etl/sprints/**/evidence/*.err
+docs/etl/sprints/**/evidence/.ts
+docs/etl/sprints/**/.ts
 
 # Cloudflare Wrangler local state (may contain sensitive tokens/state)
 .wrangler/
@@ -52,6 +91,7 @@ etl/data/staging/
 etl/data/raw/*
 !etl/data/raw/samples/
 !etl/data/raw/samples/**
+etl/data/derived/parl_initiative_doc_texts/
 
 # SQLite artifacts anywhere in the project
 *.db
