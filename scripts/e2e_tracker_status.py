@@ -36,6 +36,8 @@ TRACKER_TIPO_SOURCE_HINTS = {
     "Indicadores (confusores): Banco de España": ["bde_series_api"],
     "Indicadores (confusores): Banco de Espana": ["bde_series_api"],
     "Indicadores (confusores): AEMET": ["aemet_opendata_series"],
+    "Indicadores (confusores): ESIOS/REE": ["ree_esios_indicators"],
+    "Posiciones declaradas (programas)": ["programas_partidos"],
 }
 
 # Mapping between tracker table rows and source_id values.
@@ -79,6 +81,7 @@ TRACKER_SOURCE_HINTS = {
     "Banco de España (API series)": ["bde_series_api"],
     "Banco de Espana (API series)": ["bde_series_api"],
     "AEMET OpenData": ["aemet_opendata_series"],
+    "ESIOS/REE API": ["ree_esios_indicators"],
 }
 
 

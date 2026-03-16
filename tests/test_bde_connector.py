@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import gzip
 import json
 import tempfile
 import unittest
@@ -84,6 +85,62 @@ class TestBdeConnector(unittest.TestCase):
                 feed_url="file:///tmp/bde-run-snapshot.csv",
                 content_type="text/csv",
             )
+
+    def test_parser_accepts_fechas_valores_shape(self) -> None:
+        payload = json.dumps(
+            [
+                {
+                    "serie": "D_1NBAF472",
+                    "descripcion": "Euribor a un año",
+                    "codFrecuencia": "M",
+                    "simbolo": "%",
+                    "fechas": [
+                        "2026-01-01T09:15:00Z",
+                        "2025-12-01T09:15:00Z",
+                        "2025-11-01T09:15:00Z",
+                    ],
+                    "valores": [2.245, "2,267", None],
+                }
+            ],
+            ensure_ascii=True,
+            sort_keys=True,
+        ).encode("utf-8")
+        records = parse_bde_records(
+            payload,
+            feed_url="https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAF472&rango=30M",
+            content_type="application/json",
+        )
+        self.assertEqual(len(records), 1)
+        first = records[0]
+        self.assertEqual(first["series_code"], "D_1NBAF472")
+        self.assertGreaterEqual(int(first.get("points_count") or 0), 2)
+        periods = [str(p.get("period") or "") for p in first.get("points", [])]
+        self.assertIn("2026-01-01T09:15:00Z", periods)
+
+    def test_parser_accepts_gzip_json_payload(self) -> None:
+        payload = gzip.compress(
+            json.dumps(
+                [
+                    {
+                        "serie": "D_1NBAF472",
+                        "descripcion": "Euribor a un año",
+                        "codFrecuencia": "M",
+                        "simbolo": "%",
+                        "fechas": ["2026-01-01T09:15:00Z"],
+                        "valores": [2.245],
+                    }
+                ],
+                ensure_ascii=True,
+                sort_keys=True,
+            ).encode("utf-8")
+        )
+        records = parse_bde_records(
+            payload,
+            feed_url="https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAF472&rango=30M",
+            content_type="application/json",
+        )
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["series_code"], "D_1NBAF472")
 
     def test_source_records_ingest_is_idempotent(self) -> None:
         connector = BdeSeriesApiConnector()

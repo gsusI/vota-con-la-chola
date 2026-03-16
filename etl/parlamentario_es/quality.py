@@ -35,6 +35,9 @@ DEFAULT_DECLARED_QUALITY_THRESHOLDS: dict[str, float] = {
     "declared_positions_coverage_pct": 0.95,
 }
 
+INITIATIVE_ACTIONABLE_SCOPE_GLOBAL = "global"
+INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES = "linked_to_votes"
+
 
 def _normalize_source_ids(source_ids: Iterable[str]) -> tuple[str, ...]:
     normalized = sorted({str(s).strip() for s in source_ids if str(s).strip()})
@@ -115,6 +118,15 @@ def _empty_initiative_kpis() -> dict[str, Any]:
         "missing_doc_links_actionable": 0,
         "effective_downloaded_doc_links_pct": 0.0,
         "actionable_doc_links_closed_pct": 1.0,
+        "total_doc_links_linked_to_votes": 0,
+        "downloaded_doc_links_linked_to_votes": 0,
+        "missing_doc_links_linked_to_votes": 0,
+        "missing_doc_links_likely_not_expected_linked_to_votes": 0,
+        "missing_doc_links_actionable_linked_to_votes": 0,
+        "effective_downloaded_doc_links_pct_linked_to_votes": 0.0,
+        "actionable_doc_links_closed_pct_linked_to_votes": 1.0,
+        "missing_doc_links_actionable_selected": 0,
+        "actionable_doc_links_closed_pct_selected": 1.0,
         "global_enmiendas_vetos_analysis": {},
         "initiatives_with_title_pct": 0.0,
         "initiatives_with_expediente_pct": 0.0,
@@ -461,7 +473,20 @@ def compute_vote_quality_kpis(
 def compute_initiative_quality_kpis(
     conn: sqlite3.Connection,
     source_ids: Iterable[str] = ("congreso_iniciativas", "senado_iniciativas"),
+    *,
+    actionable_scope: str = INITIATIVE_ACTIONABLE_SCOPE_GLOBAL,
 ) -> dict[str, Any]:
+    actionable_scope_token = str(actionable_scope or "").strip().lower()
+    allowed_actionable_scopes = {
+        INITIATIVE_ACTIONABLE_SCOPE_GLOBAL,
+        INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES,
+    }
+    if actionable_scope_token not in allowed_actionable_scopes:
+        raise ValueError(
+            "actionable_scope invalido: "
+            f"{actionable_scope} (esperados: {sorted(allowed_actionable_scopes)})"
+        )
+
     source_ids_tuple = _normalize_source_ids(source_ids)
     placeholders = ",".join("?" for _ in source_ids_tuple)
 
@@ -508,11 +533,13 @@ def compute_initiative_quality_kpis(
 
     doc_rows: list[sqlite3.Row] = []
     doc_link_rows: list[sqlite3.Row] = []
+    doc_link_linked_rows: list[sqlite3.Row] = []
     extraction_rows: list[sqlite3.Row] = []
     missing_status_rows: list[sqlite3.Row] = []
     linked_doc_rows: list[sqlite3.Row] = []
     senado_missing_global_rows: list[sqlite3.Row] = []
     senado_alt_downloaded_initiatives: set[str] = set()
+    linked_initiatives: set[str] = set()
     if _table_exists(conn, "parl_initiative_documents"):
         downloaded_ref = "d.source_record_pk IS NOT NULL"
         td_join = ""
@@ -555,6 +582,27 @@ def compute_initiative_quality_kpis(
             JOIN parl_initiative_documents d ON d.initiative_id = i.initiative_id
             {td_join}
             {df_join}
+            WHERE i.source_id IN ({placeholders})
+            GROUP BY i.source_id
+            ORDER BY i.source_id
+            """,
+            source_ids_tuple,
+        ).fetchall()
+        doc_link_linked_rows = conn.execute(
+            f"""
+            WITH linked_initiatives AS (
+              SELECT DISTINCT initiative_id
+              FROM parl_vote_event_initiatives
+            )
+            SELECT
+              i.source_id,
+              COUNT(*) AS total_doc_links_linked_to_votes,
+              SUM(CASE WHEN {downloaded_ref} THEN 1 ELSE 0 END) AS downloaded_doc_links_linked_to_votes,
+              SUM(CASE WHEN {downloaded_ref} THEN 0 ELSE 1 END) AS missing_doc_links_linked_to_votes
+            FROM parl_initiatives i
+            JOIN linked_initiatives li ON li.initiative_id = i.initiative_id
+            JOIN parl_initiative_documents d ON d.initiative_id = i.initiative_id
+            {td_join}
             WHERE i.source_id IN ({placeholders})
             GROUP BY i.source_id
             ORDER BY i.source_id
@@ -629,6 +677,17 @@ def compute_initiative_quality_kpis(
             ).fetchall()
 
         if has_text_documents and "senado_iniciativas" in source_ids_tuple:
+            linked_initiative_rows = conn.execute(
+                """
+                SELECT DISTINCT initiative_id
+                FROM parl_vote_event_initiatives
+                """
+            ).fetchall()
+            for row in linked_initiative_rows:
+                iid = str(row["initiative_id"] or "").strip()
+                if iid:
+                    linked_initiatives.add(iid)
+
             senado_missing_global_rows = conn.execute(
                 """
                 SELECT
@@ -702,6 +761,18 @@ def compute_initiative_quality_kpis(
         data["downloaded_doc_links_missing_excerpt"] = int(
             row["downloaded_doc_links_missing_excerpt"] or 0
         )
+    for row in doc_link_linked_rows:
+        sid = str(row["source_id"])
+        data = by_source.setdefault(sid, _empty_initiative_kpis())
+        data["total_doc_links_linked_to_votes"] = int(
+            row["total_doc_links_linked_to_votes"] or 0
+        )
+        data["downloaded_doc_links_linked_to_votes"] = int(
+            row["downloaded_doc_links_linked_to_votes"] or 0
+        )
+        data["missing_doc_links_linked_to_votes"] = int(
+            row["missing_doc_links_linked_to_votes"] or 0
+        )
 
     for row in extraction_rows:
         sid = str(row["source_id"])
@@ -739,29 +810,57 @@ def compute_initiative_quality_kpis(
         sen_data = by_source["senado_iniciativas"]
         total_global_missing = 0
         redundant_global = 0
+        total_global_missing_linked = 0
+        redundant_global_linked = 0
         for row in senado_missing_global_rows:
             doc_url = str(row["doc_url"] or "")
             if not _is_senado_global_enmiendas_url(doc_url):
                 continue
             total_global_missing += 1
             iid = str(row["initiative_id"] or "").strip()
+            if iid and iid in linked_initiatives:
+                total_global_missing_linked += 1
             if iid and iid in senado_alt_downloaded_initiatives:
                 redundant_global += 1
+                if iid in linked_initiatives:
+                    redundant_global_linked += 1
 
         likely_not_expected = min(int(sen_data["missing_doc_links"]), int(redundant_global))
+        likely_not_expected_linked = min(
+            int(sen_data["missing_doc_links_linked_to_votes"]),
+            int(redundant_global_linked),
+        )
         sen_data["global_enmiendas_vetos_analysis"] = {
             "total_global_enmiendas_missing": int(total_global_missing),
             "likely_not_expected_redundant_global_url": int(redundant_global),
             "likely_not_expected_total": int(redundant_global),
             "actionable_missing_count": max(0, int(total_global_missing) - int(redundant_global)),
+            "total_global_enmiendas_missing_linked_to_votes": int(total_global_missing_linked),
+            "likely_not_expected_redundant_global_url_linked_to_votes": int(redundant_global_linked),
+            "likely_not_expected_total_linked_to_votes": int(redundant_global_linked),
+            "actionable_missing_count_linked_to_votes": max(
+                0,
+                int(total_global_missing_linked) - int(redundant_global_linked),
+            ),
             "classification_counts": {
                 "likely_not_expected_redundant_global_url": int(redundant_global),
+                "likely_not_expected_redundant_global_url_linked_to_votes": int(
+                    redundant_global_linked
+                ),
             },
         }
         sen_data["missing_doc_links_likely_not_expected"] = int(likely_not_expected)
         sen_data["missing_doc_links_actionable"] = max(
             0,
             int(sen_data["missing_doc_links"]) - int(likely_not_expected),
+        )
+        sen_data["missing_doc_links_likely_not_expected_linked_to_votes"] = int(
+            likely_not_expected_linked
+        )
+        sen_data["missing_doc_links_actionable_linked_to_votes"] = max(
+            0,
+            int(sen_data["missing_doc_links_linked_to_votes"])
+            - int(likely_not_expected_linked),
         )
 
     total_initiatives = 0
@@ -777,6 +876,11 @@ def compute_initiative_quality_kpis(
     total_missing_doc_links = 0
     total_missing_doc_links_likely_not_expected = 0
     total_missing_doc_links_actionable = 0
+    total_doc_links_linked_to_votes = 0
+    total_downloaded_doc_links_linked_to_votes = 0
+    total_missing_doc_links_linked_to_votes = 0
+    total_missing_doc_links_likely_not_expected_linked_to_votes = 0
+    total_missing_doc_links_actionable_linked_to_votes = 0
     total_doc_links_with_fetch_status = 0
     total_doc_links_missing_fetch_status = 0
     total_downloaded_doc_links_with_excerpt = 0
@@ -796,10 +900,29 @@ def compute_initiative_quality_kpis(
             0,
             int(data.get("missing_doc_links") or 0) - int(likely_not_expected),
         )
+        likely_not_expected_linked = int(
+            data.get("missing_doc_links_likely_not_expected_linked_to_votes") or 0
+        )
+        data["missing_doc_links_likely_not_expected_linked_to_votes"] = int(
+            likely_not_expected_linked
+        )
+        data["missing_doc_links_actionable_linked_to_votes"] = max(
+            0,
+            int(data.get("missing_doc_links_linked_to_votes") or 0)
+            - int(likely_not_expected_linked),
+        )
         effective_den = max(0, int(data["total_doc_links"]) - int(likely_not_expected))
         data["effective_downloaded_doc_links_pct"] = _ratio(
             int(data["downloaded_doc_links"]),
             effective_den,
+        )
+        effective_den_linked = max(
+            0,
+            int(data["total_doc_links_linked_to_votes"]) - int(likely_not_expected_linked),
+        )
+        data["effective_downloaded_doc_links_pct_linked_to_votes"] = _ratio(
+            int(data["downloaded_doc_links_linked_to_votes"]),
+            effective_den_linked,
         )
         total_doc_links_source = int(data["total_doc_links"])
         actionable_missing_source = int(data["missing_doc_links_actionable"])
@@ -810,6 +933,15 @@ def compute_initiative_quality_kpis(
             )
         else:
             data["actionable_doc_links_closed_pct"] = 1.0
+        total_doc_links_source_linked = int(data["total_doc_links_linked_to_votes"])
+        actionable_missing_source_linked = int(data["missing_doc_links_actionable_linked_to_votes"])
+        if total_doc_links_source_linked > 0:
+            data["actionable_doc_links_closed_pct_linked_to_votes"] = _ratio(
+                max(0, total_doc_links_source_linked - actionable_missing_source_linked),
+                total_doc_links_source_linked,
+            )
+        else:
+            data["actionable_doc_links_closed_pct_linked_to_votes"] = 1.0
 
         total_initiatives += total
         total_with_title += int(data["initiatives_with_title"])
@@ -826,6 +958,17 @@ def compute_initiative_quality_kpis(
             data.get("missing_doc_links_likely_not_expected") or 0
         )
         total_missing_doc_links_actionable += int(data.get("missing_doc_links_actionable") or 0)
+        total_doc_links_linked_to_votes += int(data["total_doc_links_linked_to_votes"])
+        total_downloaded_doc_links_linked_to_votes += int(
+            data["downloaded_doc_links_linked_to_votes"]
+        )
+        total_missing_doc_links_linked_to_votes += int(data["missing_doc_links_linked_to_votes"])
+        total_missing_doc_links_likely_not_expected_linked_to_votes += int(
+            data.get("missing_doc_links_likely_not_expected_linked_to_votes") or 0
+        )
+        total_missing_doc_links_actionable_linked_to_votes += int(
+            data.get("missing_doc_links_actionable_linked_to_votes") or 0
+        )
         total_doc_links_with_fetch_status += int(data["doc_links_with_fetch_status"])
         total_doc_links_missing_fetch_status += int(data["doc_links_missing_fetch_status"])
         total_downloaded_doc_links_with_excerpt += int(data["downloaded_doc_links_with_excerpt"])
@@ -890,14 +1033,60 @@ def compute_initiative_quality_kpis(
             list(data.get("missing_doc_links_status_buckets") or []),
             key=lambda x: (-int(x.get("count") or 0), -int(x.get("status") or 0)),
         )
+        if actionable_scope_token == INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES:
+            data["missing_doc_links_actionable_selected"] = int(
+                data["missing_doc_links_actionable_linked_to_votes"]
+            )
+            data["actionable_doc_links_closed_pct_selected"] = float(
+                data["actionable_doc_links_closed_pct_linked_to_votes"]
+            )
+        else:
+            data["missing_doc_links_actionable_selected"] = int(data["missing_doc_links_actionable"])
+            data["actionable_doc_links_closed_pct_selected"] = float(
+                data["actionable_doc_links_closed_pct"]
+            )
 
     overall_buckets = [
         {"status": int(status), "count": int(count)}
         for status, count in overall_missing_status_buckets.items()
     ]
     overall_buckets.sort(key=lambda x: (-int(x["count"]), -int(x["status"])))
+    actionable_metric = (
+        "actionable_doc_links_closed_pct_linked_to_votes"
+        if actionable_scope_token == INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES
+        else "actionable_doc_links_closed_pct"
+    )
+    missing_actionable_selected = (
+        int(total_missing_doc_links_actionable_linked_to_votes)
+        if actionable_scope_token == INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES
+        else int(total_missing_doc_links_actionable)
+    )
+    if actionable_scope_token == INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES:
+        actionable_closed_selected = (
+            _ratio(
+                max(
+                    0,
+                    total_doc_links_linked_to_votes
+                    - total_missing_doc_links_actionable_linked_to_votes,
+                ),
+                total_doc_links_linked_to_votes,
+            )
+            if total_doc_links_linked_to_votes > 0
+            else 1.0
+        )
+    else:
+        actionable_closed_selected = (
+            _ratio(
+                max(0, total_doc_links - total_missing_doc_links_actionable),
+                total_doc_links,
+            )
+            if total_doc_links > 0
+            else 1.0
+        )
 
     return {
+        "actionable_scope": actionable_scope_token,
+        "actionable_metric": actionable_metric,
         "source_ids": list(source_ids_tuple),
         "initiatives_total": total_initiatives,
         "initiatives_with_title": total_with_title,
@@ -912,6 +1101,12 @@ def compute_initiative_quality_kpis(
         "missing_doc_links": total_missing_doc_links,
         "missing_doc_links_likely_not_expected": total_missing_doc_links_likely_not_expected,
         "missing_doc_links_actionable": total_missing_doc_links_actionable,
+        "total_doc_links_linked_to_votes": total_doc_links_linked_to_votes,
+        "downloaded_doc_links_linked_to_votes": total_downloaded_doc_links_linked_to_votes,
+        "missing_doc_links_linked_to_votes": total_missing_doc_links_linked_to_votes,
+        "missing_doc_links_likely_not_expected_linked_to_votes": total_missing_doc_links_likely_not_expected_linked_to_votes,
+        "missing_doc_links_actionable_linked_to_votes": total_missing_doc_links_actionable_linked_to_votes,
+        "missing_doc_links_actionable_selected": missing_actionable_selected,
         "doc_links_with_fetch_status": total_doc_links_with_fetch_status,
         "doc_links_missing_fetch_status": total_doc_links_missing_fetch_status,
         "downloaded_doc_links_with_excerpt": total_downloaded_doc_links_with_excerpt,
@@ -942,6 +1137,27 @@ def compute_initiative_quality_kpis(
             if total_doc_links > 0
             else 1.0
         ),
+        "effective_downloaded_doc_links_pct_linked_to_votes": _ratio(
+            total_downloaded_doc_links_linked_to_votes,
+            max(
+                0,
+                total_doc_links_linked_to_votes
+                - total_missing_doc_links_likely_not_expected_linked_to_votes,
+            ),
+        ),
+        "actionable_doc_links_closed_pct_linked_to_votes": (
+            _ratio(
+                max(
+                    0,
+                    total_doc_links_linked_to_votes
+                    - total_missing_doc_links_actionable_linked_to_votes,
+                ),
+                total_doc_links_linked_to_votes,
+            )
+            if total_doc_links_linked_to_votes > 0
+            else 1.0
+        ),
+        "actionable_doc_links_closed_pct_selected": actionable_closed_selected,
         "fetch_status_coverage_pct": _ratio(total_doc_links_with_fetch_status, total_doc_links),
         "excerpt_coverage_pct": _ratio(
             total_downloaded_doc_links_with_excerpt, total_downloaded_doc_links
@@ -1237,8 +1453,18 @@ def evaluate_vote_quality_gate(
 def evaluate_initiative_quality_gate(
     kpis: Mapping[str, Any],
     thresholds: Mapping[str, float] | None = None,
+    *,
+    actionable_metric: str = "actionable_doc_links_closed_pct",
 ) -> dict[str, Any]:
     resolved_thresholds = dict(DEFAULT_INITIATIVE_QUALITY_THRESHOLDS)
+    actionable_metric_token = str(actionable_metric or "").strip()
+    if not actionable_metric_token:
+        actionable_metric_token = "actionable_doc_links_closed_pct"
+    if actionable_metric_token != "actionable_doc_links_closed_pct":
+        threshold = float(
+            resolved_thresholds.pop("actionable_doc_links_closed_pct", 1.0)
+        )
+        resolved_thresholds[actionable_metric_token] = threshold
     if thresholds:
         for metric, threshold in thresholds.items():
             resolved_thresholds[str(metric)] = float(threshold)
@@ -1261,6 +1487,7 @@ def evaluate_initiative_quality_gate(
     return {
         "passed": len(failures) == 0,
         "failures": failures,
+        "actionable_metric": actionable_metric_token,
         "thresholds": {metric: float(resolved_thresholds[metric]) for metric in ordered_metrics},
     }
 
@@ -1300,6 +1527,8 @@ __all__ = [
     "DEFAULT_VOTE_QUALITY_THRESHOLDS",
     "DEFAULT_INITIATIVE_QUALITY_THRESHOLDS",
     "DEFAULT_DECLARED_QUALITY_THRESHOLDS",
+    "INITIATIVE_ACTIONABLE_SCOPE_GLOBAL",
+    "INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES",
     "compute_vote_quality_kpis",
     "evaluate_vote_quality_gate",
     "compute_initiative_quality_kpis",

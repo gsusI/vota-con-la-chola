@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import os
 import sqlite3
@@ -33,6 +34,8 @@ from .review_queue import (
 )
 from etl.politicos_es.util import normalize_ws
 from .quality import (
+    INITIATIVE_ACTIONABLE_SCOPE_GLOBAL,
+    INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES,
     compute_declared_quality_kpis,
     compute_initiative_quality_kpis,
     compute_vote_quality_kpis,
@@ -133,6 +136,19 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         "--initiative-source-ids",
         default="congreso_iniciativas,senado_iniciativas",
         help="Lista CSV de source_id de iniciativas para incluir",
+    )
+    p_quality.add_argument(
+        "--initiative-actionable-scope",
+        default=INITIATIVE_ACTIONABLE_SCOPE_GLOBAL,
+        choices=(
+            INITIATIVE_ACTIONABLE_SCOPE_GLOBAL,
+            INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES,
+        ),
+        help=(
+            "Scope del KPI/gate de cola accionable de iniciativas: "
+            "'global' usa todos los doc_links; "
+            "'linked_to_votes' restringe a iniciativas linkeadas a votaciones."
+        ),
     )
     p_quality.add_argument(
         "--include-declared",
@@ -369,9 +385,15 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         "--archive-fallback",
         action="store_true",
         help=(
-            "Si una URL falla con 404 (o ya tenia 404 historico), intenta obtener snapshot "
+            "Si una URL falla con un status incluido en --archive-fallback-http-statuses "
+            "(o ya tenia ese status historico), intenta obtener snapshot "
             "desde Wayback (archive.org) y guarda el documento bajo la URL original."
         ),
+    )
+    p_init_docs.add_argument(
+        "--archive-fallback-http-statuses",
+        default="404",
+        help="CSV de status HTTP que disparan fallback a archive (default: 404)",
     )
     p_init_docs.add_argument(
         "--archive-timeout",
@@ -393,6 +415,23 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         "--retry-forbidden",
         action="store_true",
         help="Reintenta URLs con status historico 403/404 (por defecto se saltan para evitar loops)",
+    )
+    p_init_docs.add_argument(
+        "--retry-http-statuses",
+        default="",
+        help=(
+            "CSV opcional de status HTTP para filtrar reintentos a esos códigos "
+            "(ej. 404). Vacio = sin filtro adicional."
+        ),
+    )
+    p_init_docs.add_argument(
+        "--doc-urls-file",
+        default="",
+        help=(
+            "Archivo TXT/CSV/JSON con cohorte fija de doc_url para retry reproducible. "
+            "Si incluye last_http_status/status, ese snapshot se usa para filtrar "
+            "--retry-http-statuses sin drift por cambios en document_fetches."
+        ),
     )
     p_init_docs.add_argument(
         "--skip-link-backfill",
@@ -421,6 +460,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         "--skip-review-queue",
         action="store_true",
         help="No escribir/actualizar topic_evidence_reviews en esta corrida",
+    )
+    p_stance.add_argument(
+        "--reconcile-no-signal",
+        action="store_true",
+        help="Degradar a unclear stances auto-asignados que ya no tengan señal explícita",
     )
     p_stance.add_argument("--dry-run", action="store_true", help="Simula (no escribe) y devuelve contadores")
 
@@ -574,6 +618,200 @@ def _parse_source_ids(csv_value: str) -> tuple[str, ...]:
         seen.add(v)
         out.append(v)
     return tuple(out)
+
+
+def _parse_http_status_csv(
+    csv_value: str,
+    *,
+    for_command: str,
+    arg_name: str = "--archive-fallback-http-statuses",
+    allow_status_zero: bool = False,
+) -> tuple[int, ...]:
+    vals = [x.strip() for x in str(csv_value).split(",")]
+    vals = [x for x in vals if x]
+    out: list[int] = []
+    seen: set[int] = set()
+    for token in vals:
+        try:
+            status = int(token)
+        except ValueError as exc:
+            raise SystemExit(f"{for_command}: status HTTP invalido '{token}' en {arg_name}") from exc
+        if status == 0:
+            if not allow_status_zero:
+                raise SystemExit(
+                    f"{for_command}: status HTTP fuera de rango '{status}' en {arg_name} (esperado 100..599)"
+                )
+        elif status < 100 or status > 599:
+            raise SystemExit(
+                f"{for_command}: status HTTP fuera de rango '{status}' en {arg_name} (esperado 100..599)"
+            )
+        if status in seen:
+            continue
+        seen.add(status)
+        out.append(status)
+    if not out:
+        raise SystemExit(f"{for_command}: {arg_name} vacio")
+    return tuple(out)
+
+
+def _parse_http_status_maybe(raw: Any) -> int | None:
+    token = normalize_ws(str(raw or ""))
+    if not token:
+        return None
+    try:
+        status = int(token)
+    except ValueError:
+        return None
+    if status == 0:
+        return 0
+    if status < 100 or status > 599:
+        return None
+    return status
+
+
+def _parse_doc_urls_file(
+    path_value: str,
+    *,
+    for_command: str,
+) -> tuple[tuple[str, ...], dict[str, int], tuple[tuple[str, str, str], ...]]:
+    token = normalize_ws(path_value)
+    if not token:
+        return tuple(), {}, tuple()
+    path = Path(token)
+    if not path.exists():
+        raise SystemExit(f"{for_command}: --doc-urls-file no existe: {path}")
+    if not path.is_file():
+        raise SystemExit(f"{for_command}: --doc-urls-file debe ser un fichero: {path}")
+
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError as exc:
+        raise SystemExit(f"{for_command}: no se pudo leer --doc-urls-file {path}: {exc}") from exc
+
+    urls: list[str] = []
+    seen: set[str] = set()
+    status_by_url: dict[str, int] = {}
+    entry_keys: list[tuple[str, str, str]] = []
+    entry_seen: set[tuple[str, str, str]] = set()
+
+    def add_row(
+        raw_url: Any,
+        raw_status: Any = None,
+        *,
+        raw_initiative_id: Any = None,
+        raw_doc_kind: Any = None,
+    ) -> None:
+        url = normalize_ws(str(raw_url or ""))
+        if not url or not url.startswith("http"):
+            return
+        if url not in seen:
+            seen.add(url)
+            urls.append(url)
+        status = _parse_http_status_maybe(raw_status)
+        if status is not None:
+            status_by_url[url] = status
+        initiative_id = normalize_ws(str(raw_initiative_id or ""))
+        doc_kind = normalize_ws(str(raw_doc_kind or "")).lower()
+        if initiative_id and doc_kind:
+            key = (initiative_id, doc_kind, url)
+            if key not in entry_seen:
+                entry_seen.add(key)
+                entry_keys.append(key)
+
+    suffix = path.suffix.lower()
+    parsed = False
+    if suffix == ".json":
+        try:
+            obj = json.loads(text)
+        except Exception as exc:  # noqa: BLE001
+            raise SystemExit(f"{for_command}: JSON invalido en --doc-urls-file {path}: {exc}") from exc
+        if isinstance(obj, list):
+            for row in obj:
+                if isinstance(row, dict):
+                    add_row(
+                        row.get("doc_url") or row.get("url"),
+                        row.get("last_http_status") if "last_http_status" in row else row.get("status"),
+                        raw_initiative_id=row.get("initiative_id"),
+                        raw_doc_kind=row.get("doc_kind"),
+                    )
+                else:
+                    add_row(row, None)
+            parsed = True
+        elif isinstance(obj, dict):
+            rows = obj.get("rows")
+            if not isinstance(rows, list):
+                rows = obj.get("packet_rows")
+            if isinstance(rows, list):
+                for row in rows:
+                    if isinstance(row, dict):
+                        add_row(
+                            row.get("doc_url") or row.get("url"),
+                            row.get("last_http_status") if "last_http_status" in row else row.get("status"),
+                            raw_initiative_id=row.get("initiative_id"),
+                            raw_doc_kind=row.get("doc_kind"),
+                        )
+                    else:
+                        add_row(row, None)
+                parsed = True
+            doc_urls = obj.get("doc_urls")
+            if isinstance(doc_urls, list):
+                for row in doc_urls:
+                    if isinstance(row, dict):
+                        add_row(
+                            row.get("doc_url") or row.get("url"),
+                            row.get("last_http_status") if "last_http_status" in row else row.get("status"),
+                            raw_initiative_id=row.get("initiative_id"),
+                            raw_doc_kind=row.get("doc_kind"),
+                        )
+                    else:
+                        add_row(row, None)
+                parsed = True
+        if not parsed:
+            raise SystemExit(
+                f"{for_command}: --doc-urls-file JSON debe ser lista o dict con rows/packet_rows/doc_urls: {path}"
+            )
+    else:
+        lines = [ln for ln in text.splitlines() if normalize_ws(ln)]
+        header = normalize_ws(lines[0] if lines else "")
+        has_delim = ("," in header) or ("\t" in header) or (";" in header)
+        has_header = has_delim and ("doc_url" in header.lower() or "url" in header.lower())
+        if has_header:
+            delimiter = ","
+            if "\t" in header:
+                delimiter = "\t"
+            elif ";" in header and "," not in header:
+                delimiter = ";"
+            reader = csv.DictReader(lines, delimiter=delimiter)
+            for row in reader:
+                if not isinstance(row, dict):
+                    continue
+                add_row(
+                    row.get("doc_url") or row.get("url"),
+                    row.get("last_http_status") or row.get("status") or row.get("http_status"),
+                    raw_initiative_id=row.get("initiative_id"),
+                    raw_doc_kind=row.get("doc_kind"),
+                )
+            parsed = True
+        else:
+            for raw_line in lines:
+                line = normalize_ws(raw_line)
+                if not line or line.startswith("#"):
+                    continue
+                if "," in line:
+                    left, right = line.split(",", 1)
+                    if normalize_ws(left).startswith("http"):
+                        add_row(left, right)
+                        continue
+                if " " in line and line.startswith("http"):
+                    left, right = line.split(" ", 1)
+                    add_row(left, right)
+                    continue
+                add_row(line, None)
+            parsed = True
+
+    if not parsed or not urls:
+        raise SystemExit(f"{for_command}: --doc-urls-file sin doc_url validas: {path}")
+    return tuple(urls), status_by_url, tuple(entry_keys)
 
 
 def _cookie_header_from_playwright_cookies(path: Path, *, domain_contains: str) -> str:
@@ -806,11 +1044,25 @@ def _initiative_quality_report(
     conn: sqlite3.Connection,
     *,
     source_ids: tuple[str, ...],
+    actionable_scope: str = INITIATIVE_ACTIONABLE_SCOPE_GLOBAL,
 ) -> dict[str, Any]:
-    kpis = compute_initiative_quality_kpis(conn, source_ids=source_ids)
-    gate = evaluate_initiative_quality_gate(kpis)
+    kpis = compute_initiative_quality_kpis(
+        conn,
+        source_ids=source_ids,
+        actionable_scope=actionable_scope,
+    )
+    actionable_metric = (
+        "actionable_doc_links_closed_pct_linked_to_votes"
+        if str(actionable_scope or "").strip() == INITIATIVE_ACTIONABLE_SCOPE_LINKED_TO_VOTES
+        else "actionable_doc_links_closed_pct"
+    )
+    gate = evaluate_initiative_quality_gate(
+        kpis,
+        actionable_metric=actionable_metric,
+    )
     return {
         "source_ids": list(source_ids),
+        "actionable_scope": str(actionable_scope or INITIATIVE_ACTIONABLE_SCOPE_GLOBAL),
         "kpis": kpis,
         "gate": gate,
     }
@@ -952,7 +1204,9 @@ def main(argv: list[str] | None = None) -> int:
                 result = _quality_report(conn, source_ids=source_ids)
             if include_initiatives:
                 result["initiatives"] = _initiative_quality_report(
-                    conn, source_ids=initiative_source_ids
+                    conn,
+                    source_ids=initiative_source_ids,
+                    actionable_scope=str(args.initiative_actionable_scope or INITIATIVE_ACTIONABLE_SCOPE_GLOBAL),
                 )
             if include_declared:
                 result["declared"] = _declared_quality_report(
@@ -1356,6 +1610,24 @@ def main(argv: list[str] | None = None) -> int:
             _parse_source_ids(str(args.initiative_source_ids)),
             for_command="backfill-initiative-documents",
         )
+        archive_fallback_http_statuses = _parse_http_status_csv(
+            str(getattr(args, "archive_fallback_http_statuses", "404")),
+            for_command="backfill-initiative-documents",
+            arg_name="--archive-fallback-http-statuses",
+        )
+        retry_http_statuses: tuple[int, ...] = tuple()
+        retry_http_statuses_csv = normalize_ws(str(getattr(args, "retry_http_statuses", "") or ""))
+        if retry_http_statuses_csv:
+            retry_http_statuses = _parse_http_status_csv(
+                retry_http_statuses_csv,
+                for_command="backfill-initiative-documents",
+                arg_name="--retry-http-statuses",
+                allow_status_zero=True,
+            )
+        selected_doc_urls, selected_doc_status_by_url, selected_doc_entry_keys = _parse_doc_urls_file(
+            str(getattr(args, "doc_urls_file", "") or ""),
+            for_command="backfill-initiative-documents",
+        )
         conn = open_db(Path(args.db))
         try:
             apply_schema(conn, DEFAULT_SCHEMA)
@@ -1398,9 +1670,13 @@ def main(argv: list[str] | None = None) -> int:
                         snapshot_date=str(args.snapshot_date) if args.snapshot_date else None,
                         limit_initiatives=int(args.limit_initiatives),
                         max_docs_per_initiative=int(args.max_docs_per_initiative),
+                        selected_doc_urls=selected_doc_urls,
+                        selected_doc_status_by_url=selected_doc_status_by_url,
+                        selected_doc_entry_keys=selected_doc_entry_keys,
                         only_linked_to_votes=not bool(args.include_unlinked),
                         only_missing=not bool(args.refetch_existing),
                         retry_forbidden=bool(args.retry_forbidden),
+                        retry_http_statuses=retry_http_statuses,
                         sleep_seconds=float(args.sleep_seconds),
                         sleep_jitter_seconds=float(args.sleep_jitter_seconds),
                         cookie=cookie or None,
@@ -1408,6 +1684,7 @@ def main(argv: list[str] | None = None) -> int:
                         playwright_channel=str(args.playwright_channel or "chrome"),
                         playwright_headless=bool(args.playwright_headless),
                         archive_fallback=bool(args.archive_fallback),
+                        archive_fallback_http_statuses=archive_fallback_http_statuses,
                         archive_timeout=int(args.archive_timeout),
                         strict_network=bool(args.strict_network),
                         dry_run=bool(args.dry_run),
@@ -1438,9 +1715,13 @@ def main(argv: list[str] | None = None) -> int:
                     snapshot_date=str(args.snapshot_date) if args.snapshot_date else None,
                     limit_initiatives=int(args.limit_initiatives),
                     max_docs_per_initiative=int(args.max_docs_per_initiative),
+                    selected_doc_urls=selected_doc_urls,
+                    selected_doc_status_by_url=selected_doc_status_by_url,
+                    selected_doc_entry_keys=selected_doc_entry_keys,
                     only_linked_to_votes=not bool(args.include_unlinked),
                     only_missing=not bool(args.refetch_existing),
                     retry_forbidden=bool(args.retry_forbidden),
+                    retry_http_statuses=retry_http_statuses,
                     sleep_seconds=float(args.sleep_seconds),
                     sleep_jitter_seconds=float(args.sleep_jitter_seconds),
                     cookie=cookie or None,
@@ -1448,6 +1729,7 @@ def main(argv: list[str] | None = None) -> int:
                     playwright_channel=str(args.playwright_channel or "chrome"),
                     playwright_headless=bool(args.playwright_headless),
                     archive_fallback=bool(args.archive_fallback),
+                    archive_fallback_http_statuses=archive_fallback_http_statuses,
                     archive_timeout=int(args.archive_timeout),
                     strict_network=bool(args.strict_network),
                     dry_run=bool(args.dry_run),
@@ -1470,6 +1752,7 @@ def main(argv: list[str] | None = None) -> int:
                 limit=int(args.limit),
                 min_auto_confidence=float(args.min_auto_confidence),
                 enable_review_queue=not bool(args.skip_review_queue),
+                reconcile_no_signal=bool(args.reconcile_no_signal),
                 dry_run=bool(args.dry_run),
             )
         finally:

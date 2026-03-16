@@ -177,6 +177,27 @@ class TestParlInitiativeQuality(unittest.TestCase):
         self.assertFalse(bool(gate["passed"]))
         self.assertEqual([f["metric"] for f in gate["failures"]], ["actionable_doc_links_closed_pct"])
 
+    def test_evaluate_initiative_gate_supports_linked_actionable_metric(self) -> None:
+        kpis = {
+            "initiatives_with_title_pct": 1.0,
+            "initiatives_with_expediente_pct": 1.0,
+            "initiatives_with_legislature_pct": 1.0,
+            "initiatives_linked_to_votes_pct": 1.0,
+            "actionable_doc_links_closed_pct": 0.10,
+            "actionable_doc_links_closed_pct_linked_to_votes": 1.0,
+            "extraction_coverage_pct": 1.0,
+            "extraction_review_closed_pct": 1.0,
+        }
+        gate = evaluate_initiative_quality_gate(
+            kpis,
+            actionable_metric="actionable_doc_links_closed_pct_linked_to_votes",
+        )
+        self.assertTrue(bool(gate["passed"]))
+        self.assertEqual(
+            str(gate.get("actionable_metric") or ""),
+            "actionable_doc_links_closed_pct_linked_to_votes",
+        )
+
     def test_compute_initiative_kpis_include_doc_link_fetch_excerpt_metrics(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "parl-init-quality.db"
@@ -512,6 +533,8 @@ class TestParlInitiativeQuality(unittest.TestCase):
                 )
 
                 # Overall doc-link metrics.
+                self.assertEqual(str(kpis["actionable_scope"]), "global")
+                self.assertEqual(str(kpis["actionable_metric"]), "actionable_doc_links_closed_pct")
                 self.assertEqual(int(kpis["total_doc_links"]), 5)
                 self.assertEqual(int(kpis["downloaded_doc_links"]), 2)
                 self.assertEqual(int(kpis["missing_doc_links"]), 3)
@@ -520,6 +543,16 @@ class TestParlInitiativeQuality(unittest.TestCase):
                 self.assertAlmostEqual(float(kpis["downloaded_doc_links_pct"]), 0.4)
                 self.assertAlmostEqual(float(kpis["effective_downloaded_doc_links_pct"]), 0.4)
                 self.assertAlmostEqual(float(kpis["actionable_doc_links_closed_pct"]), 0.4)
+                self.assertEqual(int(kpis["total_doc_links_linked_to_votes"]), 5)
+                self.assertEqual(int(kpis["downloaded_doc_links_linked_to_votes"]), 2)
+                self.assertEqual(int(kpis["missing_doc_links_linked_to_votes"]), 3)
+                self.assertEqual(int(kpis["missing_doc_links_actionable_linked_to_votes"]), 3)
+                self.assertAlmostEqual(
+                    float(kpis["actionable_doc_links_closed_pct_linked_to_votes"]),
+                    0.4,
+                )
+                self.assertEqual(int(kpis["missing_doc_links_actionable_selected"]), 3)
+                self.assertAlmostEqual(float(kpis["actionable_doc_links_closed_pct_selected"]), 0.4)
 
                 self.assertEqual(int(kpis["doc_links_with_fetch_status"]), 4)
                 self.assertEqual(int(kpis["doc_links_missing_fetch_status"]), 1)
@@ -556,6 +589,12 @@ class TestParlInitiativeQuality(unittest.TestCase):
                 self.assertAlmostEqual(float(cong["downloaded_doc_links_pct"]), 0.5)
                 self.assertAlmostEqual(float(cong["effective_downloaded_doc_links_pct"]), 0.5)
                 self.assertAlmostEqual(float(cong["actionable_doc_links_closed_pct"]), 0.5)
+                self.assertEqual(int(cong["total_doc_links_linked_to_votes"]), 2)
+                self.assertEqual(int(cong["missing_doc_links_actionable_linked_to_votes"]), 1)
+                self.assertAlmostEqual(
+                    float(cong["actionable_doc_links_closed_pct_linked_to_votes"]),
+                    0.5,
+                )
                 self.assertEqual(int(cong["doc_links_with_fetch_status"]), 2)
                 self.assertEqual(int(cong["doc_links_missing_fetch_status"]), 0)
                 self.assertAlmostEqual(float(cong["fetch_status_coverage_pct"]), 1.0)
@@ -585,6 +624,12 @@ class TestParlInitiativeQuality(unittest.TestCase):
                 self.assertAlmostEqual(float(sen["downloaded_doc_links_pct"]), 1.0 / 3.0)
                 self.assertAlmostEqual(float(sen["effective_downloaded_doc_links_pct"]), 1.0 / 3.0)
                 self.assertAlmostEqual(float(sen["actionable_doc_links_closed_pct"]), 1.0 / 3.0)
+                self.assertEqual(int(sen["total_doc_links_linked_to_votes"]), 3)
+                self.assertEqual(int(sen["missing_doc_links_actionable_linked_to_votes"]), 2)
+                self.assertAlmostEqual(
+                    float(sen["actionable_doc_links_closed_pct_linked_to_votes"]),
+                    1.0 / 3.0,
+                )
                 self.assertEqual(int(sen["doc_links_with_fetch_status"]), 2)
                 self.assertEqual(int(sen["doc_links_missing_fetch_status"]), 1)
                 self.assertAlmostEqual(float(sen["fetch_status_coverage_pct"]), 2.0 / 3.0)
@@ -611,8 +656,13 @@ class TestParlInitiativeQuality(unittest.TestCase):
                         "likely_not_expected_redundant_global_url": 0,
                         "likely_not_expected_total": 0,
                         "actionable_missing_count": 0,
+                        "total_global_enmiendas_missing_linked_to_votes": 0,
+                        "likely_not_expected_redundant_global_url_linked_to_votes": 0,
+                        "likely_not_expected_total_linked_to_votes": 0,
+                        "actionable_missing_count_linked_to_votes": 0,
                         "classification_counts": {
                             "likely_not_expected_redundant_global_url": 0,
+                            "likely_not_expected_redundant_global_url_linked_to_votes": 0,
                         },
                     },
                 )
@@ -756,12 +806,16 @@ class TestParlInitiativeQuality(unittest.TestCase):
                 self.assertEqual(int(kpis["missing_doc_links_actionable"]), 0)
                 self.assertAlmostEqual(float(kpis["effective_downloaded_doc_links_pct"]), 1.0)
                 self.assertAlmostEqual(float(kpis["actionable_doc_links_closed_pct"]), 1.0)
+                self.assertEqual(int(kpis["missing_doc_links_likely_not_expected_linked_to_votes"]), 0)
+                self.assertEqual(int(kpis["missing_doc_links_actionable_linked_to_votes"]), 0)
 
                 sen = kpis["by_source"]["senado_iniciativas"]
                 self.assertEqual(int(sen["missing_doc_links_likely_not_expected"]), 1)
                 self.assertEqual(int(sen["missing_doc_links_actionable"]), 0)
                 self.assertAlmostEqual(float(sen["effective_downloaded_doc_links_pct"]), 1.0)
                 self.assertAlmostEqual(float(sen["actionable_doc_links_closed_pct"]), 1.0)
+                self.assertEqual(int(sen["missing_doc_links_likely_not_expected_linked_to_votes"]), 0)
+                self.assertEqual(int(sen["missing_doc_links_actionable_linked_to_votes"]), 0)
                 self.assertEqual(
                     sen["global_enmiendas_vetos_analysis"],
                     {
@@ -769,10 +823,181 @@ class TestParlInitiativeQuality(unittest.TestCase):
                         "likely_not_expected_redundant_global_url": 1,
                         "likely_not_expected_total": 1,
                         "actionable_missing_count": 0,
+                        "total_global_enmiendas_missing_linked_to_votes": 0,
+                        "likely_not_expected_redundant_global_url_linked_to_votes": 0,
+                        "likely_not_expected_total_linked_to_votes": 0,
+                        "actionable_missing_count_linked_to_votes": 0,
                         "classification_counts": {
                             "likely_not_expected_redundant_global_url": 1,
+                            "likely_not_expected_redundant_global_url_linked_to_votes": 0,
                         },
                     },
+                )
+            finally:
+                conn.close()
+
+    def test_compute_initiative_kpis_linked_scope_separates_unlinked_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            db_path = Path(td) / "parl-init-quality-linked-scope.db"
+            conn = open_db(db_path)
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_parl_sources(conn)
+                now = now_utc_iso()
+
+                from etl.parlamentario_es.db import upsert_source_records_with_content_sha256
+
+                linked_init = "congreso:init:linked:1"
+                unlinked_init = "congreso:init:unlinked:1"
+                linked_doc_url = "https://example.org/linked-doc.pdf"
+                unlinked_missing_url = "https://example.org/unlinked-missing.xml"
+
+                sr_map = upsert_source_records_with_content_sha256(
+                    conn,
+                    source_id="parl_initiative_docs",
+                    rows=[
+                        {
+                            "source_record_id": linked_doc_url,
+                            "raw_payload": '{"url":"https://example.org/linked-doc.pdf"}',
+                            "content_sha256": "sha-linked-doc",
+                        }
+                    ],
+                    snapshot_date="2026-02-27",
+                    now_iso=now,
+                )
+                sr_linked = int(sr_map[linked_doc_url])
+
+                conn.executemany(
+                    """
+                    INSERT INTO parl_initiatives (
+                      initiative_id, legislature, expediente, title,
+                      source_id, raw_payload, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    [
+                        (
+                            linked_init,
+                            "15",
+                            "121/000111/0000",
+                            "Iniciativa linked",
+                            "congreso_iniciativas",
+                            "{}",
+                            now,
+                            now,
+                        ),
+                        (
+                            unlinked_init,
+                            "15",
+                            "121/000222/0000",
+                            "Iniciativa unlinked",
+                            "congreso_iniciativas",
+                            "{}",
+                            now,
+                            now,
+                        ),
+                    ],
+                )
+
+                conn.execute(
+                    """
+                    INSERT INTO parl_vote_events (
+                      vote_event_id, source_id, raw_payload, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?)
+                    """,
+                    ("congreso:vote:linked:1", "congreso_votaciones", "{}", now, now),
+                )
+                conn.execute(
+                    """
+                    INSERT INTO parl_vote_event_initiatives (
+                      vote_event_id, initiative_id, link_method, confidence, evidence_json, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    ("congreso:vote:linked:1", linked_init, "test", 1.0, "{}", now, now),
+                )
+
+                conn.executemany(
+                    """
+                    INSERT INTO parl_initiative_documents (
+                      initiative_id, doc_kind, doc_url, source_record_pk, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    [
+                        (linked_init, "bocg", linked_doc_url, sr_linked, now, now),
+                        (unlinked_init, "ds", unlinked_missing_url, None, now, now),
+                    ],
+                )
+                conn.execute(
+                    """
+                    INSERT INTO text_documents (
+                      source_id, source_url, source_record_pk,
+                      fetched_at, content_type, content_sha256, bytes, raw_path,
+                      text_excerpt, text_chars, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        "parl_initiative_docs",
+                        linked_doc_url,
+                        sr_linked,
+                        now,
+                        "application/pdf",
+                        "sha-linked-doc",
+                        123,
+                        "raw/linked-doc.pdf",
+                        "texto",
+                        5,
+                        now,
+                        now,
+                    ),
+                )
+                conn.execute(
+                    """
+                    INSERT INTO document_fetches (
+                      doc_url, source_id, first_attempt_at, last_attempt_at,
+                      attempts, fetched_ok, last_http_status, last_error,
+                      content_type, content_sha256, bytes, raw_path
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        unlinked_missing_url,
+                        "parl_initiative_docs",
+                        now,
+                        now,
+                        1,
+                        0,
+                        403,
+                        "HTTPError: 403",
+                        None,
+                        None,
+                        None,
+                        None,
+                    ),
+                )
+                conn.commit()
+
+                global_kpis = compute_initiative_quality_kpis(
+                    conn,
+                    source_ids=("congreso_iniciativas",),
+                    actionable_scope="global",
+                )
+                linked_kpis = compute_initiative_quality_kpis(
+                    conn,
+                    source_ids=("congreso_iniciativas",),
+                    actionable_scope="linked_to_votes",
+                )
+
+                self.assertEqual(int(global_kpis["missing_doc_links_actionable"]), 1)
+                self.assertAlmostEqual(float(global_kpis["actionable_doc_links_closed_pct"]), 0.5)
+                self.assertEqual(int(global_kpis["missing_doc_links_actionable_linked_to_votes"]), 0)
+                self.assertAlmostEqual(
+                    float(global_kpis["actionable_doc_links_closed_pct_linked_to_votes"]),
+                    1.0,
+                )
+                self.assertEqual(int(linked_kpis["missing_doc_links_actionable_selected"]), 0)
+                self.assertAlmostEqual(float(linked_kpis["actionable_doc_links_closed_pct_selected"]), 1.0)
+                self.assertEqual(str(linked_kpis["actionable_scope"]), "linked_to_votes")
+                self.assertEqual(
+                    str(linked_kpis["actionable_metric"]),
+                    "actionable_doc_links_closed_pct_linked_to_votes",
                 )
             finally:
                 conn.close()

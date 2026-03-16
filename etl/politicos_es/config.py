@@ -371,9 +371,9 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
     "bde_series_api": {
         "name": "Banco de Espana - Indicadores confusores (API series)",
         "scope": "outcomes",
-        "default_url": "https://api.bde.es/datos/series",
+        "default_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAA301,D_1NBAA304,D_1NBAA317,D_1NBAA372,D_1NBAA572,D_1NBAC372,D_1NBAC572,D_1NBAC972,D_1NBAD301,D_1NBAD302,D_1NBAD306,D_1NBAD311,D_1NBAD317,D_1NBAD372,D_1NBAD472,D_1NBAD572,D_1NBAD972,D_1NBAE472,D_1NBAE572,D_1NBAE972,D_1NBAF472,D_1NBAF572,D_1NBAS372,D_1NBAS572,D_1NBAS972,D_1NBBO020,D_1NBBO072,D_1NBBO303,D_1NBBO305,D_1NBBO307,D_1NBBO308,D_1NBBO309,D_1NBBO310,D_1NBBO311,D_1NBBO314,D_1NBBO315,D_1NBBO316,D_1NBBO320,D_1NBBO333,D_1NBBO349,D_1NBBO572,D_1NBBP301,D_1NBBP302,D_1NBBP303,D_1NBBP304,D_1NBBP305,D_1NBBP306,D_1NBBP307,D_1NBBP308,D_1NBBP309,D_1NBBP310,D_1NBBP311,D_1NBBP314,D_1NBBP315,D_1NBBP316,D_1NBBP317,D_1NBBP349,D_1NBBP572&rango=30M",
         "format": "json",
-        "min_records_loaded_strict": 1,
+        "min_records_loaded_strict": 58,
         # Keep this as raw BDE payload shape (results/series records), not run snapshot CSV.
         "fallback_file": "etl/data/raw/samples/bde_series_api_sample.json",
     },
@@ -385,5 +385,17 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 1,
         # Keep this as raw AEMET payload shape (series/stations), not run snapshot CSV.
         "fallback_file": "etl/data/raw/samples/aemet_opendata_series_sample.json",
+    },
+    "ree_esios_indicators": {
+        "name": "ESIOS/REE - Indicadores confusores (API)",
+        "scope": "outcomes",
+        "default_url": (
+            "https://apidatos.ree.es/es/datos/demanda/evolucion"
+            "?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour"
+        ),
+        "format": "json",
+        "min_records_loaded_strict": 1,
+        # Keep this as raw REE payload shape (included/attributes/values), not run snapshot CSV.
+        "fallback_file": "etl/data/raw/samples/ree_esios_indicators_sample.json",
     },
 }

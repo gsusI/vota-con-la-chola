@@ -221,7 +221,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     backfill_indicators.add_argument(
         "--source-ids",
         nargs="+",
-        default=["eurostat_sdmx", "bde_series_api", "aemet_opendata_series"],
+        default=["eurostat_sdmx", "bde_series_api", "aemet_opendata_series", "ree_esios_indicators"],
         help="Source IDs de indicadores a armonizar",
     )
 

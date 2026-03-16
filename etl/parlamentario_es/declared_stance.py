@@ -118,6 +118,171 @@ _OPPOSE_DECLARED_WEAK_PATTERNS = (
     re.compile(r"\bno\s+(vamos|voy|iremos)\s+a\s+apoyar\b"),
 )
 
+_PROGRAMA_POLICY_ACTION_RE = (
+    r"proponemos|proposem|proposarem|proponhemos|"
+    r"propondremos|propondra|propora|"
+    r"impulsaremos|impulsarem|"
+    r"impulsar(?:emos)?|"
+    r"promovemos|promoveremos|promourem|"
+    r"apostamos\s+por|apostem\s+per|apostar\s+per|"
+    r"apuesta\s+por|aposta\s+por|"
+    r"garantizaremos|garantirem|"
+    r"priorizaremos|prioritzarem|"
+    r"reduciremos|reduirem|"
+    r"actualizaremos|actualizar(?:emos)?|"
+    r"revisaremos|revisar(?:emos)?|"
+    r"incrementaremos|incrementar(?:emos)?|"
+    r"modificaremos|modificar(?:emos)?|"
+    r"facilitaremos|facilitar(?:emos)?|"
+    r"incentivaremos|incentivar(?:emos)?|"
+    r"implicaremos|implicar(?:emos)?|"
+    r"formaremos|formar(?:emos)?|"
+    r"realizaremos|realizar(?:emos)?|"
+    r"limitaremos|limitar(?:emos)?|"
+    r"deflactaremos|deflactar(?:emos)?|"
+    r"dotaremos|dotar(?:emos)?|"
+    r"prohibiremos|prohibir|"
+    r"atajaremos|atajar|"
+    r"suprimiremos|suprimira|suprimir(?:emos)?|"
+    r"velaremos|velara|velar(?:emos)?|"
+    r"exigiremos|exigir(?:emos)?|"
+    r"demandaremos|demanda(?:remos)?|demandar(?:emos)?|"
+    r"reconocer(?:emos)?|reconociendo|reconecendo|"
+    r"fomentar(?:emos)?|"
+    r"reformular(?:emos)?|"
+    r"establecer(?:emos)?|estabelecer(?:emos)?|"
+    r"desarrollaremos|desarrollar(?:emos)?|desenvolver(?:emos)?|"
+    r"frearemos|frenaremos|frear(?:emos)?|frenar(?:emos)?|"
+    r"mejoraremos|mejorara|millorarem|millorar(?:em|a)?|mellorar(?:emos)?|"
+    r"crearemos|crearem|crear(?:em|a)?|"
+    r"pondremos\s+en\s+marcha|posarem\s+en\s+marxa|"
+    r"canviarem|canviar(?:em|a)?|"
+    r"combataremos|combatiremos|combatrem|combatre(?:m)?|"
+    r"lluita\s+contra|lluitar(?:em)?\s+contra|"
+    r"ampliaremos|ampliarem|ampliar(?:em|a)?|"
+    r"ampliando|"
+    r"universalizaremos|universalitzarem|universalitzar(?:em|a)?|"
+    r"desplegaremos|desplegarem|desplegar(?:em|a)?|"
+    r"reforzaremos|reforzara|reforzar(?:emos)?|enfortirem|enfortir(?:em|a)?|"
+    r"expropiaremos|expropiarem|expropiar(?:em|a)?|"
+    r"potenciaremos|potenciarem|potenciar(?:em|a)?|"
+    r"elaboraremos|elaboraran|elaborar(?:emos)?|"
+    r"coidaremos|coidar(?:emos)?|"
+    r"we\s+will\s+(?:focus|invest|create|combat|expand|strengthen|improve|develop|support|protect|reduce|tackle|boost|ensure|promote)|"
+    r"focus\s+on|invest|create|combat|expand|strengthen|improve|develop|support|protect|reduce|tackle|boost|ensure|promote|"
+    # Nominal proposal language common in party manifestos (municipal/regional).
+    r"impulso|fomento|promocion|promocio|"
+    r"propuesta(?:s)?|proposta(?:s)?|"
+    r"plan(?:es)?\s+nacional(?:es)?|"
+    r"mejora|millora|"
+    r"creacion|creacio|"
+    r"introduccion|introducion|"
+    r"modernizacion|modernizacio|"
+    r"ampliacion|ampliacio|"
+    r"implementacion|implementacio|"
+    r"habilitacion|habilitacio|"
+    r"desarrollo|desenvolvemento|"
+    r"establecimiento|estabelecemento|potenciacion|"
+    r"reduccion(?:es)?\s+de(?:l|la|los|las)|"
+    r"reconecemento|reconocimiento"
+)
+
+_PROGRAMA_POLICY_CONCERN_RE = (
+    r"vivienda|vivend\w*|housing|habitatg\w*|etxebizitz\w*|etxe\w*|"
+    r"alquiler|lloguer\w*|alokair\w*|arrend(?:ament)?\w*|"
+    r"empleo|employment|job(?:s)?|ocupaci\w*|trabaj(?:o|ar|adores)?|lan(?:a|gile)?\w*|"
+    r"paro|desemple(?:o|go)?|"
+    r"salari\w*|sold(?:ata)?\w*|sou(?:s)?|"
+    r"sanidad|saude|sanidade|salud|health(?:care)?|salut|osasun(?:a)?\w*|hospital\w*|dependenc\w*|cura(?:s)?|cures|"
+    r"educacion|education|educacio\w*|hezkuntz\w*|ensino|irakaskuntz\w*|"
+    r"beca\w*|beka\w*|"
+    r"energia\w*|enerxia\w*|energetic\w*|water|agua|hidric\w*|"
+    r"auga|luz|gas|autoconsum\w*|bono\s+social|eficienci\w*\s+enerxetic\w*|"
+    r"infraestrutur\w*|ferroviari\w*|viari\w*|pesca\w*|pesquer\w*|piscicol\w*|"
+    r"electric\w*|"
+    r"transporte\w*|movilidad\w*|mobilitat\w*|mugikortasun\w*|garrai\w*|"
+    r"violenc\w*|machist\w*|feminicid\w*|xener\w*|genero|"
+    r"justicia|justice|justizia|seguridad|security|seguretat|segurtasun(?:a)?|"
+    r"administraci\w*|servicio(?:s)?\s+public\w*|serviz\w*\s+public\w*|axuda\w*|transparen\w*|"
+    r"inmigr\w*|migration|migrazio\w*|immigr\w*|"
+    r"corrup\w*|ustelkeri\w*|"
+    r"agric\w*|agriculture|farmer(?:s)?|nekazaritz\w*|rural\w*|landa\w*|industr\w*|automovil\w*|"
+    r"igualdad|igualtat|berdintasun(?:a)?|juventud|joven(?:es)?|"
+    r"emplead\w*|inversion\w*|investigaci\w*|"
+    r"impuesto(?:s)?|fiscalidad\w*|fiscalidade\w*|tax(?:es)?|impost(?:os)?|zerga(?:k)?|tribut\w*|irpf|gravam\w*|inflacion\w*|"
+    r"pension(?:es)?|pensio(?:ns)?|pentsio(?:ak)?"
+)
+
+_PROGRAMA_POLICY_SUPPORT_PATTERNS = (
+    re.compile(
+        rf"\b(?:{_PROGRAMA_POLICY_ACTION_RE})\b(?:\s+\w+){{0,14}}\s+\b(?:{_PROGRAMA_POLICY_CONCERN_RE})\b"
+    ),
+    re.compile(
+        rf"\b(?:{_PROGRAMA_POLICY_CONCERN_RE})\b(?:\s+\w+){{0,14}}\s+\b(?:{_PROGRAMA_POLICY_ACTION_RE})\b"
+    ),
+)
+
+_PROGRAMA_POLICY_CONCERN_PATTERNS = (
+    re.compile(rf"\b(?:{_PROGRAMA_POLICY_CONCERN_RE})\b"),
+)
+
+_PROGRAMA_POLICY_FUTURE_INTENT_PATTERNS = (
+    re.compile(r"\b(seguiremos|seguirem)\b"),
+)
+
+_PROGRAMA_POLICY_STRONG_INTENT_MARKER_PATTERNS = (
+    re.compile(
+        r"\b(proponemos|proposem|proponhemos|propondremos|propora|impulsaremos|promoveremos|"
+        r"garantizaremos|priorizaremos|reduciremos|actualizaremos|revisaremos|incrementaremos|"
+        r"modificaremos|facilitaremos|incentivaremos|realizaremos|limitaremos|deflactaremos|"
+        r"dotaremos|prohibiremos|atajaremos|suprimiremos|velaremos|exigiremos|demandaremos|"
+        r"fomentaremos|estableceremos|desarrollaremos|frenaremos|mejoraremos|crearemos|"
+        r"pondremos\s+en\s+marcha|combatiremos|ampliaremos|universalizaremos|desplegaremos|"
+        r"reforzaremos|expropiaremos|potenciaremos|coidaremos|we\s+will|"
+        r"imos\s+(?:a\s+)?(?:combater|combatir|mellorar|mejorar|reducir|ampliar|fomentar|"
+        r"impulsar|prohibir|establecer|estabelecer|crear|desenvolver|garantir|potenciar|coidar)|"
+        r"(?:^|[.;:]\s*)(?:impulsar|deflactar|prohibir|incentivar|implicar|formar|reformular|"
+        r"establecer|estabelecer|fomentar|frear|frenar|ampliar|desplegar|potenciar|coidar|"
+        r"atajar|suprimir|velar|exigir|demandar|crear|mellorar|mejorar|reducir|combater|combatir)"
+        r")\b"
+    ),
+)
+
+_PROGRAMA_POLICY_CONTEXT_BLOCKER_PATTERNS = (
+    re.compile(
+        r"\b(se\s+ha\s+hecho\s+evidente|hasta\s+ahora|una\s+de\s+las\s+consecuencias|"
+        r"en\s+un\s+mundo\s+globalizado|por\s+si\s+esto\s+fuera\s+poco|a\s+nuestro\s+pesar)\b"
+    ),
+    re.compile(
+        r"\b(pronunciament\w*|pronunciamient\w*|apoyaron|aoi?paron|impulsaron|contribuyeron|"
+        r"contribuiron|fose\s+parcialmente|foron\s+incorporadas)\b"
+    ),
+    re.compile(r"\baccion\s+europea\s+es\s+necesaria\b"),
+)
+
+_PROGRAMA_POLICY_HARD_BLOCKER_PATTERNS = (
+    re.compile(r"\bpartidos?\s+politicos?\s+deben\s+fomentar\s+la\s+igualdad\s+entre\s+hombres\s+y\s+mujeres\b"),
+    re.compile(r"\bamenazas?\s+en\s+las\s+redes\s+de\s+internet\b"),
+    # Recurrent false-positive snippet from OCR-fragmented BNG tax paragraph.
+    re.compile(r"\bdeben\s+tributar\s+aqui\s+polo\s+imposto\s+de\s+sociedades\b"),
+)
+
+_PROGRAMA_EMPLEO_TOPIC_KEY = "concern:v1:empleo"
+
+_PROGRAMA_EMPLEO_ANCHOR_PATTERNS = (
+    re.compile(
+        r"\b(empleo|emprego|ocupaci\w*|trabaj\w*|traballo|laboral\w*|"
+        r"paro|salari\w*|treball\w*|ocupacio\w*)\b"
+    ),
+)
+
+
+def _has_programa_empleo_anchor(text: str) -> bool:
+    t = _normalize_for_match(text)
+    if not t:
+        return False
+    return _count_hits(_PROGRAMA_EMPLEO_ANCHOR_PATTERNS, t) > 0
+
 
 def _is_negated(text: str, match_start: int) -> bool:
     # Keep this conservative: only immediate negation directly before the phrase.
@@ -181,6 +346,35 @@ def _infer_declared_stance_detail(text: str) -> tuple[str, int, float, str] | No
     return None
 
 
+def _infer_programa_policy_support_detail(text: str) -> tuple[str, int, float, str] | None:
+    """Best-effort fallback for manifesto-like language in party program pages.
+
+    This is intentionally source-specific (`programas_partidos`) and only emits
+    support when a policy-proposal verb co-occurs with a concern-domain term.
+    """
+
+    t = _normalize_for_match(text)
+    if not t:
+        return None
+    hard_blocker_hits = _count_hits(_PROGRAMA_POLICY_HARD_BLOCKER_PATTERNS, t)
+    if hard_blocker_hits > 0:
+        return None
+    support_hits = _count_hits(_PROGRAMA_POLICY_SUPPORT_PATTERNS, t)
+    if support_hits <= 0:
+        future_intent_hits = _count_hits(_PROGRAMA_POLICY_FUTURE_INTENT_PATTERNS, t)
+        concern_hits = _count_hits(_PROGRAMA_POLICY_CONCERN_PATTERNS, t)
+        if future_intent_hits > 0 and concern_hits > 0:
+            return ("support", 1, 0.62, "programa_policy_proposal")
+    if support_hits <= 0:
+        return None
+    blocker_hits = _count_hits(_PROGRAMA_POLICY_CONTEXT_BLOCKER_PATTERNS, t)
+    if blocker_hits > 0:
+        strong_intent_hits = _count_hits(_PROGRAMA_POLICY_STRONG_INTENT_MARKER_PATTERNS, t)
+        if strong_intent_hits <= 0:
+            return None
+    return ("support", 1, 0.62, "programa_policy_proposal")
+
+
 def infer_declared_stance(text: str) -> tuple[str, int, float] | None:
     """Best-effort stance inference for declared evidence.
 
@@ -218,6 +412,7 @@ def backfill_declared_stance_from_topic_evidence(
     limit: int = 0,
     min_auto_confidence: float = 0.62,
     enable_review_queue: bool = True,
+    reconcile_no_signal: bool = False,
     dry_run: bool = False,
 ) -> dict[str, Any]:
     """Populate topic_evidence stance/polarity for declared evidence using text excerpts.
@@ -226,6 +421,8 @@ def backfill_declared_stance_from_topic_evidence(
     - conservative auto-updates when confidence >= min_auto_confidence
     - optional review queue rows for missing/ambiguous/low-confidence cases
     - never touches rows with non-auto/manual stance_method values
+    - optional reconciliation mode can demote stale auto-assigned stance to unclear
+      when no current signal is detected (disabled by default)
     """
 
     now_iso = now_utc_iso()
@@ -241,6 +438,7 @@ def backfill_declared_stance_from_topic_evidence(
         SELECT
           e.evidence_id,
           e.source_record_pk,
+          t.canonical_key AS topic_key,
           CASE
             WHEN e.evidence_type = 'declared:programa' THEN COALESCE(NULLIF(TRIM(e.excerpt), ''), d.text_excerpt, '')
             ELSE COALESCE(d.text_excerpt, e.excerpt, '')
@@ -253,6 +451,8 @@ def backfill_declared_stance_from_topic_evidence(
         LEFT JOIN text_documents d
           ON d.source_id = e.source_id
          AND d.source_record_pk = e.source_record_pk
+        LEFT JOIN topics t
+          ON t.topic_id = e.topic_id
         WHERE e.source_id = ?
           AND e.evidence_type LIKE 'declared:%'
           AND (
@@ -278,15 +478,22 @@ def backfill_declared_stance_from_topic_evidence(
     review_no_signal = 0
     review_low_confidence = 0
     review_conflicting_signal = 0
+    reconciled_no_signal = 0
 
     updates: list[tuple[Any, ...]] = []
     review_upserts: list[tuple[Any, ...]] = []
     resolve_review_ids: list[int] = []
+    reconcile_methods = {"", "declared:regex_v1", "declared:regex_v2", "declared:regex_v3"}
     for r in rows:
         seen += 1
         ev_id = int(r["evidence_id"])
         source_record_pk = int(r["source_record_pk"]) if r["source_record_pk"] is not None else None
+        topic_key = normalize_ws(str(r["topic_key"] or ""))
         text = str(r["text"] or "")
+        current_stance = normalize_ws(str(r["current_stance"] or ""))
+        current_polarity = int(r["current_polarity"]) if r["current_polarity"] is not None else None
+        current_confidence = float(r["current_confidence"]) if r["current_confidence"] is not None else None
+        current_method = normalize_ws(str(r["current_stance_method"] or ""))
         if not normalize_ws(text):
             if enable_review_queue:
                 review_rows_pending += 1
@@ -309,7 +516,27 @@ def backfill_declared_stance_from_topic_evidence(
             continue
 
         inferred = _infer_declared_stance_detail(text)
+        if inferred is None and source_id == "programas_partidos":
+            inferred = _infer_programa_policy_support_detail(text)
+        if (
+            inferred is not None
+            and source_id == "programas_partidos"
+            and topic_key == _PROGRAMA_EMPLEO_TOPIC_KEY
+            and inferred[3] == "programa_policy_proposal"
+            and not _has_programa_empleo_anchor(text)
+        ):
+            inferred = None
         if inferred is None:
+            should_reconcile_no_signal = bool(
+                reconcile_no_signal
+                and current_stance in {"support", "oppose", "mixed"}
+                and current_method in reconcile_methods
+            )
+            if should_reconcile_no_signal:
+                updates.append(("unclear", 0, 0.0, DECLARED_REGEX_VERSION, now_iso, ev_id))
+                resolve_review_ids.append(ev_id)
+                reconciled_no_signal += 1
+                continue
             if enable_review_queue:
                 review_rows_pending += 1
                 review_no_signal += 1
@@ -363,10 +590,6 @@ def backfill_declared_stance_from_topic_evidence(
             oppose += 1
         else:
             mixed += 1
-        current_stance = normalize_ws(str(r["current_stance"] or ""))
-        current_polarity = int(r["current_polarity"]) if r["current_polarity"] is not None else None
-        current_confidence = float(r["current_confidence"]) if r["current_confidence"] is not None else None
-        current_method = normalize_ws(str(r["current_stance_method"] or ""))
         unchanged = (
             current_stance == stance
             and current_polarity == int(polarity)
@@ -392,6 +615,7 @@ def backfill_declared_stance_from_topic_evidence(
             "review_no_signal": review_no_signal,
             "review_low_confidence": review_low_confidence,
             "review_conflicting_signal": review_conflicting_signal,
+            "would_reconcile_no_signal": reconciled_no_signal,
             "support": support,
             "oppose": oppose,
             "mixed": mixed,
@@ -486,6 +710,7 @@ def backfill_declared_stance_from_topic_evidence(
         "review_total": review_total_db,
         "review_pending": review_pending_db,
         "review_pending_by_reason": review_by_reason,
+        "reconciled_no_signal": reconciled_no_signal,
         "support": support,
         "oppose": oppose,
         "mixed": mixed,

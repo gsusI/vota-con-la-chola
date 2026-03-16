@@ -6,17 +6,88 @@ import re
 import sqlite3
 from typing import Any
 
+from .db import upsert_domain
 from .util import normalize_key_part, normalize_ws, now_utc_iso, parse_date_flexible, sha256_bytes, stable_json
 from .policy_events import _domain_id_by_canonical_key, _infer_policy_event_domain_key
 
 
-INDICATOR_SOURCE_IDS = ("eurostat_sdmx", "bde_series_api", "aemet_opendata_series")
+INDICATOR_SOURCE_IDS = ("eurostat_sdmx", "bde_series_api", "aemet_opendata_series", "ree_esios_indicators")
 
 _YEAR_RE = re.compile(r"^(\d{4})$")
 _YEAR_MONTH_RE = re.compile(r"^(\d{4})-(\d{2})$")
 _YEAR_MONTH_ALT_RE = re.compile(r"^(\d{4})M(\d{1,2})$", flags=re.I)
 _YEAR_QUARTER_RE = re.compile(r"^(\d{4})-?Q([1-4])$", flags=re.I)
 _YEAR_WEEK_RE = re.compile(r"^(\d{4})W(\d{1,2})$", flags=re.I)
+
+_DOMAIN_METADATA_BY_KEY: dict[str, tuple[str, str]] = {
+    "sanidad_salud_publica": (
+        "Sanidad y salud pública",
+        "Indicadores de salud pública, servicios sanitarios y resultados asistenciales.",
+    ),
+    "educacion_capital_humano": (
+        "Educación y capital humano",
+        "Indicadores de educación, formación y capacidades de la población.",
+    ),
+    "vivienda_urbanismo": (
+        "Vivienda y urbanismo",
+        "Indicadores de vivienda, alquiler, hipoteca, suelo y desarrollo urbano.",
+    ),
+    "justicia_seguridad": (
+        "Justicia y seguridad",
+        "Indicadores de justicia, seguridad y funcionamiento del sistema legal.",
+    ),
+    "energia_medio_ambiente": (
+        "Energía y medio ambiente",
+        "Indicadores de energía, clima, emisiones y entorno ambiental.",
+    ),
+    "infraestructura_transporte": (
+        "Infraestructura y transporte",
+        "Indicadores de transporte e infraestructuras de movilidad.",
+    ),
+    "proteccion_social_pensiones": (
+        "Protección social y pensiones",
+        "Indicadores de empleo, pensiones, prestaciones y protección social.",
+    ),
+    "impuestos_gasto_fiscalidad": (
+        "Impuestos, gasto y fiscalidad",
+        "Indicadores fiscales, de gasto público y esfuerzo tributario.",
+    ),
+}
+
+
+def _resolve_or_seed_domain_id(
+    conn: sqlite3.Connection,
+    cache: dict[str, int | None],
+    domain_key: str | None,
+    *,
+    now_iso: str,
+    stats: dict[str, Any],
+) -> int | None:
+    key = normalize_ws(str(domain_key or "")).lower()
+    if not key:
+        return None
+
+    domain_id = _domain_id_by_canonical_key(conn, cache, key)
+    if domain_id is not None:
+        return domain_id
+
+    metadata = _DOMAIN_METADATA_BY_KEY.get(key)
+    label = metadata[0] if metadata else key.replace("_", " ").capitalize()
+    description = metadata[1] if metadata else "Dominio inferido automaticamente para series de indicadores."
+    domain_id = upsert_domain(
+        conn,
+        canonical_key_value=key,
+        label=label,
+        description=description,
+        tier=1,
+        now_iso=now_iso,
+    )
+    cache[key] = domain_id
+    stats["indicator_domains_seeded"] += 1
+    seeded = stats.setdefault("indicator_domain_keys_seeded", [])
+    if key not in seeded:
+        seeded.append(key)
+    return domain_id
 
 
 def _normalize_amount(value: Any) -> float | None:
@@ -155,6 +226,30 @@ def _infer_indicator_series_domain_key(
         dataset_key = normalize_ws(str(dataset_code or "")).lower()
         if dataset_key == "une_rt_a":
             return "proteccion_social_pensiones"
+    if source_id == "bde_series_api":
+        text = normalize_ws(f"{series_label} {series_code} {dataset_code}").lower()
+        if any(token in text for token in ("euribor", "hipotec", "vivienda")):
+            return "vivienda_urbanismo"
+        if any(token in text for token in ("paro", "empleo", "pension", "pensiones")):
+            return "proteccion_social_pensiones"
+        if any(
+            token in text
+            for token in (
+                "tipo de interes",
+                "tipo de interés",
+                "interbancario",
+                "mercado monetario",
+                "eonia",
+                "ester",
+                "deuda publica",
+                "deuda pública",
+                "rendimiento",
+                "benchmark",
+            )
+        ):
+            return "impuestos_gasto_fiscalidad"
+    if source_id == "ree_esios_indicators":
+        return "energia_medio_ambiente"
 
     return _infer_policy_event_domain_key(
         source_id=source_id,
@@ -260,6 +355,8 @@ def backfill_indicator_harmonization(
         "source_records_seen": 0,
         "source_records_mapped": 0,
         "source_records_skipped": 0,
+        "indicator_domains_seeded": 0,
+        "indicator_domain_keys_seeded": [],
         "indicator_series_upserted": 0,
         "indicator_series_with_domain_id": 0,
         "indicator_series_unresolved_domain": 0,
@@ -406,7 +503,13 @@ def backfill_indicator_harmonization(
             dataset_code=dataset_code,
             raw_payload=payload,
         )
-        domain_id = _domain_id_by_canonical_key(conn, domain_cache, domain_key)
+        domain_id = _resolve_or_seed_domain_id(
+            conn,
+            domain_cache,
+            domain_key,
+            now_iso=now_iso,
+            stats=stats,
+        )
         if domain_id is None:
             stats["indicator_series_unresolved_domain"] += 1
             stats["skips"].append(
@@ -676,4 +779,5 @@ def backfill_indicator_harmonization(
     stats["indicator_series_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_series_rows}
     stats["indicator_points_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_point_rows}
     stats["observation_records_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_observation_rows}
+    stats["indicator_domain_keys_seeded"] = sorted(set(stats["indicator_domain_keys_seeded"]))
     return stats
