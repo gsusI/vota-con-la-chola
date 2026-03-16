@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T09:12:39+00:00",
+  "generated_at": "2026-02-26T23:42:30+00:00",
   "status": "ok",
   "snapshot_date": "2026-03-05",
   "schema_version": "liberty_restrictions_snapshot_v1",
@@ -44,10 +44,10 @@
   },
   "published_files": {
     "snapshot_json": {
-      "source_path": "docs/etl/sprints/AI-OPS-218/exports/liberty_restrictions_snapshot_20260305.json",
+      "source_path": "docs/etl/sprints/AI-OPS-220/exports/liberty_restrictions_snapshot_2026-03-05.json",
       "path": "etl/data/published/liberty-restrictions-atlas-2026-03-05.json",
       "bytes": 97669,
-      "sha256": "125d2c0ad8a4eb147d859b9d39c3362a777e24ba044cc0f04fd6f7cd7f33ca07"
+      "sha256": "b1056e4d3f49bfd2676e2d3dc5c2b4811ff72641411b3f0c80385553a39d940d"
     },
     "irlc_parquet": {
       "source_path": "docs/etl/sprints/AI-OPS-124/exports/irlc_by_fragment_latest.parquet",
@@ -62,16 +62,16 @@
       "sha256": "acc4ec6cd6ba02892a4bea54b4799a26a22639e9609b35172913de0c8e056bf0"
     },
     "diff_json": {
-      "source_path": "docs/etl/sprints/AI-OPS-218/evidence/liberty_restrictions_snapshot_diff_20260305.json",
+      "source_path": "docs/etl/sprints/AI-OPS-220/evidence/liberty_restrictions_snapshot_diff_2026-03-05.json",
       "path": "etl/data/published/liberty-restrictions-diff-2026-03-05.json",
       "bytes": 13232,
-      "sha256": "8c6fdcb4bc3d882bf835a7608d52e39402d2b56d4a0a6302b648025d3e26b46a"
+      "sha256": "8d5a50e0fd441af84b2d46d6722ad921708c1316661db8da559dd7941ab0a4ac"
     },
     "changelog_entry_json": {
-      "source_path": "docs/etl/sprints/AI-OPS-218/evidence/liberty_restrictions_snapshot_changelog_20260305.json",
+      "source_path": "docs/etl/sprints/AI-OPS-220/evidence/liberty_restrictions_snapshot_changelog_2026-03-05.json",
       "path": "etl/data/published/liberty-restrictions-changelog-entry-2026-03-05.json",
-      "bytes": 2153,
-      "sha256": "7e84f504201cca4b8224eedd73aa64bd86bb8eaec1d6d203c84bd94b8878c223"
+      "bytes": 2157,
+      "sha256": "4b5568f97bce6e0e111047c3bafa06e61c39333483b535bea393c5f0d97e61f8"
     },
     "changelog_history_jsonl": {
       "source_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
