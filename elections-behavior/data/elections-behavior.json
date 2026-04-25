@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "generated_at": "2026-04-25T10:47:54+00:00",
+    "source_db": "etl/data/staging/parlamentario-es.db",
+    "window_days": 365,
+    "min_directional_votes": 18,
+    "min_topic_votes": 12
+  },
+  "institutions": [
+    {
+      "bucket": "congreso",
+      "label": "Congreso"
+    },
+    {
+      "bucket": "senado",
+      "label": "Senado"
+    }
+  ],
+  "elections": [],
+  "party_index": {},
+  "party_shifts": [],
+  "topic_shifts": [],
+  "district_representation": []
+}

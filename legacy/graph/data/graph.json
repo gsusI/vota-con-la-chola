@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "rows": 0,
+    "limit": 350,
+    "source_filter": "",
+    "search": "",
+    "include_inactive": true,
+    "node_counts": {
+      "source": 0,
+      "person": 0,
+      "party": 0,
+      "institution": 0
+    },
+    "sources": [
+      {
+        "source_id": "congreso_iniciativas",
+        "name": "Congreso - Iniciativas (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://www.congreso.es/es/opendata/iniciativas",
+        "is_active": 1,
+        "data_format": "html"
+      },
+      {
+        "source_id": "congreso_intervenciones",
+        "name": "Congreso - Intervenciones (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://www.congreso.es/es/opendata/intervenciones",
+        "is_active": 1,
+        "data_format": "html"
+      },
+      {
+        "source_id": "congreso_votaciones",
+        "name": "Congreso - Votaciones (pleno, OpenData)",
+        "scope": "nacional",
+        "default_url": "https://www.congreso.es/es/opendata/votaciones",
+        "is_active": 1,
+        "data_format": "html"
+      },
+      {
+        "source_id": "parl_initiative_docs",
+        "name": "Parlamento - Documentos de iniciativas (BOCG/Diario de Sesiones)",
+        "scope": "nacional",
+        "default_url": "manifest://parl_initiative_docs",
+        "is_active": 1,
+        "data_format": "bin"
+      },
+      {
+        "source_id": "programas_partidos",
+        "name": "Programas de partidos (manifest-driven)",
+        "scope": "nacional",
+        "default_url": "manifest://programas_partidos",
+        "is_active": 1,
+        "data_format": "csv"
+      },
+      {
+        "source_id": "senado_iniciativas",
+        "name": "Senado - Iniciativas y mociones (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+        "is_active": 1,
+        "data_format": "xml"
+      },
+      {
+        "source_id": "senado_votaciones",
+        "name": "Senado - Votaciones (OpenData)",
+        "scope": "nacional",
+        "default_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
+        "is_active": 1,
+        "data_format": "html"
+      }
+    ]
+  },
+  "nodes": [],
+  "edges": []
+}

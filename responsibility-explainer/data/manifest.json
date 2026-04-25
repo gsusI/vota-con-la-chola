@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "generated_at": "2026-04-25T10:47:43Z",
+    "snapshot_date": "2026-04-12",
+    "schema_version": "responsibility_explainer_manifest_v1",
+    "snapshot_db": "etl/data/staging/parlamentario-es.db",
+    "total_cases": 2
+  },
+  "cases": [
+    {
+      "case_id": "dana-valencia-2024",
+      "title": "DANA Valencia 2024",
+      "summary": "Benchmark de accountability para una catastrofe publica: que avisos existieron, quien tenia deber de actuar, que decisiones u omisiones precedieron el dano, y que respuesta normativa y parlamentaria quedo documentada.",
+      "canonical_path": "/responsibility-explainer/dana-valencia-2024/",
+      "coverage": {
+        "initiatives_total": 11,
+        "initiatives_with_votes_total": 1,
+        "initiatives_with_measure_points_total": 1,
+        "vote_events_total": 2,
+        "reviewed_measures_total": 5,
+        "official_documents_total": 15,
+        "normative_duties_total": 4,
+        "warning_channels_total": 3,
+        "warning_timeline_events_total": 3,
+        "governing_rules_total": 3,
+        "official_findings_total": 3,
+        "administrative_acts_total": 3,
+        "responsibility_links_total": 3,
+        "named_accountability_total": 0,
+        "structural_risk_factors_total": 5,
+        "structural_audit_targets_total": 6,
+        "structural_evidence_rows_total": 28
+      },
+      "question_status_counts": {
+        "partial": 6,
+        "missing": 2
+      }
+    },
+    {
+      "case_id": "cash-payment-limit-spain",
+      "title": "Limite de pagos en efectivo en Espana",
+      "summary": "Benchmark P2 para una regla formal estatal: que norma fija el limite general de pagos en efectivo a 1.000 euros, quien la cambia, quien la promulga y quien la aplica hoy.",
+      "canonical_path": "/responsibility-explainer/cash-payment-limit-spain/",
+      "coverage": {
+        "initiatives_total": 0,
+        "initiatives_with_votes_total": 0,
+        "initiatives_with_measure_points_total": 0,
+        "vote_events_total": 0,
+        "reviewed_measures_total": 0,
+        "official_documents_total": 0,
+        "normative_duties_total": 0,
+        "warning_channels_total": 0,
+        "warning_timeline_events_total": 0,
+        "governing_rules_total": 2,
+        "official_findings_total": 2,
+        "administrative_acts_total": 2,
+        "responsibility_links_total": 3,
+        "named_accountability_total": 6,
+        "structural_risk_factors_total": 0,
+        "structural_audit_targets_total": 0,
+        "structural_evidence_rows_total": 0
+      },
+      "question_status_counts": {
+        "partial": 4,
+        "missing": 2
+      }
+    }
+  ]
+}

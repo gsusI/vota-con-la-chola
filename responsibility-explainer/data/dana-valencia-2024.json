@@ -1,0 +1,1287 @@
+{
+  "meta": {
+    "generated_at": "2026-04-25T10:47:43Z",
+    "snapshot_date": "2026-04-12",
+    "schema_version": "responsibility_explainer_case_v1",
+    "case_id": "dana-valencia-2024",
+    "snapshot_db": "etl/data/staging/parlamentario-es.db"
+  },
+  "case": {
+    "case_id": "dana-valencia-2024",
+    "title": "DANA Valencia 2024",
+    "short_label": "DANA Valencia 2024",
+    "summary": "Benchmark de accountability para una catastrofe publica: que avisos existieron, quien tenia deber de actuar, que decisiones u omisiones precedieron el dano, y que respuesta normativa y parlamentaria quedo documentada.",
+    "geography": "Comunitat Valenciana",
+    "incident_window": {
+      "label": "Octubre-noviembre 2024",
+      "start_date": "2024-10-28",
+      "end_date": "2024-11-04"
+    },
+    "current_scope_note": "Este slice cubre evidencia parlamentaria ya cargada, anclajes oficiales de deber/competencia, una primera capa de exposicion regulatoria pre-desastre y ya incorpora filas concretas de evidencia estructural para planes municipales, infraestructura hidraulica local, actos regulatorios y de urbanizacion municipal, proyectos sectoriales de servicio y estado formal de ejecucion/cierre del corredor de Paiporta. No demuestra por si solo causalidad ni reconstruye todavia la cadena operativa completa.",
+    "canonical_path": "/responsibility-explainer/dana-valencia-2024/",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/responsibility-explainer/dana-valencia-2024/"
+  },
+  "coverage": {
+    "initiatives_total": 11,
+    "initiatives_with_votes_total": 1,
+    "initiatives_with_measure_points_total": 1,
+    "vote_events_total": 2,
+    "reviewed_measures_total": 5,
+    "official_documents_total": 15,
+    "normative_duties_total": 4,
+    "warning_channels_total": 3,
+    "warning_timeline_events_total": 3,
+    "governing_rules_total": 3,
+    "official_findings_total": 3,
+    "administrative_acts_total": 3,
+    "responsibility_links_total": 3,
+    "named_accountability_total": 0,
+    "structural_risk_factors_total": 5,
+    "structural_audit_targets_total": 6,
+    "structural_evidence_rows_total": 28
+  },
+  "question_status_counts": {
+    "partial": 6,
+    "missing": 2
+  },
+  "normative_evidence": {
+    "scope_label": "Anclajes oficiales de deber, coordinacion y canales de aviso ya resumidos desde fuentes primarias",
+    "normative_duties": [
+      {
+        "duty_id": "state-alert-chain",
+        "category": "Cadena de alerta",
+        "actor": "Sistema Nacional de Proteccion Civil",
+        "actor_scope": "Organismos publicos que detectan amenazas y organos autonomicos de coordinacion",
+        "duty_summary": "Los organismos publicos que detecten o prevean amenazas inminentes deben comunicarlo de inmediato, y los organos autonomicos de coordinacion son el cauce de informacion y alerta hacia quien corresponda.",
+        "why_it_matters": "Ancla la obligacion interadministrativa minima para que avisos tecnicos y alertas no se queden aislados en un solo organismo.",
+        "source_title": "Ley 17/2015, de 9 de julio, del Sistema Nacional de Proteccion Civil",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-7730",
+        "source_locator": "arts. 12.3-12.4, 14 y 17-18",
+        "source_note": "La ley estatal fija la Red de Alerta Nacional, los deberes de comunicacion inmediata y el marco de coordinacion de planes y centros de emergencia."
+      },
+      {
+        "duty_id": "generalitat-plan-direction",
+        "category": "Direccion autonoma",
+        "actor": "Generalitat Valenciana",
+        "actor_scope": "Conseller competente en proteccion civil y gestion de emergencias",
+        "duty_summary": "Debe elaborar y aprobar los planes territoriales, planes especiales, procedimientos y protocolos operativos de la Comunitat Valenciana en materia de emergencias.",
+        "why_it_matters": "Ubica la responsabilidad autonoma sobre la arquitectura formal de respuesta y sobre los instrumentos que debian estar implantados antes de la DANA.",
+        "source_title": "Ley 13/2010, de 23 de noviembre, de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_locator": "art. 14, arts. 21-26",
+        "source_note": "La ley valenciana distribuye competencias sobre planes, procedimientos y protocolos del sistema autonomico de emergencias."
+      },
+      {
+        "duty_id": "cce-operational-alerts",
+        "category": "Coordinacion operativa",
+        "actor": "Centro de Coordinacion de Emergencias / 1.1.2 Comunitat Valenciana",
+        "actor_scope": "Nodo operativo de activacion, alerta y seguimiento",
+        "duty_summary": "Los protocolos operativos del Centro de Coordinacion de Emergencias deben cubrir activacion de planes, alerta a organismos de emergencias y seguridad, movilizacion de recursos, seguimiento del incidente y medidas de proteccion de la poblacion.",
+        "why_it_matters": "Delimita el punto operativo donde deberian poder reconstruirse activaciones, alertas, recursos movilizados y medidas de proteccion.",
+        "source_title": "Ley 13/2010, de 23 de noviembre, de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_locator": "art. 26 y art. 56",
+        "source_note": "La ley autonoma regula el papel del CCE y de 1.1.2 Comunitat Valenciana como base de los protocolos de activacion y respuesta."
+      },
+      {
+        "duty_id": "municipal-response-plans",
+        "category": "Respuesta municipal",
+        "actor": "Ayuntamientos afectados",
+        "actor_scope": "Autoridad municipal y centros de coordinacion municipales",
+        "duty_summary": "Los municipios deben aprobar su Plan Territorial Municipal y los planes de actuacion frente a riesgos concretos, colaborar con el CCE en la transmision de datos relevantes y adoptar medidas locales de proteccion, incluido activar el CECOPAL cuando proceda.",
+        "why_it_matters": "Marca el deber municipal de preparacion y de respuesta inmediata en el termino municipal, clave para evaluar si habia estructura local utilizable antes del dano.",
+        "source_title": "Ley 13/2010, de 23 de noviembre, de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_locator": "art. 16.1.b-c, art. 16.2 y disposicion adicional unica",
+        "source_note": "La ley valenciana obliga a los municipios a planificar y a activar medidas y centros de coordinacion cuando la emergencia lo requiera."
+      }
+    ],
+    "warning_channels": [
+      {
+        "channel_id": "aemet-meteoalerta",
+        "channel_name": "AEMET Meteoalerta",
+        "operator": "Agencia Estatal de Meteorologia",
+        "scope": "Fenomenos meteorologicos adversos",
+        "signal_summary": "AEMET publica avisos por niveles rojo, naranja, amarillo y verde, y distribuye la informacion de avisos en formato estandar CAP para proteccion civil.",
+        "why_next": "Falta normalizar la secuencia concreta de avisos emitidos para la Comunitat Valenciana durante la ventana de la DANA.",
+        "source_title": "AEMET adopta un formato estandar internacional para el envio de avisos por fenomenos meteorologicos adversos",
+        "source_url": "https://www.aemet.es/es/noticias/2019/02/aemet_adopta_formato_internacional_para_avisos",
+        "source_note": "AEMET documenta los niveles oficiales de aviso y su distribucion interoperable para la cadena de alertas."
+      },
+      {
+        "channel_id": "chj-saih-jucar",
+        "channel_name": "SAIH Jucar",
+        "operator": "Confederacion Hidrografica del Jucar",
+        "scope": "Lluvias, niveles y caudales en tiempo real",
+        "signal_summary": "El SAIH recoge y procesa en tiempo real datos de precipitacion, niveles en cauces y embalses, y caudales, con seguimiento especifico de eventos extremos y avenidas.",
+        "why_next": "Falta enlazar los puntos y boletines concretos usados en la DANA para reconstruir la cadena hidrologica de alerta.",
+        "source_title": "SAIH - Confederacion Hidrografica del Jucar",
+        "source_url": "https://saih.chj.es/saih",
+        "source_note": "La propia CHJ presenta el SAIH como red de monitorizacion y seguimiento en situaciones extremas."
+      },
+      {
+        "channel_id": "generalitat-cce-112",
+        "channel_name": "Centro de Coordinacion de Emergencias / 1.1.2 Comunitat Valenciana",
+        "operator": "Generalitat Valenciana",
+        "scope": "Activacion de planes, alerta a organismos y medidas de proteccion",
+        "signal_summary": "La cadena autonoma de emergencias integra el CCE y 1.1.2 Comunitat Valenciana para activar planes, alertar a organismos y movilizar recursos de proteccion civil.",
+        "why_next": "Falta la cronologia operativa real de mensajes, activaciones y decisiones durante la emergencia.",
+        "source_title": "Ley 13/2010, de 23 de noviembre, de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_note": "La ley valenciana define los protocolos operativos y el papel del Centro de Coordinacion de Emergencias como nodo de respuesta."
+      }
+    ],
+    "warning_timeline_events": [
+      {
+        "event_id": "aemet-valencia-2024-10-27-1133-initial-warning",
+        "channel_id": "aemet-meteoalerta",
+        "channel_name": "AEMET Meteoalerta",
+        "operator": "Agencia Estatal de Meteorologia",
+        "event_time": "2024-10-27T11:33:00",
+        "event_precision": "minute_local",
+        "signal_level": "amarillo",
+        "event_summary": "AEMET emitio para el 29 de octubre avisos amarillos de precipitacion de 20 mm en una hora para toda la provincia de Valencia, y de 60 mm en doce horas para Litoral norte y Litoral sur.",
+        "why_it_matters": "Ancla una primera alerta oficial previa al episodio que luego se fue elevando durante la secuencia de avisos.",
+        "source_title": "Situacion de lluvias intensas en la Peninsula y Baleares entre el 28 de octubre y 4 de noviembre de 2024",
+        "source_url": "https://www.aemet.es/documentos/es/conocermas/recursos_en_linea/publicaciones_y_estudios/estudios/estudio_28_oct_4_nov_2024.pdf",
+        "source_locator": "pp. 30-31, lineas 775-779",
+        "source_note": "Estudio oficial de AEMET que resume la secuencia de avisos emitidos para las zonas mas afectadas de Valencia."
+      },
+      {
+        "event_id": "aemet-valencia-2024-10-29-0736-red-warning-litoral-sur",
+        "channel_id": "aemet-meteoalerta",
+        "channel_name": "AEMET Meteoalerta",
+        "operator": "Agencia Estatal de Meteorologia",
+        "event_time": "2024-10-29T07:36:00",
+        "event_precision": "minute_local",
+        "signal_level": "rojo observado",
+        "event_summary": "AEMET emitio avisos observados de nivel rojo en Litoral sur por acumulados de 90 mm en una hora y 180 mm en doce horas, validos hasta las 12:00.",
+        "why_it_matters": "Marca un salto de severidad en la manana del 29 de octubre y permite empezar a reconstruir la cronologia oficial de avisos de maxima alerta.",
+        "source_title": "Situacion de lluvias intensas en la Peninsula y Baleares entre el 28 de octubre y 4 de noviembre de 2024",
+        "source_url": "https://www.aemet.es/documentos/es/conocermas/recursos_en_linea/publicaciones_y_estudios/estudios/estudio_28_oct_4_nov_2024.pdf",
+        "source_locator": "p. 31, lineas 785-787",
+        "source_note": "Estudio oficial de AEMET sobre el episodio del 29 de octubre de 2024."
+      },
+      {
+        "event_id": "aemet-valencia-2024-10-29-0941-red-warning-litoral-norte-interior-norte",
+        "channel_id": "aemet-meteoalerta",
+        "channel_name": "AEMET Meteoalerta",
+        "operator": "Agencia Estatal de Meteorologia",
+        "event_time": "2024-10-29T09:41:00",
+        "event_precision": "minute_local",
+        "signal_level": "rojo observado",
+        "event_summary": "A las 09:41 horas AEMET elevo a rojo los avisos de Litoral norte e Interior norte con acumulados de 90 mm en una hora y 180 mm en doce horas, hasta las 18:00.",
+        "why_it_matters": "A\u00f1ade una segunda elevacion a rojo dentro de la misma manana, ampliando la cobertura territorial de la maxima alerta oficial.",
+        "source_title": "Situacion de lluvias intensas en la Peninsula y Baleares entre el 28 de octubre y 4 de noviembre de 2024",
+        "source_url": "https://www.aemet.es/documentos/es/conocermas/recursos_en_linea/publicaciones_y_estudios/estudios/estudio_28_oct_4_nov_2024.pdf",
+        "source_locator": "p. 31, lineas 790-792",
+        "source_note": "Estudio oficial de AEMET sobre el episodio del 29 de octubre de 2024."
+      }
+    ]
+  },
+  "accountability_ledger": {
+    "scope_label": "Capa generica de accountability para reglas, hallazgos oficiales, actos administrativos y cadenas de responsabilidad previas o posteriores al dano",
+    "governing_rules": [
+      {
+        "rule_id": "patricova-compatibilidad-riesgo",
+        "rule_kind": "territorial-planning",
+        "title": "PATRICOVA obliga a compatibilizar planeamiento y riesgo de inundacion",
+        "duty_summary": "El planeamiento territorial y urbanistico debe incorporar la cartografia y las categorias oficiales de riesgo de inundacion.",
+        "exposure_mechanism": "Si esa compatibilidad falla, pueden consolidarse usos, tejidos urbanos e infraestructuras en zonas donde el riesgo ya era oficialmente conocido.",
+        "source_title": "PATRICOVA - Plan de accion territorial sobre prevencion del riesgo de inundacion",
+        "source_url": "https://mediambient.gva.es/es/web/planificacion-territorial-e-infraestructura-verde/patricova-plan-de-accion-territorial-de-caracter-sectorial-sobre-prevencion-del-riesgo-de-inundacion-en-la-comunitat-valenciana",
+        "source_locator": "Decreto 201/2015",
+        "source_note": "Regla territorial de base para auditar si planeamiento y desarrollos posteriores respetaron el riesgo oficial."
+      },
+      {
+        "rule_id": "rdph-usos-vulnerables-zona-inundable",
+        "rule_kind": "water-domain",
+        "title": "RDPH limita usos vulnerables en zona inundable y flujo preferente",
+        "duty_summary": "El dominio publico hidraulico y su reglamento condicionan obras, usos y autorizaciones en zonas inundables y de flujo preferente.",
+        "exposure_mechanism": "Si autorizaciones, tolerancias o proyectos no aterrizan bien esas restricciones, aumenta la exposicion material al dano.",
+        "source_title": "Reglamento del Dominio Publico Hidraulico",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1986-10638",
+        "source_locator": "art. 9 bis y concordantes",
+        "source_note": "Regla hidraulica clave para pasar de riesgo conocido a autorizaciones o tolerancias concretas."
+      },
+      {
+        "rule_id": "ley-proteccion-civil-cadena-alerta",
+        "rule_kind": "emergency-governance",
+        "title": "La cadena de alerta y coordinacion depende de una arquitectura legal y operativa predefinida",
+        "duty_summary": "La normativa de proteccion civil fija competencias de alerta, activacion de planes, coordinacion y comunicacion institucional.",
+        "exposure_mechanism": "Si la arquitectura de mando o escalado concentra decisiones tecnicas en cadenas politicas u organos no suficientemente automatizados, puede agravar la vulnerabilidad.",
+        "source_title": "Ley 13/2010, de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_locator": "sistema valenciano de proteccion civil y CCE",
+        "source_note": "Regla de gobernanza reutilizable tambien para fallos de coordinacion no ligados a inundaciones."
+      }
+    ],
+    "official_findings": [
+      {
+        "finding_id": "paiporta-saneamiento-red-unitaria-deficitaria",
+        "category": "infrastructure-diagnosis",
+        "entity_name": "Ayuntamiento de Paiporta",
+        "finding_date": "2008-01-01",
+        "finding_summary": "El Plan Director de Saneamiento describia una red unitaria, insuficiencias de drenaje y episodios de inundacion en bajos y sotanos.",
+        "accountability_implication": "La debilidad de drenaje ya estaba oficialmente diagnosticada antes de la DANA y podia servir de base para priorizacion, mantenimiento o redise\u00f1o.",
+        "source_title": "Plan Director de Saneamiento de Paiporta",
+        "source_url": "https://paiporta.es/documentos/Plan_Director_Saneamiento.pdf",
+        "source_locator": "diagnostico general y episodios de inundacion",
+        "source_note": "Hallazgo tecnico municipal previo al desastre."
+      },
+      {
+        "finding_id": "chj-arpsi-poyo-solucion-global-pendiente",
+        "category": "basin-risk-diagnosis",
+        "entity_name": "Confederacion Hidrografica del Jucar",
+        "finding_date": "2023-01-01",
+        "finding_summary": "La CHJ situaba municipios de l'Horta Sud dentro del ARPSI del Poyo y seguia hablando de la necesidad de una solucion global al problema de inundaciones.",
+        "accountability_implication": "La exposicion del corredor no era sorpresiva; estaba reconocida por la autoridad de cuenca como problema sistemico pendiente.",
+        "source_title": "Plan de Gestion del Riesgo de Inundacion - Demarcacion del Jucar",
+        "source_url": "https://www.chj.es/es-es/medioambiente/gestiondelriesgodeinundacion/Paginas/default.aspx",
+        "source_locator": "anexo ARPSI del barranco del Poyo",
+        "source_note": "Hallazgo de cuenca reutilizable para otros casos de riesgo estructural."
+      },
+      {
+        "finding_id": "global-omnium-objecciones-red-agua",
+        "category": "technical-objection",
+        "entity_name": "Global Omnium / expediente Paiporta 557433N",
+        "finding_date": "2024-11-28",
+        "finding_summary": "La operadora del agua exigio sustituir tramos de fibrocemento, incorporar hidrantes y prever medidas provisionales de suministro durante las obras.",
+        "accountability_implication": "Incluso en la aprobacion del PAI seguian aflorando debilidades materiales de la red y condiciones tecnicas pendientes de integrar.",
+        "source_title": "Acuerdo plenario de aprobacion del PAI de Paiporta",
+        "source_url": "https://paiporta.sede.dival.es/tablondeanuncios/anuncio.aspx?id=557433",
+        "source_locator": "estimacion de alegaciones de Global Omnium",
+        "source_note": "Ejemplo de hallazgo tecnico oficial que enlaza infraestructura y responsabilidad administrativa."
+      }
+    ],
+    "administrative_acts": [
+      {
+        "act_id": "paiporta-2020-suspension-licencias",
+        "act_type": "license-suspension",
+        "entity_name": "Ayuntamiento de Paiporta",
+        "act_date": "2020-09-24",
+        "status": "approved",
+        "act_summary": "El pleno suspendio licencias de parcelacion, edificacion y demolicion en el ambito Pintor Benedito / Poeta Llorente / Enrique Reig.",
+        "accountability_implication": "Muestra que el Ayuntamiento ejercia poder regulatorio directo sobre el corredor y podia modular el ritmo y las condiciones de ocupacion del ambito.",
+        "source_title": "Acuerdo plenario de suspension de licencias",
+        "source_url": "https://paiporta.sede.dival.es/tablondeanuncios/anuncio.aspx?id=325869",
+        "source_locator": "24/09/2020",
+        "source_note": "Acto administrativo util para casos de exposicion urbana, corrupcion urbanistica o tolerancia regulatoria."
+      },
+      {
+        "act_id": "paiporta-2024-registro-pai-reparcelacion",
+        "act_type": "urbanization-file",
+        "entity_name": "Ayuntamiento de Paiporta",
+        "act_date": "2024-03-07",
+        "status": "registered",
+        "act_summary": "Se registraron el PAI, el proyecto de urbanizacion y la reparcelacion del corredor, describiendo aun el ambito como sin abrir ni urbanizar.",
+        "accountability_implication": "Permite auditar que grado de preparacion material y regulatoria tenia la actuacion pocos meses antes de la DANA.",
+        "source_title": "Expediente municipal 557433N",
+        "source_url": "https://paiporta.sede.dival.es/tablondeanuncios/anuncio.aspx?id=557433",
+        "source_locator": "documentacion registrada el 07/03/2024",
+        "source_note": "Acto administrativo previo al desastre con trazabilidad documental."
+      },
+      {
+        "act_id": "paiporta-2024-aprobacion-pai-post-dana",
+        "act_type": "urbanization-approval",
+        "entity_name": "Ayuntamiento de Paiporta",
+        "act_date": "2024-11-28",
+        "status": "approved",
+        "act_summary": "La aprobacion plenaria del PAI por gestion directa llego despues del episodio del 29 de octubre de 2024.",
+        "accountability_implication": "Ayuda a situar temporalmente si la actuacion seguia sin cierre administrativo cuando ya se habia producido el dano masivo.",
+        "source_title": "Acuerdo plenario de aprobacion del PAI",
+        "source_url": "https://paiporta.sede.dival.es/tablondeanuncios/anuncio.aspx?id=557433",
+        "source_locator": "28/11/2024",
+        "source_note": "La fecha es un dato objetivo de la secuencia administrativa."
+      }
+    ],
+    "responsibility_links": [
+      {
+        "link_id": "link-ayuntamiento-paiporta-corredor-licencias",
+        "actor": "Ayuntamiento de Paiporta",
+        "actor_scope": "Pleno y gestion urbanistica municipal",
+        "linked_object_type": "administrative_act",
+        "linked_object_id": "paiporta-2020-suspension-licencias",
+        "role_in_chain": "autoriza, suspende o condiciona usos y desarrollos en el ambito",
+        "obligation_basis": "planeamiento, licencias, urbanizacion y mantenimiento local",
+        "accountability_question": "Que poder real tenia el municipio para evitar o corregir exposicion urbana conocida en el corredor?",
+        "source_title": "Acuerdos y expediente municipal de Paiporta",
+        "source_url": "https://paiporta.sede.dival.es/tablondeanuncios/anuncio.aspx?id=557433",
+        "source_locator": "suspension 2020 + expediente 557433N",
+        "source_note": "Cadena de responsabilidad administrativa local reutilizable para otros municipios o sectores."
+      },
+      {
+        "link_id": "link-chj-riesgo-cuenca-y-condiciones",
+        "actor": "Confederacion Hidrografica del Jucar",
+        "actor_scope": "Autoridad de cuenca y dominio publico hidraulico",
+        "linked_object_type": "governing_rule",
+        "linked_object_id": "rdph-usos-vulnerables-zona-inundable",
+        "role_in_chain": "diagnostica riesgo de cuenca y condiciona actuaciones en zona inundable",
+        "obligation_basis": "RDPH, cartografia de riesgo y gestion del riesgo de inundacion",
+        "accountability_question": "Que condicionamientos hidraulicos existian y como debian reflejarse en proyectos, usos o autorizaciones?",
+        "source_title": "RDPH y PGRI Jucar",
+        "source_url": "https://www.chj.es/es-es/medioambiente/gestiondelriesgodeinundacion/Paginas/default.aspx",
+        "source_locator": "art. 9 bis + ARPSI Poyo",
+        "source_note": "Responsabilidad funcional no limitada al dia del desastre."
+      },
+      {
+        "link_id": "link-generalitat-cadena-alerta",
+        "actor": "Generalitat Valenciana",
+        "actor_scope": "Conselleria competente, CCE y sistema valenciano de emergencias",
+        "linked_object_type": "governing_rule",
+        "linked_object_id": "ley-proteccion-civil-cadena-alerta",
+        "role_in_chain": "coordina activacion de planes, avisos y medidas de proteccion civil",
+        "obligation_basis": "Ley 13/2010 y sistema valenciano de proteccion civil",
+        "accountability_question": "Hasta que punto la arquitectura de alerta y escalado dependia de decisiones politicas o mixtas en vez de automatismos tecnicos?",
+        "source_title": "Ley 13/2010 y canales oficiales de emergencia",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_locator": "sistema valenciano de proteccion civil",
+        "source_note": "Ejemplo de cadena de responsabilidad reutilizable para otros fallos de gobernanza."
+      }
+    ],
+    "named_accountability": []
+  },
+  "structural_evidence": {
+    "scope_label": "Reglas de suelo, agua, licencias y gobernanza que pueden haber amplificado la exposicion previa al desastre, junto con blancos concretos de auditoria y primeras filas de evidencia para pasar de la norma al expediente",
+    "structural_risk_factors": [
+      {
+        "factor_id": "patricova-floodplain-planning",
+        "category": "Ordenacion territorial",
+        "title": "PATRICOVA como regla de compatibilidad territorial con el riesgo de inundacion",
+        "risk_mechanism": "Si el planeamiento territorial y urbanistico no incorpora bien la cartografia y las categorias de riesgo, pueden consolidarse usos y tejidos urbanos expuestos en zonas inundables.",
+        "accountability_focus": "Auditar si planeamiento, revisiones, licencias y desarrollos posteriores respetaron o no las restricciones y cartografias de riesgo de inundacion.",
+        "source_title": "PATRICOVA - Plan de accion territorial sobre prevencion del riesgo de inundacion en la Comunitat Valenciana",
+        "source_url": "https://mediambient.gva.es/es/web/planificacion-territorial-e-infraestructura-verde/patricova-plan-de-accion-territorial-de-caracter-sectorial-sobre-prevencion-del-riesgo-de-inundacion-en-la-comunitat-valenciana",
+        "source_locator": "Decreto 201/2015, de 29 de octubre, del Consell",
+        "source_note": "La Generalitat presenta PATRICOVA como el instrumento territorial especifico para prevenir el riesgo de inundacion y ordenar sus limitaciones en la Comunitat Valenciana."
+      },
+      {
+        "factor_id": "flood-risk-plan-compatibility",
+        "category": "Compatibilidad de planes",
+        "title": "Los planes urbanisticos no pueden ser incompatibles con los planes de gestion del riesgo de inundacion",
+        "risk_mechanism": "Cuando la ordenacion del suelo, los desarrollos urbanisticos o las infraestructuras se separan de los planes de riesgo, se mantiene o agrava la exposicion de personas y bienes.",
+        "accountability_focus": "Cruzar planes municipales y decisiones de suelo con PGRI, cartografia de riesgo y proteccion civil para localizar autorizaciones o inacciones incompatibles.",
+        "source_title": "Real Decreto 903/2010, de evaluacion y gestion de riesgos de inundacion",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-11184",
+        "source_locator": "arts. 11, 15 y 18",
+        "source_note": "La norma estatal obliga a coordinar gestion del riesgo, proteccion civil y ordenacion territorial, y a que los instrumentos urbanisticos no contradigan esos planes."
+      },
+      {
+        "factor_id": "hydraulic-domain-vulnerable-uses",
+        "category": "Usos vulnerables en zona inundable",
+        "title": "Limites estatales a construcciones y usos vulnerables en zona de flujo preferente y zonas inundables",
+        "risk_mechanism": "La permanencia o autorizacion de usos vulnerables en zonas inundables incrementa el dano esperable y convierte en auditable quien autorizo, tolero o no corrigio esa vulnerabilidad.",
+        "accountability_focus": "Revisar licencias, autorizaciones, informes hidraulicos y medidas de reduccion de vulnerabilidad en edificios e instalaciones expuestas.",
+        "source_title": "Texto refundido de la Ley de Aguas y reforma del Reglamento del Dominio Publico Hidraulico",
+        "source_url": "https://www.boe.es/boe/dias/2016/12/29/pdfs/BOE-A-2016-12466.pdf",
+        "source_locator": "art. 11 TRLA; arts. 9 bis, 9 ter y 9 quater RDPH",
+        "source_note": "El marco estatal define zonas inundables y refuerza las limitaciones a usos vulnerables y nuevas implantaciones en zona de flujo preferente."
+      },
+      {
+        "factor_id": "soil-law-natural-risk-maps",
+        "category": "Mapas de riesgo y urbanismo",
+        "title": "La legislacion estatal del suelo exige incorporar mapas de riesgos naturales",
+        "risk_mechanism": "Si los instrumentos de urbanizacion o transformacion del suelo no internalizan el riesgo natural desde el diseno, la vulnerabilidad queda incorporada al propio modelo urbano.",
+        "accountability_focus": "Auditar si las actuaciones de urbanizacion y ordenacion incorporaron mapas de riesgos naturales e informes hidrologicos previos suficientes.",
+        "source_title": "Texto refundido de la Ley de Suelo y Rehabilitacion Urbana",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11723",
+        "source_locator": "arts. 3 y 22",
+        "source_note": "La ley estatal vincula la ordenacion del suelo a la prevencion de riesgos naturales y exige mapas de riesgos en actuaciones de urbanizacion."
+      },
+      {
+        "factor_id": "warning-governance-chain",
+        "category": "Gobernanza de la alerta",
+        "title": "La activacion de planes y medidas de proteccion pasa por una cadena administrativa de emergencias",
+        "risk_mechanism": "Si la alerta ciudadana y la activacion de medidas dependen de una cadena administrativa mal diseada o lenta, el problema ya no es solo meteorologico sino institucional.",
+        "accountability_focus": "Determinar donde la norma deja la decision en organos politicos, directivos u operativos y si habia margen para automatizar o tecnificar mas la cadena de alerta.",
+        "source_title": "Ley 17/2015 del Sistema Nacional de Proteccion Civil y Ley 13/2010 de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-7730",
+        "source_locator": "Ley 17/2015 arts. 12, 14, 17-18; Ley 13/2010 arts. 26 y 56",
+        "source_note": "El marco de proteccion civil distribuye avisos, activacion de planes y medidas de proteccion a traves de organos administrativos concretos; ese diseno institucional es parte del objeto de atribucion."
+      }
+    ],
+    "structural_audit_targets": [
+      {
+        "target_id": "poyo-corridor-urban-planning",
+        "category": "Planeamiento municipal",
+        "title": "Corredor del barranco del Poyo: planeamiento, sectores y clasificacion de suelo",
+        "geography": "Paiporta, Picanya, Catarroja y otros municipios del corredor del barranco del Poyo",
+        "why_priority": "La auditoria debe empezar donde el riesgo inundable se cruza con trama urbana consolidada y desarrollos autorizados junto a un corredor de avenida.",
+        "audit_question": "Que planes generales, modificaciones, sectores o actuaciones de urbanizacion mantuvieron o ampliaron usos urbanos en zonas de riesgo?",
+        "documents_to_audit": [
+          "PGOU o normas subsidiarias vigentes y sus modificaciones",
+          "cartografia PATRICOVA y SNCZI o PGRI aplicable",
+          "informes hidraulicos y de proteccion civil emitidos durante la tramitacion"
+        ],
+        "authority_chain": "Ayuntamiento -> Generalitat competente en urbanismo u ordenacion -> Confederacion Hidrografica del Jucar cuando exista afeccion hidraulica",
+        "next_join_needed": "Cruzar geometrias de planeamiento y sectores con zonas inundables y la fecha de aprobacion de cada acto.",
+        "source_title": "PATRICOVA - Plan de accion territorial sobre prevencion del riesgo de inundacion en la Comunitat Valenciana",
+        "source_url": "https://mediambient.gva.es/es/web/planificacion-territorial-e-infraestructura-verde/patricova-plan-de-accion-territorial-de-caracter-sectorial-sobre-prevencion-del-riesgo-de-inundacion-en-la-comunitat-valenciana",
+        "source_locator": "Decreto 201/2015, de 29 de octubre, del Consell",
+        "source_note": "Sirve como anclaje oficial para revisar si el planeamiento y sus modificaciones respetaron la cartografia y las categorias de riesgo."
+      },
+      {
+        "target_id": "horta-sud-vulnerable-uses-licenses",
+        "category": "Licencias y usos vulnerables",
+        "title": "Licencias de vivienda, comercio y equipamientos en zonas inundables de l'Horta Sud",
+        "geography": "Paiporta, Catarroja, Sedavi, Benetusser, Alfafar y municipios proximos",
+        "why_priority": "La atribucion no pasa solo por el plan general: tambien por licencias, cambios de uso, ocupaciones y tolerancia administrativa sobre inmuebles vulnerables.",
+        "audit_question": "Que licencias, autorizaciones, declaraciones responsables o cambios de uso permitieron o mantuvieron usos vulnerables en zona inundable o de flujo preferente?",
+        "documents_to_audit": [
+          "licencias urbanisticas y de actividad",
+          "primeras ocupaciones, cambios de uso y declaraciones responsables",
+          "informes hidraulicos, condicionantes y expedientes de disciplina o restablecimiento"
+        ],
+        "authority_chain": "Ayuntamiento -> Generalitat sectorial si procede -> CHJ si existian informes o autorizaciones hidraulicas preceptivas",
+        "next_join_needed": "Unir parcelario o emplazamientos con zona inundable y flujo preferente, distinguiendo nuevas autorizaciones de situaciones heredadas no corregidas.",
+        "source_title": "Texto refundido de la Ley de Aguas y reforma del Reglamento del Dominio Publico Hidraulico",
+        "source_url": "https://www.boe.es/boe/dias/2016/12/29/pdfs/BOE-A-2016-12466.pdf",
+        "source_locator": "art. 11 TRLA; arts. 9 bis, 9 ter y 9 quater RDPH",
+        "source_note": "El marco estatal sirve de base para revisar usos vulnerables y permisos en zona inundable y de flujo preferente."
+      },
+      {
+        "target_id": "municipal-flood-emergency-plans",
+        "category": "Preparacion municipal",
+        "title": "Planes territoriales municipales, planes de inundacion y CECOPAL",
+        "geography": "Municipios afectados de la Comunitat Valenciana",
+        "why_priority": "Antes de discutir decisiones del dia 29 hay que saber si los municipios tenian plan, revision, simulacros y protocolos utiles o solo papeles desactualizados.",
+        "audit_question": "Que municipios tenian plan territorial municipal, plan frente al riesgo de inundacion, CECOPAL y procedimientos realmente aprobados, actualizados y ejercitados?",
+        "documents_to_audit": [
+          "Plan Territorial Municipal y plan de actuacion frente al riesgo de inundacion",
+          "resoluciones de homologacion o aprobacion",
+          "registros de simulacros, revisiones y activacion de CECOPAL"
+        ],
+        "authority_chain": "Ayuntamiento -> Agencia Valenciana de Seguridad y Respuesta a las Emergencias o Generalitat",
+        "next_join_needed": "Cruzar municipios danados con estado de homologacion, fecha de revision y evidencia de despliegue operativo real.",
+        "source_title": "Ley 13/2010, de 23 de noviembre, de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-19046",
+        "source_locator": "arts. 16, 21-26 y 56",
+        "source_note": "El marco valenciano permite comprobar si la preparacion municipal existia no solo en teoria sino como capacidad operativa util."
+      },
+      {
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "category": "Infraestructura hidraulica y drenaje",
+        "title": "Obras de drenaje, encauzamiento y mantenimiento de puntos criticos",
+        "geography": "Barrancos, ramblas, pasos inferiores y redes de drenaje de los municipios afectados",
+        "why_priority": "La exposicion tambien depende de si obras, encauzamientos, puentes, colectores y limpiezas estaban dimensionados, mantenidos y priorizados.",
+        "audit_question": "Que estudios, obras, contratos de mantenimiento o avisos tecnicos detectaron puntos criticos y como respondieron las administraciones competentes?",
+        "documents_to_audit": [
+          "estudios hidrologicos e hidraulicos",
+          "proyectos y obras de drenaje o encauzamiento",
+          "contratos de mantenimiento, limpieza y evaluacion de puntos criticos"
+        ],
+        "authority_chain": "Ayuntamiento o entidad gestora -> Generalitat de infraestructuras -> CHJ segun cauce y competencia",
+        "next_join_needed": "Relacionar puntos criticos del sistema de drenaje con contratos, obras ejecutadas o no ejecutadas y reparto competencial.",
+        "source_title": "Real Decreto 903/2010, de evaluacion y gestion de riesgos de inundacion",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-11184",
+        "source_locator": "arts. 11, 15 y 18",
+        "source_note": "La coordinacion entre gestion del riesgo, medidas estructurales e instrumentos territoriales es la base para revisar si la infraestructura estaba preparada."
+      },
+      {
+        "target_id": "warning-governance-technical-trigger",
+        "category": "Gobernanza de alertas",
+        "title": "Criterios tecnicos frente a autorizacion politica en la alerta a la poblacion",
+        "geography": "Cadena Generalitat / CCE / 1.1.2 / Proteccion Civil / ayuntamientos",
+        "why_priority": "El punto critico no es solo si hubo aviso tecnico, sino si la alerta a la poblacion dependia de automatismos claros o de una cadena politico-administrativa lenta.",
+        "audit_question": "Que parte de la activacion de mensajes a la poblacion, ES-Alert y medidas de autoproteccion estaba reglada tecnicamente y que parte dependia de decision politica o directiva?",
+        "documents_to_audit": [
+          "protocolos del CCE y de 1.1.2",
+          "criterios de activacion de ES-Alert y avisos masivos",
+          "organigramas, turnos y autorizaciones requeridas para alertar"
+        ],
+        "authority_chain": "Sistema Nacional de Proteccion Civil -> Generalitat Valenciana -> CCE o 1.1.2 -> ayuntamientos",
+        "next_join_needed": "Convertir protocolos y comparecencias en un grafo actor -> permiso -> mensaje -> tiempo para detectar cuellos de botella humanos.",
+        "source_title": "Ley 17/2015 del Sistema Nacional de Proteccion Civil y Ley 13/2010 de Proteccion Civil y Gestion de Emergencias",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-7730",
+        "source_locator": "Ley 17/2015 arts. 12, 14, 17-18; Ley 13/2010 arts. 26 y 56",
+        "source_note": "Este blanco traduce la cadena normativa de alerta en una pregunta auditable sobre dependencia politica frente a activacion tecnica."
+      },
+      {
+        "target_id": "risk-maps-and-urbanization-projects",
+        "category": "Urbanizacion y proyectos",
+        "title": "Actuaciones de urbanizacion y proyectos que debian incorporar mapas de riesgo natural",
+        "geography": "Sectores urbanizados o transformados en zonas expuestas antes de 2024",
+        "why_priority": "No basta con el plan general: las actuaciones concretas de urbanizacion y sus informes pueden mostrar donde se incorporo o ignoro el riesgo.",
+        "audit_question": "Que proyectos de urbanizacion, reparcelacion o dotaciones incorporaron mapas de riesgo y condicionantes suficientes antes de materializarse?",
+        "documents_to_audit": [
+          "proyectos de urbanizacion y reparcelacion",
+          "informes ambientales, territoriales y mapas de riesgos naturales",
+          "condiciones impuestas en aprobaciones y recepciones de obras"
+        ],
+        "authority_chain": "Ayuntamiento -> Generalitat urbanismo o medio ambiente -> CHJ u otros organismos sectoriales cuando proceda",
+        "next_join_needed": "Enlazar actuaciones aprobadas con mapas de riesgo natural y con tejido edificado despues materializado.",
+        "source_title": "Texto refundido de la Ley de Suelo y Rehabilitacion Urbana",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11723",
+        "source_locator": "arts. 3 y 22",
+        "source_note": "La ley del suelo sirve para revisar si las actuaciones concretas de urbanizacion integraron mapas de riesgos naturales antes de ejecutarse."
+      }
+    ],
+    "evidence_rows": [
+      {
+        "evidence_id": "paiporta-ptme-initial-2011",
+        "target_id": "municipal-flood-emergency-plans",
+        "entity_name": "Paiporta",
+        "signal_type": "PTME / acuerdo plenario",
+        "certainty": "high",
+        "signal_title": "Aprobacion inicial municipal del PTME con el riesgo de inundacion expresado en el propio acuerdo",
+        "pre_dana_reading": "El Pleno de 31 de marzo de 2011 aprobo inicialmente el Plan Territorial Municipal de Emergencias y dejo por escrito que las inundaciones eran el principal riesgo por el Barranco de Chiva, por lo que consideraba necesario un plan especifico frente a inundaciones integrado en el plan municipal.",
+        "why_it_matters": "Sirve para probar que el municipio tenia identificada de forma oficial, anos antes de la DANA, tanto la exposicion al barranco como la necesidad de un plan especifico de inundaciones.",
+        "source_title": "Acta del Pleno del Ayuntamiento de Paiporta de 31/03/2011",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1510229421Acta%20n%C2%BA%204-2011%2C%20de%2031%20de%20marzo.pdf",
+        "source_locator": "punto 10, pp. 16-17",
+        "source_note": "Fuente oficial municipal. El acuerdo menciona expresamente el Barranco de Chiva y la necesidad de un Plan de Actuacion Municipal especifico frente al riesgo de inundaciones."
+      },
+      {
+        "evidence_id": "paiporta-register-pending-2026",
+        "target_id": "municipal-flood-emergency-plans",
+        "entity_name": "Paiporta",
+        "signal_type": "PTME + PAM IN / registro AVSRE",
+        "certainty": "medium",
+        "signal_title": "El registro oficial posterior a la DANA sigue mostrando el planeamiento municipal de emergencias como pendiente",
+        "pre_dana_reading": "En el registro oficial exportado el 03/03/2026, la fila de Paiporta aparece con 'Elabor., pend. aprovar' en la parte del PTME y la maquetacion de la fila no deja una lectura tan limpia como en Picanya o Alfafar. La evidencia se usa solo como senal prudente de que el estado registral no aparece cerrado del mismo modo que en municipios vecinos.",
+        "why_it_matters": "Es una pista relevante para la auditoria porque obliga a comprobar si el municipio llego a la DANA con el PTME y el plan de inundaciones formalmente homologados o con expedientes todavia abiertos.",
+        "source_title": "AVSRE - Estat de la planificacio local d'emergencies",
+        "source_url": "https://www.112cv.gva.es/documents/163565706/174325491/NVL_PlanMun.pdf/ca7c9b7f-9c81-453d-9b4e-141851174a31?t=1657275473212",
+        "source_locator": "fila Paiporta del registro exportado el 03/03/2026",
+        "source_note": "Lectura con certeza media: la maquetacion del PDF envuelve la fila y no permite afirmar con la misma limpieza que en otros municipios todas las fechas o columnas del PAM IN."
+      },
+      {
+        "evidence_id": "catarroja-plan-status-pre-dana",
+        "target_id": "municipal-flood-emergency-plans",
+        "entity_name": "Catarroja",
+        "signal_type": "PTME + PAM IN / registro AVSRE",
+        "certainty": "high",
+        "signal_title": "Plan territorial y plan de inundaciones homologados antes de la DANA",
+        "pre_dana_reading": "El registro oficial de planificacion local de emergencias situa a Catarroja con PTME homologado el 10/12/2018 y con PAM frente al riesgo de inundaciones, nivel A, homologado el 24/10/2017.",
+        "why_it_matters": "La pregunta de responsabilidad ya no es si existia formalmente un plan municipal de base, sino si estaba actualizado, implantado y activado con eficacia cuando llego la emergencia.",
+        "source_title": "AVSRE - Estat de la planificacio local d'emergencies",
+        "source_url": "https://www.112cv.gva.es/documents/163565706/174325491/NVL_PlanMun.pdf/ca7c9b7f-9c81-453d-9b4e-141851174a31?t=1657275473212",
+        "source_locator": "fila Catarroja del registro exportado el 03/03/2026",
+        "source_note": "Export oficial de la Generalitat con fechas de aprobacion y homologacion por municipio y por tipo de plan."
+      },
+      {
+        "evidence_id": "picanya-plan-status-pre-dana",
+        "target_id": "municipal-flood-emergency-plans",
+        "entity_name": "Picanya",
+        "signal_type": "PTME + PAM IN / registro AVSRE",
+        "certainty": "high",
+        "signal_title": "Plan territorial y plan de inundaciones homologados antes de la DANA",
+        "pre_dana_reading": "El registro oficial situa a Picanya con PTME homologado el 18/01/2023 y con PAM frente al riesgo de inundaciones, nivel A, homologado tambien el 18/01/2023.",
+        "why_it_matters": "Permite usar Picanya como caso de contraste: la existencia formal del plan era anterior al episodio y la auditoria debe bajar a revision, implantacion y operativa real.",
+        "source_title": "AVSRE - Estat de la planificacio local d'emergencies",
+        "source_url": "https://www.112cv.gva.es/documents/163565706/174325491/NVL_PlanMun.pdf/ca7c9b7f-9c81-453d-9b4e-141851174a31?t=1657275473212",
+        "source_locator": "fila Picanya del registro exportado el 03/03/2026",
+        "source_note": "En la misma fila, el registro marca riesgo A para inundaciones y fechas de homologacion previas al 29/10/2024."
+      },
+      {
+        "evidence_id": "alfafar-plan-status-pre-dana",
+        "target_id": "municipal-flood-emergency-plans",
+        "entity_name": "Alfafar",
+        "signal_type": "PTME + PAM IN / registro AVSRE",
+        "certainty": "high",
+        "signal_title": "Plan territorial y plan de inundaciones homologados pocos meses antes de la DANA",
+        "pre_dana_reading": "El registro oficial situa a Alfafar con PTME homologado el 12/04/2024 y con PAM frente al riesgo de inundaciones, nivel A, homologado tambien el 12/04/2024.",
+        "why_it_matters": "Muestra un municipio del area mas golpeada donde el marco formal aparece homologado en 2024, por lo que la auditoria debe distinguir entre homologacion reciente, implantacion real y respuesta efectiva.",
+        "source_title": "AVSRE - Estat de la planificacio local d'emergencies",
+        "source_url": "https://www.112cv.gva.es/documents/163565706/174325491/NVL_PlanMun.pdf/ca7c9b7f-9c81-453d-9b4e-141851174a31?t=1657275473212",
+        "source_locator": "fila Alfafar del registro exportado el 03/03/2026",
+        "source_note": "La fila muestra fechas pre-DANA tanto para PTME como para PAM IN."
+      },
+      {
+        "evidence_id": "benetusser-plan-status-post-dana-homologation",
+        "target_id": "municipal-flood-emergency-plans",
+        "entity_name": "Benetusser",
+        "signal_type": "PTME + PAM IN / registro AVSRE",
+        "certainty": "high",
+        "signal_title": "Aprobacion municipal antes de la DANA pero homologacion autonoma posterior",
+        "pre_dana_reading": "El registro oficial situa a Benetusser con PTME aprobado el 25/04/2024 y homologado el 14/03/2025; para el PAM frente al riesgo de inundaciones, nivel A, la fila reproduce las mismas fechas, de modo que la homologacion aparece posterior al episodio del 29/10/2024.",
+        "why_it_matters": "Es una evidencia util de que en municipios especialmente afectados puede haber habido plan aprobado localmente pero sin homologacion autonoma cerrada antes de la DANA.",
+        "source_title": "AVSRE - Estat de la planificacio local d'emergencies",
+        "source_url": "https://www.112cv.gva.es/documents/163565706/174325491/NVL_PlanMun.pdf/ca7c9b7f-9c81-453d-9b4e-141851174a31?t=1657275473212",
+        "source_locator": "fila Benetusser del registro exportado el 03/03/2026",
+        "source_note": "La utilidad del registro aqui es comparar aprobacion local y homologacion autonoma con fechas exactas."
+      },
+      {
+        "evidence_id": "paiporta-saneamiento-2008-red-deficitaria",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta",
+        "signal_type": "Plan Director de Saneamiento / diagnostico de red",
+        "certainty": "high",
+        "signal_title": "El plan director municipal describio la red de saneamiento como deficitaria e inadecuada para evacuar pluviales y residuales",
+        "pre_dana_reading": "El Plan Director de Saneamiento de enero de 2008 senalo que la red era en su mayor parte unitaria, que algunos tramos tenian seccion insuficiente, pendientes muy suaves o contrapendientes, que en la zona norte descargaba en un unico punto del colector general del barranco y que, en conjunto, su funcionamiento era deficiente e inadecuado para evacuar las aguas pluviales y residuales del municipio.",
+        "why_it_matters": "Aporta una senal oficial, muchos anos antes de la DANA, de que el drenaje urbano local ya estaba diagnosticado como estructuralmente debil y no solo sometido a un evento extraordinario imprevisible.",
+        "source_title": "Plan Director de Saneamiento de Paiporta (Valencia)",
+        "source_url": "https://paiporta.es/documentos/Plan_Director_Saneamiento.pdf",
+        "source_locator": "memoria, apartado 4.1, pp. 22-23",
+        "source_note": "Documento municipal oficial de enero de 2008 sobre la infraestructura existente y el diagnostico general de la red de saneamiento."
+      },
+      {
+        "evidence_id": "paiporta-saneamiento-2008-inundaciones-previas",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta",
+        "signal_type": "Plan Director de Saneamiento / dano observado",
+        "certainty": "high",
+        "signal_title": "El propio plan municipal ya vinculaba el mal funcionamiento de la red con inundaciones en bajos, sotanos y garajes",
+        "pre_dana_reading": "El mismo plan de 2008 afirmo que el mal funcionamiento de la red provocaba inundaciones en los bajos de algunos edificios cuando llovia y que la escasa presencia de red separativa, junto con colectores unitarios precarios, generaba grandes charcos o inundaciones en sotanos y garajes.",
+        "why_it_matters": "No se limita a una debilidad teorica de la infraestructura: documenta efectos materiales previos y convierte en auditable que administraciones competentes conocieran problemas repetidos de drenaje urbano.",
+        "source_title": "Plan Director de Saneamiento de Paiporta (Valencia)",
+        "source_url": "https://paiporta.es/documentos/Plan_Director_Saneamiento.pdf",
+        "source_locator": "memoria, pp. 23-24",
+        "source_note": "La memoria municipal enlaza el diseno unitario y el funcionamiento deficitario con inundaciones en inmuebles ya antes de 2024."
+      },
+      {
+        "evidence_id": "paiporta-agua-2016-santa-ana-cuello-botella",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta",
+        "signal_type": "Plan Director de Agua / cuello de botella",
+        "certainty": "high",
+        "signal_title": "El plan director de agua detecto conducciones insuficientes hacia Santa Ana y propuso renovarlas",
+        "pre_dana_reading": "El Plan Director de Abastecimiento de Agua de julio de 2016 identifico tramos que reducian de 200 mm a 80 y 100 mm hacia el sector Santa Ana, con perdidas de carga considerables, y concluyo expresamente que esas conducciones eran insuficientes y debian renovarse para dar continuidad al calibre.",
+        "why_it_matters": "Sirve para aterrizar la pregunta de si la infraestructura critica local estaba preparada: el propio municipio tenia diagnosticados cuellos de botella y una necesidad concreta de renovacion en la red.",
+        "source_title": "Plan Director del Abastecimiento de Agua Potable y Riego al Municipio de Paiporta",
+        "source_url": "https://paiporta.es/documentos/Plan_Director_Agua%20Potable.pdf",
+        "source_locator": "memoria, apartado 6.2.2.4, p. 58",
+        "source_note": "Documento municipal oficial de julio de 2016 con analisis hidraulico de la red de abastecimiento y propuesta de mejoras."
+      },
+      {
+        "evidence_id": "paiporta-agua-2016-barranco-crossings",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta",
+        "signal_type": "Plan Director de Agua / cruce critico del barranco",
+        "certainty": "high",
+        "signal_title": "La red de abastecimiento quedaba partida por el barranco y dependia de dos cruces, uno de ellos mediante tuberia aerea en el Pont Nou",
+        "pre_dana_reading": "El plan municipal de 2016 describio que la red quedaba dividida en dos grandes partes por el barranco de Chiva y que el suministro hacia la parte este dependia de dos conducciones que cruzaban el barranco por sendos puentes; en el caso del Pont Nou, la memoria identifica una tuberia aerea de fibrocemento DN 300 colgada dentro del tablero del puente.",
+        "why_it_matters": "Introduce una pieza concreta de infraestructura expuesta sobre el propio corredor del barranco y permite auditar robustez, mantenimiento y dependencia de puntos singulares de cruce antes de la DANA.",
+        "source_title": "Plan Director del Abastecimiento de Agua Potable y Riego al Municipio de Paiporta",
+        "source_url": "https://paiporta.es/documentos/Plan_Director_Agua%20Potable.pdf",
+        "source_locator": "memoria, apartado 6.3.2, pp. 68-70",
+        "source_note": "La memoria analiza expresamente los escenarios de rotura de las conducciones que cruzan el barranco por Pont Vell y Pont Nou."
+      },
+      {
+        "evidence_id": "picanya-planeamiento-2023-proteccion-fluvial",
+        "target_id": "poyo-corridor-urban-planning",
+        "entity_name": "Picanya",
+        "signal_type": "Planeamiento consolidado / proteccion fluvial",
+        "certainty": "high",
+        "signal_title": "El texto consolidado del planeamiento mantenia una proteccion fluvial expresa sobre el barranco y una franja libre de edificacion",
+        "pre_dana_reading": "La documentacion escrita consolidada del planeamiento de Picanya, firmada en mayo de 2023, establece que la proteccion fluvial incluye las riberas y el lecho del Barranco de Xiva, prohibe cualquier uso en el cauce y exige una franja de 5 metros libre de edificacion desde el eje del lecho.",
+        "why_it_matters": "Aterriza la responsabilidad pre-DANA en una regla urbanistica municipal concreta: el riesgo del corredor fluvial no solo era conocido, sino que tenia una proteccion y una distancia minima ya positivizadas en el planeamiento.",
+        "source_title": "Texto consolidado del planeamiento de Picanya (mayo 2023) - Documentacion escrita",
+        "source_url": "https://www.picanya.es/rs/59510/d112d6ad-54ec-438b-9358-4483f9e98868/4c2/fd/1/filename/0-doc-escrita-texto-consolidado-planeamiento-picanya-may2023-f-signed.pdf",
+        "source_locator": "Normas urbanisticas, p. 53, seccion 2 \"Proteccion fluvial\"",
+        "source_note": "Fuente municipal oficial localizada por el explorer. Es util para auditar si el uso efectivo del corredor y las licencias respetaban la proteccion fluvial declarada."
+      },
+      {
+        "evidence_id": "chj-pgri-poyo-arpsi-municipios",
+        "target_id": "poyo-corridor-urban-planning",
+        "entity_name": "Corredor del barranco del Poyo",
+        "signal_type": "PGRI CHJ / ARPSI y solucion global pendiente",
+        "certainty": "high",
+        "signal_title": "La CHJ identificaba antes de la DANA al Poyo como ARPSI y situaba a Paiporta, Picanya, Catarroja, Alfafar, Benetusser y Sedavi dentro del corredor de riesgo",
+        "pre_dana_reading": "El anejo 2 del Proyecto de Plan de Gestion del Riesgo de Inundacion de la CHJ incluye a Paiporta, Picanya, Catarroja, Alfafar, Benetusser y Sedavi entre los municipios del ARPSI del Poyo y senala que los barrancos del Poyo y Pozalet requerian una solucion global al problema de inundaciones con objetivos de proteccion hasta T=500 anos en el Poyo medio y bajo.",
+        "why_it_matters": "No es una intuicion retrospectiva: la administracion hidrologica ya habia reconocido oficialmente el corredor y la necesidad de una solucion estructural antes del episodio de 2024.",
+        "source_title": "Proyecto de Plan de Gestion del Riesgo de Inundacion - Anejo 2",
+        "source_url": "https://www.chj.es/es-es/ciudadano/consultapublica/Documents/PGRI/ANEJO2.pdf",
+        "source_locator": "pp. 43-44 y 56",
+        "source_note": "Fuente oficial de la Confederacion Hidrografica del Jucar localizada por el explorer; sirve para anclar el corredor del Poyo como area de riesgo oficialmente reconocida."
+      },
+      {
+        "evidence_id": "paiporta-pai-2024-unitary-drainage",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
+        "signal_type": "Proyecto de urbanizacion / drenaje unitario",
+        "certainty": "high",
+        "signal_title": "Un proyecto de urbanizacion registrado en marzo de 2024 seguia resolviendo conjuntamente pluviales y residuales sobre la red existente",
+        "pre_dana_reading": "El proyecto de urbanizacion del PAI de las calles Enrique Reig, Poeta Llorente y Pintor Benedito, registrado el 07/03/2024 ante el Ayuntamiento de Paiporta, establece que la evacuacion de aguas pluviales y residuales se realizara de forma unitaria y conecta el ambito con la red existente hacia el colector de la calle Jose Capuz o Maestro Serrano segun el calado.",
+        "why_it_matters": "Aporta un acto urbanistico concreto inmediatamente anterior a la DANA: no solo existian diagnosticos generales sobre la debilidad del saneamiento, sino que seguian tramitandose actuaciones que se apoyaban en un esquema unitario de evacuacion y en la red existente.",
+        "source_title": "Proyecto de urbanizacion del Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/documentos/0-PROYECTO_01_03_2024_firmado.pdf",
+        "source_locator": "memoria, apartado 3.3 Red de saneamiento, p. 15; anejo 1, p. 33",
+        "source_note": "Documento municipal oficial con CSV publicado en sede electronica; es util para auditar como se seguian proyectando las infraestructuras de urbanizacion dentro del casco urbano antes de la DANA."
+      },
+      {
+        "evidence_id": "paiporta-pai-2024-five-year-flood-criterion",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
+        "signal_type": "Proyecto de urbanizacion / criterio hidraulico",
+        "certainty": "high",
+        "signal_title": "El anejo hidraulico del mismo proyecto adopto un periodo de retorno de cinco anos al considerar admisible una proteccion menor frente a inundaciones",
+        "pre_dana_reading": "En el anejo de calculos hidraulicos de la red de saneamiento, el proyecto indica expresamente que en la zona de estudio se puede admitir una proteccion menor contra inundaciones y que, por ello, un valor razonable para el periodo de retorno es de 5 anos.",
+        "why_it_matters": "Hace auditable un criterio de diseno concreto usado en 2024 para una actuacion urbanistica municipal. No prueba por si solo incumplimiento, pero permite contrastar el umbral de proteccion escogido con el contexto de riesgo y con otras obligaciones de planeamiento y drenaje.",
+        "source_title": "Proyecto de urbanizacion del Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/documentos/0-PROYECTO_01_03_2024_firmado.pdf",
+        "source_locator": "anejo 1 Calculos hidraulicos red de saneamiento, p. 34",
+        "source_note": "El valor aparece dentro del criterio de diseno del drenaje del proyecto registrado en marzo de 2024."
+      },
+      {
+        "evidence_id": "paiporta-license-suspension-2020",
+        "target_id": "horta-sud-vulnerable-uses-licenses",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Acuerdo plenario / suspension de licencias",
+        "certainty": "high",
+        "signal_title": "El Pleno suspendio en 2020 las licencias de parcelacion, edificacion y demolicion mientras se redactaba el PAI del ambito",
+        "pre_dana_reading": "En sesion plenaria de 24/09/2020, el Ayuntamiento acordo suspender la tramitacion y otorgamiento de licencias de parcelacion de terrenos, edificacion y demolicion para el ambito comprendido entre Pintor Benedito, Poeta Llorente y Enrique Reig, indicando expresamente que ya se iba a proceder a la redaccion del Programa de Actuacion Integrada de esas manzanas y ordenando publicar el acuerdo en el DOGV.",
+        "why_it_matters": "Aporta un acto regulatorio concreto de control de licencias sobre el mismo corredor antes de la DANA. Sirve para auditar que el municipio identifico formalmente el area como ambito de transformacion integrada y ejercio potestades preventivas sobre parcelacion, obra y demolicion.",
+        "source_title": "Acta del Pleno del Ayuntamiento de Paiporta de 24/09/2020",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1605781937Acta_Pleno_24-09-2020_APROBADA_-_SEFYCU_2291090.pdf",
+        "source_locator": "punto 5, pp. 34-36",
+        "source_note": "Fuente oficial municipal. El acuerdo enlaza la suspension de licencias con la futura redaccion del PAI del ambito."
+      },
+      {
+        "evidence_id": "paiporta-pai-2024-no-eate-municipal-approval",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
+        "signal_type": "PAI / encaje regulatorio y competencia municipal",
+        "certainty": "high",
+        "signal_title": "El PAI de 2024 se tramito sin evaluacion ambiental estrategica al presentarse como documento de gestion que no innovaba el planeamiento",
+        "pre_dana_reading": "El propio PAI afirma que la Evaluacion Ambiental y Territorial Estrategica resulta innecesaria porque el programa no se acompana de ningun instrumento de planeamiento, no innova ni introduce alteracion alguna sobre el planeamiento vigente y deja al Ayuntamiento de Paiporta como unico competente para su tramitacion y aprobacion.",
+        "why_it_matters": "Fija la via regulatoria concreta por la que se tramito una actuacion de 2024 en el corredor. Sirve para auditar si el marco previo de planeamiento y riesgo asumido por el expediente era suficiente o si la ausencia de una nueva evaluacion dejo fuera condicionantes relevantes.",
+        "source_title": "Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719310273.pdf",
+        "source_locator": "apartado 1.2 Evaluacion Ambiental y Territorial Estrategica, p. 15",
+        "source_note": "Documento municipal oficial registrado el 07/03/2024. La utilidad aqui es fijar el encaje regulatorio efectivo del expediente, no afirmar por si solo incumplimiento."
+      },
+      {
+        "evidence_id": "paiporta-pai-2024-integration-limited-to-services",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
+        "signal_type": "PAI / condiciones de integracion con el entorno",
+        "certainty": "high",
+        "signal_title": "La memoria del PAI limito la integracion con el entorno a conexiones de servicios y continuidad de la urbanizacion existente",
+        "pre_dana_reading": "En la memoria justificativa del cumplimiento de las condiciones de integracion con el entorno, el PAI sostiene que las unicas condiciones de integracion son las conexiones de servicios y la continuidad de la urbanizacion existente, y anade que, al margen de completar la apertura y urbanizacion de los viales con la dotacion de servicios correspondientes, no existe ninguna otra condicion especial de integracion con el entorno.",
+        "why_it_matters": "No demuestra por si solo una omision ilegal, pero convierte en auditable como el expediente de 2024 conceptualizo el entorno y sus condicionantes. Es especialmente relevante para contrastarlo despues con cartografia inundable, reglas fluviales y otras restricciones de riesgo natural.",
+        "source_title": "Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719310273.pdf",
+        "source_locator": "apartado 1.3.2 Condiciones de integracion con el entorno, p. 16",
+        "source_note": "Fuente oficial municipal. La fila documenta el marco declarativo del propio expediente sobre que condicionantes reconocia expresamente."
+      },
+      {
+        "evidence_id": "paiporta-pai-2024-external-works-town-hall",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
+        "signal_type": "PAI / obras externas e infraestructura",
+        "certainty": "high",
+        "signal_title": "El PAI atribuia al Ayuntamiento las obras externas de conexion e integracion del ambito",
+        "pre_dana_reading": "El programa indica que las obras externas al ambito del PAI seran sufragadas por el Ayuntamiento, salvo el centro de transformacion exigido por la compania suministradora, que correra a cargo del conjunto de propietarios incluido el propio Ayuntamiento.",
+        "why_it_matters": "Aterriza responsabilidad administrativa sobre infraestructura de conexion fuera del ambito estricto de la unidad de ejecucion. Sirve para auditar que parte de la preparacion material del entorno recaia en la administracion municipal y no solo en los propietarios privados.",
+        "source_title": "Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719310273.pdf",
+        "source_locator": "apartados 0.2.3 y 0.3, p. 8",
+        "source_note": "Documento municipal oficial. La evidencia sirve para fijar quien asumia las obras externas de integracion e infraestructura en el expediente."
+      },
+      {
+        "evidence_id": "paiporta-reparcelacion-2024-unurbanized-enclave",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Proyecto de reparcelacion / estado material del ambito",
+        "certainty": "high",
+        "signal_title": "En marzo de 2024 la propia reparcelacion seguia describiendo el ambito como un espacio sin abrir ni urbanizar dentro del suelo urbano",
+        "pre_dana_reading": "El proyecto de reparcelacion registrado el 07/03/2024 afirma que el ambito era un espacio sin abrir ni urbanizar, un descampado pendiente de gestion dentro de suelo urbano, y que la actuacion venia motivada por la necesidad de abrir y urbanizar los viales y culminar la urbanizacion del ambito.",
+        "why_it_matters": "Aporta una senal oficial directa sobre falta de preparacion material del corredor pocos meses antes de la DANA. No es una reconstruccion retrospectiva: el propio expediente municipal reconoce que el area seguia pendiente de gestion y urbanizacion en marzo de 2024.",
+        "source_title": "Proyecto de reparcelacion del Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719310096.pdf",
+        "source_locator": "memoria, apartado 1.1, p. 4",
+        "source_note": "Fuente oficial municipal registrada el 07/03/2024."
+      },
+      {
+        "evidence_id": "paiporta-reparcelacion-2024-town-hall-direct-actor",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Proyecto de reparcelacion / ayuntamiento como actor y beneficiario",
+        "certainty": "high",
+        "signal_title": "El Ayuntamiento figuraba dentro de la operacion como propietario expropiador, pagador de urbanizacion y beneficiario de aprovechamiento libre de cargas",
+        "pre_dana_reading": "La reparcelacion establece que el Ayuntamiento de Paiporta costeara la urbanizacion correspondiente a las calles expropiadas aportadas a la unidad y recibira, ademas, el 5 por ciento del aprovechamiento tipo libre de cargas de urbanizacion. El mismo documento cifra al Ayuntamiento en el 44,11 por ciento de las cargas repercutibles mas 102.795,70 euros de obras externas, para un total de 341.588,90 euros.",
+        "why_it_matters": "Sirve para cortar una lectura simplista de responsabilidad solo como control de licencias. En este expediente el municipio era actor material de la operacion urbanizadora, soportaba costes y recibia aprovechamiento, por lo que la auditoria debe revisar tambien sus decisiones como urbanizador y no solo como autoridad concedente.",
+        "source_title": "Proyecto de reparcelacion del Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719310096.pdf",
+        "source_locator": "memoria, p. 8 y cuenta de liquidacion provisional, p. 20",
+        "source_note": "Fuente oficial municipal. La fila resume el papel economico y urbanizador del Ayuntamiento dentro de la propia actuacion."
+      },
+      {
+        "evidence_id": "paiporta-pai-approved-after-dana-2024",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Certificacion plenaria / fecha de aprobacion",
+        "certainty": "high",
+        "signal_title": "La aprobacion plenaria del PAI llego el 28/11/2024, despues de la DANA del 29/10/2024",
+        "pre_dana_reading": "La certificacion municipal deja constancia de que el Pleno aprobo el Programa de Actuacion Integrada por gestion directa en sesion ordinaria de 28/11/2024. Inferencia a partir de fechas oficiales: cuando la DANA golpeo el 29/10/2024, la actuacion para abrir y urbanizar estos tramos seguia sin aprobacion plenaria definitiva.",
+        "why_it_matters": "Convierte el debate sobre preparacion en una cronologia administrativa verificable. No prueba causalidad por si solo, pero si documenta que la solucion urbanizadora para esos viales todavia no estaba formalmente aprobada cuando ocurrio el desastre.",
+        "source_title": "Certificacion del acuerdo plenario de aprobacion del PAI de Paiporta de 28/11/2024",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1749547928.pdf",
+        "source_locator": "p. 1",
+        "source_note": "La lectura sobre la situacion al 29/10/2024 es una inferencia explicita basada en la fecha oficial del acuerdo plenario y la fecha del episodio."
+      },
+      {
+        "evidence_id": "paiporta-global-omnium-2024-water-network-objections",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Alegaciones estimadas / red de agua y obra urbana",
+        "certainty": "high",
+        "signal_title": "La operadora del agua exigio en 2024 sustituir tramos de fibrocemento, anadir hidrantes y garantizar un suministro provisional durante las obras",
+        "pre_dana_reading": "En las alegaciones estimadas dentro del acuerdo plenario de aprobacion del PAI, Global Omnium pidio que todas las calles a urbanizar quedaran con nueva tuberia de agua potable, que se sustituyeran un tramo de fibrocemento de 200 mm en Enrique Reig y un cruce de fibrocemento de 100 mm en Poeta Llorente esquina Enrique Reig, que se incluyeran valvulas compuerta e hidrantes y que se previera una tuberia provisional, catas manuales y georradar para garantizar el suministro a los vecinos durante la ejecucion de las obras.",
+        "why_it_matters": "Aporta una evidencia oficial de que, en el propio expediente municipal previo a la DANA, la infraestructura de abastecimiento y el proyecto de urbanizacion seguian necesitando correcciones materiales relevantes. No es una conjetura externa: el operador del servicio las formulo y el Ayuntamiento las acepto.",
+        "source_title": "Certificacion del acuerdo plenario de aprobacion del PAI de Paiporta de 28/11/2024",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1749547928.pdf",
+        "source_locator": "apartado I.6, alegaciones de Global Omnium, p. 5",
+        "source_note": "Fuente oficial municipal. El valor de esta fila esta en las deficiencias materiales concretas sobre la red de agua y la obra proyectada que el expediente reconoce."
+      },
+      {
+        "evidence_id": "paiporta-global-omnium-2024-approval-conditioned",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Aprobacion plenaria condicionada",
+        "certainty": "high",
+        "signal_title": "El Pleno aprobo el proyecto de urbanizacion condicionado a incorporar los aspectos alegados por Global Omnium",
+        "pre_dana_reading": "El acuerdo plenario de aprobacion del PAI desestima las alegaciones de las propietarias particulares, estima las de Global Omnium y aprueba el proyecto de urbanizacion condicionado a que se incluyan los aspectos alegados por la operadora del agua.",
+        "why_it_matters": "Convierte las objeciones tecnicas sobre la red de agua y la ejecucion material en una condicion formal de aprobacion, no en una simple observacion tecnica. Eso refuerza que el expediente aun no estaba cerrado sobre una base infraestructural plenamente resuelta.",
+        "source_title": "Certificacion del acuerdo plenario de aprobacion del PAI de Paiporta de 28/11/2024",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1749547928.pdf",
+        "source_locator": "acuerdos PRIMERO y SEXTO, pp. 6-7",
+        "source_note": "Fuente oficial municipal. La fila resume la condicion formal impuesta al aprobar el proyecto."
+      },
+      {
+        "evidence_id": "paiporta-registry-2025-no-replanteo-or-reception",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Registro municipal del PAI / hitos formales de obra",
+        "certainty": "high",
+        "signal_title": "A 06/06/2025 el registro municipal del PAI seguia sin fecha de acta de replanteo ni de recepcion de las obras de urbanizacion",
+        "pre_dana_reading": "La ficha oficial del Registro Municipal de Programas y AIU para el PAI de Pintor Benedito / Poeta Llorente / Enrique Reig recoge la aprobacion del programa el 28/11/2024 y la inscripcion registral del expediente el 06/06/2025, pero mantiene en blanco la fecha del acta de replanteo y la fecha del acta de recepcion de las obras de urbanizacion.",
+        "why_it_matters": "No prueba por si sola que no hubiera ningun trabajo material, pero si que meses despues de la DANA el propio registro oficial no reflejaba los hitos formales que normalmente acreditan el arranque y la recepcion de la urbanizacion. Eso refuerza una lectura de corredor no formalmente cerrado ni plenamente recepcionado.",
+        "source_title": "Registro Municipal de Programas y AIU del Ayuntamiento de Paiporta",
+        "source_url": "https://paiporta.es/registro-municipal-de-programas-y-aiu",
+        "source_locator": "entrada 'Programa d'Actuacio Integrada Carrers Poeta Llorente, Pintor Benedito i Enrique Reig', fecha de inscripcion 06/06/2025",
+        "source_note": "Fuente oficial municipal. La lectura se limita al estado formal mostrado por el registro y no afirma por si sola la ausencia absoluta de ejecucion fisica."
+      },
+      {
+        "evidence_id": "paiporta-registry-2025-no-reparcelacion-closure",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Registro municipal del PAI / cierre reparcelatorio",
+        "certainty": "high",
+        "signal_title": "A 06/06/2025 el registro municipal tampoco reflejaba inscripcion registral de la reparcelacion ni liquidacion definitiva",
+        "pre_dana_reading": "En la misma ficha oficial del PAI siguen en blanco la fecha de inscripcion de la reparcelacion en el Registro de la Propiedad y la fecha de aprobacion de la liquidacion definitiva, incluso despues de la aprobacion del programa de 28/11/2024.",
+        "why_it_matters": "Aporta una senal formal de que la operacion urbanistica seguia sin reflejar hitos de cierre patrimonial y economico meses despues del 29/10/2024. Eso es relevante para evaluar hasta que punto el corredor llego a entrar en una situacion plenamente regularizada y terminada.",
+        "source_title": "Registro Municipal de Programas y AIU del Ayuntamiento de Paiporta",
+        "source_url": "https://paiporta.es/registro-municipal-de-programas-y-aiu",
+        "source_locator": "entrada 'Programa d'Actuacio Integrada Carrers Poeta Llorente, Pintor Benedito i Enrique Reig', campos de reparcelacion y liquidacion en blanco a 06/06/2025",
+        "source_note": "Fuente oficial municipal. Esta fila habla del estado formal del expediente en el registro, no de una declaracion judicial sobre responsabilidad."
+      },
+      {
+        "evidence_id": "paiporta-pai-2024-fibrocement-and-no-new-hydrants",
+        "target_id": "drainage-and-hydraulic-infrastructure",
+        "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
+        "signal_type": "Proyecto de urbanizacion / red de agua potable",
+        "certainty": "high",
+        "signal_title": "El proyecto de marzo de 2024 seguia conectandose a la red existente de fibrocemento y no consideraba necesarios nuevos hidrantes",
+        "pre_dana_reading": "La memoria de red de agua potable del proyecto de urbanizacion registrado el 07/03/2024 preveia conectar la nueva red a una tuberia de fibrocemento de 200 mm situada en la calle Poeta Llorente, alimentar desde ahi las acometidas del ambito y prescindir de nuevos hidrantes por entender suficiente el existente en el limite de la zona de actuacion.",
+        "why_it_matters": "Aporta una fotografia tecnica concreta del diseno previo a la DANA: la actuacion seguia apoyandose en infraestructura existente de fibrocemento y no preveia reforzar hidrantes dentro del ambito. Leido junto con las alegaciones tecnicas aceptadas despues a Global Omnium, permite auditar si el proyecto inicial infravaloraba necesidades basicas de la red de agua.",
+        "source_title": "Proyecto de urbanizacion del Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/documentos/0-PROYECTO_01_03_2024_firmado.pdf",
+        "source_locator": "memoria, red de agua potable, p. 13",
+        "source_note": "Documento municipal oficial con CSV. La comparacion con las objeciones posteriores de Global Omnium se hace en el benchmark con otra fuente municipal de noviembre de 2024."
+      },
+      {
+        "evidence_id": "paiporta-lighting-project-2024-unurbanized-stretches",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Proyecto de alumbrado exterior / servicios urbanos basicos",
+        "certainty": "high",
+        "signal_title": "En marzo de 2024 el Ayuntamiento seguia tramitando un proyecto especifico de alumbrado para los tramos sin urbanizar del ambito",
+        "pre_dana_reading": "Un proyecto tecnico municipal de alumbrado exterior describia en marzo de 2024 la ampliacion de la red subterranea y de cuatro circuitos de luminarias sobre los tramos sin urbanizar de Poeta Llorente y Pintor Benedito hasta Enrique Reig, con presupuesto propio y necesidad de autorizacion administrativa y de ejecucion.",
+        "why_it_matters": "Muestra que meses antes de la DANA el corredor todavia no aparecia plenamente dotado ni siquiera en un servicio urbano ordinario como el alumbrado exterior. No prueba por si sola responsabilidad por inundacion, pero refuerza la lectura de un ambito que seguia necesitando urbanizacion material y sectorial.",
+        "source_title": "Proyecto de alumbrado exterior para la urbanizacion de los tramos sin urbanizar de las calles Poeta Llorente y Pintor Benedito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719311451.pdf",
+        "source_locator": "memoria, pp. 1-4",
+        "source_note": "Documento tecnico oficial publicado por el Ayuntamiento como anexo sectorial de la actuacion urbanizadora."
+      },
+      {
+        "evidence_id": "paiporta-transformer-project-2024-unurbanized-stretches",
+        "target_id": "risk-maps-and-urbanization-projects",
+        "entity_name": "Paiporta (ambito Pintor Benedito / Poeta Llorente / Enrique Reig)",
+        "signal_type": "Proyecto de centro de transformacion / suministro electrico",
+        "certainty": "high",
+        "signal_title": "En marzo de 2024 tambien se proyectaba un nuevo centro de transformacion de 400 KVA para alimentar la urbanizacion del ambito",
+        "pre_dana_reading": "Un proyecto tecnico oficial del nuevo CT Pintor Benedito de 400 KVA sitia el centro de transformacion en una parcela municipal para equipamientos sociales y establece que servira para alimentar electricamente la urbanizacion del tramo sin urbanizar de Poeta Llorente hasta Enrique Reig y del tramo sin urbanizar de Pintor Benedito.",
+        "why_it_matters": "Refuerza con otra infraestructura basica que el corredor seguia necesitando obra material y suministro sectorial en 2024, no solo tramites abstractos. La urbanizacion pendiente no afectaba solo a pavimento o drenaje, sino tambien a la alimentacion electrica necesaria para completar el ambito.",
+        "source_title": "Proyecto CT Pintor Benedito de 400 KVA para la urbanizacion del ambito de Paiporta",
+        "source_url": "https://paiporta.es/sec_din/archivos/docs/1719311514.pdf",
+        "source_locator": "memoria, apartados 1.1.3 a 1.1.6, p. 1",
+        "source_note": "Documento tecnico oficial publicado por el Ayuntamiento. Vincula el nuevo centro de transformacion con la urbanizacion aun pendiente del mismo corredor."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "question_id": "warning_timeline",
+      "category": "Avisos",
+      "prompt": "Que avisos meteorologicos, hidrologicos y de proteccion civil existieron antes del peor dano?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "normalizar avisos AEMET/CHJ/Proteccion Civil",
+        "timeline minuto a minuto de alertas y mensajes publicos"
+      ]
+    },
+    {
+      "question_id": "duty_chain",
+      "category": "Deber de actuar",
+      "prompt": "Que administraciones y cargos tenian la competencia y el deber de alertar, coordinar y evacuar?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "grafo de competencias actor->cargo->plan activado",
+        "obligaciones normativas aterrizadas a personas, turnos y centros operativos"
+      ]
+    },
+    {
+      "question_id": "structural_exposure",
+      "category": "Regulacion y exposicion",
+      "prompt": "Que reglas de suelo, agua, licencias y gobernanza pudieron dejar viviendas, infraestructuras y sistemas de alerta mas expuestos al dano?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "cruce de cartografia inundable con planeamiento y licencias",
+        "trazabilidad de quien aprobo, informo o tolero usos vulnerables"
+      ]
+    },
+    {
+      "question_id": "operational_decisions",
+      "category": "Decisiones u omisiones",
+      "prompt": "Que decisiones operativas se tomaron, cuales se retrasaron y cuales no ocurrieron cuando debian?",
+      "status": "missing",
+      "status_label": "Pendiente",
+      "next_evidence_needed": [
+        "actas, ordenes y cronologia operativa",
+        "comparecencias y transcripciones oficiales de la gestion de la emergencia"
+      ]
+    },
+    {
+      "question_id": "parliamentary_response",
+      "category": "Respuesta institucional",
+      "prompt": "Que medidas normativas y parlamentarias se adoptaron despues de la DANA?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "seguir tramitacion completa de los expedientes ligados a la DANA"
+      ]
+    },
+    {
+      "question_id": "parliamentary_votes",
+      "category": "Rastro legislativo",
+      "prompt": "Que votos formales quedaron enlazados a esas medidas y como se resolvieron?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "mejorar enlaces voto->iniciativa para expedientes todavia sin voto asociado"
+      ]
+    },
+    {
+      "question_id": "reviewed_measures",
+      "category": "Cambios concretos",
+      "prompt": "Que cambios concretos y citizen-facing ya se pueden explicar a partir del texto oficial revisado?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "ampliar revision humana de medidas DANA y paquetes de reconstruccion"
+      ]
+    },
+    {
+      "question_id": "harm_attribution",
+      "category": "Atribucion de dano",
+      "prompt": "Que parte del dano prevenible puede atribuirse a fallos normativos, de coordinacion o de decision?",
+      "status": "missing",
+      "status_label": "Pendiente",
+      "next_evidence_needed": [
+        "outcomes de victimas y afectacion territorial",
+        "cadena causal con hallazgos administrativos y judiciales"
+      ]
+    }
+  ],
+  "parliamentary_evidence": {
+    "scope_label": "Respuesta parlamentaria y normativa ya presente en el repo",
+    "initiatives": [
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "source_id": "congreso_iniciativas",
+        "title": "Real Decreto-ley 12/2025, de 28 de octubre, por el que se adoptan medidas urgentes de reactivaci\u00f3n, refuerzo y prevenci\u00f3n en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+        "type": "Reales decretos",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 2,
+        "measure_points_count": 5,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260225050017.json",
+          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_012_2025.pdf"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:7:2024",
+        "source_id": "congreso_iniciativas",
+        "title": "Real Decreto-ley 7/2024, de 11 de noviembre, por el que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+        "type": "Reales decretos",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260225050017.json",
+          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_007_2024.pdf"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:8:2024",
+        "source_id": "congreso_iniciativas",
+        "title": "Correcci\u00f3n de errores del Real Decreto-ley 8/2024, de 28 de noviembre, por el que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+        "type": "Reales decretos",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260225050017.json",
+          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_008_2024_corr.pdf"
+        ]
+      },
+      {
+        "initiative_id": "senado:leg15:exp:622/000055",
+        "source_id": "senado_iniciativas",
+        "title": "Proposici\u00f3n de Ley relativa al establecimiento de nuevos mecanismos para atender de manera urgente y \u00e1gil situaciones de emergencia, como la derivada de la dana de octubre de 2024. (622/000055)",
+        "type": "622",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 3,
+        "official_links": [
+          "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+          "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000055",
+          "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=622&id2=000055",
+          "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=12&tipoEx=622&numEx=000055"
+        ]
+      },
+      {
+        "initiative_id": "senado:leg15:exp:622/000063",
+        "source_id": "senado_iniciativas",
+        "title": "Proposici\u00f3n de Ley relativa al establecimiento de nuevos mecanismos para atender de manera urgente y \u00e1gil situaciones de emergencia, como la derivada de la dana de octubre de 2024. (622/000063)",
+        "type": "622",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 2,
+        "official_links": [
+          "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+          "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000063",
+          "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=622&id2=000063"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000039/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes de respuesta ante los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 6/2024, de 5 de noviembre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2024-11-21",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-39-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-39-1.PDF"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000042/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 7/2024, de 11 de noviembre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2024-12-12",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-42-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-42-1.PDF"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000044/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 8/2024, de 28 de noviembre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2024-12-19",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-44-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-44-1.PDF"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:122/000148/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proposici\u00f3n de Ley relativa al establecimiento de nuevos mecanismos para atender de manera urgente y \u00e1gil situaciones de emergencia, como la derivada de la DANA de octubre de 2024.",
+        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
+        "current_status": "Cerrado",
+        "presented_date": "2025-01-11",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 2,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-2.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-1.PDF",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-2.PDF"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:122/000152/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proposici\u00f3n de Ley de medidas complementarias para ayudar a los afectados por la DANA.",
+        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
+        "current_status": "Pleno Toma en consideraci\u00f3n",
+        "presented_date": "2025-01-22",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-175-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-175-1.PDF"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000078/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes de reactivaci\u00f3n, refuerzo y prevenci\u00f3n en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 12/2025, de 28 de octubre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2025-11-27",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 1,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-78-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-78-1.PDF"
+        ]
+      }
+    ],
+    "votes": [
+      {
+        "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json",
+        "initiative_id": "congreso:ley:12:2025",
+        "source_id": "congreso_votaciones",
+        "vote_date": "2025-11-27",
+        "title": "Convalidaci\u00f3n o derogaci\u00f3n de Reales Decretos-leyes.",
+        "totals": {
+          "yes": 307,
+          "no": 33,
+          "abstain": 7,
+          "present": 347
+        },
+        "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
+      },
+      {
+        "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion017/VOT_20251127124110.json",
+        "initiative_id": "congreso:ley:12:2025",
+        "source_id": "congreso_votaciones",
+        "vote_date": "2025-11-27",
+        "title": "Convalidaci\u00f3n o derogaci\u00f3n de Reales Decretos-leyes.",
+        "totals": {
+          "yes": 347,
+          "no": 0,
+          "abstain": 0,
+          "present": 347
+        },
+        "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion017/VOT_20251127124110.json"
+      }
+    ],
+    "reviewed_measures": [
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "measure_rank": 1,
+        "measure_title": "Financiaci\u00f3n Reinicia + FEPYME DANA PLUS para pymes afectadas",
+        "citizen_summary": "Se crea un mecanismo temporal de pr\u00e9stamos participativos para pymes afectadas por la DANA y para proyectos empresariales vinculados a prevenci\u00f3n, resiliencia y transformaci\u00f3n ante emergencias.",
+        "policy_area": "",
+        "measure_status": "unknown",
+        "primary_vote_event_ids": [
+          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "measure_rank": 2,
+        "measure_title": "Avales ICO de hasta 5.000 millones para emergencias",
+        "citizen_summary": "El Estado podr\u00e1 avalar financiaci\u00f3n para hogares, empresas y aut\u00f3nomos afectados por emergencias de protecci\u00f3n civil, con un m\u00e1ximo de 5.000 millones de euros y vigencia hasta 2040.",
+        "policy_area": "",
+        "measure_status": "unknown",
+        "primary_vote_event_ids": [
+          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "measure_rank": 3,
+        "measure_title": "Aplazamiento de cuotas de Seguridad Social para afectados",
+        "citizen_summary": "Empresas, aut\u00f3nomos y trabajadores del mar de las zonas afectadas pueden pedir aplazamientos especiales para las cuotas de Seguridad Social que venzan entre finales de 2025 y principios de 2026.",
+        "policy_area": "",
+        "measure_status": "unknown",
+        "primary_vote_event_ids": [
+          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "measure_rank": 4,
+        "measure_title": "Prestaci\u00f3n extraordinaria por cese de actividad para aut\u00f3nomos",
+        "citizen_summary": "Los aut\u00f3nomos que ya cobraban la ayuda anterior pueden acceder a una prestaci\u00f3n extraordinaria por cese de actividad si la DANA sigue afectando su trabajo.",
+        "policy_area": "",
+        "measure_status": "unknown",
+        "primary_vote_event_ids": [
+          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "measure_rank": 5,
+        "measure_title": "Reposici\u00f3n de libros y material escolar en el curso 2025-2026",
+        "citizen_summary": "Las familias podr\u00e1n seguir justificando los gastos de reposici\u00f3n de libros y material escolar o de estudio perdidos o da\u00f1ados por la DANA durante el curso 2025-2026.",
+        "policy_area": "",
+        "measure_status": "unknown",
+        "primary_vote_event_ids": [
+          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
+        ]
+      }
+    ]
+  },
+  "gaps": {
+    "known_gaps": [
+      "No hay todavia una cronologia normalizada de avisos AEMET/CHJ/Proteccion Civil.",
+      "No hay aun un grafo de competencias de emergencia que cierre personas concretas, turnos y organos operativos durante la DANA.",
+      "No hay todavia cruce reproducible entre cartografia inundable, planeamiento urbanistico, licencias y ocupacion real del territorio.",
+      "No hay todavia expedientes municipales, sectoriales o hidraulicos enlazados fila a fila a los blancos de auditoria ya publicados.",
+      "No hay actas operativas, ordenes internas ni decisiones de mando enlazadas como evidencia estructurada.",
+      "No hay todavia hallazgos judiciales o administrativos integrados en un caso trazable."
+    ],
+    "next_lanes": [
+      "captura sistematica de PGOU, licencias y expedientes por municipio prioritario",
+      "cruce de planeamiento, licencias y zonas inundables",
+      "modelo de competencia y deber de actuar para emergencias",
+      "timeline de avisos y decisiones con fuentes primarias",
+      "normalizacion de comparecencias/comisiones de investigacion",
+      "enlace entre decisiones, outcomes y evidencia de dano"
+    ]
+  }
+}

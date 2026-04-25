@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "generated_at": "2026-04-25T10:47:54Z",
+    "snapshot_date": "2026-04-25",
+    "snapshot_db": "etl/data/staging/parlamentario-es.db",
+    "filters": {
+      "max_series": 120,
+      "min_points": 2,
+      "max_points_per_series": 36,
+      "max_events": 500,
+      "max_associations_per_series": 6,
+      "max_associations": 500,
+      "pre_window_days": 120,
+      "post_window_days": 120
+    }
+  },
+  "coverage": {
+    "indicator_series_total": 0,
+    "indicator_points_total": 0,
+    "interventions_total": 0,
+    "intervention_events_total": 0,
+    "causal_estimates_total": 0,
+    "policy_events_total": 0,
+    "series_loaded": 0,
+    "events_loaded": 0,
+    "events_in_association": 0,
+    "associations_total": 0,
+    "series_in_association": 0,
+    "series_by_source": {},
+    "series_coverage_by_point_count": {
+      "min_points_included": 0,
+      "max_points_included": 0
+    }
+  },
+  "series": [],
+  "policy_events": [],
+  "associations": [],
+  "limitations": {
+    "interventions_available": false,
+    "intervention_events_available": false,
+    "causal_estimates_available": false,
+    "description": [
+      "Este dataset est\u00e1 en fase temprana: hoy predomina evidencia descriptiva.",
+      "No hay pipeline estable de intervenciones e impactos causales en esta fase.",
+      "Las asociaciones son diferencias de indicador antes/despu\u00e9s por ventana temporal, no causalidad."
+    ],
+    "method_note": "Correlaci\u00f3n no implica causalidad."
+  },
+  "filters": {
+    "series_source_ids": [],
+    "event_source_ids": [],
+    "domains": []
+  }
+}

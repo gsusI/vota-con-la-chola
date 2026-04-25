@@ -1,0 +1,357 @@
+{
+  "meta": {
+    "generated_at": "2026-04-25T10:47:43Z",
+    "snapshot_date": "2026-04-12",
+    "schema_version": "responsibility_explainer_case_v1",
+    "case_id": "cash-payment-limit-spain",
+    "snapshot_db": "etl/data/staging/parlamentario-es.db"
+  },
+  "case": {
+    "case_id": "cash-payment-limit-spain",
+    "title": "Limite de pagos en efectivo en Espana",
+    "short_label": "Pagos en efectivo 1.000 EUR",
+    "summary": "Benchmark P2 para una regla formal estatal: que norma fija el limite general de pagos en efectivo a 1.000 euros, quien la cambia, quien la promulga y quien la aplica hoy.",
+    "geography": "Espana",
+    "incident_window": {
+      "label": "Desde 11 julio 2021",
+      "start_date": "2021-07-11",
+      "end_date": ""
+    },
+    "current_scope_note": "Este slice cubre el ledger formal minimo para la regla vigente: normas de base, lectura oficial publicada por la AEAT, el acto legal que rebajo el limite de 2.500 a 1.000 euros y la cadena basica aprobacion->promulgacion->aplicacion. No cubre todavia estadisticas de sancion, versionado parlamentario completo ni el grafo competencial de quien puede cambiar hoy la regla.",
+    "canonical_path": "/responsibility-explainer/cash-payment-limit-spain/",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/responsibility-explainer/cash-payment-limit-spain/"
+  },
+  "coverage": {
+    "initiatives_total": 0,
+    "initiatives_with_votes_total": 0,
+    "initiatives_with_measure_points_total": 0,
+    "vote_events_total": 0,
+    "reviewed_measures_total": 0,
+    "official_documents_total": 0,
+    "normative_duties_total": 0,
+    "warning_channels_total": 0,
+    "warning_timeline_events_total": 0,
+    "governing_rules_total": 2,
+    "official_findings_total": 2,
+    "administrative_acts_total": 2,
+    "responsibility_links_total": 3,
+    "named_accountability_total": 6,
+    "structural_risk_factors_total": 0,
+    "structural_audit_targets_total": 0,
+    "structural_evidence_rows_total": 0
+  },
+  "question_status_counts": {
+    "partial": 4,
+    "missing": 2
+  },
+  "normative_evidence": {
+    "scope_label": "Anclajes oficiales de deber, coordinacion y canales de aviso ya resumidos desde fuentes primarias",
+    "normative_duties": [],
+    "warning_channels": [],
+    "warning_timeline_events": []
+  },
+  "accountability_ledger": {
+    "scope_label": "Capa generica de accountability para reglas, hallazgos oficiales, actos administrativos y cadenas de responsabilidad previas o posteriores al dano",
+    "governing_rules": [
+      {
+        "rule_id": "cash-limit-article-7-current-limit",
+        "rule_kind": "fiscal-rule",
+        "title": "El articulo 7 de la Ley 7/2012 fija hoy el limite general de 1000 EUR",
+        "duty_summary": "No pueden pagarse en efectivo las operaciones de importe igual o superior a 1000 euros cuando alguna de las partes actua como empresario o profesional; el limite sube a 10000 euros si paga un particular no residente.",
+        "exposure_mechanism": "El punto de control formal no es territorial sino legal: la regla estatal define cuando el efectivo queda prohibido y bajo que excepciones.",
+        "source_title": "Ley 7/2012 (texto consolidado)",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-13416",
+        "source_locator": "art. 7.Uno.1; redaccion vigente desde 11/07/2021",
+        "source_note": "BOE consolidado con la redaccion vigente del limite."
+      },
+      {
+        "rule_id": "cash-limit-sanction-regime",
+        "rule_kind": "sanction-rule",
+        "title": "El mismo articulo fija infraccion grave",
+        "duty_summary": "responsabilidad solidaria y multa general del 25 por ciento",
+        "exposure_mechanism": "El incumplimiento constituye infraccion administrativa grave; pagador y receptor responden solidariamente y la sancion general es del 25 por ciento de la base.",
+        "source_title": "Ley 7/2012 (texto consolidado)",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-13416",
+        "source_locator": "art. 7.Dos.1-5 y Tres",
+        "source_note": "La propia ley fija la base del procedimiento y la sancion."
+      }
+    ],
+    "official_findings": [
+      {
+        "finding_id": "aeat-analysis-cash-opacity",
+        "category": "policy-rationale",
+        "entity_name": "Agencia Tributaria",
+        "finding_date": "2022-09-05",
+        "finding_summary": "La AEAT describe los pagos en efectivo de cuantia elevada como un medio opaco que facilita fraude fiscal y blanqueo y explica que la reforma redujo el limite general de 2500 a 1000 euros.",
+        "accountability_implication": "Aporta la justificacion oficial de politica publica y la lectura administrativa de por que existe la restriccion.",
+        "source_title": "AEAT - Pagos en efectivo",
+        "source_url": "https://sede.agenciatributaria.gob.es/Sede/normativa-criterios-interpretativos/analisis.BK.2024.03.06/2022/Pagos_en_efectivo.html",
+        "source_locator": "analisis AEAT publicado el 05/09/2022",
+        "source_note": "Analisis institucional de la AEAT sobre la limitacion."
+      },
+      {
+        "finding_id": "aeat-analysis-procedure-competence",
+        "category": "official-guidance",
+        "entity_name": "Agencia Tributaria",
+        "finding_date": "2023-01-09",
+        "finding_summary": "La AEAT aclara que el procedimiento sancionador se rige por la normativa administrativa sancionadora comun y que la competencia corresponde a la Agencia Tributaria en todo el territorio espanol.",
+        "accountability_implication": "Aterriza la lectura oficial sobre quien aplica la regla y por que via procedimental.",
+        "source_title": "AEAT - Pagos en efectivo",
+        "source_url": "https://sede.agenciatributaria.gob.es/Sede/normativa-criterios-interpretativos/analisis.BK.2024.03.06/2022/Pagos_en_efectivo.html",
+        "source_locator": "pagina actualizada 09/01/2023",
+        "source_note": "La misma nota institucional resume competencia y procedimiento."
+      }
+    ],
+    "administrative_acts": [
+      {
+        "act_id": "law-11-2021-publication",
+        "act_type": "law-publication",
+        "entity_name": "",
+        "act_date": "2021-07-10",
+        "status": "published",
+        "act_summary": "La Ley 11/2021 se publica en el BOE y modifica el articulo 7 de la Ley 7/2012 rebajando el limite general de pagos en efectivo de 2500 a 1000 euros.",
+        "accountability_implication": "Situa el acto formal que cambia la regla vigente y su fecha de entrada en vigor.",
+        "source_title": "Ley 11/2021",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+        "source_locator": "preambulo XIX y art. 18; publicada el 10/07/2021 y en vigor desde el 11/07/2021",
+        "source_note": "Acto legal estatal que cambia la regla formal."
+      },
+      {
+        "act_id": "aeat-denuncia-service",
+        "act_type": "enforcement-service",
+        "entity_name": "",
+        "act_date": "2023-06-19",
+        "status": "active",
+        "act_summary": "La sede de la AEAT mantiene el tramite publico de denuncia de pagos en efectivo y resume supuesto de hecho excepciones y obligacion de conservar justificantes.",
+        "accountability_implication": "Muestra como la regla se aterriza en un canal administrativo operativo bajo control de la AEAT.",
+        "source_title": "AEAT - Denuncia de pagos en efectivo",
+        "source_url": "https://sede.agenciatributaria.gob.es/Sede/colaborar-agencia-tributaria/denuncias/denuncia-pagos-efectivo.html",
+        "source_locator": "pagina actualizada 19/06/2023",
+        "source_note": "Servicio administrativo publico disponible en la sede electronica."
+      }
+    ],
+    "responsibility_links": [
+      {
+        "link_id": "cortes-generales-change-rule",
+        "actor": "Cortes Generales",
+        "actor_scope": "Poder legislativo estatal",
+        "linked_object_type": "administrative_act",
+        "linked_object_id": "law-11-2021-publication",
+        "role_in_chain": "Aprueban la ley que rebaja el limite general de pagos en efectivo a 1000 euros.",
+        "obligation_basis": "Potestad legislativa estatal en materia tributaria y financiera.",
+        "accountability_question": "Quien cambia formalmente la regla?",
+        "source_title": "Ley 11/2021",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+        "source_locator": "Ley aprobada por las Cortes Generales",
+        "source_note": "La propia ley identifica el vehiculo legislativo estatal."
+      },
+      {
+        "link_id": "jefatura-estado-promulgates-rule",
+        "actor": "Jefatura del Estado",
+        "actor_scope": "Sancion y promulgacion de la ley",
+        "linked_object_type": "administrative_act",
+        "linked_object_id": "law-11-2021-publication",
+        "role_in_chain": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
+        "obligation_basis": "Firma y formula promulgatoria en el BOE.",
+        "accountability_question": "Quien convierte el cambio legal en norma publicada?",
+        "source_title": "Ley 11/2021",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+        "source_locator": "formula promulgatoria y firma",
+        "source_note": "El BOE identifica la promulgacion y la orden de publicacion."
+      },
+      {
+        "link_id": "aeat-applies-rule",
+        "actor": "Agencia Estatal de Administracion Tributaria",
+        "actor_scope": "Aplicacion resolucion y recaudacion en todo el territorio espanol",
+        "linked_object_type": "governing_rule",
+        "linked_object_id": "cash-limit-sanction-regime",
+        "role_in_chain": "Tramita y resuelve el procedimiento sancionador y gestiona la recaudacion de las sanciones vinculadas a esta limitacion.",
+        "obligation_basis": "Art. 7.Tres.2 y Cuatro de la Ley 7/2012.",
+        "accountability_question": "Quien hace cumplir hoy la limitacion?",
+        "source_title": "Ley 7/2012 (texto consolidado)",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-13416",
+        "source_locator": "art. 7.Tres.2 y Cuatro",
+        "source_note": "La propia ley atribuye a la AEAT competencia y recaudacion."
+      }
+    ],
+    "named_accountability": [
+      {
+        "actor_id": "gobierno-autor-proyecto-ley-121-000033",
+        "actor_label": "Gobierno de Espana",
+        "actor_type": "institution",
+        "role": "Autor del proyecto de ley",
+        "responsibility_summary": "El expediente 121/000033 identifica al Gobierno como autor del proyecto que termino en la Ley 11/2021.",
+        "person_names": [],
+        "source_title": "Congreso de los Diputados - expediente 121/000033",
+        "source_url": "https://www.congreso.es/es/web/guest/proyectos-de-ley?_iniciativas_id=121/000033&_iniciativas_legislatura=XIV&_iniciativas_mode=mostrarDetalle&p_p_id=iniciativas&p_p_lifecycle=0&p_p_mode=view&p_p_state=normal",
+        "source_locator": "Autor: Gobierno; presentado el 14/10/2020",
+        "source_note": "Responsabilidad gubernamental de iniciativa legislativa, no voto individual."
+      },
+      {
+        "actor_id": "maria-jesus-montero-cash-limit",
+        "actor_label": "Maria Jesus Montero Cuadrado",
+        "actor_type": "person",
+        "role": "Ministra de Hacienda y portavoz del Gobierno",
+        "responsibility_summary": "Presento publicamente la medida en Consejo de Ministros: bajar el limite de pagos en efectivo de 2.500 a 1.000 euros para operaciones entre profesionales o empresarios.",
+        "person_names": [],
+        "source_title": "La Moncloa - Intervencion de Maria Jesus Montero",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/Paginas/EnlaceTranscripciones2020/131020-portavoz.aspx",
+        "source_locator": "13/10/2020; anteproyecto de Ley contra el fraude fiscal",
+        "source_note": "El voto nominal del Congreso tambien la lista con voto si el 30/06/2021."
+      },
+      {
+        "actor_id": "pedro-sanchez-promulgation-countersign",
+        "actor_label": "Pedro Sanchez Perez-Castejon",
+        "actor_type": "person",
+        "role": "Presidente del Gobierno",
+        "responsibility_summary": "Figura en el BOE como Presidente del Gobierno que firma la ley publicada el 9 de julio de 2021; el voto nominal del Congreso tambien lo lista con voto si.",
+        "person_names": [],
+        "source_title": "BOE-A-2021-11473 - Ley 11/2021",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+        "source_locator": "firma final de la ley; Madrid, 9 de julio de 2021",
+        "source_note": "Firma gubernamental de promulgacion/publicacion."
+      },
+      {
+        "actor_id": "felipe-vi-sanction-promulgation",
+        "actor_label": "Felipe VI",
+        "actor_type": "formal_head_of_state",
+        "role": "Jefatura del Estado",
+        "responsibility_summary": "Sanciona y manda guardar la Ley 11/2021 en la formula final del BOE.",
+        "person_names": [],
+        "source_title": "BOE-A-2021-11473 - Ley 11/2021",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+        "source_locator": "formula final: Felipe R.",
+        "source_note": "Actor formal de promulgacion; no es un cargo de partido."
+      },
+      {
+        "actor_id": "congreso-hacienda-ponentes-121-000033",
+        "actor_label": "Ponentes del Congreso en la Comision de Hacienda",
+        "actor_type": "named_group",
+        "role": "Ponencia parlamentaria del proyecto",
+        "responsibility_summary": "El Congreso identifica por nombre a los ponentes que trabajaron el expediente antes de la aprobacion con competencia legislativa plena.",
+        "person_names": [
+          "Javier Bas Corugeira",
+          "Ferran Bel Accensi",
+          "Patricia Blanquer Alcaraz",
+          "Carolina Espana Reina",
+          "Jose Maria Figaredo Alvarez-Sala",
+          "Juan Bernardo Fuentes Curbelo",
+          "Txema Guijarro Garcia",
+          "Rodrigo Jimenez Revuelta",
+          "Laura Lopez Dominguez",
+          "Joan Margall Sastre",
+          "Maria Carmen Martinez Granados",
+          "Oskar Matute Garcia de Jalon",
+          "Jose Maria Mazon Ramos",
+          "Montse Minguez Garcia",
+          "Idoia Sagastizabal Unzetabarrenetxea"
+        ],
+        "source_title": "Congreso de los Diputados - expediente 121/000033",
+        "source_url": "https://www.congreso.es/es/web/guest/proyectos-de-ley?_iniciativas_id=121/000033&_iniciativas_legislatura=XIV&_iniciativas_mode=mostrarDetalle&p_p_id=iniciativas&p_p_lifecycle=0&p_p_mode=view&p_p_state=normal",
+        "source_locator": "Ponentes del proyecto",
+        "source_note": "Nombres oficiales del expediente parlamentario."
+      },
+      {
+        "actor_id": "congreso-final-rollcall-2021-06-30",
+        "actor_label": "Voto nominal del Congreso del 30/06/2021",
+        "actor_type": "roll_call",
+        "role": "Votacion plenaria final sobre enmiendas del Senado",
+        "responsibility_summary": "La votacion nominal oficial permite ver cada diputado por nombre y sentido de voto: 277 si, 51 no, 4 abstenciones y 18 no votan en el bloque 'Resto de enmiendas'.",
+        "person_names": [],
+        "source_title": "Congreso - VOT_20210630175720.pdf",
+        "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion112/20210630/Votacion005/VOT_20210630175720.pdf",
+        "source_locator": "Sesion 112, votacion 5, 30/06/2021",
+        "source_note": "Lista nominal completa; no aisla por si sola el articulo 18 de pagos en efectivo."
+      }
+    ]
+  },
+  "structural_evidence": {
+    "scope_label": "Reglas de suelo, agua, licencias y gobernanza que pueden haber amplificado la exposicion previa al desastre, junto con blancos concretos de auditoria y primeras filas de evidencia para pasar de la norma al expediente",
+    "structural_risk_factors": [],
+    "structural_audit_targets": [],
+    "evidence_rows": []
+  },
+  "questions": [
+    {
+      "question_id": "formal_rule",
+      "category": "Regla formal",
+      "prompt": "Que norma fija hoy el limite general de pagos en efectivo a 1.000 euros y desde cuando aplica?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "versionado historico 2012->2021 del articulo 7",
+        "dossier parlamentario enlazado a la reforma de 2021"
+      ]
+    },
+    {
+      "question_id": "formal_enforcement_chain",
+      "category": "Cadena formal",
+      "prompt": "Que organos aprueban, promulgan y aplican formalmente esta limitacion?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "grafo competencial Ministerio/AEAT/BOE con organo concreto"
+      ]
+    },
+    {
+      "question_id": "sanction_mechanics",
+      "category": "Aplicacion administrativa",
+      "prompt": "Como entra en juego administrativamente: denuncia, tramitacion, resolucion y recaudacion de sanciones?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "resoluciones, manuales operativos o estadisticas de tramitacion"
+      ]
+    },
+    {
+      "question_id": "official_interpretation",
+      "category": "Lectura oficial",
+      "prompt": "Que lectura oficial delimita cuando aplica el limite y por que se rebajo de 2.500 a 1.000 euros?",
+      "status": "partial",
+      "status_label": "Parcial",
+      "next_evidence_needed": [
+        "FAQs oficiales y criterios interpretativos por supuestos frontera"
+      ]
+    },
+    {
+      "question_id": "who_can_change_now",
+      "category": "Quien puede cambiarlo hoy",
+      "prompt": "Que institucion o nivel de gobierno puede elevar, bajar o excepcionar hoy este limite?",
+      "status": "missing",
+      "status_label": "Pendiente",
+      "next_evidence_needed": [
+        "grafo competencial Cortes/Gobierno/Ministerio y, si aplica, marco UE"
+      ]
+    },
+    {
+      "question_id": "real_enforcement",
+      "category": "Aplicacion real",
+      "prompt": "Con que intensidad se inspecciona y sanciona realmente este limite en la practica?",
+      "status": "missing",
+      "status_label": "Pendiente",
+      "next_evidence_needed": [
+        "estadisticas de expedientes, resoluciones y recaudacion por ejercicio"
+      ]
+    }
+  ],
+  "parliamentary_evidence": {
+    "scope_label": "Respuesta parlamentaria y normativa ya presente en el repo",
+    "initiatives": [],
+    "votes": [],
+    "reviewed_measures": []
+  },
+  "gaps": {
+    "known_gaps": [
+      "No hay todavia estadisticas publicadas integradas de expedientes, sanciones firmes o recaudacion por esta infraccion.",
+      "No hay aun un grafo competencial completo que cierre quien puede modificar hoy la regla y por que instrumento.",
+      "No hay todavia el dossier parlamentario completo de la reforma de 2021 enlazado dentro del caso.",
+      "No hay todavia criterios oficiales agregados para todos los supuestos frontera de aplicacion."
+    ],
+    "next_lanes": [
+      "ingesta BOE y rastro parlamentario de la reforma de 2021",
+      "grafo de competencia Ministerio de Hacienda / AEAT / Cortes Generales",
+      "estadisticas y resoluciones de enforcement si el upstream las publica",
+      "ampliar a otras reglas formales de trazabilidad financiera o fiscal"
+    ]
+  }
+}

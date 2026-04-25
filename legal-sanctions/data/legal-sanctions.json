@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-04-25T10:47:54+00:00",
+  "snapshot_date": "2026-04-25",
+  "schema_version": "legal_sanctions_snapshot_v1",
+  "meta": {
+    "norm_nodes": 0,
+    "lineage_edges": 0,
+    "infraction_type_count": 0,
+    "infraction_mappings": 0,
+    "volume_rows": 0,
+    "kpi_rows": 0,
+    "municipal_rows": 0
+  },
+  "filters": {
+    "source_ids": [],
+    "relation_types": [],
+    "infraction_type_ids": [],
+    "kpi_ids": [],
+    "periods": []
+  },
+  "legal_graph": {
+    "nodes": [],
+    "edges": [],
+    "node_count": 0,
+    "edge_count": 0,
+    "relation_types": [],
+    "nodes_with_fragments": 0
+  },
+  "infraction_network": {
+    "infraction_types": [],
+    "mappings": []
+  },
+  "sanction_volume_monitoring": {
+    "series": [],
+    "source_totals": [],
+    "sources": [],
+    "periods": []
+  },
+  "procedural_kpi_drift": [],
+  "municipal_monitoring": {
+    "summary": {
+      "total_ordinances": 0,
+      "normalized_ordinances": 0,
+      "identified_ordinances": 0,
+      "blocked_ordinances": 0,
+      "status_counts": []
+    },
+    "city_summary": [],
+    "ordinance_rows": []
+  },
+  "responsibility_summary": {
+    "roles": [],
+    "top_actors": [],
+    "rows_with_primary_evidence": 0,
+    "rows_total": 0
+  },
+  "liberty_restriction_monitoring": {
+    "enabled": true,
+    "rows": 0,
+    "sample_first_key": "",
+    "sample_last_key": "",
+    "avg_irlc_score": null,
+    "avg_confidence": null,
+    "method_distribution": []
+  }
+}
