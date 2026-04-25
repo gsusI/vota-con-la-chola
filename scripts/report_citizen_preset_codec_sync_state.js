@@ -16,7 +16,7 @@ function usage() {
     "",
     "Options:",
     "  --source <path>     Source codec path (default: ui/citizen/preset_codec.js)",
-    "  --published <path>  Published codec path (default: docs/gh-pages/citizen/preset_codec.js)",
+    "  --published <path>  Published codec path (default: ui/gh-pages-next/public/legacy/citizen/preset_codec.js)",
     "  --json-out <path>   Optional output file for JSON report",
     "  --strict            Exit non-zero when published file is stale",
     "  --help              Show this help",
@@ -26,7 +26,7 @@ function usage() {
 function parseArgs(argv) {
   const out = {
     source: "ui/citizen/preset_codec.js",
-    published: "docs/gh-pages/citizen/preset_codec.js",
+    published: "ui/gh-pages-next/public/legacy/citizen/preset_codec.js",
     jsonOut: "",
     strict: false,
     help: false,
@@ -169,7 +169,7 @@ function main() {
       first_diff_line: diff.line,
       first_diff_source_line: diff.source_line,
       first_diff_published_line: diff.published_line,
-      recommended_command: wouldChange ? "just explorer-gh-pages-build" : "",
+      recommended_command: wouldChange ? "just cloudflare-pages-build" : "",
     });
   } catch (err) {
     report.results.push({

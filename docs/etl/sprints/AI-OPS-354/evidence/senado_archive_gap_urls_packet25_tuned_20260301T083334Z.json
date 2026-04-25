@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-03-01T08:36:41+00:00",
+  "status": "ok",
+  "inputs": {
+    "files_total": 1,
+    "files_parsed": 1
+  },
+  "totals": {
+    "archive_no_snapshot_failures_total": 24,
+    "unique_urls_total": 24
+  },
+  "limits": {
+    "strict_min_rows": 1
+  },
+  "checks": {
+    "has_inputs": true,
+    "has_rows": true
+  },
+  "strict_fail_reasons": [],
+  "sample_urls": [
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=622&id2=000002",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000066",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000069",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000070",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000071",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000072",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000073",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000074",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000017",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000019",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000002&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000003&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000004&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000023&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000024&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000025&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000026&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000027&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000028&legis=10",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000029&legis=10"
+  ]
+}

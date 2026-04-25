@@ -1,0 +1,47 @@
+{
+  "auto_review_summary": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp4dat39h8.json",
+  "qa_sample_summary": "",
+  "qa_precision_report": "",
+  "report": {
+    "status": "degraded",
+    "approved_with_non_nominative_actor_fallback_total": 2,
+    "qa_required": true,
+    "thresholds": {
+      "review_note_contains": "approved_non_nominative_unit",
+      "min_reviewed_rows": 1,
+      "min_precision_pct": 100.0
+    },
+    "qa_sample": {
+      "present": false,
+      "sample_rows_total": 0,
+      "review_note_contains": "",
+      "auto_review_csv": "",
+      "out_csv": ""
+    },
+    "qa_precision": {
+      "present": false,
+      "status": "",
+      "qa_csv": "",
+      "reviewed_rows_total": 0,
+      "observed_precision_pct": 0.0,
+      "strict_fail_reasons": []
+    },
+    "auto_review_out_csv": "",
+    "checks": {
+      "qa_required": true,
+      "qa_sample_summary_present": false,
+      "qa_precision_report_present": false,
+      "qa_sample_has_rows": false,
+      "qa_sample_review_note_filter_matches": false,
+      "qa_sample_matches_auto_review_csv": true,
+      "qa_precision_matches_sample_csv": true,
+      "qa_reviewed_rows_meet_min": false,
+      "qa_precision_meets_min": false,
+      "qa_precision_report_status_ok": false
+    },
+    "strict_fail_reasons": [
+      "missing_qa_sample_summary",
+      "missing_qa_precision_report"
+    ]
+  }
+}

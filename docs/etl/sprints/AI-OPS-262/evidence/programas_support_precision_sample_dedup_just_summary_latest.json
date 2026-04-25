@@ -1,0 +1,41 @@
+{
+  "source_id": "programas_partidos",
+  "dedupe_key": "excerpt_norm+source_url",
+  "candidate_total_before_dedupe": 110,
+  "dropped_duplicates_total": 61,
+  "dropped_duplicates_by_party": {
+    "BNG": 5,
+    "FORO Asturias": 29,
+    "PP": 16,
+    "VOX": 11
+  },
+  "sample_total": 35,
+  "target_parties": [
+    "BNG",
+    "VOX",
+    "FORO Asturias",
+    "PP"
+  ],
+  "by_party": {
+    "BNG": 10,
+    "VOX": 5,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "unique_by_party": {
+    "BNG": 10,
+    "VOX": 5,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "min_unique_per_party": 5,
+  "parties_below_min_unique": [],
+  "missing_parties": [],
+  "checks": {
+    "required_parties_covered": true,
+    "min_unique_per_party_met": true
+  },
+  "status": "ok",
+  "passed": true,
+  "strict_fail_reasons": []
+}

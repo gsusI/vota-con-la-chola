@@ -1,0 +1,75 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 6,
+  "upserted": 6,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 6
+  },
+  "by_doc_format": {
+    "html": 6
+  },
+  "sample": [
+    {
+      "source_record_pk": 147068,
+      "sample_initiative_id": "senado:leg14:exp:624/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General, para la regulación del ejercicio del voto por los españoles que viven en el extranjero. (624/000013)"
+    },
+    {
+      "source_record_pk": 147065,
+      "sample_initiative_id": "senado:leg10:exp:610/000070",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la República de Guinea al Convenio sobre los aspectos civiles de la sustracción internacional de menores, hecho en La Haya el 25 de octubre de 1980. (610/000070)"
+    },
+    {
+      "source_record_pk": 147066,
+      "sample_initiative_id": "senado:leg10:exp:610/000073",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre España y la Región Administrativa Especial de Hong Kong de la República Popular China sobre traslado de personas condenadas, hecho en Madrid el 15 de noviembre de 2012. (610/000073)"
+    },
+    {
+      "source_record_pk": 147064,
+      "sample_initiative_id": "senado:leg10:exp:610/000058",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de Sede entre la Organización Mundial del Turismo y el Reino de España para la celebración de la 93ª reunión del Consejo Ejecutivo, hecho en Madrid el 4 de junio de 2012. (610/000058)"
+    },
+    {
+      "source_record_pk": 147069,
+      "sample_initiative_id": "senado:leg10:exp:610/000146",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Protocolo correspondiente al Convenio de Atenas de 1974 relativo al transporte de pasajeros y sus equipajes por mar, hecho en Londres el 19 de noviembre de 1976. (610/000146)"
+    },
+    {
+      "source_record_pk": 147067,
+      "sample_initiative_id": "senado:leg14:exp:625/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de creación de un fondo de compensación para las víctimas del amianto. (625/000001)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

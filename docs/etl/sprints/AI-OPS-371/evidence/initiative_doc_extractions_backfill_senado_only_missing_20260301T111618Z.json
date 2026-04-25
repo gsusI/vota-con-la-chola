@@ -1,0 +1,39 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 2,
+  "upserted": 2,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 2
+  },
+  "by_doc_format": {
+    "html": 2
+  },
+  "sample": [
+    {
+      "source_record_pk": 147924,
+      "sample_initiative_id": "senado:leg14:exp:605/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma de la Ley Orgánica 5/2007, de 20 de abril, de reforma del Estatuto de Autonomía de Aragón. (605/000004)"
+    },
+    {
+      "source_record_pk": 147925,
+      "sample_initiative_id": "senado:leg14:exp:622/000055",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (622/000055)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

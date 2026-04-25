@@ -1,0 +1,59 @@
+{
+  "source_id": "programas_partidos",
+  "dedupe_key": "excerpt_norm+source_url",
+  "candidate_total_before_dedupe": 121,
+  "dropped_duplicates_total": 18,
+  "dropped_duplicates_by_party": {
+    "FORO Asturias": 6,
+    "PP": 8,
+    "VOX": 4
+  },
+  "excerpt_window_words": 40,
+  "excerpt_window_stride": 12,
+  "excerpt_window_min_words": 12,
+  "windowed_rows_total": 121,
+  "sample_total": 40,
+  "target_parties": [
+    "BNG",
+    "VOX",
+    "FORO Asturias",
+    "PP"
+  ],
+  "by_party": {
+    "BNG": 10,
+    "VOX": 10,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "unique_by_party": {
+    "BNG": 10,
+    "VOX": 10,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "available_unique_by_party": {
+    "BNG": 27,
+    "VOX": 14,
+    "FORO Asturias": 38,
+    "PP": 24
+  },
+  "min_unique_per_party": 10,
+  "effective_min_unique_per_party_by_party": {
+    "BNG": 10,
+    "VOX": 10,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "parties_below_min_unique": [],
+  "parties_below_effective_min_unique": [],
+  "parties_capped_by_available_unique": [],
+  "missing_parties": [],
+  "checks": {
+    "required_parties_covered": true,
+    "min_unique_per_party_met": true,
+    "min_unique_per_party_effective_met": true
+  },
+  "status": "ok",
+  "passed": true,
+  "strict_fail_reasons": []
+}

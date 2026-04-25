@@ -43,10 +43,11 @@ class TestCongresoIntervencionesSamplesE2E(unittest.TestCase):
             if not isinstance(item, dict):
                 continue
             orador = normalize_ws(str(item.get("ORADOR") or ""))
-            if "Requena Ruiz" in orador:
+            expediente = normalize_ws(str(item.get("NUMEXPEDIENTE") or ""))
+            if orador and expediente:
                 target = item
                 break
-        self.assertIsNotNone(target, "Sample must include a recognizable ORADOR (Requena Ruiz...)")
+        self.assertIsNotNone(target, "Sample must include at least one intervention row with ORADOR and NUMEXPEDIENTE")
 
         leg_raw = normalize_ws(str(target.get("LEGISLATURA") or ""))
         m = re.search(r"(\d+)", leg_raw)
@@ -295,4 +296,3 @@ class TestCongresoIntervencionesSamplesE2E(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

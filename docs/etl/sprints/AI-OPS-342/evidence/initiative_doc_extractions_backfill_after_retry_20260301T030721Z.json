@@ -1,0 +1,202 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 32,
+  "upserted": 32,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_sentence": 2,
+    "title_hint_strong": 30
+  },
+  "by_doc_format": {
+    "html": 32
+  },
+  "sample": [
+    {
+      "source_record_pk": 147150,
+      "sample_initiative_id": "senado:leg12:exp:621/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley sobre restitución de bienes culturales que hayan salido de forma ilegal del territorio español o de otro Estado miembro de la Unión Europea, por la que se incorpora al ordenamiento español la Directiva 2014/60/UE, del Parlamento Europeo y del Consejo de 15 de mayo de 2014. (621/000001)"
+    },
+    {
+      "source_record_pk": 147134,
+      "sample_initiative_id": "senado:leg12:exp:610/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo sobre la participación de la República de Croacia en el Espacio Económico Europeo, hecho en Bruselas el 11 de abril de 2014. (610/000003)"
+    },
+    {
+      "source_record_pk": 147149,
+      "sample_initiative_id": "senado:leg15:exp:626/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifican los artículos 133 y 182 (antes denominada Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 133). (626/000004)"
+    },
+    {
+      "source_record_pk": 147161,
+      "sample_initiative_id": "senado:leg15:exp:626/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifican los artículos 133 y 182 (antes denominada Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 133). (626/000004)"
+    },
+    {
+      "source_record_pk": 147163,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.2 (antes denominada Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.3). (626/000002)"
+    },
+    {
+      "source_record_pk": 147141,
+      "sample_initiative_id": "senado:leg14:exp:610/000118",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la Organización de las Naciones Unidas para la Educación, la Ciencia y la Cultura (UNESCO) relativo a la organización de la Tercera Conferencia Mundial sobre la Educación Superior (CMES III), hecho en París el 17 de diciembre de 2020. (610/000118)"
+    },
+    {
+      "source_record_pk": 147140,
+      "sample_initiative_id": "senado:leg14:exp:610/000117",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la Organización del Tratado del Atlántico Norte relativo a la cumbre de la OTAN que se celebrará en Madrid los días 28, 29 y 30 de junio de 2022, hecho en Bruselas el 20 de junio de 2022. (610/000117)"
+    },
+    {
+      "source_record_pk": 147138,
+      "sample_initiative_id": "senado:leg14:exp:610/000115",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio del Consejo de Europa sobre el acceso a los documentos públicos, hecho en Tromso el 18 de junio de 2009, así como Declaraciones y Reservas que España desea formular. (610/000115)"
+    },
+    {
+      "source_record_pk": 147139,
+      "sample_initiative_id": "senado:leg14:exp:610/000116",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Quinta enmienda del Protocolo de Montreal relativo a las sustancias que agotan la capa de Ozono, aprobada por la 28ª reunión de las Partes en Kigali el 15 de octubre de 2016. (610/000116)"
+    },
+    {
+      "source_record_pk": 147152,
+      "sample_initiative_id": "senado:leg14:exp:622/000096",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Real Decreto Legislativo 6/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley sobre Tráfico, Circulación de Vehículos a Motor y Seguridad Vial, y del Real Decreto 1428/2003, de 21 de noviembre, por el que se aprueba el Reglamento General de Circulación par…"
+    },
+    {
+      "source_record_pk": 147135,
+      "sample_initiative_id": "senado:leg12:exp:622/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 19/2007, de 11 de julio, contra la violencia, el racismo, la xenofobia y la intolerancia en el deporte, para erradicar la homofobia, la bifobia y la transfobia. (622/000004)"
+    },
+    {
+      "source_record_pk": 147151,
+      "sample_initiative_id": "senado:leg12:exp:622/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 19/2007, de 11 de julio, contra la violencia, el racismo, la xenofobia y la intolerancia en el deporte, para erradicar la homofobia, la bifobia y la transfobia. (622/000004)"
+    },
+    {
+      "source_record_pk": 147153,
+      "sample_initiative_id": "senado:leg14:exp:622/000102",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 7/1985, de 2 de abril, Reguladora de las Bases del Régimen Local, para la adición de un nuevo artículo regulador de las medidas alternativas a las sanciones pecuniarias. (622/000102)"
+    },
+    {
+      "source_record_pk": 147165,
+      "sample_initiative_id": "senado:leg15:exp:622/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de montes de socios. (622/000008)"
+    },
+    {
+      "source_record_pk": 147147,
+      "sample_initiative_id": "senado:leg15:exp:622/000020",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para la recuperación de la bonificación de las cuotas patronales de la Seguridad Social para los empresarios de las ciudades de Ceuta y Melilla, cuyas actividades estén encuadradas en los sectores recogidos en la presente ley, con cuentas de cotización y trabajadores asignados a dichas empresas. (62…"
+    },
+    {
+      "source_record_pk": 147159,
+      "sample_initiative_id": "senado:leg15:exp:622/000020",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para la recuperación de la bonificación de las cuotas patronales de la Seguridad Social para los empresarios de las ciudades de Ceuta y Melilla, cuyas actividades estén encuadradas en los sectores recogidos en la presente ley, con cuentas de cotización y trabajadores asignados a dichas empresas. (62…"
+    },
+    {
+      "source_record_pk": 147146,
+      "sample_initiative_id": "senado:leg15:exp:622/000019",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica contra la ocupación ilegal y para la convivencia vecinal y la protección de la seguridad de las personas y cosas en las comunidades de propietarios. (622/000019)"
+    },
+    {
+      "source_record_pk": 147158,
+      "sample_initiative_id": "senado:leg15:exp:622/000019",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica contra la ocupación ilegal y para la convivencia vecinal y la protección de la seguridad de las personas y cosas en las comunidades de propietarios. (622/000019)"
+    },
+    {
+      "source_record_pk": 147144,
+      "sample_initiative_id": "senado:leg15:exp:622/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (622/000013)"
+    },
+    {
+      "source_record_pk": 147156,
+      "sample_initiative_id": "senado:leg15:exp:622/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (622/000013)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

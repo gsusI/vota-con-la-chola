@@ -15,9 +15,9 @@ from typing import Iterable
 
 
 DEFAULT_SCAN_PATHS = (
-    Path("docs/gh-pages"),
     Path("etl/data/published"),
     Path("ui/gh-pages-next/public"),
+    Path("ui/gh-pages-next/out"),
 )
 SKIP_SUFFIXES = {
     ".db",
@@ -67,7 +67,7 @@ def parse_args() -> argparse.Namespace:
         "--path",
         action="append",
         default=[],
-        help="Path to scan (repeatable). Defaults to docs/gh-pages and etl/data/published.",
+        help="Path to scan (repeatable). Defaults to static app public/out and etl/data/published.",
     )
     parser.add_argument(
         "--max-findings",

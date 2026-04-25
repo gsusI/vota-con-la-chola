@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 22,
+  "upserted": 22,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 22
+  },
+  "by_doc_format": {
+    "html": 22
+  },
+  "sample": [
+    {
+      "source_record_pk": 147300,
+      "sample_initiative_id": "senado:leg12:exp:621/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adoptan medidas urgentes para paliar los efectos producidos por la sequía en determinadas cuencas hidrográficas y se modifica el texto refundido de la Ley de Aguas, aprobado por Real Decreto Legislativo 1/2001, de 20 de julio (procedente del Real Decreto-Ley 10/2017, de 9 de junio). (621/…"
+    },
+    {
+      "source_record_pk": 147297,
+      "sample_initiative_id": "senado:leg12:exp:621/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se incorpora al ordenamiento jurídico español la Directiva 2013/11/UE, del Parlamento Europeo y del Consejo, de 21 de mayo de 2013, relativa a la resolución alternativa de litigios en materia de consumo. (621/000005)"
+    },
+    {
+      "source_record_pk": 147296,
+      "sample_initiative_id": "senado:leg12:exp:621/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley sobre precursores de explosivos. (621/000003)"
+    },
+    {
+      "source_record_pk": 147285,
+      "sample_initiative_id": "senado:leg12:exp:621/000014",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 21/2013, de 9 de diciembre, de evaluación ambiental, la Ley 21/2015, de 20 de julio, por la que se modifica la Ley 43/2003, de 21 de noviembre, de Montes y la Ley 1/2005, de 9 de marzo, por la que se regula el régimen del comercio de derechos de emisión de gases de efecto…"
+    },
+    {
+      "source_record_pk": 147295,
+      "sample_initiative_id": "senado:leg12:exp:621/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley sobre restitución de bienes culturales que hayan salido de forma ilegal del territorio español o de otro Estado miembro de la Unión Europea, por la que se incorpora al ordenamiento español la Directiva 2014/60/UE, del Parlamento Europeo y del Consejo de 15 de mayo de 2014. (621/000001)"
+    },
+    {
+      "source_record_pk": 147282,
+      "sample_initiative_id": "senado:leg10:exp:610/000076",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo entre el Reino de España y la Confederación Suiza que modifica el Convenio para evitar la doble imposición en materia de impuestos sobre la renta y sobre el patrimonio firmado en Berna el 26 de abril de 1966, y su Protocolo, modificados por el Protocolo firmado en Madrid el 29 de junio de 2006, hecho en Madr…"
+    },
+    {
+      "source_record_pk": 147283,
+      "sample_initiative_id": "senado:leg10:exp:610/000077",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Acuerdo entre los Estados participantes en la Brigada Multinacional de Fuerzas de Reserva de Despliegue Rápido para Operaciones de la ONU referente al Estatuto de sus Fuerzas (SHIRBRIG), hecho en Copenhague el 13 de diciembre de 2001. (610/000077)"
+    },
+    {
+      "source_record_pk": 147280,
+      "sample_initiative_id": "senado:leg10:exp:610/000073",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre España y la Región Administrativa Especial de Hong Kong de la República Popular China sobre traslado de personas condenadas, hecho en Madrid el 15 de noviembre de 2012. (610/000073)"
+    },
+    {
+      "source_record_pk": 147279,
+      "sample_initiative_id": "senado:leg10:exp:610/000072",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre España y la Región Administrativa Especial de Hong Kong de la República Popular China relativo a la Asistencia Judicial en materia penal, hecho en Madrid el 15 de noviembre de 2012. (610/000072)"
+    },
+    {
+      "source_record_pk": 147299,
+      "sample_initiative_id": "senado:leg12:exp:621/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se aprueba la metodología de señalamiento del cupo del País Vasco para el quinquenio 2017-2021. (621/000007)"
+    },
+    {
+      "source_record_pk": 147298,
+      "sample_initiative_id": "senado:leg12:exp:621/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 12/2002, de 23 de mayo, por la que se aprueba el Concierto Económico con la Comunidad Autónoma del País Vasco. (621/000006)"
+    },
+    {
+      "source_record_pk": 147284,
+      "sample_initiative_id": "senado:leg10:exp:610/000098",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y los Estados Unidos de América para la mejora del cumplimiento fiscal internacional y la aplicación de la ley estadounidense de cumplimiento tributario de cuentas extranjeras, hecho en Madrid el 14 de mayo de 2013. (610/000098)"
+    },
+    {
+      "source_record_pk": 147289,
+      "sample_initiative_id": "senado:leg10:exp:610/000143",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Gobierno del Reino de España y el Gobierno de Australia relativo al programa de movilidad para jóvenes, hecho en Canberra el 3 de septiembre de 2014. (610/000143)"
+    },
+    {
+      "source_record_pk": 147281,
+      "sample_initiative_id": "senado:leg10:exp:610/000074",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo sobre Transporte Aéreo entre el Reino de España y la República de Camerún, hecho en Yaundé el 21 de noviembre de 2012. (610/000074)"
+    },
+    {
+      "source_record_pk": 147286,
+      "sample_initiative_id": "senado:leg10:exp:610/000140",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Reino de Arabia Saudí para la promoción y protección recíproca de inversiones, hecho en Riad el 9 de abril de 2006. (610/000140)"
+    },
+    {
+      "source_record_pk": 147287,
+      "sample_initiative_id": "senado:leg10:exp:610/000141",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Eslovenia para el intercambio y protección recíproca de información clasificada, hecho en Madrid el 21 de octubre de 2014. (610/000141)"
+    },
+    {
+      "source_record_pk": 147290,
+      "sample_initiative_id": "senado:leg10:exp:610/000144",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo de 2002 al Convenio de Atenas relativo al transporte de pasajeros y sus equipajes por mar, 1974, hecho en Londres el 1 de noviembre de 2002, junto con una Reserva y una Declaración que España desea formular. (610/000144)"
+    },
+    {
+      "source_record_pk": 147293,
+      "sample_initiative_id": "senado:leg10:exp:610/000147",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Revocación de la adhesión de España al Protocolo de 1990 que enmienda el Convenio de Atenas relativo al transporte de pasajeros y sus equipajes por mar, 1974, hecho en Londres el 29 de marzo de 1990. (610/000147)"
+    },
+    {
+      "source_record_pk": 147292,
+      "sample_initiative_id": "senado:leg10:exp:610/000146",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Protocolo correspondiente al Convenio de Atenas de 1974 relativo al transporte de pasajeros y sus equipajes por mar, hecho en Londres el 19 de noviembre de 1976. (610/000146)"
+    },
+    {
+      "source_record_pk": 147291,
+      "sample_initiative_id": "senado:leg10:exp:610/000145",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Convenio relativo al transporte de pasajeros y sus equipajes por mar, hecho en Atenas el 13 de diciembre de 1974. (610/000145)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

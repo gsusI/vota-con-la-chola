@@ -168,6 +168,97 @@ CREATE TABLE IF NOT EXISTS source_records (
   UNIQUE (source_id, source_record_id)
 );
 
+-- Organigrama público: unidades oficiales y dependencias orgánicas.
+-- DIR3 is the source-of-truth backbone; BOE/Transparencia can enrich positions
+-- and named office holders without overwriting this structural layer.
+CREATE TABLE IF NOT EXISTS government_org_units (
+  org_unit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  source_record_id TEXT NOT NULL,
+  org_unit_code TEXT NOT NULL,
+  org_unit_version TEXT,
+  name TEXT NOT NULL,
+  normalized_name TEXT,
+  administration_level TEXT,
+  administration_name TEXT,
+  ministry_name TEXT,
+  entity_type_code TEXT,
+  entity_type_label TEXT,
+  unit_type_code TEXT,
+  unit_type_label TEXT,
+  organic_level INTEGER,
+  status TEXT,
+  valid_from TEXT,
+  valid_to TEXT,
+  source_url TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, org_unit_code)
+);
+
+CREATE TABLE IF NOT EXISTS government_org_relationships (
+  org_relationship_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  relationship_type TEXT NOT NULL CHECK (
+    relationship_type IN ('depends_on', 'attached_to', 'reports_to', 'appoints', 'delegates_to', 'audits')
+  ),
+  subject_org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE CASCADE,
+  object_org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE CASCADE,
+  subject_org_unit_code TEXT NOT NULL,
+  object_org_unit_code TEXT NOT NULL,
+  evidence_date TEXT,
+  source_url TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, subject_org_unit_code, relationship_type, object_org_unit_code)
+);
+
+CREATE TABLE IF NOT EXISTS government_positions (
+  position_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  position_code TEXT,
+  title TEXT NOT NULL,
+  position_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    position_kind IN ('political_appointee', 'civil_service', 'elected', 'employment', 'unknown')
+  ),
+  is_top_responsible INTEGER NOT NULL DEFAULT 0 CHECK (is_top_responsible IN (0, 1)),
+  source_url TEXT,
+  raw_payload TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (org_unit_id, title, position_kind, position_code)
+);
+
+CREATE TABLE IF NOT EXISTS person_org_memberships (
+  membership_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
+  membership_kind TEXT NOT NULL CHECK (
+    membership_kind IN ('public_position', 'public_employment', 'party', 'parliamentary_group', 'other')
+  ),
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  party_id INTEGER REFERENCES parties(party_id) ON DELETE SET NULL,
+  position_id INTEGER REFERENCES government_positions(position_id) ON DELETE SET NULL,
+  role_label TEXT,
+  start_date TEXT,
+  end_date TEXT,
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  source_kind TEXT NOT NULL DEFAULT 'official_source',
+  source_url TEXT,
+  evidence_date TEXT,
+  evidence_quote TEXT,
+  raw_payload TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (person_id, membership_kind, org_unit_id, party_id, position_id, role_label, start_date, source_url)
+);
+
 CREATE TABLE IF NOT EXISTS mandates (
   mandate_id INTEGER PRIMARY KEY AUTOINCREMENT,
   person_id INTEGER NOT NULL REFERENCES persons(person_id),
@@ -754,128 +845,285 @@ CREATE TABLE IF NOT EXISTS parl_initiative_measure_points (
   UNIQUE (task_id, measure_rank)
 );
 
--- Deterministic text fragments over versioned initiative texts.
--- These are the scalable extraction unit for large-volume measure candidate generation.
-CREATE TABLE IF NOT EXISTS parl_text_fragments (
-  fragment_id TEXT PRIMARY KEY,
-  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
-  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
-  source_id TEXT NOT NULL REFERENCES sources(source_id),
-  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
-  fragment_order INTEGER NOT NULL,
-  fragment_kind TEXT NOT NULL CHECK (
-    fragment_kind IN ('article', 'disposition', 'section', 'chapter', 'paragraph', 'chunk', 'unknown')
-  ),
-  fragment_label TEXT,
-  char_start INTEGER,
-  char_end INTEGER,
-  fragment_text TEXT NOT NULL,
-  text_hash TEXT,
+-- Responsibility explainer benchmark cases and their evidence slices.
+CREATE TABLE IF NOT EXISTS responsibility_explainer_cases (
+  case_id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  short_label TEXT NOT NULL,
+  summary TEXT NOT NULL,
+  current_scope_note TEXT,
+  geography TEXT,
+  incident_window_label TEXT,
+  incident_start_date TEXT,
+  incident_end_date TEXT,
+  initiative_ids_json TEXT NOT NULL DEFAULT '[]',
+  known_gaps_json TEXT NOT NULL DEFAULT '[]',
+  next_lanes_json TEXT NOT NULL DEFAULT '[]',
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  is_active INTEGER NOT NULL DEFAULT 1,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_cases_active_sort
+ON responsibility_explainer_cases(is_active, sort_order, case_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_questions (
+  case_question_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  question_id TEXT NOT NULL,
+  category TEXT,
+  prompt TEXT NOT NULL,
+  support_rule TEXT,
+  next_evidence_needed_json TEXT NOT NULL DEFAULT '[]',
+  question_order INTEGER NOT NULL DEFAULT 0,
   raw_payload_json TEXT NOT NULL DEFAULT '{}',
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  UNIQUE (initiative_text_version_id, fragment_order)
+  UNIQUE (case_id, question_id)
 );
 
-CREATE TABLE IF NOT EXISTS parl_fragment_measure_reviews (
-  fragment_id TEXT PRIMARY KEY REFERENCES parl_text_fragments(fragment_id) ON DELETE CASCADE,
-  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
-  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
-  source_id TEXT NOT NULL REFERENCES sources(source_id),
-  status TEXT NOT NULL CHECK (status IN ('pending', 'resolved', 'ignored')),
-  note TEXT,
-  raw_payload_json TEXT NOT NULL DEFAULT '{}',
-  created_at TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_questions_case
+ON responsibility_explainer_questions(case_id, question_order, question_id);
 
--- Machine/generated-or-seeded candidate measure claims.
--- This is the raw scalable layer; reviewed points remain the publish-safe gold layer.
-CREATE TABLE IF NOT EXISTS parl_measure_candidates (
-  measure_candidate_id TEXT PRIMARY KEY,
-  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
-  source_id TEXT NOT NULL REFERENCES sources(source_id),
-  initiative_text_version_id TEXT REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE SET NULL,
-  fragment_id TEXT REFERENCES parl_text_fragments(fragment_id) ON DELETE SET NULL,
-  source_measure_point_id TEXT REFERENCES parl_initiative_measure_points(measure_point_id) ON DELETE SET NULL,
-  candidate_origin TEXT NOT NULL CHECK (
-    candidate_origin IN ('reviewed_point', 'fragment_heuristic', 'fragment_model')
-  ),
-  extraction_method TEXT,
-  effect_type TEXT NOT NULL CHECK (
-    effect_type IN ('tax', 'benefit', 'obligation', 'restriction', 'sanction', 'rights', 'institutional', 'competence', 'unknown')
-  ),
-  risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
-  measure_title TEXT NOT NULL,
-  citizen_summary TEXT NOT NULL,
-  normalized_key TEXT NOT NULL,
-  affected_groups TEXT,
-  policy_area TEXT,
-  measure_kind TEXT,
-  search_terms_json TEXT NOT NULL DEFAULT '[]',
-  primary_vote_event_ids_json TEXT NOT NULL DEFAULT '[]',
-  support_side TEXT CHECK (support_side IN ('yes', 'no', 'mixed', 'unknown')),
-  evidence_json TEXT NOT NULL DEFAULT '[]',
-  confidence REAL,
-  status TEXT NOT NULL CHECK (status IN ('candidate', 'promoted', 'rejected')) DEFAULT 'candidate',
-  raw_payload_json TEXT NOT NULL DEFAULT '{}',
-  created_at TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
-
--- Canonical citizen-facing measure clusters used for dedupe/search/publication.
-CREATE TABLE IF NOT EXISTS parl_measure_clusters (
-  measure_cluster_id TEXT PRIMARY KEY,
-  cluster_slug TEXT NOT NULL UNIQUE,
-  canonical_title TEXT NOT NULL,
-  canonical_summary TEXT NOT NULL,
-  normalized_key TEXT NOT NULL,
-  effect_type TEXT NOT NULL CHECK (
-    effect_type IN ('tax', 'benefit', 'obligation', 'restriction', 'sanction', 'rights', 'institutional', 'competence', 'unknown')
-  ),
-  risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
-  policy_area TEXT,
-  measure_kind TEXT,
-  aliases_json TEXT NOT NULL DEFAULT '[]',
-  search_terms_json TEXT NOT NULL DEFAULT '[]',
-  confidence REAL,
-  publish_status TEXT NOT NULL CHECK (
-    publish_status IN ('candidate', 'review_required', 'published', 'rejected')
-  ) DEFAULT 'candidate',
-  raw_payload_json TEXT NOT NULL DEFAULT '{}',
-  created_at TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS parl_measure_candidate_cluster_links (
-  candidate_cluster_link_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  measure_candidate_id TEXT NOT NULL REFERENCES parl_measure_candidates(measure_candidate_id) ON DELETE CASCADE,
-  measure_cluster_id TEXT NOT NULL REFERENCES parl_measure_clusters(measure_cluster_id) ON DELETE CASCADE,
-  link_method TEXT NOT NULL CHECK (
-    link_method IN ('seed_exact', 'title_norm_exact', 'manual')
-  ),
-  confidence REAL,
-  is_primary INTEGER NOT NULL DEFAULT 1 CHECK (is_primary IN (0, 1)),
+CREATE TABLE IF NOT EXISTS responsibility_explainer_normative_duties (
+  case_duty_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  duty_id TEXT NOT NULL,
+  category TEXT,
+  actor TEXT,
+  actor_scope TEXT,
+  duty_summary TEXT,
+  why_it_matters TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  duty_order INTEGER NOT NULL DEFAULT 0,
   raw_payload_json TEXT NOT NULL DEFAULT '{}',
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  UNIQUE (measure_candidate_id, measure_cluster_id)
+  UNIQUE (case_id, duty_id)
 );
 
-CREATE TABLE IF NOT EXISTS parl_measure_candidate_reviews (
-  candidate_review_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  review_key TEXT NOT NULL UNIQUE,
-  measure_candidate_id TEXT NOT NULL REFERENCES parl_measure_candidates(measure_candidate_id) ON DELETE CASCADE,
-  measure_cluster_id TEXT REFERENCES parl_measure_clusters(measure_cluster_id) ON DELETE SET NULL,
-  review_reason TEXT NOT NULL CHECK (
-    review_reason IN ('high_risk', 'low_confidence', 'cluster_ambiguous', 'missing_vote_link', 'manual_sampling')
-  ),
-  status TEXT NOT NULL CHECK (status IN ('pending', 'approved', 'edited', 'rejected', 'ignored')) DEFAULT 'pending',
-  note TEXT,
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_normative_duties_case
+ON responsibility_explainer_normative_duties(case_id, duty_order, duty_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_warning_channels (
+  case_channel_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  channel_id TEXT NOT NULL,
+  channel_name TEXT,
+  operator TEXT,
+  scope TEXT,
+  signal_summary TEXT,
+  why_next TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_note TEXT,
+  channel_order INTEGER NOT NULL DEFAULT 0,
   raw_payload_json TEXT NOT NULL DEFAULT '{}',
   created_at TEXT NOT NULL,
-  updated_at TEXT NOT NULL
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, channel_id)
 );
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_warning_channels_case
+ON responsibility_explainer_warning_channels(case_id, channel_order, channel_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_warning_timeline_events (
+  case_timeline_event_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  event_id TEXT NOT NULL,
+  channel_id TEXT,
+  channel_name TEXT,
+  operator TEXT,
+  event_time TEXT,
+  event_precision TEXT,
+  signal_level TEXT,
+  event_summary TEXT,
+  why_it_matters TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  event_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, event_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_warning_timeline_case
+ON responsibility_explainer_warning_timeline_events(case_id, event_order, event_time, event_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_governing_rules (
+  case_rule_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  rule_id TEXT NOT NULL,
+  rule_kind TEXT,
+  title TEXT,
+  duty_summary TEXT,
+  exposure_mechanism TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  rule_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, rule_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_governing_rules_case
+ON responsibility_explainer_governing_rules(case_id, rule_order, rule_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_official_findings (
+  case_finding_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  finding_id TEXT NOT NULL,
+  category TEXT,
+  entity_name TEXT,
+  finding_date TEXT,
+  finding_summary TEXT,
+  accountability_implication TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  finding_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, finding_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_official_findings_case
+ON responsibility_explainer_official_findings(case_id, finding_order, finding_date, finding_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_administrative_acts (
+  case_act_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  act_id TEXT NOT NULL,
+  act_type TEXT,
+  entity_name TEXT,
+  act_date TEXT,
+  status TEXT,
+  act_summary TEXT,
+  accountability_implication TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  act_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, act_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_administrative_acts_case
+ON responsibility_explainer_administrative_acts(case_id, act_order, act_date, act_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_responsibility_links (
+  case_link_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  link_id TEXT NOT NULL,
+  actor TEXT,
+  actor_scope TEXT,
+  linked_object_type TEXT,
+  linked_object_id TEXT,
+  role_in_chain TEXT,
+  obligation_basis TEXT,
+  accountability_question TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  link_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, link_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_responsibility_links_case
+ON responsibility_explainer_responsibility_links(case_id, link_order, link_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_structural_risk_factors (
+  case_factor_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  factor_id TEXT NOT NULL,
+  category TEXT,
+  title TEXT,
+  risk_mechanism TEXT,
+  accountability_focus TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  factor_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, factor_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_structural_risk_factors_case
+ON responsibility_explainer_structural_risk_factors(case_id, factor_order, factor_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_structural_audit_targets (
+  case_target_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  target_id TEXT NOT NULL,
+  category TEXT,
+  title TEXT,
+  geography TEXT,
+  why_priority TEXT,
+  audit_question TEXT,
+  documents_to_audit_json TEXT NOT NULL DEFAULT '[]',
+  authority_chain TEXT,
+  next_join_needed TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  target_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, target_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_structural_audit_targets_case
+ON responsibility_explainer_structural_audit_targets(case_id, target_order, target_id);
+
+CREATE TABLE IF NOT EXISTS responsibility_explainer_structural_evidence_rows (
+  case_evidence_pk TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES responsibility_explainer_cases(case_id) ON DELETE CASCADE,
+  evidence_id TEXT NOT NULL,
+  target_id TEXT,
+  entity_name TEXT,
+  signal_type TEXT,
+  certainty TEXT,
+  signal_title TEXT,
+  pre_dana_reading TEXT,
+  why_it_matters TEXT,
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_note TEXT,
+  evidence_order INTEGER NOT NULL DEFAULT 0,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (case_id, evidence_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_structural_evidence_case
+ON responsibility_explainer_structural_evidence_rows(case_id, evidence_order, evidence_id);
 
 -- Politica publica: dominios, ejes y eventos (accion revelada).
 -- Nota: estas tablas son el "hueco" intencional para evolucionar desde temas/votos
@@ -1619,6 +1867,22 @@ CREATE INDEX IF NOT EXISTS idx_mandates_admin_level_id ON mandates(admin_level_i
 CREATE INDEX IF NOT EXISTS idx_mandates_territory_id ON mandates(territory_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_source_record_pk ON mandates(source_record_pk);
 CREATE INDEX IF NOT EXISTS idx_source_records_source ON source_records(source_id);
+CREATE INDEX IF NOT EXISTS idx_government_org_units_source_id ON government_org_units(source_id);
+CREATE INDEX IF NOT EXISTS idx_government_org_units_code ON government_org_units(org_unit_code);
+CREATE INDEX IF NOT EXISTS idx_government_org_units_source_record_pk ON government_org_units(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_government_org_units_ministry ON government_org_units(ministry_name);
+CREATE INDEX IF NOT EXISTS idx_government_org_units_level ON government_org_units(administration_level);
+CREATE INDEX IF NOT EXISTS idx_government_org_relationships_subject
+    ON government_org_relationships(subject_org_unit_id, relationship_type);
+CREATE INDEX IF NOT EXISTS idx_government_org_relationships_object
+    ON government_org_relationships(object_org_unit_id, relationship_type);
+CREATE INDEX IF NOT EXISTS idx_government_org_relationships_codes
+    ON government_org_relationships(subject_org_unit_code, object_org_unit_code);
+CREATE INDEX IF NOT EXISTS idx_government_positions_org_unit_id ON government_positions(org_unit_id);
+CREATE INDEX IF NOT EXISTS idx_person_org_memberships_person_id ON person_org_memberships(person_id);
+CREATE INDEX IF NOT EXISTS idx_person_org_memberships_org_unit_id ON person_org_memberships(org_unit_id);
+CREATE INDEX IF NOT EXISTS idx_person_org_memberships_party_id ON person_org_memberships(party_id);
+CREATE INDEX IF NOT EXISTS idx_person_org_memberships_position_id ON person_org_memberships(position_id);
 CREATE INDEX IF NOT EXISTS idx_institutions_admin_level_id ON institutions(admin_level_id);
 CREATE INDEX IF NOT EXISTS idx_institutions_territory_id ON institutions(territory_id);
 CREATE INDEX IF NOT EXISTS idx_party_aliases_party_id ON party_aliases(party_id);
@@ -1697,24 +1961,6 @@ CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_review_tasks_priority ON 
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_points_task_id ON parl_initiative_measure_points(task_id);
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_points_initiative_id ON parl_initiative_measure_points(initiative_id);
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_measure_points_support_side ON parl_initiative_measure_points(support_side);
-CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_version_id ON parl_text_fragments(initiative_text_version_id);
-CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_initiative_id ON parl_text_fragments(initiative_id);
-CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_source_record_pk ON parl_text_fragments(source_record_pk);
-CREATE INDEX IF NOT EXISTS idx_parl_fragment_measure_reviews_status ON parl_fragment_measure_reviews(status);
-CREATE INDEX IF NOT EXISTS idx_parl_fragment_measure_reviews_initiative_id ON parl_fragment_measure_reviews(initiative_id);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_initiative_id ON parl_measure_candidates(initiative_id);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_fragment_id ON parl_measure_candidates(fragment_id);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_source_measure_point_id
-    ON parl_measure_candidates(source_measure_point_id);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_status ON parl_measure_candidates(status);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidates_effect_type ON parl_measure_candidates(effect_type);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_clusters_publish_status ON parl_measure_clusters(publish_status);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_clusters_normalized_key ON parl_measure_clusters(normalized_key);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidate_cluster_links_cluster_id
-    ON parl_measure_candidate_cluster_links(measure_cluster_id);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidate_reviews_status ON parl_measure_candidate_reviews(status);
-CREATE INDEX IF NOT EXISTS idx_parl_measure_candidate_reviews_cluster_id
-    ON parl_measure_candidate_reviews(measure_cluster_id);
 
 CREATE INDEX IF NOT EXISTS idx_domains_tier ON domains(tier);
 CREATE INDEX IF NOT EXISTS idx_policy_axes_domain_id ON policy_axes(domain_id);

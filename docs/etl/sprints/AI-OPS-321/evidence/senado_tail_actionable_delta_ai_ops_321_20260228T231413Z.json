@@ -1,0 +1,17 @@
+{
+  "before": {
+    "csv_lines_estimated": 1244,
+    "missing_urls": 1243,
+    "missing_initiatives": 627
+  },
+  "after": {
+    "csv_lines_actual": 1221,
+    "missing_urls": 1220,
+    "missing_initiatives": 627
+  },
+  "delta": {
+    "csv_lines": -23,
+    "missing_urls": -23,
+    "missing_initiatives": 0
+  }
+}

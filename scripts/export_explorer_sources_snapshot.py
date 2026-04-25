@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exporta una instantánea estática para explorer-sources (GitHub Pages).
+"""Exporta una instantánea estática para explorer-sources (Cloudflare Pages).
 
 Genera el payload de /api/sources/status y lo escribe a JSON.
 El inventario ideal se copia desde docs/ideal_sources_say_do.json en el build.
@@ -17,7 +17,7 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Exporta snapshot para explorer-sources (GitHub Pages)")
+    p = argparse.ArgumentParser(description="Exporta snapshot para explorer-sources (Cloudflare Pages)")
     p.add_argument("--db", default=str(DEFAULT_DB), help="Ruta de la base SQLite")
     p.add_argument("--out", required=True, help="Ruta de salida para status.json")
     return p.parse_args()

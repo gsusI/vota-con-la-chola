@@ -1,0 +1,219 @@
+{
+  "scope": "senado_iniciativas",
+  "pre": {
+    "total_rows": 3535,
+    "needs_review_rows": 0,
+    "noise_rows_total": 18,
+    "noise_rows_pct": 0.5092,
+    "noise_pattern_counts": {
+      "contains_bang_function": 18,
+      "contains_function": 18,
+      "senado_pipe_brand": 18,
+      "var_http": 18,
+      "script_tag": 0,
+      "javascript_scheme": 0
+    }
+  },
+  "post": {
+    "total_rows": 3535,
+    "needs_review_rows": 0,
+    "noise_rows_total": 0,
+    "noise_rows_pct": 0.0,
+    "noise_pattern_counts": {
+      "contains_bang_function": 0,
+      "contains_function": 0,
+      "senado_pipe_brand": 0,
+      "var_http": 0,
+      "script_tag": 0,
+      "javascript_scheme": 0
+    }
+  },
+  "delta": {
+    "noise_rows_total_delta": -18,
+    "needs_review_rows_delta": 0
+  },
+  "row_changes_checked": 18,
+  "row_changes_subject_changed": 18,
+  "row_changes_sample": [
+    {
+      "source_record_pk": 141870,
+      "sample_initiative_id": "senado:leg15:exp:600/000001",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proposición de Reforma del artículo 49 de la Constitución Española. (600/000001)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=600&id2=000001&legis=15\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=600&id2=000001&legis=15\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 141871,
+      "sample_initiative_id": "senado:leg15:exp:621/000001",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proyecto de Ley por la que se regulan las enseñanzas artísticas superiores y se establece la organización y equivalencias de las enseñanzas artísticas profesionales. (621/000001)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000001&legis=15\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000001&legis=15\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 141872,
+      "sample_initiative_id": "senado:leg12:exp:621/000002",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2017. (621/000002)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000002&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000002&legis=12\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 141873,
+      "sample_initiative_id": "senado:leg14:exp:621/000003",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proyecto de Ley reguladora de determinados aspectos de los servicios electrónicos de confianza. (621/000003)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000003&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000003&legis=14\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 141874,
+      "sample_initiative_id": "senado:leg14:exp:621/000005",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proyecto de Ley del Impuesto sobre Determinados Servicios Digitales. (621/000005)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000005&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000005&legis=14\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 141875,
+      "sample_initiative_id": "senado:leg12:exp:624/000003",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proposición de Ley de modificación de la Ley 15/2015, de 2 de julio, de Jurisdicción Voluntaria. (624/000003)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000003&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000003&legis=12\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 141876,
+      "sample_initiative_id": "senado:leg12:exp:624/000004",
+      "before_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "after_subject": "Proposición de Ley de modificación de la Ley 1/1996, de 10 de enero, de asistencia jurídica gratuita. (624/000004)",
+      "before_confidence": 0.82,
+      "after_confidence": 0.74,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000004&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000004&legis=12\", \"subject_method\": \"title_hint_strong\"}"
+    },
+    {
+      "source_record_pk": 146895,
+      "sample_initiative_id": "senado:leg14:exp:621/000089",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 24 ENERO 2025 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000089&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000089&legis=14\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147025,
+      "sample_initiative_id": "senado:leg14:exp:621/000004",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 18 MAYO 2021 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000004&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000004&legis=14\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147026,
+      "sample_initiative_id": "senado:leg14:exp:621/000015",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 11 AGOSTO 2025 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000015&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000015&legis=14\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147027,
+      "sample_initiative_id": "senado:leg14:exp:621/000016",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 24 JUNIO 2021 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000016&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000016&legis=14\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147028,
+      "sample_initiative_id": "senado:leg14:exp:624/000001",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 24 JUNIO 2021 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000001&legis=14\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000001&legis=14\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147032,
+      "sample_initiative_id": "senado:leg12:exp:621/000004",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 16 MARZO 2025 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000004&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000004&legis=12\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147033,
+      "sample_initiative_id": "senado:leg12:exp:621/000005",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 12 DICIEMBRE 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponenc…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000005&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000005&legis=12\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147034,
+      "sample_initiative_id": "senado:leg12:exp:621/000006",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 22 MARZO 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000006&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000006&legis=12\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147035,
+      "sample_initiative_id": "senado:leg12:exp:621/000007",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 18 MAYO 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000007&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000007&legis=12\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147036,
+      "sample_initiative_id": "senado:leg12:exp:621/000009",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 21 OCTUBRE 2020 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponenci…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000009&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000009&legis=12\", \"subject_method\": \"keyword_sentence\"}"
+    },
+    {
+      "source_record_pk": 147037,
+      "sample_initiative_id": "senado:leg12:exp:621/000010",
+      "before_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "after_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 31 MARZO 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias…",
+      "before_confidence": 0.82,
+      "after_confidence": 0.76,
+      "before_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000010&legis=12\", \"subject_method\": \"keyword_window\"}",
+      "after_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000010&legis=12\", \"subject_method\": \"keyword_sentence\"}"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+name: Solicitud de nueva fuente o revisión de fuente
+description: Proponer o revisar una fuente pública nueva o bloqueada.
+title: "[Data Source] "
+labels:
+  - "type:data-source"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa esta plantilla para propuestas de fuente y para registrar bloqueos de acceso.
+
+  - type: input
+    id: source_url
+    attributes:
+      label: URL fuente
+      description: Endpoint o página principal.
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connector
+    attributes:
+      label: Tipo de fuente
+      options:
+        - Mandatos/representantes
+        - Votaciones
+        - Iniciativas
+        - Otros datos políticos
+        - Resultado electoral
+      validations:
+        required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Alcance
+      description: Qué cubre y qué no cubre.
+    validations:
+      required: true
+
+  - type: textarea
+    id: terms
+    attributes:
+      label: Términos y restricciones
+      description: Licencia, condiciones de uso, límites de redistribución.
+    validations:
+      required: true
+
+  - type: input
+    id: source_reliability
+    attributes:
+      label: Estado de acceso
+      description: Abierta, necesita login, bloqueada por WAF, etc.
+      placeholder: ej. abierta / bloqueada por 403
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterios de aceptación
+      description: Qué debe quedar validado para aceptar esta fuente.
+      placeholder: |
+        - [ ] Pipeline con muestra de smoke test
+        - [ ] Evidencia y rastreabilidad en DB
+        - [ ] Cobertura mínima definida

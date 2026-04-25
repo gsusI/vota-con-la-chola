@@ -1,106 +1,217 @@
-import Link from "next/link";
-import { getHomeQuestionCards, siteSections, withBasePath } from "./siteCatalog.mjs";
+import { withBasePath } from "./path-utils.mjs";
+
+const primaryRoutes = [
+  {
+    href: "/citizen/",
+    label: "Ciudadanía",
+    title: "Comparar partidos por tema",
+    note: "Consulta rápida con evidencia y señales de incertidumbre.",
+    cta: "Empezar",
+  },
+  {
+    href: "/vote-explainer/",
+    label: "Votaciones",
+    title: "Abrir voto compartible",
+    note: "Resultado, grupos, fuente oficial y caveats visibles.",
+    cta: "Ver votos",
+  },
+  {
+    href: "/responsibility-explainer/",
+    label: "Responsabilidad",
+    title: "Seguir caso público",
+    note: "Deberes, avisos, decisiones, huecos y evidencia.",
+    cta: "Abrir casos",
+  },
+];
+
+const routeGroups = [
+  {
+    title: "Para decidir",
+    summary: "Entradas pensadas para ciudadanía y comparación rápida.",
+    links: [
+      {
+        href: "/citizen/?mode=audit",
+        title: "Modo auditoría ciudadana",
+        note: "Verifica trazabilidad, incertidumbre y soporte primario.",
+      },
+      {
+        href: "/citizen/leaderboards/",
+        title: "Leaderboards cívicos",
+        note: "Ranking por hipótesis, cobertura y comparabilidad.",
+      },
+      {
+        href: "/policy-outcomes/",
+        title: "Resultados de política pública",
+        note: "Indicadores asociados a eventos de política.",
+      },
+    ],
+  },
+  {
+    title: "Para auditar",
+    summary: "Superficies de evidencia, votos, esquema y fuentes.",
+    links: [
+      {
+        href: "/explorer-temas/",
+        title: "Explorador de temas",
+        note: "Dicho vs hecho por tema, ámbito y soporte.",
+      },
+      {
+        href: "/explorer-votaciones/",
+        title: "Monitor legislativo",
+        note: "Eventos, grupos y seguimiento temporal.",
+      },
+      {
+        href: "/explorer/",
+        title: "Power user SQL",
+        note: "Cruza tablas y baja a registros puntuales.",
+      },
+      {
+        href: "/explorer-sources/",
+        title: "Calidad de datos",
+        note: "Cobertura, bloqueos externos y backlog operativo.",
+      },
+    ],
+  },
+  {
+    title: "Para investigar actores",
+    summary: "Quién hizo qué, dónde, cuándo y con qué señales.",
+    links: [
+      {
+        href: "/people/",
+        title: "Directorio de personas",
+        note: "Perfil xray, cargos, posiciones y huecos.",
+      },
+      {
+        href: "/explorer-politico/",
+        title: "Explorador territorial",
+        note: "Actores por territorio, partido y trayectoria.",
+      },
+      {
+        href: "/political-positions/",
+        title: "Posturas explicables",
+        note: "Comparación persona/partido con evidencia rastreable.",
+      },
+      {
+        href: "/elections-behavior/",
+        title: "Elecciones y comportamiento",
+        note: "Cambios pre/post elección por partido y territorio.",
+      },
+    ],
+  },
+  {
+    title: "Para fiscalizar",
+    summary: "Cohesión parlamentaria, ciclo legislativo y responsabilidad jurídica.",
+    links: [
+      {
+        href: "/parliamentary-accountability/",
+        title: "Accountability parlamentaria",
+        note: "Disciplina, rebeldía, coaliciones, asistencia y pivotes.",
+      },
+      {
+        href: "/initiative-lifecycle/",
+        title: "Lifecycle legislativo",
+        note: "Tramitación, cuellos de botella y secuencia de votos.",
+      },
+      {
+        href: "/legal-sanctions/",
+        title: "Cumplimiento legal y sanciones",
+        note: "Normas, infracciones, volumen sancionador y monitoreo.",
+      },
+    ],
+  },
+];
+
+const signalRows = [
+  ["temas", "evidencia", "votos", "fuentes"],
+  ["actores", "territorio", "mandatos", "posturas"],
+  ["casos", "deberes", "avisos", "huecos"],
+  ["leyes", "ciclo", "grupos", "resultado"],
+];
 
 export default function HomePage() {
-  const questions = getHomeQuestionCards();
-
   return (
-    <main className="shell">
-      <section className="hero card">
-        <p className="eyebrow">Explora</p>
-        <h1>Vota Con La Chola</h1>
-        <p className="sub">
-          Sigue temas, actores, decisiones y resultados con enlaces directos a la evidencia y a los datos publicados.
-        </p>
-        <div className="chips">
-          <span className="chip">Temas</span>
-          <span className="chip">Actores</span>
-          <span className="chip">Datos verificables</span>
+    <main className="homepage">
+      <section className="homepage-hero" aria-labelledby="homepage-title">
+        <div className="homepage-hero__content">
+          <p className="homepage-hero__eyebrow eyebrow">Snapshot público · evidencia primero</p>
+          <h1 className="homepage-hero__title" id="homepage-title">Vota Con La Chola</h1>
+          <p className="homepage-hero__summary">
+            Decide, audita y comparte lo que partidos y cargos hacen con datos trazables.
+          </p>
+          <div className="homepage-hero__actions" aria-label="Entradas principales">
+            {primaryRoutes.map((item) => (
+              <a className="homepage-primary-link" href={withBasePath(item.href)} key={item.href}>
+                <span className="homepage-primary-link__label">{item.label}</span>
+                <span className="homepage-primary-link__title">{item.title}</span>
+                <span className="homepage-primary-link__note">{item.note}</span>
+                <span className="homepage-primary-link__cta">{item.cta}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="homepage-signal-panel" aria-label="Mapa visual de evidencia">
+          <div className="homepage-signal-panel__header">
+            <span className="homepage-signal-panel__status">static</span>
+            <span className="homepage-signal-panel__title">evidence graph</span>
+          </div>
+          <div className="homepage-signal-panel__matrix">
+            {signalRows.map((row, rowIndex) => (
+              <div className="homepage-signal-panel__row" key={row.join("-")}>
+                {row.map((item, index) => (
+                  <span
+                    className="homepage-signal-panel__node"
+                    data-weight={(rowIndex + index) % 3}
+                    key={item}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="homepage-signal-panel__footer">
+            <span className="homepage-signal-panel__metric">200 votos explicables</span>
+            <span className="homepage-signal-panel__metric">0 server runtime</span>
+          </div>
         </div>
       </section>
 
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Empieza por una pregunta</h2>
+      <section className="homepage-routes" aria-labelledby="homepage-routes-title">
+        <div className="homepage-section-heading">
+          <p className="homepage-section-heading__eyebrow eyebrow">Workbench</p>
+          <h2 className="homepage-section-heading__title" id="homepage-routes-title">Elige superficie</h2>
+          <p className="homepage-section-heading__summary">
+            Todas las rutas son estáticas y publicables. Cada enlace debe abrir sin servidor.
+          </p>
         </div>
-        <div className="grid">
-          {questions.map((item) => (
-            <Link className="tile" key={item.id} href={withBasePath(item.href)}>
-              <span className="tileTitle">{item.title}</span>
-              <span className="tileNote">{item.note}</span>
-              <span className="tileNote" style={{ marginTop: "2px", color: "#7b2f20", fontWeight: 700 }}>
-                {item.question}
-              </span>
-              <span className="chip">Abrir {item.label}</span>
-            </Link>
+
+        <div className="homepage-route-groups">
+          {routeGroups.map((group) => (
+            <section className="homepage-route-group" aria-label={group.title} key={group.title}>
+              <div className="homepage-route-group__heading">
+                <h3 className="homepage-route-group__title">{group.title}</h3>
+                <p className="homepage-route-group__summary">{group.summary}</p>
+              </div>
+              <div className="homepage-route-group__links">
+                {group.links.map((item) => (
+                  <a className="homepage-route-link" href={withBasePath(item.href)} key={item.href}>
+                    <span className="homepage-route-link__title">{item.title}</span>
+                    <span className="homepage-route-link__note">{item.note}</span>
+                    <span className="homepage-route-link__path">{item.href}</span>
+                  </a>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </section>
 
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Secciones principales</h2>
-        </div>
-        <div className="grid">
-          {siteSections.map((section) => (
-            <Link className="tile" key={section.id} href={withBasePath(section.href)}>
-              <span className="tileTitle">{section.navLabel}</span>
-              <span className="tileNote">{section.description}</span>
-              <span className="tileNote" style={{ marginTop: "2px", color: "#7b2f20", fontWeight: 700 }}>
-                {section.question}
-              </span>
-              <span className="chip">Entrar en {section.navLabel}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Accesos destacados</h2>
-        </div>
-        <div className="grid">
-          <Link className="tile" href={withBasePath("/citizen/")}>
-            <span className="tileTitle">Ciudadanía</span>
-            <span className="tileNote">Vista resumida para traducción rápida de temas e implicaciones.</span>
-            <span className="chip">Abrir ciudadanía</span>
-          </Link>
-          <Link className="tile" href={withBasePath("/citizen/leaderboards/")}>
-            <span className="tileTitle">Comparativas cívicas</span>
-            <span className="tileNote">Hipótesis públicas, rankings y cobertura comparada.</span>
-            <span className="chip">Abrir comparativas</span>
-          </Link>
-          <Link className="tile" href={withBasePath("/methods/datasets/")}>
-            <span className="tileTitle">Archivos publicados</span>
-            <span className="tileNote">Consulta los archivos disponibles y la sección donde se usan.</span>
-            <span className="chip">Abrir archivos</span>
-          </Link>
-          <Link className="tile" href={withBasePath("/methods/coverage/")}>
-            <span className="tileTitle">Cobertura y calidad</span>
-            <span className="tileNote">Consulta el estado de las fuentes, la cobertura y los bloqueos abiertos.</span>
-            <span className="chip">Abrir cobertura</span>
-          </Link>
-        </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Cómo orientarte</h2>
-        </div>
-        <div className="twoCols">
-          <div>
-            <h3>Si empiezas por un asunto</h3>
-            <p className="sub">
-              Entra por <strong>Temas</strong> para ver posiciones, votaciones relacionadas y resultados.
-            </p>
-          </div>
-          <div>
-            <h3>Si empiezas por una persona o partido</h3>
-            <p className="sub">
-              Entra por <strong>Actores</strong> para seguir perfiles, trayectorias y actividad pública.
-            </p>
-          </div>
-        </div>
+      <section className="homepage-proof" aria-label="Estado de publicación">
+        <p className="homepage-proof__statement">Frontend estático. Rutas profundas. Evidencia enlazada.</p>
+        <a className="homepage-proof__link" href={withBasePath("/explorer-sources/")}>
+          Ver estado de fuentes
+        </a>
       </section>
     </main>
   );

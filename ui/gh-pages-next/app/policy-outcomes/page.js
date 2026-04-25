@@ -1,14 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
-
-function withBasePath(path) {
-  return `${resolveBasePath()}${path}`;
-}
+import { resolveBasePath, withBasePath } from "../path-utils.mjs";
 
 function safeInt(value) {
   const parsed = Number(value);
@@ -385,7 +378,7 @@ export default function PolicyOutcomesPage() {
           frente a eventos de política pública.
         </p>
         <div className="chips">
-          <span className="chip">Publicación: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Snapshot: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
           <span className="chip">Series exportadas: {formatInt(coverage.series_loaded || 0)}</span>
           <span className="chip">Puntos: {formatInt(coverage.indicator_points_total || 0)}</span>
           <span className="chip">Eventos: {formatInt(coverage.events_loaded || 0)}</span>

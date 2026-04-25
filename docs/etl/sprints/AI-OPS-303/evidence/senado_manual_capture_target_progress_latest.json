@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-02-28T20:27:19+00:00",
+  "status": "degraded",
+  "targets_csv": "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv",
+  "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "thresholds": {
+    "strict_min_covered_targets": 1,
+    "strict_min_usable_targets": 1
+  },
+  "totals": {
+    "targets_total": 8,
+    "matched_targets_total": 8,
+    "unmatched_targets_total": 0,
+    "usable_targets_total": 0,
+    "access_denied_matched_targets_total": 8,
+    "matched_with_domain_cookies_total": 0,
+    "capture_files_total": 4,
+    "coverage_pct": 1.0,
+    "usable_coverage_pct": 0.0
+  },
+  "checks": {
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": false
+  },
+  "strict_fail_reasons": [
+    "usable_targets_below_min"
+  ],
+  "sample_unmatched_targets": []
+}

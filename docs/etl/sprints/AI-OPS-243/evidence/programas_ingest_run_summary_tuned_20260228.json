@@ -1,0 +1,28 @@
+{
+  "run_id": 292,
+  "started_at": "2026-02-28T08:37:19+00:00",
+  "finished_at": "2026-02-28T08:38:51+00:00",
+  "records_seen": 51,
+  "records_loaded": 51,
+  "evidence_inserted": 27,
+  "skipped": {
+    "bad_payload": 0,
+    "doc_fetch_failed": 0,
+    "missing_required": 0,
+    "no_concerns_config": 0,
+    "no_matching_topics": 0,
+    "non_program_doc": 42,
+    "party_missing_in_db": 0
+  },
+  "program_doc_signals": {
+    "legal_or_cookie_text": 31,
+    "no_programmatic_signal": 11,
+    "text_program_phrase": 6,
+    "url_program_hint": 3
+  },
+  "document_fetch_stats": {
+    "fallback_docs_fetched": 0,
+    "first_network_doc_url": "https://www.pp.es/",
+    "network_docs_fetched": 51
+  }
+}

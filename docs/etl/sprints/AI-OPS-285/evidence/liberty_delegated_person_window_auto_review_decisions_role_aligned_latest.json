@@ -1,0 +1,21 @@
+{
+  "review_queue_csv": "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv",
+  "review_assist_csv": "docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv",
+  "out_csv": "docs/etl/sprints/AI-OPS-285/exports/liberty_delegated_person_window_auto_review_decisions_role_aligned_latest.csv",
+  "summary": {
+    "status": "ok",
+    "rows_total": 8,
+    "rows_with_assist_candidates_total": 8,
+    "approved_rows_total": 2,
+    "pending_rows_total": 6,
+    "approved_with_actor_update_total": 2,
+    "approved_with_evidence_date_update_total": 0,
+    "rows_missing_candidate_total": 0,
+    "rows_missing_required_person_hint_total": 0,
+    "rows_missing_required_evidence_date_total": 0,
+    "rows_missing_role_alignment_total": 6,
+    "role_alignment_required": true,
+    "min_candidate_score": 25,
+    "max_candidates_per_link": 3
+  }
+}

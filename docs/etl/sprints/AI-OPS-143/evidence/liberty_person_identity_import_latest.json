@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-26T08:57:35+00:00",
-  "db_path": "etl/data/staging/politicos-es.db",
+  "generated_at": "2026-04-24T15:31:50+00:00",
+  "db_path": "etl/data/staging/politicos-es.e2e19.db",
   "seed_path": "etl/data/seeds/liberty_person_identity_resolution_seed_v1.json",
   "validation": {
     "valid": true,
@@ -9,14 +9,14 @@
   },
   "import": {
     "status": "ok",
-    "snapshot_date": "2026-02-26",
-    "source_id_used": "boe_api_legal",
+    "snapshot_date": "2026-04-13",
+    "source_id_used": "",
     "counts": {
       "mappings_total": 9,
-      "persons_created": 0,
-      "persons_reused": 9,
-      "aliases_inserted": 0,
-      "aliases_updated": 9,
+      "persons_created": 5,
+      "persons_reused": 4,
+      "aliases_inserted": 9,
+      "aliases_updated": 0,
       "aliases_retargeted": 0,
       "aliases_retarget_downgrade_prevented": 0,
       "aliases_source_kind_downgrade_prevented": 0,

@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/elections-behavior/data/elections-behavior.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/elections-behavior/data/elections-behavior.json")
 
 
 def parse_args() -> argparse.Namespace:
@@ -139,6 +139,19 @@ def pct(a: int, b: int) -> float:
     if not b:
         return 0.0
     return round(a * 100 / b, 2)
+
+
+def table_exists(conn: sqlite3.Connection, table_name: str) -> bool:
+    row = conn.execute(
+        """
+        SELECT 1
+        FROM sqlite_master
+        WHERE type = 'table' AND name = ?
+        LIMIT 1
+        """,
+        (table_name,),
+    ).fetchone()
+    return bool(row)
 
 
 def load_party_meta(conn: sqlite3.Connection) -> dict[int, tuple[str, str]]:
@@ -506,15 +519,21 @@ def load_election_result_coverage(conn: sqlite3.Connection, election_ids: list[s
         return {}
 
     placeholders = ",".join("?" for _ in election_ids)
+    text_documents_join = "LEFT JOIN text_documents td ON td.source_record_pk = pr.source_record_pk"
+    text_document_id_select = "td.text_document_id"
+    if not table_exists(conn, "text_documents"):
+        text_documents_join = ""
+        text_document_id_select = "NULL AS text_document_id"
+
     rows = conn.execute(
         f"""
         SELECT
           pr.proceso_id,
           pr.tipo_dato,
           pr.url,
-          td.text_document_id
+          {text_document_id_select}
         FROM infoelectoral_proceso_resultados pr
-        LEFT JOIN text_documents td ON td.source_record_pk = pr.source_record_pk
+        {text_documents_join}
         WHERE pr.proceso_id IN ({placeholders})
         """,
         election_ids,

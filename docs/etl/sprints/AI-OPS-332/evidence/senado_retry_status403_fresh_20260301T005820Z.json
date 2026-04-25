@@ -1,0 +1,56 @@
+{
+  "archive_fallback": true,
+  "archive_fallback_http_statuses": [
+    403
+  ],
+  "archive_fetched_ok": 0,
+  "archive_first_urls": 9,
+  "archive_hits": 0,
+  "archive_lookup_attempted": 9,
+  "archive_lookup_failures": [],
+  "candidate_urls": 9,
+  "derived_ini_candidates": 3,
+  "derived_ini_selected": 0,
+  "derived_probe_unfetched_skipped": 0,
+  "doc_links_filtered_by_selected_doc_entry_keys": 11,
+  "doc_links_filtered_by_selected_doc_urls": 0,
+  "doc_links_seen": 9,
+  "dry_run": false,
+  "failures": [
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000012 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000003 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000005 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000006 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000007 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000011 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000014 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000020 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000023 -> HTTPStatusError: archive fallback: no snapshot candidates"
+  ],
+  "fetched_ok": 0,
+  "initiative_documents_upserted": 9,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 9,
+  "playwright_init_error": null,
+  "playwright_runtime": {},
+  "retry_http_statuses": [
+    403
+  ],
+  "selected_doc_entry_keys_total": 9,
+  "selected_doc_status_used_for_forbidden_filter": 9,
+  "selected_doc_status_used_for_retry": 9,
+  "selected_doc_urls_not_in_candidates": 0,
+  "selected_doc_urls_total": 9,
+  "selected_doc_urls_with_snapshot_status": 9,
+  "selected_initiatives_total": 9,
+  "selected_scope_no_limit": true,
+  "skipped_existing": 0,
+  "skipped_forbidden": 0,
+  "skipped_redundant_global_urls": 0,
+  "skipped_retry_http_statuses": 0,
+  "text_documents_upserted": 0,
+  "urls_filtered_by_selected_doc_urls": 0,
+  "urls_to_fetch": 9
+}

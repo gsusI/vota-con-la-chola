@@ -3993,7 +3993,7 @@
                 return personPayload;
               }
             }
-            // Static (GitHub Pages): derive from already-loaded mandates snapshot.
+            // Static app: derive from already-loaded mandates snapshot.
             const mandates = (app.rawRows || []).filter((row) => Number(row.person_id) === Number(personId));
             if (!mandates.length) {
               return {};
@@ -4413,10 +4413,10 @@
           if (isStatic && String(msg).includes("HTTP 404")) {
             refs.leagueLoading.textContent = "Modo snapshot (limitado)";
             refs.detailView.innerHTML =
-              "<div style='padding:14px'>" +
-              "<div style='font-weight:800'>Este explorador necesita un backend</div>" +
-              "<div class='muted' style='margin-top:6px'>En GitHub Pages no publicamos el snapshot completo porque es demasiado grande.</div>" +
-              "<div class='muted' style='margin-top:6px'>Ejecuta <span class='mono'>just explorer</span> y abre <span class='mono'>http://127.0.0.1:9010/explorer-politico</span>.</div>" +
+              "<div class='explorer-politico-backend-required' style='padding:14px'>" +
+              "<div class='explorer-politico-backend-required__title' style='font-weight:800'>Este explorador necesita un backend</div>" +
+              "<div class='explorer-politico-backend-required__message muted' style='margin-top:6px'>La app estática de Cloudflare Pages no publica el snapshot completo porque es demasiado grande.</div>" +
+              "<div class='explorer-politico-backend-required__hint muted' style='margin-top:6px'>Ejecuta <span class='mono'>just explorer</span> y abre <span class='mono'>http://127.0.0.1:9010/explorer-politico</span>.</div>" +
               "</div>";
             return;
           }

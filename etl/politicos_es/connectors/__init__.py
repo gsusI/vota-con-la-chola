@@ -14,6 +14,7 @@ from .cortes_aragon import CortesAragonDiputadosConnector
 from .cortes_clm import CortesClmDiputadosConnector
 from .cortes_cyl import CortesCylProcuradoresConnector
 from .corts_valencianes import CortsValencianesDiputatsConnector
+from .dir3_org import Dir3UnidadesAgeConnector
 from .eurostat_indicators import EurostatSdmxConnector
 from .europarl import EuroparlMepsConnector
 from .jgpa_asturias import JuntaGeneralAsturiasDiputadosConnector
@@ -48,6 +49,7 @@ __all__ = [
     "CortesClmDiputadosConnector",
     "CortesCylProcuradoresConnector",
     "CortsValencianesDiputatsConnector",
+    "Dir3UnidadesAgeConnector",
     "EurostatSdmxConnector",
     "EuroparlMepsConnector",
     "JuntaGeneralAsturiasDiputadosConnector",

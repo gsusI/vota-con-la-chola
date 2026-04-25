@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.apply_initdoc_extraction_reviews import apply_review_decisions
+from etl.parlamentario_es.initdoc_review import apply_review_decisions
 
 
 class TestApplyInitdocExtractionReviews(unittest.TestCase):

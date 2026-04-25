@@ -1,0 +1,158 @@
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.139s
+
+OK
+{
+  "generated_at": "2026-02-27T10:15:00+00:00",
+  "status": "degraded",
+  "captures_glob": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpet8yx_ef/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "thresholds": {
+    "min_captures": 1
+  },
+  "totals": {
+    "captures_total": 1,
+    "usable_captures_total": 0,
+    "access_denied_captures_total": 1,
+    "cookies_domain_total": 0
+  },
+  "checks": {
+    "has_min_captures": true,
+    "has_usable_capture": false
+  },
+  "strict_fail_reasons": [
+    "no_usable_capture"
+  ],
+  "captures": [
+    {
+      "meta_file": "capture_bad.meta.json",
+      "html_file": "capture_bad.html",
+      "cookie_file": "capture_bad.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/",
+      "html_len": 26,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    }
+  ]
+}
+{
+  "generated_at": "2026-02-27T10:15:00+00:00",
+  "status": "degraded",
+  "cookie_file": "tmpzyt4kb0x.cookies.json",
+  "domain_contains": "senado.es",
+  "thresholds": {
+    "max_age_hours": 24.0,
+    "min_domain_cookies": 1,
+    "min_unexpired_persistent_cookies": 1
+  },
+  "file": {
+    "modified_at": "2026-02-26T04:15:00+00:00",
+    "age_hours": 30.0,
+    "size_bytes": 79
+  },
+  "cookies": {
+    "total": 1,
+    "domain_total": 1,
+    "persistent_total": 0,
+    "unexpired_persistent_total": 0,
+    "session_total": 1,
+    "secure_total": 0,
+    "http_only_total": 0,
+    "domain_names": [
+      "www.senado.es"
+    ],
+    "cookie_names": [
+      "JSESSIONID"
+    ],
+    "structural_fingerprint_sha256": "c660b0c506a801cec2b9475a17c6be5adafce64b15770bbfd2a86b82f7792206"
+  },
+  "checks": {
+    "has_domain_cookies": true,
+    "file_age_within_threshold": false,
+    "has_unexpired_persistent_cookies": false
+  },
+  "no_new_lever": true,
+  "strict_fail_reasons": [
+    "cookie_file_stale",
+    "no_unexpired_persistent_cookies"
+  ]
+}
+{
+  "generated_at": "2026-02-27T10:15:00+00:00",
+  "status": "degraded",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "totals": {
+    "missing_urls": 1,
+    "missing_initiatives": 1,
+    "blocked_403_urls": 0,
+    "blocked_403_rate": 0.0,
+    "blocked_500_urls": 1,
+    "unknown_status_urls": 0,
+    "zero_doc_initiatives": 1
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 500,
+      "count": 1
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 1,
+      "status_buckets": [
+        {
+          "status": 500,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000801"
+      ]
+    }
+  ],
+  "zero_doc_priority": [
+    {
+      "initiative_id": "senado:leg14:exp:622/000801",
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "top_doc_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000801",
+      "top_last_http_status": 500,
+      "top_attempts": 2,
+      "top_last_attempt_at": "2026-02-27T00:10:00Z",
+      "top_method_hint": "http"
+    }
+  ],
+  "checks": {
+    "has_missing_urls": true,
+    "has_403_signal": false,
+    "has_cohorts": true,
+    "has_zero_doc_priority": true
+  },
+  "db": "<abs>/waf_strict.db"
+}

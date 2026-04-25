@@ -1,0 +1,29 @@
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+OK
+{
+  "pending_resolution_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp97_ict88/pending.csv",
+  "targets_csv": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp97_ict88/targets.csv",
+  "summary": {
+    "status": "ok",
+    "pending_links_total": 1,
+    "target_rows_total": 8,
+    "boe_doc_candidates_emitted_total": 0,
+    "max_candidate_doc_targets_per_link": 0,
+    "pending_reason_counts": {
+      "auto_assist:role_alignment_failed:role_topic_overlap_zero": 1
+    },
+    "targets_by_label": {
+      "boe_redirector_primary": 1,
+      "boe_redirector_secondary": 1,
+      "dgt_sede": 1,
+      "dgt_sede_role_exact": 1,
+      "dgt_web": 1,
+      "dgt_web_role_exact": 1,
+      "transparencia_gob": 1,
+      "transparencia_gob_role_exact": 1
+    }
+  }
+}

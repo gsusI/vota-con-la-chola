@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "congreso_votaciones--20251209--454ac9a61e",
+    "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "canonical_path": "/vote-explainer/congreso_votaciones--20251209--454ac9a61e/",
+    "generated_at": "2026-04-25T10:47:44+00:00",
+    "snapshot_as_of_date": "2026-04-25",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "congreso_votaciones",
+    "source_name": "Congreso - Votaciones (pleno, OpenData)",
+    "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "chamber": "Congreso",
+    "vote_date": "2025-12-09",
+    "title": "Toma en consideración de Proposiciones de Ley.",
+    "expediente_text": "Proposición de Ley del Grupo Parlamentario Popular en el Congreso, en apoyo del sistema alimentario español como sector estratégico esencial de la economía.",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "No",
+    "headline": "Proposición de Ley del Grupo Parlamentario Popular en el Congreso, en apoyo del sistema alimentario español como sector estratégico esencial de la economía.",
+    "subtitle": "derived:8c471aabbe408f043aa24de1"
+  },
+  "result": {
+    "status": "rejected",
+    "label": "Rechazada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 147 · No 162 · Abstencion 35 · No vota 6"
+  },
+  "totals": {
+    "present": 344,
+    "yes": 147,
+    "no": 162,
+    "abstain": 35,
+    "no_vote": 6
+  },
+  "initiative": {
+    "initiative_id": "congreso:leg15:derived:8c471aabbe408f043aa24de1",
+    "expediente": "derived:8c471aabbe408f043aa24de1",
+    "title": "Proposición de Ley del Grupo Parlamentario Popular en el Congreso, en apoyo del sistema alimentario español como sector estratégico esencial de la economía.",
+    "type": "",
+    "grouping": "Derived from Congreso votaciones",
+    "supertype": "derived",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GP",
+      "yes": 136,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 137
+    },
+    {
+      "group_code": "GS",
+      "yes": 0,
+      "no": 117,
+      "abstain": 0,
+      "no_vote": 3,
+      "other": 0,
+      "total": 120
+    },
+    {
+      "group_code": "GVOX",
+      "yes": 3,
+      "no": 0,
+      "abstain": 30,
+      "no_vote": 0,
+      "other": 0,
+      "total": 33
+    },
+    {
+      "group_code": "GSUMAR",
+      "yes": 0,
+      "no": 25,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 26
+    },
+    {
+      "group_code": "GMx",
+      "yes": 1,
+      "no": 7,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 9
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Proposición de Ley del Grupo Parlamentario Popular en el Congreso, en apoyo del sistema alimentario español co | Vota Con La Chola",
+    "description": "Congreso · 2025-12-09 · Si 147 · No 162 · Abstencion 35 · No vota 6. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/congreso_votaciones--20251209--454ac9a61e/"
+  }
+}

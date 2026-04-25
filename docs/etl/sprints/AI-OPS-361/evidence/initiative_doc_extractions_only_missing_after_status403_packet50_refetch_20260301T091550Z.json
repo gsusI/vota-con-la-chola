@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 49,
+  "upserted": 49,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 49
+  },
+  "by_doc_format": {
+    "xml": 49
+  },
+  "sample": [
+    {
+      "source_record_pk": 147768,
+      "sample_initiative_id": "senado:leg14:exp:621/000082",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de protección de los derechos y el bienestar de los animales. (621/000082)"
+    },
+    {
+      "source_record_pk": 147766,
+      "sample_initiative_id": "senado:leg14:exp:621/000080",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica del Sistema Universitario. (621/000080)"
+    },
+    {
+      "source_record_pk": 147775,
+      "sample_initiative_id": "senado:leg14:exp:621/000089",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por el derecho a la vivienda. (621/000089)"
+    },
+    {
+      "source_record_pk": 147762,
+      "sample_initiative_id": "senado:leg14:exp:621/000076",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de pesca sostenible e investigación pesquera. (621/000076)"
+    },
+    {
+      "source_record_pk": 147761,
+      "sample_initiative_id": "senado:leg14:exp:621/000075",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica por la que se modifica la Ley Orgánica 2/2010, de 3 de marzo, de salud sexual y reproductiva y de la interrupción voluntaria del embarazo. (621/000075)"
+    },
+    {
+      "source_record_pk": 147778,
+      "sample_initiative_id": "senado:leg14:exp:624/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley integral para la igualdad de trato y la no discriminación. (624/000010)"
+    },
+    {
+      "source_record_pk": 147763,
+      "sample_initiative_id": "senado:leg14:exp:621/000077",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Empleo. (621/000077)"
+    },
+    {
+      "source_record_pk": 147764,
+      "sample_initiative_id": "senado:leg14:exp:621/000078",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley para la igualdad real y efectiva de las personas trans y para la garantía de los derechos de las personas LGTBI. (621/000078)"
+    },
+    {
+      "source_record_pk": 147786,
+      "sample_initiative_id": "senado:leg14:exp:624/000018",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para el establecimiento de gravámenes temporales energético y de entidades de crédito y establecimientos financieros de crédito y por la que se crea el impuesto temporal de solidaridad de las grandes fortunas, y se modifican determinadas normas tributarias. (624/000018)"
+    },
+    {
+      "source_record_pk": 147765,
+      "sample_initiative_id": "senado:leg14:exp:621/000079",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley reguladora de la protección de las personas que informen sobre infracciones normativas y de lucha contra la corrupción. (621/000079)"
+    },
+    {
+      "source_record_pk": 147769,
+      "sample_initiative_id": "senado:leg14:exp:621/000083",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de maltrato animal. (621/000083)"
+    },
+    {
+      "source_record_pk": 147753,
+      "sample_initiative_id": "senado:leg10:exp:624/000001",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de medidas para reforzar la protección a los deudores hipotecarios, reestructuración de deuda y alquiler social. (624/000001)"
+    },
+    {
+      "source_record_pk": 147790,
+      "sample_initiative_id": "senado:leg14:exp:624/000009",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar el acoso a las mujeres que acuden a clínicas para la interrupción voluntaria del embarazo. (624/000009)"
+    },
+    {
+      "source_record_pk": 147773,
+      "sample_initiative_id": "senado:leg14:exp:621/000087",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de trasposición de Directivas de la Unión Europea en materia de accesibilidad de determinados productos y servicios, migración de personas altamente cualificadas, tributaria y digitalización de actuaciones notariales y registrales; y por la que se modifica la Ley 12/2011, de 27 de mayo, sobre responsab…"
+    },
+    {
+      "source_record_pk": 147780,
+      "sample_initiative_id": "senado:leg14:exp:624/000012",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 19/2013, de 9 de diciembre, de transparencia, acceso a la información pública y buen gobierno, con el fin de regular las estadísticas de las microempresas, pequeñas y medianas empresas (PYME) en la contratación pública. (624/000012)"
+    },
+    {
+      "source_record_pk": 147757,
+      "sample_initiative_id": "senado:leg10:exp:624/000005",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica para reforzar la protección de las menores y mujeres con capacidad modificada judicialmente en la interrupción voluntaria del embarazo. (624/000005)"
+    },
+    {
+      "source_record_pk": 147754,
+      "sample_initiative_id": "senado:leg10:exp:624/000002",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, relativa a la justicia universal. (624/000002)"
+    },
+    {
+      "source_record_pk": 147787,
+      "sample_initiative_id": "senado:leg14:exp:624/000019",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de transposición de directivas europeas y otras disposiciones para la adaptación de la legislación penal al ordenamiento de la Unión Europea, y reforma de los delitos contra la integridad moral, desórdenes públicos y contrabando de armas de doble uso. (624/000019)"
+    },
+    {
+      "source_record_pk": 147788,
+      "sample_initiative_id": "senado:leg14:exp:624/000020",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica para la modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en los delitos contra la libertad sexual, la Ley de Enjuiciamiento Criminal y la Ley Orgánica 5/2000, de 12 de enero, reguladora de la responsabilidad penal de los menores. (624/000020)"
+    },
+    {
+      "source_record_pk": 147755,
+      "sample_initiative_id": "senado:leg10:exp:624/000003",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de delitos de terrorismo. (624/000003)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

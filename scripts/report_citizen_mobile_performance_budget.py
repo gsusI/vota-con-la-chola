@@ -25,7 +25,7 @@ DEFAULT_UI_ASSETS = [
     Path("ui/citizen/cross_method_stability.js"),
     Path("ui/citizen/evidence_trust_panel.js"),
 ]
-DEFAULT_SNAPSHOT = Path("docs/gh-pages/citizen/data/citizen.json")
+DEFAULT_SNAPSHOT = Path("ui/gh-pages-next/public/citizen/data/citizen.json")
 
 DEFAULT_MAX_UI_HTML_BYTES = 220_000
 DEFAULT_MAX_UI_ASSETS_TOTAL_BYTES = 60_000

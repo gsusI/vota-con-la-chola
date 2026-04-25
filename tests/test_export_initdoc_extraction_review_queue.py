@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.export_initdoc_extraction_review_queue import fetch_review_rows
+from etl.parlamentario_es.initdoc_review import fetch_review_rows
 
 
 class TestExportInitdocExtractionReviewQueue(unittest.TestCase):

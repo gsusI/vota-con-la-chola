@@ -1,0 +1,24 @@
+{
+  "generated_at": null,
+  "captures_total": 2,
+  "captures": [
+    {
+      "meta_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_304_02_leg10_tipo610_probe_20260228T202632Z.meta.json",
+      "cookie_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_304_02_leg10_tipo610_probe_20260228T202632Z..cookies.json",
+      "cookie_count": 0,
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+      "status": "captured",
+      "ended_at": "2026-02-28T20:26:44.543721+00:00"
+    },
+    {
+      "meta_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_304_08_leg14_tipo622_probe_20260228T202654Z.meta.json",
+      "cookie_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_304_08_leg14_tipo622_probe_20260228T202654Z..cookies.json",
+      "cookie_count": 0,
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055",
+      "status": "captured",
+      "ended_at": "2026-02-28T20:27:03.452544+00:00"
+    }
+  ]
+}

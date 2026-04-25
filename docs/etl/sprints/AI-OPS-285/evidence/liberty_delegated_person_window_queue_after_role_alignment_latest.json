@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-02-28T17:47:04+00:00",
+  "status": "failed",
+  "strict_fail_reasons": [
+    "no_delegated_links"
+  ],
+  "institution_hint_terms": [
+    "ministerio",
+    "direccion",
+    "dirección",
+    "agencia",
+    "delegacion",
+    "delegación",
+    "delegaciones",
+    "subdelegacion",
+    "subdelegación",
+    "subdelegaciones",
+    "inspeccion",
+    "inspección",
+    "organismo",
+    "gobierno",
+    "dgt",
+    "aeat",
+    "itss"
+  ],
+  "gate": {
+    "passed": false,
+    "thresholds": {
+      "max_actionable_rows": -1
+    }
+  },
+  "checks": {
+    "delegated_links_present": false,
+    "actionable_queue_materialized": true,
+    "max_actionable_rows_gate": true
+  },
+  "totals": {
+    "links_total": 0,
+    "actionable_queue_rows": 0,
+    "missing_designated_actor_total": 0,
+    "institutional_designated_actor_total": 0,
+    "missing_appointment_start_total": 0,
+    "invalid_or_inverted_window_total": 0,
+    "missing_enforcement_evidence_total": 0
+  },
+  "by_reason": {},
+  "queue_rows": []
+}

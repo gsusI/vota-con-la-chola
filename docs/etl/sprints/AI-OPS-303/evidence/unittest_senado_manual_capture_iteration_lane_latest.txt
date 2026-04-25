@@ -1,0 +1,899 @@
+.{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "db_path": "tmpw76ey2f4/db.sqlite",
+  "targets_csv": "tmpw76ey2f4/targets.csv",
+  "captures_glob": "tmpw76ey2f4/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "degraded",
+  "progress_report_error": "",
+  "progress_report_path": "tmpw76ey2f4/progress.json",
+  "progress_csv_path": "tmpw76ey2f4/progress.csv",
+  "ready_checks": {
+    "progress_report_ok": false,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": false,
+    "selected_usable_capture_with_cookie": false
+  },
+  "ready_to_retry": false,
+  "capture_inventory": {
+    "capture_files_total": 1,
+    "usable_capture_files_total": 0,
+    "usable_with_cookie_files_total": 0,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {},
+  "backfill": {
+    "attempted": false,
+    "dry_run": false,
+    "status": "skipped",
+    "skip_reason": "capture_gate_not_ready",
+    "exit_code": null,
+    "command_display": "",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": [
+    "usable_targets_below_min",
+    "no_usable_capture_cookie_file",
+    "capture_gate_not_ready"
+  ]
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "progress_json": "tmpw76ey2f4/progress.json",
+  "progress_csv": "tmpw76ey2f4/progress.csv",
+  "progress_status": "degraded",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 0
+  },
+  "totals": {
+    "targets_total": 1,
+    "pending_targets_total": 1,
+    "pending_unmatched_total": 0,
+    "pending_matched_not_usable_total": 1,
+    "pending_access_denied_total": 1,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 1,
+    "pending_commands_total": 1,
+    "pending_commands_fallback_total": 1
+  },
+  "pending_reasons": {
+    "matched_access_denied": 1
+  },
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining"
+  ],
+  "sample_pending_targets": [
+    {
+      "target_rank": 1,
+      "target_id": "t1",
+      "cohort": "seed",
+      "capture_url": "https://www.senado.es/",
+      "pending_reason": "matched_access_denied"
+    }
+  ],
+  "commands_out": "tmpw76ey2f4/pending.sh"
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "db_path": "tmpw76ey2f4/db.sqlite",
+  "inputs": {
+    "targets_csv": "tmpw76ey2f4/targets.csv",
+    "captures_glob": "tmpw76ey2f4/*.meta.json",
+    "pending_max_targets": 0,
+    "pending_wait_seconds": 120,
+    "strict_min_pending_reduction": 0
+  },
+  "totals": {
+    "previous_pending_total": 3,
+    "current_pending_total": 1,
+    "pending_reduction_total": 2,
+    "retry_rc": 0,
+    "pending_rc": 0
+  },
+  "checks": {
+    "retry_report_ok": false,
+    "pending_report_ok": true,
+    "pending_queue_empty": false,
+    "has_previous_pending_snapshot": true,
+    "backfill_attempted": false,
+    "backfill_ok": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining",
+    "backfill_not_ok"
+  ],
+  "artifacts": {
+    "retry_out": "tmpw76ey2f4/retry.json",
+    "progress_out": "tmpw76ey2f4/progress.json",
+    "progress_csv_out": "tmpw76ey2f4/progress.csv",
+    "pending_out": "tmpw76ey2f4/pending.json",
+    "pending_csv_out": "tmpw76ey2f4/pending.csv",
+    "pending_commands_out": "tmpw76ey2f4/pending.sh"
+  },
+  "retry_report": {
+    "generated_at": "2026-02-28T20:23:11+00:00",
+    "status": "degraded",
+    "db_path": "tmpw76ey2f4/db.sqlite",
+    "targets_csv": "tmpw76ey2f4/targets.csv",
+    "captures_glob": "tmpw76ey2f4/*.meta.json",
+    "cookie_domain_contains": "senado.es",
+    "strict_thresholds": {
+      "min_covered_targets": 1,
+      "min_usable_targets": 1
+    },
+    "progress_report_status": "degraded",
+    "progress_report_error": "",
+    "progress_report_path": "tmpw76ey2f4/progress.json",
+    "progress_csv_path": "tmpw76ey2f4/progress.csv",
+    "ready_checks": {
+      "progress_report_ok": false,
+      "has_targets": true,
+      "covered_targets_min_met": true,
+      "usable_targets_min_met": false,
+      "selected_usable_capture_with_cookie": false
+    },
+    "ready_to_retry": false,
+    "capture_inventory": {
+      "capture_files_total": 1,
+      "usable_capture_files_total": 0,
+      "usable_with_cookie_files_total": 0,
+      "usable_missing_cookie_files_total": 0
+    },
+    "selected_capture": {},
+    "backfill": {
+      "attempted": false,
+      "dry_run": false,
+      "status": "skipped",
+      "skip_reason": "capture_gate_not_ready",
+      "exit_code": null,
+      "command_display": "",
+      "initiative_source_ids": "senado_iniciativas",
+      "limit_initiatives": 25,
+      "max_docs_per_initiative": 1,
+      "timeout": 15,
+      "snapshot_date": ""
+    },
+    "strict_fail_reasons": [
+      "usable_targets_below_min",
+      "no_usable_capture_cookie_file",
+      "capture_gate_not_ready"
+    ]
+  },
+  "pending_report": {
+    "generated_at": "2026-02-28T20:23:11+00:00",
+    "status": "degraded",
+    "progress_json": "tmpw76ey2f4/progress.json",
+    "progress_csv": "tmpw76ey2f4/progress.csv",
+    "progress_status": "degraded",
+    "inputs": {
+      "include_unmatched": true,
+      "include_matched_not_usable": true,
+      "max_targets": 0
+    },
+    "totals": {
+      "targets_total": 1,
+      "pending_targets_total": 1,
+      "pending_unmatched_total": 0,
+      "pending_matched_not_usable_total": 1,
+      "pending_access_denied_total": 1,
+      "pending_missing_domain_cookie_total": 0,
+      "pending_cohorts_total": 1,
+      "pending_commands_total": 1,
+      "pending_commands_fallback_total": 1
+    },
+    "pending_reasons": {
+      "matched_access_denied": 1
+    },
+    "checks": {
+      "has_targets": true,
+      "pending_queue_empty": false
+    },
+    "strict_fail_reasons": [
+      "pending_targets_remaining"
+    ],
+    "sample_pending_targets": [
+      {
+        "target_rank": 1,
+        "target_id": "t1",
+        "cohort": "seed",
+        "capture_url": "https://www.senado.es/",
+        "pending_reason": "matched_access_denied"
+      }
+    ],
+    "commands_out": "tmpw76ey2f4/pending.sh"
+  }
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "ok",
+  "db_path": "tmpvpy9h03_/db.sqlite",
+  "targets_csv": "tmpvpy9h03_/targets.csv",
+  "captures_glob": "tmpvpy9h03_/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "ok",
+  "progress_report_error": "",
+  "progress_report_path": "tmpvpy9h03_/progress.json",
+  "progress_csv_path": "tmpvpy9h03_/progress.csv",
+  "ready_checks": {
+    "progress_report_ok": true,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": true,
+    "selected_usable_capture_with_cookie": true
+  },
+  "ready_to_retry": true,
+  "capture_inventory": {
+    "capture_files_total": 1,
+    "usable_capture_files_total": 1,
+    "usable_with_cookie_files_total": 1,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {
+    "meta_file": "tmpvpy9h03_/capture_ok.meta.json",
+    "cookie_file": "tmpvpy9h03_/capture_ok.cookies.json",
+    "ended_at": "2026-02-28T12:00:00+00:00",
+    "final_url": "https://www.senado.es/",
+    "cookies_domain_total": 1,
+    "access_denied_detected": false
+  },
+  "backfill": {
+    "attempted": true,
+    "dry_run": false,
+    "status": "ok",
+    "skip_reason": "",
+    "exit_code": 0,
+    "command_display": "python3 tmpvpy9h03_/fake_ingestar.py backfill-initiative-documents --db tmpvpy9h03_/db.sqlite --initiative-source-ids senado_iniciativas --skip-link-backfill --retry-forbidden --cookie-file tmpvpy9h03_/capture_ok.cookies.json --timeout 15 --limit-initiatives 25 --max-docs-per-initiative 1",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": []
+}.
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "ok",
+  "progress_json": "tmpvpy9h03_/progress.json",
+  "progress_csv": "tmpvpy9h03_/progress.csv",
+  "progress_status": "ok",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 0
+  },
+  "totals": {
+    "targets_total": 1,
+    "pending_targets_total": 0,
+    "pending_unmatched_total": 0,
+    "pending_matched_not_usable_total": 0,
+    "pending_access_denied_total": 0,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 0,
+    "pending_commands_total": 0,
+    "pending_commands_fallback_total": 0
+  },
+  "pending_reasons": {},
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": true
+  },
+  "strict_fail_reasons": [],
+  "sample_pending_targets": [],
+  "commands_out": "tmpvpy9h03_/pending.sh"
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "ok",
+  "db_path": "tmpvpy9h03_/db.sqlite",
+  "inputs": {
+    "targets_csv": "tmpvpy9h03_/targets.csv",
+    "captures_glob": "tmpvpy9h03_/*.meta.json",
+    "pending_max_targets": 0,
+    "pending_wait_seconds": 120,
+    "strict_min_pending_reduction": 0
+  },
+  "totals": {
+    "previous_pending_total": null,
+    "current_pending_total": 0,
+    "pending_reduction_total": null,
+    "retry_rc": 0,
+    "pending_rc": 0
+  },
+  "checks": {
+    "retry_report_ok": true,
+    "pending_report_ok": true,
+    "pending_queue_empty": true,
+    "has_previous_pending_snapshot": false,
+    "backfill_attempted": true,
+    "backfill_ok": true
+  },
+  "strict_fail_reasons": [],
+  "artifacts": {
+    "retry_out": "tmpvpy9h03_/retry.json",
+    "progress_out": "tmpvpy9h03_/progress.json",
+    "progress_csv_out": "tmpvpy9h03_/progress.csv",
+    "pending_out": "tmpvpy9h03_/pending.json",
+    "pending_csv_out": "tmpvpy9h03_/pending.csv",
+    "pending_commands_out": "tmpvpy9h03_/pending.sh"
+  },
+  "retry_report": {
+    "generated_at": "2026-02-28T20:23:11+00:00",
+    "status": "ok",
+    "db_path": "tmpvpy9h03_/db.sqlite",
+    "targets_csv": "tmpvpy9h03_/targets.csv",
+    "captures_glob": "tmpvpy9h03_/*.meta.json",
+    "cookie_domain_contains": "senado.es",
+    "strict_thresholds": {
+      "min_covered_targets": 1,
+      "min_usable_targets": 1
+    },
+    "progress_report_status": "ok",
+    "progress_report_error": "",
+    "progress_report_path": "tmpvpy9h03_/progress.json",
+    "progress_csv_path": "tmpvpy9h03_/progress.csv",
+    "ready_checks": {
+      "progress_report_ok": true,
+      "has_targets": true,
+      "covered_targets_min_met": true,
+      "usable_targets_min_met": true,
+      "selected_usable_capture_with_cookie": true
+    },
+    "ready_to_retry": true,
+    "capture_inventory": {
+      "capture_files_total": 1,
+      "usable_capture_files_total": 1,
+      "usable_with_cookie_files_total": 1,
+      "usable_missing_cookie_files_total": 0
+    },
+    "selected_capture": {
+      "meta_file": "tmpvpy9h03_/capture_ok.meta.json",
+      "cookie_file": "tmpvpy9h03_/capture_ok.cookies.json",
+      "ended_at": "2026-02-28T12:00:00+00:00",
+      "final_url": "https://www.senado.es/",
+      "cookies_domain_total": 1,
+      "access_denied_detected": false
+    },
+    "backfill": {
+      "attempted": true,
+      "dry_run": false,
+      "status": "ok",
+      "skip_reason": "",
+      "exit_code": 0,
+      "command_display": "python3 tmpvpy9h03_/fake_ingestar.py backfill-initiative-documents --db tmpvpy9h03_/db.sqlite --initiative-source-ids senado_iniciativas --skip-link-backfill --retry-forbidden --cookie-file tmpvpy9h03_/capture_ok.cookies.json --timeout 15 --limit-initiatives 25 --max-docs-per-initiative 1",
+      "initiative_source_ids": "senado_iniciativas",
+      "limit_initiatives": 25,
+      "max_docs_per_initiative": 1,
+      "timeout": 15,
+      "snapshot_date": ""
+    },
+    "strict_fail_reasons": []
+  },
+  "pending_report": {
+    "generated_at": "2026-02-28T20:23:11+00:00",
+    "status": "ok",
+    "progress_json": "tmpvpy9h03_/progress.json",
+    "progress_csv": "tmpvpy9h03_/progress.csv",
+    "progress_status": "ok",
+    "inputs": {
+      "include_unmatched": true,
+      "include_matched_not_usable": true,
+      "max_targets": 0
+    },
+    "totals": {
+      "targets_total": 1,
+      "pending_targets_total": 0,
+      "pending_unmatched_total": 0,
+      "pending_matched_not_usable_total": 0,
+      "pending_access_denied_total": 0,
+      "pending_missing_domain_cookie_total": 0,
+      "pending_cohorts_total": 0,
+      "pending_commands_total": 0,
+      "pending_commands_fallback_total": 0
+    },
+    "pending_reasons": {},
+    "checks": {
+      "has_targets": true,
+      "pending_queue_empty": true
+    },
+    "strict_fail_reasons": [],
+    "sample_pending_targets": [],
+    "commands_out": "tmpvpy9h03_/pending.sh"
+  }
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "db_path": "tmpy4ityxzg/db.sqlite",
+  "targets_csv": "tmpy4ityxzg/targets.csv",
+  "captures_glob": "tmpy4ityxzg/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "degraded",
+  "progress_report_error": "",
+  "progress_report_path": "tmpy4ityxzg/progress.json",
+  "progress_csv_path": "tmpy4ityxzg/progress.csv",
+  "ready_checks": {
+    "progress_report_ok": false,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": false,
+    "selected_usable_capture_with_cookie": false
+  },
+  "ready_to_retry": false,
+  "capture_inventory": {
+    "capture_files_total": 1,
+    "usable_capture_files_total": 0,
+    "usable_with_cookie_files_total": 0,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {},
+  "backfill": {
+    "attempted": false,
+    "dry_run": false,
+    "status": "skipped",
+    "skip_reason": "capture_gate_not_ready",
+    "exit_code": null,
+    "command_display": "",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": [
+    "usable_targets_below_min",
+    "no_usable_capture_cookie_file",
+    "capture_gate_not_ready"
+  ]
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "progress_json": "tmpy4ityxzg/progress.json",
+  "progress_csv": "tmpy4ityxzg/progress.csv",
+  "progress_status": "degraded",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 0
+  },
+  "totals": {
+    "targets_total": 1,
+    "pending_targets_total": 1,
+    "pending_unmatched_total": 0,
+    "pending_matched_not_usable_total": 1,
+    "pending_access_denied_total": 1,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 1,
+    "pending_commands_total": 1,
+    "pending_commands_fallback_total": 1
+  },
+  "pending_reasons": {
+    "matched_access_denied": 1
+  },
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining"
+  ],
+  "sample_pending_targets": [
+    {
+      "target_rank": 1,
+      "target_id": "t1",
+      "cohort": "seed",
+      "capture_url": "https://www.senado.es/",
+      "pending_reason": "matched_access_denied"
+    }
+  ],
+  "commands_out": "tmpy4ityxzg/pending.sh"
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "db_path": "tmpy4ityxzg/db.sqlite",
+  "inputs": {
+    "targets_csv": "tmpy4ityxzg/targets.csv",
+    "captures_glob": "tmpy4ityxzg/*.meta.json",
+    "pending_max_targets": 0,
+    "pending_wait_seconds": 120,
+    "strict_min_pending_reduction": 0
+  },
+  "totals": {
+    "previous_pending_total": null,
+    "current_pending_total": 1,
+    "pending_reduction_total": null,
+    "retry_rc": 0,
+    "pending_rc": 0
+  },
+  "checks": {
+    "retry_report_ok": false,
+    "pending_report_ok": true,
+    "pending_queue_empty": false,
+    "has_previous_pending_snapshot": false,
+    "backfill_attempted": false,
+    "backfill_ok": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining",
+    "backfill_not_ok"
+  ],
+  "artifacts": {
+    "retry_out": "tmpy4ityxzg/retry.json",
+    "progress_out": "tmpy4ityxzg/progress.json",
+    "progress_csv_out": "tmpy4ityxzg/progress.csv",
+    "pending_out": "tmpy4ityxzg/pending.json",
+    "pending_csv_out": "tmpy4ityxzg/pending.csv",
+    "pending_commands_out": "tmpy4ityxzg/pending.sh"
+  },
+  "retry_report": {
+    "generated_at": "2026-02-28T20:23:11+00:00",
+    "status": "degraded",
+    "db_path": "tmpy4ityxzg/db.sqlite",
+    "targets_csv": "tmpy4ityxzg/targets.csv",
+    "captures_glob": "tmpy4ityxzg/*.meta.json",
+    "cookie_domain_contains": "senado.es",
+    "strict_thresholds": {
+      "min_covered_targets": 1,
+      "min_usable_targets": 1
+    },
+    "progress_report_status": "degraded",
+    "progress_report_error": "",
+    "progress_report_path": "tmpy4ityxzg/progress.json",
+    "progress_csv_path": "tmpy4ityxzg/progress.csv",
+    "ready_checks": {
+      "progress_report_ok": false,
+      "has_targets": true,
+      "covered_targets_min_met": true,
+      "usable_targets_min_met": false,
+      "selected_usable_capture_with_cookie": false
+    },
+    "ready_to_retry": false,
+    "capture_inventory": {
+      "capture_files_total": 1,
+      "usable_capture_files_total": 0,
+      "usable_with_cookie_files_total": 0,
+      "usable_missing_cookie_files_total": 0
+    },
+    "selected_capture": {},
+    "backfill": {
+      "attempted": false,
+      "dry_run": false,
+      "status": "skipped",
+      "skip_reason": "capture_gate_not_ready",
+      "exit_code": null,
+      "command_display": "",
+      "initiative_source_ids": "senado_iniciativas",
+      "limit_initiatives": 25,
+      "max_docs_per_initiative": 1,
+      "timeout": 15,
+      "snapshot_date": ""
+    },
+    "strict_fail_reasons": [
+      "usable_targets_below_min",
+      "no_usable_capture_cookie_file",
+      "capture_gate_not_ready"
+    ]
+  },
+  "pending_report": {
+    "generated_at": "2026-02-28T20:23:11+00:00",
+    "status": "degraded",
+    "progress_json": "tmpy4ityxzg/progress.json",
+    "progress_csv": "tmpy4ityxzg/progress.csv",
+    "progress_status": "degraded",
+    "inputs": {
+      "include_unmatched": true,
+      "include_matched_not_usable": true,
+      "max_targets": 0
+    },
+    "totals": {
+      "targets_total": 1,
+      "pending_targets_total": 1,
+      "pending_unmatched_total": 0,
+      "pending_matched_not_usable_total": 1,
+      "pending_access_denied_total": 1,
+      "pending_missing_domain_cookie_total": 0,
+      "pending_cohorts_total": 1,
+      "pending_commands_total": 1,
+      "pending_commands_fallback_total": 1
+    },
+    "pending_reasons": {
+      "matched_access_denied": 1
+    },
+    "checks": {
+      "has_targets": true,
+      "pending_queue_empty": false
+    },
+    "strict_fail_reasons": [
+      "pending_targets_remaining"
+    ],
+    "sample_pending_targets": [
+      {
+        "target_rank": 1,
+        "target_id": "t1",
+        "cohort": "seed",
+        "capture_url": "https://www.senado.es/",
+        "pending_reason": "matched_access_denied"
+      }
+    ],
+    "commands_out": "tmpy4ityxzg/pending.sh"
+  }
+}.......
+----------------------------------------------------------------------
+Ran 9 tests in 0.115s
+
+OK
+
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "progress_json": "progress.json",
+  "progress_csv": "progress.csv",
+  "progress_status": "degraded",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 0
+  },
+  "totals": {
+    "targets_total": 3,
+    "pending_targets_total": 2,
+    "pending_unmatched_total": 1,
+    "pending_matched_not_usable_total": 1,
+    "pending_access_denied_total": 1,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 2,
+    "pending_commands_total": 2,
+    "pending_commands_fallback_total": 1
+  },
+  "pending_reasons": {
+    "unmatched_target": 1,
+    "matched_access_denied": 1
+  },
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining"
+  ],
+  "sample_pending_targets": [
+    {
+      "target_rank": 2,
+      "target_id": "t2",
+      "cohort": "leg14",
+      "capture_url": "https://www.senado.es/x",
+      "pending_reason": "unmatched_target"
+    },
+    {
+      "target_rank": 1,
+      "target_id": "t1",
+      "cohort": "seed",
+      "capture_url": "https://www.senado.es/",
+      "pending_reason": "matched_access_denied"
+    }
+  ],
+  "commands_out": "pending.sh"
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "failed",
+  "error": "progress_csv_not_found",
+  "progress_csv": "missing.csv",
+  "commands_out": "pending.sh",
+  "pending_commands_total": 0,
+  "pending_commands_fallback_total": 0
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "ok",
+  "progress_json": "progress.json",
+  "progress_csv": "progress.csv",
+  "progress_status": "degraded",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 0
+  },
+  "totals": {
+    "targets_total": 1,
+    "pending_targets_total": 0,
+    "pending_unmatched_total": 0,
+    "pending_matched_not_usable_total": 0,
+    "pending_access_denied_total": 0,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 0,
+    "pending_commands_total": 0,
+    "pending_commands_fallback_total": 0
+  },
+  "pending_reasons": {},
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": true
+  },
+  "strict_fail_reasons": [],
+  "sample_pending_targets": [],
+  "commands_out": "pending.sh"
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "ok",
+  "db_path": "tmpsa8zftr6/db.sqlite",
+  "targets_csv": "tmpsa8zftr6/targets.csv",
+  "captures_glob": "tmpsa8zftr6/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "ok",
+  "progress_report_error": "",
+  "progress_report_path": "tmpsa8zftr6/progress.json",
+  "progress_csv_path": "tmpsa8zftr6/progress.csv",
+  "ready_checks": {
+    "progress_report_ok": true,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": true,
+    "selected_usable_capture_with_cookie": true
+  },
+  "ready_to_retry": true,
+  "capture_inventory": {
+    "capture_files_total": 1,
+    "usable_capture_files_total": 1,
+    "usable_with_cookie_files_total": 1,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {
+    "meta_file": "tmpsa8zftr6/capture_ok.meta.json",
+    "cookie_file": "tmpsa8zftr6/capture_ok.cookies.json",
+    "ended_at": "2026-02-28T12:00:00+00:00",
+    "final_url": "https://www.senado.es/",
+    "cookies_domain_total": 1,
+    "access_denied_detected": false
+  },
+  "backfill": {
+    "attempted": true,
+    "dry_run": false,
+    "status": "ok",
+    "skip_reason": "",
+    "exit_code": 0,
+    "command_display": "python3 tmpsa8zftr6/fake_ingestar.py backfill-initiative-documents --db tmpsa8zftr6/db.sqlite --initiative-source-ids senado_iniciativas --skip-link-backfill --retry-forbidden --cookie-file tmpsa8zftr6/capture_ok.cookies.json --timeout 15 --limit-initiatives 25 --max-docs-per-initiative 1",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": []
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "failed",
+  "db_path": "tmpfjl1he3h/db.sqlite",
+  "targets_csv": "tmpfjl1he3h/targets.csv",
+  "captures_glob": "tmpfjl1he3h/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "ok",
+  "progress_report_error": "",
+  "progress_report_path": "tmpfjl1he3h/progress.json",
+  "progress_csv_path": "tmpfjl1he3h/progress.csv",
+  "ready_checks": {
+    "progress_report_ok": true,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": true,
+    "selected_usable_capture_with_cookie": true
+  },
+  "ready_to_retry": true,
+  "capture_inventory": {
+    "capture_files_total": 1,
+    "usable_capture_files_total": 1,
+    "usable_with_cookie_files_total": 1,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {
+    "meta_file": "tmpfjl1he3h/capture_ok.meta.json",
+    "cookie_file": "tmpfjl1he3h/capture_ok.cookies.json",
+    "ended_at": "2026-02-28T12:00:00+00:00",
+    "final_url": "https://www.senado.es/",
+    "cookies_domain_total": 1,
+    "access_denied_detected": false
+  },
+  "backfill": {
+    "attempted": true,
+    "dry_run": false,
+    "status": "failed",
+    "skip_reason": "",
+    "exit_code": 7,
+    "command_display": "python3 tmpfjl1he3h/fake_ingestar_fail.py backfill-initiative-documents --db tmpfjl1he3h/db.sqlite --initiative-source-ids senado_iniciativas --skip-link-backfill --retry-forbidden --cookie-file tmpfjl1he3h/capture_ok.cookies.json --timeout 15 --limit-initiatives 25 --max-docs-per-initiative 1",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": [
+    "backfill_failed"
+  ]
+}
+{
+  "generated_at": "2026-02-28T20:23:11+00:00",
+  "status": "degraded",
+  "db_path": "tmpkdsyklwl/db.sqlite",
+  "targets_csv": "tmpkdsyklwl/targets.csv",
+  "captures_glob": "tmpkdsyklwl/*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "degraded",
+  "progress_report_error": "",
+  "progress_report_path": "tmpkdsyklwl/progress.json",
+  "progress_csv_path": "tmpkdsyklwl/progress.csv",
+  "ready_checks": {
+    "progress_report_ok": false,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": false,
+    "selected_usable_capture_with_cookie": false
+  },
+  "ready_to_retry": false,
+  "capture_inventory": {
+    "capture_files_total": 1,
+    "usable_capture_files_total": 0,
+    "usable_with_cookie_files_total": 0,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {},
+  "backfill": {
+    "attempted": false,
+    "dry_run": false,
+    "status": "skipped",
+    "skip_reason": "capture_gate_not_ready",
+    "exit_code": null,
+    "command_display": "",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": [
+    "usable_targets_below_min",
+    "no_usable_capture_cookie_file",
+    "capture_gate_not_ready"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "ts": "20260301T014759Z",
+  "overall": {
+    "downloaded_doc_links_before": 4418,
+    "downloaded_doc_links_after": 4420,
+    "downloaded_doc_links_delta": 2,
+    "missing_doc_links_before": 5135,
+    "missing_doc_links_after": 5133,
+    "missing_doc_links_delta": -2,
+    "missing_doc_links_actionable_before": 4951,
+    "missing_doc_links_actionable_after": 4949,
+    "missing_doc_links_actionable_delta": -2,
+    "effective_downloaded_doc_links_pct_before": 47.16,
+    "effective_downloaded_doc_links_pct_after": 47.18,
+    "effective_downloaded_doc_links_pct_delta": 0.02
+  },
+  "senado": {
+    "downloaded_doc_links_before": 3606,
+    "downloaded_doc_links_after": 3608,
+    "downloaded_doc_links_delta": 2,
+    "status404_before": 877,
+    "status404_after": 875,
+    "status404_delta": -2
+  },
+  "retry_lane": {
+    "pool_rows_total": 798,
+    "fresh_rows_total": 240,
+    "excluded_used_urls_total": 556,
+    "candidate_urls": 240,
+    "urls_to_fetch": 240,
+    "fetched_ok": 2,
+    "archive_hits": 2,
+    "text_documents_upserted": 2,
+    "selected_doc_urls_not_in_candidates": 0,
+    "skipped_redundant_global_urls": 124
+  }
+}

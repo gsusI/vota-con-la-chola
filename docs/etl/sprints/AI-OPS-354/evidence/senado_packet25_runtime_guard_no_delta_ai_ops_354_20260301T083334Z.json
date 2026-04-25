@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-03-01T08:38:00+00:00",
+  "sprint_id": "AI-OPS-354",
+  "focus_row": 845,
+  "db_path": "etl/data/staging/politicos-es.db",
+  "before": {
+    "quality_snapshot": "docs/etl/sprints/AI-OPS-354/evidence/quality_initiatives_before_packet25_20260301T081547Z.json",
+    "waf_snapshot": "docs/etl/sprints/AI-OPS-354/evidence/senado_waf_block_profile_before_packet25_20260301T081547Z.json",
+    "downloaded_doc_links": 4804,
+    "missing_doc_links": 4749,
+    "missing_doc_links_actionable": 4559,
+    "missing_doc_links_actionable_linked_to_votes": 783,
+    "missing_urls": 783,
+    "blocked_403_urls": 189,
+    "status404_missing_urls": 372,
+    "zero_doc_initiatives": 5
+  },
+  "runs": {
+    "packet25_guarded_default_archive": {
+      "status": "interrupted",
+      "runtime_artifact": "docs/etl/sprints/AI-OPS-354/evidence/senado_status404_manual_cookie_archive_retry_packet25_runtime_20260301T081547Z.json",
+      "rc": 124,
+      "runtime_seconds": 422,
+      "timeout_hit": true
+    },
+    "packet25_guarded_tuned_archive404_only": {
+      "status": "ok_no_delta",
+      "runtime_artifact": "docs/etl/sprints/AI-OPS-354/evidence/senado_status404_manual_cookie_archive_retry_packet25_tuned_runtime_20260301T083334Z.json",
+      "retry_json": "docs/etl/sprints/AI-OPS-354/evidence/senado_status404_manual_cookie_archive_retry_packet25_tuned_20260301T083334Z.json",
+      "rc": 0,
+      "runtime_seconds": 5,
+      "timeout_hit": false,
+      "candidate_urls": 24,
+      "urls_to_fetch": 24,
+      "fetched_ok": 0,
+      "archive_hits": 0,
+      "archive_fetched_ok": 0,
+      "failures_total": 24,
+      "archive_lookup_failures_total": 30,
+      "skipped_redundant_global_urls": 14,
+      "notable_failure_signals": [
+        "URLError: nodename nor servname provided, or not known",
+        "HTTPStatusError: archive fallback: no snapshot candidates"
+      ]
+    }
+  },
+  "archive_gap_export": {
+    "summary_json": "docs/etl/sprints/AI-OPS-354/evidence/senado_archive_gap_urls_packet25_tuned_20260301T083334Z.json",
+    "csv": "docs/etl/sprints/AI-OPS-354/exports/senado_archive_gap_urls_packet25_tuned_20260301T083334Z.csv",
+    "archive_no_snapshot_failures_total": 24,
+    "unique_urls_total": 24
+  },
+  "after": {
+    "quality_snapshot": "docs/etl/sprints/AI-OPS-354/evidence/quality_initiatives_after_packet25_tuned_20260301T083334Z.json",
+    "waf_snapshot": "docs/etl/sprints/AI-OPS-354/evidence/senado_waf_block_profile_after_packet25_tuned_20260301T083334Z.json",
+    "downloaded_doc_links": 4804,
+    "missing_doc_links": 4749,
+    "missing_doc_links_actionable": 4559,
+    "missing_doc_links_actionable_linked_to_votes": 783,
+    "missing_urls": 783,
+    "blocked_403_urls": 189,
+    "status404_missing_urls": 372,
+    "zero_doc_initiatives": 5
+  },
+  "delta": {
+    "downloaded_doc_links": 0,
+    "missing_doc_links": 0,
+    "missing_doc_links_actionable": 0,
+    "missing_doc_links_actionable_linked_to_votes": 0,
+    "missing_urls": 0,
+    "blocked_403_urls": 0,
+    "status404_missing_urls": 0,
+    "zero_doc_initiatives": 0
+  },
+  "assessment": {
+    "visible_progress": true,
+    "row_845_done": false,
+    "notes": [
+      "Se valida guard de runtime para packet25 (evita bloqueo indefinido).",
+      "No hay conversion neta en packet25 bajo condiciones actuales.",
+      "Se estructura evidencia de 24 URLs sin snapshot y fallos de lookup con senal de resolucion DNS para lane archive."
+    ]
+  }
+}

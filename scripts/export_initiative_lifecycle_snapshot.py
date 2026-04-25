@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/initiative-lifecycle/data/lifecycle.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/initiative-lifecycle/data/lifecycle.json")
 
 
 def parse_args() -> argparse.Namespace:
@@ -32,7 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--out",
         default=str(DEFAULT_OUT),
-        help="Ruta de salida JSON (ej. docs/gh-pages/initiative-lifecycle/data/lifecycle.json).",
+        help="Ruta de salida JSON (ej. ui/gh-pages-next/public/initiative-lifecycle/data/lifecycle.json).",
     )
     parser.add_argument(
         "--max-votes-per-initiative",

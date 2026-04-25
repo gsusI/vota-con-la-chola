@@ -46,6 +46,13 @@ class TestCongresoVotacionesSamplesE2E(unittest.TestCase):
                 )
                 self.assertEqual(ev1, 1)
                 self.assertGreater(mv1, 300)
+                row = conn.execute(
+                    "SELECT legislature, vote_date, title FROM parl_vote_events ORDER BY vote_event_id LIMIT 1"
+                ).fetchone()
+                self.assertIsNotNone(row)
+                self.assertEqual(str(row["legislature"]), "15")
+                self.assertIsNotNone(row["vote_date"])
+                self.assertIsNotNone(row["title"])
 
                 ingest_parl_source(
                     conn=conn,
@@ -71,4 +78,3 @@ class TestCongresoVotacionesSamplesE2E(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

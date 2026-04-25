@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10' --label senado_cookie_refresh_ai_ops_299_02_leg10_tipo610 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055' --label senado_cookie_refresh_ai_ops_299_08_leg14_tipo622 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url https://www.senado.es/ --label senado_cookie_refresh_ai_ops_299_01_seed --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000006' --label senado_cookie_refresh_ai_ops_299_03_leg14_tipo621 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000003' --label senado_cookie_refresh_ai_ops_299_04_leg14_tipo624 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000055' --label senado_cookie_refresh_ai_ops_299_05_leg14_tipo622 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000008' --label senado_cookie_refresh_ai_ops_299_06_leg14_tipo626 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""
+python3 scripts/manual_capture_playwright.py --url 'https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000059' --label senado_cookie_refresh_ai_ops_299_07_leg14_tipo622 --out-dir etl/data/raw/manual --wait-seconds 120 --channel ""

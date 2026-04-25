@@ -1,0 +1,206 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": false,
+  "dry_run": false,
+  "seen": 3538,
+  "upserted": 3538,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_sentence": 4,
+    "keyword_window": 1508,
+    "title_hint_strong": 1794,
+    "title_hint_strong_from_short_window": 232
+  },
+  "by_doc_format": {
+    "html": 1754,
+    "other": 10,
+    "xml": 1774
+  },
+  "sample": [
+    {
+      "source_record_pk": 144316,
+      "sample_initiative_id": "senado:leg9:exp:621/000030",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2010. (621/000030)"
+    },
+    {
+      "source_record_pk": 144735,
+      "sample_initiative_id": "senado:leg10:exp:621/000055",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el a�o 2014"
+    },
+    {
+      "source_record_pk": 144659,
+      "sample_initiative_id": "senado:leg10:exp:621/000004",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el a�o 2012"
+    },
+    {
+      "source_record_pk": 144697,
+      "sample_initiative_id": "senado:leg10:exp:621/000019",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el a�o 2013"
+    },
+    {
+      "source_record_pk": 143971,
+      "sample_initiative_id": "senado:leg8:exp:605/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Estatuto de Autonomía de Cataluña. (605/000002)"
+    },
+    {
+      "source_record_pk": 143849,
+      "sample_initiative_id": "senado:leg7:exp:621/000094",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2003. (621/000094)"
+    },
+    {
+      "source_record_pk": 143596,
+      "sample_initiative_id": "senado:leg7:exp:621/000040",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2002. (621/000040)"
+    },
+    {
+      "source_record_pk": 143559,
+      "sample_initiative_id": "senado:leg7:exp:621/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2001. (621/000003)"
+    },
+    {
+      "source_record_pk": 143925,
+      "sample_initiative_id": "senado:leg7:exp:621/000172",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2004. (621/000172)"
+    },
+    {
+      "source_record_pk": 141883,
+      "sample_initiative_id": "senado:leg12:exp:621/000002",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2017"
+    },
+    {
+      "source_record_pk": 141879,
+      "sample_initiative_id": "senado:leg12:exp:621/000002",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2017"
+    },
+    {
+      "source_record_pk": 142789,
+      "sample_initiative_id": "senado:leg5:exp:621/000051",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de ley de Presupuestos Generales del Estado para 1995. (621/000051)"
+    },
+    {
+      "source_record_pk": 142134,
+      "sample_initiative_id": "senado:leg14:exp:621/000036",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2022. (621/000036)"
+    },
+    {
+      "source_record_pk": 142745,
+      "sample_initiative_id": "senado:leg5:exp:621/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de ley de Presupuestos Generales del Estado para 1994. (621/000007)"
+    },
+    {
+      "source_record_pk": 142112,
+      "sample_initiative_id": "senado:leg12:exp:621/000010",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2018. (621/000010)"
+    },
+    {
+      "source_record_pk": 141862,
+      "sample_initiative_id": "senado:leg12:exp:621/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2017. (621/000002)"
+    },
+    {
+      "source_record_pk": 142128,
+      "sample_initiative_id": "senado:leg14:exp:621/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2021. (621/000013)"
+    },
+    {
+      "source_record_pk": 142044,
+      "sample_initiative_id": "senado:leg14:exp:621/000067",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2023. (621/000067)"
+    },
+    {
+      "source_record_pk": 144313,
+      "sample_initiative_id": "senado:leg9:exp:621/000027",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de modificación de diversas leyes para su adaptación a la Ley sobre el libre acceso a las actividades de servicios y su ejercicio. (621/000027)"
+    },
+    {
+      "source_record_pk": 143321,
+      "sample_initiative_id": "senado:leg6:exp:621/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para 1997. (621/000002)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

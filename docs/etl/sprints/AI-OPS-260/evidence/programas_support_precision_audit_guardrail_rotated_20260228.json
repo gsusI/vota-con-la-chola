@@ -1,0 +1,66 @@
+{
+  "sample_file": "docs/etl/sprints/AI-OPS-260/exports/programas_support_precision_sample_labeled_20260228.csv",
+  "sample_total": 40,
+  "reviewed_total": 40,
+  "unlabeled_rows": 0,
+  "invalid_label_rows": 0,
+  "true_positive": 36,
+  "false_positive": 4,
+  "precision": 0.9,
+  "threshold": 0.9,
+  "min_reviewed": 30,
+  "required_parties": [
+    "BNG",
+    "VOX",
+    "FORO Asturias",
+    "PP"
+  ],
+  "reviewed_by_required_party": {
+    "BNG": 10,
+    "VOX": 10,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "missing_required_parties": [],
+  "false_positive_evidence_ids": [
+    1560538,
+    1560545,
+    1561270,
+    1561275
+  ],
+  "by_party": {
+    "BNG": {
+      "total": 10,
+      "tp": 8,
+      "fp": 2,
+      "precision": 0.8
+    },
+    "FORO Asturias": {
+      "total": 10,
+      "tp": 10,
+      "fp": 0,
+      "precision": 1.0
+    },
+    "PP": {
+      "total": 10,
+      "tp": 8,
+      "fp": 2,
+      "precision": 0.8
+    },
+    "VOX": {
+      "total": 10,
+      "tp": 10,
+      "fp": 0,
+      "precision": 1.0
+    }
+  },
+  "checks": {
+    "meets_min_reviewed": true,
+    "meets_precision_threshold": true,
+    "required_parties_covered": true,
+    "no_invalid_labels": true
+  },
+  "status": "ok",
+  "passed": true,
+  "strict_fail_reasons": []
+}

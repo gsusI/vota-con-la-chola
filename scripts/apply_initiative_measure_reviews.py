@@ -16,7 +16,6 @@ if str(REPO_ROOT) not in sys.path:
 from etl.parlamentario_es.config import DEFAULT_SCHEMA
 from etl.parlamentario_es.db import apply_schema, open_db
 from etl.politicos_es.util import normalize_ws, now_utc_iso, sha256_bytes, stable_json
-from scripts.measure_scale_layer import purge_seeded_measure_scale_layer, seed_measure_scale_layer
 
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
@@ -105,24 +104,6 @@ def apply_review_results(
     skipped_invalid_status = 0
     skipped_source_mismatch = 0
     skipped_invalid_measure = 0
-    scale_layer_cleanup: dict[str, Any] = {
-        "measure_point_ids_seen": 0,
-        "candidates_deleted": 0,
-        "clusters_deleted": 0,
-    }
-    scale_layer_sync: dict[str, Any] = {
-        "schema_ready": False,
-        "missing_tables": [],
-        "measure_points_seen": 0,
-        "candidate_rows_written": 0,
-        "cluster_rows_written": 0,
-        "link_rows_written": 0,
-        "versions_resolved": 0,
-        "fragments_matched": 0,
-        "missing_versions": 0,
-        "missing_fragments": 0,
-        "dry_run": bool(dry_run),
-    }
 
     task_updates: list[tuple[Any, ...]] = []
     delete_task_ids: list[str] = []
@@ -273,26 +254,7 @@ def apply_review_results(
         measure_rows.extend(clean_measure_rows)
 
     if not dry_run and task_updates:
-        existing_measure_point_ids: list[str] = []
-        if delete_task_ids:
-            marks = ",".join("?" for _ in delete_task_ids)
-            existing_rows = conn.execute(
-                f"""
-                SELECT measure_point_id
-                FROM parl_initiative_measure_points
-                WHERE task_id IN ({marks})
-                """,
-                delete_task_ids,
-            ).fetchall()
-            existing_measure_point_ids = [
-                _norm(row["measure_point_id"]) for row in existing_rows if _norm(row["measure_point_id"])
-            ]
         with conn:
-            scale_layer_cleanup = purge_seeded_measure_scale_layer(
-                conn,
-                measure_point_ids=existing_measure_point_ids,
-                dry_run=False,
-            )
             conn.executemany(
                 """
                 UPDATE parl_initiative_measure_review_tasks
@@ -318,11 +280,6 @@ def apply_review_results(
                     """,
                     measure_rows,
                 )
-                scale_layer_sync = seed_measure_scale_layer(
-                    conn,
-                    measure_point_ids=[row[0] for row in measure_rows],
-                    dry_run=False,
-                )
 
     tasks_updated = len(task_updates)
     measures_inserted = len(measure_rows)
@@ -338,8 +295,6 @@ def apply_review_results(
         "skipped_invalid_status": int(skipped_invalid_status),
         "skipped_source_mismatch": int(skipped_source_mismatch),
         "skipped_invalid_measure": int(skipped_invalid_measure),
-        "scale_layer_cleanup": scale_layer_cleanup,
-        "scale_layer_sync": scale_layer_sync,
     }
 
 

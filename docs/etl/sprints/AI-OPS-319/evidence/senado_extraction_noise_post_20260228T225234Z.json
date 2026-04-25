@@ -1,0 +1,17 @@
+{
+  "db": "etl/data/staging/politicos-es.db",
+  "scope": "senado_iniciativas",
+  "total_rows": 3535,
+  "needs_review_rows": 0,
+  "noise_rows_total": 0,
+  "noise_rows_pct": 0.0,
+  "noise_pattern_counts": {
+    "contains_bang_function": 0,
+    "contains_function": 0,
+    "senado_pipe_brand": 0,
+    "var_http": 0,
+    "script_tag": 0,
+    "javascript_scheme": 0
+  },
+  "noise_examples": []
+}

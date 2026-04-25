@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-03-01T05:56:04+00:00",
+  "sprint_id": "AI-OPS-347",
+  "timestamp": "20260301T055144Z",
+  "overall_before": {
+    "downloaded_doc_links": 4648,
+    "missing_doc_links": 4905,
+    "missing_doc_links_actionable": 4715,
+    "effective_downloaded_doc_links_pct": 49.64
+  },
+  "overall_after": {
+    "downloaded_doc_links": 4648,
+    "missing_doc_links": 4905,
+    "missing_doc_links_actionable": 4715,
+    "effective_downloaded_doc_links_pct": 49.64
+  },
+  "overall_delta": {
+    "downloaded_doc_links": 0,
+    "missing_doc_links": 0,
+    "missing_doc_links_actionable": 0,
+    "effective_downloaded_doc_links_pct": 0.0
+  },
+  "waf_before": {
+    "missing_urls": 939,
+    "blocked_403_urls": 160,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5
+  },
+  "waf_after": {
+    "missing_urls": 939,
+    "blocked_403_urls": 160,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5
+  },
+  "waf_delta": {
+    "missing_urls": 0,
+    "blocked_403_urls": 0,
+    "unknown_status_urls": 0,
+    "zero_doc_initiatives": 0
+  }
+}

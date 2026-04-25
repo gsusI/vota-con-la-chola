@@ -10,7 +10,6 @@ Primary target: `source_id='parl_initiative_docs'` rows with XML/PDF content.
 from __future__ import annotations
 
 import argparse
-import gzip
 import html
 import json
 import re
@@ -89,17 +88,7 @@ def _decode_markup_bytes(raw_bytes: bytes) -> str:
     return raw_bytes.decode("utf-8", errors="replace")
 
 
-def _maybe_decompress_gzip(raw_bytes: bytes) -> bytes:
-    if not raw_bytes.startswith(b"\x1f\x8b"):
-        return raw_bytes
-    try:
-        return gzip.decompress(raw_bytes)
-    except Exception:
-        return raw_bytes
-
-
 def extract_from_xml_or_html(raw_bytes: bytes) -> str:
-    raw_bytes = _maybe_decompress_gzip(raw_bytes)
     decoded = _decode_markup_bytes(raw_bytes)
 
     # Prefer XML parsing first so CDATA content is preserved via itertext().

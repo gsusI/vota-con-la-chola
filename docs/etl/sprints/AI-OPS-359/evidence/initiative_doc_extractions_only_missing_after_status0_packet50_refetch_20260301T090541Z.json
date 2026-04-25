@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 50,
+  "upserted": 50,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 50
+  },
+  "by_doc_format": {
+    "xml": 50
+  },
+  "sample": [
+    {
+      "source_record_pk": 147665,
+      "sample_initiative_id": "senado:leg12:exp:624/000012",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial. (624/000012)"
+    },
+    {
+      "source_record_pk": 147659,
+      "sample_initiative_id": "senado:leg12:exp:624/000006",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de Reformas Urgentes del Trabajo Autónomo. (624/000006)"
+    },
+    {
+      "source_record_pk": 147663,
+      "sample_initiative_id": "senado:leg12:exp:624/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 42/2007, de 13 de diciembre, del Patrimonio Natural y de la Biodiversidad. (624/000010)"
+    },
+    {
+      "source_record_pk": 147658,
+      "sample_initiative_id": "senado:leg12:exp:624/000005",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 17/2006, de 5 de junio, de la radio y la televisión de titularidad estatal, para recuperar la independencia de la Corporación RTVE y el pluralismo en la elección parlamentaria de sus órganos. (624/000005)"
+    },
+    {
+      "source_record_pk": 147667,
+      "sample_initiative_id": "senado:leg12:exp:624/000016",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para transponer Directivas de la Unión Europea en los ámbitos financiero y de terrorismo, y abordar cuestiones de índole internacional. (624/000016)"
+    },
+    {
+      "source_record_pk": 147664,
+      "sample_initiative_id": "senado:leg12:exp:624/000011",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, sobre medidas urgentes en aplicación del Pacto de Estado en materia de violencia de género. (624/000011)"
+    },
+    {
+      "source_record_pk": 147666,
+      "sample_initiative_id": "senado:leg12:exp:624/000013",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de mejora de la situación de orfandad de las hijas e hijos de víctimas de violencia de género y otras formas de violencia contra la mujer. (624/000013)"
+    },
+    {
+      "source_record_pk": 147662,
+      "sample_initiative_id": "senado:leg12:exp:624/000009",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil, en relación a la ocupación ilegal de viviendas. (624/000009)"
+    },
+    {
+      "source_record_pk": 147656,
+      "sample_initiative_id": "senado:leg12:exp:624/000001",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 2/2012, de 27 de abril, de Estabilidad Presupuestaria y Sostenibilidad Financiera. (624/000001)"
+    },
+    {
+      "source_record_pk": 147661,
+      "sample_initiative_id": "senado:leg12:exp:624/000008",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 14/2010, de 5 de julio, sobre las infraestructuras y los servicios de información geográfica en España. (624/000008)"
+    },
+    {
+      "source_record_pk": 147671,
+      "sample_initiative_id": "senado:leg12:exp:626/000001",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.3. (626/000001)"
+    },
+    {
+      "source_record_pk": 147683,
+      "sample_initiative_id": "senado:leg14:exp:610/000003",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo Internacional en materia de fiscalidad y protección de los intereses financieros entre el Reino de España y el Reino Unido de la Gran Bretaña e Irlanda del Norte en relación con Gibraltar, hecho \"ad referendum\" en Madrid y Londres el 4 de marzo de 2019. (610/000003)"
+    },
+    {
+      "source_record_pk": 147672,
+      "sample_initiative_id": "senado:leg12:exp:626/000003",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 30. (626/000003)"
+    },
+    {
+      "source_record_pk": 147657,
+      "sample_initiative_id": "senado:leg12:exp:624/000002",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General, para el supuesto de convocatoria automática de elecciones en virtud de lo dispuesto en el apartado 5 del artículo 99 de la Constitución. (624/000002)"
+    },
+    {
+      "source_record_pk": 147660,
+      "sample_initiative_id": "senado:leg12:exp:624/000007",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 42/2015, de 5 de octubre, de reforma de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil, para garantizar la efectividad de los actos de comunicación del Ministerio Fiscal. (624/000007)"
+    },
+    {
+      "source_record_pk": 147670,
+      "sample_initiative_id": "senado:leg12:exp:625/000003",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley sobre la transferencia de recursos de 19,99 hm3 desde la Demarcación Hidrográfica de los ríos Tinto, Odiel y Piedras a la Demarcación Hidrográfica del Guadalquivir. (625/000003)"
+    },
+    {
+      "source_record_pk": 147673,
+      "sample_initiative_id": "senado:leg12:exp:626/000004",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.2. (626/000004)"
+    },
+    {
+      "source_record_pk": 147677,
+      "sample_initiative_id": "senado:leg12:exp:626/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.2. (626/000010)"
+    },
+    {
+      "source_record_pk": 147645,
+      "sample_initiative_id": "senado:leg12:exp:622/000019",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Real Decreto Legislativo 1/2013, de 29 de noviembre, por el que se aprueba el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, para la asimilación legal de la valoración de las situaciones de dependencia con la calificación…"
+    },
+    {
+      "source_record_pk": 147644,
+      "sample_initiative_id": "senado:leg12:exp:622/000018",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 19/2015, de 13 de julio, de medidas de reforma administrativa en el ámbito de la Administración de Justicia y del Registro Civil, para la supresión de la tasa a la que está sujeto el procedimiento para la obtención de la nacionalidad española por residencia. (622/000018)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

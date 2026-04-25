@@ -1,0 +1,17 @@
+{
+  "generated_at": "20260228T225234Z",
+  "packet_rows_total": 80,
+  "packet_unique_initiatives_total": 80,
+  "max_urls_per_initiative": 1,
+  "max_total_rows": 80,
+  "excluded_url_family": "ficopendataservlet",
+  "status_buckets": {
+    "404": 80
+  },
+  "family_buckets": {
+    "detalleiniciativa_html": 14,
+    "enmiendas_index_html": 60,
+    "global_enmiendas_vetos": 6
+  },
+  "db": "etl/data/staging/politicos-es.db"
+}

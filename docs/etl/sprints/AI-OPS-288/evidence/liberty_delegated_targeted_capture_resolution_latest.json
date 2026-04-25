@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "rows_total": 8,
+  "approved_rows_total": 6,
+  "pending_rows_total": 2,
+  "approved_rows": [
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "review_note": "auto_assist:approved_from_BOE-A-1988-24053",
+      "reviewed_designated_actor_label": "Miguel José Sanz Aranda",
+      "reviewed_source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-24053"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "review_note": "auto_assist:approved_from_BOE-A-1984-27292",
+      "reviewed_designated_actor_label": "Juan Ignacio Moltó García",
+      "reviewed_source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-27292"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "review_note": "auto_assist:approved_from_BOE-A-2007-12769",
+      "reviewed_designated_actor_label": "José Alberto García Valera",
+      "reviewed_source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "review_note": "auto_assist:approved_from_BOE-A-2008-12065",
+      "reviewed_designated_actor_label": "Sofía del Carmen Hernanz Costa",
+      "reviewed_source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "review_note": "auto_assist:approved_from_BOE-A-2004-7862",
+      "reviewed_designated_actor_label": "Marta Guelbenzu Robles",
+      "reviewed_source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-7862"
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "review_note": "auto_assist:approved_from_BOE-A-1996-12484",
+      "reviewed_designated_actor_label": "Carlos Muñoz-Repiso Izaguirre",
+      "reviewed_source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1996-12484"
+    }
+  ],
+  "pending_reason_counts": {
+    "auto_assist:role_alignment_failed:procedural_unit_not_found": 1,
+    "auto_assist:role_alignment_failed:role_topic_overlap_zero": 1
+  }
+}

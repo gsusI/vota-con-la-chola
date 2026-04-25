@@ -1025,9 +1025,9 @@
         } catch (err) {
           state.snapshot = { meta: {}, tables: {} };
           setBanner(
-            `<div class="mono"><strong>Preview sin datos</strong>. No se encontro <span class="mono">${esc(
+            `<div class="explorer-temas-preview-empty mono"><strong>Preview sin datos</strong>. No se encontro <span class="mono">${esc(
               STATIC_SNAPSHOT_PATH
-            )}</span>. Ejecuta <span class="mono">just explorer-gh-pages-build</span> o abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
+            )}</span>. Ejecuta <span class="mono">just cloudflare-pages-build</span> o abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
           );
         }
       }

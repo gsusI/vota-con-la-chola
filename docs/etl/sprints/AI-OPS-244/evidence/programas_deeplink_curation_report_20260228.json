@@ -1,0 +1,468 @@
+{
+  "generated_at": "2026-02-28T08:49:54+00:00",
+  "input_manifest": "docs/etl/sprints/AI-OPS-242/exports/programas_manifest_union_multicycle_plus_pdf_20260228.csv",
+  "output_manifest": "docs/etl/sprints/AI-OPS-244/exports/programas_manifest_deeplink_curated_multicycle_20260228.csv",
+  "rows_total": 51,
+  "rows_updated": 24,
+  "rows_kept": 21,
+  "rows_skipped": 6,
+  "failures_total": 0,
+  "failures": [],
+  "probes": [
+    {
+      "party_id": "2",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.pp.es/",
+      "selected_url": "https://www.pp.es/storage/2025/09/Manifesto_2024.pdf",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "14",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.voxespana.es/",
+      "selected_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "selected_score": 11,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "18",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.eaj-pnv.eus/",
+      "selected_url": "https://www.eaj-pnv.eus/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "22",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://ehbildu.eus/",
+      "selected_url": "https://ehbildu.eus/dokumentuak/gardentasuna/2015_eleccionesjjggmayo.pdf",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "29",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://movimientosumar.es/",
+      "selected_url": "https://movimientosumar.es/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "73",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.upn.org/",
+      "selected_url": "https://www.upn.org/",
+      "selected_score": 4,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 1,
+      "error": null
+    },
+    {
+      "party_id": "276",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.bng.gal/",
+      "selected_url": "https://www.bng.gal/estaticas/programas-eleitorais.html",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "347",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://coalicioncanaria.org/",
+      "selected_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_score": 9,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 2,
+      "error": null
+    },
+    {
+      "party_id": "1055",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.ciudadanos-cs.org/",
+      "selected_url": "https://www.ciudadanos-cs.org/por-los-tuyos-propuestas-2023-28m",
+      "selected_score": 30,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 2,
+      "error": null
+    },
+    {
+      "party_id": "4756",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://foroasturias.es/",
+      "selected_url": "https://foroasturias.es/wp-content/uploads/2023/05/Programa-electoral-FORO-Asturias-20232027.pdf",
+      "selected_score": 11,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "7628",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://izquierdaunida.org/",
+      "selected_url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/",
+      "selected_score": 15,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "61293",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://compromis.net/",
+      "selected_url": "https://compromis.net/",
+      "selected_score": 5,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "67790",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.socialistes.cat/",
+      "selected_url": "https://www.socialistes.cat/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "68157",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://cup.cat/",
+      "selected_url": "https://cup.cat/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "18201",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://verdesequo.es/",
+      "selected_url": "https://verdesequo.es/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "2",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.pp.es/",
+      "selected_url": "https://www.pp.es/storage/2025/09/Manifesto_2024.pdf",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "14",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.voxespana.es/",
+      "selected_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "selected_score": 11,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "18",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.eaj-pnv.eus/",
+      "selected_url": "https://www.eaj-pnv.eus/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "22",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://ehbildu.eus/",
+      "selected_url": "https://ehbildu.eus/dokumentuak/gardentasuna/2015_eleccionesjjggmayo.pdf",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "29",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://movimientosumar.es/",
+      "selected_url": "https://movimientosumar.es/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "73",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.upn.org/",
+      "selected_url": "https://www.upn.org/",
+      "selected_score": 4,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 1,
+      "error": null
+    },
+    {
+      "party_id": "276",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.bng.gal/",
+      "selected_url": "https://www.bng.gal/estaticas/programas-eleitorais.html",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "347",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://coalicioncanaria.org/",
+      "selected_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_score": 9,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 2,
+      "error": null
+    },
+    {
+      "party_id": "1055",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.ciudadanos-cs.org/",
+      "selected_url": "https://www.ciudadanos-cs.org/por-los-tuyos-propuestas-2023-28m",
+      "selected_score": 30,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 2,
+      "error": null
+    },
+    {
+      "party_id": "4756",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://foroasturias.es/",
+      "selected_url": "https://foroasturias.es/wp-content/uploads/2023/05/Programa-electoral-FORO-Asturias-20232027.pdf",
+      "selected_score": 11,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "7628",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://izquierdaunida.org/",
+      "selected_url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/",
+      "selected_score": 15,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "61293",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://compromis.net/",
+      "selected_url": "https://compromis.net/",
+      "selected_score": 5,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "67790",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.socialistes.cat/",
+      "selected_url": "https://www.socialistes.cat/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "68157",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://cup.cat/",
+      "selected_url": "https://cup.cat/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "18201",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://verdesequo.es/",
+      "selected_url": "https://verdesequo.es/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "2",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.pp.es/",
+      "selected_url": "https://www.pp.es/storage/2025/09/Manifesto_2024.pdf",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "14",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.voxespana.es/",
+      "selected_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "selected_score": 11,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "18",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.eaj-pnv.eus/",
+      "selected_url": "https://www.eaj-pnv.eus/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "22",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://ehbildu.eus/",
+      "selected_url": "https://ehbildu.eus/dokumentuak/gardentasuna/2015_eleccionesjjggmayo.pdf",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "29",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://movimientosumar.es/",
+      "selected_url": "https://movimientosumar.es/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "73",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.upn.org/",
+      "selected_url": "https://www.upn.org/",
+      "selected_score": 4,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 1,
+      "error": null
+    },
+    {
+      "party_id": "276",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.bng.gal/",
+      "selected_url": "https://www.bng.gal/estaticas/programas-eleitorais.html",
+      "selected_score": 7,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "347",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://coalicioncanaria.org/",
+      "selected_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_score": 9,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 2,
+      "error": null
+    },
+    {
+      "party_id": "1055",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.ciudadanos-cs.org/",
+      "selected_url": "https://www.ciudadanos-cs.org/por-los-tuyos-propuestas-2023-28m",
+      "selected_score": 30,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 2,
+      "error": null
+    },
+    {
+      "party_id": "4756",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://foroasturias.es/",
+      "selected_url": "https://foroasturias.es/wp-content/uploads/2023/05/Programa-electoral-FORO-Asturias-20232027.pdf",
+      "selected_score": 11,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "7628",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://izquierdaunida.org/",
+      "selected_url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/",
+      "selected_score": 15,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 5,
+      "error": null
+    },
+    {
+      "party_id": "61293",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://compromis.net/",
+      "selected_url": "https://compromis.net/",
+      "selected_score": 5,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 3,
+      "error": null
+    },
+    {
+      "party_id": "67790",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.socialistes.cat/",
+      "selected_url": "https://www.socialistes.cat/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "68157",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://cup.cat/",
+      "selected_url": "https://cup.cat/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    },
+    {
+      "party_id": "18201",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://verdesequo.es/",
+      "selected_url": "https://verdesequo.es/",
+      "selected_score": 0,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 0,
+      "error": null
+    }
+  ],
+  "config": {
+    "timeout": 20,
+    "min_score": 7,
+    "max_probe_candidates": 5
+  }
+}

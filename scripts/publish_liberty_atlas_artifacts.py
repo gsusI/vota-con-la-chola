@@ -113,7 +113,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Permite publicar un snapshot_date posterior a la fecha UTC actual.",
     )
-    p.add_argument("--gh-pages-out", default="", help="Optional JSON mirror path (e.g. docs/gh-pages/.../liberty_atlas_release.json)")
+    p.add_argument("--gh-pages-out", default="", help="Optional static-app JSON mirror path (e.g. ui/gh-pages-next/public/.../liberty_atlas_release.json)")
     p.add_argument("--out", default="", help="Optional operation report JSON")
     return p.parse_args(argv)
 

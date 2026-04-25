@@ -1,0 +1,69 @@
+{
+  "slice": "AI-OPS-317",
+  "timestamp_utc": "20260228T223428Z",
+  "overall": {
+    "downloaded_doc_links_before": 4341,
+    "downloaded_doc_links_after": 4341,
+    "downloaded_doc_links_delta": 0,
+    "missing_doc_links_before": 5212,
+    "missing_doc_links_after": 5212,
+    "missing_doc_links_delta": 0,
+    "missing_doc_links_actionable_before": 5028,
+    "missing_doc_links_actionable_after": 5028,
+    "missing_doc_links_actionable_delta": 0,
+    "doc_links_missing_fetch_status_before": 377,
+    "doc_links_missing_fetch_status_after": 297,
+    "doc_links_missing_fetch_status_delta": -80,
+    "fetch_status_coverage_pct_before": 96.05,
+    "fetch_status_coverage_pct_after": 96.89
+  },
+  "senado_iniciativas": {
+    "downloaded_doc_links_before": 3529,
+    "downloaded_doc_links_after": 3529,
+    "downloaded_doc_links_delta": 0,
+    "missing_doc_links_before": 5212,
+    "missing_doc_links_after": 5212,
+    "missing_doc_links_delta": 0,
+    "doc_links_missing_fetch_status_before": 377,
+    "doc_links_missing_fetch_status_after": 297,
+    "doc_links_missing_fetch_status_delta": -80,
+    "fetch_status_coverage_pct_before": 95.69,
+    "fetch_status_coverage_pct_after": 96.6,
+    "missing_status_buckets_before": [
+      {
+        "status": 403,
+        "count": 2576
+      },
+      {
+        "status": 500,
+        "count": 1958
+      },
+      {
+        "status": 0,
+        "count": 491
+      },
+      {
+        "status": 404,
+        "count": 187
+      }
+    ],
+    "missing_status_buckets_after": [
+      {
+        "status": 403,
+        "count": 2576
+      },
+      {
+        "status": 500,
+        "count": 1958
+      },
+      {
+        "status": 0,
+        "count": 411
+      },
+      {
+        "status": 404,
+        "count": 267
+      }
+    ]
+  }
+}

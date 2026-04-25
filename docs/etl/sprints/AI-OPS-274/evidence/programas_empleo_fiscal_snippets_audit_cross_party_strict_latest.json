@@ -1,0 +1,274 @@
+{
+  "source_id": "programas_partidos",
+  "topic_key": "concern:v1:empleo",
+  "parties": [
+    "BNG",
+    "CCa",
+    "Compromis",
+    "EAJ-PNV",
+    "VOX"
+  ],
+  "fiscal_terms": [
+    "imposto de sociedades",
+    "fiscalidad",
+    "fiscalitat",
+    "impuesto",
+    "impostos",
+    "tribut",
+    "irpf",
+    "iva",
+    "sociedades"
+  ],
+  "employment_anchor_terms": [
+    "emple",
+    "trabaj",
+    "traballo",
+    "emprego",
+    "laboral",
+    "paro",
+    "salari",
+    "ocupacion",
+    "ocupacio"
+  ],
+  "max_suspicious_support_rows": 0,
+  "rows_total": 13,
+  "support_rows": 8,
+  "unclear_rows": 5,
+  "suspicious_support_rows": 4,
+  "checks": {
+    "rows_present": true,
+    "suspicious_support_within_threshold": false
+  },
+  "status": "degraded",
+  "passed": false,
+  "strict_fail_reasons": [
+    "suspicious_support_rows_above_threshold"
+  ],
+  "parties_breakdown": [
+    {
+      "party_name": "BNG",
+      "rows_total": 2,
+      "support_rows": 1,
+      "unclear_rows": 1,
+      "suspicious_support_rows": 0
+    },
+    {
+      "party_name": "CCa",
+      "rows_total": 1,
+      "support_rows": 0,
+      "unclear_rows": 1,
+      "suspicious_support_rows": 0
+    },
+    {
+      "party_name": "Compromis",
+      "rows_total": 4,
+      "support_rows": 4,
+      "unclear_rows": 0,
+      "suspicious_support_rows": 4
+    },
+    {
+      "party_name": "EAJ-PNV",
+      "rows_total": 3,
+      "support_rows": 3,
+      "unclear_rows": 0,
+      "suspicious_support_rows": 0
+    },
+    {
+      "party_name": "VOX",
+      "rows_total": 3,
+      "support_rows": 0,
+      "unclear_rows": 3,
+      "suspicious_support_rows": 0
+    }
+  ],
+  "rows": [
+    {
+      "evidence_id": 1560338,
+      "party_name": "BNG",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2024/01/24/24_bng_galegas_programa_goberno.pdf",
+      "matched_fiscal_terms": [
+        "imposto de sociedades",
+        "tribut",
+        "iva",
+        "sociedades"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "ion da natureza dos rendementos minorando a tributacion polos ingresos do traballo e aumentando a correspondente aos derivados do capital e deducions inversamente proporcionais aos tipos de gravame imposto de sociedades estabelecer a progresividade en funcion da dimension da empresa e deducions inversamente proporcionais aos tipos de gravame soportados ive c"
+    },
+    {
+      "evidence_id": 1560538,
+      "party_name": "BNG",
+      "topic_key": "concern:v1:empleo",
+      "stance": "unclear",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+      "matched_fiscal_terms": [
+        "imposto de sociedades",
+        "tribut",
+        "sociedades"
+      ],
+      "has_employment_anchor": false,
+      "suspicious_support": false,
+      "excerpt": "actividade de explotacion na galiza e situan o seu domicilio social 7 a economia ao servizo das maiorias sociais 39 que galiza conte con mais forza noutras partes do estado deben tributar aqui polo imposto de sociedades estabelecer a sua progresividade en funcion da dimension da empresa deducions inversamente proporcionais aos tipos de gravame soportados apl"
+    },
+    {
+      "evidence_id": 1561052,
+      "party_name": "CCa",
+      "topic_key": "concern:v1:empleo",
+      "stance": "unclear",
+      "stance_method": "programa_metadata",
+      "source_url": "https://coalicioncanaria.org/wp-content/uploads/cc-pdf/programas-electorales/Manifiesto%20Europeas%202024.pdf",
+      "matched_fiscal_terms": [
+        "iva",
+        "sociedades"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "las islas manifiesto electoral 9 de junio elecciones europeas 2024 en europa estos cambios son percibidos con cierta aprehension tanto por las sociedades debido a su impacto en el empleo y la estructura social existente como por los estados miembros y la union europea quienes ven en estos avances un nuevo factor que debilita la posicion competitiva del conti"
+    },
+    {
+      "evidence_id": 1560949,
+      "party_name": "Compromis",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://compromis.net/espai/uploads/groups/1/messages/2025/50_propostes_def.pdf",
+      "matched_fiscal_terms": [
+        "fiscalitat"
+      ],
+      "has_employment_anchor": false,
+      "suspicious_support": true,
+      "excerpt": "tornar a reduir les llistes despera de la dependencia sete compromis fer cas a la ciencia contra el canvi climatic 32 recuperar tots els instruments de lluita contra el canvi climatic incloent la fiscalitat verda per a impulsar una transicio ecologica justa 33 introduir leducacio ambiental en tots els nivells educatius 34 crear una empresa publica denergia p"
+    },
+    {
+      "evidence_id": 1560986,
+      "party_name": "Compromis",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://compromis.net/espai/uploads/groups/1/messages/2025/50_propostes_def.pdf",
+      "matched_fiscal_terms": [
+        "fiscalitat"
+      ],
+      "has_employment_anchor": false,
+      "suspicious_support": true,
+      "excerpt": "tornar a reduir les llistes despera de la dependencia sete compromis fer cas a la ciencia contra el canvi climatic 32 recuperar tots els instruments de lluita contra el canvi climatic incloent la fiscalitat verda per a impulsar una transicio ecologica justa 33 introduir leducacio ambiental en tots els nivells educatius 34 crear una empresa publica denergia p"
+    },
+    {
+      "evidence_id": 1561098,
+      "party_name": "Compromis",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://compromis.net/espai/uploads/groups/1/messages/2025/50_propostes_def.pdf",
+      "matched_fiscal_terms": [
+        "fiscalitat"
+      ],
+      "has_employment_anchor": false,
+      "suspicious_support": true,
+      "excerpt": "tornar a reduir les llistes despera de la dependencia sete compromis fer cas a la ciencia contra el canvi climatic 32 recuperar tots els instruments de lluita contra el canvi climatic incloent la fiscalitat verda per a impulsar una transicio ecologica justa 33 introduir leducacio ambiental en tots els nivells educatius 34 crear una empresa publica denergia p"
+    },
+    {
+      "evidence_id": 1561239,
+      "party_name": "Compromis",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://compromis.net/espai/uploads/groups/1/messages/2025/50_propostes_def.pdf",
+      "matched_fiscal_terms": [
+        "fiscalitat"
+      ],
+      "has_employment_anchor": false,
+      "suspicious_support": true,
+      "excerpt": "tornar a reduir les llistes despera de la dependencia sete compromis fer cas a la ciencia contra el canvi climatic 32 recuperar tots els instruments de lluita contra el canvi climatic incloent la fiscalitat verda per a impulsar una transicio ecologica justa 33 introduir leducacio ambiental en tots els nivells educatius 34 crear una empresa publica denergia p"
+    },
+    {
+      "evidence_id": 1560867,
+      "party_name": "EAJ-PNV",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.eaj-pnv.eus/es/adjuntos-documentos/20945/pdf/con-voz-propia-programa-electoral-23-j",
+      "matched_fiscal_terms": [
+        "iva"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "de recursos comercio un sector basico tanto por sus magnitudes como por su importancia social y su capacidad vertebradora de la vida urbana turismo que ademas de ser un factor dinamizador de la actividad economica y del empleo constituye una poderosa herramienta para impulsar los procesos de internacionalizacion y apertura a nuevos mercados por ello proponem"
+    },
+    {
+      "evidence_id": 1561017,
+      "party_name": "EAJ-PNV",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.eaj-pnv.eus/es/adjuntos-documentos/20945/pdf/con-voz-propia-programa-electoral-23-j",
+      "matched_fiscal_terms": [
+        "iva"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "de recursos comercio un sector basico tanto por sus magnitudes como por su importancia social y su capacidad vertebradora de la vida urbana turismo que ademas de ser un factor dinamizador de la actividad economica y del empleo constituye una poderosa herramienta para impulsar los procesos de internacionalizacion y apertura a nuevos mercados por ello proponem"
+    },
+    {
+      "evidence_id": 1561157,
+      "party_name": "EAJ-PNV",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.eaj-pnv.eus/es/adjuntos-documentos/20945/pdf/con-voz-propia-programa-electoral-23-j",
+      "matched_fiscal_terms": [
+        "iva"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "de recursos comercio un sector basico tanto por sus magnitudes como por su importancia social y su capacidad vertebradora de la vida urbana turismo que ademas de ser un factor dinamizador de la actividad economica y del empleo constituye una poderosa herramienta para impulsar los procesos de internacionalizacion y apertura a nuevos mercados por ello proponem"
+    },
+    {
+      "evidence_id": 1560856,
+      "party_name": "VOX",
+      "topic_key": "concern:v1:empleo",
+      "stance": "unclear",
+      "stance_method": "programa_metadata",
+      "source_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "matched_fiscal_terms": [
+        "fiscalidad"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "razon es bien sencilla la vivienda en propiedad fue uno de los pilares del bienestar espanol y de la expansion de las clases medias hoy todos los indicadores de precariedad en el empleo falta de vertebracion territorial desplome de la produccion industrial fiscalidad salvaje imposibilidad de ahorro etc culminan en la dificultad de acceso a la vivienda a los"
+    },
+    {
+      "evidence_id": 1561006,
+      "party_name": "VOX",
+      "topic_key": "concern:v1:empleo",
+      "stance": "unclear",
+      "stance_method": "programa_metadata",
+      "source_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "matched_fiscal_terms": [
+        "fiscalidad"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "razon es bien sencilla la vivienda en propiedad fue uno de los pilares del bienestar espanol y de la expansion de las clases medias hoy todos los indicadores de precariedad en el empleo falta de vertebracion territorial desplome de la produccion industrial fiscalidad salvaje imposibilidad de ahorro etc culminan en la dificultad de acceso a la vivienda a los"
+    },
+    {
+      "evidence_id": 1561146,
+      "party_name": "VOX",
+      "topic_key": "concern:v1:empleo",
+      "stance": "unclear",
+      "stance_method": "programa_metadata",
+      "source_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "matched_fiscal_terms": [
+        "fiscalidad"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "razon es bien sencilla la vivienda en propiedad fue uno de los pilares del bienestar espanol y de la expansion de las clases medias hoy todos los indicadores de precariedad en el empleo falta de vertebracion territorial desplome de la produccion industrial fiscalidad salvaje imposibilidad de ahorro etc culminan en la dificultad de acceso a la vivienda a los"
+    }
+  ]
+}

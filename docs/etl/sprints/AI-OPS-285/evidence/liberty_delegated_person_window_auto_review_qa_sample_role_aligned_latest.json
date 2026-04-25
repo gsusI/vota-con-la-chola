@@ -1,0 +1,27 @@
+{
+  "auto_review_csv": "docs/etl/sprints/AI-OPS-285/exports/liberty_delegated_person_window_auto_review_decisions_role_aligned_latest.csv",
+  "review_assist_csv": "docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv",
+  "out_csv": "docs/etl/sprints/AI-OPS-285/exports/liberty_delegated_person_window_auto_review_qa_sample_role_aligned_latest.csv",
+  "summary": {
+    "status": "ok",
+    "rows_considered_total": 8,
+    "sample_rows_total": 8,
+    "sample_size_requested": 8,
+    "only_approved": false,
+    "institutions_total": 4,
+    "institutions_sampled_total": 4,
+    "rows_total_by_institution": {
+      "AEAT": 3,
+      "DGT": 2,
+      "Delegaciones/Subdelegaciones del Gobierno": 1,
+      "Inspeccion de Trabajo y Seguridad Social": 2
+    },
+    "sample_rows_by_institution": {
+      "AEAT": 3,
+      "DGT": 2,
+      "Delegaciones/Subdelegaciones del Gobierno": 1,
+      "Inspeccion de Trabajo y Seguridad Social": 2
+    },
+    "sample_covers_all_rows": true
+  }
+}

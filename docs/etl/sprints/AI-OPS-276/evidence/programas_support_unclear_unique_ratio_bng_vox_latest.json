@@ -1,0 +1,55 @@
+{
+  "source_id": "programas_partidos",
+  "parties": [
+    "BNG",
+    "VOX"
+  ],
+  "rows_total": 3,
+  "min_support_unclear_unique_ratio": 1.0,
+  "near_duplicate_dedupe": {
+    "enabled": true,
+    "jaccard_min": 0.42,
+    "containment_min": 0.4,
+    "ngram_size": 6
+  },
+  "below_threshold_rows": [],
+  "checks": {
+    "rows_present": true,
+    "ratio_threshold_met": true
+  },
+  "status": "ok",
+  "passed": true,
+  "strict_fail_reasons": [],
+  "rows": [
+    {
+      "party_name": "BNG",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+      "support_rows": 9,
+      "unclear_rows": 3,
+      "unclear_unique_exact_excerpt_rows": 3,
+      "unclear_near_duplicate_collapsed_rows": 0,
+      "unclear_unique_excerpt_rows": 3,
+      "support_to_unclear_unique_ratio": 3.0
+    },
+    {
+      "party_name": "BNG",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2024/05/14/24_bng_programa_europeas_2.pdf",
+      "support_rows": 10,
+      "unclear_rows": 14,
+      "unclear_unique_exact_excerpt_rows": 7,
+      "unclear_near_duplicate_collapsed_rows": 2,
+      "unclear_unique_excerpt_rows": 5,
+      "support_to_unclear_unique_ratio": 2.0
+    },
+    {
+      "party_name": "VOX",
+      "source_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "support_rows": 18,
+      "unclear_rows": 15,
+      "unclear_unique_exact_excerpt_rows": 5,
+      "unclear_near_duplicate_collapsed_rows": 0,
+      "unclear_unique_excerpt_rows": 5,
+      "support_to_unclear_unique_ratio": 3.6
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "auto_review_summary": {
+    "status": "ok",
+    "rows_total": 8,
+    "rows_with_assist_candidates_total": 8,
+    "approved_rows_total": 2,
+    "pending_rows_total": 6,
+    "approved_with_actor_update_total": 2,
+    "approved_with_evidence_date_update_total": 0,
+    "rows_missing_candidate_total": 0,
+    "rows_missing_required_person_hint_total": 0,
+    "rows_missing_required_evidence_date_total": 0,
+    "rows_missing_role_alignment_total": 6,
+    "role_alignment_required": true,
+    "min_candidate_score": 25,
+    "max_candidates_per_link": 3
+  },
+  "qa_precision_report": {
+    "status": "ok",
+    "strict": true,
+    "decision_scope": "approved",
+    "thresholds": {
+      "min_reviewed_rows": 2,
+      "min_precision_pct": 90.0
+    },
+    "rows_total": 8,
+    "rows_in_scope_total": 2,
+    "rows_excluded_by_scope_total": 6,
+    "reviewed_rows_total": 2,
+    "confirm_total": 2,
+    "reject_total": 0,
+    "skip_or_pending_total": 0,
+    "invalid_decision_total": 0,
+    "observed_precision_pct": 100.0,
+    "institution_breakdown": [
+      {
+        "institution": "AEAT",
+        "rows_total": 1,
+        "reviewed_rows_total": 1,
+        "confirm_total": 1,
+        "reject_total": 0,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 100.0
+      },
+      {
+        "institution": "Delegaciones/Subdelegaciones del Gobierno",
+        "rows_total": 1,
+        "reviewed_rows_total": 1,
+        "confirm_total": 1,
+        "reject_total": 0,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 100.0
+      }
+    ],
+    "invalid_decision_samples": [],
+    "strict_fail_reasons": []
+  },
+  "apply_counts": {
+    "rows_seen": 8,
+    "rows_with_decision": 8,
+    "approved_rows": 2,
+    "ignored_rows": 0,
+    "pending_rows": 6,
+    "updated_rows": 2,
+    "skipped_blank_decision": 0,
+    "skipped_invalid_decision": 0,
+    "skipped_missing_link_key": 0,
+    "skipped_link_not_found": 0,
+    "skipped_invalid_date": 0,
+    "skipped_inverted_window": 0,
+    "skipped_empty_designated_actor_after_review": 0
+  }
+}

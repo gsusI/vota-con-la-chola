@@ -1,0 +1,29 @@
+{
+  "targets_csv": "docs/etl/sprints/AI-OPS-291/exports/liberty_delegated_alternative_capture_targets_latest.csv",
+  "candidates_csv": "docs/etl/sprints/AI-OPS-291/exports/liberty_delegated_alternative_boe_candidates_fail_latest.csv",
+  "summary": {
+    "status": "ok",
+    "targets_total": 22,
+    "targets_by_group": {
+      "boe_direct_doc": 6,
+      "boe_redirector_query": 4,
+      "institutional_site": 12
+    },
+    "fetch_ok_total": 18,
+    "fetch_error_total": 4,
+    "fetch_status_counts": {
+      "0": 4,
+      "200": 18
+    },
+    "boe_query_targets_total": 4,
+    "boe_direct_doc_targets_total": 6,
+    "links_total": 2,
+    "links_with_candidates_total": 2,
+    "links_without_candidates_total": 0,
+    "candidate_rows_total": 6,
+    "candidate_unique_boe_ids_total": 6,
+    "query_candidates_total": 0,
+    "direct_doc_candidates_total": 6,
+    "top_results_per_query_target": 6
+  }
+}

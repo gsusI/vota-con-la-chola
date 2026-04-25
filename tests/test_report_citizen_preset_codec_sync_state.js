@@ -61,5 +61,5 @@ test("preset codec sync-state reporter fails strict mode when published copy is 
   assert.equal(out.results[0].first_diff_published_line, "const y = 3;");
   assert.equal(out.results[0].source_sha256, out.results[0].published_after_sha256);
   assert.ok(out.results[0].source_sha256 !== out.results[0].published_before_sha256);
-  assert.equal(out.results[0].recommended_command, "just explorer-gh-pages-build");
+  assert.equal(out.results[0].recommended_command, "just cloudflare-pages-build");
 });

@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-02-28T16:13:15+00:00",
+  "lane": "programas_signal_usefulness",
+  "status": "ok",
+  "checks": {
+    "support_unclear_unique_ratio_bng_vox_ok": true,
+    "declared_gate_passed": true,
+    "review_pending_zero": true,
+    "empleo_fiscal_cross_party_suspicious_zero": true
+  },
+  "metrics": {
+    "ratio_rows_total": 3,
+    "topic_evidence_total": 568,
+    "topic_evidence_support_rows": 421,
+    "topic_evidence_unclear_rows": 147,
+    "declared_positions_total": 434,
+    "party_proxy_count": 16,
+    "review_pending": 0,
+    "cross_party_suspicious_support_rows": 0
+  },
+  "bng_vox_url_breakdown": [
+    {
+      "party_name": "BNG",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+      "evidence_rows": 12,
+      "support_rows": 9,
+      "unclear_rows": 3
+    },
+    {
+      "party_name": "BNG",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2024/05/14/24_bng_programa_europeas_2.pdf",
+      "evidence_rows": 24,
+      "support_rows": 10,
+      "unclear_rows": 14
+    },
+    {
+      "party_name": "BNG",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2024/01/24/24_bng_galegas_programa_goberno.pdf",
+      "evidence_rows": 12,
+      "support_rows": 12,
+      "unclear_rows": 0
+    },
+    {
+      "party_name": "VOX",
+      "source_url": "https://www.voxespana.es/wp-content/uploads/2025/10/Programa-WEB-021025.pdf",
+      "evidence_rows": 33,
+      "support_rows": 18,
+      "unclear_rows": 15
+    }
+  ],
+  "evidence_refs": {
+    "ratio_json": "docs/etl/sprints/AI-OPS-276/evidence/programas_support_unclear_unique_ratio_bng_vox_latest.json",
+    "quality_json": "docs/etl/sprints/AI-OPS-276/evidence/quality_declared_programas_latest.json",
+    "declared_status_json": "docs/etl/sprints/AI-OPS-276/evidence/programas_declared_status_latest.json",
+    "cross_party_empleo_fiscal_json": "docs/etl/sprints/AI-OPS-275/evidence/programas_empleo_fiscal_snippets_audit_cross_party_latest.json"
+  }
+}

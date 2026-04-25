@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-02-28T20:27:40+00:00",
+  "baseline_progress_json": "docs/etl/sprints/AI-OPS-301/evidence/senado_manual_capture_target_progress_latest.json",
+  "current_progress_json": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_target_progress_latest.json",
+  "baseline_totals": {
+    "targets_total": 8,
+    "matched_targets_total": 6,
+    "unmatched_targets_total": 2,
+    "usable_targets_total": 0,
+    "access_denied_matched_targets_total": 6,
+    "matched_with_domain_cookies_total": 0,
+    "capture_files_total": 2,
+    "coverage_pct": 0.75,
+    "usable_coverage_pct": 0.0
+  },
+  "current_totals": {
+    "targets_total": 8,
+    "matched_targets_total": 8,
+    "unmatched_targets_total": 0,
+    "usable_targets_total": 0,
+    "access_denied_matched_targets_total": 8,
+    "matched_with_domain_cookies_total": 0,
+    "capture_files_total": 4,
+    "coverage_pct": 1.0,
+    "usable_coverage_pct": 0.0
+  },
+  "delta": {
+    "targets_total": 0,
+    "matched_targets_total": 2,
+    "unmatched_targets_total": -2,
+    "usable_targets_total": 0,
+    "access_denied_matched_targets_total": 2,
+    "matched_with_domain_cookies_total": 0,
+    "capture_files_total": 2,
+    "coverage_pct": 0.25,
+    "usable_coverage_pct": 0.0
+  },
+  "status_transition": {
+    "baseline": "degraded",
+    "current": "degraded"
+  }
+}

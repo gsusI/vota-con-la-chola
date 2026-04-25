@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-03-01T05:56:04+00:00",
+  "status": "ok",
+  "inputs": {
+    "files_total": 11,
+    "files_parsed": 10
+  },
+  "totals": {
+    "archive_no_snapshot_failures_total": 212,
+    "unique_urls_total": 195
+  },
+  "limits": {
+    "strict_min_rows": 1
+  },
+  "checks": {
+    "has_inputs": true,
+    "has_rows": true
+  },
+  "strict_fail_reasons": [],
+  "sample_urls": [
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000026",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000039",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000064",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000003",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000008",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000026",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000039",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000059",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000064",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000096",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000102",
+    "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=626&numEx=000008",
+    "http://www.senado.es/legis12/expedientes/625/enmiendas/global_enmiendas_vetos_12_625000001.xml",
+    "http://www.senado.es/legis12/expedientes/626/enmiendas/global_enmiendas_vetos_12_626000001.xml",
+    "http://www.senado.es/legis12/expedientes/626/enmiendas/global_enmiendas_vetos_12_626000008.xml",
+    "http://www.senado.es/legis12/expedientes/626/enmiendas/global_enmiendas_vetos_12_626000009.xml",
+    "https://www.senado.es/legis14/expedientes/626/enmiendas/global_enmiendas_vetos_14_626000008.xml",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000081",
+    "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000082"
+  ]
+}

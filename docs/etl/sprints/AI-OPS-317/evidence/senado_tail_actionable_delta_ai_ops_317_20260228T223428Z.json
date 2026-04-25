@@ -1,0 +1,35 @@
+{
+  "slice": "AI-OPS-317",
+  "timestamp_utc": "20260228T223428Z",
+  "before": {
+    "rows": 1252,
+    "csv_lines_including_header": 1253,
+    "status_buckets": {
+      "403": 666,
+      "404": 108,
+      "500": 101,
+      "0": 377,
+      "other": 0
+    }
+  },
+  "after": {
+    "rows": 1252,
+    "csv_lines_including_header": 1253,
+    "status_buckets": {
+      "403": 666,
+      "404": 188,
+      "500": 101,
+      "0": 297,
+      "other": 0
+    }
+  },
+  "delta": {
+    "rows": 0,
+    "csv_lines_including_header": 0,
+    "status_403": 0,
+    "status_404": 80,
+    "status_500": 0,
+    "status_0": -80,
+    "status_other": 0
+  }
+}

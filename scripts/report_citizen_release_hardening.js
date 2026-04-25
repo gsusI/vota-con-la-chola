@@ -16,8 +16,8 @@ function usage() {
     "",
     "Options:",
     "  --source-root <path>         Source citizen dir (default: ui/citizen)",
-    "  --published-root <path>      Published citizen dir (default: docs/gh-pages/citizen)",
-    "  --snapshot <path>            Published snapshot path (default: docs/gh-pages/citizen/data/citizen.json)",
+    "  --published-root <path>      Published citizen dir (default: ui/gh-pages-next/out/citizen)",
+    "  --snapshot <path>            Published snapshot path (default: ui/gh-pages-next/public/citizen/data/citizen.json)",
     "  --concerns <path>            Concerns config path (default: ui/citizen/concerns_v1.json)",
     "  --assets <csv>               Relative asset paths CSV",
     "  --max-snapshot-bytes <int>   Max allowed snapshot bytes (default: 5000000)",
@@ -30,8 +30,8 @@ function usage() {
 function parseArgs(argv) {
   const out = {
     sourceRoot: "ui/citizen",
-    publishedRoot: "docs/gh-pages/citizen",
-    snapshot: "docs/gh-pages/citizen/data/citizen.json",
+    publishedRoot: "ui/gh-pages-next/out/citizen",
+    snapshot: "ui/gh-pages-next/public/citizen/data/citizen.json",
     concerns: "ui/citizen/concerns_v1.json",
     assets:
       "index.html,preset_codec.js,onboarding_funnel.js,first_answer_accelerator.js,unknown_explainability.js,cross_method_stability.js,evidence_trust_panel.js,tailwind_md3.generated.css,tailwind_md3.tokens.json",

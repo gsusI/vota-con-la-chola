@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { XRAY_KIND_LINKS } from "./xray/xrayKinds.mjs";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
-
-function withBasePath(path) {
-  return `${resolveBasePath()}${path}`;
-}
+import { resolveBasePath, withBasePath } from "../path-utils.mjs";
 
 function formatInt(value) {
   if (value === null || value === undefined || Number.isNaN(Number(value))) {
@@ -158,6 +150,14 @@ function useRowsData(filePath) {
 
   return state;
 }
+
+const XRAY_KIND_LINKS = [
+  { kind: "party", label: "Partidos", href: "/people/xray/party/" },
+  { kind: "institution", label: "Instituciones", href: "/people/xray/institution/" },
+  { kind: "ambito", label: "Ámbitos", href: "/people/xray/ambito/" },
+  { kind: "territorio", label: "Territorios", href: "/people/xray/territorio/" },
+  { kind: "cargo", label: "Cargos", href: "/people/xray/cargo/" },
+];
 
 function rowGetter(columns) {
   const map = {};
@@ -515,14 +515,14 @@ export default function PeoplePage() {
 
   if (manifestError || !manifest) {
     return (
-      <main className="shell">
-        <section className="card block">
-          <h2>Directorio no disponible</h2>
-          <p className="sub">No pude cargar el manifiesto estático de perfiles.</p>
-          <p className="sub">Error: {manifestError || "sin datos"}</p>
-          <p className="sub">
-            Asegura regenerar <code>docs/gh-pages/people/data/profiles.json</code> con{" "}
-            <code>just explorer-gh-pages-build</code> o con{" "}
+      <main className="people-directory-page shell">
+        <section className="people-directory-error card block">
+          <h2 className="people-directory-error__title">Directorio no disponible</h2>
+          <p className="people-directory-error__message sub">No pude cargar el manifiesto estático de perfiles.</p>
+          <p className="people-directory-error__message sub">Error: {manifestError || "sin datos"}</p>
+          <p className="people-directory-error__hint sub">
+            Asegura regenerar <code>ui/gh-pages-next/public/people/data/profiles.json</code> con{" "}
+            <code>just cloudflare-pages-build</code> o con{" "}
             <code>GH_PAGES_NEXT_PRIME_EXPORT=1 just gh-pages-next</code>.
           </p>
         </section>
@@ -540,7 +540,7 @@ export default function PeoplePage() {
                 ? `Cargando el perfil ${selectedPersonId}…`
                 : selectedPersonId > 0
                 ? `No se encontró el perfil ${selectedPersonId} en esta vista.`
-                : "Selecciona una persona para ver su ficha."}
+                : "Selecciona una persona para ver su xray."}
           </p>
         ) : (
         <>
@@ -634,7 +634,7 @@ export default function PeoplePage() {
           <div style={{ marginTop: 12 }}>
             <h3 style={{ margin: "0 0 8px" }}>Etiquetas del perfil</h3>
             <p className="sub" style={{ marginBottom: 8 }}>
-              Roles, instituciones y partidos con acceso directo a sus perfiles agrupados.
+              Roles, instituciones y partidos (enlace a x-ray de entidad).
             </p>
             <div className="profileTags">
               {xrayProfiles.roles.length ? (
@@ -704,13 +704,13 @@ export default function PeoplePage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Personas</p>
+        <p className="eyebrow">Directory + Xray</p>
         <h1>Personas y trayectoria pública</h1>
         <p className="sub">
           Directorio navegable de personas con resumen de actividad, posiciones que han ocupado y cola de datos públicos faltantes.
         </p>
         <div className="chips">
-          <span className="chip">Publicación: {manifest.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Snapshot: {manifest.meta?.snapshot_date || "—"}</span>
           <span className="chip">Personas: {formatInt(manifest.meta?.people_total || 0)}</span>
           <span className="chip">Buckets: {formatInt((manifest.buckets || []).length)}</span>
         </div>
@@ -775,7 +775,7 @@ export default function PeoplePage() {
         </div>
 
         <div className="blockHead" style={{ marginTop: 10 }}>
-          <h2>Perfiles por dimensión</h2>
+          <h2>X-ray por dimensión</h2>
         </div>
         <p className="sub">
           Perfiles agregados por partido, institución, ámbito, territorio y cargo.

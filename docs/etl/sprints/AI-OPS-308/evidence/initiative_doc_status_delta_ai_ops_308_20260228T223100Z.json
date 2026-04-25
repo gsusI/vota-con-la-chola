@@ -1,0 +1,98 @@
+{
+  "overall": {
+    "downloaded_doc_links": {
+      "before": 4222,
+      "after": 4236,
+      "delta": 14
+    },
+    "missing_doc_links": {
+      "before": 4510,
+      "after": 4496,
+      "delta": -14
+    },
+    "missing_doc_links_actionable": {
+      "before": 4439,
+      "after": 4425,
+      "delta": -14
+    },
+    "linked_to_votes_with_downloaded_docs": {
+      "before": 743,
+      "after": 745,
+      "delta": 2
+    },
+    "effective_downloaded_doc_links_pct": {
+      "before": 48.75,
+      "after": 48.91,
+      "delta": 0.16
+    },
+    "extraction_coverage_pct": {
+      "before": 99.6,
+      "after": 100.0,
+      "delta": 0.4
+    }
+  },
+  "senado": {
+    "downloaded_doc_links": {
+      "before": 3410,
+      "after": 3424,
+      "delta": 14
+    },
+    "missing_doc_links": {
+      "before": 4510,
+      "after": 4496,
+      "delta": -14
+    },
+    "missing_doc_links_actionable": {
+      "before": 4439,
+      "after": 4425,
+      "delta": -14
+    },
+    "linked_to_votes_with_downloaded_docs": {
+      "before": 639,
+      "after": 641,
+      "delta": 2
+    },
+    "effective_downloaded_doc_links_pct": {
+      "before": 43.45,
+      "after": 43.62,
+      "delta": 0.17
+    },
+    "extraction_coverage_pct": {
+      "before": 99.5,
+      "after": 100.0,
+      "delta": 0.5
+    }
+  },
+  "waf": {
+    "missing_urls": {
+      "before": 663,
+      "after": 649,
+      "delta": -14
+    },
+    "blocked_403_urls": {
+      "before": 567,
+      "after": 475,
+      "delta": -92
+    },
+    "blocked_403_rate": {
+      "before": 0.855204,
+      "after": 0.731895,
+      "delta": -0.123309
+    },
+    "blocked_500_urls": {
+      "before": 71,
+      "after": 60,
+      "delta": -11
+    },
+    "zero_doc_initiatives": {
+      "before": 8,
+      "after": 6,
+      "delta": -2
+    }
+  },
+  "queue": {
+    "actionable_rows_before": 663,
+    "actionable_rows_after": 649,
+    "actionable_rows_delta": -14
+  }
+}

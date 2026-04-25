@@ -1,0 +1,30 @@
+{
+  "slice": "AI-OPS-317",
+  "timestamp_utc": "20260228T223428Z",
+  "totals_before": {
+    "missing_urls": 1252,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 666,
+    "blocked_403_rate": 0.531949,
+    "blocked_500_urls": 101,
+    "unknown_status_urls": 377,
+    "zero_doc_initiatives": 6
+  },
+  "totals_after": {
+    "missing_urls": 1252,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 666,
+    "blocked_403_rate": 0.531949,
+    "blocked_500_urls": 101,
+    "unknown_status_urls": 297,
+    "zero_doc_initiatives": 6
+  },
+  "delta": {
+    "missing_urls": 0,
+    "missing_initiatives": 0,
+    "blocked_403_urls": 0,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": -80,
+    "zero_doc_initiatives": 0
+  }
+}

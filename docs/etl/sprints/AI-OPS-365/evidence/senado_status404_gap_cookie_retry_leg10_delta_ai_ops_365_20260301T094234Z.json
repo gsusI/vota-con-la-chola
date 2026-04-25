@@ -1,0 +1,34 @@
+{
+  "generated_at_utc": "20260301T094234Z",
+  "sprint": "AI-OPS-365",
+  "lane": "status404_detalleiniciativa_cookie_leg10_probe",
+  "runtime_seconds": 311.00,
+  "retry_summary": {
+    "candidate_urls": 18,
+    "urls_to_fetch": 18,
+    "fetched_ok": 0,
+    "failures_total": 18,
+    "archive_hits": 0,
+    "archive_fetched_ok": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": {
+      "before": 5202,
+      "after": 5202,
+      "delta": 0
+    },
+    "missing_doc_links_actionable": {
+      "before": 4160,
+      "after": 4160,
+      "delta": 0
+    },
+    "missing_urls": {
+      "before": 384,
+      "after": 384,
+      "delta": 0
+    }
+  },
+  "dod_check": {
+    "delta_target_met": false
+  }
+}

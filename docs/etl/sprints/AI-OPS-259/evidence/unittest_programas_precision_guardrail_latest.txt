@@ -1,0 +1,46 @@
+.......................
+----------------------------------------------------------------------
+Ran 23 tests in 25.412s
+
+OK
+{
+  "sample_file": "/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpwp0so8lo.csv",
+  "sample_total": 1,
+  "reviewed_total": 1,
+  "unlabeled_rows": 0,
+  "invalid_label_rows": 0,
+  "true_positive": 0,
+  "false_positive": 1,
+  "precision": 0.0,
+  "threshold": 0.9,
+  "min_reviewed": 1,
+  "required_parties": [
+    "BNG"
+  ],
+  "reviewed_by_required_party": {
+    "BNG": 1
+  },
+  "missing_required_parties": [],
+  "false_positive_evidence_ids": [
+    1
+  ],
+  "by_party": {
+    "BNG": {
+      "total": 1,
+      "tp": 0,
+      "fp": 1,
+      "precision": 0.0
+    }
+  },
+  "checks": {
+    "meets_min_reviewed": true,
+    "meets_precision_threshold": false,
+    "required_parties_covered": true,
+    "no_invalid_labels": true
+  },
+  "status": "degraded",
+  "passed": false,
+  "strict_fail_reasons": [
+    "precision_below_threshold"
+  ]
+}

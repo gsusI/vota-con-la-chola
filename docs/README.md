@@ -1,13 +1,14 @@
 # Docs (KISS)
 
 Fuente de verdad (roadmaps):
-- `docs/roadmap.md` (visión macro: producto + datos + “acción revelada + impacto”).
-- `docs/roadmap-tecnico.md` (ejecución: cerrar “dicen/hacen”, fiabilidad y recomendación).
-- Visión y misión canónicas: sección `Visión y misión` en `docs/roadmap.md`.
+- `ROADMAP.md` (futuro, secuencia y prioridades canónicas).
+- `docs/roadmap.md` (visión macro, modelo y arquitectura de producto/datos).
+- `docs/roadmap-tecnico.md` (ejecución derivada; no introduce scope nuevo por su cuenta).
+- Visión y misión canónicas: `ROADMAP.md` + sección `Visión y misión` en `docs/roadmap.md`.
 
 Backlog operativo (una sola lista):
 - `docs/etl/e2e-scrape-load-tracker.md` (conectores + criterio de cierre (Definition of Done, DoD) + estado `DONE/PARTIAL/TODO`).
-- Índice único de TODO: `docs/todo/README.md` (punto de entrada; sin duplicar backlog).
+- Índice único de TODO: `docs/todo/README.md` (punto de entrada; sin duplicar backlog ni roadmap).
 
 Cómo correr el ETL y la UI:
 - `docs/etl/README.md`
@@ -31,5 +32,5 @@ Contexto mínimo (sin duplicar roadmaps):
 
 Otros:
 - `docs/proximas-elecciones-espana.md` (se genera junto a `etl/data/published/proximas-elecciones-espana.json`).
-- `ui/gh-pages-next/` es la app Next.js estática que genera el landing de `docs/gh-pages/` en `just explorer-gh-pages-build`.
-- `docs/gh-pages/` es salida generada (no editar a mano).
+- `ui/gh-pages-next/` es la app Next.js estática que genera el sitio público de Cloudflare Pages con `just cloudflare-pages-build`.
+- `ui/gh-pages-next/out/` es salida generada para Cloudflare Pages; no editar a mano ni versionar.

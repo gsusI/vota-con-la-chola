@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exporta una instantánea estática (preview) de temas/posiciones para GitHub Pages.
+"""Exporta una instantánea estática (preview) de temas/posiciones para Cloudflare Pages.
 
 Objetivo: que /explorer-temas/ funcione sin /api (preview), y que opcionalmente
 pueda apuntar a un API real via ?api=...
@@ -18,9 +18,9 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Exporta snapshot (preview) para explorer-temas (GitHub Pages)")
+    p = argparse.ArgumentParser(description="Exporta snapshot (preview) para explorer-temas (Cloudflare Pages)")
     p.add_argument("--db", default=str(DEFAULT_DB), help="Ruta a la base SQLite")
-    p.add_argument("--out", required=True, help="Ruta de salida JSON (p.ej. docs/gh-pages/explorer-temas/data/temas-preview.json)")
+    p.add_argument("--out", required=True, help="Ruta de salida JSON (p.ej. ui/gh-pages-next/public/explorer-temas/data/temas-preview.json)")
     p.add_argument("--limit-topic-sets", type=int, default=250, help="Max filas a exportar de topic_sets")
     p.add_argument("--limit-topics", type=int, default=500, help="Max filas a exportar de topics")
     p.add_argument("--limit-topic-set-topics", type=int, default=2000, help="Max filas a exportar de topic_set_topics")

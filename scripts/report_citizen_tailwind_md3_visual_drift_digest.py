@@ -14,10 +14,10 @@ DEFAULT_TAILWIND_CONTRACT_JSON = Path("docs/etl/sprints/AI-OPS-96/evidence/citiz
 DEFAULT_SOURCE_TOKENS = Path("ui/citizen/tailwind_md3.tokens.json")
 DEFAULT_SOURCE_CSS = Path("ui/citizen/tailwind_md3.generated.css")
 DEFAULT_SOURCE_UI_HTML = Path("ui/citizen/index.html")
-DEFAULT_PUBLISHED_TOKENS = Path("docs/gh-pages/citizen/tailwind_md3.tokens.json")
-DEFAULT_PUBLISHED_DATA_TOKENS = Path("docs/gh-pages/citizen/data/tailwind_md3.tokens.json")
-DEFAULT_PUBLISHED_CSS = Path("docs/gh-pages/citizen/tailwind_md3.generated.css")
-DEFAULT_PUBLISHED_UI_HTML = Path("docs/gh-pages/citizen/index.html")
+DEFAULT_PUBLISHED_TOKENS = Path("ui/gh-pages-next/public/citizen/tailwind_md3.tokens.json")
+DEFAULT_PUBLISHED_DATA_TOKENS = Path("ui/gh-pages-next/public/citizen/data/tailwind_md3.tokens.json")
+DEFAULT_PUBLISHED_CSS = Path("ui/gh-pages-next/public/citizen/tailwind_md3.generated.css")
+DEFAULT_PUBLISHED_UI_HTML = Path("ui/gh-pages-next/public/citizen/index.html")
 
 HTML_COMPONENT_MARKERS = ("md3-card", "md3-chip", "md3-button", "md3-tab")
 

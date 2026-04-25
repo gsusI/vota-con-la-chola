@@ -1,0 +1,59 @@
+{
+  "pre_path": "docs/etl/sprints/AI-OPS-274/evidence/programas_empleo_fiscal_snippets_audit_cross_party_latest.json",
+  "post_path": "docs/etl/sprints/AI-OPS-275/evidence/programas_empleo_fiscal_snippets_audit_cross_party_latest.json",
+  "pre_status": "degraded",
+  "post_status": "ok",
+  "pre_suspicious_support_rows": 4,
+  "post_suspicious_support_rows": 0,
+  "pre_support_rows": 8,
+  "post_support_rows": 4,
+  "pre_unclear_rows": 5,
+  "post_unclear_rows": 9,
+  "by_party_delta": [
+    {
+      "party_name": "BNG",
+      "pre_support_rows": 1,
+      "post_support_rows": 1,
+      "pre_unclear_rows": 1,
+      "post_unclear_rows": 1,
+      "pre_suspicious_support_rows": 0,
+      "post_suspicious_support_rows": 0
+    },
+    {
+      "party_name": "CCa",
+      "pre_support_rows": 0,
+      "post_support_rows": 0,
+      "pre_unclear_rows": 1,
+      "post_unclear_rows": 1,
+      "pre_suspicious_support_rows": 0,
+      "post_suspicious_support_rows": 0
+    },
+    {
+      "party_name": "Compromis",
+      "pre_support_rows": 4,
+      "post_support_rows": 0,
+      "pre_unclear_rows": 0,
+      "post_unclear_rows": 4,
+      "pre_suspicious_support_rows": 4,
+      "post_suspicious_support_rows": 0
+    },
+    {
+      "party_name": "EAJ-PNV",
+      "pre_support_rows": 3,
+      "post_support_rows": 3,
+      "pre_unclear_rows": 0,
+      "post_unclear_rows": 0,
+      "pre_suspicious_support_rows": 0,
+      "post_suspicious_support_rows": 0
+    },
+    {
+      "party_name": "VOX",
+      "pre_support_rows": 0,
+      "post_support_rows": 0,
+      "pre_unclear_rows": 3,
+      "post_unclear_rows": 3,
+      "pre_suspicious_support_rows": 0,
+      "post_suspicious_support_rows": 0
+    }
+  ]
+}

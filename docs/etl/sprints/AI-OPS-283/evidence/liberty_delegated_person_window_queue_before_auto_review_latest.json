@@ -1,0 +1,220 @@
+{
+  "generated_at": "2026-02-28T17:23:59+00:00",
+  "status": "ok",
+  "strict_fail_reasons": [],
+  "institution_hint_terms": [
+    "ministerio",
+    "direccion",
+    "dirección",
+    "agencia",
+    "delegacion",
+    "delegación",
+    "delegaciones",
+    "subdelegacion",
+    "subdelegación",
+    "subdelegaciones",
+    "inspeccion",
+    "inspección",
+    "organismo",
+    "gobierno",
+    "dgt",
+    "aeat",
+    "itss"
+  ],
+  "gate": {
+    "passed": true,
+    "thresholds": {
+      "max_actionable_rows": -1
+    }
+  },
+  "checks": {
+    "delegated_links_present": true,
+    "actionable_queue_materialized": true,
+    "max_actionable_rows_gate": true
+  },
+  "totals": {
+    "links_total": 8,
+    "actionable_queue_rows": 8,
+    "missing_designated_actor_total": 2,
+    "institutional_designated_actor_total": 6,
+    "missing_appointment_start_total": 0,
+    "invalid_or_inverted_window_total": 0,
+    "missing_enforcement_evidence_total": 1
+  },
+  "by_reason": {
+    "missing_designated_actor": 2,
+    "missing_enforcement_evidence_date": 1,
+    "institutional_designated_actor": 6
+  },
+  "queue_rows": [
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "norm_id": "es:boe-a-2004-18398",
+      "boe_id": "BOE-A-2004-18398",
+      "norm_title": "Regimen sancionador tributario (reglamento)",
+      "fragment_label": "Bloque procedimental y de graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Unidad procedimental sancionadora",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Graduacion y tramitacion procedimental",
+      "enforcement_evidence_date": "",
+      "chain_confidence": 0.59,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "reasons": [
+        "missing_designated_actor",
+        "missing_enforcement_evidence_date"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "norm_id": "es:boe-a-2000-15060",
+      "boe_id": "BOE-A-2000-15060",
+      "norm_title": "Texto refundido de la Ley sobre infracciones y sanciones en el orden social",
+      "fragment_label": "Bloque de tipificacion laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "designated_actor_label": "",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "reasons": [
+        "missing_designated_actor"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "norm_id": "es:boe-a-2015-11724",
+      "boe_id": "BOE-A-2015-11724",
+      "norm_title": "Ley Organica de proteccion de la seguridad ciudadana",
+      "fragment_label": "Bloque de infracciones y sanciones",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "designated_actor_label": "Organismo Estatal ITSS",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.74,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "reasons": [
+        "institutional_designated_actor"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2003-23186",
+      "boe_id": "BOE-A-2003-23186",
+      "norm_title": "Referencia sancionadora BOE-A-2003-23186",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "designated_actor_label": "Delegaciones AEAT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "reasons": [
+        "institutional_designated_actor"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Unidad sancionadora DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "norm_id": "es:boe-a-1994-8985",
+      "boe_id": "BOE-A-1994-8985",
+      "norm_title": "Reglamento del procedimiento sancionador en materia de trafico",
+      "fragment_label": "Bloque procedimental sancionador",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Subdireccion de Gestion de Sanciones",
+      "designated_actor_label": "Unidad sancionadora DGT",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "reasons": [
+        "institutional_designated_actor"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-3442",
+      "boe_id": "BOE-A-2015-3442",
+      "norm_title": "Referencia sancionadora BOE-A-2015-3442",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio del Interior",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "designated_actor_label": "Delegaciones del Gobierno",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "reasons": [
+        "institutional_designated_actor"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "norm_id": "es:boe-a-2003-23514",
+      "boe_id": "BOE-A-2003-23514",
+      "norm_title": "Ley General Tributaria",
+      "fragment_label": "Bloque de infracciones tributarias",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "designated_actor_label": "Agencia Estatal de Administracion Tributaria",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "reasons": [
+        "institutional_designated_actor"
+      ]
+    },
+    {
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "norm_id": "es:boe-a-2015-11722",
+      "boe_id": "BOE-A-2015-11722",
+      "norm_title": "Ley sobre trafico, circulacion de vehiculos a motor y seguridad vial (texto refundido)",
+      "fragment_label": "Bloque sancionador principal",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "designated_actor_label": "Direccion General de Trafico",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "reasons": [
+        "institutional_designated_actor"
+      ]
+    }
+  ]
+}

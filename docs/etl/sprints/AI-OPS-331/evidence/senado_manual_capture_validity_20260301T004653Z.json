@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-03-01T00:50:45+00:00",
+  "status": "ok",
+  "captures_glob": "etl/data/raw/manual/senado_iniciativas_cookie_seed_refresh_*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "thresholds": {
+    "min_captures": 1
+  },
+  "totals": {
+    "captures_total": 1,
+    "usable_captures_total": 1,
+    "access_denied_captures_total": 0,
+    "cookies_domain_total": 6
+  },
+  "checks": {
+    "has_min_captures": true,
+    "has_usable_capture": true
+  },
+  "strict_fail_reasons": [],
+  "captures": [
+    {
+      "meta_file": "senado_iniciativas_cookie_seed_refresh_20260218T201301Z.meta.json",
+      "html_file": "senado_iniciativas_cookie_seed_refresh_20260218T201301Z.html",
+      "cookie_file": "senado_iniciativas_cookie_seed_refresh_20260218T201301Z.cookies.json",
+      "result_status": "captured",
+      "title": "Iniciativas parlamentarias | Senado de España",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=610&id2=000002",
+      "html_len": 61746,
+      "access_denied_detected": false,
+      "cookies_total": 6,
+      "cookies_domain_total": 6,
+      "usable_capture": true
+    }
+  ]
+}

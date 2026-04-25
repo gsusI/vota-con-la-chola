@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exporta una instantánea estática (preview) de votaciones para GitHub Pages.
+"""Exporta una instantánea estática (preview) de votaciones para Cloudflare Pages.
 
 Objetivo: que /explorer-votaciones/ funcione sin /api (preview), y que opcionalmente
 pueda apuntar a un API real via ?api=...
@@ -17,7 +17,7 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Exporta snapshot (preview) de votaciones para explorer-votaciones (GitHub Pages)")
+    p = argparse.ArgumentParser(description="Exporta snapshot (preview) de votaciones para explorer-votaciones (Cloudflare Pages)")
     p.add_argument("--db", default=str(DEFAULT_DB), help="Ruta a la base SQLite")
     p.add_argument("--out", required=True, help="Ruta de salida JSON")
     p.add_argument("--limit", type=int, default=200, help="Numero de eventos a exportar (ordenado por fecha desc)")
@@ -64,4 +64,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

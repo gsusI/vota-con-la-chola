@@ -1,0 +1,240 @@
+{
+  "generated_at": "2026-04-13T18:05:15+00:00",
+  "run_kind": "source_scrape_queue_one_go_r2_summary",
+  "db_path": "etl/data/staging/politicos-es.one-go-r2-2026-04-13.db",
+  "snapshot_date": "2026-04-13",
+  "catalog_summary": {
+    "sources_total": 45,
+    "desired_total": 45,
+    "in_db_total": 45,
+    "active_total": 45,
+    "with_network_total": 25,
+    "with_any_data_total": 40,
+    "sample_backed_total": 44,
+    "blocked_total": 3,
+    "tracker_done_total": 35,
+    "sql_done_total": 25,
+    "ops_ok_total": 31,
+    "under_threshold_total": 9,
+    "done_zero_real_total": 13,
+    "mismatch_total": 21,
+    "missing_source_ids_total": 0,
+    "legal_status_counts": {
+      "pending_review": 23,
+      "verified": 18,
+      "partially_verified": 3,
+      "not_verified": 1
+    },
+    "by_domain": [
+      {
+        "key": "infoelectoral",
+        "sources_total": 2,
+        "desired_total": 2,
+        "in_db_total": 2,
+        "active_total": 2,
+        "with_network_total": 1,
+        "tracker_done_total": 2,
+        "sql_done_total": 1,
+        "blocked_total": 0,
+        "mismatch_total": 1
+      },
+      {
+        "key": "parlamentario",
+        "sources_total": 7,
+        "desired_total": 7,
+        "in_db_total": 7,
+        "active_total": 7,
+        "with_network_total": 4,
+        "tracker_done_total": 2,
+        "sql_done_total": 4,
+        "blocked_total": 0,
+        "mismatch_total": 6
+      },
+      {
+        "key": "politicos",
+        "sources_total": 36,
+        "desired_total": 36,
+        "in_db_total": 36,
+        "active_total": 36,
+        "with_network_total": 20,
+        "tracker_done_total": 31,
+        "sql_done_total": 20,
+        "blocked_total": 3,
+        "mismatch_total": 14
+      }
+    ],
+    "by_scope": [
+      {
+        "key": "autonomico",
+        "sources_total": 19,
+        "desired_total": 19,
+        "in_db_total": 19,
+        "active_total": 19,
+        "with_network_total": 16,
+        "tracker_done_total": 18,
+        "sql_done_total": 16,
+        "blocked_total": 1,
+        "mismatch_total": 2
+      },
+      {
+        "key": "dinero",
+        "sources_total": 6,
+        "desired_total": 6,
+        "in_db_total": 6,
+        "active_total": 6,
+        "with_network_total": 0,
+        "tracker_done_total": 4,
+        "sql_done_total": 0,
+        "blocked_total": 0,
+        "mismatch_total": 6
+      },
+      {
+        "key": "ejecutivo",
+        "sources_total": 2,
+        "desired_total": 2,
+        "in_db_total": 2,
+        "active_total": 2,
+        "with_network_total": 0,
+        "tracker_done_total": 2,
+        "sql_done_total": 0,
+        "blocked_total": 0,
+        "mismatch_total": 2
+      },
+      {
+        "key": "electoral",
+        "sources_total": 2,
+        "desired_total": 2,
+        "in_db_total": 2,
+        "active_total": 2,
+        "with_network_total": 1,
+        "tracker_done_total": 2,
+        "sql_done_total": 1,
+        "blocked_total": 0,
+        "mismatch_total": 1
+      },
+      {
+        "key": "europeo",
+        "sources_total": 1,
+        "desired_total": 1,
+        "in_db_total": 1,
+        "active_total": 1,
+        "with_network_total": 1,
+        "tracker_done_total": 1,
+        "sql_done_total": 1,
+        "blocked_total": 0,
+        "mismatch_total": 0
+      },
+      {
+        "key": "legal",
+        "sources_total": 1,
+        "desired_total": 1,
+        "in_db_total": 1,
+        "active_total": 1,
+        "with_network_total": 0,
+        "tracker_done_total": 1,
+        "sql_done_total": 0,
+        "blocked_total": 0,
+        "mismatch_total": 1
+      },
+      {
+        "key": "municipal",
+        "sources_total": 1,
+        "desired_total": 1,
+        "in_db_total": 1,
+        "active_total": 1,
+        "with_network_total": 1,
+        "tracker_done_total": 1,
+        "sql_done_total": 1,
+        "blocked_total": 0,
+        "mismatch_total": 0
+      },
+      {
+        "key": "nacional",
+        "sources_total": 9,
+        "desired_total": 9,
+        "in_db_total": 9,
+        "active_total": 9,
+        "with_network_total": 6,
+        "tracker_done_total": 4,
+        "sql_done_total": 6,
+        "blocked_total": 0,
+        "mismatch_total": 6
+      },
+      {
+        "key": "outcomes",
+        "sources_total": 4,
+        "desired_total": 4,
+        "in_db_total": 4,
+        "active_total": 4,
+        "with_network_total": 0,
+        "tracker_done_total": 2,
+        "sql_done_total": 0,
+        "blocked_total": 2,
+        "mismatch_total": 3
+      }
+    ],
+    "tracker": {
+      "items_total": 300,
+      "unmapped": 254,
+      "todo": 27,
+      "partial": 26,
+      "done": 246,
+      "mismatch": 1,
+      "waived_mismatch": 0,
+      "done_zero_real": 13,
+      "untracked_sources": 7,
+      "waivers_active": 0,
+      "waivers_expired": 0,
+      "waivers_error": ""
+    }
+  },
+  "queue_summary": {
+    "queue_items_total": 23,
+    "p0_total": 3,
+    "p1_total": 17,
+    "p2_total": 3,
+    "by_reason": {
+      "missing_reproducible_network_run": 17,
+      "blocked_upstream": 3,
+      "tracker_mismatch": 3
+    },
+    "by_domain": {
+      "politicos": 16,
+      "infoelectoral": 1,
+      "parlamentario": 6
+    },
+    "by_scope": {
+      "autonomico": 3,
+      "dinero": 6,
+      "ejecutivo": 2,
+      "electoral": 1,
+      "legal": 1,
+      "nacional": 6,
+      "outcomes": 4
+    },
+    "by_repeatability_state": {
+      "sample_replay_only": 16,
+      "blocked_with_sample": 3,
+      "network_verified": 3,
+      "manual_capture_required": 1
+    },
+    "repeatable_now_total": 22,
+    "sample_backed_total": 22,
+    "blocked_total": 3,
+    "batches_total": 12,
+    "catalog_sources_total": 45
+  },
+  "blocked_upstream_source_ids": [
+    "parlamento_galicia_deputados",
+    "aemet_opendata_series",
+    "ree_esios_indicators"
+  ],
+  "manual_capture_required_source_ids": [
+    "parl_initiative_docs"
+  ],
+  "notes": [
+    "DB-derived summary after one-pass repeatable queue execution.",
+    "Derived money output sources no longer emit fake ingest commands.",
+    "Wrapper summary for rerun was not persisted; this file captures the resulting DB state instead."
+  ]
+}

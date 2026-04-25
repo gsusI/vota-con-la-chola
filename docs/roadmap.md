@@ -2,6 +2,11 @@
 
 Este documento es el roadmap "macro" del proyecto.
 
+Nota (`2026-04-12`):
+- `ROADMAP.md` es ahora la fuente de verdad canónica para el futuro y la secuencia del proyecto.
+- Este documento se mantiene como marco macro de producto/datos/arquitectura.
+- Si quieres añadir o cambiar scope futuro, actualiza primero `ROADMAP.md`.
+
 Fuente de verdad para ejecucion y estado (no duplicar roadmaps en otros docs):
 - `docs/roadmap-tecnico.md` (ejecucion de corto plazo).
 - `docs/etl/e2e-scrape-load-tracker.md` (backlog operativo de conectores/quality).

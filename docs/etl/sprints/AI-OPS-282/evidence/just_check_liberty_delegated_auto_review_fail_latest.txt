@@ -1,0 +1,21 @@
+PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_auto_review_decisions.py --review-queue-csv docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv --review-assist-csv docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv --min-candidate-score 25 --max-candidates-per-link 3 --strict-min-approved-rows 9 --out docs/etl/sprints/AI-OPS-282/exports/liberty_delegated_person_window_auto_review_decisions_latest.csv --summary-out docs/etl/sprints/AI-OPS-282/evidence/liberty_delegated_person_window_auto_review_decisions_latest.json
+{
+  "review_queue_csv": "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv",
+  "review_assist_csv": "docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv",
+  "out_csv": "docs/etl/sprints/AI-OPS-282/exports/liberty_delegated_person_window_auto_review_decisions_latest.csv",
+  "summary": {
+    "status": "ok",
+    "rows_total": 8,
+    "rows_with_assist_candidates_total": 5,
+    "approved_rows_total": 5,
+    "pending_rows_total": 3,
+    "approved_with_actor_update_total": 5,
+    "approved_with_evidence_date_update_total": 0,
+    "rows_missing_candidate_total": 3,
+    "rows_missing_required_person_hint_total": 0,
+    "rows_missing_required_evidence_date_total": 0,
+    "min_candidate_score": 25,
+    "max_candidates_per_link": 3
+  }
+}
+error: Recipe `parl-check-liberty-delegated-person-window-auto-review-decisions` failed on line 2461 with exit code 4

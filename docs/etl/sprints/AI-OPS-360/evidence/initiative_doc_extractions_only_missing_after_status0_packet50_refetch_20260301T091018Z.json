@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 50,
+  "upserted": 50,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 50
+  },
+  "by_doc_format": {
+    "xml": 50
+  },
+  "sample": [
+    {
+      "source_record_pk": 147740,
+      "sample_initiative_id": "senado:leg14:exp:610/000060",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo sobre la transferencia y mutualización de las aportaciones al Fondo Único de Resolución entre el Reino de Bélgica, la República de Bulgaria, la República Checa, el Reino de Dinamarca, la República Federal de Alemania, la República de Estonia, Irlanda, la República Helénica, el Reino de España, la República Fra…"
+    },
+    {
+      "source_record_pk": 147739,
+      "sample_initiative_id": "senado:leg14:exp:610/000059",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo por el que se modifica el Tratado constitutivo del Mecanismo Europeo de Estabilidad entre el Reino de Bélgica, la República Federal de Alemania, la República de Estonia, Irlanda, la República Helénica, el Reino de España, la República Francesa, la República Italiana, la República de Chipre, la República de Let…"
+    },
+    {
+      "source_record_pk": 147737,
+      "sample_initiative_id": "senado:leg14:exp:610/000057",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Níger sobre el libre ejercicio de actividades remuneradas para familiares dependientes del personal diplomático, consular, administrativo y técnico de Misiones Diplomáticas y Oficinas Consulares, hecho en Niamey el 29 de octubre de 2018. (610/000057)"
+    },
+    {
+      "source_record_pk": 147701,
+      "sample_initiative_id": "senado:leg14:exp:610/000021",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio Multilateral para aplicar las medidas relacionadas con los tratados fiscales para prevenir la erosión de las bases imponibles y el traslado de beneficios, hecho en París el 24 de noviembre de 2016, así como Declaraciones y Reservas que España desea formular. (610/000021)"
+    },
+    {
+      "source_record_pk": 147711,
+      "sample_initiative_id": "senado:leg14:exp:610/000031",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración, Actas y Resoluciones de la Unión Postal de las Américas, España y Portugal (UPAEP), adoptadas \"ad referendum\" en Montevideo el 22 de noviembre de 2017 durante el XXIII Congreso Ordinario de la Unión Postal de las Américas, España y Portugal. (610/000031)"
+    },
+    {
+      "source_record_pk": 147698,
+      "sample_initiative_id": "senado:leg14:exp:610/000018",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo de enmienda del Convenio del Consejo de Europa para la protección de las personas con respecto al tratamiento automatizado de datos de carácter personal, hecho en Estrasburgo el 10 de octubre de 2018, y Declaración que España desea formular. (610/000018)"
+    },
+    {
+      "source_record_pk": 147704,
+      "sample_initiative_id": "senado:leg14:exp:610/000024",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y la República Popular China para eliminar la doble imposición en relación con los impuestos sobre la renta y prevenir la elusión y evasión fiscales y su Protocolo, hecho en Madrid el 28 de noviembre de 2018. (610/000024)"
+    },
+    {
+      "source_record_pk": 147703,
+      "sample_initiative_id": "senado:leg14:exp:610/000023",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y la República de Bielorrusia para evitar la doble imposición y prevenir la evasión fiscal en materia de impuestos sobre la renta y sobre el patrimonio y su Protocolo, hecho en Madrid el 14 de junio de 2017. (610/000023)"
+    },
+    {
+      "source_record_pk": 147708,
+      "sample_initiative_id": "senado:leg14:exp:610/000028",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Reino Unido de Gran Bretaña e Irlanda del Norte sobre la participación en determinadas elecciones de nacionales de cada país residentes en el territorio del otro, hecho en Madrid el 21 de enero de 2019. (610/000028)"
+    },
+    {
+      "source_record_pk": 147732,
+      "sample_initiative_id": "senado:leg14:exp:610/000052",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Modificación de las reservas a formular por España en relación con el Convenio multilateral para aplicar las medidas relacionadas con los tratados fiscales para prevenir la erosión de las bases imponibles y el traslado de beneficios. (610/000052)"
+    },
+    {
+      "source_record_pk": 147694,
+      "sample_initiative_id": "senado:leg14:exp:610/000014",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de asociación global y reforzado entre la Unión Europea y la Comunidad Europea de la Energía Atómica y sus Estados Miembros, por una parte, y la República de Armenia, por otra, hecho en Bruselas el 24 de noviembre de 2017. (610/000014)"
+    },
+    {
+      "source_record_pk": 147731,
+      "sample_initiative_id": "senado:leg14:exp:610/000051",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y Ucrania para eliminar la doble imposición en relación con los impuestos sobre la renta y prevenir la elusión y evasión fiscales y su Protocolo, hecho en Madrid el 10 de septiembre de 2020. (610/000051)"
+    },
+    {
+      "source_record_pk": 147695,
+      "sample_initiative_id": "senado:leg14:exp:610/000015",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y Rumanía para eliminar la doble imposición en relación con los impuestos sobre la renta y prevenir la evasión y elusión fiscales y su Protocolo, hecho en Bucarest el 18 de octubre de 2017. (610/000015)"
+    },
+    {
+      "source_record_pk": 147717,
+      "sample_initiative_id": "senado:leg14:exp:610/000037",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y Japón para eliminar la doble imposición en relación con los impuestos sobre la renta y prevenir la elusión y evasión fiscales y de su Protocolo, hecho en Madrid el 16 de octubre de 2018. (610/000037)"
+    },
+    {
+      "source_record_pk": 147696,
+      "sample_initiative_id": "senado:leg14:exp:610/000016",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y la República de Cabo Verde para evitar la doble imposición y prevenir la evasión fiscal en materia de impuestos sobre la renta y su Protocolo, hecho en Madrid el 5 de junio de 2017. (610/000016)"
+    },
+    {
+      "source_record_pk": 147738,
+      "sample_initiative_id": "senado:leg14:exp:610/000058",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la República de Nicaragua al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000058)"
+    },
+    {
+      "source_record_pk": 147720,
+      "sample_initiative_id": "senado:leg14:exp:610/000040",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y la República del Ecuador en materia de cooperación policial para la seguridad y lucha contra la delincuencia organizada transnacional, hecho en Madrid el 26 de julio de 2018. (610/000040)"
+    },
+    {
+      "source_record_pk": 147715,
+      "sample_initiative_id": "senado:leg14:exp:610/000035",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República del Perú para el intercambio y protección recíproca de información clasificada en el ámbito de la defensa, hecho en Madrid el 28 de febrero de 2019. (610/000035)"
+    },
+    {
+      "source_record_pk": 147706,
+      "sample_initiative_id": "senado:leg14:exp:610/000026",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo Anejo al Acuerdo entre el Gobierno del Reino de España y el Gobierno de la República Popular China sobre el establecimiento de Centros Culturales, hecho en Madrid el 28 de noviembre de 2018. (610/000026)"
+    },
+    {
+      "source_record_pk": 147733,
+      "sample_initiative_id": "senado:leg14:exp:610/000053",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de colaboración y cooperación entre la Unión Europea y sus Estados miembros, por una parte, y la República de Singapur, por otra, hecho 'ad referendum' en Bruselas el 19 de octubre de 2018. (610/000053)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

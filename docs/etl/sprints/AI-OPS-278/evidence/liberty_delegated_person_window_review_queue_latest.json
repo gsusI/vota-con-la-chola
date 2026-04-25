@@ -1,0 +1,32 @@
+{
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_delegated_enforcement_seed_v1.json",
+  "queue": {
+    "status": "ok",
+    "totals": {
+      "links_total": 8,
+      "actionable_queue_rows": 8,
+      "missing_designated_actor_total": 2,
+      "institutional_designated_actor_total": 6,
+      "missing_appointment_start_total": 0,
+      "invalid_or_inverted_window_total": 0,
+      "missing_enforcement_evidence_total": 1
+    },
+    "strict_fail_reasons": []
+  },
+  "review_queue": {
+    "status": "ok",
+    "rows_total": 8,
+    "actionable_rows_total": 8,
+    "missing_seed_links_total": 0,
+    "only_actionable": true,
+    "method_version": "delegated_enforcement_v1",
+    "queue_status": "ok",
+    "queue_actionable_rows_total": 8,
+    "by_reason": {
+      "missing_designated_actor": 2,
+      "missing_enforcement_evidence_date": 1,
+      "institutional_designated_actor": 6
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "before": {
+    "downloaded_doc_links": 4414,
+    "missing_doc_links_actionable": 4955,
+    "waf_missing_urls": 1179,
+    "waf_blocked_403_urls": 160,
+    "waf_unknown_status_urls": 217
+  },
+  "after": {
+    "downloaded_doc_links": 4414,
+    "missing_doc_links_actionable": 4955,
+    "waf_missing_urls": 1179,
+    "waf_blocked_403_urls": 160,
+    "waf_unknown_status_urls": 217
+  },
+  "delta": {
+    "downloaded_doc_links": 0,
+    "missing_doc_links": 0,
+    "missing_doc_links_actionable": 0,
+    "doc_links_missing_fetch_status": 0,
+    "effective_downloaded_doc_links_pct": 0.0,
+    "waf_missing_urls": 0,
+    "waf_blocked_403_urls": 0,
+    "waf_unknown_status_urls": 0
+  }
+}

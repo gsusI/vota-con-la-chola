@@ -17,7 +17,7 @@ from statistics import median
 from typing import Any
 
 
-DEFAULT_SNAPSHOT = Path("docs/gh-pages/citizen/data/citizen.json")
+DEFAULT_SNAPSHOT = Path("ui/gh-pages-next/public/citizen/data/citizen.json")
 DEFAULT_MAX_UNKNOWN_RATE = 0.45
 DEFAULT_MAX_TIME_TO_FIRST_ANSWER_SECONDS = 120.0
 DEFAULT_MIN_DRILLDOWN_CLICK_RATE = 0.20

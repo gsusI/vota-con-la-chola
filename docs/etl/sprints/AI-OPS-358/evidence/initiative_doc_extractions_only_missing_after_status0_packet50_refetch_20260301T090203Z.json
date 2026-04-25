@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 50,
+  "upserted": 50,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 50
+  },
+  "by_doc_format": {
+    "xml": 50
+  },
+  "sample": [
+    {
+      "source_record_pk": 147625,
+      "sample_initiative_id": "senado:leg12:exp:621/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2018. (621/000010)"
+    },
+    {
+      "source_record_pk": 147623,
+      "sample_initiative_id": "senado:leg12:exp:621/000008",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adoptan medidas urgentes para paliar los efectos producidos por la sequía en determinadas cuencas hidrográficas y se modifica el texto refundido de la Ley de Aguas, aprobado por Real Decreto Legislativo 1/2001, de 20 de julio (procedente del Real Decreto-Ley 10/2017, de 9 de junio). (621/…"
+    },
+    {
+      "source_record_pk": 147631,
+      "sample_initiative_id": "senado:leg12:exp:621/000016",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley reguladora de los contratos de crédito inmobiliario. (621/000016)"
+    },
+    {
+      "source_record_pk": 147619,
+      "sample_initiative_id": "senado:leg12:exp:621/000004",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Contratos del Sector Público, por la que se transponen al ordenamiento jurídico español las Directivas del Parlamento Europeo y del Consejo, 2014/23/UE y 2014/24/UE, de 26 de febrero de 2014. (621/000004)"
+    },
+    {
+      "source_record_pk": 147633,
+      "sample_initiative_id": "senado:leg12:exp:621/000018",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de mejora de las condiciones para el desempeño de la docencia y la enseñanza en el ámbito de la educación no universitaria. (621/000018)"
+    },
+    {
+      "source_record_pk": 147627,
+      "sample_initiative_id": "senado:leg12:exp:621/000012",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales. (621/000012)"
+    },
+    {
+      "source_record_pk": 147630,
+      "sample_initiative_id": "senado:leg12:exp:621/000015",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el texto refundido de la Ley de Propiedad Intelectual, aprobado por el Real Decreto Legislativo 1/1996, de 12 de abril, y por el que se incorporan al ordenamiento jurídico español la Directiva 2014/26/UE del Parlamento Europeo y del Consejo, de 26 de febrero de 2014, y la Directi…"
+    },
+    {
+      "source_record_pk": 147624,
+      "sample_initiative_id": "senado:leg12:exp:621/000009",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 23/2014, de 20 de noviembre, de reconocimiento mutuo de resoluciones penales en la Unión Europea, para regular la Orden Europea de Investigación. (621/000009)"
+    },
+    {
+      "source_record_pk": 147629,
+      "sample_initiative_id": "senado:leg12:exp:621/000014",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 21/2013, de 9 de diciembre, de evaluación ambiental, la Ley 21/2015, de 20 de julio, por la que se modifica la Ley 43/2003, de 21 de noviembre, de Montes y la Ley 1/2005, de 9 de marzo, por la que se regula el régimen del comercio de derechos de emisión de gases de efecto…"
+    },
+    {
+      "source_record_pk": 147618,
+      "sample_initiative_id": "senado:leg12:exp:621/000003",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley sobre precursores de explosivos. (621/000003)"
+    },
+    {
+      "source_record_pk": 147626,
+      "sample_initiative_id": "senado:leg12:exp:621/000011",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 19/1994, de 6 de julio, de modificación del Régimen Económico y Fiscal de Canarias. (621/000011)"
+    },
+    {
+      "source_record_pk": 147620,
+      "sample_initiative_id": "senado:leg12:exp:621/000005",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se incorpora al ordenamiento jurídico español la Directiva 2013/11/UE, del Parlamento Europeo y del Consejo, de 21 de mayo de 2013, relativa a la resolución alternativa de litigios en materia de consumo. (621/000005)"
+    },
+    {
+      "source_record_pk": 147621,
+      "sample_initiative_id": "senado:leg12:exp:621/000006",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 12/2002, de 23 de mayo, por la que se aprueba el Concierto Económico con la Comunidad Autónoma del País Vasco. (621/000006)"
+    },
+    {
+      "source_record_pk": 147622,
+      "sample_initiative_id": "senado:leg12:exp:621/000007",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se aprueba la metodología de señalamiento del cupo del País Vasco para el quinquenio 2017-2021. (621/000007)"
+    },
+    {
+      "source_record_pk": 147632,
+      "sample_initiative_id": "senado:leg12:exp:621/000017",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Secretos Empresariales. (621/000017)"
+    },
+    {
+      "source_record_pk": 147628,
+      "sample_initiative_id": "senado:leg12:exp:621/000013",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el Código de Comercio, el texto refundido de la Ley de Sociedades de Capital aprobado por el Real Decreto Legislativo 1/2010, de 2 de julio, y la Ley 22/2015, de 20 de julio, de Auditoría de Cuentas, en materia de información no financiera y diversidad (procedente del Real Decret…"
+    },
+    {
+      "source_record_pk": 147598,
+      "sample_initiative_id": "senado:leg12:exp:610/000068",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Principado de Andorra y el Reino de España sobre el ejercicio de actividades profesionales remuneradas por parte de familiares dependientes del personal diplomático, consular, administrativo y técnico de misiones diplomáticas, oficinas consulares y representaciones permanentes ante organismos internac…"
+    },
+    {
+      "source_record_pk": 147634,
+      "sample_initiative_id": "senado:leg12:exp:622/000001",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 5/1995, de 22 de mayo, del Tribunal del Jurado, para garantizar la participación de las personas con discapacidad sin exclusiones. (622/000001)"
+    },
+    {
+      "source_record_pk": 147599,
+      "sample_initiative_id": "senado:leg12:exp:610/000069",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio de Asociación Estratégica en materia de Desarrollo y de Cooperación Cultural, Educativa y Deportiva entre el Reino de España y el Reino de Marruecos, hecho \"ad referendum\" en Rabat el 3 de octubre de 2012 y Canje de Notas interpretativas de determinados artículos del mismo. (610/000069)"
+    },
+    {
+      "source_record_pk": 147604,
+      "sample_initiative_id": "senado:leg12:exp:610/000074",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y Ucrania sobre libre ejercicio de actividades remuneradas para familiares dependientes del personal diplomático, consular, administrativo y técnico de Misiones Diplomáticas y Oficinas Consulares, hecho en Madrid el 30 de octubre de 2013. (610/000074)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

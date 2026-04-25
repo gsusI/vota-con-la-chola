@@ -2863,33 +2863,6 @@
         return k === "support" || k === "oppose" || k === "mixed";
       }
 
-      function comparabilityRowFor(topicId, partyId) {
-        const key = `${Number(topicId || 0)}:${Number(partyId || 0)}`;
-        return state.curiosity && state.curiosity.comparabilityByKey && state.curiosity.comparabilityByKey.get
-          ? state.curiosity.comparabilityByKey.get(key) || null
-          : null;
-      }
-
-      function lineageRowFor(topicId, partyId) {
-        const key = `${Number(topicId || 0)}:${Number(partyId || 0)}`;
-        return state.curiosity && state.curiosity.lineageByKey && state.curiosity.lineageByKey.get
-          ? state.curiosity.lineageByKey.get(key) || null
-          : null;
-      }
-
-      function snapshotDiffRowFor(topicId, partyId) {
-        const key = `${Number(topicId || 0)}:${Number(partyId || 0)}`;
-        return state.curiosity && state.curiosity.snapshotDiffByKey && state.curiosity.snapshotDiffByKey.get
-          ? state.curiosity.snapshotDiffByKey.get(key) || null
-          : null;
-      }
-
-      function snapshotDiffPartySummaryFor(partyId) {
-        return state.curiosity && state.curiosity.snapshotDiffPartyById && state.curiosity.snapshotDiffPartyById.get
-          ? state.curiosity.snapshotDiffPartyById.get(Number(partyId || 0)) || null
-          : null;
-      }
-
       function buildTopicByIdMap(citizen) {
         const m = new Map();
         for (const t of (citizen || {}).topics || []) {
@@ -2905,37 +2878,6 @@
           m.set(key, r);
         }
         return m;
-      }
-
-      function buildRowsByKeyMap(payload) {
-        const m = new Map();
-        for (const row of (payload && Array.isArray(payload.rows) ? payload.rows : [])) {
-          const key = `${Number(row.topic_id || 0)}:${Number(row.party_id || 0)}`;
-          m.set(key, row);
-        }
-        return m;
-      }
-
-      function buildPartySummaryByIdMap(payload) {
-        const m = new Map();
-        for (const row of (payload && Array.isArray(payload.party_summary) ? payload.party_summary : [])) {
-          m.set(Number(row.party_id || 0), row);
-        }
-        return m;
-      }
-
-      function citizenCompanionPath(kind, method) {
-        const token = String(method || "combined").trim().toLowerCase();
-        const suffix = token === "votes" ? "_votes" : token === "declared" ? "_declared" : "";
-        return `./data/citizen_${String(kind || "").trim()}${suffix}.json`;
-      }
-
-      async function fetchJsonOrNull(path) {
-        try {
-          return await fetchJson(path);
-        } catch {
-          return null;
-        }
       }
 
       function stanceFromPosMap(posMap, topicId, partyId) {
@@ -3257,16 +3199,6 @@
           loading: false,
           loadError: "",
           promise: null,
-        },
-        curiosity: {
-          method: "",
-          comparability: null,
-          lineage: null,
-          snapshotDiff: null,
-          comparabilityByKey: new Map(),
-          lineageByKey: new Map(),
-          snapshotDiffByKey: new Map(),
-          snapshotDiffPartyById: new Map(),
         },
       };
 
@@ -6052,73 +5984,6 @@
         );
       }
 
-      function renderCuriosityDetail(topicId, partyId) {
-        const comp = comparabilityRowFor(topicId, partyId);
-        const lin = lineageRowFor(topicId, partyId);
-        const diff = snapshotDiffRowFor(topicId, partyId);
-        const diffMeta = (state.curiosity && state.curiosity.snapshotDiff && state.curiosity.snapshotDiff.meta) || {};
-        const previousAsOfDate = String(diffMeta.previous_as_of_date || "").trim();
-        if (!comp && !lin && !diff) return "";
-
-        const parts = [];
-        if (comp) {
-          const comparableMembers = Number(comp.comparable_members || 0);
-          const membersTotal = Number(comp.members_total || 0);
-          const unknownTotal = Number(comp.unknown_total || 0);
-          parts.push(
-            `<div class="rowMeta" data-citizen-comparability="1">` +
-              `<span class="tag ${comp.comparable_ok ? "good" : "bad"}">comparable=${esc(comp.comparable_ok ? "si" : "no")}</span>` +
-              `<span class="tag">comparables=${esc(fmtInt(comparableMembers))}/${esc(fmtInt(membersTotal))}</span>` +
-              `<span class="tag">unknown=${esc(fmtInt(unknownTotal))}</span>` +
-              `<span>${esc(String(comp.reason_label || ""))}</span>` +
-              `</div>`
-          );
-        }
-        if (lin) {
-          const sampleEvidence = Array.isArray(((lin || {}).evidence || {}).sample_evidence) ? lin.evidence.sample_evidence : [];
-          const sampleIds = sampleEvidence
-            .map((item) => String((item || {}).source_id || "").trim())
-            .filter((token, idx, arr) => token && arr.indexOf(token) === idx)
-            .slice(0, 3);
-          parts.push(
-            `<div class="rowMeta" data-citizen-lineage="1">` +
-              `<span class="tag">metodo=${esc(String(((lin || {}).aggregate || {}).computed_method || ""))}</span>` +
-              `<span class="tag">version=${esc(String(((lin || {}).aggregate || {}).computed_version || ""))}</span>` +
-              `<span class="tag">posiciones=${esc(fmtInt(Number(((lin || {}).positions || {}).total_positions || 0)))}</span>` +
-              `<span class="tag">evidencias=${esc(fmtInt(Number(((lin || {}).evidence || {}).evidence_rows_total || 0)))}</span>` +
-              (sampleIds.length ? `<span class="tag">fuentes=${esc(sampleIds.join(","))}</span>` : `<span class="tag">fuentes=sin_muestra</span>`) +
-              `</div>`
-          );
-        }
-        if (diff && previousAsOfDate) {
-          const changeLabel =
-            String(diff.primary_change || "") === "stance_changed"
-              ? `${stanceLabel(String(diff.previous_stance || "no_signal"))} -> ${stanceLabel(String(diff.current_stance || "no_signal"))}`
-              : String(diff.primary_change || "") === "comparability_changed"
-              ? "cambio de comparabilidad"
-              : String(diff.primary_change || "") === "evidence_changed"
-              ? "cambio de evidencia"
-              : String(diff.primary_change || "") === "signal_changed"
-              ? "cambio de senal"
-              : "cambio de confianza";
-          parts.push(
-            `<div class="rowMeta" data-citizen-snapshot-diff="1">` +
-              `<span class="tag hot">delta_vs=${esc(previousAsOfDate)}</span>` +
-              `<span class="tag">${esc(changeLabel)}</span>` +
-              `<span class="tag">evidencia_delta=${esc(fmtInt(Number(diff.evidence_count_delta || 0)))}</span>` +
-              `<span class="tag">senal_delta=${esc(fmtInt(Number(diff.signal_delta || 0)))}</span>` +
-              `</div>`
-          );
-        }
-
-        return (
-          `<details class="mismatchPanel" data-citizen-curiosity-details="1" style="margin-top:8px">` +
-          `<summary><strong>Por que esta lectura</strong></summary>` +
-          `<div style="margin-top:8px">${parts.join("")}</div>` +
-          `</details>`
-        );
-      }
-
       function stanceCounts(rows) {
         const c = {
           support: 0,
@@ -6912,9 +6777,6 @@
                     const cov = Number(r.coverage || 0);
                     const narrative = alignmentNarrativeForParty(r, prefsItems.length);
                     const band = alignmentBandsByParty.get(pid) || { id: "fragil", label: "fragil" };
-                    const diffParty = snapshotDiffPartySummaryFor(pid);
-                    const diffMeta = (state.curiosity && state.curiosity.snapshotDiff && state.curiosity.snapshotDiff.meta) || {};
-                    const previousAsOfDate = String(diffMeta.previous_as_of_date || "").trim();
 
                     return (
                       `<div class="partyCard md3-card ${focused ? "focused" : ""}">` +
@@ -6926,9 +6788,6 @@
                       `<span class="tag">unknown=${esc(fmtInt(r.unknown))}</span>` +
                       `<span class="tag">net=${esc(fmtInt(r.net))}</span>` +
                       `<span class="tag ${esc(rankBandTagClass(band.id))}">banda=${esc(String(band.label || ""))}</span>` +
-                      (diffParty && previousAsOfDate
-                        ? `<span class="tag hot">cambios=${esc(fmtInt(Number(diffParty.changed_topics_total || 0)))} vs ${esc(previousAsOfDate)}</span>`
-                        : ``) +
                       `</div>` +
                       `</div>` +
                       `<div class="barWrap">` +
@@ -6979,9 +6838,6 @@
             const matchItems = focusDetailItems.filter((x) => x.res === "match");
             const unknownItems = focusDetailItems.filter((x) => x.res === "unknown");
             const focusPartyLabel = partyName(pid);
-            const diffParty = snapshotDiffPartySummaryFor(pid);
-            const diffMeta = (state.curiosity && state.curiosity.snapshotDiff && state.curiosity.snapshotDiff.meta) || {};
-            const previousAsOfDate = String(diffMeta.previous_as_of_date || "").trim();
 
             const mismatchPanel =
               `<div class="mismatchPanel">` +
@@ -6989,9 +6845,6 @@
               `<span class="tag">match=${esc(fmtInt(matchItems.length))}</span>` +
               `<span class="tag bad">mismatch=${esc(fmtInt(mismatchItems.length))}</span>` +
               `<span class="tag">unknown=${esc(fmtInt(unknownItems.length))}</span>` +
-              (diffParty && previousAsOfDate
-                ? `<span class="tag hot">cambios=${esc(fmtInt(Number(diffParty.changed_topics_total || 0)))} vs ${esc(previousAsOfDate)}</span>`
-                : ``) +
               `</div>` +
               `<div class="partyNarrative" style="margin-top:8px">` +
               (mismatchItems.length
@@ -7046,7 +6899,6 @@
                     ? `<a class="smallLink" href="${esc(String(row.pos_link || ""))}" target="_blank" rel="noopener noreferrer">SQL</a>`
                     : "") +
                   `</div>` +
-                  renderCuriosityDetail(Number(row.topic_id || 0), pid) +
                   `</div>`
                 );
               })
@@ -8187,22 +8039,8 @@
           });
 
           const [citizen, concernsCfg, packQuality] = await Promise.all([citizenP, fetchJson(concernsPath), packQualityP]);
-          const loadedMethod = String(((citizen || {}).meta || {}).computed_method || state.method || "combined").trim() || "combined";
-          const [comparabilityPayload, lineagePayload, snapshotDiffPayload] = await Promise.all([
-            fetchJsonOrNull(citizenCompanionPath("comparability", loadedMethod)),
-            fetchJsonOrNull(citizenCompanionPath("lineage", loadedMethod)),
-            fetchJsonOrNull(citizenCompanionPath("snapshot_diff", loadedMethod)),
-          ]);
           state.citizen = citizen;
           state.concernsCfg = concernsCfg;
-          state.curiosity.method = loadedMethod;
-          state.curiosity.comparability = comparabilityPayload;
-          state.curiosity.lineage = lineagePayload;
-          state.curiosity.snapshotDiff = snapshotDiffPayload;
-          state.curiosity.comparabilityByKey = buildRowsByKeyMap(comparabilityPayload);
-          state.curiosity.lineageByKey = buildRowsByKeyMap(lineagePayload);
-          state.curiosity.snapshotDiffByKey = buildRowsByKeyMap(snapshotDiffPayload);
-          state.curiosity.snapshotDiffPartyById = buildPartySummaryByIdMap(snapshotDiffPayload);
           loadConcernPackQualityRows(packQuality);
           state.concerns = Array.isArray(concernsCfg.concerns) ? concernsCfg.concerns : [];
           state.concernPacks = [];

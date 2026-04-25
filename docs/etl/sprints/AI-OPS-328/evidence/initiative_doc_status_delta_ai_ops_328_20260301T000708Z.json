@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-03-01T00:10:51Z",
+  "before_overall": {
+    "downloaded_doc_links": 4411,
+    "missing_doc_links": 5142,
+    "missing_doc_links_actionable": 4958,
+    "effective_downloaded_doc_links_pct": 47.08,
+    "doc_links_missing_fetch_status": 297,
+    "downloaded_missing_excerpt": 0
+  },
+  "after_overall": {
+    "downloaded_doc_links": 4411,
+    "missing_doc_links": 5142,
+    "missing_doc_links_actionable": 4958,
+    "effective_downloaded_doc_links_pct": 47.08,
+    "doc_links_missing_fetch_status": 217,
+    "downloaded_missing_excerpt": 0
+  },
+  "delta_overall": {
+    "downloaded_doc_links": 0,
+    "missing_doc_links": 0,
+    "missing_doc_links_actionable": 0,
+    "effective_downloaded_doc_links_pct": 0.0,
+    "doc_links_missing_fetch_status": -80,
+    "downloaded_missing_excerpt": 0
+  },
+  "before_senado": {
+    "downloaded_doc_links": 3599,
+    "missing_doc_links_actionable": 4958,
+    "effective_downloaded_doc_links_pct": 42.06,
+    "doc_links_missing_fetch_status": 297
+  },
+  "after_senado": {
+    "downloaded_doc_links": 3599,
+    "missing_doc_links_actionable": 4958,
+    "effective_downloaded_doc_links_pct": 42.06,
+    "doc_links_missing_fetch_status": 217
+  },
+  "delta_senado": {
+    "downloaded_doc_links": 0,
+    "missing_doc_links_actionable": 0,
+    "effective_downloaded_doc_links_pct": 0.0,
+    "doc_links_missing_fetch_status": -80
+  }
+}

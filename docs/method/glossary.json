@@ -1,0 +1,224 @@
+{
+  "glossary_version": "citizen_truth_glossary_v1",
+  "updated_at": "2026-04-04",
+  "source_of_truth": "docs/method/truth-contract.md",
+  "terms": {
+    "method_combined": {
+      "category": "method",
+      "code": "combined",
+      "label": "combinado",
+      "definition": "Usa votes si existe; si no, usa declared.",
+      "notes": [
+        "No es una media ponderada.",
+        "Toda metrica publica debe etiquetar cuando usa este metodo."
+      ]
+    },
+    "method_votes": {
+      "category": "method",
+      "code": "votes",
+      "label": "votos",
+      "definition": "Sintetiza solo evidencia revelada por voto."
+    },
+    "method_declared": {
+      "category": "method",
+      "code": "declared",
+      "label": "dichos",
+      "definition": "Sintetiza solo evidencia declarativa o textual."
+    },
+    "stance_support": {
+      "category": "stance",
+      "code": "support",
+      "label": "A favor",
+      "definition": "La direccion observada favorece la medida o el tema en el recorte actual.",
+      "comparable": true
+    },
+    "stance_oppose": {
+      "category": "stance",
+      "code": "oppose",
+      "label": "En contra",
+      "definition": "La direccion observada se opone a la medida o el tema en el recorte actual.",
+      "comparable": true
+    },
+    "stance_mixed": {
+      "category": "stance",
+      "code": "mixed",
+      "label": "Mixto",
+      "definition": "Hay señales en direcciones distintas dentro del mismo recorte.",
+      "comparable": false,
+      "ui_copy": "Mixto: hay señales en direcciones distintas dentro del mismo recorte."
+    },
+    "stance_unclear": {
+      "category": "stance",
+      "code": "unclear",
+      "label": "Incierto",
+      "definition": "Existe alguna señal, pero no alcanza comparabilidad suficiente o la direccion no es estable.",
+      "comparable": false,
+      "ui_copy": "Incierto: existe alguna señal, pero no alcanza comparabilidad suficiente para una lectura fuerte."
+    },
+    "stance_no_signal": {
+      "category": "stance",
+      "code": "no_signal",
+      "label": "Sin señal",
+      "definition": "No hay evidencia util suficiente para emitir una lectura.",
+      "comparable": false,
+      "ui_copy": "Sin señal: no encontramos evidencia suficiente del método seleccionado para este partido y tema."
+    },
+    "state_unknown": {
+      "category": "aggregate_state",
+      "code": "unknown",
+      "label": "Unknown",
+      "definition": "Estado paraguas para incierto + sin_senal.",
+      "formula": "unclear + no_signal",
+      "ui_copy": "unknown = incierto + sin_senal"
+    },
+    "match": {
+      "category": "comparison",
+      "code": "match",
+      "label": "Match",
+      "definition": "Solo se computa cuando ambos lados tienen señal clara comparable.",
+      "ui_copy": "match/mismatch solo cuentan cuando hay senal clara comparable"
+    },
+    "mismatch": {
+      "category": "comparison",
+      "code": "mismatch",
+      "label": "Mismatch",
+      "definition": "Solo se computa cuando ambos lados tienen señal clara comparable.",
+      "ui_copy": "match/mismatch solo cuentan cuando hay senal clara comparable"
+    },
+    "coverage_signal_ratio": {
+      "category": "metric",
+      "code": "coverage_signal_ratio",
+      "label": "cobertura de señal",
+      "definition": "Proporcion de miembros con señal util sobre el total del partido en ese tema.",
+      "formula": "members_with_signal / members_total",
+      "thresholds": {
+        "force_unclear_below": 0.2
+      },
+      "ui_copy": "Regla: si cobertura < 20%, mostramos Incierto"
+    },
+    "confidence_high": {
+      "category": "confidence_tier",
+      "code": "high",
+      "label": "alta",
+      "min": 0.66,
+      "max_exclusive": 1.01,
+      "definition": "Lectura fuerte dentro de la escala del metodo, nunca verdad absoluta."
+    },
+    "confidence_medium": {
+      "category": "confidence_tier",
+      "code": "medium",
+      "label": "media",
+      "min": 0.33,
+      "max_exclusive": 0.66,
+      "definition": "Lectura intermedia; requiere caveats visibles."
+    },
+    "confidence_low": {
+      "category": "confidence_tier",
+      "code": "low",
+      "label": "baja",
+      "min": 0.000001,
+      "max_exclusive": 0.33,
+      "definition": "Existe alguna señal, pero la lectura sigue siendo debil."
+    },
+    "confidence_none": {
+      "category": "confidence_tier",
+      "code": "none",
+      "label": "sin_confianza_util",
+      "min": 0.0,
+      "max_exclusive": 0.000001,
+      "definition": "Sin señal o sin base suficiente para una lectura."
+    },
+    "ranking_hidden_low_sample": {
+      "category": "ranking_rule",
+      "code": "hidden_low_sample",
+      "label": "ranking oculto por muestra insuficiente",
+      "thresholds": {
+        "comparables_min": 5
+      },
+      "effect": "hide",
+      "ui_copy": "Ranking oculto: la muestra comparable no alcanza el mínimo para una lectura responsable."
+    },
+    "ranking_warn_small_sample": {
+      "category": "ranking_rule",
+      "code": "warn_small_sample",
+      "label": "ranking exploratorio",
+      "thresholds": {
+        "comparables_warn_below": 40,
+        "comparables_visible_from": 5
+      },
+      "effect": "gray_warn",
+      "ui_copy": "Lectura exploratoria: la muestra comparable sigue siendo débil y puede cambiar mucho con nueva evidencia."
+    },
+    "freshness_fresh": {
+      "category": "freshness_tier",
+      "code": "fresh",
+      "label": "reciente",
+      "min_days": 0,
+      "max_days": 7,
+      "should_warn": false,
+      "ranking_effect": "normal",
+      "ui_copy": "reciente · sin advertencia de antigüedad"
+    },
+    "freshness_aging": {
+      "category": "freshness_tier",
+      "code": "aging",
+      "label": "vigente",
+      "min_days": 8,
+      "max_days": 30,
+      "should_warn": true,
+      "ranking_effect": "gray_warn",
+      "ui_copy_template": "vigente · con advertencia de antigüedad (${data_age_days} días) por no refresco reciente"
+    },
+    "freshness_stale": {
+      "category": "freshness_tier",
+      "code": "stale",
+      "label": "antigua",
+      "min_days": 31,
+      "max_days": null,
+      "should_warn": true,
+      "ranking_effect": "gray_warn",
+      "ui_copy_template": "antigua · la evidencia puede haber cambiado de forma material desde el corte (${data_age_days} días)"
+    },
+    "freshness_future": {
+      "category": "freshness_tier",
+      "code": "future",
+      "label": "futura",
+      "should_warn": true,
+      "ranking_effect": "hide",
+      "ui_copy": "futura · inconsistencia temporal detectada; no usar para rankings hasta corregir el snapshot"
+    },
+    "freshness_unknown": {
+      "category": "freshness_tier",
+      "code": "unknown",
+      "label": "desconocida",
+      "should_warn": true,
+      "ranking_effect": "hide",
+      "ui_copy": "desconocida · faltan fechas consistentes para evaluar la frescura"
+    },
+    "audit_rule": {
+      "category": "behavior_rule",
+      "code": "audit_rule",
+      "label": "regla de auditoria",
+      "ui_copy": "si ves unknown alto o confianza baja, abre la evidencia enlazada"
+    },
+    "no_imputation": {
+      "category": "behavior_rule",
+      "code": "no_imputation",
+      "label": "sin imputacion",
+      "definition": "La interfaz no debe rellenar faltantes con una lectura inventada.",
+      "ui_copy": "No se imputan estimaciones para faltantes"
+    },
+    "not_comparable_yet": {
+      "category": "comparison_rule",
+      "code": "not_comparable_yet",
+      "label": "no comparable todavia",
+      "ui_copy": "No comparable todavía: falta señal clara en uno o ambos lados de la comparación."
+    },
+    "freshness_warning": {
+      "category": "warning_copy",
+      "code": "freshness_warning",
+      "label": "aviso de frescura",
+      "ui_copy": "La señal no es de última hora; prioriza abrir evidencia en partidos con unknown alto o confianza baja."
+    }
+  }
+}

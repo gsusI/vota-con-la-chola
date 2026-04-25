@@ -1,0 +1,183 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 18,
+  "upserted": 18,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 18
+  },
+  "by_doc_format": {
+    "html": 18
+  },
+  "sample": [
+    {
+      "source_record_pk": 147937,
+      "sample_initiative_id": "senado:leg14:exp:621/000050",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de garantía integral de la libertad sexual. (621/000050)"
+    },
+    {
+      "source_record_pk": 147938,
+      "sample_initiative_id": "senado:leg14:exp:621/000052",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 14/2011, de 1 de junio, de la Ciencia, la Tecnología y la Innovación. (621/000052)"
+    },
+    {
+      "source_record_pk": 147936,
+      "sample_initiative_id": "senado:leg14:exp:621/000049",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley General de Comunicación Audiovisual. (621/000049)"
+    },
+    {
+      "source_record_pk": 147943,
+      "sample_initiative_id": "senado:leg14:exp:624/000020",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica para la modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en los delitos contra la libertad sexual, la Ley de Enjuiciamiento Criminal y la Ley Orgánica 5/2000, de 12 de enero, reguladora de la responsabilidad penal de los menores. (624/000020)"
+    },
+    {
+      "source_record_pk": 147941,
+      "sample_initiative_id": "senado:leg12:exp:624/000014",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de imprudencia en la conducción de vehículos a motor o ciclomotor y sanción del abandono del lugar del accidente. (624/000014)"
+    },
+    {
+      "source_record_pk": 147939,
+      "sample_initiative_id": "senado:leg14:exp:621/000053",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica por la que se establecen normas que faciliten el uso de información financiera y de otro tipo para la prevención, detección, investigación o enjuiciamiento de infracciones penales, de modificación de la Ley Orgánica 8/1980, de 22 de septiembre, de Financiación de las Comunidades Autónomas y ot…"
+    },
+    {
+      "source_record_pk": 147934,
+      "sample_initiative_id": "senado:leg14:exp:620/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para el reconocimiento de personalidad jurídica a la laguna del Mar Menor y su cuenca. (620/000007)"
+    },
+    {
+      "source_record_pk": 147929,
+      "sample_initiative_id": "senado:leg10:exp:610/000143",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Gobierno del Reino de España y el Gobierno de Australia relativo al programa de movilidad para jóvenes, hecho en Canberra el 3 de septiembre de 2014. (610/000143)"
+    },
+    {
+      "source_record_pk": 147926,
+      "sample_initiative_id": "senado:leg10:exp:610/000140",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Reino de Arabia Saudí para la promoción y protección recíproca de inversiones, hecho en Riad el 9 de abril de 2006. (610/000140)"
+    },
+    {
+      "source_record_pk": 147927,
+      "sample_initiative_id": "senado:leg10:exp:610/000141",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Eslovenia para el intercambio y protección recíproca de información clasificada, hecho en Madrid el 21 de octubre de 2014. (610/000141)"
+    },
+    {
+      "source_record_pk": 147930,
+      "sample_initiative_id": "senado:leg10:exp:610/000144",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo de 2002 al Convenio de Atenas relativo al transporte de pasajeros y sus equipajes por mar, 1974, hecho en Londres el 1 de noviembre de 2002, junto con una Reserva y una Declaración que España desea formular. (610/000144)"
+    },
+    {
+      "source_record_pk": 147933,
+      "sample_initiative_id": "senado:leg10:exp:610/000147",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Revocación de la adhesión de España al Protocolo de 1990 que enmienda el Convenio de Atenas relativo al transporte de pasajeros y sus equipajes por mar, 1974, hecho en Londres el 29 de marzo de 1990. (610/000147)"
+    },
+    {
+      "source_record_pk": 147932,
+      "sample_initiative_id": "senado:leg10:exp:610/000146",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Protocolo correspondiente al Convenio de Atenas de 1974 relativo al transporte de pasajeros y sus equipajes por mar, hecho en Londres el 19 de noviembre de 1976. (610/000146)"
+    },
+    {
+      "source_record_pk": 147931,
+      "sample_initiative_id": "senado:leg10:exp:610/000145",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Convenio relativo al transporte de pasajeros y sus equipajes por mar, hecho en Atenas el 13 de diciembre de 1974. (610/000145)"
+    },
+    {
+      "source_record_pk": 147935,
+      "sample_initiative_id": "senado:leg14:exp:621/000048",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas urgentes para impulsar la actividad de rehabilitación edificatoria en el contexto del Plan de Recuperación, Transformación y Resiliencia (procedente del Real Decreto-ley 19/2021, de 5 de octubre). (621/000048)"
+    },
+    {
+      "source_record_pk": 147940,
+      "sample_initiative_id": "senado:leg14:exp:621/000054",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, en materia de Juzgados de lo Mercantil. (621/000054)"
+    },
+    {
+      "source_record_pk": 147942,
+      "sample_initiative_id": "senado:leg14:exp:624/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica el artículo 324 de la Ley de Enjuiciamiento Criminal. (624/000001)"
+    },
+    {
+      "source_record_pk": 147928,
+      "sample_initiative_id": "senado:leg10:exp:610/000142",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de Asociación entre la Unión Europea y la Comunidad Europea de la Energía Atómica y sus Estados miembros, por una parte, y Ucrania, por otra, hecho en Bruselas el 21 de marzo y el 27 de junio de 2014. (610/000142)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-03-01T08:59:51+00:00",
+  "status": "degraded",
+  "inputs": {
+    "files_total": 1,
+    "files_parsed": 1
+  },
+  "totals": {
+    "archive_no_snapshot_failures_total": 0,
+    "unique_urls_total": 0
+  },
+  "limits": {
+    "strict_min_rows": 1
+  },
+  "checks": {
+    "has_inputs": true,
+    "has_rows": false
+  },
+  "strict_fail_reasons": [
+    "rows_below_min"
+  ],
+  "sample_urls": []
+}

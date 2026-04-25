@@ -24,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/political-positions/data/stances.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/political-positions/data/stances.json")
 PERSON_DETAIL_DIRNAME = "person-details"
 PERSON_TRAJECTORY_CHUNK_DIRNAME = "person-trajectory-chunks"
 PERSON_TRAJECTORY_CHUNK_SIZE = 25

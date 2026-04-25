@@ -1,0 +1,50 @@
+{
+  "sprint": "AI-OPS-370",
+  "timestamp": "20260301T105944Z",
+  "kpi_before": {
+    "downloaded_doc_links": 5223,
+    "missing_doc_links_actionable": 4139,
+    "missing_urls": 363,
+    "blocked_403_urls": 32,
+    "unknown_status_urls": 0,
+    "status404_urls": 331,
+    "status403_urls": 32
+  },
+  "kpi_after": {
+    "downloaded_doc_links": 5233,
+    "missing_doc_links_actionable": 4129,
+    "missing_urls": 353,
+    "blocked_403_urls": 22,
+    "unknown_status_urls": 0,
+    "status404_urls": 331,
+    "status403_urls": 22,
+    "downloaded_doc_links_missing_excerpt": 0,
+    "downloaded_doc_links_missing_extraction": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": 10,
+    "missing_doc_links_actionable": -10,
+    "missing_urls": -10,
+    "blocked_403_urls": -10,
+    "unknown_status_urls": 0,
+    "status404_urls": 0,
+    "status403_urls": -10
+  },
+  "retry_status403": {
+    "candidate_urls": 32,
+    "urls_to_fetch": 32,
+    "fetched_ok": 10,
+    "archive_hits": 10,
+    "archive_fetched_ok": 10,
+    "failures": 22,
+    "direct_variant_attempted_urls": 22,
+    "direct_variant_fetched_ok": 0
+  },
+  "postprocess": {
+    "excerpts_seen": 0,
+    "excerpts_updated": 0,
+    "extractions_seen": 10,
+    "extractions_upserted": 10,
+    "extractions_needs_review": 0
+  }
+}

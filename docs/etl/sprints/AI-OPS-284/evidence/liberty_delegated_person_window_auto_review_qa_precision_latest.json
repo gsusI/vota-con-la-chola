@@ -1,0 +1,62 @@
+{
+  "qa_csv": "docs/etl/sprints/AI-OPS-284/exports/liberty_delegated_person_window_auto_review_qa_sample_latest.csv",
+  "report": {
+    "status": "ok",
+    "strict": true,
+    "thresholds": {
+      "min_reviewed_rows": 8,
+      "min_precision_pct": 0.0
+    },
+    "rows_total": 8,
+    "reviewed_rows_total": 8,
+    "confirm_total": 2,
+    "reject_total": 6,
+    "skip_or_pending_total": 0,
+    "invalid_decision_total": 0,
+    "observed_precision_pct": 25.0,
+    "institution_breakdown": [
+      {
+        "institution": "AEAT",
+        "rows_total": 3,
+        "reviewed_rows_total": 3,
+        "confirm_total": 1,
+        "reject_total": 2,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 33.3333
+      },
+      {
+        "institution": "DGT",
+        "rows_total": 2,
+        "reviewed_rows_total": 2,
+        "confirm_total": 0,
+        "reject_total": 2,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 0.0
+      },
+      {
+        "institution": "Delegaciones/Subdelegaciones del Gobierno",
+        "rows_total": 1,
+        "reviewed_rows_total": 1,
+        "confirm_total": 1,
+        "reject_total": 0,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 100.0
+      },
+      {
+        "institution": "Inspeccion de Trabajo y Seguridad Social",
+        "rows_total": 2,
+        "reviewed_rows_total": 2,
+        "confirm_total": 0,
+        "reject_total": 2,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 0.0
+      }
+    ],
+    "invalid_decision_samples": [],
+    "strict_fail_reasons": []
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "sprint": "AI-OPS-348",
+  "timestamp": "20260301T060032Z",
+  "before_generated_at": "2026-03-01T06:02:22+00:00",
+  "after_generated_at": "2026-03-01T06:34:28+00:00",
+  "totals": {
+    "missing_urls": {
+      "before": 939,
+      "after": 880,
+      "delta": -59
+    },
+    "missing_initiatives": {
+      "before": 600,
+      "after": 585,
+      "delta": -15
+    },
+    "blocked_403_urls": {
+      "before": 160,
+      "after": 160,
+      "delta": 0
+    },
+    "blocked_500_urls": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "unknown_status_urls": {
+      "before": 217,
+      "after": 217,
+      "delta": 0
+    },
+    "zero_doc_initiatives": {
+      "before": 5,
+      "after": 5,
+      "delta": 0
+    }
+  }
+}

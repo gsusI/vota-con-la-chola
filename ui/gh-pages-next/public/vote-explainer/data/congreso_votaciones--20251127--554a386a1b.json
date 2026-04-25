@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "congreso_votaciones--20251127--554a386a1b",
+    "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "canonical_path": "/vote-explainer/congreso_votaciones--20251127--554a386a1b/",
+    "generated_at": "2026-04-25T10:47:44+00:00",
+    "snapshot_as_of_date": "2026-04-25",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "congreso_votaciones",
+    "source_name": "Congreso - Votaciones (pleno, OpenData)",
+    "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "chamber": "Congreso",
+    "vote_date": "2025-11-27",
+    "title": "Toma en consideración de Proposiciones de Ley.",
+    "expediente_text": "Proposición de Ley del Grupo Parlamentario Plurinacional SUMAR para la modificación de la Ley 12/2023, de 24 de mayo, por el derecho a la vivienda.",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "No",
+    "headline": "Proposición de Ley del Grupo Parlamentario Plurinacional SUMAR para la modificación de la Ley 12/2023, de 24 de mayo, por el derecho a la vivienda.",
+    "subtitle": "derived:277fc3a3a28978ccaefe741e"
+  },
+  "result": {
+    "status": "rejected",
+    "label": "Rechazada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 44 · No 179 · Abstencion 124 · No vota 3"
+  },
+  "totals": {
+    "present": 347,
+    "yes": 44,
+    "no": 179,
+    "abstain": 124,
+    "no_vote": 3
+  },
+  "initiative": {
+    "initiative_id": "congreso:leg15:derived:277fc3a3a28978ccaefe741e",
+    "expediente": "derived:277fc3a3a28978ccaefe741e",
+    "title": "Proposición de Ley del Grupo Parlamentario Plurinacional SUMAR para la modificación de la Ley 12/2023, de 24 de mayo, por el derecho a la vivienda.",
+    "type": "",
+    "grouping": "Derived from Congreso votaciones",
+    "supertype": "derived",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GP",
+      "yes": 0,
+      "no": 137,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 137
+    },
+    {
+      "group_code": "GS",
+      "yes": 0,
+      "no": 0,
+      "abstain": 119,
+      "no_vote": 1,
+      "other": 0,
+      "total": 120
+    },
+    {
+      "group_code": "GVOX",
+      "yes": 0,
+      "no": 33,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 33
+    },
+    {
+      "group_code": "GSUMAR",
+      "yes": 25,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 26
+    },
+    {
+      "group_code": "GMx",
+      "yes": 6,
+      "no": 2,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 9
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Proposición de Ley del Grupo Parlamentario Plurinacional SUMAR para la modificación de la Ley 12/2023, de 24 d | Vota Con La Chola",
+    "description": "Congreso · 2025-11-27 · Si 44 · No 179 · Abstencion 124 · No vota 3. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/congreso_votaciones--20251127--554a386a1b/"
+  }
+}

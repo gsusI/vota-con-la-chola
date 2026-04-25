@@ -10,11 +10,12 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 
 ### Documentation Philosophy
 - One source of truth per layer:
-  - Strategy and destination: `docs/roadmap.md`
-  - Near-term execution: `docs/roadmap-tecnico.md`
+  - Future direction and sequencing: `ROADMAP.md`
+  - Strategy/model background: `docs/roadmap.md`
+  - Near-term execution (derived): `docs/roadmap-tecnico.md`
   - Operational backlog and real status: `docs/etl/e2e-scrape-load-tracker.md`
   - Public accountability log for blocked access to public data: `docs/etl/name-and-shame-access-blockers.md`
-- Do not duplicate roadmaps in random docs. Link instead of copy.
+- Do not duplicate roadmaps in random docs. Link instead of copy. If direction changes, update `ROADMAP.md` first.
 - Every non-trivial change must answer three questions in docs or tracker:
   - where we are now
   - where we are going

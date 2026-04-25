@@ -1,0 +1,52 @@
+{
+  "generated_at_utc": "20260301T091550Z",
+  "sprint": "AI-OPS-361",
+  "lane": "status403_linked_to_votes_packet50_refetch",
+  "runtime_seconds": 20.54,
+  "retry_summary": {
+    "candidate_urls": 50,
+    "urls_to_fetch": 50,
+    "fetched_ok": 49,
+    "failures_total": 1,
+    "archive_hits": 0,
+    "archive_fetched_ok": 0
+  },
+  "postprocess": {
+    "extractions_seen": 49,
+    "extractions_upserted": 49,
+    "extractions_needs_review": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": {
+      "before": 5053,
+      "after": 5102,
+      "delta": 49
+    },
+    "missing_doc_links_actionable": {
+      "before": 4309,
+      "after": 4260,
+      "delta": -49
+    },
+    "missing_urls": {
+      "before": 533,
+      "after": 484,
+      "delta": -49
+    },
+    "unknown_status_urls": {
+      "before": 67,
+      "after": 68,
+      "delta": 1
+    },
+    "blocked_403_urls": {
+      "before": 114,
+      "after": 64,
+      "delta": -50
+    }
+  },
+  "dod_check": {
+    "runtime_guard_ok": true,
+    "delta_target_met": true,
+    "postprocess_ok": true,
+    "all_passed": true
+  }
+}

@@ -89,7 +89,7 @@ LEFT JOIN parties pa ON pa.party_id = m.party_id
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Exporta snapshot para explorer-sports (GitHub Pages)")
+    p = argparse.ArgumentParser(description="Exporta snapshot para explorer-sports (Cloudflare Pages)")
     p.add_argument("--db", default=str(DEFAULT_DB), help="Ruta de la base SQLite")
     p.add_argument(
         "--snapshot-date",
@@ -98,7 +98,7 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--out-dir",
-        default="docs/gh-pages/explorer-sports/data",
+        default="ui/gh-pages-next/public/explorer-sports/data",
         help="Directorio de salida para JSON estáticos",
     )
     return p.parse_args()

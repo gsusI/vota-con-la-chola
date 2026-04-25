@@ -1,0 +1,13 @@
+{
+  "sprint": "AI-OPS-331",
+  "ts": "20260301T004653Z",
+  "status": 403,
+  "selection_method": "retry_packet_only_dedup",
+  "pool_csv": "docs/etl/sprints/AI-OPS-331/exports/senado_status403_actionable_pool_20260301T004653Z.csv",
+  "pool_rows_total": 249,
+  "excluded_used_urls_total": 89,
+  "fresh_packet_csv": "docs/etl/sprints/AI-OPS-331/exports/senado_status403_fresh_packet_20260301T004653Z.csv",
+  "fresh_rows_total": 80,
+  "used_retry_packet_urls_txt": "docs/etl/sprints/AI-OPS-331/evidence/senado_used_retry_packet_urls_20260301T004653Z.txt",
+  "used_csv_refs_txt": "docs/etl/sprints/AI-OPS-331/evidence/senado_retry_packet_csv_refs_20260301T004653Z.txt"
+}

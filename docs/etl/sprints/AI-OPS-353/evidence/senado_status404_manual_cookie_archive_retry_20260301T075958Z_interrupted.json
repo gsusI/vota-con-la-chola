@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-03-01T08:07:10+00:00",
+  "status": "interrupted",
+  "reason": "runtime_exceeded_practical_window",
+  "notes": [
+    "Proceso backfill-initiative-documents en packet status404 (limit=25) supero ventana operativa y fue terminado manualmente para evitar bloqueo del sprint.",
+    "Se reintenta en el mismo sprint con packet acotado limit=8."
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 59,
+  "upserted": 59,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_sentence": 1,
+    "title_hint_strong": 58
+  },
+  "by_doc_format": {
+    "html": 59
+  },
+  "sample": [
+    {
+      "source_record_pk": 147389,
+      "sample_initiative_id": "senado:leg12:exp:621/000010",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2018. (621/000010)"
+    },
+    {
+      "source_record_pk": 147391,
+      "sample_initiative_id": "senado:leg12:exp:621/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales. (621/000012)"
+    },
+    {
+      "source_record_pk": 147370,
+      "sample_initiative_id": "senado:leg10:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 2/1979, de 3 de octubre, del Tribunal Constitucional, para la ejecución de las resoluciones del Tribunal Constitucional como garantía del Estado de Derecho. (624/000006)"
+    },
+    {
+      "source_record_pk": 147394,
+      "sample_initiative_id": "senado:leg12:exp:621/000016",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley reguladora de los contratos de crédito inmobiliario. (621/000016)"
+    },
+    {
+      "source_record_pk": 147372,
+      "sample_initiative_id": "senado:leg10:exp:610/000057",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la Antigua República Yugoslava de Macedonia al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000057)"
+    },
+    {
+      "source_record_pk": 147382,
+      "sample_initiative_id": "senado:leg10:exp:610/000067",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Guinea Ecuatorial sobre transporte aéreo, hecho en Madrid el 28 de noviembre de 2012. (610/000067)"
+    },
+    {
+      "source_record_pk": 147346,
+      "sample_initiative_id": "senado:leg10:exp:610/000165",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo del Acuerdo de estabilización y asociación entre las Comunidades Europeas y sus Estados Miembros, por una parte, y la República de Serbia, por otra, para tener en cuenta la adhesión de la República de Croacia a la Unión Europea, hecho en Bruselas el 25 de junio de 2014. (610/000165)"
+    },
+    {
+      "source_record_pk": 147339,
+      "sample_initiative_id": "senado:leg12:exp:605/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Estatuto de Autonomía de Canarias. (605/000001)"
+    },
+    {
+      "source_record_pk": 147361,
+      "sample_initiative_id": "senado:leg10:exp:620/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para la regulación de la tauromaquia como patrimonio cultural. (620/000005)"
+    },
+    {
+      "source_record_pk": 147369,
+      "sample_initiative_id": "senado:leg10:exp:624/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica para reforzar la protección de las menores y mujeres con capacidad modificada judicialmente en la interrupción voluntaria del embarazo. (624/000005)"
+    },
+    {
+      "source_record_pk": 147363,
+      "sample_initiative_id": "senado:leg12:exp:621/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adoptan medidas urgentes para paliar los efectos producidos por la sequía en determinadas cuencas hidrográficas y se modifica el texto refundido de la Ley de Aguas, aprobado por Real Decreto Legislativo 1/2001, de 20 de julio (procedente del Real Decreto-Ley 10/2017, de 9 de junio). (621/…"
+    },
+    {
+      "source_record_pk": 147362,
+      "sample_initiative_id": "senado:leg12:exp:621/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley sobre precursores de explosivos. (621/000003)"
+    },
+    {
+      "source_record_pk": 147392,
+      "sample_initiative_id": "senado:leg12:exp:621/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el Código de Comercio, el texto refundido de la Ley de Sociedades de Capital aprobado por el Real Decreto Legislativo 1/2010, de 2 de julio, y la Ley 22/2015, de 20 de julio, de Auditoría de Cuentas, en materia de información no financiera y diversidad (procedente del Real Decret…"
+    },
+    {
+      "source_record_pk": 147365,
+      "sample_initiative_id": "senado:leg12:exp:622/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 5/1995, de 22 de mayo, del Tribunal del Jurado, para garantizar la participación de las personas con discapacidad sin exclusiones. (622/000001)"
+    },
+    {
+      "source_record_pk": 147388,
+      "sample_initiative_id": "senado:leg12:exp:621/000009",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 23/2014, de 20 de noviembre, de reconocimiento mutuo de resoluciones penales en la Unión Europea, para regular la Orden Europea de Investigación. (621/000009)"
+    },
+    {
+      "source_record_pk": 147368,
+      "sample_initiative_id": "senado:leg10:exp:624/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 2/1979, de 3 de octubre, del Tribunal Constitucional, para el establecimiento del recurso previo de inconstitucionalidad para los Proyectos de Ley Orgánica de Estatuto de Autonomía o de su modificación. (624/000004)"
+    },
+    {
+      "source_record_pk": 147397,
+      "sample_initiative_id": "senado:leg12:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de Reformas Urgentes del Trabajo Autónomo. (624/000006)"
+    },
+    {
+      "source_record_pk": 147366,
+      "sample_initiative_id": "senado:leg10:exp:624/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de medidas para reforzar la protección a los deudores hipotecarios, reestructuración de deuda y alquiler social. (624/000001)"
+    },
+    {
+      "source_record_pk": 147364,
+      "sample_initiative_id": "senado:leg12:exp:621/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 19/1994, de 6 de julio, de modificación del Régimen Económico y Fiscal de Canarias. (621/000011)"
+    },
+    {
+      "source_record_pk": 147390,
+      "sample_initiative_id": "senado:leg12:exp:621/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 19/1994, de 6 de julio, de modificación del Régimen Económico y Fiscal de Canarias. (621/000011)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,153 @@
+{
+  "generated_at": "2026-04-13T18:42:05+00:00",
+  "run_kind": "source_scrape_queue_one_go_r3_summary",
+  "snapshot_date": "2026-04-13",
+  "seed_db_path": "etl/data/staging/politicos-es.one-go-r2-2026-04-13.db",
+  "execution": {
+    "mode": "preferred",
+    "only_repeatable_now": true,
+    "fallback_on_failure": "sample-if-available",
+    "command_timeout_seconds": 30
+  },
+  "queue_summary": {
+    "queue_items_total": 23,
+    "p0_total": 3,
+    "p1_total": 17,
+    "p2_total": 3,
+    "by_reason": {
+      "missing_reproducible_network_run": 17,
+      "blocked_upstream": 3,
+      "tracker_mismatch": 3
+    },
+    "by_domain": {
+      "politicos": 16,
+      "infoelectoral": 1,
+      "parlamentario": 6
+    },
+    "by_scope": {
+      "autonomico": 3,
+      "dinero": 6,
+      "ejecutivo": 2,
+      "electoral": 1,
+      "legal": 1,
+      "nacional": 6,
+      "outcomes": 4
+    },
+    "by_repeatability_state": {
+      "sample_replay_only": 16,
+      "blocked_with_sample": 3,
+      "network_verified": 3,
+      "manual_capture_required": 1
+    },
+    "repeatable_now_total": 22,
+    "sample_backed_total": 22,
+    "blocked_total": 3,
+    "batches_total": 12,
+    "catalog_sources_total": 45
+  },
+  "totals": {
+    "selected_total": 20,
+    "ok_total": 12,
+    "failed_total": 8,
+    "skipped_total": 3,
+    "fallback_total": 2
+  },
+  "highlights": {
+    "congreso_votaciones": {
+      "status": "ok_with_fallback",
+      "fallback_mode": "sample",
+      "records_loaded": 1
+    },
+    "congreso_iniciativas": {
+      "status": "ok",
+      "records_loaded": 535
+    },
+    "congreso_intervenciones": {
+      "status": "ok",
+      "records_loaded": 9,
+      "evidence_inserted": 9,
+      "pre_commands": [
+        "link-votes",
+        "backfill-topic-analytics --vote-source-ids congreso_votaciones"
+      ]
+    },
+    "senado_votaciones": {
+      "status": "ok_with_fallback",
+      "fallback_mode": "sample",
+      "records_loaded": 1
+    }
+  },
+  "skipped_pseudo_sources": [
+    {
+      "source_id": "bdns_subvenciones",
+      "reason": "no_command_available"
+    },
+    {
+      "source_id": "placsp_contratacion",
+      "reason": "no_command_available"
+    }
+  ],
+  "manual_capture_required_source_ids": [
+    "parl_initiative_docs"
+  ],
+  "blocked_upstream_source_ids": [
+    "parlamento_galicia_deputados",
+    "aemet_opendata_series",
+    "ree_esios_indicators"
+  ],
+  "remaining_under_threshold": [
+    {
+      "source_id": "parlamento_galicia_deputados",
+      "records_loaded": 3,
+      "strict_target": 50,
+      "repeatability_state": "blocked_with_sample"
+    },
+    {
+      "source_id": "parlamento_navarra_parlamentarios_forales",
+      "records_loaded": 3,
+      "strict_target": 30,
+      "repeatability_state": "sample_replay_only"
+    },
+    {
+      "source_id": "bdns_api_subvenciones",
+      "records_loaded": 3,
+      "strict_target": 10,
+      "repeatability_state": "sample_replay_only"
+    },
+    {
+      "source_id": "bdns_autonomico",
+      "records_loaded": 2,
+      "strict_target": 3,
+      "repeatability_state": "sample_replay_only"
+    },
+    {
+      "source_id": "placsp_autonomico",
+      "records_loaded": 2,
+      "strict_target": 3,
+      "repeatability_state": "sample_replay_only"
+    },
+    {
+      "source_id": "placsp_sindicacion",
+      "records_loaded": 3,
+      "strict_target": 10,
+      "repeatability_state": "sample_replay_only"
+    },
+    {
+      "source_id": "boe_api_legal",
+      "records_loaded": 3,
+      "strict_target": 5,
+      "repeatability_state": "sample_replay_only"
+    },
+    {
+      "source_id": "bde_series_api",
+      "records_loaded": 2,
+      "strict_target": 58,
+      "repeatability_state": "sample_replay_only"
+    }
+  ],
+  "notes": [
+    "Validated rerun on a temp copy of the one-go-r2 DB.",
+    "Pseudo-sources no longer fail as runnable ingest commands.",
+    "Congreso declared-intervention replay now validates after vote linking and topic analytics pre-commands."
+  ]
+}

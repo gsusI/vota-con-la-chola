@@ -1,0 +1,48 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 3,
+  "upserted": 3,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 3
+  },
+  "by_doc_format": {
+    "xml": 3
+  },
+  "sample": [
+    {
+      "source_record_pk": 147099,
+      "sample_initiative_id": "senado:leg12:exp:624/000005",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 17/2006, de 5 de junio, de la radio y la televisión de titularidad estatal, para recuperar la independencia de la Corporación RTVE y el pluralismo en la elección parlamentaria de sus órganos. (624/000005)"
+    },
+    {
+      "source_record_pk": 147100,
+      "sample_initiative_id": "senado:leg12:exp:626/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.2. (626/000010)"
+    },
+    {
+      "source_record_pk": 147098,
+      "sample_initiative_id": "senado:leg12:exp:622/000020",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 37/2015, de 29 de septiembre, de carreteras, para eximir del pago de peajes a personas con movilidad reducida que las utilicen para sus desplazamientos. (622/000020)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

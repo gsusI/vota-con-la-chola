@@ -1,0 +1,17 @@
+{
+  "playwright_init_error": null,
+  "playwright_runtime": {
+    "driver_node_path": "playwright/driver/node",
+    "driver_node_rc": null,
+    "effective_nodejs_path": "<abs>/node",
+    "fallback_applied": true,
+    "system_cli_rc": 0,
+    "system_node_path": "<abs>/node"
+  },
+  "fetched_ok": 0,
+  "failures_sample": [
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000074 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000096 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000102 -> HTTPStatusError: warmup failed (playwright) status=403"
+  ]
+}

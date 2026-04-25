@@ -1,0 +1,39 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 2,
+  "upserted": 2,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 2
+  },
+  "by_doc_format": {
+    "xml": 2
+  },
+  "sample": [
+    {
+      "source_record_pk": 147102,
+      "sample_initiative_id": "senado:leg12:exp:622/000028",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para reconocer el carácter de tribunal consuetudinario y tradicional al Tribunal del Comuner o del Rollet de l'Horta de Aldaia (Valencia/València). (622/000028)"
+    },
+    {
+      "source_record_pk": 147103,
+      "sample_initiative_id": "senado:leg14:exp:622/000015",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para despenalizar las injurias a la Corona y los ultrajes a España. (622/000015)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

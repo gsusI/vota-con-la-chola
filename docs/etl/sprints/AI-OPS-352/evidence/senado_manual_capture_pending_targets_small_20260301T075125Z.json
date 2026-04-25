@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-03-01T07:51:25+00:00",
+  "status": "degraded",
+  "progress_json": "docs/etl/sprints/AI-OPS-352/evidence/senado_manual_capture_target_progress_20260301T075033Z.json",
+  "progress_csv": "docs/etl/sprints/AI-OPS-352/exports/senado_manual_capture_target_progress_20260301T075033Z.csv",
+  "progress_status": "degraded",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 2
+  },
+  "totals": {
+    "targets_total": 8,
+    "pending_targets_total": 2,
+    "pending_unmatched_total": 0,
+    "pending_matched_not_usable_total": 2,
+    "pending_access_denied_total": 2,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 2,
+    "pending_commands_total": 2,
+    "pending_commands_fallback_total": 2
+  },
+  "pending_reasons": {
+    "matched_access_denied": 2
+  },
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining"
+  ],
+  "sample_pending_targets": [
+    {
+      "target_rank": 1,
+      "target_id": "target_01",
+      "cohort": "seed",
+      "capture_url": "https://www.senado.es/",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 2,
+      "target_id": "target_02",
+      "cohort": "leg10:tipo610",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+      "pending_reason": "matched_access_denied"
+    }
+  ],
+  "commands_out": "docs/etl/sprints/AI-OPS-352/exports/senado_manual_capture_pending_targets_small_commands_20260301T075125Z.sh"
+}

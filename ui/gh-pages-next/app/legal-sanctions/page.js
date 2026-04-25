@@ -1,14 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
-
-function withBasePath(path) {
-  return `${resolveBasePath()}${path}`;
-}
+import { resolveBasePath, withBasePath } from "../path-utils.mjs";
 
 function toInt(value) {
   const parsed = Number(value);
@@ -157,6 +150,7 @@ function setUrlState(state) {
 export default function LegalSanctionsPage() {
   const { loading, error, data } = useLegalSanctionsPayload();
   const [state, setState] = useState(() => readUrlState());
+  const payload = data || {};
 
   useEffect(() => {
     setState(readUrlState());
@@ -166,53 +160,18 @@ export default function LegalSanctionsPage() {
     setUrlState(state);
   }, [state]);
 
-  if (loading) {
-    return (
-      <main className="shell">
-        <section className="card block">
-          <h1>Cargando legal + sanciones…</h1>
-        </section>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="shell">
-        <section className="card block">
-          <h1>No se pudo cargar el snapshot</h1>
-          <p className="sub">{error}</p>
-          <p className="sub">
-            <a href={withBasePath("/legal-sanctions/?")}>Reintentar</a>
-          </p>
-        </section>
-      </main>
-    );
-  }
-
-  if (!data) {
-    return (
-      <main className="shell">
-        <section className="card block">
-          <h1>Sin datos</h1>
-          <p className="sub">No se encontró el snapshot de monitorización jurídica.</p>
-        </section>
-      </main>
-    );
-  }
-
   const query = normalizeQuery(state.q);
-  const legalGraph = data.legal_graph || {};
-  const infractionNetwork = data.infraction_network || {};
-  const volume = data.sanction_volume_monitoring || {};
-  const kpiRows = data.procedural_kpi_drift || [];
-  const municipal = data.municipal_monitoring || {};
+  const legalGraph = payload.legal_graph || {};
+  const infractionNetwork = payload.infraction_network || {};
+  const volume = payload.sanction_volume_monitoring || {};
+  const kpiRows = payload.procedural_kpi_drift || [];
+  const municipal = payload.municipal_monitoring || {};
   const municipalSummary = municipal.summary || {};
   const citySummary = municipal.city_summary || [];
   const ordinanceRows = municipal.ordinance_rows || [];
-  const responsibility = data.responsibility_summary || {};
-  const liberty = data.liberty_restriction_monitoring || {};
-  const sourceFilters = data.filters || {};
+  const responsibility = payload.responsibility_summary || {};
+  const liberty = payload.liberty_restriction_monitoring || {};
+  const sourceFilters = payload.filters || {};
 
   const legalNodes = useMemo(() => (Array.isArray(legalGraph.nodes) ? legalGraph.nodes : []), [legalGraph.nodes]);
   const legalEdges = useMemo(() => (Array.isArray(legalGraph.edges) ? legalGraph.edges : []), [legalGraph.edges]);
@@ -366,17 +325,52 @@ export default function LegalSanctionsPage() {
       .sort((a, b) => `${a.granularity} ${a.periodDate}`.localeCompare(`${b.granularity} ${b.periodDate}`));
   }, [volumePeriods]);
 
+  if (loading) {
+    return (
+      <main className="shell">
+        <section className="legal-sanctions-loading card block">
+          <h1 className="legal-sanctions-loading__title">Cargando legal + sanciones…</h1>
+        </section>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="shell">
+        <section className="legal-sanctions-error card block">
+          <h1 className="legal-sanctions-error__title">No se pudo cargar el snapshot</h1>
+          <p className="legal-sanctions-error__message sub">{error}</p>
+          <p className="legal-sanctions-error__retry sub">
+            <a className="legal-sanctions-error__retry-link" href={withBasePath("/legal-sanctions/?")}>Reintentar</a>
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  if (!data) {
+    return (
+      <main className="shell">
+        <section className="legal-sanctions-empty card block">
+          <h1 className="legal-sanctions-empty__title">Sin datos</h1>
+          <p className="legal-sanctions-empty__message sub">No se encontró el snapshot de monitorización jurídica.</p>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Normas y sanciones</p>
+        <p className="eyebrow">Legal + sanciones</p>
         <h1>Monitor jurídico y de ejecución sancionadora</h1>
         <p className="sub">
           Conecta normas, vínculos de texto, tipos de infracción, volúmenes de sanciones y evolución de KPIs
           procedimentales. También incluye monitor municipal y restricciones de derechos con trazabilidad pública.
         </p>
         <div className="chips">
-          <span className="chip">Publicación: {data.snapshot_date || "—"}</span>
+          <span className="chip">Snapshot: {data.snapshot_date || "—"}</span>
           <span className="chip">Nodos normativos: {formatInt(legalGraph.node_count || 0)}</span>
           <span className="chip">Aristas de línea: {formatInt(legalGraph.edge_count || 0)}</span>
           <span className="chip">Tipos de infracción: {formatInt(filteredInfractionTypes.length)}</span>

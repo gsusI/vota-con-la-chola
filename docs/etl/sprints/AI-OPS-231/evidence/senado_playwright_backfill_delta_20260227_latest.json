@@ -1,0 +1,68 @@
+{
+  "playwright_backfill": {
+    "initiatives_seen": 25,
+    "urls_to_fetch": 50,
+    "fetched_ok": 0,
+    "playwright_init_error": null,
+    "playwright_runtime": {
+      "driver_node_path": "playwright/driver/node",
+      "driver_node_rc": null,
+      "effective_nodejs_path": "<abs>/node",
+      "fallback_applied": true,
+      "last_fetch_status": 403,
+      "system_cli_rc": 0,
+      "system_node_path": "<abs>/node",
+      "warmup_attempted": true,
+      "warmup_error": null,
+      "warmup_ok": false,
+      "warmup_soft_failed": true,
+      "warmup_status": 403
+    },
+    "failures_sample": [
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000064 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000003 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000004 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000005 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000006 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000008 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=626&numEx=000001 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=626&numEx=000003 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=626&numEx=000007 -> HTTPStatusError: HTTP 403 (playwright)",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000064 -> HTTPStatusError: HTTP 403 (playwright)"
+    ]
+  },
+  "queue_linked": {
+    "pre": {
+      "rows": 680,
+      "initiatives": 345
+    },
+    "post": {
+      "rows": 680,
+      "initiatives": 345
+    }
+  },
+  "queue_zero_doc": {
+    "pre": {
+      "rows": 25,
+      "initiatives": 25
+    },
+    "post": {
+      "rows": 25,
+      "initiatives": 25
+    }
+  },
+  "quality_linked_scope": {
+    "pre": {
+      "missing_doc_links_actionable_selected": 680,
+      "actionable_doc_links_closed_pct_selected": 0.672604718343765,
+      "gate_passed": false,
+      "gate_metric": "actionable_doc_links_closed_pct_linked_to_votes"
+    },
+    "post": {
+      "missing_doc_links_actionable_selected": 680,
+      "actionable_doc_links_closed_pct_selected": 0.672604718343765,
+      "gate_passed": false,
+      "gate_metric": "actionable_doc_links_closed_pct_linked_to_votes"
+    }
+  }
+}

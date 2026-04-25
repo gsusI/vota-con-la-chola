@@ -1,0 +1,31 @@
+{
+  "seed_path": "docs/etl/sprints/AI-OPS-286/exports/liberty_delegated_enforcement_seed_pending_reviewed_latest.json",
+  "seed_out_path": "docs/etl/sprints/AI-OPS-305/exports/liberty_delegated_enforcement_seed_step1_from_288.json",
+  "input_csv": "docs/etl/sprints/AI-OPS-288/exports/liberty_delegated_person_window_auto_review_decisions_targeted_latest.csv",
+  "dry_run": false,
+  "apply": {
+    "counts": {
+      "rows_seen": 8,
+      "rows_with_decision": 8,
+      "approved_rows": 6,
+      "ignored_rows": 0,
+      "pending_rows": 2,
+      "updated_rows": 4,
+      "skipped_blank_decision": 0,
+      "skipped_invalid_decision": 0,
+      "skipped_missing_link_key": 0,
+      "skipped_link_not_found": 2,
+      "skipped_invalid_date": 0,
+      "skipped_inverted_window": 0,
+      "skipped_empty_designated_actor_after_review": 0
+    },
+    "failures": []
+  },
+  "validation": {
+    "valid": true,
+    "errors_count": 0,
+    "warnings_count": 0,
+    "errors": [],
+    "warnings": []
+  }
+}

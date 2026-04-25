@@ -1,0 +1,49 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 3,
+  "upserted": 3,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_sentence": 2,
+    "title_hint_strong": 1
+  },
+  "by_doc_format": {
+    "html": 3
+  },
+  "sample": [
+    {
+      "source_record_pk": 147038,
+      "sample_initiative_id": "senado:leg14:exp:621/000051",
+      "doc_format": "html",
+      "subject_method": "keyword_sentence",
+      "confidence": 0.76,
+      "needs_review": 0,
+      "extracted_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 4 MARZO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias I…"
+    },
+    {
+      "source_record_pk": 147039,
+      "sample_initiative_id": "senado:leg14:exp:621/000066",
+      "doc_format": "html",
+      "subject_method": "keyword_sentence",
+      "confidence": 0.76,
+      "needs_review": 0,
+      "extracted_subject": "Ir al Contenido (Presione enter) SENADO DE ESPAÑA Español English Català Euskara Galego Valencià Menú Enlaces Diccionario parlamentario Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 22 MAYO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias I…"
+    },
+    {
+      "source_record_pk": 147040,
+      "sample_initiative_id": "senado:leg14:exp:621/000076",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de pesca sostenible e investigación pesquera. (621/000076)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

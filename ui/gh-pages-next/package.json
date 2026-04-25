@@ -1,10 +1,10 @@
 {
-  "name": "gh-pages-next",
+  "name": "vclc-static-app",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "export:gh": "next build"
+    "build": "next build --webpack",
+    "export:cloudflare": "next build --webpack"
   },
   "dependencies": {
     "next": "16.1.6",

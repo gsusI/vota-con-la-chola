@@ -209,6 +209,22 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Source IDs money de subvenciones a mapear",
     )
 
+    backfill_government_org_units = subparsers.add_parser(
+        "backfill-government-org-units",
+        help="Mapea source_records oficiales de organigrama (DIR3) a government_org_units/relationships",
+    )
+    backfill_government_org_units.add_argument(
+        "--db",
+        default=str(DEFAULT_DB),
+        help="Ruta al archivo SQLite",
+    )
+    backfill_government_org_units.add_argument(
+        "--source-ids",
+        nargs="+",
+        default=["dir3_unidades_age"],
+        help="Source IDs de organigrama oficial a mapear",
+    )
+
     backfill_indicators = subparsers.add_parser(
         "backfill-indicators",
         help="Armoniza source_records de Eurostat/BDE/AEMET hacia indicator_series/indicator_points/observation_records",
@@ -571,6 +587,32 @@ def cmd_backfill_money_subsidy_records(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_backfill_government_org_units(args: argparse.Namespace) -> int:
+    from .government_org import backfill_government_org_units  # noqa: PLC0415
+
+    db_path = Path(args.db)
+    if not db_path.exists():
+        print(f"Base no encontrada: {db_path}", file=sys.stderr)
+        return 2
+
+    source_ids = tuple(str(s).strip() for s in (args.source_ids or []) if str(s).strip())
+    if not source_ids:
+        print("Debe indicar al menos un source_id", file=sys.stderr)
+        return 2
+
+    conn = open_db(db_path)
+    try:
+        apply_schema(conn, DEFAULT_SCHEMA)
+        seed_sources(conn)
+        seed_dimensions(conn)
+        result = backfill_government_org_units(conn, source_ids=source_ids)
+    finally:
+        conn.close()
+
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
 def cmd_backfill_indicators(args: argparse.Namespace) -> int:
     from .indicator_backfill import backfill_indicator_harmonization  # noqa: PLC0415
 
@@ -783,6 +825,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_backfill_placsp_contract_details(args)
     if args.command == "backfill-money-subsidy-records":
         return cmd_backfill_money_subsidy_records(args)
+    if args.command == "backfill-government-org-units":
+        return cmd_backfill_government_org_units(args)
     if args.command == "backfill-indicators":
         return cmd_backfill_indicators(args)
     if args.command == "export-run-snapshot":

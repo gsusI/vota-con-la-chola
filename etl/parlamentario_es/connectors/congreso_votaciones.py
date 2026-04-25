@@ -138,6 +138,19 @@ def _parse_leg_filter(value: Any) -> list[int]:
     return out
 
 
+def _legislature_from_payload(payload: dict[str, Any], *, leg_filter: list[int]) -> str | None:
+    for key in ("legislature", "LEGISLATURA"):
+        value = normalize_ws(str(payload.get(key) or ""))
+        if value.isdigit():
+            return value
+        match = re.search(r"(\d+)", value)
+        if match:
+            return str(int(match.group(1)))
+    if len(leg_filter) == 1:
+        return str(int(leg_filter[0]))
+    return None
+
+
 def _base_congreso_url(resolved_url: str) -> str:
     parsed = urlparse(resolved_url)
     if parsed.scheme and parsed.netloc:
@@ -205,7 +218,7 @@ class CongresoVotacionesConnector(BaseConnector):
                 records.append(
                     {
                         "detail_url": f"file://{p.resolve()}",
-                        "legislature": None,
+                        "legislature": _legislature_from_payload(payload, leg_filter=leg_filter),
                         "session_number": sesion,
                         "vote_number": numero,
                         "vote_date": fecha_iso,

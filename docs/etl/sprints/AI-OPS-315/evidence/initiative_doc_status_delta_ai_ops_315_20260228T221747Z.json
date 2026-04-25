@@ -1,0 +1,147 @@
+{
+  "generated_at": "2026-02-28T22:18:58+00:00",
+  "ts": "20260228T221747Z",
+  "overall": {
+    "total_doc_links": {
+      "before": 9553,
+      "after": 9553,
+      "delta": 0
+    },
+    "downloaded_doc_links": {
+      "before": 4248,
+      "after": 4334,
+      "delta": 86
+    },
+    "missing_doc_links": {
+      "before": 5305,
+      "after": 5219,
+      "delta": -86
+    },
+    "missing_doc_links_actionable": {
+      "before": 5088,
+      "after": 5035,
+      "delta": -53
+    },
+    "downloaded_doc_links_pct": {
+      "before": 44.47,
+      "after": 45.37,
+      "delta": 0.9
+    },
+    "effective_downloaded_doc_links_pct": {
+      "before": 45.5,
+      "after": 46.26,
+      "delta": 0.76
+    },
+    "downloaded_with_extraction": {
+      "before": 4248,
+      "after": 4334,
+      "delta": 86
+    },
+    "downloaded_missing_extraction": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "extraction_coverage_pct": {
+      "before": 100.0,
+      "after": 100.0,
+      "delta": 0.0
+    }
+  },
+  "by_source": {
+    "senado_iniciativas": {
+      "total_doc_links": {
+        "before": 8741,
+        "after": 8741,
+        "delta": 0
+      },
+      "downloaded_doc_links": {
+        "before": 3436,
+        "after": 3522,
+        "delta": 86
+      },
+      "missing_doc_links": {
+        "before": 5305,
+        "after": 5219,
+        "delta": -86
+      },
+      "missing_doc_links_actionable": {
+        "before": 5088,
+        "after": 5035,
+        "delta": -53
+      },
+      "downloaded_doc_links_pct": {
+        "before": 39.31,
+        "after": 40.29,
+        "delta": 0.98
+      },
+      "effective_downloaded_doc_links_pct": {
+        "before": 40.31,
+        "after": 41.16,
+        "delta": 0.85
+      },
+      "downloaded_with_extraction": {
+        "before": 3436,
+        "after": 3522,
+        "delta": 86
+      },
+      "downloaded_missing_extraction": {
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      "extraction_coverage_pct": {
+        "before": 100.0,
+        "after": 100.0,
+        "delta": 0.0
+      }
+    },
+    "congreso_iniciativas": {
+      "total_doc_links": {
+        "before": 812,
+        "after": 812,
+        "delta": 0
+      },
+      "downloaded_doc_links": {
+        "before": 812,
+        "after": 812,
+        "delta": 0
+      },
+      "missing_doc_links": {
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      "missing_doc_links_actionable": {
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      "downloaded_doc_links_pct": {
+        "before": 100.0,
+        "after": 100.0,
+        "delta": 0.0
+      },
+      "effective_downloaded_doc_links_pct": {
+        "before": 100.0,
+        "after": 100.0,
+        "delta": 0.0
+      },
+      "downloaded_with_extraction": {
+        "before": 812,
+        "after": 812,
+        "delta": 0
+      },
+      "downloaded_missing_extraction": {
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      "extraction_coverage_pct": {
+        "before": 100.0,
+        "after": 100.0,
+        "delta": 0.0
+      }
+    }
+  }
+}

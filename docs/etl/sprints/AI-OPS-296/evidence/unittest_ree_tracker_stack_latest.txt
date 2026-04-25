@@ -1,0 +1,90 @@
+test_extract_from_sample_json_includes_series_metadata (tests.test_ree_connector.TestReeEsiosConnector.test_extract_from_sample_json_includes_series_metadata) ... ok
+test_parser_accepts_serialized_records_container (tests.test_ree_connector.TestReeEsiosConnector.test_parser_accepts_serialized_records_container) ... ok
+test_parser_rejects_metric_value_snapshot_payload (tests.test_ree_connector.TestReeEsiosConnector.test_parser_rejects_metric_value_snapshot_payload) ... ok
+test_parser_source_record_id_is_stable (tests.test_ree_connector.TestReeEsiosConnector.test_parser_source_record_id_is_stable) ... ok
+test_source_records_ingest_is_idempotent (tests.test_ree_connector.TestReeEsiosConnector.test_source_records_ingest_is_idempotent) ... ok
+test_bde_euribor_maps_to_vivienda_domain (tests.test_indicator_backfill.TestIndicatorBackfill.test_bde_euribor_maps_to_vivienda_domain) ... ok
+test_bde_interest_and_debt_maps_to_fiscal_domain (tests.test_indicator_backfill.TestIndicatorBackfill.test_bde_interest_and_debt_maps_to_fiscal_domain) ... ok
+test_frequency_conflicts_keep_separate_series_variants (tests.test_indicator_backfill.TestIndicatorBackfill.test_frequency_conflicts_keep_separate_series_variants) ... ok
+test_indicator_backfill_is_idempotent_and_traceable (tests.test_indicator_backfill.TestIndicatorBackfill.test_indicator_backfill_is_idempotent_and_traceable) ... ok
+test_indicator_backfill_seeds_domains_for_inferred_keys (tests.test_indicator_backfill.TestIndicatorBackfill.test_indicator_backfill_seeds_domains_for_inferred_keys) ... ok
+test_boe_payload_exposes_tracker_and_mismatch_fields_after_mapping (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_boe_payload_exposes_tracker_and_mismatch_fields_after_mapping) ... ok
+test_infer_tracker_source_ids_maps_bde_hint_without_tilde (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_infer_tracker_source_ids_maps_bde_hint_without_tilde) ... ok
+test_infer_tracker_source_ids_maps_marco_legal_to_boe_source (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_infer_tracker_source_ids_maps_marco_legal_to_boe_source) ... ok
+test_infer_tracker_source_ids_maps_moncloa_row (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_infer_tracker_source_ids_maps_moncloa_row) ... ok
+test_load_tracker_items_maps_money_and_outcomes_rows (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_load_tracker_items_maps_money_and_outcomes_rows) ... ok
+test_load_tracker_items_sets_boe_source_ids (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_load_tracker_items_sets_boe_source_ids) ... ok
+test_load_tracker_items_sets_moncloa_source_ids (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_load_tracker_items_sets_moncloa_source_ids) ... ok
+test_payload_exposes_money_outcomes_tracker_status_not_untracked (tests.test_graph_ui_server_tracker_mapping.TestGraphUiTrackerMapping.test_payload_exposes_money_outcomes_tracker_status_not_untracked) ... ok
+test_blocked_guard_keeps_navarra_partial_when_latest_load_is_zero (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_blocked_guard_keeps_navarra_partial_when_latest_load_is_zero) ... ok
+test_cli_fail_on_mismatch_accepts_active_waiver (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_cli_fail_on_mismatch_accepts_active_waiver) ... ok
+test_cli_fail_on_mismatch_fails_with_expired_waiver (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_cli_fail_on_mismatch_fails_with_expired_waiver) ... FAIL: checklist/sql mismatches detected.
+ok
+test_cli_fail_on_mismatch_returns_nonzero (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_cli_fail_on_mismatch_returns_nonzero) ... FAIL: checklist/sql mismatches detected.
+ok
+test_cli_normalize_run_snapshot_converts_legacy_metric_value (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_cli_normalize_run_snapshot_converts_legacy_metric_value) ... ok
+test_default_waivers_path_is_canonical_registry (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_default_waivers_path_is_canonical_registry) ... ok
+test_done_zero_real_enforcement_not_weakened_by_waiver (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_done_zero_real_enforcement_not_weakened_by_waiver) ... FAIL: DONE sources with zero real-network loaded records detected.
+ok
+test_infer_tracker_source_ids_maps_money_outcomes_from_fuente_hints (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_infer_tracker_source_ids_maps_money_outcomes_from_fuente_hints) ... ok
+test_load_mismatch_waivers_splits_active_and_expired (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_load_mismatch_waivers_splits_active_and_expired) ... ok
+test_parse_tracker_rows_maps_marco_legal_electoral_to_boe_source_id (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_parse_tracker_rows_maps_marco_legal_electoral_to_boe_source_id) ... ok
+test_parse_tracker_rows_maps_moncloa_to_both_source_ids (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_parse_tracker_rows_maps_moncloa_to_both_source_ids) ... ok
+test_parse_tracker_rows_maps_money_and_outcomes_rows_to_expected_source_ids (tests.test_e2e_tracker_status_tracker.TestE2ETrackerStatusTrackerRules.test_parse_tracker_rows_maps_money_and_outcomes_rows_to_expected_source_ids) ... ok
+test_outcomes_fallback_samples_emit_parseable_from_file_payloads (tests.test_tracker_contract_parity.TestTrackerContractParity.test_outcomes_fallback_samples_emit_parseable_from_file_payloads) ... ok
+test_placsp_bdns_samples_follow_tracker_artifact_contract (tests.test_tracker_contract_parity.TestTrackerContractParity.test_placsp_bdns_samples_follow_tracker_artifact_contract) ... ok
+test_replay_snapshot_normalization_uses_canonical_fields (tests.test_tracker_contract_parity.TestTrackerContractParity.test_replay_snapshot_normalization_uses_canonical_fields) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 1.050s
+
+OK
+source_id          | checklist | sql  | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result         
+-------------------+-----------+------+---------------+---------+---------+-------------+----------------------+----------------
+congreso_diputados | PARTIAL   | DONE | 1/1           | 5       | 5       | 5           | 1/0                  | WAIVED_MISMATCH
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 0
+waived_mismatches: 1
+waivers_active: 1
+waivers_expired: 0
+done_zero_real: 0
+source_id          | checklist | sql  | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result  
+-------------------+-----------+------+---------------+---------+---------+-------------+----------------------+---------
+congreso_diputados | PARTIAL   | DONE | 1/1           | 5       | 5       | 5           | 1/0                  | MISMATCH
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 1
+waived_mismatches: 0
+waivers_active: 0
+waivers_expired: 1
+done_zero_real: 0
+source_id          | checklist | sql  | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result  
+-------------------+-----------+------+---------------+---------+---------+-------------+----------------------+---------
+congreso_diputados | PARTIAL   | DONE | 1/1           | 5       | 5       | 5           | 1/0                  | MISMATCH
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 1
+waived_mismatches: 0
+waivers_active: 0
+waivers_expired: 0
+done_zero_real: 0
+source_id: placsp_autonomico
+mode: strict-network
+exit_code: 0
+run_records_loaded: 106
+snapshot_date: 2026-02-17
+source_id          | checklist | sql     | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result        
+-------------------+-----------+---------+---------------+---------+---------+-------------+----------------------+---------------
+congreso_diputados | DONE      | PARTIAL | 1/1           | 0       | 5       | 5           | 0/1                  | DONE_ZERO_REAL
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 0
+waived_mismatches: 1
+waivers_active: 1
+waivers_expired: 0
+done_zero_real: 1

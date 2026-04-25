@@ -1,0 +1,57 @@
+OK wrote docs/etl/sprints/AI-OPS-273/exports/programas_support_precision_sample_post_fix_latest.csv (rows=40)
+OK wrote docs/etl/sprints/AI-OPS-273/evidence/programas_support_precision_sample_post_fix_summary_latest.json
+{
+  "source_id": "programas_partidos",
+  "dedupe_key": "none",
+  "candidate_total_before_dedupe": 123,
+  "dropped_duplicates_total": 0,
+  "dropped_duplicates_by_party": {},
+  "excerpt_window_words": 0,
+  "excerpt_window_stride": 0,
+  "excerpt_window_min_words": 12,
+  "windowed_rows_total": 0,
+  "sample_total": 40,
+  "target_parties": [
+    "BNG",
+    "VOX",
+    "FORO Asturias",
+    "PP"
+  ],
+  "by_party": {
+    "BNG": 10,
+    "VOX": 10,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "unique_by_party": {
+    "BNG": 10,
+    "VOX": 10,
+    "FORO Asturias": 10,
+    "PP": 10
+  },
+  "available_unique_by_party": {
+    "BNG": 31,
+    "VOX": 18,
+    "FORO Asturias": 44,
+    "PP": 30
+  },
+  "min_unique_per_party": 0,
+  "effective_min_unique_per_party_by_party": {
+    "BNG": 0,
+    "VOX": 0,
+    "FORO Asturias": 0,
+    "PP": 0
+  },
+  "parties_below_min_unique": [],
+  "parties_below_effective_min_unique": [],
+  "parties_capped_by_available_unique": [],
+  "missing_parties": [],
+  "checks": {
+    "required_parties_covered": true,
+    "min_unique_per_party_met": true,
+    "min_unique_per_party_effective_met": true
+  },
+  "status": "ok",
+  "passed": true,
+  "strict_fail_reasons": []
+}

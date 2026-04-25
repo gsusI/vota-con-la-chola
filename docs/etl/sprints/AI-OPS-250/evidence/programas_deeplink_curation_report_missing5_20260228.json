@@ -1,0 +1,168 @@
+{
+  "generated_at": "2026-02-28T10:56:39+00:00",
+  "input_manifest": "docs/etl/sprints/AI-OPS-250/exports/programas_manifest_missing5_input_20260228.csv",
+  "output_manifest": "docs/etl/sprints/AI-OPS-250/exports/programas_manifest_missing5_curated_20260228.csv",
+  "rows_total": 15,
+  "rows_updated": 9,
+  "rows_kept": 6,
+  "rows_skipped": 0,
+  "failures_total": 0,
+  "failures": [],
+  "probes": [
+    {
+      "party_id": "18",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.eaj-pnv.eus/documentos",
+      "selected_url": "https://www.eaj-pnv.eus/es/adjuntos-documentos/20945/pdf/con-voz-propia-programa-electoral-23-j",
+      "selected_score": 14,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "73",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.upn.org/propuestas",
+      "selected_url": "https://www.upn.org/propuestas",
+      "selected_score": 4,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "347",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_score": 6,
+      "selected_reason": "no_candidate_above_threshold",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "7628",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/",
+      "selected_url": "https://izquierdaunida.org/wp-content/uploads/2019/10/Programa-IU-10N-22-medidas-clave.pdf",
+      "selected_score": 20,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "67790",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.socialistes.cat/programa",
+      "selected_url": "https://www.socialistes.cat/coneixnos/",
+      "selected_score": 10,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "18",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.eaj-pnv.eus/documentos",
+      "selected_url": "https://www.eaj-pnv.eus/es/adjuntos-documentos/20945/pdf/con-voz-propia-programa-electoral-23-j",
+      "selected_score": 14,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "73",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.upn.org/propuestas",
+      "selected_url": "https://www.upn.org/propuestas",
+      "selected_score": 4,
+      "selected_reason": "cache:no_candidate_above_threshold",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "347",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_score": 6,
+      "selected_reason": "cache:no_candidate_above_threshold",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "7628",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/",
+      "selected_url": "https://izquierdaunida.org/wp-content/uploads/2019/10/Programa-IU-10N-22-medidas-clave.pdf",
+      "selected_score": 20,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "67790",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.socialistes.cat/programa",
+      "selected_url": "https://www.socialistes.cat/coneixnos/",
+      "selected_score": 10,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "18",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.eaj-pnv.eus/documentos",
+      "selected_url": "https://www.eaj-pnv.eus/es/adjuntos-documentos/20945/pdf/con-voz-propia-programa-electoral-23-j",
+      "selected_score": 14,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "73",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.upn.org/propuestas",
+      "selected_url": "https://www.upn.org/propuestas",
+      "selected_score": 4,
+      "selected_reason": "cache:no_candidate_above_threshold",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "347",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_url": "https://coalicioncanaria.org/programas-electorales/",
+      "selected_score": 6,
+      "selected_reason": "cache:no_candidate_above_threshold",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "7628",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/",
+      "selected_url": "https://izquierdaunida.org/wp-content/uploads/2019/10/Programa-IU-10N-22-medidas-clave.pdf",
+      "selected_score": 20,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    },
+    {
+      "party_id": "67790",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.socialistes.cat/programa",
+      "selected_url": "https://www.socialistes.cat/coneixnos/",
+      "selected_score": 10,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 25,
+      "error": null
+    }
+  ],
+  "config": {
+    "timeout": 20,
+    "min_score": 7,
+    "max_probe_candidates": 25
+  }
+}

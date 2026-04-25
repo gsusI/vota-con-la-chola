@@ -16,7 +16,7 @@ function usage() {
     "",
     "Options:",
     "  --source <path>     Source codec path (default: ui/citizen/preset_codec.js)",
-    "  --published <path>  Published codec path (default: docs/gh-pages/citizen/preset_codec.js)",
+    "  --published <path>  Published codec path (default: ui/gh-pages-next/public/legacy/citizen/preset_codec.js)",
     "  --json-out <path>   Optional output file for JSON report",
     "  --strict            Exit non-zero when parity fails",
     "  --help              Show this help",
@@ -26,7 +26,7 @@ function usage() {
 function parseArgs(argv) {
   const out = {
     source: "ui/citizen/preset_codec.js",
-    published: "docs/gh-pages/citizen/preset_codec.js",
+    published: "ui/gh-pages-next/public/legacy/citizen/preset_codec.js",
     jsonOut: "",
     strict: false,
     help: false,

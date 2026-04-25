@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_SNAPSHOT = Path("docs/gh-pages/citizen/data/citizen.json")
+DEFAULT_SNAPSHOT = Path("ui/gh-pages-next/public/citizen/data/citizen.json")
 DEFAULT_CONCERNS_CONFIG = Path("ui/citizen/concerns_v1.json")
 DEFAULT_OUT = Path("docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_latest.json")
 

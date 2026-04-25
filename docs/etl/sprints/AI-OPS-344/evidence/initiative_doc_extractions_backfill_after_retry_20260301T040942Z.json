@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 54,
+  "upserted": 54,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 54
+  },
+  "by_doc_format": {
+    "html": 54
+  },
+  "sample": [
+    {
+      "source_record_pk": 147244,
+      "sample_initiative_id": "senado:leg14:exp:621/000083",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de maltrato animal. (621/000083)"
+    },
+    {
+      "source_record_pk": 147266,
+      "sample_initiative_id": "senado:leg14:exp:622/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para reconocer el carácter de tribunal consuetudinario y tradicional al Juzgado Privativo de Aguas de Orihuela (Alicante/Alacant) y Pueblos de su Marco y al Tribunal del Comuner del Rollet de Gràcia de l'Horta d'A…"
+    },
+    {
+      "source_record_pk": 147250,
+      "sample_initiative_id": "senado:leg14:exp:624/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 19/2013, de 9 de diciembre, de transparencia, acceso a la información pública y buen gobierno, con el fin de regular las estadísticas de las microempresas, pequeñas y medianas empresas (PYME) en la contratación pública. (624/000012)"
+    },
+    {
+      "source_record_pk": 147272,
+      "sample_initiative_id": "senado:leg14:exp:624/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 19/2013, de 9 de diciembre, de transparencia, acceso a la información pública y buen gobierno, con el fin de regular las estadísticas de las microempresas, pequeñas y medianas empresas (PYME) en la contratación pública. (624/000012)"
+    },
+    {
+      "source_record_pk": 147273,
+      "sample_initiative_id": "senado:leg14:exp:624/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General, para la regulación del ejercicio del voto por los españoles que viven en el extranjero. (624/000013)"
+    },
+    {
+      "source_record_pk": 147225,
+      "sample_initiative_id": "senado:leg10:exp:605/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Estatuto de Autonomía de Castilla-La Mancha. (605/000002)"
+    },
+    {
+      "source_record_pk": 147227,
+      "sample_initiative_id": "senado:leg10:exp:610/000055",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio complementario de revisión del Convenio de Seguridad Social firmado el 16 de mayo de 1991 entre el Reino de España y la República Federativa de Brasil, hecho en Madrid el 24 de julio de 2012. (610/000055)"
+    },
+    {
+      "source_record_pk": 147242,
+      "sample_initiative_id": "senado:leg10:exp:610/000070",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la República de Guinea al Convenio sobre los aspectos civiles de la sustracción internacional de menores, hecho en La Haya el 25 de octubre de 1980. (610/000070)"
+    },
+    {
+      "source_record_pk": 147252,
+      "sample_initiative_id": "senado:leg14:exp:624/000015",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de los artículos 570 bis y 599 de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial. (624/000015)"
+    },
+    {
+      "source_record_pk": 147275,
+      "sample_initiative_id": "senado:leg14:exp:624/000015",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de los artículos 570 bis y 599 de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial. (624/000015)"
+    },
+    {
+      "source_record_pk": 147243,
+      "sample_initiative_id": "senado:leg10:exp:610/000071",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio relativo a garantías internacionales sobre elementos de equipo móvil, hecho en Ciudad del Cabo el 16 de noviembre de 2001. (610/000071)"
+    },
+    {
+      "source_record_pk": 147226,
+      "sample_initiative_id": "senado:leg10:exp:610/000053",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de Montenegro al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000053)"
+    },
+    {
+      "source_record_pk": 147228,
+      "sample_initiative_id": "senado:leg10:exp:610/000056",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la República de Colombia al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000056)"
+    },
+    {
+      "source_record_pk": 147229,
+      "sample_initiative_id": "senado:leg10:exp:610/000057",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la Antigua República Yugoslava de Macedonia al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000057)"
+    },
+    {
+      "source_record_pk": 147253,
+      "sample_initiative_id": "senado:leg14:exp:624/000016",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para el reconocimiento efectivo del tiempo de prestación del servicio social de la mujer en el acceso a la pensión de jubilación parcial. (624/000016)"
+    },
+    {
+      "source_record_pk": 147276,
+      "sample_initiative_id": "senado:leg14:exp:624/000016",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para el reconocimiento efectivo del tiempo de prestación del servicio social de la mujer en el acceso a la pensión de jubilación parcial. (624/000016)"
+    },
+    {
+      "source_record_pk": 147254,
+      "sample_initiative_id": "senado:leg14:exp:624/000018",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para el establecimiento de gravámenes temporales energético y de entidades de crédito y establecimientos financieros de crédito y por la que se crea el impuesto temporal de solidaridad de las grandes fortunas, y se modifican determinadas normas tributarias. (624/000018)"
+    },
+    {
+      "source_record_pk": 147277,
+      "sample_initiative_id": "senado:leg14:exp:624/000018",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para el establecimiento de gravámenes temporales energético y de entidades de crédito y establecimientos financieros de crédito y por la que se crea el impuesto temporal de solidaridad de las grandes fortunas, y se modifican determinadas normas tributarias. (624/000018)"
+    },
+    {
+      "source_record_pk": 147232,
+      "sample_initiative_id": "senado:leg10:exp:610/000060",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Tratado sobre el derecho de Patentes, Reglamento del Tratado sobre el derecho de Patentes y Declaraciones concertadas por la Conferencia Diplomática relativas al Tratado y al Reglamento, hechos en Ginebra el 1 de junio de 2000. (610/000060)"
+    },
+    {
+      "source_record_pk": 147237,
+      "sample_initiative_id": "senado:leg10:exp:610/000065",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Reino de Marruecos sobre supresión recíproca de visados en pasaportes de servicio, hecho en Rabat el 3 de octubre de 2012. (610/000065)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

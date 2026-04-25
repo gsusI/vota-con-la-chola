@@ -1,0 +1,82 @@
+{
+  "filters": {
+    "person_id": null,
+    "topic_id": null,
+    "topic_set_id": null
+  },
+  "items": [
+    {
+      "evidence_confidence": 0.2,
+      "evidence_date": "2026-02-28",
+      "evidence_excerpt": "la union europea a los ciudadanos europa en un mundo globalizado 305 una de las consecuencias de la creciente interconexion de nuestras sociedades y economias es el hecho que la accion europea es necesaria no solo para crear un mercado interior y una comunidad",
+      "evidence_id": 1560595,
+      "evidence_polarity": 0,
+      "evidence_stance": "unclear",
+      "evidence_stance_method": "programa_metadata",
+      "evidence_type": "declared:programa",
+      "extractor_version": "declared:regex_v3",
+      "note": "no explicit declared stance pattern found",
+      "person_id": 75656,
+      "person_name": "PP",
+      "review_created_at": "2026-02-28T10:49:58+00:00",
+      "review_id": 6993,
+      "review_reason": "no_signal",
+      "review_updated_at": "2026-02-28T10:49:58+00:00",
+      "source_id": "programas_partidos",
+      "source_record_pk": 145966,
+      "status": "pending",
+      "suggested_confidence": null,
+      "suggested_polarity": null,
+      "suggested_stance": "",
+      "topic_id": 908,
+      "topic_label": "Igualdad",
+      "topic_set_id": 11
+    },
+    {
+      "evidence_confidence": 0.2,
+      "evidence_date": "2026-02-28",
+      "evidence_excerpt": "e influencia en los asuntos mundiales a causa del cambio de perspectiva de su aliado mas importante estados unidos hacia otras zonas del mundo estas oportunidades y amenazas en el campo de las politicas internacionales y exteriores exigiran una respuesta con v",
+      "evidence_id": 1560594,
+      "evidence_polarity": 0,
+      "evidence_stance": "unclear",
+      "evidence_stance_method": "programa_metadata",
+      "evidence_type": "declared:programa",
+      "extractor_version": "declared:regex_v3",
+      "note": "no explicit declared stance pattern found",
+      "person_id": 75656,
+      "person_name": "PP",
+      "review_created_at": "2026-02-28T10:49:58+00:00",
+      "review_id": 6992,
+      "review_reason": "no_signal",
+      "review_updated_at": "2026-02-28T10:49:58+00:00",
+      "source_id": "programas_partidos",
+      "source_record_pk": 145966,
+      "status": "pending",
+      "suggested_confidence": null,
+      "suggested_polarity": null,
+      "suggested_stance": "",
+      "topic_id": 907,
+      "topic_label": "Campo y mundo rural",
+      "topic_set_id": 11
+    }
+  ],
+  "page": {
+    "limit": 2,
+    "offset": 0,
+    "returned": 2,
+    "total": 228
+  },
+  "review_reason": "",
+  "source_id": "programas_partidos",
+  "status": "pending",
+  "summary": {
+    "ignored": 0,
+    "pending": 228,
+    "pending_by_reason": {
+      "low_confidence": 6,
+      "no_signal": 222
+    },
+    "resolved": 0,
+    "total": 228
+  }
+}

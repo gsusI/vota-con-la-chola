@@ -1,0 +1,35 @@
+{
+  "sprint": "AI-OPS-351",
+  "timestamp": "20260301T074257Z",
+  "lane_decision": {
+    "status500_linked_to_votes": "drop_for_now_no_pool_rows",
+    "status404_linked_to_votes": "blocked_packet_exhausted_by_canonical_dedupe",
+    "zero_doc_linked_to_votes": "blocked_packet_exhausted_by_canonical_dedupe"
+  },
+  "evidence": {
+    "status500": {
+      "pool_rows_total": 0,
+      "fresh_rows_total": 0,
+      "strict_fail_reasons": [
+        "no_pool_rows",
+        "fresh_rows_below_min"
+      ]
+    },
+    "status404": {
+      "pool_rows_total": 408,
+      "fresh_rows_total": 0,
+      "strict_fail_reasons": [
+        "fresh_rows_below_min",
+        "packet_exhausted_by_canonical_dedupe"
+      ]
+    },
+    "zero_doc": {
+      "pool_rows_total": 17,
+      "fresh_rows_total": 0,
+      "strict_fail_reasons": [
+        "fresh_rows_below_min",
+        "packet_exhausted_by_canonical_dedupe"
+      ]
+    }
+  }
+}

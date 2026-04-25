@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-03-01T03:39:05+00:00",
+  "status": "ok",
+  "selection_method": "retry_packet_only_dedup",
+  "pool_csv": "docs/etl/sprints/AI-OPS-343/exports/senado_status404_actionable_pool_20260301T033850Z.csv",
+  "totals": {
+    "pool_rows_total": 739,
+    "pool_unique_urls_total": 739,
+    "used_packet_files_total": 5,
+    "used_urls_total": 243,
+    "excluded_used_urls_total": 187,
+    "excluded_duplicate_in_pool_total": 0,
+    "fresh_rows_total": 80
+  },
+  "limits": {
+    "max_rows": 80,
+    "strict_min_fresh_rows": 1
+  },
+  "checks": {
+    "has_pool_rows": true,
+    "fresh_rows_min_met": true
+  },
+  "strict_fail_reasons": [],
+  "packet_sources": [
+    {
+      "path": "docs/etl/sprints/AI-OPS-339/exports/senado_status404_recent-window_packet_20260301T015950Z.csv",
+      "status": "ok",
+      "rows_total": 0,
+      "rows_with_doc_url": 0,
+      "new_unique_urls": 0
+    },
+    {
+      "path": "docs/etl/sprints/AI-OPS-339/exports/senado_status404_recent-window_packet_20260301T020240Z.csv",
+      "status": "ok",
+      "rows_total": 160,
+      "rows_with_doc_url": 160,
+      "new_unique_urls": 160
+    },
+    {
+      "path": "docs/etl/sprints/AI-OPS-339/exports/senado_status404_recent-window_packet_via_just_20260301T020240Z.csv",
+      "status": "ok",
+      "rows_total": 160,
+      "rows_with_doc_url": 160,
+      "new_unique_urls": 0
+    },
+    {
+      "path": "docs/etl/sprints/AI-OPS-341/exports/senado_status404_recent-window_packet_20260301T023238Z.csv",
+      "status": "ok",
+      "rows_total": 80,
+      "rows_with_doc_url": 80,
+      "new_unique_urls": 3
+    },
+    {
+      "path": "docs/etl/sprints/AI-OPS-342/exports/senado_status404_recent-window_packet_20260301T030721Z.csv",
+      "status": "ok",
+      "rows_total": 80,
+      "rows_with_doc_url": 80,
+      "new_unique_urls": 80
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 2,
+  "upserted": 2,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 2
+  },
+  "by_doc_format": {
+    "html": 2
+  },
+  "sample": [
+    {
+      "source_record_pk": 147110,
+      "sample_initiative_id": "senado:leg14:exp:621/000043",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de ordenación e integración de la Formación Profesional. (621/000043)"
+    },
+    {
+      "source_record_pk": 147109,
+      "sample_initiative_id": "senado:leg14:exp:621/000009",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 58/2003, de 17 de diciembre, General Tributaria, en transposición de la Directiva (UE) 2018/822 del Consejo, de 25 de mayo de 2018, que modifica la Directiva 2011/16/UE por lo que se refiere al intercambio automático y obligatorio de información en el ámbito de la fiscalid…"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

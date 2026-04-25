@@ -14,7 +14,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 DEFAULT_PUBLISHED_RELEASE_JSON = Path("etl/data/published/liberty-restrictions-atlas-release-latest.json")
-DEFAULT_GH_PAGES_RELEASE_JSON = Path("docs/gh-pages/explorer-sources/data/liberty-atlas-release.json")
+DEFAULT_GH_PAGES_RELEASE_JSON = Path("ui/gh-pages-next/public/explorer-sources/data/liberty-atlas-release.json")
 DEFAULT_CONTINUITY_JSON = Path("docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_changelog_continuity_latest.json")
 DEFAULT_HEARTBEAT_JSONL = Path("docs/etl/runs/liberty_atlas_release_heartbeat.jsonl")
 DEFAULT_ENV_FILE = Path(".env")

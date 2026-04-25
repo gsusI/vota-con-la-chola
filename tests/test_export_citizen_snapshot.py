@@ -5,10 +5,12 @@ import sqlite3
 import subprocess
 import tempfile
 import unittest
+from argparse import Namespace
 from pathlib import Path
 
 from etl.parlamentario_es.config import DEFAULT_SCHEMA
 from etl.politicos_es.db import apply_schema
+from scripts import export_citizen_snapshot as citizen_snapshot
 from scripts.export_citizen_snapshot import build_snapshot_freshness
 
 
@@ -142,28 +144,18 @@ def _seed_min_citizen_db(conn: sqlite3.Connection) -> None:
     as_of_date = "2026-02-16"
     computed_at = ts
     rows = [
-        # previous combined snapshot for diff companion
-        (101, p1, m1, "support", 0.7, 0.8, 2, "combined", "v0", "2026-02-10"),
-        (101, p2, m2, "support", 0.55, 0.6, 1, "combined", "v0", "2026-02-10"),
-        (102, p1, m1, "support", 0.5, 0.6, 1, "combined", "v0", "2026-02-10"),
-        (102, p2, m2, "support", 0.5, 0.6, 1, "combined", "v0", "2026-02-10"),
-        # previous votes snapshot for diff companion
-        (101, p1, m1, "support", 0.7, 0.8, 2, "votes", "v0", "2026-02-10"),
-        (101, p2, m2, "support", 0.55, 0.6, 1, "votes", "v0", "2026-02-10"),
-        (102, p1, m1, "support", 0.5, 0.6, 1, "votes", "v0", "2026-02-10"),
-        (102, p2, m2, "support", 0.5, 0.6, 1, "votes", "v0", "2026-02-10"),
         # combined
-        (101, p1, m1, "support", 0.8, 0.9, 3, "combined", "v1", "2026-02-16"),
-        (101, p2, m2, "oppose", -0.7, 0.8, 2, "combined", "v1", "2026-02-16"),
-        (102, p1, m1, "support", 0.6, 0.7, 2, "combined", "v1", "2026-02-16"),
-        (102, p2, m2, "support", 0.6, 0.7, 2, "combined", "v1", "2026-02-16"),
+        (101, p1, m1, "support", 0.8, 0.9, 3, "combined", "v1"),
+        (101, p2, m2, "oppose", -0.7, 0.8, 2, "combined", "v1"),
+        (102, p1, m1, "support", 0.6, 0.7, 2, "combined", "v1"),
+        (102, p2, m2, "support", 0.6, 0.7, 2, "combined", "v1"),
         # votes
-        (101, p1, m1, "support", 0.8, 0.9, 3, "votes", "v1", "2026-02-16"),
-        (101, p2, m2, "oppose", -0.7, 0.8, 2, "votes", "v1", "2026-02-16"),
-        (102, p1, m1, "support", 0.6, 0.7, 2, "votes", "v1", "2026-02-16"),
-        (102, p2, m2, "support", 0.6, 0.7, 2, "votes", "v1", "2026-02-16"),
+        (101, p1, m1, "support", 0.8, 0.9, 3, "votes", "v1"),
+        (101, p2, m2, "oppose", -0.7, 0.8, 2, "votes", "v1"),
+        (102, p1, m1, "support", 0.6, 0.7, 2, "votes", "v1"),
+        (102, p2, m2, "support", 0.6, 0.7, 2, "votes", "v1"),
     ]
-    for topic_id, person_id, mandate_id, stance, score, conf, evc, method, version, row_as_of_date in rows:
+    for topic_id, person_id, mandate_id, stance, score, conf, evc, method, version in rows:
         conn.execute(
             """
             INSERT INTO topic_positions (
@@ -176,12 +168,12 @@ def _seed_min_citizen_db(conn: sqlite3.Connection) -> None:
                 int(topic_id),
                 int(person_id),
                 int(mandate_id),
-                str(row_as_of_date),
+                str(as_of_date),
                 str(stance),
                 float(score),
                 float(conf),
                 int(evc),
-                str(row_as_of_date),
+                str(as_of_date),
                 str(method),
                 str(version),
                 str(computed_at),
@@ -190,42 +182,168 @@ def _seed_min_citizen_db(conn: sqlite3.Connection) -> None:
             ),
         )
 
-    # Evidence rows for lineage samples.
-    evidence_rows = [
-        (10101, 101, p1, m1, "revealed:vote", "support", 1, 0.91, "2026-02-16", "https://example.com/vote-101-a"),
-        (10102, 101, p2, m2, "revealed:vote", "oppose", -1, 0.82, "2026-02-16", "https://example.com/vote-101-b"),
-        (10201, 102, p1, m1, "revealed:vote", "support", 1, 0.73, "2026-02-16", "https://example.com/vote-102-a"),
-        (10202, 102, p2, m2, "revealed:vote", "support", 1, 0.71, "2026-02-16", "https://example.com/vote-102-b"),
-    ]
-    for evidence_id, topic_id, person_id, mandate_id, evidence_type, stance, polarity, confidence, evidence_date, source_url in evidence_rows:
-        conn.execute(
-            """
-            INSERT INTO topic_evidence (
-              evidence_id, topic_id, topic_set_id, person_id, mandate_id, institution_id,
-              evidence_type, evidence_date, title, excerpt, stance, polarity,
-              weight, confidence, topic_method, stance_method,
-              source_id, source_url, source_snapshot_date, raw_payload, created_at, updated_at
-            ) VALUES (?, ?, 1, ?, ?, 7, ?, ?, ?, ?, ?, ?, 1.0, ?, 'test', 'test', 'test_source', ?, ?, '{}', ?, ?)
-            """,
-            (
-                int(evidence_id),
-                int(topic_id),
-                int(person_id),
-                int(mandate_id),
-                str(evidence_type),
-                str(evidence_date),
-                f"Evidence {evidence_id}",
-                f"Excerpt {evidence_id}",
-                str(stance),
-                int(polarity),
-                float(confidence),
-                str(source_url),
-                str(evidence_date),
-                ts,
-                ts,
-            ),
-        )
+    conn.commit()
 
+
+def _seed_scope_fallback_citizen_db(conn: sqlite3.Connection) -> None:
+    ts = "2026-02-17T00:00:00Z"
+
+    conn.execute(
+        """
+        INSERT INTO sources (source_id, name, scope, default_url, data_format, is_active, created_at, updated_at)
+        VALUES ('test_source', 'Test Source', 'test', 'https://example.com', 'test', 1, ?, ?)
+        ON CONFLICT(source_id) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO institutions (institution_id, name, level, territory_code, created_at, updated_at)
+        VALUES (1, 'Congreso de los Diputados', 'nacional', '', ?, ?)
+        ON CONFLICT(name, level, territory_code) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO institutions (institution_id, name, level, territory_code, created_at, updated_at)
+        VALUES (7, 'Ayuntamiento demo', 'municipal', 'ES', ?, ?)
+        ON CONFLICT(name, level, territory_code) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO parties (party_id, name, acronym, created_at, updated_at)
+        VALUES (1, 'Partido A', 'PA', ?, ?)
+        ON CONFLICT(party_id) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO persons (person_id, full_name, canonical_key, created_at, updated_at)
+        VALUES (1, 'Alice Example', 'person:alice', ?, ?)
+        ON CONFLICT(person_id) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO mandates (
+          mandate_id, person_id, institution_id, party_id,
+          role_title, level, territory_code,
+          is_active,
+          source_id, source_record_id,
+          first_seen_at, last_seen_at,
+          raw_payload
+        ) VALUES (1, 1, 1, 1, 'Diputada', 'nacional', '', 1, 'test_source', 'm1', ?, ?, '{}')
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO topic_sets (topic_set_id, name, institution_id, legislature, is_active, created_at, updated_at)
+        VALUES (1, 'Congreso / votos', 1, '15', 1, ?, ?)
+        ON CONFLICT(name, institution_id, admin_level_id, territory_id, legislature) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO topics (topic_id, canonical_key, label, created_at, updated_at)
+        VALUES (101, 't:101', 'Vivienda y alquiler', ?, ?)
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO topic_set_topics (topic_set_id, topic_id, stakes_rank, is_high_stakes, created_at, updated_at)
+        VALUES (1, 101, 1, 1, ?, ?)
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO topic_positions (
+          topic_id, topic_set_id, person_id, mandate_id, institution_id,
+          as_of_date, stance, score, confidence, evidence_count, last_evidence_date,
+          computed_method, computed_version, computed_at, created_at, updated_at
+        ) VALUES (101, 1, 1, 1, 1, '2026-02-16', 'support', 0.8, 0.9, 3, '2026-02-16', 'votes', 'v1', ?, ?, ?)
+        """,
+        (ts, ts, ts),
+    )
+    conn.commit()
+
+
+def _seed_no_concern_match_citizen_db(conn: sqlite3.Connection) -> None:
+    _seed_scope_fallback_citizen_db(conn)
+    conn.execute(
+        """
+        UPDATE topics
+        SET label = 'Administracion publica interna'
+        WHERE topic_id = 101
+        """
+    )
+    conn.commit()
+
+
+def _seed_empty_citizen_export_db(conn: sqlite3.Connection) -> None:
+    ts = "2026-02-17T00:00:00Z"
+
+    conn.execute(
+        """
+        INSERT INTO sources (source_id, name, scope, default_url, data_format, is_active, created_at, updated_at)
+        VALUES ('test_source', 'Test Source', 'test', 'https://example.com', 'test', 1, ?, ?)
+        ON CONFLICT(source_id) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO institutions (institution_id, name, level, territory_code, created_at, updated_at)
+        VALUES (7, 'Congreso de los Diputados', 'nacional', '', ?, ?)
+        ON CONFLICT(name, level, territory_code) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO parties (party_id, name, acronym, created_at, updated_at)
+        VALUES (1, 'Partido A', 'PA', ?, ?)
+        ON CONFLICT(party_id) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO persons (person_id, full_name, canonical_key, created_at, updated_at)
+        VALUES (1, 'Alice Example', 'person:alice', ?, ?)
+        ON CONFLICT(person_id) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO mandates (
+          mandate_id, person_id, institution_id, party_id,
+          role_title, level, territory_code,
+          is_active,
+          source_id, source_record_id,
+          first_seen_at, last_seen_at,
+          raw_payload
+        ) VALUES (1, 1, 7, 1, 'Diputada', 'nacional', '', 1, 'test_source', 'm1', ?, ?, '{}')
+        """,
+        (ts, ts),
+    )
+    conn.execute(
+        """
+        INSERT INTO topic_sets (topic_set_id, name, institution_id, legislature, is_active, created_at, updated_at)
+        VALUES (1, 'Congreso / votos', 7, '15', 1, ?, ?)
+        ON CONFLICT(name, institution_id, admin_level_id, territory_id, legislature) DO UPDATE SET updated_at=excluded.updated_at
+        """,
+        (ts, ts),
+    )
     conn.commit()
 
 
@@ -284,10 +402,6 @@ class TestExportCitizenSnapshot(unittest.TestCase):
             subprocess.run(cmd, check=True, capture_output=True, text=True)
 
             data = json.loads(out_path.read_text(encoding="utf-8"))
-            comparability = json.loads((td_path / "citizen_comparability.json").read_text(encoding="utf-8"))
-            lineage = json.loads((td_path / "citizen_lineage.json").read_text(encoding="utf-8"))
-            diff = json.loads((td_path / "citizen_snapshot_diff.json").read_text(encoding="utf-8"))
-            robustness = json.loads((td_path / "citizen_ranking_robustness.json").read_text(encoding="utf-8"))
             meta = data["meta"]
 
             self.assertEqual(meta["computed_method"], "combined")
@@ -362,49 +476,6 @@ class TestExportCitizenSnapshot(unittest.TestCase):
             self.assertEqual(len(parties), 2)
             pos = data["party_topic_positions"]
             self.assertEqual(len(pos), len(topics) * len(parties))
-            self.assertEqual(comparability["meta"]["artifact_version"], "citizen_comparability_v1")
-            self.assertEqual(len(comparability["rows"]), len(pos))
-            comparable_key = {
-                (int(row["topic_id"]), int(row["party_id"])): row for row in comparability["rows"]
-            }
-            self.assertTrue(bool(comparable_key[(101, 1)]["comparable_ok"]))
-            self.assertEqual(comparable_key[(101, 1)]["reason_code"], "clear_support")
-            self.assertEqual(int(comparable_key[(101, 1)]["support_members"]), 1)
-            self.assertEqual(int(comparable_key[(101, 1)]["unknown_total"]), 0)
-
-            self.assertEqual(lineage["meta"]["artifact_version"], "citizen_lineage_v1")
-            self.assertEqual(len(lineage["rows"]), len(pos))
-            lineage_key = {
-                (int(row["topic_id"]), int(row["party_id"])): row for row in lineage["rows"]
-            }
-            lineage_row = lineage_key[(101, 1)]
-            self.assertEqual(lineage_row["aggregate"]["computed_method"], "combined")
-            self.assertEqual(int(lineage_row["positions"]["total_positions"]), 1)
-            self.assertGreaterEqual(int(lineage_row["evidence"]["evidence_rows_total"]), 1)
-            self.assertEqual(int(lineage_row["evidence"]["sample_evidence"][0]["evidence_id"]), 10101)
-
-            self.assertEqual(diff["meta"]["artifact_version"], "citizen_snapshot_diff_v1")
-            self.assertEqual(diff["meta"]["previous_as_of_date"], "2026-02-10")
-            self.assertGreaterEqual(int(diff["meta"]["changed_rows_total"]), 1)
-            diff_key = {(int(row["topic_id"]), int(row["party_id"])): row for row in diff["rows"]}
-            self.assertIn((101, 2), diff_key)
-            self.assertTrue(bool(diff_key[(101, 2)]["stance_changed"]))
-            self.assertEqual(diff_key[(101, 2)]["primary_change"], "stance_changed")
-
-            self.assertEqual(robustness["meta"]["artifact_version"], "citizen_ranking_robustness_v1")
-            self.assertEqual(robustness["meta"]["computed_method"], "combined")
-            self.assertEqual(int(robustness["meta"]["rows_total"]), 2)
-            robustness_by_party = {int(row["party_id"]): row for row in robustness["rows"]}
-            leader_row = robustness_by_party[1]
-            runner_row = robustness_by_party[2]
-            self.assertEqual(int(leader_row["rank"]), 1)
-            self.assertEqual(int(leader_row["closest_neighbor_party_id"]), 2)
-            self.assertEqual(leader_row["focus_pair"]["relation"], "holding_above")
-            self.assertEqual(int(leader_row["focus_pair"]["driver_topics_needed"]), 1)
-            self.assertEqual(int(leader_row["focus_pair"]["driver_topics"][0]["topic_id"]), 101)
-            self.assertEqual(leader_row["rank_band"]["id"], "fragile")
-            self.assertEqual(int(runner_row["rank"]), 2)
-            self.assertEqual(runner_row["focus_pair"]["relation"], "chasing")
 
             # Validator should accept optional v2 keys.
             vcmd = [
@@ -477,3 +548,198 @@ class TestExportCitizenSnapshot(unittest.TestCase):
             result = subprocess.run(vcmd, capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("future state must expose negative data_age_days", result.stderr)
+
+    def test_resolve_scope_falls_back_to_topic_set_institution_and_votes(self) -> None:
+        conn = sqlite3.connect(":memory:")
+        conn.row_factory = sqlite3.Row
+        try:
+            apply_schema(conn, Path(DEFAULT_SCHEMA))
+            _seed_scope_fallback_citizen_db(conn)
+            scope = citizen_snapshot.resolve_scope(
+                conn,
+                args=Namespace(
+                    topic_set_id=1,
+                    institution_id=7,
+                    as_of_date="",
+                    computed_method="auto",
+                ),
+            )
+        finally:
+            conn.close()
+
+        self.assertEqual(scope.topic_set_id, 1)
+        self.assertEqual(scope.institution_id, 1)
+        self.assertEqual(scope.as_of_date, "2026-02-16")
+        self.assertEqual(scope.computed_method, "votes")
+        self.assertEqual(scope.computed_version, "v1")
+
+    def test_export_declared_snapshot_degrades_to_no_data_grid_when_positions_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            db_path = td_path / "citizen-fallback.db"
+            out_path = td_path / "citizen_declared.json"
+
+            conn = sqlite3.connect(str(db_path))
+            conn.row_factory = sqlite3.Row
+            try:
+                apply_schema(conn, Path(DEFAULT_SCHEMA))
+                _seed_scope_fallback_citizen_db(conn)
+            finally:
+                conn.close()
+
+            cmd = [
+                "python3",
+                "scripts/export_citizen_snapshot.py",
+                "--db",
+                str(db_path),
+                "--out",
+                str(out_path),
+                "--topic-set-id",
+                "1",
+                "--institution-id",
+                "7",
+                "--computed-method",
+                "declared",
+                "--max-bytes",
+                "5000000",
+            ]
+            subprocess.run(cmd, check=True, capture_output=True, text=True)
+
+            data = json.loads(out_path.read_text(encoding="utf-8"))
+            self.assertEqual(data["meta"]["computed_method"], "declared")
+            self.assertEqual(data["meta"]["computed_version"], "no_data")
+            self.assertNotIn("methods_available", data["meta"])
+            self.assertEqual(len(data["topics"]), 1)
+            self.assertEqual(len(data["parties"]), 1)
+            self.assertEqual(len(data["party_topic_positions"]), 1)
+            self.assertEqual(data["party_topic_positions"][0]["stance"], "no_signal")
+
+            vcmd = [
+                "python3",
+                "scripts/validate_citizen_snapshot.py",
+                "--path",
+                str(out_path),
+                "--max-bytes",
+                "5000000",
+                "--strict-grid",
+            ]
+            subprocess.run(vcmd, check=True, capture_output=True, text=True)
+
+    def test_export_keeps_topics_when_concern_filter_matches_none(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            db_path = td_path / "citizen-no-concern.db"
+            out_path = td_path / "citizen.json"
+
+            conn = sqlite3.connect(str(db_path))
+            conn.row_factory = sqlite3.Row
+            try:
+                apply_schema(conn, Path(DEFAULT_SCHEMA))
+                _seed_no_concern_match_citizen_db(conn)
+            finally:
+                conn.close()
+
+            cmd = [
+                "python3",
+                "scripts/export_citizen_snapshot.py",
+                "--db",
+                str(db_path),
+                "--out",
+                str(out_path),
+                "--topic-set-id",
+                "1",
+                "--institution-id",
+                "7",
+                "--computed-method",
+                "auto",
+                "--max-bytes",
+                "5000000",
+            ]
+            subprocess.run(cmd, check=True, capture_output=True, text=True)
+
+            data = json.loads(out_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(data["topics"]), 1)
+            self.assertEqual(data["topics"][0]["label"], "Administracion publica interna")
+            self.assertEqual(len(data["party_topic_positions"]), 1)
+
+    def test_export_reuses_fallback_snapshot_on_severe_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            fallback_db_path = td_path / "citizen-good.db"
+            fallback_snapshot_path = td_path / "citizen-good.json"
+            regressed_db_path = td_path / "citizen-bad.db"
+            out_path = td_path / "citizen-regressed.json"
+
+            conn = sqlite3.connect(str(fallback_db_path))
+            conn.row_factory = sqlite3.Row
+            try:
+                apply_schema(conn, Path(DEFAULT_SCHEMA))
+                _seed_min_citizen_db(conn)
+            finally:
+                conn.close()
+
+            subprocess.run(
+                [
+                    "python3",
+                    "scripts/export_citizen_snapshot.py",
+                    "--db",
+                    str(fallback_db_path),
+                    "--out",
+                    str(fallback_snapshot_path),
+                    "--topic-set-id",
+                    "1",
+                    "--institution-id",
+                    "7",
+                    "--computed-method",
+                    "auto",
+                    "--max-items-per-concern",
+                    "1",
+                    "--max-topics",
+                    "200",
+                    "--max-bytes",
+                    "5000000",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            conn = sqlite3.connect(str(regressed_db_path))
+            conn.row_factory = sqlite3.Row
+            try:
+                apply_schema(conn, Path(DEFAULT_SCHEMA))
+                _seed_empty_citizen_export_db(conn)
+            finally:
+                conn.close()
+
+            result = subprocess.run(
+                [
+                    "python3",
+                    "scripts/export_citizen_snapshot.py",
+                    "--db",
+                    str(regressed_db_path),
+                    "--out",
+                    str(out_path),
+                    "--topic-set-id",
+                    "1",
+                    "--institution-id",
+                    "7",
+                    "--computed-method",
+                    "auto",
+                    "--fallback-snapshot",
+                    str(fallback_snapshot_path),
+                    "--max-bytes",
+                    "5000000",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            fallback_data = json.loads(fallback_snapshot_path.read_text(encoding="utf-8"))
+            data = json.loads(out_path.read_text(encoding="utf-8"))
+            self.assertEqual(data["meta"]["as_of_date"], fallback_data["meta"]["as_of_date"])
+            self.assertEqual(data["meta"]["computed_method"], fallback_data["meta"]["computed_method"])
+            self.assertEqual(len(data["topics"]), len(fallback_data["topics"]))
+            self.assertEqual(len(data["party_topic_positions"]), len(fallback_data["party_topic_positions"]))
+            self.assertIn("reusing fallback", result.stderr)

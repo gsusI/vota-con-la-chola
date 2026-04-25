@@ -1,0 +1,50 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 3,
+  "upserted": 3,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 1,
+    "title_hint_strong": 2
+  },
+  "by_doc_format": {
+    "html": 2,
+    "xml": 1
+  },
+  "sample": [
+    {
+      "source_record_pk": 147106,
+      "sample_initiative_id": "senado:leg14:exp:621/000080",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica del Sistema Universitario. (621/000080)"
+    },
+    {
+      "source_record_pk": 147105,
+      "sample_initiative_id": "senado:leg14:exp:621/000079",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley reguladora de la protección de las personas que informen sobre infracciones normativas y de lucha contra la corrupción. (621/000079)"
+    },
+    {
+      "source_record_pk": 147107,
+      "sample_initiative_id": "senado:leg14:exp:621/000076",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de pesca sostenible e investigación pesquera. (621/000076)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

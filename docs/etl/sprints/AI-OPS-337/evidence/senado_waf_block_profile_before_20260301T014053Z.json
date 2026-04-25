@@ -1,0 +1,793 @@
+{
+  "generated_at": "2026-03-01T01:40:53+00:00",
+  "status": "ok",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "totals": {
+    "missing_urls": 1176,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 160,
+    "blocked_403_rate": 0.136054,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 404,
+      "count": 799
+    },
+    {
+      "status": 0,
+      "count": 217
+    },
+    {
+      "status": 403,
+      "count": 160
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort": "leg12:tipo610",
+      "legislature": "12",
+      "tipo_expediente": "610",
+      "missing_urls": 86,
+      "blocked_403_urls": 60,
+      "blocked_403_rate": 0.697674,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 60
+        },
+        {
+          "status": 0,
+          "count": 24
+        },
+        {
+          "status": 404,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 60
+        },
+        {
+          "method": "unknown",
+          "count": 24
+        },
+        {
+          "method": "other",
+          "count": 2
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo621",
+      "legislature": "14",
+      "tipo_expediente": "621",
+      "missing_urls": 211,
+      "blocked_403_urls": 46,
+      "blocked_403_rate": 0.218009,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 128
+        },
+        {
+          "status": 403,
+          "count": 46
+        },
+        {
+          "status": 0,
+          "count": 37
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 128
+        },
+        {
+          "method": "playwright",
+          "count": 46
+        },
+        {
+          "method": "unknown",
+          "count": 37
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo610",
+      "legislature": "14",
+      "tipo_expediente": "610",
+      "missing_urls": 117,
+      "blocked_403_urls": 15,
+      "blocked_403_rate": 0.128205,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 77
+        },
+        {
+          "status": 404,
+          "count": 25
+        },
+        {
+          "status": 403,
+          "count": 15
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 77
+        },
+        {
+          "method": "other",
+          "count": 25
+        },
+        {
+          "method": "playwright",
+          "count": 15
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo624",
+      "legislature": "14",
+      "tipo_expediente": "624",
+      "missing_urls": 56,
+      "blocked_403_urls": 13,
+      "blocked_403_rate": 0.232143,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 37
+        },
+        {
+          "status": 403,
+          "count": 13
+        },
+        {
+          "status": 0,
+          "count": 6
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 36
+        },
+        {
+          "method": "playwright",
+          "count": 13
+        },
+        {
+          "method": "unknown",
+          "count": 6
+        },
+        {
+          "method": "http",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg10:tipo622",
+      "legislature": "10",
+      "tipo_expediente": "622",
+      "missing_urls": 13,
+      "blocked_403_urls": 9,
+      "blocked_403_rate": 0.692308,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 9
+        },
+        {
+          "status": 404,
+          "count": 4
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 9
+        },
+        {
+          "method": "other",
+          "count": 4
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg10:tipo624",
+      "legislature": "10",
+      "tipo_expediente": "624",
+      "missing_urls": 10,
+      "blocked_403_urls": 6,
+      "blocked_403_rate": 0.6,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 6
+        },
+        {
+          "status": 404,
+          "count": 4
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 6
+        },
+        {
+          "method": "other",
+          "count": 4
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 57,
+      "blocked_403_urls": 4,
+      "blocked_403_rate": 0.070175,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 44
+        },
+        {
+          "status": 0,
+          "count": 9
+        },
+        {
+          "status": 403,
+          "count": 4
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 44
+        },
+        {
+          "method": "unknown",
+          "count": 9
+        },
+        {
+          "method": "http",
+          "count": 3
+        },
+        {
+          "method": "playwright",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg12:tipo605",
+      "legislature": "12",
+      "tipo_expediente": "605",
+      "missing_urls": 4,
+      "blocked_403_urls": 2,
+      "blocked_403_rate": 0.5,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        },
+        {
+          "status": 403,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 2
+        },
+        {
+          "method": "other",
+          "count": 2
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg10:tipo626",
+      "legislature": "10",
+      "tipo_expediente": "626",
+      "missing_urls": 3,
+      "blocked_403_urls": 2,
+      "blocked_403_rate": 0.666667,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 2
+        },
+        {
+          "status": 404,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 2
+        },
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo620",
+      "legislature": "14",
+      "tipo_expediente": "620",
+      "missing_urls": 3,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 0.333333,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        },
+        {
+          "status": 403,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 2
+        },
+        {
+          "method": "playwright",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo625",
+      "legislature": "14",
+      "tipo_expediente": "625",
+      "missing_urls": 3,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 0.333333,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        },
+        {
+          "status": 403,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 2
+        },
+        {
+          "method": "playwright",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg11:tipo626",
+      "legislature": "11",
+      "tipo_expediente": "626",
+      "missing_urls": 2,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 0.5,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 1
+        },
+        {
+          "status": 403,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 1
+        },
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg10:tipo610",
+      "legislature": "10",
+      "tipo_expediente": "610",
+      "missing_urls": 407,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 407
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 407
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg12:tipo622",
+      "legislature": "12",
+      "tipo_expediente": "622",
+      "missing_urls": 47,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 25
+        },
+        {
+          "status": 0,
+          "count": 22
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 25
+        },
+        {
+          "method": "unknown",
+          "count": 22
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg12:tipo621",
+      "legislature": "12",
+      "tipo_expediente": "621",
+      "missing_urls": 40,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 24
+        },
+        {
+          "status": 0,
+          "count": 16
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 24
+        },
+        {
+          "method": "unknown",
+          "count": 16
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg12:tipo624",
+      "legislature": "12",
+      "tipo_expediente": "624",
+      "missing_urls": 32,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 20
+        },
+        {
+          "status": 0,
+          "count": 12
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 20
+        },
+        {
+          "method": "unknown",
+          "count": 12
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg12:tipo626",
+      "legislature": "12",
+      "tipo_expediente": "626",
+      "missing_urls": 25,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 18
+        },
+        {
+          "status": 0,
+          "count": 7
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 18
+        },
+        {
+          "method": "unknown",
+          "count": 7
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg15:tipo622",
+      "legislature": "15",
+      "tipo_expediente": "622",
+      "missing_urls": 16,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 16
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 16
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo626",
+      "legislature": "14",
+      "tipo_expediente": "626",
+      "missing_urls": 12,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 12
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 12
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg12:tipo625",
+      "legislature": "12",
+      "tipo_expediente": "625",
+      "missing_urls": 10,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 7
+        },
+        {
+          "status": 0,
+          "count": 3
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 7
+        },
+        {
+          "method": "unknown",
+          "count": 3
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg14:tipo605",
+      "legislature": "14",
+      "tipo_expediente": "605",
+      "missing_urls": 8,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 5
+        },
+        {
+          "status": 0,
+          "count": 3
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 5
+        },
+        {
+          "method": "unknown",
+          "count": 3
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg15:tipo626",
+      "legislature": "15",
+      "tipo_expediente": "626",
+      "missing_urls": 6,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 6
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 6
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg10:tipo605",
+      "legislature": "10",
+      "tipo_expediente": "605",
+      "missing_urls": 3,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 3
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 3
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg15:tipo624",
+      "legislature": "15",
+      "tipo_expediente": "624",
+      "missing_urls": 3,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        },
+        {
+          "status": 0,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 2
+        },
+        {
+          "method": "unknown",
+          "count": 1
+        }
+      ],
+      "sample_urls": []
+    },
+    {
+      "cohort": "leg10:tipo620",
+      "legislature": "10",
+      "tipo_expediente": "620",
+      "missing_urls": 2,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 2
+        }
+      ],
+      "sample_urls": []
+    }
+  ],
+  "zero_doc_priority": [],
+  "checks": {
+    "has_missing_urls": true,
+    "has_403_signal": true,
+    "has_cohorts": true,
+    "has_zero_doc_priority": true
+  },
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,35 @@
+{
+  "qa_csv": "docs/etl/sprints/AI-OPS-294/exports/liberty_delegated_non_nominative_auto_review_qa_sample_reviewed_latest.csv",
+  "report": {
+    "status": "ok",
+    "strict": true,
+    "decision_scope": "approved",
+    "thresholds": {
+      "min_reviewed_rows": 1,
+      "min_precision_pct": 100.0
+    },
+    "rows_total": 1,
+    "rows_in_scope_total": 1,
+    "rows_excluded_by_scope_total": 0,
+    "reviewed_rows_total": 1,
+    "confirm_total": 1,
+    "reject_total": 0,
+    "skip_or_pending_total": 0,
+    "invalid_decision_total": 0,
+    "observed_precision_pct": 100.0,
+    "institution_breakdown": [
+      {
+        "institution": "AEAT",
+        "rows_total": 1,
+        "reviewed_rows_total": 1,
+        "confirm_total": 1,
+        "reject_total": 0,
+        "skip_or_pending_total": 0,
+        "invalid_decision_total": 0,
+        "observed_precision_pct": 100.0
+      }
+    ],
+    "invalid_decision_samples": [],
+    "strict_fail_reasons": []
+  }
+}

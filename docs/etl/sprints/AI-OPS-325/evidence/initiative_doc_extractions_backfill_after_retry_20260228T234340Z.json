@@ -1,0 +1,157 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 15,
+  "upserted": 15,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_sentence": 3,
+    "title_hint_strong": 12
+  },
+  "by_doc_format": {
+    "html": 15
+  },
+  "sample": [
+    {
+      "source_record_pk": 147084,
+      "sample_initiative_id": "senado:leg14:exp:621/000036",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2022. (621/000036)"
+    },
+    {
+      "source_record_pk": 147089,
+      "sample_initiative_id": "senado:leg14:exp:624/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de regulación de la eutanasia. (624/000002)"
+    },
+    {
+      "source_record_pk": 147087,
+      "sample_initiative_id": "senado:leg14:exp:622/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, aprobado por el Real Decreto Legislativo 1/2013, de 29 de noviembre, para establecer y regular la accesibilidad cognitiva y sus condiciones de exigencia y aplicación. (622/000…"
+    },
+    {
+      "source_record_pk": 147095,
+      "sample_initiative_id": "senado:leg12:exp:624/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial. (624/000012)"
+    },
+    {
+      "source_record_pk": 147085,
+      "sample_initiative_id": "senado:leg14:exp:621/000037",
+      "doc_format": "html",
+      "subject_method": "keyword_sentence",
+      "confidence": 0.76,
+      "needs_review": 0,
+      "extracted_subject": "sitePath=\"/actividadparlamentaria/iniciativas/enmiendas/index"
+    },
+    {
+      "source_record_pk": 147090,
+      "sample_initiative_id": "senado:leg10:exp:624/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de delitos de terrorismo. (624/000003)"
+    },
+    {
+      "source_record_pk": 147088,
+      "sample_initiative_id": "senado:leg10:exp:624/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, relativa a la justicia universal. (624/000002)"
+    },
+    {
+      "source_record_pk": 147086,
+      "sample_initiative_id": "senado:leg14:exp:621/000038",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de garantía del poder adquisitivo de las pensiones y de otras medidas de refuerzo de la sostenibilidad financiera y social del sistema público de pensiones. (621/000038)"
+    },
+    {
+      "source_record_pk": 147092,
+      "sample_initiative_id": "senado:leg12:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de Reformas Urgentes del Trabajo Autónomo. (624/000006)"
+    },
+    {
+      "source_record_pk": 147083,
+      "sample_initiative_id": "senado:leg14:exp:621/000026",
+      "doc_format": "html",
+      "subject_method": "keyword_sentence",
+      "confidence": 0.76,
+      "needs_review": 0,
+      "extracted_subject": "sitePath=\"/actividadparlamentaria/iniciativas/enmiendas/index"
+    },
+    {
+      "source_record_pk": 147097,
+      "sample_initiative_id": "senado:leg14:exp:624/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de derogación del artículo 315 apartado 3 del Código Penal. (624/000004)"
+    },
+    {
+      "source_record_pk": 147096,
+      "sample_initiative_id": "senado:leg12:exp:624/000016",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para transponer Directivas de la Unión Europea en los ámbitos financiero y de terrorismo, y abordar cuestiones de índole internacional. (624/000016)"
+    },
+    {
+      "source_record_pk": 147093,
+      "sample_initiative_id": "senado:leg12:exp:624/000009",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil, en relación a la ocupación ilegal de viviendas. (624/000009)"
+    },
+    {
+      "source_record_pk": 147091,
+      "sample_initiative_id": "senado:leg12:exp:624/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 17/2006, de 5 de junio, de la radio y la televisión de titularidad estatal, para recuperar la independencia de la Corporación RTVE y el pluralismo en la elección parlamentaria de sus órganos. (624/000005)"
+    },
+    {
+      "source_record_pk": 147094,
+      "sample_initiative_id": "senado:leg12:exp:624/000010",
+      "doc_format": "html",
+      "subject_method": "keyword_sentence",
+      "confidence": 0.76,
+      "needs_review": 0,
+      "extracted_subject": "'Descargar el fichero de datos abiertos de la lista completa de enmiendas' Datos abiertos Enmiendas y propuestas de veto Enmiendas"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

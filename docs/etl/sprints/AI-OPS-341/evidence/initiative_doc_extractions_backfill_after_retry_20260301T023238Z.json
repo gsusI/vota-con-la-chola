@@ -1,0 +1,203 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 23,
+  "upserted": 23,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 1,
+    "title_hint_strong": 22
+  },
+  "by_doc_format": {
+    "html": 22,
+    "xml": 1
+  },
+  "sample": [
+    {
+      "source_record_pk": 147129,
+      "sample_initiative_id": "senado:leg14:exp:626/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifican el artículo 84.5 y la disposición adicional 5ª, para la integración total de las lenguas oficiales. (626/000007)"
+    },
+    {
+      "source_record_pk": 147122,
+      "sample_initiative_id": "senado:leg14:exp:621/000089",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por el derecho a la vivienda. (621/000089)"
+    },
+    {
+      "source_record_pk": 147124,
+      "sample_initiative_id": "senado:leg14:exp:624/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de derogación del artículo 315 apartado 3 del Código Penal. (624/000004)"
+    },
+    {
+      "source_record_pk": 147119,
+      "sample_initiative_id": "senado:leg14:exp:624/000020",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica para la modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en los delitos contra la libertad sexual, la Ley de Enjuiciamiento Criminal y la Ley Orgánica 5/2000, de 12 de enero, reguladora de la responsabilidad penal de los menores. (624/000020)"
+    },
+    {
+      "source_record_pk": 147123,
+      "sample_initiative_id": "senado:leg14:exp:624/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para el establecimiento del régimen jurídico aplicable al Consejo General del Poder Judicial en funciones. (624/000003)"
+    },
+    {
+      "source_record_pk": 147115,
+      "sample_initiative_id": "senado:leg12:exp:621/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley sobre restitución de bienes culturales que hayan salido de forma ilegal del territorio español o de otro Estado miembro de la Unión Europea, por la que se incorpora al ordenamiento español la Directiva 2014/60/UE, del Parlamento Europeo y del Consejo de 15 de mayo de 2014. (621/000001)"
+    },
+    {
+      "source_record_pk": 147120,
+      "sample_initiative_id": "senado:leg14:exp:621/000087",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de trasposición de Directivas de la Unión Europea en materia de accesibilidad de determinados productos y servicios, migración de personas altamente cualificadas, tributaria y digitalización de actuaciones notariales y registrales; y por la que se modifica la Ley 12/2011, de 27 de mayo, sobre responsab…"
+    },
+    {
+      "source_record_pk": 147126,
+      "sample_initiative_id": "senado:leg14:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica complementaria de la Ley por la que se modifica la Ley 20/2011, de 21 de julio, del Registro Civil, de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial y de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (624/000006)"
+    },
+    {
+      "source_record_pk": 147116,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.2 (antes denominada Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.3). (626/000002)"
+    },
+    {
+      "source_record_pk": 147113,
+      "sample_initiative_id": "senado:leg14:exp:622/000096",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Real Decreto Legislativo 6/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley sobre Tráfico, Circulación de Vehículos a Motor y Seguridad Vial, y del Real Decreto 1428/2003, de 21 de noviembre, por el que se aprueba el Reglamento General de Circulación par…"
+    },
+    {
+      "source_record_pk": 147114,
+      "sample_initiative_id": "senado:leg14:exp:622/000102",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 7/1985, de 2 de abril, Reguladora de las Bases del Régimen Local, para la adición de un nuevo artículo regulador de las medidas alternativas a las sanciones pecuniarias. (622/000102)"
+    },
+    {
+      "source_record_pk": 147117,
+      "sample_initiative_id": "senado:leg15:exp:622/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de montes de socios. (622/000008)"
+    },
+    {
+      "source_record_pk": 147132,
+      "sample_initiative_id": "senado:leg14:exp:622/000088",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de garantía del servicio de cajero automático en los municipios en riesgo de exclusión financiera. (622/000088)"
+    },
+    {
+      "source_record_pk": 147131,
+      "sample_initiative_id": "senado:leg14:exp:622/000075",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley relativa a la modificación de la Ley 22/1988, de 28 de julio, de Costas, para permitir la pervivencia de conjuntos urbanos costeros de tipología tradicional en terrenos que han pasado a ser de dominio público marítimo-terrestre. (622/000075)"
+    },
+    {
+      "source_record_pk": 147133,
+      "sample_initiative_id": "senado:leg14:exp:622/000090",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para mejorar la protección social y laboral de las personas a las que les hubiera sido diagnosticada una enfermedad grave o carcinoma. (622/000090)"
+    },
+    {
+      "source_record_pk": 147112,
+      "sample_initiative_id": "senado:leg14:exp:622/000059",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se reforma la Ley 20/2011, de 21 de julio, del Registro Civil. (622/000059)"
+    },
+    {
+      "source_record_pk": 147111,
+      "sample_initiative_id": "senado:leg14:exp:622/000055",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (622/000055)"
+    },
+    {
+      "source_record_pk": 147121,
+      "sample_initiative_id": "senado:leg14:exp:621/000088",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifican la Ley 58/2003, de 17 de diciembre, General Tributaria, en transposición de la Directiva (UE) 2021/514 del Consejo de 22 de marzo de 2021 por la que se modifica la Directiva 2011/16/UE relativa a la cooperación administrativa en el ámbito de la fiscalidad, y otras normas tributa…"
+    },
+    {
+      "source_record_pk": 147125,
+      "sample_initiative_id": "senado:leg14:exp:624/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 20/2011, de 21 de julio, del Registro Civil. (624/000005)"
+    },
+    {
+      "source_record_pk": 147130,
+      "sample_initiative_id": "senado:leg14:exp:621/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley del Impuesto sobre las Transacciones Financieras. (621/000006)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

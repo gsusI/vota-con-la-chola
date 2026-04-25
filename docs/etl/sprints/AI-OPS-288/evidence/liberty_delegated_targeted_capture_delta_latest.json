@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "baseline_summary": {
+    "status": "ok",
+    "rows_total": 8,
+    "rows_with_assist_candidates_total": 8,
+    "approved_rows_total": 2,
+    "pending_rows_total": 6,
+    "approved_with_actor_update_total": 2,
+    "approved_with_evidence_date_update_total": 0,
+    "rows_missing_candidate_total": 0,
+    "rows_missing_required_person_hint_total": 0,
+    "rows_missing_required_evidence_date_total": 0,
+    "rows_missing_role_alignment_total": 6,
+    "role_alignment_required": true,
+    "min_candidate_score": 20,
+    "max_candidates_per_link": 25
+  },
+  "targeted_summary": {
+    "status": "ok",
+    "rows_total": 8,
+    "rows_with_assist_candidates_total": 8,
+    "approved_rows_total": 6,
+    "pending_rows_total": 2,
+    "approved_with_actor_update_total": 6,
+    "approved_with_evidence_date_update_total": 0,
+    "rows_missing_candidate_total": 0,
+    "rows_missing_required_person_hint_total": 0,
+    "rows_missing_required_evidence_date_total": 0,
+    "rows_missing_role_alignment_total": 2,
+    "role_alignment_required": true,
+    "min_candidate_score": 25,
+    "max_candidates_per_link": 12
+  },
+  "review_assist_targeted_summary": {
+    "status": "ok",
+    "review_links_total": 8,
+    "review_links_with_candidates_total": 8,
+    "review_links_without_candidates_total": 0,
+    "assist_rows_total": 85,
+    "min_candidate_score": 20,
+    "max_candidates_per_link": 12,
+    "relevance_bucket_counts": {
+      "strong": 30,
+      "medium": 27,
+      "weak": 28
+    },
+    "rows_below_institution_overlap_min_total": 11
+  },
+  "pending_queue_targeted_summary": {
+    "status": "ok",
+    "pending_rows_total": 2,
+    "links_with_candidates_total": 2,
+    "top_candidates_per_link": 5,
+    "pending_reason_counts": {
+      "auto_assist:role_alignment_failed:procedural_unit_not_found": 1,
+      "auto_assist:role_alignment_failed:role_topic_overlap_zero": 1
+    }
+  },
+  "delta": {
+    "approved_rows_total": 4,
+    "pending_rows_total": -4,
+    "rows_missing_role_alignment_total": -4
+  }
+}
