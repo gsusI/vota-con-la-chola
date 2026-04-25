@@ -1,0 +1,60 @@
+{
+  "generated_at_utc": "20260301T094234Z",
+  "sprint": "AI-OPS-365",
+  "lane": "status404_detalleiniciativa_cookie_lever_probe",
+  "manual_lever": {
+    "status": "ok",
+    "usable_captures_total": 4,
+    "selected_cookie_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_299_01_seed_20260301T075125Z.cookies.json",
+    "pending_targets_total": 8,
+    "pending_unmatched_total": 2,
+    "pending_access_denied_total": 6
+  },
+  "runtime_seconds": 294.00,
+  "retry_summary": {
+    "candidate_urls": 18,
+    "urls_to_fetch": 18,
+    "fetched_ok": 0,
+    "failures_total": 18,
+    "archive_hits": 0,
+    "archive_fetched_ok": 0
+  },
+  "postprocess": {
+    "extractions_seen": 0,
+    "extractions_upserted": 0,
+    "extractions_needs_review": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": {
+      "before": 5202,
+      "after": 5202,
+      "delta": 0
+    },
+    "missing_doc_links_actionable": {
+      "before": 4160,
+      "after": 4160,
+      "delta": 0
+    },
+    "missing_urls": {
+      "before": 384,
+      "after": 384,
+      "delta": 0
+    },
+    "unknown_status_urls": {
+      "before": 18,
+      "after": 18,
+      "delta": 0
+    },
+    "blocked_403_urls": {
+      "before": 14,
+      "after": 14,
+      "delta": 0
+    }
+  },
+  "dod_check": {
+    "lever_available": true,
+    "delta_target_met": false,
+    "postprocess_ok": true,
+    "all_passed": false
+  }
+}

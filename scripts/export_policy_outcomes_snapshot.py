@@ -26,7 +26,7 @@ from typing import Any
 
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/policy-outcomes/data/policy-outcomes.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/policy-outcomes/data/policy-outcomes.json")
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}")
 
@@ -111,6 +111,21 @@ def safe_float(value: Any) -> float | None:
         return None
 
 
+def table_exists(conn: sqlite3.Connection, table_name: str) -> bool:
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
+        (table_name,),
+    ).fetchone()
+    return row is not None
+
+
+def count_rows(conn: sqlite3.Connection, table_name: str) -> int:
+    if not table_exists(conn, table_name):
+        return 0
+    row = conn.execute(f"SELECT COUNT(*) AS c FROM {table_name}").fetchone()
+    return int(row["c"]) if row else 0
+
+
 def parse_date(value: Any) -> date | None:
     text = safe_text(value)
     if not text:
@@ -150,36 +165,48 @@ def as_percent(delta: float | None, base: float | None) -> float | None:
 
 
 def infer_snapshot_date(conn: sqlite3.Connection) -> str:
-    candidates = [
-        conn.execute(
+    candidates: list[sqlite3.Row | None] = []
+    queries = [
+        (
+            ("indicator_series",),
             """
             SELECT MAX(source_snapshot_date) AS d
             FROM indicator_series
             WHERE source_snapshot_date IS NOT NULL
-            """
-        ).fetchone(),
-        conn.execute(
+            """,
+        ),
+        (
+            ("indicator_points", "indicator_series"),
             """
             SELECT MAX(source_snapshot_date) AS d
             FROM indicator_points ip
             JOIN indicator_series s ON s.indicator_series_id = ip.indicator_series_id
             WHERE s.source_snapshot_date IS NOT NULL
-            """
-        ).fetchone(),
-        conn.execute(
+            """,
+        ),
+        (
+            ("policy_events",),
             """
             SELECT MAX(COALESCE(event_date, published_date)) AS d
             FROM policy_events
-            """
-        ).fetchone(),
-        conn.execute(
+            """,
+        ),
+        (
+            ("policy_events",),
             """
             SELECT MAX(source_snapshot_date) AS d
             FROM policy_events
             WHERE source_snapshot_date IS NOT NULL
-            """
-        ).fetchone(),
+            """,
+        ),
     ]
+    for required_tables, sql in queries:
+        if any(not table_exists(conn, table_name) for table_name in required_tables):
+            continue
+        try:
+            candidates.append(conn.execute(sql).fetchone())
+        except sqlite3.DatabaseError:
+            continue
 
     snapshot = ""
     for row in candidates:
@@ -194,8 +221,37 @@ def infer_snapshot_date(conn: sqlite3.Connection) -> str:
 
 
 def load_series(conn: sqlite3.Connection, *, max_series: int, min_points: int) -> tuple[list[dict[str, Any]], dict[int, list[dict[str, Any]]]]:
+    if not table_exists(conn, "indicator_series") or not table_exists(conn, "indicator_points"):
+        return [], {}
+
+    domain_label_sql = (
+        "COALESCE((SELECT d.label FROM domains d WHERE d.domain_id = s.domain_id), '') AS domain_label"
+        if table_exists(conn, "domains")
+        else "'' AS domain_label"
+    )
+    domain_key_sql = (
+        "COALESCE((SELECT d.canonical_key FROM domains d WHERE d.domain_id = s.domain_id), '') AS domain_key"
+        if table_exists(conn, "domains")
+        else "'' AS domain_key"
+    )
+    admin_level_label_sql = (
+        "COALESCE((SELECT a.label FROM admin_levels a WHERE a.admin_level_id = s.admin_level_id), '') AS admin_level_label"
+        if table_exists(conn, "admin_levels")
+        else "'' AS admin_level_label"
+    )
+    territory_label_sql = (
+        "COALESCE((SELECT COALESCE(t.name, COALESCE(t.code, '')) FROM territories t WHERE t.territory_id = s.territory_id), '') AS territory_label"
+        if table_exists(conn, "territories")
+        else "'' AS territory_label"
+    )
+    territory_code_sql = (
+        "COALESCE((SELECT COALESCE(t.code, '') FROM territories t WHERE t.territory_id = s.territory_id), '') AS territory_code"
+        if table_exists(conn, "territories")
+        else "'' AS territory_code"
+    )
+
     rows = conn.execute(
-        """
+        f"""
         SELECT
           s.indicator_series_id,
           s.canonical_key,
@@ -208,23 +264,19 @@ def load_series(conn: sqlite3.Connection, *, max_series: int, min_points: int) -
           COALESCE(s.source_id, '') AS source_id,
           COALESCE(s.source_url, '') AS source_url,
           COALESCE(s.source_snapshot_date, '') AS source_snapshot_date,
-          COALESCE(d.label, '') AS domain_label,
-          COALESCE(d.canonical_key, '') AS domain_key,
-          COALESCE(a.label, '') AS admin_level_label,
-          COALESCE(t.name, COALESCE(t.code, '')) AS territory_label,
-          COALESCE(t.code, '') AS territory_code,
+          {domain_label_sql},
+          {domain_key_sql},
+          {admin_level_label_sql},
+          {territory_label_sql},
+          {territory_code_sql},
           COUNT(p.indicator_point_id) AS point_count,
           MIN(p.date) AS first_point_date,
           MAX(p.date) AS latest_point_date
         FROM indicator_series s
         LEFT JOIN indicator_points p ON p.indicator_series_id = s.indicator_series_id
-        LEFT JOIN domains d ON d.domain_id = s.domain_id
-        LEFT JOIN admin_levels a ON a.admin_level_id = s.admin_level_id
-        LEFT JOIN territories t ON t.territory_id = s.territory_id
         GROUP BY
           s.indicator_series_id, s.canonical_key, s.label, s.unit, s.frequency, s.domain_id,
-          s.admin_level_id, s.territory_id, s.source_id, s.source_url, s.source_snapshot_date,
-          d.label, d.canonical_key, a.label, t.name, t.code
+          s.admin_level_id, s.territory_id, s.source_id, s.source_url, s.source_snapshot_date
         HAVING point_count >= ?
         ORDER BY point_count DESC, latest_point_date DESC
         LIMIT ?
@@ -342,8 +394,42 @@ def enrich_series(series: list[dict[str, Any]], points_by_series: dict[int, list
 
 
 def load_policy_events(conn: sqlite3.Connection, *, max_events: int) -> list[dict[str, Any]]:
+    if not table_exists(conn, "policy_events"):
+        return []
+
+    domain_label_sql = (
+        "COALESCE((SELECT d.label FROM domains d WHERE d.domain_id = pe.domain_id), '') AS domain_label"
+        if table_exists(conn, "domains")
+        else "'' AS domain_label"
+    )
+    domain_key_sql = (
+        "COALESCE((SELECT d.canonical_key FROM domains d WHERE d.domain_id = pe.domain_id), '') AS domain_key"
+        if table_exists(conn, "domains")
+        else "'' AS domain_key"
+    )
+    institution_name_sql = (
+        "COALESCE((SELECT i.name FROM institutions i WHERE i.institution_id = pe.institution_id), '') AS institution_name"
+        if table_exists(conn, "institutions")
+        else "'' AS institution_name"
+    )
+    admin_level_label_sql = (
+        "COALESCE((SELECT a.label FROM admin_levels a WHERE a.admin_level_id = pe.admin_level_id), '') AS admin_level_label"
+        if table_exists(conn, "admin_levels")
+        else "'' AS admin_level_label"
+    )
+    territory_label_sql = (
+        "COALESCE((SELECT COALESCE(t.name, COALESCE(t.code, '')) FROM territories t WHERE t.territory_id = pe.territory_id), '') AS territory_label"
+        if table_exists(conn, "territories")
+        else "'' AS territory_label"
+    )
+    territory_code_sql = (
+        "COALESCE((SELECT COALESCE(t.code, '') FROM territories t WHERE t.territory_id = pe.territory_id), '') AS territory_code"
+        if table_exists(conn, "territories")
+        else "'' AS territory_code"
+    )
+
     rows = conn.execute(
-        """
+        f"""
         SELECT
           pe.policy_event_id,
           COALESCE(pe.event_date, pe.published_date, '') AS event_date,
@@ -354,17 +440,13 @@ def load_policy_events(conn: sqlite3.Connection, *, max_events: int) -> list[dic
           COALESCE(pe.source_id, '') AS source_id,
           COALESCE(pe.source_url, '') AS source_url,
           COALESCE(pe.domain_id, 0) AS domain_id,
-          COALESCE(d.label, '') AS domain_label,
-          COALESCE(d.canonical_key, '') AS domain_key,
-          COALESCE(i.name, '') AS institution_name,
-          COALESCE(a.label, '') AS admin_level_label,
-          COALESCE(t.name, COALESCE(t.code, '')) AS territory_label,
-          COALESCE(t.code, '') AS territory_code
+          {domain_label_sql},
+          {domain_key_sql},
+          {institution_name_sql},
+          {admin_level_label_sql},
+          {territory_label_sql},
+          {territory_code_sql}
         FROM policy_events pe
-        LEFT JOIN domains d ON d.domain_id = pe.domain_id
-        LEFT JOIN institutions i ON i.institution_id = pe.institution_id
-        LEFT JOIN admin_levels a ON a.admin_level_id = pe.admin_level_id
-        LEFT JOIN territories t ON t.territory_id = pe.territory_id
         ORDER BY date(COALESCE(pe.event_date, pe.published_date)) DESC
         LIMIT ?
         """,
@@ -511,31 +593,24 @@ def build_associations(
 
 
 def table_counts(conn: sqlite3.Connection) -> dict[str, int]:
-    rows = conn.execute("SELECT COUNT(*) AS c FROM indicator_series").fetchone()
-    indicator_series_total = int(rows["c"]) if rows else 0
-    rows = conn.execute("SELECT COUNT(*) AS c FROM indicator_points").fetchone()
-    indicator_points_total = int(rows["c"]) if rows else 0
-    rows = conn.execute("SELECT COUNT(*) AS c FROM interventions").fetchone()
-    interventions_total = int(rows["c"]) if rows else 0
-    rows = conn.execute("SELECT COUNT(*) AS c FROM intervention_events").fetchone()
-    intervention_events_total = int(rows["c"]) if rows else 0
-    rows = conn.execute("SELECT COUNT(*) AS c FROM causal_estimates").fetchone()
-    causal_estimates_total = int(rows["c"]) if rows else 0
-    rows = conn.execute("SELECT COUNT(*) AS c FROM policy_events").fetchone()
-    policy_events_total = int(rows["c"]) if rows else 0
     return {
-        "indicator_series_total": indicator_series_total,
-        "indicator_points_total": indicator_points_total,
-        "interventions_total": interventions_total,
-        "intervention_events_total": intervention_events_total,
-        "causal_estimates_total": causal_estimates_total,
-        "policy_events_total": policy_events_total,
+        "indicator_series_total": count_rows(conn, "indicator_series"),
+        "indicator_points_total": count_rows(conn, "indicator_points"),
+        "interventions_total": count_rows(conn, "interventions"),
+        "intervention_events_total": count_rows(conn, "intervention_events"),
+        "causal_estimates_total": count_rows(conn, "causal_estimates"),
+        "policy_events_total": count_rows(conn, "policy_events"),
     }
 
 
 def build_payload(conn: sqlite3.Connection, args: argparse.Namespace) -> dict[str, Any]:
     snapshot_date = args.snapshot_date if hasattr(args, "snapshot_date") and args.snapshot_date else infer_snapshot_date(conn)
     counts = table_counts(conn)
+    missing_base_tables = [
+        table_name
+        for table_name in ("indicator_series", "indicator_points", "policy_events")
+        if not table_exists(conn, table_name)
+    ]
 
     series, points_by_series = load_series(conn, max_series=args.max_series, min_points=args.min_points)
     series_payload, series_stats = enrich_series(
@@ -574,6 +649,15 @@ def build_payload(conn: sqlite3.Connection, args: argparse.Namespace) -> dict[st
             {item.get("domain_label") or item.get("domain_key") for item in policy_events if item.get("domain_label") or item.get("domain_key")}
         ),
     }
+    limitation_description = [
+        "Este dataset está en fase temprana: hoy predomina evidencia descriptiva.",
+        "No hay pipeline estable de intervenciones e impactos causales en esta fase.",
+        "Las asociaciones son diferencias de indicador antes/después por ventana temporal, no causalidad.",
+    ]
+    if missing_base_tables:
+        limitation_description.append(
+            "La DB actual no incluye todas las tablas base de policy outcomes; se exporta un snapshot parcial o vacio segun cobertura."
+        )
 
     return {
         "meta": {
@@ -611,11 +695,7 @@ def build_payload(conn: sqlite3.Connection, args: argparse.Namespace) -> dict[st
             "interventions_available": counts["interventions_total"] > 0,
             "intervention_events_available": counts["intervention_events_total"] > 0,
             "causal_estimates_available": counts["causal_estimates_total"] > 0,
-            "description": [
-                "Este dataset está en fase temprana: hoy predomina evidencia descriptiva.",
-                "No hay pipeline estable de intervenciones e impactos causales en esta fase.",
-                "Las asociaciones son diferencias de indicador antes/después por ventana temporal, no causalidad.",
-            ],
+            "description": limitation_description,
             "method_note": "Correlación no implica causalidad.",
         },
         "filters": source_filters,

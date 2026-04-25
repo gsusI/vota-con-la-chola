@@ -1,0 +1,68 @@
+name: Reporte de bug
+description: Reporta un fallo reproducible en ETL, UI o publicación.
+title: "[Bug] "
+labels:
+  - "type:bug"
+  - "status:needs-repro"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias. Incluye evidencia mínima para acelerar revisión y reproducibilidad.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Qué pasa
+      description: Describe el comportamiento observado.
+      placeholder: El pipeline falla en ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Qué esperabas que pase
+      placeholder: Comportamiento esperado.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Componente
+      options:
+        - politicos_etl
+        - parlamentario_etl
+        - citizen_ui
+        - explorer_ui
+        - docs
+        - public_release
+      validations:
+        required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia
+      description: Adjunta logs, ids de corrida, enlaces o fragmentos de error.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproducción mínima
+      description: Pasos para reproducir localmente.
+      placeholder: |
+        1. DB_PATH=... SNAPSHOT_DATE=...
+        2. just ...
+        3. Observación
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Entorno
+      placeholder: Linux/macOS, Docker version, commit

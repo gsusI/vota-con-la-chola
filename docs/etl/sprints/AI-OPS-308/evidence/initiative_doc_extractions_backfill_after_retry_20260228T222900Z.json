@@ -1,0 +1,202 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 31,
+  "upserted": 31,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_window": 24,
+    "title_hint_strong": 7
+  },
+  "by_doc_format": {
+    "html": 31
+  },
+  "sample": [
+    {
+      "source_record_pk": 146883,
+      "sample_initiative_id": "senado:leg14:exp:626/000007",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 7 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Par…"
+    },
+    {
+      "source_record_pk": 146879,
+      "sample_initiative_id": "senado:leg14:exp:624/000004",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 9 DICIEMBRE 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146878,
+      "sample_initiative_id": "senado:leg14:exp:624/000003",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 19 ABRIL 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146903,
+      "sample_initiative_id": "senado:leg14:exp:621/000087",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 20 ABRIL 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos P…"
+    },
+    {
+      "source_record_pk": 146899,
+      "sample_initiative_id": "senado:leg10:exp:610/000143",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 15 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146881,
+      "sample_initiative_id": "senado:leg14:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 1 DICIEMBRE 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146896,
+      "sample_initiative_id": "senado:leg10:exp:610/000140",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 15 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146897,
+      "sample_initiative_id": "senado:leg10:exp:610/000141",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 16 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146900,
+      "sample_initiative_id": "senado:leg10:exp:610/000144",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 17 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146902,
+      "sample_initiative_id": "senado:leg10:exp:610/000147",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 17 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146901,
+      "sample_initiative_id": "senado:leg10:exp:610/000145",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 15 JULIO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146891,
+      "sample_initiative_id": "senado:leg14:exp:622/000096",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 6 DICIEMBRE 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146892,
+      "sample_initiative_id": "senado:leg14:exp:622/000102",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 7 JUNIO 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146887,
+      "sample_initiative_id": "senado:leg14:exp:622/000088",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 9 MAYO 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Parl…"
+    },
+    {
+      "source_record_pk": 146907,
+      "sample_initiative_id": "senado:leg14:exp:622/000030",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 18 OCTUBRE 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146886,
+      "sample_initiative_id": "senado:leg14:exp:622/000075",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 4 ABRIL 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146888,
+      "sample_initiative_id": "senado:leg14:exp:622/000090",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 11 MAYO 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    },
+    {
+      "source_record_pk": 146894,
+      "sample_initiative_id": "senado:leg14:exp:622/000059",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 20 OCTUBRE 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146890,
+      "sample_initiative_id": "senado:leg14:exp:622/000074",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 19 ABRIL 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos P…"
+    },
+    {
+      "source_record_pk": 146893,
+      "sample_initiative_id": "senado:leg14:exp:622/000055",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 10 MAYO 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos Pa…"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,87 @@
+{
+  "sample_total": 40,
+  "pre_labeled_rows": 0,
+  "carried_forward_rows": 24,
+  "unlabeled_rows": 16,
+  "invalid_sample_labels": 0,
+  "by_party": {
+    "BNG": {
+      "total": 10,
+      "labeled": 2,
+      "unlabeled": 8,
+      "carried": 2
+    },
+    "FORO Asturias": {
+      "total": 10,
+      "labeled": 10,
+      "unlabeled": 0,
+      "carried": 10
+    },
+    "PP": {
+      "total": 10,
+      "labeled": 7,
+      "unlabeled": 3,
+      "carried": 7
+    },
+    "VOX": {
+      "total": 10,
+      "labeled": 5,
+      "unlabeled": 5,
+      "carried": 5
+    }
+  },
+  "carried_forward_evidence_ids": [
+    "1560337",
+    "1560338",
+    "1560844",
+    "1560846",
+    "1560847",
+    "1560848",
+    "1560849",
+    "1560855",
+    "1560857",
+    "1560858",
+    "1560862",
+    "1560864",
+    "1560925",
+    "1560926",
+    "1560927",
+    "1560928",
+    "1560929",
+    "1560930",
+    "1560931",
+    "1560932",
+    "1560934",
+    "1560935",
+    "1561266",
+    "1561267"
+  ],
+  "unlabeled_evidence_ids": [
+    "1560537",
+    "1560538",
+    "1560542",
+    "1560543",
+    "1560545",
+    "1560830",
+    "1560831",
+    "1560832",
+    "1560865",
+    "1561005",
+    "1561007",
+    "1561008",
+    "1561012",
+    "1561268",
+    "1561270",
+    "1561275"
+  ],
+  "sample_file": "docs/etl/sprints/AI-OPS-259/exports/programas_support_precision_sample_latest.csv",
+  "labels_sources": [
+    "docs/etl/sprints/AI-OPS-258/exports/programas_support_precision_stratified_sample_20260228.csv"
+  ],
+  "label_map_size": 36,
+  "label_conflicts_total": 0,
+  "label_conflicts": [],
+  "invalid_historical_labels": 0,
+  "strict_fail_reasons": [],
+  "status": "ok"
+}

@@ -1,0 +1,202 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 38,
+  "upserted": 38,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_sentence": 4,
+    "title_hint_strong": 34
+  },
+  "by_doc_format": {
+    "html": 38
+  },
+  "sample": [
+    {
+      "source_record_pk": 147307,
+      "sample_initiative_id": "senado:leg14:exp:621/000023",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas de prevención y lucha contra el fraude fiscal, de transposición de la Directiva (UE) 2016/1164, del Consejo, de 12 de julio de 2016, por la que se establecen normas contra las prácticas de elusión fiscal que inciden directamente en el funcionamiento del mercado interior, de modificación de d…"
+    },
+    {
+      "source_record_pk": 147330,
+      "sample_initiative_id": "senado:leg12:exp:624/000010",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 42/2007, de 13 de diciembre, del Patrimonio Natural y de la Biodiversidad. (624/000010)"
+    },
+    {
+      "source_record_pk": 147306,
+      "sample_initiative_id": "senado:leg14:exp:621/000022",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de protección de datos personales tratados para fines de prevención, detección, investigación y enjuiciamiento de infracciones penales y de ejecución de sanciones penales. (621/000022)"
+    },
+    {
+      "source_record_pk": 147309,
+      "sample_initiative_id": "senado:leg14:exp:624/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para el establecimiento del régimen jurídico aplicable al Consejo General del Poder Judicial en funciones. (624/000003)"
+    },
+    {
+      "source_record_pk": 147301,
+      "sample_initiative_id": "senado:leg10:exp:605/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Estatuto de Autonomía de Castilla-La Mancha. (605/000002)"
+    },
+    {
+      "source_record_pk": 147313,
+      "sample_initiative_id": "senado:leg12:exp:624/000014",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de imprudencia en la conducción de vehículos a motor o ciclomotor y sanción del abandono del lugar del accidente. (624/000014)"
+    },
+    {
+      "source_record_pk": 147315,
+      "sample_initiative_id": "senado:leg12:exp:622/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 5/1995, de 22 de mayo, del Tribunal del Jurado, para garantizar la participación de las personas con discapacidad sin exclusiones. (622/000001)"
+    },
+    {
+      "source_record_pk": 147329,
+      "sample_initiative_id": "senado:leg12:exp:624/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 14/2010, de 5 de julio, sobre las infraestructuras y los servicios de información geográfica en España. (624/000008)"
+    },
+    {
+      "source_record_pk": 147332,
+      "sample_initiative_id": "senado:leg12:exp:625/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley sobre la transferencia de recursos de 19,99 hm3 desde la Demarcación Hidrográfica de los ríos Tinto, Odiel y Piedras a la Demarcación Hidrográfica del Guadalquivir. (625/000003)"
+    },
+    {
+      "source_record_pk": 147303,
+      "sample_initiative_id": "senado:leg10:exp:610/000055",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio complementario de revisión del Convenio de Seguridad Social firmado el 16 de mayo de 1991 entre el Reino de España y la República Federativa de Brasil, hecho en Madrid el 24 de julio de 2012. (610/000055)"
+    },
+    {
+      "source_record_pk": 147302,
+      "sample_initiative_id": "senado:leg10:exp:610/000053",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de Montenegro al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000053)"
+    },
+    {
+      "source_record_pk": 147331,
+      "sample_initiative_id": "senado:leg12:exp:625/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica el texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios y otras leyes complementarias, aprobado por Real Decreto Legislativo 1/2007, de 16 de noviembre. (625/000001)"
+    },
+    {
+      "source_record_pk": 147304,
+      "sample_initiative_id": "senado:leg10:exp:610/000056",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la República de Colombia al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000056)"
+    },
+    {
+      "source_record_pk": 147327,
+      "sample_initiative_id": "senado:leg12:exp:624/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General, para el supuesto de convocatoria automática de elecciones en virtud de lo dispuesto en el apartado 5 del artículo 99 de la Constitución. (624/000002)"
+    },
+    {
+      "source_record_pk": 147311,
+      "sample_initiative_id": "senado:leg14:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica complementaria de la Ley por la que se modifica la Ley 20/2011, de 21 de julio, del Registro Civil, de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial y de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (624/000006)"
+    },
+    {
+      "source_record_pk": 147338,
+      "sample_initiative_id": "senado:leg14:exp:605/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma de la Ley Orgánica 5/2007, de 20 de abril, de reforma del Estatuto de Autonomía de Aragón. (605/000004)"
+    },
+    {
+      "source_record_pk": 147314,
+      "sample_initiative_id": "senado:leg12:exp:626/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.2 (antes denominada Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.3). (626/000002)"
+    },
+    {
+      "source_record_pk": 147328,
+      "sample_initiative_id": "senado:leg12:exp:624/000007",
+      "doc_format": "html",
+      "subject_method": "keyword_sentence",
+      "confidence": 0.76,
+      "needs_review": 0,
+      "extracted_subject": "XII Legislatura Datos abiertos Datos abiertos Proposición de Ley del Congreso de los Diputados"
+    },
+    {
+      "source_record_pk": 147333,
+      "sample_initiative_id": "senado:leg12:exp:626/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.3. (626/000001)"
+    },
+    {
+      "source_record_pk": 147317,
+      "sample_initiative_id": "senado:leg12:exp:622/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 3/2004, de 29 de diciembre, por la que se establecen medidas de lucha contra la morosidad en las operaciones comerciales, con el fin de regular un régimen de infracciones y sanciones. (622/000007)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

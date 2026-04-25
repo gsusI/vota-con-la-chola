@@ -1,0 +1,11 @@
+0|run_id|INTEGER|0||1
+1|source_id|TEXT|1||0
+2|started_at|TEXT|1||0
+3|finished_at|TEXT|0||0
+4|status|TEXT|1||0
+5|source_url|TEXT|1||0
+6|raw_path|TEXT|0||0
+7|fetched_at|TEXT|0||0
+8|records_seen|INTEGER|1|0|0
+9|records_loaded|INTEGER|1|0|0
+10|message|TEXT|0||0

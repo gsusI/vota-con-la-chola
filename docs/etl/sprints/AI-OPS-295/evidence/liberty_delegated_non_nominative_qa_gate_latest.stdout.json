@@ -1,0 +1,44 @@
+{
+  "auto_review_summary": "docs/etl/sprints/AI-OPS-293/evidence/liberty_delegated_person_window_auto_review_decisions_alternative_latest.json",
+  "qa_sample_summary": "docs/etl/sprints/AI-OPS-294/evidence/liberty_delegated_non_nominative_auto_review_qa_sample_latest.json",
+  "qa_precision_report": "docs/etl/sprints/AI-OPS-294/evidence/liberty_delegated_non_nominative_auto_review_qa_precision_latest.json",
+  "report": {
+    "status": "ok",
+    "approved_with_non_nominative_actor_fallback_total": 1,
+    "qa_required": true,
+    "thresholds": {
+      "review_note_contains": "approved_non_nominative_unit",
+      "min_reviewed_rows": 1,
+      "min_precision_pct": 100.0
+    },
+    "qa_sample": {
+      "present": true,
+      "sample_rows_total": 1,
+      "review_note_contains": "approved_non_nominative_unit",
+      "auto_review_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_person_window_auto_review_decisions_alternative_latest.csv",
+      "out_csv": "docs/etl/sprints/AI-OPS-294/exports/liberty_delegated_non_nominative_auto_review_qa_sample_latest.csv"
+    },
+    "qa_precision": {
+      "present": true,
+      "status": "ok",
+      "qa_csv": "docs/etl/sprints/AI-OPS-294/exports/liberty_delegated_non_nominative_auto_review_qa_sample_reviewed_latest.csv",
+      "reviewed_rows_total": 1,
+      "observed_precision_pct": 100.0,
+      "strict_fail_reasons": []
+    },
+    "auto_review_out_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_person_window_auto_review_decisions_alternative_latest.csv",
+    "checks": {
+      "qa_required": true,
+      "qa_sample_summary_present": true,
+      "qa_precision_report_present": true,
+      "qa_sample_has_rows": true,
+      "qa_sample_review_note_filter_matches": true,
+      "qa_sample_matches_auto_review_csv": true,
+      "qa_precision_matches_sample_csv": true,
+      "qa_reviewed_rows_meet_min": true,
+      "qa_precision_meets_min": true,
+      "qa_precision_report_status_ok": true
+    },
+    "strict_fail_reasons": []
+  }
+}

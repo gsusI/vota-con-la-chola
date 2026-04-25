@@ -1,0 +1,30 @@
+{
+  "ts": "20260301T013022Z",
+  "before": {
+    "missing_urls": 1179,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 160,
+    "blocked_403_rate": 0.135708,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5
+  },
+  "after": {
+    "missing_urls": 1176,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 160,
+    "blocked_403_rate": 0.136054,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5
+  },
+  "delta": {
+    "missing_urls": -3,
+    "missing_initiatives": 0,
+    "blocked_403_urls": 0,
+    "blocked_403_rate": 0.00034600000000001296,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 0,
+    "zero_doc_initiatives": 0
+  }
+}

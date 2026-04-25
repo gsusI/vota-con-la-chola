@@ -25,7 +25,12 @@ DEFAULT_PUBLISHED_DIR = Path("etl/data/published")
 DEFAULT_ENV_FILE = Path(".env")
 DEFAULT_DATASET_NAME = "vota-con-la-chola-data"
 DEFAULT_SOURCE_REPO_URL = "https://github.com/gsusI/vota-con-la-chola"
-STATIC_PUBLISHED_FILES = ("proximas-elecciones-espana.json", "poblacion_municipios_es.json")
+STATIC_PUBLISHED_FILES = (
+    "proximas-elecciones-espana.json",
+    "poblacion_municipios_es.json",
+    "source-catalog-latest.json",
+    "source-scrape-queue-latest.json",
+)
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 PLACEHOLDER_VALUES = {"", "your_hf_token_here", "your_hf_username_here"}
 DEFAULT_PARQUET_EXCLUDE_TABLES = ("raw_fetches", "run_fetches", "source_records", "lost_and_found")
@@ -574,6 +579,47 @@ def extract_quality_report_summary(
                     init_kpis.get("extraction_review_closed_pct") or 0.0
                 )
     return summary
+
+
+def extract_source_catalog_summary(
+    published_files: list[Path],
+    snapshot_date: str,
+) -> dict[str, Any]:
+    date_token = str(snapshot_date).strip()
+    preferred_names = (
+        f"source-catalog-{date_token}.json",
+        "source-catalog-latest.json",
+    )
+    by_name = {p.name: p for p in published_files}
+    candidate: Path | None = None
+    for name in preferred_names:
+        p = by_name.get(name)
+        if p is not None:
+            candidate = p
+            break
+    if candidate is None:
+        return {}
+
+    payload = _read_json_or_gz(candidate)
+    if not payload:
+        return {}
+
+    summary = payload.get("summary")
+    if not isinstance(summary, dict):
+        return {}
+
+    out: dict[str, Any] = {"file_name": candidate.name}
+    for key in (
+        "sources_total",
+        "desired_total",
+        "in_db_total",
+        "with_network_total",
+        "blocked_total",
+        "mismatch_total",
+    ):
+        if key in summary:
+            out[key] = int(summary.get(key) or 0)
+    return out
 
 
 def ensure_quality_report_for_publish(
@@ -1344,6 +1390,8 @@ def build_dataset_readme(
             "Licencia del repo Hugging Face:",
             "- `license: other` porque el snapshot mezcla múltiples licencias/avisos por fuente.",
             "- La licencia/condiciones aplicables están detalladas por `source_id` en `sources/*.json`.",
+            "- La matriz de referencia y criterio de revisión legal de esta distinción entre código/datos/fuentes está en:",
+            "  - https://github.com/gsusI/vota-con-la-chola/blob/main/docs/legal/data-rights.md",
         ]
     )
     if quality_summary:
@@ -1377,6 +1425,7 @@ def build_dataset_readme(
             "- Cuando una fuente exige integridad/no alteración para mirror, mantener `published/*` como capa raw y declarar transformaciones en derivados.",
             "- Si hay datos personales, aplicar minimización, evitar reidentificación y revisar compatibilidad de finalidad (GDPR).",
             "- Fuentes con estado `parcial`, `pendiente` o `no verificado` requieren revisión legal adicional antes de reutilización comercial sensible.",
+            "- Si una fuente de origen no aparece en esta lista, se considera `pendiente` hasta verificación manual.",
             "",
             "Ruta del último snapshot publicado en este commit:",
             f"- `{snapshot_rel_dir.as_posix()}` (snapshot_date={snapshot_date})",
@@ -1435,6 +1484,7 @@ def main() -> int:
     published_dir = Path(args.published_dir)
     published_files = collect_published_files(published_dir, snapshot_date)
     quality_summary = extract_quality_report_summary(published_files, snapshot_date)
+    source_catalog_summary = extract_source_catalog_summary(published_files, snapshot_date)
     try:
         ensure_quality_report_for_publish(
             quality_summary,
@@ -1606,6 +1656,8 @@ def main() -> int:
         }
         if quality_summary:
             manifest["quality_report"] = quality_summary
+        if source_catalog_summary:
+            manifest["source_catalog"] = source_catalog_summary
         if liberty_atlas_release_latest_summary:
             manifest["liberty_atlas_release_latest"] = liberty_atlas_release_latest_summary
         for rel in tracked_files:
@@ -1633,6 +1685,8 @@ def main() -> int:
         }
         if quality_summary:
             latest_payload["quality_report"] = quality_summary
+        if source_catalog_summary:
+            latest_payload["source_catalog"] = source_catalog_summary
         if liberty_atlas_release_latest_summary:
             latest_payload["liberty_atlas_release_latest"] = liberty_atlas_release_latest_summary
         (build_root / "latest.json").write_text(

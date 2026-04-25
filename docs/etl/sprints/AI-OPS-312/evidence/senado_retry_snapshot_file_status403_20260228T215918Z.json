@@ -1,0 +1,46 @@
+{
+  "archive_fallback": true,
+  "archive_fallback_http_statuses": [
+    403
+  ],
+  "archive_fetched_ok": 1,
+  "archive_first_urls": 2,
+  "archive_hits": 1,
+  "archive_lookup_attempted": 2,
+  "archive_lookup_failures": [],
+  "candidate_urls": 60,
+  "derived_ini_candidates": 153,
+  "derived_ini_selected": 0,
+  "derived_probe_unfetched_skipped": 0,
+  "doc_links_filtered_by_selected_doc_entry_keys": 1375,
+  "doc_links_filtered_by_selected_doc_urls": 0,
+  "doc_links_seen": 60,
+  "dry_run": false,
+  "failures": [
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000047&legis=14 -> HTTPStatusError: archive fallback: no snapshot candidates"
+  ],
+  "fetched_ok": 1,
+  "initiative_documents_upserted": 60,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 628,
+  "playwright_init_error": null,
+  "playwright_runtime": {},
+  "retry_http_statuses": [
+    403
+  ],
+  "selected_doc_entry_keys_total": 60,
+  "selected_doc_status_used_for_forbidden_filter": 60,
+  "selected_doc_status_used_for_retry": 2,
+  "selected_doc_urls_not_in_candidates": 0,
+  "selected_doc_urls_total": 60,
+  "selected_doc_urls_with_snapshot_status": 60,
+  "skipped_existing": 58,
+  "skipped_forbidden": 58,
+  "skipped_redundant_global_urls": 247,
+  "skipped_retry_http_statuses": 0,
+  "text_documents_upserted": 1,
+  "urls_filtered_by_selected_doc_urls": 0,
+  "urls_to_fetch": 2
+}

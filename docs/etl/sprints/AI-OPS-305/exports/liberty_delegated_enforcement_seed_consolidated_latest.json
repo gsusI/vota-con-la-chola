@@ -1,0 +1,128 @@
+{
+  "schema_version": "liberty_delegated_enforcement_seed_v1",
+  "generated_at": "2026-02-28T20:34:38+00:00",
+  "methodology": {
+    "method_version": "delegated_enforcement_v1",
+    "method_label": "Cadena delegada de enforcement v1",
+    "rules": {
+      "target_fragment_coverage_min": 0.6,
+      "designated_actor_coverage_min": 0.5,
+      "enforcement_evidence_coverage_min": 0.7
+    },
+    "notes": "Piloto reproducible para cadena norma habilitante -> organismo delegado -> cargo/acto de enforcement."
+  },
+  "links": [
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "designated_actor_label": "Carlos Muñoz-Repiso Izaguirre",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1996-12484",
+      "evidence_quote": "Real Decreto 1343/1996, de 31 de mayo, por el que se dispone el nombramiento de don Carlos Muñoz-Repiso Izaguirre como Director general de Tráfico. | review:auto_assist:approved_from_BOE-A-1996-12484"
+    },
+    {
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Subdireccion de Gestion de Sanciones",
+      "designated_actor_label": "Mariano Fernández Fernández",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115",
+      "evidence_quote": "BOE-A-2003-23115 Orden INT/3514/2003, de 5 de diciembre, por la que se dispone el nombramiento de don Mariano Fernández Fernández como Subdirector General de Normativa y Recursos de la Dirección General de Tráfico. | review:auto_assist:approved_from_BOE-A-2003-23115"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "designated_actor_label": "Marta Guelbenzu Robles",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-7862",
+      "evidence_quote": "Corrección de erratas de la Resolución de 23 de abril de 2004, de la Presidencia de la Agencia Estatal de Administración Tributaria, por la que se dispone el nombramiento de doña Marta Guelbenzu Robles como Directora del Gabinete del Director General de la Agencia Estatal de Administración Tributaria. | review:auto_assist:approved_from_BOE-A-2004-7862"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "designated_actor_label": "José Alberto García Valera",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769",
+      "evidence_quote": "Resolución de 21 de junio de 2007, de la Presidencia de la Agencia Estatal de Administración Tributaria, por la que se dispone el nombramiento como Delegado Ejecutivo de la Delegación Especial de Andalucía, Ceuta y Melilla de don José Alberto García Valera. | review:auto_assist:approved_from_BOE-A-2007-12769"
+    },
+    {
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Unidad procedimental sancionadora",
+      "designated_actor_label": "Unidad procedimental sancionadora (AEAT)",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Graduacion y tramitacion procedimental",
+      "enforcement_evidence_date": "2010-03-27",
+      "chain_confidence": 0.59,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-5072",
+      "evidence_quote": "Resolución de 17 de marzo de 2010, de la Presidencia de la Agencia Estatal de Administración Tributaria, por la que se delega el ejercicio de las competencias para el nombramiento y cese de los representantes de la Agencia Estatal de Administración Tributaria en las Comisiones o grupos de trabajo del Consejo Superior para la Dirección y Coordinación de la Gestión Tributaria, así como para el nombramiento y cese de los representantes y sus sustitutos de la Agencia en los Consejos Territoriales para la Dirección y Coordinación de la Gestión Tributaria. | review:auto_assist:approved_non_nominative_unit_from_BOE-A-2010-5072"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio del Interior",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "designated_actor_label": "Sofía del Carmen Hernanz Costa",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065",
+      "evidence_quote": "Resolución de 16 de junio de 2008, de la Delegación del Gobierno en la Comunidad Autónoma de las Illes Balears, por la que se dispone el nombramiento de doña Sofía del Carmen Hernanz Costa como Directora Insular de la Administración General del Estado en Ibiza-Formentera. | review:auto_assist:approved_from_BOE-A-2008-12065"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "designated_actor_label": "Juan Ignacio Moltó García",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.74,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-27292",
+      "evidence_quote": "Real Decreto 2206/1984, de 12 de diciembre, por el que se dispone el nombramiento de don Juan Ignacio Moltó García como Director general de Inspección de Trabajo y Seguridad Social. | review:auto_assist:approved_from_BOE-A-1984-27292"
+    },
+    {
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "designated_actor_label": "Miguel José Sanz Aranda",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-24053",
+      "evidence_quote": "Orden de 14 de octubre de 1988 por la que se dispone el nombramiento de don Miguel José Sanz Aranda como Jefe de Inspección General de Servicios. | review:auto_assist:approved_from_BOE-A-1988-24053"
+    }
+  ]
+}

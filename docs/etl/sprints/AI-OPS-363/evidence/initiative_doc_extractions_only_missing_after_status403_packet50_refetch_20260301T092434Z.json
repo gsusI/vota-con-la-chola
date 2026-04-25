@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 50,
+  "upserted": 50,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 50
+  },
+  "by_doc_format": {
+    "xml": 50
+  },
+  "sample": [
+    {
+      "source_record_pk": 147845,
+      "sample_initiative_id": "senado:leg12:exp:605/000001",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Estatuto de Autonomía de Canarias. (605/000001)"
+    },
+    {
+      "source_record_pk": 147844,
+      "sample_initiative_id": "senado:leg11:exp:626/000001",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49.3. (626/000001)"
+    },
+    {
+      "source_record_pk": 147863,
+      "sample_initiative_id": "senado:leg12:exp:610/000018",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio europeo sobre protección de animales de compañía, hecho en Estrasburgo el 13 de noviembre de 1987, así como Declaración que España desea formular. (610/000018)"
+    },
+    {
+      "source_record_pk": 147843,
+      "sample_initiative_id": "senado:leg10:exp:626/000002",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifican los artículos 92 y 93. (626/000002)"
+    },
+    {
+      "source_record_pk": 147882,
+      "sample_initiative_id": "senado:leg12:exp:610/000038",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Modificación del texto y de los anexos II a IX e incorporación de nuevos anexos X y XI al Protocolo al Convenio de 1979 sobre contaminación atmosférica transfronteriza a gran distancia, relativo a la reducción de la acidificación, de la eutrofización y del ozono en la troposfera, adoptada en Ginebra el 4 de mayo de 20…"
+    },
+    {
+      "source_record_pk": 147849,
+      "sample_initiative_id": "senado:leg12:exp:610/000004",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Canje de Cartas constitutivo de Acuerdo de Sede entre el Reino de España y las Naciones Unidas para la celebración en Madrid, en noviembre de 2015, de tres reuniones internacionales sobre registro de emisiones y transferencias de contaminantes, hecho en Madrid y Ginebra el 26 de octubre y el 13 de noviembre de 2015. (…"
+    },
+    {
+      "source_record_pk": 147890,
+      "sample_initiative_id": "senado:leg12:exp:610/000046",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Enmiendas del texto y de los Anexos I, II, III, IV, VI y VIII al Protocolo del Convenio de 1979 sobre la contaminación atmosférica transfronteriza a gran distancia provocada por contaminantes orgánicos persistentes, adoptadas en Ginebra el 18 de diciembre de 2009 mediante Decisión 2009/1. (610/000046)"
+    },
+    {
+      "source_record_pk": 147892,
+      "sample_initiative_id": "senado:leg12:exp:610/000048",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de la India sobre el ejercicio de actividades remuneradas de familiares dependientes del personal diplomático, consular, administrativo y técnico de las misiones diplomáticas y oficinas consulares, hecho en Madrid el 30 de mayo de 2017. (610/000048)"
+    },
+    {
+      "source_record_pk": 147871,
+      "sample_initiative_id": "senado:leg12:exp:610/000026",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Canje de Notas por el que se prorroga y enmienda el Acuerdo de Cooperación Científica entre el Reino de España y los Estados Unidos de América sobre la Estación de Seguimiento de la NASA, suscrito el 28 de enero de 2003, hecho en Madrid el 31 de agosto y 4 de septiembre de 2015. (610/000026)"
+    },
+    {
+      "source_record_pk": 147888,
+      "sample_initiative_id": "senado:leg12:exp:610/000044",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Enmiendas a los Anexos I y II al Protocolo del Convenio de 1979 sobre la contaminación atmosférica transfronteriza a gran distancia provocada por contaminantes orgánicos persistentes, adoptadas en Ginebra el 18 de diciembre de 2009 por Decisión 2009/2. (610/000044)"
+    },
+    {
+      "source_record_pk": 147880,
+      "sample_initiative_id": "senado:leg12:exp:610/000036",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Actas, Resoluciones y Recomendaciones de la Unión Postal de las Américas, España y Portugal (UPAEP) adoptadas en La Habana el 13 de septiembre de 2013, durante el XXII Congreso Ordinario de la Unión Postal de las Américas, España y Portugal. (610/000036)"
+    },
+    {
+      "source_record_pk": 147879,
+      "sample_initiative_id": "senado:leg12:exp:610/000035",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la Organización Conjunta de Cooperación en Materia de Armamento (OCCAR) para el establecimiento de una Oficina Satélite del Programa A400M en territorio español, hecho en Madrid el 9 de julio de 2014. (610/000035)"
+    },
+    {
+      "source_record_pk": 147855,
+      "sample_initiative_id": "senado:leg12:exp:610/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Memorando de Entendimiento sobre apoyo logístico en la fase de vida útil (ISS) y actividades de cooperación relativas a los sistemas basados en el Leopard 1 y Leopard 2, hecho el 1 de agosto de 2012, y Declaración que España desea formular. (610/000010)"
+    },
+    {
+      "source_record_pk": 147891,
+      "sample_initiative_id": "senado:leg12:exp:610/000047",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Enmiendas al Texto y a los Anexos distintos del III y VII del Protocolo al Convenio de 1979 sobre contaminación atmosférica transfronteriza a gran distancia en materia de metales pesados, adoptadas en Ginebra el 13 de diciembre de 2012. (610/000047)"
+    },
+    {
+      "source_record_pk": 147883,
+      "sample_initiative_id": "senado:leg12:exp:610/000039",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y el Estado de Catar para evitar la doble imposición y prevenir la evasión fiscal en materia de impuestos sobre la renta, y su Protocolo, hecho en Madrid el 10 de septiembre de 2015. (610/000039)"
+    },
+    {
+      "source_record_pk": 147846,
+      "sample_initiative_id": "senado:leg12:exp:605/000002",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Estatuto de Autonomía de la Comunitat Valenciana en materia de participación de la Generalitat Valenciana en las decisiones sobre inversión del Estado en la Comunidad Valenciana. (605/000002)"
+    },
+    {
+      "source_record_pk": 147889,
+      "sample_initiative_id": "senado:leg12:exp:610/000045",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Laboratorio Europeo de Biología Molecular (EMBL) relativo al establecimiento de una Subsede del citado Laboratorio en España, hecho en Heidelberg el 26 de enero de 2017. (610/000045)"
+    },
+    {
+      "source_record_pk": 147865,
+      "sample_initiative_id": "senado:leg12:exp:610/000020",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo sobre protección mutua de información clasificada intercambiada entre el Reino de España y el Gobierno de la República Argelina Democrática y Popular, hecho en Argel el 14 de julio de 2016. (610/000020)"
+    },
+    {
+      "source_record_pk": 147868,
+      "sample_initiative_id": "senado:leg12:exp:610/000023",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Adenda relativa al establecimiento, funcionamiento y ubicación del Instituto de la Universidad de las Naciones Unidas para la Globalización, la Cultura y la Movilidad (UNU-GCM), con sede en Barcelona. (610/000023)"
+    },
+    {
+      "source_record_pk": 147856,
+      "sample_initiative_id": "senado:leg12:exp:610/000011",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de colaboración y cooperación reforzadas entre la Unión Europea y sus Estados miembros, por una parte, y la República de Kazajistán, por otra, hecho en Astaná el 21 de diciembre de 2015. (610/000011)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

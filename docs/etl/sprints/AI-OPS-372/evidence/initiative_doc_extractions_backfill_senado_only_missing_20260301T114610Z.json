@@ -1,0 +1,203 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 34,
+  "upserted": 34,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 27,
+    "title_hint_strong": 7
+  },
+  "by_doc_format": {
+    "html": 7,
+    "xml": 27
+  },
+  "sample": [
+    {
+      "source_record_pk": 147956,
+      "sample_initiative_id": "senado:leg14:exp:624/000010",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley integral para la igualdad de trato y la no discriminación. (624/000010)"
+    },
+    {
+      "source_record_pk": 147945,
+      "sample_initiative_id": "senado:leg10:exp:610/000113",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Canje de Cartas constitutivo de Acuerdo entre el Reino de España y la Organización de las Naciones Unidas por el que se reconoce la extensión del régimen de privilegios e inmunidades previsto en el Acuerdo de Sede hecho en Madrid el 28 de enero de 2009 al Centro Internacional de Cálculos Electrónicos, hecho en Nueva Y…"
+    },
+    {
+      "source_record_pk": 147957,
+      "sample_initiative_id": "senado:leg14:exp:626/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 92. (626/000008)"
+    },
+    {
+      "source_record_pk": 147947,
+      "sample_initiative_id": "senado:leg15:exp:626/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49, apartados 2 y 3. (626/000006)"
+    },
+    {
+      "source_record_pk": 147959,
+      "sample_initiative_id": "senado:leg15:exp:626/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 49, apartados 2 y 3. (626/000006)"
+    },
+    {
+      "source_record_pk": 147946,
+      "sample_initiative_id": "senado:leg15:exp:622/000024",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley relativa a la modificación de la Ley 22/1988, de 28 de julio, de Costas, para permitir la pervivencia de conjuntos urbanos costeros de tipología tradicional en terrenos que han pasado a ser de dominio público marítimo-terrestre. (622/000024)"
+    },
+    {
+      "source_record_pk": 147958,
+      "sample_initiative_id": "senado:leg15:exp:622/000024",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley relativa a la modificación de la Ley 22/1988, de 28 de julio, de Costas, para permitir la pervivencia de conjuntos urbanos costeros de tipología tradicional en terrenos que han pasado a ser de dominio público marítimo-terrestre. (622/000024)"
+    },
+    {
+      "source_record_pk": 147955,
+      "sample_initiative_id": "senado:leg14:exp:624/000009",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar el acoso a las mujeres que acuden a clínicas para la interrupción voluntaria del embarazo. (624/000009)"
+    },
+    {
+      "source_record_pk": 147969,
+      "sample_initiative_id": "senado:leg10:exp:610/000122",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Serbia para el intercambio y protección recíproca de información clasificada, hecho en Madrid el 13 de marzo de 2014. (610/000122)"
+    },
+    {
+      "source_record_pk": 147964,
+      "sample_initiative_id": "senado:leg10:exp:610/000117",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Gobierno de la Federación de Rusia sobre la protección mutua de información clasificada, hecho en Madrid el 6 de noviembre de 2013. (610/000117)"
+    },
+    {
+      "source_record_pk": 147967,
+      "sample_initiative_id": "senado:leg10:exp:610/000120",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo adicional al Convenio sobre la ciberdelincuencia relativo a la penalización de actos de índole racista y xenófoba cometidos por medio de sistemas informáticos, hecho en Estrasburgo el 28 de enero de 2003 y declaración que España desea formular. (610/000120)"
+    },
+    {
+      "source_record_pk": 147965,
+      "sample_initiative_id": "senado:leg10:exp:610/000118",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo adicional al Convenio relativo a los derechos humanos y la biomedicina sobre el trasplante de órganos y de tejidos de origen humano, hecho en Estrasburgo el 24 de enero de 2002. (610/000118)"
+    },
+    {
+      "source_record_pk": 147961,
+      "sample_initiative_id": "senado:leg10:exp:610/000114",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio Europeo sobre el Ejercicio de los Derechos de los Niños, hecho en Estrasburgo el 25 de enero de 1996. (610/000114)"
+    },
+    {
+      "source_record_pk": 147966,
+      "sample_initiative_id": "senado:leg10:exp:610/000119",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Tercer Protocolo Adicional al Convenio europeo de extradición, hecho en Estrasburgo el 10 de noviembre de 2010, y declaración que España desea formular. (610/000119)"
+    },
+    {
+      "source_record_pk": 147962,
+      "sample_initiative_id": "senado:leg10:exp:610/000115",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio sobre asistencia alimentaria, hecho en Londres el 25 de abril de 2012, y Reglamento de Procedimiento y Aplicación. (610/000115)"
+    },
+    {
+      "source_record_pk": 147963,
+      "sample_initiative_id": "senado:leg10:exp:610/000116",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y Georgia para el intercambio y protección recíproca de información clasificada, hecho en Madrid el 18 de diciembre de 2013. (610/000116)"
+    },
+    {
+      "source_record_pk": 147954,
+      "sample_initiative_id": "senado:leg10:exp:610/000139",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de adquisición conjunta de contramedidas médicas, hecho en Luxemburgo el 20 de junio de 2014. (610/000139)"
+    },
+    {
+      "source_record_pk": 147973,
+      "sample_initiative_id": "senado:leg10:exp:610/000127",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y la República de Moldova en materia de cooperación en asuntos de seguridad y lucha contra la delincuencia, hecho en Madrid el 22 de octubre de 2013. (610/000127)"
+    },
+    {
+      "source_record_pk": 147960,
+      "sample_initiative_id": "senado:leg10:exp:610/000113",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Canje de Cartas constitutivo de Acuerdo entre el Reino de España y la Organización de las Naciones Unidas por el que se reconoce la extensión del régimen de privilegios e inmunidades previsto en el Acuerdo de Sede hecho en Madrid el 28 de enero de 2009 al Centro Internacional de Cálculos Electrónicos, hecho en Nueva Y…"
+    },
+    {
+      "source_record_pk": 147968,
+      "sample_initiative_id": "senado:leg10:exp:610/000121",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Revocación de la Declaración contenida en el Instrumento de Ratificación de España del Convenio de Estocolmo sobre Contaminantes Orgánicos Persistentes, hecho en Estocolmo el 22 de mayo de 2001. (610/000121)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

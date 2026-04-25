@@ -1,0 +1,47 @@
+{
+  "source_id": "programas_partidos",
+  "parties": [
+    "BNG"
+  ],
+  "rows_total": 1,
+  "min_support_unclear_unique_ratio": 2.0,
+  "near_duplicate_dedupe": {
+    "enabled": true,
+    "jaccard_min": 0.42,
+    "containment_min": 0.4,
+    "ngram_size": 6
+  },
+  "below_threshold_rows": [
+    {
+      "party_name": "BNG",
+      "source_url": "https://bng/eu.pdf",
+      "support_rows": 1,
+      "unclear_rows": 2,
+      "unclear_unique_exact_excerpt_rows": 2,
+      "unclear_near_duplicate_collapsed_rows": 1,
+      "unclear_unique_excerpt_rows": 1,
+      "support_to_unclear_unique_ratio": 1.0
+    }
+  ],
+  "checks": {
+    "rows_present": true,
+    "ratio_threshold_met": false
+  },
+  "status": "degraded",
+  "passed": false,
+  "strict_fail_reasons": [
+    "ratio_below_threshold"
+  ],
+  "rows": [
+    {
+      "party_name": "BNG",
+      "source_url": "https://bng/eu.pdf",
+      "support_rows": 1,
+      "unclear_rows": 2,
+      "unclear_unique_exact_excerpt_rows": 2,
+      "unclear_near_duplicate_collapsed_rows": 1,
+      "unclear_unique_excerpt_rows": 1,
+      "support_to_unclear_unique_ratio": 1.0
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 86,
+  "upserted": 86,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_window": 33,
+    "title_hint_strong_from_short_window": 53
+  },
+  "by_doc_format": {
+    "xml": 86
+  },
+  "sample": [
+    {
+      "source_record_pk": 147014,
+      "sample_initiative_id": "senado:leg14:exp:621/000042",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/enmiendas/621_000042"
+    },
+    {
+      "source_record_pk": 146995,
+      "sample_initiative_id": "senado:leg14:exp:621/000020",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/enmiendas/621_000020"
+    },
+    {
+      "source_record_pk": 147019,
+      "sample_initiative_id": "senado:leg14:exp:624/000002",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/enmiendas/624_000002"
+    },
+    {
+      "source_record_pk": 147008,
+      "sample_initiative_id": "senado:leg14:exp:621/000036",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/vetos/621_000036"
+    },
+    {
+      "source_record_pk": 146998,
+      "sample_initiative_id": "senado:leg14:exp:621/000023",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas de prevención y lucha contra el fraude fiscal, de transposición de la Directiva (UE) 2016/1164, del Consejo, de 12 de julio de 2016, por la que se establecen normas contra las prácticas de elusión fiscal que inciden directamente en el funcionamiento del mercado interior, de modificación de d…"
+    },
+    {
+      "source_record_pk": 146996,
+      "sample_initiative_id": "senado:leg14:exp:621/000021",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de protección integral a la infancia y la adolescencia frente a la violencia. (621/000021)"
+    },
+    {
+      "source_record_pk": 146950,
+      "sample_initiative_id": "senado:leg12:exp:621/000005",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis12/enmiendas/621_000005"
+    },
+    {
+      "source_record_pk": 147015,
+      "sample_initiative_id": "senado:leg14:exp:621/000043",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de ordenación e integración de la Formación Profesional. (621/000043)"
+    },
+    {
+      "source_record_pk": 147007,
+      "sample_initiative_id": "senado:leg14:exp:621/000035",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/enmiendas/621_000035"
+    },
+    {
+      "source_record_pk": 147006,
+      "sample_initiative_id": "senado:leg14:exp:621/000034",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se establece el ingreso mínimo vital (procedente del Real Decreto-ley 20/2020, de 29 de mayo). (621/000034)"
+    },
+    {
+      "source_record_pk": 146985,
+      "sample_initiative_id": "senado:leg14:exp:621/000010",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adoptan determinadas medidas urgentes en materia de agricultura y alimentación (procedente del Real Decreto-ley 5/2020, de 25 de febrero). (621/000010)"
+    },
+    {
+      "source_record_pk": 146955,
+      "sample_initiative_id": "senado:leg12:exp:621/000010",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis12/enmiendas/621_000010"
+    },
+    {
+      "source_record_pk": 146961,
+      "sample_initiative_id": "senado:leg12:exp:621/000016",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis12/enmiendas/621_000016"
+    },
+    {
+      "source_record_pk": 146949,
+      "sample_initiative_id": "senado:leg12:exp:621/000004",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Contratos del Sector Público, por la que se transponen al ordenamiento jurídico español las Directivas del Parlamento Europeo y del Consejo, 2014/23/UE y 2014/24/UE, de 26 de febrero de 2014. (621/000004)"
+    },
+    {
+      "source_record_pk": 146994,
+      "sample_initiative_id": "senado:leg14:exp:621/000019",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se reforma la legislación civil y procesal para el apoyo a las personas con discapacidad en el ejercicio de su capacidad jurídica. (621/000019)"
+    },
+    {
+      "source_record_pk": 146982,
+      "sample_initiative_id": "senado:leg14:exp:621/000007",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas procesales y organizativas para hacer frente al COVID-19 en el ámbito de la Administración de Justicia (procedente del Real Decreto-ley 16/2020, de 28 de abril). (621/000007)"
+    },
+    {
+      "source_record_pk": 146988,
+      "sample_initiative_id": "senado:leg14:exp:621/000013",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/vetos/621_000013"
+    },
+    {
+      "source_record_pk": 147004,
+      "sample_initiative_id": "senado:leg14:exp:621/000030",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/enmiendas/621_000030"
+    },
+    {
+      "source_record_pk": 146989,
+      "sample_initiative_id": "senado:leg14:exp:621/000014",
+      "doc_format": "xml",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Propuestas de veto /legis14/enmiendas/621_000014"
+    },
+    {
+      "source_record_pk": 147017,
+      "sample_initiative_id": "senado:leg14:exp:622/000005",
+      "doc_format": "xml",
+      "subject_method": "title_hint_strong_from_short_window",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, aprobado por el Real Decreto Legislativo 1/2013, de 29 de noviembre, para establecer y regular la accesibilidad cognitiva y sus condiciones de exigencia y aplicación. (622/000…"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,30 @@
+{
+  "global": {
+    "actionable_scope": "global",
+    "actionable_metric": "actionable_doc_links_closed_pct",
+    "missing_doc_links_actionable": 4456,
+    "actionable_doc_links_closed_pct": 0.4896930829134219,
+    "senado_missing_doc_links_actionable": 4456,
+    "senado_actionable_doc_links_closed_pct": 0.43737373737373736
+  },
+  "linked_to_votes": {
+    "actionable_scope": "linked_to_votes",
+    "actionable_metric": "actionable_doc_links_closed_pct_linked_to_votes",
+    "missing_doc_links_actionable_selected": 680,
+    "actionable_doc_links_closed_pct_selected": 0.672604718343765,
+    "missing_doc_links_actionable_linked_to_votes": 680,
+    "actionable_doc_links_closed_pct_linked_to_votes": 0.672604718343765,
+    "senado_missing_doc_links_actionable_linked_to_votes": 680,
+    "senado_actionable_doc_links_closed_pct_linked_to_votes": 0.6238938053097345
+  },
+  "queue_exports": {
+    "linked_actionable_rows": 680,
+    "linked_actionable_unique_initiatives": 345,
+    "zero_doc_rows": 25,
+    "zero_doc_unique_initiatives": 25,
+    "zero_doc_status_buckets": {
+      "404": 1,
+      "403": 24
+    }
+  }
+}

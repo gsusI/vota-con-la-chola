@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-03-01T00:10:17Z",
+  "before": {
+    "missing_urls": 1182,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 251,
+    "blocked_403_rate": 0.212352,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 297,
+    "zero_doc_initiatives": 5
+  },
+  "after": {
+    "missing_urls": 1182,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 331,
+    "blocked_403_rate": 0.280034,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5
+  },
+  "delta": {
+    "missing_urls": 0,
+    "missing_initiatives": 0,
+    "blocked_403_urls": 80,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": -80,
+    "zero_doc_initiatives": 0
+  }
+}

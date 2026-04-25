@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-03-01T08:00:31+00:00",
+  "status": "ok",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "targets_csv": "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv",
+  "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "ok",
+  "progress_report_error": "",
+  "progress_report_path": "docs/etl/sprints/AI-OPS-353/evidence/senado_manual_capture_target_progress_20260301T075958Z.json",
+  "progress_csv_path": "docs/etl/sprints/AI-OPS-353/exports/senado_manual_capture_target_progress_20260301T075958Z.csv",
+  "ready_checks": {
+    "progress_report_ok": true,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": true,
+    "selected_usable_capture_with_cookie": true
+  },
+  "ready_to_retry": true,
+  "capture_inventory": {
+    "capture_files_total": 8,
+    "usable_capture_files_total": 2,
+    "usable_with_cookie_files_total": 2,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {
+    "meta_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_299_02_leg10_tipo610_20260301T075159Z.meta.json",
+    "cookie_file": "etl/data/raw/manual/senado_cookie_refresh_ai_ops_299_02_leg10_tipo610_20260301T075159Z.cookies.json",
+    "ended_at": "2026-03-01T07:52:20.051002+00:00",
+    "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+    "cookies_domain_total": 6,
+    "access_denied_detected": false
+  },
+  "backfill": {
+    "attempted": true,
+    "dry_run": false,
+    "status": "ok",
+    "skip_reason": "",
+    "exit_code": 0,
+    "command_display": "python3 scripts/ingestar_parlamentario_es.py backfill-initiative-documents --db etl/data/staging/politicos-es.db --initiative-source-ids senado_iniciativas --skip-link-backfill --retry-forbidden --cookie-file etl/data/raw/manual/senado_cookie_refresh_ai_ops_299_02_leg10_tipo610_20260301T075159Z.cookies.json --timeout 15 --limit-initiatives 25 --max-docs-per-initiative 1",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": ""
+  },
+  "strict_fail_reasons": []
+}

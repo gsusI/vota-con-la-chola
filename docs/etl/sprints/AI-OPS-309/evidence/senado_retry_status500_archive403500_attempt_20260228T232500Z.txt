@@ -1,0 +1,36 @@
+{
+  "archive_fallback": true,
+  "archive_fallback_http_statuses": [
+    403,
+    500
+  ],
+  "archive_fetched_ok": 0,
+  "archive_first_urls": 0,
+  "archive_hits": 0,
+  "archive_lookup_attempted": 0,
+  "archive_lookup_failures": [],
+  "candidate_urls": 759,
+  "derived_ini_candidates": 99,
+  "derived_ini_selected": 97,
+  "derived_probe_unfetched_skipped": 97,
+  "doc_links_seen": 759,
+  "dry_run": false,
+  "failures": [],
+  "fetched_ok": 0,
+  "initiative_documents_upserted": 662,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 300,
+  "playwright_init_error": null,
+  "playwright_runtime": {},
+  "retry_http_statuses": [
+    500
+  ],
+  "skipped_existing": 759,
+  "skipped_forbidden": 0,
+  "skipped_redundant_global_urls": 111,
+  "skipped_retry_http_statuses": 759,
+  "text_documents_upserted": 0,
+  "urls_to_fetch": 0
+}

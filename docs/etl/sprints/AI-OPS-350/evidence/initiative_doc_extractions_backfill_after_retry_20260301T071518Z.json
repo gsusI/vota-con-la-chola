@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 28,
+  "upserted": 28,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 28
+  },
+  "by_doc_format": {
+    "html": 28
+  },
+  "sample": [
+    {
+      "source_record_pk": 147492,
+      "sample_initiative_id": "senado:leg10:exp:620/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para la regulación de la tauromaquia como patrimonio cultural. (620/000005)"
+    },
+    {
+      "source_record_pk": 147490,
+      "sample_initiative_id": "senado:leg10:exp:610/000184",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo sobre cuestiones específicas de los elementos de Equipo Aeronáutico, del Convenio relativo a garantías internacionales sobre elementos de equipo móvil, hecho en Ciudad del Cabo el 16 de noviembre de 2001. (610/000184)"
+    },
+    {
+      "source_record_pk": 147471,
+      "sample_initiative_id": "senado:leg10:exp:610/000165",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo del Acuerdo de estabilización y asociación entre las Comunidades Europeas y sus Estados Miembros, por una parte, y la República de Serbia, por otra, para tener en cuenta la adhesión de la República de Croacia a la Unión Europea, hecho en Bruselas el 25 de junio de 2014. (610/000165)"
+    },
+    {
+      "source_record_pk": 147473,
+      "sample_initiative_id": "senado:leg10:exp:610/000167",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Gobierno del Reino de España y el Gobierno del Reino de Marruecos relativo al transporte internacional por carretera de viajeros y mercancías y su Protocolo de aplicación, hecho en Rabat el 3 de octubre de 2012. (610/000167)"
+    },
+    {
+      "source_record_pk": 147489,
+      "sample_initiative_id": "senado:leg10:exp:610/000183",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República Federativa de Brasil relativo al intercambio y la protección mutua de la información clasificada, hecho en Brasilia el 15 de abril de 2015. (610/000183)"
+    },
+    {
+      "source_record_pk": 147488,
+      "sample_initiative_id": "senado:leg10:exp:610/000182",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio Marco de Cooperación entre el Reino de España y la República de Colombia, hecho en Madrid el 3 de marzo de 2015. (610/000182)"
+    },
+    {
+      "source_record_pk": 147465,
+      "sample_initiative_id": "senado:leg10:exp:610/000098",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y los Estados Unidos de América para la mejora del cumplimiento fiscal internacional y la aplicación de la ley estadounidense de cumplimiento tributario de cuentas extranjeras, hecho en Madrid el 14 de mayo de 2013. (610/000098)"
+    },
+    {
+      "source_record_pk": 147491,
+      "sample_initiative_id": "senado:leg10:exp:610/000185",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio de sede entre el Reino de España y la Organización Mundial del Turismo, hecho en Madrid el 25 de junio de 2015. (610/000185)"
+    },
+    {
+      "source_record_pk": 147487,
+      "sample_initiative_id": "senado:leg10:exp:610/000181",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Tercer Protocolo de Enmienda del Convenio de Cooperación para la Defensa entre el Reino de España y los Estados Unidos de América, de 1 de diciembre de 1988, y sus Enmiendas, hecho en Washington el 17 de junio de 2015. (610/000181)"
+    },
+    {
+      "source_record_pk": 147478,
+      "sample_initiative_id": "senado:leg10:exp:610/000172",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo de adhesión del Gobierno de la Federación de Rusia al Convenio de 16 de diciembre de 1988 relativo a la construcción y explotación de una Instalación Europea de Radiación Sincrotrónica, hecho en Grenoble el 23 de junio de 2014 y en París el 15 de julio de 2014. (610/000172)"
+    },
+    {
+      "source_record_pk": 147483,
+      "sample_initiative_id": "senado:leg10:exp:610/000177",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo sobre la transferencia y mutualización de las aportaciones al Fondo Único de Resolución, hecho en Bruselas el 21 de mayo de 2014. (610/000177)"
+    },
+    {
+      "source_record_pk": 147470,
+      "sample_initiative_id": "senado:leg10:exp:610/000164",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo entre el Reino de España y Canadá que modifica el Convenio entre España y Canadá para evitar la doble imposición y prevenir la evasión fiscal en materia de impuestos sobre la renta y sobre el patrimonio, firmado en Ottawa el 23 de noviembre de 1976, hecho en Madrid el 18 de noviembre de 2014. (610/000164)"
+    },
+    {
+      "source_record_pk": 147484,
+      "sample_initiative_id": "senado:leg10:exp:610/000178",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Decisión del Consejo de 26 de mayo de 2014 sobre el sistema de recursos propios de la Unión Europea (2014/335/UE, EURATOM), adoptada en Bruselas el 26 de mayo de 2014. (610/000178)"
+    },
+    {
+      "source_record_pk": 147482,
+      "sample_initiative_id": "senado:leg10:exp:610/000176",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y el Principado de Andorra para evitar la doble imposición en materia de impuestos sobre la renta y prevenir la evasión fiscal y de su Protocolo, hecho en Andorra la Vella el 8 de enero de 2015. (610/000176)"
+    },
+    {
+      "source_record_pk": 147485,
+      "sample_initiative_id": "senado:leg10:exp:610/000179",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República Islámica de Mauritania sobre la promoción y protección recíproca de inversiones, hecho en Madrid el 24 de julio de 2008. (610/000179)"
+    },
+    {
+      "source_record_pk": 147479,
+      "sample_initiative_id": "senado:leg10:exp:610/000173",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y Georgia sobre cooperación en el ámbito de la lucha contra la delincuencia, hecho en Madrid el 21 de enero de 2015. (610/000173)"
+    },
+    {
+      "source_record_pk": 147472,
+      "sample_initiative_id": "senado:leg10:exp:610/000166",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Gobierno del Reino de España y el Gobierno de la República de Angola sobre supresión recíproca de visados en pasaportes diplomáticos, hecho en Madrid el 3 de febrero de 2014. (610/000166)"
+    },
+    {
+      "source_record_pk": 147481,
+      "sample_initiative_id": "senado:leg10:exp:610/000175",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Tratado de Marrakech para facilitar el acceso a las obras publicadas a las personas ciegas, con discapacidad visual o con otras dificultades para acceder al texto impreso, hecho en Marrakech el 27 de junio de 2013. (610/000175)"
+    },
+    {
+      "source_record_pk": 147480,
+      "sample_initiative_id": "senado:leg10:exp:610/000174",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio entre el Reino de España y la República de Chile sobre cooperación en materia de lucha contra la delincuencia y seguridad, hecho en Madrid el 30 de octubre de 2014. (610/000174)"
+    },
+    {
+      "source_record_pk": 147469,
+      "sample_initiative_id": "senado:leg10:exp:610/000163",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Uzbekistán sobre cooperación en materia de lucha contra la delincuencia, hecho en Madrid el 5 de noviembre de 2013. (610/000163)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

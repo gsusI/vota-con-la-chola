@@ -1,4 +1,10 @@
 db_path := env_var_or_default("DB_PATH", "etl/data/staging/politicos-es.db")
+parliamentary_accountability_db_path := env_var_or_default("PARLIAMENTARY_ACCOUNTABILITY_DB_PATH", "")
+initiative_measures_db_path := env_var_or_default("INITIATIVE_MEASURES_DB_PATH", "")
+citizen_db_path := env_var_or_default("CITIZEN_DB_PATH", "")
+responsibility_explainer_seed_path := env_var_or_default("RESPONSIBILITY_EXPLAINER_SEED_PATH", "etl/data/seeds/responsibility_explainer_cases_seed_v1.json")
+responsibility_explainer_reviewed_ledger_dir := env_var_or_default("RESPONSIBILITY_EXPLAINER_REVIEWED_LEDGER_DIR", "etl/data/manual/responsibility_explainer/reviewed_ledger_batches")
+dev_fixture_db_path := env_var_or_default("DEV_FIXTURE_DB_PATH", "etl/data/staging/politicos-es.dev.db")
 snapshot_date := env_var_or_default("SNAPSHOT_DATE", "2026-02-12")
 tracker_path := env_var_or_default("TRACKER_PATH", "docs/etl/e2e-scrape-load-tracker.md")
 tracker_waivers_path := env_var_or_default("TRACKER_WAIVERS_PATH", "docs/etl/mismatch-waivers.json")
@@ -33,7 +39,7 @@ senado_tail_archive_fallback := env_var_or_default("SENADO_TAIL_ARCHIVE_FALLBACK
 senado_tail_archive_timeout := env_var_or_default("SENADO_TAIL_ARCHIVE_TIMEOUT", "12")
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
-gh_pages_dir := env_var_or_default("GH_PAGES_DIR", "docs/gh-pages")
+gh_pages_dir := env_var_or_default("STATIC_BUILD_DATA_DIR", "ui/gh-pages-next/.static-data")
 gh_pages_remote := env_var_or_default("GH_PAGES_REMOTE", "origin")
 gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
 gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
@@ -47,7 +53,9 @@ gh_pages_next_next_dir_volume := env_var_or_default("GH_PAGES_NEXT_NEXT_DIR_VOLU
 gh_pages_next_prime_export := env_var_or_default("GH_PAGES_NEXT_PRIME_EXPORT", "1")
 gh_pages_reuse_people_exports := env_var_or_default("GH_PAGES_REUSE_PEOPLE_EXPORTS", "1")
 gh_pages_next_base_path := env_var_or_default("GH_PAGES_NEXT_BASE_PATH", "")
-gh_pages_cname := env_var_or_default("GH_PAGES_CNAME", "")
+cloudflare_pages_project := env_var_or_default("CLOUDFLARE_PAGES_PROJECT", "vota-con-la-chola")
+vote_explainer_limit := env_var_or_default("VOTE_EXPLAINER_LIMIT", "200")
+vote_explainer_allow_empty := env_var_or_default("VOTE_EXPLAINER_ALLOW_EMPTY", "0")
 topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds/topic_taxonomy_es.json")
 domain_taxonomy_seed := env_var_or_default("DOMAIN_TAXONOMY_SEED", "docs/domain_taxonomy_es.md")
 policy_axes_tier1_seed := env_var_or_default("POLICY_AXES_TIER1_SEED", "docs/codebook_tier1_es.md")
@@ -182,6 +190,9 @@ initdoc_extract_review_limit := env_var_or_default("INITDOC_EXTRACT_REVIEW_LIMIT
 initdoc_extract_review_out := env_var_or_default("INITDOC_EXTRACT_REVIEW_OUT", "docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_queue.csv")
 initdoc_extract_review_apply_file := env_var_or_default("INITDOC_EXTRACT_REVIEW_APPLY_FILE", "")
 initdoc_extract_review_apply_out := env_var_or_default("INITDOC_EXTRACT_REVIEW_APPLY_OUT", "docs/etl/sprints/AI-OPS-28/evidence/initdoc_extraction_review_apply_latest.json")
+initdoc_extract_review_label_studio_out := env_var_or_default("INITDOC_EXTRACT_REVIEW_LABEL_STUDIO_OUT", "docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_queue.label_studio.json")
+initdoc_extract_review_label_studio_config_out := env_var_or_default("INITDOC_EXTRACT_REVIEW_LABEL_STUDIO_CONFIG_OUT", "docs/etl/sprints/AI-OPS-28/exports/initdoc_extraction_review_label_studio_config.xml")
+initdoc_extract_review_label_studio_apply_file := env_var_or_default("INITDOC_EXTRACT_REVIEW_LABEL_STUDIO_APPLY_FILE", "")
 senado_detail_links_limit := env_var_or_default("SENADO_DETAIL_LINKS_LIMIT", "0")
 doc_analysis_limit := env_var_or_default("DOC_ANALYSIS_LIMIT", "0")
 doc_analysis_out := env_var_or_default("DOC_ANALYSIS_OUT", "docs/etl/sprints/AI-OPS-27/exports/senado_pdf_analysis_queue.csv")
@@ -634,7 +645,7 @@ liberty_atlas_publish_diff_json := env_var_or_default("LIBERTY_ATLAS_PUBLISH_DIF
 liberty_atlas_publish_changelog_entry_json := env_var_or_default("LIBERTY_ATLAS_PUBLISH_CHANGELOG_ENTRY_JSON", "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_changelog_latest.json")
 liberty_atlas_publish_changelog_history_jsonl := env_var_or_default("LIBERTY_ATLAS_PUBLISH_CHANGELOG_HISTORY_JSONL", "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl")
 liberty_atlas_published_dir := env_var_or_default("LIBERTY_ATLAS_PUBLISHED_DIR", "etl/data/published")
-liberty_atlas_publish_gh_pages_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_GH_PAGES_OUT", "docs/gh-pages/explorer-sources/data/liberty-atlas-release.json")
+liberty_atlas_publish_gh_pages_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_GH_PAGES_OUT", "ui/gh-pages-next/public/explorer-sources/data/liberty-atlas-release.json")
 liberty_atlas_publish_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_OUT", "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_publish_latest.json")
 liberty_atlas_publish_allow_missing := env_var_or_default("LIBERTY_ATLAS_PUBLISH_ALLOW_MISSING", "0")
 liberty_atlas_release_latest_json := env_var_or_default("LIBERTY_ATLAS_RELEASE_LATEST_JSON", "etl/data/published/liberty-restrictions-atlas-release-latest.json")
@@ -846,10 +857,10 @@ hf_verify_out := env_var_or_default("HF_VERIFY_OUT", "")
 citizen_preset_contract_fixture := env_var_or_default("CITIZEN_PRESET_CONTRACT_FIXTURE", "tests/fixtures/citizen_preset_hash_matrix.json")
 citizen_preset_contract_out := env_var_or_default("CITIZEN_PRESET_CONTRACT_OUT", "")
 citizen_preset_parity_source := env_var_or_default("CITIZEN_PRESET_PARITY_SOURCE", "ui/citizen/preset_codec.js")
-citizen_preset_parity_published := env_var_or_default("CITIZEN_PRESET_PARITY_PUBLISHED", "docs/gh-pages/citizen/preset_codec.js")
+citizen_preset_parity_published := env_var_or_default("CITIZEN_PRESET_PARITY_PUBLISHED", "ui/gh-pages-next/public/legacy/citizen/preset_codec.js")
 citizen_preset_parity_out := env_var_or_default("CITIZEN_PRESET_PARITY_OUT", "")
 citizen_preset_sync_source := env_var_or_default("CITIZEN_PRESET_SYNC_SOURCE", "ui/citizen/preset_codec.js")
-citizen_preset_sync_published := env_var_or_default("CITIZEN_PRESET_SYNC_PUBLISHED", "docs/gh-pages/citizen/preset_codec.js")
+citizen_preset_sync_published := env_var_or_default("CITIZEN_PRESET_SYNC_PUBLISHED", "ui/gh-pages-next/public/legacy/citizen/preset_codec.js")
 citizen_preset_sync_out := env_var_or_default("CITIZEN_PRESET_SYNC_OUT", "")
 citizen_preset_bundle_out := env_var_or_default("CITIZEN_PRESET_BUNDLE_OUT", "")
 citizen_preset_bundle_history_path := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_PATH", "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl")
@@ -902,7 +913,7 @@ citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbe
 citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_out := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_OUT", "")
 citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_WINDOW", "20")
 citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window_out := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_WINDOW_OUT", "")
-citizen_product_kpi_snapshot := env_var_or_default("CITIZEN_PRODUCT_KPI_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+citizen_product_kpi_snapshot := env_var_or_default("CITIZEN_PRODUCT_KPI_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
 citizen_product_kpi_events := env_var_or_default("CITIZEN_PRODUCT_KPI_EVENTS", "")
 citizen_product_kpi_summary := env_var_or_default("CITIZEN_PRODUCT_KPI_SUMMARY", "")
 citizen_product_kpi_out := env_var_or_default("CITIZEN_PRODUCT_KPI_OUT", "docs/etl/sprints/AI-OPS-72/evidence/citizen_product_kpis_latest.json")
@@ -939,7 +950,7 @@ citizen_product_kpi_heartbeat_compact_window_last := env_var_or_default("CITIZEN
 citizen_product_kpi_heartbeat_compact_window_out := env_var_or_default("CITIZEN_PRODUCT_KPI_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-107/evidence/citizen_product_kpis_heartbeat_compaction_window_latest.json")
 citizen_mobile_perf_ui_html := env_var_or_default("CITIZEN_MOBILE_PERF_UI_HTML", "ui/citizen/index.html")
 citizen_mobile_perf_ui_assets := env_var_or_default("CITIZEN_MOBILE_PERF_UI_ASSETS", "ui/citizen/preset_codec.js,ui/citizen/onboarding_funnel.js,ui/citizen/first_answer_accelerator.js,ui/citizen/unknown_explainability.js,ui/citizen/cross_method_stability.js,ui/citizen/evidence_trust_panel.js")
-citizen_mobile_perf_snapshot := env_var_or_default("CITIZEN_MOBILE_PERF_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+citizen_mobile_perf_snapshot := env_var_or_default("CITIZEN_MOBILE_PERF_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
 citizen_mobile_perf_out := env_var_or_default("CITIZEN_MOBILE_PERF_OUT", "docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_budget_latest.json")
 citizen_mobile_perf_max_ui_html_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_UI_HTML_BYTES", "220000")
 citizen_mobile_perf_max_ui_assets_total_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_UI_ASSETS_TOTAL_BYTES", "60000")
@@ -979,10 +990,10 @@ citizen_tailwind_md3_min_chip_markers := env_var_or_default("CITIZEN_TAILWIND_MD
 citizen_tailwind_md3_min_button_markers := env_var_or_default("CITIZEN_TAILWIND_MD3_MIN_BUTTON_MARKERS", "20")
 citizen_tailwind_md3_min_tab_markers := env_var_or_default("CITIZEN_TAILWIND_MD3_MIN_TAB_MARKERS", "6")
 citizen_tailwind_md3_drift_contract := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_CONTRACT", "docs/etl/sprints/AI-OPS-96/evidence/citizen_tailwind_md3_contract_latest.json")
-citizen_tailwind_md3_drift_published_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_TOKENS", "docs/gh-pages/citizen/tailwind_md3.tokens.json")
-citizen_tailwind_md3_drift_published_data_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_DATA_TOKENS", "docs/gh-pages/citizen/data/tailwind_md3.tokens.json")
-citizen_tailwind_md3_drift_published_css := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_CSS", "docs/gh-pages/citizen/tailwind_md3.generated.css")
-citizen_tailwind_md3_drift_published_ui_html := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_UI_HTML", "docs/gh-pages/citizen/index.html")
+citizen_tailwind_md3_drift_published_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_TOKENS", "ui/gh-pages-next/public/citizen/tailwind_md3.tokens.json")
+citizen_tailwind_md3_drift_published_data_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_DATA_TOKENS", "ui/gh-pages-next/public/citizen/data/tailwind_md3.tokens.json")
+citizen_tailwind_md3_drift_published_css := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_CSS", "ui/gh-pages-next/public/citizen/tailwind_md3.generated.css")
+citizen_tailwind_md3_drift_published_ui_html := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_UI_HTML", "ui/gh-pages-next/public/citizen/index.html")
 citizen_tailwind_md3_drift_out := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_OUT", "docs/etl/sprints/AI-OPS-96/evidence/citizen_tailwind_md3_visual_drift_digest_latest.json")
 citizen_tailwind_md3_drift_heartbeat_path := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_PATH", "docs/etl/runs/citizen_tailwind_md3_visual_drift_digest_heartbeat.jsonl")
 citizen_tailwind_md3_drift_heartbeat_out := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_OUT", "docs/etl/sprints/AI-OPS-103/evidence/citizen_tailwind_md3_visual_drift_digest_heartbeat_latest.json")
@@ -1009,8 +1020,8 @@ citizen_tailwind_md3_drift_heartbeat_compact_out := env_var_or_default("CITIZEN_
 citizen_tailwind_md3_drift_heartbeat_compact_window_last := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_COMPACT_WINDOW_LAST", "20")
 citizen_tailwind_md3_drift_heartbeat_compact_window_out := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-108/evidence/citizen_tailwind_md3_visual_drift_digest_heartbeat_compaction_window_latest.json")
 citizen_release_source_root := env_var_or_default("CITIZEN_RELEASE_SOURCE_ROOT", "ui/citizen")
-citizen_release_published_root := env_var_or_default("CITIZEN_RELEASE_PUBLISHED_ROOT", "docs/gh-pages/citizen")
-citizen_release_snapshot := env_var_or_default("CITIZEN_RELEASE_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+citizen_release_published_root := env_var_or_default("CITIZEN_RELEASE_PUBLISHED_ROOT", "ui/gh-pages-next/out/citizen")
+citizen_release_snapshot := env_var_or_default("CITIZEN_RELEASE_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
 citizen_release_concerns := env_var_or_default("CITIZEN_RELEASE_CONCERNS", "ui/citizen/concerns_v1.json")
 citizen_release_assets := env_var_or_default("CITIZEN_RELEASE_ASSETS", "index.html,preset_codec.js,onboarding_funnel.js,first_answer_accelerator.js,unknown_explainability.js,cross_method_stability.js,evidence_trust_panel.js,tailwind_md3.generated.css,tailwind_md3.tokens.json")
 citizen_release_max_snapshot_bytes := env_var_or_default("CITIZEN_RELEASE_MAX_SNAPSHOT_BYTES", "5000000")
@@ -1038,7 +1049,7 @@ citizen_release_trace_heartbeat_compact_min_raw := env_var_or_default("CITIZEN_R
 citizen_release_trace_heartbeat_compact_out := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_COMPACT_OUT", "docs/etl/sprints/AI-OPS-102/evidence/citizen_release_trace_digest_heartbeat_compaction_latest.json")
 citizen_release_trace_heartbeat_compact_window_last := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_COMPACT_WINDOW_LAST", "20")
 citizen_release_trace_heartbeat_compact_window_out := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-102/evidence/citizen_release_trace_digest_heartbeat_compaction_window_latest.json")
-citizen_pack_quality_snapshot := env_var_or_default("CITIZEN_PACK_QUALITY_SNAPSHOT", "docs/gh-pages/citizen/data/citizen.json")
+citizen_pack_quality_snapshot := env_var_or_default("CITIZEN_PACK_QUALITY_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
 citizen_pack_quality_concerns := env_var_or_default("CITIZEN_PACK_QUALITY_CONCERNS", "ui/citizen/concerns_v1.json")
 citizen_pack_quality_out := env_var_or_default("CITIZEN_PACK_QUALITY_OUT", "docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_latest.json")
 citizen_pack_quality_min_topics_per_pack := env_var_or_default("CITIZEN_PACK_QUALITY_MIN_TOPICS_PER_PACK", "10")
@@ -1271,7 +1282,39 @@ etl-publish-votaciones-unmatched:
 etl-publish-infoelectoral:
   docker compose run --rm --build etl "python3 scripts/publicar_infoelectoral_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
 
+etl-export-source-catalog:
+  python3 scripts/export_source_catalog_snapshot.py \
+    --db "{{db_path}}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "{{gh_pages_dir}}/explorer-sources/data/catalog.json" \
+    --published-out "etl/data/published/source-catalog-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/source-catalog-latest.json"
+
+etl-export-source-scrape-queue:
+  python3 scripts/export_source_scrape_queue_snapshot.py \
+    --db "{{db_path}}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "{{gh_pages_dir}}/explorer-sources/data/scrape-queue.json" \
+    --published-out "etl/data/published/source-scrape-queue-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/source-scrape-queue-latest.json"
+
+etl-run-source-scrape-queue:
+  python3 scripts/run_source_scrape_queue.py \
+    --db "{{db_path}}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --only-repeatable-now \
+    --summary-out "docs/etl/runs/source-scrape-queue-run-{{snapshot_date}}.json"
+
+etl-run-source-scrape-queue-prefect:
+  python3 scripts/run_source_scrape_queue_prefect.py \
+    --db "{{db_path}}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --only-repeatable-now \
+    --summary-out "docs/etl/runs/source-scrape-queue-prefect-run-{{snapshot_date}}.json"
+
 etl-publish-hf:
+  just etl-export-source-catalog
+  just etl-export-source-scrape-queue
   python3 scripts/check_public_privacy_leaks.py --path etl/data/published
   sqlite_arg="--skip-sqlite-gz"; \
   sensitive_arg=""; \
@@ -1284,6 +1327,8 @@ etl-publish-hf:
   docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db {{db_path}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --parquet-compression {{hf_parquet_compression}} --parquet-batch-rows {{hf_parquet_batch_rows}} --parquet-tables '{{hf_parquet_tables}}' --parquet-exclude-tables '{{hf_parquet_exclude_tables}}' ${sqlite_arg} ${sensitive_arg} ${quality_arg} ${liberty_atlas_arg}"
 
 etl-publish-hf-dry-run:
+  just etl-export-source-catalog
+  just etl-export-source-scrape-queue
   python3 scripts/check_public_privacy_leaks.py --path etl/data/published
   sqlite_arg="--skip-sqlite-gz"; \
   sensitive_arg=""; \
@@ -1630,6 +1675,9 @@ parl-backfill-initdoc-extractions-missing:
 parl-export-initdoc-extraction-review-queue:
   python3 scripts/export_initdoc_extraction_review_queue.py --db {{db_path}} --source-id parl_initiative_docs --only-needs-review --limit {{initdoc_extract_review_limit}} --out {{initdoc_extract_review_out}}
 
+parl-export-initdoc-extraction-label-studio:
+  python3 scripts/export_initdoc_extraction_label_studio_tasks.py --db {{db_path}} --source-id parl_initiative_docs --only-needs-review --limit {{initdoc_extract_review_limit}} --out {{initdoc_extract_review_label_studio_out}} --config-out {{initdoc_extract_review_label_studio_config_out}}
+
 parl-apply-initdoc-extraction-reviews:
   test -n "{{initdoc_extract_review_apply_file}}" || (echo "Set INITDOC_EXTRACT_REVIEW_APPLY_FILE=<csv_path>" && exit 2)
   python3 scripts/apply_initdoc_extraction_reviews.py --db {{db_path}} --source-id parl_initiative_docs --in "{{initdoc_extract_review_apply_file}}" --out {{initdoc_extract_review_apply_out}}
@@ -1637,6 +1685,14 @@ parl-apply-initdoc-extraction-reviews:
 parl-apply-initdoc-extraction-reviews-dry-run:
   test -n "{{initdoc_extract_review_apply_file}}" || (echo "Set INITDOC_EXTRACT_REVIEW_APPLY_FILE=<csv_path>" && exit 2)
   python3 scripts/apply_initdoc_extraction_reviews.py --db {{db_path}} --source-id parl_initiative_docs --in "{{initdoc_extract_review_apply_file}}" --dry-run --out {{initdoc_extract_review_apply_out}}
+
+parl-apply-initdoc-extraction-label-studio:
+  test -n "{{initdoc_extract_review_label_studio_apply_file}}" || (echo "Set INITDOC_EXTRACT_REVIEW_LABEL_STUDIO_APPLY_FILE=<label_studio_json>" && exit 2)
+  python3 scripts/apply_initdoc_extraction_label_studio_reviews.py --db {{db_path}} --source-id parl_initiative_docs --in "{{initdoc_extract_review_label_studio_apply_file}}" --out {{initdoc_extract_review_apply_out}}
+
+parl-apply-initdoc-extraction-label-studio-dry-run:
+  test -n "{{initdoc_extract_review_label_studio_apply_file}}" || (echo "Set INITDOC_EXTRACT_REVIEW_LABEL_STUDIO_APPLY_FILE=<label_studio_json>" && exit 2)
+  python3 scripts/apply_initdoc_extraction_label_studio_reviews.py --db {{db_path}} --source-id parl_initiative_docs --in "{{initdoc_extract_review_label_studio_apply_file}}" --dry-run --out {{initdoc_extract_review_apply_out}}
 
 parl-backfill-declared-stance:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-declared-stance --db {{db_path}} --source-id {{declared_source_id}} --min-auto-confidence {{declared_min_auto_confidence}}"
@@ -2689,7 +2745,7 @@ parl-check-liberty-atlas-release-heartbeat-window:
   python3 scripts/report_liberty_atlas_release_heartbeat_window.py --heartbeat-jsonl {{liberty_atlas_release_heartbeat_path}} --last {{liberty_atlas_release_heartbeat_window}} --max-failed {{liberty_atlas_release_window_max_failed}} --max-degraded {{liberty_atlas_release_window_max_degraded}} --max-stale-alerts {{liberty_atlas_release_window_max_stale_alerts}} --max-drift-alerts {{liberty_atlas_release_window_max_drift_alerts}} --max-hf-unavailable {{liberty_atlas_release_window_max_hf_unavailable}} --strict --out {{liberty_atlas_release_heartbeat_window_out}}${min_run_at_arg}
 
 parl-liberty-restrictions-pipeline:
-  just parl-sanction-citizen-pilot-pipeline
+  just parl-sanction-norms-seed-pipeline
   just parl-validate-liberty-restrictions-seed
   just parl-import-liberty-restrictions-seed
   just parl-report-liberty-restrictions-status
@@ -2828,16 +2884,25 @@ etl-smoke-e2e:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/etl_smoke_e2e.py --db {{db_path}}"
 
+dev-fixture:
+  DB_PATH={{dev_fixture_db_path}} just etl-smoke-e2e
+
+dev-smoke:
+  just dev-fixture
+  python3 scripts/dev_boot_smoke.py --db "{{dev_fixture_db_path}}" --host {{explorer_host}} --port {{explorer_port}}
+
+dev:
+  just dev-fixture
+  python3 scripts/dev_boot_smoke.py --db "{{dev_fixture_db_path}}" --host {{explorer_host}} --port {{explorer_port}} --keep-running
+
+dev-clean:
+  rm -f "{{dev_fixture_db_path}}"
+
 etl-smoke-votes:
   python3 scripts/ingestar_parlamentario_es.py init-db --db {{db_path}}
   python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json --snapshot-date {{snapshot_date}} --strict-network
   python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml --snapshot-date {{snapshot_date}} --strict-network
   python3 scripts/etl_smoke_votes.py --db {{db_path}}
-
-public-route-audit base_url="https://votaconlachola.org" json_out="":
-  json_arg=""; \
-  if [ -n "{{json_out}}" ]; then json_arg="--json-out {{json_out}}"; fi; \
-  node scripts/audit_public_routes.js --base-url "{{base_url}}" ${json_arg}
 
 etl-extract-congreso:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
@@ -3030,6 +3095,8 @@ gh-pages-next-watch:
 gh-pages-next-prime:
   mkdir -p "{{gh_pages_dir}}"/parliamentary-accountability/data
   mkdir -p "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data"
+  mkdir -p "{{gh_pages_dir}}"/responsibility-explainer/data
+  mkdir -p "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data"
   mkdir -p "{{gh_pages_dir}}"/people/data
   mkdir -p "{{gh_pages_next_app_dir}}/public/people/data"
   mkdir -p "{{gh_pages_dir}}"/initiative-lifecycle/data
@@ -3110,6 +3177,7 @@ gh-pages-next-prime:
       '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","generated_by":"gh-pages-next-prime","filters":{}}, "coverage":{"indicator_series_total":0,"indicator_points_total":0,"interventions_total":0,"intervention_events_total":0,"causal_estimates_total":0,"policy_events_total":0,"series_loaded":0,"events_loaded":0,"events_in_association":0,"associations_total":0,"series_in_association":0,"series_by_source":{},"series_coverage_by_point_count":{"min_points_included":0,"max_points_included":0}}, "series":[],"policy_events":[],"associations":[],"limitations":{"interventions_available":false,"intervention_events_available":false,"causal_estimates_available":false,"description":["Stub temporal: sin snapshot generado en modo local sin export"],"method_note":"Correlación no implica causalidad."},"filters":{"series_source_ids":[],"event_source_ids":[],"domains":[]}}' \
       > "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
   fi
+  @just responsibility-explainer-next-prime
   if [ -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
     cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
       "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json"; \
@@ -3181,6 +3249,58 @@ gh-pages-next-prime:
     cp -R "{{gh_pages_dir}}"/legacy "{{gh_pages_next_app_dir}}/public/" || true; \
     cp -R "{{gh_pages_dir}}"/parliamentary-accountability "{{gh_pages_next_app_dir}}/public/" 2>/dev/null || true; \
   fi
+  @just vote-explainer-next-prime
+
+responsibility-explainer-next-prime:
+  mkdir -p "{{gh_pages_dir}}/responsibility-explainer/data"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data"
+  set -e; \
+  responsibility_explainer_db="{{db_path}}"; \
+  if [ -n "{{initiative_measures_db_path}}" ]; then \
+    responsibility_explainer_db="{{initiative_measures_db_path}}"; \
+  fi; \
+  if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
+    python3 scripts/import_responsibility_explainer_seed.py \
+      --db "$responsibility_explainer_db" \
+      --seed "{{responsibility_explainer_seed_path}}" \
+      --snapshot-date "{{snapshot_date}}"; \
+    python3 scripts/apply_responsibility_ledger_reviews.py \
+      --db "$responsibility_explainer_db" \
+      --in-dir "{{responsibility_explainer_reviewed_ledger_dir}}"; \
+    python3 scripts/export_responsibility_explainer_snapshot.py \
+      --db "$responsibility_explainer_db" \
+      --out-dir "{{gh_pages_dir}}/responsibility-explainer/data"; \
+  elif [ ! -f "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
+    printf '%s\n' \
+      '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","schema_version":"responsibility_explainer_manifest_v1","snapshot_db":"stub","total_cases":0},"cases":[]}' \
+      > "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json"; \
+  fi
+  if [ -f "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
+    find "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
+    cp -R "{{gh_pages_dir}}/responsibility-explainer/data/." "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data/"; \
+  fi
+
+vote-explainer-next-prime:
+  mkdir -p "{{gh_pages_dir}}/explorer-votaciones/data"
+  mkdir -p "{{gh_pages_dir}}/vote-explainer/data"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/vote-explainer/data"
+  python3 scripts/export_explorer_votaciones_snapshot.py \
+    --db "{{db_path}}" \
+    --limit {{vote_explainer_limit}} \
+    --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
+  set -e; \
+  tmp_vote_dir=$(mktemp -d); \
+  cleanup() { rm -rf "$tmp_vote_dir"; }; \
+  trap cleanup EXIT; \
+  python3 scripts/export_vote_explainer_snapshot.py \
+    --source-json "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json" \
+    --out-dir "$tmp_vote_dir" \
+    --snapshot-as-of-date "{{snapshot_date}}"; \
+  VOTE_EXPLAINER_ALLOW_EMPTY="{{vote_explainer_allow_empty}}" python3 -c 'import json, os, pathlib, sys; manifest=pathlib.Path("'"$tmp_vote_dir"'")/"manifest.json"; votes=len(json.loads(manifest.read_text()).get("votes", [])); print(f"vote explainer manifest votes={votes}"); sys.exit(0 if votes or os.environ.get("VOTE_EXPLAINER_ALLOW_EMPTY") == "1" else 1)'; \
+  find "{{gh_pages_dir}}/vote-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
+  cp -R "$tmp_vote_dir/." "{{gh_pages_dir}}/vote-explainer/data/"; \
+  find "{{gh_pages_next_app_dir}}/public/vote-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
+  cp -R "$tmp_vote_dir/." "{{gh_pages_next_app_dir}}/public/vote-explainer/data/"
 
 # UI: explorador directo (localhost, sin Docker)
 # Single app serving:
@@ -3213,8 +3333,28 @@ explorer-bg-watch:
   @echo "PID guardado en /tmp/vota-explorer-ui.pid"
   @echo "Logs en /tmp/vota-explorer-ui.log"
 
+explorer-datasette:
+  python3 scripts/run_datasette_explorer.py --db "{{db_path}}" --host {{explorer_host}} --port 8011
+
+cloudflare-pages-build:
+  python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
+  mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
+  if [ ! -f "{{gh_pages_next_app_dir}}/node_modules/next/dist/bin/next" ]; then \
+    npm --prefix "{{gh_pages_next_app_dir}}" --cache /tmp/vclc-npm-cache --logs-dir /tmp/vclc-npm-logs ci --no-audit --no-fund; \
+  else \
+    echo "Reusing existing {{gh_pages_next_app_dir}}/node_modules"; \
+  fi
+  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
+  python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  just privacy-check-public-artifacts
+  @echo "Build Cloudflare Pages listo en {{gh_pages_next_out_dir}}"
+
 explorer-gh-pages-build:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html {{gh_pages_dir}}/CNAME
+  @echo "DEPRECATED: explorer-gh-pages-build está desactivado como flujo de publicación. Usa just cloudflare-pages-build."
+  @just cloudflare-pages-build
+
+cloudflare-pages-refresh-data:
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
   mkdir -p \
     {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
     {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
@@ -3222,6 +3362,8 @@ explorer-gh-pages-build:
     {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data \
     {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data \
     {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data \
+    {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/vote-explainer/data \
+    {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/responsibility-explainer/data \
     {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/parliamentary-accountability/data \
     {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/initiative-lifecycle/data \
     {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/political-positions/data \
@@ -3231,9 +3373,11 @@ explorer-gh-pages-build:
     {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/policy-outcomes/data \
     {{gh_pages_dir}}/legacy {{gh_pages_dir}}/legacy/citizen {{gh_pages_dir}}/legacy/citizen/data \
     {{gh_pages_dir}}/legacy/graph {{gh_pages_dir}}/legacy/graph/data \
-    {{gh_pages_dir}}/legacy/explorer {{gh_pages_dir}}/legacy/explorer-sources \
-    {{gh_pages_dir}}/legacy/explorer-temas {{gh_pages_dir}}/legacy/explorer-votaciones \
-    {{gh_pages_dir}}/legacy/explorer-politico
+    {{gh_pages_dir}}/legacy/explorer {{gh_pages_dir}}/legacy/explorer/data \
+    {{gh_pages_dir}}/legacy/explorer-sources {{gh_pages_dir}}/legacy/explorer-sources/data \
+    {{gh_pages_dir}}/legacy/explorer-temas {{gh_pages_dir}}/legacy/explorer-temas/data \
+    {{gh_pages_dir}}/legacy/explorer-votaciones {{gh_pages_dir}}/legacy/explorer-votaciones/data \
+    {{gh_pages_dir}}/legacy/explorer-politico {{gh_pages_dir}}/legacy/explorer-politico/data
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
   mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
   if [ ! -f "{{gh_pages_next_app_dir}}/node_modules/next/dist/bin/next" ]; then \
@@ -3241,10 +3385,11 @@ explorer-gh-pages-build:
   else \
     echo "Reusing existing {{gh_pages_next_app_dir}}/node_modules"; \
   fi
-  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build
+  @just responsibility-explainer-next-prime
+  @just vote-explainer-next-prime
+  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
+  python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
   cp -R "{{gh_pages_next_out_dir}}"/. "{{gh_pages_dir}}"/
-  rm -f "{{gh_pages_dir}}/CNAME"
-  if [ -n "{{gh_pages_cname}}" ]; then printf '%s\n' "{{gh_pages_cname}}" > "{{gh_pages_dir}}/CNAME"; fi
   touch "{{gh_pages_dir}}/.nojekyll"
   cp -R ui/citizen/. {{gh_pages_dir}}/legacy/citizen/
   cp ui/graph/index.html {{gh_pages_dir}}/legacy/graph/index.html
@@ -3271,8 +3416,17 @@ explorer-gh-pages-build:
     --db "{{db_path}}" \
     --limit 200 \
     --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{parliamentary_accountability_db_path}}" ]; then \
+    accountability_db="{{parliamentary_accountability_db_path}}"; \
+  fi; \
+  extra_accountability_args=""; \
+  if [ -n "{{initiative_measures_db_path}}" ]; then \
+    extra_accountability_args="--initiative-measures-db {{initiative_measures_db_path}}"; \
+  fi; \
   python3 scripts/export_parliamentary_accountability_snapshot.py \
-    --db "{{db_path}}" \
+    --db "$accountability_db" \
+    $extra_accountability_args \
     --out "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
     --max-rows-events 700 \
     --min-shared-events 12 \
@@ -3299,7 +3453,7 @@ explorer-gh-pages-build:
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" \
     --snapshot-date "{{snapshot_date}}"
-  if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
+  set -e; if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
     python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
     python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
     echo "Reusing existing people exports for snapshot {{snapshot_date}}"; \
@@ -3316,29 +3470,54 @@ explorer-gh-pages-build:
   python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
-  python3 scripts/export_coverage_capacity_snapshot.py \
+  python3 scripts/export_source_catalog_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/explorer-sources/data/coverage-capacity.json"
+    --snapshot-date "{{snapshot_date}}" \
+    --out "{{gh_pages_dir}}/explorer-sources/data/catalog.json" \
+    --published-out "etl/data/published/source-catalog-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/source-catalog-latest.json"
+  python3 scripts/export_source_scrape_queue_snapshot.py \
+    --db "{{db_path}}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "{{gh_pages_dir}}/explorer-sources/data/scrape-queue.json" \
+    --published-out "etl/data/published/source-scrape-queue-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/source-scrape-queue-latest.json"
   python3 scripts/export_explorer_temas_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-temas/data/temas-preview.json"
+  set -e; \
+  citizen_db="{{db_path}}"; \
+  if [ -n "{{citizen_db_path}}" ]; then \
+    citizen_db="{{citizen_db_path}}"; \
+  fi; \
+  citizen_fallback_auto="$(mktemp)"; \
+  citizen_fallback_votes="$(mktemp)"; \
+  citizen_fallback_declared="$(mktemp)"; \
+  cleanup() { rm -f "$citizen_fallback_auto" "$citizen_fallback_votes" "$citizen_fallback_declared"; }; \
+  trap cleanup EXIT; \
+  git show HEAD:ui/gh-pages-next/public/citizen/data/citizen.json > "$citizen_fallback_auto" 2>/dev/null || true; \
+  git show HEAD:ui/gh-pages-next/public/citizen/data/citizen_votes.json > "$citizen_fallback_votes" 2>/dev/null || true; \
+  git show HEAD:ui/gh-pages-next/public/citizen/data/citizen_declared.json > "$citizen_fallback_declared" 2>/dev/null || true; \
   python3 scripts/export_citizen_snapshot.py \
-    --db "{{db_path}}" \
+    --db "$citizen_db" \
     --out "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --topic-set-id 1 \
-    --computed-method combined \
-    --max-bytes 5000000
+    --computed-method auto \
+    --fallback-snapshot "$citizen_fallback_auto" \
+    --max-bytes 5000000; \
   python3 scripts/export_citizen_snapshot.py \
-    --db "{{db_path}}" \
+    --db "$citizen_db" \
     --out "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
     --topic-set-id 1 \
     --computed-method votes \
-    --max-bytes 5000000
+    --fallback-snapshot "$citizen_fallback_votes" \
+    --max-bytes 5000000; \
   python3 scripts/export_citizen_snapshot.py \
-    --db "{{db_path}}" \
+    --db "$citizen_db" \
     --out "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
     --topic-set-id 1 \
     --computed-method declared \
+    --fallback-snapshot "$citizen_fallback_declared" \
     --max-bytes 5000000
   cp -R "{{gh_pages_dir}}/citizen/data/." "{{gh_pages_dir}}/legacy/citizen/data/"
   cp -R "{{gh_pages_dir}}/graph/data/." "{{gh_pages_dir}}/legacy/graph/data/"
@@ -3346,6 +3525,10 @@ explorer-gh-pages-build:
   cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{gh_pages_dir}}/legacy/graph/data/"
   cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{gh_pages_dir}}/legacy/graph/data/"
   cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{gh_pages_dir}}/legacy/graph/data/"
+  cp -R "{{gh_pages_dir}}/explorer-temas/data/." "{{gh_pages_dir}}/legacy/explorer-temas/data/"
+  cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{gh_pages_dir}}/legacy/explorer-votaciones/data/"
+  cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{gh_pages_dir}}/legacy/explorer-sources/data/"
+  cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{gh_pages_dir}}/legacy/explorer-politico/data/"
   python3 scripts/validate_citizen_snapshot.py \
     --path "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --max-bytes 5000000 \
@@ -3358,7 +3541,6 @@ explorer-gh-pages-build:
     --path "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
     --max-bytes 5000000 \
     --strict-grid
-  cp ui/citizen/concerns_v1.json "{{gh_pages_dir}}/citizen/data/concerns_v1.json"
   python3 scripts/report_citizen_concern_pack_quality.py \
     --snapshot "{{gh_pages_dir}}/citizen/data/citizen.json" \
     --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
@@ -3378,6 +3560,21 @@ explorer-gh-pages-build:
   mkdir -p "{{gh_pages_next_app_dir}}/public/legacy/graph" "{{gh_pages_next_app_dir}}/public/legacy/graph/data"
   cp ui/graph/index.html "{{gh_pages_next_app_dir}}/public/legacy/graph/index.html"
   cp -R "{{gh_pages_dir}}/legacy/graph/data/." "{{gh_pages_next_app_dir}}/public/legacy/graph/data/"
+  mkdir -p \
+    "{{gh_pages_next_app_dir}}/public/legacy/explorer" "{{gh_pages_next_app_dir}}/public/legacy/explorer/data" \
+    "{{gh_pages_next_app_dir}}/public/legacy/explorer-sources" "{{gh_pages_next_app_dir}}/public/legacy/explorer-sources/data" \
+    "{{gh_pages_next_app_dir}}/public/legacy/explorer-temas" "{{gh_pages_next_app_dir}}/public/legacy/explorer-temas/data" \
+    "{{gh_pages_next_app_dir}}/public/legacy/explorer-votaciones" "{{gh_pages_next_app_dir}}/public/legacy/explorer-votaciones/data" \
+    "{{gh_pages_next_app_dir}}/public/legacy/explorer-politico" "{{gh_pages_next_app_dir}}/public/legacy/explorer-politico/data"
+  cp ui/graph/explorer.html "{{gh_pages_next_app_dir}}/public/legacy/explorer/index.html"
+  cp ui/graph/explorer-sources.html "{{gh_pages_next_app_dir}}/public/legacy/explorer-sources/index.html"
+  cp ui/graph/explorer-temas.html "{{gh_pages_next_app_dir}}/public/legacy/explorer-temas/index.html"
+  cp ui/graph/explorer-votaciones.html "{{gh_pages_next_app_dir}}/public/legacy/explorer-votaciones/index.html"
+  cp ui/graph/explorer-sports.html "{{gh_pages_next_app_dir}}/public/legacy/explorer-politico/index.html"
+  cp -R "{{gh_pages_dir}}/explorer-temas/data/." "{{gh_pages_next_app_dir}}/public/legacy/explorer-temas/data/"
+  cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{gh_pages_next_app_dir}}/public/legacy/explorer-votaciones/data/"
+  cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{gh_pages_next_app_dir}}/public/legacy/explorer-sources/data/"
+  cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{gh_pages_next_app_dir}}/public/legacy/explorer-politico/data/"
   mkdir -p "{{gh_pages_next_app_dir}}/public/legal-sanctions/data"
   cp -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" "{{gh_pages_next_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"
   cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json"
@@ -3416,13 +3613,16 @@ explorer-gh-pages-build:
   cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/legacy/graph/data/ideal.json"
-  cp docs/coverage_capacity_model.json "{{gh_pages_dir}}/explorer-sources/data/coverage-model.json"
-  cp docs/coverage_capacity_model.json "{{gh_pages_dir}}/legacy/graph/data/coverage-model.json"
+  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
+  python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
   just privacy-check-public-artifacts
-  @echo "Build GitHub Pages listo en {{gh_pages_dir}}"
+  @echo "Build Cloudflare Pages listo en {{gh_pages_next_out_dir}}"
 
 privacy-check-public-artifacts:
-  python3 scripts/check_public_privacy_leaks.py --path "{{gh_pages_dir}}" --path etl/data/published --path "{{gh_pages_next_app_dir}}/public"
+  python3 scripts/check_public_privacy_leaks.py --path "{{gh_pages_next_out_dir}}" --path "{{gh_pages_dir}}" --path etl/data/published --path "{{gh_pages_next_app_dir}}/public"
+
+repo-hygiene-check:
+  python3 scripts/check_repo_root_hygiene.py
 
 citizen-test-preset-codec:
   node --test tests/test_citizen_preset_codec.js tests/test_citizen_preset_recovery_ui_contract.js tests/test_report_citizen_preset_fixture_contract.js tests/test_report_citizen_preset_codec_parity.js tests/test_report_citizen_preset_codec_sync_state.js tests/test_report_citizen_preset_contract_bundle.js tests/test_report_citizen_preset_contract_bundle_history.js tests/test_report_citizen_preset_contract_bundle_history_window.js tests/test_report_citizen_preset_contract_bundle_history_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_window.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction.js tests/test_report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js
@@ -4112,31 +4312,13 @@ citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-windo
   if [ -n "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window_out}}" ]; then out_arg="--json-out {{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window_out}}"; fi; \
   node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js --heartbeat-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_path}}" --compacted-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_path}}" --last "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window}}" --strict ${out_arg}
 
+cloudflare-pages-deploy:
+  @just cloudflare-pages-build
+  cd "{{gh_pages_next_app_dir}}" && npx wrangler pages deploy out --project-name "{{cloudflare_pages_project}}"
+
 explorer-gh-pages-publish:
-  remote_url=$(git config --get remote.origin.url); \
-  if [ -z "$remote_url" ]; then \
-    echo "No se encontró remote.origin.url"; \
-    exit 1; \
-  fi; \
-  export GIT_TERMINAL_PROMPT=0; \
-  export GIT_ASKPASS=/bin/false; \
-  case "$remote_url" in \
-    git@*|ssh://*) \
-      export GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh -o BatchMode=yes -o ConnectTimeout=15 -o ConnectionAttempts=1 -o StrictHostKeyChecking=accept-new}"; \
-      ;; \
-  esac; \
-  set -e; \
-  just explorer-gh-pages-build; \
-  tmp_dir=$(mktemp -d); \
-  trap 'rm -rf "$tmp_dir"' EXIT; \
-  cp -R {{gh_pages_dir}} "$tmp_dir/site"; \
-  cd "$tmp_dir/site"; \
-  git init -q; \
-  git checkout -b "{{gh_pages_branch}}"; \
-  git add .; \
-  git commit --allow-empty -m "Publish explorers landing and explorer-politico static snapshot" -q; \
-  git remote add origin "$remote_url"; \
-  git -c credential.interactive=never push -f "$remote_url" "{{gh_pages_branch}}:{{gh_pages_branch}}"
+  @echo "DEPRECATED: gh-pages publish está desactivado. Usa just cloudflare-pages-deploy."
+  @exit 2
 
 explorer-gh-pages:
   @just explorer-gh-pages-publish

@@ -1,0 +1,41 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "congreso_iniciativas",
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 2,
+  "upserted": 2,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_window": 1,
+    "title_hint_strong": 1
+  },
+  "by_doc_format": {
+    "html": 2
+  },
+  "sample": [
+    {
+      "source_record_pk": 146937,
+      "sample_initiative_id": "senado:leg14:exp:621/000084",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 29 MARZO 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos P…"
+    },
+    {
+      "source_record_pk": 146936,
+      "sample_initiative_id": "senado:leg14:exp:621/000045",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 23/2011, de 29 de julio, de depósito legal. (621/000045)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

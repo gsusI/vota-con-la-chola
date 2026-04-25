@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-03-01T07:55:00+00:00",
+  "sprint_id": "AI-OPS-352",
+  "focus_row": 843,
+  "db_path": "etl/data/staging/politicos-es.db",
+  "lever_before": {
+    "cookie_lever_status": "degraded",
+    "cookie_lever_strict_rc": 4,
+    "manual_capture_validity_status": "degraded",
+    "manual_capture_validity_strict_rc": 4,
+    "usable_captures_total": 0,
+    "captures_total": 6
+  },
+  "lever_after": {
+    "manual_capture_validity_status": "ok",
+    "manual_capture_validity_strict_rc": 0,
+    "usable_captures_total": 2,
+    "captures_total": 8,
+    "cookies_domain_total": 12,
+    "retry_ready": true,
+    "retry_backfill_attempted": true,
+    "retry_backfill_status": "ok",
+    "retry_backfill_exit_code": 0
+  },
+  "kpi_before": {
+    "downloaded_doc_links": 4802,
+    "missing_doc_links_actionable": 4561,
+    "missing_doc_links_actionable_linked_to_votes": 785,
+    "missing_urls": 785,
+    "blocked_403_urls": 160,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5,
+    "status404_missing_urls": 408,
+    "status403_missing_urls": 160
+  },
+  "kpi_after": {
+    "downloaded_doc_links": 4802,
+    "missing_doc_links_actionable": 4561,
+    "missing_doc_links_actionable_linked_to_votes": 785,
+    "missing_urls": 785,
+    "blocked_403_urls": 172,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 5,
+    "status404_missing_urls": 396,
+    "status403_missing_urls": 172
+  },
+  "delta": {
+    "downloaded_doc_links": 0,
+    "missing_doc_links_actionable": 0,
+    "missing_doc_links_actionable_linked_to_votes": 0,
+    "missing_urls": 0,
+    "blocked_403_urls": 12,
+    "status404_missing_urls": -12,
+    "status403_missing_urls": 12
+  },
+  "assessment": {
+    "visible_progress": true,
+    "notes": [
+      "Se reabre palanca reproducible de captura manual con 2 capturas usables.",
+      "Retry real ejecutado en strict-ready, pero sin conversion neta de documentos descargados.",
+      "Hubo reclasificacion de status de faltantes (404 -> 403) sin mejorar cobertura."
+    ]
+  },
+  "artifacts": {
+    "cookie_status": "docs/etl/sprints/AI-OPS-352/evidence/senado_cookie_lever_status_20260301T075033Z.json",
+    "manual_validity_before": "docs/etl/sprints/AI-OPS-352/evidence/senado_manual_capture_validity_20260301T075033Z.json",
+    "manual_validity_after": "docs/etl/sprints/AI-OPS-352/evidence/senado_manual_capture_validity_after_small_run_20260301T075125Z.json",
+    "pending_queue": "docs/etl/sprints/AI-OPS-352/evidence/senado_manual_capture_pending_targets_20260301T075033Z.json",
+    "pending_commands": "docs/etl/sprints/AI-OPS-352/exports/senado_manual_capture_pending_targets_commands_20260301T075033Z.sh",
+    "retry_cycle": "docs/etl/sprints/AI-OPS-352/evidence/senado_manual_capture_retry_cycle_after_refresh_sanitized_20260301T075426Z.json",
+    "quality_before": "docs/etl/sprints/AI-OPS-352/evidence/quality_initiatives_before_manual_retry_20260301T075243Z.json",
+    "quality_after": "docs/etl/sprints/AI-OPS-352/evidence/quality_initiatives_after_manual_retry_sanitized_20260301T075426Z.json",
+    "waf_before": "docs/etl/sprints/AI-OPS-352/evidence/senado_waf_block_profile_before_manual_retry_20260301T075243Z.json",
+    "waf_after": "docs/etl/sprints/AI-OPS-352/evidence/senado_waf_block_profile_after_manual_retry_sanitized_20260301T075426Z.json"
+  }
+}

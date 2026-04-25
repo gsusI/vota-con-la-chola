@@ -268,6 +268,44 @@
         flex: 1;
       }
 
+      #reviewed-implications[hidden] {
+        display: none;
+      }
+
+      .reviewed-section {
+        margin: 2px 0 12px;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        border-radius: 14px;
+        padding: 10px;
+        background: linear-gradient(145deg, rgba(239, 246, 255, 0.92), rgba(248, 250, 255, 0.98));
+      }
+
+      .reviewed-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .reviewed-header h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .reviewed-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 8px;
+      }
+
+      .reviewed-card {
+        border: 1px solid rgba(15, 23, 42, 0.11);
+        border-radius: 12px;
+        padding: 9px;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
       .stat {
         padding: 9px 10px;
         border: 1px solid rgba(15, 23, 42, 0.13);
@@ -369,6 +407,123 @@
       .compact-mode .vote-about {
         padding: 4px 6px;
         margin-top: 3px;
+      }
+
+      .implication-box {
+        margin-top: 8px;
+        border: 1px solid rgba(29, 78, 216, 0.16);
+        border-radius: 12px;
+        padding: 8px;
+        background: linear-gradient(160deg, rgba(239, 246, 255, 0.9), rgba(255, 255, 255, 0.98));
+      }
+
+      .implication-context {
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      }
+
+      .implication-context-label,
+      .implication-kicker {
+        margin: 0;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #1d4ed8;
+      }
+
+      .implication-context-title,
+      .implication-title {
+        margin: 4px 0 0;
+        color: #0f172a;
+        font-weight: 700;
+      }
+
+      .implication-context-title {
+        font-size: 0.92rem;
+      }
+
+      .implication-title {
+        font-size: 0.9rem;
+      }
+
+      .implication-question {
+        margin-top: 5px;
+        color: #0f172a;
+        font-weight: 600;
+      }
+
+      .implication-summary,
+      .implication-affected,
+      .implication-note {
+        margin-top: 5px;
+      }
+
+      .implication-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 7px;
+      }
+
+      .implication-outcomes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .implication-outcome {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 10px;
+        padding: 7px 8px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .implication-outcome.approved {
+        border-color: rgba(22, 163, 74, 0.25);
+      }
+
+      .implication-outcome.rejected {
+        border-color: rgba(220, 38, 38, 0.25);
+      }
+
+      .implication-outcome span {
+        display: block;
+        font-size: 0.67rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #475569;
+        font-weight: 700;
+      }
+
+      .implication-outcome p {
+        margin-top: 4px;
+        color: #0f172a;
+        font-size: 0.8rem;
+      }
+
+      .implication-quote {
+        margin: 8px 0 0;
+        padding: 8px 10px;
+        border-left: 3px solid rgba(29, 78, 216, 0.5);
+        border-radius: 0 10px 10px 0;
+        background: rgba(219, 234, 254, 0.48);
+        color: #334155;
+        font-size: 0.78rem;
+      }
+
+      .implication-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 6px;
+        color: #1e40af;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 2px;
       }
 
       .vote-meta {
@@ -536,6 +691,10 @@
           grid-template-columns: repeat(2, minmax(140px, 1fr));
         }
 
+        .reviewed-grid {
+          grid-template-columns: 1fr;
+        }
+
         .vote-stats-grid {
           grid-template-columns: repeat(2, minmax(80px, 1fr));
         }
@@ -551,6 +710,12 @@
 
       .compact-mode .vote-card {
         padding: 6px;
+      }
+
+      .compact-mode .reviewed-section,
+      .compact-mode .reviewed-card,
+      .compact-mode .implication-box {
+        padding: 7px;
       }
 
       .compact-mode .vote-title .topic-tag {
@@ -646,6 +811,23 @@
 
       .compact-mode .vote-title {
         gap: 6px;
+      }
+
+      .compact-mode .implication-context {
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+      }
+
+      .compact-mode .implication-quote {
+        padding: 6px 8px;
+      }
+
+      .compact-mode .implication-outcomes {
+        gap: 4px;
+      }
+
+      .compact-mode .implication-outcome {
+        padding: 6px;
       }
 
       .compact-mode .panel,
@@ -784,6 +966,7 @@
           </div>
 
           <div class="content-body">
+            <div id="reviewed-implications" class="reviewed-section" hidden></div>
             <div class="stats-wrap">
               <div class="stats" id="stats" aria-live="polite"></div>
             </div>
@@ -891,6 +1074,7 @@
         next: document.getElementById("next-page"),
         apply: document.getElementById("apply-filters"),
         clear: document.getElementById("clear-filters"),
+        reviewedImplications: document.getElementById("reviewed-implications"),
         events: document.getElementById("events"),
         loading: document.getElementById("loading"),
         message: document.getElementById("message"),
@@ -933,6 +1117,36 @@
       const formatNumber = (value) => {
         const n = safeNumber(value);
         return new Intl.NumberFormat("es-ES").format(n);
+      };
+
+      const implicationKindLabel = (value = "") => {
+        const key = normalize(value);
+        if (key === "binding_law") return "Ley vinculante";
+        if (key === "budget_tax") return "Presupuesto o impuestos";
+        if (key === "regulation") return "Regulación";
+        if (key === "non_binding_motion") return "Moción no vinculante";
+        if (key === "oversight") return "Control al Gobierno";
+        if (key === "authorization") return "Autorización";
+        if (key === "procedural") return "Procedimental";
+        if (key === "unknown") return "Alcance incierto";
+        return safeText(value).replace(/_/g, " ");
+      };
+
+      const bindingStrengthLabel = (value = "") => {
+        const key = normalize(value);
+        if (key === "binding") return "Vinculante";
+        if (key === "non_binding") return "No vinculante";
+        if (key === "authorization") return "Autorización";
+        if (key === "procedural") return "Procedimental";
+        if (key === "unknown") return "Fuerza incierta";
+        return safeText(value).replace(/_/g, " ");
+      };
+
+      const confidenceLabel = (value) => {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "";
+        const pct = n <= 1 ? Math.round(n * 100) : Math.round(n);
+        return `Confianza ${pct}%`;
       };
 
       const updateSummaryStrip = (meta = {}, activeParty = "") => {
@@ -1145,6 +1359,134 @@
         `;
       };
 
+      const searchableVoteBlob = (event) => {
+        return [
+          event?.title,
+          event?.expediente_text,
+          event?.subgroup_title,
+          event?.subgroup_text,
+          event?.initiative?.title,
+          event?.initiative?.expediente,
+          event?.citizen_implication?.citizen_title,
+          event?.citizen_implication?.citizen_question,
+          event?.citizen_implication?.citizen_summary,
+          event?.citizen_implication?.impact_if_approved,
+          event?.citizen_implication?.impact_if_rejected,
+          event?.citizen_implication?.affected_groups,
+          event?.citizen_implication?.evidence_quote,
+          event?.citizen_implication?.note,
+        ].filter(Boolean).join(" | ");
+      };
+
+      const searchableImplicationBlob = (implication) => {
+        return [
+          implication?.event_title,
+          implication?.event_subgroup,
+          implication?.initiative_title,
+          implication?.initiative_expediente,
+          implication?.citizen_title,
+          implication?.citizen_question,
+          implication?.citizen_summary,
+          implication?.impact_if_approved,
+          implication?.impact_if_rejected,
+          implication?.affected_groups,
+          implication?.evidence_quote,
+          implication?.note,
+        ].filter(Boolean).join(" | ");
+      };
+
+      const renderImplicationOutcome = (label, value, tone) => {
+        const text = safeText(value);
+        if (!text) return "";
+        return `
+          <div class="implication-outcome ${escapeHtml(tone)}">
+            <span>${escapeHtml(label)}</span>
+            <p>${escapeHtml(text)}</p>
+          </div>
+        `;
+      };
+
+      const renderCitizenImplication = (implication, options = {}) => {
+        if (!implication) return "";
+        const topLevel = Boolean(options.topLevel);
+        const citizenTitle = safeText(implication?.citizen_title || implication?.initiative_title || implication?.event_title || "Lectura revisada");
+        const citizenQuestion = safeText(implication?.citizen_question);
+        const citizenSummary = safeText(implication?.citizen_summary);
+        const affectedGroups = safeText(implication?.affected_groups);
+        const evidenceQuote = safeText(implication?.evidence_quote);
+        const note = safeText(implication?.note);
+        const contextTitle = safeText(implication?.initiative_title || implication?.event_title);
+        const contextBits = [
+          implication?.vote_date ? formatDate(implication.vote_date) : "",
+          implication?.initiative_expediente,
+          implication?.event_subgroup,
+        ].filter(Boolean);
+        const openUrl = safeText(implication?.initiative_url || implication?.source_url);
+        const metaBits = [
+          implicationKindLabel(implication?.implication_kind),
+          bindingStrengthLabel(implication?.binding_strength),
+          confidenceLabel(implication?.confidence),
+        ].filter(Boolean);
+        const metaHtml = metaBits.length
+          ? `<div class="implication-meta">${metaBits.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("")}</div>`
+          : "";
+        const contextHtml = topLevel && (contextTitle || contextBits.length)
+          ? `
+            <div class="implication-context">
+              <p class="implication-context-label">Votación vinculada</p>
+              ${contextTitle ? `<p class="implication-context-title">${escapeHtml(contextTitle)}</p>` : ""}
+              ${contextBits.length ? `<p class="small">${escapeHtml(contextBits.join(" · "))}</p>` : ""}
+            </div>
+          `
+          : "";
+        const sourceHtml = topLevel ? sourceLabel(implication) : "";
+        const linkHtml = topLevel && openUrl
+          ? `<a class="implication-link" href="${escapeHtml(openUrl)}" target="_blank" rel="noopener noreferrer">Abrir fuente oficial</a>`
+          : "";
+        return `
+          <section class="implication-box">
+            ${contextHtml}
+            <p class="implication-kicker">${topLevel ? "Lectura revisada" : "Qué implica"}</p>
+            <p class="implication-title">${escapeHtml(citizenTitle)}</p>
+            ${citizenQuestion ? `<p class="small implication-question">${escapeHtml(citizenQuestion)}</p>` : ""}
+            ${citizenSummary ? `<p class="small implication-summary">${escapeHtml(citizenSummary)}</p>` : ""}
+            ${metaHtml}
+            <div class="implication-outcomes">
+              ${renderImplicationOutcome("Si se aprobaba", implication?.impact_if_approved, "approved")}
+              ${renderImplicationOutcome("Si se rechazaba", implication?.impact_if_rejected, "rejected")}
+            </div>
+            ${affectedGroups ? `<p class="small implication-affected"><strong>A quién afecta:</strong> ${escapeHtml(affectedGroups)}</p>` : ""}
+            ${evidenceQuote ? `<blockquote class="implication-quote">${escapeHtml(evidenceQuote)}</blockquote>` : ""}
+            ${note ? `<p class="small implication-note"><strong>Nota:</strong> ${escapeHtml(note)}</p>` : ""}
+            ${sourceHtml}
+            ${linkHtml}
+          </section>
+        `;
+      };
+
+      const renderReviewedImplications = (rows = []) => {
+        const items = Array.isArray(rows) ? rows : [];
+        if (!items.length) {
+          refs.reviewedImplications.hidden = true;
+          refs.reviewedImplications.innerHTML = "";
+          return;
+        }
+
+        refs.reviewedImplications.hidden = false;
+        refs.reviewedImplications.innerHTML = `
+          <div class="reviewed-header">
+            <div>
+              <h3>Votaciones explicadas para ciudadanía</h3>
+              <p class="small">Lecturas revisadas manualmente para que el sentido práctico del voto no dependa del título burocrático.</p>
+            </div>
+            <span class="pill">${formatNumber(items.length)} revisadas</span>
+          </div>
+          <div class="reviewed-grid">
+            ${items.map((item) => `<article class="reviewed-card">${renderCitizenImplication(item, { topLevel: true })}</article>`).join("")}
+          </div>
+        `;
+      };
+
       const renderGroups = (groups = []) => {
         return groups
           .sort((a, b) => safeNumber(b.total, 0) - safeNumber(a.total, 0))
@@ -1247,6 +1589,7 @@
             const totals = eventRow.totals || {};
             const partyParticipation = eventRow.party_participation || {};
             const groupItems = renderGroups(eventRow.group_breakdown || []);
+            const citizenImplication = renderCitizenImplication(eventRow.citizen_implication, { topLevel: false });
             const partyName = safeText(state.party);
             const partyHighlighted = safeNumber(partyParticipation.total, 0) > 0;
             const sourceBadge = sourceLabel(eventRow);
@@ -1297,6 +1640,7 @@
                 ${aboutBlock}
                 <p class="small">Fecha: ${escapeHtml(date)}</p>
                 ${sourceBadge}
+                ${citizenImplication}
                 ${totalsBlock}
                 <p class="small" style="margin: 8px 0 4px">Desglose por grupos</p>
                 <div class="vote-groups">
@@ -1332,12 +1676,15 @@
             updateSummaryStrip(payload.meta || {}, state.party);
             updateActiveChips();
             renderStats(payload);
+            renderReviewedImplications(payload.reviewed_implications || []);
             renderPagerInfo(payload);
             renderEvents(rows);
             refs.debugLabel.textContent = `requested=${state.source !== "all" ? state.source : "all"}, limit=${state.limit}, offset=${state.offset}, q=${state.search || "-"}, party=${state.party || "-"}`;
             refs.loading.style.display = "none";
           } catch (error) {
             refs.events.innerHTML = "";
+            refs.reviewedImplications.hidden = true;
+            refs.reviewedImplications.innerHTML = "";
             refs.loading.className = "error";
             refs.loading.innerHTML = `Error cargando votaciones (API): ${escapeHtml(error?.message || String(error))}`;
             refs.stats.innerHTML = "";
@@ -1351,6 +1698,7 @@
         try {
           const snapshot = await ensureStaticSnapshot();
           const allEvents = Array.isArray(snapshot?.events) ? snapshot.events : [];
+          const allImplications = Array.isArray(snapshot?.reviewed_implications) ? snapshot.reviewed_implications : [];
 
           if (allEvents.length) {
             const sourceMap = new Map();
@@ -1372,15 +1720,16 @@
               return false;
             }
             if (qNorm) {
-              const blob = [
-                ev?.title,
-                ev?.expediente_text,
-                ev?.subgroup_title,
-                ev?.subgroup_text,
-                ev?.initiative?.title,
-                ev?.initiative?.expediente,
-              ].filter(Boolean).join(" | ");
-              if (!normalize(blob).includes(qNorm)) return false;
+              if (!normalize(searchableVoteBlob(ev)).includes(qNorm)) return false;
+            }
+            return true;
+          });
+          const filteredImplications = allImplications.filter((implication) => {
+            if (sourceFilter !== "all" && safeText(implication?.source_id).trim() !== sourceFilter) {
+              return false;
+            }
+            if (qNorm && !normalize(searchableImplicationBlob(implication)).includes(qNorm)) {
+              return false;
             }
             return true;
           });
@@ -1400,17 +1749,20 @@
               limit,
               offset,
               returned: pageEvents.length,
+              reviewed_implications_returned: filteredImplications.length,
               source_filter: sourceFilter === "all" ? "" : sourceFilter,
               party_filter: "",
               search: state.search || "",
               static_snapshot: true,
             },
             events: pageEvents,
+            reviewed_implications: filteredImplications,
           };
 
           updateSummaryStrip(payload.meta || {}, state.party);
           updateActiveChips();
           renderStats(payload);
+          renderReviewedImplications(filteredImplications);
           renderPagerInfo(payload);
           renderEvents(pageEvents);
           refs.debugLabel.textContent = `static snapshot · total=${filtered.length} · limit=${limit} · offset=${offset}`;
@@ -1420,6 +1772,8 @@
           }
         } catch (error) {
           refs.events.innerHTML = "";
+          refs.reviewedImplications.hidden = true;
+          refs.reviewedImplications.innerHTML = "";
           refs.loading.className = "error";
           const help = API_BASE_OVERRIDE ? "" : " Añade ?api=http://127.0.0.1:9010 y recarga (o ejecuta el server local).";
           refs.loading.innerHTML = `No se pudo cargar ni API ni snapshot estático.${help}<br><br>${escapeHtml(error?.message || String(error))}`;

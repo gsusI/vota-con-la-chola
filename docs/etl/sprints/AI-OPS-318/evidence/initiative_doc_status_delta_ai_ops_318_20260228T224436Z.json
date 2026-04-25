@@ -1,0 +1,64 @@
+{
+  "slice": "AI-OPS-318",
+  "timestamp_utc": "20260228T224436Z",
+  "overall": {
+    "downloaded_doc_links_before": 4341,
+    "downloaded_doc_links_after": 4347,
+    "downloaded_doc_links_delta": 6,
+    "missing_doc_links_before": 5212,
+    "missing_doc_links_after": 5206,
+    "missing_doc_links_delta": -6,
+    "missing_doc_links_actionable_before": 5028,
+    "missing_doc_links_actionable_after": 5022,
+    "missing_doc_links_actionable_delta": -6,
+    "effective_downloaded_doc_links_pct_before": 46.33,
+    "effective_downloaded_doc_links_pct_after": 46.4
+  },
+  "senado_iniciativas": {
+    "downloaded_doc_links_before": 3529,
+    "downloaded_doc_links_after": 3535,
+    "downloaded_doc_links_delta": 6,
+    "missing_doc_links_before": 5212,
+    "missing_doc_links_after": 5206,
+    "missing_doc_links_delta": -6,
+    "missing_doc_links_actionable_before": 5028,
+    "missing_doc_links_actionable_after": 5022,
+    "missing_doc_links_actionable_delta": -6,
+    "missing_status_buckets_before": [
+      {
+        "status": 403,
+        "count": 2576
+      },
+      {
+        "status": 500,
+        "count": 1958
+      },
+      {
+        "status": 0,
+        "count": 411
+      },
+      {
+        "status": 404,
+        "count": 267
+      }
+    ],
+    "missing_status_buckets_after": [
+      {
+        "status": 403,
+        "count": 2576
+      },
+      {
+        "status": 500,
+        "count": 1893
+      },
+      {
+        "status": 0,
+        "count": 411
+      },
+      {
+        "status": 404,
+        "count": 326
+      }
+    ]
+  }
+}

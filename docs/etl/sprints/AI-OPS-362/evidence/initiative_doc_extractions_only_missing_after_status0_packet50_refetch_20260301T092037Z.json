@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 50,
+  "upserted": 50,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 50
+  },
+  "by_doc_format": {
+    "xml": 50
+  },
+  "sample": [
+    {
+      "source_record_pk": 147841,
+      "sample_initiative_id": "senado:leg14:exp:621/000042",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de residuos y suelos contaminados para una economía circular. (621/000042)"
+    },
+    {
+      "source_record_pk": 147835,
+      "sample_initiative_id": "senado:leg14:exp:621/000036",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2022. (621/000036)"
+    },
+    {
+      "source_record_pk": 147822,
+      "sample_initiative_id": "senado:leg14:exp:621/000020",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de cambio climático y transición energética. (621/000020)"
+    },
+    {
+      "source_record_pk": 147815,
+      "sample_initiative_id": "senado:leg14:exp:621/000013",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2021. (621/000013)"
+    },
+    {
+      "source_record_pk": 147823,
+      "sample_initiative_id": "senado:leg14:exp:621/000021",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de protección integral a la infancia y la adolescencia frente a la violencia. (621/000021)"
+    },
+    {
+      "source_record_pk": 147814,
+      "sample_initiative_id": "senado:leg14:exp:621/000012",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica por la que se modifica la Ley Orgánica 2/2006, de 3 de mayo, de Educación. (621/000012)"
+    },
+    {
+      "source_record_pk": 147839,
+      "sample_initiative_id": "senado:leg14:exp:621/000040",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de protección de los consumidores y usuarios frente a situaciones de vulnerabilidad social y económica (procedente del Real Decreto-ley 1/2021, de 19 de enero). (621/000040)"
+    },
+    {
+      "source_record_pk": 147816,
+      "sample_initiative_id": "senado:leg14:exp:621/000014",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas urgentes en materia de protección y asistencia a las víctimas de violencia de género (procedente del Real Decreto-ley 12/2020, de 31 de marzo). (621/000014)"
+    },
+    {
+      "source_record_pk": 147825,
+      "sample_initiative_id": "senado:leg14:exp:621/000023",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas de prevención y lucha contra el fraude fiscal, de transposición de la Directiva (UE) 2016/1164, del Consejo, de 12 de julio de 2016, por la que se establecen normas contra las prácticas de elusión fiscal que inciden directamente en el funcionamiento del mercado interior, de modificación de d…"
+    },
+    {
+      "source_record_pk": 147817,
+      "sample_initiative_id": "senado:leg14:exp:621/000015",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas urgentes de prevención, contención y coordinación para hacer frente a la crisis sanitaria ocasionada por el COVID-19 (procedente del Real Decreto-ley 21/2020, de 9 de junio). (621/000015)"
+    },
+    {
+      "source_record_pk": 147833,
+      "sample_initiative_id": "senado:leg14:exp:621/000034",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se establece el ingreso mínimo vital (procedente del Real Decreto-ley 20/2020, de 29 de mayo). (621/000034)"
+    },
+    {
+      "source_record_pk": 147827,
+      "sample_initiative_id": "senado:leg14:exp:621/000025",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de trabajo a distancia (procedente del Real Decreto-ley 28/2020, de 22 de septiembre). (621/000025)"
+    },
+    {
+      "source_record_pk": 147837,
+      "sample_initiative_id": "senado:leg14:exp:621/000038",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de garantía del poder adquisitivo de las pensiones y de otras medidas de refuerzo de la sostenibilidad financiera y social del sistema público de pensiones. (621/000038)"
+    },
+    {
+      "source_record_pk": 147830,
+      "sample_initiative_id": "senado:leg14:exp:621/000029",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el Real Decreto-ley 17/2020, de 5 de mayo, por el que se aprueban medidas de apoyo al sector cultural y de carácter tributario para hacer frente al impacto económico y social del COVID-2019 [antes denominado Proyecto de Ley por la que se aprueban medidas de apoyo al sector cultur…"
+    },
+    {
+      "source_record_pk": 147812,
+      "sample_initiative_id": "senado:leg14:exp:621/000010",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adoptan determinadas medidas urgentes en materia de agricultura y alimentación (procedente del Real Decreto-ley 5/2020, de 25 de febrero). (621/000010)"
+    },
+    {
+      "source_record_pk": 147834,
+      "sample_initiative_id": "senado:leg14:exp:621/000035",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de convivencia universitaria. (621/000035)"
+    },
+    {
+      "source_record_pk": 147836,
+      "sample_initiative_id": "senado:leg14:exp:621/000037",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas urgentes para la reducción de la temporalidad en el empleo público (procedente del Real Decreto-ley 14/2021, de 6 de julio). (621/000037)"
+    },
+    {
+      "source_record_pk": 147821,
+      "sample_initiative_id": "senado:leg14:exp:621/000019",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se reforma la legislación civil y procesal para el apoyo a las personas con discapacidad en el ejercicio de su capacidad jurídica. (621/000019)"
+    },
+    {
+      "source_record_pk": 147824,
+      "sample_initiative_id": "senado:leg14:exp:621/000022",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de protección de datos personales tratados para fines de prevención, detección, investigación y enjuiciamiento de infracciones penales y de ejecución de sanciones penales. (621/000022)"
+    },
+    {
+      "source_record_pk": 147831,
+      "sample_initiative_id": "senado:leg14:exp:621/000030",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el texto refundido de la Ley del Estatuto de los Trabajadores, aprobado por el Real Decreto Legislativo 2/2015, de 23 de octubre, para garantizar los derechos laborales de las personas dedicadas al reparto en el ámbito de plataformas digitales (procedente del Real Decreto-ley 9/2…"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

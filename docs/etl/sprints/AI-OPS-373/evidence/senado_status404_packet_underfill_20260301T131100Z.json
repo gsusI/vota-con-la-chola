@@ -1,0 +1,14 @@
+{
+  "sprint": "AI-OPS-373",
+  "timestamp": "20260301T131100Z",
+  "packet_requested": 50,
+  "packet_export_limit50_rows": 0,
+  "packet_export_limit500_rows": 272,
+  "packet_effective_rows": 50,
+  "reason": "limit50 depleted by redundant_global dedupe order",
+  "artifacts": {
+    "packet_limit50_csv": "docs/etl/sprints/AI-OPS-373/exports/senado_status404_linked_packet50_20260301T131100Z.csv",
+    "packet_limit500_csv": "docs/etl/sprints/AI-OPS-373/exports/senado_status404_linked_packet500_20260301T131100Z.csv",
+    "packet_effective_csv": "docs/etl/sprints/AI-OPS-373/exports/senado_status404_linked_packet50_effective_20260301T131100Z.csv"
+  }
+}

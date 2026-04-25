@@ -1,0 +1,58 @@
+{
+  "generated_at_utc": "20260301T085854Z",
+  "sprint": "AI-OPS-357",
+  "lane": "status403_linked_to_votes_packet50",
+  "packet_size": 50,
+  "runtime_seconds": 9.48,
+  "retry_summary": {
+    "candidate_urls": 50,
+    "urls_to_fetch": 50,
+    "fetched_ok": 50,
+    "failures_total": 0,
+    "archive_hits": 0,
+    "archive_fetched_ok": 0
+  },
+  "postprocess": {
+    "extractions_seen": 99,
+    "extractions_upserted": 99,
+    "extractions_needs_review": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": {
+      "before": 4853,
+      "after": 4903,
+      "delta": 50
+    },
+    "missing_doc_links_actionable": {
+      "before": 4509,
+      "after": 4459,
+      "delta": -50
+    },
+    "missing_urls": {
+      "before": 733,
+      "after": 683,
+      "delta": -50
+    },
+    "blocked_403_urls": {
+      "before": 164,
+      "after": 114,
+      "delta": -50
+    },
+    "zero_doc_initiatives": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "linked_to_votes_with_downloaded_docs": {
+      "before": 751,
+      "after": 751,
+      "delta": 0
+    }
+  },
+  "dod_check": {
+    "runtime_guard_ok": true,
+    "delta_target_met": true,
+    "postprocess_ok": true,
+    "all_passed": true
+  }
+}

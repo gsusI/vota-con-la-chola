@@ -1,0 +1,234 @@
+{
+  "sources": [
+    "bde_series_api"
+  ],
+  "source_records_seen": 60,
+  "source_records_mapped": 60,
+  "source_records_skipped": 0,
+  "indicator_domains_seeded": 1,
+  "indicator_domain_keys_seeded": [
+    "energia_medio_ambiente"
+  ],
+  "indicator_series_upserted": 60,
+  "indicator_series_with_domain_id": 27,
+  "indicator_series_unresolved_domain": 33,
+  "indicator_points_upserted": 1804,
+  "indicator_points_deleted_stale": 0,
+  "observation_records_upserted": 1804,
+  "observation_records_deleted_stale": 0,
+  "points_skipped_unparseable_date": 0,
+  "skips": [
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbaa301",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbaa304",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbaa317",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbaa372",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbaa572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbac572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad301",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad302",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad306",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad311",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad317",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad472",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbad572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbae572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbaf572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbas572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo020",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo072",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo303",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo305",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo307",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo308",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo309",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo310",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo311",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo314",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo315",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo316",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo320",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo333",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo349",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbo572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    },
+    {
+      "source_id": "bde_series_api",
+      "source_record_id": "series:d_1nbbp572",
+      "reason": "unresolved_domain",
+      "domain_key": null
+    }
+  ],
+  "indicator_series_total": 60,
+  "indicator_points_total": 1804,
+  "indicator_observation_records_total": 1804,
+  "indicator_series_with_provenance": 60,
+  "observation_records_with_provenance": 1804,
+  "indicator_series_by_source": {
+    "bde_series_api": 60
+  },
+  "indicator_points_by_source": {
+    "bde_series_api": 1804
+  },
+  "observation_records_by_source": {
+    "bde_series_api": 1804
+  }
+}

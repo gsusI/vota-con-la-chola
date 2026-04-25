@@ -1,0 +1,30 @@
+{
+  "ts": "20260301T023238Z",
+  "before": {
+    "downloaded_doc_links": 4424,
+    "missing_doc_links": 5129,
+    "missing_doc_links_actionable": 4945,
+    "effective_downloaded_doc_links_pct": 47.22,
+    "missing_urls": 1169,
+    "blocked_403_urls": 160,
+    "unknown_status_urls": 217
+  },
+  "after": {
+    "downloaded_doc_links": 4443,
+    "missing_doc_links": 5110,
+    "missing_doc_links_actionable": 4925,
+    "effective_downloaded_doc_links_pct": 47.43,
+    "missing_urls": 1149,
+    "blocked_403_urls": 160,
+    "unknown_status_urls": 217
+  },
+  "delta": {
+    "downloaded_doc_links": 19,
+    "missing_doc_links": -19,
+    "missing_doc_links_actionable": -20,
+    "effective_downloaded_doc_links_pct": 0.21000000000000085,
+    "missing_urls": -20,
+    "blocked_403_urls": 0,
+    "unknown_status_urls": 0
+  }
+}

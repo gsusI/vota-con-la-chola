@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-02-28T22:28:15+00:00",
+  "baseline": "before_ai_ops_316",
+  "current": "after_ai_ops_316",
+  "totals": {
+    "missing_urls": {
+      "before": 1259,
+      "after": 1252,
+      "delta": -7
+    },
+    "missing_initiatives": {
+      "before": 627,
+      "after": 627,
+      "delta": 0
+    },
+    "blocked_403_urls": {
+      "before": 705,
+      "after": 666,
+      "delta": -39
+    },
+    "blocked_500_urls": {
+      "before": 134,
+      "after": 101,
+      "delta": -33
+    },
+    "unknown_status_urls": {
+      "before": 377,
+      "after": 377,
+      "delta": 0
+    },
+    "zero_doc_initiatives": {
+      "before": 6,
+      "after": 6,
+      "delta": 0
+    }
+  }
+}

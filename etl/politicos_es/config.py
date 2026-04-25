@@ -302,6 +302,17 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "min_records_loaded_strict": 2,
         "fallback_file": "etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
     },
+    "dir3_unidades_age": {
+        "name": "DIR3 - Unidades organicas de la Administracion General del Estado",
+        "scope": "organigrama",
+        "default_url": (
+            "https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/"
+            "Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741"
+        ),
+        "format": "xlsx",
+        "min_records_loaded_strict": 1000,
+        "fallback_file": "etl/data/raw/samples/dir3_unidades_age_sample.json",
+    },
     # AI-OPS-09 source_id naming contract (money/outcomes expansion).
     # Keep these ids stable: tracker mapping and strict-gate reconciliation depend on them.
     "placsp_sindicacion": {

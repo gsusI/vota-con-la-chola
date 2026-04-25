@@ -15,6 +15,7 @@ from scripts.publicar_hf_snapshot import (
     ensure_liberty_atlas_release_latest_for_publish,
     ensure_quality_report_for_publish,
     extract_quality_report_summary,
+    extract_source_catalog_summary,
     export_source_legal_metadata,
     export_ingestion_runs_csv,
     load_dotenv,
@@ -56,6 +57,7 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             )
             (published_dir / "proximas-elecciones-espana.json").write_text("{}", encoding="utf-8")
             (published_dir / "poblacion_municipios_es.json").write_text("{}", encoding="utf-8")
+            (published_dir / "source-catalog-latest.json").write_text("{}", encoding="utf-8")
 
             files = collect_published_files(published_dir, "2026-02-12")
             names = [path.name for path in files]
@@ -64,6 +66,7 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             self.assertIn("representantes-es-2026-02-12.json", names)
             self.assertIn("proximas-elecciones-espana.json", names)
             self.assertIn("liberty-restrictions-atlas-release-latest.json", names)
+            self.assertIn("source-catalog-latest.json", names)
 
     def test_ensure_liberty_atlas_release_latest_for_publish_ok(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -191,6 +194,37 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             self.assertEqual(summary["file_name"], "votaciones-kpis-es-2026-02-12.json.gz")
             self.assertFalse(summary["vote_gate_passed"])
             self.assertEqual(summary["events_total"], 7)
+
+    def test_extract_source_catalog_summary_prefers_snapshot_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            published_dir = Path(tmp)
+            snapshot_path = published_dir / "source-catalog-2026-02-12.json"
+            snapshot_path.write_text(
+                json.dumps(
+                    {
+                        "summary": {
+                            "sources_total": 10,
+                            "desired_total": 9,
+                            "in_db_total": 8,
+                            "with_network_total": 7,
+                            "blocked_total": 2,
+                            "mismatch_total": 1,
+                        }
+                    },
+                    ensure_ascii=True,
+                ),
+                encoding="utf-8",
+            )
+            latest_path = published_dir / "source-catalog-latest.json"
+            latest_path.write_text(
+                json.dumps({"summary": {"sources_total": 99}}, ensure_ascii=True),
+                encoding="utf-8",
+            )
+
+            summary = extract_source_catalog_summary([snapshot_path, latest_path], "2026-02-12")
+            self.assertEqual(summary["file_name"], "source-catalog-2026-02-12.json")
+            self.assertEqual(summary["sources_total"], 10)
+            self.assertEqual(summary["blocked_total"], 2)
 
     def test_export_ingestion_runs_csv(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

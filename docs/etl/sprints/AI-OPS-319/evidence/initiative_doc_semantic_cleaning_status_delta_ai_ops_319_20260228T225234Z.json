@@ -1,0 +1,62 @@
+{
+  "scope": "initiatives_overall_and_senado",
+  "overall_metrics_delta": {
+    "total_doc_links": {
+      "before": 9553,
+      "after": 9553,
+      "delta": 0
+    },
+    "downloaded_doc_links": {
+      "before": 4347,
+      "after": 4347,
+      "delta": 0
+    },
+    "missing_doc_links": {
+      "before": 5206,
+      "after": 5206,
+      "delta": 0
+    },
+    "missing_doc_links_actionable": {
+      "before": 5022,
+      "after": 5022,
+      "delta": 0
+    },
+    "doc_links_missing_fetch_status": {
+      "before": 297,
+      "after": 297,
+      "delta": 0
+    }
+  },
+  "senado_metrics_delta": {
+    "total_doc_links": {
+      "before": 8741,
+      "after": 8741,
+      "delta": 0
+    },
+    "downloaded_doc_links": {
+      "before": 3535,
+      "after": 3535,
+      "delta": 0
+    },
+    "missing_doc_links": {
+      "before": 5206,
+      "after": 5206,
+      "delta": 0
+    },
+    "missing_doc_links_actionable": {
+      "before": 5022,
+      "after": 5022,
+      "delta": 0
+    },
+    "doc_links_missing_fetch_status": {
+      "before": 297,
+      "after": 297,
+      "delta": 0
+    }
+  },
+  "semantic_noise_delta": {
+    "noise_rows_total_delta": -18,
+    "needs_review_rows_delta": 0
+  },
+  "semantic_noise_rows_changed": 18
+}

@@ -1,7 +1,9 @@
 # Roadmap técnico
 
 Nota:
+- `ROADMAP.md` manda sobre el futuro y la secuencia del proyecto.
 - Visión macro y marco "acción revelada + impacto": `docs/roadmap.md`.
+- Este documento es derivado: operacionaliza trabajo cercano ya decidido en `ROADMAP.md`.
 - Este documento se centra en la ejecución de corto plazo para cerrar el loop "dicen/hacen", fiabilidad y recomendación con trazabilidad.
 - Estimación de esfuerzo en puntos (misma escala que `docs/roadmap.md`).
 - Backlog operativo + estado real: `docs/etl/e2e-scrape-load-tracker.md` y dashboard `/explorer-sources`.

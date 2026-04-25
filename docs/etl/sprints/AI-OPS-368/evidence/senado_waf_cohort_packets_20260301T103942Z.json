@@ -1,0 +1,171 @@
+{
+  "generated_at": "2026-03-01T10:39:43+00:00",
+  "status": "ok",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "limits": {
+    "cohort_top_n": 6,
+    "max_urls_per_cohort": 20,
+    "max_total_rows": 120,
+    "include_zero_doc_priority": true,
+    "max_zero_doc_rows": 20,
+    "strict_min_packet_rows": 1,
+    "strict_min_cohorts": 1
+  },
+  "totals": {
+    "missing_urls": 384,
+    "missing_initiatives": 230,
+    "blocked_403_urls": 32,
+    "blocked_403_rate": 0.083333,
+    "selected_cohorts_total": 6,
+    "zero_doc_priority_total": 0,
+    "packet_rows_total": 108,
+    "packet_unique_initiatives_total": 97
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 404,
+      "count": 329
+    },
+    {
+      "status": 403,
+      "count": 32
+    },
+    {
+      "status": 0,
+      "count": 18
+    },
+    {
+      "status": 200,
+      "count": 5
+    }
+  ],
+  "selected_cohorts": [
+    {
+      "cohort": "leg10:tipo610",
+      "legislature": "10",
+      "tipo_expediente": "610",
+      "missing_urls": 271,
+      "blocked_403_urls": 18,
+      "blocked_403_rate": 0.066421,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 253
+        },
+        {
+          "status": 403,
+          "count": 18
+        }
+      ]
+    },
+    {
+      "cohort": "leg12:tipo610",
+      "legislature": "12",
+      "tipo_expediente": "610",
+      "missing_urls": 15,
+      "blocked_403_urls": 14,
+      "blocked_403_rate": 0.933333,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 14
+        },
+        {
+          "status": 404,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "cohort": "leg14:tipo621",
+      "legislature": "14",
+      "tipo_expediente": "621",
+      "missing_urls": 22,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 20
+        },
+        {
+          "status": 0,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "cohort": "leg14:tipo610",
+      "legislature": "14",
+      "tipo_expediente": "610",
+      "missing_urls": 19,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 19
+        }
+      ]
+    },
+    {
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 18,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 9
+        },
+        {
+          "status": 404,
+          "count": 5
+        },
+        {
+          "status": 200,
+          "count": 4
+        }
+      ]
+    },
+    {
+      "cohort": "leg14:tipo624",
+      "legislature": "14",
+      "tipo_expediente": "624",
+      "missing_urls": 16,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 10
+        },
+        {
+          "status": 0,
+          "count": 6
+        }
+      ]
+    }
+  ],
+  "zero_doc_priority": [],
+  "checks": {
+    "has_missing_urls": true,
+    "selected_cohorts_min_met": true,
+    "packet_rows_min_met": true
+  },
+  "strict_fail_reasons": [],
+  "db": "etl/data/staging/politicos-es.db"
+}

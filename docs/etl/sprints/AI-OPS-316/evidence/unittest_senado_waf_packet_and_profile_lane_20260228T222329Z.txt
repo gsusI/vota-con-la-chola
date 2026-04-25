@@ -1,0 +1,231 @@
+{
+  "generated_at": "2026-02-28T22:28:58+00:00",
+  "status": "ok",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "limits": {
+    "cohort_top_n": 2,
+    "max_urls_per_cohort": 2,
+    "max_total_rows": 10,
+    "include_zero_doc_priority": true,
+    "max_zero_doc_rows": 5,
+    "strict_min_packet_rows": 1,
+    "strict_min_cohorts": 1
+  },
+  "totals": {
+    "missing_urls": 3,
+    "missing_initiatives": 2,
+    "blocked_403_urls": 2,
+    "blocked_403_rate": 0.666667,
+    "selected_cohorts_total": 2,
+    "zero_doc_priority_total": 2,
+    "packet_rows_total": 3,
+    "packet_unique_initiatives_total": 2
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 403,
+      "count": 2
+    },
+    {
+      "status": 500,
+      "count": 1
+    }
+  ],
+  "selected_cohorts": [
+    {
+      "cohort": "leg14:tipo621",
+      "legislature": "14",
+      "tipo_expediente": "621",
+      "missing_urls": 2,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 0.5,
+      "blocked_500_urls": 1,
+      "status_buckets": [
+        {
+          "status": 500,
+          "count": 1
+        },
+        {
+          "status": 403,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 1,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 1.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "zero_doc_priority": [
+    {
+      "initiative_id": "senado:leg14:exp:622/000002",
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 1,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 1.0,
+      "top_doc_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000002",
+      "top_last_http_status": 403,
+      "top_attempts": 4,
+      "top_last_attempt_at": "2026-02-28T10:10:00Z",
+      "top_method_hint": "playwright",
+      "doc_kind": "bocg"
+    },
+    {
+      "initiative_id": "senado:leg14:exp:621/000001",
+      "cohort": "leg14:tipo621",
+      "legislature": "14",
+      "tipo_expediente": "621",
+      "missing_urls": 2,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 0.5,
+      "top_doc_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000001",
+      "top_last_http_status": 403,
+      "top_attempts": 6,
+      "top_last_attempt_at": "2026-02-28T10:00:00Z",
+      "top_method_hint": "http",
+      "doc_kind": "bocg"
+    }
+  ],
+  "checks": {
+    "has_missing_urls": true,
+    "selected_cohorts_min_met": true,
+    "packet_rows_min_met": true
+  },
+  "strict_fail_reasons": [],
+  "db": "<abs>/packets.db"
+}
+{
+  "generated_at": "2026-02-28T22:28:58+00:00",
+  "status": "degraded",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "limits": {
+    "cohort_top_n": 4,
+    "max_urls_per_cohort": 25,
+    "max_total_rows": 120,
+    "include_zero_doc_priority": true,
+    "max_zero_doc_rows": 25,
+    "strict_min_packet_rows": 1,
+    "strict_min_cohorts": 1
+  },
+  "totals": {
+    "missing_urls": 0,
+    "missing_initiatives": 0,
+    "blocked_403_urls": 0,
+    "blocked_403_rate": 0.0,
+    "selected_cohorts_total": 0,
+    "zero_doc_priority_total": 0,
+    "packet_rows_total": 0,
+    "packet_unique_initiatives_total": 0
+  },
+  "status_buckets_missing_urls": [],
+  "selected_cohorts": [],
+  "zero_doc_priority": [],
+  "checks": {
+    "has_missing_urls": false,
+    "selected_cohorts_min_met": false,
+    "packet_rows_min_met": false
+  },
+  "strict_fail_reasons": [
+    "no_missing_urls",
+    "selected_cohorts_below_min",
+    "packet_rows_below_min"
+  ],
+  "db": "<abs>/empty.db"
+}
+{
+  "generated_at": "2026-02-28T22:28:58+00:00",
+  "status": "degraded",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "totals": {
+    "missing_urls": 1,
+    "missing_initiatives": 1,
+    "blocked_403_urls": 0,
+    "blocked_403_rate": 0.0,
+    "blocked_500_urls": 1,
+    "unknown_status_urls": 0,
+    "zero_doc_initiatives": 1
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 500,
+      "count": 1
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 1,
+      "status_buckets": [
+        {
+          "status": 500,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000801"
+      ]
+    }
+  ],
+  "zero_doc_priority": [
+    {
+      "initiative_id": "senado:leg14:exp:622/000801",
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "top_doc_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000801",
+      "top_last_http_status": 500,
+      "top_attempts": 2,
+      "top_last_attempt_at": "2026-02-27T00:10:00Z",
+      "top_method_hint": "http"
+    }
+  ],
+  "checks": {
+    "has_missing_urls": true,
+    "has_403_signal": false,
+    "has_cohorts": true,
+    "has_zero_doc_priority": true
+  },
+  "db": "<abs>/waf_strict.db"
+}

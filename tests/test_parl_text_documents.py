@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import gzip
 import json
 import os
 import tempfile
@@ -16,8 +15,6 @@ from etl.parlamentario_es.text_documents import (
     _PlaywrightFetchConfig,
     _PlaywrightFetcher,
     _ensure_playwright_nodejs_runtime,
-    _maybe_decompress_gzip_payload,
-    _prioritize_senado_bocg_urls,
     _senado_direct_variant_urls,
     backfill_initiative_documents_from_parl_initiatives,
     backfill_text_documents_from_topic_evidence,
@@ -40,32 +37,6 @@ class TestParlTextDocuments(unittest.TestCase):
         self.assertIn(
             "http://www.senado.es/web/ficopendataservlet?legis=9&tipoFich=12&tipoEx=610&numEx=000127",
             variants,
-        )
-
-    def test_prioritize_senado_bocg_urls_prefers_publication_pdf_and_xml_before_servlet(self) -> None:
-        ordered = _prioritize_senado_bocg_urls(
-            [
-                "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000010",
-                "https://www.senado.es/legis15/publicaciones/pdf/senado/bocg/BOCG_D_15_42_808.PDF",
-                "https://www.senado.es/legis15/expedientes/622/xml/INI-3-622000010.xml",
-                "https://www.senado.es/legis15/expedientes/622/enmiendas/global_enmiendas_vetos_15_622000010.xml",
-            ]
-        )
-        self.assertEqual(
-            ordered,
-            [
-                "https://www.senado.es/legis15/publicaciones/pdf/senado/bocg/BOCG_D_15_42_808.PDF",
-                "https://www.senado.es/legis15/expedientes/622/xml/INI-3-622000010.xml",
-                "https://www.senado.es/legis15/expedientes/622/enmiendas/global_enmiendas_vetos_15_622000010.xml",
-                "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000010",
-            ],
-        )
-
-    def test_maybe_decompress_gzip_payload_recovers_html(self) -> None:
-        raw = gzip.compress(b"<html><body>detalle senado</body></html>")
-        self.assertEqual(
-            _maybe_decompress_gzip_payload(raw),
-            b"<html><body>detalle senado</body></html>",
         )
 
     def test_ensure_playwright_nodejs_runtime_uses_system_node_fallback(self) -> None:

@@ -1,0 +1,203 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 21,
+  "upserted": 21,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_window": 1,
+    "title_hint_strong": 20
+  },
+  "by_doc_format": {
+    "html": 20,
+    "xml": 1
+  },
+  "sample": [
+    {
+      "source_record_pk": 147902,
+      "sample_initiative_id": "senado:leg14:exp:624/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de regulación de la eutanasia. (624/000002)"
+    },
+    {
+      "source_record_pk": 147899,
+      "sample_initiative_id": "senado:leg14:exp:622/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para reconocer el carácter de tribunal consuetudinario y tradicional al Juzgado Privativo de Aguas de Orihuela (Alicante/Alacant) y Pueblos de su Marco y al Tribunal del Comuner del Rollet de Gràcia de l'Horta d'A…"
+    },
+    {
+      "source_record_pk": 147904,
+      "sample_initiative_id": "senado:leg14:exp:624/000004",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de derogación del artículo 315 apartado 3 del Código Penal. (624/000004)"
+    },
+    {
+      "source_record_pk": 147903,
+      "sample_initiative_id": "senado:leg14:exp:624/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para el establecimiento del régimen jurídico aplicable al Consejo General del Poder Judicial en funciones. (624/000003)"
+    },
+    {
+      "source_record_pk": 147893,
+      "sample_initiative_id": "senado:leg14:exp:621/000043",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de ordenación e integración de la Formación Profesional. (621/000043)"
+    },
+    {
+      "source_record_pk": 147894,
+      "sample_initiative_id": "senado:leg14:exp:622/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación del Código Penal para la erradicación de la esterilización forzada o no consentida de personas con discapacidad incapacitadas judicialmente. (622/000002)"
+    },
+    {
+      "source_record_pk": 147906,
+      "sample_initiative_id": "senado:leg14:exp:624/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica complementaria de la Ley por la que se modifica la Ley 20/2011, de 21 de julio, del Registro Civil, de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial y de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (624/000006)"
+    },
+    {
+      "source_record_pk": 147897,
+      "sample_initiative_id": "senado:leg14:exp:622/000006",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica el Real Decreto de 14 de septiembre de 1882 por el que se aprueba la Ley de Enjuiciamiento Criminal, para incorporar la maternidad y paternidad entre las causas de suspensión del juicio oral. (622/000006)"
+    },
+    {
+      "source_record_pk": 147900,
+      "sample_initiative_id": "senado:leg14:exp:622/000014",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de medidas para el desarrollo del Pacto de Estado contra la Violencia de Género. (622/000014)"
+    },
+    {
+      "source_record_pk": 147912,
+      "sample_initiative_id": "senado:leg14:exp:622/000030",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de financiación del transporte público urbano y metropolitano. (622/000030)"
+    },
+    {
+      "source_record_pk": 147895,
+      "sample_initiative_id": "senado:leg14:exp:622/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido, para aplicar el tipo impositivo del IVA del 4% a la prestación de todos los servicios de atención a la dependencia, no exentos. (622/000003)"
+    },
+    {
+      "source_record_pk": 147898,
+      "sample_initiative_id": "senado:leg14:exp:622/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 19/2007, de 11 de julio, contra la violencia, el racismo, la xenofobia y la intolerancia en el deporte, para erradicar la homofobia, la bifobia y la transfobia. (622/000007)"
+    },
+    {
+      "source_record_pk": 147910,
+      "sample_initiative_id": "senado:leg14:exp:622/000062",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley reguladora de los colectivos de usuarios de cannabis. (622/000062)"
+    },
+    {
+      "source_record_pk": 147913,
+      "sample_initiative_id": "senado:leg14:exp:622/000034",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de medidas urgentes para el impulso de la radiodifusión sonora digital terrestre. (622/000034)"
+    },
+    {
+      "source_record_pk": 147901,
+      "sample_initiative_id": "senado:leg14:exp:622/000023",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 14/2011, de 1 de junio, de la Ciencia, la Tecnología y la Innovación. (622/000023)"
+    },
+    {
+      "source_record_pk": 147909,
+      "sample_initiative_id": "senado:leg14:exp:622/000044",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 5/1995, de 22 de mayo, del Tribunal del Jurado y de la Ley de Enjuiciamiento Criminal, promulgada por Real Decreto de 14 de septiembre de 1882. (622/000044)"
+    },
+    {
+      "source_record_pk": 147908,
+      "sample_initiative_id": "senado:leg15:exp:624/000001",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de amnistía para la normalización institucional, política y social en Cataluña. (624/000001)"
+    },
+    {
+      "source_record_pk": 147896,
+      "sample_initiative_id": "senado:leg14:exp:622/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, aprobado por el Real Decreto Legislativo 1/2013, de 29 de noviembre, para establecer y regular la accesibilidad cognitiva y sus condiciones de exigencia y aplicación. (622/000…"
+    },
+    {
+      "source_record_pk": 147905,
+      "sample_initiative_id": "senado:leg14:exp:624/000005",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 20/2011, de 21 de julio, del Registro Civil. (624/000005)"
+    },
+    {
+      "source_record_pk": 147907,
+      "sample_initiative_id": "senado:leg14:exp:624/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de mejora de la protección de las personas huérfanas víctimas de la violencia de género. (624/000008)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

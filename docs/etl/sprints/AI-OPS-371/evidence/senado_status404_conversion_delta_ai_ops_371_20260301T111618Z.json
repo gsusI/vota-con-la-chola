@@ -1,0 +1,62 @@
+{
+  "sprint": "AI-OPS-371",
+  "timestamp": "20260301T111618Z",
+  "kpi_before": {
+    "downloaded_doc_links": 5233,
+    "missing_doc_links_actionable": 4129,
+    "missing_urls": 353,
+    "blocked_403_urls": 22,
+    "unknown_status_urls": 0,
+    "status404_urls": 331,
+    "status403_urls": 22
+  },
+  "kpi_after": {
+    "downloaded_doc_links": 5253,
+    "missing_doc_links_actionable": 4109,
+    "missing_urls": 333,
+    "blocked_403_urls": 61,
+    "unknown_status_urls": 0,
+    "status404_urls": 272,
+    "status403_urls": 61,
+    "downloaded_doc_links_missing_excerpt": 0,
+    "downloaded_doc_links_missing_extraction": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": 20,
+    "missing_doc_links_actionable": -20,
+    "missing_urls": -20,
+    "blocked_403_urls": 39,
+    "unknown_status_urls": 0,
+    "status404_urls": -59,
+    "status403_urls": 39
+  },
+  "retry_status404_underfilled_packet": {
+    "packet_rows": 9,
+    "candidate_urls": 9,
+    "urls_to_fetch": 9,
+    "fetched_ok": 2,
+    "archive_hits": 2,
+    "archive_fetched_ok": 2,
+    "failures": 7,
+    "direct_variant_attempted_urls": 7,
+    "direct_variant_fetched_ok": 0
+  },
+  "retry_status404_packet50_effective": {
+    "packet_rows": 50,
+    "candidate_urls": 50,
+    "urls_to_fetch": 50,
+    "fetched_ok": 18,
+    "archive_hits": 19,
+    "archive_fetched_ok": 18,
+    "failures": 30,
+    "direct_variant_attempted_urls": 32,
+    "direct_variant_fetched_ok": 0
+  },
+  "postprocess": {
+    "excerpts_seen": 0,
+    "excerpts_updated": 0,
+    "extractions_seen": 20,
+    "extractions_upserted": 20,
+    "extractions_needs_review": 0
+  }
+}

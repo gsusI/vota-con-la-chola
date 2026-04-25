@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 23,
+  "upserted": 23,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 23
+  },
+  "by_doc_format": {
+    "html": 23
+  },
+  "sample": [
+    {
+      "source_record_pk": 147054,
+      "sample_initiative_id": "senado:leg10:exp:610/000071",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Convenio relativo a garantías internacionales sobre elementos de equipo móvil, hecho en Ciudad del Cabo el 16 de noviembre de 2001. (610/000071)"
+    },
+    {
+      "source_record_pk": 147041,
+      "sample_initiative_id": "senado:leg10:exp:610/000056",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la República de Colombia al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000056)"
+    },
+    {
+      "source_record_pk": 147042,
+      "sample_initiative_id": "senado:leg10:exp:610/000057",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Declaración de aceptación por España de la adhesión de la Antigua República Yugoslava de Macedonia al Convenio sobre la obtención de pruebas en el extranjero en materia civil o mercantil, hecho en La Haya el 18 de marzo de 1970. (610/000057)"
+    },
+    {
+      "source_record_pk": 147058,
+      "sample_initiative_id": "senado:leg10:exp:610/000076",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo entre el Reino de España y la Confederación Suiza que modifica el Convenio para evitar la doble imposición en materia de impuestos sobre la renta y sobre el patrimonio firmado en Berna el 26 de abril de 1966, y su Protocolo, modificados por el Protocolo firmado en Madrid el 29 de junio de 2006, hecho en Madr…"
+    },
+    {
+      "source_record_pk": 147044,
+      "sample_initiative_id": "senado:leg10:exp:610/000060",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Tratado sobre el derecho de Patentes, Reglamento del Tratado sobre el derecho de Patentes y Declaraciones concertadas por la Conferencia Diplomática relativas al Tratado y al Reglamento, hechos en Ginebra el 1 de junio de 2000. (610/000060)"
+    },
+    {
+      "source_record_pk": 147059,
+      "sample_initiative_id": "senado:leg10:exp:610/000077",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Denuncia del Acuerdo entre los Estados participantes en la Brigada Multinacional de Fuerzas de Reserva de Despliegue Rápido para Operaciones de la ONU referente al Estatuto de sus Fuerzas (SHIRBRIG), hecho en Copenhague el 13 de diciembre de 2001. (610/000077)"
+    },
+    {
+      "source_record_pk": 147049,
+      "sample_initiative_id": "senado:leg10:exp:610/000065",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y el Reino de Marruecos sobre supresión recíproca de visados en pasaportes de servicio, hecho en Rabat el 3 de octubre de 2012. (610/000065)"
+    },
+    {
+      "source_record_pk": 147047,
+      "sample_initiative_id": "senado:leg10:exp:610/000063",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Gobierno español y el Gobierno macedonio sobre el reconocimiento recíproco y canje de los permisos de conducción nacionales, hecho en Skopje el 6 de octubre de 2011. (610/000063)"
+    },
+    {
+      "source_record_pk": 147055,
+      "sample_initiative_id": "senado:leg10:exp:610/000072",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre España y la Región Administrativa Especial de Hong Kong de la República Popular China relativo a la Asistencia Judicial en materia penal, hecho en Madrid el 15 de noviembre de 2012. (610/000072)"
+    },
+    {
+      "source_record_pk": 147043,
+      "sample_initiative_id": "senado:leg10:exp:610/000059",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de colaboración y cooperación entre la Unión Europea y sus Estados Miembros, por una parte, y la República de Iraq, por otra parte, hecho en Bruselas el 11 de mayo de 2012. (610/000059)"
+    },
+    {
+      "source_record_pk": 147051,
+      "sample_initiative_id": "senado:leg10:exp:610/000067",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y la República de Guinea Ecuatorial sobre transporte aéreo, hecho en Madrid el 28 de noviembre de 2012. (610/000067)"
+    },
+    {
+      "source_record_pk": 147048,
+      "sample_initiative_id": "senado:leg10:exp:610/000064",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Protocolo por el que se modifica el Acuerdo Euromediterráneo de Aviación entre la Comunidad Europea y sus Estados Miembros, por una parte, y el Reino de Marruecos, por otra, con el fin de tener en cuenta la Adhesión a la Unión Europea de la República de Bulgaria y de Rumania, hecho en Bruselas el 18 de junio de 2012.…"
+    },
+    {
+      "source_record_pk": 147052,
+      "sample_initiative_id": "senado:leg10:exp:610/000068",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Segundo Protocolo de enmienda del Convenio de Cooperación para la defensa entre el Reino de España y los Estados Unidos de América, de 1 de diciembre de 1988, revisado, hecho en Bruselas el 10 de octubre de 2012. (610/000068)"
+    },
+    {
+      "source_record_pk": 147050,
+      "sample_initiative_id": "senado:leg10:exp:610/000066",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Gobierno del Reino de España y el Gobierno de los Emiratos Árabes Unidos sobre cooperación en materia de defensa, hecho en Abu-Dhabi el 21 de octubre de 2012. (610/000066)"
+    },
+    {
+      "source_record_pk": 147060,
+      "sample_initiative_id": "senado:leg10:exp:610/000078",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Enmienda al Acuerdo de Servicio de Préstamo de 80.000.000.000 euros entre los siguientes Estados miembros cuya moneda es el euro: el Reino de Bélgica, Irlanda, el Reino de España, la República Francesa, la República Italiana, la República de Chipre, el Gran Ducado de Luxemburgo, la República de Malta, el Reino de los…"
+    },
+    {
+      "source_record_pk": 147061,
+      "sample_initiative_id": "senado:leg10:exp:610/000098",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo entre el Reino de España y los Estados Unidos de América para la mejora del cumplimiento fiscal internacional y la aplicación de la ley estadounidense de cumplimiento tributario de cuentas extranjeras, hecho en Madrid el 14 de mayo de 2013. (610/000098)"
+    },
+    {
+      "source_record_pk": 147053,
+      "sample_initiative_id": "senado:leg10:exp:610/000069",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo Marco de Colaboración y Cooperación entre la Unión Europea y sus Estados miembros, por una parte, y la República de Filipinas, por otra, hecho en Phnom Penh el 11 de julio de 2012. (610/000069)"
+    },
+    {
+      "source_record_pk": 147045,
+      "sample_initiative_id": "senado:leg10:exp:610/000061",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo de cooperación en materia de lucha contra la delincuencia entre el Reino de España y la República de la Costa de Marfil, hecho en Madrid el 17 de julio de 2012. (610/000061)"
+    },
+    {
+      "source_record_pk": 147046,
+      "sample_initiative_id": "senado:leg10:exp:610/000062",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo Marco Global de Asociación y Cooperación entre la Unión Europea y sus Estados Miembros, por una parte, y la República Socialista de Vietnam, por otra, hecho en Bruselas el 27 de junio de 2012. (610/000062)"
+    },
+    {
+      "source_record_pk": 147056,
+      "sample_initiative_id": "senado:leg10:exp:610/000074",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Acuerdo sobre Transporte Aéreo entre el Reino de España y la República de Camerún, hecho en Yaundé el 21 de noviembre de 2012. (610/000074)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-02-28T20:27:19+00:00",
+  "status": "degraded",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "targets_csv": "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv",
+  "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "degraded",
+  "progress_report_error": "",
+  "progress_report_path": "docs/etl/sprints/AI-OPS-303/evidence/senado_manual_capture_target_progress_latest.json",
+  "progress_csv_path": "docs/etl/sprints/AI-OPS-303/exports/senado_manual_capture_target_progress_latest.csv",
+  "ready_checks": {
+    "progress_report_ok": false,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": false,
+    "selected_usable_capture_with_cookie": false
+  },
+  "ready_to_retry": false,
+  "capture_inventory": {
+    "capture_files_total": 4,
+    "usable_capture_files_total": 0,
+    "usable_with_cookie_files_total": 0,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {},
+  "backfill": {
+    "attempted": false,
+    "dry_run": false,
+    "status": "skipped",
+    "skip_reason": "capture_gate_not_ready",
+    "exit_code": null,
+    "command_display": "",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": "2026-02-12"
+  },
+  "strict_fail_reasons": [
+    "usable_targets_below_min",
+    "no_usable_capture_cookie_file",
+    "capture_gate_not_ready"
+  ]
+}

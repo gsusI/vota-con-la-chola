@@ -1,0 +1,31 @@
+{
+  "db": "etl/data/staging/politicos-es.db",
+  "source_id": "parl_initiative_docs",
+  "initiative_source_id": "",
+  "dry_run": false,
+  "candidate_urls": 157,
+  "candidate_refs_total": 205,
+  "inserted_or_would_insert": 157,
+  "coverage_before": {
+    "total_doc_links": 4041,
+    "with_fetch_status": 3836,
+    "missing_fetch_status": 205
+  },
+  "coverage_after": {
+    "total_doc_links": 4041,
+    "with_fetch_status": 4041,
+    "missing_fetch_status": 0
+  },
+  "sample_urls": [
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/lo_001_2025_corr.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/lo_002_2025.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/lo_003_2025.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/lo_005_2024.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/lo_006_2024.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_004_2025_conv.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_005_2025_corr.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_006_2025_conv.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_007_2024.pdf",
+    "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_007_2025_der.pdf"
+  ]
+}

@@ -1,0 +1,42 @@
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+OK
+{
+  "source_id": "programas_partidos",
+  "parties": [
+    "BNG"
+  ],
+  "rows_total": 1,
+  "min_support_unclear_unique_ratio": 2.0,
+  "below_threshold_rows": [
+    {
+      "party_name": "BNG",
+      "source_url": "https://bng/eu.pdf",
+      "support_rows": 1,
+      "unclear_rows": 2,
+      "unclear_unique_excerpt_rows": 2,
+      "support_to_unclear_unique_ratio": 0.5
+    }
+  ],
+  "checks": {
+    "rows_present": true,
+    "ratio_threshold_met": false
+  },
+  "status": "degraded",
+  "passed": false,
+  "strict_fail_reasons": [
+    "ratio_below_threshold"
+  ],
+  "rows": [
+    {
+      "party_name": "BNG",
+      "source_url": "https://bng/eu.pdf",
+      "support_rows": 1,
+      "unclear_rows": 2,
+      "unclear_unique_excerpt_rows": 2,
+      "support_to_unclear_unique_ratio": 0.5
+    }
+  ]
+}

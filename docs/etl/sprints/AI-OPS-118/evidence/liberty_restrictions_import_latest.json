@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-26T08:57:34+00:00",
-  "db_path": "etl/data/staging/politicos-es.db",
+  "generated_at": "2026-04-24T15:31:48+00:00",
+  "db_path": "etl/data/staging/politicos-es.e2e19.db",
   "seed_path": "etl/data/seeds/liberty_restrictions_seed_v1.json",
   "validation": {
     "valid": true,
@@ -10,17 +10,17 @@
   },
   "import": {
     "status": "ok",
-    "snapshot_date": "2026-02-26",
-    "source_id_used": "boe_api_legal",
+    "snapshot_date": "2026-04-13",
+    "source_id_used": "",
     "method_version": "irlc_v1",
     "scale_max": 100.0,
     "counts": {
-      "methodology_inserted": 0,
-      "methodology_updated": 1,
-      "right_categories_inserted": 0,
-      "right_categories_updated": 6,
-      "assessments_inserted": 0,
-      "assessments_updated": 11,
+      "methodology_inserted": 1,
+      "methodology_updated": 0,
+      "right_categories_inserted": 6,
+      "right_categories_updated": 0,
+      "assessments_inserted": 11,
+      "assessments_updated": 0,
       "unresolved_fragment_refs": 0,
       "unresolved_right_refs": 0
     },

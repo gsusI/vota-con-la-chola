@@ -1,0 +1,660 @@
+{
+  "generated_at": "2026-02-28T08:03:07Z",
+  "parties_total": 15,
+  "rows": [
+    {
+      "candidates": [
+        {
+          "bytes": 113984,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 5,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.pp.es/"
+        },
+        {
+          "bytes": 350000,
+          "code": 200,
+          "concern_hits": [
+            "educacion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://www.pp.es/storage/2025/07/ESTATUTOS_PARTIDOPOPULAR_2025.pdf"
+        },
+        {
+          "bytes": 312714,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion",
+            "energia",
+            "corrupcion"
+          ],
+          "concern_hits_total": 4,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://www.pp.es/storage/2023/11/es_platform_final62_0.pdf"
+        },
+        {
+          "bytes": 350000,
+          "code": 200,
+          "concern_hits": [
+            "educacion",
+            "energia"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://www.pp.es/storage/2025/09/Manifesto_2024.pdf"
+        }
+      ],
+      "home": "https://www.pp.es/",
+      "home_code": 200,
+      "party_id": 2,
+      "party_name": "PP"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 161098,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion",
+            "energia",
+            "corrupcion",
+            "campo_rural"
+          ],
+          "concern_hits_total": 5,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.voxespana.es/"
+        },
+        {
+          "error": "HTTPError: HTTP Error 403: Forbidden",
+          "url": "https://www.voxespana.es/vox-europa/manifiesto-patriots-eu"
+        },
+        {
+          "error": "HTTPError: HTTP Error 403: Forbidden",
+          "url": "https://www.voxespana.es/programa/otras-propuestas-de-vox"
+        },
+        {
+          "error": "HTTPError: HTTP Error 403: Forbidden",
+          "url": "https://www.voxespana.es/programa/programa-electoral-vox"
+        },
+        {
+          "error": "HTTPError: HTTP Error 403: Forbidden",
+          "url": "https://www.voxespana.es/noticias/previsiones-agenda-de-vox-actos-programados-20230510"
+        }
+      ],
+      "home": "https://www.voxespana.es/",
+      "home_code": 200,
+      "party_id": 14,
+      "party_name": "VOX"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 71132,
+          "code": 200,
+          "concern_hits": [
+            "energia",
+            "transporte"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.eaj-pnv.eus/"
+        }
+      ],
+      "home": "https://www.eaj-pnv.eus/",
+      "home_code": 200,
+      "party_id": 18,
+      "party_name": "EAJ-PNV"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 74397,
+          "code": 200,
+          "concern_hits": [
+            "energia"
+          ],
+          "concern_hits_total": 1,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://ehbildu.eus/"
+        },
+        {
+          "error": "InvalidURL: URL can't contain control characters. '/dokumentuak/gardentasuna/BALANCE DE SITUACION 2024.pdf' (found at least ' ')",
+          "url": "https://ehbildu.eus/dokumentuak/gardentasuna/BALANCE DE SITUACION 2024.pdf"
+        },
+        {
+          "bytes": 50388,
+          "code": 200,
+          "concern_hits": [
+            "educacion"
+          ],
+          "concern_hits_total": 1,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://ehbildu.eus/dokumentuak/gardentasuna/2024_PyG.pdf"
+        },
+        {
+          "error": "InvalidURL: URL can't contain control characters. '/dokumentuak/gardentasuna/MEMORIA_EH BILDU 2024.pdf' (found at least ' ')",
+          "url": "https://ehbildu.eus/dokumentuak/gardentasuna/MEMORIA_EH BILDU 2024.pdf"
+        },
+        {
+          "error": "InvalidURL: URL can't contain control characters. '/dokumentuak/gardentasuna/BALANCE DE SITUACION 2023.pdf' (found at least ' ')",
+          "url": "https://ehbildu.eus/dokumentuak/gardentasuna/BALANCE DE SITUACION 2023.pdf"
+        }
+      ],
+      "home": "https://ehbildu.eus/",
+      "home_code": 200,
+      "party_id": 22,
+      "party_name": "EH Bildu"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 193328,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "coste_vida",
+            "energia",
+            "inmigracion",
+            "corrupcion",
+            "campo_rural",
+            "igualdad"
+          ],
+          "concern_hits_total": 10,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://movimientosumar.es/"
+        }
+      ],
+      "home": "https://movimientosumar.es/",
+      "home_code": 200,
+      "party_id": 29,
+      "party_name": "SUMAR"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 140892,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "energia",
+            "corrupcion",
+            "igualdad"
+          ],
+          "concern_hits_total": 7,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.upn.org/"
+        },
+        {
+          "bytes": 105078,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "coste_vida",
+            "energia",
+            "corrupcion",
+            "igualdad"
+          ],
+          "concern_hits_total": 8,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.upn.org/upn-pide-a-gimeno-que-revierta-los-recortes-en-la-implantacion-de-la-fp-dual-y-abra-un-proceso-de-dialogo/"
+        }
+      ],
+      "home": "https://www.upn.org/",
+      "home_code": 200,
+      "party_id": 73,
+      "party_name": "UPN"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 216778,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "coste_vida",
+            "energia",
+            "transporte",
+            "seguridad_justicia",
+            "corrupcion",
+            "campo_rural",
+            "igualdad"
+          ],
+          "concern_hits_total": 11,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.bng.gal/"
+        },
+        {
+          "bytes": 132289,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "sanidad",
+            "educacion",
+            "energia",
+            "seguridad_justicia",
+            "campo_rural"
+          ],
+          "concern_hits_total": 6,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.bng.gal/estaticas/programas-eleitorais.html"
+        },
+        {
+          "error": "InvalidURL: URL can't contain control characters. '/media/bnggaliza/files/2024/03/25/Queremos vida. Queremos futuro. Altri non. - Folleto.pdf' (found at least ' ')",
+          "url": "https://www.bng.gal/media/bnggaliza/files/2024/03/25/Queremos vida. Queremos futuro. Altri non. - Folleto.pdf"
+        },
+        {
+          "bytes": 141885,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://www.bng.gal/media/bnggaliza/files/2024/07/09/EFA-Election-Manifesto-2024_EN.pdf"
+        }
+      ],
+      "home": "https://www.bng.gal/",
+      "home_code": 200,
+      "party_id": 276,
+      "party_name": "BNG"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 179690,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion",
+            "energia",
+            "corrupcion"
+          ],
+          "concern_hits_total": 4,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://coalicioncanaria.org/"
+        },
+        {
+          "bytes": 88206,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 3,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://coalicioncanaria.org/programas-electorales/"
+        },
+        {
+          "bytes": 84544,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 3,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://coalicioncanaria.org/programas-electorales-insulares/"
+        }
+      ],
+      "home": "https://coalicioncanaria.org/",
+      "home_code": 200,
+      "party_id": 347,
+      "party_name": "CCa"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 58353,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "educacion",
+            "energia",
+            "seguridad_justicia",
+            "inmigracion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 7,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.ciudadanos-cs.org/"
+        },
+        {
+          "bytes": 78001,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "coste_vida",
+            "energia",
+            "transporte",
+            "seguridad_justicia",
+            "corrupcion",
+            "campo_rural",
+            "igualdad"
+          ],
+          "concern_hits_total": 11,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": {
+            "confidence": 0.58,
+            "reason": "weak_declared_support",
+            "stance": "support"
+          },
+          "url": "https://www.ciudadanos-cs.org/por-los-tuyos-propuestas-2023-28m"
+        },
+        {
+          "bytes": 49287,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "coste_vida",
+            "transporte",
+            "seguridad_justicia",
+            "inmigracion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 9,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-desde-burgos-un-plan-de-garantias-al-alquiler-para-movilizar-las-380-000-viviendas-vacias-de-castilla-y-leon/13709"
+        }
+      ],
+      "home": "https://www.ciudadanos-cs.org/",
+      "home_code": 200,
+      "party_id": 1055,
+      "party_name": "Ciudadanos"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 328401,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "transporte",
+            "seguridad_justicia",
+            "corrupcion"
+          ],
+          "concern_hits_total": 7,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://foroasturias.es/"
+        },
+        {
+          "bytes": 286201,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "sanidad",
+            "educacion",
+            "coste_vida",
+            "energia",
+            "transporte",
+            "seguridad_justicia",
+            "corrupcion",
+            "campo_rural"
+          ],
+          "concern_hits_total": 10,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://foroasturias.es/planasturias/"
+        },
+        {
+          "bytes": 350000,
+          "code": 200,
+          "concern_hits": [
+            "educacion",
+            "energia"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://foroasturias.es/wp-content/uploads/2023/05/Programa-electoral-FORO-Asturias-20232027.pdf"
+        }
+      ],
+      "home": "https://foroasturias.es/",
+      "home_code": 200,
+      "party_id": 4756,
+      "party_name": "FORO Asturias"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 350000,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "educacion",
+            "seguridad_justicia",
+            "corrupcion",
+            "campo_rural",
+            "igualdad"
+          ],
+          "concern_hits_total": 7,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://izquierdaunida.org/"
+        },
+        {
+          "bytes": 129136,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "corrupcion",
+            "campo_rural"
+          ],
+          "concern_hits_total": 3,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://izquierdaunida.org/2023/07/01/aportacion-de-iu-al-programa-de-las-elecciones-generales-del-23j/"
+        },
+        {
+          "bytes": 113631,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "educacion",
+            "corrupcion"
+          ],
+          "concern_hits_total": 3,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://izquierdaunida.org/programa-gobierno-psoe-unidaspodemos-2020/"
+        },
+        {
+          "bytes": 126945,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "empleo",
+            "educacion",
+            "seguridad_justicia",
+            "inmigracion",
+            "corrupcion",
+            "campo_rural",
+            "igualdad"
+          ],
+          "concern_hits_total": 8,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://izquierdaunida.org/programa-electoral-de-izquierda-unida-para-las-elecciones-generales-del-10n-de-2019/"
+        },
+        {
+          "bytes": 116095,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "corrupcion"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://izquierdaunida.org/2023-04-26-programa28m/"
+        }
+      ],
+      "home": "https://izquierdaunida.org/",
+      "home_code": 200,
+      "party_id": 7628,
+      "party_name": "Izquierda Unida"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 70414,
+          "code": 200,
+          "concern_hits": [
+            "vivienda",
+            "corrupcion"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://compromis.net/"
+        },
+        {
+          "bytes": 49195,
+          "code": 200,
+          "concern_hits": [
+            "corrupcion"
+          ],
+          "concern_hits_total": 1,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://compromis.net/transparencia/acompliment-del-programa"
+        },
+        {
+          "bytes": 350000,
+          "code": 200,
+          "concern_hits": [
+            "educacion",
+            "energia"
+          ],
+          "concern_hits_total": 2,
+          "content_type": "application/pdf",
+          "stance_hint": null,
+          "url": "https://compromis.net/espai/uploads/groups/1/messages/2025/50_propostes_def.pdf"
+        }
+      ],
+      "home": "https://compromis.net/",
+      "home_code": 200,
+      "party_id": 61293,
+      "party_name": "Compromis"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 95063,
+          "code": 200,
+          "concern_hits": [
+            "corrupcion"
+          ],
+          "concern_hits_total": 1,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://www.socialistes.cat/"
+        }
+      ],
+      "home": "https://www.socialistes.cat/",
+      "home_code": 200,
+      "party_id": 67790,
+      "party_name": "PSC"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 167998,
+          "code": 200,
+          "concern_hits": [
+            "empleo",
+            "sanidad",
+            "corrupcion"
+          ],
+          "concern_hits_total": 3,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://cup.cat/"
+        }
+      ],
+      "home": "https://cup.cat/",
+      "home_code": 200,
+      "party_id": 68157,
+      "party_name": "CUP"
+    },
+    {
+      "candidates": [
+        {
+          "bytes": 95839,
+          "code": 200,
+          "concern_hits": [
+            "sanidad",
+            "educacion",
+            "energia",
+            "corrupcion"
+          ],
+          "concern_hits_total": 4,
+          "content_type": "text/html; charset=UTF-8",
+          "stance_hint": null,
+          "url": "https://verdesequo.es/"
+        }
+      ],
+      "home": "https://verdesequo.es/",
+      "home_code": 200,
+      "party_id": 18201,
+      "party_name": "EQUO"
+    }
+  ]
+}

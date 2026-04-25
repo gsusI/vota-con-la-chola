@@ -1,0 +1,104 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "congreso_iniciativas",
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 9,
+  "upserted": 9,
+  "needs_review": 0,
+  "by_method": {
+    "keyword_window": 4,
+    "title_hint_strong": 5
+  },
+  "by_doc_format": {
+    "html": 9
+  },
+  "sample": [
+    {
+      "source_record_pk": 146911,
+      "sample_initiative_id": "senado:leg14:exp:621/000049",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 4 OCTUBRE 2024 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos P…"
+    },
+    {
+      "source_record_pk": 146912,
+      "sample_initiative_id": "senado:leg14:exp:621/000053",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XV LEGISLATURA 5 DICIEMBRE 2023 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146914,
+      "sample_initiative_id": "senado:leg14:exp:621/000059",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 29 OCTUBRE 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146915,
+      "sample_initiative_id": "senado:leg14:exp:621/000060",
+      "doc_format": "html",
+      "subject_method": "keyword_window",
+      "confidence": 0.82,
+      "needs_review": 0,
+      "extracted_subject": "Preguntas frecuentes Mapa Web Contactar Síguenos XIV LEGISLATURA 5 OCTUBRE 2022 'Idiomas' 'Menú' Actividad parlamentaria Actualidad Pleno y Diputación Permanente Comisiones y Ponencias Iniciativas parlamentarias Publicaciones oficiales Relaciones internacionales Composición y organización Senadores y Senadoras Grupos…"
+    },
+    {
+      "source_record_pk": 146916,
+      "sample_initiative_id": "senado:leg14:exp:621/000064",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se regulan el sistema de gestión de la Política Agrícola Común y otras materias conexas. (621/000064)"
+    },
+    {
+      "source_record_pk": 146917,
+      "sample_initiative_id": "senado:leg14:exp:621/000076",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de pesca sostenible e investigación pesquera. (621/000076)"
+    },
+    {
+      "source_record_pk": 146910,
+      "sample_initiative_id": "senado:leg14:exp:621/000048",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas urgentes para impulsar la actividad de rehabilitación edificatoria en el contexto del Plan de Recuperación, Transformación y Resiliencia (procedente del Real Decreto-ley 19/2021, de 5 de octubre). (621/000048)"
+    },
+    {
+      "source_record_pk": 146913,
+      "sample_initiative_id": "senado:leg14:exp:621/000054",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, en materia de Juzgados de lo Mercantil. (621/000054)"
+    },
+    {
+      "source_record_pk": 146909,
+      "sample_initiative_id": "senado:leg14:exp:621/000047",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Calidad de la Arquitectura. (621/000047)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

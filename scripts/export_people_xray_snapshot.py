@@ -18,7 +18,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution
     from sqlite_export_pragmas import tune_sqlite_export_connection
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/people/data/xray.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/people/data/xray.json")
 DATE_RE = re.compile(r"^[1-2][0-9]{3}-[01][0-9]-[0-3][0-9]")
 
 

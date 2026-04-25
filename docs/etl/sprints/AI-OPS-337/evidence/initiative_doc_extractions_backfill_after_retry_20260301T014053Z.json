@@ -1,0 +1,30 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 1,
+  "upserted": 1,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 1
+  },
+  "by_doc_format": {
+    "html": 1
+  },
+  "sample": [
+    {
+      "source_record_pk": 147108,
+      "sample_initiative_id": "senado:leg12:exp:621/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales. (621/000012)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,39 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 2,
+  "upserted": 2,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 2
+  },
+  "by_doc_format": {
+    "html": 2
+  },
+  "sample": [
+    {
+      "source_record_pk": 147494,
+      "sample_initiative_id": "senado:leg14:exp:622/000074",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley relativa a la modificación de la Ley 34/2002, de 11 de julio, de servicios de la sociedad de la información y de comercio electrónico. (622/000074)"
+    },
+    {
+      "source_record_pk": 147493,
+      "sample_initiative_id": "senado:leg14:exp:622/000071",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 14/2013, de 27 de septiembre, de apoyo a los emprendedores y su internacionalización. (622/000071)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

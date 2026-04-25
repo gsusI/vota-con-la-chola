@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-03-01T08:11:00+00:00",
+  "sprint_id": "AI-OPS-353",
+  "focus_rows": [843, 844],
+  "db_path": "etl/data/staging/politicos-es.db",
+  "before": {
+    "quality_snapshot": "docs/etl/sprints/AI-OPS-353/evidence/quality_initiatives_before_manual_retry_20260301T075958Z.json",
+    "waf_snapshot": "docs/etl/sprints/AI-OPS-353/evidence/senado_waf_block_profile_before_manual_retry_20260301T075958Z.json",
+    "downloaded_doc_links": 4802,
+    "missing_doc_links": 4751,
+    "missing_doc_links_actionable": 4561,
+    "missing_doc_links_actionable_linked_to_votes": 785,
+    "missing_urls": 785,
+    "blocked_403_urls": 172,
+    "status404_missing_urls": 396,
+    "zero_doc_initiatives": 5
+  },
+  "runs": {
+    "manual_retry_cycle_limit25": {
+      "status": "ok",
+      "rc": 0,
+      "artifact": "docs/etl/sprints/AI-OPS-353/evidence/senado_manual_capture_retry_cycle_20260301T075958Z.json",
+      "notes": [
+        "Retry real con palanca manual utilizable, sin delta neta de cobertura en esa pasada."
+      ]
+    },
+    "status404_packet25_archive": {
+      "status": "interrupted",
+      "rc": 130,
+      "artifact": "docs/etl/sprints/AI-OPS-353/evidence/senado_status404_manual_cookie_archive_retry_20260301T075958Z_interrupted.json",
+      "notes": [
+        "Runtime excedido en ventana operativa; se corta y se reintenta con packet acotado."
+      ]
+    },
+    "status404_packet8_archive": {
+      "status": "ok",
+      "rc": 0,
+      "log": "docs/etl/sprints/AI-OPS-353/evidence/senado_status404_manual_cookie_archive_retry_packet8_20260301T080845Z.log",
+      "fetched_ok": 2,
+      "archive_hits": 2,
+      "archive_fetched_ok": 2,
+      "candidate_urls": 8,
+      "failures_total": 6,
+      "text_documents_upserted": 2
+    }
+  },
+  "postprocess": {
+    "initiative_doc_extractions_backfill": "docs/etl/sprints/AI-OPS-353/evidence/initiative_doc_extractions_backfill_after_archive_packet8_20260301T081020Z.json",
+    "initiative_doc_excerpts_backfill": "docs/etl/sprints/AI-OPS-353/evidence/initiative_doc_excerpts_backfill_after_archive_packet8_20260301T081020Z.json",
+    "extractions_upserted": 2,
+    "extractions_needs_review": 0,
+    "excerpts_updated": 0
+  },
+  "after": {
+    "quality_snapshot": "docs/etl/sprints/AI-OPS-353/evidence/quality_initiatives_after_archive_packet8_postprocess_20260301T081020Z.json",
+    "waf_snapshot": "docs/etl/sprints/AI-OPS-353/evidence/senado_waf_block_profile_after_archive_packet8_postprocess_20260301T081020Z.json",
+    "downloaded_doc_links": 4804,
+    "missing_doc_links": 4749,
+    "missing_doc_links_actionable": 4559,
+    "missing_doc_links_actionable_linked_to_votes": 783,
+    "missing_urls": 783,
+    "blocked_403_urls": 189,
+    "status404_missing_urls": 372,
+    "zero_doc_initiatives": 5,
+    "downloaded_missing_extraction": 0,
+    "downloaded_missing_excerpt": 0
+  },
+  "delta": {
+    "downloaded_doc_links": 2,
+    "missing_doc_links": -2,
+    "missing_doc_links_actionable": -2,
+    "missing_doc_links_actionable_linked_to_votes": -2,
+    "missing_urls": -2,
+    "blocked_403_urls": 17,
+    "status404_missing_urls": -24,
+    "zero_doc_initiatives": 0
+  },
+  "assessment": {
+    "row_843_reseed_done": true,
+    "row_844_conversion_done": true,
+    "visible_progress": true,
+    "notes": [
+      "Se obtiene conversion neta de descarga bajo palanca manual reabierta.",
+      "Persiste gap grande en Senado y crecimiento de bucket 403, por lo que se abre objetivo de escalado con guardas de runtime."
+    ]
+  }
+}

@@ -76,17 +76,6 @@ class TestExportInitiativeMeasureReviewQueue(unittest.TestCase):
               created_at TEXT NOT NULL,
               updated_at TEXT NOT NULL
             );
-            CREATE TABLE parl_initiative_doc_extractions (
-              source_record_pk INTEGER PRIMARY KEY,
-              source_id TEXT NOT NULL,
-              extracted_title TEXT,
-              extracted_subject TEXT,
-              extracted_excerpt TEXT,
-              text_extraction_method TEXT,
-              text_quality TEXT,
-              needs_ocr INTEGER,
-              full_text_path TEXT
-            );
             """
         )
         conn.executemany(
@@ -236,16 +225,11 @@ class TestExportInitiativeMeasureReviewQueue(unittest.TestCase):
             finally:
                 conn.close()
 
-    def test_doc_contains_filter_applies_before_limit(self) -> None:
+    def test_offset_applies_without_double_slicing(self) -> None:
         with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "measure_queue_doc_contains.db"
+            db_path = Path(td) / "measure_queue_offset.db"
             conn = self._open_db(db_path)
             try:
-                full_text = Path(td) / "i2.txt"
-                full_text.write_text(
-                    "La disposición final impone la sustitución de los triángulos por una baliza V16 luminosa.",
-                    encoding="utf-8",
-                )
                 conn.executemany(
                     """
                     INSERT INTO parl_initiatives(
@@ -253,8 +237,9 @@ class TestExportInitiativeMeasureReviewQueue(unittest.TestCase):
                     ) VALUES (?, 'congreso_iniciativas', ?, ?, 'Proyecto de ley', 'Función legislativa', 'Urgente', 'Cerrado', ?)
                     """,
                     [
-                        ("i1", "121/000001/0000", "Proyecto de Ley de representación paritaria.", "https://example.org/i1"),
-                        ("i2", "121/000002/0000", "Proyecto de Ley de seguridad vial.", "https://example.org/i2"),
+                        ("i1", "121/000001/0000", "Proposición de Ley A.", "https://example.org/i1"),
+                        ("i2", "121/000002/0000", "Proposición de Ley B.", "https://example.org/i2"),
+                        ("i3", "121/000003/0000", "Proposición de Ley C.", "https://example.org/i3"),
                     ],
                 )
                 conn.executemany(
@@ -266,42 +251,8 @@ class TestExportInitiativeMeasureReviewQueue(unittest.TestCase):
                     [
                         ("i1", "i1", 100),
                         ("i2", "i2", 90),
+                        ("i3", "i3", 80),
                     ],
-                )
-                conn.executemany(
-                    """
-                    INSERT INTO parl_initiative_documents(initiative_id, doc_kind, doc_url, source_record_pk)
-                    VALUES (?, 'bocg', ?, ?)
-                    """,
-                    [
-                        ("i1", "https://example.org/doc1", 1),
-                        ("i2", "https://example.org/doc2", 2),
-                    ],
-                )
-                conn.executemany(
-                    """
-                    INSERT INTO text_documents(source_id, source_url, source_record_pk, content_type, raw_path, text_chars)
-                    VALUES ('parl_initiative_docs', ?, ?, 'text/plain', ?, ?)
-                    """,
-                    [
-                        ("https://example.org/doc1", 1, str(Path(td) / "doc1.txt"), 20),
-                        ("https://example.org/doc2", 2, str(full_text), full_text.stat().st_size),
-                    ],
-                )
-                conn.execute(
-                    """
-                    INSERT INTO parl_initiative_doc_extractions(
-                      source_record_pk, source_id, extracted_title, extracted_subject, extracted_excerpt, text_quality, full_text_path
-                    ) VALUES (?, 'parl_initiative_docs', ?, ?, ?, ?, ?)
-                    """,
-                    (
-                        2,
-                        "Seguridad vial",
-                        "Baliza luminosa",
-                        "Sustitución por una baliza V16",
-                        "pdf_text_good",
-                        str(full_text),
-                    ),
                 )
                 conn.commit()
 
@@ -309,10 +260,9 @@ class TestExportInitiativeMeasureReviewQueue(unittest.TestCase):
                     conn,
                     only_pending=True,
                     contains_terms=[],
-                    doc_contains_terms=["v16"],
                     min_priority=0,
                     limit=1,
-                    offset=0,
+                    offset=1,
                 )
                 self.assertEqual(len(rows), 1)
                 self.assertEqual(rows[0]["initiative_id"], "i2")

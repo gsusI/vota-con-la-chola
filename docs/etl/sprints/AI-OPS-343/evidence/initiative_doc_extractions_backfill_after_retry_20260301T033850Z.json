@@ -1,0 +1,201 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 59,
+  "upserted": 59,
+  "needs_review": 0,
+  "by_method": {
+    "title_hint_strong": 59
+  },
+  "by_doc_format": {
+    "html": 59
+  },
+  "sample": [
+    {
+      "source_record_pk": 147166,
+      "sample_initiative_id": "senado:leg14:exp:621/000055",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de reforma del texto refundido de la Ley Concursal, aprobado por el Real Decreto Legislativo 1/2020, de 5 de mayo, para la transposición de la Directiva (UE) 2019/1023 del Parlamento Europeo y del Consejo, de 20 de junio de 2019, sobre marcos de reestructuración preventiva, exoneración de deudas e inha…"
+    },
+    {
+      "source_record_pk": 147205,
+      "sample_initiative_id": "senado:leg14:exp:621/000055",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de reforma del texto refundido de la Ley Concursal, aprobado por el Real Decreto Legislativo 1/2020, de 5 de mayo, para la transposición de la Directiva (UE) 2019/1023 del Parlamento Europeo y del Consejo, de 20 de junio de 2019, sobre marcos de reestructuración preventiva, exoneración de deudas e inha…"
+    },
+    {
+      "source_record_pk": 147200,
+      "sample_initiative_id": "senado:leg14:exp:621/000050",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de garantía integral de la libertad sexual. (621/000050)"
+    },
+    {
+      "source_record_pk": 147182,
+      "sample_initiative_id": "senado:leg14:exp:621/000082",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de protección de los derechos y el bienestar de los animales. (621/000082)"
+    },
+    {
+      "source_record_pk": 147223,
+      "sample_initiative_id": "senado:leg14:exp:621/000082",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de protección de los derechos y el bienestar de los animales. (621/000082)"
+    },
+    {
+      "source_record_pk": 147188,
+      "sample_initiative_id": "senado:leg12:exp:624/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial. (624/000012)"
+    },
+    {
+      "source_record_pk": 147224,
+      "sample_initiative_id": "senado:leg14:exp:621/000083",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de maltrato animal. (621/000083)"
+    },
+    {
+      "source_record_pk": 147180,
+      "sample_initiative_id": "senado:leg14:exp:621/000077",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Empleo. (621/000077)"
+    },
+    {
+      "source_record_pk": 147219,
+      "sample_initiative_id": "senado:leg14:exp:621/000077",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Empleo. (621/000077)"
+    },
+    {
+      "source_record_pk": 147178,
+      "sample_initiative_id": "senado:leg14:exp:621/000068",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Cooperación para el Desarrollo Sostenible y la Solidaridad Global. (621/000068)"
+    },
+    {
+      "source_record_pk": 147217,
+      "sample_initiative_id": "senado:leg14:exp:621/000068",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Cooperación para el Desarrollo Sostenible y la Solidaridad Global. (621/000068)"
+    },
+    {
+      "source_record_pk": 147221,
+      "sample_initiative_id": "senado:leg14:exp:621/000080",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica del Sistema Universitario. (621/000080)"
+    },
+    {
+      "source_record_pk": 147202,
+      "sample_initiative_id": "senado:leg14:exp:621/000052",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 14/2011, de 1 de junio, de la Ciencia, la Tecnología y la Innovación. (621/000052)"
+    },
+    {
+      "source_record_pk": 147213,
+      "sample_initiative_id": "senado:leg14:exp:621/000063",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de institucionalización de la evaluación de políticas públicas en la Administración General del Estado. (621/000063)"
+    },
+    {
+      "source_record_pk": 147199,
+      "sample_initiative_id": "senado:leg14:exp:621/000049",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley General de Comunicación Audiovisual. (621/000049)"
+    },
+    {
+      "source_record_pk": 147194,
+      "sample_initiative_id": "senado:leg14:exp:621/000012",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica por la que se modifica la Ley Orgánica 2/2006, de 3 de mayo, de Educación. (621/000012)"
+    },
+    {
+      "source_record_pk": 147189,
+      "sample_initiative_id": "senado:leg12:exp:624/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de mejora de la situación de orfandad de las hijas e hijos de víctimas de violencia de género y otras formas de violencia contra la mujer. (624/000013)"
+    },
+    {
+      "source_record_pk": 147183,
+      "sample_initiative_id": "senado:leg12:exp:621/000015",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el texto refundido de la Ley de Propiedad Intelectual, aprobado por el Real Decreto Legislativo 1/1996, de 12 de abril, y por el que se incorporan al ordenamiento jurídico español la Directiva 2014/26/UE del Parlamento Europeo y del Consejo, de 26 de febrero de 2014, y la Directi…"
+    },
+    {
+      "source_record_pk": 147196,
+      "sample_initiative_id": "senado:leg14:exp:621/000040",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de protección de los consumidores y usuarios frente a situaciones de vulnerabilidad social y económica (procedente del Real Decreto-ley 1/2021, de 19 de enero). (621/000040)"
+    },
+    {
+      "source_record_pk": 147190,
+      "sample_initiative_id": "senado:leg12:exp:624/000014",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, en materia de imprudencia en la conducción de vehículos a motor o ciclomotor y sanción del abandono del lugar del accidente. (624/000014)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

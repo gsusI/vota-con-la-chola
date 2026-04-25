@@ -1,0 +1,21 @@
+PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_review_assist_from_boe_candidates.py --review-queue-csv docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv --boe-candidates-csv docs/etl/sprints/AI-OPS-280/exports/liberty_delegated_person_window_boe_candidates_latest.csv --min-candidate-score 80 --max-candidates-per-link 1 --strict-min-assist-rows 1 --out docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv --summary-out docs/etl/sprints/AI-OPS-281/evidence/liberty_delegated_person_window_review_assist_latest.json
+{
+  "review_queue_csv": "docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv",
+  "boe_candidates_csv": "docs/etl/sprints/AI-OPS-280/exports/liberty_delegated_person_window_boe_candidates_latest.csv",
+  "assist_csv": "docs/etl/sprints/AI-OPS-281/exports/liberty_delegated_person_window_review_assist_latest.csv",
+  "summary": {
+    "status": "ok",
+    "review_links_total": 8,
+    "review_links_with_candidates_total": 0,
+    "review_links_without_candidates_total": 8,
+    "assist_rows_total": 0,
+    "min_candidate_score": 80,
+    "max_candidates_per_link": 1,
+    "relevance_bucket_counts": {
+      "strong": 0,
+      "medium": 0,
+      "weak": 0
+    }
+  }
+}
+error: Recipe `parl-check-liberty-delegated-person-window-review-assist` failed on line 2448 with exit code 4

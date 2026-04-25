@@ -1,0 +1,46 @@
+{
+  "archive_fallback": false,
+  "archive_fetched_ok": 0,
+  "archive_first_urls": 0,
+  "archive_hits": 0,
+  "archive_lookup_attempted": 0,
+  "archive_lookup_failures": [],
+  "candidate_urls": 10,
+  "derived_ini_candidates": 0,
+  "derived_ini_selected": 0,
+  "derived_probe_unfetched_skipped": 0,
+  "doc_links_seen": 10,
+  "dry_run": false,
+  "failures": [
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000074 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000096 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000102 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000074 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000096 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000102 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000059 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000055 -> HTTPStatusError: warmup failed (playwright) status=403",
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000059 -> HTTPStatusError: warmup failed (playwright) status=403"
+  ],
+  "fetched_ok": 0,
+  "initiative_documents_upserted": 10,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 5,
+  "playwright_init_error": null,
+  "playwright_runtime": {
+    "driver_node_path": "playwright/driver/node",
+    "driver_node_rc": null,
+    "effective_nodejs_path": "<abs>/node",
+    "fallback_applied": true,
+    "system_cli_rc": 0,
+    "system_node_path": "<abs>/node"
+  },
+  "skipped_existing": 0,
+  "skipped_forbidden": 0,
+  "skipped_redundant_global_urls": 0,
+  "text_documents_upserted": 0,
+  "urls_to_fetch": 10
+}

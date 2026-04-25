@@ -1,19 +1,14 @@
 import "./globals.css";
 import Breadcrumbs from "./components/Breadcrumbs";
-import SiteHeader from "./components/SiteHeader";
 import { Suspense } from "react";
+import { resolveBasePath } from "./path-utils.mjs";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://votaconlachola.org";
+const basePath = resolveBasePath();
 
 export const metadata = {
-  metadataBase: new URL(siteOrigin),
-  title: "Vota Con La Chola",
+  title: "Vota Con La Chola | GH Pages",
   description:
-    "Información pública sobre temas, actores, decisiones y resultados con evidencia y archivos publicados.",
-  alternates: {
-    canonical: basePath ? `${basePath}/` : "/",
-  },
+    "Portal estatico de Vota Con La Chola para ciudadania, explorer y artefactos JSON reproducibles por snapshot.",
   icons: {
     icon: `${basePath}/favicon.svg`,
   },
@@ -23,9 +18,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <Suspense fallback={null}>
-          <SiteHeader />
-        </Suspense>
         <Suspense fallback={null}>
           <Breadcrumbs />
         </Suspense>

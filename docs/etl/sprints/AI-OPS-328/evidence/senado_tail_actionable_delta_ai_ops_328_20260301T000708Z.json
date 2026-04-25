@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-03-01T00:10:17Z",
+  "before": {
+    "csv_lines_including_header": 1183,
+    "missing_urls": 1182,
+    "blocked_403_urls": 251,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 297
+  },
+  "after": {
+    "csv_lines_including_header": 1183,
+    "missing_urls": 1182,
+    "blocked_403_urls": 331,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 217
+  },
+  "delta": {
+    "csv_lines_including_header": 0,
+    "missing_urls": 0,
+    "blocked_403_urls": 80,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": -80
+  }
+}

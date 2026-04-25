@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-02-28T20:37:37+00:00",
+  "before_path": "docs/etl/sprints/AI-OPS-305/evidence/liberty_delegated_person_window_queue_strict_latest.json",
+  "after_path": "docs/etl/sprints/AI-OPS-305/evidence/liberty_delegated_person_window_queue_strict_after_import_latest.json",
+  "before_status": "degraded",
+  "after_status": "ok",
+  "before_actionable_queue_rows": 8,
+  "after_actionable_queue_rows": 0,
+  "before_links_total": 8,
+  "after_links_total_raw": 16,
+  "after_links_total_effective": 8,
+  "duplicate_rows_dropped_total": 8,
+  "before_strict_fail_reasons": [
+    "actionable_rows_above_threshold"
+  ],
+  "after_strict_fail_reasons": [],
+  "delta_actionable_queue_rows": -8
+}

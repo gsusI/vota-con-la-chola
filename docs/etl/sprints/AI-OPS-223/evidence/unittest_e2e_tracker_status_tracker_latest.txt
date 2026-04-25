@@ -1,0 +1,58 @@
+..FAIL: checklist/sql mismatches detected.
+.FAIL: checklist/sql mismatches detected.
+...FAIL: DONE sources with zero real-network loaded records detected.
+......
+----------------------------------------------------------------------
+Ran 12 tests in 0.013s
+
+OK
+source_id          | checklist | sql  | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result         
+-------------------+-----------+------+---------------+---------+---------+-------------+----------------------+----------------
+congreso_diputados | PARTIAL   | DONE | 1/1           | 5       | 5       | 5           | 1/0                  | WAIVED_MISMATCH
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 0
+waived_mismatches: 1
+waivers_active: 1
+waivers_expired: 0
+done_zero_real: 0
+source_id          | checklist | sql  | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result  
+-------------------+-----------+------+---------------+---------+---------+-------------+----------------------+---------
+congreso_diputados | PARTIAL   | DONE | 1/1           | 5       | 5       | 5           | 1/0                  | MISMATCH
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 1
+waived_mismatches: 0
+waivers_active: 0
+waivers_expired: 1
+done_zero_real: 0
+source_id          | checklist | sql  | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result  
+-------------------+-----------+------+---------------+---------+---------+-------------+----------------------+---------
+congreso_diputados | PARTIAL   | DONE | 1/1           | 5       | 5       | 5           | 1/0                  | MISMATCH
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 1
+waived_mismatches: 0
+waivers_active: 0
+waivers_expired: 0
+done_zero_real: 0
+OK normalized run snapshot -> /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmptgrl119j/normalized_run_snapshot.csv
+source_id: placsp_autonomico
+mode: strict-network
+exit_code: 0
+run_records_loaded: 106
+snapshot_date: 2026-02-17
+source_id          | checklist | sql     | runs_ok/total | max_net | max_any | last_loaded | net/fallback_fetches | result        
+-------------------+-----------+---------+---------------+---------+---------+-------------+----------------------+---------------
+congreso_diputados | DONE      | PARTIAL | 1/1           | 0       | 5       | 5           | 0/1                  | DONE_ZERO_REAL
+
+tracker_sources: 1
+sources_in_db: 1
+mismatches: 0
+waived_mismatches: 1
+waivers_active: 1
+waivers_expired: 0
+done_zero_real: 1

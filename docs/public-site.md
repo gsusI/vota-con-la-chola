@@ -1,16 +1,29 @@
 # Sitio público
 
 Estado actual:
-- La app pública vive en `ui/gh-pages-next` y se publica como estático en `docs/gh-pages`.
-- El pipeline `just explorer-gh-pages-build` ya genera el sitio y ahora escribe `CNAME` para `votaconlachola.org`.
-- El build por defecto ya no asume la subruta histórica `/vota-con-la-chola`.
-- Cloudflare mantiene un Worker en `votaconlachola.org/*` para canonizar rutas legacy (`/vota-con-la-chola/...`), añadir slash a rutas de directorio y servir el snapshot publicado desde la rama `gh-pages` mientras el cutover DNS/GitHub Pages se estabiliza.
+- La app pública vive en `ui/gh-pages-next` y se sirve como export estático desde Cloudflare Pages.
+- El pipeline canónico es `just cloudflare-pages-build`.
+- La salida pública está en `ui/gh-pages-next/out/`; `docs/gh-pages/` queda deprecado y no se versiona.
+- El build por defecto no asume la subruta histórica `/vota-con-la-chola`.
 
 Destino:
 - URL pública canónica: `https://votaconlachola.org/`.
-- Mantener `https://gsusI.github.io/vota-con-la-chola/` solo como fallback opcional mediante `GH_PAGES_NEXT_BASE_PATH=/vota-con-la-chola`.
+- Cloudflare Pages debe apuntar a `ui/gh-pages-next/out/` como output directory.
+- El proyecto conserva redirects/canonización de rutas legacy desde la capa Cloudflare cuando haga falta, pero ya no publica rama `gh-pages`.
 
-Siguiente paso operativo:
-- Publicar con `just explorer-gh-pages-publish`.
-- En GitHub Pages, fijar `votaconlachola.org` como custom domain del branch publicado.
-- Mantener DNS apuntando al hosting elegido para la rama `gh-pages`, o retirar el Worker cuando el cutover quede resuelto por DNS/CNAME directo.
+Build local:
+
+```bash
+just cloudflare-pages-build
+```
+
+Cloudflare Pages:
+- Build command: `just cloudflare-pages-build`
+- Build output directory: `ui/gh-pages-next/out`
+- Root directory: repo root
+
+Deploy manual si hay credenciales Wrangler:
+
+```bash
+just cloudflare-pages-deploy
+```

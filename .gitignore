@@ -16,8 +16,12 @@ dist/
 .next/
 out/
 node_modules/
+tmp/
+docs/gh-pages/
+ui/gh-pages-next/.static-data/
 
 # Accidental command artifacts (created by mis-quoted CLI runs)
+# Prefer deleting new junk files and relying on repo-hygiene-check over growing this list.
 /-
 /from-file
 /replay
@@ -25,30 +29,15 @@ node_modules/
 /python3 scripts/
 /after
 /status
-/tmp/
-/{ka*
-/{{ka*
-/fragmentos
 /101
 /1252
 /1253
-/1293
-/1337
-/1343
-/16
 /297
-/3210
-/3260
 /329
 /3529
 /4341
 /5028
 /5212
-/5290
-/5340
-/564
-/952
-/968
 /6
 /666
 /96.89

@@ -28,7 +28,7 @@ if str(ROOT_DIR) not in sys.path:
 from etl.parlamentario_es.db import open_db
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/legal-sanctions/data/legal-sanctions.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/legal-sanctions/data/legal-sanctions.json")
 
 
 def parse_args() -> argparse.Namespace:
@@ -104,6 +104,16 @@ def infer_snapshot_date(conn: sqlite3.Connection) -> str:
 
 
 def build_legal_graph(conn: sqlite3.Connection, *, max_norms: int, max_fragments_per_norm: int, max_edges: int) -> dict[str, Any]:
+    if not table_exists(conn, "legal_norms"):
+        return {
+            "nodes": [],
+            "edges": [],
+            "node_count": 0,
+            "edge_count": 0,
+            "relation_types": [],
+            "nodes_with_fragments": 0,
+        }
+
     norms = []
     relation_rows = []
     relation_types: list[str] = []

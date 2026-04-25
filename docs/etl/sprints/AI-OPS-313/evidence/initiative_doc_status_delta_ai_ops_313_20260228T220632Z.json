@@ -1,0 +1,110 @@
+{
+  "timestamp": "20260228T220632Z",
+  "retry_scope_metrics": {
+    "selected_doc_urls_total": 60,
+    "selected_doc_entry_keys_total": 60,
+    "doc_links_seen": 13,
+    "initiative_documents_upserted": 13,
+    "doc_links_filtered_by_selected_doc_entry_keys": 500,
+    "doc_links_filtered_by_selected_doc_urls": 0,
+    "urls_filtered_by_selected_doc_urls": 0,
+    "selected_doc_status_used_for_retry": 1,
+    "selected_doc_status_used_for_forbidden_filter": 13,
+    "archive_fetched_ok": 0,
+    "fetched_ok": 0,
+    "urls_to_fetch": 1
+  },
+  "initiative_doc_status": {
+    "overall": {
+      "downloaded_doc_links": {
+        "before": 4248,
+        "after": 4248,
+        "delta": 0
+      },
+      "missing_doc_links": {
+        "before": 5305,
+        "after": 5305,
+        "delta": 0
+      },
+      "missing_doc_links_actionable": {
+        "before": 5088,
+        "after": 5088,
+        "delta": 0
+      },
+      "effective_downloaded_doc_links_pct": {
+        "before": 45.5,
+        "after": 45.5,
+        "delta": 0.0
+      },
+      "downloaded_missing_extraction": {
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      }
+    },
+    "senado": {
+      "downloaded_doc_links": {
+        "before": 3436,
+        "after": 3436,
+        "delta": 0
+      },
+      "missing_doc_links": {
+        "before": 5305,
+        "after": 5305,
+        "delta": 0
+      },
+      "missing_doc_links_actionable": {
+        "before": 5088,
+        "after": 5088,
+        "delta": 0
+      },
+      "effective_downloaded_doc_links_pct": {
+        "before": 40.31,
+        "after": 40.31,
+        "delta": 0.0
+      },
+      "linked_to_votes_with_downloaded_docs": {
+        "before": 641,
+        "after": 641,
+        "delta": 0
+      }
+    }
+  },
+  "waf_profile_linked_to_votes": {
+    "missing_urls": {
+      "before": 1312,
+      "after": 1312,
+      "delta": 0
+    },
+    "missing_initiatives": {
+      "before": 627,
+      "after": 627,
+      "delta": 0
+    },
+    "blocked_403_urls": {
+      "before": 717,
+      "after": 717,
+      "delta": 0
+    },
+    "blocked_500_urls": {
+      "before": 134,
+      "after": 134,
+      "delta": 0
+    },
+    "unknown_status_urls": {
+      "before": 377,
+      "after": 377,
+      "delta": 0
+    },
+    "zero_doc_initiatives": {
+      "before": 6,
+      "after": 6,
+      "delta": 0
+    }
+  },
+  "senado_tail_actionable_csv_rows": {
+    "before_including_header": 1313,
+    "after_including_header": 1313,
+    "delta": 0
+  }
+}

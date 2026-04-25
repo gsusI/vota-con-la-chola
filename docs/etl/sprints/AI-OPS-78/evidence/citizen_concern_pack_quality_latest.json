@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-02-23T11:20:54+00:00",
-  "status": "ok",
+  "generated_at": "2026-04-12T12:32:24+00:00",
+  "status": "failed",
   "paths": {
-    "snapshot": "docs/gh-pages/citizen/data/citizen.json",
+    "snapshot": "/Users/jesus/Projects/vota-con-la-chola/tmp/citizen-ts2.json",
     "concerns_config": "ui/citizen/concerns_v1.json"
   },
   "thresholds": {
@@ -15,18 +15,25 @@
   },
   "summary": {
     "packs_total": 4,
-    "weak_packs_total": 0,
-    "weak_pack_ids": [],
-    "parties_total": 16,
-    "topics_total": 111,
-    "high_stakes_topics_total": 41,
-    "topic_party_cells_total": 1776
+    "weak_packs_total": 4,
+    "weak_pack_ids": [
+      "campo_industria",
+      "hogar_bolsillo",
+      "seguridad_estado",
+      "servicios_publicos"
+    ],
+    "parties_total": 29,
+    "topics_total": 10,
+    "high_stakes_topics_total": 5,
+    "topic_party_cells_total": 290
   },
   "checks": {
     "packs_present": true,
-    "weak_packs_within_threshold": true
+    "weak_packs_within_threshold": false
   },
-  "failure_reasons": [],
+  "failure_reasons": [
+    "weak_packs_above_threshold"
+  ],
   "packs": [
     {
       "pack_id": "servicios_publicos",
@@ -38,27 +45,32 @@
         "transporte"
       ],
       "tradeoff": "Prioriza bienestar cotidiano. Puede cubrir menos agenda productiva y rural.",
-      "topics_total": 30,
-      "high_stakes_topics_total": 12,
-      "high_stakes_share": 0.4,
-      "cells_total": 480,
+      "topics_total": 6,
+      "high_stakes_topics_total": 3,
+      "high_stakes_share": 0.5,
+      "cells_total": 174,
       "stance_counts": {
-        "support": 197,
-        "oppose": 220,
+        "support": 61,
+        "oppose": 24,
         "mixed": 0,
-        "unclear": 59,
-        "no_signal": 4
+        "unclear": 19,
+        "no_signal": 70
       },
-      "clear_cells_total": 417,
-      "clear_cells_pct": 0.86875,
-      "unknown_cells_total": 63,
-      "unknown_cells_pct": 0.13125,
-      "any_signal_cells_total": 476,
-      "any_signal_cells_pct": 0.991667,
-      "confidence_avg_signal": 0.672195,
-      "quality_score": 0.755345,
-      "weak": false,
-      "weak_reasons": []
+      "clear_cells_total": 85,
+      "clear_cells_pct": 0.488506,
+      "unknown_cells_total": 89,
+      "unknown_cells_pct": 0.511494,
+      "any_signal_cells_total": 104,
+      "any_signal_cells_pct": 0.597701,
+      "confidence_avg_signal": 0.315599,
+      "quality_score": 0.473514,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
     },
     {
       "pack_id": "hogar_bolsillo",
@@ -70,59 +82,32 @@
         "energia"
       ],
       "tradeoff": "Prioriza precio y empleo. Puede dejar en segundo plano instituciones y seguridad.",
-      "topics_total": 38,
-      "high_stakes_topics_total": 13,
-      "high_stakes_share": 0.342105,
-      "cells_total": 608,
+      "topics_total": 4,
+      "high_stakes_topics_total": 3,
+      "high_stakes_share": 0.75,
+      "cells_total": 116,
       "stance_counts": {
-        "support": 218,
-        "oppose": 291,
+        "support": 30,
+        "oppose": 18,
         "mixed": 0,
-        "unclear": 78,
-        "no_signal": 21
+        "unclear": 24,
+        "no_signal": 44
       },
-      "clear_cells_total": 509,
-      "clear_cells_pct": 0.837171,
-      "unknown_cells_total": 99,
-      "unknown_cells_pct": 0.162829,
-      "any_signal_cells_total": 587,
-      "any_signal_cells_pct": 0.965461,
-      "confidence_avg_signal": 0.611266,
-      "quality_score": 0.715567,
-      "weak": false,
-      "weak_reasons": []
-    },
-    {
-      "pack_id": "campo_industria",
-      "pack_label": "Campo e industria",
-      "concern_ids": [
-        "campo_rural",
-        "energia",
-        "transporte",
-        "empleo"
-      ],
-      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion.",
-      "topics_total": 43,
-      "high_stakes_topics_total": 14,
-      "high_stakes_share": 0.325581,
-      "cells_total": 688,
-      "stance_counts": {
-        "support": 259,
-        "oppose": 308,
-        "mixed": 0,
-        "unclear": 89,
-        "no_signal": 32
-      },
-      "clear_cells_total": 567,
-      "clear_cells_pct": 0.824128,
-      "unknown_cells_total": 121,
-      "unknown_cells_pct": 0.175872,
-      "any_signal_cells_total": 656,
-      "any_signal_cells_pct": 0.953488,
-      "confidence_avg_signal": 0.581323,
-      "quality_score": 0.700138,
-      "weak": false,
-      "weak_reasons": []
+      "clear_cells_total": 48,
+      "clear_cells_pct": 0.413793,
+      "unknown_cells_total": 68,
+      "unknown_cells_pct": 0.586207,
+      "any_signal_cells_total": 72,
+      "any_signal_cells_pct": 0.62069,
+      "confidence_avg_signal": 0.180232,
+      "quality_score": 0.457678,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
     },
     {
       "pack_id": "seguridad_estado",
@@ -134,27 +119,69 @@
         "igualdad"
       ],
       "tradeoff": "Prioriza orden institucional y convivencia. Puede reducir foco en coste de vida.",
-      "topics_total": 56,
-      "high_stakes_topics_total": 17,
-      "high_stakes_share": 0.303571,
-      "cells_total": 896,
+      "topics_total": 6,
+      "high_stakes_topics_total": 3,
+      "high_stakes_share": 0.5,
+      "cells_total": 174,
       "stance_counts": {
-        "support": 298,
-        "oppose": 441,
+        "support": 55,
+        "oppose": 26,
         "mixed": 0,
-        "unclear": 91,
-        "no_signal": 66
+        "unclear": 25,
+        "no_signal": 68
       },
-      "clear_cells_total": 739,
-      "clear_cells_pct": 0.824777,
-      "unknown_cells_total": 157,
-      "unknown_cells_pct": 0.175223,
-      "any_signal_cells_total": 830,
-      "any_signal_cells_pct": 0.926339,
-      "confidence_avg_signal": 0.50205,
-      "quality_score": 0.688263,
-      "weak": false,
-      "weak_reasons": []
+      "clear_cells_total": 81,
+      "clear_cells_pct": 0.465517,
+      "unknown_cells_total": 93,
+      "unknown_cells_pct": 0.534483,
+      "any_signal_cells_total": 106,
+      "any_signal_cells_pct": 0.609195,
+      "confidence_avg_signal": 0.182398,
+      "quality_score": 0.444102,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
+    },
+    {
+      "pack_id": "campo_industria",
+      "pack_label": "Campo e industria",
+      "concern_ids": [
+        "campo_rural",
+        "energia",
+        "transporte",
+        "empleo"
+      ],
+      "tradeoff": "Prioriza actividad economica y territorio. Puede dejar fuera sanidad/educacion.",
+      "topics_total": 3,
+      "high_stakes_topics_total": 1,
+      "high_stakes_share": 0.333333,
+      "cells_total": 87,
+      "stance_counts": {
+        "support": 35,
+        "oppose": 1,
+        "mixed": 0,
+        "unclear": 18,
+        "no_signal": 33
+      },
+      "clear_cells_total": 36,
+      "clear_cells_pct": 0.413793,
+      "unknown_cells_total": 51,
+      "unknown_cells_pct": 0.586207,
+      "any_signal_cells_total": 54,
+      "any_signal_cells_pct": 0.62069,
+      "confidence_avg_signal": 0.181904,
+      "quality_score": 0.374512,
+      "weak": true,
+      "weak_reasons": [
+        "topics_below_min",
+        "clear_cells_pct_below_min",
+        "unknown_cells_pct_above_max",
+        "confidence_avg_signal_below_min"
+      ]
     }
   ]
 }

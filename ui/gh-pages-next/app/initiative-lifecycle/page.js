@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
+import { resolveBasePath } from "../path-utils.mjs";
 
 function toInt(value) {
   const n = Number(value);
@@ -306,10 +303,10 @@ export default function InitiativeLifecyclePage() {
     <main className="shell">
       <section className="hero card">
         <p className="eyebrow">Iniciativas</p>
-        <h1>Tramitación legislativa</h1>
+        <h1>Lifecycle + Throughput legislativo</h1>
         <p className="sub">
-          Analiza tiempos de tramitación por iniciativa, cuellos de botella por comisión y la secuencia de votos con
-          trazabilidad sobre la confianza del enlace entre iniciativa y votación.
+          Analiza tiempo de tramitación por iniciativa, cuellos de botella por comisión y la secuencia de votos con
+          transparencia de confianza en el enlace iniciativa-votación.
         </p>
       </section>
 
@@ -331,7 +328,7 @@ export default function InitiativeLifecyclePage() {
             <span className="kpiValue">{formatInt(overview.unlinked_initiatives || 0)}</span>
           </div>
           <div className="kpiCard">
-            <span className="kpiLabel">Enlaces a votaciones</span>
+            <span className="kpiLabel">Total enlaces votos</span>
             <span className="kpiValue">{formatInt(data.meta.total_vote_links)}</span>
           </div>
           <div className="kpiCard">
@@ -347,13 +344,13 @@ export default function InitiativeLifecyclePage() {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Cuellos de botella por comisión</h2>
+          <h2>Cuellos de botella por comité</h2>
         </div>
         <div className="tableWrap">
           <table className="table">
             <thead>
               <tr>
-                <th>Comisión</th>
+                <th>Comité</th>
                 <th>Iniciativas</th>
                 <th>Sin voto</th>
                 <th>Median días (presentado→1ª votación)</th>
@@ -364,7 +361,7 @@ export default function InitiativeLifecyclePage() {
             <tbody>
               {committeeThroughput.length === 0 ? (
                 <tr>
-                  <td colSpan={6}>No hay datos suficientes de comisión para esta publicación.</td>
+                  <td colSpan={6}>Sin datos de comité suficiente para este snapshot.</td>
                 </tr>
               ) : (
                 committeeThroughput.slice(0, 12).map((row) => (
@@ -396,7 +393,7 @@ export default function InitiativeLifecyclePage() {
               className="textInput"
               value={state.q}
               onChange={(event) => setFilter("q", event.target.value)}
-              placeholder="Expediente, título, autor o comisión..."
+              placeholder="Expediente, título, autor, comité..."
             />
           </div>
           <div className="field">
@@ -411,7 +408,7 @@ export default function InitiativeLifecyclePage() {
             </select>
           </div>
           <div className="field">
-            <label>Comisión</label>
+            <label>Comité</label>
             <select
               className="textInput"
               value={state.committee}
@@ -510,7 +507,7 @@ export default function InitiativeLifecyclePage() {
             <thead>
               <tr>
                 <th>Iniciativa</th>
-                <th>Comisión / órgano</th>
+                <th>Comité / órgano</th>
                 <th>Votos vinculados</th>
                 <th>1ª votación</th>
                 <th>Días (presentado→1ª)</th>
@@ -553,7 +550,7 @@ export default function InitiativeLifecyclePage() {
                         {initiative.link_summary?.link_confidence_bucket || "sin enlace"}
                       </span>
                       <span className="tileNote">
-                        enlaces: {formatInt(initiative.link_summary?.low_confidence_links || 0)} ·
+                        links: {formatInt(initiative.link_summary?.low_confidence_links || 0)} ·
                         ratio: {toPercent((initiative.link_summary?.low_confidence_ratio || 0) * 100)}
                       </span>
                     </td>

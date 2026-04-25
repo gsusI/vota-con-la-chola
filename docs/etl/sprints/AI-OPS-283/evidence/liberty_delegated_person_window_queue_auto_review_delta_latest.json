@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "before": {
+    "actionable_queue_rows": 8,
+    "missing_designated_actor_total": 2,
+    "institutional_designated_actor_total": 6,
+    "missing_enforcement_evidence_total": 1
+  },
+  "after": {
+    "actionable_queue_rows": 0,
+    "missing_designated_actor_total": 0,
+    "institutional_designated_actor_total": 0,
+    "missing_enforcement_evidence_total": 0
+  },
+  "delta": {
+    "actionable_queue_rows_delta": -8,
+    "missing_designated_actor_delta": -2,
+    "institutional_designated_actor_delta": -6,
+    "missing_enforcement_evidence_delta": -1
+  }
+}

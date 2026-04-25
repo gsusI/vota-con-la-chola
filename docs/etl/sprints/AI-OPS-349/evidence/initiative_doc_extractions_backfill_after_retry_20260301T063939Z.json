@@ -1,0 +1,203 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 67,
+  "upserted": 67,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 1,
+    "title_hint_strong": 66
+  },
+  "by_doc_format": {
+    "html": 66,
+    "xml": 1
+  },
+  "sample": [
+    {
+      "source_record_pk": 147460,
+      "sample_initiative_id": "senado:leg14:exp:621/000036",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2022. (621/000036)"
+    },
+    {
+      "source_record_pk": 147453,
+      "sample_initiative_id": "senado:leg14:exp:621/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2021. (621/000013)"
+    },
+    {
+      "source_record_pk": 147426,
+      "sample_initiative_id": "senado:leg14:exp:621/000042",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de residuos y suelos contaminados para una economía circular. (621/000042)"
+    },
+    {
+      "source_record_pk": 147462,
+      "sample_initiative_id": "senado:leg14:exp:621/000042",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de residuos y suelos contaminados para una economía circular. (621/000042)"
+    },
+    {
+      "source_record_pk": 147449,
+      "sample_initiative_id": "senado:leg14:exp:626/000007",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifican el artículo 84.5 y la disposición adicional 5ª, para la integración total de las lenguas oficiales. (626/000007)"
+    },
+    {
+      "source_record_pk": 147463,
+      "sample_initiative_id": "senado:leg14:exp:624/000002",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de regulación de la eutanasia. (624/000002)"
+    },
+    {
+      "source_record_pk": 147428,
+      "sample_initiative_id": "senado:leg14:exp:622/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, para reconocer el carácter de tribunal consuetudinario y tradicional al Juzgado Privativo de Aguas de Orihuela (Alicante/Alacant) y Pueblos de su Marco y al Tribunal del Comuner del Rollet de Gràcia de l'Horta d'A…"
+    },
+    {
+      "source_record_pk": 147443,
+      "sample_initiative_id": "senado:leg14:exp:621/000046",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley General de Telecomunicaciones. (621/000046)"
+    },
+    {
+      "source_record_pk": 147414,
+      "sample_initiative_id": "senado:leg14:exp:621/000020",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de cambio climático y transición energética. (621/000020)"
+    },
+    {
+      "source_record_pk": 147457,
+      "sample_initiative_id": "senado:leg14:exp:621/000023",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de medidas de prevención y lucha contra el fraude fiscal, de transposición de la Directiva (UE) 2016/1164, del Consejo, de 12 de julio de 2016, por la que se establecen normas contra las prácticas de elusión fiscal que inciden directamente en el funcionamiento del mercado interior, de modificación de d…"
+    },
+    {
+      "source_record_pk": 147431,
+      "sample_initiative_id": "senado:leg12:exp:624/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, sobre medidas urgentes en aplicación del Pacto de Estado en materia de violencia de género. (624/000011)"
+    },
+    {
+      "source_record_pk": 147440,
+      "sample_initiative_id": "senado:leg12:exp:624/000011",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de reforma de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, sobre medidas urgentes en aplicación del Pacto de Estado en materia de violencia de género. (624/000011)"
+    },
+    {
+      "source_record_pk": 147454,
+      "sample_initiative_id": "senado:leg14:exp:621/000019",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se reforma la legislación civil y procesal para el apoyo a las personas con discapacidad en el ejercicio de su capacidad jurídica. (621/000019)"
+    },
+    {
+      "source_record_pk": 147456,
+      "sample_initiative_id": "senado:leg14:exp:621/000022",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de protección de datos personales tratados para fines de prevención, detección, investigación y enjuiciamiento de infracciones penales y de ejecución de sanciones penales. (621/000022)"
+    },
+    {
+      "source_record_pk": 147432,
+      "sample_initiative_id": "senado:leg12:exp:624/000013",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de mejora de la situación de orfandad de las hijas e hijos de víctimas de violencia de género y otras formas de violencia contra la mujer. (624/000013)"
+    },
+    {
+      "source_record_pk": 147424,
+      "sample_initiative_id": "senado:leg14:exp:621/000040",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de protección de los consumidores y usuarios frente a situaciones de vulnerabilidad social y económica (procedente del Real Decreto-ley 1/2021, de 19 de enero). (621/000040)"
+    },
+    {
+      "source_record_pk": 147422,
+      "sample_initiative_id": "senado:leg14:exp:621/000035",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de convivencia universitaria. (621/000035)"
+    },
+    {
+      "source_record_pk": 147418,
+      "sample_initiative_id": "senado:leg14:exp:621/000029",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica el Real Decreto-ley 17/2020, de 5 de mayo, por el que se aprueban medidas de apoyo al sector cultural y de carácter tributario para hacer frente al impacto económico y social del COVID-2019 [antes denominado Proyecto de Ley por la que se aprueban medidas de apoyo al sector cultur…"
+    },
+    {
+      "source_record_pk": 147421,
+      "sample_initiative_id": "senado:leg14:exp:621/000034",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se establece el ingreso mínimo vital (procedente del Real Decreto-ley 20/2020, de 29 de mayo). (621/000034)"
+    },
+    {
+      "source_record_pk": 147459,
+      "sample_initiative_id": "senado:leg14:exp:621/000034",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se establece el ingreso mínimo vital (procedente del Real Decreto-ley 20/2020, de 29 de mayo). (621/000034)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

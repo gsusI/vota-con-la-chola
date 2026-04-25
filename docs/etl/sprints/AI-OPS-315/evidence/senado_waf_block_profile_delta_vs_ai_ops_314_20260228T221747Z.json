@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-02-28T22:19:31+00:00",
+  "baseline": "AI-OPS-314",
+  "current": "AI-OPS-315",
+  "totals": {
+    "missing_urls": {
+      "before": 1312,
+      "after": 1259,
+      "delta": -53
+    },
+    "missing_initiatives": {
+      "before": 627,
+      "after": 627,
+      "delta": 0
+    },
+    "blocked_403_urls": {
+      "before": 717,
+      "after": 705,
+      "delta": -12
+    },
+    "blocked_500_urls": {
+      "before": 134,
+      "after": 134,
+      "delta": 0
+    },
+    "unknown_status_urls": {
+      "before": 377,
+      "after": 377,
+      "delta": 0
+    },
+    "zero_doc_initiatives": {
+      "before": 6,
+      "after": 6,
+      "delta": 0
+    }
+  }
+}

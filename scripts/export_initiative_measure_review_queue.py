@@ -73,12 +73,6 @@ def parse_args() -> argparse.Namespace:
         default=[],
         help="Case-insensitive text filter across initiative title and linked vote text",
     )
-    p.add_argument(
-        "--doc-contains",
-        action="append",
-        default=[],
-        help="Case-insensitive text filter across extracted dossier document text",
-    )
     p.add_argument("--min-priority", type=int, default=0, help="Minimum priority for exported rows")
     p.add_argument("--limit", type=int, default=0, help="0 means no limit")
     p.add_argument("--offset", type=int, default=0, help="Row offset for deterministic batching")
@@ -305,54 +299,6 @@ def _fetch_doc_rows(conn: Any, initiative_id: str, doc_source_id: str) -> list[d
     ]
 
 
-GOOD_TEXT_QUALITIES = {"structured_good", "html_good", "pdf_text_good", "ocr_good", "text_good"}
-
-
-def _fetch_doc_search_blob(conn: Any, initiative_id: str, doc_source_id: str) -> str:
-    if not _table_exists(conn, "parl_initiative_doc_extractions"):
-        return ""
-    rows = conn.execute(
-        """
-        SELECT
-          COALESCE(ex.extracted_title, '') AS extracted_title,
-          COALESCE(ex.extracted_subject, '') AS extracted_subject,
-          COALESCE(ex.extracted_excerpt, '') AS extracted_excerpt,
-          COALESCE(ex.text_quality, '') AS text_quality,
-          COALESCE(ex.full_text_path, '') AS full_text_path
-        FROM parl_initiative_documents pid
-        JOIN text_documents td
-          ON td.source_record_pk = pid.source_record_pk
-         AND td.source_id = ?
-        JOIN parl_initiative_doc_extractions ex
-          ON ex.source_record_pk = td.source_record_pk
-         AND ex.source_id = td.source_id
-        WHERE pid.initiative_id = ?
-          AND pid.doc_kind = 'bocg'
-        ORDER BY td.source_url ASC
-        """,
-        (_norm(doc_source_id), _norm(initiative_id)),
-    ).fetchall()
-    chunks: list[str] = []
-    for row in rows:
-        for key in ("extracted_title", "extracted_subject", "extracted_excerpt"):
-            value = _norm(row[key])
-            if value:
-                chunks.append(value)
-        if _norm(row["text_quality"]) not in GOOD_TEXT_QUALITIES:
-            continue
-        full_text_path = Path(_norm(row["full_text_path"]))
-        if not full_text_path.exists() or not full_text_path.is_file():
-            continue
-        try:
-            text = full_text_path.read_text(encoding="utf-8")
-        except UnicodeDecodeError:
-            text = full_text_path.read_text(encoding="utf-8", errors="ignore")
-        value = _norm(text)
-        if value:
-            chunks.append(value)
-    return "\n".join(chunks).lower()
-
-
 def _fetch_linked_votes(conn: Any, initiative_id: str) -> list[dict[str, Any]]:
     rows = conn.execute(
         """
@@ -549,11 +495,9 @@ def fetch_review_rows(
     *,
     only_pending: bool,
     contains_terms: list[str],
-    doc_contains_terms: list[str] | None = None,
     min_priority: int,
     limit: int,
     offset: int,
-    doc_source_id: str = DEFAULT_DOC_SOURCE_ID,
 ) -> list[dict[str, Any]]:
     where = ["1=1"]
     params: list[Any] = []
@@ -567,8 +511,7 @@ def fetch_review_rows(
     limit_i = max(0, int(limit or 0))
     offset_i = max(0, int(offset or 0))
     contains_norm = [_norm(term).lower() for term in contains_terms if _norm(term)]
-    doc_contains_norm = [_norm(term).lower() for term in (doc_contains_terms or []) if _norm(term)]
-    if not contains_norm and not doc_contains_norm:
+    if not contains_norm:
         if limit_i > 0:
             limit_sql = "LIMIT ? OFFSET ?"
             params.extend([limit_i, offset_i])
@@ -605,16 +548,10 @@ def fetch_review_rows(
     ).fetchall()
 
     out: list[dict[str, Any]] = []
-    linked_vote_cache: dict[str, list[dict[str, Any]]] = {}
-    doc_search_cache: dict[str, str] = {}
     for row in rows:
         item = {key: row[key] for key in row.keys()}
         if contains_norm:
-            initiative_id = _norm(item["initiative_id"])
-            linked_votes = linked_vote_cache.get(initiative_id)
-            if linked_votes is None:
-                linked_votes = _fetch_linked_votes(conn, initiative_id)
-                linked_vote_cache[initiative_id] = linked_votes
+            linked_votes = _fetch_linked_votes(conn, _norm(item["initiative_id"]))
             joined = " ".join(
                 [
                     _norm(item["initiative_title"]),
@@ -634,16 +571,8 @@ def fetch_review_rows(
             ).lower()
             if not any(term in joined for term in contains_norm):
                 continue
-        if doc_contains_norm:
-            initiative_id = _norm(item["initiative_id"])
-            doc_blob = doc_search_cache.get(initiative_id)
-            if doc_blob is None:
-                doc_blob = _fetch_doc_search_blob(conn, initiative_id, doc_source_id)
-                doc_search_cache[initiative_id] = doc_blob
-            if not any(term in doc_blob for term in doc_contains_norm):
-                continue
         out.append({key: (_norm(value) if isinstance(value, str) else value) for key, value in item.items()})
-    if offset_i > 0 or limit_i > 0:
+    if contains_norm and (offset_i > 0 or limit_i > 0):
         sliced = out[offset_i:]
         if limit_i > 0:
             sliced = sliced[:limit_i]
@@ -784,11 +713,9 @@ def main() -> int:
             conn,
             only_pending=bool(args.only_pending),
             contains_terms=list(args.contains or []),
-            doc_contains_terms=list(args.doc_contains or []),
             min_priority=int(args.min_priority or 0),
             limit=int(args.limit or 0),
             offset=int(args.offset or 0),
-            doc_source_id=str(args.doc_source_id),
         )
         output_rows: list[list[str]] = []
         for row in rows:

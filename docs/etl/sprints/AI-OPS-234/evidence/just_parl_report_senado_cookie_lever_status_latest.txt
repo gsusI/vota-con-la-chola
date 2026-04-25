@@ -1,0 +1,49 @@
+python3 scripts/report_senado_cookie_lever_status.py --cookie-file etl/data/raw/manual/senado_iniciativas_cookie_seed_refresh_20260218T201301Z.cookies.json --domain-contains senado.es --max-age-hours 24 --min-domain-cookies 1 --min-unexpired-persistent-cookies 1 --out docs/etl/sprints/AI-OPS-234/evidence/senado_cookie_lever_status_just_latest.json
+{
+  "generated_at": "2026-02-27T09:55:20+00:00",
+  "status": "degraded",
+  "cookie_file": "senado_iniciativas_cookie_seed_refresh_20260218T201301Z.cookies.json",
+  "domain_contains": "senado.es",
+  "thresholds": {
+    "max_age_hours": 24.0,
+    "min_domain_cookies": 1,
+    "min_unexpired_persistent_cookies": 1
+  },
+  "file": {
+    "modified_at": "2026-02-18T21:43:14+00:00",
+    "age_hours": 204.202,
+    "size_bytes": 1440
+  },
+  "cookies": {
+    "total": 6,
+    "domain_total": 6,
+    "persistent_total": 3,
+    "unexpired_persistent_total": 2,
+    "session_total": 3,
+    "secure_total": 2,
+    "http_only_total": 3,
+    "domain_names": [
+      ".senado.es",
+      ".www.senado.es",
+      "www.senado.es"
+    ],
+    "cookie_names": [
+      "JSESSIONID",
+      "RT",
+      "TS0183a7e2",
+      "_ga",
+      "_ga_GYTN66V609",
+      "senpers"
+    ],
+    "structural_fingerprint_sha256": "e13235aa4566a44c49721a39c2d89e6bcdec5846b8a8260f72de4b16c0e3949b"
+  },
+  "checks": {
+    "has_domain_cookies": true,
+    "file_age_within_threshold": false,
+    "has_unexpired_persistent_cookies": true
+  },
+  "no_new_lever": true,
+  "strict_fail_reasons": [
+    "cookie_file_stale"
+  ]
+}

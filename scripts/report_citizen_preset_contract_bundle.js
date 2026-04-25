@@ -17,7 +17,7 @@ function usage() {
     "Options:",
     "  --fixture <path>    Fixture JSON path (default: tests/fixtures/citizen_preset_hash_matrix.json)",
     "  --source <path>     Source codec path (default: ui/citizen/preset_codec.js)",
-    "  --published <path>  Published codec path (default: docs/gh-pages/citizen/preset_codec.js)",
+    "  --published <path>  Published codec path (default: ui/gh-pages-next/public/legacy/citizen/preset_codec.js)",
     "  --json-out <path>   Optional output file for JSON report",
     "  --strict            Exit non-zero when any sub-contract fails",
     "  --help              Show this help",
@@ -28,7 +28,7 @@ function parseArgs(argv) {
   const out = {
     fixture: "tests/fixtures/citizen_preset_hash_matrix.json",
     source: "ui/citizen/preset_codec.js",
-    published: "docs/gh-pages/citizen/preset_codec.js",
+    published: "ui/gh-pages-next/public/legacy/citizen/preset_codec.js",
     jsonOut: "",
     strict: false,
     help: false,

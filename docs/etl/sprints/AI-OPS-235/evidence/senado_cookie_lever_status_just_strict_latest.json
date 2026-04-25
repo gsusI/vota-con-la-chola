@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-02-27T10:07:21+00:00",
+  "status": "degraded",
+  "cookie_file": "senado_iniciativas_cookie_refresh_ai_ops_235_20260227T100143Z.cookies.json",
+  "domain_contains": "senado.es",
+  "thresholds": {
+    "max_age_hours": 24.0,
+    "min_domain_cookies": 1,
+    "min_unexpired_persistent_cookies": 1
+  },
+  "file": {
+    "modified_at": "2026-02-27T10:04:34+00:00",
+    "age_hours": 0.046,
+    "size_bytes": 2
+  },
+  "cookies": {
+    "total": 0,
+    "domain_total": 0,
+    "persistent_total": 0,
+    "unexpired_persistent_total": 0,
+    "session_total": 0,
+    "secure_total": 0,
+    "http_only_total": 0,
+    "domain_names": [],
+    "cookie_names": [],
+    "structural_fingerprint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "checks": {
+    "has_domain_cookies": false,
+    "file_age_within_threshold": true,
+    "has_unexpired_persistent_cookies": false
+  },
+  "no_new_lever": true,
+  "strict_fail_reasons": [
+    "no_domain_cookies",
+    "no_unexpired_persistent_cookies"
+  ]
+}

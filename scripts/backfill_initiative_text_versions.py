@@ -113,12 +113,6 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_INITIATIVE_SOURCE_IDS,
         help="CSV of parl_initiatives.source_id values to include",
     )
-    p.add_argument(
-        "--initiative-id",
-        action="append",
-        default=[],
-        help="Specific initiative_id to include (repeatable)",
-    )
     p.add_argument("--doc-source-id", default=DEFAULT_DOC_SOURCE_ID, help="text_documents.source_id")
     p.add_argument("--doc-kind", default=DEFAULT_DOC_KIND, help="parl_initiative_documents.doc_kind")
     p.add_argument(
@@ -226,31 +220,6 @@ def _looks_like_senado_shell_excerpt(text: str) -> bool:
     return False
 
 
-def _looks_like_senado_detail_excerpt(text: str, initiative_title: str) -> bool:
-    lower = _normalize_excerpt(text).lower()
-    if not lower:
-        return False
-    markers = 0
-    for needle in (
-        "autor:",
-        "situación:",
-        "situacion:",
-        "fecha de presentación:",
-        "fecha de presentacion:",
-        "procedimiento:",
-        "tramitación seguida",
-        "tramitacion seguida",
-        "calificación",
-        "calificacion",
-        "datos abiertos",
-    ):
-        if needle in lower:
-            markers += 1
-    title = _norm(initiative_title).lower()
-    title_hit = bool(title and title in lower)
-    return bool(markers >= 3 or (title_hit and markers >= 2))
-
-
 def _normalize_excerpt(text: str) -> str:
     return WS_RE.sub(" ", _norm(text))
 
@@ -294,17 +263,16 @@ def _infer_chamber(url: str, initiative_source_id: str) -> str:
 
 
 def _extract_excerpt(doc_row: dict[str, Any]) -> str:
+    text = _norm(doc_row.get("text_excerpt"))
+    if text:
+        return text
     raw_path = Path(_norm(doc_row.get("raw_path")))
-    if raw_path.exists() and raw_path.is_file():
-        raw_bytes = raw_path.read_bytes()
-        if should_parse_as_pdf(_norm(doc_row.get("content_type")), raw_path):
-            text = extract_from_pdf(raw_bytes, raw_path)
-        else:
-            text = extract_from_xml_or_html(raw_bytes)
-        text = _norm(text)
-        if text:
-            return text[:6000]
-    return _norm(doc_row.get("text_excerpt"))
+    if not raw_path.exists() or not raw_path.is_file():
+        return ""
+    raw_bytes = raw_path.read_bytes()
+    if should_parse_as_pdf(_norm(doc_row.get("content_type")), raw_path):
+        return extract_from_pdf(raw_bytes, raw_path)[:6000]
+    return extract_from_xml_or_html(raw_bytes)[:6000]
 
 
 def _infer_stage_kind(
@@ -394,13 +362,7 @@ def parse_doc_version_metadata(doc_row: dict[str, Any]) -> dict[str, Any] | None
             legislature = _norm(senate_meta.get("legislature"))
             tipo = _norm(senate_meta.get("tipo"))
             num = _norm(senate_meta.get("num"))
-            if family == "tipoFich3" and (
-                not excerpt
-                or (
-                    _looks_like_senado_shell_excerpt(excerpt)
-                    and not _looks_like_senado_detail_excerpt(excerpt, initiative_title)
-                )
-            ):
+            if family == "tipoFich3" and ("html" in content_type or _looks_like_senado_shell_excerpt(excerpt)):
                 return None
             doc_series = tipo
             doc_number = num
@@ -517,7 +479,6 @@ def _fetch_doc_rows(
     conn: Any,
     *,
     initiative_source_ids: tuple[str, ...],
-    initiative_ids: tuple[str, ...] = (),
     doc_source_id: str,
     doc_kind: str,
     only_vote_linked: bool,
@@ -528,10 +489,6 @@ def _fetch_doc_rows(
     marks = ",".join("?" for _ in initiative_source_ids)
     where = [f"i.source_id IN ({marks})", "d.doc_kind = ?"]
     params: list[Any] = [*initiative_source_ids, _norm(doc_kind)]
-    if initiative_ids:
-        id_marks = ",".join("?" for _ in initiative_ids)
-        where.append(f"i.initiative_id IN ({id_marks})")
-        params.extend(initiative_ids)
     if only_vote_linked:
         where.append("EXISTS (SELECT 1 FROM parl_vote_event_initiatives pvi WHERE pvi.initiative_id = i.initiative_id)")
     rows = conn.execute(
@@ -599,7 +556,6 @@ def backfill_versions(
     conn: Any,
     *,
     initiative_source_ids: tuple[str, ...],
-    initiative_ids: tuple[str, ...] = (),
     doc_source_id: str,
     doc_kind: str,
     only_vote_linked: bool,
@@ -609,7 +565,6 @@ def backfill_versions(
     doc_rows = _fetch_doc_rows(
         conn,
         initiative_source_ids=initiative_source_ids,
-        initiative_ids=initiative_ids,
         doc_source_id=doc_source_id,
         doc_kind=doc_kind,
         only_vote_linked=only_vote_linked,
@@ -720,7 +675,6 @@ def backfill_versions(
 
     return {
         "initiative_source_ids": list(initiative_source_ids),
-        "initiative_ids": list(initiative_ids),
         "doc_source_id": _norm(doc_source_id),
         "doc_kind": _norm(doc_kind),
         "dry_run": bool(dry_run),
@@ -744,13 +698,11 @@ def main() -> int:
         return 2
 
     initiative_source_ids = _parse_source_ids(args.initiative_source_ids)
-    initiative_ids = tuple(_norm(value) for value in (args.initiative_id or ()) if _norm(value))
     with open_db(db_path) as conn:
         apply_schema(conn, DEFAULT_SCHEMA)
         summary = backfill_versions(
             conn,
             initiative_source_ids=initiative_source_ids,
-            initiative_ids=initiative_ids,
             doc_source_id=_norm(args.doc_source_id) or DEFAULT_DOC_SOURCE_ID,
             doc_kind=_norm(args.doc_kind) or DEFAULT_DOC_KIND,
             only_vote_linked=bool(args.only_vote_linked),

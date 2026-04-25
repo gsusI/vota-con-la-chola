@@ -2,10 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ColumnFiltersRow, applyColumnFilters } from "../components/column-filters";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
+import { buildOutcomeInitiativeSearchText, normalizeOutcomeMeasurePreviews } from "./outcomeMeasures.mjs";
+import { resolveBasePath } from "../path-utils.mjs";
 
 function normalizePartySlugValue(value) {
   return String(value || "")
@@ -134,6 +132,13 @@ const OUTCOME_MISSING_LABELS = {
   missing_official_source_url: "fuente oficial",
 };
 
+const OUTCOME_MEASURE_SIDE_LABELS = {
+  yes: "Voto si",
+  no: "Voto no",
+  mixed: "Mixto",
+  unknown: "Sin lado",
+};
+
 function getOutcomeSubject(row) {
   return compactInlineText(row?.vote_subject || row?.title || row?.expediente_text || "", 200);
 }
@@ -171,6 +176,19 @@ function getOutcomeInitiativeHref(row) {
 
 function getOutcomeSourceUrl(row) {
   return normalizeInlineText(row?.source_url || row?.initiative_doc_url || row?.initiative_source_url || "");
+}
+
+function getOutcomeMeasurePillClass(supportSide) {
+  const key = String(supportSide || "").trim().toLowerCase();
+  if (key === "yes") return "pill-success";
+  if (key === "no") return "pill-danger";
+  if (key === "mixed") return "pill-warning";
+  return "pill-muted";
+}
+
+function formatOutcomeMeasureSideLabel(supportSide) {
+  const key = String(supportSide || "").trim().toLowerCase();
+  return OUTCOME_MEASURE_SIDE_LABELS[key] || OUTCOME_MEASURE_SIDE_LABELS.unknown;
 }
 
 function getOutcomeMissingLabels(row) {
@@ -833,7 +851,9 @@ export default function AccountabilityPageClient({ view = "all" }) {
     if (key === "margin") return row.totals?.margin ?? row.margin;
     if (key === "pivotal_count") return row.pivotal_parties?.length || 0;
     if (key === "vote_subject") return getOutcomeSubject(row);
-    if (key === "initiative") return getOutcomeInitiativeLabel(row);
+    if (key === "initiative") {
+      return `${getOutcomeInitiativeLabel(row)} ${buildOutcomeInitiativeSearchText(row)}`.trim();
+    }
     if (key === "source_url") return getOutcomeSourceUrl(row);
     if (key === "interpretability") return isOutcomeInterpretable(row) ? "completa" : "incompleta";
     if (key === "source_bucket") return formatChamberLabel(row.source_bucket);
@@ -923,13 +943,13 @@ export default function AccountabilityPageClient({ view = "all" }) {
 
   if (error || !data) {
     return (
-      <main className="shell">
-        <section className="card block">
-          <h2>Cuenta de datos sin datos</h2>
-          <p className="sub">No pude cargar el snapshot estático de accountability.</p>
-          <p className="sub">Error: {error || "sin datos"}</p>
-          <p className="sub">
-            Asegura ejecutar <code>just explorer-gh-pages-build</code> para regenerar <code>docs/gh-pages/parliamentary-accountability/data/accountability.json</code>.
+      <main className="accountability-page shell">
+        <section className="accountability-empty-state card block">
+          <h2 className="accountability-empty-state__title">Cuenta de datos sin datos</h2>
+          <p className="accountability-empty-state__message sub">No pude cargar el snapshot estático de accountability.</p>
+          <p className="accountability-empty-state__message sub">Error: {error || "sin datos"}</p>
+          <p className="accountability-empty-state__hint sub">
+            Asegura ejecutar <code>just cloudflare-pages-build</code> para regenerar <code>ui/gh-pages-next/public/parliamentary-accountability/data/accountability.json</code>.
           </p>
         </section>
       </main>
@@ -947,14 +967,14 @@ export default function AccountabilityPageClient({ view = "all" }) {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Seguimiento parlamentario</p>
+        <p className="eyebrow">Accountability parlamentaria</p>
         <h1>Analítica de disciplina y conducta de voto</h1>
         <p className="sub">
-          Publicación estática actualizada. Métricas de disciplina de grupo, asistencia, similitud
+          Snapshot estático para GH Pages. Métricas de disciplina de grupo, asistencia, similitud
           entre bloques y resultados por votación (con membresía temporal).
         </p>
         <div className="chips">
-          <span className="chip">Actualizado: {data.meta.generated_at}</span>
+          <span className="chip">Snapshot: {data.meta.generated_at}</span>
           <span className="chip">Votaciones analizadas: {formatInt(totalEvents)}</span>
           <span className="chip">Pares de coalición: {formatInt(data.coalitions?.pairs?.length || 0)}</span>
         </div>
@@ -1026,8 +1046,8 @@ export default function AccountabilityPageClient({ view = "all" }) {
                   { key: "directional_votes", label: "Votos direccionales", type: "number" },
                   { key: "aligned", label: "Alineados", type: "number" },
                   { key: "rebels", label: "Rebeldes", type: "number" },
-                  { key: "discipline_rate_pct", label: "Tasa de alineación", type: "number" },
-                  { key: "rebellion_rate_pct", label: "Tasa de rebeldía", type: "number" },
+                  { key: "discipline_rate_pct", label: "Tasa alineacion", type: "number" },
+                  { key: "rebellion_rate_pct", label: "Tasa rebeldia", type: "number" },
                   { key: "absence_rate_pct", label: "Ausencias", type: "number" },
                 ]}
                 filtersByTable={filtersByTable}
@@ -1087,7 +1107,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
                   { key: "directional_votes", label: "Votos direccionales", type: "number" },
                   { key: "aligned", label: "Alineados", type: "number" },
                   { key: "rebels", label: "Rebeldes", type: "number" },
-                  { key: "rebellion_rate_pct", label: "Tasa de rebeldía", type: "number" },
+                  { key: "rebellion_rate_pct", label: "Tasa rebeldia", type: "number" },
                   { key: "absence_rate_pct", label: "Ausencias", type: "number" },
                 ]}
                 filtersByTable={filtersByTable}
@@ -1146,10 +1166,10 @@ export default function AccountabilityPageClient({ view = "all" }) {
                 tableId="partyScope"
                 columns={[
                   { key: "party", label: "Partido", type: "text" },
-                  { key: "scope", label: "Cámara/leg.", type: "text" },
+                  { key: "scope", label: "Camara/leg", type: "text" },
                   { key: "directional_votes", label: "Votos direccionales", type: "number" },
                   { key: "rebels", label: "Rebeldes", type: "number" },
-                  { key: "rebellion_rate_pct", label: "Tasa de rebeldía", type: "number" },
+                  { key: "rebellion_rate_pct", label: "Tasa rebeldia", type: "number" },
                 ]}
                 filtersByTable={filtersByTable}
                 onFilterChange={onFilterChange}
@@ -1312,7 +1332,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
                 <SortHeader tableId="outcomes" columnKey="vote_date" label="Fecha" sortByTable={sortByTable} onSort={onSort} defaultDirection="desc" />
                 <SortHeader tableId="outcomes" columnKey="source_bucket" label="Cámara" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="legislature" label="Legislatura" sortByTable={sortByTable} onSort={onSort} defaultDirection="desc" />
-                <SortHeader tableId="outcomes" columnKey="vote_subject" label="Qué se votó" sortByTable={sortByTable} onSort={onSort} />
+                <SortHeader tableId="outcomes" columnKey="vote_subject" label="Que se voto" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="initiative" label="Iniciativa" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="interpretability" label="Lectura" sortByTable={sortByTable} onSort={onSort} />
                 <SortHeader tableId="outcomes" columnKey="outcome" label="Resultado" sortByTable={sortByTable} onSort={onSort} />
@@ -1326,9 +1346,9 @@ export default function AccountabilityPageClient({ view = "all" }) {
                 tableId="outcomes"
                 columns={[
                   { key: "vote_date", label: "Fecha", type: "text" },
-                  { key: "source_bucket", label: "Cámara", type: "text" },
+                  { key: "source_bucket", label: "Camara", type: "text" },
                   { key: "legislature", label: "Legislatura", type: "number" },
-                  { key: "vote_subject", label: "Qué se votó", type: "text" },
+                  { key: "vote_subject", label: "Que se voto", type: "text" },
                   { key: "initiative", label: "Iniciativa", type: "text" },
                   { key: "interpretability", label: "Lectura", type: "text" },
                   { key: "outcome", label: "Resultado", type: "text" },
@@ -1344,47 +1364,91 @@ export default function AccountabilityPageClient({ view = "all" }) {
             </thead>
             <tbody>
               {sortedOutcomes.map((row) => (
-                <tr key={row.vote_event_id}>
-                  <td>{row.vote_date || ""}</td>
-                  <td>{formatChamberLabel(row.source_bucket)}</td>
-                  <td>{row.legislature || "-"}</td>
-                  <td>
-                    <div>{getOutcomeSubject(row) || "Sin pregunta de votación"}</div>
-                    {!isOutcomeInterpretable(row) ? (
-                      <div style={{ marginTop: "4px", color: "#8a4b3d", fontSize: "0.72rem" }}>
-                        Falta: {getOutcomeMissingLabels(row) || "datos esenciales"}
-                      </div>
-                    ) : null}
-                  </td>
-                  <td>
-                    {getOutcomeInitiativeHref(row) ? (
-                      <a href={getOutcomeInitiativeHref(row)}>{getOutcomeInitiativeLabel(row)}</a>
-                    ) : (
-                      getOutcomeInitiativeLabel(row)
-                    )}
-                  </td>
-                  <td>
-                    <span className={`pill ${isOutcomeInterpretable(row) ? "pill-success" : "pill-warning"}`}>
-                      {isOutcomeInterpretable(row) ? "Completa" : "Incompleta"}
-                    </span>
-                  </td>
-                  <td>{renderOutcomePill(row.outcome)}</td>
-                  <td>{formatOutcomeMargin(row.totals?.margin ?? row.margin)}</td>
-                  <td>{formatTopicLabel(row.topic)}</td>
-                  <td>{formatInt(row.pivotal_parties?.length || 0)}</td>
-                  <td>
-                    {getOutcomeSourceUrl(row) ? (
-                      <a href={getOutcomeSourceUrl(row)} target="_blank" rel="noreferrer">Fuente oficial</a>
-                    ) : (
-                      "Sin fuente"
-                    )}
-                  </td>
-                  <td>{formatContextLabel(row.context)}</td>
-                </tr>
+                (() => {
+                  const measurePreviews = normalizeOutcomeMeasurePreviews(row, { limit: 2 });
+                  const extraMeasures = Math.max(0, Number(row?.initiative_measures_count || 0) - measurePreviews.length);
+                  const hasEventSpecificMeasures = String(row?.initiative_measure_match_scope || "") === "vote_event";
+                  return (
+                    <tr key={row.vote_event_id}>
+                      <td>{row.vote_date || ""}</td>
+                      <td>{formatChamberLabel(row.source_bucket)}</td>
+                      <td>{row.legislature || "-"}</td>
+                      <td>
+                        <div>{getOutcomeSubject(row) || "Sin pregunta de votacion"}</div>
+                        {!isOutcomeInterpretable(row) ? (
+                          <div style={{ marginTop: "4px", color: "#8a4b3d", fontSize: "0.72rem" }}>
+                            Falta: {getOutcomeMissingLabels(row) || "datos esenciales"}
+                          </div>
+                        ) : null}
+                      </td>
+                      <td>
+                        <div>
+                          {getOutcomeInitiativeHref(row) ? (
+                            <a href={getOutcomeInitiativeHref(row)}>{getOutcomeInitiativeLabel(row)}</a>
+                          ) : (
+                            getOutcomeInitiativeLabel(row)
+                          )}
+                        </div>
+                        {measurePreviews.length ? (
+                          <div style={{ marginTop: "8px", display: "grid", gap: "6px" }}>
+                            <div style={{ color: "#5e5337", fontSize: "0.72rem" }}>
+                              {hasEventSpecificMeasures ? "Medidas ligadas a esta votacion" : "Medidas principales de la iniciativa"}
+                            </div>
+                            {measurePreviews.map((measure) => (
+                              <div
+                                key={`${row.vote_event_id}:${measure.rank}:${measure.title}`}
+                                style={{
+                                  background: "#f5f2e7",
+                                  borderLeft: "3px solid #b88b2e",
+                                  borderRadius: "8px",
+                                  padding: "6px 8px",
+                                  fontSize: "0.74rem",
+                                  lineHeight: 1.4,
+                                }}
+                              >
+                                <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
+                                  <strong>{measure.title}</strong>
+                                  <span className={`pill ${getOutcomeMeasurePillClass(measure.supportSide)}`}>
+                                    {formatOutcomeMeasureSideLabel(measure.supportSide)}
+                                  </span>
+                                </div>
+                                {measure.summary ? (
+                                  <div style={{ marginTop: "4px", color: "#3d3528" }}>{measure.summary}</div>
+                                ) : null}
+                              </div>
+                            ))}
+                            {extraMeasures > 0 ? (
+                              <div style={{ color: "#5e5337", fontSize: "0.72rem" }}>
+                                +{formatInt(extraMeasures)} medida(s) más
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null}
+                      </td>
+                      <td>
+                        <span className={`pill ${isOutcomeInterpretable(row) ? "pill-success" : "pill-warning"}`}>
+                          {isOutcomeInterpretable(row) ? "Completa" : "Incompleta"}
+                        </span>
+                      </td>
+                      <td>{renderOutcomePill(row.outcome)}</td>
+                      <td>{formatOutcomeMargin(row.totals?.margin ?? row.margin)}</td>
+                      <td>{formatTopicLabel(row.topic)}</td>
+                      <td>{formatInt(row.pivotal_parties?.length || 0)}</td>
+                      <td>
+                        {getOutcomeSourceUrl(row) ? (
+                          <a href={getOutcomeSourceUrl(row)} target="_blank" rel="noreferrer">Fuente oficial</a>
+                        ) : (
+                          "Sin fuente"
+                        )}
+                      </td>
+                      <td>{formatContextLabel(row.context)}</td>
+                    </tr>
+                  );
+                })()
               ))}
               {!sortedOutcomes.length ? (
                 <tr>
-                  <td colSpan="11">Sin filas</td>
+                  <td colSpan="12">Sin filas</td>
                 </tr>
               ) : null}
             </tbody>
@@ -1409,7 +1473,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
               <ColumnFiltersRow
                 tableId="coalitions"
                 columns={[
-                  { key: "scope", label: "Ámbito", type: "text" },
+                  { key: "scope", label: "Ambito", type: "text" },
                   { key: "party_a", label: "Partido A", type: "text" },
                   { key: "party_b", label: "Partido B", type: "text" },
                   { key: "shared_events", label: "Eventos", type: "number" },
@@ -1487,7 +1551,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
               <ColumnFiltersRow
                 tableId="issues"
                 columns={[
-                  { key: "scope", label: "Ámbito", type: "text" },
+                  { key: "scope", label: "Ambito", type: "text" },
                   { key: "topic", label: "Tema", type: "text" },
                   { key: "party_a", label: "Partido A", type: "text" },
                   { key: "party_b", label: "Partido B", type: "text" },

@@ -7,6 +7,19 @@ on:
       - main
 
 jobs:
+  repo-root-hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run repo root hygiene checker
+        run: |
+          python3 scripts/check_repo_root_hygiene.py
+          python3 -m unittest tests.test_check_repo_root_hygiene -q
+
   citizen-preset-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -35,7 +48,7 @@ jobs:
         run: |
           node scripts/report_citizen_preset_codec_parity.js \
             --source ui/citizen/preset_codec.js \
-            --published docs/gh-pages/citizen/preset_codec.js \
+            --published ui/gh-pages-next/public/legacy/citizen/preset_codec.js \
             --strict \
             --json-out citizen_preset_codec_parity_ci.json
 
@@ -43,7 +56,7 @@ jobs:
         run: |
           node scripts/report_citizen_preset_codec_sync_state.js \
             --source ui/citizen/preset_codec.js \
-            --published docs/gh-pages/citizen/preset_codec.js \
+            --published ui/gh-pages-next/public/legacy/citizen/preset_codec.js \
             --strict \
             --json-out citizen_preset_codec_sync_ci.json
 
@@ -52,7 +65,7 @@ jobs:
           node scripts/report_citizen_preset_contract_bundle.js \
             --fixture tests/fixtures/citizen_preset_hash_matrix.json \
             --source ui/citizen/preset_codec.js \
-            --published docs/gh-pages/citizen/preset_codec.js \
+            --published ui/gh-pages-next/public/legacy/citizen/preset_codec.js \
             --strict \
             --json-out citizen_preset_contract_bundle_ci.json
 

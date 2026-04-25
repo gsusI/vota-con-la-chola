@@ -1,0 +1,202 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "congreso_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 729,
+  "upserted": 729,
+  "needs_review": 2,
+  "by_method": {
+    "title_fallback": 2,
+    "title_fallback_strong": 727
+  },
+  "by_doc_format": {
+    "pdf": 729
+  },
+  "sample": [
+    {
+      "source_record_pk": 141746,
+      "sample_initiative_id": "congreso:leg15:exp:121/000030/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se modifica la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido, para aplicar el tipo impositivo del IVA del 4% a la prestación de todos los servicios de atención a la dependencia no exentos."
+    },
+    {
+      "source_record_pk": 142149,
+      "sample_initiative_id": "congreso:leg15:exp:121/000022/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifican el texto refundido de la Ley sobre responsabilidad civil y seguro en la circulación de vehículos a motor, aprobado por el Real Decreto Legislativo 8/2004, de 29 de octubre, y la Ley 20/2015, de 14 de julio, de ordenación, supervisión y solvencia de las entidades aseguradoras y r…"
+    },
+    {
+      "source_record_pk": 142150,
+      "sample_initiative_id": "congreso:leg15:exp:121/000022/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifican el texto refundido de la Ley sobre responsabilidad civil y seguro en la circulación de vehículos a motor, aprobado por el Real Decreto Legislativo 8/2004, de 29 de octubre, y la Ley 20/2015, de 14 de julio, de ordenación, supervisión y solvencia de las entidades aseguradoras y r…"
+    },
+    {
+      "source_record_pk": 142629,
+      "sample_initiative_id": "congreso:leg15:exp:124/000022/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación de la Ley 39/2007, de 19 de noviembre, de la carrera militar."
+    },
+    {
+      "source_record_pk": 142630,
+      "sample_initiative_id": "congreso:leg15:exp:124/000024/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se reforma la fiscalidad del sector primario."
+    },
+    {
+      "source_record_pk": 142252,
+      "sample_initiative_id": "congreso:leg15:exp:121/000002/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se aprueban medidas urgentes para la ejecución del Plan de Recuperación, Transformación y Resiliencia en materia de servicio público de justicia, función pública, régimen local y mecenazgo (procedente del Real Decreto-ley 6/2023, de 19 de diciembre)."
+    },
+    {
+      "source_record_pk": 142254,
+      "sample_initiative_id": "congreso:leg15:exp:121/000003/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adoptan medidas para afrontar las consecuencias económicas y sociales derivadas de los conflictos en Ucrania y Oriente Próximo, así como para paliar los efectos de la sequía (procedente del Real Decreto-ley 8/2023, de 27 de diciembre)."
+    },
+    {
+      "source_record_pk": 142628,
+      "sample_initiative_id": "congreso:leg15:exp:124/000012/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley sobre exención fiscal de las ayudas previstas en el Real Decreto 574/2023, de 4 de julio, por el que se regula el procedimiento de concesión de ayudas a las personas afectadas por la talidomida en España, durante el periodo 1950-1985."
+    },
+    {
+      "source_record_pk": 142627,
+      "sample_initiative_id": "congreso:leg15:exp:124/000004/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal."
+    },
+    {
+      "source_record_pk": 142236,
+      "sample_initiative_id": "congreso:leg15:exp:121/000074/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de Enjuiciamiento Criminal."
+    },
+    {
+      "source_record_pk": 142160,
+      "sample_initiative_id": "congreso:leg15:exp:121/000031/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de la Función Pública de la Administración del Estado."
+    },
+    {
+      "source_record_pk": 141821,
+      "sample_initiative_id": "congreso:leg15:exp:122/000062/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 2/1979, de 3 de octubre, del Tribunal Constitucional."
+    },
+    {
+      "source_record_pk": 142626,
+      "sample_initiative_id": "congreso:leg15:exp:124/000040/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 1/1979, de 26 de septiembre, General Penitenciaria, en relación con los requisitos para la clasificación o progresión de grado para las personas condenadas por delitos de terrorismo."
+    },
+    {
+      "source_record_pk": 141742,
+      "sample_initiative_id": "congreso:leg15:exp:121/000020/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del Real Decreto Legislativo 1/2007, de 16 de noviembre, por el que se aprueba el texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios y otras leyes complementarias, para prevenir la práctica de la reduflación y proteger los derechos de las personas consum…"
+    },
+    {
+      "source_record_pk": 141751,
+      "sample_initiative_id": "congreso:ley:6:2023",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Real Decreto-ley 6/2023, de 19 de diciembre, por el que se aprueban medidas urgentes para la ejecución del Plan de Recuperación, Transformación y Resiliencia en materia de servicio público de justicia, función pública, régimen local y mecenazgo."
+    },
+    {
+      "source_record_pk": 141738,
+      "sample_initiative_id": "congreso:leg15:exp:122/000108/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley para la garantía, a nivel estatal, del funcionamiento efectivo de la tarjeta sanitaria individual y de la plena interoperabilidad de las historias clínicas."
+    },
+    {
+      "source_record_pk": 141753,
+      "sample_initiative_id": "congreso:ley:8:2023",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan medidas para afrontar las consecuencias económicas y sociales derivadas de los conflictos en Ucrania y Oriente Próximo, así como para paliar los efectos de la sequía."
+    },
+    {
+      "source_record_pk": 142218,
+      "sample_initiative_id": "congreso:leg15:exp:121/000052/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica para la protección de las personas menores de edad en los entornos digitales."
+    },
+    {
+      "source_record_pk": 142152,
+      "sample_initiative_id": "congreso:leg15:exp:121/000025/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 1/2005, de 9 de marzo, por la que se regula el régimen del comercio de derechos de emisión de gases de efecto invernadero."
+    },
+    {
+      "source_record_pk": 141635,
+      "sample_initiative_id": "congreso:leg15:exp:121/000016/0000",
+      "doc_format": "pdf",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de medidas en materia de eficiencia del Servicio Público de Justicia."
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

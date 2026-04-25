@@ -28,7 +28,8 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("docs/gh-pages/parliamentary-accountability/data/accountability.json")
+DEFAULT_OUT = Path("ui/gh-pages-next/public/parliamentary-accountability/data/accountability.json")
+MAX_INITIATIVE_MEASURE_PREVIEW = 3
 
 
 @dataclass(frozen=True)
@@ -50,7 +51,15 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--out",
         default=str(DEFAULT_OUT),
-        help="Ruta de salida JSON (ej. docs/gh-pages/parliamentary-accountability/data/accountability.json)",
+        help="Ruta de salida JSON (ej. ui/gh-pages-next/public/parliamentary-accountability/data/accountability.json)",
+    )
+    p.add_argument(
+        "--initiative-measures-db",
+        default="",
+        help=(
+            "Ruta opcional a una SQLite distinta para leer parl_initiative_measure_points. "
+            "Si se omite, usa la misma DB principal."
+        ),
     )
     p.add_argument(
         "--min-shared-events",
@@ -331,6 +340,191 @@ def derive_vote_subject(event: dict[str, Any]) -> str:
     return ""
 
 
+def parse_json_list(raw: Any) -> list[Any]:
+    payload_text = safe_text(raw)
+    if not payload_text:
+        return []
+    try:
+        payload = json.loads(payload_text)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return []
+    return payload if isinstance(payload, list) else []
+
+
+def table_exists(conn: sqlite3.Connection, table_name: str) -> bool:
+    row = conn.execute(
+        """
+        SELECT 1
+        FROM sqlite_master
+        WHERE type = 'table' AND name = ?
+        LIMIT 1
+        """,
+        (table_name,),
+    ).fetchone()
+    return bool(row)
+
+
+def iter_normalized_measure_vote_refs(raw_refs: Any) -> list[str]:
+    normalized: list[str] = []
+    seen: set[str] = set()
+    for raw_ref in parse_json_list(raw_refs):
+        ref = safe_text(raw_ref)
+        if not ref:
+            continue
+
+        candidates = [ref]
+        if ref.startswith("url:"):
+            bare_ref = safe_text(ref[4:])
+            if bare_ref:
+                candidates.append(bare_ref)
+        elif ref.startswith(("https://", "http://")):
+            candidates.append(f"url:{ref}")
+
+        for candidate in candidates:
+            if candidate and candidate not in seen:
+                normalized.append(candidate)
+                seen.add(candidate)
+    return normalized
+
+
+def build_initiative_measure_index(
+    conn: sqlite3.Connection,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[tuple[str, str], list[dict[str, Any]]]]:
+    if not table_exists(conn, "parl_initiative_measure_points"):
+        return {}, {}
+
+    rows = conn.execute(
+        """
+        SELECT
+          measure_point_id,
+          initiative_id,
+          measure_rank,
+          measure_title,
+          citizen_summary,
+          policy_area,
+          measure_status,
+          support_side,
+          primary_vote_event_ids_json
+        FROM parl_initiative_measure_points
+        ORDER BY initiative_id ASC, measure_rank ASC, measure_point_id ASC
+        """
+    ).fetchall()
+
+    by_initiative: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    by_initiative_vote_ref: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+
+    for row in rows:
+        initiative_id = safe_text(row["initiative_id"])
+        if not initiative_id:
+            continue
+
+        measure = {
+            "measure_point_id": safe_text(row["measure_point_id"]),
+            "rank": int(row["measure_rank"] or 0),
+            "title": compact_text(row["measure_title"], 160),
+            "summary": compact_text(row["citizen_summary"], 220),
+            "policy_area": compact_text(row["policy_area"], 80),
+            "status": safe_text(row["measure_status"]) or "unknown",
+            "support_side": safe_text(row["support_side"]) or "unknown",
+        }
+        by_initiative[initiative_id].append(measure)
+
+        for vote_ref in iter_normalized_measure_vote_refs(row["primary_vote_event_ids_json"]):
+            by_initiative_vote_ref[(initiative_id, vote_ref)].append(measure)
+
+    return by_initiative, by_initiative_vote_ref
+
+
+def serialize_measure_preview_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {
+            "rank": row["rank"],
+            "title": row["title"],
+            "summary": row["summary"],
+            "policy_area": row["policy_area"],
+            "status": row["status"],
+            "support_side": row["support_side"],
+        }
+        for row in rows
+    ]
+
+
+def iter_event_measure_refs(event: dict[str, Any]) -> list[str]:
+    refs: list[str] = []
+    seen: set[str] = set()
+    candidates = [
+        safe_text(event.get("vote_event_id")),
+        safe_text(event.get("source_url")),
+    ]
+    for candidate in candidates:
+        if not candidate:
+            continue
+        variants = [candidate]
+        if candidate.startswith("url:"):
+            bare_ref = safe_text(candidate[4:])
+            if bare_ref:
+                variants.append(bare_ref)
+        elif candidate.startswith(("https://", "http://")):
+            variants.append(f"url:{candidate}")
+        for variant in variants:
+            if variant and variant not in seen:
+                refs.append(variant)
+                seen.add(variant)
+    return refs
+
+
+def select_initiative_measure_previews(
+    event: dict[str, Any],
+    by_initiative: dict[str, list[dict[str, Any]]],
+    by_initiative_vote_ref: dict[tuple[str, str], list[dict[str, Any]]],
+    preview_limit: int = MAX_INITIATIVE_MEASURE_PREVIEW,
+) -> dict[str, Any]:
+    initiative_id = safe_text(event.get("initiative_id"))
+    if not initiative_id:
+        return {
+            "initiative_measure_points_total": 0,
+            "initiative_measures_count": 0,
+            "initiative_measure_match_scope": "none",
+            "initiative_measures": [],
+        }
+
+    initiative_measures = by_initiative.get(initiative_id, [])
+    matched: dict[str, dict[str, Any]] = {}
+    for vote_ref in iter_event_measure_refs(event):
+        for measure in by_initiative_vote_ref.get((initiative_id, vote_ref), []):
+            measure_id = safe_text(measure.get("measure_point_id"))
+            if measure_id:
+                matched[measure_id] = measure
+
+    matched_rows = sorted(matched.values(), key=lambda row: (int(row["rank"]), safe_text(row["measure_point_id"])))
+    match_scope = "vote_event" if matched_rows else ("initiative" if initiative_measures else "none")
+    selected_rows = matched_rows if matched_rows else initiative_measures
+
+    return {
+        "initiative_measure_points_total": len(initiative_measures),
+        "initiative_measures_count": len(selected_rows),
+        "initiative_measure_match_scope": match_scope,
+        "initiative_measures": serialize_measure_preview_rows(selected_rows[:preview_limit]),
+    }
+
+
+def attach_initiative_measure_previews(
+    events: dict[str, dict[str, Any]],
+    by_initiative: dict[str, list[dict[str, Any]]],
+    by_initiative_vote_ref: dict[tuple[str, str], list[dict[str, Any]]],
+    preview_limit: int = MAX_INITIATIVE_MEASURE_PREVIEW,
+) -> None:
+    for event in events.values():
+        event.update(
+            select_initiative_measure_previews(
+                event,
+                by_initiative,
+                by_initiative_vote_ref,
+                preview_limit=preview_limit,
+            )
+        )
+
+
 def float_pct(numerator: int, denominator: int) -> float:
     if not denominator:
         return 0.0
@@ -483,8 +677,7 @@ def resolve_party_for_vote(
 
 
 def build_event_map(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
-    rows = conn.execute(
-        """
+    first_documents_sql = """
         WITH first_documents AS (
           SELECT
             d.initiative_id,
@@ -492,6 +685,19 @@ def build_event_map(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
           FROM parl_initiative_documents d
           GROUP BY d.initiative_id
         ),
+    """
+    if not table_exists(conn, "parl_initiative_documents"):
+        first_documents_sql = """
+        WITH first_documents AS (
+          SELECT
+            CAST(NULL AS TEXT) AS initiative_id,
+            CAST(NULL AS TEXT) AS initiative_doc_url
+          WHERE 0
+        ),
+        """
+
+    query = f"""
+        {first_documents_sql}
         ranked_initiatives AS (
           SELECT
             vei.vote_event_id,
@@ -545,7 +751,7 @@ def build_event_map(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
          AND r.rn = 1
         ORDER BY e.vote_date DESC, e.vote_event_id ASC
         """
-    ).fetchall()
+    rows = conn.execute(query).fetchall()
 
     events: dict[str, dict[str, Any]] = {}
     for row in rows:
@@ -742,6 +948,10 @@ def compute_event_outcome_payload(
             "initiative_doc_url": event.get("initiative_doc_url", ""),
             "initiative_link_method": event.get("initiative_link_method", ""),
             "initiative_link_confidence": event.get("initiative_link_confidence"),
+            "initiative_measure_points_total": event.get("initiative_measure_points_total", 0),
+            "initiative_measures_count": event.get("initiative_measures_count", 0),
+            "initiative_measure_match_scope": event.get("initiative_measure_match_scope", "none"),
+            "initiative_measures": event.get("initiative_measures", []),
             "quality": event.get("quality", {}),
             "outcome": outcome,
             "totals": totals,
@@ -757,6 +967,40 @@ def compute_event_outcome_payload(
         )
     )
     return pivotal_rows, summary
+
+
+def select_featured_outcome_rows(outcome_rows: list[dict[str, Any]], limit: int = 200) -> list[dict[str, Any]]:
+    signal_rows = [row for row in outcome_rows if row["outcome"] != "no_signal"]
+    selected: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+
+    def append_row(row: dict[str, Any]) -> None:
+        vote_event_id = safe_text(row.get("vote_event_id"))
+        if not vote_event_id or vote_event_id in seen_ids:
+            return
+        selected.append(row)
+        seen_ids.add(vote_event_id)
+
+    featured_measure_rows = sorted(
+        (row for row in signal_rows if int(row.get("initiative_measures_count") or 0) > 0),
+        key=lambda row: (
+            -int(row.get("initiative_measures_count") or 0),
+            safe_text(row.get("vote_date")),
+            safe_text(row.get("vote_event_id")),
+        ),
+        reverse=True,
+    )
+    for row in featured_measure_rows:
+        if len(selected) >= limit:
+            break
+        append_row(row)
+
+    for row in signal_rows:
+        if len(selected) >= limit:
+            break
+        append_row(row)
+
+    return selected[:limit]
 
 
 def party_vectors_for_similarity(
@@ -1328,6 +1572,10 @@ def assemble_output(
     parties: dict[int, PartyAgg],
 ) -> dict[str, Any]:
     total_events = len(events)
+    events_with_measure_preview = sum(1 for row in events.values() if int(row.get("initiative_measures_count") or 0) > 0)
+    events_with_event_specific_measures = sum(
+        1 for row in events.values() if safe_text(row.get("initiative_measure_match_scope")) == "vote_event"
+    )
     with_data_rows = [
         row
         for row in outcome_rows
@@ -1355,6 +1603,10 @@ def assemble_output(
                 "context": row["context"],
                 "margin": row["margin"],
                 "initiative_id": row.get("initiative_id", ""),
+                "initiative_measure_points_total": row.get("initiative_measure_points_total", 0),
+                "initiative_measures_count": row.get("initiative_measures_count", 0),
+                "initiative_measure_match_scope": row.get("initiative_measure_match_scope", "none"),
+                "initiative_measures": row.get("initiative_measures", []),
                 "source_url": row.get("source_url", ""),
                 "quality": row.get("quality", {}),
                 "yes": row["totals_yes"],
@@ -1383,6 +1635,8 @@ def assemble_output(
             "min_shared_events": args.min_shared_events,
             "min_events_per_party": args.min_events_per_party,
             "min_events_topic_pairs": args.min_events_topic_pairs,
+            "events_with_initiative_measures": events_with_measure_preview,
+            "events_with_event_specific_initiative_measures": events_with_event_specific_measures,
         },
         "parties": party_payload,
         "events_preview": event_preview,
@@ -1403,7 +1657,7 @@ def assemble_output(
         "outcomes": {
             "summary": outcome_summary,
             "samples": with_data_rows[:600],
-            "critical_by_margin": [row for row in outcome_rows if row["outcome"] != "no_signal"][:200],
+            "critical_by_margin": select_featured_outcome_rows(outcome_rows, limit=200),
         },
     }
 
@@ -1422,17 +1676,31 @@ def sanitize_accountability_payload(payload: dict[str, Any]) -> dict[str, Any]:
 def main() -> int:
     args = parse_args()
     db_path = Path(args.db)
+    initiative_measures_db_path = Path(args.initiative_measures_db) if safe_text(args.initiative_measures_db) else db_path
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     if not db_path.exists():
         print(f"ERROR: no existe la DB -> {db_path}")
         return 2
+    if not initiative_measures_db_path.exists():
+        print(f"ERROR: no existe la DB de medidas -> {initiative_measures_db_path}")
+        return 2
 
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
+    measure_conn = conn
+    if initiative_measures_db_path.resolve() != db_path.resolve():
+        measure_conn = sqlite3.connect(str(initiative_measures_db_path))
+        measure_conn.row_factory = sqlite3.Row
     try:
         events = build_event_map(conn)
+        initiative_measures_by_initiative, initiative_measures_by_vote_ref = build_initiative_measure_index(measure_conn)
+        attach_initiative_measure_previews(
+            events,
+            initiative_measures_by_initiative,
+            initiative_measures_by_vote_ref,
+        )
         mandate_index, parties, _ = build_mandate_index(conn)
 
         party_direction_counts, _, _ = event_party_counts(
@@ -1501,6 +1769,8 @@ def main() -> int:
         print(f"ERROR SQL: {exc}")
         return 2
     finally:
+        if measure_conn is not conn:
+            measure_conn.close()
         conn.close()
 
 

@@ -1,0 +1,38 @@
+{
+  "sample_file": "docs/etl/sprints/AI-OPS-258/exports/programas_support_precision_stratified_sample_20260228.csv",
+  "sample_total": 36,
+  "true_positive": 35,
+  "false_positive": 1,
+  "precision": 0.9722222222222222,
+  "threshold": 0.9,
+  "passed": true,
+  "false_positive_evidence_ids": [
+    1560859
+  ],
+  "by_party": {
+    "BNG": {
+      "total": 10,
+      "tp": 10,
+      "fp": 0,
+      "precision": 1.0
+    },
+    "FORO Asturias": {
+      "total": 10,
+      "tp": 10,
+      "fp": 0,
+      "precision": 1.0
+    },
+    "PP": {
+      "total": 10,
+      "tp": 10,
+      "fp": 0,
+      "precision": 1.0
+    },
+    "VOX": {
+      "total": 6,
+      "tp": 5,
+      "fp": 1,
+      "precision": 0.8333333333333334
+    }
+  }
+}

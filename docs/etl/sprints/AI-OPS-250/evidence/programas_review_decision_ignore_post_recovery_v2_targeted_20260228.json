@@ -1,0 +1,50 @@
+{
+  "dry_run": false,
+  "evidence_rows_updated": 0,
+  "final_confidence": null,
+  "final_stance": "",
+  "matched": 63,
+  "not_found_evidence_ids": [],
+  "recompute": {
+    "as_of_date": "2026-02-28",
+    "combined": {
+      "as_of_date": "2026-02-28",
+      "combined_method": "combined",
+      "combined_version": "v1",
+      "dry_run": false,
+      "inserted": 242,
+      "would_insert": 242
+    },
+    "declared": {
+      "as_of_date": "2026-02-28",
+      "computed_method": "declared",
+      "computed_version": "v1",
+      "dry_run": false,
+      "positions_total": 85,
+      "source_id": "programas_partidos",
+      "stance_methods": [
+        "declared:regex_v3",
+        "declared:regex_v2",
+        "declared:regex_v1"
+      ],
+      "topic_sets": [
+        {
+          "inserted": 29,
+          "topic_set_id": 11
+        },
+        {
+          "inserted": 28,
+          "topic_set_id": 17
+        },
+        {
+          "inserted": 28,
+          "topic_set_id": 18
+        }
+      ]
+    }
+  },
+  "review_rows_updated": 63,
+  "selected": 63,
+  "source_id": "programas_partidos",
+  "status": "ignored"
+}

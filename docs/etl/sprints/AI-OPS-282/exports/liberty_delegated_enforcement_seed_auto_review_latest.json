@@ -1,0 +1,128 @@
+{
+  "schema_version": "liberty_delegated_enforcement_seed_v1",
+  "generated_at": "2026-02-28T17:23:30+00:00",
+  "methodology": {
+    "method_version": "delegated_enforcement_v1",
+    "method_label": "Cadena delegada de enforcement v1",
+    "rules": {
+      "target_fragment_coverage_min": 0.6,
+      "designated_actor_coverage_min": 0.5,
+      "enforcement_evidence_coverage_min": 0.7
+    },
+    "notes": "Piloto reproducible para cadena norma habilitante -> organismo delegado -> cargo/acto de enforcement."
+  },
+  "links": [
+    {
+      "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Direccion General",
+      "designated_actor_label": "Mariano Fernández Fernández",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.82,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115",
+      "evidence_quote": "Orden INT/3514/2003, de 5 de diciembre, por la que se dispone el nombramiento de don Mariano Fernández Fernández como Subdirector General de Normativa y Recursos de la Dirección General de Tráfico. | review:auto_assist:approved_from_BOE-A-2003-23115"
+    },
+    {
+      "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "delegating_actor_label": "Ministerio competente en trafico",
+      "delegated_institution_label": "DGT",
+      "designated_role_title": "Subdireccion de Gestion de Sanciones",
+      "designated_actor_label": "Mariano Fernández Fernández",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.78,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115",
+      "evidence_quote": "Orden INT/3514/2003, de 5 de diciembre, por la que se dispone el nombramiento de don Mariano Fernández Fernández como Subdirector General de Normativa y Recursos de la Dirección General de Tráfico. | review:auto_assist:approved_from_BOE-A-2003-23115"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Direccion General de la AEAT",
+      "designated_actor_label": "Tomás Merola Macanás",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.81,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-9974",
+      "evidence_quote": "Resolución de 10 de junio de 2008, de la Presidencia de la Agencia Estatal de Administración Tributaria, por la que se dispone el nombramiento como Director del Servicio de Auditoría Interna de la Agencia Estatal de Administración Tributaria, de don Tomás Merola Macanás. | review:auto_assist:approved_from_BOE-A-2008-9974"
+    },
+    {
+      "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Delegacion Especial",
+      "designated_actor_label": "José Alberto García Valera",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.76,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769",
+      "evidence_quote": "Resolución de 21 de junio de 2007, de la Presidencia de la Agencia Estatal de Administración Tributaria, por la que se dispone el nombramiento como Delegado Ejecutivo de la Delegación Especial de Andalucía, Ceuta y Melilla de don José Alberto García Valera. | review:auto_assist:approved_from_BOE-A-2007-12769"
+    },
+    {
+      "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "delegating_actor_label": "Ministerio de Hacienda",
+      "delegated_institution_label": "AEAT",
+      "designated_role_title": "Unidad procedimental sancionadora",
+      "designated_actor_label": "Tomás Merola Macanás",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Graduacion y tramitacion procedimental",
+      "enforcement_evidence_date": "2008-06-11",
+      "chain_confidence": 0.59,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-9974",
+      "evidence_quote": "Resolución de 10 de junio de 2008, de la Presidencia de la Agencia Estatal de Administración Tributaria, por la que se dispone el nombramiento como Director del Servicio de Auditoría Interna de la Agencia Estatal de Administración Tributaria, de don Tomás Merola Macanás. | review:auto_assist:approved_from_BOE-A-2008-9974"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "delegating_actor_label": "Ministerio del Interior",
+      "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
+      "designated_role_title": "Autoridad gubernativa",
+      "designated_actor_label": "Sofía del Carmen Hernanz Costa",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.8,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065",
+      "evidence_quote": "Resolución de 16 de junio de 2008, de la Delegación del Gobierno en la Comunidad Autónoma de las Illes Balears, por la que se dispone el nombramiento de doña Sofía del Carmen Hernanz Costa como Directora Insular de la Administración General del Estado en Ibiza-Formentera. | review:auto_assist:approved_from_BOE-A-2008-12065"
+    },
+    {
+      "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Direccion del Organismo Estatal ITSS",
+      "designated_actor_label": "Jaime Garicano Rojas",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.74,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-17717",
+      "evidence_quote": "Orden de 6 de septiembre de 2001 por la que se dispone el nombramiento, por el procedimiento de libre designación, de don Jaime Garicano Rojas como Subdirector general de Asuntos Generales de la Dirección General de la Inspección de Trabajo y Seguridad Social. | review:auto_assist:approved_from_BOE-A-2001-17717"
+    },
+    {
+      "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "delegating_actor_label": "Ministerio de Trabajo",
+      "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
+      "designated_role_title": "Jefatura de Inspeccion",
+      "designated_actor_label": "Jaime Garicano Rojas",
+      "appointment_start_date": "2024-01-01",
+      "appointment_end_date": "",
+      "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
+      "enforcement_evidence_date": "2025-12-31",
+      "chain_confidence": 0.63,
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-17717",
+      "evidence_quote": "Orden de 6 de septiembre de 2001 por la que se dispone el nombramiento, por el procedimiento de libre designación, de don Jaime Garicano Rojas como Subdirector general de Asuntos Generales de la Dirección General de la Inspección de Trabajo y Seguridad Social. | review:auto_assist:approved_from_BOE-A-2001-17717"
+    }
+  ]
+}

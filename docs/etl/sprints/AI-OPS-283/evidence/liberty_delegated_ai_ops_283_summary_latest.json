@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "assist_summary": {
+    "status": "ok",
+    "review_links_total": 8,
+    "review_links_with_candidates_total": 8,
+    "review_links_without_candidates_total": 0,
+    "assist_rows_total": 24,
+    "min_candidate_score": 20,
+    "max_candidates_per_link": 3,
+    "relevance_bucket_counts": {
+      "strong": 6,
+      "medium": 14,
+      "weak": 4
+    }
+  },
+  "auto_review_summary": {
+    "status": "ok",
+    "rows_total": 8,
+    "rows_with_assist_candidates_total": 8,
+    "approved_rows_total": 8,
+    "pending_rows_total": 0,
+    "approved_with_actor_update_total": 8,
+    "approved_with_evidence_date_update_total": 1,
+    "rows_missing_candidate_total": 0,
+    "rows_missing_required_person_hint_total": 0,
+    "rows_missing_required_evidence_date_total": 0,
+    "min_candidate_score": 25,
+    "max_candidates_per_link": 3
+  },
+  "apply_counts": {
+    "rows_seen": 8,
+    "rows_with_decision": 8,
+    "approved_rows": 8,
+    "ignored_rows": 0,
+    "pending_rows": 0,
+    "updated_rows": 8,
+    "skipped_blank_decision": 0,
+    "skipped_invalid_decision": 0,
+    "skipped_missing_link_key": 0,
+    "skipped_link_not_found": 0,
+    "skipped_invalid_date": 0,
+    "skipped_inverted_window": 0,
+    "skipped_empty_designated_actor_after_review": 0
+  },
+  "queue_delta": {
+    "actionable_queue_rows_delta": -8,
+    "missing_designated_actor_delta": -2,
+    "institutional_designated_actor_delta": -6,
+    "missing_enforcement_evidence_delta": -1
+  },
+  "queue_after": {
+    "actionable_queue_rows": 0,
+    "missing_designated_actor_total": 0,
+    "institutional_designated_actor_total": 0,
+    "missing_enforcement_evidence_total": 0
+  },
+  "candidate_person_hint_coverage": {
+    "candidate_rows_total": 40,
+    "candidate_person_hint_non_empty_total": 34,
+    "candidate_person_hint_non_empty_pct": 0.85
+  }
+}

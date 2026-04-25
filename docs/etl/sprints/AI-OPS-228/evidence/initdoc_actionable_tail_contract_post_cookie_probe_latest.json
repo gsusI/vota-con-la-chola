@@ -1,0 +1,323 @@
+{
+  "generated_at": "2026-02-27T08:54:49+00:00",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "total_missing": 4527,
+  "redundant_missing": 71,
+  "actionable_missing": 4456,
+  "redundant_missing_pct": 0.015684,
+  "actionable_missing_pct": 0.984316,
+  "checks": {
+    "actionable_queue_empty": false
+  },
+  "status_buckets_total_missing": [
+    {
+      "status": 403,
+      "count": 2498
+    },
+    {
+      "status": 500,
+      "count": 1908
+    },
+    {
+      "status": 0,
+      "count": 114
+    },
+    {
+      "status": 404,
+      "count": 7
+    }
+  ],
+  "status_buckets_actionable_missing": [
+    {
+      "status": 403,
+      "count": 2498
+    },
+    {
+      "status": 500,
+      "count": 1839
+    },
+    {
+      "status": 0,
+      "count": 114
+    },
+    {
+      "status": 404,
+      "count": 5
+    }
+  ],
+  "actionable_sample": [
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000175",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000175",
+      "last_http_status": 500,
+      "attempts": 6,
+      "last_attempt_at": "2026-02-20T08:33:29+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:622/000038",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=622&id2=000038",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:622/000039",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=622&id2=000039",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:624/000015",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=624&id2=000015",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000122",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000122",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000123",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000123",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000124",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000124",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000125",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000125",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000126",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000126",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000127",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000127",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000128",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000128",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000129",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000129",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000130",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000130",
+      "last_http_status": 500,
+      "attempts": 5,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:622/000006",
+      "doc_kind": "bocg",
+      "doc_url": "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000006",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:05:21+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:626/000002",
+      "doc_kind": "bocg",
+      "doc_url": "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=626&numEx=000002",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:05:56+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:626/000005",
+      "doc_kind": "bocg",
+      "doc_url": "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=626&numEx=000005",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:07:22+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg12:exp:626/000007",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=12&id1=626&id2=000007",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg13:exp:620/000001",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000001",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg13:exp:620/000004",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000004",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg13:exp:620/000005",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=620&id2=000005",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg13:exp:622/000001",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000001",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg13:exp:622/000002",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=13&id1=622&id2=000002",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T12:08:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000131",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000131",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000132",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000132",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000133",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000133",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000134",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000134",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg6:exp:610/000135",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=6&id1=610&id2=000135",
+      "last_http_status": 500,
+      "attempts": 4,
+      "last_attempt_at": "2026-02-20T08:20:08+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg10:exp:610/000002",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000002&legis=10",
+      "last_http_status": 500,
+      "attempts": 3,
+      "last_attempt_at": "2026-02-18T10:12:46+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg10:exp:610/000003",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000003&legis=10",
+      "last_http_status": 500,
+      "attempts": 3,
+      "last_attempt_at": "2026-02-18T10:12:46+00:00"
+    },
+    {
+      "initiative_source_id": "senado_iniciativas",
+      "initiative_id": "senado:leg10:exp:610/000006",
+      "doc_kind": "ds",
+      "doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000006&legis=10",
+      "last_http_status": 500,
+      "attempts": 3,
+      "last_attempt_at": "2026-02-18T10:12:46+00:00"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

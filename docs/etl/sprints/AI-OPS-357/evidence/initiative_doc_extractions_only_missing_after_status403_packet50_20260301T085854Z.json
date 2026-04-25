@@ -1,0 +1,203 @@
+{
+  "doc_source_id": "parl_initiative_docs",
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "extractor_version": "heuristic_subject_v2",
+  "only_missing": true,
+  "dry_run": false,
+  "seen": 99,
+  "upserted": 99,
+  "needs_review": 0,
+  "by_method": {
+    "title_fallback_strong": 51,
+    "title_hint_strong": 48
+  },
+  "by_doc_format": {
+    "html": 48,
+    "xml": 51
+  },
+  "sample": [
+    {
+      "source_record_pk": 147581,
+      "sample_initiative_id": "senado:leg14:exp:621/000067",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Presupuestos Generales del Estado para el año 2023. (621/000067)"
+    },
+    {
+      "source_record_pk": 147571,
+      "sample_initiative_id": "senado:leg14:exp:621/000057",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley de Memoria Democrática. (621/000057)"
+    },
+    {
+      "source_record_pk": 147496,
+      "sample_initiative_id": "senado:leg14:exp:624/000019",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de transposición de directivas europeas y otras disposiciones para la adaptación de la legislación penal al ordenamiento de la Unión Europea, y reforma de los delitos contra la integridad moral, desórdenes públicos y contrabando de armas de doble uso. (624/000019)"
+    },
+    {
+      "source_record_pk": 147495,
+      "sample_initiative_id": "senado:leg14:exp:624/000017",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para agravar las penas previstas para los delitos de trata de seres humanos desplazados por un conflicto armado o una catástrofe humanitaria. (624/000017)"
+    },
+    {
+      "source_record_pk": 147579,
+      "sample_initiative_id": "senado:leg14:exp:621/000065",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley del Deporte. (621/000065)"
+    },
+    {
+      "source_record_pk": 147513,
+      "sample_initiative_id": "senado:leg14:exp:621/000066",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se adapta el ordenamiento nacional al Reglamento (UE) 2018/1727 del Parlamento Europeo y del Consejo, de 14 de noviembre de 2018, sobre Eurojust, y se regulan los conflictos de jurisdicción, las redes de cooperación jurídica internacional y el personal dependiente del Ministerio de Justicia…"
+    },
+    {
+      "source_record_pk": 147508,
+      "sample_initiative_id": "senado:leg14:exp:621/000071",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 16/2010, de 16 de julio, del régimen de cesión de tributos del Estado a la Comunidad Autónoma de Cataluña y de fijación del alcance y condiciones de dicha cesión. (621/000071)"
+    },
+    {
+      "source_record_pk": 147511,
+      "sample_initiative_id": "senado:leg14:exp:621/000074",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 28/2010, de 16 de julio, del régimen de cesión de tributos del Estado a la Comunidad Autónoma de las Illes Balears y de fijación del alcance y condiciones de dicha cesión. (621/000074)"
+    },
+    {
+      "source_record_pk": 147514,
+      "sample_initiative_id": "senado:leg14:exp:621/000069",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 18/2010, de 16 de julio, del régimen de cesión de tributos del Estado a la Comunidad Autónoma de Andalucía y de fijación del alcance y condiciones de dicha cesión. (621/000069)"
+    },
+    {
+      "source_record_pk": 147515,
+      "sample_initiative_id": "senado:leg14:exp:621/000070",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 26/2010, de 16 de julio, del régimen de cesión de tributos del Estado a la Comunidad Autónoma de Canarias y de fijación del alcance y condiciones de dicha cesión. (621/000070)"
+    },
+    {
+      "source_record_pk": 147510,
+      "sample_initiative_id": "senado:leg14:exp:621/000073",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 17/2010, de 16 de julio, del régimen de cesión de tributos del Estado a la Comunidad Autónoma de Galicia y de fijación del alcance y condiciones de dicha cesión. (621/000073)"
+    },
+    {
+      "source_record_pk": 147509,
+      "sample_initiative_id": "senado:leg14:exp:621/000072",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 23/2010, de 16 de julio, del régimen de cesión de tributos del Estado a la Comunitat Valenciana y de fijación del alcance y condiciones de dicha cesión. (621/000072)"
+    },
+    {
+      "source_record_pk": 147566,
+      "sample_initiative_id": "senado:leg14:exp:621/000052",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley por la que se modifica la Ley 14/2011, de 1 de junio, de la Ciencia, la Tecnología y la Innovación. (621/000052)"
+    },
+    {
+      "source_record_pk": 147540,
+      "sample_initiative_id": "senado:leg14:exp:626/000008",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 92. (626/000008)"
+    },
+    {
+      "source_record_pk": 147543,
+      "sample_initiative_id": "senado:leg14:exp:622/000039",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley de modificación del artículo 42.1.c del Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social. (622/000039)"
+    },
+    {
+      "source_record_pk": 147564,
+      "sample_initiative_id": "senado:leg14:exp:621/000050",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley Orgánica de garantía integral de la libertad sexual. (621/000050)"
+    },
+    {
+      "source_record_pk": 147542,
+      "sample_initiative_id": "senado:leg14:exp:622/000026",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley Orgánica de modificación de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal. (622/000026)"
+    },
+    {
+      "source_record_pk": 147541,
+      "sample_initiative_id": "senado:leg14:exp:622/000064",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proposición de Ley por la que se reforma con carácter urgente el Código Penal para la protección de la libertad de expresión. (622/000064)"
+    },
+    {
+      "source_record_pk": 147539,
+      "sample_initiative_id": "senado:leg14:exp:626/000003",
+      "doc_format": "html",
+      "subject_method": "title_hint_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Propuesta de reforma del Reglamento del Senado por la que se modifica el artículo 27. (626/000003)"
+    },
+    {
+      "source_record_pk": 147589,
+      "sample_initiative_id": "senado:leg14:exp:621/000046",
+      "doc_format": "xml",
+      "subject_method": "title_fallback_strong",
+      "confidence": 0.74,
+      "needs_review": 0,
+      "extracted_subject": "Proyecto de Ley General de Telecomunicaciones. (621/000046)"
+    }
+  ],
+  "db": "etl/data/staging/politicos-es.db"
+}

@@ -1,0 +1,20 @@
+{
+  "db": "etl/data/staging/politicos-es.db",
+  "source_id": "parl_initiative_docs",
+  "initiative_source_id": "senado_iniciativas",
+  "dry_run": false,
+  "candidate_urls": 0,
+  "candidate_refs_total": 0,
+  "inserted_or_would_insert": 0,
+  "coverage_before": {
+    "total_doc_links": 3608,
+    "with_fetch_status": 3608,
+    "missing_fetch_status": 0
+  },
+  "coverage_after": {
+    "total_doc_links": 3608,
+    "with_fetch_status": 3608,
+    "missing_fetch_status": 0
+  },
+  "sample_urls": []
+}

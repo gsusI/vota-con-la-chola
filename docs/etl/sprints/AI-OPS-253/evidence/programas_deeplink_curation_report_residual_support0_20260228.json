@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-02-28T11:45:30+00:00",
+  "input_manifest": "docs/etl/sprints/AI-OPS-253/exports/programas_manifest_residual_support0_input_homepage_seed_20260228.csv",
+  "output_manifest": "docs/etl/sprints/AI-OPS-253/exports/programas_manifest_residual_support0_deeplink_curated_20260228.csv",
+  "rows_total": 11,
+  "rows_updated": 6,
+  "rows_kept": 3,
+  "rows_skipped": 2,
+  "failures_total": 1,
+  "failures": [
+    {
+      "party_id": "18201",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://verdes-equo.es/",
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    }
+  ],
+  "probes": [
+    {
+      "party_id": "22",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://ehbildu.eus/",
+      "selected_url": "https://ehbildu.eus/dokumentuak/gardentasuna/2024_PyG.pdf",
+      "selected_score": 8,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 12,
+      "error": null
+    },
+    {
+      "party_id": "276",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://www.bng.gal/",
+      "selected_url": "https://www.bng.gal/media/bnggaliza/files/2024/07/09/EFA-Election-Manifesto-2024_EN.pdf",
+      "selected_score": 13,
+      "selected_reason": "candidate_selected",
+      "candidates_evaluated": 12,
+      "error": null
+    },
+    {
+      "party_id": "18201",
+      "election_cycle": "es_generales_2023",
+      "source_url": "https://verdes-equo.es/",
+      "selected_url": "https://verdes-equo.es/",
+      "selected_score": 0,
+      "selected_reason": "kept_original",
+      "candidates_evaluated": 0,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    },
+    {
+      "party_id": "22",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://ehbildu.eus/",
+      "selected_url": "https://ehbildu.eus/dokumentuak/gardentasuna/2024_PyG.pdf",
+      "selected_score": 8,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 12,
+      "error": null
+    },
+    {
+      "party_id": "276",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://www.bng.gal/",
+      "selected_url": "https://www.bng.gal/media/bnggaliza/files/2024/07/09/EFA-Election-Manifesto-2024_EN.pdf",
+      "selected_score": 13,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 12,
+      "error": null
+    },
+    {
+      "party_id": "18201",
+      "election_cycle": "es_europeas_2024",
+      "source_url": "https://verdes-equo.es/",
+      "selected_url": "https://verdes-equo.es/",
+      "selected_score": 0,
+      "selected_reason": "cache:error_keep_original",
+      "candidates_evaluated": 0,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    },
+    {
+      "party_id": "22",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://ehbildu.eus/",
+      "selected_url": "https://ehbildu.eus/dokumentuak/gardentasuna/2024_PyG.pdf",
+      "selected_score": 8,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 12,
+      "error": null
+    },
+    {
+      "party_id": "276",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://www.bng.gal/",
+      "selected_url": "https://www.bng.gal/media/bnggaliza/files/2024/07/09/EFA-Election-Manifesto-2024_EN.pdf",
+      "selected_score": 13,
+      "selected_reason": "cache:candidate_selected",
+      "candidates_evaluated": 12,
+      "error": null
+    },
+    {
+      "party_id": "18201",
+      "election_cycle": "es_autonomicas_2023",
+      "source_url": "https://verdes-equo.es/",
+      "selected_url": "https://verdes-equo.es/",
+      "selected_score": 0,
+      "selected_reason": "cache:error_keep_original",
+      "candidates_evaluated": 0,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    }
+  ],
+  "config": {
+    "timeout": 20,
+    "min_score": 6,
+    "max_probe_candidates": 12
+  }
+}

@@ -7,6 +7,7 @@ from datetime import date, datetime, timezone
 import argparse
 import json
 import re
+import shlex
 import sys
 import sqlite3
 import unicodedata
@@ -42,8 +43,8 @@ UI_CITIZEN_EVIDENCE_TRUST_PANEL = BASE_DIR / "ui" / "citizen" / "evidence_trust_
 UI_CITIZEN_TAILWIND_MD3_CSS = BASE_DIR / "ui" / "citizen" / "tailwind_md3.generated.css"
 UI_CITIZEN_TAILWIND_MD3_TOKENS = BASE_DIR / "ui" / "citizen" / "tailwind_md3.tokens.json"
 UI_CITIZEN_CONCERNS = BASE_DIR / "ui" / "citizen" / "concerns_v1.json"
-GH_PAGES_DIR = BASE_DIR / "docs" / "gh-pages"
-GH_CITIZEN_DATA_DIR = GH_PAGES_DIR / "citizen" / "data"
+STATIC_APP_PUBLIC_DIR = BASE_DIR / "ui" / "gh-pages-next" / "public"
+GH_CITIZEN_DATA_DIR = STATIC_APP_PUBLIC_DIR / "citizen" / "data"
 MUNICIPALITY_POPULATION_PATH = BASE_DIR / "etl" / "data" / "published" / "poblacion_municipios_es.json"
 TRACKER_PATH = BASE_DIR / "docs" / "etl" / "e2e-scrape-load-tracker.md"
 MISMATCH_WAIVERS_PATH = BASE_DIR / "docs" / "etl" / "mismatch-waivers.json"
@@ -817,6 +818,21 @@ except Exception:
     INFOELECTORAL_SOURCE_CONFIG = {}
 
 try:
+    from etl.politicos_es.registry import get_connectors as get_politicos_connectors
+except Exception:
+    get_politicos_connectors = None
+
+try:
+    from etl.parlamentario_es.registry import get_connectors as get_parlamentario_connectors
+except Exception:
+    get_parlamentario_connectors = None
+
+try:
+    from etl.infoelectoral_es.registry import get_connectors as get_infoelectoral_connectors
+except Exception:
+    get_infoelectoral_connectors = None
+
+try:
     from scripts.e2e_tracker_status import load_mismatch_waivers as _load_mismatch_waivers_from_tracker
 except Exception:
     _load_mismatch_waivers_from_tracker = None
@@ -826,6 +842,20 @@ DESIRED_SOURCES: dict[str, dict[str, Any]] = {}
 DESIRED_SOURCES.update(_coerce_source_config(POLITICOS_SOURCE_CONFIG, domain="politicos"))
 DESIRED_SOURCES.update(_coerce_source_config(PARLAMENTARIO_SOURCE_CONFIG, domain="parlamentario"))
 DESIRED_SOURCES.update(_coerce_source_config(INFOELECTORAL_SOURCE_CONFIG, domain="infoelectoral"))
+
+DIRECT_INGEST_SOURCE_IDS_BY_DOMAIN: dict[str, set[str]] = {
+    "politicos": set(get_politicos_connectors().keys()) if callable(get_politicos_connectors) else set(),
+    "parlamentario": set(get_parlamentario_connectors().keys()) if callable(get_parlamentario_connectors) else set(),
+    "infoelectoral": set(get_infoelectoral_connectors().keys()) if callable(get_infoelectoral_connectors) else set(),
+}
+
+
+def _supports_direct_ingest(source_id: Any, domain: Any) -> bool:
+    sid = safe_text(source_id).strip()
+    token = safe_text(domain).strip().lower()
+    if not sid or not token:
+        return False
+    return sid in DIRECT_INGEST_SOURCE_IDS_BY_DOMAIN.get(token, set())
 
 
 TRACKER_TABLE_HEADER = "| Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |"
@@ -2504,6 +2534,9 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
 
             def ingest_cmd(domain: str, source_id: str) -> str:
                 dom = safe_text(domain).lower()
+                sid = safe_text(source_id)
+                if not _supports_direct_ingest(sid, dom):
+                    return ""
                 if dom == "politicos":
                     script = "scripts/ingestar_politicos_es.py"
                 elif dom == "parlamentario":
@@ -2514,7 +2547,7 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
                     script = ""
                 if not script:
                     return ""
-                return f"python3 {script} ingest --db {db_path} --source {source_id} --strict-network"
+                return f"python3 {script} ingest --db {db_path} --source {sid} --strict-network"
 
             tracker_cmd = f"python3 scripts/e2e_tracker_status.py --db {db_path} --tracker {TRACKER_PATH}"
 
@@ -3141,6 +3174,567 @@ def build_sources_status_payload(db_path: Path) -> dict[str, Any]:
             },
         }
         return sanitize_public_payload(payload)
+
+
+def build_source_catalog_payload(db_path: Path, *, snapshot_date: str = "") -> dict[str, Any]:
+    status_payload = build_sources_status_payload(db_path)
+    sources = status_payload.get("sources") if isinstance(status_payload, dict) else []
+    source_rows = sources if isinstance(sources, list) else []
+    db_path_text = safe_text(db_path)
+
+    def _resolve_repo_path(value: Any) -> Path | None:
+        token = safe_text(value).strip()
+        if not token:
+            return None
+        path = Path(token)
+        return path if path.is_absolute() else BASE_DIR / path
+
+    def _source_runner_script(source_id: Any, domain: Any) -> str:
+        token = safe_text(domain).strip().lower()
+        if not _supports_direct_ingest(source_id, token):
+            return ""
+        if token == "politicos":
+            return "scripts/ingestar_politicos_es.py"
+        if token == "parlamentario":
+            return "scripts/ingestar_parlamentario_es.py"
+        if token == "infoelectoral":
+            return "scripts/ingestar_infoelectoral_es.py"
+        return ""
+
+    legal_profile_error = ""
+    try:
+        from scripts.publicar_hf_snapshot import resolve_source_legal_profile  # noqa: WPS433
+    except Exception as exc:  # noqa: BLE001
+        legal_profile_error = f"{type(exc).__name__}: {exc}"
+
+        def resolve_source_legal_profile(source_id: str, default_url: str) -> dict[str, Any]:
+            return {
+                "verification_status": "pending_review",
+                "reuse_basis": "Import error: legal profile unavailable in this build.",
+                "terms_url": default_url or "",
+                "obligations": [],
+                "notes": "",
+                "personal_data_notes": "",
+                "reviewed_on": "",
+            }
+
+    def _bucket_key(value: Any) -> str:
+        token = safe_text(value).strip().lower()
+        return token or "unknown"
+
+    def _init_bucket(label: str) -> dict[str, Any]:
+        return {
+            "key": label,
+            "sources_total": 0,
+            "desired_total": 0,
+            "in_db_total": 0,
+            "active_total": 0,
+            "with_network_total": 0,
+            "tracker_done_total": 0,
+            "sql_done_total": 0,
+            "blocked_total": 0,
+            "mismatch_total": 0,
+        }
+
+    def _update_bucket(bucket: dict[str, Any], row: dict[str, Any]) -> None:
+        tracker_status = safe_text(row.get("tracker_status")).upper()
+        sql_status = safe_text(row.get("sql_status")).upper()
+        flags = row.get("flags") if isinstance(row.get("flags"), dict) else {}
+        mismatch_state = safe_text(row.get("mismatch_state"))
+
+        bucket["sources_total"] += 1
+        if bool(row.get("desired")):
+            bucket["desired_total"] += 1
+        if bool(row.get("in_db")):
+            bucket["in_db_total"] += 1
+        if bool(row.get("active")):
+            bucket["active_total"] += 1
+        if bool(flags.get("has_network")):
+            bucket["with_network_total"] += 1
+        if tracker_status == "DONE":
+            bucket["tracker_done_total"] += 1
+        if sql_status == "DONE":
+            bucket["sql_done_total"] += 1
+        if bool(flags.get("blocked_note")):
+            bucket["blocked_total"] += 1
+        if mismatch_state and mismatch_state != "MATCH":
+            bucket["mismatch_total"] += 1
+
+    domain_summary: dict[str, dict[str, Any]] = {}
+    scope_summary: dict[str, dict[str, Any]] = {}
+    legal_status_counts: dict[str, int] = {}
+    catalog_sources: list[dict[str, Any]] = []
+
+    for item in source_rows:
+        if not isinstance(item, dict):
+            continue
+        source_id = safe_text(item.get("source_id"))
+        default_url = safe_text(item.get("default_url"))
+        legal_profile = resolve_source_legal_profile(source_id, default_url)
+        legal_status = safe_text(legal_profile.get("verification_status"))
+        tracker = item.get("tracker") if isinstance(item.get("tracker"), dict) else {}
+        progress = item.get("progress") if isinstance(item.get("progress"), dict) else {}
+        warehouse = item.get("warehouse") if isinstance(item.get("warehouse"), dict) else {}
+        flags = item.get("flags") if isinstance(item.get("flags"), dict) else {}
+        fallback_file = safe_text(item.get("fallback_file"))
+        fallback_path = _resolve_repo_path(fallback_file)
+        runner_script = _source_runner_script(source_id, item.get("domain"))
+        strict_target = int(progress.get("target") or 0)
+
+        row = {
+            "source_id": source_id,
+            "source_name": safe_text(item.get("source_name")) or source_id,
+            "domain": safe_text(item.get("domain")),
+            "scope": safe_text(item.get("scope")),
+            "level": safe_text(item.get("level")),
+            "institution_name": safe_text(item.get("institution_name")),
+            "role_title": safe_text(item.get("role_title")),
+            "format": safe_text(item.get("format")),
+            "default_url": default_url,
+            "desired": bool(item.get("desired")),
+            "in_db": bool(item.get("in_db")),
+            "active": bool(item.get("active")),
+            "tracker_status": safe_text(tracker.get("status")).upper(),
+            "tracker_tipo_dato": safe_text(tracker.get("tipo_dato")),
+            "tracker_fuentes_objetivo": safe_text(tracker.get("fuentes_objetivo")),
+            "tracker_block_note": safe_text(tracker.get("bloque")),
+            "sql_status": safe_text(item.get("sql_status")).upper(),
+            "ops_state": safe_text(item.get("state")),
+            "mismatch_state": safe_text(item.get("mismatch_state")),
+            "mismatch_waived": bool(item.get("mismatch_waived")),
+            "waiver_expiry": safe_text(item.get("waiver_expiry")),
+            "runs_total": int(item.get("runs_total") or 0),
+            "runs_ok": int(item.get("runs_ok") or 0),
+            "last_status": safe_text(item.get("last_status")),
+            "last_loaded": int(item.get("last_loaded") or 0),
+            "max_loaded_any": int(item.get("max_loaded_any") or 0),
+            "max_loaded_network": int(item.get("max_loaded_network") or 0),
+            "network_fetches": int(item.get("network_fetches") or 0),
+            "fallback_fetches": int(item.get("fallback_fetches") or 0),
+            "last_seen_at": safe_text(item.get("last_seen_at")),
+            "last_message": safe_text(item.get("last_message")),
+            "progress": {
+                "loaded": int(progress.get("loaded") or 0),
+                "target": strict_target,
+                "percent": progress.get("percent"),
+            },
+            "warehouse": {
+                "primary_table": safe_text(warehouse.get("primary_table")),
+                "primary_rows": int(warehouse.get("primary_rows") or 0),
+                "counts": dict(warehouse.get("counts") or {}),
+            },
+            "execution": {
+                "runner_script": runner_script,
+                "strict_target": strict_target,
+                "fallback_file": fallback_file,
+                "sample_available": bool(fallback_path and fallback_path.exists()),
+            },
+            "flags": {
+                "under_threshold": bool(flags.get("under_threshold")),
+                "done_zero_real": bool(flags.get("done_zero_real")),
+                "has_network": bool(flags.get("has_network")),
+                "has_any": bool(flags.get("has_any")),
+                "blocked_note": bool(flags.get("blocked_note")),
+            },
+            "legal": {
+                "verification_status": legal_status,
+                "reuse_basis": safe_text(legal_profile.get("reuse_basis")),
+                "terms_url": safe_text(legal_profile.get("terms_url")),
+                "obligations": [safe_text(token) for token in legal_profile.get("obligations") or [] if safe_text(token)],
+                "notes": safe_text(legal_profile.get("notes")),
+                "personal_data_notes": safe_text(legal_profile.get("personal_data_notes")),
+                "reviewed_on": safe_text(legal_profile.get("reviewed_on")),
+            },
+        }
+        catalog_sources.append(row)
+
+        domain_key = _bucket_key(row.get("domain"))
+        scope_key = _bucket_key(row.get("scope"))
+        _update_bucket(domain_summary.setdefault(domain_key, _init_bucket(domain_key)), row)
+        _update_bucket(scope_summary.setdefault(scope_key, _init_bucket(scope_key)), row)
+
+        if legal_status:
+            legal_status_counts[legal_status] = legal_status_counts.get(legal_status, 0) + 1
+
+    flags_all = [row.get("flags") if isinstance(row.get("flags"), dict) else {} for row in catalog_sources]
+    summary = status_payload.get("summary") if isinstance(status_payload.get("summary"), dict) else {}
+    tracker_summary = dict(summary.get("tracker") or {}) if isinstance(summary.get("tracker"), dict) else {}
+    actions_payload: list[dict[str, Any]] = []
+    for action in status_payload.get("actions") or []:
+        if not isinstance(action, dict):
+            continue
+        commands = []
+        for raw_command in action.get("commands") or []:
+            command = safe_text(raw_command)
+            if db_path_text:
+                command = command.replace(db_path_text, "<db>")
+            commands.append(command)
+        action_row = dict(action)
+        action_row["commands"] = commands
+        actions_payload.append(action_row)
+
+    payload = {
+        "catalog_version": "v1",
+        "generated_at": safe_text(status_payload.get("generated_at")),
+        "snapshot_date": safe_text(snapshot_date),
+        "summary": {
+            "sources_total": len(catalog_sources),
+            "desired_total": sum(1 for row in catalog_sources if bool(row.get("desired"))),
+            "in_db_total": sum(1 for row in catalog_sources if bool(row.get("in_db"))),
+            "active_total": sum(1 for row in catalog_sources if bool(row.get("active"))),
+            "with_network_total": sum(1 for flags in flags_all if bool(flags.get("has_network"))),
+            "with_any_data_total": sum(1 for flags in flags_all if bool(flags.get("has_any"))),
+            "sample_backed_total": sum(
+                1
+                for row in catalog_sources
+                if bool((row.get("execution") or {}).get("sample_available"))
+            ),
+            "blocked_total": sum(1 for flags in flags_all if bool(flags.get("blocked_note"))),
+            "tracker_done_total": sum(1 for row in catalog_sources if safe_text(row.get("tracker_status")).upper() == "DONE"),
+            "sql_done_total": sum(1 for row in catalog_sources if safe_text(row.get("sql_status")).upper() == "DONE"),
+            "ops_ok_total": sum(1 for row in catalog_sources if safe_text(row.get("ops_state")) == "ok"),
+            "under_threshold_total": sum(1 for flags in flags_all if bool(flags.get("under_threshold"))),
+            "done_zero_real_total": sum(1 for flags in flags_all if bool(flags.get("done_zero_real"))),
+            "mismatch_total": sum(
+                1
+                for row in catalog_sources
+                if safe_text(row.get("mismatch_state")) and safe_text(row.get("mismatch_state")) != "MATCH"
+            ),
+            "missing_source_ids_total": len(status_payload.get("missing") or []),
+            "legal_status_counts": legal_status_counts,
+            "by_domain": sorted(domain_summary.values(), key=lambda row: safe_text(row.get("key"))),
+            "by_scope": sorted(scope_summary.values(), key=lambda row: safe_text(row.get("key"))),
+            "tracker": tracker_summary,
+        },
+        "ops": dict(status_payload.get("ops") or {}),
+        "roadmap": dict(status_payload.get("roadmap") or {}),
+        "roadmap_technical": dict(status_payload.get("roadmap_technical") or {}),
+        "actions": actions_payload,
+        "missing_source_ids": list(status_payload.get("missing") or []),
+        "sources": catalog_sources,
+    }
+    if safe_text(status_payload.get("error")):
+        payload["error"] = safe_text(status_payload.get("error"))
+    if legal_profile_error:
+        payload["legal_profile_error"] = legal_profile_error
+    return sanitize_public_payload(payload)
+
+
+def build_source_scrape_queue_payload(db_path: Path, *, snapshot_date: str = "") -> dict[str, Any]:
+    catalog_payload = build_source_catalog_payload(db_path, snapshot_date=snapshot_date)
+    source_rows = catalog_payload.get("sources") if isinstance(catalog_payload.get("sources"), list) else []
+    actions = catalog_payload.get("actions") if isinstance(catalog_payload.get("actions"), list) else []
+    tracker_command = "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+
+    def _source_ingest_command(domain: Any, source_id: Any, *, from_file: Any = "") -> str:
+        domain_token = safe_text(domain).strip().lower()
+        source_token = safe_text(source_id).strip()
+        if not domain_token or not source_token or not _supports_direct_ingest(source_token, domain_token):
+            return ""
+        if domain_token == "politicos":
+            script = "scripts/ingestar_politicos_es.py"
+        elif domain_token == "parlamentario":
+            script = "scripts/ingestar_parlamentario_es.py"
+        elif domain_token == "infoelectoral":
+            script = "scripts/ingestar_infoelectoral_es.py"
+        else:
+            return ""
+        parts = ["python3", script, "ingest", "--db", "<db>", "--source", source_token]
+        from_file_token = safe_text(from_file).strip()
+        if from_file_token:
+            parts.extend(["--from-file", from_file_token])
+        else:
+            parts.append("--strict-network")
+        return " ".join(shlex.quote(part) for part in parts)
+
+    actions_by_source: dict[str, list[dict[str, Any]]] = {}
+    for action in actions:
+        if not isinstance(action, dict):
+            continue
+        for source_id in action.get("source_ids") or []:
+            token = safe_text(source_id)
+            if not token:
+                continue
+            actions_by_source.setdefault(token, []).append(action)
+
+    def _reason_for_source(row: dict[str, Any]) -> tuple[str, int]:
+        flags = row.get("flags") if isinstance(row.get("flags"), dict) else {}
+        ops_state = safe_text(row.get("ops_state"))
+        mismatch_state = safe_text(row.get("mismatch_state"))
+        in_db = bool(row.get("in_db"))
+        has_network = bool(flags.get("has_network"))
+        done_zero_real = bool(flags.get("done_zero_real"))
+        under_threshold = bool(flags.get("under_threshold"))
+        blocked = bool(flags.get("blocked_note"))
+
+        if blocked:
+            return "blocked_upstream", 100
+        if not in_db:
+            return "missing_from_db", 95
+        if ops_state in {"error", "degraded"}:
+            return "ingest_error", 92
+        if done_zero_real or (in_db and not has_network):
+            return "missing_reproducible_network_run", 88
+        if under_threshold or ops_state == "partial":
+            return "under_threshold", 82
+        if mismatch_state and mismatch_state != "MATCH":
+            return "tracker_mismatch", 72
+        if ops_state in {"missing", "not_run", "unknown", "running"}:
+            return "needs_run", 65
+        return "", 0
+
+    def _repeatability_state(row: dict[str, Any]) -> str:
+        flags = row.get("flags") if isinstance(row.get("flags"), dict) else {}
+        execution = row.get("execution") if isinstance(row.get("execution"), dict) else {}
+        blocked = bool(flags.get("blocked_note"))
+        has_network = bool(flags.get("has_network"))
+        sample_available = bool(execution.get("sample_available"))
+        fallback_file = safe_text(execution.get("fallback_file"))
+        if blocked and sample_available:
+            return "blocked_with_sample"
+        if blocked:
+            return "blocked_upstream"
+        if has_network:
+            return "network_verified"
+        if sample_available:
+            return "sample_replay_only"
+        if fallback_file:
+            return "sample_declared_missing"
+        return "manual_capture_required"
+
+    def _preferred_mode(repeatability_state: str) -> str:
+        if repeatability_state in {"blocked_with_sample", "sample_replay_only"}:
+            return "from-file"
+        if repeatability_state == "blocked_upstream":
+            return "manual_capture"
+        return "strict-network"
+
+    def _execution_dependencies(source_id: str, *, snapshot_date_token: str) -> dict[str, Any]:
+        if source_id == "congreso_intervenciones":
+            return {
+                "prerequisite_source_ids": ["congreso_votaciones", "congreso_iniciativas"],
+                "pre_commands": [
+                    "python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>",
+                    (
+                        "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics "
+                        "--db <db> --vote-source-ids congreso_votaciones --as-of-date "
+                        f"{shlex.quote(snapshot_date_token)}"
+                    ),
+                ],
+            }
+        return {"prerequisite_source_ids": [], "pre_commands": []}
+
+    queue_items: list[dict[str, Any]] = []
+    by_reason: dict[str, int] = {}
+    by_domain: dict[str, int] = {}
+    by_scope: dict[str, int] = {}
+    by_repeatability_state: dict[str, int] = {}
+
+    for row in source_rows:
+        if not isinstance(row, dict):
+            continue
+        reason, priority = _reason_for_source(row)
+        if not reason:
+            continue
+        source_id = safe_text(row.get("source_id"))
+        source_actions = actions_by_source.get(source_id, [])
+        commands: list[str] = []
+        action_titles: list[str] = []
+        seen_commands: set[str] = set()
+        seen_titles: set[str] = set()
+        for action in source_actions:
+            title = safe_text(action.get("title"))
+            if title and title not in seen_titles:
+                seen_titles.add(title)
+                action_titles.append(title)
+            for raw_command in action.get("commands") or []:
+                command = safe_text(raw_command)
+                if not command or command in seen_commands:
+                    continue
+                seen_commands.add(command)
+                commands.append(command)
+
+        domain = safe_text(row.get("domain")) or "unknown"
+        scope = safe_text(row.get("scope")) or "unknown"
+        priority_band = "P0" if priority >= 90 else "P1" if priority >= 75 else "P2"
+        execution = row.get("execution") if isinstance(row.get("execution"), dict) else {}
+        repeatability_state = _repeatability_state(row)
+        preferred_mode = _preferred_mode(repeatability_state)
+        fallback_file = safe_text(execution.get("fallback_file"))
+        network_command = _source_ingest_command(domain, source_id)
+        sample_command = _source_ingest_command(domain, source_id, from_file=fallback_file) if fallback_file else ""
+        snapshot_date_token = safe_text(snapshot_date or catalog_payload.get("snapshot_date")) or "<snapshot-date>"
+        dependency_config = _execution_dependencies(source_id, snapshot_date_token=snapshot_date_token)
+        batch_key = "::".join(
+            [
+                priority_band,
+                reason,
+                domain,
+                scope,
+                preferred_mode,
+                safe_text(execution.get("runner_script")) or "unknown",
+            ]
+        )
+        queue_items.append(
+            {
+                "source_id": source_id,
+                "source_name": safe_text(row.get("source_name")) or source_id,
+                "domain": domain,
+                "scope": scope,
+                "priority_score": int(priority),
+                "priority_band": priority_band,
+                "queue_reason": reason,
+                "ops_state": safe_text(row.get("ops_state")),
+                "tracker_status": safe_text(row.get("tracker_status")),
+                "sql_status": safe_text(row.get("sql_status")),
+                "mismatch_state": safe_text(row.get("mismatch_state")),
+                "default_url": safe_text(row.get("default_url")),
+                "tracker_tipo_dato": safe_text(row.get("tracker_tipo_dato")),
+                "legal_verification_status": safe_text((row.get("legal") or {}).get("verification_status")),
+                "progress": dict(row.get("progress") or {}),
+                "flags": dict(row.get("flags") or {}),
+                "warehouse": dict(row.get("warehouse") or {}),
+                "last_message": safe_text(row.get("last_message")),
+                "tracker_block_note": safe_text(row.get("tracker_block_note")),
+                "action_titles": action_titles,
+                "commands": commands,
+                "batch_key": batch_key,
+                "execution": {
+                    "runner_script": safe_text(execution.get("runner_script")),
+                    "strict_target": int(execution.get("strict_target") or 0),
+                    "fallback_file": fallback_file,
+                    "sample_available": bool(execution.get("sample_available")),
+                    "repeatability_state": repeatability_state,
+                    "preferred_mode": preferred_mode,
+                    "network_command": network_command,
+                    "sample_command": sample_command,
+                    "validation_command": tracker_command,
+                    "prerequisite_source_ids": list(dependency_config.get("prerequisite_source_ids") or []),
+                    "pre_commands": list(dependency_config.get("pre_commands") or []),
+                },
+            }
+        )
+        by_reason[reason] = by_reason.get(reason, 0) + 1
+        by_domain[domain] = by_domain.get(domain, 0) + 1
+        by_scope[scope] = by_scope.get(scope, 0) + 1
+        by_repeatability_state[repeatability_state] = by_repeatability_state.get(repeatability_state, 0) + 1
+
+    queue_items.sort(
+        key=lambda row: (
+            -int(row.get("priority_score") or 0),
+            safe_text(row.get("domain")),
+            safe_text(row.get("scope")),
+            safe_text(row.get("source_id")),
+        )
+    )
+    for index, row in enumerate(queue_items, start=1):
+        row["rank"] = index
+
+    batches_by_key: dict[str, dict[str, Any]] = {}
+    for row in queue_items:
+        execution = row.get("execution") if isinstance(row.get("execution"), dict) else {}
+        batch_key = safe_text(row.get("batch_key"))
+        batch = batches_by_key.setdefault(
+            batch_key,
+            {
+                "batch_key": batch_key,
+                "priority_band": safe_text(row.get("priority_band")),
+                "queue_reason": safe_text(row.get("queue_reason")),
+                "domain": safe_text(row.get("domain")),
+                "scope": safe_text(row.get("scope")),
+                "preferred_mode": safe_text(execution.get("preferred_mode")),
+                "runner_script": safe_text(execution.get("runner_script")),
+                "first_rank": int(row.get("rank") or 0),
+                "source_ids": [],
+                "items_total": 0,
+                "sample_backed_total": 0,
+                "repeatable_now_total": 0,
+                "blocked_total": 0,
+                "commands": [],
+                "network_commands": [],
+                "sample_commands": [],
+            },
+        )
+        batch["items_total"] += 1
+        batch["source_ids"].append(safe_text(row.get("source_id")))
+        batch["first_rank"] = min(int(batch.get("first_rank") or 0), int(row.get("rank") or 0))
+        if bool(execution.get("sample_available")):
+            batch["sample_backed_total"] += 1
+        if safe_text(execution.get("repeatability_state")) in {
+            "blocked_with_sample",
+            "network_verified",
+            "sample_replay_only",
+        }:
+            batch["repeatable_now_total"] += 1
+        if safe_text(execution.get("repeatability_state")) in {"blocked_upstream", "blocked_with_sample"}:
+            batch["blocked_total"] += 1
+        for field, key in (
+            ("commands", "commands"),
+            ("network_commands", "network_command"),
+            ("sample_commands", "sample_command"),
+        ):
+            bucket = batch.get(field)
+            if not isinstance(bucket, list):
+                continue
+            if key == "commands":
+                values = [safe_text(token) for token in row.get("commands") or [] if safe_text(token)]
+            else:
+                value = safe_text(execution.get(key))
+                values = [value] if value else []
+            for value in values:
+                if value not in bucket:
+                    bucket.append(value)
+
+    batches = sorted(
+        batches_by_key.values(),
+        key=lambda row: (
+            int(row.get("first_rank") or 0),
+            safe_text(row.get("batch_key")),
+        ),
+    )
+
+    payload = {
+        "queue_version": "v1",
+        "generated_at": safe_text(catalog_payload.get("generated_at")),
+        "snapshot_date": safe_text(snapshot_date or catalog_payload.get("snapshot_date")),
+        "summary": {
+            "queue_items_total": len(queue_items),
+            "p0_total": sum(1 for row in queue_items if safe_text(row.get("priority_band")) == "P0"),
+            "p1_total": sum(1 for row in queue_items if safe_text(row.get("priority_band")) == "P1"),
+            "p2_total": sum(1 for row in queue_items if safe_text(row.get("priority_band")) == "P2"),
+            "by_reason": by_reason,
+            "by_domain": by_domain,
+            "by_scope": by_scope,
+            "by_repeatability_state": by_repeatability_state,
+            "repeatable_now_total": sum(
+                1
+                for row in queue_items
+                if safe_text(((row.get("execution") or {}).get("repeatability_state"))) in {
+                    "blocked_with_sample",
+                    "network_verified",
+                    "sample_replay_only",
+                }
+            ),
+            "sample_backed_total": sum(
+                1 for row in queue_items if bool(((row.get("execution") or {}).get("sample_available")))
+            ),
+            "blocked_total": sum(
+                1
+                for row in queue_items
+                if safe_text(((row.get("execution") or {}).get("repeatability_state"))) in {
+                    "blocked_upstream",
+                    "blocked_with_sample",
+                }
+            ),
+            "batches_total": len(batches),
+            "catalog_sources_total": int((catalog_payload.get("summary") or {}).get("sources_total") or 0),
+        },
+        "items": queue_items,
+        "batches": batches,
+    }
+    if safe_text(catalog_payload.get("error")):
+        payload["error"] = safe_text(catalog_payload.get("error"))
+    return sanitize_public_payload(payload)
 
 
 def _resolve_topic_coherence_as_of_date(conn: sqlite3.Connection, *, as_of_date: str | None = None) -> str:
@@ -6841,7 +7435,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 if not src_path.exists():
                     self.write_json(
                         {
-                            "error": f"{filename} no encontrado. Ejecuta `just explorer-gh-pages-build` para generarlo.",
+                            "error": f"{filename} no encontrado. Ejecuta `just cloudflare-pages-build` para generarlo.",
                             "expected_path": str(src_path),
                         },
                         status=HTTPStatus.NOT_FOUND,
@@ -7049,6 +7643,18 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                         f"present={payload.get('summary', {}).get('present', 0)}",
                         f"missing={payload.get('summary', {}).get('missing', 0)}",
                     )
+                status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
+                self.write_json(payload, status=status)
+                return
+
+            if path == "/api/sources/catalog":
+                payload = build_source_catalog_payload(config.db_path)
+                status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
+                self.write_json(payload, status=status)
+                return
+
+            if path == "/api/sources/queue":
+                payload = build_source_scrape_queue_payload(config.db_path)
                 status = HTTPStatus.BAD_REQUEST if "error" in payload else HTTPStatus.OK
                 self.write_json(payload, status=status)
                 return

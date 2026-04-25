@@ -1,0 +1,980 @@
+{
+  "generated_at": "2026-03-01T09:02:03+00:00",
+  "status": "degraded",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "totals": {
+    "missing_urls": 683,
+    "missing_initiatives": 513,
+    "blocked_403_urls": 114,
+    "blocked_403_rate": 0.166911,
+    "blocked_500_urls": 0,
+    "unknown_status_urls": 217,
+    "zero_doc_initiatives": 0
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 404,
+      "count": 347
+    },
+    {
+      "status": 0,
+      "count": 217
+    },
+    {
+      "status": 403,
+      "count": 114
+    },
+    {
+      "status": 200,
+      "count": 5
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort": "leg12:tipo610",
+      "legislature": "12",
+      "tipo_expediente": "610",
+      "missing_urls": 85,
+      "blocked_403_urls": 60,
+      "blocked_403_rate": 0.705882,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 60
+        },
+        {
+          "status": 0,
+          "count": 24
+        },
+        {
+          "status": 404,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 60
+        },
+        {
+          "method": "unknown",
+          "count": 24
+        },
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=610&numEx=000080",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000004",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000007",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000008",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000010",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000012",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000013",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000015",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000016",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000017",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000018",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000019",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000020",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000021",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000022",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000023",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000024",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=610&numEx=000025"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo621",
+      "legislature": "14",
+      "tipo_expediente": "621",
+      "missing_urls": 73,
+      "blocked_403_urls": 16,
+      "blocked_403_rate": 0.219178,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 37
+        },
+        {
+          "status": 404,
+          "count": 20
+        },
+        {
+          "status": 403,
+          "count": 16
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 37
+        },
+        {
+          "method": "other",
+          "count": 20
+        },
+        {
+          "method": "playwright",
+          "count": 16
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000048&legis=14",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000049&legis=14",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000050&legis=14",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000052&legis=14",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000053&legis=14",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000054&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000066",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000069&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000069",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000070&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000070",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000071&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000071",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000072&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000072",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000073&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000073",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000074&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=621&numEx=000074",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000044&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=621&numEx=000074",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=621&numEx=000075",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=621&numEx=000076",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=621&numEx=000077",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=621&numEx=000078"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo624",
+      "legislature": "14",
+      "tipo_expediente": "624",
+      "missing_urls": 29,
+      "blocked_403_urls": 13,
+      "blocked_403_rate": 0.448276,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 13
+        },
+        {
+          "status": 404,
+          "count": 10
+        },
+        {
+          "status": 0,
+          "count": 6
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "playwright",
+          "count": 13
+        },
+        {
+          "method": "other",
+          "count": 10
+        },
+        {
+          "method": "unknown",
+          "count": 6
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000001",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000009",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000010&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000020",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000017&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000017",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000019&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000019",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000009&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=624&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000010",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000012",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000013",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000015",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000016",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000017",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000018",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000019",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000020",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000003"
+      ]
+    },
+    {
+      "cohort": "leg10:tipo622",
+      "legislature": "10",
+      "tipo_expediente": "622",
+      "missing_urls": 12,
+      "blocked_403_urls": 9,
+      "blocked_403_rate": 0.75,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 9
+        },
+        {
+          "status": 404,
+          "count": 3
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 9
+        },
+        {
+          "method": "other",
+          "count": 3
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000004",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000010",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000012",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000013",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000015"
+      ]
+    },
+    {
+      "cohort": "leg10:tipo624",
+      "legislature": "10",
+      "tipo_expediente": "624",
+      "missing_urls": 6,
+      "blocked_403_urls": 6,
+      "blocked_403_rate": 1.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 6
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 6
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=624&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=624&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=624&numEx=000003",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=624&numEx=000004",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=624&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=624&numEx=000006"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 22,
+      "blocked_403_urls": 4,
+      "blocked_403_rate": 0.181818,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 9
+        },
+        {
+          "status": 404,
+          "count": 5
+        },
+        {
+          "status": 403,
+          "count": 4
+        },
+        {
+          "status": 200,
+          "count": 4
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 13
+        },
+        {
+          "method": "other",
+          "count": 5
+        },
+        {
+          "method": "http",
+          "count": 3
+        },
+        {
+          "method": "playwright",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000055",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000020",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000026",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000039",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000064",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000075",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000085",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000088",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000090",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000030",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000034",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000044",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000062",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000003",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000007",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000020",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=622&numEx=000023"
+      ]
+    },
+    {
+      "cohort": "leg10:tipo626",
+      "legislature": "10",
+      "tipo_expediente": "626",
+      "missing_urls": 2,
+      "blocked_403_urls": 2,
+      "blocked_403_rate": 1.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 2
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=626&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=626&numEx=000002"
+      ]
+    },
+    {
+      "cohort": "leg12:tipo605",
+      "legislature": "12",
+      "tipo_expediente": "605",
+      "missing_urls": 2,
+      "blocked_403_urls": 2,
+      "blocked_403_rate": 1.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 2
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=605&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=605&numEx=000002"
+      ]
+    },
+    {
+      "cohort": "leg11:tipo626",
+      "legislature": "11",
+      "tipo_expediente": "626",
+      "missing_urls": 2,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 0.5,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 1
+        },
+        {
+          "status": 403,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "http",
+          "count": 1
+        },
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=626&id2=000001&legis=11",
+        "https://www.senado.es/web/ficopendataservlet?legis=11&tipoFich=12&tipoEx=626&numEx=000001"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo625",
+      "legislature": "14",
+      "tipo_expediente": "625",
+      "missing_urls": 1,
+      "blocked_403_urls": 1,
+      "blocked_403_rate": 1.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "playwright",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=625&numEx=000001"
+      ]
+    },
+    {
+      "cohort": "leg10:tipo610",
+      "legislature": "10",
+      "tipo_expediente": "610",
+      "missing_urls": 271,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 271
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 271
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000113",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000114",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000115",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000116",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000117",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000118",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000119",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000120",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000121",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000122",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000123",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000124",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000126",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000127",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000128",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000129",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000130",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000131",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000132",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000133",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000134",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000135",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000137",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000138",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=10&id1=610&id2=000139"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo610",
+      "legislature": "14",
+      "tipo_expediente": "610",
+      "missing_urls": 96,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 77
+        },
+        {
+          "status": 404,
+          "count": 19
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 77
+        },
+        {
+          "method": "other",
+          "count": 19
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000082",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000083",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000084",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000092",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000093",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000094",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000095",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000096",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000097",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000098",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=610&numEx=000042",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=610&numEx=000051",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000085",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000086",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000087",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000088",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000089",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000090",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000091",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000003",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000004",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000006"
+      ]
+    },
+    {
+      "cohort": "leg12:tipo622",
+      "legislature": "12",
+      "tipo_expediente": "622",
+      "missing_urls": 26,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 22
+        },
+        {
+          "status": 404,
+          "count": 4
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 22
+        },
+        {
+          "method": "other",
+          "count": 4
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000008",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000025",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=622&numEx=000026",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000007",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000008",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000010",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000012",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000013",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000018",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000019",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000020",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000021",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000022",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000023",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000024",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000025",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000026",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000027",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=622&numEx=000028"
+      ]
+    },
+    {
+      "cohort": "leg12:tipo621",
+      "legislature": "12",
+      "tipo_expediente": "621",
+      "missing_urls": 16,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 16
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 16
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000003",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000004",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000007",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000008",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000010",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000012",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000013",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000014",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000015",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000016",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000017",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=621&numEx=000018"
+      ]
+    },
+    {
+      "cohort": "leg12:tipo624",
+      "legislature": "12",
+      "tipo_expediente": "624",
+      "missing_urls": 15,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 12
+        },
+        {
+          "status": 404,
+          "count": 3
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 12
+        },
+        {
+          "method": "other",
+          "count": 3
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000014&legis=12",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=3&tipoEx=624&numEx=000001",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000001&legis=12",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000005",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000007",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000008",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000010",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000011",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000012",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000013",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=624&numEx=000016"
+      ]
+    },
+    {
+      "cohort": "leg12:tipo626",
+      "legislature": "12",
+      "tipo_expediente": "626",
+      "missing_urls": 7,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 7
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 7
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000003",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000004",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000008",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000009",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=626&numEx=000010"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo605",
+      "legislature": "14",
+      "tipo_expediente": "605",
+      "missing_urls": 4,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 3
+        },
+        {
+          "status": 404,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 3
+        },
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=605&id2=000004&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=605&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=605&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=605&numEx=000003"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo626",
+      "legislature": "14",
+      "tipo_expediente": "626",
+      "missing_urls": 4,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 3
+        },
+        {
+          "status": 200,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 3
+        },
+        {
+          "method": "unknown",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=626&id2=000008&legis=14",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=626&numEx=000003",
+        "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=626&numEx=000008",
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000001"
+      ]
+    },
+    {
+      "cohort": "leg12:tipo625",
+      "legislature": "12",
+      "tipo_expediente": "625",
+      "missing_urls": 3,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 3
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 3
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=625&numEx=000001",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=625&numEx=000002",
+        "https://www.senado.es/web/ficopendataservlet?legis=12&tipoFich=12&tipoEx=625&numEx=000003"
+      ]
+    },
+    {
+      "cohort": "leg15:tipo622",
+      "legislature": "15",
+      "tipo_expediente": "622",
+      "missing_urls": 2,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 2
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000024",
+        "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=12&tipoEx=622&numEx=000024"
+      ]
+    },
+    {
+      "cohort": "leg15:tipo626",
+      "legislature": "15",
+      "tipo_expediente": "626",
+      "missing_urls": 2,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 2
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 2
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=626&numEx=000006",
+        "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=12&tipoEx=626&numEx=000006"
+      ]
+    },
+    {
+      "cohort": "leg10:tipo605",
+      "legislature": "10",
+      "tipo_expediente": "605",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=605&numEx=000001"
+      ]
+    },
+    {
+      "cohort": "leg14:tipo620",
+      "legislature": "14",
+      "tipo_expediente": "620",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 404,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "other",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=620&id2=000007&legis=14"
+      ]
+    },
+    {
+      "cohort": "leg15:tipo624",
+      "legislature": "15",
+      "tipo_expediente": "624",
+      "missing_urls": 1,
+      "blocked_403_urls": 0,
+      "blocked_403_rate": 0.0,
+      "blocked_500_urls": 0,
+      "status_buckets": [
+        {
+          "status": 0,
+          "count": 1
+        }
+      ],
+      "method_buckets": [
+        {
+          "method": "unknown",
+          "count": 1
+        }
+      ],
+      "sample_urls": [
+        "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=12&tipoEx=624&numEx=000001"
+      ]
+    }
+  ],
+  "zero_doc_priority": [],
+  "checks": {
+    "has_missing_urls": true,
+    "has_403_signal": true,
+    "has_cohorts": true,
+    "has_zero_doc_priority": false
+  },
+  "db": "etl/data/staging/politicos-es.db"
+}

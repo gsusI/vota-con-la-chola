@@ -24,19 +24,6 @@ test("citizen UI renders evidence trust panel markers in party cards", () => {
   assert.match(html, /metodo=/i);
 });
 
-test("citizen UI exposes curiosity companion markers for comparability, lineage, and snapshot diff", () => {
-  const html = readCitizenHtml();
-  assert.match(html, /function\s+renderCuriosityDetail\s*\(/i);
-  assert.match(html, /function\s+citizenCompanionPath\s*\(/i);
-  assert.match(html, /["']comparability["']/i);
-  assert.match(html, /["']lineage["']/i);
-  assert.match(html, /["']snapshot_diff["']/i);
-  assert.match(html, /data-citizen-curiosity-details=["']1["']/i);
-  assert.match(html, /data-citizen-comparability=["']1["']/i);
-  assert.match(html, /data-citizen-lineage=["']1["']/i);
-  assert.match(html, /data-citizen-snapshot-diff=["']1["']/i);
-});
-
 test("citizen UI exposes snapshot freshness and honesty markers in the banner", () => {
   const html = readCitizenHtml();
   assert.match(html, /function\s+snapshotFreshnessFromMeta\s*\(/i);

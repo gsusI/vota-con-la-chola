@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
+import { resolveBasePath } from "../path-utils.mjs";
 
 function asInt(value) {
   const parsed = Number(value);
@@ -284,7 +281,7 @@ export default function ElectionsBehaviorPage() {
         <section className="hero card">
           <p className="eyebrow">Conexión electoral</p>
           <h1>Cargando conexiones elecciones-comportamiento</h1>
-          <p className="sub">Esperando el snapshot estático publicado...</p>
+          <p className="sub">Esperando el snapshot estático de GH Pages...</p>
         </section>
       </main>
     );
@@ -305,14 +302,14 @@ export default function ElectionsBehaviorPage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Elecciones y comportamiento</p>
+        <p className="eyebrow">Conexión elecciones-comportamiento</p>
         <h1>Análisis: antes y después de cada elección</h1>
         <p className="sub">
           Relaciona elección nacional (Congreso / Senado) con cambios de cohesión partidaria, cambios temáticos y representación territorial
           del periodo pre/post.
         </p>
         <div className="chips" style={{ marginTop: 10 }}>
-          <span className="chip">Publicación: {meta.generated_at || "sin fecha"}</span>
+          <span className="chip">Snapshot: {meta.generated_at || "sin fecha"}</span>
           <span className="chip">Elecciones: {formatInt(elections.length)}</span>
           <span className="chip">Partidos con cambios: {formatInt(filteredPartyShifts.length)}</span>
           <span className="chip">Temas con cambios: {formatInt(filteredTopicShifts.length)}</span>
@@ -326,7 +323,7 @@ export default function ElectionsBehaviorPage() {
         </div>
         <div className="filterGrid">
           <div className="field">
-            <label htmlFor="eb-bucket">Cámara</label>
+            <label htmlFor="eb-bucket">Camara</label>
             <select
               id="eb-bucket"
               className="tableFilterSelect"
@@ -392,13 +389,13 @@ export default function ElectionsBehaviorPage() {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Elecciones</h2>
+          <h2>Elections</h2>
         </div>
         <div className="tableWrap">
           <table className="table">
             <thead>
               <tr>
-                <th>Cámara</th>
+                <th>Camara</th>
                 <th>Elección</th>
                 <th>Fecha</th>
                 <th>Tipo</th>
@@ -458,7 +455,7 @@ export default function ElectionsBehaviorPage() {
           <table className="table">
             <thead>
               <tr>
-                <th>Cámara</th>
+                <th>Camara</th>
                 <th>Elección</th>
                 <th>Partido</th>
                 <th>Pre</th>
@@ -532,7 +529,7 @@ export default function ElectionsBehaviorPage() {
           <table className="table">
             <thead>
               <tr>
-                <th>Cámara</th>
+                <th>Camara</th>
                 <th>Elección</th>
                 <th>Partido</th>
                 <th>Tema</th>
@@ -601,7 +598,7 @@ export default function ElectionsBehaviorPage() {
           <table className="table">
             <thead>
               <tr>
-                <th>Cámara</th>
+                <th>Camara</th>
                 <th>Elección</th>
                 <th>Partido</th>
                 <th>Territorio</th>

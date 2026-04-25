@@ -1,0 +1,210 @@
+{
+  "generated_at": "2026-02-28T22:00:25+00:00",
+  "status": "ok",
+  "initiative_source_id": "senado_iniciativas",
+  "doc_source_id": "parl_initiative_docs",
+  "filters": {
+    "only_linked_to_votes": true,
+    "exclude_redundant_senado_global": true
+  },
+  "limits": {
+    "cohort_top_n": 2,
+    "max_urls_per_cohort": 30,
+    "max_total_rows": 60,
+    "include_zero_doc_priority": true,
+    "max_zero_doc_rows": 10,
+    "strict_min_packet_rows": 1,
+    "strict_min_cohorts": 1
+  },
+  "totals": {
+    "missing_urls": 1313,
+    "missing_initiatives": 627,
+    "blocked_403_urls": 719,
+    "blocked_403_rate": 0.547601,
+    "selected_cohorts_total": 2,
+    "zero_doc_priority_total": 6,
+    "packet_rows_total": 60,
+    "packet_unique_initiatives_total": 59
+  },
+  "status_buckets_missing_urls": [
+    {
+      "status": 403,
+      "count": 719
+    },
+    {
+      "status": 0,
+      "count": 377
+    },
+    {
+      "status": 500,
+      "count": 134
+    },
+    {
+      "status": 404,
+      "count": 42
+    },
+    {
+      "status": 200,
+      "count": 41
+    }
+  ],
+  "selected_cohorts": [
+    {
+      "cohort": "leg10:tipo610",
+      "legislature": "10",
+      "tipo_expediente": "610",
+      "missing_urls": 432,
+      "blocked_403_urls": 266,
+      "blocked_403_rate": 0.615741,
+      "blocked_500_urls": 69,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 266
+        },
+        {
+          "status": 0,
+          "count": 77
+        },
+        {
+          "status": 500,
+          "count": 69
+        },
+        {
+          "status": 404,
+          "count": 20
+        }
+      ]
+    },
+    {
+      "cohort": "leg14:tipo621",
+      "legislature": "14",
+      "tipo_expediente": "621",
+      "missing_urls": 247,
+      "blocked_403_urls": 168,
+      "blocked_403_rate": 0.680162,
+      "blocked_500_urls": 13,
+      "status_buckets": [
+        {
+          "status": 403,
+          "count": 168
+        },
+        {
+          "status": 0,
+          "count": 37
+        },
+        {
+          "status": 404,
+          "count": 15
+        },
+        {
+          "status": 200,
+          "count": 14
+        },
+        {
+          "status": 500,
+          "count": 13
+        }
+      ]
+    }
+  ],
+  "zero_doc_priority": [
+    {
+      "initiative_id": "senado:leg14:exp:626/000008",
+      "cohort": "leg14:tipo626",
+      "legislature": "14",
+      "tipo_expediente": "626",
+      "missing_urls": 5,
+      "blocked_403_urls": 4,
+      "blocked_403_rate": 0.8,
+      "top_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000008",
+      "top_last_http_status": 403,
+      "top_attempts": 15,
+      "top_last_attempt_at": "2026-02-28T21:21:12+00:00",
+      "top_method_hint": "http",
+      "doc_kind": "ds"
+    },
+    {
+      "initiative_id": "senado:leg14:exp:622/000026",
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 3,
+      "blocked_403_urls": 3,
+      "blocked_403_rate": 1.0,
+      "top_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000026",
+      "top_last_http_status": 403,
+      "top_attempts": 15,
+      "top_last_attempt_at": "2026-02-28T21:21:12+00:00",
+      "top_method_hint": "http",
+      "doc_kind": "ds"
+    },
+    {
+      "initiative_id": "senado:leg14:exp:622/000039",
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 3,
+      "blocked_403_urls": 3,
+      "blocked_403_rate": 1.0,
+      "top_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000039",
+      "top_last_http_status": 403,
+      "top_attempts": 15,
+      "top_last_attempt_at": "2026-02-28T21:21:12+00:00",
+      "top_method_hint": "http",
+      "doc_kind": "ds"
+    },
+    {
+      "initiative_id": "senado:leg14:exp:622/000064",
+      "cohort": "leg14:tipo622",
+      "legislature": "14",
+      "tipo_expediente": "622",
+      "missing_urls": 3,
+      "blocked_403_urls": 3,
+      "blocked_403_rate": 1.0,
+      "top_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000064",
+      "top_last_http_status": 403,
+      "top_attempts": 14,
+      "top_last_attempt_at": "2026-02-28T21:21:12+00:00",
+      "top_method_hint": "http",
+      "doc_kind": "ds"
+    },
+    {
+      "initiative_id": "senado:leg14:exp:626/000001",
+      "cohort": "leg14:tipo626",
+      "legislature": "14",
+      "tipo_expediente": "626",
+      "missing_urls": 3,
+      "blocked_403_urls": 3,
+      "blocked_403_rate": 1.0,
+      "top_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000001",
+      "top_last_http_status": 403,
+      "top_attempts": 13,
+      "top_last_attempt_at": "2026-02-28T21:21:12+00:00",
+      "top_method_hint": "http",
+      "doc_kind": "ds"
+    },
+    {
+      "initiative_id": "senado:leg14:exp:626/000003",
+      "cohort": "leg14:tipo626",
+      "legislature": "14",
+      "tipo_expediente": "626",
+      "missing_urls": 3,
+      "blocked_403_urls": 3,
+      "blocked_403_rate": 1.0,
+      "top_doc_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000003",
+      "top_last_http_status": 403,
+      "top_attempts": 14,
+      "top_last_attempt_at": "2026-02-28T21:21:12+00:00",
+      "top_method_hint": "http",
+      "doc_kind": "ds"
+    }
+  ],
+  "checks": {
+    "has_missing_urls": true,
+    "selected_cohorts_min_met": true,
+    "packet_rows_min_met": true
+  },
+  "strict_fail_reasons": [],
+  "db": "etl/data/staging/politicos-es.db"
+}

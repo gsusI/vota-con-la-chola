@@ -1,0 +1,50 @@
+{
+  "archive_fallback": true,
+  "archive_fallback_http_statuses": [
+    404
+  ],
+  "archive_fetched_ok": 0,
+  "archive_first_urls": 2,
+  "archive_hits": 0,
+  "archive_lookup_attempted": 2,
+  "archive_lookup_failures": [],
+  "candidate_urls": 2,
+  "derived_ini_candidates": 0,
+  "derived_ini_selected": 0,
+  "derived_probe_unfetched_skipped": 0,
+  "doc_links_filtered_by_selected_doc_entry_keys": 0,
+  "doc_links_filtered_by_selected_doc_urls": 0,
+  "doc_links_seen": 2,
+  "dry_run": false,
+  "failures": [
+    "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000001 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=622&numEx=000004 -> HTTPStatusError: archive fallback: no snapshot candidates"
+  ],
+  "fetched_ok": 0,
+  "initiative_documents_upserted": 2,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 2,
+  "playwright_init_error": null,
+  "playwright_runtime": {},
+  "retry_http_statuses": [
+    404
+  ],
+  "selected_doc_entry_keys_total": 2,
+  "selected_doc_status_used_for_forbidden_filter": 2,
+  "selected_doc_status_used_for_retry": 2,
+  "selected_doc_urls_not_in_candidates": 0,
+  "selected_doc_urls_total": 2,
+  "selected_doc_urls_with_snapshot_status": 2,
+  "selected_initiatives_total": 2,
+  "selected_scope_ignores_doc_cap": true,
+  "selected_scope_no_limit": true,
+  "skipped_existing": 0,
+  "skipped_forbidden": 0,
+  "skipped_redundant_global_urls": 0,
+  "skipped_retry_http_statuses": 0,
+  "text_documents_upserted": 0,
+  "urls_filtered_by_selected_doc_urls": 0,
+  "urls_to_fetch": 2
+}

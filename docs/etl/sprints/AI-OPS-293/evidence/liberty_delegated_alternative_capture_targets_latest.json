@@ -1,0 +1,27 @@
+{
+  "pending_resolution_csv": "docs/etl/sprints/AI-OPS-292/exports/liberty_delegated_pending_resolution_review_queue_alternative_latest.csv",
+  "targets_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_alternative_capture_targets_latest.csv",
+  "summary": {
+    "status": "ok",
+    "pending_links_total": 1,
+    "target_rows_total": 11,
+    "boe_doc_candidates_emitted_total": 3,
+    "max_candidate_doc_targets_per_link": 3,
+    "pending_reason_counts": {
+      "auto_assist:role_alignment_failed:procedural_unit_non_nominative_requires_manual": 1
+    },
+    "targets_by_label": {
+      "aeat_sede": 1,
+      "aeat_sede_role_exact": 1,
+      "aeat_web": 1,
+      "aeat_web_role_exact": 1,
+      "boe_direct_doc_BOE-A-2008-9974": 1,
+      "boe_direct_doc_BOE-A-2010-5072": 1,
+      "boe_direct_doc_BOE-A-2024-12397": 1,
+      "boe_redirector_primary": 1,
+      "boe_redirector_secondary": 1,
+      "transparencia_gob": 1,
+      "transparencia_gob_role_exact": 1
+    }
+  }
+}

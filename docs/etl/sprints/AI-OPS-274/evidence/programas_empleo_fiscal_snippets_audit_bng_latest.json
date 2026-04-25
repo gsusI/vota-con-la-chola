@@ -1,0 +1,85 @@
+{
+  "source_id": "programas_partidos",
+  "topic_key": "concern:v1:empleo",
+  "parties": [
+    "BNG"
+  ],
+  "fiscal_terms": [
+    "imposto de sociedades",
+    "fiscalidad",
+    "fiscalitat",
+    "impuesto",
+    "impostos",
+    "tribut",
+    "irpf",
+    "iva",
+    "sociedades"
+  ],
+  "employment_anchor_terms": [
+    "emple",
+    "trabaj",
+    "traballo",
+    "emprego",
+    "laboral",
+    "paro",
+    "salari",
+    "ocupacion",
+    "ocupacio"
+  ],
+  "max_suspicious_support_rows": 0,
+  "rows_total": 2,
+  "support_rows": 1,
+  "unclear_rows": 1,
+  "suspicious_support_rows": 0,
+  "checks": {
+    "rows_present": true,
+    "suspicious_support_within_threshold": true
+  },
+  "status": "ok",
+  "passed": true,
+  "strict_fail_reasons": [],
+  "parties_breakdown": [
+    {
+      "party_name": "BNG",
+      "rows_total": 2,
+      "support_rows": 1,
+      "unclear_rows": 1,
+      "suspicious_support_rows": 0
+    }
+  ],
+  "rows": [
+    {
+      "evidence_id": 1560338,
+      "party_name": "BNG",
+      "topic_key": "concern:v1:empleo",
+      "stance": "support",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2024/01/24/24_bng_galegas_programa_goberno.pdf",
+      "matched_fiscal_terms": [
+        "imposto de sociedades",
+        "tribut",
+        "iva",
+        "sociedades"
+      ],
+      "has_employment_anchor": true,
+      "suspicious_support": false,
+      "excerpt": "ion da natureza dos rendementos minorando a tributacion polos ingresos do traballo e aumentando a correspondente aos derivados do capital e deducions inversamente proporcionais aos tipos de gravame imposto de sociedades estabelecer a progresividade en funcion da dimension da empresa e deducions inversamente proporcionais aos tipos de gravame soportados ive c"
+    },
+    {
+      "evidence_id": 1560538,
+      "party_name": "BNG",
+      "topic_key": "concern:v1:empleo",
+      "stance": "unclear",
+      "stance_method": "declared:regex_v3",
+      "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+      "matched_fiscal_terms": [
+        "imposto de sociedades",
+        "tribut",
+        "sociedades"
+      ],
+      "has_employment_anchor": false,
+      "suspicious_support": false,
+      "excerpt": "actividade de explotacion na galiza e situan o seu domicilio social 7 a economia ao servizo das maiorias sociais 39 que galiza conte con mais forza noutras partes do estado deben tributar aqui polo imposto de sociedades estabelecer a sua progresividade en funcion da dimension da empresa deducions inversamente proporcionais aos tipos de gravame soportados apl"
+    }
+  ]
+}

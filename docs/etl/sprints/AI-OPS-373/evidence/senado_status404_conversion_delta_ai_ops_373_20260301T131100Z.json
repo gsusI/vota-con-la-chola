@@ -1,0 +1,51 @@
+{
+  "sprint": "AI-OPS-373",
+  "timestamp": "20260301T131100Z",
+  "kpi_before": {
+    "downloaded_doc_links": 5287,
+    "missing_doc_links_actionable": 4075,
+    "missing_urls": 299,
+    "blocked_403_urls": 27,
+    "unknown_status_urls": 0,
+    "status404_urls": 272,
+    "status403_urls": 27
+  },
+  "kpi_after": {
+    "downloaded_doc_links": 5337,
+    "missing_doc_links_actionable": 4025,
+    "missing_urls": 249,
+    "blocked_403_urls": 27,
+    "unknown_status_urls": 0,
+    "status404_urls": 222,
+    "status403_urls": 27,
+    "downloaded_doc_links_missing_excerpt": 0,
+    "downloaded_doc_links_missing_extraction": 0
+  },
+  "kpi_delta": {
+    "downloaded_doc_links": 50,
+    "missing_doc_links_actionable": -50,
+    "missing_urls": -50,
+    "blocked_403_urls": 0,
+    "unknown_status_urls": 0,
+    "status404_urls": -50,
+    "status403_urls": 0
+  },
+  "retry_status404_packet50_effective": {
+    "packet_rows": 50,
+    "candidate_urls": 50,
+    "urls_to_fetch": 50,
+    "fetched_ok": 50,
+    "archive_hits": 0,
+    "archive_fetched_ok": 0,
+    "failures": 0,
+    "direct_variant_attempted_urls": 50,
+    "direct_variant_fetched_ok": 50
+  },
+  "postprocess": {
+    "excerpts_seen": 17,
+    "excerpts_updated": 17,
+    "extractions_seen": 50,
+    "extractions_upserted": 50,
+    "extractions_needs_review": 0
+  }
+}

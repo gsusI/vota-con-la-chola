@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exporta un snapshot estatico del grafo para GitHub Pages (sin /api)."""
+"""Exporta un snapshot estático del grafo para la app pública (sin /api)."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Exporta snapshot estatico del grafo (/api/graph) para GitHub Pages")
+    p = argparse.ArgumentParser(description="Exporta snapshot estático del grafo (/api/graph) para Cloudflare Pages")
     p.add_argument("--db", required=True, help="Ruta a la base SQLite")
     p.add_argument("--out", required=True, help="Ruta de salida JSON")
     p.add_argument("--limit", type=int, default=350, help="Limite de mandatos usados para construir el grafo")

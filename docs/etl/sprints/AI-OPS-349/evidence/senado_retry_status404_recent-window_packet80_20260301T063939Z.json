@@ -1,0 +1,63 @@
+{
+  "archive_fallback": true,
+  "archive_fallback_http_statuses": [
+    404
+  ],
+  "archive_fetched_ok": 67,
+  "archive_first_urls": 80,
+  "archive_hits": 67,
+  "archive_lookup_attempted": 80,
+  "archive_lookup_failures": [],
+  "archive_lookup_probe_requests": 1145,
+  "archive_variant_hits": 67,
+  "candidate_urls": 80,
+  "derived_ini_candidates": 48,
+  "derived_ini_selected": 0,
+  "derived_probe_unfetched_skipped": 0,
+  "doc_links_filtered_by_selected_doc_entry_keys": 81,
+  "doc_links_filtered_by_selected_doc_urls": 0,
+  "doc_links_seen": 80,
+  "dry_run": false,
+  "failures": [
+    "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000079 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=10&tipoFich=12&tipoEx=610&numEx=000080 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000044&legis=14 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000085 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000086 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000087 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000088 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000089 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000090 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=610&numEx=000091 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=12&tipoEx=624&numEx=000009 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=610&numEx=000042 -> HTTPStatusError: archive fallback: no snapshot candidates",
+    "url=https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=610&numEx=000051 -> HTTPStatusError: archive fallback: no snapshot candidates"
+  ],
+  "fetched_ok": 67,
+  "initiative_documents_upserted": 80,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 74,
+  "playwright_init_error": null,
+  "playwright_runtime": {},
+  "retry_http_statuses": [
+    404
+  ],
+  "selected_doc_entry_keys_total": 80,
+  "selected_doc_status_used_for_forbidden_filter": 80,
+  "selected_doc_status_used_for_retry": 80,
+  "selected_doc_urls_not_in_candidates": 0,
+  "selected_doc_urls_total": 80,
+  "selected_doc_urls_with_snapshot_status": 80,
+  "selected_initiatives_total": 74,
+  "selected_scope_ignores_doc_cap": true,
+  "selected_scope_no_limit": true,
+  "skipped_existing": 0,
+  "skipped_forbidden": 0,
+  "skipped_redundant_global_urls": 43,
+  "skipped_retry_http_statuses": 0,
+  "text_documents_upserted": 67,
+  "urls_filtered_by_selected_doc_urls": 0,
+  "urls_to_fetch": 80
+}

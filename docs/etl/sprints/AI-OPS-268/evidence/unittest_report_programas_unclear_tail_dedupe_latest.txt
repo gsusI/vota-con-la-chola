@@ -1,0 +1,36 @@
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+OK
+{
+  "source_id": "programas_partidos",
+  "parties": [
+    "VOX"
+  ],
+  "raw_unclear_rows_total": 3,
+  "unclear_unique_excerpt_rows_total": 2,
+  "unclear_duplicate_rows_total": 1,
+  "duplicate_share": 0.3333333333333333,
+  "max_duplicate_share": 0.1,
+  "deduped_queue_rows_total": 2,
+  "by_source_url": [
+    {
+      "party_name": "VOX",
+      "source_url": "https://vox/programa.pdf",
+      "unclear_rows": 3,
+      "unclear_unique_excerpt_rows": 2,
+      "unclear_duplicate_rows": 1
+    }
+  ],
+  "checks": {
+    "non_negative_counts": true,
+    "queue_unique_keys": true,
+    "duplicate_share_within_threshold": false
+  },
+  "status": "degraded",
+  "passed": false,
+  "strict_fail_reasons": [
+    "duplicate_share_above_threshold"
+  ]
+}

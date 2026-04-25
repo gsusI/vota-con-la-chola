@@ -1,0 +1,34 @@
+PYTHONPATH=. python3 scripts/export_liberty_delegated_person_window_review_queue.py --db etl/data/staging/politicos-es.db --seed etl/data/seeds/liberty_delegated_enforcement_seed_v1.json --limit 0 --institution-hint-terms 'ministerio,direccion,dirección,agencia,delegacion,delegación,delegaciones,subdelegacion,subdelegación,subdelegaciones,inspeccion,inspección,organismo,gobierno,dgt,aeat,itss' --only-actionable --strict-empty-actionable --out docs/etl/sprints/AI-OPS-278/exports/liberty_delegated_person_window_review_queue_latest.csv --summary-out docs/etl/sprints/AI-OPS-278/evidence/liberty_delegated_person_window_review_queue_latest.json
+{
+  "db_path": "etl/data/staging/politicos-es.db",
+  "seed_path": "etl/data/seeds/liberty_delegated_enforcement_seed_v1.json",
+  "queue": {
+    "status": "ok",
+    "totals": {
+      "links_total": 8,
+      "actionable_queue_rows": 8,
+      "missing_designated_actor_total": 2,
+      "institutional_designated_actor_total": 6,
+      "missing_appointment_start_total": 0,
+      "invalid_or_inverted_window_total": 0,
+      "missing_enforcement_evidence_total": 1
+    },
+    "strict_fail_reasons": []
+  },
+  "review_queue": {
+    "status": "ok",
+    "rows_total": 8,
+    "actionable_rows_total": 8,
+    "missing_seed_links_total": 0,
+    "only_actionable": true,
+    "method_version": "delegated_enforcement_v1",
+    "queue_status": "ok",
+    "queue_actionable_rows_total": 8,
+    "by_reason": {
+      "missing_designated_actor": 2,
+      "missing_enforcement_evidence_date": 1,
+      "institutional_designated_actor": 6
+    }
+  }
+}
+error: Recipe `parl-check-liberty-delegated-person-window-review-queue-actionable-empty` failed on line 2409 with exit code 4

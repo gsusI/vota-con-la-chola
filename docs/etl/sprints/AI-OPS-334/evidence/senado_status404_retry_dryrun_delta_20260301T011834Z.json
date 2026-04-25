@@ -1,0 +1,23 @@
+{
+  "compared_at": "2026-03-01T01:19:27Z",
+  "raw": {
+    "selected_doc_urls_total": 80,
+    "candidate_urls": 24,
+    "selected_doc_urls_not_in_candidates": 56,
+    "skipped_redundant_global_urls": 79,
+    "doc_links_filtered_by_selected_doc_urls": 0
+  },
+  "actionable_prefilter": {
+    "selected_doc_urls_total": 80,
+    "candidate_urls": 80,
+    "selected_doc_urls_not_in_candidates": 0,
+    "skipped_redundant_global_urls": 40,
+    "doc_links_filtered_by_selected_doc_urls": 0
+  },
+  "delta_actionable_minus_raw": {
+    "candidate_urls": 56,
+    "selected_doc_urls_not_in_candidates": -56,
+    "skipped_redundant_global_urls": -39,
+    "doc_links_filtered_by_selected_doc_urls": 0
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "generated_at": "2026-02-28T20:27:32+00:00",
+  "status": "degraded",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "targets_csv": "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv",
+  "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "strict_thresholds": {
+    "min_covered_targets": 1,
+    "min_usable_targets": 1
+  },
+  "progress_report_status": "degraded",
+  "progress_report_error": "",
+  "progress_report_path": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_target_progress_latest.json",
+  "progress_csv_path": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_target_progress_latest.csv",
+  "ready_checks": {
+    "progress_report_ok": false,
+    "has_targets": true,
+    "covered_targets_min_met": true,
+    "usable_targets_min_met": false,
+    "selected_usable_capture_with_cookie": false
+  },
+  "ready_to_retry": false,
+  "capture_inventory": {
+    "capture_files_total": 4,
+    "usable_capture_files_total": 0,
+    "usable_with_cookie_files_total": 0,
+    "usable_missing_cookie_files_total": 0
+  },
+  "selected_capture": {},
+  "backfill": {
+    "attempted": false,
+    "dry_run": false,
+    "status": "skipped",
+    "skip_reason": "capture_gate_not_ready",
+    "exit_code": null,
+    "command_display": "",
+    "initiative_source_ids": "senado_iniciativas",
+    "limit_initiatives": 25,
+    "max_docs_per_initiative": 1,
+    "timeout": 15,
+    "snapshot_date": "2026-02-12"
+  },
+  "strict_fail_reasons": [
+    "usable_targets_below_min",
+    "no_usable_capture_cookie_file",
+    "capture_gate_not_ready"
+  ]
+}
+{
+  "generated_at": "2026-02-28T20:27:32+00:00",
+  "status": "degraded",
+  "progress_json": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_target_progress_latest.json",
+  "progress_csv": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_target_progress_latest.csv",
+  "progress_status": "degraded",
+  "inputs": {
+    "include_unmatched": true,
+    "include_matched_not_usable": true,
+    "max_targets": 0
+  },
+  "totals": {
+    "targets_total": 8,
+    "pending_targets_total": 8,
+    "pending_unmatched_total": 0,
+    "pending_matched_not_usable_total": 8,
+    "pending_access_denied_total": 8,
+    "pending_missing_domain_cookie_total": 0,
+    "pending_cohorts_total": 6,
+    "pending_commands_total": 8,
+    "pending_commands_fallback_total": 8
+  },
+  "pending_reasons": {
+    "matched_access_denied": 8
+  },
+  "checks": {
+    "has_targets": true,
+    "pending_queue_empty": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining"
+  ],
+  "sample_pending_targets": [
+    {
+      "target_rank": 1,
+      "target_id": "target_01",
+      "cohort": "seed",
+      "capture_url": "https://www.senado.es/",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 2,
+      "target_id": "target_02",
+      "cohort": "leg10:tipo610",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 3,
+      "target_id": "target_03",
+      "cohort": "leg14:tipo621",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000006",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 4,
+      "target_id": "target_04",
+      "cohort": "leg14:tipo624",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000003",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 5,
+      "target_id": "target_05",
+      "cohort": "leg14:tipo622",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000055",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 6,
+      "target_id": "target_06",
+      "cohort": "leg14:tipo626",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000008",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 7,
+      "target_id": "target_07",
+      "cohort": "leg14:tipo622",
+      "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000059",
+      "pending_reason": "matched_access_denied"
+    },
+    {
+      "target_rank": 8,
+      "target_id": "target_08",
+      "cohort": "leg14:tipo622",
+      "capture_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055",
+      "pending_reason": "matched_access_denied"
+    }
+  ],
+  "commands_out": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_pending_targets_commands_latest.sh"
+}
+{
+  "generated_at": "2026-02-28T20:27:32+00:00",
+  "status": "degraded",
+  "db_path": "etl/data/staging/politicos-es.db",
+  "inputs": {
+    "targets_csv": "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv",
+    "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+    "pending_max_targets": 0,
+    "pending_wait_seconds": 120,
+    "strict_min_pending_reduction": 0
+  },
+  "totals": {
+    "previous_pending_total": null,
+    "current_pending_total": 8,
+    "pending_reduction_total": null,
+    "retry_rc": 0,
+    "pending_rc": 0
+  },
+  "checks": {
+    "retry_report_ok": false,
+    "pending_report_ok": true,
+    "pending_queue_empty": false,
+    "has_previous_pending_snapshot": false,
+    "backfill_attempted": false,
+    "backfill_ok": false
+  },
+  "strict_fail_reasons": [
+    "pending_targets_remaining",
+    "backfill_not_ok"
+  ],
+  "artifacts": {
+    "retry_out": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_retry_cycle_latest.json",
+    "progress_out": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_target_progress_latest.json",
+    "progress_csv_out": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_target_progress_latest.csv",
+    "pending_out": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_pending_targets_latest.json",
+    "pending_csv_out": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_pending_targets_latest.csv",
+    "pending_commands_out": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_pending_targets_commands_latest.sh"
+  },
+  "retry_report": {
+    "generated_at": "2026-02-28T20:27:32+00:00",
+    "status": "degraded",
+    "db_path": "etl/data/staging/politicos-es.db",
+    "targets_csv": "docs/etl/sprints/AI-OPS-299/exports/senado_manual_capture_targets_latest.csv",
+    "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+    "cookie_domain_contains": "senado.es",
+    "strict_thresholds": {
+      "min_covered_targets": 1,
+      "min_usable_targets": 1
+    },
+    "progress_report_status": "degraded",
+    "progress_report_error": "",
+    "progress_report_path": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_target_progress_latest.json",
+    "progress_csv_path": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_target_progress_latest.csv",
+    "ready_checks": {
+      "progress_report_ok": false,
+      "has_targets": true,
+      "covered_targets_min_met": true,
+      "usable_targets_min_met": false,
+      "selected_usable_capture_with_cookie": false
+    },
+    "ready_to_retry": false,
+    "capture_inventory": {
+      "capture_files_total": 4,
+      "usable_capture_files_total": 0,
+      "usable_with_cookie_files_total": 0,
+      "usable_missing_cookie_files_total": 0
+    },
+    "selected_capture": {},
+    "backfill": {
+      "attempted": false,
+      "dry_run": false,
+      "status": "skipped",
+      "skip_reason": "capture_gate_not_ready",
+      "exit_code": null,
+      "command_display": "",
+      "initiative_source_ids": "senado_iniciativas",
+      "limit_initiatives": 25,
+      "max_docs_per_initiative": 1,
+      "timeout": 15,
+      "snapshot_date": "2026-02-12"
+    },
+    "strict_fail_reasons": [
+      "usable_targets_below_min",
+      "no_usable_capture_cookie_file",
+      "capture_gate_not_ready"
+    ]
+  },
+  "pending_report": {
+    "generated_at": "2026-02-28T20:27:32+00:00",
+    "status": "degraded",
+    "progress_json": "docs/etl/sprints/AI-OPS-304/evidence/senado_manual_capture_target_progress_latest.json",
+    "progress_csv": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_target_progress_latest.csv",
+    "progress_status": "degraded",
+    "inputs": {
+      "include_unmatched": true,
+      "include_matched_not_usable": true,
+      "max_targets": 0
+    },
+    "totals": {
+      "targets_total": 8,
+      "pending_targets_total": 8,
+      "pending_unmatched_total": 0,
+      "pending_matched_not_usable_total": 8,
+      "pending_access_denied_total": 8,
+      "pending_missing_domain_cookie_total": 0,
+      "pending_cohorts_total": 6,
+      "pending_commands_total": 8,
+      "pending_commands_fallback_total": 8
+    },
+    "pending_reasons": {
+      "matched_access_denied": 8
+    },
+    "checks": {
+      "has_targets": true,
+      "pending_queue_empty": false
+    },
+    "strict_fail_reasons": [
+      "pending_targets_remaining"
+    ],
+    "sample_pending_targets": [
+      {
+        "target_rank": 1,
+        "target_id": "target_01",
+        "cohort": "seed",
+        "capture_url": "https://www.senado.es/",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 2,
+        "target_id": "target_02",
+        "cohort": "leg10:tipo610",
+        "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 3,
+        "target_id": "target_03",
+        "cohort": "leg14:tipo621",
+        "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000006",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 4,
+        "target_id": "target_04",
+        "cohort": "leg14:tipo624",
+        "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=624&id2=000003",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 5,
+        "target_id": "target_05",
+        "cohort": "leg14:tipo622",
+        "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000055",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 6,
+        "target_id": "target_06",
+        "cohort": "leg14:tipo626",
+        "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=626&id2=000008",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 7,
+        "target_id": "target_07",
+        "cohort": "leg14:tipo622",
+        "capture_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=622&id2=000059",
+        "pending_reason": "matched_access_denied"
+      },
+      {
+        "target_rank": 8,
+        "target_id": "target_08",
+        "cohort": "leg14:tipo622",
+        "capture_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055",
+        "pending_reason": "matched_access_denied"
+      }
+    ],
+    "commands_out": "docs/etl/sprints/AI-OPS-304/exports/senado_manual_capture_pending_targets_commands_latest.sh"
+  }
+}

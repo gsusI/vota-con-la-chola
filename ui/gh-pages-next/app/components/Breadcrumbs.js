@@ -3,10 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
+import { resolveBasePath, stripBasePath, withBasePath } from "../path-utils.mjs";
 
 function normalizeSegment(value) {
   return String(value || "")
@@ -22,36 +19,23 @@ function decodeLabel(value) {
 
 function formatBreadcrumb(segment, index, segments) {
   const map = {
-    topics: "Temas",
-    actors: "Actores",
-    decisions: "Decisiones",
-    outcomes: "Resultados",
-    methods: "Métodos",
-    coverage: "Cobertura",
-    datasets: "Archivos",
-    explorer: "Explorador SQL",
-    graph: "Esquema",
-    "parliamentary-accountability": "Seguimiento",
+    "parliamentary-accountability": "Accountability",
     discipline: "Disciplina",
     attendance: "Asistencia",
     outcomes: "Resultados",
     coalitions: "Coaliciones",
     people: "Personas",
-    xray: "Perfiles",
+    xray: "X-ray",
     party: "Partido",
     institution: "Institución",
     ambito: "Ámbito",
     territorio: "Territorio",
     cargo: "Cargo",
-    "initiative-lifecycle": "Tramitación",
+    "initiative-lifecycle": "Legislación",
     "initiative-id": "Iniciativa",
     "political-positions": "Posturas",
     "policy-outcomes": "Resultados",
-    "legal-sanctions": "Sanciones y cumplimiento",
-    "explorer-votaciones": "Votaciones",
-    "explorer-temas": "Temas",
-    "explorer-politico": "Territorio",
-    "explorer-sources": "Fuentes",
+    "legal-sanctions": "Cumplimiento legal",
   };
 
   const direct = map[segment];
@@ -78,7 +62,7 @@ export default function Breadcrumbs() {
   const initiativeParam = searchParams.get("initiative");
 
   const crumbs = useMemo(() => {
-    const rawSegments = normalizeSegment(pathname || "").split("/").filter(Boolean);
+    const rawSegments = normalizeSegment(stripBasePath(pathname || "", basePath)).split("/").filter(Boolean);
     const withDynamic = [...rawSegments];
 
     const initiativeSegment = !withDynamic.includes("initiative-lifecycle") && initiativeParam ? "initiative" : null;
@@ -89,7 +73,7 @@ export default function Breadcrumbs() {
 
     const out = [
       {
-        href: `${basePath}/`,
+        href: withBasePath("/", basePath),
         label: "Inicio",
       },
     ];
@@ -98,7 +82,7 @@ export default function Breadcrumbs() {
     for (const [index, segment] of withDynamic.entries()) {
       cumulative += `/${segment}`;
       out.push({
-        href: `${basePath}${cumulative}`,
+        href: withBasePath(cumulative, basePath),
         label: formatBreadcrumb(segment, index, withDynamic),
       });
     }

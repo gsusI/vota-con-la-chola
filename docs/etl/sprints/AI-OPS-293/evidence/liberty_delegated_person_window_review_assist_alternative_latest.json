@@ -1,0 +1,20 @@
+{
+  "review_queue_csv": "docs/etl/sprints/AI-OPS-292/exports/liberty_delegated_pending_resolution_review_queue_alternative_latest.csv",
+  "boe_candidates_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_alternative_boe_candidates_latest.csv",
+  "assist_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_person_window_review_assist_alternative_latest.csv",
+  "summary": {
+    "status": "ok",
+    "review_links_total": 1,
+    "review_links_with_candidates_total": 1,
+    "review_links_without_candidates_total": 0,
+    "assist_rows_total": 6,
+    "min_candidate_score": 20,
+    "max_candidates_per_link": 12,
+    "relevance_bucket_counts": {
+      "strong": 0,
+      "medium": 5,
+      "weak": 1
+    },
+    "rows_below_institution_overlap_min_total": 0
+  }
+}

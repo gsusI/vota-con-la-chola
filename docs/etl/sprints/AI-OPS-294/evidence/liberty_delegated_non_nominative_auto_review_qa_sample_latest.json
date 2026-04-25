@@ -1,0 +1,23 @@
+{
+  "auto_review_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_person_window_auto_review_decisions_alternative_latest.csv",
+  "review_assist_csv": "docs/etl/sprints/AI-OPS-293/exports/liberty_delegated_person_window_review_assist_alternative_latest.csv",
+  "out_csv": "docs/etl/sprints/AI-OPS-294/exports/liberty_delegated_non_nominative_auto_review_qa_sample_latest.csv",
+  "summary": {
+    "status": "ok",
+    "rows_considered_total": 1,
+    "sample_rows_total": 1,
+    "sample_size_requested": 8,
+    "only_approved": true,
+    "review_note_contains": "approved_non_nominative_unit",
+    "rows_excluded_by_review_note_filter_total": 0,
+    "institutions_total": 1,
+    "institutions_sampled_total": 1,
+    "rows_total_by_institution": {
+      "AEAT": 1
+    },
+    "sample_rows_by_institution": {
+      "AEAT": 1
+    },
+    "sample_covers_all_rows": true
+  }
+}

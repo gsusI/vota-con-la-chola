@@ -1,0 +1,144 @@
+{
+  "db": "etl/data/staging/politicos-es.db",
+  "scope": "senado_iniciativas",
+  "total_rows": 3535,
+  "needs_review_rows": 0,
+  "noise_rows_total": 18,
+  "noise_rows_pct": 0.5092,
+  "noise_pattern_counts": {
+    "contains_bang_function": 18,
+    "contains_function": 18,
+    "senado_pipe_brand": 18,
+    "var_http": 18,
+    "script_tag": 0,
+    "javascript_scheme": 0
+  },
+  "noise_examples": [
+    {
+      "source_record_pk": 141870,
+      "sample_initiative_id": "senado:leg15:exp:600/000001",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=600&id2=000001&legis=15\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 141871,
+      "sample_initiative_id": "senado:leg15:exp:621/000001",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000001&legis=15\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 141872,
+      "sample_initiative_id": "senado:leg12:exp:621/000002",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000002&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 141873,
+      "sample_initiative_id": "senado:leg14:exp:621/000003",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000003&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 141874,
+      "sample_initiative_id": "senado:leg14:exp:621/000005",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000005&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 141875,
+      "sample_initiative_id": "senado:leg12:exp:624/000003",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000003&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 141876,
+      "sample_initiative_id": "senado:leg12:exp:624/000004",
+      "extracted_subject": "Enmiendas | Senado de España !function(e){var n=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000004&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 146895,
+      "sample_initiative_id": "senado:leg14:exp:621/000089",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000089&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147025,
+      "sample_initiative_id": "senado:leg14:exp:621/000004",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000004&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147026,
+      "sample_initiative_id": "senado:leg14:exp:621/000015",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000015&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147027,
+      "sample_initiative_id": "senado:leg14:exp:621/000016",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000016&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147028,
+      "sample_initiative_id": "senado:leg14:exp:624/000001",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=624&id2=000001&legis=14\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147032,
+      "sample_initiative_id": "senado:leg12:exp:621/000004",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000004&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147033,
+      "sample_initiative_id": "senado:leg12:exp:621/000005",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000005&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147034,
+      "sample_initiative_id": "senado:leg12:exp:621/000006",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000006&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147035,
+      "sample_initiative_id": "senado:leg12:exp:621/000007",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000007&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147036,
+      "sample_initiative_id": "senado:leg12:exp:621/000009",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000009&legis=12\", \"subject_method\": \"keyword_window\"}"
+    },
+    {
+      "source_record_pk": 147037,
+      "sample_initiative_id": "senado:leg12:exp:621/000010",
+      "extracted_subject": "Enmiendas | Senado de España !function(a){var e=\"https",
+      "confidence": 0.82,
+      "analysis_payload_json": "{\"doc_refs_count\": 1, \"initiatives_count\": 1, \"source_url\": \"https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=621&id2=000010&legis=12\", \"subject_method\": \"keyword_window\"}"
+    }
+  ]
+}

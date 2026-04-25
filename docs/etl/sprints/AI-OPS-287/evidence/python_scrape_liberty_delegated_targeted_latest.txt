@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-02-28T18:03:48+00:00",
+  "targets_csv": "docs/etl/sprints/AI-OPS-279/exports/liberty_delegated_person_window_scrape_targets_latest.csv",
+  "candidates_csv": "docs/etl/sprints/AI-OPS-287/exports/liberty_delegated_person_window_boe_candidates_targeted_latest.csv",
+  "summary": {
+    "status": "ok",
+    "targets_total": 8,
+    "targets_with_results_total": 8,
+    "targets_without_results_total": 0,
+    "candidate_rows_total": 163,
+    "candidate_unique_boe_ids_total": 136,
+    "http_errors_total": 0,
+    "top_results_per_target": 25
+  }
+}

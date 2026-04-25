@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
+import { withBasePath } from "./path-utils.mjs";
 
 export default function LegacyFrame({ legacyPath, title }) {
   const [searchString, setSearchString] = useState("");
@@ -13,7 +10,7 @@ export default function LegacyFrame({ legacyPath, title }) {
     setSearchString(typeof window !== "undefined" ? window.location.search || "" : "");
   }, []);
 
-  const src = `${resolveBasePath()}${legacyPath}${searchString}`;
+  const src = `${withBasePath(legacyPath)}${searchString}`;
   return (
     <div className="legacyFrameShell">
       <iframe className="legacyFrame" src={src} title={title || "Legacy UI"} loading="eager" suppressHydrationWarning />

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exporta la cobertura north-star para explorer-sources (GitHub Pages)."""
+"""Exporta la cobertura north-star para explorer-sources (Cloudflare Pages)."""
 
 from __future__ import annotations
 

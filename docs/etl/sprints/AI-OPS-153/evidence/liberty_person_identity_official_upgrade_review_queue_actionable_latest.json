@@ -1,8 +1,8 @@
 {
   "seed_path": "etl/data/seeds/liberty_person_identity_resolution_seed_v1.json",
-  "db_path": "etl/data/staging/politicos-es.db",
+  "db_path": "etl/data/staging/politicos-es.e2e19.db",
   "out_path": "docs/etl/sprints/AI-OPS-153/exports/liberty_person_identity_official_upgrade_review_queue_actionable_latest.csv",
-  "source_record_lookup_rows_total": 174285,
+  "source_record_lookup_rows_total": 82954,
   "only_actionable": true,
   "strict_empty_actionable": true,
   "rows_exported_total": 0,

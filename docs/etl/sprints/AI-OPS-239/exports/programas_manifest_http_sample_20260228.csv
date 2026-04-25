@@ -1,0 +1,4 @@
+party_id,party_name,election_cycle,kind,source_url,format_hint,language,scope,snapshot_date,local_path,notes
+1,PSOE,es_generales_2023,programa,http://127.0.0.1:8765/etl/data/raw/samples/programas_partidos/psoe_programa_sample.html,html,es,nacional,2026-02-28,,http-served sample for strict-network contract
+2,PP,es_generales_2023,programa,http://127.0.0.1:8765/etl/data/raw/samples/programas_partidos/pp_programa_sample.html,html,es,nacional,2026-02-28,,http-served sample for strict-network contract
+29,SUMAR,es_generales_2023,programa,http://127.0.0.1:8765/etl/data/raw/samples/programas_partidos/sumar_programa_sample.html,html,es,nacional,2026-02-28,,http-served sample for strict-network contract

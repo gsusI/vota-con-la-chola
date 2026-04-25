@@ -839,7 +839,7 @@
           const resp = await fetch(apiEndpoint);
           payload = await resp.json();
         } else {
-          setDetail("Cargando", "Cargando snapshot estatico (GitHub Pages)...", true);
+          setDetail("Cargando", "Cargando snapshot estático (Cloudflare Pages)...", true);
           payload = await readJson(STATIC_GRAPH_PATH);
         }
         const nodes = payload.nodes || [];

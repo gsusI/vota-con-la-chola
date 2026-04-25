@@ -1,0 +1,144 @@
+{
+  "probe": {
+    "url_shape": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=<CODE>&rango=30M",
+    "code_shape": "D_1NB{PP}{NNN}",
+    "prefixes": [
+      "AA",
+      "AC",
+      "AD",
+      "AE",
+      "AF",
+      "AS",
+      "BO",
+      "BP"
+    ],
+    "nnn_range": "000..999",
+    "max_workers": 24,
+    "timeout_seconds": 8,
+    "total_codes": 8000
+  },
+  "totals": {
+    "rows": 8000,
+    "ok": 0,
+    "not_ok": 8000
+  },
+  "per_prefix": {
+    "AA": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 5,
+        "412": 992,
+        "none": 3
+      },
+      "error_type_counts": {
+        "http_error": 992,
+        "parse_error": 5,
+        "timeout": 3
+      }
+    },
+    "AC": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 3,
+        "412": 997
+      },
+      "error_type_counts": {
+        "http_error": 997,
+        "parse_error": 3
+      }
+    },
+    "AD": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 9,
+        "412": 990,
+        "none": 1
+      },
+      "error_type_counts": {
+        "http_error": 990,
+        "parse_error": 9,
+        "timeout": 1
+      }
+    },
+    "AE": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 3,
+        "412": 997
+      },
+      "error_type_counts": {
+        "http_error": 997,
+        "parse_error": 3
+      }
+    },
+    "AF": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 2,
+        "412": 998
+      },
+      "error_type_counts": {
+        "http_error": 998,
+        "parse_error": 2
+      }
+    },
+    "AS": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 3,
+        "412": 997
+      },
+      "error_type_counts": {
+        "http_error": 997,
+        "parse_error": 3
+      }
+    },
+    "BO": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 16,
+        "412": 983,
+        "none": 1
+      },
+      "error_type_counts": {
+        "http_error": 983,
+        "parse_error": 16,
+        "timeout": 1
+      }
+    },
+    "BP": {
+      "total": 1000,
+      "ok": 0,
+      "not_ok": 1000,
+      "status_counts": {
+        "200": 17,
+        "412": 973,
+        "none": 10
+      },
+      "error_type_counts": {
+        "http_error": 973,
+        "parse_error": 17,
+        "timeout": 10
+      }
+    }
+  },
+  "ok_codes": [],
+  "artifacts": {
+    "csv": "docs/etl/sprints/AI-OPS-238/exports/bde_series_probe_known_prefixes_000_999.csv",
+    "ok_codes_txt": "docs/etl/sprints/AI-OPS-238/exports/bde_series_ok_codes_known_prefixes_latest.txt"
+  }
+}

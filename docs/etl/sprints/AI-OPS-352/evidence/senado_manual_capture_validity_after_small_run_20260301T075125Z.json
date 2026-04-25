@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-03-01T07:52:22+00:00",
+  "status": "ok",
+  "captures_glob": "etl/data/raw/manual/senado*_cookie_refresh_*.meta.json",
+  "cookie_domain_contains": "senado.es",
+  "thresholds": {
+    "min_captures": 1
+  },
+  "totals": {
+    "captures_total": 8,
+    "usable_captures_total": 2,
+    "access_denied_captures_total": 6,
+    "cookies_domain_total": 12
+  },
+  "checks": {
+    "has_min_captures": true,
+    "has_usable_capture": true
+  },
+  "strict_fail_reasons": [],
+  "captures": [
+    {
+      "meta_file": "senado_cookie_refresh_ai_ops_299_01_seed_20260301T075125Z.meta.json",
+      "html_file": "senado_cookie_refresh_ai_ops_299_01_seed_20260301T075125Z.html",
+      "cookie_file": "senado_cookie_refresh_ai_ops_299_01_seed_20260301T075125Z.cookies.json",
+      "result_status": "captured",
+      "title": "Página principal de la web del Senado de España",
+      "final_url": "https://www.senado.es/web/index.html",
+      "html_len": 39013,
+      "access_denied_detected": false,
+      "cookies_total": 6,
+      "cookies_domain_total": 6,
+      "usable_capture": true
+    },
+    {
+      "meta_file": "senado_cookie_refresh_ai_ops_299_02_leg10_tipo610_20260301T075159Z.meta.json",
+      "html_file": "senado_cookie_refresh_ai_ops_299_02_leg10_tipo610_20260301T075159Z.html",
+      "cookie_file": "senado_cookie_refresh_ai_ops_299_02_leg10_tipo610_20260301T075159Z.cookies.json",
+      "result_status": "captured",
+      "title": "Enmiendas | Senado de España",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+      "html_len": 39462,
+      "access_denied_detected": false,
+      "cookies_total": 6,
+      "cookies_domain_total": 6,
+      "usable_capture": true
+    },
+    {
+      "meta_file": "senado_cookie_refresh_ai_ops_304_02_leg10_tipo610_probe_20260228T202632Z.meta.json",
+      "html_file": "senado_cookie_refresh_ai_ops_304_02_leg10_tipo610_probe_20260228T202632Z.html",
+      "cookie_file": "senado_cookie_refresh_ai_ops_304_02_leg10_tipo610_probe_20260228T202632Z.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/enmiendas/index.html?id1=610&id2=000005&legis=10",
+      "html_len": 351,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    },
+    {
+      "meta_file": "senado_cookie_refresh_ai_ops_304_08_leg14_tipo622_probe_20260228T202654Z.meta.json",
+      "html_file": "senado_cookie_refresh_ai_ops_304_08_leg14_tipo622_probe_20260228T202654Z.html",
+      "cookie_file": "senado_cookie_refresh_ai_ops_304_08_leg14_tipo622_probe_20260228T202654Z.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/ficopendataservlet?legis=14&tipoFich=3&tipoEx=622&numEx=000055",
+      "html_len": 314,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    },
+    {
+      "meta_file": "senado_cookie_refresh_ai_ops_330_01_leg15_tipo610_20260301T002839Z.meta.json",
+      "html_file": "senado_cookie_refresh_ai_ops_330_01_leg15_tipo610_20260301T002839Z.html",
+      "cookie_file": "senado_cookie_refresh_ai_ops_330_01_leg15_tipo610_20260301T002839Z.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=15&id1=610&id2=000002",
+      "html_len": 359,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    },
+    {
+      "meta_file": "senado_cookie_refresh_ai_ops_330_02_leg14_tipo621_20260301T002926Z.meta.json",
+      "html_file": "senado_cookie_refresh_ai_ops_330_02_leg14_tipo621_20260301T002926Z.html",
+      "cookie_file": "senado_cookie_refresh_ai_ops_330_02_leg14_tipo621_20260301T002926Z.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000006",
+      "html_len": 359,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    },
+    {
+      "meta_file": "senado_iniciativas_cookie_refresh_ai_ops_235_20260227T100143Z.meta.json",
+      "html_file": "senado_iniciativas_cookie_refresh_ai_ops_235_20260227T100143Z.html",
+      "cookie_file": "senado_iniciativas_cookie_refresh_ai_ops_235_20260227T100143Z.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000006",
+      "html_len": 357,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    },
+    {
+      "meta_file": "senado_root_cookie_refresh_ai_ops_235_20260227T100613Z.meta.json",
+      "html_file": "senado_root_cookie_refresh_ai_ops_235_20260227T100613Z.html",
+      "cookie_file": "senado_root_cookie_refresh_ai_ops_235_20260227T100613Z.cookies.json",
+      "result_status": "captured",
+      "title": "Access Denied",
+      "final_url": "https://www.senado.es/",
+      "html_len": 291,
+      "access_denied_detected": true,
+      "cookies_total": 0,
+      "cookies_domain_total": 0,
+      "usable_capture": false
+    }
+  ]
+}

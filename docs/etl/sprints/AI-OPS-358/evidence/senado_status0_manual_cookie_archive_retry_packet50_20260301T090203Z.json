@@ -1,0 +1,50 @@
+{
+  "archive_fallback": true,
+  "archive_fallback_http_statuses": [
+    403,
+    404
+  ],
+  "archive_fetched_ok": 0,
+  "archive_first_urls": 0,
+  "archive_hits": 0,
+  "archive_lookup_attempted": 0,
+  "archive_lookup_failures": [],
+  "archive_lookup_probe_requests": 0,
+  "archive_variant_hits": 0,
+  "candidate_urls": 50,
+  "derived_ini_candidates": 17,
+  "derived_ini_selected": 0,
+  "derived_probe_unfetched_skipped": 0,
+  "doc_links_filtered_by_selected_doc_entry_keys": 3,
+  "doc_links_filtered_by_selected_doc_urls": 0,
+  "doc_links_seen": 50,
+  "dry_run": false,
+  "failures": [],
+  "fetched_ok": 0,
+  "initiative_documents_upserted": 50,
+  "initiative_source_ids": [
+    "senado_iniciativas"
+  ],
+  "initiatives_seen": 50,
+  "playwright_init_error": null,
+  "playwright_runtime": {},
+  "retry_http_statuses": [
+    0
+  ],
+  "selected_doc_entry_keys_total": 50,
+  "selected_doc_status_used_for_forbidden_filter": 0,
+  "selected_doc_status_used_for_retry": 0,
+  "selected_doc_urls_not_in_candidates": 0,
+  "selected_doc_urls_total": 50,
+  "selected_doc_urls_with_snapshot_status": 0,
+  "selected_initiatives_total": 50,
+  "selected_scope_ignores_doc_cap": true,
+  "selected_scope_no_limit": true,
+  "skipped_existing": 50,
+  "skipped_forbidden": 0,
+  "skipped_redundant_global_urls": 17,
+  "skipped_retry_http_statuses": 50,
+  "text_documents_upserted": 0,
+  "urls_filtered_by_selected_doc_urls": 0,
+  "urls_to_fetch": 0
+}

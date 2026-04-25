@@ -47,11 +47,7 @@ import {
   buildPoliticalPositionsDetailPanelSummary,
   buildPoliticalPositionsEvidenceTableHeader,
 } from "./detailPanelModel.mjs";
-import { shouldShowPersonTrajectoryChunkSummary } from "./chunkSummaryDisplay.mjs";
-
-function resolveBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
+import { resolveBasePath } from "../path-utils.mjs";
 
 function normalize(value) {
   return String(value || "")
@@ -1224,9 +1220,6 @@ export default function PoliticalPositionsPage() {
   const activePersonScanMode = useMemo(() => (
     normalizeMode(state.mode) === "person" ? personTrajectoryScanMode(state, resolvedTopicId, selectiveTopicPreviewTopicIds, topicDiscoveryTopicIds) : ""
   ), [resolvedTopicId, selectiveTopicPreviewTopicIds, state, topicDiscoveryTopicIds]);
-  const showPersonTrajectoryChunkSummary = useMemo(() => (
-    shouldShowPersonTrajectoryChunkSummary(personTrajectoryChunkSummary)
-  ), [personTrajectoryChunkSummary]);
 
   const partiesById = useMemo(() => {
     const out = new Map();
@@ -1744,15 +1737,15 @@ export default function PoliticalPositionsPage() {
     <main className="shell">
       <section className="hero card">
         <p className="eyebrow">Postura política explicable</p>
-        <h1>Posturas por tema, persona y partido</h1>
+        <h1>Topic stance scoring (por persona y partido)</h1>
         <p className="sub">
           Vistas explicables de posición por tema con evidencia rastreable y estado de revisión para auditoría.
         </p>
         <div className="chips" style={{ marginTop: 12 }}>
-          <span className="chip">Publicación: {data.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Snapshot: {data.meta?.snapshot_date || "—"}</span>
           <span className="chip">Personas: {toInt((data.persons || []).length)}</span>
           <span className="chip">Partidos: {toInt((data.parties || []).length)}</span>
-          <span className="chip">Temas: {toInt((data.topics || []).length)}</span>
+          <span className="chip">Topics: {toInt((data.topics || []).length)}</span>
           <span className="chip">Pendientes de revisión: {toInt(data.meta?.review_pending || 0)}</span>
         </div>
       </section>
@@ -2339,7 +2332,7 @@ export default function PoliticalPositionsPage() {
           {!activeTrajectoryLoading && activeTrajectoryError ? (
             <span className="chip">Error de trayectorias</span>
           ) : null}
-          {state.mode === "person" && showPersonTrajectoryChunkSummary ? (
+          {state.mode === "person" && personTrajectoryChunkSummary && personTrajectoryChunkSummary.scanMode !== "default_rows" && personTrajectoryChunkSummary.scanMode !== "sort_preview" && personTrajectoryChunkSummary.scanMode !== "topic_preview" ? (
             <span className="chip">
               Chunks persona: {personTrajectoryChunkSummary.loadedCandidateTotal}/{personTrajectoryChunkSummary.candidateTotal}
               {personTrajectoryChunkSummary.candidateTotal !== personTrajectoryChunkSummary.total

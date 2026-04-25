@@ -1,0 +1,19 @@
+test_max_urls_per_initiative_applies_after_filters (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_max_urls_per_initiative_applies_after_filters) ... ok
+test_only_actionable_missing_excludes_redundant_senado_global_rows (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_only_actionable_missing_excludes_redundant_senado_global_rows) ... ok
+test_only_initiatives_without_any_doc_filters_downloaded_initiatives (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_only_initiatives_without_any_doc_filters_downloaded_initiatives) ... ok
+test_only_linked_to_votes_restricts_export_scope (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_only_linked_to_votes_restricts_export_scope) ... ok
+test_only_status_zero_includes_rows_without_fetch_status (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_only_status_zero_includes_rows_without_fetch_status) ... ok
+test_strict_empty_passes_when_filtered_queue_is_empty (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_strict_empty_passes_when_filtered_queue_is_empty) ... ok
+test_strict_empty_returns_nonzero_when_actionable_rows_exist (tests.test_export_missing_initiative_doc_urls.TestExportMissingInitiativeDocUrls.test_strict_empty_returns_nonzero_when_actionable_rows_exist) ... ERROR: strict-empty failed: exported_count=1 out=/var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmptwhmvon6/queue.txt
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.026s
+
+OK
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp56gyuib4/queue.csv (rows=2) [excluded_over_per_initiative_cap=2]
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmppbyhium7/queue.csv (rows=1) [excluded_redundant_senado_global=1]
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmpjvn68ser/queue.csv (rows=1) [excluded_initiatives_with_downloaded_docs=1]
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmputcdswy7/queue.csv (rows=1)
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp_55nvgc2/queue.csv (rows=2)
+OK wrote /var/folders/mq/m2lss7dj6gjg_kzf2_zpls500000gn/T/tmp5ccclbhs/queue.txt (urls=0) [excluded_redundant_senado_global=1]
