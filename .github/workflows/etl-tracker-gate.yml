@@ -395,14 +395,29 @@ jobs:
       - name: Ingest DONE connectors (strict network)
         run: |
           set -euo pipefail
+          failed_sources=()
           for source in $(python3 scripts/e2e_tracker_status.py --tracker docs/etl/e2e-scrape-load-tracker.md --print-done-sources); do
+            echo "::group::Ingesting source: ${source}"
             echo "Ingesting source: ${source}"
+            set +e
             python3 scripts/ingestar_politicos_es.py ingest \
               --db etl/data/staging/politicos-es.ci-gate.db \
               --source "${source}" \
               --snapshot-date 2026-02-12 \
               --strict-network
+            rc=$?
+            set -e
+            echo "::endgroup::"
+            if [ "$rc" -ne 0 ]; then
+              echo "::error title=Strict-network ingest failed::${source} exited ${rc}"
+              failed_sources+=("${source}:${rc}")
+            fi
           done
+          if [ "${#failed_sources[@]}" -ne 0 ]; then
+            printf 'Strict-network failed sources:\n'
+            printf ' - %s\n' "${failed_sources[@]}"
+            exit 1
+          fi
 
       - name: Print tracker status report
         run: |
