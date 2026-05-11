@@ -24,7 +24,7 @@ test("citizen UI exposes next-evidence nudge markers and click wiring", () => {
   assert.match(html, /function\s+renderTrustActionNudge\s*\(/i);
   assert.match(html, /data-trust-action-nudge/i);
   assert.match(html, /data-trust-action-nudge-link/i);
-  assert.match(html, /trust_next_evidence/i);
+  assert.match(html, /evidencia sugerida/i);
   assert.match(html, /recordTrustActionNudgeEvent\("trust_action_nudge_shown"/i);
   assert.match(html, /recordTrustActionNudgeEvent\("trust_action_nudge_clicked"/i);
 });

@@ -30,6 +30,6 @@ test("citizen UI includes plain-language explainability copy hints", () => {
   const html = readCitizenHtml();
   assert.match(html, /data-explainability-copy=["']1["']/i);
   assert.match(html, /primero mira cobertura y luego abre evidencia/i);
-  assert.match(html, /unknown: incierto mas sin senal/i);
+  assert.match(html, /Sin clasificar: incierto más sin señal/i);
   assert.equal(/embedding|ontologia|bayesiano|vectorizacion/i.test(html), false);
 });

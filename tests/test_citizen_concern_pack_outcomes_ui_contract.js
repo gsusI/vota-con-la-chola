@@ -24,5 +24,5 @@ test("citizen UI records key concern-pack outcome events", () => {
   assert.match(html, /recordConcernPackOutcomeEvent\("pack_selected"/i);
   assert.match(html, /recordConcernPackOutcomeEvent\("pack_cleared"/i);
   assert.match(html, /recordConcernPackOutcomeEvent\("topic_open_with_pack"/i);
-  assert.match(html, /<span>pack_follow<\/span>/i);
+  assert.match(html, /<span>seguimiento del paquete<\/span>/i);
 });

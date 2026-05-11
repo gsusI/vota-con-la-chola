@@ -14,7 +14,7 @@ test("unknown explainability flags no_signal-dominant uncertainty", () => {
   assert.equal(got.should_show, true);
   assert.equal(got.unknown_total, 9);
   assert.equal(got.unknown_ratio, 0.9);
-  assert.match(String(got.reason_label || ""), /sin_senal/i);
+  assert.match(String(got.reason_label || ""), /falta de señal/i);
 });
 
 test("unknown explainability flags low-coverage unclear dominance", () => {
@@ -27,7 +27,7 @@ test("unknown explainability flags low-coverage unclear dominance", () => {
   assert.equal(got.dominant_unknown, "unclear");
   assert.equal(got.should_show, true);
   assert.equal(got.unknown_total, 6);
-  assert.equal(got.reason_label, "unknown por cobertura baja");
+  assert.equal(got.reason_label, "incertidumbre por cobertura baja");
   assert.match(String(got.reduce_uncertainty || ""), /umbral/i);
 });
 
@@ -41,7 +41,7 @@ test("unknown explainability flags mixed uncertainty when no cause dominates", (
   assert.equal(got.should_show, true);
   assert.equal(got.unknown_total, 4);
   assert.equal(got.unknown_ratio, 0.666667);
-  assert.equal(got.reason_label, "unknown mixto");
+  assert.equal(got.reason_label, "incertidumbre mixta");
 });
 
 test("unknown explainability hides hint when no unknown cells exist", () => {
