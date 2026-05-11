@@ -2,6 +2,13 @@
 
 Purpose: help external teams add public datasets without needing private repo knowledge.
 
+Before starting:
+
+- read `docs/dev/quickstart.md`;
+- read `CONTRIBUTING.md`;
+- for new sources, follow `docs/etl/source-onboarding.md`;
+- check `/explorer-sources/` for current `available`, `blocked`, `stale`, and `missing` state.
+
 ## Integration paths
 
 ### Add a source
@@ -46,6 +53,22 @@ just etl-contributor-gates
 ```
 
 If a gate cannot run, document exact command, error, and blocker in the PR.
+
+## GitHub taxonomy
+
+Use the existing project taxonomy instead of inventing new labels:
+
+- data source connector: `area:etl`, `type:data-source`;
+- docs or guide work: `area:docs`;
+- public UI/catalog work: `area:ui`;
+- legal/transparency blocker: `area:legal`;
+- governance/steward process: `area:governance`;
+- reproducibility missing: `status:needs-repro`;
+- upstream or credential block: `status:blocked`;
+- maintainer input needed: `status:needs-maintainer`;
+- review-ready work: `status:ready-for-review`.
+
+Default milestone for starter source work: `H2 - plataforma contributiva`.
 
 ## Publication contract
 
