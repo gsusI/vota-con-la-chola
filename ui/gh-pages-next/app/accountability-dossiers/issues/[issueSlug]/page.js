@@ -12,16 +12,25 @@ import {
   topPairs,
 } from "../../dossier-utils.mjs";
 
+const EMPTY_ISSUE_SLUG = "no-issues-exported";
+
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const payload = loadDossierPayload();
-  return safeArray(payload.issues).map((issue) => ({ issueSlug: issueSlug(issue) }));
+  const params = safeArray(payload.issues).map((issue) => ({ issueSlug: issueSlug(issue) }));
+  return params.length ? params : [{ issueSlug: EMPTY_ISSUE_SLUG }];
 }
 
 export async function generateMetadata({ params }) {
   const { issueSlug: currentSlug } = await params;
   const issue = findIssueBySlug(loadDossierPayload(), currentSlug);
+  if (!issue && currentSlug === EMPTY_ISSUE_SLUG) {
+    return {
+      title: "Sin temas exportados | Vota Con La Chola",
+      description: "El corte publico actual no contiene temas de accountability exportados.",
+    };
+  }
   if (!issue) {
     return {
       title: "Tema no encontrado | Vota Con La Chola",
@@ -127,11 +136,36 @@ function EvidenceRow({ entry }) {
   );
 }
 
+function EmptyIssueDossierPage() {
+  return (
+    <main className="accountability-issue-empty-page shell">
+      <section className="accountability-issue-empty-hero hero card">
+        <p className="accountability-issue-empty-hero__eyebrow eyebrow">Dossier de tema</p>
+        <h1 className="accountability-issue-empty-hero__title">Sin temas exportados</h1>
+        <p className="accountability-issue-empty-hero__summary sub">
+          Este snapshot no contiene filas de accountability con temas. El catalogo de fuentes y el ledger JSON siguen disponibles para auditoria.
+        </p>
+        <div className="accountability-issue-empty-hero__actions chips">
+          <a className="accountability-issue-empty-hero__link chip" href={withBasePath("/accountability-dossiers/")}>
+            Volver a dossiers
+          </a>
+          <a className="accountability-issue-empty-hero__link chip" href={withBasePath("/accountability-dossiers/data/ledger.json")}>
+            Ledger JSON
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 export default async function AccountabilityIssueDossierPage({ params }) {
   const { issueSlug: currentSlug } = await params;
   const payload = loadDossierPayload();
   const issue = findIssueBySlug(payload, currentSlug);
   if (!issue) {
+    if (currentSlug === EMPTY_ISSUE_SLUG) {
+      return <EmptyIssueDossierPage />;
+    }
     return notFound();
   }
 
