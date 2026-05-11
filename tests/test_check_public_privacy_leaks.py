@@ -5,12 +5,14 @@ import tempfile
 import unittest
 from unittest import mock
 
-from scripts import check_public_privacy_leaks as checker
+from publicdata_publish import privacy as checker
+from scripts import check_public_privacy_leaks as script_checker
 
 
 class TestCheckPublicPrivacyLeaks(unittest.TestCase):
     def test_default_scan_paths_cover_next_public_tree(self) -> None:
         self.assertIn(Path("ui/gh-pages-next/public"), checker.DEFAULT_SCAN_PATHS)
+        self.assertIs(script_checker.collect_findings, checker.collect_findings)
 
     def test_collect_findings_detects_local_paths_and_email(self) -> None:
         with tempfile.TemporaryDirectory() as td:

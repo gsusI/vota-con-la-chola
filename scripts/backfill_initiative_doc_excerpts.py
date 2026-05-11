@@ -10,22 +10,21 @@ Primary target: `source_id='parl_initiative_docs'` rows with XML/PDF content.
 from __future__ import annotations
 
 import argparse
-import html
 import json
-import re
 import sqlite3
-import subprocess
-import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
+from publicdata_docs.extraction import (
+    decode_markup_bytes as _decode_markup_bytes,
+    extract_from_pdf,
+    extract_from_xml_or_html,
+    normalize_text,
+    should_parse_as_pdf,
+)
 
-TAG_RE = re.compile(r"<[^>]+>")
-WS_RE = re.compile(r"\s+")
-XML_ENCODING_RE = re.compile(br"encoding=['\"](?P<encoding>[^'\"]+)['\"]", re.I)
-HTML_CHARSET_RE = re.compile(br"charset=(?P<charset>[A-Za-z0-9._-]+)", re.I)
+DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 
 
 def now_utc_iso() -> str:
@@ -52,114 +51,6 @@ def open_db(path: Path) -> sqlite3.Connection:
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
-
-
-def normalize_text(text: str) -> str:
-    text = html.unescape(text)
-    text = TAG_RE.sub(" ", text)
-    text = WS_RE.sub(" ", text).strip()
-    return text
-
-
-def _decode_markup_bytes(raw_bytes: bytes) -> str:
-    head = raw_bytes[:2048]
-    candidates: list[str] = []
-    for regex, group_name in ((XML_ENCODING_RE, "encoding"), (HTML_CHARSET_RE, "charset")):
-        m = regex.search(head)
-        if not m:
-            continue
-        try:
-            enc = m.group(group_name).decode("ascii", errors="ignore").strip()
-        except Exception:
-            enc = ""
-        if enc:
-            candidates.append(enc)
-    candidates.extend(["utf-8", "iso-8859-15", "iso-8859-1", "cp1252"])
-    seen: set[str] = set()
-    for encoding in candidates:
-        key = encoding.lower()
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        try:
-            return raw_bytes.decode(encoding)
-        except Exception:
-            continue
-    return raw_bytes.decode("utf-8", errors="replace")
-
-
-def extract_from_xml_or_html(raw_bytes: bytes) -> str:
-    decoded = _decode_markup_bytes(raw_bytes)
-
-    # Prefer XML parsing first so CDATA content is preserved via itertext().
-    try:
-        root = ET.fromstring(decoded)
-        joined = " ".join(t for t in root.itertext() if t)
-        out = normalize_text(joined)
-        if out:
-            return out
-    except Exception:
-        pass
-
-    # Fallback for non-well-formed HTML/XML.
-    return normalize_text(decoded)
-
-
-def extract_from_pdf(raw_bytes: bytes, raw_path: Path) -> str:
-    def _pdftotext_fallback() -> str:
-        try:
-            cp = subprocess.run(
-                ["pdftotext", "-enc", "UTF-8", str(raw_path), "-"],
-                check=False,
-                capture_output=True,
-                timeout=30,
-            )
-            if cp.returncode == 0 and cp.stdout:
-                return normalize_text(cp.stdout.decode("utf-8", errors="replace"))
-        except Exception:
-            pass
-        return ""
-
-    # Lazy import so environments without PDF libs still run XML path.
-    reader = None
-    try:
-        from pypdf import PdfReader  # type: ignore
-
-        from io import BytesIO
-
-        reader = PdfReader(BytesIO(raw_bytes))
-    except Exception:
-        try:
-            from PyPDF2 import PdfReader  # type: ignore
-
-            from io import BytesIO
-
-            reader = PdfReader(BytesIO(raw_bytes))
-        except Exception:
-            return _pdftotext_fallback()
-
-    if reader is None:
-        return _pdftotext_fallback()
-
-    chunks: list[str] = []
-    for page in reader.pages:
-        try:
-            txt = page.extract_text() or ""
-        except Exception:
-            txt = ""
-        if txt:
-            chunks.append(txt)
-    out = normalize_text("\n".join(chunks))
-    if out:
-        return out
-    return _pdftotext_fallback()
-
-
-def should_parse_as_pdf(content_type: str, raw_path: Path) -> bool:
-    ct = (content_type or "").lower()
-    if "pdf" in ct:
-        return True
-    return raw_path.suffix.lower() == ".pdf"
 
 
 def build_query(filter_initiative_source: str, has_limit: bool) -> str:

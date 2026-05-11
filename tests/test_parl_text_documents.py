@@ -51,10 +51,10 @@ class TestParlTextDocuments(unittest.TestCase):
             driver_cli.write_text("console.log('ok')\n", encoding="utf-8")
 
             with patch.dict(os.environ, {}, clear=True), patch(
-                "etl.parlamentario_es.text_documents.shutil.which",
+                "publicdata_docs.runtime.shutil.which",
                 return_value="/usr/local/bin/node",
             ), patch(
-                "etl.parlamentario_es.text_documents._command_exit_code",
+                "publicdata_docs.runtime.command_exit_code",
                 side_effect=[-9, 0],
             ):
                 meta = _ensure_playwright_nodejs_runtime(pkg_dir)
@@ -72,7 +72,7 @@ class TestParlTextDocuments(unittest.TestCase):
             pkg_dir.mkdir(parents=True, exist_ok=True)
 
             with patch.dict(os.environ, {"PLAYWRIGHT_NODEJS_PATH": "/custom/node"}, clear=True), patch(
-                "etl.parlamentario_es.text_documents._command_exit_code",
+                "publicdata_docs.runtime.command_exit_code",
                 side_effect=AssertionError("should not probe when env already set"),
             ):
                 meta = _ensure_playwright_nodejs_runtime(pkg_dir)
@@ -92,10 +92,10 @@ class TestParlTextDocuments(unittest.TestCase):
             driver_cli.write_text("console.log('ok')\n", encoding="utf-8")
 
             with patch.dict(os.environ, {}, clear=True), patch(
-                "etl.parlamentario_es.text_documents.shutil.which",
+                "publicdata_docs.runtime.shutil.which",
                 return_value="/usr/local/bin/node",
             ), patch(
-                "etl.parlamentario_es.text_documents._command_exit_code",
+                "publicdata_docs.runtime.command_exit_code",
                 side_effect=[None, 0],
             ):
                 meta = _ensure_playwright_nodejs_runtime(pkg_dir)
@@ -397,7 +397,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("direct original URL should not be retried when archive-first is active")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -507,7 +507,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("direct original URL should not be retried when archive-first is active")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -611,7 +611,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("direct original URL should not be retried when archive-first is active")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -734,7 +734,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("direct original URL should not be retried when archive-first is active for 403")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -836,7 +836,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("direct original URL should not be retried when archive-first is active")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -942,7 +942,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("direct original URL should not be retried when archive-first is active")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1037,7 +1037,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>ok 404 retried</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1144,7 +1144,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>ok stable retry</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result_first = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1180,7 +1180,7 @@ class TestParlTextDocuments(unittest.TestCase):
                 self.assertEqual(int(fetch_500_after_first["fetched_ok"]), 1)
                 self.assertEqual(int(fetch_500_after_first["last_http_status"]), 200)
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result_second = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1306,7 +1306,7 @@ class TestParlTextDocuments(unittest.TestCase):
                     dry_run=False,
                 )
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result_first = backfill_initiative_documents_from_parl_initiatives(**kwargs)
                 self.assertEqual(int(result_first.get("urls_to_fetch") or 0), 1)
                 self.assertEqual(int(result_first.get("skipped_forbidden") or 0), 0)
@@ -1320,7 +1320,7 @@ class TestParlTextDocuments(unittest.TestCase):
                 ).fetchone()
                 self.assertEqual(int(fetch_after_first["last_http_status"]), 403)
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result_second = backfill_initiative_documents_from_parl_initiatives(**kwargs)
                 # DB status drifted to 404 after first run, but frozen snapshot status
                 # keeps the URL in archive-first lane instead of skip_forbidden.
@@ -1392,7 +1392,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>ok retry unknown snapshot</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1474,7 +1474,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>selected only</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1562,7 +1562,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>selected doc should pass cap</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1650,7 +1650,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>shared selected row only</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1761,7 +1761,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"<html><body>selected scope no-limit</body></html>", "text/html"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1881,7 +1881,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         return b"%PDF-1.4 selected missing extra", "application/pdf"
                     raise AssertionError(f"unexpected URL fetched: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -1974,7 +1974,7 @@ class TestParlTextDocuments(unittest.TestCase):
                         raise AssertionError("global URL should not be selected before derived INI with max-docs=1")
                     raise AssertionError(f"unexpected URL: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -2135,7 +2135,7 @@ class TestParlTextDocuments(unittest.TestCase):
                     called_urls.append(url)
                     raise AssertionError(f"unexpected network call: {url}")
 
-                with patch("etl.parlamentario_es.text_documents.http_get_bytes", side_effect=fake_http_get_bytes):
+                with patch("publicdata_docs.parliamentary_es.http_get_bytes", side_effect=fake_http_get_bytes):
                     result = backfill_initiative_documents_from_parl_initiatives(
                         conn,
                         initiative_source_ids=("senado_iniciativas",),
@@ -2202,10 +2202,10 @@ class TestParlTextDocuments(unittest.TestCase):
                 conn.commit()
 
                 with patch(
-                    "etl.parlamentario_es.text_documents._PlaywrightFetcher.__enter__",
+                    "publicdata_docs.parliamentary_es._PlaywrightFetcher.__enter__",
                     side_effect=RuntimeError("boom-init"),
                 ), patch(
-                    "etl.parlamentario_es.text_documents.http_get_bytes",
+                    "publicdata_docs.parliamentary_es.http_get_bytes",
                     side_effect=AssertionError("http_get_bytes should not be used for senado.es when playwright is configured"),
                 ):
                     result = backfill_initiative_documents_from_parl_initiatives(

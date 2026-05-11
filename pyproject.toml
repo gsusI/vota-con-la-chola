@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vota-publicdata-libs"
+version = "0.1.0"
+description = "Reusable public-data ETL libraries extracted from Vota con La Chola."
+readme = "docs/reusable-library-architecture.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = ["public-data", "etl", "sqlite", "open-data", "spain"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Database",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.optional-dependencies]
+browser = ["playwright>=1.40"]
+hf = ["huggingface-hub>=0.20"]
+parquet = ["pyarrow>=15"]
+pdf = ["pypdf>=4"]
+xlsx = ["openpyxl>=3.1"]
+
+[tool.setuptools.packages.find]
+include = ["publicdata_*", "publicdata_*.*"]
+exclude = ["etl*", "scripts*", "tests*", "ui*", "docs*"]
