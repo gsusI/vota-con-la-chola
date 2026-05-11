@@ -1,93 +1,20 @@
 from __future__ import annotations
 
-import csv
 import io
-import json
 import zipfile
 import xml.etree.ElementTree as ET
 from typing import Any
 
+from publicdata_core.parsers import (
+    flatten_json_records,
+    local_name,
+    parse_csv_source,
+    parse_json_source,
+    xlsx_col_to_index,
+)
+
 from .config import SPAIN_COUNTRY_NAMES
 from .util import normalize_key_part, normalize_ws, parse_date_flexible, pick_value, stable_json
-
-
-def flatten_json_records(data: Any) -> list[dict[str, Any]]:
-    if isinstance(data, list):
-        return [item for item in data if isinstance(item, dict)]
-    if isinstance(data, dict):
-        for key in ("results", "items", "data", "diputados", "dataset", "rows"):
-            value = data.get(key)
-            if isinstance(value, list):
-                return [item for item in value if isinstance(item, dict)]
-        nested_lists = [v for v in data.values() if isinstance(v, list)]
-        for candidate in nested_lists:
-            dict_rows = [item for item in candidate if isinstance(item, dict)]
-            if dict_rows:
-                return dict_rows
-        return [data]
-    return []
-
-
-def parse_json_source(payload: bytes) -> list[dict[str, Any]]:
-    parsed = json.loads(payload.decode("utf-8", errors="replace"))
-    return flatten_json_records(parsed)
-
-
-def _decode_csv_payload(payload: bytes) -> str:
-    for encoding in ("utf-8-sig", "utf-8"):
-        try:
-            return payload.decode(encoding)
-        except UnicodeDecodeError:
-            pass
-
-    # Legacy feeds often arrive as Windows-1252; fallback before latin-1 so we
-    # preserve punctuation mapping (€, ñ, curly quotes, etc.).
-    for encoding in ("cp1252", "latin-1"):
-        decoded = payload.decode(encoding)
-        if "\x00" in decoded:
-            continue
-        return decoded
-
-    return payload.decode("utf-8", errors="replace")
-
-
-def parse_csv_source(payload: bytes) -> list[dict[str, Any]]:
-    text = _decode_csv_payload(payload)
-    lines = text.splitlines()
-    if not lines:
-        return []
-
-    delimiter_override: str | None = None
-    first_line = lines[0].strip().lower()
-    if first_line.startswith("sep=") and len(first_line) >= 5:
-        delimiter_override = first_line.split("=", 1)[1][:1]
-        lines = lines[1:]
-
-    sample = "\n".join(lines[:20])
-    try:
-        if delimiter_override:
-            reader = csv.DictReader(lines, delimiter=delimiter_override)
-        else:
-            dialect = csv.Sniffer().sniff(sample, delimiters=";,|\t,")
-            reader = csv.DictReader(lines, dialect=dialect)
-    except csv.Error:
-        reader = csv.DictReader(lines, delimiter=";")
-    rows: list[dict[str, Any]] = []
-    for row in reader:
-        normalized_row = {str(k).strip(): (v if v is not None else "") for k, v in row.items()}
-        if any(str(v).strip() for v in normalized_row.values()):
-            rows.append(normalized_row)
-    return rows
-
-
-def xlsx_col_to_index(cell_ref: str) -> int:
-    letters = "".join(ch for ch in cell_ref if ch.isalpha()).upper()
-    if not letters:
-        return -1
-    index = 0
-    for ch in letters:
-        index = index * 26 + (ord(ch) - ord("A") + 1)
-    return index - 1
 
 
 def parse_xlsx_source(payload: bytes) -> list[dict[str, Any]]:
@@ -175,14 +102,6 @@ def parse_xlsx_source(payload: bytes) -> list[dict[str, Any]]:
         if non_empty and record:
             rows.append(record)
     return rows
-
-
-def local_name(tag: str) -> str:
-    if "}" in tag:
-        return tag.split("}", 1)[1]
-    return tag
-
-
 def parse_europarl_xml(payload: bytes) -> list[dict[str, Any]]:
     root = ET.fromstring(payload.decode("utf-8", errors="replace"))
     rows: list[dict[str, Any]] = []

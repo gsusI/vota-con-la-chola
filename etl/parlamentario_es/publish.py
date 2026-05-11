@@ -15,6 +15,16 @@ from .quality import (
 from .pipeline import backfill_vote_member_person_ids
 
 
+URL_CANDIDATE_KEYS: tuple[str, ...] = (
+    "detail_url",
+    "vote_file_url",
+    "source_url",
+    "url",
+    "link",
+    "doc_url",
+)
+
+
 def _sha256_text(text: str) -> str:
     return sha256(text.encode("utf-8")).hexdigest()
 
@@ -28,11 +38,44 @@ def _parse_json_maybe(text: str | None) -> Any | None:
         return None
 
 
-def _public_source_url(raw_url: Any) -> str | None:
+def _first_url_in_payload(payload: Any) -> str | None:
+    if not isinstance(payload, dict):
+        return None
+    for key in URL_CANDIDATE_KEYS:
+        value = payload.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    for key, value in payload.items():
+        if not isinstance(key, str) or "url" not in key.lower():
+            continue
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
+def _public_source_url(raw_url: Any, *, fallback_url: Any = None, payload_text: Any = None) -> str | None:
+    candidates: list[Any] = [raw_url]
+    payload = _parse_json_maybe(str(payload_text or "")) if payload_text else None
+    payload_url = _first_url_in_payload(payload)
+    if payload_url:
+        candidates.append(payload_url)
+    candidates.append(fallback_url)
+
+    for candidate in candidates:
+        value = str(candidate or "").strip()
+        if not value:
+            continue
+        # Public snapshots must not leak local filesystem paths from sample/fallback runs.
+        if value.lower().startswith("file://"):
+            continue
+        return value
+    return None
+
+
+def _public_source_default_url(raw_url: Any) -> str | None:
     value = str(raw_url or "").strip()
     if not value:
         return None
-    # Public snapshots must not leak local filesystem paths from sample/fallback runs.
     if value.lower().startswith("file://"):
         return None
     return value
@@ -122,12 +165,14 @@ def build_votaciones_snapshot(
           e.totals_no_vote,
           e.source_id,
           e.source_url,
+          s.default_url AS source_default_url,
           e.source_record_pk,
           e.source_snapshot_date,
           e.raw_payload AS event_raw_payload,
           sr.source_record_id AS event_source_record_id,
           sr.content_sha256 AS event_source_hash
         FROM parl_vote_events e
+        JOIN sources s ON s.source_id = e.source_id
         LEFT JOIN source_records sr ON sr.source_record_pk = e.source_record_pk
         WHERE {" AND ".join(where)}
         ORDER BY
@@ -178,7 +223,12 @@ def build_votaciones_snapshot(
                     "source_id": source_id,
                     "source_record_id": r["event_source_record_id"],
                     "source_snapshot_date": r["source_snapshot_date"],
-                    "source_url": _public_source_url(r["source_url"]),
+                    "source_url": _public_source_url(
+                        r["source_url"],
+                        fallback_url=r["source_default_url"],
+                        payload_text=r["event_raw_payload"],
+                    ),
+                    "source_default_url": _public_source_default_url(r["source_default_url"]),
                     "source_hash": _event_source_hash(r),
                     "source_record_pk": r["source_record_pk"],
                 },
@@ -207,6 +257,7 @@ def build_votaciones_snapshot(
                   i.title,
                   i.source_id AS initiative_source_id,
                   i.source_url AS initiative_source_url,
+                  si.default_url AS initiative_source_default_url,
                   i.source_record_pk AS initiative_source_record_pk,
                   i.source_snapshot_date AS initiative_source_snapshot_date,
                   i.raw_payload AS initiative_raw_payload,
@@ -214,6 +265,7 @@ def build_votaciones_snapshot(
                   sr.content_sha256 AS initiative_source_hash
                 FROM parl_vote_event_initiatives l
                 JOIN parl_initiatives i ON i.initiative_id = l.initiative_id
+                JOIN sources si ON si.source_id = i.source_id
                 LEFT JOIN source_records sr ON sr.source_record_pk = i.source_record_pk
                 WHERE l.vote_event_id IN ({qmarks})
                 ORDER BY l.vote_event_id, i.initiative_id, l.link_method
@@ -247,7 +299,12 @@ def build_votaciones_snapshot(
                             "source_id": str(r["initiative_source_id"]),
                             "source_record_id": r["initiative_source_record_id"],
                             "source_snapshot_date": r["initiative_source_snapshot_date"],
-                            "source_url": _public_source_url(r["initiative_source_url"]),
+                            "source_url": _public_source_url(
+                                r["initiative_source_url"],
+                                fallback_url=r["initiative_source_default_url"],
+                                payload_text=r["initiative_raw_payload"],
+                            ),
+                            "source_default_url": _public_source_default_url(r["initiative_source_default_url"]),
                             "source_hash": _initiative_source_hash(r),
                             "source_record_pk": r["initiative_source_record_pk"],
                         },
@@ -270,9 +327,11 @@ def build_votaciones_snapshot(
                   mv.vote_choice,
                   mv.source_id,
                   mv.source_url,
+                  s.default_url AS source_default_url,
                   mv.source_snapshot_date,
                   mv.raw_payload
                 FROM parl_vote_member_votes mv
+                JOIN sources s ON s.source_id = mv.source_id
                 LEFT JOIN persons p ON p.person_id = mv.person_id
                 WHERE mv.vote_event_id IN ({qmarks})
                 ORDER BY mv.vote_event_id, mv.seat, mv.member_name, mv.member_vote_id
@@ -303,7 +362,12 @@ def build_votaciones_snapshot(
                         "vote_choice": r["vote_choice"],
                         "source": {
                             "source_id": r["source_id"],
-                            "source_url": _public_source_url(r["source_url"]),
+                            "source_url": _public_source_url(
+                                r["source_url"],
+                                fallback_url=r["source_default_url"],
+                                payload_text=raw_payload,
+                            ),
+                            "source_default_url": _public_source_default_url(r["source_default_url"]),
                             "source_snapshot_date": r["source_snapshot_date"],
                             "source_hash": _sha256_text(raw_payload),
                             "source_record_pk": None,
@@ -371,14 +435,14 @@ def build_votaciones_snapshot(
             source_ids=initiative_source_ids,
         )
         initiatives_quality = {
-            "provider": "etl.parlamentario_es.quality",
+            "provider": "publicdata_evidence.quality",
             "scope": {"source_ids": list(initiative_source_ids)},
             "kpis": initiative_kpis,
             "gate": evaluate_initiative_quality_gate(initiative_kpis),
         }
 
     quality: dict[str, Any] = {
-        "provider": "etl.parlamentario_es.quality",
+        "provider": "publicdata_evidence.quality",
         "scope": {"source_ids": list(source_ids)},
         "kpis": kpis,
         "gate": gate,

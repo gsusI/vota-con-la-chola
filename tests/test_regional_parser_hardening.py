@@ -40,7 +40,7 @@ class TestRegionalParserHardening(unittest.TestCase):
         self.assertEqual(row["start_date"], "2024-05-14")
         self.assertEqual(row["end_date"], "2024-06-16")
 
-    @patch("etl.politicos_es.connectors.parlamento_vasco.http_get_bytes")
+    @patch("publicdata_connectors_es.representatives.parlamento_vasco.http_get_bytes")
     def test_build_vasco_records_enriches_from_profile_page(self, fake_http_get_bytes) -> None:
         list_row = "<tr><td><a href=\"/fichas/c_21.html\">Kalea, Iñigo</a></td></tr>"
         list_html = f"<table>{list_row * 55}</table>"
@@ -101,7 +101,7 @@ class TestRegionalParserHardening(unittest.TestCase):
         self.assertEqual(rows[0]["provincia"], "Granada")
         self.assertEqual(rows[0]["group_acronym"], "PSOE")
 
-    @patch("etl.politicos_es.connectors.cortes_clm.http_get_bytes")
+    @patch("publicdata_connectors_es.representatives.cortes_clm.http_get_bytes")
     def test_parse_cclm_detail_falls_back_to_gp_pattern(self, fake_http_get) -> None:
         fake_http_get.return_value = (
             """

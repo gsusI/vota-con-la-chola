@@ -3,37 +3,13 @@ from __future__ import annotations
 import sqlite3
 from typing import Any
 
-from ..politicos_es.util import now_utc_iso
+from publicdata_sqlite import seed_sources_from_config
+
 from .config import SOURCE_CONFIG
 
 
 def seed_sources(conn: sqlite3.Connection) -> None:
-    ts = now_utc_iso()
-    for source_id, cfg in SOURCE_CONFIG.items():
-        conn.execute(
-            """
-            INSERT INTO sources (
-              source_id, name, scope, default_url, data_format, is_active, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, 1, ?, ?)
-            ON CONFLICT(source_id) DO UPDATE SET
-              name=excluded.name,
-              scope=excluded.scope,
-              default_url=excluded.default_url,
-              data_format=excluded.data_format,
-              is_active=1,
-              updated_at=excluded.updated_at
-            """,
-            (
-                source_id,
-                cfg["name"],
-                cfg["scope"],
-                cfg["default_url"],
-                cfg["format"],
-                ts,
-                ts,
-            ),
-        )
-    conn.commit()
+    seed_sources_from_config(conn, SOURCE_CONFIG)
 
 
 def upsert_tipo_convocatoria(

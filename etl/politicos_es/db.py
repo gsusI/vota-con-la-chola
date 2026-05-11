@@ -5,49 +5,15 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
+from publicdata_sqlite import ensure_column, open_db, seed_sources_from_config
+from publicdata_sqlite import table_columns, table_create_sql, table_exists
+from publicdata_sqlite import upsert_source_record as _upsert_source_record
+
 from .config import SOURCE_CONFIG
 from .util import canonical_key, normalize_key_part, normalize_ws, now_utc_iso
 
 
 _UNIQUE_SOURCE_URL_RE = re.compile(r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.I)
-
-
-def open_db(path: Path) -> sqlite3.Connection:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(path)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON;")
-    return conn
-
-
-def table_columns(conn: sqlite3.Connection, table: str) -> set[str]:
-    rows = conn.execute(f'PRAGMA table_info("{table}")').fetchall()
-    return {str(r["name"]) for r in rows}
-
-
-def table_exists(conn: sqlite3.Connection, table: str) -> bool:
-    row = conn.execute(
-        "SELECT 1 FROM sqlite_master WHERE type='table' AND name = ?",
-        (table,),
-    ).fetchone()
-    return row is not None
-
-
-def table_create_sql(conn: sqlite3.Connection, table: str) -> str:
-    row = conn.execute(
-        "SELECT sql FROM sqlite_master WHERE type='table' AND name = ?",
-        (table,),
-    ).fetchone()
-    return str(row[0] or "") if row is not None else ""
-
-
-def ensure_column(conn: sqlite3.Connection, table: str, column: str, definition_sql: str) -> None:
-    if not table_exists(conn, table):
-        return
-    cols = table_columns(conn, table)
-    if column in cols:
-        return
-    conn.execute(f'ALTER TABLE "{table}" ADD COLUMN {definition_sql}')
 
 
 def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None:
@@ -359,6 +325,12 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             "territory_id": "territory_id INTEGER REFERENCES territories(territory_id)",
             "source_record_pk": "source_record_pk INTEGER REFERENCES source_records(source_record_pk)",
         },
+        "parl_vote_member_votes": {
+            "parliamentary_group_id": "parliamentary_group_id INTEGER REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE SET NULL",
+        },
+        "accountability_ledger_entries": {
+            "parliamentary_group_id": "parliamentary_group_id INTEGER REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE SET NULL",
+        },
         "institutions": {
             "admin_level_id": "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
             "territory_id": "territory_id INTEGER REFERENCES territories(territory_id)",
@@ -450,32 +422,7 @@ def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
 
 
 def seed_sources(conn: sqlite3.Connection) -> None:
-    ts = now_utc_iso()
-    for source_id, cfg in SOURCE_CONFIG.items():
-        conn.execute(
-            """
-            INSERT INTO sources (
-              source_id, name, scope, default_url, data_format, is_active, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, 1, ?, ?)
-            ON CONFLICT(source_id) DO UPDATE SET
-              name=excluded.name,
-              scope=excluded.scope,
-              default_url=excluded.default_url,
-              data_format=excluded.data_format,
-              is_active=1,
-              updated_at=excluded.updated_at
-            """,
-            (
-                source_id,
-                cfg["name"],
-                cfg["scope"],
-                cfg["default_url"],
-                cfg["format"],
-                ts,
-                ts,
-            ),
-        )
-    conn.commit()
+    seed_sources_from_config(conn, SOURCE_CONFIG)
 
 
 def seed_dimensions(conn: sqlite3.Connection) -> None:
@@ -682,23 +629,15 @@ def upsert_source_record(
     content_sha256: str,
     now_iso: str,
 ) -> int:
-    row = conn.execute(
-        """
-        INSERT INTO source_records (
-          source_id, source_record_id, source_snapshot_date, raw_payload, content_sha256, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT(source_id, source_record_id) DO UPDATE SET
-          source_snapshot_date=COALESCE(excluded.source_snapshot_date, source_records.source_snapshot_date),
-          raw_payload=excluded.raw_payload,
-          content_sha256=excluded.content_sha256,
-          updated_at=excluded.updated_at
-        RETURNING source_record_pk
-        """,
-        (source_id, source_record_id, snapshot_date, raw_payload, content_sha256, now_iso, now_iso),
-    ).fetchone()
-    if row is None:
-        raise RuntimeError("No se pudo resolver source_record_pk")
-    return int(row["source_record_pk"])
+    return _upsert_source_record(
+        conn,
+        source_id,
+        source_record_id,
+        snapshot_date,
+        raw_payload,
+        content_sha256,
+        now_iso,
+    )
 
 
 def upsert_party(conn: sqlite3.Connection, party_name: str | None, now_iso: str) -> int | None:

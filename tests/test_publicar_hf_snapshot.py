@@ -58,9 +58,15 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             (published_dir / "proximas-elecciones-espana.json").write_text("{}", encoding="utf-8")
             (published_dir / "poblacion_municipios_es.json").write_text("{}", encoding="utf-8")
             (published_dir / "source-catalog-latest.json").write_text("{}", encoding="utf-8")
+            (published_dir / "accountability-ledger-latest.json").write_text("{}", encoding="utf-8")
+            (published_dir / "accountability-dossiers-latest.json").write_text("{}", encoding="utf-8")
+            (published_dir / "accountability-evidence-api-latest.json").write_text("{}", encoding="utf-8")
 
             files = collect_published_files(published_dir, "2026-02-12")
             names = [path.name for path in files]
+            self.assertIn("accountability-ledger-latest.json", names)
+            self.assertIn("accountability-dossiers-latest.json", names)
+            self.assertIn("accountability-evidence-api-latest.json", names)
             self.assertIn("votaciones-es-2026-02-12.json.gz", names)
             self.assertNotIn("votaciones-es-2026-02-12.json", names)
             self.assertIn("representantes-es-2026-02-12.json", names)
@@ -456,7 +462,7 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             source_repo_url="https://github.com/example/repo",
         )
         self.assertIn("license: other", readme)
-        self.assertIn("Contenido por snapshot (capas raw + processed)", readme)
+        self.assertIn("Contenido por snapshot (capa raw + capa procesada)", readme)
         self.assertIn("Resumen legal por fuente", readme)
         self.assertIn("senado_senadores", readme)
         self.assertIn("Cautelas de cumplimiento", readme)
@@ -484,8 +490,8 @@ class PublicarHFSnapshotTests(unittest.TestCase):
         )
         self.assertIn("published/votaciones-kpis-es-2026-02-12.json", readme)
         self.assertIn("Resumen de calidad del snapshot", readme)
-        self.assertIn("Vote gate: PASS", readme)
-        self.assertIn("Initiative gate: PASS", readme)
+        self.assertIn("Gate de votos: PASS", readme)
+        self.assertIn("Gate de iniciativas: PASS", readme)
         self.assertIn("Eventos analizados: 321", readme)
         self.assertIn("Cobertura de extracción en docs descargados: 100.0%", readme)
 

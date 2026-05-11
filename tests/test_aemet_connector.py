@@ -106,7 +106,7 @@ class TestAemetConnector(unittest.TestCase):
                 hdrs=None,
                 fp=None,
             )
-            with mock.patch("etl.politicos_es.connectors.aemet_indicators.http_get_bytes", side_effect=http_error):
+            with mock.patch("publicdata_connectors_es.outcomes.aemet_indicators.http_get_bytes", side_effect=http_error):
                 with self.assertRaisesRegex(RuntimeError, "aemet_blocker=contract"):
                     connector.extract(
                         raw_dir=raw_dir,

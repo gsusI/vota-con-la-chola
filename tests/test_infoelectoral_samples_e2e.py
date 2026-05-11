@@ -6,7 +6,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from etl.infoelectoral_es.config import SOURCE_CONFIG as INFO_SOURCE_CONFIG
-from etl.infoelectoral_es.connectors.descargas import InfoelectoralDescargasConnector
+from publicdata_connectors_es.infoelectoral.descargas import InfoelectoralDescargasConnector
 from etl.infoelectoral_es.db import seed_sources as seed_info_sources
 from etl.infoelectoral_es.pipeline import ingest_one_source as ingest_info_one_source
 from etl.infoelectoral_es.registry import get_connectors as get_info_connectors
@@ -128,7 +128,7 @@ class TestInfoelectoralSamplesE2E(unittest.TestCase):
                 raise AssertionError(f"Unexpected URL: {url}")
 
             connector = InfoelectoralDescargasConnector()
-            with patch("etl.infoelectoral_es.connectors.descargas.http_get_bytes", side_effect=fake_http_get_bytes):
+            with patch("publicdata_connectors_es.infoelectoral.descargas.http_get_bytes", side_effect=fake_http_get_bytes):
                 extracted = connector.extract(
                     raw_dir=raw_dir,
                     timeout=5,

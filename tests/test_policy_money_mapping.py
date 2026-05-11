@@ -10,6 +10,7 @@ from etl.politicos_es.pipeline import ingest_one_source
 from etl.politicos_es.policy_events import backfill_money_policy_events
 from etl.politicos_es.registry import get_connectors
 from etl.politicos_es.util import now_utc_iso, sha256_bytes, stable_json
+from scripts.backfill_accountability_ledger_from_policy_events import backfill_policy_event_accountability_ledger
 
 
 class TestPolicyMoneyMapping(unittest.TestCase):
@@ -47,6 +48,9 @@ class TestPolicyMoneyMapping(unittest.TestCase):
 
                 result_1 = backfill_money_policy_events(conn)
                 self.assertGreater(result_1["policy_events_total"], 0)
+                self.assertEqual(result_1["policy_events_total"], result_1["policy_events_with_domain_id"])
+                self.assertEqual(result_1["policy_events_unresolved_domain"], 0)
+                self.assertGreaterEqual(result_1["policy_domains_seeded"], 1)
                 self.assertEqual(
                     result_1["policy_events_total"],
                     result_1["policy_events_with_source_url"],
@@ -71,6 +75,32 @@ class TestPolicyMoneyMapping(unittest.TestCase):
                 }
                 self.assertIn("public_contracting", instruments)
                 self.assertIn("public_subsidy", instruments)
+
+                domain_rows = conn.execute(
+                    """
+                    SELECT canonical_key, label, tier
+                    FROM domains
+                    WHERE canonical_key = 'impuestos_gasto_fiscalidad'
+                    """
+                ).fetchall()
+                self.assertEqual(len(domain_rows), 1)
+                self.assertEqual(str(domain_rows[0]["canonical_key"]), "impuestos_gasto_fiscalidad")
+
+                ledger_result = backfill_policy_event_accountability_ledger(
+                    conn,
+                    source_ids=("placsp_contratacion", "bdns_subvenciones"),
+                )
+                self.assertEqual(ledger_result["entries_upserted"], result_1["policy_events_total"])
+                ledger_rows = conn.execute(
+                    """
+                    SELECT COUNT(*) AS c
+                    FROM accountability_ledger_entries
+                    WHERE source_id IN ('placsp_contratacion','bdns_subvenciones')
+                      AND institution_id IS NOT NULL
+                      AND actor_kind = 'institution'
+                    """
+                ).fetchone()
+                self.assertEqual(int(ledger_rows["c"]), result_1["policy_events_total"])
 
                 traceability_row = conn.execute(
                     """
@@ -160,4 +190,3 @@ class TestPolicyMoneyMapping(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

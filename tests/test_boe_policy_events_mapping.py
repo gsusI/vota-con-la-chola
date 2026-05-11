@@ -62,7 +62,7 @@ class TestBoePolicyEventsMapping(unittest.TestCase):
                 traceability_row = conn.execute(
                     """
                     SELECT COUNT(*) AS c
-                    FROM policy_events
+                    FROM policy_events pe
                     WHERE source_id LIKE 'boe_%'
                       AND source_url IS NOT NULL
                       AND trim(source_url) <> ''
@@ -101,6 +101,7 @@ class TestBoePolicyEventsMapping(unittest.TestCase):
                     "title": "Orden sobre administracion y censo electoral",
                     "description": "Referencia: BOE-A-2026-9999",
                     "boe_ref": "BOE-A-2026-9999",
+                    "department_name": "MINISTERIO DE SANIDAD",
                     "source_url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-9999",
                     "published_at_iso": "2026-02-14T09:00:00+01:00",
                     "event_date_iso": "2026-02-10T00:00:00+01:00",
@@ -123,8 +124,9 @@ class TestBoePolicyEventsMapping(unittest.TestCase):
 
                 row = conn.execute(
                     """
-                    SELECT event_date, published_date
-                    FROM policy_events
+                    SELECT pe.event_date, pe.published_date, i.name AS institution_name, i.level AS institution_level
+                    FROM policy_events pe
+                    LEFT JOIN institutions i ON i.institution_id = pe.institution_id
                     WHERE source_id = 'boe_api_legal'
                       AND source_record_pk = ?
                     """,
@@ -133,6 +135,8 @@ class TestBoePolicyEventsMapping(unittest.TestCase):
                 self.assertIsNotNone(row)
                 self.assertIsNone(row["event_date"])
                 self.assertEqual(row["published_date"], "2026-02-14")
+                self.assertEqual(row["institution_name"], "MINISTERIO DE SANIDAD")
+                self.assertEqual(row["institution_level"], "nacional")
             finally:
                 conn.close()
 
