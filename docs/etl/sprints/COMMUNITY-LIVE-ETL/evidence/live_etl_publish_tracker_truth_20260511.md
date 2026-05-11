@@ -136,3 +136,25 @@ Decision:
 - Empty `HF_DATASET_REPO_ID`/`HF_USERNAME` workflow secrets must not erase the local dry-run default.
 - Build dry-run will use `local/vota-con-la-chola-data` when publish secrets are absent.
 - Real HF publish will still skip unless `HF_TOKEN` and a dataset repo target are configured.
+
+## Main Live Publish Follow-up 3
+
+Run:
+- `https://github.com/gsusI/vota-con-la-chola/actions/runs/25693053312`
+- `live-etl` job: `https://github.com/gsusI/vota-con-la-chola/actions/runs/25693053312/job/75434199468`
+
+Result:
+- `Run live ETL`: passed.
+- `Enforce tracker truth`: passed with `tracker_sources=37`, `sources_in_db=37`, `mismatches=0`, `done_zero_real=0`.
+- `Build public static artifacts`: failed after source catalog, scrape queue, accountability artifact export, accountability validation, privacy scan, and HF dry-run packager start.
+
+Failure signal:
+
+```text
+ERROR: No se encontró quality_report (votaciones-kpis) para snapshot 2026-05-11 en etl/data/published. Genera `votaciones-kpis-es-<snapshot>.json` o desactiva --require-quality-report.
+```
+
+Decision:
+- The live source workflow builds a current official-source snapshot, not the parliamentary vote/liberty release package.
+- Keep `HF_REQUIRE_QUALITY_REPORT=1` and `HF_REQUIRE_LIBERTY_ATLAS_RELEASE_LATEST=1` as normal publish defaults.
+- Set both gates to `0` only in `Live ETL Publish`, so the scheduled source run is not blocked by unrelated parliamentary artifacts.
