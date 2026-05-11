@@ -1174,7 +1174,7 @@ Leyenda:
 | Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |
 |---|---|---|---|---|
 | Representantes y mandatos (Congreso) | Nacional | Congreso OpenData Diputados | DONE | Mejorar calidad de campos opcionales |
-| Representantes y mandatos (Cortes de Aragon) | Autonomico | Cortes de Aragon: diputados (XI) | DONE | Hardening de parsing y umbral minimo |
+| Representantes y mandatos (Cortes de Aragon) | Autonomico | Cortes de Aragon: diputados (XI) | PARTIAL | GitHub Actions strict-network devuelve `HTTP 403`; mantener datos previos como evidencia parcial, pero no marcar `DONE` hasta recuperar run reproducible live-clean. |
 | Representantes y mandatos (Senado) | Nacional | Senado OpenData XML (grupos + fichas) | DONE | Hardening de aliases y umbral minimo |
 | Representantes y mandatos (Europarl) | Europeo | Europarl MEP XML | DONE | Mejorar completitud de fechas/metadatos |
 | Representantes y cargos locales | Municipal | RED SARA Concejales | DONE | Definir umbral minimo y criterio de cobertura |
