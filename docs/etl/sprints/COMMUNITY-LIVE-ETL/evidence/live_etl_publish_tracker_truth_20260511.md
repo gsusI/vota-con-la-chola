@@ -181,3 +181,33 @@ Decision:
 - Live source snapshots can legitimately have zero accountability actors/issues.
 - Keep the dynamic dossier routes exportable by adding explicit empty-state static params for zero-actor and zero-issue snapshots.
 - Empty route pages must say no actors/issues were exported, not invent accountability data.
+
+## Main Live Publish Follow-up 5
+
+Run:
+- `https://github.com/gsusI/vota-con-la-chola/actions/runs/25696619949`
+- `live-etl` job: `https://github.com/gsusI/vota-con-la-chola/actions/runs/25696619949/job/75446383653`
+
+Result:
+- `Run live ETL`: passed.
+- `Enforce tracker truth`: passed.
+- `Build public static artifacts`: passed.
+- `HF dry-run`: passed with `Published files=13`, `Ingestion runs rows=35`, `Source records rows=35`, `Parquet tables=101`, `Parquet files=104`.
+- `Publish Hugging Face snapshot`: skipped by design because `HF_TOKEN` is not configured.
+- `Deploy Cloudflare Pages`: skipped by design because Cloudflare secrets are not configured.
+
+Static export proof:
+- Empty accountability routes exported:
+  - `/accountability-dossiers/actors/no-actors-exported`
+  - `/accountability-dossiers/issues/no-issues-exported`
+- Next export not-found scan passed.
+- Public artifact privacy scan passed.
+
+## Source Catalog Front Door Proof
+
+Local verification:
+- `just cloudflare-pages-build`: passed.
+- `/explorer-sources/`: rendered the contributor front door with `available`, `blocked`, `stale`, `missing`, sample links, last snapshot, blocker reasons, and `Claim this source`.
+- Browser network requests for the page returned `200`.
+- Browser console had no warnings or errors.
+- Screenshot evidence: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/explorer_sources_front_door_local_20260511.png`.
