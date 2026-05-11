@@ -986,13 +986,17 @@ h1 {
 }
 
 .staticRoutePanelGrid {
-  display: grid;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .staticRoutePanel {
-  display: grid;
+  display: flex;
+  flex: 1 1 320px;
+  flex-direction: column;
+  justify-content: flex-start;
   gap: 12px;
 }
 
@@ -1369,8 +1373,8 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .staticRoutePanelGrid {
-    grid-template-columns: 1fr;
+  .staticRoutePanel {
+    flex-basis: 100%;
   }
 
   .block {
