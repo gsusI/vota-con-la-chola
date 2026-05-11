@@ -132,7 +132,7 @@ export function buildPoliticalPositionsContinuityBreadcrumb({
       items: [originItem, exactItem],
       primaryAction: {
         kind: "restore_discovery",
-        label: originItem.originKind === "concern" ? "Volver a la preocupación" : "Volver al pack",
+        label: originItem.originKind === "concern" ? "Volver a la preocupación" : "Volver al paquete",
       },
       dismissible: false,
       meta: null,

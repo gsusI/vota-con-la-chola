@@ -73,10 +73,10 @@ function inferTopicProcedure(label) {
     return "";
   }
   if (/^Votaci[oó]n\b/i.test(text)) {
-    return "Votacion";
+    return "Votación";
   }
   if (/^Moci[oó]n\b/i.test(text)) {
-    return "Mocion";
+    return "Moción";
   }
   if (/^Proposici[oó]n no de Ley\b/i.test(text)) {
     return "PNL";
@@ -85,7 +85,7 @@ function inferTopicProcedure(label) {
     return "Proyecto de ley";
   }
   if (/^Ley Org[aá]nica\b/i.test(text)) {
-    return "Ley organica";
+    return "Ley orgánica";
   }
   if (/^Ley\b/i.test(text)) {
     return "Ley";

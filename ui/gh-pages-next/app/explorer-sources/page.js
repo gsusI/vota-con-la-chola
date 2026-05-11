@@ -11,7 +11,7 @@ import {
 
 export const metadata = {
   title: "Fuentes | Vota Con La Chola",
-  description: "Seguimiento estatico de fuentes, cobertura de adquisicion y acciones pendientes.",
+  description: "Seguimiento estático de fuentes, cobertura de adquisición y acciones pendientes.",
 };
 
 export default function ExplorerSourcesPage() {
@@ -26,15 +26,15 @@ export default function ExplorerSourcesPage() {
     <main className="shell staticRoute staticRouteSources">
       <StaticRouteHero
         actions={[
-          { href: "/explorer-politico/", label: "Ver politicos" },
+          { href: "/explorer-politico/", label: "Ver políticos" },
           { href: "/explorer-votaciones/", label: "Ver votaciones" },
         ]}
         eyebrow="Operaciones de datos"
         meta={[
           { label: "Generado", value: formatDate(status.generated_at || catalog.generated_at) },
-          { label: "Contrato", value: "snapshot estatico" },
+          { label: "Contrato", value: "corte estático" },
         ]}
-        summary="Estado publico de fuentes, ejecuciones y bloqueos. Esta ruta usa los JSON publicados; no intenta consultar endpoints privados desde el navegador."
+        summary="Estado público de fuentes, ejecuciones y bloqueos. Esta ruta usa los JSON publicados; no intenta consultar endpoints privados desde el navegador."
         title="Fuentes y cobertura"
       />
 
@@ -54,7 +54,7 @@ export default function ExplorerSourcesPage() {
             renderItem={(source) => (
               <>
                 <strong>{source.source_name || source.source_id}</strong>
-                <span>{source.scope || "scope"} · {source.format || "formato"} · loaded {formatInt(source.last_loaded)}</span>
+                <span>{source.scope || "ámbito"} · {source.format || "formato"} · cargados {formatInt(source.last_loaded)}</span>
                 <StaticRouteStatusPill value={{ className: sourceStatusClass(source.state), label: source.state || "sin estado" }} />
                 {source.default_url ? <StaticRouteLink href={source.default_url}>Origen</StaticRouteLink> : null}
               </>

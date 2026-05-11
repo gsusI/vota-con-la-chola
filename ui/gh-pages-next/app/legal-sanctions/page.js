@@ -339,7 +339,7 @@ export default function LegalSanctionsPage() {
     return (
       <main className="shell">
         <section className="legal-sanctions-error card block">
-          <h1 className="legal-sanctions-error__title">No se pudo cargar el snapshot</h1>
+          <h1 className="legal-sanctions-error__title">No se pudo cargar el corte</h1>
           <p className="legal-sanctions-error__message sub">{error}</p>
           <p className="legal-sanctions-error__retry sub">
             <a className="legal-sanctions-error__retry-link" href={withBasePath("/legal-sanctions/?")}>Reintentar</a>
@@ -354,7 +354,7 @@ export default function LegalSanctionsPage() {
       <main className="shell">
         <section className="legal-sanctions-empty card block">
           <h1 className="legal-sanctions-empty__title">Sin datos</h1>
-          <p className="legal-sanctions-empty__message sub">No se encontró el snapshot de monitorización jurídica.</p>
+          <p className="legal-sanctions-empty__message sub">No se encontró el corte de monitorización jurídica.</p>
         </section>
       </main>
     );
@@ -370,7 +370,7 @@ export default function LegalSanctionsPage() {
           procedimentales. También incluye monitor municipal y restricciones de derechos con trazabilidad pública.
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {data.snapshot_date || "—"}</span>
+          <span className="chip">Corte: {data.snapshot_date || "—"}</span>
           <span className="chip">Nodos normativos: {formatInt(legalGraph.node_count || 0)}</span>
           <span className="chip">Aristas de línea: {formatInt(legalGraph.edge_count || 0)}</span>
           <span className="chip">Tipos de infracción: {formatInt(filteredInfractionTypes.length)}</span>

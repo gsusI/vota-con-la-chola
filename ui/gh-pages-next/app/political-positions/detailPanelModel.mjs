@@ -35,6 +35,25 @@ function formatDate(value) {
   return cleanLabel(value) || "—";
 }
 
+function formatStance(value) {
+  const key = cleanLabel(value).toLowerCase();
+  if (key === "support" || key === "supportive") return "A favor";
+  if (key === "oppose") return "En contra";
+  if (key === "mixed") return "Mixta";
+  if (key === "unclear") return "Incierta";
+  if (key === "no_signal") return "Sin señal";
+  return cleanLabel(value) || "Sin señal";
+}
+
+function formatMethod(value) {
+  const key = cleanLabel(value).toLowerCase();
+  if (key === "votes") return "Votos";
+  if (key === "declared") return "Declaraciones";
+  if (key === "combined") return "Combinado";
+  if (key === "all") return "Todos";
+  return cleanLabel(value) || "—";
+}
+
 function buildExactTraceCopy(scopeKind) {
   if (scopeKind === "party") {
     return {
@@ -71,15 +90,15 @@ export function buildPoliticalPositionsDetailPanelSummary({
   detailContinuityBreadcrumb,
 }) {
   if (detailContinuityBreadcrumb) {
-    return "La ruta superior resume el contexto editorial. Debajo tienes postura agregada, revision y drill-down reproducible.";
+    return "La ruta superior resume el contexto editorial. Debajo tienes postura agregada, revisión y detalle reproducible.";
   }
   if (selectedPoint) {
-    return "Vista puntual de evidencia, revision y Explorer para la fila activa.";
+    return "Vista puntual de evidencia, revisión y explorador para la fila activa.";
   }
   if (resolvedTopicFilter) {
-    return "Tema exacto activo. Selecciona una fila para abrir evidencia puntual, revision y drill-down reproducible.";
+    return "Tema exacto activo. Selecciona una fila para abrir evidencia puntual, revisión y detalle reproducible.";
   }
-  return "Selecciona una fila para ver evidencia puntual, revision y drill-down reproducible.";
+  return "Selecciona una fila para ver evidencia puntual, revisión y detalle reproducible.";
 }
 
 export function buildPoliticalPositionsDetailOverview(selectedPoint) {
@@ -88,18 +107,18 @@ export function buildPoliticalPositionsDetailOverview(selectedPoint) {
   }
 
   const entries = [
-    { label: "Postura", value: cleanLabel(selectedPoint.stance) || "no_signal", kind: "stance" },
-    { label: "Metodo", value: cleanLabel(selectedPoint.method) || "—" },
-    { label: "As of", value: cleanLabel(selectedPoint.asOf) || "—" },
-    { label: "Score", value: toScore(selectedPoint.score) },
+    { label: "Postura", value: formatStance(selectedPoint.stance), kind: "stance" },
+    { label: "Método", value: formatMethod(selectedPoint.method) },
+    { label: "Fecha", value: cleanLabel(selectedPoint.asOf) || "—" },
+    { label: "Puntuación", value: toScore(selectedPoint.score) },
     { label: "Confianza", value: toPercent(selectedPoint.confidence) },
     { label: "Evidencias", value: String(toInt(selectedPoint.evidenceCount || 0)) },
-    { label: "Ultima evidencia", value: formatDate(selectedPoint.lastEvidenceDate) },
+    { label: "Última evidencia", value: formatDate(selectedPoint.lastEvidenceDate) },
   ];
 
   const windowDays = toInt(selectedPoint.windowDays);
   if (windowDays > 0) {
-    entries.push({ label: "Ventana", value: `${windowDays} dias` });
+    entries.push({ label: "Ventana", value: `${windowDays} días` });
   }
 
   return entries;
@@ -125,7 +144,7 @@ export function buildPoliticalPositionsDetailDrilldownLinks({
     }
     return [
       {
-        label: "Rastro exacto: evidencia persona + tema",
+        label: "Rastro exacto: persona y tema",
         href: `${safeBasePath}/explorer/?t=topic_evidence&wc=person_id&wv=${personId}&wc=topic_id&wv=${topicId}&wc=topic_set_id&wv=${safeTopicSetId}`,
       },
       {
@@ -143,7 +162,7 @@ export function buildPoliticalPositionsDetailDrilldownLinks({
     }
     return [
       {
-        label: "Rastro exacto: grupo + tema",
+        label: "Rastro exacto: grupo y tema",
         href: `${safeBasePath}/explorer/?t=topic_positions&wc=party_id&wv=${partyId}&wc=topic_id&wv=${topicId}&wc=topic_set_id&wv=${safeTopicSetId}`,
       },
       {
@@ -184,16 +203,16 @@ export function buildPoliticalPositionsEvidenceTableHeader({
     availableCount,
   });
   const subtitle = hasTruncatedSamples && hasAggregateGap
-    ? `Ves ${visibleCount}/${availableCount} muestras; el score usa ${evidenceCount} evidencias. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
+    ? `Ves ${visibleCount}/${availableCount} muestras; la puntuación usa ${evidenceCount} evidencias. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
     : hasTruncatedSamples
     ? `Ves ${visibleCount}/${availableCount} muestras. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
     : availableCount > 0 && hasAggregateGap
-    ? `Hay ${availableCount} muestras publicadas; el score usa ${evidenceCount} evidencias. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
+    ? `Hay ${availableCount} muestras publicadas; la puntuación usa ${evidenceCount} evidencias. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
     : availableCount === 0 && hasAggregateGap
-    ? `No hay muestra puntual publicada; el score usa ${evidenceCount} evidencias. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
+    ? `No hay muestra puntual publicada; la puntuación usa ${evidenceCount} evidencias. Abre el rastro exacto ${exactTraceCopy.subtitleTarget}.`
     : visibleCount > 0
-    ? `Drill-down reproducible para la ${scopeLabel} y el tema activos.`
-    : `No hay muestras puntuales listadas; usa Explorer para abrir el rastro completo ${scopeArticle} ${scopeLabel}.`;
+    ? `Detalle reproducible para la ${scopeLabel} y el tema activos.`
+    : `No hay muestras puntuales listadas; usa el explorador para abrir el rastro completo ${scopeArticle} ${scopeLabel}.`;
   const links = (Array.isArray(drilldownLinks) ? drilldownLinks : [])
     .filter((link) => cleanLabel(link?.href))
     .map((link, index) => ({
@@ -206,12 +225,12 @@ export function buildPoliticalPositionsEvidenceTableHeader({
     }));
 
   return {
-    title: "Muestras y auditoria",
+    title: "Muestras y auditoría",
     subtitle,
     chips: [
       {
-        label: "Revision",
-        value: cleanLabel(reviewLabel) || "Sin revision registrada",
+        label: "Revisión",
+        value: cleanLabel(reviewLabel) || "Sin revisión registrada",
       },
       {
         label: hasTruncatedSamples ? "Mostrando" : "Muestras puntuales",

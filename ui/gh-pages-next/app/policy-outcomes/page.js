@@ -347,7 +347,7 @@ export default function PolicyOutcomesPage() {
     return (
       <main className="shell">
         <section className="card block">
-          <h1>No se pudo cargar el snapshot</h1>
+          <h1>No se pudo cargar el corte</h1>
           <p className="sub">{error}</p>
           <p className="sub">
             <a href={withBasePath("/policy-outcomes/")}>Reintentar</a>
@@ -362,7 +362,7 @@ export default function PolicyOutcomesPage() {
       <main className="shell">
         <section className="card block">
           <h1>Sin datos</h1>
-          <p className="sub">No hay snapshot de resultados e indicadores disponible.</p>
+          <p className="sub">No hay corte de resultados e indicadores disponible.</p>
         </section>
       </main>
     );
@@ -378,7 +378,7 @@ export default function PolicyOutcomesPage() {
           frente a eventos de política pública.
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Corte: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
           <span className="chip">Series exportadas: {formatInt(coverage.series_loaded || 0)}</span>
           <span className="chip">Puntos: {formatInt(coverage.indicator_points_total || 0)}</span>
           <span className="chip">Eventos: {formatInt(coverage.events_loaded || 0)}</span>
@@ -523,7 +523,7 @@ export default function PolicyOutcomesPage() {
             </select>
           </div>
           <div className="field">
-            <label>Umbral cambio mínimo (abs)</label>
+            <label>Umbral mínimo de cambio absoluto</label>
             <input
               className="textInput"
               value={state.minAbsDelta}
@@ -537,7 +537,7 @@ export default function PolicyOutcomesPage() {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>1) Series de indicadores (outcomes)</h2>
+          <h2>1) Series de indicadores</h2>
         </div>
         <div className="tableWrap">
           <table className="table">
@@ -693,7 +693,7 @@ export default function PolicyOutcomesPage() {
               {!eventRows.length && (
                 <tr>
                   <td className="sub" colSpan={5}>
-                    No hay eventos en el rango del snapshot.
+                    No hay eventos en el rango del corte.
                   </td>
                 </tr>
               )}

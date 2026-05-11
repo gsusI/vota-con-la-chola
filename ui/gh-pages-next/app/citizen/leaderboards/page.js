@@ -1,4 +1,4 @@
-import { formatDate, formatInt, formatPct, readPublicJson } from "../../static-snapshot.mjs";
+import { formatDate, formatInt, formatMethod, formatPct, readPublicJson } from "../../static-snapshot.mjs";
 import {
   StaticRouteHero,
   StaticRouteLink,
@@ -10,8 +10,8 @@ import {
 } from "../../static-route-components";
 
 export const metadata = {
-  title: "Leaderboards | Vota Con La Chola",
-  description: "Tablero estatico de senales, incertidumbre y cobertura por partido.",
+  title: "Clasificaciones | Vota Con La Chola",
+  description: "Tablero estático de señales, incertidumbre y cobertura por partido.",
 };
 
 function buildPartyRows(parties, positions) {
@@ -73,46 +73,46 @@ export default function CitizenLeaderboardPage() {
           { href: "/citizen/", label: "Vista ciudadana" },
           { href: "/explorer-temas/", label: "Auditar evidencia" },
         ]}
-        eyebrow="Leaderboards"
+        eyebrow="Clasificaciones"
         meta={[
-          { label: "As of", value: formatDate(citizen.meta?.as_of_date) },
-          { label: "Metodo", value: citizen.meta?.computed_method || "combined" },
+          { label: "Corte", value: formatDate(citizen.meta?.as_of_date) },
+          { label: "Método", value: formatMethod(citizen.meta?.computed_method || "combined") },
         ]}
-        summary="Ranking estatico por partido y calidad de packs. Muestra senal clara y unknown sin inventar certezas."
-        title="Leaderboards"
+        summary="Clasificación estática por partido y calidad de paquetes. Muestra señal clara e incertidumbre sin inventar certezas."
+        title="Clasificaciones"
       />
 
       <StaticRouteMetrics
         metrics={[
           { label: "Partidos", value: formatInt(parties.length) },
           { label: "Celdas", value: formatInt(positions.length) },
-          { label: "Senal clara", value: formatPct(citizen.meta?.quality?.clear_pct) },
-          { label: "Unknown", value: formatPct(citizen.meta?.quality?.unknown_pct) },
+          { label: "Señal clara", value: formatPct(citizen.meta?.quality?.clear_pct) },
+          { label: "Sin clasificar", value: formatPct(citizen.meta?.quality?.unknown_pct) },
         ]}
       />
 
       <StaticRoutePanelGrid>
-        <StaticRoutePanel note="Ordenado por numero de posturas claras." title="Partidos">
+        <StaticRoutePanel note="Ordenado por número de posturas claras." title="Partidos">
           <StaticRouteList
             items={partyRows.slice(0, 16)}
             renderItem={(party) => (
               <>
                 <strong>{party.name}</strong>
-                <span>Claras {formatInt(party.clear)} · support {formatInt(party.support)} · oppose {formatInt(party.oppose)} · mixed {formatInt(party.mixed)}</span>
-                <span className="staticRouteList__meta">Unknown/no signal {formatInt(party.noSignal + party.unclear)} · confianza media {formatPct(party.confidenceAvg)}</span>
+                <span>Claras {formatInt(party.clear)} · a favor {formatInt(party.support)} · en contra {formatInt(party.oppose)} · mixtas {formatInt(party.mixed)}</span>
+                <span className="staticRouteList__meta">Sin clasificar/sin señal {formatInt(party.noSignal + party.unclear)} · confianza media {formatPct(party.confidenceAvg)}</span>
               </>
             )}
           />
         </StaticRoutePanel>
 
-        <StaticRoutePanel note="Calidad de cada pack ciudadano." title="Packs">
+        <StaticRoutePanel note="Calidad de cada paquete ciudadano." title="Paquetes">
           <StaticRouteList
             items={packs}
             renderItem={(pack) => (
               <>
                 <strong>{pack.pack_label || pack.pack_id}</strong>
-                <span>Clear {formatPct(pack.clear_cells_pct)} · unknown {formatPct(pack.unknown_cells_pct)}</span>
-                <StaticRouteStatusPill value={{ className: pack.weak ? "staticRouteStatusPill--warn" : "staticRouteStatusPill--ok", label: pack.weak ? "debil" : "ok" }} />
+                <span>Claras {formatPct(pack.clear_cells_pct)} · sin clasificar {formatPct(pack.unknown_cells_pct)}</span>
+                <StaticRouteStatusPill value={{ className: pack.weak ? "staticRouteStatusPill--warn" : "staticRouteStatusPill--ok", label: pack.weak ? "débil" : "ok" }} />
                 <StaticRouteLink href="/citizen/">Ver contexto</StaticRouteLink>
               </>
             )}

@@ -27,18 +27,18 @@ export async function generateMetadata({ params }) {
   if (!payload) {
     return {
       title: "Voto no encontrado | Vota Con La Chola",
-      description: "No encontramos esa votacion en el snapshot publico actual.",
+      description: "No encontramos esa votación en el corte público actual.",
     };
   }
   return {
-    title: payload.social?.title || "Vote explainer | Vota Con La Chola",
-    description: payload.social?.description || "Pagina publica y auditable de una votacion concreta.",
+    title: payload.social?.title || "Explicador de votos | Vota Con La Chola",
+    description: payload.social?.description || "Página pública y auditable de una votación concreta.",
     alternates: {
       canonical: payload.social?.canonical_url || undefined,
     },
     openGraph: {
-      title: payload.social?.title || "Vote explainer | Vota Con La Chola",
-      description: payload.social?.description || "Pagina publica y auditable de una votacion concreta.",
+      title: payload.social?.title || "Explicador de votos | Vota Con La Chola",
+      description: payload.social?.description || "Página pública y auditable de una votación concreta.",
       url: payload.social?.canonical_url || undefined,
       type: "article",
       siteName: "Vota Con La Chola",
@@ -47,8 +47,8 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary",
-      title: payload.social?.title || "Vote explainer | Vota Con La Chola",
-      description: payload.social?.description || "Pagina publica y auditable de una votacion concreta.",
+      title: payload.social?.title || "Explicador de votos | Vota Con La Chola",
+      description: payload.social?.description || "Página pública y auditable de una votación concreta.",
       images: [buildSiteImageUrl()],
     },
   };
@@ -97,14 +97,14 @@ export default async function VoteExplainerDetailPage({ params }) {
   return (
     <main className="shell">
       <section className="hero card explainerHero">
-        <p className="eyebrow">Vote explainer MVP</p>
-        <h1>{event.headline || "Votacion sin titular legible"}</h1>
+        <p className="eyebrow">Explicador de votos</p>
+        <h1>{event.headline || "Votación sin titular legible"}</h1>
         <p className="sub">
-          {event.chamber || "Institucion parlamentaria"} · {formatVoteDate(event.vote_date)} · pagina publica y auditable de una votacion concreta.
+          {event.chamber || "Institución parlamentaria"} · {formatVoteDate(event.vote_date)} · página pública y auditable de una votación concreta.
         </p>
         <div className="chips">
           <span className={`chip ${resultToneClass(payload.result?.status)}`}>{payload.result?.label || "Resultado no disponible"}</span>
-          <span className={`chip ${freshnessToneClass(freshness.tier)}`}>Snapshot {freshness.label || "desconocida"}</span>
+          <span className={`chip ${freshnessToneClass(freshness.tier)}`}>Corte {freshness.label || "desconocido"}</span>
           <span className="chip">Evento: {payload.meta?.public_vote_id}</span>
         </div>
         {event.subtitle ? (
@@ -113,10 +113,10 @@ export default async function VoteExplainerDetailPage({ params }) {
           </p>
         ) : null}
         <p className="sub" style={{ marginTop: 12 }}>
-          {officialLinks[0] ? <a href={officialLinks[0].url}>Abrir fuente oficial principal</a> : "No hay fuente oficial directa enlazada en este snapshot."}
+          {officialLinks[0] ? <a href={officialLinks[0].url}>Abrir fuente oficial principal</a> : "No hay fuente oficial directa enlazada en este corte."}
           {explorerLink ? (
             <span style={{ marginLeft: "10px" }}>
-              <a href={explorerLink}>Auditar en explorer-votaciones</a>
+              <a href={explorerLink}>Auditar en el explorador de votaciones</a>
             </span>
           ) : null}
         </p>
@@ -125,12 +125,12 @@ export default async function VoteExplainerDetailPage({ params }) {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Que se votaba</h2>
+          <h2>Qué se votaba</h2>
         </div>
         <div className="voteMetaGrid">
           <div className="voteMetaCard">
             <span className="kpiLabel">Titular del voto</span>
-            <strong>{event.title || event.headline || "Sin titulo"}</strong>
+            <strong>{event.title || event.headline || "Sin título"}</strong>
           </div>
           <div className="voteMetaCard">
             <span className="kpiLabel">Expediente</span>
@@ -151,26 +151,26 @@ export default async function VoteExplainerDetailPage({ params }) {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Que paso</h2>
+          <h2>Qué pasó</h2>
         </div>
         <div className="kpiGrid">
-          <TotalsCard label="Si" value={totals.yes} />
+          <TotalsCard label="Sí" value={totals.yes} />
           <TotalsCard label="No" value={totals.no} />
-          <TotalsCard label="Abstencion" value={totals.abstain} />
+          <TotalsCard label="Abstención" value={totals.abstain} />
           <TotalsCard label="No vota" value={totals.no_vote} />
           <TotalsCard label="Presentes" value={totals.present} />
         </div>
         <p className="sub" style={{ marginTop: 12 }}>
-          {payload.result?.summary_text || "Sin resumen numerico."}
+          {payload.result?.summary_text || "Sin resumen numérico."}
         </p>
       </section>
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Como votaron los grupos</h2>
+          <h2>Cómo votaron los grupos</h2>
         </div>
         <p className="sub">
-          Vista publica resumida de grupos parlamentarios. No equivale a un roll-call nominal completo.
+          Vista pública resumida de grupos parlamentarios. No equivale a una votación nominal completa.
         </p>
         <div className="voteGroupGrid">
           {groups.map((group) => (
@@ -181,7 +181,7 @@ export default async function VoteExplainerDetailPage({ params }) {
               </div>
               <GroupVoteBar group={group} />
               <p className="voteBreakdownText">
-                Si {formatInt(group.yes)} · No {formatInt(group.no)} · Abst. {formatInt(group.abstain)} · No vota {formatInt(group.no_vote)}
+                Sí {formatInt(group.yes)} · No {formatInt(group.no)} · Abst. {formatInt(group.abstain)} · No vota {formatInt(group.no_vote)}
                 {Number(group.other || 0) > 0 ? ` · Otras ${formatInt(group.other)}` : ""}
               </p>
             </article>
@@ -189,7 +189,7 @@ export default async function VoteExplainerDetailPage({ params }) {
         </div>
         {explorerLink ? (
           <p className="sub" style={{ marginTop: 12 }}>
-            <a href={explorerLink}>Abrir esta votacion en explorer-votaciones</a>
+            <a href={explorerLink}>Abrir esta votación en el explorador de votaciones</a>
           </p>
         ) : null}
       </section>
@@ -208,13 +208,13 @@ export default async function VoteExplainerDetailPage({ params }) {
             ))}
           </div>
         ) : (
-          <p className="sub">Todavia no hay enlaces oficiales directos en este snapshot publico.</p>
+          <p className="sub">Todavía no hay enlaces oficiales directos en este corte público.</p>
         )}
       </section>
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Caveats metodologicos</h2>
+          <h2>Salvedades metodológicas</h2>
         </div>
         <div className="voteCaveatGrid">
           {caveats.map((caveat) => (
@@ -228,18 +228,18 @@ export default async function VoteExplainerDetailPage({ params }) {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Auditoria</h2>
+          <h2>Auditoría</h2>
         </div>
         <div className="voteLinkList">
           {explorerLink ? (
             <a className="voteLinkCard" href={explorerLink}>
-              <span className="kpiLabel">Explorer</span>
-              <span>Auditar esta votacion en explorer-votaciones</span>
+              <span className="kpiLabel">Explorador</span>
+              <span>Auditar esta votación en el explorador de votaciones</span>
             </a>
           ) : null}
           {snapshotLink ? (
             <a className="voteLinkCard" href={snapshotLink}>
-              <span className="kpiLabel">Snapshot fuente</span>
+              <span className="kpiLabel">Corte fuente</span>
               <span>{payload.meta?.source_snapshot_path}</span>
             </a>
           ) : null}

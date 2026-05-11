@@ -12,7 +12,7 @@ const primaryRoutes = [
     href: "/vote-explainer/",
     label: "Votaciones",
     title: "Abrir voto compartible",
-    note: "Resultado, grupos, fuente oficial y caveats visibles.",
+    note: "Resultado, grupos, fuente oficial y salvedades visibles.",
     cta: "Ver votos",
   },
   {
@@ -36,8 +36,8 @@ const routeGroups = [
       },
       {
         href: "/citizen/leaderboards/",
-        title: "Leaderboards cívicos",
-        note: "Ranking por hipótesis, cobertura y comparabilidad.",
+        title: "Clasificaciones cívicas",
+        note: "Ordenación por hipótesis, cobertura y comparabilidad.",
       },
       {
         href: "/policy-outcomes/",
@@ -62,7 +62,7 @@ const routeGroups = [
       },
       {
         href: "/explorer/",
-        title: "Power user SQL",
+        title: "Explorador SQL",
         note: "Cruza tablas y baja a registros puntuales.",
       },
       {
@@ -108,6 +108,11 @@ const routeGroups = [
         note: "Disciplina, rebeldía, coaliciones, asistencia y pivotes.",
       },
       {
+        href: "/accountability-dossiers/",
+        title: "Dossiers de accountability",
+        note: "Responsabilidades por tema y por actor desde el ledger trazable.",
+      },
+      {
         href: "/initiative-lifecycle/",
         title: "Lifecycle legislativo",
         note: "Tramitación, cuellos de botella y secuencia de votos.",
@@ -133,7 +138,7 @@ export default function HomePage() {
     <main className="homepage">
       <section className="homepage-hero" aria-labelledby="homepage-title">
         <div className="homepage-hero__content">
-          <p className="homepage-hero__eyebrow eyebrow">Snapshot público · evidencia primero</p>
+          <p className="homepage-hero__eyebrow eyebrow">Corte público · evidencia primero</p>
           <h1 className="homepage-hero__title" id="homepage-title">Vota Con La Chola</h1>
           <p className="homepage-hero__summary">
             Decide, audita y comparte lo que partidos y cargos hacen con datos trazables.

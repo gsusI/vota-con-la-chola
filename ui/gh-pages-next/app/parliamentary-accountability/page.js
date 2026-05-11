@@ -4,7 +4,7 @@ const ANALYSES = [
   {
     slug: "discipline",
     title: "Disciplina",
-    description: "Rebeldia y alineacion por persona y partido.",
+    description: "Rebeldía y alineación por persona y partido.",
   },
   {
     slug: "attendance",
@@ -27,9 +27,9 @@ export default function ParliamentaryAccountabilityIndexPage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Accountability parlamentaria</p>
-        <h1>Analisis disponibles</h1>
-        <p className="sub">Selecciona un analisis para abrirlo como pagina dedicada.</p>
+        <p className="eyebrow">Responsabilidad parlamentaria</p>
+        <h1>Análisis disponibles</h1>
+        <p className="sub">Selecciona un análisis para abrirlo como página dedicada.</p>
       </section>
 
       <section className="card block">

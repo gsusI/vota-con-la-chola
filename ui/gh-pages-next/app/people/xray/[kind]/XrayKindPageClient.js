@@ -131,7 +131,7 @@ export default function XrayKindPageClient({ kind, meta, groups, snapshotDate })
         <div className="chips">
           <span className="chip">Tipo: {kind}</span>
           <span className="chip">Grupos: {formatInt(sorted.length)}</span>
-          <span className="chip">Publicación: {snapshotDate || "—"}</span>
+          <span className="chip">Corte: {snapshotDate || "—"}</span>
         </div>
         <p className="sub">
           <a href={withBasePath("/people/")}>Volver a Directorio</a>
@@ -161,7 +161,7 @@ export default function XrayKindPageClient({ kind, meta, groups, snapshotDate })
             </div>
             {explorerLink ? (
               <p className="sub" style={{ marginTop: 10 }}>
-                <a href={explorerLink}>Abrir mandatos en Explorer</a>
+                <a href={explorerLink}>Abrir mandatos en el explorador</a>
               </p>
             ) : null}
             <div className="tableWrap" style={{ marginTop: 12 }}>

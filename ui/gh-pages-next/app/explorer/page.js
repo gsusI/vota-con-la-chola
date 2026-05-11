@@ -9,8 +9,8 @@ import {
 } from "../static-route-components";
 
 export const metadata = {
-  title: "Explorer SQL | Vota Con La Chola",
-  description: "Indice estatico de tablas y snapshots publicos para navegacion en Cloudflare Pages.",
+  title: "Explorador SQL | Vota Con La Chola",
+  description: "Índice estático de tablas y cortes públicos para navegación en Cloudflare Pages.",
 };
 
 export default function ExplorerPage() {
@@ -35,32 +35,32 @@ export default function ExplorerPage() {
           { href: "/explorer-votaciones/", label: "Votaciones" },
           { href: "/explorer-sources/", label: "Fuentes" },
         ]}
-        eyebrow="Indice estatico"
+        eyebrow="Índice estático"
         meta={[
-          { label: "Runtime", value: "static export" },
+          { label: "Ejecución", value: "exportación estática" },
           { label: "API", value: "no requerida" },
         ]}
-        summary="Sustituye el explorador SQL con una portada de tablas publicas. Las rutas enlazan a snapshots materializados para que Cloudflare no dependa de backend."
-        title="Explorer"
+        summary="Sustituye el explorador SQL con una portada de tablas públicas. Las rutas enlazan a cortes materializados para que Cloudflare no dependa de un servidor."
+        title="Explorador"
       />
 
       <StaticRouteMetrics
         metrics={[
-          { label: "Nodos graph", value: formatInt(graph.nodes?.length || 0) },
-          { label: "Edges graph", value: formatInt(graph.edges?.length || 0) },
+          { label: "Nodos del grafo", value: formatInt(graph.nodes?.length || 0) },
+          { label: "Aristas del grafo", value: formatInt(graph.edges?.length || 0) },
           { label: "Eventos voto", value: formatInt(votes.meta?.total) },
           { label: "Fuentes deseadas", value: formatInt(sources.summary?.desired) },
         ]}
       />
 
       <StaticRoutePanelGrid>
-        <StaticRoutePanel note="Tablas publicas con vista dedicada." title="Tablas navegables">
+        <StaticRoutePanel note="Tablas públicas con vista dedicada." title="Tablas navegables">
           <StaticRouteList
             items={tableCards}
             renderItem={(row) => (
               <>
                 <strong>{row.label}</strong>
-                <span>Total snapshot {formatInt(row.total)}</span>
+                <span>Total del corte {formatInt(row.total)}</span>
                 <StaticRouteLink href={row.href}>Abrir vista</StaticRouteLink>
               </>
             )}
