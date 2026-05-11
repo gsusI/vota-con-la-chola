@@ -102,10 +102,10 @@ export function tallyBy(rows, key) {
 
 export function sourceStatusClass(value) {
   const status = String(value || "").toLowerCase();
-  if (status === "ok" || status === "done" || status === "match") {
+  if (status === "ok" || status === "done" || status === "match" || status === "available") {
     return "staticRouteStatusPill--ok";
   }
-  if (status === "partial" || status === "degraded" || status === "running") {
+  if (status === "partial" || status === "degraded" || status === "running" || status === "stale") {
     return "staticRouteStatusPill--warn";
   }
   if (status === "missing" || status === "error" || status === "blocked") {

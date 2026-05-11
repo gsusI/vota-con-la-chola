@@ -40,10 +40,10 @@ Define roles de primer nivel en docs y PR:
 - **Data Steward**: calidad, cobertura, trazabilidad y bloqueos de fuentes.
 - **Infrastructure Steward**: Docker/Just, pipelines, CI y publicación de artefactos.
 
-Mapeo inicial recomendado (reemplazar por handlers reales en GitHub):
-- `@owner/project-steward` → Project Steward
-- `@owner/data-steward` → Data Steward
-- `@owner/infra-steward` → Infrastructure Steward
+Mapeo inicial:
+- `@gsusI` → Project Steward
+- `@gsusI` → Data Steward
+- `@gsusI` → Infrastructure Steward
 
 `CODEOWNERS` se mantiene para rutas en esta fase:
 - `*` → Project Steward

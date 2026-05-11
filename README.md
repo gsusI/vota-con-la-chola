@@ -106,6 +106,9 @@ just etl-publish-votaciones
 
 - Contribuir: `CONTRIBUTING.md`
 - Gobernanza: `GOVERNANCE.md`
+- Retos de fuentes: `docs/community/contributor-challenges-v1.md`
+- Guía de integración: `docs/community/partner-integration-guide.md`
+- Steward map: `docs/community/steward-map.md`
 - Plantillas de issue: `.github/ISSUE_TEMPLATE/`
 - Plantilla de PR: `.github/PULL_REQUEST_TEMPLATE.md`
 - Responsables de código: `.github/CODEOWNERS`

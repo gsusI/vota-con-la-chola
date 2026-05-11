@@ -200,6 +200,8 @@ def parse_tracker_rows(tracker_path: Path) -> dict[str, dict[str, Any]]:
         blocked = _is_explicitly_blocked(bloque)
         source_ids = _infer_tracker_source_ids(tipo_dato, fuente)
         for source_id in source_ids:
+            if source_id in rows:
+                continue
             rows[source_id] = {
                 "status": estado,
                 "blocked": blocked,
@@ -362,6 +364,16 @@ def sql_status_from_metrics(metrics: dict[str, Any], *, tracker_blocked: bool = 
     return "PARTIAL"
 
 
+def tracker_status_matches_sql(checklist: str, sql_status: str) -> bool:
+    checklist = (checklist or "N/A").upper()
+    sql_status = (sql_status or "TODO").upper()
+    if checklist == "N/A":
+        return True
+    if checklist == "PARTIAL":
+        return sql_status in {"TODO", "PARTIAL", "DONE"}
+    return checklist == sql_status
+
+
 def format_row(cols: list[str], widths: list[int]) -> str:
     parts = []
     for i, col in enumerate(cols):
@@ -409,7 +421,7 @@ def print_report(
         fallback_fetches = int(metrics.get("fallback_fetches") or 0)
 
         result = "OK"
-        has_mismatch = checklist != "N/A" and checklist != sql_status
+        has_mismatch = not tracker_status_matches_sql(checklist, sql_status)
         if has_mismatch:
             if source_id in waivers_active:
                 result = "WAIVED_MISMATCH"

@@ -18,6 +18,7 @@
 - [ ] Enlaces de contexto en comentarios / documentación incluidos.
 - [ ] Si afecta publicación, se menciona impacto y alcance.
 - [ ] Si cambia comportamiento de datos, incluye `source_url` o `source_hash` cuando aplica.
+- [ ] Nueva fuente: `just add-source` usado y `just etl-contributor-gates` ejecutado o bloqueo documentado.
 
 ## Verificación ejecutada
 

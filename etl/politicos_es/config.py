@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from publicdata_connectors_es.government import SOURCE_CONFIG as GOVERNMENT_SOURCE_CONFIG
+from publicdata_connectors_es.contrib import SOURCE_CONFIG as CONTRIB_SOURCE_CONFIG
 from publicdata_connectors_es.money import SOURCE_CONFIG as MONEY_SOURCE_CONFIG
 from publicdata_connectors_es.org import SOURCE_CONFIG as ORG_SOURCE_CONFIG
 from publicdata_connectors_es.outcomes import SOURCE_CONFIG as OUTCOME_SOURCE_CONFIG
@@ -50,4 +51,5 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
     },
     **OUTCOME_SOURCE_CONFIG,
+    **CONTRIB_SOURCE_CONFIG,
 }

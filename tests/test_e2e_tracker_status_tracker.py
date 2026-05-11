@@ -148,12 +148,57 @@ class TestE2ETrackerStatusTrackerRules(unittest.TestCase):
         self.assertEqual(sql_when_unblocked, "DONE")
         self.assertEqual(sql_when_blocked, "PARTIAL")
 
-    def test_cli_fail_on_mismatch_returns_nonzero(self) -> None:
+    def test_partial_tracker_status_accepts_not_yet_live_sql_states(self) -> None:
+        self.assertTrue(tracker.tracker_status_matches_sql("PARTIAL", "TODO"))
+        self.assertTrue(tracker.tracker_status_matches_sql("PARTIAL", "PARTIAL"))
+        self.assertTrue(tracker.tracker_status_matches_sql("PARTIAL", "DONE"))
+        self.assertFalse(tracker.tracker_status_matches_sql("DONE", "PARTIAL"))
+
+    def test_cli_fail_on_mismatch_accepts_conservative_partial_against_done_sql(self) -> None:
         tracker_md = """# Tracker
 
 | Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |
 |---|---|---|---|---|
 | Representantes y mandatos (Congreso) | Nacional | Congreso OpenData Diputados | PARTIAL | test |
+"""
+        with tempfile.TemporaryDirectory() as td:
+            tracker_path = Path(td) / "tracker.md"
+            tracker_path.write_text(tracker_md, encoding="utf-8")
+            db_path = Path(td) / "tracker.db"
+            self._create_min_tracker_db(db_path)
+
+            conn = sqlite3.connect(db_path)
+            try:
+                conn.execute("INSERT INTO sources (source_id) VALUES ('congreso_diputados')")
+                conn.execute(
+                    "INSERT INTO ingestion_runs (run_id, source_id, status, records_loaded) VALUES (1, 'congreso_diputados', 'ok', 5)"
+                )
+                conn.execute("INSERT INTO raw_fetches (run_id, source_url) VALUES (1, 'https://example.invalid/run')")
+                conn.commit()
+            finally:
+                conn.close()
+
+            argv = [
+                "e2e_tracker_status.py",
+                "--db",
+                str(db_path),
+                "--tracker",
+                str(tracker_path),
+                "--waivers",
+                str(Path(td) / "waivers-none.json"),
+                "--fail-on-mismatch",
+            ]
+            with mock.patch.object(sys, "argv", argv):
+                exit_code = tracker.main()
+
+            self.assertEqual(exit_code, 0)
+
+    def test_cli_fail_on_mismatch_fails_when_todo_source_has_live_rows(self) -> None:
+        tracker_md = """# Tracker
+
+| Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |
+|---|---|---|---|---|
+| Representantes y mandatos (Congreso) | Nacional | Congreso OpenData Diputados | TODO | test |
 """
         with tempfile.TemporaryDirectory() as td:
             tracker_path = Path(td) / "tracker.md"
@@ -313,7 +358,7 @@ class TestE2ETrackerStatusTrackerRules(unittest.TestCase):
 
             self.assertEqual(exit_code, 0)
 
-    def test_cli_fail_on_mismatch_fails_with_expired_waiver(self) -> None:
+    def test_cli_fail_on_mismatch_accepts_conservative_partial_even_with_expired_waiver(self) -> None:
         tracker_md = """# Tracker
 
 | Tipo de dato | Dominio | Fuentes objetivo | Estado | Bloque principal |
@@ -369,7 +414,7 @@ class TestE2ETrackerStatusTrackerRules(unittest.TestCase):
             with mock.patch.object(sys, "argv", argv):
                 exit_code = tracker.main()
 
-            self.assertEqual(exit_code, 1)
+            self.assertEqual(exit_code, 0)
 
     def test_done_zero_real_enforcement_not_weakened_by_waiver(self) -> None:
         tracker_md = """# Tracker

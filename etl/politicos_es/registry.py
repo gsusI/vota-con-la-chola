@@ -38,6 +38,7 @@ from .connectors import (
     SenadoSenadoresConnector,
 )
 from .connectors.base import BaseConnector
+from publicdata_connectors_es.contrib import get_contrib_connectors
 
 
 def get_connectors() -> dict[str, BaseConnector]:
@@ -78,4 +79,6 @@ def get_connectors() -> dict[str, BaseConnector]:
         AemetOpenDataSeriesConnector(),
         ReeEsiosIndicatorsConnector(),
     ]
-    return {c.source_id: c for c in connectors}
+    registered = {c.source_id: c for c in connectors}
+    registered.update(get_contrib_connectors())
+    return registered
