@@ -146,19 +146,19 @@
     try {
       decoded = decodePayloadWithRecovery(raw);
     } catch (err) {
-      return resultError("decode_error", String((err && err.message) || err || "preset hash invalido"));
+      return resultError("decode_error", String((err && err.message) || err || "ajuste del enlace inválido"));
     }
 
     const parsed = parseVersionAndPayload(decoded);
-    if (!parsed.version) return resultError("unsupported_version", "preset hash version no soportada");
-    if (parsed.version !== "v1") return resultError("unsupported_version", "preset hash version no soportada");
-    if (!String(parsed.payload || "").trim()) return resultError("empty_payload", "preset hash vacio");
+    if (!parsed.version) return resultError("unsupported_version", "versión de ajuste no soportada");
+    if (parsed.version !== "v1") return resultError("unsupported_version", "versión de ajuste no soportada");
+    if (!String(parsed.payload || "").trim()) return resultError("empty_payload", "ajuste vacío");
 
     const preset = decodePresetPayload(parsed.payload, cfg);
-    if (!preset) return resultError("empty_payload", "preset hash vacio");
+    if (!preset) return resultError("empty_payload", "ajuste vacío");
 
     if (typeof preset !== "object" || Array.isArray(preset) || !Object.keys(preset).length) {
-      return resultError("no_supported_fields", "preset hash sin campos validos");
+      return resultError("no_supported_fields", "ajuste sin campos válidos");
     }
     const cp = new URLSearchParams();
     const canonicalView = String(preset.view || "").trim();
