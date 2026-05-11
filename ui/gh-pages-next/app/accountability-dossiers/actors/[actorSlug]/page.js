@@ -15,16 +15,25 @@ import {
   topPairs,
 } from "../../dossier-utils.mjs";
 
+const EMPTY_ACTOR_SLUG = "no-actors-exported";
+
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const payload = loadDossierPayload();
-  return safeArray(payload.actors).map((actor) => ({ actorSlug: actorSlug(actor) }));
+  const params = safeArray(payload.actors).map((actor) => ({ actorSlug: actorSlug(actor) }));
+  return params.length ? params : [{ actorSlug: EMPTY_ACTOR_SLUG }];
 }
 
 export async function generateMetadata({ params }) {
   const { actorSlug: currentSlug } = await params;
   const actor = findActorBySlug(loadDossierPayload(), currentSlug);
+  if (!actor && currentSlug === EMPTY_ACTOR_SLUG) {
+    return {
+      title: "Sin actores exportados | Vota Con La Chola",
+      description: "El corte publico actual no contiene actores de accountability exportados.",
+    };
+  }
   if (!actor) {
     return {
       title: "Actor no encontrado | Vota Con La Chola",
@@ -153,11 +162,36 @@ function EvidenceRow({ entry }) {
   );
 }
 
+function EmptyActorDossierPage() {
+  return (
+    <main className="accountability-actor-empty-page shell">
+      <section className="accountability-actor-empty-hero hero card">
+        <p className="accountability-actor-empty-hero__eyebrow eyebrow">Dossier de actor</p>
+        <h1 className="accountability-actor-empty-hero__title">Sin actores exportados</h1>
+        <p className="accountability-actor-empty-hero__summary sub">
+          Este snapshot no contiene filas de accountability con actores. El catalogo de fuentes y el ledger JSON siguen disponibles para auditoria.
+        </p>
+        <div className="accountability-actor-empty-hero__actions chips">
+          <a className="accountability-actor-empty-hero__link chip" href={withBasePath("/accountability-dossiers/")}>
+            Volver a dossiers
+          </a>
+          <a className="accountability-actor-empty-hero__link chip" href={withBasePath("/accountability-dossiers/data/ledger.json")}>
+            Ledger JSON
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 export default async function AccountabilityActorDossierPage({ params }) {
   const { actorSlug: currentSlug } = await params;
   const payload = loadDossierPayload();
   const actor = findActorBySlug(payload, currentSlug);
   if (!actor) {
+    if (currentSlug === EMPTY_ACTOR_SLUG) {
+      return <EmptyActorDossierPage />;
+    }
     return notFound();
   }
 
