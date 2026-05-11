@@ -1,0 +1,74 @@
+name: Live ETL Publish
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to Hugging Face and deploy Cloudflare when secrets are present"
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: live-etl-publish
+  cancel-in-progress: false
+
+jobs:
+  live-etl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      DB_PATH: etl/data/staging/politicos-es.live.db
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_USERNAME: ${{ secrets.HF_USERNAME }}
+      HF_DATASET_REPO_ID: ${{ secrets.HF_DATASET_REPO_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      LIVE_ETL_PUBLISH_REQUESTED: ${{ github.event_name == 'schedule' || github.event.inputs.publish == 'true' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install just
+        uses: extractions/setup-just@v2
+
+      - name: Normalize snapshot date
+        run: |
+          echo "SNAPSHOT_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
+
+      - name: Build ETL image
+        run: docker compose build etl
+
+      - name: Run live ETL
+        run: just etl-live
+
+      - name: Enforce tracker truth
+        run: |
+          just etl-tracker-status
+          just etl-tracker-gate
+
+      - name: Build public static artifacts
+        run: |
+          just etl-publish-hf-dry-run
+          just cloudflare-pages-build
+
+      - name: Publish Hugging Face snapshot
+        if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "HF_TOKEN missing; checked dry-run only."
+            exit 0
+          fi
+          just etl-publish-hf
+
+      - name: Deploy Cloudflare Pages
+        if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "Cloudflare secrets missing; build artifact only."
+            exit 0
+          fi
+          just cloudflare-pages-deploy

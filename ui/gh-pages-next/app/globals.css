@@ -1083,6 +1083,34 @@ h1 {
   background: #f8faf9;
 }
 
+.sourceClaimCard {
+  display: grid;
+  gap: 7px;
+}
+
+.sourceClaimCard__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sourceClaimCard__title {
+  line-height: 1.25;
+}
+
+.sourceClaimCard__meta,
+.sourceClaimCard__blocker {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.sourceClaimCard__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .legacyFrameShell {
   min-height: 100vh;
   min-height: 100dvh;

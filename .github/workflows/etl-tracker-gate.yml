@@ -20,6 +20,20 @@ jobs:
           python3 scripts/check_repo_root_hygiene.py
           python3 -m unittest tests.test_check_repo_root_hygiene -q
 
+  source-onboarding-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run source onboarding contract tests
+        run: |
+          python3 -m unittest tests.test_source_onboarding_scaffold -q
+          python3 scripts/ingestar_politicos_es.py init-db --db /tmp/vota-source-onboarding.db
+          rm -f /tmp/vota-source-onboarding.db
+
   citizen-preset-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 10

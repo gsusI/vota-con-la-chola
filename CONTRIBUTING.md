@@ -24,8 +24,11 @@ Gracias por aportar en un proyecto de infraestructura pública y verificable.
 
 ### Cambios de datos / ETL
 
+- Para una fuente nueva, empieza con `just add-source <source_id> name="..." scope="..." url="..." format=json`.
+- La ruta obligatoria es: config -> sample fixture -> parser -> strict sample test -> catalog/publish mapping -> docs entry.
 - Añade `source_url` y `source_hash` cuando se publique información nueva.
 - Si el cambio altera contratos públicos (snapshots/HF), actualiza documentación de release y validación.
+- Antes del PR ejecuta `just etl-contributor-gates` o documenta exactamente qué gate no pudo ejecutarse.
 
 ### Cambios de UI/API
 
@@ -49,6 +52,7 @@ Gracias por aportar en un proyecto de infraestructura pública y verificable.
 - [ ] Cambios públicos o de contrato: documentación / release actualizado.
 - [ ] Si hay riesgo legal/ética: `docs/legal/data-rights.md` revisado en el alcance.
 - [ ] Pruebas mínimas ejecutadas si aplica (o justificación de no ejecutar).
+- [ ] Nuevas fuentes: scaffold + gates + docs entry completos.
 
 ## Revisión y merge
 
