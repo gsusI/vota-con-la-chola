@@ -1,23 +1,23 @@
 {
   "catalog_version": "v1",
-  "generated_at": "2026-04-25T10:47:55+00:00",
-  "snapshot_date": "2026-04-25",
+  "generated_at": "2026-05-10T21:44:14+00:00",
+  "snapshot_date": "2026-02-12",
   "summary": {
     "sources_total": 46,
     "desired_total": 46,
-    "in_db_total": 7,
-    "active_total": 7,
-    "with_network_total": 4,
-    "with_any_data_total": 4,
+    "in_db_total": 44,
+    "active_total": 44,
+    "with_network_total": 0,
+    "with_any_data_total": 2,
     "sample_backed_total": 45,
     "blocked_total": 3,
     "tracker_done_total": 35,
-    "sql_done_total": 4,
-    "ops_ok_total": 4,
-    "under_threshold_total": 0,
-    "done_zero_real_total": 0,
-    "mismatch_total": 45,
-    "missing_source_ids_total": 39,
+    "sql_done_total": 0,
+    "ops_ok_total": 1,
+    "under_threshold_total": 1,
+    "done_zero_real_total": 1,
+    "mismatch_total": 46,
+    "missing_source_ids_total": 2,
     "legal_status_counts": {
       "pending_review": 24,
       "verified": 18,
@@ -43,18 +43,18 @@
         "desired_total": 7,
         "in_db_total": 7,
         "active_total": 7,
-        "with_network_total": 4,
+        "with_network_total": 0,
         "tracker_done_total": 2,
-        "sql_done_total": 4,
+        "sql_done_total": 0,
         "blocked_total": 0,
-        "mismatch_total": 6
+        "mismatch_total": 7
       },
       {
         "key": "politicos",
         "sources_total": 37,
         "desired_total": 37,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 37,
+        "active_total": 37,
         "with_network_total": 0,
         "tracker_done_total": 31,
         "sql_done_total": 0,
@@ -67,8 +67,8 @@
         "key": "autonomico",
         "sources_total": 19,
         "desired_total": 19,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 19,
+        "active_total": 19,
         "with_network_total": 0,
         "tracker_done_total": 18,
         "sql_done_total": 0,
@@ -79,8 +79,8 @@
         "key": "dinero",
         "sources_total": 6,
         "desired_total": 6,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 6,
+        "active_total": 6,
         "with_network_total": 0,
         "tracker_done_total": 4,
         "sql_done_total": 0,
@@ -91,8 +91,8 @@
         "key": "ejecutivo",
         "sources_total": 2,
         "desired_total": 2,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 2,
+        "active_total": 2,
         "with_network_total": 0,
         "tracker_done_total": 2,
         "sql_done_total": 0,
@@ -115,8 +115,8 @@
         "key": "europeo",
         "sources_total": 1,
         "desired_total": 1,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 1,
+        "active_total": 1,
         "with_network_total": 0,
         "tracker_done_total": 1,
         "sql_done_total": 0,
@@ -127,8 +127,8 @@
         "key": "legal",
         "sources_total": 1,
         "desired_total": 1,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 1,
+        "active_total": 1,
         "with_network_total": 0,
         "tracker_done_total": 1,
         "sql_done_total": 0,
@@ -139,8 +139,8 @@
         "key": "municipal",
         "sources_total": 1,
         "desired_total": 1,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 1,
+        "active_total": 1,
         "with_network_total": 0,
         "tracker_done_total": 1,
         "sql_done_total": 0,
@@ -151,20 +151,20 @@
         "key": "nacional",
         "sources_total": 9,
         "desired_total": 9,
-        "in_db_total": 7,
-        "active_total": 7,
-        "with_network_total": 4,
+        "in_db_total": 9,
+        "active_total": 9,
+        "with_network_total": 0,
         "tracker_done_total": 4,
-        "sql_done_total": 4,
+        "sql_done_total": 0,
         "blocked_total": 0,
-        "mismatch_total": 8
+        "mismatch_total": 9
       },
       {
         "key": "organigrama",
         "sources_total": 1,
         "desired_total": 1,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 1,
+        "active_total": 1,
         "with_network_total": 0,
         "tracker_done_total": 0,
         "sql_done_total": 0,
@@ -175,8 +175,8 @@
         "key": "outcomes",
         "sources_total": 4,
         "desired_total": 4,
-        "in_db_total": 0,
-        "active_total": 0,
+        "in_db_total": 4,
+        "active_total": 4,
         "with_network_total": 0,
         "tracker_done_total": 2,
         "sql_done_total": 0,
@@ -192,7 +192,7 @@
       "done": 246,
       "mismatch": 37,
       "waived_mismatch": 0,
-      "done_zero_real": 0,
+      "done_zero_real": 1,
       "untracked_sources": 8,
       "waivers_active": 0,
       "waivers_expired": 0,
@@ -200,14 +200,14 @@
     }
   },
   "ops": {
-    "ingestion_runs_total": 16,
-    "ingestion_runs_ok": 14,
+    "ingestion_runs_total": 26,
+    "ingestion_runs_ok": 26,
     "ingestion_runs_error": 0,
-    "ingestion_runs_retry": 2,
-    "ingestion_runs_ok_pct": 0.875,
-    "avg_run_seconds": 29.00000363588333,
+    "ingestion_runs_retry": 0,
+    "ingestion_runs_ok_pct": 1.0,
+    "avg_run_seconds": 0.03846132984528175,
     "last_run_seconds": 0.0,
-    "retry_rate": 0.125,
+    "retry_rate": 0.0,
     "published_recommendation_artifacts": 0,
     "autonomico_sources_ok": 0,
     "europeo_sources_ok": 0
@@ -994,13 +994,13 @@
         "points_eng_raw": "8",
         "progress": {
           "done": 4,
-          "partial": 1,
-          "todo": 2,
+          "partial": 0,
+          "todo": 3,
           "untracked": 3,
           "tracked_total": 7,
           "overall_total": 10,
-          "tracked_percent": 64,
-          "overall_percent": 45
+          "tracked_percent": 57,
+          "overall_percent": 40
         },
         "checks": [
           {
@@ -1091,12 +1091,12 @@
             "kind": "metric",
             "id": "done_sources_with_network",
             "label": "Fuentes tracker=DONE con evidencia de red",
-            "status": "PARTIAL",
+            "status": "TODO",
             "metric": "done_sources_with_network_pct",
-            "actual": 0.02857142857142857,
+            "actual": 0.0,
             "target": 1.0,
             "format": "pct",
-            "actual_display": "3%",
+            "actual_display": "0%",
             "target_display": "100%"
           }
         ],
@@ -1104,8 +1104,8 @@
           {
             "id": "done_sources_with_network",
             "label": "Fuentes tracker=DONE con evidencia de red",
-            "status": "PARTIAL",
-            "actual_display": "3%",
+            "status": "TODO",
+            "actual_display": "0%",
             "target_display": "100%"
           },
           {
@@ -1152,14 +1152,14 @@
         "points_eng": 8,
         "points_eng_raw": "8",
         "progress": {
-          "done": 1,
-          "partial": 1,
+          "done": 2,
+          "partial": 0,
           "todo": 2,
           "untracked": 4,
           "tracked_total": 4,
           "overall_total": 8,
-          "tracked_percent": 38,
-          "overall_percent": 19
+          "tracked_percent": 50,
+          "overall_percent": 25
         },
         "checks": [
           {
@@ -1198,20 +1198,8 @@
             "kind": "metric",
             "id": "events_with_date_pct",
             "label": "Eventos con fecha",
-            "status": "PARTIAL",
-            "metric": "events_with_date_pct",
-            "actual": 0.704225352112676,
-            "target": 0.95,
-            "format": "pct",
-            "actual_display": "70%",
-            "target_display": "95%"
-          },
-          {
-            "kind": "metric",
-            "id": "events_with_initiative_link_pct",
-            "label": "Eventos con iniciativa enlazada",
             "status": "DONE",
-            "metric": "events_with_initiative_link_pct",
+            "metric": "events_with_date_pct",
             "actual": 1.0,
             "target": 0.95,
             "format": "pct",
@@ -1220,14 +1208,26 @@
           },
           {
             "kind": "metric",
-            "id": "member_votes_with_person_id_pct",
-            "label": "Votos nominales con person_id",
+            "id": "events_with_initiative_link_pct",
+            "label": "Eventos con iniciativa enlazada",
             "status": "TODO",
-            "metric": "member_votes_with_person_id_pct",
+            "metric": "events_with_initiative_link_pct",
             "actual": 0.0,
-            "target": 0.9,
+            "target": 0.95,
             "format": "pct",
             "actual_display": "0%",
+            "target_display": "95%"
+          },
+          {
+            "kind": "metric",
+            "id": "member_votes_with_person_id_pct",
+            "label": "Votos nominales con person_id",
+            "status": "DONE",
+            "metric": "member_votes_with_person_id_pct",
+            "actual": 1.0,
+            "target": 0.9,
+            "format": "pct",
+            "actual_display": "100%",
             "target_display": "90%"
           },
           {
@@ -1245,10 +1245,10 @@
         ],
         "next": [
           {
-            "id": "events_with_date_pct",
-            "label": "Eventos con fecha",
-            "status": "PARTIAL",
-            "actual_display": "70%",
+            "id": "events_with_initiative_link_pct",
+            "label": "Eventos con iniciativa enlazada",
+            "status": "TODO",
+            "actual_display": "0%",
             "target_display": "95%"
           },
           {
@@ -1257,13 +1257,6 @@
             "status": "TODO",
             "actual_display": "0%",
             "target_display": "50%"
-          },
-          {
-            "id": "member_votes_with_person_id_pct",
-            "label": "Votos nominales con person_id",
-            "status": "TODO",
-            "actual_display": "0%",
-            "target_display": "90%"
           },
           {
             "id": "iniciativas_congreso",
@@ -1282,6 +1275,13 @@
           {
             "id": "votaciones_congreso",
             "label": "Votaciones Congreso",
+            "status": "MISSING",
+            "actual_display": "MISSING",
+            "target_display": "DONE"
+          },
+          {
+            "id": "votaciones_senado_y_mociones",
+            "label": "Votaciones Senado y mociones",
             "status": "MISSING",
             "actual_display": "MISSING",
             "target_display": "DONE"
@@ -1759,32 +1759,32 @@
         "label": "Fuentes objetivo en estado ok",
         "status": "PARTIAL",
         "metric": "desired_sources_ok_pct",
-        "actual": 0.08695652173913043,
+        "actual": 0.021739130434782608,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "9%",
+        "actual_display": "2%",
         "target_display": "80%"
       },
       {
         "id": "events_with_initiative_link_pct",
         "label": "Eventos con iniciativa enlazada",
-        "status": "DONE",
+        "status": "TODO",
         "metric": "events_with_initiative_link_pct",
-        "actual": 1.0,
+        "actual": 0.0,
         "target": 0.95,
         "format": "pct",
-        "actual_display": "100%",
+        "actual_display": "0%",
         "target_display": "95%"
       },
       {
         "id": "member_votes_with_person_id_pct",
         "label": "Votos nominales con person_id",
-        "status": "TODO",
+        "status": "DONE",
         "metric": "member_votes_with_person_id_pct",
-        "actual": 0.0,
+        "actual": 1.0,
         "target": 0.9,
         "format": "pct",
-        "actual_display": "0%",
+        "actual_display": "100%",
         "target_display": "90%"
       },
       {
@@ -1814,10 +1814,10 @@
         "label": "Runs ETL en estado ok",
         "status": "DONE",
         "metric": "ingestion_runs_ok_pct",
-        "actual": 0.875,
+        "actual": 1.0,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "88%",
+        "actual_display": "100%",
         "target_display": "80%"
       },
       {
@@ -1825,10 +1825,10 @@
         "label": "Costo de reintentos ETL",
         "status": "DONE",
         "metric": "retry_rate",
-        "actual": 0.125,
+        "actual": 0.0,
         "target": 0.2,
         "format": "pct",
-        "actual_display": "12%",
+        "actual_display": "0%",
         "target_display": "20%"
       },
       {
@@ -1836,17 +1836,17 @@
         "label": "Duraci\u00f3n media por run ETL",
         "status": "DONE",
         "metric": "avg_run_seconds",
-        "actual": 29.00000363588333,
+        "actual": 0.03846132984528175,
         "target": null,
         "format": "seconds",
-        "actual_display": "29.0s",
+        "actual_display": "0.0s",
         "target_display": "\u2014"
       }
     ],
     "summary": {
-      "done": 15,
-      "partial": 2,
-      "todo": 21,
+      "done": 16,
+      "partial": 0,
+      "todo": 22,
       "untracked": 8,
       "tracked_total": 38,
       "overall_total": 46,
@@ -1860,267 +1860,16 @@
   },
   "actions": [
     {
-      "kind": "missing_source",
+      "kind": "done_zero_real",
       "priority": "P0",
       "scope": "",
-      "title": "Fuente deseada no existe en BD: aemet_opendata_series",
-      "details": "Dominio=politicos \u00b7 scope=outcomes",
-      "source_ids": [
-        "aemet_opendata_series"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source aemet_opendata_series --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: asamblea_ceuta_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "asamblea_ceuta_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_ceuta_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: asamblea_extremadura_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "asamblea_extremadura_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_extremadura_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: asamblea_madrid_ocupaciones",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "asamblea_madrid_ocupaciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_madrid_ocupaciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: asamblea_melilla_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "asamblea_melilla_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_melilla_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: asamblea_murcia_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "asamblea_murcia_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_murcia_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: bde_series_api",
-      "details": "Dominio=politicos \u00b7 scope=outcomes",
-      "source_ids": [
-        "bde_series_api"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bde_series_api --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: bdns_api_subvenciones",
-      "details": "Dominio=politicos \u00b7 scope=dinero",
-      "source_ids": [
-        "bdns_api_subvenciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: bdns_autonomico",
-      "details": "Dominio=politicos \u00b7 scope=dinero",
-      "source_ids": [
-        "bdns_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: bdns_subvenciones",
-      "details": "Dominio=politicos \u00b7 scope=dinero",
-      "source_ids": [
-        "bdns_subvenciones"
-      ],
-      "commands": [
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: boe_api_legal",
-      "details": "Dominio=politicos \u00b7 scope=legal",
-      "source_ids": [
-        "boe_api_legal"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: congreso_diputados",
-      "details": "Dominio=politicos \u00b7 scope=nacional",
+      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): congreso_diputados",
+      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
       "source_ids": [
         "congreso_diputados"
       ],
       "commands": [
         "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source congreso_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: cortes_aragon_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "cortes_aragon_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source cortes_aragon_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: cortes_clm_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "cortes_clm_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source cortes_clm_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: cortes_cyl_procuradores",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "cortes_cyl_procuradores"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source cortes_cyl_procuradores --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: corts_valencianes_diputats",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "corts_valencianes_diputats"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source corts_valencianes_diputats --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: dir3_unidades_age",
-      "details": "Dominio=politicos \u00b7 scope=organigrama",
-      "source_ids": [
-        "dir3_unidades_age"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source dir3_unidades_age --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: europarl_meps",
-      "details": "Dominio=politicos \u00b7 scope=europeo",
-      "source_ids": [
-        "europarl_meps"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source europarl_meps --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: eurostat_sdmx",
-      "details": "Dominio=politicos \u00b7 scope=outcomes",
-      "source_ids": [
-        "eurostat_sdmx"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --strict-network",
         "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
@@ -2149,257 +1898,6 @@
       ],
       "commands": [
         "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_procesos --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: jgpa_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "jgpa_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source jgpa_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: moncloa_referencias",
-      "details": "Dominio=politicos \u00b7 scope=ejecutivo",
-      "source_ids": [
-        "moncloa_referencias"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_referencias --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: moncloa_rss_referencias",
-      "details": "Dominio=politicos \u00b7 scope=ejecutivo",
-      "source_ids": [
-        "moncloa_rss_referencias"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_rss_referencias --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: municipal_concejales",
-      "details": "Dominio=politicos \u00b7 scope=municipal",
-      "source_ids": [
-        "municipal_concejales"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source municipal_concejales --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlament_balears_diputats",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlament_balears_diputats"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlament_balears_diputats --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlament_catalunya_diputats",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlament_catalunya_diputats"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlament_catalunya_diputats --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_andalucia_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_andalucia_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_andalucia_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_canarias_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_canarias_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_canarias_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_cantabria_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_cantabria_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_cantabria_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_galicia_deputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_galicia_deputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_galicia_deputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_larioja_diputados",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_larioja_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_larioja_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_navarra_parlamentarios_forales",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_navarra_parlamentarios_forales"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_navarra_parlamentarios_forales --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: parlamento_vasco_parlamentarios",
-      "details": "Dominio=politicos \u00b7 scope=autonomico",
-      "source_ids": [
-        "parlamento_vasco_parlamentarios"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_vasco_parlamentarios --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: placsp_autonomico",
-      "details": "Dominio=politicos \u00b7 scope=dinero",
-      "source_ids": [
-        "placsp_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: placsp_contratacion",
-      "details": "Dominio=politicos \u00b7 scope=dinero",
-      "source_ids": [
-        "placsp_contratacion"
-      ],
-      "commands": [
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: placsp_sindicacion",
-      "details": "Dominio=politicos \u00b7 scope=dinero",
-      "source_ids": [
-        "placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: ree_esios_indicators",
-      "details": "Dominio=politicos \u00b7 scope=outcomes",
-      "source_ids": [
-        "ree_esios_indicators"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "missing_source",
-      "priority": "P0",
-      "scope": "",
-      "title": "Fuente deseada no existe en BD: senado_senadores",
-      "details": "Dominio=politicos \u00b7 scope=nacional",
-      "source_ids": [
-        "senado_senadores"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source senado_senadores --strict-network",
         "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
@@ -2894,48 +2392,25 @@
       "details": "Done now: PARTIAL. Slice AI-OPS-116 publica contrato KPI de justicia procedimental en `sanction_procedural_kpi_definitions` (`3` KPIs: recurso estimado, anulaci\u00f3n formal, retraso p90) y tabla operativa `sanction_procedural_metrics` para series observadas. Evidencia: `docs/etl/sprints/AI-OPS-116/reports/sanction-data-catalog-lane.md`, `docs/etl/sprints/AI-OPS-116/evidence/sanction_data_catalog_import_20260223T174656Z.json`, `docs/etl/sprints/AI-OPS-116/evidence/sanction_data_catalog_status_20260223T174656Z.json`. Falta ingesta de datos revisores (TEAR/TEAC/contencioso/defensores) para poblar m\u00e9tricas y pasar de contrato a resultados. Siguiente comando: `DB_PATH=<db> just parl-report-sanction-data-catalog-status`.",
       "source_ids": [],
       "commands": []
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: congreso_diputados",
+      "details": "loaded=2 target=300",
+      "source_ids": [
+        "congreso_diputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source congreso_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
     }
   ],
   "missing_source_ids": [
-    "aemet_opendata_series",
-    "asamblea_ceuta_diputados",
-    "asamblea_extremadura_diputados",
-    "asamblea_madrid_ocupaciones",
-    "asamblea_melilla_diputados",
-    "asamblea_murcia_diputados",
-    "bde_series_api",
-    "bdns_api_subvenciones",
-    "bdns_autonomico",
-    "bdns_subvenciones",
-    "boe_api_legal",
-    "congreso_diputados",
-    "cortes_aragon_diputados",
-    "cortes_clm_diputados",
-    "cortes_cyl_procuradores",
-    "corts_valencianes_diputats",
-    "dir3_unidades_age",
-    "europarl_meps",
-    "eurostat_sdmx",
     "infoelectoral_descargas",
-    "infoelectoral_procesos",
-    "jgpa_diputados",
-    "moncloa_referencias",
-    "moncloa_rss_referencias",
-    "municipal_concejales",
-    "parlament_balears_diputats",
-    "parlament_catalunya_diputats",
-    "parlamento_andalucia_diputados",
-    "parlamento_canarias_diputados",
-    "parlamento_cantabria_diputados",
-    "parlamento_galicia_deputados",
-    "parlamento_larioja_diputados",
-    "parlamento_navarra_parlamentarios_forales",
-    "parlamento_vasco_parlamentarios",
-    "placsp_autonomico",
-    "placsp_contratacion",
-    "placsp_sindicacion",
-    "ree_esios_indicators",
-    "senado_senadores"
+    "infoelectoral_procesos"
   ],
   "sources": [
     {
@@ -2949,14 +2424,14 @@
       "format": "json",
       "default_url": "https://www.ceuta.es/gobiernodeceuta/index.php/el-gobierno/la-asamblea",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Ceuta)",
       "tracker_fuentes_objetivo": "Asamblea de Ceuta: miembros (2023/2027)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3022,14 +2497,14 @@
       "format": "json",
       "default_url": "https://www.asambleaex.es/dipslegis",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Extremadura)",
       "tracker_fuentes_objetivo": "Asamblea de Extremadura (dipslegis + paginacion)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3095,14 +2570,14 @@
       "format": "csv",
       "default_url": "https://ctyp.asambleamadrid.es/static/doc/opendata/SGP_ADMIN.OPENDATA_OCUPACIONES_ASAMBLEA.csv",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Madrid)",
       "tracker_fuentes_objetivo": "Asamblea de Madrid OpenData Ocupaciones",
       "tracker_block_note": "Definir umbral minimo y aclarar semantica de `is_active`",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3169,14 +2644,14 @@
       "format": "json",
       "default_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Melilla)",
       "tracker_fuentes_objetivo": "Asamblea de Melilla: diputados (2023/2027)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3242,14 +2717,14 @@
       "format": "json",
       "default_url": "https://www.asambleamurcia.es/diputados",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Asamblea Murcia)",
       "tracker_fuentes_objetivo": "Asamblea Regional de Murcia: diputados (listado + fichas)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3315,14 +2790,14 @@
       "format": "json",
       "default_url": "https://www.cortesaragon.es/Quienes-somos.2250.0.html?no_cache=1&tx_t3comunicacion_pi3%5Bnumleg%5D=11&tx_t3comunicacion_pi3%5Btipinf%5D=3&tx_t3comunicacion_pi3%5Buidcom%5D=-2#verContenido",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Cortes de Aragon)",
       "tracker_fuentes_objetivo": "Cortes de Aragon: diputados (XI)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3388,14 +2863,14 @@
       "format": "json",
       "default_url": "https://www.ccyl.es/Organizacion/PlenoAlfabetico",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Cortes CyL)",
       "tracker_fuentes_objetivo": "Cortes de Castilla y Leon (PlenoAlfabetico)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3461,14 +2936,14 @@
       "format": "json",
       "default_url": "https://www.cortesclm.es/web2/paginas/resul_diputados.php?legislatura=11",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Cortes CLM)",
       "tracker_fuentes_objetivo": "Cortes de Castilla-La Mancha (listado + fichas)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3534,14 +3009,14 @@
       "format": "json",
       "default_url": "https://www.jgpa.es/diputados-y-diputadas",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (JGPA Asturias)",
       "tracker_fuentes_objetivo": "Junta General del Principado de Asturias (diputados)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3607,14 +3082,14 @@
       "format": "json",
       "default_url": "https://www.cortsvalencianes.es/es/composicion/diputados",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Corts Valencianes)",
       "tracker_fuentes_objetivo": "Corts Valencianes (listado + fichas)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3680,14 +3155,14 @@
       "format": "json",
       "default_url": "https://www.parlament.cat/web/composicio/ple-parlament/composicio-actual/index.html",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlament de Catalunya)",
       "tracker_fuentes_objetivo": "Parlament de Catalunya (composicio actual + fichas)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3753,14 +3228,14 @@
       "format": "json",
       "default_url": "https://www.parlamentib.es/Representants/Diputats.aspx?criteria=0",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlament IB)",
       "tracker_fuentes_objetivo": "Parlament de les Illes Balears: diputats (listado + fichas via webGTP)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3826,14 +3301,14 @@
       "format": "json",
       "default_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/composicionyfuncionamiento/diputadosysenadores.do",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Andalucia)",
       "tracker_fuentes_objetivo": "Parlamento de Andalucia (listado + fichas)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3899,14 +3374,14 @@
       "format": "json",
       "default_url": "https://parcan.es/api/diputados/por_legislatura/11/?format=json",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Canarias)",
       "tracker_fuentes_objetivo": "Parlamento de Canarias: diputados + grupos (API oficial)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -3972,14 +3447,14 @@
       "format": "json",
       "default_url": "https://parlamento-cantabria.es/informacion-general/composicion/11l-pleno-del-parlamento-de-cantabria",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Cantabria)",
       "tracker_fuentes_objetivo": "Parlamento de Cantabria",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4045,14 +3520,14 @@
       "format": "json",
       "default_url": "https://www.parlamentodegalicia.gal/Composicion/Deputados",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "PARTIAL",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Galicia)",
       "tracker_fuentes_objetivo": "Parlamento de Galicia: deputados (fichas HTML)",
       "tracker_block_note": "Done now: NO. Blocker: `parlamento_galicia_deputados` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=265`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4118,14 +3593,14 @@
       "format": "json",
       "default_url": "https://adminweb.parlamento-larioja.org/composicion-y-organos/diputados",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de La Rioja)",
       "tracker_fuentes_objetivo": "Parlamento de La Rioja: diputados (listado + fichas)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4191,14 +3666,14 @@
       "format": "json",
       "default_url": "https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Navarra)",
       "tracker_fuentes_objetivo": "Parlamento de Navarra: parlamentarios forales (fichas HTML)",
       "tracker_block_note": "Done now: YES. Reconcilia `parlamento_navarra_parlamentarios_forales` en `from-file` con `50/50 registros validos` en `run_id=595` (snapshot `2026-02-12`, origen `etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages`). Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4264,14 +3739,14 @@
       "format": "json",
       "default_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento Vasco)",
       "tracker_fuentes_objetivo": "Parlamento Vasco (listado ACT)",
       "tracker_block_note": "Hardening de parsing y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4337,14 +3812,14 @@
       "format": "json",
       "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
       "tracker_fuentes_objetivo": "BDNS/SNPSAP (filtrado por \u00f3rgano convocante/territorio)",
       "tracker_block_note": "Done now: YES. `bdns_autonomico` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/busqueda`) y red real (`run_id=257`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4414,14 +3889,14 @@
       "format": "json",
       "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Subvenciones y ayudas (Espana)",
       "tracker_fuentes_objetivo": "BDNS/SNPSAP: API",
       "tracker_block_note": "Done now: YES. `bdns_api_subvenciones` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/ultimas`) y red real (`run_id=256`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4491,14 +3966,14 @@
       "format": "json",
       "default_url": "https://contrataciondelestado.es/",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "",
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4555,7 +4030,7 @@
     },
     {
       "source_id": "placsp_autonomico",
-      "source_name": "PLACSP - Contratacion auton\u00f3mica (piloto 3 CCAA)",
+      "source_name": "PLACSP - Contratacion autonomica (piloto 3 CCAA)",
       "domain": "politicos",
       "scope": "dinero",
       "level": "",
@@ -4564,14 +4039,14 @@
       "format": "xml",
       "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Contratacion detalle y documentacion de licitaciones (PLACSP)",
       "tracker_fuentes_objetivo": "PLACSP: `url_detalle` desde `placsp_sindicacion`/`placsp_autonomico`",
       "tracker_block_note": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4639,14 +4114,14 @@
       "format": "xml",
       "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Contratacion detalle y documentacion de licitaciones (PLACSP)",
       "tracker_fuentes_objetivo": "PLACSP: `url_detalle` desde `placsp_sindicacion`/`placsp_autonomico`",
       "tracker_block_note": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4714,14 +4189,14 @@
       "format": "json",
       "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "",
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4787,14 +4262,14 @@
       "format": "html",
       "default_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
       "tracker_fuentes_objetivo": "La Moncloa: referencias + RSS",
       "tracker_block_note": "Done now: YES. Ingesta Moncloa y mapping a `policy_events` reproducibles (`moncloa_referencias=20`, `moncloa_rss_referencias=8`, total `28`) y reconciliadas con SQL `DONE` sin waiver activa para Moncloa. Evidencia: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`. Siguiente comando: `just etl-tracker-gate`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -4864,14 +4339,14 @@
       "format": "xml",
       "default_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
       "tracker_fuentes_objetivo": "La Moncloa: referencias + RSS",
       "tracker_block_note": "Done now: YES. Ingesta Moncloa y mapping a `policy_events` reproducibles (`moncloa_referencias=20`, `moncloa_rss_referencias=8`, total `28`) y reconciliadas con SQL `DONE` sin waiver activa para Moncloa. Evidencia: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`. Siguiente comando: `just etl-tracker-gate`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -5095,14 +4570,14 @@
       "format": "xml",
       "default_url": "https://www.europarl.europa.eu/meps/es/full-list/xml",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Europarl)",
       "tracker_fuentes_objetivo": "Europarl MEP XML",
       "tracker_block_note": "Mejorar completitud de fechas/metadatos",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -5169,14 +4644,14 @@
       "format": "xml",
       "default_url": "https://www.boe.es/rss/boe.php",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Marco legal electoral",
       "tracker_fuentes_objetivo": "BOE API",
       "tracker_block_note": "Done now: YES. Ingesta BOE (`boe_api_legal`) y mapping a `policy_events` est\u00e1n reproducibles (`records_loaded=298`, `policy_events_boe=298`) y reconciliados con SQL `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log` y `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md`. Siguiente comando: `just etl-tracker-gate`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -5244,14 +4719,14 @@
       "format": "xlsx",
       "default_url": "https://concejales.redsara.es/consulta/getConcejalesLegislatura",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y cargos locales",
       "tracker_fuentes_objetivo": "RED SARA Concejales",
       "tracker_block_note": "Definir umbral minimo y criterio de cobertura",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -5327,33 +4802,33 @@
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
-      "sql_status": "DONE",
-      "ops_state": "ok",
+      "sql_status": "TODO",
+      "ops_state": "not_run",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 3,
-      "runs_ok": 3,
-      "last_status": "ok",
-      "last_loaded": 497,
-      "max_loaded_any": 497,
-      "max_loaded_network": 497,
-      "network_fetches": 3,
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
       "fallback_fetches": 0,
-      "last_seen_at": "2026-02-25T15:46:30+00:00",
-      "last_message": "{\"initiatives_loaded\": 497, \"note\": \"network\"}",
+      "last_seen_at": "",
+      "last_message": "",
       "progress": {
-        "loaded": 497,
+        "loaded": 0,
         "target": 1,
-        "percent": 100
+        "percent": 0
       },
       "warehouse": {
         "primary_table": "parl_initiatives",
-        "primary_rows": 435,
+        "primary_rows": 0,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
-          "parl_initiatives": 435,
+          "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
@@ -5367,8 +4842,8 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
+        "has_network": false,
+        "has_any": false,
         "blocked_note": false
       },
       "legal": {
@@ -5481,20 +4956,20 @@
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
-      "sql_status": "DONE",
+      "sql_status": "PARTIAL",
       "ops_state": "ok",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 6,
-      "runs_ok": 4,
+      "runs_total": 13,
+      "runs_ok": 13,
       "last_status": "ok",
       "last_loaded": 1,
-      "max_loaded_any": 249,
-      "max_loaded_network": 249,
-      "network_fetches": 1,
-      "fallback_fetches": 3,
-      "last_seen_at": "2026-02-25T17:19:30+00:00",
+      "max_loaded_any": 1,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 13,
+      "last_seen_at": "2026-05-09T17:33:06+00:00",
       "last_message": "{\"events_loaded\": 1, \"member_votes_loaded\": 350, \"note\": \"from-file\"}",
       "progress": {
         "loaded": 1,
@@ -5503,11 +4978,11 @@
       },
       "warehouse": {
         "primary_table": "parl_vote_events",
-        "primary_rows": 250,
+        "primary_rows": 1,
         "counts": {
-          "mandates": 0,
-          "parl_vote_events": 250,
-          "parl_initiatives": 56,
+          "mandates": 350,
+          "parl_vote_events": 1,
+          "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
@@ -5521,7 +4996,7 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": true,
+        "has_network": false,
         "has_any": true,
         "blocked_note": false
       },
@@ -5704,33 +5179,33 @@
       "tracker_tipo_dato": "Conversi\u00f3n iterativa adicional del residual global Senado `status=404` tras primer delta material",
       "tracker_fuentes_objetivo": "Packet global `status=404` (`senado_iniciativas`) con replay acotado + cierre anti-loop",
       "tracker_block_note": "Done now: NO_DELTA_WITH_EVIDENCE. AI-OPS-388 ejecuta dos pasadas `packet50` con `--include-unlinked` y postproceso completo (`excerpts` + `extractions --only-missing`) sin conversi\u00f3n neta: pass1 `candidate_urls=50`, `fetched_ok=0`, `failures=30`; pass2 `candidate_urls=50`, `fetched_ok=0`, `failures=30`; delta acumulada `downloaded_doc_links=0`, `missing_doc_links_actionable=0`, `missing_urls=0`, `status404=0`, con `status403/status500` estables. Se registra `no_new_lever` y se cierra por anti-loop. Evidencia: `docs/etl/sprints/AI-OPS-388/reports/senado-status404-global-two-pass-no-delta-20260301.md`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_conversion_delta_ai_ops_388_20260301T174503Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_no_new_lever_ai_ops_388_20260301T174503Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_retry_packet50_effective_pass1_20260301T172903Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_retry_packet50_effective_pass2_20260301T174503Z.json`.",
-      "sql_status": "DONE",
-      "ops_state": "ok",
-      "mismatch_state": "MATCH",
+      "sql_status": "TODO",
+      "ops_state": "not_run",
+      "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 2,
-      "runs_ok": 2,
-      "last_status": "ok",
-      "last_loaded": 2000,
-      "max_loaded_any": 2000,
-      "max_loaded_network": 2000,
-      "network_fetches": 2,
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
       "fallback_fetches": 0,
-      "last_seen_at": "2026-02-25T15:46:35+00:00",
-      "last_message": "{\"initiatives_loaded\": 2000, \"note\": \"network\"}",
+      "last_seen_at": "",
+      "last_message": "",
       "progress": {
-        "loaded": 2000,
+        "loaded": 0,
         "target": 1,
-        "percent": 100
+        "percent": 0
       },
       "warehouse": {
         "primary_table": "parl_initiatives",
-        "primary_rows": 2000,
+        "primary_rows": 0,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
-          "parl_initiatives": 2000,
+          "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
@@ -5744,8 +5219,8 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
+        "has_network": false,
+        "has_any": false,
         "blocked_note": false
       },
       "legal": {
@@ -5778,32 +5253,32 @@
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
-      "sql_status": "DONE",
-      "ops_state": "ok",
+      "sql_status": "TODO",
+      "ops_state": "not_run",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 5,
-      "runs_ok": 5,
-      "last_status": "ok",
-      "last_loaded": 1,
-      "max_loaded_any": 105,
-      "max_loaded_network": 105,
-      "network_fetches": 2,
-      "fallback_fetches": 3,
-      "last_seen_at": "2026-02-25T17:19:30+00:00",
-      "last_message": "{\"events_loaded\": 1, \"member_votes_loaded\": 0, \"note\": \"from-file\"}",
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 0,
+      "last_seen_at": "",
+      "last_message": "",
       "progress": {
-        "loaded": 1,
+        "loaded": 0,
         "target": 1,
-        "percent": 100
+        "percent": 0
       },
       "warehouse": {
         "primary_table": "parl_vote_events",
-        "primary_rows": 105,
+        "primary_rows": 0,
         "counts": {
           "mandates": 0,
-          "parl_vote_events": 105,
+          "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
@@ -5818,8 +5293,8 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
+        "has_network": false,
+        "has_any": false,
         "blocked_note": false
       },
       "legal": {
@@ -5846,37 +5321,37 @@
       "format": "json",
       "default_url": "https://www.congreso.es/es/opendata/diputados",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Congreso)",
       "tracker_fuentes_objetivo": "Congreso OpenData Diputados",
       "tracker_block_note": "Mejorar calidad de campos opcionales",
-      "sql_status": "TODO",
-      "ops_state": "missing",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "ops_state": "partial",
+      "mismatch_state": "DONE_ZERO_REAL",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
+      "runs_total": 13,
+      "runs_ok": 13,
+      "last_status": "ok",
+      "last_loaded": 2,
+      "max_loaded_any": 2,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_seen_at": "",
-      "last_message": "",
+      "fallback_fetches": 13,
+      "last_seen_at": "2026-05-09T17:33:06+00:00",
+      "last_message": "Ingesta completada: 2/2 registros validos (from-file)",
       "progress": {
-        "loaded": 0,
+        "loaded": 2,
         "target": 300,
-        "percent": 0
+        "percent": 1
       },
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 0,
+        "primary_rows": 2,
         "counts": {
-          "mandates": 0,
+          "mandates": 2,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -5890,10 +5365,10 @@
         "sample_available": true
       },
       "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
+        "under_threshold": true,
+        "done_zero_real": true,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": false
       },
       "legal": {
@@ -5923,14 +5398,14 @@
       "format": "xml",
       "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Representantes y mandatos (Senado)",
       "tracker_fuentes_objetivo": "Senado OpenData XML (grupos + fichas)",
       "tracker_block_note": "Hardening de aliases y umbral minimo",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -5997,14 +5472,14 @@
       "format": "xlsx",
       "default_url": "https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "",
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -6070,14 +5545,14 @@
       "format": "json",
       "default_url": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "PARTIAL",
       "tracker_tipo_dato": "Indicadores (confusores): AEMET",
       "tracker_fuentes_objetivo": "AEMET OpenData",
       "tracker_block_note": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -6144,14 +5619,14 @@
       "format": "json",
       "default_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAA301,D_1NBAA304,D_1NBAA317,D_1NBAA372,D_1NBAA572,D_1NBAC372,D_1NBAC572,D_1NBAC972,D_1NBAD301,D_1NBAD302,D_1NBAD306,D_1NBAD311,D_1NBAD317,D_1NBAD372,D_1NBAD472,D_1NBAD572,D_1NBAD972,D_1NBAE472,D_1NBAE572,D_1NBAE972,D_1NBAF472,D_1NBAF572,D_1NBAS372,D_1NBAS572,D_1NBAS972,D_1NBBO020,D_1NBBO072,D_1NBBO303,D_1NBBO305,D_1NBBO307,D_1NBBO308,D_1NBBO309,D_1NBBO310,D_1NBBO311,D_1NBBO314,D_1NBBO315,D_1NBBO316,D_1NBBO320,D_1NBBO333,D_1NBBO349,D_1NBBO572,D_1NBBP301,D_1NBBP302,D_1NBBP303,D_1NBBP304,D_1NBBP305,D_1NBBP306,D_1NBBP307,D_1NBBP308,D_1NBBP309,D_1NBBP310,D_1NBBP311,D_1NBBP314,D_1NBBP315,D_1NBBP316,D_1NBBP317,D_1NBBP349,D_1NBBP572&rango=30M",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Indicadores (confusores): Banco de Espana",
       "tracker_fuentes_objetivo": "Banco de Espana (API series)",
       "tracker_block_note": "Done now: YES. AI-OPS-237 cierra la deriva de endpoint BDE: se migra el conector a `app.bde.es/bierest/resources/srdatosapp/listaSeries` y se endurece parsing para payload `fechas/valores` + `gzip`. Corrida `strict-network` real en staging: `run_id=278`, `status=ok`, `records_seen=1`, `records_loaded=1` (`bde_series_api: 1/1 registros validos`). Estructuraci\u00f3n posterior (`backfill-indicators --source-ids bde_series_api`) queda en `source_records_mapped=3`, `indicator_series_upserted=3`, `indicator_points_upserted=37`, `observation_records_upserted=37`, `indicator_series_unresolved_domain=0` (heur\u00edstica a\u00f1adida `euribor -> vivienda_urbanismo`). Evidencia: `docs/etl/sprints/AI-OPS-237/reports/bde-series-endpoint-drift-closure-20260227.md`, `docs/etl/sprints/AI-OPS-237/evidence/bde_series_ingest_strict_latest.json`, `docs/etl/sprints/AI-OPS-237/evidence/bde_series_ingestion_runs_latest.txt`, `docs/etl/sprints/AI-OPS-237/evidence/backfill_indicators_bde_after_domain_fix_latest.json`, `docs/etl/sprints/AI-OPS-237/evidence/tracker_status_post_bde_fix_latest.log`, `docs/etl/sprints/AI-OPS-237/evidence/python_unittest_bde_indicator_backfill_latest.txt`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bde_series_api --url 'https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAF472&rango=30M' --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids bde_series_api`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -6220,14 +5695,14 @@
       "format": "json",
       "default_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "PARTIAL",
       "tracker_tipo_dato": "Indicadores (confusores): ESIOS/REE",
       "tracker_fuentes_objetivo": "ESIOS/REE API (token)",
       "tracker_block_note": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
@@ -6293,14 +5768,14 @@
       "format": "json",
       "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
       "desired": true,
-      "in_db": false,
-      "active": false,
+      "in_db": true,
+      "active": true,
       "tracker_status": "DONE",
       "tracker_tipo_dato": "Indicadores (outcomes): Eurostat",
       "tracker_fuentes_objetivo": "Eurostat (API/SDMX)",
       "tracker_block_note": "Done now: YES. `eurostat_sdmx` tiene `strict-network` exitoso (`run_records_loaded=2394`) y replay no-cero (`run_records_loaded=2`), por lo que el mismatch actual era desfase tracker/SQL y se reconcilia a `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__strict-network_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__replay_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/reports/eurostat-apply.md`, `docs/etl/sprints/AI-OPS-10/evidence/tracker-gate-postrun.log`, `docs/etl/sprints/AI-OPS-10/evidence/status-postrun.json`. Siguiente comando: `just etl-tracker-gate`.",
       "sql_status": "TODO",
-      "ops_state": "missing",
+      "ops_state": "not_run",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
