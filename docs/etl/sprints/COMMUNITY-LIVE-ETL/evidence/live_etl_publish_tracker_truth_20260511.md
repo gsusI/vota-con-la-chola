@@ -87,3 +87,28 @@ Strict-network failed sources:
 | `asamblea_extremadura_diputados` | `urllib.error.URLError: <urlopen error timed out>` | Move to `PARTIAL` until a current GitHub Actions strict run loads records. |
 | `boe_api_legal` | `urllib.error.URLError: <urlopen error timed out>` | Move to `PARTIAL`; keep historical BOE rows as evidence, not live-clean proof. |
 | `parlament_balears_diputats` | `urllib.error.URLError: <urlopen error timed out>` | Move to `PARTIAL` until a current GitHub Actions strict run loads records. |
+
+## Main Live Publish Follow-up
+
+Run:
+- `https://github.com/gsusI/vota-con-la-chola/actions/runs/25689554864`
+- `live-etl` job: `https://github.com/gsusI/vota-con-la-chola/actions/runs/25689554864/job/75422091834`
+
+Result:
+- `Run live ETL`: passed.
+- `Enforce tracker truth`: passed with `mismatches=0` and `done_zero_real=0`.
+- `Build public static artifacts`: failed before HF/Cloudflare publish.
+
+Failure signal:
+
+```text
+ERROR: ledger entries below minimum
+ERROR: dossier actors below minimum
+ERROR: dossier issues below minimum
+ERROR: evidence_api issue_clusters below minimum
+```
+
+Decision:
+- Live politicos source DB can legitimately have zero accountability rows.
+- Keep default accountability minimums for normal publish lanes.
+- Override accountability minimums only in `Live ETL Publish` so live source catalog/static artifacts can build and publish.
