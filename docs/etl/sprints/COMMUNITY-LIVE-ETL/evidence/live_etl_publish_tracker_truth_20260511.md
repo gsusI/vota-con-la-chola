@@ -158,3 +158,26 @@ Decision:
 - The live source workflow builds a current official-source snapshot, not the parliamentary vote/liberty release package.
 - Keep `HF_REQUIRE_QUALITY_REPORT=1` and `HF_REQUIRE_LIBERTY_ATLAS_RELEASE_LATEST=1` as normal publish defaults.
 - Set both gates to `0` only in `Live ETL Publish`, so the scheduled source run is not blocked by unrelated parliamentary artifacts.
+
+## Main Live Publish Follow-up 4
+
+Run:
+- `https://github.com/gsusI/vota-con-la-chola/actions/runs/25694720290`
+- `live-etl` job: `https://github.com/gsusI/vota-con-la-chola/actions/runs/25694720290/job/75439898509`
+
+Result:
+- `Run live ETL`: passed.
+- `Enforce tracker truth`: passed with `tracker_sources=37`, `sources_in_db=37`, `mismatches=0`, `done_zero_real=0`.
+- `HF dry-run`: passed with `Published files=13`, `Ingestion runs rows=35`, `Source records rows=35`, `Parquet tables=101`, `Parquet files=104`.
+- `Cloudflare/static build`: failed in Next export.
+
+Failure signal:
+
+```text
+Error: Page "/accountability-dossiers/actors/[actorSlug]" is missing "generateStaticParams()" so it cannot be used with "output: export" config.
+```
+
+Decision:
+- Live source snapshots can legitimately have zero accountability actors/issues.
+- Keep the dynamic dossier routes exportable by adding explicit empty-state static params for zero-actor and zero-issue snapshots.
+- Empty route pages must say no actors/issues were exported, not invent accountability data.
