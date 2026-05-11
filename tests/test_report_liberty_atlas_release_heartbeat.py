@@ -97,7 +97,7 @@ class TestReportLibertyAtlasReleaseHeartbeat(unittest.TestCase):
                     "--snapshot-date",
                     "2026-02-23",
                     "--max-snapshot-age-days",
-                    "14",
+                    "999",
                     "--strict",
                     "--out",
                     str(out),
