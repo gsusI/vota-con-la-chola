@@ -56,7 +56,9 @@ jobs:
 
       - name: Build public static artifacts
         run: |
-          just etl-publish-hf-dry-run
+          HF_DATASET_REPO_ID="${HF_DATASET_REPO_ID:-local/vota-con-la-chola-data}" \
+            HF_USERNAME="${HF_USERNAME:-local}" \
+            just etl-publish-hf-dry-run
           just cloudflare-pages-build
 
       - name: Publish Hugging Face snapshot
@@ -64,6 +66,10 @@ jobs:
         run: |
           if [ -z "$HF_TOKEN" ]; then
             echo "HF_TOKEN missing; checked dry-run only."
+            exit 0
+          fi
+          if [ -z "$HF_DATASET_REPO_ID" ] && [ -z "$HF_USERNAME" ]; then
+            echo "HF_DATASET_REPO_ID/HF_USERNAME missing; checked dry-run only."
             exit 0
           fi
           just etl-publish-hf
