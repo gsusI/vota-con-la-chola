@@ -1295,6 +1295,20 @@ etl-backfill-money-subsidy-records:
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 
+add-source source_id name scope url format="json" min_records="1":
+  python3 scripts/add_source.py "{{source_id}}" --name "{{name}}" --scope "{{scope}}" --url "{{url}}" --format "{{format}}" --min-records "{{min_records}}"
+
+etl-schema-compat-check:
+  python3 scripts/ingestar_politicos_es.py init-db --db /tmp/vota-schema-compat.db
+  rm -f /tmp/vota-schema-compat.db
+
+etl-contributor-gates:
+  python3 -m unittest tests.test_source_onboarding_scaffold tests.test_samples_e2e -q
+  just etl-schema-compat-check
+  just etl-export-source-catalog
+  just privacy-check-public-artifacts
+  just etl-publish-hf-dry-run
+
 etl-live:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source all --snapshot-date {{snapshot_date}} --timeout {{municipal_timeout}}"
 

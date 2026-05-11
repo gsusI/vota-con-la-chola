@@ -3280,6 +3280,17 @@ def build_source_catalog_payload(db_path: Path, *, snapshot_date: str = "") -> d
         fallback_path = _resolve_repo_path(fallback_file)
         runner_script = _source_runner_script(source_id, item.get("domain"))
         strict_target = int(progress.get("target") or 0)
+        blocker_reason = safe_text(tracker.get("bloque")) or safe_text(item.get("last_message"))
+        if bool(flags.get("blocked_note")):
+            catalog_state = "blocked"
+        elif not bool(item.get("in_db")):
+            catalog_state = "missing"
+        elif bool(flags.get("under_threshold")) or bool(flags.get("done_zero_real")):
+            catalog_state = "stale"
+        elif bool(flags.get("has_any")):
+            catalog_state = "available"
+        else:
+            catalog_state = "missing"
 
         row = {
             "source_id": source_id,
@@ -3300,6 +3311,7 @@ def build_source_catalog_payload(db_path: Path, *, snapshot_date: str = "") -> d
             "tracker_block_note": safe_text(tracker.get("bloque")),
             "sql_status": safe_text(item.get("sql_status")).upper(),
             "ops_state": safe_text(item.get("state")),
+            "catalog_state": catalog_state,
             "mismatch_state": safe_text(item.get("mismatch_state")),
             "mismatch_waived": bool(item.get("mismatch_waived")),
             "waiver_expiry": safe_text(item.get("waiver_expiry")),
@@ -3312,7 +3324,9 @@ def build_source_catalog_payload(db_path: Path, *, snapshot_date: str = "") -> d
             "network_fetches": int(item.get("network_fetches") or 0),
             "fallback_fetches": int(item.get("fallback_fetches") or 0),
             "last_seen_at": safe_text(item.get("last_seen_at")),
+            "latest_snapshot": safe_text(item.get("last_seen_at")),
             "last_message": safe_text(item.get("last_message")),
+            "blocker_reason": blocker_reason if bool(flags.get("blocked_note")) else "",
             "progress": {
                 "loaded": int(progress.get("loaded") or 0),
                 "target": strict_target,
@@ -3327,6 +3341,7 @@ def build_source_catalog_payload(db_path: Path, *, snapshot_date: str = "") -> d
                 "runner_script": runner_script,
                 "strict_target": strict_target,
                 "fallback_file": fallback_file,
+                "sample_url": fallback_file,
                 "sample_available": bool(fallback_path and fallback_path.exists()),
             },
             "flags": {
@@ -3393,6 +3408,9 @@ def build_source_catalog_payload(db_path: Path, *, snapshot_date: str = "") -> d
             "tracker_done_total": sum(1 for row in catalog_sources if safe_text(row.get("tracker_status")).upper() == "DONE"),
             "sql_done_total": sum(1 for row in catalog_sources if safe_text(row.get("sql_status")).upper() == "DONE"),
             "ops_ok_total": sum(1 for row in catalog_sources if safe_text(row.get("ops_state")) == "ok"),
+            "available_total": sum(1 for row in catalog_sources if safe_text(row.get("catalog_state")) == "available"),
+            "stale_total": sum(1 for row in catalog_sources if safe_text(row.get("catalog_state")) == "stale"),
+            "missing_total": sum(1 for row in catalog_sources if safe_text(row.get("catalog_state")) == "missing"),
             "under_threshold_total": sum(1 for flags in flags_all if bool(flags.get("under_threshold"))),
             "done_zero_real_total": sum(1 for flags in flags_all if bool(flags.get("done_zero_real"))),
             "mismatch_total": sum(
