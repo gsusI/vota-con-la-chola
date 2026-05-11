@@ -1111,6 +1111,114 @@ h1 {
   gap: 10px;
 }
 
+.sourceFrontDoorCard {
+  display: grid;
+  gap: 10px;
+}
+
+.sourceFrontDoorCard__header,
+.sourceStateBucket__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sourceFrontDoorCard__title,
+.sourceStateBucket__title,
+.sourceStateBucket__sourceTitle,
+.sourceQueueItem__title,
+.sourceDownloadItem__title,
+.sourceActionItem__title,
+.sourceIdealItem__title {
+  line-height: 1.25;
+}
+
+.sourceFrontDoorCard__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.sourceFrontDoorCard__fact {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  border: 1px solid #dfe6e4;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fbfcfc;
+}
+
+.sourceFrontDoorCard__fact dt {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sourceFrontDoorCard__fact dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+}
+
+.sourceFrontDoorCard__blocker,
+.sourceFrontDoorCard__queueReason,
+.sourceStateBucket__sourceMeta,
+.sourceQueueItem__meta,
+.sourceQueueItem__blocker,
+.sourceDownloadItem__meta,
+.sourceActionItem__details,
+.sourceActionItem__meta,
+.sourceIdealItem__meta {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.sourceFrontDoorCard__links,
+.sourceStateBucket__sourceLinks,
+.sourceQueueItem__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sourceStateBucketGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sourceStateBucket {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid #dfe6e4;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfcfc;
+}
+
+.sourceStateBucket .staticRouteList {
+  gap: 8px;
+}
+
+.sourceStateBucket .staticRouteList__item {
+  padding: 10px;
+}
+
+@media (max-width: 760px) {
+  .sourceFrontDoorCard__facts,
+  .sourceStateBucketGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .legacyFrameShell {
   min-height: 100vh;
   min-height: 100dvh;
