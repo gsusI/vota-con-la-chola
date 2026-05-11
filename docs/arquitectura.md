@@ -6,6 +6,9 @@ Una sola app y un solo flujo de datos hasta validar utilidad real.
 Diagrama E2E consolidado:
 - `docs/flow-diagram.md`
 
+Limites para extraer librerias reutilizables:
+- `docs/reusable-library-architecture.md`
+
 ## Componentes minimos
 
 1. **Frontend web**
