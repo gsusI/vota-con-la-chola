@@ -49,10 +49,36 @@ class TestExportLibertyDelegatedPersonWindowScrapeTargets(unittest.TestCase):
         review_rows, _ = build_review_rows(queue_report=queue_report, seed_doc=delegated_seed, only_actionable=True)
         targets, summary = build_scrape_targets(review_rows=review_rows, min_priority_score=1)
 
-        self.assertEqual(int(summary["targets_total"]), 8)
-        self.assertEqual(int(summary["packets_total"]), 4)
+        self.assertEqual(int(summary["targets_total"]), 0)
+        self.assertEqual(int(summary["packets_total"]), 0)
+        self.assertEqual(int(summary["top_priority_score"]), 0)
+
+    def test_build_scrape_targets_prioritizes_actionable_review_rows(self) -> None:
+        targets, summary = build_scrape_targets(
+            review_rows=[
+                {
+                    "link_key": "link-1",
+                    "fragment_id": "frag-1",
+                    "norm_id": "norm-1",
+                    "boe_id": "BOE-A-2024-1",
+                    "delegating_actor_label": "Ministerio",
+                    "delegated_institution_label": "AEAT",
+                    "designated_role_title": "Director",
+                    "current_designated_actor_label": "",
+                    "current_appointment_start_date": "",
+                    "current_enforcement_evidence_date": "",
+                    "current_source_url": "https://www.boe.es/boe/dias/2024/01/02/",
+                    "chain_confidence": 0.5,
+                    "reasons_csv": "missing_designated_actor|missing_appointment_start_date|missing_enforcement_evidence_date",
+                }
+            ],
+            min_priority_score=1,
+        )
+
+        self.assertEqual(int(summary["targets_total"]), 1)
+        self.assertEqual(int(summary["packets_total"]), 1)
         self.assertIn("missing_designated_actor", dict(summary["by_reason"]))
-        self.assertEqual(int(summary["top_priority_score"]), 65)
+        self.assertEqual(int(summary["top_priority_score"]), 75)
 
         first = targets[0]
         self.assertIn('site:boe.es "AEAT"', str(first["search_query_primary"]))

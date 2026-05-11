@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "schema_version": "accountability_issue_cluster_reviews_v1",
+    "snapshot_date": "2026-02-12",
+    "reviewed_at": "2026-05-10",
+    "reviewer": "Dev",
+    "review_scope": "public_bucket_label",
+    "membership_caveat": "Reviewed labels do not mean every source-native issue inside the bucket has been manually adjudicated."
+  },
+  "reviews": [
+    {
+      "cluster_id": "education-culture",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Educacion, cultura, universidades y formacion",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches observed education, arts, culture, UNESCO, and training keywords in the current cut.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "public-finance-taxation",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Hacienda publica, presupuestos e impuestos",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches budget, tax, fiscal, VAT, and public-finance terms in the current cut.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "international-relations-treaties",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Relaciones internacionales, tratados y acuerdos exteriores",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches treaties, agreements, protocols, international bodies, and external-relations terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "agriculture-food-rural",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Agricultura, alimentacion, pesca y medio rural",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches agriculture, food, fishing, hunting, agro, and rural-affairs terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "justice-security-rights",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Justicia, seguridad, derechos y orden publico",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches justice, criminal law, security, fundamental-rights, data-protection, and public-order terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "digital-finance-technology",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Servicios digitales, datos, tecnologia y sistema financiero",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches digital services, data, technology, electronic, and finance keywords.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "parliamentary-procedure",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Procedimiento parlamentario y reglas institucionales",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches Senate rules, committee opinions, avocation, legislative procedure, and institutional-rule terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "other-official-actions",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Otras actuaciones oficiales pendientes de agrupacion manual",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Fallback bucket label is intentionally reviewed as a visible remainder, not as a final topic taxonomy.",
+      "caveat": "This bucket explicitly requires issue-level grouping before public topic claims."
+    },
+    {
+      "cluster_id": "climate-environment-water",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Clima, medio ambiente, agua y riesgo territorial",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches climate, emissions, environment, water, basin, biosphere, and territorial-risk terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "labor-social-rights",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Trabajo, derechos sociales, juventud y hogares",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches work, employment, labour, youth, minors, housing, family, and household terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    },
+    {
+      "cluster_id": "health-care",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Sanidad, cuidados, pacientes y salud publica",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Label matches health, patients, disease, medicines, physicians, dependency, disability, and care terms.",
+      "caveat": "Issue membership remains deterministic keyword grouping until issue-level adjudication."
+    }
+  ]
+}

@@ -105,7 +105,7 @@ def build_queue_report(
     limit: int,
     institution_hint_terms: list[str],
     max_actionable_rows: int,
-    dedupe_fragment_latest: bool,
+    dedupe_fragment_latest: bool = True,
 ) -> dict[str, Any]:
     raw_rows = conn.execute(
         """

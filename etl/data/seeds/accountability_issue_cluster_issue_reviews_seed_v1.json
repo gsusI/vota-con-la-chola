@@ -1,0 +1,2928 @@
+{
+  "meta": {
+    "schema_version": "accountability_issue_cluster_issue_reviews_v1",
+    "snapshot_date": "2026-02-12",
+    "reviewed_at": "2026-05-10",
+    "reviewer": "Dev",
+    "review_scope": "source_issue_cluster_assignment",
+    "caveat": "These decisions review source-native issue placement into citizen buckets; they do not review every actor entry inside each issue.",
+    "updated_at": "2026-05-11T06:10:28+00:00",
+    "last_apply_source": "accountability_issue_cluster_assignment_reviews_csv"
+  },
+  "cluster_definitions": [
+    {
+      "cluster_id": "territorial-autonomy-institutional-reform",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Autonomia territorial, administracion local y reformas institucionales",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Bucket covers autonomy statutes, local-government rules, and institutional reform issues not captured by existing keyword buckets.",
+      "caveat": "Issue placement is reviewed for this seed batch only; future similar issues need explicit review or better rules."
+    },
+    {
+      "cluster_id": "sanctions-enforcement-regimes",
+      "decision": "accept",
+      "review_status": "reviewed",
+      "reviewed_label": "Regimen sancionador, inspeccion y potestad administrativa",
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "public_bucket_label",
+      "rationale": "Bucket covers sanctioning, inspection, and administrative enforcement regimes across policy domains.",
+      "caveat": "This bucket groups legal/enforcement responsibility evidence; domain-specific secondary tags remain useful."
+    }
+  ],
+  "issue_reviews": [
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:605/000004",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Aragon autonomy statute reform is territorial/institutional reform."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000006",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Universal Postal Union acts are international treaty/external agreement material."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000007",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "UPAEP congress acts are international treaty/external agreement material."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000080",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Universal Postal Union extraordinary congress decisions are international external-agreement material."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000034",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Penitentiary staff authority status belongs under justice/security/public-order accountability."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000021",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Bases del Regimen Local article change is local-government institutional reform."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000024",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water",
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Coastal-domain urban-settlement issue is mainly environmental/territorial-risk with institutional land-use implications."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000008",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Montes de socios is rural land/forestry accountability."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:605/000003",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Balearic autonomy statute and aforamiento reform is territorial/institutional with justice accountability overlap."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000044",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Revised European Social Charter is social-rights material with treaty status."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000027",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "IMF borrowing arrangements are public-finance accountability with international agreement context."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:605/000001",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Murcia autonomy statute reform is territorial/institutional reform."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:605/000002",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Cantabria autonomy statute and aforamiento reform is territorial/institutional with justice accountability overlap."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2004-18398",
+      "decision": "set_clusters",
+      "primary_cluster_id": "sanctions-enforcement-regimes",
+      "cluster_ids": [
+        "sanctions-enforcement-regimes",
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Tax sanction regulation belongs to enforcement/sanctions with public-finance overlap."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-1994-8985",
+      "decision": "set_clusters",
+      "primary_cluster_id": "sanctions-enforcement-regimes",
+      "cluster_ids": [
+        "sanctions-enforcement-regimes",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Traffic sanction procedure belongs to administrative enforcement with public-order overlap."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2000-15060",
+      "decision": "set_clusters",
+      "primary_cluster_id": "sanctions-enforcement-regimes",
+      "cluster_ids": [
+        "sanctions-enforcement-regimes",
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "Social-order infringements and sanctions belong to enforcement/sanctions with labour/social-rights overlap."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2003-23186",
+      "decision": "set_clusters",
+      "primary_cluster_id": "sanctions-enforcement-regimes",
+      "cluster_ids": [
+        "sanctions-enforcement-regimes"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "BOE sanction reference is reviewed into the enforcement/sanctions bucket pending richer domain text."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2015-3442",
+      "decision": "set_clusters",
+      "primary_cluster_id": "sanctions-enforcement-regimes",
+      "cluster_ids": [
+        "sanctions-enforcement-regimes"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "rationale": "BOE sanction reference is reviewed into the enforcement/sanctions bucket pending richer domain text."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000012",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: organic education law belongs in education/culture."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000013",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: annual state budget bill belongs in public finance/taxation."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:621/000001",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: artistic education law belongs in education/culture."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000010",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: urgent agriculture and food measures belong in agriculture/food/rural affairs."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000005",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "digital-finance-technology"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: digital services tax is primarily public finance, with digital-services overlap."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000006",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "digital-finance-technology"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: financial transactions tax is public finance with financial-system overlap."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000007",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: justice administration COVID procedural measures belong in justice/security/rights."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:626/000004",
+      "decision": "set_clusters",
+      "primary_cluster_id": "parliamentary-procedure",
+      "cluster_ids": [
+        "parliamentary-procedure"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: Senate rules reform belongs in parliamentary procedure."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000011",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: greenhouse-gas emissions trading law belongs in climate/environment."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000009",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: General Tax Law and EU tax-transparency transposition belong in public finance/taxation."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:620/000007",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: Mar Menor legal personality and basin belong in climate/environment/water."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000003",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: electronic trust services belong in digital/data/technology."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000006",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: VAT law modification belongs in public finance/taxation."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:626/000006",
+      "decision": "set_clusters",
+      "primary_cluster_id": "parliamentary-procedure",
+      "cluster_ids": [
+        "parliamentary-procedure"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: Senate rules reform belongs in parliamentary procedure."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000008",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: digital transformation of financial system belongs in digital finance/technology."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:626/000002",
+      "decision": "set_clusters",
+      "primary_cluster_id": "parliamentary-procedure",
+      "cluster_ids": [
+        "parliamentary-procedure"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: Senate rules reform on official languages belongs in parliamentary procedure."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:621/000004",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "digital-finance-technology"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: passenger name record data for terrorism/serious crime belongs in justice/security and data technology."
+    },
+    {
+      "issue_id": "parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+      "decision": "set_clusters",
+      "primary_cluster_id": "parliamentary-procedure",
+      "cluster_ids": [
+        "parliamentary-procedure"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: avocation of legislative initiatives is parliamentary procedure."
+    },
+    {
+      "issue_id": "parl-vote:congreso:vote:d6d15e5a8f16384ce6481d10",
+      "decision": "set_clusters",
+      "primary_cluster_id": "parliamentary-procedure",
+      "cluster_ids": [
+        "parliamentary-procedure"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: committee opinions on legislative initiatives are parliamentary procedure."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000110",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: UNESCO center agreement belongs in education/culture and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000070",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: classified information protection agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000117",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: NATO summit agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000093",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: criminal corruption convention reservation belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000102",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: education/youth/sport treaty belongs in education/culture/social-youth and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000098",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: hunting/waters agreement on Minho river belongs in agriculture/rural and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000086",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: bilateral air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000075",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: diplomatic passport visa agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000089",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: international maritime navigation aids convention belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000077",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: home work convention belongs in labor/social rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000088",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: work in fishing sector convention belongs in agriculture/fisheries labor and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000074",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: Rome Statute International Criminal Court amendment belongs in justice/security."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000092",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: protocol to European facility agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000066",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: EU-Singapore investment protection agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000065",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: EU-Vietnam investment protection agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000067",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed title: classified information protection agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000118",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "UNESCO higher education conference agreement belongs in education/culture and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000097",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Fishing in the international Minho river section belongs in agriculture/fisheries and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000083",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Investment protection agreement with Colombia belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000095",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Public health cooperation agreement belongs in health and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000085",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Security and crime cooperation agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000104",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000068",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Modification of air transport convention belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000087",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Modification of air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000072",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Nationality convention with France belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000073",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Cinematographic coproduction convention belongs in culture and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000115",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Council of Europe public documents convention belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000071",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Cultural heritage convention belongs in culture and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000076",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Violence and harassment in world of work convention belongs in labor/social rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000069",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Foreign evidence in civil or commercial matters belongs in justice/legal cooperation and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000094",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Luxembourg protocol on rail equipment guarantees belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000116",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Montreal Protocol ozone amendment belongs in climate/environment and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000113",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Friendship and cooperation treaty with Portugal belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000091",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Classified information protection agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000090",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense export controls agreement belongs in security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000112",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Security and crime cooperation agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000096",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Decent work for domestic workers convention belongs in labor/social rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000082",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "General Fisheries Commission amendments belong in agriculture/fisheries and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000084",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Social Charter collective complaints protocol belongs in labor/social rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000111",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Classified defense information agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000114",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "UN counter-terrorism office agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000105",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Common aviation area agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000100",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "NATO accession protocol belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000099",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "NATO accession protocol belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000107",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Youth mobility agreement belongs in social/youth affairs and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000079",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Labor migration flows agreement belongs in labor/social rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000081",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000004",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "European bats conservation agreement belongs in environment and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000108",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Crime and security cooperation agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000109",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Friendship and cooperation treaty belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000050",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "IFAD cofinancing agreement belongs in agriculture finance and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000047",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "IMF loan agreement belongs in public finance and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000103",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000002",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Social Security convention belongs in labor/social protection and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000051",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Double taxation convention belongs in public finance/taxation and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000008",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "health-care",
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Agriculture safety and health convention belongs in agriculture health labor and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000003",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care",
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Construction safety and health convention belongs in health labor and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000058",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Foreign evidence in civil or commercial matters belongs in justice/legal cooperation and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000015",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "health-care"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Disability rights and social inclusion belong in labor/social rights and health/care."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000106",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Common aviation area agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000056",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Termination of bilateral investment treaties belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000059",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "European Stability Mechanism treaty modification belongs in public finance and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000041",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000043",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Air transport agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000060",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Single Resolution Fund transfer and mutualization agreement belongs in public finance and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000010",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "IBI tax bonuses for single-parent families belong in public finance and social/family rights."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000054",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Economic partnership agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000053",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "EU-Singapore cooperation agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000057",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Paid activity rights for diplomatic family members belong in labor/social rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000078",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Fleet activity conditions in Spanish and Portuguese waters belong in fisheries and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000048",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Safe and environmentally sound ship recycling convention belongs in environment and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000052",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Fiscal treaty reservation changes belong in public finance/taxation and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000019",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Illegal occupation and public safety bill belongs in justice/security rights."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000020",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Employer Social Security contribution bonuses belong in public finance and labor/social protection."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000045",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "digital-finance-technology",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Electronic legal cooperation requests belong in justice digital procedure and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000042",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "International Olive Council headquarters agreement belongs in agriculture and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000005",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Transfer of sentenced persons agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000055",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Crime and security cooperation agreement belongs in justice/security and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:610/000001",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Energy Charter Treaty denunciation belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000049",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Social Security convention belongs in labor/social protection and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg15:exp:622/000013",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Penal Code modification belongs in justice/security rights."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000014",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "EU-Armenia enhanced partnership agreement belongs in international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000013",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "health-care",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Human organ trafficking convention belongs in justice health and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000015",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Double taxation convention belongs in public finance/taxation and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000016",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Double taxation convention belongs in public finance/taxation and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000018",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology",
+        "justice-security-rights",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Automated personal data protection convention belongs in data technology rights and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000046",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "EU own resources decision belongs in public finance and international treaties."
+    },
+    {
+      "issue_id": "parl-initiative:senado:leg14:exp:610/000012",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Double taxation convention belongs in public finance/taxation and international treaties."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2015-11724",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Citizen security organic law belongs in justice/security rights."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2003-23514",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "General Tax Law belongs in public finance/taxation."
+    },
+    {
+      "issue_id": "legal-norm:es:boe-a-2015-11722",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-10",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Traffic and road safety law belongs in justice/security rights."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3248",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Judicial career magistrate competition belongs in justice governance, not international relations."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3207",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "International administrative agreement with UN-Habitat."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Rail accident victim aid correction; no dedicated transport/disaster cluster in current taxonomy."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3216",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Private university recognition."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3217",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Regional finance law."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3218",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Regional budget law."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3277",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Fishing resources management plan."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3239",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Education state secretary cabinet dismissal belongs in education governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3239",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Education state secretary cabinet dismissal belongs in education governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3237",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "National Police seniority roster belongs in security governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3213",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Electric-grid connection technical requirements belong in energy/environment bucket."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3227",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military promotion belongs in security/defense governance, not labor despite the word empleo."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3228",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military promotion belongs in security/defense governance, not labor despite the word empleo."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3229",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military promotion belongs in security/defense governance, not labor despite the word empleo."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3230",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military promotion belongs in security/defense governance, not labor despite the word empleo."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3231",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Guardia Civil promotion belongs in security governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3232",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Guardia Civil promotion belongs in security governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3233",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3233",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3234",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3234",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3235",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3235",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3236",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3236",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command appointment belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3242",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Health ministry director general appointment belongs in health governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3242",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Health ministry director general appointment belongs in health governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3265",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Pardon of Guardia Civil member belongs in justice/security rights."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3208",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Vocational training course curriculum."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3209",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Professional certificate curriculum in vocational training."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3210",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Teaching habilitation professional certificate belongs in education/training."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3211",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Professional certificate curriculum belongs in education/training."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3212",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Electricity supply and commercialization regulation belongs in energy/environment bucket."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3214",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Canary Islands advisory body composition is institutional/territorial governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3215",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Health-product financing under national health system."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3221",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3221",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3222",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3222",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3223",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3223",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3224",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3224",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Defense senior command dismissal belongs in security/defense governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3225",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military promotion belongs in security/defense governance, not labor despite the word empleo."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3226",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military promotion belongs in security/defense governance, not labor despite the word empleo."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3262",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "CCN product security certification is cybersecurity with security-governance relevance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3264",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "CCN product security certification is cybersecurity with security-governance relevance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3263",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "CCN product security certification is cybersecurity with security-governance relevance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3261",
+      "decision": "set_clusters",
+      "primary_cluster_id": "digital-finance-technology",
+      "cluster_ids": [
+        "digital-finance-technology",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "CCN product security certification is cybersecurity with security-governance relevance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3260",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights",
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Military training modules primarily belong in defense/security, with education/training secondary."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3268",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation",
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Import/locality list under Gaza urgent measures is customs/finance with international-policy context."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3278",
+      "decision": "set_clusters",
+      "primary_cluster_id": "agriculture-food-rural",
+      "cluster_ids": [
+        "agriculture-food-rural"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Fishery ordering provisions."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3244",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Science/universities ministry personnel destination belongs in education/research governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3289",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Official euro exchange rates belong in finance/monetary administration."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3273",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Port/municipal/provincial urban redevelopment agreement belongs in territorial/local governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3276",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Collective agreement wage increase belongs in labor rights."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3275",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Port promotion agreement has no clear current citizen bucket."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3274",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Professional visa agreement for port authority has no clear current citizen bucket."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3272",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University student practice agreement."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3280",
+      "decision": "set_clusters",
+      "primary_cluster_id": "international-relations-treaties",
+      "cluster_ids": [
+        "international-relations-treaties"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "ICEX/CEOE agreement supports internationalization of Spanish companies."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3285",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "ANECA/research evaluation agreement belongs in university/research governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3258",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Local/comarcal administration staffing call."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3252",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "CIEMAT staffing relates to energy/environment research institution."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3246",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University professor appointment."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3246",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University professor appointment."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3254",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Local administration staffing call."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3255",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Local administration staffing call."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3256",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Local administration staffing call."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3257",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Local administration staffing call."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3290",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Mortgage reference indices belong in financial/public finance regulation."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3283",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "ONCE lottery products belong in social-rights/ONCE public-social framework more than finance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3288",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Youth/childhood university agreement for cultural, scientific and technological development."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3271",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Private security selection tests belong in security governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3247",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University teaching corps integration."
+    },
+    {
+      "issue_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3245",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University professor appointment."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3245",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University professor appointment."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3281",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture",
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Training practice agreement with autism-support association; education primary, social inclusion secondary."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3287",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Social Security citizen information services."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3286",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care",
+        "labor-social-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Asbestos-affected workers health actions belong in health with labor secondary."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3284",
+      "decision": "set_clusters",
+      "primary_cluster_id": "labor-social-rights",
+      "cluster_ids": [
+        "labor-social-rights",
+        "health-care"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Dependency, ELA, home assistance and personal autonomy services belong in social care with health secondary."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3240",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Territorial policy ministry personnel destination belongs in institutional/territorial governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3259",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "University teaching access competition."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3267",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Cadastre agreement belongs in public finance/tax-administration context."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3266",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Cadastre agreement belongs in public finance/tax-administration context."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3243",
+      "decision": "set_clusters",
+      "primary_cluster_id": "health-care",
+      "cluster_ids": [
+        "health-care"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Health ministry free-designation destination belongs in health governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3241",
+      "decision": "set_clusters",
+      "primary_cluster_id": "territorial-autonomy-institutional-reform",
+      "cluster_ids": [
+        "territorial-autonomy-institutional-reform"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Territorial policy ministry personnel destination belongs in institutional/territorial governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3269",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Local police integration into gender-violence monitoring system belongs in security/rights."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3282",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Consumer arbitration agreement belongs in consumer rights/dispute resolution."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3238",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Transport ministry personnel appointment/destination without dedicated transport cluster."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3251",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Traffic technical scale selection belongs in road/security administration."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3249",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "State lawyers exam belongs in justice/legal administration."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3220",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "State legal service/Abogacia personnel competition belongs in justice-administration context."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3279",
+      "decision": "set_clusters",
+      "primary_cluster_id": "education-culture",
+      "cluster_ids": [
+        "education-culture"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Cultural heritage digitization/diffusion agreement."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3250",
+      "decision": "set_clusters",
+      "primary_cluster_id": "public-finance-taxation",
+      "cluster_ids": [
+        "public-finance-taxation"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Customs surveillance corps selection belongs in finance/tax/customs administration."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3270",
+      "decision": "set_clusters",
+      "primary_cluster_id": "justice-security-rights",
+      "cluster_ids": [
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Security agreement with local police belongs in security governance."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3219",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Personnel destination resolution without substantive policy domain in current taxonomy."
+    },
+    {
+      "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3253",
+      "decision": "set_clusters",
+      "primary_cluster_id": "climate-environment-water",
+      "cluster_ids": [
+        "climate-environment-water",
+        "justice-security-rights"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Nuclear safety/protection exam has regulatory safety and environmental-risk relevance."
+    },
+    {
+      "issue_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    },
+    {
+      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
+      "decision": "set_clusters",
+      "primary_cluster_id": "other-official-actions",
+      "cluster_ids": [
+        "other-official-actions"
+      ],
+      "reviewer": "Dev",
+      "reviewed_at": "2026-05-11",
+      "review_scope": "source_issue_cluster_assignment",
+      "rationale": "Reviewed issue title and accepted current cluster assignment."
+    }
+  ]
+}

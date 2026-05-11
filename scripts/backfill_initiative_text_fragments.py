@@ -22,6 +22,7 @@ from scripts.backfill_initiative_doc_excerpts import (
     extract_from_xml_or_html,
     should_parse_as_pdf,
 )
+from etl.parlamentario_es.text_documents import _maybe_decompress_gzip_payload
 
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
@@ -189,7 +190,7 @@ def _load_raw_text(row: Any) -> str:
     raw_path = Path(raw_path_value)
     if not raw_path.exists() or not raw_path.is_file():
         return ""
-    raw_bytes = raw_path.read_bytes()
+    raw_bytes = _maybe_decompress_gzip_payload(raw_path.read_bytes())
     if should_parse_as_pdf(_norm(row["content_type"]), raw_path):
         return _norm(extract_from_pdf(raw_bytes, raw_path))
     return _norm(extract_from_xml_or_html(raw_bytes))

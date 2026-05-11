@@ -2,6 +2,7 @@ db_path := env_var_or_default("DB_PATH", "etl/data/staging/politicos-es.db")
 parliamentary_accountability_db_path := env_var_or_default("PARLIAMENTARY_ACCOUNTABILITY_DB_PATH", "")
 initiative_measures_db_path := env_var_or_default("INITIATIVE_MEASURES_DB_PATH", "")
 citizen_db_path := env_var_or_default("CITIZEN_DB_PATH", "")
+accountability_ledger_db_path := env_var_or_default("ACCOUNTABILITY_LEDGER_DB_PATH", "")
 responsibility_explainer_seed_path := env_var_or_default("RESPONSIBILITY_EXPLAINER_SEED_PATH", "etl/data/seeds/responsibility_explainer_cases_seed_v1.json")
 responsibility_explainer_reviewed_ledger_dir := env_var_or_default("RESPONSIBILITY_EXPLAINER_REVIEWED_LEDGER_DIR", "etl/data/manual/responsibility_explainer/reviewed_ledger_batches")
 dev_fixture_db_path := env_var_or_default("DEV_FIXTURE_DB_PATH", "etl/data/staging/politicos-es.dev.db")
@@ -839,6 +840,36 @@ liberty_delegated_alternative_boe_max_queries_per_query_target := env_var_or_def
 liberty_delegated_alternative_boe_timeout := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_TIMEOUT", "30")
 liberty_delegated_alternative_boe_strict_min_candidates := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_STRICT_MIN_CANDIDATES", "1")
 liberty_delegated_alternative_boe_strict_min_links_with_candidates := env_var_or_default("LIBERTY_DELEGATED_ALTERNATIVE_BOE_STRICT_MIN_LINKS_WITH_CANDIDATES", "1")
+accountability_actor_resolution_queue_out := env_var_or_default("ACCOUNTABILITY_ACTOR_RESOLUTION_QUEUE_OUT", "docs/etl/sprints/AI-OPS-ACCOUNTABILITY/evidence/accountability_actor_resolution_queue_latest.json")
+accountability_actor_resolution_queue_csv_out := env_var_or_default("ACCOUNTABILITY_ACTOR_RESOLUTION_QUEUE_CSV_OUT", "docs/etl/sprints/AI-OPS-ACCOUNTABILITY/exports/accountability_actor_resolution_queue_latest.csv")
+accountability_actor_resolution_queue_limit := env_var_or_default("ACCOUNTABILITY_ACTOR_RESOLUTION_QUEUE_LIMIT", "0")
+accountability_issue_cluster_assignment_review_queue_out := env_var_or_default("ACCOUNTABILITY_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_QUEUE_OUT", "docs/etl/sprints/AI-OPS-ACCOUNTABILITY/evidence/accountability_issue_cluster_assignment_review_queue_latest.json")
+accountability_issue_cluster_assignment_review_queue_csv_out := env_var_or_default("ACCOUNTABILITY_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_QUEUE_CSV_OUT", "docs/etl/sprints/AI-OPS-ACCOUNTABILITY/exports/accountability_issue_cluster_assignment_review_queue_latest.csv")
+accountability_issue_cluster_assignment_review_queue_limit := env_var_or_default("ACCOUNTABILITY_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_QUEUE_LIMIT", "0")
+accountability_issue_cluster_assignment_reviews_csv := env_var_or_default("ACCOUNTABILITY_ISSUE_CLUSTER_ASSIGNMENT_REVIEWS_CSV", "docs/etl/sprints/AI-OPS-ACCOUNTABILITY/exports/accountability_issue_cluster_assignment_reviews_latest.csv")
+accountability_issue_cluster_assignment_reviews_report_out := env_var_or_default("ACCOUNTABILITY_ISSUE_CLUSTER_ASSIGNMENT_REVIEWS_REPORT_OUT", "docs/etl/sprints/AI-OPS-ACCOUNTABILITY/evidence/accountability_issue_cluster_assignment_reviews_apply_report_latest.json")
+accountability_min_entries := env_var_or_default("ACCOUNTABILITY_MIN_ENTRIES", "1")
+accountability_min_actors := env_var_or_default("ACCOUNTABILITY_MIN_ACTORS", "1")
+accountability_min_issues := env_var_or_default("ACCOUNTABILITY_MIN_ISSUES", "1")
+accountability_min_evidence_api_questions := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_QUESTIONS", "5")
+accountability_min_evidence_api_issue_clusters := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTERS", "1")
+accountability_min_evidence_api_reviewed_issue_clusters := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_REVIEWED_ISSUE_CLUSTERS", "0")
+accountability_min_evidence_api_issue_cluster_issue_reviews := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTER_ISSUE_REVIEWS", "0")
+accountability_min_evidence_api_issue_cluster_assignment_review_needed := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_NEEDED", "0")
+accountability_max_evidence_api_issue_cluster_assignment_review_needed := env_var_or_default("ACCOUNTABILITY_MAX_EVIDENCE_API_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_NEEDED", "-1")
+accountability_min_evidence_api_gap_answers := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_GAP_ANSWERS", "9")
+accountability_min_evidence_api_qa_answers := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_QA_ANSWERS", "1")
+accountability_min_resolution_pct := env_var_or_default("ACCOUNTABILITY_MIN_RESOLUTION_PCT", "1.0")
+accountability_min_person_id_entries := env_var_or_default("ACCOUNTABILITY_MIN_PERSON_ID_ENTRIES", "0")
+accountability_min_party_id_entries := env_var_or_default("ACCOUNTABILITY_MIN_PARTY_ID_ENTRIES", "0")
+accountability_min_parliamentary_group_id_entries := env_var_or_default("ACCOUNTABILITY_MIN_PARLIAMENTARY_GROUP_ID_ENTRIES", "0")
+accountability_max_ledger_bytes := env_var_or_default("ACCOUNTABILITY_MAX_LEDGER_BYTES", "5000000")
+accountability_max_dossiers_bytes := env_var_or_default("ACCOUNTABILITY_MAX_DOSSIERS_BYTES", "10000000")
+accountability_max_evidence_api_bytes := env_var_or_default("ACCOUNTABILITY_MAX_EVIDENCE_API_BYTES", "8000000")
+accountability_ledger_max_entries_per_issue := env_var_or_default("ACCOUNTABILITY_LEDGER_MAX_ENTRIES_PER_ISSUE", "10")
+accountability_ledger_max_sample_entries_per_actor := env_var_or_default("ACCOUNTABILITY_LEDGER_MAX_SAMPLE_ENTRIES_PER_ACTOR", "2")
+accountability_dossiers_max_issues_per_actor := env_var_or_default("ACCOUNTABILITY_DOSSIERS_MAX_ISSUES_PER_ACTOR", "12")
+accountability_dossiers_max_actors_per_issue := env_var_or_default("ACCOUNTABILITY_DOSSIERS_MAX_ACTORS_PER_ISSUE", "25")
 code_zip_name := env_var_or_default("CODE_ZIP_NAME", "vota-con-la-chola-code.zip")
 hf_dataset_repo_id := env_var_or_default("HF_DATASET_REPO_ID", "vota-con-la-chola-data")
 hf_parquet_batch_rows := env_var_or_default("HF_PARQUET_BATCH_ROWS", "50000")
@@ -1298,6 +1329,123 @@ etl-export-source-scrape-queue:
     --published-out "etl/data/published/source-scrape-queue-{{snapshot_date}}.json" \
     --latest-out "etl/data/published/source-scrape-queue-latest.json"
 
+etl-backfill-accountability-ledger:
+  set -e; \
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{accountability_ledger_db_path}}" ]; then accountability_db="{{accountability_ledger_db_path}}"; fi; \
+  python3 scripts/backfill_persons_from_vote_member_names.py --db "$accountability_db"; \
+  python3 scripts/backfill_mandates_from_vote_member_names.py --db "$accountability_db"; \
+  python3 scripts/backfill_parliamentary_groups_from_vote_member_votes.py --db "$accountability_db"; \
+  python3 scripts/backfill_accountability_ledger_from_parliament.py --db "$accountability_db"; \
+  python3 scripts/backfill_accountability_ledger_from_legal_responsibilities.py --db "$accountability_db"; \
+  python3 scripts/backfill_accountability_ledger_from_sanction_norm_catalog.py --db "$accountability_db"; \
+  python3 scripts/ingestar_politicos_es.py backfill-policy-events-money --db "$accountability_db"; \
+  python3 scripts/ingestar_politicos_es.py backfill-policy-events-boe --db "$accountability_db"; \
+  python3 scripts/backfill_accountability_ledger_from_policy_events.py --db "$accountability_db"; \
+  python3 scripts/backfill_accountability_ledger_from_boe_appointments.py --db "$accountability_db"; \
+  python3 scripts/backfill_accountability_ledger_actor_ids.py --db "$accountability_db"
+
+etl-ingest-boe-sumario-snapshot:
+  set -e; \
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{accountability_ledger_db_path}}" ]; then accountability_db="{{accountability_ledger_db_path}}"; fi; \
+  boe_date="$(printf '%s' '{{snapshot_date}}' | tr -d '-')"; \
+  python3 scripts/ingestar_politicos_es.py ingest \
+    --db "$accountability_db" \
+    --source boe_api_legal \
+    --url "https://www.boe.es/datosabiertos/api/boe/sumario/${boe_date}" \
+    --snapshot-date "{{snapshot_date}}" \
+    --strict-network
+
+etl-export-accountability-ledger:
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{accountability_ledger_db_path}}" ]; then accountability_db="{{accountability_ledger_db_path}}"; fi; \
+  python3 scripts/export_accountability_ledger_snapshot.py \
+    --db "$accountability_db" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "etl/data/published/accountability-ledger-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/accountability-ledger-latest.json" \
+    --max-entries-per-issue "{{accountability_ledger_max_entries_per_issue}}" \
+    --max-sample-entries-per-actor "{{accountability_ledger_max_sample_entries_per_actor}}"
+
+etl-export-accountability-dossiers:
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{accountability_ledger_db_path}}" ]; then accountability_db="{{accountability_ledger_db_path}}"; fi; \
+  python3 scripts/export_accountability_dossier_snapshot.py \
+    --db "$accountability_db" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "etl/data/published/accountability-dossiers-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/accountability-dossiers-latest.json" \
+    --max-issues-per-actor "{{accountability_dossiers_max_issues_per_actor}}" \
+    --max-actors-per-issue "{{accountability_dossiers_max_actors_per_issue}}"
+
+etl-export-accountability-evidence-api:
+  python3 scripts/export_accountability_evidence_api_snapshot.py \
+    --dossiers "etl/data/published/accountability-dossiers-{{snapshot_date}}.json" \
+    --ledger "etl/data/published/accountability-ledger-{{snapshot_date}}.json" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "etl/data/published/accountability-evidence-api-{{snapshot_date}}.json" \
+    --latest-out "etl/data/published/accountability-evidence-api-latest.json"
+
+etl-export-accountability-actor-resolution-queue:
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{accountability_ledger_db_path}}" ]; then accountability_db="{{accountability_ledger_db_path}}"; fi; \
+  python3 scripts/export_accountability_actor_resolution_queue.py \
+    --db "$accountability_db" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "{{accountability_actor_resolution_queue_out}}" \
+    --csv-out "{{accountability_actor_resolution_queue_csv_out}}" \
+    --limit "{{accountability_actor_resolution_queue_limit}}"
+
+etl-export-accountability-issue-cluster-assignment-review-queue:
+  python3 scripts/export_accountability_issue_cluster_assignment_review_queue.py \
+    --evidence-api "etl/data/published/accountability-evidence-api-{{snapshot_date}}.json" \
+    --snapshot-date "{{snapshot_date}}" \
+    --out "{{accountability_issue_cluster_assignment_review_queue_out}}" \
+    --csv-out "{{accountability_issue_cluster_assignment_review_queue_csv_out}}" \
+    --limit "{{accountability_issue_cluster_assignment_review_queue_limit}}"
+
+etl-apply-accountability-issue-cluster-assignment-reviews:
+  python3 scripts/apply_accountability_issue_cluster_assignment_reviews.py \
+    --csv "{{accountability_issue_cluster_assignment_reviews_csv}}" \
+    --seed "etl/data/seeds/accountability_issue_cluster_issue_reviews_seed_v1.json" \
+    --out "etl/data/seeds/accountability_issue_cluster_issue_reviews_seed_v1.json" \
+    --report-out "{{accountability_issue_cluster_assignment_reviews_report_out}}"
+
+etl-validate-accountability-artifacts:
+  python3 scripts/validate_accountability_artifacts.py \
+    --ledger "etl/data/published/accountability-ledger-{{snapshot_date}}.json" \
+    --dossiers "etl/data/published/accountability-dossiers-{{snapshot_date}}.json" \
+    --evidence-api "etl/data/published/accountability-evidence-api-{{snapshot_date}}.json" \
+    --snapshot-date "{{snapshot_date}}" \
+    --min-entries "{{accountability_min_entries}}" \
+    --min-actors "{{accountability_min_actors}}" \
+    --min-issues "{{accountability_min_issues}}" \
+    --min-evidence-api-questions "{{accountability_min_evidence_api_questions}}" \
+    --min-evidence-api-issue-clusters "{{accountability_min_evidence_api_issue_clusters}}" \
+    --min-evidence-api-reviewed-issue-clusters "{{accountability_min_evidence_api_reviewed_issue_clusters}}" \
+    --min-evidence-api-issue-cluster-issue-reviews "{{accountability_min_evidence_api_issue_cluster_issue_reviews}}" \
+    --min-evidence-api-issue-cluster-assignment-review-needed "{{accountability_min_evidence_api_issue_cluster_assignment_review_needed}}" \
+    --max-evidence-api-issue-cluster-assignment-review-needed "{{accountability_max_evidence_api_issue_cluster_assignment_review_needed}}" \
+    --min-evidence-api-gap-answers "{{accountability_min_evidence_api_gap_answers}}" \
+    --min-evidence-api-qa-answers "{{accountability_min_evidence_api_qa_answers}}" \
+    --min-resolution-pct "{{accountability_min_resolution_pct}}" \
+    --min-person-id-entries "{{accountability_min_person_id_entries}}" \
+    --min-party-id-entries "{{accountability_min_party_id_entries}}" \
+    --min-parliamentary-group-id-entries "{{accountability_min_parliamentary_group_id_entries}}" \
+    --max-ledger-bytes "{{accountability_max_ledger_bytes}}" \
+    --max-dossiers-bytes "{{accountability_max_dossiers_bytes}}" \
+    --max-evidence-api-bytes "{{accountability_max_evidence_api_bytes}}"
+
+etl-refresh-accountability-ledger:
+  just etl-backfill-accountability-ledger
+  just etl-export-accountability-ledger
+  just etl-export-accountability-dossiers
+  just etl-export-accountability-evidence-api
+  just etl-validate-accountability-artifacts
+  just etl-export-accountability-actor-resolution-queue
+  just etl-export-accountability-issue-cluster-assignment-review-queue
+
 etl-run-source-scrape-queue:
   python3 scripts/run_source_scrape_queue.py \
     --db "{{db_path}}" \
@@ -1315,6 +1463,10 @@ etl-run-source-scrape-queue-prefect:
 etl-publish-hf:
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
+  just etl-export-accountability-ledger
+  just etl-export-accountability-dossiers
+  just etl-export-accountability-evidence-api
+  just etl-validate-accountability-artifacts
   python3 scripts/check_public_privacy_leaks.py --path etl/data/published
   sqlite_arg="--skip-sqlite-gz"; \
   sensitive_arg=""; \
@@ -1329,6 +1481,10 @@ etl-publish-hf:
 etl-publish-hf-dry-run:
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
+  just etl-export-accountability-ledger
+  just etl-export-accountability-dossiers
+  just etl-export-accountability-evidence-api
+  just etl-validate-accountability-artifacts
   python3 scripts/check_public_privacy_leaks.py --path etl/data/published
   sqlite_arg="--skip-sqlite-gz"; \
   sensitive_arg=""; \
@@ -3092,9 +3248,66 @@ gh-pages-next-watch:
       fi; \
       npm run dev -- --hostname 0.0.0.0 --port {{gh_pages_next_port}}'
 
+accountability-dossiers-next-prime:
+  mkdir -p "{{gh_pages_dir}}/accountability-dossiers/data"
+  mkdir -p "{{gh_pages_dir}}/accountability-evidence/data"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/accountability-evidence/data"
+  set -e; \
+  accountability_db="{{db_path}}"; \
+  if [ -n "{{accountability_ledger_db_path}}" ]; then accountability_db="{{accountability_ledger_db_path}}"; fi; \
+  if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
+    python3 scripts/export_accountability_dossier_snapshot.py \
+      --db "$accountability_db" \
+      --snapshot-date "{{snapshot_date}}" \
+      --out "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
+      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
+    python3 scripts/export_accountability_ledger_snapshot.py \
+      --db "$accountability_db" \
+      --snapshot-date "{{snapshot_date}}" \
+      --out "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
+      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
+    python3 scripts/export_accountability_evidence_api_snapshot.py \
+      --dossiers "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
+      --ledger "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
+      --snapshot-date "{{snapshot_date}}" \
+      --out "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json" \
+      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; \
+  else \
+    if [ -f "etl/data/published/accountability-dossiers-latest.json" ]; then \
+      cp -f "etl/data/published/accountability-dossiers-latest.json" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
+      cp -f "etl/data/published/accountability-dossiers-latest.json" "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
+    elif [ ! -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" ]; then \
+      printf '%s\n' '{"meta":{"schema_version":"accountability_dossier_snapshot_v1","generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}"},"snapshot_date":"{{snapshot_date}}","coverage":{"entries_total":0,"actors_total":0,"actors_exported":0,"actors_truncated":false,"issues_total":0,"issues_exported":0,"issues_truncated":false,"issue_actor_edges_total":0,"entries_with_person_id":0,"entries_with_party_id":0,"entries_with_parliamentary_group_id":0,"entries_with_mandate_id":0,"entries_with_institution_id":0,"entries_with_org_unit_id":0,"entries_with_position_id":0,"entries_by_role":{},"entries_by_kind":{},"entries_by_actor_kind":{}},"actors":[],"issues":[]}' > "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
+      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
+    else \
+      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
+    fi; \
+    if [ -f "etl/data/published/accountability-ledger-latest.json" ]; then \
+      cp -f "etl/data/published/accountability-ledger-latest.json" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
+      cp -f "etl/data/published/accountability-ledger-latest.json" "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
+    elif [ ! -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" ]; then \
+      printf '%s\n' '{"meta":{"schema_version":"accountability_ledger_snapshot_v1","generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","issue_id":""},"snapshot_date":"{{snapshot_date}}","coverage":{"issues_total":0,"entries_total":0,"entries_exported":0,"entries_truncated":false,"issues_with_truncated_entries":0,"actors_total":0,"entries_with_resolved_actor_id":0,"entries_with_person_id":0,"entries_with_party_id":0,"entries_with_parliamentary_group_id":0,"entries_with_mandate_id":0,"entries_with_institution_id":0,"entries_with_org_unit_id":0,"entries_with_position_id":0,"entries_by_role":{},"entries_by_kind":{},"entries_by_actor_kind":{}},"actors":[],"issues":[]}' > "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
+      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
+    else \
+      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
+    fi; \
+    if [ -f "etl/data/published/accountability-evidence-api-latest.json" ]; then \
+      cp -f "etl/data/published/accountability-evidence-api-latest.json" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+      cp -f "etl/data/published/accountability-evidence-api-latest.json" "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; \
+    elif [ ! -f "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json" ]; then \
+      printf '%s\n' '{"meta":{"schema_version":"accountability_evidence_api_v1","generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}"},"snapshot_date":"{{snapshot_date}}","coverage":{"source_entries_total":0,"source_actors_total":0,"source_issues_total":0,"question_templates_total":0,"actor_answers_total":0,"issue_answers_total":0,"actor_issue_refs_total":0,"issue_clusters_total":0,"issue_cluster_links_total":0,"issue_cluster_review_items_total":0,"issue_cluster_review_status_counts":{},"fallback_issue_cluster_answers_total":0,"gap_answers_total":0,"qa_answers_total":0,"qa_answers_with_self_route_total":0,"evidence_samples_total":0,"answer_status_counts":{},"gap_answer_status_counts":{},"qa_answer_status_counts":{}},"question_templates":[],"actor_answers":[],"issue_answers":[],"actor_issue_refs":[],"issue_clusters":[],"issue_cluster_review_queue":[],"gap_answers":[],"qa_answers":[],"indexes":{"actor_answer_by_key":{},"issue_answer_by_id":{},"issue_cluster_by_id":{},"issue_clusters_by_issue_id":{},"issue_cluster_review_by_id":{},"gap_answer_by_dimension":{},"qa_answer_by_id":{},"qa_route_by_id":{}}}' > "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; \
+      cp -f "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+    else \
+      cp -f "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+    fi; \
+  fi
+
 gh-pages-next-prime:
   mkdir -p "{{gh_pages_dir}}"/parliamentary-accountability/data
   mkdir -p "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data"
+  mkdir -p "{{gh_pages_dir}}"/accountability-dossiers/data
+  mkdir -p "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data"
   mkdir -p "{{gh_pages_dir}}"/responsibility-explainer/data
   mkdir -p "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data"
   mkdir -p "{{gh_pages_dir}}"/people/data
@@ -3177,6 +3390,7 @@ gh-pages-next-prime:
       '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","generated_by":"gh-pages-next-prime","filters":{}}, "coverage":{"indicator_series_total":0,"indicator_points_total":0,"interventions_total":0,"intervention_events_total":0,"causal_estimates_total":0,"policy_events_total":0,"series_loaded":0,"events_loaded":0,"events_in_association":0,"associations_total":0,"series_in_association":0,"series_by_source":{},"series_coverage_by_point_count":{"min_points_included":0,"max_points_included":0}}, "series":[],"policy_events":[],"associations":[],"limitations":{"interventions_available":false,"intervention_events_available":false,"causal_estimates_available":false,"description":["Stub temporal: sin snapshot generado en modo local sin export"],"method_note":"Correlación no implica causalidad."},"filters":{"series_source_ids":[],"event_source_ids":[],"domains":[]}}' \
       > "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
   fi
+  @just accountability-dossiers-next-prime
   @just responsibility-explainer-next-prime
   if [ -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
     cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
@@ -3338,6 +3552,7 @@ explorer-datasette:
 
 cloudflare-pages-build:
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
+  GH_PAGES_NEXT_PRIME_EXPORT=0 just accountability-dossiers-next-prime
   mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
   if [ ! -f "{{gh_pages_next_app_dir}}/node_modules/next/dist/bin/next" ]; then \
     npm --prefix "{{gh_pages_next_app_dir}}" --cache /tmp/vclc-npm-cache --logs-dir /tmp/vclc-npm-logs ci --no-audit --no-fund; \
@@ -3354,7 +3569,7 @@ explorer-gh-pages-build:
   @just cloudflare-pages-build
 
 cloudflare-pages-refresh-data:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
   mkdir -p \
     {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
     {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
@@ -3365,6 +3580,7 @@ cloudflare-pages-refresh-data:
     {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/vote-explainer/data \
     {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/responsibility-explainer/data \
     {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/parliamentary-accountability/data \
+    {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/accountability-dossiers/data \
     {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/initiative-lifecycle/data \
     {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/political-positions/data \
     {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elections-behavior/data \
@@ -3386,6 +3602,7 @@ cloudflare-pages-refresh-data:
     echo "Reusing existing {{gh_pages_next_app_dir}}/node_modules"; \
   fi
   @just responsibility-explainer-next-prime
+  @just accountability-dossiers-next-prime
   @just vote-explainer-next-prime
   cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"

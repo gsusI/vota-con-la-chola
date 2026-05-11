@@ -259,6 +259,37 @@ CREATE TABLE IF NOT EXISTS person_org_memberships (
   UNIQUE (person_id, membership_kind, org_unit_id, party_id, position_id, role_label, start_date, source_url)
 );
 
+CREATE TABLE IF NOT EXISTS parliamentary_groups (
+  parliamentary_group_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  legislature TEXT,
+  group_code TEXT NOT NULL,
+  name TEXT NOT NULL,
+  normalized_name TEXT,
+  source_url TEXT,
+  raw_payload TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, legislature, group_code)
+);
+
+CREATE TABLE IF NOT EXISTS person_parliamentary_group_memberships (
+  membership_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  person_id INTEGER NOT NULL REFERENCES persons(person_id) ON DELETE CASCADE,
+  parliamentary_group_id INTEGER NOT NULL REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  legislature TEXT,
+  start_date TEXT,
+  end_date TEXT,
+  source_url TEXT,
+  evidence_quote TEXT,
+  raw_payload TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (person_id, parliamentary_group_id, source_id, start_date)
+);
+
 CREATE TABLE IF NOT EXISTS mandates (
   mandate_id INTEGER PRIMARY KEY AUTOINCREMENT,
   person_id INTEGER NOT NULL REFERENCES persons(person_id),
@@ -396,6 +427,7 @@ CREATE TABLE IF NOT EXISTS parl_vote_member_votes (
   member_name_normalized TEXT,
   person_id INTEGER REFERENCES persons(person_id),
   group_code TEXT,
+  parliamentary_group_id INTEGER REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE SET NULL,
   vote_choice TEXT NOT NULL,
   source_id TEXT NOT NULL REFERENCES sources(source_id),
   source_url TEXT,
@@ -507,6 +539,36 @@ CREATE TABLE IF NOT EXISTS parl_vote_event_text_versions (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
   UNIQUE (vote_event_id, initiative_id, is_primary)
+);
+
+CREATE TABLE IF NOT EXISTS parl_text_fragments (
+  fragment_id TEXT PRIMARY KEY,
+  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  fragment_order INTEGER NOT NULL,
+  fragment_kind TEXT NOT NULL,
+  fragment_label TEXT,
+  char_start INTEGER,
+  char_end INTEGER,
+  fragment_text TEXT NOT NULL,
+  text_hash TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS parl_fragment_measure_reviews (
+  fragment_id TEXT PRIMARY KEY REFERENCES parl_text_fragments(fragment_id) ON DELETE CASCADE,
+  initiative_id TEXT NOT NULL REFERENCES parl_initiatives(initiative_id) ON DELETE CASCADE,
+  initiative_text_version_id TEXT NOT NULL REFERENCES parl_initiative_text_versions(initiative_text_version_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  status TEXT NOT NULL CHECK (status IN ('pending', 'resolved', 'ignored')) DEFAULT 'pending',
+  note TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
 );
 
 -- Link votes to initiatives when we can do it deterministically (or with explicit method+confidence).
@@ -1124,6 +1186,138 @@ CREATE TABLE IF NOT EXISTS responsibility_explainer_structural_evidence_rows (
 
 CREATE INDEX IF NOT EXISTS idx_responsibility_explainer_structural_evidence_case
 ON responsibility_explainer_structural_evidence_rows(case_id, evidence_order, evidence_id);
+
+-- Generic accountability ledger: issue-led actor/action/evidence spine.
+-- This is the cross-case layer behind actor dossiers, issue ledgers, and Q&A.
+CREATE TABLE IF NOT EXISTS accountability_issues (
+  issue_id TEXT PRIMARY KEY,
+  case_id TEXT REFERENCES responsibility_explainer_cases(case_id) ON DELETE SET NULL,
+  canonical_key TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  summary TEXT,
+  scope TEXT,
+  domain_id INTEGER REFERENCES domains(domain_id),
+  topic_id INTEGER REFERENCES topics(topic_id),
+  issue_status TEXT NOT NULL DEFAULT 'active' CHECK (
+    issue_status IN ('draft', 'active', 'archived')
+  ),
+  source_kind TEXT NOT NULL DEFAULT 'derived' CHECK (
+    source_kind IN ('derived', 'manual_seed', 'official_source', 'mixed')
+  ),
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS accountability_ledger_entries (
+  entry_id TEXT PRIMARY KEY,
+  issue_id TEXT NOT NULL REFERENCES accountability_issues(issue_id) ON DELETE CASCADE,
+  entry_kind TEXT NOT NULL CHECK (
+    entry_kind IN (
+      'promise',
+      'parliamentary_action',
+      'rule',
+      'appointment',
+      'money',
+      'implementation',
+      'enforcement',
+      'audit',
+      'outcome',
+      'blocker',
+      'responsibility_link',
+      'other'
+    )
+  ),
+  accountability_role TEXT CHECK (
+    accountability_role IN (
+      'promised',
+      'proposed',
+      'sponsored',
+      'voted_for',
+      'voted_against',
+      'abstained',
+      'approved',
+      'published',
+      'appointed',
+      'dismissed',
+      'delegated_to',
+      'implemented',
+      'funded',
+      'contracted',
+      'subsidized',
+      'enforced',
+      'audited',
+      'current_owner',
+      'unknown'
+    )
+  ),
+  role_in_chain TEXT,
+  actor_label TEXT NOT NULL,
+  actor_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    actor_kind IN ('person', 'party', 'institution', 'org_unit', 'position', 'group', 'unknown')
+  ),
+  person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  party_id INTEGER REFERENCES parties(party_id) ON DELETE SET NULL,
+  parliamentary_group_id INTEGER REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE SET NULL,
+  mandate_id INTEGER REFERENCES mandates(mandate_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  position_id INTEGER REFERENCES government_positions(position_id) ON DELETE SET NULL,
+  linked_object_type TEXT,
+  linked_object_id TEXT,
+  policy_event_id TEXT REFERENCES policy_events(policy_event_id) ON DELETE SET NULL,
+  topic_evidence_id INTEGER REFERENCES topic_evidence(evidence_id) ON DELETE SET NULL,
+  legal_fragment_id TEXT REFERENCES legal_norm_fragments(fragment_id) ON DELETE SET NULL,
+  event_date TEXT,
+  published_date TEXT,
+  title TEXT,
+  summary TEXT,
+  accountability_question TEXT,
+  confidence REAL,
+  evidence_tier INTEGER CHECK (evidence_tier BETWEEN 0 AND 5),
+  source_id TEXT REFERENCES sources(source_id),
+  source_title TEXT,
+  source_url TEXT,
+  source_locator TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  evidence_quote TEXT,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_issues_case
+ON accountability_issues(case_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_issues_domain_topic
+ON accountability_issues(domain_id, topic_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_issue
+ON accountability_ledger_entries(issue_id, entry_kind);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_role
+ON accountability_ledger_entries(accountability_role);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_actor_label
+ON accountability_ledger_entries(actor_label);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_person
+ON accountability_ledger_entries(person_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_party
+ON accountability_ledger_entries(party_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_parliamentary_group
+ON accountability_ledger_entries(parliamentary_group_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_institution
+ON accountability_ledger_entries(institution_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_policy_event
+ON accountability_ledger_entries(policy_event_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_source
+ON accountability_ledger_entries(source_id, source_record_pk);
 
 -- Politica publica: dominios, ejes y eventos (accion revelada).
 -- Nota: estas tablas son el "hueco" intencional para evolucionar desde temas/votos
@@ -1883,6 +2077,14 @@ CREATE INDEX IF NOT EXISTS idx_person_org_memberships_person_id ON person_org_me
 CREATE INDEX IF NOT EXISTS idx_person_org_memberships_org_unit_id ON person_org_memberships(org_unit_id);
 CREATE INDEX IF NOT EXISTS idx_person_org_memberships_party_id ON person_org_memberships(party_id);
 CREATE INDEX IF NOT EXISTS idx_person_org_memberships_position_id ON person_org_memberships(position_id);
+CREATE INDEX IF NOT EXISTS idx_parliamentary_groups_source
+    ON parliamentary_groups(source_id, legislature, group_code);
+CREATE INDEX IF NOT EXISTS idx_parliamentary_groups_institution_id
+    ON parliamentary_groups(institution_id);
+CREATE INDEX IF NOT EXISTS idx_person_parliamentary_group_memberships_person
+    ON person_parliamentary_group_memberships(person_id);
+CREATE INDEX IF NOT EXISTS idx_person_parliamentary_group_memberships_group
+    ON person_parliamentary_group_memberships(parliamentary_group_id);
 CREATE INDEX IF NOT EXISTS idx_institutions_admin_level_id ON institutions(admin_level_id);
 CREATE INDEX IF NOT EXISTS idx_institutions_territory_id ON institutions(territory_id);
 CREATE INDEX IF NOT EXISTS idx_party_aliases_party_id ON party_aliases(party_id);
@@ -1908,6 +2110,10 @@ CREATE INDEX IF NOT EXISTS idx_parl_initiative_documents_source_record_pk ON par
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_text_versions_initiative ON parl_initiative_text_versions(initiative_id);
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_text_versions_pubdate ON parl_initiative_text_versions(published_date);
 CREATE INDEX IF NOT EXISTS idx_parl_initiative_text_versions_source_record_pk ON parl_initiative_text_versions(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_text_version ON parl_text_fragments(initiative_text_version_id);
+CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_initiative ON parl_text_fragments(initiative_id);
+CREATE INDEX IF NOT EXISTS idx_parl_text_fragments_kind ON parl_text_fragments(fragment_kind);
+CREATE INDEX IF NOT EXISTS idx_parl_fragment_measure_reviews_status ON parl_fragment_measure_reviews(status);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_vote ON parl_vote_event_initiatives(vote_event_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_init ON parl_vote_event_initiatives(initiative_id);
 CREATE INDEX IF NOT EXISTS idx_parl_vote_event_text_versions_vote ON parl_vote_event_text_versions(vote_event_id);
