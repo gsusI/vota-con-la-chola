@@ -1,0 +1,38 @@
+{
+  "source": "boe_open_data_sumario_smoke",
+  "snapshot_date": "2026-02-12",
+  "official_endpoint_pattern": "https://www.boe.es/datosabiertos/api/boe/sumario/{yyyymmdd}",
+  "recipe": "etl-ingest-boe-sumario-snapshot",
+  "strict_network": true,
+  "source_records_loaded": 85,
+  "source_records_valid": 85,
+  "policy_events_seen": 85,
+  "policy_events_mapped": 85,
+  "policy_events_skipped": 0,
+  "policy_events_with_source_url": 85,
+  "policy_events_null_event_date_with_published": 85,
+  "appointment_candidates": 12,
+  "appointment_entries": 12,
+  "persons_total": 10,
+  "positions_total": 8,
+  "memberships_total": 12,
+  "appointment_entries_with_position_id": 12,
+  "foreign_key_check_rows": 0,
+  "rich_db_refresh": {
+    "ledger_entries_total": 126757,
+    "ledger_issues_total": 225,
+    "ledger_actors_total": 920,
+    "ledger_entries_with_resolved_actor_id": 126757,
+    "boe_rule_entries": 85,
+    "boe_appointment_entries": 12,
+    "boe_issue_cluster_assignment_review_needed": 97,
+    "actor_resolution_queue_unresolved_entries": 0
+  },
+  "notes": [
+    "Smoke ran on an isolated scratch SQLite DB, not the rich published DB.",
+    "Rich DB was refreshed after the smoke; BOE now contributes published ledger/dossier/Evidence API rows.",
+    "BOE OpenData summary JSON preserves section, department, epigraph, legal document URLs, and publication date.",
+    "Appointment title parsing now handles both 'se nombra a persona como cargo' and 'se nombra cargo a persona' patterns, including honorific tails after military/professional prefixes.",
+    "Political-appointee classification remains conservative: high-office title patterns are tagged political_appointee; career/professional positions remain unknown."
+  ]
+}
