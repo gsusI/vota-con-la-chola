@@ -133,7 +133,7 @@
       "expect": {
         "preset": null,
         "error_code": "unsupported_version",
-        "error_contains": "version"
+        "error_contains": "versi.n"
       }
     },
     {
@@ -151,7 +151,7 @@
       "expect": {
         "preset": null,
         "error_code": "empty_payload",
-        "error_contains": "vacio"
+        "error_contains": "vac.o"
       }
     },
     {
@@ -160,7 +160,7 @@
       "expect": {
         "preset": null,
         "error_code": "no_supported_fields",
-        "error_contains": "campos validos"
+        "error_contains": "campos v.lidos"
       }
     }
   ],

@@ -28,5 +28,5 @@ test("coherence cards expose strict drilldown markers for mismatch trace links",
   assert.match(html, /data-concern-id="\$\{esc\(/i);
   assert.match(html, /auditTid/i);
   assert.match(html, /drillConcernId/i);
-  assert.match(html, /Auditar mismatch/i);
+  assert.match(html, /Auditar desajuste/i);
 });

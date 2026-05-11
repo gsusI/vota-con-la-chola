@@ -19,9 +19,9 @@ test("citizen UI renders evidence trust panel markers in party cards", () => {
   const html = readCitizenHtml();
   assert.match(html, /data-evidence-trust-panel/i);
   assert.match(html, /data-evidence-trust-freshness/i);
-  assert.match(html, /fuente_/i);
-  assert.match(html, /edad_fuente=/i);
-  assert.match(html, /metodo=/i);
+  assert.match(html, /fuente\s+\$\{esc\(freshnessLabel\)\}/i);
+  assert.match(html, /edad de fuente:/i);
+  assert.match(html, /método:/i);
 });
 
 test("citizen UI exposes snapshot freshness and honesty markers in the banner", () => {
@@ -33,5 +33,5 @@ test("citizen UI exposes snapshot freshness and honesty markers in the banner", 
   assert.match(html, /data-snapshot-freshness-warning=["']1["']/i);
   assert.match(html, /<strong>Lectura honesta:<\/strong>/i);
   assert.match(html, /<strong>Frescura:<\/strong>/i);
-  assert.match(html, /Explorer SQL/i);
+  assert.match(html, /Explorador SQL/i);
 });

@@ -21,7 +21,7 @@ test("citizen UI exposes weak-pack markers in tags and hints", () => {
   const html = readCitizenHtml();
   assert.match(html, /data-pack-weak/i);
   assert.match(html, /data-pack-weak-hint/i);
-  assert.match(html, /pack_debil/i);
-  assert.match(html, /packs_weak/i);
-  assert.match(html, /pack_quality/i);
+  assert.match(html, /paquete débil/i);
+  assert.match(html, /paquetes débiles/i);
+  assert.match(html, /calidad del paquete/i);
 });

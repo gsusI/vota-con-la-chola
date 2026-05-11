@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vota Con La Chola | Temas (dice vs hace)</title>
+    <title>Vota Con La Chola | Temas (dichos vs hechos)</title>
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -542,19 +542,19 @@
     <div class="app">
       <header class="top card">
         <div class="nav">
-          <a class="pill" href="../">Indice</a>
-          <a class="pill" href="../explorer/" data-local-api="explorer-sql">Explorer SQL</a>
+          <a class="pill" href="../">Índice</a>
+          <a class="pill" href="../explorer/" data-local-api="explorer-sql">Explorador SQL</a>
           <a class="pill" href="../explorer-sources/">Fuentes</a>
         </div>
 
         <div class="hero">
           <div>
-            <p class="eyebrow">Analitica</p>
-            <h1>Temas: dice vs hace</h1>
+            <p class="eyebrow">Analítica</p>
+            <h1>Temas: dichos vs hechos</h1>
             <p class="sub">
-              Navega por <span class="mono">topic_sets</span> (scope) -&gt; temas (<span class="mono">topic_set_topics</span>) -&gt;
+              Navega por <span class="mono">topic_sets</span> (ámbito) -&gt; temas (<span class="mono">topic_set_topics</span>) -&gt;
               posiciones (<span class="mono">topic_positions</span>) -&gt; evidencia (<span class="mono">topic_evidence</span>) y
-              cola de revision (<span class="mono">topic_evidence_reviews</span>).
+              cola de revisión (<span class="mono">topic_evidence_reviews</span>).
             </p>
           </div>
           <div class="status">
@@ -571,11 +571,11 @@
       <main class="layout">
         <section class="panel card">
           <div class="head">
-            <h2>1) Topic sets (scope)</h2>
+            <h2>1) Conjuntos de temas (ámbito)</h2>
             <p class="hint">Scope: institucion / territorio / nivel / legislatura.</p>
           </div>
           <div class="controls">
-            <input id="sets-q" type="text" placeholder="Buscar sets..." />
+            <input id="sets-q" type="text" placeholder="Buscar conjuntos..." />
             <label class="toggle"><input id="sets-active" type="checkbox" checked /> Solo activos</label>
             <button class="btn" id="reload" type="button">Recargar</button>
           </div>
@@ -584,11 +584,11 @@
 
         <section class="panel card">
           <div class="head">
-            <h2>2) Temas (en el set)</h2>
+            <h2>2) Temas (en el conjunto)</h2>
             <p class="hint">Stake scoring: <span class="mono">topic_set_topics</span>.</p>
           </div>
           <div class="controls">
-            <label class="toggle"><input id="topics-high" type="checkbox" /> Solo high-stakes</label>
+            <label class="toggle"><input id="topics-high" type="checkbox" /> Solo alta relevancia</label>
             <input id="topics-q" type="text" placeholder="Buscar temas..." />
           </div>
           <div class="list" id="topics"></div>
@@ -597,50 +597,50 @@
         <section class="panel card wide">
           <div class="head">
             <h2>3) Posiciones y evidencia</h2>
-            <p class="hint">Selecciona tema y luego una persona. Usa Explorer SQL para auditar la tabla completa.</p>
+            <p class="hint">Selecciona un tema y luego una persona. Usa el Explorador SQL para auditar la tabla completa.</p>
           </div>
           <div class="controls">
             <select id="method">
-              <option value="votes" selected>Method: votes (does)</option>
-              <option value="declared">Method: declared (says)</option>
-              <option value="combined">Method: combined</option>
-              <option value="all">Method: all</option>
+              <option value="votes" selected>Método: votos (hechos)</option>
+              <option value="declared">Método: declaraciones (dichos)</option>
+              <option value="combined">Método: combinado</option>
+              <option value="all">Método: todos</option>
             </select>
             <select id="stance">
-              <option value="">Stance: todas</option>
-              <option value="support">support</option>
-              <option value="oppose">oppose</option>
-              <option value="mixed">mixed</option>
-              <option value="unclear">unclear</option>
-              <option value="no_signal">no_signal</option>
+              <option value="">Postura: todas</option>
+              <option value="support">a favor</option>
+              <option value="oppose">en contra</option>
+              <option value="mixed">mixta</option>
+              <option value="unclear">incierta</option>
+              <option value="no_signal">sin señal</option>
             </select>
             <input id="positions-q" type="text" placeholder="Filtrar posiciones (cliente)..." />
             <button class="btn primary" id="open-sql" type="button" data-local-api="explorer-sql">
-              Abrir en Explorer SQL
+              Abrir en el Explorador SQL
             </button>
           </div>
 
           <div class="coherence">
             <div class="headrow">
-              <h3>Coherencia (says vs does)</h3>
-              <span class="badge mono" id="coherence-scope">scope: -</span>
+              <h3>Coherencia entre dichos y hechos</h3>
+              <span class="badge mono" id="coherence-scope">ámbito: -</span>
             </div>
-            <div class="panemeta mono" id="coherence-meta">Selecciona un tema para calcular overlap/coherent/incoherent.</div>
+            <div class="panemeta mono" id="coherence-meta">Selecciona un tema para calcular solapamientos, coherencias e incoherencias.</div>
             <div class="coh-grid">
               <button class="coh-btn" id="coh-overlap" type="button">
-                <span>overlap</span>
+                <span>solapamiento</span>
                 <strong id="coh-overlap-count">0</strong>
               </button>
               <button class="coh-btn ok" id="coh-coherent" type="button">
-                <span>coherent</span>
+                <span>coherentes</span>
                 <strong id="coh-coherent-count">0</strong>
               </button>
               <button class="coh-btn bad" id="coh-incoherent" type="button">
-                <span>incoherent</span>
+                <span>incoherentes</span>
                 <strong id="coh-incoherent-count">0</strong>
               </button>
             </div>
-            <div class="meta" id="coherence-foot">Click en un bucket para drill-down a filas de evidencia.</div>
+            <div class="meta" id="coherence-foot">Haz clic en un grupo para ver los registros de evidencia.</div>
           </div>
 
           <div class="split">
@@ -652,7 +652,7 @@
               <div class="panemeta mono" id="positions-meta">Selecciona un tema.</div>
               <div class="panebody" id="positions"></div>
               <div class="panefoot">
-                <button class="btn" id="positions-more" type="button" disabled>Cargar mas</button>
+                <button class="btn" id="positions-more" type="button" disabled>Cargar más</button>
                 <span class="meta" id="positions-foot"></span>
               </div>
             </div>
@@ -667,14 +667,14 @@
                     <option value="does">hecho</option>
                   </select>
                   <button class="btn" id="review-open-sql" type="button" data-local-api="explorer-sql">
-                    Review queue SQL
+                    Cola de revisión SQL
                   </button>
                 </div>
               </div>
               <div class="panemeta mono" id="evidence-meta">Selecciona una posicion.</div>
               <div class="panebody" id="evidence"></div>
               <div class="panefoot">
-                <button class="btn" id="evidence-more" type="button" disabled>Cargar mas</button>
+                <button class="btn" id="evidence-more" type="button" disabled>Cargar más</button>
                 <span class="meta" id="evidence-foot"></span>
               </div>
             </div>
@@ -1005,7 +1005,7 @@
       }
 
       function setModeUI() {
-        nodes.mode.textContent = state.mode === "live" ? "live" : "preview";
+        nodes.mode.textContent = state.mode === "live" ? "en vivo" : "estática";
         dotize(nodes.chipMode, state.mode === "live" ? "ok" : "warn");
 
         if (state.mode === "live") {
@@ -1013,7 +1013,7 @@
           dotize(nodes.chipApi, "ok");
           return;
         }
-        nodes.api.textContent = API_BASE_OVERRIDE ? "override (fallo)" : "no";
+        nodes.api.textContent = API_BASE_OVERRIDE ? "forzada (falló)" : "no";
         dotize(nodes.chipApi, API_BASE_OVERRIDE ? "warn" : "bad");
       }
 
@@ -1025,7 +1025,7 @@
         } catch (err) {
           state.snapshot = { meta: {}, tables: {} };
           setBanner(
-            `<div class="explorer-temas-preview-empty mono"><strong>Preview sin datos</strong>. No se encontro <span class="mono">${esc(
+            `<div class="explorer-temas-preview-empty mono"><strong>Vista previa sin datos</strong>. No se encontró <span class="mono">${esc(
               STATIC_SNAPSHOT_PATH
             )}</span>. Ejecuta <span class="mono">just cloudflare-pages-build</span> o abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
           );
@@ -1120,7 +1120,7 @@
           btn.className = "item" + (active ? " active" : "");
           btn.innerHTML =
             `<div class="row"><strong>${esc(toText(p.name || r.label || `topic_set ${id}`))}</strong>${badge}</div>` +
-            `<div class="meta">${esc(scopeBits || "scope: -")}</div>` +
+            `<div class="meta">${esc(scopeBits || "ámbito: -")}</div>` +
             (validBits ? `<div class="meta">${esc("valid: " + validBits)}</div>` : "");
           btn.addEventListener("click", () => selectSet(id));
           nodes.sets.appendChild(btn);
@@ -1165,8 +1165,8 @@
             const topicId = r.identity && r.identity.topic_id ? r.identity.topic_id : raw.topic_id;
             const active = state.activeTopicId && sameId(state.activeTopicId, topicId);
             const isHigh = String(raw.is_high_stakes || "0") === "1" || String(raw.is_high_stakes || "").toLowerCase() === "true";
-            const badge = isHigh ? "<span class='badge ok'>high</span>" : "<span class='badge'>topic</span>";
-            const stakes = [raw.stakes_rank !== undefined ? `rank=${raw.stakes_rank}` : "", raw.stakes_score !== undefined ? `score=${raw.stakes_score}` : ""]
+            const badge = isHigh ? "<span class='badge ok'>alto</span>" : "<span class='badge'>tema</span>";
+            const stakes = [raw.stakes_rank !== undefined ? `rango: ${raw.stakes_rank}` : "", raw.stakes_score !== undefined ? `puntuación: ${raw.stakes_score}` : ""]
               .filter(Boolean)
               .join("  ");
 
@@ -1213,16 +1213,16 @@
         const incoherent = Number(summary.incoherent_total || 0);
         const explicit = Number(summary.explicit_total || 0);
         const scopeValues = Array.from(new Set(groups.map((g) => norm(g.scope || "")).filter(Boolean)));
-        const scopeLabel = scopeValues.length === 0 ? "-" : scopeValues.length === 1 ? scopeValues[0] : `${scopeValues.length} scopes`;
+        const scopeLabel = scopeValues.length === 0 ? "-" : scopeValues.length === 1 ? scopeValues[0] : `${scopeValues.length} ámbitos`;
 
         nodes.cohOverlapCount.textContent = String(overlap);
         nodes.cohCoherentCount.textContent = String(coherent);
         nodes.cohIncoherentCount.textContent = String(incoherent);
-        nodes.coherenceScope.textContent = `scope: ${scopeLabel}`;
+        nodes.coherenceScope.textContent = `ámbito: ${scopeLabel}`;
 
         if (!hasSelection) {
-          nodes.coherenceMeta.textContent = "Selecciona un tema para calcular overlap/coherent/incoherent.";
-          nodes.coherenceFoot.textContent = "Click en un bucket para drill-down a filas de evidencia.";
+          nodes.coherenceMeta.textContent = "Selecciona un tema para calcular solapamientos, coherencias e incoherencias.";
+          nodes.coherenceFoot.textContent = "Haz clic en un grupo para ver los registros de evidencia.";
           nodes.cohOverlap.disabled = true;
           nodes.cohCoherent.disabled = true;
           nodes.cohIncoherent.disabled = true;
@@ -1231,7 +1231,7 @@
         }
 
         if (state.mode !== "live") {
-          nodes.coherenceMeta.textContent = "Coherencia interactiva requiere API live (no disponible en preview).";
+          nodes.coherenceMeta.textContent = "La coherencia interactiva requiere API en vivo (no disponible en modo estático).";
           nodes.coherenceFoot.textContent = "Arranca just explorer y abre con ?api=http://127.0.0.1:9010.";
           nodes.cohOverlap.disabled = true;
           nodes.cohCoherent.disabled = true;
@@ -1249,11 +1249,11 @@
           return;
         }
 
-        const asOf = state.coherence.asOfDate ? `as_of=${state.coherence.asOfDate}` : "as_of=-";
-        const partyMeta = state.activePartyId ? ` party_id=${state.activePartyId}` : "";
-        nodes.coherenceMeta.textContent = `overlap=${overlap} explicit=${explicit} coherent=${coherent} incoherent=${incoherent}${partyMeta}`;
+        const asOf = state.coherence.asOfDate ? `fecha: ${state.coherence.asOfDate}` : "fecha: -";
+        const partyMeta = state.activePartyId ? ` partido: ${state.activePartyId}` : "";
+        nodes.coherenceMeta.textContent = `solapamiento: ${overlap}; explícitas: ${explicit}; coherentes: ${coherent}; incoherentes: ${incoherent}${partyMeta}`;
         nodes.coherenceFoot.textContent =
-          `${asOf} | groups=${groups.length}. Click en un bucket para drill-down a evidence rows.`;
+          `${asOf} | grupos: ${groups.length}. Haz clic en un grupo para ver los registros de evidencia.`;
         nodes.cohOverlap.disabled = overlap <= 0;
         nodes.cohCoherent.disabled = coherent <= 0;
         nodes.cohIncoherent.disabled = incoherent <= 0;
@@ -1351,7 +1351,7 @@
           state.evidence.total = 0;
           state.evidence.meta = null;
           nodes.evidence.innerHTML = `<div class='empty'>${esc(toText(err && err.message ? err.message : err))}</div>`;
-          nodes.evidenceMeta.textContent = `Error en drill-down: ${toText(err && err.message ? err.message : err)}`;
+          nodes.evidenceMeta.textContent = `Error al abrir el detalle: ${toText(err && err.message ? err.message : err)}`;
           nodes.evidenceMore.disabled = true;
         } finally {
           state.evidence.loading = false;
@@ -1409,15 +1409,15 @@
             const p = pickPreview(r);
             const raw = pickRaw(r);
             const personId = raw.person_id;
-            const title = toText(p.person_id || r.label || `person_id=${personId}`);
+            const title = toText(p.person_id || r.label || `persona #${personId}`);
             const st = toText(raw.stance || "");
             const badgeClass = st === "support" || st === "oppose" ? "ok" : st ? "warn" : "";
             const metaBits = [
-              raw.as_of_date ? `as_of=${raw.as_of_date}` : "",
-              raw.computed_method ? `method=${raw.computed_method}` : "",
-              raw.computed_version ? `ver=${raw.computed_version}` : "",
-              raw.score !== undefined && raw.score !== null ? `score=${raw.score}` : "",
-              raw.evidence_count !== undefined && raw.evidence_count !== null ? `evidence=${raw.evidence_count}` : "",
+              raw.as_of_date ? `fecha: ${raw.as_of_date}` : "",
+              raw.computed_method ? `método: ${raw.computed_method}` : "",
+              raw.computed_version ? `versión: ${raw.computed_version}` : "",
+              raw.score !== undefined && raw.score !== null ? `puntuación: ${raw.score}` : "",
+              raw.evidence_count !== undefined && raw.evidence_count !== null ? `evidencia: ${raw.evidence_count}` : "",
             ]
               .filter(Boolean)
               .join("  |  ");
@@ -1435,7 +1435,7 @@
           if (rows.length > 220) {
             const more = document.createElement("div");
             more.className = "empty";
-            more.textContent = `+${rows.length - 220} mas (filtrado local). Usa Explorer SQL para ver todo.`;
+            more.textContent = `+${rows.length - 220} más (filtrado local). Usa el Explorador SQL para ver todo.`;
             nodes.positions.appendChild(more);
           }
         }
@@ -1494,27 +1494,28 @@
         const evidenceTotal = Number(summary.evidence_total || state.evidence.total || 0);
         const asOf = state.coherence.asOfDate || toText(payload && payload.meta ? payload.meta.as_of_date : "");
 
+        const bucketLabel = bucket === "incoherent" ? "incoherente" : bucket === "coherent" ? "coherente" : bucket;
         nodes.evidenceMeta.innerHTML =
-          `COHERENCE bucket: <strong>${esc(bucket)}</strong> | ` +
-          `pairs=${esc(String(pairsTotal))} evidence=${esc(String(evidenceTotal))}` +
-          (asOf ? ` | as_of=${esc(asOf)}` : "");
+          `Grupo de coherencia: <strong>${esc(bucketLabel)}</strong> | ` +
+          `pares: ${esc(String(pairsTotal))}; evidencias: ${esc(String(evidenceTotal))}` +
+          (asOf ? ` | fecha: ${esc(asOf)}` : "");
 
         if (!filtered.length) {
-          nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia para este bucket/filtro.</div>";
+          nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia para este grupo o filtro.</div>";
         } else {
           nodes.evidence.innerHTML = "";
           filtered.slice(0, 90).forEach((raw) => {
             const kind = inferEvidenceKind(raw || {});
             const kindBadge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
-            const et = toText(raw.evidence_type || "evidence");
-            const personName = toText(raw.person_name || (raw.person_id ? `person_id=${raw.person_id}` : ""));
-            const partyName = toText(raw.party_name || (raw.party_id ? `party_id=${raw.party_id}` : ""));
-            const pair = `does=${toText(raw.does_stance || "-")} says=${toText(raw.says_stance || "-")}`;
+            const et = toText(raw.evidence_type || "evidencia");
+            const personName = toText(raw.person_name || (raw.person_id ? `persona #${raw.person_id}` : ""));
+            const partyName = toText(raw.party_name || (raw.party_id ? `partido #${raw.party_id}` : ""));
+            const pair = `hechos: ${toText(raw.does_stance || "-")}; dichos: ${toText(raw.says_stance || "-")}`;
             const dt = toText(raw.evidence_date || "");
             const src = toText(raw.source_id || "");
-            const conf = raw.evidence_confidence !== undefined && raw.evidence_confidence !== null ? `conf=${raw.evidence_confidence}` : "";
+            const conf = raw.evidence_confidence !== undefined && raw.evidence_confidence !== null ? `confianza: ${raw.evidence_confidence}` : "";
             const url = raw.source_url
-              ? `<a class="link mono" href="${esc(toText(raw.source_url))}" target="_blank" rel="noopener">url</a>`
+              ? `<a class="link mono" href="${esc(toText(raw.source_url))}" target="_blank" rel="noopener">fuente</a>`
               : "";
             const evidenceId = raw.evidence_id;
             const openSql = evidenceId
@@ -1536,7 +1537,7 @@
           if (filtered.length > 90) {
             const more = document.createElement("div");
             more.className = "empty";
-            more.textContent = `+${filtered.length - 90} mas (filtrado local).`;
+            more.textContent = `+${filtered.length - 90} más (filtrado local).`;
             nodes.evidence.appendChild(more);
           }
         }
@@ -1544,8 +1545,8 @@
         const canMore = state.evidence.total && state.evidence.offset + state.evidence.rows.length < state.evidence.total;
         nodes.evidenceMore.disabled = !canMore || state.evidence.loading;
         nodes.evidenceFoot.textContent = canMore
-          ? `bucket=${bucket} offset=${state.evidence.offset} limit=${state.evidence.limit}`
-          : `bucket=${bucket}`;
+          ? `grupo: ${bucketLabel}; posición: ${state.evidence.offset}; límite: ${state.evidence.limit}`
+          : `grupo: ${bucketLabel}`;
       }
 
       function renderEvidence() {
@@ -1574,9 +1575,9 @@
           says.stance !== does.stance;
 
         nodes.evidenceMeta.innerHTML =
-          `SAYS: <strong>${esc(says.stance)}</strong> (${esc(String(says.count))})  |  ` +
-          `DOES: <strong>${esc(does.stance)}</strong> (${esc(String(does.count))})  |  ` +
-          (diverges ? `<span class="badge warn">diverge</span>` : `<span class="badge ok">align/unknown</span>`);
+          `Dichos: <strong>${esc(says.stance)}</strong> (${esc(String(says.count))})  |  ` +
+          `Hechos: <strong>${esc(does.stance)}</strong> (${esc(String(does.count))})  |  ` +
+          (diverges ? `<span class="badge warn">divergen</span>` : `<span class="badge ok">alineado/sin clasificar</span>`);
 
         if (!filtered.length) {
           nodes.evidence.innerHTML = "<div class='empty'>Sin evidencia cargada para este filtro.</div>";
@@ -1591,10 +1592,10 @@
               const badge = kind === "does" ? "<span class='badge ok'>hecho</span>" : "<span class='badge'>dicho</span>";
               const dt = toText(p.evidence_date || raw.evidence_date || "");
               const src = toText(p.source_id || raw.source_id || "");
-              const et = toText(p.evidence_type || raw.evidence_type || "evidence");
-              const conf = raw.confidence !== undefined && raw.confidence !== null ? `conf=${raw.confidence}` : "";
-              const weight = raw.weight !== undefined && raw.weight !== null ? `w=${raw.weight}` : "";
-              const url = p.source_url ? `<a class="link mono" href="${esc(toText(p.source_url))}" target="_blank" rel="noopener">url</a>` : "";
+              const et = toText(p.evidence_type || raw.evidence_type || "evidencia");
+              const conf = raw.confidence !== undefined && raw.confidence !== null ? `confianza: ${raw.confidence}` : "";
+              const weight = raw.weight !== undefined && raw.weight !== null ? `peso: ${raw.weight}` : "";
+              const url = p.source_url ? `<a class="link mono" href="${esc(toText(p.source_url))}" target="_blank" rel="noopener">fuente</a>` : "";
 
               const evidenceId = r.identity && r.identity.evidence_id ? r.identity.evidence_id : raw.evidence_id;
               const openSql = evidenceId
@@ -1628,10 +1629,10 @@
                   if (asked === null) return;
                   const stance = norm(asked);
                   if (!["support", "oppose", "mixed", "unclear", "no_signal"].includes(stance)) {
-                    window.alert("Stance invalido.");
+                    window.alert("Postura inválida.");
                     return;
                   }
-                  const note = window.prompt("Nota de revision (opcional)", "") || "";
+                  const note = window.prompt("Nota de revisión (opcional)", "") || "";
                   await applyReviewDecision({
                     evidenceIds: [Number(evidenceId)],
                     status: "resolved",
@@ -1870,7 +1871,7 @@
 
       async function applyReviewDecision({ evidenceIds, status, finalStance, note, sourceId, recompute }) {
         if (state.mode !== "live") {
-          window.alert("Modo preview no permite escribir.");
+          window.alert("El modo estático no permite escribir.");
           return;
         }
         const endpoint = resolveApiPath("/api/topics/reviews/decision");
@@ -1896,13 +1897,13 @@
           const decision = (response && response.decision) ? response.decision : {};
           const changed = Number(decision.evidence_rows_updated || 0);
           setBanner(
-            `<div class="mono"><strong>Review guardada</strong>. status=${esc(payload.status)} · matched=${esc(
+            `<div class="mono"><strong>Revisión guardada</strong>. estado: ${esc(payload.status)} · coincidencias: ${esc(
               String(decision.matched || 0)
-            )} · evidence_updated=${esc(String(changed))}</div>`
+            )} · evidencia actualizada: ${esc(String(changed))}</div>`
           );
           await Promise.all([loadCounts(), loadPositionsPage({ reset: true }), loadCoherenceSummary(), loadEvidencePage({ reset: true })]);
         } catch (err) {
-          window.alert(`No se pudo guardar decision: ${String(err)}`);
+          window.alert(`No se pudo guardar la decisión: ${String(err)}`);
         } finally {
           state.reviewBusy = false;
         }
@@ -1980,8 +1981,8 @@
 
         if (state.mode === "preview") {
           setBanner(
-            `<div class="mono"><strong>Modo preview</strong>: leyendo ${esc(STATIC_SNAPSHOT_PATH)}. ` +
-              `Para modo live: ejecuta <span class="mono">just explorer</span> y abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
+            `<div class="mono"><strong>Modo estático</strong>: leyendo ${esc(STATIC_SNAPSHOT_PATH)}. ` +
+              `Para modo en vivo: ejecuta <span class="mono">just explorer</span> y abre con <span class="mono">?api=http://127.0.0.1:9010</span>.</div>`
           );
         } else {
           setBanner("");
