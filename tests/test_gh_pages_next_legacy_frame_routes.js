@@ -4,20 +4,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT = path.join(__dirname, "..");
+const APP_ROOT = path.join(ROOT, "ui", "gh-pages-next", "app");
 const PUBLIC_ROOT = path.join(ROOT, "ui", "gh-pages-next", "public");
-
-const FRAME_ROUTE_FILES = [
-  "ui/gh-pages-next/app/citizen/page.js",
-  "ui/gh-pages-next/app/citizen/leaderboards/page.js",
-  "ui/gh-pages-next/app/explorer/page.js",
-  "ui/gh-pages-next/app/explorer-politico/page.js",
-  "ui/gh-pages-next/app/explorer-sources/page.js",
-  "ui/gh-pages-next/app/explorer-temas/page.js",
-  "ui/gh-pages-next/app/explorer-votaciones/page.js",
-  "ui/gh-pages-next/app/graph/page.js",
-  "ui/gh-pages-next/app/methods/explorer/page.js",
-  "ui/gh-pages-next/app/methods/graph/page.js",
-];
 
 function resolveLegacyPathTarget(legacyPath) {
   const relativePath = legacyPath.replace(/^\//u, "");
@@ -34,9 +22,31 @@ function resolveLegacyPathTarget(legacyPath) {
   return null;
 }
 
+function findLegacyFrameRouteFiles(dir = APP_ROOT) {
+  const files = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...findLegacyFrameRouteFiles(entryPath));
+      continue;
+    }
+    if (entry.name !== "page.js") {
+      continue;
+    }
+    const source = fs.readFileSync(entryPath, "utf8");
+    if (source.includes("LegacyFrame")) {
+      files.push(entryPath);
+    }
+  }
+  return files;
+}
+
 test("every LegacyFrame route points to an exported legacy asset", () => {
-  for (const relativeFile of FRAME_ROUTE_FILES) {
-    const filePath = path.join(ROOT, relativeFile);
+  const frameRouteFiles = findLegacyFrameRouteFiles();
+  assert.ok(frameRouteFiles.length > 0, "expected at least one LegacyFrame route");
+
+  for (const filePath of frameRouteFiles) {
+    const relativeFile = path.relative(ROOT, filePath);
     const source = fs.readFileSync(filePath, "utf8");
     const match = source.match(/legacyPath="([^"]+)"/u);
 

@@ -19,13 +19,13 @@ function decodeLabel(value) {
 
 function formatBreadcrumb(segment, index, segments) {
   const map = {
-    "parliamentary-accountability": "Accountability",
+    "parliamentary-accountability": "Rendición de cuentas",
     discipline: "Disciplina",
     attendance: "Asistencia",
     outcomes: "Resultados",
     coalitions: "Coaliciones",
     people: "Personas",
-    xray: "X-ray",
+    xray: "Radiografía",
     party: "Partido",
     institution: "Institución",
     ambito: "Ámbito",
@@ -36,6 +36,7 @@ function formatBreadcrumb(segment, index, segments) {
     "political-positions": "Posturas",
     "policy-outcomes": "Resultados",
     "legal-sanctions": "Cumplimiento legal",
+    questions: "Q&A",
   };
 
   const direct = map[segment];

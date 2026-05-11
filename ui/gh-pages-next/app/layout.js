@@ -8,7 +8,7 @@ const basePath = resolveBasePath();
 export const metadata = {
   title: "Vota Con La Chola | GH Pages",
   description:
-    "Portal estatico de Vota Con La Chola para ciudadania, explorer y artefactos JSON reproducibles por snapshot.",
+    "Portal estático de Vota Con La Chola para ciudadanía, explorador y artefactos JSON reproducibles por corte.",
   icons: {
     icon: `${basePath}/favicon.svg`,
   },

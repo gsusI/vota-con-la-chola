@@ -29,23 +29,23 @@ const XRAY_KINDS = [
 ];
 
 export const metadata = {
-  title: "Personas X-ray | Vota Con La Chola",
-  description: "Indice de agrupaciones X-ray del directorio de personas.",
+  title: "Radiografía de personas | Vota Con La Chola",
+  description: "Índice de agrupaciones del directorio de personas.",
 };
 
 export default function PeopleXrayIndexPage() {
   return (
     <main className="people-xray-index shell">
       <section className="people-xray-index__hero hero card">
-        <p className="people-xray-index__eyebrow eyebrow">X-ray de personas</p>
-        <h1 className="people-xray-index__title">Personas X-ray</h1>
+        <p className="people-xray-index__eyebrow eyebrow">Radiografía de personas</p>
+        <h1 className="people-xray-index__title">Personas por agrupación</h1>
         <p className="people-xray-index__summary sub">
           Índice estático para explorar personas por partido, institución, ámbito, territorio o cargo.
         </p>
         <div className="people-xray-index__chips chips">
           <span className="people-xray-index__chip chip">Rutas estáticas</span>
           <span className="people-xray-index__chip chip">Agrupaciones navegables</span>
-          <span className="people-xray-index__chip chip">Sin API server-side</span>
+          <span className="people-xray-index__chip chip">Sin API de servidor</span>
         </div>
         <p className="people-xray-index__back-link sub">
           <a className="people-xray-index__directory-link" href={withBasePath("/people/")}>

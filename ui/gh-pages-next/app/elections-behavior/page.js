@@ -281,7 +281,7 @@ export default function ElectionsBehaviorPage() {
         <section className="hero card">
           <p className="eyebrow">Conexión electoral</p>
           <h1>Cargando conexiones elecciones-comportamiento</h1>
-          <p className="sub">Esperando el snapshot estático de GH Pages...</p>
+          <p className="sub">Esperando el corte estático de GH Pages…</p>
         </section>
       </main>
     );
@@ -292,7 +292,7 @@ export default function ElectionsBehaviorPage() {
       <main className="shell">
         <section className="hero card">
           <p className="eyebrow">Conexión electoral</p>
-          <h1>No se pudo cargar el snapshot</h1>
+          <h1>No se pudo cargar el corte</h1>
           <p className="sub">{error}</p>
         </section>
       </main>
@@ -309,7 +309,7 @@ export default function ElectionsBehaviorPage() {
           del periodo pre/post.
         </p>
         <div className="chips" style={{ marginTop: 10 }}>
-          <span className="chip">Snapshot: {meta.generated_at || "sin fecha"}</span>
+          <span className="chip">Corte: {meta.generated_at || "sin fecha"}</span>
           <span className="chip">Elecciones: {formatInt(elections.length)}</span>
           <span className="chip">Partidos con cambios: {formatInt(filteredPartyShifts.length)}</span>
           <span className="chip">Temas con cambios: {formatInt(filteredTopicShifts.length)}</span>
@@ -323,7 +323,7 @@ export default function ElectionsBehaviorPage() {
         </div>
         <div className="filterGrid">
           <div className="field">
-            <label htmlFor="eb-bucket">Camara</label>
+            <label htmlFor="eb-bucket">Cámara</label>
             <select
               id="eb-bucket"
               className="tableFilterSelect"
@@ -389,13 +389,13 @@ export default function ElectionsBehaviorPage() {
 
       <section className="card block">
         <div className="blockHead">
-          <h2>Elections</h2>
+          <h2>Elecciones</h2>
         </div>
         <div className="tableWrap">
           <table className="table">
             <thead>
               <tr>
-                <th>Camara</th>
+                <th>Cámara</th>
                 <th>Elección</th>
                 <th>Fecha</th>
                 <th>Tipo</th>
@@ -445,8 +445,8 @@ export default function ElectionsBehaviorPage() {
                 <option value="delta_abs_desc">Δ Cohesión | abs descendente</option>
                 <option value="delta_desc">Δ Cohesión descendente</option>
                 <option value="delta_asc">Δ Cohesión ascendente</option>
-                <option value="post_desc">Votaciones post descendente</option>
-                <option value="post_asc">Votaciones post ascendente</option>
+                <option value="post_desc">Votaciones posteriores descendente</option>
+                <option value="post_asc">Votaciones posteriores ascendente</option>
               </select>
             </div>
           </div>
@@ -455,7 +455,7 @@ export default function ElectionsBehaviorPage() {
           <table className="table">
             <thead>
               <tr>
-                <th>Camara</th>
+                <th>Cámara</th>
                 <th>Elección</th>
                 <th>Partido</th>
                 <th>Pre</th>
@@ -519,8 +519,8 @@ export default function ElectionsBehaviorPage() {
                 <option value="delta_abs_desc">Δ Cohesión | abs descendente</option>
                 <option value="delta_desc">Δ Cohesión descendente</option>
                 <option value="delta_asc">Δ Cohesión ascendente</option>
-                <option value="pre_desc">Votaciones pre descendente</option>
-                <option value="pre_asc">Votaciones pre ascendente</option>
+                <option value="pre_desc">Votaciones previas descendente</option>
+                <option value="pre_asc">Votaciones previas ascendente</option>
               </select>
             </div>
           </div>
@@ -529,7 +529,7 @@ export default function ElectionsBehaviorPage() {
           <table className="table">
             <thead>
               <tr>
-                <th>Camara</th>
+                <th>Cámara</th>
                 <th>Elección</th>
                 <th>Partido</th>
                 <th>Tema</th>
@@ -598,7 +598,7 @@ export default function ElectionsBehaviorPage() {
           <table className="table">
             <thead>
               <tr>
-                <th>Camara</th>
+                <th>Cámara</th>
                 <th>Elección</th>
                 <th>Partido</th>
                 <th>Territorio</th>

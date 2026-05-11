@@ -129,6 +129,18 @@ export const siteSections = [
         href: "/parliamentary-accountability/",
         cta: "Abrir seguimiento",
       },
+      {
+        title: "Ver dossiers de accountability",
+        note: "Cruza temas y actores desde el ledger genérico publicado.",
+        href: "/accountability-dossiers/",
+        cta: "Abrir dossiers",
+      },
+      {
+        title: "Usar Evidence API",
+        note: "Abre respuestas repetibles con caveats y muestras de evidencia.",
+        href: "/accountability-evidence/",
+        cta: "Abrir API",
+      },
     ],
     surfaces: [
       {
@@ -146,6 +158,16 @@ export const siteSections = [
         href: "/parliamentary-accountability/",
         note: "Disciplina, asistencia, resultados y coaliciones.",
       },
+      {
+        title: "Dossiers de accountability",
+        href: "/accountability-dossiers/",
+        note: "Resumen issue-led y actor-led de responsabilidades trazables.",
+      },
+      {
+        title: "Evidence API",
+        href: "/accountability-evidence/",
+        note: "Catalogo de preguntas y respuestas parciales con caveats.",
+      },
     ],
   },
   {
@@ -162,7 +184,7 @@ export const siteSections = [
         title: "Explorar indicadores",
         note: "Empieza por resultados observables y señales posteriores a decisiones públicas.",
         href: "/policy-outcomes/",
-        cta: "Abrir outcomes",
+        cta: "Abrir resultados",
       },
       {
         title: "Abrir sanciones y cumplimiento",
@@ -334,6 +356,22 @@ export const datasetCatalog = [
     confidence: "Publicado",
   },
   {
+    id: "accountability-dossiers",
+    sectionId: "decisions",
+    label: "Dossiers de accountability",
+    path: "/accountability-dossiers/data/dossiers.json",
+    note: "Resumen por tema y por actor del ledger genérico de accountability.",
+    confidence: "Publicado",
+  },
+  {
+    id: "accountability-ledger",
+    sectionId: "decisions",
+    label: "Ledger de accountability",
+    path: "/accountability-dossiers/data/ledger.json",
+    note: "Ledger trazable completo usado para construir los dossiers compactos.",
+    confidence: "Publicado",
+  },
+  {
     id: "policy-outcomes",
     sectionId: "outcomes",
     label: "Resultados observables",
@@ -362,7 +400,7 @@ export const datasetCatalog = [
     sectionId: "methods",
     label: "Estado de fuentes",
     path: "/explorer-sources/data/status.json",
-    note: "Estado operativo, roadmap y calidad de fuentes.",
+    note: "Estado operativo, hoja de ruta y calidad de fuentes.",
     confidence: "Publicado",
   },
   {

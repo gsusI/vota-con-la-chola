@@ -25,7 +25,7 @@ test("buildPoliticalPositionsDetailPanelSummary prioritizes the compact route co
       resolvedTopicFilter: { topicId: 327, label: "Mocion de vivienda" },
       detailContinuityBreadcrumb: { mode: "exact" },
     }),
-    "La ruta superior resume el contexto editorial. Debajo tienes postura agregada, revision y drill-down reproducible.",
+    "La ruta superior resume el contexto editorial. Debajo tienes postura agregada, revisión y detalle reproducible.",
   );
 });
 
@@ -38,7 +38,7 @@ test("buildPoliticalPositionsDetailPanelSummary keeps exact topic guidance when 
       resolvedTopicFilter: { topicId: 327, label: "Mocion de vivienda" },
       detailContinuityBreadcrumb: null,
     }),
-    "Tema exacto activo. Selecciona una fila para abrir evidencia puntual, revision y drill-down reproducible.",
+    "Tema exacto activo. Selecciona una fila para abrir evidencia puntual, revisión y detalle reproducible.",
   );
 });
 
@@ -60,14 +60,14 @@ test("buildPoliticalPositionsDetailOverview returns metrics without repeating ro
       topicLabel: "Mocion de vivienda",
     }),
     [
-      { label: "Postura", value: "support", kind: "stance" },
-      { label: "Metodo", value: "votes" },
-      { label: "As of", value: "2026-02-12" },
-      { label: "Score", value: "0.85" },
+    { label: "Postura", value: "A favor", kind: "stance" },
+    { label: "Método", value: "Votos" },
+      { label: "Fecha", value: "2026-02-12" },
+      { label: "Puntuación", value: "0.85" },
       { label: "Confianza", value: "72.0%" },
       { label: "Evidencias", value: "14" },
-      { label: "Ultima evidencia", value: "2026-02-10" },
-      { label: "Ventana", value: "30 dias" },
+      { label: "Última evidencia", value: "2026-02-10" },
+      { label: "Ventana", value: "30 días" },
     ],
   );
 });
@@ -87,7 +87,7 @@ test("buildPoliticalPositionsDetailDrilldownLinks builds person explorer links",
     }),
     [
       {
-        label: "Rastro exacto: evidencia persona + tema",
+        label: "Rastro exacto: persona y tema",
         href: "/vota-con-la-chola/explorer/?t=topic_evidence&wc=person_id&wv=91&wc=topic_id&wv=327&wc=topic_set_id&wv=4",
       },
       {
@@ -114,7 +114,7 @@ test("buildPoliticalPositionsDetailDrilldownLinks builds party explorer links", 
     }),
     [
       {
-        label: "Rastro exacto: grupo + tema",
+        label: "Rastro exacto: grupo y tema",
         href: "/explorer/?t=topic_positions&wc=party_id&wv=14&wc=topic_id&wv=327&wc=topic_set_id&wv=1",
       },
       {
@@ -140,22 +140,22 @@ test("buildPoliticalPositionsEvidenceTableHeader promotes review and drill-down 
       reviewLabel: "Pendiente 2 · Aprobada 9 · Ignorada 1",
       drilldownLinks: [
         {
-          label: "Rastro exacto: evidencia persona + tema",
+          label: "Rastro exacto: persona y tema",
           href: "/explorer/?t=topic_evidence",
         },
       ],
     }),
     {
-      title: "Muestras y auditoria",
-      subtitle: "Drill-down reproducible para la persona y el tema activos.",
+      title: "Muestras y auditoría",
+      subtitle: "Detalle reproducible para la persona y el tema activos.",
       chips: [
-        { label: "Revision", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
+        { label: "Revisión", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
         { label: "Muestras puntuales", value: "6" },
         { label: "Evidencias agregadas", value: "6" },
       ],
       links: [
         {
-          label: "Rastro exacto: evidencia persona + tema",
+          label: "Rastro exacto: persona y tema",
           href: "/explorer/?t=topic_evidence",
           role: "primary",
           hint: "",
@@ -179,7 +179,7 @@ test("buildPoliticalPositionsEvidenceTableHeader makes aggregate gap explicit ev
       reviewLabel: "Pendiente 2 · Aprobada 9 · Ignorada 1",
       drilldownLinks: [
         {
-          label: "Rastro exacto: evidencia persona + tema",
+          label: "Rastro exacto: persona y tema",
           href: "/explorer/?t=topic_evidence",
         },
         {
@@ -190,10 +190,10 @@ test("buildPoliticalPositionsEvidenceTableHeader makes aggregate gap explicit ev
       ],
     }),
     {
-      title: "Muestras y auditoria",
-      subtitle: "Hay 6 muestras publicadas; el score usa 14 evidencias. Abre el rastro exacto de la persona y el tema activos.",
+      title: "Muestras y auditoría",
+      subtitle: "Hay 6 muestras publicadas; la puntuación usa 14 evidencias. Abre el rastro exacto de la persona y el tema activos.",
       chips: [
-        { label: "Revision", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
+        { label: "Revisión", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
         { label: "Muestras puntuales", value: "6" },
         { label: "Evidencias agregadas", value: "14" },
       ],
@@ -229,7 +229,7 @@ test("buildPoliticalPositionsEvidenceTableHeader makes truncation explicit and p
       reviewLabel: "Pendiente 2 · Aprobada 9 · Ignorada 1",
       drilldownLinks: [
         {
-          label: "Rastro exacto: evidencia persona + tema",
+          label: "Rastro exacto: persona y tema",
           href: "/explorer/?t=topic_evidence",
         },
         {
@@ -240,10 +240,10 @@ test("buildPoliticalPositionsEvidenceTableHeader makes truncation explicit and p
       ],
     }),
     {
-      title: "Muestras y auditoria",
-      subtitle: "Ves 6/12 muestras; el score usa 14 evidencias. Abre el rastro exacto de la persona y el tema activos.",
+      title: "Muestras y auditoría",
+      subtitle: "Ves 6/12 muestras; la puntuación usa 14 evidencias. Abre el rastro exacto de la persona y el tema activos.",
       chips: [
-        { label: "Revision", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
+        { label: "Revisión", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
         { label: "Mostrando", value: "6 de 12" },
         { label: "Evidencias agregadas", value: "14" },
       ],
@@ -279,7 +279,7 @@ test("buildPoliticalPositionsEvidenceTableHeader distinguishes full published sa
       reviewLabel: "Pendiente 2 · Aprobada 9 · Ignorada 1",
       drilldownLinks: [
         {
-          label: "Rastro exacto: evidencia persona + tema",
+          label: "Rastro exacto: persona y tema",
           href: "/explorer/?t=topic_evidence",
         },
         {
@@ -290,10 +290,10 @@ test("buildPoliticalPositionsEvidenceTableHeader distinguishes full published sa
       ],
     }),
     {
-      title: "Muestras y auditoria",
+      title: "Muestras y auditoría",
       subtitle: "Ves 6/12 muestras. Abre el rastro exacto de la persona y el tema activos.",
       chips: [
-        { label: "Revision", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
+        { label: "Revisión", value: "Pendiente 2 · Aprobada 9 · Ignorada 1" },
         { label: "Mostrando", value: "6 de 12" },
         { label: "Evidencias agregadas", value: "12" },
       ],
@@ -335,10 +335,10 @@ test("buildPoliticalPositionsEvidenceTableHeader keeps audit actions available e
       ],
     }),
     {
-      title: "Muestras y auditoria",
-      subtitle: "No hay muestras puntuales listadas; usa Explorer para abrir el rastro completo del grupo.",
+      title: "Muestras y auditoría",
+      subtitle: "No hay muestras puntuales listadas; usa el explorador para abrir el rastro completo del grupo.",
       chips: [
-        { label: "Revision", value: "Sin revision registrada" },
+        { label: "Revisión", value: "Sin revisión registrada" },
         { label: "Muestras puntuales", value: "0" },
         { label: "Evidencias agregadas", value: "0" },
       ],
@@ -368,7 +368,7 @@ test("buildPoliticalPositionsEvidenceTableHeader explains aggregate-only evidenc
       reviewLabel: "",
       drilldownLinks: [
         {
-          label: "Rastro exacto: grupo + tema",
+          label: "Rastro exacto: grupo y tema",
           href: "/explorer/?t=topic_positions&wc=party_id&wv=14&wc=topic_id&wv=327",
         },
         {
@@ -379,10 +379,10 @@ test("buildPoliticalPositionsEvidenceTableHeader explains aggregate-only evidenc
       ],
     }),
     {
-      title: "Muestras y auditoria",
-      subtitle: "No hay muestra puntual publicada; el score usa 8 evidencias. Abre el rastro exacto del grupo y el tema activos.",
+      title: "Muestras y auditoría",
+      subtitle: "No hay muestra puntual publicada; la puntuación usa 8 evidencias. Abre el rastro exacto del grupo y el tema activos.",
       chips: [
-        { label: "Revision", value: "Sin revision registrada" },
+        { label: "Revisión", value: "Sin revisión registrada" },
         { label: "Muestras puntuales", value: "0" },
         { label: "Evidencias agregadas", value: "8" },
       ],

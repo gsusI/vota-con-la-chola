@@ -1,4 +1,4 @@
-import { formatDate, formatInt, formatPct, readPublicJson } from "../static-snapshot.mjs";
+import { formatDate, formatInt, formatMethod, formatPct, readPublicJson } from "../static-snapshot.mjs";
 import {
   StaticRouteHero,
   StaticRouteLink,
@@ -10,8 +10,8 @@ import {
 } from "../static-route-components";
 
 export const metadata = {
-  title: "Ciudadania | Vota Con La Chola",
-  description: "Vista ciudadana estatica de preocupaciones, partidos y evidencias.",
+  title: "Ciudadanía | Vota Con La Chola",
+  description: "Vista ciudadana estática de preocupaciones, partidos y evidencias.",
 };
 
 export default function CitizenPage() {
@@ -28,35 +28,35 @@ export default function CitizenPage() {
       <StaticRouteHero
         actions={[
           { href: "/explorer-temas/", label: "Auditar evidencia" },
-          { href: "/citizen/leaderboards/", label: "Leaderboards" },
+          { href: "/citizen/leaderboards/", label: "Clasificaciones" },
         ]}
         eyebrow="Vista ciudadana"
         meta={[
-          { label: "As of", value: formatDate(citizen.meta?.as_of_date) },
-          { label: "Metodo", value: citizen.meta?.computed_method || "combined" },
+          { label: "Corte", value: formatDate(citizen.meta?.as_of_date) },
+          { label: "Método", value: formatMethod(citizen.meta?.computed_method || "combined") },
         ]}
-        summary="Mapa de preocupaciones, partidos y senales con honestidad visible sobre incertidumbre. Render estatico: no iframe, no API runtime."
-        title="Ciudadania"
+        summary="Mapa de preocupaciones, partidos y señales con honestidad visible sobre incertidumbre. Página estática: sin marco incrustado ni API en tiempo de ejecución."
+        title="Ciudadanía"
       />
 
       <StaticRouteMetrics
         metrics={[
           { label: "Temas", value: formatInt(topics.length) },
           { label: "Partidos", value: formatInt(parties.length) },
-          { label: "Senales claras", value: formatInt(clearPositions.length), note: formatPct(citizen.meta?.quality?.clear_pct) },
-          { label: "Unknown", value: formatPct(citizen.meta?.quality?.unknown_pct), note: citizen.meta?.freshness?.freshness_label || "" },
+          { label: "Señales claras", value: formatInt(clearPositions.length), note: formatPct(citizen.meta?.quality?.clear_pct) },
+          { label: "Sin clasificar", value: formatPct(citizen.meta?.quality?.unknown_pct), note: citizen.meta?.freshness?.freshness_label || "" },
         ]}
       />
 
       <StaticRoutePanelGrid>
-        <StaticRoutePanel note="Paquetes de preocupaciones publicados." title="Packs ciudadanos">
+        <StaticRoutePanel note="Paquetes de preocupaciones publicados." title="Paquetes ciudadanos">
           <StaticRouteList
             items={packs}
             renderItem={(pack) => (
               <>
                 <strong>{pack.pack_label || pack.pack_id}</strong>
-                <span>{formatInt(pack.topics_total)} temas · {formatInt(pack.high_stakes_topics_total)} high stakes</span>
-                <StaticRouteStatusPill value={{ className: pack.weak ? "staticRouteStatusPill--warn" : "staticRouteStatusPill--ok", label: pack.weak ? "debil" : "ok" }} />
+                <span>{formatInt(pack.topics_total)} temas · {formatInt(pack.high_stakes_topics_total)} de alta relevancia</span>
+                <StaticRouteStatusPill value={{ className: pack.weak ? "staticRouteStatusPill--warn" : "staticRouteStatusPill--ok", label: pack.weak ? "débil" : "ok" }} />
               </>
             )}
           />
@@ -68,21 +68,21 @@ export default function CitizenPage() {
             renderItem={(topic) => (
               <>
                 <strong>{topic.label}</strong>
-                <span>{(topic.concern_ids || []).join(", ") || "sin pack"} · rank {topic.stakes_rank}</span>
+                <span>{(topic.concern_ids || []).join(", ") || "sin paquete"} · prioridad {topic.stakes_rank}</span>
                 {topic.links?.explorer_temas ? <StaticRouteLink href="/explorer-temas/">Abrir evidencia</StaticRouteLink> : null}
               </>
             )}
           />
         </StaticRoutePanel>
 
-        <StaticRoutePanel note="Partidos disponibles en el snapshot." title="Partidos">
+        <StaticRoutePanel note="Partidos disponibles en el corte." title="Partidos">
           <StaticRouteList
             items={parties.slice(0, 16)}
             renderItem={(party) => (
               <>
                 <strong>{party.name || party.acronym || party.party_id}</strong>
-                <span>Party ID {party.party_id}</span>
-                <StaticRouteLink href="/explorer-politico/">Abrir arena</StaticRouteLink>
+                <span>ID de partido {party.party_id}</span>
+                <StaticRouteLink href="/explorer-politico/">Abrir políticos</StaticRouteLink>
               </>
             )}
           />

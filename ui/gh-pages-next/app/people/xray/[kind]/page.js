@@ -149,7 +149,7 @@ export default async function XrayKindIndexPage({ params, searchParams }) {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">X-ray de personas</p>
+        <p className="eyebrow">Radiografía de personas</p>
         <h1>
           {meta.label}: exploración por agrupación
         </h1>
@@ -157,12 +157,12 @@ export default async function XrayKindIndexPage({ params, searchParams }) {
         <div className="chips">
           <span className="chip">Tipo: {kind}</span>
           <span className="chip">Grupos: {formatInt(sorted.length)}</span>
-          <span className="chip">Snapshot: {payload?.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Corte: {payload?.meta?.snapshot_date || "—"}</span>
         </div>
         <p className="sub">
           <a href={withBasePath("/people/")}>Volver a Directorio</a>
           <span style={{ marginLeft: "10px", color: "var(--ink-soft)" }}>
-            Tip: usa <code>q</code> y <code>mode</code> en query string para filtrar.
+            Consejo: usa <code>q</code> y <code>mode</code> en la URL para filtrar.
           </span>
         </p>
       </section>
@@ -188,7 +188,7 @@ export default async function XrayKindIndexPage({ params, searchParams }) {
             </div>
             {explorerLink ? (
               <p className="sub" style={{ marginTop: 10 }}>
-                <a href={explorerLink}>Abrir mandatos en Explorer</a>
+                <a href={explorerLink}>Abrir mandatos en el explorador</a>
               </p>
             ) : null}
             <div className="tableWrap" style={{ marginTop: 12 }}>

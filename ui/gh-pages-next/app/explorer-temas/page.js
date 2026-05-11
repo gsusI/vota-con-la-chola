@@ -19,7 +19,7 @@ import {
 
 export const metadata = {
   title: "Temas | Vota Con La Chola",
-  description: "Vista estatica de temas, posiciones y evidencias del snapshot publico.",
+  description: "Vista estática de temas, posiciones y evidencias del corte público.",
 };
 
 export default function ExplorerTemasPage() {
@@ -37,18 +37,18 @@ export default function ExplorerTemasPage() {
           { href: "/citizen/", label: "Abrir vista ciudadana" },
           { href: "/political-positions/", label: "Ver posiciones" },
         ]}
-        eyebrow="Snapshot publico"
+        eyebrow="Corte público"
         meta={[
           { label: "Generado", value: formatDate(snapshot?.meta?.generated_at) },
           { label: "Modo", value: "sin API runtime" },
         ]}
-        summary="Temas, posiciones y evidencias ya materializadas. Esta pagina no llama a /api: lo que ves sale del JSON estatico publicado."
+        summary="Temas, posiciones y evidencias ya materializadas. Esta página no llama a /api: lo que ves sale del JSON estático publicado."
         title="Temas y evidencia"
       />
 
       <StaticRouteMetrics
         metrics={[
-          { label: "Topic sets", value: formatInt(explorerTableMeta(snapshot, "topic_sets").total) },
+          { label: "Conjuntos de temas", value: formatInt(explorerTableMeta(snapshot, "topic_sets").total) },
           { label: "Temas", value: formatInt(explorerTableMeta(snapshot, "topics").total) },
           { label: "Posiciones", value: formatInt(explorerTableMeta(snapshot, "topic_positions").total) },
           { label: "Evidencias", value: formatInt(explorerTableMeta(snapshot, "topic_evidence").total) },
@@ -56,7 +56,7 @@ export default function ExplorerTemasPage() {
       />
 
       <StaticRoutePanelGrid>
-        <StaticRoutePanel note="Universos de temas publicados." title="Sets activos">
+        <StaticRoutePanel note="Universos de temas publicados." title="Conjuntos activos">
           <StaticRouteList
             items={topicSets.slice(0, 6)}
             renderItem={(row) => (
@@ -69,20 +69,20 @@ export default function ExplorerTemasPage() {
           />
         </StaticRoutePanel>
 
-        <StaticRoutePanel note="Primeras etiquetas canonicas disponibles." title="Temas">
+        <StaticRoutePanel note="Primeras etiquetas canónicas disponibles." title="Temas">
           <StaticRouteList
             items={topics.slice(0, 8)}
             renderItem={(row) => (
               <>
                 <strong>{row.label || rowPreviewValue(row, "label")}</strong>
                 <span>{compactText(rowPreviewValue(row, "canonical_key"), 120)}</span>
-                <span className="staticRouteList__meta">Topic {rowIdentityValue(row)}</span>
+                <span className="staticRouteList__meta">Tema {rowIdentityValue(row)}</span>
               </>
             )}
           />
         </StaticRoutePanel>
 
-        <StaticRoutePanel note="Ultimas filas exportadas del corte." title="Evidencia trazable">
+        <StaticRoutePanel note="Últimos registros exportados del corte." title="Evidencia trazable">
           <StaticRouteList
             items={evidence.slice(0, 8)}
             renderItem={(row) => (
@@ -95,7 +95,7 @@ export default function ExplorerTemasPage() {
           />
         </StaticRoutePanel>
 
-        <StaticRoutePanel note="Tablas listas para inspeccion estatica." title="Cobertura de tablas">
+        <StaticRoutePanel note="Tablas listas para inspección estática." title="Cobertura de tablas">
           <StaticRouteList
             items={tableNames.map((name) => ({ id: name, name, meta: explorerTableMeta(snapshot, name) }))}
             renderItem={(row) => (
@@ -113,8 +113,8 @@ export default function ExplorerTemasPage() {
             renderItem={(row) => (
               <>
                 <strong>{row.label || rowPreviewValue(row, "person_id")}</strong>
-                <span>{rowPreviewValue(row, "computed_method")} · ultima evidencia {formatDate(rowPreviewValue(row, "last_evidence_date"))}</span>
-                <span className="staticRouteList__meta">Position {rowIdentityValue(row)} · {rowPreviewValue(row, "territory_id")}</span>
+                <span>{rowPreviewValue(row, "computed_method")} · última evidencia {formatDate(rowPreviewValue(row, "last_evidence_date"))}</span>
+                <span className="staticRouteList__meta">Posición {rowIdentityValue(row)} · {rowPreviewValue(row, "territory_id")}</span>
               </>
             )}
           />

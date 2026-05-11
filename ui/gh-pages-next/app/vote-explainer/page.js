@@ -7,8 +7,8 @@ import {
 } from "./pageData.mjs";
 
 export const metadata = {
-  title: "Vote explainer | Vota Con La Chola",
-  description: "Indice publico de votaciones compartibles con fuentes oficiales y caveats visibles.",
+  title: "Explicador de votos | Vota Con La Chola",
+  description: "Índice público de votaciones compartibles con fuentes oficiales y salvedades visibles.",
 };
 
 export default function VoteExplainerIndexPage() {
@@ -18,20 +18,20 @@ export default function VoteExplainerIndexPage() {
   return (
     <main className="shell">
       <section className="hero card explainerHero">
-        <p className="eyebrow">Wedge principal</p>
-        <h1>Vote explainer</h1>
+        <p className="eyebrow">Votaciones explicadas</p>
+        <h1>Explicador de votos</h1>
         <p className="sub">
-          Paginas publicas y compartibles para una votacion concreta: que se voto, que paso, como votaron los grupos, donde estan las fuentes oficiales y que caveats aplican.
+          Páginas públicas y compartibles para una votación concreta: qué se votó, qué pasó, cómo votaron los grupos, dónde están las fuentes oficiales y qué salvedades aplican.
         </p>
         <div className="chips">
-          <span className="chip">Rutas canonicas por voto</span>
-          <span className="chip">Snapshot estatico reproducible</span>
-          <span className="chip">Sin API server-side</span>
+          <span className="chip">Rutas canónicas por voto</span>
+          <span className="chip">Corte estático reproducible</span>
+          <span className="chip">Sin API de servidor</span>
         </div>
         <p className="sub" style={{ marginTop: 12 }}>
-          {demoVote ? <a href={buildVoteExplainerHref(demoVote.public_vote_id)}>Abrir demo actual</a> : "Todavia no hay votos exportados para demo."}
+          {demoVote ? <a href={buildVoteExplainerHref(demoVote.public_vote_id)}>Abrir ejemplo actual</a> : "Todavía no hay votos exportados."}
           <span style={{ marginLeft: "10px" }}>
-            <a href={withBasePath("/explorer-votaciones/")}>Ir al explorer de votaciones</a>
+            <a href={withBasePath("/explorer-votaciones/")}>Ir al explorador de votaciones</a>
           </span>
         </p>
       </section>
@@ -46,12 +46,12 @@ export default function VoteExplainerIndexPage() {
               const topCaveat = vote.top_caveat || null;
               return (
                 <a className="voteIndexCard" href={buildVoteExplainerHref(vote.public_vote_id)} key={vote.public_vote_id}>
-                  <span className="kpiLabel">{vote.chamber || "Institucion parlamentaria"} · {formatVoteDate(vote.vote_date)}</span>
+                  <span className="kpiLabel">{vote.chamber || "Institución parlamentaria"} · {formatVoteDate(vote.vote_date)}</span>
                   <strong>{vote.headline || vote.vote_event_id}</strong>
                   <span className="sub" style={{ marginTop: 8 }}>{vote.result_label || vote.summary_text}</span>
                   {topCaveat ? (
                     <span className={`chip ${caveatSeverityClass(topCaveat.severity)}`} style={{ marginTop: 10 }}>
-                      Caveat: {topCaveat.label}
+                      Salvedad: {topCaveat.label}
                     </span>
                   ) : null}
                 </a>
@@ -59,7 +59,7 @@ export default function VoteExplainerIndexPage() {
             })}
           </div>
         ) : (
-          <p className="sub">No encontramos votos exportados en el snapshot publico actual.</p>
+          <p className="sub">No encontramos votos exportados en el corte público actual.</p>
         )}
       </section>
     </main>

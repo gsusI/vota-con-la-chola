@@ -493,7 +493,7 @@ export default function PeoplePage() {
   }, [xrayPayload, profile]);
 
   const bucketOptions = useMemo(() => {
-    const options = [{ value: "top", label: `Top (${formatInt(manifest?.top?.rows_total || 0)})` }];
+    const options = [{ value: "top", label: `Principales (${formatInt(manifest?.top?.rows_total || 0)})` }];
     for (const item of manifest?.buckets || []) {
       options.push({
         value: String(item.bucket || "").toUpperCase(),
@@ -627,7 +627,7 @@ export default function PeoplePage() {
                 </table>
               </div>
             ) : (
-              <p className="sub">Sin posiciones históricas registradas en el snapshot.</p>
+              <p className="sub">Sin posiciones históricas registradas en el corte.</p>
             )}
           </div>
 
@@ -680,19 +680,19 @@ export default function PeoplePage() {
 
           <ul className="artifactList" style={{ marginTop: 12 }}>
             <li>
-              <a href={`${explorerBase}?t=mandates&wc=person_id&wv=${profile.personId}`}>Explorer: mandatos</a>
-              <span>drill-down directo</span>
+              <a href={`${explorerBase}?t=mandates&wc=person_id&wv=${profile.personId}`}>Explorador: mandatos</a>
+              <span>detalle directo</span>
             </li>
             <li>
-              <a href={`${explorerBase}?t=parl_vote_member_votes&wc=person_id&wv=${profile.personId}`}>Explorer: votos persona</a>
+              <a href={`${explorerBase}?t=parl_vote_member_votes&wc=person_id&wv=${profile.personId}`}>Explorador: votos de la persona</a>
               <span>histórico de voto</span>
             </li>
             <li>
-              <a href={`${explorerBase}?t=topic_evidence&wc=person_id&wv=${profile.personId}`}>Explorer: evidencia temática</a>
+              <a href={`${explorerBase}?t=topic_evidence&wc=person_id&wv=${profile.personId}`}>Explorador: evidencia temática</a>
               <span>trazabilidad de postura</span>
             </li>
             <li>
-              <a href={`${explorerBase}?t=person_public_data_queue&wc=person_id&wv=${profile.personId}`}>Explorer: cola de datos faltantes</a>
+              <a href={`${explorerBase}?t=person_public_data_queue&wc=person_id&wv=${profile.personId}`}>Explorador: cola de datos faltantes</a>
               <span>backlog por persona</span>
             </li>
           </ul>
@@ -704,15 +704,15 @@ export default function PeoplePage() {
   return (
     <main className="shell">
       <section className="hero card">
-        <p className="eyebrow">Directory + Xray</p>
+        <p className="eyebrow">Directorio + radiografía</p>
         <h1>Personas y trayectoria pública</h1>
         <p className="sub">
           Directorio navegable de personas con resumen de actividad, posiciones que han ocupado y cola de datos públicos faltantes.
         </p>
         <div className="chips">
-          <span className="chip">Snapshot: {manifest.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Corte: {manifest.meta?.snapshot_date || "—"}</span>
           <span className="chip">Personas: {formatInt(manifest.meta?.people_total || 0)}</span>
-          <span className="chip">Buckets: {formatInt((manifest.buckets || []).length)}</span>
+          <span className="chip">Grupos: {formatInt((manifest.buckets || []).length)}</span>
         </div>
       </section>
 
@@ -721,7 +721,7 @@ export default function PeoplePage() {
       <section className="card block">
         <div className="blockHead"><h2>Directorio</h2></div>
         <p className="sub">
-          Carga inicial con top; para buscar en todo el padrón usa bucket por inicial.</p>
+          Carga inicial con principales; para buscar en todo el padrón usa el grupo por inicial.</p>
         {selectedPersonId > 0 ? (
           <p className="sub" style={{ marginTop: 6 }}>
             Perfil seleccionado arriba. Esta tabla es el directorio navegable completo.
@@ -729,7 +729,7 @@ export default function PeoplePage() {
         ) : null}
         <div className="filterGrid">
           <label className="field">
-            Bucket
+            Grupo
             <select value={bucket} onChange={(e) => setBucket(e.target.value)}>
               {bucketOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -775,7 +775,7 @@ export default function PeoplePage() {
         </div>
 
         <div className="blockHead" style={{ marginTop: 10 }}>
-          <h2>X-ray por dimensión</h2>
+          <h2>Radiografía por dimensión</h2>
         </div>
         <p className="sub">
           Perfiles agregados por partido, institución, ámbito, territorio y cargo.
@@ -789,9 +789,9 @@ export default function PeoplePage() {
         </div>
 
         {rowsLoading ? (
-          <p className="sub" style={{ marginTop: 10 }}>Cargando filas del bucket…</p>
+          <p className="sub" style={{ marginTop: 10 }}>Cargando filas del grupo…</p>
         ) : null}
-        {rowsError ? <p className="sub" style={{ marginTop: 10 }}>Error de bucket: {rowsError}</p> : null}
+        {rowsError ? <p className="sub" style={{ marginTop: 10 }}>Error de grupo: {rowsError}</p> : null}
 
         <div className="tableWrap">
           <table className="table">

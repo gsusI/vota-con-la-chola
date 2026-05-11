@@ -64,6 +64,23 @@ export function formatDate(value) {
   return raw || "sin fecha";
 }
 
+export function formatMethod(value) {
+  const key = String(value || "").toLowerCase().trim();
+  if (key === "votes") {
+    return "Votos";
+  }
+  if (key === "declared") {
+    return "Declaraciones";
+  }
+  if (key === "combined") {
+    return "Combinado";
+  }
+  if (key === "all") {
+    return "Todos";
+  }
+  return String(value || "").trim() || "sin método";
+}
+
 export function compactText(value, limit = 150) {
   const text = String(value || "").replace(/\s+/g, " ").trim();
   if (text.length <= limit) {

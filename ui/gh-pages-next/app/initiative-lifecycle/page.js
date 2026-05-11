@@ -281,7 +281,7 @@ export default function InitiativeLifecyclePage() {
     return (
       <main className="shell">
         <section className="card block">
-          <h1>No se pudo cargar el snapshot</h1>
+          <h1>No se pudo cargar el corte</h1>
           <p className="sub">{error}</p>
         </section>
       </main>
@@ -361,7 +361,7 @@ export default function InitiativeLifecyclePage() {
             <tbody>
               {committeeThroughput.length === 0 ? (
                 <tr>
-                  <td colSpan={6}>Sin datos de comité suficiente para este snapshot.</td>
+                  <td colSpan={6}>Sin datos de comité suficientes para este corte.</td>
                 </tr>
               ) : (
                 committeeThroughput.slice(0, 12).map((row) => (

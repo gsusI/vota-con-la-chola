@@ -100,7 +100,7 @@ function continuityBreadcrumbItemLabel(item) {
     return "";
   }
   if (item.kind === "origin") {
-    return item.originKind === "concern" ? `Preocupación: ${item.label}` : `Pack: ${item.label}`;
+    return item.originKind === "concern" ? `Preocupación: ${item.label}` : `Paquete: ${item.label}`;
   }
   if (item.kind === "family") {
     return `Familia: ${item.label}`;
@@ -130,6 +130,39 @@ function stancePillClass(stance) {
       return "pill-muted";
     default:
       return "pill-muted";
+  }
+}
+
+function stanceLabel(stance) {
+  switch (String(stance || "").toLowerCase()) {
+    case "support":
+    case "supportive":
+      return "A favor";
+    case "oppose":
+      return "En contra";
+    case "mixed":
+      return "Mixta";
+    case "unclear":
+      return "Incierta";
+    case "no_signal":
+      return "Sin señal";
+    default:
+      return String(stance || "").trim() || "Sin señal";
+  }
+}
+
+function methodLabel(method) {
+  switch (String(method || "").toLowerCase()) {
+    case "votes":
+      return "Votos";
+    case "declared":
+      return "Declaraciones";
+    case "combined":
+      return "Combinado";
+    case "all":
+      return "Todos";
+    default:
+      return String(method || "").trim() || "—";
   }
 }
 
@@ -640,7 +673,7 @@ export default function PoliticalPositionsPage() {
       return "";
     }
     if (topicDiscoveryContext.sourceMode === "pack_discovery") {
-      return `Temas para ${topicDiscoveryContext.sourceLabel || "el pack seleccionado"}`;
+      return `Temas para ${topicDiscoveryContext.sourceLabel || "el paquete seleccionado"}`;
     }
     if (topicDiscoveryContext.sourceMode === "concern_discovery") {
       return `Temas para ${topicDiscoveryContext.sourceLabel || "la preocupación seleccionada"}`;
@@ -683,7 +716,7 @@ export default function PoliticalPositionsPage() {
     if (!activePackEntry) {
       return "Entrada más humana para descubrimiento temático amplio. Cada chip abre una lista estática de temas relacionados antes de cargar trayectorias.";
     }
-    return `${String(activePackEntry.tradeoff || "").trim() || "Ruta curada con tradeoff explícito."} Si quieres acotar más antes de elegir tema exacto, baja a una preocupación concreta.`;
+    return `${String(activePackEntry.tradeoff || "").trim() || "Ruta curada con una contrapartida explícita."} Si quieres acotar más antes de elegir tema exacto, baja a una preocupación concreta.`;
   }, [activePackEntry]);
   const exactTopicOriginContext = useMemo(() => {
     if (!resolvedTopicFilter || activePackEntry || activeConcernEntry) {
@@ -1727,7 +1760,7 @@ export default function PoliticalPositionsPage() {
           <h2>Error de publicación</h2>
           <p className="sub">No pude cargar <code>political-positions/data/stances.json</code>.</p>
           <p className="sub">Error: {error || "sin datos"}</p>
-          <p className="sub">Genera el snapshot con: <code>python3 scripts/export_political_positions_snapshot.py --db etl/data/staging/politicos-es.db --snapshot-date 2026-02-12</code>.</p>
+          <p className="sub">Genera el corte con: <code>python3 scripts/export_political_positions_snapshot.py --db etl/data/staging/politicos-es.db --snapshot-date 2026-02-12</code>.</p>
         </section>
       </main>
     );
@@ -1737,15 +1770,15 @@ export default function PoliticalPositionsPage() {
     <main className="shell">
       <section className="hero card">
         <p className="eyebrow">Postura política explicable</p>
-        <h1>Topic stance scoring (por persona y partido)</h1>
+        <h1>Puntuación de posturas por tema</h1>
         <p className="sub">
           Vistas explicables de posición por tema con evidencia rastreable y estado de revisión para auditoría.
         </p>
         <div className="chips" style={{ marginTop: 12 }}>
-          <span className="chip">Snapshot: {data.meta?.snapshot_date || "—"}</span>
+          <span className="chip">Corte: {data.meta?.snapshot_date || "—"}</span>
           <span className="chip">Personas: {toInt((data.persons || []).length)}</span>
           <span className="chip">Partidos: {toInt((data.parties || []).length)}</span>
-          <span className="chip">Topics: {toInt((data.topics || []).length)}</span>
+          <span className="chip">Temas: {toInt((data.topics || []).length)}</span>
           <span className="chip">Pendientes de revisión: {toInt(data.meta?.review_pending || 0)}</span>
         </div>
       </section>
@@ -1806,15 +1839,15 @@ export default function PoliticalPositionsPage() {
               <option value="all">Todos</option>
               <option value="combined">Combined</option>
               <option value="votes">Votos</option>
-              <option value="declared">Declarado</option>
+              <option value="declared">Declaraciones</option>
             </select>
           </label>
           <label className="field">
             Postura
             <select value={state.stance} onChange={(e) => setState((prev) => ({ ...prev, stance: e.target.value }))}>
               <option value="all">Todas</option>
-              <option value="support">Support</option>
-              <option value="oppose">Oppose</option>
+              <option value="support">A favor</option>
+              <option value="oppose">En contra</option>
               <option value="mixed">Mixto</option>
               <option value="unclear">Poco claro</option>
               <option value="no_signal">Sin señal</option>
@@ -1878,9 +1911,9 @@ export default function PoliticalPositionsPage() {
 
         {state.mode === "person" ? (
           <article className="kpiCard" style={{ marginTop: 12 }}>
-            <span className="kpiLabel">Rutas por pack</span>
+            <span className="kpiLabel">Rutas por paquete</span>
             <p className="sub" style={{ marginTop: 4 }}>
-              Agrupaciones editoriales de preocupaciones con tradeoff explícito. Cada pack abre una exploración temática estática antes de tocar trayectorias de personas.
+              Agrupaciones editoriales de preocupaciones con contrapartida explícita. Cada paquete abre una exploración temática estática antes de tocar trayectorias de personas.
             </p>
             <div className="chips" style={{ marginTop: 10 }}>
               {concernPackEntries.map((pack) => {
@@ -1919,7 +1952,7 @@ export default function PoliticalPositionsPage() {
             {activePackEntry ? (
               <>
                 <p className="sub" style={{ marginTop: 10 }}>
-                  {activePackEntry.tradeoff || "Pack curado para exploración temática más guiada."}
+                  {activePackEntry.tradeoff || "Paquete curado para una exploración temática más guiada."}
                 </p>
                 <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
                   {(activePackEntry.concerns || []).map((concern) => (
@@ -2262,7 +2295,7 @@ export default function PoliticalPositionsPage() {
             <span className="chip">Buscar: {qInterpretationLabel}</span>
           ) : null}
           {activePackEntry ? (
-            <span className="chip">Pack: {activePackEntry.label}</span>
+            <span className="chip">Paquete: {activePackEntry.label}</span>
           ) : null}
           {activeConcernEntry ? (
             <span className="chip">Preocupación: {activeConcernEntry.label}</span>
@@ -2274,7 +2307,7 @@ export default function PoliticalPositionsPage() {
             <span className="chip">Error de filas iniciales</span>
           ) : null}
           {state.mode === "person" && activePersonScanMode === "default_rows" && Array.isArray(personDefaultRows) ? (
-            <span className="chip">Vista rápida sin chunks</span>
+            <span className="chip">Vista rápida sin segmentos</span>
           ) : null}
           {activeSortPreviewLoading ? (
             <span className="chip">Cargando vista ordenada…</span>
@@ -2310,7 +2343,7 @@ export default function PoliticalPositionsPage() {
             </span>
           ) : null}
           {state.mode === "person" && activePersonScanMode === "topic_discovery" ? (
-            <span className="chip">Exploración temática sin chunks</span>
+            <span className="chip">Exploración temática sin segmentos</span>
           ) : null}
           {activePersonSearchIndexLoading ? (
             <span className="chip">Cargando índice de búsqueda…</span>
@@ -2334,7 +2367,7 @@ export default function PoliticalPositionsPage() {
           ) : null}
           {state.mode === "person" && personTrajectoryChunkSummary && personTrajectoryChunkSummary.scanMode !== "default_rows" && personTrajectoryChunkSummary.scanMode !== "sort_preview" && personTrajectoryChunkSummary.scanMode !== "topic_preview" ? (
             <span className="chip">
-              Chunks persona: {personTrajectoryChunkSummary.loadedCandidateTotal}/{personTrajectoryChunkSummary.candidateTotal}
+              Segmentos de persona: {personTrajectoryChunkSummary.loadedCandidateTotal}/{personTrajectoryChunkSummary.candidateTotal}
               {personTrajectoryChunkSummary.candidateTotal !== personTrajectoryChunkSummary.total
                 ? ` · ${personTrajectoryChunkSummary.total} totales`
                 : ""}
@@ -2362,9 +2395,9 @@ export default function PoliticalPositionsPage() {
                 <th>Entidad</th>
                 <th>Tema</th>
                 <th>Método</th>
-                <th>As Of</th>
+                <th>Corte</th>
                 <th>Postura</th>
-                <th>Score</th>
+                <th>Puntuación</th>
                 <th>Confianza</th>
                 <th>Evidencia</th>
                 <th>Revisión</th>
@@ -2376,7 +2409,7 @@ export default function PoliticalPositionsPage() {
                 const rowLabel = row.scope === "person"
                   ? `${row.personName || row.personId} · ${row.partyLabel || "Sin partido"}`
                   : `${row.partyLabel || row.partyId}`;
-                const rowText = `/${row.scope}/`;
+                const rowText = row.scope === "person" ? "persona" : "grupo";
                 return (
                   <tr
                     key={row.key}
@@ -2394,11 +2427,11 @@ export default function PoliticalPositionsPage() {
                     <td>{rowText}</td>
                     <td>{rowLabel}</td>
                     <td>{row.topicLabel || "Sin tema"}</td>
-                    <td>{row.method || "—"}</td>
+                    <td>{methodLabel(row.method)}</td>
                     <td>{formatDate(row.asOf)}{row.windowDays ? ` (${row.windowDays}d)` : ""}</td>
                     <td>
                       <span className={`pill ${stancePillClass(row.stance)}`}>
-                        {row.stance || "no_signal"}
+                        {stanceLabel(row.stance)}
                       </span>
                     </td>
                     <td>{toScore(row.score)}</td>
@@ -2451,7 +2484,7 @@ export default function PoliticalPositionsPage() {
                 <tr>
                   <td colSpan={10} className="sub">
                     {activePackEntry
-                      ? `El pack ${activePackEntry.label} abre varias preocupaciones y temas. Elige uno de los temas sugeridos para fijar un tema exacto antes de cargar trayectorias de personas.`
+                      ? `El paquete ${activePackEntry.label} abre varias preocupaciones y temas. Elige uno de los temas sugeridos para fijar un tema exacto antes de cargar trayectorias de personas.`
                       : activeConcernEntry
                       ? `La preocupación ${activeConcernEntry.label} agrupa varios temas. Elige uno de los temas sugeridos para fijar un tema exacto antes de cargar trayectorias de personas.`
                       : "La búsqueda temática sigue siendo amplia. Elige uno de los temas sugeridos para fijar un tema exacto antes de cargar trayectorias de personas."}

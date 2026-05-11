@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import {
-  buildResponsibilityExplainerHref,
   formatDate,
   formatInt,
   loadResponsibilityExplainerCasePayload,
@@ -21,13 +20,13 @@ export async function generateMetadata({ params }) {
   if (!payload) {
     return {
       title: "Caso no encontrado | Vota Con La Chola",
-      description: "No encontramos ese caso en el snapshot publico actual.",
+      description: "No encontramos ese caso en el corte público actual.",
     };
   }
 
   return {
-    title: `${payload.case?.title || payload.case?.short_label || "Responsibility explainer"} | Vota Con La Chola`,
-    description: payload.case?.summary || "Pagina publica y auditable de un caso de responsabilidad.",
+    title: `${payload.case?.title || payload.case?.short_label || "Caso de responsabilidad"} | Vota Con La Chola`,
+    description: payload.case?.summary || "Página pública y auditable de un caso de responsabilidad.",
     alternates: {
       canonical: payload.case?.canonical_url || undefined,
     },
@@ -183,15 +182,15 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                 Inicio
               </a>
               <a className="responsibility-hero__breadcrumb-link" href={withBasePath("/responsibility-explainer/")}>
-                Responsibility explainer
+                Casos de responsabilidad
               </a>
             </nav>
-            <p className="responsibility-hero__eyebrow">Responsibility explainer</p>
+            <p className="responsibility-hero__eyebrow">Casos de responsabilidad</p>
             <h1 className="responsibility-hero__title" id="responsibility-hero-title">
               {caseInfo.title || caseInfo.short_label || "Caso sin titular legible"}
             </h1>
             <p className="responsibility-hero__dek">
-              {caseInfo.summary || "Pagina publica para seguir reglas, actos, responsabilidades y huecos abiertos."}
+              {caseInfo.summary || "Página pública para seguir reglas, actos, responsabilidades y huecos abiertos."}
             </p>
             <dl className="responsibility-hero__facts" aria-label="Cobertura principal">
               <div className="responsibility-hero__fact">
@@ -208,21 +207,18 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
               </div>
             </dl>
             <p className="responsibility-hero__scope">
-              {caseInfo.current_scope_note || "Snapshot parcial. Las lagunas quedan visibles para no convertir incertidumbre en conclusion."}
+              {caseInfo.current_scope_note || "Corte parcial. Las lagunas quedan visibles para no convertir incertidumbre en conclusión."}
             </p>
             <div className="responsibility-hero__links" aria-label="Enlaces del caso">
               <a className="responsibility-hero__link" href={withBasePath("/responsibility-explainer/")}>
-                Volver al indice
-              </a>
-              <a className="responsibility-hero__link" href={buildResponsibilityExplainerHref(caseInfo.case_id)}>
-                Ruta canonica
+                Volver al índice
               </a>
             </div>
           </div>
 
           <aside className="responsibility-hero__visual" aria-label="Resumen visual del caso">
             <div className="responsibility-radar">
-              <p className="responsibility-radar__label">{caseInfo.geography || "Ambito no disponible"}</p>
+              <p className="responsibility-radar__label">{caseInfo.geography || "Ámbito no disponible"}</p>
               <p className="responsibility-radar__window">{caseInfo.incident_window?.label || "Ventana temporal no disponible"}</p>
               <div className="responsibility-radar__bars" aria-hidden="true">
                 {(hasTimeline ? warningTimelineEvents : governingRules).slice(0, 5).map((item, index) => (
@@ -233,18 +229,18 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                 ))}
               </div>
               <p className="responsibility-radar__caption">
-                Snapshot {payload.meta?.snapshot_date || "sin fecha"} · {formatInt(questions.length)} preguntas · {formatInt(questionCounts.partial)} parciales
+                Corte {payload.meta?.snapshot_date || "sin fecha"} · {formatInt(questions.length)} preguntas · {formatInt(questionCounts.partial)} parciales
               </p>
             </div>
           </aside>
         </section>
 
-        <nav className="responsibility-chapter-nav" aria-label="Capitulos del explainer">
+        <nav className="responsibility-chapter-nav" aria-label="Capítulos del explicador">
           <a className="responsibility-chapter-nav__link" href="#resumen">
             Resumen
           </a>
           <a className="responsibility-chapter-nav__link" href="#cronologia">
-            Cronologia
+            Cronología
           </a>
           <a className="responsibility-chapter-nav__link" href="#cadena">
             Cadena
@@ -258,30 +254,30 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
         </nav>
 
         <section className="responsibility-summary-section" id="resumen" aria-labelledby="responsibility-summary-title">
-          <p className="responsibility-section-kicker">Que muestra este slice</p>
+          <p className="responsibility-section-kicker">Qué muestra este recorte</p>
           <h2 className="responsibility-section-title" id="responsibility-summary-title">
-            No es una sentencia. Es un mapa navegable de deberes, senales y huecos.
+            No es una sentencia. Es un mapa navegable de deberes, señales y huecos.
           </h2>
           <div className="responsibility-summary-grid">
             <article className="responsibility-summary-card">
               <span className="responsibility-summary-card__number">{formatInt(questionCounts.partial)}</span>
               <h3 className="responsibility-summary-card__title">Preguntas con respuesta parcial</h3>
               <p className="responsibility-summary-card__copy">
-                Hay anclajes suficientes para orientar la auditoria, pero no para cerrar causalidad.
+                Hay anclajes suficientes para orientar la auditoría, pero no para cerrar causalidad.
               </p>
             </article>
             <article className="responsibility-summary-card">
               <span className="responsibility-summary-card__number">{formatInt(highCertaintyEvidenceCount || evidenceRows.length)}</span>
-              <h3 className="responsibility-summary-card__title">Filas de evidencia fuerte</h3>
+              <h3 className="responsibility-summary-card__title">Registros con evidencia sólida</h3>
               <p className="responsibility-summary-card__copy">
-                La lectura publica debe poder volver desde cada afirmacion a un documento oficial.
+                La lectura pública debe poder volver desde cada afirmación a un documento oficial.
               </p>
             </article>
             <article className="responsibility-summary-card">
               <span className="responsibility-summary-card__number">{formatInt(knownGaps.length)}</span>
               <h3 className="responsibility-summary-card__title">Huecos declarados</h3>
               <p className="responsibility-summary-card__copy">
-                Lo que falta queda en portada: cronologia operativa, decisiones internas y cruces territoriales.
+                Lo que falta queda en portada: cronología operativa, decisiones internas y cruces territoriales.
               </p>
             </article>
           </div>
@@ -289,12 +285,12 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
 
         <section className="responsibility-story-section responsibility-story-section--timeline" id="cronologia" aria-labelledby="responsibility-timeline-title">
           <div className="responsibility-section-heading">
-            <p className="responsibility-section-kicker">1 / Cronologia</p>
+            <p className="responsibility-section-kicker">1 / Cronología</p>
             <h2 className="responsibility-section-title" id="responsibility-timeline-title">
-              Primero, ordenar las senales en tiempo.
+              Primero, ordenar las señales en el tiempo.
             </h2>
             <p className="responsibility-section-dek">
-              El lector necesita ver cuando aparece cada aviso antes de entrar en competencias, omisiones o responsabilidades.
+              El lector necesita ver cuándo aparece cada aviso antes de entrar en competencias, omisiones o responsabilidades.
             </p>
           </div>
 
@@ -306,7 +302,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                   <ol className="responsibility-signal-panel__list">
                     {warningTimelineEvents.map((event) => (
                       <li className="responsibility-signal-panel__item" key={`panel-${event.event_id || event.event_time}`}>
-                        <span className={signalClassName(event.signal_level)}>{event.signal_level || "senal"}</span>
+                        <span className={signalClassName(event.signal_level)}>{event.signal_level || "señal"}</span>
                         <time className="responsibility-signal-panel__time">{formatTimestamp(event.event_time)}</time>
                       </li>
                     ))}
@@ -322,7 +318,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                         <span className="responsibility-timeline__index">{String(index + 1).padStart(2, "0")}</span>
                         <time className="responsibility-timeline__time">{formatTimestamp(event.event_time)}</time>
                         <h3 className="responsibility-timeline__title">{event.channel_name || event.channel_id || "Canal sin nombre"}</h3>
-                        <span className={signalClassName(event.signal_level)}>{event.signal_level || "senal sin nivel"}</span>
+                        <span className={signalClassName(event.signal_level)}>{event.signal_level || "señal sin nivel"}</span>
                         <p className="responsibility-timeline__copy">{event.event_summary || "Sin resumen de aviso."}</p>
                         {event.why_it_matters ? <p className="responsibility-timeline__why">{event.why_it_matters}</p> : null}
                         <SourceLink href={eventHref} label={event.source_title || "Abrir fuente del aviso"} />
@@ -334,7 +330,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
             </div>
           ) : (
             <div className="responsibility-empty-state">
-              <p className="responsibility-empty-state__copy">No hay cronologia de senales normalizada en este caso.</p>
+              <p className="responsibility-empty-state__copy">No hay cronología de señales normalizada en este caso.</p>
             </div>
           )}
         </section>
@@ -343,10 +339,10 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
           <div className="responsibility-section-heading">
             <p className="responsibility-section-kicker">2 / Cadena</p>
             <h2 className="responsibility-section-title" id="responsibility-chain-title">
-              Despues, separar competencia de culpa.
+              Después, separar competencia de culpa.
             </h2>
             <p className="responsibility-section-dek">
-              Una cadena legible muestra quien tenia deber, quien tenia datos y que pregunta queda abierta para cada actor.
+              Una cadena legible muestra quién tenía el deber, quién tenía los datos y qué pregunta queda abierta para cada actor.
             </p>
           </div>
 
@@ -379,7 +375,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                     return (
                       <article className="responsibility-ledger__item" key={item.rule_id || item.finding_id || item.title || item.entity_name}>
                         <p className="responsibility-ledger__item-label">{item.rule_kind || item.category || item.entity_name || "Registro"}</p>
-                        <h4 className="responsibility-ledger__item-title">{item.title || item.finding_summary || "Registro sin titulo"}</h4>
+                        <h4 className="responsibility-ledger__item-title">{item.title || item.finding_summary || "Registro sin título"}</h4>
                         {item.duty_summary || item.accountability_implication ? (
                           <p className="responsibility-ledger__item-copy">{item.duty_summary || item.accountability_implication}</p>
                         ) : null}
@@ -397,7 +393,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                     return (
                       <article className="responsibility-ledger__item" key={item.act_id || item.link_id || item.role_in_chain}>
                         <p className="responsibility-ledger__item-label">{item.act_type || item.actor || "Cadena"}</p>
-                        <h4 className="responsibility-ledger__item-title">{item.act_summary || item.role_in_chain || item.status || "Registro sin titulo"}</h4>
+                        <h4 className="responsibility-ledger__item-title">{item.act_summary || item.role_in_chain || item.status || "Registro sin título"}</h4>
                         {item.accountability_implication || item.obligation_basis ? (
                           <p className="responsibility-ledger__item-copy">{item.accountability_implication || item.obligation_basis}</p>
                         ) : null}
@@ -415,10 +411,10 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
           <div className="responsibility-section-heading">
             <p className="responsibility-section-kicker">3 / Evidencia</p>
             <h2 className="responsibility-section-title" id="responsibility-evidence-title">
-              La parte pesada debe ser explorable, no una pared de tarjetas.
+              La evidencia debe poder recorrerse sin saturar la pantalla.
             </h2>
             <p className="responsibility-section-dek">
-              Los factores estructurales se leen como rutas de auditoria. Las filas concretas viven dentro de desplegables con fuente.
+              Los factores estructurales se leen como rutas de auditoría. Los registros concretos viven dentro de desplegables con fuente.
             </p>
           </div>
 
@@ -431,7 +427,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                     return (
                       <article className="responsibility-factor-strip__item" key={factor.factor_id || `${factor.category}-${factor.title}`}>
                         <p className="responsibility-factor-strip__category">{factor.category || "Factor regulatorio"}</p>
-                        <h3 className="responsibility-factor-strip__title">{factor.title || "Factor sin titulo"}</h3>
+                        <h3 className="responsibility-factor-strip__title">{factor.title || "Factor sin título"}</h3>
                         <p className="responsibility-factor-strip__copy">{factor.risk_mechanism || "Sin mecanismo de riesgo resumido."}</p>
                         {factor.accountability_focus ? <p className="responsibility-factor-strip__focus">{factor.accountability_focus}</p> : null}
                         <SourceLink href={factorHref} label={factor.source_title || "Abrir fuente del factor"} />
@@ -450,14 +446,14 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                     return (
                       <details className="responsibility-evidence-target" key={targetId} open={targetIndex === 0}>
                         <summary className="responsibility-evidence-target__summary">
-                          <span className="responsibility-evidence-target__category">{target.category || "Blanco de auditoria"}</span>
+                          <span className="responsibility-evidence-target__category">{target.category || "Blanco de auditoría"}</span>
                           <span className="responsibility-evidence-target__title">{target.title || targetTitleById[targetId] || targetId}</span>
-                          <span className="responsibility-evidence-target__count">{formatInt(rows.length)} filas</span>
+                          <span className="responsibility-evidence-target__count">{formatInt(rows.length)} registros</span>
                         </summary>
                         <div className="responsibility-evidence-target__body">
                           {target.audit_question ? <p className="responsibility-evidence-target__question">{target.audit_question}</p> : null}
                           {target.why_priority ? <p className="responsibility-evidence-target__priority">{target.why_priority}</p> : null}
-                          <SourceLink href={targetHref} label={target.source_title || "Abrir fuente del target"} />
+                          <SourceLink href={targetHref} label={target.source_title || "Abrir fuente del blanco de auditoría"} />
                           {rows.length ? (
                             <ul className="responsibility-evidence-list">
                               {rows.map((row) => {
@@ -469,7 +465,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                                         <span className="responsibility-evidence-row__entity">{row.entity_name || "Entidad sin nombre"}</span>
                                         {row.certainty ? <span className="responsibility-evidence-row__certainty">Certeza: {row.certainty}</span> : null}
                                       </div>
-                                      <h4 className="responsibility-evidence-row__title">{row.signal_title || row.signal_type || "Senal sin titulo"}</h4>
+                                      <h4 className="responsibility-evidence-row__title">{row.signal_title || row.signal_type || "Señal sin título"}</h4>
                                       <p className="responsibility-evidence-row__copy">{row.pre_dana_reading || "Sin lectura contextual resumida."}</p>
                                       {row.why_it_matters ? <p className="responsibility-evidence-row__why">{row.why_it_matters}</p> : null}
                                       <SourceLink href={rowHref} label={row.source_title || "Abrir fuente oficial"} />
@@ -479,7 +475,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                               })}
                             </ul>
                           ) : (
-                            <p className="responsibility-empty-state__copy">Este target aun no tiene filas de evidencia publicadas.</p>
+                            <p className="responsibility-empty-state__copy">Este blanco aún no tiene registros de evidencia publicados.</p>
                           )}
                         </div>
                       </details>
@@ -525,8 +521,8 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
               {measures.map((measure) => (
                 <article className="responsibility-parliament-card" key={`${measure.initiative_id}-${measure.measure_rank}`}>
                   <p className="responsibility-parliament-card__meta">{measure.policy_area || measure.initiative_id}</p>
-                  <h3 className="responsibility-parliament-card__title">{measure.measure_title || "Medida sin titulo"}</h3>
-                  <p className="responsibility-parliament-card__copy">{measure.citizen_summary || "Sin resumen citizen-facing."}</p>
+                  <h3 className="responsibility-parliament-card__title">{measure.measure_title || "Medida sin título"}</h3>
+                  <p className="responsibility-parliament-card__copy">{measure.citizen_summary || "Sin resumen para la vista ciudadana."}</p>
                 </article>
               ))}
             </div>
@@ -540,7 +536,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
               Separar probado, parcial y pendiente.
             </h2>
             <p className="responsibility-section-dek">
-              La pagina debe acabar con incertidumbre accionable, no con falsa conclusion.
+              La página debe acabar con incertidumbre accionable, no con una falsa conclusión.
             </p>
           </div>
 
@@ -564,7 +560,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
             </div>
 
             <div className="responsibility-question-column responsibility-question-column--gaps">
-              <h3 className="responsibility-question-column__title">Huecos y proximas lineas</h3>
+              <h3 className="responsibility-question-column__title">Huecos y próximas líneas</h3>
               {knownGaps.length ? (
                 <ul className="responsibility-gap-list">
                   {knownGaps.map((item) => (
@@ -577,7 +573,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
                 <p className="responsibility-empty-state__copy">No hay huecos conocidos publicados.</p>
               )}
               {nextLanes.length ? (
-                <div className="responsibility-next-lanes" aria-label="Siguientes lineas">
+                <div className="responsibility-next-lanes" aria-label="Siguientes líneas">
                   {nextLanes.map((item) => (
                     <span className="responsibility-next-lanes__item" key={item}>
                       {item}
@@ -593,7 +589,7 @@ export default async function ResponsibilityExplainerCasePage({ params }) {
               Cobertura total: {formatInt(coverage.governing_rules_total || governingRules.length)} reglas,{" "}
               {formatInt(coverage.official_findings_total || officialFindings.length)} hallazgos,{" "}
               {formatInt(coverage.administrative_acts_total || administrativeActs.length)} actos,{" "}
-              {formatInt(coverage.structural_evidence_rows_total || evidenceRows.length)} filas de evidencia.
+              {formatInt(coverage.structural_evidence_rows_total || evidenceRows.length)} registros de evidencia.
             </p>
           </footer>
         </section>

@@ -10,7 +10,7 @@ const coverageArtifacts = [
   {
     title: "status.json",
     href: "/explorer-sources/data/status.json",
-    note: "Archivo principal con el estado operativo y los indicadores del snapshot.",
+    note: "Archivo principal con el estado operativo y los indicadores del corte.",
   },
   {
     title: "ideal.json",

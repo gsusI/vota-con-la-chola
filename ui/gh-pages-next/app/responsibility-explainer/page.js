@@ -7,8 +7,8 @@ import {
 } from "./pageData.mjs";
 
 export const metadata = {
-  title: "Responsibility explainer | Vota Con La Chola",
-  description: "Indice publico de casos de responsabilidad con reglas, actos, cadenas y huecos visibles.",
+  title: "Casos de responsabilidad | Vota Con La Chola",
+  description: "Índice público de casos de responsabilidad con reglas, actos, cadenas y huecos visibles.",
 };
 
 export default function ResponsibilityExplainerIndexPage() {
@@ -18,22 +18,22 @@ export default function ResponsibilityExplainerIndexPage() {
   return (
     <main className="shell">
       <section className="hero card explainerHero">
-        <p className="eyebrow">Wedge de responsabilidad</p>
-        <h1>Responsibility explainer</h1>
+        <p className="eyebrow">Responsabilidad pública</p>
+        <h1>Casos de responsabilidad</h1>
         <p className="sub">
-          Paginas publicas y compartibles para seguir reglas, actos, cadenas de responsabilidad y huecos abiertos en
-          fallos publicos, captura regulatoria, urbanismo, enforcement o crisis concretas.
+          Páginas públicas y compartibles para seguir reglas, actos, cadenas de responsabilidad y huecos abiertos en
+          fallos públicos, captura regulatoria, urbanismo, potestad sancionadora o crisis concretas.
         </p>
         <div className="chips">
-          <span className="chip">Casos static-first</span>
-          <span className="chip">Ledger de reglas y actos</span>
+          <span className="chip">Casos estáticos</span>
+          <span className="chip">Registro de reglas y actos</span>
           <span className="chip">Huecos explicitados</span>
-          <span className="chip">Snapshot: {manifest.meta?.snapshot_date || "sin fecha"}</span>
+          <span className="chip">Corte: {manifest.meta?.snapshot_date || "sin fecha"}</span>
         </div>
         <p className="sub" style={{ marginTop: 12 }}>
-          {firstCase ? <a href={buildResponsibilityExplainerHref(firstCase.case_id)}>Abrir caso destacado</a> : "Todavia no hay casos exportados para demo."}
+          {firstCase ? <a href={buildResponsibilityExplainerHref(firstCase.case_id)}>Abrir caso destacado</a> : "Todavía no hay casos exportados."}
           <span style={{ marginLeft: "10px" }}>
-            <a href={withBasePath("/explorer/")}>Ir al explorer</a>
+            <a href={withBasePath("/explorer/")}>Ir al explorador</a>
           </span>
         </p>
       </section>
@@ -71,7 +71,7 @@ export default function ResponsibilityExplainerIndexPage() {
             })}
           </div>
         ) : (
-          <p className="sub">No encontramos casos exportados en el snapshot publico actual.</p>
+          <p className="sub">No encontramos casos exportados en el corte público actual.</p>
         )}
       </section>
     </main>

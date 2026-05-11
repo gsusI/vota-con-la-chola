@@ -52,7 +52,7 @@ export function StaticRouteHero({ eyebrow, title, summary, actions = [], meta = 
 
 export function StaticRouteMetrics({ metrics }) {
   return (
-    <section className="staticRouteMetricGrid" aria-label="Metricas del snapshot">
+    <section className="staticRouteMetricGrid" aria-label="Métricas del corte">
       {metrics.map((metric) => (
         <div className="staticRouteMetric" key={metric.label}>
           <span className="staticRouteMetric__label">{metric.label}</span>
@@ -80,7 +80,7 @@ export function StaticRoutePanel({ title, note, children }) {
   );
 }
 
-export function StaticRouteList({ items, renderItem, empty = "Sin filas en este snapshot." }) {
+export function StaticRouteList({ items, renderItem, empty = "Sin filas en este corte." }) {
   if (!items.length) {
     return <p className="sub staticRouteEmpty">{empty}</p>;
   }

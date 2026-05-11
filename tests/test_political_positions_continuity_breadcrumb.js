@@ -37,7 +37,7 @@ test("buildPoliticalPositionsContinuityBreadcrumb returns compact exact-topic ro
       ],
       primaryAction: {
         kind: "restore_discovery",
-        label: "Volver al pack",
+        label: "Volver al paquete",
       },
       dismissible: false,
       meta: null,
@@ -101,7 +101,7 @@ test("buildPoliticalPositionsDetailBreadcrumb appends active person to the compa
         ],
         primaryAction: {
           kind: "restore_discovery",
-          label: "Volver al pack",
+          label: "Volver al paquete",
         },
         dismissible: false,
         meta: null,
@@ -127,7 +127,7 @@ test("buildPoliticalPositionsDetailBreadcrumb appends active person to the compa
       ],
       primaryAction: {
         kind: "restore_discovery",
-        label: "Volver al pack",
+        label: "Volver al paquete",
       },
       dismissible: false,
       meta: null,
