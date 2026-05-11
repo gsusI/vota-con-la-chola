@@ -112,3 +112,27 @@ Decision:
 - Live politicos source DB can legitimately have zero accountability rows.
 - Keep default accountability minimums for normal publish lanes.
 - Override accountability minimums only in `Live ETL Publish` so live source catalog/static artifacts can build and publish.
+
+## Main Live Publish Follow-up 2
+
+Run:
+- `https://github.com/gsusI/vota-con-la-chola/actions/runs/25691354880`
+- `live-etl` job: `https://github.com/gsusI/vota-con-la-chola/actions/runs/25691354880/job/75428278075`
+
+Result:
+- `Run live ETL`: passed.
+- Total loaded: `78621/78717 registros validos`.
+- `Enforce tracker truth`: passed with `mismatches=0` and `done_zero_real=0`.
+- Accountability artifact validation passed with live-workflow zero thresholds.
+- `Build public static artifacts`: failed before HF/Cloudflare publish.
+
+Failure signal:
+
+```text
+publicar_hf_snapshot.py: error: argument --dataset-repo: expected one argument
+```
+
+Decision:
+- Empty `HF_DATASET_REPO_ID`/`HF_USERNAME` workflow secrets must not erase the local dry-run default.
+- Build dry-run will use `local/vota-con-la-chola-data` when publish secrets are absent.
+- Real HF publish will still skip unless `HF_TOKEN` and a dataset repo target are configured.
