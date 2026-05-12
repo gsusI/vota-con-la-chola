@@ -1,34 +1,33 @@
 {
-  "generated_at": "2026-05-12T10:43:08+00:00",
+  "generated_at": "2026-05-12T13:11:09+00:00",
   "summary": {
     "desired": 46,
-    "present": 45,
-    "missing": 1,
+    "present": 44,
+    "missing": 2,
     "extra": 0,
-    "not_run": 12,
+    "not_run": 5,
     "running": 0,
     "ok": 28,
-    "partial": 4,
+    "partial": 11,
     "error": 0,
-    "degraded": 1,
+    "degraded": 0,
     "unknown": 0,
     "not_in_catalog": 0,
     "desired_progress": {
-      "loaded": 82695,
+      "loaded": 79211,
       "target": 57557,
       "percent": 100
     },
     "states": [
-      "degraded",
       "missing",
       "not_run",
       "ok",
       "partial"
     ],
     "sql": {
-      "todo": 13,
-      "partial": 5,
-      "done": 28,
+      "todo": 7,
+      "partial": 14,
+      "done": 25,
       "foreign_key_violations": 0
     },
     "tracker": {
@@ -37,9 +36,9 @@
       "todo": 28,
       "partial": 42,
       "done": 229,
-      "mismatch": 17,
+      "mismatch": 10,
       "waived_mismatch": 0,
-      "done_zero_real": 2,
+      "done_zero_real": 0,
       "untracked_sources": 8,
       "waivers_active": 0,
       "waivers_expired": 0,
@@ -47,36 +46,36 @@
     }
   },
   "ops": {
-    "ingestion_runs_total": 50,
-    "ingestion_runs_ok": 41,
-    "ingestion_runs_error": 7,
-    "ingestion_runs_retry": 9,
-    "ingestion_runs_ok_pct": 0.82,
-    "avg_run_seconds": 188.458336237818,
-    "last_run_seconds": 2.0000293850898743,
-    "retry_rate": 0.18,
+    "ingestion_runs_total": 39,
+    "ingestion_runs_ok": 39,
+    "ingestion_runs_error": 0,
+    "ingestion_runs_retry": 0,
+    "ingestion_runs_ok_pct": 1.0,
+    "avg_run_seconds": 30.17948751266186,
+    "last_run_seconds": 0.0,
+    "retry_rate": 0.0,
     "published_recommendation_artifacts": 0,
-    "autonomico_sources_ok": 17,
+    "autonomico_sources_ok": 15,
     "europeo_sources_ok": 1
   },
   "analytics": {
     "topics": {
-      "topics_total": 26,
-      "topic_sets_total": 2,
-      "topic_sets_active": 2,
-      "topic_set_topics_total": 25,
-      "high_stakes_total": 16
+      "topics_total": 0,
+      "topic_sets_total": 0,
+      "topic_sets_active": 0,
+      "topic_set_topics_total": 0,
+      "high_stakes_total": 0
     },
     "evidence": {
-      "topic_evidence_total": 24837,
-      "topic_evidence_with_topic": 24837,
-      "topic_evidence_with_topic_pct": 1.0,
-      "topic_evidence_with_date": 24837,
-      "topic_evidence_with_date_pct": 1.0,
-      "topic_evidence_with_source_url": 24837,
-      "topic_evidence_with_source_url_pct": 1.0,
+      "topic_evidence_total": 0,
+      "topic_evidence_with_topic": 0,
+      "topic_evidence_with_topic_pct": 0.0,
+      "topic_evidence_with_date": 0,
+      "topic_evidence_with_date_pct": 0.0,
+      "topic_evidence_with_source_url": 0,
+      "topic_evidence_with_source_url_pct": 0.0,
       "topic_evidence_declared_total": 0,
-      "topic_evidence_revealed_total": 24837,
+      "topic_evidence_revealed_total": 0,
       "topic_evidence_declared_with_date": 0,
       "topic_evidence_declared_with_date_pct": 0.0,
       "topic_evidence_declared_with_signal": 0,
@@ -87,25 +86,9 @@
       "topic_evidence_reviews_ignored": 0,
       "topic_evidence_reviews_pending_pct": 0.0,
       "topic_evidence_reviews_pending_by_reason": {},
-      "topic_evidence_by_type": {
-        "revealed:vote": 24837
-      },
-      "topic_method_top": [
-        {
-          "key": "initiative:leg_expediente_payload_exact",
-          "count": 24493
-        },
-        {
-          "key": "initiative:derived_title_key",
-          "count": 344
-        }
-      ],
-      "stance_method_top": [
-        {
-          "key": "rollcall",
-          "count": 24837
-        }
-      ],
+      "topic_evidence_by_type": {},
+      "topic_method_top": [],
+      "stance_method_top": [],
       "text_documents_total": 0,
       "text_documents_with_excerpt": 0,
       "text_documents_with_excerpt_pct": 0.0,
@@ -113,15 +96,13 @@
       "declared_evidence_with_text_excerpt_pct": 0.0
     },
     "positions": {
-      "topic_positions_total": 6388,
-      "topic_positions_with_evidence": 6388,
-      "topic_positions_with_evidence_pct": 1.0,
-      "topic_positions_by_method": {
-        "votes": 6388
-      }
+      "topic_positions_total": 0,
+      "topic_positions_with_evidence": 0,
+      "topic_positions_with_evidence_pct": 0.0,
+      "topic_positions_by_method": {}
     },
     "coherence": {
-      "as_of_date": "2026-05-12",
+      "as_of_date": "",
       "overlap_total": 0,
       "explicit_total": 0,
       "coherent_total": 0,
@@ -130,12 +111,12 @@
       "incoherence_pct": 0.0
     },
     "traceability": {
-      "parl_vote_events_total": 502,
-      "parl_vote_events_with_source_url": 502,
+      "parl_vote_events_total": 80,
+      "parl_vote_events_with_source_url": 80,
       "parl_vote_events_with_source_url_pct": 1.0
     },
     "action": {
-      "policy_events_total": 95,
+      "policy_events_total": 0,
       "policy_event_axis_scores_total": 0,
       "interventions_total": 0
     },
@@ -152,86 +133,75 @@
           "congreso_votaciones",
           "senado_votaciones"
         ],
-        "events_total": 502,
-        "events_with_date": 460,
-        "events_with_date_pct": 0.9163346613545816,
-        "events_with_theme": 502,
+        "events_total": 80,
+        "events_with_date": 80,
+        "events_with_date_pct": 1.0,
+        "events_with_theme": 80,
         "events_with_theme_pct": 1.0,
-        "events_with_totals": 460,
-        "events_with_totals_pct": 0.9163346613545816,
-        "events_with_nominal_vote": 460,
-        "events_with_nominal_vote_pct": 0.9163346613545816,
-        "events_with_initiative_link": 502,
+        "events_with_totals": 80,
+        "events_with_totals_pct": 1.0,
+        "events_with_nominal_vote": 80,
+        "events_with_nominal_vote_pct": 1.0,
+        "events_with_initiative_link": 80,
         "events_with_initiative_link_pct": 1.0,
-        "events_with_official_initiative_link": 501,
-        "events_with_official_initiative_link_pct": 0.99800796812749,
-        "latest_events_total": 101,
-        "latest_events_with_topic_evidence": 96,
-        "latest_events_with_topic_evidence_pct": 0.9504950495049505,
-        "member_votes_total": 119816,
-        "member_votes_with_person_id": 119816,
+        "events_with_official_initiative_link": 13,
+        "events_with_official_initiative_link_pct": 0.1625,
+        "latest_events_total": 80,
+        "latest_events_with_topic_evidence": 0,
+        "latest_events_with_topic_evidence_pct": 0.0,
+        "member_votes_total": 28000,
+        "member_votes_with_person_id": 28000,
         "member_votes_with_person_id_pct": 1.0,
         "by_source": {
           "congreso_votaciones": {
-            "events_total": 2,
-            "events_with_date": 2,
-            "events_with_theme": 2,
-            "events_with_totals": 2,
-            "events_with_nominal_vote": 2,
-            "events_with_initiative_link": 2,
-            "events_with_official_initiative_link": 1,
+            "events_total": 80,
+            "events_with_date": 80,
+            "events_with_theme": 80,
+            "events_with_totals": 80,
+            "events_with_nominal_vote": 80,
+            "events_with_initiative_link": 80,
+            "events_with_official_initiative_link": 13,
             "events_with_date_pct": 1.0,
             "events_with_theme_pct": 1.0,
             "events_with_totals_pct": 1.0,
             "events_with_nominal_vote_pct": 1.0,
             "events_with_initiative_link_pct": 1.0,
-            "events_with_official_initiative_link_pct": 0.5,
+            "events_with_official_initiative_link_pct": 0.1625,
             "latest_legislature": "15",
-            "latest_events_total": 1,
-            "latest_events_with_topic_evidence": 1,
-            "latest_events_with_topic_evidence_pct": 1.0,
-            "member_votes_total": 700,
-            "member_votes_with_person_id": 700,
+            "latest_events_total": 80,
+            "latest_events_with_topic_evidence": 0,
+            "latest_events_with_topic_evidence_pct": 0.0,
+            "member_votes_total": 28000,
+            "member_votes_with_person_id": 28000,
             "member_votes_with_person_id_pct": 1.0
           },
           "senado_votaciones": {
-            "events_total": 500,
-            "events_with_date": 458,
-            "events_with_theme": 500,
-            "events_with_totals": 458,
-            "events_with_nominal_vote": 458,
-            "events_with_initiative_link": 500,
-            "events_with_official_initiative_link": 500,
-            "events_with_date_pct": 0.916,
-            "events_with_theme_pct": 1.0,
-            "events_with_totals_pct": 0.916,
-            "events_with_nominal_vote_pct": 0.916,
-            "events_with_initiative_link_pct": 1.0,
-            "events_with_official_initiative_link_pct": 1.0,
-            "latest_legislature": "15",
-            "latest_events_total": 100,
-            "latest_events_with_topic_evidence": 95,
-            "latest_events_with_topic_evidence_pct": 0.95,
-            "member_votes_total": 119116,
-            "member_votes_with_person_id": 119116,
-            "member_votes_with_person_id_pct": 1.0
+            "events_total": 0,
+            "events_with_date": 0,
+            "events_with_theme": 0,
+            "events_with_totals": 0,
+            "events_with_nominal_vote": 0,
+            "events_with_initiative_link": 0,
+            "events_with_official_initiative_link": 0,
+            "events_with_date_pct": 0.0,
+            "events_with_theme_pct": 0.0,
+            "events_with_totals_pct": 0.0,
+            "events_with_nominal_vote_pct": 0.0,
+            "events_with_initiative_link_pct": 0.0,
+            "events_with_official_initiative_link_pct": 0.0,
+            "latest_legislature": null,
+            "latest_events_total": 0,
+            "latest_events_with_topic_evidence": 0,
+            "latest_events_with_topic_evidence_pct": 0.0,
+            "member_votes_total": 0,
+            "member_votes_with_person_id": 0,
+            "member_votes_with_person_id_pct": 0.0
           }
         }
       },
       "gate": {
-        "passed": false,
-        "failures": [
-          {
-            "metric": "events_with_date_pct",
-            "actual": 0.9163346613545816,
-            "threshold": 0.95
-          },
-          {
-            "metric": "events_with_totals_pct",
-            "actual": 0.9163346613545816,
-            "threshold": 0.95
-          }
-        ],
+        "passed": true,
+        "failures": [],
         "thresholds": {
           "events_with_date_pct": 0.95,
           "events_with_initiative_link_pct": 0.95,
@@ -249,11 +219,11 @@
           "congreso_iniciativas",
           "senado_iniciativas"
         ],
-        "initiatives_total": 4035,
-        "initiatives_with_title": 4035,
-        "initiatives_with_expediente": 4035,
-        "initiatives_with_legislature": 4001,
-        "initiatives_linked_to_votes": 155,
+        "initiatives_total": 422,
+        "initiatives_with_title": 422,
+        "initiatives_with_expediente": 422,
+        "initiatives_with_legislature": 381,
+        "initiatives_linked_to_votes": 8,
         "initiatives_with_doc_links": 0,
         "initiatives_with_downloaded_docs": 0,
         "initiatives_linked_to_votes_with_downloaded_docs": 0,
@@ -278,8 +248,8 @@
         "missing_doc_links_status_buckets": [],
         "initiatives_with_title_pct": 1.0,
         "initiatives_with_expediente_pct": 1.0,
-        "initiatives_with_legislature_pct": 0.9915737298636927,
-        "initiatives_linked_to_votes_pct": 0.03841387856257745,
+        "initiatives_with_legislature_pct": 0.9028436018957346,
+        "initiatives_linked_to_votes_pct": 0.018957345971563982,
         "initiatives_with_doc_links_pct": 0.0,
         "initiatives_with_downloaded_docs_pct": 0.0,
         "initiatives_linked_to_votes_with_downloaded_docs_pct": 0.0,
@@ -296,11 +266,11 @@
         "extraction_review_closed_pct": 1.0,
         "by_source": {
           "congreso_iniciativas": {
-            "initiatives_total": 428,
-            "initiatives_with_title": 428,
-            "initiatives_with_expediente": 428,
-            "initiatives_with_legislature": 394,
-            "initiatives_linked_to_votes": 1,
+            "initiatives_total": 422,
+            "initiatives_with_title": 422,
+            "initiatives_with_expediente": 422,
+            "initiatives_with_legislature": 381,
+            "initiatives_linked_to_votes": 8,
             "initiatives_with_doc_links": 0,
             "initiatives_with_downloaded_docs": 0,
             "initiatives_linked_to_votes_with_downloaded_docs": 0,
@@ -331,8 +301,8 @@
             "global_enmiendas_vetos_analysis": {},
             "initiatives_with_title_pct": 1.0,
             "initiatives_with_expediente_pct": 1.0,
-            "initiatives_with_legislature_pct": 0.9205607476635514,
-            "initiatives_linked_to_votes_pct": 0.002336448598130841,
+            "initiatives_with_legislature_pct": 0.9028436018957346,
+            "initiatives_linked_to_votes_pct": 0.018957345971563982,
             "initiatives_with_doc_links_pct": 0.0,
             "initiatives_with_downloaded_docs_pct": 0.0,
             "initiatives_linked_to_votes_with_downloaded_docs_pct": 0.0,
@@ -344,11 +314,11 @@
             "extraction_review_closed_pct": 1.0
           },
           "senado_iniciativas": {
-            "initiatives_total": 3607,
-            "initiatives_with_title": 3607,
-            "initiatives_with_expediente": 3607,
-            "initiatives_with_legislature": 3607,
-            "initiatives_linked_to_votes": 154,
+            "initiatives_total": 0,
+            "initiatives_with_title": 0,
+            "initiatives_with_expediente": 0,
+            "initiatives_with_legislature": 0,
+            "initiatives_linked_to_votes": 0,
             "initiatives_with_doc_links": 0,
             "initiatives_with_downloaded_docs": 0,
             "initiatives_linked_to_votes_with_downloaded_docs": 0,
@@ -390,10 +360,10 @@
                 "likely_not_expected_redundant_global_url_linked_to_votes": 0
               }
             },
-            "initiatives_with_title_pct": 1.0,
-            "initiatives_with_expediente_pct": 1.0,
-            "initiatives_with_legislature_pct": 1.0,
-            "initiatives_linked_to_votes_pct": 0.04269476018852232,
+            "initiatives_with_title_pct": 0.0,
+            "initiatives_with_expediente_pct": 0.0,
+            "initiatives_with_legislature_pct": 0.0,
+            "initiatives_linked_to_votes_pct": 0.0,
             "initiatives_with_doc_links_pct": 0.0,
             "initiatives_with_downloaded_docs_pct": 0.0,
             "initiatives_linked_to_votes_with_downloaded_docs_pct": 0.0,
@@ -439,9 +409,9 @@
     "summary": {
       "cells_total": 9,
       "cells_with_denominator": 6,
-      "blocked_cells": 2,
+      "blocked_cells": 0,
       "denominator_gaps": 3,
-      "weighted_percent": 23.0
+      "weighted_percent": 23.9
     },
     "families": [
       {
@@ -465,15 +435,15 @@
         "label": "inventory",
         "cells_total": 4,
         "cells_with_denominator": 4,
-        "blocked_cells": 1,
-        "weighted_percent": 2.2
+        "blocked_cells": 0,
+        "weighted_percent": 3.8
       },
       {
         "key": "records",
         "label": "records",
         "cells_total": 2,
         "cells_with_denominator": 1,
-        "blocked_cells": 1,
+        "blocked_cells": 0,
         "weighted_percent": 100.0
       }
     ],
@@ -492,15 +462,15 @@
         "cells_total": 1,
         "cells_with_denominator": 1,
         "blocked_cells": 0,
-        "weighted_percent": 0.0
+        "weighted_percent": 14.3
       },
       {
         "key": "nacional",
         "label": "nacional",
         "cells_total": 6,
         "cells_with_denominator": 3,
-        "blocked_cells": 2,
-        "weighted_percent": 39.1
+        "blocked_cells": 0,
+        "weighted_percent": 38.1
       },
       {
         "key": "subnacional",
@@ -517,15 +487,15 @@
         "label": "both",
         "cells_total": 4,
         "cells_with_denominator": 4,
-        "blocked_cells": 1,
-        "weighted_percent": 2.2
+        "blocked_cells": 0,
+        "weighted_percent": 3.8
       },
       {
         "key": "does",
         "label": "does",
         "cells_total": 4,
         "cells_with_denominator": 2,
-        "blocked_cells": 1,
+        "blocked_cells": 0,
         "weighted_percent": 50.0
       },
       {
@@ -575,15 +545,15 @@
         "label": "source_inventory",
         "cells_total": 4,
         "cells_with_denominator": 4,
-        "blocked_cells": 1,
-        "weighted_percent": 2.2
+        "blocked_cells": 0,
+        "weighted_percent": 3.8
       },
       {
         "key": "votes",
         "label": "votes",
         "cells_total": 1,
         "cells_with_denominator": 1,
-        "blocked_cells": 1,
+        "blocked_cells": 0,
         "weighted_percent": 100.0
       }
     ],
@@ -630,18 +600,16 @@
         "ideal_total": 25,
         "stages": {
           "discoverable": 3,
-          "downloaded": 2,
-          "processed": 2,
-          "linked": 1,
-          "published": 1
+          "downloaded": 1,
+          "processed": 1,
+          "linked": 0,
+          "published": 0
         },
-        "primary_total": 2,
-        "primary_percent": 8.0,
+        "primary_total": 1,
+        "primary_percent": 4.0,
         "denominator_status": "ok",
-        "blocked": true,
-        "blocked_sources": [
-          "senado_votaciones"
-        ],
+        "blocked": false,
+        "blocked_sources": [],
         "gap_reason": ""
       },
       {
@@ -726,12 +694,12 @@
         "stages": {
           "discoverable": 1,
           "downloaded": 1,
-          "processed": 0,
-          "linked": 0,
-          "published": 0
+          "processed": 1,
+          "linked": 1,
+          "published": 1
         },
-        "primary_total": 0,
-        "primary_percent": 0.0,
+        "primary_total": 1,
+        "primary_percent": 14.3,
         "denominator_status": "ok",
         "blocked": false,
         "blocked_sources": [],
@@ -756,21 +724,19 @@
           "congreso_votaciones",
           "senado_votaciones"
         ],
-        "ideal_total": 502,
+        "ideal_total": 80,
         "stages": {
-          "discoverable": 502,
-          "downloaded": 502,
-          "processed": 502,
-          "linked": 502,
-          "published": 502
+          "discoverable": 80,
+          "downloaded": 80,
+          "processed": 80,
+          "linked": 80,
+          "published": 80
         },
-        "primary_total": 502,
+        "primary_total": 80,
         "primary_percent": 100.0,
         "denominator_status": "proxy",
-        "blocked": true,
-        "blocked_sources": [
-          "senado_votaciones"
-        ],
+        "blocked": false,
+        "blocked_sources": [],
         "gap_reason": ""
       },
       {
@@ -792,9 +758,9 @@
           "congreso_iniciativas",
           "senado_iniciativas"
         ],
-        "ideal_total": 9084,
+        "ideal_total": 1393,
         "stages": {
-          "discoverable": 9084,
+          "discoverable": 1393,
           "downloaded": 0,
           "processed": 0,
           "linked": 0,
@@ -915,7 +881,7 @@
       "senado_iniciativas"
     ],
     "contract": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "initiative_source_ids": [
         "senado_iniciativas"
       ],
@@ -932,8 +898,8 @@
       "actionable_sample": []
     },
     "digest": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
-      "contract_generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
+      "contract_generated_at": "2026-05-12T13:11:09+00:00",
       "initiative_source_ids": [
         "senado_iniciativas"
       ],
@@ -956,7 +922,7 @@
       "strict_fail_reasons": []
     },
     "heartbeat_window": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
       "window_last": 20,
@@ -1004,7 +970,7 @@
       "status": "ok"
     },
     "heartbeat_compaction_window": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
       "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl",
@@ -1059,11 +1025,11 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "strict": false,
       "input": {
         "compaction_window_json_path": "",
-        "compaction_window_generated_at": "2026-05-12T10:43:08+00:00",
+        "compaction_window_generated_at": "2026-05-12T13:11:09+00:00",
         "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
         "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl"
       },
@@ -1103,7 +1069,7 @@
       "validation_errors": []
     },
     "heartbeat_compaction_window_digest_heartbeat_window": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
       "window_last": 20,
@@ -1159,7 +1125,7 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest_heartbeat_compaction_window": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
       "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
@@ -1214,11 +1180,11 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": {
-      "generated_at": "2026-05-12T10:43:08+00:00",
+      "generated_at": "2026-05-12T13:11:09+00:00",
       "strict": false,
       "input": {
         "compaction_window_json_path": "",
-        "compaction_window_generated_at": "2026-05-12T10:43:08+00:00",
+        "compaction_window_generated_at": "2026-05-12T13:11:09+00:00",
         "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
         "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl"
       },
@@ -7700,14 +7666,14 @@
         "points_eng": 8,
         "points_eng_raw": "8",
         "progress": {
-          "done": 4,
+          "done": 5,
           "partial": 1,
-          "todo": 2,
+          "todo": 1,
           "untracked": 3,
           "tracked_total": 7,
           "overall_total": 10,
-          "tracked_percent": 64,
-          "overall_percent": 45
+          "tracked_percent": 79,
+          "overall_percent": 55
         },
         "checks": [
           {
@@ -7774,12 +7740,12 @@
             "kind": "metric",
             "id": "votes_quality_gate",
             "label": "Gate de calidad de votaciones (enforce-gate)",
-            "status": "TODO",
+            "status": "DONE",
             "metric": "vote_gate_passed",
-            "actual": false,
+            "actual": true,
             "target": null,
             "format": "bool",
-            "actual_display": "false",
+            "actual_display": "true",
             "target_display": "\u2014"
           },
           {
@@ -7800,10 +7766,10 @@
             "label": "Fuentes tracker=DONE con evidencia de red",
             "status": "PARTIAL",
             "metric": "done_sources_with_network_pct",
-            "actual": 0.8421052631578947,
+            "actual": 0.8947368421052632,
             "target": 1.0,
             "format": "pct",
-            "actual_display": "84%",
+            "actual_display": "89%",
             "target_display": "100%"
           }
         ],
@@ -7812,19 +7778,12 @@
             "id": "done_sources_with_network",
             "label": "Fuentes tracker=DONE con evidencia de red",
             "status": "PARTIAL",
-            "actual_display": "84%",
+            "actual_display": "89%",
             "target_display": "100%"
           },
           {
             "id": "initiatives_quality_gate",
             "label": "Gate de calidad de iniciativas",
-            "status": "TODO",
-            "actual_display": "false",
-            "target_display": "\u2014"
-          },
-          {
-            "id": "votes_quality_gate",
-            "label": "Gate de calidad de votaciones (enforce-gate)",
             "status": "TODO",
             "actual_display": "false",
             "target_display": "\u2014"
@@ -7860,13 +7819,13 @@
         "points_eng_raw": "8",
         "progress": {
           "done": 3,
-          "partial": 1,
-          "todo": 0,
+          "partial": 0,
+          "todo": 1,
           "untracked": 4,
           "tracked_total": 4,
           "overall_total": 8,
-          "tracked_percent": 88,
-          "overall_percent": 44
+          "tracked_percent": 75,
+          "overall_percent": 38
         },
         "checks": [
           {
@@ -7905,12 +7864,12 @@
             "kind": "metric",
             "id": "events_with_date_pct",
             "label": "Eventos con fecha",
-            "status": "PARTIAL",
+            "status": "DONE",
             "metric": "events_with_date_pct",
-            "actual": 0.9163346613545816,
+            "actual": 1.0,
             "target": 0.95,
             "format": "pct",
-            "actual_display": "92%",
+            "actual_display": "100%",
             "target_display": "95%"
           },
           {
@@ -7941,22 +7900,22 @@
             "kind": "metric",
             "id": "latest_events_with_topic_evidence_pct",
             "label": "Eventos latest con topic_evidence",
-            "status": "DONE",
+            "status": "TODO",
             "metric": "latest_events_with_topic_evidence_pct",
-            "actual": 0.9504950495049505,
+            "actual": 0.0,
             "target": 0.5,
             "format": "pct",
-            "actual_display": "95%",
+            "actual_display": "0%",
             "target_display": "50%"
           }
         ],
         "next": [
           {
-            "id": "events_with_date_pct",
-            "label": "Eventos con fecha",
-            "status": "PARTIAL",
-            "actual_display": "92%",
-            "target_display": "95%"
+            "id": "latest_events_with_topic_evidence_pct",
+            "label": "Eventos latest con topic_evidence",
+            "status": "TODO",
+            "actual_display": "0%",
+            "target_display": "50%"
           },
           {
             "id": "iniciativas_congreso",
@@ -7995,14 +7954,14 @@
         "points_eng": 13,
         "points_eng_raw": "13",
         "progress": {
-          "done": 5,
+          "done": 3,
           "partial": 0,
-          "todo": 2,
+          "todo": 4,
           "untracked": 1,
           "tracked_total": 7,
           "overall_total": 8,
-          "tracked_percent": 71,
-          "overall_percent": 62
+          "tracked_percent": 43,
+          "overall_percent": 38
         },
         "checks": [
           {
@@ -8065,28 +8024,35 @@
             "kind": "metric",
             "id": "topic_evidence_with_topic_pct",
             "label": "Evidencia con topic_id",
-            "status": "DONE",
+            "status": "TODO",
             "metric": "topic_evidence_with_topic_pct",
-            "actual": 1.0,
+            "actual": 0.0,
             "target": 0.95,
             "format": "pct",
-            "actual_display": "100%",
+            "actual_display": "0%",
             "target_display": "95%"
           },
           {
             "kind": "metric",
             "id": "topic_evidence_with_source_url_pct",
             "label": "Trazabilidad en topic_evidence (source_url)",
-            "status": "DONE",
+            "status": "TODO",
             "metric": "topic_evidence_with_source_url_pct",
-            "actual": 1.0,
+            "actual": 0.0,
             "target": 1.0,
             "format": "pct",
-            "actual_display": "100%",
+            "actual_display": "0%",
             "target_display": "100%"
           }
         ],
         "next": [
+          {
+            "id": "topic_evidence_with_topic_pct",
+            "label": "Evidencia con topic_id",
+            "status": "TODO",
+            "actual_display": "0%",
+            "target_display": "95%"
+          },
           {
             "id": "topic_evidence_declared_with_signal_pct",
             "label": "Evidencia declarada con stance util",
@@ -8100,6 +8066,13 @@
             "status": "TODO",
             "actual_display": "0",
             "target_display": "1"
+          },
+          {
+            "id": "topic_evidence_with_source_url_pct",
+            "label": "Trazabilidad en topic_evidence (source_url)",
+            "status": "TODO",
+            "actual_display": "0%",
+            "target_display": "100%"
           },
           {
             "id": "intervenciones_congreso",
@@ -8117,14 +8090,14 @@
         "points_eng": 13,
         "points_eng_raw": "13",
         "progress": {
-          "done": 3,
+          "done": 1,
           "partial": 0,
-          "todo": 2,
+          "todo": 4,
           "untracked": 0,
           "tracked_total": 5,
           "overall_total": 5,
-          "tracked_percent": 60,
-          "overall_percent": 60
+          "tracked_percent": 20,
+          "overall_percent": 20
         },
         "checks": [
           {
@@ -8147,24 +8120,24 @@
             "kind": "metric",
             "id": "topic_positions_total",
             "label": "Posiciones agregadas disponibles",
-            "status": "DONE",
+            "status": "TODO",
             "metric": "topic_positions_total",
-            "actual": 6388,
+            "actual": 0,
             "target": 1,
             "format": "int",
-            "actual_display": "6388",
+            "actual_display": "0",
             "target_display": "1"
           },
           {
             "kind": "metric",
             "id": "topic_positions_with_evidence_pct",
             "label": "Posiciones con evidencia suficiente",
-            "status": "DONE",
+            "status": "TODO",
             "metric": "topic_positions_with_evidence_pct",
-            "actual": 1.0,
+            "actual": 0.0,
             "target": 0.9,
             "format": "pct",
-            "actual_display": "100%",
+            "actual_display": "0%",
             "target_display": "90%"
           },
           {
@@ -8187,6 +8160,20 @@
             "status": "TODO",
             "actual_display": "0",
             "target_display": "1"
+          },
+          {
+            "id": "topic_positions_total",
+            "label": "Posiciones agregadas disponibles",
+            "status": "TODO",
+            "actual_display": "0",
+            "target_display": "1"
+          },
+          {
+            "id": "topic_positions_with_evidence_pct",
+            "label": "Posiciones con evidencia suficiente",
+            "status": "TODO",
+            "actual_display": "0%",
+            "target_display": "90%"
           },
           {
             "id": "posiciones_declaradas_programas",
@@ -8381,10 +8368,10 @@
             "label": "Fuentes autonomicas en estado ok",
             "status": "DONE",
             "metric": "autonomico_sources_ok",
-            "actual": 17,
+            "actual": 15,
             "target": 1,
             "format": "int",
-            "actual_display": "17",
+            "actual_display": "15",
             "target_display": "1"
           },
           {
@@ -8483,23 +8470,23 @@
       {
         "id": "latest_events_with_topic_evidence_pct",
         "label": "Eventos latest con topic_evidence",
-        "status": "DONE",
+        "status": "TODO",
         "metric": "latest_events_with_topic_evidence_pct",
-        "actual": 0.9504950495049505,
+        "actual": 0.0,
         "target": 0.5,
         "format": "pct",
-        "actual_display": "95%",
+        "actual_display": "0%",
         "target_display": "50%"
       },
       {
         "id": "topic_positions_with_evidence_pct",
         "label": "Posiciones con evidencia suficiente",
-        "status": "DONE",
+        "status": "TODO",
         "metric": "topic_positions_with_evidence_pct",
-        "actual": 1.0,
+        "actual": 0.0,
         "target": 0.9,
         "format": "pct",
-        "actual_display": "100%",
+        "actual_display": "0%",
         "target_display": "90%"
       },
       {
@@ -8507,10 +8494,10 @@
         "label": "Runs ETL en estado ok",
         "status": "DONE",
         "metric": "ingestion_runs_ok_pct",
-        "actual": 0.82,
+        "actual": 1.0,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "82%",
+        "actual_display": "100%",
         "target_display": "80%"
       },
       {
@@ -8518,10 +8505,10 @@
         "label": "Costo de reintentos ETL",
         "status": "DONE",
         "metric": "retry_rate",
-        "actual": 0.18,
+        "actual": 0.0,
         "target": 0.2,
         "format": "pct",
-        "actual_display": "18%",
+        "actual_display": "0%",
         "target_display": "20%"
       },
       {
@@ -8529,22 +8516,22 @@
         "label": "Duraci\u00f3n media por run ETL",
         "status": "DONE",
         "metric": "avg_run_seconds",
-        "actual": 188.458336237818,
+        "actual": 30.17948751266186,
         "target": null,
         "format": "seconds",
-        "actual_display": "188.5s",
+        "actual_display": "30.2s",
         "target_display": "\u2014"
       }
     ],
     "summary": {
-      "done": 18,
-      "partial": 5,
-      "todo": 15,
+      "done": 15,
+      "partial": 4,
+      "todo": 19,
       "untracked": 8,
       "tracked_total": 38,
       "overall_total": 46,
-      "tracked_percent": 54,
-      "overall_percent": 45
+      "tracked_percent": 45,
+      "overall_percent": 37
     },
     "notes": [
       "Los checks de fase combinan tracker operativo y KPIs cuantificables.",
@@ -8553,45 +8540,17 @@
   },
   "actions": [
     {
-      "kind": "done_zero_real",
+      "kind": "missing_source",
       "priority": "P0",
       "scope": "",
-      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): placsp_autonomico",
-      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
+      "title": "Fuente deseada no existe en BD: infoelectoral_descargas",
+      "details": "Dominio=infoelectoral \u00b7 scope=electoral",
       "source_ids": [
-        "placsp_autonomico"
+        "infoelectoral_descargas"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "done_zero_real",
-      "priority": "P0",
-      "scope": "",
-      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): placsp_sindicacion",
-      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
-      "source_ids": [
-        "placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "ingest_error",
-      "priority": "P0",
-      "scope": "",
-      "title": "Ingesta en error: senado_votaciones",
-      "details": "HTTPError: HTTP Error 403: Forbidden",
-      "source_ids": [
-        "senado_votaciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db etl/data/staging/politicos-es.db --source senado_votaciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.live.db --source infoelectoral_descargas --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8604,8 +8563,8 @@
         "infoelectoral_procesos"
       ],
       "commands": [
-        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.db --source infoelectoral_procesos --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.live.db --source infoelectoral_procesos --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8861,8 +8820,8 @@
         "programas_partidos"
       ],
       "commands": [
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db etl/data/staging/politicos-es.db --source programas_partidos --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db etl/data/staging/politicos-es.live.db --source programas_partidos --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8875,8 +8834,8 @@
         "aemet_opendata_series"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source aemet_opendata_series --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8898,8 +8857,8 @@
         "asamblea_extremadura_diputados"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source asamblea_extremadura_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source asamblea_extremadura_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8912,8 +8871,8 @@
         "asamblea_melilla_diputados"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source asamblea_melilla_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source asamblea_melilla_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8926,8 +8885,8 @@
         "bdns_autonomico"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source bdns_autonomico --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8940,8 +8899,8 @@
         "bdns_api_subvenciones"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source bdns_api_subvenciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -8999,8 +8958,8 @@
         "boe_api_legal"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source boe_api_legal --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source boe_api_legal --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9058,8 +9017,8 @@
         "cortes_aragon_diputados"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source cortes_aragon_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source cortes_aragon_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9099,8 +9058,8 @@
         "ree_esios_indicators"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source ree_esios_indicators --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source ree_esios_indicators --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9122,8 +9081,8 @@
         "eurostat_sdmx"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source eurostat_sdmx --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source eurostat_sdmx --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9137,9 +9096,9 @@
         "infoelectoral_procesos"
       ],
       "commands": [
-        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.db --source infoelectoral_descargas --strict-network",
-        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.db --source infoelectoral_procesos --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.live.db --source infoelectoral_descargas --strict-network",
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db etl/data/staging/politicos-es.live.db --source infoelectoral_procesos --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9153,9 +9112,9 @@
         "moncloa_rss_referencias"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source moncloa_referencias --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source moncloa_rss_referencias --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source moncloa_referencias --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source moncloa_rss_referencias --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9186,8 +9145,8 @@
         "placsp_autonomico"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source placsp_autonomico --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9200,8 +9159,8 @@
         "placsp_sindicacion"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source placsp_sindicacion --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9214,8 +9173,8 @@
         "parlament_balears_diputats"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlament_balears_diputats --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlament_balears_diputats --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9228,8 +9187,8 @@
         "parlamento_vasco_parlamentarios"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_vasco_parlamentarios --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_vasco_parlamentarios --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9242,8 +9201,8 @@
         "parlamento_andalucia_diputados"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_andalucia_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_andalucia_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9256,8 +9215,8 @@
         "parlamento_galicia_deputados"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_galicia_deputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9270,8 +9229,8 @@
         "parlamento_navarra_parlamentarios_forales"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_navarra_parlamentarios_forales --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_navarra_parlamentarios_forales --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9302,8 +9261,8 @@
         "senado_senadores"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source senado_senadores --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source senado_senadores --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9352,8 +9311,8 @@
         "bdns_api_subvenciones"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source bdns_api_subvenciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
@@ -9366,36 +9325,134 @@
         "bdns_autonomico"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source bdns_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source bdns_autonomico --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
       "kind": "under_threshold",
       "priority": "P1",
       "scope": "",
-      "title": "Por debajo del umbral minimo: placsp_autonomico",
-      "details": "loaded=2 target=3",
+      "title": "Por debajo del umbral minimo: dir3_unidades_age",
+      "details": "loaded=3 target=1000",
       "source_ids": [
-        "placsp_autonomico"
+        "dir3_unidades_age"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source dir3_unidades_age --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     },
     {
       "kind": "under_threshold",
       "priority": "P1",
       "scope": "",
-      "title": "Por debajo del umbral minimo: placsp_sindicacion",
-      "details": "loaded=3 target=10",
+      "title": "Por debajo del umbral minimo: moncloa_referencias",
+      "details": "loaded=1 target=2",
       "source_ids": [
-        "placsp_sindicacion"
+        "moncloa_referencias"
       ],
       "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source moncloa_referencias --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: parlamento_andalucia_diputados",
+      "details": "loaded=2 target=90",
+      "source_ids": [
+        "parlamento_andalucia_diputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_andalucia_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: parlamento_galicia_deputados",
+      "details": "loaded=3 target=50",
+      "source_ids": [
+        "parlamento_galicia_deputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_galicia_deputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: parlamento_navarra_parlamentarios_forales",
+      "details": "loaded=3 target=30",
+      "source_ids": [
+        "parlamento_navarra_parlamentarios_forales"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_navarra_parlamentarios_forales --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: parlamento_vasco_parlamentarios",
+      "details": "loaded=2 target=60",
+      "source_ids": [
+        "parlamento_vasco_parlamentarios"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source parlamento_vasco_parlamentarios --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: senado_iniciativas",
+      "details": "loaded=0 target=1",
+      "source_ids": [
+        "senado_iniciativas"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db etl/data/staging/politicos-es.live.db --source senado_iniciativas --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: senado_senadores",
+      "details": "loaded=2 target=250",
+      "source_ids": [
+        "senado_senadores"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source senado_senadores --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "under_threshold",
+      "priority": "P1",
+      "scope": "",
+      "title": "Por debajo del umbral minimo: senado_votaciones",
+      "details": "loaded=0 target=1",
+      "source_ids": [
+        "senado_votaciones"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db etl/data/staging/politicos-es.live.db --source senado_votaciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
     }
   ],
@@ -9434,8 +9491,8 @@
       "max_loaded_network": 25,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:08:40+00:00",
-      "last_seen_at": "2026-02-12T12:08:41+00:00",
+      "last_started_at": "2026-05-12T12:49:04+00:00",
+      "last_seen_at": "2026-05-12T12:49:05+00:00",
       "last_source_url": "https://www.ceuta.es/gobiernodeceuta/index.php/el-gobierno/la-asamblea",
       "last_message": "Ingesta completada: 25/25 registros validos",
       "progress": {
@@ -9492,26 +9549,26 @@
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 65,
-      "max_loaded_any": 65,
-      "max_loaded_network": 65,
+      "last_loaded": 56,
+      "max_loaded_any": 56,
+      "max_loaded_network": 56,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:08:41+00:00",
-      "last_seen_at": "2026-02-12T12:08:43+00:00",
+      "last_started_at": "2026-05-12T12:49:05+00:00",
+      "last_seen_at": "2026-05-12T12:49:08+00:00",
       "last_source_url": "https://www.asambleaex.es/dipslegis",
-      "last_message": "Ingesta completada: 65/65 registros validos",
+      "last_message": "Ingesta completada: 56/56 registros validos",
       "progress": {
-        "loaded": 65,
+        "loaded": 56,
         "target": 50,
         "percent": 100
       },
-      "mandates": 65,
+      "mandates": 56,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 65,
+        "primary_rows": 56,
         "counts": {
-          "mandates": 65,
+          "mandates": 56,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -9555,26 +9612,26 @@
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 9188,
-      "max_loaded_any": 9188,
-      "max_loaded_network": 9188,
+      "last_loaded": 9249,
+      "max_loaded_any": 9249,
+      "max_loaded_network": 9249,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:08:36+00:00",
-      "last_seen_at": "2026-02-12T12:08:40+00:00",
+      "last_started_at": "2026-05-12T12:49:08+00:00",
+      "last_seen_at": "2026-05-12T12:49:20+00:00",
       "last_source_url": "https://ctyp.asambleamadrid.es/static/doc/opendata/SGP_ADMIN.OPENDATA_OCUPACIONES_ASAMBLEA.csv",
-      "last_message": "Ingesta completada: 9188/9285 registros validos",
+      "last_message": "Ingesta completada: 9249/9345 registros validos",
       "progress": {
-        "loaded": 9188,
+        "loaded": 9249,
         "target": 5000,
         "percent": 100
       },
-      "mandates": 9188,
+      "mandates": 9249,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 9188,
+        "primary_rows": 9249,
         "counts": {
-          "mandates": 9188,
+          "mandates": 9249,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -9623,8 +9680,8 @@
       "max_loaded_network": 26,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-05-11T17:56:58+00:00",
-      "last_seen_at": "2026-05-11T17:57:01+00:00",
+      "last_started_at": "2026-05-12T12:49:20+00:00",
+      "last_seen_at": "2026-05-12T12:49:23+00:00",
       "last_source_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
       "last_message": "Ingesta completada: 26/26 registros validos",
       "progress": {
@@ -9686,8 +9743,8 @@
       "max_loaded_network": 54,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:08:43+00:00",
-      "last_seen_at": "2026-02-12T12:09:10+00:00",
+      "last_started_at": "2026-05-12T12:49:23+00:00",
+      "last_seen_at": "2026-05-12T12:51:21+00:00",
       "last_source_url": "https://www.asambleamurcia.es/diputados",
       "last_message": "Ingesta completada: 54/54 registros validos",
       "progress": {
@@ -9736,8 +9793,8 @@
         "fuentes_objetivo": "Cortes de Aragon: diputados (XI)",
         "bloque": "GitHub Actions strict-network devuelve `HTTP 403`; mantener datos previos como evidencia parcial, pero no marcar `DONE` hasta recuperar run reproducible live-clean."
       },
-      "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "ok",
@@ -9746,13 +9803,13 @@
       "last_status": "ok",
       "last_loaded": 75,
       "max_loaded_any": 75,
-      "max_loaded_network": 75,
-      "network_fetches": 1,
-      "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:05:30+00:00",
-      "last_seen_at": "2026-02-12T12:05:36+00:00",
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T12:51:27+00:00",
+      "last_seen_at": "2026-05-12T12:51:29+00:00",
       "last_source_url": "https://www.cortesaragon.es/Quienes-somos.2250.0.html?no_cache=1&tx_t3comunicacion_pi3%5Bnumleg%5D=11&tx_t3comunicacion_pi3%5Btipinf%5D=3&tx_t3comunicacion_pi3%5Buidcom%5D=-2#verContenido",
-      "last_message": "Ingesta completada: 75/75 registros validos",
+      "last_message": "Ingesta completada: 75/75 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
         "loaded": 75,
         "target": 50,
@@ -9773,7 +9830,7 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": true,
+        "has_network": false,
         "has_any": true,
         "blocked_note": false
       }
@@ -9807,26 +9864,26 @@
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 81,
-      "max_loaded_any": 81,
-      "max_loaded_network": 81,
+      "last_loaded": 82,
+      "max_loaded_any": 82,
+      "max_loaded_network": 82,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:16:10+00:00",
-      "last_seen_at": "2026-02-12T12:16:10+00:00",
+      "last_started_at": "2026-05-12T12:52:10+00:00",
+      "last_seen_at": "2026-05-12T12:52:12+00:00",
       "last_source_url": "https://www.ccyl.es/Organizacion/PlenoAlfabetico",
-      "last_message": "Ingesta completada: 81/81 registros validos",
+      "last_message": "Ingesta completada: 82/82 registros validos",
       "progress": {
-        "loaded": 81,
+        "loaded": 82,
         "target": 70,
         "percent": 100
       },
-      "mandates": 81,
+      "mandates": 82,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 81,
+        "primary_rows": 82,
         "counts": {
-          "mandates": 81,
+          "mandates": 82,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -9875,8 +9932,8 @@
       "max_loaded_network": 33,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:15:58+00:00",
-      "last_seen_at": "2026-02-12T12:16:10+00:00",
+      "last_started_at": "2026-05-12T12:51:29+00:00",
+      "last_seen_at": "2026-05-12T12:52:10+00:00",
       "last_source_url": "https://www.cortesclm.es/web2/paginas/resul_diputados.php?legislatura=11",
       "last_message": "Ingesta completada: 33/33 registros validos",
       "progress": {
@@ -9938,8 +9995,8 @@
       "max_loaded_network": 45,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:09:11+00:00",
-      "last_seen_at": "2026-02-12T12:09:12+00:00",
+      "last_started_at": "2026-05-12T12:53:27+00:00",
+      "last_seen_at": "2026-05-12T12:53:29+00:00",
       "last_source_url": "https://www.jgpa.es/diputados-y-diputadas?p_p_id=jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&p_r_p_2113237475_diputadoId=0&p_r_p_2113237475_legislaturaId=0&p_r_p_2113237475_grupoParlamentarioId=0&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_redirect=%2Fdiputados-y-diputadas&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_delta=50&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_keywords=&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_advancedSearch=false&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_andOperator=true&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_resetCur=false&cur=1",
       "last_message": "Ingesta completada: 45/45 registros validos",
       "progress": {
@@ -10001,8 +10058,8 @@
       "max_loaded_network": 99,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:14:46+00:00",
-      "last_seen_at": "2026-02-12T12:15:57+00:00",
+      "last_started_at": "2026-05-12T12:52:12+00:00",
+      "last_seen_at": "2026-05-12T12:53:21+00:00",
       "last_source_url": "https://www.cortsvalencianes.es/es/composicion/diputados",
       "last_message": "Ingesta completada: 99/99 registros validos",
       "progress": {
@@ -10064,8 +10121,8 @@
       "max_loaded_network": 135,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:12:12+00:00",
-      "last_seen_at": "2026-02-12T12:14:45+00:00",
+      "last_started_at": "2026-05-12T12:56:34+00:00",
+      "last_seen_at": "2026-05-12T12:59:22+00:00",
       "last_source_url": "https://www.parlament.cat/web/composicio/ple-parlament/composicio-actual/index.html",
       "last_message": "Ingesta completada: 135/135 registros validos",
       "progress": {
@@ -10127,8 +10184,8 @@
       "max_loaded_network": 59,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:10:52+00:00",
-      "last_seen_at": "2026-02-12T12:12:10+00:00",
+      "last_started_at": "2026-05-12T12:55:21+00:00",
+      "last_seen_at": "2026-05-12T12:56:34+00:00",
       "last_source_url": "https://www.parlamentib.es/Representants/Diputats.aspx?criteria=0",
       "last_message": "Ingesta completada: 59/59 registros validos",
       "progress": {
@@ -10177,34 +10234,34 @@
         "fuentes_objetivo": "Parlamento de Andalucia (listado + fichas)",
         "bloque": "GitHub Actions strict-network ya no encuentra diputados actuales (`codmie/nlegis`); requiere reparar parser o endpoint antes de volver a `DONE`."
       },
-      "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "ok",
+      "state": "partial",
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 109,
-      "max_loaded_any": 109,
-      "max_loaded_network": 109,
-      "network_fetches": 1,
-      "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:16:11+00:00",
-      "last_seen_at": "2026-02-12T12:16:54+00:00",
+      "last_loaded": 2,
+      "max_loaded_any": 2,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T12:59:22+00:00",
+      "last_seen_at": "2026-05-12T12:59:23+00:00",
       "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/composicionyfuncionamiento/diputadosysenadores.do",
-      "last_message": "Ingesta completada: 109/109 registros validos",
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: RuntimeError: No se encontraron diputados actuales (codmie/nlegis) en Parlamento de Andalucia)",
       "progress": {
-        "loaded": 109,
+        "loaded": 2,
         "target": 90,
-        "percent": 100
+        "percent": 2
       },
-      "mandates": 109,
+      "mandates": 2,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 109,
+        "primary_rows": 2,
         "counts": {
-          "mandates": 109,
+          "mandates": 2,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -10212,9 +10269,9 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
-        "has_network": true,
+        "has_network": false,
         "has_any": true,
         "blocked_note": false
       }
@@ -10253,8 +10310,8 @@
       "max_loaded_network": 79,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:09:12+00:00",
-      "last_seen_at": "2026-02-12T12:09:13+00:00",
+      "last_started_at": "2026-05-12T12:59:23+00:00",
+      "last_seen_at": "2026-05-12T12:59:25+00:00",
       "last_source_url": "https://parcan.es/api/diputados/por_legislatura/11/?format=json",
       "last_message": "Ingesta completada: 79/79 registros validos",
       "progress": {
@@ -10316,8 +10373,8 @@
       "max_loaded_network": 35,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:09:13+00:00",
-      "last_seen_at": "2026-02-12T12:10:52+00:00",
+      "last_started_at": "2026-05-12T12:59:25+00:00",
+      "last_seen_at": "2026-05-12T13:00:33+00:00",
       "last_source_url": "https://parlamento-cantabria.es/informacion-general/composicion/11l-pleno-del-parlamento-de-cantabria",
       "last_message": "Ingesta completada: 35/35 registros validos",
       "progress": {
@@ -10366,34 +10423,34 @@
         "fuentes_objetivo": "Parlamento de Galicia: deputados (fichas HTML)",
         "bloque": "Done now: NO. Blocker: `parlamento_galicia_deputados` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=265`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-17 --strict-network --timeout 30`."
       },
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 3,
+      "max_loaded_any": 3,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T13:00:33+00:00",
+      "last_seen_at": "2026-05-12T13:00:35+00:00",
+      "last_source_url": "https://www.parlamentodegalicia.gal/Composicion/Deputados",
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
-        "loaded": 0,
+        "loaded": 3,
         "target": 50,
-        "percent": 0
+        "percent": 6
       },
-      "mandates": 0,
+      "mandates": 3,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 0,
+        "primary_rows": 3,
         "counts": {
-          "mandates": 0,
+          "mandates": 3,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -10401,10 +10458,10 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": true
       }
     },
@@ -10442,8 +10499,8 @@
       "max_loaded_network": 33,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:12:11+00:00",
-      "last_seen_at": "2026-02-12T12:12:12+00:00",
+      "last_started_at": "2026-05-12T13:00:35+00:00",
+      "last_seen_at": "2026-05-12T13:00:36+00:00",
       "last_source_url": "https://adminweb.parlamento-larioja.org/composicion-y-organos/diputados",
       "last_message": "Ingesta completada: 33/33 registros validos",
       "progress": {
@@ -10492,34 +10549,34 @@
         "fuentes_objetivo": "Parlamento de Navarra: parlamentarios forales (fichas HTML)",
         "bloque": "Done now: NO para live-clean. Existe replay manual `from-file` (`50/50 registros validos`), pero falta run de red real vigente o bloqueo reproducible actualizado antes de cerrar como `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`."
       },
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 3,
+      "max_loaded_any": 3,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T13:00:36+00:00",
+      "last_seen_at": "2026-05-12T13:00:36+00:00",
+      "last_source_url": "https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales",
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
-        "loaded": 0,
+        "loaded": 3,
         "target": 30,
-        "percent": 0
+        "percent": 10
       },
-      "mandates": 0,
+      "mandates": 3,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 0,
+        "primary_rows": 3,
         "counts": {
-          "mandates": 0,
+          "mandates": 3,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -10527,10 +10584,10 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": false
       }
     },
@@ -10555,34 +10612,34 @@
         "fuentes_objetivo": "Parlamento Vasco (listado ACT)",
         "bloque": "GitHub Actions strict-network agota tiempo en `parlamento_vasco_parlamentarios`; requiere retry reproducible o hardening de timeout/endpoints antes de volver a `DONE`."
       },
-      "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "ok",
+      "state": "partial",
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 75,
-      "max_loaded_any": 75,
-      "max_loaded_network": 75,
-      "network_fetches": 1,
-      "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:16:55+00:00",
-      "last_seen_at": "2026-02-12T12:16:55+00:00",
+      "last_loaded": 2,
+      "max_loaded_any": 2,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T13:00:36+00:00",
+      "last_seen_at": "2026-05-12T13:07:23+00:00",
       "last_source_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
-      "last_message": "Ingesta completada: 75/75 registros validos",
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
       "progress": {
-        "loaded": 75,
+        "loaded": 2,
         "target": 60,
-        "percent": 100
+        "percent": 3
       },
-      "mandates": 75,
+      "mandates": 2,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 75,
+        "primary_rows": 2,
         "counts": {
-          "mandates": 75,
+          "mandates": 2,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -10590,9 +10647,9 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
-        "has_network": true,
+        "has_network": false,
         "has_any": true,
         "blocked_note": false
       }
@@ -10631,10 +10688,10 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-05-11T06:30:38+00:00",
-      "last_seen_at": "2026-05-11T06:30:38+00:00",
-      "last_source_url": "",
-      "last_message": "Ingesta completada: 2/2 registros validos (from-file)",
+      "last_started_at": "2026-05-12T12:51:23+00:00",
+      "last_seen_at": "2026-05-12T12:51:24+00:00",
+      "last_source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=31d51dfeea8d6e27917ede290381f8d1e17b63c712bd007d2857d0b3e9474b5b))",
       "progress": {
         "loaded": 2,
         "target": 3,
@@ -10694,10 +10751,10 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-05-11T06:30:38+00:00",
-      "last_seen_at": "2026-05-11T06:30:38+00:00",
-      "last_source_url": "",
-      "last_message": "Ingesta completada: 3/3 registros validos (from-file)",
+      "last_started_at": "2026-05-12T12:51:22+00:00",
+      "last_seen_at": "2026-05-12T12:51:23+00:00",
+      "last_source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=31d51dfeea8d6e27917ede290381f8d1e17b63c712bd007d2857d0b3e9474b5b))",
       "progress": {
         "loaded": 3,
         "target": 10,
@@ -10807,27 +10864,27 @@
         "fuentes_objetivo": "PLACSP: `url_detalle` desde `placsp_sindicacion`/`placsp_autonomico`",
         "bloque": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "DONE_ZERO_REAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "partial",
+      "state": "ok",
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 2,
-      "max_loaded_any": 2,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-05-11T06:30:37+00:00",
-      "last_seen_at": "2026-05-11T06:30:38+00:00",
-      "last_source_url": "",
-      "last_message": "Ingesta completada: 2/2 registros validos (from-file)",
+      "last_loaded": 426,
+      "max_loaded_any": 426,
+      "max_loaded_network": 426,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-05-12T13:07:23+00:00",
+      "last_seen_at": "2026-05-12T13:07:36+00:00",
+      "last_source_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+      "last_message": "Ingesta completada: 426/426 registros validos",
       "progress": {
-        "loaded": 2,
+        "loaded": 426,
         "target": 3,
-        "percent": 67
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -10842,9 +10899,9 @@
         }
       },
       "flags": {
-        "under_threshold": true,
-        "done_zero_real": true,
-        "has_network": false,
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -10870,27 +10927,27 @@
         "fuentes_objetivo": "PLACSP: `url_detalle` desde `placsp_sindicacion`/`placsp_autonomico`",
         "bloque": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "DONE_ZERO_REAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "partial",
+      "state": "ok",
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 3,
-      "max_loaded_any": 3,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-05-11T06:30:35+00:00",
-      "last_seen_at": "2026-05-11T06:30:37+00:00",
-      "last_source_url": "",
-      "last_message": "Ingesta completada: 3/3 registros validos (from-file)",
+      "last_loaded": 426,
+      "max_loaded_any": 426,
+      "max_loaded_network": 426,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-05-12T13:07:36+00:00",
+      "last_seen_at": "2026-05-12T13:07:50+00:00",
+      "last_source_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+      "last_message": "Ingesta completada: 426/426 registros validos",
       "progress": {
-        "loaded": 3,
+        "loaded": 426,
         "target": 10,
-        "percent": 30
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -10905,9 +10962,9 @@
         }
       },
       "flags": {
-        "under_threshold": true,
-        "done_zero_real": true,
-        "has_network": false,
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -10996,27 +11053,27 @@
         "fuentes_objetivo": "La Moncloa: referencias + RSS",
         "bloque": "Done now: NO para live-clean actual. La evidencia hist\u00f3rica existe, pero el DB operativo actual no conserva runs de red para `moncloa_referencias` y `moncloa_rss_referencias`; repetir strict-network o documentar bloqueo antes de `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`."
       },
-      "sql_status": "TODO",
+      "sql_status": "DONE",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 1,
+      "max_loaded_any": 1,
+      "max_loaded_network": 1,
+      "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "last_started_at": "2026-05-12T12:53:29+00:00",
+      "last_seen_at": "2026-05-12T12:53:31+00:00",
+      "last_source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
+      "last_message": "Ingesta completada: 1/1 registros validos",
       "progress": {
-        "loaded": 0,
+        "loaded": 1,
         "target": 2,
-        "percent": 0
+        "percent": 50
       },
       "mandates": 0,
       "warehouse": {
@@ -11031,10 +11088,10 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
+        "has_network": true,
+        "has_any": true,
         "blocked_note": false
       }
     },
@@ -11059,27 +11116,27 @@
         "fuentes_objetivo": "La Moncloa: referencias + RSS",
         "bloque": "Done now: NO para live-clean actual. La evidencia hist\u00f3rica existe, pero el DB operativo actual no conserva runs de red para `moncloa_referencias` y `moncloa_rss_referencias`; repetir strict-network o documentar bloqueo antes de `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`."
       },
-      "sql_status": "TODO",
+      "sql_status": "DONE",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 8,
+      "max_loaded_any": 8,
+      "max_loaded_network": 8,
+      "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "last_started_at": "2026-05-12T12:53:31+00:00",
+      "last_seen_at": "2026-05-12T12:53:32+00:00",
+      "last_source_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
+      "last_message": "Ingesta completada: 8/8 registros validos",
       "progress": {
-        "loaded": 0,
+        "loaded": 8,
         "target": 2,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -11096,8 +11153,8 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
+        "has_network": true,
+        "has_any": true,
         "blocked_note": false
       }
     },
@@ -11107,8 +11164,8 @@
       "source_name": "Infoelectoral - Area de descargas (convocatorias + archivos)",
       "scope": "electoral",
       "desired": true,
-      "in_db": true,
-      "active": true,
+      "in_db": false,
+      "active": false,
       "default_url": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
       "institution_name": "",
       "role_title": "",
@@ -11122,45 +11179,45 @@
         "fuentes_objetivo": "Infoelectoral descargas/procesos",
         "bloque": "`infoelectoral_descargas` tiene evidencia de red en snapshot rico, pero `infoelectoral_procesos` no tiene run live-clean en el DB operativo actual. Cerrar solo cuando ambos source_id tengan `records_loaded > 0` o bloqueo documentado."
       },
-      "sql_status": "DONE",
+      "sql_status": "TODO",
       "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "ok",
-      "runs_total": 2,
-      "runs_ok": 1,
-      "last_status": "ok",
-      "last_loaded": 263,
-      "max_loaded_any": 263,
-      "max_loaded_network": 263,
-      "network_fetches": 1,
+      "state": "missing",
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T22:41:24+00:00",
-      "last_seen_at": "2026-02-12T22:41:39+00:00",
-      "last_source_url": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
-      "last_message": "Ingesta completada: 263/263 (network-with-partial-errors (archivos[6:198305]: RuntimeError: Respuesta inesperada (HTML recibido)))",
+      "last_started_at": "",
+      "last_seen_at": "",
+      "last_source_url": "",
+      "last_message": "",
       "progress": {
-        "loaded": 263,
+        "loaded": 0,
         "target": 3,
-        "percent": 100
+        "percent": 0
       },
       "mandates": 0,
       "warehouse": {
         "primary_table": "infoelectoral_convocatoria_tipos",
-        "primary_rows": 6,
+        "primary_rows": 0,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 6,
+          "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
+        "has_network": false,
+        "has_any": false,
         "blocked_note": false
       }
     },
@@ -11261,8 +11318,8 @@
       "max_loaded_network": 60,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:07:20+00:00",
-      "last_seen_at": "2026-02-12T12:07:21+00:00",
+      "last_started_at": "2026-05-12T12:53:25+00:00",
+      "last_seen_at": "2026-05-12T12:53:26+00:00",
       "last_source_url": "https://www.europarl.europa.eu/meps/es/full-list/xml",
       "last_message": "Ingesta completada: 60/60 registros validos",
       "progress": {
@@ -11319,17 +11376,17 @@
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 85,
-      "max_loaded_any": 85,
-      "max_loaded_network": 85,
+      "last_loaded": 284,
+      "max_loaded_any": 284,
+      "max_loaded_network": 284,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-05-10T22:23:45+00:00",
-      "last_seen_at": "2026-05-10T22:23:48+00:00",
-      "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260212",
-      "last_message": "Ingesta completada: 85/85 registros validos",
+      "last_started_at": "2026-05-12T12:51:24+00:00",
+      "last_seen_at": "2026-05-12T12:51:25+00:00",
+      "last_source_url": "https://www.boe.es/rss/boe.php",
+      "last_message": "Ingesta completada: 284/284 registros validos",
       "progress": {
-        "loaded": 85,
+        "loaded": 284,
         "target": 5,
         "percent": 100
       },
@@ -11382,26 +11439,26 @@
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 66895,
-      "max_loaded_any": 66895,
-      "max_loaded_network": 66895,
+      "last_loaded": 66907,
+      "max_loaded_any": 66907,
+      "max_loaded_network": 66907,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:07:21+00:00",
-      "last_seen_at": "2026-02-12T12:08:35+00:00",
+      "last_started_at": "2026-05-12T12:53:32+00:00",
+      "last_seen_at": "2026-05-12T12:55:21+00:00",
       "last_source_url": "https://concejales.redsara.es/consulta/getConcejalesLegislatura",
-      "last_message": "Ingesta completada: 66895/66895 registros validos",
+      "last_message": "Ingesta completada: 66907/66907 registros validos",
       "progress": {
-        "loaded": 66895,
+        "loaded": 66907,
         "target": 50000,
         "percent": 100
       },
-      "mandates": 66895,
+      "mandates": 66907,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 66895,
+        "primary_rows": 66907,
         "counts": {
-          "mandates": 66895,
+          "mandates": 66907,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -11445,28 +11502,28 @@
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 489,
-      "max_loaded_any": 489,
-      "max_loaded_network": 489,
+      "last_loaded": 500,
+      "max_loaded_any": 500,
+      "max_loaded_network": 500,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T22:41:53+00:00",
-      "last_seen_at": "2026-02-12T22:41:54+00:00",
+      "last_started_at": "2026-05-12T13:08:44+00:00",
+      "last_seen_at": "2026-05-12T13:08:47+00:00",
       "last_source_url": "https://www.congreso.es/es/opendata/iniciativas",
-      "last_message": "{\"initiatives_loaded\": 489, \"note\": \"network\"}",
+      "last_message": "{\"initiatives_loaded\": 500, \"note\": \"network\"}",
       "progress": {
-        "loaded": 489,
+        "loaded": 500,
         "target": 1,
         "percent": 100
       },
       "mandates": 0,
       "warehouse": {
         "primary_table": "parl_initiatives",
-        "primary_rows": 428,
+        "primary_rows": 422,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
-          "parl_initiatives": 428,
+          "parl_initiatives": 422,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
@@ -11568,31 +11625,31 @@
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "ok",
-      "runs_total": 3,
-      "runs_ok": 3,
+      "runs_total": 1,
+      "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 1,
-      "max_loaded_any": 1,
-      "max_loaded_network": 1,
+      "last_loaded": 80,
+      "max_loaded_any": 80,
+      "max_loaded_network": 80,
       "network_fetches": 1,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-12T22:39:17+00:00",
-      "last_seen_at": "2026-02-12T22:39:18+00:00",
-      "last_source_url": "",
-      "last_message": "{\"events_loaded\": 1, \"member_votes_loaded\": 350, \"note\": \"from-file\"}",
+      "fallback_fetches": 0,
+      "last_started_at": "2026-05-12T13:07:55+00:00",
+      "last_seen_at": "2026-05-12T13:08:42+00:00",
+      "last_source_url": "https://www.congreso.es/es/opendata/votaciones",
+      "last_message": "{\"events_loaded\": 80, \"member_votes_loaded\": 28000, \"note\": \"network\"}",
       "progress": {
-        "loaded": 1,
+        "loaded": 80,
         "target": 1,
         "percent": 100
       },
-      "mandates": 350,
+      "mandates": 0,
       "warehouse": {
         "primary_table": "parl_vote_events",
-        "primary_rows": 2,
+        "primary_rows": 80,
         "counts": {
-          "mandates": 350,
-          "parl_vote_events": 2,
-          "parl_initiatives": 1,
+          "mandates": 0,
+          "parl_vote_events": 80,
+          "parl_initiatives": 21,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
@@ -11752,45 +11809,45 @@
         "fuentes_objetivo": "Packet global `status=404` (`senado_iniciativas`) con replay acotado + cierre anti-loop",
         "bloque": "Done now: NO_DELTA_WITH_EVIDENCE. AI-OPS-388 ejecuta dos pasadas `packet50` con `--include-unlinked` y postproceso completo (`excerpts` + `extractions --only-missing`) sin conversi\u00f3n neta: pass1 `candidate_urls=50`, `fetched_ok=0`, `failures=30`; pass2 `candidate_urls=50`, `fetched_ok=0`, `failures=30`; delta acumulada `downloaded_doc_links=0`, `missing_doc_links_actionable=0`, `missing_urls=0`, `status404=0`, con `status403/status500` estables. Se registra `no_new_lever` y se cierra por anti-loop. Evidencia: `docs/etl/sprints/AI-OPS-388/reports/senado-status404-global-two-pass-no-delta-20260301.md`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_conversion_delta_ai_ops_388_20260301T174503Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_no_new_lever_ai_ops_388_20260301T174503Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_retry_packet50_effective_pass1_20260301T172903Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_retry_packet50_effective_pass2_20260301T174503Z.json`."
       },
-      "sql_status": "DONE",
-      "mismatch_state": "MATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "ok",
-      "runs_total": 4,
-      "runs_ok": 2,
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 3607,
-      "max_loaded_any": 3607,
-      "max_loaded_network": 3607,
-      "network_fetches": 2,
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T22:46:01+00:00",
-      "last_seen_at": "2026-02-12T22:46:04+00:00",
+      "last_started_at": "2026-05-12T13:08:50+00:00",
+      "last_seen_at": "2026-05-12T13:08:50+00:00",
       "last_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
-      "last_message": "{\"initiatives_loaded\": 3607, \"note\": \"network\"}",
+      "last_message": "{\"initiatives_loaded\": 0, \"note\": \"network-partial\"}",
       "progress": {
-        "loaded": 3607,
+        "loaded": 0,
         "target": 1,
-        "percent": 100
+        "percent": 0
       },
       "mandates": 0,
       "warehouse": {
         "primary_table": "parl_initiatives",
-        "primary_rows": 3607,
+        "primary_rows": 0,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
-          "parl_initiatives": 3607,
+          "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
+        "has_network": false,
+        "has_any": false,
         "blocked_note": false
       }
     },
@@ -11815,45 +11872,45 @@
         "fuentes_objetivo": "",
         "bloque": ""
       },
-      "sql_status": "DONE",
+      "sql_status": "PARTIAL",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "degraded",
-      "runs_total": 7,
-      "runs_ok": 3,
-      "last_status": "error",
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
       "last_loaded": 0,
-      "max_loaded_any": 500,
-      "max_loaded_network": 500,
-      "network_fetches": 2,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-02-12T23:09:34+00:00",
-      "last_seen_at": "2026-02-13T01:24:00+00:00",
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-05-12T13:08:48+00:00",
+      "last_seen_at": "2026-05-12T13:08:48+00:00",
       "last_source_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
-      "last_message": "HTTPError: HTTP Error 403: Forbidden",
+      "last_message": "{\"events_loaded\": 0, \"member_votes_loaded\": 0, \"note\": \"network-partial\"}",
       "progress": {
         "loaded": 0,
         "target": 1,
         "percent": 0
       },
-      "mandates": 575,
+      "mandates": 0,
       "warehouse": {
         "primary_table": "parl_vote_events",
-        "primary_rows": 500,
+        "primary_rows": 0,
         "counts": {
-          "mandates": 575,
-          "parl_vote_events": 500,
+          "mandates": 0,
+          "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
+        "has_network": false,
+        "has_any": false,
         "blocked_note": false
       }
     },
@@ -11891,9 +11948,9 @@
       "max_loaded_network": 350,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T12:05:29+00:00",
-      "last_seen_at": "2026-02-12T12:05:30+00:00",
-      "last_source_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260212050007.json",
+      "last_started_at": "2026-05-12T12:51:25+00:00",
+      "last_seen_at": "2026-05-12T12:51:27+00:00",
+      "last_source_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260512050012.json",
       "last_message": "Ingesta completada: 350/350 registros validos",
       "progress": {
         "loaded": 350,
@@ -11941,34 +11998,34 @@
         "fuentes_objetivo": "Senado OpenData XML (grupos + fichas)",
         "bloque": "GitHub Actions strict-network devuelve `HTTP 403` en `senado_senadores`; mantener datos previos como evidencia parcial, pero no marcar `DONE` hasta recuperar run reproducible live-clean."
       },
-      "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "ok",
-      "runs_total": 6,
-      "runs_ok": 4,
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 659,
-      "max_loaded_any": 659,
-      "max_loaded_network": 659,
-      "network_fetches": 3,
-      "fallback_fetches": 0,
-      "last_started_at": "2026-02-12T23:02:50+00:00",
-      "last_seen_at": "2026-02-12T23:03:35+00:00",
+      "last_loaded": 2,
+      "max_loaded_any": 2,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T13:07:51+00:00",
+      "last_seen_at": "2026-05-12T13:07:51+00:00",
       "last_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=4&legis=14,15",
-      "last_message": "Ingesta completada: 659/659 registros validos",
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
-        "loaded": 659,
+        "loaded": 2,
         "target": 250,
-        "percent": 100
+        "percent": 1
       },
-      "mandates": 659,
+      "mandates": 2,
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 659,
+        "primary_rows": 2,
         "counts": {
-          "mandates": 659,
+          "mandates": 2,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
@@ -11976,9 +12033,9 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
-        "has_network": true,
+        "has_network": false,
         "has_any": true,
         "blocked_note": false
       }
@@ -12004,25 +12061,25 @@
         "fuentes_objetivo": "",
         "bloque": ""
       },
-      "sql_status": "TODO",
+      "sql_status": "PARTIAL",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
+      "state": "partial",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 3,
+      "max_loaded_any": 3,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T12:53:22+00:00",
+      "last_seen_at": "2026-05-12T12:53:25+00:00",
+      "last_source_url": "https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741",
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Temporarily)",
       "progress": {
-        "loaded": 0,
+        "loaded": 3,
         "target": 1000,
         "percent": 0
       },
@@ -12039,10 +12096,10 @@
         }
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": false
       }
     },
@@ -12067,27 +12124,27 @@
         "fuentes_objetivo": "AEMET OpenData",
         "bloque": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`."
       },
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 2,
+      "max_loaded_any": 2,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T12:49:03+00:00",
+      "last_seen_at": "2026-05-12T12:49:04+00:00",
+      "last_source_url": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
+      "last_message": "Ingesta completada: 2/2 registros validos (contract-error-fallback: HTTPError: HTTP Error 404: No Encontrado)",
       "progress": {
-        "loaded": 0,
+        "loaded": 2,
         "target": 1,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -12105,7 +12162,7 @@
         "under_threshold": false,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": true
       }
     },
@@ -12143,8 +12200,8 @@
       "max_loaded_network": 58,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-05-11T17:56:58+00:00",
-      "last_seen_at": "2026-05-11T17:57:00+00:00",
+      "last_started_at": "2026-05-12T12:51:21+00:00",
+      "last_seen_at": "2026-05-12T12:51:22+00:00",
       "last_source_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAA301,D_1NBAA304,D_1NBAA317,D_1NBAA372,D_1NBAA572,D_1NBAC372,D_1NBAC572,D_1NBAC972,D_1NBAD301,D_1NBAD302,D_1NBAD306,D_1NBAD311,D_1NBAD317,D_1NBAD372,D_1NBAD472,D_1NBAD572,D_1NBAD972,D_1NBAE472,D_1NBAE572,D_1NBAE972,D_1NBAF472,D_1NBAF572,D_1NBAS372,D_1NBAS572,D_1NBAS972,D_1NBBO020,D_1NBBO072,D_1NBBO303,D_1NBBO305,D_1NBBO307,D_1NBBO308,D_1NBBO309,D_1NBBO310,D_1NBBO311,D_1NBBO314,D_1NBBO315,D_1NBBO316,D_1NBBO320,D_1NBBO333,D_1NBBO349,D_1NBBO572,D_1NBBP301,D_1NBBP302,D_1NBBP303,D_1NBBP304,D_1NBBP305,D_1NBBP306,D_1NBBP307,D_1NBBP308,D_1NBBP309,D_1NBBP310,D_1NBBP311,D_1NBBP314,D_1NBBP315,D_1NBBP316,D_1NBBP317,D_1NBBP349,D_1NBBP572&rango=30M",
       "last_message": "Ingesta completada: 58/58 registros validos",
       "progress": {
@@ -12193,27 +12250,27 @@
         "fuentes_objetivo": "ESIOS/REE API (token)",
         "bloque": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`."
       },
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "not_run",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
+      "state": "ok",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 2,
+      "max_loaded_any": 2,
       "max_loaded_network": 0,
       "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_started_at": "",
-      "last_seen_at": "",
-      "last_source_url": "",
-      "last_message": "",
+      "fallback_fetches": 1,
+      "last_started_at": "2026-05-12T13:07:50+00:00",
+      "last_seen_at": "2026-05-12T13:07:51+00:00",
+      "last_source_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour",
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 400: Bad Request)",
       "progress": {
-        "loaded": 0,
+        "loaded": 2,
         "target": 1,
-        "percent": 0
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -12231,7 +12288,7 @@
         "under_threshold": false,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": true
       }
     },
@@ -12269,8 +12326,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-05-11T17:56:58+00:00",
-      "last_seen_at": "2026-05-11T17:57:00+00:00",
+      "last_started_at": "2026-05-12T12:53:26+00:00",
+      "last_seen_at": "2026-05-12T12:53:27+00:00",
       "last_source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 404: Not Found)",
       "progress": {
@@ -12300,6 +12357,7 @@
     }
   ],
   "missing": [
+    "infoelectoral_descargas",
     "infoelectoral_procesos"
   ]
 }
