@@ -10,6 +10,11 @@ snapshot_date := env_var_or_default("SNAPSHOT_DATE", "2026-02-12")
 tracker_path := env_var_or_default("TRACKER_PATH", "docs/etl/e2e-scrape-load-tracker.md")
 tracker_waivers_path := env_var_or_default("TRACKER_WAIVERS_PATH", "docs/etl/mismatch-waivers.json")
 municipal_timeout := env_var_or_default("MUNICIPAL_TIMEOUT", "240")
+live_parl_max_votes := env_var_or_default("LIVE_PARL_MAX_VOTES", "80")
+live_parl_max_records := env_var_or_default("LIVE_PARL_MAX_RECORDS", "500")
+live_parl_max_files := env_var_or_default("LIVE_PARL_MAX_FILES", "8")
+live_parl_congreso_legs := env_var_or_default("LIVE_PARL_CONGRESO_LEGS", "15")
+live_parl_senado_legs := env_var_or_default("LIVE_PARL_SENADO_LEGS", "15")
 galicia_manual_dir := env_var_or_default("GALICIA_MANUAL_DIR", "etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages")
 navarra_manual_dir := env_var_or_default("NAVARRA_MANUAL_DIR", "etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages")
 infoelectoral_timeout := env_var_or_default("INFOELECTORAL_TIMEOUT", "30")
@@ -1312,6 +1317,13 @@ etl-contributor-gates:
 
 etl-live:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source all --snapshot-date {{snapshot_date}} --timeout {{municipal_timeout}}"
+  @just etl-live-parlamentario
+
+etl-live-parlamentario:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --congreso-legs {{live_parl_congreso_legs}} --max-votes {{live_parl_max_votes}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_iniciativas --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --max-files {{live_parl_max_files}} --max-records {{live_parl_max_records}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --senado-legs {{live_parl_senado_legs}} --max-votes {{live_parl_max_votes}} --senado-skip-details"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_iniciativas --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --senado-legs {{live_parl_senado_legs}} --max-records {{live_parl_max_records}}"
 
 etl-elecciones:
   docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}}"
