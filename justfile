@@ -3499,7 +3499,22 @@ responsibility-explainer-next-prime:
   if [ -n "{{initiative_measures_db_path}}" ]; then \
     responsibility_explainer_db="{{initiative_measures_db_path}}"; \
   fi; \
+  responsibility_tmp_dir=""; \
+  responsibility_tmp_db=""; \
+  cleanup() { \
+    if [ -n "$responsibility_tmp_dir" ]; then \
+      rm -rf "$responsibility_tmp_dir"; \
+    fi; \
+  }; \
+  trap cleanup EXIT; \
   if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
+    if [ -f "$responsibility_explainer_db" ] && [ ! -w "$responsibility_explainer_db" ]; then \
+      responsibility_tmp_dir="$(mktemp -d)"; \
+      responsibility_tmp_db="$responsibility_tmp_dir/responsibility-explainer.db"; \
+      cp "$responsibility_explainer_db" "$responsibility_tmp_db"; \
+      chmod u+w "$responsibility_tmp_db"; \
+      responsibility_explainer_db="$responsibility_tmp_db"; \
+    fi; \
     python3 scripts/import_responsibility_explainer_seed.py \
       --db "$responsibility_explainer_db" \
       --seed "{{responsibility_explainer_seed_path}}" \
