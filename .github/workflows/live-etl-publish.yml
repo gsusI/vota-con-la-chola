@@ -46,6 +46,14 @@ jobs:
       - name: Install just
         uses: extractions/setup-just@v2
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
       - name: Normalize snapshot date
         run: |
           echo "SNAPSHOT_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
