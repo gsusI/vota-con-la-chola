@@ -43,16 +43,31 @@ function normalize(value) {
   return String(value || "").trim().toLowerCase();
 }
 
-function resolveDataPath() {
-  return path.resolve(process.cwd(), "public", "people", "data", "xray.json");
+function resolveDataPath(kind) {
+  return path.resolve(process.cwd(), "public", "people", "data", `xray-${kind}.json`);
 }
 
-function loadXrayPayload() {
-  const dataPath = resolveDataPath();
-  if (!fs.existsSync(dataPath)) {
+function loadXrayPayload(kind) {
+  const dataPath = resolveDataPath(kind);
+  if (fs.existsSync(dataPath)) {
+    const raw = fs.readFileSync(dataPath, "utf-8");
+    const payload = JSON.parse(raw);
+    return {
+      meta: payload.meta || {},
+      groups: {
+        [kind]: Array.isArray(payload.groups) ? payload.groups : [],
+      },
+      group_index: {
+        [kind]: payload.group_index || {},
+      },
+    };
+  }
+
+  const legacyPath = path.resolve(process.cwd(), "public", "people", "data", "xray.json");
+  if (!fs.existsSync(legacyPath)) {
     return null;
   }
-  const raw = fs.readFileSync(dataPath, "utf-8");
+  const raw = fs.readFileSync(legacyPath, "utf-8");
   return JSON.parse(raw);
 }
 
@@ -111,10 +126,10 @@ function findGroup(groups, groupKey) {
 }
 
 export default async function XrayKindIndexPage({ params, searchParams }) {
-  const payload = loadXrayPayload();
   const resolvedParams = await params;
   const kind = String(resolvedParams?.kind || "").toLowerCase();
   const meta = KIND_META[kind];
+  const payload = meta ? loadXrayPayload(kind) : null;
 
   if (!meta || !payload || !payload.groups) {
     return notFound();

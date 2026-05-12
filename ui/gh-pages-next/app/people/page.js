@@ -42,8 +42,13 @@ function resolveXraySlugFromGroups(groupsByKind, kind, payload, label) {
   if (!kind || !label) {
     return "";
   }
-  const list = Array.isArray(groupsByKind?.[kind]) ? groupsByKind[kind] : [];
   const target = normalizeLabel(label);
+  const indexed = payload?.label_index?.[kind]?.[target];
+  if (indexed) {
+    return String(indexed);
+  }
+
+  const list = Array.isArray(groupsByKind?.[kind]) ? groupsByKind[kind] : [];
   const exact = list.find((item) => normalizeLabel(item?.label || "") === target);
   if (exact?.slug) {
     return String(exact.slug);

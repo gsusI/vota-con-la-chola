@@ -27,6 +27,17 @@ export function loadXrayPayload() {
 export function buildXrayKindSummaries(payload) {
   return XRAY_KIND_ORDER.map((kind) => {
     const meta = XRAY_KIND_META[kind];
+    const summary = payload?.kind_summaries?.[kind];
+    if (summary) {
+      return {
+        ...meta,
+        groupCount: toInt(summary.group_count),
+        latestActionDate: formatDateValue(summary.latest_action_date),
+        topGroupLabel: String(summary.top_group_label || "").trim(),
+        topGroupPeople: toInt(summary.top_group_people),
+      };
+    }
+
     const groups = Array.isArray(payload?.groups?.[kind]) ? payload.groups[kind] : [];
     const topGroup = groups.reduce((best, group) => {
       if (!best) {
