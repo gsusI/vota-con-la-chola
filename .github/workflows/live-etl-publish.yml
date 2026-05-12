@@ -15,6 +15,9 @@ concurrency:
   group: live-etl-publish
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   live-etl:
     runs-on: ubuntu-latest
@@ -31,8 +34,10 @@ jobs:
       ACCOUNTABILITY_MIN_ACTORS: "0"
       ACCOUNTABILITY_MIN_ISSUES: "0"
       ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTERS: "0"
-      HF_REQUIRE_QUALITY_REPORT: "0"
+      ACCOUNTABILITY_MIN_RESOLUTION_PCT: "0.999"
+      HF_REQUIRE_QUALITY_REPORT: "1"
       HF_REQUIRE_LIBERTY_ATLAS_RELEASE_LATEST: "0"
+      INITIATIVE_QUALITY_ACTIONABLE_SCOPE: "linked_to_votes"
 
     steps:
       - name: Checkout
@@ -61,7 +66,7 @@ jobs:
           HF_DATASET_REPO_ID="${HF_DATASET_REPO_ID:-local/vota-con-la-chola-data}" \
             HF_USERNAME="${HF_USERNAME:-local}" \
             just etl-publish-hf-dry-run
-          just cloudflare-pages-build
+          just cloudflare-pages-refresh-data
 
       - name: Publish Hugging Face snapshot
         if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
@@ -84,3 +89,7 @@ jobs:
             exit 0
           fi
           just cloudflare-pages-deploy
+
+      - name: Publish votaconlachola.org static branch
+        if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
+        run: just votaconlachola-gh-pages-publish

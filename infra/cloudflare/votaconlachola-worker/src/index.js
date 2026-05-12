@@ -1,4 +1,4 @@
-const RAW_ORIGIN = "https://raw.githubusercontent.com/gsusI/vota-con-la-chola/gh-pages";
+const PAGES_ORIGIN = "https://vota-con-la-chola.pages.dev";
 const ORIGIN_PREFIX = "/vota-con-la-chola";
 
 function normalizePathname(pathname) {
@@ -36,7 +36,7 @@ export default {
 
     const isDirectoryPath = normalizedPath.endsWith("/");
     const upstreamPath = isDirectoryPath ? `${normalizedPath}index.html` : normalizedPath;
-    const upstreamUrl = new URL(`${RAW_ORIGIN}${upstreamPath}`);
+    const upstreamUrl = new URL(upstreamPath, PAGES_ORIGIN);
 
     const upstreamResponse = await fetch(upstreamUrl, {
       method: request.method,
