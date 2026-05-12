@@ -42,3 +42,23 @@ test("xray kind metadata and links stay aligned", async () => {
     assert.equal(meta.href, `/people/xray/${kind}/`);
   }
 });
+
+test("people xray public data is split below Cloudflare Pages file limit", async () => {
+  const kinds = await loadKinds();
+  const dataDir = path.join(ROOT, "ui", "gh-pages-next", "public", "people", "data");
+  const maxCloudflarePagesBytes = 25 * 1024 * 1024;
+  const manifestPath = path.join(dataDir, "xray.json");
+
+  assert.equal(fs.existsSync(manifestPath), true);
+  assert.ok(fs.statSync(manifestPath).size < maxCloudflarePagesBytes, "xray.json exceeds Pages file limit");
+
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+  assert.deepEqual(manifest.kinds, kinds.XRAY_KIND_ORDER);
+
+  for (const kind of kinds.XRAY_KIND_ORDER) {
+    const fileName = manifest.group_files?.[kind] || `xray-${kind}.json`;
+    const filePath = path.join(dataDir, fileName);
+    assert.equal(fs.existsSync(filePath), true, `missing ${fileName}`);
+    assert.ok(fs.statSync(filePath).size < maxCloudflarePagesBytes, `${fileName} exceeds Pages file limit`);
+  }
+});

@@ -119,6 +119,19 @@ def slug_with_uniqueness(base: str, seen: dict[str, int]) -> str:
     return f"{base}-{count}"
 
 
+def normalize_label(value: Any) -> str:
+    raw = norm(value).lower()
+    if not raw:
+        return ""
+    decomposed = unicodedata.normalize("NFD", raw)
+    without_accents = "".join(ch for ch in decomposed if not unicodedata.combining(ch))
+    return re.sub(r"\s+", " ", without_accents).strip()
+
+
+def xray_kind_file_name(out_path: Path, kind: str) -> str:
+    return f"{out_path.stem}-{kind}{out_path.suffix}"
+
+
 def fetch_person_summaries(conn: sqlite3.Connection, include_party_proxies: bool) -> dict[int, dict[str, Any]]:
     sql = """
     WITH
@@ -408,24 +421,67 @@ def main() -> int:
         conn.close()
 
     xray_index: dict[str, dict[str, str]] = {}
+    label_index: dict[str, dict[str, str]] = {}
+    group_files: dict[str, str] = {}
+    kind_summaries: dict[str, dict[str, Any]] = {}
     for kind in KIND_DEFS:
         kind_index: dict[str, str] = {}
+        kind_label_index: dict[str, str] = {}
+        groups = groups_payload.get(kind, [])
+        latest_action_date = ""
+        top_group: dict[str, Any] | None = None
         for group in groups_payload.get(kind, []):
             kind_index[group["slug"]] = group["group_key"]
+            normalized_label = normalize_label(group.get("label"))
+            if normalized_label and normalized_label not in kind_label_index:
+                kind_label_index[normalized_label] = group["slug"]
+            group_last = norm(group.get("last_action_date"))
+            if group_last and (not latest_action_date or group_last > latest_action_date):
+                latest_action_date = group_last
+            if top_group is None or as_int(group.get("person_count")) > as_int(top_group.get("person_count")):
+                top_group = group
         xray_index[kind] = kind_index
+        label_index[kind] = kind_label_index
+        group_files[kind] = xray_kind_file_name(out_path, kind)
+        kind_summaries[kind] = {
+            "group_count": len(groups),
+            "latest_action_date": latest_action_date,
+            "top_group_label": norm(top_group.get("label")) if top_group else "",
+            "top_group_people": as_int(top_group.get("person_count")) if top_group else 0,
+        }
+
+    common_meta = {
+        "generated_at": now_utc_iso(),
+        "snapshot_date": snapshot_date,
+        "source_snapshot": snapshot_date,
+        "top_members": max(1, int(args.top_members)),
+        "include_party_proxies": bool(args.include_party_proxies),
+        "group_count": {kind: len(groups_payload.get(kind, [])) for kind in KIND_DEFS},
+        "split": True,
+    }
+
+    for kind in KIND_DEFS:
+        kind_path = out_path.with_name(group_files[kind])
+        kind_payload = {
+            "meta": {
+                **common_meta,
+                "kind": kind,
+            },
+            "kind": kind,
+            "groups": groups_payload.get(kind, []),
+            "group_index": xray_index[kind],
+        }
+        kind_bytes = write_payload(kind_path, kind_payload)
+        print(f"OK people xray kind snapshot -> {kind_path} ({kind_bytes} bytes)")
 
     payload = {
-        "meta": {
-            "generated_at": now_utc_iso(),
-            "snapshot_date": snapshot_date,
-            "source_snapshot": snapshot_date,
-            "top_members": max(1, int(args.top_members)),
-            "include_party_proxies": bool(args.include_party_proxies),
-            "group_count": {kind: len(groups_payload.get(kind, [])) for kind in KIND_DEFS},
-        },
+        "meta": common_meta,
         "kinds": KIND_DEFS,
-        "groups": groups_payload,
+        "groups": {kind: [] for kind in KIND_DEFS},
+        "group_files": group_files,
+        "kind_summaries": kind_summaries,
         "group_index": xray_index,
+        "label_index": label_index,
     }
     bytes_written = write_payload(out_path, payload)
     print(f"OK people xray snapshot -> {out_path} ({bytes_written} bytes)")
