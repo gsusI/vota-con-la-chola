@@ -1,1 +1,0 @@
-self.__SSG_MANIFEST=new Set(["\u002Fpeople\u002Fxray\u002F[kind]","\u002Fresponsibility-explainer\u002F[caseId]","\u002Fvote-explainer\u002F[publicVoteId]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

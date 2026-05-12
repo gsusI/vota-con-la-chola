@@ -4,8 +4,8 @@
     "public_vote_id": "congreso_votaciones--20260212--5aec714687",
     "vote_event_id": "congreso:vote:d6d15e5a8f16384ce6481d10",
     "canonical_path": "/vote-explainer/congreso_votaciones--20260212--5aec714687/",
-    "generated_at": "2026-04-25T10:47:44+00:00",
-    "snapshot_as_of_date": "2026-04-25",
+    "generated_at": "2026-05-12T10:42:37+00:00",
+    "snapshot_as_of_date": "2026-05-12",
     "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
     "static_snapshot": true,
     "freshness": {
@@ -20,7 +20,7 @@
     "source_id": "congreso_votaciones",
     "source_name": "Congreso - Votaciones (pleno, OpenData)",
     "source_url": "",
-    "primary_source_url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260212050152.json",
     "chamber": "Congreso",
     "vote_date": "2026-02-12",
     "title": "Dictámenes de Comisiones sobre iniciativas legislativas.",
@@ -53,39 +53,10 @@
     "supertype": "Función legislativa Función legislativa",
     "author_text": "Grupo Parlamentario Junts per Catalunya",
     "procedure_type": "Normal",
-    "current_status": "Senado",
+    "current_status": "Pleno Aprobación",
     "result_text": "",
-    "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
-    "confidence": 0.75,
-    "documents": {
-      "total": 6,
-      "by_kind": {
-        "bocg": 3,
-        "ds": 3
-      },
-      "docs": [
-        {
-          "kind": "bocg",
-          "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-1.PDF",
-          "downloaded": true
-        },
-        {
-          "kind": "bocg",
-          "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-2.PDF",
-          "downloaded": true
-        },
-        {
-          "kind": "bocg",
-          "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-3.PDF",
-          "downloaded": true
-        },
-        {
-          "kind": "ds",
-          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/CO/DSCD-15-CO-474.PDF",
-          "downloaded": true
-        }
-      ]
-    }
+    "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260212050152.json",
+    "confidence": 0.75
   },
   "groups": [
     {
@@ -163,8 +134,8 @@
   ],
   "audit_links": {
     "explorer_votaciones": "/explorer-votaciones/?q=congreso%3Avote%3Ad6d15e5a8f16384ce6481d10",
-    "explorer_source": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
-    "initiative_url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260212050152.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260212050152.json",
     "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
   },
   "social": {

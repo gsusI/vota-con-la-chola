@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "senado_votaciones--20211221--0992d4de5c",
+    "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_42_1657.xml",
+    "canonical_path": "/vote-explainer/senado_votaciones--20211221--0992d4de5c/",
+    "generated_at": "2026-05-12T10:42:37+00:00",
+    "snapshot_as_of_date": "2026-05-12",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "senado_votaciones",
+    "source_name": "Senado - Votaciones (OpenData)",
+    "source_url": "https://www.senado.es/legis14/votaciones/ses_42.xml",
+    "primary_source_url": "https://www.senado.es/legis14/votaciones/ses_42.xml",
+    "chamber": "Senado",
+    "vote_date": "2021-12-21",
+    "title": "Autorización",
+    "expediente_text": "Convenio sobre el trabajo a domicilio, hecho en Ginebra el 20 de junio de 1996. (610/000077)",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "",
+    "headline": "Convenio sobre el trabajo a domicilio, hecho en Ginebra el 20 de junio de 1996. (610/000077)",
+    "subtitle": "610/000077"
+  },
+  "result": {
+    "status": "approved",
+    "label": "Aprobada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 247 · No 3 · Abstencion 7 · No vota 8"
+  },
+  "totals": {
+    "present": 265,
+    "yes": 247,
+    "no": 3,
+    "abstain": 7,
+    "no_vote": 8
+  },
+  "initiative": {
+    "initiative_id": "senado:leg14:exp:610/000077",
+    "expediente": "610/000077",
+    "title": "Convenio sobre el trabajo a domicilio, hecho en Ginebra el 20 de junio de 1996. (610/000077)",
+    "type": "610",
+    "grouping": "Votaciones por iniciativa (Senado)",
+    "supertype": "",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GRUPO PARLAMENTARIO SOCIALISTA",
+      "yes": 114,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 114
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO POPULAR EN EL SENADO",
+      "yes": 99,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 1,
+      "total": 100
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO ESQUERRA REPUBLICANA-EUSKAL HERRIA BILDU",
+      "yes": 14,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 2,
+      "total": 16
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO VASCO EN EL SENADO (EAJ-PNV)",
+      "yes": 10,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 10
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO MIXTO",
+      "yes": 3,
+      "no": 3,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 1,
+      "total": 7
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.senado.es/legis14/votaciones/ses_42_1657.xml",
+    "explorer_source": "https://www.senado.es/legis14/votaciones/ses_42.xml",
+    "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Convenio sobre el trabajo a domicilio, hecho en Ginebra el 20 de junio de 1996. (610/000077) | Vota Con La Chola",
+    "description": "Senado · 2021-12-21 · Si 247 · No 3 · Abstencion 7 · No vota 8. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/senado_votaciones--20211221--0992d4de5c/"
+  }
+}

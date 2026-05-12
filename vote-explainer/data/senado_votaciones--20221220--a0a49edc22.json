@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "senado_votaciones--20221220--a0a49edc22",
+    "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_62_3293.xml",
+    "canonical_path": "/vote-explainer/senado_votaciones--20221220--a0a49edc22/",
+    "generated_at": "2026-05-12T10:42:37+00:00",
+    "snapshot_as_of_date": "2026-05-12",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "senado_votaciones",
+    "source_name": "Senado - Votaciones (OpenData)",
+    "source_url": "https://www.senado.es/legis14/votaciones/ses_62.xml",
+    "primary_source_url": "https://www.senado.es/legis14/votaciones/ses_62.xml",
+    "chamber": "Senado",
+    "vote_date": "2022-12-20",
+    "title": "Propuesta de reforma",
+    "expediente_text": "Propuesta de reforma de la Ley Orgánica 5/2007, de 20 de abril, de reforma del Estatuto de Autonomía de Aragón. (605/000004)",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "",
+    "headline": "Propuesta de reforma de la Ley Orgánica 5/2007, de 20 de abril, de reforma del Estatuto de Autonomía de Aragón. (605/000004)",
+    "subtitle": "605/000004"
+  },
+  "result": {
+    "status": "approved",
+    "label": "Aprobada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 239 · No 0 · Abstencion 20 · No vota 2"
+  },
+  "totals": {
+    "present": 261,
+    "yes": 239,
+    "no": 0,
+    "abstain": 20,
+    "no_vote": 2
+  },
+  "initiative": {
+    "initiative_id": "senado:leg14:exp:605/000004",
+    "expediente": "605/000004",
+    "title": "Propuesta de reforma de la Ley Orgánica 5/2007, de 20 de abril, de reforma del Estatuto de Autonomía de Aragón. (605/000004)",
+    "type": "605",
+    "grouping": "Votaciones por iniciativa (Senado)",
+    "supertype": "",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GRUPO PARLAMENTARIO SOCIALISTA",
+      "yes": 113,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 113
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO POPULAR EN EL SENADO",
+      "yes": 99,
+      "no": 0,
+      "abstain": 1,
+      "no_vote": 0,
+      "other": 4,
+      "total": 104
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO ESQUERRA REPUBLICANA-EUSKAL HERRIA BILDU",
+      "yes": 0,
+      "no": 0,
+      "abstain": 14,
+      "no_vote": 0,
+      "other": 2,
+      "total": 16
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO VASCO EN EL SENADO (EAJ-PNV)",
+      "yes": 10,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 10
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO MIXTO",
+      "yes": 7,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 7
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.senado.es/legis14/votaciones/ses_62_3293.xml",
+    "explorer_source": "https://www.senado.es/legis14/votaciones/ses_62.xml",
+    "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Propuesta de reforma de la Ley Orgánica 5/2007, de 20 de abril, de reforma del Estatuto de Autonomía de Aragón | Vota Con La Chola",
+    "description": "Senado · 2022-12-20 · Si 239 · No 0 · Abstencion 20 · No vota 2. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/senado_votaciones--20221220--a0a49edc22/"
+  }
+}

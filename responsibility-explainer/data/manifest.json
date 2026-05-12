@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at": "2026-04-25T10:47:43Z",
-    "snapshot_date": "2026-04-12",
+    "generated_at": "2026-05-12T10:42:17Z",
+    "snapshot_date": "2026-02-12",
     "schema_version": "responsibility_explainer_manifest_v1",
-    "snapshot_db": "etl/data/staging/parlamentario-es.db",
+    "snapshot_db": "etl/data/staging/politicos-es.db",
     "total_cases": 2
   },
   "cases": [
@@ -14,11 +14,11 @@
       "canonical_path": "/responsibility-explainer/dana-valencia-2024/",
       "coverage": {
         "initiatives_total": 11,
-        "initiatives_with_votes_total": 1,
-        "initiatives_with_measure_points_total": 1,
-        "vote_events_total": 2,
-        "reviewed_measures_total": 5,
-        "official_documents_total": 15,
+        "initiatives_with_votes_total": 0,
+        "initiatives_with_measure_points_total": 0,
+        "vote_events_total": 0,
+        "reviewed_measures_total": 0,
+        "official_documents_total": 0,
         "normative_duties_total": 4,
         "warning_channels_total": 3,
         "warning_timeline_events_total": 3,
@@ -32,8 +32,8 @@
         "structural_evidence_rows_total": 28
       },
       "question_status_counts": {
-        "partial": 6,
-        "missing": 2
+        "partial": 4,
+        "missing": 4
       }
     },
     {

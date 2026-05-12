@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generated_at": "2026-04-25T10:47:43Z",
-    "snapshot_date": "2026-04-12",
+    "generated_at": "2026-05-12T10:42:17Z",
+    "snapshot_date": "2026-02-12",
     "schema_version": "responsibility_explainer_case_v1",
     "case_id": "dana-valencia-2024",
-    "snapshot_db": "etl/data/staging/parlamentario-es.db"
+    "snapshot_db": "etl/data/staging/politicos-es.db"
   },
   "case": {
     "case_id": "dana-valencia-2024",
@@ -23,11 +23,11 @@
   },
   "coverage": {
     "initiatives_total": 11,
-    "initiatives_with_votes_total": 1,
-    "initiatives_with_measure_points_total": 1,
-    "vote_events_total": 2,
-    "reviewed_measures_total": 5,
-    "official_documents_total": 15,
+    "initiatives_with_votes_total": 0,
+    "initiatives_with_measure_points_total": 0,
+    "vote_events_total": 0,
+    "reviewed_measures_total": 0,
+    "official_documents_total": 0,
     "normative_duties_total": 4,
     "warning_channels_total": 3,
     "warning_timeline_events_total": 3,
@@ -41,8 +41,8 @@
     "structural_evidence_rows_total": 28
   },
   "question_status_counts": {
-    "partial": 6,
-    "missing": 2
+    "partial": 4,
+    "missing": 4
   },
   "normative_evidence": {
     "scope_label": "Anclajes oficiales de deber, coordinacion y canales de aviso ya resumidos desde fuentes primarias",
@@ -970,8 +970,8 @@
       "question_id": "parliamentary_votes",
       "category": "Rastro legislativo",
       "prompt": "Que votos formales quedaron enlazados a esas medidas y como se resolvieron?",
-      "status": "partial",
-      "status_label": "Parcial",
+      "status": "missing",
+      "status_label": "Pendiente",
       "next_evidence_needed": [
         "mejorar enlaces voto->iniciativa para expedientes todavia sin voto asociado"
       ]
@@ -980,8 +980,8 @@
       "question_id": "reviewed_measures",
       "category": "Cambios concretos",
       "prompt": "Que cambios concretos y citizen-facing ya se pueden explicar a partir del texto oficial revisado?",
-      "status": "partial",
-      "status_label": "Parcial",
+      "status": "missing",
+      "status_label": "Pendiente",
       "next_evidence_needed": [
         "ampliar revision humana de medidas DANA y paquetes de reconstruccion"
       ]
@@ -1008,12 +1008,11 @@
         "type": "Reales decretos",
         "current_status": "",
         "presented_date": "",
-        "vote_events_count": 2,
-        "measure_points_count": 5,
-        "official_documents_count": 1,
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260225050017.json",
-          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_012_2025.pdf"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260212050017.json"
         ]
       },
       {
@@ -1025,10 +1024,9 @@
         "presented_date": "",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260225050017.json",
-          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_007_2024.pdf"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260212050017.json"
         ]
       },
       {
@@ -1040,10 +1038,9 @@
         "presented_date": "",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260225050017.json",
-          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_008_2024_corr.pdf"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260212050017.json"
         ]
       },
       {
@@ -1055,7 +1052,7 @@
         "presented_date": "",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 3,
+        "official_documents_count": 0,
         "official_links": [
           "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
           "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000055",
@@ -1072,7 +1069,7 @@
         "presented_date": "",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 2,
+        "official_documents_count": 0,
         "official_links": [
           "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
           "https://www.senado.es/web/ficopendataservlet?legis=15&tipoFich=3&tipoEx=622&numEx=000063",
@@ -1088,11 +1085,9 @@
         "presented_date": "2024-11-21",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-39-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-39-1.PDF"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260212050027.json"
         ]
       },
       {
@@ -1104,11 +1099,9 @@
         "presented_date": "2024-12-12",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-42-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-42-1.PDF"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260212050027.json"
         ]
       },
       {
@@ -1120,11 +1113,9 @@
         "presented_date": "2024-12-19",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-44-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-44-1.PDF"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260212050027.json"
         ]
       },
       {
@@ -1136,13 +1127,9 @@
         "presented_date": "2025-01-11",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 2,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-2.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-1.PDF",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-2.PDF"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260212050152.json"
         ]
       },
       {
@@ -1154,11 +1141,9 @@
         "presented_date": "2025-01-22",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260225050121.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-175-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-175-1.PDF"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260212050152.json"
         ]
       },
       {
@@ -1170,101 +1155,14 @@
         "presented_date": "2025-11-27",
         "vote_events_count": 0,
         "measure_points_count": 0,
-        "official_documents_count": 1,
+        "official_documents_count": 0,
         "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260225050028.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-78-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-78-1.PDF"
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260212050027.json"
         ]
       }
     ],
-    "votes": [
-      {
-        "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json",
-        "initiative_id": "congreso:ley:12:2025",
-        "source_id": "congreso_votaciones",
-        "vote_date": "2025-11-27",
-        "title": "Convalidaci\u00f3n o derogaci\u00f3n de Reales Decretos-leyes.",
-        "totals": {
-          "yes": 307,
-          "no": 33,
-          "abstain": 7,
-          "present": 347
-        },
-        "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
-      },
-      {
-        "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion017/VOT_20251127124110.json",
-        "initiative_id": "congreso:ley:12:2025",
-        "source_id": "congreso_votaciones",
-        "vote_date": "2025-11-27",
-        "title": "Convalidaci\u00f3n o derogaci\u00f3n de Reales Decretos-leyes.",
-        "totals": {
-          "yes": 347,
-          "no": 0,
-          "abstain": 0,
-          "present": 347
-        },
-        "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion017/VOT_20251127124110.json"
-      }
-    ],
-    "reviewed_measures": [
-      {
-        "initiative_id": "congreso:ley:12:2025",
-        "measure_rank": 1,
-        "measure_title": "Financiaci\u00f3n Reinicia + FEPYME DANA PLUS para pymes afectadas",
-        "citizen_summary": "Se crea un mecanismo temporal de pr\u00e9stamos participativos para pymes afectadas por la DANA y para proyectos empresariales vinculados a prevenci\u00f3n, resiliencia y transformaci\u00f3n ante emergencias.",
-        "policy_area": "",
-        "measure_status": "unknown",
-        "primary_vote_event_ids": [
-          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
-        ]
-      },
-      {
-        "initiative_id": "congreso:ley:12:2025",
-        "measure_rank": 2,
-        "measure_title": "Avales ICO de hasta 5.000 millones para emergencias",
-        "citizen_summary": "El Estado podr\u00e1 avalar financiaci\u00f3n para hogares, empresas y aut\u00f3nomos afectados por emergencias de protecci\u00f3n civil, con un m\u00e1ximo de 5.000 millones de euros y vigencia hasta 2040.",
-        "policy_area": "",
-        "measure_status": "unknown",
-        "primary_vote_event_ids": [
-          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
-        ]
-      },
-      {
-        "initiative_id": "congreso:ley:12:2025",
-        "measure_rank": 3,
-        "measure_title": "Aplazamiento de cuotas de Seguridad Social para afectados",
-        "citizen_summary": "Empresas, aut\u00f3nomos y trabajadores del mar de las zonas afectadas pueden pedir aplazamientos especiales para las cuotas de Seguridad Social que venzan entre finales de 2025 y principios de 2026.",
-        "policy_area": "",
-        "measure_status": "unknown",
-        "primary_vote_event_ids": [
-          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
-        ]
-      },
-      {
-        "initiative_id": "congreso:ley:12:2025",
-        "measure_rank": 4,
-        "measure_title": "Prestaci\u00f3n extraordinaria por cese de actividad para aut\u00f3nomos",
-        "citizen_summary": "Los aut\u00f3nomos que ya cobraban la ayuda anterior pueden acceder a una prestaci\u00f3n extraordinaria por cese de actividad si la DANA sigue afectando su trabajo.",
-        "policy_area": "",
-        "measure_status": "unknown",
-        "primary_vote_event_ids": [
-          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
-        ]
-      },
-      {
-        "initiative_id": "congreso:ley:12:2025",
-        "measure_rank": 5,
-        "measure_title": "Reposici\u00f3n de libros y material escolar en el curso 2025-2026",
-        "citizen_summary": "Las familias podr\u00e1n seguir justificando los gastos de reposici\u00f3n de libros y material escolar o de estudio perdidos o da\u00f1ados por la DANA durante el curso 2025-2026.",
-        "policy_area": "",
-        "measure_status": "unknown",
-        "primary_vote_event_ids": [
-          "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion016/VOT_20251127124109.json"
-        ]
-      }
-    ]
+    "votes": [],
+    "reviewed_measures": []
   },
   "gaps": {
     "known_gaps": [

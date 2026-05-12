@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "senado_votaciones--20210915--81e0b13255",
+    "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_35_1392.xml",
+    "canonical_path": "/vote-explainer/senado_votaciones--20210915--81e0b13255/",
+    "generated_at": "2026-05-12T10:42:37+00:00",
+    "snapshot_as_of_date": "2026-05-12",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "senado_votaciones",
+    "source_name": "Senado - Votaciones (OpenData)",
+    "source_url": "https://www.senado.es/legis14/votaciones/ses_35.xml",
+    "primary_source_url": "https://www.senado.es/legis14/votaciones/ses_35.xml",
+    "chamber": "Senado",
+    "vote_date": "2021-09-15",
+    "title": "Autorización",
+    "expediente_text": "Acuerdo sobre la transferencia y mutualización de las aportaciones al Fondo Único de Resolución entre el Reino de Bélgica, la República de Bulgaria, la República Checa, el Reino de Dinamarca, la República Federal de Alemania, la República de Estonia, Irlanda, la República Helénica, el Reino de España, la República Francesa, la República de Croacia, la República Italiana, la República de Chipre, la República de Letonia, la República de Lituania, el Gran Ducado de Luxemburgo, Hungría, la República de Malta, el Reino de los Países Bajos, la República de Austria, la República de Polonia, la República Portuguesa, Rumania, la República de Eslovenia, la República Eslovaca y la República de Finlandia, hecho en Bruselas el 27 de enero y el 8 de febrero de 2021. (610/000060)",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "",
+    "headline": "Acuerdo sobre la transferencia y mutualización de las aportaciones al Fondo Único de Resolución entre el Reino de Bélgica, la República de Bulgaria, la República Checa, el Reino de Dinamarca, la República Federal de Alemania, la República de Estonia, Irlanda, la República Helénica, el Reino de España, la República Francesa, la República de Croacia, la República Italiana, la República de Chipre, la República de Letonia, la República de Lituania, el Gran Ducado de Luxemburgo, Hungría, la República de Malta, el Reino de los Países Bajos, la República de Austria, la República de Polonia, la República Portuguesa, Rumania, la República de Eslovenia, la República Eslovaca y la República de Finlandia, hecho en Bruselas el 27 de enero y el 8 de febrero de 2021. (610/000060)",
+    "subtitle": "610/000060"
+  },
+  "result": {
+    "status": "approved",
+    "label": "Aprobada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 230 · No 0 · Abstencion 26 · No vota 8"
+  },
+  "totals": {
+    "present": 264,
+    "yes": 230,
+    "no": 0,
+    "abstain": 26,
+    "no_vote": 8
+  },
+  "initiative": {
+    "initiative_id": "senado:leg14:exp:610/000060",
+    "expediente": "610/000060",
+    "title": "Acuerdo sobre la transferencia y mutualización de las aportaciones al Fondo Único de Resolución entre el Reino de Bélgica, la República de Bulgaria, la República Checa, el Reino de Dinamarca, la República Federal de Alemania, la República de Estonia, Irlanda, la República Helénica, el Reino de España, la República Francesa, la República de Croacia, la República Italiana, la República de Chipre, la República de Letonia, la República de Lituania, el Gran Ducado de Luxemburgo, Hungría, la República de Malta, el Reino de los Países Bajos, la República de Austria, la República de Polonia, la República Portuguesa, Rumania, la República de Eslovenia, la República Eslovaca y la República de Finlandia, hecho en Bruselas el 27 de enero y el 8 de febrero de 2021. (610/000060)",
+    "type": "610",
+    "grouping": "Votaciones por iniciativa (Senado)",
+    "supertype": "",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GRUPO PARLAMENTARIO SOCIALISTA",
+      "yes": 112,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 112
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO POPULAR EN EL SENADO",
+      "yes": 96,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 4,
+      "total": 100
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO ESQUERRA REPUBLICANA-EUSKAL HERRIA BILDU",
+      "yes": 0,
+      "no": 0,
+      "abstain": 16,
+      "no_vote": 0,
+      "other": 0,
+      "total": 16
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO VASCO EN EL SENADO (EAJ-PNV)",
+      "yes": 10,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 10
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO MIXTO",
+      "yes": 4,
+      "no": 0,
+      "abstain": 3,
+      "no_vote": 0,
+      "other": 0,
+      "total": 7
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.senado.es/legis14/votaciones/ses_35_1392.xml",
+    "explorer_source": "https://www.senado.es/legis14/votaciones/ses_35.xml",
+    "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Acuerdo sobre la transferencia y mutualización de las aportaciones al Fondo Único de Resolución entre el Reino | Vota Con La Chola",
+    "description": "Senado · 2021-09-15 · Si 230 · No 0 · Abstencion 26 · No vota 8. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/senado_votaciones--20210915--81e0b13255/"
+  }
+}

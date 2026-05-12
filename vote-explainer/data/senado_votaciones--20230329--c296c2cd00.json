@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "senado_votaciones--20230329--c296c2cd00",
+    "vote_event_id": "url:https://www.senado.es/legis14/votaciones/ses_67_4340.xml",
+    "canonical_path": "/vote-explainer/senado_votaciones--20230329--c296c2cd00/",
+    "generated_at": "2026-05-12T10:42:37+00:00",
+    "snapshot_as_of_date": "2026-05-12",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "senado_votaciones",
+    "source_name": "Senado - Votaciones (OpenData)",
+    "source_url": "https://www.senado.es/legis14/votaciones/ses_67.xml",
+    "primary_source_url": "https://www.senado.es/legis14/votaciones/ses_67.xml",
+    "chamber": "Senado",
+    "vote_date": "2023-03-29",
+    "title": "Autorización",
+    "expediente_text": "Tratado de Amistad y Cooperación entre el Reino de España y la República Portuguesa, hecho en Trujillo el 28 de octubre de 2021. (610/000113)",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "",
+    "headline": "Tratado de Amistad y Cooperación entre el Reino de España y la República Portuguesa, hecho en Trujillo el 28 de octubre de 2021. (610/000113)",
+    "subtitle": "610/000113"
+  },
+  "result": {
+    "status": "approved",
+    "label": "Aprobada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 234 · No 0 · Abstencion 27"
+  },
+  "totals": {
+    "present": 261,
+    "yes": 234,
+    "no": 0,
+    "abstain": 27,
+    "no_vote": 0
+  },
+  "initiative": {
+    "initiative_id": "senado:leg14:exp:610/000113",
+    "expediente": "610/000113",
+    "title": "Tratado de Amistad y Cooperación entre el Reino de España y la República Portuguesa, hecho en Trujillo el 28 de octubre de 2021. (610/000113)",
+    "type": "610",
+    "grouping": "Votaciones por iniciativa (Senado)",
+    "supertype": "",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GRUPO PARLAMENTARIO SOCIALISTA",
+      "yes": 112,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 1,
+      "total": 113
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO POPULAR EN EL SENADO",
+      "yes": 102,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 2,
+      "total": 104
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO ESQUERRA REPUBLICANA-EUSKAL HERRIA BILDU",
+      "yes": 0,
+      "no": 0,
+      "abstain": 16,
+      "no_vote": 0,
+      "other": 0,
+      "total": 16
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO VASCO EN EL SENADO (EAJ-PNV)",
+      "yes": 10,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 10
+    },
+    {
+      "group_code": "GRUPO PARLAMENTARIO MIXTO",
+      "yes": 3,
+      "no": 0,
+      "abstain": 3,
+      "no_vote": 0,
+      "other": 1,
+      "total": 7
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.senado.es/legis14/votaciones/ses_67_4340.xml",
+    "explorer_source": "https://www.senado.es/legis14/votaciones/ses_67.xml",
+    "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=14",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Tratado de Amistad y Cooperación entre el Reino de España y la República Portuguesa, hecho en Trujillo el 28 d | Vota Con La Chola",
+    "description": "Senado · 2023-03-29 · Si 234 · No 0 · Abstencion 27. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/senado_votaciones--20230329--c296c2cd00/"
+  }
+}

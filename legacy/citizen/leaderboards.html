@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vota Con La Chola | Leaderboards</title>
+    <title>Vota Con La Chola | Clasificaciones</title>
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -341,17 +341,17 @@
   <body>
     <main class="shell">
       <header class="card top">
-        <nav class="nav" aria-label="Navegacion principal">
+        <nav class="nav" aria-label="Navegación principal">
           <a class="pill" href="../">Exploradores</a>
-          <a class="pill secondary" href="./">Ciudadania</a>
+          <a class="pill secondary" href="./">Ciudadanía</a>
           <a class="pill neutral" href="../explorer-temas/">Temas</a>
           <a class="pill neutral" href="../explorer-sources/#campaign-map">Mapa de conquista</a>
         </nav>
-        <p class="eyebrow">Leaderboards</p>
-        <h1>Hipotesis ciudadanas en ranking</h1>
+        <p class="eyebrow">Clasificaciones</p>
+        <h1>Hipótesis ciudadanas ordenadas</h1>
         <p class="sub">
-          Este panel convierte 10 hipotesis de interes publico en tablas comparables por partido y por tema usando snapshots
-          estaticos de GH Pages (<span class="mono">votes</span>, <span class="mono">declared</span> y <span class="mono">combined</span>).
+          Este panel convierte 11 hipótesis de interés público en tablas comparables por partido y por tema usando cortes
+          estáticos de GH Pages (<span class="mono">votos</span>, <span class="mono">dichos</span> y <span class="mono">combinado</span>).
         </p>
         <div class="meta" id="metaChips">
           <span class="chip">Cargando metadatos...</span>
@@ -361,8 +361,8 @@
       <section class="boards" id="boardsRoot" aria-live="polite"></section>
 
       <footer class="card footer">
-        Interpretacion: no es un ranking electoral final. Son pruebas exploratorias para auditar patrones en datos disponibles.
-        Algunas hipotesis usan proxies porque el snapshot ciudadano no incluye voto nominal por miembro-partido en cada evento.
+        Interpretación: no es una clasificación electoral final. Son pruebas exploratorias para auditar patrones en los datos disponibles.
+        Algunas hipótesis usan aproximaciones porque el corte ciudadano no incluye voto nominal por miembro-partido en cada evento.
       </footer>
     </main>
 
@@ -372,6 +372,9 @@
         votes: "./data/citizen_votes.json",
         declared: "./data/citizen_declared.json",
         concerns: "./data/concerns_v1.json",
+        robustnessCombined: "./data/citizen_ranking_robustness.json",
+        robustnessVotes: "./data/citizen_ranking_robustness_votes.json",
+        robustnessDeclared: "./data/citizen_ranking_robustness_declared.json",
       };
 
       const GOV_REGEX = /(PSOE|SUMAR)/i;
@@ -469,6 +472,11 @@
         const combined = data.combined;
         const votes = data.votes;
         const declared = data.declared;
+        const robustness = {
+          combined: data.robustnessCombined || {},
+          votes: data.robustnessVotes || {},
+          declared: data.robustnessDeclared || {},
+        };
         const concernMeta = new Map((data.concerns.concerns || []).map((c) => [c.id, c]));
         const partyById = new Map((combined.parties || []).map((p) => [p.party_id, p]));
         const topicById = new Map((combined.topics || []).map((t) => [t.topic_id, t]));
@@ -482,6 +490,12 @@
           topicById,
           allPartyIds: [...partyById.keys()],
           allTopicIds: [...topicById.keys()],
+          robustness,
+          robustnessByParty: {
+            combined: new Map(((robustness.combined || {}).rows || []).map((row) => [row.party_id, row])),
+            votes: new Map(((robustness.votes || {}).rows || []).map((row) => [row.party_id, row])),
+            declared: new Map(((robustness.declared || {}).rows || []).map((row) => [row.party_id, row])),
+          },
           maps: {
             combined: mkRowMap(combined.party_topic_positions || []),
             votes: mkRowMap(votes.party_topic_positions || []),
@@ -499,6 +513,50 @@
           },
           asOfDate: combined.meta?.as_of_date || votes.meta?.as_of_date || declared.meta?.as_of_date || null,
         };
+      }
+
+      function rankBandTagClass(id) {
+        if (id === "stable") return "good";
+        if (id === "competitive") return "warn";
+        if (id === "fragile") return "bad";
+        return "";
+      }
+
+      function rankBandChip(row) {
+        const band = row?.rank_band || {};
+        return `<span class="tag ${escapeHtml(rankBandTagClass(band.id || ""))}">${escapeHtml(band.label || "sin base")}</span>`;
+      }
+
+      function rankRangeLabel(ctx, partyId) {
+        const ranks = [];
+        ["combined", "votes", "declared"].forEach((key) => {
+          const row = ctx.robustnessByParty[key]?.get(partyId);
+          const rank = Number(row?.rank || 0);
+          if (rank > 0) ranks.push(rank);
+        });
+        if (!ranks.length) return "—";
+        const lo = Math.min(...ranks);
+        const hi = Math.max(...ranks);
+        if (lo === hi) return `#${fmt.format(lo)}`;
+        return `#${fmt.format(lo)}-#${fmt.format(hi)}`;
+      }
+
+      function renderDriverTopics(row) {
+        const focus = row?.focus_pair || {};
+        const drivers = Array.isArray(focus.driver_topics) ? focus.driver_topics : [];
+        if (!drivers.length) return escapeHtml(focus.reason_label || "Sin temas comparables claros.");
+        const labels = drivers
+          .slice(0, 2)
+          .map((item) => {
+            const suffix = item?.is_high_stakes ? " [HS]" : "";
+            return `${item?.topic_label || ""}${suffix}`;
+          })
+          .join(" · ");
+        const needed = Number(focus.driver_topics_needed || 0);
+        if (needed > 0) {
+          return `${fmt.format(needed)} tema(s): ${escapeHtml(labels)}`;
+        }
+        return escapeHtml(labels);
       }
 
       function partyName(ctx, partyId) {
@@ -591,7 +649,7 @@
           title: "Brecha entre lo declarado y lo votado",
           hypothesis: "Las posturas declaradas difieren de forma significativa respecto al comportamiento de voto.",
           notes:
-            "Solo compara casos con stance claro (support/oppose) en ambos metodos. Brecha robusta = shrinkage hacia tasa global para evitar sobreajuste con n chico.",
+            "Solo compara casos con postura clara (a favor o en contra) en ambos métodos. La brecha robusta se contrae hacia la tasa global para evitar sobreajuste con muestras pequeñas.",
           alert,
           columns: [
             { key: "party", label: "Partido" },
@@ -619,8 +677,8 @@
           .sort((a, b) => b.coherence - a.coherence || b.overlap - a.overlap);
         return {
           id: "H2",
-          title: "Quien es mas coherente (dice vs hace)",
-          hypothesis: "Hay partidos sistematicamente mas coherentes entre discurso y accion.",
+          title: "Quién es más coherente entre dichos y hechos",
+          hypothesis: "Hay partidos sistemáticamente más coherentes entre discurso y acción.",
           notes: `Misma base comparativa de H1; excluye partidos con comparables<${toNum(H1_MIN_COMPARABLES, 0)}.`,
           columns: [
             { key: "party", label: "Partido" },
@@ -662,12 +720,12 @@
           id: "H3",
           title: "Donde se concentra la incoherencia",
           hypothesis: "La incoherencia se acumula en temas concretos de alto impacto.",
-          notes: "Ranking por tema: porcentaje de partidos con choque entre declared y votes.",
+          notes: "Clasificación por tema: porcentaje de partidos con choque entre declaraciones y votos.",
           columns: [
             { key: "topic", label: "Tema" },
             {
               key: "highStakes",
-              label: "High-stakes",
+              label: "Alta relevancia",
               format: (v) => (v ? "<span class='tag warn'>SI</span>" : "<span class='tag'>NO</span>"),
             },
             { key: "incoherence", label: "Incoherencia", align: "right", format: toPct },
@@ -721,14 +779,14 @@
 
         return {
           id: "H4",
-          title: "Alineacion con el bloque de gobierno (heuristico)",
-          hypothesis: "Partidos de gobierno tienden a votar alineados entre si en mas temas que la oposicion.",
+          title: "Alineación con el bloque de gobierno (heurística)",
+          hypothesis: "Los partidos de gobierno tienden a votar alineados entre sí en más temas que la oposición.",
           notes:
-            "Heuristica de bloque basada en nombre del partido (PSOE/SUMAR). Conviene sustituir por etiqueta institucional cuando exista.",
+            "Heurística de bloque basada en el nombre del partido (PSOE/SUMAR). Conviene sustituirla por una etiqueta institucional cuando exista.",
           columns: [
             { key: "party", label: "Partido" },
             { key: "bloc", label: "Bloque" },
-            { key: "alignment", label: "Alineacion", align: "right", format: toPct },
+            { key: "alignment", label: "Alineación", align: "right", format: toPct },
             { key: "compared", label: "Temas comparados", align: "right", format: (v) => toNum(v, 0) },
           ],
           rows,
@@ -770,13 +828,13 @@
           title: "Regionalistas vs estatales en agenda territorial",
           hypothesis: "Partidos regionalistas muestran patrones distintos en temas territoriales frente a partidos estatales.",
           notes:
-            "Indice = media score en temas territoriales - media score general. Mayor |indice| = comportamiento mas diferenciado.",
+            "Índice = media de puntuación en temas territoriales - media general. Cuanto mayor sea |índice|, más diferenciado es el comportamiento.",
           columns: [
             { key: "party", label: "Partido" },
             { key: "class", label: "Clase" },
-            { key: "diff", label: "Indice diferencial", align: "right", format: (v) => toNum(v, 2) },
-            { key: "terrAvg", label: "Score territorial", align: "right", format: (v) => toNum(v, 2) },
-            { key: "overallAvg", label: "Score general", align: "right", format: (v) => toNum(v, 2) },
+            { key: "diff", label: "Índice diferencial", align: "right", format: (v) => toNum(v, 2) },
+            { key: "terrAvg", label: "Puntuación territorial", align: "right", format: (v) => toNum(v, 2) },
+            { key: "overallAvg", label: "Puntuación general", align: "right", format: (v) => toNum(v, 2) },
             { key: "terrN", label: "Temas territoriales", align: "right", format: (v) => toNum(v, 0) },
           ],
           rows,
@@ -818,16 +876,16 @@
         });
         return {
           id: "H6",
-          title: "Disciplina interna (proxy)",
+          title: "Disciplina interna (aproximación)",
           hypothesis: "Algunos partidos muestran mayor disciplina interna que otros.",
           notes:
-            "Proxy = confianza media x proporcion de miembros con senal por tema. No reemplaza una metrica de disciplina nominal por diputado.",
+            "Aproximación = confianza media x proporción de miembros con señal por tema. No reemplaza una métrica de disciplina nominal por diputado.",
           columns: [
             { key: "party", label: "Partido" },
-            { key: "discipline", label: "Proxy disciplina", align: "right", format: (v) => toNum(v, 3) },
-            { key: "memberSignalRatio", label: "Miembros con senal", align: "right", format: toPct },
+            { key: "discipline", label: "Aproximación disciplina", align: "right", format: (v) => toNum(v, 3) },
+            { key: "memberSignalRatio", label: "Miembros con señal", align: "right", format: toPct },
             { key: "confidenceAvg", label: "Confianza media", align: "right", format: (v) => toNum(v, 3) },
-            { key: "clearRate", label: "Stance claro", align: "right", format: toPct },
+            { key: "clearRate", label: "Postura clara", align: "right", format: toPct },
           ],
           rows,
         };
@@ -857,14 +915,14 @@
         });
         return {
           id: "H7",
-          title: "Incertidumbre en temas high-stakes",
-          hypothesis: "Los temas mas sensibles concentran mayor incertidumbre publica (unclear/no_signal).",
-          notes: "Ordenado por tasa de incertidumbre en el metodo combinado.",
+          title: "Incertidumbre en temas de alta relevancia",
+          hypothesis: "Los temas más sensibles concentran mayor incertidumbre pública.",
+          notes: "Ordenado por tasa de incertidumbre en el método combinado.",
           columns: [
-            { key: "topic", label: "Tema high-stakes" },
+            { key: "topic", label: "Tema de alta relevancia" },
             { key: "uncertainty", label: "Incertidumbre", align: "right", format: toPct },
-            { key: "noSignal", label: "No signal", align: "right", format: (v) => toNum(v, 0) },
-            { key: "unclear", label: "Unclear", align: "right", format: (v) => toNum(v, 0) },
+            { key: "noSignal", label: "Sin señal", align: "right", format: (v) => toNum(v, 0) },
+            { key: "unclear", label: "Incierto", align: "right", format: (v) => toNum(v, 0) },
             { key: "parties", label: "Partidos", align: "right", format: (v) => toNum(v, 0) },
           ],
           rows,
@@ -901,12 +959,12 @@
         return {
           id: "H8",
           title: "Evidencia vs confianza",
-          hypothesis: "Mas evidencia util reduce incertidumbre y aumenta confianza en posiciones.",
-          notes: "Trust index = (1 - no_signal) x confianza media x log10(1 + evidencia media).",
+          hypothesis: "Más evidencia útil reduce la incertidumbre y aumenta la confianza en las posiciones.",
+          notes: "Índice de confianza = (1 - sin señal) x confianza media x log10(1 + evidencia media).",
           columns: [
             { key: "party", label: "Partido" },
-            { key: "trustIndex", label: "Trust index", align: "right", format: (v) => toNum(v, 3) },
-            { key: "unknownRate", label: "No signal", align: "right", format: toPct },
+            { key: "trustIndex", label: "Índice de confianza", align: "right", format: (v) => toNum(v, 3) },
+            { key: "unknownRate", label: "Sin señal", align: "right", format: toPct },
             { key: "confidenceAvg", label: "Confianza media", align: "right", format: (v) => toNum(v, 3) },
             { key: "evidenceAvg", label: "Evidencia media", align: "right", format: (v) => toNum(v, 1) },
           ],
@@ -940,13 +998,13 @@
           id: "H9",
           title: "Robustez al filtrar por alta confianza",
           hypothesis: "Los patrones de partido se mantienen al exigir solo evidencia de alta confianza.",
-          notes: "Menor drift = mayor robustez del ranking al aplicar confidence >= 0.66.",
+          notes: "Menor deriva = mayor robustez de la clasificación al aplicar confianza >= 0.66.",
           columns: [
             { key: "party", label: "Partido" },
-            { key: "drift", label: "Drift (abs)", align: "right", format: (v) => toNum(v, 3) },
-            { key: "allMean", label: "Score medio (all)", align: "right", format: (v) => toNum(v, 3) },
-            { key: "highMean", label: "Score medio (high conf)", align: "right", format: (v) => toNum(v, 3) },
-            { key: "highN", label: "N high-conf", align: "right", format: (v) => toNum(v, 0) },
+            { key: "drift", label: "Deriva (abs.)", align: "right", format: (v) => toNum(v, 3) },
+            { key: "allMean", label: "Puntuación media (todo)", align: "right", format: (v) => toNum(v, 3) },
+            { key: "highMean", label: "Puntuación media (alta confianza)", align: "right", format: (v) => toNum(v, 3) },
+            { key: "highN", label: "N alta confianza", align: "right", format: (v) => toNum(v, 0) },
           ],
           rows,
         };
@@ -997,18 +1055,61 @@
         return {
           id: "H10",
           title: "Recencia de evidencia vs zonas desconocidas",
-          hypothesis: "Cuanto mas reciente la evidencia, menor tasa de no_signal por partido.",
+          hypothesis: "Cuanto más reciente es la evidencia, menor es la tasa de casos sin señal por partido.",
           notes:
             corr === null
-              ? "Correlacion no disponible."
-              : `Correlacion (dias desde ultima evidencia vs no_signal): ${toNum(corr, 3)}.`,
+              ? "Correlación no disponible."
+              : `Correlación (días desde la última evidencia frente a casos sin señal): ${toNum(corr, 3)}.`,
           columns: [
             { key: "party", label: "Partido" },
-            { key: "freshnessScore", label: "Freshness index", align: "right", format: (v) => toNum(v, 4) },
-            { key: "medianDays", label: "Mediana dias sin evidencia", align: "right", format: (v) => toNum(v, 0) },
-            { key: "unknownRate", label: "No signal", align: "right", format: toPct },
+            { key: "freshnessScore", label: "Índice de recencia", align: "right", format: (v) => toNum(v, 4) },
+            { key: "medianDays", label: "Mediana de días sin evidencia", align: "right", format: (v) => toNum(v, 0) },
+            { key: "unknownRate", label: "Sin señal", align: "right", format: toPct },
           ],
           rows,
+        };
+      }
+
+      function board11WhatChangesRanking(ctx) {
+        const robustnessRows = (ctx.robustness?.combined?.rows || []).map((row) => {
+          const focus = row?.focus_pair || {};
+          const closestGap = Number(row?.closest_gap);
+          const comparable = Number(focus?.comparable_topics_total || 0);
+          return {
+            party: row?.party_name || partyName(ctx, row?.party_id),
+            band: rankBandChip(row),
+            rankRange: rankRangeLabel(ctx, row?.party_id),
+            criticalNeighbor: focus?.against_party_name || "—",
+            gap: Number.isFinite(closestGap) ? closestGap : null,
+            pairComparable: comparable,
+            whatChanges: renderDriverTopics(row),
+            _bandOrder:
+              row?.rank_band?.id === "fragile" ? 0 : row?.rank_band?.id === "competitive" ? 1 : row?.rank_band?.id === "stable" ? 2 : 3,
+          };
+        });
+        robustnessRows.sort((a, b) => {
+          if (a._bandOrder !== b._bandOrder) return a._bandOrder - b._bandOrder;
+          const ag = a.gap === null ? Number.POSITIVE_INFINITY : a.gap;
+          const bg = b.gap === null ? Number.POSITIVE_INFINITY : b.gap;
+          if (ag !== bg) return ag - bg;
+          return String(a.party || "").localeCompare(String(b.party || ""));
+        });
+        return {
+          id: "H11",
+          title: "Qué podría mover la clasificación",
+          hypothesis: "Las posiciones más inestables de la clasificación se concentran en márgenes estrechos y pocos temas decisivos.",
+          notes:
+            "Usa el artefacto de robustez: vecino crítico, brecha media y temas que más explican la distancia actual.",
+          columns: [
+            { key: "party", label: "Partido" },
+            { key: "band", label: "Banda", format: (v) => v },
+            { key: "rankRange", label: "Rango de métodos" },
+            { key: "criticalNeighbor", label: "Vecino crítico" },
+            { key: "gap", label: "Brecha media", align: "right", format: (v) => toNum(v, 3) },
+            { key: "pairComparable", label: "Temas comparables", align: "right", format: (v) => toNum(v, 0) },
+            { key: "whatChanges", label: "Qué lo movería", format: (v) => v },
+          ],
+          rows: robustnessRows,
         };
       }
 
@@ -1017,12 +1118,14 @@
         const combinedMeta = ctx.combined?.meta || {};
         const votesMeta = ctx.votes?.meta || {};
         const declaredMeta = ctx.declared?.meta || {};
+        const robustnessMeta = ctx.robustness?.combined?.meta || {};
         root.innerHTML = [
-          `<span class="chip">combined as_of: <span class="mono">${escapeHtml(combinedMeta.as_of_date || "—")}</span></span>`,
-          `<span class="chip">votes as_of: <span class="mono">${escapeHtml(votesMeta.as_of_date || "—")}</span></span>`,
-          `<span class="chip">declared as_of: <span class="mono">${escapeHtml(declaredMeta.as_of_date || "—")}</span></span>`,
+          `<span class="chip">combinado corte: <span class="mono">${escapeHtml(combinedMeta.as_of_date || "—")}</span></span>`,
+          `<span class="chip">votos corte: <span class="mono">${escapeHtml(votesMeta.as_of_date || "—")}</span></span>`,
+          `<span class="chip">declaraciones corte: <span class="mono">${escapeHtml(declaredMeta.as_of_date || "—")}</span></span>`,
           `<span class="chip">temas: <span class="mono">${fmt.format(ctx.allTopicIds.length)}</span></span>`,
           `<span class="chip">partidos: <span class="mono">${fmt.format(ctx.allPartyIds.length)}</span></span>`,
+          `<span class="chip">robustez: <span class="mono">${escapeHtml(robustnessMeta.artifact_version || "—")}</span></span>`,
         ].join("");
       }
 
@@ -1062,7 +1165,7 @@
         root.innerHTML = boards
           .map(
             (board) => `
-              <article class="card board" id="${escapeHtml(board.id)}">
+              <article class="card board" id="${escapeHtml(board.id)}"${board.id === "H11" ? ` data-ranking-robustness="1" data-ranking-what-changes="1"` : ""}>
                 <div class="board-head">
                   <span class="board-id">${escapeHtml(board.id)}</span>
                   <h2>${escapeHtml(board.title)}</h2>
@@ -1085,13 +1188,24 @@
 
       async function main() {
         try {
-          const [combined, votes, declared, concerns] = await Promise.all([
+          const [combined, votes, declared, concerns, robustnessCombined, robustnessVotes, robustnessDeclared] = await Promise.all([
             fetchJson(DATA_PATHS.combined),
             fetchJson(DATA_PATHS.votes),
             fetchJson(DATA_PATHS.declared),
             fetchJson(DATA_PATHS.concerns),
+            fetchJson(DATA_PATHS.robustnessCombined),
+            fetchJson(DATA_PATHS.robustnessVotes),
+            fetchJson(DATA_PATHS.robustnessDeclared),
           ]);
-          const ctx = buildContext({ combined, votes, declared, concerns });
+          const ctx = buildContext({
+            combined,
+            votes,
+            declared,
+            concerns,
+            robustnessCombined,
+            robustnessVotes,
+            robustnessDeclared,
+          });
           renderMeta(ctx);
 
           const h1 = board1DeclaredVsRevealedGap(ctx);
@@ -1106,6 +1220,7 @@
             board8EvidenceTrust(ctx),
             board9RobustnessHighConfidence(ctx),
             board10FreshnessVsUnknown(ctx),
+            board11WhatChangesRanking(ctx),
           ];
           renderBoards(boards);
         } catch (error) {
