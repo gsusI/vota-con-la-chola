@@ -11,6 +11,10 @@ services:
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
       - TZ=UTC
+      - HF_TOKEN
+      - HF_USERNAME
+      - HF_DATASET_REPO_ID
+      - HF_RAW_DATASET_REPO_ID
     entrypoint: ["/bin/sh", "-lc"]
     command: ["python3 --version"]
 
