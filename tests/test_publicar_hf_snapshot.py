@@ -491,7 +491,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
         self.assertIn("published/votaciones-kpis-es-2026-02-12.json", readme)
         self.assertIn("Resumen de calidad del snapshot", readme)
         self.assertIn("Gate de votos: PASS", readme)
+        self.assertIn("Vote gate: PASS", readme)
         self.assertIn("Gate de iniciativas: PASS", readme)
+        self.assertIn("Initiative gate: PASS", readme)
         self.assertIn("Eventos analizados: 321", readme)
         self.assertIn("Cobertura de extracción en docs descargados: 100.0%", readme)
 

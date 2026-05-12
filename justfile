@@ -55,6 +55,7 @@ gh_pages_next_prime_export := env_var_or_default("GH_PAGES_NEXT_PRIME_EXPORT", "
 gh_pages_reuse_people_exports := env_var_or_default("GH_PAGES_REUSE_PEOPLE_EXPORTS", "1")
 gh_pages_next_base_path := env_var_or_default("GH_PAGES_NEXT_BASE_PATH", "")
 cloudflare_pages_project := env_var_or_default("CLOUDFLARE_PAGES_PROJECT", "vota-con-la-chola")
+cloudflare_pages_max_file_bytes := env_var_or_default("CLOUDFLARE_PAGES_MAX_FILE_BYTES", "25000000")
 vote_explainer_limit := env_var_or_default("VOTE_EXPLAINER_LIMIT", "200")
 vote_explainer_allow_empty := env_var_or_default("VOTE_EXPLAINER_ALLOW_EMPTY", "0")
 topic_taxonomy_seed := env_var_or_default("TOPIC_TAXONOMY_SEED", "etl/data/seeds/topic_taxonomy_es.json")
@@ -1475,6 +1476,7 @@ etl-run-source-scrape-queue-prefect:
     --summary-out "docs/etl/runs/source-scrape-queue-prefect-run-{{snapshot_date}}.json"
 
 etl-publish-hf:
+  if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
   just etl-export-accountability-ledger
@@ -1493,6 +1495,7 @@ etl-publish-hf:
   docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db {{db_path}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --parquet-compression {{hf_parquet_compression}} --parquet-batch-rows {{hf_parquet_batch_rows}} --parquet-tables '{{hf_parquet_tables}}' --parquet-exclude-tables '{{hf_parquet_exclude_tables}}' ${sqlite_arg} ${sensitive_arg} ${quality_arg} ${liberty_atlas_arg}"
 
 etl-publish-hf-dry-run:
+  if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
   just etl-export-accountability-ledger
@@ -3019,6 +3022,11 @@ parl-quality-report-declared-enforce:
 parl-quality-report-unmatched:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-unmatched --unmatched-sample-limit 50"
 
+parl-quality-report-hf:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --unmatched-sample-limit 50"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --include-initiatives --initiative-source-ids congreso_iniciativas,senado_iniciativas --initiative-actionable-scope {{initiative_quality_actionable_scope}} --json-out etl/data/published/votaciones-kpis-es-{{snapshot_date}}.json"
+
 parl-quality-pipeline:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --unmatched-sample-limit 50"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py link-votes --db {{db_path}}"
@@ -3275,12 +3283,16 @@ accountability-dossiers-next-prime:
       --db "$accountability_db" \
       --snapshot-date "{{snapshot_date}}" \
       --out "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
-      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
+      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" \
+      --max-issues-per-actor "{{accountability_dossiers_max_issues_per_actor}}" \
+      --max-actors-per-issue "{{accountability_dossiers_max_actors_per_issue}}"; \
     python3 scripts/export_accountability_ledger_snapshot.py \
       --db "$accountability_db" \
       --snapshot-date "{{snapshot_date}}" \
       --out "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
-      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
+      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" \
+      --max-entries-per-issue "{{accountability_ledger_max_entries_per_issue}}" \
+      --max-sample-entries-per-actor "{{accountability_ledger_max_sample_entries_per_actor}}"; \
     python3 scripts/export_accountability_evidence_api_snapshot.py \
       --dossiers "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
       --ledger "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
@@ -3575,8 +3587,19 @@ cloudflare-pages-build:
   fi
   cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  just cloudflare-pages-size-check
   just privacy-check-public-artifacts
   @echo "Build Cloudflare Pages listo en {{gh_pages_next_out_dir}}"
+
+cloudflare-pages-size-check:
+  set -e; \
+  oversized="$(find "{{gh_pages_next_out_dir}}" -type f -size +{{cloudflare_pages_max_file_bytes}}c -print)"; \
+  if [ -n "$oversized" ]; then \
+    echo "ERROR: Cloudflare Pages file size limit exceeded (> {{cloudflare_pages_max_file_bytes}} bytes):" >&2; \
+    printf '%s\n' "$oversized" | while IFS= read -r file; do wc -c "$file" >&2; done; \
+    exit 1; \
+  fi; \
+  echo "OK Cloudflare Pages file size budget: no files over {{cloudflare_pages_max_file_bytes}} bytes"
 
 explorer-gh-pages-build:
   @echo "DEPRECATED: explorer-gh-pages-build está desactivado como flujo de publicación. Usa just cloudflare-pages-build."
@@ -3620,6 +3643,7 @@ cloudflare-pages-refresh-data:
   @just vote-explainer-next-prime
   cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  just cloudflare-pages-size-check
   cp -R "{{gh_pages_next_out_dir}}"/. "{{gh_pages_dir}}"/
   touch "{{gh_pages_dir}}/.nojekyll"
   cp -R ui/citizen/. {{gh_pages_dir}}/legacy/citizen/
@@ -3842,10 +3866,18 @@ cloudflare-pages-refresh-data:
   fi
   cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" "{{gh_pages_next_app_dir}}/public/elections-behavior/data/elections-behavior.json"
   cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
+  for rel in citizen/data graph/data explorer-politico/data explorer-sources/data explorer-temas/data explorer-votaciones/data people/data; do \
+    rm -rf "{{gh_pages_next_app_dir}}/public/$rel"; \
+    mkdir -p "{{gh_pages_next_app_dir}}/public/$rel"; \
+    cp -R "{{gh_pages_dir}}/$rel/." "{{gh_pages_next_app_dir}}/public/$rel/"; \
+  done
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
   cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/legacy/graph/data/ideal.json"
+  cp docs/ideal_sources_say_do.json "{{gh_pages_next_app_dir}}/public/explorer-sources/data/ideal.json"
+  cp docs/ideal_sources_say_do.json "{{gh_pages_next_app_dir}}/public/legacy/graph/data/ideal.json"
   cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  just cloudflare-pages-size-check
   just privacy-check-public-artifacts
   @echo "Build Cloudflare Pages listo en {{gh_pages_next_out_dir}}"
 
@@ -4544,12 +4576,31 @@ citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-windo
   node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js --heartbeat-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_path}}" --compacted-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_path}}" --last "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window}}" --strict ${out_arg}
 
 cloudflare-pages-deploy:
-  @just cloudflare-pages-build
+  @just cloudflare-pages-refresh-data
   cd "{{gh_pages_next_app_dir}}" && npx wrangler pages deploy out --project-name "{{cloudflare_pages_project}}"
 
+votaconlachola-gh-pages-publish:
+  set -e; \
+  test -d "{{gh_pages_next_out_dir}}" || (echo "Missing {{gh_pages_next_out_dir}}; run just cloudflare-pages-refresh-data first" >&2; exit 2); \
+  tmpdir="$(mktemp -d)"; \
+  cleanup() { git worktree remove --force "$tmpdir" >/dev/null 2>&1 || rm -rf "$tmpdir"; }; \
+  trap cleanup EXIT; \
+  git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"; \
+  git worktree add --detach "$tmpdir" FETCH_HEAD; \
+  rsync -a --delete --exclude .git "{{gh_pages_next_out_dir}}"/ "$tmpdir"/; \
+  touch "$tmpdir/.nojekyll"; \
+  git -C "$tmpdir" add -A; \
+  if git -C "$tmpdir" diff --cached --quiet; then \
+    echo "No gh-pages changes to publish"; \
+  else \
+    git -C "$tmpdir" config user.name "${GIT_AUTHOR_NAME:-vclc-publisher}"; \
+    git -C "$tmpdir" config user.email "${GIT_AUTHOR_EMAIL:-actions@users.noreply.github.com}"; \
+    git -C "$tmpdir" commit -m "Publish static site snapshot {{snapshot_date}}"; \
+    git -C "$tmpdir" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"; \
+  fi
+
 explorer-gh-pages-publish:
-  @echo "DEPRECATED: gh-pages publish está desactivado. Usa just cloudflare-pages-deploy."
-  @exit 2
+  @just votaconlachola-gh-pages-publish
 
 explorer-gh-pages:
   @just explorer-gh-pages-publish

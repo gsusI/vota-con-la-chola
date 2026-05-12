@@ -690,11 +690,15 @@ def build_dataset_readme(
     )
     if quality_summary:
         lines.extend(["", "Resumen de calidad del snapshot:"])
-        lines.append(f"- Gate de votos: {'PASS' if bool(quality_summary.get('vote_gate_passed')) else 'FAIL'}")
+        vote_gate_status = "PASS" if bool(quality_summary.get("vote_gate_passed")) else "FAIL"
+        lines.append(f"- Gate de votos: {vote_gate_status}")
+        lines.append(f"- Vote gate: {vote_gate_status}")
         if "initiative_gate_passed" in quality_summary:
+            initiative_gate_status = "PASS" if bool(quality_summary.get("initiative_gate_passed")) else "FAIL"
             lines.append(
-                f"- Gate de iniciativas: {'PASS' if bool(quality_summary.get('initiative_gate_passed')) else 'FAIL'}"
+                f"- Gate de iniciativas: {initiative_gate_status}"
             )
+            lines.append(f"- Initiative gate: {initiative_gate_status}")
         if "events_total" in quality_summary:
             lines.append(f"- Eventos analizados: {int(quality_summary.get('events_total') or 0)}")
         if "downloaded_doc_links" in quality_summary:
