@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vota Con La Chola | Data Explorer</title>
+    <title>Vota Con La Chola | Explorador de datos</title>
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -511,12 +511,12 @@
         </div>
         <header class="topbar card">
           <div class="title-wrap">
-            <h1>Data Explorer (Wikidata-like)</h1>
-          <p>Navegacion dinamica por tablas, registros y relaciones (incluye temas/evidencia/posiciones cuando existan).</p>
+            <h1>Explorador de datos (tipo Wikidata)</h1>
+          <p>Navegación dinámica por tablas, registros y relaciones (incluye temas, evidencia y posiciones cuando existan).</p>
         </div>
         <nav class="switch">
-          <a href="../graph/">Graph</a>
-          <a class="active" href="./">Explorer</a>
+          <a href="../graph/">Grafo</a>
+          <a class="active" href="./">Explorador</a>
         </nav>
       </header>
 
@@ -524,7 +524,7 @@
         <section class="panel card">
           <div class="head">
             <h2>1) Tablas</h2>
-            <p>Vista top-level de todo lo disponible. Atajo: abre el modelo de posiciones por temas.</p>
+            <p>Vista general de todo lo disponible. Atajo: abre el modelo de posiciones por temas.</p>
           </div>
           <div class="controls">
             <input id="tableFilter" type="text" placeholder="Filtrar tablas..." />
@@ -548,18 +548,18 @@
             <input id="recordSearch" type="text" placeholder="Buscar en columnas textuales" />
             <div class="row-actions">
               <button id="applySearch" class="secondary">Buscar</button>
-              <button id="prevPage" class="secondary">Prev</button>
-              <button id="nextPage" class="secondary">Next</button>
+              <button id="prevPage" class="secondary">Anterior</button>
+              <button id="nextPage" class="secondary">Siguiente</button>
             </div>
             <div class="row-actions">
               <select id="filterCol" title="Columna a filtrar"></select>
               <input id="filterVal" type="text" placeholder="Valor (=)" />
-              <button id="addFilter" class="secondary" type="button" style="width:auto;">Add</button>
-              <button id="clearFilters" class="secondary" type="button" style="width:auto;">Clear</button>
+              <button id="addFilter" class="secondary" type="button" style="width:auto;">Añadir</button>
+              <button id="clearFilters" class="secondary" type="button" style="width:auto;">Limpiar</button>
             </div>
             <div id="filtersBar" class="pill-row"></div>
             <div class="row-actions">
-              <label for="pageSize" class="meta" style="display:flex;align-items:center;">Page size</label>
+              <label for="pageSize" class="meta" style="display:flex;align-items:center;">Filas por página</label>
               <select id="pageSize">
                 <option value="25">25</option>
                 <option value="50" selected>50</option>
@@ -1445,7 +1445,7 @@
 
         const pk = meta.primary_key || [];
         if (!pk.length) {
-          return { error: "Tabla sin PK navegable en snapshot HF." };
+          return { error: "Tabla sin clave primaria navegable en el corte HF." };
         }
 
         const clauses = [];
@@ -1718,7 +1718,7 @@
 
       function renderTags(previewObj) {
         const entries = Object.entries(previewObj || {});
-        if (!entries.length) return '<div class="meta">sin preview</div>';
+        if (!entries.length) return '<div class="meta">sin vista previa</div>';
         const tags = entries
           .map(([k, v]) => {
             const kk = escapeHtml(prettyKey(k));
@@ -2241,7 +2241,7 @@
             nextOffset < total
               ? `<div class="pill-row"><button type="button" class="pill rel-more" data-relkey="${escapeHtml(
                   relKey,
-                )}" data-next="${nextOffset}">Cargar mas (${fmtCount(total - nextOffset)})</button></div>`
+                )}" data-next="${nextOffset}">Cargar más (${fmtCount(total - nextOffset)})</button></div>`
               : "";
 
           if (!append) {
@@ -2362,7 +2362,7 @@
           wrap.innerHTML = `<div class="meta">Cargando...</div>`;
         } else if (state.total && state.offset + state.loaded < state.total) {
           const remaining = state.total - (state.offset + state.loaded);
-          wrap.innerHTML = `<div class="pill-row"><button type="button" class="pill" data-load-more="1">Cargar mas (${fmtCount(
+          wrap.innerHTML = `<div class="pill-row"><button type="button" class="pill" data-load-more="1">Cargar más (${fmtCount(
             remaining,
           )})</button></div>`;
         } else {
@@ -2768,7 +2768,7 @@
 
       async function startExplorer() {
         await initBackend();
-        const modeLabel = backend.mode === "api" ? "API local" : "HF/browser";
+        const modeLabel = backend.mode === "api" ? "API local" : "HF/navegador";
         els.recordsHint.textContent = `Fuente: ${modeLabel} (${backend.sourceLabel || "desconocida"})`;
 
         await loadSchema();
@@ -2781,7 +2781,7 @@
 
       startExplorer().catch((err) => {
         const msg = toText(err && err.message ? err.message : err);
-        els.tables.innerHTML = `<div class="meta">No se pudo inicializar Explorer: ${escapeHtml(msg)}</div>`;
+        els.tables.innerHTML = `<div class="meta">No se pudo inicializar el explorador: ${escapeHtml(msg)}</div>`;
         setDetailHtml(`<div class="meta">Error: ${escapeHtml(msg)}</div>`);
       });
     </script>

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "congreso_votaciones--20260430--d9cc32baff",
+    "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "canonical_path": "/vote-explainer/congreso_votaciones--20260430--d9cc32baff/",
+    "generated_at": "2026-05-14T06:00:20+00:00",
+    "snapshot_as_of_date": "2026-05-14",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "congreso_votaciones",
+    "source_name": "Congreso - Votaciones (pleno, OpenData)",
+    "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "chamber": "Congreso",
+    "vote_date": "2026-04-30",
+    "title": "Debates de totalidad de iniciativas de reforma constitucional.",
+    "expediente_text": "Votación conjunta de las enmiendas a la totalidad de devolución al Proyecto de reforma del artículo 43 de la Constitución Española, presentadas por los Grupos Parlamentarios Popular en el Congreso y VOX.",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "No",
+    "headline": "Votación conjunta de las enmiendas a la totalidad de devolución al Proyecto de reforma del artículo 43 de la Constitución Española, presentadas por los Grupos Parlamentarios Popular en el Congreso y VOX.",
+    "subtitle": "derived:47eb7d23dda79472ef60930a"
+  },
+  "result": {
+    "status": "rejected",
+    "label": "Rechazada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 171 · No 177 · Abstencion 0 · No vota 2"
+  },
+  "totals": {
+    "present": 348,
+    "yes": 171,
+    "no": 177,
+    "abstain": 0,
+    "no_vote": 2
+  },
+  "initiative": {
+    "initiative_id": "congreso:leg15:derived:47eb7d23dda79472ef60930a",
+    "expediente": "derived:47eb7d23dda79472ef60930a",
+    "title": "Votación conjunta de las enmiendas a la totalidad de devolución al Proyecto de reforma del artículo 43 de la Constitución Española, presentadas por los Grupos Parlamentarios Popular en el Congreso y VOX.",
+    "type": "",
+    "grouping": "Derived from Congreso votaciones",
+    "supertype": "derived",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GP",
+      "yes": 137,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 137
+    },
+    {
+      "group_code": "GS",
+      "yes": 0,
+      "no": 119,
+      "abstain": 0,
+      "no_vote": 2,
+      "other": 0,
+      "total": 121
+    },
+    {
+      "group_code": "GVOX",
+      "yes": 33,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 33
+    },
+    {
+      "group_code": "GSUMAR",
+      "yes": 0,
+      "no": 26,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 26
+    },
+    {
+      "group_code": "GMx",
+      "yes": 1,
+      "no": 7,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 8
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Votación conjunta de las enmiendas a la totalidad de devolución al Proyecto de reforma del artículo 43 de la C | Vota Con La Chola",
+    "description": "Congreso · 2026-04-30 · Si 171 · No 177 · Abstencion 0 · No vota 2. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/congreso_votaciones--20260430--d9cc32baff/"
+  }
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vota Con La Chola | Graph Explorer</title>
+    <title>Vota Con La Chola | Explorador de grafo</title>
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -327,11 +327,11 @@
         </a>
       </div>
       <aside class="sidebar card">
-        <h1>Graph Explorer</h1>
-        <p class="subtitle">Politicos, instituciones, partidos y fuentes</p>
+        <h1>Explorador de grafo</h1>
+        <p class="subtitle">Políticos, instituciones, partidos y fuentes</p>
         <div class="view-links">
-          <a class="active" href="./">Graph</a>
-          <a href="../explorer/" data-local-api="explorer-sql">Explorer</a>
+          <a class="active" href="./">Grafo</a>
+          <a href="../explorer/" data-local-api="explorer-sql">Explorador</a>
           <a href="../explorer-politico/">Radar</a>
           <a href="../explorer-sources/">Fuentes</a>
         </div>
@@ -346,7 +346,7 @@
           <label for="search">Buscar persona</label>
           <input id="search" type="text" placeholder="apellido, nombre..." />
 
-          <label for="limit">Limite de mandatos</label>
+          <label for="limit">Límite de mandatos</label>
           <input id="limit" type="number" min="20" max="2000" value="350" />
 
           <label class="inline">
@@ -356,7 +356,7 @@
 
           <div class="inline">
             <button id="load">Cargar grafo</button>
-            <button id="fit" class="secondary">Reset vista</button>
+            <button id="fit" class="secondary">Recentrar vista</button>
           </div>
 
           <div class="control-group">
@@ -569,11 +569,11 @@
       function buildStats(visibleNodes, visibleEdges) {
         const c = state.meta.node_counts || {};
         return [
-          `db: ${state.meta.db_path || "-"}`,
-          `rows: ${state.meta.rows || 0} | visible nodes: ${visibleNodes} | visible edges: ${visibleEdges}`,
-          `total source=${c.source || 0} person=${c.person || 0} party=${c.party || 0} institution=${c.institution || 0}`,
-          `mode: ${state.viewMode} | lens: ${els.lens.value} | depth: ${els.depth.value}`,
-          `search: ${state.meta.search || "-"} | source: ${state.meta.source_filter || "all"} | limit: ${state.meta.limit || "-"}`,
+          `bd: ${state.meta.db_path || "-"}`,
+          `filas: ${state.meta.rows || 0} | nodos visibles: ${visibleNodes} | enlaces visibles: ${visibleEdges}`,
+          `total: fuentes ${c.source || 0}; personas ${c.person || 0}; partidos ${c.party || 0}; instituciones ${c.institution || 0}`,
+          `modo: ${state.viewMode} | lente: ${els.lens.value} | profundidad: ${els.depth.value}`,
+          `búsqueda: ${state.meta.search || "-"} | fuente: ${state.meta.source_filter || "todas"} | límite: ${state.meta.limit || "-"}`,
         ].join("\n");
       }
 
@@ -835,11 +835,11 @@
         const apiEndpoint = resolveApiPath(`/api/graph?${params.toString()}`);
         let payload = null;
         if (apiEndpoint) {
-          setDetail("Cargando", "Consultando API...", true);
+          setDetail("Cargando", "Consultando API…", true);
           const resp = await fetch(apiEndpoint);
           payload = await resp.json();
         } else {
-          setDetail("Cargando", "Cargando snapshot estatico (GitHub Pages)...", true);
+          setDetail("Cargando", "Cargando corte estático (Cloudflare Pages)…", true);
           payload = await readJson(STATIC_GRAPH_PATH);
         }
         const nodes = payload.nodes || [];
