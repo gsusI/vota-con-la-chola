@@ -5,8 +5,8 @@
     "fecha_local_ultima_conocida": "2023-05-28"
   },
   "estado_operativo": {
-    "ahora": "Primer corte publico con ciclos legales y calendarios oficiales scrapeados.",
-    "siguiente": "Anadir mas fuentes autonomicas con calendario publicado y registrar bloqueos si no exponen datos reutilizables.",
+    "ahora": "Primer corte público con ciclos legales y calendarios oficiales scrapeados.",
+    "siguiente": "Añadir más fuentes autonómicas con calendario publicado y registrar bloqueos si no exponen datos reutilizables.",
     "vamos": "Ampliar manifest oficial por comunidad/organismo y sustituir filas condicionales cuando haya convocatoria."
   },
   "events": [
@@ -16,11 +16,11 @@
       "date_end": null,
       "date_label": "2026-05-17",
       "date_precision": "day",
-      "election": "Parlamento de Andalucia",
+      "election": "Parlamento de Andalucía",
       "election_type": "parlamento_autonomico",
       "event_id": "autonomico-andalucia-2026-05-17",
-      "level": "Autonomico",
-      "notes": "Calendario oficial de la Junta Electoral de Andalucia.",
+      "level": "Autonómico",
+      "notes": "Calendario oficial de la Junta Electoral de Andalucía.",
       "scope": "autonomico",
       "source_hash": "45f6d2c192fd3ec3aee7c399f975bd130f8413beabbda3c2b4c7b661c4642ef3",
       "source_id": "jec_andalucia_2026_calendario",
@@ -29,7 +29,7 @@
       "source_url": "https://www.juntaelectoralcentral.es/cs/jec/documentos/Andalucia_2026_calendario.pdf",
       "source_verified": true,
       "status": "convocada",
-      "territory": "Andalucia"
+      "territory": "Andalucía"
     },
     {
       "certainty": "calculada",
@@ -40,8 +40,8 @@
       "election": "Asambleas de Ceuta y Melilla",
       "election_type": "ciudades_autonomas",
       "event_id": "ceuta-melilla-2027-05-23",
-      "level": "Ciudades autonomas",
-      "notes": "Ciclo alineado con elecciones locales salvo convocatoria especifica.",
+      "level": "Ciudades autónomas",
+      "notes": "Ciclo alineado con elecciones locales salvo convocatoria específica.",
       "scope": "autonomico",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -71,7 +71,7 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
       "status": "ligado al ciclo local",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "calculada",
@@ -104,7 +104,7 @@
       "election_type": "municipales",
       "event_id": "municipal-local-2027-05-23",
       "level": "Municipal",
-      "notes": "Cuarto domingo de mayo cada 4 anos.",
+      "notes": "Cuarto domingo de mayo cada 4 años.",
       "scope": "municipal",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -113,7 +113,7 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
       "status": "ciclo fijo",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "calculada",
@@ -121,11 +121,11 @@
       "date_end": null,
       "date_label": "2027-05-23",
       "date_precision": "day",
-      "election": "Juntas Generales de Alava, Bizkaia y Gipuzkoa",
+      "election": "Juntas Generales de Álava, Bizkaia y Gipuzkoa",
       "election_type": "juntas_generales",
       "event_id": "juntas-generales-pais-vasco-2027-05-23",
-      "level": "Territorios historicos",
-      "notes": "Eleccion directa habitualmente alineada con el ciclo local.",
+      "level": "Territorios históricos",
+      "notes": "Elección directa habitualmente alineada con el ciclo local.",
       "scope": "foral",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -134,19 +134,19 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
       "status": "ligado al ciclo local",
-      "territory": "Pais Vasco"
+      "territory": "País Vasco"
     },
     {
       "certainty": "condicional",
       "date": "2027-05-24",
       "date_end": null,
-      "date_label": "despues de 2027-05-23",
+      "date_label": "después de 2027-05-23",
       "date_precision": "after_day",
       "election": "Diputaciones provinciales",
       "election_type": "diputaciones",
       "event_id": "diputaciones-provinciales-2027",
       "level": "Provincial",
-      "notes": "Constitucion indirecta derivada de resultados municipales.",
+      "notes": "Constitución indirecta derivada de resultados municipales.",
       "scope": "provincial",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -154,8 +154,8 @@
       "source_status": "computed",
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
-      "status": "eleccion indirecta",
-      "territory": "Provincias de regimen comun"
+      "status": "elección indirecta",
+      "territory": "Provincias de régimen común"
     },
     {
       "certainty": "condicional",
@@ -176,7 +176,7 @@
       "source_url": "https://www.boe.es/legislacion/documentos/ConstitucionCASTELLANO.pdf",
       "source_verified": true,
       "status": "fecha condicional",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "condicional",
@@ -188,7 +188,7 @@
       "election_type": "europeas",
       "event_id": "europeas-2029",
       "level": "Europeo",
-      "notes": "Ciclo europeo de 5 anos; fecha exacta se fija en convocatoria.",
+      "notes": "Ciclo europeo de 5 años; fecha exacta se fija en convocatoria.",
       "scope": "europeo",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -197,7 +197,7 @@
       "source_url": "https://infoelectoral.interior.gob.es/es/proceso-electoral/preguntas-frecuentes/tipos-de-elecciones/",
       "source_verified": true,
       "status": "ciclo conocido, fecha no fijada",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "desconocida",
@@ -205,10 +205,10 @@
       "date_end": null,
       "date_label": "sin fecha fijada",
       "date_precision": "unknown",
-      "election": "Parlamentos de comunidades autonomas",
+      "election": "Parlamentos de comunidades autónomas",
       "election_type": "parlamentos_autonomicos",
       "event_id": "autonomicas-sin-fecha-unica",
-      "level": "Autonomico",
+      "level": "Autonómico",
       "notes": "Cada comunidad depende de su legislatura y de convocatorias oficiales.",
       "scope": "autonomico",
       "source_hash": "",
@@ -217,22 +217,22 @@
       "source_status": "computed",
       "source_url": "https://infoelectoral.interior.gob.es/es/proceso-electoral/calendario-electoral/",
       "source_verified": true,
-      "status": "sin fecha unica estatal",
-      "territory": "Comunidades autonomas"
+      "status": "sin fecha única estatal",
+      "territory": "Comunidades autónomas"
     }
   ],
   "fecha_referencia": "2026-05-16",
   "filters": {
     "levels": [
-      "Autonomico",
-      "Ciudades autonomas",
+      "Autonómico",
+      "Ciudades autónomas",
       "Entidades locales menores",
       "Estatal",
       "Europeo",
       "Insular",
       "Municipal",
       "Provincial",
-      "Territorios historicos"
+      "Territorios históricos"
     ],
     "scopes": [
       "autonomico",
@@ -247,19 +247,19 @@
       "ciclo conocido, fecha no fijada",
       "ciclo fijo",
       "convocada",
-      "eleccion indirecta",
+      "elección indirecta",
       "fecha condicional",
       "ligado al ciclo local",
-      "sin fecha unica estatal"
+      "sin fecha única estatal"
     ],
     "territories": [
-      "Andalucia",
+      "Andalucía",
       "Canarias / Illes Balears",
       "Ceuta / Melilla",
-      "Comunidades autonomas",
-      "Espana",
-      "Pais Vasco",
-      "Provincias de regimen comun"
+      "Comunidades autónomas",
+      "España",
+      "País Vasco",
+      "Provincias de régimen común"
     ]
   },
   "fuentes": [
@@ -269,20 +269,20 @@
     "https://www.boe.es/legislacion/documentos/ConstitucionCASTELLANO.pdf",
     "https://www.juntaelectoralcentral.es/cs/jec/documentos/Andalucia_2026_calendario.pdf"
   ],
-  "generado_en": "2026-05-16T08:02:59+00:00",
+  "generado_en": "2026-05-16T08:16:09+00:00",
   "niveles": [
     {
       "eleccion": "Parlamento Europeo",
       "estado": "ciclo conocido, fecha no fijada",
       "nivel": "Europeo",
-      "notas": "Las elecciones europeas son cada 5 anos.",
+      "notas": "Las elecciones europeas son cada 5 años.",
       "proximo_anio_esperado": 2029
     },
     {
       "eleccion": "Cortes Generales (Congreso y Senado)",
       "estado": "fecha condicional",
       "nivel": "Nacional",
-      "notas": "La fecha puede cambiar si hay disolucion anticipada.",
+      "notas": "La fecha puede cambiar si hay disolución anticipada.",
       "proximo_si_legislatura_completa": {
         "fin_legislatura": "2027-07-23",
         "fin_ventana": "2027-09-21",
@@ -292,9 +292,9 @@
       }
     },
     {
-      "eleccion": "Parlamentos de las comunidades autonomas",
-      "estado": "sin fecha unica estatal",
-      "nivel": "Autonomico",
+      "eleccion": "Parlamentos de las comunidades autónomas",
+      "estado": "sin fecha única estatal",
+      "nivel": "Autonómico",
       "notas": "Cada comunidad sigue su calendario y convocatorias.",
       "proximo_esperado": "depende_de_cada_comunidad"
     },
@@ -302,14 +302,14 @@
       "eleccion": "Ayuntamientos",
       "estado": "ciclo fijo",
       "nivel": "Local/Municipal",
-      "notas": "Cuarto domingo de mayo cada 4 anos.",
+      "notas": "Cuarto domingo de mayo cada 4 años.",
       "proxima_fecha": "2027-05-23"
     },
     {
       "eleccion": "Diputaciones Provinciales",
-      "estado": "eleccion indirecta",
+      "estado": "elección indirecta",
       "nivel": "Provincial",
-      "notas": "Constitucion indirecta desde resultados municipales.",
+      "notas": "Constitución indirecta desde resultados municipales.",
       "proxima_esperada_despues_de": "2027-05-23"
     }
   ],
@@ -327,7 +327,7 @@
         "2026-06-11"
       ],
       "format": "pdf",
-      "name": "Junta Electoral de Andalucia - calendario electoral 2026",
+      "name": "Junta Electoral de Andalucía - calendario electoral 2026",
       "raw_path": "etl/data/raw/election_calendar/jec_andalucia_2026_calendario.pdf",
       "source_id": "jec_andalucia_2026_calendario",
       "source_verified": true,
@@ -342,11 +342,11 @@
       "date_end": null,
       "date_label": "2026-05-17",
       "date_precision": "day",
-      "election": "Parlamento de Andalucia",
+      "election": "Parlamento de Andalucía",
       "election_type": "parlamento_autonomico",
       "event_id": "autonomico-andalucia-2026-05-17",
-      "level": "Autonomico",
-      "notes": "Calendario oficial de la Junta Electoral de Andalucia.",
+      "level": "Autonómico",
+      "notes": "Calendario oficial de la Junta Electoral de Andalucía.",
       "scope": "autonomico",
       "source_hash": "45f6d2c192fd3ec3aee7c399f975bd130f8413beabbda3c2b4c7b661c4642ef3",
       "source_id": "jec_andalucia_2026_calendario",
@@ -355,7 +355,7 @@
       "source_url": "https://www.juntaelectoralcentral.es/cs/jec/documentos/Andalucia_2026_calendario.pdf",
       "source_verified": true,
       "status": "convocada",
-      "territory": "Andalucia"
+      "territory": "Andalucía"
     },
     {
       "certainty": "calculada",
@@ -366,8 +366,8 @@
       "election": "Asambleas de Ceuta y Melilla",
       "election_type": "ciudades_autonomas",
       "event_id": "ceuta-melilla-2027-05-23",
-      "level": "Ciudades autonomas",
-      "notes": "Ciclo alineado con elecciones locales salvo convocatoria especifica.",
+      "level": "Ciudades autónomas",
+      "notes": "Ciclo alineado con elecciones locales salvo convocatoria específica.",
       "scope": "autonomico",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -397,7 +397,7 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
       "status": "ligado al ciclo local",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "calculada",
@@ -430,7 +430,7 @@
       "election_type": "municipales",
       "event_id": "municipal-local-2027-05-23",
       "level": "Municipal",
-      "notes": "Cuarto domingo de mayo cada 4 anos.",
+      "notes": "Cuarto domingo de mayo cada 4 años.",
       "scope": "municipal",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -439,7 +439,7 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
       "status": "ciclo fijo",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "calculada",
@@ -447,11 +447,11 @@
       "date_end": null,
       "date_label": "2027-05-23",
       "date_precision": "day",
-      "election": "Juntas Generales de Alava, Bizkaia y Gipuzkoa",
+      "election": "Juntas Generales de Álava, Bizkaia y Gipuzkoa",
       "election_type": "juntas_generales",
       "event_id": "juntas-generales-pais-vasco-2027-05-23",
-      "level": "Territorios historicos",
-      "notes": "Eleccion directa habitualmente alineada con el ciclo local.",
+      "level": "Territorios históricos",
+      "notes": "Elección directa habitualmente alineada con el ciclo local.",
       "scope": "foral",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -460,19 +460,19 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
       "status": "ligado al ciclo local",
-      "territory": "Pais Vasco"
+      "territory": "País Vasco"
     },
     {
       "certainty": "condicional",
       "date": "2027-05-24",
       "date_end": null,
-      "date_label": "despues de 2027-05-23",
+      "date_label": "después de 2027-05-23",
       "date_precision": "after_day",
       "election": "Diputaciones provinciales",
       "election_type": "diputaciones",
       "event_id": "diputaciones-provinciales-2027",
       "level": "Provincial",
-      "notes": "Constitucion indirecta derivada de resultados municipales.",
+      "notes": "Constitución indirecta derivada de resultados municipales.",
       "scope": "provincial",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -480,8 +480,8 @@
       "source_status": "computed",
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672",
       "source_verified": true,
-      "status": "eleccion indirecta",
-      "territory": "Provincias de regimen comun"
+      "status": "elección indirecta",
+      "territory": "Provincias de régimen común"
     },
     {
       "certainty": "condicional",
@@ -502,7 +502,7 @@
       "source_url": "https://www.boe.es/legislacion/documentos/ConstitucionCASTELLANO.pdf",
       "source_verified": true,
       "status": "fecha condicional",
-      "territory": "Espana"
+      "territory": "España"
     },
     {
       "certainty": "condicional",
@@ -514,7 +514,7 @@
       "election_type": "europeas",
       "event_id": "europeas-2029",
       "level": "Europeo",
-      "notes": "Ciclo europeo de 5 anos; fecha exacta se fija en convocatoria.",
+      "notes": "Ciclo europeo de 5 años; fecha exacta se fija en convocatoria.",
       "scope": "europeo",
       "source_hash": "",
       "source_id": "legal_cycle",
@@ -523,7 +523,7 @@
       "source_url": "https://infoelectoral.interior.gob.es/es/proceso-electoral/preguntas-frecuentes/tipos-de-elecciones/",
       "source_verified": true,
       "status": "ciclo conocido, fecha no fijada",
-      "territory": "Espana"
+      "territory": "España"
     }
   ],
   "totales": {
@@ -541,10 +541,10 @@
       "date_end": null,
       "date_label": "sin fecha fijada",
       "date_precision": "unknown",
-      "election": "Parlamentos de comunidades autonomas",
+      "election": "Parlamentos de comunidades autónomas",
       "election_type": "parlamentos_autonomicos",
       "event_id": "autonomicas-sin-fecha-unica",
-      "level": "Autonomico",
+      "level": "Autonómico",
       "notes": "Cada comunidad depende de su legislatura y de convocatorias oficiales.",
       "scope": "autonomico",
       "source_hash": "",
@@ -553,8 +553,8 @@
       "source_status": "computed",
       "source_url": "https://infoelectoral.interior.gob.es/es/proceso-electoral/calendario-electoral/",
       "source_verified": true,
-      "status": "sin fecha unica estatal",
-      "territory": "Comunidades autonomas"
+      "status": "sin fecha única estatal",
+      "territory": "Comunidades autónomas"
     }
   ]
 }
