@@ -104,20 +104,20 @@
   function buildReasonLabel(primaryReason) {
     if (primaryReason === "low_votes_declared_comparable") return "comparables bajos entre votos y dichos";
     if (primaryReason === "declared_unknown_dominant") return "dichos con incertidumbre dominante";
-    if (primaryReason === "high_votes_declared_mismatch") return "desajuste alto entre votos y dichos";
+    if (primaryReason === "high_votes_declared_mismatch") return "mismatch alto entre votos y dichos";
     if (primaryReason === "combined_tracks_votes_not_declared") return "combinado sigue votos, no dichos";
     return "estabilidad sin alertas fuertes";
   }
 
   function buildReasonDetail(primaryReason) {
     if (primaryReason === "low_votes_declared_comparable") {
-      return "La comparabilidad entre votos y dichos cae por debajo del umbral operativo.";
+      return "La comparabilidad votes-vs-declared cae por debajo del umbral operativo.";
     }
     if (primaryReason === "declared_unknown_dominant") {
-      return "La capa declarada concentra incertidumbre, lo que reduce la trazabilidad cruzada.";
+      return "La capa declarada concentra unknown (unclear/no_signal/mixed), reduciendo trazabilidad cruzada.";
     }
     if (primaryReason === "high_votes_declared_mismatch") {
-      return "Cuando ambos lados son comparables, los desacuerdos entre votos y dichos superan el umbral de estabilidad.";
+      return "Cuando ambos son comparables, los desacuerdos votes-vs-declared superan el umbral de estabilidad.";
     }
     if (primaryReason === "combined_tracks_votes_not_declared") {
       return "La salida combinada se alinea con votos y diverge de dichos para la misma celda comparable.";

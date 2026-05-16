@@ -52,35 +52,35 @@
   function messageForDominant(dominant, coverageRatio, unclearThreshold) {
     if (dominant === "no_signal") {
       return {
-        reason_label: "incertidumbre dominada por falta de señal",
-        reason_detail: "La mayoría de celdas sin clasificar no tienen posición observable.",
+        reason_label: "unknown dominado por sin_senal",
+        reason_detail: "La mayoria de celdas unknown no tienen posicion observable.",
         reduce_uncertainty: "Reducir incertidumbre: sumar evidencia verificable (votos, iniciativas o textos enlazados).",
       };
     }
     if (dominant === "unclear") {
       if (coverageRatio < unclearThreshold) {
         return {
-          reason_label: "incertidumbre por cobertura baja",
+          reason_label: "unknown por cobertura baja",
           reason_detail: "La cobertura clara queda por debajo del umbral operativo del 20%.",
-          reduce_uncertainty: "Reducir incertidumbre: subir la cobertura clara (a favor, en contra o mixto) por encima del umbral.",
+          reduce_uncertainty: "Reducir incertidumbre: subir la cobertura clara (a_favor/en_contra/mixto) por encima del umbral.",
         };
       }
       return {
-        reason_label: "incertidumbre por señal ambigua",
-        reason_detail: "Predominan casos inciertos frente a la señal clara.",
-        reduce_uncertainty: "Reducir incertidumbre: revisar los casos inciertos y reforzar la señal clara por partido.",
+        reason_label: "unknown por senal ambigua",
+        reason_detail: "Predominan casos inciertos frente a senal clara.",
+        reduce_uncertainty: "Reducir incertidumbre: revisar los casos inciertos y reforzar senal clara por partido.",
       };
     }
     if (dominant === "mixed") {
       return {
-        reason_label: "incertidumbre mixta",
-        reason_detail: "La incertidumbre combina falta de señal y casos inciertos.",
-        reduce_uncertainty: "Reducir incertidumbre: cerrar huecos sin señal y resolver casos inciertos prioritarios.",
+        reason_label: "unknown mixto",
+        reason_detail: "Unknown combina falta de senal y casos inciertos.",
+        reduce_uncertainty: "Reducir incertidumbre: cerrar huecos sin_senal y resolver casos inciertos prioritarios.",
       };
     }
     return {
-      reason_label: "sin incertidumbre",
-      reason_detail: "No hay celdas sin clasificar en este agregado.",
+      reason_label: "sin unknown",
+      reason_detail: "No hay celdas unknown en este agregado.",
       reduce_uncertainty: "Mantener cobertura y trazabilidad actuales.",
     };
   }
