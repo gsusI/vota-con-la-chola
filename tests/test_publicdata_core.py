@@ -95,6 +95,32 @@ class TestPublicDataCore(unittest.TestCase):
             self.assertEqual(result["note"], "network")
             self.assertTrue(str(result["raw_path"]).endswith(".html"))
 
+    def test_fetch_payload_can_use_scoped_insecure_ssl(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            sample = root / "source.csv"
+            sample.write_text("a\n1\n", encoding="utf-8")
+            cfg = {"source_csv": {"format": "csv", "fallback_file": str(sample)}}
+
+            with patch(
+                "publicdata_core.fetch.http_get_bytes",
+                return_value=(b"a\n1\n", "text/csv"),
+            ) as fake_get:
+                result = fetch_payload(
+                    cfg,
+                    "source_csv",
+                    "https://example.test/source.csv",
+                    root / "raw",
+                    timeout=5,
+                    from_file=None,
+                    strict_network=True,
+                    insecure_ssl=True,
+                )
+
+            self.assertEqual(result["note"], "network")
+            self.assertTrue(str(result["raw_path"]).endswith(".csv"))
+            self.assertTrue(fake_get.call_args.kwargs["insecure_ssl"])
+
     def test_util_helpers_are_stable_for_source_records(self) -> None:
         self.assertEqual(normalize_key_part(" José-Luis/Álvarez "), "jose luis alvarez")
         self.assertEqual(stable_json({"b": 2, "a": 1}), '{"a": 1, "b": 2}')

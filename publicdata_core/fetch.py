@@ -38,6 +38,7 @@ def fetch_payload(
     strict_network: bool,
     *,
     base_headers: Mapping[str, str] | None = None,
+    insecure_ssl: bool = False,
 ) -> dict[str, Any]:
     fetched_at = now_utc_iso()
     ext = str(source_config[source_id]["format"])
@@ -53,7 +54,12 @@ def fetch_payload(
         resolved_url = source_url
         note = "network"
         try:
-            payload, content_type = http_get_bytes(source_url, timeout, base_headers=base_headers)
+            payload, content_type = http_get_bytes(
+                source_url,
+                timeout,
+                base_headers=base_headers,
+                insecure_ssl=insecure_ssl,
+            )
             ext = detect_extension(source_config, source_id, content_type, ext)
             if str(source_config[source_id].get("format") or "").lower() != "html":
                 validate_network_payload(source_id, payload, content_type)

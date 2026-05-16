@@ -20,6 +20,8 @@ def fetch_payload(
     timeout: int,
     from_file: Path | None,
     strict_network: bool,
+    *,
+    insecure_ssl: bool = False,
 ) -> dict[str, Any]:
     return _fetch_payload(
         SOURCE_CONFIG,
@@ -30,6 +32,7 @@ def fetch_payload(
         from_file,
         strict_network,
         base_headers=BASE_HEADERS,
+        insecure_ssl=insecure_ssl,
     )
 
 

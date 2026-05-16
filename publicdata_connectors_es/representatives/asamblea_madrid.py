@@ -39,6 +39,7 @@ class AsambleaMadridOcupacionesConnector(BaseConnector):
             timeout=timeout,
             from_file=from_file,
             strict_network=strict_network,
+            insecure_ssl=True,
         )
         records = parse_asamblea_madrid_ocupaciones_csv(fetched["payload"])
         return Extracted(
