@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "congreso_votaciones--20260415--3f4f3b1024",
+    "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "canonical_path": "/vote-explainer/congreso_votaciones--20260415--3f4f3b1024/",
+    "generated_at": "2026-05-17T05:57:44+00:00",
+    "snapshot_as_of_date": "2026-05-17",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "congreso_votaciones",
+    "source_name": "Congreso - Votaciones (pleno, OpenData)",
+    "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "chamber": "Congreso",
+    "vote_date": "2026-04-15",
+    "title": "Dictámenes de la Comisión de Asuntos Exteriores sobre Convenios internacionales.",
+    "expediente_text": "Acuerdo de Sede entre el Reino de España y el Secretariado de la Unión por el Mediterráneo, hecho ad referendum en Barcelona el 28 de noviembre de 2025.",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "No",
+    "headline": "Acuerdo de Sede entre el Reino de España y el Secretariado de la Unión por el Mediterráneo, hecho ad referendum en Barcelona el 28 de noviembre de 2025.",
+    "subtitle": "derived:f668881a0581929a2ff9b0c0"
+  },
+  "result": {
+    "status": "approved",
+    "label": "Aprobada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 307 · No 31 · Abstencion 6 · No vota 6"
+  },
+  "totals": {
+    "present": 344,
+    "yes": 307,
+    "no": 31,
+    "abstain": 6,
+    "no_vote": 6
+  },
+  "initiative": {
+    "initiative_id": "congreso:leg15:derived:f668881a0581929a2ff9b0c0",
+    "expediente": "derived:f668881a0581929a2ff9b0c0",
+    "title": "Acuerdo de Sede entre el Reino de España y el Secretariado de la Unión por el Mediterráneo, hecho ad referendum en Barcelona el 28 de noviembre de 2025.",
+    "type": "",
+    "grouping": "Derived from Congreso votaciones",
+    "supertype": "derived",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "confidence": 1.0
+  },
+  "groups": [
+    {
+      "group_code": "GP",
+      "yes": 137,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 137
+    },
+    {
+      "group_code": "GS",
+      "yes": 120,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 121
+    },
+    {
+      "group_code": "GVOX",
+      "yes": 0,
+      "no": 31,
+      "abstain": 0,
+      "no_vote": 2,
+      "other": 0,
+      "total": 33
+    },
+    {
+      "group_code": "GSUMAR",
+      "yes": 24,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 2,
+      "other": 0,
+      "total": 26
+    },
+    {
+      "group_code": "GMx",
+      "yes": 7,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 8
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion018/VOT_20260415133929.json",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Acuerdo de Sede entre el Reino de España y el Secretariado de la Unión por el Mediterráneo, hecho ad referendu | Vota Con La Chola",
+    "description": "Congreso · 2026-04-15 · Si 307 · No 31 · Abstencion 6 · No vota 6. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/congreso_votaciones--20260415--3f4f3b1024/"
+  }
+}
