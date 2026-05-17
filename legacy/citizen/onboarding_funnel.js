@@ -32,28 +32,28 @@
     if (!packReady && hasRecommendedPack) {
       return {
         id: "apply_pack",
-        label: "Siguiente: aplicar paquete",
+        label: "Siguiente: aplicar pack",
         reason: "pack_pendiente",
       };
     }
     if (!concernReady && hasRecommendedConcern) {
       return {
         id: "select_concern",
-        label: "Siguiente: elegir preocupación",
+        label: "Siguiente: elegir preocupacion",
         reason: "concern_pendiente",
       };
     }
     if (!topicReady && hasRecommendedTopic) {
       return {
         id: "open_topic",
-        label: "Siguiente: abrir caso",
+        label: "Siguiente: abrir item",
         reason: "topic_pendiente",
       };
     }
     if (!alignmentReady) {
       return {
         id: "open_alignment",
-        label: "Siguiente: ir a la comparación",
+        label: "Siguiente: ir a alineamiento",
         reason: "alignment_pendiente",
       };
     }
@@ -66,7 +66,7 @@
     }
     return {
       id: "done",
-      label: "Guía inicial completa",
+      label: "Onboarding completo",
       reason: "done",
     };
   }
