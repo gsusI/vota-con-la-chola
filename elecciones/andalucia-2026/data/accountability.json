@@ -8,6 +8,955 @@
     "source_path": "ui/gh-pages-next/public/accountability-evidence/data/evidence-api.json",
     "status": "ok"
   },
+  "accountability_readiness": {
+    "automation_command": "just etl-andalucia-2026-accountability-assist",
+    "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+    "classification_counts": [
+      {
+        "count": 4,
+        "key": "responsibility_execution_and_baseline_reviewed_no_post_change_causality"
+      },
+      {
+        "count": 3,
+        "key": "program_only_needs_primary_evidence"
+      },
+      {
+        "count": 2,
+        "key": "program_with_primary_legal_signal_needs_review"
+      },
+      {
+        "count": 1,
+        "key": "responsibility_observed_execution_outcome_pending"
+      }
+    ],
+    "issues": [
+      {
+        "blockers": [
+          "delivery_or_beneficiary_missing",
+          "post_change_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "execution_queue_items_total": 2,
+        "issue_review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_budget_and_contract_partial",
+        "next_action": {
+          "action_id": "find_delivery_or_beneficiary_evidence",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "delivery_or_beneficiary_missing",
+          "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+          "label": "Buscar entrega/beneficiario",
+          "source_candidate_ids": [
+            "junta_presupuesto_2026_partidas_gastos",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "junta_subvenciones_programas_prioritarios",
+            "junta_tesoreria_2025_pagos_agregados",
+            "junta_contratos_menores_2025",
+            "junta_contratos_menores_2024",
+            "bdns_convocatorias",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "ieca_ods_cultura_patrimonio_gasto_85763"
+          ]
+        },
+        "next_actions": [
+          {
+            "action_id": "find_delivery_or_beneficiary_evidence",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "delivery_or_beneficiary_missing",
+            "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+            "label": "Buscar entrega/beneficiario",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "junta_contratos_menores_2025",
+              "junta_contratos_menores_2024",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_cultura_patrimonio_gasto_85763"
+            ]
+          },
+          {
+            "action_id": "collect_post_change_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "post_change_outcome_missing",
+            "description": "Capturar dato oficial posterior al cambio legal/ejecucion para comparar contra baseline.",
+            "label": "Esperar/ingerir outcome posterior",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "junta_contratos_menores_2025",
+              "junta_contratos_menores_2024",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_cultura_patrimonio_gasto_85763"
+            ]
+          },
+          {
+            "action_id": "review_causal_link",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "causal_link_missing",
+            "description": "Conectar decision, ejecucion y outcome sin convertir correlacion en merito o culpa.",
+            "label": "Revisar causalidad",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_merit_blame",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "merit_blame_review_missing",
+            "description": "Solo despues de outcome post-cambio y causalidad; publicar si la evidencia lo soporta.",
+            "label": "Revisar merito/culpa",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 32,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "delivery_or_beneficiary_missing",
+        "primary_blocker_label": "Hay dinero/contrato/ayuda parcial, pero falta entrega final o beneficiario completo.",
+        "program_measures_total": 9,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 1,
+        "reviewed_execution_evidence_kind_counts": [
+          {
+            "count": 10,
+            "key": "indicator_target"
+          },
+          {
+            "count": 4,
+            "key": "budget_plan"
+          },
+          {
+            "count": 4,
+            "key": "contract_award"
+          },
+          {
+            "count": 1,
+            "key": "grant_award"
+          },
+          {
+            "count": 1,
+            "key": "observed_outcome_series"
+          },
+          {
+            "count": 1,
+            "key": "treasury_payment_aggregate"
+          }
+        ],
+        "reviewed_execution_evidence_rows_total": 21,
+        "reviewed_vote_items_total": 4,
+        "topic_id": "cultura_patrimonio",
+        "topic_label": "Cultura y patrimonio"
+      },
+      {
+        "blockers": [
+          "delivery_or_beneficiary_missing",
+          "post_change_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "execution_queue_items_total": 2,
+        "issue_review_status": "reviewed_issue_direction_actor_execution_owner_budget_and_contract_partial",
+        "next_action": {
+          "action_id": "find_delivery_or_beneficiary_evidence",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "delivery_or_beneficiary_missing",
+          "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+          "label": "Buscar entrega/beneficiario",
+          "source_candidate_ids": [
+            "junta_presupuesto_2026_partidas_gastos",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "junta_subvenciones_programas_prioritarios",
+            "junta_tesoreria_2025_pagos_agregados",
+            "junta_contratos_menores_2025",
+            "junta_contratos_menores_2024",
+            "bdns_convocatorias",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "ieca_ods_agua_631_111614"
+          ]
+        },
+        "next_actions": [
+          {
+            "action_id": "find_delivery_or_beneficiary_evidence",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "delivery_or_beneficiary_missing",
+            "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+            "label": "Buscar entrega/beneficiario",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "junta_contratos_menores_2025",
+              "junta_contratos_menores_2024",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_agua_631_111614"
+            ]
+          },
+          {
+            "action_id": "collect_post_change_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "post_change_outcome_missing",
+            "description": "Capturar dato oficial posterior al cambio legal/ejecucion para comparar contra baseline.",
+            "label": "Esperar/ingerir outcome posterior",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "junta_contratos_menores_2025",
+              "junta_contratos_menores_2024",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_agua_631_111614"
+            ]
+          },
+          {
+            "action_id": "review_causal_link",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "causal_link_missing",
+            "description": "Conectar decision, ejecucion y outcome sin convertir correlacion en merito o culpa.",
+            "label": "Revisar causalidad",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_merit_blame",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "merit_blame_review_missing",
+            "description": "Solo despues de outcome post-cambio y causalidad; publicar si la evidencia lo soporta.",
+            "label": "Revisar merito/culpa",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 15,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "delivery_or_beneficiary_missing",
+        "primary_blocker_label": "Hay dinero/contrato/ayuda parcial, pero falta entrega final o beneficiario completo.",
+        "program_measures_total": 4,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 2,
+        "reviewed_execution_evidence_kind_counts": [
+          {
+            "count": 6,
+            "key": "indicator_target"
+          },
+          {
+            "count": 4,
+            "key": "budget_plan"
+          },
+          {
+            "count": 3,
+            "key": "contract_award"
+          },
+          {
+            "count": 1,
+            "key": "grant_award"
+          },
+          {
+            "count": 1,
+            "key": "observed_outcome_series"
+          },
+          {
+            "count": 1,
+            "key": "treasury_payment_aggregate"
+          }
+        ],
+        "reviewed_execution_evidence_rows_total": 16,
+        "reviewed_vote_items_total": 3,
+        "topic_id": "campo_agua",
+        "topic_label": "Campo y agua"
+      },
+      {
+        "blockers": [
+          "delivery_or_beneficiary_missing",
+          "post_change_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "execution_queue_items_total": 2,
+        "issue_review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_and_budget_allocation_partial",
+        "next_action": {
+          "action_id": "find_delivery_or_beneficiary_evidence",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "delivery_or_beneficiary_missing",
+          "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+          "label": "Buscar entrega/beneficiario",
+          "source_candidate_ids": [
+            "junta_presupuesto_2026_partidas_gastos",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "junta_subvenciones_programas_prioritarios",
+            "junta_tesoreria_2025_pagos_agregados",
+            "bdns_convocatorias",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "ieca_ods_clima_gei_60509",
+            "ieca_ods_aire_pm10_85172"
+          ]
+        },
+        "next_actions": [
+          {
+            "action_id": "find_delivery_or_beneficiary_evidence",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "delivery_or_beneficiary_missing",
+            "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+            "label": "Buscar entrega/beneficiario",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_clima_gei_60509",
+              "ieca_ods_aire_pm10_85172"
+            ]
+          },
+          {
+            "action_id": "collect_post_change_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "post_change_outcome_missing",
+            "description": "Capturar dato oficial posterior al cambio legal/ejecucion para comparar contra baseline.",
+            "label": "Esperar/ingerir outcome posterior",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_clima_gei_60509",
+              "ieca_ods_aire_pm10_85172"
+            ]
+          },
+          {
+            "action_id": "review_causal_link",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "causal_link_missing",
+            "description": "Conectar decision, ejecucion y outcome sin convertir correlacion en merito o culpa.",
+            "label": "Revisar causalidad",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_merit_blame",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "merit_blame_review_missing",
+            "description": "Solo despues de outcome post-cambio y causalidad; publicar si la evidencia lo soporta.",
+            "label": "Revisar merito/culpa",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 10,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "delivery_or_beneficiary_missing",
+        "primary_blocker_label": "Hay dinero/contrato/ayuda parcial, pero falta entrega final o beneficiario completo.",
+        "program_measures_total": 9,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 1,
+        "reviewed_execution_evidence_kind_counts": [
+          {
+            "count": 6,
+            "key": "budget_plan"
+          },
+          {
+            "count": 6,
+            "key": "indicator_target"
+          },
+          {
+            "count": 2,
+            "key": "observed_outcome_series"
+          },
+          {
+            "count": 1,
+            "key": "grant_award"
+          },
+          {
+            "count": 1,
+            "key": "treasury_payment_aggregate"
+          }
+        ],
+        "reviewed_execution_evidence_rows_total": 16,
+        "reviewed_vote_items_total": 2,
+        "topic_id": "energia_clima",
+        "topic_label": "Energia y clima"
+      },
+      {
+        "blockers": [
+          "delivery_or_beneficiary_missing",
+          "post_change_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "execution_queue_items_total": 2,
+        "issue_review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_and_budget_allocation_partial",
+        "next_action": {
+          "action_id": "find_delivery_or_beneficiary_evidence",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "delivery_or_beneficiary_missing",
+          "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+          "label": "Buscar entrega/beneficiario",
+          "source_candidate_ids": [
+            "junta_presupuesto_2026_partidas_gastos",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "junta_subvenciones_programas_prioritarios",
+            "junta_tesoreria_2025_pagos_agregados",
+            "bdns_convocatorias",
+            "junta_presupuesto_2026_objetivos_indicadores",
+            "ieca_ods_educacion_abandono_115550"
+          ]
+        },
+        "next_actions": [
+          {
+            "action_id": "find_delivery_or_beneficiary_evidence",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "delivery_or_beneficiary_missing",
+            "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
+            "label": "Buscar entrega/beneficiario",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_educacion_abandono_115550"
+            ]
+          },
+          {
+            "action_id": "collect_post_change_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "post_change_outcome_missing",
+            "description": "Capturar dato oficial posterior al cambio legal/ejecucion para comparar contra baseline.",
+            "label": "Esperar/ingerir outcome posterior",
+            "source_candidate_ids": [
+              "junta_presupuesto_2026_partidas_gastos",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "junta_subvenciones_programas_prioritarios",
+              "junta_tesoreria_2025_pagos_agregados",
+              "bdns_convocatorias",
+              "junta_presupuesto_2026_objetivos_indicadores",
+              "ieca_ods_educacion_abandono_115550"
+            ]
+          },
+          {
+            "action_id": "review_causal_link",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "causal_link_missing",
+            "description": "Conectar decision, ejecucion y outcome sin convertir correlacion en merito o culpa.",
+            "label": "Revisar causalidad",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_merit_blame",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "merit_blame_review_missing",
+            "description": "Solo despues de outcome post-cambio y causalidad; publicar si la evidencia lo soporta.",
+            "label": "Revisar merito/culpa",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 5,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "delivery_or_beneficiary_missing",
+        "primary_blocker_label": "Hay dinero/contrato/ayuda parcial, pero falta entrega final o beneficiario completo.",
+        "program_measures_total": 15,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 1,
+        "reviewed_execution_evidence_kind_counts": [
+          {
+            "count": 7,
+            "key": "budget_plan"
+          },
+          {
+            "count": 6,
+            "key": "indicator_target"
+          },
+          {
+            "count": 1,
+            "key": "grant_award"
+          },
+          {
+            "count": 1,
+            "key": "observed_outcome_series"
+          },
+          {
+            "count": 1,
+            "key": "treasury_payment_aggregate"
+          }
+        ],
+        "reviewed_execution_evidence_rows_total": 16,
+        "reviewed_vote_items_total": 1,
+        "topic_id": "educacion",
+        "topic_label": "Educacion"
+      },
+      {
+        "blockers": [
+          "reviewed_vote_missing",
+          "citizen_direction_missing",
+          "responsible_actor_missing",
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "program_with_primary_legal_signal_needs_review",
+        "execution_queue_items_total": 0,
+        "issue_review_status": "",
+        "next_action": {
+          "action_id": "review_parliament_vote_signal",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "reviewed_vote_missing",
+          "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+          "label": "Revisar voto parlamentario",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "review_parliament_vote_signal",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_vote_missing",
+            "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+            "label": "Revisar voto parlamentario",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_issue_direction_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "citizen_direction_missing",
+            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+            "label": "Anadir direccion del issue",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_responsible_actor_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "responsible_actor_missing",
+            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
+            "label": "Anadir actor responsable",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_execution_source_plan",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "execution_source_plan_missing",
+            "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
+            "label": "Crear plan de fuentes de ejecucion",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 0,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "reviewed_vote_missing",
+        "primary_blocker_label": "Falta voto parlamentario revisado.",
+        "program_measures_total": 14,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 2,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 0,
+        "topic_id": "empleo",
+        "topic_label": "Empleo"
+      },
+      {
+        "blockers": [
+          "reviewed_vote_missing",
+          "reviewed_boja_missing",
+          "citizen_direction_missing",
+          "responsible_actor_missing",
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "program_only_needs_primary_evidence",
+        "execution_queue_items_total": 0,
+        "issue_review_status": "",
+        "next_action": {
+          "action_id": "review_parliament_vote_signal",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "reviewed_vote_missing",
+          "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+          "label": "Revisar voto parlamentario",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "review_parliament_vote_signal",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_vote_missing",
+            "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+            "label": "Revisar voto parlamentario",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_boja_legal_change",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_boja_missing",
+            "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
+            "label": "Revisar BOJA",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_issue_direction_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "citizen_direction_missing",
+            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+            "label": "Anadir direccion del issue",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_responsible_actor_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "responsible_actor_missing",
+            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
+            "label": "Anadir actor responsable",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 0,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "reviewed_vote_missing",
+        "primary_blocker_label": "Falta voto parlamentario revisado.",
+        "program_measures_total": 20,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 0,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 0,
+        "topic_id": "sanidad",
+        "topic_label": "Sanidad"
+      },
+      {
+        "blockers": [
+          "reviewed_vote_missing",
+          "reviewed_boja_missing",
+          "citizen_direction_missing",
+          "responsible_actor_missing",
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "program_only_needs_primary_evidence",
+        "execution_queue_items_total": 0,
+        "issue_review_status": "",
+        "next_action": {
+          "action_id": "review_parliament_vote_signal",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "reviewed_vote_missing",
+          "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+          "label": "Revisar voto parlamentario",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "review_parliament_vote_signal",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_vote_missing",
+            "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+            "label": "Revisar voto parlamentario",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_boja_legal_change",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_boja_missing",
+            "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
+            "label": "Revisar BOJA",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_issue_direction_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "citizen_direction_missing",
+            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+            "label": "Anadir direccion del issue",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_responsible_actor_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "responsible_actor_missing",
+            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
+            "label": "Anadir actor responsable",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 0,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "reviewed_vote_missing",
+        "primary_blocker_label": "Falta voto parlamentario revisado.",
+        "program_measures_total": 18,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 0,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 0,
+        "topic_id": "seguridad_libertades",
+        "topic_label": "Seguridad y libertades"
+      },
+      {
+        "blockers": [
+          "reviewed_vote_missing",
+          "reviewed_boja_missing",
+          "citizen_direction_missing",
+          "responsible_actor_missing",
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "program_only_needs_primary_evidence",
+        "execution_queue_items_total": 0,
+        "issue_review_status": "",
+        "next_action": {
+          "action_id": "review_parliament_vote_signal",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "reviewed_vote_missing",
+          "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+          "label": "Revisar voto parlamentario",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "review_parliament_vote_signal",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_vote_missing",
+            "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+            "label": "Revisar voto parlamentario",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_boja_legal_change",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_boja_missing",
+            "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
+            "label": "Revisar BOJA",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_issue_direction_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "citizen_direction_missing",
+            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+            "label": "Anadir direccion del issue",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_responsible_actor_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "responsible_actor_missing",
+            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
+            "label": "Anadir actor responsable",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 0,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "reviewed_vote_missing",
+        "primary_blocker_label": "Falta voto parlamentario revisado.",
+        "program_measures_total": 10,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 0,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 0,
+        "topic_id": "transparencia_corrupcion",
+        "topic_label": "Transparencia y corrupcion"
+      },
+      {
+        "blockers": [
+          "reviewed_vote_missing",
+          "citizen_direction_missing",
+          "responsible_actor_missing",
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "program_with_primary_legal_signal_needs_review",
+        "execution_queue_items_total": 0,
+        "issue_review_status": "",
+        "next_action": {
+          "action_id": "review_parliament_vote_signal",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "reviewed_vote_missing",
+          "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+          "label": "Revisar voto parlamentario",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "review_parliament_vote_signal",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "reviewed_vote_missing",
+            "description": "Promover un item de la cola de votos a senal revisada con efecto legal y actores.",
+            "label": "Revisar voto parlamentario",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_issue_direction_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "citizen_direction_missing",
+            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+            "label": "Anadir direccion del issue",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_responsible_actor_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "responsible_actor_missing",
+            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
+            "label": "Anadir actor responsable",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_execution_source_plan",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "execution_source_plan_missing",
+            "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
+            "label": "Crear plan de fuentes de ejecucion",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 0,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "reviewed_vote_missing",
+        "primary_blocker_label": "Falta voto parlamentario revisado.",
+        "program_measures_total": 12,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 1,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 0,
+        "topic_id": "vivienda",
+        "topic_label": "Vivienda"
+      },
+      {
+        "blockers": [
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "responsibility_observed_execution_outcome_pending",
+        "execution_queue_items_total": 0,
+        "issue_review_status": "reviewed_issue_direction_actor_execution_owner_and_budget_allocation_partial",
+        "next_action": {
+          "action_id": "add_execution_source_plan",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "execution_source_plan_missing",
+          "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
+          "label": "Crear plan de fuentes de ejecucion",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "add_execution_source_plan",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "execution_source_plan_missing",
+            "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
+            "label": "Crear plan de fuentes de ejecucion",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "collect_observed_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "observed_outcome_missing",
+            "description": "Anadir serie oficial observada, no solo objetivo o prevision presupuestaria.",
+            "label": "Ingerir outcome observado",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_causal_link",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "causal_link_missing",
+            "description": "Conectar decision, ejecucion y outcome sin convertir correlacion en merito o culpa.",
+            "label": "Revisar causalidad",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "review_merit_blame",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "merit_blame_review_missing",
+            "description": "Solo despues de outcome post-cambio y causalidad; publicar si la evidencia lo soporta.",
+            "label": "Revisar merito/culpa",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 13,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "execution_source_plan_missing",
+        "primary_blocker_label": "Falta plan de fuentes de ejecucion para este issue.",
+        "program_measures_total": 9,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 4,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 2,
+        "topic_id": "fiscalidad",
+        "topic_label": "Fiscalidad"
+      }
+    ],
+    "next_action_counts": [
+      {
+        "count": 5,
+        "key": "review_parliament_vote_signal"
+      },
+      {
+        "count": 4,
+        "key": "find_delivery_or_beneficiary_evidence"
+      },
+      {
+        "count": 1,
+        "key": "add_execution_source_plan"
+      }
+    ],
+    "open_limitations": [
+      "classifier_is_readiness_only",
+      "no_merit_blame_without_post_change_outcome",
+      "no_merit_blame_without_causal_link_review"
+    ],
+    "primary_blocker_counts": [
+      {
+        "count": 5,
+        "key": "reviewed_vote_missing",
+        "label": "Falta voto parlamentario revisado."
+      },
+      {
+        "count": 1,
+        "key": "execution_source_plan_missing",
+        "label": "Falta plan de fuentes de ejecucion para este issue."
+      },
+      {
+        "count": 4,
+        "key": "delivery_or_beneficiary_missing",
+        "label": "Hay dinero/contrato/ayuda parcial, pero falta entrega final o beneficiario completo."
+      }
+    ],
+    "publishable_merit_blame_topics_total": 0,
+    "schema_version": "andalucia_2026_accountability_readiness_v1",
+    "status": "blocked_pending_post_change_outcomes_and_causality",
+    "topics_total": 10,
+    "topics_with_execution_evidence_total": 4,
+    "topics_with_observed_outcome_baseline_total": 4,
+    "topics_with_observed_responsibility_total": 5,
+    "topics_with_post_change_outcome_total": 0
+  },
   "boja_impact_reviews": {
     "applied_reviews_total": 12,
     "reviews": [
@@ -112039,6 +112988,12 @@
   "coverage": {
     "accountability_evidence_actor_answers_total": 929,
     "accountability_evidence_source_entries_total": 126767,
+    "accountability_readiness_publishable_merit_blame_topics_total": 0,
+    "accountability_readiness_topics_total": 10,
+    "accountability_readiness_topics_with_execution_evidence_total": 4,
+    "accountability_readiness_topics_with_observed_outcome_baseline_total": 4,
+    "accountability_readiness_topics_with_observed_responsibility_total": 5,
+    "accountability_readiness_topics_with_post_change_outcome_total": 0,
     "boja_norms_api_total_hits": 64831,
     "boja_norms_details_available_total": 60,
     "boja_norms_fragments_total": 119,
@@ -119771,7 +120726,7 @@
       "source_url": "https://www.juntaelectoralcentral.es/cs/jec/documentos/andalucia_2026_candidaturas_proclamadas.pdf"
     }
   ],
-  "generated_at": "2026-05-17T09:45:01+00:00",
+  "generated_at": "2026-05-17T09:52:44+00:00",
   "issue_accountability_packets": {
     "claim_status": "issue_evidence_packet_only_no_merit_or_blame_claim",
     "interpretation_status": "cross_source_evidence_ready_for_review",
