@@ -1527,7 +1527,6 @@
       },
       {
         "blockers": [
-          "reviewed_boja_missing",
           "citizen_direction_missing",
           "responsible_actor_missing",
           "execution_source_plan_missing",
@@ -1543,22 +1542,14 @@
         "execution_queue_items_total": 0,
         "issue_review_status": "",
         "next_action": {
-          "action_id": "review_boja_legal_change",
+          "action_id": "add_issue_direction_review",
           "automation_command": "just etl-andalucia-2026-accountability-assist",
-          "blocker_id": "reviewed_boja_missing",
-          "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
-          "label": "Revisar BOJA",
+          "blocker_id": "citizen_direction_missing",
+          "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+          "label": "Anadir direccion del issue",
           "source_candidate_ids": []
         },
         "next_actions": [
-          {
-            "action_id": "review_boja_legal_change",
-            "automation_command": "just etl-andalucia-2026-accountability-assist",
-            "blocker_id": "reviewed_boja_missing",
-            "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
-            "label": "Revisar BOJA",
-            "source_candidate_ids": []
-          },
           {
             "action_id": "add_issue_direction_review",
             "automation_command": "just etl-andalucia-2026-accountability-assist",
@@ -1582,12 +1573,20 @@
             "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
             "label": "Crear plan de fuentes de ejecucion",
             "source_candidate_ids": []
+          },
+          {
+            "action_id": "collect_observed_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "observed_outcome_missing",
+            "description": "Anadir serie oficial observada, no solo objetivo o prevision presupuestaria.",
+            "label": "Ingerir outcome observado",
+            "source_candidate_ids": []
           }
         ],
         "observed_responsibility_claims_total": 25,
         "post_change_outcome_rows_total": 0,
-        "primary_blocker": "reviewed_boja_missing",
-        "primary_blocker_label": "Falta cambio BOJA revisado.",
+        "primary_blocker": "citizen_direction_missing",
+        "primary_blocker_label": "Falta direccion ciudadana revisada.",
         "program_measures_total": 18,
         "public_merit_blame_eligible": false,
         "reviewed_boja_legal_changes_total": 0,
@@ -1596,78 +1595,6 @@
         "reviewed_vote_items_total": 5,
         "topic_id": "seguridad_libertades",
         "topic_label": "Seguridad y libertades"
-      },
-      {
-        "blockers": [
-          "reviewed_boja_missing",
-          "citizen_direction_missing",
-          "responsible_actor_missing",
-          "execution_source_plan_missing",
-          "observed_outcome_missing",
-          "causal_link_missing",
-          "merit_blame_review_missing"
-        ],
-        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
-        "classification": "program_with_primary_legal_signal_needs_review",
-        "delivery_evidence_hunts": [],
-        "delivery_evidence_hunts_total": 0,
-        "delivery_evidence_search_targets_total": 0,
-        "execution_queue_items_total": 0,
-        "issue_review_status": "",
-        "next_action": {
-          "action_id": "review_boja_legal_change",
-          "automation_command": "just etl-andalucia-2026-accountability-assist",
-          "blocker_id": "reviewed_boja_missing",
-          "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
-          "label": "Revisar BOJA",
-          "source_candidate_ids": []
-        },
-        "next_actions": [
-          {
-            "action_id": "review_boja_legal_change",
-            "automation_command": "just etl-andalucia-2026-accountability-assist",
-            "blocker_id": "reviewed_boja_missing",
-            "description": "Promover fragmento BOJA a cambio legal revisado con direccion y alcance.",
-            "label": "Revisar BOJA",
-            "source_candidate_ids": []
-          },
-          {
-            "action_id": "add_issue_direction_review",
-            "automation_command": "just etl-andalucia-2026-accountability-assist",
-            "blocker_id": "citizen_direction_missing",
-            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
-            "label": "Anadir direccion del issue",
-            "source_candidate_ids": []
-          },
-          {
-            "action_id": "add_responsible_actor_review",
-            "automation_command": "just etl-andalucia-2026-accountability-assist",
-            "blocker_id": "responsible_actor_missing",
-            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
-            "label": "Anadir actor responsable",
-            "source_candidate_ids": []
-          },
-          {
-            "action_id": "add_execution_source_plan",
-            "automation_command": "just etl-andalucia-2026-accountability-assist",
-            "blocker_id": "execution_source_plan_missing",
-            "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
-            "label": "Crear plan de fuentes de ejecucion",
-            "source_candidate_ids": []
-          }
-        ],
-        "observed_responsibility_claims_total": 5,
-        "post_change_outcome_rows_total": 0,
-        "primary_blocker": "reviewed_boja_missing",
-        "primary_blocker_label": "Falta cambio BOJA revisado.",
-        "program_measures_total": 20,
-        "public_merit_blame_eligible": false,
-        "reviewed_boja_legal_changes_total": 0,
-        "reviewed_execution_evidence_kind_counts": [],
-        "reviewed_execution_evidence_rows_total": 0,
-        "reviewed_vote_items_total": 1,
-        "topic_id": "sanidad",
-        "topic_label": "Sanidad"
       },
       {
         "blockers": [
@@ -1738,6 +1665,77 @@
         "reviewed_vote_items_total": 2,
         "topic_id": "vivienda",
         "topic_label": "Vivienda"
+      },
+      {
+        "blockers": [
+          "citizen_direction_missing",
+          "responsible_actor_missing",
+          "execution_source_plan_missing",
+          "observed_outcome_missing",
+          "causal_link_missing",
+          "merit_blame_review_missing"
+        ],
+        "claim_status": "readiness_classifier_no_merit_or_blame_claim",
+        "classification": "program_with_primary_legal_signal_needs_review",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
+        "execution_queue_items_total": 0,
+        "issue_review_status": "",
+        "next_action": {
+          "action_id": "add_issue_direction_review",
+          "automation_command": "just etl-andalucia-2026-accountability-assist",
+          "blocker_id": "citizen_direction_missing",
+          "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+          "label": "Anadir direccion del issue",
+          "source_candidate_ids": []
+        },
+        "next_actions": [
+          {
+            "action_id": "add_issue_direction_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "citizen_direction_missing",
+            "description": "Completar seed de revision por issue con direccion ciudadana y limitaciones.",
+            "label": "Anadir direccion del issue",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_responsible_actor_review",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "responsible_actor_missing",
+            "description": "Enlazar grupos, cargos, organos y fuente primaria del actor responsable.",
+            "label": "Anadir actor responsable",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "add_execution_source_plan",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "execution_source_plan_missing",
+            "description": "Declarar fuentes oficiales y terminos de busqueda para dinero, entrega y outcomes.",
+            "label": "Crear plan de fuentes de ejecucion",
+            "source_candidate_ids": []
+          },
+          {
+            "action_id": "collect_observed_outcome_series",
+            "automation_command": "just etl-andalucia-2026-accountability-assist",
+            "blocker_id": "observed_outcome_missing",
+            "description": "Anadir serie oficial observada, no solo objetivo o prevision presupuestaria.",
+            "label": "Ingerir outcome observado",
+            "source_candidate_ids": []
+          }
+        ],
+        "observed_responsibility_claims_total": 5,
+        "post_change_outcome_rows_total": 0,
+        "primary_blocker": "citizen_direction_missing",
+        "primary_blocker_label": "Falta direccion ciudadana revisada.",
+        "program_measures_total": 20,
+        "public_merit_blame_eligible": false,
+        "reviewed_boja_legal_changes_total": 0,
+        "reviewed_execution_evidence_kind_counts": [],
+        "reviewed_execution_evidence_rows_total": 0,
+        "reviewed_vote_items_total": 1,
+        "topic_id": "sanidad",
+        "topic_label": "Sanidad"
       },
       {
         "blockers": [
@@ -1815,8 +1813,8 @@
         "key": "find_delivery_or_beneficiary_evidence"
       },
       {
-        "count": 2,
-        "key": "review_boja_legal_change"
+        "count": 3,
+        "key": "add_issue_direction_review"
       },
       {
         "count": 2,
@@ -1825,10 +1823,6 @@
       {
         "count": 1,
         "key": "add_execution_source_plan"
-      },
-      {
-        "count": 1,
-        "key": "add_issue_direction_review"
       }
     ],
     "open_limitations": [
@@ -1843,12 +1837,7 @@
         "label": "Falta voto parlamentario revisado."
       },
       {
-        "count": 2,
-        "key": "reviewed_boja_missing",
-        "label": "Falta cambio BOJA revisado."
-      },
-      {
-        "count": 1,
+        "count": 3,
         "key": "citizen_direction_missing",
         "label": "Falta direccion ciudadana revisada."
       },
@@ -121648,7 +121637,7 @@
       "source_url": "https://www.juntaelectoralcentral.es/cs/jec/documentos/andalucia_2026_candidaturas_proclamadas.pdf"
     }
   ],
-  "generated_at": "2026-05-17T10:36:11+00:00",
+  "generated_at": "2026-05-17T10:48:58+00:00",
   "issue_accountability_packets": {
     "claim_status": "issue_evidence_packet_only_no_merit_or_blame_claim",
     "interpretation_status": "cross_source_evidence_ready_for_review",
@@ -121792,7 +121781,6 @@
           }
         ],
         "open_gaps": [
-          "missing_reviewed_boja_legal_change",
           "missing_citizen_direction",
           "missing_responsible_actor",
           "missing_budget_execution",
@@ -121964,7 +121952,20 @@
         ],
         "reviewed_boja_legal_changes_total": 0,
         "reviewed_boja_samples": [],
+        "reviewed_vote_boja_expectation_status": "boja_not_expected_for_reviewed_vote_effects",
+        "reviewed_vote_boja_expected_total": 0,
+        "reviewed_vote_boja_not_expected_total": 5,
         "reviewed_vote_items_total": 5,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 3,
+            "key": "motion_resolution_vote_rejected"
+          },
+          {
+            "count": 2,
+            "key": "nonbinding_resolution_vote_rejected"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -122475,7 +122476,20 @@
             "source_url": "https://juntadeandalucia.es/eboja/2026/65/BOJA26-065-00093-4443-01_00335678.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_expected_for_approved_legal_effect",
+        "reviewed_vote_boja_expected_total": 1,
+        "reviewed_vote_boja_not_expected_total": 3,
         "reviewed_vote_items_total": 4,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 3,
+            "key": "law_final_approval_vote_rejected"
+          },
+          {
+            "count": 1,
+            "key": "law_final_approval_vote_passed"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -122945,7 +122959,16 @@
             "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00087-17435-01_00331032.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_expected_for_approved_legal_effect",
+        "reviewed_vote_boja_expected_total": 3,
+        "reviewed_vote_boja_not_expected_total": 0,
         "reviewed_vote_items_total": 3,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 3,
+            "key": "law_final_approval_vote_passed"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -123535,7 +123558,20 @@
             "source_url": "https://juntadeandalucia.es/eboja/2026/56/BOJA26-056-00001-3889-01_00335111.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_expected_for_approved_legal_effect",
+        "reviewed_vote_boja_expected_total": 1,
+        "reviewed_vote_boja_not_expected_total": 1,
         "reviewed_vote_items_total": 2,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 1,
+            "key": "decree_law_validation_vote_not_passed_or_derogation_supported"
+          },
+          {
+            "count": 1,
+            "key": "decree_law_validation_vote_passed"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -123882,7 +123918,16 @@
             "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00087-17435-01_00331032.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_not_expected_for_reviewed_vote_effects",
+        "reviewed_vote_boja_expected_total": 0,
+        "reviewed_vote_boja_not_expected_total": 2,
         "reviewed_vote_items_total": 2,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 2,
+            "key": "nonbinding_resolution_vote_rejected"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -124327,7 +124372,20 @@
             "source_url": "https://juntadeandalucia.es/eboja/2026/55/BOJA26-055-00151-3749-01_00334970.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_expected_for_approved_legal_effect",
+        "reviewed_vote_boja_expected_total": 1,
+        "reviewed_vote_boja_not_expected_total": 1,
         "reviewed_vote_items_total": 2,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 1,
+            "key": "law_final_approval_vote_passed"
+          },
+          {
+            "count": 1,
+            "key": "law_final_approval_vote_rejected"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -124772,7 +124830,16 @@
             "source_url": "https://juntadeandalucia.es/eboja/2026/45/BOJA26-045-00092-3059-01_00334281.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_expected_for_approved_legal_effect",
+        "reviewed_vote_boja_expected_total": 1,
+        "reviewed_vote_boja_not_expected_total": 0,
         "reviewed_vote_items_total": 1,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 1,
+            "key": "law_final_approval_vote_passed"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -124922,7 +124989,6 @@
           }
         ],
         "open_gaps": [
-          "missing_reviewed_boja_legal_change",
           "missing_citizen_direction",
           "missing_responsible_actor",
           "missing_budget_execution",
@@ -125094,7 +125160,16 @@
         ],
         "reviewed_boja_legal_changes_total": 0,
         "reviewed_boja_samples": [],
+        "reviewed_vote_boja_expectation_status": "boja_not_expected_for_reviewed_vote_effects",
+        "reviewed_vote_boja_expected_total": 0,
+        "reviewed_vote_boja_not_expected_total": 1,
         "reviewed_vote_items_total": 1,
+        "reviewed_vote_legal_effect_counts": [
+          {
+            "count": 1,
+            "key": "parliament_work_body_creation_vote_rejected"
+          }
+        ],
         "reviewed_vote_party_profiles_total": 5,
         "reviewed_vote_samples": [
           {
@@ -125309,7 +125384,11 @@
             "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00087-17435-01_00331032.pdf"
           }
         ],
+        "reviewed_vote_boja_expectation_status": "boja_expectation_not_assessed_without_reviewed_vote",
+        "reviewed_vote_boja_expected_total": 0,
+        "reviewed_vote_boja_not_expected_total": 0,
         "reviewed_vote_items_total": 0,
+        "reviewed_vote_legal_effect_counts": [],
         "reviewed_vote_party_profiles_total": 0,
         "reviewed_vote_samples": [],
         "status": "program_boja_reviewed",
@@ -125467,7 +125546,11 @@
         ],
         "reviewed_boja_legal_changes_total": 0,
         "reviewed_boja_samples": [],
+        "reviewed_vote_boja_expectation_status": "boja_expectation_not_assessed_without_reviewed_vote",
+        "reviewed_vote_boja_expected_total": 0,
+        "reviewed_vote_boja_not_expected_total": 0,
         "reviewed_vote_items_total": 0,
+        "reviewed_vote_legal_effect_counts": [],
         "reviewed_vote_party_profiles_total": 0,
         "reviewed_vote_samples": [],
         "status": "program_only",
