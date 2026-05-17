@@ -29,6 +29,9 @@
         "key": "responsibility_observed_execution_outcome_pending"
       }
     ],
+    "delivery_evidence_hunt_topics_total": 4,
+    "delivery_evidence_hunts_total": 16,
+    "delivery_evidence_search_targets_total": 40,
     "issues": [
       {
         "blockers": [
@@ -39,14 +42,233 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "delivery_evidence_hunts": [
+          {
+            "amount_eur": 3000000,
+            "contract_reference": "",
+            "evidence_kind": "grant_award",
+            "grant_beneficiary": "DIPUTACION DE CADIZ",
+            "hunt_id": "delivery-evidence-cultura-patrimonio-grant-award-junta-subvenciones-programas-prioritarios-junta-subvenciones-programas-prioritarios-json-fila-359-fom-y-prom-gestion-cultural",
+            "open_limitations": [
+              "grant_award_not_final_delivery",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "45E",
+            "reviewed_label": "FOM. Y PROM. GESTION CULTURAL",
+            "search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "DIPUTACION DE CADIZ SUBV EXCEPCIONAL A LA DIPUTACION DE CADIZ RESTAURACI\u00d3N EDIFICIO VALCARCEL FOM. Y PROM. GESTION CULTURAL",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-diputacion-de-cadiz-subv-excepcional-a-la-diputacion-de-cadiz-restauracion-edificio-valcarcel-fom-y-prom-gestion-cultural",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Buscar resolucion final, justificacion o reintegro publicado.",
+                "query": "DIPUTACION DE CADIZ SUBV EXCEPCIONAL A LA DIPUTACION DE CADIZ RESTAURACI\u00d3N EDIFICIO VALCARCEL justificacion subvencion",
+                "registry": "boja",
+                "target_id": "boja-grant-final-resolution-diputacion-de-cadiz-subv-excepcional-a-la-diputacion-de-cadiz-restauracion-edificio-valcarcel-justificacion-subvencion",
+                "target_kind": "grant_final_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=DIPUTACION+DE+CADIZ+SUBV+EXCEPCIONAL+A+LA+DIPUTACION+DE+CADIZ+RESTAURACI%C3%93N+EDIFICIO+VALCARCEL+justificacion+subvencion"
+              },
+              {
+                "purpose": "Buscar dataset complementario con beneficiario o finalidad mas granular.",
+                "query": "DIPUTACION DE CADIZ FOM. Y PROM. GESTION CULTURAL subvencion beneficiario",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-grant-open-data-detail-diputacion-de-cadiz-fom-y-prom-gestion-cultural-subvencion-beneficiario",
+                "target_kind": "grant_open_data_detail",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=DIPUTACION+DE+CADIZ+FOM.+Y+PROM.+GESTION+CULTURAL+subvencion+beneficiario"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_subvenciones_programas_prioritarios",
+            "source_kind": "official_grant_awards_open_data",
+            "source_locator": "junta_subvenciones_programas_prioritarios.json:fila 359",
+            "source_url": "https://datos.juntadeandalucia.es/api/v0/subventions/search",
+            "topic_id": "cultura_patrimonio",
+            "topic_label": "Cultura y patrimonio"
+          },
+          {
+            "amount_eur": 14760,
+            "contract_reference": "CONTR 2024 0001008630",
+            "evidence_kind": "contract_award",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-cultura-patrimonio-contract-award-junta-contratos-menores-2024-menores-2024-v1-20250420-json-fila-31655-contrato-menor-de-organizacion-del-archivo-de-proteccion-del-patrimonio-historico",
+            "open_limitations": [
+              "contract_award_not_final_delivery",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "Contrato menor de organizaci\u00f3n del archivo de Protecci\u00f3n del Patrimonio Hist\u00f3rico",
+            "search_targets": [
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2024 0001008630",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0001008630",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              },
+              {
+                "purpose": "Buscar recepcion, certificacion final o resolucion publicada.",
+                "query": "CONTR 2024 0001008630 acta recepcion certificacion final",
+                "registry": "boja",
+                "target_id": "boja-contract-final-delivery-contr-2024-0001008630-acta-recepcion-certificacion-final",
+                "target_kind": "contract_final_delivery",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CONTR+2024+0001008630+acta+recepcion+certificacion+final"
+              },
+              {
+                "purpose": "Buscar dataset o detalle adicional con adjudicatario, entrega o pago.",
+                "query": "Contrato menor de organizaci\u00f3n del archivo de Protecci\u00f3n del Patrimonio Hist\u00f3rico Consejer\u00eda de Turismo, Cultura y Deporte. Direcci\u00f3n General de Patrimonio Hist\u00f3rico (en transici\u00f3n) adjudica",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-contract-delivery-dataset-contrato-menor-de-organizacion-del-archivo-de-proteccion-del-patrimonio-historico-consejeria-de-turismo-cultura-y-deporte-direccion-general-de-patrimonio-historico-en-transicion-adjudica",
+                "target_kind": "contract_delivery_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=Contrato+menor+de+organizaci%C3%B3n+del+archivo+de+Protecci%C3%B3n+del+Patrimonio+Hist%C3%B3rico+Consejer%C3%ADa+de+Turismo%2C+Cultura+y+Deporte.+Direcci%C3%B3n+General+de+Patrimonio+Hist%C3%B3rico+%28en+transici%C3%B3n%29+adjudica"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_contratos_menores_2024",
+            "source_kind": "official_procurement_open_data",
+            "source_locator": "menores_2024_v1_20250420.json:fila 31655",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/cdf0e880-0a19-46cf-a09e-856328d85700/resource/56a49a80-5d11-4559-b028-483e2eefa68a/download/menores_2024_v1_20250420.json",
+            "topic_id": "cultura_patrimonio",
+            "topic_label": "Cultura y patrimonio"
+          },
+          {
+            "amount_eur": 6446,
+            "contract_reference": "CONTR 2024 0000952895",
+            "evidence_kind": "contract_award",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-cultura-patrimonio-contract-award-junta-contratos-menores-2024-menores-2024-v1-20250420-json-fila-41839-investigacion-y-ordenacion-de-archivo-y-biblioteca-en-el-museo-de-jaen",
+            "open_limitations": [
+              "contract_award_not_final_delivery",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "INVESTIGACION Y ORDENACION DE ARCHIVO Y BIBLIOTECA EN EL MUSEO DE JAEN",
+            "search_targets": [
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2024 0000952895",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0000952895",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              },
+              {
+                "purpose": "Buscar recepcion, certificacion final o resolucion publicada.",
+                "query": "CONTR 2024 0000952895 acta recepcion certificacion final",
+                "registry": "boja",
+                "target_id": "boja-contract-final-delivery-contr-2024-0000952895-acta-recepcion-certificacion-final",
+                "target_kind": "contract_final_delivery",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CONTR+2024+0000952895+acta+recepcion+certificacion+final"
+              },
+              {
+                "purpose": "Buscar dataset o detalle adicional con adjudicatario, entrega o pago.",
+                "query": "INVESTIGACION Y ORDENACION DE ARCHIVO Y BIBLIOTECA EN EL MUSEO DE JAEN Delegaci\u00f3n Territorial de Turismo, Cultura y Deporte en Ja\u00e9n adjudicatario recepcion",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-contract-delivery-dataset-investigacion-y-ordenacion-de-archivo-y-biblioteca-en-el-museo-de-jaen-delegacion-territorial-de-turismo-cultura-y-deporte-en-jaen-adjudicatario-recepcion",
+                "target_kind": "contract_delivery_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=INVESTIGACION+Y+ORDENACION+DE+ARCHIVO+Y+BIBLIOTECA+EN+EL+MUSEO+DE+JAEN+Delegaci%C3%B3n+Territorial+de+Turismo%2C+Cultura+y+Deporte+en+Ja%C3%A9n+adjudicatario+recepcion"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_contratos_menores_2024",
+            "source_kind": "official_procurement_open_data",
+            "source_locator": "menores_2024_v1_20250420.json:fila 41839",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/cdf0e880-0a19-46cf-a09e-856328d85700/resource/56a49a80-5d11-4559-b028-483e2eefa68a/download/menores_2024_v1_20250420.json",
+            "topic_id": "cultura_patrimonio",
+            "topic_label": "Cultura y patrimonio"
+          },
+          {
+            "amount_eur": 6000,
+            "contract_reference": "CONTR 2025 0000168035",
+            "evidence_kind": "contract_award",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-cultura-patrimonio-contract-award-junta-contratos-menores-2025-menores-2025-v1-20260122-json-fila-217-contrato-menor-de-proyecto-expositivo-sobre-conservacion-del-patrimonio-mueble",
+            "open_limitations": [
+              "contract_award_not_final_delivery",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "Contrato menor de proyecto expositivo sobre conservaci\u00f3n del patrimonio mueble",
+            "search_targets": [
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2025 0000168035",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2025-0000168035",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              },
+              {
+                "purpose": "Buscar recepcion, certificacion final o resolucion publicada.",
+                "query": "CONTR 2025 0000168035 acta recepcion certificacion final",
+                "registry": "boja",
+                "target_id": "boja-contract-final-delivery-contr-2025-0000168035-acta-recepcion-certificacion-final",
+                "target_kind": "contract_final_delivery",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CONTR+2025+0000168035+acta+recepcion+certificacion+final"
+              },
+              {
+                "purpose": "Buscar dataset o detalle adicional con adjudicatario, entrega o pago.",
+                "query": "Contrato menor de proyecto expositivo sobre conservaci\u00f3n del patrimonio mueble Instituto Andaluz del Patrimonio Hist\u00f3rico adjudicatario recepcion",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-contract-delivery-dataset-contrato-menor-de-proyecto-expositivo-sobre-conservacion-del-patrimonio-mueble-instituto-andaluz-del-patrimonio-historico-adjudicatario-recepcion",
+                "target_kind": "contract_delivery_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=Contrato+menor+de+proyecto+expositivo+sobre+conservaci%C3%B3n+del+patrimonio+mueble+Instituto+Andaluz+del+Patrimonio+Hist%C3%B3rico+adjudicatario+recepcion"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_contratos_menores_2025",
+            "source_kind": "official_procurement_open_data",
+            "source_locator": "menores_2025_v1_20260122.json:fila 217",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/00510697-b39d-4e19-b142-14565baafabd/resource/33d80321-3ffc-4b3c-8b27-5e073bab8419/download/menores_2025_v1_20260122.json",
+            "topic_id": "cultura_patrimonio",
+            "topic_label": "Cultura y patrimonio"
+          }
+        ],
+        "delivery_evidence_hunts_total": 4,
+        "delivery_evidence_search_targets_total": 12,
         "execution_queue_items_total": 2,
         "issue_review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_budget_and_contract_partial",
         "next_action": {
           "action_id": "find_delivery_or_beneficiary_evidence",
           "automation_command": "just etl-andalucia-2026-accountability-assist",
           "blocker_id": "delivery_or_beneficiary_missing",
+          "delivery_evidence_hunts_total": 4,
+          "delivery_evidence_search_targets_total": 12,
           "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
           "label": "Buscar entrega/beneficiario",
+          "sample_delivery_search_targets": [
+            {
+              "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+              "query": "DIPUTACION DE CADIZ SUBV EXCEPCIONAL A LA DIPUTACION DE CADIZ RESTAURACI\u00d3N EDIFICIO VALCARCEL FOM. Y PROM. GESTION CULTURAL",
+              "registry": "bdns",
+              "target_id": "bdns-grant-bdns-detail-diputacion-de-cadiz-subv-excepcional-a-la-diputacion-de-cadiz-restauracion-edificio-valcarcel-fom-y-prom-gestion-cultural",
+              "target_kind": "grant_bdns_detail",
+              "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+            },
+            {
+              "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+              "query": "CONTR 2024 0001008630",
+              "registry": "junta_procurement_registry",
+              "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0001008630",
+              "target_kind": "contract_exact_reference",
+              "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+            }
+          ],
           "source_candidate_ids": [
             "junta_presupuesto_2026_partidas_gastos",
             "junta_presupuesto_2026_objetivos_indicadores",
@@ -63,8 +285,28 @@
             "action_id": "find_delivery_or_beneficiary_evidence",
             "automation_command": "just etl-andalucia-2026-accountability-assist",
             "blocker_id": "delivery_or_beneficiary_missing",
+            "delivery_evidence_hunts_total": 4,
+            "delivery_evidence_search_targets_total": 12,
             "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
             "label": "Buscar entrega/beneficiario",
+            "sample_delivery_search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "DIPUTACION DE CADIZ SUBV EXCEPCIONAL A LA DIPUTACION DE CADIZ RESTAURACI\u00d3N EDIFICIO VALCARCEL FOM. Y PROM. GESTION CULTURAL",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-diputacion-de-cadiz-subv-excepcional-a-la-diputacion-de-cadiz-restauracion-edificio-valcarcel-fom-y-prom-gestion-cultural",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2024 0001008630",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0001008630",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              }
+            ],
             "source_candidate_ids": [
               "junta_presupuesto_2026_partidas_gastos",
               "junta_presupuesto_2026_objetivos_indicadores",
@@ -157,14 +399,233 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "delivery_evidence_hunts": [
+          {
+            "amount_eur": 100000,
+            "contract_reference": "",
+            "evidence_kind": "grant_award",
+            "grant_beneficiary": "EMPRESA METROPOLITANA DE ABASTECIMIENTO Y SANEAMIE",
+            "hunt_id": "delivery-evidence-campo-agua-grant-award-junta-subvenciones-programas-prioritarios-junta-subvenciones-programas-prioritarios-json-fila-407-digitalizacion-control-usos-del-agua-urbana",
+            "open_limitations": [
+              "grant_award_not_final_delivery",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "51D",
+            "reviewed_label": "DIGITALIZACI\u00d3N CONTROL USOS DEL AGUA URBANA",
+            "search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "EMPRESA METROPOLITANA DE ABASTECIMIENTO Y SANEAMIE ORDEN DE 10 DE MAYO DE 2024, Digitalizaci\u00f3n usos agua munic. - 20.000 hab DIGITALIZACI\u00d3N CONTROL USOS DEL AGUA URBANA",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-empresa-metropolitana-de-abastecimiento-y-saneamie-orden-de-10-de-mayo-de-2024-digitalizacion-usos-agua-munic-20-000-hab-digitalizacion-control-usos-del-agua-urbana",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Buscar resolucion final, justificacion o reintegro publicado.",
+                "query": "EMPRESA METROPOLITANA DE ABASTECIMIENTO Y SANEAMIE ORDEN DE 10 DE MAYO DE 2024, Digitalizaci\u00f3n usos agua munic. - 20.000 hab justificacion subvencion",
+                "registry": "boja",
+                "target_id": "boja-grant-final-resolution-empresa-metropolitana-de-abastecimiento-y-saneamie-orden-de-10-de-mayo-de-2024-digitalizacion-usos-agua-munic-20-000-hab-justificacion-subvencion",
+                "target_kind": "grant_final_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=EMPRESA+METROPOLITANA+DE+ABASTECIMIENTO+Y+SANEAMIE+ORDEN+DE+10+DE+MAYO+DE+2024%2C+Digitalizaci%C3%B3n+usos+agua+munic.+-+20.000+hab+justificacion+subvencion"
+              },
+              {
+                "purpose": "Buscar dataset complementario con beneficiario o finalidad mas granular.",
+                "query": "EMPRESA METROPOLITANA DE ABASTECIMIENTO Y SANEAMIE DIGITALIZACI\u00d3N CONTROL USOS DEL AGUA URBANA subvencion beneficiario",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-grant-open-data-detail-empresa-metropolitana-de-abastecimiento-y-saneamie-digitalizacion-control-usos-del-agua-urbana-subvencion-beneficiario",
+                "target_kind": "grant_open_data_detail",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=EMPRESA+METROPOLITANA+DE+ABASTECIMIENTO+Y+SANEAMIE+DIGITALIZACI%C3%93N+CONTROL+USOS+DEL+AGUA+URBANA+subvencion+beneficiario"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_subvenciones_programas_prioritarios",
+            "source_kind": "official_grant_awards_open_data",
+            "source_locator": "junta_subvenciones_programas_prioritarios.json:fila 407",
+            "source_url": "https://datos.juntadeandalucia.es/api/v0/subventions/search",
+            "topic_id": "campo_agua",
+            "topic_label": "Campo y agua"
+          },
+          {
+            "amount_eur": 37614,
+            "contract_reference": "CONTR 2024 0001075987",
+            "evidence_kind": "contract_award",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-campo-agua-contract-award-junta-contratos-menores-2024-menores-2024-v1-20250420-json-fila-100530-contrato-menor-de-mejora-del-tratamiento-de-aguas-residuales-en-refugio-ubeire",
+            "open_limitations": [
+              "contract_award_not_final_delivery",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "Contrato menor de mejora del tratamiento de aguas residuales en Refugio Ubeire",
+            "search_targets": [
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2024 0001075987",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0001075987",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              },
+              {
+                "purpose": "Buscar recepcion, certificacion final o resolucion publicada.",
+                "query": "CONTR 2024 0001075987 acta recepcion certificacion final",
+                "registry": "boja",
+                "target_id": "boja-contract-final-delivery-contr-2024-0001075987-acta-recepcion-certificacion-final",
+                "target_kind": "contract_final_delivery",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CONTR+2024+0001075987+acta+recepcion+certificacion+final"
+              },
+              {
+                "purpose": "Buscar dataset o detalle adicional con adjudicatario, entrega o pago.",
+                "query": "Contrato menor de mejora del tratamiento de aguas residuales en Refugio Ubeire Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul. Direcci\u00f3n General de Espacios Naturales Protegido",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-contract-delivery-dataset-contrato-menor-de-mejora-del-tratamiento-de-aguas-residuales-en-refugio-ubeire-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul-direccion-general-de-espacios-naturales-protegido",
+                "target_kind": "contract_delivery_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=Contrato+menor+de+mejora+del+tratamiento+de+aguas+residuales+en+Refugio+Ubeire+Consejer%C3%ADa+de+Sostenibilidad%2C+Medio+Ambiente+y+Econom%C3%ADa+Azul.+Direcci%C3%B3n+General+de+Espacios+Naturales+Protegido"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_contratos_menores_2024",
+            "source_kind": "official_procurement_open_data",
+            "source_locator": "menores_2024_v1_20250420.json:fila 100530",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/cdf0e880-0a19-46cf-a09e-856328d85700/resource/56a49a80-5d11-4559-b028-483e2eefa68a/download/menores_2024_v1_20250420.json",
+            "topic_id": "campo_agua",
+            "topic_label": "Campo y agua"
+          },
+          {
+            "amount_eur": 36449,
+            "contract_reference": "CONTR 2025 0000594840",
+            "evidence_kind": "contract_award",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-campo-agua-contract-award-junta-contratos-menores-2025-menores-2025-v1-20260122-json-fila-4441-contrato-menor-de-rehabilitacion-del-sistema-de-depuracion-de-aguas-en-hotel-humaina",
+            "open_limitations": [
+              "contract_award_not_final_delivery",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "Contrato menor de rehabilitaci\u00f3n del sistema de depuraci\u00f3n de aguas en Hotel Humaina",
+            "search_targets": [
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2025 0000594840",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2025-0000594840",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              },
+              {
+                "purpose": "Buscar recepcion, certificacion final o resolucion publicada.",
+                "query": "CONTR 2025 0000594840 acta recepcion certificacion final",
+                "registry": "boja",
+                "target_id": "boja-contract-final-delivery-contr-2025-0000594840-acta-recepcion-certificacion-final",
+                "target_kind": "contract_final_delivery",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CONTR+2025+0000594840+acta+recepcion+certificacion+final"
+              },
+              {
+                "purpose": "Buscar dataset o detalle adicional con adjudicatario, entrega o pago.",
+                "query": "Contrato menor de rehabilitaci\u00f3n del sistema de depuraci\u00f3n de aguas en Hotel Humaina Agencia de Medio Ambiente y Agua de Andaluc\u00eda adjudicatario recepcion",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-contract-delivery-dataset-contrato-menor-de-rehabilitacion-del-sistema-de-depuracion-de-aguas-en-hotel-humaina-agencia-de-medio-ambiente-y-agua-de-andalucia-adjudicatario-recepcion",
+                "target_kind": "contract_delivery_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=Contrato+menor+de+rehabilitaci%C3%B3n+del+sistema+de+depuraci%C3%B3n+de+aguas+en+Hotel+Humaina+Agencia+de+Medio+Ambiente+y+Agua+de+Andaluc%C3%ADa+adjudicatario+recepcion"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_contratos_menores_2025",
+            "source_kind": "official_procurement_open_data",
+            "source_locator": "menores_2025_v1_20260122.json:fila 4441",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/00510697-b39d-4e19-b142-14565baafabd/resource/33d80321-3ffc-4b3c-8b27-5e073bab8419/download/menores_2025_v1_20260122.json",
+            "topic_id": "campo_agua",
+            "topic_label": "Campo y agua"
+          },
+          {
+            "amount_eur": 802,
+            "contract_reference": "CONTR 2024 0000523888",
+            "evidence_kind": "contract_award",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-campo-agua-contract-award-junta-contratos-menores-2024-menores-2024-v1-20250420-json-fila-27690-iofp-servicio-para-el-mantenimiento-de-areas-y-lineas-cortafuegos-mediante-ganado-en-montes-publicos-gestionados-por-la-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul-en-el-monte-explotacion-forestal-de-montecorto-y-zona-montecorto-lote16-tm",
+            "open_limitations": [
+              "contract_award_not_final_delivery",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "IOFP-Servicio para el mantenimiento de \u00e1reas y l\u00edneas cortafuegos mediante ganado en montes p\u00fablicos gestionados por la Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul en el monte Explotaci\u00f3n Forestal de Montecorto y zona Montecorto_lote16.TM",
+            "search_targets": [
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2024 0000523888",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0000523888",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              },
+              {
+                "purpose": "Buscar recepcion, certificacion final o resolucion publicada.",
+                "query": "CONTR 2024 0000523888 acta recepcion certificacion final",
+                "registry": "boja",
+                "target_id": "boja-contract-final-delivery-contr-2024-0000523888-acta-recepcion-certificacion-final",
+                "target_kind": "contract_final_delivery",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CONTR+2024+0000523888+acta+recepcion+certificacion+final"
+              },
+              {
+                "purpose": "Buscar dataset o detalle adicional con adjudicatario, entrega o pago.",
+                "query": "IOFP-Servicio para el mantenimiento de \u00e1reas y l\u00edneas cortafuegos mediante ganado en montes p\u00fablicos gestionados por la Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul en el mon",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-contract-delivery-dataset-iofp-servicio-para-el-mantenimiento-de-areas-y-lineas-cortafuegos-mediante-ganado-en-montes-publicos-gestionados-por-la-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul-en-el-mon",
+                "target_kind": "contract_delivery_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=IOFP-Servicio+para+el+mantenimiento+de+%C3%A1reas+y+l%C3%ADneas+cortafuegos+mediante+ganado+en+montes+p%C3%BAblicos+gestionados+por+la+Consejer%C3%ADa+de+Sostenibilidad%2C+Medio+Ambiente+y+Econom%C3%ADa+Azul+en+el+mon"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_contratos_menores_2024",
+            "source_kind": "official_procurement_open_data",
+            "source_locator": "menores_2024_v1_20250420.json:fila 27690",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/cdf0e880-0a19-46cf-a09e-856328d85700/resource/56a49a80-5d11-4559-b028-483e2eefa68a/download/menores_2024_v1_20250420.json",
+            "topic_id": "campo_agua",
+            "topic_label": "Campo y agua"
+          }
+        ],
+        "delivery_evidence_hunts_total": 4,
+        "delivery_evidence_search_targets_total": 12,
         "execution_queue_items_total": 2,
         "issue_review_status": "reviewed_issue_direction_actor_execution_owner_budget_and_contract_partial",
         "next_action": {
           "action_id": "find_delivery_or_beneficiary_evidence",
           "automation_command": "just etl-andalucia-2026-accountability-assist",
           "blocker_id": "delivery_or_beneficiary_missing",
+          "delivery_evidence_hunts_total": 4,
+          "delivery_evidence_search_targets_total": 12,
           "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
           "label": "Buscar entrega/beneficiario",
+          "sample_delivery_search_targets": [
+            {
+              "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+              "query": "EMPRESA METROPOLITANA DE ABASTECIMIENTO Y SANEAMIE ORDEN DE 10 DE MAYO DE 2024, Digitalizaci\u00f3n usos agua munic. - 20.000 hab DIGITALIZACI\u00d3N CONTROL USOS DEL AGUA URBANA",
+              "registry": "bdns",
+              "target_id": "bdns-grant-bdns-detail-empresa-metropolitana-de-abastecimiento-y-saneamie-orden-de-10-de-mayo-de-2024-digitalizacion-usos-agua-munic-20-000-hab-digitalizacion-control-usos-del-agua-urbana",
+              "target_kind": "grant_bdns_detail",
+              "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+            },
+            {
+              "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+              "query": "CONTR 2024 0001075987",
+              "registry": "junta_procurement_registry",
+              "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0001075987",
+              "target_kind": "contract_exact_reference",
+              "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+            }
+          ],
           "source_candidate_ids": [
             "junta_presupuesto_2026_partidas_gastos",
             "junta_presupuesto_2026_objetivos_indicadores",
@@ -181,8 +642,28 @@
             "action_id": "find_delivery_or_beneficiary_evidence",
             "automation_command": "just etl-andalucia-2026-accountability-assist",
             "blocker_id": "delivery_or_beneficiary_missing",
+            "delivery_evidence_hunts_total": 4,
+            "delivery_evidence_search_targets_total": 12,
             "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
             "label": "Buscar entrega/beneficiario",
+            "sample_delivery_search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "EMPRESA METROPOLITANA DE ABASTECIMIENTO Y SANEAMIE ORDEN DE 10 DE MAYO DE 2024, Digitalizaci\u00f3n usos agua munic. - 20.000 hab DIGITALIZACI\u00d3N CONTROL USOS DEL AGUA URBANA",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-empresa-metropolitana-de-abastecimiento-y-saneamie-orden-de-10-de-mayo-de-2024-digitalizacion-usos-agua-munic-20-000-hab-digitalizacion-control-usos-del-agua-urbana",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Abrir registro de contratacion para localizar expediente, adjudicatario, formalizacion o recepcion.",
+                "query": "CONTR 2024 0001075987",
+                "registry": "junta_procurement_registry",
+                "target_id": "junta-procurement-registry-contract-exact-reference-contr-2024-0001075987",
+                "target_kind": "contract_exact_reference",
+                "url": "https://www.juntadeandalucia.es/temas/contratacion-publica/perfiles-licitaciones.html"
+              }
+            ],
             "source_candidate_ids": [
               "junta_presupuesto_2026_partidas_gastos",
               "junta_presupuesto_2026_objetivos_indicadores",
@@ -275,14 +756,201 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "delivery_evidence_hunts": [
+          {
+            "amount_eur": 26113,
+            "contract_reference": "",
+            "evidence_kind": "grant_award",
+            "grant_beneficiary": "AYUNTAMIENTO DE MOTRIL",
+            "hunt_id": "delivery-evidence-energia-clima-grant-award-junta-subvenciones-programas-prioritarios-junta-subvenciones-programas-prioritarios-json-fila-241-actuaciones-innovadoras-proyectos-cambio-climatico",
+            "open_limitations": [
+              "grant_award_not_final_delivery",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "44F",
+            "reviewed_label": "ACTUACIONES INNOVADORAS / PROYECTOS CAMBIO CLIM\u00c1TICO",
+            "search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "AYUNTAMIENTO DE MOTRIL ORDEN DE 19 DE JUNIO de 2023,PIMA cambio clim\u00e1tico munic.50000 a 100000 hab ACTUACIONES INNOVADORAS / PROYECTOS CAMBIO CLIM\u00c1TICO",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-ayuntamiento-de-motril-orden-de-19-de-junio-de-2023-pima-cambio-climatico-munic-50000-a-100000-hab-actuaciones-innovadoras-proyectos-cambio-climatico",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Buscar resolucion final, justificacion o reintegro publicado.",
+                "query": "AYUNTAMIENTO DE MOTRIL ORDEN DE 19 DE JUNIO de 2023,PIMA cambio clim\u00e1tico munic.50000 a 100000 hab justificacion subvencion",
+                "registry": "boja",
+                "target_id": "boja-grant-final-resolution-ayuntamiento-de-motril-orden-de-19-de-junio-de-2023-pima-cambio-climatico-munic-50000-a-100000-hab-justificacion-subvencion",
+                "target_kind": "grant_final_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=AYUNTAMIENTO+DE+MOTRIL+ORDEN+DE+19+DE+JUNIO+de+2023%2CPIMA+cambio+clim%C3%A1tico+munic.50000+a+100000+hab+justificacion+subvencion"
+              },
+              {
+                "purpose": "Buscar dataset complementario con beneficiario o finalidad mas granular.",
+                "query": "AYUNTAMIENTO DE MOTRIL ACTUACIONES INNOVADORAS / PROYECTOS CAMBIO CLIM\u00c1TICO subvencion beneficiario",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-grant-open-data-detail-ayuntamiento-de-motril-actuaciones-innovadoras-proyectos-cambio-climatico-subvencion-beneficiario",
+                "target_kind": "grant_open_data_detail",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=AYUNTAMIENTO+DE+MOTRIL+ACTUACIONES+INNOVADORAS+%2F+PROYECTOS+CAMBIO+CLIM%C3%81TICO+subvencion+beneficiario"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_subvenciones_programas_prioritarios",
+            "source_kind": "official_grant_awards_open_data",
+            "source_locator": "junta_subvenciones_programas_prioritarios.json:fila 241",
+            "source_url": "https://datos.juntadeandalucia.es/api/v0/subventions/search",
+            "topic_id": "energia_clima",
+            "topic_label": "Energia y clima"
+          },
+          {
+            "amount_eur": 5043448,
+            "contract_reference": "",
+            "evidence_kind": "treasury_payment_aggregate",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-energia-clima-treasury-payment-aggregate-junta-tesoreria-2025-pagos-agregados-tesoreria-2025-movimientos-7z-2025t4-pagos-4-csv-fila-15-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul",
+            "open_limitations": [
+              "treasury_payment_aggregate_not_beneficiary_level",
+              "final_delivery_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul",
+            "search_targets": [
+              {
+                "purpose": "Buscar pagos desagregados o dataset con tercero/beneficiario.",
+                "query": "1. Nomina 1.1. Consejer\u00edas Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul beneficiarios pagos tesoreria",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-treasury-beneficiary-breakdown-1-nomina-1-1-consejerias-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul-beneficiarios-pagos-tesoreria",
+                "target_kind": "treasury_beneficiary_breakdown",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=1.+Nomina+1.1.+Consejer%C3%ADas+Consejer%C3%ADa+de+Sostenibilidad%2C+Medio+Ambiente+y+Econom%C3%ADa+Azul+beneficiarios+pagos+tesoreria"
+              }
+            ],
+            "search_targets_total": 1,
+            "source_id": "junta_tesoreria_2025_pagos_agregados",
+            "source_kind": "official_treasury_payment_aggregate_open_data",
+            "source_locator": "tesoreria_2025_movimientos.7z:2025T4_PAGOS_4.CSV:fila 15",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/58adcfb6-e01f-446a-9122-9f07e11c978a/resource/5610d3b1-4fc8-47f5-8243-7370f0202886/download/transparencia-presidencia-2025t4.7z",
+            "topic_id": "energia_clima",
+            "topic_label": "Energia y clima"
+          },
+          {
+            "amount_eur": 4266816,
+            "contract_reference": "",
+            "evidence_kind": "budget_plan",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-energia-clima-budget-plan-junta-presupuesto-2026-partidas-gastos-partidas-de-gastos-xlsx-fila-11094-mejora-de-calidad-del-aire-y-reduccion-del-ruido",
+            "open_limitations": [
+              "budget_plan_not_execution",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "44B",
+            "reviewed_label": "Mejora de calidad del aire y reduccion del ruido",
+            "search_targets": [
+              {
+                "purpose": "Buscar ejecucion presupuestaria o fuente secundaria oficial vinculable a la partida.",
+                "query": "44B Mejora de calidad del aire y reduccion del ruido ejecucion pagos contratos subvenciones",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-budget-execution-dataset-44b-mejora-de-calidad-del-aire-y-reduccion-del-ruido-ejecucion-pagos-contratos-subvenciones",
+                "target_kind": "budget_execution_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=44B+Mejora+de+calidad+del+aire+y+reduccion+del+ruido+ejecucion+pagos+contratos+subvenciones"
+              },
+              {
+                "purpose": "Buscar resolucion BOJA que convierta la partida en acto ejecutado.",
+                "query": "44B Mejora de calidad del aire y reduccion del ruido beneficiarios resolucion",
+                "registry": "boja",
+                "target_id": "boja-budget-resolution-44b-mejora-de-calidad-del-aire-y-reduccion-del-ruido-beneficiarios-resolucion",
+                "target_kind": "budget_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=44B+Mejora+de+calidad+del+aire+y+reduccion+del+ruido+beneficiarios+resolucion"
+              }
+            ],
+            "search_targets_total": 2,
+            "source_id": "junta_presupuesto_2026_partidas_gastos",
+            "source_kind": "official_budget_open_data",
+            "source_locator": "partidas-de-gastos.xlsx:fila 11094",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx",
+            "topic_id": "energia_clima",
+            "topic_label": "Energia y clima"
+          },
+          {
+            "amount_eur": 1295724,
+            "contract_reference": "",
+            "evidence_kind": "budget_plan",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-energia-clima-budget-plan-junta-presupuesto-2026-partidas-gastos-partidas-de-gastos-xlsx-fila-10659-cambio-climatico-y-calidad-del-aire",
+            "open_limitations": [
+              "budget_plan_not_execution",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "44B",
+            "reviewed_label": "Cambio climatico y calidad del aire",
+            "search_targets": [
+              {
+                "purpose": "Buscar ejecucion presupuestaria o fuente secundaria oficial vinculable a la partida.",
+                "query": "44B Cambio climatico y calidad del aire ejecucion pagos contratos subvenciones",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-budget-execution-dataset-44b-cambio-climatico-y-calidad-del-aire-ejecucion-pagos-contratos-subvenciones",
+                "target_kind": "budget_execution_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=44B+Cambio+climatico+y+calidad+del+aire+ejecucion+pagos+contratos+subvenciones"
+              },
+              {
+                "purpose": "Buscar resolucion BOJA que convierta la partida en acto ejecutado.",
+                "query": "44B Cambio climatico y calidad del aire beneficiarios resolucion",
+                "registry": "boja",
+                "target_id": "boja-budget-resolution-44b-cambio-climatico-y-calidad-del-aire-beneficiarios-resolucion",
+                "target_kind": "budget_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=44B+Cambio+climatico+y+calidad+del+aire+beneficiarios+resolucion"
+              }
+            ],
+            "search_targets_total": 2,
+            "source_id": "junta_presupuesto_2026_partidas_gastos",
+            "source_kind": "official_budget_open_data",
+            "source_locator": "partidas-de-gastos.xlsx:fila 10659",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx",
+            "topic_id": "energia_clima",
+            "topic_label": "Energia y clima"
+          }
+        ],
+        "delivery_evidence_hunts_total": 4,
+        "delivery_evidence_search_targets_total": 8,
         "execution_queue_items_total": 2,
         "issue_review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_and_budget_allocation_partial",
         "next_action": {
           "action_id": "find_delivery_or_beneficiary_evidence",
           "automation_command": "just etl-andalucia-2026-accountability-assist",
           "blocker_id": "delivery_or_beneficiary_missing",
+          "delivery_evidence_hunts_total": 4,
+          "delivery_evidence_search_targets_total": 8,
           "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
           "label": "Buscar entrega/beneficiario",
+          "sample_delivery_search_targets": [
+            {
+              "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+              "query": "AYUNTAMIENTO DE MOTRIL ORDEN DE 19 DE JUNIO de 2023,PIMA cambio clim\u00e1tico munic.50000 a 100000 hab ACTUACIONES INNOVADORAS / PROYECTOS CAMBIO CLIM\u00c1TICO",
+              "registry": "bdns",
+              "target_id": "bdns-grant-bdns-detail-ayuntamiento-de-motril-orden-de-19-de-junio-de-2023-pima-cambio-climatico-munic-50000-a-100000-hab-actuaciones-innovadoras-proyectos-cambio-climatico",
+              "target_kind": "grant_bdns_detail",
+              "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+            },
+            {
+              "purpose": "Buscar pagos desagregados o dataset con tercero/beneficiario.",
+              "query": "1. Nomina 1.1. Consejer\u00edas Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul beneficiarios pagos tesoreria",
+              "registry": "junta_open_data",
+              "target_id": "junta-open-data-treasury-beneficiary-breakdown-1-nomina-1-1-consejerias-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul-beneficiarios-pagos-tesoreria",
+              "target_kind": "treasury_beneficiary_breakdown",
+              "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=1.+Nomina+1.1.+Consejer%C3%ADas+Consejer%C3%ADa+de+Sostenibilidad%2C+Medio+Ambiente+y+Econom%C3%ADa+Azul+beneficiarios+pagos+tesoreria"
+            }
+          ],
           "source_candidate_ids": [
             "junta_presupuesto_2026_partidas_gastos",
             "junta_presupuesto_2026_objetivos_indicadores",
@@ -298,8 +966,28 @@
             "action_id": "find_delivery_or_beneficiary_evidence",
             "automation_command": "just etl-andalucia-2026-accountability-assist",
             "blocker_id": "delivery_or_beneficiary_missing",
+            "delivery_evidence_hunts_total": 4,
+            "delivery_evidence_search_targets_total": 8,
             "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
             "label": "Buscar entrega/beneficiario",
+            "sample_delivery_search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "AYUNTAMIENTO DE MOTRIL ORDEN DE 19 DE JUNIO de 2023,PIMA cambio clim\u00e1tico munic.50000 a 100000 hab ACTUACIONES INNOVADORAS / PROYECTOS CAMBIO CLIM\u00c1TICO",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-ayuntamiento-de-motril-orden-de-19-de-junio-de-2023-pima-cambio-climatico-munic-50000-a-100000-hab-actuaciones-innovadoras-proyectos-cambio-climatico",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Buscar pagos desagregados o dataset con tercero/beneficiario.",
+                "query": "1. Nomina 1.1. Consejer\u00edas Consejer\u00eda de Sostenibilidad, Medio Ambiente y Econom\u00eda Azul beneficiarios pagos tesoreria",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-treasury-beneficiary-breakdown-1-nomina-1-1-consejerias-consejeria-de-sostenibilidad-medio-ambiente-y-economia-azul-beneficiarios-pagos-tesoreria",
+                "target_kind": "treasury_beneficiary_breakdown",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=1.+Nomina+1.1.+Consejer%C3%ADas+Consejer%C3%ADa+de+Sostenibilidad%2C+Medio+Ambiente+y+Econom%C3%ADa+Azul+beneficiarios+pagos+tesoreria"
+              }
+            ],
             "source_candidate_ids": [
               "junta_presupuesto_2026_partidas_gastos",
               "junta_presupuesto_2026_objetivos_indicadores",
@@ -386,14 +1074,201 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "responsibility_execution_and_baseline_reviewed_no_post_change_causality",
+        "delivery_evidence_hunts": [
+          {
+            "amount_eur": 196124,
+            "contract_reference": "",
+            "evidence_kind": "grant_award",
+            "grant_beneficiary": "CENTRO ASOCIADO DE LA UNIVERSIDAD NACION AL DE EDU",
+            "hunt_id": "delivery-evidence-educacion-grant-award-junta-subvenciones-programas-prioritarios-junta-subvenciones-programas-prioritarios-json-fila-1-ensenanzas-universitarias",
+            "open_limitations": [
+              "grant_award_not_final_delivery",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "42J",
+            "reviewed_label": "ENSE\u00d1ANZAS UNIVERSITARIAS",
+            "search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "CENTRO ASOCIADO DE LA UNIVERSIDAD NACION AL DE EDU SUBVENCION NOMINATIVA 2025 Centro UNED C\u00e1diz ENSE\u00d1ANZAS UNIVERSITARIAS",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-centro-asociado-de-la-universidad-nacion-al-de-edu-subvencion-nominativa-2025-centro-uned-cadiz-ensenanzas-universitarias",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Buscar resolucion final, justificacion o reintegro publicado.",
+                "query": "CENTRO ASOCIADO DE LA UNIVERSIDAD NACION AL DE EDU SUBVENCION NOMINATIVA 2025 Centro UNED C\u00e1diz justificacion subvencion",
+                "registry": "boja",
+                "target_id": "boja-grant-final-resolution-centro-asociado-de-la-universidad-nacion-al-de-edu-subvencion-nominativa-2025-centro-uned-cadiz-justificacion-subvencion",
+                "target_kind": "grant_final_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=CENTRO+ASOCIADO+DE+LA+UNIVERSIDAD+NACION+AL+DE+EDU+SUBVENCION+NOMINATIVA+2025+Centro+UNED+C%C3%A1diz+justificacion+subvencion"
+              },
+              {
+                "purpose": "Buscar dataset complementario con beneficiario o finalidad mas granular.",
+                "query": "CENTRO ASOCIADO DE LA UNIVERSIDAD NACION AL DE EDU ENSE\u00d1ANZAS UNIVERSITARIAS subvencion beneficiario",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-grant-open-data-detail-centro-asociado-de-la-universidad-nacion-al-de-edu-ensenanzas-universitarias-subvencion-beneficiario",
+                "target_kind": "grant_open_data_detail",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=CENTRO+ASOCIADO+DE+LA+UNIVERSIDAD+NACION+AL+DE+EDU+ENSE%C3%91ANZAS+UNIVERSITARIAS+subvencion+beneficiario"
+              }
+            ],
+            "search_targets_total": 3,
+            "source_id": "junta_subvenciones_programas_prioritarios",
+            "source_kind": "official_grant_awards_open_data",
+            "source_locator": "junta_subvenciones_programas_prioritarios.json:fila 1",
+            "source_url": "https://datos.juntadeandalucia.es/api/v0/subventions/search",
+            "topic_id": "educacion",
+            "topic_label": "Educacion"
+          },
+          {
+            "amount_eur": 24171067,
+            "contract_reference": "",
+            "evidence_kind": "treasury_payment_aggregate",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-educacion-treasury-payment-aggregate-junta-tesoreria-2025-pagos-agregados-tesoreria-2025-movimientos-7z-2025t4-pagos-4-csv-fila-8-consejeria-de-desarrollo-educativo-y-formacion-profesional",
+            "open_limitations": [
+              "treasury_payment_aggregate_not_beneficiary_level",
+              "final_delivery_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "",
+            "reviewed_label": "Consejer\u00eda de Desarrollo Educativo y Formaci\u00f3n Profesional",
+            "search_targets": [
+              {
+                "purpose": "Buscar pagos desagregados o dataset con tercero/beneficiario.",
+                "query": "1. Nomina 1.1. Consejer\u00edas Consejer\u00eda de Desarrollo Educativo y Formaci\u00f3n Profesional beneficiarios pagos tesoreria",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-treasury-beneficiary-breakdown-1-nomina-1-1-consejerias-consejeria-de-desarrollo-educativo-y-formacion-profesional-beneficiarios-pagos-tesoreria",
+                "target_kind": "treasury_beneficiary_breakdown",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=1.+Nomina+1.1.+Consejer%C3%ADas+Consejer%C3%ADa+de+Desarrollo+Educativo+y+Formaci%C3%B3n+Profesional+beneficiarios+pagos+tesoreria"
+              }
+            ],
+            "search_targets_total": 1,
+            "source_id": "junta_tesoreria_2025_pagos_agregados",
+            "source_kind": "official_treasury_payment_aggregate_open_data",
+            "source_locator": "tesoreria_2025_movimientos.7z:2025T4_PAGOS_4.CSV:fila 8",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/58adcfb6-e01f-446a-9122-9f07e11c978a/resource/5610d3b1-4fc8-47f5-8243-7370f0202886/download/transparencia-presidencia-2025t4.7z",
+            "topic_id": "educacion",
+            "topic_label": "Educacion"
+          },
+          {
+            "amount_eur": 191560745,
+            "contract_reference": "",
+            "evidence_kind": "budget_plan",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-educacion-budget-plan-junta-presupuesto-2026-partidas-gastos-partidas-de-gastos-xlsx-fila-6805-ajustes-de-financiacion-de-universidades-publicas-andaluzas",
+            "open_limitations": [
+              "budget_plan_not_execution",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "42J",
+            "reviewed_label": "Ajustes de financiacion de universidades publicas andaluzas",
+            "search_targets": [
+              {
+                "purpose": "Buscar ejecucion presupuestaria o fuente secundaria oficial vinculable a la partida.",
+                "query": "42J Ajustes de financiacion de universidades publicas andaluzas ejecucion pagos contratos subvenciones",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-budget-execution-dataset-42j-ajustes-de-financiacion-de-universidades-publicas-andaluzas-ejecucion-pagos-contratos-subvenciones",
+                "target_kind": "budget_execution_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=42J+Ajustes+de+financiacion+de+universidades+publicas+andaluzas+ejecucion+pagos+contratos+subvenciones"
+              },
+              {
+                "purpose": "Buscar resolucion BOJA que convierta la partida en acto ejecutado.",
+                "query": "42J Ajustes de financiacion de universidades publicas andaluzas beneficiarios resolucion",
+                "registry": "boja",
+                "target_id": "boja-budget-resolution-42j-ajustes-de-financiacion-de-universidades-publicas-andaluzas-beneficiarios-resolucion",
+                "target_kind": "budget_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=42J+Ajustes+de+financiacion+de+universidades+publicas+andaluzas+beneficiarios+resolucion"
+              }
+            ],
+            "search_targets_total": 2,
+            "source_id": "junta_presupuesto_2026_partidas_gastos",
+            "source_kind": "official_budget_open_data",
+            "source_locator": "partidas-de-gastos.xlsx:fila 6805",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx",
+            "topic_id": "educacion",
+            "topic_label": "Educacion"
+          },
+          {
+            "amount_eur": 31850969,
+            "contract_reference": "",
+            "evidence_kind": "budget_plan",
+            "grant_beneficiary": "",
+            "hunt_id": "delivery-evidence-educacion-budget-plan-junta-presupuesto-2026-partidas-gastos-partidas-de-gastos-xlsx-fila-6815-financiacion-universidades-publicas-andaluzas-universidad-de-granada",
+            "open_limitations": [
+              "budget_plan_not_execution",
+              "beneficiaries_not_linked",
+              "observed_outcome_not_linked",
+              "causal_impact_not_claimed",
+              "merit_blame_not_scored"
+            ],
+            "program_code": "42J",
+            "reviewed_label": "FINANCIACI\u00d3N UNIVERSIDADES P\u00daBLICAS ANDALUZAS. UNIVERSIDAD DE GRANADA",
+            "search_targets": [
+              {
+                "purpose": "Buscar ejecucion presupuestaria o fuente secundaria oficial vinculable a la partida.",
+                "query": "42J FINANCIACI\u00d3N UNIVERSIDADES P\u00daBLICAS ANDALUZAS. UNIVERSIDAD DE GRANADA ejecucion pagos contratos subvenciones",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-budget-execution-dataset-42j-financiacion-universidades-publicas-andaluzas-universidad-de-granada-ejecucion-pagos-contratos-subvenciones",
+                "target_kind": "budget_execution_dataset",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=42J+FINANCIACI%C3%93N+UNIVERSIDADES+P%C3%9ABLICAS+ANDALUZAS.+UNIVERSIDAD+DE+GRANADA+ejecucion+pagos+contratos+subvenciones"
+              },
+              {
+                "purpose": "Buscar resolucion BOJA que convierta la partida en acto ejecutado.",
+                "query": "42J FINANCIACI\u00d3N UNIVERSIDADES P\u00daBLICAS ANDALUZAS. UNIVERSIDAD DE GRANADA beneficiarios resolucion",
+                "registry": "boja",
+                "target_id": "boja-budget-resolution-42j-financiacion-universidades-publicas-andaluzas-universidad-de-granada-beneficiarios-resolucion",
+                "target_kind": "budget_resolution",
+                "url": "https://www.juntadeandalucia.es/eboja/buscador/index.html?texto=42J+FINANCIACI%C3%93N+UNIVERSIDADES+P%C3%9ABLICAS+ANDALUZAS.+UNIVERSIDAD+DE+GRANADA+beneficiarios+resolucion"
+              }
+            ],
+            "search_targets_total": 2,
+            "source_id": "junta_presupuesto_2026_partidas_gastos",
+            "source_kind": "official_budget_open_data",
+            "source_locator": "partidas-de-gastos.xlsx:fila 6815",
+            "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx",
+            "topic_id": "educacion",
+            "topic_label": "Educacion"
+          }
+        ],
+        "delivery_evidence_hunts_total": 4,
+        "delivery_evidence_search_targets_total": 8,
         "execution_queue_items_total": 2,
         "issue_review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_and_budget_allocation_partial",
         "next_action": {
           "action_id": "find_delivery_or_beneficiary_evidence",
           "automation_command": "just etl-andalucia-2026-accountability-assist",
           "blocker_id": "delivery_or_beneficiary_missing",
+          "delivery_evidence_hunts_total": 4,
+          "delivery_evidence_search_targets_total": 8,
           "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
           "label": "Buscar entrega/beneficiario",
+          "sample_delivery_search_targets": [
+            {
+              "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+              "query": "CENTRO ASOCIADO DE LA UNIVERSIDAD NACION AL DE EDU SUBVENCION NOMINATIVA 2025 Centro UNED C\u00e1diz ENSE\u00d1ANZAS UNIVERSITARIAS",
+              "registry": "bdns",
+              "target_id": "bdns-grant-bdns-detail-centro-asociado-de-la-universidad-nacion-al-de-edu-subvencion-nominativa-2025-centro-uned-cadiz-ensenanzas-universitarias",
+              "target_kind": "grant_bdns_detail",
+              "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+            },
+            {
+              "purpose": "Buscar pagos desagregados o dataset con tercero/beneficiario.",
+              "query": "1. Nomina 1.1. Consejer\u00edas Consejer\u00eda de Desarrollo Educativo y Formaci\u00f3n Profesional beneficiarios pagos tesoreria",
+              "registry": "junta_open_data",
+              "target_id": "junta-open-data-treasury-beneficiary-breakdown-1-nomina-1-1-consejerias-consejeria-de-desarrollo-educativo-y-formacion-profesional-beneficiarios-pagos-tesoreria",
+              "target_kind": "treasury_beneficiary_breakdown",
+              "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=1.+Nomina+1.1.+Consejer%C3%ADas+Consejer%C3%ADa+de+Desarrollo+Educativo+y+Formaci%C3%B3n+Profesional+beneficiarios+pagos+tesoreria"
+            }
+          ],
           "source_candidate_ids": [
             "junta_presupuesto_2026_partidas_gastos",
             "junta_presupuesto_2026_objetivos_indicadores",
@@ -408,8 +1283,28 @@
             "action_id": "find_delivery_or_beneficiary_evidence",
             "automation_command": "just etl-andalucia-2026-accountability-assist",
             "blocker_id": "delivery_or_beneficiary_missing",
+            "delivery_evidence_hunts_total": 4,
+            "delivery_evidence_search_targets_total": 8,
             "description": "Localizar resoluciones finales, actas, pagos desagregados o entregables verificables.",
             "label": "Buscar entrega/beneficiario",
+            "sample_delivery_search_targets": [
+              {
+                "purpose": "Buscar convocatoria/concesion para documentar beneficiario, importe, justificacion y estado.",
+                "query": "CENTRO ASOCIADO DE LA UNIVERSIDAD NACION AL DE EDU SUBVENCION NOMINATIVA 2025 Centro UNED C\u00e1diz ENSE\u00d1ANZAS UNIVERSITARIAS",
+                "registry": "bdns",
+                "target_id": "bdns-grant-bdns-detail-centro-asociado-de-la-universidad-nacion-al-de-edu-subvencion-nominativa-2025-centro-uned-cadiz-ensenanzas-universitarias",
+                "target_kind": "grant_bdns_detail",
+                "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias"
+              },
+              {
+                "purpose": "Buscar pagos desagregados o dataset con tercero/beneficiario.",
+                "query": "1. Nomina 1.1. Consejer\u00edas Consejer\u00eda de Desarrollo Educativo y Formaci\u00f3n Profesional beneficiarios pagos tesoreria",
+                "registry": "junta_open_data",
+                "target_id": "junta-open-data-treasury-beneficiary-breakdown-1-nomina-1-1-consejerias-consejeria-de-desarrollo-educativo-y-formacion-profesional-beneficiarios-pagos-tesoreria",
+                "target_kind": "treasury_beneficiary_breakdown",
+                "url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/?q=1.+Nomina+1.1.+Consejer%C3%ADas+Consejer%C3%ADa+de+Desarrollo+Educativo+y+Formaci%C3%B3n+Profesional+beneficiarios+pagos+tesoreria"
+              }
+            ],
             "source_candidate_ids": [
               "junta_presupuesto_2026_partidas_gastos",
               "junta_presupuesto_2026_objetivos_indicadores",
@@ -497,6 +1392,9 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "program_with_primary_legal_signal_needs_review",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
         "execution_queue_items_total": 0,
         "issue_review_status": "",
         "next_action": {
@@ -567,6 +1465,9 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "program_only_needs_primary_evidence",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
         "execution_queue_items_total": 0,
         "issue_review_status": "",
         "next_action": {
@@ -637,6 +1538,9 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "program_only_needs_primary_evidence",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
         "execution_queue_items_total": 0,
         "issue_review_status": "",
         "next_action": {
@@ -707,6 +1611,9 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "program_only_needs_primary_evidence",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
         "execution_queue_items_total": 0,
         "issue_review_status": "",
         "next_action": {
@@ -776,6 +1683,9 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "program_with_primary_legal_signal_needs_review",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
         "execution_queue_items_total": 0,
         "issue_review_status": "",
         "next_action": {
@@ -842,6 +1752,9 @@
         ],
         "claim_status": "readiness_classifier_no_merit_or_blame_claim",
         "classification": "responsibility_observed_execution_outcome_pending",
+        "delivery_evidence_hunts": [],
+        "delivery_evidence_hunts_total": 0,
+        "delivery_evidence_search_targets_total": 0,
         "execution_queue_items_total": 0,
         "issue_review_status": "reviewed_issue_direction_actor_execution_owner_and_budget_allocation_partial",
         "next_action": {
@@ -112976,6 +113889,9 @@
   "coverage": {
     "accountability_evidence_actor_answers_total": 929,
     "accountability_evidence_source_entries_total": 126767,
+    "accountability_readiness_delivery_evidence_hunt_topics_total": 4,
+    "accountability_readiness_delivery_evidence_hunts_total": 16,
+    "accountability_readiness_delivery_evidence_search_targets_total": 40,
     "accountability_readiness_publishable_merit_blame_topics_total": 0,
     "accountability_readiness_topics_total": 10,
     "accountability_readiness_topics_with_execution_evidence_total": 4,
@@ -120714,7 +121630,7 @@
       "source_url": "https://www.juntaelectoralcentral.es/cs/jec/documentos/andalucia_2026_candidaturas_proclamadas.pdf"
     }
   ],
-  "generated_at": "2026-05-17T09:57:58+00:00",
+  "generated_at": "2026-05-17T10:05:56+00:00",
   "issue_accountability_packets": {
     "claim_status": "issue_evidence_packet_only_no_merit_or_blame_claim",
     "interpretation_status": "cross_source_evidence_ready_for_review",
