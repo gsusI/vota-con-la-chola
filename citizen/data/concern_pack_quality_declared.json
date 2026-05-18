@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-24T15:46:49+00:00",
+  "generated_at": "2026-05-18T06:05:52+00:00",
   "status": "failed",
   "paths": {
-    "snapshot": "docs/gh-pages/citizen/data/citizen_declared.json",
-    "concerns_config": "docs/gh-pages/citizen/data/concerns_v1.json"
+    "snapshot": "ui/gh-pages-next/.static-data/citizen/data/citizen_declared.json",
+    "concerns_config": "ui/gh-pages-next/.static-data/citizen/data/concerns_v1.json"
   },
   "thresholds": {
     "min_topics_per_pack": 10,
@@ -37,7 +37,7 @@
   "packs": [
     {
       "pack_id": "servicios_publicos",
-      "pack_label": "Servicios publicos",
+      "pack_label": "Servicios públicos",
       "concern_ids": [
         "sanidad",
         "educacion",

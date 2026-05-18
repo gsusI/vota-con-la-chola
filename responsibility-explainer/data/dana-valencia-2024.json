@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generated_at": "2026-04-25T11:17:37Z",
-    "snapshot_date": "2026-04-25",
+    "generated_at": "2026-05-18T06:05:22Z",
+    "snapshot_date": "2026-05-18",
     "schema_version": "responsibility_explainer_case_v1",
     "case_id": "dana-valencia-2024",
-    "snapshot_db": "etl/data/staging/politicos-es.db"
+    "snapshot_db": "responsibility-explainer.db"
   },
   "case": {
     "case_id": "dana-valencia-2024",
@@ -22,7 +22,7 @@
     "canonical_url": "https://gsusI.github.io/vota-con-la-chola/responsibility-explainer/dana-valencia-2024/"
   },
   "coverage": {
-    "initiatives_total": 0,
+    "initiatives_total": 9,
     "initiatives_with_votes_total": 0,
     "initiatives_with_measure_points_total": 0,
     "vote_events_total": 0,
@@ -41,8 +41,8 @@
     "structural_evidence_rows_total": 28
   },
   "question_status_counts": {
-    "partial": 3,
-    "missing": 5
+    "partial": 4,
+    "missing": 4
   },
   "normative_evidence": {
     "scope_label": "Anclajes oficiales de deber, coordinacion y canales de aviso ya resumidos desde fuentes primarias",
@@ -525,7 +525,7 @@
         "certainty": "high",
         "signal_title": "Aprobacion inicial municipal del PTME con el riesgo de inundacion expresado en el propio acuerdo",
         "pre_dana_reading": "El Pleno de 31 de marzo de 2011 aprobo inicialmente el Plan Territorial Municipal de Emergencias y dejo por escrito que las inundaciones eran el principal riesgo por el Barranco de Chiva, por lo que consideraba necesario un plan especifico frente a inundaciones integrado en el plan municipal.",
-        "why_it_matters": "Sirve para probar que el municipio tenia identificada de forma oficial, años antes de la DANA, tanto la exposicion al barranco como la necesidad de un plan especifico de inundaciones.",
+        "why_it_matters": "Sirve para probar que el municipio tenia identificada de forma oficial, anos antes de la DANA, tanto la exposicion al barranco como la necesidad de un plan especifico de inundaciones.",
         "source_title": "Acta del Pleno del Ayuntamiento de Paiporta de 31/03/2011",
         "source_url": "https://paiporta.es/sec_din/archivos/docs/1510229421Acta%20n%C2%BA%204-2011%2C%20de%2031%20de%20marzo.pdf",
         "source_locator": "punto 10, pp. 16-17",
@@ -609,7 +609,7 @@
         "certainty": "high",
         "signal_title": "El plan director municipal describio la red de saneamiento como deficitaria e inadecuada para evacuar pluviales y residuales",
         "pre_dana_reading": "El Plan Director de Saneamiento de enero de 2008 senalo que la red era en su mayor parte unitaria, que algunos tramos tenian seccion insuficiente, pendientes muy suaves o contrapendientes, que en la zona norte descargaba en un unico punto del colector general del barranco y que, en conjunto, su funcionamiento era deficiente e inadecuado para evacuar las aguas pluviales y residuales del municipio.",
-        "why_it_matters": "Aporta una senal oficial, muchos años antes de la DANA, de que el drenaje urbano local ya estaba diagnosticado como estructuralmente debil y no solo sometido a un evento extraordinario imprevisible.",
+        "why_it_matters": "Aporta una senal oficial, muchos anos antes de la DANA, de que el drenaje urbano local ya estaba diagnosticado como estructuralmente debil y no solo sometido a un evento extraordinario imprevisible.",
         "source_title": "Plan Director de Saneamiento de Paiporta (Valencia)",
         "source_url": "https://paiporta.es/documentos/Plan_Director_Saneamiento.pdf",
         "source_locator": "memoria, apartado 4.1, pp. 22-23",
@@ -678,7 +678,7 @@
         "signal_type": "PGRI CHJ / ARPSI y solucion global pendiente",
         "certainty": "high",
         "signal_title": "La CHJ identificaba antes de la DANA al Poyo como ARPSI y situaba a Paiporta, Picanya, Catarroja, Alfafar, Benetusser y Sedavi dentro del corredor de riesgo",
-        "pre_dana_reading": "El anejo 2 del Proyecto de Plan de Gestion del Riesgo de Inundacion de la CHJ incluye a Paiporta, Picanya, Catarroja, Alfafar, Benetusser y Sedavi entre los municipios del ARPSI del Poyo y senala que los barrancos del Poyo y Pozalet requerian una solucion global al problema de inundaciones con objetivos de proteccion hasta T=500 años en el Poyo medio y bajo.",
+        "pre_dana_reading": "El anejo 2 del Proyecto de Plan de Gestion del Riesgo de Inundacion de la CHJ incluye a Paiporta, Picanya, Catarroja, Alfafar, Benetusser y Sedavi entre los municipios del ARPSI del Poyo y senala que los barrancos del Poyo y Pozalet requerian una solucion global al problema de inundaciones con objetivos de proteccion hasta T=500 anos en el Poyo medio y bajo.",
         "why_it_matters": "No es una intuicion retrospectiva: la administracion hidrologica ya habia reconocido oficialmente el corredor y la necesidad de una solucion estructural antes del episodio de 2024.",
         "source_title": "Proyecto de Plan de Gestion del Riesgo de Inundacion - Anejo 2",
         "source_url": "https://www.chj.es/es-es/ciudadano/consultapublica/Documents/PGRI/ANEJO2.pdf",
@@ -705,8 +705,8 @@
         "entity_name": "Paiporta (PAI Enrique Reig / Poeta Llorente / Pintor Benedito)",
         "signal_type": "Proyecto de urbanizacion / criterio hidraulico",
         "certainty": "high",
-        "signal_title": "El anejo hidraulico del mismo proyecto adopto un periodo de retorno de cinco años al considerar admisible una proteccion menor frente a inundaciones",
-        "pre_dana_reading": "En el anejo de calculos hidraulicos de la red de saneamiento, el proyecto indica expresamente que en la zona de estudio se puede admitir una proteccion menor contra inundaciones y que, por ello, un valor razonable para el periodo de retorno es de 5 años.",
+        "signal_title": "El anejo hidraulico del mismo proyecto adopto un periodo de retorno de cinco anos al considerar admisible una proteccion menor frente a inundaciones",
+        "pre_dana_reading": "En el anejo de calculos hidraulicos de la red de saneamiento, el proyecto indica expresamente que en la zona de estudio se puede admitir una proteccion menor contra inundaciones y que, por ello, un valor razonable para el periodo de retorno es de 5 anos.",
         "why_it_matters": "Hace auditable un criterio de diseno concreto usado en 2024 para una actuacion urbanistica municipal. No prueba por si solo incumplimiento, pero permite contrastar el umbral de proteccion escogido con el contexto de riesgo y con otras obligaciones de planeamiento y drenaje.",
         "source_title": "Proyecto de urbanizacion del Programa de Actuacion Integrada para urbanizar los viales Enrique Reig, Poeta Llorente y Pintor Benedito de Paiporta",
         "source_url": "https://paiporta.es/documentos/0-PROYECTO_01_03_2024_firmado.pdf",
@@ -960,8 +960,8 @@
       "question_id": "parliamentary_response",
       "category": "Respuesta institucional",
       "prompt": "Que medidas normativas y parlamentarias se adoptaron despues de la DANA?",
-      "status": "missing",
-      "status_label": "Pendiente",
+      "status": "partial",
+      "status_label": "Parcial",
       "next_evidence_needed": [
         "seguir tramitacion completa de los expedientes ligados a la DANA"
       ]
@@ -1000,7 +1000,144 @@
   ],
   "parliamentary_evidence": {
     "scope_label": "Respuesta parlamentaria y normativa ya presente en el repo",
-    "initiatives": [],
+    "initiatives": [
+      {
+        "initiative_id": "congreso:ley:12:2025",
+        "source_id": "congreso_iniciativas",
+        "title": "Real Decreto-ley 12/2025, de 28 de octubre, por el que se adoptan medidas urgentes de reactivaci\u00f3n, refuerzo y prevenci\u00f3n en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+        "type": "Reales decretos",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260518050010.json",
+          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_012_2025.pdf"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:7:2024",
+        "source_id": "congreso_iniciativas",
+        "title": "Real Decreto-ley 7/2024, de 11 de noviembre, por el que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+        "type": "Reales decretos",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260518050010.json",
+          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_007_2024.pdf"
+        ]
+      },
+      {
+        "initiative_id": "congreso:ley:8:2024",
+        "source_id": "congreso_iniciativas",
+        "title": "Resoluci\u00f3n de 19 de diciembre de 2024, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de convalidaci\u00f3n del Real Decreto-ley 8/2024, de 28 de noviembre, por el que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+        "type": "Reales decretos",
+        "current_status": "",
+        "presented_date": "",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260518050010.json",
+          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_008_2024_conv.pdf"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000039/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes de respuesta ante los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 6/2024, de 5 de noviembre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2024-11-21",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260518050019.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-39-1.PDF#page=1"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000042/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 7/2024, de 11 de noviembre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2024-12-12",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260518050019.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-42-1.PDF#page=1"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000044/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 8/2024, de 28 de noviembre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2024-12-19",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260518050019.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-44-1.PDF#page=1"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:122/000148/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proposici\u00f3n de Ley relativa al establecimiento de nuevos mecanismos para atender de manera urgente y \u00e1gil situaciones de emergencia, como la derivada de la DANA de octubre de 2024.",
+        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
+        "current_status": "Cerrado",
+        "presented_date": "2025-01-11",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260518050113.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-1.PDF#page=1",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-2.PDF#page=1"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:122/000152/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proposici\u00f3n de Ley de medidas complementarias para ayudar a los afectados por la DANA.",
+        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
+        "current_status": "Pleno Toma en consideraci\u00f3n",
+        "presented_date": "2025-01-22",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260518050113.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-175-1.PDF#page=1"
+        ]
+      },
+      {
+        "initiative_id": "congreso:leg15:exp:121/000078/0000",
+        "source_id": "congreso_iniciativas",
+        "title": "Proyecto de Ley por la que se adoptan medidas urgentes de reactivaci\u00f3n, refuerzo y prevenci\u00f3n en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 12/2025, de 28 de octubre).",
+        "type": "Proyecto de ley",
+        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
+        "presented_date": "2025-11-27",
+        "vote_events_count": 0,
+        "measure_points_count": 0,
+        "official_documents_count": 0,
+        "official_links": [
+          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260518050019.json",
+          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-78-1.PDF#page=1"
+        ]
+      }
+    ],
     "votes": [],
     "reviewed_measures": []
   },
