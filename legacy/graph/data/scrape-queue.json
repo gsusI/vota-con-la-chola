@@ -1,7 +1,7 @@
 {
   "queue_version": "v1",
-  "generated_at": "2026-05-18T06:05:50+00:00",
-  "snapshot_date": "2026-05-18",
+  "generated_at": "2026-05-19T06:05:32+00:00",
+  "snapshot_date": "2026-05-19",
   "summary": {
     "queue_items_total": 29,
     "p0_total": 5,
@@ -420,7 +420,7 @@
         ],
         "pre_commands": [
           "python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>",
-          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-05-18"
+          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-05-19"
         ]
       },
       "rank": 6
@@ -1810,7 +1810,7 @@
       "tracker_tipo_dato": "Marco legal electoral",
       "legal_verification_status": "verified",
       "progress": {
-        "loaded": 273,
+        "loaded": 288,
         "target": 5,
         "percent": 100
       },
@@ -1832,7 +1832,7 @@
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "Ingesta completada: 273/273 registros validos",
+      "last_message": "Ingesta completada: 288/288 registros validos",
       "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. La ingesta historica BOE (`boe_api_legal`) existe (`records_loaded=298`, `policy_events_boe=298`), pero PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>`. Mantener como parcial hasta recuperar run reproducible de red real vigente. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log`, `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md` y `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
       "action_titles": [
         "PARTIAL: BOE API"
