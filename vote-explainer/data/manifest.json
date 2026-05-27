@@ -1,12 +1,75 @@
 {
   "meta": {
     "schema_version": "vote_explainer_manifest_v1",
-    "generated_at": "2026-05-26T06:06:33+00:00",
-    "snapshot_as_of_date": "2026-05-26",
+    "generated_at": "2026-05-27T06:07:28+00:00",
+    "snapshot_as_of_date": "2026-05-27",
     "total_votes": 80,
-    "demo_public_vote_id": "congreso_votaciones--20260520--34969068c1"
+    "demo_public_vote_id": "congreso_votaciones--20260526--5f841d66f0"
   },
   "votes": [
+    {
+      "public_vote_id": "congreso_votaciones--20260526--5f841d66f0",
+      "canonical_path": "/vote-explainer/congreso_votaciones--20260526--5f841d66f0/",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json",
+      "vote_date": "2026-05-26",
+      "chamber": "Congreso",
+      "headline": "Proposición del Sr. Álvaro Vidal y otros 20 Diputados, de reforma del Reglamento del Congreso.",
+      "subtitle": "derived:a70279bac9c2aab8f430e842",
+      "result_label": "Aprobada en esta votacion",
+      "summary_text": "Si 178 · No 171 · Abstencion 0 · No vota 1",
+      "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json",
+      "caveat_codes": [
+        "derived_result",
+        "group_breakdown_partial"
+      ],
+      "top_caveat": {
+        "code": "derived_result",
+        "label": "Resultado derivado",
+        "severity": "warn"
+      }
+    },
+    {
+      "public_vote_id": "congreso_votaciones--20260526--e1dd0039e7",
+      "canonical_path": "/vote-explainer/congreso_votaciones--20260526--e1dd0039e7/",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion002/VOT_20260526210642.json",
+      "vote_date": "2026-05-26",
+      "chamber": "Congreso",
+      "headline": "Proposición de Ley de modificación de la Ley 49/1960, de 21 de julio, sobre propiedad horizontal.",
+      "subtitle": "122/000240/0000",
+      "result_label": "Aprobada en esta votacion",
+      "summary_text": "Si 306 · No 33 · Abstencion 10 · No vota 1",
+      "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion002/VOT_20260526210642.json",
+      "caveat_codes": [
+        "derived_result",
+        "group_breakdown_partial"
+      ],
+      "top_caveat": {
+        "code": "derived_result",
+        "label": "Resultado derivado",
+        "severity": "warn"
+      }
+    },
+    {
+      "public_vote_id": "congreso_votaciones--20260526--3547622bdc",
+      "canonical_path": "/vote-explainer/congreso_votaciones--20260526--3547622bdc/",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion001/VOT_20260526210640.json",
+      "vote_date": "2026-05-26",
+      "chamber": "Congreso",
+      "headline": "Proposición de Ley para la promoción del consumo de alimentos y bebidas saludables.",
+      "subtitle": "122/000275/0000",
+      "result_label": "Rechazada en esta votacion",
+      "summary_text": "Si 166 · No 178 · Abstencion 5 · No vota 1",
+      "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion001/VOT_20260526210640.json",
+      "caveat_codes": [
+        "derived_result",
+        "group_breakdown_partial"
+      ],
+      "top_caveat": {
+        "code": "derived_result",
+        "label": "Resultado derivado",
+        "severity": "warn"
+      }
+    },
     {
       "public_vote_id": "congreso_votaciones--20260520--34969068c1",
       "canonical_path": "/vote-explainer/congreso_votaciones--20260520--34969068c1/",
@@ -1486,72 +1549,6 @@
       "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion171/20260414/Votacion001/VOT_20260414203032.json",
       "caveat_codes": [
         "derived_result",
-        "group_breakdown_partial"
-      ],
-      "top_caveat": {
-        "code": "derived_result",
-        "label": "Resultado derivado",
-        "severity": "warn"
-      }
-    },
-    {
-      "public_vote_id": "congreso_votaciones--20260326--4492015e70",
-      "canonical_path": "/vote-explainer/congreso_votaciones--20260326--4492015e70/",
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion011/VOT_20260326165039.json",
-      "vote_date": "2026-03-26",
-      "chamber": "Congreso",
-      "headline": "Proposición no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, autónomos y pequeños empresarios.",
-      "subtitle": "Votación separada por puntos.",
-      "result_label": "Rechazada en esta votacion",
-      "summary_text": "Si 52 · No 161 · Abstencion 137",
-      "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion011/VOT_20260326165039.json",
-      "caveat_codes": [
-        "derived_result",
-        "subvote_not_whole_file",
-        "group_breakdown_partial"
-      ],
-      "top_caveat": {
-        "code": "derived_result",
-        "label": "Resultado derivado",
-        "severity": "warn"
-      }
-    },
-    {
-      "public_vote_id": "congreso_votaciones--20260326--6c9990316e",
-      "canonical_path": "/vote-explainer/congreso_votaciones--20260326--6c9990316e/",
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion010/VOT_20260326165037.json",
-      "vote_date": "2026-03-26",
-      "chamber": "Congreso",
-      "headline": "Proposición no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, autónomos y pequeños empresarios.",
-      "subtitle": "Votación separada por puntos.",
-      "result_label": "Aprobada en esta votacion",
-      "summary_text": "Si 177 · No 152 · Abstencion 18 · No vota 3",
-      "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion010/VOT_20260326165037.json",
-      "caveat_codes": [
-        "derived_result",
-        "subvote_not_whole_file",
-        "group_breakdown_partial"
-      ],
-      "top_caveat": {
-        "code": "derived_result",
-        "label": "Resultado derivado",
-        "severity": "warn"
-      }
-    },
-    {
-      "public_vote_id": "congreso_votaciones--20260326--b3c9c6e83b",
-      "canonical_path": "/vote-explainer/congreso_votaciones--20260326--b3c9c6e83b/",
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion009/VOT_20260326165035.json",
-      "vote_date": "2026-03-26",
-      "chamber": "Congreso",
-      "headline": "Proposición no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, autónomos y pequeños empresarios.",
-      "subtitle": "Votación separada por puntos.",
-      "result_label": "Aprobada en esta votacion",
-      "summary_text": "Si 177 · No 164 · Abstencion 5 · No vota 4",
-      "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion009/VOT_20260326165035.json",
-      "caveat_codes": [
-        "derived_result",
-        "subvote_not_whole_file",
         "group_breakdown_partial"
       ],
       "top_caveat": {

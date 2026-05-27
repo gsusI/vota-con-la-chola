@@ -11,6 +11,249 @@
   },
   "events": [
     {
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json",
+      "source_id": "congreso_votaciones",
+      "source_name": "Congreso - Votaciones (pleno, OpenData)",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json",
+      "vote_date": "2026-05-26",
+      "title": "Toma en consideraci\u00f3n de Proposici\u00f3n de reforma del Reglamento del Congreso.",
+      "expediente_text": "Proposici\u00f3n del Sr. \u00c1lvaro Vidal y otros 20 Diputados, de reforma del Reglamento del Congreso.",
+      "subgroup_title": "",
+      "subgroup_text": "",
+      "assentimiento": "No",
+      "initiative": {
+        "initiative_id": "congreso:leg15:derived:a70279bac9c2aab8f430e842",
+        "expediente": "derived:a70279bac9c2aab8f430e842",
+        "title": "Proposici\u00f3n del Sr. \u00c1lvaro Vidal y otros 20 Diputados, de reforma del Reglamento del Congreso.",
+        "type": "",
+        "grouping": "Derived from Congreso votaciones",
+        "supertype": "derived",
+        "author_text": "",
+        "procedure_type": "",
+        "current_status": "",
+        "result_text": "",
+        "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json",
+        "confidence": 1.0
+      },
+      "totals": {
+        "present": 349,
+        "yes": 178,
+        "no": 171,
+        "abstain": 0,
+        "no_vote": 1
+      },
+      "group_breakdown": [
+        {
+          "group_code": "GP",
+          "yes": 0,
+          "no": 137,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 137
+        },
+        {
+          "group_code": "GS",
+          "yes": 120,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 1,
+          "other": 0,
+          "total": 121
+        },
+        {
+          "group_code": "GVOX",
+          "yes": 0,
+          "no": 33,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 33
+        },
+        {
+          "group_code": "GSUMAR",
+          "yes": 26,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 26
+        },
+        {
+          "group_code": "GMx",
+          "yes": 7,
+          "no": 1,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 8
+        }
+      ],
+      "party_participation": null
+    },
+    {
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion002/VOT_20260526210642.json",
+      "source_id": "congreso_votaciones",
+      "source_name": "Congreso - Votaciones (pleno, OpenData)",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion002/VOT_20260526210642.json",
+      "vote_date": "2026-05-26",
+      "title": "Toma en consideraci\u00f3n de Proposiciones de Ley.",
+      "expediente_text": "Proposici\u00f3n de Ley del Grupo Parlamentario Popular en el Congreso, de modificaci\u00f3n de la Ley 49/1960, de 21 de julio, sobre propiedad horizontal.",
+      "subgroup_title": "",
+      "subgroup_text": "",
+      "assentimiento": "No",
+      "initiative": {
+        "initiative_id": "congreso:leg15:exp:122/000240/0000",
+        "expediente": "122/000240/0000",
+        "title": "Proposici\u00f3n de Ley de modificaci\u00f3n de la Ley 49/1960, de 21 de julio, sobre propiedad horizontal.",
+        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
+        "grouping": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
+        "supertype": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
+        "author_text": "Grupo Parlamentario Popular en el Congreso",
+        "procedure_type": "",
+        "current_status": "Pleno Toma en consideraci\u00f3n",
+        "result_text": "",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
+        "confidence": 0.85
+      },
+      "totals": {
+        "present": 349,
+        "yes": 306,
+        "no": 33,
+        "abstain": 10,
+        "no_vote": 1
+      },
+      "group_breakdown": [
+        {
+          "group_code": "GP",
+          "yes": 137,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 137
+        },
+        {
+          "group_code": "GS",
+          "yes": 120,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 1,
+          "other": 0,
+          "total": 121
+        },
+        {
+          "group_code": "GVOX",
+          "yes": 33,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 33
+        },
+        {
+          "group_code": "GSUMAR",
+          "yes": 1,
+          "no": 25,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 26
+        },
+        {
+          "group_code": "GMx",
+          "yes": 3,
+          "no": 1,
+          "abstain": 4,
+          "no_vote": 0,
+          "other": 0,
+          "total": 8
+        }
+      ],
+      "party_participation": null
+    },
+    {
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion001/VOT_20260526210640.json",
+      "source_id": "congreso_votaciones",
+      "source_name": "Congreso - Votaciones (pleno, OpenData)",
+      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion001/VOT_20260526210640.json",
+      "vote_date": "2026-05-26",
+      "title": "Toma en consideraci\u00f3n de Proposiciones de Ley.",
+      "expediente_text": "Proposici\u00f3n de Ley del Grupo Parlamentario Plurinacional SUMAR, para la promoci\u00f3n del consumo de alimentos y bebidas saludables.",
+      "subgroup_title": "",
+      "subgroup_text": "",
+      "assentimiento": "No",
+      "initiative": {
+        "initiative_id": "congreso:leg15:exp:122/000275/0000",
+        "expediente": "122/000275/0000",
+        "title": "Proposici\u00f3n de Ley para la promoci\u00f3n del consumo de alimentos y bebidas saludables.",
+        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
+        "grouping": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
+        "supertype": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
+        "author_text": "Grupo Parlamentario Plurinacional SUMAR",
+        "procedure_type": "",
+        "current_status": "Pleno Toma en consideraci\u00f3n",
+        "result_text": "",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
+        "confidence": 0.85
+      },
+      "totals": {
+        "present": 349,
+        "yes": 166,
+        "no": 178,
+        "abstain": 5,
+        "no_vote": 1
+      },
+      "group_breakdown": [
+        {
+          "group_code": "GP",
+          "yes": 0,
+          "no": 137,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 137
+        },
+        {
+          "group_code": "GS",
+          "yes": 120,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 1,
+          "other": 0,
+          "total": 121
+        },
+        {
+          "group_code": "GVOX",
+          "yes": 0,
+          "no": 33,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 33
+        },
+        {
+          "group_code": "GSUMAR",
+          "yes": 26,
+          "no": 0,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 26
+        },
+        {
+          "group_code": "GMx",
+          "yes": 7,
+          "no": 1,
+          "abstain": 0,
+          "no_vote": 0,
+          "other": 0,
+          "total": 8
+        }
+      ],
+      "party_participation": null
+    },
+    {
       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion013/VOT_20260520142338.json",
       "source_id": "congreso_votaciones",
       "source_name": "Congreso - Votaciones (pleno, OpenData)",
@@ -32,7 +275,7 @@
         "procedure_type": "",
         "current_status": "",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260526050100.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260527050017.json",
         "confidence": 0.9
       },
       "totals": {
@@ -113,7 +356,7 @@
         "procedure_type": "",
         "current_status": "",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260526050100.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260527050017.json",
         "confidence": 0.85
       },
       "totals": {
@@ -1082,10 +1325,10 @@
         "grouping": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
         "supertype": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
         "author_text": "Grupo Parlamentario Socialista",
-        "procedure_type": "",
-        "current_status": "Mesa del Congreso Acuerdo subsiguiente a la toma en consideraci\u00f3n",
+        "procedure_type": "Urgente",
+        "current_status": "Pleno Enmiendas",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -1163,10 +1406,10 @@
         "grouping": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
         "supertype": "Funci\u00f3n legislativa Funci\u00f3n legislativa",
         "author_text": "Grupo Parlamentario Popular en el Congreso",
-        "procedure_type": "",
-        "current_status": "Mesa del Congreso Acuerdo subsiguiente a la toma en consideraci\u00f3n",
+        "procedure_type": "Normal",
+        "current_status": "Comisi\u00f3n de Interior Publicaci\u00f3n",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -1328,7 +1571,7 @@
         "procedure_type": "",
         "current_status": "",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260526050100.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260527050017.json",
         "confidence": 0.9
       },
       "totals": {
@@ -1409,7 +1652,7 @@
         "procedure_type": "",
         "current_status": "",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260526050100.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260527050017.json",
         "confidence": 0.85
       },
       "totals": {
@@ -2219,7 +2462,7 @@
         "procedure_type": "",
         "current_status": "",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260526050100.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260527050017.json",
         "confidence": 0.9
       },
       "totals": {
@@ -2300,7 +2543,7 @@
         "procedure_type": "",
         "current_status": "Cerrado",
         "result_text": "Rechazado 05/05/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -2381,7 +2624,7 @@
         "procedure_type": "",
         "current_status": "Cerrado",
         "result_text": "Rechazado 05/05/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -3920,7 +4163,7 @@
         "procedure_type": "Competencia Legislativa Plena",
         "current_status": "Comisi\u00f3n de Vivienda y Agenda Urbana Enmiendas",
         "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -5459,7 +5702,7 @@
         "procedure_type": "",
         "current_status": "Cerrado",
         "result_text": "Rechazado 20/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -5540,7 +5783,7 @@
         "procedure_type": "",
         "current_status": "Cerrado",
         "result_text": "Rechazado 20/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.85
       },
       "totals": {
@@ -5593,249 +5836,6 @@
           "no": 7,
           "abstain": 1,
           "no_vote": 0,
-          "other": 0,
-          "total": 8
-        }
-      ],
-      "party_participation": null
-    },
-    {
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion011/VOT_20260326165039.json",
-      "source_id": "congreso_votaciones",
-      "source_name": "Congreso - Votaciones (pleno, OpenData)",
-      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion011/VOT_20260326165039.json",
-      "vote_date": "2026-03-26",
-      "title": "Proposiciones no de Ley.",
-      "expediente_text": "Proposici\u00f3n no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, aut\u00f3nomos y peque\u00f1os empresarios.",
-      "subgroup_title": "Votaci\u00f3n separada por puntos.",
-      "subgroup_text": "Punto 4.",
-      "assentimiento": "No",
-      "initiative": {
-        "initiative_id": "congreso:leg15:derived:93f720271367106d97a9035e",
-        "expediente": "derived:93f720271367106d97a9035e",
-        "title": "Proposici\u00f3n no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, aut\u00f3nomos y peque\u00f1os empresarios.",
-        "type": "",
-        "grouping": "Derived from Congreso votaciones",
-        "supertype": "derived",
-        "author_text": "",
-        "procedure_type": "",
-        "current_status": "",
-        "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion008/VOT_20260326165034.json",
-        "confidence": 1.0
-      },
-      "totals": {
-        "present": 350,
-        "yes": 52,
-        "no": 161,
-        "abstain": 137,
-        "no_vote": 0
-      },
-      "group_breakdown": [
-        {
-          "group_code": "GP",
-          "yes": 1,
-          "no": 0,
-          "abstain": 136,
-          "no_vote": 0,
-          "other": 0,
-          "total": 137
-        },
-        {
-          "group_code": "GS",
-          "yes": 0,
-          "no": 121,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 121
-        },
-        {
-          "group_code": "GVOX",
-          "yes": 0,
-          "no": 33,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 33
-        },
-        {
-          "group_code": "GSUMAR",
-          "yes": 26,
-          "no": 0,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 26
-        },
-        {
-          "group_code": "GMx",
-          "yes": 1,
-          "no": 6,
-          "abstain": 1,
-          "no_vote": 0,
-          "other": 0,
-          "total": 8
-        }
-      ],
-      "party_participation": null
-    },
-    {
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion010/VOT_20260326165037.json",
-      "source_id": "congreso_votaciones",
-      "source_name": "Congreso - Votaciones (pleno, OpenData)",
-      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion010/VOT_20260326165037.json",
-      "vote_date": "2026-03-26",
-      "title": "Proposiciones no de Ley.",
-      "expediente_text": "Proposici\u00f3n no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, aut\u00f3nomos y peque\u00f1os empresarios.",
-      "subgroup_title": "Votaci\u00f3n separada por puntos.",
-      "subgroup_text": "Punto 3.",
-      "assentimiento": "No",
-      "initiative": {
-        "initiative_id": "congreso:leg15:derived:93f720271367106d97a9035e",
-        "expediente": "derived:93f720271367106d97a9035e",
-        "title": "Proposici\u00f3n no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, aut\u00f3nomos y peque\u00f1os empresarios.",
-        "type": "",
-        "grouping": "Derived from Congreso votaciones",
-        "supertype": "derived",
-        "author_text": "",
-        "procedure_type": "",
-        "current_status": "",
-        "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion008/VOT_20260326165034.json",
-        "confidence": 1.0
-      },
-      "totals": {
-        "present": 347,
-        "yes": 177,
-        "no": 152,
-        "abstain": 18,
-        "no_vote": 3
-      },
-      "group_breakdown": [
-        {
-          "group_code": "GP",
-          "yes": 134,
-          "no": 0,
-          "abstain": 0,
-          "no_vote": 3,
-          "other": 0,
-          "total": 137
-        },
-        {
-          "group_code": "GS",
-          "yes": 0,
-          "no": 121,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 121
-        },
-        {
-          "group_code": "GVOX",
-          "yes": 33,
-          "no": 0,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 33
-        },
-        {
-          "group_code": "GSUMAR",
-          "yes": 0,
-          "no": 26,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 26
-        },
-        {
-          "group_code": "GMx",
-          "yes": 3,
-          "no": 5,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 8
-        }
-      ],
-      "party_participation": null
-    },
-    {
-      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion009/VOT_20260326165035.json",
-      "source_id": "congreso_votaciones",
-      "source_name": "Congreso - Votaciones (pleno, OpenData)",
-      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion009/VOT_20260326165035.json",
-      "vote_date": "2026-03-26",
-      "title": "Proposiciones no de Ley.",
-      "expediente_text": "Proposici\u00f3n no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, aut\u00f3nomos y peque\u00f1os empresarios.",
-      "subgroup_title": "Votaci\u00f3n separada por puntos.",
-      "subgroup_text": "Punto 2.",
-      "assentimiento": "No",
-      "initiative": {
-        "initiative_id": "congreso:leg15:derived:93f720271367106d97a9035e",
-        "expediente": "derived:93f720271367106d97a9035e",
-        "title": "Proposici\u00f3n no de Ley del Grupo Parlamentario Junts per Catalunya, de medidas fiscales urgentes para hacer frente a la fatiga tributaria que padecen la clase media, trabajadores, aut\u00f3nomos y peque\u00f1os empresarios.",
-        "type": "",
-        "grouping": "Derived from Congreso votaciones",
-        "supertype": "derived",
-        "author_text": "",
-        "procedure_type": "",
-        "current_status": "",
-        "result_text": "",
-        "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion008/VOT_20260326165034.json",
-        "confidence": 1.0
-      },
-      "totals": {
-        "present": 346,
-        "yes": 177,
-        "no": 164,
-        "abstain": 5,
-        "no_vote": 4
-      },
-      "group_breakdown": [
-        {
-          "group_code": "GP",
-          "yes": 137,
-          "no": 0,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 137
-        },
-        {
-          "group_code": "GS",
-          "yes": 0,
-          "no": 121,
-          "abstain": 0,
-          "no_vote": 0,
-          "other": 0,
-          "total": 121
-        },
-        {
-          "group_code": "GVOX",
-          "yes": 32,
-          "no": 0,
-          "abstain": 0,
-          "no_vote": 1,
-          "other": 0,
-          "total": 33
-        },
-        {
-          "group_code": "GSUMAR",
-          "yes": 0,
-          "no": 24,
-          "abstain": 0,
-          "no_vote": 2,
-          "other": 0,
-          "total": 26
-        },
-        {
-          "group_code": "GMx",
-          "yes": 1,
-          "no": 6,
-          "abstain": 0,
-          "no_vote": 1,
           "other": 0,
           "total": 8
         }
@@ -5945,7 +5945,7 @@
         "procedure_type": "Normal",
         "current_status": "Cerrado",
         "result_text": "Aprobado con modificaciones 14/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.75
       },
       "totals": {
@@ -6026,7 +6026,7 @@
         "procedure_type": "Normal",
         "current_status": "Cerrado",
         "result_text": "Aprobado con modificaciones 14/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.75
       },
       "totals": {
@@ -6107,7 +6107,7 @@
         "procedure_type": "Normal",
         "current_status": "Cerrado",
         "result_text": "Aprobado con modificaciones 14/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.75
       },
       "totals": {
@@ -6188,7 +6188,7 @@
         "procedure_type": "Normal",
         "current_status": "Cerrado",
         "result_text": "Aprobado con modificaciones 14/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.75
       },
       "totals": {
@@ -6269,7 +6269,7 @@
         "procedure_type": "Normal",
         "current_status": "Cerrado",
         "result_text": "Aprobado con modificaciones 14/04/2026",
-        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260526050520.json",
+        "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260527050144.json",
         "confidence": 0.75
       },
       "totals": {
