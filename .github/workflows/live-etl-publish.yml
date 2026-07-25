@@ -10,6 +10,14 @@ on:
         required: false
         default: false
         type: boolean
+      release_scope:
+        description: "Run the full data release or publish the committed static site only"
+        required: false
+        default: "full"
+        type: choice
+        options:
+          - "full"
+          - "site"
 
 concurrency:
   group: live-etl-publish
@@ -30,6 +38,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       LIVE_ETL_PUBLISH_REQUESTED: ${{ github.event_name == 'schedule' || github.event.inputs.publish == 'true' }}
+      SITE_ONLY_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.release_scope == 'site' }}
       ACCOUNTABILITY_MIN_ENTRIES: "0"
       ACCOUNTABILITY_MIN_ACTORS: "0"
       ACCOUNTABILITY_MIN_ISSUES: "0"
@@ -59,12 +68,15 @@ jobs:
           echo "SNAPSHOT_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
 
       - name: Build ETL image
+        if: env.SITE_ONLY_RELEASE != 'true'
         run: docker compose build etl
 
       - name: Run live ETL
+        if: env.SITE_ONLY_RELEASE != 'true'
         run: just etl-live
 
       - name: Enforce tracker truth
+        if: env.SITE_ONLY_RELEASE != 'true'
         run: |
           just etl-tracker-status
           just etl-tracker-gate
@@ -78,13 +90,17 @@ jobs:
 
       - name: Build public static artifacts
         run: |
-          HF_DATASET_REPO_ID="${HF_DATASET_REPO_ID:-local/vota-con-la-chola-data}" \
-            HF_USERNAME="${HF_USERNAME:-local}" \
-            just etl-publish-hf-dry-run
-          just cloudflare-pages-refresh-data
+          if [ "$SITE_ONLY_RELEASE" = "true" ]; then
+            GH_PAGES_NEXT_PRIME_EXPORT=0 just cloudflare-pages-build
+          else
+            HF_DATASET_REPO_ID="${HF_DATASET_REPO_ID:-local/vota-con-la-chola-data}" \
+              HF_USERNAME="${HF_USERNAME:-local}" \
+              just etl-publish-hf-dry-run
+            just cloudflare-pages-refresh-data
+          fi
 
       - name: Publish Hugging Face snapshot
-        if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
+        if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true' && env.SITE_ONLY_RELEASE != 'true'
         run: |
           if [ -z "$HF_TOKEN" ]; then
             echo "HF_TOKEN missing; checked dry-run only."
@@ -103,7 +119,12 @@ jobs:
             echo "Cloudflare secrets missing; build artifact only."
             exit 0
           fi
-          just cloudflare-pages-deploy
+          if [ "$SITE_ONLY_RELEASE" = "true" ]; then
+            cd ui/gh-pages-next
+            npx wrangler pages deploy out --project-name "vota-con-la-chola"
+          else
+            just cloudflare-pages-deploy
+          fi
 
       - name: Publish votaconlachola.org static branch
         if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'

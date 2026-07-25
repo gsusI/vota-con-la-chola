@@ -8,6 +8,7 @@ Estado actual (`2026-07-25`):
 - primer corte público e inmutable publicado;
 - exportador conserva snapshots fechados y calcula diff semántico por compromiso;
 - gate de frescura bloquea CI/publicación cuando el recibo supera `8` días sin revisión;
+- el workflow vivo admite publicación `site` desde el commit limpio sin fingir que un ETL bloqueado está sano;
 - sigue pendiente un segundo corte real, la auditoría con cinco usuarios y cualquier prueba de retorno.
 
 ## Arreglar primero el cuello de botella
