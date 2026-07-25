@@ -32,6 +32,38 @@ const EMPTY_RECEIPT = {
 };
 const COMMUNITY_REVIEW_HREF =
   "https://github.com/gsusI/vota-con-la-chola/issues/20";
+const COMMUNITY_REVIEW_TRACKS = [
+  {
+    key: "declaraciones",
+    number: "01",
+    title: "Declaraciones",
+    prompt: "Contrasta las tres citas y su página exacta.",
+  },
+  {
+    key: "ventana-evidencia",
+    number: "02",
+    title: "Ventana de evidencia",
+    prompt: "Busca un acto oficial posterior que falte.",
+  },
+  {
+    key: "clasificacion",
+    number: "03",
+    title: "Clasificación",
+    prompt: "Separa contexto, reiteración y progreso real.",
+  },
+  {
+    key: "responsabilidad",
+    number: "04",
+    title: "Responsabilidad",
+    prompt: "Comprueba Ejecutivo, Parlamento, dinero y entrega.",
+  },
+  {
+    key: "uso-ciudadano",
+    number: "05",
+    title: "Uso ciudadano",
+    prompt: "Prueba en móvil si respuesta y límites se entienden.",
+  },
+];
 
 function classes(localClass, stableClass) {
   return `${localClass} ${stableClass}`;
@@ -524,6 +556,138 @@ export default function Andalucia2026WaterReceiptPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section
+        className={classes(styles.reviewCall, "water-receipt-community-review-call")}
+        aria-labelledby="water-community-review-title"
+      >
+        <header
+          className={classes(
+            styles.reviewCallHeader,
+            "water-receipt-community-review-header",
+          )}
+        >
+          <div
+            className={classes(
+              styles.reviewCallHeading,
+              "water-receipt-community-review-heading",
+            )}
+          >
+            <p
+              className={classes(
+                styles.reviewCallEyebrow,
+                "water-receipt-community-review-eyebrow",
+              )}
+            >
+              Auditoría ciudadana abierta
+            </p>
+            <h2
+              className={classes(
+                styles.reviewCallTitle,
+                "water-receipt-community-review-title",
+              )}
+              id="water-community-review-title"
+            >
+              Diez minutos. Una comprobación concreta.
+            </h2>
+          </div>
+          <p
+            className={classes(
+              styles.reviewCallIntro,
+              "water-receipt-community-review-intro",
+            )}
+          >
+            No necesitas programar. Elige una pista, abre las fuentes y deja un
+            veredicto reproducible. Cinco personas distintas deben cubrir las
+            cinco pistas.
+          </p>
+        </header>
+
+        <ol
+          className={classes(
+            styles.reviewTrackList,
+            "water-receipt-community-review-track-list",
+          )}
+        >
+          {COMMUNITY_REVIEW_TRACKS.map((track) => (
+            <li
+              className={classes(
+                styles.reviewTrackItem,
+                `water-receipt-community-review-track water-receipt-community-review-track--${track.key}`,
+              )}
+              key={track.key}
+            >
+              <span
+                className={classes(
+                  styles.reviewTrackNumber,
+                  "water-receipt-community-review-track-number",
+                )}
+              >
+                {track.number}
+              </span>
+              <h3
+                className={classes(
+                  styles.reviewTrackTitle,
+                  "water-receipt-community-review-track-title",
+                )}
+              >
+                {track.title}
+              </h3>
+              <p
+                className={classes(
+                  styles.reviewTrackPrompt,
+                  "water-receipt-community-review-track-prompt",
+                )}
+              >
+                {track.prompt}
+              </p>
+            </li>
+          ))}
+        </ol>
+
+        <div
+          className={classes(
+            styles.reviewCallAction,
+            "water-receipt-community-review-action",
+          )}
+        >
+          <div
+            className={classes(
+              styles.reviewCallActionCopy,
+              "water-receipt-community-review-action-copy",
+            )}
+          >
+            <p
+              className={classes(
+                styles.reviewCallActionTitle,
+                "water-receipt-community-review-action-title",
+              )}
+            >
+              Tu revisión queda pública y contable.
+            </p>
+            <p
+              className={classes(
+                styles.reviewCallActionRule,
+                "water-receipt-community-review-action-rule",
+              )}
+            >
+              Bots, propietario, miembros, colaboradores y duplicados no
+              cuentan. Un hallazgo abierto impide cerrar la revisión.
+            </p>
+          </div>
+          <a
+            className={classes(
+              styles.reviewCallActionLink,
+              "water-receipt-community-review-action-link",
+            )}
+            href={COMMUNITY_REVIEW_HREF}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Elegir pista y revisar ↗
+          </a>
         </div>
       </section>
 

@@ -901,6 +901,154 @@
   color: var(--receipt-rust);
 }
 
+.reviewCall {
+  margin-top: 32px;
+  border: 1px solid rgba(20, 32, 25, 0.28);
+  background: var(--receipt-green);
+  color: #fffdf7;
+}
+
+.reviewCallHeader {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(28px, 6vw, 80px);
+  align-items: end;
+  padding: clamp(32px, 6vw, 64px);
+}
+
+.reviewCallHeading {
+  display: grid;
+  gap: 12px;
+}
+
+.reviewCallEyebrow {
+  margin: 0;
+  color: #a7cfba;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reviewCallTitle {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(2.25rem, 4.8vw, 4.3rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.reviewCallIntro {
+  max-width: 52ch;
+  margin: 0;
+  color: #d7e8df;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.reviewTrackList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1px;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  padding: 0;
+  background: rgba(255, 255, 255, 0.24);
+  list-style: none;
+}
+
+.reviewTrackItem {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 10px;
+  min-height: 210px;
+  background: var(--receipt-green);
+  padding: 24px;
+}
+
+.reviewTrackNumber {
+  color: #a7cfba;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.reviewTrackTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.reviewTrackPrompt {
+  align-self: end;
+  margin: 0;
+  color: #d7e8df;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.reviewCallAction {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--receipt-paper-deep);
+  padding: clamp(24px, 4vw, 40px);
+  color: var(--receipt-ink);
+}
+
+.reviewCallActionCopy {
+  display: grid;
+  flex: 1 1 460px;
+  gap: 8px;
+}
+
+.reviewCallActionTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.reviewCallActionRule {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--receipt-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.reviewCallActionLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid var(--receipt-green);
+  background: var(--receipt-green);
+  padding: 12px 18px;
+  color: #fffdf7;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.reviewCallActionLink:hover,
+.reviewCallActionLink:focus-visible {
+  border-color: var(--receipt-rust);
+  background: var(--receipt-rust);
+}
+
 .pageFooter {
   display: flex;
   flex-wrap: wrap;
@@ -926,7 +1074,8 @@
   .answer,
   .changeSummary,
   .baseline,
-  .method {
+  .method,
+  .reviewCallHeader {
     grid-template-columns: 1fr;
   }
 
@@ -1036,6 +1185,31 @@
     padding: 28px 22px;
   }
 
+  .reviewCallHeader {
+    padding: 32px 22px;
+  }
+
+  .reviewTrackList {
+    grid-template-columns: 1fr;
+  }
+
+  .reviewTrackItem {
+    min-height: 0;
+    padding: 24px 20px;
+  }
+
+  .reviewTrackPrompt {
+    align-self: auto;
+  }
+
+  .reviewCallAction {
+    padding: 26px 20px;
+  }
+
+  .reviewCallActionLink {
+    width: 100%;
+  }
+
   .commitments {
     gap: 46px;
     padding: 46px 0;
@@ -1097,7 +1271,8 @@
 
   .commitmentNav,
   .directLink,
-  .footerLinks {
+  .footerLinks,
+  .reviewCall {
     display: none;
   }
 

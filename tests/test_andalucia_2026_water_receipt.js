@@ -93,12 +93,30 @@ test("public route renders the focused answer without loading the operational pa
     "water-receipt-checkpoint",
     "water-receipt-unknowns",
     "water-receipt-method",
+    "water-receipt-community-review-call",
+    "water-receipt-community-review-track-list",
+    "water-receipt-community-review-action-link",
   ]) {
     assert.match(pageSource, new RegExp(`"${className}"`, "u"));
   }
   assert.match(pageSource, /data\/water-receipt\/snapshots\//u);
   assert.match(pageSource, /Participar en la revisión comunitaria/u);
   assert.match(pageSource, /vota-con-la-chola\/issues\/20/u);
+  assert.match(pageSource, /Diez minutos\. Una comprobación concreta\./u);
+  assert.match(pageSource, /Cinco personas distintas deben cubrir las/u);
+  for (const track of [
+    "declaraciones",
+    "ventana-evidencia",
+    "clasificacion",
+    "responsabilidad",
+    "uso-ciudadano",
+  ]) {
+    assert.match(pageSource, new RegExp(`key: "${track}"`, "u"));
+  }
+  assert.match(
+    pageSource,
+    /water-receipt-community-review-track--\$\{track\.key\}/u,
+  );
 });
 
 test("election index points to the current receipt, not stale election metadata", () => {
