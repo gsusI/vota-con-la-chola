@@ -10,6 +10,14 @@ const PAGE_PREFIX_BYTES = 256 * 1024;
 const FRAME_PREFIX_BYTES = 128 * 1024;
 const ASSET_PREFIX_BYTES = 8 * 1024;
 
+const ROUTE_CONTENT_MARKERS = {
+  "/elecciones/andalucia-2026/": [
+    "El recibo del agua de Andalucía",
+    "Primera ley andaluza de regadíos",
+    "Sin hito público localizado",
+  ],
+};
+
 const ROUTES = [
   "/",
   "/topics/",
@@ -32,6 +40,7 @@ const ROUTES = [
   "/initiative-lifecycle/",
   "/legal-sanctions/",
   "/elections-behavior/",
+  "/elecciones/andalucia-2026/",
   "/parliamentary-accountability/",
   "/parliamentary-accountability/attendance/",
   "/parliamentary-accountability/coalitions/",
@@ -81,6 +90,7 @@ const CRITICAL_ASSETS = [
   "/policy-outcomes/data/policy-outcomes.json",
   "/legal-sanctions/data/legal-sanctions.json",
   "/elections-behavior/data/elections-behavior.json",
+  "/elecciones/andalucia-2026/data/water-receipt.json",
   "/political-positions/data/stances.json",
   "/political-positions/data/party-trajectories.json",
   "/political-positions/data/person-default-rows.json",
@@ -289,6 +299,10 @@ async function auditRoute(baseUrl, route, timeoutMs) {
   const iframeSrc = page.ok ? extractIframeSrc(page.prefix) : "";
   const iframeUrl = iframeSrc ? new URL(iframeSrc, baseUrl).toString() : "";
   const visibleAppError = page.ok ? detectVisibleAppError(page.prefix) : false;
+  const expectedMarkers = ROUTE_CONTENT_MARKERS[route] || [];
+  const missingContentMarkers = page.ok
+    ? expectedMarkers.filter((marker) => !page.prefix.includes(marker))
+    : expectedMarkers;
   let iframe = null;
 
   if (iframeUrl) {
@@ -318,9 +332,10 @@ async function auditRoute(baseUrl, route, timeoutMs) {
     title: page.ok ? extractTitle(page.prefix) : "",
     hidden_next_not_found_template: page.ok ? hasHiddenNextNotFoundTemplate(page.prefix) : false,
     visible_app_error: visibleAppError,
+    missing_content_markers: missingContentMarkers,
     error: page.ok ? "" : page.error,
     iframe,
-    ok: pageOk && iframeOk && !visibleAppError,
+    ok: pageOk && iframeOk && !visibleAppError && missingContentMarkers.length === 0,
   };
 }
 
@@ -368,7 +383,10 @@ function printSummary(summary, routeResults, assetResults) {
     console.log("[public-route-audit] route failures:");
     for (const item of routeFailures) {
       const frame = item.iframe ? ` iframe=${item.iframe.status}${item.iframe.embedded_404 ? " embedded404" : ""}` : "";
-      const reason = item.error || (item.visible_app_error ? " visible_app_error" : "");
+      const markerReason = item.missing_content_markers.length
+        ? `missing_markers:${item.missing_content_markers.join("|")}`
+        : "";
+      const reason = item.error || (item.visible_app_error ? "visible_app_error" : markerReason);
       console.log(`  - ${item.route} status=${item.status}${frame}${reason ? ` reason=${reason}` : ""}`);
     }
   }

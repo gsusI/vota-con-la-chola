@@ -40,6 +40,11 @@ const routeGroups = [
         note: "Ordenación por hipótesis, cobertura y comparabilidad.",
       },
       {
+        href: "/elecciones/andalucia-2026/",
+        title: "El recibo del agua de Andalucía",
+        note: "Tres compromisos de investidura, estado verificable y fuentes oficiales.",
+      },
+      {
         href: "/policy-outcomes/",
         title: "Resultados de política pública",
         note: "Indicadores asociados a eventos de política.",

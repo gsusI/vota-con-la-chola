@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: `canonical`
-Updated: `2026-05-11`
+Updated: `2026-07-25`
 
 ## Mandate
 
@@ -94,6 +94,7 @@ Actor scope:
 - Career civil servants and contractors are not treated as politicians by default. They can still appear as implementation or enforcement actors when a public record names them, but attribution must distinguish administrative execution from political accountability.
 
 Where we are now:
+- A citizen-first Andalucía slice is live at `/elecciones/andalucia-2026/`: a reviewed `10 KB` `andalucia_water_commitment_receipt_v1` tracks three investiture water commitments as of `2026-07-25`, keeps pre-`2026-07-02` evidence as historical context, records one non-progress reiteration, links official sources/checkpoints/owners/unknowns, and reports zero formal post-investiture milestones without calling any promise late or broken.
 - Actor backbone exists: `persons`, `parties`, `mandates`, `institutions`, `government_org_units`, `government_org_relationships`, `government_positions`, and `person_org_memberships`.
 - Parliamentary action spine exists: votes, initiatives, documents, text extraction, topic evidence, and topic positions.
 - Policy/event scaffolding exists: domains, axes, instruments, `policy_events`, and event axis scores.
@@ -246,6 +247,7 @@ Exit gate:
 - the product can say "this happened after these decisions" separately from "this decision plausibly caused this outcome", with causal claims held back until methodology supports them.
 
 What is next:
+- Publish the second Andalucía water snapshot, generate a commitment-level diff, and run a five-user comprehension test before expanding the receipt beyond this issue.
 - Close D0+D1 enough for national accountability: actor/office history, Congress/Senate votes, initiatives, text versions, sponsors, reviewed measure points, and party/person behavior.
 - Start D2 with BOE rules and appointments because it unlocks responsibility chains and direct appointee accountability.
 - Then add D3 money and enforcement for the same issues already visible in D1/D2, rather than opening unrelated source lanes.
