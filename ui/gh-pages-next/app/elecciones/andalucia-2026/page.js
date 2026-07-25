@@ -30,6 +30,8 @@ const EMPTY_RECEIPT = {
   sources: [],
   summary: {},
 };
+const COMMUNITY_REVIEW_HREF =
+  "https://github.com/gsusI/vota-con-la-chola/issues/20";
 
 function classes(localClass, stableClass) {
   return `${localClass} ${stableClass}`;
@@ -57,20 +59,6 @@ function changeSummaryCopy(history) {
     return "No se ha añadido evidencia ni ha cambiado el estado de ningún compromiso desde el corte anterior.";
   }
   return "Este corte fija la línea base. El próximo permitirá distinguir cambios reales de una simple republicación.";
-}
-
-function reviewIssueHref(receipt) {
-  const title = `[Recibo del agua] Revisión del corte ${receipt.snapshot_date}`;
-  const body = [
-    "Compromiso revisado:",
-    "",
-    "Fuente oficial:",
-    "",
-    "Qué debería corregirse o añadirse:",
-    "",
-    `Corte: ${receipt.snapshot_date}`,
-  ].join("\n");
-  return `https://github.com/gsusI/vota-con-la-chola/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
 }
 
 function OfficialSourceLink({ source, compact = false }) {
@@ -555,11 +543,11 @@ export default function Andalucia2026WaterReceiptPage() {
           </a>
           <a
             className={classes(styles.reviewLink, "water-receipt-review-link")}
-            href={reviewIssueHref(receipt)}
+            href={COMMUNITY_REVIEW_HREF}
             rel="noreferrer"
             target="_blank"
           >
-            Proponer evidencia o corrección
+            Participar en la revisión comunitaria
           </a>
         </div>
       </footer>
