@@ -6,6 +6,19 @@ export const metadata = {
   title: "El recibo del agua de Andalucía | Vota Con La Chola",
   description:
     "Tres compromisos de investidura sobre agua, su estado público y las fuentes oficiales revisadas.",
+  openGraph: {
+    title: "El recibo del agua de Andalucía",
+    description:
+      "Tres compromisos de investidura, su estado verificable y las fuentes oficiales revisadas.",
+    type: "article",
+    url: "/elecciones/andalucia-2026/",
+  },
+  twitter: {
+    card: "summary",
+    title: "El recibo del agua de Andalucía",
+    description:
+      "Qué se prometió, qué acto oficial existe y qué sigue sin probarse.",
+  },
 };
 
 const EMPTY_RECEIPT = {
@@ -34,6 +47,30 @@ function formatDate(value) {
 
 function sourceMap(sources) {
   return new Map((Array.isArray(sources) ? sources : []).map((source) => [source.source_id, source]));
+}
+
+function changeSummaryCopy(history) {
+  if (history.status === "changed") {
+    return `${history.commitments_changed_total || 0} compromisos contienen cambios verificables desde el corte anterior.`;
+  }
+  if (history.status === "no_change") {
+    return "No se ha añadido evidencia ni ha cambiado el estado de ningún compromiso desde el corte anterior.";
+  }
+  return "Este corte fija la línea base. El próximo permitirá distinguir cambios reales de una simple republicación.";
+}
+
+function reviewIssueHref(receipt) {
+  const title = `[Recibo del agua] Revisión del corte ${receipt.snapshot_date}`;
+  const body = [
+    "Compromiso revisado:",
+    "",
+    "Fuente oficial:",
+    "",
+    "Qué debería corregirse o añadirse:",
+    "",
+    `Corte: ${receipt.snapshot_date}`,
+  ].join("\n");
+  return `https://github.com/gsusI/vota-con-la-chola/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
 }
 
 function OfficialSourceLink({ source, compact = false }) {
@@ -295,8 +332,12 @@ export default function Andalucia2026WaterReceiptPage() {
   const context = receipt.context || {};
   const evidenceCheck = receipt.evidence_check || {};
   const method = receipt.method || {};
+  const history = receipt.history || {};
   const ownerSource = sourcesById.get("government-structure-2026-07-09");
   const lawSource = sourcesById.get("water-law-consolidated-2026-06-20");
+  const immutableSnapshotHref = withBasePath(
+    `/elecciones/andalucia-2026/data/water-receipt/snapshots/${receipt.snapshot_date}.json`,
+  );
 
   return (
     <main className={classes(styles.page, "water-receipt-page")}>
@@ -339,6 +380,62 @@ export default function Andalucia2026WaterReceiptPage() {
           <p className={classes(styles.answerCaveat, "water-receipt-answer-caveat")}>
             {context.caveat}
           </p>
+        </div>
+      </section>
+
+      <section
+        className={classes(styles.changeSummary, "water-receipt-change-summary")}
+        aria-labelledby="water-change-summary-title"
+      >
+        <div className={classes(styles.changeSummaryHeading, "water-receipt-change-summary-heading")}>
+          <p className={classes(styles.changeSummaryEyebrow, "water-receipt-change-summary-eyebrow")}>
+            Historial verificable
+          </p>
+          <h2
+            className={classes(styles.changeSummaryTitle, "water-receipt-change-summary-title")}
+            id="water-change-summary-title"
+          >
+            {history.status === "first_snapshot" ? "Primer corte comparable" : "Qué cambió"}
+          </h2>
+        </div>
+        <div className={classes(styles.changeSummaryContent, "water-receipt-change-summary-content")}>
+          <p className={classes(styles.changeSummaryCopy, "water-receipt-change-summary-copy")}>
+            {changeSummaryCopy(history)}
+          </p>
+          <dl className={classes(styles.changeSummaryFacts, "water-receipt-change-summary-facts")}>
+            <div className={classes(styles.changeSummaryFact, "water-receipt-change-summary-fact")}>
+              <dt className={classes(styles.changeSummaryTerm, "water-receipt-change-summary-term")}>
+                Corte anterior
+              </dt>
+              <dd className={classes(styles.changeSummaryValue, "water-receipt-change-summary-value")}>
+                {history.previous_snapshot_date
+                  ? formatDate(history.previous_snapshot_date)
+                  : "Línea base"}
+              </dd>
+            </div>
+            <div className={classes(styles.changeSummaryFact, "water-receipt-change-summary-fact")}>
+              <dt className={classes(styles.changeSummaryTerm, "water-receipt-change-summary-term")}>
+                Próximo control
+              </dt>
+              <dd className={classes(styles.changeSummaryValue, "water-receipt-change-summary-value")}>
+                {formatDate(method.next_check)}
+              </dd>
+            </div>
+            <div className={classes(styles.changeSummaryFact, "water-receipt-change-summary-fact")}>
+              <dt className={classes(styles.changeSummaryTerm, "water-receipt-change-summary-term")}>
+                Compromisos con cambios
+              </dt>
+              <dd className={classes(styles.changeSummaryValue, "water-receipt-change-summary-value")}>
+                {history.commitments_changed_total ?? 0}
+              </dd>
+            </div>
+          </dl>
+          <a
+            className={classes(styles.immutableSnapshotLink, "water-receipt-immutable-snapshot-link")}
+            href={immutableSnapshotHref}
+          >
+            Descargar este corte inmutable
+          </a>
         </div>
       </section>
 
@@ -455,6 +552,14 @@ export default function Andalucia2026WaterReceiptPage() {
           </a>
           <a className={classes(styles.indexLink, "water-receipt-index-link")} href={withBasePath("/elecciones/")}>
             Ver elecciones
+          </a>
+          <a
+            className={classes(styles.reviewLink, "water-receipt-review-link")}
+            href={reviewIssueHref(receipt)}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Proponer evidencia o corrección
           </a>
         </div>
       </footer>

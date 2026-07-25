@@ -31,6 +31,8 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
             {item["status"] for item in payload["commitments"]},
             {"declarado"},
         )
+        self.assertEqual(payload["history"]["status"], "first_snapshot")
+        self.assertIsNone(payload["history"]["previous_snapshot_date"])
 
     def test_reiteration_does_not_count_as_progress(self):
         payload = MODULE.build_receipt(self.seed)
@@ -58,6 +60,113 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "needs evidence"):
             MODULE.build_receipt(self.seed)
 
+    def test_rejects_next_check_that_does_not_follow_snapshot(self):
+        self.seed["method"]["next_check"] = self.seed["snapshot_date"]
+
+        with self.assertRaisesRegex(ValueError, "next_check"):
+            MODULE.build_receipt(self.seed)
+
+    def test_semantic_diff_reports_added_evidence_and_status_change(self):
+        previous = MODULE.build_receipt(self.seed)
+        current = json.loads(json.dumps(self.seed))
+        current["snapshot_date"] = "2026-08-01"
+        current["scope"]["evidence_window_end"] = "2026-08-01"
+        current["evidence_check"]["checked_at"] = "2026-08-01"
+        current["method"]["next_check"] = "2026-08-08"
+        current["sources"].append(
+            {
+                "source_id": "irrigation-law-filing-2026-07-30",
+                "label": "Registro del proyecto de ley de regadíos",
+                "publisher": "Parlamento de Andalucía",
+                "published_date": "2026-07-30",
+                "locator": "Expediente de la XIII legislatura",
+                "url": "https://www.parlamentodeandalucia.es/expediente/ley-regadios",
+                "source_role": "formal_action",
+            }
+        )
+        current["commitments"][0]["status"] = "acto_oficial"
+        current["commitments"][0]["status_label"] = "Acto oficial"
+        current["commitments"][0]["status_detail"] = "Proyecto registrado."
+        current["commitments"][0]["post_investiture_evidence"].append(
+            {
+                "evidence_kind": "formal_action",
+                "date": "2026-07-30",
+                "label": "Proyecto registrado en el Parlamento.",
+                "source_id": "irrigation-law-filing-2026-07-30",
+                "counts_as_progress": True,
+            }
+        )
+
+        payload = MODULE.build_receipt(current, previous=previous)
+
+        self.assertEqual(payload["history"]["status"], "changed")
+        self.assertEqual(payload["history"]["previous_snapshot_date"], "2026-07-25")
+        self.assertEqual(payload["history"]["commitments_changed_total"], 1)
+        change = payload["history"]["commitments"][0]
+        self.assertEqual(change["commitment_id"], "ley-andaluza-regadios")
+        self.assertIn("status_changed", change["change_kinds"])
+        self.assertIn("evidence_added", change["change_kinds"])
+        self.assertEqual(len(change["evidence_added"]), 1)
+
+    def test_semantic_diff_reports_explicit_no_change(self):
+        previous = MODULE.build_receipt(self.seed)
+        current = json.loads(json.dumps(self.seed))
+        current["snapshot_date"] = "2026-08-01"
+        current["scope"]["evidence_window_end"] = "2026-08-01"
+        current["evidence_check"]["checked_at"] = "2026-08-01"
+        current["method"]["next_check"] = "2026-08-08"
+
+        payload = MODULE.build_receipt(current, previous=previous)
+
+        self.assertEqual(payload["history"]["status"], "no_change")
+        self.assertEqual(payload["history"]["commitments_changed_total"], 0)
+        self.assertEqual(
+            payload["summary"]["changed_since_previous_snapshot"],
+            "sin_cambios_desde_2026-07-25",
+        )
+
+    def test_semantic_diff_reports_removed_commitment(self):
+        previous = MODULE.build_receipt(self.seed)
+        current = json.loads(json.dumps(self.seed))
+        current["snapshot_date"] = "2026-08-01"
+        current["scope"]["evidence_window_end"] = "2026-08-01"
+        current["evidence_check"]["checked_at"] = "2026-08-01"
+        current["method"]["next_check"] = "2026-08-08"
+        removed = current["commitments"].pop()
+        replacement = json.loads(json.dumps(current["commitments"][0]))
+        replacement["commitment_id"] = "nuevo-compromiso"
+        replacement["number"] = "04"
+        replacement["title"] = "Nuevo compromiso"
+        current["commitments"].append(replacement)
+
+        payload = MODULE.build_receipt(current, previous=previous)
+
+        change = next(
+            item
+            for item in payload["history"]["commitments"]
+            if item["commitment_id"] == removed["commitment_id"]
+        )
+        self.assertEqual(change["commitment_id"], removed["commitment_id"])
+        self.assertEqual(change["change_kinds"], ["commitment_removed"])
+        self.assertIsNone(change["status_after"])
+
+    def test_freshness_gate_accepts_current_and_rejects_stale(self):
+        payload = MODULE.build_receipt(self.seed)
+
+        current = MODULE.check_freshness(
+            payload,
+            as_of_date="2026-08-01",
+            max_age_days=8,
+        )
+        self.assertEqual(current["age_days"], 7)
+
+        with self.assertRaisesRegex(ValueError, "water receipt is stale"):
+            MODULE.check_freshness(
+                payload,
+                as_of_date="2026-08-04",
+                max_age_days=8,
+            )
+
     def test_exports_identical_bounded_artifacts(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             first = Path(temp_dir) / "published.json"
@@ -67,6 +176,81 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
 
             self.assertEqual(first.read_bytes(), second.read_bytes())
             self.assertLess(first.stat().st_size, MODULE.MAX_PUBLIC_BYTES)
+
+    def test_exports_immutable_archive_and_uses_it_for_next_diff(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp = Path(temp_dir)
+            seed_path = temp / "seed.json"
+            first = temp / "latest.json"
+            archive = temp / "archive"
+            seed_path.write_text(
+                json.dumps(self.seed, ensure_ascii=False),
+                encoding="utf-8",
+            )
+
+            MODULE.export_receipt(
+                seed_path,
+                [first],
+                archive_dirs=[archive],
+                as_of_date="2026-07-25",
+            )
+            archived_first = archive / "2026-07-25.json"
+            self.assertTrue(archived_first.exists())
+
+            next_seed = json.loads(json.dumps(self.seed))
+            next_seed["snapshot_date"] = "2026-08-01"
+            next_seed["scope"]["evidence_window_end"] = "2026-08-01"
+            next_seed["evidence_check"]["checked_at"] = "2026-08-01"
+            next_seed["method"]["next_check"] = "2026-08-08"
+            seed_path.write_text(
+                json.dumps(next_seed, ensure_ascii=False),
+                encoding="utf-8",
+            )
+
+            payload = MODULE.export_receipt(
+                seed_path,
+                [first],
+                archive_dirs=[archive],
+                as_of_date="2026-08-01",
+            )
+
+            self.assertEqual(payload["history"]["status"], "no_change")
+            self.assertEqual(
+                payload["history"]["previous_snapshot_date"],
+                "2026-07-25",
+            )
+            self.assertTrue((archive / "2026-08-01.json").exists())
+
+    def test_archive_rejects_rewriting_a_snapshot_date(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp = Path(temp_dir)
+            seed_path = temp / "seed.json"
+            archive = temp / "archive"
+            seed_path.write_text(
+                json.dumps(self.seed, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            MODULE.export_receipt(
+                seed_path,
+                [temp / "latest.json"],
+                archive_dirs=[archive],
+                as_of_date="2026-07-25",
+            )
+
+            changed_seed = json.loads(json.dumps(self.seed))
+            changed_seed["question"] = "Contenido cambiado sin nuevo corte"
+            seed_path.write_text(
+                json.dumps(changed_seed, ensure_ascii=False),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "immutable receipt snapshot"):
+                MODULE.export_receipt(
+                    seed_path,
+                    [temp / "latest.json"],
+                    archive_dirs=[archive],
+                    as_of_date="2026-07-25",
+                )
 
 
 if __name__ == "__main__":

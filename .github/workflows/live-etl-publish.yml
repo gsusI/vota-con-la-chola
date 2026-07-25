@@ -69,6 +69,13 @@ jobs:
           just etl-tracker-status
           just etl-tracker-gate
 
+      - name: Enforce current Andalucía water receipt
+        run: |
+          python3 scripts/export_andalucia_2026_water_commitment_receipt.py \
+            --as-of-date "$SNAPSHOT_DATE" \
+            --max-age-days 8
+          node --test tests/test_andalucia_2026_water_receipt.js
+
       - name: Build public static artifacts
         run: |
           HF_DATASET_REPO_ID="${HF_DATASET_REPO_ID:-local/vota-con-la-chola-data}" \

@@ -7,6 +7,37 @@ on:
       - main
 
 jobs:
+  andalucia-water-receipt-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate, export, and freshness-check water receipt
+        run: |
+          python3 scripts/export_andalucia_2026_water_commitment_receipt.py \
+            --as-of-date "$(date -u +%F)" \
+            --max-age-days 8
+          python3 -m unittest tests.test_export_andalucia_2026_water_commitment_receipt -q
+          node --test tests/test_andalucia_2026_water_receipt.js
+          git diff --exit-code -- \
+            etl/data/published/andalucia-2026-water-commitment-receipt.json \
+            etl/data/published/andalucia-water-receipt/snapshots \
+            ui/gh-pages-next/public/elecciones/andalucia-2026/data/water-receipt.json \
+            ui/gh-pages-next/public/elecciones/andalucia-2026/data/water-receipt/snapshots
+
   repo-root-hygiene:
     runs-on: ubuntu-latest
     timeout-minutes: 5

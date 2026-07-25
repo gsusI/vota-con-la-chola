@@ -33,6 +33,12 @@ test("water receipt artifact is compact, current, and conservative", () => {
   assert.equal(receipt.snapshot_date, "2026-07-25");
   assert.equal(receipt.commitments.length, 3);
   assert.equal(receipt.summary.post_investiture_actions_total, 0);
+  assert.equal(receipt.history.status, "first_snapshot");
+  assert.equal(receipt.history.previous_snapshot_date, null);
+  assert.equal(receipt.history.commitments_changed_total, 0);
+  assert.equal(receipt.freshness.last_checked_date, "2026-07-25");
+  assert.equal(receipt.freshness.next_check_date, "2026-08-01");
+  assert.equal(receipt.freshness.stale_after_date, "2026-08-03");
   assert.deepEqual(
     receipt.commitments.map((item) => item.commitment_id),
     [
@@ -82,6 +88,7 @@ test("public route renders the focused answer without loading the operational pa
   for (const className of [
     "water-receipt-page",
     "water-receipt-answer",
+    "water-receipt-change-summary",
     "water-receipt-commitment",
     "water-receipt-checkpoint",
     "water-receipt-unknowns",
@@ -89,6 +96,8 @@ test("public route renders the focused answer without loading the operational pa
   ]) {
     assert.match(pageSource, new RegExp(`"${className}"`, "u"));
   }
+  assert.match(pageSource, /data\/water-receipt\/snapshots\//u);
+  assert.match(pageSource, /Proponer evidencia o corrección/u);
 });
 
 test("election index points to the current receipt, not stale election metadata", () => {
@@ -136,4 +145,23 @@ test("public route audit checks content and compact artifact, not only HTTP 200"
     /"\/elecciones\/andalucia-2026\/data\/water-receipt\.json"/u,
   );
   assert.match(auditSource, /missing_content_markers/u);
+});
+
+test("immutable first snapshot matches current public receipt", () => {
+  const receipt = fs.readFileSync(dataPath);
+  const archivePath = path.join(
+    root,
+    "ui",
+    "gh-pages-next",
+    "public",
+    "elecciones",
+    "andalucia-2026",
+    "data",
+    "water-receipt",
+    "snapshots",
+    "2026-07-25.json",
+  );
+
+  assert.ok(fs.existsSync(archivePath));
+  assert.deepEqual(fs.readFileSync(archivePath), receipt);
 });
