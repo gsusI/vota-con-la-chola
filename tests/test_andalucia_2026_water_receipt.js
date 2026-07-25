@@ -97,7 +97,8 @@ test("public route renders the focused answer without loading the operational pa
     assert.match(pageSource, new RegExp(`"${className}"`, "u"));
   }
   assert.match(pageSource, /data\/water-receipt\/snapshots\//u);
-  assert.match(pageSource, /Proponer evidencia o corrección/u);
+  assert.match(pageSource, /Participar en la revisión comunitaria/u);
+  assert.match(pageSource, /vota-con-la-chola\/issues\/20/u);
 });
 
 test("election index points to the current receipt, not stale election metadata", () => {
