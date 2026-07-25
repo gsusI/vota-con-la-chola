@@ -1,0 +1,224 @@
+{
+  "schema_version": "andalucia_water_commitment_receipt_v1",
+  "snapshot_date": "2026-07-25",
+  "title": "El recibo del agua de Andalucía",
+  "question": "¿Qué prometió el nuevo Gobierno andaluz sobre agua y qué ha hecho ya?",
+  "scope": {
+    "territory": "Andalucía",
+    "legislature": "XIII",
+    "investiture_date": "2026-07-02",
+    "evidence_window_start": "2026-07-02",
+    "evidence_window_end": "2026-07-25"
+  },
+  "context": {
+    "answer": "Tres compromisos declarados y ningún hito jurídico posterior específico localizado en este primer corte.",
+    "caveat": "Ninguno incluye un plazo. Este corte temprano no prueba incumplimiento ni descarta trabajo interno o documentos todavía no indexados.",
+    "owner_note": "La Consejería de Agricultura, Pesca, Agua y Desarrollo Rural conserva las competencias autonómicas en agua. Los proyectos de ley requieren tramitación parlamentaria.",
+    "historical_baseline_note": "La evidencia anterior al 2 de julio de 2026 se trata como contexto histórico y nunca como avance de estos compromisos."
+  },
+  "sources": [
+    {
+      "source_id": "investiture-speech-2026-06-29",
+      "label": "Discurso de investidura",
+      "publisher": "Parlamento de Andalucía",
+      "published_date": "2026-06-29",
+      "locator": "DSPA Plenos núm. 2, pág. 19",
+      "url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?id=203574&tipodoc=diario",
+      "source_role": "declaration"
+    },
+    {
+      "source_id": "investiture-result-2026-07-02",
+      "label": "Resultado de la investidura",
+      "publisher": "Parlamento de Andalucía",
+      "published_date": "2026-07-02",
+      "locator": "Comunicado de 2 de julio de 2026",
+      "url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actualidad/comunicadosdeprensa.do?id=203654",
+      "source_role": "context"
+    },
+    {
+      "source_id": "government-structure-2026-07-09",
+      "label": "Competencias de la nueva estructura de Gobierno",
+      "publisher": "Boletín Oficial de la Junta de Andalucía",
+      "published_date": "2026-07-09",
+      "locator": "Decreto del Presidente 9/2026, art. 6",
+      "url": "https://www.juntadeandalucia.es/boja/2026/512/1",
+      "source_role": "ownership"
+    },
+    {
+      "source_id": "water-law-consolidated-2026-06-20",
+      "label": "Ley 9/2010 de Aguas de Andalucía",
+      "publisher": "Boletín Oficial de la Junta de Andalucía",
+      "published_date": "2026-06-20",
+      "locator": "Texto consolidado vigente desde el 20 de junio de 2026",
+      "url": "https://ws040.juntadeandalucia.es/sedeboja/lconsolidada/eli/es-an/l/2010/07/30/9/con/20260620/spa/html/LE0000424487_20260620.html",
+      "source_role": "historical_context"
+    },
+    {
+      "source_id": "irrigation-law-reiteration-2026-07-16",
+      "label": "La Junta anuncia que impulsará la Ley del Regadío Sostenible",
+      "publisher": "Junta de Andalucía",
+      "published_date": "2026-07-16",
+      "locator": "Nota oficial de la Consejería de Agricultura, Pesca, Agua y Desarrollo Rural",
+      "url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/servicios/actualidad/noticias/detalle/674179.html",
+      "source_role": "reiteration"
+    },
+    {
+      "source_id": "water-law-consultation-2025-07",
+      "label": "Consulta previa sobre la modificación de la Ley 9/2010",
+      "publisher": "Junta de Andalucía",
+      "published_date": "2025-07-09",
+      "locator": "Consulta pública previa, 9 a 23 de julio de 2025",
+      "url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/servicios/participacion/normativa/consulta-previa/detalle/597343.html",
+      "source_role": "historical_context"
+    },
+    {
+      "source_id": "water-law-partial-change-2026-03",
+      "label": "Ley 2/2026 para la Gestión Ambiental de Andalucía",
+      "publisher": "Boletín Oficial de la Junta de Andalucía",
+      "published_date": "2026-03-20",
+      "locator": "Disposición final sexta: modificación parcial de la Ley 9/2010",
+      "url": "https://www.juntadeandalucia.es/boja/2026/55/1",
+      "source_role": "historical_context"
+    }
+  ],
+  "evidence_check": {
+    "checked_at": "2026-07-25",
+    "method": "Revisión manual de fuentes oficiales por título, texto y tipo de acto dentro de la ventana del corte.",
+    "official_scopes": [
+      {
+        "label": "Mesa del Parlamento, última sesión revisada 23 de julio",
+        "publisher": "Parlamento de Andalucía",
+        "url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/calendariodesesiones/buscadordesesiones.do?legislatura=13&numses=7&organo=1&origen=desarrolloexp"
+      },
+      {
+        "label": "Boletín Oficial de la Junta de Andalucía",
+        "publisher": "Junta de Andalucía",
+        "url": "https://www.juntadeandalucia.es/eboja.html"
+      },
+      {
+        "label": "Consejo de Gobierno, última sesión revisada 22 de julio",
+        "publisher": "Junta de Andalucía",
+        "url": "https://www.juntadeandalucia.es/organismos/consejo/sesion/22072026.html"
+      }
+    ],
+    "limitation": "Un resultado sin evidencia localizada describe este corte y estas fuentes; no afirma que sea imposible que exista otra actuación oficial."
+  },
+  "commitments": [
+    {
+      "commitment_id": "ley-andaluza-regadios",
+      "number": "01",
+      "title": "Primera ley andaluza de regadíos",
+      "declaration": "El presidente se comprometió a llevar a la Cámara una primera ley andaluza específica sobre regadíos.",
+      "source_excerpt": "«la primera ley de regadío de Andalucía»",
+      "declared_source_id": "investiture-speech-2026-06-29",
+      "status": "declarado",
+      "status_label": "Solo declarado",
+      "status_detail": "La Junta reiteró el 16 de julio que impulsará la Ley del Regadío Sostenible. No se ha localizado anteproyecto, consulta pública, aprobación del Consejo o registro parlamentario.",
+      "checkpoint": "Registro de un proyecto de ley de regadíos en el Parlamento de Andalucía.",
+      "post_investiture_evidence": [
+        {
+          "evidence_kind": "reiteration",
+          "date": "2026-07-16",
+          "label": "La Consejería vuelve a anunciar que impulsará la ley.",
+          "source_id": "irrigation-law-reiteration-2026-07-16",
+          "counts_as_progress": false
+        }
+      ],
+      "ownership": {
+        "executive": "Consejo de Gobierno y consejería competente en agua: preparar e impulsar el proyecto.",
+        "legislature": "Parlamento de Andalucía: tramitar, debatir y aprobar o rechazar."
+      },
+      "money_and_delivery": "No hay presupuesto, contrato o entrega enlazados que prueben la redacción o tramitación de esta ley.",
+      "unknowns": [
+        "Si existe ya un borrador interno.",
+        "Qué alcance material tendrá la futura ley.",
+        "Cuándo se registrará en la Cámara."
+      ],
+      "limitations": [
+        "La declaración no equivale a un proyecto registrado.",
+        "La actividad anterior al 2 de julio no cuenta como avance del compromiso.",
+        "No se anunció un plazo de cumplimiento."
+      ]
+    },
+    {
+      "commitment_id": "reglamento-planificacion-agua",
+      "number": "02",
+      "title": "Nuevo reglamento de planificación del agua",
+      "declaration": "El presidente anunció la aprobación de un nuevo reglamento de planificación para reducir cargas burocráticas en procedimientos relacionados con el agua.",
+      "source_excerpt": "«un nuevo reglamento de planificación»",
+      "declared_source_id": "investiture-speech-2026-06-29",
+      "status": "declarado",
+      "status_label": "Solo declarado",
+      "status_detail": "No se ha localizado una aprobación o publicación posterior del reglamento anunciado.",
+      "checkpoint": "Aprobación del reglamento y publicación del decreto correspondiente en el BOJA.",
+      "post_investiture_evidence": [],
+      "ownership": {
+        "executive": "Consejo de Gobierno y consejería competente en agua: preparar y aprobar el desarrollo reglamentario.",
+        "legislature": "Parlamento de Andalucía: control político; la aprobación reglamentaria corresponde al Ejecutivo."
+      },
+      "money_and_delivery": "No se ha enlazado gasto, contrato o indicador de ejecución específico para este reglamento.",
+      "unknowns": [
+        "Qué procedimientos cambiará.",
+        "Si existe consulta pública o memoria normativa.",
+        "Cuál será su calendario de aprobación."
+      ],
+      "limitations": [
+        "Una simplificación anunciada no demuestra todavía menor tiempo o carga para la ciudadanía.",
+        "El cambio organizativo del Gobierno identifica competencia, no progreso normativo.",
+        "No se anunció un plazo de cumplimiento."
+      ]
+    },
+    {
+      "commitment_id": "actualizacion-ley-aguas",
+      "number": "03",
+      "title": "Actualización de la Ley de Aguas",
+      "declaration": "El presidente propuso actualizar la Ley 9/2010 de Aguas de Andalucía para adaptarla a nuevas necesidades hídricas.",
+      "source_excerpt": "«actualizar la Ley de Aguas de Andalucía»",
+      "declared_source_id": "investiture-speech-2026-06-29",
+      "status": "declarado",
+      "status_label": "Solo declarado",
+      "status_detail": "No se ha localizado una iniciativa posterior que materialice la actualización anunciada.",
+      "checkpoint": "Registro de una iniciativa que modifique la Ley 9/2010 y publicación de su expediente parlamentario.",
+      "post_investiture_evidence": [],
+      "ownership": {
+        "executive": "Consejo de Gobierno y consejería competente en agua: proponer e impulsar la reforma.",
+        "legislature": "Parlamento de Andalucía: tramitar, enmendar y aprobar o rechazar la modificación."
+      },
+      "money_and_delivery": "No hay una partida o contratación enlazada que demuestre el trabajo normativo de esta actualización.",
+      "unknowns": [
+        "Qué artículos se pretenden modificar.",
+        "Si la reforma llegará como proyecto independiente o dentro de otra ley.",
+        "Qué participación pública tendrá el proceso."
+      ],
+      "historical_context": [
+        {
+          "label": "Consulta pública previa sobre una modificación de la Ley 9/2010.",
+          "date": "2025-07-09",
+          "source_id": "water-law-consultation-2025-07"
+        },
+        {
+          "label": "La Ley 2/2026 introdujo cambios parciales antes del nuevo compromiso.",
+          "date": "2026-03-20",
+          "source_id": "water-law-partial-change-2026-03"
+        }
+      ],
+      "limitations": [
+        "La Ley 9/2010 ya tuvo cambios anteriores; no deben confundirse con esta promesa posterior.",
+        "No se atribuye resultado hídrico alguno hasta observar aplicación y efectos.",
+        "No se anunció un plazo de cumplimiento."
+      ]
+    }
+  ],
+  "method": {
+    "status_vocabulary": {
+      "declarado": "Existe una declaración primaria, pero no un acto posterior específico localizado.",
+      "acto_oficial": "Existe una iniciativa, decreto, publicación o expediente oficial posterior enlazado.",
+      "financiado": "Existe una asignación presupuestaria específica enlazada.",
+      "contratado": "Existe una contratación específica enlazada.",
+      "entrega_observada": "Existe prueba oficial de entrega o puesta en servicio.",
+      "resultado_observado": "Existe un indicador posterior observado; no implica causalidad por sí solo."
+    },
+    "rule": "Solo la evidencia fechada desde el 2 de julio de 2026 puede mover el estado de un compromiso. Contexto, planes o gasto anteriores permanecen como baseline.",
+    "next_check": "2026-08-01"
+  }
+}

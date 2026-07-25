@@ -5,6 +5,7 @@ Estado actual:
 - El pipeline canónico es `just cloudflare-pages-build`.
 - La salida pública está en `ui/gh-pages-next/out/`; `docs/gh-pages/` queda deprecado y no se versiona.
 - El build por defecto no asume la subruta histórica `/vota-con-la-chola`.
+- Desde `2026-07-25`, `/elecciones/andalucia-2026/` usa `water-receipt.json` como entrada ciudadana: `81 KB` de HTML y `10 KB` de JSON con tres compromisos de agua revisados, fuentes oficiales y límites explícitos. Los artefactos técnicos completos quedan fuera del payload ciudadano. La misma salida se publica en Cloudflare Pages y en `gh-pages`, origen que todavía sirve el dominio canónico.
 
 Destino:
 - URL pública canónica: `https://votaconlachola.org/`.
