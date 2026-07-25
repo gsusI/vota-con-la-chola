@@ -1844,19 +1844,19 @@
         <div class="nav">
           <a class="pill" href="../">Exploradores</a>
           <a class="pill secondary" href="../explorer-temas/">Temas</a>
-          <a class="pill neutral" href="../explorer/">Explorador SQL</a>
+          <a class="pill neutral" href="../explorer/">Explorer SQL</a>
           <a class="pill neutral" href="../explorer-sources/">Fuentes</a>
-          <a class="pill neutral" href="leaderboards.html">Clasificaciones</a>
+          <a class="pill neutral" href="leaderboards.html">Leaderboards</a>
         </div>
 
         <div class="hero">
           <div>
-            <p class="eyebrow">Ciudadanía</p>
-            <h1>Qué hicieron sobre lo que te importa</h1>
+            <p class="eyebrow">Ciudadania</p>
+            <h1>Que hicieron sobre lo que te importa</h1>
             <p class="sub">
-              Elige una preocupación. Verás casos concretos (hoy: iniciativas y votaciones) y un resumen por partido.
+              Elige una preocupacion. Veras items concretos (hoy: iniciativas/votaciones) y un resumen por partido.
               Cada tarjeta enlaza a evidencia para auditar.
-              <strong>No hay clasificación mágica</strong>.
+              <strong>No hay ranking magico</strong>.
             </p>
           </div>
           <div class="status" id="statusChips" role="status" aria-live="polite" aria-atomic="true">
@@ -1866,23 +1866,23 @@
 
         <div class="modeSwitch" id="experienceModeSwitch" role="group" aria-label="Modo de experiencia">
           <button class="modeBtn is-active" type="button" data-experience-mode="consumer">Modo ciudadano</button>
-          <button class="modeBtn" type="button" data-experience-mode="audit">Modo auditoría</button>
+          <button class="modeBtn" type="button" data-experience-mode="audit">Modo auditoria</button>
         </div>
         <p class="modeHint" id="experienceModeHint">
-          Modo ciudadano: primero respuesta útil, luego detalle. Cambia a auditoría para ver telemetría y tablas completas.
+          Modo ciudadano: primero respuesta util, luego detalle. Cambia a auditoria para ver telemetria y tablas completas.
         </p>
 
         <div class="banner" id="banner" role="status" aria-live="polite" aria-atomic="true"></div>
-        <div class="onboard" id="onboard" role="region" aria-label="Guía de inicio"></div>
+        <div class="onboard" id="onboard" role="region" aria-label="Guia de inicio"></div>
       </header>
 
       <section class="experience card md3-card fadeIn" id="experienceFlow" style="animation-delay: 0.05s" aria-label="Ruta guiada">
         <div class="experienceRail">
           <div class="journeyIntro">
             <p class="eyebrow">Flujo guiado</p>
-            <h2 class="journeyTitle">Del problema ciudadano a una decisión auditable</h2>
+            <h2 class="journeyTitle">Del problema ciudadano a una decision auditable</h2>
             <p class="journeyNarrative" id="journeyNarrative">
-              Empieza con una preocupación, abre un caso concreto y contrasta partidos con evidencia verificable.
+              Empieza con una preocupacion, abre un caso concreto y contrasta partidos con evidencia verificable.
             </p>
             <div class="journeyProgressWrap">
               <div class="journeyProgressBar"><div id="journeyProgressFill"></div></div>
@@ -1890,9 +1890,9 @@
             </div>
             <div class="journeyDecision" id="journeyDecisionCard">
               <p class="journeyDecisionHead">Lectura actual</p>
-              <p class="journeyDecisionTitle" id="journeyDecisionTitle">Selecciona una preocupación para empezar.</p>
+              <p class="journeyDecisionTitle" id="journeyDecisionTitle">Selecciona una preocupacion para empezar.</p>
               <p class="journeyDecisionBody" id="journeyDecisionBody">
-                Esta capa convierte los datos en decisiones: prioridad, caso, postura personal y comparación de partidos.
+                Esta capa abstrae la data a decisiones: prioridad, caso, postura personal y comparacion de partidos.
               </p>
               <div class="journeyDecisionTags" id="journeyDecisionTags"></div>
               <div class="journeyDecisionLinks" id="journeyDecisionLinks"></div>
@@ -1904,21 +1904,21 @@
               <span class="journeyStepNum">1</span>
               <div class="journeyStepText">
                 <strong>Define prioridad</strong>
-                <span data-step-status>Elige la preocupación principal.</span>
+                <span data-step-status>Elige la preocupacion principal.</span>
               </div>
             </li>
             <li class="journeyStep" id="journeyStepTopic" data-step="2">
               <span class="journeyStepNum">2</span>
               <div class="journeyStepText">
                 <strong>Abre un caso</strong>
-                <span data-step-status>Escoge un caso concreto para evitar ruido.</span>
+                <span data-step-status>Escoge un item concreto para evitar ruido.</span>
               </div>
             </li>
             <li class="journeyStep" id="journeyStepPreference" data-step="3">
               <span class="journeyStepNum">3</span>
               <div class="journeyStepText">
                 <strong>Marca tu postura</strong>
-                <span data-step-status>Activa coincidencias y desajustes según tu criterio.</span>
+                <span data-step-status>Activa match/mismatch segun tu criterio.</span>
               </div>
             </li>
             <li class="journeyStep" id="journeyStepCompare" data-step="4">
@@ -1934,32 +1934,32 @@
             <p class="hint">Atajos de experiencia</p>
             <button class="btn md3-button" id="journeyNextAction" type="button" data-journey-action="next_step">Siguiente paso</button>
             <button class="btn md3-button" id="journeyFirstAnswerAction" type="button" data-journey-action="first_answer">
-              Aplicar respuesta rápida
+              Aplicar respuesta rapida
             </button>
             <button class="btn md3-button" type="button" data-journey-scroll="#concernSectionHeading">Ir a prioridades</button>
             <button class="btn md3-button" type="button" data-journey-scroll="#itemsSectionHeading">Ir a casos</button>
-            <button class="btn md3-button" type="button" data-journey-scroll="#compareSectionHeading">Ir a comparación</button>
-            <button class="btn md3-button" type="button" data-journey-action="share_preset">Compartir ajuste</button>
+            <button class="btn md3-button" type="button" data-journey-scroll="#compareSectionHeading">Ir a comparacion</button>
+            <button class="btn md3-button" type="button" data-journey-action="share_preset">Compartir preset</button>
           </div>
         </div>
       </section>
 
-      <main class="layout fadeIn" style="animation-delay: 0.08s" id="citizenMain" tabindex="-1" aria-label="Panel principal de comparación">
+      <main class="layout fadeIn" style="animation-delay: 0.08s" id="citizenMain" tabindex="-1" aria-label="Panel principal de comparacion">
         <section class="panel panelConcern card md3-card" id="stepConcern" aria-labelledby="concernSectionHeading">
           <div class="head">
-            <h2 id="concernSectionHeading">1) Preocupación</h2>
+            <h2 id="concernSectionHeading">1) Preocupacion</h2>
             <p class="hint">Define primero el problema ciudadano. Luego todo el flujo se filtra y simplifica alrededor de esa prioridad.</p>
           </div>
           <div class="controls" style="align-items: flex-start">
             <div style="flex: 1 1 240px; min-width: 0">
-              <div class="hint" style="margin: 0 0 6px">Mis preocupaciones (panel)</div>
+              <div class="hint" style="margin: 0 0 6px">Mis preocupaciones (dashboard)</div>
               <div class="tags" id="selectedConcernTags"></div>
             </div>
             <button class="btn md3-button" id="btnResetSelected" type="button">Reset</button>
           </div>
           <div class="controls" style="padding-top: 0">
             <div style="flex: 1 1 100%; min-width: 0">
-              <div class="hint" style="margin: 0 0 6px">Paquetes rápidos de preocupaciones</div>
+              <div class="hint" style="margin: 0 0 6px">Packs rapidos (multi-concern)</div>
               <div class="tags" id="concernPackTags"></div>
               <div class="hint" id="concernPackHint" style="margin: 6px 0 0"></div>
             </div>
@@ -1973,12 +1973,12 @@
 
         <section class="panel panelItems card md3-card" id="stepItems" aria-labelledby="itemsSectionHeading">
           <div class="head">
-            <h2 id="itemsSectionHeading">2) Casos</h2>
+            <h2 id="itemsSectionHeading">2) Items</h2>
             <p class="hint">Trabaja sobre un caso concreto: evita promedios abstractos y prioriza casos auditables.</p>
           </div>
           <div class="controls">
-            <input id="topicSearch" type="text" aria-label="Buscar casos por título" placeholder="Busca en el título…" />
-            <select class="md3-tab" id="topicLimit" aria-label="Límite de casos">
+            <input id="topicSearch" type="text" aria-label="Buscar items por titulo" placeholder="Busca en el titulo…" />
+            <select class="md3-tab" id="topicLimit" aria-label="Limite de items">
               <option value="20" selected>20</option>
               <option value="40">40</option>
               <option value="60">60</option>
@@ -1990,25 +1990,25 @@
               <span class="dot ok"></span><span>foco</span><span class="mono" id="partyFocusName"></span>
             </span>
           </div>
-          <div class="list" id="topicList" role="list" aria-label="Lista de casos"></div>
+          <div class="list" id="topicList" role="list" aria-label="Lista de items"></div>
         </section>
 
         <section class="panel panelCompare card md3-card" id="stepCompare" aria-labelledby="compareSectionHeading">
           <div class="head">
             <h2 id="compareSectionHeading">3) Comparar por partido</h2>
             <p class="hint">
-              Aquí conviertes los datos en decisión: compara postura, cobertura y confianza, y luego abre evidencia cuando haya duda.
+              Aqui conviertes la data en decision: compara postura, cobertura y confianza, y luego abre evidencia cuando haya duda.
             </p>
-            <details class="explainGlossary" data-explainability-glossary="1" aria-label="Glosario rápido para leer resultados">
-              <summary data-explainability-copy="1">Glosario rápido: primero mira cobertura y luego abre evidencia.</summary>
+            <details class="explainGlossary" data-explainability-glossary="1" aria-label="Glosario rapido para leer resultados">
+              <summary data-explainability-copy="1">Glosario rapido: primero mira cobertura y luego abre evidencia.</summary>
               <div class="rowMeta" data-explainability-glossary-tags="1">
                 <span
                   class="tag"
                   data-explainability-term="unknown"
                   data-explainability-tooltip="1"
-                  data-term-definition="Sin clasificar significa incierto más sin señal."
-                  title="Sin clasificar significa incierto más sin señal."
-                  >sin clasificar</span
+                  data-term-definition="Unknown significa incierto mas sin senal."
+                  title="Unknown significa incierto mas sin senal."
+                  >unknown</span
                 >
                 <span
                   class="tag"
@@ -2022,37 +2022,37 @@
                   class="tag"
                   data-explainability-term="confianza"
                   data-explainability-tooltip="1"
-                  data-term-definition="Confianza indica cuánta evidencia respalda el resumen."
-                  title="Confianza indica cuánta evidencia respalda el resumen."
+                  data-term-definition="Confianza indica cuanta evidencia respalda el resumen."
+                  title="Confianza indica cuanta evidencia respalda el resumen."
                   >confianza</span
                 >
                 <span
                   class="tag"
                   data-explainability-term="evidencia"
                   data-explainability-tooltip="1"
-                  data-term-definition="Evidencia abre la fuente original para auditoría."
-                  title="Evidencia abre la fuente original para auditoría."
+                  data-term-definition="Evidencia abre la fuente original para auditoria."
+                  title="Evidencia abre la fuente original para auditoria."
                   >evidencia</span
                 >
               </div>
               <ul class="explainGlossaryList" data-explainability-glossary-list="1">
-                <li data-explainability-copy="1">Sin clasificar: incierto más sin señal. No implica apoyo ni rechazo.</li>
-                <li data-explainability-copy="1">Cobertura alta reduce dudas. Cobertura baja exige revisar enlaces.</li>
-                <li data-explainability-copy="1">Confianza alta no reemplaza auditoría. Siempre puedes abrir evidencia.</li>
+                <li data-explainability-copy="1">Unknown: incierto mas sin senal. No implica apoyo ni rechazo.</li>
+                <li data-explainability-copy="1">Cobertura alta reduce dudas. Cobertura baja exige revisar links.</li>
+                <li data-explainability-copy="1">Confianza alta no reemplaza auditoria. Siempre puedes abrir evidencia.</li>
               </ul>
             </details>
           </div>
           <div class="controls">
             <select class="md3-tab" id="viewMode" aria-label="Vista">
               <option value="detail" selected>Vista: detalle</option>
-              <option value="dashboard">Vista: mi panel</option>
+              <option value="dashboard">Vista: mi dashboard</option>
               <option value="alignment">Vista: alineamiento</option>
               <option value="coherence">Vista: coherencia</option>
             </select>
-            <select class="md3-tab" id="methodSelect" aria-label="Método">
-              <option value="combined" selected>Método: combinado (prioriza votos)</option>
-              <option value="votes">Método: hechos (votos)</option>
-              <option value="declared">Método: dichos (intervenciones)</option>
+            <select class="md3-tab" id="methodSelect" aria-label="Metodo">
+              <option value="combined" selected>Metodo: combinado (prioriza votos)</option>
+              <option value="votes">Metodo: hechos (votos)</option>
+              <option value="declared">Metodo: dichos (intervenciones)</option>
             </select>
           </div>
           <details class="advancedControls">
@@ -2064,7 +2064,7 @@
                 <option value="oppose">En contra</option>
                 <option value="mixed">Mixto</option>
                 <option value="unclear">Incierto</option>
-                <option value="no_signal">Sin señal</option>
+                <option value="no_signal">Sin senal</option>
               </select>
               <select class="md3-tab" id="partySort" aria-label="Orden de partidos">
                 <option value="name" selected>Orden: nombre</option>
@@ -2078,10 +2078,10 @@
       </main>
 
       <footer class="foot card fadeIn" style="animation-delay: 0.14s">
-        <strong>Cómo leer esto:</strong> “A favor / En contra / Mixto” viene de agregar posiciones de diputados del partido.
-        Si la cobertura es baja, mostramos <strong>Incierto</strong>. Si no hay datos, mostramos <strong>Sin señal</strong>.
+        <strong>Como leer esto:</strong> “A favor / En contra / Mixto” viene de agregar posiciones de diputados del partido.
+        Si la cobertura es baja, mostramos <strong>Incierto</strong>. Si no hay datos, mostramos <strong>Sin senal</strong>.
         En <strong>combinado</strong> priorizamos <strong>votos</strong>; si no hay votos, usamos <strong>dichos</strong>.
-        “Programa” viene de textos (promesas) y es más incierto por defecto. Usa los enlaces de auditoría para ver registros y evidencia.
+        “Programa” viene de textos (promesas) y es mas incierto por defecto. Usa los links de auditoria para ver filas y evidencia.
       </footer>
     </div>
 
@@ -2806,7 +2806,7 @@
         if (k === "oppose") return "En contra";
         if (k === "mixed") return "Mixto";
         if (k === "unclear") return "Incierto";
-        if (k === "no_signal") return "Sin señal";
+        if (k === "no_signal") return "Sin senal";
         return "Incierto";
       }
 
@@ -2863,33 +2863,6 @@
         return k === "support" || k === "oppose" || k === "mixed";
       }
 
-      function comparabilityRowFor(topicId, partyId) {
-        const key = `${Number(topicId || 0)}:${Number(partyId || 0)}`;
-        return state.curiosity && state.curiosity.comparabilityByKey && state.curiosity.comparabilityByKey.get
-          ? state.curiosity.comparabilityByKey.get(key) || null
-          : null;
-      }
-
-      function lineageRowFor(topicId, partyId) {
-        const key = `${Number(topicId || 0)}:${Number(partyId || 0)}`;
-        return state.curiosity && state.curiosity.lineageByKey && state.curiosity.lineageByKey.get
-          ? state.curiosity.lineageByKey.get(key) || null
-          : null;
-      }
-
-      function snapshotDiffRowFor(topicId, partyId) {
-        const key = `${Number(topicId || 0)}:${Number(partyId || 0)}`;
-        return state.curiosity && state.curiosity.snapshotDiffByKey && state.curiosity.snapshotDiffByKey.get
-          ? state.curiosity.snapshotDiffByKey.get(key) || null
-          : null;
-      }
-
-      function snapshotDiffPartySummaryFor(partyId) {
-        return state.curiosity && state.curiosity.snapshotDiffPartyById && state.curiosity.snapshotDiffPartyById.get
-          ? state.curiosity.snapshotDiffPartyById.get(Number(partyId || 0)) || null
-          : null;
-      }
-
       function buildTopicByIdMap(citizen) {
         const m = new Map();
         for (const t of (citizen || {}).topics || []) {
@@ -2905,37 +2878,6 @@
           m.set(key, r);
         }
         return m;
-      }
-
-      function buildRowsByKeyMap(payload) {
-        const m = new Map();
-        for (const row of (payload && Array.isArray(payload.rows) ? payload.rows : [])) {
-          const key = `${Number(row.topic_id || 0)}:${Number(row.party_id || 0)}`;
-          m.set(key, row);
-        }
-        return m;
-      }
-
-      function buildPartySummaryByIdMap(payload) {
-        const m = new Map();
-        for (const row of (payload && Array.isArray(payload.party_summary) ? payload.party_summary : [])) {
-          m.set(Number(row.party_id || 0), row);
-        }
-        return m;
-      }
-
-      function citizenCompanionPath(kind, method) {
-        const token = String(method || "combined").trim().toLowerCase();
-        const suffix = token === "votes" ? "_votes" : token === "declared" ? "_declared" : "";
-        return `./data/citizen_${String(kind || "").trim()}${suffix}.json`;
-      }
-
-      async function fetchJsonOrNull(path) {
-        try {
-          return await fetchJson(path);
-        } catch {
-          return null;
-        }
       }
 
       function stanceFromPosMap(posMap, topicId, partyId) {
@@ -3086,18 +3028,18 @@
 
       function readPresetFromHash() {
         const codec = presetCodec();
-        if (!codec) return { preset: null, error: "módulo de ajuste no disponible", error_code: "codec_missing" };
+        if (!codec) return { preset: null, error: "preset codec no disponible", error_code: "codec_missing" };
         return codec.readPresetFromHash(String(location.hash || ""), presetCodecConfig());
       }
 
       function presetErrorHint(errorCode) {
         const code = String(errorCode || "").trim();
         if (!code) return "";
-        if (code === "unsupported_version") return "Este enlace usa otra versión. Vuelve a generar un enlace con #preset=v1.";
-        if (code === "decode_error") return "El fragmento del enlace está corrupto o truncado. Copia el enlace completo de nuevo.";
-        if (code === "empty_payload") return "El enlace no trae datos de ajuste. Se ignora y se usa el estado local.";
-        if (code === "no_supported_fields") return "El enlace no trae campos reconocidos (vista, método, paquete o preocupación).";
-        if (code === "codec_missing") return "No se pudo cargar el módulo de ajuste. Recarga la página y prueba otra vez.";
+        if (code === "unsupported_version") return "Este enlace usa otra version. Vuelve a generar un enlace con #preset=v1.";
+        if (code === "decode_error") return "El hash del enlace esta corrupto o truncado. Copia el enlace completo de nuevo.";
+        if (code === "empty_payload") return "El enlace no trae datos de preset. Se ignora y se usa estado local.";
+        if (code === "no_supported_fields") return "El enlace no trae campos reconocidos (view/method/pack/concerns/concern).";
+        if (code === "codec_missing") return "No se pudo cargar el modulo de preset. Recarga la pagina y prueba otra vez.";
         return "";
       }
 
@@ -3258,16 +3200,6 @@
           loadError: "",
           promise: null,
         },
-        curiosity: {
-          method: "",
-          comparability: null,
-          lineage: null,
-          snapshotDiff: null,
-          comparabilityByKey: new Map(),
-          lineageByKey: new Map(),
-          snapshotDiffByKey: new Map(),
-          snapshotDiffPartyById: new Map(),
-        },
       };
 
       function normalizeExperienceMode(v) {
@@ -3301,9 +3233,9 @@
         return (
           `<div class="rowMeta" style="margin-top:8px">` +
           `<span class="tag">modo ciudadano</span>` +
-          `<span>Mostrando solo lo más útil ahora (${esc(String(n))} ${esc(String(label || "resultados"))} ocultos).</span>` +
+          `<span>Mostrando solo lo mas util ahora (${esc(String(n))} ${esc(String(label || "resultados"))} ocultos).</span>` +
           `<button class="btn md3-button" type="button" data-consumer-show-all-parties="1">Ver todo</button>` +
-          `<span>Cambia a <strong>Modo auditoría</strong> para mantener la vista completa por defecto.</span>` +
+          `<span>Cambia a <strong>Modo auditoria</strong> para mantener la vista completa por defecto.</span>` +
           `</div>`
         );
       }
@@ -3411,7 +3343,7 @@
             u.hash = canonical;
             const copied = await copyToClipboard(u.toString());
             setBanner(
-            `<div><strong>Ajuste canónico</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automáticamente"}.</div>` +
+              `<div><strong>Preset canonico</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automaticamente"}.</div>` +
                 `<div style="margin-top:8px"><span class="mono">${esc(u.toString())}</span></div>`
             );
           });
@@ -3518,15 +3450,15 @@
         if (isConsumerMode()) {
           el.innerHTML =
             `<span class="chip md3-chip"><span class="dot ok"></span><span>actualizado</span><span class="mono">${esc(asOf || "?")}</span></span>` +
-            `<span class="chip md3-chip"><span class="dot ok"></span><span>método</span><span class="mono">${esc(computedMethodLabel())}</span></span>` +
+            `<span class="chip md3-chip"><span class="dot ok"></span><span>metodo</span><span class="mono">${esc(computedMethodLabel())}</span></span>` +
             `<span class="chip md3-chip"><span class="dot ${freshnessDot}"></span><span>frescura</span><span class="mono">${esc(freshnessValue)}</span></span>` +
             (quality
-              ? `<span class="chip md3-chip"><span class="dot ${clearDot}"></span><span>señal clara</span><span class="mono">${esc(
+              ? `<span class="chip md3-chip"><span class="dot ${clearDot}"></span><span>senal clara</span><span class="mono">${esc(
                   fmtPct01(clearPct)
                 )}</span></span>`
               : "") +
             (quality
-              ? `<span class="chip md3-chip"><span class="dot ${unknownDot}"></span><span>sin clasificar</span><span class="mono">${esc(
+              ? `<span class="chip md3-chip"><span class="dot ${unknownDot}"></span><span>unknown</span><span class="mono">${esc(
                   fmtPct01(unknownPct)
                 )}</span></span>`
               : "") +
@@ -3540,27 +3472,27 @@
 
         el.innerHTML =
           `<span class="chip md3-chip"><span class="dot ok"></span><span>as_of</span><span class="mono">${esc(asOf)}</span></span>` +
-          `<span class="chip md3-chip"><span class="dot ok"></span><span>método</span><span class="mono">${esc(method)}</span></span>` +
+          `<span class="chip md3-chip"><span class="dot ok"></span><span>metodo</span><span class="mono">${esc(method)}</span></span>` +
           `<span class="chip md3-chip"><span class="dot ${freshnessDot}"></span><span>frescura</span><span class="mono">${esc(freshnessValue)}</span></span>` +
           `<span class="chip md3-chip"><span class="dot ok"></span><span>topic_set</span><span class="mono">${esc(setId)}</span></span>` +
           `<span class="chip md3-chip"><span class="dot ok"></span><span>version</span><span class="mono">${esc(version)}</span></span>` +
           (activePack
-            ? `<span class="chip md3-chip"><span class="dot ok"></span><span>paquete</span><span class="mono">${esc(
+            ? `<span class="chip md3-chip"><span class="dot ok"></span><span>pack</span><span class="mono">${esc(
                 String(activePack.label || activePack.id || "")
               )}</span></span>`
             : "") +
           (packsTotal > 0
-            ? `<span class="chip md3-chip"><span class="dot ${weakPacksTotal > 0 ? "warn" : "ok"}"></span><span>paquetes débiles</span><span class="mono">${esc(
+            ? `<span class="chip md3-chip"><span class="dot ${weakPacksTotal > 0 ? "warn" : "ok"}"></span><span>packs_weak</span><span class="mono">${esc(
                 String(weakPacksTotal)
               )}/${esc(String(packsTotal))}</span></span>`
             : "") +
           (activePackQuality
-            ? `<span class="chip md3-chip"><span class="dot ${activePackQuality.weak ? "warn" : "ok"}"></span><span>calidad del paquete</span><span class="mono">${esc(
+            ? `<span class="chip md3-chip"><span class="dot ${activePackQuality.weak ? "warn" : "ok"}"></span><span>pack_quality</span><span class="mono">${esc(
                 fmtPct01(Number(activePackQuality.quality_score || 0))
               )}</span></span>`
             : "") +
           (Number((packOutcome || {}).pack_selected_events_total || 0) > 0
-            ? `<span class="chip md3-chip"><span class="dot ${weakFollowDot}"></span><span>seguimiento del paquete</span><span class="mono">${esc(
+            ? `<span class="chip md3-chip"><span class="dot ${weakFollowDot}"></span><span>pack_follow</span><span class="mono">${esc(
                 fmtPct01(weakFollowRate)
               )}</span></span>`
             : "") +
@@ -3570,10 +3502,10 @@
               )}</span></span>`
             : "") +
           (quality
-            ? `<span class="chip md3-chip"><span class="dot ${clearDot}"></span><span>señal clara</span><span class="mono">${esc(fmtPct01(clearPct))}</span></span>`
+            ? `<span class="chip md3-chip"><span class="dot ${clearDot}"></span><span>senal_clara</span><span class="mono">${esc(fmtPct01(clearPct))}</span></span>`
             : "") +
           (quality
-            ? `<span class="chip md3-chip"><span class="dot ${unknownDot}"></span><span>sin clasificar</span><span class="mono">${esc(fmtPct01(unknownPct))}</span></span>`
+            ? `<span class="chip md3-chip"><span class="dot ${unknownDot}"></span><span>unknown</span><span class="mono">${esc(fmtPct01(unknownPct))}</span></span>`
             : "") +
           (quality
             ? `<span class="chip md3-chip"><span class="dot ${confDot}"></span><span>conf_media</span><span class="mono">${esc(fmtPct01(confAvg))}</span></span>`
@@ -3600,8 +3532,8 @@
         if (hint) {
           hint.textContent =
             mode === "consumer"
-              ? "Modo ciudadano: primero respuesta útil, luego detalle. Cambia a auditoría para ver telemetría y tablas completas."
-              : "Modo auditoría: vista completa con telemetría, filtros finos y detalle metodológico.";
+              ? "Modo ciudadano: primero respuesta util, luego detalle. Cambia a auditoria para ver telemetria y tablas completas."
+              : "Modo auditoria: vista completa con telemetria, filtros finos y detalle metodologico.";
         }
 
         const adv = qs(".advancedControls");
@@ -3900,9 +3832,9 @@
                 ? String(quality.weak_reasons.join(", "))
                 : "";
             hint.innerHTML =
-              `<span class="tag">Paquete activo: ${esc(String(activePack.label || activePack.id || ""))}</span>` +
+              `<span class="tag">Pack activo: ${esc(String(activePack.label || activePack.id || ""))}</span>` +
               (quality ? ` <span class="tag">calidad=${esc(qualityScore)}</span>` : "") +
-              (weak ? ` <span class="tag hot" data-pack-weak-hint="1">paquete débil</span>` : "") +
+              (weak ? ` <span class="tag hot" data-pack-weak-hint="1">pack_debil</span>` : "") +
               (weakReasons ? ` <span>${esc(weakReasons)}</span>` : "") +
               (tradeoff ? ` <span>${esc(tradeoff)}</span>` : "");
           } else {
@@ -4166,11 +4098,11 @@
             return (
               `<div class="row ${active ? "active" : ""}" data-cid="${esc(r.cid)}" role="button" tabindex="0">` +
               `<div class="rowTitle"><strong>${esc(r.label)}</strong><span class="tags">` +
-              `<span class="tag">${fmtInt(r.count)} casos</span>` +
-              (selected ? `<span class="tag">panel</span>` : ``) +
+              `<span class="tag">${fmtInt(r.count)} items</span>` +
+              (selected ? `<span class="tag">dashboard</span>` : ``) +
               `</span></div>` +
               `<div class="rowMeta">` +
-              `<span class="tag">${selected ? "en el panel" : "puedes agregarla al panel"}</span>` +
+              `<span class="tag">${selected ? "en dashboard" : "puedes agregarla al dashboard"}</span>` +
               (r.desc ? `<span>${esc(r.desc)}</span>` : ``) +
               `</div>` +
               `</div>`
@@ -4355,17 +4287,17 @@
           else if (unclearShare >= 0.6) dominant = "unclear";
           else dominant = "mixed";
         }
-        let reasonLabel = "sin incertidumbre";
+        let reasonLabel = "sin unknown";
         let reduceUncertainty = "Mantener cobertura y trazabilidad actuales.";
         if (dominant === "no_signal") {
-          reasonLabel = "incertidumbre dominada por falta de señal";
+          reasonLabel = "unknown dominado por sin_senal";
           reduceUncertainty = "Reducir incertidumbre: sumar evidencia verificable (votos, iniciativas o textos enlazados).";
         } else if (dominant === "unclear") {
-          reasonLabel = coverageRatio < 0.2 ? "incertidumbre por cobertura baja" : "incertidumbre por señal ambigua";
-          reduceUncertainty = "Reducir incertidumbre: subir la cobertura clara y revisar los casos inciertos.";
+          reasonLabel = coverageRatio < 0.2 ? "unknown por cobertura baja" : "unknown por senal ambigua";
+          reduceUncertainty = "Reducir incertidumbre: subir cobertura clara y revisar los casos inciertos.";
         } else if (dominant === "mixed") {
-          reasonLabel = "incertidumbre mixta";
-          reduceUncertainty = "Reducir incertidumbre: cerrar huecos sin señal y resolver casos inciertos prioritarios.";
+          reasonLabel = "unknown mixto";
+          reduceUncertainty = "Reducir incertidumbre: cerrar huecos sin_senal y resolver casos inciertos prioritarios.";
         }
         return {
           explainability_version: "unknown_explainability_fallback",
@@ -4388,7 +4320,7 @@
         const attr = mode === "summary" ? ' data-unknown-explainability-summary="1"' : ' data-unknown-explainability="1"';
         return (
           `<div class="${cls}"${attr}>` +
-          `<span class="tag">sin clasificar: ${esc(fmtInt(Number(x.unknown_total || 0)))}/${esc(fmtInt(Number(x.total || 0)))} (${esc(
+          `<span class="tag">unknown=${esc(fmtInt(Number(x.unknown_total || 0)))}/${esc(fmtInt(Number(x.total || 0)))} (${esc(
             fmtPct01(Number(x.unknown_ratio || 0))
           )})</span>` +
           `<span class="tag">${esc(String(x.reason_label || ""))}</span>` +
@@ -4465,11 +4397,11 @@
         const auditLinks = honesty.audit_links && typeof honesty.audit_links === "object" ? honesty.audit_links : {};
         return {
           unknown_definition:
-            String(honesty.unknown_definition || "").trim() || "sin clasificar = incierto + sin señal",
+            String(honesty.unknown_definition || "").trim() || "unknown = incierto + sin_senal",
           match_definition:
-            String(honesty.match_definition || "").trim() || "las coincidencias y desajustes solo cuentan cuando hay señal clara comparable",
+            String(honesty.match_definition || "").trim() || "match/mismatch solo cuentan cuando hay senal clara comparable",
           audit_rule:
-            String(honesty.audit_rule || "").trim() || "si ves muchos casos sin clasificar o confianza baja, abre la evidencia enlazada",
+            String(honesty.audit_rule || "").trim() || "si ves unknown alto o confianza baja, abre la evidencia enlazada",
           explorer_temas: String(auditLinks.explorer_temas || "../explorer-temas/").trim(),
           explorer_sql: String(auditLinks.explorer_sql || "../explorer/").trim(),
         };
@@ -4534,7 +4466,6 @@
         const mode = String(kind || "card");
         const cls = mode === "summary" ? "rowMeta" : "partyMeta";
         const tier = String(x.freshness_tier || "unknown");
-        const freshnessLabel = String(x.freshness_label || tier);
         const methodLabel = String(x.method_label || x.method || "?");
         const age = x.source_age_days == null ? "?" : `${String(x.source_age_days)}d`;
         const cov = fmtPct01(Number(x.coverage_ratio || 0));
@@ -4544,11 +4475,11 @@
         const linkEv = String((x.links || {}).explorer_evidence || "");
         return (
           `<div class="${cls}" data-evidence-trust-panel="1">` +
-          `<span class="tag" data-evidence-trust-freshness="${esc(tier)}">fuente ${esc(freshnessLabel)}</span>` +
-          `<span class="tag">edad de fuente: ${esc(age)}</span>` +
-          `<span class="tag">método: ${esc(methodLabel)}</span>` +
-          `<span class="tag">cobertura: ${esc(cov)}</span>` +
-          `<span class="tag">evidencia: ${esc(evCount)}</span>` +
+          `<span class="tag" data-evidence-trust-freshness="${esc(tier)}">fuente_${esc(tier)}</span>` +
+          `<span class="tag">edad_fuente=${esc(age)}</span>` +
+          `<span class="tag">metodo=${esc(methodLabel)}</span>` +
+          `<span class="tag">cobertura=${esc(cov)}</span>` +
+          `<span class="tag">evidencia=${esc(evCount)}</span>` +
           (linkTemas ? `<a class="smallLink" href="${esc(linkTemas)}" target="_blank" rel="noopener noreferrer">Tema</a>` : "") +
           (linkPos ? `<a class="smallLink" href="${esc(linkPos)}" target="_blank" rel="noopener noreferrer">Posiciones</a>` : "") +
           (linkEv ? `<a class="smallLink" href="${esc(linkEv)}" target="_blank" rel="noopener noreferrer">Evidencia</a>` : "") +
@@ -4627,7 +4558,7 @@
             concern_id: concernId || null,
             topic_id: topicId,
             reason_code: "audit_next",
-            reason_label: "siguiente paso recomendado de auditoría",
+            reason_label: "siguiente paso recomendado de auditoria",
             message_short: `Siguiente paso: abrir evidencia de ${String(best.party_label || "partido")}`,
             message_long: `Revisa evidencia directa en ${locationLabel}.`,
           },
@@ -4658,15 +4589,9 @@
         }
         return (
           `<div class="rowMeta" data-trust-action-nudge="1">` +
-          `<span class="tag">evidencia sugerida</span>` +
-          `<span class="tag">partido: ${esc(String(sel.party_label || "?"))}</span>` +
-          `<span class="tag">confianza: ${esc(
-            String(sel.trust_level || "low") === "high"
-              ? "alta"
-              : String(sel.trust_level || "low") === "medium"
-              ? "media"
-              : "baja"
-          )}</span>` +
+          `<span class="tag">trust_next_evidence</span>` +
+          `<span class="tag">party=${esc(String(sel.party_label || "?"))}</span>` +
+          `<span class="tag">trust=${esc(String(sel.trust_level || "low"))}</span>` +
           `<span>${esc(String(sel.message_short || "Siguiente paso recomendado"))}</span>` +
           `<a class="smallLink" data-trust-action-nudge-link="1" data-nudge-id="${esc(String(nudgeId))}" data-source-view="${esc(
             String(sel.view_mode || state.viewMode || "detail")
@@ -4764,7 +4689,7 @@
           uncertainty_reasons: reasons,
           reason_label: reasons.length ? "comparables bajos entre votos y dichos" : "estabilidad sin alertas fuertes",
           reason_detail: reasons.length
-            ? "La comparabilidad entre votos y dichos cae por debajo del umbral operativo."
+            ? "La comparabilidad votes-vs-declared cae por debajo del umbral operativo."
             : "No se detectan señales fuertes de inestabilidad para este corte.",
           should_show: rows.length > 0,
         };
@@ -4778,28 +4703,17 @@
         const vd = (x.pair_stats || {}).votes_declared || {};
         const cv = (x.pair_stats || {}).combined_votes || {};
         const cd = (x.pair_stats || {}).combined_declared || {};
-        const status = String(x.status || "unknown");
-        const statusLabel =
-          status === "stable"
-            ? "estable"
-            : status === "mixed"
-            ? "mixta"
-            : status === "unstable"
-            ? "inestable"
-            : status === "uncertain"
-            ? "incierta"
-            : "sin clasificar";
-        const uncertainty = String(x.uncertainty_level || "low");
-        const uncertaintyLabel = uncertainty === "high" ? "alta" : uncertainty === "medium" ? "media" : uncertainty === "low" ? "baja" : "desconocida";
         return (
           `<div class="${cls}" data-cross-method-stability="1" data-cross-method-status="${esc(String(x.status || ""))}">` +
-          `<span class="tag">estabilidad: ${esc(statusLabel)}</span>` +
-          `<span class="tag">puntuación: ${esc(fmtPct01(Number(x.weighted_stability_score || 0)))}</span>` +
-          `<span class="tag">votos/dichos comparables: ${esc(fmtPct01(Number(vd.comparable_pct_total || 0)))}</span>` +
-          `<span class="tag">desajuste votos/dichos: ${esc(fmtPct01(Number(vd.mismatch_pct_of_comparable || 0)))}</span>` +
-          `<span class="tag">desajuste combinado/votos: ${esc(fmtPct01(Number(cv.mismatch_pct_of_comparable || 0)))}</span>` +
-          `<span class="tag">desajuste combinado/dichos: ${esc(fmtPct01(Number(cd.mismatch_pct_of_comparable || 0)))}</span>` +
-          `<span class="tag" data-cross-method-uncertainty="${esc(String(x.uncertainty_level || ""))}">incertidumbre: ${esc(uncertaintyLabel)}</span>` +
+          `<span class="tag">estabilidad=${esc(String(x.status || "unknown"))}</span>` +
+          `<span class="tag">score=${esc(fmtPct01(Number(x.weighted_stability_score || 0)))}</span>` +
+          `<span class="tag">vd_comp=${esc(fmtPct01(Number(vd.comparable_pct_total || 0)))}</span>` +
+          `<span class="tag">vd_mismatch=${esc(fmtPct01(Number(vd.mismatch_pct_of_comparable || 0)))}</span>` +
+          `<span class="tag">cv_mismatch=${esc(fmtPct01(Number(cv.mismatch_pct_of_comparable || 0)))}</span>` +
+          `<span class="tag">cd_mismatch=${esc(fmtPct01(Number(cd.mismatch_pct_of_comparable || 0)))}</span>` +
+          `<span class="tag" data-cross-method-uncertainty="${esc(String(x.uncertainty_level || ""))}">incertidumbre=${esc(
+            String(x.uncertainty_level || "low")
+          )}</span>` +
           `<span>${esc(String(x.reason_label || ""))}</span>` +
           `</div>`
         );
@@ -4850,7 +4764,7 @@
           required_done: requiredDone,
           required_completion_pct: Number((requiredDone / 4).toFixed(6)),
           steps: [],
-            next_action: { id: "done", label: "Guía inicial completa", reason: "fallback" },
+          next_action: { id: "done", label: "Onboarding completo", reason: "fallback" },
         };
       }
 
@@ -4914,7 +4828,7 @@
           if (!state.activeTopicId && recTid) openOnboardingTopic(recTid);
           goOnboardingAlignment(recTid);
           setBanner(
-            `<div><strong>Siguiente paso</strong>: marca tu postura en un caso con <span class="mono">Yo: a favor</span> o <span class="mono">Yo: en contra</span> para ver coincidencias y desajustes por partido.</div>`
+            `<div><strong>Siguiente paso</strong>: marca tu postura en un item con <span class="mono">Yo: a favor</span> o <span class="mono">Yo: en contra</span> para activar match/mismatch por partido.</div>`
           );
           return true;
         }
@@ -4983,7 +4897,7 @@
           hasRecommendedConcern: Boolean(recConcernId),
           hasRecommendedTopic: Boolean(recTid),
         });
-        const nextAction = contract && contract.next_action ? contract.next_action : { id: "done", label: "Guía inicial completa" };
+        const nextAction = contract && contract.next_action ? contract.next_action : { id: "done", label: "Onboarding completo" };
         const completionPct = Math.round(Number(contract && contract.required_completion_pct ? contract.required_completion_pct : 0) * 100);
         const steps = Array.isArray(contract && contract.steps) ? contract.steps : [];
         const stepById = new Map();
@@ -5007,15 +4921,15 @@
         box.innerHTML =
           `<div class="onboardHead">` +
           `<div>` +
-          `<p class="onboardTitle">Empieza aquí: primer resultado en 90 segundos</p>` +
-          `<p class="onboardHint">Sin clasificación mágica: eliges una preocupación, revisas un caso y luego marcas tu postura para ver coincidencias, desajustes y casos sin clasificar por partido.</p>` +
+          `<p class="onboardTitle">Empieza aqui: primer resultado en 90 segundos</p>` +
+          `<p class="onboardHint">Sin ranking magico: eliges una preocupacion, revisas un item y luego marcas tu postura para ver match/mismatch/unknown por partido.</p>` +
           `</div>` +
           `<span class="tag">${esc("progreso " + String(completionPct) + "%")}</span>` +
           `</div>` +
           `<div class="onboardSteps">` +
-          `<span class="tag ${packDone ? "good" : ""}">0) paquete ${esc(packDone ? "listo" : "opcional")}</span>` +
-          `<span class="tag ${concernDone ? "good" : ""}">1) preocupación ${esc(concernDone ? "lista" : "pendiente")}</span>` +
-          `<span class="tag ${topicDone ? "good" : ""}">2) caso ${esc(topicDone ? "listo" : "pendiente")}</span>` +
+          `<span class="tag ${packDone ? "good" : ""}">0) pack ${esc(packDone ? "listo" : "opcional")}</span>` +
+          `<span class="tag ${concernDone ? "good" : ""}">1) preocupacion ${esc(concernDone ? "lista" : "pendiente")}</span>` +
+          `<span class="tag ${topicDone ? "good" : ""}">2) item ${esc(topicDone ? "listo" : "pendiente")}</span>` +
           `<span class="tag ${alignmentDone ? "good" : ""}">3) vista alineamiento ${esc(
             alignmentDone ? "lista" : "pendiente"
           )}</span>` +
@@ -5026,13 +4940,13 @@
             String(nextAction.label || "Siguiente paso")
           )}</button>` +
           `<button class="btn md3-button" type="button" data-first-answer-run="1" ${accelConcernId && accelTid > 0 ? "" : "disabled"}>${esc(
-            accelConcernId && accelTid > 0 ? "Respuesta rápida recomendada" : "Sin recomendación"
+            accelConcernId && accelTid > 0 ? "Respuesta rapida recomendada" : "Sin recomendacion"
           )}</button>` +
           (accelConcernId && accelTid > 0
             ? `<span class="tag">acelerador: ${esc(accelConcernLabel)} -> ${esc(accelTopicLabel)}</span>`
             : `<span class="tag">acelerador sin ranking</span>`) +
           (accelConcernId && accelTid > 0
-            ? `<span class="tag">puntuación: ${esc(fmtPct01(accelScore))}</span>`
+            ? `<span class="tag">score=${esc(fmtPct01(accelScore))}</span>`
             : ``) +
           (accelLinks && accelLinks.explorer_evidence
             ? `<a class="smallLink" href="${esc(String(accelLinks.explorer_evidence || ""))}" target="_blank" rel="noopener noreferrer">Evidencia recomendada</a>`
@@ -5041,22 +4955,22 @@
             ? `<a class="smallLink" href="${esc(String(accelLinks.explorer_temas || ""))}" target="_blank" rel="noopener noreferrer">Tema recomendado</a>`
             : ``) +
           `<button class="btn md3-button" type="button" data-onboard-pack="${esc(recPackId)}" ${recPackId ? "" : "disabled"}>` +
-          `${esc(packReady ? "Paquete activo" : "Aplicar paquete rápido")}` +
+          `${esc(packReady ? "Pack activo" : "Aplicar pack rapido")}` +
           `</button>` +
           (recPackId
-            ? `<span class="tag">paquete: ${esc(recPackLabel)}</span>`
-            : `<span class="tag">sin paquete sugerido</span>`) +
-          `<button class="btn md3-button" type="button" data-onboard-pack-share="1" ${recPackId ? "" : "disabled"}>Enlace del paquete</button>` +
+            ? `<span class="tag">pack: ${esc(recPackLabel)}</span>`
+            : `<span class="tag">sin pack sugerido</span>`) +
+          `<button class="btn md3-button" type="button" data-onboard-pack-share="1" ${recPackId ? "" : "disabled"}>Link pack</button>` +
           `<button class="btn md3-button" type="button" data-onboard-topic="${esc(String(recTid || 0))}" ${recTid ? "" : "disabled"}>` +
-          `${esc(topicReady ? "Caso activo" : "Abrir caso recomendado")}` +
+          `${esc(topicReady ? "Item activo" : "Abrir item recomendado")}` +
           `</button>` +
           (recTid
             ? `<span class="tag">recomendado: ${esc(recLabel)}</span>`
-            : `<span class="tag">sin caso recomendado</span>`) +
+            : `<span class="tag">sin item recomendado</span>`) +
           `<button class="btn md3-button" type="button" data-onboard-alignment="1">${esc(
             alignReady ? "Alineamiento activo" : "Ir a alineamiento"
           )}</button>` +
-          `<button class="btn md3-button" type="button" data-onboard-dismiss="1">Ocultar guía</button>` +
+          `<button class="btn md3-button" type="button" data-onboard-dismiss="1">Ocultar guia</button>` +
           `</div>`;
 
         const actionCtx = {
@@ -5068,7 +4982,7 @@
           btn.addEventListener("click", () => {
             if (!runFirstAnswerRecommendation(true)) return;
             setBanner(
-              `<div><strong>Respuesta rápida</strong>: se activó el caso recomendado para acelerar tu primera comparación con evidencia auditable.</div>`
+              `<div><strong>Respuesta rapida</strong>: se activo el item recomendado para acelerar tu primer match/mismatch con evidencia auditable.</div>`
             );
           });
         }
@@ -5169,10 +5083,10 @@
 
         const j = journeyStepState();
         const stepMap = [
-          { id: "journeyStepConcern", key: "concern", pending: "Elige la preocupación principal.", done: "Prioridad definida." },
-          { id: "journeyStepTopic", key: "topic", pending: "Abre un caso concreto.", done: "Caso seleccionado." },
+          { id: "journeyStepConcern", key: "concern", pending: "Elige la preocupacion principal.", done: "Prioridad definida." },
+          { id: "journeyStepTopic", key: "topic", pending: "Abre un item concreto.", done: "Caso seleccionado." },
           { id: "journeyStepPreference", key: "preference", pending: "Marca tu postura personal.", done: "Postura registrada." },
-          { id: "journeyStepCompare", key: "compare", pending: "Contrasta y abre evidencia.", done: "Comparación lista." },
+          { id: "journeyStepCompare", key: "compare", pending: "Contrasta y abre evidencia.", done: "Comparacion lista." },
         ];
 
         for (const cfg of stepMap) {
@@ -5197,14 +5111,14 @@
           if (narrative) {
             narrative.textContent = rec
               ? `Empieza por ${recConcernLabel} y abre ${recTopicLabel} para obtener una respuesta inicial con evidencia.`
-              : "Empieza eligiendo una preocupación. Eso define el recorte de casos y partidos.";
+              : "Empieza eligiendo una preocupacion. Eso define el recorte de casos y partidos.";
           }
         } else if (!j.topicDone) {
           if (narrative) narrative.textContent = "Ya tienes prioridad. Ahora abre un caso concreto para evitar comparaciones abstractas.";
         } else if (!j.preferenceDone) {
-          if (narrative) narrative.textContent = "Marca tu postura en el caso activo para comparar coincidencias y desajustes con los partidos.";
+          if (narrative) narrative.textContent = "Marca tu postura en el caso activo para activar match/mismatch con partidos.";
         } else {
-          if (narrative) narrative.textContent = "Flujo completo: ya puedes comparar, auditar evidencia y compartir el ajuste.";
+          if (narrative) narrative.textContent = "Flujo completo: ya puedes comparar, auditar evidencia y compartir preset.";
         }
 
         if (nextBtn) {
@@ -5214,7 +5128,7 @@
               ? "Abrir caso recomendado"
               : !j.preferenceDone
                 ? "Marcar mi postura"
-                : "Ir a comparación";
+                : "Ir a comparacion";
         }
         if (firstAnswerBtn) firstAnswerBtn.disabled = !rec;
 
@@ -5226,7 +5140,7 @@
         const links = [];
 
         if (!activeConcernLabel) {
-          if (titleEl) titleEl.textContent = "Selecciona una preocupación para empezar.";
+          if (titleEl) titleEl.textContent = "Selecciona una preocupacion para empezar.";
           if (bodyEl) bodyEl.textContent = "La experiencia se simplifica cuando defines primero el problema que quieres resolver.";
         } else if (!activeTopic) {
           const recTopic = recommendedOnboardingTopicForConcern(String(state.activeConcernId || ""));
@@ -5234,7 +5148,7 @@
           if (bodyEl) {
             bodyEl.textContent = recTopic
               ? `Siguiente paso recomendado: ${String(recTopic.label || "").trim() || "abrir el primer caso relevante"}.`
-              : "Siguiente paso: abre un caso para pasar de narrativa general a evidencia concreta.";
+              : "Siguiente paso: abre un item para pasar de narrativa general a evidencia concreta.";
           }
           tags.push(`<span class="tag">prioridad=${esc(activeConcernLabel)}</span>`);
         } else {
@@ -5246,13 +5160,13 @@
           if (bodyEl) {
             bodyEl.textContent = pref
               ? `Tu postura: ${stanceLabel(pref)}. Ahora compara partidos y abre evidencia en los casos con mayor incertidumbre.`
-              : "Aún no has marcado tu postura. Marca tu posición en este caso para personalizar la comparación.";
+              : "No has marcado tu postura aun. Marca tu posicion en este caso para personalizar la comparacion.";
           }
-          tags.push(`<span class="tag">método: ${esc(computedMethodLabel())}</span>`);
-          tags.push(`<span class="tag">vista: ${esc(journeyViewLabel())}</span>`);
-          tags.push(`<span class="tag">cobertura: ${esc(fmtPct01(clearPct))}</span>`);
-          tags.push(`<span class="tag">sin clasificar: ${esc(fmtPct01(unknownPct))}</span>`);
-          if (pref) tags.push(`<span class="tag good">tu postura: ${esc(stanceLabel(pref))}</span>`);
+          tags.push(`<span class="tag">metodo=${esc(computedMethodLabel())}</span>`);
+          tags.push(`<span class="tag">vista=${esc(journeyViewLabel())}</span>`);
+          tags.push(`<span class="tag">cobertura=${esc(fmtPct01(clearPct))}</span>`);
+          tags.push(`<span class="tag">unknown=${esc(fmtPct01(unknownPct))}</span>`);
+          if (pref) tags.push(`<span class="tag good">tu_postura=${esc(stanceLabel(pref))}</span>`);
           const topicLinks = activeTopic.links && typeof activeTopic.links === "object" ? activeTopic.links : {};
           if (String(topicLinks.explorer_temas || "").trim()) {
             links.push(
@@ -5271,7 +5185,7 @@
           }
         }
 
-        if (activePack) tags.push(`<span class="tag">paquete: ${esc(String(activePack.label || activePack.id || ""))}</span>`);
+        if (activePack) tags.push(`<span class="tag">pack=${esc(String(activePack.label || activePack.id || ""))}</span>`);
         if (Array.isArray(state.selectedConcernIds) && state.selectedConcernIds.length > 1) {
           tags.push(`<span class="tag">${esc(String(state.selectedConcernIds.length))} preocupaciones</span>`);
         }
@@ -5283,7 +5197,7 @@
         const action = String(actionId || "").trim();
         if (action === "first_answer") {
           if (!runFirstAnswerRecommendation(true)) {
-            setBanner(`<div><strong>Sin recomendación activa</strong>: elige una preocupación para iniciar el flujo.</div>`);
+            setBanner(`<div><strong>Sin recomendacion activa</strong>: elige una preocupacion para iniciar el flujo.</div>`);
           }
           return;
         }
@@ -5292,7 +5206,7 @@
           const url = buildAlignmentPresetShareUrl(payload);
           const copied = await copyToClipboard(url);
           setBanner(
-            `<div><strong>Ajuste de alineamiento</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automáticamente"}.</div>` +
+            `<div><strong>Preset de alineamiento</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automaticamente"}.</div>` +
               `<div style="margin-top:8px"><span class="mono">${esc(url)}</span></div>`
           );
           return;
@@ -5384,13 +5298,13 @@
         renderPartyFocusControls();
         const alignmentMode = state.viewMode === "alignment";
         if (!state.activeConcernId) {
-          list.innerHTML = `<div class="empty">Elige una preocupación para ver casos.</div>`;
+          list.innerHTML = `<div class="empty">Elige una preocupacion para ver items.</div>`;
           return;
         }
 
         const topicsAll = topicsForActiveConcernAll();
         if (!topicsAll.length) {
-          list.innerHTML = `<div class="empty">No hay casos que coincidan con esta preocupación o con el filtro.</div>`;
+          list.innerHTML = `<div class="empty">No hay items que coincidan con esta preocupacion (o con el filtro).</div>`;
           return;
         }
 
@@ -5406,8 +5320,8 @@
             const tid = Number(t.topic_id || 0);
             const active = state.activeTopicId && tid === state.activeTopicId;
             const tags = [];
-            if (t.is_high_stakes) tags.push(`<span class="tag hot">alta relevancia</span>`);
-            if (t.stakes_rank != null) tags.push(`<span class="tag">prioridad #${esc(String(t.stakes_rank))}</span>`);
+            if (t.is_high_stakes) tags.push(`<span class="tag hot">high-stakes</span>`);
+            if (t.stakes_rank != null) tags.push(`<span class="tag">rank #${esc(String(t.stakes_rank))}</span>`);
             tags.push(`<span class="tag">caso auditable</span>`);
 
             if (alignmentMode) {
@@ -5437,7 +5351,7 @@
                 const sv = stanceFromPosMap(coh.votesPosByKey, tid, pid);
                 const sd = stanceFromPosMap(coh.declaredPosByKey, tid, pid);
                 const mismatch = isComparableStance(sv) && isComparableStance(sd) && sv !== sd;
-                if (mismatch) tags.push(`<span class="tag hot">desajuste</span>`);
+                if (mismatch) tags.push(`<span class="tag hot">mismatch</span>`);
                 tags.push(
                   `<span class="stanceChip mini ${esc(sv)}"><span class="dot ${esc(dotClassForStance(sv))}"></span>v:${esc(
                     stanceLabel(sv)
@@ -5456,9 +5370,9 @@
                   const pref = normalizePrefValue(state.prefs.get(tid));
                   if (pref) {
                     if (isComparableStance(s)) {
-                      tags.push(`<span class="tag ${esc(s === pref ? "good" : "bad")}">${esc(s === pref ? "coincidencia" : "desajuste")}</span>`);
+                      tags.push(`<span class="tag ${esc(s === pref ? "good" : "bad")}">${esc(s === pref ? "match" : "mismatch")}</span>`);
                     } else {
-                      tags.push(`<span class="tag">sin clasificar</span>`);
+                      tags.push(`<span class="tag">unknown</span>`);
                     }
                   }
                 }
@@ -5486,8 +5400,8 @@
           .join("") +
           (isConsumerMode() && hiddenTopics > 0 && !state.consumerTopicExpanded
             ? `<div class="empty" style="margin: 8px 3px 0">` +
-              `<span>Hay ${esc(String(hiddenTopics))} casos más. </span>` +
-              `<button class="btn md3-button" type="button" data-topic-show-more="1">Ver más casos</button>` +
+              `<span>Hay ${esc(String(hiddenTopics))} casos mas. </span>` +
+              `<button class="btn md3-button" type="button" data-topic-show-more="1">Ver mas casos</button>` +
               `</div>`
             : "");
 
@@ -5570,35 +5484,35 @@
           return s === "unclear" || s === "no_signal";
         }).length;
 
-        let title = "Respuesta rápida para este caso";
+        let title = "Respuesta rapida para este caso";
         let body =
-          "Marca tu postura y te muestro el contraste inmediato por partido sin ruido metodológico.";
+          "Marca tu postura y te muestro el contraste inmediato por partido sin ruido metodologico.";
         let tags = "";
         if (pref === "support") {
           title = "Si tu postura es A favor";
           body = supportTop
-            ? `Partido más alineado ahora: ${supportTop.party_label}.`
-            : "No hay suficiente señal clara para identificar alineamiento directo.";
+            ? `Partido mas alineado ahora: ${supportTop.party_label}.`
+            : "No hay suficiente senal clara para identificar alineamiento directo.";
           tags =
             `<span class="tag good">tu postura: ${esc(stanceLabel(pref))}</span>` +
-            (supportTop ? `<span class="tag">mejor coincidencia: ${esc(String(supportTop.party_label || ""))}</span>` : ``) +
-            (opposeTop ? `<span class="tag">mayor contraste: ${esc(String(opposeTop.party_label || ""))}</span>` : ``) +
-            `<span class="tag">sin clasificar: ${esc(fmtInt(unknownCount))}</span>`;
+            (supportTop ? `<span class="tag">top match: ${esc(String(supportTop.party_label || ""))}</span>` : ``) +
+            (opposeTop ? `<span class="tag">top contraste: ${esc(String(opposeTop.party_label || ""))}</span>` : ``) +
+            `<span class="tag">unknown=${esc(fmtInt(unknownCount))}</span>`;
         } else if (pref === "oppose") {
           title = "Si tu postura es En contra";
           body = opposeTop
-            ? `Partido más alineado ahora: ${opposeTop.party_label}.`
-            : "No hay suficiente señal clara para identificar alineamiento directo.";
+            ? `Partido mas alineado ahora: ${opposeTop.party_label}.`
+            : "No hay suficiente senal clara para identificar alineamiento directo.";
           tags =
             `<span class="tag good">tu postura: ${esc(stanceLabel(pref))}</span>` +
-            (opposeTop ? `<span class="tag">mejor coincidencia: ${esc(String(opposeTop.party_label || ""))}</span>` : ``) +
-            (supportTop ? `<span class="tag">mayor contraste: ${esc(String(supportTop.party_label || ""))}</span>` : ``) +
-            `<span class="tag">sin clasificar: ${esc(fmtInt(unknownCount))}</span>`;
+            (opposeTop ? `<span class="tag">top match: ${esc(String(opposeTop.party_label || ""))}</span>` : ``) +
+            (supportTop ? `<span class="tag">top contraste: ${esc(String(supportTop.party_label || ""))}</span>` : ``) +
+            `<span class="tag">unknown=${esc(fmtInt(unknownCount))}</span>`;
         } else {
           tags =
             (supportTop ? `<span class="tag">si apoyas: ${esc(String(supportTop.party_label || ""))}</span>` : ``) +
             (opposeTop ? `<span class="tag">si te opones: ${esc(String(opposeTop.party_label || ""))}</span>` : ``) +
-            `<span class="tag">sin clasificar: ${esc(fmtInt(unknownCount))}</span>`;
+            `<span class="tag">unknown=${esc(fmtInt(unknownCount))}</span>`;
         }
 
         return (
@@ -5631,12 +5545,12 @@
 
         const leaderName = partyName(Number(leader.party_id || 0));
         const leaderCoverage = Number(leader.coverage || 0);
-        const leaderSignal = leaderCoverage >= 0.7 ? "señal alta" : leaderCoverage >= 0.4 ? "señal media" : "señal débil";
+        const leaderSignal = leaderCoverage >= 0.7 ? "senal alta" : leaderCoverage >= 0.4 ? "senal media" : "senal debil";
         const leadGap = runner ? Number(leader.net || 0) - Number(runner.net || 0) : Number(leader.net || 0);
-        const leadGapTag = runner ? `ventaja sobre 2.º: ${fmtInt(leadGap)}` : `saldo: ${fmtInt(Number(leader.net || 0))}`;
+        const leadGapTag = runner ? `ventaja_vs_2=${fmtInt(leadGap)}` : `net=${fmtInt(Number(leader.net || 0))}`;
         const caution =
           leaderCoverage >= 0.5
-            ? "Lectura útil para decidir: abre al menos un desajuste para validar el contexto antes de compartir."
+            ? "Lectura util para decidir: abre al menos un mismatch para validar contexto antes de compartir."
             : "Lectura preliminar: cobertura limitada. Abre evidencia antes de decidir.";
 
         const mismatchTopic = leader.audit_mismatch_topic || null;
@@ -5653,40 +5567,40 @@
             const net = Number((r || {}).net || 0);
             const cov = Number((r || {}).coverage || 0);
             const band = bandsByParty.get(pid) || { id: "fragil", label: "fragil" };
-            return `<span class="tag ${esc(rankBandTagClass(band.id))}">${esc(String(idx + 1))}. ${esc(n)} · saldo: ${esc(fmtInt(net))}; cobertura: ${esc(
+            return `<span class="tag ${esc(rankBandTagClass(band.id))}">${esc(String(idx + 1))}) ${esc(n)} net=${esc(fmtInt(net))} cov=${esc(
               fmtPct01(cov)
-            )}; banda: ${esc(String(band.label || ""))}</span>`;
+            )} banda=${esc(String(band.label || ""))}</span>`;
           })
           .join("");
 
         return (
           `<div class="consumerDecision">` +
-          `<p class="eyebrow">Decisión provisional</p>` +
-          `<h3>Mejor coincidencia actual: ${esc(leaderName)}</h3>` +
-          `<p>Con ${esc(fmtInt(prefs.length))} posturas: ${esc(fmtInt(Number(leader.match || 0)))} coincidencias, ${esc(
+          `<p class="eyebrow">Decision provisional</p>` +
+          `<h3>Top match actual: ${esc(leaderName)}</h3>` +
+          `<p>Con ${esc(fmtInt(prefs.length))} posturas: ${esc(fmtInt(Number(leader.match || 0)))} match, ${esc(
             fmtInt(Number(leader.mismatch || 0))
-          )} desajustes, ${esc(fmtInt(Number(leader.unknown || 0)))} sin clasificar y cobertura ${esc(fmtPct01(leaderCoverage))}.</p>` +
+          )} mismatch, ${esc(fmtInt(Number(leader.unknown || 0)))} unknown y cobertura ${esc(fmtPct01(leaderCoverage))}.</p>` +
           `<div class="partyMeta" style="margin-top:8px">` +
-          `<span class="tag good">primero: ${esc(leaderName)}</span>` +
+          `<span class="tag good">top=${esc(leaderName)}</span>` +
           `<span class="tag">${esc(leadGapTag)}</span>` +
           `<span class="tag">${esc(leaderSignal)}</span>` +
-          `<span class="tag ${esc(rankBandTagClass(leaderBand.id))}">banda: ${esc(String(leaderBand.label || ""))}</span>` +
-          (runner ? `<span class="tag">2.º: ${esc(partyName(Number(runner.party_id || 0)))}</span>` : ``) +
-          (tail ? `<span class="tag bad">más distante: ${esc(partyName(Number(tail.party_id || 0)))}</span>` : ``) +
+          `<span class="tag ${esc(rankBandTagClass(leaderBand.id))}">banda=${esc(String(leaderBand.label || ""))}</span>` +
+          (runner ? `<span class="tag">2o=${esc(partyName(Number(runner.party_id || 0)))}</span>` : ``) +
+          (tail ? `<span class="tag bad">mas distante=${esc(partyName(Number(tail.party_id || 0)))}</span>` : ``) +
           `</div>` +
           (top3Tags ? `<div class="partyMeta" style="margin-top:8px">${top3Tags}</div>` : ``) +
           `<p class="consumerDecisionHint">${esc(caution)} ${esc(String(leaderBand.reason || ""))}</p>` +
           `<div class="consumerDecisionActions">` +
-          `<button class="btn md3-button" type="button" data-focus-party="${esc(String(Number(leader.party_id || 0)))}">Ver detalle</button>` +
+          `<button class="btn md3-button" type="button" data-focus-party="${esc(String(Number(leader.party_id || 0)))}">Ver detalle top match</button>` +
           `<button class="btn md3-button" type="button" data-copy-consumer-decision="1">Copiar resumen</button>` +
-          `<button class="btn md3-button" type="button" data-prefs-share="1">Compartir comparación</button>` +
+          `<button class="btn md3-button" type="button" data-prefs-share="1">Compartir comparacion</button>` +
           (mismatchLink
-            ? `<a class="smallLink" href="${esc(mismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar desajuste: ${esc(
+            ? `<a class="smallLink" href="${esc(mismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar mismatch: ${esc(
                 mismatchLabel || "abrir caso"
               )}</a>`
             : ``) +
           (matchLink
-            ? `<a class="smallLink" href="${esc(matchLink)}" target="_blank" rel="noopener noreferrer">Auditar coincidencia</a>`
+            ? `<a class="smallLink" href="${esc(matchLink)}" target="_blank" rel="noopener noreferrer">Auditar match</a>`
             : ``) +
           `</div>` +
           `</div>`
@@ -5724,20 +5638,20 @@
         const nextNet = nextRow ? Number((nextRow || {}).net || 0) : net - 3;
         const gap = nextRow ? net - nextNet : Math.max(0, net);
 
-        if (total <= 0) return { id: "fragil", label: "frágil", reason: "sin preferencias suficientes." };
+        if (total <= 0) return { id: "fragil", label: "fragil", reason: "sin preferencias suficientes." };
         if (comparable <= 1 || coverage < 0.34 || gap <= 1) {
-          return { id: "fragil", label: "frágil", reason: "poca distancia o baja cobertura; puede cambiar rápido." };
+          return { id: "fragil", label: "fragil", reason: "poca distancia o baja cobertura; puede cambiar rapido." };
         }
         if (gap >= 3 && coverage >= 0.67 && comparable >= Math.max(2, Math.floor(total * 0.6))) {
           if (unknown > comparable) {
-            return { id: "intermedia", label: "intermedia", reason: "ventaja clara, pero muchos casos sin clasificar." };
+            return { id: "intermedia", label: "intermedia", reason: "ventaja clara, pero unknown alto relativo." };
           }
           return { id: "estable", label: "estable", reason: "ventaja clara con buena cobertura comparable." };
         }
         if (unknown > comparable) {
-          return { id: "fragil", label: "frágil", reason: "hay más casos sin clasificar que casos comparables; clasificación inestable." };
+          return { id: "fragil", label: "fragil", reason: "unknown alto frente a comparables; ranking inestable." };
         }
-        return { id: "intermedia", label: "intermedia", reason: "ventaja moderada; conviene validar 1-2 temas más." };
+        return { id: "intermedia", label: "intermedia", reason: "ventaja moderada; conviene validar 1-2 temas mas." };
       }
 
       function rankingBandsByParty(rows, prefsTotal) {
@@ -5758,12 +5672,12 @@
           return {
             score: 0,
             label: "preliminar",
-            reason: "marca posturas para activar una comparación útil.",
+            reason: "marca posturas para activar comparacion util.",
             leader: null,
             runner: null,
             coverage: 0,
             gap: 0,
-            leaderBand: { id: "fragil", label: "frágil", reason: "sin base suficiente." },
+            leaderBand: { id: "fragil", label: "fragil", reason: "sin base suficiente." },
           };
         }
         const leader = ranked[0] || null;
@@ -5773,7 +5687,7 @@
         const bandsByParty = rankingBandsByParty(rows, prefs.length);
         const leaderBand = bandsByParty.get(Number((leader || {}).party_id || 0)) || {
           id: "fragil",
-          label: "frágil",
+          label: "fragil",
           reason: "poca distancia o baja cobertura.",
         };
 
@@ -5783,16 +5697,16 @@
         const score = Math.round((0.35 * prefsProgress + 0.35 * coverage + 0.2 * bandScore + 0.1 * gapScore) * 100);
 
         let label = "preliminar";
-        let reason = "base limitada para una decisión final.";
+        let reason = "base limitada para una decision final.";
         if (score >= 75) {
           label = "listo_para_decidir";
-          reason = "señal consistente para una decisión provisional auditable.";
+          reason = "senal consistente para una decision provisional auditable.";
         } else if (score >= 55) {
           label = "casi_listo";
-          reason = "falta uno o dos pasos para cerrar la decisión con menos duda.";
+          reason = "falta uno o dos pasos para cerrar decision con menos duda.";
         }
         if (prefs.length < 3) {
-          reason = "todavía hay pocas posturas marcadas para comparar con solidez.";
+          reason = "todavia hay pocas posturas marcadas para comparar con solidez.";
         } else if (coverage < 0.5) {
           reason = "cobertura baja: faltan comparables para algunos partidos.";
         } else if (String(leaderBand.id || "") === "fragil") {
@@ -5812,16 +5726,16 @@
         const payload = currentAlignmentPresetForShare();
         const url = buildAlignmentPresetShareUrl(payload);
         const lines = [];
-        lines.push(`Comparación ciudadana (${computedMethodLabel()})`);
-        lines.push(`Posturas marcadas: ${fmtInt(prefs.length)} (a favor: ${fmtInt(supportN)}, en contra: ${fmtInt(opposeN)})`);
-        lines.push(`Preparación: ${fmtInt(Number(readiness.score || 0))}% (${String(readiness.label || "preliminar")})`);
+        lines.push(`Comparacion ciudadana (${computedMethodLabel()})`);
+        lines.push(`Posturas marcadas: ${fmtInt(prefs.length)} (a favor=${fmtInt(supportN)}, en contra=${fmtInt(opposeN)})`);
+        lines.push(`Readiness: ${fmtInt(Number(readiness.score || 0))}% (${String(readiness.label || "preliminar")})`);
         for (const r of ranked.slice(0, 3)) {
           const pid = Number((r || {}).party_id || 0);
-          const band = bandsByParty.get(pid) || { label: "frágil" };
+          const band = bandsByParty.get(pid) || { label: "fragil" };
           lines.push(
-            `${partyName(pid)}: coincidencias: ${fmtInt(Number((r || {}).match || 0))}, desajustes: ${fmtInt(Number((r || {}).mismatch || 0))}, sin clasificar: ${fmtInt(
+            `${partyName(pid)} -> match=${fmtInt(Number((r || {}).match || 0))}, mismatch=${fmtInt(Number((r || {}).mismatch || 0))}, unknown=${fmtInt(
               Number((r || {}).unknown || 0)
-            )}, cobertura: ${fmtPct01(Number((r || {}).coverage || 0))}, banda: ${String(band.label || "frágil")}`
+            )}, cobertura=${fmtPct01(Number((r || {}).coverage || 0))}, banda=${String(band.label || "fragil")}`
           );
         }
         lines.push(`Link: ${url}`);
@@ -5836,20 +5750,20 @@
         const coverage = Number((row || {}).coverage || 0);
         const net = Number((row || {}).net || 0);
 
-        if (total <= 0) return "Sin posturas marcadas todavía.";
+        if (total <= 0) return "Sin posturas marcadas todavia.";
         if (coverage < 0.34) {
-          return `Señal limitada: solo ${fmtInt(match + mismatch)}/${fmtInt(total)} comparables. Revisa evidencia antes de decidir.`;
+          return `Senal limitada: solo ${fmtInt(match + mismatch)}/${fmtInt(total)} comparables. Revisa evidencia antes de decidir.`;
         }
         if (net >= 2 && mismatch === 0) {
-          return `Alineación alta: coincide en ${fmtInt(match)} de ${fmtInt(total)} casos comparables.`;
+          return `Alta alineacion: coincide en ${fmtInt(match)} de ${fmtInt(total)} casos comparables.`;
         }
         if (net > 0) {
-          return `Alineación moderada: ${fmtInt(match)} coincidencias frente a ${fmtInt(mismatch)} desajustes. Sin clasificar: ${fmtInt(unknown)}.`;
+          return `Alineacion moderada: ${fmtInt(match)} match frente a ${fmtInt(mismatch)} mismatch. Unknown=${fmtInt(unknown)}.`;
         }
         if (net === 0) {
-          return `Empate práctico: mismo volumen de coincidencias y desajustes. Necesita auditoría puntual.`;
+          return `Empate practico: mismo volumen de match y mismatch. Necesita auditoria puntual.`;
         }
-        return `Desalineación: ${fmtInt(mismatch)} desajustes frente a ${fmtInt(match)} coincidencias. Sin clasificar: ${fmtInt(unknown)}.`;
+        return `Desalineacion: ${fmtInt(mismatch)} mismatch supera ${fmtInt(match)} match. Unknown=${fmtInt(unknown)}.`;
       }
 
       function buildFocusMismatchShareSummary(partyId, focusItems, prefsItems) {
@@ -5862,10 +5776,10 @@
         const payload = currentAlignmentPresetForShare();
         const url = buildAlignmentPresetShareUrl(payload);
         const lines = [];
-        lines.push(`Diagnóstico de desajustes: ${partyName(pid)}`);
-        lines.push(`Posturas marcadas: ${fmtInt(prefs.length)}; coincidencias: ${fmtInt(matches.length)}; desajustes: ${fmtInt(mismatches.length)}; sin clasificar: ${fmtInt(unknowns.length)}`);
+        lines.push(`Diagnostico de mismatch: ${partyName(pid)}`);
+        lines.push(`Posturas marcadas=${fmtInt(prefs.length)}; match=${fmtInt(matches.length)}; mismatch=${fmtInt(mismatches.length)}; unknown=${fmtInt(unknowns.length)}`);
         if (mismatches.length) {
-          lines.push("Principales desacuerdos:");
+          lines.push(`Principales desacuerdos:`);
           for (const row of mismatches.slice(0, 5)) {
             const label = String((row && row.topic_label) || "");
             const pref = String((row && row.pref) || "");
@@ -5873,7 +5787,7 @@
             lines.push(`- ${label}: tu=${stanceLabel(pref)} partido=${stanceLabel(stance)}`);
           }
         } else {
-          lines.push("No hay desajustes en los temas comparables actuales.");
+          lines.push(`No hay mismatches en los temas comparables actuales.`);
         }
         lines.push(`Link: ${url}`);
         return { text: lines.join("\n"), url };
@@ -5964,11 +5878,11 @@
           `<div class="mismatchPanel" style="margin-top:10px">` +
           `<div class="partyMeta">` +
           `<span class="tag">desempate</span>` +
-          `<span class="tag">líder: ${esc(partyName(Number(leader.party_id || 0)))}</span>` +
-          `<span class="tag">segundo: ${esc(partyName(Number(second.party_id || 0)))}</span>` +
-          `<span class="tag">brecha de saldo: ${esc(fmtInt(gap))}</span>` +
-          `<span class="tag">temas extra mín.: ${esc(fmtInt(minExtra))}</span>` +
-          `<span class="tag ${esc(rankBandTagClass(leaderBand.id))}">banda del líder: ${esc(String(leaderBand.label || ""))}</span>` +
+          `<span class="tag">top1=${esc(partyName(Number(leader.party_id || 0)))}</span>` +
+          `<span class="tag">top2=${esc(partyName(Number(second.party_id || 0)))}</span>` +
+          `<span class="tag">gap_net=${esc(fmtInt(gap))}</span>` +
+          `<span class="tag">min_temas_extra~${esc(fmtInt(minExtra))}</span>` +
+          `<span class="tag ${esc(rankBandTagClass(leaderBand.id))}">banda_top1=${esc(String(leaderBand.label || ""))}</span>` +
           `</div>` +
           `<div class="partyNarrative" style="margin-top:8px">${esc(caution)} ${esc(String(leaderBand.reason || ""))}</div>` +
           (candidates.length
@@ -5978,7 +5892,7 @@
                   const reason =
                     c.bucket === "direct_split"
                       ? `partidos en lados opuestos (${stanceLabel(c.top_stance)} vs ${stanceLabel(c.second_stance)})`
-                      : `brecha de señal (${stanceLabel(c.top_stance)} frente a ${stanceLabel(c.second_stance)})`;
+                      : `brecha de senal (${stanceLabel(c.top_stance)} vs ${stanceLabel(c.second_stance)})`;
                   return (
                     `<li>` +
                     `<strong>${esc(String(c.topic_label || ""))}</strong> ` +
@@ -6022,16 +5936,16 @@
         const steps = [];
         if (toMark > 0) {
           steps.push(
-            `<li><strong>Completa la base mínima</strong>: marca ${esc(fmtInt(toMark))} postura(s) más para mejorar cobertura.` +
+            `<li><strong>Completa base minima</strong>: marca ${esc(fmtInt(toMark))} postura(s) mas para mejorar cobertura.` +
               ` <button class="btn md3-button" type="button" data-consumer-go-items="1">Ir a casos</button></li>`
           );
         } else {
-          steps.push(`<li><strong>Base activa</strong>: ya tienes suficientes posturas para comparar partidos sin promedios vacíos.</li>`);
+          steps.push(`<li><strong>Base activa</strong>: ya tienes suficientes posturas para comparar partidos sin promedios vacios.</li>`);
         }
 
         if (tieTopic) {
           steps.push(
-            `<li><strong>Reduce la duda entre líderes</strong>: abre <span class="mono">${esc(String(tieTopic.topic_label || ""))}</span> para separar ${esc(
+            `<li><strong>Reduce duda entre lideres</strong>: abre <span class="mono">${esc(String(tieTopic.topic_label || ""))}</span> para separar ${esc(
               leaderPartyName
             )}${runner ? ` y ${esc(partyName(Number((runner || {}).party_id || 0)))}` : ""}.` +
               ` <button class="btn md3-button" type="button" data-guidance-open-topic="${esc(String(tieTopic.topic_id || 0))}">Abrir tema</button></li>`
@@ -6040,100 +5954,33 @@
 
         if (leaderMismatchLink) {
           steps.push(
-            `<li><strong>Audita un desacuerdo clave</strong>: valida contexto en <span class="mono">${esc(leaderMismatchLabel || "desajuste")}</span>.` +
-              ` <a class="smallLink" href="${esc(leaderMismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar desajuste</a></li>`
+            `<li><strong>Audita un desacuerdo clave</strong>: valida contexto en <span class="mono">${esc(leaderMismatchLabel || "mismatch")}</span>.` +
+              ` <a class="smallLink" href="${esc(leaderMismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar mismatch</a></li>`
           );
         } else {
-          steps.push(`<li><strong>Valida evidencia</strong>: abre al menos un caso en Temas/SQL antes de compartir tu conclusión.</li>`);
+          steps.push(`<li><strong>Valida evidencia</strong>: abre al menos un caso en Temas/SQL antes de compartir tu conclusion.</li>`);
         }
 
         if (score >= 75) {
-          steps.push(`<li><strong>Comparte la decisión provisional</strong>: exporta el resumen y el enlace para discutir con evidencia.` + ` <button class="btn md3-button" type="button" data-copy-consumer-decision="1">Copiar resumen</button></li>`);
+          steps.push(`<li><strong>Comparte decision provisional</strong>: exporta resumen y link para discutir con evidencia.` + ` <button class="btn md3-button" type="button" data-copy-consumer-decision="1">Copiar resumen</button></li>`);
         }
 
         const renderedSteps = steps.slice(0, 4).join("");
         return (
           `<div class="mismatchPanel" style="margin-top:10px" data-consumer-action-plan="1">` +
           `<div class="partyMeta">` +
-          `<span class="tag ${esc(levelClass)}">preparación: ${esc(fmtInt(score))}%</span>` +
-          `<span class="tag">estado: ${esc(String(readiness.label || "preliminar"))}</span>` +
-          `<span class="tag">líder: ${esc(leaderPartyName)}</span>` +
-          `<span class="tag">cobertura: ${esc(fmtPct01(Number(readiness.coverage || 0)))}</span>` +
-          `<span class="tag">brecha de saldo: ${esc(fmtInt(Number(readiness.gap || 0)))}</span>` +
-          `<span class="tag ${esc(rankBandTagClass(String((readiness.leaderBand || {}).id || "fragil")))}">banda del líder: ${esc(
+          `<span class="tag ${esc(levelClass)}">readiness=${esc(fmtInt(score))}%</span>` +
+          `<span class="tag">estado=${esc(String(readiness.label || "preliminar"))}</span>` +
+          `<span class="tag">top=${esc(leaderPartyName)}</span>` +
+          `<span class="tag">cobertura=${esc(fmtPct01(Number(readiness.coverage || 0)))}</span>` +
+          `<span class="tag">gap_net=${esc(fmtInt(Number(readiness.gap || 0)))}</span>` +
+          `<span class="tag ${esc(rankBandTagClass(String((readiness.leaderBand || {}).id || "fragil")))}">banda_top1=${esc(
             String((readiness.leaderBand || {}).label || "fragil")
           )}</span>` +
           `</div>` +
-          `<div class="partyNarrative" style="margin-top:8px">Valor práctico: ${esc(String(readiness.reason || ""))}</div>` +
+          `<div class="partyNarrative" style="margin-top:8px">Valor practico: ${esc(String(readiness.reason || ""))}</div>` +
           `<ol class="mismatchList">${renderedSteps}</ol>` +
           `</div>`
-        );
-      }
-
-      function renderCuriosityDetail(topicId, partyId) {
-        const comp = comparabilityRowFor(topicId, partyId);
-        const lin = lineageRowFor(topicId, partyId);
-        const diff = snapshotDiffRowFor(topicId, partyId);
-        const diffMeta = (state.curiosity && state.curiosity.snapshotDiff && state.curiosity.snapshotDiff.meta) || {};
-        const previousAsOfDate = String(diffMeta.previous_as_of_date || "").trim();
-        if (!comp && !lin && !diff) return "";
-
-        const parts = [];
-        if (comp) {
-          const comparableMembers = Number(comp.comparable_members || 0);
-          const membersTotal = Number(comp.members_total || 0);
-          const unknownTotal = Number(comp.unknown_total || 0);
-          parts.push(
-            `<div class="rowMeta" data-citizen-comparability="1">` +
-              `<span class="tag ${comp.comparable_ok ? "good" : "bad"}">comparable: ${esc(comp.comparable_ok ? "sí" : "no")}</span>` +
-              `<span class="tag">comparables: ${esc(fmtInt(comparableMembers))}/${esc(fmtInt(membersTotal))}</span>` +
-              `<span class="tag">sin clasificar: ${esc(fmtInt(unknownTotal))}</span>` +
-              `<span>${esc(String(comp.reason_label || ""))}</span>` +
-              `</div>`
-          );
-        }
-        if (lin) {
-          const sampleEvidence = Array.isArray(((lin || {}).evidence || {}).sample_evidence) ? lin.evidence.sample_evidence : [];
-          const sampleIds = sampleEvidence
-            .map((item) => String((item || {}).source_id || "").trim())
-            .filter((token, idx, arr) => token && arr.indexOf(token) === idx)
-            .slice(0, 3);
-          parts.push(
-            `<div class="rowMeta" data-citizen-lineage="1">` +
-              `<span class="tag">método: ${esc(String(((lin || {}).aggregate || {}).computed_method || ""))}</span>` +
-              `<span class="tag">versión: ${esc(String(((lin || {}).aggregate || {}).computed_version || ""))}</span>` +
-              `<span class="tag">posiciones: ${esc(fmtInt(Number(((lin || {}).positions || {}).total_positions || 0)))}</span>` +
-              `<span class="tag">evidencias: ${esc(fmtInt(Number(((lin || {}).evidence || {}).evidence_rows_total || 0)))}</span>` +
-              (sampleIds.length ? `<span class="tag">fuentes: ${esc(sampleIds.join(", "))}</span>` : `<span class="tag">fuentes: sin muestra</span>`) +
-              `</div>`
-          );
-        }
-        if (diff && previousAsOfDate) {
-          const changeLabel =
-            String(diff.primary_change || "") === "stance_changed"
-              ? `${stanceLabel(String(diff.previous_stance || "no_signal"))} -> ${stanceLabel(String(diff.current_stance || "no_signal"))}`
-              : String(diff.primary_change || "") === "comparability_changed"
-              ? "cambio de comparabilidad"
-              : String(diff.primary_change || "") === "evidence_changed"
-              ? "cambio de evidencia"
-              : String(diff.primary_change || "") === "signal_changed"
-              ? "cambio de señal"
-              : "cambio de confianza";
-          parts.push(
-            `<div class="rowMeta" data-citizen-snapshot-diff="1">` +
-              `<span class="tag hot">delta_vs=${esc(previousAsOfDate)}</span>` +
-              `<span class="tag">${esc(changeLabel)}</span>` +
-              `<span class="tag">evidencia_delta=${esc(fmtInt(Number(diff.evidence_count_delta || 0)))}</span>` +
-              `<span class="tag">señal_delta=${esc(fmtInt(Number(diff.signal_delta || 0)))}</span>` +
-              `</div>`
-          );
-        }
-
-        return (
-          `<details class="mismatchPanel" data-citizen-curiosity-details="1" style="margin-top:8px">` +
-          `<summary><strong>Por qué esta lectura</strong></summary>` +
-          `<div style="margin-top:8px">${parts.join("")}</div>` +
-          `</details>`
         );
       }
 
@@ -6434,7 +6281,7 @@
 
       function partyName(pid) {
         const p = state.partyById.get(Number(pid)) || null;
-        if (!p) return `partido #${pid}`;
+        if (!p) return `party_id=${pid}`;
         const a = String(p.acronym || "").trim();
         const n = String(p.name || "").trim();
         return a ? `${a} · ${n}` : n;
@@ -6523,7 +6370,7 @@
       function renderCoherenceCompare(el, selectedConcernIds, { sortMode } = {}) {
         const cids = normalizeSelectedConcernIds(selectedConcernIds || []);
         if (!cids.length) {
-          el.innerHTML = `<div class="empty"><strong>Coherencia</strong>: selecciona al menos una preocupación.</div>`;
+          el.innerHTML = `<div class="empty"><strong>Coherencia</strong>: selecciona al menos 1 preocupacion.</div>`;
           return;
         }
 
@@ -6559,7 +6406,7 @@
 
         const topicsUnion = topicsForConcernIdsAll(cids);
         if (!topicsUnion.length) {
-          el.innerHTML = `<div class="empty">No hay casos etiquetados para las preocupaciones seleccionadas.</div>`;
+          el.innerHTML = `<div class="empty">No hay items etiquetados para las preocupaciones seleccionadas.</div>`;
           return;
         }
 
@@ -6589,12 +6436,12 @@
             return (
               `<div class="rowMeta">` +
               `<span class="tag"><strong>${esc(concernLabelById(cid) || cid)}</strong></span>` +
-              `<span class="tag">casos: ${esc(fmtInt(votes.items_total))}</span>` +
-              `<span class="tag">votos con señal: ${esc(fmtPct01(votes.any_signal_pct))}; claros: ${esc(fmtPct01(votes.clear_pct))}</span>` +
-              `<span class="tag">dichos con señal: ${esc(fmtPct01(declared.any_signal_pct))}; claros: ${esc(fmtPct01(declared.clear_pct))}</span>` +
-              `<span class="tag">combinado con señal: ${esc(fmtPct01(combined.any_signal_pct))}; claro: ${esc(fmtPct01(combined.clear_pct))}</span>` +
-              `<span class="tag">comparables: ${esc(fmtInt(cohTotals.comparable))}</span>` +
-              `<span class="tag">desajustes: ${esc(fmtInt(cohTotals.mismatch))}</span>` +
+              `<span class="tag">items=${esc(fmtInt(votes.items_total))}</span>` +
+              `<span class="tag">votos any=${esc(fmtPct01(votes.any_signal_pct))} clear=${esc(fmtPct01(votes.clear_pct))}</span>` +
+              `<span class="tag">dichos any=${esc(fmtPct01(declared.any_signal_pct))} clear=${esc(fmtPct01(declared.clear_pct))}</span>` +
+              `<span class="tag">combinado any=${esc(fmtPct01(combined.any_signal_pct))} clear=${esc(fmtPct01(combined.clear_pct))}</span>` +
+              `<span class="tag">comparables=${esc(fmtInt(cohTotals.comparable))}</span>` +
+              `<span class="tag">mismatch=${esc(fmtInt(cohTotals.mismatch))}</span>` +
               `</div>`
             );
           })
@@ -6630,16 +6477,16 @@
           `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">` +
           `<div><strong>Coherencia</strong> (votos vs dichos)</div>` +
           `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">` +
-          `<span class="tag">casos: ${esc(fmtInt(topicsUnion.length))}</span>` +
-          `<span class="tag">comparables: ${esc(fmtInt(overallCoh.comparable))}</span>` +
-          `<span class="tag">desajustes: ${esc(fmtInt(overallCoh.mismatch))} (${esc(fmtPct01(mismatchPct))} de comparables)</span>` +
-          (state.activePartyId ? `<span class="tag">foco: ${esc(partyName(state.activePartyId))}</span>` : "") +
+          `<span class="tag">items=${esc(fmtInt(topicsUnion.length))}</span>` +
+          `<span class="tag">comparables=${esc(fmtInt(overallCoh.comparable))}</span>` +
+          `<span class="tag">mismatch=${esc(fmtInt(overallCoh.mismatch))} (${esc(fmtPct01(mismatchPct))} de comparables)</span>` +
+          (state.activePartyId ? `<span class="tag">foco=${esc(partyName(state.activePartyId))}</span>` : "") +
           (state.activePartyId ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>` : "") +
           `</div>` +
           `</div>` +
           `<div class="rowMeta" style="margin-top:8px">` +
           `<span class="tag">Comparable solo si ambos son A favor / En contra</span>` +
-          `<span class="tag">mixto, incierto o sin señal = no comparable</span>` +
+          `<span class="tag">mixed/unclear/no_signal = no comparable</span>` +
           `</div>` +
           (stabilityPanel ? `<div style="margin-top:8px">${stabilityPanel}</div>` : ``) +
           `<div class="rowMeta" style="margin-top:8px">` +
@@ -6680,7 +6527,7 @@
                     bucket: auditIsMismatch ? "incoherent" : "coherent",
                     view: "coherence",
                   });
-                  const drilldownLabel = auditIsMismatch ? "Auditar desajuste" : "Auditar coherencia";
+                  const drilldownLabel = auditIsMismatch ? "Auditar mismatch" : "Auditar coherencia";
 
                   const sv = auditTid ? stanceFromPosMap(coh.votesPosByKey, auditTid, pid) : "no_signal";
                   const sd = auditTid ? stanceFromPosMap(coh.declaredPosByKey, auditTid, pid) : "no_signal";
@@ -6690,7 +6537,7 @@
                     `<div class="partyHead">` +
                     `<div class="partyName">${esc(partyName(pid))}</div>` +
                     `<div class="tags">` +
-                    `<span class="tag">${esc(auditIsMismatch ? "desajuste" : auditTopic ? "coincidencia" : "sin comparables")}</span>` +
+                    `<span class="tag">${esc(auditIsMismatch ? "mismatch" : auditTopic ? "match" : "sin comparables")}</span>` +
                     `</div>` +
                     `</div>` +
                     `<div class="barWrap">` +
@@ -6700,15 +6547,15 @@
                     `<div class="bar"><div style="width:${Math.round(comparableRatio * 100)}%"></div></div>` +
                     `</div>` +
                     `<div class="barWrap">` +
-                    `<div class="barLabel"><span>Desajustes entre comparables</span><span class="mono">${esc(fmtInt(mismatch))}/${esc(
+                    `<div class="barLabel"><span>Mismatch (de comparables)</span><span class="mono">${esc(fmtInt(mismatch))}/${esc(
                       fmtInt(comparable)
                     )} (${esc(fmtPct01(mismatchRatio))})</span></div>` +
                     `<div class="bar"><div style="width:${Math.round(mismatchRatio * 100)}%"></div></div>` +
                     `</div>` +
                     `<div class="partyMeta">` +
-                    `<span class="tag">coincidencias: ${esc(fmtInt(match))}</span>` +
-                    `<span class="tag">desajustes: ${esc(fmtInt(mismatch))}</span>` +
-                    `<span class="tag">no comparables: ${esc(fmtInt(notComp))}</span>` +
+                    `<span class="tag">match=${esc(fmtInt(match))}</span>` +
+                    `<span class="tag">mismatch=${esc(fmtInt(mismatch))}</span>` +
+                    `<span class="tag">no_comparable=${esc(fmtInt(notComp))}</span>` +
                     `</div>` +
                     `<div class="partyMeta">` +
                     `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Foco partido</button>` +
@@ -6718,7 +6565,7 @@
                         )}" data-concern-id="${esc(String(drillConcernId || ""))}" href="${esc(
                           String(drilldownLink)
                         )}" target="_blank" rel="noopener noreferrer">${esc(drilldownLabel)}</a>`
-                      : `<span class="tag">sin enlace de auditoría</span>`) +
+                      : `<span class="tag">sin audit link</span>`) +
                     `</div>` +
                     (auditTopic
                       ? `<div class="partyMeta">` +
@@ -6814,16 +6661,16 @@
           `<div><strong>Alineamiento</strong></div>` +
           `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end">` +
           `<span class="tag">${esc(computedMethodLabel())}</span>` +
-          `<span class="tag">posturas: ${esc(fmtInt(prefsItems.length))}</span>` +
-          `<span class="tag">a favor: ${esc(fmtInt(supportN))}</span>` +
-          `<span class="tag">en contra: ${esc(fmtInt(opposeN))}</span>` +
-          (state.activePartyId ? `<span class="tag">foco: ${esc(partyName(state.activePartyId))}</span>` : "") +
+          `<span class="tag">prefs=${esc(fmtInt(prefsItems.length))}</span>` +
+          `<span class="tag">a_favor=${esc(fmtInt(supportN))}</span>` +
+          `<span class="tag">en_contra=${esc(fmtInt(opposeN))}</span>` +
+          (state.activePartyId ? `<span class="tag">foco=${esc(partyName(state.activePartyId))}</span>` : "") +
           (state.activePartyId ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>` : "") +
           `</div>` +
           `</div>` +
           `<div class="rowMeta" style="margin-top:8px">` +
           `<span class="tag">Honestidad</span>` +
-          `<span>Solo contamos coincidencias y desajustes cuando el partido tiene señal clara (a favor o en contra). Todo lo demás queda <strong>sin clasificar</strong>.</span>` +
+          `<span>match/mismatch solo cuando el partido tiene senal clara (a_favor/en_contra). Todo lo demas es <strong>unknown</strong>.</span>` +
           `</div>` +
           `<div class="rowMeta" style="margin-top:8px">` +
           `<span class="tag">Privacidad</span>` +
@@ -6831,7 +6678,7 @@
           `</div>` +
           `<div class="rowMeta" style="margin-top:10px">` +
           `<button class="btn md3-button" type="button" data-prefs-clear-all="1" ${prefsItems.length ? "" : "disabled"}>Borrar preferencias</button>` +
-          `<button class="btn md3-button" type="button" data-prefs-share="1" ${prefsItems.length ? "" : "disabled"}>Generar enlace</button>` +
+          `<button class="btn md3-button" type="button" data-prefs-share="1" ${prefsItems.length ? "" : "disabled"}>Generar link</button>` +
           `<button class="btn md3-button" type="button" data-prefs-download="1" ${prefsItems.length ? "" : "disabled"}>Descargar JSON</button>` +
           `<label class="btn md3-button" style="display:inline-flex; align-items:center; gap:8px; cursor:pointer">` +
           `Importar JSON<input id="prefsUpload" type="file" accept=\"application/json\" style="display:none" />` +
@@ -6848,8 +6695,8 @@
             selectedTopicHtml +
             prefsHeader +
             `<div class="empty">` +
-            `<strong>Empieza aquí</strong>: selecciona un caso en la columna 2 y marca <span class="mono">Yo: a favor</span> o <span class="mono">Yo: en contra</span>.` +
-            `<div style="margin-top:8px">Verás un resumen por partido con coincidencias, desajustes, casos sin clasificar y cobertura.</div>` +
+            `<strong>Empieza aqui</strong>: selecciona un item en la columna 2 y marca <span class="mono">Yo: a favor</span> o <span class="mono">Yo: en contra</span>.` +
+            `<div style="margin-top:8px">Veras un resumen por partido con <span class="mono">match/mismatch/unknown</span> y cobertura.</div>` +
             `</div>`;
         } else {
           const rows = [];
@@ -6929,24 +6776,18 @@
                     const matchLink = auditMatch && auditMatch.links ? String(auditMatch.links.explorer_temas || "") : "";
                     const cov = Number(r.coverage || 0);
                     const narrative = alignmentNarrativeForParty(r, prefsItems.length);
-                    const band = alignmentBandsByParty.get(pid) || { id: "fragil", label: "frágil" };
-                    const diffParty = snapshotDiffPartySummaryFor(pid);
-                    const diffMeta = (state.curiosity && state.curiosity.snapshotDiff && state.curiosity.snapshotDiff.meta) || {};
-                    const previousAsOfDate = String(diffMeta.previous_as_of_date || "").trim();
+                    const band = alignmentBandsByParty.get(pid) || { id: "fragil", label: "fragil" };
 
                     return (
                       `<div class="partyCard md3-card ${focused ? "focused" : ""}">` +
                       `<div class="partyHead">` +
                       `<div class="partyName">${esc(partyName(pid))}</div>` +
                       `<div class="tags">` +
-                      `<span class="tag">coincidencias: ${esc(fmtInt(r.match))}</span>` +
-                      `<span class="tag">desajustes: ${esc(fmtInt(r.mismatch))}</span>` +
-                      `<span class="tag">sin clasificar: ${esc(fmtInt(r.unknown))}</span>` +
-                      `<span class="tag">saldo: ${esc(fmtInt(r.net))}</span>` +
-                      `<span class="tag ${esc(rankBandTagClass(band.id))}">banda: ${esc(String(band.label || ""))}</span>` +
-                      (diffParty && previousAsOfDate
-                        ? `<span class="tag hot">cambios: ${esc(fmtInt(Number(diffParty.changed_topics_total || 0)))} vs ${esc(previousAsOfDate)}</span>`
-                        : ``) +
+                      `<span class="tag">match=${esc(fmtInt(r.match))}</span>` +
+                      `<span class="tag">mismatch=${esc(fmtInt(r.mismatch))}</span>` +
+                      `<span class="tag">unknown=${esc(fmtInt(r.unknown))}</span>` +
+                      `<span class="tag">net=${esc(fmtInt(r.net))}</span>` +
+                      `<span class="tag ${esc(rankBandTagClass(band.id))}">banda=${esc(String(band.label || ""))}</span>` +
                       `</div>` +
                       `</div>` +
                       `<div class="barWrap">` +
@@ -6959,11 +6800,11 @@
                       `<div class="partyMeta">` +
                       `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Foco</button>` +
                       (mismatchLink
-                        ? `<a class="smallLink" href="${esc(mismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar desajuste</a>`
-                        : `<span class="tag">sin desajuste</span>`) +
+                        ? `<a class="smallLink" href="${esc(mismatchLink)}" target="_blank" rel="noopener noreferrer">Auditar mismatch</a>`
+                        : `<span class="tag">sin mismatch</span>`) +
                       (matchLink
-                        ? `<a class="smallLink" href="${esc(matchLink)}" target="_blank" rel="noopener noreferrer">Auditar coincidencia</a>`
-                        : `<span class="tag">sin coincidencia</span>`) +
+                        ? `<a class="smallLink" href="${esc(matchLink)}" target="_blank" rel="noopener noreferrer">Auditar match</a>`
+                        : `<span class="tag">sin match</span>`) +
                       `</div>` +
                       `</div>`
                     );
@@ -6997,24 +6838,18 @@
             const matchItems = focusDetailItems.filter((x) => x.res === "match");
             const unknownItems = focusDetailItems.filter((x) => x.res === "unknown");
             const focusPartyLabel = partyName(pid);
-            const diffParty = snapshotDiffPartySummaryFor(pid);
-            const diffMeta = (state.curiosity && state.curiosity.snapshotDiff && state.curiosity.snapshotDiff.meta) || {};
-            const previousAsOfDate = String(diffMeta.previous_as_of_date || "").trim();
 
             const mismatchPanel =
               `<div class="mismatchPanel">` +
               `<div class="partyMeta">` +
-              `<span class="tag">coincidencias: ${esc(fmtInt(matchItems.length))}</span>` +
-              `<span class="tag bad">desajustes: ${esc(fmtInt(mismatchItems.length))}</span>` +
-              `<span class="tag">sin clasificar: ${esc(fmtInt(unknownItems.length))}</span>` +
-              (diffParty && previousAsOfDate
-                ? `<span class="tag hot">cambios: ${esc(fmtInt(Number(diffParty.changed_topics_total || 0)))} vs ${esc(previousAsOfDate)}</span>`
-                : ``) +
+              `<span class="tag">match=${esc(fmtInt(matchItems.length))}</span>` +
+              `<span class="tag bad">mismatch=${esc(fmtInt(mismatchItems.length))}</span>` +
+              `<span class="tag">unknown=${esc(fmtInt(unknownItems.length))}</span>` +
               `</div>` +
               `<div class="partyNarrative" style="margin-top:8px">` +
               (mismatchItems.length
                 ? `Principales motivos de desajuste para ${esc(focusPartyLabel)} (primeros ${fmtInt(Math.min(3, mismatchItems.length))}):`
-                : `No hay desajustes en los temas comparables actuales para ${esc(focusPartyLabel)}.`) +
+                : `No hay mismatch en los temas comparables actuales para ${esc(focusPartyLabel)}.`) +
               `</div>` +
               (mismatchItems.length
                 ? `<ol class="mismatchList">` +
@@ -7025,7 +6860,7 @@
                         `<li>` +
                         `<strong>${esc(String(row.topic_label || ""))}</strong> ` +
                         `tu: <span class="mono">${esc(stanceLabel(String(row.pref || "")))}</span> ` +
-                        `frente al partido: <span class="mono">${esc(stanceLabel(String(row.stance || "")))}</span> ` +
+                        `vs partido: <span class="mono">${esc(stanceLabel(String(row.stance || "")))}</span> ` +
                         (row.temas_link
                           ? `<a class="smallLink" href="${esc(String(row.temas_link || ""))}" target="_blank" rel="noopener noreferrer">Auditar</a>`
                           : ``) +
@@ -7036,8 +6871,8 @@
                   `</ol>`
                 : ``) +
               `<div class="consumerDecisionActions">` +
-              `<button class="btn md3-button" type="button" data-copy-focus-mismatch-summary="1" data-party-id="${esc(String(pid))}">Copiar diagnóstico</button>` +
-              `<button class="btn md3-button" type="button" data-prefs-share="1">Compartir comparación</button>` +
+              `<button class="btn md3-button" type="button" data-copy-focus-mismatch-summary="1" data-party-id="${esc(String(pid))}">Copiar diagnostico</button>` +
+              `<button class="btn md3-button" type="button" data-prefs-share="1">Compartir comparacion</button>` +
               `</div>` +
               `</div>`;
 
@@ -7048,7 +6883,7 @@
                   `<div class="partyCard md3-card">` +
                   `<div class="partyHead">` +
                   `<div class="partyName">${esc(String(row.topic_label || ""))}</div>` +
-                  `<span class="tag ${esc(resClass)}">${esc(row.res === "match" ? "coincidencia" : row.res === "mismatch" ? "desajuste" : "sin clasificar")}</span>` +
+                  `<span class="tag ${esc(resClass)}">${esc(String(row.res || "unknown"))}</span>` +
                   `</div>` +
                   `<div class="partyMeta">` +
                   `<span class="stanceChip mini ${esc(String(row.pref || ""))}"><span class="dot ${esc(dotClassForStance(String(row.pref || "")))}"></span>tu:${esc(
@@ -7064,7 +6899,6 @@
                     ? `<a class="smallLink" href="${esc(String(row.pos_link || ""))}" target="_blank" rel="noopener noreferrer">SQL</a>`
                     : "") +
                   `</div>` +
-                  renderCuriosityDetail(Number(row.topic_id || 0), pid) +
                   `</div>`
                 );
               })
@@ -7073,7 +6907,7 @@
             el.innerHTML +=
               `<div class="empty" style="margin-top: 12px">` +
               `<strong>Foco partido</strong>: ${esc(partyName(pid))}` +
-              `<div style="margin-top:8px">Detalle por tema (tu preferencia frente a la posición del partido).</div>` +
+              `<div style="margin-top:8px">Detalle por tema (tu preferencia vs posicion del partido).</div>` +
               `</div>` +
               mismatchPanel +
               detailRows;
@@ -7126,7 +6960,7 @@
             const summary = buildConsumerAlignmentShareSummary(alignmentRowsForConsumerSummary, prefsItems);
             const copied = await copyToClipboard(String(summary.text || ""));
             setBanner(
-              `<div><strong>Resumen ciudadano</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automáticamente"}.</div>` +
+              `<div><strong>Resumen ciudadano</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automaticamente"}.</div>` +
                 `<div style="margin-top:8px"><span class="mono">${esc(String(summary.url || ""))}</span></div>`
             );
           });
@@ -7137,7 +6971,7 @@
             const summary = buildFocusMismatchShareSummary(focusDetailPartyId, focusDetailItems, prefsItems);
             const copied = await copyToClipboard(String(summary.text || ""));
             setBanner(
-              `<div><strong>Diagnóstico de desajustes</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automáticamente"}.</div>` +
+              `<div><strong>Diagnostico de mismatch</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automaticamente"}.</div>` +
                 `<div style="margin-top:8px"><span class="mono">${esc(String(summary.url || ""))}</span></div>`
             );
           });
@@ -7149,7 +6983,7 @@
             selectTopic(tid2, true);
             scrollToSection("#stepItems");
             setBanner(
-              `<div><strong>Tema sugerido abierto</strong>: marca tu postura para reducir el empate entre los partidos líderes.</div>`
+              `<div><strong>Tema sugerido abierto</strong>: marca tu postura para reducir empate entre partidos lideres.</div>`
             );
           });
         }
@@ -7163,7 +6997,7 @@
             renderCompare();
             scrollToSection("#stepItems");
             setBanner(
-              `<div><strong>Siguiente paso</strong>: marca tu postura en más casos para aumentar la cobertura y la estabilidad de la clasificación.</div>`
+              `<div><strong>Siguiente paso</strong>: marca postura en mas casos para subir cobertura y estabilidad del ranking.</div>`
             );
           });
         }
@@ -7256,12 +7090,12 @@
             const temasLink = String((rec.links || {}).explorer_temas || "");
             el.innerHTML =
               `<div class="empty">` +
-              `<div><strong>Elige una preocupación para empezar.</strong></div>` +
-              `<div style="margin-top:8px">Sugerencia rápida: <span class="mono">${esc(String(rec.concern_label || rec.concern_id || ""))}</span> -> <span class="mono">${esc(
+              `<div><strong>Elige una preocupacion para empezar.</strong></div>` +
+              `<div style="margin-top:8px">Sugerencia rapida: <span class="mono">${esc(String(rec.concern_label || rec.concern_id || ""))}</span> -> <span class="mono">${esc(
                 String(rec.topic_label || "")
               )}</span>.</div>` +
               `<div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">` +
-              `<button class="btn md3-button" type="button" data-first-answer-run-inline="1">Usar recomendación</button>` +
+              `<button class="btn md3-button" type="button" data-first-answer-run-inline="1">Usar recomendacion</button>` +
               (evLink
                 ? `<a class="smallLink" href="${esc(evLink)}" target="_blank" rel="noopener noreferrer">Evidencia</a>`
                 : ``) +
@@ -7277,7 +7111,7 @@
             }
             return;
           }
-          el.innerHTML = `<div class="empty">Elige una preocupación para empezar.</div>`;
+          el.innerHTML = `<div class="empty">Elige una preocupacion para empezar.</div>`;
           return;
         }
 
@@ -7298,14 +7132,14 @@
             if (selected.length < 2) {
               el.innerHTML =
                 `<div class="empty">` +
-                `<strong>Mi panel</strong>: selecciona al menos <strong>2</strong> preocupaciones en la columna 1 (se guardan arriba) para ver un resumen múltiple.` +
+                `<strong>Mi dashboard</strong>: selecciona al menos <strong>2</strong> preocupaciones en la columna 1 (se guardan arriba) para ver un resumen multi-concern.` +
                 `</div>`;
               return;
             }
 
             const sum = dashboardPartySummaries();
             if (!sum.items_total) {
-              el.innerHTML = `<div class="empty">No hay casos para las preocupaciones seleccionadas.</div>`;
+              el.innerHTML = `<div class="empty">No hay items para las preocupaciones seleccionadas.</div>`;
               return;
             }
             const dashboardCoverage = coverageStatsForTopics(sum.topics || [], state.posByKey);
@@ -7394,14 +7228,14 @@
             el.innerHTML =
               `<div class="empty" style="margin-bottom: 12px">` +
               `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">` +
-              `<div><strong>Mi panel</strong></div>` +
+              `<div><strong>Mi dashboard</strong></div>` +
               `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">` +
               `<span class="tag">${esc(computedMethodLabel())}</span>` +
-              `<span class="tag">${esc(fmtInt(sum.items_total))} casos (unión)</span>` +
+              `<span class="tag">${esc(fmtInt(sum.items_total))} items (union)</span>` +
               `<span class="tag">${esc(fmtInt((sum.concern_ids || []).length))} preocupaciones</span>` +
-              (activePack ? `<span class="tag">paquete: ${esc(String(activePack.label || activePack.id || ""))}</span>` : `<span class="tag">paquete personalizado</span>`) +
-              `<button class="btn md3-button" data-dashboard-share-preset="1" type="button">Compartir ajuste</button>` +
-              (state.activePartyId ? `<span class="tag">foco: ${esc(partyName(state.activePartyId))}</span>` : "") +
+              (activePack ? `<span class="tag">pack=${esc(String(activePack.label || activePack.id || ""))}</span>` : `<span class="tag">pack=personalizado</span>`) +
+              `<button class="btn md3-button" data-dashboard-share-preset="1" type="button">Compartir preset</button>` +
+              (state.activePartyId ? `<span class="tag">foco=${esc(partyName(state.activePartyId))}</span>` : "") +
               (state.activePartyId
                 ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>`
                 : "") +
@@ -7412,13 +7246,13 @@
               `<span class="tags">${concernTags || ""}</span>` +
               `</div>` +
               `<div class="rowMeta" style="margin-top:8px">` +
-              `<span class="tag">sin clasificar = incierto + sin señal</span>` +
+              `<span class="tag">unknown = incierto + sin_senal</span>` +
               `<span class="tag">confianza alta/media/baja/nula por partido</span>` +
               `</div>` +
               (dashboardUnknownSummary || "") +
               (dashboardNudge || "") +
               (activePackTradeoff
-                ? `<div class="rowMeta" style="margin-top:8px"><span class="tag">contrapartida del paquete</span><span>${esc(activePackTradeoff)}</span></div>`
+                ? `<div class="rowMeta" style="margin-top:8px"><span class="tag">tradeoff pack</span><span>${esc(activePackTradeoff)}</span></div>`
                 : ``) +
               (concernExplainers ? `<div class="rowMeta" style="margin-top:8px">${concernExplainers}</div>` : ``) +
               (dashboardHiddenHint || "") +
@@ -7483,7 +7317,7 @@
                         )}</div>` +
                         `</div>` +
                         `<div class="barWrap">` +
-                        `<div class="barLabel"><span>Cobertura (casos)</span><span class="mono">${esc(clearTotal)}/${esc(
+                        `<div class="barLabel"><span>Cobertura (items)</span><span class="mono">${esc(clearTotal)}/${esc(
                           itemsTotal
                         )} (${esc(fmtPct01(cov))})</span></div>` +
                         `<div class="bar"><div style="width:${Math.round(cov * 100)}%"></div></div>` +
@@ -7494,24 +7328,24 @@
                         `</div>` +
                         `<div class="partyMeta">` +
                         (showAuditDetails
-                          ? `<span class="tag">casos: ${esc(fmtInt(itemsTotal))}</span>` +
-                            `<span class="tag">a favor: ${esc(fmtInt(Number(counts.support || 0)))}</span>` +
-                            `<span class="tag">en contra: ${esc(fmtInt(Number(counts.oppose || 0)))}</span>` +
-                            `<span class="tag">mixto: ${esc(fmtInt(Number(counts.mixed || 0)))}</span>` +
-                            `<span class="tag">incierto: ${esc(fmtInt(Number(counts.unclear || 0)))}</span>` +
-                            `<span class="tag">sin señal: ${esc(fmtInt(Number(counts.no_signal || 0)))}</span>` +
-                            `<span class="tag ${esc(confidenceTierTagClass(confTier))}">confianza: ${esc(confidenceTierLabel(confTier))}</span>`
-                          : `<span class="tag">cobertura: ${esc(fmtPct01(cov))}</span>` +
-                            `<span class="tag">confianza: ${esc(fmtPct01(conf))}</span>` +
-                            `<span class="tag">sin clasificar: ${esc(fmtInt(Number(counts.unclear || 0) + Number(counts.no_signal || 0)))}</span>`) +
+                          ? `<span class="tag">items=${esc(fmtInt(itemsTotal))}</span>` +
+                            `<span class="tag">a_favor=${esc(fmtInt(Number(counts.support || 0)))}</span>` +
+                            `<span class="tag">en_contra=${esc(fmtInt(Number(counts.oppose || 0)))}</span>` +
+                            `<span class="tag">mixto=${esc(fmtInt(Number(counts.mixed || 0)))}</span>` +
+                            `<span class="tag">incierto=${esc(fmtInt(Number(counts.unclear || 0)))}</span>` +
+                            `<span class="tag">sin_senal=${esc(fmtInt(Number(counts.no_signal || 0)))}</span>` +
+                            `<span class="tag ${esc(confidenceTierTagClass(confTier))}">conf_tier=${esc(confidenceTierLabel(confTier))}</span>`
+                          : `<span class="tag">cobertura=${esc(fmtPct01(cov))}</span>` +
+                            `<span class="tag">confianza=${esc(fmtPct01(conf))}</span>` +
+                            `<span class="tag">unknown=${esc(fmtInt(Number(counts.unclear || 0) + Number(counts.no_signal || 0)))}</span>`) +
                         `</div>` +
                         (unknownHint || "") +
                         (showAuditDetails ? trustPanel || "" : "") +
                         `<div class="partyMeta">` +
-                        `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Ver casos principales</button>` +
+                        `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Ver top items</button>` +
                         (auditLink
-                          ? `<a class="smallLink" href="${esc(String(auditLink))}" target="_blank" rel="noopener noreferrer">Auditar caso</a>`
-                          : `<span class="tag">sin enlace de auditoría</span>`) +
+                          ? `<a class="smallLink" href="${esc(String(auditLink))}" target="_blank" rel="noopener noreferrer">Auditar item</a>`
+                          : `<span class="tag">sin audit link</span>`) +
                         `</div>` +
                         (showAuditDetails
                           ? `<div class="partyMeta">` +
@@ -7519,9 +7353,9 @@
                             `<span class="stanceChip mini ${esc(progStance)}">` +
                             `<span class="dot ${esc(dotClassForStance(progStance))}"></span>${esc(stanceLabel(progStance))}` +
                             `</span>` +
-                            `<span class="tag">confianza: ${esc(fmtPct01(progConf))}</span>` +
-                            `<span class="tag ${esc(confidenceTierTagClass(progTier))}">confianza cualitativa: ${esc(confidenceTierLabel(progTier))}</span>` +
-                            `<span class="tag">claras: ${esc(fmtInt(Number(progCounts.support || 0) + Number(progCounts.oppose || 0) + Number(progCounts.mixed || 0)))}/${esc(
+                            `<span class="tag">conf=${esc(fmtPct01(progConf))}</span>` +
+                            `<span class="tag ${esc(confidenceTierTagClass(progTier))}">tier=${esc(confidenceTierLabel(progTier))}</span>` +
+                            `<span class="tag">ok=${esc(fmtInt(Number(progCounts.support || 0) + Number(progCounts.oppose || 0) + Number(progCounts.mixed || 0)))}/${esc(
                               fmtInt(Number((sum.concern_ids || []).length))
                             )}</span>` +
                             (progLink
@@ -7552,7 +7386,7 @@
                 const url = buildAlignmentPresetShareUrl(payload);
                 const copied = await copyToClipboard(url);
                 setBanner(
-                  `<div><strong>Ajuste de alineamiento</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automáticamente"}.</div>` +
+                  `<div><strong>Preset de alineamiento</strong>: ${copied ? "copiado al portapapeles" : "no se pudo copiar automaticamente"}.</div>` +
                     `<div style="margin-top:8px"><span class="mono">${esc(url)}</span></div>`
                 );
               });
@@ -7568,7 +7402,7 @@
 
           const sum = concernPartySummaries();
           if (!sum.items_total) {
-            el.innerHTML = `<div class="empty">No hay casos para esta preocupación.</div>`;
+            el.innerHTML = `<div class="empty">No hay items para esta preocupacion.</div>`;
             return;
           }
           const concernCoverage = coverageStatsForTopics(sum.topics || [], state.posByKey);
@@ -7647,23 +7481,23 @@
             `<div><strong>${esc(concernLabel)}</strong></div>` +
             `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">` +
             `<span class="tag">${esc(computedMethodLabel())}</span>` +
-            `<span class="tag">${esc(fmtInt(sum.items_total))} casos (total)</span>` +
-            (state.activePartyId ? `<span class="tag">foco: ${esc(partyName(state.activePartyId))}</span>` : "") +
+            `<span class="tag">${esc(fmtInt(sum.items_total))} items (total)</span>` +
+            (state.activePartyId ? `<span class="tag">foco=${esc(partyName(state.activePartyId))}</span>` : "") +
             (state.activePartyId
               ? `<button class="btn md3-button" data-clear-party-focus="1" type="button">Salir foco</button>`
               : "") +
             `</div>` +
             `</div>` +
             `<div class="rowMeta" style="margin-top:8px">` +
-            `<span class="tag">Resumen global: todos los casos etiquetados</span>` +
-            `<span class="tag">La columna 2 sirve para navegar y buscar casos</span>` +
-            `<span class="tag">Cobertura de casos = (a favor + en contra + mixto) / casos</span>` +
-            `<span class="tag">sin clasificar = incierto + sin señal</span>` +
+            `<span class="tag">Resumen global: todos los items etiquetados</span>` +
+            `<span class="tag">Columna 2 sirve para navegar/buscar items</span>` +
+            `<span class="tag">Cobertura(items) = (a_favor+en_contra+mixto)/items</span>` +
+            `<span class="tag">unknown = incierto + sin_senal</span>` +
             `</div>` +
             (concernUnknownSummary || "") +
             (concernNudge || "") +
             (concernDescription
-              ? `<div class="rowMeta" style="margin-top:8px"><span class="tag">explicación</span><span>${esc(concernDescription)}</span></div>`
+              ? `<div class="rowMeta" style="margin-top:8px"><span class="tag">explicacion</span><span>${esc(concernDescription)}</span></div>`
               : ``) +
             (concernHiddenHint || "") +
             `</div>` +
@@ -7727,7 +7561,7 @@
                       )}</div>` +
                       `</div>` +
                       `<div class="barWrap">` +
-                      `<div class="barLabel"><span>Cobertura (casos)</span><span class="mono">${esc(clearTotal)}/${esc(
+                      `<div class="barLabel"><span>Cobertura (items)</span><span class="mono">${esc(clearTotal)}/${esc(
                         itemsTotal
                       )} (${esc(fmtPct01(cov))})</span></div>` +
                       `<div class="bar"><div style="width:${Math.round(cov * 100)}%"></div></div>` +
@@ -7738,24 +7572,24 @@
                       `</div>` +
                       `<div class="partyMeta">` +
                       (showAuditDetails
-                        ? `<span class="tag">casos: ${esc(fmtInt(itemsTotal))}</span>` +
-                          `<span class="tag">a favor: ${esc(fmtInt(Number(counts.support || 0)))}</span>` +
-                          `<span class="tag">en contra: ${esc(fmtInt(Number(counts.oppose || 0)))}</span>` +
-                          `<span class="tag">mixto: ${esc(fmtInt(Number(counts.mixed || 0)))}</span>` +
-                          `<span class="tag">incierto: ${esc(fmtInt(Number(counts.unclear || 0)))}</span>` +
-                          `<span class="tag">sin señal: ${esc(fmtInt(Number(counts.no_signal || 0)))}</span>` +
-                          `<span class="tag ${esc(confidenceTierTagClass(confTier))}">confianza: ${esc(confidenceTierLabel(confTier))}</span>`
-                        : `<span class="tag">cobertura: ${esc(fmtPct01(cov))}</span>` +
-                          `<span class="tag">confianza: ${esc(fmtPct01(conf))}</span>` +
-                          `<span class="tag">sin clasificar: ${esc(fmtInt(Number(counts.unclear || 0) + Number(counts.no_signal || 0)))}</span>`) +
+                        ? `<span class="tag">items=${esc(fmtInt(itemsTotal))}</span>` +
+                          `<span class="tag">a_favor=${esc(fmtInt(Number(counts.support || 0)))}</span>` +
+                          `<span class="tag">en_contra=${esc(fmtInt(Number(counts.oppose || 0)))}</span>` +
+                          `<span class="tag">mixto=${esc(fmtInt(Number(counts.mixed || 0)))}</span>` +
+                          `<span class="tag">incierto=${esc(fmtInt(Number(counts.unclear || 0)))}</span>` +
+                          `<span class="tag">sin_senal=${esc(fmtInt(Number(counts.no_signal || 0)))}</span>` +
+                          `<span class="tag ${esc(confidenceTierTagClass(confTier))}">conf_tier=${esc(confidenceTierLabel(confTier))}</span>`
+                        : `<span class="tag">cobertura=${esc(fmtPct01(cov))}</span>` +
+                          `<span class="tag">confianza=${esc(fmtPct01(conf))}</span>` +
+                          `<span class="tag">unknown=${esc(fmtInt(Number(counts.unclear || 0) + Number(counts.no_signal || 0)))}</span>`) +
                       `</div>` +
                       (unknownHint || "") +
                       (showAuditDetails ? trustPanel || "" : "") +
                       `<div class="partyMeta">` +
-                      `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Ver casos principales</button>` +
+                      `<button class="btn md3-button" type="button" data-focus-party="${esc(String(pid))}">Ver top items</button>` +
                       (auditLink
-                        ? `<a class="smallLink" href="${esc(String(auditLink))}" target="_blank" rel="noopener noreferrer">Auditar caso principal</a>`
-                        : `<span class="tag">sin enlace de auditoría</span>`) +
+                        ? `<a class="smallLink" href="${esc(String(auditLink))}" target="_blank" rel="noopener noreferrer">Auditar top item</a>`
+                        : `<span class="tag">sin audit link</span>`) +
                       `</div>` +
                       (showAuditDetails
                         ? `<div class="partyMeta">` +
@@ -7763,8 +7597,8 @@
                           `<span class="stanceChip mini ${esc(progStance)}">` +
                           `<span class="dot ${esc(dotClassForStance(progStance))}"></span>${esc(stanceLabel(progStance))}` +
                           `</span>` +
-                          `<span class="tag">confianza: ${esc(fmtPct01(progConf))}</span>` +
-                          `<span class="tag ${esc(confidenceTierTagClass(progTier))}">confianza cualitativa: ${esc(confidenceTierLabel(progTier))}</span>` +
+                          `<span class="tag">conf=${esc(fmtPct01(progConf))}</span>` +
+                          `<span class="tag ${esc(confidenceTierTagClass(progTier))}">tier=${esc(confidenceTierLabel(progTier))}</span>` +
                           (progLink
                             ? `<a class="smallLink" href="${esc(String(progLink))}" target="_blank" rel="noopener noreferrer">Evidencia (programa)</a>`
                             : `<span class="tag">sin evidencia</span>`) +
@@ -7882,7 +7716,7 @@
           `<div class="kpi"><div class="k">En contra</div><div class="v">${fmtInt(counts.oppose)}</div></div>` +
           `<div class="kpi"><div class="k">Mixto</div><div class="v">${fmtInt(counts.mixed)}</div></div>` +
           `<div class="kpi"><div class="k">Incierto</div><div class="v">${fmtInt(counts.unclear)}</div></div>` +
-          `<div class="kpi"><div class="k">Sin señal</div><div class="v">${fmtInt(counts.no_signal)}</div></div>` +
+          `<div class="kpi"><div class="k">Sin senal</div><div class="v">${fmtInt(counts.no_signal)}</div></div>` +
           `</div>` +
           `<div class="empty" style="margin-bottom: 12px">` +
           `<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">` +
@@ -7898,9 +7732,9 @@
           `</div>` +
           `<div class="rowMeta" style="margin-top:8px">` +
           `<span class="tag">Regla: si cobertura < 20%, mostramos Incierto</span>` +
-          `<span class="tag">Señal útil = diputados con señal / total del partido</span>` +
+          `<span class="tag">Senal util = diputados con senal / total del partido</span>` +
           `<span class="tag">Peso relativo = total del partido / mayor bancada del caso</span>` +
-          `<span class="tag">sin clasificar = sin señal dentro del partido</span>` +
+          `<span class="tag">unknown = sin senal dentro del partido</span>` +
           `</div>` +
           (topicUnknownSummary || "") +
           (topicNudge || "") +
@@ -7969,14 +7803,14 @@
                     `</div>` +
                     `<div class="topicScales">` +
                     `<div class="topicScale">` +
-                    `<div class="topicScaleHead"><strong>Señal útil</strong><span class="mono">${esc(membersSignal)}/${esc(
+                    `<div class="topicScaleHead"><strong>Senal util</strong><span class="mono">${esc(membersSignal)}/${esc(
                       membersTotal
                     )} (${esc(fmtPct01(coverageRatio))})</span></div>` +
                     `<div class="topicScaleTrack">` +
                     `<span class="topicScaleSignal ${esc(stance)}" style="width:${signalPct}%"></span>` +
                     `<span class="topicScaleUnknown" style="width:${unknownPct}%"></span>` +
                     `</div>` +
-                    `<div class="topicScaleHint">sin clasificar: ${esc(fmtInt(unknownMembers))}/${esc(fmtInt(membersTotal))} · escala interna del partido</div>` +
+                    `<div class="topicScaleHint">unknown=${esc(fmtInt(unknownMembers))}/${esc(fmtInt(membersTotal))} · escala interna del partido</div>` +
                     `</div>` +
                     `<div class="topicScale">` +
                     `<div class="topicScaleHead"><strong>Peso relativo</strong><span class="mono">${esc(fmtInt(membersTotal))}/${esc(
@@ -7988,13 +7822,13 @@
                     `</div>` +
                     `<div class="partyMeta">` +
                     (showAuditDetails
-                      ? `<span class="tag">evidencias: ${esc(fmtInt(evCount))}</span>` +
-                        `<span class="tag">sin clasificar: ${esc(fmtInt(unknownMembers))}</span>` +
-                        `<span class="tag ${esc(confidenceTierTagClass(confTier))}">confianza: ${esc(confidenceTierLabel(confTier))}</span>` +
-                        (lastEv ? `<span class="tag">última: ${esc(lastEv)}</span>` : `<span class="tag">última: ?</span>`)
-                      : `<span class="tag">confianza: ${esc(fmtPct01(conf))}</span>` +
-                        `<span class="tag">peso: ${esc(fmtPct01(weightRatio))}</span>` +
-                        `<span class="tag">sin clasificar: ${esc(fmtInt(unknownMembers))}/${esc(fmtInt(membersTotal))}</span>`) +
+                      ? `<span class="tag">evidence_count=${esc(fmtInt(evCount))}</span>` +
+                        `<span class="tag">unknown=${esc(fmtInt(unknownMembers))}</span>` +
+                        `<span class="tag ${esc(confidenceTierTagClass(confTier))}">conf_tier=${esc(confidenceTierLabel(confTier))}</span>` +
+                        (lastEv ? `<span class="tag">ultima=${esc(lastEv)}</span>` : `<span class="tag">ultima=?</span>`)
+                      : `<span class="tag">confianza=${esc(fmtPct01(conf))}</span>` +
+                        `<span class="tag">peso=${esc(fmtPct01(weightRatio))}</span>` +
+                        `<span class="tag">unknown=${esc(fmtInt(unknownMembers))}/${esc(fmtInt(membersTotal))}</span>`) +
                     (linkPos ? `<a class="smallLink" href="${esc(String(linkPos))}" target="_blank" rel="noopener noreferrer">Ver posiciones</a>` : "") +
                     (linkTemas ? `<a class="smallLink" href="${esc(String(linkTemas))}" target="_blank" rel="noopener noreferrer">Ver en Temas</a>` : "") +
                     `</div>` +
@@ -8006,8 +7840,8 @@
                         `<span class="stanceChip mini ${esc(progStance)}">` +
                         `<span class="dot ${esc(dotClassForStance(progStance))}"></span>${esc(stanceLabel(progStance))}` +
                         `</span>` +
-                        `<span class="tag">confianza: ${esc(fmtPct01(progConf))}</span>` +
-                        `<span class="tag ${esc(confidenceTierTagClass(progTier))}">confianza cualitativa: ${esc(confidenceTierLabel(progTier))}</span>` +
+                        `<span class="tag">conf=${esc(fmtPct01(progConf))}</span>` +
+                        `<span class="tag ${esc(confidenceTierTagClass(progTier))}">tier=${esc(confidenceTierLabel(progTier))}</span>` +
                         (progLink
                           ? `<a class="smallLink" href="${esc(String(progLink))}" target="_blank" rel="noopener noreferrer">Evidencia (programa)</a>`
                           : `<span class="tag">sin evidencia</span>`) +
@@ -8205,22 +8039,8 @@
           });
 
           const [citizen, concernsCfg, packQuality] = await Promise.all([citizenP, fetchJson(concernsPath), packQualityP]);
-          const loadedMethod = String(((citizen || {}).meta || {}).computed_method || state.method || "combined").trim() || "combined";
-          const [comparabilityPayload, lineagePayload, snapshotDiffPayload] = await Promise.all([
-            fetchJsonOrNull(citizenCompanionPath("comparability", loadedMethod)),
-            fetchJsonOrNull(citizenCompanionPath("lineage", loadedMethod)),
-            fetchJsonOrNull(citizenCompanionPath("snapshot_diff", loadedMethod)),
-          ]);
           state.citizen = citizen;
           state.concernsCfg = concernsCfg;
-          state.curiosity.method = loadedMethod;
-          state.curiosity.comparability = comparabilityPayload;
-          state.curiosity.lineage = lineagePayload;
-          state.curiosity.snapshotDiff = snapshotDiffPayload;
-          state.curiosity.comparabilityByKey = buildRowsByKeyMap(comparabilityPayload);
-          state.curiosity.lineageByKey = buildRowsByKeyMap(lineagePayload);
-          state.curiosity.snapshotDiffByKey = buildRowsByKeyMap(snapshotDiffPayload);
-          state.curiosity.snapshotDiffPartyById = buildPartySummaryByIdMap(snapshotDiffPayload);
           loadConcernPackQualityRows(packQuality);
           state.concerns = Array.isArray(concernsCfg.concerns) ? concernsCfg.concerns : [];
           state.concernPacks = [];
@@ -8288,61 +8108,61 @@
           const freshnessAgeDays = Number(freshness.data_age_days);
           const freshnessText =
             Number.isFinite(freshnessAgeDays) && freshnessAgeDays >= 0
-              ? `${String(freshness.freshness_label || "desconocida")} (${fmtInt(freshnessAgeDays)} días)`
+              ? `${String(freshness.freshness_label || "desconocida")} (${fmtInt(freshnessAgeDays)} dias)`
               : String(freshness.freshness_label || "desconocida");
           const auditLinksHtml =
             `<a class="smallLink" href="${esc(String(honesty.explorer_temas || "../explorer-temas/"))}">Temas</a>` +
-            ` y <a class="smallLink" href="${esc(String(honesty.explorer_sql || "../explorer/"))}">Explorador SQL</a>`;
+            ` y <a class="smallLink" href="${esc(String(honesty.explorer_sql || "../explorer/"))}">Explorer SQL</a>`;
           let banner =
             isConsumerMode()
-              ? `<div><strong>Cómo usarlo rápido:</strong> 1) elige una preocupación, 2) abre un caso, 3) marca tu postura, 4) compara y abre evidencia solo donde haya dudas.</div>`
-              : `<div><strong>Nota:</strong> esto es una vista ciudadana. “Programa” es una capa adicional (promesas) derivada de textos y puede requerir revisión. Para auditoría completa, abre <a class="smallLink" href="../explorer-temas/">Temas</a> y <a class="smallLink" href="../explorer/">Explorador SQL</a>.</div>`;
+              ? `<div><strong>Como usarlo rapido:</strong> 1) elige preocupacion, 2) abre un caso, 3) marca tu postura, 4) compara y abre evidencia solo donde haya dudas.</div>`
+              : `<div><strong>Nota:</strong> esto es una vista ciudadana. “Programa” es una capa adicional (promesas) derivada de textos y puede requerir revision. Para auditoria completa, abre <a class="smallLink" href="../explorer-temas/">Temas</a> y <a class="smallLink" href="../explorer/">Explorer SQL</a>.</div>`;
           banner +=
             `<div style="margin-top:8px" data-snapshot-honesty="1"><strong>Lectura honesta:</strong> ${esc(String(honesty.unknown_definition || ""))}. ${esc(
               String(honesty.match_definition || "")
             )}.</div>` +
-            `<div style="margin-top:8px" data-snapshot-freshness="1"><strong>Frescura:</strong> corte ${esc(freshnessText)} frente al cierre <span class="mono">${esc(
+            `<div style="margin-top:8px" data-snapshot-freshness="1"><strong>Frescura:</strong> snapshot ${esc(freshnessText)} frente al corte <span class="mono">${esc(
               String(meta.as_of_date || "?")
             )}</span>. ${esc(String(honesty.audit_rule || ""))}. Para auditar completo: ${auditLinksHtml}.</div>`;
           if (freshness.should_warn) {
-            banner += `<div style="margin-top:8px" data-snapshot-freshness-warning="1"><strong>Aviso de frescura:</strong> la señal no es de última hora; prioriza abrir evidencia en partidos con muchos casos sin clasificar o confianza baja.</div>`;
+            banner += `<div style="margin-top:8px" data-snapshot-freshness-warning="1"><strong>Aviso de frescura:</strong> la señal no es de ultima hora; prioriza abrir evidencia en partidos con <span class="mono">unknown</span> alto o confianza baja.</div>`;
           }
           if (state.prefsLoadedFrom === "hash") {
             banner += `<div style="margin-top:8px"><strong>Preferencias:</strong> cargadas desde un enlace compartido y guardadas localmente en tu navegador.</div>`;
           }
           if (state.presetLoadedFrom === "hash_preset") {
-            banner += `<div style="margin-top:8px"><strong>Ajuste:</strong> cargado desde enlace compartido de alineamiento (<span class="mono">#preset=...</span>).</div>`;
+            banner += `<div style="margin-top:8px"><strong>Preset:</strong> cargado desde enlace compartido de alineamiento (<span class="mono">#preset=...</span>).</div>`;
           }
           if (state.presetRecoveredFrom) {
             banner +=
-              `<div style="margin-top:8px"><strong>Ajuste:</strong> se recuperó un formato antiguo y se aplicó de forma compatible.</div>` +
-              `<div style="margin-top:6px"><span class="tag">recuperación=${esc(String(state.presetRecoveredFrom))}</span></div>`;
+              `<div style="margin-top:8px"><strong>Preset:</strong> se recupero un formato legacy y se aplico de forma compatible.</div>` +
+              `<div style="margin-top:6px"><span class="tag">recovery=${esc(String(state.presetRecoveredFrom))}</span></div>`;
           }
           if (state.presetHashWasNormalized && state.presetCanonicalHash) {
             banner +=
-              `<div style="margin-top:8px"><strong>Ajuste:</strong> enlace normalizado al formato canónico v1.</div>` +
-              `<div style="margin-top:8px"><button class="btn md3-button" type="button" data-preset-copy-canonical="1">Copiar enlace canónico</button></div>`;
+              `<div style="margin-top:8px"><strong>Preset:</strong> enlace normalizado a formato canonico v1.</div>` +
+              `<div style="margin-top:8px"><button class="btn md3-button" type="button" data-preset-copy-canonical="1">Copiar enlace canonico</button></div>`;
           }
           if (state.prefsLoadError) {
-            banner += `<div style="margin-top:8px"><strong>Aviso de preferencias:</strong> <span class="mono">${esc(
+            banner += `<div style="margin-top:8px"><strong>Aviso prefs:</strong> <span class="mono">${esc(
               String(state.prefsLoadError)
             )}</span></div>`;
           }
           if (state.presetLoadError) {
             const presetHint = presetErrorHint(state.presetLoadErrorCode);
-            banner += `<div style="margin-top:8px"><strong>Aviso de ajuste:</strong> <span class="mono">${esc(
+            banner += `<div style="margin-top:8px"><strong>Aviso preset:</strong> <span class="mono">${esc(
               String(state.presetLoadError)
             )}</span>${
               presetHint ? `<div style="margin-top:6px">${esc(presetHint)}</div>` : ""
             }</div>` +
             (String(location.hash || "").toLowerCase().startsWith("#preset=")
-              ? `<div style="margin-top:8px"><button class="btn md3-button" type="button" data-preset-clear-hash="1">Limpiar ajuste del enlace</button></div>`
+              ? `<div style="margin-top:8px"><button class="btn md3-button" type="button" data-preset-clear-hash="1">Limpiar hash preset</button></div>`
               : "");
           }
           if (prefsDropped) {
             banner += `<div style="margin-top:8px"><strong>Aviso prefs:</strong> se descartaron <span class="mono">${esc(
               String(prefsDropped)
-            )}</span> preferencias porque esos temas no existen en este corte.</div>`;
+            )}</span> preferencias porque esos temas no existen en este snapshot.</div>`;
           }
           setBanner(banner);
         } catch (err) {
