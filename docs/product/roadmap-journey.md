@@ -4,6 +4,12 @@ Estado: `recomendación derivada`, no nueva fuente de verdad. Este documento est
 
 Loop que se cierra: **duda concreta → compromiso exacto → actuación oficial → responsable → evidencia → desconocidos → cambio posterior compartible**. El primer corte ya cierra la secuencia para agua; el siguiente hueco es probar retorno real con un segundo snapshot.
 
+Estado actual (`2026-07-25`):
+- primer corte público e inmutable publicado;
+- exportador conserva snapshots fechados y calcula diff semántico por compromiso;
+- gate de frescura bloquea CI/publicación cuando el recibo supera `8` días sin revisión;
+- sigue pendiente un segundo corte real, la auditoría con cinco usuarios y cualquier prueba de retorno.
+
 ## Arreglar primero el cuello de botella
 
 - [x] **Fijar el baseline político actual.** Incorporar resultados oficiales, constitución de la XIII legislatura, investidura del `2026-07-02` y fecha de corte. Hecho cuando el artefacto ya no diga `convocada` y ninguna prueba preelectoral se presente como avance posterior.
@@ -32,8 +38,9 @@ Loop que se cierra: **duda concreta → compromiso exacto → actuación oficial
 
 ## Transición 3 — Prueba visible → Utilidad repetida
 
-- [ ] Versionar el recibo por snapshot y producir diff semántico: evidencia añadida, estado cambiado, responsable cambiado o sin cambio. Hecho cuando dos cortes generen un resumen reproducible.
-- [ ] Mostrar fecha del último control y frescura conforme a `docs/method/truth-contract.md`. Hecho cuando un corte de más de `30` días quede marcado `antiguo`.
+- [x] Conservar cada recibo en una ruta inmutable y calcular diff semántico: evidencia añadida, estado, checkpoint, responsable o evaluación cambiados. El primer corte vive en `water-receipt/snapshots/2026-07-25.json`; el segundo reutilizará ese baseline automáticamente.
+- [ ] Publicar el segundo corte real. Hecho cuando exista un snapshot posterior que muestre `changed` o `no_change` contra `2026-07-25`, sin editar el archivo histórico.
+- [x] Mostrar fecha del último control, próximo control y freshness. CI y publicación fallan cuando el corte supera `8` días sin revisión.
 - [ ] Permitir guardar «Agua» solo en `localStorage`. Hecho cuando la preferencia no viaje en query params ni se envíe al servidor.
 - [ ] Ejecutar un control manual semanal de BOPA, BOJA, presupuesto y contratación para los tres compromisos. Automatizar solo después de que dos ciclos manuales prueben el contrato.
 - [ ] Publicar «sin evidencia nueva» cuando corresponda. Hecho cuando ausencia de cambio sea verificable por fecha y fuentes revisadas.
@@ -50,7 +57,7 @@ Loop que se cierra: **duda concreta → compromiso exacto → actuación oficial
 ## Tareas mínimas para personas secundarias
 
 - [ ] **Alba:** ofrecer arriba un resumen de tres frases y un botón «Ver prueba»; no obligarla a leer metodología.
-- [ ] **Óscar:** incluir changelog, localizador de fuente y cita reproducible; no construir alertas hasta validar retorno.
+- [x] **Óscar:** incluir historial/diff, localizador de fuente, snapshot inmutable y cita reproducible; no construir alertas hasta validar retorno.
 - [x] **Irene:** ofrecer descarga JSON compacta del recibo y referencias; no exponer el snapshot andaluz completo como payload de página.
 - [x] **Nadia/Tomás:** conservar colas, drafts, comandos y gates en superficies operativas separadas. La ruta ciudadana solo consume artefactos validados.
 
@@ -68,7 +75,7 @@ Loop que se cierra: **duda concreta → compromiso exacto → actuación oficial
 - [x] Añadir presupuesto de salida: HTML inicial `<=250 KB` y JSON del recibo `<=250 KB` sin comprimir. El snapshot técnico de `14,4 MB` queda como descarga separada.
 - [x] Ejecutar `just privacy-check-public-artifacts` y el build público canónico. Hecho cuando ambos pasen sobre el mismo artefacto.
 - [x] Ampliar auditoría de rutas para validar esta ruta, título, tres compromisos, una fuente primaria, estado vacío y límite visible; un simple HTTP `200` no basta.
-- [ ] Añadir freshness gate que falle si fecha electoral, legislatura o estado institucional quedan obsoletos.
+- [x] Añadir freshness gate que falle si el recibo supera `8` días sin un nuevo control. El gate corre en PR/push y antes del publish vivo.
 
 ## Diferido hasta completar un recorrido entero
 
