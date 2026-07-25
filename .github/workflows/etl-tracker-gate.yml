@@ -7,6 +7,25 @@ on:
       - main
 
 jobs:
+  andalucia-water-community-review-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify independent-review counting contract
+        run: |
+          python3 -m unittest \
+            tests.test_audit_andalucia_2026_water_receipt_reviews \
+            -q
+
   andalucia-water-receipt-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 5

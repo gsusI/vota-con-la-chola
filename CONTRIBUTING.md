@@ -40,6 +40,31 @@ Gracias por aportar en un proyecto de infraestructura pública y verificable.
 - Prefiere ejemplos concretos y decisiones explícitas.
 - Alinea nuevos docs con `docs/README.md`.
 
+## Revisión comunitaria del recibo de Andalucía
+
+- **Ahora:** el primer corte inmutable del recibo del agua está publicado y la
+  revisión se coordina en
+  [el issue #20](https://github.com/gsusI/vota-con-la-chola/issues/20).
+- **Meta:** 5 revisores independientes, las 5 pistas cubiertas, cero hallazgos
+  abiertos y un segundo snapshot con diff explícito.
+- **Siguiente:** elige una pista todavía no cubierta, contrasta la evidencia y
+  comenta usando el bloque estructurado del issue.
+
+El contador automático excluye bots, propietario, miembros y colaboradores.
+También deduplica por cuenta y pista. Una revisión posterior del mismo par
+sustituye a la anterior, permitiendo confirmar una corrección sin borrar el
+historial público.
+
+La validación local del contrato es:
+
+```bash
+python3 -m unittest tests.test_audit_andalucia_2026_water_receipt_reviews -q
+```
+
+La automatización valida formato, independencia, cobertura y hallazgos
+abiertos. No sustituye la lectura humana ni decide si una conclusión es
+sustantivamente correcta.
+
 ## Plantillas obligatorias
 
 - Usa una plantilla de issue para abrir o discutir la tarea antes del PR.

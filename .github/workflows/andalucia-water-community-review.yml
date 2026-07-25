@@ -1,0 +1,100 @@
+name: Andalucía Water Community Review
+
+on:
+  schedule:
+    - cron: "47 5 * * *"
+  workflow_dispatch:
+  issue_comment:
+    types:
+      - created
+      - edited
+      - deleted
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit-community-review:
+    if: >-
+      github.event_name != 'issue_comment' ||
+      (
+        github.event.issue.number == 20 &&
+        github.actor != 'github-actions[bot]'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REVIEW_ISSUE_NUMBER: "20"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch public review comments
+        run: |
+          gh api \
+            --paginate \
+            --slurp \
+            "repos/${GITHUB_REPOSITORY}/issues/${REVIEW_ISSUE_NUMBER}/comments?per_page=100" \
+            > "${RUNNER_TEMP}/water-review-comments.json"
+
+      - name: Audit independent reviews
+        run: |
+          python3 scripts/audit_andalucia_2026_water_receipt_reviews.py \
+            --comments-json "${RUNNER_TEMP}/water-review-comments.json" \
+            --exclude-login "${GITHUB_REPOSITORY_OWNER}" \
+            --required-reviewers 5 \
+            --issue-url "https://github.com/${GITHUB_REPOSITORY}/issues/${REVIEW_ISSUE_NUMBER}" \
+            --status-out "${RUNNER_TEMP}/water-review-status.json" \
+            --markdown-out "${RUNNER_TEMP}/water-review-status.md"
+          cat "${RUNNER_TEMP}/water-review-status.md" >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Maintain one public status comment
+        run: |
+          marker='<!-- andalucia-water-review-status:v1 -->'
+          status_comment_id="$(
+            jq -r \
+              --arg marker "$marker" \
+              '
+                flatten
+                | map(
+                    select(
+                      .user.login == "github-actions[bot]"
+                      and (.body | contains($marker))
+                    )
+                  )
+                | first
+                | .id // empty
+              ' \
+              "${RUNNER_TEMP}/water-review-comments.json"
+          )"
+          jq -Rs '{body: .}' \
+            "${RUNNER_TEMP}/water-review-status.md" \
+            > "${RUNNER_TEMP}/water-review-status-comment.json"
+          if [ -n "$status_comment_id" ]; then
+            gh api \
+              --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/issues/comments/${status_comment_id}" \
+              --input "${RUNNER_TEMP}/water-review-status-comment.json"
+          else
+            gh api \
+              --method POST \
+              "repos/${GITHUB_REPOSITORY}/issues/${REVIEW_ISSUE_NUMBER}/comments" \
+              --input "${RUNNER_TEMP}/water-review-status-comment.json"
+          fi
+
+      - name: Upload review audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: andalucia-water-community-review
+          path: |
+            ${{ runner.temp }}/water-review-status.json
+            ${{ runner.temp }}/water-review-status.md
+          retention-days: 30
