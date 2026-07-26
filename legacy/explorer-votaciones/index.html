@@ -971,7 +971,7 @@
               <div class="stats" id="stats" aria-live="polite"></div>
             </div>
             <div id="events" style="margin-top: 10px"></div>
-            <div id="loading" class="loading hint" style="display: none">Cargando votaciones...</div>
+            <div id="loading" class="loading hint" style="display: none">Cargando votaciones…</div>
             <p id="message" class="hint">Ajusta filtros y pulsa "Aplicar filtros".</p>
             <div class="footer">
               <span id="range-label" class="muted"></span>
@@ -1658,7 +1658,7 @@
       const loadEvents = async () => {
         refs.loading.style.display = "block";
         refs.message.textContent = "";
-        refs.loading.textContent = "Cargando votaciones...";
+        refs.loading.textContent = "Cargando votaciones…";
         refs.loading.className = "loading";
         const apiBase = resolveApiPath("/api/votes/summary");
 
@@ -1679,14 +1679,14 @@
             renderReviewedImplications(payload.reviewed_implications || []);
             renderPagerInfo(payload);
             renderEvents(rows);
-            refs.debugLabel.textContent = `requested=${state.source !== "all" ? state.source : "all"}, limit=${state.limit}, offset=${state.offset}, q=${state.search || "-"}, party=${state.party || "-"}`;
+            refs.debugLabel.textContent = `solicitado: ${state.source !== "all" ? state.source : "todas"}, límite: ${state.limit}, posición: ${state.offset}, búsqueda: ${state.search || "-"}, partido: ${state.party || "-"}`;
             refs.loading.style.display = "none";
           } catch (error) {
             refs.events.innerHTML = "";
             refs.reviewedImplications.hidden = true;
             refs.reviewedImplications.innerHTML = "";
             refs.loading.className = "error";
-            refs.loading.innerHTML = `Error cargando votaciones (API): ${escapeHtml(error?.message || String(error))}`;
+            refs.loading.innerHTML = `Error al cargar votaciones (API): ${escapeHtml(error?.message || String(error))}`;
             refs.stats.innerHTML = "";
             refs.debugLabel.textContent = "";
             refs.rangeLabel.textContent = "";
@@ -1694,7 +1694,7 @@
           return;
         }
 
-        refs.loading.textContent = "Cargando snapshot estático...";
+        refs.loading.textContent = "Cargando corte estático…";
         try {
           const snapshot = await ensureStaticSnapshot();
           const allEvents = Array.isArray(snapshot?.events) ? snapshot.events : [];
@@ -1765,7 +1765,7 @@
           renderReviewedImplications(filteredImplications);
           renderPagerInfo(payload);
           renderEvents(pageEvents);
-          refs.debugLabel.textContent = `static snapshot · total=${filtered.length} · limit=${limit} · offset=${offset}`;
+          refs.debugLabel.textContent = `corte estático · total: ${filtered.length} · límite: ${limit} · posición: ${offset}`;
           refs.loading.style.display = "none";
           if (safeText(state.party).trim()) {
             refs.message.textContent = "Nota: el filtro de partido solo funciona en modo API (?api=...).";
@@ -1776,7 +1776,7 @@
           refs.reviewedImplications.innerHTML = "";
           refs.loading.className = "error";
           const help = API_BASE_OVERRIDE ? "" : " Añade ?api=http://127.0.0.1:9010 y recarga (o ejecuta el server local).";
-          refs.loading.innerHTML = `No se pudo cargar ni API ni snapshot estático.${help}<br><br>${escapeHtml(error?.message || String(error))}`;
+          refs.loading.innerHTML = `No se pudo cargar ni API ni corte estático.${help}<br><br>${escapeHtml(error?.message || String(error))}`;
           refs.stats.innerHTML = "";
           refs.debugLabel.textContent = "";
           refs.rangeLabel.textContent = "";

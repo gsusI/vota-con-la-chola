@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "congreso_votaciones--20260625--3c54b1ef59",
+    "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion002/VOT_20260625150740.json",
+    "canonical_path": "/vote-explainer/congreso_votaciones--20260625--3c54b1ef59/",
+    "generated_at": "2026-07-26T05:53:20+00:00",
+    "snapshot_as_of_date": "2026-07-26",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "congreso_votaciones",
+    "source_name": "Congreso - Votaciones (pleno, OpenData)",
+    "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion002/VOT_20260625150740.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion002/VOT_20260625150740.json",
+    "chamber": "Congreso",
+    "vote_date": "2026-06-25",
+    "title": "Dictámenes de Comisiones sobre iniciativas legislativas.",
+    "expediente_text": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar las terapias de conversión dirigidas a eliminar o negar la orientación sexual, identidad sexual o expresión de género.",
+    "subgroup_title": "Enmiendas presentadas por el Grupo Parlamentario Plurinacional SUMAR, el Grupo Parlamentario Republicano, el Grupo Parlamentario Euskal Herria Bildu y el Grupo Parlamentario Mixto (Sra. Micó Micó y Sr. Rego Candamil).",
+    "subgroup_text": "Enmienda transaccional en Comisión nº 3.",
+    "assentimiento": "No",
+    "headline": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar las terapias de conversión dirigidas a eliminar o negar la orientación sexual, identidad sexual o expresión de género.",
+    "subtitle": "Enmiendas presentadas por el Grupo Parlamentario Plurinacional SUMAR, el Grupo Parlamentario Republicano, el Grupo Parlamentario Euskal Herria Bildu y el Grupo Parlamentario Mixto (Sra. Micó Micó y Sr. Rego Candamil)."
+  },
+  "result": {
+    "status": "rejected",
+    "label": "Rechazada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 50 · No 298 · Abstencion 0 · No vota 2"
+  },
+  "totals": {
+    "present": 348,
+    "yes": 50,
+    "no": 298,
+    "abstain": 0,
+    "no_vote": 2
+  },
+  "initiative": {
+    "initiative_id": "congreso:leg15:exp:122/000201/0000",
+    "expediente": "122/000201/0000",
+    "title": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar las terapias de conversión dirigidas a eliminar o negar la orientación sexual, identidad sexual o expresión de género.",
+    "type": "Proposición de ley de Grupos Parlamentarios del Congreso",
+    "grouping": "Función legislativa Función legislativa",
+    "supertype": "Función legislativa Función legislativa",
+    "author_text": "Grupo Parlamentario Socialista",
+    "procedure_type": "Normal",
+    "current_status": "Senado",
+    "result_text": "",
+    "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260726050119.json",
+    "confidence": 0.85
+  },
+  "groups": [
+    {
+      "group_code": "GP",
+      "yes": 0,
+      "no": 137,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 137
+    },
+    {
+      "group_code": "GS",
+      "yes": 0,
+      "no": 121,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 121
+    },
+    {
+      "group_code": "GVOX",
+      "yes": 0,
+      "no": 32,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 33
+    },
+    {
+      "group_code": "GSUMAR",
+      "yes": 26,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 26
+    },
+    {
+      "group_code": "GMx",
+      "yes": 6,
+      "no": 2,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 8
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "subvote_not_whole_file",
+      "severity": "warn",
+      "label": "Votacion parcial del expediente",
+      "detail": "Esta pagina resume esta votacion concreta, no todo el expediente."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion002/VOT_20260625150740.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion002/VOT_20260625150740.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260726050119.json",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Pen | Vota Con La Chola",
+    "description": "Congreso · 2026-06-25 · Si 50 · No 298 · Abstencion 0 · No vota 2. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/congreso_votaciones--20260625--3c54b1ef59/"
+  }
+}

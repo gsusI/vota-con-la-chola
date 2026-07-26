@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "vote_explainer_v1",
+    "public_vote_id": "congreso_votaciones--20260714--95c88f562b",
+    "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion053/VOT_20260714202100.json",
+    "canonical_path": "/vote-explainer/congreso_votaciones--20260714--95c88f562b/",
+    "generated_at": "2026-07-26T05:53:20+00:00",
+    "snapshot_as_of_date": "2026-07-26",
+    "source_snapshot_path": "/explorer-votaciones/data/votes-preview.json",
+    "static_snapshot": true,
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "should_warn": false,
+      "data_age_days": 0,
+      "detail": "reciente · sin advertencia de antiguedad"
+    }
+  },
+  "event": {
+    "source_id": "congreso_votaciones",
+    "source_name": "Congreso - Votaciones (pleno, OpenData)",
+    "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion053/VOT_20260714202100.json",
+    "primary_source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion053/VOT_20260714202100.json",
+    "chamber": "Congreso",
+    "vote_date": "2026-07-14",
+    "title": "Convalidación o derogación de Reales Decretos-leyes.",
+    "expediente_text": "Tramitación como Proyecto de Ley por el procedimiento de urgencia del Real Decreto-ley 17/2026, de 23 de junio, de medidas extraordinarias para el fortalecimiento y consolidación del Sistema para la Autonomía y Atención a la Dependencia.",
+    "subgroup_title": "",
+    "subgroup_text": "",
+    "assentimiento": "No",
+    "headline": "Corrección de errores del Real Decreto-ley 17/2026, de 23 de junio, de medidas extraordinarias para el fortalecimiento y consolidación del Sistema para la Autonomía y Atención a la Dependencia.",
+    "subtitle": "ley:17/2026"
+  },
+  "result": {
+    "status": "approved",
+    "label": "Aprobada en esta votacion",
+    "confidence": "medium",
+    "summary_text": "Si 344 · No 0 · Abstencion 5 · No vota 1"
+  },
+  "totals": {
+    "present": 349,
+    "yes": 344,
+    "no": 0,
+    "abstain": 5,
+    "no_vote": 1
+  },
+  "initiative": {
+    "initiative_id": "congreso:ley:17:2026",
+    "expediente": "ley:17/2026",
+    "title": "Corrección de errores del Real Decreto-ley 17/2026, de 23 de junio, de medidas extraordinarias para el fortalecimiento y consolidación del Sistema para la Autonomía y Atención a la Dependencia.",
+    "type": "Reales decretos",
+    "grouping": "IniciativasLegislativasAprobadas",
+    "supertype": "",
+    "author_text": "",
+    "procedure_type": "",
+    "current_status": "",
+    "result_text": "",
+    "url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260726050015.json",
+    "confidence": 0.9
+  },
+  "groups": [
+    {
+      "group_code": "GP",
+      "yes": 137,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 137
+    },
+    {
+      "group_code": "GS",
+      "yes": 121,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 121
+    },
+    {
+      "group_code": "GVOX",
+      "yes": 33,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 33
+    },
+    {
+      "group_code": "GSUMAR",
+      "yes": 25,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 1,
+      "other": 0,
+      "total": 26
+    },
+    {
+      "group_code": "GMx",
+      "yes": 8,
+      "no": 0,
+      "abstain": 0,
+      "no_vote": 0,
+      "other": 0,
+      "total": 8
+    }
+  ],
+  "citizen_implication": null,
+  "caveats": [
+    {
+      "code": "derived_result",
+      "severity": "warn",
+      "label": "Resultado derivado",
+      "detail": "El resultado se infiere de los totales de esta votacion concreta y debe contrastarse con la fuente oficial."
+    },
+    {
+      "code": "group_breakdown_partial",
+      "severity": "info",
+      "label": "Desglose de grupos parcial",
+      "detail": "El desglose publico de grupos es un resumen parcial y no equivale a un roll-call completo del hemiciclo."
+    }
+  ],
+  "audit_links": {
+    "explorer_votaciones": "/explorer-votaciones/?q=url%3Ahttps%3A//www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion053/VOT_20260714202100.json",
+    "explorer_source": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion053/VOT_20260714202100.json",
+    "initiative_url": "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260726050015.json",
+    "source_snapshot": "/explorer-votaciones/data/votes-preview.json"
+  },
+  "social": {
+    "title": "¿Que se voto? Corrección de errores del Real Decreto-ley 17/2026, de 23 de junio, de medidas extraordinarias para el fortale | Vota Con La Chola",
+    "description": "Congreso · 2026-07-14 · Si 344 · No 0 · Abstencion 5 · No vota 1. Fuente oficial y caveats visibles.",
+    "canonical_url": "https://gsusI.github.io/vota-con-la-chola/vote-explainer/congreso_votaciones--20260714--95c88f562b/"
+  }
+}

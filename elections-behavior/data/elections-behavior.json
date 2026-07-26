@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-04-25T10:47:54+00:00",
-    "source_db": "etl/data/staging/parlamentario-es.db",
+    "generated_at": "2026-07-26T05:53:47+00:00",
+    "source_db": "etl/data/staging/politicos-es.live.db",
     "window_days": 365,
     "min_directional_votes": 18,
     "min_topic_votes": 12
@@ -17,7 +17,10468 @@
     }
   ],
   "elections": [],
-  "party_index": {},
+  "party_index": {
+    "1": {
+      "name": "PP",
+      "acronym": ""
+    },
+    "2": {
+      "name": "VOX",
+      "acronym": ""
+    },
+    "3": {
+      "name": "MDyC",
+      "acronym": ""
+    },
+    "4": {
+      "name": "PSOE",
+      "acronym": ""
+    },
+    "5": {
+      "name": "Ceuta Ya",
+      "acronym": ""
+    },
+    "6": {
+      "name": "Grupo Parlamentario Socialista (PSOE)",
+      "acronym": ""
+    },
+    "7": {
+      "name": "Grupo Parlamentario Unidas por Extremadura (Podemos-IU-AV)",
+      "acronym": ""
+    },
+    "8": {
+      "name": "Grupo Parlamentario Popular (PP)",
+      "acronym": ""
+    },
+    "9": {
+      "name": "Grupo Parlamentario VOX Extremadura",
+      "acronym": ""
+    },
+    "10": {
+      "name": "Grupo Parlamentario Socialista",
+      "acronym": ""
+    },
+    "11": {
+      "name": "Grupo Parlamentario Popular",
+      "acronym": ""
+    },
+    "12": {
+      "name": "Grupo Parlamentario Comunista-Comunidad de Madrid",
+      "acronym": ""
+    },
+    "13": {
+      "name": "Grupo Parlamentario AP-PDP-UL",
+      "acronym": ""
+    },
+    "14": {
+      "name": "Grupo Parlamentario Mixto",
+      "acronym": ""
+    },
+    "15": {
+      "name": "Grupo Parlamentario CDS",
+      "acronym": ""
+    },
+    "16": {
+      "name": "Grupo Parlamentario de Izquierda Unida",
+      "acronym": ""
+    },
+    "17": {
+      "name": "Grupo Parlamentario de Izquierda Unida-Los Verdes",
+      "acronym": ""
+    },
+    "18": {
+      "name": "Grupo Parlamentario Socialista-progresistas",
+      "acronym": ""
+    },
+    "19": {
+      "name": "Grupo Parlamentario no adscritos",
+      "acronym": ""
+    },
+    "20": {
+      "name": "Grupo Parlamentario Unión Progreso y Democracia",
+      "acronym": ""
+    },
+    "21": {
+      "name": "Grupo Parlamentario Podemos Comunidad de Madrid",
+      "acronym": ""
+    },
+    "22": {
+      "name": "Grupo Parlamentario de Ciudadanos",
+      "acronym": ""
+    },
+    "23": {
+      "name": "Grupo Parlamentario Unidas Podemos Izquierda Unida Madrid en Pie",
+      "acronym": ""
+    },
+    "24": {
+      "name": "Grupo Parlamentario Más Madrid",
+      "acronym": ""
+    },
+    "25": {
+      "name": "Grupo Parlamentario Vox en Madrid",
+      "acronym": ""
+    },
+    "26": {
+      "name": "Grupo Parlamentario Unidas Podemos",
+      "acronym": ""
+    },
+    "27": {
+      "name": "Coalición por Melilla (CpM)",
+      "acronym": ""
+    },
+    "28": {
+      "name": "Partido Popular (PP)",
+      "acronym": ""
+    },
+    "29": {
+      "name": "Partido Socialista Obrero Español (PSOE)",
+      "acronym": ""
+    },
+    "31": {
+      "name": "SML",
+      "acronym": ""
+    },
+    "34": {
+      "name": "Grupo Parlamentario Mixto, desde 09/03/2026",
+      "acronym": ""
+    },
+    "35": {
+      "name": "Grupo Parlamentario Vox",
+      "acronym": ""
+    },
+    "36": {
+      "name": "Grupo Parlamentario Popular.",
+      "acronym": ""
+    },
+    "37": {
+      "name": "Grupo Parlamentario Popular, desde 03/10/2023.",
+      "acronym": ""
+    },
+    "38": {
+      "name": "Grupo Parlamentario Vox.",
+      "acronym": ""
+    },
+    "39": {
+      "name": "Grupo Parlamentario Socialista.",
+      "acronym": ""
+    },
+    "40": {
+      "name": "Grupo Parlamentario Mixto, desde 14/04/2026",
+      "acronym": ""
+    },
+    "41": {
+      "name": "Grupo Parlamentario Socialista, desde 6/09/2023, en sustitución de Francisco Lucas Ayala.",
+      "acronym": ""
+    },
+    "42": {
+      "name": "Grupo Parlamentario Popular.&nbsp;",
+      "acronym": ""
+    },
+    "43": {
+      "name": "Grupo Parlamentario Popular, desde 03/10/2023",
+      "acronym": ""
+    },
+    "44": {
+      "name": "Grupo Parlamentario Popular, desde 6/09/2023, en sustitución de Luis Alberto Marín.&nbsp;",
+      "acronym": ""
+    },
+    "45": {
+      "name": "Grupo Parlamentario Popular, hasta el 15/09/2023.",
+      "acronym": ""
+    },
+    "46": {
+      "name": "Grupo Parlamentario Socialista hasta el 07/08/2023, fecha en la que renuncia a su escaño tras ser elegido diputado a Cortes.",
+      "acronym": ""
+    },
+    "47": {
+      "name": "Grupo Parlamentario Popular hasta 07/08/2023, fecha en la que renuncia a su escaño tras ser elegido diputado a Cortes.",
+      "acronym": ""
+    },
+    "48": {
+      "name": "Grupo Parlamentario Socialista, hasta el 02.05.2025.",
+      "acronym": ""
+    },
+    "52": {
+      "name": "PsdeG-PSOE",
+      "acronym": ""
+    },
+    "53": {
+      "name": "EAJ-PNV",
+      "acronym": ""
+    },
+    "54": {
+      "name": "EH Bildu",
+      "acronym": ""
+    },
+    "55": {
+      "name": "PSC-PSOE",
+      "acronym": ""
+    },
+    "56": {
+      "name": "SUMAR",
+      "acronym": ""
+    },
+    "57": {
+      "name": "ERC",
+      "acronym": ""
+    },
+    "58": {
+      "name": "PSIB-PSOE",
+      "acronym": ""
+    },
+    "59": {
+      "name": "PSE-EE (PSOE)",
+      "acronym": ""
+    },
+    "60": {
+      "name": "PSN-PSOE",
+      "acronym": ""
+    },
+    "61": {
+      "name": "JxCAT-JUNTS",
+      "acronym": ""
+    },
+    "62": {
+      "name": "UPN",
+      "acronym": ""
+    },
+    "63": {
+      "name": "BNG",
+      "acronym": ""
+    },
+    "64": {
+      "name": "CCa",
+      "acronym": ""
+    },
+    "65": {
+      "name": "G.P. Popular de las Cortes de Aragón",
+      "acronym": ""
+    },
+    "66": {
+      "name": "G.P. Socialista",
+      "acronym": ""
+    },
+    "67": {
+      "name": "G.P. Mixto",
+      "acronym": ""
+    },
+    "68": {
+      "name": "G.P. Chunta Aragonesista",
+      "acronym": ""
+    },
+    "69": {
+      "name": "GPS",
+      "acronym": ""
+    },
+    "70": {
+      "name": "G.P. VOX",
+      "acronym": ""
+    },
+    "71": {
+      "name": "GPVOX",
+      "acronym": ""
+    },
+    "72": {
+      "name": "G.P. Aragón-Teruel Existe",
+      "acronym": ""
+    },
+    "73": {
+      "name": "GPPCA",
+      "acronym": ""
+    },
+    "74": {
+      "name": "GRUPO PARLAMENTARIO SOCIALISTA (GPS)",
+      "acronym": ""
+    },
+    "75": {
+      "name": "GRUPO PARLAMENTARIO POPULAR (GPP)",
+      "acronym": ""
+    },
+    "76": {
+      "name": "n8Fp8tXsF6ZA3xLJ4GqOP",
+      "acronym": ""
+    },
+    "77": {
+      "name": "KooArQi06IsrtBjAroW4uhcVBGfkj4",
+      "acronym": ""
+    },
+    "78": {
+      "name": "SrCZsRtCx9A4qx",
+      "acronym": ""
+    },
+    "79": {
+      "name": "BrqddF7PEJ7CTcp6qDzUuOpyU6jcWjG06LWXugs8mB1OW6VH4p1dFhitoZAxQ5dgeM0",
+      "acronym": ""
+    },
+    "80": {
+      "name": "Popular",
+      "acronym": ""
+    },
+    "81": {
+      "name": "Socialista",
+      "acronym": ""
+    },
+    "82": {
+      "name": "VOX Castilla y León",
+      "acronym": ""
+    },
+    "83": {
+      "name": "Mixto",
+      "acronym": ""
+    },
+    "86": {
+      "name": "Vox Cortes Valencianas",
+      "acronym": ""
+    },
+    "87": {
+      "name": "Compromís",
+      "acronym": ""
+    },
+    "88": {
+      "name": "Renew",
+      "acronym": ""
+    },
+    "89": {
+      "name": "EPP",
+      "acronym": ""
+    },
+    "93": {
+      "name": "Grupo Parlamentario Convocatoria por Asturies IU-Más País-IAS",
+      "acronym": ""
+    },
+    "96": {
+      "name": "ACORD PER GUANYAR",
+      "acronym": ""
+    },
+    "97": {
+      "name": "FP",
+      "acronym": ""
+    },
+    "99": {
+      "name": "AV",
+      "acronym": ""
+    },
+    "100": {
+      "name": "EUPV - PODEM: UNIDAS",
+      "acronym": ""
+    },
+    "102": {
+      "name": "DECIDIX",
+      "acronym": ""
+    },
+    "103": {
+      "name": "EUPV: ENDAVANT",
+      "acronym": ""
+    },
+    "104": {
+      "name": "GXA",
+      "acronym": ""
+    },
+    "105": {
+      "name": "EUPV:ADELANTE",
+      "acronym": ""
+    },
+    "106": {
+      "name": "N.ADS.",
+      "acronym": ""
+    },
+    "107": {
+      "name": "COMPROMÍS PER ALTEA: ACORD PER GUANYAR",
+      "acronym": ""
+    },
+    "108": {
+      "name": "CS",
+      "acronym": ""
+    },
+    "109": {
+      "name": "IAF",
+      "acronym": ""
+    },
+    "110": {
+      "name": "FEPAL",
+      "acronym": ""
+    },
+    "111": {
+      "name": "PB-FEPAL",
+      "acronym": ""
+    },
+    "112": {
+      "name": "UPB",
+      "acronym": ""
+    },
+    "113": {
+      "name": "CIUDADANOS DE BENISSA. GRUP INDEPENDENT",
+      "acronym": ""
+    },
+    "114": {
+      "name": "RB",
+      "acronym": ""
+    },
+    "115": {
+      "name": "VLC",
+      "acronym": ""
+    },
+    "116": {
+      "name": "UCIN",
+      "acronym": ""
+    },
+    "117": {
+      "name": "SOM CALP",
+      "acronym": ""
+    },
+    "118": {
+      "name": "DEFENDAMOS CALPE",
+      "acronym": ""
+    },
+    "119": {
+      "name": "EUPV - PODEM - AV: UNIDAS",
+      "acronym": ""
+    },
+    "120": {
+      "name": "XEC",
+      "acronym": ""
+    },
+    "121": {
+      "name": "ACUERDO PARA GANAR",
+      "acronym": ""
+    },
+    "122": {
+      "name": "GD",
+      "acronym": ""
+    },
+    "123": {
+      "name": "AGV",
+      "acronym": ""
+    },
+    "124": {
+      "name": "SP-EUPV:ENDAVANT",
+      "acronym": ""
+    },
+    "125": {
+      "name": "ENS UNEIX",
+      "acronym": ""
+    },
+    "126": {
+      "name": "XARXA-FEPAL",
+      "acronym": ""
+    },
+    "127": {
+      "name": "PODEM-EUPV:UNIDAS",
+      "acronym": ""
+    },
+    "128": {
+      "name": "AXLN- PODEM",
+      "acronym": ""
+    },
+    "129": {
+      "name": "TPL",
+      "acronym": ""
+    },
+    "130": {
+      "name": "JXP",
+      "acronym": ""
+    },
+    "131": {
+      "name": "MP",
+      "acronym": ""
+    },
+    "132": {
+      "name": "MESB",
+      "acronym": ""
+    },
+    "133": {
+      "name": "REDCV",
+      "acronym": ""
+    },
+    "134": {
+      "name": "VIVIM",
+      "acronym": ""
+    },
+    "135": {
+      "name": "PRE-FEPAL",
+      "acronym": ""
+    },
+    "136": {
+      "name": "PADER",
+      "acronym": ""
+    },
+    "137": {
+      "name": "XLR",
+      "acronym": ""
+    },
+    "138": {
+      "name": "G.P.C. -FEPAL",
+      "acronym": ""
+    },
+    "139": {
+      "name": "P.I.P.N.",
+      "acronym": ""
+    },
+    "140": {
+      "name": "SANET - FEPAL",
+      "acronym": ""
+    },
+    "141": {
+      "name": "FEM POBLE",
+      "acronym": ""
+    },
+    "142": {
+      "name": "S.I.",
+      "acronym": ""
+    },
+    "143": {
+      "name": "AES",
+      "acronym": ""
+    },
+    "144": {
+      "name": "SOM SENIJA - FEPAL",
+      "acronym": ""
+    },
+    "145": {
+      "name": "IPT-FEPAL",
+      "acronym": ""
+    },
+    "146": {
+      "name": "E.M.E.",
+      "acronym": ""
+    },
+    "147": {
+      "name": "AIDU-TIBI",
+      "acronym": ""
+    },
+    "148": {
+      "name": "TPT",
+      "acronym": ""
+    },
+    "149": {
+      "name": "PLT",
+      "acronym": ""
+    },
+    "150": {
+      "name": "SUEÑA",
+      "acronym": ""
+    },
+    "151": {
+      "name": "GPV-CS",
+      "acronym": ""
+    },
+    "152": {
+      "name": "CPJ",
+      "acronym": ""
+    },
+    "153": {
+      "name": "MX-AM",
+      "acronym": ""
+    },
+    "154": {
+      "name": "JNU",
+      "acronym": ""
+    },
+    "155": {
+      "name": "UNIDAS - PODEMOS - IU",
+      "acronym": ""
+    },
+    "156": {
+      "name": "I.U.",
+      "acronym": ""
+    },
+    "157": {
+      "name": "AICL",
+      "acronym": ""
+    },
+    "158": {
+      "name": "UNIDAS - IU - PODEMOS",
+      "acronym": ""
+    },
+    "159": {
+      "name": "VOX CAUDETE",
+      "acronym": ""
+    },
+    "160": {
+      "name": "CCD",
+      "acronym": ""
+    },
+    "161": {
+      "name": "UNIDAS-PODEMOS - IU",
+      "acronym": ""
+    },
+    "162": {
+      "name": "AGRUPACIÓN DE ELECTORES SOMOS FUENTEALBILLA",
+      "acronym": ""
+    },
+    "163": {
+      "name": "AGRUPACIÓN DE ELECTORESINDEPENDIENTES POR LA HERRERA",
+      "acronym": ""
+    },
+    "164": {
+      "name": "PSOE HIGUERUELA",
+      "acronym": ""
+    },
+    "165": {
+      "name": "AM",
+      "acronym": ""
+    },
+    "166": {
+      "name": "PP MONTEALEGRE DEL CASTILLO",
+      "acronym": ""
+    },
+    "167": {
+      "name": "SOMOS EL CAMBIO",
+      "acronym": ""
+    },
+    "168": {
+      "name": "AINPHO",
+      "acronym": ""
+    },
+    "169": {
+      "name": "VECINOS NAVA",
+      "acronym": ""
+    },
+    "170": {
+      "name": "UNIDAS-PODEMOS-IZQUIERDA UNIDA",
+      "acronym": ""
+    },
+    "171": {
+      "name": "P.C.D.T.",
+      "acronym": ""
+    },
+    "172": {
+      "name": "SPV",
+      "acronym": ""
+    },
+    "173": {
+      "name": "AIV",
+      "acronym": ""
+    },
+    "174": {
+      "name": "PLATAFORMADRA",
+      "acronym": ""
+    },
+    "175": {
+      "name": "ESPAÑA VACIADA",
+      "acronym": ""
+    },
+    "176": {
+      "name": "CON ANDALUCÍA",
+      "acronym": ""
+    },
+    "177": {
+      "name": "EIB",
+      "acronym": ""
+    },
+    "178": {
+      "name": "CÁNJAYAR CIEN POR CIEN",
+      "acronym": ""
+    },
+    "179": {
+      "name": "IXC",
+      "acronym": ""
+    },
+    "180": {
+      "name": "FELIXIEMPRE",
+      "acronym": ""
+    },
+    "181": {
+      "name": "GRINPH",
+      "acronym": ""
+    },
+    "182": {
+      "name": "TOD@S TOD@S",
+      "acronym": ""
+    },
+    "183": {
+      "name": "AEODC",
+      "acronym": ""
+    },
+    "184": {
+      "name": "JUNTOS POR ORIA",
+      "acronym": ""
+    },
+    "185": {
+      "name": "ADEPART",
+      "acronym": ""
+    },
+    "186": {
+      "name": "ALMERÍA AVANZA",
+      "acronym": ""
+    },
+    "187": {
+      "name": "JUNTOS POR SIERRO",
+      "acronym": ""
+    },
+    "188": {
+      "name": "UNIDOS POR VELEZ RUBIO",
+      "acronym": ""
+    },
+    "189": {
+      "name": "EH BILDU",
+      "acronym": ""
+    },
+    "191": {
+      "name": "DTI-AIA",
+      "acronym": ""
+    },
+    "193": {
+      "name": "GOAZEN",
+      "acronym": ""
+    },
+    "194": {
+      "name": "AIARA BATUZ",
+      "acronym": ""
+    },
+    "195": {
+      "name": "KAIXO",
+      "acronym": ""
+    },
+    "196": {
+      "name": "Z B",
+      "acronym": ""
+    },
+    "197": {
+      "name": "LPA",
+      "acronym": ""
+    },
+    "198": {
+      "name": "OMNIA",
+      "acronym": ""
+    },
+    "199": {
+      "name": "OA",
+      "acronym": ""
+    },
+    "200": {
+      "name": "AMI/UEI",
+      "acronym": ""
+    },
+    "201": {
+      "name": "RBB",
+      "acronym": ""
+    },
+    "202": {
+      "name": "PODEMOS, EZKER ANITZA / IU, BERDEAK EQUO, ALIANZA VERDE",
+      "acronym": ""
+    },
+    "203": {
+      "name": "ZBG - ZNU",
+      "acronym": ""
+    },
+    "204": {
+      "name": "ALLANDESES INDEPENDIENTES",
+      "acronym": ""
+    },
+    "205": {
+      "name": "IU-MÁS PAÍS-IAS",
+      "acronym": ""
+    },
+    "206": {
+      "name": "FORO ASTURIAS",
+      "acronym": ""
+    },
+    "207": {
+      "name": "PODEMOS - IU - CXASTURIES",
+      "acronym": ""
+    },
+    "208": {
+      "name": "ASTURIANISTAS BIMENES",
+      "acronym": ""
+    },
+    "209": {
+      "name": "BOAL ACTIVO",
+      "acronym": ""
+    },
+    "210": {
+      "name": "IU-MAS PAIS-IAS",
+      "acronym": ""
+    },
+    "211": {
+      "name": "IU-SOMOS CARREÑO",
+      "acronym": ""
+    },
+    "212": {
+      "name": "C A",
+      "acronym": ""
+    },
+    "213": {
+      "name": "PODEMOS",
+      "acronym": ""
+    },
+    "214": {
+      "name": "GAI",
+      "acronym": ""
+    },
+    "215": {
+      "name": "ILLANO ADELANTE",
+      "acronym": ""
+    },
+    "216": {
+      "name": "CXASTURIES",
+      "acronym": ""
+    },
+    "217": {
+      "name": "VXLL",
+      "acronym": ""
+    },
+    "218": {
+      "name": "FACIENDO MORCIN",
+      "acronym": ""
+    },
+    "219": {
+      "name": "ASTURIANISTES-FORO",
+      "acronym": ""
+    },
+    "220": {
+      "name": "IPÑ",
+      "acronym": ""
+    },
+    "221": {
+      "name": "JUNTOS POR RIBADEDEVA",
+      "acronym": ""
+    },
+    "222": {
+      "name": "I.R.",
+      "acronym": ""
+    },
+    "223": {
+      "name": "IU-MAS PAÍS-IAS",
+      "acronym": ""
+    },
+    "224": {
+      "name": "AGRUPACIÓN DE ELECTORES DE SAMARTIN",
+      "acronym": ""
+    },
+    "225": {
+      "name": "ARRANCA SAN MARTÍN",
+      "acronym": ""
+    },
+    "226": {
+      "name": "PROMUSA",
+      "acronym": ""
+    },
+    "227": {
+      "name": "P.V.F.",
+      "acronym": ""
+    },
+    "228": {
+      "name": "CISB",
+      "acronym": ""
+    },
+    "229": {
+      "name": "SJASI",
+      "acronym": ""
+    },
+    "230": {
+      "name": "AYTAMOS",
+      "acronym": ""
+    },
+    "231": {
+      "name": "PNTAV",
+      "acronym": ""
+    },
+    "232": {
+      "name": "POR.LA",
+      "acronym": ""
+    },
+    "233": {
+      "name": "XAV",
+      "acronym": ""
+    },
+    "234": {
+      "name": "AREVALO DECIDE",
+      "acronym": ""
+    },
+    "235": {
+      "name": "AIEBA",
+      "acronym": ""
+    },
+    "236": {
+      "name": "C.I.C",
+      "acronym": ""
+    },
+    "237": {
+      "name": "AGRUPACION ELECTORAL INDEPENDIENTE DE CONSTANZANA",
+      "acronym": ""
+    },
+    "238": {
+      "name": "CIGA",
+      "acronym": ""
+    },
+    "239": {
+      "name": "GDES",
+      "acronym": ""
+    },
+    "240": {
+      "name": "GUISANDO AVANZA",
+      "acronym": ""
+    },
+    "241": {
+      "name": "IU-PODEMOS",
+      "acronym": ""
+    },
+    "242": {
+      "name": "AEMI",
+      "acronym": ""
+    },
+    "243": {
+      "name": "APN",
+      "acronym": ""
+    },
+    "244": {
+      "name": "CIN",
+      "acronym": ""
+    },
+    "245": {
+      "name": "NV",
+      "acronym": ""
+    },
+    "246": {
+      "name": "VECINOS",
+      "acronym": ""
+    },
+    "247": {
+      "name": "SBXSBB",
+      "acronym": ""
+    },
+    "248": {
+      "name": "PSJD",
+      "acronym": ""
+    },
+    "249": {
+      "name": "PEP",
+      "acronym": ""
+    },
+    "250": {
+      "name": "J.U.E.X.",
+      "acronym": ""
+    },
+    "251": {
+      "name": "COPAC",
+      "acronym": ""
+    },
+    "252": {
+      "name": "IPAL",
+      "acronym": ""
+    },
+    "253": {
+      "name": "AIPAL",
+      "acronym": ""
+    },
+    "254": {
+      "name": "APAL",
+      "acronym": ""
+    },
+    "255": {
+      "name": "IU-PODEMOS-AV -UNIDAS",
+      "acronym": ""
+    },
+    "256": {
+      "name": "IZQUIERDA UNIDA POR BENQUERENCIA DE LA SERENA",
+      "acronym": ""
+    },
+    "257": {
+      "name": "IPB",
+      "acronym": ""
+    },
+    "258": {
+      "name": "DESPIERTA BURGUILLOS",
+      "acronym": ""
+    },
+    "259": {
+      "name": "LEVANTA",
+      "acronym": ""
+    },
+    "260": {
+      "name": "UNIDAS POR CASTUERA",
+      "acronym": ""
+    },
+    "261": {
+      "name": "AL@CO",
+      "acronym": ""
+    },
+    "262": {
+      "name": "SIEMPRE DON BENITO",
+      "acronym": ""
+    },
+    "263": {
+      "name": "P.I.D.E.S.",
+      "acronym": ""
+    },
+    "264": {
+      "name": "PODEMOS-IU-AV -UNIDAS",
+      "acronym": ""
+    },
+    "265": {
+      "name": "UNION GRANJEÑA",
+      "acronym": ""
+    },
+    "266": {
+      "name": "AGRUPACIÓN DE ELECTORES ALTERNATIVA POR HIGUERA",
+      "acronym": ""
+    },
+    "267": {
+      "name": "IZQUIERDA UNIDA",
+      "acronym": ""
+    },
+    "268": {
+      "name": "AVANZA MEDELLIN-YELBES",
+      "acronym": ""
+    },
+    "269": {
+      "name": "ADV",
+      "acronym": ""
+    },
+    "270": {
+      "name": "XMÉRIDA",
+      "acronym": ""
+    },
+    "271": {
+      "name": "C.I.O.",
+      "acronym": ""
+    },
+    "272": {
+      "name": "JUNTOS POR EXTREMADURA",
+      "acronym": ""
+    },
+    "273": {
+      "name": "UNIDAS POR PERALEDA DEL ZAUCEJO",
+      "acronym": ""
+    },
+    "274": {
+      "name": "G.I.R",
+      "acronym": ""
+    },
+    "275": {
+      "name": "PCLI",
+      "acronym": ""
+    },
+    "276": {
+      "name": "IPORV",
+      "acronym": ""
+    },
+    "277": {
+      "name": "PCV",
+      "acronym": ""
+    },
+    "278": {
+      "name": "IU-PODEMOS-AV-UNIDAS",
+      "acronym": ""
+    },
+    "279": {
+      "name": "VNU",
+      "acronym": ""
+    },
+    "280": {
+      "name": "A.Z.P.I.",
+      "acronym": ""
+    },
+    "281": {
+      "name": "PARTIDO POPULAR",
+      "acronym": ""
+    },
+    "282": {
+      "name": "PSC-CP",
+      "acronym": ""
+    },
+    "283": {
+      "name": "AEC - C",
+      "acronym": ""
+    },
+    "284": {
+      "name": "ERC - AM",
+      "acronym": ""
+    },
+    "285": {
+      "name": "U X A",
+      "acronym": ""
+    },
+    "286": {
+      "name": "CM",
+      "acronym": ""
+    },
+    "287": {
+      "name": "VIU AIGUAFREDA ERC - AM",
+      "acronym": ""
+    },
+    "288": {
+      "name": "ERC+SXA - AM",
+      "acronym": ""
+    },
+    "289": {
+      "name": "AP-PSC-CP",
+      "acronym": ""
+    },
+    "290": {
+      "name": "MPIC",
+      "acronym": ""
+    },
+    "291": {
+      "name": "FP - AM",
+      "acronym": ""
+    },
+    "292": {
+      "name": "A'T",
+      "acronym": ""
+    },
+    "293": {
+      "name": "CUP-AMUNT",
+      "acronym": ""
+    },
+    "294": {
+      "name": "TXA",
+      "acronym": ""
+    },
+    "295": {
+      "name": "ARA PL",
+      "acronym": ""
+    },
+    "296": {
+      "name": "UNITAT - AXR",
+      "acronym": ""
+    },
+    "297": {
+      "name": "ERC-AM",
+      "acronym": ""
+    },
+    "298": {
+      "name": "GDA",
+      "acronym": ""
+    },
+    "299": {
+      "name": "SA",
+      "acronym": ""
+    },
+    "300": {
+      "name": "F-AVIÀ-AM",
+      "acronym": ""
+    },
+    "301": {
+      "name": "TOTS SOM AVINYONET-CP",
+      "acronym": ""
+    },
+    "302": {
+      "name": "BCOMÚP - C",
+      "acronym": ""
+    },
+    "303": {
+      "name": "GBEC-MCAT",
+      "acronym": ""
+    },
+    "304": {
+      "name": "TFB-C",
+      "acronym": ""
+    },
+    "305": {
+      "name": "CXB-CP",
+      "acronym": ""
+    },
+    "306": {
+      "name": "AEBE",
+      "acronym": ""
+    },
+    "307": {
+      "name": "XBAGÀ - AM",
+      "acronym": ""
+    },
+    "308": {
+      "name": "JPB",
+      "acronym": ""
+    },
+    "309": {
+      "name": "CP",
+      "acronym": ""
+    },
+    "310": {
+      "name": "ENDAVANT BALSARENY",
+      "acronym": ""
+    },
+    "311": {
+      "name": "BECP - C",
+      "acronym": ""
+    },
+    "312": {
+      "name": "EAB-CUP-AMUNT",
+      "acronym": ""
+    },
+    "313": {
+      "name": "P.C.P.B.",
+      "acronym": ""
+    },
+    "314": {
+      "name": "TXB - ARA PL",
+      "acronym": ""
+    },
+    "315": {
+      "name": "BARCELONA EN COMÚ - C",
+      "acronym": ""
+    },
+    "316": {
+      "name": "TRIASXBCN-CM",
+      "acronym": ""
+    },
+    "317": {
+      "name": "ERC / AM",
+      "acronym": ""
+    },
+    "318": {
+      "name": "UXP-AM",
+      "acronym": ""
+    },
+    "319": {
+      "name": "BEGI",
+      "acronym": ""
+    },
+    "320": {
+      "name": "ERC-I - AM",
+      "acronym": ""
+    },
+    "321": {
+      "name": "AGBIR",
+      "acronym": ""
+    },
+    "322": {
+      "name": "UB-CP",
+      "acronym": ""
+    },
+    "323": {
+      "name": "IEB-ERC-AM",
+      "acronym": ""
+    },
+    "324": {
+      "name": "AB",
+      "acronym": ""
+    },
+    "325": {
+      "name": "ERC / ESQUERRA",
+      "acronym": ""
+    },
+    "326": {
+      "name": "CACTUA",
+      "acronym": ""
+    },
+    "327": {
+      "name": "UC-ERC-AM",
+      "acronym": ""
+    },
+    "328": {
+      "name": "CUP - AMUNT",
+      "acronym": ""
+    },
+    "329": {
+      "name": "MUC",
+      "acronym": ""
+    },
+    "330": {
+      "name": "UNITS X CABRILS",
+      "acronym": ""
+    },
+    "331": {
+      "name": "JXC-AM",
+      "acronym": ""
+    },
+    "332": {
+      "name": "SC-CP",
+      "acronym": ""
+    },
+    "333": {
+      "name": "AC-AM",
+      "acronym": ""
+    },
+    "334": {
+      "name": "GDE",
+      "acronym": ""
+    },
+    "335": {
+      "name": "PSC - CP",
+      "acronym": ""
+    },
+    "336": {
+      "name": "AC - ARA PL",
+      "acronym": ""
+    },
+    "337": {
+      "name": "CECP - C",
+      "acronym": ""
+    },
+    "338": {
+      "name": "EC - ARA PL",
+      "acronym": ""
+    },
+    "339": {
+      "name": "CXC",
+      "acronym": ""
+    },
+    "340": {
+      "name": "FEM-AM",
+      "acronym": ""
+    },
+    "341": {
+      "name": "CXC - C",
+      "acronym": ""
+    },
+    "342": {
+      "name": "CANETENCS",
+      "acronym": ""
+    },
+    "343": {
+      "name": "AC-PSC-CP",
+      "acronym": ""
+    },
+    "344": {
+      "name": "C.U.P.",
+      "acronym": ""
+    },
+    "345": {
+      "name": "MILLOREM CANET PRIMÀRIES",
+      "acronym": ""
+    },
+    "346": {
+      "name": "SC - C",
+      "acronym": ""
+    },
+    "347": {
+      "name": "3E",
+      "acronym": ""
+    },
+    "348": {
+      "name": "ECPC - C",
+      "acronym": ""
+    },
+    "349": {
+      "name": "ESQUERRA EN COMÚ - AM",
+      "acronym": ""
+    },
+    "350": {
+      "name": "VDC-CUP-AMUNT",
+      "acronym": ""
+    },
+    "351": {
+      "name": "TSCAPOLAT - AM",
+      "acronym": ""
+    },
+    "352": {
+      "name": "F.I.C.",
+      "acronym": ""
+    },
+    "353": {
+      "name": "CE-AM",
+      "acronym": ""
+    },
+    "354": {
+      "name": "AMUNT - AMUNT",
+      "acronym": ""
+    },
+    "355": {
+      "name": "CE - AM",
+      "acronym": ""
+    },
+    "356": {
+      "name": "SOM DE CASTELLAR-PSC-CP",
+      "acronym": ""
+    },
+    "357": {
+      "name": "SXCV - AM",
+      "acronym": ""
+    },
+    "358": {
+      "name": "SOM VEU",
+      "acronym": ""
+    },
+    "359": {
+      "name": "ALTPCB - C",
+      "acronym": ""
+    },
+    "360": {
+      "name": "ARAC-AM",
+      "acronym": ""
+    },
+    "361": {
+      "name": "MOVEM ECP - C",
+      "acronym": ""
+    },
+    "362": {
+      "name": "SFELS",
+      "acronym": ""
+    },
+    "363": {
+      "name": "VALENTS",
+      "acronym": ""
+    },
+    "364": {
+      "name": "VC-AM",
+      "acronym": ""
+    },
+    "365": {
+      "name": "ICB",
+      "acronym": ""
+    },
+    "366": {
+      "name": "CESM",
+      "acronym": ""
+    },
+    "367": {
+      "name": "CEP",
+      "acronym": ""
+    },
+    "368": {
+      "name": "SUMEM+ CASTELLVÍ DE LA MARCA - CANDIDATURA DE PROGRÉS (SUMEM-CP)",
+      "acronym": ""
+    },
+    "369": {
+      "name": "FP - ERC - AM",
+      "acronym": ""
+    },
+    "370": {
+      "name": "JUNTS PER CASTELLVÍ - CP",
+      "acronym": ""
+    },
+    "371": {
+      "name": "L'IMPULS",
+      "acronym": ""
+    },
+    "372": {
+      "name": "SOM CERCS",
+      "acronym": ""
+    },
+    "373": {
+      "name": "IC",
+      "acronym": ""
+    },
+    "374": {
+      "name": "TFC - AM",
+      "acronym": ""
+    },
+    "375": {
+      "name": "GUANYEMC - AMUNT",
+      "acronym": ""
+    },
+    "376": {
+      "name": "M'ESTIMO CERVELLÓ - PSC - CP",
+      "acronym": ""
+    },
+    "377": {
+      "name": "S X C",
+      "acronym": ""
+    },
+    "378": {
+      "name": "SDEC - CP",
+      "acronym": ""
+    },
+    "379": {
+      "name": "COLLBATOTS",
+      "acronym": ""
+    },
+    "380": {
+      "name": "AC",
+      "acronym": ""
+    },
+    "381": {
+      "name": "FC - PSC - CP",
+      "acronym": ""
+    },
+    "382": {
+      "name": "GIU",
+      "acronym": ""
+    },
+    "383": {
+      "name": "ERC-EUIA-AM",
+      "acronym": ""
+    },
+    "384": {
+      "name": "JXCUB - ARA PL",
+      "acronym": ""
+    },
+    "385": {
+      "name": "LA PAC",
+      "acronym": ""
+    },
+    "386": {
+      "name": "SDP",
+      "acronym": ""
+    },
+    "387": {
+      "name": "EECP - C",
+      "acronym": ""
+    },
+    "388": {
+      "name": "JPE- ARA PL",
+      "acronym": ""
+    },
+    "389": {
+      "name": "ECP-C",
+      "acronym": ""
+    },
+    "390": {
+      "name": "PDR",
+      "acronym": ""
+    },
+    "391": {
+      "name": "AUD-ERC-AM",
+      "acronym": ""
+    },
+    "392": {
+      "name": "SC",
+      "acronym": ""
+    },
+    "393": {
+      "name": "AXE-ERC-AM",
+      "acronym": ""
+    },
+    "394": {
+      "name": "TXF",
+      "acronym": ""
+    },
+    "395": {
+      "name": "AM-ER - AM",
+      "acronym": ""
+    },
+    "396": {
+      "name": "IF",
+      "acronym": ""
+    },
+    "397": {
+      "name": "IPF - AM",
+      "acronym": ""
+    },
+    "398": {
+      "name": "SUMEM-ERC-AM",
+      "acronym": ""
+    },
+    "399": {
+      "name": "EFR-IDC",
+      "acronym": ""
+    },
+    "400": {
+      "name": "ERC+LFI - AM",
+      "acronym": ""
+    },
+    "401": {
+      "name": "SPLF - C",
+      "acronym": ""
+    },
+    "402": {
+      "name": "SAL-CUP-AMUNT",
+      "acronym": ""
+    },
+    "403": {
+      "name": "100% LA GARRIGA",
+      "acronym": ""
+    },
+    "404": {
+      "name": "ECP - C",
+      "acronym": ""
+    },
+    "405": {
+      "name": "PSC-GELIDA-CP",
+      "acronym": ""
+    },
+    "406": {
+      "name": "GXR - FP - FIC",
+      "acronym": ""
+    },
+    "407": {
+      "name": "MXGI",
+      "acronym": ""
+    },
+    "408": {
+      "name": "G - AM",
+      "acronym": ""
+    },
+    "409": {
+      "name": "SOM-CP",
+      "acronym": ""
+    },
+    "410": {
+      "name": "PP - PARTIT POPULAR",
+      "acronym": ""
+    },
+    "411": {
+      "name": "PRIG",
+      "acronym": ""
+    },
+    "413": {
+      "name": "AD'EG",
+      "acronym": ""
+    },
+    "414": {
+      "name": "UXG-AM",
+      "acronym": ""
+    },
+    "415": {
+      "name": "LHECP - C",
+      "acronym": ""
+    },
+    "416": {
+      "name": "PA-CUP- AMUNT",
+      "acronym": ""
+    },
+    "417": {
+      "name": "SOM-HI - PSC - IO - CP",
+      "acronym": ""
+    },
+    "418": {
+      "name": "SC.MP-SOMMESCAT",
+      "acronym": ""
+    },
+    "419": {
+      "name": "AXLL-AM",
+      "acronym": ""
+    },
+    "420": {
+      "name": "LLEC - C",
+      "acronym": ""
+    },
+    "421": {
+      "name": "LLECP - C",
+      "acronym": ""
+    },
+    "422": {
+      "name": "FEM-ECP - C",
+      "acronym": ""
+    },
+    "423": {
+      "name": "FPA-AMUNT",
+      "acronym": ""
+    },
+    "424": {
+      "name": "MALL",
+      "acronym": ""
+    },
+    "425": {
+      "name": "SXLL - C",
+      "acronym": ""
+    },
+    "426": {
+      "name": "APM- AM",
+      "acronym": ""
+    },
+    "427": {
+      "name": "MEM - ARA PL",
+      "acronym": ""
+    },
+    "428": {
+      "name": "C.U.P-AMUNT",
+      "acronym": ""
+    },
+    "429": {
+      "name": "U PER M",
+      "acronym": ""
+    },
+    "430": {
+      "name": "AGM - ARA PL",
+      "acronym": ""
+    },
+    "431": {
+      "name": "ALIANÇA.CAT",
+      "acronym": ""
+    },
+    "432": {
+      "name": "FEM MANRESA - ALTERNATIVA MUNICIPALISTA (FEM - AMUNT)",
+      "acronym": ""
+    },
+    "433": {
+      "name": "FNC",
+      "acronym": ""
+    },
+    "434": {
+      "name": "APM",
+      "acronym": ""
+    },
+    "435": {
+      "name": "VDM",
+      "acronym": ""
+    },
+    "436": {
+      "name": "JUNTS PER MARTORELL - CM",
+      "acronym": ""
+    },
+    "437": {
+      "name": "MM - C",
+      "acronym": ""
+    },
+    "438": {
+      "name": "MEC - C",
+      "acronym": ""
+    },
+    "439": {
+      "name": "PSC - MAPM - CP",
+      "acronym": ""
+    },
+    "440": {
+      "name": "MRI-AM",
+      "acronym": ""
+    },
+    "441": {
+      "name": "SOMVOLTREGA - AM",
+      "acronym": ""
+    },
+    "442": {
+      "name": "ERC-AM - AM",
+      "acronym": ""
+    },
+    "443": {
+      "name": "MECP-C",
+      "acronym": ""
+    },
+    "444": {
+      "name": "FMM",
+      "acronym": ""
+    },
+    "445": {
+      "name": "SOM-HI MATADEPERA",
+      "acronym": ""
+    },
+    "446": {
+      "name": "S+MTDP - ARA PL",
+      "acronym": ""
+    },
+    "447": {
+      "name": "ECPM-C",
+      "acronym": ""
+    },
+    "448": {
+      "name": "ARAMOIÀ - AM",
+      "acronym": ""
+    },
+    "449": {
+      "name": "CM - CUP - AMUNT",
+      "acronym": ""
+    },
+    "450": {
+      "name": "ARA MOLINS - ARA PL",
+      "acronym": ""
+    },
+    "451": {
+      "name": "MECP - C",
+      "acronym": ""
+    },
+    "452": {
+      "name": "ARA MOLLET ERC-EUIA - AM",
+      "acronym": ""
+    },
+    "453": {
+      "name": "VIVIMIR",
+      "acronym": ""
+    },
+    "454": {
+      "name": "ECPMIR-C",
+      "acronym": ""
+    },
+    "455": {
+      "name": "M - AM",
+      "acronym": ""
+    },
+    "456": {
+      "name": "SM- AMUNT",
+      "acronym": ""
+    },
+    "457": {
+      "name": "SDM",
+      "acronym": ""
+    },
+    "458": {
+      "name": "CANVIEM - C",
+      "acronym": ""
+    },
+    "459": {
+      "name": "FEM",
+      "acronym": ""
+    },
+    "460": {
+      "name": "FEMM",
+      "acronym": ""
+    },
+    "461": {
+      "name": "AMD-CP",
+      "acronym": ""
+    },
+    "462": {
+      "name": "IPM-ERC - AM",
+      "acronym": ""
+    },
+    "463": {
+      "name": "MAMV - AMUNT",
+      "acronym": ""
+    },
+    "464": {
+      "name": "ARA- AM",
+      "acronym": ""
+    },
+    "465": {
+      "name": "NAVARCLES EN COMÚ PODEM - CONFLUÈNCIA (NECP-C)",
+      "acronym": ""
+    },
+    "466": {
+      "name": "PUPV",
+      "acronym": ""
+    },
+    "467": {
+      "name": "VF - AM",
+      "acronym": ""
+    },
+    "468": {
+      "name": "ÒAF",
+      "acronym": ""
+    },
+    "469": {
+      "name": "PSC-ÒDENA PROGRÉS-CP",
+      "acronym": ""
+    },
+    "470": {
+      "name": "APO",
+      "acronym": ""
+    },
+    "471": {
+      "name": "PARTIT DELS SOCIALISTES DE CATALUNYA -CANDIDATURA DE PROGRÉS (PSC-CP)",
+      "acronym": ""
+    },
+    "472": {
+      "name": "GOOB-FIC",
+      "acronym": ""
+    },
+    "473": {
+      "name": "BO - AMUNT",
+      "acronym": ""
+    },
+    "474": {
+      "name": "OOECP - C",
+      "acronym": ""
+    },
+    "475": {
+      "name": "IOISC",
+      "acronym": ""
+    },
+    "476": {
+      "name": "TP - AM",
+      "acronym": ""
+    },
+    "477": {
+      "name": "PLS",
+      "acronym": ""
+    },
+    "478": {
+      "name": "EP - C",
+      "acronym": ""
+    },
+    "479": {
+      "name": "P.D.F.",
+      "acronym": ""
+    },
+    "480": {
+      "name": "SFP",
+      "acronym": ""
+    },
+    "481": {
+      "name": "LA PALMA SEMPRE - ERC - AM",
+      "acronym": ""
+    },
+    "482": {
+      "name": "SAC - C",
+      "acronym": ""
+    },
+    "483": {
+      "name": "APM - AMUNT",
+      "acronym": ""
+    },
+    "484": {
+      "name": "SUMEM PER EL PAPIOL- CP",
+      "acronym": ""
+    },
+    "485": {
+      "name": "SEAP",
+      "acronym": ""
+    },
+    "486": {
+      "name": "PAP - AMUNT",
+      "acronym": ""
+    },
+    "487": {
+      "name": "SP-SOMMESCAT",
+      "acronym": ""
+    },
+    "488": {
+      "name": "PECP-C",
+      "acronym": ""
+    },
+    "489": {
+      "name": "P!",
+      "acronym": ""
+    },
+    "490": {
+      "name": "PECP - C",
+      "acronym": ""
+    },
+    "491": {
+      "name": "EPCP-C",
+      "acronym": ""
+    },
+    "492": {
+      "name": "JPD",
+      "acronym": ""
+    },
+    "493": {
+      "name": "CPD - AMUNT",
+      "acronym": ""
+    },
+    "494": {
+      "name": "VXPD - ARA PL",
+      "acronym": ""
+    },
+    "495": {
+      "name": "CP - AMUNT",
+      "acronym": ""
+    },
+    "496": {
+      "name": "JXR - ARA PL",
+      "acronym": ""
+    },
+    "497": {
+      "name": "G.I.R.",
+      "acronym": ""
+    },
+    "498": {
+      "name": "ADR",
+      "acronym": ""
+    },
+    "499": {
+      "name": "ARALAROCA",
+      "acronym": ""
+    },
+    "500": {
+      "name": "LREC - C",
+      "acronym": ""
+    },
+    "501": {
+      "name": "ERC-RODAREP-AM",
+      "acronym": ""
+    },
+    "502": {
+      "name": "IPR",
+      "acronym": ""
+    },
+    "503": {
+      "name": "AR - ARA PL",
+      "acronym": ""
+    },
+    "504": {
+      "name": "RD",
+      "acronym": ""
+    },
+    "505": {
+      "name": "AUP - AMUNT",
+      "acronym": ""
+    },
+    "506": {
+      "name": "ECPR - C",
+      "acronym": ""
+    },
+    "507": {
+      "name": "VR",
+      "acronym": ""
+    },
+    "508": {
+      "name": "GDR-AM",
+      "acronym": ""
+    },
+    "509": {
+      "name": "RUPIT PRUIT-AM",
+      "acronym": ""
+    },
+    "510": {
+      "name": "CPS - AMUNT",
+      "acronym": ""
+    },
+    "511": {
+      "name": "ERC-EUIA - AM",
+      "acronym": ""
+    },
+    "512": {
+      "name": "SECP -C",
+      "acronym": ""
+    },
+    "513": {
+      "name": "AS - AM",
+      "acronym": ""
+    },
+    "514": {
+      "name": "TSP - AM",
+      "acronym": ""
+    },
+    "515": {
+      "name": "PS",
+      "acronym": ""
+    },
+    "516": {
+      "name": "FEM MÉS POBLE SALLENT - ALTERNATIVA MUNICIPALISTA (FMPS- AMUNT)",
+      "acronym": ""
+    },
+    "517": {
+      "name": "SAEC-C",
+      "acronym": ""
+    },
+    "518": {
+      "name": "FEM SANT ANDREU - AM",
+      "acronym": ""
+    },
+    "519": {
+      "name": "ECPSAB-C",
+      "acronym": ""
+    },
+    "520": {
+      "name": "SSAB",
+      "acronym": ""
+    },
+    "521": {
+      "name": "APLL",
+      "acronym": ""
+    },
+    "522": {
+      "name": "MLL-C",
+      "acronym": ""
+    },
+    "523": {
+      "name": "CANVI",
+      "acronym": ""
+    },
+    "524": {
+      "name": "P.U.S.A.",
+      "acronym": ""
+    },
+    "525": {
+      "name": "SBECP-C",
+      "acronym": ""
+    },
+    "526": {
+      "name": "AVSC",
+      "acronym": ""
+    },
+    "527": {
+      "name": "ATSC - AMUNT",
+      "acronym": ""
+    },
+    "528": {
+      "name": "GXSC-CP",
+      "acronym": ""
+    },
+    "529": {
+      "name": "SCECP - C",
+      "acronym": ""
+    },
+    "530": {
+      "name": "SC-PM-CP",
+      "acronym": ""
+    },
+    "531": {
+      "name": "M",
+      "acronym": ""
+    },
+    "532": {
+      "name": "ARASES",
+      "acronym": ""
+    },
+    "533": {
+      "name": "ERC I MÉS - AM",
+      "acronym": ""
+    },
+    "534": {
+      "name": "SOM ALTERNATIVA",
+      "acronym": ""
+    },
+    "535": {
+      "name": "PRIMÀRIES CODINES",
+      "acronym": ""
+    },
+    "536": {
+      "name": "JUNTS PER SFC",
+      "acronym": ""
+    },
+    "537": {
+      "name": "VXSF",
+      "acronym": ""
+    },
+    "538": {
+      "name": "SFECP - C",
+      "acronym": ""
+    },
+    "539": {
+      "name": "IUSF",
+      "acronym": ""
+    },
+    "540": {
+      "name": "ARA SANT FOST-ERC-AM",
+      "acronym": ""
+    },
+    "541": {
+      "name": "GFP",
+      "acronym": ""
+    },
+    "542": {
+      "name": "SOM SFB - ARA PL",
+      "acronym": ""
+    },
+    "543": {
+      "name": "SOMVOLTREGÀ - AM",
+      "acronym": ""
+    },
+    "544": {
+      "name": "SPSI-C",
+      "acronym": ""
+    },
+    "545": {
+      "name": "EXSI - AM",
+      "acronym": ""
+    },
+    "546": {
+      "name": "CXSJF-CP",
+      "acronym": ""
+    },
+    "547": {
+      "name": "AXSJ",
+      "acronym": ""
+    },
+    "548": {
+      "name": "COMPROMÍS - C",
+      "acronym": ""
+    },
+    "549": {
+      "name": "SJDECP - C",
+      "acronym": ""
+    },
+    "550": {
+      "name": "C - AM",
+      "acronym": ""
+    },
+    "551": {
+      "name": "AVV - AM",
+      "acronym": ""
+    },
+    "552": {
+      "name": "VP",
+      "acronym": ""
+    },
+    "553": {
+      "name": "ESJD - ARA PL",
+      "acronym": ""
+    },
+    "554": {
+      "name": "SJECP - C",
+      "acronym": ""
+    },
+    "555": {
+      "name": "MXH - AM",
+      "acronym": ""
+    },
+    "556": {
+      "name": "AVANCEM - CP",
+      "acronym": ""
+    },
+    "557": {
+      "name": "I",
+      "acronym": ""
+    },
+    "558": {
+      "name": "GDSMC - AM",
+      "acronym": ""
+    },
+    "559": {
+      "name": "FOMENENC",
+      "acronym": ""
+    },
+    "560": {
+      "name": "MOVEM SANT MARTÍ-COL·LECTIU SOCIALISTA-CANDIDATURA DE PROGRÉS (MOVEM-CP)",
+      "acronym": ""
+    },
+    "561": {
+      "name": "SMA-AM",
+      "acronym": ""
+    },
+    "562": {
+      "name": "SUMEM - AM",
+      "acronym": ""
+    },
+    "563": {
+      "name": "FP-ECP - C",
+      "acronym": ""
+    },
+    "564": {
+      "name": "UM 9-CUP-CONSTRUIR-AMUNT",
+      "acronym": ""
+    },
+    "565": {
+      "name": "MP-CUP-AMUNT",
+      "acronym": ""
+    },
+    "566": {
+      "name": "ENTESA - AM",
+      "acronym": ""
+    },
+    "567": {
+      "name": "ISP",
+      "acronym": ""
+    },
+    "568": {
+      "name": "ISPS-AM",
+      "acronym": ""
+    },
+    "569": {
+      "name": "SASPS - C",
+      "acronym": ""
+    },
+    "570": {
+      "name": "MSP",
+      "acronym": ""
+    },
+    "571": {
+      "name": "SP - AMUNT",
+      "acronym": ""
+    },
+    "572": {
+      "name": "JUNTS-ERC-AM",
+      "acronym": ""
+    },
+    "573": {
+      "name": "SOM SQV - ARA PL",
+      "acronym": ""
+    },
+    "574": {
+      "name": "SQVEC - C",
+      "acronym": ""
+    },
+    "575": {
+      "name": "ISQS-CP",
+      "acronym": ""
+    },
+    "576": {
+      "name": "SSECP - C",
+      "acronym": ""
+    },
+    "577": {
+      "name": "SUMEM-AM",
+      "acronym": ""
+    },
+    "578": {
+      "name": "SV SOU VOSALTRES",
+      "acronym": ""
+    },
+    "579": {
+      "name": "SS-CP",
+      "acronym": ""
+    },
+    "580": {
+      "name": "JUNTSXSVM - ARA PL",
+      "acronym": ""
+    },
+    "581": {
+      "name": "SOM-HI",
+      "acronym": ""
+    },
+    "582": {
+      "name": "PSC - SV+ - CP",
+      "acronym": ""
+    },
+    "583": {
+      "name": "SVHECP - C",
+      "acronym": ""
+    },
+    "584": {
+      "name": "JUNTSXSVH - ERC-EUIA - AM",
+      "acronym": ""
+    },
+    "585": {
+      "name": "ISC-AM",
+      "acronym": ""
+    },
+    "586": {
+      "name": "SCI",
+      "acronym": ""
+    },
+    "587": {
+      "name": "P - C",
+      "acronym": ""
+    },
+    "588": {
+      "name": "COL·LABOREM-ERC-AM",
+      "acronym": ""
+    },
+    "589": {
+      "name": "SANTA COLOMA DE CERVELLÓ SUMA- PSC-CP",
+      "acronym": ""
+    },
+    "590": {
+      "name": "INDEPENDENTS PER SANTA EUGENIA DE BERGA",
+      "acronym": ""
+    },
+    "591": {
+      "name": "SOM SEB - ERC - AM",
+      "acronym": ""
+    },
+    "592": {
+      "name": "IPR - AM",
+      "acronym": ""
+    },
+    "593": {
+      "name": "SER",
+      "acronym": ""
+    },
+    "594": {
+      "name": "POBLE UNIT",
+      "acronym": ""
+    },
+    "595": {
+      "name": "IND-ERC - AM",
+      "acronym": ""
+    },
+    "596": {
+      "name": "AM-LVDVDM",
+      "acronym": ""
+    },
+    "597": {
+      "name": "SOM-ERC-AM",
+      "acronym": ""
+    },
+    "598": {
+      "name": "PA-AMUNT",
+      "acronym": ""
+    },
+    "599": {
+      "name": "OLÓ SOM TOTS- ERC- AM",
+      "acronym": ""
+    },
+    "600": {
+      "name": "SB - AM",
+      "acronym": ""
+    },
+    "601": {
+      "name": "SMEC - C",
+      "acronym": ""
+    },
+    "602": {
+      "name": "ERC-PA - AM",
+      "acronym": ""
+    },
+    "603": {
+      "name": "SOM-CUP-AMUNT",
+      "acronym": ""
+    },
+    "604": {
+      "name": "SPEC - C",
+      "acronym": ""
+    },
+    "605": {
+      "name": "USS - AM",
+      "acronym": ""
+    },
+    "606": {
+      "name": "XS-PSC-CP",
+      "acronym": ""
+    },
+    "607": {
+      "name": "SEAM",
+      "acronym": ""
+    },
+    "608": {
+      "name": "ACSENT - MCAT",
+      "acronym": ""
+    },
+    "609": {
+      "name": "FETS PER SITGES",
+      "acronym": ""
+    },
+    "610": {
+      "name": "SITGES-GI",
+      "acronym": ""
+    },
+    "611": {
+      "name": "VECPS - C",
+      "acronym": ""
+    },
+    "612": {
+      "name": "GS-AMUNT",
+      "acronym": ""
+    },
+    "613": {
+      "name": "PSC-MARGALLÓ X SITGES-CP",
+      "acronym": ""
+    },
+    "614": {
+      "name": "IPS",
+      "acronym": ""
+    },
+    "615": {
+      "name": "IPS - AM",
+      "acronym": ""
+    },
+    "616": {
+      "name": "APS-CUP-AMUNT",
+      "acronym": ""
+    },
+    "617": {
+      "name": "FS - AMUNT",
+      "acronym": ""
+    },
+    "618": {
+      "name": "GIIS",
+      "acronym": ""
+    },
+    "619": {
+      "name": "AT-ERC-AM",
+      "acronym": ""
+    },
+    "620": {
+      "name": "FEMT- AM",
+      "acronym": ""
+    },
+    "621": {
+      "name": "FT - ERC - AM",
+      "acronym": ""
+    },
+    "622": {
+      "name": "IXT - AMUNT",
+      "acronym": ""
+    },
+    "623": {
+      "name": "CAT - ERC - AM",
+      "acronym": ""
+    },
+    "624": {
+      "name": "GDT",
+      "acronym": ""
+    },
+    "625": {
+      "name": "TXT",
+      "acronym": ""
+    },
+    "626": {
+      "name": "JUNTS",
+      "acronym": ""
+    },
+    "627": {
+      "name": "AT",
+      "acronym": ""
+    },
+    "628": {
+      "name": "MT -IDC",
+      "acronym": ""
+    },
+    "629": {
+      "name": "ECPT - C",
+      "acronym": ""
+    },
+    "630": {
+      "name": "ERC- GDT-JOVENT-AM",
+      "acronym": ""
+    },
+    "631": {
+      "name": "ERC -JPT - AM",
+      "acronym": ""
+    },
+    "632": {
+      "name": "CUP - SP - AMUNT",
+      "acronym": ""
+    },
+    "633": {
+      "name": "ERC-SA-AM",
+      "acronym": ""
+    },
+    "634": {
+      "name": "RE",
+      "acronym": ""
+    },
+    "635": {
+      "name": "IMPULSEM TORRELLES DE FOIX - COMPROMÍS MUNICIPAL",
+      "acronym": ""
+    },
+    "636": {
+      "name": "CAT",
+      "acronym": ""
+    },
+    "637": {
+      "name": "LAVV",
+      "acronym": ""
+    },
+    "638": {
+      "name": "V PER V",
+      "acronym": ""
+    },
+    "639": {
+      "name": "ALTERNATIVA - AMUNT",
+      "acronym": ""
+    },
+    "640": {
+      "name": "VECP - C",
+      "acronym": ""
+    },
+    "641": {
+      "name": "VET",
+      "acronym": ""
+    },
+    "642": {
+      "name": "MXV-ERC - AM",
+      "acronym": ""
+    },
+    "643": {
+      "name": "AV - ARA PL",
+      "acronym": ""
+    },
+    "644": {
+      "name": "GDV",
+      "acronym": ""
+    },
+    "645": {
+      "name": "IVALL",
+      "acronym": ""
+    },
+    "646": {
+      "name": "ARA VIC - ARA PL",
+      "acronym": ""
+    },
+    "647": {
+      "name": "SOM IDENTITARIS (SOMI)",
+      "acronym": ""
+    },
+    "648": {
+      "name": "AV - AM",
+      "acronym": ""
+    },
+    "649": {
+      "name": "VECP-C",
+      "acronym": ""
+    },
+    "650": {
+      "name": "FV - C",
+      "acronym": ""
+    },
+    "651": {
+      "name": "CUP- AMUNT",
+      "acronym": ""
+    },
+    "652": {
+      "name": "VEC - C",
+      "acronym": ""
+    },
+    "653": {
+      "name": "ARA VILALBA ERC-AM",
+      "acronym": ""
+    },
+    "654": {
+      "name": "IPVS",
+      "acronym": ""
+    },
+    "655": {
+      "name": "PSC",
+      "acronym": ""
+    },
+    "656": {
+      "name": "V VILANOVA365",
+      "acronym": ""
+    },
+    "657": {
+      "name": "IVDV",
+      "acronym": ""
+    },
+    "658": {
+      "name": "UPVV",
+      "acronym": ""
+    },
+    "659": {
+      "name": "TRANSFORMEM-VNG",
+      "acronym": ""
+    },
+    "660": {
+      "name": "BABORD",
+      "acronym": ""
+    },
+    "661": {
+      "name": "ERC - VDMFUTUR - AM",
+      "acronym": ""
+    },
+    "662": {
+      "name": "VIURE VILOBÍ-CANDIDATURA DE PROGRÉS (VV-CP)",
+      "acronym": ""
+    },
+    "663": {
+      "name": "A.I.B.",
+      "acronym": ""
+    },
+    "664": {
+      "name": "IN.D.A.Z.",
+      "acronym": ""
+    },
+    "665": {
+      "name": "PODEMOS, EZKER ANITZA / IU, EQUO BERDEAK, ALIANZA VERDE",
+      "acronym": ""
+    },
+    "666": {
+      "name": "HK",
+      "acronym": ""
+    },
+    "667": {
+      "name": "ARRIGORRIAGA GARA-ELKARREKIN",
+      "acronym": ""
+    },
+    "668": {
+      "name": "NOA",
+      "acronym": ""
+    },
+    "669": {
+      "name": "C.L.I.",
+      "acronym": ""
+    },
+    "670": {
+      "name": "ELKARREKIN PODEMOS-EZKER ANITZA/IU-ALIANZA VERDE",
+      "acronym": ""
+    },
+    "671": {
+      "name": "IBARRIKA",
+      "acronym": ""
+    },
+    "672": {
+      "name": "ELKARREKIN PODEMOS - EZKER ANITZA IU - BERDEAK EQUO - ALIANZA VERDE",
+      "acronym": ""
+    },
+    "673": {
+      "name": "GUZAN",
+      "acronym": ""
+    },
+    "674": {
+      "name": "ELKARREKIN PODEMOS - EZKER ANITZA / IU - BERDEAK EQUO - ALIANZA VERDE",
+      "acronym": ""
+    },
+    "675": {
+      "name": "SQ-2D",
+      "acronym": ""
+    },
+    "676": {
+      "name": "PODEMOS, EZKER ANITZA / IU, ALIANZA VERDE",
+      "acronym": ""
+    },
+    "677": {
+      "name": "L.V.P.",
+      "acronym": ""
+    },
+    "678": {
+      "name": "AZK",
+      "acronym": ""
+    },
+    "679": {
+      "name": "UH",
+      "acronym": ""
+    },
+    "680": {
+      "name": "HERRIKO TALDEA",
+      "acronym": ""
+    },
+    "681": {
+      "name": "GTI",
+      "acronym": ""
+    },
+    "682": {
+      "name": "GUZTIONTZAKO HERRIA",
+      "acronym": ""
+    },
+    "683": {
+      "name": "IB",
+      "acronym": ""
+    },
+    "684": {
+      "name": "G.H.T.",
+      "acronym": ""
+    },
+    "685": {
+      "name": "ARMENDU",
+      "acronym": ""
+    },
+    "686": {
+      "name": "K.Z.",
+      "acronym": ""
+    },
+    "687": {
+      "name": "LZ",
+      "acronym": ""
+    },
+    "688": {
+      "name": "H.A.",
+      "acronym": ""
+    },
+    "689": {
+      "name": "CMB",
+      "acronym": ""
+    },
+    "690": {
+      "name": "MUNGIA ALKARTU",
+      "acronym": ""
+    },
+    "691": {
+      "name": "MIT",
+      "acronym": ""
+    },
+    "692": {
+      "name": "ELKARREKIN PODEMOS - BOROBIL- EZKER ANITZA / IU",
+      "acronym": ""
+    },
+    "693": {
+      "name": "AEI",
+      "acronym": ""
+    },
+    "694": {
+      "name": "AVS/SAA",
+      "acronym": ""
+    },
+    "695": {
+      "name": "SKB",
+      "acronym": ""
+    },
+    "696": {
+      "name": "UHK",
+      "acronym": ""
+    },
+    "697": {
+      "name": "C. GESTORA",
+      "acronym": ""
+    },
+    "698": {
+      "name": "ZB",
+      "acronym": ""
+    },
+    "699": {
+      "name": "PIGH",
+      "acronym": ""
+    },
+    "700": {
+      "name": "EV-PCAS-TC",
+      "acronym": ""
+    },
+    "701": {
+      "name": "VB",
+      "acronym": ""
+    },
+    "702": {
+      "name": "IASG",
+      "acronym": ""
+    },
+    "703": {
+      "name": "AGRUPACION VECINAL AMEYUGO",
+      "acronym": ""
+    },
+    "704": {
+      "name": "PODEMOS-IU",
+      "acronym": ""
+    },
+    "705": {
+      "name": "PODEMOS-IU-AV",
+      "acronym": ""
+    },
+    "706": {
+      "name": "AEAR",
+      "acronym": ""
+    },
+    "707": {
+      "name": "SI-ARIJA",
+      "acronym": ""
+    },
+    "708": {
+      "name": "RENUEVA BAÑOS",
+      "acronym": ""
+    },
+    "709": {
+      "name": "AIDJ",
+      "acronym": ""
+    },
+    "710": {
+      "name": "GLB",
+      "acronym": ""
+    },
+    "711": {
+      "name": "V-B",
+      "acronym": ""
+    },
+    "712": {
+      "name": "AGRUPACION DE ELECTORES DE CASTRILLO DEL VAL",
+      "acronym": ""
+    },
+    "713": {
+      "name": "AGRUPACION DE ELECTORES CIRUELOS DE CERVERA",
+      "acronym": ""
+    },
+    "714": {
+      "name": "TREVIÑO DÍA A DÍA",
+      "acronym": ""
+    },
+    "715": {
+      "name": "AGRUPACION INDEPENDIENTE DEL CONDADO DE TREVIÑO",
+      "acronym": ""
+    },
+    "716": {
+      "name": "JXE",
+      "acronym": ""
+    },
+    "717": {
+      "name": "AVANZA FONTIOSO",
+      "acronym": ""
+    },
+    "718": {
+      "name": "AEVG",
+      "acronym": ""
+    },
+    "719": {
+      "name": "HDLC",
+      "acronym": ""
+    },
+    "720": {
+      "name": "ANH",
+      "acronym": ""
+    },
+    "721": {
+      "name": "HTA",
+      "acronym": ""
+    },
+    "722": {
+      "name": "IH",
+      "acronym": ""
+    },
+    "723": {
+      "name": "ALI",
+      "acronym": ""
+    },
+    "724": {
+      "name": "JV",
+      "acronym": ""
+    },
+    "725": {
+      "name": "PALACIOS-VÍA BURGALESA",
+      "acronym": ""
+    },
+    "726": {
+      "name": "AGPCUI",
+      "acronym": ""
+    },
+    "727": {
+      "name": "US",
+      "acronym": ""
+    },
+    "728": {
+      "name": "PR",
+      "acronym": ""
+    },
+    "729": {
+      "name": "AIRE",
+      "acronym": ""
+    },
+    "730": {
+      "name": "ACS",
+      "acronym": ""
+    },
+    "731": {
+      "name": "AGRUPACION DE ELECTORES VALLE DE SAN VICENTE",
+      "acronym": ""
+    },
+    "732": {
+      "name": "AGRUPACION ELECTORAL SANTA MARIA DEL CAMPO",
+      "acronym": ""
+    },
+    "733": {
+      "name": "PSYP",
+      "acronym": ""
+    },
+    "734": {
+      "name": "INDEPENDIENTES-TARDAJOS",
+      "acronym": ""
+    },
+    "735": {
+      "name": "POR MENA",
+      "acronym": ""
+    },
+    "736": {
+      "name": "VENT",
+      "acronym": ""
+    },
+    "737": {
+      "name": "VPV",
+      "acronym": ""
+    },
+    "738": {
+      "name": "V.I.V.",
+      "acronym": ""
+    },
+    "739": {
+      "name": "V.A.",
+      "acronym": ""
+    },
+    "740": {
+      "name": "MCVI",
+      "acronym": ""
+    },
+    "741": {
+      "name": "AEV",
+      "acronym": ""
+    },
+    "742": {
+      "name": "(PEX)-(EXT)",
+      "acronym": ""
+    },
+    "743": {
+      "name": "A.I.A.",
+      "acronym": ""
+    },
+    "744": {
+      "name": "SOMOS CC",
+      "acronym": ""
+    },
+    "745": {
+      "name": "CAÑAMERO AVANZA - UNIDAS - PODEMOS - IU",
+      "acronym": ""
+    },
+    "746": {
+      "name": "ALTERNATIVA POR CAÑAVERAL",
+      "acronym": ""
+    },
+    "747": {
+      "name": "TUD",
+      "acronym": ""
+    },
+    "748": {
+      "name": "ACDG",
+      "acronym": ""
+    },
+    "749": {
+      "name": "AICA",
+      "acronym": ""
+    },
+    "750": {
+      "name": "CACERES VIVA",
+      "acronym": ""
+    },
+    "751": {
+      "name": "G.I.C.",
+      "acronym": ""
+    },
+    "752": {
+      "name": "POR DELEITOSA",
+      "acronym": ""
+    },
+    "753": {
+      "name": "PG",
+      "acronym": ""
+    },
+    "754": {
+      "name": "CH",
+      "acronym": ""
+    },
+    "755": {
+      "name": "UED",
+      "acronym": ""
+    },
+    "756": {
+      "name": "PPM",
+      "acronym": ""
+    },
+    "757": {
+      "name": "LYM",
+      "acronym": ""
+    },
+    "758": {
+      "name": "IPT",
+      "acronym": ""
+    },
+    "759": {
+      "name": "TA",
+      "acronym": ""
+    },
+    "760": {
+      "name": "A.I.V.A.",
+      "acronym": ""
+    },
+    "761": {
+      "name": "PIN-NAVA",
+      "acronym": ""
+    },
+    "762": {
+      "name": "PSOE-A",
+      "acronym": ""
+    },
+    "763": {
+      "name": "IU ANDALUCÍA",
+      "acronym": ""
+    },
+    "764": {
+      "name": "I.U. ANDALUCIA",
+      "acronym": ""
+    },
+    "765": {
+      "name": "AI-PRO",
+      "acronym": ""
+    },
+    "766": {
+      "name": "UA",
+      "acronym": ""
+    },
+    "767": {
+      "name": "SIEMPRE",
+      "acronym": ""
+    },
+    "768": {
+      "name": "MB",
+      "acronym": ""
+    },
+    "769": {
+      "name": "AI",
+      "acronym": ""
+    },
+    "770": {
+      "name": "IU ANDALUCIA",
+      "acronym": ""
+    },
+    "771": {
+      "name": "U X CH",
+      "acronym": ""
+    },
+    "772": {
+      "name": "PARA LA GENTE",
+      "acronym": ""
+    },
+    "773": {
+      "name": "LL100X100",
+      "acronym": ""
+    },
+    "774": {
+      "name": "UP",
+      "acronym": ""
+    },
+    "775": {
+      "name": "ADELANTE ANDALUCÍA",
+      "acronym": ""
+    },
+    "776": {
+      "name": "IU + PODEMOS",
+      "acronym": ""
+    },
+    "777": {
+      "name": "SR 100X100",
+      "acronym": ""
+    },
+    "778": {
+      "name": "NAT",
+      "acronym": ""
+    },
+    "779": {
+      "name": "ALFOZ",
+      "acronym": ""
+    },
+    "780": {
+      "name": "P.R.C.",
+      "acronym": ""
+    },
+    "781": {
+      "name": "OLA CANTABRIA",
+      "acronym": ""
+    },
+    "782": {
+      "name": "VXL CADL 2023",
+      "acronym": ""
+    },
+    "783": {
+      "name": "AGRUPACION ELECTORAL POR YUSO",
+      "acronym": ""
+    },
+    "784": {
+      "name": "CASTROVERDE",
+      "acronym": ""
+    },
+    "785": {
+      "name": "UPE",
+      "acronym": ""
+    },
+    "786": {
+      "name": "CANTABRIA DISTINTA",
+      "acronym": ""
+    },
+    "787": {
+      "name": "SG",
+      "acronym": ""
+    },
+    "788": {
+      "name": "HACEMOS LAREDO",
+      "acronym": ""
+    },
+    "789": {
+      "name": "UXL",
+      "acronym": ""
+    },
+    "790": {
+      "name": "ULP",
+      "acronym": ""
+    },
+    "791": {
+      "name": "EQUO",
+      "acronym": ""
+    },
+    "792": {
+      "name": "UPP",
+      "acronym": ""
+    },
+    "793": {
+      "name": "@VIP",
+      "acronym": ""
+    },
+    "794": {
+      "name": "REC",
+      "acronym": ""
+    },
+    "795": {
+      "name": "POR",
+      "acronym": ""
+    },
+    "796": {
+      "name": "VSF",
+      "acronym": ""
+    },
+    "797": {
+      "name": "SVB",
+      "acronym": ""
+    },
+    "798": {
+      "name": "ADVI",
+      "acronym": ""
+    },
+    "799": {
+      "name": "AIDC",
+      "acronym": ""
+    },
+    "800": {
+      "name": "AVI",
+      "acronym": ""
+    },
+    "801": {
+      "name": "SÑS",
+      "acronym": ""
+    },
+    "802": {
+      "name": "TORRELAVEGA SÍ",
+      "acronym": ""
+    },
+    "803": {
+      "name": "AIVA",
+      "acronym": ""
+    },
+    "804": {
+      "name": "POR VALLE DE VILLAVERDE",
+      "acronym": ""
+    },
+    "805": {
+      "name": "A. V. V.",
+      "acronym": ""
+    },
+    "806": {
+      "name": "ALC",
+      "acronym": ""
+    },
+    "807": {
+      "name": "MÉS - COMPROMÍS : ACORD PER GUANYAR",
+      "acronym": ""
+    },
+    "808": {
+      "name": "P.S.V.-P.S.O.E.",
+      "acronym": ""
+    },
+    "809": {
+      "name": "BG",
+      "acronym": ""
+    },
+    "810": {
+      "name": "VDEB",
+      "acronym": ""
+    },
+    "811": {
+      "name": "AVANT C D C",
+      "acronym": ""
+    },
+    "812": {
+      "name": "APC",
+      "acronym": ""
+    },
+    "813": {
+      "name": "TXC",
+      "acronym": ""
+    },
+    "814": {
+      "name": "AEH",
+      "acronym": ""
+    },
+    "815": {
+      "name": "AGRUPACIÓ D'ELECTORS LA JANA ENTRE TOTS",
+      "acronym": ""
+    },
+    "816": {
+      "name": "UNIÓ",
+      "acronym": ""
+    },
+    "817": {
+      "name": "LMM",
+      "acronym": ""
+    },
+    "818": {
+      "name": "INDEPENDENTS PER MORELLA",
+      "acronym": ""
+    },
+    "819": {
+      "name": "ALTERNATIVA POR NAVAJAS",
+      "acronym": ""
+    },
+    "820": {
+      "name": "CEN",
+      "acronym": ""
+    },
+    "821": {
+      "name": "MN-EUPV:ENDAVANT",
+      "acronym": ""
+    },
+    "822": {
+      "name": "A.E: LA BELLIDA",
+      "acronym": ""
+    },
+    "823": {
+      "name": "SP",
+      "acronym": ""
+    },
+    "824": {
+      "name": "UPT",
+      "acronym": ""
+    },
+    "825": {
+      "name": "AVET",
+      "acronym": ""
+    },
+    "826": {
+      "name": "SOMOS TORRALBA DEL PINAR",
+      "acronym": ""
+    },
+    "827": {
+      "name": "TD",
+      "acronym": ""
+    },
+    "828": {
+      "name": "IXLV",
+      "acronym": ""
+    },
+    "829": {
+      "name": "VIU VILLORES",
+      "acronym": ""
+    },
+    "830": {
+      "name": "P.V.I",
+      "acronym": ""
+    },
+    "831": {
+      "name": "CPV - ACORD PER GUANYAR",
+      "acronym": ""
+    },
+    "832": {
+      "name": "CEUTA YA!",
+      "acronym": ""
+    },
+    "833": {
+      "name": "MDYC",
+      "acronym": ""
+    },
+    "834": {
+      "name": "PA",
+      "acronym": ""
+    },
+    "835": {
+      "name": "VQ-IU",
+      "acronym": ""
+    },
+    "836": {
+      "name": "ALSIM",
+      "acronym": ""
+    },
+    "837": {
+      "name": "UNIDAS-IU-PODEMOS",
+      "acronym": ""
+    },
+    "838": {
+      "name": "A.E.P.A.",
+      "acronym": ""
+    },
+    "839": {
+      "name": "UD. CA + CS",
+      "acronym": ""
+    },
+    "840": {
+      "name": "UD.CA",
+      "acronym": ""
+    },
+    "841": {
+      "name": "GIXG",
+      "acronym": ""
+    },
+    "842": {
+      "name": "SM",
+      "acronym": ""
+    },
+    "843": {
+      "name": "DCM",
+      "acronym": ""
+    },
+    "844": {
+      "name": "IXP",
+      "acronym": ""
+    },
+    "845": {
+      "name": "A.R.E.I.",
+      "acronym": ""
+    },
+    "846": {
+      "name": "DECIDA O DE.CI.D.A.",
+      "acronym": ""
+    },
+    "847": {
+      "name": "UPOA",
+      "acronym": ""
+    },
+    "848": {
+      "name": "UVEGA",
+      "acronym": ""
+    },
+    "849": {
+      "name": "AGRUPACIÓN DE ELECTORES POR CASTRO",
+      "acronym": ""
+    },
+    "850": {
+      "name": "UI CON ANDALUCÍA",
+      "acronym": ""
+    },
+    "851": {
+      "name": "C.I.D.G.",
+      "acronym": ""
+    },
+    "852": {
+      "name": "G.I.H.",
+      "acronym": ""
+    },
+    "853": {
+      "name": "CONTIGO MONTEMAYOR",
+      "acronym": ""
+    },
+    "854": {
+      "name": "UDIM",
+      "acronym": ""
+    },
+    "855": {
+      "name": "IU CON ANDALUCÍA",
+      "acronym": ""
+    },
+    "856": {
+      "name": "SI PEÑARROYA",
+      "acronym": ""
+    },
+    "857": {
+      "name": "SOMOS A.S.I",
+      "acronym": ""
+    },
+    "858": {
+      "name": "VAMOS",
+      "acronym": ""
+    },
+    "859": {
+      "name": "UNIDE",
+      "acronym": ""
+    },
+    "860": {
+      "name": "CDEI",
+      "acronym": ""
+    },
+    "861": {
+      "name": "AGRUPACIÓN DE ELECTORES EL ALCORNOQUE DE VILLAVICOSA DE CÓRDOBA",
+      "acronym": ""
+    },
+    "862": {
+      "name": "AGRUPACIÓN DE ELECTORES UNIDOS POR VILLAVICIOSA",
+      "acronym": ""
+    },
+    "863": {
+      "name": "B.N.G.",
+      "acronym": ""
+    },
+    "864": {
+      "name": "PSDEG-PSOE",
+      "acronym": ""
+    },
+    "865": {
+      "name": "ESCO",
+      "acronym": ""
+    },
+    "866": {
+      "name": "NAL",
+      "acronym": ""
+    },
+    "867": {
+      "name": "A.A",
+      "acronym": ""
+    },
+    "868": {
+      "name": "BOIRO NOVO",
+      "acronym": ""
+    },
+    "869": {
+      "name": "SCV-CC.VV",
+      "acronym": ""
+    },
+    "870": {
+      "name": "UXC",
+      "acronym": ""
+    },
+    "871": {
+      "name": "AIAC",
+      "acronym": ""
+    },
+    "872": {
+      "name": "IXCEE",
+      "acronym": ""
+    },
+    "873": {
+      "name": "CXM (CANDIDATURA DE XESTIÓN MUNICIPAL)",
+      "acronym": ""
+    },
+    "874": {
+      "name": "UVD",
+      "acronym": ""
+    },
+    "875": {
+      "name": "XENTE DE DODRO",
+      "acronym": ""
+    },
+    "876": {
+      "name": "EU",
+      "acronym": ""
+    },
+    "877": {
+      "name": "FEC",
+      "acronym": ""
+    },
+    "878": {
+      "name": "AMLD",
+      "acronym": ""
+    },
+    "879": {
+      "name": "MC",
+      "acronym": ""
+    },
+    "880": {
+      "name": "IXMUXÍA",
+      "acronym": ""
+    },
+    "881": {
+      "name": "TEGA",
+      "acronym": ""
+    },
+    "882": {
+      "name": "MOVENEDA",
+      "acronym": ""
+    },
+    "883": {
+      "name": "MAREA CIDADÁ DE NOIA",
+      "acronym": ""
+    },
+    "884": {
+      "name": "NO.I.A.",
+      "acronym": ""
+    },
+    "885": {
+      "name": "P.ORTI",
+      "acronym": ""
+    },
+    "886": {
+      "name": "XA",
+      "acronym": ""
+    },
+    "887": {
+      "name": "CO",
+      "acronym": ""
+    },
+    "888": {
+      "name": "NÓSPOBRA",
+      "acronym": ""
+    },
+    "889": {
+      "name": "VIXP",
+      "acronym": ""
+    },
+    "890": {
+      "name": "AXP",
+      "acronym": ""
+    },
+    "891": {
+      "name": "GLG",
+      "acronym": ""
+    },
+    "892": {
+      "name": "PBBI",
+      "acronym": ""
+    },
+    "893": {
+      "name": "SADAMAIORÍA",
+      "acronym": ""
+    },
+    "894": {
+      "name": "UPSA",
+      "acronym": ""
+    },
+    "895": {
+      "name": "COMPOSTELA ABERTA",
+      "acronym": ""
+    },
+    "896": {
+      "name": "ALTXSOM",
+      "acronym": ""
+    },
+    "897": {
+      "name": "PXC",
+      "acronym": ""
+    },
+    "898": {
+      "name": "PMVDET",
+      "acronym": ""
+    },
+    "899": {
+      "name": "UXT",
+      "acronym": ""
+    },
+    "900": {
+      "name": "AINA",
+      "acronym": ""
+    },
+    "901": {
+      "name": "UNIDAS I.U.PODEMOS",
+      "acronym": ""
+    },
+    "902": {
+      "name": "CRECE",
+      "acronym": ""
+    },
+    "903": {
+      "name": "PIDA",
+      "acronym": ""
+    },
+    "904": {
+      "name": "+CU-EV",
+      "acronym": ""
+    },
+    "905": {
+      "name": "BETETA PARTICIPA",
+      "acronym": ""
+    },
+    "906": {
+      "name": "JXCH",
+      "acronym": ""
+    },
+    "907": {
+      "name": "UCG",
+      "acronym": ""
+    },
+    "908": {
+      "name": "AIU",
+      "acronym": ""
+    },
+    "909": {
+      "name": "UP-AC-IU",
+      "acronym": ""
+    },
+    "910": {
+      "name": "CNU",
+      "acronym": ""
+    },
+    "911": {
+      "name": "AIE",
+      "acronym": ""
+    },
+    "912": {
+      "name": "HUERTANOSUNE",
+      "acronym": ""
+    },
+    "913": {
+      "name": "TÚPATRIA",
+      "acronym": ""
+    },
+    "914": {
+      "name": "UNIDAS PODEMOS - IU",
+      "acronym": ""
+    },
+    "915": {
+      "name": "AGIH",
+      "acronym": ""
+    },
+    "916": {
+      "name": "VV",
+      "acronym": ""
+    },
+    "917": {
+      "name": "AEPVLJ",
+      "acronym": ""
+    },
+    "918": {
+      "name": "H.",
+      "acronym": ""
+    },
+    "919": {
+      "name": "ABB",
+      "acronym": ""
+    },
+    "920": {
+      "name": "A.B.Z.",
+      "acronym": ""
+    },
+    "921": {
+      "name": "AA",
+      "acronym": ""
+    },
+    "922": {
+      "name": "AAE",
+      "acronym": ""
+    },
+    "923": {
+      "name": "A.A.T.",
+      "acronym": ""
+    },
+    "924": {
+      "name": "AME",
+      "acronym": ""
+    },
+    "925": {
+      "name": "A.H.B.",
+      "acronym": ""
+    },
+    "926": {
+      "name": "AZKOITIA BAI ELKARREKIN",
+      "acronym": ""
+    },
+    "927": {
+      "name": "A.B.",
+      "acronym": ""
+    },
+    "928": {
+      "name": "DENOK BAT",
+      "acronym": ""
+    },
+    "929": {
+      "name": "BB",
+      "acronym": ""
+    },
+    "930": {
+      "name": "IBIRI",
+      "acronym": ""
+    },
+    "931": {
+      "name": "GB",
+      "acronym": ""
+    },
+    "932": {
+      "name": "ELKARREKIN ORAIN DEBA",
+      "acronym": ""
+    },
+    "933": {
+      "name": "ELKARREKIN PODEMOS, EZKER ANITZA / IU, BERDEAK EQUO, ALIANZA VERDE",
+      "acronym": ""
+    },
+    "934": {
+      "name": "EG",
+      "acronym": ""
+    },
+    "935": {
+      "name": "EZKIO ERAIKIZ",
+      "acronym": ""
+    },
+    "936": {
+      "name": "GHE",
+      "acronym": ""
+    },
+    "937": {
+      "name": "G.H.",
+      "acronym": ""
+    },
+    "938": {
+      "name": "HERNIOPE",
+      "acronym": ""
+    },
+    "939": {
+      "name": "ABOTSANITZ",
+      "acronym": ""
+    },
+    "940": {
+      "name": "BERDEAK + INDEPENDIENTES LEGAZPI",
+      "acronym": ""
+    },
+    "941": {
+      "name": "LG",
+      "acronym": ""
+    },
+    "942": {
+      "name": "MHK-2023",
+      "acronym": ""
+    },
+    "943": {
+      "name": "BERDEAK EQUO",
+      "acronym": ""
+    },
+    "944": {
+      "name": "OEO",
+      "acronym": ""
+    },
+    "945": {
+      "name": "ELKARREKIN PODEMOS - EZKER ANITZA / IU - ORAIN ORDIZIA",
+      "acronym": ""
+    },
+    "946": {
+      "name": "OB",
+      "acronym": ""
+    },
+    "947": {
+      "name": "PODEMOS-AV",
+      "acronym": ""
+    },
+    "948": {
+      "name": "ZL",
+      "acronym": ""
+    },
+    "949": {
+      "name": "CC-TE",
+      "acronym": ""
+    },
+    "950": {
+      "name": "PIA",
+      "acronym": ""
+    },
+    "951": {
+      "name": "SA-AM",
+      "acronym": ""
+    },
+    "952": {
+      "name": "EC-IDC",
+      "acronym": ""
+    },
+    "953": {
+      "name": "IPA - AM",
+      "acronym": ""
+    },
+    "954": {
+      "name": "VIU ALP",
+      "acronym": ""
+    },
+    "955": {
+      "name": "APC-AM",
+      "acronym": ""
+    },
+    "956": {
+      "name": "EA-IDSELVA",
+      "acronym": ""
+    },
+    "957": {
+      "name": "IPA",
+      "acronym": ""
+    },
+    "958": {
+      "name": "IXA- AM",
+      "acronym": ""
+    },
+    "959": {
+      "name": "ERC- SOMB-AM",
+      "acronym": ""
+    },
+    "960": {
+      "name": "PSC-CIP-CP",
+      "acronym": ""
+    },
+    "961": {
+      "name": "SBNY-CUP-AMUNT",
+      "acronym": ""
+    },
+    "962": {
+      "name": "+BE - C",
+      "acronym": ""
+    },
+    "963": {
+      "name": "JXB-E-ERC - AM",
+      "acronym": ""
+    },
+    "964": {
+      "name": "TXBE-TE",
+      "acronym": ""
+    },
+    "965": {
+      "name": "ERC-IDB- AM",
+      "acronym": ""
+    },
+    "966": {
+      "name": "PSC-IPLB-CP",
+      "acronym": ""
+    },
+    "967": {
+      "name": "CUP-SP-AMUNT",
+      "acronym": ""
+    },
+    "968": {
+      "name": "LBECP - C",
+      "acronym": ""
+    },
+    "969": {
+      "name": "TXLB - TE",
+      "acronym": ""
+    },
+    "970": {
+      "name": "AMXB-AM",
+      "acronym": ""
+    },
+    "971": {
+      "name": "BLANES, SÍ - ARA PL",
+      "acronym": ""
+    },
+    "972": {
+      "name": "GRUP BLANES",
+      "acronym": ""
+    },
+    "973": {
+      "name": "MXBE-AM",
+      "acronym": ""
+    },
+    "974": {
+      "name": "MB-AMUNT",
+      "acronym": ""
+    },
+    "975": {
+      "name": "FB-AM",
+      "acronym": ""
+    },
+    "976": {
+      "name": "SC-TE",
+      "acronym": ""
+    },
+    "977": {
+      "name": "FEMCDQ-IDC",
+      "acronym": ""
+    },
+    "978": {
+      "name": "SOM CALDES-AMUNT",
+      "acronym": ""
+    },
+    "979": {
+      "name": "AVANCEM - ARA PL",
+      "acronym": ""
+    },
+    "980": {
+      "name": "G-CISA-AMUNT",
+      "acronym": ""
+    },
+    "981": {
+      "name": "SOMCISA",
+      "acronym": ""
+    },
+    "982": {
+      "name": "TPP - TE",
+      "acronym": ""
+    },
+    "983": {
+      "name": "ERC-SOMC-AM",
+      "acronym": ""
+    },
+    "984": {
+      "name": "IDR-IDC",
+      "acronym": ""
+    },
+    "985": {
+      "name": "ACIEB - AM",
+      "acronym": ""
+    },
+    "986": {
+      "name": "EC-AM",
+      "acronym": ""
+    },
+    "987": {
+      "name": "TPC - CP",
+      "acronym": ""
+    },
+    "988": {
+      "name": "+C - ERC - AM",
+      "acronym": ""
+    },
+    "989": {
+      "name": "IPC-AM",
+      "acronym": ""
+    },
+    "990": {
+      "name": "FC-AM",
+      "acronym": ""
+    },
+    "991": {
+      "name": "BNC",
+      "acronym": ""
+    },
+    "992": {
+      "name": "LVAEC - C",
+      "acronym": ""
+    },
+    "993": {
+      "name": "SOM - TE",
+      "acronym": ""
+    },
+    "994": {
+      "name": "+CASTELLFOLLIT-AM",
+      "acronym": ""
+    },
+    "995": {
+      "name": "SOMEC-TE",
+      "acronym": ""
+    },
+    "996": {
+      "name": "SC - IDSELVA",
+      "acronym": ""
+    },
+    "997": {
+      "name": "CAM - AM",
+      "acronym": ""
+    },
+    "998": {
+      "name": "SP-CUP-AMUNT",
+      "acronym": ""
+    },
+    "999": {
+      "name": "ACR-SP-AMUNT",
+      "acronym": ""
+    },
+    "1000": {
+      "name": "IPC-AMUNT",
+      "acronym": ""
+    },
+    "1001": {
+      "name": "FP-TE",
+      "acronym": ""
+    },
+    "1002": {
+      "name": "+CCCM - AM",
+      "acronym": ""
+    },
+    "1003": {
+      "name": "CPC- ERC-AM",
+      "acronym": ""
+    },
+    "1004": {
+      "name": "SOMC-AM",
+      "acronym": ""
+    },
+    "1005": {
+      "name": "AVENÇ - AM",
+      "acronym": ""
+    },
+    "1006": {
+      "name": "TXD-TE",
+      "acronym": ""
+    },
+    "1007": {
+      "name": "APL'E-ARA PL",
+      "acronym": ""
+    },
+    "1008": {
+      "name": "ECL-C",
+      "acronym": ""
+    },
+    "1009": {
+      "name": "G'E-SP-AMUNT",
+      "acronym": ""
+    },
+    "1010": {
+      "name": "EPF-AM",
+      "acronym": ""
+    },
+    "1011": {
+      "name": "ERC-SOME- AM",
+      "acronym": ""
+    },
+    "1012": {
+      "name": "FV-ERC-AM",
+      "acronym": ""
+    },
+    "1013": {
+      "name": "AXF - AM",
+      "acronym": ""
+    },
+    "1014": {
+      "name": "AFC - ARA PL",
+      "acronym": ""
+    },
+    "1015": {
+      "name": "ERC-AMPFV-AM",
+      "acronym": ""
+    },
+    "1016": {
+      "name": "MESF",
+      "acronym": ""
+    },
+    "1017": {
+      "name": "TSF - AM",
+      "acronym": ""
+    },
+    "1018": {
+      "name": "IPF-AMUNT",
+      "acronym": ""
+    },
+    "1019": {
+      "name": "GPF-AM",
+      "acronym": ""
+    },
+    "1020": {
+      "name": "SG-AM",
+      "acronym": ""
+    },
+    "1021": {
+      "name": "ERC- AM",
+      "acronym": ""
+    },
+    "1022": {
+      "name": "EG-AM",
+      "acronym": ""
+    },
+    "1023": {
+      "name": "GGI-AMUNT",
+      "acronym": ""
+    },
+    "1024": {
+      "name": "TJFG - AM",
+      "acronym": ""
+    },
+    "1025": {
+      "name": "TFG - TE",
+      "acronym": ""
+    },
+    "1026": {
+      "name": "ESCOLTEM",
+      "acronym": ""
+    },
+    "1027": {
+      "name": "SXH-AM",
+      "acronym": ""
+    },
+    "1028": {
+      "name": "HA - IDSELVA",
+      "acronym": ""
+    },
+    "1029": {
+      "name": "GDJ",
+      "acronym": ""
+    },
+    "1030": {
+      "name": "SJ",
+      "acronym": ""
+    },
+    "1031": {
+      "name": "TPLJ - SOS - CP",
+      "acronym": ""
+    },
+    "1032": {
+      "name": "ESTIMEM J-AM",
+      "acronym": ""
+    },
+    "1033": {
+      "name": "CUP-ALL-AMUNT",
+      "acronym": ""
+    },
+    "1034": {
+      "name": "TXLL-AM",
+      "acronym": ""
+    },
+    "1035": {
+      "name": "AXL - TE",
+      "acronym": ""
+    },
+    "1036": {
+      "name": "ERC-",
+      "acronym": ""
+    },
+    "1037": {
+      "name": "IXLL-AM",
+      "acronym": ""
+    },
+    "1038": {
+      "name": "FLL",
+      "acronym": ""
+    },
+    "1039": {
+      "name": "PERLL",
+      "acronym": ""
+    },
+    "1040": {
+      "name": "+LLORET - IDSELVA",
+      "acronym": ""
+    },
+    "1041": {
+      "name": "TOTS PER LLORET - ARA PL",
+      "acronym": ""
+    },
+    "1042": {
+      "name": "TLLL",
+      "acronym": ""
+    },
+    "1043": {
+      "name": "MS-AM",
+      "acronym": ""
+    },
+    "1044": {
+      "name": "TXM-TE",
+      "acronym": ""
+    },
+    "1045": {
+      "name": "MÉSXMÇ-ERC-AM",
+      "acronym": ""
+    },
+    "1046": {
+      "name": "IPM-AM",
+      "acronym": ""
+    },
+    "1047": {
+      "name": "IPM - AM",
+      "acronym": ""
+    },
+    "1048": {
+      "name": "SOM - IDSELVA",
+      "acronym": ""
+    },
+    "1049": {
+      "name": "VM",
+      "acronym": ""
+    },
+    "1050": {
+      "name": "AMM - AM",
+      "acronym": ""
+    },
+    "1051": {
+      "name": "SMO",
+      "acronym": ""
+    },
+    "1052": {
+      "name": "SM-AM",
+      "acronym": ""
+    },
+    "1053": {
+      "name": "IPO-ERC-AM",
+      "acronym": ""
+    },
+    "1054": {
+      "name": "ACTIVEM",
+      "acronym": ""
+    },
+    "1055": {
+      "name": "UFO - AM",
+      "acronym": ""
+    },
+    "1056": {
+      "name": "SGDP - TE",
+      "acronym": ""
+    },
+    "1057": {
+      "name": "SOM-HI - TE",
+      "acronym": ""
+    },
+    "1058": {
+      "name": "AD'EPDSE",
+      "acronym": ""
+    },
+    "1059": {
+      "name": "GDP - AM",
+      "acronym": ""
+    },
+    "1060": {
+      "name": "FP - TE",
+      "acronym": ""
+    },
+    "1061": {
+      "name": "AXT-TE",
+      "acronym": ""
+    },
+    "1062": {
+      "name": "GDP-AM",
+      "acronym": ""
+    },
+    "1063": {
+      "name": "JXP - AM",
+      "acronym": ""
+    },
+    "1064": {
+      "name": "+P - AM",
+      "acronym": ""
+    },
+    "1065": {
+      "name": "SGDP-AM",
+      "acronym": ""
+    },
+    "1066": {
+      "name": "IDV-AMUNT",
+      "acronym": ""
+    },
+    "1067": {
+      "name": "ELPH",
+      "acronym": ""
+    },
+    "1068": {
+      "name": "CXP",
+      "acronym": ""
+    },
+    "1069": {
+      "name": "SP - AM",
+      "acronym": ""
+    },
+    "1070": {
+      "name": "IDP-AM",
+      "acronym": ""
+    },
+    "1071": {
+      "name": "SEP - AM",
+      "acronym": ""
+    },
+    "1072": {
+      "name": "SXP-CP",
+      "acronym": ""
+    },
+    "1073": {
+      "name": "IP - ERC - AM",
+      "acronym": ""
+    },
+    "1074": {
+      "name": "FTR",
+      "acronym": ""
+    },
+    "1075": {
+      "name": "QA",
+      "acronym": ""
+    },
+    "1076": {
+      "name": "MREC - C",
+      "acronym": ""
+    },
+    "1077": {
+      "name": "ERC - TFR - AM",
+      "acronym": ""
+    },
+    "1078": {
+      "name": "ERC - GIR - AM",
+      "acronym": ""
+    },
+    "1079": {
+      "name": "SE·RIV - IDSELVA",
+      "acronym": ""
+    },
+    "1080": {
+      "name": "SOMRIU -IDSELVA",
+      "acronym": ""
+    },
+    "1081": {
+      "name": "SOM- IDSELVA",
+      "acronym": ""
+    },
+    "1082": {
+      "name": "TXR - TE",
+      "acronym": ""
+    },
+    "1083": {
+      "name": "RA - AM",
+      "acronym": ""
+    },
+    "1084": {
+      "name": "ERC-SR-AM",
+      "acronym": ""
+    },
+    "1085": {
+      "name": "GDPR-TE",
+      "acronym": ""
+    },
+    "1086": {
+      "name": "LLXROSES - ARA PL",
+      "acronym": ""
+    },
+    "1087": {
+      "name": "SR",
+      "acronym": ""
+    },
+    "1088": {
+      "name": "TPS",
+      "acronym": ""
+    },
+    "1089": {
+      "name": "SAP-AMUNT",
+      "acronym": ""
+    },
+    "1090": {
+      "name": "IPS-CUP-AMUNT",
+      "acronym": ""
+    },
+    "1091": {
+      "name": "ISAF-AM",
+      "acronym": ""
+    },
+    "1092": {
+      "name": "TSF-TE",
+      "acronym": ""
+    },
+    "1093": {
+      "name": "GDC-ECP-C",
+      "acronym": ""
+    },
+    "1094": {
+      "name": "MÉSSFG - SOMMESCAT",
+      "acronym": ""
+    },
+    "1095": {
+      "name": "UXSF-ERC-AM",
+      "acronym": ""
+    },
+    "1096": {
+      "name": "PIG-IDSELVA",
+      "acronym": ""
+    },
+    "1097": {
+      "name": "MES-SOMMESCAT",
+      "acronym": ""
+    },
+    "1098": {
+      "name": "JPERM-AM",
+      "acronym": ""
+    },
+    "1099": {
+      "name": "SP1972-AMUNT",
+      "acronym": ""
+    },
+    "1100": {
+      "name": "CSLLM-AM",
+      "acronym": ""
+    },
+    "1101": {
+      "name": "ILL-AM",
+      "acronym": ""
+    },
+    "1102": {
+      "name": "TXSMV-AM",
+      "acronym": ""
+    },
+    "1103": {
+      "name": "SOMSMC-AM",
+      "acronym": ""
+    },
+    "1104": {
+      "name": "SOM SANT MORI",
+      "acronym": ""
+    },
+    "1105": {
+      "name": "+SP - AM",
+      "acronym": ""
+    },
+    "1106": {
+      "name": "IXSPP-AM",
+      "acronym": ""
+    },
+    "1107": {
+      "name": "ISC-IDSELVA",
+      "acronym": ""
+    },
+    "1108": {
+      "name": "SOM-HI-ERC-AM",
+      "acronym": ""
+    },
+    "1109": {
+      "name": "TXSCA - TE",
+      "acronym": ""
+    },
+    "1110": {
+      "name": "GNR - C",
+      "acronym": ""
+    },
+    "1111": {
+      "name": "UXSP-AM",
+      "acronym": ""
+    },
+    "1112": {
+      "name": "PAS-AMUNT",
+      "acronym": ""
+    },
+    "1113": {
+      "name": "SOM-HI-AM",
+      "acronym": ""
+    },
+    "1114": {
+      "name": "GPS-AM",
+      "acronym": ""
+    },
+    "1115": {
+      "name": "F+X SETCASES - AM",
+      "acronym": ""
+    },
+    "1116": {
+      "name": "F+S - AM",
+      "acronym": ""
+    },
+    "1117": {
+      "name": "IDSILS - IDSELVA",
+      "acronym": ""
+    },
+    "1118": {
+      "name": "SECP - C",
+      "acronym": ""
+    },
+    "1119": {
+      "name": "TXS-AM",
+      "acronym": ""
+    },
+    "1120": {
+      "name": "VCTMT",
+      "acronym": ""
+    },
+    "1121": {
+      "name": "RU - AM",
+      "acronym": ""
+    },
+    "1122": {
+      "name": "ET-AM",
+      "acronym": ""
+    },
+    "1123": {
+      "name": "TXT-TE",
+      "acronym": ""
+    },
+    "1124": {
+      "name": "UPM",
+      "acronym": ""
+    },
+    "1125": {
+      "name": "COMPROMÍS - ARA PL",
+      "acronym": ""
+    },
+    "1126": {
+      "name": "L'EST-TE",
+      "acronym": ""
+    },
+    "1127": {
+      "name": "OTE-AMUNT",
+      "acronym": ""
+    },
+    "1128": {
+      "name": "ST-ERC-AM",
+      "acronym": ""
+    },
+    "1129": {
+      "name": "ENDAVANT TOSSA - FIC",
+      "acronym": ""
+    },
+    "1130": {
+      "name": "TOSSA SEMPRE!",
+      "acronym": ""
+    },
+    "1131": {
+      "name": "TU-IDSELVA",
+      "acronym": ""
+    },
+    "1132": {
+      "name": "MOU - AM",
+      "acronym": ""
+    },
+    "1133": {
+      "name": "TCU - AM",
+      "acronym": ""
+    },
+    "1134": {
+      "name": "UU - AM",
+      "acronym": ""
+    },
+    "1135": {
+      "name": "LVP-AM",
+      "acronym": ""
+    },
+    "1136": {
+      "name": "TPV - AM",
+      "acronym": ""
+    },
+    "1137": {
+      "name": "AV-AMUNT",
+      "acronym": ""
+    },
+    "1138": {
+      "name": "FV-AM",
+      "acronym": ""
+    },
+    "1139": {
+      "name": "SXV-AM",
+      "acronym": ""
+    },
+    "1140": {
+      "name": "IPV - AM",
+      "acronym": ""
+    },
+    "1141": {
+      "name": "SV-AM",
+      "acronym": ""
+    },
+    "1142": {
+      "name": "TXV-TE",
+      "acronym": ""
+    },
+    "1143": {
+      "name": "UXVI-IDC",
+      "acronym": ""
+    },
+    "1144": {
+      "name": "GPV- AM",
+      "acronym": ""
+    },
+    "1145": {
+      "name": "ERC-SOMV-AM",
+      "acronym": ""
+    },
+    "1146": {
+      "name": "SPV-AM",
+      "acronym": ""
+    },
+    "1147": {
+      "name": "IV",
+      "acronym": ""
+    },
+    "1148": {
+      "name": "SV - TE",
+      "acronym": ""
+    },
+    "1149": {
+      "name": "APV",
+      "acronym": ""
+    },
+    "1150": {
+      "name": "VDVT - AM",
+      "acronym": ""
+    },
+    "1151": {
+      "name": "IXV-AM",
+      "acronym": ""
+    },
+    "1152": {
+      "name": "MXV - TE",
+      "acronym": ""
+    },
+    "1153": {
+      "name": "GMI-VO-IDSELVA",
+      "acronym": ""
+    },
+    "1154": {
+      "name": "VIU - ARA PL",
+      "acronym": ""
+    },
+    "1155": {
+      "name": "ACUDE",
+      "acronym": ""
+    },
+    "1156": {
+      "name": "POR ALDEIRE",
+      "acronym": ""
+    },
+    "1157": {
+      "name": "APAS",
+      "acronym": ""
+    },
+    "1158": {
+      "name": "IAG",
+      "acronym": ""
+    },
+    "1159": {
+      "name": "UPC",
+      "acronym": ""
+    },
+    "1160": {
+      "name": "NC",
+      "acronym": ""
+    },
+    "1161": {
+      "name": "VXCH",
+      "acronym": ""
+    },
+    "1162": {
+      "name": "FTUC",
+      "acronym": ""
+    },
+    "1163": {
+      "name": "P.J.P.C",
+      "acronym": ""
+    },
+    "1164": {
+      "name": "AICB",
+      "acronym": ""
+    },
+    "1165": {
+      "name": "GICG",
+      "acronym": ""
+    },
+    "1166": {
+      "name": "PDS",
+      "acronym": ""
+    },
+    "1167": {
+      "name": "ALTERNATIVA DURQUEÑA",
+      "acronym": ""
+    },
+    "1168": {
+      "name": "GOREÑOS POR GOR",
+      "acronym": ""
+    },
+    "1169": {
+      "name": "AGX",
+      "acronym": ""
+    },
+    "1170": {
+      "name": "UPG",
+      "acronym": ""
+    },
+    "1171": {
+      "name": "POR HUENEJA Y LA HUERTEZUELA",
+      "acronym": ""
+    },
+    "1172": {
+      "name": "I.H.S.",
+      "acronym": ""
+    },
+    "1173": {
+      "name": "JCM",
+      "acronym": ""
+    },
+    "1174": {
+      "name": "UPL",
+      "acronym": ""
+    },
+    "1175": {
+      "name": "AVELOTIC",
+      "acronym": ""
+    },
+    "1176": {
+      "name": "CIL",
+      "acronym": ""
+    },
+    "1177": {
+      "name": "MC23",
+      "acronym": ""
+    },
+    "1178": {
+      "name": "QM",
+      "acronym": ""
+    },
+    "1179": {
+      "name": "COM",
+      "acronym": ""
+    },
+    "1180": {
+      "name": "IU-VERDES EQUO PARA LA GENTE",
+      "acronym": ""
+    },
+    "1181": {
+      "name": "PMAS",
+      "acronym": ""
+    },
+    "1182": {
+      "name": "AVANZA NIGÜELAS",
+      "acronym": ""
+    },
+    "1183": {
+      "name": "GIN",
+      "acronym": ""
+    },
+    "1184": {
+      "name": "APPO",
+      "acronym": ""
+    },
+    "1185": {
+      "name": "P´ALANTE ÓRGIVA",
+      "acronym": ""
+    },
+    "1186": {
+      "name": "PGPE",
+      "acronym": ""
+    },
+    "1187": {
+      "name": "PGI",
+      "acronym": ""
+    },
+    "1188": {
+      "name": "UIMUP",
+      "acronym": ""
+    },
+    "1189": {
+      "name": "IU PARA LA GENTE",
+      "acronym": ""
+    },
+    "1190": {
+      "name": "GRITO",
+      "acronym": ""
+    },
+    "1191": {
+      "name": "A.I.VA",
+      "acronym": ""
+    },
+    "1192": {
+      "name": "VXV",
+      "acronym": ""
+    },
+    "1193": {
+      "name": "IPV",
+      "acronym": ""
+    },
+    "1194": {
+      "name": "LZY",
+      "acronym": ""
+    },
+    "1195": {
+      "name": "GDZ",
+      "acronym": ""
+    },
+    "1196": {
+      "name": "CIHGU",
+      "acronym": ""
+    },
+    "1197": {
+      "name": "GRIAL",
+      "acronym": ""
+    },
+    "1198": {
+      "name": "UNIDAS",
+      "acronym": ""
+    },
+    "1199": {
+      "name": "AEA",
+      "acronym": ""
+    },
+    "1200": {
+      "name": "ALTERNATIVA ALOVERA",
+      "acronym": ""
+    },
+    "1201": {
+      "name": "ADANGON",
+      "acronym": ""
+    },
+    "1202": {
+      "name": "ARMALLONES +",
+      "acronym": ""
+    },
+    "1203": {
+      "name": "A.R.G.A.",
+      "acronym": ""
+    },
+    "1204": {
+      "name": "UNIDAS-PODEMOS-IU",
+      "acronym": ""
+    },
+    "1205": {
+      "name": "CONTIGO",
+      "acronym": ""
+    },
+    "1206": {
+      "name": "HEM",
+      "acronym": ""
+    },
+    "1207": {
+      "name": "ETF",
+      "acronym": ""
+    },
+    "1208": {
+      "name": "AGRUPACION INDEPENDIENTE DE FUENTELAHIGUERA",
+      "acronym": ""
+    },
+    "1209": {
+      "name": "AEF",
+      "acronym": ""
+    },
+    "1210": {
+      "name": "G A",
+      "acronym": ""
+    },
+    "1211": {
+      "name": "A GUADALAJARA HAY QUE QUERERLA",
+      "acronym": ""
+    },
+    "1212": {
+      "name": "TLP",
+      "acronym": ""
+    },
+    "1213": {
+      "name": "FO",
+      "acronym": ""
+    },
+    "1214": {
+      "name": "AEN",
+      "acronym": ""
+    },
+    "1215": {
+      "name": "PV",
+      "acronym": ""
+    },
+    "1216": {
+      "name": "AGRUPACION DE ELECTORES POR EL CAMBIO",
+      "acronym": ""
+    },
+    "1217": {
+      "name": "AGRUPACION DE ELECTORES POR TI PERALEJOS",
+      "acronym": ""
+    },
+    "1218": {
+      "name": "AGRUPACION DE ELECTORES RUEDA DE LA SIERRA",
+      "acronym": ""
+    },
+    "1219": {
+      "name": "AETYP",
+      "acronym": ""
+    },
+    "1220": {
+      "name": "A.C.U.A.",
+      "acronym": ""
+    },
+    "1221": {
+      "name": "AID",
+      "acronym": ""
+    },
+    "1222": {
+      "name": "ATLV",
+      "acronym": ""
+    },
+    "1223": {
+      "name": "40C",
+      "acronym": ""
+    },
+    "1224": {
+      "name": "AEPA",
+      "acronym": ""
+    },
+    "1225": {
+      "name": "AHORA INDEPENDIENTES",
+      "acronym": ""
+    },
+    "1226": {
+      "name": "ILUSIONA",
+      "acronym": ""
+    },
+    "1227": {
+      "name": "MESA",
+      "acronym": ""
+    },
+    "1228": {
+      "name": "SOMOS PUEBLO",
+      "acronym": ""
+    },
+    "1229": {
+      "name": "IULV-CA",
+      "acronym": ""
+    },
+    "1230": {
+      "name": "ICAR",
+      "acronym": ""
+    },
+    "1231": {
+      "name": "XH",
+      "acronym": ""
+    },
+    "1232": {
+      "name": "PNP",
+      "acronym": ""
+    },
+    "1233": {
+      "name": "ANDALUCÍA POR SI",
+      "acronym": ""
+    },
+    "1234": {
+      "name": "P.I.F",
+      "acronym": ""
+    },
+    "1235": {
+      "name": "AVEMA",
+      "acronym": ""
+    },
+    "1236": {
+      "name": "X NERVA",
+      "acronym": ""
+    },
+    "1237": {
+      "name": "LP+",
+      "acronym": ""
+    },
+    "1238": {
+      "name": "CON ANDALUCÍA - IZQUIERDA UNIDA CON PATERNA",
+      "acronym": ""
+    },
+    "1239": {
+      "name": "UPU",
+      "acronym": ""
+    },
+    "1240": {
+      "name": "F.C.V.",
+      "acronym": ""
+    },
+    "1241": {
+      "name": "MÁS VILLARRASA",
+      "acronym": ""
+    },
+    "1242": {
+      "name": "PAR",
+      "acronym": ""
+    },
+    "1243": {
+      "name": "P A",
+      "acronym": ""
+    },
+    "1244": {
+      "name": "CHA",
+      "acronym": ""
+    },
+    "1245": {
+      "name": "EXISTE",
+      "acronym": ""
+    },
+    "1246": {
+      "name": "CS-TÚ ARAGÓN",
+      "acronym": ""
+    },
+    "1247": {
+      "name": "CIUDADANOS-TÚ ARAGÓN",
+      "acronym": ""
+    },
+    "1248": {
+      "name": "AMPMA",
+      "acronym": ""
+    },
+    "1249": {
+      "name": "F.I.A.",
+      "acronym": ""
+    },
+    "1250": {
+      "name": "ECCBARBASTRO",
+      "acronym": ""
+    },
+    "1251": {
+      "name": "IVB",
+      "acronym": ""
+    },
+    "1252": {
+      "name": "GML",
+      "acronym": ""
+    },
+    "1253": {
+      "name": "CB",
+      "acronym": ""
+    },
+    "1254": {
+      "name": "AEPTB",
+      "acronym": ""
+    },
+    "1255": {
+      "name": "ARAGÓN EXISTE",
+      "acronym": ""
+    },
+    "1256": {
+      "name": "ETXSBC",
+      "acronym": ""
+    },
+    "1257": {
+      "name": "POR LA FUEVA",
+      "acronym": ""
+    },
+    "1258": {
+      "name": "AGRUPACION ELECTORAL IBIECA",
+      "acronym": ""
+    },
+    "1259": {
+      "name": "ARAGONESES-PLATAFORMA ARAGONESISTA",
+      "acronym": ""
+    },
+    "1260": {
+      "name": "+JACA-PODEMOS-AV",
+      "acronym": ""
+    },
+    "1261": {
+      "name": "AMIL",
+      "acronym": ""
+    },
+    "1262": {
+      "name": "LOCUR",
+      "acronym": ""
+    },
+    "1263": {
+      "name": "LOPORVENIR",
+      "acronym": ""
+    },
+    "1264": {
+      "name": "MF",
+      "acronym": ""
+    },
+    "1265": {
+      "name": "CM-IU",
+      "acronym": ""
+    },
+    "1266": {
+      "name": "AGRUPACION DE ELECTORES ASTORITO",
+      "acronym": ""
+    },
+    "1267": {
+      "name": "CISGR",
+      "acronym": ""
+    },
+    "1268": {
+      "name": "TS",
+      "acronym": ""
+    },
+    "1269": {
+      "name": "CLS",
+      "acronym": ""
+    },
+    "1270": {
+      "name": "AVANÇAM",
+      "acronym": ""
+    },
+    "1271": {
+      "name": "MÉS",
+      "acronym": ""
+    },
+    "1273": {
+      "name": "UPERA",
+      "acronym": ""
+    },
+    "1274": {
+      "name": "EL PI",
+      "acronym": ""
+    },
+    "1275": {
+      "name": "EUIB - UNIDAS PODEMOS",
+      "acronym": ""
+    },
+    "1276": {
+      "name": "UIA-MÉS",
+      "acronym": ""
+    },
+    "1277": {
+      "name": "BPC",
+      "acronym": ""
+    },
+    "1278": {
+      "name": "UXB",
+      "acronym": ""
+    },
+    "1279": {
+      "name": "TXB",
+      "acronym": ""
+    },
+    "1280": {
+      "name": "EOB",
+      "acronym": ""
+    },
+    "1281": {
+      "name": "SOM AVI - EL PI",
+      "acronym": ""
+    },
+    "1282": {
+      "name": "AEMC",
+      "acronym": ""
+    },
+    "1283": {
+      "name": "PSIB PSOE EUIB INDEPENDENTS",
+      "acronym": ""
+    },
+    "1284": {
+      "name": "IPEC",
+      "acronym": ""
+    },
+    "1285": {
+      "name": "SOM ES CASTELL",
+      "acronym": ""
+    },
+    "1286": {
+      "name": "PSM MXM",
+      "acronym": ""
+    },
+    "1287": {
+      "name": "CIUTADELLA ENDAVANT",
+      "acronym": ""
+    },
+    "1288": {
+      "name": "A DEIÀ",
+      "acronym": ""
+    },
+    "1289": {
+      "name": "PERXB",
+      "acronym": ""
+    },
+    "1290": {
+      "name": "PSIB-PSOE-EUIB",
+      "acronym": ""
+    },
+    "1291": {
+      "name": "BLOC-MÉS",
+      "acronym": ""
+    },
+    "1292": {
+      "name": "ENTESA",
+      "acronym": ""
+    },
+    "1293": {
+      "name": "SA UNIÓ",
+      "acronym": ""
+    },
+    "1294": {
+      "name": "GXF",
+      "acronym": ""
+    },
+    "1295": {
+      "name": "E.LL",
+      "acronym": ""
+    },
+    "1296": {
+      "name": "ARA SI",
+      "acronym": ""
+    },
+    "1297": {
+      "name": "FXLL",
+      "acronym": ""
+    },
+    "1298": {
+      "name": "FUTUR LLUBÍ-EL PI",
+      "acronym": ""
+    },
+    "1299": {
+      "name": "ASI",
+      "acronym": ""
+    },
+    "1300": {
+      "name": "LLIBERTAT LLUCMAJOR",
+      "acronym": ""
+    },
+    "1301": {
+      "name": "S´ULL",
+      "acronym": ""
+    },
+    "1302": {
+      "name": "AIPC/SYS",
+      "acronym": ""
+    },
+    "1303": {
+      "name": "ARA MAÓ",
+      "acronym": ""
+    },
+    "1304": {
+      "name": "UIM",
+      "acronym": ""
+    },
+    "1305": {
+      "name": "C.D.M.",
+      "acronym": ""
+    },
+    "1306": {
+      "name": "IXSP",
+      "acronym": ""
+    },
+    "1307": {
+      "name": "TOTS-ELPI",
+      "acronym": ""
+    },
+    "1308": {
+      "name": "UMP",
+      "acronym": ""
+    },
+    "1309": {
+      "name": "IPG-MÉS",
+      "acronym": ""
+    },
+    "1310": {
+      "name": "PSIB - PSOE - MES PER MALLORCA - INDEPENDENTS",
+      "acronym": ""
+    },
+    "1311": {
+      "name": "SANTI",
+      "acronym": ""
+    },
+    "1312": {
+      "name": "SVDP+CS",
+      "acronym": ""
+    },
+    "1313": {
+      "name": "ARA EIVISSA-AM",
+      "acronym": ""
+    },
+    "1314": {
+      "name": "GENT COSTA - EL PI",
+      "acronym": ""
+    },
+    "1315": {
+      "name": "UICA",
+      "acronym": ""
+    },
+    "1316": {
+      "name": "VOLEM SANT LLUÍS",
+      "acronym": ""
+    },
+    "1317": {
+      "name": "COALICIÓ CONVERGENCIA",
+      "acronym": ""
+    },
+    "1318": {
+      "name": "SUMA",
+      "acronym": ""
+    },
+    "1319": {
+      "name": "ARRELAM-MÉS-PSIB",
+      "acronym": ""
+    },
+    "1320": {
+      "name": "F.C.",
+      "acronym": ""
+    },
+    "1321": {
+      "name": "VOLEM SENCELLES",
+      "acronym": ""
+    },
+    "1322": {
+      "name": "MÉS-EU",
+      "acronym": ""
+    },
+    "1323": {
+      "name": "SENY",
+      "acronym": ""
+    },
+    "1324": {
+      "name": "IXSMB",
+      "acronym": ""
+    },
+    "1325": {
+      "name": "UNIDOS PODEMOS",
+      "acronym": ""
+    },
+    "1326": {
+      "name": "G.I.V.",
+      "acronym": ""
+    },
+    "1327": {
+      "name": "PXP",
+      "acronym": ""
+    },
+    "1328": {
+      "name": "ASSEMBLEA PER VILAFRANCA",
+      "acronym": ""
+    },
+    "1329": {
+      "name": "(UA)",
+      "acronym": ""
+    },
+    "1330": {
+      "name": "P.AR.",
+      "acronym": ""
+    },
+    "1331": {
+      "name": "AIBAILEN",
+      "acronym": ""
+    },
+    "1332": {
+      "name": "AGRUPACION ELECTORAL INDEPENDIENTE-CAMBIAR",
+      "acronym": ""
+    },
+    "1333": {
+      "name": "JM+",
+      "acronym": ""
+    },
+    "1334": {
+      "name": "POR FDR",
+      "acronym": ""
+    },
+    "1335": {
+      "name": "PSLF",
+      "acronym": ""
+    },
+    "1336": {
+      "name": "IUF",
+      "acronym": ""
+    },
+    "1337": {
+      "name": "U.D.J",
+      "acronym": ""
+    },
+    "1338": {
+      "name": "A.U.P.A.",
+      "acronym": ""
+    },
+    "1339": {
+      "name": "MI RUS",
+      "acronym": ""
+    },
+    "1340": {
+      "name": "UXS",
+      "acronym": ""
+    },
+    "1341": {
+      "name": "IZQUIERDA UNIDA ANDALUCÍA PARA LA GENTE",
+      "acronym": ""
+    },
+    "1342": {
+      "name": "U.D.Vª.Q.",
+      "acronym": ""
+    },
+    "1343": {
+      "name": "AXV",
+      "acronym": ""
+    },
+    "1344": {
+      "name": "U.P.L.",
+      "acronym": ""
+    },
+    "1345": {
+      "name": "ALANTRE VERDES EQUO",
+      "acronym": ""
+    },
+    "1346": {
+      "name": "C. BIERZO",
+      "acronym": ""
+    },
+    "1347": {
+      "name": "IU CONTIGO",
+      "acronym": ""
+    },
+    "1348": {
+      "name": "X BEMBIBRE",
+      "acronym": ""
+    },
+    "1349": {
+      "name": "VU",
+      "acronym": ""
+    },
+    "1350": {
+      "name": "CITR",
+      "acronym": ""
+    },
+    "1351": {
+      "name": "AGRUPACION DE ELECTORES INDEPENDIENTES DE CIMANES DEL TEJAR",
+      "acronym": ""
+    },
+    "1352": {
+      "name": "C.P.U.",
+      "acronym": ""
+    },
+    "1353": {
+      "name": "A.I.C.",
+      "acronym": ""
+    },
+    "1354": {
+      "name": "AGRUPACION DE ELECTORES ESCOBAR INDEPENDIENTE",
+      "acronym": ""
+    },
+    "1355": {
+      "name": "IPF",
+      "acronym": ""
+    },
+    "1356": {
+      "name": "FC",
+      "acronym": ""
+    },
+    "1357": {
+      "name": "AVG",
+      "acronym": ""
+    },
+    "1358": {
+      "name": "AIPL",
+      "acronym": ""
+    },
+    "1359": {
+      "name": "AIMAP",
+      "acronym": ""
+    },
+    "1360": {
+      "name": "AGRUPACION DEL MUNICIPIO DE SANTA MARINA DEL REY",
+      "acronym": ""
+    },
+    "1361": {
+      "name": "AGRUPACION DE ELECTORES DE TORAL",
+      "acronym": ""
+    },
+    "1362": {
+      "name": "TYP",
+      "acronym": ""
+    },
+    "1363": {
+      "name": "T.B.O.",
+      "acronym": ""
+    },
+    "1364": {
+      "name": "AIMUP",
+      "acronym": ""
+    },
+    "1365": {
+      "name": "CRA",
+      "acronym": ""
+    },
+    "1366": {
+      "name": "P.F",
+      "acronym": ""
+    },
+    "1367": {
+      "name": "APMV",
+      "acronym": ""
+    },
+    "1368": {
+      "name": "XPU",
+      "acronym": ""
+    },
+    "1369": {
+      "name": "VVQ",
+      "acronym": ""
+    },
+    "1370": {
+      "name": "VC",
+      "acronym": ""
+    },
+    "1371": {
+      "name": "ESQUERRA REPUBLICANA DE CATALUNYA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1372": {
+      "name": "JUNTS PER ABELLA DE LA CONCA- COMPROMÍS MUNICIPAL",
+      "acronym": ""
+    },
+    "1373": {
+      "name": "IXA-AM",
+      "acronym": ""
+    },
+    "1374": {
+      "name": "AD´E - AM",
+      "acronym": ""
+    },
+    "1375": {
+      "name": "AR-AM",
+      "acronym": ""
+    },
+    "1376": {
+      "name": "TXEA - AM",
+      "acronym": ""
+    },
+    "1377": {
+      "name": "PXEA - CP",
+      "acronym": ""
+    },
+    "1378": {
+      "name": "CXAC - CP",
+      "acronym": ""
+    },
+    "1379": {
+      "name": "AA-XTU",
+      "acronym": ""
+    },
+    "1380": {
+      "name": "AETS-AM",
+      "acronym": ""
+    },
+    "1381": {
+      "name": "SA - PSC - CP",
+      "acronym": ""
+    },
+    "1382": {
+      "name": "AGRUPACIÓ D'ELECTORS-PRIMER ALCOLETGE",
+      "acronym": ""
+    },
+    "1383": {
+      "name": "IA-AM",
+      "acronym": ""
+    },
+    "1384": {
+      "name": "HORITZO31",
+      "acronym": ""
+    },
+    "1385": {
+      "name": "ENDAVANT VALL FERRERA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1386": {
+      "name": "COMPROMÍS X ALINS - CANDIDATURA DE PROGRÉS (CP)",
+      "acronym": ""
+    },
+    "1387": {
+      "name": "AE-AM",
+      "acronym": ""
+    },
+    "1388": {
+      "name": "IXAB-AM",
+      "acronym": ""
+    },
+    "1389": {
+      "name": "FEM MUNICPI - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1390": {
+      "name": "JUNTS PER LES VALLS D'ÀNEU - ALT ÁNEU CM",
+      "acronym": ""
+    },
+    "1391": {
+      "name": "ERD'A-AM",
+      "acronym": ""
+    },
+    "1392": {
+      "name": "EA-AM",
+      "acronym": ""
+    },
+    "1393": {
+      "name": "CXA - CP",
+      "acronym": ""
+    },
+    "1394": {
+      "name": "CDA-PNA",
+      "acronym": ""
+    },
+    "1395": {
+      "name": "AR - AMUNT",
+      "acronym": ""
+    },
+    "1396": {
+      "name": "MA-AM",
+      "acronym": ""
+    },
+    "1397": {
+      "name": "CADLL-CP",
+      "acronym": ""
+    },
+    "1398": {
+      "name": "CXA-CP",
+      "acronym": ""
+    },
+    "1399": {
+      "name": "IASL-AM",
+      "acronym": ""
+    },
+    "1400": {
+      "name": "SOM-HI BAIX PALLARS",
+      "acronym": ""
+    },
+    "1401": {
+      "name": "VIU BAIX PALLARS - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1402": {
+      "name": "BAS-C",
+      "acronym": ""
+    },
+    "1403": {
+      "name": "JXB-AM",
+      "acronym": ""
+    },
+    "1404": {
+      "name": "IXBR-CP",
+      "acronym": ""
+    },
+    "1405": {
+      "name": "AA-AM",
+      "acronym": ""
+    },
+    "1406": {
+      "name": "IXB - AM",
+      "acronym": ""
+    },
+    "1407": {
+      "name": "BM - AM",
+      "acronym": ""
+    },
+    "1408": {
+      "name": "IXB-AM",
+      "acronym": ""
+    },
+    "1409": {
+      "name": "IBU-AM",
+      "acronym": ""
+    },
+    "1410": {
+      "name": "ARA-PL",
+      "acronym": ""
+    },
+    "1411": {
+      "name": "AMR-AM",
+      "acronym": ""
+    },
+    "1412": {
+      "name": "GRUP INDEPENDENT IL.LUSIONA'T",
+      "acronym": ""
+    },
+    "1413": {
+      "name": "IB-AM-AM",
+      "acronym": ""
+    },
+    "1414": {
+      "name": "TPBA-AM",
+      "acronym": ""
+    },
+    "1415": {
+      "name": "IXB - CP",
+      "acronym": ""
+    },
+    "1416": {
+      "name": "UA-PSC-CP",
+      "acronym": ""
+    },
+    "1417": {
+      "name": "BX REP-XTU",
+      "acronym": ""
+    },
+    "1418": {
+      "name": "IC-AM",
+      "acronym": ""
+    },
+    "1419": {
+      "name": "CXC - CP",
+      "acronym": ""
+    },
+    "1420": {
+      "name": "IXC-AM",
+      "acronym": ""
+    },
+    "1421": {
+      "name": "JUNTS PER CASTELL DE MUR CM",
+      "acronym": ""
+    },
+    "1422": {
+      "name": "UCF-AM",
+      "acronym": ""
+    },
+    "1423": {
+      "name": "VIUC-AM",
+      "acronym": ""
+    },
+    "1424": {
+      "name": "C.U.P. - AMUNT",
+      "acronym": ""
+    },
+    "1425": {
+      "name": "HSPT-AM",
+      "acronym": ""
+    },
+    "1426": {
+      "name": "SIF - FIC",
+      "acronym": ""
+    },
+    "1427": {
+      "name": "IXP-AM",
+      "acronym": ""
+    },
+    "1428": {
+      "name": "CF - AM",
+      "acronym": ""
+    },
+    "1429": {
+      "name": "C-XTU",
+      "acronym": ""
+    },
+    "1430": {
+      "name": "IXC - AM",
+      "acronym": ""
+    },
+    "1431": {
+      "name": "CMXCN-CP",
+      "acronym": ""
+    },
+    "1432": {
+      "name": "FEM CONCA DE DALT - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1433": {
+      "name": "JUNTS PER CONCA DE DALT CM",
+      "acronym": ""
+    },
+    "1434": {
+      "name": "CA-AM",
+      "acronym": ""
+    },
+    "1435": {
+      "name": "TE-XTU",
+      "acronym": ""
+    },
+    "1436": {
+      "name": "GREC-AM",
+      "acronym": ""
+    },
+    "1437": {
+      "name": "VIU ESPOT - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1438": {
+      "name": "COMPROMÍS X ESPOT - CANDIDATURA DE PROGRÉS",
+      "acronym": ""
+    },
+    "1439": {
+      "name": "IME-AM",
+      "acronym": ""
+    },
+    "1440": {
+      "name": "JUNTS PER LES VALLS D'ÀNEU - ESTERRI DÁNEU CM",
+      "acronym": ""
+    },
+    "1441": {
+      "name": "JUNTS PER ESTERRI DE CARDÓS CM",
+      "acronym": ""
+    },
+    "1442": {
+      "name": "ESQUERRA REPUBLICANA DE CATALUNYA FEM MUNICIPI - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1443": {
+      "name": "JUNTS PER TOTS CM",
+      "acronym": ""
+    },
+    "1444": {
+      "name": "SF",
+      "acronym": ""
+    },
+    "1445": {
+      "name": "TFP - AM",
+      "acronym": ""
+    },
+    "1446": {
+      "name": "IFB-AM",
+      "acronym": ""
+    },
+    "1447": {
+      "name": "APF-AM",
+      "acronym": ""
+    },
+    "1448": {
+      "name": "XTU",
+      "acronym": ""
+    },
+    "1449": {
+      "name": "JUNTS PER GAVET DE LA CONCA CM",
+      "acronym": ""
+    },
+    "1450": {
+      "name": "COMPROMÍS X GAVET DE LA CONCA - CANDIDATURA DE PROGRÉS (CXGC-CP)",
+      "acronym": ""
+    },
+    "1451": {
+      "name": "AGRUPACIÓ D'ELECTORS SOM POBLE",
+      "acronym": ""
+    },
+    "1452": {
+      "name": "ASG - AM",
+      "acronym": ""
+    },
+    "1453": {
+      "name": "ASG-X TU",
+      "acronym": ""
+    },
+    "1454": {
+      "name": "GDF - AM",
+      "acronym": ""
+    },
+    "1455": {
+      "name": "FEM MUNICIPI - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1456": {
+      "name": "JUNTS PER LES VALLS D'ÀNEU - LA GUINGUETA D'ÁNEU CM",
+      "acronym": ""
+    },
+    "1457": {
+      "name": "ENDAVANT GUIXERS - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1458": {
+      "name": "JUNTS PER ISONA I CONCA DELLÀ - COMPROMÍS MUNICIPAL",
+      "acronym": ""
+    },
+    "1459": {
+      "name": "ACORD D'ESQUERRA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1460": {
+      "name": "E-AM",
+      "acronym": ""
+    },
+    "1461": {
+      "name": "ARA UXIV-AM",
+      "acronym": ""
+    },
+    "1462": {
+      "name": "CXJT - CP",
+      "acronym": ""
+    },
+    "1463": {
+      "name": "SJT - C",
+      "acronym": ""
+    },
+    "1464": {
+      "name": "TSJ - AM",
+      "acronym": ""
+    },
+    "1465": {
+      "name": "J X TU",
+      "acronym": ""
+    },
+    "1466": {
+      "name": "INDEPENDENTS PEL PROGRÉS - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1467": {
+      "name": "FEM LLARVOSÍ - ESQUERRA REPUBLICANA DE CATALUNYA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1468": {
+      "name": "JUNTS PER LLAVORSÍ - CM",
+      "acronym": ""
+    },
+    "1469": {
+      "name": "PSC-UNITS-CP",
+      "acronym": ""
+    },
+    "1470": {
+      "name": "COMÚDELLEIDA-C",
+      "acronym": ""
+    },
+    "1471": {
+      "name": "FPSP-AM-AM",
+      "acronym": ""
+    },
+    "1472": {
+      "name": "JUNTS PER LLIMIANA CM",
+      "acronym": ""
+    },
+    "1473": {
+      "name": "IXM - AM",
+      "acronym": ""
+    },
+    "1474": {
+      "name": "AM - AM",
+      "acronym": ""
+    },
+    "1475": {
+      "name": "IM - AM",
+      "acronym": ""
+    },
+    "1476": {
+      "name": "IXM-CP",
+      "acronym": ""
+    },
+    "1477": {
+      "name": "IM-AM",
+      "acronym": ""
+    },
+    "1478": {
+      "name": "IXM-AM",
+      "acronym": ""
+    },
+    "1479": {
+      "name": "PMM-AM-AM",
+      "acronym": ""
+    },
+    "1480": {
+      "name": "CXMC - CP",
+      "acronym": ""
+    },
+    "1481": {
+      "name": "EMB-AM",
+      "acronym": ""
+    },
+    "1482": {
+      "name": "MEM - AM",
+      "acronym": ""
+    },
+    "1483": {
+      "name": "CXMLL - CP",
+      "acronym": ""
+    },
+    "1484": {
+      "name": "AXM - ERC - AM",
+      "acronym": ""
+    },
+    "1485": {
+      "name": "CXN - CP",
+      "acronym": ""
+    },
+    "1486": {
+      "name": "FO - AM",
+      "acronym": ""
+    },
+    "1487": {
+      "name": "EXO - AM",
+      "acronym": ""
+    },
+    "1488": {
+      "name": "CXO - CP",
+      "acronym": ""
+    },
+    "1489": {
+      "name": "IOB-AM",
+      "acronym": ""
+    },
+    "1490": {
+      "name": "FMO",
+      "acronym": ""
+    },
+    "1491": {
+      "name": "ARA EL PALAU - AM",
+      "acronym": ""
+    },
+    "1492": {
+      "name": "CXP - CP",
+      "acronym": ""
+    },
+    "1493": {
+      "name": "EPA-AM",
+      "acronym": ""
+    },
+    "1494": {
+      "name": "CIP - AM",
+      "acronym": ""
+    },
+    "1495": {
+      "name": "JUNTS PER LA POBLA DE SEGUR CM",
+      "acronym": ""
+    },
+    "1496": {
+      "name": "P.D.M.",
+      "acronym": ""
+    },
+    "1497": {
+      "name": "TOTHOM AGRUPACIÓ ELECTORAL DEL PONT DE SUERT",
+      "acronym": ""
+    },
+    "1498": {
+      "name": "JUNTS PEL PONT DE SUERT CM",
+      "acronym": ""
+    },
+    "1499": {
+      "name": "PONTS KM0",
+      "acronym": ""
+    },
+    "1500": {
+      "name": "ARA UXP-AM",
+      "acronym": ""
+    },
+    "1501": {
+      "name": "IP-AM",
+      "acronym": ""
+    },
+    "1502": {
+      "name": "AXP-CP",
+      "acronym": ""
+    },
+    "1503": {
+      "name": "JUNTS PER RIALP CM",
+      "acronym": ""
+    },
+    "1504": {
+      "name": "FEM MUNICIPI - VIU RIALP - ESQUERRA REPUBLICANA DE CATALUNYA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1505": {
+      "name": "PRD'O-CP",
+      "acronym": ""
+    },
+    "1506": {
+      "name": "IPR- AM",
+      "acronym": ""
+    },
+    "1507": {
+      "name": "AR - CP",
+      "acronym": ""
+    },
+    "1508": {
+      "name": "VR - AM",
+      "acronym": ""
+    },
+    "1509": {
+      "name": "AMC",
+      "acronym": ""
+    },
+    "1510": {
+      "name": "COMPROMÍS X SALÁS DE PALLARS - CANDIDATURA DE PROGRES (CXSP-CP)",
+      "acronym": ""
+    },
+    "1511": {
+      "name": "IXS-ERC- AM",
+      "acronym": ""
+    },
+    "1512": {
+      "name": "COMPROMÍS X SANT ESTEVE DE LA SARGA - CANDIDATURA DE PROGRÉS",
+      "acronym": ""
+    },
+    "1513": {
+      "name": "SGPV - AMUNT",
+      "acronym": ""
+    },
+    "1514": {
+      "name": "PITEUS-AM",
+      "acronym": ""
+    },
+    "1515": {
+      "name": "MIR - AM",
+      "acronym": ""
+    },
+    "1516": {
+      "name": "UXMSR - CP",
+      "acronym": ""
+    },
+    "1517": {
+      "name": "COMPROMIS X SARROCA DE BELLERA - CANDIDATURA DE PROGRÉS (CXSB-CP)",
+      "acronym": ""
+    },
+    "1518": {
+      "name": "JUNTS PER SARROCA DE BELLERA CM",
+      "acronym": ""
+    },
+    "1519": {
+      "name": "COMPROMIS X SENTERADA - CANDIDATURA DE PROGRÉS (CXS-CP)",
+      "acronym": ""
+    },
+    "1520": {
+      "name": "ESQUERRA REPUBLICANA CATALUNYA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1521": {
+      "name": "JUNTS PER SENTERADA CM",
+      "acronym": ""
+    },
+    "1522": {
+      "name": "IS-AM",
+      "acronym": ""
+    },
+    "1523": {
+      "name": "CXLS - CP",
+      "acronym": ""
+    },
+    "1524": {
+      "name": "ARA SIDAMON-AM",
+      "acronym": ""
+    },
+    "1525": {
+      "name": "IS - AM",
+      "acronym": ""
+    },
+    "1526": {
+      "name": "S-AMUNT",
+      "acronym": ""
+    },
+    "1527": {
+      "name": "VIU SORIGUERA - ESQUERRA REPUBLICANA DE CATALUNYA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1528": {
+      "name": "JUNTS PER SORIGUERA CM",
+      "acronym": ""
+    },
+    "1529": {
+      "name": "SUMEM - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1530": {
+      "name": "ENDAVANT X SORT - CANDIDATURA DE PROGRÉS (CP)",
+      "acronym": ""
+    },
+    "1531": {
+      "name": "GENT DE POBLE",
+      "acronym": ""
+    },
+    "1532": {
+      "name": "AS-AM",
+      "acronym": ""
+    },
+    "1533": {
+      "name": "SOM TALARN - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1534": {
+      "name": "IMT - AM",
+      "acronym": ""
+    },
+    "1535": {
+      "name": "IPT-AMUNT",
+      "acronym": ""
+    },
+    "1536": {
+      "name": "MT-AM",
+      "acronym": ""
+    },
+    "1537": {
+      "name": "VIU TÍRVIA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1538": {
+      "name": "JUNTS PER TIRVIA CM",
+      "acronym": ""
+    },
+    "1539": {
+      "name": "IT-AM",
+      "acronym": ""
+    },
+    "1540": {
+      "name": "IXT - AM",
+      "acronym": ""
+    },
+    "1541": {
+      "name": "PV-AMUNT",
+      "acronym": ""
+    },
+    "1542": {
+      "name": "COMPROMÍS PER LA VALL FOSCA - CANDIDATURA DE PROGRÉS",
+      "acronym": ""
+    },
+    "1543": {
+      "name": "JUNTS PER LA TORRE DE CAPDELLA - COMPROMÍS MUNICIPAL",
+      "acronym": ""
+    },
+    "1544": {
+      "name": "SOM VALL FOSCA",
+      "acronym": ""
+    },
+    "1545": {
+      "name": "TE-CP",
+      "acronym": ""
+    },
+    "1546": {
+      "name": "PSC - UNITS - CP",
+      "acronym": ""
+    },
+    "1547": {
+      "name": "CXT-CP",
+      "acronym": ""
+    },
+    "1548": {
+      "name": "JUNTS PER TREMP - COMPROMÍS MUNICIPAL",
+      "acronym": ""
+    },
+    "1549": {
+      "name": "PER LA VALL - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1550": {
+      "name": "JUNTS PER LA VALL DE BOÍ CM",
+      "acronym": ""
+    },
+    "1551": {
+      "name": "LA NOSTRA VALL DE BOÍ",
+      "acronym": ""
+    },
+    "1552": {
+      "name": "VALL DE CARDÓS AMONT",
+      "acronym": ""
+    },
+    "1553": {
+      "name": "NOVA VALL DE CARDÓS - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "1554": {
+      "name": "CXVM - CP",
+      "acronym": ""
+    },
+    "1555": {
+      "name": "IVA-AM",
+      "acronym": ""
+    },
+    "1556": {
+      "name": "IVV-ERC-AM",
+      "acronym": ""
+    },
+    "1557": {
+      "name": "AIPN - AM",
+      "acronym": ""
+    },
+    "1558": {
+      "name": "IV - AM",
+      "acronym": ""
+    },
+    "1559": {
+      "name": "FP-AM",
+      "acronym": ""
+    },
+    "1560": {
+      "name": "MÉS X VILALLER - CANDIDATURA DE PROGRÉS",
+      "acronym": ""
+    },
+    "1561": {
+      "name": "JUNTS PER VILALLER CM",
+      "acronym": ""
+    },
+    "1562": {
+      "name": "EV",
+      "acronym": ""
+    },
+    "1563": {
+      "name": "TSV - AM",
+      "acronym": ""
+    },
+    "1564": {
+      "name": "CAV - AM",
+      "acronym": ""
+    },
+    "1565": {
+      "name": "VIA ALFOZ",
+      "acronym": ""
+    },
+    "1566": {
+      "name": "CONTAMOS GA.S GLG",
+      "acronym": ""
+    },
+    "1567": {
+      "name": "SNB",
+      "acronym": ""
+    },
+    "1568": {
+      "name": "CIF",
+      "acronym": ""
+    },
+    "1569": {
+      "name": "I.G.V.- C.I.F.",
+      "acronym": ""
+    },
+    "1570": {
+      "name": "CONTAMOS GA.S",
+      "acronym": ""
+    },
+    "1571": {
+      "name": "IXM",
+      "acronym": ""
+    },
+    "1572": {
+      "name": "AP",
+      "acronym": ""
+    },
+    "1573": {
+      "name": "IPQ",
+      "acronym": ""
+    },
+    "1574": {
+      "name": "IR",
+      "acronym": ""
+    },
+    "1575": {
+      "name": "CONTAMOS CAMIÑA SARRIA",
+      "acronym": ""
+    },
+    "1576": {
+      "name": "UDIVAL",
+      "acronym": ""
+    },
+    "1577": {
+      "name": "VILALBABERTA",
+      "acronym": ""
+    },
+    "1578": {
+      "name": "XV",
+      "acronym": ""
+    },
+    "1579": {
+      "name": "CONCEJO ABIERTO LA ACEBEDA",
+      "acronym": ""
+    },
+    "1580": {
+      "name": "AIA",
+      "acronym": ""
+    },
+    "1581": {
+      "name": "MM-VQ AJALVIR",
+      "acronym": ""
+    },
+    "1582": {
+      "name": "ACALA",
+      "acronym": ""
+    },
+    "1583": {
+      "name": "MM-VQ ALCALÁ DE HENARES",
+      "acronym": ""
+    },
+    "1584": {
+      "name": "F-CS",
+      "acronym": ""
+    },
+    "1585": {
+      "name": "MM-VQ ALCOBENDAS",
+      "acronym": ""
+    },
+    "1586": {
+      "name": "G. ALCORCÓN",
+      "acronym": ""
+    },
+    "1587": {
+      "name": "MM-VQ ALCORCÓN",
+      "acronym": ""
+    },
+    "1588": {
+      "name": "USD",
+      "acronym": ""
+    },
+    "1589": {
+      "name": "VXA",
+      "acronym": ""
+    },
+    "1590": {
+      "name": "MM-VQ ALPEDRETE",
+      "acronym": ""
+    },
+    "1591": {
+      "name": "UN.P.A.",
+      "acronym": ""
+    },
+    "1592": {
+      "name": "ADE SA",
+      "acronym": ""
+    },
+    "1593": {
+      "name": "ACIPA",
+      "acronym": ""
+    },
+    "1594": {
+      "name": "IN-PAR-IU-PODEMOS-AV",
+      "acronym": ""
+    },
+    "1595": {
+      "name": "MM-VQ ARANJUEZ",
+      "acronym": ""
+    },
+    "1596": {
+      "name": "VECINOS ARROYOMOLINOS",
+      "acronym": ""
+    },
+    "1597": {
+      "name": "MAS",
+      "acronym": ""
+    },
+    "1598": {
+      "name": "MM-VQ ARROYOMOLINOS",
+      "acronym": ""
+    },
+    "1599": {
+      "name": "IU - PODEMOS - AV",
+      "acronym": ""
+    },
+    "1600": {
+      "name": "SOMOS BECERRIL",
+      "acronym": ""
+    },
+    "1601": {
+      "name": "SB",
+      "acronym": ""
+    },
+    "1602": {
+      "name": "MM-VQ EL BERRUECO",
+      "acronym": ""
+    },
+    "1603": {
+      "name": "MM-VQ BOADILLA DEL MONTE",
+      "acronym": ""
+    },
+    "1604": {
+      "name": "BCM EN COMÚN",
+      "acronym": ""
+    },
+    "1605": {
+      "name": "ABANZA",
+      "acronym": ""
+    },
+    "1606": {
+      "name": "GANAR BRUNETE (IU -PODEMOS)",
+      "acronym": ""
+    },
+    "1607": {
+      "name": "SOMOS CABANILLAS",
+      "acronym": ""
+    },
+    "1608": {
+      "name": "MM-VQ PARTICIPA LA CABRERA",
+      "acronym": ""
+    },
+    "1609": {
+      "name": "ACDE",
+      "acronym": ""
+    },
+    "1610": {
+      "name": "MM-VQ CASARRUBUELOS",
+      "acronym": ""
+    },
+    "1611": {
+      "name": "COMCE",
+      "acronym": ""
+    },
+    "1612": {
+      "name": "G.I. CERCEDILLA",
+      "acronym": ""
+    },
+    "1613": {
+      "name": "MM-VQ CERCEDILLA",
+      "acronym": ""
+    },
+    "1614": {
+      "name": "JXCER",
+      "acronym": ""
+    },
+    "1615": {
+      "name": "VXC",
+      "acronym": ""
+    },
+    "1616": {
+      "name": "RNC",
+      "acronym": ""
+    },
+    "1617": {
+      "name": "MEJORAR CHAPINERIA",
+      "acronym": ""
+    },
+    "1618": {
+      "name": "AVANZA CHINCHÓN",
+      "acronym": ""
+    },
+    "1619": {
+      "name": "ATYSCH",
+      "acronym": ""
+    },
+    "1620": {
+      "name": "C.P.CI",
+      "acronym": ""
+    },
+    "1621": {
+      "name": "MM-VQ CIEMPOZUELOS",
+      "acronym": ""
+    },
+    "1622": {
+      "name": "V.DE.C.",
+      "acronym": ""
+    },
+    "1623": {
+      "name": "VIVE",
+      "acronym": ""
+    },
+    "1624": {
+      "name": "VXCM",
+      "acronym": ""
+    },
+    "1625": {
+      "name": "MCV",
+      "acronym": ""
+    },
+    "1626": {
+      "name": "MM-VQ COLLADO VILLALBA",
+      "acronym": ""
+    },
+    "1627": {
+      "name": "PDC",
+      "acronym": ""
+    },
+    "1628": {
+      "name": "ICDEO",
+      "acronym": ""
+    },
+    "1629": {
+      "name": "GANEMOS COLMENAR - IU - PODEMOS - AV",
+      "acronym": ""
+    },
+    "1630": {
+      "name": "MM-VQ COLMENAR VIEJO",
+      "acronym": ""
+    },
+    "1631": {
+      "name": "MM-VQ COLMENAREJO",
+      "acronym": ""
+    },
+    "1632": {
+      "name": "PALCO",
+      "acronym": ""
+    },
+    "1633": {
+      "name": "UYCC",
+      "acronym": ""
+    },
+    "1634": {
+      "name": "MM-VQ COSLADA",
+      "acronym": ""
+    },
+    "1635": {
+      "name": "MM-VQ DAGANZO DE ARRIBA",
+      "acronym": ""
+    },
+    "1636": {
+      "name": "HEE",
+      "acronym": ""
+    },
+    "1637": {
+      "name": "MM-VQ EL ESCORIAL",
+      "acronym": ""
+    },
+    "1638": {
+      "name": "INDEPENDIENTES POR ESTREMERA",
+      "acronym": ""
+    },
+    "1639": {
+      "name": "PF",
+      "acronym": ""
+    },
+    "1640": {
+      "name": "FA",
+      "acronym": ""
+    },
+    "1641": {
+      "name": "S+",
+      "acronym": ""
+    },
+    "1642": {
+      "name": "MM-VQ FUENLABRADA",
+      "acronym": ""
+    },
+    "1643": {
+      "name": "JXFS",
+      "acronym": ""
+    },
+    "1644": {
+      "name": "GET",
+      "acronym": ""
+    },
+    "1645": {
+      "name": "POR GALAPAGAR",
+      "acronym": ""
+    },
+    "1646": {
+      "name": "CONCEJO",
+      "acronym": ""
+    },
+    "1647": {
+      "name": "MMCCG",
+      "acronym": ""
+    },
+    "1648": {
+      "name": "APPG",
+      "acronym": ""
+    },
+    "1649": {
+      "name": "VECINOS POR GUADARRAMA",
+      "acronym": ""
+    },
+    "1650": {
+      "name": "A.E.LA HIRUELA",
+      "acronym": ""
+    },
+    "1651": {
+      "name": "MM-VQ HOYO DE MANZANARES",
+      "acronym": ""
+    },
+    "1652": {
+      "name": "VHM",
+      "acronym": ""
+    },
+    "1653": {
+      "name": "ULEG",
+      "acronym": ""
+    },
+    "1654": {
+      "name": "MM-VQ LEGANÉS",
+      "acronym": ""
+    },
+    "1655": {
+      "name": "MM-VQ",
+      "acronym": ""
+    },
+    "1656": {
+      "name": "MM - IU",
+      "acronym": ""
+    },
+    "1657": {
+      "name": "VPMJ",
+      "acronym": ""
+    },
+    "1658": {
+      "name": "CUV-PODEMOS-IU-AV",
+      "acronym": ""
+    },
+    "1659": {
+      "name": "MM-VQ MANZANARES EL REAL",
+      "acronym": ""
+    },
+    "1660": {
+      "name": "ALXM",
+      "acronym": ""
+    },
+    "1661": {
+      "name": "MM-VQ MEJORADA DEL CAMPO",
+      "acronym": ""
+    },
+    "1662": {
+      "name": "MARMED",
+      "acronym": ""
+    },
+    "1663": {
+      "name": "IPM",
+      "acronym": ""
+    },
+    "1664": {
+      "name": "MEC-PODEMOS-IU-AV",
+      "acronym": ""
+    },
+    "1665": {
+      "name": "VMP!",
+      "acronym": ""
+    },
+    "1666": {
+      "name": "MM",
+      "acronym": ""
+    },
+    "1667": {
+      "name": "N - GLOBAL",
+      "acronym": ""
+    },
+    "1668": {
+      "name": "PDN",
+      "acronym": ""
+    },
+    "1669": {
+      "name": "AIN",
+      "acronym": ""
+    },
+    "1670": {
+      "name": "LA",
+      "acronym": ""
+    },
+    "1671": {
+      "name": "PODEMOS - IU - AV",
+      "acronym": ""
+    },
+    "1672": {
+      "name": "VECINOS POR NAVALCARNERO",
+      "acronym": ""
+    },
+    "1673": {
+      "name": "AINS",
+      "acronym": ""
+    },
+    "1674": {
+      "name": "CILC",
+      "acronym": ""
+    },
+    "1675": {
+      "name": "CASEROS",
+      "acronym": ""
+    },
+    "1676": {
+      "name": "F",
+      "acronym": ""
+    },
+    "1677": {
+      "name": "CIO",
+      "acronym": ""
+    },
+    "1678": {
+      "name": "ICXP",
+      "acronym": ""
+    },
+    "1679": {
+      "name": "SMM",
+      "acronym": ""
+    },
+    "1680": {
+      "name": "MM-VQ PARLA",
+      "acronym": ""
+    },
+    "1681": {
+      "name": "AGRUPACION INDEPENDIENTE DE PEDREZUELA",
+      "acronym": ""
+    },
+    "1682": {
+      "name": "SOMOSV",
+      "acronym": ""
+    },
+    "1683": {
+      "name": "AVP",
+      "acronym": ""
+    },
+    "1684": {
+      "name": "IU - PODMEOS- AV",
+      "acronym": ""
+    },
+    "1685": {
+      "name": "IDP",
+      "acronym": ""
+    },
+    "1686": {
+      "name": "PAVNZ",
+      "acronym": ""
+    },
+    "1687": {
+      "name": "MM-VQ PINTO",
+      "acronym": ""
+    },
+    "1688": {
+      "name": "UP-PODEMOS-IU-AV",
+      "acronym": ""
+    },
+    "1689": {
+      "name": "SPOZ",
+      "acronym": ""
+    },
+    "1690": {
+      "name": "PUEBLA, TRADICION Y FUTURO",
+      "acronym": ""
+    },
+    "1691": {
+      "name": "GRUPO INDEPENDIENTE PUENTES VIEJAS",
+      "acronym": ""
+    },
+    "1692": {
+      "name": "VXQ",
+      "acronym": ""
+    },
+    "1693": {
+      "name": "CVRO",
+      "acronym": ""
+    },
+    "1694": {
+      "name": "SRO",
+      "acronym": ""
+    },
+    "1695": {
+      "name": "IU-MÁSMADRID-EQUO",
+      "acronym": ""
+    },
+    "1696": {
+      "name": "UPPR",
+      "acronym": ""
+    },
+    "1697": {
+      "name": "PRU",
+      "acronym": ""
+    },
+    "1698": {
+      "name": "MM-VQ LAS ROZAS",
+      "acronym": ""
+    },
+    "1699": {
+      "name": "MM-VQ SAN FERNANDO DE HENARES",
+      "acronym": ""
+    },
+    "1700": {
+      "name": "MM-VQ SAN LORENZO DE EL ESCORIAL",
+      "acronym": ""
+    },
+    "1701": {
+      "name": "NOSOTROS SAN LORENZO CS",
+      "acronym": ""
+    },
+    "1702": {
+      "name": "VXSLE",
+      "acronym": ""
+    },
+    "1703": {
+      "name": "II-ISSR",
+      "acronym": ""
+    },
+    "1704": {
+      "name": "MM-VQ SAN SEBASTIAN DE LOS REYES",
+      "acronym": ""
+    },
+    "1705": {
+      "name": "VXSSR-CS",
+      "acronym": ""
+    },
+    "1706": {
+      "name": "CIRCULO",
+      "acronym": ""
+    },
+    "1707": {
+      "name": "TDS",
+      "acronym": ""
+    },
+    "1708": {
+      "name": "MM-VQ SEVILLA LA NUEVA",
+      "acronym": ""
+    },
+    "1709": {
+      "name": "MÁS MADRID",
+      "acronym": ""
+    },
+    "1710": {
+      "name": "GLITC",
+      "acronym": ""
+    },
+    "1711": {
+      "name": "CUV (IU - PODEMOS.- AV)",
+      "acronym": ""
+    },
+    "1712": {
+      "name": "VT",
+      "acronym": ""
+    },
+    "1713": {
+      "name": "ITRTC",
+      "acronym": ""
+    },
+    "1714": {
+      "name": "PVT",
+      "acronym": ""
+    },
+    "1715": {
+      "name": "POR 3C",
+      "acronym": ""
+    },
+    "1716": {
+      "name": "VAV",
+      "acronym": ""
+    },
+    "1717": {
+      "name": "AVANZA VALDEMANCO",
+      "acronym": ""
+    },
+    "1718": {
+      "name": "OVAL",
+      "acronym": ""
+    },
+    "1719": {
+      "name": "VVAL",
+      "acronym": ""
+    },
+    "1720": {
+      "name": "MM-VQ VALDEMORO",
+      "acronym": ""
+    },
+    "1721": {
+      "name": "VEXVAL",
+      "acronym": ""
+    },
+    "1722": {
+      "name": "IVAM",
+      "acronym": ""
+    },
+    "1723": {
+      "name": "MM-VQ SUMANDO PARA TOD@S",
+      "acronym": ""
+    },
+    "1724": {
+      "name": "CIV",
+      "acronym": ""
+    },
+    "1725": {
+      "name": "VIV",
+      "acronym": ""
+    },
+    "1726": {
+      "name": "HACER NACION",
+      "acronym": ""
+    },
+    "1727": {
+      "name": "MM-VQ VELILLA DE SAN ANTONIO",
+      "acronym": ""
+    },
+    "1728": {
+      "name": "SOMOS",
+      "acronym": ""
+    },
+    "1729": {
+      "name": "EL ENCINAR",
+      "acronym": ""
+    },
+    "1730": {
+      "name": "IU",
+      "acronym": ""
+    },
+    "1731": {
+      "name": "PIM-VILLALBILLA",
+      "acronym": ""
+    },
+    "1732": {
+      "name": "GVVP",
+      "acronym": ""
+    },
+    "1733": {
+      "name": "PL-VP",
+      "acronym": ""
+    },
+    "1734": {
+      "name": "EL BOSQUE EXISTE",
+      "acronym": ""
+    },
+    "1735": {
+      "name": "MM-VQ VILLAVICIOSA",
+      "acronym": ""
+    },
+    "1736": {
+      "name": "¡AZ!",
+      "acronym": ""
+    },
+    "1737": {
+      "name": "POR MI PUEBLO",
+      "acronym": ""
+    },
+    "1738": {
+      "name": "SOMOS ALCAUCÍN",
+      "acronym": ""
+    },
+    "1739": {
+      "name": "100% ALHAURÍN",
+      "acronym": ""
+    },
+    "1740": {
+      "name": "A.E.BENADALID UNIDO",
+      "acronym": ""
+    },
+    "1741": {
+      "name": "AEB",
+      "acronym": ""
+    },
+    "1742": {
+      "name": "A.P.B.",
+      "acronym": ""
+    },
+    "1743": {
+      "name": "BUP",
+      "acronym": ""
+    },
+    "1744": {
+      "name": "AVCM",
+      "acronym": ""
+    },
+    "1745": {
+      "name": "MAS PUEBLO LA CUEVA",
+      "acronym": ""
+    },
+    "1746": {
+      "name": "COMPROMISO MANILVA",
+      "acronym": ""
+    },
+    "1747": {
+      "name": "OSP",
+      "acronym": ""
+    },
+    "1748": {
+      "name": "MOLLINA SI",
+      "acronym": ""
+    },
+    "1749": {
+      "name": "MXS",
+      "acronym": ""
+    },
+    "1750": {
+      "name": "X SIERRA DE YEGUAS",
+      "acronym": ""
+    },
+    "1751": {
+      "name": "GIPMTM",
+      "acronym": ""
+    },
+    "1752": {
+      "name": "POR VILLANUEVA DE ALGAIDAS",
+      "acronym": ""
+    },
+    "1753": {
+      "name": "TRABUCOSI",
+      "acronym": ""
+    },
+    "1754": {
+      "name": "APY",
+      "acronym": ""
+    },
+    "1755": {
+      "name": "CPM",
+      "acronym": ""
+    },
+    "1757": {
+      "name": "IU-V",
+      "acronym": ""
+    },
+    "1758": {
+      "name": "UYD",
+      "acronym": ""
+    },
+    "1759": {
+      "name": "L V D P",
+      "acronym": ""
+    },
+    "1760": {
+      "name": "UXA",
+      "acronym": ""
+    },
+    "1761": {
+      "name": "ALHAM@UNA",
+      "acronym": ""
+    },
+    "1762": {
+      "name": "IUV",
+      "acronym": ""
+    },
+    "1763": {
+      "name": "IU-V-RM",
+      "acronym": ""
+    },
+    "1764": {
+      "name": "BLP",
+      "acronym": ""
+    },
+    "1765": {
+      "name": "SOMOS BLANCA",
+      "acronym": ""
+    },
+    "1766": {
+      "name": "CAVV",
+      "acronym": ""
+    },
+    "1767": {
+      "name": "POR MI REGIÓN",
+      "acronym": ""
+    },
+    "1768": {
+      "name": "MC CARTAGENA",
+      "acronym": ""
+    },
+    "1769": {
+      "name": "SI CARTAGENA",
+      "acronym": ""
+    },
+    "1770": {
+      "name": "GESTIONA",
+      "acronym": ""
+    },
+    "1771": {
+      "name": "XCEH",
+      "acronym": ""
+    },
+    "1772": {
+      "name": "C.I.F.A.",
+      "acronym": ""
+    },
+    "1773": {
+      "name": "UPRL",
+      "acronym": ""
+    },
+    "1774": {
+      "name": "IU-VERDES + PODEMOS +AV",
+      "acronym": ""
+    },
+    "1775": {
+      "name": "UIDM",
+      "acronym": ""
+    },
+    "1776": {
+      "name": "IU-VERDES+PODEMOS",
+      "acronym": ""
+    },
+    "1777": {
+      "name": "OV",
+      "acronym": ""
+    },
+    "1778": {
+      "name": "PAS",
+      "acronym": ""
+    },
+    "1779": {
+      "name": "PLEAMAR, C.I.",
+      "acronym": ""
+    },
+    "1780": {
+      "name": "PODEMOS+IU-VERDES+AV",
+      "acronym": ""
+    },
+    "1781": {
+      "name": "AISP",
+      "acronym": ""
+    },
+    "1782": {
+      "name": "AXS",
+      "acronym": ""
+    },
+    "1783": {
+      "name": "PITP",
+      "acronym": ""
+    },
+    "1784": {
+      "name": "GT",
+      "acronym": ""
+    },
+    "1785": {
+      "name": "DLU",
+      "acronym": ""
+    },
+    "1786": {
+      "name": "UPA",
+      "acronym": ""
+    },
+    "1787": {
+      "name": "AGRUPACION INDEPENDIENTE ELKEA",
+      "acronym": ""
+    },
+    "1788": {
+      "name": "AISM",
+      "acronym": ""
+    },
+    "1789": {
+      "name": "AIAM",
+      "acronym": ""
+    },
+    "1792": {
+      "name": "A.E.A",
+      "acronym": ""
+    },
+    "1793": {
+      "name": "AGRUPACION VECINAL ADIOS",
+      "acronym": ""
+    },
+    "1794": {
+      "name": "A.I.A.D.C.",
+      "acronym": ""
+    },
+    "1795": {
+      "name": "A.I.S.A.D.C",
+      "acronym": ""
+    },
+    "1796": {
+      "name": "AGEIZIA",
+      "acronym": ""
+    },
+    "1797": {
+      "name": "C.I.V.A",
+      "acronym": ""
+    },
+    "1798": {
+      "name": "A.V.A",
+      "acronym": ""
+    },
+    "1799": {
+      "name": "GBAI",
+      "acronym": ""
+    },
+    "1800": {
+      "name": "AGRUPACION INDEPENDIENTE AMESCOA BAJA",
+      "acronym": ""
+    },
+    "1801": {
+      "name": "A.I.L.",
+      "acronym": ""
+    },
+    "1802": {
+      "name": "AGRUPACIÓN ELECTORAL AÑORBE AVANZA",
+      "acronym": ""
+    },
+    "1803": {
+      "name": "CONTIGO-ZUREKIN",
+      "acronym": ""
+    },
+    "1804": {
+      "name": "AGRUPACION BURDINDOGI",
+      "acronym": ""
+    },
+    "1805": {
+      "name": "CPVA",
+      "acronym": ""
+    },
+    "1806": {
+      "name": "BILDU",
+      "acronym": ""
+    },
+    "1807": {
+      "name": "A.I.T.A.",
+      "acronym": ""
+    },
+    "1808": {
+      "name": "A.H.T.",
+      "acronym": ""
+    },
+    "1809": {
+      "name": "CUPA",
+      "acronym": ""
+    },
+    "1810": {
+      "name": "ILA",
+      "acronym": ""
+    },
+    "1811": {
+      "name": "TPLA",
+      "acronym": ""
+    },
+    "1812": {
+      "name": "ADELANTE ARELLANO",
+      "acronym": ""
+    },
+    "1813": {
+      "name": "Areso Eraikiz",
+      "acronym": ""
+    },
+    "1814": {
+      "name": "PSN - PSPE",
+      "acronym": ""
+    },
+    "1815": {
+      "name": "BATZALARRE",
+      "acronym": ""
+    },
+    "1816": {
+      "name": "AGD",
+      "acronym": ""
+    },
+    "1817": {
+      "name": "A.E.",
+      "acronym": ""
+    },
+    "1818": {
+      "name": "AU",
+      "acronym": ""
+    },
+    "1819": {
+      "name": "GEROA BAI",
+      "acronym": ""
+    },
+    "1820": {
+      "name": "AIB",
+      "acronym": ""
+    },
+    "1821": {
+      "name": "ZUREKIN BAZTAN",
+      "acronym": ""
+    },
+    "1822": {
+      "name": "BAZTANGO INDEPENDIENTEAK - INDEPENDIENTES DEL BAZTAN",
+      "acronym": ""
+    },
+    "1823": {
+      "name": "HERRIARENGATIK",
+      "acronym": ""
+    },
+    "1824": {
+      "name": "BEIRE ACTIVA",
+      "acronym": ""
+    },
+    "1825": {
+      "name": "CIB",
+      "acronym": ""
+    },
+    "1826": {
+      "name": "HERRIRAKO",
+      "acronym": ""
+    },
+    "1827": {
+      "name": "PB",
+      "acronym": ""
+    },
+    "1828": {
+      "name": "AB/BA",
+      "acronym": ""
+    },
+    "1829": {
+      "name": "PLAZAOLA",
+      "acronym": ""
+    },
+    "1830": {
+      "name": "VPA",
+      "acronym": ""
+    },
+    "1831": {
+      "name": "AAB",
+      "acronym": ""
+    },
+    "1832": {
+      "name": "BERTIZARANAKO TALDEA",
+      "acronym": ""
+    },
+    "1833": {
+      "name": "ARRITXU TALDEA",
+      "acronym": ""
+    },
+    "1834": {
+      "name": "URGUNEA",
+      "acronym": ""
+    },
+    "1835": {
+      "name": "AGRUPACION INDEPENDIENTE DE BIURRUN-OLCOZ",
+      "acronym": ""
+    },
+    "1836": {
+      "name": "BUÑUEL INDEPENDIENTE",
+      "acronym": ""
+    },
+    "1837": {
+      "name": "TXABALKO",
+      "acronym": ""
+    },
+    "1838": {
+      "name": "CCAZ",
+      "acronym": ""
+    },
+    "1839": {
+      "name": "IEB",
+      "acronym": ""
+    },
+    "1840": {
+      "name": "A.I.O.",
+      "acronym": ""
+    },
+    "1841": {
+      "name": "C.P.F",
+      "acronym": ""
+    },
+    "1842": {
+      "name": "CIC",
+      "acronym": ""
+    },
+    "1843": {
+      "name": "C.A.",
+      "acronym": ""
+    },
+    "1844": {
+      "name": "ASZC",
+      "acronym": ""
+    },
+    "1845": {
+      "name": "IC/KL",
+      "acronym": ""
+    },
+    "1846": {
+      "name": "PODEMOS + IZQUIERDA UNIDA + BATZARRE + ALIANZA VERDE + BERDEAK EQUO",
+      "acronym": ""
+    },
+    "1847": {
+      "name": "SOMOS CASTEJON",
+      "acronym": ""
+    },
+    "1848": {
+      "name": "C-G",
+      "acronym": ""
+    },
+    "1849": {
+      "name": "ICO",
+      "acronym": ""
+    },
+    "1850": {
+      "name": "OH",
+      "acronym": ""
+    },
+    "1851": {
+      "name": "A.P.C.",
+      "acronym": ""
+    },
+    "1852": {
+      "name": "CAI",
+      "acronym": ""
+    },
+    "1853": {
+      "name": "HC",
+      "acronym": ""
+    },
+    "1854": {
+      "name": "CA",
+      "acronym": ""
+    },
+    "1855": {
+      "name": "ACI",
+      "acronym": ""
+    },
+    "1856": {
+      "name": "C.E.T.",
+      "acronym": ""
+    },
+    "1857": {
+      "name": "EH BILDU - CICO",
+      "acronym": ""
+    },
+    "1858": {
+      "name": "CISPM",
+      "acronym": ""
+    },
+    "1859": {
+      "name": "AIM",
+      "acronym": ""
+    },
+    "1860": {
+      "name": "C.P.E.",
+      "acronym": ""
+    },
+    "1861": {
+      "name": "AGRUPACION INDEPENDIENTE ELGORRIAGA",
+      "acronym": ""
+    },
+    "1862": {
+      "name": "A.E.E.",
+      "acronym": ""
+    },
+    "1863": {
+      "name": "A.E. “PAUSOZ PAUSO”",
+      "acronym": ""
+    },
+    "1864": {
+      "name": "BATZARRAMENDI",
+      "acronym": ""
+    },
+    "1865": {
+      "name": "ASKOGAIN",
+      "acronym": ""
+    },
+    "1866": {
+      "name": "HZM",
+      "acronym": ""
+    },
+    "1867": {
+      "name": "AIVE",
+      "acronym": ""
+    },
+    "1868": {
+      "name": "JUNTOS POR ESLAVA",
+      "acronym": ""
+    },
+    "1869": {
+      "name": "AGEREGI",
+      "acronym": ""
+    },
+    "1870": {
+      "name": "CONTIGO ZUREKIN",
+      "acronym": ""
+    },
+    "1871": {
+      "name": "OE",
+      "acronym": ""
+    },
+    "1872": {
+      "name": "ALTERNATIVA ESTERIBAR",
+      "acronym": ""
+    },
+    "1873": {
+      "name": "I.D.E.",
+      "acronym": ""
+    },
+    "1874": {
+      "name": "HT",
+      "acronym": ""
+    },
+    "1875": {
+      "name": "AIVE-EAB",
+      "acronym": ""
+    },
+    "1876": {
+      "name": "AGRUPACIÓN DE ELECTORES IDOIA",
+      "acronym": ""
+    },
+    "1877": {
+      "name": "A.I.F.",
+      "acronym": ""
+    },
+    "1878": {
+      "name": "FEP",
+      "acronym": ""
+    },
+    "1879": {
+      "name": "POR FUSTIÑANA",
+      "acronym": ""
+    },
+    "1880": {
+      "name": "AICG",
+      "acronym": ""
+    },
+    "1881": {
+      "name": "VG",
+      "acronym": ""
+    },
+    "1882": {
+      "name": "AEIVA",
+      "acronym": ""
+    },
+    "1883": {
+      "name": "DOZOLA",
+      "acronym": ""
+    },
+    "1884": {
+      "name": "AK",
+      "acronym": ""
+    },
+    "1885": {
+      "name": "A.E.EGIEDER",
+      "acronym": ""
+    },
+    "1886": {
+      "name": "A.I.E.E.",
+      "acronym": ""
+    },
+    "1887": {
+      "name": "AIG",
+      "acronym": ""
+    },
+    "1888": {
+      "name": "AGRUPACION INDEPENDIENTE GUESALAZ",
+      "acronym": ""
+    },
+    "1889": {
+      "name": "VG-GB",
+      "acronym": ""
+    },
+    "1890": {
+      "name": "GH",
+      "acronym": ""
+    },
+    "1891": {
+      "name": "A.I. Berrendi",
+      "acronym": ""
+    },
+    "1892": {
+      "name": "IGANTZIKO HERRI TALDEA",
+      "acronym": ""
+    },
+    "1893": {
+      "name": "AGRUPACION INDEPENDIENTE CAMINO DEL VALLE",
+      "acronym": ""
+    },
+    "1894": {
+      "name": "SED",
+      "acronym": ""
+    },
+    "1895": {
+      "name": "ORBELA",
+      "acronym": ""
+    },
+    "1896": {
+      "name": "A.E. GARBISA",
+      "acronym": ""
+    },
+    "1897": {
+      "name": "HERRI ELKARLANA",
+      "acronym": ""
+    },
+    "1898": {
+      "name": "UPI",
+      "acronym": ""
+    },
+    "1899": {
+      "name": "ARIZA",
+      "acronym": ""
+    },
+    "1900": {
+      "name": "AGRUPACIÓN INDEPENDIENTE JAURRIETA",
+      "acronym": ""
+    },
+    "1901": {
+      "name": "AGRUPACIÓN INDEPENDIENTE SAN FRANCISCO JAVIER",
+      "acronym": ""
+    },
+    "1902": {
+      "name": "TXULAPAIN",
+      "acronym": ""
+    },
+    "1903": {
+      "name": "J.A",
+      "acronym": ""
+    },
+    "1904": {
+      "name": "AIVL",
+      "acronym": ""
+    },
+    "1905": {
+      "name": "AGRUPACIÓN LANTZ",
+      "acronym": ""
+    },
+    "1906": {
+      "name": "AGRUPACION INDEPENDIENTE EL CASTILLO",
+      "acronym": ""
+    },
+    "1907": {
+      "name": "AITP",
+      "acronym": ""
+    },
+    "1908": {
+      "name": "LC",
+      "acronym": ""
+    },
+    "1909": {
+      "name": "I X L",
+      "acronym": ""
+    },
+    "1910": {
+      "name": "A.E.L",
+      "acronym": ""
+    },
+    "1911": {
+      "name": "PIZ",
+      "acronym": ""
+    },
+    "1912": {
+      "name": "AEIL",
+      "acronym": ""
+    },
+    "1913": {
+      "name": "A.E.I.L.",
+      "acronym": ""
+    },
+    "1914": {
+      "name": "C.I. LEGARIA",
+      "acronym": ""
+    },
+    "1915": {
+      "name": "L.T.",
+      "acronym": ""
+    },
+    "1916": {
+      "name": "LB",
+      "acronym": ""
+    },
+    "1917": {
+      "name": "AIL",
+      "acronym": ""
+    },
+    "1918": {
+      "name": "A.L.",
+      "acronym": ""
+    },
+    "1919": {
+      "name": "PDL",
+      "acronym": ""
+    },
+    "1920": {
+      "name": "AVL",
+      "acronym": ""
+    },
+    "1921": {
+      "name": "AL",
+      "acronym": ""
+    },
+    "1922": {
+      "name": "I.L.A./L.A.I.",
+      "acronym": ""
+    },
+    "1923": {
+      "name": "LOIU",
+      "acronym": ""
+    },
+    "1924": {
+      "name": "AII",
+      "acronym": ""
+    },
+    "1925": {
+      "name": "PARA LUQUIN",
+      "acronym": ""
+    },
+    "1926": {
+      "name": "POR LUQUIN",
+      "acronym": ""
+    },
+    "1927": {
+      "name": "AGRUPACION INDEPENDIENTE LUZAIDE",
+      "acronym": ""
+    },
+    "1928": {
+      "name": "GRUPO INDEPENDIENTE DE TRABAJO POR MELIDA",
+      "acronym": ""
+    },
+    "1929": {
+      "name": "MD",
+      "acronym": ""
+    },
+    "1930": {
+      "name": "AELB",
+      "acronym": ""
+    },
+    "1931": {
+      "name": "XM MENDIGORRIA",
+      "acronym": ""
+    },
+    "1932": {
+      "name": "AISHT",
+      "acronym": ""
+    },
+    "1933": {
+      "name": "A.E.M-I",
+      "acronym": ""
+    },
+    "1934": {
+      "name": "A.I.N.M.",
+      "acronym": ""
+    },
+    "1935": {
+      "name": "MJ",
+      "acronym": ""
+    },
+    "1936": {
+      "name": "AIJM",
+      "acronym": ""
+    },
+    "1937": {
+      "name": "MXM",
+      "acronym": ""
+    },
+    "1938": {
+      "name": "A.M.",
+      "acronym": ""
+    },
+    "1939": {
+      "name": "PC-LV",
+      "acronym": ""
+    },
+    "1940": {
+      "name": "A. I. ALMIRADIO NAVASCUES",
+      "acronym": ""
+    },
+    "1941": {
+      "name": "A.E.K",
+      "acronym": ""
+    },
+    "1942": {
+      "name": "A.N",
+      "acronym": ""
+    },
+    "1943": {
+      "name": "OTSAGABIA",
+      "acronym": ""
+    },
+    "1944": {
+      "name": "ANDUÑA",
+      "acronym": ""
+    },
+    "1945": {
+      "name": "CANDIDATURA INDEPENDIENTE DE OCO",
+      "acronym": ""
+    },
+    "1946": {
+      "name": "AIO/OEI",
+      "acronym": ""
+    },
+    "1947": {
+      "name": "OIZKO ALKARTASUNA",
+      "acronym": ""
+    },
+    "1948": {
+      "name": "CANDIDATURA INDEPENDIENTE DE OLEJUA",
+      "acronym": ""
+    },
+    "1949": {
+      "name": "AO/EE",
+      "acronym": ""
+    },
+    "1950": {
+      "name": "AO",
+      "acronym": ""
+    },
+    "1951": {
+      "name": "A.E. TXANTXALAN ORBAIZETA",
+      "acronym": ""
+    },
+    "1952": {
+      "name": "AGRUPACION ELECTORAL INDEPENDIENTE ORBARA 2023",
+      "acronym": ""
+    },
+    "1953": {
+      "name": "A. E. Amarrain",
+      "acronym": ""
+    },
+    "1954": {
+      "name": "JUNT@S POR ORKOIEN",
+      "acronym": ""
+    },
+    "1955": {
+      "name": "BIHUR",
+      "acronym": ""
+    },
+    "1956": {
+      "name": "LEARPURU",
+      "acronym": ""
+    },
+    "1957": {
+      "name": "AIR-O",
+      "acronym": ""
+    },
+    "1958": {
+      "name": "MENDIBELZU",
+      "acronym": ""
+    },
+    "1959": {
+      "name": "UNION DEL PUEBLO NAVARRO",
+      "acronym": ""
+    },
+    "1960": {
+      "name": "U.PE.I.",
+      "acronym": ""
+    },
+    "1961": {
+      "name": "I.P.A.",
+      "acronym": ""
+    },
+    "1962": {
+      "name": "AIP",
+      "acronym": ""
+    },
+    "1963": {
+      "name": "P.B",
+      "acronym": ""
+    },
+    "1964": {
+      "name": "LDR",
+      "acronym": ""
+    },
+    "1965": {
+      "name": "URRUTEA",
+      "acronym": ""
+    },
+    "1966": {
+      "name": "A. I. SADA",
+      "acronym": ""
+    },
+    "1967": {
+      "name": "TANTADI",
+      "acronym": ""
+    },
+    "1968": {
+      "name": "AGRUPACIÓN DE ELECTORES ZANZALAETA",
+      "acronym": ""
+    },
+    "1969": {
+      "name": "AISMU",
+      "acronym": ""
+    },
+    "1970": {
+      "name": "AISS",
+      "acronym": ""
+    },
+    "1971": {
+      "name": "MELGAR",
+      "acronym": ""
+    },
+    "1972": {
+      "name": "A.I.S.",
+      "acronym": ""
+    },
+    "1973": {
+      "name": "AISG",
+      "acronym": ""
+    },
+    "1974": {
+      "name": "INPORT",
+      "acronym": ""
+    },
+    "1975": {
+      "name": "AITMC",
+      "acronym": ""
+    },
+    "1976": {
+      "name": "A.I.S.A",
+      "acronym": ""
+    },
+    "1977": {
+      "name": "AGRUPACION EL MENDI",
+      "acronym": ""
+    },
+    "1978": {
+      "name": "P.I.L",
+      "acronym": ""
+    },
+    "1979": {
+      "name": "A.I.T.",
+      "acronym": ""
+    },
+    "1980": {
+      "name": "U.P.T.",
+      "acronym": ""
+    },
+    "1981": {
+      "name": "A.I.S.M.",
+      "acronym": ""
+    },
+    "1982": {
+      "name": "APB-BHH",
+      "acronym": ""
+    },
+    "1983": {
+      "name": "INDU",
+      "acronym": ""
+    },
+    "1984": {
+      "name": "AU2",
+      "acronym": ""
+    },
+    "1985": {
+      "name": "AU1",
+      "acronym": ""
+    },
+    "1986": {
+      "name": "AZKAR AGRUPACIÓN ELECTORAL",
+      "acronym": ""
+    },
+    "1987": {
+      "name": "AEIUA",
+      "acronym": ""
+    },
+    "1988": {
+      "name": "ARETA",
+      "acronym": ""
+    },
+    "1989": {
+      "name": "URRALEGUI",
+      "acronym": ""
+    },
+    "1990": {
+      "name": "A. I. UTERGA",
+      "acronym": ""
+    },
+    "1991": {
+      "name": "A.E. IZPEA",
+      "acronym": ""
+    },
+    "1992": {
+      "name": "IVG",
+      "acronym": ""
+    },
+    "1993": {
+      "name": "V!VEGÜESB!Z!",
+      "acronym": ""
+    },
+    "1994": {
+      "name": "AINE",
+      "acronym": ""
+    },
+    "1995": {
+      "name": "AE",
+      "acronym": ""
+    },
+    "1996": {
+      "name": "SV",
+      "acronym": ""
+    },
+    "1997": {
+      "name": "AUZOLAN",
+      "acronym": ""
+    },
+    "1998": {
+      "name": "CP IRANTZU HK",
+      "acronym": ""
+    },
+    "1999": {
+      "name": "IPY",
+      "acronym": ""
+    },
+    "2000": {
+      "name": "BINIÉS",
+      "acronym": ""
+    },
+    "2001": {
+      "name": "SIEMPRE VILLAFRANCA",
+      "acronym": ""
+    },
+    "2002": {
+      "name": "AESE",
+      "acronym": ""
+    },
+    "2003": {
+      "name": "A-GBAI",
+      "acronym": ""
+    },
+    "2004": {
+      "name": "ZUREKIN CONTIGO",
+      "acronym": ""
+    },
+    "2005": {
+      "name": "I.X.Y.",
+      "acronym": ""
+    },
+    "2006": {
+      "name": "YA",
+      "acronym": ""
+    },
+    "2007": {
+      "name": "AGRUPACION INDEPENDIENTE ZABALZA/ZABALTZA",
+      "acronym": ""
+    },
+    "2008": {
+      "name": "AS ZIZUR",
+      "acronym": ""
+    },
+    "2009": {
+      "name": "AUZOLANEAN",
+      "acronym": ""
+    },
+    "2010": {
+      "name": "AKELARRE",
+      "acronym": ""
+    },
+    "2011": {
+      "name": "CUZ",
+      "acronym": ""
+    },
+    "2012": {
+      "name": "NOVOS AIRES POR AVION",
+      "acronym": ""
+    },
+    "2013": {
+      "name": "D.O.",
+      "acronym": ""
+    },
+    "2014": {
+      "name": "AEPB",
+      "acronym": ""
+    },
+    "2015": {
+      "name": "AVIDE",
+      "acronym": ""
+    },
+    "2016": {
+      "name": "SOB",
+      "acronym": ""
+    },
+    "2017": {
+      "name": "AECA",
+      "acronym": ""
+    },
+    "2018": {
+      "name": "CR-23",
+      "acronym": ""
+    },
+    "2019": {
+      "name": "CD",
+      "acronym": ""
+    },
+    "2020": {
+      "name": "CXG",
+      "acronym": ""
+    },
+    "2021": {
+      "name": "XPC-CIF",
+      "acronym": ""
+    },
+    "2022": {
+      "name": "AEIG",
+      "acronym": ""
+    },
+    "2023": {
+      "name": "XPI",
+      "acronym": ""
+    },
+    "2024": {
+      "name": "I.G.V. - C.I.F.",
+      "acronym": ""
+    },
+    "2025": {
+      "name": "VECIÑ@S",
+      "acronym": ""
+    },
+    "2026": {
+      "name": "VDEM",
+      "acronym": ""
+    },
+    "2027": {
+      "name": "VECIÑOS POR PADERNE",
+      "acronym": ""
+    },
+    "2028": {
+      "name": "RIBEIRO EN COMÚN",
+      "acronym": ""
+    },
+    "2029": {
+      "name": "R.U.A",
+      "acronym": ""
+    },
+    "2030": {
+      "name": "XUNTOS",
+      "acronym": ""
+    },
+    "2031": {
+      "name": "AGRELSAN",
+      "acronym": ""
+    },
+    "2032": {
+      "name": "VE-TA",
+      "acronym": ""
+    },
+    "2033": {
+      "name": "I.G.V-C.I.F.",
+      "acronym": ""
+    },
+    "2034": {
+      "name": "AXIL",
+      "acronym": ""
+    },
+    "2035": {
+      "name": "IXAYV",
+      "acronym": ""
+    },
+    "2036": {
+      "name": "I.A",
+      "acronym": ""
+    },
+    "2037": {
+      "name": "GITV",
+      "acronym": ""
+    },
+    "2038": {
+      "name": "SOMOS VALDAVIA",
+      "acronym": ""
+    },
+    "2039": {
+      "name": "AECV",
+      "acronym": ""
+    },
+    "2040": {
+      "name": "INDEPENDIENTES POR CORDOVILLA LA REAL",
+      "acronym": ""
+    },
+    "2041": {
+      "name": "AGRUPACION INDEPENDIENTE DE ELECTORES DE FRESNO DEL RIO",
+      "acronym": ""
+    },
+    "2042": {
+      "name": "INDEPENDIENTES POR HERRERA",
+      "acronym": ""
+    },
+    "2043": {
+      "name": "AIHDC",
+      "acronym": ""
+    },
+    "2044": {
+      "name": "CANDIDATURA INDEPENDIENTE",
+      "acronym": ""
+    },
+    "2045": {
+      "name": "P.M.",
+      "acronym": ""
+    },
+    "2046": {
+      "name": "SOLO PERNIA",
+      "acronym": ""
+    },
+    "2047": {
+      "name": "AGRUPACION INDEPENDIENTE DE ELECTORES DEL PINO DEL RIO",
+      "acronym": ""
+    },
+    "2048": {
+      "name": "IU - PODEMOS",
+      "acronym": ""
+    },
+    "2049": {
+      "name": "AGRUPACION DE ELECTORES INDEPENDIENTES DE VILLALUENGA",
+      "acronym": ""
+    },
+    "2050": {
+      "name": "I.P.U",
+      "acronym": ""
+    },
+    "2051": {
+      "name": "AGELINVIC",
+      "acronym": ""
+    },
+    "2052": {
+      "name": "BNR-NC",
+      "acronym": ""
+    },
+    "2053": {
+      "name": "RA",
+      "acronym": ""
+    },
+    "2054": {
+      "name": "CCA",
+      "acronym": ""
+    },
+    "2055": {
+      "name": "NC-FAC",
+      "acronym": ""
+    },
+    "2056": {
+      "name": "AMF",
+      "acronym": ""
+    },
+    "2057": {
+      "name": "ALXAN-NC",
+      "acronym": ""
+    },
+    "2058": {
+      "name": "UXGC",
+      "acronym": ""
+    },
+    "2059": {
+      "name": "UPBE",
+      "acronym": ""
+    },
+    "2060": {
+      "name": "COMFIR-NC",
+      "acronym": ""
+    },
+    "2061": {
+      "name": "COMPROMISO X HARÍA",
+      "acronym": ""
+    },
+    "2062": {
+      "name": "P.M.H.",
+      "acronym": ""
+    },
+    "2063": {
+      "name": "FD-NC",
+      "acronym": ""
+    },
+    "2064": {
+      "name": "PP-SOMOS",
+      "acronym": ""
+    },
+    "2065": {
+      "name": "AGS",
+      "acronym": ""
+    },
+    "2066": {
+      "name": "JPM",
+      "acronym": ""
+    },
+    "2067": {
+      "name": "EN MARCHA",
+      "acronym": ""
+    },
+    "2068": {
+      "name": "JXP-NC",
+      "acronym": ""
+    },
+    "2069": {
+      "name": "USP",
+      "acronym": ""
+    },
+    "2070": {
+      "name": "F.A.",
+      "acronym": ""
+    },
+    "2071": {
+      "name": "PP-AV",
+      "acronym": ""
+    },
+    "2072": {
+      "name": "ANDO",
+      "acronym": ""
+    },
+    "2073": {
+      "name": "P.V.S.B.",
+      "acronym": ""
+    },
+    "2074": {
+      "name": "AV-SLT-PP",
+      "acronym": ""
+    },
+    "2075": {
+      "name": "LA FORTALEZA",
+      "acronym": ""
+    },
+    "2076": {
+      "name": "AG",
+      "acronym": ""
+    },
+    "2077": {
+      "name": "JP-GUIA-NC",
+      "acronym": ""
+    },
+    "2078": {
+      "name": "PTG",
+      "acronym": ""
+    },
+    "2079": {
+      "name": "AET",
+      "acronym": ""
+    },
+    "2080": {
+      "name": "TEJEDA X EL CAMBIO",
+      "acronym": ""
+    },
+    "2081": {
+      "name": "CIUCA",
+      "acronym": ""
+    },
+    "2082": {
+      "name": "+XT",
+      "acronym": ""
+    },
+    "2083": {
+      "name": "MRT-NC",
+      "acronym": ""
+    },
+    "2084": {
+      "name": "ASAVA",
+      "acronym": ""
+    },
+    "2085": {
+      "name": "PORV",
+      "acronym": ""
+    },
+    "2086": {
+      "name": "PSOE - VPL",
+      "acronym": ""
+    },
+    "2087": {
+      "name": "ASBA",
+      "acronym": ""
+    },
+    "2088": {
+      "name": "AVESAN",
+      "acronym": ""
+    },
+    "2089": {
+      "name": "A.X.S.M.",
+      "acronym": ""
+    },
+    "2090": {
+      "name": "UVE",
+      "acronym": ""
+    },
+    "2091": {
+      "name": "UPY",
+      "acronym": ""
+    },
+    "2092": {
+      "name": "YAS",
+      "acronym": ""
+    },
+    "2093": {
+      "name": "PAYJ",
+      "acronym": ""
+    },
+    "2095": {
+      "name": "AGRELAR",
+      "acronym": ""
+    },
+    "2096": {
+      "name": "IPPA",
+      "acronym": ""
+    },
+    "2097": {
+      "name": "PX´S",
+      "acronym": ""
+    },
+    "2098": {
+      "name": "CAMBA PODE",
+      "acronym": ""
+    },
+    "2099": {
+      "name": "PORVIR",
+      "acronym": ""
+    },
+    "2100": {
+      "name": "MOVETE",
+      "acronym": ""
+    },
+    "2101": {
+      "name": "M.M.",
+      "acronym": ""
+    },
+    "2102": {
+      "name": "VEDM",
+      "acronym": ""
+    },
+    "2103": {
+      "name": "MI",
+      "acronym": ""
+    },
+    "2104": {
+      "name": "APORM",
+      "acronym": ""
+    },
+    "2105": {
+      "name": "AENE",
+      "acronym": ""
+    },
+    "2106": {
+      "name": "AGRUPACION DE ELECTORES ALTERNATIVA VECIÑAL",
+      "acronym": ""
+    },
+    "2107": {
+      "name": "ACIP",
+      "acronym": ""
+    },
+    "2108": {
+      "name": "IP",
+      "acronym": ""
+    },
+    "2109": {
+      "name": "PEC",
+      "acronym": ""
+    },
+    "2110": {
+      "name": "AER",
+      "acronym": ""
+    },
+    "2111": {
+      "name": "SOMOS RIBADUMIA",
+      "acronym": ""
+    },
+    "2112": {
+      "name": "UXR",
+      "acronym": ""
+    },
+    "2113": {
+      "name": "MS",
+      "acronym": ""
+    },
+    "2114": {
+      "name": "XPC",
+      "acronym": ""
+    },
+    "2115": {
+      "name": "A",
+      "acronym": ""
+    },
+    "2116": {
+      "name": "PR+E",
+      "acronym": ""
+    },
+    "2117": {
+      "name": "PLRI",
+      "acronym": ""
+    },
+    "2118": {
+      "name": "DM",
+      "acronym": ""
+    },
+    "2119": {
+      "name": "I.U.-PODEMOS",
+      "acronym": ""
+    },
+    "2120": {
+      "name": "AUSEJO",
+      "acronym": ""
+    },
+    "2121": {
+      "name": "PSOE-IU BERCEO",
+      "acronym": ""
+    },
+    "2122": {
+      "name": "VINEA",
+      "acronym": ""
+    },
+    "2123": {
+      "name": "+R.O.",
+      "acronym": ""
+    },
+    "2124": {
+      "name": "AGRUPACIÓN INDEPENDIENTE DE CORERA",
+      "acronym": ""
+    },
+    "2125": {
+      "name": "AIC",
+      "acronym": ""
+    },
+    "2126": {
+      "name": "JXG",
+      "acronym": ""
+    },
+    "2127": {
+      "name": "ADELANTE HERVIAS",
+      "acronym": ""
+    },
+    "2128": {
+      "name": "ATI",
+      "acronym": ""
+    },
+    "2129": {
+      "name": "CANDIDATURA INDEPENDIENTE DE JALON DE CAMEROS",
+      "acronym": ""
+    },
+    "2130": {
+      "name": "PODEMOS-IZQUIERDA UNIDA (PODEMOS-I.U.)",
+      "acronym": ""
+    },
+    "2131": {
+      "name": "CIMA",
+      "acronym": ""
+    },
+    "2132": {
+      "name": "IZQUIERDA UNIDA-PODEMOS (I.U.-PODEMOS)",
+      "acronym": ""
+    },
+    "2133": {
+      "name": "JUNTOS POR OCON",
+      "acronym": ""
+    },
+    "2134": {
+      "name": "INDEPENDIENTES POR SAN ROMAN, VADILLOS Y VELILLA",
+      "acronym": ""
+    },
+    "2135": {
+      "name": "MSD",
+      "acronym": ""
+    },
+    "2136": {
+      "name": "CANDIDATURA INDEPENDIENTE DE TORREMONTALBO",
+      "acronym": ""
+    },
+    "2137": {
+      "name": "AIT",
+      "acronym": ""
+    },
+    "2138": {
+      "name": "AGRUPACION DE ELECTORES DE TRICIO",
+      "acronym": ""
+    },
+    "2139": {
+      "name": "IA",
+      "acronym": ""
+    },
+    "2140": {
+      "name": "BIEN",
+      "acronym": ""
+    },
+    "2141": {
+      "name": "TAB",
+      "acronym": ""
+    },
+    "2142": {
+      "name": "CV",
+      "acronym": ""
+    },
+    "2143": {
+      "name": "SALAMANCA SÍ",
+      "acronym": ""
+    },
+    "2144": {
+      "name": "I.DLG",
+      "acronym": ""
+    },
+    "2145": {
+      "name": "GYP - LA RAD",
+      "acronym": ""
+    },
+    "2146": {
+      "name": "UUGP",
+      "acronym": ""
+    },
+    "2147": {
+      "name": "AIHS",
+      "acronym": ""
+    },
+    "2148": {
+      "name": "INDEPENDIENTES POR LUMBRALES",
+      "acronym": ""
+    },
+    "2149": {
+      "name": "AGRUPACION DE ELECTORES MORONTA-ESCUERNAVACAS",
+      "acronym": ""
+    },
+    "2150": {
+      "name": "PPC",
+      "acronym": ""
+    },
+    "2151": {
+      "name": "SAMADE",
+      "acronym": ""
+    },
+    "2152": {
+      "name": "VYC",
+      "acronym": ""
+    },
+    "2153": {
+      "name": "V.C.",
+      "acronym": ""
+    },
+    "2154": {
+      "name": "SLO",
+      "acronym": ""
+    },
+    "2155": {
+      "name": "ALTERNATIVA POR VILVESTRE",
+      "acronym": ""
+    },
+    "2156": {
+      "name": "P.S.O.E.",
+      "acronym": ""
+    },
+    "2157": {
+      "name": "ASG",
+      "acronym": ""
+    },
+    "2158": {
+      "name": "ARICO ST",
+      "acronym": ""
+    },
+    "2159": {
+      "name": "+PORARONA",
+      "acronym": ""
+    },
+    "2160": {
+      "name": "SSP",
+      "acronym": ""
+    },
+    "2161": {
+      "name": "A.H.I.",
+      "acronym": ""
+    },
+    "2162": {
+      "name": "U.P.F.",
+      "acronym": ""
+    },
+    "2163": {
+      "name": "A'GARA",
+      "acronym": ""
+    },
+    "2164": {
+      "name": "AICOD",
+      "acronym": ""
+    },
+    "2165": {
+      "name": "ASAMBLEA POR LA OROTAVA",
+      "acronym": ""
+    },
+    "2166": {
+      "name": "ASAMBLEA HERREÑA",
+      "acronym": ""
+    },
+    "2167": {
+      "name": "ASAMBLEA - ACP",
+      "acronym": ""
+    },
+    "2168": {
+      "name": "IR-VERDES",
+      "acronym": ""
+    },
+    "2169": {
+      "name": "DVC",
+      "acronym": ""
+    },
+    "2170": {
+      "name": "AUPSJR-SSP",
+      "acronym": ""
+    },
+    "2171": {
+      "name": "IXLG",
+      "acronym": ""
+    },
+    "2172": {
+      "name": "A.I.S.U.",
+      "acronym": ""
+    },
+    "2173": {
+      "name": "AISA-NC",
+      "acronym": ""
+    },
+    "2174": {
+      "name": "SOMOS TACORONTE",
+      "acronym": ""
+    },
+    "2175": {
+      "name": "+I+D TEGUESTE",
+      "acronym": ""
+    },
+    "2176": {
+      "name": "AHORA TEGUESTE-NC",
+      "acronym": ""
+    },
+    "2177": {
+      "name": "MAE",
+      "acronym": ""
+    },
+    "2178": {
+      "name": "LS",
+      "acronym": ""
+    },
+    "2179": {
+      "name": "IXB",
+      "acronym": ""
+    },
+    "2180": {
+      "name": "PCM",
+      "acronym": ""
+    },
+    "2181": {
+      "name": "AEC",
+      "acronym": ""
+    },
+    "2182": {
+      "name": "AEVC",
+      "acronym": ""
+    },
+    "2183": {
+      "name": "AHORA SI",
+      "acronym": ""
+    },
+    "2184": {
+      "name": "AIFC",
+      "acronym": ""
+    },
+    "2185": {
+      "name": "DF",
+      "acronym": ""
+    },
+    "2186": {
+      "name": "PIF",
+      "acronym": ""
+    },
+    "2187": {
+      "name": "JPH",
+      "acronym": ""
+    },
+    "2188": {
+      "name": "POR HONTALBILLA",
+      "acronym": ""
+    },
+    "2189": {
+      "name": "AGRUPACION INDEPENDIENTE POR LABAJOS",
+      "acronym": ""
+    },
+    "2190": {
+      "name": "UNIDOS X LA LASTRILLA",
+      "acronym": ""
+    },
+    "2191": {
+      "name": "CANDIDATURA INDEPENDIENTE LA LOSA UNIDA",
+      "acronym": ""
+    },
+    "2192": {
+      "name": "PCAS-TC",
+      "acronym": ""
+    },
+    "2193": {
+      "name": "A.L.M.",
+      "acronym": ""
+    },
+    "2194": {
+      "name": "PEÑAMORA",
+      "acronym": ""
+    },
+    "2195": {
+      "name": "CENTRADOS",
+      "acronym": ""
+    },
+    "2196": {
+      "name": "NCV",
+      "acronym": ""
+    },
+    "2197": {
+      "name": "PU",
+      "acronym": ""
+    },
+    "2198": {
+      "name": "SOMOS NAVILLAS",
+      "acronym": ""
+    },
+    "2199": {
+      "name": "ALIO",
+      "acronym": ""
+    },
+    "2200": {
+      "name": "M.U.",
+      "acronym": ""
+    },
+    "2201": {
+      "name": "IRVM",
+      "acronym": ""
+    },
+    "2202": {
+      "name": "AIS",
+      "acronym": ""
+    },
+    "2203": {
+      "name": "AEIS",
+      "acronym": ""
+    },
+    "2204": {
+      "name": "AEST",
+      "acronym": ""
+    },
+    "2205": {
+      "name": "ISB",
+      "acronym": ""
+    },
+    "2206": {
+      "name": "TEM",
+      "acronym": ""
+    },
+    "2207": {
+      "name": "A.V.D.P.",
+      "acronym": ""
+    },
+    "2208": {
+      "name": "ALCALA NOS IMPORTA",
+      "acronym": ""
+    },
+    "2209": {
+      "name": "P.I.D.A",
+      "acronym": ""
+    },
+    "2210": {
+      "name": "MPA",
+      "acronym": ""
+    },
+    "2211": {
+      "name": "POR ALMENSILLA",
+      "acronym": ""
+    },
+    "2212": {
+      "name": "CMOS",
+      "acronym": ""
+    },
+    "2213": {
+      "name": "CON ANDALUCIA",
+      "acronym": ""
+    },
+    "2214": {
+      "name": "BENACAZÓN NOS UNE",
+      "acronym": ""
+    },
+    "2215": {
+      "name": "BXD",
+      "acronym": ""
+    },
+    "2216": {
+      "name": "JUNTOS X LA CAMPANA",
+      "acronym": ""
+    },
+    "2217": {
+      "name": "AND",
+      "acronym": ""
+    },
+    "2218": {
+      "name": "PSOIC",
+      "acronym": ""
+    },
+    "2219": {
+      "name": "CCXC",
+      "acronym": ""
+    },
+    "2220": {
+      "name": "CPSG",
+      "acronym": ""
+    },
+    "2221": {
+      "name": "FU.E.",
+      "acronym": ""
+    },
+    "2222": {
+      "name": "IXE",
+      "acronym": ""
+    },
+    "2223": {
+      "name": "XG",
+      "acronym": ""
+    },
+    "2224": {
+      "name": "U.L.L.Y.C.",
+      "acronym": ""
+    },
+    "2225": {
+      "name": "MRDC",
+      "acronym": ""
+    },
+    "2226": {
+      "name": "UXM",
+      "acronym": ""
+    },
+    "2227": {
+      "name": "A.M.A.",
+      "acronym": ""
+    },
+    "2228": {
+      "name": "VEPM",
+      "acronym": ""
+    },
+    "2229": {
+      "name": "AMA-MORON",
+      "acronym": ""
+    },
+    "2230": {
+      "name": "PALOMARES, UN PASO MÁS",
+      "acronym": ""
+    },
+    "2231": {
+      "name": "PIM",
+      "acronym": ""
+    },
+    "2232": {
+      "name": "V L P",
+      "acronym": ""
+    },
+    "2233": {
+      "name": "DELAPUEBLA",
+      "acronym": ""
+    },
+    "2234": {
+      "name": "100% RJ",
+      "acronym": ""
+    },
+    "2235": {
+      "name": "CSJ",
+      "acronym": ""
+    },
+    "2236": {
+      "name": "SANLÚCAR EN POSITIVO",
+      "acronym": ""
+    },
+    "2237": {
+      "name": "GISAN",
+      "acronym": ""
+    },
+    "2238": {
+      "name": "COMPROMISO CON EL SAUCEJO",
+      "acronym": ""
+    },
+    "2239": {
+      "name": "ATR",
+      "acronym": ""
+    },
+    "2240": {
+      "name": "UTRERA +",
+      "acronym": ""
+    },
+    "2241": {
+      "name": "AGRUPACION DE VECINOS POR VALENCINA",
+      "acronym": ""
+    },
+    "2242": {
+      "name": "A.E. CONTIGO VVA DEL RIO Y MINAS",
+      "acronym": ""
+    },
+    "2243": {
+      "name": "A.E.V.I",
+      "acronym": ""
+    },
+    "2244": {
+      "name": "SOMOS VILLAVERDE",
+      "acronym": ""
+    },
+    "2245": {
+      "name": "JYF",
+      "acronym": ""
+    },
+    "2246": {
+      "name": "AE AUSEJO",
+      "acronym": ""
+    },
+    "2247": {
+      "name": "AIECS",
+      "acronym": ""
+    },
+    "2248": {
+      "name": "CASTILLEJO SIGLO XXI",
+      "acronym": ""
+    },
+    "2249": {
+      "name": "AE COVALEDA",
+      "acronym": ""
+    },
+    "2250": {
+      "name": "AEE",
+      "acronym": ""
+    },
+    "2251": {
+      "name": "IDM",
+      "acronym": ""
+    },
+    "2252": {
+      "name": "POR NARROS",
+      "acronym": ""
+    },
+    "2253": {
+      "name": "AIDOYP",
+      "acronym": ""
+    },
+    "2254": {
+      "name": "HACEMOSPUEBLO",
+      "acronym": ""
+    },
+    "2255": {
+      "name": "¡QA!",
+      "acronym": ""
+    },
+    "2256": {
+      "name": "A.I.E.R.",
+      "acronym": ""
+    },
+    "2257": {
+      "name": "A.E.I. COMUNIDAD CINTORA",
+      "acronym": ""
+    },
+    "2258": {
+      "name": "SPMYP",
+      "acronym": ""
+    },
+    "2259": {
+      "name": "AGRUPACIÓN ELECTORES TORRUBIA",
+      "acronym": ""
+    },
+    "2260": {
+      "name": "C.I.T.R.E.",
+      "acronym": ""
+    },
+    "2261": {
+      "name": "IMA - C",
+      "acronym": ""
+    },
+    "2262": {
+      "name": "CONFIANÇA-ARA PL",
+      "acronym": ""
+    },
+    "2263": {
+      "name": "SUMEM PER L'ALBIOL-CP",
+      "acronym": ""
+    },
+    "2264": {
+      "name": "APCANVI",
+      "acronym": ""
+    },
+    "2265": {
+      "name": "EA-ERC-AM",
+      "acronym": ""
+    },
+    "2266": {
+      "name": "INDEPENDENTS PER L'ALDEA-CANDIDATURA DE PROGRÉS",
+      "acronym": ""
+    },
+    "2267": {
+      "name": "ERCA-AM",
+      "acronym": ""
+    },
+    "2268": {
+      "name": "SOM-HI-FIC",
+      "acronym": ""
+    },
+    "2269": {
+      "name": "ECPA-C",
+      "acronym": ""
+    },
+    "2270": {
+      "name": "AECP - C",
+      "acronym": ""
+    },
+    "2271": {
+      "name": "L'EINA-ERC-AM",
+      "acronym": ""
+    },
+    "2272": {
+      "name": "AA - C",
+      "acronym": ""
+    },
+    "2273": {
+      "name": "EPC-MTE - C",
+      "acronym": ""
+    },
+    "2274": {
+      "name": "AST-PSC-CP",
+      "acronym": ""
+    },
+    "2275": {
+      "name": "MLA-AM",
+      "acronym": ""
+    },
+    "2276": {
+      "name": "SOM AMPOSTA",
+      "acronym": ""
+    },
+    "2277": {
+      "name": "AXL´A",
+      "acronym": ""
+    },
+    "2278": {
+      "name": "AGL'A",
+      "acronym": ""
+    },
+    "2279": {
+      "name": "IPA-AM",
+      "acronym": ""
+    },
+    "2280": {
+      "name": "BNY-AM",
+      "acronym": ""
+    },
+    "2281": {
+      "name": "BV - C",
+      "acronym": ""
+    },
+    "2282": {
+      "name": "UPTA-CP",
+      "acronym": ""
+    },
+    "2283": {
+      "name": "IPB - AM",
+      "acronym": ""
+    },
+    "2284": {
+      "name": "ECPB - C",
+      "acronym": ""
+    },
+    "2285": {
+      "name": "TXB-F.I.C.",
+      "acronym": ""
+    },
+    "2286": {
+      "name": "MB-AM",
+      "acronym": ""
+    },
+    "2287": {
+      "name": "BD - AM",
+      "acronym": ""
+    },
+    "2288": {
+      "name": "C - ARA PL",
+      "acronym": ""
+    },
+    "2289": {
+      "name": "TSB",
+      "acronym": ""
+    },
+    "2290": {
+      "name": "SB-MTE - C",
+      "acronym": ""
+    },
+    "2291": {
+      "name": "APB-CP",
+      "acronym": ""
+    },
+    "2292": {
+      "name": "TSB-AM",
+      "acronym": ""
+    },
+    "2293": {
+      "name": "IPC - AM",
+      "acronym": ""
+    },
+    "2294": {
+      "name": "VVUU",
+      "acronym": ""
+    },
+    "2295": {
+      "name": "UAM",
+      "acronym": ""
+    },
+    "2296": {
+      "name": "NMC",
+      "acronym": ""
+    },
+    "2297": {
+      "name": "CECP-C",
+      "acronym": ""
+    },
+    "2298": {
+      "name": "SPC-AMUNT",
+      "acronym": ""
+    },
+    "2299": {
+      "name": "FCFP - AM",
+      "acronym": ""
+    },
+    "2300": {
+      "name": "SOMÇ",
+      "acronym": ""
+    },
+    "2301": {
+      "name": "TSM-AM",
+      "acronym": ""
+    },
+    "2302": {
+      "name": "MO1-TE",
+      "acronym": ""
+    },
+    "2303": {
+      "name": "SOMOS CATLLAR",
+      "acronym": ""
+    },
+    "2304": {
+      "name": "IPC",
+      "acronym": ""
+    },
+    "2305": {
+      "name": "C+",
+      "acronym": ""
+    },
+    "2306": {
+      "name": "SPC-AM",
+      "acronym": ""
+    },
+    "2307": {
+      "name": "CP - AM",
+      "acronym": ""
+    },
+    "2308": {
+      "name": "SOM CREIXELL",
+      "acronym": ""
+    },
+    "2309": {
+      "name": "UPC-FIC",
+      "acronym": ""
+    },
+    "2310": {
+      "name": "ECPC-C",
+      "acronym": ""
+    },
+    "2311": {
+      "name": "AD - AM",
+      "acronym": ""
+    },
+    "2312": {
+      "name": "SOM ESPLUGA-AM",
+      "acronym": ""
+    },
+    "2313": {
+      "name": "NOVA ESPLUGA - PSC-CP",
+      "acronym": ""
+    },
+    "2314": {
+      "name": "ALF-AM",
+      "acronym": ""
+    },
+    "2315": {
+      "name": "LFE - AM",
+      "acronym": ""
+    },
+    "2316": {
+      "name": "EPF-FIC",
+      "acronym": ""
+    },
+    "2317": {
+      "name": "ERC- EPF- AM",
+      "acronym": ""
+    },
+    "2318": {
+      "name": "AXF-CP",
+      "acronym": ""
+    },
+    "2319": {
+      "name": "AF-AM",
+      "acronym": ""
+    },
+    "2320": {
+      "name": "TSG-CP",
+      "acronym": ""
+    },
+    "2321": {
+      "name": "APG-ERC-AM",
+      "acronym": ""
+    },
+    "2322": {
+      "name": "SXG - CP",
+      "acronym": ""
+    },
+    "2323": {
+      "name": "UPG - AM",
+      "acronym": ""
+    },
+    "2324": {
+      "name": "TSG-AM",
+      "acronym": ""
+    },
+    "2325": {
+      "name": "PLA/G",
+      "acronym": ""
+    },
+    "2326": {
+      "name": "APG - AM",
+      "acronym": ""
+    },
+    "2327": {
+      "name": "G-CP",
+      "acronym": ""
+    },
+    "2328": {
+      "name": "IPG - AM",
+      "acronym": ""
+    },
+    "2329": {
+      "name": "PAG - AMUNT",
+      "acronym": ""
+    },
+    "2330": {
+      "name": "MÉS-AM",
+      "acronym": ""
+    },
+    "2331": {
+      "name": "IEL - AM",
+      "acronym": ""
+    },
+    "2332": {
+      "name": "FLL-AM",
+      "acronym": ""
+    },
+    "2333": {
+      "name": "CALL-ARA PL",
+      "acronym": ""
+    },
+    "2334": {
+      "name": "PMM - AM",
+      "acronym": ""
+    },
+    "2335": {
+      "name": "TPM-CP",
+      "acronym": ""
+    },
+    "2336": {
+      "name": "ALTERNATIVA PER MASLLORENÇ - CP",
+      "acronym": ""
+    },
+    "2337": {
+      "name": "FM-AM",
+      "acronym": ""
+    },
+    "2338": {
+      "name": "FM - AM",
+      "acronym": ""
+    },
+    "2339": {
+      "name": "A - AM",
+      "acronym": ""
+    },
+    "2340": {
+      "name": "JXM-AM",
+      "acronym": ""
+    },
+    "2341": {
+      "name": "PB.SM",
+      "acronym": ""
+    },
+    "2342": {
+      "name": "IMM",
+      "acronym": ""
+    },
+    "2343": {
+      "name": "JUNTSXMTB - ARA PL",
+      "acronym": ""
+    },
+    "2344": {
+      "name": "DP - FIC",
+      "acronym": ""
+    },
+    "2345": {
+      "name": "EM-AM",
+      "acronym": ""
+    },
+    "2346": {
+      "name": "SM - AMUNT",
+      "acronym": ""
+    },
+    "2347": {
+      "name": "EPM - ARA PL",
+      "acronym": ""
+    },
+    "2348": {
+      "name": "FM-AMUNT",
+      "acronym": ""
+    },
+    "2349": {
+      "name": "UPM-FIC",
+      "acronym": ""
+    },
+    "2350": {
+      "name": "#COMPARTIM-FIC",
+      "acronym": ""
+    },
+    "2351": {
+      "name": "SOM - AM",
+      "acronym": ""
+    },
+    "2352": {
+      "name": "SOM-HI NULLES",
+      "acronym": ""
+    },
+    "2353": {
+      "name": "IP-FIC",
+      "acronym": ""
+    },
+    "2354": {
+      "name": "XP-AM",
+      "acronym": ""
+    },
+    "2355": {
+      "name": "TSPIP - AM",
+      "acronym": ""
+    },
+    "2356": {
+      "name": "AP-ERC-AM",
+      "acronym": ""
+    },
+    "2357": {
+      "name": "LPPF",
+      "acronym": ""
+    },
+    "2358": {
+      "name": "-FIC",
+      "acronym": ""
+    },
+    "2359": {
+      "name": "EPB-MTE - C",
+      "acronym": ""
+    },
+    "2360": {
+      "name": "UNIC - FIC",
+      "acronym": ""
+    },
+    "2361": {
+      "name": "APP - AM",
+      "acronym": ""
+    },
+    "2362": {
+      "name": "UAS-POBLA",
+      "acronym": ""
+    },
+    "2363": {
+      "name": "AMPM-PSC-CP",
+      "acronym": ""
+    },
+    "2364": {
+      "name": "UNITS PEL PONT D'ARMENTERA - CP",
+      "acronym": ""
+    },
+    "2365": {
+      "name": "IPT - AM",
+      "acronym": ""
+    },
+    "2366": {
+      "name": "JPP-CP",
+      "acronym": ""
+    },
+    "2367": {
+      "name": "DIP-CP",
+      "acronym": ""
+    },
+    "2368": {
+      "name": "SPP-AM",
+      "acronym": ""
+    },
+    "2369": {
+      "name": "CIQ-AM",
+      "acronym": ""
+    },
+    "2370": {
+      "name": "PR-PSC-CP",
+      "acronym": ""
+    },
+    "2371": {
+      "name": "FR-MTE - C",
+      "acronym": ""
+    },
+    "2372": {
+      "name": "LRXXI-ARA PL",
+      "acronym": ""
+    },
+    "2373": {
+      "name": "MR",
+      "acronym": ""
+    },
+    "2374": {
+      "name": "SI-SOLIDARITAT",
+      "acronym": ""
+    },
+    "2375": {
+      "name": "RST - AM",
+      "acronym": ""
+    },
+    "2376": {
+      "name": "RR - AM",
+      "acronym": ""
+    },
+    "2377": {
+      "name": "TXLR",
+      "acronym": ""
+    },
+    "2378": {
+      "name": "SLR - AM",
+      "acronym": ""
+    },
+    "2379": {
+      "name": "TRIA RODA",
+      "acronym": ""
+    },
+    "2380": {
+      "name": "AERA",
+      "acronym": ""
+    },
+    "2381": {
+      "name": "MR-MTE - C",
+      "acronym": ""
+    },
+    "2382": {
+      "name": "RPC-AM",
+      "acronym": ""
+    },
+    "2383": {
+      "name": "TXS-FIC",
+      "acronym": ""
+    },
+    "2384": {
+      "name": "SUMEN PER SALOU -PSC-CP",
+      "acronym": ""
+    },
+    "2385": {
+      "name": "USAP",
+      "acronym": ""
+    },
+    "2386": {
+      "name": "CSJ - ARA PL",
+      "acronym": ""
+    },
+    "2387": {
+      "name": "PERSB'",
+      "acronym": ""
+    },
+    "2388": {
+      "name": "SBAU - ARA PL",
+      "acronym": ""
+    },
+    "2389": {
+      "name": "CPSOECP - C",
+      "acronym": ""
+    },
+    "2390": {
+      "name": "UPS-FIC",
+      "acronym": ""
+    },
+    "2391": {
+      "name": "PSC-JSP-CP",
+      "acronym": ""
+    },
+    "2392": {
+      "name": "APS-AM",
+      "acronym": ""
+    },
+    "2393": {
+      "name": "ES-ERC-AM",
+      "acronym": ""
+    },
+    "2394": {
+      "name": "AS",
+      "acronym": ""
+    },
+    "2395": {
+      "name": "FS-MTE - C",
+      "acronym": ""
+    },
+    "2396": {
+      "name": "IPS-AM",
+      "acronym": ""
+    },
+    "2397": {
+      "name": "TGNECP - C",
+      "acronym": ""
+    },
+    "2398": {
+      "name": "IFP-ERC-AM",
+      "acronym": ""
+    },
+    "2399": {
+      "name": "CT -ARA PL",
+      "acronym": ""
+    },
+    "2400": {
+      "name": "AISA-FIC",
+      "acronym": ""
+    },
+    "2401": {
+      "name": "TDF - AMUNT",
+      "acronym": ""
+    },
+    "2402": {
+      "name": "JUNTS-AM",
+      "acronym": ""
+    },
+    "2403": {
+      "name": "ALTERNATIVA TORREDEMBARRA",
+      "acronym": ""
+    },
+    "2404": {
+      "name": "RT-ERC-AM",
+      "acronym": ""
+    },
+    "2405": {
+      "name": "MT-PSC-CP",
+      "acronym": ""
+    },
+    "2406": {
+      "name": "SU-CP",
+      "acronym": ""
+    },
+    "2407": {
+      "name": "ACTIVEMUIB",
+      "acronym": ""
+    },
+    "2408": {
+      "name": "UB-ERC-AM",
+      "acronym": ""
+    },
+    "2409": {
+      "name": "AM VH-AM",
+      "acronym": ""
+    },
+    "2410": {
+      "name": "FIC",
+      "acronym": ""
+    },
+    "2411": {
+      "name": "ECPEV - PSP - C",
+      "acronym": ""
+    },
+    "2412": {
+      "name": "FEMEV",
+      "acronym": ""
+    },
+    "2413": {
+      "name": "SP - ERC - AM",
+      "acronym": ""
+    },
+    "2414": {
+      "name": "COMPROMIS X VILA RODONA - CP",
+      "acronym": ""
+    },
+    "2415": {
+      "name": "DV - AM",
+      "acronym": ""
+    },
+    "2416": {
+      "name": "PSC-VST-CP",
+      "acronym": ""
+    },
+    "2417": {
+      "name": "VSEC-ECP-C",
+      "acronym": ""
+    },
+    "2418": {
+      "name": "CPV-AM",
+      "acronym": ""
+    },
+    "2419": {
+      "name": "TOT(S)",
+      "acronym": ""
+    },
+    "2420": {
+      "name": "VILALLONGA POT MÉS-CP",
+      "acronym": ""
+    },
+    "2421": {
+      "name": "IVE - AM",
+      "acronym": ""
+    },
+    "2422": {
+      "name": "APVP - AM",
+      "acronym": ""
+    },
+    "2423": {
+      "name": "AMICS DE VILANOVA-CP",
+      "acronym": ""
+    },
+    "2424": {
+      "name": "UV-ERC-AM",
+      "acronym": ""
+    },
+    "2425": {
+      "name": "AV-AM",
+      "acronym": ""
+    },
+    "2426": {
+      "name": "IPLVA - AM",
+      "acronym": ""
+    },
+    "2427": {
+      "name": "IPVB-AM",
+      "acronym": ""
+    },
+    "2428": {
+      "name": "PXV - AM",
+      "acronym": ""
+    },
+    "2429": {
+      "name": "VIA-AM",
+      "acronym": ""
+    },
+    "2430": {
+      "name": "GA:IU",
+      "acronym": ""
+    },
+    "2431": {
+      "name": "GC",
+      "acronym": ""
+    },
+    "2432": {
+      "name": "GLH-IU",
+      "acronym": ""
+    },
+    "2433": {
+      "name": "MASSALIÓ VIU",
+      "acronym": ""
+    },
+    "2434": {
+      "name": "POR MOLINOS",
+      "acronym": ""
+    },
+    "2435": {
+      "name": "TERUEL EXISTE",
+      "acronym": ""
+    },
+    "2436": {
+      "name": "GM-IU",
+      "acronym": ""
+    },
+    "2437": {
+      "name": "GLPH-IU",
+      "acronym": ""
+    },
+    "2438": {
+      "name": "TERUEL",
+      "acronym": ""
+    },
+    "2439": {
+      "name": "SIA",
+      "acronym": ""
+    },
+    "2440": {
+      "name": "JUNTOS POR AÑOVER",
+      "acronym": ""
+    },
+    "2441": {
+      "name": "BURGUILLOS VECINAL",
+      "acronym": ""
+    },
+    "2442": {
+      "name": "AQUI AHORA",
+      "acronym": ""
+    },
+    "2443": {
+      "name": "+FCC",
+      "acronym": ""
+    },
+    "2444": {
+      "name": "EPT",
+      "acronym": ""
+    },
+    "2445": {
+      "name": "M-LT",
+      "acronym": ""
+    },
+    "2446": {
+      "name": "ASHL",
+      "acronym": ""
+    },
+    "2447": {
+      "name": "SLC",
+      "acronym": ""
+    },
+    "2448": {
+      "name": "UNIDAS IU",
+      "acronym": ""
+    },
+    "2449": {
+      "name": "VDP",
+      "acronym": ""
+    },
+    "2450": {
+      "name": "AEPE",
+      "acronym": ""
+    },
+    "2451": {
+      "name": "UNIDAS-IU",
+      "acronym": ""
+    },
+    "2452": {
+      "name": "VXR",
+      "acronym": ""
+    },
+    "2453": {
+      "name": "RIELVES FUNCIONA",
+      "acronym": ""
+    },
+    "2454": {
+      "name": "A.E.S.P.",
+      "acronym": ""
+    },
+    "2455": {
+      "name": "MSÑ",
+      "acronym": ""
+    },
+    "2456": {
+      "name": "TXS",
+      "acronym": ""
+    },
+    "2457": {
+      "name": "JXU",
+      "acronym": ""
+    },
+    "2458": {
+      "name": "UPVI",
+      "acronym": ""
+    },
+    "2459": {
+      "name": "UNION",
+      "acronym": ""
+    },
+    "2460": {
+      "name": "GA",
+      "acronym": ""
+    },
+    "2461": {
+      "name": "UNITS PER AGULLENT",
+      "acronym": ""
+    },
+    "2462": {
+      "name": "PER AIELO",
+      "acronym": ""
+    },
+    "2463": {
+      "name": "AVANT - DECIDIX",
+      "acronym": ""
+    },
+    "2464": {
+      "name": "AEVA23",
+      "acronym": ""
+    },
+    "2465": {
+      "name": "AA4",
+      "acronym": ""
+    },
+    "2466": {
+      "name": "SOC ALBUIXECH",
+      "acronym": ""
+    },
+    "2467": {
+      "name": "ANEM",
+      "acronym": ""
+    },
+    "2468": {
+      "name": "SD´ALGINET",
+      "acronym": ""
+    },
+    "2469": {
+      "name": "UNXAS.",
+      "acronym": ""
+    },
+    "2470": {
+      "name": "JUNTOS POR ANDILLA",
+      "acronym": ""
+    },
+    "2471": {
+      "name": "I X B",
+      "acronym": ""
+    },
+    "2472": {
+      "name": "SOM BARXETA-AM",
+      "acronym": ""
+    },
+    "2473": {
+      "name": "MBEN",
+      "acronym": ""
+    },
+    "2474": {
+      "name": "MXB",
+      "acronym": ""
+    },
+    "2475": {
+      "name": "UPERB",
+      "acronym": ""
+    },
+    "2476": {
+      "name": "BP",
+      "acronym": ""
+    },
+    "2477": {
+      "name": "PROPOSEM ESQUERRA - ACORD MUNICIPAL",
+      "acronym": ""
+    },
+    "2478": {
+      "name": "JXB",
+      "acronym": ""
+    },
+    "2479": {
+      "name": "COALICIÓN ELECTORAL PARTIDOS MÁS CAMARENA-TORRE EN CONILL",
+      "acronym": ""
+    },
+    "2480": {
+      "name": "XBUÑOL",
+      "acronym": ""
+    },
+    "2481": {
+      "name": "I.A.B.",
+      "acronym": ""
+    },
+    "2482": {
+      "name": "EN POSITIVO",
+      "acronym": ""
+    },
+    "2483": {
+      "name": "SU+",
+      "acronym": ""
+    },
+    "2484": {
+      "name": "VPC",
+      "acronym": ""
+    },
+    "2485": {
+      "name": "UPERC",
+      "acronym": ""
+    },
+    "2486": {
+      "name": "ACC",
+      "acronym": ""
+    },
+    "2487": {
+      "name": "GXC",
+      "acronym": ""
+    },
+    "2488": {
+      "name": "TXCA",
+      "acronym": ""
+    },
+    "2489": {
+      "name": "CONTIGO SOM CASINOS",
+      "acronym": ""
+    },
+    "2490": {
+      "name": "EUPV-PUP:ADELANTE",
+      "acronym": ""
+    },
+    "2491": {
+      "name": "ACTIVA CHIVA",
+      "acronym": ""
+    },
+    "2492": {
+      "name": "ADUC",
+      "acronym": ""
+    },
+    "2493": {
+      "name": "COMPROMIS",
+      "acronym": ""
+    },
+    "2494": {
+      "name": "VINCHI",
+      "acronym": ""
+    },
+    "2495": {
+      "name": "XVR",
+      "acronym": ""
+    },
+    "2496": {
+      "name": "AGRUPACIÓ PIC",
+      "acronym": ""
+    },
+    "2497": {
+      "name": "PL@CE",
+      "acronym": ""
+    },
+    "2498": {
+      "name": "PFONT",
+      "acronym": ""
+    },
+    "2499": {
+      "name": "CG",
+      "acronym": ""
+    },
+    "2500": {
+      "name": "PUG",
+      "acronym": ""
+    },
+    "2501": {
+      "name": "SEF",
+      "acronym": ""
+    },
+    "2502": {
+      "name": "FNU",
+      "acronym": ""
+    },
+    "2503": {
+      "name": "UXLL",
+      "acronym": ""
+    },
+    "2504": {
+      "name": "AGRUPACION DE ELECTORES JUNTOS POR LOSA",
+      "acronym": ""
+    },
+    "2505": {
+      "name": "PODEMOS - AV (PODEM)",
+      "acronym": ""
+    },
+    "2506": {
+      "name": "EN MARXA",
+      "acronym": ""
+    },
+    "2507": {
+      "name": "VPM",
+      "acronym": ""
+    },
+    "2508": {
+      "name": "X MONTITXELVO",
+      "acronym": ""
+    },
+    "2509": {
+      "name": "IXM - DECIDIX",
+      "acronym": ""
+    },
+    "2510": {
+      "name": "TSM",
+      "acronym": ""
+    },
+    "2511": {
+      "name": "A.I.G.U.A.",
+      "acronym": ""
+    },
+    "2512": {
+      "name": "UPDN",
+      "acronym": ""
+    },
+    "2513": {
+      "name": "PRO OLIVA",
+      "acronym": ""
+    },
+    "2514": {
+      "name": "PTDERV",
+      "acronym": ""
+    },
+    "2515": {
+      "name": "POBLE - DECIDIX",
+      "acronym": ""
+    },
+    "2516": {
+      "name": "CELP",
+      "acronym": ""
+    },
+    "2517": {
+      "name": "C.U.PO.",
+      "acronym": ""
+    },
+    "2518": {
+      "name": "PURP",
+      "acronym": ""
+    },
+    "2519": {
+      "name": "PODEM - EUPV - IA: UNIDAS",
+      "acronym": ""
+    },
+    "2520": {
+      "name": "PRYA",
+      "acronym": ""
+    },
+    "2521": {
+      "name": "PODEM - EUPV - GR: UNIDAS",
+      "acronym": ""
+    },
+    "2522": {
+      "name": "AROT",
+      "acronym": ""
+    },
+    "2523": {
+      "name": "INICIATIVA PORTEÑA",
+      "acronym": ""
+    },
+    "2524": {
+      "name": "AISAB",
+      "acronym": ""
+    },
+    "2525": {
+      "name": "JUNTS PER SEGART",
+      "acronym": ""
+    },
+    "2526": {
+      "name": "AGRUPACION ELECTORAL LA TORRE DE PORTACOELI",
+      "acronym": ""
+    },
+    "2527": {
+      "name": "UNIDAS-EUPV: ENDAVANT",
+      "acronym": ""
+    },
+    "2528": {
+      "name": "SU-EUPV:ENDAVANT",
+      "acronym": ""
+    },
+    "2529": {
+      "name": "SXD",
+      "acronym": ""
+    },
+    "2530": {
+      "name": "PODEM - EUPV: UNIDAS",
+      "acronym": ""
+    },
+    "2531": {
+      "name": "ST",
+      "acronym": ""
+    },
+    "2532": {
+      "name": "AITOR",
+      "acronym": ""
+    },
+    "2533": {
+      "name": "TUÉJAR",
+      "acronym": ""
+    },
+    "2534": {
+      "name": "PIPT",
+      "acronym": ""
+    },
+    "2535": {
+      "name": "XU-EUPV:ENDAVANT",
+      "acronym": ""
+    },
+    "2536": {
+      "name": "JPZ",
+      "acronym": ""
+    },
+    "2537": {
+      "name": "IPAE",
+      "acronym": ""
+    },
+    "2538": {
+      "name": "VECINOS ARROYO DE LA ENCOMIENDA",
+      "acronym": ""
+    },
+    "2539": {
+      "name": "BARCIAL DE LA LOMA IZQUIERDA UNIDA TLP",
+      "acronym": ""
+    },
+    "2540": {
+      "name": "POR BOLAÑOS",
+      "acronym": ""
+    },
+    "2541": {
+      "name": "ACDC",
+      "acronym": ""
+    },
+    "2542": {
+      "name": "C Y P",
+      "acronym": ""
+    },
+    "2543": {
+      "name": "HERRIN DE CAMPOS IZQUIERDA UNIDA TLP",
+      "acronym": ""
+    },
+    "2544": {
+      "name": "CONTIGO AVANZAMOS",
+      "acronym": ""
+    },
+    "2545": {
+      "name": "IL",
+      "acronym": ""
+    },
+    "2546": {
+      "name": "XLD",
+      "acronym": ""
+    },
+    "2547": {
+      "name": "M1º-TV",
+      "acronym": ""
+    },
+    "2548": {
+      "name": "J.P.M.",
+      "acronym": ""
+    },
+    "2549": {
+      "name": "SOMOSXNAVADELREY",
+      "acronym": ""
+    },
+    "2550": {
+      "name": "IO-TV",
+      "acronym": ""
+    },
+    "2551": {
+      "name": "PHAE",
+      "acronym": ""
+    },
+    "2552": {
+      "name": "AQUÍ",
+      "acronym": ""
+    },
+    "2553": {
+      "name": "XNTROF",
+      "acronym": ""
+    },
+    "2554": {
+      "name": "POR VALVENI",
+      "acronym": ""
+    },
+    "2555": {
+      "name": "S.D.",
+      "acronym": ""
+    },
+    "2556": {
+      "name": "TIEDRA IZQUIERDA UNIDA TLP",
+      "acronym": ""
+    },
+    "2557": {
+      "name": "URT",
+      "acronym": ""
+    },
+    "2558": {
+      "name": "VPT",
+      "acronym": ""
+    },
+    "2559": {
+      "name": "IHD",
+      "acronym": ""
+    },
+    "2560": {
+      "name": "SOMOS DUERO",
+      "acronym": ""
+    },
+    "2561": {
+      "name": "VALDUNQUILLO IZQUIERDA UNIDA TLP",
+      "acronym": ""
+    },
+    "2562": {
+      "name": "A.E.P",
+      "acronym": ""
+    },
+    "2563": {
+      "name": "AHORA DECIDE",
+      "acronym": ""
+    },
+    "2564": {
+      "name": "ZSI",
+      "acronym": ""
+    },
+    "2565": {
+      "name": "PEB",
+      "acronym": ""
+    },
+    "2566": {
+      "name": "XCM",
+      "acronym": ""
+    },
+    "2567": {
+      "name": "AECOTANES",
+      "acronym": ""
+    },
+    "2568": {
+      "name": "CUBO DEL VINO",
+      "acronym": ""
+    },
+    "2569": {
+      "name": "VDV",
+      "acronym": ""
+    },
+    "2570": {
+      "name": "AGRUPACIÓN DE ELECTORES 'PUEBLOS CON FUTURO'",
+      "acronym": ""
+    },
+    "2571": {
+      "name": "PIMV",
+      "acronym": ""
+    },
+    "2572": {
+      "name": "JUPAL",
+      "acronym": ""
+    },
+    "2573": {
+      "name": "AGRUPACION DE ELECTORES DE PRADO",
+      "acronym": ""
+    },
+    "2574": {
+      "name": "AGRUPACION DE ELECTORES GRUPO INDEPENDIENTE DE SAN MIGUEL DEL VALLE",
+      "acronym": ""
+    },
+    "2575": {
+      "name": "N.M.P.T.",
+      "acronym": ""
+    },
+    "2576": {
+      "name": "XVILLAVEZA",
+      "acronym": ""
+    },
+    "2577": {
+      "name": "APUESTA POR ALAGON",
+      "acronym": ""
+    },
+    "2578": {
+      "name": "POR ALMOCHUEL",
+      "acronym": ""
+    },
+    "2579": {
+      "name": "AMBEL ES+",
+      "acronym": ""
+    },
+    "2580": {
+      "name": "AMCJ",
+      "acronym": ""
+    },
+    "2581": {
+      "name": "S-B",
+      "acronym": ""
+    },
+    "2582": {
+      "name": "BEC",
+      "acronym": ""
+    },
+    "2583": {
+      "name": "#SOMOSCASPE",
+      "acronym": ""
+    },
+    "2584": {
+      "name": "C.CUARTE",
+      "acronym": ""
+    },
+    "2585": {
+      "name": "ASÍ EJEA",
+      "acronym": ""
+    },
+    "2586": {
+      "name": "TRABAJANDO POR GELSA",
+      "acronym": ""
+    },
+    "2587": {
+      "name": "LET",
+      "acronym": ""
+    },
+    "2588": {
+      "name": "A.D.E. POR LUESIA",
+      "acronym": ""
+    },
+    "2589": {
+      "name": "AIRE NUEVO MAGALLON",
+      "acronym": ""
+    },
+    "2590": {
+      "name": "POR MALLEN",
+      "acronym": ""
+    },
+    "2591": {
+      "name": "PMDH",
+      "acronym": ""
+    },
+    "2592": {
+      "name": "JXM",
+      "acronym": ""
+    },
+    "2593": {
+      "name": "GMEC",
+      "acronym": ""
+    },
+    "2594": {
+      "name": "AGRUPACION DE ELECTORES DE MOZOTA",
+      "acronym": ""
+    },
+    "2595": {
+      "name": "MUEL CON RASMIA",
+      "acronym": ""
+    },
+    "2596": {
+      "name": "X NUEZ",
+      "acronym": ""
+    },
+    "2597": {
+      "name": "PANICEROS POR PANIZA",
+      "acronym": ""
+    },
+    "2598": {
+      "name": "SOMOS PASTRIZ",
+      "acronym": ""
+    },
+    "2599": {
+      "name": "CON RICLA -PODEMOS-AV",
+      "acronym": ""
+    },
+    "2600": {
+      "name": "SI",
+      "acronym": ""
+    },
+    "2601": {
+      "name": "TP - IU",
+      "acronym": ""
+    },
+    "2602": {
+      "name": "ADM",
+      "acronym": ""
+    },
+    "2603": {
+      "name": "U.A.",
+      "acronym": ""
+    },
+    "2604": {
+      "name": "FIA",
+      "acronym": ""
+    },
+    "2605": {
+      "name": "ZEC",
+      "acronym": ""
+    },
+    "2606": {
+      "name": "FIA-PILL",
+      "acronym": ""
+    },
+    "2608": {
+      "name": "MÉS per Mallorca",
+      "acronym": ""
+    },
+    "2609": {
+      "name": "PARTIT SOCIALISTA DE LES ILLES BALEARS",
+      "acronym": ""
+    },
+    "2611": {
+      "name": "MÉS PER MENORCA",
+      "acronym": ""
+    },
+    "2612": {
+      "name": "COALICIÓ SA UNIÓ DE FORMENTERA",
+      "acronym": ""
+    },
+    "2613": {
+      "name": "COALICIÓ UNIDAS PODEMOS",
+      "acronym": ""
+    },
+    "2614": {
+      "name": "PARTIT SOCIALISTA OBRER ESPANYOL",
+      "acronym": ""
+    },
+    "2615": {
+      "name": "Junts per Catalunya",
+      "acronym": ""
+    },
+    "2617": {
+      "name": "Esquerra Republicana de Catalunya",
+      "acronym": ""
+    },
+    "2618": {
+      "name": "Catalunya en Comú",
+      "acronym": ""
+    },
+    "2619": {
+      "name": "Partit dels Socialistes de Catalunya (PSC-PSOE)",
+      "acronym": ""
+    },
+    "2620": {
+      "name": "Partit Popular",
+      "acronym": ""
+    },
+    "2621": {
+      "name": "Candidatura d'Unitat Popular - Defensem la Terra",
+      "acronym": ""
+    },
+    "2622": {
+      "name": "Units per Avançar",
+      "acronym": ""
+    },
+    "2623": {
+      "name": "Independent",
+      "acronym": ""
+    },
+    "2624": {
+      "name": "Esquerra Unida i Alternativa",
+      "acronym": ""
+    },
+    "2625": {
+      "name": "Aliança Catalana",
+      "acronym": ""
+    },
+    "2627": {
+      "name": "G.P. Popular de Andalucía",
+      "acronym": ""
+    },
+    "2628": {
+      "name": "G.P. Por Andalucía",
+      "acronym": ""
+    },
+    "2629": {
+      "name": "G.P. Vox en Andalucía",
+      "acronym": ""
+    },
+    "2630": {
+      "name": "G.P. Adelante Andalucía",
+      "acronym": ""
+    },
+    "2632": {
+      "name": "AHI",
+      "acronym": ""
+    },
+    "2633": {
+      "name": "CC-PNC",
+      "acronym": ""
+    },
+    "2634": {
+      "name": "NCA-BC",
+      "acronym": ""
+    },
+    "2640": {
+      "name": "Grupo Parlamentario Regionalista",
+      "acronym": ""
+    },
+    "2642": {
+      "name": "Grupo Parlamentario Popular de Galicia",
+      "acronym": ""
+    },
+    "2643": {
+      "name": "Grupo Parlamentario do Bloque Nacionalista Galego",
+      "acronym": ""
+    },
+    "2647": {
+      "name": "Grupo Parlamentario Podemos-Izquierda Unida",
+      "acronym": ""
+    },
+    "2648": {
+      "name": "G.P. Unión del Pueblo Navarro",
+      "acronym": ""
+    },
+    "2649": {
+      "name": "G.P. Partido Socialista de Navarra",
+      "acronym": ""
+    },
+    "2650": {
+      "name": "G.P. EH Bildu Nafarroa",
+      "acronym": ""
+    },
+    "2651": {
+      "name": "EA-NV",
+      "acronym": ""
+    },
+    "2652": {
+      "name": "SV-ES",
+      "acronym": ""
+    }
+  },
   "party_shifts": [],
   "topic_shifts": [],
   "district_representation": []

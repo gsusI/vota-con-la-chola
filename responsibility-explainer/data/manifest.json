@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at": "2026-04-25T11:17:37Z",
-    "snapshot_date": "2026-04-25",
+    "generated_at": "2026-07-26T05:53:20Z",
+    "snapshot_date": "2026-07-26",
     "schema_version": "responsibility_explainer_manifest_v1",
-    "snapshot_db": "etl/data/staging/politicos-es.db",
+    "snapshot_db": "responsibility-explainer.db",
     "total_cases": 2
   },
   "cases": [
@@ -13,7 +13,7 @@
       "summary": "Benchmark de accountability para una catastrofe publica: que avisos existieron, quien tenia deber de actuar, que decisiones u omisiones precedieron el dano, y que respuesta normativa y parlamentaria quedo documentada.",
       "canonical_path": "/responsibility-explainer/dana-valencia-2024/",
       "coverage": {
-        "initiatives_total": 0,
+        "initiatives_total": 9,
         "initiatives_with_votes_total": 0,
         "initiatives_with_measure_points_total": 0,
         "vote_events_total": 0,
@@ -32,8 +32,8 @@
         "structural_evidence_rows_total": 28
       },
       "question_status_counts": {
-        "partial": 3,
-        "missing": 5
+        "partial": 4,
+        "missing": 4
       }
     },
     {
