@@ -1,7 +1,7 @@
 {
   "queue_version": "v1",
-  "generated_at": "2026-07-28T05:49:38+00:00",
-  "snapshot_date": "2026-07-28",
+  "generated_at": "2026-07-31T05:58:18+00:00",
+  "snapshot_date": "2026-07-31",
   "summary": {
     "queue_items_total": 33,
     "p0_total": 5,
@@ -421,7 +421,7 @@
         ],
         "pre_commands": [
           "python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>",
-          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-07-28"
+          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-07-31"
         ]
       },
       "rank": 6
@@ -1580,11 +1580,11 @@
       },
       "warehouse": {
         "primary_table": "parl_initiatives",
-        "primary_rows": 411,
+        "primary_rows": 409,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
-          "parl_initiatives": 411,
+          "parl_initiatives": 409,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
@@ -1872,7 +1872,7 @@
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Andalucia)",
       "legal_verification_status": "pending_review",
       "progress": {
-        "loaded": 106,
+        "loaded": 109,
         "target": 90,
         "percent": 100
       },
@@ -1885,16 +1885,16 @@
       },
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 106,
+        "primary_rows": 109,
         "counts": {
-          "mandates": 106,
+          "mandates": 109,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "Ingesta completada: 106/106 registros validos",
+      "last_message": "Ingesta completada: 109/109 registros validos",
       "tracker_block_note": "GitHub Actions strict-network ya no encuentra diputados actuales (`codmie/nlegis`); requiere reparar parser o endpoint antes de volver a `DONE`.",
       "action_titles": [
         "PARTIAL: Parlamento de Andalucia (listado + fichas)"
@@ -1935,7 +1935,7 @@
       "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
       "legal_verification_status": "verified",
       "progress": {
-        "loaded": 3,
+        "loaded": 4,
         "target": 2,
         "percent": 100
       },
@@ -1957,7 +1957,7 @@
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "Ingesta completada: 3/3 registros validos",
+      "last_message": "Ingesta completada: 4/4 registros validos",
       "tracker_block_note": "Done now: NO para live-clean actual. La evidencia hist\u00f3rica existe, pero el DB operativo actual no conserva runs de red para `moncloa_referencias` y `moncloa_rss_referencias`; repetir strict-network o documentar bloqueo antes de `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`.",
       "action_titles": [
         "PARTIAL: La Moncloa: referencias + RSS"
@@ -2063,7 +2063,7 @@
       "tracker_tipo_dato": "Marco legal electoral",
       "legal_verification_status": "verified",
       "progress": {
-        "loaded": 254,
+        "loaded": 190,
         "target": 5,
         "percent": 100
       },
@@ -2085,7 +2085,7 @@
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "Ingesta completada: 254/254 registros validos",
+      "last_message": "Ingesta completada: 190/190 registros validos",
       "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. La ingesta historica BOE (`boe_api_legal`) existe (`records_loaded=298`, `policy_events_boe=298`), pero PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>`. Mantener como parcial hasta recuperar run reproducible de red real vigente. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log`, `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md` y `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
       "action_titles": [
         "PARTIAL: BOE API"
