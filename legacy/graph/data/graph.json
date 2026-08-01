@@ -4583,10 +4583,10 @@
     },
     {
       "data": {
-        "id": "person:27818",
+        "id": "person:27817",
         "type": "person",
         "label": "ADELA PEREIRA SANCHEZ",
-        "person_id": 27818,
+        "person_id": 27817,
         "full_name": "ADELA PEREIRA SANCHEZ",
         "given_name": "ADELA",
         "family_name": "PEREIRA SANCHEZ",
@@ -14537,9 +14537,9 @@
     },
     {
       "data": {
-        "id": "mandate-party:35848",
+        "id": "mandate-party:35847",
         "type": "party_affiliation",
-        "source": "person:27818",
+        "source": "person:27817",
         "target": "party:313",
         "source_id": "municipal_concejales",
         "is_active": 1
@@ -14547,17 +14547,17 @@
     },
     {
       "data": {
-        "id": "source-person:municipal_concejales:27818",
+        "id": "source-person:municipal_concejales:27817",
         "type": "source_person",
         "source": "source:municipal_concejales",
-        "target": "person:27818"
+        "target": "person:27817"
       }
     },
     {
       "data": {
-        "id": "mandate-institution:35848",
+        "id": "mandate-institution:35847",
         "type": "mandate",
-        "source": "person:27818",
+        "source": "person:27817",
         "target": "institution:2909",
         "label": "Concejal",
         "source_id": "municipal_concejales",
