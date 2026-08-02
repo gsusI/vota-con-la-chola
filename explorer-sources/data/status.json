@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T06:24:49+00:00",
+  "generated_at": "2026-08-02T05:59:39+00:00",
   "summary": {
     "desired": 46,
     "present": 44,
@@ -7,14 +7,14 @@
     "extra": 0,
     "not_run": 5,
     "running": 0,
-    "ok": 27,
-    "partial": 12,
+    "ok": 29,
+    "partial": 10,
     "error": 0,
     "degraded": 0,
     "unknown": 0,
     "not_in_catalog": 0,
     "desired_progress": {
-      "loaded": 78418,
+      "loaded": 79315,
       "target": 57557,
       "percent": 100
     },
@@ -26,8 +26,8 @@
     ],
     "sql": {
       "todo": 7,
-      "partial": 21,
-      "done": 18,
+      "partial": 18,
+      "done": 21,
       "foreign_key_violations": 0
     },
     "tracker": {
@@ -36,9 +36,9 @@
       "todo": 28,
       "partial": 46,
       "done": 225,
-      "mismatch": 9,
+      "mismatch": 10,
       "waived_mismatch": 0,
-      "done_zero_real": 2,
+      "done_zero_real": 0,
       "untracked_sources": 8,
       "waivers_active": 0,
       "waivers_expired": 0,
@@ -51,7 +51,7 @@
     "ingestion_runs_error": 0,
     "ingestion_runs_retry": 0,
     "ingestion_runs_ok_pct": 1.0,
-    "avg_run_seconds": 84.46153837900896,
+    "avg_run_seconds": 45.97436029177446,
     "last_run_seconds": 0.0,
     "retry_rate": 0.0,
     "published_recommendation_artifacts": 0,
@@ -411,7 +411,7 @@
       "cells_with_denominator": 6,
       "blocked_cells": 0,
       "denominator_gaps": 3,
-      "weighted_percent": 22.3
+      "weighted_percent": 23.9
     },
     "families": [
       {
@@ -436,7 +436,7 @@
         "cells_total": 4,
         "cells_with_denominator": 4,
         "blocked_cells": 0,
-        "weighted_percent": 1.1
+        "weighted_percent": 3.8
       },
       {
         "key": "records",
@@ -462,7 +462,7 @@
         "cells_total": 1,
         "cells_with_denominator": 1,
         "blocked_cells": 0,
-        "weighted_percent": 0.0
+        "weighted_percent": 14.3
       },
       {
         "key": "nacional",
@@ -488,7 +488,7 @@
         "cells_total": 4,
         "cells_with_denominator": 4,
         "blocked_cells": 0,
-        "weighted_percent": 1.1
+        "weighted_percent": 3.8
       },
       {
         "key": "does",
@@ -546,7 +546,7 @@
         "cells_total": 4,
         "cells_with_denominator": 4,
         "blocked_cells": 0,
-        "weighted_percent": 1.1
+        "weighted_percent": 3.8
       },
       {
         "key": "votes",
@@ -694,12 +694,12 @@
         "stages": {
           "discoverable": 1,
           "downloaded": 1,
-          "processed": 0,
-          "linked": 0,
-          "published": 0
+          "processed": 1,
+          "linked": 1,
+          "published": 1
         },
-        "primary_total": 0,
-        "primary_percent": 0.0,
+        "primary_total": 1,
+        "primary_percent": 14.3,
         "denominator_status": "ok",
         "blocked": false,
         "blocked_sources": [],
@@ -881,7 +881,7 @@
       "senado_iniciativas"
     ],
     "contract": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "initiative_source_ids": [
         "senado_iniciativas"
       ],
@@ -898,8 +898,8 @@
       "actionable_sample": []
     },
     "digest": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
-      "contract_generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
+      "contract_generated_at": "2026-08-02T05:59:39+00:00",
       "initiative_source_ids": [
         "senado_iniciativas"
       ],
@@ -922,7 +922,7 @@
       "strict_fail_reasons": []
     },
     "heartbeat_window": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
       "window_last": 20,
@@ -970,7 +970,7 @@
       "status": "ok"
     },
     "heartbeat_compaction_window": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
       "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl",
@@ -1025,11 +1025,11 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "strict": false,
       "input": {
         "compaction_window_json_path": "",
-        "compaction_window_generated_at": "2026-08-01T06:24:49+00:00",
+        "compaction_window_generated_at": "2026-08-02T05:59:39+00:00",
         "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.jsonl",
         "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat.compacted.jsonl"
       },
@@ -1069,7 +1069,7 @@
       "validation_errors": []
     },
     "heartbeat_compaction_window_digest_heartbeat_window": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
       "window_last": 20,
@@ -1125,7 +1125,7 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest_heartbeat_compaction_window": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "strict": false,
       "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
       "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
@@ -1180,11 +1180,11 @@
       "status": "ok"
     },
     "heartbeat_compaction_window_digest_heartbeat_compaction_window_digest": {
-      "generated_at": "2026-08-01T06:24:49+00:00",
+      "generated_at": "2026-08-02T05:59:39+00:00",
       "strict": false,
       "input": {
         "compaction_window_json_path": "",
-        "compaction_window_generated_at": "2026-08-01T06:24:49+00:00",
+        "compaction_window_generated_at": "2026-08-02T05:59:39+00:00",
         "heartbeat_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
         "compacted_path": "docs/etl/runs/initdoc_actionable_tail_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl"
       },
@@ -7766,10 +7766,10 @@
             "label": "Fuentes tracker=DONE con evidencia de red",
             "status": "PARTIAL",
             "metric": "done_sources_with_network_pct",
-            "actual": 0.7333333333333333,
+            "actual": 0.8666666666666667,
             "target": 1.0,
             "format": "pct",
-            "actual_display": "73%",
+            "actual_display": "87%",
             "target_display": "100%"
           }
         ],
@@ -7778,7 +7778,7 @@
             "id": "done_sources_with_network",
             "label": "Fuentes tracker=DONE con evidencia de red",
             "status": "PARTIAL",
-            "actual_display": "73%",
+            "actual_display": "87%",
             "target_display": "100%"
           },
           {
@@ -8439,10 +8439,10 @@
         "label": "Fuentes objetivo en estado ok",
         "status": "PARTIAL",
         "metric": "desired_sources_ok_pct",
-        "actual": 0.5869565217391305,
+        "actual": 0.6304347826086957,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "59%",
+        "actual_display": "63%",
         "target_display": "80%"
       },
       {
@@ -8516,10 +8516,10 @@
         "label": "Duraci\u00f3n media por run ETL",
         "status": "DONE",
         "metric": "avg_run_seconds",
-        "actual": 84.46153837900896,
+        "actual": 45.97436029177446,
         "target": null,
         "format": "seconds",
-        "actual_display": "84.5s",
+        "actual_display": "46.0s",
         "target_display": "\u2014"
       }
     ],
@@ -8539,34 +8539,6 @@
     ]
   },
   "actions": [
-    {
-      "kind": "done_zero_real",
-      "priority": "P0",
-      "scope": "",
-      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): placsp_autonomico",
-      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
-      "source_ids": [
-        "placsp_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "done_zero_real",
-      "priority": "P0",
-      "scope": "",
-      "title": "Tracker DONE pero sin ejecuci\u00f3n reproducible (strict-network): placsp_sindicacion",
-      "details": "Hay carga en BD pero no hay evidencia de ejecuci\u00f3n desde red (raw_fetches http).",
-      "source_ids": [
-        "placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
     {
       "kind": "missing_source",
       "priority": "P0",
@@ -9487,34 +9459,6 @@
       "kind": "under_threshold",
       "priority": "P1",
       "scope": "",
-      "title": "Por debajo del umbral minimo: placsp_autonomico",
-      "details": "loaded=2 target=3",
-      "source_ids": [
-        "placsp_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "under_threshold",
-      "priority": "P1",
-      "scope": "",
-      "title": "Por debajo del umbral minimo: placsp_sindicacion",
-      "details": "loaded=3 target=10",
-      "source_ids": [
-        "placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.live.db --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db etl/data/staging/politicos-es.live.db --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ]
-    },
-    {
-      "kind": "under_threshold",
-      "priority": "P1",
-      "scope": "",
       "title": "Por debajo del umbral minimo: senado_iniciativas",
       "details": "loaded=0 target=1",
       "source_ids": [
@@ -9589,8 +9533,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:27:07+00:00",
-      "last_seen_at": "2026-08-01T05:29:21+00:00",
+      "last_started_at": "2026-08-02T05:27:06+00:00",
+      "last_seen_at": "2026-08-02T05:29:20+00:00",
       "last_source_url": "https://www.ceuta.es/gobiernodeceuta/index.php/el-gobierno/la-asamblea",
       "last_message": "Ingesta completada: 25/25 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
       "progress": {
@@ -9639,8 +9583,8 @@
         "fuentes_objetivo": "Asamblea de Extremadura (dipslegis + paginacion)",
         "bloque": "Done now: NO para live-clean en GitHub Actions. PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>` para `asamblea_extremadura_diputados`; mantener evidencia previa como parcial hasta recuperar run reproducible. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_extremadura_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "MATCH",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "state": "ok",
@@ -9649,13 +9593,13 @@
       "last_status": "ok",
       "last_loaded": 65,
       "max_loaded_any": 65,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:29:21+00:00",
-      "last_seen_at": "2026-08-01T05:36:06+00:00",
+      "max_loaded_network": 65,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-08-02T05:29:20+00:00",
+      "last_seen_at": "2026-08-02T05:29:23+00:00",
       "last_source_url": "https://www.asambleaex.es/dipslegis",
-      "last_message": "Ingesta completada: 65/65 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
+      "last_message": "Ingesta completada: 65/65 registros validos",
       "progress": {
         "loaded": 65,
         "target": 50,
@@ -9676,7 +9620,7 @@
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
-        "has_network": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -9715,8 +9659,8 @@
       "max_loaded_network": 9262,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:36:06+00:00",
-      "last_seen_at": "2026-08-01T05:36:15+00:00",
+      "last_started_at": "2026-08-02T05:29:23+00:00",
+      "last_seen_at": "2026-08-02T05:29:32+00:00",
       "last_source_url": "https://ctyp.asambleamadrid.es/static/doc/opendata/SGP_ADMIN.OPENDATA_OCUPACIONES_ASAMBLEA.csv",
       "last_message": "Ingesta completada: 9262/9358 registros validos",
       "progress": {
@@ -9778,8 +9722,8 @@
       "max_loaded_network": 26,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:36:15+00:00",
-      "last_seen_at": "2026-08-01T05:36:17+00:00",
+      "last_started_at": "2026-08-02T05:29:32+00:00",
+      "last_seen_at": "2026-08-02T05:29:34+00:00",
       "last_source_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
       "last_message": "Ingesta completada: 26/26 registros validos",
       "progress": {
@@ -9841,8 +9785,8 @@
       "max_loaded_network": 145,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:36:17+00:00",
-      "last_seen_at": "2026-08-01T05:40:21+00:00",
+      "last_started_at": "2026-08-02T05:29:34+00:00",
+      "last_seen_at": "2026-08-02T05:33:17+00:00",
       "last_source_url": "https://www.asambleamurcia.es/diputados",
       "last_message": "Ingesta completada: 145/145 registros validos",
       "progress": {
@@ -9904,8 +9848,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:40:30+00:00",
-      "last_seen_at": "2026-08-01T05:40:31+00:00",
+      "last_started_at": "2026-08-02T05:33:23+00:00",
+      "last_seen_at": "2026-08-02T05:33:24+00:00",
       "last_source_url": "https://www.cortesaragon.es/Quienes-somos.2250.0.html?no_cache=1&tx_t3comunicacion_pi3%5Bnumleg%5D=11&tx_t3comunicacion_pi3%5Btipinf%5D=3&tx_t3comunicacion_pi3%5Buidcom%5D=-2#verContenido",
       "last_message": "Ingesta completada: 75/75 registros validos (network-error-fallback: RemoteDisconnected: Remote end closed connection without response)",
       "progress": {
@@ -9967,8 +9911,8 @@
       "max_loaded_network": 79,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:41:11+00:00",
-      "last_seen_at": "2026-08-01T05:41:12+00:00",
+      "last_started_at": "2026-08-02T05:34:00+00:00",
+      "last_seen_at": "2026-08-02T05:34:01+00:00",
       "last_source_url": "https://www.ccyl.es/Organizacion/PlenoAlfabetico",
       "last_message": "Ingesta completada: 79/79 registros validos",
       "progress": {
@@ -10030,8 +9974,8 @@
       "max_loaded_network": 33,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:40:31+00:00",
-      "last_seen_at": "2026-08-01T05:41:11+00:00",
+      "last_started_at": "2026-08-02T05:33:24+00:00",
+      "last_seen_at": "2026-08-02T05:34:00+00:00",
       "last_source_url": "https://www.cortesclm.es/web2/paginas/resul_diputados.php?legislatura=11",
       "last_message": "Ingesta completada: 33/33 registros validos",
       "progress": {
@@ -10093,8 +10037,8 @@
       "max_loaded_network": 45,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:43:06+00:00",
-      "last_seen_at": "2026-08-01T05:43:08+00:00",
+      "last_started_at": "2026-08-02T05:35:57+00:00",
+      "last_seen_at": "2026-08-02T05:35:59+00:00",
       "last_source_url": "https://www.jgpa.es/diputados-y-diputadas?p_p_id=jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&p_r_p_2113237475_diputadoId=0&p_r_p_2113237475_legislaturaId=0&p_r_p_2113237475_grupoParlamentarioId=0&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_redirect=%2Fdiputados-y-diputadas&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_delta=50&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_keywords=&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_advancedSearch=false&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_andOperator=true&_jgpaportlet_WAR_jgpaportlet_INSTANCE_JoGQRoxbw79k_resetCur=false&cur=1",
       "last_message": "Ingesta completada: 45/45 registros validos",
       "progress": {
@@ -10156,8 +10100,8 @@
       "max_loaded_network": 99,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:41:12+00:00",
-      "last_seen_at": "2026-08-01T05:43:01+00:00",
+      "last_started_at": "2026-08-02T05:34:01+00:00",
+      "last_seen_at": "2026-08-02T05:35:53+00:00",
       "last_source_url": "https://www.cortsvalencianes.es/es/composicion/diputados",
       "last_message": "Ingesta completada: 99/99 registros validos",
       "progress": {
@@ -10219,8 +10163,8 @@
       "max_loaded_network": 135,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:52:17+00:00",
-      "last_seen_at": "2026-08-01T05:56:47+00:00",
+      "last_started_at": "2026-08-02T05:45:10+00:00",
+      "last_seen_at": "2026-08-02T05:47:44+00:00",
       "last_source_url": "https://www.parlament.cat/web/composicio/ple-parlament/composicio-actual/index.html",
       "last_message": "Ingesta completada: 135/135 registros validos",
       "progress": {
@@ -10282,8 +10226,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:45:32+00:00",
-      "last_seen_at": "2026-08-01T05:52:17+00:00",
+      "last_started_at": "2026-08-02T05:38:26+00:00",
+      "last_seen_at": "2026-08-02T05:45:10+00:00",
       "last_source_url": "https://www.parlamentib.es/Representants/Diputats.aspx?criteria=0",
       "last_message": "Ingesta completada: 59/59 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
       "progress": {
@@ -10345,8 +10289,8 @@
       "max_loaded_network": 109,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:56:47+00:00",
-      "last_seen_at": "2026-08-01T06:00:31+00:00",
+      "last_started_at": "2026-08-02T05:47:44+00:00",
+      "last_seen_at": "2026-08-02T05:48:51+00:00",
       "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/composicionyfuncionamiento/diputadosysenadores.do",
       "last_message": "Ingesta completada: 109/109 registros validos",
       "progress": {
@@ -10408,8 +10352,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:00:31+00:00",
-      "last_seen_at": "2026-08-01T06:00:32+00:00",
+      "last_started_at": "2026-08-02T05:48:51+00:00",
+      "last_seen_at": "2026-08-02T05:48:53+00:00",
       "last_source_url": "https://parcan.es/api/diputados/por_legislatura/11/?format=json",
       "last_message": "Ingesta completada: 79/79 registros validos (network-error-fallback: HTTPError: HTTP Error 404: Not Found)",
       "progress": {
@@ -10471,8 +10415,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:00:32+00:00",
-      "last_seen_at": "2026-08-01T06:00:45+00:00",
+      "last_started_at": "2026-08-02T05:48:53+00:00",
+      "last_seen_at": "2026-08-02T05:49:03+00:00",
       "last_source_url": "https://parlamento-cantabria.es/informacion-general/composicion/11l-pleno-del-parlamento-de-cantabria",
       "last_message": "Ingesta completada: 35/35 registros validos (network-error-fallback: RuntimeError: Extraccion sospechosa: solo 13 diputados (esperado ~35))",
       "progress": {
@@ -10534,8 +10478,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:00:45+00:00",
-      "last_seen_at": "2026-08-01T06:00:45+00:00",
+      "last_started_at": "2026-08-02T05:49:03+00:00",
+      "last_seen_at": "2026-08-02T05:49:03+00:00",
       "last_source_url": "https://www.parlamentodegalicia.gal/Composicion/Deputados",
       "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
@@ -10597,8 +10541,8 @@
       "max_loaded_network": 33,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T06:00:45+00:00",
-      "last_seen_at": "2026-08-01T06:00:47+00:00",
+      "last_started_at": "2026-08-02T05:49:03+00:00",
+      "last_seen_at": "2026-08-02T05:49:05+00:00",
       "last_source_url": "https://adminweb.parlamento-larioja.org/composicion-y-organos/diputados",
       "last_message": "Ingesta completada: 33/33 registros validos",
       "progress": {
@@ -10660,8 +10604,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:00:47+00:00",
-      "last_seen_at": "2026-08-01T06:00:47+00:00",
+      "last_started_at": "2026-08-02T05:49:05+00:00",
+      "last_seen_at": "2026-08-02T05:49:05+00:00",
       "last_source_url": "https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales",
       "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
@@ -10723,8 +10667,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:00:47+00:00",
-      "last_seen_at": "2026-08-01T06:07:30+00:00",
+      "last_started_at": "2026-08-02T05:49:05+00:00",
+      "last_seen_at": "2026-08-02T05:55:49+00:00",
       "last_source_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
       "progress": {
@@ -10786,8 +10730,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:40:24+00:00",
-      "last_seen_at": "2026-08-01T05:40:25+00:00",
+      "last_started_at": "2026-08-02T05:33:19+00:00",
+      "last_seen_at": "2026-08-02T05:33:20+00:00",
       "last_source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=cbd38f13d80e12be655c5cb84330dd3e28099e19ef71ffe7a41f2665fa9a0f84))",
       "progress": {
@@ -10849,8 +10793,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:40:24+00:00",
-      "last_seen_at": "2026-08-01T05:40:24+00:00",
+      "last_started_at": "2026-08-02T05:33:19+00:00",
+      "last_seen_at": "2026-08-02T05:33:19+00:00",
       "last_source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
       "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=cbd38f13d80e12be655c5cb84330dd3e28099e19ef71ffe7a41f2665fa9a0f84))",
       "progress": {
@@ -10962,27 +10906,27 @@
         "fuentes_objetivo": "PLACSP: `url_detalle` desde `placsp_sindicacion`/`placsp_autonomico`",
         "bloque": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "DONE_ZERO_REAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "partial",
+      "state": "ok",
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 2,
-      "max_loaded_any": 2,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:07:30+00:00",
-      "last_seen_at": "2026-08-01T06:14:16+00:00",
+      "last_loaded": 451,
+      "max_loaded_any": 451,
+      "max_loaded_network": 451,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-08-02T05:55:49+00:00",
+      "last_seen_at": "2026-08-02T05:56:02+00:00",
       "last_source_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
-      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
+      "last_message": "Ingesta completada: 451/451 registros validos",
       "progress": {
-        "loaded": 2,
+        "loaded": 451,
         "target": 3,
-        "percent": 67
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -10997,9 +10941,9 @@
         }
       },
       "flags": {
-        "under_threshold": true,
-        "done_zero_real": true,
-        "has_network": false,
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -11025,27 +10969,27 @@
         "fuentes_objetivo": "PLACSP: `url_detalle` desde `placsp_sindicacion`/`placsp_autonomico`",
         "bloque": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`."
       },
-      "sql_status": "PARTIAL",
-      "mismatch_state": "DONE_ZERO_REAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "state": "partial",
+      "state": "ok",
       "runs_total": 1,
       "runs_ok": 1,
       "last_status": "ok",
-      "last_loaded": 3,
-      "max_loaded_any": 3,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:14:16+00:00",
-      "last_seen_at": "2026-08-01T06:21:01+00:00",
+      "last_loaded": 451,
+      "max_loaded_any": 451,
+      "max_loaded_network": 451,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_started_at": "2026-08-02T05:56:02+00:00",
+      "last_seen_at": "2026-08-02T05:56:13+00:00",
       "last_source_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
-      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
+      "last_message": "Ingesta completada: 451/451 registros validos",
       "progress": {
-        "loaded": 3,
+        "loaded": 451,
         "target": 10,
-        "percent": 30
+        "percent": 100
       },
       "mandates": 0,
       "warehouse": {
@@ -11060,9 +11004,9 @@
         }
       },
       "flags": {
-        "under_threshold": true,
-        "done_zero_real": true,
-        "has_network": false,
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
         "has_any": true,
         "blocked_note": false
       }
@@ -11164,8 +11108,8 @@
       "max_loaded_network": 5,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:43:08+00:00",
-      "last_seen_at": "2026-08-01T05:43:25+00:00",
+      "last_started_at": "2026-08-02T05:35:59+00:00",
+      "last_seen_at": "2026-08-02T05:36:16+00:00",
       "last_source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
       "last_message": "Ingesta completada: 5/5 registros validos",
       "progress": {
@@ -11227,8 +11171,8 @@
       "max_loaded_network": 8,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:43:25+00:00",
-      "last_seen_at": "2026-08-01T05:43:27+00:00",
+      "last_started_at": "2026-08-02T05:36:16+00:00",
+      "last_seen_at": "2026-08-02T05:36:18+00:00",
       "last_source_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
       "last_message": "Ingesta completada: 8/8 registros validos",
       "progress": {
@@ -11416,8 +11360,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:43:05+00:00",
-      "last_seen_at": "2026-08-01T05:43:05+00:00",
+      "last_started_at": "2026-08-02T05:35:57+00:00",
+      "last_seen_at": "2026-08-02T05:35:57+00:00",
       "last_source_url": "https://www.europarl.europa.eu/meps/es/full-list/xml",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para europarl_meps (content_type=text/html; charset=UTF-8))",
       "progress": {
@@ -11479,8 +11423,8 @@
       "max_loaded_network": 135,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:40:25+00:00",
-      "last_seen_at": "2026-08-01T05:40:25+00:00",
+      "last_started_at": "2026-08-02T05:33:20+00:00",
+      "last_seen_at": "2026-08-02T05:33:21+00:00",
       "last_source_url": "https://www.boe.es/rss/boe.php",
       "last_message": "Ingesta completada: 135/135 registros validos",
       "progress": {
@@ -11542,8 +11486,8 @@
       "max_loaded_network": 66947,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:43:27+00:00",
-      "last_seen_at": "2026-08-01T05:45:32+00:00",
+      "last_started_at": "2026-08-02T05:36:18+00:00",
+      "last_seen_at": "2026-08-02T05:38:26+00:00",
       "last_source_url": "https://concejales.redsara.es/consulta/getConcejalesLegislatura",
       "last_message": "Ingesta completada: 66947/66947 registros validos",
       "progress": {
@@ -11605,8 +11549,8 @@
       "max_loaded_network": 500,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T06:22:08+00:00",
-      "last_seen_at": "2026-08-01T06:22:11+00:00",
+      "last_started_at": "2026-08-02T05:57:01+00:00",
+      "last_seen_at": "2026-08-02T05:57:06+00:00",
       "last_source_url": "https://www.congreso.es/es/opendata/iniciativas",
       "last_message": "{\"initiatives_loaded\": 500, \"note\": \"network\"}",
       "progress": {
@@ -11731,8 +11675,8 @@
       "max_loaded_network": 80,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T06:21:07+00:00",
-      "last_seen_at": "2026-08-01T06:22:06+00:00",
+      "last_started_at": "2026-08-02T05:56:19+00:00",
+      "last_seen_at": "2026-08-02T05:56:59+00:00",
       "last_source_url": "https://www.congreso.es/es/opendata/votaciones",
       "last_message": "{\"events_loaded\": 80, \"member_votes_loaded\": 28000, \"note\": \"network\"}",
       "progress": {
@@ -11920,8 +11864,8 @@
       "max_loaded_network": 0,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T06:22:15+00:00",
-      "last_seen_at": "2026-08-01T06:22:15+00:00",
+      "last_started_at": "2026-08-02T05:57:09+00:00",
+      "last_seen_at": "2026-08-02T05:57:09+00:00",
       "last_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
       "last_message": "{\"initiatives_loaded\": 0, \"note\": \"network-partial\"}",
       "progress": {
@@ -11983,8 +11927,8 @@
       "max_loaded_network": 0,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T06:22:13+00:00",
-      "last_seen_at": "2026-08-01T06:22:13+00:00",
+      "last_started_at": "2026-08-02T05:57:07+00:00",
+      "last_seen_at": "2026-08-02T05:57:07+00:00",
       "last_source_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
       "last_message": "{\"events_loaded\": 0, \"member_votes_loaded\": 0, \"note\": \"network-partial\"}",
       "progress": {
@@ -12046,9 +11990,9 @@
       "max_loaded_network": 350,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:40:28+00:00",
-      "last_seen_at": "2026-08-01T05:40:30+00:00",
-      "last_source_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260801050006.json",
+      "last_started_at": "2026-08-02T05:33:21+00:00",
+      "last_seen_at": "2026-08-02T05:33:23+00:00",
+      "last_source_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260802050008.json",
       "last_message": "Ingesta completada: 350/350 registros validos",
       "progress": {
         "loaded": 350,
@@ -12109,8 +12053,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:21:02+00:00",
-      "last_seen_at": "2026-08-01T06:21:03+00:00",
+      "last_started_at": "2026-08-02T05:56:14+00:00",
+      "last_seen_at": "2026-08-02T05:56:14+00:00",
       "last_source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=4&legis=14,15",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "progress": {
@@ -12172,8 +12116,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:43:02+00:00",
-      "last_seen_at": "2026-08-01T05:43:05+00:00",
+      "last_started_at": "2026-08-02T05:35:54+00:00",
+      "last_seen_at": "2026-08-02T05:35:57+00:00",
       "last_source_url": "https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741",
       "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Temporarily)",
       "progress": {
@@ -12235,8 +12179,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:27:07+00:00",
-      "last_seen_at": "2026-08-01T05:27:07+00:00",
+      "last_started_at": "2026-08-02T05:27:05+00:00",
+      "last_seen_at": "2026-08-02T05:27:06+00:00",
       "last_source_url": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
       "last_message": "Ingesta completada: 2/2 registros validos (contract-error-fallback: HTTPError: HTTP Error 404: No Encontrado)",
       "progress": {
@@ -12298,8 +12242,8 @@
       "max_loaded_network": 58,
       "network_fetches": 1,
       "fallback_fetches": 0,
-      "last_started_at": "2026-08-01T05:40:21+00:00",
-      "last_seen_at": "2026-08-01T05:40:24+00:00",
+      "last_started_at": "2026-08-02T05:33:17+00:00",
+      "last_seen_at": "2026-08-02T05:33:19+00:00",
       "last_source_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAA301,D_1NBAA304,D_1NBAA317,D_1NBAA372,D_1NBAA572,D_1NBAC372,D_1NBAC572,D_1NBAC972,D_1NBAD301,D_1NBAD302,D_1NBAD306,D_1NBAD311,D_1NBAD317,D_1NBAD372,D_1NBAD472,D_1NBAD572,D_1NBAD972,D_1NBAE472,D_1NBAE572,D_1NBAE972,D_1NBAF472,D_1NBAF572,D_1NBAS372,D_1NBAS572,D_1NBAS972,D_1NBBO020,D_1NBBO072,D_1NBBO303,D_1NBBO305,D_1NBBO307,D_1NBBO308,D_1NBBO309,D_1NBBO310,D_1NBBO311,D_1NBBO314,D_1NBBO315,D_1NBBO316,D_1NBBO320,D_1NBBO333,D_1NBBO349,D_1NBBO572,D_1NBBP301,D_1NBBP302,D_1NBBP303,D_1NBBP304,D_1NBBP305,D_1NBBP306,D_1NBBP307,D_1NBBP308,D_1NBBP309,D_1NBBP310,D_1NBBP311,D_1NBBP314,D_1NBBP315,D_1NBBP316,D_1NBBP317,D_1NBBP349,D_1NBBP572&rango=30M",
       "last_message": "Ingesta completada: 58/58 registros validos",
       "progress": {
@@ -12361,8 +12305,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T06:21:01+00:00",
-      "last_seen_at": "2026-08-01T06:21:02+00:00",
+      "last_started_at": "2026-08-02T05:56:13+00:00",
+      "last_seen_at": "2026-08-02T05:56:14+00:00",
       "last_source_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 400: Bad Request)",
       "progress": {
@@ -12424,8 +12368,8 @@
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 1,
-      "last_started_at": "2026-08-01T05:43:05+00:00",
-      "last_seen_at": "2026-08-01T05:43:06+00:00",
+      "last_started_at": "2026-08-02T05:35:57+00:00",
+      "last_seen_at": "2026-08-02T05:35:57+00:00",
       "last_source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
       "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 404: Not Found)",
       "progress": {
