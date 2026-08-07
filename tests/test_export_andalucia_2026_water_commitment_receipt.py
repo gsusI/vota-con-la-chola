@@ -2,6 +2,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+from datetime import date, timedelta
 from pathlib import Path
 
 
@@ -11,6 +12,17 @@ SPEC = importlib.util.spec_from_file_location("water_receipt_exporter", MODULE_P
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(MODULE)
+
+
+def advanced_seed(seed: dict, *, days: int = 7) -> dict:
+    current = json.loads(json.dumps(seed))
+    snapshot = date.fromisoformat(seed["snapshot_date"]) + timedelta(days=days)
+    next_check = snapshot + timedelta(days=7)
+    current["snapshot_date"] = snapshot.isoformat()
+    current["scope"]["evidence_window_end"] = snapshot.isoformat()
+    current["evidence_check"]["checked_at"] = snapshot.isoformat()
+    current["method"]["next_check"] = next_check.isoformat()
+    return current
 
 
 class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
@@ -68,17 +80,14 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
 
     def test_semantic_diff_reports_added_evidence_and_status_change(self):
         previous = MODULE.build_receipt(self.seed)
-        current = json.loads(json.dumps(self.seed))
-        current["snapshot_date"] = "2026-08-01"
-        current["scope"]["evidence_window_end"] = "2026-08-01"
-        current["evidence_check"]["checked_at"] = "2026-08-01"
-        current["method"]["next_check"] = "2026-08-08"
+        current = advanced_seed(self.seed)
+        evidence_date = current["snapshot_date"]
         current["sources"].append(
             {
-                "source_id": "irrigation-law-filing-2026-07-30",
+                "source_id": f"irrigation-law-filing-{evidence_date}",
                 "label": "Registro del proyecto de ley de regadíos",
                 "publisher": "Parlamento de Andalucía",
-                "published_date": "2026-07-30",
+                "published_date": evidence_date,
                 "locator": "Expediente de la XIII legislatura",
                 "url": "https://www.parlamentodeandalucia.es/expediente/ley-regadios",
                 "source_role": "formal_action",
@@ -90,9 +99,9 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
         current["commitments"][0]["post_investiture_evidence"].append(
             {
                 "evidence_kind": "formal_action",
-                "date": "2026-07-30",
+                "date": evidence_date,
                 "label": "Proyecto registrado en el Parlamento.",
-                "source_id": "irrigation-law-filing-2026-07-30",
+                "source_id": f"irrigation-law-filing-{evidence_date}",
                 "counts_as_progress": True,
             }
         )
@@ -100,7 +109,10 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
         payload = MODULE.build_receipt(current, previous=previous)
 
         self.assertEqual(payload["history"]["status"], "changed")
-        self.assertEqual(payload["history"]["previous_snapshot_date"], "2026-07-25")
+        self.assertEqual(
+            payload["history"]["previous_snapshot_date"],
+            self.seed["snapshot_date"],
+        )
         self.assertEqual(payload["history"]["commitments_changed_total"], 1)
         change = payload["history"]["commitments"][0]
         self.assertEqual(change["commitment_id"], "ley-andaluza-regadios")
@@ -110,11 +122,7 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
 
     def test_semantic_diff_reports_explicit_no_change(self):
         previous = MODULE.build_receipt(self.seed)
-        current = json.loads(json.dumps(self.seed))
-        current["snapshot_date"] = "2026-08-01"
-        current["scope"]["evidence_window_end"] = "2026-08-01"
-        current["evidence_check"]["checked_at"] = "2026-08-01"
-        current["method"]["next_check"] = "2026-08-08"
+        current = advanced_seed(self.seed)
 
         payload = MODULE.build_receipt(current, previous=previous)
 
@@ -122,16 +130,12 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
         self.assertEqual(payload["history"]["commitments_changed_total"], 0)
         self.assertEqual(
             payload["summary"]["changed_since_previous_snapshot"],
-            "sin_cambios_desde_2026-07-25",
+            f"sin_cambios_desde_{self.seed['snapshot_date']}",
         )
 
     def test_semantic_diff_reports_removed_commitment(self):
         previous = MODULE.build_receipt(self.seed)
-        current = json.loads(json.dumps(self.seed))
-        current["snapshot_date"] = "2026-08-01"
-        current["scope"]["evidence_window_end"] = "2026-08-01"
-        current["evidence_check"]["checked_at"] = "2026-08-01"
-        current["method"]["next_check"] = "2026-08-08"
+        current = advanced_seed(self.seed)
         removed = current["commitments"].pop()
         replacement = json.loads(json.dumps(current["commitments"][0]))
         replacement["commitment_id"] = "nuevo-compromiso"
@@ -152,10 +156,11 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
 
     def test_freshness_gate_accepts_current_and_rejects_stale(self):
         payload = MODULE.build_receipt(self.seed)
+        snapshot = date.fromisoformat(self.seed["snapshot_date"])
 
         current = MODULE.check_freshness(
             payload,
-            as_of_date="2026-08-01",
+            as_of_date=(snapshot + timedelta(days=7)).isoformat(),
             max_age_days=8,
         )
         self.assertEqual(current["age_days"], 7)
@@ -163,7 +168,7 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "water receipt is stale"):
             MODULE.check_freshness(
                 payload,
-                as_of_date="2026-08-04",
+                as_of_date=(snapshot + timedelta(days=9)).isoformat(),
                 max_age_days=8,
             )
 
@@ -192,16 +197,12 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
                 seed_path,
                 [first],
                 archive_dirs=[archive],
-                as_of_date="2026-07-25",
+                as_of_date=self.seed["snapshot_date"],
             )
-            archived_first = archive / "2026-07-25.json"
+            archived_first = archive / f"{self.seed['snapshot_date']}.json"
             self.assertTrue(archived_first.exists())
 
-            next_seed = json.loads(json.dumps(self.seed))
-            next_seed["snapshot_date"] = "2026-08-01"
-            next_seed["scope"]["evidence_window_end"] = "2026-08-01"
-            next_seed["evidence_check"]["checked_at"] = "2026-08-01"
-            next_seed["method"]["next_check"] = "2026-08-08"
+            next_seed = advanced_seed(self.seed)
             seed_path.write_text(
                 json.dumps(next_seed, ensure_ascii=False),
                 encoding="utf-8",
@@ -211,15 +212,15 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
                 seed_path,
                 [first],
                 archive_dirs=[archive],
-                as_of_date="2026-08-01",
+                as_of_date=next_seed["snapshot_date"],
             )
 
             self.assertEqual(payload["history"]["status"], "no_change")
             self.assertEqual(
                 payload["history"]["previous_snapshot_date"],
-                "2026-07-25",
+                self.seed["snapshot_date"],
             )
-            self.assertTrue((archive / "2026-08-01.json").exists())
+            self.assertTrue((archive / f"{next_seed['snapshot_date']}.json").exists())
 
     def test_archive_rejects_rewriting_a_snapshot_date(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -234,7 +235,7 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
                 seed_path,
                 [temp / "latest.json"],
                 archive_dirs=[archive],
-                as_of_date="2026-07-25",
+                as_of_date=self.seed["snapshot_date"],
             )
 
             changed_seed = json.loads(json.dumps(self.seed))
@@ -249,7 +250,7 @@ class AndaluciaWaterReceiptExporterTest(unittest.TestCase):
                     seed_path,
                     [temp / "latest.json"],
                     archive_dirs=[archive],
-                    as_of_date="2026-07-25",
+                    as_of_date=self.seed["snapshot_date"],
                 )
 
 
