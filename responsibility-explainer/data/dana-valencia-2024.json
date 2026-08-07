@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generated_at": "2026-08-02T05:59:11Z",
-    "snapshot_date": "2026-08-02",
+    "generated_at": "2026-04-25T11:17:37Z",
+    "snapshot_date": "2026-04-25",
     "schema_version": "responsibility_explainer_case_v1",
     "case_id": "dana-valencia-2024",
-    "snapshot_db": "responsibility-explainer.db"
+    "snapshot_db": "etl/data/staging/politicos-es.db"
   },
   "case": {
     "case_id": "dana-valencia-2024",
@@ -22,7 +22,7 @@
     "canonical_url": "https://gsusI.github.io/vota-con-la-chola/responsibility-explainer/dana-valencia-2024/"
   },
   "coverage": {
-    "initiatives_total": 9,
+    "initiatives_total": 0,
     "initiatives_with_votes_total": 0,
     "initiatives_with_measure_points_total": 0,
     "vote_events_total": 0,
@@ -41,8 +41,8 @@
     "structural_evidence_rows_total": 28
   },
   "question_status_counts": {
-    "partial": 4,
-    "missing": 4
+    "partial": 3,
+    "missing": 5
   },
   "normative_evidence": {
     "scope_label": "Anclajes oficiales de deber, coordinacion y canales de aviso ya resumidos desde fuentes primarias",
@@ -960,8 +960,8 @@
       "question_id": "parliamentary_response",
       "category": "Respuesta institucional",
       "prompt": "Que medidas normativas y parlamentarias se adoptaron despues de la DANA?",
-      "status": "partial",
-      "status_label": "Parcial",
+      "status": "missing",
+      "status_label": "Pendiente",
       "next_evidence_needed": [
         "seguir tramitacion completa de los expedientes ligados a la DANA"
       ]
@@ -1000,144 +1000,7 @@
   ],
   "parliamentary_evidence": {
     "scope_label": "Respuesta parlamentaria y normativa ya presente en el repo",
-    "initiatives": [
-      {
-        "initiative_id": "congreso:ley:12:2025",
-        "source_id": "congreso_iniciativas",
-        "title": "Real Decreto-ley 12/2025, de 28 de octubre, por el que se adoptan medidas urgentes de reactivaci\u00f3n, refuerzo y prevenci\u00f3n en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
-        "type": "Reales decretos",
-        "current_status": "",
-        "presented_date": "",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260802050017.json",
-          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_012_2025.pdf"
-        ]
-      },
-      {
-        "initiative_id": "congreso:ley:7:2024",
-        "source_id": "congreso_iniciativas",
-        "title": "Real Decreto-ley 7/2024, de 11 de noviembre, por el que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
-        "type": "Reales decretos",
-        "current_status": "",
-        "presented_date": "",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260802050017.json",
-          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_007_2024.pdf"
-        ]
-      },
-      {
-        "initiative_id": "congreso:ley:8:2024",
-        "source_id": "congreso_iniciativas",
-        "title": "Resoluci\u00f3n de 19 de diciembre de 2024, del Congreso de los Diputados, por la que se ordena la publicaci\u00f3n del Acuerdo de convalidaci\u00f3n del Real Decreto-ley 8/2024, de 28 de noviembre, por el que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
-        "type": "Reales decretos",
-        "current_status": "",
-        "presented_date": "",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/IniciativasLegislativasAprobadas__20260802050017.json",
-          "https://www.congreso.es/constitucion/ficheros/leyes_espa/rdl_008_2024_conv.pdf"
-        ]
-      },
-      {
-        "initiative_id": "congreso:leg15:exp:121/000039/0000",
-        "source_id": "congreso_iniciativas",
-        "title": "Proyecto de Ley por la que se adoptan medidas urgentes de respuesta ante los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 6/2024, de 5 de noviembre).",
-        "type": "Proyecto de ley",
-        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
-        "presented_date": "2024-11-21",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260802050025.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-39-1.PDF#page=1"
-        ]
-      },
-      {
-        "initiative_id": "congreso:leg15:exp:121/000042/0000",
-        "source_id": "congreso_iniciativas",
-        "title": "Proyecto de Ley por la que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 7/2024, de 11 de noviembre).",
-        "type": "Proyecto de ley",
-        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
-        "presented_date": "2024-12-12",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260802050025.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-42-1.PDF#page=1"
-        ]
-      },
-      {
-        "initiative_id": "congreso:leg15:exp:121/000044/0000",
-        "source_id": "congreso_iniciativas",
-        "title": "Proyecto de Ley por la que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 8/2024, de 28 de noviembre).",
-        "type": "Proyecto de ley",
-        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
-        "presented_date": "2024-12-19",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260802050025.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-44-1.PDF#page=1"
-        ]
-      },
-      {
-        "initiative_id": "congreso:leg15:exp:122/000148/0000",
-        "source_id": "congreso_iniciativas",
-        "title": "Proposici\u00f3n de Ley relativa al establecimiento de nuevos mecanismos para atender de manera urgente y \u00e1gil situaciones de emergencia, como la derivada de la DANA de octubre de 2024.",
-        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
-        "current_status": "Cerrado",
-        "presented_date": "2025-01-11",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260802050142.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-1.PDF#page=1",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-171-2.PDF#page=1"
-        ]
-      },
-      {
-        "initiative_id": "congreso:leg15:exp:122/000152/0000",
-        "source_id": "congreso_iniciativas",
-        "title": "Proposici\u00f3n de Ley de medidas complementarias para ayudar a los afectados por la DANA.",
-        "type": "Proposici\u00f3n de ley de Grupos Parlamentarios del Congreso",
-        "current_status": "Pleno Toma en consideraci\u00f3n",
-        "presented_date": "2025-01-22",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProposicionesDeLey__20260802050142.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-175-1.PDF#page=1"
-        ]
-      },
-      {
-        "initiative_id": "congreso:leg15:exp:121/000078/0000",
-        "source_id": "congreso_iniciativas",
-        "title": "Proyecto de Ley por la que se adoptan medidas urgentes de reactivaci\u00f3n, refuerzo y prevenci\u00f3n en el marco del Plan de respuesta inmediata, reconstrucci\u00f3n y relanzamiento frente a los da\u00f1os causados por la Depresi\u00f3n Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024 (procedente del Real Decreto-ley 12/2025, de 28 de octubre).",
-        "type": "Proyecto de ley",
-        "current_status": "Comisi\u00f3n de Pol\u00edtica Territorial Enmiendas",
-        "presented_date": "2025-11-27",
-        "vote_events_count": 0,
-        "measure_points_count": 0,
-        "official_documents_count": 0,
-        "official_links": [
-          "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20260802050025.json",
-          "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-78-1.PDF#page=1"
-        ]
-      }
-    ],
+    "initiatives": [],
     "votes": [],
     "reviewed_measures": []
   },

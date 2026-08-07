@@ -174,7 +174,7 @@
     if ((stance === "unclear" || stance === "no_signal") && (trustLevelToken === "low" || trustLevelToken === "medium")) {
       return {
         reason_code: "unknown_with_trust_gap",
-        reason_label: "incertidumbre y confianza baja: conviene abrir la evidencia",
+        reason_label: "unknown + confianza baja: conviene abrir evidencia",
       };
     }
     if (stance === "unclear" || stance === "no_signal") {
@@ -186,12 +186,12 @@
     if (trustLevelToken === "low" || trustLevelToken === "medium") {
       return {
         reason_code: "trust_gap",
-        reason_label: "confianza parcial: valida con la evidencia",
+        reason_label: "confianza parcial: valida con evidencia",
       };
     }
     return {
       reason_code: "audit_next",
-      reason_label: "siguiente paso recomendado de auditoría",
+      reason_label: "siguiente paso recomendado de auditoria",
     };
   }
 

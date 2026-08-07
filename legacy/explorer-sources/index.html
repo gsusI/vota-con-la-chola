@@ -897,7 +897,7 @@
 	          <span style="font-size: 0.65em; opacity: 0.8; vertical-align: middle">v1.1.0</span>
 	        </h1>
         <p class="subtitle">
-          Panel integral de progreso: cruza <span class="mono">SOURCE_CONFIG</span>, tracker operativo, hoja de ruta general y hoja de ruta técnica con KPIs cuantificables.
+          Dashboard integral de progreso: cruza <span class="mono">SOURCE_CONFIG</span>, tracker operativo, roadmap macro y roadmap técnico con KPIs cuantificables.
         </p>
         <div id="global-progress" class="global-progress" aria-live="polite">
           <div class="muted">Cargando progreso...</div>
@@ -905,8 +905,8 @@
         <details class="content details-block" id="panel-roadmap" open>
           <summary>
             <span class="details-title">
-              <strong>Hoja de ruta (fases)</strong>
-              <small>Visibilidad de “dónde estamos” frente a “qué falta” para llegar al objetivo principal.</small>
+              <strong>Roadmap (fases)</strong>
+              <small>Visibilidad de “dónde estamos” vs “qué falta” para llegar al north-star.</small>
             </span>
           </summary>
           <div class="details-body">
@@ -920,8 +920,8 @@
         <details class="content details-block" id="panel-roadmap-tech" open>
           <summary>
             <span class="details-title">
-              <strong>Hoja de ruta técnica (fases + KPIs)</strong>
-              <small>Entrega técnica medible: controles, cobertura política, productividad ETL y trazabilidad.</small>
+              <strong>Roadmap técnico (fases + KPIs)</strong>
+              <small>Entrega técnica medible: gates, cobertura política, productividad ETL y trazabilidad.</small>
             </span>
           </summary>
           <div class="details-body">
@@ -930,21 +930,6 @@
             <div id="roadmap-tech-kpis" class="kpis" style="margin-top:10px"></div>
             <p class="sub" style="margin:10px 0 0">
               Fuente de verdad: <span class="mono">docs/roadmap-tecnico.md</span> y métricas reales de <span class="mono">/api/sources/status</span>.
-            </p>
-          </div>
-        </details>
-        <details class="content details-block" id="panel-coverage-capacity" open>
-          <summary>
-            <span class="details-title">
-              <strong>Cobertura objetivo</strong>
-              <small>Denominadores acotados por dimensión para medir cuánto del universo ideal ya está descubierto, descargado, procesado o enlazado.</small>
-            </span>
-          </summary>
-          <div class="details-body">
-            <div id="coverage-capacity-summary" class="sub" style="margin:0 0 8px"></div>
-            <div id="coverage-capacity-dashboard" class="scope-grid"></div>
-            <p class="sub" style="margin:10px 0 0">
-              Fuente de verdad: <span class="mono">docs/coverage_capacity_model.json</span> y métricas reales de <span class="mono">/api/sources/status</span>.
             </p>
           </div>
         </details>
@@ -977,7 +962,7 @@
                 <option value="extra">Fuentes adicionales</option>
               </select>
               <select id="filter-tracker-domain">
-                <option value="">Dominio (hoja de ruta): Todos</option>
+                <option value="">Dominio (roadmap): Todos</option>
               </select>
               <select id="filter-roadmap">
                 <option value="">Ruta de trabajo: Todos</option>
@@ -1011,7 +996,7 @@
           <p id="refresh-at" class="sub" style="margin:0"></p>
         </div>
         <p class="sub">
-          Cada tarjeta representa un ámbito y agrupa: progreso mínimo, estado operativo, fuentes en configuración, elementos de la hoja de ruta sin conector y pendientes accionables.
+          Cada tarjeta representa un ámbito y agrupa: progreso mínimo, estado operativo, fuentes en configuración, elementos de roadmap sin conector y pendientes accionables.
         </p>
         <div id="scope-dashboard" class="scope-grid"></div>
       </section>
@@ -1019,7 +1004,7 @@
       <details class="content details-block" id="panel-ideal">
         <summary>
           <span class="details-title">
-            <strong>Inventario ideal (dichos vs hechos)</strong>
+            <strong>Inventario ideal (Says vs Does)</strong>
             <small>Lista ambiciosa de fuentes programáticas (oficiales y no oficiales) para comparar “lo que dicen” vs “lo que hacen”.</small>
           </span>
         </summary>
@@ -1027,9 +1012,9 @@
           <div class="toolbar" style="margin-top:0">
             <select id="ideal-evidence">
               <option value="">Evidencia: Todas</option>
-              <option value="does">hechos</option>
-              <option value="says">dichos</option>
-              <option value="both">ambos</option>
+              <option value="does">does (hecho)</option>
+              <option value="says">says (dicho)</option>
+              <option value="both">both</option>
             </select>
             <select id="ideal-min-confidence">
               <option value="0">Fiabilidad mínima: 0</option>
@@ -1057,12 +1042,11 @@
         <div class="details-body">
           <ul class="list">
             <li><strong>Progreso (metas mínimas):</strong> suma de <span class="mono">min_records_loaded_strict</span> por fuente objetivo (si aplica).</li>
-            <li><strong>Cobertura objetivo:</strong> usa unidades acotadas por dimensión; no suma filas heterogéneas para el % global, sino promedios ponderados por celda.</li>
-            <li><strong>Estado operativo:</strong> deriva de ejecuciones registradas y umbral mínimo (correcto, parcial, error, sin ejecutar...).</li>
-            <li><strong>Hoja de ruta (sin conector):</strong> elementos del tracker sin <span class="mono">source_id</span> todavía, con ámbito inferido cuando es posible.</li>
+            <li><strong>Estado operativo:</strong> deriva de ejecuciones registradas y umbral mínimo (ok, partial, error, not_run...).</li>
+            <li><strong>Roadmap (sin conector):</strong> items del tracker sin <span class="mono">source_id</span> todavía, con ámbito inferido cuando es posible.</li>
             <li><strong>Analítica (temas/posiciones):</strong> contadores y % de calidad para <span class="mono">topics</span>, <span class="mono">topic_evidence</span>, <span class="mono">topic_evidence_reviews</span> y <span class="mono">topic_positions</span> (si existen en la BD).</li>
             <li><strong>Regla de “doble entrada” (calidad):</strong> cuando exista, cruzar “comunicado oficial” con “registro con efectos”. Ejemplos: Consejo de Ministros → BOE; anuncio de adjudicación → PLACSP; anuncio de subvención → BDNS.</li>
-            <li><strong>Fiabilidad de fuente (0-5):</strong> 5=registro/boletín con efectos, 4=datos abiertos oficiales estructurados, 3=comunicación oficial (RSS/agenda), 2=reutilizador, 1=señal, 0=sin trazabilidad.</li>
+            <li><strong>Fiabilidad de fuente (0-5):</strong> 5=registro/boletín con efectos, 4=open data oficial estructurado, 3=comunicación oficial (RSS/agenda), 2=reutilizador, 1=señal, 0=sin trazabilidad.</li>
           </ul>
         </div>
       </details>
@@ -1089,8 +1073,6 @@
         roadmapTechSummary: document.getElementById("roadmap-tech-summary"),
         roadmapTechDashboard: document.getElementById("roadmap-tech-dashboard"),
         roadmapTechKpis: document.getElementById("roadmap-tech-kpis"),
-        coverageCapacitySummary: document.getElementById("coverage-capacity-summary"),
-        coverageCapacityDashboard: document.getElementById("coverage-capacity-dashboard"),
         campaignMap: document.getElementById("campaign-map"),
         campaignAt: document.getElementById("campaign-at"),
         scopeDashboard: document.getElementById("scope-dashboard"),
@@ -1120,8 +1102,8 @@
       const CAMPAIGN_TERRITORIES = [
         {
           id: "representation",
-          name: "Representación institucional",
-          flavor: "Quién ocupa cada asiento: cámaras, parlamentos y cargos.",
+          name: "Representacion institucional",
+          flavor: "Quien ocupa cada asiento: camaras, parlamentos y cargos.",
           status_tokens: ["diputad", "senador", "parlamentari", "procurador", "concejal", "meps", "ocupaciones", "miembros", "activos"],
           ideal_tokens: ["actores", "mandatos", "declaraciones", "ids", "quien_es_quien", "wikidata", "profiles"],
           domain_hints: ["actores", "mandatos", "declaraciones", "ids"],
@@ -1136,15 +1118,15 @@
         },
         {
           id: "public_money",
-          name: "Dinero público",
-          flavor: "Contratación, subvenciones y ejecución de gasto.",
+          name: "Dinero publico",
+          flavor: "Contratacion, subvenciones y ejecucion de gasto.",
           status_tokens: ["placsp", "bdns", "contrat", "subvencion", "ayuda", "sindicacion", "dinero"],
           ideal_tokens: ["contratacion", "licitaciones", "adjudicaciones", "subvenciones", "ayudas", "dinero_publico", "presupuesto", "ejecucion", "convenios", "encomiendas", "finanzas_publicas", "auditoria", "ted"],
           domain_hints: ["contratacion", "subvenciones", "presupuesto", "dinero_publico"],
         },
         {
           id: "executive",
-          name: "Ejecutivo y comunicación",
+          name: "Ejecutivo y comunicacion",
           flavor: "Consejo de ministros, agendas, comparecencias y comunicados.",
           status_tokens: ["moncloa", "rss", "referencias", "ejecutivo", "agenda"],
           ideal_tokens: ["consejo_ministros", "acuerdos", "agenda", "actividad_publica", "comunicacion", "comparecencias", "alertas", "transparencia", "integridad", "conflictos_interes", "patrimonio", "lobby", "influencia"],
@@ -1161,7 +1143,7 @@
         {
           id: "legal",
           name: "Marco legal",
-          flavor: "Normativa, boletines y textos con efectos jurídicos.",
+          flavor: "Normativa, boletines y textos con efectos juridicos.",
           status_tokens: ["boe", "legal", "norma", "sancion", "borme", "boletin"],
           ideal_tokens: ["normativa", "nombramientos", "resoluciones", "sumario", "publicacion", "legislacion", "texto_vigente", "pre_normativa", "planificacion_normativa", "boe", "eurlex"],
           domain_hints: ["normativa", "sumario", "legislacion", "texto_vigente"],
@@ -1169,7 +1151,7 @@
         {
           id: "context",
           name: "Contexto e impacto",
-          flavor: "Series para resultados, comparación territorial y contexto.",
+          flavor: "Series para outcomes, comparacion territorial y contexto.",
           status_tokens: ["eurostat", "aemet", "bde", "series", "outcomes", "indicadores"],
           ideal_tokens: ["estadistica", "contexto", "geografia", "territorio", "codigos", "catalogo", "descubrimiento", "opendata", "tempus", "ign"],
           domain_hints: ["estadistica", "contexto", "territorio", "geografia"],
@@ -1296,9 +1278,9 @@
           DONE: "Completado",
           PARTIAL: "Parcial",
           TODO: "Pendiente",
-          NA: "Sin hoja de ruta",
-          "N/A": "Sin hoja de ruta",
-          "": "Sin hoja de ruta",
+          NA: "Sin roadmap",
+          "N/A": "Sin roadmap",
+          "": "Sin roadmap",
         };
         return map[value] || value;
       }
@@ -1306,7 +1288,7 @@
       function roadmapPill(value) {
         const val = (value || "").toUpperCase().trim();
         if (!val) {
-          return "<span class='pill muted'>Sin hoja de ruta</span>";
+          return "<span class='pill muted'>Sin roadmap</span>";
         }
         if (val === "DONE") {
           return "<span class='pill ok'>Completado</span>";
@@ -1322,12 +1304,12 @@
 
       function statusPill(value) {
         const val = (value || "").toUpperCase().trim();
-        if (!val) return "<span class='pill muted'>No aplica</span>";
-        if (val === "DONE") return "<span class='pill ok'>Completado</span>";
-        if (val === "PARTIAL") return "<span class='pill warn'>Parcial</span>";
-        if (val === "TODO") return "<span class='pill muted'>Pendiente</span>";
-        if (val === "MISSING") return "<span class='pill err'>Falta</span>";
-        if (val === "UNTRACKED") return "<span class='pill muted'>Sin seguimiento</span>";
+        if (!val) return "<span class='pill muted'>N/A</span>";
+        if (val === "DONE") return "<span class='pill ok'>DONE</span>";
+        if (val === "PARTIAL") return "<span class='pill warn'>PARTIAL</span>";
+        if (val === "TODO") return "<span class='pill muted'>TODO</span>";
+        if (val === "MISSING") return "<span class='pill err'>MISSING</span>";
+        if (val === "UNTRACKED") return "<span class='pill muted'>UNTRACKED</span>";
         return "<span class='pill muted'>" + val + "</span>";
       }
 
@@ -1352,7 +1334,7 @@
         const map = {
           done_zero_real: "En BD sin ejecución real verificable (strict-network)",
           ingest_error: "Error en la ingesta",
-          tracker_item: "Requiere trabajo de la hoja de ruta",
+          tracker_item: "Requiere trabajo del roadmap",
         };
         return map[value] || value;
       }
@@ -1565,14 +1547,14 @@
 	          "<div class='kpis'>" +
 	          "<div class='kpi'><p class='label'>Inventario</p><div class='value'><strong>" + present + "</strong><span class='muted'>en BD</span></div><div class='small'>Esperadas: " + desired + " · Extras: " + extra + " · Faltan: " + missing + "</div></div>" +
 	          "<div class='kpi'><p class='label'>Tracker</p><div class='value'><strong>" + (todo + partial) + "</strong><span class='muted'>por resolver</span></div><div class='small'>Pendientes: " + todo + " · Parciales: " + partial + " · Completadas: " + done + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Comprobaciones SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + " · Errores FK: " + (fkViolations === null ? "—" : fkViolations) + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Votaciones (calidad)</p><div class='value'><strong>" + fmtPct(Number(voteLinkPct)) + "</strong><span class='muted'>enlace</span></div><div class='small'>Oficial: " + fmtPct(Number(voteOfficialLinkPct)) + " · personas identificadas: " + fmtPct(Number(votePersonIdPct)) + " · temas recientes: " + fmtPct(Number(voteTopicPctLatest)) + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Iniciativas Senado (cola histórica)</p><div class='value'><strong>" + initdocActionableMissing + "</strong><span class='pill " + initdocStatusClass + "'>" + initdocStatusLabel + "</span></div><div class='small'>accionables: " + initdocActionableMissing + " · redundantes: " + initdocRedundantMissing + " · faltantes totales: " + initdocTotalMissing + " · <span class='pill " + initdocTrendStatusClass + "'>tendencia " + initdocTrendStatusLabel + "</span> · <span class='pill " + initdocCompactTrendStatusClass + "'>compactado " + initdocCompactTrendStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestStatusClass + "'>resumen compactado " + initdocCompactTrendDigestStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatWindowStatusClass + "'>tendencia resumen " + initdocCompactTrendDigestHeartbeatWindowStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusClass + "'>compactación resumen " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusClass + "'>digest resumen " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusLabel + "</span></div><div class='small'>" + initdocTrendSummary + " · " + initdocCompactTrendSummary + " · " + initdocCompactTrendDigestSummary + " · " + initdocCompactTrendDigestHeartbeatWindowSummary + " · " + initdocCompactTrendDigestHeartbeatCompactionWindowSummary + " · " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestSummary + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Analítica (temas)</p><div class='value'><strong>" + positionsTotal + "</strong><span class='muted'>posiciones</span></div><div class='small'>Temas: " + topicsTotal + " · Conjuntos: " + topicSetsTotal + " · Alta relevancia: " + highStakesTotal + " · pos(votos): " + positionsVotes + " · pos(declaraciones): " + positionsDeclared + " · pos(combinado): " + positionsCombined + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Coherencia (dichos/hechos)</p><div class='value'><strong>" + fmtPct(coherencePct) + "</strong><span class='muted'>explícita</span></div><div class='small'>corte: " + (coherenceAsOf || "—") + " · solapamiento: " + coherenceOverlap + " · explícitas: " + coherenceExplicit + " · incoherentes: " + coherenceIncoherent + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Analítica (evidencia)</p><div class='value'><strong>" + evidenceTotal + "</strong><span class='muted'>evidencias</span></div><div class='small'>hechos: " + evidenceRevealedTotal + " · dichos: " + evidenceDeclaredTotal + " · dichos(texto): " + fmtPct(evidenceDeclaredTextPct) + " · dichos(fecha): " + fmtPct(evidenceDeclaredDatePct) + " · dichos(postura): " + fmtPct(evidenceDeclaredSignalPct) + " · pos(evidencia): " + fmtPct(positionsWithEvidencePct) + " · docs: " + textDocsTotal + " · tema/método: " + topicMethodKey + " · postura/método: " + stanceMethodKey + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Cola de revisión (dichos)</p><div class='value'><strong>" + reviewPending + "</strong><span class='muted'>pendientes</span></div><div class='small'>pendientes/declarados: " + fmtPct(reviewPendingPct) + " · total: " + reviewTotal + " · resueltos: " + reviewResolved + " · ignorados: " + reviewIgnored + (reviewTop ? " · " + reviewTop : "") + "</div></div>" +
-	          "<div class='kpi'><p class='label'>Acción/impacto</p><div class='value'><strong>" + policyEventsTotal + "</strong><span class='muted'>eventos</span></div><div class='small'>Ejes: " + policyAxisScoresTotal + " · Intervenciones: " + interventionsTotal + " · Series: " + indicatorSeriesTotal + " (" + indicatorPointsTotal + " pts) · Estimaciones: " + causalEstimatesTotal + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Checks SQL</p><div class='value'><strong>" + sqlDone + "</strong><span class='muted'>OK</span></div><div class='small'>Parciales: " + sqlPartial + " · FK violations: " + (fkViolations === null ? "—" : fkViolations) + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Votaciones (quality)</p><div class='value'><strong>" + fmtPct(Number(voteLinkPct)) + "</strong><span class='muted'>link</span></div><div class='small'>Oficial: " + fmtPct(Number(voteOfficialLinkPct)) + " · person_id: " + fmtPct(Number(votePersonIdPct)) + " · topic (latest): " + fmtPct(Number(voteTopicPctLatest)) + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Iniciativas Senado (tail)</p><div class='value'><strong>" + initdocActionableMissing + "</strong><span class='pill " + initdocStatusClass + "'>" + initdocStatusLabel + "</span></div><div class='small'>actionable: " + initdocActionableMissing + " · redundant: " + initdocRedundantMissing + " · total_missing: " + initdocTotalMissing + " · <span class='pill " + initdocTrendStatusClass + "'>trend " + initdocTrendStatusLabel + "</span> · <span class='pill " + initdocCompactTrendStatusClass + "'>compact " + initdocCompactTrendStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestStatusClass + "'>compact-digest " + initdocCompactTrendDigestStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatWindowStatusClass + "'>cd-trend " + initdocCompactTrendDigestHeartbeatWindowStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusClass + "'>cd-compact " + initdocCompactTrendDigestHeartbeatCompactionWindowStatusLabel + "</span> · <span class='pill " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusClass + "'>cd-digest " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestStatusLabel + "</span></div><div class='small'>" + initdocTrendSummary + " · " + initdocCompactTrendSummary + " · " + initdocCompactTrendDigestSummary + " · " + initdocCompactTrendDigestHeartbeatWindowSummary + " · " + initdocCompactTrendDigestHeartbeatCompactionWindowSummary + " · " + initdocCompactTrendDigestHeartbeatCompactionWindowDigestSummary + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Analítica (temas)</p><div class='value'><strong>" + positionsTotal + "</strong><span class='muted'>posiciones</span></div><div class='small'>Temas: " + topicsTotal + " · Sets: " + topicSetsTotal + " · High-stakes: " + highStakesTotal + " · pos(votes): " + positionsVotes + " · pos(declared): " + positionsDeclared + " · pos(combined): " + positionsCombined + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Coherencia (says/does)</p><div class='value'><strong>" + fmtPct(coherencePct) + "</strong><span class='muted'>explicit</span></div><div class='small'>as_of: " + (coherenceAsOf || "—") + " · overlap: " + coherenceOverlap + " · explicit: " + coherenceExplicit + " · incoherent: " + coherenceIncoherent + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Analítica (evidencia)</p><div class='value'><strong>" + evidenceTotal + "</strong><span class='muted'>evidencias</span></div><div class='small'>does: " + evidenceRevealedTotal + " · says: " + evidenceDeclaredTotal + " · says(text): " + fmtPct(evidenceDeclaredTextPct) + " · says(fecha): " + fmtPct(evidenceDeclaredDatePct) + " · says(stance): " + fmtPct(evidenceDeclaredSignalPct) + " · pos(evid): " + fmtPct(positionsWithEvidencePct) + " · docs: " + textDocsTotal + " · tm: " + topicMethodKey + " · sm: " + stanceMethodKey + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Review queue (says)</p><div class='value'><strong>" + reviewPending + "</strong><span class='muted'>pending</span></div><div class='small'>pending/declared: " + fmtPct(reviewPendingPct) + " · total: " + reviewTotal + " · resolved: " + reviewResolved + " · ignored: " + reviewIgnored + (reviewTop ? " · " + reviewTop : "") + "</div></div>" +
+	          "<div class='kpi'><p class='label'>Acción/Impacto</p><div class='value'><strong>" + policyEventsTotal + "</strong><span class='muted'>events</span></div><div class='small'>Axis: " + policyAxisScoresTotal + " · Interv: " + interventionsTotal + " · Series: " + indicatorSeriesTotal + " (" + indicatorPointsTotal + " pts) · Estimates: " + causalEstimatesTotal + "</div></div>" +
 	          "</div>";
 	      }
 
@@ -1583,7 +1565,7 @@
         const summary = rd.summary || {};
 
         if (!phases.length) {
-          nodes.roadmapDashboard.innerHTML = "<div class='muted'>Hoja de ruta no disponible en /api/sources/status.</div>";
+          nodes.roadmapDashboard.innerHTML = "<div class='muted'>Roadmap no disponible en /api/sources/status.</div>";
           if (nodes.roadmapSummary) nodes.roadmapSummary.textContent = "";
           return;
         }
@@ -1597,9 +1579,9 @@
           const t = (trackedPct === null) ? "—" : (String(trackedPct) + "%");
           const o = (overallPct === null) ? "—" : (String(overallPct) + "%");
           nodes.roadmapSummary.innerHTML =
-            "<span class='muted'>Progreso (elementos):</span> " +
-            "<strong>" + t + "</strong> <span class='muted'>(con seguimiento)</span>" +
-            " · <strong>" + o + "</strong> <span class='muted'>(incluye manual/sin seguimiento)</span>" +
+            "<span class='muted'>Progreso (items):</span> " +
+            "<strong>" + t + "</strong> <span class='muted'>(tracked)</span>" +
+            " · <strong>" + o + "</strong> <span class='muted'>(incluye manual/untracked)</span>" +
             " · <span class='mono muted'>" + trackedTotal + "/" + overallTotal + "</span>";
         }
 
@@ -1620,13 +1602,13 @@
                 return "<li>" + statusPill(it.status) + " <strong>" + label + "</strong>" + path + "</li>";
               }).join("") +
               "</ul></div>"
-            : "<div class='muted' style='margin-top:8px'>Sin siguientes acciones (fase completa o sin elementos).</div>";
+            : "<div class='muted' style='margin-top:8px'>Sin siguientes acciones (fase completa o sin items).</div>";
 
           const meta = "<div class='scope-meta'><span class='mono'>ENG " + eng + "</span> · <span class='mono'>HUM " + hum + "</span></div>";
-          const counts = "<div class='small muted'>Completadas: " + Number(pr.done || 0) +
-            " · Parciales: " + Number(pr.partial || 0) +
-            " · Pendientes: " + Number(pr.todo || 0) +
-            " · Sin seguimiento: " + Number(pr.untracked || 0) +
+          const counts = "<div class='small muted'>DONE: " + Number(pr.done || 0) +
+            " · PARTIAL: " + Number(pr.partial || 0) +
+            " · TODO: " + Number(pr.todo || 0) +
+            " · UNTRACKED: " + Number(pr.untracked || 0) +
             "</div>";
           const pctLine = "<div class='row'><span class='muted'>Progreso</span><span class='mono'>" +
             ((tracked === null) ? "—" : (String(tracked) + "%")) +
@@ -1657,7 +1639,7 @@
         const programKpis = Array.isArray(rd.program_kpis) ? rd.program_kpis : [];
 
         if (!phases.length) {
-          nodes.roadmapTechDashboard.innerHTML = "<div class='muted'>Hoja de ruta técnica no disponible en /api/sources/status.</div>";
+          nodes.roadmapTechDashboard.innerHTML = "<div class='muted'>Roadmap técnico no disponible en /api/sources/status.</div>";
           nodes.roadmapTechSummary.textContent = "";
           nodes.roadmapTechKpis.innerHTML = "";
           return;
@@ -1700,7 +1682,7 @@
             : "<div class='muted' style='margin-top:8px'>Sin pendientes en esta fase.</div>";
 
           const checksBlock = checks.length
-            ? "<details style='margin-top:8px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Comprobaciones (" + checks.length + ")</summary>" +
+            ? "<details style='margin-top:8px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Checks (" + checks.length + ")</summary>" +
               "<div class='list' style='margin-top:8px'><ul>" +
               checks.slice(0, 16).map((it) => {
                 const label = String(it.label || it.id || "—");
@@ -1710,7 +1692,7 @@
                   : "";
                 return "<li>" + statusPill(it.status) + " <strong>" + label + "</strong>" + actual + target + "</li>";
               }).join("") +
-              (checks.length > 16 ? "<li class='muted'>+" + (checks.length - 16) + " comprobaciones más...</li>" : "") +
+              (checks.length > 16 ? "<li class='muted'>+" + (checks.length - 16) + " checks más...</li>" : "") +
               "</ul></div></details>"
             : "";
 
@@ -1726,10 +1708,10 @@
               (overall === null ? "—" : (String(overall) + "%")) +
             "</span></div>" +
             "<div class='meter'><span style='width:" + meter + "%'></span></div>" +
-            "<div class='small muted'>Completadas: " + Number(pr.done || 0) +
-              " · Parciales: " + Number(pr.partial || 0) +
-              " · Pendientes: " + Number(pr.todo || 0) +
-              " · Sin seguimiento: " + Number(pr.untracked || 0) +
+            "<div class='small muted'>DONE: " + Number(pr.done || 0) +
+              " · PARTIAL: " + Number(pr.partial || 0) +
+              " · TODO: " + Number(pr.todo || 0) +
+              " · UNTRACKED: " + Number(pr.untracked || 0) +
             "</div>" +
             nextList +
             checksBlock +
@@ -1746,149 +1728,11 @@
               "<div class='kpi'>" +
               "<p class='label'>KPI programa</p>" +
               "<div class='value'><strong>" + actual + "</strong>" + statusPill(kpi.status) + "</div>" +
-              "<div class='small'>" + label + (target ? (" · objetivo: " + target) : "") + "</div>" +
+              "<div class='small'>" + label + (target ? (" · target: " + target) : "") + "</div>" +
               "</div>"
             );
           }).join("")
           : "<div class='muted'>Sin KPIs de programa para mostrar.</div>";
-      }
-
-      function coverageStageLabel(value) {
-        const normalized = String(value || "").toLowerCase();
-        const map = {
-          discoverable: "descubrible",
-          downloaded: "descargado",
-          processed: "procesado",
-          linked: "enlazado",
-          published: "publicado",
-        };
-        return map[normalized] || normalized || "procesado";
-      }
-
-      function coverageDenominatorPill(value) {
-        const normalized = String(value || "").toLowerCase();
-        if (normalized === "ok") {
-          return "<span class='pill ok'>denominator: ok</span>";
-        }
-        if (normalized === "proxy") {
-          return "<span class='pill warn'>denominator: proxy</span>";
-        }
-        return "<span class='pill muted'>denominator: missing</span>";
-      }
-
-      function renderCoverageCapacityDashboard(data) {
-        if (!nodes.coverageCapacitySummary || !nodes.coverageCapacityDashboard) return;
-        const payload = data.coverage_capacity || {};
-        const summary = payload.summary || {};
-        const cells = Array.isArray(payload.cells) ? payload.cells : [];
-        const byScope = Array.isArray(payload.by_scope) ? payload.by_scope : [];
-        const byDomain = Array.isArray(payload.by_domain) ? payload.by_domain : [];
-        const families = Array.isArray(payload.families) ? payload.families : [];
-        const weightedPercent = summary.weighted_percent;
-        const cellsWithDenominator = Number(summary.cells_with_denominator || 0);
-        const cellsTotal = Number(summary.cells_total || 0);
-        const blockedCells = Number(summary.blocked_cells || 0);
-        const denominatorGaps = Number(summary.denominator_gaps || 0);
-
-        const scopeSummary = byScope
-          .map((row) => {
-            if (row.weighted_percent === null || row.weighted_percent === undefined) return "";
-            return String(row.label || row.key || "ámbito") + ": " + String(row.weighted_percent) + "%";
-          })
-          .filter(Boolean)
-          .slice(0, 4)
-          .join(" · ");
-
-        const domainSummary = byDomain
-          .map((row) => {
-            if (row.weighted_percent === null || row.weighted_percent === undefined) return "";
-            return String(row.label || row.key || "dominio") + ": " + String(row.weighted_percent) + "%";
-          })
-          .filter(Boolean)
-          .slice(0, 4)
-          .join(" · ");
-
-        const familySummary = families
-          .map((row) => {
-            if (row.weighted_percent === null || row.weighted_percent === undefined) return "";
-            return String(row.label || row.key || "familia") + ": " + String(row.weighted_percent) + "%";
-          })
-          .filter(Boolean)
-          .slice(0, 4)
-          .join(" · ");
-
-        nodes.coverageCapacitySummary.innerHTML =
-          "<span class='muted'>Cobertura objetivo:</span> " +
-          "<strong>" + (weightedPercent === null || weightedPercent === undefined ? "—" : (String(weightedPercent) + "%")) + "</strong>" +
-          " <span class='muted'>(promedio ponderado por celda)</span>" +
-          " · <span class='mono muted'>" + cellsWithDenominator + "/" + cellsTotal + "</span> celdas con denominador" +
-          " · <span class='muted'>bloqueadas:</span> <strong>" + blockedCells + "</strong>" +
-          " · <span class='muted'>brechas:</span> <strong>" + denominatorGaps + "</strong>" +
-          (scopeSummary ? " · <span class='muted'>" + scopeSummary + "</span>" : "") +
-          (domainSummary ? " · <span class='muted'>" + domainSummary + "</span>" : "") +
-          (familySummary ? " · <span class='muted'>" + familySummary + "</span>" : "");
-
-        if (!cells.length) {
-          nodes.coverageCapacityDashboard.innerHTML = "<div class='muted'>Coverage capacity no disponible en /api/sources/status.</div>";
-          return;
-        }
-
-        nodes.coverageCapacityDashboard.innerHTML = cells
-          .slice()
-          .sort((a, b) => {
-            const ap = (a.primary_percent === null || a.primary_percent === undefined) ? -1 : Number(a.primary_percent);
-            const bp = (b.primary_percent === null || b.primary_percent === undefined) ? -1 : Number(b.primary_percent);
-            if (ap !== bp) return ap - bp;
-            return String(a.label || a.id || "").localeCompare(String(b.label || b.id || ""));
-          })
-          .map((cell) => {
-            const stages = cell.stages || {};
-            const primaryStage = String(cell.primary_stage || "processed");
-            const primaryTotal = Number(cell.primary_total || 0);
-            const idealTotal = Number(cell.ideal_total || 0);
-            const primaryPercent = cell.primary_percent;
-            const meter = (primaryPercent === null || primaryPercent === undefined) ? 0 : Math.max(0, Math.min(100, Number(primaryPercent)));
-            const blockedSources = Array.isArray(cell.blocked_sources) ? cell.blocked_sources : [];
-            const stageLine = [
-              "descubribles: " + Number(stages.discoverable || 0),
-              "descargados: " + Number(stages.downloaded || 0),
-              "procesados: " + Number(stages.processed || 0),
-              "enlazados: " + Number(stages.linked || 0),
-              "publicados: " + Number(stages.published || 0),
-            ].join(" · ");
-            const metaBits = [
-              cell.scope ? "<span class='mono'>" + String(cell.scope) + "</span>" : "",
-              cell.evidence_kind ? "<span class='mono'>" + String(cell.evidence_kind) + "</span>" : "",
-              cell.unit_type ? "<span class='mono'>" + String(cell.unit_type) + "</span>" : "",
-            ].filter(Boolean).join(" · ");
-            const blockedLine = blockedSources.length
-              ? "<div class='small muted'>Bloqueadas: " + blockedSources.join(", ") + "</div>"
-              : "";
-            const gapLine = cell.gap_reason
-              ? "<div class='small muted'>Brecha: " + String(cell.gap_reason) + "</div>"
-              : "";
-            return (
-              "<article class='scope-card'>" +
-              "<div class='scope-head'>" +
-              "<div class='scope-title'>" + String(cell.label || cell.id || "Celda de cobertura") + "</div>" +
-              "<div class='scope-meta'>" + metaBits + "</div>" +
-              "</div>" +
-              "<div class='row'><span class='muted'>Etapa principal</span><span class='mono'>" +
-              coverageStageLabel(primaryStage) + ": " + primaryTotal + "/" + idealTotal +
-              (primaryPercent === null || primaryPercent === undefined ? "" : (" (" + String(primaryPercent) + "%)")) +
-              "</span></div>" +
-              "<div class='meter'><span style='width:" + meter + "%'></span></div>" +
-              "<div class='small' style='margin-top:8px'>" + coverageDenominatorPill(cell.denominator_status) +
-              (cell.blocked ? " <span class='pill warn'>bloqueada</span>" : "") +
-              "</div>" +
-              "<div class='small muted' style='margin-top:8px'>" + stageLine + "</div>" +
-              (cell.notes ? "<div class='small muted' style='margin-top:8px'>" + String(cell.notes) + "</div>" : "") +
-              blockedLine +
-              gapLine +
-              "</article>"
-            );
-          })
-          .join("");
       }
 
       function safeNum(x, fallback = 0) {
@@ -1907,7 +1751,7 @@
               if (typeof it === "string") {
                 return "<li>" + String(it) + "</li>";
               }
-              const label = String(it.label || it.id || "elemento");
+              const label = String(it.label || it.id || "item");
               const fields = Array.isArray(it.fields) ? it.fields : [];
               const body = fields.length ? "<ul class='small muted'>" + fields.map((f) => "<li>" + String(f) + "</li>").join("") + "</ul>" : "";
               return "<li><strong>" + label + "</strong>" + body + "</li>";
@@ -1915,7 +1759,7 @@
             .join("");
           return (
             "<div class='card' style='margin-top:10px'>" +
-            "<div class='row'><strong>" + title + "</strong><span class='pill muted'>objetivo</span></div>" +
+            "<div class='row'><strong>" + title + "</strong><span class='pill muted'>north-star</span></div>" +
             "<ul style='margin:8px 0 0; padding-left:18px'>" +
             rows +
             "</ul></div>"
@@ -1927,9 +1771,9 @@
           "<div><strong>Datos ideales a capturar</strong></div>" +
           "<div class='mono muted'>docs/ideal_sources_say_do.json</div>" +
           "</div>" +
-          section("Por político (por ámbito)", req.per_politician_per_scope) +
-          section("Por conjunto de temas", req.per_topic_set) +
-          section("Por evidencia (atómica)", req.per_evidence_item) +
+          section("Por político (por scope)", req.per_politician_per_scope) +
+          section("Por topic_set", req.per_topic_set) +
+          section("Por evidencia (atomic)", req.per_evidence_item) +
           section("Por fuente", req.per_source)
         );
       }
@@ -1997,12 +1841,12 @@
             const access = Array.isArray(s.access) ? s.access.join(", ") : "";
             const fmt = Array.isArray(s.formats) ? s.formats.join(", ") : "";
             const meta = [
-              "id: " + String(s.id || ""),
-              "confianza: " + String(conf),
-              s.jurisdiction ? "jurisdicción: " + String(s.jurisdiction) : "",
-              s.scope ? "ámbito: " + String(s.scope) : "",
-              access ? "acceso: " + access : "",
-              fmt ? "formato: " + fmt : "",
+              "id=" + String(s.id || ""),
+              "conf=" + String(conf),
+              s.jurisdiction ? "jur=" + String(s.jurisdiction) : "",
+              s.scope ? "scope=" + String(s.scope) : "",
+              access ? "access=" + access : "",
+              fmt ? "fmt=" + fmt : "",
             ].filter(Boolean).join(" · ");
             const notes = s.notes ? "<div class='small muted'>" + String(s.notes) + "</div>" : "";
             const domLine = dom ? "<div class='small muted'>dominios: " + String(dom) + "</div>" : "";
@@ -2060,7 +1904,7 @@
         if (nodes.filterTrackerDomain) {
           const keep = nodes.filterTrackerDomain.options[0]
             ? nodes.filterTrackerDomain.options[0].outerHTML
-            : "<option value=''>Dominio (hoja de ruta): Todos</option>";
+            : "<option value=''>Dominio (roadmap): Todos</option>";
           nodes.filterTrackerDomain.innerHTML = keep;
           trackerDomains.forEach((d) => {
             const option = document.createElement("option");
@@ -2398,7 +2242,7 @@
               "<span class='campaign-chip err'>ERROR " + safeNum(territory.failed, 0) + "</span>",
             ];
             if (territory.blocked > 0) {
-              chips.push("<span class='campaign-chip err'>BLOQUEADAS " + territory.blocked + "</span>");
+              chips.push("<span class='campaign-chip err'>BLOCKED " + territory.blocked + "</span>");
             }
             if (territory.unmapped_backlog > 0) {
               chips.push("<span class='campaign-chip warn'>SIN CONECTOR " + territory.unmapped_backlog + "</span>");
@@ -2634,7 +2478,7 @@
                   }).join("") +
                   (actions.length > 12 ? "<div class='muted'>+" + (actions.length - 12) + " más…</div>" : "") +
                   "</div></details>" : "") +
-                (roadmapItems.length ? "<details style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Hoja de ruta sin conector (" + roadmapItems.length + ")</summary><div class='list' style='margin-top:8px'><ul>" +
+                (roadmapItems.length ? "<details style='margin-top:10px'><summary class='scope-meta' style='cursor:pointer; font-weight:800'>Roadmap sin conector (" + roadmapItems.length + ")</summary><div class='list' style='margin-top:8px'><ul>" +
                   roadmapItems.slice(0, 24).map((it) => {
                     const e = String(it.estado || "").toUpperCase();
                     const pill = roadmapPill(e);
@@ -2678,7 +2522,7 @@
               "<article class='scope-card'>" +
               "<div class='scope-head'>" +
               "<div class='scope-title'>" + scopeLabel(scopeKey) + "</div>" +
-              "<div class='scope-meta'><span class='mono'>" + rowsSorted.length + "</span> fuentes · <span class='mono'>" + roadmapItems.length + "</span> en hoja de ruta</div>" +
+              "<div class='scope-meta'><span class='mono'>" + rowsSorted.length + "</span> fuentes · <span class='mono'>" + roadmapItems.length + "</span> roadmap</div>" +
               "</div>" +
               meters +
               "<div style='margin-top:10px'>" + issuesBlock + "</div>" +
@@ -2715,7 +2559,6 @@
           renderGlobalProgress(payload);
           renderRoadmapDashboard(payload);
           renderRoadmapTechnicalDashboard(payload);
-          renderCoverageCapacityDashboard(payload);
           renderCampaignMap(payload, idealPayload);
           fillAdvancedFilters(payload);
           nodes.refreshAt.textContent = "Actualizado: " + formatDate(payload.generated_at || "");
