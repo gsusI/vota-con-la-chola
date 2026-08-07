@@ -1,6 +1,6 @@
 {
   "schema_version": "andalucia_water_commitment_receipt_v1",
-  "snapshot_date": "2026-07-25",
+  "snapshot_date": "2026-08-07",
   "title": "El recibo del agua de Andalucía",
   "question": "¿Qué prometió el nuevo Gobierno andaluz sobre agua y qué ha hecho ya?",
   "scope": {
@@ -8,12 +8,12 @@
     "legislature": "XIII",
     "investiture_date": "2026-07-02",
     "evidence_window_start": "2026-07-02",
-    "evidence_window_end": "2026-07-25"
+    "evidence_window_end": "2026-08-07"
   },
   "context": {
-    "answer": "Tres compromisos declarados y ningún hito jurídico posterior específico localizado en este primer corte.",
-    "caveat": "Ninguno incluye un plazo. Este corte temprano no prueba incumplimiento ni descarta trabajo interno o documentos todavía no indexados.",
-    "owner_note": "La Consejería de Agricultura, Pesca, Agua y Desarrollo Rural conserva las competencias autonómicas en agua. Los proyectos de ley requieren tramitación parlamentaria.",
+    "answer": "Los tres compromisos siguen solo declarados. El Decreto 193/2026 reorganizó competencias de agua y regadíos, pero no aprobó ninguno de los tres hitos prometidos.",
+    "caveat": "Ninguno incluye un plazo. Este segundo corte no prueba incumplimiento ni descarta trabajo interno o documentos todavía no indexados.",
+    "owner_note": "El Decreto 193/2026 asigna las competencias de agua y regadíos dentro de la Consejería de Agricultura, Pesca, Agua y Desarrollo Rural. Los proyectos de ley requieren tramitación parlamentaria.",
     "historical_baseline_note": "La evidencia anterior al 2 de julio de 2026 se trata como contexto histórico y nunca como avance de estos compromisos."
   },
   "sources": [
@@ -82,23 +82,28 @@
     }
   ],
   "evidence_check": {
-    "checked_at": "2026-07-25",
+    "checked_at": "2026-08-07",
     "method": "Revisión manual de fuentes oficiales por título, texto y tipo de acto dentro de la ventana del corte.",
     "official_scopes": [
       {
-        "label": "Mesa del Parlamento, última sesión revisada 23 de julio",
+        "label": "Iniciativas legislativas en tramitación: un expediente no relacionado y ningún proyecto de ley del agua localizado al 7 de agosto",
         "publisher": "Parlamento de Andalucía",
-        "url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/calendariodesesiones/buscadordesesiones.do?legislatura=13&numses=7&organo=1&origen=desarrolloexp"
+        "url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/tramitacionencurso/legislativas.do"
       },
       {
-        "label": "Boletín Oficial de la Junta de Andalucía",
+        "label": "BOJA ordinarios 143 a 152, complementarios y extraordinarios del 27 de julio al 7 de agosto",
         "publisher": "Junta de Andalucía",
-        "url": "https://www.juntadeandalucia.es/eboja.html"
+        "url": "https://www.juntadeandalucia.es/eboja/2026.html"
       },
       {
-        "label": "Consejo de Gobierno, última sesión revisada 22 de julio",
+        "label": "Decreto 193/2026: estructura orgánica y reparto de competencias de agua y regadíos",
         "publisher": "Junta de Andalucía",
-        "url": "https://www.juntadeandalucia.es/organismos/consejo/sesion/22072026.html"
+        "url": "https://www.juntadeandalucia.es/boja/2026/515/5"
+      },
+      {
+        "label": "Noticias oficiales etiquetadas Agua, del 26 de julio al 7 de agosto: sin resultados",
+        "publisher": "Junta de Andalucía",
+        "url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/servicios/actualidad/noticias-historico.html?temas_consejeria_f=7597&field_fecha_publicacion_value=2026-07-26&field_fecha_publicacion_value_1=2026-08-07&items_per_page=50"
       }
     ],
     "limitation": "Un resultado sin evidencia localizada describe este corte y estas fuentes; no afirma que sea imposible que exista otra actuación oficial."
@@ -219,6 +224,6 @@
       "resultado_observado": "Existe un indicador posterior observado; no implica causalidad por sí solo."
     },
     "rule": "Solo la evidencia fechada desde el 2 de julio de 2026 puede mover el estado de un compromiso. Contexto, planes o gasto anteriores permanecen como baseline.",
-    "next_check": "2026-08-01"
+    "next_check": "2026-08-14"
   }
 }
