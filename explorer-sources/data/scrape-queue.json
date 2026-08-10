@@ -1,44 +1,46 @@
 {
   "queue_version": "v1",
-  "generated_at": "2026-04-24T15:46:48+00:00",
-  "snapshot_date": "2026-04-13",
+  "generated_at": "2026-08-10T05:24:54+00:00",
+  "snapshot_date": "2026-08-10",
   "summary": {
-    "queue_items_total": 23,
-    "p0_total": 17,
-    "p1_total": 4,
-    "p2_total": 2,
+    "queue_items_total": 33,
+    "p0_total": 5,
+    "p1_total": 21,
+    "p2_total": 7,
     "by_reason": {
-      "missing_from_db": 13,
+      "missing_reproducible_network_run": 20,
+      "tracker_mismatch": 7,
       "blocked_upstream": 3,
-      "missing_reproducible_network_run": 4,
-      "tracker_mismatch": 2,
-      "ingest_error": 1
+      "missing_from_db": 2,
+      "under_threshold": 1
     },
     "by_domain": {
-      "politicos": 16,
-      "infoelectoral": 1,
-      "parlamentario": 6
+      "politicos": 24,
+      "infoelectoral": 2,
+      "parlamentario": 7
     },
     "by_scope": {
-      "autonomico": 3,
-      "dinero": 6,
+      "autonomico": 11,
+      "dinero": 4,
       "ejecutivo": 2,
-      "electoral": 1,
+      "electoral": 2,
+      "europeo": 1,
       "legal": 1,
-      "nacional": 6,
-      "outcomes": 4
+      "nacional": 8,
+      "organigrama": 1,
+      "outcomes": 3
     },
     "by_repeatability_state": {
-      "sample_replay_only": 16,
+      "sample_replay_only": 21,
+      "network_verified": 8,
       "blocked_with_sample": 3,
-      "network_verified": 3,
       "manual_capture_required": 1
     },
-    "repeatable_now_total": 22,
-    "sample_backed_total": 22,
+    "repeatable_now_total": 32,
+    "sample_backed_total": 32,
     "blocked_total": 3,
-    "batches_total": 14,
-    "catalog_sources_total": 45
+    "batches_total": 16,
+    "catalog_sources_total": 46
   },
   "items": [
     {
@@ -49,40 +51,41 @@
       "priority_score": 100,
       "priority_band": "P0",
       "queue_reason": "blocked_upstream",
-      "ops_state": "not_run",
+      "ops_state": "partial",
       "tracker_status": "PARTIAL",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "default_url": "https://www.parlamentodegalicia.gal/Composicion/Deputados",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Galicia)",
       "legal_verification_status": "pending_review",
       "progress": {
-        "loaded": 0,
+        "loaded": 3,
         "target": 50,
-        "percent": 0
+        "percent": 6
       },
       "flags": {
-        "under_threshold": false,
+        "under_threshold": true,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": true
       },
       "warehouse": {
         "primary_table": "mandates",
-        "primary_rows": 0,
+        "primary_rows": 3,
         "counts": {
-          "mandates": 0,
+          "mandates": 3,
           "parl_vote_events": 0,
           "parl_initiatives": 0,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "",
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
       "tracker_block_note": "Done now: NO. Blocker: `parlamento_galicia_deputados` en `strict-network` sigue bloqueado con HTTP 403 (`run_id=265`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source parlamento_galicia_deputados --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
       "action_titles": [
-        "PARTIAL: Parlamento de Galicia: deputados (fichas HTML)"
+        "PARTIAL: Parlamento de Galicia: deputados (fichas HTML)",
+        "Por debajo del umbral minimo: parlamento_galicia_deputados"
       ],
       "commands": [
         "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_galicia_deputados --strict-network",
@@ -112,23 +115,23 @@
       "priority_score": 100,
       "priority_band": "P0",
       "queue_reason": "blocked_upstream",
-      "ops_state": "missing",
+      "ops_state": "ok",
       "tracker_status": "PARTIAL",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "default_url": "https://opendata.aemet.es/opendata/api/valores/climatologicos",
       "tracker_tipo_dato": "Indicadores (confusores): AEMET",
       "legal_verification_status": "verified",
       "progress": {
-        "loaded": 0,
+        "loaded": 2,
         "target": 1,
-        "percent": 0
+        "percent": 100
       },
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": true
       },
       "warehouse": {
@@ -142,10 +145,9 @@
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "",
+      "last_message": "Ingesta completada: 2/2 registros validos (contract-error-fallback: HTTPError: HTTP Error 404: No Encontrado)",
       "tracker_block_note": "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` sigue bloqueado por contrato (`aemet_blocker=contract`, JSON invalido con payload vac\u00edo `payload_sig=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`, `run_id=263`, `run_records_loaded=0`), por lo que la fila permanece `PARTIAL`. Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `AEMET_API_KEY=<token> python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --source aemet_opendata_series --url https://opendata.aemet.es/opendata/api/observacion/convencional/todas --snapshot-date 2026-02-17 --strict-network --timeout 30`.",
       "action_titles": [
-        "Fuente deseada no existe en BD: aemet_opendata_series",
         "PARTIAL: AEMET OpenData"
       ],
       "commands": [
@@ -176,23 +178,23 @@
       "priority_score": 100,
       "priority_band": "P0",
       "queue_reason": "blocked_upstream",
-      "ops_state": "missing",
+      "ops_state": "ok",
       "tracker_status": "PARTIAL",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "default_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour",
       "tracker_tipo_dato": "Indicadores (confusores): ESIOS/REE",
       "legal_verification_status": "pending_review",
       "progress": {
-        "loaded": 0,
+        "loaded": 2,
         "target": 1,
-        "percent": 0
+        "percent": 100
       },
       "flags": {
         "under_threshold": false,
         "done_zero_real": false,
         "has_network": false,
-        "has_any": false,
+        "has_any": true,
         "blocked_note": true
       },
       "warehouse": {
@@ -206,10 +208,9 @@
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "",
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 400: Bad Request)",
       "tracker_block_note": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
       "action_titles": [
-        "Fuente deseada no existe en BD: ree_esios_indicators",
         "PARTIAL: ESIOS/REE API (token)"
       ],
       "commands": [
@@ -233,6 +234,71 @@
       "rank": 3
     },
     {
+      "source_id": "infoelectoral_descargas",
+      "source_name": "Infoelectoral - Area de descargas (convocatorias + archivos)",
+      "domain": "infoelectoral",
+      "scope": "electoral",
+      "priority_score": 95,
+      "priority_band": "P0",
+      "queue_reason": "missing_from_db",
+      "ops_state": "missing",
+      "tracker_status": "PARTIAL",
+      "sql_status": "TODO",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
+      "tracker_tipo_dato": "Procesos electorales y resultados",
+      "legal_verification_status": "partially_verified",
+      "progress": {
+        "loaded": 0,
+        "target": 3,
+        "percent": 0
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "infoelectoral_convocatoria_tipos",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "",
+      "tracker_block_note": "`infoelectoral_descargas` tiene evidencia de red en snapshot rico, pero `infoelectoral_procesos` no tiene run live-clean en el DB operativo actual. Cerrar solo cuando ambos source_id tengan `records_loaded > 0` o bloqueo documentado.",
+      "action_titles": [
+        "Fuente deseada no existe en BD: infoelectoral_descargas",
+        "PARTIAL: Infoelectoral descargas/procesos"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_descargas --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_procesos --strict-network"
+      ],
+      "batch_key": "P0::missing_from_db::infoelectoral::electoral::from-file::scripts/ingestar_infoelectoral_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_infoelectoral_es.py",
+        "strict_target": 3,
+        "fallback_file": "etl/data/raw/samples/infoelectoral_descargas_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_infoelectoral_es.py ingest --db '<db>' --source infoelectoral_descargas --strict-network",
+        "sample_command": "python3 scripts/ingestar_infoelectoral_es.py ingest --db '<db>' --source infoelectoral_descargas --from-file etl/data/raw/samples/infoelectoral_descargas_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 4
+    },
+    {
       "source_id": "infoelectoral_procesos",
       "source_name": "Infoelectoral - Procesos electorales celebrados (datos/resultados)",
       "domain": "infoelectoral",
@@ -241,7 +307,7 @@
       "priority_band": "P0",
       "queue_reason": "missing_from_db",
       "ops_state": "missing",
-      "tracker_status": "DONE",
+      "tracker_status": "PARTIAL",
       "sql_status": "TODO",
       "mismatch_state": "MISMATCH",
       "default_url": "https://infoelectoral.interior.gob.es/min/procesos/",
@@ -271,13 +337,15 @@
         }
       },
       "last_message": "",
-      "tracker_block_note": "Hardening de parsing de campos opcionales en procesos/resultados",
+      "tracker_block_note": "`infoelectoral_descargas` tiene evidencia de red en snapshot rico, pero `infoelectoral_procesos` no tiene run live-clean en el DB operativo actual. Cerrar solo cuando ambos source_id tengan `records_loaded > 0` o bloqueo documentado.",
       "action_titles": [
-        "Fuente deseada no existe en BD: infoelectoral_procesos"
+        "Fuente deseada no existe en BD: infoelectoral_procesos",
+        "PARTIAL: Infoelectoral descargas/procesos"
       ],
       "commands": [
         "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_procesos --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_descargas --strict-network"
       ],
       "batch_key": "P0::missing_from_db::infoelectoral::electoral::from-file::scripts/ingestar_infoelectoral_es.py",
       "execution": {
@@ -293,824 +361,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 4
-    },
-    {
-      "source_id": "asamblea_melilla_diputados",
-      "source_name": "Asamblea de Melilla - Miembros (Legislatura 2023/2027)",
-      "domain": "politicos",
-      "scope": "autonomico",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
-      "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Melilla)",
-      "legal_verification_status": "pending_review",
-      "progress": {
-        "loaded": 0,
-        "target": 20,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Hardening de parsing y umbral minimo",
-      "action_titles": [
-        "Fuente deseada no existe en BD: asamblea_melilla_diputados"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_melilla_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 20,
-        "fallback_file": "etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --from-file etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
       "rank": 5
-    },
-    {
-      "source_id": "bdns_api_subvenciones",
-      "source_name": "BDNS/SNPSAP - Subvenciones y ayudas Espana (API)",
-      "domain": "politicos",
-      "scope": "dinero",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
-      "tracker_tipo_dato": "Subvenciones y ayudas (Espana)",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 10,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. `bdns_api_subvenciones` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/ultimas`) y red real (`run_id=256`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: bdns_api_subvenciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 10,
-        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --from-file etl/data/raw/samples/bdns_api_subvenciones_sample.json",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 6
-    },
-    {
-      "source_id": "bdns_autonomico",
-      "source_name": "BDNS/SNPSAP - Subvenciones autonomicas (piloto 3 CCAA)",
-      "domain": "politicos",
-      "scope": "dinero",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
-      "tracker_tipo_dato": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 3,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. `bdns_autonomico` recuper\u00f3 `strict-network` con endpoint JSON (`/bdnstrans/api/convocatorias/busqueda`) y red real (`run_id=257`, `run_status=ok`, `run_records_loaded=50`), por lo que se reconcilia la fila a `DONE` sin waiver. Evidencia: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`. Siguiente comando: `just etl-tracker-gate`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: bdns_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 3,
-        "fallback_file": "etl/data/raw/samples/bdns_autonomico_sample.json",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --from-file etl/data/raw/samples/bdns_autonomico_sample.json",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 7
-    },
-    {
-      "source_id": "bdns_subvenciones",
-      "source_name": "Subvenciones publicas (canonico policy_events)",
-      "domain": "politicos",
-      "scope": "dinero",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "",
-      "sql_status": "TODO",
-      "mismatch_state": "UNTRACKED",
-      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
-      "tracker_tipo_dato": "",
-      "legal_verification_status": "pending_review",
-      "progress": {
-        "loaded": 0,
-        "target": 0,
-        "percent": null
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "",
-      "action_titles": [
-        "Fuente deseada no existe en BD: bdns_subvenciones"
-      ],
-      "commands": [
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::unknown",
-      "execution": {
-        "runner_script": "",
-        "strict_target": 0,
-        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "",
-        "sample_command": "",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 8
-    },
-    {
-      "source_id": "placsp_autonomico",
-      "source_name": "PLACSP - Contratacion auton\u00f3mica (piloto 3 CCAA)",
-      "domain": "politicos",
-      "scope": "dinero",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
-      "tracker_tipo_dato": "Contratacion detalle y documentacion de licitaciones (PLACSP)",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 3,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: placsp_autonomico"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source placsp_autonomico --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 3,
-        "fallback_file": "etl/data/raw/samples/placsp_autonomico_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_autonomico --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_autonomico --from-file etl/data/raw/samples/placsp_autonomico_sample.xml",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 9
-    },
-    {
-      "source_id": "placsp_contratacion",
-      "source_name": "Contratacion publica (canonico policy_events)",
-      "domain": "politicos",
-      "scope": "dinero",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "",
-      "sql_status": "TODO",
-      "mismatch_state": "UNTRACKED",
-      "default_url": "https://contrataciondelestado.es/",
-      "tracker_tipo_dato": "",
-      "legal_verification_status": "pending_review",
-      "progress": {
-        "loaded": 0,
-        "target": 0,
-        "percent": null
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "",
-      "action_titles": [
-        "Fuente deseada no existe en BD: placsp_contratacion"
-      ],
-      "commands": [
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::unknown",
-      "execution": {
-        "runner_script": "",
-        "strict_target": 0,
-        "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "",
-        "sample_command": "",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 10
-    },
-    {
-      "source_id": "placsp_sindicacion",
-      "source_name": "PLACSP - Contratacion publica Espana (ATOM/CODICE)",
-      "domain": "politicos",
-      "scope": "dinero",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
-      "tracker_tipo_dato": "Contratacion detalle y documentacion de licitaciones (PLACSP)",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 10,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. Paso 1 sigue estable sin nuevos faltantes (`backfill-placsp-contract-details` `source_records_seen=0`). Paso 2 y 2.5 completados: `backfill-money-contract-records` (`1985` contratos mapeados/actualizados) y `backfill-policy-events-money` (`1985` `policy_events` upserted en `placsp_contratacion`, todos con `source_record_pk`; totals `policy_events_by_source['placsp_contratacion']=1985`). Cierres SQL reproducibles: `placsp_contract_detail_records` `992`+`993`, `placsp_contract_detail_documents` `8144`+`8144`, `money_contract_records` `992`+`993`, `policy_events` `placsp_contratacion=1985`; evidencia en `docs/etl/sprints/AI-OPS-152/evidence/placsp_linkage_checks.log` y `docs/etl/sprints/AI-OPS-152/evidence/tracker_status_after_placsp_money_policy_events.log`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: placsp_sindicacion"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source placsp_sindicacion --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 10,
-        "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_sindicacion --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_sindicacion --from-file etl/data/raw/samples/placsp_sindicacion_sample.xml",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 11
-    },
-    {
-      "source_id": "moncloa_referencias",
-      "source_name": "La Moncloa - Referencias del Consejo de Ministros",
-      "domain": "politicos",
-      "scope": "ejecutivo",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
-      "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 2,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. Ingesta Moncloa y mapping a `policy_events` reproducibles (`moncloa_referencias=20`, `moncloa_rss_referencias=8`, total `28`) y reconciliadas con SQL `DONE` sin waiver activa para Moncloa. Evidencia: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`. Siguiente comando: `just etl-tracker-gate`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: moncloa_referencias"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_referencias --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::ejecutivo::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 2,
-        "fallback_file": "etl/data/raw/samples/moncloa_referencias_sample.html",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --from-file etl/data/raw/samples/moncloa_referencias_sample.html",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 12
-    },
-    {
-      "source_id": "moncloa_rss_referencias",
-      "source_name": "La Moncloa - RSS Referencias/Resumenes del Consejo de Ministros",
-      "domain": "politicos",
-      "scope": "ejecutivo",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
-      "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 2,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. Ingesta Moncloa y mapping a `policy_events` reproducibles (`moncloa_referencias=20`, `moncloa_rss_referencias=8`, total `28`) y reconciliadas con SQL `DONE` sin waiver activa para Moncloa. Evidencia: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`. Siguiente comando: `just etl-tracker-gate`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: moncloa_rss_referencias"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_rss_referencias --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::ejecutivo::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 2,
-        "fallback_file": "etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --from-file etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 13
-    },
-    {
-      "source_id": "boe_api_legal",
-      "source_name": "BOE API - Marco legal (RSS diario)",
-      "domain": "politicos",
-      "scope": "legal",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://www.boe.es/rss/boe.php",
-      "tracker_tipo_dato": "Marco legal electoral",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 5,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. Ingesta BOE (`boe_api_legal`) y mapping a `policy_events` est\u00e1n reproducibles (`records_loaded=298`, `policy_events_boe=298`) y reconciliados con SQL `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log` y `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md`. Siguiente comando: `just etl-tracker-gate`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: boe_api_legal"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::legal::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 5,
-        "fallback_file": "etl/data/raw/samples/boe_api_legal_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 14
-    },
-    {
-      "source_id": "bde_series_api",
-      "source_name": "Banco de Espana - Indicadores confusores (API series)",
-      "domain": "politicos",
-      "scope": "outcomes",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAA301,D_1NBAA304,D_1NBAA317,D_1NBAA372,D_1NBAA572,D_1NBAC372,D_1NBAC572,D_1NBAC972,D_1NBAD301,D_1NBAD302,D_1NBAD306,D_1NBAD311,D_1NBAD317,D_1NBAD372,D_1NBAD472,D_1NBAD572,D_1NBAD972,D_1NBAE472,D_1NBAE572,D_1NBAE972,D_1NBAF472,D_1NBAF572,D_1NBAS372,D_1NBAS572,D_1NBAS972,D_1NBBO020,D_1NBBO072,D_1NBBO303,D_1NBBO305,D_1NBBO307,D_1NBBO308,D_1NBBO309,D_1NBBO310,D_1NBBO311,D_1NBBO314,D_1NBBO315,D_1NBBO316,D_1NBBO320,D_1NBBO333,D_1NBBO349,D_1NBBO572,D_1NBBP301,D_1NBBP302,D_1NBBP303,D_1NBBP304,D_1NBBP305,D_1NBBP306,D_1NBBP307,D_1NBBP308,D_1NBBP309,D_1NBBP310,D_1NBBP311,D_1NBBP314,D_1NBBP315,D_1NBBP316,D_1NBBP317,D_1NBBP349,D_1NBBP572&rango=30M",
-      "tracker_tipo_dato": "Indicadores (confusores): Banco de Espana",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 58,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. AI-OPS-237 cierra la deriva de endpoint BDE: se migra el conector a `app.bde.es/bierest/resources/srdatosapp/listaSeries` y se endurece parsing para payload `fechas/valores` + `gzip`. Corrida `strict-network` real en staging: `run_id=278`, `status=ok`, `records_seen=1`, `records_loaded=1` (`bde_series_api: 1/1 registros validos`). Estructuraci\u00f3n posterior (`backfill-indicators --source-ids bde_series_api`) queda en `source_records_mapped=3`, `indicator_series_upserted=3`, `indicator_points_upserted=37`, `observation_records_upserted=37`, `indicator_series_unresolved_domain=0` (heur\u00edstica a\u00f1adida `euribor -> vivienda_urbanismo`). Evidencia: `docs/etl/sprints/AI-OPS-237/reports/bde-series-endpoint-drift-closure-20260227.md`, `docs/etl/sprints/AI-OPS-237/evidence/bde_series_ingest_strict_latest.json`, `docs/etl/sprints/AI-OPS-237/evidence/bde_series_ingestion_runs_latest.txt`, `docs/etl/sprints/AI-OPS-237/evidence/backfill_indicators_bde_after_domain_fix_latest.json`, `docs/etl/sprints/AI-OPS-237/evidence/tracker_status_post_bde_fix_latest.log`, `docs/etl/sprints/AI-OPS-237/evidence/python_unittest_bde_indicator_backfill_latest.txt`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bde_series_api --url 'https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAF472&rango=30M' --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids bde_series_api`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: bde_series_api"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bde_series_api --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::outcomes::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 58,
-        "fallback_file": "etl/data/raw/samples/bde_series_api_sample.json",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bde_series_api --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bde_series_api --from-file etl/data/raw/samples/bde_series_api_sample.json",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 15
-    },
-    {
-      "source_id": "eurostat_sdmx",
-      "source_name": "Eurostat - Indicadores outcomes (API/SDMX)",
-      "domain": "politicos",
-      "scope": "outcomes",
-      "priority_score": 95,
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "ops_state": "missing",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
-      "tracker_tipo_dato": "Indicadores (outcomes): Eurostat",
-      "legal_verification_status": "partially_verified",
-      "progress": {
-        "loaded": 0,
-        "target": 1,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "",
-      "tracker_block_note": "Done now: YES. `eurostat_sdmx` tiene `strict-network` exitoso (`run_records_loaded=2394`) y replay no-cero (`run_records_loaded=2`), por lo que el mismatch actual era desfase tracker/SQL y se reconcilia a `DONE`. Evidencia: `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__strict-network_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/evidence/eurostat-sql/eurostat_sdmx__replay_run_snapshot.csv`, `docs/etl/sprints/AI-OPS-10/reports/eurostat-apply.md`, `docs/etl/sprints/AI-OPS-10/evidence/tracker-gate-postrun.log`, `docs/etl/sprints/AI-OPS-10/evidence/status-postrun.json`. Siguiente comando: `just etl-tracker-gate`.",
-      "action_titles": [
-        "Fuente deseada no existe en BD: eurostat_sdmx"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::missing_from_db::politicos::outcomes::from-file::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 1,
-        "fallback_file": "etl/data/raw/samples/eurostat_sdmx_sample.json",
-        "sample_available": true,
-        "repeatability_state": "sample_replay_only",
-        "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --from-file etl/data/raw/samples/eurostat_sdmx_sample.json",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 16
-    },
-    {
-      "source_id": "senado_votaciones",
-      "source_name": "Senado - Votaciones (OpenData)",
-      "domain": "parlamentario",
-      "scope": "nacional",
-      "priority_score": 92,
-      "priority_band": "P0",
-      "queue_reason": "ingest_error",
-      "ops_state": "degraded",
-      "tracker_status": "",
-      "sql_status": "DONE",
-      "mismatch_state": "UNTRACKED",
-      "default_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
-      "tracker_tipo_dato": "",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 0,
-        "target": 1,
-        "percent": 0
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "parl_vote_events",
-        "primary_rows": 500,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 500,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "HTTPError: HTTP Error 403: Forbidden",
-      "tracker_block_note": "",
-      "action_titles": [
-        "Ingesta en error: senado_votaciones"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source senado_votaciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P0::ingest_error::parlamentario::nacional::strict-network::scripts/ingestar_parlamentario_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_parlamentario_es.py",
-        "strict_target": 1,
-        "fallback_file": "etl/data/raw/samples/senado_votaciones_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "network_verified",
-        "preferred_mode": "strict-network",
-        "network_command": "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --strict-network",
-        "sample_command": "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 17
     },
     {
       "source_id": "congreso_intervenciones",
@@ -1171,10 +422,10 @@
         ],
         "pre_commands": [
           "python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>",
-          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-04-13"
+          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-08-10"
         ]
       },
-      "rank": 18
+      "rank": 6
     },
     {
       "source_id": "parl_initiative_docs",
@@ -1232,7 +483,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 19
+      "rank": 7
     },
     {
       "source_id": "programas_partidos",
@@ -1274,8 +525,13 @@
       },
       "last_message": "",
       "tracker_block_note": "Done now: YES. AI-OPS-270 cierra el objetivo con dedupe `near-duplicate` reproducible en `scripts/report_programas_support_unclear_unique_ratio.py` (Jaccard/containment + guard por n-grama), conservando contrato strict y fail-path exact-only. Resultado real en staging (`PROGRAMAS_UNCLEAR_RATIO_PARTIES='BNG'`, `MIN=2.0`): `BNG europeas 2024` pasa de `support_to_unclear_unique_ratio=1.428571` (`unclear_unique=7`) a `2.0` (`unclear_unique=5`, `collapsed=2`) sin degradar gates declared (`declared.gate.passed=true`, `review_pending=0`) ni tracker (`mismatches=0`, `done_zero_real=0`). Guardrail de precisi\u00f3n en muestra revisada vigente: `precision_by_required_party={BNG:0.8571, VOX:1.0, FORO:1.0, PP:1.0}` (`min_party_precision=0.85`, `reviewed_total=28`). Evidencia: `docs/etl/sprints/AI-OPS-270/reports/programas-bng-europeas-near-duplicate-ratio-closure-20260228.md`, `docs/etl/sprints/AI-OPS-270/evidence/programas_support_unclear_unique_ratio_bng_latest.json`, `docs/etl/sprints/AI-OPS-270/exports/programas_support_unclear_unique_ratio_bng_latest.csv`, `docs/etl/sprints/AI-OPS-270/evidence/programas_support_unclear_unique_ratio_bng_exact_fail_latest.json`, `docs/etl/sprints/AI-OPS-270/evidence/programas_support_unclear_unique_ratio_bng_exact_fail_rc_latest.txt`, `docs/etl/sprints/AI-OPS-270/evidence/programas_support_unclear_unique_ratio_bng_delta_vs_ai_ops_269_latest.json`, `docs/etl/sprints/AI-OPS-270/evidence/quality_declared_programas_enforce_latest.json`, `docs/etl/sprints/AI-OPS-270/evidence/tracker_status_post_latest.log`, `docs/etl/sprints/AI-OPS-270/evidence/programas_support_precision_audit_latest.json`.",
-      "action_titles": [],
-      "commands": [],
+      "action_titles": [
+        "TODO: Webs/programas de partidos"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
       "batch_key": "P1::missing_reproducible_network_run::parlamentario::nacional::from-file::scripts/ingestar_parlamentario_es.py",
       "execution": {
         "runner_script": "scripts/ingestar_parlamentario_es.py",
@@ -1290,7 +546,448 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 20
+      "rank": 8
+    },
+    {
+      "source_id": "senado_iniciativas",
+      "source_name": "Senado - Iniciativas y mociones (OpenData)",
+      "domain": "parlamentario",
+      "scope": "nacional",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "DONE",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+      "tracker_tipo_dato": "Conversi\u00f3n iterativa adicional del residual global Senado `status=404` tras primer delta material",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 0,
+        "target": 1,
+        "percent": 0
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "parl_initiatives",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "{\"initiatives_loaded\": 0, \"note\": \"network-partial\"}",
+      "tracker_block_note": "Done now: NO_DELTA_WITH_EVIDENCE. AI-OPS-388 ejecuta dos pasadas `packet50` con `--include-unlinked` y postproceso completo (`excerpts` + `extractions --only-missing`) sin conversi\u00f3n neta: pass1 `candidate_urls=50`, `fetched_ok=0`, `failures=30`; pass2 `candidate_urls=50`, `fetched_ok=0`, `failures=30`; delta acumulada `downloaded_doc_links=0`, `missing_doc_links_actionable=0`, `missing_urls=0`, `status404=0`, con `status403/status500` estables. Se registra `no_new_lever` y se cierra por anti-loop. Evidencia: `docs/etl/sprints/AI-OPS-388/reports/senado-status404-global-two-pass-no-delta-20260301.md`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_conversion_delta_ai_ops_388_20260301T174503Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_no_new_lever_ai_ops_388_20260301T174503Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_retry_packet50_effective_pass1_20260301T172903Z.json`, `docs/etl/sprints/AI-OPS-388/evidence/senado_status404_global_retry_packet50_effective_pass2_20260301T174503Z.json`.",
+      "action_titles": [
+        "Por debajo del umbral minimo: senado_iniciativas"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source senado_iniciativas --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::parlamentario::nacional::from-file::scripts/ingestar_parlamentario_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_parlamentario_es.py",
+        "strict_target": 1,
+        "fallback_file": "etl/data/raw/samples/senado_iniciativas_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_iniciativas --strict-network",
+        "sample_command": "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_iniciativas --from-file etl/data/raw/samples/senado_iniciativas_sample.xml",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 9
+    },
+    {
+      "source_id": "senado_votaciones",
+      "source_name": "Senado - Votaciones (OpenData)",
+      "domain": "parlamentario",
+      "scope": "nacional",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "UNTRACKED",
+      "default_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/votaciones/index.html?legis=15",
+      "tracker_tipo_dato": "",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 0,
+        "target": 1,
+        "percent": 0
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "parl_vote_events",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "{\"events_loaded\": 0, \"member_votes_loaded\": 0, \"note\": \"network-partial\"}",
+      "tracker_block_note": "",
+      "action_titles": [
+        "Por debajo del umbral minimo: senado_votaciones"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source senado_votaciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::parlamentario::nacional::from-file::scripts/ingestar_parlamentario_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_parlamentario_es.py",
+        "strict_target": 1,
+        "fallback_file": "etl/data/raw/samples/senado_votaciones_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --strict-network",
+        "sample_command": "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 10
+    },
+    {
+      "source_id": "asamblea_ceuta_diputados",
+      "source_name": "Asamblea de Ceuta - Miembros (Legislatura 2023/2027)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.ceuta.es/gobiernodeceuta/index.php/el-gobierno/la-asamblea",
+      "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Ceuta)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 25,
+        "target": 20,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 25,
+        "counts": {
+          "mandates": 25,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 25/25 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
+      "tracker_block_note": "Done now: NO para live-clean. GitHub Actions `30175083036` (`2026-07-25`) agot\u00f3 el timeout de red en `asamblea_ceuta_diputados`. Mantener evidencia previa como hist\u00f3rica hasta recuperar strict-network reproducible. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_ceuta_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Asamblea de Ceuta: miembros (2023/2027)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_ceuta_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 20,
+        "fallback_file": "etl/data/raw/samples/asamblea_ceuta_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_ceuta_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_ceuta_diputados --from-file etl/data/raw/samples/asamblea_ceuta_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 11
+    },
+    {
+      "source_id": "cortes_aragon_diputados",
+      "source_name": "Cortes de Aragon - Diputados (XI Legislatura)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.cortesaragon.es/Quienes-somos.2250.0.html?no_cache=1&tx_t3comunicacion_pi3%5Bnumleg%5D=11&tx_t3comunicacion_pi3%5Btipinf%5D=3&tx_t3comunicacion_pi3%5Buidcom%5D=-2#verContenido",
+      "tracker_tipo_dato": "Representantes y mandatos (Cortes de Aragon)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 75,
+        "target": 50,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 75,
+        "counts": {
+          "mandates": 75,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 75/75 registros validos (network-error-fallback: RemoteDisconnected: Remote end closed connection without response)",
+      "tracker_block_note": "GitHub Actions strict-network devuelve `HTTP 403`; mantener datos previos como evidencia parcial, pero no marcar `DONE` hasta recuperar run reproducible live-clean.",
+      "action_titles": [
+        "PARTIAL: Cortes de Aragon: diputados (XI)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source cortes_aragon_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 50,
+        "fallback_file": "etl/data/raw/samples/cortes_aragon_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source cortes_aragon_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source cortes_aragon_diputados --from-file etl/data/raw/samples/cortes_aragon_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 12
+    },
+    {
+      "source_id": "parlament_balears_diputats",
+      "source_name": "Parlament de les Illes Balears - Diputats (webGTP)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.parlamentib.es/Representants/Diputats.aspx?criteria=0",
+      "tracker_tipo_dato": "Representantes y mandatos (Parlament IB)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 59,
+        "target": 45,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 59,
+        "counts": {
+          "mandates": 59,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 59/59 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
+      "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>` para `parlament_balears_diputats`; mantener evidencia previa como parcial hasta recuperar run reproducible. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlament_balears_diputats --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Parlament de les Illes Balears: diputats (listado + fichas via webGTP)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlament_balears_diputats --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 45,
+        "fallback_file": "etl/data/raw/samples/parlament_balears_diputats_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlament_balears_diputats --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlament_balears_diputats --from-file etl/data/raw/samples/parlament_balears_diputats_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 13
+    },
+    {
+      "source_id": "parlamento_canarias_diputados",
+      "source_name": "Parlamento de Canarias - Diputados (API)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://parcan.es/api/diputados/por_legislatura/11/?format=json",
+      "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Canarias)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 79,
+        "target": 60,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 79,
+        "counts": {
+          "mandates": 79,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 79/79 registros validos (network-error-fallback: HTTPError: HTTP Error 404: Not Found)",
+      "tracker_block_note": "Done now: NO para live-clean. GitHub Actions `30175083036` (`2026-07-25`) termin\u00f3 en `HTTP 404` tras redirecci\u00f3n del endpoint oficial. Mantener evidencia previa como hist\u00f3rica hasta reparar endpoint y recuperar strict-network reproducible. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_canarias_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Parlamento de Canarias: diputados + grupos (API oficial)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_canarias_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 60,
+        "fallback_file": "etl/data/raw/samples/parlamento_canarias_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_canarias_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_canarias_diputados --from-file etl/data/raw/samples/parlamento_canarias_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 14
+    },
+    {
+      "source_id": "parlamento_cantabria_diputados",
+      "source_name": "Parlamento de Cantabria - Diputados (XI Legislatura)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://parlamento-cantabria.es/informacion-general/composicion/11l-pleno-del-parlamento-de-cantabria",
+      "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Cantabria)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 35,
+        "target": 25,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 35,
+        "counts": {
+          "mandates": 35,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 35/35 registros validos (network-error-fallback: RuntimeError: Extraccion sospechosa: solo 13 diputados (esperado ~35))",
+      "tracker_block_note": "Done now: NO para live-clean. GitHub Actions `30175083036` (`2026-07-25`) extrajo solo `13` diputados frente al umbral esperado de aproximadamente `35`; el guardrail rechaz\u00f3 la carga sospechosa. Mantener evidencia previa como hist\u00f3rica hasta reparar parsing/contrato y recuperar cobertura reproducible. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_cantabria_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Parlamento de Cantabria"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_cantabria_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 25,
+        "fallback_file": "etl/data/raw/samples/parlamento_cantabria_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_cantabria_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_cantabria_diputados --from-file etl/data/raw/samples/parlamento_cantabria_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 15
     },
     {
       "source_id": "parlamento_navarra_parlamentarios_forales",
@@ -1300,17 +997,273 @@
       "priority_score": 88,
       "priority_band": "P1",
       "queue_reason": "missing_reproducible_network_run",
-      "ops_state": "not_run",
-      "tracker_status": "DONE",
-      "sql_status": "TODO",
-      "mismatch_state": "MISMATCH",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
       "default_url": "https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales",
       "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Navarra)",
       "legal_verification_status": "pending_review",
       "progress": {
-        "loaded": 0,
+        "loaded": 3,
         "target": 30,
-        "percent": 0
+        "percent": 10
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 3,
+        "counts": {
+          "mandates": 3,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
+      "tracker_block_note": "Done now: NO para live-clean. Existe replay manual `from-file` (`50/50 registros validos`), pero falta run de red real vigente o bloqueo reproducible actualizado antes de cerrar como `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`.",
+      "action_titles": [
+        "PARTIAL: Parlamento de Navarra: parlamentarios forales (fichas HTML)",
+        "Por debajo del umbral minimo: parlamento_navarra_parlamentarios_forales"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_navarra_parlamentarios_forales --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 30,
+        "fallback_file": "etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --from-file etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 16
+    },
+    {
+      "source_id": "parlamento_vasco_parlamentarios",
+      "source_name": "Parlamento Vasco - Parlamentarios (listado ACT)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.legebiltzarra.eus/comparla/c_comparla_alf_ACT.html",
+      "tracker_tipo_dato": "Representantes y mandatos (Parlamento Vasco)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 2,
+        "target": 60,
+        "percent": 3
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 2,
+        "counts": {
+          "mandates": 2,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: URLError: <urlopen error [Errno 110] Connection timed out>)",
+      "tracker_block_note": "GitHub Actions strict-network agota tiempo en `parlamento_vasco_parlamentarios`; requiere retry reproducible o hardening de timeout/endpoints antes de volver a `DONE`.",
+      "action_titles": [
+        "PARTIAL: Parlamento Vasco (listado ACT)",
+        "Por debajo del umbral minimo: parlamento_vasco_parlamentarios"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_vasco_parlamentarios --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 60,
+        "fallback_file": "etl/data/raw/samples/parlamento_vasco_parlamentarios_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_vasco_parlamentarios --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_vasco_parlamentarios --from-file etl/data/raw/samples/parlamento_vasco_parlamentarios_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 17
+    },
+    {
+      "source_id": "bdns_api_subvenciones",
+      "source_name": "BDNS/SNPSAP - Subvenciones y ayudas Espana (API)",
+      "domain": "politicos",
+      "scope": "dinero",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "tracker_tipo_dato": "Subvenciones y ayudas (Espana)",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 3,
+        "target": 10,
+        "percent": 30
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=cbd38f13d80e12be655c5cb84330dd3e28099e19ef71ffe7a41f2665fa9a0f84))",
+      "tracker_block_note": "Done now: NO para live-clean actual. El snapshot operativo conserva fallback/local replay para `bdns_api_subvenciones` (`max_net=0`), as\u00ed que falta repetir strict-network con red real o documentar bloqueo antes de cerrar como `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`.",
+      "action_titles": [
+        "PARTIAL: BDNS/SNPSAP: API",
+        "Por debajo del umbral minimo: bdns_api_subvenciones"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_api_subvenciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 10,
+        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --from-file etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 18
+    },
+    {
+      "source_id": "bdns_autonomico",
+      "source_name": "BDNS/SNPSAP - Subvenciones autonomicas (piloto 3 CCAA)",
+      "domain": "politicos",
+      "scope": "dinero",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "tracker_tipo_dato": "Subvenciones auton\u00f3micas (piloto 3 CCAA)",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 2,
+        "target": 3,
+        "percent": 67
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=cbd38f13d80e12be655c5cb84330dd3e28099e19ef71ffe7a41f2665fa9a0f84))",
+      "tracker_block_note": "Done now: NO para live-clean actual. El snapshot operativo conserva fallback/local replay para `bdns_autonomico` (`max_net=0`), as\u00ed que falta repetir strict-network con red real o documentar bloqueo antes de cerrar como `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-13/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-13/evidence/bdns-api-discovery.log`, `docs/etl/sprints/AI-OPS-13/exports/unblock_feasibility_matrix.csv`.",
+      "action_titles": [
+        "PARTIAL: BDNS/SNPSAP (filtrado por \u00f3rgano convocante/territorio)",
+        "Por debajo del umbral minimo: bdns_autonomico"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_autonomico --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 3,
+        "fallback_file": "etl/data/raw/samples/bdns_autonomico_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --from-file etl/data/raw/samples/bdns_autonomico_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 19
+    },
+    {
+      "source_id": "bdns_subvenciones",
+      "source_name": "Subvenciones publicas (canonico policy_events)",
+      "domain": "politicos",
+      "scope": "dinero",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "not_run",
+      "tracker_status": "",
+      "sql_status": "TODO",
+      "mismatch_state": "UNTRACKED",
+      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "tracker_tipo_dato": "",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 0,
+        "target": 0,
+        "percent": null
       },
       "flags": {
         "under_threshold": false,
@@ -1331,24 +1284,400 @@
         }
       },
       "last_message": "",
-      "tracker_block_note": "Done now: YES. Reconcilia `parlamento_navarra_parlamentarios_forales` en `from-file` con `50/50 registros validos` en `run_id=595` (snapshot `2026-02-12`, origen `etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages`). Evidencia: `docs/etl/sprints/AI-OPS-14/evidence/blocker-probe-refresh.log`, `docs/etl/sprints/AI-OPS-14/evidence/unblock-execution.log`, `docs/etl/sprints/AI-OPS-14/exports/unblock_feasibility_matrix.csv`.",
+      "tracker_block_note": "",
       "action_titles": [],
       "commands": [],
-      "batch_key": "P1::missing_reproducible_network_run::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
+      "batch_key": "P1::missing_reproducible_network_run::politicos::dinero::from-file::unknown",
       "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 30,
-        "fallback_file": "etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
+        "runner_script": "",
+        "strict_target": 0,
+        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
         "sample_available": true,
         "repeatability_state": "sample_replay_only",
         "preferred_mode": "from-file",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --from-file etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
+        "network_command": "",
+        "sample_command": "",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 20
+    },
+    {
+      "source_id": "placsp_contratacion",
+      "source_name": "Contratacion publica (canonico policy_events)",
+      "domain": "politicos",
+      "scope": "dinero",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "not_run",
+      "tracker_status": "",
+      "sql_status": "TODO",
+      "mismatch_state": "UNTRACKED",
+      "default_url": "https://contrataciondelestado.es/",
+      "tracker_tipo_dato": "",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 0,
+        "target": 0,
+        "percent": null
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "",
+      "tracker_block_note": "",
+      "action_titles": [],
+      "commands": [],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::dinero::from-file::unknown",
+      "execution": {
+        "runner_script": "",
+        "strict_target": 0,
+        "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "",
+        "sample_command": "",
         "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
       "rank": 21
+    },
+    {
+      "source_id": "europarl_meps",
+      "source_name": "Parlamento Europeo - MEPs",
+      "domain": "politicos",
+      "scope": "europeo",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.europarl.europa.eu/meps/es/full-list/xml",
+      "tracker_tipo_dato": "Representantes y mandatos (Europarl)",
+      "legal_verification_status": "not_verified",
+      "progress": {
+        "loaded": 2,
+        "target": 40,
+        "percent": 5
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 2,
+        "counts": {
+          "mandates": 2,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: RuntimeError: Respuesta HTML inesperada para europarl_meps (content_type=text/html; charset=UTF-8))",
+      "tracker_block_note": "Done now: NO para live-clean. GitHub Actions `30175083036` (`2026-07-25`) recibi\u00f3 HTML inesperado donde el contrato exige XML (`content_type=text/html; charset=UTF-8`). Mantener evidencia previa como hist\u00f3rica hasta reparar endpoint/contrato y recuperar strict-network reproducible. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source europarl_meps --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Europarl MEP XML",
+        "Por debajo del umbral minimo: europarl_meps"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source europarl_meps --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::europeo::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 40,
+        "fallback_file": "etl/data/raw/samples/europarl_meps_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source europarl_meps --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source europarl_meps --from-file etl/data/raw/samples/europarl_meps_sample.xml",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 22
+    },
+    {
+      "source_id": "senado_senadores",
+      "source_name": "Senado - Senadores",
+      "domain": "politicos",
+      "scope": "nacional",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15",
+      "tracker_tipo_dato": "Representantes y mandatos (Senado)",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 2,
+        "target": 250,
+        "percent": 1
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 2,
+        "counts": {
+          "mandates": 2,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 403: Forbidden)",
+      "tracker_block_note": "GitHub Actions strict-network devuelve `HTTP 403` en `senado_senadores`; mantener datos previos como evidencia parcial, pero no marcar `DONE` hasta recuperar run reproducible live-clean.",
+      "action_titles": [
+        "PARTIAL: Senado OpenData XML (grupos + fichas)",
+        "Por debajo del umbral minimo: senado_senadores"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source senado_senadores --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::nacional::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 250,
+        "fallback_file": "etl/data/raw/samples/senado_senadores_sample.csv",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source senado_senadores --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source senado_senadores --from-file etl/data/raw/samples/senado_senadores_sample.csv",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 23
+    },
+    {
+      "source_id": "dir3_unidades_age",
+      "source_name": "DIR3 - Unidades organicas de la Administracion General del Estado",
+      "domain": "politicos",
+      "scope": "organigrama",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "partial",
+      "tracker_status": "",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "UNTRACKED",
+      "default_url": "https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741",
+      "tracker_tipo_dato": "",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 3,
+        "target": 1000,
+        "percent": 0
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 3/3 registros validos (network-error-fallback: HTTPError: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Temporarily)",
+      "tracker_block_note": "",
+      "action_titles": [
+        "Por debajo del umbral minimo: dir3_unidades_age"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source dir3_unidades_age --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::organigrama::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 1000,
+        "fallback_file": "etl/data/raw/samples/dir3_unidades_age_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source dir3_unidades_age --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source dir3_unidades_age --from-file etl/data/raw/samples/dir3_unidades_age_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 24
+    },
+    {
+      "source_id": "eurostat_sdmx",
+      "source_name": "Eurostat - Indicadores outcomes (API/SDMX)",
+      "domain": "politicos",
+      "scope": "outcomes",
+      "priority_score": 88,
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "PARTIAL",
+      "mismatch_state": "MATCH",
+      "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+      "tracker_tipo_dato": "Indicadores (outcomes): Eurostat",
+      "legal_verification_status": "partially_verified",
+      "progress": {
+        "loaded": 2,
+        "target": 1,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 2/2 registros validos (network-error-fallback: HTTPError: HTTP Error 404: Not Found)",
+      "tracker_block_note": "Done now: NO para live-clean. Live ETL `2026-05-11` carg\u00f3 solo fallback (`2/2`) tras `HTTP 404` en red real (`max_net=0`, `net/fallback_fetches=0/1`), as\u00ed que queda `PARTIAL` hasta corregir endpoint/query o confirmar contrato alternativo. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Eurostat (API/SDMX)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::missing_reproducible_network_run::politicos::outcomes::from-file::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 1,
+        "fallback_file": "etl/data/raw/samples/eurostat_sdmx_sample.json",
+        "sample_available": true,
+        "repeatability_state": "sample_replay_only",
+        "preferred_mode": "from-file",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --from-file etl/data/raw/samples/eurostat_sdmx_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 25
+    },
+    {
+      "source_id": "boe_api_legal",
+      "source_name": "BOE API - Marco legal (RSS diario)",
+      "domain": "politicos",
+      "scope": "legal",
+      "priority_score": 82,
+      "priority_band": "P1",
+      "queue_reason": "under_threshold",
+      "ops_state": "partial",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.boe.es/rss/boe.php",
+      "tracker_tipo_dato": "Marco legal electoral",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 2,
+        "target": 5,
+        "percent": 40
+      },
+      "flags": {
+        "under_threshold": true,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 2/2 registros validos",
+      "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. La ingesta historica BOE (`boe_api_legal`) existe (`records_loaded=298`, `policy_events_boe=298`), pero PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>`. Mantener como parcial hasta recuperar run reproducible de red real vigente. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log`, `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md` y `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: BOE API",
+        "Por debajo del umbral minimo: boe_api_legal"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P1::under_threshold::politicos::legal::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 5,
+        "fallback_file": "etl/data/raw/samples/boe_api_legal_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 26
     },
     {
       "source_id": "congreso_iniciativas",
@@ -1366,7 +1695,7 @@
       "tracker_tipo_dato": "",
       "legal_verification_status": "verified",
       "progress": {
-        "loaded": 489,
+        "loaded": 500,
         "target": 1,
         "percent": 100
       },
@@ -1379,16 +1708,16 @@
       },
       "warehouse": {
         "primary_table": "parl_initiatives",
-        "primary_rows": 428,
+        "primary_rows": 406,
         "counts": {
           "mandates": 0,
           "parl_vote_events": 0,
-          "parl_initiatives": 428,
+          "parl_initiatives": 406,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "{\"initiatives_loaded\": 489, \"note\": \"network\"}",
+      "last_message": "{\"initiatives_loaded\": 500, \"note\": \"network\"}",
       "tracker_block_note": "",
       "action_titles": [],
       "commands": [],
@@ -1406,7 +1735,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 22
+      "rank": 27
     },
     {
       "source_id": "congreso_votaciones",
@@ -1424,7 +1753,7 @@
       "tracker_tipo_dato": "",
       "legal_verification_status": "verified",
       "progress": {
-        "loaded": 1,
+        "loaded": 80,
         "target": 1,
         "percent": 100
       },
@@ -1437,16 +1766,16 @@
       },
       "warehouse": {
         "primary_table": "parl_vote_events",
-        "primary_rows": 2,
+        "primary_rows": 80,
         "counts": {
           "mandates": 0,
-          "parl_vote_events": 2,
-          "parl_initiatives": 0,
+          "parl_vote_events": 80,
+          "parl_initiatives": 6,
           "infoelectoral_convocatoria_tipos": 0,
           "infoelectoral_procesos": 0
         }
       },
-      "last_message": "{\"events_loaded\": 1, \"member_votes_loaded\": 350, \"note\": \"from-file\"}",
+      "last_message": "{\"events_loaded\": 80, \"member_votes_loaded\": 28000, \"note\": \"network\"}",
       "tracker_block_note": "",
       "action_titles": [],
       "commands": [],
@@ -1464,7 +1793,324 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 23
+      "rank": 28
+    },
+    {
+      "source_id": "asamblea_extremadura_diputados",
+      "source_name": "Asamblea de Extremadura - Diputadas/os (XII Legislatura)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 72,
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.asambleaex.es/dipslegis",
+      "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Extremadura)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 65,
+        "target": 50,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 65,
+        "counts": {
+          "mandates": 65,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 65/65 registros validos",
+      "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>` para `asamblea_extremadura_diputados`; mantener evidencia previa como parcial hasta recuperar run reproducible. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_extremadura_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Asamblea de Extremadura (dipslegis + paginacion)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_extremadura_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P2::tracker_mismatch::politicos::autonomico::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 50,
+        "fallback_file": "etl/data/raw/samples/asamblea_extremadura_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_extremadura_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_extremadura_diputados --from-file etl/data/raw/samples/asamblea_extremadura_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 29
+    },
+    {
+      "source_id": "asamblea_melilla_diputados",
+      "source_name": "Asamblea de Melilla - Miembros (Legislatura 2023/2027)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 72,
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_MIEMBROS",
+      "tracker_tipo_dato": "Representantes y mandatos (Asamblea de Melilla)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 26,
+        "target": 20,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 26,
+        "counts": {
+          "mandates": 26,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 26/26 registros validos",
+      "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. Live ETL `25715374667` (`2026-05-12`) carg\u00f3 `26/26` solo por fallback (`max_net=0`, `max_any=26`) tras `network-error-fallback: RuntimeError: No se encontr\u00f3 dataset_PTS2_MIEMBROS en la p\u00e1gina`; por tanto no puede mantenerse como `DONE` hasta recuperar red real reproducible. Evidencia previa `2026-05-11` queda como hist\u00f3rica, no como verdad vigente. Evidencia actual: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260512.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_melilla_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: Asamblea de Melilla: diputados (2023/2027)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_melilla_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P2::tracker_mismatch::politicos::autonomico::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 20,
+        "fallback_file": "etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --from-file etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 30
+    },
+    {
+      "source_id": "parlamento_andalucia_diputados",
+      "source_name": "Parlamento de Andalucia - Diputados (fichas HTML)",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "priority_score": 72,
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/composicionyfuncionamiento/diputadosysenadores.do",
+      "tracker_tipo_dato": "Representantes y mandatos (Parlamento de Andalucia)",
+      "legal_verification_status": "pending_review",
+      "progress": {
+        "loaded": 109,
+        "target": 90,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 109,
+        "counts": {
+          "mandates": 109,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 109/109 registros validos",
+      "tracker_block_note": "GitHub Actions strict-network ya no encuentra diputados actuales (`codmie/nlegis`); requiere reparar parser o endpoint antes de volver a `DONE`.",
+      "action_titles": [
+        "PARTIAL: Parlamento de Andalucia (listado + fichas)"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_andalucia_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P2::tracker_mismatch::politicos::autonomico::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 90,
+        "fallback_file": "etl/data/raw/samples/parlamento_andalucia_diputados_sample.json",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_andalucia_diputados --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_andalucia_diputados --from-file etl/data/raw/samples/parlamento_andalucia_diputados_sample.json",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 31
+    },
+    {
+      "source_id": "moncloa_referencias",
+      "source_name": "La Moncloa - Referencias del Consejo de Ministros",
+      "domain": "politicos",
+      "scope": "ejecutivo",
+      "priority_score": 72,
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
+      "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 5,
+        "target": 2,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 5/5 registros validos",
+      "tracker_block_note": "Done now: NO para live-clean actual. La evidencia hist\u00f3rica existe, pero el DB operativo actual no conserva runs de red para `moncloa_referencias` y `moncloa_rss_referencias`; repetir strict-network o documentar bloqueo antes de `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`.",
+      "action_titles": [
+        "PARTIAL: La Moncloa: referencias + RSS"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_referencias --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_rss_referencias --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P2::tracker_mismatch::politicos::ejecutivo::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 2,
+        "fallback_file": "etl/data/raw/samples/moncloa_referencias_sample.html",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --from-file etl/data/raw/samples/moncloa_referencias_sample.html",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 32
+    },
+    {
+      "source_id": "moncloa_rss_referencias",
+      "source_name": "La Moncloa - RSS Referencias/Resumenes del Consejo de Ministros",
+      "domain": "politicos",
+      "scope": "ejecutivo",
+      "priority_score": 72,
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.lamoncloa.gob.es/Paginas/rss.aspx?tipo=16",
+      "tracker_tipo_dato": "Accion ejecutiva (Consejo de Ministros)",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 8,
+        "target": 2,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 8/8 registros validos",
+      "tracker_block_note": "Done now: NO para live-clean actual. La evidencia hist\u00f3rica existe, pero el DB operativo actual no conserva runs de red para `moncloa_referencias` y `moncloa_rss_referencias`; repetir strict-network o documentar bloqueo antes de `DONE`. Evidencia hist\u00f3rica: `docs/etl/sprints/AI-OPS-07/reports/dual-entry-apply-recompute.md`, `docs/etl/sprints/AI-OPS-07/reports/boe-policy-events-mapping.md` y `docs/etl/sprints/AI-OPS-07/evidence/post_apply_waiveraware_checker_final.log`.",
+      "action_titles": [
+        "PARTIAL: La Moncloa: referencias + RSS"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_referencias --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_rss_referencias --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P2::tracker_mismatch::politicos::ejecutivo::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 2,
+        "fallback_file": "etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --from-file etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 33
     }
   ],
   "batches": [
@@ -1536,226 +2182,25 @@
       "runner_script": "scripts/ingestar_infoelectoral_es.py",
       "first_rank": 4,
       "source_ids": [
+        "infoelectoral_descargas",
         "infoelectoral_procesos"
       ],
-      "items_total": 1,
-      "sample_backed_total": 1,
-      "repeatable_now_total": 1,
+      "items_total": 2,
+      "sample_backed_total": 2,
+      "repeatable_now_total": 2,
       "blocked_total": 0,
       "commands": [
-        "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_procesos --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_descargas --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db <db> --source infoelectoral_procesos --strict-network"
       ],
       "network_commands": [
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db '<db>' --source infoelectoral_descargas --strict-network",
         "python3 scripts/ingestar_infoelectoral_es.py ingest --db '<db>' --source infoelectoral_procesos --strict-network"
       ],
       "sample_commands": [
+        "python3 scripts/ingestar_infoelectoral_es.py ingest --db '<db>' --source infoelectoral_descargas --from-file etl/data/raw/samples/infoelectoral_descargas_sample.json",
         "python3 scripts/ingestar_infoelectoral_es.py ingest --db '<db>' --source infoelectoral_procesos --from-file etl/data/raw/samples/infoelectoral_procesos_sample.json"
-      ]
-    },
-    {
-      "batch_key": "P0::missing_from_db::politicos::autonomico::from-file::scripts/ingestar_politicos_es.py",
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "domain": "politicos",
-      "scope": "autonomico",
-      "preferred_mode": "from-file",
-      "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 5,
-      "source_ids": [
-        "asamblea_melilla_diputados"
-      ],
-      "items_total": 1,
-      "sample_backed_total": 1,
-      "repeatable_now_total": 1,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_melilla_diputados --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --from-file etl/data/raw/samples/asamblea_melilla_diputados_sample.json"
-      ]
-    },
-    {
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "domain": "politicos",
-      "scope": "dinero",
-      "preferred_mode": "from-file",
-      "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 6,
-      "source_ids": [
-        "bdns_api_subvenciones",
-        "bdns_autonomico",
-        "placsp_autonomico",
-        "placsp_sindicacion"
-      ],
-      "items_total": 4,
-      "sample_backed_total": 4,
-      "repeatable_now_total": 4,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_autonomico --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source placsp_autonomico --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source placsp_sindicacion --strict-network"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_autonomico --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_sindicacion --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --from-file etl/data/raw/samples/bdns_api_subvenciones_sample.json",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --from-file etl/data/raw/samples/bdns_autonomico_sample.json",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_autonomico --from-file etl/data/raw/samples/placsp_autonomico_sample.xml",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source placsp_sindicacion --from-file etl/data/raw/samples/placsp_sindicacion_sample.xml"
-      ]
-    },
-    {
-      "batch_key": "P0::missing_from_db::politicos::dinero::from-file::unknown",
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "domain": "politicos",
-      "scope": "dinero",
-      "preferred_mode": "from-file",
-      "runner_script": "",
-      "first_rank": 8,
-      "source_ids": [
-        "bdns_subvenciones",
-        "placsp_contratacion"
-      ],
-      "items_total": 2,
-      "sample_backed_total": 2,
-      "repeatable_now_total": 2,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "network_commands": [],
-      "sample_commands": []
-    },
-    {
-      "batch_key": "P0::missing_from_db::politicos::ejecutivo::from-file::scripts/ingestar_politicos_es.py",
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "domain": "politicos",
-      "scope": "ejecutivo",
-      "preferred_mode": "from-file",
-      "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 12,
-      "source_ids": [
-        "moncloa_referencias",
-        "moncloa_rss_referencias"
-      ],
-      "items_total": 2,
-      "sample_backed_total": 2,
-      "repeatable_now_total": 2,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_referencias --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_rss_referencias --strict-network"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --from-file etl/data/raw/samples/moncloa_referencias_sample.html",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --from-file etl/data/raw/samples/moncloa_rss_referencias_sample.xml"
-      ]
-    },
-    {
-      "batch_key": "P0::missing_from_db::politicos::legal::from-file::scripts/ingestar_politicos_es.py",
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "domain": "politicos",
-      "scope": "legal",
-      "preferred_mode": "from-file",
-      "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 14,
-      "source_ids": [
-        "boe_api_legal"
-      ],
-      "items_total": 1,
-      "sample_backed_total": 1,
-      "repeatable_now_total": 1,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml"
-      ]
-    },
-    {
-      "batch_key": "P0::missing_from_db::politicos::outcomes::from-file::scripts/ingestar_politicos_es.py",
-      "priority_band": "P0",
-      "queue_reason": "missing_from_db",
-      "domain": "politicos",
-      "scope": "outcomes",
-      "preferred_mode": "from-file",
-      "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 15,
-      "source_ids": [
-        "bde_series_api",
-        "eurostat_sdmx"
-      ],
-      "items_total": 2,
-      "sample_backed_total": 2,
-      "repeatable_now_total": 2,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bde_series_api --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --strict-network"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bde_series_api --strict-network",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bde_series_api --from-file etl/data/raw/samples/bde_series_api_sample.json",
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --from-file etl/data/raw/samples/eurostat_sdmx_sample.json"
-      ]
-    },
-    {
-      "batch_key": "P0::ingest_error::parlamentario::nacional::strict-network::scripts/ingestar_parlamentario_es.py",
-      "priority_band": "P0",
-      "queue_reason": "ingest_error",
-      "domain": "parlamentario",
-      "scope": "nacional",
-      "preferred_mode": "strict-network",
-      "runner_script": "scripts/ingestar_parlamentario_es.py",
-      "first_rank": 17,
-      "source_ids": [
-        "senado_votaciones"
-      ],
-      "items_total": 1,
-      "sample_backed_total": 1,
-      "repeatable_now_total": 1,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source senado_votaciones --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml"
       ]
     },
     {
@@ -1766,23 +2211,34 @@
       "scope": "nacional",
       "preferred_mode": "from-file",
       "runner_script": "scripts/ingestar_parlamentario_es.py",
-      "first_rank": 18,
+      "first_rank": 6,
       "source_ids": [
         "congreso_intervenciones",
-        "programas_partidos"
+        "programas_partidos",
+        "senado_iniciativas",
+        "senado_votaciones"
       ],
-      "items_total": 2,
-      "sample_backed_total": 2,
-      "repeatable_now_total": 2,
+      "items_total": 4,
+      "sample_backed_total": 4,
+      "repeatable_now_total": 4,
       "blocked_total": 0,
-      "commands": [],
+      "commands": [
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source programas_partidos --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source senado_iniciativas --strict-network",
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source senado_votaciones --strict-network"
+      ],
       "network_commands": [
         "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source congreso_intervenciones --strict-network",
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source programas_partidos --strict-network"
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source programas_partidos --strict-network",
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_iniciativas --strict-network",
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --strict-network"
       ],
       "sample_commands": [
         "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source congreso_intervenciones --from-file etl/data/raw/samples/congreso_intervenciones_sample.json",
-        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source programas_partidos --from-file etl/data/raw/samples/programas_partidos_sample.csv"
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source programas_partidos --from-file etl/data/raw/samples/programas_partidos_sample.csv",
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_iniciativas --from-file etl/data/raw/samples/senado_iniciativas_sample.xml",
+        "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source senado_votaciones --from-file etl/data/raw/samples/senado_votaciones_sample.xml"
       ]
     },
     {
@@ -1793,7 +2249,7 @@
       "scope": "nacional",
       "preferred_mode": "strict-network",
       "runner_script": "",
-      "first_rank": 19,
+      "first_rank": 7,
       "source_ids": [
         "parl_initiative_docs"
       ],
@@ -1813,20 +2269,234 @@
       "scope": "autonomico",
       "preferred_mode": "from-file",
       "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 21,
+      "first_rank": 11,
       "source_ids": [
-        "parlamento_navarra_parlamentarios_forales"
+        "asamblea_ceuta_diputados",
+        "cortes_aragon_diputados",
+        "parlament_balears_diputats",
+        "parlamento_canarias_diputados",
+        "parlamento_cantabria_diputados",
+        "parlamento_navarra_parlamentarios_forales",
+        "parlamento_vasco_parlamentarios"
+      ],
+      "items_total": 7,
+      "sample_backed_total": 7,
+      "repeatable_now_total": 7,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_ceuta_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source cortes_aragon_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlament_balears_diputats --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_canarias_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_cantabria_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_navarra_parlamentarios_forales --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_vasco_parlamentarios --strict-network"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_ceuta_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source cortes_aragon_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlament_balears_diputats --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_canarias_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_cantabria_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_vasco_parlamentarios --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_ceuta_diputados --from-file etl/data/raw/samples/asamblea_ceuta_diputados_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source cortes_aragon_diputados --from-file etl/data/raw/samples/cortes_aragon_diputados_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlament_balears_diputats --from-file etl/data/raw/samples/parlament_balears_diputats_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_canarias_diputados --from-file etl/data/raw/samples/parlamento_canarias_diputados_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_cantabria_diputados --from-file etl/data/raw/samples/parlamento_cantabria_diputados_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --from-file etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_vasco_parlamentarios --from-file etl/data/raw/samples/parlamento_vasco_parlamentarios_sample.json"
+      ]
+    },
+    {
+      "batch_key": "P1::missing_reproducible_network_run::politicos::dinero::from-file::scripts/ingestar_politicos_es.py",
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "domain": "politicos",
+      "scope": "dinero",
+      "preferred_mode": "from-file",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 18,
+      "source_ids": [
+        "bdns_api_subvenciones",
+        "bdns_autonomico"
+      ],
+      "items_total": 2,
+      "sample_backed_total": 2,
+      "repeatable_now_total": 2,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_api_subvenciones --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source bdns_autonomico --strict-network"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_api_subvenciones --from-file etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source bdns_autonomico --from-file etl/data/raw/samples/bdns_autonomico_sample.json"
+      ]
+    },
+    {
+      "batch_key": "P1::missing_reproducible_network_run::politicos::dinero::from-file::unknown",
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "domain": "politicos",
+      "scope": "dinero",
+      "preferred_mode": "from-file",
+      "runner_script": "",
+      "first_rank": 20,
+      "source_ids": [
+        "bdns_subvenciones",
+        "placsp_contratacion"
+      ],
+      "items_total": 2,
+      "sample_backed_total": 2,
+      "repeatable_now_total": 2,
+      "blocked_total": 0,
+      "commands": [],
+      "network_commands": [],
+      "sample_commands": []
+    },
+    {
+      "batch_key": "P1::missing_reproducible_network_run::politicos::europeo::from-file::scripts/ingestar_politicos_es.py",
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "domain": "politicos",
+      "scope": "europeo",
+      "preferred_mode": "from-file",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 22,
+      "source_ids": [
+        "europarl_meps"
       ],
       "items_total": 1,
       "sample_backed_total": 1,
       "repeatable_now_total": 1,
       "blocked_total": 0,
-      "commands": [],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source europarl_meps --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
       "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --strict-network"
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source europarl_meps --strict-network"
       ],
       "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_navarra_parlamentarios_forales --from-file etl/data/raw/samples/parlamento_navarra_parlamentarios_forales_sample.json"
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source europarl_meps --from-file etl/data/raw/samples/europarl_meps_sample.xml"
+      ]
+    },
+    {
+      "batch_key": "P1::missing_reproducible_network_run::politicos::nacional::from-file::scripts/ingestar_politicos_es.py",
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "domain": "politicos",
+      "scope": "nacional",
+      "preferred_mode": "from-file",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 23,
+      "source_ids": [
+        "senado_senadores"
+      ],
+      "items_total": 1,
+      "sample_backed_total": 1,
+      "repeatable_now_total": 1,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source senado_senadores --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source senado_senadores --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source senado_senadores --from-file etl/data/raw/samples/senado_senadores_sample.csv"
+      ]
+    },
+    {
+      "batch_key": "P1::missing_reproducible_network_run::politicos::organigrama::from-file::scripts/ingestar_politicos_es.py",
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "domain": "politicos",
+      "scope": "organigrama",
+      "preferred_mode": "from-file",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 24,
+      "source_ids": [
+        "dir3_unidades_age"
+      ],
+      "items_total": 1,
+      "sample_backed_total": 1,
+      "repeatable_now_total": 1,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source dir3_unidades_age --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source dir3_unidades_age --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source dir3_unidades_age --from-file etl/data/raw/samples/dir3_unidades_age_sample.json"
+      ]
+    },
+    {
+      "batch_key": "P1::missing_reproducible_network_run::politicos::outcomes::from-file::scripts/ingestar_politicos_es.py",
+      "priority_band": "P1",
+      "queue_reason": "missing_reproducible_network_run",
+      "domain": "politicos",
+      "scope": "outcomes",
+      "preferred_mode": "from-file",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 25,
+      "source_ids": [
+        "eurostat_sdmx"
+      ],
+      "items_total": 1,
+      "sample_backed_total": 1,
+      "repeatable_now_total": 1,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source eurostat_sdmx --from-file etl/data/raw/samples/eurostat_sdmx_sample.json"
+      ]
+    },
+    {
+      "batch_key": "P1::under_threshold::politicos::legal::strict-network::scripts/ingestar_politicos_es.py",
+      "priority_band": "P1",
+      "queue_reason": "under_threshold",
+      "domain": "politicos",
+      "scope": "legal",
+      "preferred_mode": "strict-network",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 26,
+      "source_ids": [
+        "boe_api_legal"
+      ],
+      "items_total": 1,
+      "sample_backed_total": 1,
+      "repeatable_now_total": 1,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml"
       ]
     },
     {
@@ -1837,7 +2507,7 @@
       "scope": "nacional",
       "preferred_mode": "strict-network",
       "runner_script": "scripts/ingestar_parlamentario_es.py",
-      "first_rank": 22,
+      "first_rank": 27,
       "source_ids": [
         "congreso_iniciativas",
         "congreso_votaciones"
@@ -1854,6 +2524,72 @@
       "sample_commands": [
         "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source congreso_iniciativas --from-file etl/data/raw/samples/congreso_iniciativas_sample.json",
         "python3 scripts/ingestar_parlamentario_es.py ingest --db '<db>' --source congreso_votaciones --from-file etl/data/raw/samples/congreso_votaciones_sample.json"
+      ]
+    },
+    {
+      "batch_key": "P2::tracker_mismatch::politicos::autonomico::strict-network::scripts/ingestar_politicos_es.py",
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "domain": "politicos",
+      "scope": "autonomico",
+      "preferred_mode": "strict-network",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 29,
+      "source_ids": [
+        "asamblea_extremadura_diputados",
+        "asamblea_melilla_diputados",
+        "parlamento_andalucia_diputados"
+      ],
+      "items_total": 3,
+      "sample_backed_total": 3,
+      "repeatable_now_total": 3,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_extremadura_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_melilla_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source parlamento_andalucia_diputados --strict-network"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_extremadura_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_andalucia_diputados --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_extremadura_diputados --from-file etl/data/raw/samples/asamblea_extremadura_diputados_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source asamblea_melilla_diputados --from-file etl/data/raw/samples/asamblea_melilla_diputados_sample.json",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source parlamento_andalucia_diputados --from-file etl/data/raw/samples/parlamento_andalucia_diputados_sample.json"
+      ]
+    },
+    {
+      "batch_key": "P2::tracker_mismatch::politicos::ejecutivo::strict-network::scripts/ingestar_politicos_es.py",
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "domain": "politicos",
+      "scope": "ejecutivo",
+      "preferred_mode": "strict-network",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 32,
+      "source_ids": [
+        "moncloa_referencias",
+        "moncloa_rss_referencias"
+      ],
+      "items_total": 2,
+      "sample_backed_total": 2,
+      "repeatable_now_total": 2,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_referencias --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source moncloa_rss_referencias --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --strict-network",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --from-file etl/data/raw/samples/moncloa_referencias_sample.html",
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --from-file etl/data/raw/samples/moncloa_rss_referencias_sample.xml"
       ]
     }
   ]
