@@ -14,9 +14,9 @@ from etl.politicos_es.util import now_utc_iso, sha256_bytes, stable_json
 
 class TestBoePolicyEventsMapping(unittest.TestCase):
     def test_backfill_boe_policy_events_is_idempotent_and_traceable(self) -> None:
-        snapshot_date = "2026-02-16"
-        sample_xml = Path("etl/data/raw/samples/boe_api_legal_sample.xml")
-        self.assertTrue(sample_xml.exists(), f"Missing sample: {sample_xml}")
+        snapshot_date = "2026-08-12"
+        sample_xml = Path("etl/data/raw/official-captures/boe/boe-rss-20260812.xml")
+        self.assertTrue(sample_xml.exists(), f"Missing official capture: {sample_xml}")
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "boe-policy-events.db"

@@ -15,17 +15,21 @@ from etl.politicos_es.pipeline import ingest_one_source
 
 
 class TestBdnsConnector(unittest.TestCase):
-    def test_extract_from_sample_json_includes_subsidy_fields(self) -> None:
+    OFFICIAL_CAPTURE = Path(
+        "etl/data/raw/official-captures/bdns/concesiones-page-0-20260812.json"
+    )
+
+    def test_extract_from_official_capture_includes_subsidy_fields(self) -> None:
         connector = BdnsApiSubvencionesConnector()
-        sample_path = Path("etl/data/raw/samples/bdns_api_subvenciones_sample.json")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        capture_path = self.OFFICIAL_CAPTURE
+        self.assertTrue(capture_path.exists(), f"Missing official capture: {capture_path}")
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td) / "raw"
             extracted = connector.extract(
                 raw_dir=raw_dir,
                 timeout=5,
-                from_file=sample_path,
+                from_file=capture_path,
                 url_override=None,
                 strict_network=True,
             )
@@ -40,8 +44,7 @@ class TestBdnsConnector(unittest.TestCase):
             self.assertTrue(all(str(r.get("source_record_id") or "").strip() for r in extracted.records))
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        sample_path = Path("etl/data/raw/samples/bdns_api_subvenciones_sample.json")
-        payload = sample_path.read_bytes()
+        payload = self.OFFICIAL_CAPTURE.read_bytes()
 
         records_1 = parse_bdns_records(
             payload,
@@ -60,9 +63,9 @@ class TestBdnsConnector(unittest.TestCase):
     def test_source_records_ingest_is_idempotent_for_bdns_sources(self) -> None:
         snapshot_date = "2026-02-16"
         connectors = [BdnsApiSubvencionesConnector(), BdnsAutonomicoConnector()]
-        sample_paths = {
-            "bdns_api_subvenciones": Path("etl/data/raw/samples/bdns_api_subvenciones_sample.json"),
-            "bdns_autonomico": Path("etl/data/raw/samples/bdns_autonomico_sample.json"),
+        capture_paths = {
+            "bdns_api_subvenciones": self.OFFICIAL_CAPTURE,
+            "bdns_autonomico": self.OFFICIAL_CAPTURE,
         }
 
         with tempfile.TemporaryDirectory() as td:
@@ -80,7 +83,7 @@ class TestBdnsConnector(unittest.TestCase):
                         connector=connector,
                         raw_dir=raw_dir,
                         timeout=5,
-                        from_file=sample_paths[connector.source_id],
+                        from_file=capture_paths[connector.source_id],
                         url_override=None,
                         snapshot_date=snapshot_date,
                         strict_network=True,
@@ -107,7 +110,7 @@ class TestBdnsConnector(unittest.TestCase):
                         connector=connector,
                         raw_dir=raw_dir,
                         timeout=5,
-                        from_file=sample_paths[connector.source_id],
+                        from_file=capture_paths[connector.source_id],
                         url_override=None,
                         snapshot_date=snapshot_date,
                         strict_network=True,
@@ -132,4 +135,3 @@ class TestBdnsConnector(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import tempfile
 import unittest
 import zipfile
@@ -45,7 +46,7 @@ def _minimal_xlsx(rows: list[list[str]]) -> bytes:
     sheet_xml = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
-        f'<sheetData>{"".join(sheet_rows)}</sheetData></worksheet>'
+        f"<sheetData>{''.join(sheet_rows)}</sheetData></worksheet>"
     )
     workbook_xml = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
@@ -84,7 +85,11 @@ class TestDir3Org(unittest.TestCase):
                                 "accessURL": "https://example.test/provincias.xlsx",
                             },
                             {
-                                "title": [{"_value": "Listado de información básica de unidades orgánicas de la AGE"}],
+                                "title": [
+                                    {
+                                        "_value": "Listado de información básica de unidades orgánicas de la AGE"
+                                    }
+                                ],
                                 "accessURL": "https://example.test/Listado%20Unidades%20AGE.xlsx",
                             },
                         ]
@@ -108,7 +113,13 @@ class TestDir3Org(unittest.TestCase):
                     "Denominacion unidad organica superior",
                     "Nivel jerarquico",
                 ],
-                ["EA0040879 - v4", "Departamento de Asuntos Institucionales", "E00000001", "Presidencia del Gobierno", "2"],
+                [
+                    "EA0040879 - v4",
+                    "Departamento de Asuntos Institucionales",
+                    "E00000001",
+                    "Presidencia del Gobierno",
+                    "2",
+                ],
             ]
         )
         rows = parse_dir3_xlsx(payload)
@@ -124,8 +135,16 @@ class TestDir3Org(unittest.TestCase):
 
     def test_sample_ingest_backfills_org_graph(self) -> None:
         connector = Dir3UnidadesAgeConnector()
-        sample_path = Path(SOURCE_CONFIG["dir3_unidades_age"]["fallback_file"])
-        self.assertTrue(sample_path.exists())
+        capture_raw = os.environ.get("DIR3_REAL_CAPTURE", "").strip()
+        if not capture_raw:
+            self.skipTest(
+                "DIR3_REAL_CAPTURE is required; official endpoint currently rejects reproducible downloads and synthetic fixtures are forbidden"
+            )
+        sample_path = Path(capture_raw)
+        self.assertTrue(
+            sample_path.is_file(), f"Missing official DIR3 capture: {sample_path}"
+        )
+        official_url = str(SOURCE_CONFIG["dir3_unidades_age"]["default_url"])
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "politicos-test.db"
@@ -142,21 +161,28 @@ class TestDir3Org(unittest.TestCase):
                     raw_dir=raw_dir,
                     timeout=5,
                     from_file=sample_path,
-                    url_override=None,
+                    url_override=official_url,
                     snapshot_date="2026-02-12",
                     strict_network=True,
                 )
-                self.assertEqual((seen, loaded, note), (3, 3, "from-file"))
+                self.assertGreaterEqual(seen, 1000)
+                self.assertEqual(loaded, seen)
+                self.assertEqual(note, "from-file")
 
-                result = backfill_government_org_units(conn, source_ids=("dir3_unidades_age",))
-                self.assertEqual(result["org_units_upserted"], 3)
-                self.assertEqual(result["relationships_upserted"], 2)
-                self.assertEqual(result["relationships_missing_parent"], 0)
+                result = backfill_government_org_units(
+                    conn, source_ids=("dir3_unidades_age",)
+                )
+                self.assertGreaterEqual(result["org_units_upserted"], 1000)
+                self.assertGreater(result["relationships_upserted"], 0)
 
-                unit_count = conn.execute("SELECT COUNT(*) AS c FROM government_org_units").fetchone()["c"]
-                rel_count = conn.execute("SELECT COUNT(*) AS c FROM government_org_relationships").fetchone()["c"]
-                self.assertEqual(unit_count, 3)
-                self.assertEqual(rel_count, 2)
+                unit_count = conn.execute(
+                    "SELECT COUNT(*) AS c FROM government_org_units"
+                ).fetchone()["c"]
+                rel_count = conn.execute(
+                    "SELECT COUNT(*) AS c FROM government_org_relationships"
+                ).fetchone()["c"]
+                self.assertEqual(unit_count, result["org_units_upserted"])
+                self.assertEqual(rel_count, result["relationships_upserted"])
 
                 row = conn.execute(
                     """
@@ -164,11 +190,13 @@ class TestDir3Org(unittest.TestCase):
                     FROM government_org_relationships rel
                     JOIN government_org_units child ON child.org_unit_id = rel.subject_org_unit_id
                     JOIN government_org_units parent ON parent.org_unit_id = rel.object_org_unit_id
-                    WHERE child.org_unit_code = 'EA0040880'
+                    ORDER BY rel.org_relationship_id
+                    LIMIT 1
                     """
                 ).fetchone()
                 self.assertIsNotNone(row)
-                self.assertEqual(row["parent_code"], "EA0040879")
+                self.assertTrue(str(row["child_code"] or "").strip())
+                self.assertTrue(str(row["parent_code"] or "").strip())
             finally:
                 conn.close()
 

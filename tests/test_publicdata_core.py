@@ -29,7 +29,7 @@ class TestPublicDataCore(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "Respuesta HTML inesperada"):
             validate_network_payload("source_test", b"{\"ok\": true}", "text/html")
 
-    def test_raw_fallback_uses_source_config_and_writes_provenance_payload(self) -> None:
+    def test_raw_fallback_is_forbidden(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             sample = root / "sample.json"
@@ -42,12 +42,9 @@ class TestPublicDataCore(unittest.TestCase):
                 }
             }
 
-            result = fallback_payload_from_sample(cfg, "source_test", root / "raw", "fallback")
-
-            self.assertEqual(result["payload"], payload)
-            self.assertEqual(result["content_sha256"], sha256_bytes(payload))
-            self.assertTrue(Path(result["raw_path"]).exists())
-            self.assertEqual(Path(result["raw_path"]).read_bytes(), payload)
+            with self.assertRaisesRegex(RuntimeError, "real-data-only policy"):
+                fallback_payload_from_sample(cfg, "source_test", root / "raw", "fallback")
+            self.assertFalse((root / "raw").exists())
 
     def test_fetch_payload_from_file_is_reusable_without_project_config(self) -> None:
         with tempfile.TemporaryDirectory() as td:

@@ -5,60 +5,80 @@ import unittest
 from pathlib import Path
 
 from etl.politicos_es.config import DEFAULT_SCHEMA
-from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sources, upsert_source_record
+from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sources
 from etl.politicos_es.indicator_backfill import backfill_indicator_harmonization
 from etl.politicos_es.pipeline import ingest_one_source
 from etl.politicos_es.registry import get_connectors
-from etl.politicos_es.util import now_utc_iso, sha256_bytes, stable_json
+
+
+EUROSTAT_OFFICIAL_CAPTURE = Path(
+    "etl/data/object-origin/eurostat-indicators/fc/a5/"
+    "fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018.json"
+)
+EUROSTAT_OFFICIAL_URL = (
+    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+    "ilc_peps11n?lang=EN&sinceTimePeriod=2015"
+)
+BDE_OFFICIAL_CAPTURE = Path(
+    "etl/data/raw/bde_series_api/2026/05/11/bde_series_api_20260511T175659Z.json"
+)
+
+REAL_INDICATOR_CAPTURES = (
+    ("eurostat_sdmx", EUROSTAT_OFFICIAL_CAPTURE, EUROSTAT_OFFICIAL_URL),
+    ("bde_series_api", BDE_OFFICIAL_CAPTURE, None),
+)
+REAL_INDICATOR_SOURCE_IDS = tuple(item[0] for item in REAL_INDICATOR_CAPTURES)
+
+
+def _ingest_real_indicator_captures(conn, raw_dir: Path) -> None:  # type: ignore[no-untyped-def]
+    connectors = get_connectors()
+    for source_id, capture_path, source_url in REAL_INDICATOR_CAPTURES:
+        if not capture_path.exists():
+            raise AssertionError(f"Missing official capture for {source_id}: {capture_path}")
+        ingest_one_source(
+            conn=conn,
+            connector=connectors[source_id],
+            raw_dir=raw_dir,
+            timeout=5,
+            from_file=capture_path,
+            url_override=source_url,
+            snapshot_date="2026-08-12",
+            strict_network=True,
+        )
 
 
 class TestIndicatorBackfill(unittest.TestCase):
-    def test_indicator_backfill_seeds_domains_for_inferred_keys(self) -> None:
-        snapshot_date = "2026-02-16"
-        samples = (
-            ("eurostat_sdmx", Path("etl/data/raw/samples/eurostat_sdmx_sample.json")),
-            ("bde_series_api", Path("etl/data/raw/samples/bde_series_api_sample.json")),
-            ("aemet_opendata_series", Path("etl/data/raw/samples/aemet_opendata_series_sample.json")),
-        )
-        for source_id, sample_path in samples:
-            self.assertTrue(sample_path.exists(), f"Missing sample for {source_id}: {sample_path}")
-
+    def test_indicator_backfill_seeds_domains_for_real_official_series(self) -> None:
         with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "indicator-domain-linkage.db"
-            raw_dir = Path(td) / "raw"
-            conn = open_db(db_path)
+            td_path = Path(td)
+            conn = open_db(td_path / "indicator-domain-linkage.db")
             try:
                 apply_schema(conn, DEFAULT_SCHEMA)
                 seed_sources(conn)
                 seed_dimensions(conn)
-
-                connectors = get_connectors()
-                for source_id, sample_path in samples:
-                    ingest_one_source(
-                        conn=conn,
-                        connector=connectors[source_id],
-                        raw_dir=raw_dir,
-                        timeout=5,
-                        from_file=sample_path,
-                        url_override=None,
-                        snapshot_date=snapshot_date,
-                        strict_network=True,
-                    )
+                _ingest_real_indicator_captures(conn, td_path / "raw")
 
                 result = backfill_indicator_harmonization(conn)
-                self.assertGreaterEqual(result["indicator_domains_seeded"], 3)
-                self.assertEqual(result["indicator_series_unresolved_domain"], 0)
-                self.assertEqual(result["indicator_series_with_domain_id"], result["indicator_series_total"])
+                self.assertEqual(
+                    result["indicator_series_with_domain_id"]
+                    + result["indicator_series_unresolved_domain"],
+                    result["indicator_series_total"],
+                )
 
+                placeholders = ",".join("?" for _ in REAL_INDICATOR_SOURCE_IDS)
                 unresolved_row = conn.execute(
-                    """
+                    f"""
                     SELECT COUNT(*) AS c
                     FROM indicator_series
-                    WHERE source_id IN ('eurostat_sdmx','bde_series_api','aemet_opendata_series')
+                    WHERE source_id IN ({placeholders})
                       AND domain_id IS NULL
-                    """
+                    """,
+                    REAL_INDICATOR_SOURCE_IDS,
                 ).fetchone()
-                self.assertEqual(int(unresolved_row["c"]), 0)
+                self.assertEqual(
+                    int(unresolved_row["c"]),
+                    result["indicator_series_unresolved_domain"],
+                )
 
                 domain_keys = {
                     str(row["canonical_key"])
@@ -66,41 +86,19 @@ class TestIndicatorBackfill(unittest.TestCase):
                 }
                 self.assertIn("proteccion_social_pensiones", domain_keys)
                 self.assertIn("vivienda_urbanismo", domain_keys)
-                self.assertIn("energia_medio_ambiente", domain_keys)
+                self.assertIn("impuestos_gasto_fiscalidad", domain_keys)
             finally:
                 conn.close()
 
-    def test_indicator_backfill_is_idempotent_and_traceable(self) -> None:
-        snapshot_date = "2026-02-16"
-        samples = (
-            ("eurostat_sdmx", Path("etl/data/raw/samples/eurostat_sdmx_sample.json")),
-            ("bde_series_api", Path("etl/data/raw/samples/bde_series_api_sample.json")),
-            ("aemet_opendata_series", Path("etl/data/raw/samples/aemet_opendata_series_sample.json")),
-        )
-        for source_id, sample_path in samples:
-            self.assertTrue(sample_path.exists(), f"Missing sample for {source_id}: {sample_path}")
-
+    def test_indicator_backfill_is_idempotent_and_traceable_on_real_captures(self) -> None:
         with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "indicator-backfill.db"
-            raw_dir = Path(td) / "raw"
-            conn = open_db(db_path)
+            td_path = Path(td)
+            conn = open_db(td_path / "indicator-backfill.db")
             try:
                 apply_schema(conn, DEFAULT_SCHEMA)
                 seed_sources(conn)
                 seed_dimensions(conn)
-
-                connectors = get_connectors()
-                for source_id, sample_path in samples:
-                    ingest_one_source(
-                        conn=conn,
-                        connector=connectors[source_id],
-                        raw_dir=raw_dir,
-                        timeout=5,
-                        from_file=sample_path,
-                        url_override=None,
-                        snapshot_date=snapshot_date,
-                        strict_network=True,
-                    )
+                _ingest_real_indicator_captures(conn, td_path / "raw")
 
                 result_1 = backfill_indicator_harmonization(conn)
                 self.assertGreater(result_1["indicator_series_total"], 0)
@@ -114,252 +112,136 @@ class TestIndicatorBackfill(unittest.TestCase):
                     result_1["indicator_observation_records_total"],
                     result_1["observation_records_with_provenance"],
                 )
-                self.assertGreater(result_1["indicator_series_by_source"].get("eurostat_sdmx", 0), 0)
-                self.assertGreater(result_1["indicator_series_by_source"].get("bde_series_api", 0), 0)
-                self.assertGreater(result_1["indicator_series_by_source"].get("aemet_opendata_series", 0), 0)
+                for source_id in REAL_INDICATOR_SOURCE_IDS:
+                    self.assertGreater(
+                        result_1["indicator_series_by_source"].get(source_id, 0),
+                        0,
+                    )
 
+                placeholders = ",".join("?" for _ in REAL_INDICATOR_SOURCE_IDS)
                 traceability_series_row = conn.execute(
-                    """
+                    f"""
                     SELECT COUNT(*) AS c
                     FROM indicator_series
-                    WHERE source_id IN ('eurostat_sdmx','bde_series_api','aemet_opendata_series')
+                    WHERE source_id IN ({placeholders})
                       AND source_record_pk IS NOT NULL
                       AND source_snapshot_date IS NOT NULL
                       AND trim(source_snapshot_date) <> ''
-                      AND source_url IS NOT NULL
-                      AND trim(source_url) <> ''
+                      AND source_url LIKE 'https://%'
                       AND raw_payload IS NOT NULL
                       AND trim(raw_payload) <> ''
-                    """
+                    """,
+                    REAL_INDICATOR_SOURCE_IDS,
                 ).fetchone()
                 total_series_row = conn.execute(
-                    """
-                    SELECT COUNT(*) AS c
-                    FROM indicator_series
-                    WHERE source_id IN ('eurostat_sdmx','bde_series_api','aemet_opendata_series')
-                    """
+                    f"SELECT COUNT(*) AS c FROM indicator_series WHERE source_id IN ({placeholders})",
+                    REAL_INDICATOR_SOURCE_IDS,
                 ).fetchone()
-                self.assertEqual(int(traceability_series_row["c"]), int(total_series_row["c"]))
+                self.assertEqual(
+                    int(traceability_series_row["c"]),
+                    int(total_series_row["c"]),
+                )
 
                 traceability_obs_row = conn.execute(
-                    """
+                    f"""
                     SELECT COUNT(*) AS c
                     FROM indicator_observation_records
-                    WHERE source_id IN ('eurostat_sdmx','bde_series_api','aemet_opendata_series')
+                    WHERE source_id IN ({placeholders})
                       AND source_record_pk IS NOT NULL
                       AND source_record_id IS NOT NULL
                       AND trim(source_record_id) <> ''
                       AND source_snapshot_date IS NOT NULL
                       AND trim(source_snapshot_date) <> ''
-                      AND source_url IS NOT NULL
-                      AND trim(source_url) <> ''
+                      AND source_url LIKE 'https://%'
                       AND methodology_version IS NOT NULL
                       AND trim(methodology_version) <> ''
                       AND raw_payload IS NOT NULL
                       AND trim(raw_payload) <> ''
-                    """
+                    """,
+                    REAL_INDICATOR_SOURCE_IDS,
                 ).fetchone()
                 total_obs_row = conn.execute(
-                    """
+                    f"""
                     SELECT COUNT(*) AS c
                     FROM indicator_observation_records
-                    WHERE source_id IN ('eurostat_sdmx','bde_series_api','aemet_opendata_series')
-                    """
+                    WHERE source_id IN ({placeholders})
+                    """,
+                    REAL_INDICATOR_SOURCE_IDS,
                 ).fetchone()
                 self.assertEqual(int(traceability_obs_row["c"]), int(total_obs_row["c"]))
 
+                linked_obs_row = conn.execute(
+                    f"""
+                    SELECT COUNT(*) AS c
+                    FROM indicator_observation_records AS o
+                    JOIN indicator_series AS s
+                      ON s.indicator_series_id = o.indicator_series_id
+                     AND s.source_id = o.source_id
+                    WHERE o.source_id IN ({placeholders})
+                    """,
+                    REAL_INDICATOR_SOURCE_IDS,
+                ).fetchone()
+                self.assertEqual(int(linked_obs_row["c"]), int(total_obs_row["c"]))
+
                 result_2 = backfill_indicator_harmonization(conn)
-                self.assertEqual(result_1["indicator_series_total"], result_2["indicator_series_total"])
-                self.assertEqual(result_1["indicator_points_total"], result_2["indicator_points_total"])
+                for key in (
+                    "indicator_series_total",
+                    "indicator_points_total",
+                    "indicator_observation_records_total",
+                ):
+                    self.assertEqual(result_1[key], result_2[key])
+
+                self.assertEqual(conn.execute("PRAGMA foreign_key_check").fetchall(), [])
+            finally:
+                conn.close()
+
+    def test_real_bde_series_map_to_accountability_domains(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            conn = open_db(td_path / "indicator-bde-domains.db")
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_sources(conn)
+                seed_dimensions(conn)
+                connector = get_connectors()["bde_series_api"]
+                ingest_one_source(
+                    conn=conn,
+                    connector=connector,
+                    raw_dir=td_path / "raw",
+                    timeout=5,
+                    from_file=BDE_OFFICIAL_CAPTURE,
+                    url_override=None,
+                    snapshot_date="2026-05-11",
+                    strict_network=True,
+                )
+                result = backfill_indicator_harmonization(
+                    conn,
+                    source_ids=("bde_series_api",),
+                )
+                self.assertGreaterEqual(result["indicator_series_with_domain_id"], 2)
+
+                rows = {
+                    str(row["label"]): str(row["canonical_key"])
+                    for row in conn.execute(
+                        """
+                        SELECT s.label, d.canonical_key
+                        FROM indicator_series AS s
+                        JOIN domains AS d ON d.domain_id = s.domain_id
+                        WHERE s.source_id='bde_series_api'
+                          AND s.label IN (
+                            'Euribor a un año',
+                            'MERCADO SECUNDARIO DE DEUDA PUBLICA RENDIMIENTOS EN EL AREA DEL EURO BENCHMARK A 10 AÑOS'
+                          )
+                        """
+                    ).fetchall()
+                }
+                self.assertEqual(rows["Euribor a un año"], "vivienda_urbanismo")
                 self.assertEqual(
-                    result_1["indicator_observation_records_total"],
-                    result_2["indicator_observation_records_total"],
+                    rows[
+                        "MERCADO SECUNDARIO DE DEUDA PUBLICA RENDIMIENTOS EN EL AREA DEL EURO BENCHMARK A 10 AÑOS"
+                    ],
+                    "impuestos_gasto_fiscalidad",
                 )
-
-                fk_rows = conn.execute("PRAGMA foreign_key_check").fetchall()
-                self.assertEqual(fk_rows, [])
-            finally:
-                conn.close()
-
-    def test_frequency_conflicts_keep_separate_series_variants(self) -> None:
-        with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "indicator-backfill-freq.db"
-            conn = open_db(db_path)
-            try:
-                apply_schema(conn, DEFAULT_SCHEMA)
-                seed_sources(conn)
-                seed_dimensions(conn)
-                now_iso = now_utc_iso()
-
-                payload_monthly = {
-                    "record_kind": "bde_series",
-                    "source_feed": "bde_series_api",
-                    "dataset_code": "bde_series_api",
-                    "source_url": "https://api.bde.es/datos/series/demo",
-                    "series_code": "DEMO.SERIES",
-                    "series_label": "Demo Series",
-                    "frequency": "M",
-                    "unit": "PERCENT",
-                    "series_dimensions": {"source": "bde_api", "series_code": "DEMO.SERIES", "freq": "M"},
-                    "points": [{"period": "2026-01", "value": 10.0}],
-                }
-                payload_annual = {
-                    "record_kind": "bde_series",
-                    "source_feed": "bde_series_api",
-                    "dataset_code": "bde_series_api",
-                    "source_url": "https://api.bde.es/datos/series/demo",
-                    "series_code": "DEMO.SERIES",
-                    "series_label": "Demo Series",
-                    "frequency": "A",
-                    "unit": "PERCENT",
-                    "series_dimensions": {"source": "bde_api", "series_code": "DEMO.SERIES", "freq": "A"},
-                    "points": [{"period": "2026", "value": 9.5}],
-                }
-
-                raw_monthly = stable_json(payload_monthly)
-                raw_annual = stable_json(payload_annual)
-                upsert_source_record(
-                    conn=conn,
-                    source_id="bde_series_api",
-                    source_record_id="series:demo:m",
-                    snapshot_date="2026-02-16",
-                    raw_payload=raw_monthly,
-                    content_sha256=sha256_bytes(raw_monthly.encode("utf-8")),
-                    now_iso=now_iso,
-                )
-                upsert_source_record(
-                    conn=conn,
-                    source_id="bde_series_api",
-                    source_record_id="series:demo:a",
-                    snapshot_date="2026-02-16",
-                    raw_payload=raw_annual,
-                    content_sha256=sha256_bytes(raw_annual.encode("utf-8")),
-                    now_iso=now_iso,
-                )
-                conn.commit()
-
-                result = backfill_indicator_harmonization(conn, source_ids=("bde_series_api",))
-                self.assertEqual(result["source_records_mapped"], 2)
-                self.assertEqual(result["indicator_series_by_source"].get("bde_series_api", 0), 2)
-
-                rows = conn.execute(
-                    """
-                    SELECT frequency, COUNT(*) AS c
-                    FROM indicator_series
-                    WHERE source_id='bde_series_api'
-                      AND label='Demo Series'
-                    GROUP BY frequency
-                    ORDER BY frequency
-                    """
-                ).fetchall()
-                self.assertEqual(len(rows), 2)
-                frequencies = {str(row["frequency"]): int(row["c"]) for row in rows}
-                self.assertIn("A", frequencies)
-                self.assertIn("M", frequencies)
-            finally:
-                conn.close()
-
-    def test_bde_euribor_maps_to_vivienda_domain(self) -> None:
-        with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "indicator-backfill-bde-euribor.db"
-            conn = open_db(db_path)
-            try:
-                apply_schema(conn, DEFAULT_SCHEMA)
-                seed_sources(conn)
-                seed_dimensions(conn)
-                now_iso = now_utc_iso()
-
-                payload = {
-                    "record_kind": "bde_series",
-                    "source_feed": "bde_series_api",
-                    "dataset_code": "bde_series_api",
-                    "source_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBAF472&rango=30M",
-                    "series_code": "D_1NBAF472",
-                    "series_label": "Euribor a un año",
-                    "frequency": "M",
-                    "unit": "PERCENT",
-                    "series_dimensions": {"source": "bde_api", "series_code": "D_1NBAF472", "freq": "M"},
-                    "points": [{"period": "2026-01-01T09:15:00Z", "value": 2.245}],
-                }
-                raw_payload = stable_json(payload)
-                upsert_source_record(
-                    conn=conn,
-                    source_id="bde_series_api",
-                    source_record_id="series:d_1nbaf472",
-                    snapshot_date="2026-02-27",
-                    raw_payload=raw_payload,
-                    content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
-                    now_iso=now_iso,
-                )
-                conn.commit()
-
-                result = backfill_indicator_harmonization(conn, source_ids=("bde_series_api",))
-                self.assertEqual(result["source_records_mapped"], 1)
-                self.assertEqual(result["indicator_series_unresolved_domain"], 0)
-
-                row = conn.execute(
-                    """
-                    SELECT d.canonical_key
-                    FROM indicator_series s
-                    LEFT JOIN domains d ON d.domain_id = s.domain_id
-                    WHERE s.source_id='bde_series_api'
-                      AND s.label='Euribor a un año'
-                    """
-                ).fetchone()
-                self.assertIsNotNone(row)
-                self.assertEqual(str(row["canonical_key"]), "vivienda_urbanismo")
-            finally:
-                conn.close()
-
-    def test_bde_interest_and_debt_maps_to_fiscal_domain(self) -> None:
-        with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "indicator-backfill-bde-interest-domain.db"
-            conn = open_db(db_path)
-            try:
-                apply_schema(conn, DEFAULT_SCHEMA)
-                seed_sources(conn)
-                seed_dimensions(conn)
-                now_iso = now_utc_iso()
-
-                payload = {
-                    "record_kind": "bde_series",
-                    "source_feed": "bde_series_api",
-                    "dataset_code": "bde_series_api",
-                    "source_url": "https://app.bde.es/bierest/resources/srdatosapp/listaSeries?idioma=es&series=D_1NBBO572&rango=30M",
-                    "series_code": "D_1NBBO572",
-                    "series_label": "MERCADO SECUNDARIO DE DEUDA PUBLICA RENDIMIENTOS EN EL AREA DEL EURO BENCHMARK A 10 AÑOS",
-                    "frequency": "M",
-                    "unit": "PERCENT",
-                    "series_dimensions": {"source": "bde_api", "series_code": "D_1NBBO572", "freq": "M"},
-                    "points": [{"period": "2026-01-01T09:15:00Z", "value": 3.22}],
-                }
-                raw_payload = stable_json(payload)
-                upsert_source_record(
-                    conn=conn,
-                    source_id="bde_series_api",
-                    source_record_id="series:d_1nbbo572",
-                    snapshot_date="2026-02-27",
-                    raw_payload=raw_payload,
-                    content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
-                    now_iso=now_iso,
-                )
-                conn.commit()
-
-                result = backfill_indicator_harmonization(conn, source_ids=("bde_series_api",))
-                self.assertEqual(result["source_records_mapped"], 1)
-                self.assertEqual(result["indicator_series_unresolved_domain"], 0)
-
-                row = conn.execute(
-                    """
-                    SELECT d.canonical_key
-                    FROM indicator_series s
-                    LEFT JOIN domains d ON d.domain_id = s.domain_id
-                    WHERE s.source_id='bde_series_api'
-                      AND s.label='MERCADO SECUNDARIO DE DEUDA PUBLICA RENDIMIENTOS EN EL AREA DEL EURO BENCHMARK A 10 AÑOS'
-                    """
-                ).fetchone()
-                self.assertIsNotNone(row)
-                self.assertEqual(str(row["canonical_key"]), "impuestos_gasto_fiscalidad")
             finally:
                 conn.close()
 

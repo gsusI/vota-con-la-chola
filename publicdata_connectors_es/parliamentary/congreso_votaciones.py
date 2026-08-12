@@ -151,6 +151,96 @@ def _legislature_from_payload(payload: dict[str, Any], *, leg_filter: list[int])
     return None
 
 
+def _legacy_capture_vote_event_id(
+    payload: dict[str, Any], *, legislature: str | None
+) -> str:
+    info = payload.get("informacion") or {}
+    fingerprint = stable_json(
+        {
+            "leg": legislature,
+            "ses": info.get("sesion"),
+            "num": info.get("numeroVotacion"),
+            "fecha": info.get("fecha"),
+            "titulo": info.get("titulo"),
+        }
+    )
+    return f"congreso:vote:{sha256_bytes(fingerprint.encode('utf-8'))[:24]}"
+
+
+def _official_capture_metadata(
+    payload_path: Path,
+    payload_bytes: bytes,
+    payload: dict[str, Any],
+    *,
+    leg_filter: list[int],
+    required: bool,
+) -> dict[str, str] | None:
+    metadata_path = payload_path.with_name(f"{payload_path.name}.source.json")
+    if not metadata_path.is_file():
+        if required:
+            raise RuntimeError(
+                f"captura oficial sin sidecar de provenance: {metadata_path.name}"
+            )
+        return None
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(
+            f"sidecar de captura oficial invalido: {metadata_path.name}: {exc}"
+        ) from exc
+    if not isinstance(metadata, dict):
+        raise RuntimeError(f"sidecar de captura oficial no es objeto: {metadata_path.name}")
+    if metadata.get("schema_version") != "official-capture-source-v1":
+        raise RuntimeError(f"schema de sidecar no soportado: {metadata_path.name}")
+
+    observed_capture_sha = sha256_bytes(payload_bytes)
+    if metadata.get("captured_payload_sha256") != observed_capture_sha:
+        raise RuntimeError(f"checksum de captura no coincide: {payload_path.name}")
+    official_sha = normalize_ws(str(metadata.get("official_payload_sha256") or ""))
+    if not re.fullmatch(r"[0-9a-f]{64}", official_sha):
+        raise RuntimeError(f"checksum oficial ausente o invalido: {metadata_path.name}")
+    if metadata.get("semantic_match_after_declared_capture_changes") is not True:
+        raise RuntimeError(f"captura sin verificacion semantica: {metadata_path.name}")
+
+    source_url = normalize_ws(str(metadata.get("source_url") or ""))
+    parsed = urlparse(source_url)
+    match = VOTE_JSON_RE.fullmatch(parsed.path)
+    if parsed.scheme != "https" or parsed.hostname != "www.congreso.es" or not match:
+        raise RuntimeError(f"URL oficial de captura invalida: {source_url!r}")
+
+    legislature = _legislature_from_payload(payload, leg_filter=leg_filter)
+    info = payload.get("informacion") or {}
+    vote_date = (_iso_from_ddmmyyyy(info.get("fecha")) or "").replace("-", "")
+    if metadata.get("vote_event_id_derivation") != (
+        "legacy_fingerprint_with_legislature_null"
+    ):
+        raise RuntimeError(
+            f"derivacion de identidad estable no soportada: {metadata_path.name}"
+        )
+    # This capture entered the canonical DB before legislature metadata was
+    # available. Keep its established source-scoped identity while upgrading
+    # the missing legislature and official URL in place.
+    expected_event_id = _legacy_capture_vote_event_id(payload, legislature=None)
+    if str(int(match.group("leg"))) != str(legislature or ""):
+        raise RuntimeError(f"legislatura de captura no coincide: {metadata_path.name}")
+    if int(match.group("ses")) != int(info.get("sesion")):
+        raise RuntimeError(f"sesion de captura no coincide: {metadata_path.name}")
+    if int(match.group("vnum")) != int(info.get("numeroVotacion")):
+        raise RuntimeError(f"numero de votacion no coincide: {metadata_path.name}")
+    if match.group("yyyymmdd") != vote_date:
+        raise RuntimeError(f"fecha de captura no coincide: {metadata_path.name}")
+    if metadata.get("vote_event_id") != expected_event_id:
+        raise RuntimeError(f"identidad estable de captura no coincide: {metadata_path.name}")
+    return {
+        "source_url": source_url,
+        "legislature": str(legislature),
+        "vote_event_id": expected_event_id,
+        "captured_payload_sha256": observed_capture_sha,
+        "official_payload_sha256": official_sha,
+        "metadata_path": metadata_path.name,
+    }
+
+
 def _base_congreso_url(resolved_url: str) -> str:
     parsed = urlparse(resolved_url)
     if parsed.scheme and parsed.netloc:
@@ -203,22 +293,43 @@ class CongresoVotacionesConnector(BaseConnector):
             # - a directory containing many vote JSON files
             paths: list[Path]
             if from_file.is_dir():
-                paths = sorted([p for p in from_file.glob("*.json") if p.is_file()])
+                paths = sorted(
+                    p
+                    for p in from_file.glob("*.json")
+                    if p.is_file() and not p.name.endswith(".source.json")
+                )
                 note = "from-dir"
             else:
                 paths = [from_file]
                 note = "from-file"
 
             for p in paths:
-                payload = json.loads(p.read_bytes())
+                captured_bytes = p.read_bytes()
+                payload = json.loads(captured_bytes)
                 info = payload.get("informacion") or {}
                 sesion = info.get("sesion")
                 numero = info.get("numeroVotacion")
                 fecha_iso = _iso_from_ddmmyyyy(info.get("fecha"))
+                capture = _official_capture_metadata(
+                    p,
+                    captured_bytes,
+                    payload,
+                    leg_filter=leg_filter,
+                    required=strict_network,
+                )
+                legislature = (
+                    capture["legislature"]
+                    if capture
+                    else _legislature_from_payload(payload, leg_filter=leg_filter)
+                )
                 records.append(
                     {
-                        "detail_url": f"file://{p.resolve()}",
-                        "legislature": _legislature_from_payload(payload, leg_filter=leg_filter),
+                        "detail_url": (
+                            capture["source_url"] if capture else f"file://{p.resolve()}"
+                        ),
+                        "vote_event_id": capture["vote_event_id"] if capture else None,
+                        "source_capture": capture,
+                        "legislature": legislature,
                         "session_number": sesion,
                         "vote_number": numero,
                         "vote_date": fecha_iso,
@@ -228,7 +339,12 @@ class CongresoVotacionesConnector(BaseConnector):
 
             meta = {
                 "source": "congreso_votaciones_from_file",
-                "paths": [str(p) for p in paths],
+                "paths": [p.name for p in paths],
+                "official_captures": [
+                    rec["source_capture"]
+                    for rec in records
+                    if rec.get("source_capture")
+                ],
                 "records": len(records),
             }
             payload_bytes = stable_json(meta).encode("utf-8")

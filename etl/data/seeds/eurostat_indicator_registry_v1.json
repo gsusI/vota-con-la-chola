@@ -1,0 +1,50 @@
+{
+  "schema_version": "eurostat_indicator_registry_v1",
+  "source_id": "eurostat_sdmx",
+  "queries": [
+    {
+      "query_id": "regional_population_age_sex_nuts3_since_2015",
+      "dataset_code": "demo_r_pjangrp3",
+      "domain_key": "demografia_contexto",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_pjangrp3?lang=EN&sinceTimePeriod=2015",
+      "minimum_observations": 1000000,
+      "maximum_bytes": 67108864,
+      "maximum_cube_cells": 2000000,
+      "priority": 100,
+      "max_attempts": 5
+    },
+    {
+      "query_id": "regional_gdp_nuts3_since_2000",
+      "dataset_code": "nama_10r_3gdp",
+      "domain_key": "economia_empleo",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10r_3gdp?lang=EN&sinceTimePeriod=2000",
+      "minimum_observations": 250000,
+      "maximum_bytes": 67108864,
+      "maximum_cube_cells": 500000,
+      "priority": 90,
+      "max_attempts": 5
+    },
+    {
+      "query_id": "regional_population_density_nuts3_since_2000",
+      "dataset_code": "demo_r_d3dens",
+      "domain_key": "demografia_contexto",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_d3dens?lang=EN&sinceTimePeriod=2000",
+      "minimum_observations": 40000,
+      "maximum_bytes": 16777216,
+      "maximum_cube_cells": 100000,
+      "priority": 80,
+      "max_attempts": 5
+    },
+    {
+      "query_id": "regional_poverty_exclusion_nuts2_since_2015",
+      "dataset_code": "ilc_peps11n",
+      "domain_key": "proteccion_social_pensiones",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_peps11n?lang=EN&sinceTimePeriod=2015",
+      "minimum_observations": 3000,
+      "maximum_bytes": 8388608,
+      "maximum_cube_cells": 10000,
+      "priority": 70,
+      "max_attempts": 5
+    }
+  ]
+}

@@ -61,7 +61,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="nacional",
         default_url="manifest://programas_partidos",
         format="csv",
-        fallback_file="etl/data/raw/samples/programas_partidos_sample.csv",
+        fallback_file="",
         min_records_loaded_strict=1,
         metadata={"level": "nacional", "institution_name": "Programas de partidos"},
     ),

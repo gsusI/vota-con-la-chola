@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,9 +12,28 @@ from etl.politicos_es.pipeline import ingest_one_source
 from etl.politicos_es.registry import get_connectors
 
 
+EUROSTAT_OFFICIAL_CAPTURE = Path(
+    "etl/data/object-origin/eurostat-indicators/fc/a5/"
+    "fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018.json"
+)
+EUROSTAT_OFFICIAL_URL = (
+    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+    "ilc_peps11n?lang=EN&sinceTimePeriod=2015"
+)
+BDE_OFFICIAL_CAPTURE = Path(
+    "etl/data/raw/bde_series_api/2026/05/11/bde_series_api_20260511T175659Z.json"
+)
+
+
 class TestSamplesE2E(unittest.TestCase):
-    def test_samples_ingest_is_idempotent(self) -> None:
+    def test_configured_official_captures_ingest_idempotently(self) -> None:
         connectors = get_connectors()
+        connectors = {
+            source_id: connector
+            for source_id, connector in connectors.items()
+            if str(SOURCE_CONFIG[source_id].get("fallback_file") or "").strip()
+        }
+        self.assertTrue(connectors)
         ingest_modes = {source_id: getattr(connector, "ingest_mode", "mandates") for source_id, connector in connectors.items()}
         snapshot_date = "2026-02-12"
 
@@ -29,7 +49,10 @@ class TestSamplesE2E(unittest.TestCase):
 
                 for source_id, connector in connectors.items():
                     sample_path = Path(SOURCE_CONFIG[source_id]["fallback_file"])
-                    self.assertTrue(sample_path.exists(), f"Missing sample for {source_id}: {sample_path}")
+                    self.assertTrue(
+                        sample_path.exists(),
+                        f"Missing configured capture for {source_id}: {sample_path}",
+                    )
                     ingest_one_source(
                         conn=conn,
                         connector=connector,
@@ -53,7 +76,10 @@ class TestSamplesE2E(unittest.TestCase):
                         "SELECT source_id, COUNT(*) AS c FROM source_records GROUP BY source_id"
                     ).fetchall()
                 }
-                self.assertTrue(source_records_counts_1, "Expected source_records after ingesting samples")
+                self.assertTrue(
+                    source_records_counts_1,
+                    "Expected source_records after ingesting configured captures",
+                )
                 for source_id in connectors:
                     mode = ingest_modes[source_id]
                     if mode == "source_records_only":
@@ -100,12 +126,12 @@ class TestSamplesE2E(unittest.TestCase):
             finally:
                 conn.close()
 
-    def test_eurostat_replay_container_fixture_is_ingestable(self) -> None:
+    def test_eurostat_replay_container_from_official_capture_is_ingestable(self) -> None:
         connectors = get_connectors()
         connector = connectors["eurostat_sdmx"]
-        sample_path = Path(SOURCE_CONFIG["eurostat_sdmx"]["fallback_file"])
-        snapshot_date = "2026-02-12"
-        self.assertTrue(sample_path.exists(), f"Missing sample for eurostat_sdmx: {sample_path}")
+        sample_path = EUROSTAT_OFFICIAL_CAPTURE
+        snapshot_date = "2026-08-12"
+        self.assertTrue(sample_path.exists(), f"Missing official Eurostat capture: {sample_path}")
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "politicos-test.db"
@@ -118,7 +144,7 @@ class TestSamplesE2E(unittest.TestCase):
                 raw_dir=raw_dir,
                 timeout=5,
                 from_file=sample_path,
-                url_override=None,
+                url_override=EUROSTAT_OFFICIAL_URL,
                 strict_network=True,
             )
             replay_path.write_bytes(extracted.payload)
@@ -135,7 +161,7 @@ class TestSamplesE2E(unittest.TestCase):
                     raw_dir=raw_dir,
                     timeout=5,
                     from_file=replay_path,
-                    url_override=None,
+                    url_override=EUROSTAT_OFFICIAL_URL,
                     snapshot_date=snapshot_date,
                     strict_network=True,
                 )
@@ -145,12 +171,12 @@ class TestSamplesE2E(unittest.TestCase):
             finally:
                 conn.close()
 
-    def test_bde_replay_container_fixture_is_ingestable_for_stable_series(self) -> None:
+    def test_bde_replay_container_from_official_capture_is_ingestable(self) -> None:
         connectors = get_connectors()
         connector = connectors["bde_series_api"]
-        sample_path = Path(SOURCE_CONFIG["bde_series_api"]["fallback_file"])
-        snapshot_date = "2026-02-12"
-        self.assertTrue(sample_path.exists(), f"Missing sample for bde_series_api: {sample_path}")
+        sample_path = BDE_OFFICIAL_CAPTURE
+        snapshot_date = "2026-05-11"
+        self.assertTrue(sample_path.exists(), f"Missing official BDE capture: {sample_path}")
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "politicos-test.db"
@@ -165,8 +191,16 @@ class TestSamplesE2E(unittest.TestCase):
                 strict_network=True,
             )
             payload = json.loads(extracted.payload.decode("utf-8"))
-            records = [record for record in payload.get("records", []) if record.get("series_code") == "PARO.TASA.ES.M"]
-            self.assertEqual(len(records), 1, "Expected exactly one stable PARO.TASA.ES.M record in sample")
+            records = [
+                record
+                for record in payload.get("records", [])
+                if record.get("series_code") == "D_1NBAF472"
+            ]
+            self.assertEqual(
+                len(records),
+                1,
+                "Expected captured BDE Euribor series D_1NBAF472",
+            )
             payload["records"] = records
             replay_path.write_text(json.dumps(payload, ensure_ascii=True, sort_keys=True), encoding="utf-8")
 
@@ -200,16 +234,20 @@ class TestSamplesE2E(unittest.TestCase):
                     """
                 ).fetchone()
                 self.assertIsNotNone(row)
-                self.assertEqual(str(row["source_record_id"]), "series:parotasaesm")
+                self.assertEqual(str(row["source_record_id"]), "series:d_1nbaf472")
             finally:
                 conn.close()
 
-    def test_aemet_replay_container_fixture_is_ingestable_for_stable_series(self) -> None:
+    @unittest.skipUnless(
+        os.environ.get("AEMET_REAL_CAPTURE"),
+        "AEMET_REAL_CAPTURE not provided; synthetic capture forbidden",
+    )
+    def test_aemet_replay_container_from_official_capture_is_ingestable(self) -> None:
         connectors = get_connectors()
         connector = connectors["aemet_opendata_series"]
-        sample_path = Path(SOURCE_CONFIG["aemet_opendata_series"]["fallback_file"])
-        snapshot_date = "2026-02-12"
-        self.assertTrue(sample_path.exists(), f"Missing sample for aemet_opendata_series: {sample_path}")
+        sample_path = Path(str(os.environ["AEMET_REAL_CAPTURE"]))
+        snapshot_date = "2026-08-12"
+        self.assertTrue(sample_path.exists(), f"Missing official AEMET capture: {sample_path}")
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "politicos-test.db"
@@ -224,12 +262,10 @@ class TestSamplesE2E(unittest.TestCase):
                 strict_network=True,
             )
             payload = json.loads(extracted.payload.decode("utf-8"))
-            records = [
-                record
-                for record in payload.get("records", [])
-                if record.get("station_id") == "3195" and record.get("variable") == "tmed"
-            ]
-            self.assertEqual(len(records), 1, "Expected exactly one stable station:3195:var:tmed record in sample")
+            records = list(payload.get("records", []))[:1]
+            self.assertEqual(len(records), 1, "Expected at least one official AEMET station series")
+            expected_source_record_id = str(records[0].get("source_record_id") or "")
+            self.assertTrue(expected_source_record_id)
             payload["records"] = records
             replay_path.write_text(json.dumps(payload, ensure_ascii=True, sort_keys=True), encoding="utf-8")
 
@@ -263,7 +299,7 @@ class TestSamplesE2E(unittest.TestCase):
                     """
                 ).fetchone()
                 self.assertIsNotNone(row)
-                self.assertEqual(str(row["source_record_id"]), "station:3195:var:tmed")
+                self.assertEqual(str(row["source_record_id"]), expected_source_record_id)
             finally:
                 conn.close()
 

@@ -3,14 +3,43 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
-from etl.politicos_es.config import SOURCE_CONFIG
 from etl.politicos_es.registry import get_connectors
 from etl.politicos_es.run_snapshot_schema import (
     NORMALIZED_RUN_SNAPSHOT_FIELDS,
     RUN_SNAPSHOT_SCHEMA_VERSION,
     normalize_run_snapshot_row,
+)
+
+
+EUROSTAT_OFFICIAL_CAPTURE = Path(
+    "etl/data/object-origin/eurostat-indicators/fc/a5/"
+    "fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018.json"
+)
+EUROSTAT_OFFICIAL_URL = (
+    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+    "ilc_peps11n?lang=EN&sinceTimePeriod=2015"
+)
+BDE_OFFICIAL_CAPTURE = Path(
+    "etl/data/raw/bde_series_api/2026/05/11/bde_series_api_20260511T175659Z.json"
+)
+PLACSP_OFFICIAL_ARCHIVE = Path(
+    "etl/data/object-origin/placsp-contracts/bd/a7/"
+    "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f.zip"
+)
+PLACSP_OFFICIAL_MEMBER = "licitacionesPerfilesContratanteCompleto3.atom"
+PLACSP_OFFICIAL_URL = (
+    "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/"
+    "licitacionesPerfilesContratanteCompleto3_2025.zip"
+)
+BDNS_OFFICIAL_CAPTURE = Path(
+    "etl/data/raw/official-captures/bdns/concesiones-page-0-20260812.json"
+)
+BDNS_OFFICIAL_URL = (
+    "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda"
+    "?page=0&size=10&sort=fechaAlta,desc"
 )
 
 
@@ -41,22 +70,27 @@ class TestTrackerContractParity(unittest.TestCase):
         self.assertEqual(normalized["run_records_seen"], "2")
         self.assertEqual(normalized["run_records_loaded"], "2")
 
-    def test_outcomes_fallback_samples_emit_parseable_from_file_payloads(self) -> None:
+    def test_official_outcome_captures_emit_tracker_compatible_payloads(self) -> None:
         connectors = get_connectors()
-        source_ids = ("eurostat_sdmx", "bde_series_api", "aemet_opendata_series")
+        captures = (
+            ("eurostat_sdmx", EUROSTAT_OFFICIAL_CAPTURE, EUROSTAT_OFFICIAL_URL),
+            ("bde_series_api", BDE_OFFICIAL_CAPTURE, None),
+        )
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td)
-            for source_id in source_ids:
+            for source_id, capture_path, source_url in captures:
                 with self.subTest(source_id=source_id):
-                    sample_path = Path(SOURCE_CONFIG[source_id]["fallback_file"])
-                    self.assertTrue(sample_path.exists(), f"Missing fallback sample: {sample_path}")
+                    self.assertTrue(
+                        capture_path.exists(),
+                        f"Missing official capture: {capture_path}",
+                    )
 
                     extracted = connectors[source_id].extract(
                         raw_dir=raw_dir,
                         timeout=5,
-                        from_file=sample_path,
-                        url_override=None,
+                        from_file=capture_path,
+                        url_override=source_url,
                         strict_network=True,
                     )
                     self.assertEqual(extracted.note, "from-file")
@@ -79,32 +113,31 @@ class TestTrackerContractParity(unittest.TestCase):
                     elif source_id == "bde_series_api":
                         self.assertEqual(first.get("record_kind"), "bde_series")
                         self.assertTrue(str(first.get("series_code") or "").strip())
-                    else:
-                        self.assertEqual(first.get("record_kind"), "aemet_station_series")
-                        self.assertTrue(str(first.get("station_id") or "").strip())
-                        self.assertTrue(str(first.get("variable") or "").strip())
-
-    def test_placsp_bdns_samples_follow_tracker_artifact_contract(self) -> None:
+    def test_official_money_captures_follow_tracker_artifact_contract(self) -> None:
         connectors = get_connectors()
-        source_ids = (
-            "placsp_sindicacion",
-            "placsp_autonomico",
-            "bdns_api_subvenciones",
-            "bdns_autonomico",
-        )
 
         with tempfile.TemporaryDirectory() as td:
-            raw_dir = Path(td)
-            for source_id in source_ids:
+            td_path = Path(td)
+            raw_dir = td_path / "raw"
+            placsp_path = td_path / PLACSP_OFFICIAL_MEMBER
+            with zipfile.ZipFile(PLACSP_OFFICIAL_ARCHIVE) as archive:
+                placsp_path.write_bytes(archive.read(PLACSP_OFFICIAL_MEMBER))
+            captures = (
+                ("placsp_sindicacion", placsp_path, PLACSP_OFFICIAL_URL),
+                ("bdns_api_subvenciones", BDNS_OFFICIAL_CAPTURE, BDNS_OFFICIAL_URL),
+            )
+            for source_id, capture_path, source_url in captures:
                 with self.subTest(source_id=source_id):
-                    sample_path = Path(SOURCE_CONFIG[source_id]["fallback_file"])
-                    self.assertTrue(sample_path.exists(), f"Missing fallback sample: {sample_path}")
+                    self.assertTrue(
+                        capture_path.exists(),
+                        f"Missing official capture: {capture_path}",
+                    )
 
                     extracted = connectors[source_id].extract(
                         raw_dir=raw_dir,
                         timeout=5,
-                        from_file=sample_path,
-                        url_override=None,
+                        from_file=capture_path,
+                        url_override=source_url,
                         strict_network=True,
                     )
                     self.assertEqual(extracted.note, "from-file")

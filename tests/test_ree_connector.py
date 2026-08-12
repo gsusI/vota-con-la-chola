@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,10 +13,18 @@ from etl.politicos_es.pipeline import ingest_one_source
 
 
 class TestReeEsiosConnector(unittest.TestCase):
-    def test_extract_from_sample_json_includes_series_metadata(self) -> None:
+    def official_capture(self) -> Path:
+        path_value = os.environ.get("REE_ESIOS_REAL_CAPTURE", "").strip()
+        if not path_value:
+            self.skipTest("REE_ESIOS_REAL_CAPTURE is required; synthetic fixtures are forbidden")
+        path = Path(path_value)
+        if not path.is_file():
+            self.skipTest(f"REE_ESIOS_REAL_CAPTURE does not exist: {path}")
+        return path
+
+    def test_extract_from_official_capture_includes_series_metadata(self) -> None:
         connector = ReeEsiosIndicatorsConnector()
-        sample_path = Path("etl/data/raw/samples/ree_esios_indicators_sample.json")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        sample_path = self.official_capture()
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td) / "raw"
@@ -34,7 +43,7 @@ class TestReeEsiosConnector(unittest.TestCase):
             self.assertGreater(int(first.get("points_count") or 0), 0)
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        payload = Path("etl/data/raw/samples/ree_esios_indicators_sample.json").read_bytes()
+        payload = self.official_capture().read_bytes()
         records_1 = parse_ree_records(
             payload,
             feed_url="https://apidatos.ree.es/es/datos/demanda/evolucion",
@@ -50,7 +59,7 @@ class TestReeEsiosConnector(unittest.TestCase):
         self.assertEqual(ids_1, ids_2)
 
     def test_parser_accepts_serialized_records_container(self) -> None:
-        sample_path = Path("etl/data/raw/samples/ree_esios_indicators_sample.json")
+        sample_path = self.official_capture()
         payload = sample_path.read_bytes()
         baseline = parse_ree_records(
             payload,
@@ -86,7 +95,7 @@ class TestReeEsiosConnector(unittest.TestCase):
 
     def test_source_records_ingest_is_idempotent(self) -> None:
         connector = ReeEsiosIndicatorsConnector()
-        sample_path = Path("etl/data/raw/samples/ree_esios_indicators_sample.json")
+        sample_path = self.official_capture()
         snapshot_date = "2026-02-28"
 
         with tempfile.TemporaryDirectory() as td:

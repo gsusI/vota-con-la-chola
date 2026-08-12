@@ -13,12 +13,21 @@ from etl.politicos_es.connectors.eurostat_indicators import (
 from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sources
 from etl.politicos_es.pipeline import ingest_one_source
 
+EUROSTAT_OFFICIAL_CAPTURE = Path(
+    "etl/data/object-origin/eurostat-indicators/fc/a5/"
+    "fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018.json"
+)
+EUROSTAT_OFFICIAL_URL = (
+    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+    "ilc_peps11n?lang=EN&sinceTimePeriod=2015"
+)
+
 
 class TestEurostatConnector(unittest.TestCase):
-    def test_extract_from_sample_json_has_series_unit_and_dimensions(self) -> None:
+    def test_extract_from_official_capture_has_series_unit_and_dimensions(self) -> None:
         connector = EurostatSdmxConnector()
-        sample_path = Path("etl/data/raw/samples/eurostat_sdmx_sample.json")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        sample_path = EUROSTAT_OFFICIAL_CAPTURE
+        self.assertTrue(sample_path.exists(), f"Missing official capture: {sample_path}")
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td) / "raw"
@@ -26,7 +35,7 @@ class TestEurostatConnector(unittest.TestCase):
                 raw_dir=raw_dir,
                 timeout=5,
                 from_file=sample_path,
-                url_override=None,
+                url_override=EUROSTAT_OFFICIAL_URL,
                 strict_network=True,
             )
             self.assertGreaterEqual(len(extracted.records), 2)
@@ -38,16 +47,16 @@ class TestEurostatConnector(unittest.TestCase):
             self.assertIn("dimension_codelists", first)
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        sample_path = Path("etl/data/raw/samples/eurostat_sdmx_sample.json")
+        sample_path = EUROSTAT_OFFICIAL_CAPTURE
         payload = sample_path.read_bytes()
         records_1 = parse_eurostat_records(
             payload,
-            feed_url="https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_a",
+            feed_url=EUROSTAT_OFFICIAL_URL,
             content_type="application/json",
         )
         records_2 = parse_eurostat_records(
             payload,
-            feed_url="https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_a",
+            feed_url=EUROSTAT_OFFICIAL_URL,
             content_type="application/json",
         )
         ids_1 = sorted(str(row.get("source_record_id") or "") for row in records_1)
@@ -55,17 +64,17 @@ class TestEurostatConnector(unittest.TestCase):
         self.assertEqual(ids_1, ids_2)
 
     def test_parser_accepts_serialized_records_container(self) -> None:
-        sample_path = Path("etl/data/raw/samples/eurostat_sdmx_sample.json")
+        sample_path = EUROSTAT_OFFICIAL_CAPTURE
         payload = sample_path.read_bytes()
         baseline = parse_eurostat_records(
             payload,
-            feed_url="https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_a",
+            feed_url=EUROSTAT_OFFICIAL_URL,
             content_type="application/json",
         )
         wrapped_payload = json.dumps(
             {
                 "source": "eurostat_sdmx_network",
-                "feed_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_a",
+                "feed_url": EUROSTAT_OFFICIAL_URL,
                 "records": baseline,
             },
             ensure_ascii=True,
@@ -91,8 +100,8 @@ class TestEurostatConnector(unittest.TestCase):
 
     def test_source_records_ingest_is_idempotent(self) -> None:
         connector = EurostatSdmxConnector()
-        sample_path = Path("etl/data/raw/samples/eurostat_sdmx_sample.json")
-        snapshot_date = "2026-02-16"
+        sample_path = EUROSTAT_OFFICIAL_CAPTURE
+        snapshot_date = "2026-08-11"
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "eurostat-test.db"
@@ -109,7 +118,7 @@ class TestEurostatConnector(unittest.TestCase):
                     raw_dir=raw_dir,
                     timeout=5,
                     from_file=sample_path,
-                    url_override=None,
+                    url_override=EUROSTAT_OFFICIAL_URL,
                     snapshot_date=snapshot_date,
                     strict_network=True,
                 )
@@ -126,7 +135,7 @@ class TestEurostatConnector(unittest.TestCase):
                     raw_dir=raw_dir,
                     timeout=5,
                     from_file=sample_path,
-                    url_override=None,
+                    url_override=EUROSTAT_OFFICIAL_URL,
                     snapshot_date=snapshot_date,
                     strict_network=True,
                 )

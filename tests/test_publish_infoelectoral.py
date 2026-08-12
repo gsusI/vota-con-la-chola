@@ -5,12 +5,26 @@ import unittest
 from pathlib import Path
 
 from etl.infoelectoral_es.config import DEFAULT_SCHEMA
-from etl.infoelectoral_es.config import SOURCE_CONFIG as INFO_SOURCE_CONFIG
 from etl.infoelectoral_es.db import seed_sources as seed_info_sources
 from etl.infoelectoral_es.pipeline import ingest_one_source
 from etl.infoelectoral_es.publish import build_infoelectoral_snapshot
 from etl.infoelectoral_es.registry import get_connectors
 from etl.politicos_es.db import apply_schema, open_db, seed_dimensions
+
+INFOELECTORAL_OFFICIAL_CAPTURES = {
+    "infoelectoral_descargas": Path(
+        "etl/data/raw/infoelectoral_descargas/2026/02/25/"
+        "infoelectoral_descargas_20260225T172351Z.json"
+    ),
+    "infoelectoral_procesos": Path(
+        "etl/data/raw/infoelectoral_procesos/2026/02/25/"
+        "infoelectoral_procesos_20260225T172425Z.json"
+    ),
+}
+INFOELECTORAL_OFFICIAL_URLS = {
+    "infoelectoral_descargas": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/",
+    "infoelectoral_procesos": "https://infoelectoral.interior.gob.es/min/procesos/",
+}
 
 
 class TestPublishInfoelectoral(unittest.TestCase):
@@ -32,8 +46,8 @@ class TestPublishInfoelectoral(unittest.TestCase):
                 seed_info_sources(conn)
                 seed_dimensions(conn)
 
-                descargas_sample = Path(INFO_SOURCE_CONFIG[descargas_source_id]["fallback_file"])
-                procesos_sample = Path(INFO_SOURCE_CONFIG[procesos_source_id]["fallback_file"])
+                descargas_sample = INFOELECTORAL_OFFICIAL_CAPTURES[descargas_source_id]
+                procesos_sample = INFOELECTORAL_OFFICIAL_CAPTURES[procesos_source_id]
                 self.assertTrue(
                     descargas_sample.exists(),
                     f"Missing sample for {descargas_source_id}: {descargas_sample}",
@@ -45,14 +59,14 @@ class TestPublishInfoelectoral(unittest.TestCase):
 
                 for source_id in (descargas_source_id, procesos_source_id):
                     connector = connectors[source_id]
-                    sample_path = Path(INFO_SOURCE_CONFIG[source_id]["fallback_file"])
+                    sample_path = INFOELECTORAL_OFFICIAL_CAPTURES[source_id]
                     ingest_one_source(
                         conn=conn,
                         connector=connector,
                         raw_dir=raw_dir,
                         timeout=5,
                         from_file=sample_path,
-                        url_override=None,
+                        url_override=INFOELECTORAL_OFFICIAL_URLS[source_id],
                         snapshot_date=snapshot_date,
                         strict_network=True,
                     )

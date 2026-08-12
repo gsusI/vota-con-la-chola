@@ -141,10 +141,10 @@ class TestBoeConnector(unittest.TestCase):
         self.assertEqual(extracted.records[0]["source_record_id"], "boe_ref:BOE-A-2026-3212")
         self.assertEqual(extracted.records[0]["published_at_iso"], "2026-02-12")
 
-    def test_extract_from_sample_xml(self) -> None:
+    def test_extract_from_official_capture_xml(self) -> None:
         connector = BoeApiLegalConnector()
-        sample_path = Path("etl/data/raw/samples/boe_api_legal_sample.xml")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        sample_path = Path("etl/data/raw/official-captures/boe/boe-rss-20260812.xml")
+        self.assertTrue(sample_path.exists(), f"Missing official capture: {sample_path}")
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td) / "raw"
@@ -155,15 +155,15 @@ class TestBoeConnector(unittest.TestCase):
                 url_override=None,
                 strict_network=True,
             )
-            self.assertGreaterEqual(len(extracted.records), 3)
+            self.assertGreaterEqual(len(extracted.records), 100)
             refs = {str(row.get("boe_ref") or "") for row in extracted.records}
-            self.assertIn("BOE-A-2026-3482", refs)
-            self.assertIn("BOE-A-2026-3499", refs)
+            self.assertIn("BOE-A-2026-17573", refs)
+            self.assertIn("BOE-A-2026-17574", refs)
             ids = [str(row.get("source_record_id") or "") for row in extracted.records]
             self.assertTrue(all(item.startswith("boe_ref:") for item in ids))
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        sample_path = Path("etl/data/raw/samples/boe_api_legal_sample.xml")
+        sample_path = Path("etl/data/raw/official-captures/boe/boe-rss-20260812.xml")
         payload = sample_path.read_bytes()
         records_1 = parse_boe_rss_items(payload, feed_url="https://www.boe.es/rss/boe.php", content_type="text/xml")
         records_2 = parse_boe_rss_items(payload, feed_url="https://www.boe.es/rss/boe.php", content_type="text/xml")
@@ -173,9 +173,9 @@ class TestBoeConnector(unittest.TestCase):
         self.assertEqual(ids_1, ids_2)
 
     def test_source_records_ingest_is_idempotent(self) -> None:
-        snapshot_date = "2026-02-16"
+        snapshot_date = "2026-08-12"
         connector = BoeApiLegalConnector()
-        sample_path = Path("etl/data/raw/samples/boe_api_legal_sample.xml")
+        sample_path = Path("etl/data/raw/official-captures/boe/boe-rss-20260812.xml")
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "politicos-test.db"

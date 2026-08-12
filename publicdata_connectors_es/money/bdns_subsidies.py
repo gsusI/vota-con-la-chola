@@ -1,15 +1,18 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+import re
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from publicdata_core.connectors import BaseConnector
 from publicdata_core.http import http_get_bytes, payload_looks_like_html
+from publicdata_core.raw import (
+    fallback_payload_from_sample as _fallback_payload_from_sample,
+)
 from publicdata_core.raw import raw_output_path
-from publicdata_core.raw import fallback_payload_from_sample as _fallback_payload_from_sample
 from publicdata_core.sources import SourceDefinition, source_config_mapping
 from publicdata_core.types import Extracted
 from publicdata_core.util import (
@@ -22,9 +25,19 @@ from publicdata_core.util import (
     stable_json,
 )
 
+BDNS_BASE = "https://www.infosubvenciones.es"
+BDNS_API_BASE = f"{BDNS_BASE}/bdnstrans/api"
+BDNS_DEFAULT_URL = (
+    f"{BDNS_API_BASE}/concesiones/busqueda?"
+    "vpd=GE&page=0&pageSize=1000&order=fechaConcesion&direccion=desc"
+)
 
-BDNS_BASE = "https://www.pap.hacienda.gob.es"
-BDNS_DEFAULT_URL = "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias"
+_LEGAL_ENTITY_NIF = re.compile(
+    r"^([ABCDEFGHJNPQRSUVW][0-9]{7}[0-9A-J])\s+(.+)$", re.IGNORECASE
+)
+_NATURAL_PERSON_NIF = re.compile(
+    r"^([0-9]{8}[A-Z]|[XYZ][0-9]{7}[A-Z])\s+(.+)$", re.IGNORECASE
+)
 
 SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
     SourceDefinition(
@@ -33,7 +46,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="dinero",
         default_url=BDNS_DEFAULT_URL,
         format="json",
-        fallback_file="etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+        fallback_file="",
         min_records_loaded_strict=10,
     ),
     SourceDefinition(
@@ -42,7 +55,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="dinero",
         default_url=BDNS_DEFAULT_URL,
         format="json",
-        fallback_file="etl/data/raw/samples/bdns_autonomico_sample.json",
+        fallback_file="",
         min_records_loaded_strict=3,
     ),
 )
@@ -54,7 +67,15 @@ def _flatten_rows(data: Any) -> list[dict[str, Any]]:
     if isinstance(data, list):
         return [row for row in data if isinstance(row, dict)]
     if isinstance(data, dict):
-        for key in ("results", "items", "data", "convocatorias", "subvenciones", "rows"):
+        for key in (
+            "content",
+            "results",
+            "items",
+            "data",
+            "convocatorias",
+            "subvenciones",
+            "rows",
+        ):
             value = data.get(key)
             if isinstance(value, list):
                 return [row for row in value if isinstance(row, dict)]
@@ -74,7 +95,11 @@ def _canonical_url(raw_url: str | None) -> str | None:
     parts = urlsplit(absolute)
     if not parts.netloc:
         return None
-    scheme = "https" if parts.scheme.lower() in {"http", "https", ""} else parts.scheme.lower()
+    scheme = (
+        "https"
+        if parts.scheme.lower() in {"http", "https", ""}
+        else parts.scheme.lower()
+    )
     return urlunsplit((scheme, parts.netloc.lower(), parts.path, parts.query, ""))
 
 
@@ -85,10 +110,10 @@ def _parse_datetime_iso(raw: str | None) -> str | None:
     if not text:
         return None
     try:
-        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(text)
         if parsed.tzinfo is None:
-            parsed = parsed.replace(tzinfo=timezone.utc)
-        return parsed.astimezone(timezone.utc).isoformat()
+            parsed = parsed.replace(tzinfo=UTC)
+        return parsed.astimezone(UTC).isoformat()
     except ValueError:
         pass
     date_only = parse_date_flexible(text)
@@ -132,6 +157,44 @@ def _normalize_token(raw: str | None) -> str:
     return text.replace(" ", "_")
 
 
+def _beneficiary_fields(
+    raw_name: str | None,
+    explicit_identifier: str | None,
+) -> tuple[str | None, str | None, str, str | None]:
+    name = normalize_ws(raw_name or "") or None
+    identifier = normalize_ws(explicit_identifier or "") or None
+    if name:
+        legal_match = _LEGAL_ENTITY_NIF.match(name)
+        natural_match = _NATURAL_PERSON_NIF.match(name)
+        if legal_match:
+            return (
+                normalize_ws(legal_match.group(2)),
+                identifier or legal_match.group(1).upper(),
+                "legal_entity",
+                "spanish_tax_identifier",
+            )
+        if natural_match:
+            return (
+                normalize_ws(natural_match.group(2)),
+                identifier or natural_match.group(1).upper(),
+                "potential_natural_person",
+                "spanish_tax_identifier",
+            )
+    return name, identifier, "unclassified", "source_identifier" if identifier else None
+
+
+def _public_concession_url(
+    concession_id: str | None,
+    convocatoria_id: str | None,
+) -> str | None:
+    concession = normalize_ws(concession_id or "")
+    convocatoria = normalize_ws(convocatoria_id or "")
+    if not concession:
+        return None
+    suffix = f"?convocatoria={convocatoria}" if convocatoria else ""
+    return f"{BDNS_BASE}/bdnstrans/GE/es/concesiones/{concession}{suffix}"
+
+
 def build_source_record_id(record: dict[str, Any]) -> str:
     concesion_id = _normalize_token(str(record.get("concesion_id") or ""))
     convocatoria_id = _normalize_token(str(record.get("convocatoria_id") or ""))
@@ -140,7 +203,9 @@ def build_source_record_id(record: dict[str, Any]) -> str:
     source_url = normalize_ws(str(record.get("source_url") or ""))
     amount = record.get("importe_eur")
     published = normalize_ws(str(record.get("published_at_iso") or ""))
-    raw_fingerprint = sha256_bytes(stable_json(record.get("raw_row") or {}).encode("utf-8"))[:24]
+    raw_fingerprint = sha256_bytes(
+        stable_json(record.get("raw_row") or {}).encode("utf-8")
+    )[:24]
 
     if concesion_id:
         return f"concesion:{concesion_id}"
@@ -183,15 +248,21 @@ def _dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [by_id[key] for key in sorted(by_id)]
 
 
-def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | None) -> list[dict[str, Any]]:
+def parse_bdns_records(
+    payload: bytes, *, feed_url: str, content_type: str | None
+) -> list[dict[str, Any]]:
     payload_sig = sha256_bytes(payload)
     if payload_looks_like_html(payload):
-        raise RuntimeError(f"Respuesta HTML inesperada para BDNS feed (payload_sig={payload_sig})")
+        raise RuntimeError(
+            f"Respuesta HTML inesperada para BDNS feed (payload_sig={payload_sig})"
+        )
 
     try:
         parsed = json.loads(payload.decode("utf-8", errors="replace"))
     except json.JSONDecodeError as exc:
-        raise RuntimeError(f"JSON invalido para BDNS ({exc}; payload_sig={payload_sig})") from exc
+        raise RuntimeError(
+            f"JSON invalido para BDNS ({exc}; payload_sig={payload_sig})"
+        ) from exc
 
     rows = _flatten_rows(parsed)
     extracted: list[dict[str, Any]] = []
@@ -214,6 +285,7 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
         convocatoria_id = pick_value(
             row,
             (
+                "numeroConvocatoria",
                 "convocatoria_id",
                 "id_convocatoria",
                 "idConvocatoria",
@@ -226,6 +298,7 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
         concesion_id = pick_value(
             row,
             (
+                "codConcesion",
                 "concesion_id",
                 "id_concesion",
                 "idConcesion",
@@ -233,7 +306,7 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
                 "id",
             ),
         )
-        beneficiario = pick_value(
+        beneficiario_raw = pick_value(
             row,
             (
                 "beneficiario",
@@ -245,7 +318,7 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
                 "razon_social",
             ),
         )
-        beneficiario_id = pick_value(
+        beneficiario_id_raw = pick_value(
             row,
             (
                 "beneficiario_id",
@@ -258,6 +331,12 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
                 "nif",
             ),
         )
+        (
+            beneficiario,
+            beneficiario_id,
+            beneficiary_entity_type,
+            beneficiary_identifier_kind,
+        ) = _beneficiary_fields(beneficiario_raw, beneficiario_id_raw)
         organo_convocante = pick_value(
             row,
             (
@@ -267,6 +346,7 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
                 "organoConcedente",
                 "unidad_tramitadora",
                 "unidadTramitadora",
+                "nivel3",
             ),
         )
         importe_eur = _parse_decimal(
@@ -297,9 +377,27 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
         )
         territory_code = pick_value(
             row,
-            ("territory_code", "ccaa", "comunidad_autonoma", "comunidadAutonoma", "codigo_territorio"),
+            (
+                "territory_code",
+                "ccaa",
+                "comunidad_autonoma",
+                "comunidadAutonoma",
+                "codigo_territorio",
+                "nivel2",
+            ),
         )
-        program_code = pick_value(row, ("programa", "program_code", "linea_subvencion", "lineaSubvencion"))
+        program_code = pick_value(
+            row,
+            (
+                "programa",
+                "program_code",
+                "linea_subvencion",
+                "lineaSubvencion",
+                "instrumento",
+            ),
+        )
+        if source_url is None:
+            source_url = _public_concession_url(concesion_id, convocatoria_id)
 
         record: dict[str, Any] = {
             "record_kind": "bdns_subsidy_record",
@@ -311,12 +409,21 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
             "organo_convocante": organo_convocante,
             "beneficiario": beneficiario,
             "beneficiario_id": beneficiario_id,
+            "beneficiary_entity_type": beneficiary_entity_type,
+            "beneficiary_identifier_kind": beneficiary_identifier_kind,
+            "beneficiary_registry_id": pick_value(row, ("idPersona",)),
             "program_code": program_code,
             "territory_code": territory_code,
             "importe_eur": importe_eur,
             "currency": "EUR" if importe_eur is not None else None,
             "published_at_iso": published_at_iso,
-            "summary_text": pick_value(row, ("descripcion", "objeto", "titulo", "title")),
+            "concession_date": parse_date_flexible(
+                pick_value(row, ("fechaConcesion", "fecha_concesion")) or ""
+            ),
+            "summary_text": pick_value(
+                row,
+                ("convocatoria", "descripcion", "objeto", "titulo", "title"),
+            ),
             "raw_row": row,
         }
         record["source_record_id"] = build_source_record_id(record)
@@ -325,7 +432,9 @@ def parse_bdns_records(payload: bytes, *, feed_url: str, content_type: str | Non
     records = _dedupe_records(extracted)
     if records:
         return records
-    raise RuntimeError(f"No se encontraron registros parseables en BDNS ({payload_sig})")
+    raise RuntimeError(
+        f"No se encontraron registros parseables en BDNS ({payload_sig})"
+    )
 
 
 class _BdnsBaseConnector(BaseConnector):
@@ -357,9 +466,15 @@ class _BdnsBaseConnector(BaseConnector):
                     )
                 records = _dedupe_records(all_records)
                 if not records:
-                    raise RuntimeError(f"No se encontraron JSON parseables en directorio BDNS: {from_file}")
+                    raise RuntimeError(
+                        f"No se encontraron JSON parseables en directorio BDNS: {from_file}"
+                    )
                 serialized = json.dumps(
-                    {"source": f"{self.source_id}_dir", "dir": str(from_file), "records": records},
+                    {
+                        "source": f"{self.source_id}_dir",
+                        "dir": str(from_file),
+                        "records": records,
+                    },
                     ensure_ascii=True,
                     sort_keys=True,
                 ).encode("utf-8")
@@ -380,11 +495,17 @@ class _BdnsBaseConnector(BaseConnector):
                     records=records,
                 )
 
-            resolved_url = f"file://{from_file.resolve()}"
+            resolved_url = url_override or f"file://{from_file.resolve()}"
             payload = from_file.read_bytes()
-            records = parse_bdns_records(payload, feed_url=resolved_url, content_type="application/json")
+            records = parse_bdns_records(
+                payload, feed_url=resolved_url, content_type="application/json"
+            )
             serialized = json.dumps(
-                {"source": f"{self.source_id}_file", "file": str(from_file), "records": records},
+                {
+                    "source": f"{self.source_id}_file",
+                    "file": str(from_file),
+                    "records": records,
+                },
                 ensure_ascii=True,
                 sort_keys=True,
             ).encode("utf-8")
@@ -408,9 +529,15 @@ class _BdnsBaseConnector(BaseConnector):
         resolved_url = self.resolve_url(url_override, timeout)
         try:
             payload, content_type = http_get_bytes(resolved_url, timeout)
-            records = parse_bdns_records(payload, feed_url=resolved_url, content_type=content_type)
+            records = parse_bdns_records(
+                payload, feed_url=resolved_url, content_type=content_type
+            )
             serialized = json.dumps(
-                {"source": f"{self.source_id}_network", "feed_url": resolved_url, "records": records},
+                {
+                    "source": f"{self.source_id}_network",
+                    "feed_url": resolved_url,
+                    "records": records,
+                },
                 ensure_ascii=True,
                 sort_keys=True,
             ).encode("utf-8")
@@ -430,7 +557,7 @@ class _BdnsBaseConnector(BaseConnector):
                 payload=serialized,
                 records=records,
             )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             if strict_network:
                 raise
             fetched = _fallback_payload_from_sample(
@@ -458,7 +585,9 @@ class _BdnsBaseConnector(BaseConnector):
                 records=records,
             )
 
-    def normalize(self, record: dict[str, Any], snapshot_date: str | None) -> dict[str, Any] | None:
+    def normalize(
+        self, record: dict[str, Any], snapshot_date: str | None
+    ) -> dict[str, Any] | None:
         source_record_id = str(record.get("source_record_id") or "").strip()
         if not source_record_id:
             source_record_id = build_source_record_id(record)

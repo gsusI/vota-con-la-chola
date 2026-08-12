@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import base64
 import json
+import logging
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 
@@ -16,9 +18,11 @@ from publicdata_core.util import now_utc_iso, sha256_bytes
 
 from .config import INFOELECTORAL_BASE, SOURCE_CONFIG
 
+LOGGER = logging.getLogger(__name__)
+
 
 def basic_auth_header(user: str, password: str) -> str:
-    token = base64.b64encode(f"{user}:{password}".encode("utf-8")).decode("ascii")
+    token = base64.b64encode(f"{user}:{password}".encode()).decode("ascii")
     return f"Basic {token}"
 
 
@@ -75,7 +79,9 @@ class InfoelectoralProcesosConnector:
         payload, _ct = http_get_bytes(url, timeout, headers=headers, insecure_ssl=True)
         return parse_api_payload(payload)
 
-    def _extract_from_convocatorias(self, timeout: int) -> tuple[list[dict[str, Any]], list[str]]:
+    def _extract_from_convocatorias(
+        self, timeout: int
+    ) -> tuple[list[dict[str, Any]], list[str]]:
         """Fallback extractor when the historical `/min/procesos/` endpoint is removed."""
 
         notes: list[str] = []
@@ -171,18 +177,32 @@ class InfoelectoralProcesosConnector:
         return {
             "kind": "proceso",
             "proceso_id": proceso_id,
-            "nombre": _pick(row, "nombre", "name", "titulo", "titulo_proceso") or proceso_id,
+            "nombre": _pick(row, "nombre", "name", "titulo", "titulo_proceso")
+            or proceso_id,
             "tipo": _pick(row, "tipo", "tipo_proceso", "ambito_proceso"),
-            "ambito": _pick(row, "ambito", "ambito_territorial", "ambitoTerritorial", "ambito_geo"),
+            "ambito": _pick(
+                row, "ambito", "ambito_territorial", "ambitoTerritorial", "ambito_geo"
+            ),
             "estado": _pick(row, "estado", "estado_proceso", "fase"),
-            "fecha": _pick(row, "fecha", "fecha_proceso", "fechaInicio", "fecha_proceso_inicio"),
+            "fecha": _pick(
+                row, "fecha", "fecha_proceso", "fechaInicio", "fecha_proceso_inicio"
+            ),
             "detalle_url": _pick(row, "detalle_url", "url_detalle", "detalleUrl"),
         }
 
     @staticmethod
-    def _extract_dataset_rows(row: dict[str, Any], proceso_id: str) -> list[dict[str, Any]]:
+    def _extract_dataset_rows(
+        row: dict[str, Any], proceso_id: str
+    ) -> list[dict[str, Any]]:
         rows: list[dict[str, Any]] = []
-        for key in ("datasets", "resultados", "resultados_descarga", "resultats", "archivos", "resultados_descargables"):
+        for key in (
+            "datasets",
+            "resultados",
+            "resultados_descarga",
+            "resultats",
+            "archivos",
+            "resultados_descargables",
+        ):
             raw = row.get(key)
             if isinstance(raw, list):
                 rows.extend(raw)
@@ -195,7 +215,9 @@ class InfoelectoralProcesosConnector:
         for idx, dataset_row in enumerate(rows):
             if not isinstance(dataset_row, dict):
                 continue
-            dataset_id = _pick(dataset_row, "proceso_dataset_id", "id", "dataset_id", "codigo", "cod")
+            dataset_id = _pick(
+                dataset_row, "proceso_dataset_id", "id", "dataset_id", "codigo", "cod"
+            )
             url = _pick(dataset_row, "url", "link", "enlace", "archivo", "ruta", "file")
             if not url:
                 continue
@@ -207,11 +229,34 @@ class InfoelectoralProcesosConnector:
                     "kind": "proceso_resultado",
                     "proceso_dataset_id": dataset_id,
                     "proceso_id": proceso_id,
-                    "nombre": _pick(dataset_row, "nombre", "name", "titulo", "descripcion", "titulo_dataset") or url,
-                    "tipo_dato": _pick(dataset_row, "tipo_dato", "tipo", "tipo_dataset", "clase", "mimetype"),
+                    "nombre": _pick(
+                        dataset_row,
+                        "nombre",
+                        "name",
+                        "titulo",
+                        "descripcion",
+                        "titulo_dataset",
+                    )
+                    or url,
+                    "tipo_dato": _pick(
+                        dataset_row,
+                        "tipo_dato",
+                        "tipo",
+                        "tipo_dataset",
+                        "clase",
+                        "mimetype",
+                    ),
                     "url": url,
-                    "formato": _pick(dataset_row, "formato", "extension", "file_type", "mime"),
-                    "fecha": _pick(dataset_row, "fecha", "fecha_publicacion", "fecha_actualizacion", "fecha_proceso"),
+                    "formato": _pick(
+                        dataset_row, "formato", "extension", "file_type", "mime"
+                    ),
+                    "fecha": _pick(
+                        dataset_row,
+                        "fecha",
+                        "fecha_publicacion",
+                        "fecha_actualizacion",
+                        "fecha_proceso",
+                    ),
                 }
             )
         return records
@@ -226,11 +271,18 @@ class InfoelectoralProcesosConnector:
             if not proceso_record:
                 continue
             records.append(proceso_record)
-            records.extend(self._extract_dataset_rows(row, proceso_record["proceso_id"]))
+            records.extend(
+                self._extract_dataset_rows(row, proceso_record["proceso_id"])
+            )
         return records
 
-    def _fetch_dataset_from_proceso(self, proceso_id: str, timeout: int) -> list[dict[str, Any]]:
-        for path in (f"procesos/{proceso_id}/resultados", f"procesos/{proceso_id}/datasets"):
+    def _fetch_dataset_from_proceso(
+        self, proceso_id: str, timeout: int
+    ) -> list[dict[str, Any]]:
+        for path in (
+            f"procesos/{proceso_id}/resultados",
+            f"procesos/{proceso_id}/datasets",
+        ):
             try:
                 rows = self._get_json(f"{INFOELECTORAL_BASE}{path}", timeout)
                 out: list[dict[str, Any]] = []
@@ -240,18 +292,48 @@ class InfoelectoralProcesosConnector:
                     out.append(
                         {
                             "kind": "proceso_resultado",
-                            "proceso_dataset_id": _pick(row, "proceso_dataset_id", "id", "dataset_id", "codigo", "cod")
+                            "proceso_dataset_id": _pick(
+                                row,
+                                "proceso_dataset_id",
+                                "id",
+                                "dataset_id",
+                                "codigo",
+                                "cod",
+                            )
                             or f"{proceso_id}|dataset-extra",
                             "proceso_id": proceso_id,
-                            "nombre": _pick(row, "nombre", "name", "titulo", "descripcion") or "Resultado",
-                            "tipo_dato": _pick(row, "tipo_dato", "tipo", "tipo_dataset", "clase", "mimetype"),
-                            "url": _pick(row, "url", "link", "enlace", "archivo", "ruta", "file") or "",
-                            "formato": _pick(row, "formato", "extension", "file_type", "mime"),
-                            "fecha": _pick(row, "fecha", "fecha_publicacion", "fecha_actualizacion"),
+                            "nombre": _pick(
+                                row, "nombre", "name", "titulo", "descripcion"
+                            )
+                            or "Resultado",
+                            "tipo_dato": _pick(
+                                row,
+                                "tipo_dato",
+                                "tipo",
+                                "tipo_dataset",
+                                "clase",
+                                "mimetype",
+                            ),
+                            "url": _pick(
+                                row, "url", "link", "enlace", "archivo", "ruta", "file"
+                            )
+                            or "",
+                            "formato": _pick(
+                                row, "formato", "extension", "file_type", "mime"
+                            ),
+                            "fecha": _pick(
+                                row, "fecha", "fecha_publicacion", "fecha_actualizacion"
+                            ),
                         }
                     )
                 return [r for r in out if r.get("url")]
-            except Exception:  # noqa: BLE001
+            except Exception as exc:  # noqa: BLE001
+                LOGGER.debug(
+                    "Infoelectoral dataset endpoint failed: process=%s endpoint=%s error=%s",
+                    proceso_id,
+                    path,
+                    exc,
+                )
                 continue
         return []
 
@@ -267,6 +349,7 @@ class InfoelectoralProcesosConnector:
         fetched_at = now_utc_iso()
 
         if from_file is not None:
+            replay_url = url_override or resolved_url
             payload = from_file.read_bytes()
             rows = json.loads(payload.decode("utf-8", errors="replace"))
             if not isinstance(rows, list):
@@ -279,13 +362,15 @@ class InfoelectoralProcesosConnector:
                     maybe = self._normalize_proceso(row)
                     if maybe:
                         records.append(maybe)
-                        records.extend(self._extract_dataset_rows(row, maybe["proceso_id"]))
+                        records.extend(
+                            self._extract_dataset_rows(row, maybe["proceso_id"])
+                        )
             raw_path = raw_output_path(raw_dir, self.source_id, "json")
             raw_path.write_bytes(payload)
             return Extracted(
                 source_id=self.source_id,
-                source_url=f"file://{from_file.resolve()}",
-                resolved_url=f"file://{from_file.resolve()}",
+                source_url=replay_url,
+                resolved_url=replay_url,
                 fetched_at=fetched_at,
                 raw_path=raw_path,
                 content_sha256=sha256_bytes(payload),
@@ -322,19 +407,26 @@ class InfoelectoralProcesosConnector:
 
             for rec in [r for r in records if r.get("kind") == "proceso"]:
                 if not any(
-                    r.get("kind") == "proceso_resultado" and r.get("proceso_id") == rec.get("proceso_id")
+                    r.get("kind") == "proceso_resultado"
+                    and r.get("proceso_id") == rec.get("proceso_id")
                     for r in records
                 ):
                     extra = self._fetch_dataset_from_proceso(rec["proceso_id"], timeout)
                     if extra:
                         records.extend(extra)
                     else:
-                        notes.append(f"proceso_id {rec['proceso_id']}: sin resultados directos")
+                        notes.append(
+                            f"proceso_id {rec['proceso_id']}: sin resultados directos"
+                        )
 
             if not records:
-                raise RuntimeError(f"No se pudo extraer ningun registro: {'; '.join(notes)}")
+                raise RuntimeError(
+                    f"No se pudo extraer ningun registro: {'; '.join(notes)}"
+                )
 
-            payload = json.dumps(records, ensure_ascii=True, sort_keys=True).encode("utf-8")
+            payload = json.dumps(records, ensure_ascii=True, sort_keys=True).encode(
+                "utf-8"
+            )
             raw_path = raw_output_path(raw_dir, self.source_id, "json")
             raw_path.write_bytes(payload)
             note = "network"
@@ -353,29 +445,8 @@ class InfoelectoralProcesosConnector:
                 payload=payload,
                 records=records,
             )
-        except Exception as exc:  # noqa: BLE001
-            if strict_network:
-                raise
-            sample = Path(str(self.source_config[self.source_id]["fallback_file"]))
-            payload = sample.read_bytes()
-            rows = json.loads(payload.decode("utf-8", errors="replace"))
-            if not isinstance(rows, list):
-                raise RuntimeError(f"Muestra invalida: se esperaba una lista JSON ({self.source_id})")
-            raw_rows = [r for r in rows if isinstance(r, dict) and str(r.get("kind") or "").strip()]
-            if not raw_rows:
-                raw_rows = [record for record in self._extract_record_batches(payload) if record]
-            raw_path = raw_output_path(raw_dir, self.source_id, "json")
-            raw_path.write_bytes(payload)
-            return Extracted(
-                source_id=self.source_id,
-                source_url=resolved_url,
-                resolved_url=resolved_url,
-                fetched_at=fetched_at,
-                raw_path=raw_path,
-                content_sha256=sha256_bytes(payload),
-                content_type="application/json",
-                bytes=len(payload),
-                note=f"network-error-fallback: {type(exc).__name__}: {exc}",
-                payload=payload,
-                records=[r for r in raw_rows if isinstance(r, dict) and str(r.get("kind") or "").strip()],
-            )
+        except Exception as exc:
+            raise RuntimeError(
+                "Infoelectoral network extraction failed; implicit sample fallback is disabled "
+                f"by the real-data-only policy: {type(exc).__name__}: {exc}"
+            ) from exc
