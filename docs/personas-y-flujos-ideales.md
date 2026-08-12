@@ -32,7 +32,7 @@ Estas seis personas concretan el north-star para decisiones de producto, UX y pr
 
 - Mapa: `Ciudadania de respuesta rapida`.
 - Flujos clave: `F-01`, `F-02`, `F-05`.
-- Identidad: 29 anos, administrativa en Malaga, sigue la politica lo justo y llega a la plataforma desde movil cuando una conversacion o un titular le obliga a tomar postura.
+- Identidad: 29 años, administrativa en Malaga, sigue la politica lo justo y llega a la plataforma desde movil cuando una conversacion o un titular le obliga a tomar postura.
 - Jobs-to-be-done: decidir rapido sobre vivienda, coste de vida o sanidad; comparar partidos sobre un caso concreto sin leer veinte paginas.
 - Momento activador: ve un enlace compartido o entra dias antes de votar porque quiere una respuesta util en menos de cinco minutos.
 - Exito: sale con una decision provisional clara, entiende que partidos son comparables en ese caso y puede guardar o compartir la vista.
@@ -51,7 +51,7 @@ Estas seis personas concretan el north-star para decisiones de producto, UX y pr
 
 - Mapa: `Ciudadania esceptica (modo auditoria)`.
 - Flujos clave: `F-03`, `F-04`, `F-17`.
-- Identidad: 41 anos, profesor de instituto en Zaragoza, desconfia de rankings civicos y solo acepta un resumen si puede bajar de la tarjeta a la fuente original.
+- Identidad: 41 años, profesor de instituto en Zaragoza, desconfia de rankings civicos y solo acepta un resumen si puede bajar de la tarjeta a la fuente original.
 - Jobs-to-be-done: comprobar si una postura agregada esta bien fundada; entender si `unknown` significa falta de datos, conflicto real o una decision metodologica debil.
 - Momento activador: detecta una afirmacion fuerte en citizen o en un enlace compartido y quiere desmontarla o validarla por su cuenta.
 - Exito: puede recorrer metrica -> evidencia -> fuente sin perderse, y termina con un veredicto propio de verificado, dudoso o insuficiente.
@@ -70,7 +70,7 @@ Estas seis personas concretan el north-star para decisiones de producto, UX y pr
 
 - Mapa: `Analista de politicas (Temas)`.
 - Flujos clave: `F-09`, `F-10`, `F-18`.
-- Identidad: 35 anos, consultora de politicas publicas en Madrid, trabaja con briefs y necesita separar lo que es robusto de lo que solo parece una buena historia.
+- Identidad: 35 años, consultora de politicas publicas en Madrid, trabaja con briefs y necesita separar lo que es robusto de lo que solo parece una buena historia.
 - Jobs-to-be-done: ejecutar analisis `dice vs hace` por tema y scope; producir un briefing auditable con deltas, unknown y evidencia enlazada.
 - Momento activador: recibe un encargo sobre un tema concreto, por ejemplo vivienda o energia, y necesita una base reproducible antes de redactar conclusiones.
 - Exito: obtiene tablas exportables, puede filtrar por metodo y cobertura, y cada afirmacion relevante queda respaldada por evidencia primaria.
@@ -89,7 +89,7 @@ Estas seis personas concretan el north-star para decisiones de producto, UX y pr
 
 - Mapa: `Monitor legislativo (Votaciones)`.
 - Flujos clave: `F-11`, `F-12`.
-- Identidad: 38 anos, periodista freelance en Valencia, sigue varias instituciones a la vez y necesita detectar movimientos relevantes antes de que la conversacion publica se cierre.
+- Identidad: 38 años, periodista freelance en Valencia, sigue varias instituciones a la vez y necesita detectar movimientos relevantes antes de que la conversacion publica se cierre.
 - Jobs-to-be-done: vigilar actividad parlamentaria por tema, partido e institucion; detectar posibles cambios de postura con suficiente contexto para publicar o investigar.
 - Momento activador: se abre una sesion relevante o una watchlist marca un evento nuevo que puede alterar una historia en curso.
 - Exito: identifica rapido que paso, quienes se movieron, y si el aparente cambio de postura es comparable o un falso positivo por contexto distinto.
@@ -108,7 +108,7 @@ Estas seis personas concretan el north-star para decisiones de producto, UX y pr
 
 - Mapa: `Operador de calidad de datos (Fuentes y Calidad)`.
 - Flujos clave: `F-15`, `F-16`, `F-24`.
-- Identidad: 33 anos, ingeniera de datos en Barcelona, vive entre conectores, quality gates y bloqueos de fuentes oficiales; mide su trabajo por impacto ciudadano real, no por volumen de logs.
+- Identidad: 33 años, ingeniera de datos en Barcelona, vive entre conectores, quality gates y bloqueos de fuentes oficiales; mide su trabajo por impacto ciudadano real, no por volumen de logs.
 - Jobs-to-be-done: priorizar backlog tecnico segun dano visible en producto; registrar bloqueos externos con evidencia y evitar ciclos inutiles de reintento.
 - Momento activador: cae una fuente, baja una cobertura clave o una area de citizen empieza a mostrar mas `unknown` del aceptable.
 - Exito: sabe que issue arreglar primero, deja evidencia publica verificable cuando algo externo bloquea, y puede demostrar mejora en KPI o cobertura tras el fix.
@@ -127,7 +127,7 @@ Estas seis personas concretan el north-star para decisiones de producto, UX y pr
 
 - Mapa: `Maintainer / release owner`.
 - Flujos clave: `F-25`, `F-26`, `F-19`.
-- Identidad: 44 anos, responsable tecnico del proyecto en Sevilla, piensa en snapshots, privacidad, publicacion estatica y reputacion publica del sistema como un solo problema.
+- Identidad: 44 años, responsable tecnico del proyecto en Sevilla, piensa en snapshots, privacidad, publicacion estatica y reputacion publica del sistema como un solo problema.
 - Jobs-to-be-done: publicar artefactos seguros y reproducibles; responder a incidentes o regresiones con evidencia, no con improvisacion.
 - Momento activador: toca release, aparece una regresion en rutas publicas o falla un gate de privacidad, integridad o calidad.
 - Exito: puede ejecutar el checklist, validar artefactos publicos, publicar GH Pages y snapshot externo, y dejar un rastro claro de lo que cambio.

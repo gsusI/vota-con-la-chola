@@ -22,6 +22,13 @@ const primaryRoutes = [
     note: "Deberes, avisos, decisiones, huecos y evidencia.",
     cta: "Abrir casos",
   },
+  {
+    href: "/calendario-electoral/",
+    label: "Calendario",
+    title: "Ver próximas elecciones",
+    note: "Convocatorias, ciclos legales y fechas condicionales.",
+    cta: "Abrir",
+  },
 ];
 
 const routeGroups = [
@@ -48,6 +55,11 @@ const routeGroups = [
         href: "/policy-outcomes/",
         title: "Resultados de política pública",
         note: "Indicadores asociados a eventos de política.",
+      },
+      {
+        href: "/calendario-electoral/",
+        title: "Calendario electoral",
+        note: "Próximas citas por ámbito, territorio y fuente.",
       },
     ],
   },
@@ -100,6 +112,11 @@ const routeGroups = [
         href: "/elections-behavior/",
         title: "Elecciones y comportamiento",
         note: "Cambios pre/post elección por partido y territorio.",
+      },
+      {
+        href: "/elecciones/andalucia-2026/",
+        title: "Andalucía 2026",
+        note: "Candidaturas oficiales y backlog de scrapers para culpa/mérito.",
       },
     ],
   },

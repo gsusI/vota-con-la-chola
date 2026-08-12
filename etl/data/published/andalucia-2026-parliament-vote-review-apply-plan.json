@@ -1,0 +1,42 @@
+{
+  "actions": [
+    {
+      "action": "would_apply",
+      "effect_outcome": "decree_law_validated_by_majority_yes",
+      "legal_effect_status": "observed_decree_law_validation_vote",
+      "reason": "safe_for_seed_promotion",
+      "review_item_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3",
+      "topic_id": "empleo",
+      "violations": [],
+      "vote_event_id": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3"
+    },
+    {
+      "action": "would_apply",
+      "effect_outcome": "decree_law_validated_by_majority_yes",
+      "legal_effect_status": "observed_decree_law_validation_vote",
+      "reason": "safe_for_seed_promotion",
+      "review_item_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1",
+      "topic_id": "transparencia_corrupcion",
+      "violations": [],
+      "vote_event_id": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1"
+    }
+  ],
+  "allow_machine_drafts": false,
+  "applied_total": 2,
+  "apply_changed": true,
+  "blocked_unsafe_total": 0,
+  "drafts_total": 19,
+  "dry_run": false,
+  "existing_reviews_total": 20,
+  "generated_at": "2026-05-17T11:43:55Z",
+  "missing_review_item_ids": [],
+  "missing_review_item_ids_total": 0,
+  "schema_version": "andalucia_2026_parliament_vote_review_apply_plan_v1",
+  "selected_total": 2,
+  "selection_mode": "explicit_ids",
+  "skipped_duplicate_total": 0,
+  "skipped_unapproved_total": 0,
+  "source_schema_version": "andalucia_2026_parliament_vote_review_drafts_v1",
+  "status": "ready_to_apply",
+  "would_apply_total": 2
+}

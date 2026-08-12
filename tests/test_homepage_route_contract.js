@@ -22,6 +22,8 @@ const expectedRoutes = [
   "/parliamentary-accountability/",
   "/initiative-lifecycle/",
   "/elections-behavior/",
+  "/calendario-electoral/",
+  "/elecciones/andalucia-2026/",
   "/political-positions/",
   "/explorer/",
   "/legal-sanctions/",

@@ -1,0 +1,44 @@
+{
+  "actions": [
+    {
+      "action": "would_apply",
+      "gap_id": "missing_budget_execution",
+      "promoted_review_item_id": "andalucia-2026-execution-review-transparencia-corrupcion-missing-budget-execution-junta-tesoreria-2025-pagos-agregados-tesoreria-2025-movimientos-7z-2025t4-pagos-4-csv-fila-5",
+      "reason": "safe_for_seed_promotion",
+      "review_item_id": "andalucia-2026-execution-draft-transparencia-corrupcion-missing-budget-execution-junta-tesoreria-2025-pagos-agregados-tesoreria-2025-movimientos-7z-2025t4-pagos-4-csv-fila-5",
+      "source_id": "junta_tesoreria_2025_pagos_agregados",
+      "source_locator": "tesoreria_2025_movimientos.7z:2025T4_PAGOS_4.CSV:fila 5",
+      "topic_id": "transparencia_corrupcion",
+      "violations": []
+    },
+    {
+      "action": "would_apply",
+      "gap_id": "missing_outcomes",
+      "promoted_review_item_id": "andalucia-2026-execution-review-transparencia-corrupcion-missing-outcomes-junta-presupuesto-2026-objetivos-indicadores-objetivos-actuaciones-e-indicadores-xlsx-fila-514",
+      "reason": "safe_for_seed_promotion",
+      "review_item_id": "andalucia-2026-execution-draft-transparencia-corrupcion-missing-outcomes-junta-presupuesto-2026-objetivos-indicadores-objetivos-actuaciones-e-indicadores-xlsx-fila-514",
+      "source_id": "junta_presupuesto_2026_objetivos_indicadores",
+      "source_locator": "objetivos-actuaciones-e-indicadores.xlsx:fila 514",
+      "topic_id": "transparencia_corrupcion",
+      "violations": []
+    }
+  ],
+  "allow_machine_drafts": false,
+  "applied_total": 2,
+  "apply_changed": true,
+  "blocked_unsafe_total": 0,
+  "drafts_total": 12,
+  "dry_run": false,
+  "existing_reviews_total": 115,
+  "generated_at": "2026-05-17T12:34:45Z",
+  "missing_review_item_ids": [],
+  "missing_review_item_ids_total": 0,
+  "schema_version": "andalucia_2026_execution_evidence_review_apply_plan_v1",
+  "selected_total": 2,
+  "selection_mode": "explicit_ids",
+  "skipped_duplicate_total": 0,
+  "skipped_unapproved_total": 0,
+  "source_schema_version": "andalucia_2026_execution_evidence_review_drafts_v1",
+  "status": "ready_to_apply",
+  "would_apply_total": 2
+}
