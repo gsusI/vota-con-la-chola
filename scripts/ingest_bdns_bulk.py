@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import resource
+import shutil
 import sqlite3
 import sys
 import threading
@@ -119,6 +120,88 @@ def _display_path(path: Path) -> str:
         return str(path.resolve().relative_to(REPO_ROOT.resolve()))
     except ValueError:
         return path.name
+
+
+def _storage_preflight(
+    path: Path,
+    *,
+    min_free_bytes: int,
+    reserve_bytes: int,
+) -> dict[str, Any]:
+    """Check a storage floor before claiming work that may consume it."""
+    if min_free_bytes < 0:
+        raise ValueError("min_free_bytes must be nonnegative")
+    if reserve_bytes < 0:
+        raise ValueError("reserve_bytes must be nonnegative")
+    path.mkdir(parents=True, exist_ok=True)
+    usage = shutil.disk_usage(path)
+    required_free_bytes = min_free_bytes + reserve_bytes
+    return {
+        "schema_version": "storage_capacity_preflight_v1",
+        "path": _display_path(path),
+        "total_bytes": int(usage.total),
+        "used_bytes": int(usage.used),
+        "free_bytes": int(usage.free),
+        "min_free_bytes": int(min_free_bytes),
+        "reserve_bytes": int(reserve_bytes),
+        "required_free_bytes": int(required_free_bytes),
+        "free_after_reserve_bytes": int(usage.free) - int(reserve_bytes),
+        "headroom_bytes": int(usage.free) - int(required_free_bytes),
+        "ready": int(usage.free) >= int(required_free_bytes),
+    }
+
+
+def _sqlite_storage_path(conn: sqlite3.Connection) -> Path:
+    for row in conn.execute("PRAGMA database_list").fetchall():
+        if str(row[1]) == "main" and str(row[2] or "").strip():
+            return Path(str(row[2])).resolve().parent
+    return Path.cwd()
+
+
+def _worker_storage_preflight(
+    conn: sqlite3.Connection,
+    *,
+    raw_root: Path,
+    min_free_bytes: int,
+    raw_reserve_bytes: int,
+    sqlite_reserve_bytes: int,
+) -> dict[str, Any]:
+    """Check raw-object and SQLite capacity without double-counting one volume."""
+    raw_root.mkdir(parents=True, exist_ok=True)
+    sqlite_root = _sqlite_storage_path(conn)
+    sqlite_root.mkdir(parents=True, exist_ok=True)
+    same_filesystem = raw_root.stat().st_dev == sqlite_root.stat().st_dev
+    if same_filesystem:
+        checks = [
+            _storage_preflight(
+                raw_root,
+                min_free_bytes=min_free_bytes,
+                reserve_bytes=raw_reserve_bytes + sqlite_reserve_bytes,
+            )
+        ]
+    else:
+        checks = [
+            _storage_preflight(
+                raw_root,
+                min_free_bytes=min_free_bytes,
+                reserve_bytes=raw_reserve_bytes,
+            ),
+            _storage_preflight(
+                sqlite_root,
+                min_free_bytes=min_free_bytes,
+                reserve_bytes=sqlite_reserve_bytes,
+            ),
+        ]
+    return {
+        "schema_version": "bdns_worker_storage_preflight_v1",
+        "same_filesystem": same_filesystem,
+        "raw_root": _display_path(raw_root),
+        "sqlite_root": _display_path(sqlite_root),
+        "raw_reserve_bytes": int(raw_reserve_bytes),
+        "sqlite_reserve_bytes": int(sqlite_reserve_bytes),
+        "ready": all(bool(check["ready"]) for check in checks),
+        "checks": checks,
+    }
 
 
 def _write_report(path: str, payload: dict[str, Any]) -> None:
@@ -600,9 +683,7 @@ def expand_bdns_daily_partitions(
         (bulk_run_id,),
     ).fetchall()
     if not partitions:
-        raise RuntimeError(
-            f"pipeline_id is not daily-partitioned: {pipeline_id}"
-        )
+        raise RuntimeError(f"pipeline_id is not daily-partitioned: {pipeline_id}")
 
     work_rows = conn.execute(
         """
@@ -695,9 +776,7 @@ def expand_bdns_daily_partitions(
             int(plan["old_pages"]),
             int(plan["desired_pages"]),
         ):
-            item_key = (
-                f"{partition['partition_key']}:page:{source_page_number:08d}"
-            )
+            item_key = f"{partition['partition_key']}:page:{source_page_number:08d}"
             if item_key in existing_item_keys:
                 continue
             new_items.append(
@@ -730,9 +809,7 @@ def expand_bdns_daily_partitions(
             next_global_page += 1
 
     desired_by_partition_id = {
-        int(plan["partition"]["money_bulk_partition_id"]): int(
-            plan["desired_pages"]
-        )
+        int(plan["partition"]["money_bulk_partition_id"]): int(plan["desired_pages"])
         for plan in plans
     }
     desired_queue_total = sum(
@@ -848,9 +925,7 @@ def expand_bdns_daily_partitions(
             "pages_added": int(queue["inserted_total"]),
             "selected_records_after": int(summary["selected_records"]),
             "total_pages_discovered": int(summary["total_pages"]),
-            "truncated_partitions_after": int(
-                summary["truncated_partitions"] or 0
-            ),
+            "truncated_partitions_after": int(summary["truncated_partitions"] or 0),
             "max_pages_per_partition": max_pages_per_partition,
             "official_partition_contracts_stable": True,
         },
@@ -859,8 +934,7 @@ def expand_bdns_daily_partitions(
                 "partition_key": str(plan["partition"]["partition_key"]),
                 "pages_before": int(plan["old_pages"]),
                 "pages_after": int(plan["desired_pages"]),
-                "pages_added": int(plan["desired_pages"])
-                - int(plan["old_pages"]),
+                "pages_added": int(plan["desired_pages"]) - int(plan["old_pages"]),
             }
             for plan in plans
         ],
@@ -1536,20 +1610,46 @@ def run_worker(
     lease_seconds: int,
     timeout: int,
     max_bytes: int,
+    min_free_bytes: int,
+    sqlite_reserve_multiplier: float,
     download_attempts: int,
     retry_delay_seconds: int,
     request_interval_seconds: float,
     stop_failure_rate: float,
     failure_window_size: int,
 ) -> dict[str, Any]:
+    if sqlite_reserve_multiplier < 0:
+        raise ValueError("sqlite_reserve_multiplier must be nonnegative")
     processed = 0
     successes = 0
     failures = 0
+    blocked_storage = False
     stop_reason = "queue_drained"
+    storage_preflight: dict[str, Any] | None = None
     request_pacer = RequestPacer(request_interval_seconds)
     recent_failures: deque[bool] = deque(maxlen=max(1, failure_window_size))
     while max_items <= 0 or processed < max_items:
         limit = min(claim_size, max_items - processed) if max_items > 0 else claim_size
+        queue_before_claim = work_queue_observability(
+            conn,
+            pipeline_id=pipeline_id,
+            top_limit=1,
+        )
+        if int(queue_before_claim["unfinished_total"]) == 0:
+            break
+        raw_reserve_bytes = int(max_bytes) * max(1, int(limit))
+        sqlite_reserve_bytes = int(raw_reserve_bytes * sqlite_reserve_multiplier)
+        storage_preflight = _worker_storage_preflight(
+            conn,
+            raw_root=raw_root,
+            min_free_bytes=min_free_bytes,
+            raw_reserve_bytes=raw_reserve_bytes,
+            sqlite_reserve_bytes=sqlite_reserve_bytes,
+        )
+        if not storage_preflight["ready"]:
+            blocked_storage = True
+            stop_reason = "insufficient_free_space"
+            break
         claimed = claim_work_items(
             conn,
             pipeline_id=pipeline_id,
@@ -1558,6 +1658,7 @@ def run_worker(
             lease_seconds=lease_seconds,
         )
         if not claimed:
+            stop_reason = "no_claimable_items"
             break
         with ThreadPoolExecutor(max_workers=max(1, workers)) as executor:
             futures = {
@@ -1632,7 +1733,15 @@ def run_worker(
         ):
             stop_reason = "upstream_failure_rate_circuit_open"
             break
-    report = report_bdns_bulk_run(conn, pipeline_id=pipeline_id, finalize=True)
+    if not blocked_storage and max_items > 0 and processed >= max_items:
+        stop_reason = "max_items_reached"
+    report = report_bdns_bulk_run(
+        conn,
+        pipeline_id=pipeline_id,
+        finalize=not blocked_storage,
+    )
+    if blocked_storage:
+        report["status"] = "blocked_storage"
     report["worker"] = {
         "worker_id": worker_id,
         "processed": processed,
@@ -1644,6 +1753,7 @@ def run_worker(
         "stop_failure_rate": stop_failure_rate,
         "failure_window_size": max(1, failure_window_size),
         "stop_reason": stop_reason,
+        "storage_preflight": storage_preflight,
     }
     return report
 
@@ -1687,11 +1797,28 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     work.add_argument("--lease-seconds", type=int, default=300)
     work.add_argument("--timeout", type=int, default=30)
     work.add_argument("--max-bytes", type=int, default=10 * 1024 * 1024)
+    work.add_argument("--min-free-bytes", type=int, default=10 * 1024 * 1024 * 1024)
+    work.add_argument("--sqlite-reserve-multiplier", type=float, default=2.0)
     work.add_argument("--download-attempts", type=int, default=3)
     work.add_argument("--retry-delay-seconds", type=int, default=30)
     work.add_argument("--request-interval-seconds", type=float, default=0.75)
     work.add_argument("--stop-failure-rate", type=float, default=0.5)
     work.add_argument("--failure-window-size", type=int, default=20)
+
+    storage_preflight = subparsers.add_parser("storage-preflight")
+    storage_preflight.add_argument("--raw-root", default=str(DEFAULT_RAW_ROOT))
+    storage_preflight.add_argument("--claim-size", type=int, default=4)
+    storage_preflight.add_argument("--max-bytes", type=int, default=10 * 1024 * 1024)
+    storage_preflight.add_argument(
+        "--min-free-bytes",
+        type=int,
+        default=10 * 1024 * 1024 * 1024,
+    )
+    storage_preflight.add_argument(
+        "--sqlite-reserve-multiplier",
+        type=float,
+        default=2.0,
+    )
 
     report = subparsers.add_parser("report")
     report.add_argument("--finalize", action="store_true")
@@ -1747,12 +1874,29 @@ def main(argv: list[str] | None = None) -> int:
                 lease_seconds=args.lease_seconds,
                 timeout=args.timeout,
                 max_bytes=args.max_bytes,
+                min_free_bytes=args.min_free_bytes,
+                sqlite_reserve_multiplier=args.sqlite_reserve_multiplier,
                 download_attempts=args.download_attempts,
                 retry_delay_seconds=args.retry_delay_seconds,
                 request_interval_seconds=args.request_interval_seconds,
                 stop_failure_rate=args.stop_failure_rate,
                 failure_window_size=args.failure_window_size,
             )
+        elif args.command == "storage-preflight":
+            if args.sqlite_reserve_multiplier < 0:
+                raise ValueError("sqlite_reserve_multiplier must be nonnegative")
+            raw_reserve_bytes = int(args.max_bytes) * max(1, int(args.claim_size))
+            sqlite_reserve_bytes = int(
+                raw_reserve_bytes * float(args.sqlite_reserve_multiplier)
+            )
+            report = _worker_storage_preflight(
+                conn,
+                raw_root=Path(args.raw_root),
+                min_free_bytes=args.min_free_bytes,
+                raw_reserve_bytes=raw_reserve_bytes,
+                sqlite_reserve_bytes=sqlite_reserve_bytes,
+            )
+            report["status"] = "ok" if report["ready"] else "blocked_storage"
         elif args.command == "report":
             report = report_bdns_bulk_run(
                 conn,
@@ -1772,7 +1916,7 @@ def main(argv: list[str] | None = None) -> int:
         conn.close()
     _write_report(args.report_out, report)
     print(json.dumps(report, ensure_ascii=True, sort_keys=True))
-    if report.get("status") == "failed":
+    if report.get("status") in {"failed", "blocked_storage"}:
         return 1
     return 0
 

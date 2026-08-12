@@ -237,6 +237,16 @@ FROM facts
 ORDER BY fact_kind, source_id, jurisdiction, fact_year, numeric_id
 """
 
+
+def capacity_class_for_rows(rows: int) -> str:
+    """Return the shared scale class for an exact count of real rows."""
+    if rows >= 1_000_000:
+        return "s2_1m"
+    if rows >= 100_000:
+        return "s1_100k"
+    return "below_s1_100k"
+
+
 AMOUNT_QUANTUM = Decimal("0.000001")
 LEGAL_ENTITY_IDENTIFIER = re.compile(
     r"^[ABCDEFGHJNPQRSUVW][0-9]{7}[0-9A-J]$", re.IGNORECASE
@@ -988,7 +998,7 @@ def export_money_partitions(
             "promotion_checks": promotion_checks,
             "promotion_gate_passed": all(promotion_checks.values()),
             "publication_status": "local_generated_not_published",
-            "capacity_class": "below_s1_100k" if rows < 100_000 else "s1_100k",
+            "capacity_class": capacity_class_for_rows(rows),
             "performance": {
                 "fingerprint_seconds": round(scan_seconds, 6),
                 "materialize_seconds": round(export_seconds, 6),

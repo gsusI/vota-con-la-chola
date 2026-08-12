@@ -1,0 +1,25 @@
+{
+  "checks": [
+    {
+      "free_after_reserve_bytes": 5560033280,
+      "free_bytes": 5685862400,
+      "headroom_bytes": -5177384960,
+      "min_free_bytes": 10737418240,
+      "path": "etl/data/object-origin/bdns-concessions-partitioned-real-s3-20260812",
+      "ready": false,
+      "required_free_bytes": 10863247360,
+      "reserve_bytes": 125829120,
+      "schema_version": "storage_capacity_preflight_v1",
+      "total_bytes": 994662584320,
+      "used_bytes": 988976721920
+    }
+  ],
+  "raw_reserve_bytes": 41943040,
+  "raw_root": "etl/data/object-origin/bdns-concessions-partitioned-real-s3-20260812",
+  "ready": false,
+  "same_filesystem": true,
+  "schema_version": "bdns_worker_storage_preflight_v1",
+  "sqlite_reserve_bytes": 83886080,
+  "sqlite_root": "etl/data/staging",
+  "status": "blocked_storage"
+}

@@ -6,6 +6,8 @@ import tempfile
 import unittest
 from collections import deque
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from publicdata_connectors_es.money.bdns_bulk import (
     build_bdns_concessions_url,
@@ -18,12 +20,14 @@ from scripts.ingest_bdns_bulk import (
     _failure_circuit_open,
     _open_runtime,
     _persist_record_version_lineage,
+    _storage_preflight,
     backfill_record_version_lineage,
     enqueue_bdns_daily_partitions,
     enqueue_bdns_pages,
     expand_bdns_daily_partitions,
     persist_bdns_page,
     report_bdns_bulk_run,
+    run_worker,
 )
 
 
@@ -62,6 +66,99 @@ def _row(row_id: int, *, entity_prefix: str = "G12345678") -> dict[str, object]:
 
 
 class TestBdnsBulkIngest(unittest.TestCase):
+    OFFICIAL_CAPTURE = Path(
+        "etl/data/raw/official-captures/bdns/concesiones-page-0-20260812.json"
+    )
+
+    def test_storage_preflight_reserves_claim_before_enforcing_floor(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            usage = SimpleNamespace(total=1_000, used=600, free=400)
+            with patch(
+                "scripts.ingest_bdns_bulk.shutil.disk_usage",
+                return_value=usage,
+            ):
+                ready = _storage_preflight(
+                    root,
+                    min_free_bytes=200,
+                    reserve_bytes=150,
+                )
+                blocked = _storage_preflight(
+                    root,
+                    min_free_bytes=300,
+                    reserve_bytes=150,
+                )
+
+            self.assertTrue(ready["ready"])
+            self.assertEqual(ready["headroom_bytes"], 50)
+            self.assertEqual(ready["free_after_reserve_bytes"], 250)
+            self.assertFalse(blocked["ready"])
+            self.assertEqual(blocked["headroom_bytes"], -50)
+
+    def test_worker_blocks_before_claim_or_network_when_storage_is_low(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            conn = _open_runtime(
+                root / "bdns.db",
+                Path("etl/load/sqlite_schema.sql"),
+            )
+            try:
+                official_payload = self.OFFICIAL_CAPTURE.read_bytes()
+
+                def fetch_official(url: str, timeout: int) -> tuple[bytes, str]:
+                    self.assertGreater(timeout, 0)
+                    self.assertIn("page=0", url)
+                    return official_payload, "application/json"
+
+                enqueue_bdns_pages(
+                    conn,
+                    pipeline_id="bdns-storage-test",
+                    snapshot_date="2026-08-12",
+                    page_size=10,
+                    max_pages=1,
+                    timeout=10,
+                    fetch_bytes=fetch_official,
+                )
+                with patch(
+                    "scripts.ingest_bdns_bulk._worker_storage_preflight",
+                    return_value={
+                        "schema_version": "bdns_worker_storage_preflight_v1",
+                        "ready": False,
+                        "checks": [{"ready": False}],
+                    },
+                ):
+                    report = run_worker(
+                        conn,
+                        pipeline_id="bdns-storage-test",
+                        worker_id="storage-test-worker",
+                        raw_root=root / "raw",
+                        workers=1,
+                        claim_size=1,
+                        max_items=1,
+                        lease_seconds=60,
+                        timeout=10,
+                        max_bytes=1_000,
+                        min_free_bytes=100,
+                        sqlite_reserve_multiplier=2.0,
+                        download_attempts=1,
+                        retry_delay_seconds=0,
+                        request_interval_seconds=0,
+                        stop_failure_rate=0.5,
+                        failure_window_size=20,
+                    )
+
+                self.assertEqual(report["status"], "blocked_storage")
+                self.assertEqual(report["worker"]["processed"], 0)
+                self.assertEqual(
+                    report["worker"]["stop_reason"],
+                    "insufficient_free_space",
+                )
+                queue = report["queue"]
+                self.assertEqual(queue["state_counts"]["pending"], 1)
+                self.assertEqual(queue["attempts_total"], 0)
+            finally:
+                conn.close()
+
     def test_daily_partition_persists_discovered_and_enqueued_pages(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             conn = _open_runtime(
@@ -151,9 +248,7 @@ class TestBdnsBulkIngest(unittest.TestCase):
                 self.assertEqual(expanded["expansion"]["pages_before"], 2)
                 self.assertEqual(expanded["expansion"]["pages_after"], 3)
                 self.assertEqual(expanded["expansion"]["pages_added"], 1)
-                self.assertEqual(
-                    expanded["expansion"]["truncated_partitions_after"], 0
-                )
+                self.assertEqual(expanded["expansion"]["truncated_partitions_after"], 0)
                 payloads = [
                     json.loads(str(row[0]))
                     for row in conn.execute(

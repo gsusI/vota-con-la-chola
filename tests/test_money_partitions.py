@@ -7,13 +7,25 @@ import unittest
 from pathlib import Path
 
 from publicdata_publish.money_partition_validation import validate_money_partitions
-from publicdata_publish.money_partitions import _iter_rows, export_money_partitions
+from publicdata_publish.money_partitions import (
+    _iter_rows,
+    capacity_class_for_rows,
+    export_money_partitions,
+)
 
 try:
     import pyarrow
     import pyarrow.parquet as pq
 except ModuleNotFoundError:
     pyarrow = None
+
+
+class TestMoneyPartitionCapacityClass(unittest.TestCase):
+    def test_capacity_boundaries(self) -> None:
+        self.assertEqual(capacity_class_for_rows(99_999), "below_s1_100k")
+        self.assertEqual(capacity_class_for_rows(100_000), "s1_100k")
+        self.assertEqual(capacity_class_for_rows(999_999), "s1_100k")
+        self.assertEqual(capacity_class_for_rows(1_000_000), "s2_1m")
 
 
 @unittest.skipIf(pyarrow is None, "pyarrow optional dependency is not installed")
