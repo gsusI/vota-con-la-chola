@@ -1,18 +1,18 @@
 {
   "meta": {
     "schema_version": "accountability_dossier_snapshot_v1",
-    "generated_at": "2026-08-12T10:51:09+00:00",
-    "snapshot_date": "2026-02-12",
+    "generated_at": "2026-08-12T13:17:53+00:00",
+    "snapshot_date": "2026-08-12",
     "max_actors": 5000,
     "max_issues": 5000,
     "max_issues_per_actor": 12,
     "max_actors_per_issue": 25
   },
-  "snapshot_date": "2026-02-12",
+  "snapshot_date": "2026-08-12",
   "coverage": {
     "entries_total": 126760,
-    "actors_total": 923,
-    "actors_exported": 923,
+    "actors_total": 921,
+    "actors_exported": 921,
     "actors_truncated": false,
     "issues_total": 226,
     "issues_exported": 226,
@@ -22,7 +22,7 @@
     "entries_with_party_id": 1255,
     "entries_with_parliamentary_group_id": 126068,
     "entries_with_mandate_id": 119816,
-    "entries_with_institution_id": 126745,
+    "entries_with_institution_id": 126748,
     "entries_with_org_unit_id": 0,
     "entries_with_position_id": 12,
     "entries_by_role": {
@@ -95533,12 +95533,13 @@
       "actor_label": "Cortes Generales",
       "actor_kind": "institution",
       "institution_id": 8165,
-      "entries_total": 6,
-      "issues_total": 6,
+      "entries_total": 7,
+      "issues_total": 7,
       "roles": {
-        "approved": 6
+        "approved": 7
       },
       "entry_kinds": {
+        "responsibility_link": 1,
         "rule": 6
       },
       "first_date": "2000-08-08",
@@ -95582,6 +95583,19 @@
           },
           "first_date": "2015-10-31",
           "last_date": "2015-10-31"
+        },
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entries_total": 1,
+          "roles": {
+            "approved": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
         },
         {
           "issue_id": "legal-norm:es:boe-a-2003-23186",
@@ -104201,6 +104215,51 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
+        }
+      ]
+    },
+    {
+      "actor_key": "institution_id:8259",
+      "actor_label": "Jefatura del Estado",
+      "actor_kind": "institution",
+      "institution_id": 8259,
+      "entries_total": 2,
+      "issues_total": 2,
+      "roles": {
+        "published": 2
+      },
+      "entry_kinds": {
+        "responsibility_link": 1,
+        "rule": 1
+      },
+      "first_date": "2026-02-12",
+      "last_date": "2026-02-12",
+      "top_issues": [
+        {
+          "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
+          "issue_label": "Correcci\u00f3n de errores del Real Decreto-ley 1/2026, de 27 de enero, de ayudas a las v\u00edctimas de los accidentes ferroviarios de Adamuz (C\u00f3rdoba) y G\u00e9lida (Barcelona).",
+          "entries_total": 1,
+          "roles": {
+            "published": 1
+          },
+          "entry_kinds": {
+            "rule": 1
+          },
+          "first_date": "2026-02-12",
+          "last_date": "2026-02-12"
+        },
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entries_total": 1,
+          "roles": {
+            "published": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
         }
       ]
     },
@@ -114122,9 +114181,10 @@
       ]
     },
     {
-      "actor_key": "institution:label:agencia estatal de administracion tributaria",
+      "actor_key": "institution_id:8554",
       "actor_label": "Agencia Estatal de Administracion Tributaria",
       "actor_kind": "institution",
+      "institution_id": 8554,
       "entries_total": 1,
       "issues_total": 1,
       "roles": {
@@ -114272,34 +114332,6 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution:label:cortes generales",
-      "actor_label": "Cortes Generales",
-      "actor_kind": "institution",
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "approved": 1
-      },
-      "entry_kinds": {
-        "responsibility_link": 1
-      },
-      "top_issues": [
-        {
-          "issue_id": "cash-payment-limit-spain",
-          "issue_label": "Limite de pagos en efectivo en Espana",
-          "entries_total": 1,
-          "roles": {
-            "approved": 1
-          },
-          "entry_kinds": {
-            "responsibility_link": 1
-          },
-          "first_date": "",
-          "last_date": ""
         }
       ]
     },
@@ -114457,65 +114489,6 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8259",
-      "actor_label": "JEFATURA DEL ESTADO",
-      "actor_kind": "institution",
-      "institution_id": 8259,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "published": 1
-      },
-      "entry_kinds": {
-        "rule": 1
-      },
-      "first_date": "2026-02-12",
-      "last_date": "2026-02-12",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
-          "issue_label": "Correcci\u00f3n de errores del Real Decreto-ley 1/2026, de 27 de enero, de ayudas a las v\u00edctimas de los accidentes ferroviarios de Adamuz (C\u00f3rdoba) y G\u00e9lida (Barcelona).",
-          "entries_total": 1,
-          "roles": {
-            "published": 1
-          },
-          "entry_kinds": {
-            "rule": 1
-          },
-          "first_date": "2026-02-12",
-          "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution:label:jefatura del estado",
-      "actor_label": "Jefatura del Estado",
-      "actor_kind": "institution",
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "published": 1
-      },
-      "entry_kinds": {
-        "responsibility_link": 1
-      },
-      "top_issues": [
-        {
-          "issue_id": "cash-payment-limit-spain",
-          "issue_label": "Limite de pagos en efectivo en Espana",
-          "entries_total": 1,
-          "roles": {
-            "published": 1
-          },
-          "entry_kinds": {
-            "responsibility_link": 1
-          },
-          "first_date": "",
-          "last_date": ""
         }
       ]
     },
@@ -182521,14 +182494,14 @@
       },
       "top_actors": [
         {
-          "actor_key": "institution:label:agencia estatal de administracion tributaria",
+          "actor_key": "institution_id:8554",
           "actor_label": "Agencia Estatal de Administracion Tributaria",
           "actor_kind": "institution",
           "person_id": null,
           "party_id": null,
           "parliamentary_group_id": null,
           "mandate_id": null,
-          "institution_id": null,
+          "institution_id": 8554,
           "org_unit_id": null,
           "position_id": null,
           "entries_total": 1,
@@ -182542,14 +182515,14 @@
           "last_date": ""
         },
         {
-          "actor_key": "institution:label:cortes generales",
+          "actor_key": "institution_id:8165",
           "actor_label": "Cortes Generales",
           "actor_kind": "institution",
           "person_id": null,
           "party_id": null,
           "parliamentary_group_id": null,
           "mandate_id": null,
-          "institution_id": null,
+          "institution_id": 8165,
           "org_unit_id": null,
           "position_id": null,
           "entries_total": 1,
@@ -182563,14 +182536,14 @@
           "last_date": ""
         },
         {
-          "actor_key": "institution:label:jefatura del estado",
+          "actor_key": "institution_id:8259",
           "actor_label": "Jefatura del Estado",
           "actor_kind": "institution",
           "person_id": null,
           "party_id": null,
           "parliamentary_group_id": null,
           "mandate_id": null,
-          "institution_id": null,
+          "institution_id": 8259,
           "org_unit_id": null,
           "position_id": null,
           "entries_total": 1,
