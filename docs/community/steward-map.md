@@ -1,9 +1,9 @@
 # Steward map
 
-Verified GitHub handles on `2026-05-11`:
+Verified GitHub handles on `2026-08-10`:
 
 - `@gsusI`: repository collaborator with admin, maintain, and push permissions.
-- `@codex`: automation contributor visible in repository contributors; no maintainer authority.
+- Automation accounts and generated commits have no maintainer authority.
 
 | Area | Steward | Scope |
 |---|---|---|

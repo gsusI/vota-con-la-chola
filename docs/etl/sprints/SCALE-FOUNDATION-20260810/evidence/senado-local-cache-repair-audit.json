@@ -1,0 +1,409 @@
+{
+  "baseline": {
+    "checks": {
+      "foreign_keys": false,
+      "million_member_votes": false,
+      "recognized_vote_choices": true,
+      "sqlite_integrity": true
+    },
+    "database_bytes": 1531031552,
+    "database_file": "politicos-es.recovered.db",
+    "database_sha256": "8efa9154e352b2db4381c26d100e5bf38da7d8da508e29c9f858ceb9dcab1c6f",
+    "entity_counts": {
+      "mandates": 77353,
+      "persons": 68562
+    },
+    "foreign_key_errors": 44646,
+    "has_totals_absent_column": true,
+    "integrity_check": [
+      "ok"
+    ],
+    "mismatch_profile": {
+      "sources": {
+        "congreso_votaciones": {
+          "classes": {
+            "observed_rows_above_official_categories": 0,
+            "observed_rows_below_official_categories": 11,
+            "same_category_total_wrong_distribution": 0
+          },
+          "dimensions": {
+            "absent": {
+              "absolute_delta_sum": 0,
+              "events_mismatched": 0,
+              "max_absolute_delta": 0,
+              "observed_minus_expected_sum": 0
+            },
+            "abstain": {
+              "absolute_delta_sum": 363,
+              "events_mismatched": 4,
+              "max_absolute_delta": 153,
+              "observed_minus_expected_sum": -363
+            },
+            "no": {
+              "absolute_delta_sum": 485,
+              "events_mismatched": 6,
+              "max_absolute_delta": 165,
+              "observed_minus_expected_sum": -485
+            },
+            "no_vote": {
+              "absolute_delta_sum": 22,
+              "events_mismatched": 8,
+              "max_absolute_delta": 7,
+              "observed_minus_expected_sum": -22
+            },
+            "yes": {
+              "absolute_delta_sum": 1876,
+              "events_mismatched": 9,
+              "max_absolute_delta": 333,
+              "observed_minus_expected_sum": -1876
+            }
+          },
+          "events": 11
+        },
+        "senado_votaciones": {
+          "classes": {
+            "observed_rows_above_official_categories": 0,
+            "observed_rows_below_official_categories": 1235,
+            "same_category_total_wrong_distribution": 0
+          },
+          "dimensions": {
+            "absent": {
+              "absolute_delta_sum": 0,
+              "events_mismatched": 0,
+              "max_absolute_delta": 0,
+              "observed_minus_expected_sum": 0
+            },
+            "abstain": {
+              "absolute_delta_sum": 13507,
+              "events_mismatched": 811,
+              "max_absolute_delta": 133,
+              "observed_minus_expected_sum": -13507
+            },
+            "no": {
+              "absolute_delta_sum": 100306,
+              "events_mismatched": 1112,
+              "max_absolute_delta": 247,
+              "observed_minus_expected_sum": -100306
+            },
+            "no_vote": {
+              "absolute_delta_sum": 833,
+              "events_mismatched": 222,
+              "max_absolute_delta": 14,
+              "observed_minus_expected_sum": -833
+            },
+            "yes": {
+              "absolute_delta_sum": 62793,
+              "events_mismatched": 1012,
+              "max_absolute_delta": 254,
+              "observed_minus_expected_sum": -62793
+            }
+          },
+          "events": 1235
+        }
+      },
+      "total": {
+        "classes": {
+          "observed_rows_above_official_categories": 0,
+          "observed_rows_below_official_categories": 1246,
+          "same_category_total_wrong_distribution": 0
+        },
+        "dimensions": {
+          "absent": {
+            "absolute_delta_sum": 0,
+            "events_mismatched": 0,
+            "max_absolute_delta": 0,
+            "observed_minus_expected_sum": 0
+          },
+          "abstain": {
+            "absolute_delta_sum": 13870,
+            "events_mismatched": 815,
+            "max_absolute_delta": 153,
+            "observed_minus_expected_sum": -13870
+          },
+          "no": {
+            "absolute_delta_sum": 100791,
+            "events_mismatched": 1118,
+            "max_absolute_delta": 247,
+            "observed_minus_expected_sum": -100791
+          },
+          "no_vote": {
+            "absolute_delta_sum": 855,
+            "events_mismatched": 230,
+            "max_absolute_delta": 14,
+            "observed_minus_expected_sum": -855
+          },
+          "yes": {
+            "absolute_delta_sum": 64669,
+            "events_mismatched": 1021,
+            "max_absolute_delta": 333,
+            "observed_minus_expected_sum": -64669
+          }
+        },
+        "events": 1246
+      }
+    },
+    "sources": [
+      {
+        "events_absent_totals_available": 0,
+        "events_not_reconciled": 11,
+        "events_reconciled": 1591,
+        "events_reconciled_pct": 0.993134,
+        "events_total": 2823,
+        "events_totals_available": 1602,
+        "events_totals_unavailable": 0,
+        "events_with_member_votes": 1602,
+        "member_votes": 557922,
+        "member_votes_absent": 0,
+        "member_votes_other_choice": 0,
+        "member_votes_with_person_id": 531812,
+        "member_votes_with_person_id_pct": 0.953201,
+        "source_id": "congreso_votaciones"
+      },
+      {
+        "events_absent_totals_available": 0,
+        "events_not_reconciled": 1235,
+        "events_reconciled": 383,
+        "events_reconciled_pct": 0.236712,
+        "events_total": 5534,
+        "events_totals_available": 1618,
+        "events_totals_unavailable": 0,
+        "events_with_member_votes": 1618,
+        "member_votes": 250646,
+        "member_votes_absent": 18719,
+        "member_votes_other_choice": 0,
+        "member_votes_with_person_id": 162104,
+        "member_votes_with_person_id_pct": 0.646745,
+        "source_id": "senado_votaciones"
+      }
+    ],
+    "totals": {
+      "events_absent_totals_available": 0,
+      "events_not_reconciled": 1246,
+      "events_reconciled": 1974,
+      "events_reconciled_pct": 0.613043,
+      "events_total": 8357,
+      "events_totals_available": 3220,
+      "events_totals_unavailable": 0,
+      "events_with_member_votes": 3220,
+      "member_votes": 808568,
+      "member_votes_absent": 18719,
+      "member_votes_other_choice": 0,
+      "member_votes_with_person_id": 693916,
+      "member_votes_with_person_id_pct": 0.858204
+    }
+  },
+  "current": {
+    "checks": {
+      "foreign_keys": true,
+      "million_member_votes": true,
+      "recognized_vote_choices": true,
+      "sqlite_integrity": true
+    },
+    "database_bytes": 2659622912,
+    "database_file": "vota-recovered-scale-repair-v2-20260810.db",
+    "database_sha256": "2cf93423ae52d062a3134f8b6bff538f36c013ac11bae00ec7d68e0f0995d956",
+    "entity_counts": {
+      "mandates": 80713,
+      "persons": 69510
+    },
+    "foreign_key_errors": 0,
+    "has_totals_absent_column": true,
+    "integrity_check": [
+      "ok"
+    ],
+    "mismatch_profile": {
+      "sources": {
+        "congreso_votaciones": {
+          "classes": {
+            "observed_rows_above_official_categories": 0,
+            "observed_rows_below_official_categories": 11,
+            "same_category_total_wrong_distribution": 0
+          },
+          "dimensions": {
+            "absent": {
+              "absolute_delta_sum": 0,
+              "events_mismatched": 0,
+              "max_absolute_delta": 0,
+              "observed_minus_expected_sum": 0
+            },
+            "abstain": {
+              "absolute_delta_sum": 363,
+              "events_mismatched": 4,
+              "max_absolute_delta": 153,
+              "observed_minus_expected_sum": -363
+            },
+            "no": {
+              "absolute_delta_sum": 485,
+              "events_mismatched": 6,
+              "max_absolute_delta": 165,
+              "observed_minus_expected_sum": -485
+            },
+            "no_vote": {
+              "absolute_delta_sum": 22,
+              "events_mismatched": 8,
+              "max_absolute_delta": 7,
+              "observed_minus_expected_sum": -22
+            },
+            "yes": {
+              "absolute_delta_sum": 1876,
+              "events_mismatched": 9,
+              "max_absolute_delta": 333,
+              "observed_minus_expected_sum": -1876
+            }
+          },
+          "events": 11
+        },
+        "senado_votaciones": {
+          "classes": {
+            "observed_rows_above_official_categories": 0,
+            "observed_rows_below_official_categories": 1104,
+            "same_category_total_wrong_distribution": 7
+          },
+          "dimensions": {
+            "absent": {
+              "absolute_delta_sum": 289,
+              "events_mismatched": 20,
+              "max_absolute_delta": 50,
+              "observed_minus_expected_sum": -107
+            },
+            "abstain": {
+              "absolute_delta_sum": 7294,
+              "events_mismatched": 535,
+              "max_absolute_delta": 133,
+              "observed_minus_expected_sum": -7288
+            },
+            "no": {
+              "absolute_delta_sum": 58584,
+              "events_mismatched": 979,
+              "max_absolute_delta": 247,
+              "observed_minus_expected_sum": -57838
+            },
+            "no_vote": {
+              "absolute_delta_sum": 491,
+              "events_mismatched": 147,
+              "max_absolute_delta": 12,
+              "observed_minus_expected_sum": -479
+            },
+            "yes": {
+              "absolute_delta_sum": 39892,
+              "events_mismatched": 743,
+              "max_absolute_delta": 252,
+              "observed_minus_expected_sum": -38840
+            }
+          },
+          "events": 1111
+        }
+      },
+      "total": {
+        "classes": {
+          "observed_rows_above_official_categories": 0,
+          "observed_rows_below_official_categories": 1115,
+          "same_category_total_wrong_distribution": 7
+        },
+        "dimensions": {
+          "absent": {
+            "absolute_delta_sum": 289,
+            "events_mismatched": 20,
+            "max_absolute_delta": 50,
+            "observed_minus_expected_sum": -107
+          },
+          "abstain": {
+            "absolute_delta_sum": 7657,
+            "events_mismatched": 539,
+            "max_absolute_delta": 153,
+            "observed_minus_expected_sum": -7651
+          },
+          "no": {
+            "absolute_delta_sum": 59069,
+            "events_mismatched": 985,
+            "max_absolute_delta": 247,
+            "observed_minus_expected_sum": -58323
+          },
+          "no_vote": {
+            "absolute_delta_sum": 513,
+            "events_mismatched": 155,
+            "max_absolute_delta": 12,
+            "observed_minus_expected_sum": -501
+          },
+          "yes": {
+            "absolute_delta_sum": 41768,
+            "events_mismatched": 752,
+            "max_absolute_delta": 333,
+            "observed_minus_expected_sum": -40716
+          }
+        },
+        "events": 1122
+      }
+    },
+    "sources": [
+      {
+        "events_absent_totals_available": 0,
+        "events_not_reconciled": 11,
+        "events_reconciled": 1591,
+        "events_reconciled_pct": 0.993134,
+        "events_total": 2823,
+        "events_totals_available": 1602,
+        "events_totals_unavailable": 0,
+        "events_with_member_votes": 1602,
+        "member_votes": 557922,
+        "member_votes_absent": 0,
+        "member_votes_other_choice": 0,
+        "member_votes_with_person_id": 557922,
+        "member_votes_with_person_id_pct": 1.0,
+        "source_id": "congreso_votaciones"
+      },
+      {
+        "events_absent_totals_available": 4237,
+        "events_not_reconciled": 1111,
+        "events_reconciled": 4239,
+        "events_reconciled_pct": 0.792336,
+        "events_total": 5534,
+        "events_totals_available": 5350,
+        "events_totals_unavailable": 30,
+        "events_with_member_votes": 5380,
+        "member_votes": 1319111,
+        "member_votes_absent": 34565,
+        "member_votes_other_choice": 0,
+        "member_votes_with_person_id": 1319111,
+        "member_votes_with_person_id_pct": 1.0,
+        "source_id": "senado_votaciones"
+      }
+    ],
+    "totals": {
+      "events_absent_totals_available": 4237,
+      "events_not_reconciled": 1122,
+      "events_reconciled": 5830,
+      "events_reconciled_pct": 0.838608,
+      "events_total": 8357,
+      "events_totals_available": 6952,
+      "events_totals_unavailable": 30,
+      "events_with_member_votes": 6982,
+      "member_votes": 1877033,
+      "member_votes_absent": 34565,
+      "member_votes_other_choice": 0,
+      "member_votes_with_person_id": 1877033,
+      "member_votes_with_person_id_pct": 1.0
+    }
+  },
+  "delta": {
+    "entity_counts": {
+      "mandates": 3360,
+      "persons": 948
+    },
+    "events_not_reconciled": -124,
+    "events_reconciled": 3856,
+    "events_reconciled_pct_points": 22.5565,
+    "events_with_member_votes": 3762,
+    "foreign_key_errors": -44646,
+    "member_votes": 1068465,
+    "member_votes_with_person_id": 1183117
+  },
+  "generated_at": "2026-08-10T16:19:45+00:00",
+  "limitations": [
+    "Tally reconciliation proves agreement with published aggregates; it does not prove the upstream roll call is complete or substantively correct.",
+    "Absent is distinct from no-vote and is compared only where the event stores an explicit absence total.",
+    "Mismatch classes compare observed member-row category counts with the official categories available for that event; they identify repair shape, not cause or responsibility.",
+    "A person_id coverage gap remains a separate identity-resolution problem."
+  ],
+  "schema_version": "vote_database_audit_v2"
+}

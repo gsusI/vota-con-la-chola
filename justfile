@@ -18,6 +18,28 @@ live_parl_senado_legs := env_var_or_default("LIVE_PARL_SENADO_LEGS", "15")
 galicia_manual_dir := env_var_or_default("GALICIA_MANUAL_DIR", "etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages")
 navarra_manual_dir := env_var_or_default("NAVARRA_MANUAL_DIR", "etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages")
 infoelectoral_timeout := env_var_or_default("INFOELECTORAL_TIMEOUT", "30")
+infoelectoral_elected_store_root := env_var_or_default("INFOELECTORAL_ELECTED_STORE_ROOT", "etl/data/object-origin/infoelectoral-elected-officials")
+infoelectoral_elected_manifest_root := env_var_or_default("INFOELECTORAL_ELECTED_MANIFEST_ROOT", "etl/data/raw/infoelectoral/elected-officials/manifests")
+infoelectoral_elected_report := env_var_or_default("INFOELECTORAL_ELECTED_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/infoelectoral-elected-officials-real-20260811.json")
+infoelectoral_elected_min_free_bytes := env_var_or_default("INFOELECTORAL_ELECTED_MIN_FREE_BYTES", "5368709120")
+infoelectoral_candidate_pipeline_id := env_var_or_default("INFOELECTORAL_CANDIDATE_PIPELINE_ID", "infoelectoral-candidates-v1")
+infoelectoral_candidate_store_root := env_var_or_default("INFOELECTORAL_CANDIDATE_STORE_ROOT", "etl/data/object-origin/restricted/infoelectoral-candidates")
+infoelectoral_candidate_local_archive_dir := env_var_or_default("INFOELECTORAL_CANDIDATE_LOCAL_ARCHIVE_DIR", "")
+infoelectoral_candidate_report := env_var_or_default("INFOELECTORAL_CANDIDATE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/infoelectoral-candidate-archive-queue-latest.json")
+infoelectoral_candidate_worker_max_items := env_var_or_default("INFOELECTORAL_CANDIDATE_WORKER_MAX_ITEMS", "1")
+infoelectoral_candidate_min_free_bytes := env_var_or_default("INFOELECTORAL_CANDIDATE_MIN_FREE_BYTES", "5368709120")
+andalucia_execution_source_discovery_out := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_DISCOVERY_OUT", "etl/data/published/andalucia-2026-execution-source-discovery.json")
+andalucia_execution_source_query_timeout := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_QUERY_TIMEOUT", "10")
+andalucia_execution_source_max_topic_terms := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_MAX_TOPIC_TERMS", "0")
+andalucia_execution_source_probe_timeout := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_PROBE_TIMEOUT", "6")
+andalucia_execution_source_max_resource_probes := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_MAX_RESOURCE_PROBES", "12")
+andalucia_delivery_hunt_results_out := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_RESULTS_OUT", "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json")
+andalucia_delivery_hunt_public_out := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_PUBLIC_OUT", "ui/gh-pages-next/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json")
+andalucia_delivery_review_drafts_out := env_var_or_default("ANDALUCIA_DELIVERY_REVIEW_DRAFTS_OUT", "etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json")
+andalucia_delivery_review_drafts_public_out := env_var_or_default("ANDALUCIA_DELIVERY_REVIEW_DRAFTS_PUBLIC_OUT", "ui/gh-pages-next/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json")
+andalucia_delivery_hunt_max_targets := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_MAX_TARGETS", "40")
+andalucia_delivery_hunt_rows_per_query := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_ROWS_PER_QUERY", "3")
+andalucia_delivery_hunt_timeout := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_TIMEOUT", "12")
 senado_detail_workers := env_var_or_default("SENADO_DETAIL_WORKERS", "16")
 senado_detail_timeout := env_var_or_default("SENADO_DETAIL_TIMEOUT", "8")
 senado_detail_max_events := env_var_or_default("SENADO_DETAIL_MAX_EVENTS", "30")
@@ -208,6 +230,148 @@ text_extraction_queue_formats := env_var_or_default("TEXT_EXTRACTION_QUEUE_FORMA
 text_extraction_queue_limit := env_var_or_default("TEXT_EXTRACTION_QUEUE_LIMIT", "0")
 text_extraction_queue_out := env_var_or_default("TEXT_EXTRACTION_QUEUE_OUT", "docs/etl/sprints/AI-OPS-28/exports/text_extraction_queue.csv")
 text_extraction_queue_summary_out := env_var_or_default("TEXT_EXTRACTION_QUEUE_SUMMARY_OUT", "docs/etl/sprints/AI-OPS-28/evidence/text_extraction_queue_summary.json")
+scale_queue_enqueue_batch_size := env_var_or_default("SCALE_QUEUE_ENQUEUE_BATCH_SIZE", "5000")
+scale_queue_claim_batch_size := env_var_or_default("SCALE_QUEUE_CLAIM_BATCH_SIZE", "2000")
+scale_readiness_report_out := env_var_or_default("SCALE_READINESS_REPORT_OUT", "etl/data/published/scale-readiness-latest.json")
+scale_member_vote_snapshot := env_var_or_default("SCALE_MEMBER_VOTE_SNAPSHOT", "etl/data/published/votaciones-es-2026-02-25.json")
+scale_member_vote_audit_out := env_var_or_default("SCALE_MEMBER_VOTE_AUDIT_OUT", "etl/data/published/member-vote-million-audit-latest.json")
+scale_vote_db_audit_out := env_var_or_default("SCALE_VOTE_DB_AUDIT_OUT", "etl/data/published/vote-database-audit-latest.json")
+scale_vote_db_shard_root := env_var_or_default("SCALE_VOTE_DB_SHARD_ROOT", "etl/data/derived/vote-db-shards")
+scale_vote_db_shard_manifest_out := env_var_or_default("SCALE_VOTE_DB_SHARD_MANIFEST_OUT", "etl/data/published/vote-database-shard-manifest-latest.json")
+scale_vote_db_shard_validation_out := env_var_or_default("SCALE_VOTE_DB_SHARD_VALIDATION_OUT", "etl/data/published/vote-database-shard-validation-latest.json")
+scale_semantic_member_vote_root := env_var_or_default("SCALE_SEMANTIC_MEMBER_VOTE_ROOT", "etl/data/derived/semantic-member-votes")
+scale_semantic_member_vote_manifest_out := env_var_or_default("SCALE_SEMANTIC_MEMBER_VOTE_MANIFEST_OUT", "etl/data/published/member-vote-semantic-partition-manifest-latest.json")
+scale_semantic_member_vote_validation_out := env_var_or_default("SCALE_SEMANTIC_MEMBER_VOTE_VALIDATION_OUT", "etl/data/published/member-vote-semantic-partition-validation-latest.json")
+scale_semantic_previous_manifest := env_var_or_default("SCALE_SEMANTIC_PREVIOUS_MANIFEST", "")
+scale_semantic_previous_root := env_var_or_default("SCALE_SEMANTIC_PREVIOUS_ROOT", "")
+scale_semantic_vote_audit := env_var_or_default("SCALE_SEMANTIC_VOTE_AUDIT", "")
+scale_semantic_min_rows := env_var_or_default("SCALE_SEMANTIC_MIN_ROWS", "1")
+scale_semantic_row_group_rows := env_var_or_default("SCALE_SEMANTIC_ROW_GROUP_ROWS", "25000")
+scale_semantic_max_file_rows := env_var_or_default("SCALE_SEMANTIC_MAX_FILE_ROWS", "100000")
+scale_semantic_ledger_root := env_var_or_default("SCALE_SEMANTIC_LEDGER_ROOT", "etl/data/derived/semantic-accountability-ledger")
+scale_semantic_ledger_manifest_out := env_var_or_default("SCALE_SEMANTIC_LEDGER_MANIFEST_OUT", "etl/data/published/accountability-ledger-semantic-partition-manifest-latest.json")
+scale_semantic_ledger_validation_out := env_var_or_default("SCALE_SEMANTIC_LEDGER_VALIDATION_OUT", "etl/data/published/accountability-ledger-semantic-partition-validation-latest.json")
+scale_semantic_ledger_previous_manifest := env_var_or_default("SCALE_SEMANTIC_LEDGER_PREVIOUS_MANIFEST", "")
+scale_semantic_ledger_previous_root := env_var_or_default("SCALE_SEMANTIC_LEDGER_PREVIOUS_ROOT", "")
+scale_semantic_ledger_min_rows := env_var_or_default("SCALE_SEMANTIC_LEDGER_MIN_ROWS", "100000")
+scale_semantic_actor_root := env_var_or_default("SCALE_SEMANTIC_ACTOR_ROOT", "etl/data/derived/semantic-actor-mandates")
+scale_semantic_actor_manifest_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_MANIFEST_OUT", "etl/data/published/actor-mandate-semantic-partition-manifest-latest.json")
+scale_semantic_actor_validation_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_VALIDATION_OUT", "etl/data/published/actor-mandate-semantic-partition-validation-latest.json")
+scale_semantic_actor_incremental_manifest_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_INCREMENTAL_MANIFEST_OUT", "etl/data/published/actor-mandate-semantic-partition-incremental-latest.json")
+scale_semantic_actor_incremental_validation_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_INCREMENTAL_VALIDATION_OUT", "etl/data/published/actor-mandate-semantic-partition-validation-incremental-latest.json")
+scale_semantic_actor_previous_manifest := env_var_or_default("SCALE_SEMANTIC_ACTOR_PREVIOUS_MANIFEST", "")
+scale_semantic_actor_previous_root := env_var_or_default("SCALE_SEMANTIC_ACTOR_PREVIOUS_ROOT", "")
+scale_semantic_actor_min_rows := env_var_or_default("SCALE_SEMANTIC_ACTOR_MIN_ROWS", "70000")
+scale_semantic_candidate_root := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_ROOT", "etl/data/derived/semantic-candidate-occurrences")
+scale_semantic_candidate_manifest_out := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_MANIFEST_OUT", "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json")
+scale_semantic_candidate_validation_out := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_VALIDATION_OUT", "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json")
+scale_semantic_candidate_previous_manifest := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_PREVIOUS_MANIFEST", "")
+scale_semantic_candidate_previous_root := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_PREVIOUS_ROOT", "")
+scale_semantic_candidate_min_rows := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_MIN_ROWS", "1")
+scale_semantic_money_root := env_var_or_default("SCALE_SEMANTIC_MONEY_ROOT", "etl/data/derived/semantic-public-money")
+scale_semantic_money_manifest_out := env_var_or_default("SCALE_SEMANTIC_MONEY_MANIFEST_OUT", "etl/data/published/public-money-semantic-partition-manifest-latest.json")
+scale_semantic_money_validation_out := env_var_or_default("SCALE_SEMANTIC_MONEY_VALIDATION_OUT", "etl/data/published/public-money-semantic-partition-validation-latest.json")
+scale_semantic_money_previous_manifest := env_var_or_default("SCALE_SEMANTIC_MONEY_PREVIOUS_MANIFEST", "")
+scale_semantic_money_previous_root := env_var_or_default("SCALE_SEMANTIC_MONEY_PREVIOUS_ROOT", "")
+scale_semantic_money_min_rows := env_var_or_default("SCALE_SEMANTIC_MONEY_MIN_ROWS", "10")
+scale_semantic_indicator_root := env_var_or_default("SCALE_SEMANTIC_INDICATOR_ROOT", "etl/data/derived/semantic-indicator-observations")
+scale_semantic_indicator_manifest_out := env_var_or_default("SCALE_SEMANTIC_INDICATOR_MANIFEST_OUT", "etl/data/published/indicator-observation-semantic-partition-manifest-latest.json")
+scale_semantic_indicator_validation_out := env_var_or_default("SCALE_SEMANTIC_INDICATOR_VALIDATION_OUT", "etl/data/published/indicator-observation-semantic-partition-validation-latest.json")
+scale_semantic_indicator_previous_manifest := env_var_or_default("SCALE_SEMANTIC_INDICATOR_PREVIOUS_MANIFEST", "")
+scale_semantic_indicator_previous_root := env_var_or_default("SCALE_SEMANTIC_INDICATOR_PREVIOUS_ROOT", "")
+scale_semantic_indicator_min_rows := env_var_or_default("SCALE_SEMANTIC_INDICATOR_MIN_ROWS", "1")
+eurostat_indicator_registry := env_var_or_default("EUROSTAT_INDICATOR_REGISTRY", "etl/data/seeds/eurostat_indicator_registry_v1.json")
+eurostat_indicator_db := env_var_or_default("EUROSTAT_INDICATOR_DB", "etl/data/staging/eurostat-indicators-real-s2.db")
+eurostat_indicator_pipeline_id := env_var_or_default("EUROSTAT_INDICATOR_PIPELINE_ID", "eurostat-indicators-real-s2")
+eurostat_indicator_raw_root := env_var_or_default("EUROSTAT_INDICATOR_RAW_ROOT", "etl/data/object-origin/eurostat-indicators")
+eurostat_indicator_ca_bundle := env_var_or_default("EUROSTAT_INDICATOR_CA_BUNDLE", "")
+eurostat_indicator_worker_max_items := env_var_or_default("EUROSTAT_INDICATOR_WORKER_MAX_ITEMS", "4")
+eurostat_indicator_source_record_batch_size := env_var_or_default("EUROSTAT_INDICATOR_SOURCE_RECORD_BATCH_SIZE", "1000")
+eurostat_indicator_acquisition_report := env_var_or_default("EUROSTAT_INDICATOR_ACQUISITION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-acquisition.json")
+eurostat_indicator_semantic_root := env_var_or_default("EUROSTAT_INDICATOR_SEMANTIC_ROOT", "etl/data/derived/eurostat-indicator-real-s2")
+eurostat_indicator_semantic_replay_root := env_var_or_default("EUROSTAT_INDICATOR_SEMANTIC_REPLAY_ROOT", "etl/data/derived/eurostat-indicator-real-s2-replay")
+eurostat_indicator_semantic_manifest := env_var_or_default("EUROSTAT_INDICATOR_SEMANTIC_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-manifest.json")
+eurostat_indicator_semantic_validation := env_var_or_default("EUROSTAT_INDICATOR_SEMANTIC_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-validation.json")
+eurostat_indicator_incremental_manifest := env_var_or_default("EUROSTAT_INDICATOR_INCREMENTAL_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-incremental-manifest.json")
+eurostat_indicator_incremental_validation := env_var_or_default("EUROSTAT_INDICATOR_INCREMENTAL_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-incremental-validation.json")
+bdns_bulk_pipeline_id := env_var_or_default("BDNS_BULK_PIPELINE_ID", "bdns-concessions-scale")
+bdns_bulk_raw_root := env_var_or_default("BDNS_BULK_RAW_ROOT", "etl/data/raw/bdns/concessions-pages")
+bdns_bulk_page_size := env_var_or_default("BDNS_BULK_PAGE_SIZE", "1000")
+bdns_bulk_max_pages := env_var_or_default("BDNS_BULK_MAX_PAGES", "0")
+bdns_bulk_workers := env_var_or_default("BDNS_BULK_WORKERS", "2")
+bdns_bulk_claim_size := env_var_or_default("BDNS_BULK_CLAIM_SIZE", "4")
+bdns_bulk_request_interval := env_var_or_default("BDNS_BULK_REQUEST_INTERVAL", "2.0")
+bdns_bulk_failure_window := env_var_or_default("BDNS_BULK_FAILURE_WINDOW", "20")
+bdns_bulk_version_backfill_max_pages := env_var_or_default("BDNS_BULK_VERSION_BACKFILL_MAX_PAGES", "0")
+bdns_bulk_enqueue_report := env_var_or_default("BDNS_BULK_ENQUEUE_REPORT", "etl/data/published/bdns-concessions-bulk-enqueue-latest.json")
+bdns_bulk_run_report := env_var_or_default("BDNS_BULK_RUN_REPORT", "etl/data/published/bdns-concessions-bulk-run-latest.json")
+placsp_bulk_db := env_var_or_default("PLACSP_BULK_DB", "etl/data/staging/placsp-contracts-real-s1-20260811.db")
+placsp_bulk_pipeline_id := env_var_or_default("PLACSP_BULK_PIPELINE_ID", "placsp-contracts-real-s1-20260811")
+placsp_bulk_latest_pipeline_id := env_var_or_default("PLACSP_BULK_LATEST_PIPELINE_ID", "placsp-contracts-real-s1-2025q2-20260811")
+placsp_bulk_raw_root := env_var_or_default("PLACSP_BULK_RAW_ROOT", "etl/data/object-origin/placsp-contracts")
+placsp_bulk_ca_bundle := env_var_or_default("PLACSP_BULK_CA_BUNDLE", "")
+placsp_bulk_min_free_bytes := env_var_or_default("PLACSP_BULK_MIN_FREE_BYTES", "10737418240")
+placsp_bulk_snapshot_date := env_var_or_default("PLACSP_BULK_SNAPSHOT_DATE", "2025-03-31")
+placsp_bulk_semantic_snapshot_date := env_var_or_default("PLACSP_BULK_SEMANTIC_SNAPSHOT_DATE", "2025-06-30")
+placsp_bulk_replay_snapshot_date := env_var_or_default("PLACSP_BULK_REPLAY_SNAPSHOT_DATE", "2025-07-01")
+placsp_bulk_archive_args := env_var_or_default("PLACSP_BULK_ARCHIVE_ARGS", "--archive 202501=https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip --archive 202502=https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202502.zip --archive 202503=https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202503.zip")
+placsp_bulk_enqueue_report := env_var_or_default("PLACSP_BULK_ENQUEUE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-enqueue.json")
+placsp_bulk_archive_report := env_var_or_default("PLACSP_BULK_ARCHIVE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-archive-worker.json")
+placsp_bulk_run_report := env_var_or_default("PLACSP_BULK_RUN_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-run.json")
+placsp_bulk_corpus_report := env_var_or_default("PLACSP_BULK_CORPUS_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025q2-run.json")
+placsp_bulk_semantic_root := env_var_or_default("PLACSP_BULK_SEMANTIC_ROOT", "etl/data/derived/placsp-contracts-real-2025h1-v4")
+placsp_bulk_semantic_replay_root := env_var_or_default("PLACSP_BULK_SEMANTIC_REPLAY_ROOT", "etl/data/derived/placsp-contracts-real-2025h1-v4-replay")
+placsp_bulk_semantic_manifest := env_var_or_default("PLACSP_BULK_SEMANTIC_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-semantic-manifest.json")
+placsp_bulk_semantic_validation := env_var_or_default("PLACSP_BULK_SEMANTIC_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-semantic-validation.json")
+placsp_bulk_incremental_manifest := env_var_or_default("PLACSP_BULK_INCREMENTAL_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-semantic-incremental-manifest.json")
+placsp_bulk_incremental_validation := env_var_or_default("PLACSP_BULK_INCREMENTAL_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-semantic-incremental-validation.json")
+placsp_document_pipeline_id := env_var_or_default("PLACSP_DOCUMENT_PIPELINE_ID", "placsp_document_fetch_real_s1")
+placsp_document_raw_root := env_var_or_default("PLACSP_DOCUMENT_RAW_ROOT", "etl/data/object-origin/placsp-contract-documents")
+placsp_document_worker_max_items := env_var_or_default("PLACSP_DOCUMENT_WORKER_MAX_ITEMS", "20")
+placsp_document_enqueue_report := env_var_or_default("PLACSP_DOCUMENT_ENQUEUE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-document-fetch-enqueue.json")
+placsp_document_worker_report := env_var_or_default("PLACSP_DOCUMENT_WORKER_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-document-fetch-sample.json")
+placsp_integrity_report := env_var_or_default("PLACSP_INTEGRITY_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-integrity-signal-run.json")
+placsp_history_pipeline_id := env_var_or_default("PLACSP_HISTORY_PIPELINE_ID", "placsp-contracts-official-history-2012-20260811")
+placsp_history_snapshot_date := env_var_or_default("PLACSP_HISTORY_SNAPSHOT_DATE", "2026-08-11")
+placsp_history_catalog_report := env_var_or_default("PLACSP_HISTORY_CATALOG_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-archive-catalog-20260811.json")
+placsp_history_enqueue_report := env_var_or_default("PLACSP_HISTORY_ENQUEUE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-history-enqueue-20260811.json")
+placsp_history_min_free_bytes := env_var_or_default("PLACSP_HISTORY_MIN_FREE_BYTES", "107374182400")
+placsp_history_archive_max_items := env_var_or_default("PLACSP_HISTORY_ARCHIVE_MAX_ITEMS", "1")
+placsp_history_member_max_items := env_var_or_default("PLACSP_HISTORY_MEMBER_MAX_ITEMS", "10")
+placsp_history_storage_report := env_var_or_default("PLACSP_HISTORY_STORAGE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-history-storage-preflight-20260811.json")
+placsp_history_member_report := env_var_or_default("PLACSP_HISTORY_MEMBER_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-history-member-worker-20260811.json")
+scale_document_pipeline_evidence := env_var_or_default("SCALE_DOCUMENT_PIPELINE_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-pipeline-scale-run.json")
+scale_document_format_inventory := env_var_or_default("SCALE_DOCUMENT_FORMAT_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
+scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BENCHMARK", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/pdf-ocr-routing-benchmark.json")
+scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
+scale_member_vote_shard_root := env_var_or_default("SCALE_MEMBER_VOTE_SHARD_ROOT", "etl/data/derived/member-vote-shards")
+scale_member_vote_shard_manifest_out := env_var_or_default("SCALE_MEMBER_VOTE_SHARD_MANIFEST_OUT", "etl/data/published/member-vote-shard-manifest-latest.json")
+scale_member_vote_shard_validation_out := env_var_or_default("SCALE_MEMBER_VOTE_SHARD_VALIDATION_OUT", "etl/data/published/member-vote-shard-validation-latest.json")
+scale_member_vote_source_provenance_overrides := env_var_or_default("SCALE_MEMBER_VOTE_SOURCE_PROVENANCE_OVERRIDES", "etl/data/raw/samples/congreso_votaciones_sample.json.source.json")
+scale_queue_pipeline_id := env_var_or_default("SCALE_QUEUE_PIPELINE_ID", "")
+scale_queue_health_out := env_var_or_default("SCALE_QUEUE_HEALTH_OUT", "etl/data/published/pipeline-work-queue-health-latest.json")
+object_store_backend := env_var_or_default("OBJECT_STORE_BACKEND", "filesystem")
+object_store_filesystem_root := env_var_or_default("OBJECT_STORE_FILESYSTEM_ROOT", "etl/data/object-origin")
+object_store_manifest_out := env_var_or_default("OBJECT_STORE_MANIFEST_OUT", "etl/data/manifests/content-objects-latest.jsonl")
+object_store_replication_report_out := env_var_or_default("OBJECT_STORE_REPLICATION_REPORT_OUT", "etl/data/published/content-object-replication-latest.json")
+object_store_restore_report_out := env_var_or_default("OBJECT_STORE_RESTORE_REPORT_OUT", "etl/data/published/object-store-restore-drill-latest.json")
+object_store_replication_limit := env_var_or_default("OBJECT_STORE_REPLICATION_LIMIT", "0")
+object_store_restore_sample_size := env_var_or_default("OBJECT_STORE_RESTORE_SAMPLE_SIZE", "100")
+integrity_signal_threshold_eur := env_var_or_default("INTEGRITY_SIGNAL_THRESHOLD_EUR", "15000")
+integrity_signal_min_records := env_var_or_default("INTEGRITY_SIGNAL_MIN_RECORDS", "3")
+integrity_signal_max_signals := env_var_or_default("INTEGRITY_SIGNAL_MAX_SIGNALS", "0")
+integrity_signal_internal_report_out := env_var_or_default("INTEGRITY_SIGNAL_INTERNAL_REPORT_OUT", "tmp/integrity-signals/procurement-latest.json")
+integrity_signal_public_out := env_var_or_default("INTEGRITY_SIGNAL_PUBLIC_OUT", "etl/data/published/integrity-signals-latest.json")
+document_fetch_workers := env_var_or_default("DOCUMENT_FETCH_WORKERS", "8")
+document_fetch_per_host_workers := env_var_or_default("DOCUMENT_FETCH_PER_HOST_WORKERS", "2")
+document_fetch_claim_size := env_var_or_default("DOCUMENT_FETCH_CLAIM_SIZE", "32")
+document_fetch_max_items := env_var_or_default("DOCUMENT_FETCH_MAX_ITEMS", "0")
+document_fetch_max_bytes := env_var_or_default("DOCUMENT_FETCH_MAX_BYTES", "262144000")
+document_fetch_report_out := env_var_or_default("DOCUMENT_FETCH_REPORT_OUT", "docs/etl/runs/document-fetch-queue-latest.json")
+text_extraction_workers := env_var_or_default("TEXT_EXTRACTION_WORKERS", "4")
+text_extraction_claim_size := env_var_or_default("TEXT_EXTRACTION_CLAIM_SIZE", "16")
+text_extraction_max_items := env_var_or_default("TEXT_EXTRACTION_MAX_ITEMS", "0")
+text_extraction_report_out := env_var_or_default("TEXT_EXTRACTION_REPORT_OUT", "docs/etl/runs/text-extraction-queue-latest.json")
 declared_min_auto_confidence := env_var_or_default("DECLARED_MIN_AUTO_CONFIDENCE", "0.62")
 declared_source_id := env_var_or_default("DECLARED_SOURCE_ID", "congreso_intervenciones")
 declared_review_limit := env_var_or_default("DECLARED_REVIEW_LIMIT", "50")
@@ -217,7 +381,7 @@ declared_quality_vote_source_ids := env_var_or_default("DECLARED_QUALITY_VOTE_SO
 declared_quality_out := env_var_or_default("DECLARED_QUALITY_OUT", "")
 declared_quality_skip_vote_gate := env_var_or_default("DECLARED_QUALITY_SKIP_VOTE_GATE", "1")
 initiative_quality_actionable_scope := env_var_or_default("INITIATIVE_QUALITY_ACTIONABLE_SCOPE", "global")
-programas_manifest := env_var_or_default("PROGRAMAS_MANIFEST", "etl/data/raw/samples/programas_partidos_sample.csv")
+programas_manifest := env_var_or_default("PROGRAMAS_MANIFEST", "docs/etl/sprints/AI-OPS-256/exports/programas_manifest_local_replay_from_db_20260228.csv")
 programas_status_out := env_var_or_default("PROGRAMAS_STATUS_OUT", "docs/etl/sprints/AI-OPS-29/evidence/programas_status_latest.json")
 programas_manifest_validate_out := env_var_or_default("PROGRAMAS_MANIFEST_VALIDATE_OUT", "docs/etl/sprints/AI-OPS-30/evidence/programas_manifest_validate_latest.json")
 programas_manifest_require_local_path := env_var_or_default("PROGRAMAS_MANIFEST_REQUIRE_LOCAL_PATH", "0")
@@ -857,13 +1021,14 @@ accountability_issue_cluster_assignment_reviews_report_out := env_var_or_default
 accountability_min_entries := env_var_or_default("ACCOUNTABILITY_MIN_ENTRIES", "1")
 accountability_min_actors := env_var_or_default("ACCOUNTABILITY_MIN_ACTORS", "1")
 accountability_min_issues := env_var_or_default("ACCOUNTABILITY_MIN_ISSUES", "1")
-accountability_min_evidence_api_questions := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_QUESTIONS", "5")
+accountability_min_evidence_api_questions := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_QUESTIONS", "6")
 accountability_min_evidence_api_issue_clusters := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTERS", "1")
 accountability_min_evidence_api_reviewed_issue_clusters := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_REVIEWED_ISSUE_CLUSTERS", "0")
 accountability_min_evidence_api_issue_cluster_issue_reviews := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTER_ISSUE_REVIEWS", "0")
 accountability_min_evidence_api_issue_cluster_assignment_review_needed := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_NEEDED", "0")
 accountability_max_evidence_api_issue_cluster_assignment_review_needed := env_var_or_default("ACCOUNTABILITY_MAX_EVIDENCE_API_ISSUE_CLUSTER_ASSIGNMENT_REVIEW_NEEDED", "-1")
 accountability_min_evidence_api_gap_answers := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_GAP_ANSWERS", "9")
+accountability_min_evidence_api_blocker_answers := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_BLOCKER_ANSWERS", "1")
 accountability_min_evidence_api_qa_answers := env_var_or_default("ACCOUNTABILITY_MIN_EVIDENCE_API_QA_ANSWERS", "1")
 accountability_min_resolution_pct := env_var_or_default("ACCOUNTABILITY_MIN_RESOLUTION_PCT", "1.0")
 accountability_min_person_id_entries := env_var_or_default("ACCOUNTABILITY_MIN_PERSON_ID_ENTRIES", "0")
@@ -1326,7 +1491,7 @@ etl-live-parlamentario:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_iniciativas --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --senado-legs {{live_parl_senado_legs}} --max-records {{live_parl_max_records}}"
 
 etl-elecciones:
-  docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}}"
+  docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}} --timeout {{infoelectoral_timeout}} --public-json-out ui/gh-pages-next/public/calendario-electoral/data/election-calendar.json"
 
 etl-publish-representantes:
   docker compose run --rm --build etl "python3 scripts/publicar_representantes_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
@@ -1347,6 +1512,102 @@ etl-export-source-catalog:
     --out "{{gh_pages_dir}}/explorer-sources/data/catalog.json" \
     --published-out "etl/data/published/source-catalog-{{snapshot_date}}.json" \
     --latest-out "etl/data/published/source-catalog-latest.json"
+
+etl-discover-andalucia-2026-execution-sources:
+  python3 scripts/discover_andalucia_2026_execution_sources.py \
+    --out "{{andalucia_execution_source_discovery_out}}" \
+    --timeout "{{andalucia_execution_source_query_timeout}}" \
+    --max-topic-terms "{{andalucia_execution_source_max_topic_terms}}" \
+    --probe-timeout "{{andalucia_execution_source_probe_timeout}}" \
+    --max-resource-probes "{{andalucia_execution_source_max_resource_probes}}"
+
+etl-run-andalucia-2026-delivery-evidence-hunts:
+  python3 scripts/run_andalucia_2026_delivery_evidence_hunts.py \
+    --out "{{andalucia_delivery_hunt_results_out}}" \
+    --public-out "{{andalucia_delivery_hunt_public_out}}" \
+    --max-targets "{{andalucia_delivery_hunt_max_targets}}" \
+    --rows-per-query "{{andalucia_delivery_hunt_rows_per_query}}" \
+    --timeout "{{andalucia_delivery_hunt_timeout}}"
+
+etl-generate-andalucia-2026-delivery-review-drafts:
+  python3 scripts/generate_andalucia_2026_delivery_review_drafts.py \
+    --hunt-results "{{andalucia_delivery_hunt_results_out}}" \
+    --out "{{andalucia_delivery_review_drafts_out}}" \
+    --public-out "{{andalucia_delivery_review_drafts_public_out}}"
+
+etl-andalucia-2026-accountability-assist:
+  just etl-discover-andalucia-2026-execution-sources
+  python3 scripts/export_andalucia_2026_accountability_snapshot.py \
+    --db "{{db_path}}" \
+    --timeout "{{infoelectoral_timeout}}" \
+    --refresh-outcome-series
+  just etl-run-andalucia-2026-delivery-evidence-hunts
+  just etl-generate-andalucia-2026-delivery-review-drafts
+  python3 scripts/generate_andalucia_2026_boja_review_drafts.py
+  python3 scripts/apply_andalucia_2026_boja_review_drafts.py \
+    --out "etl/data/published/andalucia-2026-boja-review-apply-dry-run.json"
+  python3 scripts/generate_andalucia_2026_parliament_vote_review_drafts.py
+  python3 scripts/apply_andalucia_2026_parliament_vote_review_drafts.py \
+    --out "etl/data/published/andalucia-2026-parliament-vote-review-apply-dry-run.json"
+  python3 scripts/generate_andalucia_2026_issue_review_drafts.py
+  python3 scripts/apply_andalucia_2026_issue_review_drafts.py \
+    --out "etl/data/published/andalucia-2026-issue-review-apply-dry-run.json"
+  python3 scripts/generate_andalucia_2026_execution_review_drafts.py
+  python3 scripts/apply_andalucia_2026_execution_review_drafts.py \
+    --auto-safe \
+    --out "etl/data/published/andalucia-2026-execution-evidence-review-apply-dry-run.json"
+
+etl-andalucia-2026-accountability-apply-safe:
+  just etl-discover-andalucia-2026-execution-sources
+  python3 scripts/export_andalucia_2026_accountability_snapshot.py \
+    --db "{{db_path}}" \
+    --timeout "{{infoelectoral_timeout}}" \
+    --refresh-outcome-series
+  just etl-run-andalucia-2026-delivery-evidence-hunts
+  just etl-generate-andalucia-2026-delivery-review-drafts
+  python3 scripts/generate_andalucia_2026_boja_review_drafts.py
+  python3 scripts/apply_andalucia_2026_boja_review_drafts.py --apply \
+    --out "etl/data/published/andalucia-2026-boja-review-apply-report.json"
+  python3 scripts/generate_andalucia_2026_parliament_vote_review_drafts.py
+  python3 scripts/apply_andalucia_2026_parliament_vote_review_drafts.py --apply \
+    --out "etl/data/published/andalucia-2026-parliament-vote-review-apply-report.json"
+  python3 scripts/generate_andalucia_2026_issue_review_drafts.py
+  python3 scripts/apply_andalucia_2026_issue_review_drafts.py --apply \
+    --out "etl/data/published/andalucia-2026-issue-review-apply-report.json"
+  python3 scripts/generate_andalucia_2026_execution_review_drafts.py
+  python3 scripts/apply_andalucia_2026_execution_review_drafts.py --apply \
+    --auto-safe \
+    --out "etl/data/published/andalucia-2026-execution-evidence-review-apply-report.json"
+  python3 scripts/export_andalucia_2026_accountability_snapshot.py \
+    --db "{{db_path}}" \
+    --timeout "{{infoelectoral_timeout}}" \
+    --published-out "etl/data/published/andalucia-2026-accountability.json" \
+    --refresh-outcome-series
+
+etl-andalucia-2026-accountability-apply-safe-prime:
+  just etl-andalucia-2026-accountability-apply-safe
+  mkdir -p "{{gh_pages_dir}}/elecciones/andalucia-2026/data"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/elecciones/andalucia-2026/data"
+  for item in \\
+    accountability.json \\
+    delivery-evidence-hunt-results.json \\
+    delivery-evidence-review-drafts.json \\
+    boja-impact-review-queue.csv \\
+    parliament-vote-impact-review-queue.csv \\
+    execution-evidence-queue.csv; do \\
+      src="{{gh_pages_next_app_dir}}/public/elecciones/andalucia-2026/data/$item"; \\
+      fallback="{{gh_pages_dir}}/elecciones/andalucia-2026/data/$item"; \\
+      if [ -f "$src" ]; then cp -f "$src" "$fallback"; \\
+      elif [ -f "$fallback" ]; then :; \\
+      else echo "warn: missing andalu data artifact $item"; fi; \\
+    done
+
+etl-andalucia-2026-accountability-apply-safe-prime-full:
+  just etl-andalucia-2026-accountability-apply-safe-prime
+  just gh-pages-next-prime
+
+etl-andalucia-2026-accountability-full:
+  just etl-andalucia-2026-accountability-apply-safe-prime-full
 
 etl-export-source-scrape-queue:
   python3 scripts/export_source_scrape_queue_snapshot.py \
@@ -1455,6 +1716,7 @@ etl-validate-accountability-artifacts:
     --min-evidence-api-issue-cluster-assignment-review-needed "{{accountability_min_evidence_api_issue_cluster_assignment_review_needed}}" \
     --max-evidence-api-issue-cluster-assignment-review-needed "{{accountability_max_evidence_api_issue_cluster_assignment_review_needed}}" \
     --min-evidence-api-gap-answers "{{accountability_min_evidence_api_gap_answers}}" \
+    --min-evidence-api-blocker-answers "{{accountability_min_evidence_api_blocker_answers}}" \
     --min-evidence-api-qa-answers "{{accountability_min_evidence_api_qa_answers}}" \
     --min-resolution-pct "{{accountability_min_resolution_pct}}" \
     --min-person-id-entries "{{accountability_min_person_id_entries}}" \
@@ -1488,6 +1750,7 @@ etl-run-source-scrape-queue-prefect:
     --summary-out "docs/etl/runs/source-scrape-queue-prefect-run-{{snapshot_date}}.json"
 
 etl-publish-hf:
+  just etl-scale-readiness
   if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
@@ -1507,6 +1770,7 @@ etl-publish-hf:
   docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db {{db_path}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --parquet-compression {{hf_parquet_compression}} --parquet-batch-rows {{hf_parquet_batch_rows}} --parquet-tables '{{hf_parquet_tables}}' --parquet-exclude-tables '{{hf_parquet_exclude_tables}}' ${sqlite_arg} ${sensitive_arg} ${quality_arg} ${liberty_atlas_arg}"
 
 etl-publish-hf-dry-run:
+  just etl-scale-readiness
   if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
@@ -1600,6 +1864,11 @@ parl-backfill-senado-details:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --db {{db_path}} --auto --legislature {{senado_detail_legislatures}} --max-events {{senado_detail_max_events}} --max-loops {{senado_detail_max_loops}} --timeout {{senado_detail_timeout}} --detail-workers {{senado_detail_workers}} --snapshot-date {{snapshot_date}}${senado_detail_arg}"
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py quality-report --db {{db_path}} --source-ids senado_votaciones --json-out etl/data/published/votaciones-kpis-senado-{{snapshot_date}}.json"
 
+# Offline authoritative refresh. Requires cached XML and never attempts network.
+parl-refresh-senado-local-cache:
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-member-ids --db {{db_path}} --source-ids senado_votaciones --batch-size 10000 --unmatched-sample-limit 0"
+  docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py backfill-senado-details --db {{db_path}} --snapshot-date {{snapshot_date}} --include-existing --senado-detail-dir {{senado_manual_detail_dir}} --local-cache-only --detail-workers {{senado_detail_workers}}"
+
 parl-senado-tail-daemon:
   DB_PATH={{db_path}} \
   COOKIE_FILE={{senado_tail_cookie_file}} \
@@ -1647,6 +1916,238 @@ parl-export-text-extraction-queue:
 
 parl-export-text-extraction-queue-missing:
   python3 scripts/export_text_extraction_queue.py --db {{db_path}} --source-ids '{{text_extraction_queue_source_ids}}' --formats '{{text_extraction_queue_formats}}' --only-missing-excerpt --dedupe-by content_sha256 --limit {{text_extraction_queue_limit}} --out {{text_extraction_queue_out}} --summary-out {{text_extraction_queue_summary_out}}
+
+# Durable high-volume queue producers. These stream references in bounded
+# batches; raw bytes and source payloads are never copied into queue rows.
+etl-enqueue-source-record-work:
+  python3 scripts/enqueue_pipeline_work.py --db {{db_path}} --kind source-record-transform --batch-size {{scale_queue_enqueue_batch_size}}
+
+parl-enqueue-document-fetch-work:
+  python3 scripts/enqueue_pipeline_work.py --db {{db_path}} --kind document-fetch --source-ids 'congreso_iniciativas,senado_iniciativas' --only-missing --batch-size {{scale_queue_enqueue_batch_size}}
+
+parl-run-document-fetch-work:
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --raw-root etl/data/raw/text_documents/parl_initiative_docs --workers {{document_fetch_workers}} --per-host-workers {{document_fetch_per_host_workers}} --claim-size {{document_fetch_claim_size}} --max-items {{document_fetch_max_items}} --max-bytes {{document_fetch_max_bytes}} --report-out {{document_fetch_report_out}}
+
+parl-enqueue-text-extraction-work:
+  python3 scripts/enqueue_pipeline_work.py --db {{db_path}} --kind text-extract --source-ids '{{text_extraction_queue_source_ids}}' --only-missing --batch-size {{scale_queue_enqueue_batch_size}}
+
+parl-run-text-extraction-work:
+  python3 scripts/run_text_extraction_queue.py --db {{db_path}} --text-root etl/data/derived/text --workers {{text_extraction_workers}} --claim-size {{text_extraction_claim_size}} --max-items {{text_extraction_max_items}} --report-out {{text_extraction_report_out}}
+
+parl-document-pipeline-scale:
+  just parl-enqueue-document-fetch-work
+  just parl-run-document-fetch-work
+  just parl-enqueue-text-extraction-work
+  just parl-run-text-extraction-work
+
+etl-scale-readiness:
+  just real-data-only-check
+  docker compose run --rm etl "python3 scripts/report_scale_readiness.py --registry docs/etl/real-corpus-registry.json --out {{scale_readiness_report_out}} --enforce-foundation"
+
+real-data-only-check:
+  python3 scripts/check_real_data_only.py \
+    --db "{{db_path}}" \
+    --path etl/data/raw \
+    --path etl/data/derived \
+    --path etl/data/published \
+    --path "{{gh_pages_next_app_dir}}/public" \
+    --out docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-data-only-validation.json \
+    --enforce
+
+# Fail closed on malformed SQLite files, FK damage, recovery residue, stale
+# ingestion markers, and truncated derived text artifacts.
+etl-data-integrity-audit:
+  python3 scripts/audit_data_integrity.py --report-out etl/data/published/data-integrity-latest.json --enforce
+
+etl-data-integrity-audit-all-staging:
+  python3 scripts/audit_data_integrity.py --scan-staging --enforce
+
+etl-scale-eurostat-indicators-enqueue:
+  python3 scripts/ingest_eurostat_indicator_registry.py enqueue --db {{eurostat_indicator_db}} --pipeline-id {{eurostat_indicator_pipeline_id}} --registry {{eurostat_indicator_registry}} --snapshot-date {{snapshot_date}}
+
+etl-scale-eurostat-indicators-work:
+  ca_arg=""; if [ -n "{{eurostat_indicator_ca_bundle}}" ]; then ca_arg="--ca-bundle {{eurostat_indicator_ca_bundle}}"; fi; python3 scripts/ingest_eurostat_indicator_registry.py worker --db {{eurostat_indicator_db}} --pipeline-id {{eurostat_indicator_pipeline_id}} --registry {{eurostat_indicator_registry}} --snapshot-date {{snapshot_date}} --worker-id eurostat-indicator-worker --store-root {{eurostat_indicator_raw_root}} --timeout 180 --max-items {{eurostat_indicator_worker_max_items}} --source-record-batch-size {{eurostat_indicator_source_record_batch_size}} $ca_arg
+
+etl-scale-eurostat-indicators-backfill:
+  python3 scripts/ingestar_politicos_es.py init-db --db {{eurostat_indicator_db}}
+  python3 scripts/ingestar_politicos_es.py backfill-indicators --db {{eurostat_indicator_db}} --source-ids eurostat_sdmx
+
+etl-scale-eurostat-indicators-report:
+  python3 scripts/ingest_eurostat_indicator_registry.py report --db {{eurostat_indicator_db}} --pipeline-id {{eurostat_indicator_pipeline_id}} --registry {{eurostat_indicator_registry}} --snapshot-date {{snapshot_date}} --out {{eurostat_indicator_acquisition_report}} --enforce
+
+etl-scale-eurostat-indicators-export:
+  # Requires project parquet extra. Output root must not already exist.
+  python3 scripts/export_semantic_partitions.py --lane indicator_observations --db {{eurostat_indicator_db}} --output-root {{eurostat_indicator_semantic_root}} --snapshot-date {{snapshot_date}} --row-group-rows 25000 --max-file-rows 100000 --manifest-out {{eurostat_indicator_semantic_manifest}} --min-rows 1000000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-eurostat-indicators-validate:
+  # Requires project parquet extra.
+  python3 scripts/validate_semantic_partitions.py --lane indicator_observations --root {{eurostat_indicator_semantic_root}} --manifest {{eurostat_indicator_semantic_manifest}} --report-out {{eurostat_indicator_semantic_validation}} --min-rows 1000000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-eurostat-indicators-replay:
+  # Requires project parquet extra. Replay root must not already exist.
+  python3 scripts/export_semantic_partitions.py --lane indicator_observations --db {{eurostat_indicator_db}} --output-root {{eurostat_indicator_semantic_replay_root}} --snapshot-date {{snapshot_date}} --row-group-rows 25000 --max-file-rows 100000 --previous-manifest {{eurostat_indicator_semantic_manifest}} --previous-root {{eurostat_indicator_semantic_root}} --manifest-out {{eurostat_indicator_incremental_manifest}} --min-rows 1000000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-eurostat-indicators-replay-validate:
+  # Requires project parquet extra.
+  python3 scripts/validate_semantic_partitions.py --lane indicator_observations --root {{eurostat_indicator_semantic_replay_root}} --manifest {{eurostat_indicator_incremental_manifest}} --report-out {{eurostat_indicator_incremental_validation}} --min-rows 1000000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-inventory-documents:
+  python3 scripts/inventory_document_corpus.py --root etl/data/raw --workers {{scale_document_workers}}
+
+etl-scale-benchmark-ocr-routing:
+  python3 scripts/benchmark_pdf_ocr_routing.py --root etl/data/raw --manifest etl/data/manifests/real-document-format-inventory.jsonl --workers 4 --max-pages 20
+
+etl-scale-audit-member-votes:
+  python3 scripts/audit_large_vote_snapshot.py --snapshot {{scale_member_vote_snapshot}} --shard-manifest {{scale_member_vote_shard_manifest_out}} --out {{scale_member_vote_audit_out}}
+
+etl-scale-audit-vote-db:
+  python3 scripts/audit_vote_database.py --db {{db_path}} --out {{scale_vote_db_audit_out}}
+
+etl-scale-export-vote-db-shards:
+  python3 scripts/export_vote_database_shards.py --db {{db_path}} --snapshot-date {{snapshot_date}} --shard-root {{scale_vote_db_shard_root}} --manifest-out {{scale_vote_db_shard_manifest_out}} --enforce
+
+etl-scale-validate-vote-db-shards:
+  python3 scripts/validate_member_vote_shards.py --manifest {{scale_vote_db_shard_manifest_out}} --shard-root {{scale_vote_db_shard_root}} --report-out {{scale_vote_db_shard_validation_out}} --enforce
+
+etl-scale-export-semantic-member-votes:
+  # Requires project parquet extra or requirements.txt environment.
+  prev_args=""; if [ -n "{{scale_semantic_previous_manifest}}" ] || [ -n "{{scale_semantic_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_previous_manifest}} --previous-root {{scale_semantic_previous_root}}"; fi; audit_arg=""; if [ -n "{{scale_semantic_vote_audit}}" ]; then audit_arg="--vote-audit {{scale_semantic_vote_audit}}"; fi; python3 scripts/export_semantic_partitions.py --db {{db_path}} --output-root {{scale_semantic_member_vote_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_member_vote_manifest_out}} --min-rows {{scale_semantic_min_rows}} --max-peak-rss-mb 1024 $prev_args $audit_arg --enforce
+
+etl-scale-validate-semantic-member-votes:
+  # Requires project parquet extra or requirements.txt environment.
+  python3 scripts/validate_semantic_partitions.py --root {{scale_semantic_member_vote_root}} --manifest {{scale_semantic_member_vote_manifest_out}} --report-out {{scale_semantic_member_vote_validation_out}} --min-rows {{scale_semantic_min_rows}} --max-peak-rss-mb 1024 --enforce
+
+etl-scale-export-semantic-accountability-ledger:
+  # Requires project parquet extra or requirements.txt environment.
+  prev_args=""; if [ -n "{{scale_semantic_ledger_previous_manifest}}" ] || [ -n "{{scale_semantic_ledger_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_ledger_previous_manifest}} --previous-root {{scale_semantic_ledger_previous_root}}"; fi; python3 scripts/export_semantic_partitions.py --lane accountability_ledger --db {{db_path}} --output-root {{scale_semantic_ledger_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_ledger_manifest_out}} --min-rows {{scale_semantic_ledger_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce
+
+etl-scale-validate-semantic-accountability-ledger:
+  # Requires project parquet extra or requirements.txt environment.
+  python3 scripts/validate_semantic_partitions.py --lane accountability_ledger --root {{scale_semantic_ledger_root}} --manifest {{scale_semantic_ledger_manifest_out}} --report-out {{scale_semantic_ledger_validation_out}} --min-rows {{scale_semantic_ledger_min_rows}} --max-peak-rss-mb 1024 --enforce
+
+etl-scale-export-semantic-actor-mandates:
+  prev_args=""; if [ -n "{{scale_semantic_actor_previous_manifest}}" ] || [ -n "{{scale_semantic_actor_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_actor_previous_manifest}} --previous-root {{scale_semantic_actor_previous_root}}"; fi; docker compose run --rm --build etl "python3 scripts/export_semantic_partitions.py --lane actor_mandates --db {{db_path}} --output-root {{scale_semantic_actor_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_actor_manifest_out}} --min-rows {{scale_semantic_actor_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce"
+
+etl-scale-validate-semantic-actor-mandates:
+  docker compose run --rm --build etl "python3 scripts/validate_semantic_partitions.py --lane actor_mandates --root {{scale_semantic_actor_root}} --manifest {{scale_semantic_actor_manifest_out}} --report-out {{scale_semantic_actor_validation_out}} --min-rows {{scale_semantic_actor_min_rows}} --max-peak-rss-mb 1024 --enforce"
+
+etl-scale-export-semantic-candidate-occurrences:
+  prev_args=""; if [ -n "{{scale_semantic_candidate_previous_manifest}}" ] || [ -n "{{scale_semantic_candidate_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_candidate_previous_manifest}} --previous-root {{scale_semantic_candidate_previous_root}}"; fi; docker compose run --rm --build etl "python3 scripts/export_semantic_partitions.py --lane candidate_occurrences --db {{db_path}} --output-root {{scale_semantic_candidate_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_candidate_manifest_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce"
+
+etl-scale-validate-semantic-candidate-occurrences:
+  docker compose run --rm --build etl "python3 scripts/validate_semantic_partitions.py --lane candidate_occurrences --root {{scale_semantic_candidate_root}} --manifest {{scale_semantic_candidate_manifest_out}} --report-out {{scale_semantic_candidate_validation_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 --enforce"
+
+etl-scale-export-semantic-public-money:
+  # Requires project parquet extra or requirements.txt environment.
+  prev_args=""; if [ -n "{{scale_semantic_money_previous_manifest}}" ] || [ -n "{{scale_semantic_money_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_money_previous_manifest}} --previous-root {{scale_semantic_money_previous_root}}"; fi; python3 scripts/export_semantic_partitions.py --lane public_money_facts --db {{db_path}} --output-root {{scale_semantic_money_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_money_manifest_out}} --min-rows {{scale_semantic_money_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce
+
+etl-scale-validate-semantic-public-money:
+  # Requires project parquet extra or requirements.txt environment.
+  python3 scripts/validate_semantic_partitions.py --lane public_money_facts --root {{scale_semantic_money_root}} --manifest {{scale_semantic_money_manifest_out}} --report-out {{scale_semantic_money_validation_out}} --min-rows {{scale_semantic_money_min_rows}} --max-peak-rss-mb 1024 --enforce
+
+etl-scale-export-semantic-indicators:
+  # Requires project parquet extra or requirements.txt environment.
+  prev_args=""; if [ -n "{{scale_semantic_indicator_previous_manifest}}" ] || [ -n "{{scale_semantic_indicator_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_indicator_previous_manifest}} --previous-root {{scale_semantic_indicator_previous_root}}"; fi; python3 scripts/export_semantic_partitions.py --lane indicator_observations --db {{db_path}} --output-root {{scale_semantic_indicator_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_indicator_manifest_out}} --min-rows {{scale_semantic_indicator_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce
+
+etl-scale-validate-semantic-indicators:
+  # Requires project parquet extra or requirements.txt environment.
+  python3 scripts/validate_semantic_partitions.py --lane indicator_observations --root {{scale_semantic_indicator_root}} --manifest {{scale_semantic_indicator_manifest_out}} --report-out {{scale_semantic_indicator_validation_out}} --min-rows {{scale_semantic_indicator_min_rows}} --max-peak-rss-mb 1024 --enforce
+
+etl-scale-bdns-bulk-enqueue:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_enqueue_report}} enqueue --snapshot-date {{snapshot_date}} --page-size {{bdns_bulk_page_size}} --max-pages {{bdns_bulk_max_pages}}
+
+etl-scale-bdns-bulk-work:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} work --raw-root {{bdns_bulk_raw_root}} --workers {{bdns_bulk_workers}} --claim-size {{bdns_bulk_claim_size}} --request-interval-seconds {{bdns_bulk_request_interval}} --failure-window-size {{bdns_bulk_failure_window}}
+
+etl-scale-bdns-bulk-report:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} report
+
+etl-scale-bdns-bulk-version-lineage:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} backfill-version-lineage --max-pages {{bdns_bulk_version_backfill_max_pages}}
+
+etl-scale-placsp-archives-enqueue:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_bulk_pipeline_id}} --report-out {{placsp_bulk_enqueue_report}} enqueue --snapshot-date {{placsp_bulk_snapshot_date}} {{placsp_bulk_archive_args}}
+
+etl-scale-placsp-history-discover:
+  python3 scripts/ingest_placsp_archives.py --report-out {{placsp_history_catalog_report}} discover-archives --as-of-date {{placsp_history_snapshot_date}} --start-year 2012 --enforce
+
+etl-scale-placsp-history-enqueue:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_history_pipeline_id}} --report-out {{placsp_history_enqueue_report}} enqueue --snapshot-date {{placsp_history_snapshot_date}} --archive-report {{placsp_history_catalog_report}}
+
+etl-scale-placsp-history-archives-work:
+  ca_arg=""; if [ -n "{{placsp_bulk_ca_bundle}}" ]; then ca_arg="--ca-bundle {{placsp_bulk_ca_bundle}}"; fi; python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_history_pipeline_id}} --report-out {{placsp_history_storage_report}} work-archives --raw-root {{placsp_bulk_raw_root}} --max-items {{placsp_history_archive_max_items}} --min-free-bytes {{placsp_history_min_free_bytes}} --lease-seconds 1800 --timeout 180 $ca_arg
+
+etl-scale-placsp-history-members-work:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_history_pipeline_id}} --report-out {{placsp_history_member_report}} work-members --claim-size 1 --max-items {{placsp_history_member_max_items}} --min-free-bytes {{placsp_history_min_free_bytes}} --lease-seconds 300
+
+etl-scale-placsp-archives-work:
+  ca_arg=""; if [ -n "{{placsp_bulk_ca_bundle}}" ]; then ca_arg="--ca-bundle {{placsp_bulk_ca_bundle}}"; fi; python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_bulk_pipeline_id}} --report-out {{placsp_bulk_archive_report}} work-archives --raw-root {{placsp_bulk_raw_root}} --min-free-bytes {{placsp_bulk_min_free_bytes}} --lease-seconds 1800 --timeout 180 $ca_arg
+
+etl-scale-placsp-members-work:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_bulk_pipeline_id}} --report-out {{placsp_bulk_run_report}} work-members --claim-size 4 --min-free-bytes {{placsp_bulk_min_free_bytes}} --lease-seconds 300
+
+etl-scale-placsp-requeue-document-cap:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_bulk_pipeline_id}} requeue-dead-members --error-contains 'documents exceed cap'
+
+etl-scale-placsp-report:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_bulk_pipeline_id}} --report-out {{placsp_bulk_run_report}} report
+
+etl-scale-placsp-corpus-report:
+  python3 scripts/ingest_placsp_archives.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_bulk_latest_pipeline_id}} --report-out {{placsp_bulk_corpus_report}} report
+
+etl-scale-placsp-export:
+  python3 scripts/export_semantic_partitions.py --lane public_money_facts --db {{placsp_bulk_db}} --output-root {{placsp_bulk_semantic_root}} --snapshot-date {{placsp_bulk_semantic_snapshot_date}} --row-group-rows 25000 --max-file-rows 50000 --manifest-out {{placsp_bulk_semantic_manifest}} --min-rows 100000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-placsp-validate:
+  python3 scripts/validate_semantic_partitions.py --lane public_money_facts --root {{placsp_bulk_semantic_root}} --manifest {{placsp_bulk_semantic_manifest}} --report-out {{placsp_bulk_semantic_validation}} --min-rows 100000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-placsp-replay:
+  python3 scripts/export_semantic_partitions.py --lane public_money_facts --db {{placsp_bulk_db}} --output-root {{placsp_bulk_semantic_replay_root}} --snapshot-date {{placsp_bulk_replay_snapshot_date}} --row-group-rows 25000 --max-file-rows 50000 --previous-manifest {{placsp_bulk_semantic_manifest}} --previous-root {{placsp_bulk_semantic_root}} --manifest-out {{placsp_bulk_incremental_manifest}} --min-rows 100000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-placsp-replay-validate:
+  python3 scripts/validate_semantic_partitions.py --lane public_money_facts --root {{placsp_bulk_semantic_replay_root}} --manifest {{placsp_bulk_incremental_manifest}} --report-out {{placsp_bulk_incremental_validation}} --min-rows 100000 --max-peak-rss-mb 1536 --enforce
+
+etl-scale-placsp-documents-enqueue:
+  python3 scripts/enqueue_pipeline_work.py --db {{placsp_bulk_db}} --kind placsp-document-fetch --pipeline-id {{placsp_document_pipeline_id}} --source-ids placsp_sindicacion --only-missing --batch-size 5000 --max-attempts 5 --report-out {{placsp_document_enqueue_report}}
+
+etl-scale-placsp-documents-work:
+  ca_arg=""; if [ -n "{{placsp_bulk_ca_bundle}}" ]; then ca_arg="--ca-bundle {{placsp_bulk_ca_bundle}}"; fi; python3 scripts/run_document_fetch_queue.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_document_pipeline_id}} --worker-id placsp-document-worker --raw-root {{placsp_document_raw_root}} --workers 2 --per-host-workers 1 --claim-size 4 --max-items {{placsp_document_worker_max_items}} --lease-seconds 900 --timeout 60 --max-bytes 262144000 --download-attempts 1 --retry-delay-seconds 300 --report-out {{placsp_document_worker_report}} $ca_arg
+
+etl-scale-placsp-integrity-review:
+  python3 scripts/detect_procurement_integrity_signals.py --db {{placsp_bulk_db}} --source-ids placsp_sindicacion --threshold-eur {{integrity_signal_threshold_eur}} --min-records {{integrity_signal_min_records}} --max-signals {{integrity_signal_max_signals}} --supersede-missing --supersede-prior-versions --report-out {{placsp_integrity_report}}
+
+etl-scale-shard-member-votes:
+  python3 scripts/shard_large_vote_snapshot.py --snapshot {{scale_member_vote_snapshot}} --shard-root {{scale_member_vote_shard_root}} --manifest-out {{scale_member_vote_shard_manifest_out}} --source-provenance-overrides {{scale_member_vote_source_provenance_overrides}} --enforce
+
+etl-scale-validate-member-vote-shards:
+  python3 scripts/validate_member_vote_shards.py --manifest {{scale_member_vote_shard_manifest_out}} --shard-root {{scale_member_vote_shard_root}} --report-out {{scale_member_vote_shard_validation_out}} --enforce
+
+etl-scale-queue-status:
+  python3 scripts/report_pipeline_work_queue.py --db {{db_path}} --pipeline-id '{{scale_queue_pipeline_id}}' --out {{scale_queue_health_out}}
+
+etl-object-store-replicate-dry-run:
+  python3 scripts/replicate_content_objects.py --db {{db_path}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --limit {{object_store_replication_limit}} --manifest-out {{object_store_manifest_out}} --report-out {{object_store_replication_report_out}} --dry-run
+
+etl-object-store-replicate:
+  python3 scripts/replicate_content_objects.py --db {{db_path}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --limit {{object_store_replication_limit}} --manifest-out {{object_store_manifest_out}} --report-out {{object_store_replication_report_out}}
+
+etl-object-store-restore-drill:
+  python3 scripts/verify_object_store_restore.py --manifest {{object_store_manifest_out}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --sample-size {{object_store_restore_sample_size}} --report-out {{object_store_restore_report_out}}
+
+etl-integrity-procurement-detect-dry-run:
+  python3 scripts/detect_procurement_integrity_signals.py --db {{db_path}} --threshold-eur {{integrity_signal_threshold_eur}} --min-records {{integrity_signal_min_records}} --max-signals {{integrity_signal_max_signals}} --report-out {{integrity_signal_internal_report_out}} --dry-run
+
+# Persists internal review signals only. It cannot publish or label corruption.
+etl-integrity-procurement-detect:
+  python3 scripts/detect_procurement_integrity_signals.py --db {{db_path}} --threshold-eur {{integrity_signal_threshold_eur}} --min-records {{integrity_signal_min_records}} --max-signals {{integrity_signal_max_signals}} --report-out {{integrity_signal_internal_report_out}}
+
+etl-export-integrity-signals:
+  python3 scripts/export_public_integrity_signals.py --db {{db_path}} --snapshot-date {{snapshot_date}} --out {{integrity_signal_public_out}}
+
+etl-scale-gate:
+  just etl-scale-readiness
+  just privacy-check-public-artifacts
+  just etl-tracker-gate
 
 parl-backfill-initdoc-excerpts:
   docker compose run --rm --build etl "python3 scripts/backfill_initiative_doc_excerpts.py --db {{db_path}} --source-id parl_initiative_docs --initiative-source-id {{initdoc_excerpt_scope}}"
@@ -3171,6 +3672,23 @@ etl-extract-infoelectoral-descargas:
 etl-extract-infoelectoral-procesos:
   docker compose run --rm --build etl "python3 scripts/ingestar_infoelectoral_es.py ingest --db {{db_path}} --source infoelectoral_procesos --snapshot-date {{snapshot_date}} --timeout {{infoelectoral_timeout}} --strict-network"
 
+# descargas.interior.gob.es currently serves an incomplete TLS chain from this runtime.
+# Keep the bypass explicit, source-scoped, and recorded as tls_verified=false.
+etl-extract-infoelectoral-elected-officials:
+  docker compose run --rm --build etl "python3 scripts/ingest_infoelectoral_elected_officials.py --db {{db_path}} --snapshot-date {{snapshot_date}} --store-root {{infoelectoral_elected_store_root}} --manifest-root {{infoelectoral_elected_manifest_root}} --report-out {{infoelectoral_elected_report}} --min-free-bytes {{infoelectoral_elected_min_free_bytes}} --timeout {{infoelectoral_timeout}} --insecure-ssl"
+
+# Catalog is safe/offline after infoelectoral_descargas has populated the DB.
+etl-infoelectoral-candidates-enqueue:
+  docker compose run --rm --build etl "python3 scripts/ingest_infoelectoral_candidates.py --db {{db_path}} --pipeline-id {{infoelectoral_candidate_pipeline_id}} --report-out {{infoelectoral_candidate_report}} enqueue --snapshot-date {{snapshot_date}}"
+
+# Raw candidate archives contain DNI/birth fields. Keep the CAS restricted and ignored.
+# Workers are horizontally repeatable through atomic SQLite leases; each run stays bounded.
+etl-infoelectoral-candidates-work:
+  docker compose run --rm --build etl "local_arg=''; if [ -n '{{infoelectoral_candidate_local_archive_dir}}' ]; then local_arg='--local-archive-dir {{infoelectoral_candidate_local_archive_dir}}'; fi; python3 scripts/ingest_infoelectoral_candidates.py --db {{db_path}} --pipeline-id {{infoelectoral_candidate_pipeline_id}} --report-out {{infoelectoral_candidate_report}} worker --worker-id infoelectoral-candidate-worker --store-root {{infoelectoral_candidate_store_root}} --timeout {{infoelectoral_timeout}} --max-items {{infoelectoral_candidate_worker_max_items}} --min-free-bytes {{infoelectoral_candidate_min_free_bytes}} $local_arg"
+
+etl-infoelectoral-candidates-report:
+  docker compose run --rm --build etl "python3 scripts/ingest_infoelectoral_candidates.py --db {{db_path}} --pipeline-id {{infoelectoral_candidate_pipeline_id}} --report-out {{infoelectoral_candidate_report}} report"
+
 etl-extract-all:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source congreso_diputados --snapshot-date {{snapshot_date}} --strict-network"
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source cortes_aragon_diputados --snapshot-date {{snapshot_date}} --strict-network"
@@ -3356,6 +3874,8 @@ gh-pages-next-prime:
   mkdir -p "{{gh_pages_next_app_dir}}/public/political-positions/data"
   mkdir -p "{{gh_pages_dir}}"/elections-behavior/data
   mkdir -p "{{gh_pages_next_app_dir}}"/public/elections-behavior/data
+  mkdir -p "{{gh_pages_dir}}"/elecciones/andalucia-2026/data
+  mkdir -p "{{gh_pages_next_app_dir}}"/public/elecciones/andalucia-2026/data
   mkdir -p "{{gh_pages_dir}}"/legal-sanctions/data
   mkdir -p "{{gh_pages_next_app_dir}}"/public/legal-sanctions/data
   mkdir -p "{{gh_pages_dir}}"/policy-outcomes/data
@@ -3406,6 +3926,23 @@ gh-pages-next-prime:
       --out "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
       --window-days 365 \
       --min-directional-votes 18; \
+    python3 scripts/export_andalucia_2026_accountability_snapshot.py \
+      --db "{{db_path}}" \
+      --out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+      --published-out "etl/data/published/andalucia-2026-accountability.json" \
+      --timeout "{{infoelectoral_timeout}}" \
+      --refresh-outcome-series; \
+    python3 scripts/run_andalucia_2026_delivery_evidence_hunts.py \
+      --snapshot "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+      --out "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
+      --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" \
+      --max-targets "{{andalucia_delivery_hunt_max_targets}}" \
+      --rows-per-query "{{andalucia_delivery_hunt_rows_per_query}}" \
+      --timeout "{{andalucia_delivery_hunt_timeout}}"; \
+    python3 scripts/generate_andalucia_2026_delivery_review_drafts.py \
+      --hunt-results "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
+      --out "etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json" \
+      --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"; \
     python3 scripts/export_legal_sanctions_snapshot.py \
       --db "{{db_path}}" \
       --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
@@ -3633,7 +4170,7 @@ explorer-gh-pages-build:
   @just cloudflare-pages-build
 
 cloudflare-pages-refresh-data:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elecciones {{gh_pages_dir}}/calendario-electoral {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
   mkdir -p \
     {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
     {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
@@ -3648,6 +4185,8 @@ cloudflare-pages-refresh-data:
     {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/initiative-lifecycle/data \
     {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/political-positions/data \
     {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elections-behavior/data \
+    {{gh_pages_dir}}/elecciones {{gh_pages_dir}}/elecciones/andalucia-2026 {{gh_pages_dir}}/elecciones/andalucia-2026/data \
+    {{gh_pages_dir}}/calendario-electoral {{gh_pages_dir}}/calendario-electoral/data \
     {{gh_pages_dir}}/people {{gh_pages_dir}}/people/data \
     {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/legal-sanctions/data \
     {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/policy-outcomes/data \
@@ -3728,6 +4267,28 @@ cloudflare-pages-refresh-data:
     --out "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
     --window-days 365 \
     --min-directional-votes 18
+  python3 scripts/export_andalucia_2026_accountability_snapshot.py \
+    --db "{{db_path}}" \
+    --out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+    --published-out "etl/data/published/andalucia-2026-accountability.json" \
+    --timeout "{{infoelectoral_timeout}}" \
+    --refresh-outcome-series
+  python3 scripts/run_andalucia_2026_delivery_evidence_hunts.py \
+    --snapshot "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+    --out "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
+    --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" \
+    --max-targets "{{andalucia_delivery_hunt_max_targets}}" \
+    --rows-per-query "{{andalucia_delivery_hunt_rows_per_query}}" \
+    --timeout "{{andalucia_delivery_hunt_timeout}}"
+  python3 scripts/generate_andalucia_2026_delivery_review_drafts.py \
+    --hunt-results "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
+    --out "etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json" \
+    --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"
+  python3 scripts/generar_proximas_elecciones_espana.py \
+    --today "{{snapshot_date}}" \
+    --timeout "{{infoelectoral_timeout}}" \
+    --json-out "etl/data/published/proximas-elecciones-espana.json" \
+    --public-json-out "{{gh_pages_dir}}/calendario-electoral/data/election-calendar.json"
   python3 scripts/export_legal_sanctions_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"
@@ -3892,8 +4453,14 @@ cloudflare-pages-refresh-data:
     cp -R "{{gh_pages_dir}}/political-positions/data/topic-person-rows" "{{gh_pages_next_app_dir}}/public/political-positions/data/topic-person-rows"; \
   fi
   cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" "{{gh_pages_next_app_dir}}/public/elections-behavior/data/elections-behavior.json"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/elecciones/andalucia-2026/data"
+  cp -f "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" "{{gh_pages_next_app_dir}}/public/elecciones/andalucia-2026/data/accountability.json"
+  cp -f "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" "{{gh_pages_next_app_dir}}/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json"
+  cp -f "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json" "{{gh_pages_next_app_dir}}/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/calendario-electoral/data"
+  cp -f "{{gh_pages_dir}}/calendario-electoral/data/election-calendar.json" "{{gh_pages_next_app_dir}}/public/calendario-electoral/data/election-calendar.json"
   cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
-  for rel in citizen/data graph/data explorer-politico/data explorer-sources/data explorer-temas/data explorer-votaciones/data people/data; do \
+  for rel in citizen/data graph/data explorer-politico/data explorer-sources/data explorer-temas/data explorer-votaciones/data calendario-electoral/data people/data; do \
     rm -rf "{{gh_pages_next_app_dir}}/public/$rel"; \
     mkdir -p "{{gh_pages_next_app_dir}}/public/$rel"; \
     cp -R "{{gh_pages_dir}}/$rel/." "{{gh_pages_next_app_dir}}/public/$rel/"; \
@@ -3909,6 +4476,7 @@ cloudflare-pages-refresh-data:
   @echo "Build Cloudflare Pages listo en {{gh_pages_next_out_dir}}"
 
 privacy-check-public-artifacts:
+  just real-data-only-check
   python3 scripts/check_public_privacy_leaks.py --path "{{gh_pages_next_out_dir}}" --path "{{gh_pages_dir}}" --path etl/data/published --path "{{gh_pages_next_app_dir}}/public"
 
 repo-hygiene-check:
@@ -4603,7 +5171,7 @@ citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-windo
   node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js --heartbeat-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_path}}" --compacted-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_path}}" --last "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window}}" --strict ${out_arg}
 
 cloudflare-pages-deploy:
-  @just cloudflare-pages-refresh-data
+  @just cloudflare-pages-build
   cd "{{gh_pages_next_app_dir}}" && npx wrangler pages deploy out --project-name "{{cloudflare_pages_project}}"
 
 votaconlachola-gh-pages-publish:

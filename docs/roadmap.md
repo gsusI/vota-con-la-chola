@@ -145,6 +145,21 @@ Si solo hiciéramos cinco cosas (en orden), serían:
 - Añadir una primera fuente de acción con efectos fuera del parlamento (BOE o dinero público) como `policy_events` trazables.
 - Definir el primer "paquete de intervención" end-to-end (eventos -> indicadores -> diseño -> diagnóstico), aunque sea en un solo dominio.
 
+## 4.4) Estrategia de escala
+
+La capacidad detallada y su secuencia son canónicas en `ROADMAP.md` (`Scale And Accountability Contract` y `P0S`). Aquí queda el principio de producto/datos:
+
+- Escalamos por lanes verificables, no por una cifra global. Identidad, documentos/OCR, votos, dinero, indicadores, review y publicación pasan gates independientes.
+- El control plane mueve referencias pequeñas mediante leases; los bytes van a object storage content-addressed; los hechos grandes van a Parquet particionado; el producto público consume summaries/shards acotados.
+- SQLite sigue siendo una pieza reproducible y navegable. No tiene que almacenar por sí solo todos los bytes ni servir consultas analíticas de cien millones de hechos.
+- Cada promoción conserva raw, checksum, parser/version, identidad del source record, incertidumbre, reconciliation report y costo medido.
+- Ningún dato sintético o mock cuenta como prueba de capacidad, cobertura o readiness. Solo corpus oficiales reales, trazables y reconciliados prueban una lane. Si el universo oficial es menor, se exige cobertura total.
+- En identidad, una candidatura, un cargo electo y un mandato son hechos distintos. Se conservan occurrences source-scoped hasta que un gold set adjudicado soporte merges cross-election. DNI, fecha de nacimiento y cualquier otro dato personal que la fuente oficial haya hecho público se conservan en facts públicos con URL, checksum y lineage de campo; la clasificación nunca los suprime. Las candidaturas se publican, cuando existan facts reales reconciliados, mediante su propia lane Parquet `candidate_occurrences`, separada de mandatos.
+- Automatizar anomalías no automatiza acusaciones. Una señal de posible irregularidad entra en review/corroboración/counterevidence; no se publica como corrupción por score.
+- La comunidad escala mediante módulos pequeños, fixtures, contratos, ownership y review reproducible; no mediante conocimiento tácito de una única persona.
+
+La arquitectura debe permitir `10M+` hechos y `1M+` documentos sin cambiar el contrato de evidencia. Llegar a `100M+` debe requerir más workers/storage/particiones, no reescribir la ontología ni romper URLs públicas.
+
 ## 5) Roadmap por fases (por esfuerzo)
 
 ### Fase 0: base metodológica y de datos (`ENG: 3`, `HUM: 13`)

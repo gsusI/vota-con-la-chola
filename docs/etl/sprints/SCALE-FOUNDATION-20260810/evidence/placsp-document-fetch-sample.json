@@ -1,0 +1,30 @@
+{
+  "failure_class_counts": {},
+  "failure_samples": [],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 1,
+  "pipeline_id": "placsp_document_fetch_real_s1",
+  "queue": {
+    "items_total": 579705,
+    "pipeline_id": "placsp_document_fetch_real_s1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 579685,
+      "succeeded": 20
+    },
+    "terminal_total": 20,
+    "unfinished_total": 579685
+  },
+  "schema_version": "document_fetch_queue_run_v1",
+  "status": "ok",
+  "totals": {
+    "claimed": 20,
+    "dead": 0,
+    "retried": 0,
+    "succeeded": 20
+  },
+  "worker_id": "placsp-doc-sample-real-s1",
+  "workers": 2
+}

@@ -1,0 +1,158 @@
+{
+  "by_extension": {
+    "html": {
+      "bytes": 1010329330,
+      "files": 13142,
+      "ok": 13142
+    },
+    "pdf": {
+      "bytes": 717488036,
+      "files": 1436,
+      "ok": 1436
+    },
+    "xml": {
+      "bytes": 534289886,
+      "files": 6820,
+      "ok": 6820
+    }
+  },
+  "by_source_group": {
+    "election_calendar": {
+      "bytes": 727586,
+      "files": 1,
+      "ok": 1
+    },
+    "elections": {
+      "bytes": 44066769,
+      "files": 93,
+      "ok": 93
+    },
+    "europarl_meps": {
+      "bytes": 8977089,
+      "files": 59,
+      "ok": 59
+    },
+    "manual": {
+      "bytes": 484936848,
+      "files": 1387,
+      "ok": 1387
+    },
+    "moncloa_referencias": {
+      "bytes": 155073,
+      "files": 3,
+      "ok": 3
+    },
+    "moncloa_rss_referencias": {
+      "bytes": 7536,
+      "files": 2,
+      "ok": 2
+    },
+    "municipal_concejales": {
+      "bytes": 11338475,
+      "files": 4,
+      "ok": 4
+    },
+    "official-captures": {
+      "bytes": 115695,
+      "files": 1,
+      "ok": 1
+    },
+    "placsp_autonomico_detail": {
+      "bytes": 357188621,
+      "files": 2824,
+      "ok": 2824
+    },
+    "placsp_sindicacion_detail": {
+      "bytes": 121892000,
+      "files": 1023,
+      "ok": 1023
+    },
+    "samples": {
+      "bytes": 58996,
+      "files": 5,
+      "ok": 5
+    },
+    "senado_votaciones_xmls": {
+      "bytes": 3994128,
+      "files": 796,
+      "ok": 796
+    },
+    "text_documents/congreso_intervenciones": {
+      "bytes": 27731231,
+      "files": 74,
+      "ok": 74
+    },
+    "text_documents/parl_initiative_docs": {
+      "bytes": 886954691,
+      "files": 14314,
+      "ok": 14314
+    },
+    "text_documents/programas_partidos": {
+      "bytes": 68688701,
+      "files": 282,
+      "ok": 282
+    },
+    "text_documents/text_documents": {
+      "bytes": 245273813,
+      "files": 530,
+      "ok": 530
+    }
+  },
+  "capacity_class": "below_s1_100k",
+  "checks": {
+    "all_files_accounted": true,
+    "repo_relative_manifest_paths": true,
+    "s1_100k_reached": false
+  },
+  "distinct_content_progress_to_s1_pct": 19.538,
+  "failure_samples": [],
+  "file_instances_progress_to_s1_pct": 21.398,
+  "generated_at": "2026-08-12T11:37:34.641316+00:00",
+  "limitations": [
+    "This inventories the existing local real corpus; it does not prove a 100k-document run.",
+    "Sparse or empty PDF text marks an OCR candidate only; OCR was not run.",
+    "Markup text counts are parser-based inventory metrics, not semantic extraction quality judgments.",
+    "Office documents and additional languages require new representative source inventory."
+  ],
+  "manifest": {
+    "bytes": 10678051,
+    "ref": "etl/data/manifests/real-document-format-inventory.jsonl",
+    "rows": 21398,
+    "sha256": "c38f9bfc3e090330631c7428d2a67b423f222b6cde9e35e71f963b9b4478d997",
+    "storage_class": "local_generated_ignored"
+  },
+  "quality_classes": {
+    "empty_markup": 2937,
+    "markup_with_text": 17025,
+    "pdf_digital_text": 1379,
+    "pdf_mixed_empty_pages": 9,
+    "pdf_mixed_sparse_pages": 48
+  },
+  "root": "etl/data/raw",
+  "schema_version": "real_document_format_inventory_v1",
+  "size_buckets": {
+    "100kb_to_1mb": 5920,
+    "10kb_to_100kb": 10178,
+    "1mb_to_10mb": 115,
+    "gte_10mb": 17,
+    "lt_10kb": 5168
+  },
+  "status": "ok",
+  "target_files_s1": 100000,
+  "totals": {
+    "bytes": 2262107252,
+    "distinct_content_objects": 19538,
+    "duplicate_file_instances": 1860,
+    "failed_or_unsupported": 0,
+    "files": 21398,
+    "markup_text_chars": 332180362,
+    "ok": 21398,
+    "pdf_files": 1436,
+    "pdf_files_ok": 1436,
+    "pdf_pages": 44825,
+    "pdf_pages_empty": 34,
+    "pdf_pages_sparse_ocr_candidate": 814,
+    "pdf_pages_with_text": 44791,
+    "pdf_text_chars": 124734123
+  }
+}

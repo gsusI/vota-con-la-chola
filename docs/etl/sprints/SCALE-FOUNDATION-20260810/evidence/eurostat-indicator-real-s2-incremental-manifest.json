@@ -1,0 +1,1359 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "bounded_file_rows": true,
+    "bounded_peak_rss": true,
+    "database_join_balance": true,
+    "distinct_observation_ids": true,
+    "lineage_complete": true,
+    "metadata_states_complete": true,
+    "minimum_rows": true,
+    "no_private_tokens": true,
+    "observation_state_complete": true,
+    "revision_pairs_balanced": true,
+    "revision_state_complete": true,
+    "source_url_complete": true
+  },
+  "coverage": {
+    "frequency": 1.0,
+    "lineage": 1.0,
+    "methodology": 1.0,
+    "source_url": 1.0,
+    "unit": 1.0
+  },
+  "generated_at": "2026-08-11T14:41:04+00:00",
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 37,
+    "input_fingerprint": "sha256_canonical_public_rows",
+    "partitions_rebuilt": 0,
+    "partitions_reused": 26,
+    "previous_manifest_sha256": "b8d8bde43f8e788f465ad980cea2c6803822a2ea71584ff7390d7fed6078ddbc",
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version"
+    ]
+  },
+  "lane": "indicator_observations",
+  "limitations": [
+    "Capacity validation does not establish representative real-world indicator coverage.",
+    "Revision order is deterministic by snapshot, source-record identity, and observation id; it does not infer upstream publication chronology beyond those fields.",
+    "Missing units, frequencies, methodologies, domains, and territories remain explicit rather than imputed.",
+    "Local materialization does not prove durable publication or restore."
+  ],
+  "partition_contract": {
+    "compression": "zstd",
+    "keys": [
+      "snapshot_date",
+      "source_id",
+      "geographic_scope",
+      "year"
+    ],
+    "max_file_rows": 100000,
+    "ordering": [
+      "source_id",
+      "point_year",
+      "point_date",
+      "series_code",
+      "source_snapshot_date",
+      "source_record_id",
+      "observation_id"
+    ],
+    "row_group_rows": 25000,
+    "strategy": "semantic_hive"
+  },
+  "partitions": [
+    {
+      "files": [
+        {
+          "bytes": 1896784,
+          "max_id": "indicator_observation:00000000000001755742",
+          "min_id": "indicator_observation:00000000000000000113",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2000/part-00000.parquet",
+          "rows": 13064,
+          "sha256": "13b1cc8011bf952e9886bbe1bd504eb9f621d8a9fc4bd6471171b403609eb3a4"
+        }
+      ],
+      "frequency_rows": 13064,
+      "input_sha256": "57c9ccdcd1bee97785c3ee3e6829bb7c4c8e81c744d86db261cd7e848a3d596c",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13064,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755742",
+      "methodology_rows": 13064,
+      "min_id": "indicator_observation:00000000000000000113",
+      "missing_rows": 0,
+      "numeric_rows": 13064,
+      "partition_id": "eurostat_sdmx|es-territorial|2000",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2000",
+      "rows": 13064,
+      "sole_rows": 13064,
+      "source_url_rows": 13064,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13064,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2000"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1923530,
+          "max_id": "indicator_observation:00000000000001755743",
+          "min_id": "indicator_observation:00000000000000000114",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2001/part-00000.parquet",
+          "rows": 13226,
+          "sha256": "7e9d6bbeee3c6660759f8774ad965170aacbc02d483663a4e2a1b07fe6c284c9"
+        }
+      ],
+      "frequency_rows": 13226,
+      "input_sha256": "10e45ea3aa0acde8f259495cc1af4756359ad6e3e58d8e656dd8a250e77de1ef",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13226,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755743",
+      "methodology_rows": 13226,
+      "min_id": "indicator_observation:00000000000000000114",
+      "missing_rows": 0,
+      "numeric_rows": 13226,
+      "partition_id": "eurostat_sdmx|es-territorial|2001",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2001",
+      "rows": 13226,
+      "sole_rows": 13226,
+      "source_url_rows": 13226,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13226,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2001"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1914014,
+          "max_id": "indicator_observation:00000000000001755744",
+          "min_id": "indicator_observation:00000000000000000115",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2002/part-00000.parquet",
+          "rows": 13116,
+          "sha256": "8bf17ac2d7c33219a0bfd5e5e394b871b15afb41f4a86126086de7d261e0ef46"
+        }
+      ],
+      "frequency_rows": 13116,
+      "input_sha256": "a511af0a8570a5ca1b90ab08b829e5bae844bc61226e9b04d4f3e7f0119801d7",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13116,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755744",
+      "methodology_rows": 13116,
+      "min_id": "indicator_observation:00000000000000000115",
+      "missing_rows": 0,
+      "numeric_rows": 13116,
+      "partition_id": "eurostat_sdmx|es-territorial|2002",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2002",
+      "rows": 13116,
+      "sole_rows": 13116,
+      "source_url_rows": 13116,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13116,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2002"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1972449,
+          "max_id": "indicator_observation:00000000000001755745",
+          "min_id": "indicator_observation:00000000000000000116",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2003/part-00000.parquet",
+          "rows": 13545,
+          "sha256": "5038dec88991bdb16f7820da0cb69d3d0adce06e7cd1be7a7a14bc2c1a9763b8"
+        }
+      ],
+      "frequency_rows": 13545,
+      "input_sha256": "e39b91af518780d515d6a98e331641631c8f9b7162083b144e98199d75293703",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13545,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755745",
+      "methodology_rows": 13545,
+      "min_id": "indicator_observation:00000000000000000116",
+      "missing_rows": 0,
+      "numeric_rows": 13545,
+      "partition_id": "eurostat_sdmx|es-territorial|2003",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2003",
+      "rows": 13545,
+      "sole_rows": 13545,
+      "source_url_rows": 13545,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13545,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2003"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1975815,
+          "max_id": "indicator_observation:00000000000001755746",
+          "min_id": "indicator_observation:00000000000000000117",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2004/part-00000.parquet",
+          "rows": 13559,
+          "sha256": "859677f2ecc6fe45af3105724d4da4dce3ee763b1bd117c62453e8f51fadd91b"
+        }
+      ],
+      "frequency_rows": 13559,
+      "input_sha256": "d8f167ecb62b0dcbb2286216d8337497c8f8389061f5d6c8f510b9f92bfdef8e",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13559,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755746",
+      "methodology_rows": 13559,
+      "min_id": "indicator_observation:00000000000000000117",
+      "missing_rows": 0,
+      "numeric_rows": 13559,
+      "partition_id": "eurostat_sdmx|es-territorial|2004",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2004",
+      "rows": 13559,
+      "sole_rows": 13559,
+      "source_url_rows": 13559,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13559,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2004"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1980434,
+          "max_id": "indicator_observation:00000000000001755747",
+          "min_id": "indicator_observation:00000000000000000118",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2005/part-00000.parquet",
+          "rows": 13565,
+          "sha256": "acb1c6d7cb7dfcb1b978e4efcca87505c0ebdecf4da726ce3d7ddbd92e359174"
+        }
+      ],
+      "frequency_rows": 13565,
+      "input_sha256": "d1dd248d530afa350ad3eb22bdfd49db0e1efe33009cbd23a8f325b2651680d1",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13565,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755747",
+      "methodology_rows": 13565,
+      "min_id": "indicator_observation:00000000000000000118",
+      "missing_rows": 0,
+      "numeric_rows": 13565,
+      "partition_id": "eurostat_sdmx|es-territorial|2005",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2005",
+      "rows": 13565,
+      "sole_rows": 13565,
+      "source_url_rows": 13565,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13565,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2005"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1981557,
+          "max_id": "indicator_observation:00000000000001755748",
+          "min_id": "indicator_observation:00000000000000000119",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2006/part-00000.parquet",
+          "rows": 13603,
+          "sha256": "94597dac2ffa8bc392db4bcb7372bef45153a9e531388872e6965e3369fc885a"
+        }
+      ],
+      "frequency_rows": 13603,
+      "input_sha256": "05ae48eeb522acdcef2ee740396ad82cee1eafbe78f7de22225f547e2a884c53",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13603,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755748",
+      "methodology_rows": 13603,
+      "min_id": "indicator_observation:00000000000000000119",
+      "missing_rows": 0,
+      "numeric_rows": 13603,
+      "partition_id": "eurostat_sdmx|es-territorial|2006",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2006",
+      "rows": 13603,
+      "sole_rows": 13603,
+      "source_url_rows": 13603,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13603,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2006"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 1980790,
+          "max_id": "indicator_observation:00000000000001755749",
+          "min_id": "indicator_observation:00000000000000000120",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2007/part-00000.parquet",
+          "rows": 13615,
+          "sha256": "c78cdff53d7ba2603d88b73277d7d2095f1ffcd4e720518b57c38f4ff37c6cb6"
+        }
+      ],
+      "frequency_rows": 13615,
+      "input_sha256": "3de5de06286ac0f3cbce528db12ddbb73e00a717315da97c49165f5e927680ba",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13615,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755749",
+      "methodology_rows": 13615,
+      "min_id": "indicator_observation:00000000000000000120",
+      "missing_rows": 0,
+      "numeric_rows": 13615,
+      "partition_id": "eurostat_sdmx|es-territorial|2007",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2007",
+      "rows": 13615,
+      "sole_rows": 13615,
+      "source_url_rows": 13615,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13615,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2007"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2034192,
+          "max_id": "indicator_observation:00000000000001755750",
+          "min_id": "indicator_observation:00000000000000000012",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2008/part-00000.parquet",
+          "rows": 13966,
+          "sha256": "9b72c9197421e0d38ad75e2a4e5349342821f423a9319cf92965a7bdb6d7d174"
+        }
+      ],
+      "frequency_rows": 13966,
+      "input_sha256": "eaeb8e195c3c1762e8c93fabbb6146908feb2f7285e1d9e72e913ba15b116e3e",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13966,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755750",
+      "methodology_rows": 13966,
+      "min_id": "indicator_observation:00000000000000000012",
+      "missing_rows": 0,
+      "numeric_rows": 13966,
+      "partition_id": "eurostat_sdmx|es-territorial|2008",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2008",
+      "rows": 13966,
+      "sole_rows": 13966,
+      "source_url_rows": 13966,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13966,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2008"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2037870,
+          "max_id": "indicator_observation:00000000000001755751",
+          "min_id": "indicator_observation:00000000000000000013",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2009/part-00000.parquet",
+          "rows": 13984,
+          "sha256": "15dced8cc9a9e3131b2cac433696057c8ca21a4c8076416076ea93b3ffb9492e"
+        }
+      ],
+      "frequency_rows": 13984,
+      "input_sha256": "37eec89ca1e16bbf4c4b475013e2c4742ca9f357e8379ad1722a527d0abff2e6",
+      "latest_revision_rows": 0,
+      "lineage_rows": 13984,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755751",
+      "methodology_rows": 13984,
+      "min_id": "indicator_observation:00000000000000000013",
+      "missing_rows": 0,
+      "numeric_rows": 13984,
+      "partition_id": "eurostat_sdmx|es-territorial|2009",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2009",
+      "rows": 13984,
+      "sole_rows": 13984,
+      "source_url_rows": 13984,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 13984,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2009"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2033773,
+          "max_id": "indicator_observation:00000000000001755752",
+          "min_id": "indicator_observation:00000000000000000014",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2010/part-00000.parquet",
+          "rows": 14004,
+          "sha256": "d0e024ac5ed2200124959be1b5e253bfff2cd339f4b91f344d264ef9d32fb56d"
+        }
+      ],
+      "frequency_rows": 14004,
+      "input_sha256": "eee29cd57dad39f93d7a5755c25245f047fcb3d051e1b15fec691716d816b8f0",
+      "latest_revision_rows": 0,
+      "lineage_rows": 14004,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755752",
+      "methodology_rows": 14004,
+      "min_id": "indicator_observation:00000000000000000014",
+      "missing_rows": 0,
+      "numeric_rows": 14004,
+      "partition_id": "eurostat_sdmx|es-territorial|2010",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2010",
+      "rows": 14004,
+      "sole_rows": 14004,
+      "source_url_rows": 14004,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 14004,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2010"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2046211,
+          "max_id": "indicator_observation:00000000000001755753",
+          "min_id": "indicator_observation:00000000000000000015",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2011/part-00000.parquet",
+          "rows": 14038,
+          "sha256": "d682f83405fa75b9dd729809d515db462a5aa8695360177ba32ec6727516008b"
+        }
+      ],
+      "frequency_rows": 14038,
+      "input_sha256": "9db6b6350ad849dd3f3c168550ac3746e75b014bcf1c6b56836513c337b18f7a",
+      "latest_revision_rows": 0,
+      "lineage_rows": 14038,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755753",
+      "methodology_rows": 14038,
+      "min_id": "indicator_observation:00000000000000000015",
+      "missing_rows": 0,
+      "numeric_rows": 14038,
+      "partition_id": "eurostat_sdmx|es-territorial|2011",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2011",
+      "rows": 14038,
+      "sole_rows": 14038,
+      "source_url_rows": 14038,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 14038,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2011"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2087072,
+          "max_id": "indicator_observation:00000000000001755754",
+          "min_id": "indicator_observation:00000000000000000016",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2012/part-00000.parquet",
+          "rows": 14288,
+          "sha256": "c74568a1e26ae94d157628b03d79488cec099ee392cc9080f217da056b5a760a"
+        }
+      ],
+      "frequency_rows": 14288,
+      "input_sha256": "237c4d7d6ef2b0e5fdd089c3142300126086a82514188251d3109970cb54f0d5",
+      "latest_revision_rows": 0,
+      "lineage_rows": 14288,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755754",
+      "methodology_rows": 14288,
+      "min_id": "indicator_observation:00000000000000000016",
+      "missing_rows": 0,
+      "numeric_rows": 14288,
+      "partition_id": "eurostat_sdmx|es-territorial|2012",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2012",
+      "rows": 14288,
+      "sole_rows": 14288,
+      "source_url_rows": 14288,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 14288,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2012"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2084752,
+          "max_id": "indicator_observation:00000000000001755755",
+          "min_id": "indicator_observation:00000000000000000017",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2013/part-00000.parquet",
+          "rows": 14322,
+          "sha256": "0a26ee3205b39b2a625702fbf28023aa292b9612d631ae2bc55a49b56be27329"
+        }
+      ],
+      "frequency_rows": 14322,
+      "input_sha256": "a7fe160a2e7731efe95b958d8167f5336912181629fcad5e8e10ebed639cf875",
+      "latest_revision_rows": 0,
+      "lineage_rows": 14322,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755755",
+      "methodology_rows": 14322,
+      "min_id": "indicator_observation:00000000000000000017",
+      "missing_rows": 0,
+      "numeric_rows": 14322,
+      "partition_id": "eurostat_sdmx|es-territorial|2013",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2013",
+      "rows": 14322,
+      "sole_rows": 14322,
+      "source_url_rows": 14322,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 14322,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2013"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 2091770,
+          "max_id": "indicator_observation:00000000000001755756",
+          "min_id": "indicator_observation:00000000000000000018",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2014/part-00000.parquet",
+          "rows": 14347,
+          "sha256": "219f596afbc7397eb4598e0ec88b16d8d62f12b2e7626c90f00fc09c2ea7014a"
+        }
+      ],
+      "frequency_rows": 14347,
+      "input_sha256": "b33e684320af55abbf98f52864da9b3fb9a9e7ea4352d315a1f6d94efa40ebf8",
+      "latest_revision_rows": 0,
+      "lineage_rows": 14347,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755756",
+      "methodology_rows": 14347,
+      "min_id": "indicator_observation:00000000000000000018",
+      "missing_rows": 0,
+      "numeric_rows": 14347,
+      "partition_id": "eurostat_sdmx|es-territorial|2014",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2014",
+      "rows": 14347,
+      "sole_rows": 14347,
+      "source_url_rows": 14347,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 14347,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2014"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14443935,
+          "max_id": "indicator_observation:00000000000001755800",
+          "min_id": "indicator_observation:00000000000000000001",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2015/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "4a59ca7b8c8072cde56a8d1758e8fdb8e3248fe88d512c40856c261af4f01f42"
+        },
+        {
+          "bytes": 7234440,
+          "max_id": "indicator_observation:00000000000001755767",
+          "min_id": "indicator_observation:00000000000000000019",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2015/part-00001.parquet",
+          "rows": 50373,
+          "sha256": "d0afc60308bdfd4d3782b0275c8fa7ba5815d4dc8b5e088009a0771e28fd13b4"
+        }
+      ],
+      "frequency_rows": 150373,
+      "input_sha256": "eb86c3d26c5cb54a07ff66918042cf2ecccba3565246fbf657cf1912435ee051",
+      "latest_revision_rows": 0,
+      "lineage_rows": 150373,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755800",
+      "methodology_rows": 150373,
+      "min_id": "indicator_observation:00000000000000000001",
+      "missing_rows": 0,
+      "numeric_rows": 150373,
+      "partition_id": "eurostat_sdmx|es-territorial|2015",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2015",
+      "rows": 150373,
+      "sole_rows": 150373,
+      "source_url_rows": 150373,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 150373,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2015"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14431947,
+          "max_id": "indicator_observation:00000000000001755801",
+          "min_id": "indicator_observation:00000000000000000002",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2016/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "daf00a8b0231fe4ded7b4e4fa31727c74aee4c232d61a345c031aaf6087f5119"
+        },
+        {
+          "bytes": 7242126,
+          "max_id": "indicator_observation:00000000000001755768",
+          "min_id": "indicator_observation:00000000000000000020",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2016/part-00001.parquet",
+          "rows": 50385,
+          "sha256": "15d94c9a35837916d213ec360b727bab3cf3d1033a52e8b347e926e77649ca7f"
+        }
+      ],
+      "frequency_rows": 150385,
+      "input_sha256": "73b9e72897e93a801a9d0044deeaeb89fa10f2ebfbd5910f2f664b7972326a9f",
+      "latest_revision_rows": 0,
+      "lineage_rows": 150385,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755801",
+      "methodology_rows": 150385,
+      "min_id": "indicator_observation:00000000000000000002",
+      "missing_rows": 0,
+      "numeric_rows": 150385,
+      "partition_id": "eurostat_sdmx|es-territorial|2016",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2016",
+      "rows": 150385,
+      "sole_rows": 150385,
+      "source_url_rows": 150385,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 150385,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2016"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14447137,
+          "max_id": "indicator_observation:00000000000001755802",
+          "min_id": "indicator_observation:00000000000000000003",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2017/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "406e5fde685cd9bba07d315a41f2eb5a80d11643c44f928fda008620356d849c"
+        },
+        {
+          "bytes": 7561027,
+          "max_id": "indicator_observation:00000000000001755769",
+          "min_id": "indicator_observation:00000000000000000021",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2017/part-00001.parquet",
+          "rows": 52719,
+          "sha256": "3e826d1ae349ca85a6f93c143c31040fd17d8ad9838f8a9d78bf3a1938d36dd1"
+        }
+      ],
+      "frequency_rows": 152719,
+      "input_sha256": "37c05f69f9d60a8a2b44f901d5cee81041c0f5ef3e66cc0bc864a697e3daef5f",
+      "latest_revision_rows": 0,
+      "lineage_rows": 152719,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755802",
+      "methodology_rows": 152719,
+      "min_id": "indicator_observation:00000000000000000003",
+      "missing_rows": 0,
+      "numeric_rows": 152719,
+      "partition_id": "eurostat_sdmx|es-territorial|2017",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2017",
+      "rows": 152719,
+      "sole_rows": 152719,
+      "source_url_rows": 152719,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 152719,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2017"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14427823,
+          "max_id": "indicator_observation:00000000000001755803",
+          "min_id": "indicator_observation:00000000000000000004",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2018/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "b8ddeeb4026c7b5a663cfd39225e1cd7d53f607184b1a1b0981941727bf5dd86"
+        },
+        {
+          "bytes": 7628885,
+          "max_id": "indicator_observation:00000000000001755770",
+          "min_id": "indicator_observation:00000000000000000022",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2018/part-00001.parquet",
+          "rows": 53259,
+          "sha256": "3b364231ce988723081fe0000ffd9d95bdce159a4d8948ba911d9597d151b156"
+        }
+      ],
+      "frequency_rows": 153259,
+      "input_sha256": "385abbd5ed91d7d259c902e989b9108fa1fed9800177ac35b9c2deebc097a413",
+      "latest_revision_rows": 0,
+      "lineage_rows": 153259,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755803",
+      "methodology_rows": 153259,
+      "min_id": "indicator_observation:00000000000000000004",
+      "missing_rows": 0,
+      "numeric_rows": 153259,
+      "partition_id": "eurostat_sdmx|es-territorial|2018",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2018",
+      "rows": 153259,
+      "sole_rows": 153259,
+      "source_url_rows": 153259,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 153259,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2018"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14475048,
+          "max_id": "indicator_observation:00000000000001755804",
+          "min_id": "indicator_observation:00000000000000000005",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2019/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "42cdd0b10ed401003647126044681879c52dce3395897ef2d8064961d1b563ab"
+        },
+        {
+          "bytes": 7677232,
+          "max_id": "indicator_observation:00000000000001755771",
+          "min_id": "indicator_observation:00000000000000000023",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2019/part-00001.parquet",
+          "rows": 53463,
+          "sha256": "a899512533e4930690bcf0b13a4962d7263ce3377e791a0815157bb7f17324ca"
+        }
+      ],
+      "frequency_rows": 153463,
+      "input_sha256": "8bb168857f1d6dfcb59e2a5e57885556448aa6cd27907087c36028624f11ad6d",
+      "latest_revision_rows": 0,
+      "lineage_rows": 153463,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755804",
+      "methodology_rows": 153463,
+      "min_id": "indicator_observation:00000000000000000005",
+      "missing_rows": 0,
+      "numeric_rows": 153463,
+      "partition_id": "eurostat_sdmx|es-territorial|2019",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2019",
+      "rows": 153463,
+      "sole_rows": 153463,
+      "source_url_rows": 153463,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 153463,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2019"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14420132,
+          "max_id": "indicator_observation:00000000000001755805",
+          "min_id": "indicator_observation:00000000000000000006",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2020/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "dd4b3c4853295d0c4ac44c6d39a03be1fd13740b0273d8d4a34dd8e916430d7e"
+        },
+        {
+          "bytes": 5707554,
+          "max_id": "indicator_observation:00000000000001755772",
+          "min_id": "indicator_observation:00000000000000000024",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2020/part-00001.parquet",
+          "rows": 39767,
+          "sha256": "7c86f5a758edfd66336be5443a862741c4bf7459de83f5758cbaf26ba0e4ca7e"
+        }
+      ],
+      "frequency_rows": 139767,
+      "input_sha256": "f2a6fd2b268da57072b6bbe68d3afaccf31fb4e32afc0f57997d047daa7c8143",
+      "latest_revision_rows": 0,
+      "lineage_rows": 139767,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755805",
+      "methodology_rows": 139767,
+      "min_id": "indicator_observation:00000000000000000006",
+      "missing_rows": 0,
+      "numeric_rows": 139767,
+      "partition_id": "eurostat_sdmx|es-territorial|2020",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2020",
+      "rows": 139767,
+      "sole_rows": 139767,
+      "source_url_rows": 139767,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 139767,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2020"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14411584,
+          "max_id": "indicator_observation:00000000000001755806",
+          "min_id": "indicator_observation:00000000000000000007",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2021/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "da606f64da2c9f7279a5340669af2f5503e2e9373b31e3e8cc9ccb142302f187"
+        },
+        {
+          "bytes": 5065082,
+          "max_id": "indicator_observation:00000000000001755704",
+          "min_id": "indicator_observation:00000000000000000025",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2021/part-00001.parquet",
+          "rows": 35227,
+          "sha256": "97608170c44c6c204cea89c5f7f846d6d3281ef83e277ee8af03eb107afc3645"
+        }
+      ],
+      "frequency_rows": 135227,
+      "input_sha256": "b8e53407aa8b6ca5f1a8c37d67c885895d63dee51e8d915338a88055596a44e8",
+      "latest_revision_rows": 0,
+      "lineage_rows": 135227,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755806",
+      "methodology_rows": 135227,
+      "min_id": "indicator_observation:00000000000000000007",
+      "missing_rows": 0,
+      "numeric_rows": 135227,
+      "partition_id": "eurostat_sdmx|es-territorial|2021",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2021",
+      "rows": 135227,
+      "sole_rows": 135227,
+      "source_url_rows": 135227,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 135227,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2021"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14410983,
+          "max_id": "indicator_observation:00000000000001755807",
+          "min_id": "indicator_observation:00000000000000000008",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2022/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "e2ab4763eb80ca093c947366ec141335c67d5fdd3ce037a6ba5315e4a15c5c03"
+        },
+        {
+          "bytes": 5148165,
+          "max_id": "indicator_observation:00000000000001755705",
+          "min_id": "indicator_observation:00000000000000000135",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2022/part-00001.parquet",
+          "rows": 35735,
+          "sha256": "f4cdcd2a785b72bbf42993646ef777e83a0344edd4c35458d0ee6135b00c4f39"
+        }
+      ],
+      "frequency_rows": 135735,
+      "input_sha256": "dbb934302fa015f87f02901841adb2d7ea79d9fb8006275c62bb5f5be1587dc7",
+      "latest_revision_rows": 0,
+      "lineage_rows": 135735,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755807",
+      "methodology_rows": 135735,
+      "min_id": "indicator_observation:00000000000000000008",
+      "missing_rows": 0,
+      "numeric_rows": 135735,
+      "partition_id": "eurostat_sdmx|es-territorial|2022",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2022",
+      "rows": 135735,
+      "sole_rows": 135735,
+      "source_url_rows": 135735,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 135735,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2022"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14418961,
+          "max_id": "indicator_observation:00000000000001755808",
+          "min_id": "indicator_observation:00000000000000000009",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2023/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "98af39e80a0afa24d7c94d8126046515d06ae8f78287a4cd7f04b2d2bb230f36"
+        },
+        {
+          "bytes": 5064675,
+          "max_id": "indicator_observation:00000000000001755706",
+          "min_id": "indicator_observation:00000000000000000136",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2023/part-00001.parquet",
+          "rows": 35149,
+          "sha256": "6e2a0f66391f85aaf44e0a95f2d16474c01d3f5fd3bd75b4f2981b350befaaa9"
+        }
+      ],
+      "frequency_rows": 135149,
+      "input_sha256": "b9ddc758c147d6bb593158c48e64a1dec8084ce4d3701f4c74a889ea6247ed1a",
+      "latest_revision_rows": 0,
+      "lineage_rows": 135149,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755808",
+      "methodology_rows": 135149,
+      "min_id": "indicator_observation:00000000000000000009",
+      "missing_rows": 0,
+      "numeric_rows": 135149,
+      "partition_id": "eurostat_sdmx|es-territorial|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2023",
+      "rows": 135149,
+      "sole_rows": 135149,
+      "source_url_rows": 135149,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 135149,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2023"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14413794,
+          "max_id": "indicator_observation:00000000000001755798",
+          "min_id": "indicator_observation:00000000000000000010",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2024/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "8e1173dad4139b99200cbc4a0e61ed88569acaa3d62c1345674ff5ac3fd5e71a"
+        },
+        {
+          "bytes": 3646720,
+          "max_id": "indicator_observation:00000000000001755707",
+          "min_id": "indicator_observation:00000000000000000161",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2024/part-00001.parquet",
+          "rows": 25373,
+          "sha256": "3dc5fc447a9d825a6905b4569008e3e2c90bee22a48edc2c2a3c6363d0f485fe"
+        }
+      ],
+      "frequency_rows": 125373,
+      "input_sha256": "0bdabc63b316512e62bd3f6a9f03ccfde80755452d5ca574c62d3b3acad5c21e",
+      "latest_revision_rows": 0,
+      "lineage_rows": 125373,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755798",
+      "methodology_rows": 125373,
+      "min_id": "indicator_observation:00000000000000000010",
+      "missing_rows": 0,
+      "numeric_rows": 125373,
+      "partition_id": "eurostat_sdmx|es-territorial|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2024",
+      "rows": 125373,
+      "sole_rows": 125373,
+      "source_url_rows": 125373,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 125373,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2024"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14402343,
+          "max_id": "indicator_observation:00000000000001755809",
+          "min_id": "indicator_observation:00000000000000000011",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2025/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "447458dd27ec058f55d4777a55b3a036b1a67b5a0764d0267d9fe1b76a841941"
+        },
+        {
+          "bytes": 2653254,
+          "max_id": "indicator_observation:00000000000001755708",
+          "min_id": "indicator_observation:00000000000000000331",
+          "path": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2025/part-00001.parquet",
+          "rows": 18117,
+          "sha256": "525a353980cf9e958fd1d42b90fe66a679da915b8ecf1958eb5dba3c9404e689"
+        }
+      ],
+      "frequency_rows": 118117,
+      "input_sha256": "c618d72c5cf86ae428c1a161863fd7ff961fb863813ca26b1d7b9dce6c47d3fd",
+      "latest_revision_rows": 0,
+      "lineage_rows": 118117,
+      "materialization": "reused",
+      "max_id": "indicator_observation:00000000000001755809",
+      "methodology_rows": 118117,
+      "min_id": "indicator_observation:00000000000000000011",
+      "missing_rows": 0,
+      "numeric_rows": 118117,
+      "partition_id": "eurostat_sdmx|es-territorial|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=indicator_observations/snapshot_date=2026-08-11/source_id=eurostat_sdmx/geographic_scope=es-territorial/year=2025",
+      "rows": 118117,
+      "sole_rows": 118117,
+      "source_url_rows": 118117,
+      "superseded_revision_rows": 0,
+      "text_rows": 0,
+      "unit_rows": 118117,
+      "values": {
+        "geographic_scope": "es-territorial",
+        "snapshot_date": "2026-08-11",
+        "source_id": "eurostat_sdmx",
+        "year": "2025"
+      }
+    }
+  ],
+  "performance": {
+    "fingerprint_seconds": 184.451531,
+    "materialize_seconds": 1e-06,
+    "max_peak_rss_mb": 1536.0,
+    "peak_rss_mb": 165.422,
+    "rows_per_second": 9438.894,
+    "total_seconds": 186.018519
+  },
+  "promotion_checks": {
+    "analytical_partition_gate": true,
+    "durable_public_origin_verified": false,
+    "official_source_totals_reconciled": false,
+    "published_artifact_restore_verified": false,
+    "representative_real_observations": false
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "schema": [
+    {
+      "name": "observation_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "observation_group_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "revision_ordinal",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "revision_count",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "revision_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "indicator_series_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "series_canonical_key",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "series_code",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "series_label",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "domain_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "domain_key",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "admin_level_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "admin_level_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "territory_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "territory_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "territory_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "geographic_scope",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_record_pk",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "source_record_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_snapshot_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_url_scope",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "lineage_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "point_date",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "point_year",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "nullable": true,
+      "type": "float64"
+    },
+    {
+      "name": "value_text",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "observation_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "unit",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "unit_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "frequency",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "frequency_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "methodology_version",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "methodology_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "dimensions_json",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "dimensions_sha256",
+      "nullable": false,
+      "type": "string"
+    }
+  ],
+  "schema_sha256": "d41d533be187ccfff786b0e9cf11e23803ff2b41cc68188cc1f8f78912779555",
+  "schema_version": "semantic_partition_manifest_v1",
+  "snapshot_date": "2026-08-11",
+  "source": {
+    "database_bytes": 2801963008,
+    "database_file": "eurostat-indicators-real-s2-20260811.db",
+    "dimensions_published_as_canonical_json": true,
+    "raw_payload_published": false,
+    "series_table": "indicator_series",
+    "table": "indicator_observation_records"
+  },
+  "totals": {
+    "distinct_observation_ids": 1755809,
+    "files": 37,
+    "frequency_rows": 1755809,
+    "joined_rows": 1755809,
+    "latest_revision_rows": 0,
+    "lineage_rows": 1755809,
+    "methodology_rows": 1755809,
+    "missing_rows": 0,
+    "numeric_rows": 1755809,
+    "observation_table_rows": 1755809,
+    "parquet_bytes": 253373860,
+    "partitions": 26,
+    "private_token_findings": 0,
+    "revised_groups": 0,
+    "revision_groups": 1755809,
+    "rows": 1755809,
+    "series_table_rows": 155435,
+    "sole_rows": 1755809,
+    "source_url_rows": 1755809,
+    "superseded_revision_rows": 0,
+    "text_rows": 0,
+    "unit_rows": 1755809
+  },
+  "transformer_version": "indicator_observations_public_v1"
+}

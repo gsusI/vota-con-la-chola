@@ -1,0 +1,990 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "all_partitions_materialized": true,
+    "bounded_peak_rss": true,
+    "database_rows_reconciled": true,
+    "member_vote_ids_unique": true,
+    "minimum_rows": true,
+    "no_private_tokens": true,
+    "source_id_consistency": true,
+    "source_record_lineage_at_least_99_pct": true,
+    "source_url_coverage_at_least_99_pct": true
+  },
+  "coverage": {
+    "event_source_record": 1.0,
+    "person_id": 1.0,
+    "source_id_match": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-11T06:31:10+00:00",
+  "identity_assurance": "observed_label_linkage_not_external_identity",
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 0,
+    "input_fingerprint": "sha256_canonical_public_rows",
+    "partitions_rebuilt": 20,
+    "partitions_reused": 0,
+    "previous_manifest_sha256": null,
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version"
+    ]
+  },
+  "lane": "member_votes",
+  "limitations": [
+    "Observed-label person links are not externally verified identity.",
+    "Local materialization does not prove durable public-origin publication.",
+    "Vote-lane promotion remains blocked until official totals reconcile at or above 95 percent."
+  ],
+  "partition_contract": {
+    "compression": "zstd",
+    "keys": [
+      "snapshot_date",
+      "source_id",
+      "jurisdiction",
+      "year"
+    ],
+    "max_file_rows": 100000,
+    "ordering": [
+      "source_id",
+      "year",
+      "member_vote_id"
+    ],
+    "row_group_rows": 25000,
+    "strategy": "semantic_hive"
+  },
+  "partitions": [
+    {
+      "bytes_total": 21717,
+      "event_source_record_rows": 456,
+      "files": [
+        {
+          "bytes": 21717,
+          "max_member_vote_id": 1306762,
+          "min_member_vote_id": 1306307,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2020/part-00000.parquet",
+          "rows": 456,
+          "sha256": "f3ce4818b0050691eff5693c0c5fc73fcf58612d34fd8fdb946be0964ba9718a"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "05f95ae7ba43cd8841153ba1e0ce3ed5000d056c7e2c0982db3bf6afed2e3782",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1306762,
+      "min_member_vote_id": 1306307,
+      "partition_id": "congreso_votaciones|es-congreso|2020",
+      "person_id_rows": 456,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2020",
+      "rows": 456,
+      "source_default_url_rows": 0,
+      "source_id_match_rows": 456,
+      "source_record_url_rows": 456,
+      "source_url_rows": 456,
+      "values": {
+        "jurisdiction": "es-congreso",
+        "snapshot_date": "2026-02-25",
+        "source_id": "congreso_votaciones",
+        "year": "2020"
+      }
+    },
+    {
+      "bytes_total": 85250,
+      "event_source_record_rows": 11200,
+      "files": [
+        {
+          "bytes": 85250,
+          "max_member_vote_id": 735138,
+          "min_member_vote_id": 723939,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2023/part-00000.parquet",
+          "rows": 11200,
+          "sha256": "14f73bfd858350c3006454aef24af88e71c83fec71d67e8470188b7bbb74e57b"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "56236b5693d7ac44549a8725506070cfcaf46c242b1109c0e170564f191d9103",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 735138,
+      "min_member_vote_id": 723939,
+      "partition_id": "congreso_votaciones|es-congreso|2023",
+      "person_id_rows": 11200,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2023",
+      "rows": 11200,
+      "source_default_url_rows": 0,
+      "source_id_match_rows": 11200,
+      "source_record_url_rows": 11200,
+      "source_url_rows": 11200,
+      "values": {
+        "jurisdiction": "es-congreso",
+        "snapshot_date": "2026-02-25",
+        "source_id": "congreso_votaciones",
+        "year": "2023"
+      }
+    },
+    {
+      "bytes_total": 1704151,
+      "event_source_record_rows": 301670,
+      "files": [
+        {
+          "bytes": 572454,
+          "max_member_vote_id": 835138,
+          "min_member_vote_id": 735139,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2024/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "0bf76cc2ad33a1c7fb55a0a480466cfd439c3ec5000c2c521941ecb1984c6a62"
+        },
+        {
+          "bytes": 558757,
+          "max_member_vote_id": 935138,
+          "min_member_vote_id": 835139,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2024/part-00001.parquet",
+          "rows": 100000,
+          "sha256": "10470f691d89b87fd2bd1561c95083bc94e66e66f3ba6a1a9c0316a0c4f8a7e4"
+        },
+        {
+          "bytes": 543692,
+          "max_member_vote_id": 1035138,
+          "min_member_vote_id": 935139,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2024/part-00002.parquet",
+          "rows": 100000,
+          "sha256": "4444bfc951dfe3677ef707f4e0113c329244b81ba041eab198d4e5fb68777dfb"
+        },
+        {
+          "bytes": 29248,
+          "max_member_vote_id": 1036808,
+          "min_member_vote_id": 1035139,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2024/part-00003.parquet",
+          "rows": 1670,
+          "sha256": "2c646bbd643c1d6e8d15b7bff53578753317210d885c1f265181029a6f6b8775"
+        }
+      ],
+      "files_total": 4,
+      "input_sha256": "b62007913b94e708a30375b0b245b69674dd0b5f89b8b3e6c29e648c43d88815",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1036808,
+      "min_member_vote_id": 735139,
+      "partition_id": "congreso_votaciones|es-congreso|2024",
+      "person_id_rows": 301670,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2024",
+      "rows": 301670,
+      "source_default_url_rows": 0,
+      "source_id_match_rows": 301670,
+      "source_record_url_rows": 301670,
+      "source_url_rows": 301670,
+      "values": {
+        "jurisdiction": "es-congreso",
+        "snapshot_date": "2026-02-25",
+        "source_id": "congreso_votaciones",
+        "year": "2024"
+      }
+    },
+    {
+      "bytes_total": 1341328,
+      "event_source_record_rows": 235417,
+      "files": [
+        {
+          "bytes": 565934,
+          "max_member_vote_id": 1136808,
+          "min_member_vote_id": 1036809,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2025/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "a548f7af01e2988835c67caf8512d1d49f8fad05422dba601f215e5e2742cabc"
+        },
+        {
+          "bytes": 560651,
+          "max_member_vote_id": 1236808,
+          "min_member_vote_id": 1136809,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2025/part-00001.parquet",
+          "rows": 100000,
+          "sha256": "5231664f0512d2c15dd3e6aa4662bd6d976f52b5e66bf07888804720e76c007d"
+        },
+        {
+          "bytes": 214743,
+          "max_member_vote_id": 1294589,
+          "min_member_vote_id": 1236809,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2025/part-00002.parquet",
+          "rows": 35417,
+          "sha256": "e8131f81f1cd30ea41ea095c0c96ca75fb5d97b8f65db23d12816e79f157dcc8"
+        }
+      ],
+      "files_total": 3,
+      "input_sha256": "7c961014b1c55165e8f0d60037e0a4fb45ed29e68c2d04faadaae8d463330fb6",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1294589,
+      "min_member_vote_id": 1036809,
+      "partition_id": "congreso_votaciones|es-congreso|2025",
+      "person_id_rows": 235417,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2025",
+      "rows": 235417,
+      "source_default_url_rows": 0,
+      "source_id_match_rows": 235417,
+      "source_record_url_rows": 235417,
+      "source_url_rows": 235417,
+      "values": {
+        "jurisdiction": "es-congreso",
+        "snapshot_date": "2026-02-25",
+        "source_id": "congreso_votaciones",
+        "year": "2025"
+      }
+    },
+    {
+      "bytes_total": 71478,
+      "event_source_record_rows": 9179,
+      "files": [
+        {
+          "bytes": 71478,
+          "max_member_vote_id": 1306306,
+          "min_member_vote_id": 585535,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2026/part-00000.parquet",
+          "rows": 9179,
+          "sha256": "7edb9b9d61090ae3214d7f5aed32ff2ac7dfe01167c31ac87cd8264b1f165dee"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "4ccb363dd1408cc8460e51269720c46066e65e1d829062af5d81955a0de7e671",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1306306,
+      "min_member_vote_id": 585535,
+      "partition_id": "congreso_votaciones|es-congreso|2026",
+      "person_id_rows": 9179,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=congreso_votaciones/jurisdiction=es-congreso/year=2026",
+      "rows": 9179,
+      "source_default_url_rows": 350,
+      "source_id_match_rows": 9179,
+      "source_record_url_rows": 8829,
+      "source_url_rows": 9179,
+      "values": {
+        "jurisdiction": "es-congreso",
+        "snapshot_date": "2026-02-25",
+        "source_id": "congreso_votaciones",
+        "year": "2026"
+      }
+    },
+    {
+      "bytes_total": 61438,
+      "event_source_record_rows": 9922,
+      "files": [
+        {
+          "bytes": 61438,
+          "max_member_vote_id": 1321701,
+          "min_member_vote_id": 359647,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2012/part-00000.parquet",
+          "rows": 9922,
+          "sha256": "b6c0feec5971990a3348ea618a6a56988825f943b791fb4c0972dd296a0ac590"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "7b420c4c154ebc3c7b2efaacdc57a6f53db439534a3f2c32bec79aa5276030c4",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1321701,
+      "min_member_vote_id": 359647,
+      "partition_id": "senado_votaciones|es-senado|2012",
+      "person_id_rows": 9922,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2012",
+      "rows": 9922,
+      "source_default_url_rows": 9831,
+      "source_id_match_rows": 9922,
+      "source_record_url_rows": 91,
+      "source_url_rows": 9922,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2012"
+      }
+    },
+    {
+      "bytes_total": 33089,
+      "event_source_record_rows": 3059,
+      "files": [
+        {
+          "bytes": 33089,
+          "max_member_vote_id": 1307530,
+          "min_member_vote_id": 413465,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2013/part-00000.parquet",
+          "rows": 3059,
+          "sha256": "57c7d4e76ac9834f246fb6009d62d60c0375a7f098715e204d92bce5a4978fde"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "f34568fd6b0e523f2b8d9ff4ba423ac0cb859f175f512d97942438cf4d7e8826",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1307530,
+      "min_member_vote_id": 413465,
+      "partition_id": "senado_votaciones|es-senado|2013",
+      "person_id_rows": 3059,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2013",
+      "rows": 3059,
+      "source_default_url_rows": 532,
+      "source_id_match_rows": 3059,
+      "source_record_url_rows": 2527,
+      "source_url_rows": 3059,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2013"
+      }
+    },
+    {
+      "bytes_total": 14245,
+      "event_source_record_rows": 935,
+      "files": [
+        {
+          "bytes": 14245,
+          "max_member_vote_id": 416990,
+          "min_member_vote_id": 416056,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2014/part-00000.parquet",
+          "rows": 935,
+          "sha256": "e284c6dcaca7416f01d8a90bc43e01ebb4c883a43b4bc8b226b1d0f393465424"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "b4b2d354f41f6f7494ca1a5dc36116c8cfddc86e25166729ab79ceaa5e7233fe",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 416990,
+      "min_member_vote_id": 416056,
+      "partition_id": "senado_votaciones|es-senado|2014",
+      "person_id_rows": 935,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2014",
+      "rows": 935,
+      "source_default_url_rows": 0,
+      "source_id_match_rows": 935,
+      "source_record_url_rows": 935,
+      "source_url_rows": 935,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2014"
+      }
+    },
+    {
+      "bytes_total": 84618,
+      "event_source_record_rows": 14567,
+      "files": [
+        {
+          "bytes": 84618,
+          "max_member_vote_id": 1321443,
+          "min_member_vote_id": 416991,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2015/part-00000.parquet",
+          "rows": 14567,
+          "sha256": "12eb0d3c44a5982d45a0e105196bbccee2fb3f990faaed5e246b05bba39cff1b"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "fb1c7287cd8652bfda6acef258fc35849c15cbc63062a901cea5a788f849a31c",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1321443,
+      "min_member_vote_id": 416991,
+      "partition_id": "senado_votaciones|es-senado|2015",
+      "person_id_rows": 14567,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2015",
+      "rows": 14567,
+      "source_default_url_rows": 13926,
+      "source_id_match_rows": 14567,
+      "source_record_url_rows": 641,
+      "source_url_rows": 14567,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2015"
+      }
+    },
+    {
+      "bytes_total": 44984,
+      "event_source_record_rows": 5282,
+      "files": [
+        {
+          "bytes": 44984,
+          "max_member_vote_id": 1475462,
+          "min_member_vote_id": 412579,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2016/part-00000.parquet",
+          "rows": 5282,
+          "sha256": "a0517ab8a58337b68402f8e8216ca9fd3f7841237d114330434aa7abe32f2069"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "dee4e3883e47360a8b111183442f897c760136e881803f26542c3d3745b7acf6",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1475462,
+      "min_member_vote_id": 412579,
+      "partition_id": "senado_votaciones|es-senado|2016",
+      "person_id_rows": 5282,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2016",
+      "rows": 5282,
+      "source_default_url_rows": 5282,
+      "source_id_match_rows": 5282,
+      "source_record_url_rows": 0,
+      "source_url_rows": 5282,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2016"
+      }
+    },
+    {
+      "bytes_total": 351296,
+      "event_source_record_rows": 79316,
+      "files": [
+        {
+          "bytes": 351296,
+          "max_member_vote_id": 1400468,
+          "min_member_vote_id": 387029,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2017/part-00000.parquet",
+          "rows": 79316,
+          "sha256": "0a74e870c11443029e1c8c81c57e6b4129d29464e03b74a8b0af53b92345ec4c"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "c27d657884224e0a3f0538721e852b7d35b29a2a67184bf09ffed7c8e08a0799",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1400468,
+      "min_member_vote_id": 387029,
+      "partition_id": "senado_votaciones|es-senado|2017",
+      "person_id_rows": 79316,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2017",
+      "rows": 79316,
+      "source_default_url_rows": 78204,
+      "source_id_match_rows": 79316,
+      "source_record_url_rows": 1112,
+      "source_url_rows": 79316,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2017"
+      }
+    },
+    {
+      "bytes_total": 350964,
+      "event_source_record_rows": 78329,
+      "files": [
+        {
+          "bytes": 350964,
+          "max_member_vote_id": 1472288,
+          "min_member_vote_id": 423636,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2018/part-00000.parquet",
+          "rows": 78329,
+          "sha256": "056d8fbdc1712751fd27279481e344375040d6c7d3fa0c4da0d6158c5e5c3af2"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "2322309e7be5a52569816ebc59d94810ab15d7aa60ac07d833284faec26c13d3",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1472288,
+      "min_member_vote_id": 423636,
+      "partition_id": "senado_votaciones|es-senado|2018",
+      "person_id_rows": 78329,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2018",
+      "rows": 78329,
+      "source_default_url_rows": 71274,
+      "source_id_match_rows": 78329,
+      "source_record_url_rows": 7055,
+      "source_url_rows": 78329,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2018"
+      }
+    },
+    {
+      "bytes_total": 30229,
+      "event_source_record_rows": 2887,
+      "files": [
+        {
+          "bytes": 30229,
+          "max_member_vote_id": 537412,
+          "min_member_vote_id": 534526,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2019/part-00000.parquet",
+          "rows": 2887,
+          "sha256": "28ae6edc469ea77a997d45cf8ee7ca283cfaaef102db8f9e6913db9a3dfea216"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "063731a71a266790ae7645d251243850b99dc572422120f507b55cf6d2684f40",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 537412,
+      "min_member_vote_id": 534526,
+      "partition_id": "senado_votaciones|es-senado|2019",
+      "person_id_rows": 2887,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2019",
+      "rows": 2887,
+      "source_default_url_rows": 0,
+      "source_id_match_rows": 2887,
+      "source_record_url_rows": 2887,
+      "source_url_rows": 2887,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2019"
+      }
+    },
+    {
+      "bytes_total": 361045,
+      "event_source_record_rows": 90003,
+      "files": [
+        {
+          "bytes": 361045,
+          "max_member_vote_id": 1829652,
+          "min_member_vote_id": 423896,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2020/part-00000.parquet",
+          "rows": 90003,
+          "sha256": "4a1214ee03d5d46c44156b5b145e81b468b59559aff249b8d2b574b478c6aa74"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "2cd6ff2cb3cd704e32c2545fd68d64ea3d47ff1cc5aed37394c54df7c572067b",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1829652,
+      "min_member_vote_id": 423896,
+      "partition_id": "senado_votaciones|es-senado|2020",
+      "person_id_rows": 90003,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2020",
+      "rows": 90003,
+      "source_default_url_rows": 12667,
+      "source_id_match_rows": 90003,
+      "source_record_url_rows": 77336,
+      "source_url_rows": 90003,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2020"
+      }
+    },
+    {
+      "bytes_total": 1152824,
+      "event_source_record_rows": 287015,
+      "files": [
+        {
+          "bytes": 380925,
+          "max_member_vote_id": 1524986,
+          "min_member_vote_id": 425456,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2021/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "bf09d1d36b6523b9217e05365cfa8bf3a5e8d4d4dad13226709bb69efabf9c4e"
+        },
+        {
+          "bytes": 405820,
+          "max_member_vote_id": 1626046,
+          "min_member_vote_id": 1524987,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2021/part-00001.parquet",
+          "rows": 100000,
+          "sha256": "59ae1f9bfdc6e87deb00d0c7af12e29f3dbf450b31034542e21a1d65103c0f8b"
+        },
+        {
+          "bytes": 366079,
+          "max_member_vote_id": 1713326,
+          "min_member_vote_id": 1626047,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2021/part-00002.parquet",
+          "rows": 87015,
+          "sha256": "937e67392ee21c96deeaf70e60852e6348393612d66ff95111cba3d28f7d69df"
+        }
+      ],
+      "files_total": 3,
+      "input_sha256": "78d3261047688d6350e6c9d2f6a07aba9edded44cd4f34082301a6547b9ef324",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1713326,
+      "min_member_vote_id": 425456,
+      "partition_id": "senado_votaciones|es-senado|2021",
+      "person_id_rows": 287015,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2021",
+      "rows": 287015,
+      "source_default_url_rows": 222811,
+      "source_id_match_rows": 287015,
+      "source_record_url_rows": 64204,
+      "source_url_rows": 287015,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2021"
+      }
+    },
+    {
+      "bytes_total": 2990203,
+      "event_source_record_rows": 460918,
+      "files": [
+        {
+          "bytes": 417418,
+          "max_member_vote_id": 1812531,
+          "min_member_vote_id": 370011,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2022/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "7657b1658ca5f94b3a1aa2d7552732f50ba3d71f7a700e31de5b9b10f08c1e80"
+        },
+        {
+          "bytes": 670279,
+          "max_member_vote_id": 1912795,
+          "min_member_vote_id": 1812532,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2022/part-00001.parquet",
+          "rows": 100000,
+          "sha256": "dbcc3392f31eddaf118d0c763daa57cdf8e585e394f5b835ac0487cc65be6200"
+        },
+        {
+          "bytes": 728329,
+          "max_member_vote_id": 2012795,
+          "min_member_vote_id": 1912796,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2022/part-00002.parquet",
+          "rows": 100000,
+          "sha256": "ae6348a3ec551d4cfa874c555ef91db562c6879108731fe0c431f79279c055f1"
+        },
+        {
+          "bytes": 732149,
+          "max_member_vote_id": 2112795,
+          "min_member_vote_id": 2012796,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2022/part-00003.parquet",
+          "rows": 100000,
+          "sha256": "b512e21dabdb44264b11f5e2b45032bc95a94a0e1a6e209c2e3a432d9c16da78"
+        },
+        {
+          "bytes": 442028,
+          "max_member_vote_id": 2173713,
+          "min_member_vote_id": 2112796,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2022/part-00004.parquet",
+          "rows": 60918,
+          "sha256": "a580130541b74aa76c3171f3a50359d980882c8d50ca4d39cfa52dcae6e13496"
+        }
+      ],
+      "files_total": 5,
+      "input_sha256": "d94734bac7a7f4cabbc0d8c333ed7ae4e8911f2dc953d2432837d802c2c7506c",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 2173713,
+      "min_member_vote_id": 370011,
+      "partition_id": "senado_votaciones|es-senado|2022",
+      "person_id_rows": 460918,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2022",
+      "rows": 460918,
+      "source_default_url_rows": 460918,
+      "source_id_match_rows": 460918,
+      "source_record_url_rows": 0,
+      "source_url_rows": 460918,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2022"
+      }
+    },
+    {
+      "bytes_total": 1791706,
+      "event_source_record_rows": 246468,
+      "files": [
+        {
+          "bytes": 722274,
+          "max_member_vote_id": 2268925,
+          "min_member_vote_id": 354327,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2023/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "64775684f6dbf217ffce2087999891967ac04dfc4583d8e67db711e82157ae21"
+        },
+        {
+          "bytes": 735977,
+          "max_member_vote_id": 2368925,
+          "min_member_vote_id": 2268926,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2023/part-00001.parquet",
+          "rows": 100000,
+          "sha256": "f7b60bc7bf60a01579a9c9072046232c324a362b245075df0b4d0ccaf5d0578c"
+        },
+        {
+          "bytes": 333455,
+          "max_member_vote_id": 2415393,
+          "min_member_vote_id": 2368926,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2023/part-00002.parquet",
+          "rows": 46468,
+          "sha256": "9f00e5a106350f0fab6a91ed67cca6d2a0e53c4863fd5bc97c9b3c661f0ad76d"
+        }
+      ],
+      "files_total": 3,
+      "input_sha256": "671734b0bab0eda6da4cddcd528654d51e8e94b806ff6e378612121e7274b38e",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 2415393,
+      "min_member_vote_id": 354327,
+      "partition_id": "senado_votaciones|es-senado|2023",
+      "person_id_rows": 246468,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2023",
+      "rows": 246468,
+      "source_default_url_rows": 246468,
+      "source_id_match_rows": 246468,
+      "source_record_url_rows": 0,
+      "source_url_rows": 246468,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2023"
+      }
+    },
+    {
+      "bytes_total": 267607,
+      "event_source_record_rows": 39618,
+      "files": [
+        {
+          "bytes": 267607,
+          "max_member_vote_id": 1478898,
+          "min_member_vote_id": 337044,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2024/part-00000.parquet",
+          "rows": 39618,
+          "sha256": "de6a69e0e7e68f66e3e7c4930b6a162f2d1dbc6afbebad1a5a6df3a2d432512e"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "079d7d3ca32abfd6cafe84c6ea7a031ef610630cdb3c74b5df3603822021d70b",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1478898,
+      "min_member_vote_id": 337044,
+      "partition_id": "senado_votaciones|es-senado|2024",
+      "person_id_rows": 39618,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2024",
+      "rows": 39618,
+      "source_default_url_rows": 21264,
+      "source_id_match_rows": 39618,
+      "source_record_url_rows": 18354,
+      "source_url_rows": 39618,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2024"
+      }
+    },
+    {
+      "bytes_total": 17612,
+      "event_source_record_rows": 266,
+      "files": [
+        {
+          "bytes": 17612,
+          "max_member_vote_id": 2415659,
+          "min_member_vote_id": 2415394,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2025/part-00000.parquet",
+          "rows": 266,
+          "sha256": "b45d7095e5a1eb17e394e94ad358e2e0a164dac613b9a68cf912de3a1b9062a6"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "ab06fbcfff835b597230af58fe4b2b69ae36b664cf9322b660c675737afa3dcf",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 2415659,
+      "min_member_vote_id": 2415394,
+      "partition_id": "senado_votaciones|es-senado|2025",
+      "person_id_rows": 266,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=2025",
+      "rows": 266,
+      "source_default_url_rows": 266,
+      "source_id_match_rows": 266,
+      "source_record_url_rows": 0,
+      "source_url_rows": 266,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "2025"
+      }
+    },
+    {
+      "bytes_total": 19889,
+      "event_source_record_rows": 526,
+      "files": [
+        {
+          "bytes": 19889,
+          "max_member_vote_id": 1697426,
+          "min_member_vote_id": 584752,
+          "path": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=unknown/part-00000.parquet",
+          "rows": 526,
+          "sha256": "f8efbd383669270171a61e4c6200616b9abe2ebb2ed16e774e13afbf74d42a43"
+        }
+      ],
+      "files_total": 1,
+      "input_sha256": "8c757c241c6676770a358cda901ab92abe920823ac06c86c3f8d9a66c35c8658",
+      "materialization": "rebuilt",
+      "max_member_vote_id": 1697426,
+      "min_member_vote_id": 584752,
+      "partition_id": "senado_votaciones|es-senado|unknown",
+      "person_id_rows": 526,
+      "private_token_findings": 0,
+      "relative_dir": "lane=member_votes/snapshot_date=2026-02-25/source_id=senado_votaciones/jurisdiction=es-senado/year=unknown",
+      "rows": 526,
+      "source_default_url_rows": 265,
+      "source_id_match_rows": 526,
+      "source_record_url_rows": 261,
+      "source_url_rows": 526,
+      "values": {
+        "jurisdiction": "es-senado",
+        "snapshot_date": "2026-02-25",
+        "source_id": "senado_votaciones",
+        "year": "unknown"
+      }
+    }
+  ],
+  "performance": {
+    "fingerprint_seconds": 37.578862,
+    "materialize_seconds": 28.118795,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 122.625,
+    "rows_per_second": 27797.346,
+    "total_seconds": 67.525619
+  },
+  "promotion_checks": {
+    "analytical_partition_gate": true,
+    "durable_public_origin_verified": false,
+    "external_identity_verified": false,
+    "official_totals_reconciled_at_least_95_pct": false
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "schema": [
+    {
+      "name": "member_vote_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "vote_event_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "seat",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "member_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "member_name_normalized",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "person_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "group_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "vote_choice",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_url",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url_scope",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_snapshot_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "parliamentary_group_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "legislature",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "vote_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "vote_year",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "jurisdiction",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "event_source_record_pk",
+      "nullable": true,
+      "type": "int64"
+    }
+  ],
+  "schema_sha256": "6aef71856da304d6e908e038ce2e191591cf060619ab4e481d59e3cff870e16d",
+  "schema_version": "semantic_partition_manifest_v1",
+  "snapshot_date": "2026-02-25",
+  "source": {
+    "database_bytes": 2659622912,
+    "database_file": "vota-recovered-scale-repair-v2-20260810.db",
+    "event_table": "parl_vote_events",
+    "raw_payload_published": false,
+    "table": "parl_vote_member_votes"
+  },
+  "totals": {
+    "distinct_member_vote_ids": 1877033,
+    "event_source_record_rows": 1877033,
+    "files": 33,
+    "joined_rows": 1877033,
+    "member_vote_rows": 1877033,
+    "parquet_bytes": 10795673,
+    "partitions": 20,
+    "person_id_rows": 1877033,
+    "private_token_findings": 0,
+    "rows": 1877033,
+    "source_default_url_rows": 1144058,
+    "source_id_match_rows": 1877033,
+    "source_record_url_rows": 732975,
+    "source_url_rows": 1877033,
+    "unknown_year_rows": 526
+  },
+  "transformer_version": "member_votes_public_v2",
+  "vote_audit": {
+    "events_not_reconciled": 1122,
+    "events_reconciled": 5830,
+    "events_reconciled_pct": 0.838608,
+    "events_totals_available": 6952,
+    "evidence_file": "senado-local-cache-repair-audit.json",
+    "foreign_key_errors": 0,
+    "schema_version": "vote_database_audit_v2"
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "analytical_partition_gate_passed": true,
+  "capacity_class": "s1_100k",
+  "checks": {
+    "amount_states_explicit": true,
+    "amounts_nonnegative": true,
+    "bounded_file_rows": true,
+    "bounded_peak_rss": true,
+    "counterparty_identifiers_retained_exactly": true,
+    "counterparty_names_retained_exactly": true,
+    "currency_eur_for_amounts": true,
+    "database_join_balance": true,
+    "distinct_source_records_bounded": true,
+    "fact_kind_balance": true,
+    "minimum_rows": true,
+    "no_private_tokens": true,
+    "public_domain_counterparty_retention_complete": true,
+    "source_record_complete": true,
+    "source_url_complete": true
+  },
+  "counterparty_publication_assurance": "all_official_public_domain_names_and_identifiers_retained;entity_type_is_classification_not_suppression",
+  "coverage": {
+    "amount": 1.0,
+    "counterparty_identifier": 0.39539,
+    "counterparty_name": 1.0,
+    "counterparty_publication_state": 1.0,
+    "source_record": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-12T12:35:10+00:00",
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 0,
+    "input_fingerprint": "sha256_canonical_public_rows",
+    "partitions_rebuilt": 1,
+    "partitions_reused": 0,
+    "previous_manifest_sha256": null,
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version"
+    ]
+  },
+  "lane": "public_money_facts",
+  "limitations": [
+    "Contract amounts are publication/noticing values, not verified payments.",
+    "Subsidy amounts are published award/call values, not verified disbursements.",
+    "PLACSP exact lexical decimals are retained; legacy SQLite REAL subsidy inputs are normalized to six-decimal Arrow decimals.",
+    "Official-source counterparty names and identifiers are retained for legal entities, natural persons, and unclassified counterparties; classification never suppresses public-domain evidence.",
+    "Published counterparties remain unresolved evidence, not merged or externally verified identities.",
+    "This artifact reflects only the supplied cohort; row scale does not prove complete official coverage or representative mix.",
+    "Local materialization does not prove durable public-origin publication or restore."
+  ],
+  "money_assurance": "published_amounts_not_execution_or_disbursement",
+  "partition_contract": {
+    "compression": "zstd",
+    "exact_territory_retained_as_column": true,
+    "keys": [
+      "snapshot_date",
+      "fact_kind",
+      "source_id",
+      "jurisdiction",
+      "year"
+    ],
+    "max_file_rows": 100000,
+    "ordering": [
+      "fact_kind",
+      "source_id",
+      "jurisdiction",
+      "year",
+      "money_fact_id"
+    ],
+    "row_group_rows": 50000,
+    "strategy": "semantic_hive_money_fact_kind"
+  },
+  "partitions": [
+    {
+      "amount_eur_total": "3259528635.280000",
+      "amount_rows": 100000,
+      "counterparty_identifier_rows": 39539,
+      "counterparty_name_rows": 100000,
+      "counterparty_not_available_rows": 0,
+      "counterparty_published_legal_entity_rows": 39539,
+      "counterparty_published_natural_person_rows": 0,
+      "counterparty_published_rows": 100000,
+      "counterparty_published_unclassified_rows": 60461,
+      "eur_rows": 100000,
+      "files": [
+        {
+          "bytes": 3464007,
+          "max_id": "subsidy_record:00000000000000100000",
+          "min_id": "subsidy_record:00000000000000000001",
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "c51c95f1b1bc4467b3f6e3f94f3c4b6ee00f4f07bdec7e0e5cbea215a8439a4c"
+        }
+      ],
+      "input_sha256": "285a2e4a7fd0ca8bf08cb02da41549cc890465a5c293ad5f62bce1dd766fd7e3",
+      "materialization": "rebuilt",
+      "max_id": "subsidy_record:00000000000000100000",
+      "min_id": "subsidy_record:00000000000000000001",
+      "nonnegative_amount_rows": 100000,
+      "partition_id": "subsidy_record|bdns_api_subvenciones|es-territorial|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026",
+      "rows": 100000,
+      "source_record_rows": 100000,
+      "source_url_rows": 100000,
+      "values": {
+        "fact_kind": "subsidy_record",
+        "jurisdiction": "es-territorial",
+        "snapshot_date": "2026-08-12",
+        "source_id": "bdns_api_subvenciones",
+        "year": "2026"
+      }
+    }
+  ],
+  "performance": {
+    "fingerprint_seconds": 6.766553,
+    "materialize_seconds": 4.77418,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 238.91,
+    "rows_per_second": 8239.758,
+    "total_seconds": 12.136277
+  },
+  "promotion_checks": {
+    "analytical_partition_gate": true,
+    "counterparty_entity_resolution_verified": false,
+    "durable_public_origin_verified": false,
+    "million_real_rows": false,
+    "official_live_source_totals_reconciled": false,
+    "representative_100k_real_rows": true
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "schema": [
+    {
+      "name": "money_fact_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "fact_kind",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_record_pk",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "source_record_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_snapshot_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_url_scope",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "lineage_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "jurisdiction",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "territory_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "fact_year",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "published_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "effective_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "primary_reference_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "secondary_reference_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "classification_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "classification_label",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "public_authority",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "counterparty_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "counterparty_identifier",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "counterparty_entity_type",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "counterparty_publication_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "counterparty_resolution_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "notice_type",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "procedure_type",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "contract_status_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "amount_eur",
+      "nullable": true,
+      "type": "decimal128_38_6"
+    },
+    {
+      "name": "currency",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "amount_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "amount_semantics",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "spend_semantics",
+      "nullable": false,
+      "type": "string"
+    }
+  ],
+  "schema_sha256": "d4ab736894992a78e8145f17ecc9890e4bdc53ca901d6e983b81b7253bd34e3b",
+  "schema_version": "semantic_partition_manifest_v1",
+  "snapshot_date": "2026-08-12",
+  "source": {
+    "database_bytes": 486121472,
+    "database_file": "bdns-concessions-real-s1-20260812.db",
+    "raw_payload_published": false,
+    "tables": [
+      "money_contract_records",
+      "money_contract_award_results",
+      "money_subsidy_records"
+    ]
+  },
+  "totals": {
+    "amount_eur_by_fact_kind": {
+      "subsidy_record": "3259528635.280000"
+    },
+    "amount_eur_total": "3259528635.280000",
+    "amount_rows": 100000,
+    "contract_award_rows": 0,
+    "contract_award_table_rows": 0,
+    "contract_notice_rows": 0,
+    "contract_table_rows": 0,
+    "counterparty_identifier_rows": 39539,
+    "counterparty_name_rows": 100000,
+    "counterparty_not_available_rows": 0,
+    "counterparty_published_legal_entity_rows": 39539,
+    "counterparty_published_natural_person_rows": 0,
+    "counterparty_published_rows": 100000,
+    "counterparty_published_unclassified_rows": 60461,
+    "distinct_source_records": 100000,
+    "eur_rows": 100000,
+    "files": 1,
+    "joined_rows": 100000,
+    "money_table_rows": 100000,
+    "nonnegative_amount_rows": 100000,
+    "parquet_bytes": 3464007,
+    "partitions": 1,
+    "private_token_findings": 0,
+    "rows": 100000,
+    "source_counterparty_identifier_rows": 39539,
+    "source_counterparty_name_rows": 100000,
+    "source_record_rows": 100000,
+    "source_url_rows": 100000,
+    "subsidy_record_rows": 100000,
+    "subsidy_table_rows": 100000,
+    "unknown_year_rows": 0
+  },
+  "transformer_version": "public_money_facts_v5"
+}

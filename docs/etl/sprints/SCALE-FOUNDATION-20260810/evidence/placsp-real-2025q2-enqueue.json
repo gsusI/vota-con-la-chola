@@ -1,0 +1,29 @@
+{
+  "archive_queue": {
+    "existing_total": 0,
+    "input_total": 3,
+    "inserted_total": 3,
+    "pipeline_total": 3
+  },
+  "archives": [
+    {
+      "period": "202504",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202504.zip"
+    },
+    {
+      "period": "202505",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202505.zip"
+    },
+    {
+      "period": "202506",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202506.zip"
+    }
+  ],
+  "peak_rss_mb": 37.844,
+  "pipeline_id": "placsp-contracts-real-s1-2025q2-20260811",
+  "placsp_bulk_run_id": 2,
+  "schema_version": "placsp_bulk_enqueue_v1",
+  "snapshot_date": "2025-06-30",
+  "source_id": "placsp_sindicacion",
+  "status": "ok"
+}

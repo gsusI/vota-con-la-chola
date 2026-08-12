@@ -1,0 +1,209 @@
+{
+  "detector_id": "procurement-threshold-pattern-review",
+  "detector_version": "v3",
+  "evidence_basis": "latest_contract_versions_with_award_results_preferred",
+  "min_records": 3,
+  "safety": {
+    "corruption_finding": false,
+    "human_review_required": true,
+    "initial_state": "review_signal",
+    "public_by_default": false
+  },
+  "samples": [
+    {
+      "amount_eur": 21683.54,
+      "cpv_code": "45450000",
+      "period_month": "2024-09",
+      "records": 3,
+      "review_subject_id": "ADIF - Presidencia|cpv:45450000",
+      "signal_id": "integrity-1ad9961d66bc8a4b6d22e2f702cc5101",
+      "subject_id": "ADIF - Presidencia"
+    },
+    {
+      "amount_eur": 27420.79,
+      "cpv_code": "71356000",
+      "period_month": "2025-05",
+      "records": 3,
+      "review_subject_id": "ADIF - Presidencia|cpv:71356000",
+      "signal_id": "integrity-d4c9ac0597f95def8b98b58c48046799",
+      "subject_id": "ADIF - Presidencia"
+    },
+    {
+      "amount_eur": 24610.0,
+      "cpv_code": "71730000",
+      "period_month": "2024-12",
+      "records": 3,
+      "review_subject_id": "ADIF - Presidencia|cpv:71730000",
+      "signal_id": "integrity-033351e1e9b2624e160aecac42978b6f",
+      "subject_id": "ADIF - Presidencia"
+    },
+    {
+      "amount_eur": 52200.0,
+      "cpv_code": "80500000",
+      "period_month": "2025-02",
+      "records": 4,
+      "review_subject_id": "ADIF - Presidencia|cpv:80500000",
+      "signal_id": "integrity-4f908586f36ee0503bb3580f9c4e8e02",
+      "subject_id": "ADIF - Presidencia"
+    },
+    {
+      "amount_eur": 42560.0,
+      "cpv_code": "39130000",
+      "period_month": "2025-03",
+      "records": 4,
+      "review_subject_id": "ADIF Alta Velocidad - Presidencia|cpv:39130000",
+      "signal_id": "integrity-75219c7c80eb39c962e067c619d81df8",
+      "subject_id": "ADIF Alta Velocidad - Presidencia"
+    },
+    {
+      "amount_eur": 24470.87,
+      "cpv_code": "44100000",
+      "period_month": "2024-11",
+      "records": 3,
+      "review_subject_id": "ALCALD\u00cdA DEL AYUNTAMIENTO DE VILLAGARCIA DE LA TORRE|cpv:44100000",
+      "signal_id": "integrity-fcfe3f8e4ea5f4ed88b12770a43d5c23",
+      "subject_id": "ALCALD\u00cdA DEL AYUNTAMIENTO DE VILLAGARCIA DE LA TORRE"
+    },
+    {
+      "amount_eur": 53640.0,
+      "cpv_code": "80000000",
+      "period_month": "2025-03",
+      "records": 6,
+      "review_subject_id": "Administrador Unico de FEVAL Gesti\u00f3n de Sevicios S.L.U.|cpv:80000000",
+      "signal_id": "integrity-f0bd811f540b961de0b39da7d2d14623",
+      "subject_id": "Administrador Unico de FEVAL Gesti\u00f3n de Sevicios S.L.U."
+    },
+    {
+      "amount_eur": 27107.13,
+      "cpv_code": "80000000",
+      "period_month": "2025-04",
+      "records": 3,
+      "review_subject_id": "Administrador Unico de FEVAL Gesti\u00f3n de Sevicios S.L.U.|cpv:80000000",
+      "signal_id": "integrity-cefbd804f9cfa939f92a32a56ce85f46",
+      "subject_id": "Administrador Unico de FEVAL Gesti\u00f3n de Sevicios S.L.U."
+    },
+    {
+      "amount_eur": 54815.34,
+      "cpv_code": "34990000",
+      "period_month": "2025-01",
+      "records": 13,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-eff42fdad4821dbb1e6f41c85f85d5ae",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 30050.1,
+      "cpv_code": "34990000",
+      "period_month": "2025-02",
+      "records": 7,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-17925a1a1e574fa9cde1ee40d0926008",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 47420.51,
+      "cpv_code": "34990000",
+      "period_month": "2025-03",
+      "records": 10,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-27ccaa2fef3714e45894764c4159ac27",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 37890.08,
+      "cpv_code": "34990000",
+      "period_month": "2025-04",
+      "records": 12,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-b0988deaa82becebe4613854b892154d",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 50517.21,
+      "cpv_code": "34990000",
+      "period_month": "2025-05",
+      "records": 11,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-e8b8ef591a5c47515b915d129927a59b",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 33306.49,
+      "cpv_code": "34990000",
+      "period_month": "2025-06",
+      "records": 8,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-2694e01e3b4fc0650c485217652d58c0",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 18520.72,
+      "cpv_code": "22200000",
+      "period_month": "2025-02",
+      "records": 8,
+      "review_subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n|cpv:22200000",
+      "signal_id": "integrity-f36f892459d5a267d47b1fcf7c732257",
+      "subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n"
+    },
+    {
+      "amount_eur": 25157.0,
+      "cpv_code": "79112000",
+      "period_month": "2025-01",
+      "records": 11,
+      "review_subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n|cpv:79112000",
+      "signal_id": "integrity-c559554b08f453a7b7147fdbba21c07c",
+      "subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n"
+    },
+    {
+      "amount_eur": 16244.0,
+      "cpv_code": "50114100",
+      "period_month": "2025-06",
+      "records": 3,
+      "review_subject_id": "Aena. Direcci\u00f3n del Aeropuerto de San Sebasti\u00e1n|cpv:50114100",
+      "signal_id": "integrity-9a1c3355e554b91e9994aeacf58fdc74",
+      "subject_id": "Aena. Direcci\u00f3n del Aeropuerto de San Sebasti\u00e1n"
+    },
+    {
+      "amount_eur": 19750.0,
+      "cpv_code": "39800000",
+      "period_month": "2025-04",
+      "records": 3,
+      "review_subject_id": "Aena. Direcci\u00f3n del Aeropuerto de Tenerife Norte|cpv:39800000",
+      "signal_id": "integrity-185578e30321d77e3b1d02bd11b1ffba",
+      "subject_id": "Aena. Direcci\u00f3n del Aeropuerto de Tenerife Norte"
+    },
+    {
+      "amount_eur": 17975.59,
+      "cpv_code": "18331000",
+      "period_month": "2024-12",
+      "records": 3,
+      "review_subject_id": "Alcalde de Ayuntamiento de Puente Genil|cpv:18331000",
+      "signal_id": "integrity-8f58d84d09d155c1e791be8acba6a088",
+      "subject_id": "Alcalde de Ayuntamiento de Puente Genil"
+    },
+    {
+      "amount_eur": 23087.6,
+      "cpv_code": "50232100",
+      "period_month": "2024-07",
+      "records": 3,
+      "review_subject_id": "Alcalde de Ayuntamiento de Puente Genil|cpv:50232100",
+      "signal_id": "integrity-ea2a7dd9e9aa55ef6e22a93f40ca8e18",
+      "subject_id": "Alcalde de Ayuntamiento de Puente Genil"
+    }
+  ],
+  "schema_version": "procurement_integrity_signal_detection_v3",
+  "source_ids": [
+    "placsp_sindicacion"
+  ],
+  "status": "dry_run",
+  "threshold_eur": 15000.0,
+  "totals": {
+    "evidence_rows_materialized": 0,
+    "evidence_rows_sampled": 14074,
+    "matched_candidate_rows": 17585,
+    "matched_contract_rows": 17585,
+    "signals_detected": 2036,
+    "signals_materialized": 0,
+    "signals_persisted": 0
+  }
+}

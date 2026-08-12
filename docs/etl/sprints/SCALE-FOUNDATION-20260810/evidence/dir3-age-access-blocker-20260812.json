@@ -1,0 +1,26 @@
+{
+  "schema_version": "public_source_access_blocker_v1",
+  "observed_at": "2026-08-12T11:50:34Z",
+  "source_id": "dir3_unidades_age",
+  "organism": "Ministerio para la Transformación Digital y de la Función Pública / Secretaría General de Administración Digital",
+  "catalog_url": "https://datos.gob.es/es/catalogo/e05251701-directorio-comun-de-unidades-organicas-y-oficinas-dir3",
+  "distribution_url": "https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741",
+  "strict_network": {
+    "command": "python3 scripts/ingestar_politicos_es.py ingest --db etl/data/staging/politicos-es.db --raw-dir etl/data/raw --source dir3_unidades_age --snapshot-date 2026-08-12 --timeout 60 --strict-network",
+    "exit_code": 1,
+    "failure": "urllib.error.HTTPError: HTTP Error 302: redirect error that would lead to an infinite loop",
+    "records_loaded": 0
+  },
+  "direct_probe": {
+    "command": "curl -sS -I --max-redirs 5 -L <distribution_url>",
+    "http_status": 200,
+    "content_type": "text/html",
+    "content_length": 244,
+    "body_signal": "Request Rejected",
+    "expected_content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  },
+  "fallback_used": false,
+  "synthetic_or_mock_rows_loaded": 0,
+  "status": "blocked_official_origin",
+  "next_action": "Request a stable machine-readable official DIR3 AGE distribution; do not rerun without a changed endpoint, reviewed official capture, or upstream status signal."
+}

@@ -69,6 +69,14 @@ jobs:
         run: |
           python3 scripts/check_repo_root_hygiene.py
           python3 -m unittest tests.test_check_repo_root_hygiene -q
+          python3 -m unittest tests.test_integrity_signal_policy_contract -q
+          python3 -m unittest \
+            tests.test_check_public_privacy_leaks \
+            tests.test_sanitize_public_gzip_json \
+            -q
+          python3 scripts/check_public_privacy_leaks.py \
+            --path etl/data/published \
+            --path ui/gh-pages-next/public
 
   source-onboarding-contract:
     runs-on: ubuntu-latest
@@ -83,6 +91,56 @@ jobs:
           python3 -m unittest tests.test_source_onboarding_scaffold -q
           python3 scripts/ingestar_politicos_es.py init-db --db /tmp/vota-source-onboarding.db
           rm -f /tmp/vota-source-onboarding.db
+
+  million-scale-control-plane-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Parquet contract dependency
+        run: pip install "pyarrow>=18,<21"
+
+      - name: Verify durable queue, provenance, and real-data contracts
+        run: |
+          python3 -m unittest \
+            tests.test_publicdata_ops_work_queue \
+            tests.test_publicdata_blobstore \
+            tests.test_publicdata_object_store \
+            tests.test_content_object_replication \
+            tests.test_enqueue_pipeline_work \
+            tests.test_run_document_fetch_queue \
+            tests.test_run_text_extraction_queue \
+            tests.test_senado_votaciones_compat_exports \
+            tests.test_senado_local_detail_prefetch \
+            tests.test_backfill_persons_from_vote_member_names \
+            tests.test_backfill_mandates_from_vote_member_names \
+            tests.test_report_pipeline_work_queue \
+            tests.test_audit_vote_database \
+            tests.test_audit_large_vote_snapshot \
+            tests.test_export_vote_database_shards \
+            tests.test_shard_large_vote_snapshot \
+            tests.test_validate_member_vote_shards \
+            tests.test_semantic_partitions \
+            tests.test_accountability_partitions \
+            tests.test_actor_mandate_partitions \
+            tests.test_money_partitions \
+            tests.test_bdns_bulk_ingest \
+            tests.test_report_scale_readiness \
+            tests.test_inventory_document_corpus \
+            tests.test_benchmark_pdf_ocr_routing \
+            tests.test_integrity_signal_workflow \
+            tests.test_detect_procurement_integrity_signals \
+            tests.test_export_public_integrity_signals \
+            tests.test_politicos_scale_primitives \
+            -q
 
   citizen-preset-contract:
     runs-on: ubuntu-latest

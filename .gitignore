@@ -81,6 +81,10 @@ etl/data/raw/*
 !etl/data/raw/samples/
 !etl/data/raw/samples/**
 etl/data/derived/parl_initiative_doc_texts/
+etl/data/derived/text/
+etl/data/derived/member-vote-shards/
+etl/data/object-origin/
+etl/data/manifests/
 
 # SQLite artifacts anywhere in the project
 *.db

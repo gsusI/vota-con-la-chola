@@ -1,0 +1,120 @@
+{
+  "analytical_ingest_gate_passed": true,
+  "archive_queue": {
+    "active_workers": [],
+    "attempt_status_counts": {
+      "succeeded": 3
+    },
+    "attempts_total": 3,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-11T15:46:57+00:00",
+    "items_total": 3,
+    "max_attempts_observed": 1,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-contracts-real-s1-20260811:archives",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 3
+    },
+    "terminal_total": 3,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "period:2025",
+        "state": "succeeded",
+        "total": 3
+      }
+    ],
+    "unfinished_total": 0
+  },
+  "checks": {
+    "all_archive_rows_ok": true,
+    "all_archives_succeeded": true,
+    "all_member_rows_ok": true,
+    "all_members_succeeded": true,
+    "archive_member_bytes_reconcile": true,
+    "archive_rows_reconcile": true,
+    "member_queue_discovered": true,
+    "member_record_counts_reconcile": true,
+    "no_dead_archives": true,
+    "no_dead_members": true,
+    "unique_version_lineage_present": true
+  },
+  "limitations": [
+    "The selected archive cohort is not the complete official corpus since 2012.",
+    "Published contract awards are commitments, not proof of invoice or payment execution.",
+    "Supplier publication requires legal-entity classification before public export."
+  ],
+  "member_queue": {
+    "active_workers": [],
+    "attempt_status_counts": {
+      "dead": 9,
+      "succeeded": 297
+    },
+    "attempts_total": 306,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-11T15:46:57+00:00",
+    "items_total": 297,
+    "max_attempts_observed": 2,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-contracts-real-s1-20260811:members",
+    "retry_attempts_total": 9,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 297
+    },
+    "terminal_total": 297,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "archive:3",
+        "state": "succeeded",
+        "total": 111
+      },
+      {
+        "partition_key": "archive:1",
+        "state": "succeeded",
+        "total": 94
+      },
+      {
+        "partition_key": "archive:2",
+        "state": "succeeded",
+        "total": 92
+      }
+    ],
+    "unfinished_total": 0
+  },
+  "observed": {
+    "archive_bytes": 462341818,
+    "archives": 3,
+    "award_results": 123953,
+    "document_manifests": 1422578,
+    "duplicate_version_sightings": 331,
+    "members": 297,
+    "peak_rss_mb": 44.984,
+    "record_versions": 147113,
+    "records_seen": 147444,
+    "stable_contracts": 68189,
+    "tombstones": 480,
+    "uncompressed_member_bytes": 4510718806
+  },
+  "pipeline_id": "placsp-contracts-real-s1-20260811",
+  "placsp_bulk_run_id": 1,
+  "promotion_gate_passed": false,
+  "publication_status": "local_normalized_not_published",
+  "schema_version": "placsp_bulk_run_report_v1",
+  "snapshot_date": "2025-03-31",
+  "source_id": "placsp_sindicacion",
+  "status": "succeeded"
+}

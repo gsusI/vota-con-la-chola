@@ -1,450 +1,495 @@
 # ROADMAP
 
 Status: `canonical`
-Updated: `2026-07-25`
+Updated: `2026-08-12`
 
-## Mandate
+## 1. Mission
 
-This file is the single source of truth for the future of the project.
+Build Spain's open, evidence-backed accountability infrastructure.
 
-Rules:
-- If a future initiative, surface, or expansion is not in this file, it is not prioritized.
-- `docs/etl/e2e-scrape-load-tracker.md` remains the source of truth for operational status, connector gates, and blockers already in flight.
-- `docs/roadmap.md`, `docs/roadmap-tecnico.md`, and `docs/roadmap/public-roadmap.md` are supporting documents. They may elaborate or operationalize this roadmap, but they must not introduce net-new future scope without updating this file first.
-- Other TODO-like docs must be pointers, not parallel planning systems.
-- When direction changes, update this file first. Then align derived docs.
-
-## End Goal
-
-Build an evidence-backed public accountability system for Spain that can answer, with explicit caveats:
+The system must let a citizen, journalist, researcher, auditor, or public servant answer:
 
 - what was promised,
-- what was done,
-- what each party, elected official, party official, and direct political appointee has done through time,
-- which parties and accountable actors were involved in a specific issue,
-- who is responsible,
-- who can change it now,
-- what changed afterward,
-- and what remains unknown or blocked.
-
-The finished system must be able to answer both narrow public questions and hard structural questions with drill-down to primary evidence.
-
-Primary public surfaces:
-- `vote explainer`
-- `responsibility explainer`
-- `source catalog / scrape coverage map`
-- `source obstruction tracker`
-- `accountability dossiers`
-- `actor dossiers`
-- `evidence-backed Q&A`
-
-## Platform Thesis
-
-This project is not meant to scale by having the core team manually build every answer.
-
-It should scale as a shared accountability platform:
-- the core team builds and maintains the rails,
-- collaborators add bounded evidence-producing components,
-- all public answers run through the same evidence and provenance contract.
-
-Core team responsibilities:
-- canonical ontology, IDs, and relationship model,
-- source registry, scrape coverage publication, and blocker taxonomy,
-- jurisdiction, competence, and responsibility framework,
-- plugin contracts and SDK,
-- provenance, reproducibility, privacy, and review gates,
-- Evidence API and canonical public surfaces,
-- quality thresholds and publication rules.
-
-Collaborator responsibilities:
-- source connectors,
-- document and measure extractors,
-- topic and domain codebooks,
-- review and adjudication workflows,
-- dossiers, explainers, and downstream tools built on the Evidence API.
-
-Design rule:
-- the core team builds the rails,
-- the ecosystem adds modules,
-- the public product composes those modules into answerable questions.
-
-## North-Star Questions
-
-The roadmap is complete only when the system can answer questions like these responsibly:
-
-- What exactly was voted, what passed, and who voted how?
-- Who created, approved, promulgated, implements, and enforces a given rule?
-- Which level of government or institution actually owns a policy constraint?
-- Why does a service fail in practice: law, budget, staffing, execution, management, or geography?
-- What evidence is strong, what is partial, and what cannot yet be answered?
-- In a public failure or disaster case, what warnings existed, who had the duty to act, what was decided or omitted, and what evidence supports attributing preventable harm?
-- For a specific issue, which parties, elected officials, party officials, appointees, institutions, and implementation bodies touched the chain?
-- For a specific actor or party, what is their historical record by issue, with the evidence split between promises, votes, rules, appointments, money, enforcement, and outcomes?
-
-## Data Extraction Roadmap
-
-Purpose:
-- Build the evidence spine for accountability across history, by issue, party, politician, appointee, institution, and responsibility role.
-
-Actor scope:
-- `Politician` means any publicly accountable actor in one of these evidence-backed categories:
-  - elected official,
-  - party member or party office-holder when public source data supports the link,
-  - person directly appointed by an elected official, party member, party-controlled body, or politically accountable institution.
-- Career civil servants and contractors are not treated as politicians by default. They can still appear as implementation or enforcement actors when a public record names them, but attribution must distinguish administrative execution from political accountability.
-
-Where we are now:
-- A citizen-first Andalucía slice is live at `/elecciones/andalucia-2026/`: a reviewed `10 KB` `andalucia_water_commitment_receipt_v1` tracks three investiture water commitments as of `2026-07-25`, keeps pre-`2026-07-02` evidence as historical context, records one non-progress reiteration, links official sources/checkpoints/owners/unknowns, and reports zero formal post-investiture milestones without calling any promise late or broken.
-- Actor backbone exists: `persons`, `parties`, `mandates`, `institutions`, `government_org_units`, `government_org_relationships`, `government_positions`, and `person_org_memberships`.
-- Parliamentary action spine exists: votes, initiatives, documents, text extraction, topic evidence, and topic positions.
-- Policy/event scaffolding exists: domains, axes, instruments, `policy_events`, and event axis scores.
-- Generic accountability ledger spine now exists: `accountability_issues`, `accountability_ledger_entries`, source-specific backfills, actor-id resolution, shared evidence-tier inference aligned to the source hierarchy, dated/latest public JSON export with issue-led and actor-led summaries, and an actor-resolution queue for unresolved labels.
-- Conservative D0 identity bridge now exists for official roll-call labels: distinct Congreso/Senado vote-member names can seed `persons` + `person_name_aliases`, link `parl_vote_member_votes.person_id`, and materialize observed chamber mandates from voting participation. Parliamentary group codes are now materialized separately as `parliamentary_groups` + observed memberships and linked into the generic ledger, including group rollup entries per issue/vote/group/role; they are not treated as one-party affiliation. Where a dated mandate has source-backed `party_id`, the parliamentary backfill now also emits conservative party rollups per issue/vote/party/role, without inferring party from group code. It uses exact normalized labels only and keeps the caveat that external person identifiers, full mandate dates, and formal party affiliation still need verification.
-- BOE appointment/title backfill now creates a conservative direct-appointee bridge from real BOE `policy_events`: exact-name `persons`, `person_name_aliases`, `government_positions`, `person_org_memberships`, and ledger `person_id`/`position_id` links for appointment/dismissal rows, with `political_appointee` position kind only for high-office title patterns such as director general or secretario de estado. BOE extraction supports the official OpenData daily-summary endpoint `/datosabiertos/api/boe/sumario/{yyyymmdd}` through `just etl-ingest-boe-sumario-snapshot`, preserving section, department, epigraph, publication date, and legal document URLs. Current rich cut for snapshot `2026-02-12` loads `85/85` BOE records, maps `85` BOE policy events, publishes `85` BOE rule rows and `12` appointment rows, resolves BOE department labels to conservative institution stubs, and adds `12` position-linked appointee rows. The BOE source-issue assignment batch is now applied and the explicit assignment-review queue is `0`.
-- Compact accountability dossier export now exists: `accountability-dossiers-<snapshot>.json` / `accountability-dossiers-latest.json` summarize actor history, issue history, issue-actor edges, role counts, and ID coverage without publishing every raw ledger row. A publish gate now validates ledger/dossier schema versions, snapshot dates, count parity, resolved actor coverage, ID coverage floors, and public artifact size before HF packaging. The public ledger export can now cap per-issue evidence rows, actor sample entries, and nested actor/issue summaries while preserving full coverage totals, so richer D1+D2+D3 snapshots fit static publication budgets.
-- Static public dossier surface now exists at `/accountability-dossiers/`, backed by `/accountability-dossiers/data/dossiers.json` and `/accountability-dossiers/data/ledger.json`, with coverage metrics, top issue summaries, top actor summaries, direct JSON download links, actor/issue index routes, and generated actor/issue detail routes under `/accountability-dossiers/actors/*` and `/accountability-dossiers/issues/*`. The current rich cut includes parliamentary votes, group rollups, source-backed party rollups, BOE legal-responsibility issues, and sanction competent-body current-owner rows in the same public surface.
-- Static Evidence API slice now exists at `/accountability-evidence/`, backed by `/accountability-evidence/data/evidence-api.json` and published as `accountability-evidence-api-<snapshot>.json` / `accountability-evidence-api-latest.json`. Current cut exposes 5 repeatable question templates, 27 deterministic natural-language Q&A answers with shareable static routes under `/accountability-evidence/questions/*`, 929 actor answers, 235 issue answers, 2,351 bounded actor-issue references, 13 citizen issue clusters with reviewed public bucket labels, 235 applied source-issue reviews, 323 issue-cluster links, 13 reviewed cluster items, 0 issue-level assignment review queue items, 9 explicit gap answers, and 1,164 evidence samples, with explicit `partial`/`unanswerable` caveats, source-confidence levels, freshness levels, completeness percentages, and fallback buckets for missing promises, money, implementation, enforcement, audits, and outcomes. The published API uses compact JSON by default so the same coverage fits static/public artifact budgets; `--pretty` remains available for manual inspection. Five reviewed batches are now applied through `scripts/apply_accountability_issue_cluster_assignment_reviews.py` (10 rows, 25 rows, 75 rows, 97-row BOE batch, and the 10-row money batch), moving the reviewed source-issue seed from 18 to 235 rows and keeping the explicit issue-assignment queue at 0.
-- Source catalog, scrape queue, obstruction tracking, privacy gates, and static public surfaces already exist.
-
-Where we are going:
-- Every public accountability answer should resolve to:
-  - actors involved,
-  - issue/topic/domain,
-  - instrument used,
-  - role in the chain,
-  - date and scope,
-  - source record,
-  - evidence quality,
-  - uncertainty or blocker state.
-- Accountability roles should be explicit, not inferred from vague proximity:
-  - `promised`
-  - `proposed`
-  - `sponsored`
-  - `voted_for`
-  - `voted_against`
-  - `abstained`
-  - `approved`
-  - `published`
-  - `appointed`
-  - `dismissed`
-  - `delegated_to`
-  - `implemented`
-  - `funded`
-  - `contracted`
-  - `subsidized`
-  - `enforced`
-  - `audited`
-  - `current_owner`
-
-Source hierarchy:
-- Tier 1: primary records with legal or administrative effect: BOE and official bulletins, parliamentary votes and initiatives, budgets, budget execution, PLACSP, BDNS/SNPSAP, official appointment records, sanctions, inspections, court or audit records where applicable.
-- Tier 2: official structured data without direct legal effect: open data APIs, catalogs, organigrams, agendas, declarations, transparency portals.
-- Tier 3: official communications: Moncloa, ministries, party releases, RSS, press notes. Use for detection and declared position, then validate against Tier 1 when an effect exists.
-- Tier 4: reliable reusers: academia, NGOs, watchdogs, journalists with documented data. Use as discovery or cross-check, not as final authority when primary records are available.
-- Tier 5: media/social signals. Use only for lead generation unless independently verified.
-
-Extraction sequence:
-
-### D0. Actor And Office History
-
-Objective:
-- Build a historical graph of people, parties, elected offices, party offices, direct appointees, institutions, units, and reporting/appointment edges.
-
-Extract:
-- elected mandates,
-- parliamentary groups and party affiliation,
-- party executive/office holders where public and reproducible,
-- government structure and direct political appointments,
-- appointing authority and reporting chain,
-- start/end dates and source evidence.
-
-Exit gate:
-- an actor dossier can show "who this person is, which party/institution they were attached to, who appointed them, who they reported to, and during which dates" with source links.
-
-### D1. Legislative And Parliamentary Action
-
-Objective:
-- Capture what elected actors and parties did in parliament, not just how they describe themselves.
-
-Extract:
-- votes,
-- initiatives,
-- amendments where available,
-- sponsorship/signatories,
-- committee activity,
-- interventions,
-- official text version at time of vote,
-- initiative documents and reviewed citizen-facing measure points.
-
-Exit gate:
-- a vote or initiative explainer can show text, stage, party/person behavior, issue tags, and caveats without mixing later text into earlier votes.
-
-### D2. Rules, Executive Acts, And Appointments
-
-Objective:
-- Capture acts with formal effects outside parliamentary roll calls.
-
-Extract:
-- BOE and official bulletin norms,
-- decrees, orders, resolutions, circulars, plans, and appointments,
-- Consejo de Ministros references as detection signals,
-- appointment/dismissal chains,
-- competence and delegation clauses,
-- affected issue/domain and responsibility role.
-
-Exit gate:
-- a rule or appointment can be traced to originator, approving/publishing institution, appointer, appointee, effective dates, issue, and current owner.
-
-### D3. Money, Implementation, And Enforcement
-
-Objective:
-- Capture whether policy became resources, contracts, subsidies, staffing, permits, inspections, sanctions, or administrative execution.
-
-Extract:
-- budgets and execution,
-- contracts and procurement documents,
-- grants/subsidies,
-- staffing/organization where public,
-- permits/licenses,
-- inspections and sanctions,
-- service capacity and delivery records.
-
-Exit gate:
-- an issue dossier can distinguish "rule passed" from "funded, contracted, staffed, enforced, ignored, blocked, or delegated."
-
-### D4. Issue-Led Accountability Ledgers
-
-Objective:
-- Make each issue answerable end-to-end, across all involved parties and actors.
-
-Extract by issue, not only by source:
-- all relevant promises, votes, rules, appointments, money flows, implementation acts, enforcement acts, audits, outcomes, and blockers.
-
-Priority issue method:
-- choose one issue,
-- define source families and gate,
-- extract enough to answer who did what,
-- publish the issue ledger,
-- expose unknowns instead of filling gaps with assumptions.
-
-Exit gate:
-- a citizen can open an issue and see all involved parties/politicians/appointees, their role, evidence, timeline, and missing evidence.
-
-### D5. Outcomes, Audit, And Causality Guardrail
-
-Objective:
-- Connect actions to observed results only when evidence supports the connection.
-
-Extract:
-- official indicators,
-- audit findings,
-- court/control-body findings,
-- inspection outcomes,
-- service outputs,
-- confounders and context.
-
-Exit gate:
-- the product can say "this happened after these decisions" separately from "this decision plausibly caused this outcome", with causal claims held back until methodology supports them.
-
-What is next:
-- Publish the second Andalucía water snapshot, generate a commitment-level diff, and run a five-user comprehension test before expanding the receipt beyond this issue.
-- Close D0+D1 enough for national accountability: actor/office history, Congress/Senate votes, initiatives, text versions, sponsors, reviewed measure points, and party/person behavior.
-- Start D2 with BOE rules and appointments because it unlocks responsibility chains and direct appointee accountability.
-- Then add D3 money and enforcement for the same issues already visible in D1/D2, rather than opening unrelated source lanes.
-
-## Strategic Sequence
-
-### P0. Delivery Machine And Repo Boundaries
-
-Objective:
-- Stop the repo from behaving like a codebase, archive, publish bucket, and speculative planning dump at the same time.
-
-We need:
-- one canonical roadmap,
-- explicit separation between source, generated outputs, and published artifacts,
-- stable fixture/dev path,
-- reproducibility and privacy gates,
-- ownership boundaries by layer.
-- reusable library boundaries for source contracts, fetch/provenance, connectors, document extraction, evidence modeling, quality gates, and publishing.
-- a thin Vota con La Chola app layer that keeps product/UI/orchestration while generic public-data logic can be reused by other open-source projects.
-- first installable package boundary via `pyproject.toml`, limited to `publicdata_*` namespaces: `publicdata_core`, `publicdata_sqlite`, `publicdata_connectors_es`, `publicdata_policy_es`, `publicdata_ops`, `publicdata_docs`, `publicdata_evidence`, and `publicdata_publish`.
-
-Exit gate:
-- future direction is maintained in this file only,
-- operational status lives in tracker/docs that do not invent new scope,
-- contributors can identify what matters now in minutes.
-- generic library seams are documented in `docs/reusable-library-architecture.md`, and the first extraction slice can run without changing public source IDs or UI behavior.
-
-### P1. Public Product Wedge
-
-Objective:
-- Ship a public surface that is immediately useful and evidence-first.
-
-We need:
-- canonical vote explainer,
-- public source catalog and scrape coverage contract,
-- obstruction tracker,
-- transparency dashboard,
-- explicit freshness/coverage/uncertainty contract.
-
-Exit gate:
-- any major vote can produce a shareable explainer with official sources and visible caveats inside one publish cycle.
-
-### P2. State Policy Ledger And Responsibility Chain V1
-
-Objective:
-- Move from "votes only" to a national ledger of policy actions with responsibility attribution.
-
-We need:
-- `policy_events` and `policy_instruments`,
-- BOE and executive/legal instrument ingestion,
-- budgets, procurement, and subsidy evidence,
-- measure extraction from legal/policy text,
-- responsibility roles:
-  - `originator`
-  - `approver`
-  - `promulgator`
-  - `implementer`
-  - `enforcer`
-  - `current_owner`
-
-Exit gate:
-- the system can answer formal national-rule questions such as "who is responsible for limiting cash payments to businesses to 1k euro?" with evidence and caveats.
-
-### P3. Jurisdiction And Competence Graph
-
-Objective:
-- Know which institution can act, which one cannot, and where responsibility is split.
-
-We need:
-- State / CCAA / municipal / regulator / agency / service-operator modeling,
-- competence mappings by topic and instrument,
-- actor-to-institution and institution-to-jurisdiction relationships,
-- "who can change this now?" logic.
-
-Exit gate:
-- the system can answer multilevel rule questions such as rural housing expansion or street-vending restrictions without collapsing everything into "the government."
-
-### P4. Implementation And Enforcement Graph
-
-Objective:
-- Explain why a rule bites in practice, not only where it was written.
-
-We need:
-- permits and licensing workflows,
-- inspections and sanctions,
-- administrative instructions and guidance,
-- execution evidence through procurement, staffing, and operational decisions,
-- implementation status over time.
-
-Exit gate:
-- the system can distinguish between rule origin and real-world enforcement/administration.
-
-### P5. Outcomes And Service Bottlenecks
-
-Objective:
-- Explain service failures and social bottlenecks without pretending pure legal attribution is enough.
-
-We need:
-- indicators and revisions,
-- waiting-list and capacity data,
-- staffing, training slots, budgets, procurement, and geography,
-- confounders and context,
-- intervention definitions for domains where impact claims may later be defendable.
-
-Exit gate:
-- the system can answer questions like public-dermatology wait times with a responsibility chain plus explicit uncertainty about causality and confounders.
-
-### P6. Evidence API, Dossiers, And Q&A
-
-Objective:
-- Turn the data model into repeatable, evidence-backed public answers.
-
-We need:
-- stable Evidence API,
-- question catalog,
-- answer renderer with confidence/freshness/unanswerable states,
-- actor and institution dossiers,
-- shareable public routes for responsibility questions.
-
-Partial shipped:
-- `accountability_evidence_api_v1` exports a bounded static JSON API from the ledger/dossier artifacts, validates question count and byte budget before publish packaging, and powers `/accountability-evidence/`.
-- Covered now: issue-involved actors, actor historical records, actor-issue record refs, visible actor-issue cards, first actor-issue Q&A routes, citizen issue clusters with reviewed public bucket labels, first reviewed issue-level cluster assignments for fallback issues, bounded issue-cluster review queue, bounded deterministic natural-language Q&A answers, shareable static Q&A routes, missing-evidence gap answers, confidence/freshness/completeness metadata, and explicit `unanswerable` state for dimensions absent in the current D1+D2+D3-rich cut.
-- Not complete yet: maintaining issue-level cluster adjudication as new source issues enter, richer user-composed responsibility-question routes, full appointee/party identity enrichment, and outcome/causality evidence.
-
-Exit gate:
-- the system can answer a first set of high-value public questions end-to-end without ad hoc analyst reconstruction.
-
-## Priority Stack
-
-`now`
-- `P0. Delivery Machine And Repo Boundaries`
-- `P1. Public Product Wedge`
-- `P2. State Policy Ledger And Responsibility Chain V1`
-
-`next`
-- `P3. Jurisdiction And Competence Graph`
-- `P4. Implementation And Enforcement Graph`
-
-`later`
-- `P5. Outcomes And Service Bottlenecks`
-- `P6. Evidence API, Dossiers, And Q&A`
-
-## Question Readiness Milestones
-
-### M1. Formal Rule Attribution
-
-The system can answer:
-- what rule changed,
-- who passed it,
-- who promulgated it,
-- who enforces it formally.
-
-Example class:
-- cash payment limits.
-
-### M2. Rule Plus Competence Attribution
-
-The system can answer:
-- which level of government owns the rule,
-- which institution issues permits or denials,
-- who could change it now.
-
-Example class:
-- rural housing expansion,
-- street sale restrictions.
-
-### M3. Implementation Attribution
-
-The system can answer:
-- why something is blocked in practice,
-- whether the blocker is law, procedure, permit design, inspection, staffing, or budget.
-
-Example class:
-- emergency-management and public-failure cases such as DANA Valencia 2024.
-
-### M4. Service Bottleneck Attribution
-
-The system can answer:
-- who owns a service outcome,
-- which decisions plausibly contribute,
-- which indicators support that reading,
-- and where the evidence stops short of a causal claim.
-
-Example class:
-- specialist waiting lists in public healthcare.
-
-## Anti-Convolution Rules
-
-- Do not open new product surfaces unless they clearly support one of the programs above.
-- Do not expand to new domains just because data exists; expand only when it unlocks answerable question classes.
-- Do not build generalized political rankings ahead of responsibility attribution.
-- Do not claim causal impact ahead of the outcomes/intervention stack.
-- Do not treat ad hoc TODO lists as planning authority.
-
-## Maintenance Protocol
-
-- Update this file first for any change in future direction, scope, or sequencing.
-- Keep each program legible in one screen: objective, needed components, exit gate.
-- Reflect execution detail elsewhere only after the program exists here.
-- Prefer editing this file over adding another planning document.
+- what was voted and by whom,
+- what rule or executive act was approved,
+- who had formal responsibility,
+- what money was budgeted, awarded, paid, or withheld,
+- what was implemented or enforced,
+- what outcome followed,
+- what evidence supports each statement,
+- what remains unknown, disputed, stale, or blocked,
+- and how a published conclusion changed after correction or counterevidence.
+
+Every public claim must drill down to primary evidence. Anomaly detection may create a review signal. It may never publish a corruption verdict by itself.
+
+## 2. Authority And Status
+
+This file owns future direction and sequencing.
+
+- Strategy and model background: `docs/roadmap.md`.
+- Near-term engineering execution: `docs/roadmap-tecnico.md`.
+- Live source and pipeline status: `docs/etl/e2e-scrape-load-tracker.md`.
+- Confirmed official-data access obstruction: `docs/etl/name-and-shame-access-blockers.md`.
+- Stable implementation knowledge: `project_kb/README.md`.
+
+Rules:
+
+- Derived documents may refine this roadmap but may not introduce net-new scope.
+- A work item is `DONE` only when its exit gate has current evidence.
+- Local code, a passing unit test, or a large generated file is not production readiness.
+- Missing artifacts, blocked sources, and unverified identities stay open.
+- Every non-trivial slice records current state, destination, next action, command, artifact, and definition of done.
+
+## 3. Non-Negotiable Real-Data Policy
+
+Only records captured from identifiable official public sources count toward coverage, capacity, quality, or readiness.
+
+Required for every counted corpus:
+
+- official source identity and allowlisted origin,
+- retrieval timestamp and HTTP outcome,
+- immutable raw checksum,
+- source record identity or explicit source-scoped fallback,
+- parser and schema version,
+- exact transformation lineage,
+- manifest with row, file, byte, and checksum totals,
+- independent validation against the materialized artifact,
+- public-domain status and provenance classification,
+- current limitation and next gate.
+
+Captured official samples may support deterministic tests. They must retain source metadata and checksums. Generated records, invented people, invented transactions, loopback HTTP results, and placeholder origins never count toward a roadmap gate.
+
+Public-domain identity is accountability evidence. Names, public identifiers, birth fields, official contact details, candidacy facts, supplier and beneficiary identities, appointments, donations, and comparable personal information published by an authoritative public source must be retained exactly with source URL, retrieval, checksum, and record/field lineage. Entity classification may describe a person or organization; it may never suppress an official public field. Secrets, credentials, workstation traces, private session state, and information not obtained from a public source remain forbidden in public artifacts.
+
+The machine-enforced registry is `docs/etl/real-corpus-registry.json`. The canonical audit is:
+
+```bash
+just etl-scale-readiness
+```
+
+## 4. Scale Contract
+
+Scale is an end-to-end operating property. It includes discovery, fetch, preservation, parsing, normalization, identity, enrichment, review, publication, correction, recovery, and cost.
+
+### 4.1 Scale classes
+
+| Class | Real corpus | Required proof |
+| --- | ---: | --- |
+| `R0 captured` | `1-9,999` official records | provenance, repeatable parse, idempotence, public-field retention, artifact validation |
+| `R1 operational` | `100,000+` official records or full smaller universe | bounded memory, resumability, reconciliation, quality sample, bounded publication |
+| `R2 million` | `1,000,000+` official items | freshness SLO, recovery, incremental rebuild, durable origin, clean restore, cost report |
+| `R3 national history` | `10,000,000+` facts and `1,000,000+` documents | multi-year completeness, revision history, source drift, distributed workers, public release SLO |
+| `R4 ecosystem` | `100,000,000+` facts | independent replicas, stable contracts, horizontal operation, audited releases, contributor governance |
+
+Rows alone never promote a lane. Promotion also requires representative scope, source-total reconciliation, durable public origin, clean-room restore, corrections, and a public delivery contract.
+
+### 4.2 Mandatory million-scale SLOs
+
+| Property | Gate |
+| --- | --- |
+| Provenance | `100%` of published claims resolve to an official source, retrieval, checksum, parser, and evidence row |
+| Source URL | `100%` public URL or a documented immutable official-source replacement |
+| Idempotence | replay creates zero duplicate logical facts and emits a reconciled delta |
+| Work durability | every item is pending, leased, succeeded, or dead; no silent loss |
+| Recovery | killed workers resume from durable state; expired leases are reclaimable |
+| Memory | bounded by batch, shard, or document limits, never total corpus size |
+| Fetch | `>=99.5%` after bounded retries for reachable in-contract items; every residual failure classified |
+| Parse | `>=99%` for supported digital formats; OCR and unsupported formats separated |
+| Reconciliation | discovered, fetched, stored, parsed, normalized, and published counts balance per run |
+| Freshness | every source has an owner and measured SLA; overdue data is public status |
+| Unknowns | missing, disputed, blocked, and `no_signal` remain explicit |
+| Publication | manifests and bounded shards; no browser route loads a million-row blob |
+| Corrections | accepted corrections appear in the next release with immutable history |
+| Recovery drill | raw objects and analytical artifacts restore from a clean environment |
+| Publication hygiene/security | official public fields retained exactly; secrets, local traces, and non-public state blocked; dependency and least-privilege checks pass |
+| Cost | bytes, requests, CPU, memory, OCR pages, storage, and cost per `1,000` items reported |
+
+### 4.3 Priority lanes
+
+Each lane must reach `R2` independently:
+
+1. actors: people, candidates, mandates, appointments, party offices, identifiers, aliases;
+2. parliamentary action: initiatives, versions, amendments, signatories, votes, speeches;
+3. documents: PDFs, HTML, attachments, OCR pages, extracted measures, document versions;
+4. responsibility: rules, policy events, institutions, competences, delegation, current owner;
+5. public money: budgets, execution, contracts, lots, awards, suppliers, subsidies, beneficiaries;
+6. implementation: staffing, permits, inspections, sanctions, service delivery, audit findings;
+7. outcomes: indicator observations, methodology versions, revisions, confounders;
+8. accountability: issue ledgers, evidence edges, claims, counterevidence, corrections, appeals;
+9. participation: review tasks, calibration, adjudication, contributor and release evidence.
+
+## 5. Verified Baseline — 2026-08-12
+
+`just etl-scale-readiness` currently validates six materialized official-source corpora:
+
+| Lane | Real rows | Files | Current proof | Promotion blockers |
+| --- | ---: | ---: | --- | --- |
+| Member votes | `1,809,222` | `8,373` gzip shards | every file, checksum, payload, member count, source record, and public URL audited; one verified official capture sidecar repairs `350` legacy rows | `102,172` URL rows use official HTTP; official-total reconciliation, durable origin, clean restore, representative chamber history |
+| Eurostat indicators | `1,755,809` | `37` Parquet files | full provenance, schema/hash/row validation, `26/26` unchanged partitions reused | four-dataset scope is not representative; no second-snapshot revision proof; no durable public origin or clean restore; corrections workflow incomplete |
+| PLACSP money facts | `263,302` | `50` Parquet files | v5 exact manifest/file/row/hash validation; all `128,849` source-published counterparty names and identifiers retained, including `8,260` natural-person and `3,058` unclassified rows; `50/50` unchanged partitions reused | incomplete historical universe; awards are not payments; identity resolution and durable restore open |
+| BDNS subsidy facts | `100,000` | `1` Parquet file | current v5 full-row validation; all `100,000` official beneficiary names and all `39,539` source-published identifiers retained; queue/page/version/source/amount totals exact; unchanged partition hardlinked | only `100/28,677` pages observed; below `R2`; no second snapshot, representative history, durable origin, or clean restore |
+| Accountability ledger | `126,760` | `13` Parquet files | clean real-only rebuild; full source/URL/lineage validation; `13/13` unchanged partitions reused; `26` blank legacy source IDs explicitly inferred from allowlisted BOE URLs | parliamentary-heavy mix; below `R2`; durable origin and clean restore open |
+| Actor mandates | `88,031` | `108` Parquet files | official origins, full URL coverage, identity states, `108/108` unchanged partitions reused | below `R1`; uneven jurisdiction mix; external identity precision/recall and durable restore open |
+
+Current truth:
+
+- registered real corpora: `6`;
+- real million-scale row lanes: `2`;
+- promoted lanes: `0`;
+- candidate occurrences: `8,926` official historical elected outcomes; accepted nominal candidate corpus still `0` because official archive access is blocked;
+- BDNS: current durable acquisition and v5 artifact reconcile `100,000` official rows, `100` page captures, `100,000` immutable version sightings, exact official identity retention, and unchanged replay; the older `146,000` checkpoint has no compliant current root and does not replace this evidence;
+- accountability ledger: `126,760` real rows are recovered and validated after removing `10` fixture-derived money rows; the mix remains parliamentary-heavy and below `R2`;
+- documents: `21,398` real instances / `19,538` content hashes are inventoried; source provenance, extraction quality, and OCR coverage remain below gate;
+- corruption-risk publication: `0` promoted representative lanes and therefore no inferred high-risk public verdict is authorized.
+
+Status: `REAL FOUNDATION READY; SOCIETAL SCALE INCOMPLETE`.
+
+## 6. Target Architecture
+
+### 6.1 Control plane
+
+- One durable work contract for discovery, fetch, parse, OCR, normalize, identity, enrich, review, aggregate, and publish.
+- Atomic claims, leases, heartbeats, retry classes, dead letters, host budgets, and circuit breakers.
+- Stable payload references only; no document bytes inside queue rows.
+- SQLite remains the reproducible snapshot and single-node baseline.
+- Move operational coordination to a server database only after measured lock/throughput pressure; preserve SQLite export semantics.
+
+### 6.2 Object plane
+
+- Raw and derived bytes keyed by SHA-256.
+- Stream to bounded partial files; publish only after checksum and size completion.
+- Local disk is disposable cache.
+- Versioned S3-compatible public origin is the durable source for public artifacts.
+- Metadata includes URL, status, headers allowed by policy, size, checksum, retrieval, attempt, content type, and parser lineage.
+- Retention, replication, encryption, lifecycle, and restore are explicit.
+
+### 6.3 Transform plane
+
+- Separate resumable stages with bounded batches.
+- Additive schema evolution and stable public IDs.
+- Input checksum plus transformer version controls invalidation.
+- Unchanged inputs reuse verified partitions.
+- Digital text extraction precedes OCR; OCR is page-scoped and cacheable.
+- Model-assisted extraction creates evidence candidates, never unreviewed public allegations.
+
+### 6.4 Analytical plane
+
+- SQLite for canonical navigation and integrity constraints.
+- Typed Parquet for high-volume immutable facts.
+- Partition by bounded source/snapshot/jurisdiction/year keys.
+- Manifests contain schema, counts, min/max, checksums, supersession, and source coverage.
+- Aggregates rebuild from canonical facts; dashboards are never the only copy.
+
+### 6.5 Public delivery plane
+
+- Static-first citizen surfaces with bounded JSON indexes and drill-down shards.
+- Public dataset/object origin for large analytical downloads.
+- Stable cursors, content hashes, immutable release IDs, cache headers, and old-link tests.
+- Every claim exposes freshness, coverage, uncertainty, evidence, correction state, and shareable state.
+
+### 6.6 Integrity and review plane
+
+- Signals are triage artifacts, not findings.
+- High-risk publication requires corroboration, human review, conflict disclosure, counterevidence, right of reply where appropriate, and correction/version history.
+- Official court, audit, or control-body findings remain distinct from project inference.
+- Reviewer operational credentials and non-public session state follow least-exposure rules. Official public-domain identity evidence remains publishable and traceable.
+
+## 7. Delivery Program
+
+Dependencies are strict. A later wave may prototype, but it cannot claim completion before its inputs pass.
+
+### Wave 0 — Truthful foundation and artifact recovery
+
+Target: two weeks. Priority: `P0`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W0-001` | Enforce official-real-only registry in local and CI readiness | none | disallowed evidence fails; six current corpora pass actual file and provenance audit |
+| `W0-002` | Remove obsolete capacity-only outputs, generators, recipes, and roadmap claims | `W0-001` | repository search and artifact inventory show no such output used for readiness |
+| `W0-003` | `DONE 2026-08-12`: regenerate BDNS semantic root from a fresh official acquisition | storage preflight | `100,000` rows; v5 manifest/full validation; exact source/amount/public-field balance; `1/1` unchanged partition hardlinked |
+| `W0-004` | Regenerate accountability-ledger root from current canonical evidence | BDNS optional; votes required | every ledger edge resolves; actor/issue/role unknowns explicit; full validation |
+| `W0-005` | Reconcile live document inventory to actual object/text files | none | instance/object/fetch/extract/OCR totals balance; missing objects classified |
+| `W0-006` | Repair the 350 vote rows without public URLs or document a checksum-backed official replacement | official source availability | `DONE 2026-08-12`: verified Congreso capture URL plus official/captured checksums; `0` unexplained missing URL rows |
+| `W0-007` | Inventory official HTTP lineage and secure/capture immutable replacements | `W0-006` | zero unclassified insecure-origin rows; promotion policy explicit |
+| `W0-008` | Make tracker, technical roadmap, and project knowledge match current artifacts | `W0-001..007` | no absent artifact is `DONE`; commands and next gates current |
+
+Wave exit:
+
+- current real artifacts are complete, named, independently validated, and recoverable locally;
+- readiness report contains no stale or missing artifact claim;
+- every open gap has owner, next command, input requirement, and exit gate.
+
+### Wave 1 — Durable origin and clean-room recovery
+
+Target: four weeks. Priority: `P0`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W1-001` | Choose public S3-compatible origin and write bucket/key/version/retention contract | `W0` | ADR, config contract, no credentials committed |
+| `W1-002` | Upload immutable raw objects by SHA-256 | `W1-001` | idempotent upload report; remote checksum verified |
+| `W1-003` | Upload Parquet/shards/manifests as immutable release | `W1-001` | release manifest balances remote objects and bytes |
+| `W1-004` | Add origin-to-cache fetch by checksum | `W1-002` | deleted local sample restores byte-identically |
+| `W1-005` | Run full clean-room restore of one million-row lane | `W1-003..004` | new environment validates rows/files/hashes with no local hidden state |
+| `W1-006` | Add database rebuild from immutable inputs | `W1-002` | canonical slice rebuilds; FK/integrity and logical totals reconcile |
+| `W1-007` | Define RPO/RTO, release rollback, and supersession | `W1-003` | rehearsed rollback and latest-pointer recovery |
+| `W1-008` | Publish storage health without secrets or workstation paths | `W1-003` | public status artifact passes publication-hygiene gate |
+
+Wave exit: local disk can be lost without losing published evidence.
+
+### Wave 2 — Real document and OCR factory
+
+Target: six weeks. Priority: `P0`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W2-001` | Classify every real document by source, MIME, size, language, page count, encryption, and text density | `W0-005` | `100%` classified or explicit unknown |
+| `W2-002` | Apply per-host discovery/fetch budgets and politeness | `W1` | host SLO and request budget report |
+| `W2-003` | Stream fetch with byte/time limits, checksum, partial cleanup, retries, and dead letters | `W2-002` | every item terminal or reclaimable; zero orphan partials |
+| `W2-004` | Extract digital PDF, HTML, and office text by page/section | `W2-001` | page lineage, parser version, character counts, failure reason |
+| `W2-005` | Route only text-poor pages to OCR | `W2-004` | route reason and input/engine/version cache key persisted |
+| `W2-006` | Build a stratified 100,000-document official cohort | `W2-001..005` | source/format/size/language strata published |
+| `W2-007` | Human-review extraction and OCR quality | `W2-006` | precision/recall or character/field accuracy by stratum; disagreements adjudicated |
+| `W2-008` | Publish cost and throughput per 1,000 documents/pages | `W2-006` | requests, bytes, CPU, RSS, OCR pages, storage, failures, cost |
+| `W2-009` | Scale to one million documents by source cohorts | `W2-006..008` | `R2` SLO, clean restore, bounded delivery, correction path |
+
+Wave exit: one million official documents are preserved and usable, not merely downloaded.
+
+### Wave 3 — Actors, candidates, offices, and identity
+
+Target: eight weeks. Priority: `P0`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W3-001` | Resolve official Infoelectoral candidate archive access with a reproducible method | external lever | one archive retrieved with official origin/checksum and documented contract |
+| `W3-002` | Ingest the queued official election archives in bounded cohorts and retain every official public identity field | `W3-001` | archive/member/candidate/party counts and field-level identity retention reconcile per election |
+| `W3-003` | Add official regional and municipal candidacy/result sources | source contracts | jurisdiction/election coverage matrix and source totals |
+| `W3-004` | Add party-office and political-appointment history | official registries/bulletins | appointment/dismissal dates and appointing authority traceable |
+| `W3-005` | Preserve source identity, deterministic candidate link, reviewed link, conflict, and unresolved states | `W3-002..004` | no forced ambiguous merge |
+| `W3-006` | Create stratified adjudicated identity gold set | `W3-005` | dual review, adjudication, precision/recall by source and name pattern |
+| `W3-007` | Add immutable merge/split history | `W3-005` | old evidence identities remain reconstructable |
+| `W3-008` | Reach one million real actor/candidate/mandate/appointment rows | `W3-002..007` | `R2` manifest, identity quality, restore, public origin, corrections |
+
+Wave exit: public actor histories never depend on an unreviewed ambiguous identity merge.
+
+### Wave 4 — Parliamentary decisions and text-at-decision
+
+Target: eight weeks. Priority: `P0`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W4-001` | Complete Congress/Senate legislature/session discovery | source contracts | official event totals and missing ranges published |
+| `W4-002` | Preserve initiative and amendment versions | `W2` | text-at-vote-time distinct from later consolidated text |
+| `W4-003` | Ingest signatories, speeches, committee stages, and group/member votes | `W4-001..002` | source totals and FK balance per chamber/legislature |
+| `W4-004` | Preserve yes/no/abstain/absence/no-vote as distinct source states | `W4-003` | no fabricated member assignment from aggregate gaps |
+| `W4-005` | Repair or classify all vote-total mismatches | `W4-003..004` | each mismatch has a source-supported reason or open incident |
+| `W4-006` | Link actors through reviewed source identities | `W3`, `W4-003` | link quality reported; unresolved visible |
+| `W4-007` | Publish million-row analytical facts and bounded drill-down shards | `W4-003..006` | `R2` validation, origin, restore, public payload budget |
+
+Wave exit: a vote explainer reproduces the official decision, people, text, totals, provenance, and known gaps.
+
+### Wave 5 — Money, implementation, and enforcement
+
+Target: twelve weeks. Priority: `P0`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W5-001` | Expand PLACSP through complete bounded official archive cohorts | `W1` storage | gap-free period catalog, version/tombstone balance, one million real facts |
+| `W5-002` | Complete BDNS pagination and revision handling | `W0-003` | one million or full official universe; source and amount totals reconcile |
+| `W5-003` | Add budget appropriations and execution | official source contract | budget version, unit, program, territory, and execution semantics preserved |
+| `W5-004` | Separate notice, award, modification, invoice, payment, and budget execution | `W5-001..003` | no award represented as payment |
+| `W5-005` | Resolve counterparties with reviewed identifiers and merge history | `W3-005..007` | entity precision/recall; official natural-person identifiers retained with provenance |
+| `W5-006` | Add inspections, sanctions, permits, staffing, and audit findings | official sources | typed implementation facts with authority and effective dates |
+| `W5-007` | Reconcile monetary totals by source, period, currency, tax treatment, and revision | `W5-001..006` | declared discrepancies and no float-induced drift |
+| `W5-008` | Publish bounded public-money dossiers | `W5-007` | source-to-entity-to-contract-to-payment evidence chain |
+
+Wave exit: the product distinguishes promised, budgeted, contracted, paid, delivered, inspected, sanctioned, and unknown.
+
+### Wave 6 — Responsibility and issue ledgers
+
+Target: ten weeks. Priority: `P1`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W6-001` | Ingest BOE and official bulletin rules, decrees, orders, resolutions, and appointments | `W2` | originator, approver, publisher, effective date, version, repeal state |
+| `W6-002` | Model competence, delegation, transfer, oversight, and current owner | official legal sources | time-bounded responsibility edge with evidence |
+| `W6-003` | Define controlled issue taxonomy and versioned codebook | domain review | inclusion/exclusion examples and change history |
+| `W6-004` | Extract measures and obligations from official text | `W2`, `W6-003` | evidence span, extractor version, confidence, review state |
+| `W6-005` | Link promises, decisions, rules, money, implementation, enforcement, audits, and outcomes | `W4..006`, `W5` | every edge typed and traceable; unknown edges explicit |
+| `W6-006` | Rebuild the accountability ledger to one million representative facts | `W6-001..005` | domain/source/role mix, actor quality, `R2` origin/restore/corrections |
+| `W6-007` | Publish three complete issue-led dossiers | `W6-006` | citizen can see who did what, who owns it now, and what is missing |
+
+Wave exit: responsibility attribution is temporal, sourced, and separable from political rhetoric.
+
+### Wave 7 — Outcomes and causal discipline
+
+Target: eight weeks. Priority: `P1`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W7-001` | Approve representative indicator codebook | domain review | unit, geography, frequency, methodology, known breaks, intended use |
+| `W7-002` | Add official national, regional, and municipal outcome sources | `W7-001` | source contracts and coverage matrix |
+| `W7-003` | Capture second and later snapshots with revisions/deletions | `W7-002` | unchanged/changed/deleted observations version correctly |
+| `W7-004` | Reach one million representative outcome observations | `W7-002..003` | `R2` validation, origin, restore, correction workflow |
+| `W7-005` | Define descriptive, associational, quasi-experimental, and causal claim levels | methodology review | UI language and publication gate per level |
+| `W7-006` | Record confounders, comparison group, sensitivity, and caveats | `W7-005` | causal claim cannot publish without method evidence |
+| `W7-007` | Link observed outcomes to issue ledgers conservatively | `W6`, `W7-006` | chronology shown separately from causality |
+
+Wave exit: the product can say what changed without implying unsupported causation.
+
+### Wave 8 — Integrity signals, review, and corrections
+
+Target: eight weeks. Priority: `P0` before any high-risk public inference.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W8-001` | Version review task, evidence, confidence, disagreement, and adjudication contracts | `W0` | append-only review history |
+| `W8-002` | Create real historical review calibration set from official findings | legal/editorial review | gold labels cite court/audit/control-body sources |
+| `W8-003` | Define signal thresholds and minimum cohorts | `W5`, `W8-002` | small-cohort and missing-data suppression tested |
+| `W8-004` | Require corroboration and conflict disclosure | `W8-003` | no single weak signal can become public high-risk claim |
+| `W8-005` | Implement counterevidence, appeal, right-of-reply, and correction queues | `W8-001` | each path reaches public supersession state |
+| `W8-006` | Measure agreement, reversal, drift, correction latency, and queue age | `W8-002..005` | release scorecard |
+| `W8-007` | Publish only reviewed signals with evidence cards and limitations | `W8-003..006` | legal/editorial/publication-hygiene gate and immutable claim version |
+
+Wave exit: a disputed claim can be audited and corrected without erasing history.
+
+### Wave 9 — Public product and open-source scale
+
+Target: continuous after Wave 1; promotion gate after Waves 3-8. Priority: `P1`.
+
+| ID | Task | Dependency | Exit evidence |
+| --- | --- | --- | --- |
+| `W9-001` | Publish source coverage and obstruction map | `W0` | freshness, completeness, last run, blocker evidence per source |
+| `W9-002` | Publish vote, actor, issue, money, and responsibility explainers | corresponding lanes | primary evidence within three meaningful interactions |
+| `W9-003` | Publish stable Evidence API and schema compatibility policy | `W1`, analytical contracts | versioned endpoints, pagination, changelog, deprecation window |
+| `W9-004` | Provide source-adapter SDK and one-command validation | pipeline contracts | new contributor runs capture-to-artifact without private state |
+| `W9-005` | Create bounded starter issues and maintainer ownership map | `W9-004` | no critical lane has one undocumented owner |
+| `W9-006` | Require two-person review for schema, identity, publication, and allegation-policy changes | governance | protected ownership and review evidence |
+| `W9-007` | Publish contributor, review, data-correction, security, and citation paths | none | response SLO and templates visible |
+| `W9-008` | Measure first-contribution time, review latency, retention, bus factor, and source adoption | `W9-004..007` | quarterly community scorecard |
+| `W9-009` | Support independent snapshot replicas and reproducibility attestations | `W1`, `W9-003` | external maintainer reproduces and signs release manifest |
+
+Wave exit: three independent maintainers can ship a connector or review batch, and an external party can reproduce a release.
+
+## 8. Critical Path
+
+Strict order:
+
+1. `W0`: truthful artifact inventory and recovery.
+2. `W1`: durable public origin and clean restore.
+3. `W2`: 100,000-document quality gate, then document `R2`.
+4. `W3` and `W4`: actor identity and parliamentary completeness.
+5. `W5`: money, implementation, and enforcement.
+6. `W6`: responsibility and issue ledgers.
+7. `W7`: representative outcomes and causal guardrails.
+8. `W8`: high-risk review/correction machinery.
+9. `W9`: public product, API, and contributor replication throughout, with final promotion after upstream gates.
+
+Parallelism allowed:
+
+- W1 storage contract can start while W0 artifact recovery finishes.
+- W2 document inventory can start from current real objects while W1 origin is prepared.
+- W3 official-source discovery and W4 reconciliation can proceed independently.
+- W9 documentation, source catalog, and safe public explainers can ship continuously.
+
+Parallelism forbidden:
+
+- no public inferred integrity signal before W8;
+- no identity merge before adjudicated identity evidence;
+- no causal claim before W7 methodology gate;
+- no lane promotion from row count alone;
+- no source marked complete while official totals or time ranges remain unknown.
+
+## 9. Release And Accountability Cadence
+
+Every ingestion run emits:
+
+- source and snapshot identity,
+- discovered/fetched/stored/parsed/normalized/published counts,
+- bytes and checksums,
+- attempts, retries, dead items, and blocker classes,
+- elapsed time, CPU, RSS, and storage delta,
+- parser/schema versions,
+- freshness and source-total reconciliation,
+- publication-hygiene findings,
+- current limitations and next action.
+
+Every weekly closeout:
+
+- update the tracker from generated evidence,
+- publish visible progress under repository control,
+- close or reclassify stale work,
+- run publication hygiene, integrity, readiness, and relevant tests,
+- list newly observed blockers and owners.
+
+Every public release:
+
+- immutable release manifest,
+- schema and method changelog,
+- source coverage and freshness report,
+- validation and publication-hygiene reports,
+- known limitations,
+- corrections and superseded claims,
+- restore attestation,
+- rollback pointer.
+
+Every quarter:
+
+- coverage matrix by jurisdiction, time, source, and lane,
+- SLO and cost scorecard,
+- correction and reversal analysis,
+- identity and extraction quality sample,
+- community health and bus-factor scorecard,
+- roadmap re-prioritization based on public impact and evidence gaps.
+
+## 10. Success Metrics
+
+Data:
+
+- real rows/documents by lane and scale class;
+- official universe coverage by source and period;
+- provenance, public URL, and source-record coverage;
+- source-total and monetary reconciliation;
+- identity precision/recall and unresolved rate;
+- extraction/OCR quality by stratum;
+- freshness and source-drift incidents.
+
+Operations:
+
+- successful unattended refreshes;
+- queue age, retry rate, dead rate, recovery time;
+- throughput, peak RSS, storage growth, and cost per `1,000`;
+- clean restore time and checksum success;
+- release rollback time.
+
+Public value:
+
+- evidence drill-down completion;
+- explainers used and shared;
+- correction response and publication latency;
+- citations by journalists, researchers, civil society, and public bodies;
+- documented decisions improved or errors corrected because evidence was available.
+
+Community:
+
+- active maintainers and reviewers;
+- first-contribution time and review latency;
+- contributor retention;
+- independently maintained source adapters;
+- independent release reproductions;
+- critical-lane bus factor.
+
+## 11. Definition Of Societal-Scale Done
+
+The goal is achieved only when all are true:
+
+- every priority lane reaches `R2` with official real records or the complete documented official universe when smaller;
+- at least the core vote, actor, document, money, responsibility, outcome, and correction lanes have durable public origins and clean-room restores;
+- national-history lanes operate incrementally with declared freshness and cost SLOs;
+- public routes remain bounded, accessible, evidence-first, and reproducible;
+- identity, extraction, and review quality are measured on adjudicated official evidence;
+- integrity signals cannot bypass corroboration, human review, counterevidence, and correction;
+- releases are auditable, reversible, retain official public-domain identity, exclude secrets/non-public state, and are independently reproducible;
+- at least three independent maintainers can operate critical paths;
+- no known missing evidence or blocked source is mislabeled as complete.
+
+Until then, the system may be useful and impactful, but the societal-scale goal remains open.

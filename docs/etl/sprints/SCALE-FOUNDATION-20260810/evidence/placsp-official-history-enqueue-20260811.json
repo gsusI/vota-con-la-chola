@@ -1,0 +1,182 @@
+{
+  "archive_contract_sha256": "27848dea5b511d0275e081d0e1a6e8cea6be03b235e999b5c33eab34601b29a1",
+  "archive_queue": {
+    "existing_total": 22,
+    "input_total": 22,
+    "inserted_total": 0,
+    "pipeline_total": 22
+  },
+  "archive_queue_status": {
+    "active_workers": [],
+    "attempt_status_counts": {},
+    "attempts_total": 0,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-11T17:24:03+00:00",
+    "items_total": 22,
+    "max_attempts_observed": 0,
+    "oldest_pending_at": "2026-08-11T17:18:29+00:00",
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-contracts-official-history-2012-20260811:archives",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 22,
+      "succeeded": 0
+    },
+    "terminal_total": 0,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "period:2026",
+        "state": "pending",
+        "total": 8
+      },
+      {
+        "partition_key": "period:2012",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2013",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2014",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2015",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2016",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2017",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2018",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2019",
+        "state": "pending",
+        "total": 1
+      },
+      {
+        "partition_key": "period:2020",
+        "state": "pending",
+        "total": 1
+      }
+    ],
+    "unfinished_total": 22
+  },
+  "archives": [
+    {
+      "period": "2012",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2012.zip"
+    },
+    {
+      "period": "2013",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2013.zip"
+    },
+    {
+      "period": "2014",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2014.zip"
+    },
+    {
+      "period": "2015",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2015.zip"
+    },
+    {
+      "period": "2016",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2016.zip"
+    },
+    {
+      "period": "2017",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2017.zip"
+    },
+    {
+      "period": "2018",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2018.zip"
+    },
+    {
+      "period": "2019",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2019.zip"
+    },
+    {
+      "period": "2020",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2020.zip"
+    },
+    {
+      "period": "2021",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2021.zip"
+    },
+    {
+      "period": "2022",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2022.zip"
+    },
+    {
+      "period": "2023",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2023.zip"
+    },
+    {
+      "period": "2024",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2024.zip"
+    },
+    {
+      "period": "2025",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2025.zip"
+    },
+    {
+      "period": "202601",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202601.zip"
+    },
+    {
+      "period": "202602",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202602.zip"
+    },
+    {
+      "period": "202603",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202603.zip"
+    },
+    {
+      "period": "202604",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202604.zip"
+    },
+    {
+      "period": "202605",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202605.zip"
+    },
+    {
+      "period": "202606",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202606.zip"
+    },
+    {
+      "period": "202607",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202607.zip"
+    },
+    {
+      "period": "202608",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202608.zip"
+    }
+  ],
+  "peak_rss_mb": 38.484,
+  "pipeline_id": "placsp-contracts-official-history-2012-20260811",
+  "placsp_bulk_run_id": 3,
+  "schema_version": "placsp_bulk_enqueue_v1",
+  "snapshot_date": "2026-08-11",
+  "source_id": "placsp_sindicacion",
+  "status": "ok"
+}

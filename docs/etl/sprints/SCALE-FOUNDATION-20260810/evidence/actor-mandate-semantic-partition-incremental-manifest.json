@@ -1,0 +1,3548 @@
+{
+  "analytical_partition_gate_passed": true,
+  "capacity_class": "below_s1_100k",
+  "checks": {
+    "bounded_file_rows": true,
+    "bounded_peak_rss": true,
+    "database_join_balance": true,
+    "distinct_mandate_ids": true,
+    "identity_state_complete": true,
+    "lineage_complete": true,
+    "minimum_rows": true,
+    "no_private_tokens": true,
+    "source_url_complete": true
+  },
+  "coverage": {
+    "lineage": 1.0,
+    "source_identifier": 0.99998736,
+    "source_record": 0.98830668,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-11T07:21:46+00:00",
+  "identity_assurance": "source_scoped_states_not_external_identity",
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 93,
+    "input_fingerprint": "sha256_canonical_public_rows",
+    "partitions_rebuilt": 0,
+    "partitions_reused": 93,
+    "previous_manifest_sha256": "cced3a832a73ae231a930125d1527fdea65f8d7ff926a8b3b26d554755a41f81",
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version"
+    ]
+  },
+  "lane": "actor_mandates",
+  "limitations": [
+    "Source identifiers and aliases are preserved as evidence; they do not prove external identity equivalence.",
+    "The real corpus remains below the representative 100k and one-million actor promotion classes.",
+    "Local materialization does not prove durable public-origin publication or restore."
+  ],
+  "partition_contract": {
+    "compression": "zstd",
+    "exact_territory_retained_as_column": true,
+    "keys": [
+      "snapshot_date",
+      "source_id",
+      "jurisdiction",
+      "year"
+    ],
+    "max_file_rows": 100000,
+    "ordering": [
+      "source_id",
+      "year",
+      "mandate_id"
+    ],
+    "row_group_rows": 25000,
+    "strategy": "semantic_hive_coarse_jurisdiction"
+  },
+  "partitions": [
+    {
+      "active_rows": 25,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13835,
+          "max_id": 76857,
+          "min_id": 76833,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_ceuta_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 25,
+          "sha256": "eb5c37cff0f27ced030a13b7c56c72f180ef52d867f3d52626563dc35b889039"
+        }
+      ],
+      "input_sha256": "4b702649d64de5b26abd78da18892e7950e633ac072f26d139c3d0e7568261cc",
+      "lineage_rows": 25,
+      "materialization": "reused",
+      "max_id": 76857,
+      "min_id": 76833,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_ceuta_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_ceuta_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 25,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 25,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 25,
+      "source_url_rows": 25,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_ceuta_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 65,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 16946,
+          "max_id": 76922,
+          "min_id": 76858,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_extremadura_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 65,
+          "sha256": "ae3062b3bc751981f52dfeaefe77af8fbddb554d8e8e4f7681b3f6ff53772c30"
+        }
+      ],
+      "input_sha256": "fdabd9c721c4b25a8568952e88f4edb70515f6e8b69994940e7c82b88beb0cb1",
+      "lineage_rows": 65,
+      "materialization": "reused",
+      "max_id": 76922,
+      "min_id": 76858,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_extremadura_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_extremadura_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 65,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 65,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 65,
+      "source_url_rows": 65,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_extremadura_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 27652,
+          "max_id": 67809,
+          "min_id": 67645,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1983/part-00000.parquet",
+          "rows": 165,
+          "sha256": "2ca847fc40b1d3b2b2bed5ef314473fb3907a2a691bd7ab1ed5bfceac1fffd26"
+        }
+      ],
+      "input_sha256": "a9c87d6460500bb87c57d1a27c5e449f5b434d2191c88190237d66ebe9c14b9d",
+      "lineage_rows": 165,
+      "materialization": "reused",
+      "max_id": 67809,
+      "min_id": 67645,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1983",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1983",
+      "rows": 165,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 165,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 165,
+      "source_url_rows": 165,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1983"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13514,
+          "max_id": 67816,
+          "min_id": 67810,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1984/part-00000.parquet",
+          "rows": 7,
+          "sha256": "54a093c84c0076861a786d220c53b6ca0c8d95a22044051e169f927a28e390c3"
+        }
+      ],
+      "input_sha256": "bf73c8fe057a9e5a2ca0133b1a32c3c27ea0c82db29ef59d1ade68992f875960",
+      "lineage_rows": 7,
+      "materialization": "reused",
+      "max_id": 67816,
+      "min_id": 67810,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1984",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1984",
+      "rows": 7,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 7,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 7,
+      "source_url_rows": 7,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1984"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15446,
+          "max_id": 67834,
+          "min_id": 67817,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1985/part-00000.parquet",
+          "rows": 18,
+          "sha256": "02d6a23efdd846e2c2954726b75479c85f0f08f52dbf763ec361c9d2836d2107"
+        }
+      ],
+      "input_sha256": "39e3352792246c36d8656cf9cff3a08f389f0c037e50bda9137c6705fdf478f8",
+      "lineage_rows": 18,
+      "materialization": "reused",
+      "max_id": 67834,
+      "min_id": 67817,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1985",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1985",
+      "rows": 18,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 18,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 18,
+      "source_url_rows": 18,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1985"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13434,
+          "max_id": 67840,
+          "min_id": 67835,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1986/part-00000.parquet",
+          "rows": 6,
+          "sha256": "1df62f37893e40f12f4934ad79ce0b6678aaa5e3b4f267336edc28ac8b6dd9b7"
+        }
+      ],
+      "input_sha256": "9ba7e4cd1eecae45b2f8e2ee84f7a11da89f7b7b7c4812a16af8518603f61e2d",
+      "lineage_rows": 6,
+      "materialization": "reused",
+      "max_id": 67840,
+      "min_id": 67835,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1986",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1986",
+      "rows": 6,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 6,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 6,
+      "source_url_rows": 6,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1986"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 33734,
+          "max_id": 68009,
+          "min_id": 67841,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1987/part-00000.parquet",
+          "rows": 169,
+          "sha256": "01338659847c0b826071d15e939ff93ae7e6f9c508a051c9a5d68ec182651eab"
+        }
+      ],
+      "input_sha256": "20ef2d6d56f52b2a84b8e58f4fe8a3384ad454da3b77017d895acbcb7f90580f",
+      "lineage_rows": 169,
+      "materialization": "reused",
+      "max_id": 68009,
+      "min_id": 67841,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1987",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1987",
+      "rows": 169,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 169,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 169,
+      "source_url_rows": 169,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1987"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13932,
+          "max_id": 68020,
+          "min_id": 68010,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1988/part-00000.parquet",
+          "rows": 11,
+          "sha256": "55edbf269b86da46615bbd920a82f942921a4a4615300ac75d57a047cafb69b8"
+        }
+      ],
+      "input_sha256": "907520ba0f0d78ab46b3e9a86f8f9e33f2d4e43e4c2df4c73802e12f3dd229e5",
+      "lineage_rows": 11,
+      "materialization": "reused",
+      "max_id": 68020,
+      "min_id": 68010,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1988",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1988",
+      "rows": 11,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 11,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 11,
+      "source_url_rows": 11,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1988"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13240,
+          "max_id": 68025,
+          "min_id": 68021,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1989/part-00000.parquet",
+          "rows": 5,
+          "sha256": "993f17707959ad863479c87960fa23962b602f44c53d98be684cd66606b83459"
+        }
+      ],
+      "input_sha256": "802ba0eec2c9002471c70bec1aec6df0772557deb479de77b674fe86c64bfa4e",
+      "lineage_rows": 5,
+      "materialization": "reused",
+      "max_id": 68025,
+      "min_id": 68021,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1989",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1989",
+      "rows": 5,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 5,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 5,
+      "source_url_rows": 5,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1989"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 37850,
+          "max_id": 68203,
+          "min_id": 68026,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1991/part-00000.parquet",
+          "rows": 178,
+          "sha256": "aca33fca1cffa770efaf55f2ddd77c47e7359e01635e2da415ac29f4d3c96b08"
+        }
+      ],
+      "input_sha256": "ee710582325dddd3d1ace7b570fa6e429d8072257ca91aff3962d70eef70d578",
+      "lineage_rows": 178,
+      "materialization": "reused",
+      "max_id": 68203,
+      "min_id": 68026,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1991",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1991",
+      "rows": 178,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 178,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 178,
+      "source_url_rows": 178,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1991"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13055,
+          "max_id": 68206,
+          "min_id": 68204,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1994/part-00000.parquet",
+          "rows": 3,
+          "sha256": "bf8eed09419076e951dab7c0ad1c4e919130b57ee00556a7310d73ef5289be78"
+        }
+      ],
+      "input_sha256": "2ee45e7be81749aad35bfbd2a231686b5828b1b5586d1bb231d17125f40003ae",
+      "lineage_rows": 3,
+      "materialization": "reused",
+      "max_id": 68206,
+      "min_id": 68204,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1994",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1994",
+      "rows": 3,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 3,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 3,
+      "source_url_rows": 3,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1994"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 45513,
+          "max_id": 68402,
+          "min_id": 68207,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1995/part-00000.parquet",
+          "rows": 196,
+          "sha256": "92ef40975b9c63d39dd0219df04c34a4ba413fc3d20134e78b61697dae8f1c6a"
+        }
+      ],
+      "input_sha256": "efb35ecbabc6094ecc00f1976744ead9b59280a400dfca1638f94245c381567d",
+      "lineage_rows": 196,
+      "materialization": "reused",
+      "max_id": 68402,
+      "min_id": 68207,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1995",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1995",
+      "rows": 196,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 196,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 196,
+      "source_url_rows": 196,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1995"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15022,
+          "max_id": 68412,
+          "min_id": 68403,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1996/part-00000.parquet",
+          "rows": 10,
+          "sha256": "9d0d25eff3e3d3875d55e5f19f57ebeaf3c1151ddf543d8516c96e9e9c3b1ea1"
+        }
+      ],
+      "input_sha256": "c1770d002f4d894845ba0978e7e67915c67ba01dafaecaaef4c174c13bce5f75",
+      "lineage_rows": 10,
+      "materialization": "reused",
+      "max_id": 68412,
+      "min_id": 68403,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1996",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1996",
+      "rows": 10,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 10,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 10,
+      "source_url_rows": 10,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1996"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15760,
+          "max_id": 68419,
+          "min_id": 68413,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1997/part-00000.parquet",
+          "rows": 7,
+          "sha256": "3eccb8a025ccb9b608ec297ec577407d24567fb409d51590593559e7de168e54"
+        }
+      ],
+      "input_sha256": "6b91f9d665ae260572fab1fe42feb1228335a7cc71713a0b19a20e09cb4b7a41",
+      "lineage_rows": 7,
+      "materialization": "reused",
+      "max_id": 68419,
+      "min_id": 68413,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1997",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1997",
+      "rows": 7,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 7,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 7,
+      "source_url_rows": 7,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1997"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14932,
+          "max_id": 68434,
+          "min_id": 68420,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1998/part-00000.parquet",
+          "rows": 15,
+          "sha256": "3d946ea4391ca81a0f8eedf8cea1bfdd519ebbad0f3b5c8cf836747896e72186"
+        }
+      ],
+      "input_sha256": "547eed489d0bca7abca559ee58e9ee35800d04b8ccc2a1d7722b3b5d8d707000",
+      "lineage_rows": 15,
+      "materialization": "reused",
+      "max_id": 68434,
+      "min_id": 68420,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1998",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1998",
+      "rows": 15,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 15,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 15,
+      "source_url_rows": 15,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1998"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 70474,
+          "max_id": 68907,
+          "min_id": 68435,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1999/part-00000.parquet",
+          "rows": 473,
+          "sha256": "54febdca26f49b32331a75fb3a19897db5859fc72db530cc39e67f94de927744"
+        }
+      ],
+      "input_sha256": "ab93bf54bc42571f8136f48252b51e2a71d455e157c51fe958ca350ae97be593",
+      "lineage_rows": 473,
+      "materialization": "reused",
+      "max_id": 68907,
+      "min_id": 68435,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|1999",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=1999",
+      "rows": 473,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 473,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 473,
+      "source_url_rows": 473,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "1999"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 47357,
+          "max_id": 69095,
+          "min_id": 68908,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2000/part-00000.parquet",
+          "rows": 188,
+          "sha256": "047675ca3d66b05a08b3bbfed17a35a397f2a8755a959195815d1e6072b5e929"
+        }
+      ],
+      "input_sha256": "932507f41746d962102215639a5901208dc8fac7dbdea005cfdd9446ae36490a",
+      "lineage_rows": 188,
+      "materialization": "reused",
+      "max_id": 69095,
+      "min_id": 68908,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2000",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2000",
+      "rows": 188,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 188,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 188,
+      "source_url_rows": 188,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2000"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 47960,
+          "max_id": 69269,
+          "min_id": 69096,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2001/part-00000.parquet",
+          "rows": 174,
+          "sha256": "ca32bf1d31351fc928ecfbe8c0c1b804def7fb41ad66d1d9fc0b7cef57a8b687"
+        }
+      ],
+      "input_sha256": "80a9a2eafd92bd181100183917ce51509c252419746757799e829408cb3e4aab",
+      "lineage_rows": 174,
+      "materialization": "reused",
+      "max_id": 69269,
+      "min_id": 69096,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2001",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2001",
+      "rows": 174,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 174,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 174,
+      "source_url_rows": 174,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2001"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 19127,
+          "max_id": 69295,
+          "min_id": 69270,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2002/part-00000.parquet",
+          "rows": 26,
+          "sha256": "5217d991498a391820a71191c335a5b579ee217fd3e7818cc8f68c36e6e8ae1a"
+        }
+      ],
+      "input_sha256": "adec937bae288a408095ff2736731bf1deeeee5317557a0db3458fae2cc4120c",
+      "lineage_rows": 26,
+      "materialization": "reused",
+      "max_id": 69295,
+      "min_id": 69270,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2002",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2002",
+      "rows": 26,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 26,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 26,
+      "source_url_rows": 26,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2002"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 97819,
+          "max_id": 70365,
+          "min_id": 69296,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2003/part-00000.parquet",
+          "rows": 1070,
+          "sha256": "31a7fee2c7db961483b6590e204199a750715dc318ae0d09a2fede747bcee193"
+        }
+      ],
+      "input_sha256": "b465ab08402f251142f50bf2c172fc3c247ec7071d7f3d92eb6bef90e71f4b98",
+      "lineage_rows": 1070,
+      "materialization": "reused",
+      "max_id": 70365,
+      "min_id": 69296,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2003",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2003",
+      "rows": 1070,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1070,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1070,
+      "source_url_rows": 1070,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2003"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 47937,
+          "max_id": 70549,
+          "min_id": 70366,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2004/part-00000.parquet",
+          "rows": 184,
+          "sha256": "ea1006233a04d7c11f4380e1c77c828601b69745e816349eec66405a2faaf4ad"
+        }
+      ],
+      "input_sha256": "5dde1b4a9b82b7bdfa0c9b6ab4499c5d922cbca06673faef278b43c7e4a93722",
+      "lineage_rows": 184,
+      "materialization": "reused",
+      "max_id": 70549,
+      "min_id": 70366,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2004",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2004",
+      "rows": 184,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 184,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 184,
+      "source_url_rows": 184,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2004"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 34782,
+          "max_id": 70624,
+          "min_id": 70550,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2005/part-00000.parquet",
+          "rows": 75,
+          "sha256": "9c7378a9231ed9e6680ca921c445649f9df048a0902ed4fb93b227fa54d4897b"
+        }
+      ],
+      "input_sha256": "30ce17c65eaeb1d28b405f00702a1deb7a3e5ff00b365edf29549c003fca31fc",
+      "lineage_rows": 75,
+      "materialization": "reused",
+      "max_id": 70624,
+      "min_id": 70550,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2005",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2005",
+      "rows": 75,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 75,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 75,
+      "source_url_rows": 75,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2005"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 17007,
+          "max_id": 70645,
+          "min_id": 70625,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2006/part-00000.parquet",
+          "rows": 21,
+          "sha256": "7c858545ac73b781f8d67fb13b0af12457086b1855f96bebfcfdc798e2bf2b26"
+        }
+      ],
+      "input_sha256": "9c1431e8162b3918c2e9af6e2e8c2b17c906e304d00501541d292db6f660c809",
+      "lineage_rows": 21,
+      "materialization": "reused",
+      "max_id": 70645,
+      "min_id": 70625,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2006",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2006",
+      "rows": 21,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 21,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 21,
+      "source_url_rows": 21,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2006"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 87160,
+          "max_id": 71327,
+          "min_id": 70646,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2007/part-00000.parquet",
+          "rows": 682,
+          "sha256": "75769931e0f711c5fdebd4414e669372b18249de53e5998d23d254eae894019a"
+        }
+      ],
+      "input_sha256": "608b373cfb07ff089dea9fdad1b6815d1adf255ac33b7ec82083367820d9eabe",
+      "lineage_rows": 682,
+      "materialization": "reused",
+      "max_id": 71327,
+      "min_id": 70646,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2007",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2007",
+      "rows": 682,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 682,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 682,
+      "source_url_rows": 682,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2007"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 53785,
+          "max_id": 71499,
+          "min_id": 71328,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2008/part-00000.parquet",
+          "rows": 172,
+          "sha256": "e591269619b025814abc11eefd03486678d7889f84483e686d1ebe6e97b727b0"
+        }
+      ],
+      "input_sha256": "3d1727284e90cc8f4e70c82f4aafb388a1252b9e866bdf4849cf246d4c96265c",
+      "lineage_rows": 172,
+      "materialization": "reused",
+      "max_id": 71499,
+      "min_id": 71328,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2008",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2008",
+      "rows": 172,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 172,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 172,
+      "source_url_rows": 172,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2008"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 41789,
+          "max_id": 71619,
+          "min_id": 71500,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2009/part-00000.parquet",
+          "rows": 120,
+          "sha256": "0a0a2f784af95855c714841cc1a53242791a29152cfee0a773ccfa4d4d41502d"
+        }
+      ],
+      "input_sha256": "b84536ad942dc454b09c913d92018aad1e1caad474d0a1f5b55684d022f2d4a8",
+      "lineage_rows": 120,
+      "materialization": "reused",
+      "max_id": 71619,
+      "min_id": 71500,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2009",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2009",
+      "rows": 120,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 120,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 120,
+      "source_url_rows": 120,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2009"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 19908,
+          "max_id": 71647,
+          "min_id": 71620,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2010/part-00000.parquet",
+          "rows": 28,
+          "sha256": "32dc3b4eabe3033bfbcb9360747e6012187e8b68f44f3cc367b5bc04e71415aa"
+        }
+      ],
+      "input_sha256": "522233fae89dbed232b188d9de168b10ca0d28d8418295912ab03008416b75f6",
+      "lineage_rows": 28,
+      "materialization": "reused",
+      "max_id": 71647,
+      "min_id": 71620,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2010",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2010",
+      "rows": 28,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 28,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 28,
+      "source_url_rows": 28,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2010"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 80601,
+          "max_id": 72266,
+          "min_id": 71648,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2011/part-00000.parquet",
+          "rows": 619,
+          "sha256": "f6e9ecb8c334a2f166978915fd34719cf289b3dec4636a8c852dac35e5295325"
+        }
+      ],
+      "input_sha256": "d8d40e8412f9498b3fb290bfe717f7e8ed7a4e9bf30627ef1409be0fe4048ed9",
+      "lineage_rows": 619,
+      "materialization": "reused",
+      "max_id": 72266,
+      "min_id": 71648,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2011",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2011",
+      "rows": 619,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 619,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 619,
+      "source_url_rows": 619,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2011"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 44165,
+          "max_id": 72408,
+          "min_id": 72267,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2012/part-00000.parquet",
+          "rows": 142,
+          "sha256": "53b49955cad57b3af1ba1ddd8f3565b5e32cd4031cd242982c8b35f1bc94e13f"
+        }
+      ],
+      "input_sha256": "076d8eff80ff1a993e8718147b535cebbb164367579292ed38b088fc0b4563c6",
+      "lineage_rows": 142,
+      "materialization": "reused",
+      "max_id": 72408,
+      "min_id": 72267,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2012",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2012",
+      "rows": 142,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 142,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 142,
+      "source_url_rows": 142,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2012"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 25203,
+          "max_id": 72456,
+          "min_id": 72409,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2013/part-00000.parquet",
+          "rows": 48,
+          "sha256": "1ea6fbc763544682f0cc4e952c695fa6376164df9ee058e4a9c9a047833ab32e"
+        }
+      ],
+      "input_sha256": "27cf2910bcc7d96e9fb2255e02edec49d106dcbe15f9b708b60e8148f8225732",
+      "lineage_rows": 48,
+      "materialization": "reused",
+      "max_id": 72456,
+      "min_id": 72409,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2013",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2013",
+      "rows": 48,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 48,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 48,
+      "source_url_rows": 48,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2013"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 24460,
+          "max_id": 72501,
+          "min_id": 72457,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2014/part-00000.parquet",
+          "rows": 45,
+          "sha256": "0271bad1ebd63a02c8229bba9977fdd8a03e9d9494201b7b2395d09789108e01"
+        }
+      ],
+      "input_sha256": "3ac359d2460fa93d311330645b58cbfc279ccdf4d2441725197a5c3ffe20c51c",
+      "lineage_rows": 45,
+      "materialization": "reused",
+      "max_id": 72501,
+      "min_id": 72457,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2014",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2014",
+      "rows": 45,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 45,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 45,
+      "source_url_rows": 45,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2014"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 79497,
+          "max_id": 73112,
+          "min_id": 72502,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2015/part-00000.parquet",
+          "rows": 611,
+          "sha256": "53f5a104be5c3b6b43b71575505f5c27c6c7eadb9bb70f1a617ab5da1044e034"
+        }
+      ],
+      "input_sha256": "873b7a8ecf50aba5e0c0dcc54153e9f1ba718513e4796fec47d298c77381b32c",
+      "lineage_rows": 611,
+      "materialization": "reused",
+      "max_id": 73112,
+      "min_id": 72502,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2015",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2015",
+      "rows": 611,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 611,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 611,
+      "source_url_rows": 611,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2015"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 32306,
+          "max_id": 73226,
+          "min_id": 73113,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2016/part-00000.parquet",
+          "rows": 114,
+          "sha256": "90fce783203b593600a19486bb9a7b9c327f094eb9fd8b492c8caf2b292b90b5"
+        }
+      ],
+      "input_sha256": "2c877766cd890eb589640a09d2b6b2c2fcbe0e241b8a6268baddf72f7f379029",
+      "lineage_rows": 114,
+      "materialization": "reused",
+      "max_id": 73226,
+      "min_id": 73113,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2016",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2016",
+      "rows": 114,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 114,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 114,
+      "source_url_rows": 114,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2016"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 36453,
+          "max_id": 73338,
+          "min_id": 73227,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2017/part-00000.parquet",
+          "rows": 112,
+          "sha256": "436d51650989fb0a8c441e0e86d39ec507169d3b2aae5f533f142b0568f5b629"
+        }
+      ],
+      "input_sha256": "e2757c5fc8be5af174976fc374fa450dfc6f148162f7c3e10cf3ac8d8235f857",
+      "lineage_rows": 112,
+      "materialization": "reused",
+      "max_id": 73338,
+      "min_id": 73227,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2017",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2017",
+      "rows": 112,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 112,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 112,
+      "source_url_rows": 112,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2017"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 42985,
+          "max_id": 73498,
+          "min_id": 73339,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2018/part-00000.parquet",
+          "rows": 160,
+          "sha256": "2165bcbffa91024583713a3657e85e0ab9439fc598785f977411a7a8ec30d17d"
+        }
+      ],
+      "input_sha256": "e5f898f731c332e8d73c5dc3086b08e18f35ec4dd311a78818116bd9d7cf339b",
+      "lineage_rows": 160,
+      "materialization": "reused",
+      "max_id": 73498,
+      "min_id": 73339,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2018",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2018",
+      "rows": 160,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 160,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 160,
+      "source_url_rows": 160,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2018"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 85559,
+          "max_id": 74340,
+          "min_id": 73499,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2019/part-00000.parquet",
+          "rows": 842,
+          "sha256": "fb662fbf8a7a64049f9272686a4123cd830689bb8ba150abddde79386603c0e5"
+        }
+      ],
+      "input_sha256": "52842d2a35cc2476b6d799de946d01652dcce2dcd4df38cd344f022cc3545d94",
+      "lineage_rows": 842,
+      "materialization": "reused",
+      "max_id": 74340,
+      "min_id": 73499,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2019",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2019",
+      "rows": 842,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 842,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 842,
+      "source_url_rows": 842,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2019"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 55884,
+          "max_id": 74594,
+          "min_id": 74341,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2020/part-00000.parquet",
+          "rows": 254,
+          "sha256": "6a648d49393cde39e1fd167cc008bd0e217fa2d83e64929430a7e74515ec6730"
+        }
+      ],
+      "input_sha256": "8dd94df01452b8f8e27556b64f23ad8853194e98d4d5eac0f5e135552defb6f7",
+      "lineage_rows": 254,
+      "materialization": "reused",
+      "max_id": 74594,
+      "min_id": 74341,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2020",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2020",
+      "rows": 254,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 254,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 254,
+      "source_url_rows": 254,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2020"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 88531,
+          "max_id": 75401,
+          "min_id": 74595,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2021/part-00000.parquet",
+          "rows": 807,
+          "sha256": "1483e80ab17b70d6c74b40f19bfd126d354ba558cb0430e822c268e7aa37f4dd"
+        }
+      ],
+      "input_sha256": "afcf107193b7961adc46aceec449c9c8079c8856367c8a032a879614198c2771",
+      "lineage_rows": 807,
+      "materialization": "reused",
+      "max_id": 75401,
+      "min_id": 74595,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2021",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2021",
+      "rows": 807,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 807,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 807,
+      "source_url_rows": 807,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2021"
+      }
+    },
+    {
+      "active_rows": 0,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 41216,
+          "max_id": 75537,
+          "min_id": 75402,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2022/part-00000.parquet",
+          "rows": 136,
+          "sha256": "d235feb0ff6760350bc3da4e9b7d4ba48c06e635e6ee9872caf3b8255814a137"
+        }
+      ],
+      "input_sha256": "13109aa7f980c0ac1abe0b472bd39d8b82c873ac1913a68b9d9c4d88ce86cf94",
+      "lineage_rows": 136,
+      "materialization": "reused",
+      "max_id": 75537,
+      "min_id": 75402,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2022",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2022",
+      "rows": 136,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 136,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 136,
+      "source_url_rows": 136,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2022"
+      }
+    },
+    {
+      "active_rows": 418,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 85607,
+          "max_id": 76376,
+          "min_id": 75538,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2023/part-00000.parquet",
+          "rows": 839,
+          "sha256": "20a4202ac7ec1d0691abe1613c181307088e4466d5f89fe7b6388b9111e9e659"
+        }
+      ],
+      "input_sha256": "47ee368445a0fe1ea4b58863bf3c595947ce484220a59c3aed84b375fb4f1aa5",
+      "lineage_rows": 839,
+      "materialization": "reused",
+      "max_id": 76376,
+      "min_id": 75538,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2023",
+      "rows": 839,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 839,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 839,
+      "source_url_rows": 839,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 150,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 47738,
+          "max_id": 76632,
+          "min_id": 76377,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2024/part-00000.parquet",
+          "rows": 256,
+          "sha256": "3bdc5b4c5e11c074a3a97037c593e2ef5395950e32a00a367a9a08d561f7750f"
+        }
+      ],
+      "input_sha256": "1513f8316e1c421ce19130cdd95dd833451993b8506b59156cc365c0093a3d2f",
+      "lineage_rows": 256,
+      "materialization": "reused",
+      "max_id": 76632,
+      "min_id": 76377,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2024",
+      "rows": 256,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 256,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 256,
+      "source_url_rows": 256,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 132,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 39223,
+          "max_id": 76808,
+          "min_id": 76633,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2025/part-00000.parquet",
+          "rows": 176,
+          "sha256": "7d908a075ac2211c5cb075e3a1548a08280190f02a0f4298809f8ab32a8f331a"
+        }
+      ],
+      "input_sha256": "22462012a00d48fed5c1ea4335f818a03cedd72101b684f8b6762c5dc00a3be7",
+      "lineage_rows": 176,
+      "materialization": "reused",
+      "max_id": 76808,
+      "min_id": 76633,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2025",
+      "rows": 176,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 176,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 176,
+      "source_url_rows": 176,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 24,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 16972,
+          "max_id": 76832,
+          "min_id": 76809,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 24,
+          "sha256": "eba0d7d341ff185f8458f37dc5790758ced7363cd620ae4ea16edc35a0056f5c"
+        }
+      ],
+      "input_sha256": "a6e670014928dc10d2987444fe54e7a4d1fef4332be5fbebe9883a3f2e16af7f",
+      "lineage_rows": 24,
+      "materialization": "reused",
+      "max_id": 76832,
+      "min_id": 76809,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_madrid_ocupaciones|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_madrid_ocupaciones/jurisdiction=es-autonomic/year=2026",
+      "rows": 24,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 24,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 24,
+      "source_url_rows": 24,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_madrid_ocupaciones",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12663,
+          "max_id": 92054,
+          "min_id": 92054,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_melilla_diputados/jurisdiction=es-autonomic/year=2023/part-00000.parquet",
+          "rows": 1,
+          "sha256": "efaf7ba0bc8302ecb89763d95b1ea221dfa7aacdb6d630b00bf0bf0f54d57bf2"
+        }
+      ],
+      "input_sha256": "e12d07035e8e5658fdfa0cf844d27502c52ecd6203dc2a50e01706e9326bd049",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 92054,
+      "min_id": 92054,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_melilla_diputados|es-autonomic|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_melilla_diputados/jurisdiction=es-autonomic/year=2023",
+      "rows": 1,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_melilla_diputados",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 24,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14491,
+          "max_id": 92056,
+          "min_id": 92031,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_melilla_diputados/jurisdiction=es-autonomic/year=2024/part-00000.parquet",
+          "rows": 24,
+          "sha256": "cb4db7d85d4820bda30e719948958fe8bd5951a629fc51227a2b9d85919a7a45"
+        }
+      ],
+      "input_sha256": "4e2bc9d32df4cd8c42d8b408c5f183dbf1c1ef39a82cf5fc1f098823c7b9cd3a",
+      "lineage_rows": 24,
+      "materialization": "reused",
+      "max_id": 92056,
+      "min_id": 92031,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_melilla_diputados|es-autonomic|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_melilla_diputados/jurisdiction=es-autonomic/year=2024",
+      "rows": 24,
+      "rows_with_aliases": 1,
+      "source_identifier_rows": 24,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 24,
+      "source_url_rows": 24,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_melilla_diputados",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12266,
+          "max_id": 92055,
+          "min_id": 92055,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_melilla_diputados/jurisdiction=es-autonomic/year=2025/part-00000.parquet",
+          "rows": 1,
+          "sha256": "45404206bbd633193d32fe7ef9a14bde4566aa51fce0fc47807fe3a1ddbec491"
+        }
+      ],
+      "input_sha256": "d1569bf945258a4b0b7f58ffb6cc8a17ebb9e467d1773d45cfd22b3027360576",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 92055,
+      "min_id": 92055,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_melilla_diputados|es-autonomic|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_melilla_diputados/jurisdiction=es-autonomic/year=2025",
+      "rows": 1,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_melilla_diputados",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 45,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14804,
+          "max_id": 76976,
+          "min_id": 76923,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_murcia_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 54,
+          "sha256": "e98e9255d98db8dba5671b9010a6bd8024e484c0667921a579e85917d6edfe6d"
+        }
+      ],
+      "input_sha256": "de85a27ed22aac08bdf60d241e9462a78e6bbd8539359b85368193951c9d9ed1",
+      "lineage_rows": 54,
+      "materialization": "reused",
+      "max_id": 76976,
+      "min_id": 76923,
+      "observed_label_only_rows": 0,
+      "partition_id": "asamblea_murcia_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=asamblea_murcia_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 54,
+      "rows_with_aliases": 1,
+      "source_identifier_rows": 54,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 54,
+      "source_url_rows": 54,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "asamblea_murcia_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 310,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 43867,
+          "max_id": 350,
+          "min_id": 1,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 310,
+          "sha256": "027924b14bff3af980463c98848510ad9f2490389cfe59f55c25a7fd644f1cee"
+        }
+      ],
+      "input_sha256": "0a0dcd580553e17a38f131e4b081a87ffed125c3bc54796f4d54ee0fe35d01d0",
+      "lineage_rows": 310,
+      "materialization": "reused",
+      "max_id": 350,
+      "min_id": 1,
+      "observed_label_only_rows": 0,
+      "partition_id": "congreso_diputados|es-national|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2023",
+      "rows": 310,
+      "rows_with_aliases": 281,
+      "source_identifier_rows": 310,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 310,
+      "source_url_rows": 310,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "congreso_diputados",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 27,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15780,
+          "max_id": 341,
+          "min_id": 8,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 27,
+          "sha256": "1647040e13e413008a787e25203c59e5071b4fa12f1b242895fd8de878242b81"
+        }
+      ],
+      "input_sha256": "a5b966503728fb8e885c89fad6658bfb78aa8b6be71a6539f57333ad3686ed24",
+      "lineage_rows": 27,
+      "materialization": "reused",
+      "max_id": 341,
+      "min_id": 8,
+      "observed_label_only_rows": 0,
+      "partition_id": "congreso_diputados|es-national|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2024",
+      "rows": 27,
+      "rows_with_aliases": 27,
+      "source_identifier_rows": 27,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 27,
+      "source_url_rows": 27,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "congreso_diputados",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 10,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13660,
+          "max_id": 323,
+          "min_id": 25,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2025/part-00000.parquet",
+          "rows": 10,
+          "sha256": "6ae33cf309facce9625d024213120b54731fff32d184565120c8eca66d2144a4"
+        }
+      ],
+      "input_sha256": "f9a151b5fa23e0d6c4fee309ce20231eb31951f547cd8e2c7a389965d6214fd0",
+      "lineage_rows": 10,
+      "materialization": "reused",
+      "max_id": 323,
+      "min_id": 25,
+      "observed_label_only_rows": 0,
+      "partition_id": "congreso_diputados|es-national|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2025",
+      "rows": 10,
+      "rows_with_aliases": 10,
+      "source_identifier_rows": 10,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 10,
+      "source_url_rows": 10,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "congreso_diputados",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 3,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12457,
+          "max_id": 347,
+          "min_id": 34,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 3,
+          "sha256": "69f6a1eaf2e288b8599daaac3cc5c077f9db4384abd418a8be406c52abefd1d8"
+        }
+      ],
+      "input_sha256": "ac96de0fd3fdd4cb71a973e6a87d476a5914feb2fbbd083a560deafa38fbf597",
+      "lineage_rows": 3,
+      "materialization": "reused",
+      "max_id": 347,
+      "min_id": 34,
+      "observed_label_only_rows": 0,
+      "partition_id": "congreso_diputados|es-national|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_diputados/jurisdiction=es-national/year=2026",
+      "rows": 3,
+      "rows_with_aliases": 3,
+      "source_identifier_rows": 3,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 3,
+      "source_url_rows": 3,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "congreso_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 350,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 44113,
+          "max_id": 79430,
+          "min_id": 79081,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_votaciones/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 350,
+          "sha256": "1a7ce406398e010be847084052d263410e7a778d870ccd6c732942f36f468a1b"
+        }
+      ],
+      "input_sha256": "29286256b7d1b5524c6b2a5d604a33a4f919acd3e979d7e8f48938aa37bb4165",
+      "lineage_rows": 350,
+      "materialization": "reused",
+      "max_id": 79430,
+      "min_id": 79081,
+      "observed_label_only_rows": 0,
+      "partition_id": "congreso_votaciones|es-national|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=congreso_votaciones/jurisdiction=es-national/year=2026",
+      "rows": 350,
+      "rows_with_aliases": 321,
+      "source_identifier_rows": 350,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 0,
+      "source_url_rows": 350,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "congreso_votaciones",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 67,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 16581,
+          "max_id": 425,
+          "min_id": 351,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_aragon_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 75,
+          "sha256": "df564f6bfa1ec3b180a2c8c9a3fc85f13a836a7ea2a748e95b57d760c6e34889"
+        }
+      ],
+      "input_sha256": "bb607d98cf17b5c46e43966bc65d545a23ef79cf5f476aacb71a47eb19c0f39c",
+      "lineage_rows": 75,
+      "materialization": "reused",
+      "max_id": 425,
+      "min_id": 351,
+      "observed_label_only_rows": 0,
+      "partition_id": "cortes_aragon_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_aragon_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 75,
+      "rows_with_aliases": 4,
+      "source_identifier_rows": 75,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 75,
+      "source_url_rows": 75,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "cortes_aragon_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 30,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13992,
+          "max_id": 77493,
+          "min_id": 77462,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_clm_diputados/jurisdiction=es-autonomic/year=2023/part-00000.parquet",
+          "rows": 30,
+          "sha256": "fbdd72fa8c70b84b17e9377d2f8f180c60c3cbf337f5897ed6a89b0afcb03234"
+        }
+      ],
+      "input_sha256": "b22da70288d565a46dc73c8a22d9c63736f00b33675b32d11a07170bdb1461ba",
+      "lineage_rows": 30,
+      "materialization": "reused",
+      "max_id": 77493,
+      "min_id": 77462,
+      "observed_label_only_rows": 0,
+      "partition_id": "cortes_clm_diputados|es-autonomic|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_clm_diputados/jurisdiction=es-autonomic/year=2023",
+      "rows": 30,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 30,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 30,
+      "source_url_rows": 30,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "cortes_clm_diputados",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 2,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12270,
+          "max_id": 77494,
+          "min_id": 77474,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_clm_diputados/jurisdiction=es-autonomic/year=2025/part-00000.parquet",
+          "rows": 2,
+          "sha256": "30aefcbde35f97f3f312abf83eab5bc1664ca964070a0c65969f782093bf5435"
+        }
+      ],
+      "input_sha256": "eb7095d83ba55ea949bcfa83611da8fd8d6e42effc250d0f2f6096105037f1d6",
+      "lineage_rows": 2,
+      "materialization": "reused",
+      "max_id": 77494,
+      "min_id": 77474,
+      "observed_label_only_rows": 0,
+      "partition_id": "cortes_clm_diputados|es-autonomic|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_clm_diputados/jurisdiction=es-autonomic/year=2025",
+      "rows": 2,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 2,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 2,
+      "source_url_rows": 2,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "cortes_clm_diputados",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12183,
+          "max_id": 77471,
+          "min_id": 77471,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_clm_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 1,
+          "sha256": "f8f7acc8170ecc9d9c9f6939e94a2598188bd2e06e96ebf772f9fc99df8c2b8b"
+        }
+      ],
+      "input_sha256": "9b273768603bfc90d0407a34a218386f8384d477dcb8ba2425cf325aea79f856",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 77471,
+      "min_id": 77471,
+      "observed_label_only_rows": 0,
+      "partition_id": "cortes_clm_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_clm_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 1,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "cortes_clm_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 81,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 16438,
+          "max_id": 77575,
+          "min_id": 77495,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_cyl_procuradores/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 81,
+          "sha256": "826d67306727c25ed2ca893336e972b80d88eb2c8358d741addf6b9ec7c149b4"
+        }
+      ],
+      "input_sha256": "98a3caaaaef14c62b106883a572b718dea5c5a33691ed78e21942cf2c3276b5a",
+      "lineage_rows": 81,
+      "materialization": "reused",
+      "max_id": 77575,
+      "min_id": 77495,
+      "observed_label_only_rows": 0,
+      "partition_id": "cortes_cyl_procuradores|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=cortes_cyl_procuradores/jurisdiction=es-autonomic/year=2026",
+      "rows": 81,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 81,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 81,
+      "source_url_rows": 81,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "cortes_cyl_procuradores",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 99,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 20514,
+          "max_id": 77461,
+          "min_id": 77363,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=corts_valencianes_diputats/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 99,
+          "sha256": "8313c2d3df332a9e53593084d06c271c6ce303cf91c4926c02cfc939552efc44"
+        }
+      ],
+      "input_sha256": "2f071b2dfaf4a340dc6b9aebc1f39e0122f181e670d97965631d461421fa7603",
+      "lineage_rows": 99,
+      "materialization": "reused",
+      "max_id": 77461,
+      "min_id": 77363,
+      "observed_label_only_rows": 0,
+      "partition_id": "corts_valencianes_diputats|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=corts_valencianes_diputats/jurisdiction=es-autonomic/year=2026",
+      "rows": 99,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 99,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 99,
+      "source_url_rows": 99,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "corts_valencianes_diputats",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 60,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14729,
+          "max_id": 749,
+          "min_id": 690,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=europarl_meps/jurisdiction=eu/year=2026/part-00000.parquet",
+          "rows": 60,
+          "sha256": "839f9590517e7e80a34218bf34f164bde061e5503dabd36d907a2ec583c8147a"
+        }
+      ],
+      "input_sha256": "9caa2214d3faf0f80f5a65588215e6bb096df0cfa0bbe105df3ce4b4175e9d4d",
+      "lineage_rows": 60,
+      "materialization": "reused",
+      "max_id": 749,
+      "min_id": 690,
+      "observed_label_only_rows": 0,
+      "partition_id": "europarl_meps|eu|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=europarl_meps/jurisdiction=eu/year=2026",
+      "rows": 60,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 60,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 60,
+      "source_url_rows": 60,
+      "values": {
+        "jurisdiction": "eu",
+        "snapshot_date": "2026-02-13",
+        "source_id": "europarl_meps",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 45,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15111,
+          "max_id": 77021,
+          "min_id": 76977,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=jgpa_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 45,
+          "sha256": "04ec9ad01985db5ffeb1e10cf6a81a365465eb0058800a3c5e821dd0a92564b6"
+        }
+      ],
+      "input_sha256": "1e7d1d3c330d460754f3bd27a477231b7d7d9ea86b4ea526df205124629a066f",
+      "lineage_rows": 45,
+      "materialization": "reused",
+      "max_id": 77021,
+      "min_id": 76977,
+      "observed_label_only_rows": 0,
+      "partition_id": "jgpa_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=jgpa_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 45,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 45,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 45,
+      "source_url_rows": 45,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "jgpa_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 63698,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 5319468,
+          "max_id": 67644,
+          "min_id": 750,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2023/part-00000.parquet",
+          "rows": 63698,
+          "sha256": "73b077d07025381480e24ee82518f1a88f0c677ec47532c317337a73685f4332"
+        }
+      ],
+      "input_sha256": "b7671495834da0d52d6acc52e0c0520af2dd41f936abb7da75c233053ab39034",
+      "lineage_rows": 63698,
+      "materialization": "reused",
+      "max_id": 67644,
+      "min_id": 750,
+      "observed_label_only_rows": 0,
+      "partition_id": "municipal_concejales|es-municipal|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2023",
+      "rows": 63698,
+      "rows_with_aliases": 2,
+      "source_identifier_rows": 63698,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 63698,
+      "source_url_rows": 63698,
+      "values": {
+        "jurisdiction": "es-municipal",
+        "snapshot_date": "2026-02-13",
+        "source_id": "municipal_concejales",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 1442,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 158321,
+          "max_id": 67641,
+          "min_id": 771,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2024/part-00000.parquet",
+          "rows": 1442,
+          "sha256": "2dd50ee177a2ce134d7076353959969019b87f3599901c880753280e91139996"
+        }
+      ],
+      "input_sha256": "f3346a4a48e09df73b0008c28e14a8c2442d5b47f513ae3c2a34f064afb2ef3b",
+      "lineage_rows": 1442,
+      "materialization": "reused",
+      "max_id": 67641,
+      "min_id": 771,
+      "observed_label_only_rows": 0,
+      "partition_id": "municipal_concejales|es-municipal|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2024",
+      "rows": 1442,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1442,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1442,
+      "source_url_rows": 1442,
+      "values": {
+        "jurisdiction": "es-municipal",
+        "snapshot_date": "2026-02-13",
+        "source_id": "municipal_concejales",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 1633,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 175221,
+          "max_id": 67501,
+          "min_id": 793,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2025/part-00000.parquet",
+          "rows": 1633,
+          "sha256": "79c92a42222aed70841d4416b5dc34a06ab185affd2d5d53691914bafe6ceb48"
+        }
+      ],
+      "input_sha256": "a2e68f754631c61201849be17419016070447afae9f3fab03d7f05d092952b44",
+      "lineage_rows": 1633,
+      "materialization": "reused",
+      "max_id": 67501,
+      "min_id": 793,
+      "observed_label_only_rows": 0,
+      "partition_id": "municipal_concejales|es-municipal|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2025",
+      "rows": 1633,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1633,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1633,
+      "source_url_rows": 1633,
+      "values": {
+        "jurisdiction": "es-municipal",
+        "snapshot_date": "2026-02-13",
+        "source_id": "municipal_concejales",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 122,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 26207,
+          "max_id": 67557,
+          "min_id": 1284,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2026/part-00000.parquet",
+          "rows": 122,
+          "sha256": "f7acfee146abee6f42f6cb273d275e42230385ba1525e80536aa3aaafd146f38"
+        }
+      ],
+      "input_sha256": "67becc27b13384a12c2ef3ea2d560e4c2e9335c77377d2a5789b5522bd8116e1",
+      "lineage_rows": 122,
+      "materialization": "reused",
+      "max_id": 67557,
+      "min_id": 1284,
+      "observed_label_only_rows": 0,
+      "partition_id": "municipal_concejales|es-municipal|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=municipal_concejales/jurisdiction=es-municipal/year=2026",
+      "rows": 122,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 122,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 122,
+      "source_url_rows": 122,
+      "values": {
+        "jurisdiction": "es-municipal",
+        "snapshot_date": "2026-02-13",
+        "source_id": "municipal_concejales",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 53,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15228,
+          "max_id": 77194,
+          "min_id": 77136,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_balears_diputats/jurisdiction=es-autonomic/year=2023/part-00000.parquet",
+          "rows": 53,
+          "sha256": "7460167fe05edfa26593448ffddb4743cc3cac14230c304c5ed6419b2cfc082d"
+        }
+      ],
+      "input_sha256": "17950815e385c1bd746a0b9e539e5b58384252c4413f93581de56be47cc968d0",
+      "lineage_rows": 53,
+      "materialization": "reused",
+      "max_id": 77194,
+      "min_id": 77136,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlament_balears_diputats|es-autonomic|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_balears_diputats/jurisdiction=es-autonomic/year=2023",
+      "rows": 53,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 53,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 53,
+      "source_url_rows": 53,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlament_balears_diputats",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 3,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12448,
+          "max_id": 77190,
+          "min_id": 77140,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_balears_diputats/jurisdiction=es-autonomic/year=2024/part-00000.parquet",
+          "rows": 3,
+          "sha256": "9599ffbe44bc96e8732d2712a53d8f866fed3799f1ba79061ad27b7b0461d446"
+        }
+      ],
+      "input_sha256": "1a47ac54a3eb58288f1b25d9d3428e2327168ef8d54d241139e5b89adee093ae",
+      "lineage_rows": 3,
+      "materialization": "reused",
+      "max_id": 77190,
+      "min_id": 77140,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlament_balears_diputats|es-autonomic|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_balears_diputats/jurisdiction=es-autonomic/year=2024",
+      "rows": 3,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 3,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 3,
+      "source_url_rows": 3,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlament_balears_diputats",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 3,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12403,
+          "max_id": 77183,
+          "min_id": 77159,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_balears_diputats/jurisdiction=es-autonomic/year=2025/part-00000.parquet",
+          "rows": 3,
+          "sha256": "8cceb61a93374d6145f294fef004ed824d8807d59ced27d718e34f497a2a9e9b"
+        }
+      ],
+      "input_sha256": "a32dbc9993ec173d82bd36307c0dd904eff5b7114719bfd938f683048f0a40c1",
+      "lineage_rows": 3,
+      "materialization": "reused",
+      "max_id": 77183,
+      "min_id": 77159,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlament_balears_diputats|es-autonomic|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_balears_diputats/jurisdiction=es-autonomic/year=2025",
+      "rows": 3,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 3,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 3,
+      "source_url_rows": 3,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlament_balears_diputats",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 129,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 19383,
+          "max_id": 77362,
+          "min_id": 77228,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_catalunya_diputats/jurisdiction=es-autonomic/year=2024/part-00000.parquet",
+          "rows": 129,
+          "sha256": "331cc25b74827cb37b532f732811d9c4bf13837d61392b1edfa92e28086419ba"
+        }
+      ],
+      "input_sha256": "65c35013998dd5fbb1b02c18faa0385d74330c394512389d94880408be28b0eb",
+      "lineage_rows": 129,
+      "materialization": "reused",
+      "max_id": 77362,
+      "min_id": 77228,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlament_catalunya_diputats|es-autonomic|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_catalunya_diputats/jurisdiction=es-autonomic/year=2024",
+      "rows": 129,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 129,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 129,
+      "source_url_rows": 129,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlament_catalunya_diputats",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 5,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12917,
+          "max_id": 77354,
+          "min_id": 77300,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_catalunya_diputats/jurisdiction=es-autonomic/year=2025/part-00000.parquet",
+          "rows": 5,
+          "sha256": "d652bbe697f890b4f593cd658ba2dd9f31f9bff88d1bd1126ba06aecf98fad1b"
+        }
+      ],
+      "input_sha256": "5306d0a5f78e9d1b5ac5a365e89fcec7691d59f76d102f6d2756b58ac26a60cb",
+      "lineage_rows": 5,
+      "materialization": "reused",
+      "max_id": 77354,
+      "min_id": 77300,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlament_catalunya_diputats|es-autonomic|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_catalunya_diputats/jurisdiction=es-autonomic/year=2025",
+      "rows": 5,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 5,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 5,
+      "source_url_rows": 5,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlament_catalunya_diputats",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12466,
+          "max_id": 77248,
+          "min_id": 77248,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_catalunya_diputats/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 1,
+          "sha256": "affc1c58be53d0e21aafa872ba67f99a207cff190edb81c717e5698980b616ec"
+        }
+      ],
+      "input_sha256": "ea524b1264e59c56633122c11d1ae2b4dd96eb273b8c1df605cd291597d0e617",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 77248,
+      "min_id": 77248,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlament_catalunya_diputats|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlament_catalunya_diputats/jurisdiction=es-autonomic/year=2026",
+      "rows": 1,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlament_catalunya_diputats",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 109,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 17762,
+          "max_id": 77684,
+          "min_id": 77576,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_andalucia_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 109,
+          "sha256": "d28e6758c38ef96a0767c8b6b329c5312947f774318867032e459ee35693f363"
+        }
+      ],
+      "input_sha256": "6b499e791798372518f0694be6a2c359e2d3cdade980c48bee47425d843a0e8a",
+      "lineage_rows": 109,
+      "materialization": "reused",
+      "max_id": 77684,
+      "min_id": 77576,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_andalucia_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_andalucia_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 109,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 109,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 109,
+      "source_url_rows": 109,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_andalucia_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 69,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 18004,
+          "max_id": 77100,
+          "min_id": 77022,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_canarias_diputados/jurisdiction=es-autonomic/year=2023/part-00000.parquet",
+          "rows": 78,
+          "sha256": "5cc98209af80cff9b103188e90083003d53001569958bae3a4c60ea5ef244dde"
+        }
+      ],
+      "input_sha256": "5ac6af687138bf13a14ea80a0f13636f2fad7e47cce2ad87404fd468ec5ec6f3",
+      "lineage_rows": 78,
+      "materialization": "reused",
+      "max_id": 77100,
+      "min_id": 77022,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_canarias_diputados|es-autonomic|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_canarias_diputados/jurisdiction=es-autonomic/year=2023",
+      "rows": 78,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 78,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 78,
+      "source_url_rows": 78,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_canarias_diputados",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12204,
+          "max_id": 77070,
+          "min_id": 77070,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_canarias_diputados/jurisdiction=es-autonomic/year=2024/part-00000.parquet",
+          "rows": 1,
+          "sha256": "d57e8cfc920ce5d6bb388a15ad52ad2ba556d5c1a94c48cf43d468005bac5462"
+        }
+      ],
+      "input_sha256": "b765f7a1f3b02ea744ae580ecbb398785064cabe039449f383da20d38159ebbf",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 77070,
+      "min_id": 77070,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_canarias_diputados|es-autonomic|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_canarias_diputados/jurisdiction=es-autonomic/year=2024",
+      "rows": 1,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_canarias_diputados",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 35,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15146,
+          "max_id": 77135,
+          "min_id": 77101,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_cantabria_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 35,
+          "sha256": "784665a82363c0a5c1d3be75b354164c093c6d43b30ece3332f93cf195906c59"
+        }
+      ],
+      "input_sha256": "55b586aa884fedf9fb3516fc5194fcbc50535441db2eb45029941121f094f711",
+      "lineage_rows": 35,
+      "materialization": "reused",
+      "max_id": 77135,
+      "min_id": 77101,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_cantabria_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_cantabria_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 35,
+      "rows_with_aliases": 1,
+      "source_identifier_rows": 35,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 35,
+      "source_url_rows": 35,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_cantabria_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 33,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 15117,
+          "max_id": 77227,
+          "min_id": 77195,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_larioja_diputados/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 33,
+          "sha256": "2bbd384d515773a367c51bb83e7a9777d52b01fc2bdcc5f7a99513101867d934"
+        }
+      ],
+      "input_sha256": "adb9a4147aeba4045f367d0999795caa1081374410d44cf11650495de74e709f",
+      "lineage_rows": 33,
+      "materialization": "reused",
+      "max_id": 77227,
+      "min_id": 77195,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_larioja_diputados|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_larioja_diputados/jurisdiction=es-autonomic/year=2026",
+      "rows": 33,
+      "rows_with_aliases": 2,
+      "source_identifier_rows": 33,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 33,
+      "source_url_rows": 33,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_larioja_diputados",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 47,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14543,
+          "max_id": 77759,
+          "min_id": 77685,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_vasco_parlamentarios/jurisdiction=es-autonomic/year=2024/part-00000.parquet",
+          "rows": 47,
+          "sha256": "a83a5fff0b23c498daf47bfe9d05ba661cf7d6e67ce0a6324bf6a5233eb07899"
+        }
+      ],
+      "input_sha256": "9ef5db4b7f9134b45d90806413b866d64e4920bc8afbba416f76af14467a1ab4",
+      "lineage_rows": 47,
+      "materialization": "reused",
+      "max_id": 77759,
+      "min_id": 77685,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_vasco_parlamentarios|es-autonomic|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_vasco_parlamentarios/jurisdiction=es-autonomic/year=2024",
+      "rows": 47,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 47,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 47,
+      "source_url_rows": 47,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_vasco_parlamentarios",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 11965,
+          "max_id": 77757,
+          "min_id": 77757,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_vasco_parlamentarios/jurisdiction=es-autonomic/year=2025/part-00000.parquet",
+          "rows": 1,
+          "sha256": "ee48cd702dc247c90e2553d38e8b822f841af8b6241aa798b42fcac8664cd9f6"
+        }
+      ],
+      "input_sha256": "910cf7f0c4a2d6ffda2ac61ea79a51c36e02d616ef5849553c966ae87256233b",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 77757,
+      "min_id": 77757,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_vasco_parlamentarios|es-autonomic|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_vasco_parlamentarios/jurisdiction=es-autonomic/year=2025",
+      "rows": 1,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_vasco_parlamentarios",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 27,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13230,
+          "max_id": 77758,
+          "min_id": 77690,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_vasco_parlamentarios/jurisdiction=es-autonomic/year=2026/part-00000.parquet",
+          "rows": 27,
+          "sha256": "bff274ea8bc4b259631665d9964ea53e810f3fa3f0900ce1122c31eb3ca798fb"
+        }
+      ],
+      "input_sha256": "21f7f78aacfe5dcbe3200b64adee1a4a8491d5b6567bb457e5977e155cecba12",
+      "lineage_rows": 27,
+      "materialization": "reused",
+      "max_id": 77758,
+      "min_id": 77690,
+      "observed_label_only_rows": 0,
+      "partition_id": "parlamento_vasco_parlamentarios|es-autonomic|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=parlamento_vasco_parlamentarios/jurisdiction=es-autonomic/year=2026",
+      "rows": 27,
+      "rows_with_aliases": 0,
+      "source_identifier_rows": 27,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 27,
+      "source_url_rows": 27,
+      "values": {
+        "jurisdiction": "es-autonomic",
+        "snapshot_date": "2026-02-13",
+        "source_id": "parlamento_vasco_parlamentarios",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 1,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12097,
+          "max_id": 433,
+          "min_id": 433,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2008/part-00000.parquet",
+          "rows": 1,
+          "sha256": "5b1a5f4f28ee1c8d2527e86b2c25394767e5a2468436792d190c34f335a4bc29"
+        }
+      ],
+      "input_sha256": "07fd0ffc71a281fedde283a1ea055e9189d3f177821eb720b85570326f3e4883",
+      "lineage_rows": 1,
+      "materialization": "reused",
+      "max_id": 433,
+      "min_id": 433,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2008",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2008",
+      "rows": 1,
+      "rows_with_aliases": 1,
+      "source_identifier_rows": 1,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 1,
+      "source_url_rows": 1,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2008"
+      }
+    },
+    {
+      "active_rows": 2,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12446,
+          "max_id": 78547,
+          "min_id": 78489,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2018/part-00000.parquet",
+          "rows": 2,
+          "sha256": "398bb154f5f47aa25305f4767ec9166bfe6cede140fc4f2f7c6fe0d85fbb1450"
+        }
+      ],
+      "input_sha256": "45ccf6419d816b1384b7abee01d06f00b97dbe554d41d4fcd5bdcb67005b09df",
+      "lineage_rows": 2,
+      "materialization": "reused",
+      "max_id": 78547,
+      "min_id": 78489,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2018",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2018",
+      "rows": 2,
+      "rows_with_aliases": 2,
+      "source_identifier_rows": 2,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 2,
+      "source_url_rows": 2,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2018"
+      }
+    },
+    {
+      "active_rows": 79,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 20485,
+          "max_id": 78819,
+          "min_id": 77860,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2019/part-00000.parquet",
+          "rows": 79,
+          "sha256": "202a03c9dc52112ed9a4bffbf42b3803dbfa6e841e85de09e6fe586aa397389d"
+        }
+      ],
+      "input_sha256": "908f05d987e91b1c3a051ae32ee378d3a44a6fc4bb9f6cc6919e81e7e2f9e67f",
+      "lineage_rows": 79,
+      "materialization": "reused",
+      "max_id": 78819,
+      "min_id": 77860,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2019",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2019",
+      "rows": 79,
+      "rows_with_aliases": 70,
+      "source_identifier_rows": 79,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 79,
+      "source_url_rows": 79,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2019"
+      }
+    },
+    {
+      "active_rows": 5,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12999,
+          "max_id": 78836,
+          "min_id": 77858,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2020/part-00000.parquet",
+          "rows": 5,
+          "sha256": "e812fedfec8a1676b22deb842879d5f3a84200fcd7037ce27450f5e54ee15e1a"
+        }
+      ],
+      "input_sha256": "0556f98a736f8c0fe18f2d225dc4e14c858ceff44d8bbacb2c11aa3653693e86",
+      "lineage_rows": 5,
+      "materialization": "reused",
+      "max_id": 78836,
+      "min_id": 77858,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2020",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2020",
+      "rows": 5,
+      "rows_with_aliases": 5,
+      "source_identifier_rows": 5,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 5,
+      "source_url_rows": 5,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2020"
+      }
+    },
+    {
+      "active_rows": 16,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13874,
+          "max_id": 78859,
+          "min_id": 77788,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2021/part-00000.parquet",
+          "rows": 16,
+          "sha256": "cb40d8b96a995df1e8eed05aebaf2c5cd4722eabf07a48acc4d9d92906e50b05"
+        }
+      ],
+      "input_sha256": "3d907ee6f5bd3c8fb5fccbf98caaf71cfc229c0d478bd5e6d4a034d46fdbb9d2",
+      "lineage_rows": 16,
+      "materialization": "reused",
+      "max_id": 78859,
+      "min_id": 77788,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2021",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2021",
+      "rows": 16,
+      "rows_with_aliases": 13,
+      "source_identifier_rows": 16,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 16,
+      "source_url_rows": 16,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2021"
+      }
+    },
+    {
+      "active_rows": 14,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 13732,
+          "max_id": 78877,
+          "min_id": 427,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2022/part-00000.parquet",
+          "rows": 14,
+          "sha256": "dad02413957cae39f7a88588fd49b6576a055737360a2ac3afd073a5e358a7ba"
+        }
+      ],
+      "input_sha256": "72af656e5cb7e62d03f893169cfe1362f5130f7d9b90a6310072885665d5cb11",
+      "lineage_rows": 14,
+      "materialization": "reused",
+      "max_id": 78877,
+      "min_id": 427,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2022",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2022",
+      "rows": 14,
+      "rows_with_aliases": 13,
+      "source_identifier_rows": 14,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 14,
+      "source_url_rows": 14,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2022"
+      }
+    },
+    {
+      "active_rows": 282,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 34995,
+          "max_id": 78072,
+          "min_id": 426,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 282,
+          "sha256": "e974e105b5ae358d7425f09fad77c3f381981a14228057a0b660f28ab3cc62c1"
+        }
+      ],
+      "input_sha256": "9120046bc8ebce4bf5c243d995683bc2755ffebd833c904cf15ae06619415511",
+      "lineage_rows": 282,
+      "materialization": "reused",
+      "max_id": 78072,
+      "min_id": 426,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2023",
+      "rows": 282,
+      "rows_with_aliases": 275,
+      "source_identifier_rows": 282,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 282,
+      "source_url_rows": 282,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 22,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14701,
+          "max_id": 78077,
+          "min_id": 463,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 22,
+          "sha256": "f3fee23e7afdb38c1e58895cb0e1839fc30a4926cd486e2f90e91ac4ce673a0b"
+        }
+      ],
+      "input_sha256": "dc61c52a213bb7b3afd7630990a7cbaad41bb9a0e3f59a4b3022c3f533d365ba",
+      "lineage_rows": 22,
+      "materialization": "reused",
+      "max_id": 78077,
+      "min_id": 463,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2024",
+      "rows": 22,
+      "rows_with_aliases": 15,
+      "source_identifier_rows": 22,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 22,
+      "source_url_rows": 22,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2024"
+      }
+    },
+    {
+      "active_rows": 6,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12792,
+          "max_id": 689,
+          "min_id": 515,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2025/part-00000.parquet",
+          "rows": 6,
+          "sha256": "d4a128f71dd3f698f9a89c59a4987469b23a15379474b2c65bce0b3049641472"
+        }
+      ],
+      "input_sha256": "3461cb7e499993b6425c7f79d79f6add00dcf37f8422622dfd778e7be163eb68",
+      "lineage_rows": 6,
+      "materialization": "reused",
+      "max_id": 689,
+      "min_id": 515,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2025",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2025",
+      "rows": 6,
+      "rows_with_aliases": 2,
+      "source_identifier_rows": 6,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 6,
+      "source_url_rows": 6,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2025"
+      }
+    },
+    {
+      "active_rows": 232,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 28871,
+          "max_id": 78882,
+          "min_id": 78422,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 232,
+          "sha256": "964122edf9c03cebf78402395b1c93ffd475320710a2425dafccf8b84938d559"
+        }
+      ],
+      "input_sha256": "55efd7d197c1bb2f8b4cc988e61118ee93f36d03c5cb2b430e98c76a257f6908",
+      "lineage_rows": 232,
+      "materialization": "reused",
+      "max_id": 78882,
+      "min_id": 78422,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_senadores|es-national|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_senadores/jurisdiction=es-national/year=2026",
+      "rows": 232,
+      "rows_with_aliases": 223,
+      "source_identifier_rows": 232,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 232,
+      "source_url_rows": 232,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_senadores",
+        "year": "2026"
+      }
+    },
+    {
+      "active_rows": 266,
+      "alias_only_rows": 1,
+      "files": [
+        {
+          "bytes": 35602,
+          "max_id": 79735,
+          "min_id": 79431,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2020/part-00000.parquet",
+          "rows": 266,
+          "sha256": "6e0f4b05232725e97245f18875f9c40a004d6fe560f71685afe56ff3e59f472e"
+        }
+      ],
+      "input_sha256": "4aa0d8147ed175b8babb0a1949f895754475b63b640f938eb82da481add5cc76",
+      "lineage_rows": 266,
+      "materialization": "reused",
+      "max_id": 79735,
+      "min_id": 79431,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2020",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2020",
+      "rows": 266,
+      "rows_with_aliases": 264,
+      "source_identifier_rows": 265,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 0,
+      "source_url_rows": 266,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_votaciones",
+        "year": "2020"
+      }
+    },
+    {
+      "active_rows": 19,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14509,
+          "max_id": 79722,
+          "min_id": 79441,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2021/part-00000.parquet",
+          "rows": 19,
+          "sha256": "827ebf365752564cea35cc7a8fa563b2946e9ab918bc7e79729c16b2089e4fc3"
+        }
+      ],
+      "input_sha256": "9a228d096b20803a2885f73a2b60733d8aa0f37a9b8dc5f8fb1d8bac3eaef5bc",
+      "lineage_rows": 19,
+      "materialization": "reused",
+      "max_id": 79722,
+      "min_id": 79441,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2021",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2021",
+      "rows": 19,
+      "rows_with_aliases": 18,
+      "source_identifier_rows": 19,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 0,
+      "source_url_rows": 19,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_votaciones",
+        "year": "2021"
+      }
+    },
+    {
+      "active_rows": 15,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 14097,
+          "max_id": 79731,
+          "min_id": 79434,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2022/part-00000.parquet",
+          "rows": 15,
+          "sha256": "434b65a78829e19099b96b3569c827e0e76c26da4098438ba9cfa40891f4426c"
+        }
+      ],
+      "input_sha256": "e46f9caf4907be17c029ddb6610dec73caeb0716e27818660b92a12db74f2a39",
+      "lineage_rows": 15,
+      "materialization": "reused",
+      "max_id": 79731,
+      "min_id": 79434,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2022",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2022",
+      "rows": 15,
+      "rows_with_aliases": 15,
+      "source_identifier_rows": 15,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 0,
+      "source_url_rows": 15,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_votaciones",
+        "year": "2022"
+      }
+    },
+    {
+      "active_rows": 271,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 36383,
+          "max_id": 80005,
+          "min_id": 79501,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 271,
+          "sha256": "b07d5fda9fa682410d76403c38f8a40c192ef632e70557c8400076a7d60afdb6"
+        }
+      ],
+      "input_sha256": "6fced4fdfc77e67b89e01acdc117a37c92eebc63654bc39f110161f2ed7cd948",
+      "lineage_rows": 271,
+      "materialization": "reused",
+      "max_id": 80005,
+      "min_id": 79501,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2023",
+      "rows": 271,
+      "rows_with_aliases": 265,
+      "source_identifier_rows": 271,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 0,
+      "source_url_rows": 271,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_votaciones",
+        "year": "2023"
+      }
+    },
+    {
+      "active_rows": 4,
+      "alias_only_rows": 0,
+      "files": [
+        {
+          "bytes": 12780,
+          "max_id": 79945,
+          "min_id": 79742,
+          "path": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 4,
+          "sha256": "d06e6c5224f2d60455204b333ba8fdb430a4549d520853396b15e81919c7e288"
+        }
+      ],
+      "input_sha256": "f6ba93839c426e1e77b03da6daf390f0cc065bd397079bdd553d51c3b8fab6d3",
+      "lineage_rows": 4,
+      "materialization": "reused",
+      "max_id": 79945,
+      "min_id": 79742,
+      "observed_label_only_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=actor_mandates/snapshot_date=2026-02-13/source_id=senado_votaciones/jurisdiction=es-national/year=2024",
+      "rows": 4,
+      "rows_with_aliases": 4,
+      "source_identifier_rows": 4,
+      "source_record_identity_rows": 0,
+      "source_record_rows": 0,
+      "source_url_rows": 4,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-02-13",
+        "source_id": "senado_votaciones",
+        "year": "2024"
+      }
+    }
+  ],
+  "performance": {
+    "fingerprint_seconds": 2.344702,
+    "materialize_seconds": 0.0,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 46.266,
+    "rows_per_second": 32864.763,
+    "total_seconds": 2.406985
+  },
+  "promotion_checks": {
+    "analytical_partition_gate": true,
+    "durable_public_origin_verified": false,
+    "external_identity_quality_verified": false,
+    "million_real_rows": false,
+    "representative_100k_real_rows": false
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "schema": [
+    {
+      "name": "mandate_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "person_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "full_name",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "given_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "family_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "person_canonical_key",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "gender_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "birth_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "identity_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_identifiers",
+      "nullable": false,
+      "type": "list_string"
+    },
+    {
+      "name": "aliases",
+      "nullable": false,
+      "type": "list_string"
+    },
+    {
+      "name": "institution_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "institution_name",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "party_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "party_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "party_acronym",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "role_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "role_title",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "normalized_role_title",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "level",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "admin_level_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "territory_code",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "territory_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "start_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "end_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "is_active",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "mandate_year",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_record_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_record_pk",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "source_snapshot_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url_scope",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "lineage_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "jurisdiction",
+      "nullable": false,
+      "type": "string"
+    }
+  ],
+  "schema_sha256": "6b82a181e3357299526b0a0bec3c5fb01c3b71e0ad62cd0843a25422ca5abc1d",
+  "schema_version": "semantic_partition_manifest_v1",
+  "snapshot_date": "2026-02-13",
+  "source": {
+    "alias_table": "person_name_aliases",
+    "database_bytes": 625025024,
+    "database_file": "politicos-es.db",
+    "identifier_table": "person_identifiers",
+    "person_table": "persons",
+    "raw_payload_published": false,
+    "table": "mandates"
+  },
+  "totals": {
+    "active_rows": 70615,
+    "alias_only_rows": 1,
+    "aliases_total": 1838,
+    "distinct_mandate_ids": 79105,
+    "distinct_people": 70097,
+    "files": 93,
+    "joined_rows": 79105,
+    "lineage_rows": 79105,
+    "mandate_rows": 79105,
+    "observed_label_only_rows": 0,
+    "parquet_bytes": 8193685,
+    "partitions": 93,
+    "private_token_findings": 0,
+    "rows": 79105,
+    "rows_with_aliases": 1838,
+    "source_identifier_rows": 79104,
+    "source_identifiers_total": 240517,
+    "source_record_identity_rows": 0,
+    "source_record_rows": 78180,
+    "source_url_rows": 79105,
+    "unknown_year_rows": 0
+  },
+  "transformer_version": "actor_mandates_public_v1"
+}

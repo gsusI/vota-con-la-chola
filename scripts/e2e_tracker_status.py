@@ -27,6 +27,9 @@ DEFAULT_WAIVERS = Path("docs/etl/mismatch-waivers.json")
 # free-text "Fuentes objetivo" wording changes.
 TRACKER_TIPO_SOURCE_HINTS = {
     "Marco legal electoral": ["boe_api_legal"],
+    "Cargos electos históricos Congreso/Senado": [
+        "infoelectoral_elected_officials"
+    ],
     # AI-OPS-09: explicit row-level contracts (avoid ambiguity between national and pilot rows).
     "Contratación autonómica (piloto 3 CCAA)": ["placsp_autonomico"],
     "Subvenciones autonómicas (piloto 3 CCAA)": ["bdns_autonomico"],
