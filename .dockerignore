@@ -9,6 +9,7 @@ __pycache__
 *.pyo
 *.pyd
 .venv
+.scale-origin-*
 .playwright-cli
 output
 vota_publicdata_libs.egg-info
@@ -20,6 +21,8 @@ docs/screenshots
 etl/data/derived
 etl/data/object-origin
 etl/data/raw/**
+etl/data/restored
+etl/data/rebuilt
 etl/data/staging/**
 etl/data/published/**
 !etl/data/raw/samples

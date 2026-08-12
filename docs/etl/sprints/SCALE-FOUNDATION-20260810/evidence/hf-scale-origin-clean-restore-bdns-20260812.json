@@ -1,0 +1,32 @@
+{
+  "bytes": 43042223,
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "downloaded_bytes": 43042223,
+  "downloaded_files": 20,
+  "elapsed_seconds": 7.419542,
+  "errors": [],
+  "files": 20,
+  "manifest_sha256": "10ef14326dc9eb95d81fb9debf9db3c49a0d0132846fb914409007e4a87b5faf",
+  "preflight": {
+    "bytes": 43042223,
+    "files": 20,
+    "free_bytes": 9114873856,
+    "headroom_bytes": 7998089809,
+    "minimum_free_after_restore_bytes": 1073741824,
+    "missing_bytes": 43042223,
+    "missing_files": 20,
+    "required_bytes": 1116784047,
+    "reusable_bytes": 0,
+    "reusable_files": 0,
+    "status": "ok"
+  },
+  "public_domain_personal_information_retained": true,
+  "reused_bytes": 0,
+  "reused_files": 0,
+  "schema_version": "real-scale-origin-restore-v1",
+  "selected_corpus_ids": [
+    "bdns_public_money"
+  ],
+  "snapshot_date": "2026-08-12",
+  "status": "restored_checksums_verified"
+}

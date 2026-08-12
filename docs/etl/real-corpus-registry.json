@@ -32,14 +32,15 @@
         "www.senado.es"
       ],
       "representative_scope": false,
-      "durable_public_origin": false,
-      "clean_room_restore": false,
+      "durable_public_origin": true,
+      "clean_room_restore": true,
       "corrections_workflow": true,
       "limitations": [
         "Current evidence covers the available Congreso and Senado vote corpus, not every legislature or public decision body.",
-        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+        "All 102172 historical HTTP rows across 1166 Senate URLs are classified without rewriting: local checksum captures cover 33683 rows across 484 URLs, while 68489 rows across 682 URLs still lack an immutable replacement; two bounded HTTPS equivalence probes returned HTTP 403 HTML and established no content equivalence.",
+        "A fresh empty cache downloaded and checksum-verified all 8373 published shards, then an isolated copied validator full-validated 1809222 member-vote rows with complete source-record and public-URL coverage."
       ],
-      "next_gate": "Publish immutable shards and manifests, restore them in a clean environment, then quantify legislature and chamber completeness against official source totals."
+      "next_gate": "Recover or publish immutable official captures for the remaining 682 historical HTTP URLs, retry HTTPS equivalence only with a new access lever, then quantify legislature and chamber completeness against official source totals."
     },
     {
       "id": "eurostat_indicators",
@@ -59,14 +60,14 @@
         "ec.europa.eu"
       ],
       "representative_scope": false,
-      "durable_public_origin": false,
-      "clean_room_restore": false,
+      "durable_public_origin": true,
+      "clean_room_restore": true,
       "corrections_workflow": false,
       "limitations": [
         "Four selected Eurostat datasets prove real analytical scale but do not represent all policy domains.",
-        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+        "A fresh empty cache downloaded and checksum-verified the published artifact, then an isolated no-project validator full-validated 1755809 rows across 37 Parquet files with bounded memory."
       ],
-      "next_gate": "Define a public, versioned indicator codebook across spending, services, inequality, climate, housing, and health; publish and clean-room restore the resulting snapshot."
+      "next_gate": "Define a public, versioned indicator codebook across spending, services, inequality, climate, housing, and health; capture a second snapshot and prove revisions."
     },
     {
       "id": "placsp_public_money",
@@ -86,26 +87,26 @@
         "contrataciondelestado.es"
       ],
       "representative_scope": false,
-      "durable_public_origin": false,
-      "clean_room_restore": false,
+      "durable_public_origin": true,
+      "clean_room_restore": true,
       "corrections_workflow": true,
       "limitations": [
         "This cohort is not a complete historical PLACSP archive and contract values are not verified payments.",
         "All 128849 official-source counterparty names and identifiers are retained exactly, including 8260 natural-person and 3058 unclassified counterparties; classification never suppresses public-domain evidence.",
-        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+        "A fresh empty cache downloaded and checksum-verified the published artifact, then an isolated no-project validator full-validated 263302 rows across 50 Parquet files with exact public identity retention."
       ],
-      "next_gate": "Ingest the complete official archive by bounded time cohorts, reconcile source totals and revisions, publish one million real facts, and prove clean-room restore."
+      "next_gate": "Ingest the complete official archive by bounded time cohorts, reconcile source totals and revisions, and publish one million real facts."
     },
     {
       "id": "bdns_public_money",
       "label": "BDNS subsidy concessions",
       "kind": "parquet_manifest",
-      "root": "etl/data/derived/bdns-public-money-real-s3-v6-20260812",
-      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-manifest-20260812.json",
-      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-validation-20260812.json",
-      "replay_root": "etl/data/derived/bdns-public-money-real-s3-v6-20260812-replay",
-      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-manifest-20260812.json",
-      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-validation-20260812.json",
+      "root": "etl/data/derived/bdns-public-money-real-s3-v7-20260812",
+      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v7-manifest-20260812.json",
+      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v7-validation-20260812.json",
+      "replay_root": "etl/data/derived/bdns-public-money-real-s3-v7-20260812-replay",
+      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v7-incremental-manifest-20260812.json",
+      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v7-incremental-validation-20260812.json",
       "minimum_real_rows": 1000000,
       "official_source_ids": [
         "bdns_api_subvenciones"
@@ -114,16 +115,17 @@
         "www.infosubvenciones.es"
       ],
       "representative_scope": false,
-      "durable_public_origin": false,
-      "clean_room_restore": false,
+      "durable_public_origin": true,
+      "clean_room_restore": true,
       "corrections_workflow": true,
       "limitations": [
         "This is a bounded 1419-page cohort containing 1360382 of 28676987 official concessions observed on 2026-08-12 across 89 complete date windows; it is not the complete historical registry.",
         "All 1360382 official beneficiary names and all 163270 source-published identifiers are retained exactly; the remaining 1197112 counterparties are explicitly unclassified and no identity field is suppressed.",
         "Published subsidy amounts are award values, not independently verified disbursements or outcomes.",
-        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+        "The worker fails closed before claims when storage is below its configured floor; the latest local preflight is blocked with 5685862400 bytes free against 10863247360 required and -5177384960 bytes of headroom.",
+        "A checksum-verified content-addressed Hugging Face release carries the stable artifact contract and provides a durable public origin; a disposable isolated restore of all 20 selected files passed full validation of 1360382 rows with bounded memory."
       ],
-      "next_gate": "Capture a second snapshot for real revision deltas, extend through bounded historical cohorts, publish immutable artifacts, reconcile published source totals, and prove clean-room restore."
+      "next_gate": "Restore sufficient storage headroom for the next acquisition cohort, capture a second snapshot for real revision deltas, extend through bounded historical cohorts, and reconcile published source totals."
     },
     {
       "id": "accountability_ledger",
@@ -147,16 +149,16 @@
       "www.senado.es"
       ],
       "representative_scope": false,
-      "durable_public_origin": false,
-      "clean_room_restore": false,
+      "durable_public_origin": true,
+      "clean_room_restore": true,
       "corrections_workflow": true,
     "limitations": [
       "The clean 2026-08-12 materialization contains 126760 rows from boe_api_legal, congreso_votaciones, and senado_votaciones; ten fixture-derived PLACSP/BDNS rows and their downstream issues and ledger entries were removed.",
       "The corpus is dominated by parliamentary actions and is not representative of money, implementation, enforcement, audits, or outcomes.",
         "Twenty-six legacy rows infer boe_api_legal from an allowlisted official BOE URL because their stored source_id is blank; that inference is explicit in source_id_scope.",
-        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+        "A fresh empty cache downloaded and checksum-verified the published artifact, then an isolated no-project validator full-validated 126760 rows across 13 Parquet files with complete evidence lineage."
       ],
-      "next_gate": "Expand the ledger with representative rules, appointments, money, implementation, enforcement, audit, and outcome facts; reach one million real rows and prove public-origin restore."
+      "next_gate": "Expand the ledger with representative rules, appointments, money, implementation, enforcement, audit, and outcome facts; reach one million real rows."
     },
     {
       "id": "actor_mandates",
@@ -220,13 +222,13 @@
         "www.senado.es"
       ],
       "representative_scope": false,
-      "durable_public_origin": false,
-      "clean_room_restore": false,
+      "durable_public_origin": true,
+      "clean_room_restore": true,
       "corrections_workflow": true,
       "limitations": [
         "Source-scoped identifiers and name aliases do not prove identity equivalence across institutions.",
         "Coverage is uneven across national, regional, municipal, and European institutions.",
-        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+        "A fresh empty cache downloaded and checksum-verified the published artifact, then an isolated no-project validator full-validated 88031 mandate rows across 108 Parquet files with complete public URL coverage."
       ],
       "next_gate": "Reach one million real mandates and candidacy occurrences, publish institution-by-election coverage, and require reviewed merge/split identity history before cross-source aggregation."
     }
@@ -245,16 +247,16 @@
       "status": "validated_real_million_cohort_not_promoted",
       "current_real_rows": 1360382,
       "target_real_rows": 1000000,
-      "evidence": "The current durable cohort reconciles 1360382 official rows, 1419 page captures, 1360382 checksum-linked version sightings, 14 v6 Parquet files, exact public identity retention, 89 of 89 complete selected daily windows, and one unchanged 14-file hardlinked replay. It crosses the million-row capacity gate but is not promoted because historical representativeness, a second snapshot, and public-origin restore are unproven.",
-      "next_action": "Capture a second snapshot, extend bounded historical cohorts, reconcile published source totals, publish immutable artifacts, and prove clean-room restore."
+      "evidence": "The current durable cohort reconciles 1360382 official rows, 1419 page captures, 1360382 checksum-linked version sightings, 14 v7 Parquet files with the correct s2_1m capacity class, exact public identity retention, 89 of 89 complete selected daily windows, and one unchanged 14-file hardlinked replay. A checksum-verified content-addressed HF release carries the stable artifact contract and provides durable public origin, and a disposable isolated restore of all 20 selected files passed full validation of all 1360382 rows with bounded memory. The lane is not promoted because historical representativeness and a second snapshot remain unproven.",
+      "next_action": "Restore sufficient acquisition storage headroom, capture a second snapshot, extend bounded historical cohorts, and reconcile published source totals."
     },
     {
       "id": "document_corpus",
       "status": "below_scale_and_ocr_quality_gate",
       "current_real_rows": 21398,
       "target_real_rows": 1000000,
-      "evidence": "The current real inventory reconciles 21398 files and 19538 distinct content hashes, but it is far below the target and lacks artifact-wide source provenance and reviewed OCR quality.",
-      "next_action": "Reconcile the live manifest, fetch and extract a stratified 100000-document cohort, add page-level OCR lineage and quality review, then scale by official-host cohorts."
+      "evidence": "The current real inventory reconciles 21398 files and 19538 distinct content hashes. A disk-backed file-level audit verifies checksum lineage for 10219 files, public URL lineage for 10195, and all 6792 referenced compressed text artifacts with zero checksum conflicts; 11179 files remain explicitly unlinked. The lane is far below target and lacks artifact-wide provenance and reviewed OCR quality.",
+      "next_action": "Recover official URL, retrieval, and checksum metadata for the 11179 unlinked files; then fetch and extract a stratified 100000-document cohort, add page-level OCR lineage and quality review, and scale by official-host cohorts."
     },
     {
       "id": "representative_integrity_analysis",

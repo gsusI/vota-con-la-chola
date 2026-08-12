@@ -1,0 +1,24 @@
+{
+  "objects_total": 6792,
+  "performance": {
+    "bytes_per_second": 98621988.252,
+    "elapsed_seconds": 1.350809,
+    "objects_per_second": 5028.098
+  },
+  "preflight": {
+    "free_bytes": 49949925376,
+    "headroom_bytes": 39079287679,
+    "minimum_free_after_restore_bytes": 10737418240,
+    "required_bytes": 10870637697,
+    "selected_bytes": 133219457,
+    "selected_objects": 6792,
+    "status": "ok"
+  },
+  "restored_bytes": 133219457,
+  "sample_total": 6792,
+  "schema_version": "object_store_restore_drill_v2",
+  "selection_mode": "full_manifest",
+  "status": "ok",
+  "verified_at": "2026-08-12T17:56:51+00:00",
+  "workers": 16
+}

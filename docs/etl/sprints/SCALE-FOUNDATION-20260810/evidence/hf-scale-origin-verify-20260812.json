@@ -1,0 +1,117 @@
+{
+  "checks": {
+    "artifact_contract": {
+      "declared_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+      "latest_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+      "local_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+      "recomputed_remote_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+      "schema_version": "real-scale-artifact-contract-v1"
+    },
+    "corpus_contracts_match": true,
+    "declared_bundle_files": 8619,
+    "declared_data_files": 8595,
+    "declared_snapshot_path": "scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "downloaded_manifest_sha256": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "expected_data_files": 8595,
+    "expected_immutable_snapshot_path": "scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "immutable_snapshot_path": true,
+    "latest_manifest_sha256": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "latest_schema_version": "real-scale-origin-bundle-v2",
+    "local_corpora": [
+      {
+        "bytes": 1271649,
+        "files": 13,
+        "id": "accountability_ledger",
+        "rows": 126760
+      },
+      {
+        "bytes": 9236064,
+        "files": 108,
+        "id": "actor_mandates",
+        "rows": 88031
+      },
+      {
+        "bytes": 42955289,
+        "files": 14,
+        "id": "bdns_public_money",
+        "rows": 1360382
+      },
+      {
+        "bytes": 253373860,
+        "files": 37,
+        "id": "eurostat_indicators",
+        "rows": 1755809
+      },
+      {
+        "bytes": 170990631,
+        "files": 8373,
+        "id": "member_votes",
+        "rows": 1809222
+      },
+      {
+        "bytes": 20803781,
+        "files": 50,
+        "id": "placsp_public_money",
+        "rows": 263302
+      }
+    ],
+    "local_readiness_sha256": "0cf8fba9f8b4c168f41bb8410c854b6df8c5c6e49d0ce7db50e29b363d7fbd50",
+    "local_registry_sha256": "5500f73d8068d9c9fb9b41916f1a16b91d1a30293c79e8c6d6fe5a4116ac4b64",
+    "manifest_schema_version": "real-scale-origin-bundle-v2",
+    "metadata_freshness": true,
+    "metadata_warnings": [],
+    "promotion_states_match": true,
+    "remote_corpora": [
+      {
+        "bytes": 1271649,
+        "files": 13,
+        "id": "accountability_ledger",
+        "rows": 126760
+      },
+      {
+        "bytes": 9236064,
+        "files": 108,
+        "id": "actor_mandates",
+        "rows": 88031
+      },
+      {
+        "bytes": 42955289,
+        "files": 14,
+        "id": "bdns_public_money",
+        "rows": 1360382
+      },
+      {
+        "bytes": 253373860,
+        "files": 37,
+        "id": "eurostat_indicators",
+        "rows": 1755809
+      },
+      {
+        "bytes": 170990631,
+        "files": 8373,
+        "id": "member_votes",
+        "rows": 1809222
+      },
+      {
+        "bytes": 20803781,
+        "files": 50,
+        "id": "placsp_public_money",
+        "rows": 263302
+      }
+    ],
+    "remote_readiness_sha256": "0cf8fba9f8b4c168f41bb8410c854b6df8c5c6e49d0ce7db50e29b363d7fbd50",
+    "remote_registry_sha256": "5500f73d8068d9c9fb9b41916f1a16b91d1a30293c79e8c6d6fe5a4116ac4b64",
+    "required_policy_passed": true,
+    "snapshot_date": "2026-08-12"
+  },
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "errors": [],
+  "passed": true,
+  "snapshot_date": "2026-08-12",
+  "status": "verified_current_scale_origin",
+  "urls": {
+    "latest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/latest.json",
+    "manifest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139/manifest.json"
+  },
+  "warnings": []
+}

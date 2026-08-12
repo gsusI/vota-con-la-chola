@@ -58,6 +58,8 @@ STATIC_PUBLISHED_FILES = (
     "accountability-dossiers-latest.json",
     "accountability-evidence-api-latest.json",
     "andalucia-2026-accountability.json",
+    "data-integrity-latest.json",
+    "scale-readiness-latest.json",
 )
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 PLACEHOLDER_VALUES = {"", "your_hf_token_here", "your_hf_username_here"}

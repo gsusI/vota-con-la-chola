@@ -1,0 +1,33 @@
+{
+  "schema_version": "docker_context_storage_blocker_v1",
+  "observed_on": "2026-08-12",
+  "status": "blocked_docker_desktop_storage_io",
+  "trigger": {
+    "context_bytes_before_fix": 514200000,
+    "cause": "A repository-local analytical scale-bundle temporary directory was not excluded from the Docker build context.",
+    "build_failure": "failed to extract project image layer: input/output error"
+  },
+  "remediation": {
+    "temporary_directory_removed": true,
+    "temporary_directory_bytes": 514000000,
+    "temporary_packaging_moved_outside_repository": true,
+    "dockerignore_scale_temporary_pattern_added": true,
+    "dockerignore_restore_cache_added": true,
+    "project_image_removal_attempted": true
+  },
+  "current_checks": {
+    "host_tracker_sources": 38,
+    "host_database_sources": 48,
+    "host_tracker_mismatches": 0,
+    "host_waived_mismatches": 0,
+    "host_expired_waivers": 0,
+    "host_done_zero_real": 0,
+    "docker_image_removal_succeeded": false,
+    "docker_rerun_succeeded": false,
+    "filesystem_free_bytes_after_temp_cleanup": 5697978368,
+    "orphaned_project_container_id": "bd6a156e2859",
+    "orphaned_project_container_removal_succeeded": false
+  },
+  "blocker": "Docker Desktop containerd metadata and blob writes still return input/output error for the disposable project image and its orphaned project container, even after filesystem headroom recovered. Docker Desktop storage repair or restart is required before the containerized tracker gate can be rerun; a restart was not attempted because unrelated project containers are running.",
+  "data_safety": "No source corpus, database, official identity, or user-owned unrelated Docker artifact was deleted."
+}

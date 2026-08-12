@@ -1,0 +1,189 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "all_files_present": true,
+    "amount_states_explicit": true,
+    "amounts_nonnegative": true,
+    "bounded_peak_rss": true,
+    "checksums_and_bytes": true,
+    "counterparty_identifiers_retained_exactly": true,
+    "counterparty_names_retained_exactly": true,
+    "counterparty_publication_assurance": true,
+    "currency_eur_for_amounts": true,
+    "decimal_amount_types": true,
+    "file_minmax": true,
+    "file_rows": true,
+    "lane": true,
+    "manifest_coverage": true,
+    "manifest_metric_totals": true,
+    "manifest_schema": true,
+    "manifest_schema_definition": true,
+    "minimum_rows": true,
+    "money_fact_ids_sorted_within_partitions": true,
+    "money_fact_ids_unique": true,
+    "no_duplicate_manifest_paths": true,
+    "no_extra_parquet_files": true,
+    "no_private_tokens": true,
+    "parquet_schemas": true,
+    "partition_hashes": true,
+    "partition_rows_and_money": true,
+    "partition_values": true,
+    "public_domain_counterparty_retention_complete": true,
+    "row_semantics_consistent": true,
+    "schema_sha256": true,
+    "source_records_complete": true,
+    "source_urls_complete_and_public": true,
+    "transformer_version": true
+  },
+  "counterparty_publication_assurance": "all_official_public_domain_names_and_identifiers_retained;entity_type_is_classification_not_suppression",
+  "coverage": {
+    "amount": 1.0,
+    "counterparty_identifier": 0.12001776,
+    "counterparty_name": 1.0,
+    "counterparty_publication_state": 1.0,
+    "source_record": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-12T16:02:21+00:00",
+  "manifest_file": "manifest.json",
+  "money_assurance": "published_amounts_not_execution_or_disbursement",
+  "partitions": [
+    {
+      "amount_eur_total": "10121196195.270000",
+      "files": [
+        {
+          "bytes": 3436732,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "2febba0ce8da8c92640414b5360563204064dd62a24b4db38c8d94cdc80b19c0"
+        },
+        {
+          "bytes": 3026239,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00001.parquet",
+          "rows": 100000,
+          "sha256": "3e0cf84c75b0c903d9350c69646e6c448e0d33f043c4ad07a7ec6f1a5e8038a4"
+        },
+        {
+          "bytes": 3298306,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00002.parquet",
+          "rows": 100000,
+          "sha256": "b5585827431e19bab522448bb3da34de9124fbce19fdb97ffac4434d092702bc"
+        },
+        {
+          "bytes": 3198121,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00003.parquet",
+          "rows": 100000,
+          "sha256": "533dd6a02fe48c28d3293f84402d39ba8ab1c8b15c61bdf7148d95b976dcce13"
+        },
+        {
+          "bytes": 3140783,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00004.parquet",
+          "rows": 100000,
+          "sha256": "302681d568e78be92c1039c511b8425e3bc93366e61b8af8d372797363cd0114"
+        },
+        {
+          "bytes": 3191460,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00005.parquet",
+          "rows": 100000,
+          "sha256": "be5b1250f750c4dc3987e2dea8a0f4811d4020776be3afa1db938c9ef22882ec"
+        },
+        {
+          "bytes": 3361942,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00006.parquet",
+          "rows": 100000,
+          "sha256": "046abbf063a5d65424a2b907edc5907ff117aa13d1fd4b921638176d20853353"
+        },
+        {
+          "bytes": 2924393,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00007.parquet",
+          "rows": 100000,
+          "sha256": "8bf358ead19e01c186f60f0376f51f4fdbe5447d6e9e541355dc3026ca7c72a7"
+        },
+        {
+          "bytes": 3178796,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00008.parquet",
+          "rows": 100000,
+          "sha256": "35bbe93073f121fe53177545e6bdb9a30dfaa58253e5b50ff87c64408638a289"
+        },
+        {
+          "bytes": 3068265,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00009.parquet",
+          "rows": 100000,
+          "sha256": "d1c1bb25bd23b2c6e367c9f0145cab9c05755ba4c99ffe40b6fa32a5d08f5cc2"
+        },
+        {
+          "bytes": 2903320,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00010.parquet",
+          "rows": 100000,
+          "sha256": "3746d585ba0fef908a7c05644970438f1ea0fb92bf7f0f734ad14fdeb0641b97"
+        },
+        {
+          "bytes": 2986852,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00011.parquet",
+          "rows": 100000,
+          "sha256": "57ae353911697ea079497f6ed14dd91a326feefcec5e16ea074f5b30fa756b37"
+        },
+        {
+          "bytes": 3132971,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00012.parquet",
+          "rows": 100000,
+          "sha256": "5670699320bed52ec0deb896f474a2694ad790c9b7a9fe41d620d545efce1324"
+        },
+        {
+          "bytes": 2107109,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00013.parquet",
+          "rows": 60382,
+          "sha256": "e5c0d1af4a8a4418d3f4ea785d8d23e0339e2089fdb67abe57bb7d92f1a38f90"
+        }
+      ],
+      "input_sha256": "514e3d734f796b8af9c706330e5709b8170703b4af464734b3ceb04e64665462",
+      "partition_id": "subsidy_record|bdns_api_subvenciones|es-territorial|2026",
+      "rows": 1360382
+    }
+  ],
+  "performance": {
+    "batch_rows": 10000,
+    "distinct_index_bytes": 74412032,
+    "distinct_index_storage": "temporary_sqlite_disk",
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 350.344
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "root_name": "data",
+  "schema_version": "public_money_partition_validation_v1",
+  "status": "ok",
+  "totals": {
+    "amount_eur_by_fact_kind": {
+      "subsidy_record": "10121196195.270000"
+    },
+    "amount_eur_total": "10121196195.270000",
+    "amount_rows": 1360382,
+    "contract_award_rows": 0,
+    "contract_award_table_rows": 0,
+    "contract_notice_rows": 0,
+    "contract_table_rows": 0,
+    "counterparty_identifier_rows": 163270,
+    "counterparty_name_rows": 1360382,
+    "counterparty_not_available_rows": 0,
+    "counterparty_published_legal_entity_rows": 163270,
+    "counterparty_published_natural_person_rows": 0,
+    "counterparty_published_rows": 1360382,
+    "counterparty_published_unclassified_rows": 1197112,
+    "distinct_source_records": 1360382,
+    "eur_rows": 1360382,
+    "files": 14,
+    "joined_rows": 1360382,
+    "money_table_rows": 1360382,
+    "nonnegative_amount_rows": 1360382,
+    "parquet_bytes": 42955289,
+    "partitions": 1,
+    "private_token_findings": 0,
+    "rows": 1360382,
+    "source_record_rows": 1360382,
+    "source_url_rows": 1360382,
+    "subsidy_record_rows": 1360382,
+    "subsidy_table_rows": 1360382,
+    "unknown_year_rows": 0
+  }
+}

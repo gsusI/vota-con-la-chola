@@ -1,0 +1,67 @@
+{
+  "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+  "checks": {
+    "corpora_valid": true,
+    "data_bytes_match_release": true,
+    "data_files_match_release": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "rows_match_release": true,
+    "selected_restored_bytes_valid": true,
+    "selected_restored_files_valid": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "corpora": [
+    {
+      "actual": {
+        "bytes": 9236064,
+        "files": 108,
+        "rows": 88031
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 9236064,
+        "files": 108,
+        "rows": 88031
+      },
+      "id": "actor_mandates",
+      "kind": "parquet_manifest",
+      "lane": "actor_mandates",
+      "performance": {
+        "batch_rows": 10000,
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 224.938
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-08-12T17:46:13.664396Z",
+  "reference_file": "restore-reference.json",
+  "release_id": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+  "root_name": "hf-scale-explicit-release-actor-20260812",
+  "schema_version": "restored_scale_origin_validation_v1",
+  "selected_corpus_ids": [
+    "actor_mandates"
+  ],
+  "selection_mode": "explicit_immutable_snapshot",
+  "snapshot_date": "2026-08-12",
+  "status": "ok",
+  "totals": {
+    "corpora": 1,
+    "data_bytes": 9236064,
+    "data_files": 108,
+    "restored_bytes": 9688787,
+    "restored_bytes_checksum_valid": 9688787,
+    "restored_files": 114,
+    "restored_files_checksum_valid": 114,
+    "rows": 88031
+  }
+}
