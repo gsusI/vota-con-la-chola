@@ -43,7 +43,7 @@ just etl-scale-readiness
 | votos nominales | `1,809,222` | `8,373` shards gzip, `170,990,067` bytes | validado; no promocionado |
 | indicadores Eurostat | `1,755,809` | `37` Parquet, `253,373,860` bytes | validado; replay `26/26`; no representativo |
 | PLACSP | `263,302` | `50` Parquet, `20,803,781` bytes | v5 validado; identidad source `128,849/128,849`; replay `50/50`; historia incompleta |
-| BDNS | `100,000` | `1` Parquet, `3,464,007` bytes | v5 validado; nombres `100,000/100,000`, identificadores `39,539/39,539`; replay `1/1`; solo 100 páginas |
+| BDNS | `1,360,382` | `14` Parquet, `42,955,289` bytes | v6 validado; nombres `1,360,382/1,360,382`, identificadores `163,270/163,270`; replay `1/1` por `14/14` hardlinks; 1,419 páginas y `89/89` fechas completas |
 | accountability ledger | `126,760` | `13` Parquet, `1,271,649` bytes | real-only validado; replay `13/13`; mix parlamentario |
 | actores/mandatos | `88,031` | `108` Parquet, `9,236,064` bytes | validado; replay `108/108`; bajo `100k` |
 
@@ -51,7 +51,7 @@ Defectos visibles:
 
 - votos: URL pública/source record `100%`; `102,172` filas con URL oficial HTTP;
 - candidatos: `8,926` resultados históricos electos, pero `0` filas nominales aceptadas del archivo de candidaturas por bloqueo de origen;
-- BDNS: el root actual valida `100,000` filas oficiales; el checkpoint anterior de `146,000` carece de root v5 vigente y no sustituye esta evidencia;
+- BDNS: el root actual valida `1,360,382` filas oficiales y cruza el gate de capacidad `R2`; las `89/89` ventanas seleccionadas están completas, pero faltan historia completa, segundo snapshot, origin público y clean restore para promoción;
 - ledger: `126,760` facts reales recuperados; `10` facts derivados de fixtures fueron purgados; `26` source IDs legacy se infieren explícitamente desde URL BOE oficial; faltan mix representativo, `1M`, origin y restore;
 - documentos: `21,398` instancias / `19,538` hashes reconciliados; faltan provenance de origen por fichero, muestra de calidad suficiente y escala;
 - lanes promocionadas: `0`.
@@ -81,24 +81,24 @@ DoD:
 - ningún endpoint no oficial cuenta;
 - cualquier fila sin URL/lineage aparece como gap.
 
-### RT-002 — BDNS semántico v5 (`S1` cerrado; `R2` abierto)
+### RT-002 — BDNS semántico v5 (`R2` de capacidad cerrado; promoción abierta)
 
 Entrada ejecutada:
 
-- DB `etl/data/staging/bdns-concessions-real-s1-20260812.db`;
-- CAS `etl/data/object-origin/bdns-concessions-real-s1-20260812`;
-- `100` páginas oficiales nuevas de `1,000` filas.
+- DB `etl/data/staging/bdns-concessions-partitioned-real-s3-20260812.db`;
+- CAS `etl/data/object-origin/bdns-concessions-partitioned-real-s3-20260812`;
+- `1,419` páginas oficiales de hasta `1,000` filas, distribuidas en `89` ventanas diarias completas.
 
 Resultado:
 
-1. queue `100 succeeded / 0 unfinished / 0 dead / 0 retries`;
-2. `100,000` records, source IDs, record URLs y version sightings distintos;
-3. `80,509,937` raw bytes en `100` objetos checksum-linked;
+1. queue `1,419 succeeded / 0 unfinished / 0 dead / 0 retries`;
+2. `1,360,382` records, source IDs, record URLs y version sightings distintos;
+3. `1,080,788,680` raw bytes en `1,419` objetos checksum-linked;
 4. SQLite `quick_check=ok`, FK `0`;
-5. `public_money_facts_v5`: `100,000` rows, `1` Parquet, `3,464,007` bytes;
-6. nombres oficiales `100,000/100,000` e identificadores source `39,539/39,539` retenidos exactamente;
-7. validator full-row verde, `0` private tokens, replay `1/1` por hardlink;
-8. corpus registrado, pero `promotion_gate_passed=false`.
+5. `public_money_facts_v5` contract, artifact v6: `1,360,382` rows, `14` Parquet, `42,955,289` bytes;
+6. nombres oficiales `1,360,382/1,360,382` e identificadores source `163,270/163,270` retenidos exactamente;
+7. validator full-row verde, `0` private tokens, replay `1/1` partición por `14/14` hardlinks;
+8. `89/89` ventanas completas tras expansión append-only; corpus registrado con row-scale gate verde, pero `promotion_gate_passed=false` por historia incompleta, segundo snapshot, origin y restore.
 
 Comandos base:
 
@@ -407,6 +407,8 @@ just etl-scale-placsp-replay
 just etl-scale-placsp-replay-validate
 
 # BDNS real
+just etl-scale-bdns-bulk-enqueue-daily
+just etl-scale-bdns-bulk-work
 just etl-scale-bdns-bulk-report
 just etl-scale-bdns-bulk-version-lineage
 

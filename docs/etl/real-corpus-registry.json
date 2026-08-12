@@ -100,13 +100,13 @@
       "id": "bdns_public_money",
       "label": "BDNS subsidy concessions",
       "kind": "parquet_manifest",
-      "root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812",
-      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-manifest-20260812.json",
-      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-validation-20260812.json",
-      "replay_root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812-replay",
-      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-manifest-20260812.json",
-      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-validation-20260812.json",
-      "minimum_real_rows": 100000,
+      "root": "etl/data/derived/bdns-public-money-real-s3-v6-20260812",
+      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-manifest-20260812.json",
+      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-validation-20260812.json",
+      "replay_root": "etl/data/derived/bdns-public-money-real-s3-v6-20260812-replay",
+      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-manifest-20260812.json",
+      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-validation-20260812.json",
+      "minimum_real_rows": 1000000,
       "official_source_ids": [
         "bdns_api_subvenciones"
       ],
@@ -118,12 +118,12 @@
       "clean_room_restore": false,
       "corrections_workflow": true,
       "limitations": [
-        "This is a bounded 100-page cohort containing 100000 of 28676987 official concessions observed on 2026-08-12; it is not a representative historical sample or the complete registry.",
-        "All 100000 official beneficiary names and all 39539 source-published identifiers are retained exactly; the remaining 60461 counterparties are explicitly unclassified and no identity field is suppressed.",
+        "This is a bounded 1419-page cohort containing 1360382 of 28676987 official concessions observed on 2026-08-12 across 89 complete date windows; it is not the complete historical registry.",
+        "All 1360382 official beneficiary names and all 163270 source-published identifiers are retained exactly; the remaining 1197112 counterparties are explicitly unclassified and no identity field is suppressed.",
         "Published subsidy amounts are award values, not independently verified disbursements or outcomes.",
         "The artifact is local and has not passed a clean-room restore from a durable public origin."
       ],
-      "next_gate": "Continue official pagination to a reconciled one-million-row cohort, capture a second snapshot for real revision deltas, publish immutable artifacts, and prove clean-room restore."
+      "next_gate": "Capture a second snapshot for real revision deltas, extend through bounded historical cohorts, publish immutable artifacts, reconcile published source totals, and prove clean-room restore."
     },
     {
       "id": "accountability_ledger",
@@ -242,11 +242,11 @@
     },
     {
       "id": "bdns_subsidies",
-      "status": "validated_real_s1_below_million",
-      "current_real_rows": 100000,
+      "status": "validated_real_million_cohort_not_promoted",
+      "current_real_rows": 1360382,
       "target_real_rows": 1000000,
-      "evidence": "The current durable cohort reconciles 100000 official rows, 100 page captures, 100000 checksum-linked version sightings, one v5 Parquet file, exact identity retention, and one unchanged hardlinked replay. The older 146000-row checkpoint lacks a current compliant root and does not count instead.",
-      "next_action": "Continue bounded official pagination from a durable queue to one million rows, then reconcile a second snapshot, public origin, and clean-room restore."
+      "evidence": "The current durable cohort reconciles 1360382 official rows, 1419 page captures, 1360382 checksum-linked version sightings, 14 v6 Parquet files, exact public identity retention, 89 of 89 complete selected daily windows, and one unchanged 14-file hardlinked replay. It crosses the million-row capacity gate but is not promoted because historical representativeness, a second snapshot, and public-origin restore are unproven.",
+      "next_action": "Capture a second snapshot, extend bounded historical cohorts, reconcile published source totals, publish immutable artifacts, and prove clean-room restore."
     },
     {
       "id": "document_corpus",

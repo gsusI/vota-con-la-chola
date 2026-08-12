@@ -1,0 +1,47 @@
+{
+  "expansion": {
+    "max_pages_per_partition": 0,
+    "official_partition_contracts_stable": true,
+    "pages_added": 361,
+    "pages_after": 1419,
+    "pages_before": 1058,
+    "partitions_revalidated": 3,
+    "selected_records_after": 1360382,
+    "strategy": "append_only_daily_partition_pages",
+    "total_pages_discovered": 1419,
+    "truncated_partitions_after": 0
+  },
+  "money_bulk_run_id": 1,
+  "partitions_expanded": [
+    {
+      "pages_added": 58,
+      "pages_after": 158,
+      "pages_before": 100,
+      "partition_key": "date:2026-06-05"
+    },
+    {
+      "pages_added": 300,
+      "pages_after": 400,
+      "pages_before": 100,
+      "partition_key": "date:2026-05-20"
+    },
+    {
+      "pages_added": 3,
+      "pages_after": 7,
+      "pages_before": 4,
+      "partition_key": "date:2026-05-15"
+    }
+  ],
+  "peak_rss_mb": 47.578,
+  "pipeline_id": "bdns-concessions-partitioned-real-s3-20260812",
+  "queue": {
+    "existing_total": 0,
+    "input_total": 361,
+    "inserted_total": 361,
+    "pipeline_total": 1419
+  },
+  "schema_version": "bdns_bulk_partitioned_expand_v1",
+  "snapshot_date": "2026-08-12",
+  "source_id": "bdns_api_subvenciones",
+  "status": "ok"
+}

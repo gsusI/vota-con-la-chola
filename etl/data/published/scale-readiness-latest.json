@@ -178,24 +178,24 @@
       }
     },
     {
-      "bytes": 3464007,
-      "files": 1,
+      "bytes": 42955289,
+      "files": 14,
       "id": "bdns_public_money",
       "kind": "parquet_manifest",
       "label": "BDNS subsidy concessions",
       "limitations": [
-        "This is a bounded 100-page cohort containing 100000 of 28676987 official concessions observed on 2026-08-12; it is not a representative historical sample or the complete registry.",
-        "All 100000 official beneficiary names and all 39539 source-published identifiers are retained exactly; the remaining 60461 counterparties are explicitly unclassified and no identity field is suppressed.",
+        "This is a bounded 1419-page cohort containing 1360382 of 28676987 official concessions observed on 2026-08-12 across 89 complete date windows; it is not the complete historical registry.",
+        "All 1360382 official beneficiary names and all 163270 source-published identifiers are retained exactly; the remaining 1197112 counterparties are explicitly unclassified and no identity field is suppressed.",
         "Published subsidy amounts are award values, not independently verified disbursements or outcomes.",
         "The artifact is local and has not passed a clean-room restore from a durable public origin."
       ],
       "manifest": {
-        "bytes": 9964,
-        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-manifest-20260812.json",
-        "sha256": "9800924b1b4b711f070efb847d91bcfdf346d00bfccd5051654eafc7b56b8964"
+        "bytes": 16110,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-manifest-20260812.json",
+        "sha256": "765533d4c04a818f8aaa1adca2f0b57fa36a8f5457182aad98d4a7cd2d51e8ce"
       },
-      "minimum_real_rows": 100000,
-      "next_gate": "Continue official pagination to a reconciled one-million-row cohort, capture a second snapshot for real revision deltas, publish immutable artifacts, and prove clean-room restore.",
+      "minimum_real_rows": 1000000,
+      "next_gate": "Capture a second snapshot for real revision deltas, extend through bounded historical cohorts, publish immutable artifacts, reconcile published source totals, and prove clean-room restore.",
       "official_hosts": [
         "www.infosubvenciones.es"
       ],
@@ -210,36 +210,36 @@
       },
       "promotion_gate_passed": false,
       "real_official_data": true,
-      "root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812",
-      "rows": 100000,
+      "root": "etl/data/derived/bdns-public-money-real-s3-v6-20260812",
+      "rows": 1360382,
       "scale_gate_passed": true,
       "source_ids": [
         "bdns_api_subvenciones"
       ],
       "source_url_coverage": 1.0,
-      "source_url_https_rows": 100000,
-      "source_url_rows": 100000,
+      "source_url_https_rows": 1360382,
+      "source_url_rows": 1360382,
       "status": "validated_real_artifact",
       "unchanged_replay": {
-        "files_hardlinked": 1,
+        "files_hardlinked": 14,
         "manifest": {
-          "bytes": 10022,
-          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-manifest-20260812.json",
-          "sha256": "0c05b4b3e7d45e8cb28d7da7b1682de1a7aea7a2da72d2a23393e6d8e26bf8c3"
+          "bytes": 16110,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-manifest-20260812.json",
+          "sha256": "4e9984f74f3fed76022c604711802f98328c0873177edaea81add22935fcc613"
         },
         "partitions_reused": 1,
         "passed": true,
-        "root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812-replay",
+        "root": "etl/data/derived/bdns-public-money-real-s3-v6-20260812-replay",
         "validation": {
-          "bytes": 3853,
-          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-validation-20260812.json",
-          "sha256": "7c7ab34f16dac98b0f9ecef1709d7dfdfeb169a8361989ef94bee6fe08b9d2f3"
+          "bytes": 8469,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-validation-20260812.json",
+          "sha256": "12e15d094d55ccd49c789fe9f4dfefb0b87c47655bd8d32a5ad03c520b07c4a3"
         }
       },
       "validation": {
-        "bytes": 3834,
-        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-validation-20260812.json",
-        "sha256": "511fa66e0cf69a9d2c62d83dad9f0356a7edfda8ecca380d6021799c6cc4b4e1"
+        "bytes": 8450,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-validation-20260812.json",
+        "sha256": "548ec26be579484c1a5d5f1d00027db694e53a30d79f9bfe1ef822724b8126b0"
       }
     },
     {
@@ -434,11 +434,11 @@
       "target_real_rows": 1000000
     },
     {
-      "current_real_rows": 100000,
-      "evidence": "The current durable cohort reconciles 100000 official rows, 100 page captures, 100000 checksum-linked version sightings, one v5 Parquet file, exact identity retention, and one unchanged hardlinked replay. The older 146000-row checkpoint lacks a current compliant root and does not count instead.",
+      "current_real_rows": 1360382,
+      "evidence": "The current durable cohort reconciles 1360382 official rows, 1419 page captures, 1360382 checksum-linked version sightings, 14 v6 Parquet files, exact public identity retention, 89 of 89 complete selected daily windows, and one unchanged 14-file hardlinked replay. It crosses the million-row capacity gate but is not promoted because historical representativeness, a second snapshot, and public-origin restore are unproven.",
       "id": "bdns_subsidies",
-      "next_action": "Continue bounded official pagination from a durable queue to one million rows, then reconcile a second snapshot, public origin, and clean-room restore.",
-      "status": "validated_real_s1_below_million",
+      "next_action": "Capture a second snapshot, extend bounded historical cohorts, reconcile published source totals, publish immutable artifacts, and prove clean-room restore.",
+      "status": "validated_real_million_cohort_not_promoted",
       "target_real_rows": 1000000
     },
     {
@@ -458,7 +458,7 @@
       "target_real_rows": 1000000
     }
   ],
-  "generated_at": "2026-08-12T13:17:23.562047Z",
+  "generated_at": "2026-08-12T14:22:49.717894Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -470,16 +470,16 @@
     "synthetic_or_mock_records_forbidden": true
   },
   "registry": {
-    "bytes": 14498,
+    "bytes": 14663,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "a18061811708866530f61eada897c424a68f94b7050ddb1719ab700d8be424b5"
+    "sha256": "cbd1601f9e3d52e98fa52303785838d93bca9542a608943c66df16bf42e01b2e"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "real_foundation_ready_scale_incomplete",
   "summary": {
     "open_gaps": 4,
     "promoted_lanes": 0,
-    "real_million_scale_lanes": 2,
+    "real_million_scale_lanes": 3,
     "registered_real_corpora": 6,
     "validated_real_corpora": 6
   }

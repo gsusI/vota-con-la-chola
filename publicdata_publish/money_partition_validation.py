@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sqlite3
+import tempfile
 from datetime import UTC, datetime
 from decimal import Decimal
 from pathlib import Path
@@ -25,6 +27,60 @@ from .semantic_contracts import (
 )
 
 VALIDATION_SCHEMA_VERSION = "public_money_partition_validation_v1"
+
+
+class _DiskDistinctIndex:
+    """Exact corpus-wide uniqueness with bounded process memory."""
+
+    def __init__(self) -> None:
+        self._temp_dir = tempfile.TemporaryDirectory(
+            prefix="vota-money-validation-distinct-"
+        )
+        self._path = Path(self._temp_dir.name) / "distinct.sqlite"
+        self._conn = sqlite3.connect(self._path)
+        self._conn.execute("PRAGMA journal_mode=OFF")
+        self._conn.execute("PRAGMA synchronous=OFF")
+        self._conn.execute("PRAGMA temp_store=FILE")
+        self._conn.execute("PRAGMA cache_size=-8192")
+        self._conn.executescript(
+            """
+            CREATE TABLE fact_ids (
+              value TEXT PRIMARY KEY
+            ) WITHOUT ROWID;
+            CREATE TABLE source_record_pks (
+              value INTEGER PRIMARY KEY
+            ) WITHOUT ROWID;
+            """
+        )
+
+    def add_batch(self, fact_ids: list[str], source_record_pks: list[int]) -> int:
+        before = self._conn.total_changes
+        self._conn.executemany(
+            "INSERT OR IGNORE INTO fact_ids (value) VALUES (?)",
+            ((value,) for value in fact_ids),
+        )
+        inserted_ids = self._conn.total_changes - before
+        self._conn.executemany(
+            "INSERT OR IGNORE INTO source_record_pks (value) VALUES (?)",
+            ((value,) for value in source_record_pks),
+        )
+        self._conn.commit()
+        return len(fact_ids) - inserted_ids
+
+    def counts(self) -> tuple[int, int]:
+        fact_ids = int(self._conn.execute("SELECT COUNT(*) FROM fact_ids").fetchone()[0])
+        source_records = int(
+            self._conn.execute("SELECT COUNT(*) FROM source_record_pks").fetchone()[0]
+        )
+        return fact_ids, source_records
+
+    def bytes(self) -> int:
+        self._conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+        return int(self._path.stat().st_size)
+
+    def close(self) -> None:
+        self._conn.close()
+        self._temp_dir.cleanup()
 
 
 def _now_iso() -> str:
@@ -168,8 +224,7 @@ def validate_money_partitions(
     expected_schema = MONEY_FACT_CONTRACT.arrow_schema()
 
     expected_paths: set[str] = set()
-    seen_ids: set[str] = set()
-    seen_source_records: set[int] = set()
+    distinct_index = _DiskDistinctIndex()
     duplicate_paths = 0
     duplicate_ids = 0
     files_present = True
@@ -276,6 +331,8 @@ def validate_money_partitions(
             file_min_id: str | None = None
             file_max_id: str | None = None
             for batch in parquet_file.iter_batches(batch_size=batch_rows):
+                batch_fact_ids: list[str] = []
+                batch_source_record_pks: list[int] = []
                 columns = {
                     name: batch.column(index).to_pylist()
                     for index, name in enumerate(MONEY_FACT_CONTRACT.columns)
@@ -286,10 +343,8 @@ def validate_money_partitions(
                         for name in MONEY_FACT_CONTRACT.columns
                     }
                     money_fact_id = str(row["money_fact_id"])
-                    if money_fact_id in seen_ids:
-                        duplicate_ids += 1
-                    seen_ids.add(money_fact_id)
-                    seen_source_records.add(int(row["source_record_pk"]))
+                    batch_fact_ids.append(money_fact_id)
+                    batch_source_record_pks.append(int(row["source_record_pk"]))
                     if (
                         partition_previous_id is not None
                         and money_fact_id <= partition_previous_id
@@ -430,6 +485,10 @@ def validate_money_partitions(
                     file_rows += 1
                     partition_rows += 1
                     rows_total += 1
+                duplicate_ids += distinct_index.add_batch(
+                    batch_fact_ids,
+                    batch_source_record_pks,
+                )
             if file_rows != expected_file_rows:
                 file_rows_valid = False
             if file_min_id != file_meta.get("min_id"):
@@ -478,13 +537,15 @@ def validate_money_partitions(
     amount_by_kind_text = {
         key: format(value, "f") for key, value in sorted(amount_by_kind.items())
     }
+    distinct_fact_ids, distinct_source_records = distinct_index.counts()
+    distinct_index_bytes = distinct_index.bytes()
     calculated_totals: dict[str, Any] = {
         "contract_table_rows": contract_notice_rows,
         "contract_award_table_rows": contract_award_rows,
         "subsidy_table_rows": subsidy_record_rows,
         "money_table_rows": rows_total,
         "joined_rows": rows_total,
-        "distinct_source_records": len(seen_source_records),
+        "distinct_source_records": distinct_source_records,
         "rows": rows_total,
         "contract_notice_rows": contract_notice_rows,
         "contract_award_rows": contract_award_rows,
@@ -558,7 +619,8 @@ def validate_money_partitions(
         "partition_hashes": partition_hashes_valid,
         "partition_values": partition_values_valid,
         "money_fact_ids_sorted_within_partitions": ids_sorted,
-        "money_fact_ids_unique": duplicate_ids == 0 and len(seen_ids) == rows_total,
+        "money_fact_ids_unique": duplicate_ids == 0
+        and distinct_fact_ids == rows_total,
         "manifest_metric_totals": all(
             key in totals and totals[key] == value
             for key, value in calculated_totals.items()
@@ -595,7 +657,7 @@ def validate_money_partitions(
         "bounded_peak_rss": peak_rss <= float(max_peak_rss_mb),
     }
     status = "ok" if all(checks.values()) else "failed"
-    return {
+    report = {
         "schema_version": VALIDATION_SCHEMA_VERSION,
         "generated_at": _now_iso(),
         "status": status,
@@ -608,6 +670,8 @@ def validate_money_partitions(
             "peak_rss_mb": peak_rss,
             "max_peak_rss_mb": float(max_peak_rss_mb),
             "batch_rows": int(batch_rows),
+            "distinct_index_bytes": distinct_index_bytes,
+            "distinct_index_storage": "temporary_sqlite_disk",
         },
         "money_assurance": manifest.get("money_assurance"),
         "counterparty_publication_assurance": manifest.get(
@@ -619,6 +683,8 @@ def validate_money_partitions(
         and all(checks.values()),
         "partitions": partition_reports,
     }
+    distinct_index.close()
+    return report
 
 
 __all__ = ["VALIDATION_SCHEMA_VERSION", "validate_money_partitions"]

@@ -260,20 +260,26 @@ PROJECT_FACTS = [
             "The amounts are published notice or award values, not verified payments "
             "or disbursements. Representative live PLACSP, supplier resolution, "
             "S1/S2, and public-origin proof remain open. "
-            "A fresh durable BDNS queue discovered 28,676,987 live concessions and "
-            "completed 100 paced official pages without retry or dead work. It exactly "
-            "reconciles 100,000 source records, record URLs, immutable version sightings, "
-            "and raw-page checksum links over 80,509,937 captured bytes; SQLite passes "
-            "quick_check and FK validation. The registered v5 semantic artifact contains "
-            "100,000 subsidy facts in one 3,464,007-byte Parquet file with exact total "
-            "EUR 3,259,528,635.280000, full source URL/lineage/amount coverage, and "
-            "independent full-row validation. All 100,000 official beneficiary names and "
-            "all 39,539 source-published identifiers are retained exactly; 60,461 "
-            "counterparties remain explicitly unclassified without field suppression. "
-            "Unchanged replay reuses the partition by hardlink. This passes registered "
-            "real R1, not representative R2 or promotion; subsidy awards are not verified "
-            "disbursements, and second-snapshot revision, durable origin, and clean restore "
-            "remain open. An older 146,000-row checkpoint and its v3 semantic roots lack "
+            "A fresh durable partitioned BDNS queue discovered 28,676,987 live "
+            "concessions and completed 1,419 paced official pages without retry or dead "
+            "work. It avoids unstable global deep offsets through 89 official daily "
+            "windows, all now complete after an append-only expansion of the three "
+            "previously truncated windows. It exactly reconciles 1,360,382 source "
+            "records, record URLs, immutable version sightings, and raw-page checksum "
+            "links over 1,080,788,680 captured bytes; SQLite passes quick_check and FK "
+            "validation. The registered v5 semantic contract, exported as the v6 "
+            "artifact revision, contains 1,360,382 subsidy facts in 14 Parquet files "
+            "with exact total EUR 10,121,196,195.270000, full source URL/lineage/amount "
+            "coverage, and independent full-row validation. All 1,360,382 official "
+            "beneficiary names and all 163,270 source-published identifiers are retained "
+            "exactly; 1,197,112 counterparties remain explicitly unclassified without "
+            "field suppression. Unchanged replay reuses one partition through 14 "
+            "hardlinks. Exact validation now uses a temporary disk-backed SQLite "
+            "distinct index and stays below 293 MB peak RSS. This passes registered real "
+            "million-row capacity, not promotion; subsidy awards are not verified "
+            "disbursements, and full-history coverage, second-snapshot revision, durable "
+            "origin, and clean restore remain "
+            "open. An older 146,000-row checkpoint and its v3 semantic roots lack "
             "a current compliant artifact and do not count toward readiness. "
             "Indicator observations now have an additive normalized-series link and "
             "a revision-preserving typed public contract for source lineage, domain, "
@@ -386,20 +392,24 @@ PROJECT_FACTS = [
                 detail="Unchanged reuse of all four canonical public-money partitions.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-real-s1-run-20260812.json",
-                detail="Fresh official BDNS discovery plus durable 100k acquisition, exact queue/page/row/version reconciliation, pacing, and public-identity retention evidence.",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-run-20260812.json",
+                detail="Fresh official BDNS million-row acquisition with bounded daily partitions, exact queue/page/row/version reconciliation, pacing, and public-identity retention evidence.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-real-s1-version-lineage-20260812.json",
-                detail="Checksum-verified 100k immutable record-version and raw-page sighting reconciliation without raw payload duplication.",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-enqueue-20260812.json",
+                detail="Official daily-window discovery and the initial complete-versus-truncated partition contract for the million-row cohort.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-validation-20260812.json",
-                detail="Independent full-row v5 validation of 100k official subsidy facts, exact identity retention, decimals, lineage, hashes, and publication hygiene.",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-expand-20260812.json",
+                detail="Append-only official expansion that completed all 89 selected daily windows while preserving existing global page identities.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-manifest-20260812.json",
-                detail="Unchanged hardlink reuse of the current v5 BDNS S1 semantic partition.",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-validation-20260812.json",
+                detail="Independent full-row validation of 1360382 official subsidy facts with exact identity retention, decimals, lineage, hashes, publication hygiene, and bounded disk-backed distinct indexing.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-manifest-20260812.json",
+                detail="Unchanged hardlink reuse of the current million-row BDNS semantic partition across all 14 files.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-s2-partial-run.json",

@@ -154,6 +154,7 @@ def enqueue_work_items(
     items: Iterable[Mapping[str, object]],
     batch_size: int = 1_000,
     now: datetime | None = None,
+    commit: bool = True,
 ) -> dict[str, int]:
     """Insert/update work references without materializing the input iterable."""
 
@@ -219,7 +220,8 @@ def enqueue_work_items(
             """,
             batch,
         )
-        conn.commit()
+        if commit:
+            conn.commit()
 
     after = int(
         conn.execute(
