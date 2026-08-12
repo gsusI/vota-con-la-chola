@@ -268,15 +268,17 @@ def publish_scale_origin_bundle(
     dataset_repo: str,
     build_root: Path,
     snapshot_date: str,
+    operation_factory: Any | None = None,
 ) -> None:
     """Upload immutable scale files first, then move the public latest pointer."""
-    from huggingface_hub import CommitOperationAdd  # type: ignore
+    if operation_factory is None:
+        from huggingface_hub import CommitOperationAdd  # type: ignore
+
+        operation_factory = CommitOperationAdd
 
     latest_path = build_root / "scale" / "latest.json"
     bundle_files = sorted(
-        path
-        for path in build_root.rglob("*")
-        if path.is_file() and path != latest_path
+        path for path in build_root.rglob("*") if path.is_file() and path != latest_path
     )
     batch_total = (len(bundle_files) + UPLOAD_BATCH_FILES - 1) // UPLOAD_BATCH_FILES
     for batch_index, offset in enumerate(
@@ -285,7 +287,7 @@ def publish_scale_origin_bundle(
     ):
         batch = bundle_files[offset : offset + UPLOAD_BATCH_FILES]
         operations = [
-            CommitOperationAdd(
+            operation_factory(
                 path_in_repo=path.relative_to(build_root).as_posix(),
                 path_or_fileobj=str(path),
             )
