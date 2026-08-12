@@ -1,0 +1,268 @@
+{
+  "schema_version": "real-corpus-registry-v1",
+  "policy": {
+    "official_real_records_only": true,
+    "synthetic_or_mock_records_forbidden": true,
+    "every_row_requires_source_lineage": true,
+    "official_public_domain_personal_information_retained": true,
+    "classification_never_suppresses_public_domain_identity": true,
+    "secrets_workstation_traces_and_non_public_data_forbidden": true,
+    "local_capacity_runs_are_not_readiness_evidence": true,
+    "promotion_requires_representative_scope": true,
+    "promotion_requires_durable_public_origin": true,
+    "promotion_requires_clean_room_restore": true
+  },
+  "corpora": [
+    {
+      "id": "member_votes",
+      "label": "Spanish parliamentary member votes",
+      "kind": "gzip_vote_shards",
+      "root": "etl/data/derived/member-vote-shards",
+      "manifest": "etl/data/published/member-vote-shard-manifest-latest.json",
+      "validation": "etl/data/published/member-vote-shard-validation-latest.json",
+      "minimum_real_rows": 1000000,
+      "official_source_ids": [
+        "congreso_iniciativas",
+        "congreso_votaciones",
+        "senado_iniciativas",
+        "senado_votaciones"
+      ],
+      "official_hosts": [
+        "www.congreso.es",
+        "www.senado.es"
+      ],
+      "representative_scope": false,
+      "durable_public_origin": false,
+      "clean_room_restore": false,
+      "corrections_workflow": true,
+      "limitations": [
+        "Current evidence covers the available Congreso and Senado vote corpus, not every legislature or public decision body.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "next_gate": "Publish immutable shards and manifests, restore them in a clean environment, then quantify legislature and chamber completeness against official source totals."
+    },
+    {
+      "id": "eurostat_indicators",
+      "label": "Eurostat Spain-relevant indicator observations",
+      "kind": "parquet_manifest",
+      "root": "etl/data/published/semantic/eurostat-indicator-real-s2-20260811",
+      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-manifest.json",
+      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-validation.json",
+      "replay_root": "etl/data/published/semantic/eurostat-indicator-real-s2-20260811-replay",
+      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-incremental-manifest.json",
+      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-incremental-validation.json",
+      "minimum_real_rows": 1000000,
+      "official_source_ids": [
+        "eurostat_sdmx"
+      ],
+      "official_hosts": [
+        "ec.europa.eu"
+      ],
+      "representative_scope": false,
+      "durable_public_origin": false,
+      "clean_room_restore": false,
+      "corrections_workflow": false,
+      "limitations": [
+        "Four selected Eurostat datasets prove real analytical scale but do not represent all policy domains.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "next_gate": "Define a public, versioned indicator codebook across spending, services, inequality, climate, housing, and health; publish and clean-room restore the resulting snapshot."
+    },
+    {
+      "id": "placsp_public_money",
+      "label": "PLACSP contract notices and awards",
+      "kind": "parquet_manifest",
+      "root": "etl/data/derived/placsp-contracts-real-s1-v5-current",
+      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-manifest.json",
+      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-validation.json",
+      "replay_root": "etl/data/derived/placsp-contracts-real-s1-v5-current-replay",
+      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-incremental-manifest.json",
+      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-incremental-validation.json",
+      "minimum_real_rows": 100000,
+      "official_source_ids": [
+        "placsp_sindicacion"
+      ],
+      "official_hosts": [
+        "contrataciondelestado.es"
+      ],
+      "representative_scope": false,
+      "durable_public_origin": false,
+      "clean_room_restore": false,
+      "corrections_workflow": true,
+      "limitations": [
+        "This cohort is not a complete historical PLACSP archive and contract values are not verified payments.",
+        "All 128849 official-source counterparty names and identifiers are retained exactly, including 8260 natural-person and 3058 unclassified counterparties; classification never suppresses public-domain evidence.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "next_gate": "Ingest the complete official archive by bounded time cohorts, reconcile source totals and revisions, publish one million real facts, and prove clean-room restore."
+    },
+    {
+      "id": "bdns_public_money",
+      "label": "BDNS subsidy concessions",
+      "kind": "parquet_manifest",
+      "root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812",
+      "manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-manifest-20260812.json",
+      "validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-validation-20260812.json",
+      "replay_root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812-replay",
+      "incremental_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-manifest-20260812.json",
+      "incremental_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-validation-20260812.json",
+      "minimum_real_rows": 100000,
+      "official_source_ids": [
+        "bdns_api_subvenciones"
+      ],
+      "official_hosts": [
+        "www.infosubvenciones.es"
+      ],
+      "representative_scope": false,
+      "durable_public_origin": false,
+      "clean_room_restore": false,
+      "corrections_workflow": true,
+      "limitations": [
+        "This is a bounded 100-page cohort containing 100000 of 28676987 official concessions observed on 2026-08-12; it is not a representative historical sample or the complete registry.",
+        "All 100000 official beneficiary names and all 39539 source-published identifiers are retained exactly; the remaining 60461 counterparties are explicitly unclassified and no identity field is suppressed.",
+        "Published subsidy amounts are award values, not independently verified disbursements or outcomes.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "next_gate": "Continue official pagination to a reconciled one-million-row cohort, capture a second snapshot for real revision deltas, publish immutable artifacts, and prove clean-room restore."
+    },
+    {
+      "id": "accountability_ledger",
+      "label": "Cross-source accountability ledger",
+      "kind": "parquet_manifest",
+      "root": "etl/data/derived/semantic-accountability-ledger",
+      "manifest": "etl/data/published/accountability-ledger-semantic-partition-manifest-latest.json",
+      "validation": "etl/data/published/accountability-ledger-semantic-partition-validation-latest.json",
+      "replay_root": "etl/data/derived/semantic-accountability-ledger-incremental",
+      "incremental_manifest": "etl/data/published/accountability-ledger-semantic-partition-incremental-latest.json",
+      "incremental_validation": "etl/data/published/accountability-ledger-semantic-partition-validation-incremental-latest.json",
+      "minimum_real_rows": 100000,
+    "official_source_ids": [
+      "boe_api_legal",
+      "congreso_votaciones",
+      "senado_votaciones"
+    ],
+    "official_hosts": [
+      "www.boe.es",
+      "www.congreso.es",
+      "www.senado.es"
+      ],
+      "representative_scope": false,
+      "durable_public_origin": false,
+      "clean_room_restore": false,
+      "corrections_workflow": true,
+    "limitations": [
+      "The clean 2026-08-12 materialization contains 126760 rows from boe_api_legal, congreso_votaciones, and senado_votaciones; ten fixture-derived PLACSP/BDNS rows and their downstream issues and ledger entries were removed.",
+      "The corpus is dominated by parliamentary actions and is not representative of money, implementation, enforcement, audits, or outcomes.",
+        "Twenty-six legacy rows infer boe_api_legal from an allowlisted official BOE URL because their stored source_id is blank; that inference is explicit in source_id_scope.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "next_gate": "Expand the ledger with representative rules, appointments, money, implementation, enforcement, audit, and outcome facts; reach one million real rows and prove public-origin restore."
+    },
+    {
+      "id": "actor_mandates",
+      "label": "Spanish elected representatives and mandates",
+      "kind": "parquet_manifest",
+      "root": "etl/data/derived/semantic-actor-mandates",
+      "manifest": "etl/data/published/actor-mandate-semantic-partition-manifest-latest.json",
+      "validation": "etl/data/published/actor-mandate-semantic-partition-validation-latest.json",
+      "replay_root": "etl/data/derived/semantic-actor-mandates-incremental",
+      "incremental_manifest": "etl/data/published/actor-mandate-semantic-partition-incremental-latest.json",
+      "incremental_validation": "etl/data/published/actor-mandate-semantic-partition-validation-incremental-latest.json",
+      "minimum_real_rows": 70000,
+      "official_source_ids": [
+        "asamblea_ceuta_diputados",
+        "asamblea_extremadura_diputados",
+        "asamblea_madrid_ocupaciones",
+        "asamblea_melilla_diputados",
+        "asamblea_murcia_diputados",
+        "congreso_diputados",
+        "congreso_votaciones",
+        "cortes_aragon_diputados",
+        "cortes_clm_diputados",
+        "cortes_cyl_procuradores",
+        "corts_valencianes_diputats",
+        "europarl_meps",
+        "infoelectoral_elected_officials",
+        "jgpa_diputados",
+        "municipal_concejales",
+        "parlament_balears_diputats",
+        "parlament_catalunya_diputats",
+        "parlamento_andalucia_diputados",
+        "parlamento_canarias_diputados",
+        "parlamento_cantabria_diputados",
+        "parlamento_larioja_diputados",
+        "parlamento_vasco_parlamentarios",
+        "senado_senadores",
+        "senado_votaciones"
+      ],
+      "official_hosts": [
+        "adminweb.parlamento-larioja.org",
+        "concejales.redsara.es",
+        "ctyp.asambleamadrid.es",
+        "datos.gob.es",
+        "parcan.es",
+        "parlamento-cantabria.es",
+        "sede.melilla.es",
+        "www.asambleaex.es",
+        "www.asambleamurcia.es",
+        "www.ccyl.es",
+        "www.ceuta.es",
+        "www.congreso.es",
+        "www.cortesaragon.es",
+        "www.cortesclm.es",
+        "www.cortsvalencianes.es",
+        "www.europarl.europa.eu",
+        "www.jgpa.es",
+        "www.legebiltzarra.eus",
+        "www.parlament.cat",
+        "www.parlamentib.es",
+        "www.parlamentodeandalucia.es",
+        "www.senado.es"
+      ],
+      "representative_scope": false,
+      "durable_public_origin": false,
+      "clean_room_restore": false,
+      "corrections_workflow": true,
+      "limitations": [
+        "Source-scoped identifiers and name aliases do not prove identity equivalence across institutions.",
+        "Coverage is uneven across national, regional, municipal, and European institutions.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "next_gate": "Reach one million real mandates and candidacy occurrences, publish institution-by-election coverage, and require reviewed merge/split identity history before cross-source aggregation."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "candidate_occurrences",
+      "status": "blocked_official_origin",
+      "current_real_rows": 8926,
+      "target_real_rows": 1000000,
+      "evidence": "Official elected-official occurrences are present; the official candidate archive lane has no accepted candidate rows because origin access is failing.",
+      "next_action": "Resolve reproducible official archive access, ingest bounded election cohorts, and reconcile candidate and party line counts to official archive metadata."
+    },
+    {
+      "id": "bdns_subsidies",
+      "status": "validated_real_s1_below_million",
+      "current_real_rows": 100000,
+      "target_real_rows": 1000000,
+      "evidence": "The current durable cohort reconciles 100000 official rows, 100 page captures, 100000 checksum-linked version sightings, one v5 Parquet file, exact identity retention, and one unchanged hardlinked replay. The older 146000-row checkpoint lacks a current compliant root and does not count instead.",
+      "next_action": "Continue bounded official pagination from a durable queue to one million rows, then reconcile a second snapshot, public origin, and clean-room restore."
+    },
+    {
+      "id": "document_corpus",
+      "status": "below_scale_and_ocr_quality_gate",
+      "current_real_rows": 21398,
+      "target_real_rows": 1000000,
+      "evidence": "The current real inventory reconciles 21398 files and 19538 distinct content hashes, but it is far below the target and lacks artifact-wide source provenance and reviewed OCR quality.",
+      "next_action": "Reconcile the live manifest, fetch and extract a stratified 100000-document cohort, add page-level OCR lineage and quality review, then scale by official-host cohorts."
+    },
+    {
+      "id": "representative_integrity_analysis",
+      "status": "not_ready",
+      "current_real_rows": 0,
+      "target_real_rows": 1000000,
+      "evidence": "No lane is yet promoted for representative public corruption-risk analysis.",
+      "next_action": "Define reviewed indicator semantics, counterevidence and correction workflows, minimum cohort sizes, false-positive controls, and traceable public explanations before publishing inferred risk signals."
+    }
+  ]
+}

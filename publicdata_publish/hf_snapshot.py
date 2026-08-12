@@ -23,6 +23,7 @@ STATIC_PUBLISHED_FILES = (
     "accountability-ledger-latest.json",
     "accountability-dossiers-latest.json",
     "accountability-evidence-api-latest.json",
+    "integrity-signals-latest.json",
 )
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 
@@ -710,6 +711,26 @@ def export_parquet_tables(
                     arrow_type = pa.string()
                 fields.append(pa.field(col_name, arrow_type, nullable=True))
             schema = pa.schema(fields)
+            schema_contract = [
+                {
+                    "name": col_name,
+                    "sqlite_declared_type": str(col["declared_type"]),
+                    "logical_kind": kind,
+                    "arrow_type": str(schema.field(index).type),
+                    "nullable": True,
+                }
+                for index, (col_name, col, kind) in enumerate(
+                    zip(col_names, cols, kinds)
+                )
+            ]
+            schema_sha256 = hashlib.sha256(
+                json.dumps(
+                    schema_contract,
+                    ensure_ascii=True,
+                    separators=(",", ":"),
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
 
             table_rel_dir = Path(parquet_prefix) / table_name
             table_abs_dir = snapshot_dir / table_rel_dir
@@ -732,6 +753,8 @@ def export_parquet_tables(
             cur = conn.execute(select_sql)
             part_idx = 0
             row_count = 0
+            part_manifests: list[dict[str, Any]] = []
+            order_col_indexes = [col_names.index(name) for name in order_by_cols]
             while True:
                 rows = cur.fetchmany(batch_rows)
                 if not rows:
@@ -742,8 +765,29 @@ def export_parquet_tables(
                     arrays.append(pa.array(values, type=schema.field(col_idx).type))
                 chunk_table = pa.Table.from_arrays(arrays, schema=schema)
                 rel_path = table_rel_dir / f"part-{part_idx:05d}.parquet"
-                pq.write_table(chunk_table, snapshot_dir / rel_path, compression=compression)
+                abs_path = snapshot_dir / rel_path
+                pq.write_table(chunk_table, abs_path, compression=compression)
                 parquet_rel_paths.append(rel_path)
+                min_key = (
+                    [coerce_parquet_value(rows[0][idx], kinds[idx]) for idx in order_col_indexes]
+                    if order_col_indexes
+                    else None
+                )
+                max_key = (
+                    [coerce_parquet_value(rows[-1][idx], kinds[idx]) for idx in order_col_indexes]
+                    if order_col_indexes
+                    else None
+                )
+                part_manifests.append(
+                    {
+                        "path": rel_path.as_posix(),
+                        "rows": len(rows),
+                        "bytes": int(abs_path.stat().st_size),
+                        "sha256": sha256_file(abs_path),
+                        "min_order_key": min_key,
+                        "max_order_key": max_key,
+                    }
+                )
                 part_idx += 1
                 row_count += len(rows)
 
@@ -753,6 +797,17 @@ def export_parquet_tables(
                 rel_path = table_rel_dir / "part-00000.parquet"
                 pq.write_table(empty_table, snapshot_dir / rel_path, compression=compression)
                 parquet_rel_paths.append(rel_path)
+                abs_path = snapshot_dir / rel_path
+                part_manifests.append(
+                    {
+                        "path": rel_path.as_posix(),
+                        "rows": 0,
+                        "bytes": int(abs_path.stat().st_size),
+                        "sha256": sha256_file(abs_path),
+                        "min_order_key": None,
+                        "max_order_key": None,
+                    }
+                )
                 part_idx = 1
 
             parquet_tables.append(
@@ -763,6 +818,14 @@ def export_parquet_tables(
                     "files": part_idx,
                     "order_by": order_label,
                     "path_glob": f"{table_rel_dir.as_posix()}/*.parquet",
+                    "schema": schema_contract,
+                    "schema_sha256": schema_sha256,
+                    "partition_contract": {
+                        "strategy": "ordered_fixed_row_batches",
+                        "batch_rows": int(batch_rows),
+                        "order_by": order_by_cols or (["rowid"] if order_label == "rowid" else []),
+                    },
+                    "parts": part_manifests,
                 }
             )
         return parquet_rel_paths, parquet_tables
