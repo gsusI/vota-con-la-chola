@@ -1,0 +1,127 @@
+{
+  "checks": {
+    "all_http_rows_have_checksum_capture": false,
+    "all_shard_bytes_and_checksums_valid": true,
+    "integrity_passed": true,
+    "manifest_event_total_matches": true,
+    "manifest_member_vote_total_matches": true,
+    "probed_https_content_equivalence_verified": false,
+    "secure_or_immutable_replacement_gate": false,
+    "url_rows_reconcile": true
+  },
+  "generated_at": "2026-08-12T16:05:04.216762+00:00",
+  "https_probes": [],
+  "inputs": {
+    "capture_root": "etl/data/raw/manual/senado_votaciones_ses",
+    "manifest": {
+      "bytes": 4485195,
+      "path": "etl/data/published/member-vote-shard-manifest-latest.json",
+      "rows": 8373,
+      "sha256": "864f683b8b6986834ec1833933e223b5ddc185bf3cf0b9b0fdb9be0dcd86d7be"
+    },
+    "root": "etl/data/derived/member-vote-shards"
+  },
+  "limitations": [
+    "Historical HTTP source URLs are evidence and remain unchanged.",
+    "A local checksum capture classifies insecure transport lineage but is not a durable public origin.",
+    "Uncaptured HTTP URLs remain promotion blockers until an immutable official capture or content-equivalent HTTPS endpoint is verified.",
+    "A 403 response does not establish content equivalence and must not be substituted for the historical source."
+  ],
+  "next_action": "Recover immutable official captures for every uncaptured HTTP URL, publish them by checksum, and retry HTTPS equivalence only when a new access lever exists.",
+  "policy": {
+    "historical_source_urls_retained_exactly": true,
+    "https_replacement_requires_content_equivalence": true,
+    "official_real_records_only": true,
+    "public_domain_personal_information_retained": true,
+    "source_urls_silently_rewritten": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "member_vote_source_url_lineage_v1",
+  "scopes": [
+    {
+      "distinct_urls": 2,
+      "host": "www.congreso.es",
+      "legislature": "14",
+      "member_vote_rows": 456,
+      "scheme": "https",
+      "source_id": "congreso_votaciones"
+    },
+    {
+      "distinct_urls": 1680,
+      "host": "www.congreso.es",
+      "legislature": "15",
+      "member_vote_rows": 588318,
+      "scheme": "https",
+      "source_id": "congreso_votaciones"
+    },
+    {
+      "distinct_urls": 302,
+      "host": "www.senado.es",
+      "legislature": "10",
+      "member_vote_rows": 36390,
+      "scheme": "http",
+      "source_id": "senado_votaciones"
+    },
+    {
+      "distinct_urls": 1,
+      "host": "www.senado.es",
+      "legislature": "11",
+      "member_vote_rows": 795,
+      "scheme": "https",
+      "source_id": "senado_votaciones"
+    },
+    {
+      "distinct_urls": 864,
+      "host": "www.senado.es",
+      "legislature": "12",
+      "member_vote_rows": 65782,
+      "scheme": "http",
+      "source_id": "senado_votaciones"
+    },
+    {
+      "distinct_urls": 11,
+      "host": "www.senado.es",
+      "legislature": "12",
+      "member_vote_rows": 13320,
+      "scheme": "https",
+      "source_id": "senado_votaciones"
+    },
+    {
+      "distinct_urls": 3549,
+      "host": "www.senado.es",
+      "legislature": "14",
+      "member_vote_rows": 1078366,
+      "scheme": "https",
+      "source_id": "senado_votaciones"
+    },
+    {
+      "distinct_urls": 17,
+      "host": "www.senado.es",
+      "legislature": "15",
+      "member_vote_rows": 25795,
+      "scheme": "https",
+      "source_id": "senado_votaciones"
+    }
+  ],
+  "status": "ok",
+  "totals": {
+    "http_rows_with_checksum_capture": 33683,
+    "http_rows_without_checksum_capture": 68489,
+    "http_urls_with_checksum_capture": 484,
+    "http_urls_without_checksum_capture": 682,
+    "rows": 1809222,
+    "rows_http": 102172,
+    "rows_https": 1707050,
+    "shard_bytes": 170990631,
+    "shards": 8373,
+    "urls": 6426,
+    "urls_http": 1166,
+    "urls_https": 5260
+  },
+  "url_manifest": {
+    "bytes": 2418737,
+    "path": "etl/data/manifests/member-vote-source-url-lineage.jsonl",
+    "rows": 6426,
+    "sha256": "7401a73375041e7880cc09907acd6690c4da1a955de1e5971fb202126af851aa"
+  }
+}
