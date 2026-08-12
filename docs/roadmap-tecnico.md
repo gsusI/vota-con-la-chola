@@ -40,20 +40,20 @@ just etl-scale-readiness
 
 | Lane | Filas reales | Artefacto actual | Estado |
 | --- | ---: | --- | --- |
-| votos nominales | `1,809,222` | `8,373` shards gzip, `170,990,067` bytes | validado; no promocionado |
+| votos nominales | `1,809,222` | `8,373` shards gzip, `170,990,631` bytes | validado; no promocionado |
 | indicadores Eurostat | `1,755,809` | `37` Parquet, `253,373,860` bytes | validado; replay `26/26`; no representativo |
 | PLACSP | `263,302` | `50` Parquet, `20,803,781` bytes | v5 validado; identidad source `128,849/128,849`; replay `50/50`; historia incompleta |
-| BDNS | `1,360,382` | `14` Parquet, `42,955,289` bytes | v6 validado; nombres `1,360,382/1,360,382`, identificadores `163,270/163,270`; replay `1/1` por `14/14` hardlinks; 1,419 páginas y `89/89` fechas completas |
+| BDNS | `1,360,382` | `14` Parquet, `42,955,289` bytes | v7 validado; `capacity_class=s2_1m`; nombres `1,360,382/1,360,382`, identificadores `163,270/163,270`; replay `1/1` por `14/14` hardlinks; 1,419 páginas y `89/89` fechas completas |
 | accountability ledger | `126,760` | `13` Parquet, `1,271,649` bytes | real-only validado; replay `13/13`; mix parlamentario |
 | actores/mandatos | `88,031` | `108` Parquet, `9,236,064` bytes | validado; replay `108/108`; bajo `100k` |
 
 Defectos visibles:
 
-- votos: URL pública/source record `100%`; `102,172` filas con URL oficial HTTP;
+- votos: URL pública/source record `100%`; las `102,172` filas HTTP / `1,166` URLs están clasificadas: `33,683` filas / `484` URLs tienen captura checksum local y `68,489` filas / `682` URLs siguen sin replacement inmutable; dos probes HTTPS acotados devolvieron `403` HTML y ninguna URL histórica fue reescrita;
 - candidatos: `8,926` resultados históricos electos, pero `0` filas nominales aceptadas del archivo de candidaturas por bloqueo de origen;
-- BDNS: el root actual valida `1,360,382` filas oficiales y cruza el gate de capacidad `R2`; las `89/89` ventanas seleccionadas están completas, pero faltan historia completa, segundo snapshot, origin público y clean restore para promoción;
-- ledger: `126,760` facts reales recuperados; `10` facts derivados de fixtures fueron purgados; `26` source IDs legacy se infieren explícitamente desde URL BOE oficial; faltan mix representativo, `1M`, origin y restore;
-- documentos: `21,398` instancias / `19,538` hashes reconciliados; faltan provenance de origen por fichero, muestra de calidad suficiente y escala;
+- BDNS: el root actual valida `1,360,382` filas oficiales y cruza el gate de capacidad `R2`; las `89/89` ventanas seleccionadas están completas; origin y clean-room restore pasan, pero faltan historia completa y segundo snapshot para promoción;
+- ledger: `126,760` facts reales recuperados; `10` facts derivados de fixtures fueron purgados; `26` source IDs legacy se infieren explícitamente desde URL BOE oficial; origin y clean-room restore pasan; faltan mix representativo y `1M`;
+- documentos: `21,398` instancias / `19,538` hashes; el audit file-level verifica checksum para `10,219`, URL pública para `10,195` y `6,792/6,792` textos referenciados, pero `11,179` ficheros siguen sin lineage y faltan muestra de calidad suficiente y escala;
 - lanes promocionadas: `0`.
 
 El reporte `etl/data/published/scale-readiness-latest.json` debe decir `real_foundation_ready_scale_incomplete` hasta cerrar representatividad, origin público, clean restore y correcciones.
@@ -81,7 +81,7 @@ DoD:
 - ningún endpoint no oficial cuenta;
 - cualquier fila sin URL/lineage aparece como gap.
 
-### RT-002 — BDNS semántico v5 (`R2` de capacidad cerrado; promoción abierta)
+### RT-002 — BDNS semántico v7 (`R2` de capacidad cerrado; promoción abierta)
 
 Entrada ejecutada:
 
@@ -95,15 +95,17 @@ Resultado:
 2. `1,360,382` records, source IDs, record URLs y version sightings distintos;
 3. `1,080,788,680` raw bytes en `1,419` objetos checksum-linked;
 4. SQLite `quick_check=ok`, FK `0`;
-5. `public_money_facts_v5` contract, artifact v6: `1,360,382` rows, `14` Parquet, `42,955,289` bytes;
+5. `public_money_facts_v5` contract, artifact v7: `1,360,382` rows, `14` Parquet, `42,955,289` bytes y `capacity_class=s2_1m`;
 6. nombres oficiales `1,360,382/1,360,382` e identificadores source `163,270/163,270` retenidos exactamente;
 7. validator full-row verde, `0` private tokens, replay `1/1` partición por `14/14` hardlinks;
-8. `89/89` ventanas completas tras expansión append-only; corpus registrado con row-scale gate verde, pero `promotion_gate_passed=false` por historia incompleta, segundo snapshot, origin y restore.
+8. `89/89` ventanas completas tras expansión append-only; corpus registrado con row-scale gate verde, `durable_public_origin=true` y restore desde cache vacío validado contra la release v2; `promotion_gate_passed=false` por historia incompleta y segundo snapshot.
+9. el worker hace preflight antes de cada claim y reserva CAS + crecimiento SQLite/WAL. Un preflight intermedio llegó a verde tras liberar temporales, pero el actual vuelve a fallar cerrado con `5,685,862,400` bytes libres frente a `10,863,247,360` requeridos y headroom `-5,177,384,960`; no se reclama más trabajo.
 
 Comandos base:
 
 ```bash
 just etl-scale-bdns-bulk-report
+just etl-scale-bdns-storage-preflight
 just etl-scale-bdns-bulk-version-lineage
 just etl-scale-export-semantic-public-money
 just etl-scale-validate-semantic-public-money
@@ -114,14 +116,39 @@ DoD `S1`: `DONE 2026-08-12`.
 - source/page/version/amount/public-field totals exactos;
 - manifest, validation y replay actuales;
 - registry/readiness/tracker actualizados;
-- lane global sigue `PARTIAL` hasta `1M`, segundo snapshot, historia representativa, origin y restore.
+- lane global sigue `PARTIAL` hasta segundo snapshot e historia representativa.
 
 Siguiente salto:
 
-1. preflight de disco, origin y request budget para `1,000` páginas;
+1. recuperar al menos `5,177,384,960` bytes de headroom y exigir preflight verde de disco, origin y request budget antes de cada cohorte;
 2. nueva cohorte durable sin reutilizar el checkpoint v3 no conforme;
 3. mismo pacing/circuit; detener ante error-rate o latencia fuera de presupuesto;
 4. exportar v5 solo después de reconciliar `1,000/1,000` páginas y `1M` filas reales.
+
+### RT-002B — Origin bundle analítico (`P0`, rollback y raw objects abiertos)
+
+Implementado:
+
+- `scripts/publicar_hf_scale_snapshot.py` empaqueta únicamente registry, readiness, manifests, validations y ficheros canónicos declarados;
+- valida path, bytes y SHA-256 de cada fichero antes de staging;
+- usa hardlinks cuando es posible y no transforma ni suprime identidad pública;
+- `scripts/verify_hf_scale_origin.py` reconstruye el bundle local, compara fail-closed el contrato estable de data/provenance y reporta drift de registry/readiness como metadata separada;
+- `scripts/restore_hf_scale_origin.py` restaura por corpus con concurrencia acotada, preflight de storage, partials atómicos, bytes/SHA-256 exactos y reuse de ficheros ya verificados; acepta además un `--snapshot-path` inmutable para recovery sin depender de `latest`;
+- `scripts/rebuild_restored_scale_sqlite.py` importa corpora Parquet restaurados por batches, conserva strings/listas/identidades publicados, compara hash lógico input/SQLite, exige integridad y RSS acotado, y hace publish local por rename atómico;
+- `scripts/replicate_content_objects.py` y `scripts/verify_object_store_restore.py` procesan manifests en batches acotados con workers configurables; el manifest de objetos elimina timestamps por fila para ser determinista, el restore completo hace preflight de bytes + reserva antes de transferir, y el report conserva generated/throughput;
+- el publisher tabular incluye `data-integrity-latest.json` y `scale-readiness-latest.json` en el snapshot actual.
+
+Evidencia real actual:
+
+- release v2 contract-bearing publicada: `6` corpora, `5,403,506` filas, `8,595` data files, `498,631,274` bytes, `0` copies y `8,619` hardlinks metadata+data; release `5872efaf...`, artifact contract `bb99c119...`;
+- parity remota: pointer, manifest, artifact contract, registry y readiness coinciden; `verify_hf_scale_origin.py` devuelve `verified_current_scale_origin`, sin errores ni warnings. Las seis lanes declaran `durable_public_origin=true`;
+- clean-room restore completo: BDNS descarga `20` ficheros / `43,042,223` bytes; las otras cinco lanes descargan `8,601` ficheros / `461,088,883` bytes con `10 GiB` de reserva. Todos los bytes verifican SHA-256 y validadores aislados no-project leen `5,403,506` filas / `8,595` data files con `0` private tokens;
+- recovery de release explícita: un cache vacío apuntado directamente a `scale/snapshots/2026-08-12/623b4a5a...` descarga `114` ficheros / `9,688,787` bytes de `actor_mandates`, sin consultar el pointer `latest`; el validador lee `88,031` filas / `108` Parquet y pasa todos los checks;
+- rebuild SQLite determinista: dos ejecuciones independientes desde ese restore actor producen `88,031` filas, `88,031` mandate IDs distintos y DBs byte-idénticos de `71,168,000` bytes (`SHA-256 61cfdf8e...`); el hash lógico de todas las columnas es `eb7fdb8e...`, `integrity_check=ok` y peak RSS queda entre `229.750` y `233.578 MB`;
+- raw-object CAS local: `16` workers procesan los `6,792` objetos reales enlazados / `133,219,457` bytes; replay deduplica `6,792/6,792`, repite manifest de `2,733,754` bytes con SHA-256 `6e496f35...`, y restore `full_manifest` recupera `6,792/6,792` tras preflight con reserva `10 GiB`. El throughput warm/local observado (`7,482.620` objetos/s en dedupe; hasta `5,028.098` objetos/s en restore) no se extrapola a red;
+- durable origin y clean-room restore pasan en las seis lanes registradas. Ninguna se promociona por ello: representatividad, historia, reconciliación y correcciones siguen mandando.
+
+DoD pendiente: reconstruir el esquema normalizado y sus relaciones desde inputs inmutables, ensayar la mutación y recuperación de `latest`, fijar supersession/RPO/RTO y publicar/verificar el CAS completo en un origin S3-compatible con versioning/retention. El publisher evita paths mutables y el contrato estable evita que cambiar el propio flag de publicación invalide la paridad de datos.
 
 ### RT-003 — Regenerar accountability ledger
 
@@ -157,7 +184,7 @@ DoD:
 Pasos:
 
 1. inventariar raw y derived reales;
-2. reconciliar file instances, content hashes, fetch queue, text queue y DB;
+2. `PARTIAL 2026-08-12`: reconciliar file instances, content hashes, fetch queue, text queue y DB. El audit disk-backed balancea `21,398/21,398`, verifica checksum para `10,219` y URL pública para `10,195`, verifica `6,792/6,792` textos comprimidos y mantiene `11,179` ficheros sin lineage como gap explícito;
 3. clasificar faltantes, duplicados, corruptos, cifrados y unsupported;
 4. persistir MIME, bytes, páginas, idioma y densidad;
 5. medir cobertura de texto y OCR por source/format;
@@ -168,6 +195,8 @@ Comandos base:
 
 ```bash
 just etl-scale-inventory-documents
+just etl-scale-audit-document-provenance
+just etl-scale-reconcile-documents
 just parl-enqueue-document-fetch-work
 just parl-run-document-fetch-work
 just parl-enqueue-text-extraction-work
@@ -189,8 +218,8 @@ Pasos:
 1. `DONE`: aislar el único evento responsable de las `350` URLs nulas;
 2. `DONE`: verificar el endpoint oficial Congreso con browser-equivalent request;
 3. `DONE`: registrar URL, hash oficial, hash capturado, diferencia semántica y event ID estable en sidecar;
-4. inventariar las filas con URL HTTP por cámara/legislatura;
-5. intentar equivalentes HTTPS sin cambiar identidad semántica;
+4. `DONE`: inventariar las filas con URL HTTP por cámara/legislatura mediante `just etl-scale-audit-vote-source-urls`: `102,172` filas / `1,166` URLs, todas de Senado legislaturas 10 y 12; `33,683` filas / `484` URLs tienen captura checksum local y `68,489` / `682` no;
+5. `PARTIAL`: dos probes HTTPS content-equivalence acotados devolvieron `HTTP 403` con HTML de `417/418` bytes; no reescribir URLs y no repetir red sin una palanca nueva;
 6. `DONE`: reexportar `8,373` shards y validar `1,809,222/1,809,222` URLs/source records;
 7. mantener incompatibilidades como gaps públicos.
 
@@ -200,6 +229,14 @@ DoD:
 - `100%` public URL o replacement oficial inmutable;
 - HTTPS o excepción content-addressed explícita;
 - official totals reconciliados o discrepancia clasificada por evento.
+
+Audit offline repetible:
+
+```bash
+just etl-scale-audit-vote-source-urls
+```
+
+Los probes de red son explícitos y solo se repiten si cambia el endpoint, existe una sesión reproducible o aparece otro canal oficial.
 
 ## 4. Backlog técnico priorizado
 
@@ -384,6 +421,7 @@ just parl-document-pipeline-scale
 
 # Votos
 just etl-scale-audit-member-votes
+just etl-scale-audit-vote-source-urls
 just etl-scale-audit-vote-db
 just etl-scale-export-vote-db-shards
 just etl-scale-validate-vote-db-shards
