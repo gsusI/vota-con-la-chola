@@ -70,6 +70,22 @@ class TestDurableWorkQueue(unittest.TestCase):
         self.assertEqual(int(row["priority"]), 99)
         self.assertEqual(row["state"], "pending")
 
+    def test_enqueue_can_join_caller_transaction(self) -> None:
+        result = enqueue_work_items(
+            self.conn,
+            pipeline_id="atomic_expand",
+            items=[{"item_key": "page:1"}],
+            now=BASE_TIME,
+            commit=False,
+        )
+        self.assertEqual(result["inserted_total"], 1)
+        self.conn.rollback()
+        remaining = self.conn.execute(
+            "SELECT COUNT(*) FROM pipeline_work_items WHERE pipeline_id = ?",
+            ("atomic_expand",),
+        ).fetchone()[0]
+        self.assertEqual(remaining, 0)
+
     def test_claim_orders_by_priority_and_complete_requires_owner(self) -> None:
         enqueue_work_items(
             self.conn,

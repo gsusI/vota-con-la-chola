@@ -21,6 +21,7 @@ from scripts.ingest_bdns_bulk import (
     backfill_record_version_lineage,
     enqueue_bdns_daily_partitions,
     enqueue_bdns_pages,
+    expand_bdns_daily_partitions,
     persist_bdns_page,
     report_bdns_bulk_run,
 )
@@ -118,6 +119,61 @@ class TestBdnsBulkIngest(unittest.TestCase):
                 self.assertEqual(partition["total_pages_discovered"], 3)
                 self.assertEqual(partition["pages_enqueued"], 2)
                 self.assertEqual(result["queue"]["pipeline_total"], 2)
+
+                def fetch_expansion(url: str, timeout: int) -> tuple[bytes, str]:
+                    self.assertGreater(timeout, 0)
+                    row = _row(1)
+                    row["fechaConcesion"] = "2026-08-10"
+                    return (
+                        json.dumps(
+                            {
+                                "content": [row],
+                                "number": 0,
+                                "size": 1,
+                                "numberOfElements": 1,
+                                "totalElements": 2_501,
+                                "totalPages": 2_501,
+                                "first": True,
+                                "last": False,
+                            }
+                        ).encode("utf-8"),
+                        "application/json",
+                    )
+
+                expanded = expand_bdns_daily_partitions(
+                    conn,
+                    pipeline_id="bdns-partition-test",
+                    max_pages_per_partition=0,
+                    timeout=10,
+                    request_interval_seconds=0,
+                    fetch_bytes=fetch_expansion,
+                )
+                self.assertEqual(expanded["expansion"]["pages_before"], 2)
+                self.assertEqual(expanded["expansion"]["pages_after"], 3)
+                self.assertEqual(expanded["expansion"]["pages_added"], 1)
+                self.assertEqual(
+                    expanded["expansion"]["truncated_partitions_after"], 0
+                )
+                payloads = [
+                    json.loads(str(row[0]))
+                    for row in conn.execute(
+                        """
+                        SELECT payload_json
+                        FROM pipeline_work_items
+                        WHERE pipeline_id = ?
+                        ORDER BY work_item_id
+                        """,
+                        ("bdns-partition-test",),
+                    )
+                ]
+                self.assertEqual(
+                    [payload["page_number"] for payload in payloads],
+                    [0, 1, 2],
+                )
+                self.assertEqual(
+                    [payload["source_page_number"] for payload in payloads],
+                    [0, 1, 2],
+                )
             finally:
                 conn.close()
 

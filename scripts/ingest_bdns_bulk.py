@@ -572,6 +572,303 @@ def enqueue_bdns_daily_partitions(
     }
 
 
+def expand_bdns_daily_partitions(
+    conn: sqlite3.Connection,
+    *,
+    pipeline_id: str,
+    max_pages_per_partition: int,
+    timeout: int,
+    request_interval_seconds: float,
+    fetch_bytes: Any = http_get_bytes,
+) -> dict[str, Any]:
+    """Append missing pages to an existing daily-partitioned cohort."""
+
+    if max_pages_per_partition < 0:
+        raise ValueError("max_pages_per_partition must be >= 0")
+    run = _existing_bulk_run(conn, pipeline_id)
+    if run is None:
+        raise RuntimeError(f"unknown money bulk pipeline: {pipeline_id}")
+    bulk_run_id = int(run["money_bulk_run_id"])
+    page_size = int(run["page_size"])
+    partitions = conn.execute(
+        """
+        SELECT *
+        FROM money_bulk_partitions
+        WHERE money_bulk_run_id = ?
+        ORDER BY money_bulk_partition_id
+        """,
+        (bulk_run_id,),
+    ).fetchall()
+    if not partitions:
+        raise RuntimeError(
+            f"pipeline_id is not daily-partitioned: {pipeline_id}"
+        )
+
+    work_rows = conn.execute(
+        """
+        SELECT item_key, payload_json
+        FROM pipeline_work_items
+        WHERE pipeline_id = ?
+        ORDER BY work_item_id
+        """,
+        (pipeline_id,),
+    ).fetchall()
+    existing_item_keys = {str(row["item_key"]) for row in work_rows}
+    pages_before = sum(int(partition["pages_enqueued"]) for partition in partitions)
+    if len(work_rows) != pages_before:
+        raise RuntimeError(
+            "daily partition queue does not reconcile before expansion: "
+            f"queue={len(work_rows)} partitions={pages_before}"
+        )
+    used_global_pages: set[int] = set()
+    for row in work_rows:
+        payload = json.loads(str(row["payload_json"]))
+        page_number = int(payload["page_number"])
+        if page_number in used_global_pages:
+            raise RuntimeError(
+                f"pipeline has duplicate global page numbers: {pipeline_id}"
+            )
+        used_global_pages.add(page_number)
+    next_global_page = max(used_global_pages, default=-1) + 1
+
+    pacer = RequestPacer(request_interval_seconds)
+    plans: list[dict[str, Any]] = []
+    for partition in partitions:
+        old_pages = int(partition["pages_enqueued"])
+        total_pages = int(partition["total_pages_discovered"])
+        desired_pages = total_pages
+        if max_pages_per_partition > 0:
+            desired_pages = min(desired_pages, max_pages_per_partition)
+        desired_pages = max(old_pages, desired_pages)
+        if desired_pages == old_pages:
+            continue
+        date_from = str(partition["date_from"] or "")
+        date_to = str(partition["date_to"] or "")
+        if not date_from or not date_to:
+            raise RuntimeError(
+                "daily partition is missing its date contract: "
+                f"{partition['partition_key']}"
+            )
+        source_url = build_bdns_concessions_url(
+            page=0,
+            page_size=1,
+            date_from=_api_date(_parse_iso_date(date_from, field="date_from")),
+            date_to=_api_date(_parse_iso_date(date_to, field="date_to")),
+        )
+        pacer.wait()
+        payload, content_type = fetch_bytes(source_url, timeout)
+        observed = parse_bdns_page(
+            payload,
+            feed_url=source_url,
+            content_type=content_type,
+            expected_page=0,
+            expected_page_size=1,
+        )
+        observed_pages = (observed.total_elements + page_size - 1) // page_size
+        expected_contract = (
+            int(partition["total_elements_discovered"]),
+            total_pages,
+        )
+        observed_contract = (observed.total_elements, observed_pages)
+        if expected_contract != observed_contract:
+            raise RuntimeError(
+                "official BDNS partition contract drifted; create a new snapshot: "
+                f"{partition['partition_key']} "
+                f"expected={expected_contract} observed={observed_contract}"
+            )
+        plans.append(
+            {
+                "partition": partition,
+                "old_pages": old_pages,
+                "desired_pages": desired_pages,
+                "date_from_api": _api_date(
+                    _parse_iso_date(date_from, field="date_from")
+                ),
+                "date_to_api": _api_date(_parse_iso_date(date_to, field="date_to")),
+            }
+        )
+
+    new_items: list[dict[str, Any]] = []
+    for plan in plans:
+        partition = plan["partition"]
+        for source_page_number in range(
+            int(plan["old_pages"]),
+            int(plan["desired_pages"]),
+        ):
+            item_key = (
+                f"{partition['partition_key']}:page:{source_page_number:08d}"
+            )
+            if item_key in existing_item_keys:
+                continue
+            new_items.append(
+                {
+                    "item_key": item_key,
+                    "partition_key": str(partition["partition_key"]),
+                    "payload": {
+                        "money_bulk_run_id": bulk_run_id,
+                        "money_bulk_partition_id": int(
+                            partition["money_bulk_partition_id"]
+                        ),
+                        "page_number": next_global_page,
+                        "source_page_number": source_page_number,
+                        "page_size": page_size,
+                        "snapshot_date": str(run["snapshot_date"]),
+                        "date_from": str(partition["date_from"]),
+                        "date_to": str(partition["date_to"]),
+                        "source_id": SOURCE_ID,
+                        "source_url": build_bdns_concessions_url(
+                            page=source_page_number,
+                            page_size=page_size,
+                            date_from=str(plan["date_from_api"]),
+                            date_to=str(plan["date_to_api"]),
+                        ),
+                    },
+                    "max_attempts": 5,
+                }
+            )
+            existing_item_keys.add(item_key)
+            next_global_page += 1
+
+    desired_by_partition_id = {
+        int(plan["partition"]["money_bulk_partition_id"]): int(
+            plan["desired_pages"]
+        )
+        for plan in plans
+    }
+    desired_queue_total = sum(
+        desired_by_partition_id.get(
+            int(partition["money_bulk_partition_id"]),
+            int(partition["pages_enqueued"]),
+        )
+        for partition in partitions
+    )
+    if len(new_items) != desired_queue_total - pages_before:
+        raise RuntimeError(
+            "daily expansion plan does not reconcile before enqueue: "
+            f"new_items={len(new_items)} "
+            f"expected={desired_queue_total - pages_before}"
+        )
+
+    queue = enqueue_work_items(
+        conn,
+        pipeline_id=pipeline_id,
+        items=new_items,
+        batch_size=1_000,
+        commit=False,
+    )
+    if (
+        int(queue["inserted_total"]) != len(new_items)
+        or int(queue["pipeline_total"]) != desired_queue_total
+    ):
+        conn.rollback()
+        raise RuntimeError(
+            "expanded partition queue does not reconcile after enqueue: "
+            f"inserted={queue['inserted_total']}/{len(new_items)} "
+            f"queue={queue['pipeline_total']}/{desired_queue_total}"
+        )
+    now_iso = now_utc_iso()
+    for partition in partitions:
+        partition_id = int(partition["money_bulk_partition_id"])
+        desired_pages = desired_by_partition_id.get(
+            partition_id,
+            int(partition["pages_enqueued"]),
+        )
+        conn.execute(
+            """
+            UPDATE money_bulk_partitions
+            SET pages_enqueued = ?, updated_at = ?
+            WHERE money_bulk_partition_id = ?
+            """,
+            (desired_pages, now_iso, partition_id),
+        )
+    summary = conn.execute(
+        """
+        SELECT
+          COALESCE(SUM(pages_enqueued), 0) AS pages_enqueued,
+          COALESCE(SUM(total_pages_discovered), 0) AS total_pages,
+          COALESCE(SUM(MIN(total_elements_discovered, pages_enqueued * ?)), 0)
+            AS selected_records,
+          SUM(CASE WHEN pages_enqueued < total_pages_discovered THEN 1 ELSE 0 END)
+            AS truncated_partitions
+        FROM money_bulk_partitions
+        WHERE money_bulk_run_id = ?
+        """,
+        (page_size, bulk_run_id),
+    ).fetchone()
+    expected_queue_total = int(summary["pages_enqueued"])
+    if expected_queue_total != desired_queue_total:
+        conn.rollback()
+        raise RuntimeError(
+            "expanded partition queue does not reconcile: "
+            f"planned={desired_queue_total} partitions={expected_queue_total}"
+        )
+    conn.execute(
+        """
+        UPDATE money_bulk_runs
+        SET total_elements_discovered = ?, total_pages_discovered = ?,
+            pages_enqueued = ?, state = 'running', updated_at = ?, finished_at = NULL
+        WHERE money_bulk_run_id = ?
+        """,
+        (
+            int(summary["selected_records"]),
+            int(summary["total_pages"]),
+            expected_queue_total,
+            now_iso,
+            bulk_run_id,
+        ),
+    )
+    if run["ingestion_run_id"] is not None:
+        conn.execute(
+            """
+            UPDATE ingestion_runs
+            SET status = 'running', finished_at = NULL, message = ?
+            WHERE run_id = ?
+            """,
+            (
+                (
+                    "BDNS daily cohort expanded: "
+                    f"pages={len(work_rows)}->{expected_queue_total}"
+                ),
+                int(run["ingestion_run_id"]),
+            ),
+        )
+    conn.commit()
+    return {
+        "schema_version": "bdns_bulk_partitioned_expand_v1",
+        "status": "ok",
+        "source_id": SOURCE_ID,
+        "pipeline_id": pipeline_id,
+        "money_bulk_run_id": bulk_run_id,
+        "snapshot_date": str(run["snapshot_date"]),
+        "expansion": {
+            "strategy": "append_only_daily_partition_pages",
+            "partitions_revalidated": len(plans),
+            "pages_before": len(work_rows),
+            "pages_after": expected_queue_total,
+            "pages_added": int(queue["inserted_total"]),
+            "selected_records_after": int(summary["selected_records"]),
+            "total_pages_discovered": int(summary["total_pages"]),
+            "truncated_partitions_after": int(
+                summary["truncated_partitions"] or 0
+            ),
+            "max_pages_per_partition": max_pages_per_partition,
+            "official_partition_contracts_stable": True,
+        },
+        "partitions_expanded": [
+            {
+                "partition_key": str(plan["partition"]["partition_key"]),
+                "pages_before": int(plan["old_pages"]),
+                "pages_after": int(plan["desired_pages"]),
+                "pages_added": int(plan["desired_pages"])
+                - int(plan["old_pages"]),
+            }
+            for plan in plans
+        ],
+        "queue": queue,
+        "peak_rss_mb": round(_peak_rss_mb(), 3),
+    }
+
+
 def _fetch_page_item(
     item: Mapping[str, object],
     *,
@@ -1376,6 +1673,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     enqueue_daily.add_argument("--timeout", type=int, default=30)
     enqueue_daily.add_argument("--request-interval-seconds", type=float, default=2.0)
 
+    expand_daily = subparsers.add_parser("expand-daily")
+    expand_daily.add_argument("--max-pages-per-partition", type=int, default=0)
+    expand_daily.add_argument("--timeout", type=int, default=30)
+    expand_daily.add_argument("--request-interval-seconds", type=float, default=2.0)
+
     work = subparsers.add_parser("work")
     work.add_argument("--raw-root", default=str(DEFAULT_RAW_ROOT))
     work.add_argument("--worker-id", default="bdns-bulk-worker")
@@ -1421,6 +1723,14 @@ def main(argv: list[str] | None = None) -> int:
                 page_size=args.page_size,
                 target_records=args.target_records,
                 max_partitions=args.max_partitions,
+                max_pages_per_partition=args.max_pages_per_partition,
+                timeout=args.timeout,
+                request_interval_seconds=args.request_interval_seconds,
+            )
+        elif args.command == "expand-daily":
+            report = expand_bdns_daily_partitions(
+                conn,
+                pipeline_id=args.pipeline_id,
                 max_pages_per_partition=args.max_pages_per_partition,
                 timeout=args.timeout,
                 request_interval_seconds=args.request_interval_seconds,

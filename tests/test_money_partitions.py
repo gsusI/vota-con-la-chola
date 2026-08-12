@@ -168,6 +168,11 @@ class TestMoneyPartitions(unittest.TestCase):
             self.assertFalse(first["promotion_gate_passed"])
             report = validate_money_partitions(root=first_root, min_rows=7)
             self.assertEqual(report["status"], "ok")
+            self.assertEqual(
+                report["performance"]["distinct_index_storage"],
+                "temporary_sqlite_disk",
+            )
+            self.assertGreater(report["performance"]["distinct_index_bytes"], 0)
             self.assertEqual(report["totals"]["amount_eur_total"], "2252.750000")
             self.assertTrue(
                 report["checks"]["public_domain_counterparty_retention_complete"]

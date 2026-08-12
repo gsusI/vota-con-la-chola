@@ -127,17 +127,17 @@ Each lane must reach `R2` independently:
 | Member votes | `1,809,222` | `8,373` gzip shards | every file, checksum, payload, member count, source record, and public URL audited; one verified official capture sidecar repairs `350` legacy rows | `102,172` URL rows use official HTTP; official-total reconciliation, durable origin, clean restore, representative chamber history |
 | Eurostat indicators | `1,755,809` | `37` Parquet files | full provenance, schema/hash/row validation, `26/26` unchanged partitions reused | four-dataset scope is not representative; no second-snapshot revision proof; no durable public origin or clean restore; corrections workflow incomplete |
 | PLACSP money facts | `263,302` | `50` Parquet files | v5 exact manifest/file/row/hash validation; all `128,849` source-published counterparty names and identifiers retained, including `8,260` natural-person and `3,058` unclassified rows; `50/50` unchanged partitions reused | incomplete historical universe; awards are not payments; identity resolution and durable restore open |
-| BDNS subsidy facts | `100,000` | `1` Parquet file | current v5 full-row validation; all `100,000` official beneficiary names and all `39,539` source-published identifiers retained; queue/page/version/source/amount totals exact; unchanged partition hardlinked | only `100/28,677` pages observed; below `R2`; no second snapshot, representative history, durable origin, or clean restore |
+| BDNS subsidy facts | `1,360,382` | `14` Parquet files | current v6 full-row validation; all `1,360,382` official beneficiary names and all `163,270` source-published identifiers retained; `1,419/1,419` queue/page/version/source/amount totals exact; `89/89` selected daily windows complete; unchanged partition reused through `14/14` hardlinks | no second snapshot, full-history/representative reconciliation, durable origin, or clean restore |
 | Accountability ledger | `126,760` | `13` Parquet files | clean real-only rebuild; full source/URL/lineage validation; `13/13` unchanged partitions reused; `26` blank legacy source IDs explicitly inferred from allowlisted BOE URLs | parliamentary-heavy mix; below `R2`; durable origin and clean restore open |
 | Actor mandates | `88,031` | `108` Parquet files | official origins, full URL coverage, identity states, `108/108` unchanged partitions reused | below `R1`; uneven jurisdiction mix; external identity precision/recall and durable restore open |
 
 Current truth:
 
 - registered real corpora: `6`;
-- real million-scale row lanes: `2`;
+- real million-scale row lanes: `3`;
 - promoted lanes: `0`;
 - candidate occurrences: `8,926` official historical elected outcomes; accepted nominal candidate corpus still `0` because official archive access is blocked;
-- BDNS: current durable acquisition and v5 artifact reconcile `100,000` official rows, `100` page captures, `100,000` immutable version sightings, exact official identity retention, and unchanged replay; the older `146,000` checkpoint has no compliant current root and does not replace this evidence;
+- BDNS: current partitioned durable acquisition and v6 artifact reconcile `1,360,382` official rows, `1,419` page captures, `1,360,382` immutable version sightings, exact official identity retention, and unchanged `14`-file replay; append-only expansion revalidated source totals and completed all `89/89` selected daily windows without retry or dead work;
 - accountability ledger: `126,760` real rows are recovered and validated after removing `10` fixture-derived money rows; the mix remains parliamentary-heavy and below `R2`;
 - documents: `21,398` real instances / `19,538` content hashes are inventoried; source provenance, extraction quality, and OCR coverage remain below gate;
 - corruption-risk publication: `0` promoted representative lanes and therefore no inferred high-risk public verdict is authorized.
@@ -206,7 +206,7 @@ Target: two weeks. Priority: `P0`.
 | --- | --- | --- | --- |
 | `W0-001` | Enforce official-real-only registry in local and CI readiness | none | disallowed evidence fails; six current corpora pass actual file and provenance audit |
 | `W0-002` | Remove obsolete capacity-only outputs, generators, recipes, and roadmap claims | `W0-001` | repository search and artifact inventory show no such output used for readiness |
-| `W0-003` | `DONE 2026-08-12`: regenerate BDNS semantic root from a fresh official acquisition | storage preflight | `100,000` rows; v5 manifest/full validation; exact source/amount/public-field balance; `1/1` unchanged partition hardlinked |
+| `W0-003` | `DONE 2026-08-12`: regenerate and scale BDNS semantic root from fresh official acquisition | storage preflight | `1,360,382` rows; v6 manifest/full validation; exact source/amount/public-field balance; `1/1` unchanged partition reused through `14/14` hardlinks; validator peak RSS `292.719 MB` via disk-backed exact uniqueness |
 | `W0-004` | Regenerate accountability-ledger root from current canonical evidence | BDNS optional; votes required | every ledger edge resolves; actor/issue/role unknowns explicit; full validation |
 | `W0-005` | Reconcile live document inventory to actual object/text files | none | instance/object/fetch/extract/OCR totals balance; missing objects classified |
 | `W0-006` | Repair the 350 vote rows without public URLs or document a checksum-backed official replacement | official source availability | `DONE 2026-08-12`: verified Congreso capture URL plus official/captured checksums; `0` unexplained missing URL rows |
@@ -294,7 +294,7 @@ Target: twelve weeks. Priority: `P0`.
 | ID | Task | Dependency | Exit evidence |
 | --- | --- | --- | --- |
 | `W5-001` | Expand PLACSP through complete bounded official archive cohorts | `W1` storage | gap-free period catalog, version/tombstone balance, one million real facts |
-| `W5-002` | Complete BDNS pagination and revision handling | `W0-003` | one million or full official universe; source and amount totals reconcile |
+| `W5-002` | `PARTIAL 2026-08-12`: complete BDNS pagination and revision handling | `W0-003` | selected-window pagination is complete at `89/89`; next: second snapshot/revisions, full historical cohorts, durable origin and clean restore |
 | `W5-003` | Add budget appropriations and execution | official source contract | budget version, unit, program, territory, and execution semantics preserved |
 | `W5-004` | Separate notice, award, modification, invoice, payment, and budget execution | `W5-001..003` | no award represented as payment |
 | `W5-005` | Resolve counterparties with reviewed identifiers and merge history | `W3-005..007` | entity precision/recall; official natural-person identifiers retained with provenance |

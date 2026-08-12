@@ -14,17 +14,17 @@
     "version_sightings_reconcile": true
   },
   "discovery": {
-    "max_pages_enqueued_per_partition": 100,
+    "max_pages_enqueued_per_partition": 400,
     "max_pages_per_partition": 400,
     "page_size": 1000,
-    "pages_enqueued": 1058,
+    "pages_enqueued": 1419,
     "partition_strategy": "bounded_daily_prefix_windows_descending",
     "partitions": 89,
     "selected_date_from": "2026-05-15",
     "selected_date_to": "2026-08-11",
-    "total_elements": 1000828,
+    "total_elements": 1360382,
     "total_pages": 1419,
-    "truncated_partitions": 3
+    "truncated_partitions": 0
   },
   "limitations": [
     "Official BDNS fields, including natural-person names and source-published identifiers, are retained exactly; source-side masking remains unchanged.",
@@ -33,11 +33,11 @@
   "limited_run": true,
   "money_bulk_run_id": 1,
   "observed": {
-    "bytes": 800650489,
-    "pages_fetched": 1058,
-    "peak_rss_mb": 45.391,
-    "records_loaded_distinct": 1000828,
-    "records_seen": 1000828
+    "bytes": 1080788680,
+    "pages_fetched": 1419,
+    "peak_rss_mb": 174.984,
+    "records_loaded_distinct": 1360382,
+    "records_seen": 1360382
   },
   "pipeline_id": "bdns-concessions-partitioned-real-s3-20260812",
   "promotion_gate_passed": false,
@@ -45,13 +45,13 @@
   "queue": {
     "active_workers": [],
     "attempt_status_counts": {
-      "succeeded": 1058
+      "succeeded": 1419
     },
-    "attempts_total": 1058,
+    "attempts_total": 1419,
     "dead_letter_rate": 0.0,
     "earliest_lease_expiry": null,
-    "generated_at": "2026-08-12T13:31:22+00:00",
-    "items_total": 1058,
+    "generated_at": "2026-08-12T14:06:33+00:00",
+    "items_total": 1419,
     "max_attempts_observed": 1,
     "oldest_pending_at": null,
     "overdue_leases_total": 0,
@@ -62,20 +62,20 @@
       "dead": 0,
       "leased": 0,
       "pending": 0,
-      "succeeded": 1058
+      "succeeded": 1419
     },
-    "terminal_total": 1058,
+    "terminal_total": 1419,
     "top_errors": [],
     "top_partitions": [
       {
         "partition_key": "date:2026-05-20",
         "state": "succeeded",
-        "total": 100
+        "total": 400
       },
       {
         "partition_key": "date:2026-06-05",
         "state": "succeeded",
-        "total": 100
+        "total": 158
       },
       {
         "partition_key": "date:2026-06-30",
@@ -121,16 +121,28 @@
     "unfinished_total": 0
   },
   "record_versions": {
-    "current_source_rows_for_snapshot": 1000828,
-    "distinct_source_records": 1000828,
-    "raw_page_lineage_rows": 1000828,
+    "current_source_rows_for_snapshot": 1360382,
+    "distinct_source_records": 1360382,
+    "raw_page_lineage_rows": 1360382,
     "raw_payload_duplicated": false,
     "records_with_prior_versions": 0,
-    "sightings_total": 1000828,
-    "versions_linked": 1000828
+    "sightings_total": 1360382,
+    "versions_linked": 1360382
   },
   "schema_version": "bdns_bulk_run_report_v1",
   "snapshot_date": "2026-08-12",
   "source_id": "bdns_api_subvenciones",
-  "status": "partial"
+  "status": "partial",
+  "worker": {
+    "claim_size": 16,
+    "failed_attempts": 0,
+    "failure_window_size": 20,
+    "processed": 201,
+    "request_interval_seconds": 0.5,
+    "stop_failure_rate": 0.5,
+    "stop_reason": "queue_drained",
+    "succeeded": 201,
+    "worker_id": "bdns-real-s3-expand",
+    "workers": 8
+  }
 }

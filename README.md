@@ -65,11 +65,11 @@ Estado de escala (`2026-08-12`): solo datos capturados de fuentes oficiales cuen
 - votos nominales: `1,809,222` filas / `8,373` shards; URL pública y source record `100%`; `102,172` apuntan a un endpoint oficial HTTP;
 - Eurostat: `1,755,809` observaciones / `37` Parquet; full validation y replay `26/26`;
 - PLACSP: `263,302` facts / `50` Parquet; `128,849/128,849` nombres e identificadores de contraparte publicados por la fuente se conservan exactamente; full validation y replay `50/50`;
-- BDNS: `100,000` facts / `1` Parquet; nombres `100,000/100,000` e identificadores source `39,539/39,539` retenidos exactamente; full validation y replay `1/1`;
-- accountability ledger: `126,770` facts / `15` Parquet; full validation y replay `15/15`;
+- BDNS: `1,360,382` facts / `14` Parquet; nombres `1,360,382/1,360,382` e identificadores source `163,270/163,270` retenidos exactamente; full validation y replay `1/1` partición mediante `14/14` hardlinks;
+- accountability ledger: `126,760` facts / `13` Parquet; full validation y replay `13/13`;
 - actores: `88,031` mandatos / `108` Parquet; full validation y replay `108/108`.
 
-Hay `2` lanes reales por encima de un millón, `6` corpora registrados y `0` lanes promocionadas. BDNS pasa `R1`, pero sigue en `100,000/1M`, sin historia representativa, segundo snapshot, origin público ni clean restore. Candidaturas nominales siguen en `0` por bloqueo del origen oficial. El inventario documental real contiene `21,398` instancias / `19,538` hashes. Estado honesto: `real_foundation_ready_scale_incomplete`. Ver `etl/data/published/scale-readiness-latest.json`, `docs/etl/real-corpus-registry.json` y `ROADMAP.md`.
+Hay `3` lanes reales por encima de un millón, `6` corpora registrados y `0` lanes promocionadas. BDNS pasa capacidad `R2` con un cohort reconciliado de `1,360,382` filas y `89/89` ventanas diarias completas; todavía faltan segundo snapshot, cobertura histórica/representativa, origin público y clean restore. Candidaturas nominales siguen en `0` por bloqueo del origen oficial. El inventario documental real contiene `21,398` instancias / `19,538` hashes. Estado honesto: `real_foundation_ready_scale_incomplete`. Ver `etl/data/published/scale-readiness-latest.json`, `docs/etl/real-corpus-registry.json` y `ROADMAP.md`.
 
 ## Fuente de verdad (código)
 

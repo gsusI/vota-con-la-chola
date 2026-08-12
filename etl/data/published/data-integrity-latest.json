@@ -1,7 +1,7 @@
 {
   "databases": [
     {
-      "bytes": 735555584,
+      "bytes": 735571968,
       "checks": {
         "exists": true,
         "foreign_keys": true,
@@ -70,7 +70,7 @@
     "root": "etl/data/derived/parl_initiative_doc_texts",
     "zero_byte_files": []
   },
-  "generated_at": "2026-08-12T12:41:12.745681Z",
+  "generated_at": "2026-08-12T14:25:53.139930Z",
   "policy": {
     "quarantine_directories_excluded": true,
     "stale_running_after_hours": 24

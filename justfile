@@ -298,6 +298,12 @@ bdns_bulk_pipeline_id := env_var_or_default("BDNS_BULK_PIPELINE_ID", "bdns-conce
 bdns_bulk_raw_root := env_var_or_default("BDNS_BULK_RAW_ROOT", "etl/data/raw/bdns/concessions-pages")
 bdns_bulk_page_size := env_var_or_default("BDNS_BULK_PAGE_SIZE", "1000")
 bdns_bulk_max_pages := env_var_or_default("BDNS_BULK_MAX_PAGES", "0")
+bdns_bulk_date_from := env_var_or_default("BDNS_BULK_DATE_FROM", "2026-01-01")
+bdns_bulk_date_to := env_var_or_default("BDNS_BULK_DATE_TO", snapshot_date)
+bdns_bulk_target_records := env_var_or_default("BDNS_BULK_TARGET_RECORDS", "1000000")
+bdns_bulk_max_partitions := env_var_or_default("BDNS_BULK_MAX_PARTITIONS", "366")
+bdns_bulk_max_pages_per_partition := env_var_or_default("BDNS_BULK_MAX_PAGES_PER_PARTITION", "100")
+bdns_bulk_expand_max_pages_per_partition := env_var_or_default("BDNS_BULK_EXPAND_MAX_PAGES_PER_PARTITION", "0")
 bdns_bulk_workers := env_var_or_default("BDNS_BULK_WORKERS", "2")
 bdns_bulk_claim_size := env_var_or_default("BDNS_BULK_CLAIM_SIZE", "4")
 bdns_bulk_request_interval := env_var_or_default("BDNS_BULK_REQUEST_INTERVAL", "2.0")
@@ -2055,6 +2061,12 @@ etl-scale-validate-semantic-indicators:
 
 etl-scale-bdns-bulk-enqueue:
   python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_enqueue_report}} enqueue --snapshot-date {{snapshot_date}} --page-size {{bdns_bulk_page_size}} --max-pages {{bdns_bulk_max_pages}}
+
+etl-scale-bdns-bulk-enqueue-daily:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_enqueue_report}} enqueue-daily --snapshot-date {{snapshot_date}} --date-from {{bdns_bulk_date_from}} --date-to {{bdns_bulk_date_to}} --page-size {{bdns_bulk_page_size}} --target-records {{bdns_bulk_target_records}} --max-partitions {{bdns_bulk_max_partitions}} --max-pages-per-partition {{bdns_bulk_max_pages_per_partition}} --request-interval-seconds {{bdns_bulk_request_interval}}
+
+etl-scale-bdns-bulk-expand-daily:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_enqueue_report}} expand-daily --max-pages-per-partition {{bdns_bulk_expand_max_pages_per_partition}} --request-interval-seconds {{bdns_bulk_request_interval}}
 
 etl-scale-bdns-bulk-work:
   python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} work --raw-root {{bdns_bulk_raw_root}} --workers {{bdns_bulk_workers}} --claim-size {{bdns_bulk_claim_size}} --request-interval-seconds {{bdns_bulk_request_interval}} --failure-window-size {{bdns_bulk_failure_window}}
