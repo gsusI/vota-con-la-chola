@@ -171,6 +171,64 @@ export const siteSections = [
     ],
   },
   {
+    id: "calendar",
+    href: "/calendario-electoral/",
+    navLabel: "Calendario",
+    title: "Calendario electoral",
+    question: "¿Cuándo son las próximas elecciones y con qué fuente?",
+    description:
+      "Ordena convocatorias oficiales, ciclos legales y fechas condicionales por ámbito y territorio.",
+    chips: ["Convocatorias", "Ciclos", "Territorio"],
+    tasks: [
+      {
+        title: "Ver próximas elecciones",
+        note: "Timeline de citas oficiales, fechas calculadas y ventanas condicionales.",
+        href: "/calendario-electoral/",
+        cta: "Abrir calendario",
+      },
+      {
+        title: "Auditar una elección",
+        note: "Entra en páginas dedicadas con candidaturas, programas y evidencia separada de claims.",
+        href: "/elecciones/",
+        cta: "Abrir elecciones",
+      },
+      {
+        title: "Revisar comportamiento electoral",
+        note: "Cruza cada elección con señales antes y después del voto.",
+        href: "/elections-behavior/",
+        cta: "Abrir análisis electoral",
+      },
+      {
+        title: "Auditar fuentes electorales",
+        note: "Consulta cobertura, bloqueos y fuentes del dominio electoral.",
+        href: "/explorer-sources/?domain=infoelectoral",
+        cta: "Ver fuentes",
+      },
+    ],
+    surfaces: [
+      {
+        title: "Calendario electoral",
+        href: "/calendario-electoral/",
+        note: "Próximas citas por ámbito, territorio, estado y fuente.",
+      },
+      {
+        title: "Páginas electorales",
+        href: "/elecciones/",
+        note: "Índice de elecciones con cortes dedicados de candidaturas, programas y medidas.",
+      },
+      {
+        title: "Elecciones y comportamiento",
+        href: "/elections-behavior/",
+        note: "Comparativas antes y después de cada elección por partido, tema y territorio.",
+      },
+      {
+        title: "Fuentes electorales",
+        href: "/explorer-sources/",
+        note: "Estado operativo de Infoelectoral, JEC y otros datos electorales.",
+      },
+    ],
+  },
+  {
     id: "outcomes",
     href: "/outcomes/",
     navLabel: "Resultados",
@@ -198,6 +256,12 @@ export const siteSections = [
         href: "/elections-behavior/",
         cta: "Abrir análisis electoral",
       },
+      {
+        title: "Auditar Andalucía 2026",
+        note: "Parte de candidaturas oficiales y huecos de evidencia antes de atribuir responsabilidad.",
+        href: "/elecciones/andalucia-2026/",
+        cta: "Abrir Andalucía 2026",
+      },
     ],
     surfaces: [
       {
@@ -214,6 +278,11 @@ export const siteSections = [
         title: "Elecciones y comportamiento",
         href: "/elections-behavior/",
         note: "Comparativas antes y después de cada elección por partido, tema y territorio.",
+      },
+      {
+        title: "Andalucía 2026",
+        href: "/elecciones/andalucia-2026/",
+        note: "Partidos, candidatos, actores enlazados y scrapers pendientes para culpa/mérito.",
       },
     ],
   },
@@ -396,6 +465,22 @@ export const datasetCatalog = [
     confidence: "Publicado",
   },
   {
+    id: "andalucia-2026-accountability",
+    sectionId: "outcomes",
+    label: "Andalucía 2026",
+    path: "/elecciones/andalucia-2026/data/accountability.json",
+    note: "Candidaturas proclamadas, actores enlazados y gaps de evidencia para responsabilidad.",
+    confidence: "Publicado",
+  },
+  {
+    id: "election-calendar",
+    sectionId: "calendar",
+    label: "Calendario electoral",
+    path: "/calendario-electoral/data/election-calendar.json",
+    note: "Convocatorias oficiales, ciclos legales y fechas condicionales.",
+    confidence: "Publicado",
+  },
+  {
     id: "sources-status",
     sectionId: "methods",
     label: "Estado de fuentes",
@@ -455,6 +540,12 @@ export const homeQuestions = [
     sectionId: "decisions",
     title: "¿Qué se votó y cómo se llegó ahí?",
     note: "Entra por evento, iniciativa o disciplina parlamentaria.",
+  },
+  {
+    id: "question-calendar",
+    sectionId: "calendar",
+    title: "¿Cuándo vuelve a votar cada ámbito?",
+    note: "Consulta citas oficiales, ciclos fijos y ventanas condicionales.",
   },
   {
     id: "question-outcomes",

@@ -1,0 +1,88 @@
+{
+  "schema_version": "andalucia_2026_program_sources_v1",
+  "election_id": "andalucia-2026-05-17",
+  "notes": [
+    "Seed de fuentes programaticas localizadas para el primer corte Andalucia 2026.",
+    "officiality=press_hosted_copy significa que el PDF contiene el programa electoral, pero la URL primaria localizada esta alojada por un medio; usar como evidencia declarativa provisional hasta encontrar URL directa del partido."
+  ],
+  "sources": [
+    {
+      "source_id": "andalucia_2026_programa_pp",
+      "party_key": "pp",
+      "party_acronym": "PP",
+      "party_name": "Partido Popular Andaluz",
+      "title": "PP-A programa electoral 2026",
+      "url": "https://juanmapresidente.es/wp-content/uploads/2026/04/PP-A-programa-2026.pdf",
+      "page_url": "https://juanmapresidente.es/",
+      "source_kind": "campaign_pdf",
+      "officiality": "campaign_domain",
+      "format": "pdf",
+      "verify_terms": ["programa electoral 2026", "juanma moreno", "andalucia"]
+    },
+    {
+      "source_id": "andalucia_2026_programa_psoe_a",
+      "party_key": "psoe-a",
+      "party_acronym": "PSOE-A",
+      "party_name": "Partido Socialista Obrero Español de Andalucía",
+      "title": "Plan Montero 2026 programa de gobierno",
+      "url": "https://fundacionandalucia-asd.com/wp-content/uploads/2026/05/PLAN-MONTERO-2026-PROGRAMA-DE-GOBIERNO.pdf",
+      "page_url": "https://fundacionandalucia-asd.com/2026/05/05/plan-de-gobierno-de-maria-jesus-montero-candidata-del-psoe-a-la-presidencia-de-la-junta-de-andalucia/",
+      "source_kind": "party_affiliated_pdf",
+      "officiality": "party_affiliated_domain",
+      "format": "pdf",
+      "verify_terms": ["plan montero 2026", "programa de gobierno", "psoe andalucia"]
+    },
+    {
+      "source_id": "andalucia_2026_programa_vox",
+      "party_key": "vox",
+      "party_acronym": "VOX",
+      "party_name": "VOX",
+      "title": "VOX programa electoral 17 de mayo de 2026",
+      "url": "https://www.eldebate.com/uploads/files/2026/05/05/Programa-completo-A5-WEB_B-1_compressed.pdf",
+      "page_url": "https://www.eldebate.com/espana/andalucia/20260510/este-programa-electoral-vox-elecciones-autonomicas-andalucia-este-2026-cns_414188.html",
+      "source_kind": "press_hosted_pdf_copy",
+      "officiality": "press_hosted_copy",
+      "format": "pdf",
+      "verify_terms": ["programa electoral", "17 de mayo de 2026", "vox"]
+    },
+    {
+      "source_id": "andalucia_2026_programa_pora",
+      "party_key": "pora",
+      "party_acronym": "PorA",
+      "party_name": "Por Andalucía",
+      "title": "Por Andalucía programa de gobierno 2026",
+      "url": "https://www.eldebate.com/uploads/files/2026/05/04/PROGRAMA_POR_ANDALUCIA.pdf",
+      "page_url": "https://www.eldebate.com/espana/andalucia/20260511/este-programa-electoral-andalucia-elecciones-autonomicas-este-2026-cns_413937.html",
+      "source_kind": "press_hosted_pdf_copy",
+      "officiality": "press_hosted_copy",
+      "format": "pdf",
+      "verify_terms": ["programa de gobierno", "hay esperanza", "andalucismo"]
+    },
+    {
+      "source_id": "andalucia_2026_programa_adelante_andalucia",
+      "party_key": "adelante-andalucia",
+      "party_acronym": "ADELANTE ANDALUCIA",
+      "party_name": "Adelante Andalucía",
+      "title": "Adelante Andalucía programa de gobierno 2026",
+      "url": "https://www.eldebate.com/uploads/files/2026/05/05/PROGRAMA-AA-2026-DEF.pdf",
+      "page_url": "https://www.eldebate.com/espana/andalucia/20260512/este-programa-electoral-adelante-andalucia-elecciones-autonomicas-este-2026_413963.html",
+      "source_kind": "press_hosted_pdf_copy",
+      "officiality": "press_hosted_copy",
+      "format": "pdf",
+      "verify_terms": ["adelante andalucia", "50 principales medidas", "programa de gobierno"]
+    },
+    {
+      "source_id": "andalucia_2026_programa_mj",
+      "party_key": "mundo-justo",
+      "party_acronym": "MUNDO+JUSTO",
+      "party_name": "Por Un Mundo Más Justo",
+      "title": "M+J Andalucía programa electoral 2026",
+      "url": "https://andalucia.porunmundomasjusto.es/assets/descargas/programa-mj-andalucia-2026.pdf",
+      "page_url": "https://www.porunmundomasjusto.es/sedes/andalucia/",
+      "source_kind": "party_pdf",
+      "officiality": "party_domain",
+      "format": "pdf",
+      "verify_terms": ["programa electoral", "compromiso de m+j", "andalucia tierra hermana"]
+    }
+  ]
+}

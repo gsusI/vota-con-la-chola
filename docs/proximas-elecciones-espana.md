@@ -1,27 +1,46 @@
-# Proximas elecciones en Espana (por nivel)
+# Próximas elecciones en España
 
-Fecha de referencia: **2026-02-12**
+Fecha de referencia: **2026-05-16**
 
-| Nivel | Eleccion | Proxima | Estado | Notas |
+## Timeline
+
+| Fecha | Ámbito | Elección | Territorio | Estado | Fuente |
+|---|---|---|---|---|---|
+| 2026-05-17 | Autonómico | Parlamento de Andalucía | Andalucía | convocada | oficial |
+| 2027-05-23 | Ciudades autónomas | Asambleas de Ceuta y Melilla | Ceuta / Melilla | ligado al ciclo local | ciclo legal |
+| 2027-05-23 | Entidades locales menores | EATIM y entidades locales menores | España | ligado al ciclo local | ciclo legal |
+| 2027-05-23 | Insular | Cabildos canarios y consells insulares | Canarias / Illes Balears | ligado al ciclo local | ciclo legal |
+| 2027-05-23 | Municipal | Ayuntamientos | España | ciclo fijo | ciclo legal |
+| 2027-05-23 | Territorios históricos | Juntas Generales de Álava, Bizkaia y Gipuzkoa | País Vasco | ligado al ciclo local | ciclo legal |
+| después de 2027-05-23 | Provincial | Diputaciones provinciales | Provincias de régimen común | elección indirecta | ciclo legal |
+| 2027-08-22 a 2027-09-19 | Estatal | Cortes Generales (Congreso y Senado) | España | fecha condicional | ciclo legal |
+| 2029 (fecha exacta no fijada) | Europeo | Parlamento Europeo | España | ciclo conocido, fecha no fijada | ciclo legal |
+
+## Sin fecha cerrada
+
+| Ámbito | Elección | Territorio | Estado | Notas |
 |---|---|---|---|---|
-| Europeo | Parlamento Europeo | 2029 | ciclo conocido, fecha no fijada | Las elecciones europeas son cada 5 anos. La fecha exacta en Espana se fija en la convocatoria oficial. |
-| Nacional | Cortes Generales (Congreso y Senado) | si legislatura completa: 2027-08-22 a 2027-09-19 | fecha condicional | La fecha puede cambiar si hay disolucion anticipada. La ventana mostrada asume legislatura completa desde 2023-07-23. |
-| Autonomico | Parlamentos de las comunidades autonomas | depende_de_cada_comunidad | sin fecha unica estatal | No existe una fecha unica para todas las autonomicas. Cada comunidad sigue su propio calendario y convocatorias. |
-| Local/Municipal | Ayuntamientos | 2027-05-23 | ciclo fijo | Cuarto domingo de mayo cada 4 anos. |
-| Insular | Cabildos (Canarias) y Consells (Baleares) | 2027-05-23 | ligado al ciclo local | Se celebran junto con el ciclo local. |
-| Ciudades autonomas | Asambleas de Ceuta y Melilla | 2027-05-23 | ligado al ciclo local | Se celebran junto con el ciclo local. |
-| Territorios historicos (Pais Vasco) | Juntas Generales (Alava, Bizkaia, Gipuzkoa) | 2027-05-23 | ligado al ciclo local | Eleccion directa habitualmente alineada con el ciclo local. |
-| Entidades locales menores | EATIM / entidades locales menores | 2027-05-23 | ligado al ciclo local | Generalmente alineadas con el ciclo local cuando aplica. |
-| Provincial | Diputaciones Provinciales | despues de 2027-05-23 | eleccion indirecta | Se constituyen en general de forma indirecta desde resultados municipales. |
+| Autonómico | Parlamentos de comunidades autónomas | Comunidades autónomas | sin fecha única estatal | Cada comunidad depende de su legislatura y de convocatorias oficiales. |
 
-## Fuentes
+## Fuentes scrapeadas
 
+- jec_andalucia_2026_calendario: ok, verificada - https://www.juntaelectoralcentral.es/cs/jec/documentos/Andalucia_2026_calendario.pdf
+
+## Fuentes metodológicas
+
+- https://infoelectoral.interior.gob.es/es/proceso-electoral/calendario-electoral/
 - https://infoelectoral.interior.gob.es/es/proceso-electoral/preguntas-frecuentes/tipos-de-elecciones/
-- https://infoelectoral.interior.gob.es/es/proceso-electoral/preguntas-frecuentes/tipos-de-elecciones/elecciones-al-parlamento-europeo/index.html
 - https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672
 - https://www.boe.es/legislacion/documentos/ConstitucionCASTELLANO.pdf
+- https://www.juntaelectoralcentral.es/cs/jec/documentos/Andalucia_2026_calendario.pdf
+
+## Estado operativo
+
+- Ahora: Primer corte público con ciclos legales y calendarios oficiales scrapeados.
+- Vamos: Ampliar manifest oficial por comunidad/organismo y sustituir filas condicionales cuando haya convocatoria.
+- Siguiente: Añadir más fuentes autonómicas con calendario publicado y registrar bloqueos si no exponen datos reutilizables.
 
 ## Aclaraciones
 
-- Las fechas nacionales y muchas autonomicas son legales/politicamente condicionales.
-- Este archivo es una instantanea calculada, no una convocatoria legal.
+- Las fechas estatales y autonómicas pueden cambiar por disolución o convocatoria anticipada.
+- Las filas de ciclo legal son calculadas; las filas oficiales indican fuente scrapeada.

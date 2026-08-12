@@ -1,0 +1,30 @@
+{
+  "actions": [
+    {
+      "action": "would_apply",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "reason": "safe_for_seed_promotion",
+      "review_id": "andalucia-2026-issue-review-draft-transparencia_corrupcion-001",
+      "topic_id": "transparencia_corrupcion",
+      "violations": []
+    }
+  ],
+  "allow_machine_drafts": false,
+  "applied_total": 1,
+  "apply_changed": true,
+  "blocked_unsafe_total": 0,
+  "drafts_total": 1,
+  "dry_run": false,
+  "existing_reviews_total": 9,
+  "generated_at": "2026-05-17T12:28:30Z",
+  "missing_review_ids": [],
+  "missing_review_ids_total": 0,
+  "schema_version": "andalucia_2026_issue_review_apply_plan_v1",
+  "selected_total": 1,
+  "selection_mode": "explicit_ids",
+  "skipped_duplicate_total": 0,
+  "skipped_unapproved_total": 0,
+  "source_schema_version": "andalucia_2026_issue_review_drafts_v1",
+  "status": "ready_to_apply",
+  "would_apply_total": 1
+}

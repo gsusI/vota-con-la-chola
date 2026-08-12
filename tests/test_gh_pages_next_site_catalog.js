@@ -15,11 +15,11 @@ async function loadCatalog() {
   return import(pathToFileURL(filePath).href);
 }
 
-test("site catalog exposes the five canonical public families", async () => {
+test("site catalog exposes the six canonical public families", async () => {
   const catalog = await loadCatalog();
   const ids = catalog.siteSections.map((section) => section.id);
 
-  assert.deepEqual(ids, ["topics", "actors", "decisions", "outcomes", "methods"]);
+  assert.deepEqual(ids, ["topics", "actors", "decisions", "calendar", "outcomes", "methods"]);
   for (const section of catalog.siteSections) {
     assert.match(section.href, /^\/[a-z-]+\/$/u);
     assert.ok(String(section.question || "").trim().length > 0);

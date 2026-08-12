@@ -1,0 +1,963 @@
+{
+  "review_policy": "Issue-level reviews may document direction, actor signals and remaining evidence gaps. They do not score merit, blame, causality, money execution, service outcomes or final citizen impact.",
+  "reviewed_at": "2026-05-16",
+  "reviews": [
+    {
+      "budget_execution_label": "El Presupuesto de Andaluc\u00eda 2026 contiene una partida candidata de 50.000 EUR para APOYO REDACCI\u00d3N LEY DE MONTES; los datasets oficiales de contratos menores 2024/2025 contienen dos adjudicaciones revisadas por 37.614 EUR y 36.449 EUR ligadas a tratamiento/depuraci\u00f3n de aguas. Esto documenta asignaci\u00f3n y adjudicaci\u00f3n, no entrega final ni outcome.",
+      "budget_execution_status": "budget_allocation_and_contract_award_linked_outcome_pending",
+      "budget_refs": [
+        {
+          "amount_eur": 50000,
+          "budget_item": "A TECNOLOG\u00cdAS Y SERVICIOS AGRARIOS S.A.,S.M.E.,M.P. (TRAGSATEC)",
+          "budget_project": "APOYO REDACCI\u00d3N LEY DE MONTES",
+          "evidence_excerpt": "Programa 44E Gesti\u00f3n forestal y biodiversidad; proyecto presupuestario APOYO REDACCI\u00d3N LEY DE MONTES; importe 50.000 EUR.",
+          "org_section": "CONSEJER\u00cdA DE SOSTENIBILIDAD Y MEDIO AMBIENTE",
+          "program_code": "44E",
+          "program_name": "GESTI\u00d3N FORESTAL Y BIODIVERSIDAD",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 10741",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        }
+      ],
+      "citizen_direction_label": "Cambio normativo documentado en montes y agua; impacto ciudadano pendiente de ejecucion y outcomes.",
+      "citizen_direction_status": "legal_direction_documented_outcome_pending",
+      "claim_status": "issue_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-25/PL-000010, debate final; votacion numero 12; total si 56; total no 50.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-12",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694.txt:1642",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694"
+        },
+        {
+          "evidence_excerpt": "Se modifican el articulo 67 y la disposicion adicional decimoctava ... canones autonomicos sobre el agua.",
+          "source_id": "boja-impact-review-disposition-2025-251-2-campo-agua-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2025.251.2::body::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00087-17435-01_00331032.pdf"
+        },
+        {
+          "evidence_excerpt": "La Ley 9/2010, de 30 de julio, de Aguas de Andalucia, se modifica en los siguientes terminos.",
+          "source_id": "boja-impact-review-disposition-2025-251-2-campo-agua-f02",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2025.251.2::body::2",
+          "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00087-17435-01_00331032.pdf"
+        }
+      ],
+      "execution_owner_label": "La Resoluci\u00f3n BOJA de 18 de diciembre de 2025 atribuye la gesti\u00f3n, control y autorizaci\u00f3n de pagos de ayudas a la Direcci\u00f3n General de Ayudas Directas y de Mercados, dentro de la Consejer\u00eda de Agricultura, Pesca, Agua y Desarrollo Rural.",
+      "execution_owner_status": "execution_owner_linked_budget_amount_pending",
+      "execution_refs": [
+        {
+          "evidence_excerpt": "La gestion y control de las ayudas, y la autorizacion de pagos de la ayuda financiera, es competencia de la Direccion General de Ayudas Directas y de Mercados.",
+          "source_id": "boja-fragment-disposition-2025-251-4-campo-agua-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2025.251.4::bodyNoHtml::gestion-control-ayudas",
+          "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00014-17395-01_00330992.pdf"
+        },
+        {
+          "evidence_excerpt": "Para el ejercicio 2026 en el ambito de la Comunidad Autonoma de Andalucia, la convocatoria para la presentacion de las solicitudes de pago de la ayuda financiera comunitaria.",
+          "source_id": "boja-fragment-disposition-2025-251-4-campo-agua-f02",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2025.251.4::bodyNoHtml::convocatoria-2026",
+          "source_url": "https://juntadeandalucia.es/eboja/2025/251/BOJA25-251-00014-17395-01_00330992.pdf"
+        },
+        {
+          "evidence_excerpt": "CONTR 2025 0000594840; contrato menor de 36.449 EUR para rehabilitacion integral del sistema de depuracion de aguas del Hotel Humaina; Agencia de Medio Ambiente y Agua de Andalucia; 20/10/2025.",
+          "source_id": "junta_contratos_menores_2025",
+          "source_kind": "official_contract_award_open_data",
+          "source_locator": "menores_2025_v1_20260122.json:fila 4441",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/00510697-b39d-4e19-b142-14565baafabd/resource/33d80321-3ffc-4b3c-8b27-5e073bab8419/download/menores_2025_v1_20260122.json"
+        },
+        {
+          "evidence_excerpt": "CONTR 2024 0001075987; contrato menor de 37.614 EUR para sustitucion y mejora del sistema de tratamiento de aguas residuales del Refugio Ubeire en Fi\u00f1ana; Direccion General de Espacios Naturales Protegidos; 2024-11-12.",
+          "source_id": "junta_contratos_menores_2024",
+          "source_kind": "official_contract_award_open_data",
+          "source_locator": "menores_2024_v1_20250420.json:fila 100530",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/cdf0e880-0a19-46cf-a09e-856328d85700/resource/56a49a80-5d11-4559-b028-483e2eefa68a/download/menores_2024_v1_20250420.json"
+        }
+      ],
+      "interpretation_status": "legal_direction_actor_execution_owner_and_budget_allocation_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "budget_allocation_not_execution",
+        "contract_award_not_final_delivery",
+        "contract_award_not_outcome",
+        "service_or_environment_outcomes_not_linked",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "responsible_actor_label": "Mayor\u00eda parlamentaria observada en votos revisados, publicador oficial BOJA, \u00f3rgano gestor observado para una convocatoria de ayudas del bloque, una partida presupuestaria candidata de montes y dos contratos menores oficiales sobre depuraci\u00f3n/tratamiento de aguas; faltan entrega final, beneficiarios y resultado.",
+      "responsible_actor_status": "legislative_publisher_and_execution_actor_observed_budget_pending",
+      "review_confidence": "medium",
+      "review_id": "andalucia-2026-issue-review-campo-agua-001",
+      "review_status": "reviewed_issue_direction_actor_execution_owner_budget_and_contract_partial",
+      "review_summary": "Campo y agua ya tiene programa, votos revisados del Proyecto de Ley de Montes, cambios BOJA revisados sobre la Ley 9/2010 de Aguas de Andalucia/canones autonomicos, claims observados por posicion de partido, un \u00f3rgano ejecutor observado en BOJA para ayudas agrarias 2026, una partida presupuestaria candidata para apoyo a la redaccion de la Ley de Montes y dos contratos menores oficiales ligados a tratamiento/depuracion de aguas. La direccion legal, el ejecutor administrativo parcial, la asignacion presupuestaria candidata y las adjudicaciones contractuales estan documentadas, pero no hay aun entrega final, beneficiarios, servicio ambiental ni outcome ciudadano.",
+      "reviewed_at": "2026-05-16",
+      "reviewed_by": "repo_seed",
+      "topic_id": "campo_agua",
+      "topic_label": "Campo y agua"
+    },
+    {
+      "budget_execution_label": "El Presupuesto de Andaluc\u00eda 2026 incluye partidas revisadas para obras del Museo de Bellas Artes de C\u00f3rdoba y subvenciones a archivos/bibliotecas municipales; los dumps oficiales de contratos menores 2024/2025 incluyen adjudicaciones revisadas para patrimonio hist\u00f3rico/documental. Esto documenta asignaci\u00f3n y adjudicaci\u00f3n, no entrega final ni outcome.",
+      "budget_execution_status": "budget_allocation_and_contract_award_linked_outcome_pending",
+      "budget_refs": [
+        {
+          "amount_eur": 100000,
+          "budget_item": "EDIFICIOS Y OTRAS CONSTRUCCIONES",
+          "budget_project": "OBRAS MUSEO DE BELLAS ARTES DE C\u00d3RDOBA",
+          "evidence_excerpt": "Programa 45E Conservaci\u00f3n, infraestructuras culturales, archivos y bibliotecas; proyecto OBRAS MUSEO DE BELLAS ARTES DE C\u00d3RDOBA; importe 100.000 EUR.",
+          "org_section": "CONSEJER\u00cdA DE CULTURA Y DEPORTE",
+          "program_code": "45E",
+          "program_name": "CONSERVACI\u00d3N, INFRAEST. CULT, ARCHIVOS Y BIBLIOTEC",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 9627",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        },
+        {
+          "amount_eur": 225000,
+          "budget_item": "SUBVENCIONES PARA ARCHIVOS Y BIBLIOTECAS MUNICIPALES",
+          "budget_project": "SUBVENCIONES PARA ARCHIVOS Y BIBLIOTECAS MUNICIPALES",
+          "evidence_excerpt": "Programa 45E Conservaci\u00f3n, infraestructuras culturales, archivos y bibliotecas; subvenciones para archivos y bibliotecas municipales; importe 225.000 EUR.",
+          "org_section": "CONSEJER\u00cdA DE CULTURA Y DEPORTE",
+          "program_code": "45E",
+          "program_name": "CONSERVACI\u00d3N, INFRAEST. CULT, ARCHIVOS Y BIBLIOTEC",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 9645",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        }
+      ],
+      "citizen_direction_label": "Resultado legislativo documentado para el Proyecto de Ley de Patrimonio Cultural de Andaluc\u00eda y publicaci\u00f3n oficial en BOJA como Ley 4/2026; adem\u00e1s hay presupuesto, contratos e indicadores oficiales candidatos. Impacto cultural pendiente de ejecuci\u00f3n final y outcomes observados.",
+      "citizen_direction_status": "legal_direction_documented_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "Ley 4/2026, de 24 de marzo, de Patrimonio Cultural de Andalucia.",
+          "source_id": "boja-disposition-2026-65-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.65.1::body::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/65/BOJA26-065-00093-4443-01_00335678.pdf"
+        },
+        {
+          "evidence_excerpt": "12-25/PL-000011, debate final; votacion numero 5; total si 58; total no 50.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-5",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495.txt:608",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "12-25/PL-000011, vote 2; total si 36; total no 72.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-2",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495.txt:189",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "12-25/PL-000011, vote 3; total si 36; total no 72.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-3",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495.txt:339",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "12-25/PL-000011, vote 4; total si 14; total no 94.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-4",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495.txt:489",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        }
+      ],
+      "execution_owner_label": "Las filas oficiales revisadas sit\u00faan presupuesto 2026 en la Consejer\u00eda de Cultura y Deporte y contratos menores 2024/2025 en la Direcci\u00f3n General de Patrimonio Hist\u00f3rico, el Instituto Andaluz del Patrimonio Hist\u00f3rico y servicios territoriales; falta expediente final de ejecuci\u00f3n.",
+      "execution_owner_status": "execution_owner_partially_observed",
+      "execution_refs": [
+        {
+          "evidence_excerpt": "CONTR 2024 0001008630; contrato menor de 14.760 EUR para organizaci\u00f3n y descripci\u00f3n del archivo de oficina del Servicio de Protecci\u00f3n del Patrimonio Hist\u00f3rico; Direcci\u00f3n General de Patrimonio Hist\u00f3rico; 2024-11-15.",
+          "source_id": "junta_contratos_menores_2024",
+          "source_kind": "official_contract_award_open_data",
+          "source_locator": "menores_2024_v1_20250420.json:fila 31655",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/cdf0e880-0a19-46cf-a09e-856328d85700/resource/56a49a80-5d11-4559-b028-483e2eefa68a/download/menores_2024_v1_20250420.json"
+        },
+        {
+          "evidence_excerpt": "CONTR 2025 0000168035; contrato menor de 6.000 EUR para proyecto expositivo sobre conservaci\u00f3n del patrimonio mueble; Instituto Andaluz del Patrimonio Hist\u00f3rico; 21/02/2025.",
+          "source_id": "junta_contratos_menores_2025",
+          "source_kind": "official_contract_award_open_data",
+          "source_locator": "menores_2025_v1_20260122.json:fila 217",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/00510697-b39d-4e19-b142-14565baafabd/resource/33d80321-3ffc-4b3c-8b27-5e073bab8419/download/menores_2025_v1_20260122.json"
+        }
+      ],
+      "interpretation_status": "legislative_vote_boja_actor_budget_contract_and_indicator_targets_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "boja_publication_not_execution",
+        "budget_allocation_not_execution",
+        "contract_award_not_final_delivery",
+        "indicator_target_not_observed_outcome",
+        "service_or_cultural_outcomes_not_linked",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "responsible_actor_label": "Las posiciones de partido y candidatos est\u00e1n observadas en 4 votaciones oficiales del Pleno sobre PL-000011; adem\u00e1s aparecen la Consejer\u00eda de Cultura y Deporte, la Direcci\u00f3n General de Patrimonio Hist\u00f3rico y el Instituto Andaluz del Patrimonio Hist\u00f3rico en filas oficiales de presupuesto/contratos. Esto documenta se\u00f1al legislativa y administrativa parcial, no m\u00e9rito ni outcome.",
+      "responsible_actor_status": "legislative_publisher_and_execution_actor_observed_budget_pending",
+      "review_confidence": "medium",
+      "review_id": "andalucia-2026-issue-review-cultura-patrimonio-001",
+      "review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_budget_and_contract_partial",
+      "review_summary": "Cultura y patrimonio tiene programas declarados, 4 resultados oficiales revisados sobre PL-000011, 1 publicaci\u00f3n BOJA revisada de la Ley 4/2026, 32 claims observados de responsabilidad legislativa, 2 partidas presupuestarias oficiales revisadas, 2 contratos menores oficiales revisados y 2 indicadores presupuestarios revisados como objetivos/previsi\u00f3n. La aprobaci\u00f3n final, la publicaci\u00f3n legal, las posiciones de actor y algunas se\u00f1ales administrativas quedan documentadas; faltan expediente de ejecuci\u00f3n final, beneficiarios, outcomes culturales observados y cualquier scoring de m\u00e9rito o culpa.",
+      "reviewed_at": "2026-05-16",
+      "reviewed_by": "repo_seed",
+      "topic_id": "cultura_patrimonio",
+      "topic_label": "Cultura y patrimonio"
+    },
+    {
+      "budget_execution_label": "BOJA publica cuantias maximas/creditos para ayudas por borrascas: 75.000.000 EUR ganaderia extensiva, 500.000.000 EUR explotaciones agricolas en zonas inundadas, 110.000.000 EUR explotaciones agricolas por vientos/inundaciones fuera de la zona delimitada, y 50.000.000 EUR para mantenimiento de actividad y empleo. Esto documenta techo/convocatoria presupuestaria, no pago ejecutado ni beneficiario final.",
+      "budget_execution_status": "budget_allocation_linked_execution_pending",
+      "budget_refs": [
+        {
+          "amount_eur": 500000000,
+          "budget_item": "G/71B/47002/00 BOR0000001",
+          "budget_project": "Ayudas directas indemnizatorias a explotaciones agricolas en zonas gravemente afectadas por inundaciones",
+          "evidence_excerpt": "Partida 1200010000 G/71B/47002/00 BOR0000001; anualidad 2026; importe 500.000.000 euros.",
+          "org_section": "Consejeria de Agricultura, Pesca, Agua y Desarrollo Rural",
+          "program_code": "71B",
+          "program_name": "Agricultura y ganaderia",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "boja-disposition-2026-206101-2",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.206101.2::body::financiacion",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/206101/BOJA26-206101-00025-4331-01_00335566.pdf"
+        },
+        {
+          "amount_eur": 110000000,
+          "budget_item": "G/71B/47003/00 BOR0000001",
+          "budget_project": "Ayudas directas indemnizatorias a explotaciones agricolas por vientos e inundaciones fuera de la zona delimitada",
+          "evidence_excerpt": "Partida 1200010000 G/71B/47003/00 BOR0000001; anualidad 2026; importe 110.000.000 euros.",
+          "org_section": "Consejeria de Agricultura, Pesca, Agua y Desarrollo Rural",
+          "program_code": "71B",
+          "program_name": "Agricultura y ganaderia",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "boja-disposition-2026-206101-3",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.206101.3::body::financiacion",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/206101/BOJA26-206101-00045-4333-01_00335568.pdf"
+        },
+        {
+          "amount_eur": 75000000,
+          "budget_item": "G/71B/47001/00 BOR0000001",
+          "budget_project": "Ayudas directas indemnizatorias a explotaciones ganaderas extensivas afectadas por borrascas",
+          "evidence_excerpt": "Partida 1200010000 G/71B/47001/00 BOR0000001; anualidad 2026; importe 75.000.000 euros.",
+          "org_section": "Consejeria de Agricultura, Pesca, Agua y Desarrollo Rural",
+          "program_code": "71B",
+          "program_name": "Agricultura y ganaderia",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "boja-disposition-2026-206101-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.206101.1::body::financiacion",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/206101/BOJA26-206101-00025-4330-01_00335565.pdf"
+        },
+        {
+          "amount_eur": 50000000,
+          "budget_item": "G/72C/47007/00 BOR000001",
+          "budget_project": "Ayudas para mantenimiento de actividad y empleo en zonas afectadas por danos meteorologicos",
+          "evidence_excerpt": "Importe maximo total 50.000.000 euros; linea 1 con partida 1400010409 G/72C/47007/00 BOR000001.",
+          "org_section": "Consejeria de Empleo, Empresa y Trabajo Autonomo",
+          "program_code": "72C",
+          "program_name": "Trabajo autonomo y economia social",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "boja-disposition-2026-206701-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.206701.1::body::financiacion",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/206701/BOJA26-206701-00076-4810-01_00336046.pdf"
+        }
+      ],
+      "citizen_direction_label": "Resultado legislativo documentado para el Decreto-ley 1/2026 de apoyo fiscal por borrascas: publicacion BOJA, convalidacion, modificacion posterior y ordenes de ayudas observadas; pagos, beneficiarios finales e impacto pendientes.",
+      "citizen_direction_status": "legal_direction_documented_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-26/DL-000001, convalidacion o derogacion del Decreto-ley 1/2026; votacion numero 6; total si 72; total no 0.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-6",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495.txt:752",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "12-26/DL-000001, convalidacion o derogacion del Decreto-ley 1/2026; votacion numero 7; total si 36; total no 72.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-7",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495.txt:901",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "Decreto-ley 1/2026 adopta medidas urgentes de apoyo fiscal por danos producidos por borrascas.",
+          "source_id": "boja-impact-review-disposition-2026-203802-1-fiscalidad-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.203802.1::body::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/203802/BOJA26-203802-00019-2764-01_00333986.pdf"
+        },
+        {
+          "evidence_excerpt": "BOJA publica el acuerdo de convalidacion del Decreto-ley 1/2026.",
+          "source_id": "boja-impact-review-disposition-2026-56-1-fiscalidad-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.56.1::summaryNoHtml::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/56/BOJA26-056-00001-3889-01_00335111.pdf"
+        },
+        {
+          "evidence_excerpt": "Decreto-ley 4/2026 modifica el Decreto-ley 1/2026.",
+          "source_id": "boja-impact-review-disposition-2026-74-1-fiscalidad-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.74.1::summaryNoHtml::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/74/BOJA26-074-00004-5173-01_00336410.pdf"
+        },
+        {
+          "evidence_excerpt": "BOJA publica el acuerdo de convalidacion del Decreto-ley 4/2026.",
+          "source_id": "boja-impact-review-disposition-2026-86-3-fiscalidad-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.86.3::summaryNoHtml::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/86/BOJA26-086-00001-5967-01_00337203.pdf"
+        }
+      ],
+      "execution_owner_label": "BOJA identifica organos ejecutores parciales para la respuesta por borrascas: Direccion General de la Produccion Agricola y Ganadera, Direccion General de Pesca, Acuicultura y Economia Azul, Consejeria de Empleo, Empresa y Trabajo Autonomo, y Direccion General de Emergencias, Proteccion Civil y Lucha contra Incendios Forestales.",
+      "execution_owner_status": "execution_owner_partially_observed",
+      "execution_refs": [
+        {
+          "evidence_excerpt": "Vista la propuesta de la Direccion General de la Produccion Agricola y Ganadera de fecha 27 de marzo de 2026; se faculta a su titular para instrucciones y medidas de desarrollo y ejecucion.",
+          "source_id": "boja-disposition-2026-206101-2",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.206101.2::body::direccion-general",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/206101/BOJA26-206101-00025-4331-01_00335566.pdf"
+        },
+        {
+          "evidence_excerpt": "Vista la propuesta de la Direccion General de Pesca, Acuicultura y Economia Azul de fecha 23 de marzo de 2026; se aprueba el regimen de ayudas directas.",
+          "source_id": "boja-disposition-2026-205801-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.205801.1::body::direccion-general",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/205801/BOJA26-205801-00037-4147-01_00335369.pdf"
+        },
+        {
+          "evidence_excerpt": "Orden de 9 de abril de 2026 de la Consejeria de Empleo, Empresa y Trabajo Autonomo para ayudas de mantenimiento de actividad y empleo en zonas afectadas.",
+          "source_id": "boja-disposition-2026-206701-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.206701.1::body::consejeria-empleo",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/206701/BOJA26-206701-00076-4810-01_00336046.pdf"
+        },
+        {
+          "evidence_excerpt": "La Direccion General de Emergencias, Proteccion Civil y Lucha contra Incendios Forestales elaboro el informe de gestion de la emergencia con cuantias maximas por municipio y entidad local autonoma.",
+          "source_id": "boja-disposition-2026-64-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.64.1::body::direccion-general-emergencias",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/64/BOJA26-064-00016-4421-01_00335656.pdf"
+        }
+      ],
+      "interpretation_status": "decree_law_publication_validation_vote_actor_execution_owner_and_aid_ceiling_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_boja_execution_and_outcomes",
+      "open_limitations": [
+        "legal_publication_and_validation_not_execution",
+        "aid_ceiling_not_executed_payment",
+        "beneficiaries_not_linked",
+        "storm_damage_outcomes_not_linked",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "responsible_actor_label": "Las posiciones de partido y candidatos estan observadas en 2 votaciones oficiales del Pleno sobre DL-000001; BOJA documenta publicador oficial, organos de Agricultura/Pesca/Empleo/Emergencias y cuantias maximas de ayuda, pero aun no pagos finales ni resultado ciudadano.",
+      "responsible_actor_status": "legislative_publisher_and_execution_actor_observed_budget_pending",
+      "review_confidence": "medium",
+      "review_id": "andalucia-2026-issue-review-fiscalidad-001",
+      "review_status": "reviewed_issue_direction_actor_execution_owner_and_budget_allocation_partial",
+      "review_summary": "Fiscalidad tiene programas declarados, 2 resultados oficiales revisados sobre DL-000001, publicacion BOJA revisada del Decreto-ley 1/2026, convalidacion BOJA, modificacion posterior por Decreto-ley 4/2026, organos ejecutores parciales observados y cuatro cuantias maximas/creditos de ayuda por borrascas. La publicacion legal, convalidacion, posiciones de actor, organos parciales y techo presupuestario quedan documentados; faltan pagos ejecutados, beneficiarios finales, outcomes por danos de borrascas y cualquier scoring de merito o culpa.",
+      "reviewed_at": "2026-05-16",
+      "reviewed_by": "repo_seed",
+      "topic_id": "fiscalidad",
+      "topic_label": "Fiscalidad"
+    },
+    {
+      "budget_execution_label": "El Presupuesto de Andalucia 2026 incluye partidas revisadas de 1.295.724 EUR para cambio climatico y calidad del aire y 4.266.816 EUR para mejora de calidad del aire y reduccion del ruido. Esto documenta asignacion presupuestaria, no pago ejecutado, expediente final ni outcome ambiental.",
+      "budget_execution_status": "budget_allocation_linked_execution_pending",
+      "budget_refs": [
+        {
+          "amount_eur": 1295724,
+          "budget_item": "OTRO INMOVILIZADO INMATERIAL",
+          "budget_project": "CAMBIO CLIM\u00c1TICO Y CALIDAD DEL AIRE",
+          "evidence_excerpt": "Programa 44B Prevenci\u00f3n y calidad ambiental; proyecto CAMBIO CLIM\u00c1TICO Y CALIDAD DEL AIRE; importe 1.295.724 EUR.",
+          "org_section": "CONSEJER\u00cdA DE SOSTENIBILIDAD Y MEDIO AMBIENTE",
+          "program_code": "44B",
+          "program_name": "PREVENCI\u00d3N Y CALIDAD AMBIENTAL",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 10659",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        },
+        {
+          "amount_eur": 4266816,
+          "budget_item": "OTRO INMOVILIZADO INMATERIAL",
+          "budget_project": "MEDIDAS LA MEJORA DE LA CALIDAD DEL AIRE Y LA REDUCCI\u00d3N DEL RUIDO",
+          "evidence_excerpt": "Programa 44B Prevenci\u00f3n y calidad ambiental; proyecto MEDIDAS LA MEJORA DE LA CALIDAD DEL AIRE Y LA REDUCCI\u00d3N DEL RUIDO; importe 4.266.816 EUR.",
+          "org_section": "CONSEJER\u00cdA DE SOSTENIBILIDAD Y MEDIO AMBIENTE",
+          "program_code": "44B",
+          "program_name": "PREVENCI\u00d3N Y CALIDAD AMBIENTAL",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 11094",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        }
+      ],
+      "citizen_direction_label": "Resultado legislativo documentado para el Proyecto de Ley para la Gestion Ambiental de Andalucia y publicacion oficial en BOJA como Ley 2/2026. La norma declara objetivos de proteccion ambiental, sostenibilidad, evaluacion/prevencion ambiental y participacion, pero quedan pendientes ejecucion, expedientes concretos, efectos ambientales y outcomes observados.",
+      "citizen_direction_status": "legal_direction_documented_outcome_pending",
+      "claim_status": "issue_vote_boja_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-25/PL-000009, debate final del Proyecto de Ley para la Gestion Ambiental de Andalucia; votacion numero 6; total si 56; total no 50.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-6",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694.txt:755",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694"
+        },
+        {
+          "evidence_excerpt": "12-25/PL-000009, votacion numero 1; total si 13; total no 93.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-1",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694.txt:125",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694"
+        },
+        {
+          "evidence_excerpt": "Ley 2/2026 para la Gestion Ambiental de Andalucia establece los principios y fines de la politica ambiental y el marco juridico de gestion ambiental.",
+          "source_id": "boja-impact-review-disposition-2026-55-1-energia-clima-f02",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.55.1::body::2",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/55/BOJA26-055-00151-3749-01_00334970.pdf"
+        }
+      ],
+      "execution_owner_label": "La Ley 2/2026 identifica ejecucion administrativa parcial: Consejeria competente en materia de medio ambiente para autorizaciones/comprobaciones, calidad del aire, inspeccion y potestad sancionadora en varios instrumentos; y ayuntamientos para licencia ambiental, inspeccion y sancion de actuaciones sometidas a licencia/declaracion responsable. Falta enlazar expedientes concretos.",
+      "execution_owner_status": "execution_owner_partially_observed",
+      "execution_refs": [
+        {
+          "evidence_excerpt": "Corresponde a la Consejeria competente en materia de medio ambiente la realizacion de inventarios de emisiones, planificacion, seguimiento, vigilancia, control, inspeccion y potestad sancionadora en calidad del aire.",
+          "source_id": "boja-disposition-2026-55-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.55.1::body::articulo-110-competencias",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/55/BOJA26-055-00151-3749-01_00334970.pdf"
+        },
+        {
+          "evidence_excerpt": "Corresponde a los ayuntamientos la tramitacion y resolucion de procedimientos de licencia ambiental y la vigilancia, control, inspeccion y potestad sancionadora de actuaciones sometidas a dicho instrumento.",
+          "source_id": "boja-disposition-2026-55-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.55.1::body::articulo-91-competencias",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/55/BOJA26-055-00151-3749-01_00334970.pdf"
+        }
+      ],
+      "interpretation_status": "legislative_vote_boja_actor_execution_owner_budget_allocation_and_indicator_targets_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_budget_and_outcomes",
+      "open_limitations": [
+        "boja_publication_not_execution",
+        "execution_owner_partial_not_case_file",
+        "budget_allocation_not_execution",
+        "indicator_target_not_observed_outcome",
+        "environmental_permit_effects_not_linked",
+        "environmental_outcomes_not_linked",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "responsible_actor_label": "Las posiciones de partido y candidatos estan observadas en 2 votaciones oficiales del Pleno sobre PL-000009; BOJA documenta publicador oficial de la Ley 2/2026 y marco competencial ambiental. La ley identifica organos competentes parciales para autorizaciones, inspeccion, calidad del aire y licencias; el Presupuesto 2026 enlaza partidas de calidad del aire y clima, pero aun no expedientes resueltos, dinero ejecutado ni resultado ciudadano.",
+      "responsible_actor_status": "legislative_and_publisher_actor_observed_execution_owner_pending",
+      "review_confidence": "medium",
+      "review_id": "andalucia-2026-issue-review-energia-clima-001",
+      "review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_and_budget_allocation_partial",
+      "review_summary": "Energia y clima tiene programas declarados, 2 resultados oficiales revisados sobre PL-000009, 1 publicacion BOJA revisada de la Ley 2/2026, organos ejecutores parciales observados, 10 claims observados de responsabilidad legislativa, 2 partidas presupuestarias oficiales revisadas y 2 indicadores presupuestarios revisados como objetivos/prevision. La aprobacion final, la publicacion legal, la direccion normativa ambiental, las posiciones de actor, organos competentes y asignacion presupuestaria quedan documentados; faltan expedientes ambientales resueltos, presupuesto ejecutado, outcomes ambientales observados y cualquier scoring de merito o culpa.",
+      "reviewed_at": "2026-05-16",
+      "reviewed_by": "repo_seed",
+      "topic_id": "energia_clima",
+      "topic_label": "Energia y clima"
+    },
+    {
+      "budget_execution_label": "El Presupuesto de Andalucia 2026 incluye partidas revisadas de 191.560.745 EUR para ajustes de financiacion de universidades publicas andaluzas y 2.000.000 EUR para compensacion de becas ministeriales. Esto documenta asignacion presupuestaria, no pago ejecutado, aplicacion universitaria final ni outcome estudiantil.",
+      "budget_execution_status": "budget_allocation_linked_execution_pending",
+      "budget_refs": [
+        {
+          "amount_eur": 191560745,
+          "budget_item": "AJUSTES FINANCIACI\u00d3N UNIVERSIDADES P\u00daBLICAS ANDALUZAS",
+          "evidence_excerpt": "Programa 42J Universidades; partida AJUSTES FINANCIACI\u00d3N UNIVERSIDADES P\u00daBLICAS ANDALUZAS; importe 191.560.745 EUR.",
+          "org_section": "C. UNIVERSIDAD, INVESTIGACI\u00d3N E INNOVACI\u00d3N",
+          "program_code": "42J",
+          "program_name": "UNIVERSIDADES",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 6805",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        },
+        {
+          "amount_eur": 2000000,
+          "budget_item": "FINANCIACI\u00d3N M.U. COMPENSACI\u00d3N BECAS MINISTERIO",
+          "evidence_excerpt": "Programa 42J Universidades; partida FINANCIACI\u00d3N M.U. COMPENSACI\u00d3N BECAS MINISTERIO; importe 2.000.000 EUR.",
+          "org_section": "C. UNIVERSIDAD, INVESTIGACI\u00d3N E INNOVACI\u00d3N",
+          "program_code": "42J",
+          "program_name": "UNIVERSIDADES",
+          "review_status": "budget_allocation_candidate_reviewed_execution_pending",
+          "source_id": "junta_presupuesto_2026_partidas_gastos",
+          "source_kind": "official_budget_open_data",
+          "source_locator": "partidas-de-gastos.xlsx:fila 6811",
+          "source_url": "https://www.juntadeandalucia.es/datosabiertos/portal/dataset/171ed75b-9f2c-4525-910a-c37397da4ce8/resource/50eb97e4-0da7-4f61-a426-61891fd81fde/download/partidas-de-gastos.xlsx"
+        }
+      ],
+      "citizen_direction_label": "Resultado legislativo documentado para el Proyecto de Ley Universitaria para Andalucia y publicacion oficial en BOJA como Ley 1/2026. La norma regula sistema universitario, derechos del estudiantado, coordinacion universitaria, financiacion y gobernanza, pero quedan pendientes ejecucion, financiacion efectiva, aplicacion por universidades y outcomes observados.",
+      "citizen_direction_status": "legal_direction_documented_outcome_pending",
+      "claim_status": "issue_vote_boja_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-25/PL-000007, debate final del Proyecto de Ley Universitaria para Andalucia; votacion numero 4; total si 58; total no 47.",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-4",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "vote_text/parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414.txt:463",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Ley 1/2026, de 20 de febrero, Universitaria para Andalucia.",
+          "source_id": "boja-impact-review-disposition-2026-45-1-educacion-f01",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.45.1::body::1",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/45/BOJA26-045-00092-3059-01_00334281.pdf"
+        }
+      ],
+      "execution_owner_label": "La Ley 1/2026 identifica ejecucion administrativa parcial: Consejeria de Universidad, Investigacion e Innovacion para las competencias de ensenanza universitaria; Consejeria competente en universidades para coordinacion, inspeccion y sanciones graves o muy graves; Secretaria General competente para sanciones leves. Falta enlazar actos de desarrollo, financiacion o expedientes concretos.",
+      "execution_owner_status": "execution_owner_partially_observed",
+      "execution_refs": [
+        {
+          "evidence_excerpt": "Corresponde a la Consejeria de Universidad, Investigacion e Innovacion la gestion de las competencias que, en materia de ensenanza universitaria, corresponden a la Comunidad Autonoma de Andalucia.",
+          "source_id": "boja-disposition-2026-45-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.45.1::body::decreto-6-2024-competencias",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/45/BOJA26-045-00092-3059-01_00334281.pdf"
+        },
+        {
+          "evidence_excerpt": "La Consejeria competente en materia de universidades realizara las actividades de inspeccion que conciernan al ejercicio de las competencias autonomicas sobre universidades.",
+          "source_id": "boja-disposition-2026-45-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.45.1::body::articulo-130-inspeccion",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/45/BOJA26-045-00092-3059-01_00334281.pdf"
+        },
+        {
+          "evidence_excerpt": "La competencia para imponer sanciones corresponde a la persona titular de la Consejeria competente en universidades para infracciones graves o muy graves y a la Secretaria General competente para infracciones leves.",
+          "source_id": "boja-disposition-2026-45-1",
+          "source_kind": "official_boja_text",
+          "source_locator": "disposition.2026.45.1::body::articulo-143-sanciones",
+          "source_url": "https://juntadeandalucia.es/eboja/2026/45/BOJA26-045-00092-3059-01_00334281.pdf"
+        }
+      ],
+      "interpretation_status": "legislative_vote_boja_actor_execution_owner_budget_allocation_and_indicator_targets_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_budget_and_outcomes",
+      "open_limitations": [
+        "boja_publication_not_execution",
+        "execution_owner_partial_not_case_file",
+        "budget_allocation_not_execution",
+        "indicator_target_not_observed_outcome",
+        "university_financing_effects_not_linked",
+        "student_or_university_outcomes_not_linked",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "responsible_actor_label": "Las posiciones de partido y candidatos estan observadas en 1 votacion oficial del Pleno sobre PL-000007; BOJA documenta publicacion oficial de la Ley 1/2026 y marco de competencias universitarias. La ley identifica organos competentes parciales para coordinacion, inspeccion y sancion universitaria; el Presupuesto 2026 enlaza financiacion universitaria publica y becas, pero aun no financiacion ejecutada, actos de desarrollo ni resultado ciudadano.",
+      "responsible_actor_status": "legislative_and_publisher_actor_observed_execution_owner_pending",
+      "review_confidence": "medium",
+      "review_id": "andalucia-2026-issue-review-educacion-001",
+      "review_status": "reviewed_issue_vote_boja_direction_actor_execution_owner_and_budget_allocation_partial",
+      "review_summary": "Educacion tiene programas declarados, 1 resultado oficial revisado sobre PL-000007, 1 publicacion BOJA revisada de la Ley 1/2026, organos ejecutores parciales observados, 5 claims observados de responsabilidad legislativa, 2 partidas presupuestarias oficiales revisadas y 1 indicador presupuestario revisado como objetivo/prevision. La aprobacion final, la publicacion legal, la direccion normativa universitaria, las posiciones de actor, organos competentes y asignacion presupuestaria quedan documentados; faltan actos de desarrollo, presupuesto ejecutado, outcomes universitarios observados y cualquier scoring de merito o culpa.",
+      "reviewed_at": "2026-05-16",
+      "reviewed_by": "repo_seed",
+      "topic_id": "educacion",
+      "topic_label": "Educacion"
+    },
+    {
+      "budget_execution_label": "",
+      "budget_execution_status": "budget_execution_not_linked",
+      "budget_refs": [],
+      "citizen_direction_label": "Senal parlamentaria revisada para Sanidad: 12-25/COM-000012: rejected by majority no. Direccion ciudadana pendiente de ejecucion, outcome y revision humana final.",
+      "citizen_direction_status": "direction_partially_reviewed_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-25/COM-000012; 12-25/COM-000012, SOLICITUD DE CREACI\u00d3N DE COMISI\u00d3N DE INVESTIGACI\u00d3N RELATIVA A CONTRATOS ADJUDICADOS POR LA JUNTA DE ANDALUC\u00cdA, SUS...; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto si en Sanidad; resultado oficial revisado: rechazada por mayoria no (50 si / 56 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "PP voto no en Sanidad; resultado oficial revisado: rechazada por mayoria no (50 si / 56 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-pp",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-pp",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "PSOE-A voto si en Sanidad; resultado oficial revisado: rechazada por mayoria no (50 si / 56 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-psoe-a",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-psoe-a",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Por Andaluc\u00eda voto si en Sanidad; resultado oficial revisado: rechazada por mayoria no (50 si / 56 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-pora",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-8-pora",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        }
+      ],
+      "execution_owner_label": "",
+      "execution_owner_status": "execution_owner_not_reviewed",
+      "execution_refs": [],
+      "interpretation_status": "legislative_vote_actor_signal_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "legislative_vote_signal_only",
+        "boja_not_expected_for_reviewed_vote_effects",
+        "execution_owner_not_reviewed",
+        "budget_execution_not_linked",
+        "outcome_not_reviewed",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "promotion_status": "promoted_from_machine_issue_draft_explicit_selection",
+      "responsible_actor_label": "El paquete contiene 5 claims observados de posicion legislativa por partido/candidato. Esto observa actores parlamentarios, no ejecucion administrativa ni impacto.",
+      "responsible_actor_status": "responsible_actor_partially_observed",
+      "review_confidence": "low",
+      "review_id": "andalucia-2026-issue-review-draft-sanidad-001",
+      "review_status": "reviewed_issue_vote_direction_and_actor_partial",
+      "review_summary": "Draft machine-assisted para Sanidad: hay votos oficiales revisados y posiciones legislativas observadas. La fila solo propone cerrar direccion/actor parlamentario parcial; no documenta entrega, beneficiarios, ejecucion, outcome, causalidad, merito ni culpa.",
+      "reviewed_at": "2026-05-17",
+      "reviewed_by": "draft_generator_explicit_review_selection",
+      "topic_id": "sanidad",
+      "topic_label": "Sanidad"
+    },
+    {
+      "budget_execution_label": "",
+      "budget_execution_status": "budget_execution_not_linked",
+      "budget_refs": [],
+      "citizen_direction_label": "Senal parlamentaria revisada para Seguridad y libertades: 4 votos revisados; primer expediente 12-26/PNLP-000013: rejected by majority no. Direccion ciudadana pendiente de ejecucion, outcome y revision humana final.",
+      "citizen_direction_status": "direction_partially_reviewed_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-26/PNLP-000013; 12-26/PNLP-000013, PROPOSICI\u00d3N NO DE LEY EN PLENO RELATIVA A DEFENSA DE LA LIBERTAD DE EXPRESI\u00d3N FRENTE A LOS...; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-18",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-18",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694"
+        },
+        {
+          "evidence_excerpt": "12-26/PNLP-000013; 12-26/PNLP-000013, PROPOSICI\u00d3N NO DE LEY EN PLENO RELATIVA A DEFENSA DE LA LIBERTAD DE EXPRESI\u00d3N FRENTE A LOS...; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-19",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-19",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694"
+        },
+        {
+          "evidence_excerpt": "12-25/M-000017; 12-25/M-000017, MOCI\u00d3N RELATIVA A MEMORIA HIST\u00d3RICA Y DEMOCR\u00c1TICA DE ANDALUC\u00cdA.; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-5",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-5",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "12-25/M-000017; 12-25/M-000017, MOCI\u00d3N RELATIVA A MEMORIA HIST\u00d3RICA Y DEMOCR\u00c1TICA DE ANDALUC\u00cdA.; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-6",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-6",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto si en Seguridad y libertades; resultado oficial revisado: rechazada por mayoria no (37 si / 69 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-5-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-5-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto si en Seguridad y libertades; resultado oficial revisado: rechazada por mayoria no (7 si / 69 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-6-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-6-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto si en Seguridad y libertades; resultado oficial revisado: rechazada por mayoria no (7 si / 99 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-7-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-200414-7-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto no en Seguridad y libertades; resultado oficial revisado: rechazada por mayoria no (13 si / 93 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-18-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201694-18-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694"
+        }
+      ],
+      "execution_owner_label": "",
+      "execution_owner_status": "execution_owner_not_reviewed",
+      "execution_refs": [],
+      "interpretation_status": "legislative_vote_actor_signal_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "legislative_vote_signal_only",
+        "boja_not_expected_for_reviewed_vote_effects",
+        "execution_owner_not_reviewed",
+        "budget_execution_not_linked",
+        "outcome_not_reviewed",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "promotion_status": "promoted_from_machine_issue_draft_explicit_selection",
+      "responsible_actor_label": "El paquete contiene 25 claims observados de posicion legislativa por partido/candidato. Esto observa actores parlamentarios, no ejecucion administrativa ni impacto.",
+      "responsible_actor_status": "responsible_actor_partially_observed",
+      "review_confidence": "low",
+      "review_id": "andalucia-2026-issue-review-draft-seguridad_libertades-001",
+      "review_status": "reviewed_issue_vote_direction_and_actor_partial",
+      "review_summary": "Draft machine-assisted para Seguridad y libertades: hay votos oficiales revisados y posiciones legislativas observadas. La fila solo propone cerrar direccion/actor parlamentario parcial; no documenta entrega, beneficiarios, ejecucion, outcome, causalidad, merito ni culpa.",
+      "reviewed_at": "2026-05-17",
+      "reviewed_by": "draft_generator_explicit_review_selection",
+      "topic_id": "seguridad_libertades",
+      "topic_label": "Seguridad y libertades"
+    },
+    {
+      "budget_execution_label": "",
+      "budget_execution_status": "budget_execution_not_linked",
+      "budget_refs": [],
+      "citizen_direction_label": "Senal parlamentaria revisada para Vivienda: 2 votos revisados; primer expediente 12-26/PNLP-000026: rejected by majority no. Direccion ciudadana pendiente de ejecucion, outcome y revision humana final.",
+      "citizen_direction_status": "direction_partially_reviewed_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-26/PNLP-000026; 12-26/PNLP-000026, PROPOSICI\u00d3N NO DE LEY EN PLENO RELATIVA A GARANT\u00cdA EFECTIVA DEL DERECHO A LA VIVIENDA EN ANDALUC\u00cdA; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-25",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-25",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "12-26/PNLP-000026; 12-26/PNLP-000026, PROPOSICI\u00d3N NO DE LEY EN PLENO RELATIVA A GARANT\u00cdA EFECTIVA DEL DERECHO A LA VIVIENDA EN ANDALUC\u00cdA; rejected by majority no",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-26",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-26",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto si en Vivienda; resultado oficial revisado: rechazada por mayoria no (30 si / 70 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-25-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-25-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto abstenciones en Vivienda; resultado oficial revisado: rechazada por mayoria no (27 si / 71 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-26-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-26-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "PP voto no en Vivienda; resultado oficial revisado: rechazada por mayoria no (30 si / 70 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-25-pp",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-25-pp",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        },
+        {
+          "evidence_excerpt": "PP voto no en Vivienda; resultado oficial revisado: rechazada por mayoria no (27 si / 71 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-26-pp",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-201495-26-pp",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495"
+        }
+      ],
+      "execution_owner_label": "",
+      "execution_owner_status": "execution_owner_not_reviewed",
+      "execution_refs": [],
+      "interpretation_status": "legislative_vote_actor_signal_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "legislative_vote_signal_only",
+        "boja_not_expected_for_reviewed_vote_effects",
+        "execution_owner_not_reviewed",
+        "budget_execution_not_linked",
+        "outcome_not_reviewed",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "promotion_status": "promoted_from_machine_issue_draft_explicit_selection",
+      "responsible_actor_label": "El paquete contiene 10 claims observados de posicion legislativa por partido/candidato. Esto observa actores parlamentarios, no ejecucion administrativa ni impacto.",
+      "responsible_actor_status": "responsible_actor_partially_observed",
+      "review_confidence": "low",
+      "review_id": "andalucia-2026-issue-review-draft-vivienda-001",
+      "review_status": "reviewed_issue_vote_direction_and_actor_partial",
+      "review_summary": "Draft machine-assisted para Vivienda: hay votos oficiales revisados y posiciones legislativas observadas. La fila solo propone cerrar direccion/actor parlamentario parcial; no documenta entrega, beneficiarios, ejecucion, outcome, causalidad, merito ni culpa.",
+      "reviewed_at": "2026-05-17",
+      "reviewed_by": "draft_generator_explicit_review_selection",
+      "topic_id": "vivienda",
+      "topic_label": "Vivienda"
+    },
+    {
+      "budget_execution_label": "",
+      "budget_execution_status": "budget_execution_not_linked",
+      "budget_refs": [],
+      "citizen_direction_label": "Senal parlamentaria revisada para Empleo: 12-22/DL-000007: decree law validated by majority yes. Direccion ciudadana pendiente de ejecucion, outcome y revision humana final.",
+      "citizen_direction_status": "direction_partially_reviewed_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-22/DL-000007; 12-22/DL-000007, CONVALIDACI\u00d3N O DEROGACI\u00d3N DEL DECRETO-LEY 12/2022, DE 29 DE NOVIEMBRE, POR EL QUE SE REGULAN LOS PROCESOS...; decree law validated by majority yes",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=169694"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto abstenciones en Empleo; resultado oficial revisado: decreto-ley convalidado por mayoria si (58 si / 0 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=169694"
+        },
+        {
+          "evidence_excerpt": "PP voto si en Empleo; resultado oficial revisado: decreto-ley convalidado por mayoria si (58 si / 0 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-pp",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-pp",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=169694"
+        },
+        {
+          "evidence_excerpt": "PSOE-A voto abstenciones en Empleo; resultado oficial revisado: decreto-ley convalidado por mayoria si (58 si / 0 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-psoe-a",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-psoe-a",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=169694"
+        },
+        {
+          "evidence_excerpt": "Por Andaluc\u00eda voto abstenciones en Empleo; resultado oficial revisado: decreto-ley convalidado por mayoria si (58 si / 0 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-pora",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-169694-3-pora",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=169694"
+        }
+      ],
+      "execution_owner_label": "",
+      "execution_owner_status": "execution_owner_not_reviewed",
+      "execution_refs": [],
+      "interpretation_status": "legislative_vote_actor_signal_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "legislative_vote_signal_only",
+        "execution_owner_not_reviewed",
+        "budget_execution_not_linked",
+        "outcome_not_reviewed",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "promotion_status": "promoted_from_machine_issue_draft_explicit_selection",
+      "responsible_actor_label": "El paquete contiene 5 claims observados de posicion legislativa por partido/candidato. Esto observa actores parlamentarios, no ejecucion administrativa ni impacto.",
+      "responsible_actor_status": "responsible_actor_partially_observed",
+      "review_confidence": "low",
+      "review_id": "andalucia-2026-issue-review-draft-empleo-001",
+      "review_status": "reviewed_issue_vote_direction_and_actor_partial",
+      "review_summary": "Draft machine-assisted para Empleo: hay votos oficiales revisados y posiciones legislativas observadas. La fila solo propone cerrar direccion/actor parlamentario parcial; no documenta entrega, beneficiarios, ejecucion, outcome, causalidad, merito ni culpa.",
+      "reviewed_at": "2026-05-17",
+      "reviewed_by": "draft_generator_explicit_review_selection",
+      "topic_id": "empleo",
+      "topic_label": "Empleo"
+    },
+    {
+      "budget_execution_label": "",
+      "budget_execution_status": "budget_execution_not_linked",
+      "budget_refs": [],
+      "citizen_direction_label": "Senal parlamentaria revisada para Transparencia y corrupcion: 12-24/DL-000006: decree law validated by majority yes. Direccion ciudadana pendiente de ejecucion, outcome y revision humana final.",
+      "citizen_direction_status": "direction_partially_reviewed_outcome_pending",
+      "claim_status": "issue_vote_direction_actor_review_no_merit_or_blame",
+      "evidence_refs": [
+        {
+          "evidence_excerpt": "12-24/DL-000006; 12-24/DL-000006, CONVALIDACI\u00d3N O DEROGACI\u00d3N DEL DECRETO-LEY 6/2024, DE 28 DE MAYO, POR EL QUE SE MODIFICA LA LEY...; decree law validated by majority yes",
+          "source_id": "parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1",
+          "source_kind": "official_vote_pdf_text",
+          "source_locator": "parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=183794"
+        },
+        {
+          "evidence_excerpt": "Adelante Andaluc\u00eda voto no en Transparencia y corrupcion; resultado oficial revisado: decreto-ley convalidado por mayoria si (68 si / 34 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-adelante-andalucia",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-adelante-andalucia",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=183794"
+        },
+        {
+          "evidence_excerpt": "PP voto si en Transparencia y corrupcion; resultado oficial revisado: decreto-ley convalidado por mayoria si (68 si / 34 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-pp",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-pp",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=183794"
+        },
+        {
+          "evidence_excerpt": "PSOE-A voto no en Transparencia y corrupcion; resultado oficial revisado: decreto-ley convalidado por mayoria si (68 si / 34 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-psoe-a",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-psoe-a",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=183794"
+        },
+        {
+          "evidence_excerpt": "Por Andaluc\u00eda voto no en Transparencia y corrupcion; resultado oficial revisado: decreto-ley convalidado por mayoria si (68 si / 34 no).",
+          "source_id": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-pora",
+          "source_kind": "observed_legislative_responsibility_claim",
+          "source_locator": "andalucia-2026-party-legislative-observation-parliament-vote-impact-review-parlamento-andalucia-votacion-https-www-parlamentodeandalucia-es-webdinamica-portal-web-parlamento-pdf-do-tipodoc-diario-id-183794-1-pora",
+          "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=183794"
+        }
+      ],
+      "execution_owner_label": "",
+      "execution_owner_status": "execution_owner_not_reviewed",
+      "execution_refs": [],
+      "interpretation_status": "legislative_vote_actor_signal_documented_execution_outcome_pending",
+      "merit_blame_status": "closed_pending_execution_and_outcomes",
+      "open_limitations": [
+        "legislative_vote_signal_only",
+        "execution_owner_not_reviewed",
+        "budget_execution_not_linked",
+        "outcome_not_reviewed",
+        "causal_impact_not_claimed",
+        "merit_blame_not_scored"
+      ],
+      "outcome_status": "outcome_not_linked",
+      "promotion_status": "promoted_from_machine_issue_draft_explicit_selection",
+      "responsible_actor_label": "El paquete contiene 5 claims observados de posicion legislativa por partido/candidato. Esto observa actores parlamentarios, no ejecucion administrativa ni impacto.",
+      "responsible_actor_status": "responsible_actor_partially_observed",
+      "review_confidence": "low",
+      "review_id": "andalucia-2026-issue-review-draft-transparencia_corrupcion-001",
+      "review_status": "reviewed_issue_vote_direction_and_actor_partial",
+      "review_summary": "Draft machine-assisted para Transparencia y corrupcion: hay votos oficiales revisados y posiciones legislativas observadas. La fila solo propone cerrar direccion/actor parlamentario parcial; no documenta entrega, beneficiarios, ejecucion, outcome, causalidad, merito ni culpa.",
+      "reviewed_at": "2026-05-17",
+      "reviewed_by": "draft_generator_explicit_review_selection",
+      "topic_id": "transparencia_corrupcion",
+      "topic_label": "Transparencia y corrupcion"
+    }
+  ],
+  "schema_version": "andalucia_2026_issue_reviews_v1"
+}

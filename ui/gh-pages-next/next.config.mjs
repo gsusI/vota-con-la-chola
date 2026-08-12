@@ -8,6 +8,8 @@ function normalizeBasePath(value) {
 }
 
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? "");
+const buildCpus = Number.parseInt(process.env.NEXT_BUILD_CPUS ?? "2", 10);
+const safeBuildCpus = Number.isFinite(buildCpus) && buildCpus > 0 ? buildCpus : 2;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -17,6 +19,10 @@ const nextConfig = {
   assetPrefix: basePath || undefined,
   images: {
     unoptimized: true,
+  },
+  experimental: {
+    cpus: safeBuildCpus,
+    staticGenerationMaxConcurrency: safeBuildCpus,
   },
 };
 

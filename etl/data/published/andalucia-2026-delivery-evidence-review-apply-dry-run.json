@@ -1,0 +1,33 @@
+{
+  "actions": [
+    {
+      "action": "would_apply",
+      "gap_id": "missing_budget_execution",
+      "promoted_review_item_id": "andalucia-2026-execution-review-seguridad-libertades-missing-budget-execution-junta-procurement-registry-elastic-junta-pdc-elastic-id-expediente-259420",
+      "reason": "safe_for_seed_promotion",
+      "review_item_id": "andalucia-2026-execution-draft-seguridad-libertades-missing-budget-execution-junta-procurement-registry-elastic-junta-pdc-elastic-id-expediente-259420",
+      "source_id": "junta_procurement_registry_elastic",
+      "source_locator": "junta-pdc-elastic:id-expediente:259420",
+      "topic_id": "seguridad_libertades",
+      "violations": []
+    }
+  ],
+  "allow_machine_drafts": true,
+  "applied_total": 0,
+  "apply_changed": false,
+  "blocked_unsafe_total": 0,
+  "drafts_total": 1,
+  "dry_run": true,
+  "existing_reviews_total": 129,
+  "generated_at": "2026-05-19T15:18:46Z",
+  "missing_review_item_ids": [],
+  "missing_review_item_ids_total": 0,
+  "schema_version": "andalucia_2026_execution_evidence_review_apply_plan_v1",
+  "selected_total": 1,
+  "selection_mode": "auto_safe",
+  "skipped_duplicate_total": 0,
+  "skipped_unapproved_total": 0,
+  "source_schema_version": "andalucia_2026_delivery_evidence_review_drafts_v1",
+  "status": "ready_to_apply",
+  "would_apply_total": 1
+}
