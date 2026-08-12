@@ -15,6 +15,7 @@ export function loadEvidenceApiPayload() {
     issue_answers: [],
     issue_clusters: [],
     gap_answers: [],
+    blocker_answers: [],
     qa_answers: [],
     indexes: {},
   });

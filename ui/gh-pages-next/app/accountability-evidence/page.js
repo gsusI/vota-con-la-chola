@@ -407,6 +407,52 @@ function GapAnswerCard({ answer }) {
   );
 }
 
+function SourceBlockerCard({ blocker }) {
+  const coverage = safeObject(blocker.coverage);
+  const evidenceRefs = safeArray(blocker.evidence_refs).slice(0, 3);
+  return (
+    <article className="accountability-evidence-source-blocker-card kpiCard">
+      <p className="accountability-evidence-source-blocker-card__eyebrow eyebrow">
+        {blocker.answer_status || "bloqueado"} · {blocker.scope || "sin ambito"}
+      </p>
+      <h3 className="accountability-evidence-source-blocker-card__title">{blocker.source_name || blocker.source_id}</h3>
+      <p className="accountability-evidence-source-blocker-card__summary sub">{blocker.summary || "Fuente bloqueada."}</p>
+      <dl className="accountability-evidence-source-blocker-card__facts">
+        <div className="accountability-evidence-source-blocker-card__fact">
+          <dt>Tipo</dt>
+          <dd>{blocker.blocker_kind || "blocked_unknown"}</dd>
+        </div>
+        <div className="accountability-evidence-source-blocker-card__fact">
+          <dt>Runs</dt>
+          <dd>{formatInt(coverage.runs_total)}</dd>
+        </div>
+        <div className="accountability-evidence-source-blocker-card__fact">
+          <dt>Red</dt>
+          <dd>{formatInt(coverage.network_fetches)}</dd>
+        </div>
+      </dl>
+      <p className="accountability-evidence-source-blocker-card__reason sub">{blocker.blocker_reason || "Sin razon publicada."}</p>
+      <div className="accountability-evidence-source-blocker-card__evidence-list chips">
+        {evidenceRefs.map((ref) => (
+          <span className="accountability-evidence-source-blocker-card__evidence-ref chip" key={ref.path}>
+            {ref.path}
+          </span>
+        ))}
+      </div>
+      <div className="accountability-evidence-source-blocker-card__actions chips">
+        <a className="accountability-evidence-source-blocker-card__link chip" href={withBasePath(blocker.routes?.source_catalog || "/explorer-sources/")}>
+          Abrir catalogo
+        </a>
+        {blocker.source_url ? (
+          <a className="accountability-evidence-source-blocker-card__link chip" href={blocker.source_url}>
+            Fuente
+          </a>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 function EvidenceSampleCard({ sample }) {
   return (
     <article className="accountability-evidence-sample-card kpiCard">
@@ -457,6 +503,7 @@ export default function AccountabilityEvidenceApiPage() {
   const issueClusterReviewItems = safeArray(payload.issue_cluster_review_queue).slice(0, 6);
   const issueClusterAssignmentReviewItems = safeArray(payload.issue_cluster_assignment_review_queue).slice(0, 6);
   const gapAnswers = safeArray(payload.gap_answers);
+  const blockerAnswers = safeArray(payload.blocker_answers);
   const qaAnswers = safeArray(payload.qa_answers).slice(0, 8);
   const evidenceSamples = [
     ...safeArray(payload.issue_answers).flatMap((answer) => safeArray(answer.evidence_samples)),
@@ -502,6 +549,7 @@ export default function AccountabilityEvidenceApiPage() {
           note={`${formatInt(coverage.issue_cluster_assignment_review_queue_total)} visibles`}
         />
         <MetricCard label="Huecos" value={formatInt(coverage.gap_answers_total)} note="dimensiones auditadas" />
+        <MetricCard label="Bloqueos" value={formatInt(coverage.blocker_answers_total)} note="fuentes no reproducibles" />
         <MetricCard label="Q&A" value={formatInt(coverage.qa_answers_total)} note="respuestas narrativas" />
         <MetricCard label="Evidencia" value={formatInt(coverage.evidence_samples_total)} note="muestras enlazadas" />
         <MetricCard
@@ -647,6 +695,17 @@ export default function AccountabilityEvidenceApiPage() {
         <div className="accountability-evidence-gap-answer-section__grid grid">
           {gapAnswers.map((answer) => (
             <GapAnswerCard answer={answer} key={answer.answer_id} />
+          ))}
+        </div>
+      </section>
+
+      <section className="accountability-evidence-source-blocker-section card block">
+        <div className="accountability-evidence-source-blocker-section__head blockHead">
+          <h2 className="accountability-evidence-source-blocker-section__title">Fuentes bloqueadas</h2>
+        </div>
+        <div className="accountability-evidence-source-blocker-section__grid grid">
+          {blockerAnswers.map((blocker) => (
+            <SourceBlockerCard blocker={blocker} key={blocker.answer_id} />
           ))}
         </div>
       </section>

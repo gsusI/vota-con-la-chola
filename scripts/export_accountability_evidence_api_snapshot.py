@@ -25,6 +25,7 @@ DEFAULT_LEDGER = Path("etl/data/published/accountability-ledger-latest.json")
 DEFAULT_OUT = Path("etl/data/published/accountability-evidence-api.json")
 DEFAULT_ISSUE_CLUSTER_REVIEWS = Path("etl/data/seeds/accountability_issue_cluster_reviews_seed_v1.json")
 DEFAULT_ISSUE_CLUSTER_ISSUE_REVIEWS = Path("etl/data/seeds/accountability_issue_cluster_issue_reviews_seed_v1.json")
+DEFAULT_SOURCE_CATALOG = Path("etl/data/published/source-catalog-latest.json")
 
 EXPECTED_DIMENSIONS = (
     ("promises", "promise"),
@@ -250,6 +251,13 @@ QUESTION_TEMPLATES = (
         "answer_shape": "missing dimension counts, gap status, sample actors/issues, next evidence needed",
     },
     {
+        "question_id": "source_blocker",
+        "question": "Que fuentes publicas estan bloqueadas o no son reproducibles?",
+        "answer_collection": "blocker_answers",
+        "route_kind": "blocker",
+        "answer_shape": "source -> blocker state, evidence refs, source catalog route, next command",
+    },
+    {
         "question_id": "natural_language_qa",
         "question": "Que puede contestar ya la API en lenguaje natural?",
         "answer_collection": "qa_answers",
@@ -272,6 +280,11 @@ def parse_args() -> argparse.Namespace:
         "--issue-cluster-issue-reviews",
         default=str(DEFAULT_ISSUE_CLUSTER_ISSUE_REVIEWS),
         help="Optional reviewed issue-level cluster assignment seed JSON",
+    )
+    p.add_argument(
+        "--source-catalog",
+        default=str(DEFAULT_SOURCE_CATALOG),
+        help="Optional source-catalog JSON for blocker answers",
     )
     p.add_argument("--snapshot-date", required=True, help="Snapshot date")
     p.add_argument("--out", default=str(DEFAULT_OUT), help="Output JSON path")
@@ -543,6 +556,12 @@ def _caveats(entry_kinds: Any) -> list[str]:
 
 
 def _evidence_ref(entry: dict[str, Any]) -> dict[str, Any]:
+    summary = (
+        entry.get("summary")
+        or entry.get("title")
+        or entry.get("issue_label")
+        or entry.get("source_title")
+    )
     return {
         "entry_id": entry.get("entry_id"),
         "issue_id": entry.get("issue_id"),
@@ -553,11 +572,12 @@ def _evidence_ref(entry: dict[str, Any]) -> dict[str, Any]:
         "accountability_role": entry.get("accountability_role"),
         "event_date": entry.get("event_date"),
         "evidence_tier": entry.get("evidence_tier"),
+        "title": _clip(entry.get("title"), 180),
         "source_title": entry.get("source_title"),
         "source_url": entry.get("source_url"),
         "source_locator": entry.get("source_locator"),
         "evidence_quote": _clip(entry.get("evidence_quote"), 240),
-        "summary": _clip(entry.get("summary"), 320),
+        "summary": _clip(summary, 320),
     }
 
 
@@ -665,6 +685,111 @@ def _gap_answers(
                 "sample_missing_actors": [_gap_ref(answer, kind="actor") for answer in missing_actor_answers[:max_samples]],
             }
         )
+    return answers
+
+
+def _extract_backtick_paths(text: str) -> list[str]:
+    paths: list[str] = []
+    for value in re.findall(r"`([^`]+)`", str(text or "")):
+        if value.startswith(("docs/", "etl/", "ui/")) and value not in paths:
+            paths.append(value)
+    return paths
+
+
+def _extract_next_commands(text: str) -> list[str]:
+    commands: list[str] = []
+    for value in re.findall(r"Siguiente comando:\s*`([^`]+)`", str(text or "")):
+        command = value.strip()
+        if command and command not in commands:
+            commands.append(command)
+    return commands
+
+
+def _blocker_kind(reason: str) -> str:
+    text = _fold_text(reason)
+    if "http 403" in text or "403" in text or "access denied" in text:
+        return "http_403"
+    if "anti-bot" in text or "antihtml" in text or "html anti" in text or "imperva" in text or "waf" in text:
+        return "anti_bot_or_waf"
+    if "http 500" in text or " 500" in text:
+        return "http_500"
+    if "token" in text or "contrato" in text or "contract" in text or "api_key" in text:
+        return "contract_or_token"
+    if "dns" in text:
+        return "dns"
+    return "blocked_unknown"
+
+
+def _source_blocker_answers(source_catalog: dict[str, Any] | None, *, max_items: int = 100) -> list[dict[str, Any]]:
+    catalog = _safe_object(source_catalog)
+    answers: list[dict[str, Any]] = []
+    sources = _safe_array(catalog.get("sources"))
+    for source in sources:
+        row = _safe_object(source)
+        if str(row.get("catalog_state") or "") != "blocked":
+            continue
+        source_id = str(row.get("source_id") or "").strip()
+        if not source_id:
+            continue
+        reason = str(row.get("blocker_reason") or row.get("tracker_block_note") or row.get("last_message") or "").strip()
+        action_refs = [
+            _safe_object(action)
+            for action in _safe_array(catalog.get("actions"))
+            if source_id in {str(item) for item in _safe_array(_safe_object(action).get("source_ids"))}
+        ]
+        action_details = "\n".join(str(action.get("details") or "") for action in action_refs)
+        combined_text = "\n".join(part for part in (reason, action_details) if part)
+        evidence_paths = _extract_backtick_paths(combined_text)
+        commands = _extract_next_commands(combined_text)
+        if not commands:
+            for action in action_refs:
+                commands.extend(str(command) for command in _safe_array(action.get("commands")) if str(command).strip())
+        blocker_kind = _blocker_kind(combined_text)
+        source_name = str(row.get("source_name") or source_id)
+        summary = (
+            f"{source_name} is blocked in the source catalog for {row.get('scope') or row.get('level') or 'unknown scope'}; "
+            f"blocker kind: {blocker_kind}."
+        )
+        answers.append(
+            {
+                "answer_id": f"blocker:{source_id}",
+                "question_id": "source_blocker",
+                "answer_status": "blocked",
+                "source_id": source_id,
+                "source_name": source_name,
+                "institution_name": row.get("institution_name"),
+                "domain": row.get("domain"),
+                "scope": row.get("scope") or row.get("level"),
+                "catalog_state": row.get("catalog_state"),
+                "tracker_status": row.get("tracker_status"),
+                "sql_status": row.get("sql_status"),
+                "blocker_kind": blocker_kind,
+                "summary": _clip(summary, 360),
+                "blocker_reason": _clip(reason or action_details, 1200),
+                "evidence_refs": [{"path": path} for path in evidence_paths[:8]],
+                "next_commands": commands[:3],
+                "source_url": row.get("default_url"),
+                "latest_snapshot": row.get("latest_snapshot") or row.get("last_seen_at"),
+                "coverage": {
+                    "runs_total": int(row.get("runs_total") or 0),
+                    "runs_ok": int(row.get("runs_ok") or 0),
+                    "last_loaded": int(row.get("last_loaded") or 0),
+                    "max_loaded_network": int(row.get("max_loaded_network") or 0),
+                    "network_fetches": int(row.get("network_fetches") or 0),
+                    "fallback_fetches": int(row.get("fallback_fetches") or 0),
+                },
+                "routes": {
+                    "source_catalog": "/explorer-sources/",
+                    "datasets": "/methods/datasets/",
+                },
+                "caveats": [
+                    "This is an access/blocker answer from the source catalog; it is not a responsibility claim.",
+                    "Open the evidence refs and rerun the next command before treating the blocker as current.",
+                ],
+            }
+        )
+        if len(answers) >= int(max_items or 0):
+            break
     return answers
 
 
@@ -1188,6 +1313,7 @@ def _qa_answers(
     actor_issue_refs: list[dict[str, Any]],
     issue_clusters: list[dict[str, Any]],
     gap_answers: list[dict[str, Any]],
+    blocker_answers: list[dict[str, Any]],
     max_qa_answers: int,
 ) -> list[dict[str, Any]]:
     answers: list[dict[str, Any]] = []
@@ -1340,6 +1466,36 @@ def _qa_answers(
             )
         )
 
+    for blocker in blocker_answers[:6]:
+        if len(answers) >= max_total:
+            return answers
+        coverage = _safe_object(blocker.get("coverage"))
+        answers.append(
+            _qa_base(
+                answer_id=f"qa:blocker:{blocker.get('source_id')}",
+                source_collection="blocker_answers",
+                source_answer_id=str(blocker.get("answer_id") or ""),
+                question=f"Que bloquea la fuente {blocker.get('source_name') or blocker.get('source_id')}?",
+                answer_text=(
+                    f"{blocker.get('source_name') or blocker.get('source_id')} is marked blocked in the source catalog. "
+                    f"Kind: {blocker.get('blocker_kind') or 'blocked_unknown'}. "
+                    f"Scope: {blocker.get('scope') or 'unknown'}. "
+                    f"Runs: {int(coverage.get('runs_total') or 0)}, network fetches: "
+                    f"{int(coverage.get('network_fetches') or 0)}."
+                ),
+                answer_status="blocked",
+                evidence_basis={
+                    "source_id": blocker.get("source_id"),
+                    "scope": blocker.get("scope"),
+                    "domain": blocker.get("domain"),
+                    "blocker_kind": blocker.get("blocker_kind"),
+                    "evidence_refs_total": len(_safe_array(blocker.get("evidence_refs"))),
+                },
+                routes={"primary": _safe_object(blocker.get("routes")).get("source_catalog")},
+                caveats=_safe_array(blocker.get("caveats"))[:2],
+            )
+        )
+
     prioritized_gaps = sorted(
         gap_answers,
         key=lambda answer: (
@@ -1384,6 +1540,7 @@ def build_evidence_api(
     snapshot_date: str,
     issue_cluster_reviews: dict[str, Any] | None = None,
     issue_cluster_issue_reviews: dict[str, Any] | None = None,
+    source_catalog: dict[str, Any] | None = None,
     max_actor_answers: int = 5000,
     max_issue_answers: int = 5000,
     max_actor_issue_refs: int = 12000,
@@ -1391,6 +1548,7 @@ def build_evidence_api(
     max_top_items: int = 12,
     max_evidence_per_answer: int = 3,
     max_qa_answers: int = 32,
+    max_blocker_answers: int = 100,
 ) -> dict[str, Any]:
     actors = _safe_array(dossiers.get("actors"))[: int(max_actor_answers or 0) or None]
     issues = _safe_array(dossiers.get("issues"))[: int(max_issue_answers or 0) or None]
@@ -1580,12 +1738,16 @@ def build_evidence_api(
         str(answer.get("dimension")): int(_safe_object(answer.get("coverage")).get("missing_answers_total") or 0)
         for answer in gap_answers
     }
+    blocker_answers = _source_blocker_answers(source_catalog, max_items=max_blocker_answers)
+    blocker_status_counts = Counter(str(answer.get("answer_status") or "unknown") for answer in blocker_answers)
+    blocker_kind_counts = Counter(str(answer.get("blocker_kind") or "blocked_unknown") for answer in blocker_answers)
     qa_answers = _qa_answers(
         actor_answers=actor_answers,
         issue_answers=issue_answers,
         actor_issue_refs=actor_issue_refs,
         issue_clusters=issue_clusters,
         gap_answers=gap_answers,
+        blocker_answers=blocker_answers,
         max_qa_answers=max_qa_answers,
     )
     qa_status_counts = Counter(str(answer.get("answer_status") or "unknown") for answer in qa_answers)
@@ -1599,6 +1761,7 @@ def build_evidence_api(
             "source_ledger_schema": _safe_object(ledger.get("meta")).get("schema_version"),
             "source_issue_cluster_reviews_schema": _safe_object(review_doc.get("meta")).get("schema_version"),
             "source_issue_cluster_issue_reviews_schema": _safe_object(_safe_object(issue_cluster_issue_reviews).get("meta")).get("schema_version"),
+            "source_catalog_version": _safe_object(source_catalog).get("catalog_version"),
             "max_actor_answers": max_actor_answers,
             "max_issue_answers": max_issue_answers,
             "max_actor_issue_refs": max_actor_issue_refs,
@@ -1606,6 +1769,7 @@ def build_evidence_api(
             "max_top_items": max_top_items,
             "max_evidence_per_answer": max_evidence_per_answer,
             "max_qa_answers": max_qa_answers,
+            "max_blocker_answers": max_blocker_answers,
         },
         "snapshot_date": snapshot_date,
         "coverage": {
@@ -1633,6 +1797,9 @@ def build_evidence_api(
             "issue_answers_with_primary_cluster_total": len(issue_answers),
             "fallback_issue_cluster_answers_total": fallback_issue_answers_total,
             "gap_answers_total": len(gap_answers),
+            "blocker_answers_total": len(blocker_answers),
+            "source_catalog_sources_total": int(_safe_object(_safe_object(source_catalog).get("summary")).get("sources_total") or 0),
+            "source_catalog_blocked_total": int(_safe_object(_safe_object(source_catalog).get("summary")).get("blocked_total") or 0),
             "qa_answers_total": len(qa_answers),
             "qa_answers_with_self_route_total": sum(1 for answer in qa_answers if _safe_object(answer.get("routes")).get("self")),
             "evidence_samples_total": evidence_samples_total,
@@ -1642,6 +1809,8 @@ def build_evidence_api(
             "freshness_level_counts": dict(sorted(freshness_counts.items())),
             "gap_answer_status_counts": dict(sorted(gap_status_counts.items())),
             "gap_missing_answer_counts_by_dimension": dict(sorted(gap_dimension_counts.items())),
+            "blocker_answer_status_counts": dict(sorted(blocker_status_counts.items())),
+            "blocker_kind_counts": dict(sorted(blocker_kind_counts.items())),
         },
         "question_templates": list(QUESTION_TEMPLATES),
         "actor_answers": actor_answers,
@@ -1651,6 +1820,7 @@ def build_evidence_api(
         "issue_cluster_review_queue": issue_cluster_review_queue,
         "issue_cluster_assignment_review_queue": issue_cluster_assignment_review_queue,
         "gap_answers": gap_answers,
+        "blocker_answers": blocker_answers,
         "qa_answers": qa_answers,
         "indexes": {
             "actor_answer_by_key": {answer["actor_key"]: answer["answer_id"] for answer in actor_answers},
@@ -1666,6 +1836,7 @@ def build_evidence_api(
                 item["review_id"]: item["issue_id"] for item in issue_cluster_assignment_review_queue
             },
             "gap_answer_by_dimension": {answer["dimension"]: answer["answer_id"] for answer in gap_answers},
+            "blocker_answer_by_source_id": {answer["source_id"]: answer["answer_id"] for answer in blocker_answers},
             "qa_answer_by_id": {answer["answer_id"]: answer["answer_id"] for answer in qa_answers},
             "qa_route_by_id": {
                 answer["answer_id"]: _safe_object(answer.get("routes")).get("self") for answer in qa_answers
@@ -1680,12 +1851,14 @@ def main() -> int:
     ledger = _load_json(Path(args.ledger))
     issue_cluster_reviews = _load_optional_json(str(args.issue_cluster_reviews or ""))
     issue_cluster_issue_reviews = _load_optional_json(str(args.issue_cluster_issue_reviews or ""))
+    source_catalog = _load_optional_json(str(args.source_catalog or ""))
     payload = build_evidence_api(
         dossiers,
         ledger,
         snapshot_date=str(args.snapshot_date),
         issue_cluster_reviews=issue_cluster_reviews,
         issue_cluster_issue_reviews=issue_cluster_issue_reviews,
+        source_catalog=source_catalog,
         max_actor_answers=int(args.max_actor_answers or 0),
         max_issue_answers=int(args.max_issue_answers or 0),
         max_actor_issue_refs=int(args.max_actor_issue_refs or 0),
