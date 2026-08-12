@@ -14,10 +14,10 @@ from scripts.publicar_hf_snapshot import (
     collect_published_files,
     ensure_liberty_atlas_release_latest_for_publish,
     ensure_quality_report_for_publish,
+    export_ingestion_runs_csv,
+    export_source_legal_metadata,
     extract_quality_report_summary,
     extract_source_catalog_summary,
-    export_source_legal_metadata,
-    export_ingestion_runs_csv,
     load_dotenv,
     resolve_source_legal_profile,
     sanitize_url_for_public,
@@ -29,15 +29,10 @@ class PublicarHFSnapshotTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             env_path = Path(tmp) / ".env"
             env_path.write_text(
-                "\n".join(
-                    (
-                        "# comment",
-                        "HF_TOKEN=abc123",
-                        "export HF_USERNAME='jesus'",
-                        "HF_DATASET_REPO_ID=\"org/data\"",
-                        "",
-                    )
-                ),
+                "# comment\n"
+                "HF_TOKEN=abc123\n"
+                "export HF_USERNAME='jesus'\n"
+                'HF_DATASET_REPO_ID="org/data"\n',
                 encoding="utf-8",
             )
             values = load_dotenv(env_path)
@@ -48,19 +43,41 @@ class PublicarHFSnapshotTests(unittest.TestCase):
     def test_collect_published_files_prefers_gz(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             published_dir = Path(tmp)
-            (published_dir / "votaciones-es-2026-02-12.json").write_text("{}", encoding="utf-8")
-            (published_dir / "votaciones-es-2026-02-12.json.gz").write_text("gz", encoding="utf-8")
-            (published_dir / "representantes-es-2026-02-12.json").write_text("{}", encoding="utf-8")
-            (published_dir / "liberty-restrictions-atlas-release-latest.json").write_text(
-                json.dumps({"status": "ok", "snapshot_date": "2026-02-12"}, ensure_ascii=True),
+            (published_dir / "votaciones-es-2026-02-12.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "votaciones-es-2026-02-12.json.gz").write_text(
+                "gz", encoding="utf-8"
+            )
+            (published_dir / "representantes-es-2026-02-12.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (
+                published_dir / "liberty-restrictions-atlas-release-latest.json"
+            ).write_text(
+                json.dumps(
+                    {"status": "ok", "snapshot_date": "2026-02-12"}, ensure_ascii=True
+                ),
                 encoding="utf-8",
             )
-            (published_dir / "proximas-elecciones-espana.json").write_text("{}", encoding="utf-8")
-            (published_dir / "poblacion_municipios_es.json").write_text("{}", encoding="utf-8")
-            (published_dir / "source-catalog-latest.json").write_text("{}", encoding="utf-8")
-            (published_dir / "accountability-ledger-latest.json").write_text("{}", encoding="utf-8")
-            (published_dir / "accountability-dossiers-latest.json").write_text("{}", encoding="utf-8")
-            (published_dir / "accountability-evidence-api-latest.json").write_text("{}", encoding="utf-8")
+            (published_dir / "proximas-elecciones-espana.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "poblacion_municipios_es.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "source-catalog-latest.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "accountability-ledger-latest.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "accountability-dossiers-latest.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "accountability-evidence-api-latest.json").write_text(
+                "{}", encoding="utf-8"
+            )
 
             files = collect_published_files(published_dir, "2026-02-12")
             names = [path.name for path in files]
@@ -77,9 +94,13 @@ class PublicarHFSnapshotTests(unittest.TestCase):
     def test_ensure_liberty_atlas_release_latest_for_publish_ok(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             published_dir = Path(tmp)
-            latest_path = published_dir / "liberty-restrictions-atlas-release-latest.json"
+            latest_path = (
+                published_dir / "liberty-restrictions-atlas-release-latest.json"
+            )
             latest_path.write_text(
-                json.dumps({"status": "ok", "snapshot_date": "2026-02-12"}, ensure_ascii=True),
+                json.dumps(
+                    {"status": "ok", "snapshot_date": "2026-02-12"}, ensure_ascii=True
+                ),
                 encoding="utf-8",
             )
 
@@ -88,26 +109,38 @@ class PublicarHFSnapshotTests(unittest.TestCase):
                 snapshot_date="2026-02-12",
                 require_release_latest=True,
             )
-            self.assertEqual(summary["file_name"], "liberty-restrictions-atlas-release-latest.json")
+            self.assertEqual(
+                summary["file_name"], "liberty-restrictions-atlas-release-latest.json"
+            )
             self.assertEqual(summary["snapshot_date"], "2026-02-12")
             self.assertEqual(summary["status"], "ok")
 
     def test_ensure_liberty_atlas_release_latest_for_publish_missing(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaises(ValueError) as ctx:
-                ensure_liberty_atlas_release_latest_for_publish(
-                    published_dir=Path(tmp),
-                    snapshot_date="2026-02-12",
-                    require_release_latest=True,
-                )
-        self.assertIn("liberty-restrictions-atlas-release-latest.json", str(ctx.exception))
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            self.assertRaises(ValueError) as ctx,
+        ):
+            ensure_liberty_atlas_release_latest_for_publish(
+                published_dir=Path(tmp),
+                snapshot_date="2026-02-12",
+                require_release_latest=True,
+            )
+        self.assertIn(
+            "liberty-restrictions-atlas-release-latest.json", str(ctx.exception)
+        )
 
-    def test_ensure_liberty_atlas_release_latest_for_publish_snapshot_mismatch(self) -> None:
+    def test_ensure_liberty_atlas_release_latest_for_publish_snapshot_mismatch(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             published_dir = Path(tmp)
-            latest_path = published_dir / "liberty-restrictions-atlas-release-latest.json"
+            latest_path = (
+                published_dir / "liberty-restrictions-atlas-release-latest.json"
+            )
             latest_path.write_text(
-                json.dumps({"status": "ok", "snapshot_date": "2026-02-11"}, ensure_ascii=True),
+                json.dumps(
+                    {"status": "ok", "snapshot_date": "2026-02-11"}, ensure_ascii=True
+                ),
                 encoding="utf-8",
             )
 
@@ -119,7 +152,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
                 )
         self.assertIn("no coincide", str(ctx.exception))
 
-    def test_ensure_quality_report_for_publish_allows_empty_when_not_required(self) -> None:
+    def test_ensure_quality_report_for_publish_allows_empty_when_not_required(
+        self,
+    ) -> None:
         ensure_quality_report_for_publish(
             {},
             require_quality_report=False,
@@ -127,7 +162,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             published_dir=Path("etl/data/published"),
         )
 
-    def test_ensure_quality_report_for_publish_fails_when_required_and_missing(self) -> None:
+    def test_ensure_quality_report_for_publish_fails_when_required_and_missing(
+        self,
+    ) -> None:
         with self.assertRaises(ValueError) as ctx:
             ensure_quality_report_for_publish(
                 {},
@@ -197,7 +234,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
                     ensure_ascii=True,
                 )
             summary = extract_quality_report_summary([report_path], "2026-02-12")
-            self.assertEqual(summary["file_name"], "votaciones-kpis-es-2026-02-12.json.gz")
+            self.assertEqual(
+                summary["file_name"], "votaciones-kpis-es-2026-02-12.json.gz"
+            )
             self.assertFalse(summary["vote_gate_passed"])
             self.assertEqual(summary["events_total"], 7)
 
@@ -227,7 +266,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            summary = extract_source_catalog_summary([snapshot_path, latest_path], "2026-02-12")
+            summary = extract_source_catalog_summary(
+                [snapshot_path, latest_path], "2026-02-12"
+            )
             self.assertEqual(summary["file_name"], "source-catalog-2026-02-12.json")
             self.assertEqual(summary["sources_total"], 10)
             self.assertEqual(summary["blocked_total"], 2)
@@ -312,7 +353,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             with out_csv.open("r", encoding="utf-8", newline="") as fh:
                 reader = csv.reader(fh)
                 data = list(reader)
-            self.assertEqual(data[1][5], "https://api.example.com/data?api_key=REDACTED&public=1")
+            self.assertEqual(
+                data[1][5], "https://api.example.com/data?api_key=REDACTED&public=1"
+            )
             self.assertEqual(data[1][8], "Authorization: Bearer REDACTED")
 
     def test_sanitize_url_for_public_removes_credentials(self) -> None:
@@ -323,7 +366,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
         safe = sanitize_url_for_public("file:///Users/alice/private/source.json")
         self.assertEqual(safe, "")
 
-    def test_export_ingestion_runs_csv_redacts_local_path_and_email(self) -> None:
+    def test_export_ingestion_runs_csv_redacts_local_path_and_retains_public_contact(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             db_path = Path(tmp) / "sample.db"
             out_csv = Path(tmp) / "ingestion_runs.csv"
@@ -368,7 +413,7 @@ class PublicarHFSnapshotTests(unittest.TestCase):
                 data = list(reader)
             self.assertEqual(data[1][5], "")
             self.assertNotIn("/Users/alice", data[1][8])
-            self.assertNotIn("alice@example.com", data[1][8])
+            self.assertIn("alice@example.com", data[1][8])
 
     def test_build_explorer_schema_payload_includes_fk_contract(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -399,8 +444,12 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             self.assertIn("mandates", tables)
             self.assertIn("institutions", tables)
             self.assertEqual(tables["mandates"]["primary_key"], ["mandate_id"])
-            self.assertEqual(tables["mandates"]["foreign_keys_out"][0]["to_table"], "institutions")
-            self.assertEqual(tables["institutions"]["foreign_keys_in"][0]["from_table"], "mandates")
+            self.assertEqual(
+                tables["mandates"]["foreign_keys_out"][0]["to_table"], "institutions"
+            )
+            self.assertEqual(
+                tables["institutions"]["foreign_keys_in"][0]["from_table"], "mandates"
+            )
 
     def test_resolve_source_legal_profile_known_and_unknown(self) -> None:
         known = resolve_source_legal_profile(
@@ -410,7 +459,9 @@ class PublicarHFSnapshotTests(unittest.TestCase):
         self.assertEqual(known["verification_status"], "verified")
         self.assertIn("CC BY 4.0", known["reuse_basis"])
 
-        unknown = resolve_source_legal_profile("fuente_no_catalogada", "https://example.org/data")
+        unknown = resolve_source_legal_profile(
+            "fuente_no_catalogada", "https://example.org/data"
+        )
         self.assertEqual(unknown["verification_status"], "pending_review")
         self.assertEqual(unknown["terms_url"], "https://example.org/data")
 

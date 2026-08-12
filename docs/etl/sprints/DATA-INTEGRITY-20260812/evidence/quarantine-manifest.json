@@ -1,0 +1,56 @@
+{
+  "created_at": "2026-08-12T10:37:46Z",
+  "policy": "Preserve suspect artifacts outside active roots; delete nothing.",
+  "sqlite_artifacts": [
+    {
+      "original_path": "etl/data/staging/politicos-es.db.corrupt.bak",
+      "quarantine_path": "etl/data/staging/quarantine/2026-08-12/politicos-es.db.corrupt.bak",
+      "bytes": 1554706432,
+      "sha256": "95ea989797b1e0ad2d8738d1098e87ca799e85d0e296b3379e227c35791b9f51",
+      "reason": "sqlite_physical_corruption"
+    },
+    {
+      "original_path": "etl/data/staging/politicos-es.fresh.db",
+      "quarantine_path": "etl/data/staging/quarantine/2026-08-12/politicos-es.fresh.db",
+      "bytes": 916041728,
+      "sha256": "b17b224fc836d6979b87e3f9508a3ac2de03c25366891ce4a7f405bb62ecb474",
+      "reason": "sqlite_physical_corruption"
+    },
+    {
+      "original_path": "etl/data/staging/politicos-es.e2e-postfix-20260212.db",
+      "quarantine_path": "etl/data/staging/quarantine/2026-08-12/politicos-es.e2e-postfix-20260212.db",
+      "bytes": 22409216,
+      "sha256": "6de89a69689de9d5e4e3bae345784d20e7169499054e15c78ae6d247b41cefe9",
+      "reason": "sqlite_physical_corruption"
+    },
+    {
+      "original_path": "etl/data/staging/politicos-es.recovered.db",
+      "quarantine_path": "etl/data/staging/quarantine/2026-08-12/politicos-es.recovered.db",
+      "bytes": 1531031552,
+      "sha256": "8efa9154e352b2db4381c26d100e5bf38da7d8da508e29c9f858ceb9dcab1c6f",
+      "reason": "sqlite_recovery_residue_and_44646_foreign_key_violations"
+    },
+    {
+      "original_path": "etl/data/staging/politicos-es.fresh.recovered.20260214_1705.db",
+      "quarantine_path": "etl/data/staging/quarantine/2026-08-12/politicos-es.fresh.recovered.20260214_1705.db",
+      "bytes": 459022336,
+      "sha256": "05fde0bff116878bd2b066a21b7808625b10e090789597c65a24359671534581",
+      "reason": "sqlite_recovery_residue_1542_rows"
+    },
+    {
+      "original_path": "etl/data/staging/politicos-es.fresh.work.20260214_1710.db",
+      "quarantine_path": "etl/data/staging/quarantine/2026-08-12/politicos-es.fresh.work.20260214_1710.db",
+      "bytes": 460959744,
+      "sha256": "4274add04e1f2cd65fd125d11ad41b6f9a58cc11d6c85caf593d822eccda8dac",
+      "reason": "sqlite_recovery_residue_1542_rows"
+    }
+  ],
+  "derived_artifacts": {
+    "original_root": "etl/data/derived/parl_initiative_doc_texts",
+    "quarantine_root": "etl/data/derived/parl_initiative_doc_texts/quarantine/2026-08-12",
+    "files": 42,
+    "bytes_each": 0,
+    "sha256_each": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reason": "truncated_zero_byte_text_artifacts"
+  }
+}

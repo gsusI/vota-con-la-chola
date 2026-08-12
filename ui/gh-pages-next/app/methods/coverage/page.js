@@ -19,12 +19,12 @@ const coverageArtifacts = [
   },
   {
     title: "coverage-capacity.json",
-    href: "/explorer-sources/data/coverage-capacity.json",
+    href: "/legacy/graph/data/coverage-capacity.json",
     note: "Cobertura frente al total esperado en cada dimensión.",
   },
   {
     title: "coverage-model.json",
-    href: "/explorer-sources/data/coverage-model.json",
+    href: "/legacy/graph/data/coverage-model.json",
     note: "Definición de unidades y criterios usados para medir cobertura.",
   },
 ];

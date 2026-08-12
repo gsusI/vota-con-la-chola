@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "accountability_dossier_snapshot_v1",
-    "generated_at": "2026-05-11T06:40:19+00:00",
+    "generated_at": "2026-08-12T10:51:09+00:00",
     "snapshot_date": "2026-02-12",
     "max_actors": 5000,
     "max_issues": 5000,
@@ -10,33 +10,31 @@
   },
   "snapshot_date": "2026-02-12",
   "coverage": {
-    "entries_total": 126767,
-    "actors_total": 929,
-    "actors_exported": 929,
+    "entries_total": 126760,
+    "actors_total": 923,
+    "actors_exported": 923,
     "actors_truncated": false,
-    "issues_total": 235,
-    "issues_exported": 235,
+    "issues_total": 226,
+    "issues_exported": 226,
     "issues_truncated": false,
-    "issue_actor_edges_total": 33159,
+    "issue_actor_edges_total": 33152,
     "entries_with_person_id": 119828,
     "entries_with_party_id": 1255,
     "entries_with_parliamentary_group_id": 126068,
     "entries_with_mandate_id": 119816,
-    "entries_with_institution_id": 126755,
+    "entries_with_institution_id": 126745,
     "entries_with_org_unit_id": 0,
     "entries_with_position_id": 12,
     "entries_by_role": {
       "abstained": 9648,
       "appointed": 7,
-      "approved": 6,
-      "contracted": 5,
+      "approved": 7,
       "current_owner": 8,
       "delegated_to": 2,
       "dismissed": 5,
-      "enforced": 4,
+      "enforced": 5,
       "proposed": 3,
-      "published": 85,
-      "subsidized": 5,
+      "published": 86,
       "unknown": 3371,
       "voted_against": 65729,
       "voted_for": 47889
@@ -45,13 +43,13 @@
       "appointment": 12,
       "enforcement": 12,
       "implementation": 2,
-      "money": 10,
       "parliamentary_action": 126637,
+      "responsibility_link": 3,
       "rule": 94
     },
     "entries_by_actor_kind": {
       "group": 6252,
-      "institution": 118,
+      "institution": 111,
       "party": 569,
       "person": 119828
     }
@@ -102319,51 +102317,6 @@
       ]
     },
     {
-      "actor_key": "institution_id:8551",
-      "actor_label": "Generalitat de Catalunya",
-      "actor_kind": "institution",
-      "institution_id": 8551,
-      "entries_total": 2,
-      "issues_total": 2,
-      "roles": {
-        "contracted": 1,
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 2
-      },
-      "first_date": "2026-02-13",
-      "last_date": "2026-02-15",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-          "issue_label": "AUTO-CAT-2026-2002 - Centre Tecnologic Delta",
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-13",
-          "last_date": "2026-02-13"
-        },
-        {
-          "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-          "issue_label": "Licitacion regional - Expediente: CAT-2026-0002",
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
-        }
-      ]
-    },
-    {
       "actor_key": "person_id:244",
       "actor_label": "Gerardo Pisarello Prados",
       "actor_kind": "person",
@@ -114169,33 +114122,30 @@
       ]
     },
     {
-      "actor_key": "institution_id:8554",
+      "actor_key": "institution:label:agencia estatal de administracion tributaria",
       "actor_label": "Agencia Estatal de Administracion Tributaria",
       "actor_kind": "institution",
-      "institution_id": 8554,
       "entries_total": 1,
       "issues_total": 1,
       "roles": {
-        "contracted": 1
+        "enforced": 1
       },
       "entry_kinds": {
-        "money": 1
+        "responsibility_link": 1
       },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
       "top_issues": [
         {
-          "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-          "issue_label": "Contrato de servicios - Expediente: EXP-2026-0002",
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
           "entries_total": 1,
           "roles": {
-            "contracted": 1
+            "enforced": 1
           },
           "entry_kinds": {
-            "money": 1
+            "responsibility_link": 1
           },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
+          "first_date": "",
+          "last_date": ""
         }
       ]
     },
@@ -114322,6 +114272,34 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
+        }
+      ]
+    },
+    {
+      "actor_key": "institution:label:cortes generales",
+      "actor_label": "Cortes Generales",
+      "actor_kind": "institution",
+      "entries_total": 1,
+      "issues_total": 1,
+      "roles": {
+        "approved": 1
+      },
+      "entry_kinds": {
+        "responsibility_link": 1
+      },
+      "top_issues": [
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entries_total": 1,
+          "roles": {
+            "approved": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
         }
       ]
     },
@@ -114514,6 +114492,34 @@
       ]
     },
     {
+      "actor_key": "institution:label:jefatura del estado",
+      "actor_label": "Jefatura del Estado",
+      "actor_kind": "institution",
+      "entries_total": 1,
+      "issues_total": 1,
+      "roles": {
+        "published": 1
+      },
+      "entry_kinds": {
+        "responsibility_link": 1
+      },
+      "top_issues": [
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entries_total": 1,
+          "roles": {
+            "published": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
+        }
+      ]
+    },
+    {
       "actor_key": "person_id:70934",
       "actor_label": "Joaqu\u00edn Broch Hueso",
       "actor_kind": "person",
@@ -114542,68 +114548,6 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8550",
-      "actor_label": "Junta de Andalucia",
-      "actor_kind": "institution",
-      "institution_id": 8550,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-14",
-      "last_date": "2026-02-14",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-          "issue_label": "AUTO-AND-2026-2001 - Fundacion Innova Sur",
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-14",
-          "last_date": "2026-02-14"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8552",
-      "actor_label": "Junta de Andalucia - Servicio Andaluz de Salud",
-      "actor_kind": "institution",
-      "institution_id": 8552,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-          "issue_label": "Licitacion regional - Expediente: AND-2026-0001",
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-16",
-          "last_date": "2026-02-16"
         }
       ]
     },
@@ -114828,68 +114772,6 @@
       ]
     },
     {
-      "actor_key": "institution_id:8548",
-      "actor_label": "Ministerio de Agricultura, Pesca y Alimentacion",
-      "actor_kind": "institution",
-      "institution_id": 8548,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-          "issue_label": "BDNS-2026-1002 - Cooperativa Agricola Norte",
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8549",
-      "actor_label": "Ministerio de Cultura",
-      "actor_kind": "institution",
-      "institution_id": 8549,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-          "issue_label": "BDNS-2026-1003 - Asociacion Cultural Centro",
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
-        }
-      ]
-    },
-    {
       "actor_key": "institution_id:8168",
       "actor_label": "Ministerio de Hacienda",
       "actor_kind": "institution",
@@ -114917,99 +114799,6 @@
           },
           "first_date": "2004-10-28",
           "last_date": "2004-10-28"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8555",
-      "actor_label": "Ministerio de Inclusion",
-      "actor_kind": "institution",
-      "institution_id": 8555,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-14",
-      "last_date": "2026-02-14",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-          "issue_label": "Suministro de equipos de red",
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-14",
-          "last_date": "2026-02-14"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8547",
-      "actor_label": "Ministerio de Industria y Turismo",
-      "actor_kind": "institution",
-      "institution_id": 8547,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-          "issue_label": "BDNS-2026-1001 - Empresa Solar SA",
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-16",
-          "last_date": "2026-02-16"
-        }
-      ]
-    },
-    {
-      "actor_key": "institution_id:8553",
-      "actor_label": "Ministerio de Transportes y Movilidad Sostenible",
-      "actor_kind": "institution",
-      "institution_id": 8553,
-      "entries_total": 1,
-      "issues_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "top_issues": [
-        {
-          "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-          "issue_label": "Licitacion abierta - Expediente: EXP-2026-0001",
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-16",
-          "last_date": "2026-02-16"
         }
       ]
     },
@@ -182712,6 +182501,91 @@
       ]
     },
     {
+      "issue_id": "cash-payment-limit-spain",
+      "label": "Limite de pagos en efectivo en Espana",
+      "summary": "Benchmark P2 para una regla formal estatal: que norma fija el limite general de pagos en efectivo a 1.000 euros, quien la cambia, quien la promulga y quien la aplica hoy.",
+      "scope": "Espana",
+      "issue_status": "active",
+      "entries_total": 3,
+      "actors_total": 3,
+      "roles": {
+        "approved": 1,
+        "enforced": 1,
+        "published": 1
+      },
+      "entry_kinds": {
+        "responsibility_link": 3
+      },
+      "actor_kinds": {
+        "institution": 3
+      },
+      "top_actors": [
+        {
+          "actor_key": "institution:label:agencia estatal de administracion tributaria",
+          "actor_label": "Agencia Estatal de Administracion Tributaria",
+          "actor_kind": "institution",
+          "person_id": null,
+          "party_id": null,
+          "parliamentary_group_id": null,
+          "mandate_id": null,
+          "institution_id": null,
+          "org_unit_id": null,
+          "position_id": null,
+          "entries_total": 1,
+          "roles": {
+            "enforced": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
+        },
+        {
+          "actor_key": "institution:label:cortes generales",
+          "actor_label": "Cortes Generales",
+          "actor_kind": "institution",
+          "person_id": null,
+          "party_id": null,
+          "parliamentary_group_id": null,
+          "mandate_id": null,
+          "institution_id": null,
+          "org_unit_id": null,
+          "position_id": null,
+          "entries_total": 1,
+          "roles": {
+            "approved": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
+        },
+        {
+          "actor_key": "institution:label:jefatura del estado",
+          "actor_label": "Jefatura del Estado",
+          "actor_kind": "institution",
+          "person_id": null,
+          "party_id": null,
+          "parliamentary_group_id": null,
+          "mandate_id": null,
+          "institution_id": null,
+          "org_unit_id": null,
+          "position_id": null,
+          "entries_total": 1,
+          "roles": {
+            "published": 1
+          },
+          "entry_kinds": {
+            "responsibility_link": 1
+          },
+          "first_date": "",
+          "last_date": ""
+        }
+      ]
+    },
+    {
       "issue_id": "legal-norm:es:boe-a-2004-18398",
       "label": "Regimen sancionador tributario (reglamento)",
       "summary": "Bloque procedimental y de graduacion / Criterios y procedimiento",
@@ -183088,92 +182962,6 @@
       ]
     },
     {
-      "issue_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-      "label": "AUTO-AND-2026-2001 - Fundacion Innova Sur",
-      "summary": "Junta de Andalucia",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-14",
-      "last_date": "2026-02-14",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8550",
-          "actor_label": "Junta de Andalucia",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8550,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-14",
-          "last_date": "2026-02-14"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-      "label": "AUTO-CAT-2026-2002 - Centre Tecnologic Delta",
-      "summary": "Generalitat de Catalunya",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-13",
-      "last_date": "2026-02-13",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8551",
-          "actor_label": "Generalitat de Catalunya",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8551,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-13",
-          "last_date": "2026-02-13"
-        }
-      ]
-    },
-    {
       "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3248",
       "label": "Acuerdo de 2 de febrero de 2026, de la Comisi\u00f3n Permanente del Consejo General del Poder Judicial, por el que se convoca concurso para la provisi\u00f3n de cargos judiciales entre miembros de la Judicial, con categor\u00eda de Magistrado/a.",
       "scope": "legal",
@@ -183254,178 +183042,6 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-      "label": "BDNS-2026-1001 - Empresa Solar SA",
-      "summary": "Ministerio de Industria y Turismo",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8547",
-          "actor_label": "Ministerio de Industria y Turismo",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8547,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-16",
-          "last_date": "2026-02-16"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-      "label": "BDNS-2026-1002 - Cooperativa Agricola Norte",
-      "summary": "Ministerio de Agricultura, Pesca y Alimentacion",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8548",
-          "actor_label": "Ministerio de Agricultura, Pesca y Alimentacion",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8548,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-      "label": "BDNS-2026-1003 - Asociacion Cultural Centro",
-      "summary": "Ministerio de Cultura",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8549",
-          "actor_label": "Ministerio de Cultura",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8549,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "subsidized": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-      "label": "Contrato de servicios - Expediente: EXP-2026-0002",
-      "summary": "Agencia Estatal de Administracion Tributaria | 72262000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8554",
-          "actor_label": "Agencia Estatal de Administracion Tributaria",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8554,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
         }
       ]
     },
@@ -183594,135 +183210,6 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-      "label": "Licitacion abierta - Expediente: EXP-2026-0001",
-      "summary": "Ministerio de Transportes y Movilidad Sostenible | 45233100",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8553",
-          "actor_label": "Ministerio de Transportes y Movilidad Sostenible",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8553,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-16",
-          "last_date": "2026-02-16"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-      "label": "Licitacion regional - Expediente: AND-2026-0001",
-      "summary": "Junta de Andalucia - Servicio Andaluz de Salud | 85100000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8552",
-          "actor_label": "Junta de Andalucia - Servicio Andaluz de Salud",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8552,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-16",
-          "last_date": "2026-02-16"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-      "label": "Licitacion regional - Expediente: CAT-2026-0002",
-      "summary": "Generalitat de Catalunya | 79710000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8551",
-          "actor_label": "Generalitat de Catalunya",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8551,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-15",
-          "last_date": "2026-02-15"
         }
       ]
     },
@@ -187557,49 +187044,6 @@
           },
           "first_date": "2026-02-12",
           "last_date": "2026-02-12"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-      "label": "Suministro de equipos de red",
-      "summary": "Ministerio de Inclusion | 32420000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "entries_total": 1,
-      "actors_total": 1,
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "actor_kinds": {
-        "institution": 1
-      },
-      "first_date": "2026-02-14",
-      "last_date": "2026-02-14",
-      "top_actors": [
-        {
-          "actor_key": "institution_id:8555",
-          "actor_label": "Ministerio de Inclusion",
-          "actor_kind": "institution",
-          "person_id": null,
-          "party_id": null,
-          "parliamentary_group_id": null,
-          "mandate_id": null,
-          "institution_id": 8555,
-          "org_unit_id": null,
-          "position_id": null,
-          "entries_total": 1,
-          "roles": {
-            "contracted": 1
-          },
-          "entry_kinds": {
-            "money": 1
-          },
-          "first_date": "2026-02-14",
-          "last_date": "2026-02-14"
         }
       ]
     }

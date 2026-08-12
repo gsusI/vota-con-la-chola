@@ -27,6 +27,7 @@ La regla base es simple:
 - `ui/citizen/index.html`
 - `ui/citizen/leaderboards.html`
 - `scripts/export_citizen_snapshot.py`
+- `docs/method/integrity-signal-policy.md`
 
 ## Principios no negociables
 
@@ -44,6 +45,9 @@ La regla base es simple:
 
 5. **La frescura es parte del resultado**
    - Un snapshot viejo o temporalmente inconsistente debe seguir viendose, pero con advertencia o bloqueo segun el caso.
+
+6. **La identidad publica no se oculta**
+   - Todo dato personal publicado por una fuente oficial se conserva con URL, checksum y lineage. La clasificacion de entidad no autoriza supresion. Solo se bloquean secretos, estado local/no publico y trazas de workstation.
 
 ## Metodos publicos
 
@@ -267,6 +271,7 @@ Para el **vote explainer** elegido en `docs/product/killer-use-case.md`, este co
 - presentar `match/mismatch` sobre evidencia no comparable
 - mantener rankings visibles cuando la muestra o la frescura no lo sostienen
 - usar la confianza como sustituto de falta de cobertura
+- presentar una anomalía o señal de revisión como corrupción, ilegalidad, intención o culpa personal
 
 ## Vinculo con el glosario JSON
 

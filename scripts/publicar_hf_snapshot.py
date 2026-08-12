@@ -57,6 +57,7 @@ STATIC_PUBLISHED_FILES = (
     "accountability-ledger-latest.json",
     "accountability-dossiers-latest.json",
     "accountability-evidence-api-latest.json",
+    "andalucia-2026-accountability.json",
 )
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 PLACEHOLDER_VALUES = {"", "your_hf_token_here", "your_hf_username_here"}
@@ -85,7 +86,7 @@ BDE_OBLIGATIONS = (
     "No alterar contenido ni metadatos de origen cuando se redistribuyen como mirror.",
     "Atribuir la fuente (Banco de España) e indicar fecha de actualización.",
     "Si hay elaboración propia, indicarla explícitamente.",
-    "No intentar reidentificación de personas ni circular datos personales identificables.",
+    "No intentar deshacer el enmascarado aplicado por la fuente ni enriquecer con datos no públicos.",
 )
 
 EUROSTAT_OBLIGATIONS = (
@@ -103,7 +104,8 @@ DEFAULT_LEGAL_PROFILE = {
     ),
     "notes": "Estado pendiente: falta evidencia legal consolidada por fuente.",
     "personal_data_notes": (
-        "Si existen datos personales, aplicar minimización, evitar reidentificación y atender solicitudes de derechos."
+        "Conservar íntegramente los datos personales que la fuente oficial publique como registro público de "
+        "rendición de cuentas; no añadir datos no públicos ni deshacer el enmascarado del origen."
     ),
 }
 
@@ -114,7 +116,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.congreso.es/es/avisoLegal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "congreso_votaciones": {
         "verification_status": "verified",
@@ -122,7 +124,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.congreso.es/es/avisoLegal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "congreso_iniciativas": {
         "verification_status": "verified",
@@ -130,7 +132,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.congreso.es/es/avisoLegal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "congreso_intervenciones": {
         "verification_status": "verified",
@@ -138,7 +140,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.congreso.es/es/avisoLegal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Para mirror, conservar integridad/atribución; para derivados, marcar elaboración propia.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "senado_senadores": {
         "verification_status": "verified",
@@ -146,7 +148,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html",
         "obligations": CC_BY_4_OBLIGATIONS,
         "notes": "Redistribución y transformación permitidas con atribución.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "senado_votaciones": {
         "verification_status": "verified",
@@ -154,7 +156,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html",
         "obligations": CC_BY_4_OBLIGATIONS,
         "notes": "Redistribución y transformación permitidas con atribución.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "senado_iniciativas": {
         "verification_status": "verified",
@@ -162,7 +164,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.senado.es/web/relacionesciudadanos/datosabiertos/catalogodatos/index.html",
         "obligations": CC_BY_4_OBLIGATIONS,
         "notes": "Redistribución y transformación permitidas con atribución.",
-        "personal_data_notes": "Datos de representantes: publicar solo campos necesarios para transparencia.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
     "boe_api_legal": {
         "verification_status": "verified",
@@ -174,7 +176,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
             "Excluir o segregar materiales con restricciones de terceros (p. ej. NC/ND).",
         ),
         "notes": "Aplicar exclusiones de terceros cuando correspondan.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "moncloa_referencias": {
         "verification_status": "verified",
@@ -182,7 +184,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.lamoncloa.gob.es/Paginas/avisolegal.aspx",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Atribución explícita a La Moncloa/Ministerio de la Presidencia.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "moncloa_rss_referencias": {
         "verification_status": "verified",
@@ -190,23 +192,23 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.lamoncloa.gob.es/Paginas/avisolegal.aspx",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Atribución explícita a La Moncloa/Ministerio de la Presidencia.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "bdns_api_subvenciones": {
         "verification_status": "verified",
         "reuse_basis": "Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones)",
         "terms_url": "https://datos.gob.es/es/aviso-legal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
-        "notes": "Riesgo adicional GDPR cuando haya beneficiarios personas físicas.",
-        "personal_data_notes": "Aplicar minimización; considerar segregación/anonimización de beneficiarios personas físicas.",
+        "notes": "Los beneficiarios, incluidos los que sean personas físicas, son evidencia pública de gasto.",
+        "personal_data_notes": "Conservar exactamente nombre e identificador tal como los publique BDNS; no deshacer su enmascarado.",
     },
     "bdns_autonomico": {
         "verification_status": "verified",
         "reuse_basis": "Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones)",
         "terms_url": "https://datos.gob.es/es/aviso-legal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
-        "notes": "Riesgo adicional GDPR cuando haya beneficiarios personas físicas.",
-        "personal_data_notes": "Aplicar minimización; considerar segregación/anonimización de beneficiarios personas físicas.",
+        "notes": "Los beneficiarios, incluidos los que sean personas físicas, son evidencia pública de gasto.",
+        "personal_data_notes": "Conservar exactamente nombre e identificador tal como los publique BDNS; no deshacer su enmascarado.",
     },
     "placsp_sindicacion": {
         "verification_status": "verified",
@@ -218,7 +220,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
             "Conservar metadatos/condiciones de reutilización cuando existan.",
         ),
         "notes": "Si se mezcla con datasets de Hacienda, aplican además condiciones del aviso legal tipo.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "placsp_autonomico": {
         "verification_status": "verified",
@@ -230,7 +232,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
             "Conservar metadatos/condiciones de reutilización cuando existan.",
         ),
         "notes": "Si se mezcla con datasets de Hacienda, aplican además condiciones del aviso legal tipo.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "municipal_concejales": {
         "verification_status": "verified",
@@ -238,7 +240,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://concejales.redsara.es",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "Datos de cargos electos con finalidad de transparencia.",
-        "personal_data_notes": "Minimizar campos no necesarios y evitar exposición de datos de contacto personal.",
+        "personal_data_notes": "Conservar íntegramente los contactos que la fuente oficial publique para rendición de cuentas.",
     },
     "asamblea_madrid_ocupaciones": {
         "verification_status": "verified",
@@ -246,7 +248,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.asambleamadrid.es/datos-abiertos",
         "obligations": CC_BY_3_ES_OBLIGATIONS,
         "notes": "Atribuir explícitamente a Asamblea de Madrid.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "aemet_opendata_series": {
         "verification_status": "verified",
@@ -262,7 +264,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://www.bde.es",
         "obligations": BDE_OBLIGATIONS,
         "notes": "Cuando haya tratamiento, indicar elaboración propia con datos extraídos.",
-        "personal_data_notes": "Difundir solo resultados agregados cuando exista riesgo de identificación.",
+        "personal_data_notes": "Conservar la granularidad e identidad que publique la fuente oficial; no añadir datos no públicos.",
     },
     "eurostat_sdmx": {
         "verification_status": "partially_verified",
@@ -278,7 +280,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://datos.gob.es/es/aviso-legal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "No se pudo abrir el aviso legal del portal en este entorno; confirmar en próxima revisión.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "infoelectoral_procesos": {
         "verification_status": "partially_verified",
@@ -286,7 +288,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
         "terms_url": "https://datos.gob.es/es/aviso-legal",
         "obligations": DEFAULT_LEGAL_OBLIGATIONS,
         "notes": "No se pudo abrir el aviso legal del portal en este entorno; confirmar en próxima revisión.",
-        "personal_data_notes": "No publicar campos personales innecesarios.",
+        "personal_data_notes": "Conservar íntegramente los campos personales publicados por la fuente oficial.",
     },
     "europarl_meps": {
         "verification_status": "not_verified",
@@ -297,7 +299,7 @@ LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
             "Conservar evidencia de la revisión legal cuando se confirme.",
         ),
         "notes": "Estado no confirmado en esta revisión.",
-        "personal_data_notes": "Aplicar minimización al redistribuir datos personales de representantes.",
+        "personal_data_notes": "Conservar íntegramente los campos de representantes publicados por la fuente oficial.",
     },
 }
 
@@ -676,7 +678,7 @@ def build_dataset_readme(
             "Cautelas de cumplimiento:",
             "- Este dataset no implica respaldo institucional de las fuentes.",
             "- Cuando una fuente exige integridad/no alteración para mirror, mantener `published/*` como capa raw y declarar transformaciones en derivados.",
-            "- Si hay datos personales, aplicar minimización, evitar reidentificación y revisar compatibilidad de finalidad (GDPR).",
+            "- Los datos personales ya publicados por fuentes oficiales como evidencia de rendición de cuentas se conservan íntegros; no se añaden datos no públicos ni se deshace el enmascarado de origen.",
             "- Fuentes con estado `parcial`, `pendiente` o `no verificado` requieren revisión legal adicional antes de reutilización comercial sensible.",
             "- Si una fuente de origen no aparece en esta lista, se considera `pendiente` hasta verificación manual.",
             "",

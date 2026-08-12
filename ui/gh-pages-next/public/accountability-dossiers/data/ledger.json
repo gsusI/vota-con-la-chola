@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "accountability_ledger_snapshot_v1",
-    "generated_at": "2026-05-11T06:40:11+00:00",
+    "generated_at": "2026-08-12T10:51:02+00:00",
     "snapshot_date": "2026-02-12",
     "issue_id": "",
     "max_entries_per_issue": 10,
@@ -9,32 +9,30 @@
   },
   "snapshot_date": "2026-02-12",
   "coverage": {
-    "issues_total": 235,
-    "entries_total": 126767,
-    "entries_exported": 1330,
+    "issues_total": 226,
+    "entries_total": 126760,
+    "entries_exported": 1323,
     "entries_truncated": true,
     "issues_with_truncated_entries": 120,
-    "actors_total": 929,
-    "entries_with_resolved_actor_id": 126767,
+    "actors_total": 923,
+    "entries_with_resolved_actor_id": 126757,
     "entries_with_person_id": 119828,
     "entries_with_party_id": 1255,
     "entries_with_parliamentary_group_id": 126068,
     "entries_with_mandate_id": 119816,
-    "entries_with_institution_id": 126755,
+    "entries_with_institution_id": 126745,
     "entries_with_org_unit_id": 0,
     "entries_with_position_id": 12,
     "entries_by_role": {
       "abstained": 9648,
       "appointed": 7,
-      "approved": 6,
-      "contracted": 5,
+      "approved": 7,
       "current_owner": 8,
       "delegated_to": 2,
       "dismissed": 5,
-      "enforced": 4,
+      "enforced": 5,
       "proposed": 3,
-      "published": 85,
-      "subsidized": 5,
+      "published": 86,
       "unknown": 3371,
       "voted_against": 65729,
       "voted_for": 47889
@@ -43,13 +41,13 @@
       "appointment": 12,
       "enforcement": 12,
       "implementation": 2,
-      "money": 10,
       "parliamentary_action": 126637,
+      "responsibility_link": 3,
       "rule": 94
     },
     "entries_by_actor_kind": {
       "group": 6252,
-      "institution": 118,
+      "institution": 111,
       "party": 569,
       "person": 119828
     }
@@ -36712,58 +36710,6 @@
       }
     },
     {
-      "actor_key": "institution_id:8551",
-      "actor_label": "Generalitat de Catalunya",
-      "actor_kind": "institution",
-      "institution_id": 8551,
-      "entries_total": 2,
-      "issues_total": 2,
-      "first_date": "2026-02-13",
-      "last_date": "2026-02-15",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-          "issue_label": "AUTO-CAT-2026-2002 - Centre Tecnologic Delta",
-          "entry_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "actor_label": "Generalitat de Catalunya",
-          "published_date": "2026-02-13",
-          "title": "AUTO-CAT-2026-2002 - Centre Tecnologic Delta",
-          "summary": "Generalitat de Catalunya",
-          "evidence_tier": 1,
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/autonomico/catalunya/3002",
-          "source_locator": "money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta"
-        },
-        {
-          "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-          "issue_label": "Licitacion regional - Expediente: CAT-2026-0002",
-          "entry_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "actor_label": "Generalitat de Catalunya",
-          "published_date": "2026-02-15",
-          "title": "Licitacion regional - Expediente: CAT-2026-0002",
-          "summary": "Generalitat de Catalunya | 79710000",
-          "evidence_tier": 1,
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=cat0002",
-          "source_locator": "money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e"
-        }
-      ],
-      "roles": {
-        "contracted": 1,
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 2
-      },
-      "evidence_tiers": {
-        "1": 2
-      }
-    },
-    {
       "actor_key": "person_id:244",
       "actor_label": "Gerardo Pisarello Prados",
       "actor_kind": "person",
@@ -50312,36 +50258,33 @@
       }
     },
     {
-      "actor_key": "institution_id:8554",
+      "actor_key": "institution:label:agencia estatal de administracion tributaria",
       "actor_label": "Agencia Estatal de Administracion Tributaria",
       "actor_kind": "institution",
-      "institution_id": 8554,
       "entries_total": 1,
       "issues_total": 1,
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
       "sample_entries": [
         {
-          "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-          "issue_label": "Contrato de servicios - Expediente: EXP-2026-0002",
-          "entry_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:aeat-applies-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "enforced",
           "actor_label": "Agencia Estatal de Administracion Tributaria",
-          "published_date": "2026-02-15",
-          "title": "Contrato de servicios - Expediente: EXP-2026-0002",
-          "summary": "Agencia Estatal de Administracion Tributaria | 72262000",
+          "title": "Ley 7/2012 (texto consolidado)",
+          "summary": "Tramita y resuelve el procedimiento sancionador y gestiona la recaudacion de las sanciones vinculadas a esta limitacion.",
           "evidence_tier": 1,
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=exp0002",
-          "source_locator": "money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2"
+          "source_title": "Ley 7/2012 (texto consolidado)",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-13416",
+          "source_locator": "art. 7.Tres.2 y Cuatro",
+          "evidence_quote": "Art. 7.Tres.2 y Cuatro de la Ley 7/2012."
         }
       ],
       "roles": {
-        "contracted": 1
+        "enforced": 1
       },
       "entry_kinds": {
-        "money": 1
+        "responsibility_link": 1
       },
       "evidence_tiers": {
         "1": 1
@@ -50486,6 +50429,39 @@
       },
       "entry_kinds": {
         "appointment": 1
+      },
+      "evidence_tiers": {
+        "1": 1
+      }
+    },
+    {
+      "actor_key": "institution:label:cortes generales",
+      "actor_label": "Cortes Generales",
+      "actor_kind": "institution",
+      "entries_total": 1,
+      "issues_total": 1,
+      "sample_entries": [
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:cortes-generales-change-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "approved",
+          "actor_label": "Cortes Generales",
+          "title": "Ley 11/2021",
+          "summary": "Aprueban la ley que rebaja el limite general de pagos en efectivo a 1000 euros.",
+          "evidence_tier": 1,
+          "source_title": "Ley 11/2021",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+          "source_locator": "Ley aprobada por las Cortes Generales",
+          "evidence_quote": "Potestad legislativa estatal en materia tributaria y financiera."
+        }
+      ],
+      "roles": {
+        "approved": 1
+      },
+      "entry_kinds": {
+        "responsibility_link": 1
       },
       "evidence_tiers": {
         "1": 1
@@ -50714,6 +50690,39 @@
       }
     },
     {
+      "actor_key": "institution:label:jefatura del estado",
+      "actor_label": "Jefatura del Estado",
+      "actor_kind": "institution",
+      "entries_total": 1,
+      "issues_total": 1,
+      "sample_entries": [
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:jefatura-estado-promulgates-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "published",
+          "actor_label": "Jefatura del Estado",
+          "title": "Ley 11/2021",
+          "summary": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
+          "evidence_tier": 1,
+          "source_title": "Ley 11/2021",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+          "source_locator": "formula promulgatoria y firma",
+          "evidence_quote": "Firma y formula promulgatoria en el BOE."
+        }
+      ],
+      "roles": {
+        "published": 1
+      },
+      "entry_kinds": {
+        "responsibility_link": 1
+      },
+      "evidence_tiers": {
+        "1": 1
+      }
+    },
+    {
       "actor_key": "person_id:70934",
       "actor_label": "Joaqu\u00edn Broch Hueso",
       "actor_kind": "person",
@@ -50745,78 +50754,6 @@
       },
       "entry_kinds": {
         "appointment": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8550",
-      "actor_label": "Junta de Andalucia",
-      "actor_kind": "institution",
-      "institution_id": 8550,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-14",
-      "last_date": "2026-02-14",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-          "issue_label": "AUTO-AND-2026-2001 - Fundacion Innova Sur",
-          "entry_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "actor_label": "Junta de Andalucia",
-          "published_date": "2026-02-14",
-          "title": "AUTO-AND-2026-2001 - Fundacion Innova Sur",
-          "summary": "Junta de Andalucia",
-          "evidence_tier": 1,
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/autonomico/andalucia/3001",
-          "source_locator": "money:bdns:bdns_autonomico:concesion:auto_and_2026_3001"
-        }
-      ],
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8552",
-      "actor_label": "Junta de Andalucia - Servicio Andaluz de Salud",
-      "actor_kind": "institution",
-      "institution_id": 8552,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-          "issue_label": "Licitacion regional - Expediente: AND-2026-0001",
-          "entry_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "actor_label": "Junta de Andalucia - Servicio Andaluz de Salud",
-          "published_date": "2026-02-16",
-          "title": "Licitacion regional - Expediente: AND-2026-0001",
-          "summary": "Junta de Andalucia - Servicio Andaluz de Salud | 85100000",
-          "evidence_tier": 1,
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=and0001",
-          "source_locator": "money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97"
-        }
-      ],
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
       },
       "evidence_tiers": {
         "1": 1
@@ -51076,78 +51013,6 @@
       }
     },
     {
-      "actor_key": "institution_id:8548",
-      "actor_label": "Ministerio de Agricultura, Pesca y Alimentacion",
-      "actor_kind": "institution",
-      "institution_id": 8548,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-          "issue_label": "BDNS-2026-1002 - Cooperativa Agricola Norte",
-          "entry_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "actor_label": "Ministerio de Agricultura, Pesca y Alimentacion",
-          "published_date": "2026-02-15",
-          "title": "BDNS-2026-1002 - Cooperativa Agricola Norte",
-          "summary": "Ministerio de Agricultura, Pesca y Alimentacion",
-          "evidence_tier": 1,
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/concesiones/9002",
-          "source_locator": "money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002"
-        }
-      ],
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8549",
-      "actor_label": "Ministerio de Cultura",
-      "actor_kind": "institution",
-      "institution_id": 8549,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-15",
-      "last_date": "2026-02-15",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-          "issue_label": "BDNS-2026-1003 - Asociacion Cultural Centro",
-          "entry_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "actor_label": "Ministerio de Cultura",
-          "published_date": "2026-02-15",
-          "title": "BDNS-2026-1003 - Asociacion Cultural Centro",
-          "summary": "Ministerio de Cultura",
-          "evidence_tier": 1,
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/concesiones/9003",
-          "source_locator": "money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro"
-        }
-      ],
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
       "actor_key": "institution_id:8168",
       "actor_label": "Ministerio de Hacienda",
       "actor_kind": "institution",
@@ -51179,114 +51044,6 @@
       },
       "entry_kinds": {
         "implementation": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8555",
-      "actor_label": "Ministerio de Inclusion",
-      "actor_kind": "institution",
-      "institution_id": 8555,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-14",
-      "last_date": "2026-02-14",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-          "issue_label": "Suministro de equipos de red",
-          "entry_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "actor_label": "Ministerio de Inclusion",
-          "published_date": "2026-02-14",
-          "title": "Suministro de equipos de red",
-          "summary": "Ministerio de Inclusion | 32420000",
-          "evidence_tier": 1,
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=exp0003&numexp=EXP-2026-0003",
-          "source_locator": "money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f"
-        }
-      ],
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8547",
-      "actor_label": "Ministerio de Industria y Turismo",
-      "actor_kind": "institution",
-      "institution_id": 8547,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-          "issue_label": "BDNS-2026-1001 - Empresa Solar SA",
-          "entry_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "actor_label": "Ministerio de Industria y Turismo",
-          "published_date": "2026-02-16",
-          "title": "BDNS-2026-1001 - Empresa Solar SA",
-          "summary": "Ministerio de Industria y Turismo",
-          "evidence_tier": 1,
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias/1001",
-          "source_locator": "money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001"
-        }
-      ],
-      "roles": {
-        "subsidized": 1
-      },
-      "entry_kinds": {
-        "money": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8553",
-      "actor_label": "Ministerio de Transportes y Movilidad Sostenible",
-      "actor_kind": "institution",
-      "institution_id": 8553,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-16",
-      "last_date": "2026-02-16",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-          "issue_label": "Licitacion abierta - Expediente: EXP-2026-0001",
-          "entry_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "actor_label": "Ministerio de Transportes y Movilidad Sostenible",
-          "published_date": "2026-02-16",
-          "title": "Licitacion abierta - Expediente: EXP-2026-0001",
-          "summary": "Ministerio de Transportes y Movilidad Sostenible | 45233100",
-          "evidence_tier": 1,
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=exp0001",
-          "source_locator": "money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266"
-        }
-      ],
-      "roles": {
-        "contracted": 1
-      },
-      "entry_kinds": {
-        "money": 1
       },
       "evidence_tiers": {
         "1": 1
@@ -51445,76 +51202,6 @@
     }
   ],
   "issues": [
-    {
-      "issue_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-      "canonical_key": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-      "label": "AUTO-AND-2026-2001 - Fundacion Innova Sur",
-      "summary": "Junta de Andalucia",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "role_in_chain": "subsidized",
-          "actor_label": "Junta de Andalucia",
-          "actor_kind": "institution",
-          "institution_id": 8550,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:bdns:bdns_autonomico:concesion:auto_and_2026_3001",
-          "published_date": "2026-02-14",
-          "title": "AUTO-AND-2026-2001 - Fundacion Innova Sur",
-          "summary": "Junta de Andalucia",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "bdns_subvenciones",
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/autonomico/andalucia/3001",
-          "source_locator": "money:bdns:bdns_autonomico:concesion:auto_and_2026_3001"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-      "canonical_key": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-      "label": "AUTO-CAT-2026-2002 - Centre Tecnologic Delta",
-      "summary": "Generalitat de Catalunya",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "role_in_chain": "subsidized",
-          "actor_label": "Generalitat de Catalunya",
-          "actor_kind": "institution",
-          "institution_id": 8551,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta",
-          "published_date": "2026-02-13",
-          "title": "AUTO-CAT-2026-2002 - Centre Tecnologic Delta",
-          "summary": "Generalitat de Catalunya",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "bdns_subvenciones",
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/autonomico/catalunya/3002",
-          "source_locator": "money:bdns:bdns_autonomico:conv:auto_cat_2026_2002:ben:centre_tecnologic_delta"
-        }
-      ]
-    },
     {
       "issue_id": "parl-initiative:senado:leg15:exp:610/000006",
       "canonical_key": "parl-initiative:senado:leg15:exp:610/000006",
@@ -63014,111 +62701,6 @@
       ]
     },
     {
-      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-      "canonical_key": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-      "label": "BDNS-2026-1001 - Empresa Solar SA",
-      "summary": "Ministerio de Industria y Turismo",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "role_in_chain": "subsidized",
-          "actor_label": "Ministerio de Industria y Turismo",
-          "actor_kind": "institution",
-          "institution_id": 8547,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001",
-          "published_date": "2026-02-16",
-          "title": "BDNS-2026-1001 - Empresa Solar SA",
-          "summary": "Ministerio de Industria y Turismo",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "bdns_subvenciones",
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias/1001",
-          "source_locator": "money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9001"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-      "canonical_key": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-      "label": "BDNS-2026-1002 - Cooperativa Agricola Norte",
-      "summary": "Ministerio de Agricultura, Pesca y Alimentacion",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "role_in_chain": "subsidized",
-          "actor_label": "Ministerio de Agricultura, Pesca y Alimentacion",
-          "actor_kind": "institution",
-          "institution_id": 8548,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002",
-          "published_date": "2026-02-15",
-          "title": "BDNS-2026-1002 - Cooperativa Agricola Norte",
-          "summary": "Ministerio de Agricultura, Pesca y Alimentacion",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "bdns_subvenciones",
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/concesiones/9002",
-          "source_locator": "money:bdns:bdns_api_subvenciones:concesion:bdnsc_2026_9002"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-      "canonical_key": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-      "label": "BDNS-2026-1003 - Asociacion Cultural Centro",
-      "summary": "Ministerio de Cultura",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-          "entry_kind": "money",
-          "accountability_role": "subsidized",
-          "role_in_chain": "subsidized",
-          "actor_label": "Ministerio de Cultura",
-          "actor_kind": "institution",
-          "institution_id": 8549,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro",
-          "published_date": "2026-02-15",
-          "title": "BDNS-2026-1003 - Asociacion Cultural Centro",
-          "summary": "Ministerio de Cultura",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "bdns_subvenciones",
-          "source_title": "Subvencion publica",
-          "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/concesiones/9003",
-          "source_locator": "money:bdns:bdns_api_subvenciones:conv:bdns_2026_1003:ben:asociacion_cultural_centro"
-        }
-      ]
-    },
-    {
       "issue_id": "parl-initiative:senado:leg14:exp:610/000068",
       "canonical_key": "parl-initiative:senado:leg14:exp:610/000068",
       "label": "Canje de Notas constitutivo de Acuerdo para la modificaci\u00f3n del Convenio sobre transporte a\u00e9reo entre el Reino de Espa\u00f1a y los Estados Unidos Mexicanos, hecho en Madrid el 29 de enero de 2020 y 23 de febrero de 2021. (610/000068)",
@@ -63912,41 +63494,6 @@
           "source_url": "https://www.senado.es/legis14/votaciones/ses_25.xml",
           "source_locator": "url:https://www.senado.es/legis14/votaciones/ses_25_589.xml",
           "evidence_quote": "S\u00cd"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-      "canonical_key": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-      "label": "Contrato de servicios - Expediente: EXP-2026-0002",
-      "summary": "Agencia Estatal de Administracion Tributaria | 72262000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "role_in_chain": "contracted",
-          "actor_label": "Agencia Estatal de Administracion Tributaria",
-          "actor_kind": "institution",
-          "institution_id": 8554,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2",
-          "published_date": "2026-02-15",
-          "title": "Contrato de servicios - Expediente: EXP-2026-0002",
-          "summary": "Agencia Estatal de Administracion Tributaria | 72262000",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "placsp_contratacion",
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=exp0002",
-          "source_locator": "money:placsp:placsp_sindicacion:expediente:exp_2026_0002:6ed468ccb4c2"
         }
       ]
     },
@@ -72562,107 +72109,72 @@
       ]
     },
     {
-      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-      "canonical_key": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-      "label": "Licitacion abierta - Expediente: EXP-2026-0001",
-      "summary": "Ministerio de Transportes y Movilidad Sostenible | 45233100",
-      "scope": "dinero",
+      "issue_id": "cash-payment-limit-spain",
+      "case_id": "cash-payment-limit-spain",
+      "canonical_key": "cash-payment-limit-spain",
+      "label": "Limite de pagos en efectivo en Espana",
+      "summary": "Benchmark P2 para una regla formal estatal: que norma fija el limite general de pagos en efectivo a 1.000 euros, quien la cambia, quien la promulga y quien la aplica hoy.",
+      "scope": "Espana",
       "issue_status": "active",
       "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
+      "updated_at": "2026-05-12T16:39:24+00:00",
+      "entries_total": 3,
+      "entries_exported": 3,
       "entries_truncated": false,
       "entries": [
         {
-          "entry_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "role_in_chain": "contracted",
-          "actor_label": "Ministerio de Transportes y Movilidad Sostenible",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:aeat-applies-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "enforced",
+          "role_in_chain": "Tramita y resuelve el procedimiento sancionador y gestiona la recaudacion de las sanciones vinculadas a esta limitacion.",
+          "actor_label": "Agencia Estatal de Administracion Tributaria",
           "actor_kind": "institution",
-          "institution_id": 8553,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266",
-          "published_date": "2026-02-16",
-          "title": "Licitacion abierta - Expediente: EXP-2026-0001",
-          "summary": "Ministerio de Transportes y Movilidad Sostenible | 45233100",
-          "accountability_question": "What official policy event happened for this issue?",
+          "linked_object_type": "governing_rule",
+          "linked_object_id": "cash-limit-sanction-regime",
+          "title": "Ley 7/2012 (texto consolidado)",
+          "summary": "Tramita y resuelve el procedimiento sancionador y gestiona la recaudacion de las sanciones vinculadas a esta limitacion.",
+          "accountability_question": "Quien hace cumplir hoy la limitacion?",
           "evidence_tier": 1,
-          "source_id": "placsp_contratacion",
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=exp0001",
-          "source_locator": "money:placsp:placsp_sindicacion:expediente:exp_2026_0001:4b7d196e3266"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-      "canonical_key": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-      "label": "Licitacion regional - Expediente: AND-2026-0001",
-      "summary": "Junta de Andalucia - Servicio Andaluz de Salud | 85100000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
+          "source_title": "Ley 7/2012 (texto consolidado)",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-13416",
+          "source_locator": "art. 7.Tres.2 y Cuatro",
+          "evidence_quote": "Art. 7.Tres.2 y Cuatro de la Ley 7/2012."
+        },
         {
-          "entry_id": "policy-event:money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "role_in_chain": "contracted",
-          "actor_label": "Junta de Andalucia - Servicio Andaluz de Salud",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:cortes-generales-change-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "approved",
+          "role_in_chain": "Aprueban la ley que rebaja el limite general de pagos en efectivo a 1000 euros.",
+          "actor_label": "Cortes Generales",
           "actor_kind": "institution",
-          "institution_id": 8552,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97",
-          "published_date": "2026-02-16",
-          "title": "Licitacion regional - Expediente: AND-2026-0001",
-          "summary": "Junta de Andalucia - Servicio Andaluz de Salud | 85100000",
-          "accountability_question": "What official policy event happened for this issue?",
+          "linked_object_type": "administrative_act",
+          "linked_object_id": "law-11-2021-publication",
+          "title": "Ley 11/2021",
+          "summary": "Aprueban la ley que rebaja el limite general de pagos en efectivo a 1000 euros.",
+          "accountability_question": "Quien cambia formalmente la regla?",
           "evidence_tier": 1,
-          "source_id": "placsp_contratacion",
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=and0001",
-          "source_locator": "money:placsp:placsp_autonomico:expediente:and_2026_0001:4f1665224f97"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-      "canonical_key": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-      "label": "Licitacion regional - Expediente: CAT-2026-0002",
-      "summary": "Generalitat de Catalunya | 79710000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
+          "source_title": "Ley 11/2021",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+          "source_locator": "Ley aprobada por las Cortes Generales",
+          "evidence_quote": "Potestad legislativa estatal en materia tributaria y financiera."
+        },
         {
-          "entry_id": "policy-event:money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "role_in_chain": "contracted",
-          "actor_label": "Generalitat de Catalunya",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:jefatura-estado-promulgates-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "published",
+          "role_in_chain": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
+          "actor_label": "Jefatura del Estado",
           "actor_kind": "institution",
-          "institution_id": 8551,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e",
-          "published_date": "2026-02-15",
-          "title": "Licitacion regional - Expediente: CAT-2026-0002",
-          "summary": "Generalitat de Catalunya | 79710000",
-          "accountability_question": "What official policy event happened for this issue?",
+          "linked_object_type": "administrative_act",
+          "linked_object_id": "law-11-2021-publication",
+          "title": "Ley 11/2021",
+          "summary": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
+          "accountability_question": "Quien convierte el cambio legal en norma publicada?",
           "evidence_tier": 1,
-          "source_id": "placsp_contratacion",
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=cat0002",
-          "source_locator": "money:placsp:placsp_autonomico:expediente:cat_2026_0002:575bfd60c21e"
+          "source_title": "Ley 11/2021",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+          "source_locator": "formula promulgatoria y firma",
+          "evidence_quote": "Firma y formula promulgatoria en el BOE."
         }
       ]
     },
@@ -86496,41 +86008,6 @@
           "source_title": "Documento legal BOE",
           "source_url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-3253",
           "source_locator": "boe:boe_api_legal:BOE-A-2026-3253"
-        }
-      ]
-    },
-    {
-      "issue_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-      "canonical_key": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-      "label": "Suministro de equipos de red",
-      "summary": "Ministerio de Inclusion | 32420000",
-      "scope": "dinero",
-      "issue_status": "active",
-      "source_kind": "derived",
-      "updated_at": "2026-05-11T06:40:00+00:00",
-      "entries_total": 1,
-      "entries_exported": 1,
-      "entries_truncated": false,
-      "entries": [
-        {
-          "entry_id": "policy-event:money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-          "entry_kind": "money",
-          "accountability_role": "contracted",
-          "role_in_chain": "contracted",
-          "actor_label": "Ministerio de Inclusion",
-          "actor_kind": "institution",
-          "institution_id": 8555,
-          "linked_object_type": "policy_event",
-          "linked_object_id": "money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f",
-          "published_date": "2026-02-14",
-          "title": "Suministro de equipos de red",
-          "summary": "Ministerio de Inclusion | 32420000",
-          "accountability_question": "What official policy event happened for this issue?",
-          "evidence_tier": 1,
-          "source_id": "placsp_contratacion",
-          "source_title": "Contratacion publica",
-          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink%3Adetalle_licitacion&idEvl=exp0003&numexp=EXP-2026-0003",
-          "source_locator": "money:placsp:placsp_sindicacion:expediente:exp_2026_0003:902ce203059f"
         }
       ]
     },

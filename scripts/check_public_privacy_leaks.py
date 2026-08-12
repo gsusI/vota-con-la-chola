@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail when public artifacts contain local-path or email leaks."""
+"""Fail when public artifacts contain workstation-path or internal-state leaks."""
 
 from __future__ import annotations
 

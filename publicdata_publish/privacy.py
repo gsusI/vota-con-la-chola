@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
+import gzip
 import mmap
 from pathlib import Path
 import re
 import shutil
 import subprocess
-from typing import Iterable
+from typing import Iterable, TextIO
 
 
 DEFAULT_SCAN_PATHS = (
@@ -20,7 +21,6 @@ SKIP_SUFFIXES = {
     ".sqlite",
     ".sqlite3",
     ".parquet",
-    ".gz",
     ".zip",
     ".jpg",
     ".jpeg",
@@ -30,25 +30,25 @@ SKIP_SUFFIXES = {
 }
 LOCAL_USERS_PREFIX = "/" + "Users" + "/"
 LOCAL_FILE_USERS_PREFIX = "file://" + LOCAL_USERS_PREFIX
-EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 LEAK_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("local_file_url", re.compile(re.escape(LOCAL_FILE_USERS_PREFIX) + r"[^\r\n\"']+")),
     ("local_user_path", re.compile(re.escape(LOCAL_USERS_PREFIX) + r"[^/\s]+/")),
     ("gdrive_email_segment", re.compile(r"GoogleDrive-[^/\s]+@[^\s/]+")),
-    ("email", EMAIL_RE),
     ("internal_db_path", re.compile(r'"db_path"\s*:\s*"[^"\r\n]+"')),
 )
 LEAK_PREFILTERS: dict[str, tuple[str, ...]] = {
     "local_file_url": (LOCAL_FILE_USERS_PREFIX,),
     "local_user_path": (LOCAL_USERS_PREFIX,),
     "gdrive_email_segment": ("GoogleDrive-", "@"),
-    "email": ("@",),
     "internal_db_path": ('"db_path"',),
 }
 LEAK_SENTINELS = tuple(sorted({token for tokens in LEAK_PREFILTERS.values() for token in tokens}))
 LEAK_SENTINEL_BYTES = tuple(token.encode("utf-8") for token in LEAK_SENTINELS)
 LEAK_SENTINEL_BYTES_RE = re.compile(b"|".join(re.escape(token) for token in LEAK_SENTINEL_BYTES))
 LARGE_FILE_PREFILTER_BYTES = 1024 * 1024
+GZIP_SCAN_CHARS = 1024 * 1024
+GZIP_SCAN_OVERLAP_CHARS = 4096
+MAX_GZIP_FINDINGS_PER_FILE = 50
 
 
 @dataclass
@@ -60,7 +60,7 @@ class Finding:
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Check public artifacts for private path/email leaks")
+    parser = argparse.ArgumentParser(description="Check public artifacts for workstation-path and internal-state leaks")
     parser.add_argument(
         "--path",
         action="append",
@@ -148,6 +148,58 @@ def large_file_may_contain_leak_candidate(path: Path) -> bool:
         return False
 
 
+def _collect_stream_findings(path: Path, handle: TextIO) -> list[Finding]:
+    findings: list[Finding] = []
+    carry = ""
+    lines_before = 0
+    while len(findings) < MAX_GZIP_FINDINGS_PER_FILE:
+        chunk = handle.read(GZIP_SCAN_CHARS)
+        if not chunk:
+            break
+        text = carry + chunk
+        carry_length = len(carry)
+        if may_contain_leak_candidate(text):
+            for kind, pattern in LEAK_PATTERNS:
+                if not should_scan_pattern(text, kind):
+                    continue
+                for match in pattern.finditer(text):
+                    if match.end() <= carry_length:
+                        continue
+                    line = lines_before + text.count("\n", 0, match.start()) + 1
+                    findings.append(
+                        Finding(
+                            path=path,
+                            line=line,
+                            kind=kind,
+                            snippet=build_snippet(text, match.start(), match.end()),
+                        )
+                    )
+                    if len(findings) >= MAX_GZIP_FINDINGS_PER_FILE:
+                        break
+                if len(findings) >= MAX_GZIP_FINDINGS_PER_FILE:
+                    break
+        processed = text[:-GZIP_SCAN_OVERLAP_CHARS]
+        lines_before += processed.count("\n")
+        carry = text[-GZIP_SCAN_OVERLAP_CHARS:]
+    return findings
+
+
+def collect_gzip_findings(path: Path) -> list[Finding]:
+    try:
+        with gzip.open(path, "rt", encoding="utf-8", errors="replace") as handle:
+            return _collect_stream_findings(path, handle)
+    except (OSError, EOFError):
+        return []
+
+
+def collect_large_text_findings(path: Path) -> list[Finding]:
+    try:
+        with path.open("rt", encoding="utf-8", errors="replace") as handle:
+            return _collect_stream_findings(path, handle)
+    except OSError:
+        return []
+
+
 def collect_findings(paths: list[Path]) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     files_scanned = 0
@@ -156,10 +208,19 @@ def collect_findings(paths: list[Path]) -> tuple[list[Finding], int]:
         if not file_is_scannable(file_path):
             continue
         files_scanned += 1
+        if file_path.suffix.lower() == ".gz":
+            findings.extend(collect_gzip_findings(file_path))
+            continue
         if rg_candidate_paths is not None:
             if str(file_path) not in rg_candidate_paths:
                 continue
         elif not large_file_may_contain_leak_candidate(file_path):
+            continue
+        try:
+            if file_path.stat().st_size > LARGE_FILE_PREFILTER_BYTES:
+                findings.extend(collect_large_text_findings(file_path))
+                continue
+        except OSError:
             continue
         text = read_text_file(file_path)
         if text is None:
@@ -187,14 +248,14 @@ def main(argv: list[str] | None = None) -> int:
     targets = [Path(p) for p in args.path] if args.path else list(DEFAULT_SCAN_PATHS)
     findings, files_scanned = collect_findings(targets)
     if not findings:
-        print(f"OK privacy leak scan: no findings (files_scanned={files_scanned})")
+        print(f"OK publication hygiene scan: no findings (files_scanned={files_scanned})")
         return 0
 
     findings.sort(key=lambda f: (str(f.path), f.line, f.kind))
     max_findings = max(1, int(args.max_findings))
     shown = findings[:max_findings]
     print(
-        "Privacy leak scan failed: "
+        "Publication hygiene scan failed: "
         f"{len(findings)} finding(s) across {len({str(f.path) for f in findings})} file(s)."
     )
     for finding in shown:

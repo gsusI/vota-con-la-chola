@@ -18,7 +18,7 @@ class TestPublicDataPublish(unittest.TestCase):
         redacted = redact_sensitive_text("Bearer hf_abcdefghijklmnopqrstuvwxyz01234567 /Users/alice a@example.com")
         self.assertNotIn("hf_abcdefghijklmnopqrstuvwxyz01234567", redacted)
         self.assertNotIn("/Users/alice", redacted)
-        self.assertNotIn("a@example.com", redacted)
+        self.assertIn("a@example.com", redacted)
 
     def test_privacy_collect_findings_detects_public_artifact_leaks(self) -> None:
         with tempfile.TemporaryDirectory() as td:
