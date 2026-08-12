@@ -229,17 +229,32 @@ PROJECT_FACTS = [
             "files, hashes, rows, source IDs, and origin allowlist. The registry currently "
             "validates 1,809,222 member votes in 8,373 shards, 1,755,809 Eurostat "
             "observations in 37 Parquet files, 263,302 PLACSP money facts in 50 files, "
-            "and 88,031 actor mandates in 108 files. Two lanes exceed one million real "
+            "1,360,382 BDNS subsidy facts in 14 files, 126,760 accountability-ledger "
+            "entries in 13 files, and 88,031 actor mandates in 108 files. Three lanes exceed one million real "
             "rows and zero lanes are promoted. The vote artifact now has 100 percent "
             "public URL/source-record coverage after one checksum-backed official capture "
-            "override repaired 350 rows; 102,172 URL rows remain on official HTTP. Eurostat, PLACSP, and "
-            "actor unchanged replays pass. All four lanes remain local and lack clean-room "
-            "restore; representative scope and corrections are incomplete. "
+            "override repaired 350 rows. Its 102,172 historical HTTP rows across 1,166 "
+            "Senate URLs are fully classified without rewrite: 33,683 rows across 484 URLs "
+            "have local checksum captures and 68,489 rows across 682 URLs lack an immutable "
+            "replacement; two bounded HTTPS-equivalence probes returned 403 HTML. "
+            "Eurostat, PLACSP, and actor unchanged replays pass. The content-addressed "
+            "HF v2 release is remotely verified for all six corpora, with stable artifact, "
+            "registry, and readiness parity and no verifier warnings. All six durable-public-origin and clean-room-restore flags are "
+            "true after isolated validators full-read every published corpus. Explicit "
+            "immutable-release recovery is also proven without reading the mutable latest "
+            "pointer: the actor drill restored 114 files and full-validated 88,031 rows. "
+            "That restored actor corpus also rebuilds twice into byte-identical SQLite "
+            "artifacts with exact logical-row hashing, 88,031 unique mandate IDs, and "
+            "integrity checks green; normalized production-schema reconstruction remains open. "
+            "Raw-object replication and full-manifest restore now use bounded worker batches; "
+            "two local CAS replays deterministically reconcile 6,792 real objects and a full "
+            "restore verifies all bytes, while external S3 durability remains unproven. "
+            "Representative scope and corrections remain incomplete. "
             "The reusable typed contract also passes the real S1 accountability-"
             "ledger gate: 126,760 entries, 13 partitions/files, exact DB balance, "
             "100 percent public URL and evidence lineage, 126,757 resolved actor "
             "states, three explicit unresolved states, and full incremental reuse. "
-            "It remains below one million, parliamentary-dominated, and unpublished. "
+            "It remains below one million, parliamentary-dominated, and unpromoted. "
             "The actor-mandate lane also passes the same local analytical contract "
             "at 88,031 mandates and 79,023 distinct people across 108 partitions/files, "
             "with complete public URL and explicit lineage coverage, independently "
@@ -259,7 +274,7 @@ PROJECT_FACTS = [
             "every official-source counterparty name and identifier. "
             "The amounts are published notice or award values, not verified payments "
             "or disbursements. Representative live PLACSP, supplier resolution, "
-            "S1/S2, and public-origin proof remain open. "
+            "S2, and identity resolution remain open; clean restore passes. "
             "A fresh durable partitioned BDNS queue discovered 28,676,987 live "
             "concessions and completed 1,419 paced official pages without retry or dead "
             "work. It avoids unstable global deep offsets through 89 official daily "
@@ -267,7 +282,7 @@ PROJECT_FACTS = [
             "previously truncated windows. It exactly reconciles 1,360,382 source "
             "records, record URLs, immutable version sightings, and raw-page checksum "
             "links over 1,080,788,680 captured bytes; SQLite passes quick_check and FK "
-            "validation. The registered v5 semantic contract, exported as the v6 "
+            "validation. The registered v5 semantic contract, exported as the v7 "
             "artifact revision, contains 1,360,382 subsidy facts in 14 Parquet files "
             "with exact total EUR 10,121,196,195.270000, full source URL/lineage/amount "
             "coverage, and independent full-row validation. All 1,360,382 official "
@@ -277,9 +292,14 @@ PROJECT_FACTS = [
             "hardlinks. Exact validation now uses a temporary disk-backed SQLite "
             "distinct index and stays below 293 MB peak RSS. This passes registered real "
             "million-row capacity, not promotion; subsidy awards are not verified "
-            "disbursements, and full-history coverage, second-snapshot revision, durable "
-            "origin, and clean restore remain "
-            "open. An older 146,000-row checkpoint and its v3 semantic roots lack "
+            "disbursements. The worker now checks capacity before every claim and "
+            "reserves raw-object plus SQLite/WAL growth. The first real preflight "
+            "failed closed at -968,454,144 bytes of headroom without claiming work; "
+            "after temporary artifacts were released, the current check is again "
+            "blocked at 5,685,862,400 bytes free against "
+            "10,863,247,360 required and -5,177,384,960 bytes of headroom. "
+            "Full-history coverage, "
+            "second-snapshot revision remain open. An older 146,000-row checkpoint and its v3 semantic roots lack "
             "a current compliant artifact and do not count toward readiness. "
             "Indicator observations now have an additive normalized-series link and "
             "a revision-preserving typed public contract for source lineage, domain, "
@@ -295,16 +315,27 @@ PROJECT_FACTS = [
             "artifact passes independent full-row validation in 26 partitions / 37 "
             "Parquet files, and unchanged replay reuses all 26 partitions by 37 "
             "hardlinks. This remains unpromoted because the four-dataset demographic/"
-            "economic mix is not representative, no second-snapshot revision delta "
-            "has been measured, and durable public-origin restore is unverified. "
+            "economic mix is not representative and no second-snapshot revision delta "
+            "has been measured; clean-environment restore passes. "
+            "The HF analytical origin publishes all six corpora as 5,403,506 rows, "
+            "8,595 canonical data files, and 498,631,274 bytes. Remote parity passed "
+            "for the published release. Two fresh empty caches restore every registered "
+            "corpus: BDNS downloads 20 selected files and the other five download 8,601, "
+            "with every byte checksum-verified. Isolated no-project validators using only "
+            "copied code full-read all 5,403,506 rows and 8,595 data files under bounded "
+            "memory, without using canonical corpus input. "
             "A real Senate slice has 6,792 fetched/extracted "
             "XML/HTML documents and a successful local object-restore sample, but "
             "the broader local inventory has only 21,398 file instances / 19,538 "
             "distinct contents, including 1,436 PDFs / 44,825 pages. Page-density "
             "routing finds 848 OCR candidates and a 20-page OCR sample passes, "
             "but semantic accuracy, production caching, scanned-PDF diversity, "
-            "and 100k remain open. That is not remote-origin proof; each real "
-            "lane still needs its own promotion."
+            "and 100k remain open. A disk-backed file/edge audit reconciles all "
+            "21,398 inventory rows, verifies checksum lineage for 10,219 files, "
+            "public URL lineage for 10,195, and decompressed checksums for all 6,792 "
+            "referenced text artifacts with zero conflicts. It leaves 11,179 files "
+            "explicitly unlinked instead of promoting them. Each real lane still needs "
+            "its own representative-scope, recovery, correction, and promotion proof."
         ),
         evidence=[
             Evidence(
@@ -404,12 +435,92 @@ PROJECT_FACTS = [
                 detail="Append-only official expansion that completed all 89 selected daily windows while preserving existing global page identities.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-validation-20260812.json",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-storage-preflight-20260812.json",
+                detail="Latest real storage preflight for raw-object and SQLite/WAL capacity before another BDNS work claim.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-storage-preflight-blocked-20260812.json",
+                detail="Earlier real fail-closed storage preflight that blocked before claim while capacity was below the configured floor.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v7-validation-20260812.json",
                 detail="Independent full-row validation of 1360382 official subsidy facts with exact identity retention, decimals, lineage, hashes, publication hygiene, and bounded disk-backed distinct indexing.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v6-incremental-manifest-20260812.json",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s3-v7-incremental-manifest-20260812.json",
                 detail="Unchanged hardlink reuse of the current million-row BDNS semantic partition across all 14 files.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-bundle-dry-run-20260812.json",
+                detail="Fail-closed local HF scale bundle over every registered real corpus, with exact file and byte reconciliation and public-domain identities retained.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-parity-20260812.json",
+                detail="Historical fail-closed evidence from before the analytical scale origin was published; retained to show the transition from blocked to verified.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-restore-probe-20260812.json",
+                detail="Historical pre-publication restore probe that failed closed before cache creation; retained as negative-path evidence.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/docker-context-storage-blocker-20260812.json",
+                detail="Docker context regression remediation and honest containerd storage blocker, with the equivalent host tracker gate green.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+                detail="Disk-backed file-level reconciliation of the real document inventory against SQLite source URLs, checksums, and derived text artifacts, with unlinked files explicit.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/member-vote-source-url-lineage-20260812.json",
+                detail="Full member-vote source URL transport classification, checksum-capture coverage, and bounded HTTPS 403 evidence without silent URL rewriting.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-verify-20260812.json",
+                detail="Historical publication-time proof of remote manifest, corpus, registry, readiness, and required-policy parity for the six-corpus analytical release.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-current-metadata-parity-20260812.json",
+                detail="Current verifier proof that immutable artifact-contract, registry, and readiness parity pass without warnings.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-clean-restore-remaining-20260812.json",
+                detail="Fresh-cache recovery of the five non-BDNS corpora: 8601 downloaded files and 461088883 checksum-verified bytes with a 10 GiB reserve.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-restore-bdns-validation-20260812.json",
+                detail="Independent full-row validation of the million-row BDNS lane restored from the public origin into an empty cache.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-clean-room-drill-20260812.json",
+                detail="Disposable isolated-environment proof that all 20 BDNS files restore from the public origin and full-validate without canonical corpus input.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-clean-room-all-corpora-20260812.json",
+                detail="Aggregate clean-room proof that all six registered corpora restore from fresh caches and full-validate 5403506 real rows across 8595 data files.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-explicit-release-restore-actor-20260812.json",
+                detail="Fresh-cache recovery of the actor corpus from an explicit full-SHA immutable release path without consulting the mutable latest pointer.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-explicit-release-actor-validation-20260812.json",
+                detail="Full semantic validation of 88031 real actor-mandate rows after explicit immutable-release recovery.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-sqlite-rebuild-actor-20260812.json",
+                detail="Atomic bounded SQLite rebuild of the restored actor corpus with exact logical-row, integrity, identity, and memory gates.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-sqlite-rebuild-actor-replay-20260812.json",
+                detail="Independent replay proving the rebuilt 88031-row actor SQLite artifact is byte deterministic.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/content-object-parallel-replication-20260812.json",
+                detail="Bounded 16-worker local CAS replay of 6792 real linked-text objects with full checksum deduplication and deterministic manifest hash.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/content-object-full-local-restore-20260812.json",
+                detail="Streaming full-manifest local restore proof for all 6792 replicated real objects and 133219457 bytes.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-s2-partial-run.json",
