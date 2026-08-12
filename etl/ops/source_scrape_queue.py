@@ -43,9 +43,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--fallback-on-failure",
-        choices=("none", "sample-if-available"),
-        default="sample-if-available",
-        help="Retry sample command if the chosen command fails",
+        choices=("none",),
+        default="none",
+        help="Fail closed; synthetic or sample fallback is forbidden",
     )
     parser.add_argument("--include-logs", action="store_true", help="Include raw stdout/stderr in summary JSON")
     parser.add_argument("--command-timeout-seconds", type=int, default=90, help="Per-source subprocess timeout in seconds")
@@ -194,7 +194,7 @@ def execute_item(
     snapshot_date: str = "",
     mode: str = "preferred",
     only_repeatable_now: bool = False,
-    fallback_on_failure: str = "sample-if-available",
+    fallback_on_failure: str = "none",
     include_logs: bool = False,
     command_timeout_seconds: int = 90,
     dry_run: bool = False,
@@ -283,34 +283,8 @@ def execute_item(
         result_row["status"] = "ok"
         return result_row
 
-    if fallback_on_failure == "sample-if-available":
-        sample_command = str(execution.get("sample_command") or "").strip()
-        sample_tokens = _normalize_command(sample_command, db_path=db_path, snapshot_date=snapshot_date)
-        if sample_command and chosen_mode != "sample":
-            fallback_before_run_id = _latest_ingestion_run_id(db_path, source_id)
-            result_row["fallback_command"] = sample_tokens
-            fallback_result = _run_command(
-                sample_tokens,
-                include_logs=include_logs,
-                command_timeout_seconds=command_timeout_seconds,
-            )
-            result_row["fallback_exit_code"] = int(fallback_result.get("exit_code") or 0)
-            if bool(fallback_result.get("timed_out")):
-                result_row["fallback_timed_out"] = True
-            if include_logs:
-                result_row["fallback_stdout"] = str(fallback_result.get("stdout") or "")
-                result_row["fallback_stderr"] = str(fallback_result.get("stderr") or "")
-            fallback_validation = _validate_ingest_run(
-                db_path=db_path,
-                source_id=source_id,
-                strict_target=strict_target,
-                min_run_id_exclusive=fallback_before_run_id,
-            )
-            result_row["fallback_validation"] = fallback_validation
-            if result_row.get("fallback_exit_code") == 0 and bool(fallback_validation.get("ok")):
-                result_row["status"] = "ok_with_fallback"
-                result_row["fallback_mode"] = "sample"
-                return result_row
+    if fallback_on_failure != "none":
+        raise ValueError("real-data-only policy requires fallback_on_failure='none'")
 
     result_row["status"] = "failed"
     if not bool(validation.get("ok")) and not str(result_row.get("failure_reason") or "").strip():
@@ -342,7 +316,7 @@ def execute_queue(
     snapshot_date: str = "",
     mode: str = "preferred",
     only_repeatable_now: bool = False,
-    fallback_on_failure: str = "sample-if-available",
+    fallback_on_failure: str = "none",
     include_logs: bool = False,
     command_timeout_seconds: int = 90,
     dry_run: bool = False,
@@ -386,7 +360,7 @@ def main(argv: list[str] | None = None) -> int:
         snapshot_date=str(args.snapshot_date or "").strip(),
         mode=str(args.mode or "preferred"),
         only_repeatable_now=bool(args.only_repeatable_now),
-        fallback_on_failure=str(args.fallback_on_failure or "sample-if-available"),
+        fallback_on_failure=str(args.fallback_on_failure or "none"),
         include_logs=bool(args.include_logs),
         command_timeout_seconds=int(args.command_timeout_seconds or 90),
         dry_run=bool(args.dry_run),

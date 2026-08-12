@@ -86,6 +86,43 @@ CREATE TABLE IF NOT EXISTS run_fetches (
   bytes INTEGER NOT NULL
 );
 
+-- Durable, bounded work queue shared by high-volume acquisition and transform
+-- pipelines. Payloads contain references only; raw bytes stay outside SQLite.
+CREATE TABLE IF NOT EXISTS pipeline_work_items (
+  work_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  pipeline_id TEXT NOT NULL,
+  item_key TEXT NOT NULL,
+  partition_key TEXT NOT NULL DEFAULT '',
+  priority INTEGER NOT NULL DEFAULT 0,
+  state TEXT NOT NULL DEFAULT 'pending'
+    CHECK (state IN ('pending', 'leased', 'succeeded', 'dead')),
+  payload_json TEXT NOT NULL DEFAULT '{}',
+  available_at TEXT NOT NULL,
+  lease_owner TEXT,
+  lease_expires_at TEXT,
+  attempts INTEGER NOT NULL DEFAULT 0,
+  max_attempts INTEGER NOT NULL DEFAULT 5 CHECK (max_attempts >= 1),
+  last_error TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  completed_at TEXT,
+  UNIQUE (pipeline_id, item_key)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_work_attempts (
+  work_attempt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  work_item_id INTEGER NOT NULL
+    REFERENCES pipeline_work_items(work_item_id) ON DELETE CASCADE,
+  attempt_number INTEGER NOT NULL,
+  worker_id TEXT NOT NULL,
+  started_at TEXT NOT NULL,
+  finished_at TEXT,
+  status TEXT NOT NULL DEFAULT 'running'
+    CHECK (status IN ('running', 'succeeded', 'retry', 'dead', 'lease_expired')),
+  error TEXT,
+  UNIQUE (work_item_id, attempt_number)
+);
+
 CREATE TABLE IF NOT EXISTS persons (
   person_id INTEGER PRIMARY KEY AUTOINCREMENT,
   full_name TEXT NOT NULL,
@@ -393,6 +430,145 @@ CREATE TABLE IF NOT EXISTS infoelectoral_proceso_resultados (
   UNIQUE (proceso_id, url)
 );
 
+-- Electoral: named historical elected officials from official XLSX datasets.
+-- Rows are election outcomes. They do not assert current-office status or
+-- cross-election person identity.
+CREATE TABLE IF NOT EXISTS infoelectoral_elected_officials (
+  elected_official_id TEXT PRIMARY KEY,
+  election_date TEXT NOT NULL,
+  election_code TEXT NOT NULL,
+  chamber TEXT NOT NULL CHECK (chamber IN ('congreso', 'senado')),
+  province_code TEXT NOT NULL,
+  province_name TEXT NOT NULL,
+  district TEXT,
+  constituency TEXT,
+  full_name TEXT NOT NULL,
+  candidacy_name TEXT NOT NULL,
+  candidacy_acronym TEXT,
+  votes INTEGER CHECK (votes IS NULL OR votes >= 0),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk),
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  source_row_number INTEGER NOT NULL CHECK (source_row_number >= 1),
+  person_id INTEGER REFERENCES persons(person_id),
+  mandate_id INTEGER REFERENCES mandates(mandate_id),
+  party_id INTEGER REFERENCES parties(party_id),
+  institution_id INTEGER REFERENCES institutions(institution_id),
+  role_id INTEGER REFERENCES roles(role_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  first_seen_snapshot_date TEXT NOT NULL DEFAULT '',
+  last_seen_snapshot_date TEXT NOT NULL DEFAULT '',
+  is_present INTEGER NOT NULL DEFAULT 1 CHECK (is_present IN (0, 1)),
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Append-only workbook sightings. Stable facts above retain the latest observed
+-- payload while this table proves snapshot/content/run history without raw copies.
+CREATE TABLE IF NOT EXISTS infoelectoral_elected_official_observations (
+  elected_official_observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  elected_official_id TEXT NOT NULL
+    REFERENCES infoelectoral_elected_officials(elected_official_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk),
+  run_id INTEGER REFERENCES ingestion_runs(run_id),
+  snapshot_date TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  source_row_number INTEGER NOT NULL CHECK (source_row_number >= 1),
+  row_content_sha256 TEXT NOT NULL,
+  first_observed_at TEXT NOT NULL,
+  last_observed_at TEXT NOT NULL,
+  UNIQUE (elected_official_id, snapshot_date, source_content_sha256)
+);
+
+-- Electoral: official fixed-width candidate archives discovered through the
+-- Infoelectoral download catalog. Public-domain candidate identity fields remain
+-- traceable to the exact official archive and source line.
+CREATE TABLE IF NOT EXISTS infoelectoral_candidate_archives (
+  archive_id TEXT PRIMARY KEY,
+  election_id TEXT NOT NULL,
+  election_date TEXT NOT NULL,
+  election_type_code TEXT NOT NULL,
+  source_url TEXT NOT NULL UNIQUE,
+  source_content_sha256 TEXT,
+  archive_bytes INTEGER CHECK (archive_bytes IS NULL OR archive_bytes >= 0),
+  raw_path TEXT,
+  candidate_rows INTEGER NOT NULL DEFAULT 0 CHECK (candidate_rows >= 0),
+  party_rows INTEGER NOT NULL DEFAULT 0 CHECK (party_rows >= 0),
+  status TEXT NOT NULL DEFAULT 'cataloged'
+    CHECK (status IN ('cataloged', 'validated', 'loaded', 'failed')),
+  last_error TEXT,
+  first_seen_snapshot_date TEXT NOT NULL,
+  last_seen_snapshot_date TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS infoelectoral_candidate_occurrences (
+  candidate_occurrence_id TEXT PRIMARY KEY,
+  archive_id TEXT NOT NULL
+    REFERENCES infoelectoral_candidate_archives(archive_id),
+  election_date TEXT NOT NULL,
+  election_type_code TEXT NOT NULL,
+  election_year INTEGER NOT NULL CHECK (election_year BETWEEN 1900 AND 2200),
+  election_month INTEGER NOT NULL CHECK (election_month BETWEEN 1 AND 12),
+  election_round TEXT NOT NULL,
+  province_code TEXT NOT NULL,
+  district_code TEXT NOT NULL,
+  candidate_scope_code TEXT NOT NULL,
+  party_source_code TEXT NOT NULL,
+  candidate_order INTEGER NOT NULL CHECK (candidate_order >= 0),
+  candidate_type_code TEXT NOT NULL,
+  given_name TEXT NOT NULL,
+  surname_1 TEXT NOT NULL,
+  surname_2 TEXT,
+  full_name TEXT NOT NULL,
+  gender_code TEXT,
+  birth_date TEXT,
+  birth_date_source TEXT,
+  dni TEXT,
+  is_elected INTEGER NOT NULL DEFAULT 0 CHECK (is_elected IN (0, 1)),
+  candidacy_name TEXT NOT NULL,
+  candidacy_acronym TEXT,
+  party_province_code TEXT,
+  party_autonomy_code TEXT,
+  party_national_code TEXT,
+  person_id INTEGER NOT NULL REFERENCES persons(person_id),
+  party_id INTEGER NOT NULL REFERENCES parties(party_id),
+  territory_id INTEGER REFERENCES territories(territory_id),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk),
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  source_member_name TEXT NOT NULL,
+  source_line_number INTEGER NOT NULL CHECK (source_line_number >= 1),
+  first_seen_snapshot_date TEXT NOT NULL,
+  last_seen_snapshot_date TEXT NOT NULL,
+  is_present INTEGER NOT NULL DEFAULT 1 CHECK (is_present IN (0, 1)),
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS infoelectoral_candidate_observations (
+  candidate_observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  candidate_occurrence_id TEXT NOT NULL
+    REFERENCES infoelectoral_candidate_occurrences(candidate_occurrence_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk),
+  run_id INTEGER REFERENCES ingestion_runs(run_id),
+  snapshot_date TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  source_member_name TEXT NOT NULL,
+  source_line_number INTEGER NOT NULL CHECK (source_line_number >= 1),
+  row_content_sha256 TEXT NOT NULL,
+  first_observed_at TEXT NOT NULL,
+  last_observed_at TEXT NOT NULL,
+  UNIQUE (candidate_occurrence_id, snapshot_date, source_content_sha256)
+);
+
 -- Parlamentario: votaciones (roll-call cuando exista)
 CREATE TABLE IF NOT EXISTS parl_vote_events (
   vote_event_id TEXT PRIMARY KEY,
@@ -410,6 +586,7 @@ CREATE TABLE IF NOT EXISTS parl_vote_events (
   totals_no INTEGER,
   totals_abstain INTEGER,
   totals_no_vote INTEGER,
+  totals_absent INTEGER,
   source_id TEXT NOT NULL REFERENCES sources(source_id),
   source_url TEXT,
   source_record_pk INTEGER REFERENCES source_records(source_record_pk),
@@ -743,6 +920,11 @@ CREATE TABLE IF NOT EXISTS text_documents (
   raw_path TEXT,
   text_excerpt TEXT,
   text_chars INTEGER,
+  text_path TEXT,
+  text_sha256 TEXT,
+  text_extraction_method TEXT,
+  text_extracted_at TEXT,
+  text_truncated INTEGER NOT NULL DEFAULT 0 CHECK (text_truncated IN (0, 1)),
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
@@ -1319,6 +1501,19 @@ ON accountability_ledger_entries(policy_event_id);
 CREATE INDEX IF NOT EXISTS idx_accountability_ledger_source
 ON accountability_ledger_entries(source_id, source_record_pk);
 
+-- Cover the bounded semantic publisher's source/year/id traversal at scale.
+CREATE INDEX IF NOT EXISTS idx_accountability_ledger_partition
+ON accountability_ledger_entries(
+  COALESCE(NULLIF(source_id, ''), 'unknown'),
+  CASE
+    WHEN substr(COALESCE(NULLIF(event_date, ''), published_date, ''), 1, 4)
+      GLOB '[12][0-9][0-9][0-9]'
+    THEN substr(COALESCE(NULLIF(event_date, ''), published_date, ''), 1, 4)
+    ELSE 'unknown'
+  END,
+  entry_id
+);
+
 -- Politica publica: dominios, ejes y eventos (accion revelada).
 -- Nota: estas tablas son el "hueco" intencional para evolucionar desde temas/votos
 -- hacia acciones con efectos (BOE, dinero publico, etc.) sin romper Explorer.
@@ -1414,11 +1609,66 @@ CREATE TABLE IF NOT EXISTS money_contract_records (
   published_date TEXT,
   awarded_date TEXT,
   amount_eur REAL,
+  amount_eur_decimal TEXT,
+  amount_semantics TEXT,
   currency TEXT,
+  stable_contract_id TEXT,
+  entry_updated_at TEXT,
+  contract_status_code TEXT,
+  authority_identifier TEXT,
   raw_payload TEXT NOT NULL,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
   UNIQUE (source_id, source_record_pk)
+);
+
+-- One contract version can resolve multiple lots/results. Amounts remain exact
+-- decimal strings; public publication applies legal-entity privacy rules.
+CREATE TABLE IF NOT EXISTS money_contract_award_results (
+  contract_award_result_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id)
+    CHECK (source_id LIKE 'placsp_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  stable_contract_id TEXT NOT NULL,
+  award_ordinal INTEGER NOT NULL CHECK (award_ordinal >= 0),
+  lot_id TEXT,
+  result_code TEXT,
+  result_description TEXT,
+  award_date TEXT,
+  received_tender_quantity INTEGER,
+  supplier_name TEXT,
+  supplier_identifier TEXT,
+  supplier_identifier_scheme TEXT,
+  amount_eur_decimal TEXT,
+  payable_amount_eur_decimal TEXT,
+  currency TEXT,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_record_pk, award_ordinal)
+);
+
+-- Bounded document manifest extracted from official CODICE entries. The bytes
+-- are downloaded by the separate durable document pipeline.
+CREATE TABLE IF NOT EXISTS money_contract_documents (
+  contract_document_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id)
+    CHECK (source_id LIKE 'placsp_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  stable_contract_id TEXT NOT NULL,
+  document_ordinal INTEGER NOT NULL CHECK (document_ordinal >= 0),
+  document_kind TEXT,
+  document_label TEXT,
+  source_url TEXT NOT NULL,
+  official_document_hash TEXT,
+  document_source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_record_pk, document_ordinal),
+  UNIQUE (source_record_pk, source_url)
 );
 
 -- Detalle estructurado de licitaciones/cpvs/documentos (scrape puntual PLACSP).
@@ -1502,6 +1752,165 @@ CREATE TABLE IF NOT EXISTS money_subsidy_records (
   UNIQUE (source_id, source_record_pk)
 );
 
+-- Durable, bounded-page acquisition control for national money registries.
+-- One bulk run owns a stable queue namespace. Page payload bytes live in the
+-- content-addressed raw store; these tables retain only checkpoints/lineage.
+CREATE TABLE IF NOT EXISTS money_bulk_runs (
+  money_bulk_run_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  pipeline_id TEXT NOT NULL UNIQUE,
+  ingestion_run_id INTEGER REFERENCES ingestion_runs(run_id),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT NOT NULL,
+  snapshot_date TEXT NOT NULL,
+  page_size INTEGER NOT NULL CHECK (page_size BETWEEN 1 AND 1000),
+  total_elements_discovered INTEGER NOT NULL CHECK (total_elements_discovered >= 0),
+  total_pages_discovered INTEGER NOT NULL CHECK (total_pages_discovered >= 0),
+  pages_enqueued INTEGER NOT NULL CHECK (pages_enqueued >= 0),
+  limited_run INTEGER NOT NULL DEFAULT 0 CHECK (limited_run IN (0, 1)),
+  state TEXT NOT NULL DEFAULT 'running'
+    CHECK (state IN ('running', 'succeeded', 'partial', 'failed')),
+  records_seen INTEGER NOT NULL DEFAULT 0,
+  records_loaded INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  finished_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS money_bulk_page_fetches (
+  money_bulk_page_fetch_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  money_bulk_run_id INTEGER NOT NULL
+    REFERENCES money_bulk_runs(money_bulk_run_id) ON DELETE CASCADE,
+  work_item_id INTEGER REFERENCES pipeline_work_items(work_item_id) ON DELETE SET NULL,
+  page_number INTEGER NOT NULL CHECK (page_number >= 0),
+  source_url TEXT NOT NULL,
+  fetched_at TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL,
+  content_type TEXT,
+  bytes INTEGER NOT NULL CHECK (bytes >= 0),
+  raw_path TEXT NOT NULL,
+  api_total_elements INTEGER NOT NULL CHECK (api_total_elements >= 0),
+  api_total_pages INTEGER NOT NULL CHECK (api_total_pages >= 0),
+  records_seen INTEGER NOT NULL CHECK (records_seen >= 0),
+  records_loaded INTEGER NOT NULL CHECK (records_loaded >= 0),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (money_bulk_run_id, page_number)
+);
+
+-- Immutable normalized-record fingerprints. Raw official beneficiary payloads
+-- remain in content-addressed page objects exactly as published by the source;
+-- version rows avoid duplicating the same payload.
+CREATE TABLE IF NOT EXISTS money_source_record_versions (
+  money_source_record_version_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT NOT NULL,
+  record_sha256 TEXT NOT NULL CHECK (length(record_sha256) = 64),
+  first_seen_at TEXT NOT NULL,
+  last_seen_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_id, record_sha256)
+);
+
+-- One source-record sighting per bulk snapshot/run, linked back to an immutable
+-- raw page object plus record ordinal and normalized-record version.
+CREATE TABLE IF NOT EXISTS money_bulk_record_sightings (
+  money_bulk_record_sighting_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  money_bulk_run_id INTEGER NOT NULL
+    REFERENCES money_bulk_runs(money_bulk_run_id) ON DELETE CASCADE,
+  money_bulk_page_fetch_id INTEGER NOT NULL
+    REFERENCES money_bulk_page_fetches(money_bulk_page_fetch_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT NOT NULL,
+  money_source_record_version_id INTEGER NOT NULL
+    REFERENCES money_source_record_versions(money_source_record_version_id),
+  snapshot_date TEXT NOT NULL,
+  record_ordinal INTEGER NOT NULL CHECK (record_ordinal >= 0),
+  observed_at TEXT NOT NULL,
+  UNIQUE (money_bulk_run_id, source_id, source_record_id),
+  UNIQUE (money_bulk_page_fetch_id, record_ordinal)
+);
+
+-- Durable archive/member acquisition for PLACSP monthly/yearly ZIP corpora.
+-- ZIP bytes stay in content-addressed storage; members are parsed in-place and
+-- independently leased so restarts never require corpus-wide extraction.
+CREATE TABLE IF NOT EXISTS placsp_bulk_runs (
+  placsp_bulk_run_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  pipeline_id TEXT NOT NULL UNIQUE,
+  ingestion_run_id INTEGER REFERENCES ingestion_runs(run_id),
+  source_id TEXT NOT NULL REFERENCES sources(source_id) CHECK (source_id LIKE 'placsp_%'),
+  snapshot_date TEXT NOT NULL,
+  archives_enqueued INTEGER NOT NULL CHECK (archives_enqueued >= 0),
+  archive_contract_sha256 TEXT CHECK (
+    archive_contract_sha256 IS NULL OR length(archive_contract_sha256) = 64
+  ),
+  state TEXT NOT NULL DEFAULT 'running'
+    CHECK (state IN ('running', 'succeeded', 'partial', 'failed')),
+  records_seen INTEGER NOT NULL DEFAULT 0,
+  records_loaded INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  finished_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS placsp_bulk_archives (
+  placsp_bulk_archive_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  placsp_bulk_run_id INTEGER NOT NULL
+    REFERENCES placsp_bulk_runs(placsp_bulk_run_id) ON DELETE CASCADE,
+  work_item_id INTEGER REFERENCES pipeline_work_items(work_item_id) ON DELETE SET NULL,
+  period TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  transport_security TEXT NOT NULL,
+  fetched_at TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  bytes INTEGER NOT NULL CHECK (bytes >= 0),
+  raw_path TEXT NOT NULL,
+  members_total INTEGER NOT NULL CHECK (members_total >= 0),
+  uncompressed_bytes INTEGER NOT NULL CHECK (uncompressed_bytes >= 0),
+  status TEXT NOT NULL CHECK (status IN ('ok', 'error')),
+  error TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (placsp_bulk_run_id, source_url),
+  UNIQUE (placsp_bulk_run_id, content_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS placsp_bulk_members (
+  placsp_bulk_member_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  placsp_bulk_archive_id INTEGER NOT NULL
+    REFERENCES placsp_bulk_archives(placsp_bulk_archive_id) ON DELETE CASCADE,
+  work_item_id INTEGER REFERENCES pipeline_work_items(work_item_id) ON DELETE SET NULL,
+  member_name TEXT NOT NULL,
+  crc32 INTEGER NOT NULL,
+  compressed_bytes INTEGER NOT NULL CHECK (compressed_bytes >= 0),
+  uncompressed_bytes INTEGER NOT NULL CHECK (uncompressed_bytes >= 0),
+  content_sha256 TEXT CHECK (content_sha256 IS NULL OR length(content_sha256) = 64),
+  records_seen INTEGER NOT NULL DEFAULT 0 CHECK (records_seen >= 0),
+  records_loaded INTEGER NOT NULL DEFAULT 0 CHECK (records_loaded >= 0),
+  tombstones_seen INTEGER NOT NULL DEFAULT 0 CHECK (tombstones_seen >= 0),
+  status TEXT NOT NULL DEFAULT 'pending'
+    CHECK (status IN ('pending', 'running', 'ok', 'error')),
+  error TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (placsp_bulk_archive_id, member_name)
+);
+
+CREATE TABLE IF NOT EXISTS placsp_bulk_record_sightings (
+  placsp_bulk_record_sighting_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  placsp_bulk_run_id INTEGER NOT NULL
+    REFERENCES placsp_bulk_runs(placsp_bulk_run_id) ON DELETE CASCADE,
+  placsp_bulk_member_id INTEGER NOT NULL
+    REFERENCES placsp_bulk_members(placsp_bulk_member_id) ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id) CHECK (source_id LIKE 'placsp_%'),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  stable_contract_id TEXT NOT NULL,
+  entry_content_sha256 TEXT NOT NULL CHECK (length(entry_content_sha256) = 64),
+  record_ordinal INTEGER NOT NULL CHECK (record_ordinal >= 0),
+  observed_at TEXT NOT NULL,
+  UNIQUE (placsp_bulk_member_id, record_ordinal),
+  UNIQUE (placsp_bulk_run_id, source_id, stable_contract_id, entry_content_sha256)
+);
+
 -- Interventions: agrupacion reproducible de eventos en tratamientos evaluables.
 CREATE TABLE IF NOT EXISTS interventions (
   intervention_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1540,6 +1949,7 @@ CREATE TABLE IF NOT EXISTS indicator_series (
   source_url TEXT,
   source_record_pk INTEGER REFERENCES source_records(source_record_pk),
   source_snapshot_date TEXT,
+  dimensions_json TEXT,
   raw_payload TEXT NOT NULL,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
@@ -1563,11 +1973,13 @@ CREATE TABLE IF NOT EXISTS indicator_points (
 -- - AEMET: source_id = aemet_opendata_series
 CREATE TABLE IF NOT EXISTS indicator_observation_records (
   observation_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  indicator_series_id INTEGER REFERENCES indicator_series(indicator_series_id) ON DELETE SET NULL,
   source_id TEXT NOT NULL REFERENCES sources(source_id)
       CHECK (
         source_id LIKE 'eurostat_%'
         OR source_id LIKE 'bde_%'
         OR source_id LIKE 'aemet_%'
+        OR source_id LIKE 'ree_%'
       ),
   source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
   source_record_id TEXT,
@@ -1585,6 +1997,41 @@ CREATE TABLE IF NOT EXISTS indicator_observation_records (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
   UNIQUE (source_id, series_code, point_date, source_record_id)
+);
+
+-- Durable registry acquisitions for large official indicator cubes. Queue rows
+-- orchestrate retries; these rows reconcile each immutable raw blob to the
+-- versioned source records materialized from it.
+CREATE TABLE IF NOT EXISTS indicator_bulk_acquisitions (
+  indicator_bulk_acquisition_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  pipeline_id TEXT NOT NULL,
+  item_key TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  dataset_code TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  source_snapshot_date TEXT NOT NULL,
+  transport_security TEXT NOT NULL
+    CHECK (transport_security IN ('verified_ca', 'unverified_tls', 'local_fixture')),
+  raw_content_sha256 TEXT NOT NULL,
+  raw_path TEXT NOT NULL,
+  raw_bytes INTEGER NOT NULL,
+  series_loaded INTEGER NOT NULL DEFAULT 0,
+  observations_discovered INTEGER NOT NULL DEFAULT 0,
+  status TEXT NOT NULL CHECK (status IN ('running', 'ok', 'error')),
+  error TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (pipeline_id, item_key)
+);
+
+CREATE TABLE IF NOT EXISTS indicator_bulk_acquisition_records (
+  indicator_bulk_acquisition_id INTEGER NOT NULL
+    REFERENCES indicator_bulk_acquisitions(indicator_bulk_acquisition_id) ON DELETE CASCADE,
+  source_record_pk INTEGER NOT NULL
+    REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  observations_discovered INTEGER NOT NULL,
+  record_sha256 TEXT NOT NULL,
+  PRIMARY KEY (indicator_bulk_acquisition_id, source_record_pk)
 );
 
 -- Causal estimates: resultados de evaluacion con diagnosticos y trazabilidad.
@@ -2043,18 +2490,100 @@ CREATE TABLE IF NOT EXISTS liberty_delegated_enforcement_links (
 );
 
 CREATE INDEX IF NOT EXISTS idx_runs_source_id ON ingestion_runs(source_id);
+CREATE INDEX IF NOT EXISTS idx_pipeline_work_claim
+  ON pipeline_work_items (
+    pipeline_id,
+    state,
+    available_at,
+    priority DESC,
+    work_item_id
+  );
+CREATE INDEX IF NOT EXISTS idx_pipeline_work_claim_v2
+  ON pipeline_work_items (
+    pipeline_id,
+    state,
+    priority DESC,
+    work_item_id,
+    available_at
+  );
+CREATE INDEX IF NOT EXISTS idx_pipeline_work_lease
+  ON pipeline_work_items (state, lease_expires_at);
+CREATE INDEX IF NOT EXISTS idx_pipeline_work_partition
+  ON pipeline_work_items (pipeline_id, partition_key, state, work_item_id);
+CREATE INDEX IF NOT EXISTS idx_pipeline_work_attempt_item
+  ON pipeline_work_attempts (work_item_id, attempt_number);
 CREATE INDEX IF NOT EXISTS idx_persons_name ON persons(full_name);
 CREATE INDEX IF NOT EXISTS idx_persons_gender_id ON persons(gender_id);
 CREATE INDEX IF NOT EXISTS idx_persons_territory_id ON persons(territory_id);
+CREATE INDEX IF NOT EXISTS idx_person_identifiers_person_rollup
+  ON person_identifiers(person_id, namespace, value, person_identifier_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_person ON mandates(person_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_institution_id ON mandates(institution_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_party_id ON mandates(party_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_source ON mandates(source_id);
+CREATE INDEX IF NOT EXISTS idx_mandates_actor_partition
+  ON mandates(
+    source_id,
+    level,
+    CASE
+      WHEN substr(COALESCE(NULLIF(start_date, ''), source_snapshot_date, ''), 1, 4)
+        GLOB '[12][0-9][0-9][0-9]'
+      THEN substr(COALESCE(NULLIF(start_date, ''), source_snapshot_date, ''), 1, 4)
+      ELSE 'unknown'
+    END,
+    mandate_id
+  );
 
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_convocatorias_tipo ON infoelectoral_convocatorias(tipo_convocatoria);
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_archivos_convocatoria ON infoelectoral_archivos_extraccion(convocatoria_id);
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_procesos_estado ON infoelectoral_procesos(estado);
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_resultados_proceso ON infoelectoral_proceso_resultados(proceso_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_date_chamber
+  ON infoelectoral_elected_officials(election_date, chamber, elected_official_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_name
+  ON infoelectoral_elected_officials(full_name, election_date);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_party
+  ON infoelectoral_elected_officials(candidacy_name, election_date);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_source_record
+  ON infoelectoral_elected_officials(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_workbook_row
+  ON infoelectoral_elected_officials(source_url, source_row_number);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_presence
+  ON infoelectoral_elected_officials(is_present, chamber, election_date);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_person
+  ON infoelectoral_elected_officials(person_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_mandate
+  ON infoelectoral_elected_officials(mandate_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_party_fk
+  ON infoelectoral_elected_officials(party_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_observations_snapshot
+  ON infoelectoral_elected_official_observations(snapshot_date, elected_official_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_elected_observations_run
+  ON infoelectoral_elected_official_observations(run_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_archives_status
+  ON infoelectoral_candidate_archives(status, election_date, archive_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_election
+  ON infoelectoral_candidate_occurrences(
+    election_date, election_type_code, province_code, candidate_occurrence_id
+  );
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_partition
+  ON infoelectoral_candidate_occurrences(
+    election_type_code, election_year, archive_id, candidate_occurrence_id
+  );
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_name
+  ON infoelectoral_candidate_occurrences(full_name, election_date);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_party
+  ON infoelectoral_candidate_occurrences(party_id, election_date);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_person
+  ON infoelectoral_candidate_occurrences(person_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_source_record
+  ON infoelectoral_candidate_occurrences(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_occurrence_presence
+  ON infoelectoral_candidate_occurrences(archive_id, is_present);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_observations_snapshot
+  ON infoelectoral_candidate_observations(snapshot_date, candidate_occurrence_id);
+CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_observations_run
+  ON infoelectoral_candidate_observations(run_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_active ON mandates(is_active);
 CREATE INDEX IF NOT EXISTS idx_mandates_role_id ON mandates(role_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_admin_level_id ON mandates(admin_level_id);
@@ -2089,6 +2618,13 @@ CREATE INDEX IF NOT EXISTS idx_institutions_admin_level_id ON institutions(admin
 CREATE INDEX IF NOT EXISTS idx_institutions_territory_id ON institutions(territory_id);
 CREATE INDEX IF NOT EXISTS idx_party_aliases_party_id ON party_aliases(party_id);
 CREATE INDEX IF NOT EXISTS idx_person_name_aliases_person_id ON person_name_aliases(person_id);
+CREATE INDEX IF NOT EXISTS idx_person_name_aliases_person_rollup
+  ON person_name_aliases(
+    person_id,
+    canonical_alias,
+    person_name_alias_id,
+    alias
+  );
 CREATE INDEX IF NOT EXISTS idx_person_name_aliases_source_id ON person_name_aliases(source_id);
 CREATE INDEX IF NOT EXISTS idx_person_name_aliases_source_record_pk ON person_name_aliases(source_record_pk);
 CREATE INDEX IF NOT EXISTS idx_person_name_aliases_source_kind ON person_name_aliases(source_kind);
@@ -2148,6 +2684,8 @@ CREATE INDEX IF NOT EXISTS idx_person_public_data_queue_source_id ON person_publ
 CREATE INDEX IF NOT EXISTS idx_text_documents_source_id ON text_documents(source_id);
 CREATE INDEX IF NOT EXISTS idx_text_documents_source_record_pk ON text_documents(source_record_pk);
 CREATE INDEX IF NOT EXISTS idx_text_documents_source_url ON text_documents(source_url);
+CREATE INDEX IF NOT EXISTS idx_text_documents_content_sha256 ON text_documents(content_sha256);
+CREATE INDEX IF NOT EXISTS idx_text_documents_text_sha256 ON text_documents(text_sha256);
 CREATE INDEX IF NOT EXISTS idx_document_fetches_source_id ON document_fetches(source_id);
 CREATE INDEX IF NOT EXISTS idx_document_fetches_fetched_ok ON document_fetches(fetched_ok);
 CREATE INDEX IF NOT EXISTS idx_document_fetches_last_http_status ON document_fetches(last_http_status);
@@ -2178,6 +2716,20 @@ CREATE INDEX IF NOT EXISTS idx_money_contract_records_source_id ON money_contrac
 CREATE INDEX IF NOT EXISTS idx_money_contract_records_contract_id ON money_contract_records(contract_id);
 CREATE INDEX IF NOT EXISTS idx_money_contract_records_cpv_code ON money_contract_records(cpv_code);
 CREATE INDEX IF NOT EXISTS idx_money_contract_records_published_date ON money_contract_records(published_date);
+CREATE INDEX IF NOT EXISTS idx_money_contract_records_stable_contract
+  ON money_contract_records(source_id, stable_contract_id, entry_updated_at);
+CREATE INDEX IF NOT EXISTS idx_money_contract_awards_source_record
+  ON money_contract_award_results(source_record_pk, award_ordinal);
+CREATE INDEX IF NOT EXISTS idx_money_contract_awards_supplier
+  ON money_contract_award_results(supplier_identifier, award_date);
+CREATE INDEX IF NOT EXISTS idx_money_contract_awards_amount
+  ON money_contract_award_results(amount_eur_decimal);
+CREATE INDEX IF NOT EXISTS idx_money_contract_documents_source_record
+  ON money_contract_documents(source_record_pk, document_ordinal);
+CREATE INDEX IF NOT EXISTS idx_money_contract_documents_url
+  ON money_contract_documents(source_url, contract_document_id);
+CREATE INDEX IF NOT EXISTS idx_money_contract_documents_download
+  ON money_contract_documents(document_source_record_pk, contract_document_id);
 CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_source_id ON placsp_contract_detail_records(source_id);
 CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_contract_id ON placsp_contract_detail_records(contract_id);
 CREATE INDEX IF NOT EXISTS idx_placsp_contract_detail_records_file_number ON placsp_contract_detail_records(file_number);
@@ -2191,6 +2743,28 @@ CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_call_id ON money_subsidy_re
 CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_beneficiary_id
     ON money_subsidy_records(beneficiary_identifier);
 CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_published_date ON money_subsidy_records(published_date);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_runs_source_state
+    ON money_bulk_runs(source_id, state, money_bulk_run_id);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_page_fetches_run_page
+    ON money_bulk_page_fetches(money_bulk_run_id, page_number);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_page_fetches_content
+    ON money_bulk_page_fetches(content_sha256);
+CREATE INDEX IF NOT EXISTS idx_money_source_record_versions_record
+    ON money_source_record_versions(source_id, source_record_id, money_source_record_version_id);
+CREATE INDEX IF NOT EXISTS idx_money_source_record_versions_hash
+    ON money_source_record_versions(record_sha256);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_record_sightings_run_page
+    ON money_bulk_record_sightings(money_bulk_run_id, money_bulk_page_fetch_id);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_record_sightings_version
+    ON money_bulk_record_sightings(money_source_record_version_id);
+CREATE INDEX IF NOT EXISTS idx_placsp_bulk_archives_run_status
+  ON placsp_bulk_archives(placsp_bulk_run_id, status, placsp_bulk_archive_id);
+CREATE INDEX IF NOT EXISTS idx_placsp_bulk_members_archive_status
+  ON placsp_bulk_members(placsp_bulk_archive_id, status, placsp_bulk_member_id);
+CREATE INDEX IF NOT EXISTS idx_placsp_bulk_sightings_run_record
+  ON placsp_bulk_record_sightings(placsp_bulk_run_id, source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_placsp_bulk_sightings_stable
+  ON placsp_bulk_record_sightings(source_id, stable_contract_id, entry_content_sha256);
 CREATE INDEX IF NOT EXISTS idx_interventions_domain_id ON interventions(domain_id);
 CREATE INDEX IF NOT EXISTS idx_intervention_events_event_id ON intervention_events(policy_event_id);
 CREATE INDEX IF NOT EXISTS idx_indicator_series_domain_id ON indicator_series(domain_id);
@@ -2199,6 +2773,18 @@ CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_source_series
     ON indicator_observation_records(source_id, series_code);
 CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_point_date
     ON indicator_observation_records(point_date);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_series_date
+    ON indicator_observation_records(indicator_series_id, point_date);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_partition
+    ON indicator_observation_records(
+      source_id,
+      substr(point_date, 1, 4),
+      point_date,
+      series_code,
+      COALESCE(source_snapshot_date, ''),
+      COALESCE(source_record_id, ''),
+      observation_record_id
+    );
 CREATE INDEX IF NOT EXISTS idx_causal_estimates_intervention_id ON causal_estimates(intervention_id);
 
 CREATE INDEX IF NOT EXISTS idx_legal_norms_scope ON legal_norms(scope);
@@ -2289,3 +2875,134 @@ CREATE INDEX IF NOT EXISTS idx_liberty_delegated_links_designated_actor
     ON liberty_delegated_enforcement_links(designated_actor_label);
 CREATE INDEX IF NOT EXISTS idx_liberty_delegated_links_chain_confidence
     ON liberty_delegated_enforcement_links(chain_confidence DESC);
+
+-- Safety-gated anomaly/integrity review. A signal is not an allegation.
+CREATE TABLE IF NOT EXISTS integrity_signals (
+  signal_id TEXT PRIMARY KEY,
+  detector_id TEXT NOT NULL,
+  detector_version TEXT NOT NULL,
+  signal_type TEXT NOT NULL,
+  subject_type TEXT NOT NULL,
+  subject_id TEXT NOT NULL,
+  jurisdiction TEXT,
+  period_start TEXT,
+  period_end TEXT,
+  state TEXT NOT NULL CHECK (state IN (
+    'observed_fact','review_signal','corroborated_risk','official_finding',
+    'rejected','superseded'
+  )),
+  review_priority INTEGER NOT NULL DEFAULT 0,
+  summary TEXT NOT NULL,
+  metrics_json TEXT NOT NULL DEFAULT '{}',
+  limitations_json TEXT NOT NULL DEFAULT '[]',
+  publication_status TEXT NOT NULL DEFAULT 'internal' CHECK (publication_status IN (
+    'internal','approved','published','withdrawn'
+  )),
+  right_of_reply_status TEXT NOT NULL DEFAULT 'pending' CHECK (right_of_reply_status IN (
+    'pending','received','declined','no_response_after_deadline','not_required'
+  )),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (
+    detector_id, detector_version, signal_type, subject_type, subject_id,
+    period_start, period_end
+  )
+);
+
+CREATE TABLE IF NOT EXISTS integrity_signal_evidence (
+  signal_evidence_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  signal_id TEXT NOT NULL REFERENCES integrity_signals(signal_id) ON DELETE CASCADE,
+  evidence_role TEXT NOT NULL CHECK (evidence_role IN (
+    'observed','corroborating','counterevidence','official_finding','context'
+  )),
+  independent_source_key TEXT NOT NULL,
+  source_id TEXT,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  source_url TEXT,
+  content_sha256 TEXT,
+  excerpt TEXT,
+  observed_at TEXT,
+  created_at TEXT NOT NULL,
+  UNIQUE (
+    signal_id, evidence_role, independent_source_key, source_id,
+    source_record_pk, source_url
+  )
+);
+
+CREATE TABLE IF NOT EXISTS integrity_signal_reviews (
+  signal_review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  signal_id TEXT NOT NULL REFERENCES integrity_signals(signal_id) ON DELETE CASCADE,
+  reviewer_id TEXT NOT NULL,
+  reviewer_independence_class TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    reviewer_independence_class IN ('author','maintainer','independent','unknown')
+  ),
+  decision TEXT NOT NULL CHECK (decision IN (
+    'needs_more_evidence','corroborate','reject','approve_publication','withdraw'
+  )),
+  rationale TEXT NOT NULL,
+  reviewed_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS integrity_signal_transitions (
+  signal_transition_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  signal_id TEXT NOT NULL REFERENCES integrity_signals(signal_id) ON DELETE CASCADE,
+  from_state TEXT NOT NULL,
+  to_state TEXT NOT NULL,
+  actor_kind TEXT NOT NULL,
+  actor_id TEXT NOT NULL,
+  rationale TEXT NOT NULL,
+  transitioned_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS integrity_signal_responses (
+  signal_response_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  signal_id TEXT NOT NULL REFERENCES integrity_signals(signal_id) ON DELETE CASCADE,
+  response_status TEXT NOT NULL CHECK (response_status IN (
+    'received','declined','no_response_after_deadline','not_required'
+  )),
+  response_source_url TEXT,
+  response_content_sha256 TEXT,
+  response_summary TEXT,
+  recorded_by TEXT NOT NULL,
+  recorded_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS integrity_signal_corrections (
+  signal_correction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  signal_id TEXT NOT NULL REFERENCES integrity_signals(signal_id) ON DELETE CASCADE,
+  correction_type TEXT NOT NULL CHECK (correction_type IN (
+    'counterevidence','factual_correction','identity_correction','withdrawal','supersession'
+  )),
+  rationale TEXT NOT NULL,
+  evidence_url TEXT,
+  corrected_by TEXT NOT NULL,
+  corrected_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_integrity_signals_state_priority
+  ON integrity_signals(state, review_priority DESC, created_at);
+CREATE INDEX IF NOT EXISTS idx_integrity_signals_subject
+  ON integrity_signals(subject_type, subject_id, period_start);
+CREATE INDEX IF NOT EXISTS idx_integrity_signals_publication
+  ON integrity_signals(publication_status, state, updated_at);
+CREATE INDEX IF NOT EXISTS idx_integrity_signal_evidence_signal_role
+  ON integrity_signal_evidence(signal_id, evidence_role, independent_source_key);
+CREATE INDEX IF NOT EXISTS idx_integrity_signal_transitions_signal
+  ON integrity_signal_transitions(signal_id, transitioned_at);
+CREATE INDEX IF NOT EXISTS idx_integrity_signal_reviews_signal
+  ON integrity_signal_reviews(signal_id, reviewed_at);
+CREATE INDEX IF NOT EXISTS idx_money_contract_integrity_group
+  ON money_contract_records(
+    contracting_authority, cpv_code, awarded_date, published_date, amount_eur
+  );
+CREATE INDEX IF NOT EXISTS idx_indicator_bulk_acquisitions_pipeline
+  ON indicator_bulk_acquisitions(pipeline_id, status, dataset_code);
+CREATE INDEX IF NOT EXISTS idx_indicator_bulk_acquisition_records_source
+  ON indicator_bulk_acquisition_records(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_source_records_indicator_backfill
+  ON source_records(
+    source_id,
+    COALESCE(source_snapshot_date, ''),
+    source_record_id,
+    source_record_pk
+  );

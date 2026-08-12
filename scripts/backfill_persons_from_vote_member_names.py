@@ -199,6 +199,15 @@ def backfill_persons_from_vote_member_names(
 
     now_iso = now_utc_iso()
     with conn:
+        conn.execute(
+            """
+            CREATE TEMP TABLE IF NOT EXISTS vote_member_person_map (
+              name_key_raw TEXT PRIMARY KEY,
+              person_id INTEGER NOT NULL
+            ) WITHOUT ROWID
+            """
+        )
+        conn.execute("DELETE FROM vote_member_person_map")
         for row in rows:
             member_name = _norm(row["member_name"])
             member_name_normalized = _norm(row["member_name_normalized"])
@@ -224,18 +233,46 @@ def backfill_persons_from_vote_member_names(
                 now_iso=now_iso,
             )
             stats["aliases_upserted"] += 1
-            cur = conn.execute(
+            conn.execute(
                 """
-                UPDATE parl_vote_member_votes
-                SET person_id = ?,
-                    updated_at = ?
-                WHERE source_id IN ({})
-                  AND person_id IS NULL
-                  AND COALESCE(NULLIF(TRIM(member_name_normalized), ''), lower(trim(member_name))) = ?
-                """.format(",".join(["?"] * len(effective_source_ids))),
-                (person_id, now_iso, *effective_source_ids, row["name_key_raw"]),
+                INSERT INTO vote_member_person_map (name_key_raw, person_id)
+                VALUES (?, ?)
+                ON CONFLICT(name_key_raw) DO UPDATE SET
+                  person_id = excluded.person_id
+                """,
+                (row["name_key_raw"], person_id),
             )
-            stats["member_votes_updated"] += int(cur.rowcount if cur.rowcount is not None else 0)
+        # One bounded scan of unresolved vote rows plus indexed temp-map lookups.
+        # The previous per-label UPDATE multiplied table scans by label count.
+        cur = conn.execute(
+            """
+            UPDATE parl_vote_member_votes AS member_vote
+            SET person_id = (
+                  SELECT mapping.person_id
+                  FROM vote_member_person_map AS mapping
+                  WHERE mapping.name_key_raw = COALESCE(
+                    NULLIF(TRIM(member_vote.member_name_normalized), ''),
+                    lower(trim(member_vote.member_name))
+                  )
+                ),
+                updated_at = ?
+            WHERE member_vote.source_id IN ({})
+              AND member_vote.person_id IS NULL
+              AND EXISTS (
+                SELECT 1
+                FROM vote_member_person_map AS mapping
+                WHERE mapping.name_key_raw = COALESCE(
+                  NULLIF(TRIM(member_vote.member_name_normalized), ''),
+                  lower(trim(member_vote.member_name))
+                )
+              )
+            """.format(",".join(["?"] * len(effective_source_ids))),
+            (now_iso, *effective_source_ids),
+        )
+        stats["member_votes_updated"] = int(
+            cur.rowcount if cur.rowcount is not None else 0
+        )
+        conn.execute("DELETE FROM vote_member_person_map")
     stats["created_by_source"] = dict(sorted(created_by_source.items()))
     return stats
 

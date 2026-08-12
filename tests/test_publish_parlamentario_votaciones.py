@@ -109,6 +109,27 @@ class TestPublishParlamentarioVotaciones(unittest.TestCase):
 
                 self.assertTrue(any((it.get("initiatives") or []) for it in items))
                 self.assertTrue(any((it.get("member_votes") or []) for it in items))
+                congreso_items = [
+                    item
+                    for item in items
+                    if (item.get("source") or {}).get("source_id")
+                    == "congreso_votaciones"
+                ]
+                self.assertTrue(congreso_items)
+                for item in congreso_items:
+                    self.assertTrue(
+                        (item.get("source") or {}).get("source_url", "").startswith(
+                            "https://www.congreso.es/webpublica/opendata/votaciones/"
+                        )
+                    )
+                    for vote in item.get("member_votes") or []:
+                        self.assertTrue(
+                            (vote.get("source") or {})
+                            .get("source_url", "")
+                            .startswith(
+                                "https://www.congreso.es/webpublica/opendata/votaciones/"
+                            )
+                        )
 
                 snap_with_unmatched = build_votaciones_snapshot(
                     conn,
@@ -153,6 +174,11 @@ class TestPublishParlamentarioVotaciones(unittest.TestCase):
                         self.assertTrue(msrc.get("source_id"))
                         self.assertTrue(msrc.get("source_url"))
                         self.assertTrue(msrc.get("source_hash"))
+                        self.assertTrue(msrc.get("source_record_id"))
+                        self.assertIsNotNone(msrc.get("source_record_pk"))
+                        self.assertEqual(
+                            msrc.get("source_record_scope"), "parent_vote_event"
+                        )
             finally:
                 conn.close()
 

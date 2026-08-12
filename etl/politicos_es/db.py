@@ -16,6 +16,115 @@ from .util import canonical_key, normalize_key_part, normalize_ws, now_utc_iso
 _UNIQUE_SOURCE_URL_RE = re.compile(r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.I)
 
 
+def ensure_indicator_observations_allow_ree(conn: sqlite3.Connection) -> None:
+    """Upgrade the legacy indicator-observation source constraint in place."""
+    table = "indicator_observation_records"
+    if not table_exists(conn, table):
+        return
+    sql = table_create_sql(conn, table)
+    if "source_id LIKE 'ree_%'" in sql:
+        return
+    backup = "indicator_observation_records_legacy_source_check"
+    if table_exists(conn, backup):
+        raise RuntimeError(
+            f"Schema migration blocked: found unexpected table '{backup}'"
+        )
+    if conn.in_transaction:
+        conn.commit()
+    fk_on = int(conn.execute("PRAGMA foreign_keys").fetchone()[0] or 0)
+    if fk_on:
+        conn.execute("PRAGMA foreign_keys = OFF;")
+    try:
+        conn.execute("BEGIN;")
+        conn.execute(f'ALTER TABLE "{table}" RENAME TO "{backup}";')
+        conn.execute(
+            """
+            CREATE TABLE indicator_observation_records (
+              observation_record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              indicator_series_id INTEGER REFERENCES indicator_series(indicator_series_id) ON DELETE SET NULL,
+              source_id TEXT NOT NULL REFERENCES sources(source_id)
+                  CHECK (
+                    source_id LIKE 'eurostat_%'
+                    OR source_id LIKE 'bde_%'
+                    OR source_id LIKE 'aemet_%'
+                    OR source_id LIKE 'ree_%'
+                  ),
+              source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+              source_record_id TEXT,
+              source_snapshot_date TEXT,
+              source_url TEXT,
+              series_code TEXT NOT NULL,
+              point_date TEXT NOT NULL,
+              value REAL,
+              value_text TEXT,
+              unit TEXT,
+              frequency TEXT,
+              dimensions_json TEXT,
+              methodology_version TEXT,
+              raw_payload TEXT NOT NULL,
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              UNIQUE (source_id, series_code, point_date, source_record_id)
+            )
+            """
+        )
+        conn.execute(
+            f"""
+            INSERT INTO indicator_observation_records (
+              observation_record_id, indicator_series_id, source_id,
+              source_record_pk, source_record_id, source_snapshot_date,
+              source_url, series_code, point_date, value, value_text, unit,
+              frequency, dimensions_json, methodology_version, raw_payload,
+              created_at, updated_at
+            )
+            SELECT
+              observation_record_id, indicator_series_id, source_id,
+              source_record_pk, source_record_id, source_snapshot_date,
+              source_url, series_code, point_date, value, value_text, unit,
+              frequency, dimensions_json, methodology_version, raw_payload,
+              created_at, updated_at
+            FROM "{backup}"
+            """
+        )
+        conn.execute(f'DROP TABLE "{backup}";')
+        conn.execute(
+            "CREATE INDEX idx_indicator_observation_records_source_series "
+            "ON indicator_observation_records(source_id, series_code)"
+        )
+        conn.execute(
+            "CREATE INDEX idx_indicator_observation_records_point_date "
+            "ON indicator_observation_records(point_date)"
+        )
+        conn.execute(
+            "CREATE INDEX idx_indicator_observation_records_series_date "
+            "ON indicator_observation_records(indicator_series_id, point_date)"
+        )
+        conn.execute(
+            """
+            CREATE INDEX idx_indicator_observation_records_partition
+            ON indicator_observation_records(
+              source_id,
+              substr(point_date, 1, 4),
+              point_date,
+              series_code,
+              COALESCE(source_snapshot_date, ''),
+              COALESCE(source_record_id, ''),
+              observation_record_id
+            )
+            """
+        )
+        conn.execute("COMMIT;")
+    except Exception:
+        try:
+            conn.execute("ROLLBACK;")
+        except sqlite3.Error:
+            pass
+        raise
+    finally:
+        if fk_on:
+            conn.execute("PRAGMA foreign_keys = ON;")
+
+
 def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None:
     """Fix early schema bug: text_documents must allow repeated source_url.
 
@@ -57,6 +166,11 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
               raw_path TEXT,
               text_excerpt TEXT,
               text_chars INTEGER,
+              text_path TEXT,
+              text_sha256 TEXT,
+              text_extraction_method TEXT,
+              text_extracted_at TEXT,
+              text_truncated INTEGER NOT NULL DEFAULT 0 CHECK (text_truncated IN (0, 1)),
               created_at TEXT NOT NULL,
               updated_at TEXT NOT NULL
             )
@@ -76,6 +190,11 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
               raw_path,
               text_excerpt,
               text_chars,
+              text_path,
+              text_sha256,
+              text_extraction_method,
+              text_extracted_at,
+              text_truncated,
               created_at,
               updated_at
             )
@@ -91,6 +210,11 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
               raw_path,
               text_excerpt,
               text_chars,
+              text_path,
+              text_sha256,
+              text_extraction_method,
+              text_extracted_at,
+              text_truncated,
               created_at,
               updated_at
             FROM text_documents_old
@@ -328,8 +452,61 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
         "parl_vote_member_votes": {
             "parliamentary_group_id": "parliamentary_group_id INTEGER REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE SET NULL",
         },
+        "parl_vote_events": {
+            "totals_absent": "totals_absent INTEGER",
+        },
         "accountability_ledger_entries": {
             "parliamentary_group_id": "parliamentary_group_id INTEGER REFERENCES parliamentary_groups(parliamentary_group_id) ON DELETE SET NULL",
+        },
+        "indicator_observation_records": {
+            "indicator_series_id": "indicator_series_id INTEGER REFERENCES indicator_series(indicator_series_id) ON DELETE SET NULL",
+        },
+        "indicator_series": {
+            "dimensions_json": "dimensions_json TEXT",
+        },
+        "infoelectoral_elected_officials": {
+            "person_id": "person_id INTEGER REFERENCES persons(person_id)",
+            "mandate_id": "mandate_id INTEGER REFERENCES mandates(mandate_id)",
+            "party_id": "party_id INTEGER REFERENCES parties(party_id)",
+            "institution_id": (
+                "institution_id INTEGER REFERENCES institutions(institution_id)"
+            ),
+            "role_id": "role_id INTEGER REFERENCES roles(role_id)",
+            "territory_id": (
+                "territory_id INTEGER REFERENCES territories(territory_id)"
+            ),
+            "first_seen_snapshot_date": (
+                "first_seen_snapshot_date TEXT NOT NULL DEFAULT ''"
+            ),
+            "last_seen_snapshot_date": (
+                "last_seen_snapshot_date TEXT NOT NULL DEFAULT ''"
+            ),
+            "is_present": (
+                "is_present INTEGER NOT NULL DEFAULT 1 "
+                "CHECK (is_present IN (0, 1))"
+            ),
+        },
+        "infoelectoral_candidate_occurrences": {
+            "birth_date": "birth_date TEXT",
+            "birth_date_source": "birth_date_source TEXT",
+            "dni": "dni TEXT",
+        },
+        "money_contract_records": {
+            "amount_eur_decimal": "amount_eur_decimal TEXT",
+            "amount_semantics": "amount_semantics TEXT",
+            "stable_contract_id": "stable_contract_id TEXT",
+            "entry_updated_at": "entry_updated_at TEXT",
+            "contract_status_code": "contract_status_code TEXT",
+            "authority_identifier": "authority_identifier TEXT",
+        },
+        "money_contract_documents": {
+            "document_source_record_pk": (
+                "document_source_record_pk INTEGER "
+                "REFERENCES source_records(source_record_pk)"
+            ),
+        },
+        "placsp_bulk_runs": {
+            "archive_contract_sha256": "archive_contract_sha256 TEXT",
         },
         "institutions": {
             "admin_level_id": "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
@@ -365,12 +542,49 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             "full_text_chars": "full_text_chars INTEGER",
             "full_text_path": "full_text_path TEXT",
         },
+        "text_documents": {
+            "text_path": "text_path TEXT",
+            "text_sha256": "text_sha256 TEXT",
+            "text_extraction_method": "text_extraction_method TEXT",
+            "text_extracted_at": "text_extracted_at TEXT",
+            "text_truncated": "text_truncated INTEGER NOT NULL DEFAULT 0 CHECK (text_truncated IN (0, 1))",
+        },
+        "integrity_signal_reviews": {
+            "reviewer_independence_class": (
+                "reviewer_independence_class TEXT NOT NULL DEFAULT 'unknown' "
+                "CHECK (reviewer_independence_class IN "
+                "('author','maintainer','independent','unknown'))"
+            ),
+        },
     }
 
     for table, columns in compat_columns.items():
         for column, definition_sql in columns.items():
             ensure_column(conn, table, column, definition_sql)
 
+    if table_exists(conn, "infoelectoral_elected_officials"):
+        conn.execute(
+            """
+            UPDATE infoelectoral_elected_officials
+            SET first_seen_snapshot_date = COALESCE(
+                  NULLIF(first_seen_snapshot_date, ''),
+                  (SELECT source_snapshot_date FROM source_records
+                   WHERE source_records.source_record_pk =
+                         infoelectoral_elected_officials.source_record_pk),
+                  ''
+                ),
+                last_seen_snapshot_date = COALESCE(
+                  NULLIF(last_seen_snapshot_date, ''),
+                  (SELECT source_snapshot_date FROM source_records
+                   WHERE source_records.source_record_pk =
+                         infoelectoral_elected_officials.source_record_pk),
+                  ''
+                )
+            WHERE first_seen_snapshot_date = '' OR last_seen_snapshot_date = ''
+            """
+        )
+
+    ensure_indicator_observations_allow_ree(conn)
     ensure_text_documents_allow_duplicate_urls(conn)
     ensure_surrogate_pk_compat(conn)
     conn.commit()
@@ -844,7 +1058,11 @@ def upsert_mandate(
 
 
 def close_missing_mandates(
-    conn: sqlite3.Connection, source_id: str, seen_ids: list[str], snapshot_date: str | None, now_iso: str
+    conn: sqlite3.Connection,
+    source_id: str,
+    seen_ids: list[str],
+    snapshot_date: str | None,
+    now_iso: str,
 ) -> None:
     if not seen_ids:
         conn.execute(
@@ -859,20 +1077,38 @@ def close_missing_mandates(
         )
         return
 
-    placeholders = ",".join("?" for _ in seen_ids)
-    params: list[Any] = [snapshot_date, now_iso, source_id, *seen_ids]
+    # Do not build a NOT IN (?, ... x N) statement. SQLite variable limits make
+    # that fail far below million-row sources. A connection-local indexed temp
+    # table keeps SQL size and peak parameter memory bounded.
     conn.execute(
-        f"""
+        """
+        CREATE TEMP TABLE IF NOT EXISTS ingest_seen_mandate_ids (
+          source_record_id TEXT PRIMARY KEY
+        ) WITHOUT ROWID
+        """
+    )
+    conn.execute("DELETE FROM ingest_seen_mandate_ids")
+    conn.executemany(
+        "INSERT OR IGNORE INTO ingest_seen_mandate_ids (source_record_id) VALUES (?)",
+        ((str(source_record_id),) for source_record_id in seen_ids),
+    )
+    conn.execute(
+        """
         UPDATE mandates
         SET is_active = 0,
             end_date = COALESCE(end_date, ?),
             last_seen_at = ?
         WHERE source_id = ?
           AND is_active = 1
-          AND source_record_id NOT IN ({placeholders})
+          AND NOT EXISTS (
+            SELECT 1
+            FROM ingest_seen_mandate_ids seen
+            WHERE seen.source_record_id = mandates.source_record_id
+          )
         """,
-        tuple(params),
+        (snapshot_date, now_iso, source_id),
     )
+    conn.execute("DELETE FROM ingest_seen_mandate_ids")
 
 
 def start_run(conn: sqlite3.Connection, source_id: str, source_url: str) -> int:

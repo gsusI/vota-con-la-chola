@@ -46,9 +46,10 @@ def upsert_parl_vote_event(
           title, expediente_text, subgroup_title, subgroup_text,
           assentimiento,
           totals_present, totals_yes, totals_no, totals_abstain, totals_no_vote,
+          totals_absent,
           source_id, source_url, source_record_pk, source_snapshot_date,
           raw_payload, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(vote_event_id) DO UPDATE SET
           legislature=excluded.legislature,
           session_number=excluded.session_number,
@@ -64,6 +65,7 @@ def upsert_parl_vote_event(
           totals_no=excluded.totals_no,
           totals_abstain=excluded.totals_abstain,
           totals_no_vote=excluded.totals_no_vote,
+          totals_absent=excluded.totals_absent,
           source_url=COALESCE(excluded.source_url, parl_vote_events.source_url),
           source_record_pk=COALESCE(excluded.source_record_pk, parl_vote_events.source_record_pk),
           source_snapshot_date=COALESCE(excluded.source_snapshot_date, parl_vote_events.source_snapshot_date),
@@ -86,6 +88,7 @@ def upsert_parl_vote_event(
             row.get("totals_no"),
             row.get("totals_abstain"),
             row.get("totals_no_vote"),
+            row.get("totals_absent"),
             source_id,
             source_url,
             source_record_pk,

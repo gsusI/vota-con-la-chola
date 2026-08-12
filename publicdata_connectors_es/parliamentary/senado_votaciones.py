@@ -96,7 +96,7 @@ def _to_int(value: str | int | None) -> int | None:
 
 
 def _parse_senado_vote_date(value: str | None) -> str | None:
-    txt = normalize_ws(value)
+    txt = normalize_ws(str(value or ""))
     if not txt:
         return None
     direct = parse_date_flexible(txt)
@@ -395,6 +395,7 @@ def _find_local_session_xml(
     candidate_names.append(f"ses_{session_id}.xml")
 
     preferred_dirs: list[Path] = []
+    legislature_dir: Path | None = None
     if session_url:
         try:
             parsed = urlparse(session_url)
@@ -406,8 +407,11 @@ def _find_local_session_xml(
 
         m = re.search(r"/legis(\d+)/votaciones/", session_url, flags=re.I)
         if m:
-            preferred_dirs.append(detail_dir / f"legis{m.group(1)}")
-    preferred_dirs.append(detail_dir)
+            legislature_dir = detail_dir / f"legis{m.group(1)}"
+            if legislature_dir.is_dir():
+                preferred_dirs.append(legislature_dir)
+    if legislature_dir is None or not legislature_dir.is_dir():
+        preferred_dirs.append(detail_dir)
 
     for root in preferred_dirs:
         for name in candidate_names:
@@ -415,11 +419,13 @@ def _find_local_session_xml(
             if direct.exists() and direct.is_file():
                 return direct
 
-    # Last resort: recursive search (slower, but keeps backward compat with older folder layouts).
-    for name in candidate_names:
-        matches = sorted(detail_dir.glob(f"**/{name}"))
-        if matches:
-            return matches[0]
+    # Last resort: recurse only inside the resolved legislature directory. A
+    # same-named session file from another legislature is different evidence.
+    for root in preferred_dirs:
+        for name in candidate_names:
+            matches = sorted(root.glob(f"**/{name}"))
+            if matches:
+                return matches[0]
 
     return None
 
@@ -432,6 +438,7 @@ def _load_session_vote_info(
     session_id: int | None,
     vote_id: int | None,
     detail_cookie: str | None,
+    local_only: bool = False,
 ) -> dict[str, Any]:
     session_info: dict[str, Any] = {"ok": False, "votes": [], "error": None, "source": None}
     if not session_url:
@@ -439,6 +446,7 @@ def _load_session_vote_info(
         return session_info
 
     bad_local_path: Path | None = None
+    local_path: Path | None = None
     if detail_dir is not None:
         local_path = _find_local_session_xml(
             detail_dir,
@@ -464,6 +472,13 @@ def _load_session_vote_info(
             except Exception as exc:  # noqa: BLE001
                 bad_local_path = local_path
                 session_info["error"] = f"local-parse: {type(exc).__name__}: {exc}"
+
+    if local_only:
+        if local_path is None:
+            session_info["error"] = "local-cache-only: miss"
+        elif session_info.get("error"):
+            session_info["error"] = f"local-cache-only: {session_info['error']}"
+        return session_info
 
     try:
         headers = {"Accept": "application/xml,text/xml,*/*"}
@@ -530,6 +545,7 @@ def _enrich_senado_record_with_details(
     detail_host: str,
     detail_cookie: str | None,
     detail_failures: list[str],
+    local_only: bool = False,
 ) -> None:
     # Backward compat: older stored payloads were "flat" dicts (no {"payload": {...}} wrapper).
     # In that case, mutate `rec` directly so the caller can persist enriched fields.
@@ -540,6 +556,10 @@ def _enrich_senado_record_with_details(
         payload = payload_obj
     else:
         return
+
+    # Report the current enrichment attempt, not a stale failure persisted by a
+    # previous network/cache run.
+    payload.pop("detail_error", None)
 
     leg = normalize_ws(str(payload.get("legislature") or rec.get("legislature") or "")) or None
     session_id = _to_int(payload.get("session_id") or rec.get("session_id"))
@@ -571,6 +591,7 @@ def _enrich_senado_record_with_details(
                 session_id=session_id,
                 vote_id=vote_id,
                 detail_cookie=detail_cookie,
+                local_only=local_only,
             )
             session_cache[session_url] = session_info
 

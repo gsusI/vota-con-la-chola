@@ -17,7 +17,7 @@ def run_prefect_queue(
     snapshot_date: str = "",
     mode: str = "preferred",
     only_repeatable_now: bool = False,
-    fallback_on_failure: str = "sample-if-available",
+    fallback_on_failure: str = "none",
     include_logs: bool = False,
     command_timeout_seconds: int = 90,
     summary_out: str = "",

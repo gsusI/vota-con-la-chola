@@ -5,6 +5,7 @@ import sqlite3
 from hashlib import sha256
 from pathlib import Path
 from typing import Any, Iterable
+from urllib.parse import urlsplit
 
 from .quality import (
     compute_initiative_quality_kpis,
@@ -65,8 +66,8 @@ def _public_source_url(raw_url: Any, *, fallback_url: Any = None, payload_text: 
         value = str(candidate or "").strip()
         if not value:
             continue
-        # Public snapshots must not leak local filesystem paths from sample/fallback runs.
-        if value.lower().startswith("file://"):
+        parsed = urlsplit(value)
+        if parsed.scheme.lower() not in {"http", "https"} or not parsed.netloc:
             continue
         return value
     return None
@@ -76,7 +77,8 @@ def _public_source_default_url(raw_url: Any) -> str | None:
     value = str(raw_url or "").strip()
     if not value:
         return None
-    if value.lower().startswith("file://"):
+    parsed = urlsplit(value)
+    if parsed.scheme.lower() not in {"http", "https"} or not parsed.netloc:
         return None
     return value
 
@@ -163,6 +165,7 @@ def build_votaciones_snapshot(
           e.totals_no,
           e.totals_abstain,
           e.totals_no_vote,
+          e.totals_absent,
           e.source_id,
           e.source_url,
           s.default_url AS source_default_url,
@@ -218,6 +221,7 @@ def build_votaciones_snapshot(
                     "totals_no": r["totals_no"],
                     "totals_abstain": r["totals_abstain"],
                     "totals_no_vote": r["totals_no_vote"],
+                    "totals_absent": r["totals_absent"],
                 },
                 "source": {
                     "source_id": source_id,
@@ -329,9 +333,13 @@ def build_votaciones_snapshot(
                   mv.source_url,
                   s.default_url AS source_default_url,
                   mv.source_snapshot_date,
-                  mv.raw_payload
+                  mv.raw_payload,
+                  e.source_record_pk AS event_source_record_pk,
+                  sr.source_record_id AS event_source_record_id
                 FROM parl_vote_member_votes mv
                 JOIN sources s ON s.source_id = mv.source_id
+                JOIN parl_vote_events e ON e.vote_event_id = mv.vote_event_id
+                LEFT JOIN source_records sr ON sr.source_record_pk = e.source_record_pk
                 LEFT JOIN persons p ON p.person_id = mv.person_id
                 WHERE mv.vote_event_id IN ({qmarks})
                 ORDER BY mv.vote_event_id, mv.seat, mv.member_name, mv.member_vote_id
@@ -370,8 +378,9 @@ def build_votaciones_snapshot(
                             "source_default_url": _public_source_default_url(r["source_default_url"]),
                             "source_snapshot_date": r["source_snapshot_date"],
                             "source_hash": _sha256_text(raw_payload),
-                            "source_record_pk": None,
-                            "source_record_id": None,
+                            "source_record_pk": r["event_source_record_pk"],
+                            "source_record_id": r["event_source_record_id"],
+                            "source_record_scope": "parent_vote_event",
                         },
                     }
                 )
@@ -392,6 +401,7 @@ def build_votaciones_snapshot(
             or ev["totals_no"] is not None
             or ev["totals_abstain"] is not None
             or ev["totals_no_vote"] is not None
+            or ev["totals_absent"] is not None
         ):
             events_with_totals += 1
 
