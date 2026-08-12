@@ -32,7 +32,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="dinero",
         default_url=PLACSP_DEFAULT_URL,
         format="xml",
-        fallback_file="etl/data/raw/samples/placsp_sindicacion_sample.xml",
+        fallback_file="",
         min_records_loaded_strict=10,
     ),
     SourceDefinition(
@@ -41,7 +41,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="dinero",
         default_url=PLACSP_DEFAULT_URL,
         format="xml",
-        fallback_file="etl/data/raw/samples/placsp_autonomico_sample.xml",
+        fallback_file="",
         min_records_loaded_strict=3,
     ),
 )
@@ -49,11 +49,15 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
 SOURCE_CONFIG = source_config_mapping(SOURCE_DEFINITIONS)
 
 EXPEDIENTE_PATTERNS = (
+    re.compile(r"(?:id\s+licitaci[oó]n)\s*[:\-]\s*([^;\n]+)", re.I),
     re.compile(r"(?:expediente|n(?:u|ú)m(?:ero)?\s+de\s+expediente)\s*[:\-]\s*([A-Za-z0-9./_-]{3,})", re.I),
     re.compile(r"\bEXP[-_/]?\d{4}[-_/]\d+\b", re.I),
 )
 ORGANO_PATTERNS = (
-    re.compile(r"(?:organo(?:\s+de\s+contratacion)?|entidad adjudicadora)\s*[:\-]\s*([^.;\n]+)", re.I),
+    re.compile(
+        r"(?:[oó]rgano(?:\s+de\s+contrataci[oó]n)?|entidad adjudicadora)\s*[:\-]\s*([^;\n]+)",
+        re.I,
+    ),
 )
 AMOUNT_PATTERNS = (
     re.compile(r"(?:importe|presupuesto)[^0-9]{0,25}([0-9][0-9., ]{0,40})", re.I),
@@ -114,6 +118,42 @@ def _extract_text(entry: ET.Element, field_name: str) -> str:
         if text:
             return text
     return ""
+
+
+def _first_descendant_text(node: ET.Element | None, field_name: str) -> str | None:
+    if node is None:
+        return None
+    for descendant in node.iter():
+        if _local_name(descendant.tag) != field_name:
+            continue
+        value = normalize_ws(
+            " ".join(part.strip() for part in descendant.itertext() if part and part.strip())
+        )
+        if value:
+            return value
+    return None
+
+
+def _descendant_texts(node: ET.Element | None, field_name: str) -> list[str]:
+    if node is None:
+        return []
+    values: list[str] = []
+    for descendant in node.iter():
+        if _local_name(descendant.tag) != field_name:
+            continue
+        value = normalize_ws(
+            " ".join(part.strip() for part in descendant.itertext() if part and part.strip())
+        )
+        if value:
+            values.append(value)
+    return values
+
+
+def _first_descendant(entry: ET.Element, field_name: str) -> ET.Element | None:
+    for descendant in entry.iter():
+        if _local_name(descendant.tag) == field_name:
+            return descendant
+    return None
 
 
 def _extract_links(entry: ET.Element) -> list[str]:
@@ -308,10 +348,57 @@ def parse_placsp_atom_entries(
         source_url_raw = links[0] if links else entry_id
 
         text_blob = normalize_ws(" ".join(part for part in (title, summary, content) if part))
-        expediente = _extract_expediente(text_blob, source_url=source_url, entry_id=entry_id)
-        organo = _extract_organo(text_blob)
-        cpv_codes = _extract_cpv_codes(text_blob)
-        amount_eur = _extract_amount_eur(text_blob)
+        contract_status = _first_descendant(entry, "ContractFolderStatus")
+        status_root = contract_status if contract_status is not None else entry
+        contracting_party = _first_descendant(status_root, "LocatedContractingParty")
+        procurement_project = _first_descendant(status_root, "ProcurementProject")
+
+        expediente = _first_descendant_text(contract_status, "ContractFolderID")
+        if not expediente:
+            expediente = _extract_expediente(
+                text_blob,
+                source_url=source_url,
+                entry_id=entry_id,
+            )
+
+        organo = _first_descendant_text(contracting_party, "Name")
+        if not organo:
+            organo = _extract_organo(text_blob)
+
+        cpv_codes = sorted(
+            {
+                value
+                for value in _descendant_texts(
+                    procurement_project,
+                    "ItemClassificationCode",
+                )
+                if re.fullmatch(r"\d{8}", value)
+            }
+        )
+        if not cpv_codes:
+            cpv_codes = _extract_cpv_codes(text_blob)
+
+        amount_eur = None
+        amount_root = procurement_project if procurement_project is not None else entry
+        amount_node = next(
+            (
+                node
+                for node in (
+                    _first_descendant(amount_root, field_name)
+                    for field_name in (
+                        "EstimatedOverallContractAmount",
+                        "TaxExclusiveAmount",
+                        "TotalAmount",
+                    )
+                )
+                if node is not None
+            ),
+            None,
+        )
+        if amount_node is not None and amount_node.text:
+            amount_eur = _parse_decimal_token(amount_node.text)
+        if amount_eur is None:
+            amount_eur = _extract_amount_eur(text_blob)
         published_iso = _extract_publication_iso(updated_raw, published_raw, text_blob)
 
         record: dict[str, Any] = {
@@ -397,7 +484,7 @@ class _PlacspBaseConnector(BaseConnector):
                     records=records,
                 )
 
-            resolved_url = f"file://{from_file.resolve()}"
+            resolved_url = url_override or f"file://{from_file.resolve()}"
             payload = from_file.read_bytes()
             if from_file.suffix.lower() == ".json":
                 records = parse_json_source(payload)

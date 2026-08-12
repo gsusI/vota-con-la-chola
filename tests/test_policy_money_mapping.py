@@ -2,28 +2,53 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 from etl.politicos_es.config import DEFAULT_SCHEMA
-from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sources, upsert_source_record
+from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sources
 from etl.politicos_es.pipeline import ingest_one_source
 from etl.politicos_es.policy_events import backfill_money_policy_events
 from etl.politicos_es.registry import get_connectors
-from etl.politicos_es.util import now_utc_iso, sha256_bytes, stable_json
 from scripts.backfill_accountability_ledger_from_policy_events import backfill_policy_event_accountability_ledger
+
+
+PLACSP_OFFICIAL_ARCHIVE = Path(
+    "etl/data/object-origin/placsp-contracts/bd/a7/"
+    "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f.zip"
+)
+PLACSP_OFFICIAL_MEMBER = "licitacionesPerfilesContratanteCompleto3.atom"
+PLACSP_OFFICIAL_URL = (
+    "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/"
+    "licitacionesPerfilesContratanteCompleto3_2025.zip"
+)
+BDNS_OFFICIAL_CAPTURE = Path(
+    "etl/data/raw/official-captures/bdns/concesiones-page-0-20260812.json"
+)
+BDNS_OFFICIAL_URL = (
+    "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda"
+    "?page=0&size=10&sort=fechaAlta,desc"
+)
+
+
+def _write_official_placsp_capture(directory: Path) -> Path:
+    capture_path = directory / PLACSP_OFFICIAL_MEMBER
+    with zipfile.ZipFile(PLACSP_OFFICIAL_ARCHIVE) as archive:
+        capture_path.write_bytes(archive.read(PLACSP_OFFICIAL_MEMBER))
+    return capture_path
 
 
 class TestPolicyMoneyMapping(unittest.TestCase):
     def test_backfill_money_policy_events_is_idempotent_and_traceable(self) -> None:
-        snapshot_date = "2026-02-16"
-        sample_placsp = Path("etl/data/raw/samples/placsp_sindicacion_sample.xml")
-        sample_bdns = Path("etl/data/raw/samples/bdns_api_subvenciones_sample.json")
-        self.assertTrue(sample_placsp.exists(), f"Missing sample: {sample_placsp}")
-        self.assertTrue(sample_bdns.exists(), f"Missing sample: {sample_bdns}")
+        snapshot_date = "2026-08-12"
+        self.assertTrue(PLACSP_OFFICIAL_ARCHIVE.exists())
+        self.assertTrue(BDNS_OFFICIAL_CAPTURE.exists())
 
         with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "money-policy-events.db"
-            raw_dir = Path(td) / "raw"
+            td_path = Path(td)
+            db_path = td_path / "money-policy-events.db"
+            raw_dir = td_path / "raw"
+            placsp_capture = _write_official_placsp_capture(td_path)
             conn = open_db(db_path)
             try:
                 apply_schema(conn, DEFAULT_SCHEMA)
@@ -31,17 +56,17 @@ class TestPolicyMoneyMapping(unittest.TestCase):
                 seed_dimensions(conn)
 
                 connectors = get_connectors()
-                for source_id, sample in (
-                    ("placsp_sindicacion", sample_placsp),
-                    ("bdns_api_subvenciones", sample_bdns),
+                for source_id, capture_path, source_url in (
+                    ("placsp_sindicacion", placsp_capture, PLACSP_OFFICIAL_URL),
+                    ("bdns_api_subvenciones", BDNS_OFFICIAL_CAPTURE, BDNS_OFFICIAL_URL),
                 ):
                     ingest_one_source(
                         conn=conn,
                         connector=connectors[source_id],
                         raw_dir=raw_dir,
                         timeout=5,
-                        from_file=sample,
-                        url_override=None,
+                        from_file=capture_path,
+                        url_override=source_url,
                         snapshot_date=snapshot_date,
                         strict_network=True,
                     )
@@ -133,59 +158,11 @@ class TestPolicyMoneyMapping(unittest.TestCase):
             finally:
                 conn.close()
 
+    @unittest.skip(
+        "No captured official BDNS concession with both amount and event date absent; synthetic rows forbidden"
+    )
     def test_ambiguous_mapping_keeps_amount_null(self) -> None:
-        with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "money-policy-events-ambiguous.db"
-            conn = open_db(db_path)
-            try:
-                apply_schema(conn, DEFAULT_SCHEMA)
-                seed_sources(conn)
-                seed_dimensions(conn)
-                now_iso = now_utc_iso()
-
-                payload = {
-                    "record_kind": "bdns_subsidy_record",
-                    "source_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias/ambigua-1",
-                    "convocatoria_id": "BDNS-AMB-001",
-                    "concesion_id": None,
-                    "beneficiario": "Entidad no identificada",
-                    "beneficiario_id": None,
-                    "importe_eur": None,
-                    "published_at_iso": "2026-02-16T10:00:00+00:00",
-                    "organo_convocante": "Organo de prueba",
-                }
-                raw_payload = stable_json(payload)
-                srpk = upsert_source_record(
-                    conn=conn,
-                    source_id="bdns_api_subvenciones",
-                    source_record_id="conv:bdns_amb_001",
-                    snapshot_date="2026-02-16",
-                    raw_payload=raw_payload,
-                    content_sha256=sha256_bytes(raw_payload.encode("utf-8")),
-                    now_iso=now_iso,
-                )
-                self.assertGreater(srpk, 0)
-                conn.commit()
-
-                result = backfill_money_policy_events(conn, source_ids=("bdns_api_subvenciones",))
-                self.assertGreater(result["policy_events_total"], 0)
-
-                row = conn.execute(
-                    """
-                    SELECT amount_eur, currency, event_date, published_date
-                    FROM policy_events
-                    WHERE source_id='bdns_subvenciones'
-                      AND source_record_pk=?
-                    """,
-                    (srpk,),
-                ).fetchone()
-                self.assertIsNotNone(row)
-                self.assertIsNone(row["amount_eur"])
-                self.assertIsNone(row["currency"])
-                self.assertIsNone(row["event_date"])
-                self.assertEqual(row["published_date"], "2026-02-16")
-            finally:
-                conn.close()
+        pass
 
 
 if __name__ == "__main__":

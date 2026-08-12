@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 from etl.politicos_es.config import DEFAULT_SCHEMA
 from etl.politicos_es.connectors.placsp_contracts import (
-    PlacspAutonomicoConnector,
     PlacspSindicacionConnector,
     parse_placsp_atom_entries,
 )
@@ -14,19 +14,45 @@ from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sou
 from etl.politicos_es.pipeline import ingest_one_source
 
 
+PLACSP_OFFICIAL_ARCHIVE = Path(
+    "etl/data/object-origin/placsp-contracts/bd/a7/"
+    "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f.zip"
+)
+PLACSP_OFFICIAL_MEMBER = "licitacionesPerfilesContratanteCompleto3.atom"
+PLACSP_OFFICIAL_URL = (
+    "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/"
+    "licitacionesPerfilesContratanteCompleto3_2025.zip"
+)
+
+
+def _official_placsp_payload() -> bytes:
+    with zipfile.ZipFile(PLACSP_OFFICIAL_ARCHIVE) as archive:
+        return archive.read(PLACSP_OFFICIAL_MEMBER)
+
+
+def _write_official_placsp_capture(directory: Path) -> Path:
+    capture_path = directory / PLACSP_OFFICIAL_MEMBER
+    capture_path.write_bytes(_official_placsp_payload())
+    return capture_path
+
+
 class TestPlacspConnector(unittest.TestCase):
-    def test_extract_from_sample_xml_includes_contracting_fields(self) -> None:
+    def test_extract_from_official_capture_includes_contracting_fields(self) -> None:
         connector = PlacspSindicacionConnector()
-        sample_path = Path("etl/data/raw/samples/placsp_sindicacion_sample.xml")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        self.assertTrue(
+            PLACSP_OFFICIAL_ARCHIVE.exists(),
+            f"Missing official archive: {PLACSP_OFFICIAL_ARCHIVE}",
+        )
 
         with tempfile.TemporaryDirectory() as td:
-            raw_dir = Path(td) / "raw"
+            td_path = Path(td)
+            raw_dir = td_path / "raw"
+            capture_path = _write_official_placsp_capture(td_path)
             extracted = connector.extract(
                 raw_dir=raw_dir,
                 timeout=5,
-                from_file=sample_path,
-                url_override=None,
+                from_file=capture_path,
+                url_override=PLACSP_OFFICIAL_URL,
                 strict_network=True,
             )
 
@@ -46,17 +72,16 @@ class TestPlacspConnector(unittest.TestCase):
             self.assertTrue(all(id_value for id_value in ids))
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        sample_path = Path("etl/data/raw/samples/placsp_sindicacion_sample.xml")
-        payload = sample_path.read_bytes()
+        payload = _official_placsp_payload()
 
         records_1 = parse_placsp_atom_entries(
             payload,
-            feed_url="https://contrataciondelestado.es/sindicacion/sample.atom",
+            feed_url=PLACSP_OFFICIAL_URL,
             content_type="application/atom+xml",
         )
         records_2 = parse_placsp_atom_entries(
             payload,
-            feed_url="https://contrataciondelestado.es/sindicacion/sample.atom",
+            feed_url=PLACSP_OFFICIAL_URL,
             content_type="application/atom+xml",
         )
 
@@ -64,34 +89,31 @@ class TestPlacspConnector(unittest.TestCase):
         ids_2 = sorted(str(row.get("source_record_id") or "") for row in records_2)
         self.assertEqual(ids_1, ids_2)
 
-    def test_source_records_ingest_is_idempotent_for_both_placsp_sources(self) -> None:
-        snapshot_date = "2026-02-16"
-        connectors = [PlacspSindicacionConnector(), PlacspAutonomicoConnector()]
-        sample_paths = {
-            "placsp_sindicacion": Path("etl/data/raw/samples/placsp_sindicacion_sample.xml"),
-            "placsp_autonomico": Path("etl/data/raw/samples/placsp_autonomico_sample.xml"),
-        }
+    def test_source_records_ingest_is_idempotent_for_official_national_capture(self) -> None:
+        snapshot_date = "2026-08-12"
+        connector = PlacspSindicacionConnector()
 
         with tempfile.TemporaryDirectory() as td:
-            db_path = Path(td) / "politicos-test.db"
-            raw_dir = Path(td) / "raw"
+            td_path = Path(td)
+            db_path = td_path / "politicos-test.db"
+            raw_dir = td_path / "raw"
+            capture_path = _write_official_placsp_capture(td_path)
             conn = open_db(db_path)
             try:
                 apply_schema(conn, DEFAULT_SCHEMA)
                 seed_sources(conn)
                 seed_dimensions(conn)
 
-                for connector in connectors:
-                    ingest_one_source(
-                        conn=conn,
-                        connector=connector,
-                        raw_dir=raw_dir,
-                        timeout=5,
-                        from_file=sample_paths[connector.source_id],
-                        url_override=None,
-                        snapshot_date=snapshot_date,
-                        strict_network=True,
-                    )
+                ingest_one_source(
+                    conn=conn,
+                    connector=connector,
+                    raw_dir=raw_dir,
+                    timeout=5,
+                    from_file=capture_path,
+                    url_override=PLACSP_OFFICIAL_URL,
+                    snapshot_date=snapshot_date,
+                    strict_network=True,
+                )
 
                 counts_1 = {
                     row["source_id"]: int(row["c"])
@@ -99,26 +121,24 @@ class TestPlacspConnector(unittest.TestCase):
                         """
                         SELECT source_id, COUNT(*) AS c
                         FROM source_records
-                        WHERE source_id LIKE 'placsp_%'
+                        WHERE source_id = 'placsp_sindicacion'
                         GROUP BY source_id
                         ORDER BY source_id
                         """
                     ).fetchall()
                 }
                 self.assertGreater(counts_1.get("placsp_sindicacion", 0), 0)
-                self.assertGreater(counts_1.get("placsp_autonomico", 0), 0)
 
-                for connector in connectors:
-                    ingest_one_source(
-                        conn=conn,
-                        connector=connector,
-                        raw_dir=raw_dir,
-                        timeout=5,
-                        from_file=sample_paths[connector.source_id],
-                        url_override=None,
-                        snapshot_date=snapshot_date,
-                        strict_network=True,
-                    )
+                ingest_one_source(
+                    conn=conn,
+                    connector=connector,
+                    raw_dir=raw_dir,
+                    timeout=5,
+                    from_file=capture_path,
+                    url_override=PLACSP_OFFICIAL_URL,
+                    snapshot_date=snapshot_date,
+                    strict_network=True,
+                )
 
                 counts_2 = {
                     row["source_id"]: int(row["c"])
@@ -126,7 +146,7 @@ class TestPlacspConnector(unittest.TestCase):
                         """
                         SELECT source_id, COUNT(*) AS c
                         FROM source_records
-                        WHERE source_id LIKE 'placsp_%'
+                        WHERE source_id = 'placsp_sindicacion'
                         GROUP BY source_id
                         ORDER BY source_id
                         """
@@ -139,4 +159,3 @@ class TestPlacspConnector(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

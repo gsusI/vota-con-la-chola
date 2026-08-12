@@ -3,20 +3,29 @@ from __future__ import annotations
 import io
 import json
 import re
-import zipfile
 import xml.etree.ElementTree as ET
+import zipfile
 from pathlib import Path
 from typing import Any
 
 from publicdata_core.connectors import BaseConnector
 from publicdata_core.http import http_get_bytes, payload_looks_like_html
 from publicdata_core.parsers import parse_json_source
+from publicdata_core.raw import (
+    fallback_payload_from_sample as _fallback_payload_from_sample,
+)
 from publicdata_core.raw import raw_output_path
-from publicdata_core.raw import fallback_payload_from_sample as _fallback_payload_from_sample
 from publicdata_core.sources import SourceDefinition, source_config_mapping
 from publicdata_core.types import Extracted
-from publicdata_core.util import normalize_key_part, normalize_ws, now_utc_iso, parse_date_flexible, pick_value, sha256_bytes, stable_json
-
+from publicdata_core.util import (
+    normalize_key_part,
+    normalize_ws,
+    now_utc_iso,
+    parse_date_flexible,
+    pick_value,
+    sha256_bytes,
+    stable_json,
+)
 
 DIR3_CATALOG_URL = "https://datos.gob.es/es/catalogo/e05251701-directorio-comun-de-unidades-organicas-y-oficinas-dir3"
 DIR3_DATASET_API_URL = (
@@ -35,7 +44,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="organigrama",
         default_url=DIR3_AGE_XLSX_URL,
         format="xlsx",
-        fallback_file="etl/data/raw/samples/dir3_unidades_age_sample.json",
+        fallback_file="",
         min_records_loaded_strict=1000,
     ),
 )
@@ -56,7 +65,9 @@ def _xlsx_col_to_index(cell_ref: str) -> int:
 def _cell_text(cell: ET.Element, shared: list[str]) -> str:
     cell_type = cell.attrib.get("t")
     if cell_type == "inlineStr":
-        return normalize_ws("".join(node.text or "" for node in cell.findall(".//{*}t")))
+        return normalize_ws(
+            "".join(node.text or "" for node in cell.findall(".//{*}t"))
+        )
 
     node = cell.find("{*}v")
     raw_value = normalize_ws(node.text or "") if node is not None else ""
@@ -73,21 +84,31 @@ def _cell_text(cell: ET.Element, shared: list[str]) -> str:
 def parse_dir3_xlsx(payload: bytes) -> list[dict[str, Any]]:
     payload_sig = sha256_bytes(payload)
     if payload_looks_like_html(payload):
-        raise RuntimeError(f"Respuesta HTML inesperada para DIR3 XLSX (payload_sig={payload_sig})")
+        raise RuntimeError(
+            f"Respuesta HTML inesperada para DIR3 XLSX (payload_sig={payload_sig})"
+        )
 
     try:
         zf = zipfile.ZipFile(io.BytesIO(payload))
     except zipfile.BadZipFile as exc:
-        raise RuntimeError(f"XLSX invalido para DIR3 (payload_sig={payload_sig})") from exc
+        raise RuntimeError(
+            f"XLSX invalido para DIR3 (payload_sig={payload_sig})"
+        ) from exc
 
     with zf:
         shared: list[str] = []
         if "xl/sharedStrings.xml" in zf.namelist():
             root = ET.fromstring(zf.read("xl/sharedStrings.xml"))
             for si in root.findall(".//{*}si"):
-                shared.append("".join(node.text or "" for node in si.findall(".//{*}t")))
+                shared.append(
+                    "".join(node.text or "" for node in si.findall(".//{*}t"))
+                )
 
-        sheets = sorted(name for name in zf.namelist() if name.startswith("xl/worksheets/sheet") and name.endswith(".xml"))
+        sheets = sorted(
+            name
+            for name in zf.namelist()
+            if name.startswith("xl/worksheets/sheet") and name.endswith(".xml")
+        )
         if not sheets:
             return []
 
@@ -110,14 +131,18 @@ def parse_dir3_xlsx(payload: bytes) -> list[dict[str, Any]]:
 
     header_idx = -1
     for idx, values in enumerate(raw_rows[:30]):
-        normalized_headers = {normalize_key_part(value) for value in values if normalize_key_part(value)}
-        if any("codigo" in h and ("unidad" in h or "dir3" in h) for h in normalized_headers) and any(
-            "denominacion" in h or "nombre" in h for h in normalized_headers
-        ):
+        normalized_headers = {
+            normalize_key_part(value) for value in values if normalize_key_part(value)
+        }
+        if any(
+            "codigo" in h and ("unidad" in h or "dir3" in h) for h in normalized_headers
+        ) and any("denominacion" in h or "nombre" in h for h in normalized_headers):
             header_idx = idx
             break
     if header_idx < 0:
-        raise RuntimeError(f"No se encontro cabecera DIR3 reconocible (payload_sig={payload_sig})")
+        raise RuntimeError(
+            f"No se encontro cabecera DIR3 reconocible (payload_sig={payload_sig})"
+        )
 
     headers = [normalize_ws(value) for value in raw_rows[header_idx]]
     rows: list[dict[str, Any]] = []
@@ -140,7 +165,11 @@ def _clean_code(raw: str | None) -> str:
     text = normalize_ws(str(raw or "")).upper()
     if not text:
         return ""
-    text = text.split("-", 1)[0].strip() if re.search(r"\s*-\s*v\d+", text, flags=re.I) else text
+    text = (
+        text.split("-", 1)[0].strip()
+        if re.search(r"\s*-\s*v\d+", text, flags=re.IGNORECASE)
+        else text
+    )
     text = re.sub(r"[^A-Z0-9]", "", text)
     return text
 
@@ -149,7 +178,7 @@ def _clean_version(raw: str | None) -> str | None:
     text = normalize_ws(str(raw or ""))
     if not text:
         return None
-    match = re.search(r"\bv\s*([0-9]+)\b", text, flags=re.I)
+    match = re.search(r"\bv\s*([0-9]+)\b", text, flags=re.IGNORECASE)
     if match:
         return match.group(1)
     if text.isdigit():
@@ -173,7 +202,9 @@ def _pick_date(record: dict[str, Any], candidates: tuple[str, ...]) -> str | Non
     return parsed or (normalize_ws(raw) if raw else None)
 
 
-def normalize_dir3_record(row: dict[str, Any], *, feed_url: str) -> dict[str, Any] | None:
+def normalize_dir3_record(
+    row: dict[str, Any], *, feed_url: str
+) -> dict[str, Any] | None:
     code_raw = pick_value(
         row,
         (
@@ -220,7 +251,16 @@ def normalize_dir3_record(row: dict[str, Any], *, feed_url: str) -> dict[str, An
         )
     )
     version = _clean_version(
-        pick_value(row, ("version", "versión", "version unidad", "versión unidad", "codigo unidad organica"))
+        pick_value(
+            row,
+            (
+                "version",
+                "versión",
+                "version unidad",
+                "versión unidad",
+                "codigo unidad organica",
+            ),
+        )
         or code_raw
     )
     normalized: dict[str, Any] = {
@@ -255,16 +295,59 @@ def normalize_dir3_record(row: dict[str, Any], *, feed_url: str) -> dict[str, An
                 "administración",
             ),
         ),
-        "administration_name": pick_value(row, ("administracion", "administración", "nombre administracion")),
-        "ministry_name": pick_value(row, ("ministerio", "departamento ministerial", "departamento")),
-        "entity_type_code": pick_value(row, ("codigo tipo entidad publica", "código tipo entidad pública", "tipo entidad codigo")),
-        "entity_type_label": pick_value(row, ("tipo entidad publica", "tipo entidad pública", "tipo entidad")),
-        "unit_type_code": pick_value(row, ("codigo tipo unidad organica", "código tipo unidad orgánica", "tipo unidad codigo")),
-        "unit_type_label": pick_value(row, ("tipo unidad organica", "tipo unidad orgánica", "tipo unidad")),
-        "organic_level": _parse_int(pick_value(row, ("nivel jerarquico", "nivel jerárquico", "nivel organico", "nivel orgánico"))),
+        "administration_name": pick_value(
+            row, ("administracion", "administración", "nombre administracion")
+        ),
+        "ministry_name": pick_value(
+            row, ("ministerio", "departamento ministerial", "departamento")
+        ),
+        "entity_type_code": pick_value(
+            row,
+            (
+                "codigo tipo entidad publica",
+                "código tipo entidad pública",
+                "tipo entidad codigo",
+            ),
+        ),
+        "entity_type_label": pick_value(
+            row, ("tipo entidad publica", "tipo entidad pública", "tipo entidad")
+        ),
+        "unit_type_code": pick_value(
+            row,
+            (
+                "codigo tipo unidad organica",
+                "código tipo unidad orgánica",
+                "tipo unidad codigo",
+            ),
+        ),
+        "unit_type_label": pick_value(
+            row, ("tipo unidad organica", "tipo unidad orgánica", "tipo unidad")
+        ),
+        "organic_level": _parse_int(
+            pick_value(
+                row,
+                (
+                    "nivel jerarquico",
+                    "nivel jerárquico",
+                    "nivel organico",
+                    "nivel orgánico",
+                ),
+            )
+        ),
         "status": pick_value(row, ("estado", "situacion", "situación", "vigencia")),
-        "valid_from": _pick_date(row, ("fecha alta", "fecha inicio", "fecha vigencia desde")),
-        "valid_to": _pick_date(row, ("fecha baja", "fecha fin", "fecha extincion", "fecha extinción", "fecha vigencia hasta")),
+        "valid_from": _pick_date(
+            row, ("fecha alta", "fecha inicio", "fecha vigencia desde")
+        ),
+        "valid_to": _pick_date(
+            row,
+            (
+                "fecha baja",
+                "fecha fin",
+                "fecha extincion",
+                "fecha extinción",
+                "fecha vigencia hasta",
+            ),
+        ),
         "raw_row": row,
     }
     return normalized
@@ -304,7 +387,9 @@ def find_dir3_age_distribution_url(catalog_payload: dict[str, Any]) -> str | Non
             if isinstance(title_values, list):
                 for value in title_values:
                     if isinstance(value, dict):
-                        titles.append(normalize_key_part(str(value.get("_value") or "")))
+                        titles.append(
+                            normalize_key_part(str(value.get("_value") or ""))
+                        )
             title = " ".join(titles)
             if "unidades organicas" not in title or "age" not in title:
                 continue
@@ -317,7 +402,9 @@ def find_dir3_age_distribution_url(catalog_payload: dict[str, Any]) -> str | Non
 def resolve_dir3_age_distribution_url(timeout: int) -> str | None:
     payload, content_type = http_get_bytes(DIR3_DATASET_API_URL, timeout)
     if payload_looks_like_html(payload):
-        raise RuntimeError(f"Respuesta HTML inesperada para catalogo DIR3 (content_type={content_type or 'desconocido'})")
+        raise RuntimeError(
+            f"Respuesta HTML inesperada para catalogo DIR3 (content_type={content_type or 'desconocido'})"
+        )
     catalog_payload = json.loads(payload.decode("utf-8"))
     if not isinstance(catalog_payload, dict):
         return None
@@ -335,16 +422,24 @@ class Dir3UnidadesAgeConnector(BaseConnector):
             resolved = resolve_dir3_age_distribution_url(timeout)
         except Exception:  # noqa: BLE001
             resolved = None
-        return resolved or SOURCE_CONFIG[self.source_id].get("default_url", DIR3_AGE_XLSX_URL)
+        return resolved or SOURCE_CONFIG[self.source_id].get(
+            "default_url", DIR3_AGE_XLSX_URL
+        )
 
-    def _records_from_payload(self, payload: bytes, *, feed_url: str, content_type: str | None) -> list[dict[str, Any]]:
+    def _records_from_payload(
+        self, payload: bytes, *, feed_url: str, content_type: str | None
+    ) -> list[dict[str, Any]]:
         _ = content_type
         if payload.lstrip().startswith(b"{") or payload.lstrip().startswith(b"["):
             parsed = parse_json_source(payload)
             records = [record for record in parsed if isinstance(record, dict)]
             return dedupe_dir3_records(records)
         rows = parse_dir3_xlsx(payload)
-        records = [record for row in rows if (record := normalize_dir3_record(row, feed_url=feed_url)) is not None]
+        records = [
+            record
+            for row in rows
+            if (record := normalize_dir3_record(row, feed_url=feed_url)) is not None
+        ]
         return dedupe_dir3_records(records)
 
     def _extracted(
@@ -387,11 +482,17 @@ class Dir3UnidadesAgeConnector(BaseConnector):
         strict_network: bool,
     ) -> Extracted:
         if from_file is not None:
-            resolved_url = f"file://{from_file.resolve()}"
+            resolved_url = url_override or str(
+                SOURCE_CONFIG[self.source_id].get("default_url", DIR3_AGE_XLSX_URL)
+            )
             payload = from_file.read_bytes()
-            records = self._records_from_payload(payload, feed_url=resolved_url, content_type=None)
+            records = self._records_from_payload(
+                payload, feed_url=resolved_url, content_type=None
+            )
             if not records:
-                raise RuntimeError(f"No se encontraron unidades DIR3 parseables en {from_file}")
+                raise RuntimeError(
+                    f"No se encontraron unidades DIR3 parseables en {from_file}"
+                )
             return self._extracted(
                 source_url=resolved_url,
                 resolved_url=resolved_url,
@@ -403,7 +504,9 @@ class Dir3UnidadesAgeConnector(BaseConnector):
         resolved_url = self.resolve_url(url_override, timeout)
         try:
             payload, content_type = http_get_bytes(resolved_url, timeout)
-            records = self._records_from_payload(payload, feed_url=resolved_url, content_type=content_type)
+            records = self._records_from_payload(
+                payload, feed_url=resolved_url, content_type=content_type
+            )
             if not records:
                 raise RuntimeError("No se encontraron unidades DIR3 parseables")
             return self._extracted(
@@ -413,7 +516,7 @@ class Dir3UnidadesAgeConnector(BaseConnector):
                 records=records,
                 note="network",
             )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             if strict_network:
                 raise
             fetched = _fallback_payload_from_sample(
@@ -441,7 +544,9 @@ class Dir3UnidadesAgeConnector(BaseConnector):
                 records=records,
             )
 
-    def normalize(self, record: dict[str, Any], snapshot_date: str | None) -> dict[str, Any] | None:
+    def normalize(
+        self, record: dict[str, Any], snapshot_date: str | None
+    ) -> dict[str, Any] | None:
         source_record_id = normalize_ws(str(record.get("source_record_id") or ""))
         if not source_record_id:
             return None

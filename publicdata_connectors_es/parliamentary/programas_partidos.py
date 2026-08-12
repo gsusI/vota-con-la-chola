@@ -16,7 +16,7 @@ class ProgramasPartidosConnector(BaseConnector):
     """Manifest-driven connector for party programs.
 
     v1 is intentionally minimal:
-    - Reads a CSV manifest (from `--from-file` or the configured fallback sample).
+    - Reads a CSV manifest supplied explicitly with `--from-file`.
     - Does not fetch program documents here; ingestion/persistence happens in the pipeline.
     """
 
@@ -42,7 +42,11 @@ class ProgramasPartidosConnector(BaseConnector):
         options = dict(options or {})
         max_records = options.get("max_records")
 
-        manifest_path = from_file or Path(str(SOURCE_CONFIG[self.source_id]["fallback_file"]))
+        if from_file is None:
+            raise RuntimeError(
+                "programas_partidos requires an explicit manifest of real official sources via --from-file"
+            )
+        manifest_path = from_file
         if not manifest_path.exists():
             raise RuntimeError(f"Manifest no existe para {self.source_id}: {manifest_path}")
         if manifest_path.is_dir():
@@ -78,7 +82,7 @@ class ProgramasPartidosConnector(BaseConnector):
             records = records[: int(max_records)]
 
         resolved = f"file://{manifest_path.resolve()}"
-        note = "from-file" if from_file else "fallback-sample"
+        note = "from-file"
         return Extracted(
             source_id=self.source_id,
             source_url=resolved,

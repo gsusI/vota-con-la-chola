@@ -26,7 +26,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="outcomes",
         default_url=AEMET_DEFAULT_URL,
         format="json",
-        fallback_file="etl/data/raw/samples/aemet_opendata_series_sample.json",
+        fallback_file="",
         min_records_loaded_strict=1,
     ),
 )
@@ -552,7 +552,7 @@ class AemetOpenDataSeriesConnector(BaseConnector):
                         records=records,
                     )
 
-                resolved_url = f"file://{from_file.resolve()}"
+                resolved_url = url_override or f"file://{from_file.resolve()}"
                 payload = from_file.read_bytes()
                 records = parse_aemet_records(payload, feed_url=resolved_url, content_type="application/json")
                 serialized = json.dumps(

@@ -40,7 +40,7 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "default_url": "https://contrataciondelestado.es/",
         "format": "json",
         "min_records_loaded_strict": 0,
-        "fallback_file": "etl/data/raw/samples/placsp_sindicacion_sample.xml",
+        "fallback_file": "",
     },
     "bdns_subvenciones": {
         "name": "Subvenciones publicas (canonico policy_events)",
@@ -48,7 +48,7 @@ SOURCE_CONFIG: dict[str, dict[str, Any]] = {
         "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
         "format": "json",
         "min_records_loaded_strict": 0,
-        "fallback_file": "etl/data/raw/samples/bdns_api_subvenciones_sample.json",
+        "fallback_file": "",
     },
     **OUTCOME_SOURCE_CONFIG,
     **CONTRIB_SOURCE_CONFIG,

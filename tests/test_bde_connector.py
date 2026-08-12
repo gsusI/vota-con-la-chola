@@ -11,12 +11,16 @@ from etl.politicos_es.connectors.bde_series import BdeSeriesApiConnector, parse_
 from etl.politicos_es.db import apply_schema, open_db, seed_dimensions, seed_sources
 from etl.politicos_es.pipeline import ingest_one_source
 
+BDE_OFFICIAL_CAPTURE = Path(
+    "etl/data/raw/bde_series_api/2026/05/11/bde_series_api_20260511T175659Z.json"
+)
+
 
 class TestBdeConnector(unittest.TestCase):
-    def test_extract_from_sample_json_includes_frequency_unit_series(self) -> None:
+    def test_extract_from_official_capture_preserves_series_without_inventing_metadata(self) -> None:
         connector = BdeSeriesApiConnector()
-        sample_path = Path("etl/data/raw/samples/bde_series_api_sample.json")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        sample_path = BDE_OFFICIAL_CAPTURE
+        self.assertTrue(sample_path.exists(), f"Missing official capture: {sample_path}")
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td) / "raw"
@@ -30,12 +34,12 @@ class TestBdeConnector(unittest.TestCase):
             self.assertGreaterEqual(len(extracted.records), 2)
             first = extracted.records[0]
             self.assertTrue(str(first.get("series_code") or "").strip())
-            self.assertTrue(str(first.get("frequency") or "").strip())
-            self.assertTrue(str(first.get("unit") or "").strip())
+            self.assertIsNone(first.get("frequency"))
+            self.assertIsNone(first.get("unit"))
             self.assertGreater(int(first.get("points_count") or 0), 0)
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        sample_path = Path("etl/data/raw/samples/bde_series_api_sample.json")
+        sample_path = BDE_OFFICIAL_CAPTURE
         payload = sample_path.read_bytes()
         records_1 = parse_bde_records(
             payload,
@@ -52,7 +56,7 @@ class TestBdeConnector(unittest.TestCase):
         self.assertEqual(ids_1, ids_2)
 
     def test_parser_accepts_serialized_records_container(self) -> None:
-        sample_path = Path("etl/data/raw/samples/bde_series_api_sample.json")
+        sample_path = BDE_OFFICIAL_CAPTURE
         payload = sample_path.read_bytes()
         baseline = parse_bde_records(
             payload,
@@ -144,8 +148,8 @@ class TestBdeConnector(unittest.TestCase):
 
     def test_source_records_ingest_is_idempotent(self) -> None:
         connector = BdeSeriesApiConnector()
-        sample_path = Path("etl/data/raw/samples/bde_series_api_sample.json")
-        snapshot_date = "2026-02-16"
+        sample_path = BDE_OFFICIAL_CAPTURE
+        snapshot_date = "2026-05-11"
 
         with tempfile.TemporaryDirectory() as td:
             db_path = Path(td) / "bde-test.db"

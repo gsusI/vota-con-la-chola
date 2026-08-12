@@ -4,20 +4,35 @@ import datetime as dt
 import json
 import re
 import sqlite3
+from collections.abc import Iterator
 from typing import Any
 
+from publicdata_core.util import (
+    normalize_key_part,
+    normalize_ws,
+    now_utc_iso,
+    parse_date_flexible,
+    sha256_bytes,
+    stable_json,
+)
 from publicdata_policy_es.domains import upsert_domain
-from publicdata_core.util import normalize_key_part, normalize_ws, now_utc_iso, parse_date_flexible, sha256_bytes, stable_json
-from publicdata_policy_es.policy_events import _domain_id_by_canonical_key, _infer_policy_event_domain_key
+from publicdata_policy_es.policy_events import (
+    _domain_id_by_canonical_key,
+    _infer_policy_event_domain_key,
+)
 
-
-INDICATOR_SOURCE_IDS = ("eurostat_sdmx", "bde_series_api", "aemet_opendata_series", "ree_esios_indicators")
+INDICATOR_SOURCE_IDS = (
+    "eurostat_sdmx",
+    "bde_series_api",
+    "aemet_opendata_series",
+    "ree_esios_indicators",
+)
 
 _YEAR_RE = re.compile(r"^(\d{4})$")
 _YEAR_MONTH_RE = re.compile(r"^(\d{4})-(\d{2})$")
-_YEAR_MONTH_ALT_RE = re.compile(r"^(\d{4})M(\d{1,2})$", flags=re.I)
-_YEAR_QUARTER_RE = re.compile(r"^(\d{4})-?Q([1-4])$", flags=re.I)
-_YEAR_WEEK_RE = re.compile(r"^(\d{4})W(\d{1,2})$", flags=re.I)
+_YEAR_MONTH_ALT_RE = re.compile(r"^(\d{4})M(\d{1,2})$", flags=re.IGNORECASE)
+_YEAR_QUARTER_RE = re.compile(r"^(\d{4})-?Q([1-4])$", flags=re.IGNORECASE)
+_YEAR_WEEK_RE = re.compile(r"^(\d{4})W(\d{1,2})$", flags=re.IGNORECASE)
 
 _DOMAIN_METADATA_BY_KEY: dict[str, tuple[str, str]] = {
     "sanidad_salud_publica": (
@@ -52,6 +67,14 @@ _DOMAIN_METADATA_BY_KEY: dict[str, tuple[str, str]] = {
         "Impuestos, gasto y fiscalidad",
         "Indicadores fiscales, de gasto público y esfuerzo tributario.",
     ),
+    "demografia_contexto": (
+        "Demografía y contexto poblacional",
+        "Indicadores demográficos usados como denominadores y contexto territorial.",
+    ),
+    "economia_empleo": (
+        "Economía y empleo",
+        "Indicadores de actividad económica, producción, renta y empleo.",
+    ),
 }
 
 
@@ -73,7 +96,11 @@ def _resolve_or_seed_domain_id(
 
     metadata = _DOMAIN_METADATA_BY_KEY.get(key)
     label = metadata[0] if metadata else key.replace("_", " ").capitalize()
-    description = metadata[1] if metadata else "Dominio inferido automaticamente para series de indicadores."
+    description = (
+        metadata[1]
+        if metadata
+        else "Dominio inferido automaticamente para series de indicadores."
+    )
     domain_id = upsert_domain(
         conn,
         canonical_key_value=key,
@@ -183,7 +210,9 @@ def _period_to_date(period: Any, frequency: str | None) -> str | None:
     return None
 
 
-def _series_version_token(metadata_version: str | None, snapshot_date: str | None) -> str:
+def _series_version_token(
+    metadata_version: str | None, snapshot_date: str | None
+) -> str:
     metadata = normalize_ws(str(metadata_version or ""))
     if metadata:
         return f"meta-{sha256_bytes(metadata.encode('utf-8'))[:16]}"
@@ -193,7 +222,9 @@ def _series_version_token(metadata_version: str | None, snapshot_date: str | Non
     return "v0"
 
 
-def _series_methodology_version(metadata_version: str | None, snapshot_date: str | None) -> str:
+def _series_methodology_version(
+    metadata_version: str | None, snapshot_date: str | None
+) -> str:
     metadata = normalize_ws(str(metadata_version or ""))
     if metadata:
         return metadata
@@ -224,7 +255,7 @@ def _infer_indicator_series_domain_key(
 
     if source_id == "eurostat_sdmx":
         dataset_key = normalize_ws(str(dataset_code or "")).lower()
-        if dataset_key == "une_rt_a":
+        if dataset_key in {"une_rt_a", "ilc_peps11n"}:
             return "proteccion_social_pensiones"
     if source_id == "bde_series_api":
         text = normalize_ws(f"{series_label} {series_code} {dataset_code}").lower()
@@ -297,7 +328,10 @@ def _delete_stale_indicator_points(
     keep_dates: list[str],
 ) -> int:
     if not keep_dates:
-        cur = conn.execute("DELETE FROM indicator_points WHERE indicator_series_id = ?", (indicator_series_id,))
+        cur = conn.execute(
+            "DELETE FROM indicator_points WHERE indicator_series_id = ?",
+            (indicator_series_id,),
+        )
         return max(int(cur.rowcount or 0), 0)
     placeholders = ",".join("?" for _ in keep_dates)
     cur = conn.execute(
@@ -344,11 +378,69 @@ def _delete_stale_observation_records(
     return max(int(cur.rowcount or 0), 0)
 
 
+def _iter_source_records_keyset(
+    conn: sqlite3.Connection,
+    *,
+    source_ids: tuple[str, ...],
+    batch_size: int,
+) -> Iterator[sqlite3.Row]:
+    """Yield ordered source rows without retaining a corpus-sized read cursor."""
+
+    placeholders = ",".join("?" for _ in source_ids)
+    last_source_id = ""
+    last_snapshot = ""
+    last_record_id = ""
+    last_pk = 0
+    while True:
+        batch = conn.execute(
+            f"""
+            SELECT
+              sr.source_record_pk,
+              sr.source_id,
+              sr.source_record_id,
+              sr.source_snapshot_date,
+              sr.raw_payload
+            FROM source_records sr
+            WHERE sr.source_id IN ({placeholders})
+              AND (
+                sr.source_id,
+                COALESCE(sr.source_snapshot_date, ''),
+                sr.source_record_id,
+                sr.source_record_pk
+              ) > (?, ?, ?, ?)
+            ORDER BY sr.source_id,
+                     COALESCE(sr.source_snapshot_date, ''),
+                     sr.source_record_id,
+                     sr.source_record_pk
+            LIMIT ?
+            """,
+            (
+                *source_ids,
+                last_source_id,
+                last_snapshot,
+                last_record_id,
+                last_pk,
+                int(batch_size),
+            ),
+        ).fetchall()
+        if not batch:
+            return
+        yield from batch
+        last = batch[-1]
+        last_source_id = str(last["source_id"])
+        last_snapshot = str(last["source_snapshot_date"] or "")
+        last_record_id = str(last["source_record_id"])
+        last_pk = int(last["source_record_pk"])
+
+
 def backfill_indicator_harmonization(
     conn: sqlite3.Connection,
     *,
     source_ids: tuple[str, ...] = INDICATOR_SOURCE_IDS,
+    commit_every_source_records: int = 1_000,
 ) -> dict[str, Any]:
+    if int(commit_every_source_records) < 0:
+        raise ValueError("commit_every_source_records must be >= 0")
     now_iso = now_utc_iso()
     stats: dict[str, Any] = {
         "sources": list(source_ids),
@@ -370,26 +462,19 @@ def backfill_indicator_harmonization(
     domain_cache: dict[str, int | None] = {}
 
     placeholders = ",".join("?" for _ in source_ids)
-    rows = conn.execute(
-        f"""
-        SELECT
-          sr.source_record_pk,
-          sr.source_id,
-          sr.source_record_id,
-          sr.source_snapshot_date,
-          sr.raw_payload
-        FROM source_records sr
-        WHERE sr.source_id IN ({placeholders})
-        ORDER BY sr.source_id, sr.source_record_id
-        """,
-        source_ids,
-    ).fetchall()
+    rows = _iter_source_records_keyset(
+        conn,
+        source_ids=source_ids,
+        batch_size=max(1, int(commit_every_source_records) or 1_000),
+    )
 
     for row in rows:
         stats["source_records_seen"] += 1
         source_record_pk = int(row["source_record_pk"])
         source_id = str(row["source_id"])
-        source_record_id = normalize_ws(str(row["source_record_id"] or "")) or f"pk:{source_record_pk}"
+        source_record_id = (
+            normalize_ws(str(row["source_record_id"] or "")) or f"pk:{source_record_pk}"
+        )
         source_snapshot_date = _normalize_iso_date(row["source_snapshot_date"])
         raw_payload = str(row["raw_payload"] or "")
 
@@ -442,11 +527,17 @@ def backfill_indicator_harmonization(
 
         frequency = normalize_ws(str(payload.get("frequency") or "")) or None
         unit = normalize_ws(str(payload.get("unit") or "")) or None
-        metadata_version = normalize_ws(str(payload.get("metadata_version") or "")) or None
-        methodology_version = _series_methodology_version(metadata_version, source_snapshot_date)
+        metadata_version = (
+            normalize_ws(str(payload.get("metadata_version") or "")) or None
+        )
+        methodology_version = _series_methodology_version(
+            metadata_version, source_snapshot_date
+        )
         version_token = _series_version_token(metadata_version, source_snapshot_date)
         source_url = _extract_source_url(payload)
-        series_label = normalize_ws(str(payload.get("series_label") or payload.get("series_code") or ""))
+        series_label = normalize_ws(
+            str(payload.get("series_label") or payload.get("series_code") or "")
+        )
         if not series_label:
             dataset_code = normalize_ws(str(payload.get("dataset_code") or ""))
             series_label = f"{dataset_code} {series_code}".strip() or series_code
@@ -459,8 +550,28 @@ def backfill_indicator_harmonization(
             version_token=version_token,
         )
 
+        dimensions_payload = {
+            "dataset_code": payload.get("dataset_code"),
+            "series_dimensions": payload.get("series_dimensions"),
+            "series_dimension_labels": payload.get("series_dimension_labels"),
+            "time_dimension": payload.get("time_dimension"),
+            "metadata_version": metadata_version,
+        }
+        dimensions_json = stable_json(dimensions_payload)
+        series_payload = stable_json(
+            {
+                "source_record_id": source_record_id,
+                "series_code": series_code,
+                "dataset_code": payload.get("dataset_code"),
+                "series_version_sha256": payload.get("series_version_sha256"),
+                "origin_capture_sha256": payload.get("origin_capture_sha256"),
+            }
+        )
+
         point_map: dict[str, dict[str, Any]] = {}
-        for point in sorted(points_obj, key=lambda item: str((item or {}).get("period") or "")):
+        for point in sorted(
+            points_obj, key=lambda item: str((item or {}).get("period") or "")
+        ):
             if not isinstance(point, dict):
                 continue
             point_date = _period_to_date(point.get("period"), frequency)
@@ -537,10 +648,11 @@ def backfill_indicator_harmonization(
               source_url,
               source_record_pk,
               source_snapshot_date,
+              dimensions_json,
               raw_payload,
               created_at,
               updated_at
-            ) VALUES (?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(canonical_key) DO UPDATE SET
               domain_id=excluded.domain_id,
               label=excluded.label,
@@ -550,6 +662,7 @@ def backfill_indicator_harmonization(
               source_url=excluded.source_url,
               source_record_pk=excluded.source_record_pk,
               source_snapshot_date=excluded.source_snapshot_date,
+              dimensions_json=excluded.dimensions_json,
               raw_payload=excluded.raw_payload,
               updated_at=excluded.updated_at
             RETURNING indicator_series_id
@@ -564,24 +677,18 @@ def backfill_indicator_harmonization(
                 source_url,
                 source_record_pk,
                 source_snapshot_date,
-                raw_payload,
+                dimensions_json,
+                series_payload,
                 now_iso,
                 now_iso,
             ),
         ).fetchone()
         if series_row is None:
-            raise RuntimeError(f"No se pudo resolver indicator_series_id ({source_id}:{source_record_id})")
+            raise RuntimeError(
+                f"No se pudo resolver indicator_series_id ({source_id}:{source_record_id})"
+            )
         indicator_series_id = int(series_row["indicator_series_id"])
         stats["indicator_series_upserted"] += 1
-
-        dimensions_payload = {
-            "dataset_code": payload.get("dataset_code"),
-            "series_dimensions": payload.get("series_dimensions"),
-            "series_dimension_labels": payload.get("series_dimension_labels"),
-            "time_dimension": payload.get("time_dimension"),
-            "metadata_version": metadata_version,
-        }
-        dimensions_json = stable_json(dimensions_payload)
 
         for point_date in point_dates:
             parsed_point = point_map[point_date]
@@ -613,16 +720,14 @@ def backfill_indicator_harmonization(
 
             observation_payload = stable_json(
                 {
+                    "source_record_pk": source_record_pk,
                     "source_record_id": source_record_id,
-                    "series_code": series_code,
-                    "point": parsed_point["raw_point"],
-                    "series_dimensions": payload.get("series_dimensions"),
-                    "dataset_code": payload.get("dataset_code"),
                 }
             )
             conn.execute(
                 """
                 INSERT INTO indicator_observation_records (
+                  indicator_series_id,
                   source_id,
                   source_record_pk,
                   source_record_id,
@@ -639,8 +744,9 @@ def backfill_indicator_harmonization(
                   raw_payload,
                   created_at,
                   updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(source_id, series_code, point_date, source_record_id) DO UPDATE SET
+                  indicator_series_id=excluded.indicator_series_id,
                   source_record_pk=excluded.source_record_pk,
                   source_snapshot_date=excluded.source_snapshot_date,
                   source_url=excluded.source_url,
@@ -654,6 +760,7 @@ def backfill_indicator_harmonization(
                   updated_at=excluded.updated_at
                 """,
                 (
+                    indicator_series_id,
                     source_id,
                     source_record_pk,
                     source_record_id,
@@ -665,7 +772,7 @@ def backfill_indicator_harmonization(
                     parsed_point["value_text"],
                     unit,
                     frequency,
-                    dimensions_json,
+                    None,
                     methodology_version,
                     observation_payload,
                     now_iso,
@@ -688,6 +795,11 @@ def backfill_indicator_harmonization(
         )
 
         stats["source_records_mapped"] += 1
+        if (
+            int(commit_every_source_records) > 0
+            and stats["source_records_mapped"] % int(commit_every_source_records) == 0
+        ):
+            conn.commit()
 
     conn.commit()
 
@@ -769,15 +881,31 @@ def backfill_indicator_harmonization(
         source_ids,
     ).fetchone()
 
-    stats["indicator_series_total"] = int(total_series_row["c"] if total_series_row else 0)
-    stats["indicator_points_total"] = int(total_points_row["c"] if total_points_row else 0)
-    stats["indicator_observation_records_total"] = int(total_observation_row["c"] if total_observation_row else 0)
-    stats["indicator_series_with_provenance"] = int(with_provenance_series_row["c"] if with_provenance_series_row else 0)
+    stats["indicator_series_total"] = int(
+        total_series_row["c"] if total_series_row else 0
+    )
+    stats["indicator_points_total"] = int(
+        total_points_row["c"] if total_points_row else 0
+    )
+    stats["indicator_observation_records_total"] = int(
+        total_observation_row["c"] if total_observation_row else 0
+    )
+    stats["indicator_series_with_provenance"] = int(
+        with_provenance_series_row["c"] if with_provenance_series_row else 0
+    )
     stats["observation_records_with_provenance"] = int(
         with_provenance_observation_row["c"] if with_provenance_observation_row else 0
     )
-    stats["indicator_series_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_series_rows}
-    stats["indicator_points_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_point_rows}
-    stats["observation_records_by_source"] = {str(r["source_id"]): int(r["c"]) for r in by_source_observation_rows}
-    stats["indicator_domain_keys_seeded"] = sorted(set(stats["indicator_domain_keys_seeded"]))
+    stats["indicator_series_by_source"] = {
+        str(r["source_id"]): int(r["c"]) for r in by_source_series_rows
+    }
+    stats["indicator_points_by_source"] = {
+        str(r["source_id"]): int(r["c"]) for r in by_source_point_rows
+    }
+    stats["observation_records_by_source"] = {
+        str(r["source_id"]): int(r["c"]) for r in by_source_observation_rows
+    }
+    stats["indicator_domain_keys_seeded"] = sorted(
+        set(stats["indicator_domain_keys_seeded"])
+    )
     return stats

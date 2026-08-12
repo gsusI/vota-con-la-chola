@@ -3,8 +3,9 @@ from __future__ import annotations
 import base64
 import json
 import re
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 from urllib.parse import urlencode
 
 from publicdata_core.http import http_get_bytes, payload_looks_like_html
@@ -16,7 +17,7 @@ from .config import INFOELECTORAL_BASE, SOURCE_CONFIG
 
 
 def basic_auth_header(user: str, password: str) -> str:
-    token = base64.b64encode(f"{user}:{password}".encode("utf-8")).decode("ascii")
+    token = base64.b64encode(f"{user}:{password}".encode()).decode("ascii")
     return f"Basic {token}"
 
 
@@ -27,12 +28,12 @@ def parse_api_payload(payload: bytes) -> list[dict[str, Any]]:
         raise RuntimeError("Respuesta inesperada (HTML recibido)")
     obj = json.loads(payload.decode("utf-8", errors="replace"))
     if not isinstance(obj, dict):
-        raise RuntimeError("Respuesta inesperada (no dict)")
+        raise TypeError("Respuesta inesperada (no dict)")
     if str(obj.get("cod")) != "200":
         raise RuntimeError(f"Respuesta API con cod={obj.get('cod')}")
     data = obj.get("data")
     if not isinstance(data, list):
-        raise RuntimeError("Respuesta inesperada (data no list)")
+        raise TypeError("Respuesta inesperada (data no list)")
     return [row for row in data if isinstance(row, dict)]
 
 
@@ -77,6 +78,7 @@ class InfoelectoralDescargasConnector:
         fetched_at = now_utc_iso()
 
         if from_file is not None:
+            replay_url = url_override or resolved_url
             payload = from_file.read_bytes()
             records = json.loads(payload.decode("utf-8", errors="replace"))
             if not isinstance(records, list):
@@ -85,8 +87,8 @@ class InfoelectoralDescargasConnector:
             raw_path.write_bytes(payload)
             return Extracted(
                 source_id=self.source_id,
-                source_url=f"file://{from_file.resolve()}",
-                resolved_url=f"file://{from_file.resolve()}",
+                source_url=replay_url,
+                resolved_url=replay_url,
                 fetched_at=fetched_at,
                 raw_path=raw_path,
                 content_sha256=sha256_bytes(payload),
@@ -124,7 +126,13 @@ class InfoelectoralDescargasConnector:
                     }
                 )
 
-            for tipo in sorted({r["tipo_convocatoria"] for r in records if r.get("kind") == "tipo_convocatoria"}):
+            for tipo in sorted(
+                {
+                    r["tipo_convocatoria"]
+                    for r in records
+                    if r.get("kind") == "tipo_convocatoria"
+                }
+            ):
                 conv_url = f"{INFOELECTORAL_BASE}convocatorias?{urlencode({'tipoConvocatoria': tipo})}"
                 convocatorias = safe_get(conv_url, f"convocatorias[{tipo}]")
                 if convocatorias is None:
@@ -141,8 +149,12 @@ class InfoelectoralDescargasConnector:
                             "tipo_convocatoria": str(c.get("tipoConvocatoria") or tipo),
                             "cod": cod,
                             "fecha": str(c.get("fecha") or "").strip() or None,
-                            "descripcion": str(c.get("descripcion") or "").strip() or None,
-                            "ambito_territorio": str(c.get("ambitoTerritorio") or "").strip() or None,
+                            "descripcion": str(c.get("descripcion") or "").strip()
+                            or None,
+                            "ambito_territorio": str(
+                                c.get("ambitoTerritorio") or ""
+                            ).strip()
+                            or None,
                         }
                     )
 
@@ -174,9 +186,13 @@ class InfoelectoralDescargasConnector:
                         )
 
             if not records:
-                raise RuntimeError(f"No se pudo extraer ningun registro: {'; '.join(notes)}")
+                raise RuntimeError(
+                    f"No se pudo extraer ningun registro: {'; '.join(notes)}"
+                )
 
-            payload = json.dumps(records, ensure_ascii=True, sort_keys=True).encode("utf-8")
+            payload = json.dumps(records, ensure_ascii=True, sort_keys=True).encode(
+                "utf-8"
+            )
             raw_path = raw_output_path(raw_dir, self.source_id, "json")
             raw_path.write_bytes(payload)
             note = "network"
@@ -195,26 +211,8 @@ class InfoelectoralDescargasConnector:
                 payload=payload,
                 records=records,
             )
-        except Exception as exc:  # noqa: BLE001
-            if strict_network:
-                raise
-            sample = Path(str(self.source_config[self.source_id]["fallback_file"]))
-            payload = sample.read_bytes()
-            records = json.loads(payload.decode("utf-8", errors="replace"))
-            if not isinstance(records, list):
-                records = []
-            raw_path = raw_output_path(raw_dir, self.source_id, "json")
-            raw_path.write_bytes(payload)
-            return Extracted(
-                source_id=self.source_id,
-                source_url=resolved_url,
-                resolved_url=resolved_url,
-                fetched_at=fetched_at,
-                raw_path=raw_path,
-                content_sha256=sha256_bytes(payload),
-                content_type="application/json",
-                bytes=len(payload),
-                note=f"network-error-fallback: {type(exc).__name__}: {exc}",
-                payload=payload,
-                records=[r for r in records if isinstance(r, dict)],
-            )
+        except Exception as exc:
+            raise RuntimeError(
+                "Infoelectoral network extraction failed; implicit sample fallback is disabled "
+                f"by the real-data-only policy: {type(exc).__name__}: {exc}"
+            ) from exc

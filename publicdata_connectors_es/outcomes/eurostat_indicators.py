@@ -23,7 +23,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="outcomes",
         default_url=EUROSTAT_DEFAULT_URL,
         format="json",
-        fallback_file="etl/data/raw/samples/eurostat_sdmx_sample.json",
+        fallback_file="",
         min_records_loaded_strict=1,
     ),
 )
@@ -511,7 +511,7 @@ class EurostatSdmxConnector(BaseConnector):
                     payload=serialized,
                     records=records,
                 )
-            resolved_url = f"file://{from_file.resolve()}"
+            resolved_url = url_override or f"file://{from_file.resolve()}"
             payload = from_file.read_bytes()
             records = parse_eurostat_records(payload, feed_url=resolved_url, content_type="application/json")
             serialized = json.dumps(

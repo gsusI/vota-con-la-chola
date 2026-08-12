@@ -30,7 +30,7 @@ SOURCE_DEFINITIONS: tuple[SourceDefinition, ...] = (
         scope="legal",
         default_url=BOE_RSS_URL,
         format="xml",
-        fallback_file="etl/data/raw/samples/boe_api_legal_sample.xml",
+        fallback_file="",
         min_records_loaded_strict=5,
     ),
 )
@@ -521,7 +521,7 @@ class BoeApiLegalConnector(BaseConnector):
                     records=records,
                 )
 
-            resolved_url = f"file://{from_file.resolve()}"
+            resolved_url = url_override or f"file://{from_file.resolve()}"
             payload = from_file.read_bytes()
             if from_file.suffix.lower() == ".json":
                 content_type = "application/json"

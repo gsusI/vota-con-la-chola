@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import urllib.error
 import unittest
@@ -17,10 +18,18 @@ from etl.politicos_es.pipeline import ingest_one_source
 
 
 class TestAemetConnector(unittest.TestCase):
-    def test_extract_from_sample_json_includes_station_metadata(self) -> None:
+    def official_capture(self) -> Path:
+        path_value = os.environ.get("AEMET_REAL_CAPTURE", "").strip()
+        if not path_value:
+            self.skipTest("AEMET_REAL_CAPTURE is required; synthetic fixtures are forbidden")
+        path = Path(path_value)
+        if not path.is_file():
+            self.skipTest(f"AEMET_REAL_CAPTURE does not exist: {path}")
+        return path
+
+    def test_extract_from_official_capture_includes_station_metadata(self) -> None:
         connector = AemetOpenDataSeriesConnector()
-        sample_path = Path("etl/data/raw/samples/aemet_opendata_series_sample.json")
-        self.assertTrue(sample_path.exists(), f"Missing sample: {sample_path}")
+        sample_path = self.official_capture()
 
         with tempfile.TemporaryDirectory() as td:
             raw_dir = Path(td) / "raw"
@@ -39,7 +48,7 @@ class TestAemetConnector(unittest.TestCase):
             self.assertGreater(int(first.get("points_count") or 0), 0)
 
     def test_parser_source_record_id_is_stable(self) -> None:
-        payload = Path("etl/data/raw/samples/aemet_opendata_series_sample.json").read_bytes()
+        payload = self.official_capture().read_bytes()
         records_1 = parse_aemet_records(
             payload,
             feed_url="https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/2026-02-13/fechafin/2026-02-15",
@@ -55,7 +64,7 @@ class TestAemetConnector(unittest.TestCase):
         self.assertEqual(ids_1, ids_2)
 
     def test_parser_accepts_serialized_records_container(self) -> None:
-        sample_path = Path("etl/data/raw/samples/aemet_opendata_series_sample.json")
+        sample_path = self.official_capture()
         payload = sample_path.read_bytes()
         baseline = parse_aemet_records(
             payload,
@@ -118,7 +127,7 @@ class TestAemetConnector(unittest.TestCase):
 
     def test_source_records_ingest_is_idempotent(self) -> None:
         connector = AemetOpenDataSeriesConnector()
-        sample_path = Path("etl/data/raw/samples/aemet_opendata_series_sample.json")
+        sample_path = self.official_capture()
         snapshot_date = "2026-02-16"
 
         with tempfile.TemporaryDirectory() as td:
