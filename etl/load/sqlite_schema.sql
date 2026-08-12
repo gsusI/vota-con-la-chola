@@ -1776,12 +1776,35 @@ CREATE TABLE IF NOT EXISTS money_bulk_runs (
   finished_at TEXT
 );
 
+-- Shallow source-side windows avoid deep-offset degradation on very large APIs.
+-- Partition discovery is immutable within a run and every fetched page links
+-- back to the exact official filter window used to obtain it.
+CREATE TABLE IF NOT EXISTS money_bulk_partitions (
+  money_bulk_partition_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  money_bulk_run_id INTEGER NOT NULL
+    REFERENCES money_bulk_runs(money_bulk_run_id) ON DELETE CASCADE,
+  partition_key TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  filter_json TEXT NOT NULL,
+  date_from TEXT,
+  date_to TEXT,
+  total_elements_discovered INTEGER NOT NULL CHECK (total_elements_discovered >= 0),
+  total_pages_discovered INTEGER NOT NULL CHECK (total_pages_discovered >= 0),
+  pages_enqueued INTEGER NOT NULL CHECK (pages_enqueued >= 0),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (money_bulk_run_id, partition_key)
+);
+
 CREATE TABLE IF NOT EXISTS money_bulk_page_fetches (
   money_bulk_page_fetch_id INTEGER PRIMARY KEY AUTOINCREMENT,
   money_bulk_run_id INTEGER NOT NULL
     REFERENCES money_bulk_runs(money_bulk_run_id) ON DELETE CASCADE,
   work_item_id INTEGER REFERENCES pipeline_work_items(work_item_id) ON DELETE SET NULL,
   page_number INTEGER NOT NULL CHECK (page_number >= 0),
+  money_bulk_partition_id INTEGER
+    REFERENCES money_bulk_partitions(money_bulk_partition_id) ON DELETE SET NULL,
+  source_page_number INTEGER CHECK (source_page_number IS NULL OR source_page_number >= 0),
   source_url TEXT NOT NULL,
   fetched_at TEXT NOT NULL,
   content_sha256 TEXT NOT NULL,
@@ -2745,8 +2768,12 @@ CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_beneficiary_id
 CREATE INDEX IF NOT EXISTS idx_money_subsidy_records_published_date ON money_subsidy_records(published_date);
 CREATE INDEX IF NOT EXISTS idx_money_bulk_runs_source_state
     ON money_bulk_runs(source_id, state, money_bulk_run_id);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_partitions_run_key
+    ON money_bulk_partitions(money_bulk_run_id, partition_key);
 CREATE INDEX IF NOT EXISTS idx_money_bulk_page_fetches_run_page
     ON money_bulk_page_fetches(money_bulk_run_id, page_number);
+CREATE INDEX IF NOT EXISTS idx_money_bulk_page_fetches_partition_page
+    ON money_bulk_page_fetches(money_bulk_partition_id, source_page_number);
 CREATE INDEX IF NOT EXISTS idx_money_bulk_page_fetches_content
     ON money_bulk_page_fetches(content_sha256);
 CREATE INDEX IF NOT EXISTS idx_money_source_record_versions_record

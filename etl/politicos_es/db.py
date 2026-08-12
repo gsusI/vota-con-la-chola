@@ -13,7 +13,9 @@ from .config import SOURCE_CONFIG
 from .util import canonical_key, normalize_key_part, normalize_ws, now_utc_iso
 
 
-_UNIQUE_SOURCE_URL_RE = re.compile(r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.I)
+_UNIQUE_SOURCE_URL_RE = re.compile(
+    r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.I
+)
 
 
 def ensure_indicator_observations_allow_ree(conn: sqlite3.Connection) -> None:
@@ -140,7 +142,9 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
         return
     # Avoid clobbering if a previous migration failed halfway.
     if table_exists(conn, "text_documents_old"):
-        raise RuntimeError("Schema migration blocked: found unexpected table 'text_documents_old'")
+        raise RuntimeError(
+            "Schema migration blocked: found unexpected table 'text_documents_old'"
+        )
 
     # PRAGMA foreign_keys can't be toggled mid-transaction.
     if conn.in_transaction:
@@ -221,9 +225,15 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
             """
         )
         conn.execute('DROP TABLE "text_documents_old";')
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_text_documents_source_id ON text_documents(source_id);")
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_text_documents_source_record_pk ON text_documents(source_record_pk);")
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_text_documents_source_url ON text_documents(source_url);")
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_text_documents_source_id ON text_documents(source_id);"
+        )
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_text_documents_source_record_pk ON text_documents(source_record_pk);"
+        )
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_text_documents_source_url ON text_documents(source_url);"
+        )
         conn.execute("COMMIT;")
     except Exception:
         try:
@@ -236,7 +246,13 @@ def ensure_text_documents_allow_duplicate_urls(conn: sqlite3.Connection) -> None
             conn.execute("PRAGMA foreign_keys = ON;")
 
 
-def _ensure_single_pk_table(conn: sqlite3.Connection, table: str, create_sql: str, copy_columns: list[str], index_sqls: list[str] | None = None) -> None:
+def _ensure_single_pk_table(
+    conn: sqlite3.Connection,
+    table: str,
+    create_sql: str,
+    copy_columns: list[str],
+    index_sqls: list[str] | None = None,
+) -> None:
     """Rebuild tables that still use legacy composite PKs into a surrogate ID PK.
 
     This preserves existing uniqueness constraints and data while making explorer FK
@@ -245,13 +261,19 @@ def _ensure_single_pk_table(conn: sqlite3.Connection, table: str, create_sql: st
     if not table_exists(conn, table):
         return
 
-    pk_columns = [row["name"] for row in conn.execute(f'PRAGMA table_info("{table}")').fetchall() if int(row["pk"]) > 0]
+    pk_columns = [
+        row["name"]
+        for row in conn.execute(f'PRAGMA table_info("{table}")').fetchall()
+        if int(row["pk"]) > 0
+    ]
     if len(pk_columns) == 1:
         return
 
     backup_table = f"{table}_legacy_pk_migrate"
     if table_exists(conn, backup_table):
-        raise RuntimeError(f"Schema migration blocked: found unexpected table '{backup_table}'")
+        raise RuntimeError(
+            f"Schema migration blocked: found unexpected table '{backup_table}'"
+        )
 
     if conn.in_transaction:
         conn.commit()
@@ -266,10 +288,12 @@ def _ensure_single_pk_table(conn: sqlite3.Connection, table: str, create_sql: st
 
     try:
         conn.execute("BEGIN;")
-        conn.execute(f'ALTER TABLE {quoted_table} RENAME TO {quoted_backup};')
+        conn.execute(f"ALTER TABLE {quoted_table} RENAME TO {quoted_backup};")
         conn.execute(create_sql)
-        conn.execute(f'INSERT INTO "{table}" ({col_sql}) SELECT {col_sql} FROM {quoted_backup};')
-        conn.execute(f'DROP TABLE {quoted_backup};')
+        conn.execute(
+            f'INSERT INTO "{table}" ({col_sql}) SELECT {col_sql} FROM {quoted_backup};'
+        )
+        conn.execute(f"DROP TABLE {quoted_backup};")
         for idx_sql in index_sqls or ():
             conn.execute(idx_sql)
         conn.execute("COMMIT;")
@@ -315,7 +339,15 @@ def ensure_surrogate_pk_compat(conn: sqlite3.Connection) -> None:
               UNIQUE (vote_event_id, initiative_id, link_method)
             )
             """,
-            "copy_columns": ["vote_event_id", "initiative_id", "link_method", "confidence", "evidence_json", "created_at", "updated_at"],
+            "copy_columns": [
+                "vote_event_id",
+                "initiative_id",
+                "link_method",
+                "confidence",
+                "evidence_json",
+                "created_at",
+                "updated_at",
+            ],
             "index_sqls": [
                 "CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_vote ON parl_vote_event_initiatives(vote_event_id);",
                 "CREATE INDEX IF NOT EXISTS idx_parl_vote_event_initiatives_init ON parl_vote_event_initiatives(initiative_id);",
@@ -395,7 +427,12 @@ def ensure_surrogate_pk_compat(conn: sqlite3.Connection) -> None:
               UNIQUE (intervention_id, policy_event_id)
             )
             """,
-            "copy_columns": ["intervention_id", "policy_event_id", "created_at", "updated_at"],
+            "copy_columns": [
+                "intervention_id",
+                "policy_event_id",
+                "created_at",
+                "updated_at",
+            ],
             "index_sqls": [
                 "CREATE INDEX IF NOT EXISTS idx_intervention_events_event_id ON intervention_events(policy_event_id);",
             ],
@@ -413,7 +450,13 @@ def ensure_surrogate_pk_compat(conn: sqlite3.Connection) -> None:
               UNIQUE (norm_id, fragment_id)
             )
             """,
-            "copy_columns": ["norm_id", "fragment_id", "link_reason", "created_at", "updated_at"],
+            "copy_columns": [
+                "norm_id",
+                "fragment_id",
+                "link_reason",
+                "created_at",
+                "updated_at",
+            ],
             "index_sqls": [
                 "CREATE INDEX IF NOT EXISTS idx_sanction_norm_fragment_links_fragment_id ON sanction_norm_fragment_links(fragment_id);",
             ],
@@ -482,8 +525,7 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
                 "last_seen_snapshot_date TEXT NOT NULL DEFAULT ''"
             ),
             "is_present": (
-                "is_present INTEGER NOT NULL DEFAULT 1 "
-                "CHECK (is_present IN (0, 1))"
+                "is_present INTEGER NOT NULL DEFAULT 1 CHECK (is_present IN (0, 1))"
             ),
         },
         "infoelectoral_candidate_occurrences": {
@@ -504,6 +546,14 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
                 "document_source_record_pk INTEGER "
                 "REFERENCES source_records(source_record_pk)"
             ),
+        },
+        "money_bulk_page_fetches": {
+            "money_bulk_partition_id": (
+                "money_bulk_partition_id INTEGER "
+                "REFERENCES money_bulk_partitions(money_bulk_partition_id) "
+                "ON DELETE SET NULL"
+            ),
+            "source_page_number": "source_page_number INTEGER",
         },
         "placsp_bulk_runs": {
             "archive_contract_sha256": "archive_contract_sha256 TEXT",
@@ -798,7 +848,9 @@ def normalize_territory_code(raw: str | None) -> tuple[str, str | None]:
     return normalize_key_part(name), name
 
 
-def upsert_territory(conn: sqlite3.Connection, raw_code: str | None, now_iso: str) -> int | None:
+def upsert_territory(
+    conn: sqlite3.Connection, raw_code: str | None, now_iso: str
+) -> int | None:
     code, name = normalize_territory_code(raw_code)
     if not code:
         return None
@@ -816,7 +868,9 @@ def upsert_territory(conn: sqlite3.Connection, raw_code: str | None, now_iso: st
     return int(row["territory_id"]) if row else None
 
 
-def upsert_party_alias(conn: sqlite3.Connection, party_id: int, alias: str, now_iso: str) -> None:
+def upsert_party_alias(
+    conn: sqlite3.Connection, party_id: int, alias: str, now_iso: str
+) -> None:
     alias_norm = normalize_ws(alias)
     if not alias_norm:
         return
@@ -854,7 +908,9 @@ def upsert_source_record(
     )
 
 
-def upsert_party(conn: sqlite3.Connection, party_name: str | None, now_iso: str) -> int | None:
+def upsert_party(
+    conn: sqlite3.Connection, party_name: str | None, now_iso: str
+) -> int | None:
     if not party_name:
         return None
     party_name = normalize_ws(party_name)
@@ -897,7 +953,15 @@ def upsert_institution(
           updated_at=excluded.updated_at
         RETURNING institution_id
         """,
-        (institution_name, level, admin_level_id, territory_code, territory_id, now_iso, now_iso),
+        (
+            institution_name,
+            level,
+            admin_level_id,
+            territory_code,
+            territory_id,
+            now_iso,
+            now_iso,
+        ),
     ).fetchone()
     if row is None:
         raise RuntimeError("No se pudo resolver institution_id")
@@ -913,7 +977,9 @@ def normalize_gender_code(raw_gender: str | None) -> str:
     return "u"
 
 
-def upsert_gender(conn: sqlite3.Connection, raw_gender: str | None, now_iso: str) -> int | None:
+def upsert_gender(
+    conn: sqlite3.Connection, raw_gender: str | None, now_iso: str
+) -> int | None:
     if raw_gender is None:
         return None
     code = normalize_gender_code(raw_gender)
@@ -937,7 +1003,9 @@ def upsert_person(
     gender_id: int | None,
     now_iso: str,
 ) -> int:
-    ckey = canonical_key(row["full_name"], row.get("birth_date"), row.get("territory_code"))
+    ckey = canonical_key(
+        row["full_name"], row.get("birth_date"), row.get("territory_code")
+    )
     result = conn.execute(
         """
         INSERT INTO persons (
@@ -979,7 +1047,11 @@ def upsert_person(
 
 
 def upsert_person_identifier(
-    conn: sqlite3.Connection, person_id: int, source_id: str, source_record_id: str, now_iso: str
+    conn: sqlite3.Connection,
+    person_id: int,
+    source_id: str,
+    source_record_id: str,
+    now_iso: str,
 ) -> None:
     namespace = f"{source_id}:source_record_id"
     conn.execute(

@@ -24,20 +24,29 @@ class BdnsPage:
     records: list[dict[str, object]]
 
 
-def build_bdns_concessions_url(*, page: int, page_size: int) -> str:
+def build_bdns_concessions_url(
+    *,
+    page: int,
+    page_size: int,
+    date_from: str = "",
+    date_to: str = "",
+) -> str:
     if int(page) < 0:
         raise ValueError("page must be >= 0")
     if int(page_size) < 1 or int(page_size) > MAX_PAGE_SIZE:
         raise ValueError(f"page_size must be between 1 and {MAX_PAGE_SIZE}")
-    query = urlencode(
-        {
-            "vpd": "GE",
-            "page": int(page),
-            "pageSize": int(page_size),
-            "order": "fechaConcesion",
-            "direccion": "desc",
-        }
-    )
+    params = {
+        "vpd": "GE",
+        "page": int(page),
+        "pageSize": int(page_size),
+        "order": "fechaConcesion",
+        "direccion": "desc",
+    }
+    if str(date_from or "").strip():
+        params["fechaDesde"] = str(date_from).strip()
+    if str(date_to or "").strip():
+        params["fechaHasta"] = str(date_to).strip()
+    query = urlencode(params)
     return f"{BDNS_CONCESSIONS_ENDPOINT}?{query}"
 
 
@@ -80,10 +89,14 @@ def parse_bdns_page(
     ):
         raise RuntimeError("BDNS page metadata is internally inconsistent")
 
-    records = parse_bdns_records(
-        payload,
-        feed_url=feed_url,
-        content_type=content_type,
+    records = (
+        parse_bdns_records(
+            payload,
+            feed_url=feed_url,
+            content_type=content_type,
+        )
+        if number_of_elements > 0
+        else []
     )
     if len(records) != number_of_elements:
         raise RuntimeError(
