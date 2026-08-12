@@ -73,19 +73,15 @@ class RunSourceScrapeQueueTests(unittest.TestCase):
 
     @mock.patch("etl.ops.source_scrape_queue._validate_ingest_run")
     @mock.patch("etl.ops.source_scrape_queue.subprocess.run")
-    def test_execute_queue_falls_back_to_sample(
+    def test_execute_queue_fails_closed_after_network_error(
         self,
         run_mock: mock.Mock,
         validate_mock: mock.Mock,
     ) -> None:
-        run_mock.side_effect = [
-            mock.Mock(returncode=1, stdout="net-fail", stderr="boom"),
-            mock.Mock(returncode=0, stdout="sample-ok", stderr=""),
-        ]
-        validate_mock.side_effect = [
-            _validation(False, reason="process_failed", run_id=0, status="", records_loaded=0),
-            _validation(True, run_id=2, records_loaded=1),
-        ]
+        run_mock.return_value = mock.Mock(returncode=1, stdout="net-fail", stderr="boom")
+        validate_mock.return_value = _validation(
+            False, reason="process_failed", run_id=0, status="", records_loaded=0
+        )
         payload = {
             "items": [
                 {
@@ -106,27 +102,24 @@ class RunSourceScrapeQueueTests(unittest.TestCase):
                 db_path=db_path,
                 queue_payload=payload,
                 mode="preferred",
-                fallback_on_failure="sample-if-available",
+                fallback_on_failure="none",
             )
-        self.assertEqual(summary["totals"]["ok_total"], 1)
-        self.assertEqual(summary["totals"]["fallback_total"], 1)
-        self.assertEqual(summary["results"][0]["status"], "ok_with_fallback")
+        self.assertEqual(summary["totals"]["ok_total"], 0)
+        self.assertEqual(summary["totals"]["fallback_total"], 0)
+        self.assertEqual(summary["results"][0]["status"], "failed")
+        self.assertEqual(run_mock.call_count, 1)
 
     @mock.patch("etl.ops.source_scrape_queue._validate_ingest_run")
     @mock.patch("etl.ops.source_scrape_queue.subprocess.run")
-    def test_execute_queue_falls_back_after_timeout(
+    def test_execute_queue_fails_closed_after_timeout(
         self,
         run_mock: mock.Mock,
         validate_mock: mock.Mock,
     ) -> None:
-        run_mock.side_effect = [
-            subprocess.TimeoutExpired(cmd=["python3"], timeout=1),
-            mock.Mock(returncode=0, stdout="sample-ok", stderr=""),
-        ]
-        validate_mock.side_effect = [
-            _validation(False, reason="timeout", run_id=0, status="", records_loaded=0),
-            _validation(True, run_id=2, records_loaded=1),
-        ]
+        run_mock.side_effect = subprocess.TimeoutExpired(cmd=["python3"], timeout=1)
+        validate_mock.return_value = _validation(
+            False, reason="timeout", run_id=0, status="", records_loaded=0
+        )
         payload = {
             "items": [
                 {
@@ -147,29 +140,26 @@ class RunSourceScrapeQueueTests(unittest.TestCase):
                 db_path=db_path,
                 queue_payload=payload,
                 mode="preferred",
-                fallback_on_failure="sample-if-available",
+                fallback_on_failure="none",
                 command_timeout_seconds=1,
             )
-        self.assertEqual(summary["totals"]["ok_total"], 1)
-        self.assertEqual(summary["totals"]["fallback_total"], 1)
+        self.assertEqual(summary["totals"]["ok_total"], 0)
+        self.assertEqual(summary["totals"]["fallback_total"], 0)
         self.assertTrue(summary["results"][0]["timed_out"])
-        self.assertEqual(summary["results"][0]["status"], "ok_with_fallback")
+        self.assertEqual(summary["results"][0]["status"], "failed")
+        self.assertEqual(run_mock.call_count, 1)
 
     @mock.patch("etl.ops.source_scrape_queue._validate_ingest_run")
     @mock.patch("etl.ops.source_scrape_queue.subprocess.run")
-    def test_execute_queue_validation_failure_triggers_fallback_even_on_exit_zero(
+    def test_execute_queue_validation_failure_fails_closed_even_on_exit_zero(
         self,
         run_mock: mock.Mock,
         validate_mock: mock.Mock,
     ) -> None:
-        run_mock.side_effect = [
-            mock.Mock(returncode=0, stdout="net-ok", stderr=""),
-            mock.Mock(returncode=0, stdout="sample-ok", stderr=""),
-        ]
-        validate_mock.side_effect = [
-            _validation(False, reason="records_loaded_below_target", run_id=1, records_loaded=0),
-            _validation(True, run_id=2, records_loaded=1),
-        ]
+        run_mock.return_value = mock.Mock(returncode=0, stdout="net-ok", stderr="")
+        validate_mock.return_value = _validation(
+            False, reason="records_loaded_below_target", run_id=1, records_loaded=0
+        )
         payload = {
             "items": [
                 {
@@ -191,12 +181,13 @@ class RunSourceScrapeQueueTests(unittest.TestCase):
                 db_path=db_path,
                 queue_payload=payload,
                 mode="preferred",
-                fallback_on_failure="sample-if-available",
+                fallback_on_failure="none",
             )
-        self.assertEqual(summary["totals"]["ok_total"], 1)
-        self.assertEqual(summary["totals"]["fallback_total"], 1)
-        self.assertEqual(summary["results"][0]["status"], "ok_with_fallback")
+        self.assertEqual(summary["totals"]["ok_total"], 0)
+        self.assertEqual(summary["totals"]["fallback_total"], 0)
+        self.assertEqual(summary["results"][0]["status"], "failed")
         self.assertEqual(summary["results"][0]["validation"]["reason"], "records_loaded_below_target")
+        self.assertEqual(run_mock.call_count, 1)
 
     @mock.patch("etl.ops.source_scrape_queue._validate_ingest_run")
     @mock.patch("etl.ops.source_scrape_queue.subprocess.run")

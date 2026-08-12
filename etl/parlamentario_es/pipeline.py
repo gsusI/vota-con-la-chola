@@ -1833,11 +1833,18 @@ def backfill_senado_vote_details(
     senado_detail_host: str | None = None,
     senado_detail_cookie: str | None = None,
     senado_skip_details: bool = False,
+    senado_local_cache_only: bool = False,
     dry_run: bool = False,
     detail_workers: int = 1,
 ) -> dict[str, Any]:
     if limit is not None and limit <= 0:
         raise ValueError("max-events debe ser > 0")
+    if senado_local_cache_only and not senado_detail_dir:
+        raise ValueError("senado_local_cache_only requiere senado_detail_dir")
+    if senado_local_cache_only and senado_skip_details:
+        raise ValueError(
+            "senado_local_cache_only no es compatible con senado_skip_details"
+        )
 
     selected_legislatures: list[str] = []
     seen_legislatures: set[str] = set()
@@ -1902,6 +1909,7 @@ def backfill_senado_vote_details(
             "events_without_member_votes": len(records) - len(records_with_votes),
             "events_reingested": 0 if dry_run else 0,
             "member_votes_loaded": 0,
+            "stale_member_votes_removed": 0,
             "errors_summary": {},
             "last_vote_event_id": last_vote_event_id,
             "detail_failures": [],
@@ -1911,6 +1919,7 @@ def backfill_senado_vote_details(
     # Need to enrich records with session detail to recover member votes.
     from .connectors.senado_votaciones import (
         _enrich_senado_record_with_details,
+        _find_local_session_xml,
         _load_session_vote_info,
         _session_vote_file_url_candidates,
         _to_int,
@@ -1926,11 +1935,11 @@ def backfill_senado_vote_details(
 
     worker_count = max(1, int(detail_workers or 1))
 
+    events_skipped_no_local_cache = 0
     for row in rows:
         payload = _parse_raw_payload(row["raw_payload"])
         if not isinstance(payload, dict):
             continue
-        rows_to_enrich.append((row, payload))
         leg = normalize_ws(str(payload.get("legislature") or row["legislature"] or "")) or None
         session_id = _to_int(payload.get("session_id"))
         vote_id = _to_int(payload.get("vote_id"))
@@ -1942,11 +1951,36 @@ def backfill_senado_vote_details(
             vote_id,
             vote_file_url,
         )
-        if candidate_urls:
-            first_session_urls.setdefault(candidate_urls[0], (session_id, vote_id))
+        prefetch_url = candidate_urls[0] if candidate_urls else None
+        if senado_local_cache_only:
+            prefetch_url = next(
+                (
+                    candidate_url
+                    for candidate_url in candidate_urls
+                    if _find_local_session_xml(
+                    detail_dir,
+                    session_id or 0,
+                    vote_id,
+                    session_url=candidate_url,
+                    )
+                    is not None
+                ),
+                None,
+            )
+            if prefetch_url is None:
+                events_skipped_no_local_cache += 1
+                continue
+        rows_to_enrich.append((row, payload))
+        if prefetch_url:
+            first_session_urls.setdefault(prefetch_url, (session_id, vote_id))
 
-    def _prefetch_session(args: tuple[str, tuple[int | None, int | None]]) -> tuple[str, dict[str, Any]]:
-        session_url, ids = args
+    rows = [row for row, _payload in rows_to_enrich]
+    last_vote_event_id = rows[-1]["vote_event_id"] if rows else None
+
+    def _prefetch_session(
+        args: tuple[list[str], str, tuple[int | None, int | None]]
+    ) -> tuple[list[str], str, dict[str, Any]]:
+        session_urls, session_url, ids = args
         session_id, vote_id = ids
         info = _load_session_vote_info(
             session_url,
@@ -1955,8 +1989,9 @@ def backfill_senado_vote_details(
             session_id=session_id,
             vote_id=vote_id,
             detail_cookie=senado_detail_cookie,
+            local_only=senado_local_cache_only,
         )
-        return session_url, info
+        return session_urls, session_url, info
 
     def _enrich_row(row: Any) -> tuple[dict[str, Any] | None, list[str]]:
         row_data, payload = row
@@ -1975,6 +2010,7 @@ def backfill_senado_vote_details(
                 detail_host=detail_host,
                 detail_cookie=senado_detail_cookie,
                 detail_failures=failures,
+                local_only=senado_local_cache_only,
             )
         except Exception as exc:  # noqa: BLE001
             payload_detail = rec.get("payload")
@@ -1983,16 +2019,48 @@ def backfill_senado_vote_details(
             failures.append(f"unexpected-enrich-error: {type(exc).__name__}: {exc}")
         return rec, failures
 
+    detail_urls_total = len(first_session_urls)
+    detail_prefetch_jobs_total = 0
+    detail_local_cache_groups_total = 0
     if first_session_urls:
-        prefetch_items = list(first_session_urls.items())
+        grouped_prefetch: dict[
+            str,
+            tuple[list[str], str, tuple[int | None, int | None]],
+        ] = {}
+        for session_url, ids in first_session_urls.items():
+            session_id, vote_id = ids
+            local_path = None
+            if detail_dir is not None:
+                local_path = _find_local_session_xml(
+                    detail_dir,
+                    session_id or 0,
+                    vote_id,
+                    session_url=session_url,
+                )
+            group_key = (
+                f"local:{local_path.resolve()}"
+                if local_path is not None
+                else f"url:{session_url}"
+            )
+            existing = grouped_prefetch.get(group_key)
+            if existing is None:
+                grouped_prefetch[group_key] = ([session_url], session_url, ids)
+            else:
+                existing[0].append(session_url)
+        prefetch_items = list(grouped_prefetch.values())
+        detail_prefetch_jobs_total = len(prefetch_items)
+        detail_local_cache_groups_total = sum(
+            key.startswith("local:") for key in grouped_prefetch
+        )
         blocked_error: str | None = None
         probe_budget = min(3, len(prefetch_items))
         probe_403_count = 0
         start_idx = 0
         # Probe a small sample first: treat repeated hard 403 as blocked host.
-        for session_url, _ids in prefetch_items[:probe_budget]:
-            session_url, info = _prefetch_session((session_url, _ids))
-            session_cache[session_url] = info
+        for item in prefetch_items[:probe_budget]:
+            session_urls, session_url, info = _prefetch_session(item)
+            for cache_url in session_urls:
+                session_cache[cache_url] = info
             err = normalize_ws(str(info.get("error") or ""))
             if err:
                 detail_failures.append(f"detail-prefetch {session_url}: {err}")
@@ -2005,18 +2073,21 @@ def backfill_senado_vote_details(
         if blocked_error is not None and probe_403_count >= probe_budget and probe_budget > 0:
             detail_blocked = True
             blocked_error_text = blocked_error
-            for session_url, _ids in prefetch_items[start_idx:]:
-                session_cache[session_url] = {
+            for session_urls, session_url, _ids in prefetch_items[start_idx:]:
+                blocked_info = {
                     "ok": False,
                     "votes": [],
                     "error": blocked_error_text,
                     "source": None,
                 }
+                for cache_url in session_urls:
+                    session_cache[cache_url] = blocked_info
                 detail_failures.append(f"detail-prefetch {session_url}: {blocked_error_text}")
         elif worker_count <= 1:
             for item in prefetch_items[start_idx:]:
-                session_url, info = _prefetch_session(item)
-                session_cache[session_url] = info
+                session_urls, session_url, info = _prefetch_session(item)
+                for cache_url in session_urls:
+                    session_cache[cache_url] = info
                 err = normalize_ws(str(info.get("error") or ""))
                 if err:
                     detail_failures.append(f"detail-prefetch {session_url}: {err}")
@@ -2024,8 +2095,12 @@ def backfill_senado_vote_details(
             remaining = prefetch_items[start_idx:]
             if remaining:
                 with ThreadPoolExecutor(max_workers=worker_count) as prefetch_executor:
-                    for session_url, info in prefetch_executor.map(_prefetch_session, remaining):
-                        session_cache[session_url] = info
+                    for session_urls, session_url, info in prefetch_executor.map(
+                        _prefetch_session,
+                        remaining,
+                    ):
+                        for cache_url in session_urls:
+                            session_cache[cache_url] = info
                         err = normalize_ws(str(info.get("error") or ""))
                         if err:
                             detail_failures.append(f"detail-prefetch {session_url}: {err}")
@@ -2093,8 +2168,13 @@ def backfill_senado_vote_details(
             "events_without_payload": len(rows) - len(records),
             "events_with_member_votes": len(records_with_votes),
             "events_without_member_votes": len(records) - len(records_with_votes),
+            "events_skipped_no_local_cache": int(events_skipped_no_local_cache),
             "events_reingested": 0,
             "member_votes_loaded": 0,
+            "stale_member_votes_removed": 0,
+            "detail_urls_total": int(detail_urls_total),
+            "detail_prefetch_jobs_total": int(detail_prefetch_jobs_total),
+            "detail_local_cache_groups_total": int(detail_local_cache_groups_total),
             "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
             "last_vote_event_id": last_vote_event_id,
             "detail_failures": sorted(set(detail_failures)),
@@ -2111,8 +2191,13 @@ def backfill_senado_vote_details(
             "events_without_payload": len(rows) - len(records),
             "events_with_member_votes": 0,
             "events_without_member_votes": len(records),
+            "events_skipped_no_local_cache": int(events_skipped_no_local_cache),
             "events_reingested": 0,
             "member_votes_loaded": 0,
+            "stale_member_votes_removed": 0,
+            "detail_urls_total": int(detail_urls_total),
+            "detail_prefetch_jobs_total": int(detail_prefetch_jobs_total),
+            "detail_local_cache_groups_total": int(detail_local_cache_groups_total),
             "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
             "last_vote_event_id": last_vote_event_id,
             "detail_failures": sorted(set(detail_failures)),
@@ -2120,12 +2205,18 @@ def backfill_senado_vote_details(
         }
 
     now_iso = now_utc_iso()
-    _, events_reingested, member_votes_loaded = _ingest_senado_votaciones(
+    (
+        _,
+        events_reingested,
+        member_votes_loaded,
+        stale_member_votes_removed,
+    ) = _ingest_senado_votaciones(
         conn,
         extracted_records=records_to_reingest,
         source_id="senado_votaciones",
         snapshot_date=snapshot_date,
         now_iso=now_iso,
+        reconcile_member_vote_sets=True,
     )
     conn.commit()
 
@@ -2138,8 +2229,13 @@ def backfill_senado_vote_details(
         "events_without_payload": len(rows) - len(records),
         "events_with_member_votes": len(records_with_votes),
         "events_without_member_votes": len(records) - len(records_with_votes),
+        "events_skipped_no_local_cache": int(events_skipped_no_local_cache),
         "events_reingested": int(events_reingested),
         "member_votes_loaded": int(member_votes_loaded),
+        "stale_member_votes_removed": int(stale_member_votes_removed),
+        "detail_urls_total": int(detail_urls_total),
+        "detail_prefetch_jobs_total": int(detail_prefetch_jobs_total),
+        "detail_local_cache_groups_total": int(detail_local_cache_groups_total),
         "errors_summary": {k: int(v) for k, v in sorted(events_by_error.items())},
         "last_vote_event_id": last_vote_event_id,
         "detail_failures": sorted(set(detail_failures)),
@@ -2895,10 +2991,23 @@ def _ingest_senado_votaciones(
     source_id: str,
     snapshot_date: str | None,
     now_iso: str,
-) -> tuple[int, int, int]:
+    reconcile_member_vote_sets: bool = False,
+) -> tuple[int, int, int, int]:
     seen = 0
     loaded = 0
     member_votes_loaded = 0
+    stale_member_votes_removed = 0
+    if reconcile_member_vote_sets:
+        conn.execute(
+            """
+            CREATE TEMP TABLE IF NOT EXISTS senado_seen_member_vote_keys (
+              vote_event_id TEXT NOT NULL,
+              seat TEXT NOT NULL,
+              PRIMARY KEY (vote_event_id, seat)
+            ) WITHOUT ROWID
+            """
+        )
+        conn.execute("DELETE FROM senado_seen_member_vote_keys")
     person_index = _load_mandate_name_index(conn, "senado_senadores")
     for rec in extracted_records:
         seen += 1
@@ -2948,6 +3057,7 @@ def _ingest_senado_votaciones(
                 "totals_no": payload.get("totals_no"),
                 "totals_abstain": payload.get("totals_abstain"),
                 "totals_no_vote": payload.get("totals_no_vote"),
+                "totals_absent": payload.get("totals_absent"),
             },
             source_id=source_id,
             source_url=normalize_ws(
@@ -3040,9 +3150,39 @@ def _ingest_senado_votaciones(
                 """,
                 member_rows,
             )
+            if reconcile_member_vote_sets:
+                conn.executemany(
+                    """
+                    INSERT OR IGNORE INTO senado_seen_member_vote_keys (
+                      vote_event_id, seat
+                    ) VALUES (?, ?)
+                    """,
+                    ((str(row[0]), str(row[1])) for row in member_rows),
+                )
         member_votes_loaded += len(member_rows)
 
-    return seen, loaded, member_votes_loaded
+    if reconcile_member_vote_sets:
+        conn.execute(
+            """
+            DELETE FROM parl_vote_member_votes AS member_vote
+            WHERE member_vote.vote_event_id IN (
+              SELECT DISTINCT vote_event_id
+              FROM senado_seen_member_vote_keys
+            )
+              AND NOT EXISTS (
+                SELECT 1
+                FROM senado_seen_member_vote_keys AS seen
+                WHERE seen.vote_event_id = member_vote.vote_event_id
+                  AND seen.seat = member_vote.seat
+              )
+            """
+        )
+        stale_member_votes_removed = int(
+            conn.execute("SELECT changes()").fetchone()[0]
+        )
+        conn.execute("DELETE FROM senado_seen_member_vote_keys")
+
+    return seen, loaded, member_votes_loaded, stale_member_votes_removed
 
 
 def ingest_one_source(
@@ -3334,7 +3474,7 @@ def ingest_one_source(
             return rec_seen, rec_loaded, message
 
         if source_id == "senado_votaciones":
-            rec_seen, rec_loaded, mv_loaded = _ingest_senado_votaciones(
+            rec_seen, rec_loaded, mv_loaded, _stale_removed = _ingest_senado_votaciones(
                 conn,
                 extracted_records=extracted.records,
                 source_id=source_id,
@@ -3389,7 +3529,12 @@ def ingest_one_source(
             votos = payload.get("votaciones") or []
 
             detail_url = rec.get("detail_url")
-            if detail_url and str(detail_url).startswith("http"):
+            explicit_vote_event_id = normalize_ws(
+                str(rec.get("vote_event_id") or "")
+            )
+            if explicit_vote_event_id:
+                vote_event_id = explicit_vote_event_id
+            elif detail_url and str(detail_url).startswith("http"):
                 vote_event_id = f"url:{detail_url}"
             else:
                 fingerprint = stable_json(

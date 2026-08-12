@@ -23,7 +23,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--snapshot-date", default="", help="Optional YYYY-MM-DD override for ingest commands")
     parser.add_argument("--mode", choices=("preferred", "network", "sample"), default="preferred")
     parser.add_argument("--only-repeatable-now", action="store_true")
-    parser.add_argument("--fallback-on-failure", choices=("none", "sample-if-available"), default="sample-if-available")
+    parser.add_argument("--fallback-on-failure", choices=("none",), default="none")
     parser.add_argument("--include-logs", action="store_true")
     parser.add_argument("--command-timeout-seconds", type=int, default=90)
     parser.add_argument("--summary-out", default="")
@@ -42,7 +42,7 @@ def main() -> int:
         snapshot_date=str(args.snapshot_date or "").strip(),
         mode=str(args.mode or "preferred"),
         only_repeatable_now=bool(args.only_repeatable_now),
-        fallback_on_failure=str(args.fallback_on_failure or "sample-if-available"),
+        fallback_on_failure=str(args.fallback_on_failure or "none"),
         include_logs=bool(args.include_logs),
         command_timeout_seconds=int(args.command_timeout_seconds or 90),
         summary_out=str(args.summary_out or "").strip(),

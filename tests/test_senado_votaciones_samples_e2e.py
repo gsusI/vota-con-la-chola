@@ -161,7 +161,8 @@ class TestSenadoVotacionesSamplesE2E(unittest.TestCase):
 
                 event = conn.execute(
                     """
-                    SELECT totals_present, totals_yes, totals_no, totals_abstain, totals_no_vote, vote_date
+                    SELECT totals_present, totals_yes, totals_no, totals_abstain,
+                           totals_no_vote, totals_absent, vote_date
                     FROM parl_vote_events
                     LIMIT 1
                     """
@@ -172,6 +173,7 @@ class TestSenadoVotacionesSamplesE2E(unittest.TestCase):
                 self.assertEqual(int(event["totals_no"]), 1)
                 self.assertEqual(int(event["totals_abstain"]), 0)
                 self.assertEqual(int(event["totals_no_vote"]), 0)
+                self.assertEqual(int(event["totals_absent"]), 1)
                 self.assertEqual(str(event["vote_date"]), "2024-01-25")
 
                 mv = int(conn.execute("SELECT COUNT(*) AS c FROM parl_vote_member_votes").fetchone()["c"])
@@ -193,6 +195,13 @@ class TestSenadoVotacionesSamplesE2E(unittest.TestCase):
         ses = conn_mod._parse_sesion_vote_xml(b"")
         self.assertEqual(ses["votes"], [])
         self.assertIsNone(ses["session_date"])
+
+        missing_vote_date = conn_mod._parse_sesion_vote_xml(
+            b"<main><sesion><fecha_sesion>01/01/2026</fecha_sesion>"
+            b"<votacion><CodVotacion>1</CodVotacion></votacion>"
+            b"</sesion></main>"
+        )
+        self.assertEqual(missing_vote_date["votes"][0]["vote_date"], "2026-01-01")
 
         with self.assertRaises(RuntimeError) as ctx:
             conn_mod._parse_sesion_vote_xml(b"<!doctype html><html><body>blocked</body></html>")

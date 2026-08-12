@@ -9,6 +9,22 @@ from .queue import (
     render_command,
     sort_items_by_dependencies,
 )
+from .work_queue import (
+    DEAD,
+    LEASED,
+    PENDING,
+    SUCCEEDED,
+    claim_work_items,
+    collect_futures_with_heartbeat,
+    complete_work_items,
+    enqueue_work_items,
+    ensure_work_queue_schema,
+    fail_work_items,
+    heartbeat_work_items,
+    requeue_expired_leases,
+    work_queue_stats,
+    work_queue_observability,
+)
 
 __all__ = [
     "MANUAL_STATES",
@@ -18,4 +34,18 @@ __all__ = [
     "prerequisite_source_ids",
     "render_command",
     "sort_items_by_dependencies",
+    "DEAD",
+    "LEASED",
+    "PENDING",
+    "SUCCEEDED",
+    "claim_work_items",
+    "collect_futures_with_heartbeat",
+    "complete_work_items",
+    "enqueue_work_items",
+    "ensure_work_queue_schema",
+    "fail_work_items",
+    "heartbeat_work_items",
+    "requeue_expired_leases",
+    "work_queue_stats",
+    "work_queue_observability",
 ]

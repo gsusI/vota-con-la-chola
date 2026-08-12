@@ -26,6 +26,8 @@ class TestPublicDataSqlite(unittest.TestCase):
             try:
                 conn.execute("CREATE TABLE demo (demo_id INTEGER PRIMARY KEY)")
                 self.assertEqual(int(conn.execute("PRAGMA foreign_keys").fetchone()[0]), 1)
+                self.assertEqual(str(conn.execute("PRAGMA journal_mode").fetchone()[0]), "wal")
+                self.assertEqual(int(conn.execute("PRAGMA busy_timeout").fetchone()[0]), 30_000)
                 self.assertTrue(table_exists(conn, "demo"))
                 ensure_column(conn, "demo", "label", "label TEXT")
                 self.assertIn("label", table_columns(conn, "demo"))

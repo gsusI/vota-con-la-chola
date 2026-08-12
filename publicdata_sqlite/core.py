@@ -4,11 +4,26 @@ import sqlite3
 from pathlib import Path
 
 
-def open_db(path: Path) -> sqlite3.Connection:
+def open_db(
+    path: Path,
+    *,
+    busy_timeout_ms: int = 30_000,
+    wal: bool = True,
+) -> sqlite3.Connection:
+    """Open an ETL database with safe concurrent-worker defaults.
+
+    WAL keeps readers available while one bounded writer transaction runs.
+    SQLite still has one writer; queue claims and batch writes must stay short.
+    """
+
     path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=max(0.001, int(busy_timeout_ms) / 1_000))
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
+    conn.execute(f"PRAGMA busy_timeout = {max(1, int(busy_timeout_ms))};")
+    if wal:
+        conn.execute("PRAGMA journal_mode = WAL;")
+        conn.execute("PRAGMA synchronous = NORMAL;")
     return conn
 
 

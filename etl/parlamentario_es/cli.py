@@ -236,6 +236,11 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         help="No intentar enriquecimiento de detalle (no agregará member_votes)",
     )
     p_backfill_senado.add_argument(
+        "--local-cache-only",
+        action="store_true",
+        help="Procesar solo eventos resueltos desde --senado-detail-dir; nunca intentar red",
+    )
+    p_backfill_senado.add_argument(
         "--detail-workers",
         type=int,
         default=8,
@@ -1316,6 +1321,7 @@ def main(argv: list[str] | None = None) -> int:
                     senado_detail_host=args.senado_detail_host,
                     senado_detail_cookie=args.senado_detail_cookie,
                     senado_skip_details=bool(args.senado_skip_details),
+                    senado_local_cache_only=bool(args.local_cache_only),
                     dry_run=bool(args.dry_run),
                     detail_workers=detail_workers,
                 )
@@ -1364,6 +1370,7 @@ def main(argv: list[str] | None = None) -> int:
                             senado_detail_host=args.senado_detail_host,
                             senado_detail_cookie=args.senado_detail_cookie,
                             senado_skip_details=bool(args.senado_skip_details),
+                            senado_local_cache_only=bool(args.local_cache_only),
                             dry_run=bool(args.dry_run),
                             detail_workers=detail_workers,
                         )
