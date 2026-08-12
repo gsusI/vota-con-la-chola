@@ -1,0 +1,375 @@
+{
+  "by_source_group": {
+    "election_calendar": {
+      "bytes": 727586,
+      "files": 1,
+      "files_with_public_url": 0,
+      "unlinked": 1
+    },
+    "elections": {
+      "bytes": 44066769,
+      "files": 93,
+      "files_with_public_url": 0,
+      "unlinked": 93
+    },
+    "europarl_meps": {
+      "bytes": 8977089,
+      "files": 59,
+      "files_with_public_url": 24,
+      "unlinked": 35,
+      "verified_content_checksum": 23,
+      "verified_path_checksum": 1
+    },
+    "manual": {
+      "bytes": 484936848,
+      "files": 1387,
+      "files_with_public_url": 527,
+      "unlinked": 860,
+      "verified_content_checksum": 527
+    },
+    "moncloa_referencias": {
+      "bytes": 155073,
+      "files": 3,
+      "files_with_public_url": 0,
+      "unlinked": 3
+    },
+    "moncloa_rss_referencias": {
+      "bytes": 7536,
+      "files": 2,
+      "files_with_public_url": 0,
+      "unlinked": 2
+    },
+    "municipal_concejales": {
+      "bytes": 11338475,
+      "files": 4,
+      "files_with_public_url": 0,
+      "unlinked": 4
+    },
+    "official-captures": {
+      "bytes": 115695,
+      "files": 1,
+      "files_with_public_url": 0,
+      "unlinked": 1
+    },
+    "placsp_autonomico_detail": {
+      "bytes": 357188621,
+      "files": 2824,
+      "files_with_public_url": 0,
+      "unlinked": 2824
+    },
+    "placsp_sindicacion_detail": {
+      "bytes": 121892000,
+      "files": 1023,
+      "files_with_public_url": 0,
+      "unlinked": 1023
+    },
+    "samples": {
+      "bytes": 58996,
+      "files": 5,
+      "files_with_public_url": 1,
+      "unlinked": 4,
+      "verified_content_checksum": 1
+    },
+    "senado_votaciones_xmls": {
+      "bytes": 3994128,
+      "files": 796,
+      "files_with_public_url": 796,
+      "verified_content_checksum": 796
+    },
+    "text_documents/congreso_intervenciones": {
+      "bytes": 27731231,
+      "files": 74,
+      "files_with_public_url": 0,
+      "unlinked": 74
+    },
+    "text_documents/parl_initiative_docs": {
+      "bytes": 886954691,
+      "files": 14314,
+      "files_with_public_url": 8317,
+      "unlinked": 5973,
+      "verified_content_checksum": 461,
+      "verified_path_checksum": 7880
+    },
+    "text_documents/programas_partidos": {
+      "bytes": 68688701,
+      "files": 282,
+      "files_with_public_url": 0,
+      "unlinked": 282
+    },
+    "text_documents/text_documents": {
+      "bytes": 245273813,
+      "files": 530,
+      "files_with_public_url": 530,
+      "verified_path_checksum": 530
+    }
+  },
+  "checks": {
+    "all_referenced_text_artifacts_exist": true,
+    "complete_checksum_provenance": false,
+    "complete_public_url_provenance": false,
+    "database_inputs_readable": true,
+    "integrity_passed": true,
+    "inventory_files_parse_clean": true,
+    "inventory_rows_reconciled": true,
+    "no_document_checksum_conflicts": true,
+    "no_text_checksum_conflicts": true,
+    "promotion_ready": false
+  },
+  "databases": [
+    {
+      "bytes": 735571968,
+      "path": "etl/data/staging/politicos-es.db",
+      "raw_metadata_rows": 13587,
+      "status": "ok",
+      "tables": {
+        "document_fetches": {
+          "raw_metadata_rows": 6792,
+          "text_metadata_rows": 0
+        },
+        "ingestion_runs": {
+          "raw_metadata_rows": 1,
+          "text_metadata_rows": 0
+        },
+        "raw_fetches": {
+          "raw_metadata_rows": 1,
+          "text_metadata_rows": 0
+        },
+        "run_fetches": {
+          "raw_metadata_rows": 1,
+          "text_metadata_rows": 0
+        },
+        "text_documents": {
+          "raw_metadata_rows": 6792,
+          "text_metadata_rows": 6792
+        }
+      },
+      "text_metadata_rows": 6792
+    },
+    {
+      "bytes": 355815424,
+      "path": "etl/data/staging/parlamentario-es.db",
+      "raw_metadata_rows": 3184,
+      "status": "ok",
+      "tables": {
+        "document_fetches": {
+          "raw_metadata_rows": 1604,
+          "text_metadata_rows": 0
+        },
+        "ingestion_runs": {
+          "raw_metadata_rows": 0,
+          "text_metadata_rows": 0
+        },
+        "raw_fetches": {
+          "raw_metadata_rows": 0,
+          "text_metadata_rows": 0
+        },
+        "run_fetches": {
+          "raw_metadata_rows": 0,
+          "text_metadata_rows": 0
+        },
+        "text_documents": {
+          "raw_metadata_rows": 1580,
+          "text_metadata_rows": 0
+        }
+      },
+      "text_metadata_rows": 0
+    },
+    {
+      "bytes": 7998259200,
+      "path": "etl/data/staging/placsp-contracts-real-s1-20260811.db",
+      "raw_metadata_rows": 40,
+      "status": "ok",
+      "tables": {
+        "document_fetches": {
+          "raw_metadata_rows": 20,
+          "text_metadata_rows": 0
+        },
+        "ingestion_runs": {
+          "raw_metadata_rows": 0,
+          "text_metadata_rows": 0
+        },
+        "raw_fetches": {
+          "raw_metadata_rows": 0,
+          "text_metadata_rows": 0
+        },
+        "run_fetches": {
+          "raw_metadata_rows": 0,
+          "text_metadata_rows": 0
+        },
+        "text_documents": {
+          "raw_metadata_rows": 20,
+          "text_metadata_rows": 0
+        }
+      },
+      "text_metadata_rows": 0
+    }
+  ],
+  "edge_manifest": {
+    "bytes": 15159037,
+    "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
+    "rows": 20415,
+    "sha256": "905a30bfa00b4dd9cd2a85084bbd33efeb8dcd5fbaa0af2e6fefe012ba2acf20"
+  },
+  "file_manifest": {
+    "bytes": 9940701,
+    "path": "etl/data/manifests/real-document-provenance-files.jsonl",
+    "rows": 21398,
+    "sha256": "abb3da773cb7379b0b165311c1e9fbc7fc0e1e410ad946e085ac73a727919e81"
+  },
+  "generated_at": "2026-08-12T15:50:14.589958+00:00",
+  "inventory": {
+    "bytes": 10678051,
+    "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+    "rows": 21398,
+    "sha256": "c38f9bfc3e090330631c7428d2a67b423f222b6cde9e35e71f963b9b4478d997"
+  },
+  "limitations": [
+    "The audit covers only the declared inventory manifest and SQLite metadata inputs.",
+    "Unlinked files remain real local bytes but do not count as fully traceable evidence until an official URL and checksum-backed metadata edge are recovered.",
+    "A public HTTP(S) URL proves a public locator, not institutional completeness or long-term availability.",
+    "This reconciliation does not increase the document corpus row count or prove extraction accuracy."
+  ],
+  "metadata": {
+    "matched_metadata_edges": 16771,
+    "metadata_edges": 16811,
+    "unmatched_metadata_edges": 40,
+    "unmatched_samples": [
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/2b/36/2b369e3647df5cede32dfa901bcb39f1c1750d0405f4d0f57e2b21e5e396ebdf.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/2b/36/2b369e3647df5cede32dfa901bcb39f1c1750d0405f4d0f57e2b21e5e396ebdf.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/31/4f/314fe37d9760e04e2e269361f9c7667eb267d12f04ae828b267cfbb14bdb4b83.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/31/4f/314fe37d9760e04e2e269361f9c7667eb267d12f04ae828b267cfbb14bdb4b83.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/31/cd/31cd88aa1f94caeba4e59bce5e14ec2113881b1c54e98791c19889f0267400d0.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/31/cd/31cd88aa1f94caeba4e59bce5e14ec2113881b1c54e98791c19889f0267400d0.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/33/83/3383e9bfc47e227a811a9c37d92ff20510f420c132bb4da9118a291fa4981a3a.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/33/83/3383e9bfc47e227a811a9c37d92ff20510f420c132bb4da9118a291fa4981a3a.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/43/a8/43a8ad3fc194f5ae95bc89cd1ee883c310fada15f4568dd12a8aea3a09247a4a.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/43/a8/43a8ad3fc194f5ae95bc89cd1ee883c310fada15f4568dd12a8aea3a09247a4a.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/47/c5/47c5fe518e2e4d98cad0c3a96d9684660ca4fe2b62c80077ccbd4fb5e8f0cdfd.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/47/c5/47c5fe518e2e4d98cad0c3a96d9684660ca4fe2b62c80077ccbd4fb5e8f0cdfd.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/51/dd/51ddc1a1de61c789becd1c243361f2db24e238fdbdb10f1faec1cea25ccd24d3.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/51/dd/51ddc1a1de61c789becd1c243361f2db24e238fdbdb10f1faec1cea25ccd24d3.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/55/82/5582e6b25c9a52a394750f5e4226c95bc139bbb0af856bf2af6f22a0a2e43ea9.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/55/82/5582e6b25c9a52a394750f5e4226c95bc139bbb0af856bf2af6f22a0a2e43ea9.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/5f/aa/5faa240343c4988c6ffd6b7f6004a22c6e61407c878f1091bf5d99a5976e6e47.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/5f/aa/5faa240343c4988c6ffd6b7f6004a22c6e61407c878f1091bf5d99a5976e6e47.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/69/23/6923dda16c8836d83720696f19bfd2592c81c217694fba0fbcd2696504065b6b.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "text_documents"
+      },
+      {
+        "path": "etl/data/object-origin/placsp-contract-documents/69/23/6923dda16c8836d83720696f19bfd2592c81c217694fba0fbcd2696504065b6b.pdf",
+        "source_id": "placsp_contract_docs",
+        "table": "document_fetches"
+      }
+    ]
+  },
+  "next_action": "Recover source URL, retrieval, and checksum metadata for every unlinked source group; regenerate the inventory and audit; then require promotion_ready before durable publication.",
+  "policy": {
+    "checksum_or_content_address_required_for_verified_file": true,
+    "official_real_records_only": true,
+    "public_domain_personal_information_retained": true,
+    "synthetic_or_mock_records_counted": false,
+    "workstation_paths_forbidden_in_outputs": true
+  },
+  "schema_version": "real_document_provenance_audit_v1",
+  "status": "partial",
+  "text_artifacts": {
+    "checksum_conflict_samples": [],
+    "checksum_conflicts": 0,
+    "checksum_unavailable": 0,
+    "checksum_verified": 6792,
+    "existing": 6792,
+    "metadata_edges": 6792,
+    "missing": 0,
+    "missing_samples": [],
+    "unique_paths": 6792
+  },
+  "totals": {
+    "bytes": 2262107252,
+    "files": 21398,
+    "files_with_checksum_conflict": 0,
+    "files_with_public_https_url": 7208,
+    "files_with_public_url": 10195,
+    "inventory_non_ok_files": 0,
+    "provenance_edges": 20415,
+    "public_url_coverage": 0.476446,
+    "unlinked": 11179,
+    "verified_checksum_coverage": 0.477568,
+    "verified_checksum_files": 10219,
+    "verified_content_checksum": 1808,
+    "verified_path_checksum": 8411
+  }
+}
