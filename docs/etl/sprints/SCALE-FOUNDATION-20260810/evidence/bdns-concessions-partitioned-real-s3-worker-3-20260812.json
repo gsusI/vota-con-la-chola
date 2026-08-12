@@ -1,0 +1,162 @@
+{
+  "analytical_ingest_gate_passed": false,
+  "checks": {
+    "all_pages_succeeded": false,
+    "api_total_elements_stable": true,
+    "api_total_pages_stable": false,
+    "distinct_snapshot_rows_reconcile": false,
+    "no_dead_pages": true,
+    "page_fetch_rows_complete": false,
+    "page_record_counts_reconcile": false,
+    "partition_page_lineage_complete": true,
+    "raw_page_version_lineage_complete": true,
+    "version_sightings_distinct_reconcile": true,
+    "version_sightings_reconcile": false
+  },
+  "discovery": {
+    "max_pages_enqueued_per_partition": 400,
+    "max_pages_per_partition": 100,
+    "page_size": 1000,
+    "pages_enqueued": 1058,
+    "partition_strategy": "bounded_daily_prefix_windows_descending",
+    "partitions": 89,
+    "selected_date_from": "2026-05-15",
+    "selected_date_to": "2026-08-11",
+    "total_elements": 1000828,
+    "total_pages": 1419,
+    "truncated_partitions": 0
+  },
+  "limitations": [
+    "Official BDNS fields, including natural-person names and source-published identifiers, are retained exactly; source-side masking remains unchanged.",
+    "A limited page cohort proves bounded acquisition and reconciliation, not full-registry completeness."
+  ],
+  "limited_run": true,
+  "money_bulk_run_id": 1,
+  "observed": {
+    "bytes": 797345707,
+    "pages_fetched": 1052,
+    "peak_rss_mb": 82.281,
+    "records_loaded_distinct": 1000828,
+    "records_seen": 996809
+  },
+  "pipeline_id": "bdns-concessions-partitioned-real-s3-20260812",
+  "promotion_gate_passed": false,
+  "publication_status": "local_raw_captured_not_published",
+  "queue": {
+    "active_workers": [
+      {
+        "earliest_lease_expiry": "2026-08-12T13:35:20+00:00",
+        "last_heartbeat_at": "2026-08-12T13:30:20+00:00",
+        "lease_owner": "bdns-partitioned-real-s3-worker-1",
+        "leased_total": 4
+      },
+      {
+        "earliest_lease_expiry": "2026-08-12T13:35:26+00:00",
+        "last_heartbeat_at": "2026-08-12T13:30:26+00:00",
+        "lease_owner": "bdns-partitioned-real-s3-worker-2",
+        "leased_total": 2
+      }
+    ],
+    "attempt_status_counts": {
+      "running": 6,
+      "succeeded": 1052
+    },
+    "attempts_total": 1058,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": "2026-08-12T13:35:20+00:00",
+    "generated_at": "2026-08-12T13:30:29+00:00",
+    "items_total": 1058,
+    "max_attempts_observed": 1,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "bdns-concessions-partitioned-real-s3-20260812",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 6,
+      "pending": 0,
+      "succeeded": 1052
+    },
+    "terminal_total": 1052,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "date:2026-05-20",
+        "state": "succeeded",
+        "total": 100
+      },
+      {
+        "partition_key": "date:2026-06-05",
+        "state": "succeeded",
+        "total": 100
+      },
+      {
+        "partition_key": "date:2026-06-30",
+        "state": "succeeded",
+        "total": 89
+      },
+      {
+        "partition_key": "date:2026-06-02",
+        "state": "succeeded",
+        "total": 83
+      },
+      {
+        "partition_key": "date:2026-06-25",
+        "state": "succeeded",
+        "total": 64
+      },
+      {
+        "partition_key": "date:2026-05-28",
+        "state": "succeeded",
+        "total": 53
+      },
+      {
+        "partition_key": "date:2026-05-30",
+        "state": "succeeded",
+        "total": 52
+      },
+      {
+        "partition_key": "date:2026-06-12",
+        "state": "succeeded",
+        "total": 38
+      },
+      {
+        "partition_key": "date:2026-06-01",
+        "state": "succeeded",
+        "total": 35
+      },
+      {
+        "partition_key": "date:2026-05-25",
+        "state": "succeeded",
+        "total": 29
+      }
+    ],
+    "unfinished_total": 6
+  },
+  "record_versions": {
+    "current_source_rows_for_snapshot": 996809,
+    "distinct_source_records": 1000828,
+    "raw_page_lineage_rows": 1000828,
+    "raw_payload_duplicated": false,
+    "records_with_prior_versions": 0,
+    "sightings_total": 1000828,
+    "versions_linked": 1000828
+  },
+  "schema_version": "bdns_bulk_run_report_v1",
+  "snapshot_date": "2026-08-12",
+  "source_id": "bdns_api_subvenciones",
+  "status": "running",
+  "worker": {
+    "claim_size": 4,
+    "failed_attempts": 0,
+    "failure_window_size": 20,
+    "processed": 352,
+    "request_interval_seconds": 2.0,
+    "stop_failure_rate": 0.5,
+    "stop_reason": "queue_drained",
+    "succeeded": 352,
+    "worker_id": "bdns-partitioned-real-s3-worker-3",
+    "workers": 2
+  }
+}

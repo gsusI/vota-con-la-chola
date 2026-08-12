@@ -19,6 +19,7 @@ from scripts.ingest_bdns_bulk import (
     _open_runtime,
     _persist_record_version_lineage,
     backfill_record_version_lineage,
+    enqueue_bdns_daily_partitions,
     enqueue_bdns_pages,
     persist_bdns_page,
     report_bdns_bulk_run,
@@ -60,6 +61,66 @@ def _row(row_id: int, *, entity_prefix: str = "G12345678") -> dict[str, object]:
 
 
 class TestBdnsBulkIngest(unittest.TestCase):
+    def test_daily_partition_persists_discovered_and_enqueued_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            conn = _open_runtime(
+                Path(temp_dir) / "partitions.db",
+                Path("etl/load/sqlite_schema.sql"),
+            )
+            try:
+                calls = 0
+
+                def fetch_discovery(url: str, timeout: int) -> tuple[bytes, str]:
+                    nonlocal calls
+                    self.assertGreater(timeout, 0)
+                    calls += 1
+                    total_elements = 100_000 if calls == 1 else 2_501
+                    row = _row(1)
+                    row["fechaConcesion"] = "2026-08-10"
+                    return (
+                        json.dumps(
+                            {
+                                "content": [row],
+                                "number": 0,
+                                "size": 1,
+                                "numberOfElements": 1,
+                                "totalElements": total_elements,
+                                "totalPages": total_elements,
+                                "first": True,
+                                "last": total_elements == 1,
+                            }
+                        ).encode("utf-8"),
+                        "application/json",
+                    )
+
+                result = enqueue_bdns_daily_partitions(
+                    conn,
+                    pipeline_id="bdns-partition-test",
+                    snapshot_date="2026-08-11",
+                    date_from="2026-08-10",
+                    date_to="2026-08-10",
+                    page_size=1_000,
+                    target_records=2_000,
+                    max_partitions=1,
+                    max_pages_per_partition=2,
+                    timeout=10,
+                    request_interval_seconds=0,
+                    fetch_bytes=fetch_discovery,
+                )
+                partition = conn.execute(
+                    """
+                    SELECT total_pages_discovered, pages_enqueued
+                    FROM money_bulk_partitions
+                    WHERE money_bulk_run_id = ?
+                    """,
+                    (result["money_bulk_run_id"],),
+                ).fetchone()
+                self.assertEqual(partition["total_pages_discovered"], 3)
+                self.assertEqual(partition["pages_enqueued"], 2)
+                self.assertEqual(result["queue"]["pipeline_total"], 2)
+            finally:
+                conn.close()
+
     def test_version_lineage_preserves_changed_record_without_raw_copy(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             conn = _open_runtime(
