@@ -24,6 +24,8 @@ STATIC_PUBLISHED_FILES = (
     "accountability-dossiers-latest.json",
     "accountability-evidence-api-latest.json",
     "integrity-signals-latest.json",
+    "data-integrity-latest.json",
+    "scale-readiness-latest.json",
 )
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 

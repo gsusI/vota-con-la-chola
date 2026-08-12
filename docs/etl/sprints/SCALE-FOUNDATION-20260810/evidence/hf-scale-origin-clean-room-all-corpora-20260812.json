@@ -1,0 +1,214 @@
+{
+  "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+  "checks": {
+    "corpora_valid": true,
+    "data_bytes_match_release": true,
+    "data_files_match_release": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "rows_match_release": true,
+    "selected_restored_bytes_valid": true,
+    "selected_restored_files_valid": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "corpora": [
+    {
+      "actual": {
+        "bytes": 1271649,
+        "files": 13,
+        "rows": 126760
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 1271649,
+        "files": 13,
+        "rows": 126760
+      },
+      "id": "accountability_ledger",
+      "kind": "parquet_manifest",
+      "lane": "accountability_ledger",
+      "performance": {
+        "batch_rows": 10000,
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 275.375
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    },
+    {
+      "actual": {
+        "bytes": 9236064,
+        "files": 108,
+        "rows": 88031
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 9236064,
+        "files": 108,
+        "rows": 88031
+      },
+      "id": "actor_mandates",
+      "kind": "parquet_manifest",
+      "lane": "actor_mandates",
+      "performance": {
+        "batch_rows": 10000,
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 321.125
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    },
+    {
+      "actual": {
+        "bytes": 42955289,
+        "files": 14,
+        "rows": 1360382
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 42955289,
+        "files": 14,
+        "rows": 1360382
+      },
+      "id": "bdns_public_money",
+      "kind": "parquet_manifest",
+      "lane": "public_money_facts",
+      "performance": {
+        "batch_rows": 10000,
+        "distinct_index_bytes": 74412032,
+        "distinct_index_storage": "temporary_sqlite_disk",
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 460.891
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    },
+    {
+      "actual": {
+        "bytes": 253373860,
+        "files": 37,
+        "rows": 1755809
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 253373860,
+        "files": 37,
+        "rows": 1755809
+      },
+      "id": "eurostat_indicators",
+      "kind": "parquet_manifest",
+      "lane": "indicator_observations",
+      "performance": {
+        "batch_rows": 10000,
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 1063.984
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    },
+    {
+      "actual": {
+        "bytes": 170990631,
+        "files": 8373,
+        "rows": 1809222
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 170990631,
+        "files": 8373,
+        "rows": 1809222
+      },
+      "id": "member_votes",
+      "kind": "gzip_vote_shards",
+      "lane": null,
+      "private_token_findings": 0,
+      "status": "ok"
+    },
+    {
+      "actual": {
+        "bytes": 20803781,
+        "files": 50,
+        "rows": 263302
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 20803781,
+        "files": 50,
+        "rows": 263302
+      },
+      "id": "placsp_public_money",
+      "kind": "parquet_manifest",
+      "lane": "public_money_facts",
+      "performance": {
+        "batch_rows": 10000,
+        "distinct_index_bytes": 12779520,
+        "distinct_index_storage": "temporary_sqlite_disk",
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 1063.984
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-08-12T17:37:17.574525Z",
+  "release_id": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+  "root_name": "hf-scale-remaining-cleanroom-20260812",
+  "schema_version": "restored_scale_origin_validation_v1",
+  "selected_corpus_ids": [
+    "accountability_ledger",
+    "actor_mandates",
+    "bdns_public_money",
+    "eurostat_indicators",
+    "member_votes",
+    "placsp_public_money"
+  ],
+  "snapshot_date": "2026-08-12",
+  "status": "ok",
+  "totals": {
+    "corpora": 6,
+    "data_bytes": 498631274,
+    "data_files": 8595,
+    "restored_bytes": 504093303,
+    "restored_bytes_checksum_valid": 504093303,
+    "restored_files": 8619,
+    "restored_files_checksum_valid": 8619,
+    "rows": 5403506
+  }
+}

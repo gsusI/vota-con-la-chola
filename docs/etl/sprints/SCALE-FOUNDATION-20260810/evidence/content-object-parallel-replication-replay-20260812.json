@@ -1,0 +1,23 @@
+{
+  "backend": "filesystem",
+  "generated_at": "2026-08-12T17:54:18+00:00",
+  "manifest": "content-objects-latest.jsonl",
+  "manifest_bytes": 2733754,
+  "manifest_sha256": "6e496f35ffc49df559dcac6af82dfc53344ce7f6565b8f2d650422101da7675c",
+  "namespace": "raw/text-documents",
+  "performance": {
+    "bytes_per_second": 148472445.737,
+    "elapsed_seconds": 0.897267,
+    "objects_per_second": 7569.651
+  },
+  "schema_version": "content_object_replication_report_v2",
+  "status": "ok",
+  "totals": {
+    "bytes": 133219457,
+    "candidates": 6792,
+    "deduplicated": 6792,
+    "missing_local": 0,
+    "replicated": 6792
+  },
+  "workers": 16
+}

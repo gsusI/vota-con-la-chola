@@ -4,7 +4,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from publicdata_publish.hf_snapshot import collect_published_files, ensure_iso_date, parse_csv_list
+from publicdata_publish.hf_snapshot import (
+    collect_published_files,
+    ensure_iso_date,
+    parse_csv_list,
+)
 from publicdata_publish.privacy import collect_findings
 from publicdata_publish.sanitize import redact_sensitive_text, sanitize_url_for_public
 
@@ -42,6 +46,8 @@ class TestPublicDataPublish(unittest.TestCase):
             (root / "accountability-ledger-latest.json").write_text("{}", encoding="utf-8")
             (root / "accountability-dossiers-latest.json").write_text("{}", encoding="utf-8")
             (root / "accountability-evidence-api-latest.json").write_text("{}", encoding="utf-8")
+            (root / "data-integrity-latest.json").write_text("{}", encoding="utf-8")
+            (root / "scale-readiness-latest.json").write_text("{}", encoding="utf-8")
             files = collect_published_files(root, "2026-02-12")
             self.assertEqual(
                 [path.name for path in files],
@@ -49,6 +55,8 @@ class TestPublicDataPublish(unittest.TestCase):
                     "accountability-dossiers-latest.json",
                     "accountability-evidence-api-latest.json",
                     "accountability-ledger-latest.json",
+                    "data-integrity-latest.json",
+                    "scale-readiness-latest.json",
                     "thing-2026-02-12.json",
                 ],
             )

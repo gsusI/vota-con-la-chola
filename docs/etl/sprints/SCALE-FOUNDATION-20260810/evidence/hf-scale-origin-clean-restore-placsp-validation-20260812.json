@@ -1,0 +1,798 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "all_files_present": true,
+    "amount_states_explicit": true,
+    "amounts_nonnegative": true,
+    "bounded_peak_rss": true,
+    "checksums_and_bytes": true,
+    "counterparty_identifiers_retained_exactly": true,
+    "counterparty_names_retained_exactly": true,
+    "counterparty_publication_assurance": true,
+    "currency_eur_for_amounts": true,
+    "decimal_amount_types": true,
+    "file_minmax": true,
+    "file_rows": true,
+    "lane": true,
+    "manifest_coverage": true,
+    "manifest_metric_totals": true,
+    "manifest_schema": true,
+    "manifest_schema_definition": true,
+    "minimum_rows": true,
+    "money_fact_ids_sorted_within_partitions": true,
+    "money_fact_ids_unique": true,
+    "no_duplicate_manifest_paths": true,
+    "no_extra_parquet_files": true,
+    "no_private_tokens": true,
+    "parquet_schemas": true,
+    "partition_hashes": true,
+    "partition_rows_and_money": true,
+    "partition_values": true,
+    "public_domain_counterparty_retention_complete": true,
+    "row_semantics_consistent": true,
+    "schema_sha256": true,
+    "source_records_complete": true,
+    "source_urls_complete_and_public": true,
+    "transformer_version": true
+  },
+  "counterparty_publication_assurance": "all_official_public_domain_names_and_identifiers_retained;entity_type_is_classification_not_suppression",
+  "coverage": {
+    "amount": 0.94900532,
+    "counterparty_identifier": 0.48935823,
+    "counterparty_name": 0.48935823,
+    "counterparty_publication_state": 1.0,
+    "source_record": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-12T17:26:58+00:00",
+  "manifest_file": "manifest.json",
+  "money_assurance": "published_amounts_not_execution_or_disbursement",
+  "partitions": [
+    {
+      "amount_eur_total": "82325.520000",
+      "files": [
+        {
+          "bytes": 11994,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2007/part-00000.parquet",
+          "rows": 1,
+          "sha256": "f7a1dca8b0e4adc6125ec5361eff80814559ac63975e355643490bd4f7f9329c"
+        }
+      ],
+      "input_sha256": "8b38c38bbd631260d805ebf0e400a7042e79df103263d3fa4125c2450f0e173d",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2007",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "73231.380000",
+      "files": [
+        {
+          "bytes": 11997,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2009/part-00000.parquet",
+          "rows": 1,
+          "sha256": "ffba4c739b4d3dd48355c841c2c264601f71b54e4576c5c847d1625675443ef9"
+        }
+      ],
+      "input_sha256": "7d9ced9076b1165586604431aef9112ef83f8c161d6a7da732a04086c9d48c81",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2009",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "441335.630000",
+      "files": [
+        {
+          "bytes": 12031,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2012/part-00000.parquet",
+          "rows": 1,
+          "sha256": "e0c9cac7e912d2e6ae5663681c5099e7b9ce85bf86aaf12cd0b71debd00c9fce"
+        }
+      ],
+      "input_sha256": "94562bacd7defc7d3ff7faffe4520f580e4a6cd093d98c20dc9175416182d9d3",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2012",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "34320.580000",
+      "files": [
+        {
+          "bytes": 12194,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2013/part-00000.parquet",
+          "rows": 2,
+          "sha256": "eeb6fbfebe05369d1d1fdbd0bf2680b431ade1ca290ffd467837ebbda502e7d3"
+        }
+      ],
+      "input_sha256": "f73dbb6173d3d4157733321d642ab4caf3454651883ff7982f45200821b62061",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2013",
+      "rows": 2
+    },
+    {
+      "amount_eur_total": "228179.880000",
+      "files": [
+        {
+          "bytes": 12014,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2018/part-00000.parquet",
+          "rows": 1,
+          "sha256": "7f3955d00cd345385f6cb6d94d0e2b48a362b9e848fe2234d56a1f261c9bf91d"
+        }
+      ],
+      "input_sha256": "78306aade335bbc2e054e79335353ba642cf525bfbc9769a1ef408a1966ca33a",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2018",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "937750.130000",
+      "files": [
+        {
+          "bytes": 13051,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2021/part-00000.parquet",
+          "rows": 10,
+          "sha256": "7414ce032646809e13e21bed4f5eb05924085901309d0b69654d7ae16669b7f6"
+        }
+      ],
+      "input_sha256": "7d3def8ce9d7ba75da94fa67508afbb783ea11416c226fe801832e0187defe18",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2021",
+      "rows": 10
+    },
+    {
+      "amount_eur_total": "775909.210000",
+      "files": [
+        {
+          "bytes": 13608,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2022/part-00000.parquet",
+          "rows": 13,
+          "sha256": "62ec8f6aeac297f0bc3041fdae15cbcd7483c60076a5fb553998906e7e175e39"
+        }
+      ],
+      "input_sha256": "5957001d0b3952dfb406b88ee8f00840728042c3963976b31535cf24277e14c0",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2022",
+      "rows": 13
+    },
+    {
+      "amount_eur_total": "8789795.310000",
+      "files": [
+        {
+          "bytes": 16177,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 38,
+          "sha256": "41bfc44ba98344da2a73d1366a990fa5cf8e9c8a4a9a34563766d4843eca529e"
+        }
+      ],
+      "input_sha256": "9c650f4d70a9459fa00c82d2e38a1fd28e702bac87e83ef1a957d5ec417fd3bb",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2023",
+      "rows": 38
+    },
+    {
+      "amount_eur_total": "10985937.850000",
+      "files": [
+        {
+          "bytes": 25989,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 135,
+          "sha256": "5ec40200e91cfab7475f7b1d52d842f5738cb852a70da097d289645480378091"
+        }
+      ],
+      "input_sha256": "4275ec89e3443014dd863ceb549cc4e2ed9ada225cfa88047895b39878203c38",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2024",
+      "rows": 135
+    },
+    {
+      "amount_eur_total": "7472031.560000",
+      "files": [
+        {
+          "bytes": 22175,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-national/year=2025/part-00000.parquet",
+          "rows": 97,
+          "sha256": "ac4787b02f63b667cf714cb339c9f4fb371d16c803f3f9381c85f605d081d214"
+        }
+      ],
+      "input_sha256": "00c8ca4dffe4f4baf131de4eff3b419fd3c1c527f06997d71c036d76efde0d10",
+      "partition_id": "contract_award|placsp_sindicacion|es-national|2025",
+      "rows": 97
+    },
+    {
+      "amount_eur_total": "79914.280000",
+      "files": [
+        {
+          "bytes": 12161,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=1925/part-00000.parquet",
+          "rows": 1,
+          "sha256": "26ad06160739a4580f8c84585a723321cbd89da0a3759c0a186799c34afa1cd2"
+        }
+      ],
+      "input_sha256": "d8a841fabf85bdc5a0da33fd4f60df129594c3831cefc546824d8ed8677ca838",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|1925",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "122400.000000",
+      "files": [
+        {
+          "bytes": 12008,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2004/part-00000.parquet",
+          "rows": 1,
+          "sha256": "429c0a889473bf4c47fb4244fe42f0478843f5595a4ba11934f9c4abc100707e"
+        }
+      ],
+      "input_sha256": "545c1bcd49b552221c35975a89f73799414d7bc5607ae4eacad8caa2a8473a7f",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2004",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "759240000.000000",
+      "files": [
+        {
+          "bytes": 12046,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2013/part-00000.parquet",
+          "rows": 1,
+          "sha256": "1f1ee76db3af70a1e09fb316a8cd72c216d6fe9741c9236bb6a9b3b4b2e87391"
+        }
+      ],
+      "input_sha256": "d31e1fab23c1150c629b4b8c25ac29d25801fc0a4f5e3453d5ba2e8d013c49a9",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2013",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "423147106.770000",
+      "files": [
+        {
+          "bytes": 12672,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2014/part-00000.parquet",
+          "rows": 3,
+          "sha256": "abf955a1e1425456bfae37d41ffd7c65020212ba81fbd7a69f1b78d4e0a288c5"
+        }
+      ],
+      "input_sha256": "a4089a992a769464aa931ce079eb034dd6f7743b12f52c136cc3a538e4d0f438",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2014",
+      "rows": 3
+    },
+    {
+      "amount_eur_total": "496687.120000",
+      "files": [
+        {
+          "bytes": 12600,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2015/part-00000.parquet",
+          "rows": 3,
+          "sha256": "ba057a302215567ce0ae46bb93e852ad3c0921bcae11628bf2bfe4d5f932c782"
+        }
+      ],
+      "input_sha256": "c28ffcb2baac6b818b7e933b0c257d68c51ecaec5e59f7ad254bba68656fc97f",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2015",
+      "rows": 3
+    },
+    {
+      "amount_eur_total": "15731.430000",
+      "files": [
+        {
+          "bytes": 12085,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2016/part-00000.parquet",
+          "rows": 1,
+          "sha256": "0f8ad9af660a4995eb07c30e3cd4cf857a48e136a96f3cce1de2240f723e94df"
+        }
+      ],
+      "input_sha256": "48956fd486891ecd252af206f4c7662ae1715c1476e4ef67f128203796d9e9d6",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2016",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "3337434.000000",
+      "files": [
+        {
+          "bytes": 13041,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2017/part-00000.parquet",
+          "rows": 7,
+          "sha256": "c688460540c39cac885b6bbd08bbacc30efea7007b558c5fcfcb654d4e53f5ea"
+        }
+      ],
+      "input_sha256": "79277e90d2901edf738c5a3854d03ee11105b421561c84524d970f48c4c1dc4e",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2017",
+      "rows": 7
+    },
+    {
+      "amount_eur_total": "630724690.440000",
+      "files": [
+        {
+          "bytes": 22065,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2018/part-00000.parquet",
+          "rows": 112,
+          "sha256": "187f07496ecd639a3850df8385c6fc44f91f73bf16b7b623433a0697b32d92f5"
+        }
+      ],
+      "input_sha256": "f83ac486b87654988b6daf46ea0a987ad9f90b4e1a0c2d227d1a29c8db80018e",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2018",
+      "rows": 112
+    },
+    {
+      "amount_eur_total": "1822519032.260000",
+      "files": [
+        {
+          "bytes": 35075,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2019/part-00000.parquet",
+          "rows": 260,
+          "sha256": "3cc2af79e6b0a20592e4cb1459a1a260640a9ef9bc7850fd785818a14b73a5f5"
+        }
+      ],
+      "input_sha256": "527cae0795300afda8c3194a537484578bef2f3223b02e6d958b9039112e53b3",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2019",
+      "rows": 260
+    },
+    {
+      "amount_eur_total": "1335057653.970000",
+      "files": [
+        {
+          "bytes": 65835,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2020/part-00000.parquet",
+          "rows": 631,
+          "sha256": "ae2204f7f6b10353a6b5800a5e99fd953275a2d333058d260f4d67aa403c26e6"
+        }
+      ],
+      "input_sha256": "8f4f17d694ff69d70ba2190dc601e1f024e1ef17baa49fb886b6b927f4999c97",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2020",
+      "rows": 631
+    },
+    {
+      "amount_eur_total": "10951132052.930000",
+      "files": [
+        {
+          "bytes": 166378,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2021/part-00000.parquet",
+          "rows": 2224,
+          "sha256": "081cb0bd58e0ab1913352a5727469e00cf432fe08376710eefc907d7f760d5ea"
+        }
+      ],
+      "input_sha256": "357c3b5f3facc2fcabfc66552033fe8132f365d13e2f2c64ee14443a26837261",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2021",
+      "rows": 2224
+    },
+    {
+      "amount_eur_total": "12584362286.960000",
+      "files": [
+        {
+          "bytes": 328214,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2022/part-00000.parquet",
+          "rows": 5596,
+          "sha256": "200f365e85063e38ed6162f197a6889f2bbc171f022158f1f1555e4f10f2d038"
+        }
+      ],
+      "input_sha256": "5c7f74131ffeddb48d5dca03631aa9d2d687051012d9512764851b6b75c465b6",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2022",
+      "rows": 5596
+    },
+    {
+      "amount_eur_total": "8795868119.060000",
+      "files": [
+        {
+          "bytes": 568686,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2023/part-00000.parquet",
+          "rows": 8978,
+          "sha256": "0f8e80542b9dccfce5ec165651bf18afce1f5d40e41a42bf97e3e5558b1f5407"
+        }
+      ],
+      "input_sha256": "a9d7b6f67b7dda1c49af6d654f8c52e588b319914e1e5a9b40500afa596c44cc",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2023",
+      "rows": 8978
+    },
+    {
+      "amount_eur_total": "23662819229.210000",
+      "files": [
+        {
+          "bytes": 2278151,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2024/part-00000.parquet",
+          "rows": 32592,
+          "sha256": "fba9aa64cf942d6c0795f9f93b12164613f3607f434bebb67a034eaf260ae6b8"
+        }
+      ],
+      "input_sha256": "c23ef16e553d8ac510f4fbf49e399258d162c5dd4155e02b8ab13acab9adc97e",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2024",
+      "rows": 32592
+    },
+    {
+      "amount_eur_total": "28094966197.270000",
+      "files": [
+        {
+          "bytes": 7013508,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_award/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2025/part-00000.parquet",
+          "rows": 91038,
+          "sha256": "164b6c4fca87fb679bdf5c955f55c8cc877674b3c7e46aa33668cfba8d8ae9db"
+        }
+      ],
+      "input_sha256": "275d4fa8f897a45f07396f695cb261281c6741eb71b337e003bcee015b3b6a67",
+      "partition_id": "contract_award|placsp_sindicacion|es-territorial|2025",
+      "rows": 91038
+    },
+    {
+      "amount_eur_total": "82325.520000",
+      "files": [
+        {
+          "bytes": 11772,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2007/part-00000.parquet",
+          "rows": 1,
+          "sha256": "9c8b8e2c3f289adb746201088d04d8259eba58b49a5aa12f3a3d0852e24a4474"
+        }
+      ],
+      "input_sha256": "14e57c40038f4680329d1ffd0a873966b97927853c511646b8c6306e4940a6e3",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2007",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "73231.380000",
+      "files": [
+        {
+          "bytes": 11780,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2009/part-00000.parquet",
+          "rows": 1,
+          "sha256": "e3c988684126974fbca55e5308d7605d22bb367dac12f35c3de15091dcd13b13"
+        }
+      ],
+      "input_sha256": "f068d087f81fc11fade9eeac9f92ba615c775b0b9255c79b98ac0b7e5a296172",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2009",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "441335.630000",
+      "files": [
+        {
+          "bytes": 11764,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2012/part-00000.parquet",
+          "rows": 1,
+          "sha256": "17b745941ad6b885553f3010e0f0999754e415d433ee56e6bab31d0a037a0bab"
+        }
+      ],
+      "input_sha256": "81be6821dfc677c0687ab27f4b098e07e61ba85cb86cbe7ed8ff7094ba1b4837",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2012",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "34320.580000",
+      "files": [
+        {
+          "bytes": 11915,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2013/part-00000.parquet",
+          "rows": 2,
+          "sha256": "98779d17d346a7d2532b31624d5b89223cd42b3b698ef99d420b10f1b0474224"
+        }
+      ],
+      "input_sha256": "3ba1ff0bd14bb4b0740b62f06543b2f4181709a89cb9072631f4ac17b4fdc27a",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2013",
+      "rows": 2
+    },
+    {
+      "amount_eur_total": "228179.880000",
+      "files": [
+        {
+          "bytes": 11797,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2018/part-00000.parquet",
+          "rows": 1,
+          "sha256": "f0c5a365749bcc3b86e61ffa4ede65c186216b045ac3aff0a33f22c8309361c7"
+        }
+      ],
+      "input_sha256": "9d63d3077c3d88cb12ffdc0a3446fcf9dcffe90f32562eab5daffd05fb4417aa",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2018",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "1925451.780000",
+      "files": [
+        {
+          "bytes": 12552,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2021/part-00000.parquet",
+          "rows": 6,
+          "sha256": "48a7d16e1d237caa7a027e2b467ae7f14d04b0071f0e65e8db1ff024893b2933"
+        }
+      ],
+      "input_sha256": "c5436adccf9a82f4a2517d3ed6c3801720a5130cf35d1e173814a35288377f47",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2021",
+      "rows": 6
+    },
+    {
+      "amount_eur_total": "1246999.080000",
+      "files": [
+        {
+          "bytes": 13009,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2022/part-00000.parquet",
+          "rows": 10,
+          "sha256": "0b9b3acb9663b39a2d8574000f4ed850d169e0f2fae2c702bb80c5398504e9fc"
+        }
+      ],
+      "input_sha256": "3b5234642392c769d515f884e4d42e735c96e92a57a2c53955fc1fe8e0fd37eb",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2022",
+      "rows": 10
+    },
+    {
+      "amount_eur_total": "14460519.870000",
+      "files": [
+        {
+          "bytes": 14904,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 30,
+          "sha256": "96e3d916d6b60fdf8ebcb67439c8a29b34727d183adc03a7fa201ddd6f1487f0"
+        }
+      ],
+      "input_sha256": "717df7a97a0234b5469b0925e879ec2a1766edb13d1f4ceaf53408b8d444a5f7",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2023",
+      "rows": 30
+    },
+    {
+      "amount_eur_total": "19877934.420000",
+      "files": [
+        {
+          "bytes": 22266,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 123,
+          "sha256": "72aad940a12a7726d95447fbfd3622a0780b1f69eabc30efdb01145f67fd8df1"
+        }
+      ],
+      "input_sha256": "b94344e7721a0fc7a6dce2f211382d3764d02a9b4a121eff4f7b99e3b8fb6eef",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2024",
+      "rows": 123
+    },
+    {
+      "amount_eur_total": "30682347.160000",
+      "files": [
+        {
+          "bytes": 45658,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-national/year=2025/part-00000.parquet",
+          "rows": 646,
+          "sha256": "355049a8c7b43f677182c3dba71d9b746726e8a17befc69c78aeb014c0a54b0c"
+        }
+      ],
+      "input_sha256": "3cbb4590cc9015250ff7509ebf430ff55d3a314a9e92249588387dc5829b39c4",
+      "partition_id": "contract_notice|placsp_sindicacion|es-national|2025",
+      "rows": 646
+    },
+    {
+      "amount_eur_total": "79914.280000",
+      "files": [
+        {
+          "bytes": 11934,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=1925/part-00000.parquet",
+          "rows": 1,
+          "sha256": "1752ed8fa483028f6abb5a87a05f02cfc40694e5d00b6d1670ac4609cc95c4d0"
+        }
+      ],
+      "input_sha256": "94d620dcf6bf2f2037244c5ab1f098bfc10cd43a77cf004b0449b6680f824eae",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|1925",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "122400.000000",
+      "files": [
+        {
+          "bytes": 11826,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2004/part-00000.parquet",
+          "rows": 1,
+          "sha256": "e81e734c36efba12a4d6255ed60b0654059a86e6dc6eef42b03adc4625bdb36d"
+        }
+      ],
+      "input_sha256": "03fa9761c50aff1a2506fd4754feb27ef165a7938f25d2b7027d0c7609b07dbe",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2004",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "759240000.000000",
+      "files": [
+        {
+          "bytes": 11804,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2013/part-00000.parquet",
+          "rows": 1,
+          "sha256": "c92a1b7732d6dda7b9dc906d955074ee38646930eb93b46d7283f3cf3afaeeea"
+        }
+      ],
+      "input_sha256": "118e8dcbb40d7752633a6b992adeae636cf176e23a858da7fcd15932f84add8b",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2013",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "609087540.930000",
+      "files": [
+        {
+          "bytes": 12292,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2014/part-00000.parquet",
+          "rows": 3,
+          "sha256": "7deebf0be7df94c1768ef1c037ba3017fd83303b74a312b7e5b088f95696d714"
+        }
+      ],
+      "input_sha256": "7a76f8f544e114846481331f49a88f75f5e7cdc6e66ec6b7fed821eedf58e6a2",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2014",
+      "rows": 3
+    },
+    {
+      "amount_eur_total": "496687.120000",
+      "files": [
+        {
+          "bytes": 12255,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2015/part-00000.parquet",
+          "rows": 3,
+          "sha256": "4028359205c016f9f08200172be7e315973a68c2dec83a7391f7686d70b4afac"
+        }
+      ],
+      "input_sha256": "746eaa8eedc6113dd11fea51c542162dca60414ca9762741db953fb5836fcb12",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2015",
+      "rows": 3
+    },
+    {
+      "amount_eur_total": "43000.000000",
+      "files": [
+        {
+          "bytes": 11903,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2016/part-00000.parquet",
+          "rows": 1,
+          "sha256": "427e8b8c591c8d6c60863c61e8d38c3dc28c2faeca28f81dd2096101bdcc8e39"
+        }
+      ],
+      "input_sha256": "1ab1ed347844ed099bdb60266ba32b7735c9ac02bd82a713784a46e283dff0f6",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2016",
+      "rows": 1
+    },
+    {
+      "amount_eur_total": "6248251.140000",
+      "files": [
+        {
+          "bytes": 12914,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2017/part-00000.parquet",
+          "rows": 8,
+          "sha256": "e6babd79938e4f4f065df1b6a170442b62e1314ed0543deccbb19515a0d9f6e4"
+        }
+      ],
+      "input_sha256": "d3a8b1a012430b9e7feffe008800807123e8ddc03a159bc35b6b7755e9e0890d",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2017",
+      "rows": 8
+    },
+    {
+      "amount_eur_total": "656834025.030000",
+      "files": [
+        {
+          "bytes": 18607,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2018/part-00000.parquet",
+          "rows": 63,
+          "sha256": "7f0bf69318c87c73a92dfe99f249f67fb17a332835d0af34baf75818b7bb81d0"
+        }
+      ],
+      "input_sha256": "af4ce444ceaa88810964ca2ba6c495255b87055ec60ce17ad221ef8dee08ce4f",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2018",
+      "rows": 63
+    },
+    {
+      "amount_eur_total": "2708268241.820000",
+      "files": [
+        {
+          "bytes": 28197,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2019/part-00000.parquet",
+          "rows": 169,
+          "sha256": "3e27a3bb86ecc1e35d752783ee93ebe443aeb2a35561b8d126163f23736795a8"
+        }
+      ],
+      "input_sha256": "dec8c9f57561d54075c00c8578824f801cf726a5b81e25e686dbb3bcf25e4e44",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2019",
+      "rows": 169
+    },
+    {
+      "amount_eur_total": "2748570344.020000",
+      "files": [
+        {
+          "bytes": 50948,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2020/part-00000.parquet",
+          "rows": 409,
+          "sha256": "24fba12d42620446ff377bf7df92eee42aa6bb185fac7dfa2df45bc709edebda"
+        }
+      ],
+      "input_sha256": "70e7aad8f509aeb07c3bf933c3787560d077012f7ea83dc67cec4882d5989c80",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2020",
+      "rows": 409
+    },
+    {
+      "amount_eur_total": "12642343063.340000",
+      "files": [
+        {
+          "bytes": 113157,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2021/part-00000.parquet",
+          "rows": 1123,
+          "sha256": "67233aa18ee7863a42e255474d2f9760e9465c468214f8a997858cd74a88add2"
+        }
+      ],
+      "input_sha256": "cf999300f4813c23e9a7cef5282ac0569b4c61b3480e63b5b7bf59698a551d5d",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2021",
+      "rows": 1123
+    },
+    {
+      "amount_eur_total": "16046173212.880000",
+      "files": [
+        {
+          "bytes": 207344,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2022/part-00000.parquet",
+          "rows": 2253,
+          "sha256": "3039ad48ed3fb95c9077ed74c6db4560df7c6756c25c2fd49f7659d70e19ca33"
+        }
+      ],
+      "input_sha256": "0a65fd3183704ffd8cd3ca6293e44f7d4d253f12a1a701139518318ed99642de",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2022",
+      "rows": 2253
+    },
+    {
+      "amount_eur_total": "15675552564.090000",
+      "files": [
+        {
+          "bytes": 379222,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2023/part-00000.parquet",
+          "rows": 4257,
+          "sha256": "10b1d5507a51ad52e1cae77158fa64090a7bc207b4e06db3a479c9570e54b729"
+        }
+      ],
+      "input_sha256": "7e767c5e6459fd55f34772f3657711b95550a8211bef5268b1107c1b159a1e7d",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2023",
+      "rows": 4257
+    },
+    {
+      "amount_eur_total": "32826242608.990000",
+      "files": [
+        {
+          "bytes": 1703034,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2024/part-00000.parquet",
+          "rows": 20791,
+          "sha256": "e2752bf8008c7b374181606a23961fdf8ddb16395e34b3017319dbc7ee7506dd"
+        }
+      ],
+      "input_sha256": "c83fce839c001025a5a4c78af9d373b30f60f0e2e4ba69f1fad06c64dc94015b",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2024",
+      "rows": 20791
+    },
+    {
+      "amount_eur_total": "97353511650.880000",
+      "files": [
+        {
+          "bytes": 7335172,
+          "path": "lane=public_money_facts/snapshot_date=2025-03-31/fact_kind=contract_notice/source_id=placsp_sindicacion/jurisdiction=es-territorial/year=2025/part-00000.parquet",
+          "rows": 91651,
+          "sha256": "0a21f51491883d26a197c2462f0c764c056f5d0d857b954fc16acd9c10722c41"
+        }
+      ],
+      "input_sha256": "d26a2f4faf7ca7ef50d00b3787f115eb5bd375f4df24c6a431efea4e6692e2b5",
+      "partition_id": "contract_notice|placsp_sindicacion|es-territorial|2025",
+      "rows": 91651
+    }
+  ],
+  "performance": {
+    "batch_rows": 10000,
+    "distinct_index_bytes": 12779520,
+    "distinct_index_storage": "temporary_sqlite_disk",
+    "max_peak_rss_mb": 1536.0,
+    "peak_rss_mb": 285.609
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "root_name": "data",
+  "schema_version": "public_money_partition_validation_v1",
+  "status": "ok",
+  "totals": {
+    "amount_eur_by_fact_kind": {
+      "contract_award": "89093709352.750000",
+      "contract_notice": "182101866149.820000"
+    },
+    "amount_eur_total": "271195575502.570000",
+    "amount_rows": 249875,
+    "contract_award_rows": 141747,
+    "contract_award_table_rows": 141747,
+    "contract_notice_rows": 121555,
+    "contract_table_rows": 121555,
+    "counterparty_identifier_rows": 128849,
+    "counterparty_name_rows": 128849,
+    "counterparty_not_available_rows": 12898,
+    "counterparty_published_legal_entity_rows": 117531,
+    "counterparty_published_natural_person_rows": 8260,
+    "counterparty_published_rows": 128849,
+    "counterparty_published_unclassified_rows": 3058,
+    "distinct_source_records": 121555,
+    "eur_rows": 249875,
+    "files": 50,
+    "joined_rows": 263302,
+    "money_table_rows": 263302,
+    "nonnegative_amount_rows": 249875,
+    "parquet_bytes": 20803781,
+    "partitions": 50,
+    "private_token_findings": 0,
+    "rows": 263302,
+    "source_record_rows": 263302,
+    "source_url_rows": 263302,
+    "subsidy_record_rows": 0,
+    "subsidy_table_rows": 0,
+    "unknown_year_rows": 0
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+  "checks": {
+    "bounded_peak_rss": true,
+    "bytes_match_release": true,
+    "files_match_release": true,
+    "foreign_keys_valid": true,
+    "identity_unique_when_declared": true,
+    "logical_rows_exact": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "rows_match_release": true,
+    "sqlite_integrity": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "corpus_id": "actor_mandates",
+  "input_file_rows_total": 88031,
+  "logical_rows_sha256": "eb7fdb8e81a28da840074f15dbb895abbcc2210ddfea655cd08b4c7dfa272628",
+  "output": "actor-mandates-from-hf-623b4a5a-logical-replay.sqlite",
+  "performance": {
+    "batch_rows": 10000,
+    "elapsed_seconds": 2.895059,
+    "max_peak_rss_mb": 1536.0,
+    "peak_rss_mb": 229.75
+  },
+  "public_domain_personal_information_retained": true,
+  "release_id": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+  "schema_version": "restored_scale_sqlite_rebuild_v1",
+  "selection_mode": "explicit_immutable_snapshot",
+  "snapshot_date": "2026-08-12",
+  "sqlite_sha256": "61cfdf8e90719ccf66c4867058420502be3a6a26bdca41f0092075e604b24a27",
+  "status": "ok",
+  "table": "corpus_actor_mandates",
+  "totals": {
+    "bytes": 9236064,
+    "distinct_identity": 88031,
+    "files": 108,
+    "rows": 88031,
+    "sqlite_bytes": 71168000
+  }
+}

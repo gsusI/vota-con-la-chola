@@ -306,6 +306,8 @@ bdns_bulk_max_pages_per_partition := env_var_or_default("BDNS_BULK_MAX_PAGES_PER
 bdns_bulk_expand_max_pages_per_partition := env_var_or_default("BDNS_BULK_EXPAND_MAX_PAGES_PER_PARTITION", "0")
 bdns_bulk_workers := env_var_or_default("BDNS_BULK_WORKERS", "2")
 bdns_bulk_claim_size := env_var_or_default("BDNS_BULK_CLAIM_SIZE", "4")
+bdns_bulk_min_free_bytes := env_var_or_default("BDNS_BULK_MIN_FREE_BYTES", "10737418240")
+bdns_bulk_sqlite_reserve_multiplier := env_var_or_default("BDNS_BULK_SQLITE_RESERVE_MULTIPLIER", "2.0")
 bdns_bulk_request_interval := env_var_or_default("BDNS_BULK_REQUEST_INTERVAL", "2.0")
 bdns_bulk_failure_window := env_var_or_default("BDNS_BULK_FAILURE_WINDOW", "20")
 bdns_bulk_version_backfill_max_pages := env_var_or_default("BDNS_BULK_VERSION_BACKFILL_MAX_PAGES", "0")
@@ -362,7 +364,11 @@ object_store_manifest_out := env_var_or_default("OBJECT_STORE_MANIFEST_OUT", "et
 object_store_replication_report_out := env_var_or_default("OBJECT_STORE_REPLICATION_REPORT_OUT", "etl/data/published/content-object-replication-latest.json")
 object_store_restore_report_out := env_var_or_default("OBJECT_STORE_RESTORE_REPORT_OUT", "etl/data/published/object-store-restore-drill-latest.json")
 object_store_replication_limit := env_var_or_default("OBJECT_STORE_REPLICATION_LIMIT", "0")
+object_store_replication_workers := env_var_or_default("OBJECT_STORE_REPLICATION_WORKERS", "8")
 object_store_restore_sample_size := env_var_or_default("OBJECT_STORE_RESTORE_SAMPLE_SIZE", "100")
+object_store_restore_workers := env_var_or_default("OBJECT_STORE_RESTORE_WORKERS", "8")
+object_store_restore_all := env_var_or_default("OBJECT_STORE_RESTORE_ALL", "0")
+object_store_restore_min_free_bytes := env_var_or_default("OBJECT_STORE_RESTORE_MIN_FREE_BYTES", "10737418240")
 integrity_signal_threshold_eur := env_var_or_default("INTEGRITY_SIGNAL_THRESHOLD_EUR", "15000")
 integrity_signal_min_records := env_var_or_default("INTEGRITY_SIGNAL_MIN_RECORDS", "3")
 integrity_signal_max_signals := env_var_or_default("INTEGRITY_SIGNAL_MAX_SIGNALS", "0")
@@ -1062,6 +1068,22 @@ hf_raw_max_files_per_block := env_var_or_default("HF_RAW_MAX_FILES_PER_BLOCK", "
 hf_raw_include_manual := env_var_or_default("HF_RAW_INCLUDE_MANUAL", "0")
 hf_verify_timeout := env_var_or_default("HF_VERIFY_TIMEOUT", "20")
 hf_verify_out := env_var_or_default("HF_VERIFY_OUT", "")
+hf_scale_registry := env_var_or_default("HF_SCALE_REGISTRY", "docs/etl/real-corpus-registry.json")
+hf_scale_readiness := env_var_or_default("HF_SCALE_READINESS", "etl/data/published/scale-readiness-latest.json")
+hf_scale_report_out := env_var_or_default("HF_SCALE_REPORT_OUT", "")
+hf_scale_verify_out := env_var_or_default("HF_SCALE_VERIFY_OUT", "")
+hf_scale_python := env_var_or_default("HF_SCALE_PYTHON", "python3")
+hf_scale_restore_destination := env_var_or_default("HF_SCALE_RESTORE_DESTINATION", "etl/data/restored/hf-scale")
+hf_scale_restore_corpus_ids := env_var_or_default("HF_SCALE_RESTORE_CORPUS_IDS", "")
+hf_scale_restore_snapshot_path := env_var_or_default("HF_SCALE_RESTORE_SNAPSHOT_PATH", "")
+hf_scale_restore_workers := env_var_or_default("HF_SCALE_RESTORE_WORKERS", "8")
+hf_scale_restore_min_free_bytes := env_var_or_default("HF_SCALE_RESTORE_MIN_FREE_BYTES", "10737418240")
+hf_scale_restore_report_out := env_var_or_default("HF_SCALE_RESTORE_REPORT_OUT", "")
+hf_scale_restore_validation_out := env_var_or_default("HF_SCALE_RESTORE_VALIDATION_OUT", "")
+hf_scale_restore_validation_max_rss_mb := env_var_or_default("HF_SCALE_RESTORE_VALIDATION_MAX_RSS_MB", "1536")
+hf_scale_rebuild_corpus_id := env_var_or_default("HF_SCALE_REBUILD_CORPUS_ID", "actor_mandates")
+hf_scale_rebuild_output := env_var_or_default("HF_SCALE_REBUILD_OUTPUT", "etl/data/rebuilt/scale-origin.sqlite")
+hf_scale_rebuild_report_out := env_var_or_default("HF_SCALE_REBUILD_REPORT_OUT", "")
 citizen_preset_contract_fixture := env_var_or_default("CITIZEN_PRESET_CONTRACT_FIXTURE", "tests/fixtures/citizen_preset_hash_matrix.json")
 citizen_preset_contract_out := env_var_or_default("CITIZEN_PRESET_CONTRACT_OUT", "")
 citizen_preset_parity_source := env_var_or_default("CITIZEN_PRESET_PARITY_SOURCE", "ui/citizen/preset_codec.js")
@@ -1800,6 +1822,54 @@ etl-verify-hf-quality:
   if [ -n "{{hf_verify_out}}" ]; then out_arg="--json-out {{hf_verify_out}}"; fi; \
   docker compose run --rm --build etl "python3 scripts/verify_hf_snapshot_quality.py --dataset-repo {{hf_dataset_repo_id}} --snapshot-date {{snapshot_date}} --timeout {{hf_verify_timeout}} ${out_arg}"
 
+etl-scale-origin-hf-dry-run:
+  just etl-scale-readiness
+  just privacy-check-public-artifacts
+  out_arg=""; \
+  if [ -n "{{hf_scale_report_out}}" ]; then out_arg="--report-out {{hf_scale_report_out}}"; fi; \
+  {{hf_scale_python}} scripts/publicar_hf_scale_snapshot.py --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} ${out_arg}
+
+etl-scale-origin-hf-publish:
+  just etl-scale-readiness
+  just privacy-check-public-artifacts
+  out_arg=""; \
+  if [ -n "{{hf_scale_report_out}}" ]; then out_arg="--report-out {{hf_scale_report_out}}"; fi; \
+  {{hf_scale_python}} scripts/publicar_hf_scale_snapshot.py --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --publish ${out_arg}
+
+etl-scale-origin-hf-verify:
+  out_arg=""; \
+  if [ -n "{{hf_scale_verify_out}}" ]; then out_arg="--json-out {{hf_scale_verify_out}}"; fi; \
+  {{hf_scale_python}} scripts/verify_hf_scale_origin.py --dataset-repo {{hf_dataset_repo_id}} --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --timeout {{hf_verify_timeout}} ${out_arg}
+
+etl-scale-origin-hf-restore:
+  corpus_arg=""; \
+  snapshot_arg=""; \
+  report_arg=""; \
+  if [ -n "{{hf_scale_restore_corpus_ids}}" ]; then corpus_arg="--corpus-ids {{hf_scale_restore_corpus_ids}}"; fi; \
+  if [ -n "{{hf_scale_restore_snapshot_path}}" ]; then snapshot_arg="--snapshot-path {{hf_scale_restore_snapshot_path}}"; fi; \
+  if [ -n "{{hf_scale_restore_report_out}}" ]; then report_arg="--report-out {{hf_scale_restore_report_out}}"; fi; \
+  python3 scripts/restore_hf_scale_origin.py --dataset-repo {{hf_dataset_repo_id}} --destination {{hf_scale_restore_destination}} --workers {{hf_scale_restore_workers}} --timeout {{hf_verify_timeout}} --min-free-bytes {{hf_scale_restore_min_free_bytes}} ${snapshot_arg} ${corpus_arg} ${report_arg}
+
+etl-scale-origin-hf-validate-restored:
+  corpus_arg=""; \
+  report_arg=""; \
+  if [ -n "{{hf_scale_restore_corpus_ids}}" ]; then corpus_arg="--corpus-ids {{hf_scale_restore_corpus_ids}}"; fi; \
+  if [ -n "{{hf_scale_restore_validation_out}}" ]; then report_arg="--report-out {{hf_scale_restore_validation_out}}"; fi; \
+  uv run --no-project --with pyarrow python scripts/validate_restored_scale_origin.py --root {{hf_scale_restore_destination}} --registry {{hf_scale_registry}} --max-peak-rss-mb {{hf_scale_restore_validation_max_rss_mb}} ${corpus_arg} ${report_arg} --enforce
+
+etl-scale-origin-hf-restore-validate:
+  just etl-scale-origin-hf-restore
+  just etl-scale-origin-hf-validate-restored
+
+etl-scale-origin-sqlite-rebuild:
+  report_arg=""; \
+  if [ -n "{{hf_scale_rebuild_report_out}}" ]; then report_arg="--report-out {{hf_scale_rebuild_report_out}}"; fi; \
+  uv run --no-project --with pyarrow python scripts/rebuild_restored_scale_sqlite.py --root {{hf_scale_restore_destination}} --corpus-id {{hf_scale_rebuild_corpus_id}} --output {{hf_scale_rebuild_output}} --max-peak-rss-mb {{hf_scale_restore_validation_max_rss_mb}} ${report_arg}
+
+etl-scale-origin-hf-restore-bdns:
+  HF_SCALE_RESTORE_CORPUS_IDS=bdns_public_money just etl-scale-origin-hf-restore
+  docker compose run --rm etl "python3 scripts/validate_semantic_partitions.py --lane public_money_facts --root {{hf_scale_restore_destination}}/corpora/bdns_public_money/data --manifest {{hf_scale_restore_destination}}/corpora/bdns_public_money/manifest.json --min-rows 1000000 --max-peak-rss-mb 1024 --enforce"
+
 etl-publish-hf-verify:
   just etl-publish-hf
   just etl-verify-hf-quality
@@ -2000,11 +2070,21 @@ etl-scale-eurostat-indicators-replay-validate:
 etl-scale-inventory-documents:
   python3 scripts/inventory_document_corpus.py --root etl/data/raw --workers {{scale_document_workers}}
 
+etl-scale-audit-document-provenance:
+  python3 scripts/audit_document_provenance.py --enforce-integrity
+
+etl-scale-reconcile-documents:
+  just etl-scale-inventory-documents
+  just etl-scale-audit-document-provenance
+
 etl-scale-benchmark-ocr-routing:
   python3 scripts/benchmark_pdf_ocr_routing.py --root etl/data/raw --manifest etl/data/manifests/real-document-format-inventory.jsonl --workers 4 --max-pages 20
 
 etl-scale-audit-member-votes:
   python3 scripts/audit_large_vote_snapshot.py --snapshot {{scale_member_vote_snapshot}} --shard-manifest {{scale_member_vote_shard_manifest_out}} --out {{scale_member_vote_audit_out}}
+
+etl-scale-audit-vote-source-urls:
+  python3 scripts/audit_vote_source_urls.py --report-out docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/member-vote-source-url-lineage-offline-latest.json --enforce-integrity
 
 etl-scale-audit-vote-db:
   python3 scripts/audit_vote_database.py --db {{db_path}} --out {{scale_vote_db_audit_out}}
@@ -2068,8 +2148,11 @@ etl-scale-bdns-bulk-enqueue-daily:
 etl-scale-bdns-bulk-expand-daily:
   python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_enqueue_report}} expand-daily --max-pages-per-partition {{bdns_bulk_expand_max_pages_per_partition}} --request-interval-seconds {{bdns_bulk_request_interval}}
 
+etl-scale-bdns-storage-preflight:
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} storage-preflight --raw-root {{bdns_bulk_raw_root}} --claim-size {{bdns_bulk_claim_size}} --min-free-bytes {{bdns_bulk_min_free_bytes}} --sqlite-reserve-multiplier {{bdns_bulk_sqlite_reserve_multiplier}}
+
 etl-scale-bdns-bulk-work:
-  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} work --raw-root {{bdns_bulk_raw_root}} --workers {{bdns_bulk_workers}} --claim-size {{bdns_bulk_claim_size}} --request-interval-seconds {{bdns_bulk_request_interval}} --failure-window-size {{bdns_bulk_failure_window}}
+  python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} work --raw-root {{bdns_bulk_raw_root}} --workers {{bdns_bulk_workers}} --claim-size {{bdns_bulk_claim_size}} --min-free-bytes {{bdns_bulk_min_free_bytes}} --sqlite-reserve-multiplier {{bdns_bulk_sqlite_reserve_multiplier}} --request-interval-seconds {{bdns_bulk_request_interval}} --failure-window-size {{bdns_bulk_failure_window}}
 
 etl-scale-bdns-bulk-report:
   python3 scripts/ingest_bdns_bulk.py --db {{db_path}} --pipeline-id {{bdns_bulk_pipeline_id}} --report-out {{bdns_bulk_run_report}} report
@@ -2138,13 +2221,15 @@ etl-scale-queue-status:
   python3 scripts/report_pipeline_work_queue.py --db {{db_path}} --pipeline-id '{{scale_queue_pipeline_id}}' --out {{scale_queue_health_out}}
 
 etl-object-store-replicate-dry-run:
-  python3 scripts/replicate_content_objects.py --db {{db_path}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --limit {{object_store_replication_limit}} --manifest-out {{object_store_manifest_out}} --report-out {{object_store_replication_report_out}} --dry-run
+  python3 scripts/replicate_content_objects.py --db {{db_path}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --limit {{object_store_replication_limit}} --workers {{object_store_replication_workers}} --manifest-out {{object_store_manifest_out}} --report-out {{object_store_replication_report_out}} --dry-run
 
 etl-object-store-replicate:
-  python3 scripts/replicate_content_objects.py --db {{db_path}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --limit {{object_store_replication_limit}} --manifest-out {{object_store_manifest_out}} --report-out {{object_store_replication_report_out}}
+  python3 scripts/replicate_content_objects.py --db {{db_path}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --limit {{object_store_replication_limit}} --workers {{object_store_replication_workers}} --manifest-out {{object_store_manifest_out}} --report-out {{object_store_replication_report_out}}
 
 etl-object-store-restore-drill:
-  python3 scripts/verify_object_store_restore.py --manifest {{object_store_manifest_out}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --sample-size {{object_store_restore_sample_size}} --report-out {{object_store_restore_report_out}}
+  all_arg=""; \
+  if [ "{{object_store_restore_all}}" = "1" ]; then all_arg="--all"; fi; \
+  python3 scripts/verify_object_store_restore.py --manifest {{object_store_manifest_out}} --backend {{object_store_backend}} --filesystem-root {{object_store_filesystem_root}} --sample-size {{object_store_restore_sample_size}} --workers {{object_store_restore_workers}} --min-free-bytes {{object_store_restore_min_free_bytes}} --report-out {{object_store_restore_report_out}} ${all_arg}
 
 etl-integrity-procurement-detect-dry-run:
   python3 scripts/detect_procurement_integrity_signals.py --db {{db_path}} --threshold-eur {{integrity_signal_threshold_eur}} --min-records {{integrity_signal_min_records}} --max-signals {{integrity_signal_max_signals}} --report-out {{integrity_signal_internal_report_out}} --dry-run

@@ -1,0 +1,65 @@
+{
+  "schema_version": "hf_scale_origin_clean_room_drill_v1",
+  "generated_at": "2026-08-12T16:16:18Z",
+  "status": "ok",
+  "corpus_id": "bdns_public_money",
+  "snapshot_date": "2026-08-12",
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "remote_manifest_sha256": "10ef14326dc9eb95d81fb9debf9db3c49a0d0132846fb914409007e4a87b5faf",
+  "restore": {
+    "destination": "etl/data/restored/hf-scale-bdns-cleanroom-20260812",
+    "destination_started_empty": true,
+    "declared_files": 20,
+    "declared_bytes": 43042223,
+    "downloaded_files": 20,
+    "downloaded_bytes": 43042223,
+    "reused_files": 0,
+    "checksum_verification": "passed",
+    "evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-clean-restore-bdns-20260812.json"
+  },
+  "validation_environment": {
+    "workspace": "isolated_system_temporary_directory",
+    "project_environment_loaded": false,
+    "dependency_environment": "uv_no_project_isolated_cache",
+    "copied_code_only": [
+      "scripts/validate_semantic_partitions.py",
+      "publicdata_publish"
+    ],
+    "runtime_dependency": "pyarrow"
+  },
+  "validation": {
+    "rows": 1360382,
+    "partitions": 1,
+    "parquet_files": 14,
+    "parquet_bytes": 42955289,
+    "source_url_rows": 1360382,
+    "source_record_rows": 1360382,
+    "counterparty_name_rows": 1360382,
+    "counterparty_identifier_rows": 163270,
+    "private_token_findings": 0,
+    "peak_rss_mb": 350.484,
+    "max_peak_rss_mb": 1024.0,
+    "status": "ok",
+    "evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-clean-restore-bdns-validation-20260812.json"
+  },
+  "policy": {
+    "official_real_records_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "public_domain_personal_information_retained": true
+  },
+  "checks": {
+    "empty_destination": true,
+    "all_selected_files_downloaded": true,
+    "remote_bytes_and_checksums_verified": true,
+    "isolated_validator_code_copy": true,
+    "isolated_dependency_environment": true,
+    "full_row_validation_passed": true,
+    "minimum_million_rows_passed": true,
+    "bounded_memory_passed": true,
+    "clean_room_restore_passed": true
+  },
+  "limitations": [
+    "This proves analytical artifact recovery, not reconstruction of the source SQLite database.",
+    "The lane remains unpromoted because historical representativeness and a second-snapshot revision delta are open."
+  ]
+}

@@ -78,12 +78,20 @@ class PublicarHFSnapshotTests(unittest.TestCase):
             (published_dir / "accountability-evidence-api-latest.json").write_text(
                 "{}", encoding="utf-8"
             )
+            (published_dir / "data-integrity-latest.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            (published_dir / "scale-readiness-latest.json").write_text(
+                "{}", encoding="utf-8"
+            )
 
             files = collect_published_files(published_dir, "2026-02-12")
             names = [path.name for path in files]
             self.assertIn("accountability-ledger-latest.json", names)
             self.assertIn("accountability-dossiers-latest.json", names)
             self.assertIn("accountability-evidence-api-latest.json", names)
+            self.assertIn("data-integrity-latest.json", names)
+            self.assertIn("scale-readiness-latest.json", names)
             self.assertIn("votaciones-es-2026-02-12.json.gz", names)
             self.assertNotIn("votaciones-es-2026-02-12.json", names)
             self.assertIn("representantes-es-2026-02-12.json", names)
