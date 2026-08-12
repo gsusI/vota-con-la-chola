@@ -131,6 +131,8 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 
 - MTurk manual review workflow: `skills/mturk-review-loop/SKILL.md`
 - Use this skill for batch prep/apply/progress on `topic_evidence_reviews` (`congreso_intervenciones`).
+- Durable agent knowledge base: `project_kb/README.md`.
+- Use it for stable project learnings, decisions, workflows, and gotchas. Do not duplicate roadmap or tracker authority there.
 
 ## Working Agreement
 
