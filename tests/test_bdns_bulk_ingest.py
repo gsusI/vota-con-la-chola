@@ -218,6 +218,29 @@ class TestBdnsBulkIngest(unittest.TestCase):
                 expected_page_size=2,
             )
 
+    def test_empty_official_page_is_valid(self) -> None:
+        payload = json.dumps(
+            {
+                "content": [],
+                "number": 0,
+                "size": 1000,
+                "numberOfElements": 0,
+                "totalElements": 0,
+                "totalPages": 0,
+                "first": True,
+                "last": True,
+            }
+        ).encode("utf-8")
+        page = parse_bdns_page(
+            payload,
+            feed_url=build_bdns_concessions_url(page=0, page_size=1000),
+            content_type="application/json",
+            expected_page=0,
+            expected_page_size=1000,
+        )
+        self.assertEqual(page.records, [])
+        self.assertEqual(page.total_elements, 0)
+
     def test_two_page_queue_persists_and_reconciles_idempotently(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

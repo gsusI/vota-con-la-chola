@@ -16,6 +16,7 @@ from collections import deque
 from collections.abc import Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -70,6 +71,8 @@ class PageOutcome:
     page: BdnsPage | None
     error: str | None
     retryable: bool
+    partition_id: int | None = None
+    source_page_number: int | None = None
 
 
 class RequestPacer:
@@ -300,6 +303,275 @@ def enqueue_bdns_pages(
     }
 
 
+def _parse_iso_date(raw: str, *, field: str) -> date:
+    try:
+        return date.fromisoformat(str(raw))
+    except ValueError as exc:
+        raise ValueError(f"{field} must use YYYY-MM-DD") from exc
+
+
+def _api_date(value: date) -> str:
+    return value.strftime("%d/%m/%Y")
+
+
+def enqueue_bdns_daily_partitions(
+    conn: sqlite3.Connection,
+    *,
+    pipeline_id: str,
+    snapshot_date: str,
+    date_from: str,
+    date_to: str,
+    page_size: int,
+    target_records: int,
+    max_partitions: int,
+    max_pages_per_partition: int,
+    timeout: int,
+    request_interval_seconds: float,
+    fetch_bytes: Any = http_get_bytes,
+) -> dict[str, Any]:
+    """Discover complete daily windows until the real-row target is reached."""
+
+    if _existing_bulk_run(conn, pipeline_id) is not None:
+        raise RuntimeError(
+            f"partitioned pipeline_id already exists; use its durable queue: {pipeline_id}"
+        )
+    start = _parse_iso_date(date_from, field="date_from")
+    end = _parse_iso_date(date_to, field="date_to")
+    if start > end:
+        raise ValueError("date_from must be <= date_to")
+    if page_size < 1 or page_size > 1_000:
+        raise ValueError("page_size must be between 1 and 1000")
+    if target_records < 1:
+        raise ValueError("target_records must be >= 1")
+    if max_partitions < 1:
+        raise ValueError("max_partitions must be >= 1")
+    if max_pages_per_partition < 1:
+        raise ValueError("max_pages_per_partition must be >= 1")
+
+    discovery_url = build_bdns_concessions_url(page=0, page_size=1)
+    payload, content_type = fetch_bytes(discovery_url, timeout)
+    global_page = parse_bdns_page(
+        payload,
+        feed_url=discovery_url,
+        content_type=content_type,
+        expected_page=0,
+        expected_page_size=1,
+    )
+    pacer = RequestPacer(request_interval_seconds)
+    partitions: list[dict[str, object]] = []
+    current = end
+    selected_records = 0
+    while (
+        current >= start
+        and len(partitions) < max_partitions
+        and selected_records < target_records
+    ):
+        api_token = _api_date(current)
+        source_url = build_bdns_concessions_url(
+            page=0,
+            page_size=1,
+            date_from=api_token,
+            date_to=api_token,
+        )
+        pacer.wait()
+        day_payload, day_content_type = fetch_bytes(source_url, timeout)
+        day_page = parse_bdns_page(
+            day_payload,
+            feed_url=source_url,
+            content_type=day_content_type,
+            expected_page=0,
+            expected_page_size=1,
+        )
+        day_iso = current.isoformat()
+        if day_page.records:
+            observed_date = _date_token(day_page.records[0].get("concession_date"))
+            if observed_date != day_iso:
+                raise RuntimeError(
+                    "BDNS daily discovery escaped its filter: "
+                    f"expected={day_iso} observed={observed_date or 'missing'}"
+                )
+        total_pages = (day_page.total_elements + page_size - 1) // page_size
+        remaining_records = target_records - selected_records
+        pages_needed = (remaining_records + page_size - 1) // page_size
+        pages_enqueued = min(
+            total_pages,
+            max_pages_per_partition,
+            pages_needed,
+        )
+        selected_partition_records = min(
+            day_page.total_elements,
+            pages_enqueued * page_size,
+        )
+        partitions.append(
+            {
+                "partition_key": f"date:{day_iso}",
+                "date_from": day_iso,
+                "date_to": day_iso,
+                "source_url": build_bdns_concessions_url(
+                    page=0,
+                    page_size=page_size,
+                    date_from=api_token,
+                    date_to=api_token,
+                ),
+                "api_date": api_token,
+                "total_elements": day_page.total_elements,
+                "total_pages": total_pages,
+                "pages_enqueued": pages_enqueued,
+                "partition_complete": pages_enqueued == total_pages,
+            }
+        )
+        selected_records += selected_partition_records
+        current -= timedelta(days=1)
+
+    if selected_records < target_records:
+        raise RuntimeError(
+            "BDNS partition discovery did not reach target_records: "
+            f"selected={selected_records} target={target_records} "
+            f"partitions={len(partitions)}"
+        )
+
+    total_pages_discovered = sum(int(item["total_pages"]) for item in partitions)
+    selected_pages = sum(int(item["pages_enqueued"]) for item in partitions)
+    now_iso = now_utc_iso()
+    ingestion_run_id = start_run(conn, SOURCE_ID, discovery_url)
+    row = conn.execute(
+        """
+        INSERT INTO money_bulk_runs (
+          pipeline_id, ingestion_run_id, source_id, source_url, snapshot_date,
+          page_size, total_elements_discovered, total_pages_discovered,
+          pages_enqueued, limited_run, state, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 'running', ?, ?)
+        RETURNING money_bulk_run_id
+        """,
+        (
+            pipeline_id,
+            ingestion_run_id,
+            SOURCE_ID,
+            discovery_url,
+            snapshot_date,
+            page_size,
+            selected_records,
+            total_pages_discovered,
+            selected_pages,
+            now_iso,
+            now_iso,
+        ),
+    ).fetchone()
+    bulk_run_id = int(row["money_bulk_run_id"])
+    for partition in partitions:
+        cursor = conn.execute(
+            """
+            INSERT INTO money_bulk_partitions (
+              money_bulk_run_id, partition_key, source_url, filter_json,
+              date_from, date_to, total_elements_discovered,
+              total_pages_discovered, pages_enqueued, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                bulk_run_id,
+                partition["partition_key"],
+                partition["source_url"],
+                stable_json(
+                    {
+                        "fechaDesde": partition["api_date"],
+                        "fechaHasta": partition["api_date"],
+                    }
+                ),
+                partition["date_from"],
+                partition["date_to"],
+                partition["total_elements"],
+                partition["pages_enqueued"],
+                partition["total_pages"],
+                now_iso,
+                now_iso,
+            ),
+        )
+        partition["money_bulk_partition_id"] = int(cursor.lastrowid)
+    conn.commit()
+
+    def items() -> Any:
+        global_page_number = 0
+        for partition in partitions:
+            for source_page_number in range(int(partition["pages_enqueued"])):
+                yield {
+                    "item_key": (
+                        f"{partition['partition_key']}:page:{source_page_number:08d}"
+                    ),
+                    "partition_key": str(partition["partition_key"]),
+                    "payload": {
+                        "money_bulk_run_id": bulk_run_id,
+                        "money_bulk_partition_id": partition["money_bulk_partition_id"],
+                        "page_number": global_page_number,
+                        "source_page_number": source_page_number,
+                        "page_size": page_size,
+                        "snapshot_date": snapshot_date,
+                        "date_from": partition["date_from"],
+                        "date_to": partition["date_to"],
+                        "source_id": SOURCE_ID,
+                        "source_url": build_bdns_concessions_url(
+                            page=source_page_number,
+                            page_size=page_size,
+                            date_from=str(partition["api_date"]),
+                            date_to=str(partition["api_date"]),
+                        ),
+                    },
+                    "max_attempts": 5,
+                }
+                global_page_number += 1
+
+    queue = enqueue_work_items(
+        conn,
+        pipeline_id=pipeline_id,
+        items=items(),
+        batch_size=1_000,
+    )
+    return {
+        "schema_version": "bdns_bulk_partitioned_enqueue_v1",
+        "status": "ok",
+        "source_id": SOURCE_ID,
+        "pipeline_id": pipeline_id,
+        "money_bulk_run_id": bulk_run_id,
+        "snapshot_date": snapshot_date,
+        "discovery": {
+            "global_total_elements": global_page.total_elements,
+            "global_total_pages_at_page_size_1": global_page.total_pages,
+            "strategy": "bounded_daily_prefix_windows_descending",
+            "date_from_available": date_from,
+            "date_to_available": date_to,
+            "selected_date_from": partitions[-1]["date_from"],
+            "selected_date_to": partitions[0]["date_to"],
+            "partitions": len(partitions),
+            "page_size": page_size,
+            "selected_records": selected_records,
+            "selected_pages": selected_pages,
+            "total_pages_discovered": total_pages_discovered,
+            "target_records": target_records,
+            "max_pages_per_partition": max_pages_per_partition,
+            "complete_partitions": sum(
+                1 for item in partitions if item["partition_complete"]
+            ),
+            "truncated_partitions": sum(
+                1 for item in partitions if not item["partition_complete"]
+            ),
+            "limited_run": True,
+        },
+        "partition_totals": [
+            {
+                "partition_key": item["partition_key"],
+                "date_from": item["date_from"],
+                "date_to": item["date_to"],
+                "total_elements": item["total_elements"],
+                "total_pages": item["total_pages"],
+                "pages_enqueued": item["pages_enqueued"],
+                "partition_complete": item["partition_complete"],
+            }
+            for item in partitions
+        ],
+        "queue": queue,
+        "peak_rss_mb": round(_peak_rss_mb(), 3),
+    }
+
+
 def _fetch_page_item(
     item: Mapping[str, object],
     *,
@@ -312,6 +584,12 @@ def _fetch_page_item(
     work_item_id = int(item["work_item_id"])
     payload = dict(item.get("payload") or {})
     page_number = int(payload["page_number"])
+    source_page_number = int(payload.get("source_page_number", page_number))
+    partition_id = (
+        int(payload["money_bulk_partition_id"])
+        if payload.get("money_bulk_partition_id") is not None
+        else None
+    )
     page_size = int(payload["page_size"])
     source_url = str(payload["source_url"])
     try:
@@ -331,9 +609,24 @@ def _fetch_page_item(
             page_payload,
             feed_url=source_url,
             content_type=stored.content_type,
-            expected_page=page_number,
+            expected_page=source_page_number,
             expected_page_size=page_size,
         )
+        date_from = str(payload.get("date_from") or "")
+        date_to = str(payload.get("date_to") or "")
+        if date_from or date_to:
+            for record in page.records:
+                record_date = _date_token(record.get("concession_date"))
+                if (
+                    record_date is None
+                    or (date_from and record_date < date_from)
+                    or (date_to and record_date > date_to)
+                ):
+                    raise RuntimeError(
+                        "BDNS partition date mismatch: "
+                        f"expected={date_from or '*'}..{date_to or '*'} "
+                        f"observed={record_date or 'missing'}"
+                    )
         return PageOutcome(
             work_item_id,
             page_number,
@@ -342,6 +635,8 @@ def _fetch_page_item(
             page,
             None,
             True,
+            partition_id,
+            source_page_number,
         )
     except Exception as exc:  # noqa: BLE001
         retryable = True
@@ -365,6 +660,8 @@ def _fetch_page_item(
             None,
             f"{type(exc).__name__}: {exc}"[:2_000],
             retryable,
+            partition_id,
+            source_page_number,
         )
 
 
@@ -530,12 +827,15 @@ def persist_bdns_page(
     conn.execute(
         """
         INSERT INTO money_bulk_page_fetches (
-          money_bulk_run_id, work_item_id, page_number, source_url, fetched_at,
+          money_bulk_run_id, work_item_id, page_number,
+          money_bulk_partition_id, source_page_number, source_url, fetched_at,
           content_sha256, content_type, bytes, raw_path, api_total_elements,
           api_total_pages, records_seen, records_loaded, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(money_bulk_run_id, page_number) DO UPDATE SET
           work_item_id=excluded.work_item_id,
+          money_bulk_partition_id=excluded.money_bulk_partition_id,
+          source_page_number=excluded.source_page_number,
           source_url=excluded.source_url,
           fetched_at=excluded.fetched_at,
           content_sha256=excluded.content_sha256,
@@ -552,6 +852,12 @@ def persist_bdns_page(
             bulk_run_id,
             outcome.work_item_id,
             outcome.page_number,
+            outcome.partition_id,
+            (
+                outcome.source_page_number
+                if outcome.source_page_number is not None
+                else outcome.page_number
+            ),
             outcome.source_url,
             now_iso,
             outcome.stored.content_sha256,
@@ -614,6 +920,41 @@ def report_bdns_bulk_run(
         """,
         (bulk_run_id,),
     ).fetchone()
+    partition_summary = conn.execute(
+        """
+        SELECT
+          COUNT(*) AS partitions_total,
+          COALESCE(SUM(MIN(total_elements_discovered, pages_enqueued * ?)), 0)
+            AS expected_elements,
+          COALESCE(SUM(total_elements_discovered), 0) AS source_elements,
+          COALESCE(SUM(total_pages_discovered), 0) AS total_pages,
+          COALESCE(MAX(total_pages_discovered), 0) AS max_pages_per_partition,
+          COALESCE(MAX(pages_enqueued), 0) AS max_pages_enqueued_per_partition,
+          SUM(CASE WHEN pages_enqueued < total_pages_discovered THEN 1 ELSE 0 END)
+            AS truncated_partitions,
+          MIN(date_from) AS selected_date_from,
+          MAX(date_to) AS selected_date_to
+        FROM money_bulk_partitions
+        WHERE money_bulk_run_id = ?
+        """,
+        (int(run["page_size"]), bulk_run_id),
+    ).fetchone()
+    partition_consistency = conn.execute(
+        """
+        SELECT
+          SUM(CASE WHEN f.money_bulk_partition_id IS NULL THEN 1 ELSE 0 END)
+            AS pages_without_partition,
+          SUM(CASE WHEN f.api_total_elements <> p.total_elements_discovered
+                   THEN 1 ELSE 0 END) AS element_mismatches,
+          SUM(CASE WHEN f.api_total_pages <> p.total_pages_discovered
+                   THEN 1 ELSE 0 END) AS page_mismatches
+        FROM money_bulk_page_fetches AS f
+        LEFT JOIN money_bulk_partitions AS p
+          ON p.money_bulk_partition_id = f.money_bulk_partition_id
+        WHERE f.money_bulk_run_id = ?
+        """,
+        (bulk_run_id,),
+    ).fetchone()
     queue = work_queue_observability(conn, pipeline_id=pipeline_id, top_limit=10)
     current_source_snapshot_rows = int(
         conn.execute(
@@ -670,7 +1011,29 @@ def report_bdns_bulk_run(
     pages_enqueued = int(run["pages_enqueued"])
     page_size = int(run["page_size"])
     total_elements = int(run["total_elements_discovered"])
-    expected_rows = min(total_elements, pages_enqueued * page_size)
+    partitions_total = int(partition_summary["partitions_total"])
+    partitioned = partitions_total > 0
+    expected_rows = (
+        int(partition_summary["expected_elements"])
+        if partitioned
+        else min(total_elements, pages_enqueued * page_size)
+    )
+    api_total_elements_stable = (
+        int(partition_consistency["pages_without_partition"] or 0) == 0
+        and int(partition_consistency["element_mismatches"] or 0) == 0
+        if partitioned
+        else int(page["min_api_total_elements"] or 0)
+        == int(page["max_api_total_elements"] or 0)
+        == total_elements
+    )
+    api_total_pages_stable = (
+        int(partition_consistency["pages_without_partition"] or 0) == 0
+        and int(partition_consistency["page_mismatches"] or 0) == 0
+        if partitioned
+        else int(page["min_api_total_pages"] or 0)
+        == int(page["max_api_total_pages"] or 0)
+        == int(run["total_pages_discovered"])
+    )
     state_counts = dict(queue["state_counts"])
     checks = {
         "no_dead_pages": int(state_counts.get("dead", 0)) == 0,
@@ -678,12 +1041,13 @@ def report_bdns_bulk_run(
         "page_fetch_rows_complete": pages_fetched == pages_enqueued,
         "page_record_counts_reconcile": records_seen == expected_rows,
         "distinct_snapshot_rows_reconcile": distinct_snapshot_rows == records_seen,
-        "api_total_elements_stable": int(page["min_api_total_elements"] or 0)
-        == int(page["max_api_total_elements"] or 0)
-        == total_elements,
-        "api_total_pages_stable": int(page["min_api_total_pages"] or 0)
-        == int(page["max_api_total_pages"] or 0)
-        == int(run["total_pages_discovered"]),
+        "api_total_elements_stable": api_total_elements_stable,
+        "api_total_pages_stable": api_total_pages_stable,
+        "partition_page_lineage_complete": (
+            int(partition_consistency["pages_without_partition"] or 0) == 0
+            if partitioned
+            else True
+        ),
         "version_sightings_reconcile": version_sightings_total == records_seen,
         "version_sightings_distinct_reconcile": version_distinct_source_records
         == distinct_snapshot_rows,
@@ -746,6 +1110,21 @@ def report_bdns_bulk_run(
             "total_elements": total_elements,
             "total_pages": int(run["total_pages_discovered"]),
             "pages_enqueued": pages_enqueued,
+            "partition_strategy": (
+                "bounded_daily_prefix_windows_descending"
+                if partitioned
+                else "global_offset"
+            ),
+            "partitions": partitions_total,
+            "selected_date_from": partition_summary["selected_date_from"],
+            "selected_date_to": partition_summary["selected_date_to"],
+            "max_pages_per_partition": int(
+                partition_summary["max_pages_per_partition"] or 0
+            ),
+            "max_pages_enqueued_per_partition": int(
+                partition_summary["max_pages_enqueued_per_partition"] or 0
+            ),
+            "truncated_partitions": int(partition_summary["truncated_partitions"] or 0),
         },
         "observed": {
             "pages_fetched": pages_fetched,
@@ -815,7 +1194,11 @@ def backfill_record_version_lineage(
             payload,
             feed_url=str(page_row["source_url"]),
             content_type=str(page_row["content_type"] or "") or None,
-            expected_page=int(page_row["page_number"]),
+            expected_page=int(
+                page_row["source_page_number"]
+                if page_row["source_page_number"] is not None
+                else page_row["page_number"]
+            ),
             expected_page_size=int(run["page_size"]),
         )
         if len(page.records) != int(page_row["records_loaded"]):
@@ -982,6 +1365,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     enqueue.add_argument("--max-pages", type=int, default=0)
     enqueue.add_argument("--timeout", type=int, default=30)
 
+    enqueue_daily = subparsers.add_parser("enqueue-daily")
+    enqueue_daily.add_argument("--snapshot-date", required=True)
+    enqueue_daily.add_argument("--date-from", required=True)
+    enqueue_daily.add_argument("--date-to", required=True)
+    enqueue_daily.add_argument("--page-size", type=int, default=1_000)
+    enqueue_daily.add_argument("--target-records", type=int, default=1_000_000)
+    enqueue_daily.add_argument("--max-partitions", type=int, default=366)
+    enqueue_daily.add_argument("--max-pages-per-partition", type=int, default=100)
+    enqueue_daily.add_argument("--timeout", type=int, default=30)
+    enqueue_daily.add_argument("--request-interval-seconds", type=float, default=2.0)
+
     work = subparsers.add_parser("work")
     work.add_argument("--raw-root", default=str(DEFAULT_RAW_ROOT))
     work.add_argument("--worker-id", default="bdns-bulk-worker")
@@ -1016,6 +1410,20 @@ def main(argv: list[str] | None = None) -> int:
                 page_size=args.page_size,
                 max_pages=args.max_pages,
                 timeout=args.timeout,
+            )
+        elif args.command == "enqueue-daily":
+            report = enqueue_bdns_daily_partitions(
+                conn,
+                pipeline_id=args.pipeline_id,
+                snapshot_date=args.snapshot_date,
+                date_from=args.date_from,
+                date_to=args.date_to,
+                page_size=args.page_size,
+                target_records=args.target_records,
+                max_partitions=args.max_partitions,
+                max_pages_per_partition=args.max_pages_per_partition,
+                timeout=args.timeout,
+                request_interval_seconds=args.request_interval_seconds,
             )
         elif args.command == "work":
             report = run_worker(

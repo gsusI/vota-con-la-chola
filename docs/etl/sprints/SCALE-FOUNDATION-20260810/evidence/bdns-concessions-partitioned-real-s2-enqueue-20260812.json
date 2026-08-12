@@ -1,0 +1,620 @@
+{
+  "discovery": {
+    "date_from_available": "2026-01-01",
+    "date_to_available": "2026-08-11",
+    "global_total_elements": 28676987,
+    "global_total_pages_at_page_size_1": 28676987,
+    "limited_run": true,
+    "page_size": 1000,
+    "partitions": 84,
+    "selected_date_from": "2026-05-20",
+    "selected_date_to": "2026-08-11",
+    "selected_pages": 1398,
+    "selected_records": 1343996,
+    "strategy": "complete_daily_windows_descending",
+    "target_records": 1000000
+  },
+  "money_bulk_run_id": 1,
+  "partition_totals": [
+    {
+      "date_from": "2026-08-11",
+      "date_to": "2026-08-11",
+      "partition_key": "date:2026-08-11",
+      "total_elements": 397,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-08-10",
+      "date_to": "2026-08-10",
+      "partition_key": "date:2026-08-10",
+      "total_elements": 2073,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-08-09",
+      "date_to": "2026-08-09",
+      "partition_key": "date:2026-08-09",
+      "total_elements": 2,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-08-08",
+      "date_to": "2026-08-08",
+      "partition_key": "date:2026-08-08",
+      "total_elements": 0,
+      "total_pages": 0
+    },
+    {
+      "date_from": "2026-08-07",
+      "date_to": "2026-08-07",
+      "partition_key": "date:2026-08-07",
+      "total_elements": 3026,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-08-06",
+      "date_to": "2026-08-06",
+      "partition_key": "date:2026-08-06",
+      "total_elements": 854,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-08-05",
+      "date_to": "2026-08-05",
+      "partition_key": "date:2026-08-05",
+      "total_elements": 1785,
+      "total_pages": 2
+    },
+    {
+      "date_from": "2026-08-04",
+      "date_to": "2026-08-04",
+      "partition_key": "date:2026-08-04",
+      "total_elements": 2224,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-08-03",
+      "date_to": "2026-08-03",
+      "partition_key": "date:2026-08-03",
+      "total_elements": 2278,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-08-02",
+      "date_to": "2026-08-02",
+      "partition_key": "date:2026-08-02",
+      "total_elements": 1,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-08-01",
+      "date_to": "2026-08-01",
+      "partition_key": "date:2026-08-01",
+      "total_elements": 3,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-31",
+      "date_to": "2026-07-31",
+      "partition_key": "date:2026-07-31",
+      "total_elements": 1153,
+      "total_pages": 2
+    },
+    {
+      "date_from": "2026-07-30",
+      "date_to": "2026-07-30",
+      "partition_key": "date:2026-07-30",
+      "total_elements": 1124,
+      "total_pages": 2
+    },
+    {
+      "date_from": "2026-07-29",
+      "date_to": "2026-07-29",
+      "partition_key": "date:2026-07-29",
+      "total_elements": 1234,
+      "total_pages": 2
+    },
+    {
+      "date_from": "2026-07-28",
+      "date_to": "2026-07-28",
+      "partition_key": "date:2026-07-28",
+      "total_elements": 4842,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-07-27",
+      "date_to": "2026-07-27",
+      "partition_key": "date:2026-07-27",
+      "total_elements": 4368,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-07-26",
+      "date_to": "2026-07-26",
+      "partition_key": "date:2026-07-26",
+      "total_elements": 99,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-25",
+      "date_to": "2026-07-25",
+      "partition_key": "date:2026-07-25",
+      "total_elements": 96,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-24",
+      "date_to": "2026-07-24",
+      "partition_key": "date:2026-07-24",
+      "total_elements": 3372,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-07-23",
+      "date_to": "2026-07-23",
+      "partition_key": "date:2026-07-23",
+      "total_elements": 2817,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-07-22",
+      "date_to": "2026-07-22",
+      "partition_key": "date:2026-07-22",
+      "total_elements": 6311,
+      "total_pages": 7
+    },
+    {
+      "date_from": "2026-07-21",
+      "date_to": "2026-07-21",
+      "partition_key": "date:2026-07-21",
+      "total_elements": 4719,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-07-20",
+      "date_to": "2026-07-20",
+      "partition_key": "date:2026-07-20",
+      "total_elements": 2645,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-07-19",
+      "date_to": "2026-07-19",
+      "partition_key": "date:2026-07-19",
+      "total_elements": 10,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-18",
+      "date_to": "2026-07-18",
+      "partition_key": "date:2026-07-18",
+      "total_elements": 13,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-17",
+      "date_to": "2026-07-17",
+      "partition_key": "date:2026-07-17",
+      "total_elements": 3216,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-07-16",
+      "date_to": "2026-07-16",
+      "partition_key": "date:2026-07-16",
+      "total_elements": 4319,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-07-15",
+      "date_to": "2026-07-15",
+      "partition_key": "date:2026-07-15",
+      "total_elements": 3047,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-07-14",
+      "date_to": "2026-07-14",
+      "partition_key": "date:2026-07-14",
+      "total_elements": 4245,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-07-13",
+      "date_to": "2026-07-13",
+      "partition_key": "date:2026-07-13",
+      "total_elements": 2647,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-07-12",
+      "date_to": "2026-07-12",
+      "partition_key": "date:2026-07-12",
+      "total_elements": 5,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-11",
+      "date_to": "2026-07-11",
+      "partition_key": "date:2026-07-11",
+      "total_elements": 48,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-10",
+      "date_to": "2026-07-10",
+      "partition_key": "date:2026-07-10",
+      "total_elements": 6442,
+      "total_pages": 7
+    },
+    {
+      "date_from": "2026-07-09",
+      "date_to": "2026-07-09",
+      "partition_key": "date:2026-07-09",
+      "total_elements": 4246,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-07-08",
+      "date_to": "2026-07-08",
+      "partition_key": "date:2026-07-08",
+      "total_elements": 7429,
+      "total_pages": 8
+    },
+    {
+      "date_from": "2026-07-07",
+      "date_to": "2026-07-07",
+      "partition_key": "date:2026-07-07",
+      "total_elements": 13129,
+      "total_pages": 14
+    },
+    {
+      "date_from": "2026-07-06",
+      "date_to": "2026-07-06",
+      "partition_key": "date:2026-07-06",
+      "total_elements": 2302,
+      "total_pages": 3
+    },
+    {
+      "date_from": "2026-07-05",
+      "date_to": "2026-07-05",
+      "partition_key": "date:2026-07-05",
+      "total_elements": 301,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-04",
+      "date_to": "2026-07-04",
+      "partition_key": "date:2026-07-04",
+      "total_elements": 237,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-07-03",
+      "date_to": "2026-07-03",
+      "partition_key": "date:2026-07-03",
+      "total_elements": 3642,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-07-02",
+      "date_to": "2026-07-02",
+      "partition_key": "date:2026-07-02",
+      "total_elements": 3687,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-07-01",
+      "date_to": "2026-07-01",
+      "partition_key": "date:2026-07-01",
+      "total_elements": 7026,
+      "total_pages": 8
+    },
+    {
+      "date_from": "2026-06-30",
+      "date_to": "2026-06-30",
+      "partition_key": "date:2026-06-30",
+      "total_elements": 88245,
+      "total_pages": 89
+    },
+    {
+      "date_from": "2026-06-29",
+      "date_to": "2026-06-29",
+      "partition_key": "date:2026-06-29",
+      "total_elements": 22406,
+      "total_pages": 23
+    },
+    {
+      "date_from": "2026-06-28",
+      "date_to": "2026-06-28",
+      "partition_key": "date:2026-06-28",
+      "total_elements": 336,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-27",
+      "date_to": "2026-06-27",
+      "partition_key": "date:2026-06-27",
+      "total_elements": 0,
+      "total_pages": 0
+    },
+    {
+      "date_from": "2026-06-26",
+      "date_to": "2026-06-26",
+      "partition_key": "date:2026-06-26",
+      "total_elements": 5404,
+      "total_pages": 6
+    },
+    {
+      "date_from": "2026-06-25",
+      "date_to": "2026-06-25",
+      "partition_key": "date:2026-06-25",
+      "total_elements": 63480,
+      "total_pages": 64
+    },
+    {
+      "date_from": "2026-06-24",
+      "date_to": "2026-06-24",
+      "partition_key": "date:2026-06-24",
+      "total_elements": 9116,
+      "total_pages": 10
+    },
+    {
+      "date_from": "2026-06-23",
+      "date_to": "2026-06-23",
+      "partition_key": "date:2026-06-23",
+      "total_elements": 4656,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-06-22",
+      "date_to": "2026-06-22",
+      "partition_key": "date:2026-06-22",
+      "total_elements": 24623,
+      "total_pages": 25
+    },
+    {
+      "date_from": "2026-06-21",
+      "date_to": "2026-06-21",
+      "partition_key": "date:2026-06-21",
+      "total_elements": 14,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-20",
+      "date_to": "2026-06-20",
+      "partition_key": "date:2026-06-20",
+      "total_elements": 928,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-19",
+      "date_to": "2026-06-19",
+      "partition_key": "date:2026-06-19",
+      "total_elements": 5577,
+      "total_pages": 6
+    },
+    {
+      "date_from": "2026-06-18",
+      "date_to": "2026-06-18",
+      "partition_key": "date:2026-06-18",
+      "total_elements": 8253,
+      "total_pages": 9
+    },
+    {
+      "date_from": "2026-06-17",
+      "date_to": "2026-06-17",
+      "partition_key": "date:2026-06-17",
+      "total_elements": 20209,
+      "total_pages": 21
+    },
+    {
+      "date_from": "2026-06-16",
+      "date_to": "2026-06-16",
+      "partition_key": "date:2026-06-16",
+      "total_elements": 10351,
+      "total_pages": 11
+    },
+    {
+      "date_from": "2026-06-15",
+      "date_to": "2026-06-15",
+      "partition_key": "date:2026-06-15",
+      "total_elements": 5597,
+      "total_pages": 6
+    },
+    {
+      "date_from": "2026-06-14",
+      "date_to": "2026-06-14",
+      "partition_key": "date:2026-06-14",
+      "total_elements": 168,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-13",
+      "date_to": "2026-06-13",
+      "partition_key": "date:2026-06-13",
+      "total_elements": 242,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-12",
+      "date_to": "2026-06-12",
+      "partition_key": "date:2026-06-12",
+      "total_elements": 37681,
+      "total_pages": 38
+    },
+    {
+      "date_from": "2026-06-11",
+      "date_to": "2026-06-11",
+      "partition_key": "date:2026-06-11",
+      "total_elements": 7843,
+      "total_pages": 8
+    },
+    {
+      "date_from": "2026-06-10",
+      "date_to": "2026-06-10",
+      "partition_key": "date:2026-06-10",
+      "total_elements": 14115,
+      "total_pages": 15
+    },
+    {
+      "date_from": "2026-06-09",
+      "date_to": "2026-06-09",
+      "partition_key": "date:2026-06-09",
+      "total_elements": 4120,
+      "total_pages": 5
+    },
+    {
+      "date_from": "2026-06-08",
+      "date_to": "2026-06-08",
+      "partition_key": "date:2026-06-08",
+      "total_elements": 21122,
+      "total_pages": 22
+    },
+    {
+      "date_from": "2026-06-07",
+      "date_to": "2026-06-07",
+      "partition_key": "date:2026-06-07",
+      "total_elements": 44,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-06",
+      "date_to": "2026-06-06",
+      "partition_key": "date:2026-06-06",
+      "total_elements": 9,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-06-05",
+      "date_to": "2026-06-05",
+      "partition_key": "date:2026-06-05",
+      "total_elements": 157827,
+      "total_pages": 158
+    },
+    {
+      "date_from": "2026-06-04",
+      "date_to": "2026-06-04",
+      "partition_key": "date:2026-06-04",
+      "total_elements": 7876,
+      "total_pages": 8
+    },
+    {
+      "date_from": "2026-06-03",
+      "date_to": "2026-06-03",
+      "partition_key": "date:2026-06-03",
+      "total_elements": 10364,
+      "total_pages": 11
+    },
+    {
+      "date_from": "2026-06-02",
+      "date_to": "2026-06-02",
+      "partition_key": "date:2026-06-02",
+      "total_elements": 82204,
+      "total_pages": 83
+    },
+    {
+      "date_from": "2026-06-01",
+      "date_to": "2026-06-01",
+      "partition_key": "date:2026-06-01",
+      "total_elements": 34481,
+      "total_pages": 35
+    },
+    {
+      "date_from": "2026-05-31",
+      "date_to": "2026-05-31",
+      "partition_key": "date:2026-05-31",
+      "total_elements": 46,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-05-30",
+      "date_to": "2026-05-30",
+      "partition_key": "date:2026-05-30",
+      "total_elements": 51328,
+      "total_pages": 52
+    },
+    {
+      "date_from": "2026-05-29",
+      "date_to": "2026-05-29",
+      "partition_key": "date:2026-05-29",
+      "total_elements": 9068,
+      "total_pages": 10
+    },
+    {
+      "date_from": "2026-05-28",
+      "date_to": "2026-05-28",
+      "partition_key": "date:2026-05-28",
+      "total_elements": 52029,
+      "total_pages": 53
+    },
+    {
+      "date_from": "2026-05-27",
+      "date_to": "2026-05-27",
+      "partition_key": "date:2026-05-27",
+      "total_elements": 13420,
+      "total_pages": 14
+    },
+    {
+      "date_from": "2026-05-26",
+      "date_to": "2026-05-26",
+      "partition_key": "date:2026-05-26",
+      "total_elements": 6457,
+      "total_pages": 7
+    },
+    {
+      "date_from": "2026-05-25",
+      "date_to": "2026-05-25",
+      "partition_key": "date:2026-05-25",
+      "total_elements": 28823,
+      "total_pages": 29
+    },
+    {
+      "date_from": "2026-05-24",
+      "date_to": "2026-05-24",
+      "partition_key": "date:2026-05-24",
+      "total_elements": 132,
+      "total_pages": 1
+    },
+    {
+      "date_from": "2026-05-23",
+      "date_to": "2026-05-23",
+      "partition_key": "date:2026-05-23",
+      "total_elements": 3397,
+      "total_pages": 4
+    },
+    {
+      "date_from": "2026-05-22",
+      "date_to": "2026-05-22",
+      "partition_key": "date:2026-05-22",
+      "total_elements": 12330,
+      "total_pages": 13
+    },
+    {
+      "date_from": "2026-05-21",
+      "date_to": "2026-05-21",
+      "partition_key": "date:2026-05-21",
+      "total_elements": 8640,
+      "total_pages": 9
+    },
+    {
+      "date_from": "2026-05-20",
+      "date_to": "2026-05-20",
+      "partition_key": "date:2026-05-20",
+      "total_elements": 399621,
+      "total_pages": 400
+    }
+  ],
+  "peak_rss_mb": 43.656,
+  "pipeline_id": "bdns-concessions-partitioned-real-s2-20260812",
+  "queue": {
+    "existing_total": 0,
+    "input_total": 1398,
+    "inserted_total": 1398,
+    "pipeline_total": 1398
+  },
+  "schema_version": "bdns_bulk_partitioned_enqueue_v1",
+  "snapshot_date": "2026-08-12",
+  "source_id": "bdns_api_subvenciones",
+  "status": "ok"
+}
