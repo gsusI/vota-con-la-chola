@@ -15,6 +15,10 @@ intro.md
 dist/
 .next/
 out/
+output/
+.playwright-cli/
+outputs/**/node_modules
+outputs/**/build_*.mjs
 node_modules/
 tmp/
 docs/gh-pages/
@@ -83,6 +87,8 @@ etl/data/raw/*
 etl/data/derived/parl_initiative_doc_texts/
 etl/data/derived/text/
 etl/data/derived/member-vote-shards/
+etl/data/derived/
+etl/data/published/semantic/
 etl/data/object-origin/
 etl/data/manifests/
 
