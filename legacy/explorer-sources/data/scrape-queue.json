@@ -1,18 +1,17 @@
 {
   "queue_version": "v1",
-  "generated_at": "2026-08-10T05:24:54+00:00",
-  "snapshot_date": "2026-08-10",
+  "generated_at": "2026-08-12T05:28:48+00:00",
+  "snapshot_date": "2026-08-12",
   "summary": {
     "queue_items_total": 33,
     "p0_total": 5,
-    "p1_total": 21,
-    "p2_total": 7,
+    "p1_total": 20,
+    "p2_total": 8,
     "by_reason": {
       "missing_reproducible_network_run": 20,
-      "tracker_mismatch": 7,
+      "tracker_mismatch": 8,
       "blocked_upstream": 3,
-      "missing_from_db": 2,
-      "under_threshold": 1
+      "missing_from_db": 2
     },
     "by_domain": {
       "politicos": 24,
@@ -422,7 +421,7 @@
         ],
         "pre_commands": [
           "python3 scripts/ingestar_parlamentario_es.py link-votes --db <db>",
-          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-08-10"
+          "python3 scripts/ingestar_parlamentario_es.py backfill-topic-analytics --db <db> --vote-source-ids congreso_votaciones --as-of-date 2026-08-12"
         ]
       },
       "rank": 6
@@ -1616,70 +1615,6 @@
       "rank": 25
     },
     {
-      "source_id": "boe_api_legal",
-      "source_name": "BOE API - Marco legal (RSS diario)",
-      "domain": "politicos",
-      "scope": "legal",
-      "priority_score": 82,
-      "priority_band": "P1",
-      "queue_reason": "under_threshold",
-      "ops_state": "partial",
-      "tracker_status": "PARTIAL",
-      "sql_status": "DONE",
-      "mismatch_state": "MISMATCH",
-      "default_url": "https://www.boe.es/rss/boe.php",
-      "tracker_tipo_dato": "Marco legal electoral",
-      "legal_verification_status": "verified",
-      "progress": {
-        "loaded": 2,
-        "target": 5,
-        "percent": 40
-      },
-      "flags": {
-        "under_threshold": true,
-        "done_zero_real": false,
-        "has_network": true,
-        "has_any": true,
-        "blocked_note": false
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "last_message": "Ingesta completada: 2/2 registros validos",
-      "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. La ingesta historica BOE (`boe_api_legal`) existe (`records_loaded=298`, `policy_events_boe=298`), pero PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>`. Mantener como parcial hasta recuperar run reproducible de red real vigente. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log`, `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md` y `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
-      "action_titles": [
-        "PARTIAL: BOE API",
-        "Por debajo del umbral minimo: boe_api_legal"
-      ],
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "batch_key": "P1::under_threshold::politicos::legal::strict-network::scripts/ingestar_politicos_es.py",
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 5,
-        "fallback_file": "etl/data/raw/samples/boe_api_legal_sample.xml",
-        "sample_available": true,
-        "repeatability_state": "network_verified",
-        "preferred_mode": "strict-network",
-        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network",
-        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml",
-        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
-        "prerequisite_source_ids": [],
-        "pre_commands": []
-      },
-      "rank": 26
-    },
-    {
       "source_id": "congreso_iniciativas",
       "source_name": "Congreso - Iniciativas (OpenData)",
       "domain": "parlamentario",
@@ -1735,7 +1670,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 27
+      "rank": 26
     },
     {
       "source_id": "congreso_votaciones",
@@ -1793,7 +1728,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 28
+      "rank": 27
     },
     {
       "source_id": "asamblea_extremadura_diputados",
@@ -1856,7 +1791,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 29
+      "rank": 28
     },
     {
       "source_id": "asamblea_melilla_diputados",
@@ -1919,7 +1854,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 30
+      "rank": 29
     },
     {
       "source_id": "parlamento_andalucia_diputados",
@@ -1982,7 +1917,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 31
+      "rank": 30
     },
     {
       "source_id": "moncloa_referencias",
@@ -2046,7 +1981,7 @@
         "prerequisite_source_ids": [],
         "pre_commands": []
       },
-      "rank": 32
+      "rank": 31
     },
     {
       "source_id": "moncloa_rss_referencias",
@@ -2106,6 +2041,69 @@
         "preferred_mode": "strict-network",
         "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --strict-network",
         "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --from-file etl/data/raw/samples/moncloa_rss_referencias_sample.xml",
+        "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
+        "prerequisite_source_ids": [],
+        "pre_commands": []
+      },
+      "rank": 32
+    },
+    {
+      "source_id": "boe_api_legal",
+      "source_name": "BOE API - Marco legal (RSS diario)",
+      "domain": "politicos",
+      "scope": "legal",
+      "priority_score": 72,
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "ops_state": "ok",
+      "tracker_status": "PARTIAL",
+      "sql_status": "DONE",
+      "mismatch_state": "MISMATCH",
+      "default_url": "https://www.boe.es/rss/boe.php",
+      "tracker_tipo_dato": "Marco legal electoral",
+      "legal_verification_status": "verified",
+      "progress": {
+        "loaded": 149,
+        "target": 5,
+        "percent": 100
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
+        "blocked_note": false
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "last_message": "Ingesta completada: 149/149 registros validos",
+      "tracker_block_note": "Done now: NO para live-clean en GitHub Actions. La ingesta historica BOE (`boe_api_legal`) existe (`records_loaded=298`, `policy_events_boe=298`), pero PR gate `25687905013` fallo en `--strict-network` con `urllib.error.URLError: <urlopen error timed out>`. Mantener como parcial hasta recuperar run reproducible de red real vigente. Evidencia: `docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-ingest-replay.log`, `docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-boe-policy-events-backfill.log`, `docs/etl/sprints/AI-OPS-08/reports/boe-tracker-mapping-hardening.md` y `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "action_titles": [
+        "PARTIAL: BOE API"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "batch_key": "P2::tracker_mismatch::politicos::legal::strict-network::scripts/ingestar_politicos_es.py",
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 5,
+        "fallback_file": "etl/data/raw/samples/boe_api_legal_sample.xml",
+        "sample_available": true,
+        "repeatability_state": "network_verified",
+        "preferred_mode": "strict-network",
+        "network_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network",
+        "sample_command": "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml",
         "validation_command": "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md",
         "prerequisite_source_ids": [],
         "pre_commands": []
@@ -2473,33 +2471,6 @@
       ]
     },
     {
-      "batch_key": "P1::under_threshold::politicos::legal::strict-network::scripts/ingestar_politicos_es.py",
-      "priority_band": "P1",
-      "queue_reason": "under_threshold",
-      "domain": "politicos",
-      "scope": "legal",
-      "preferred_mode": "strict-network",
-      "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 26,
-      "source_ids": [
-        "boe_api_legal"
-      ],
-      "items_total": 1,
-      "sample_backed_total": 1,
-      "repeatable_now_total": 1,
-      "blocked_total": 0,
-      "commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
-        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
-      ],
-      "network_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network"
-      ],
-      "sample_commands": [
-        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml"
-      ]
-    },
-    {
       "batch_key": "P2::tracker_mismatch::parlamentario::nacional::strict-network::scripts/ingestar_parlamentario_es.py",
       "priority_band": "P2",
       "queue_reason": "tracker_mismatch",
@@ -2507,7 +2478,7 @@
       "scope": "nacional",
       "preferred_mode": "strict-network",
       "runner_script": "scripts/ingestar_parlamentario_es.py",
-      "first_rank": 27,
+      "first_rank": 26,
       "source_ids": [
         "congreso_iniciativas",
         "congreso_votaciones"
@@ -2534,7 +2505,7 @@
       "scope": "autonomico",
       "preferred_mode": "strict-network",
       "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 29,
+      "first_rank": 28,
       "source_ids": [
         "asamblea_extremadura_diputados",
         "asamblea_melilla_diputados",
@@ -2569,7 +2540,7 @@
       "scope": "ejecutivo",
       "preferred_mode": "strict-network",
       "runner_script": "scripts/ingestar_politicos_es.py",
-      "first_rank": 32,
+      "first_rank": 31,
       "source_ids": [
         "moncloa_referencias",
         "moncloa_rss_referencias"
@@ -2590,6 +2561,33 @@
       "sample_commands": [
         "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_referencias --from-file etl/data/raw/samples/moncloa_referencias_sample.html",
         "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source moncloa_rss_referencias --from-file etl/data/raw/samples/moncloa_rss_referencias_sample.xml"
+      ]
+    },
+    {
+      "batch_key": "P2::tracker_mismatch::politicos::legal::strict-network::scripts/ingestar_politicos_es.py",
+      "priority_band": "P2",
+      "queue_reason": "tracker_mismatch",
+      "domain": "politicos",
+      "scope": "legal",
+      "preferred_mode": "strict-network",
+      "runner_script": "scripts/ingestar_politicos_es.py",
+      "first_rank": 33,
+      "source_ids": [
+        "boe_api_legal"
+      ],
+      "items_total": 1,
+      "sample_backed_total": 1,
+      "repeatable_now_total": 1,
+      "blocked_total": 0,
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source boe_api_legal --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ],
+      "network_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --strict-network"
+      ],
+      "sample_commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db '<db>' --source boe_api_legal --from-file etl/data/raw/samples/boe_api_legal_sample.xml"
       ]
     }
   ]
