@@ -1,0 +1,14 @@
+{
+  "schema_version": "official-capture-source-v1",
+  "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion001/VOT_20260212114304.json",
+  "vote_event_id": "congreso:vote:d6d15e5a8f16384ce6481d10",
+  "vote_event_id_derivation": "legacy_fingerprint_with_legislature_null",
+  "captured_payload_sha256": "f46a89ec125581f21651d11384f8a57161588b398c733341ab2436194f398331",
+  "official_payload_sha256": "92ffc4059b10fd43e4fde11923d52047900682559f3df4818bbaa80db5e0c9d7",
+  "official_payload_bytes": 32271,
+  "verified_at": "2026-08-12",
+  "capture_changes": [
+    "added top-level legislature=15 metadata"
+  ],
+  "semantic_match_after_declared_capture_changes": true
+}
