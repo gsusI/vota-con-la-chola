@@ -1,0 +1,164 @@
+{
+  "failure_class_counts": {
+    "host_circuit_open": 2070,
+    "not_fetchable": 19,
+    "timeout": 1,
+    "upstream_server_error": 21
+  },
+  "failure_samples": [
+    {
+      "error": "HTTPError: HTTP Error 500: Internal Server Error",
+      "failure_class": "upstream_server_error",
+      "http_status": 500,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000008"
+    },
+    {
+      "error": "HTTPError: HTTP Error 500: Internal Server Error",
+      "failure_class": "upstream_server_error",
+      "http_status": 500,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000009"
+    },
+    {
+      "error": "HTTPError: HTTP Error 500: Internal Server Error",
+      "failure_class": "upstream_server_error",
+      "http_status": 500,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000004"
+    },
+    {
+      "error": "HTTPError: HTTP Error 500: Internal Server Error",
+      "failure_class": "upstream_server_error",
+      "http_status": 500,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000005"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000104"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000071"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000099"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000084"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000087"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000100"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000076"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000085"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000081"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000101"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000086"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000068"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000078"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000096"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000072"
+    },
+    {
+      "error": "host_circuit_open",
+      "failure_class": "host_circuit_open",
+      "http_status": null,
+      "item_key": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000088"
+    }
+  ],
+  "opened_circuits": [
+    "www.senado.es|legis:5|web/actividadparlamentaria",
+    "www.senado.es|legis:6|web/actividadparlamentaria",
+    "www.senado.es|legis:7|web/actividadparlamentaria",
+    "www.senado.es|legis:8|web/actividadparlamentaria",
+    "www.senado.es|legis:9|web/actividadparlamentaria"
+  ],
+  "opened_hosts": [
+    "www.senado.es"
+  ],
+  "per_host_workers": 2,
+  "pipeline_id": "document_fetch",
+  "queue": {
+    "items_total": 9084,
+    "pipeline_id": "document_fetch",
+    "state_counts": {
+      "dead": 198,
+      "leased": 0,
+      "pending": 2094,
+      "succeeded": 6792
+    },
+    "terminal_total": 6990,
+    "unfinished_total": 2094
+  },
+  "schema_version": "document_fetch_queue_run_v1",
+  "status": "partial",
+  "totals": {
+    "claimed": 4885,
+    "dead": 19,
+    "retried": 2092,
+    "succeeded": 2774
+  },
+  "worker_id": "document-fetch-worker",
+  "workers": 8
+}

@@ -1,0 +1,27 @@
+{
+  "failure_samples": [],
+  "pipeline_id": "text_extraction",
+  "queue": {
+    "items_total": 6792,
+    "pipeline_id": "text_extraction",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 6792
+    },
+    "terminal_total": 6792,
+    "unfinished_total": 0
+  },
+  "schema_version": "text_extraction_queue_run_v1",
+  "status": "ok",
+  "totals": {
+    "claimed": 2774,
+    "dead": 0,
+    "document_rows_updated": 2774,
+    "retried": 0,
+    "succeeded": 2774
+  },
+  "worker_id": "text-extraction-worker",
+  "workers": 4
+}

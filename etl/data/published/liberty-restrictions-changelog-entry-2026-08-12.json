@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "changelog_path": "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl",
+  "entry_id": "2026-08-12|2026-04-13|5ad3d3e15c967760df147c27dd23918f558d51a58e29a03577de07da973f74fd",
+  "appended": true,
+  "history_entries_total": 11,
+  "history_malformed_lines_total": 0,
+  "entry": {
+    "run_at": "2026-08-12T13:13:39+00:00",
+    "entry_id": "2026-08-12|2026-04-13|5ad3d3e15c967760df147c27dd23918f558d51a58e29a03577de07da973f74fd",
+    "snapshot_date": "2026-08-12",
+    "previous_snapshot_date": "2026-04-13",
+    "schema_version": "liberty_restrictions_snapshot_v1",
+    "snapshot_path": "docs/etl/sprints/AI-OPS-118/exports/liberty_restrictions_snapshot_latest.json",
+    "previous_snapshot_path": "etl/data/published/liberty-restrictions-atlas-2026-04-13.json",
+    "diff_path": "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_diff_latest.json",
+    "fingerprint": "5ad3d3e15c967760df147c27dd23918f558d51a58e29a03577de07da973f74fd",
+    "totals": {
+      "restrictions_total": 11,
+      "accountability_edges_total": 15,
+      "proportionality_reviews_total": 8,
+      "actors_scored_total": 8,
+      "persons_scored_total": 5,
+      "enforcement_observations_total": 16,
+      "indirect_edges_total": 12,
+      "indirect_attributable_edges_total": 9,
+      "delegated_links_total": 8,
+      "fragments_with_delegated_chain_total": 8,
+      "municipal_restrictions_total": 0,
+      "municipal_fragments_total": 0,
+      "municipal_mapped_fragment_total": 0,
+      "municipal_unmapped_fragment_total": 0
+    },
+    "change_summary": {
+      "status": "unchanged",
+      "changed_sections_total": 0,
+      "changed_sections": [],
+      "items_added_total": 0,
+      "items_removed_total": 0,
+      "totals_changed": []
+    }
+  }
+}

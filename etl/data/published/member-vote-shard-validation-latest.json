@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "all_checksums_valid": true,
+    "all_files_present": true,
+    "all_payloads_valid": true,
+    "event_total_matches": true,
+    "member_public_source_url_coverage_at_least_99_pct": true,
+    "member_source_record_coverage_at_least_99_pct": true,
+    "member_vote_total_matches": true,
+    "no_private_path_tokens": true,
+    "shard_byte_total_matches": true
+  },
+  "error_samples": [],
+  "manifest": "member-vote-shard-manifest-latest.json",
+  "schema_version": "member_vote_shard_validation_v1",
+  "status": "ok",
+  "totals": {
+    "bytes": 170990631,
+    "checksums_valid": 8373,
+    "entries": 8373,
+    "files_present": 8373,
+    "member_votes": 1809222,
+    "member_votes_with_public_source_url": 1809222,
+    "member_votes_with_source_record": 1809222,
+    "payloads_valid": 8373,
+    "payloads_with_private_path_tokens": 0
+  }
+}

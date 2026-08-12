@@ -1,0 +1,486 @@
+{
+  "corpora": [
+    {
+      "bytes": 170990631,
+      "files": 8373,
+      "id": "member_votes",
+      "kind": "gzip_vote_shards",
+      "label": "Spanish parliamentary member votes",
+      "limitations": [
+        "Current evidence covers the available Congreso and Senado vote corpus, not every legislature or public decision body.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "manifest": {
+        "bytes": 4485195,
+        "path": "etl/data/published/member-vote-shard-manifest-latest.json",
+        "sha256": "864f683b8b6986834ec1833933e223b5ddc185bf3cf0b9b0fdb9be0dcd86d7be"
+      },
+      "minimum_real_rows": 1000000,
+      "next_gate": "Publish immutable shards and manifests, restore them in a clean environment, then quantify legislature and chamber completeness against official source totals.",
+      "official_hosts": [
+        "www.congreso.es",
+        "www.senado.es"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": true,
+        "durable_public_origin": false,
+        "https_source_urls_only": false,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/derived/member-vote-shards",
+      "rows": 1809222,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "congreso_votaciones",
+        "senado_votaciones"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 1707050,
+      "source_url_rows": 1809222,
+      "status": "validated_real_artifact",
+      "unchanged_replay": null,
+      "validation": {
+        "bytes": 857,
+        "path": "etl/data/published/member-vote-shard-validation-latest.json",
+        "sha256": "1d4ba60a25a5466f6c7a71d19d2fa46f12ec62a291dddced767fc448d9933d54"
+      }
+    },
+    {
+      "bytes": 253373860,
+      "files": 37,
+      "id": "eurostat_indicators",
+      "kind": "parquet_manifest",
+      "label": "Eurostat Spain-relevant indicator observations",
+      "limitations": [
+        "Four selected Eurostat datasets prove real analytical scale but do not represent all policy domains.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "manifest": {
+        "bytes": 51065,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-manifest.json",
+        "sha256": "b8d8bde43f8e788f465ad980cea2c6803822a2ea71584ff7390d7fed6078ddbc"
+      },
+      "minimum_real_rows": 1000000,
+      "next_gate": "Define a public, versioned indicator codebook across spending, services, inequality, climate, housing, and health; publish and clean-room restore the resulting snapshot.",
+      "official_hosts": [
+        "ec.europa.eu"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": false,
+        "durable_public_origin": false,
+        "https_source_urls_only": true,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/published/semantic/eurostat-indicator-real-s2-20260811",
+      "rows": 1755809,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "eurostat_sdmx"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 1755809,
+      "source_url_rows": 1755809,
+      "status": "validated_real_artifact",
+      "unchanged_replay": {
+        "files_hardlinked": 37,
+        "manifest": {
+          "bytes": 51098,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-incremental-manifest.json",
+          "sha256": "faffa50deaf7b9a1fb7181681719456df5194302df1e25524f161635d1be9bd5"
+        },
+        "partitions_reused": 26,
+        "passed": true,
+        "root": "etl/data/published/semantic/eurostat-indicator-real-s2-20260811-replay",
+        "validation": {
+          "bytes": 19411,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-incremental-validation.json",
+          "sha256": "b05f1d14abf7c9c1da02b6ca5bc96b5574ac9d662f001fde16845fa24a7209de"
+        }
+      },
+      "validation": {
+        "bytes": 19402,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-validation.json",
+        "sha256": "878fd4cf6b5bc346174c74b43ccd018d746c9e11c45a26c6b2b1151c276b76b0"
+      }
+    },
+    {
+      "bytes": 20803781,
+      "files": 50,
+      "id": "placsp_public_money",
+      "kind": "parquet_manifest",
+      "label": "PLACSP contract notices and awards",
+      "limitations": [
+        "This cohort is not a complete historical PLACSP archive and contract values are not verified payments.",
+        "All 128849 official-source counterparty names and identifiers are retained exactly, including 8260 natural-person and 3058 unclassified counterparties; classification never suppresses public-domain evidence.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "manifest": {
+        "bytes": 95911,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-manifest.json",
+        "sha256": "b225f167d1fad027a0f8d3bac336ec96f9a5e06770f32db8c2f2af53810dda4b"
+      },
+      "minimum_real_rows": 100000,
+      "next_gate": "Ingest the complete official archive by bounded time cohorts, reconcile source totals and revisions, publish one million real facts, and prove clean-room restore.",
+      "official_hosts": [
+        "contrataciondelestado.es"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": true,
+        "durable_public_origin": false,
+        "https_source_urls_only": true,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/derived/placsp-contracts-real-s1-v5-current",
+      "rows": 263302,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "placsp_sindicacion"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 263302,
+      "source_url_rows": 263302,
+      "status": "validated_real_artifact",
+      "unchanged_replay": {
+        "files_hardlinked": 50,
+        "manifest": {
+          "bytes": 95918,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-incremental-manifest.json",
+          "sha256": "7fc476a70c451f606973d2f6a7b3d59d4ba0d144cf0169af6b00a0b1e9cf881f"
+        },
+        "partitions_reused": 50,
+        "passed": true,
+        "root": "etl/data/derived/placsp-contracts-real-s1-v5-current-replay",
+        "validation": {
+          "bytes": 33550,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-incremental-validation.json",
+          "sha256": "36e09c6bd195d14e638c977414c26e30818e0eb62dbfc6a6ae92e6c7ef64f9e8"
+        }
+      },
+      "validation": {
+        "bytes": 33531,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-s1-v5-semantic-validation.json",
+        "sha256": "9d4c187c45ab15b98f40f5d270275dc59a1c4db0558b05d90cbb8b50335603ee"
+      }
+    },
+    {
+      "bytes": 3464007,
+      "files": 1,
+      "id": "bdns_public_money",
+      "kind": "parquet_manifest",
+      "label": "BDNS subsidy concessions",
+      "limitations": [
+        "This is a bounded 100-page cohort containing 100000 of 28676987 official concessions observed on 2026-08-12; it is not a representative historical sample or the complete registry.",
+        "All 100000 official beneficiary names and all 39539 source-published identifiers are retained exactly; the remaining 60461 counterparties are explicitly unclassified and no identity field is suppressed.",
+        "Published subsidy amounts are award values, not independently verified disbursements or outcomes.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "manifest": {
+        "bytes": 9964,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-manifest-20260812.json",
+        "sha256": "9800924b1b4b711f070efb847d91bcfdf346d00bfccd5051654eafc7b56b8964"
+      },
+      "minimum_real_rows": 100000,
+      "next_gate": "Continue official pagination to a reconciled one-million-row cohort, capture a second snapshot for real revision deltas, publish immutable artifacts, and prove clean-room restore.",
+      "official_hosts": [
+        "www.infosubvenciones.es"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": true,
+        "durable_public_origin": false,
+        "https_source_urls_only": true,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812",
+      "rows": 100000,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "bdns_api_subvenciones"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 100000,
+      "source_url_rows": 100000,
+      "status": "validated_real_artifact",
+      "unchanged_replay": {
+        "files_hardlinked": 1,
+        "manifest": {
+          "bytes": 10022,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-manifest-20260812.json",
+          "sha256": "0c05b4b3e7d45e8cb28d7da7b1682de1a7aea7a2da72d2a23393e6d8e26bf8c3"
+        },
+        "partitions_reused": 1,
+        "passed": true,
+        "root": "etl/data/derived/bdns-public-money-real-s1-v5-20260812-replay",
+        "validation": {
+          "bytes": 3853,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-incremental-validation-20260812.json",
+          "sha256": "7c7ab34f16dac98b0f9ecef1709d7dfdfeb169a8361989ef94bee6fe08b9d2f3"
+        }
+      },
+      "validation": {
+        "bytes": 3834,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-public-money-real-s1-v5-validation-20260812.json",
+        "sha256": "511fa66e0cf69a9d2c62d83dad9f0356a7edfda8ecca380d6021799c6cc4b4e1"
+      }
+    },
+    {
+      "bytes": 1271649,
+      "files": 13,
+      "id": "accountability_ledger",
+      "kind": "parquet_manifest",
+      "label": "Cross-source accountability ledger",
+      "limitations": [
+        "The clean 2026-08-12 materialization contains 126760 rows from boe_api_legal, congreso_votaciones, and senado_votaciones; ten fixture-derived PLACSP/BDNS rows and their downstream issues and ledger entries were removed.",
+        "The corpus is dominated by parliamentary actions and is not representative of money, implementation, enforcement, audits, or outcomes.",
+        "Twenty-six legacy rows infer boe_api_legal from an allowlisted official BOE URL because their stored source_id is blank; that inference is explicit in source_id_scope.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "manifest": {
+        "bytes": 28475,
+        "path": "etl/data/published/accountability-ledger-semantic-partition-manifest-latest.json",
+        "sha256": "f0447a308813f16839b4ea2aa9492ef7308d55b83a34f4654bfe7eea8a515186"
+      },
+      "minimum_real_rows": 100000,
+      "next_gate": "Expand the ledger with representative rules, appointments, money, implementation, enforcement, audit, and outcome facts; reach one million real rows and prove public-origin restore.",
+      "official_hosts": [
+        "www.boe.es",
+        "www.congreso.es",
+        "www.senado.es"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": true,
+        "durable_public_origin": false,
+        "https_source_urls_only": true,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/derived/semantic-accountability-ledger",
+      "rows": 126760,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "boe_api_legal",
+        "congreso_votaciones",
+        "senado_votaciones"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 126760,
+      "source_url_rows": 126760,
+      "status": "validated_real_artifact",
+      "unchanged_replay": {
+        "files_hardlinked": 13,
+        "manifest": {
+          "bytes": 28519,
+          "path": "etl/data/published/accountability-ledger-semantic-partition-incremental-latest.json",
+          "sha256": "aee043bc21ccf1477cc01e26cfa5d88a22eb7c4fbd518b1c672a2ea7115925f6"
+        },
+        "partitions_reused": 13,
+        "passed": true,
+        "root": "etl/data/derived/semantic-accountability-ledger-incremental",
+        "validation": {
+          "bytes": 8629,
+          "path": "etl/data/published/accountability-ledger-semantic-partition-validation-incremental-latest.json",
+          "sha256": "374077a80be6354c00315c1ee5d198c80b50fc40047746447d9ade8b4f4d1ca1"
+        }
+      },
+      "validation": {
+        "bytes": 8614,
+        "path": "etl/data/published/accountability-ledger-semantic-partition-validation-latest.json",
+        "sha256": "73f481c0a60e4301d440d2c6f4e2da7e9716056379e1922cc5e0eb034d1e3fbb"
+      }
+    },
+    {
+      "bytes": 9236064,
+      "files": 108,
+      "id": "actor_mandates",
+      "kind": "parquet_manifest",
+      "label": "Spanish elected representatives and mandates",
+      "limitations": [
+        "Source-scoped identifiers and name aliases do not prove identity equivalence across institutions.",
+        "Coverage is uneven across national, regional, municipal, and European institutions.",
+        "The artifact is local and has not passed a clean-room restore from a durable public origin."
+      ],
+      "manifest": {
+        "bytes": 147213,
+        "path": "etl/data/published/actor-mandate-semantic-partition-manifest-latest.json",
+        "sha256": "807d3841554d24872043bdd0e3210482fcf88d99e81a52a9a050b935f14a678c"
+      },
+      "minimum_real_rows": 70000,
+      "next_gate": "Reach one million real mandates and candidacy occurrences, publish institution-by-election coverage, and require reviewed merge/split identity history before cross-source aggregation.",
+      "official_hosts": [
+        "adminweb.parlamento-larioja.org",
+        "concejales.redsara.es",
+        "ctyp.asambleamadrid.es",
+        "datos.gob.es",
+        "parcan.es",
+        "parlamento-cantabria.es",
+        "sede.melilla.es",
+        "www.asambleaex.es",
+        "www.asambleamurcia.es",
+        "www.ccyl.es",
+        "www.ceuta.es",
+        "www.congreso.es",
+        "www.cortesaragon.es",
+        "www.cortesclm.es",
+        "www.cortsvalencianes.es",
+        "www.europarl.europa.eu",
+        "www.jgpa.es",
+        "www.legebiltzarra.eus",
+        "www.parlament.cat",
+        "www.parlamentib.es",
+        "www.parlamentodeandalucia.es",
+        "www.senado.es"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": true,
+        "durable_public_origin": false,
+        "https_source_urls_only": true,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/derived/semantic-actor-mandates",
+      "rows": 88031,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "asamblea_ceuta_diputados",
+        "asamblea_extremadura_diputados",
+        "asamblea_madrid_ocupaciones",
+        "asamblea_melilla_diputados",
+        "asamblea_murcia_diputados",
+        "congreso_diputados",
+        "congreso_votaciones",
+        "cortes_aragon_diputados",
+        "cortes_clm_diputados",
+        "cortes_cyl_procuradores",
+        "corts_valencianes_diputats",
+        "europarl_meps",
+        "infoelectoral_elected_officials",
+        "jgpa_diputados",
+        "municipal_concejales",
+        "parlament_balears_diputats",
+        "parlament_catalunya_diputats",
+        "parlamento_andalucia_diputados",
+        "parlamento_canarias_diputados",
+        "parlamento_cantabria_diputados",
+        "parlamento_larioja_diputados",
+        "parlamento_vasco_parlamentarios",
+        "senado_senadores",
+        "senado_votaciones"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 88031,
+      "source_url_rows": 88031,
+      "status": "validated_real_artifact",
+      "unchanged_replay": {
+        "files_hardlinked": 108,
+        "manifest": {
+          "bytes": 147166,
+          "path": "etl/data/published/actor-mandate-semantic-partition-incremental-latest.json",
+          "sha256": "7fbd31f447b5f453d74a7be70d2b25cb5873ce640ffa561ced6b906c0a70b8b2"
+        },
+        "partitions_reused": 108,
+        "passed": true,
+        "root": "etl/data/derived/semantic-actor-mandates-incremental",
+        "validation": {
+          "bytes": 59332,
+          "path": "etl/data/published/actor-mandate-semantic-partition-validation-incremental-latest.json",
+          "sha256": "ad224c2464d3dd4496942f7cecfb014ac6340a5b7fec9652a5ed2d39d9dddc0f"
+        }
+      },
+      "validation": {
+        "bytes": 59317,
+        "path": "etl/data/published/actor-mandate-semantic-partition-validation-latest.json",
+        "sha256": "c35d1b0401d26fa1718536afa3b5ee5d8758877b68c02017467e5824cf21ef1d"
+      }
+    }
+  ],
+  "foundation": {
+    "meaning": "Every registered current artifact is independently reconciled to official source provenance; societal-scale coverage remains open.",
+    "ready": true
+  },
+  "gaps": [
+    {
+      "current_real_rows": 8926,
+      "evidence": "Official elected-official occurrences are present; the official candidate archive lane has no accepted candidate rows because origin access is failing.",
+      "id": "candidate_occurrences",
+      "next_action": "Resolve reproducible official archive access, ingest bounded election cohorts, and reconcile candidate and party line counts to official archive metadata.",
+      "status": "blocked_official_origin",
+      "target_real_rows": 1000000
+    },
+    {
+      "current_real_rows": 100000,
+      "evidence": "The current durable cohort reconciles 100000 official rows, 100 page captures, 100000 checksum-linked version sightings, one v5 Parquet file, exact identity retention, and one unchanged hardlinked replay. The older 146000-row checkpoint lacks a current compliant root and does not count instead.",
+      "id": "bdns_subsidies",
+      "next_action": "Continue bounded official pagination from a durable queue to one million rows, then reconcile a second snapshot, public origin, and clean-room restore.",
+      "status": "validated_real_s1_below_million",
+      "target_real_rows": 1000000
+    },
+    {
+      "current_real_rows": 21398,
+      "evidence": "The current real inventory reconciles 21398 files and 19538 distinct content hashes, but it is far below the target and lacks artifact-wide source provenance and reviewed OCR quality.",
+      "id": "document_corpus",
+      "next_action": "Reconcile the live manifest, fetch and extract a stratified 100000-document cohort, add page-level OCR lineage and quality review, then scale by official-host cohorts.",
+      "status": "below_scale_and_ocr_quality_gate",
+      "target_real_rows": 1000000
+    },
+    {
+      "current_real_rows": 0,
+      "evidence": "No lane is yet promoted for representative public corruption-risk analysis.",
+      "id": "representative_integrity_analysis",
+      "next_action": "Define reviewed indicator semantics, counterevidence and correction workflows, minimum cohort sizes, false-positive controls, and traceable public explanations before publishing inferred risk signals.",
+      "status": "not_ready",
+      "target_real_rows": 1000000
+    }
+  ],
+  "generated_at": "2026-08-12T13:17:23.562047Z",
+  "policy": {
+    "classification_never_suppresses_public_domain_identity": true,
+    "generated_test_records_count_toward_readiness": false,
+    "loopback_network_results_count_toward_readiness": false,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "promotion_requires_public_origin_and_clean_restore": true,
+    "secrets_workstation_traces_and_non_public_data_forbidden": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "registry": {
+    "bytes": 14498,
+    "path": "docs/etl/real-corpus-registry.json",
+    "sha256": "a18061811708866530f61eada897c424a68f94b7050ddb1719ab700d8be424b5"
+  },
+  "schema_version": "real-scale-readiness-v1",
+  "status": "real_foundation_ready_scale_incomplete",
+  "summary": {
+    "open_gaps": 4,
+    "promoted_lanes": 0,
+    "real_million_scale_lanes": 2,
+    "registered_real_corpora": 6,
+    "validated_real_corpora": 6
+  }
+}

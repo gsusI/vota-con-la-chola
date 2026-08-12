@@ -1,26 +1,26 @@
 {
   "meta": {
     "schema_version": "accountability_ledger_snapshot_v1",
-    "generated_at": "2026-08-12T10:51:02+00:00",
-    "snapshot_date": "2026-02-12",
+    "generated_at": "2026-08-12T13:17:47+00:00",
+    "snapshot_date": "2026-08-12",
     "issue_id": "",
     "max_entries_per_issue": 10,
     "max_sample_entries_per_actor": 2
   },
-  "snapshot_date": "2026-02-12",
+  "snapshot_date": "2026-08-12",
   "coverage": {
     "issues_total": 226,
     "entries_total": 126760,
     "entries_exported": 1323,
     "entries_truncated": true,
     "issues_with_truncated_entries": 120,
-    "actors_total": 923,
-    "entries_with_resolved_actor_id": 126757,
+    "actors_total": 921,
+    "entries_with_resolved_actor_id": 126760,
     "entries_with_person_id": 119828,
     "entries_with_party_id": 1255,
     "entries_with_parliamentary_group_id": 126068,
     "entries_with_mandate_id": 119816,
-    "entries_with_institution_id": 126745,
+    "entries_with_institution_id": 126748,
     "entries_with_org_unit_id": 0,
     "entries_with_position_id": 12,
     "entries_by_role": {
@@ -29327,8 +29327,8 @@
       "actor_label": "Cortes Generales",
       "actor_kind": "institution",
       "institution_id": 8165,
-      "entries_total": 6,
-      "issues_total": 6,
+      "entries_total": 7,
+      "issues_total": 7,
       "first_date": "2000-08-08",
       "last_date": "2015-10-31",
       "sample_entries": [
@@ -29366,13 +29366,14 @@
         }
       ],
       "roles": {
-        "approved": 6
+        "approved": 7
       },
       "entry_kinds": {
+        "responsibility_link": 1,
         "rule": 6
       },
       "evidence_tiers": {
-        "1": 6
+        "1": 7
       }
     },
     {
@@ -38343,6 +38344,57 @@
       },
       "entry_kinds": {
         "parliamentary_action": 2
+      },
+      "evidence_tiers": {
+        "1": 2
+      }
+    },
+    {
+      "actor_key": "institution_id:8259",
+      "actor_label": "JEFATURA DEL ESTADO",
+      "actor_kind": "institution",
+      "institution_id": 8259,
+      "entries_total": 2,
+      "issues_total": 2,
+      "first_date": "2026-02-12",
+      "last_date": "2026-02-12",
+      "sample_entries": [
+        {
+          "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
+          "issue_label": "Correcci\u00f3n de errores del Real Decreto-ley 1/2026, de 27 de enero, de ayudas a las v\u00edctimas de los accidentes ferroviarios de Adamuz (C\u00f3rdoba) y G\u00e9lida (Barcelona).",
+          "entry_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
+          "entry_kind": "rule",
+          "accountability_role": "published",
+          "actor_label": "JEFATURA DEL ESTADO",
+          "published_date": "2026-02-12",
+          "title": "Correcci\u00f3n de errores del Real Decreto-ley 1/2026, de 27 de enero, de ayudas a las v\u00edctimas de los accidentes ferroviarios de Adamuz (C\u00f3rdoba) y G\u00e9lida (Barcelona).",
+          "evidence_tier": 1,
+          "source_title": "Documento legal BOE",
+          "source_url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-3206",
+          "source_locator": "boe:boe_api_legal:BOE-A-2026-3206"
+        },
+        {
+          "issue_id": "cash-payment-limit-spain",
+          "issue_label": "Limite de pagos en efectivo en Espana",
+          "entry_id": "cash-payment-limit-spain:responsibility_link:jefatura-estado-promulgates-rule",
+          "entry_kind": "responsibility_link",
+          "accountability_role": "published",
+          "actor_label": "Jefatura del Estado",
+          "title": "Ley 11/2021",
+          "summary": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
+          "evidence_tier": 1,
+          "source_title": "Ley 11/2021",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
+          "source_locator": "formula promulgatoria y firma",
+          "evidence_quote": "Firma y formula promulgatoria en el BOE."
+        }
+      ],
+      "roles": {
+        "published": 2
+      },
+      "entry_kinds": {
+        "responsibility_link": 1,
+        "rule": 1
       },
       "evidence_tiers": {
         "1": 2
@@ -50258,9 +50310,10 @@
       }
     },
     {
-      "actor_key": "institution:label:agencia estatal de administracion tributaria",
+      "actor_key": "institution_id:8554",
       "actor_label": "Agencia Estatal de Administracion Tributaria",
       "actor_kind": "institution",
+      "institution_id": 8554,
       "entries_total": 1,
       "issues_total": 1,
       "sample_entries": [
@@ -50429,39 +50482,6 @@
       },
       "entry_kinds": {
         "appointment": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution:label:cortes generales",
-      "actor_label": "Cortes Generales",
-      "actor_kind": "institution",
-      "entries_total": 1,
-      "issues_total": 1,
-      "sample_entries": [
-        {
-          "issue_id": "cash-payment-limit-spain",
-          "issue_label": "Limite de pagos en efectivo en Espana",
-          "entry_id": "cash-payment-limit-spain:responsibility_link:cortes-generales-change-rule",
-          "entry_kind": "responsibility_link",
-          "accountability_role": "approved",
-          "actor_label": "Cortes Generales",
-          "title": "Ley 11/2021",
-          "summary": "Aprueban la ley que rebaja el limite general de pagos en efectivo a 1000 euros.",
-          "evidence_tier": 1,
-          "source_title": "Ley 11/2021",
-          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
-          "source_locator": "Ley aprobada por las Cortes Generales",
-          "evidence_quote": "Potestad legislativa estatal en materia tributaria y financiera."
-        }
-      ],
-      "roles": {
-        "approved": 1
-      },
-      "entry_kinds": {
-        "responsibility_link": 1
       },
       "evidence_tiers": {
         "1": 1
@@ -50649,74 +50669,6 @@
       },
       "entry_kinds": {
         "appointment": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution_id:8259",
-      "actor_label": "JEFATURA DEL ESTADO",
-      "actor_kind": "institution",
-      "institution_id": 8259,
-      "entries_total": 1,
-      "issues_total": 1,
-      "first_date": "2026-02-12",
-      "last_date": "2026-02-12",
-      "sample_entries": [
-        {
-          "issue_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
-          "issue_label": "Correcci\u00f3n de errores del Real Decreto-ley 1/2026, de 27 de enero, de ayudas a las v\u00edctimas de los accidentes ferroviarios de Adamuz (C\u00f3rdoba) y G\u00e9lida (Barcelona).",
-          "entry_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3206",
-          "entry_kind": "rule",
-          "accountability_role": "published",
-          "actor_label": "JEFATURA DEL ESTADO",
-          "published_date": "2026-02-12",
-          "title": "Correcci\u00f3n de errores del Real Decreto-ley 1/2026, de 27 de enero, de ayudas a las v\u00edctimas de los accidentes ferroviarios de Adamuz (C\u00f3rdoba) y G\u00e9lida (Barcelona).",
-          "evidence_tier": 1,
-          "source_title": "Documento legal BOE",
-          "source_url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-3206",
-          "source_locator": "boe:boe_api_legal:BOE-A-2026-3206"
-        }
-      ],
-      "roles": {
-        "published": 1
-      },
-      "entry_kinds": {
-        "rule": 1
-      },
-      "evidence_tiers": {
-        "1": 1
-      }
-    },
-    {
-      "actor_key": "institution:label:jefatura del estado",
-      "actor_label": "Jefatura del Estado",
-      "actor_kind": "institution",
-      "entries_total": 1,
-      "issues_total": 1,
-      "sample_entries": [
-        {
-          "issue_id": "cash-payment-limit-spain",
-          "issue_label": "Limite de pagos en efectivo en Espana",
-          "entry_id": "cash-payment-limit-spain:responsibility_link:jefatura-estado-promulgates-rule",
-          "entry_kind": "responsibility_link",
-          "accountability_role": "published",
-          "actor_label": "Jefatura del Estado",
-          "title": "Ley 11/2021",
-          "summary": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
-          "evidence_tier": 1,
-          "source_title": "Ley 11/2021",
-          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-11473",
-          "source_locator": "formula promulgatoria y firma",
-          "evidence_quote": "Firma y formula promulgatoria en el BOE."
-        }
-      ],
-      "roles": {
-        "published": 1
-      },
-      "entry_kinds": {
-        "responsibility_link": 1
       },
       "evidence_tiers": {
         "1": 1
@@ -72129,6 +72081,7 @@
           "role_in_chain": "Tramita y resuelve el procedimiento sancionador y gestiona la recaudacion de las sanciones vinculadas a esta limitacion.",
           "actor_label": "Agencia Estatal de Administracion Tributaria",
           "actor_kind": "institution",
+          "institution_id": 8554,
           "linked_object_type": "governing_rule",
           "linked_object_id": "cash-limit-sanction-regime",
           "title": "Ley 7/2012 (texto consolidado)",
@@ -72147,6 +72100,7 @@
           "role_in_chain": "Aprueban la ley que rebaja el limite general de pagos en efectivo a 1000 euros.",
           "actor_label": "Cortes Generales",
           "actor_kind": "institution",
+          "institution_id": 8165,
           "linked_object_type": "administrative_act",
           "linked_object_id": "law-11-2021-publication",
           "title": "Ley 11/2021",
@@ -72165,6 +72119,7 @@
           "role_in_chain": "Sanciona promulga y ordena la publicacion de la ley que cambia el limite.",
           "actor_label": "Jefatura del Estado",
           "actor_kind": "institution",
+          "institution_id": 8259,
           "linked_object_type": "administrative_act",
           "linked_object_id": "law-11-2021-publication",
           "title": "Ley 11/2021",

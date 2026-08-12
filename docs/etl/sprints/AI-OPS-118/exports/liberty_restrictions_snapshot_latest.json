@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-26T07:36:40+00:00",
-  "snapshot_date": "2026-03-05",
+  "generated_at": "2026-08-12T13:13:39+00:00",
+  "snapshot_date": "2026-08-12",
   "schema_version": "liberty_restrictions_snapshot_v1",
   "totals": {
     "restrictions_total": 11,
@@ -12,7 +12,11 @@
     "indirect_edges_total": 12,
     "indirect_attributable_edges_total": 9,
     "delegated_links_total": 8,
-    "fragments_with_delegated_chain_total": 8
+    "fragments_with_delegated_chain_total": 8,
+    "municipal_restrictions_total": 0,
+    "municipal_fragments_total": 0,
+    "municipal_mapped_fragment_total": 0,
+    "municipal_unmapped_fragment_total": 0
   },
   "restrictions": [
     {
@@ -291,6 +295,7 @@
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
     }
   ],
+  "municipal_restrictions": [],
   "accountability_edges": [
     {
       "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
@@ -900,8 +905,8 @@
     }
   },
   "personal_accountability_summary": {
-    "generated_at": "2026-02-26T07:36:40+00:00",
-    "status": "ok",
+    "generated_at": "2026-08-12T13:13:39+00:00",
+    "status": "degraded",
     "totals": {
       "target_fragments_total": 8,
       "fragments_with_personal_accountability_total": 7,
@@ -916,15 +921,15 @@
       "indirect_person_edges_identity_resolved_alias_total": 9,
       "indirect_person_edges_identity_resolved_alias_non_manual_total": 0,
       "indirect_person_edges_identity_resolved_alias_manual_total": 9,
-      "aliases_total": 9,
+      "aliases_total": 831,
       "manual_alias_rows_total": 9,
       "manual_alias_rows_with_edge_impact_total": 9,
       "manual_alias_edges_with_impact_total": 9,
-      "official_alias_rows_total": 0,
-      "official_alias_rows_with_evidence_total": 0,
-      "official_alias_rows_missing_evidence_total": 0,
-      "official_alias_rows_with_source_record_total": 0,
-      "official_alias_rows_missing_source_record_total": 0,
+      "official_alias_rows_total": 822,
+      "official_alias_rows_with_evidence_total": 10,
+      "official_alias_rows_missing_evidence_total": 812,
+      "official_alias_rows_with_source_record_total": 10,
+      "official_alias_rows_missing_source_record_total": 812,
       "persons_scored_total": 5,
       "top_person_scores_total": 5
     },
@@ -934,11 +939,11 @@
       "indirect_person_edges_with_valid_window_pct": 1.0,
       "indirect_identity_resolution_pct": 1.0,
       "indirect_non_manual_alias_resolution_pct": 0.0,
-      "manual_alias_share_pct": 1.0,
+      "manual_alias_share_pct": 0.01083,
       "manual_alias_upgrade_edge_impact_pct": 1.0,
-      "official_alias_share_pct": 0.0,
-      "official_alias_evidence_coverage_pct": 1.0,
-      "official_alias_source_record_coverage_pct": 1.0
+      "official_alias_share_pct": 0.98917,
+      "official_alias_evidence_coverage_pct": 0.012165,
+      "official_alias_source_record_coverage_pct": 0.012165
     },
     "checks": {
       "personal_scores_available": true,
@@ -950,11 +955,11 @@
       "indirect_non_manual_alias_resolution_gate": true,
       "manual_alias_share_gate": true,
       "official_alias_share_gate": true,
-      "official_alias_evidence_gate": true,
-      "official_alias_source_record_gate": true
+      "official_alias_evidence_gate": false,
+      "official_alias_source_record_gate": false
     },
     "gate": {
-      "passed": true,
+      "passed": false,
       "thresholds": {
         "personal_confidence_min": 0.55,
         "personal_max_causal_distance": 2,
@@ -1185,7 +1190,7 @@
     "indirect_identity_unresolved_sample": []
   },
   "enforcement_variation": {
-    "generated_at": "2026-02-26T07:36:37+00:00",
+    "generated_at": "2026-08-12T13:13:37+00:00",
     "status": "ok",
     "totals": {
       "methodologies_total": 1,
@@ -1522,7 +1527,7 @@
     }
   ],
   "indirect_accountability_summary": {
-    "generated_at": "2026-02-26T07:36:37+00:00",
+    "generated_at": "2026-08-12T13:13:37+00:00",
     "status": "ok",
     "totals": {
       "methodologies_total": 1,
@@ -1782,7 +1787,7 @@
   },
   "delegated_enforcement_links": [
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Carlos Muñoz-Repiso Izaguirre|https://www.boe.es/buscar/doc.php?id=BOE-A-1996-12484",
       "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
       "norm_id": "es:boe-a-2015-11722",
       "boe_id": "BOE-A-2015-11722",
@@ -1792,16 +1797,16 @@
       "delegating_actor_label": "Ministerio competente en trafico",
       "delegated_institution_label": "DGT",
       "designated_role_title": "Direccion General",
-      "designated_actor_label": "Direccion General de Trafico",
+      "designated_actor_label": "Carlos Muñoz-Repiso Izaguirre",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.82,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1996-12484"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Marta Guelbenzu Robles|https://www.boe.es/buscar/doc.php?id=BOE-A-2004-7862",
       "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
       "norm_id": "es:boe-a-2003-23514",
       "boe_id": "BOE-A-2003-23514",
@@ -1811,16 +1816,16 @@
       "delegating_actor_label": "Ministerio de Hacienda",
       "delegated_institution_label": "AEAT",
       "designated_role_title": "Direccion General de la AEAT",
-      "designated_actor_label": "Agencia Estatal de Administracion Tributaria",
+      "designated_actor_label": "Marta Guelbenzu Robles",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.81,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-7862"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Sofía del Carmen Hernanz Costa|https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065",
       "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
       "norm_id": "es:boe-a-2015-3442",
       "boe_id": "BOE-A-2015-3442",
@@ -1830,16 +1835,16 @@
       "delegating_actor_label": "Ministerio del Interior",
       "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
       "designated_role_title": "Autoridad gubernativa",
-      "designated_actor_label": "Delegaciones del Gobierno",
+      "designated_actor_label": "Sofía del Carmen Hernanz Costa",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.8,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Unidad sancionadora DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+      "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Mariano Fernández Fernández|https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115",
       "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
       "norm_id": "es:boe-a-1994-8985",
       "boe_id": "BOE-A-1994-8985",
@@ -1849,16 +1854,16 @@
       "delegating_actor_label": "Ministerio competente en trafico",
       "delegated_institution_label": "DGT",
       "designated_role_title": "Subdireccion de Gestion de Sanciones",
-      "designated_actor_label": "Unidad sancionadora DGT",
+      "designated_actor_label": "Mariano Fernández Fernández",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.78,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|José Alberto García Valera|https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769",
       "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
       "norm_id": "es:boe-a-2003-23186",
       "boe_id": "BOE-A-2003-23186",
@@ -1868,16 +1873,16 @@
       "delegating_actor_label": "Ministerio de Hacienda",
       "delegated_institution_label": "AEAT",
       "designated_role_title": "Delegacion Especial",
-      "designated_actor_label": "Delegaciones AEAT",
+      "designated_actor_label": "José Alberto García Valera",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.76,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Juan Ignacio Moltó García|https://www.boe.es/buscar/doc.php?id=BOE-A-1984-27292",
       "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
       "norm_id": "es:boe-a-2015-11724",
       "boe_id": "BOE-A-2015-11724",
@@ -1887,16 +1892,16 @@
       "delegating_actor_label": "Ministerio de Trabajo",
       "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
       "designated_role_title": "Direccion del Organismo Estatal ITSS",
-      "designated_actor_label": "Organismo Estatal ITSS",
+      "designated_actor_label": "Juan Ignacio Moltó García",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.74,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-27292"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Miguel José Sanz Aranda|https://www.boe.es/buscar/doc.php?id=BOE-A-1988-24053",
       "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
       "norm_id": "es:boe-a-2000-15060",
       "boe_id": "BOE-A-2000-15060",
@@ -1906,16 +1911,16 @@
       "delegating_actor_label": "Ministerio de Trabajo",
       "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
       "designated_role_title": "Jefatura de Inspeccion",
-      "designated_actor_label": "",
+      "designated_actor_label": "Miguel José Sanz Aranda",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
       "enforcement_evidence_date": "2025-12-31",
       "chain_confidence": 0.63,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-24053"
     },
     {
-      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+      "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT|Unidad procedimental sancionadora (AEAT)|https://www.boe.es/buscar/doc.php?id=BOE-A-2010-5072",
       "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
       "norm_id": "es:boe-a-2004-18398",
       "boe_id": "BOE-A-2004-18398",
@@ -1925,31 +1930,31 @@
       "delegating_actor_label": "Ministerio de Hacienda",
       "delegated_institution_label": "AEAT",
       "designated_role_title": "Unidad procedimental sancionadora",
-      "designated_actor_label": "",
+      "designated_actor_label": "Unidad procedimental sancionadora (AEAT)",
       "appointment_start_date": "2024-01-01",
       "appointment_end_date": "",
       "enforcement_action_label": "Graduacion y tramitacion procedimental",
-      "enforcement_evidence_date": "",
+      "enforcement_evidence_date": "2010-03-27",
       "chain_confidence": 0.59,
-      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-5072"
     }
   ],
   "delegated_enforcement_summary": {
-    "generated_at": "2026-02-26T07:36:40+00:00",
+    "generated_at": "2026-08-12T13:13:39+00:00",
     "status": "ok",
     "totals": {
       "methodologies_total": 1,
       "links_total": 8,
       "fragments_with_links_total": 8,
       "target_fragments_total": 8,
-      "fragments_with_designated_actor_total": 6,
-      "links_with_enforcement_evidence_total": 7,
-      "weak_links_total": 2
+      "fragments_with_designated_actor_total": 8,
+      "links_with_enforcement_evidence_total": 8,
+      "weak_links_total": 0
     },
     "coverage": {
       "target_fragment_coverage_pct": 1.0,
-      "designated_actor_coverage_pct": 0.75,
-      "enforcement_evidence_coverage_pct": 0.875
+      "designated_actor_coverage_pct": 1.0,
+      "enforcement_evidence_coverage_pct": 1.0
     },
     "checks": {
       "delegated_chain_started": true,
@@ -1993,7 +1998,7 @@
     ],
     "delegated_links_sample": [
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Direccion General de Trafico|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal|Ministerio competente en trafico|DGT|Carlos Muñoz-Repiso Izaguirre|https://www.boe.es/buscar/doc.php?id=BOE-A-1996-12484",
         "fragment_id": "es:boe-a-2015-11722:fragment:articulo:bloque-sancionador-principal",
         "norm_id": "es:boe-a-2015-11722",
         "boe_id": "BOE-A-2015-11722",
@@ -2002,16 +2007,16 @@
         "delegating_actor_label": "Ministerio competente en trafico",
         "delegated_institution_label": "DGT",
         "designated_role_title": "Direccion General",
-        "designated_actor_label": "Direccion General de Trafico",
+        "designated_actor_label": "Carlos Muñoz-Repiso Izaguirre",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Tramitacion sancionadora en materia de trafico",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.82,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11722"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1996-12484"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Agencia Estatal de Administracion Tributaria|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias|Ministerio de Hacienda|AEAT|Marta Guelbenzu Robles|https://www.boe.es/buscar/doc.php?id=BOE-A-2004-7862",
         "fragment_id": "es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
         "norm_id": "es:boe-a-2003-23514",
         "boe_id": "BOE-A-2003-23514",
@@ -2020,16 +2025,16 @@
         "delegating_actor_label": "Ministerio de Hacienda",
         "delegated_institution_label": "AEAT",
         "designated_role_title": "Direccion General de la AEAT",
-        "designated_actor_label": "Agencia Estatal de Administracion Tributaria",
+        "designated_actor_label": "Marta Guelbenzu Robles",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Instruccion y resolucion de infracciones tributarias",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.81,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23514"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-7862"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Delegaciones del Gobierno|https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal|Ministerio del Interior|Delegaciones/Subdelegaciones del Gobierno|Sofía del Carmen Hernanz Costa|https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065",
         "fragment_id": "es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
         "norm_id": "es:boe-a-2015-3442",
         "boe_id": "BOE-A-2015-3442",
@@ -2038,16 +2043,16 @@
         "delegating_actor_label": "Ministerio del Interior",
         "delegated_institution_label": "Delegaciones/Subdelegaciones del Gobierno",
         "designated_role_title": "Autoridad gubernativa",
-        "designated_actor_label": "Delegaciones del Gobierno",
+        "designated_actor_label": "Sofía del Carmen Hernanz Costa",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Resolucion de expedientes de seguridad ciudadana",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.8,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-12065"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Unidad sancionadora DGT|https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985",
+        "link_key": "delegated_enforcement_v1|es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador|Ministerio competente en trafico|DGT|Mariano Fernández Fernández|https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115",
         "fragment_id": "es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
         "norm_id": "es:boe-a-1994-8985",
         "boe_id": "BOE-A-1994-8985",
@@ -2056,16 +2061,16 @@
         "delegating_actor_label": "Ministerio competente en trafico",
         "delegated_institution_label": "DGT",
         "designated_role_title": "Subdireccion de Gestion de Sanciones",
-        "designated_actor_label": "Unidad sancionadora DGT",
+        "designated_actor_label": "Mariano Fernández Fernández",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Gestion procedimental de expedientes sancionadores",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.78,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-8985"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2003-23115"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|Delegaciones AEAT|https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal|Ministerio de Hacienda|AEAT|José Alberto García Valera|https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769",
         "fragment_id": "es:boe-a-2003-23186:fragment:articulo:bloque-sancionador-principal",
         "norm_id": "es:boe-a-2003-23186",
         "boe_id": "BOE-A-2003-23186",
@@ -2074,16 +2079,16 @@
         "delegating_actor_label": "Ministerio de Hacienda",
         "delegated_institution_label": "AEAT",
         "designated_role_title": "Delegacion Especial",
-        "designated_actor_label": "Delegaciones AEAT",
+        "designated_actor_label": "José Alberto García Valera",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Ejecucion de recaudacion en periodo ejecutivo",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.76,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-12769"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Organismo Estatal ITSS|https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Juan Ignacio Moltó García|https://www.boe.es/buscar/doc.php?id=BOE-A-1984-27292",
         "fragment_id": "es:boe-a-2015-11724:fragment:articulo:bloque-de-infracciones-y-sanciones",
         "norm_id": "es:boe-a-2015-11724",
         "boe_id": "BOE-A-2015-11724",
@@ -2092,16 +2097,16 @@
         "delegating_actor_label": "Ministerio de Trabajo",
         "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
         "designated_role_title": "Direccion del Organismo Estatal ITSS",
-        "designated_actor_label": "Organismo Estatal ITSS",
+        "designated_actor_label": "Juan Ignacio Moltó García",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Actuacion inspectora con propuesta sancionadora",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.74,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-27292"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social|Miguel José Sanz Aranda|https://www.boe.es/buscar/doc.php?id=BOE-A-1988-24053",
         "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
         "norm_id": "es:boe-a-2000-15060",
         "boe_id": "BOE-A-2000-15060",
@@ -2110,16 +2115,16 @@
         "delegating_actor_label": "Ministerio de Trabajo",
         "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
         "designated_role_title": "Jefatura de Inspeccion",
-        "designated_actor_label": "",
+        "designated_actor_label": "Miguel José Sanz Aranda",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Tipificacion e impulso sancionador en orden social",
         "enforcement_evidence_date": "2025-12-31",
         "chain_confidence": 0.63,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-24053"
       },
       {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
+        "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT|Unidad procedimental sancionadora (AEAT)|https://www.boe.es/buscar/doc.php?id=BOE-A-2010-5072",
         "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
         "norm_id": "es:boe-a-2004-18398",
         "boe_id": "BOE-A-2004-18398",
@@ -2128,35 +2133,16 @@
         "delegating_actor_label": "Ministerio de Hacienda",
         "delegated_institution_label": "AEAT",
         "designated_role_title": "Unidad procedimental sancionadora",
-        "designated_actor_label": "",
+        "designated_actor_label": "Unidad procedimental sancionadora (AEAT)",
         "appointment_start_date": "2024-01-01",
         "appointment_end_date": "",
         "enforcement_action_label": "Graduacion y tramitacion procedimental",
-        "enforcement_evidence_date": "",
+        "enforcement_evidence_date": "2010-03-27",
         "chain_confidence": 0.59,
-        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398"
+        "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-5072"
       }
     ],
-    "weak_links_sample": [
-      {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion|Ministerio de Hacienda|AEAT||https://www.boe.es/buscar/act.php?id=BOE-A-2004-18398",
-        "fragment_id": "es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
-        "delegating_actor_label": "Ministerio de Hacienda",
-        "delegated_institution_label": "AEAT",
-        "designated_actor_label": "",
-        "enforcement_evidence_date": "",
-        "chain_confidence": 0.59
-      },
-      {
-        "link_key": "delegated_enforcement_v1|es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral|Ministerio de Trabajo|Inspeccion de Trabajo y Seguridad Social||https://www.boe.es/buscar/act.php?id=BOE-A-2000-15060",
-        "fragment_id": "es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
-        "delegating_actor_label": "Ministerio de Trabajo",
-        "delegated_institution_label": "Inspeccion de Trabajo y Seguridad Social",
-        "designated_actor_label": "",
-        "enforcement_evidence_date": "2025-12-31",
-        "chain_confidence": 0.63
-      }
-    ],
+    "weak_links_sample": [],
     "missing_fragment_sample": []
   }
 }

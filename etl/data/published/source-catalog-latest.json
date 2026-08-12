@@ -1,20 +1,20 @@
 {
   "catalog_version": "v1",
-  "generated_at": "2026-08-12T11:08:52+00:00",
-  "snapshot_date": "2026-02-12",
+  "generated_at": "2026-08-12T13:17:35+00:00",
+  "snapshot_date": "2026-08-12",
   "summary": {
     "sources_total": 48,
     "desired_total": 48,
     "in_db_total": 48,
     "active_total": 48,
-    "with_network_total": 29,
-    "with_any_data_total": 29,
+    "with_network_total": 30,
+    "with_any_data_total": 30,
     "sample_backed_total": 30,
-    "blocked_total": 3,
+    "blocked_total": 2,
     "tracker_done_total": 16,
-    "sql_done_total": 29,
-    "ops_ok_total": 28,
-    "available_total": 29,
+    "sql_done_total": 30,
+    "ops_ok_total": 29,
+    "available_total": 30,
     "stale_total": 0,
     "missing_total": 16,
     "under_threshold_total": 0,
@@ -58,10 +58,10 @@
         "desired_total": 37,
         "in_db_total": 37,
         "active_total": 37,
-        "with_network_total": 23,
+        "with_network_total": 24,
         "tracker_done_total": 13,
-        "sql_done_total": 23,
-        "blocked_total": 3,
+        "sql_done_total": 24,
+        "blocked_total": 2,
         "mismatch_total": 26
       }
     ],
@@ -180,10 +180,10 @@
         "desired_total": 4,
         "in_db_total": 4,
         "active_total": 4,
-        "with_network_total": 1,
+        "with_network_total": 2,
         "tracker_done_total": 1,
-        "sql_done_total": 1,
-        "blocked_total": 2,
+        "sql_done_total": 2,
+        "blocked_total": 1,
         "mismatch_total": 3
       }
     ],
@@ -191,8 +191,8 @@
       "items_total": 301,
       "unmapped": 254,
       "todo": 27,
-      "partial": 47,
-      "done": 226,
+      "partial": 48,
+      "done": 225,
       "mismatch": 26,
       "waived_mismatch": 0,
       "done_zero_real": 0,
@@ -203,14 +203,14 @@
     }
   },
   "ops": {
-    "ingestion_runs_total": 49,
-    "ingestion_runs_ok": 40,
-    "ingestion_runs_error": 9,
-    "ingestion_runs_retry": 9,
-    "ingestion_runs_ok_pct": 0.8163265306122449,
-    "avg_run_seconds": 636708.448982178,
-    "last_run_seconds": 0.0,
-    "retry_rate": 0.1836734693877551,
+    "ingestion_runs_total": 52,
+    "ingestion_runs_ok": 42,
+    "ingestion_runs_error": 10,
+    "ingestion_runs_retry": 10,
+    "ingestion_runs_ok_pct": 0.8076923076923077,
+    "avg_run_seconds": 599975.4423099642,
+    "last_run_seconds": 5.000013113021851,
+    "retry_rate": 0.19230769230769232,
     "published_recommendation_artifacts": 0,
     "autonomico_sources_ok": 17,
     "europeo_sources_ok": 1
@@ -833,7 +833,7 @@
             "status": "PARTIAL",
             "dominio": "Outcomes",
             "scope": "outcomes",
-            "bloque": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
+            "bloque": "Estado real-only `2026-08-12`: conector y parser existen, pero `0` filas REE reales aceptadas. Las `2` filas hist\u00f3ricas proven\u00edan de un fixture y fueron retiradas; aquella corrida no cuenta. Probe actual al endpoint oficial de demanda: `HTTP 403` con p\u00e1gina Incapsula, sin `ESIOS_API_TOKEN` disponible. Evidencia machine-readable: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-access-blocker-20260812.json`; body: `ree-demanda-incapsula-block-20260812.html`; incidente p\u00fablico actualizado en `docs/etl/name-and-shame-access-blockers.md`. No ejecutar fallback. Siguiente comando solo con lever nuevo: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
             "source_ids": [
               "ree_esios_indicators"
             ]
@@ -1013,10 +1013,10 @@
         "label": "Fuentes objetivo en estado ok",
         "status": "PARTIAL",
         "metric": "desired_sources_ok_pct",
-        "actual": 0.5833333333333334,
+        "actual": 0.6041666666666666,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "58%",
+        "actual_display": "60%",
         "target_display": "80%"
       },
       {
@@ -1068,10 +1068,10 @@
         "label": "Runs ETL en estado ok",
         "status": "DONE",
         "metric": "ingestion_runs_ok_pct",
-        "actual": 0.8163265306122449,
+        "actual": 0.8076923076923077,
         "target": 0.8,
         "format": "pct",
-        "actual_display": "82%",
+        "actual_display": "81%",
         "target_display": "80%"
       },
       {
@@ -1079,10 +1079,10 @@
         "label": "Costo de reintentos ETL",
         "status": "DONE",
         "metric": "retry_rate",
-        "actual": 0.1836734693877551,
+        "actual": 0.19230769230769232,
         "target": 0.2,
         "format": "pct",
-        "actual_display": "18%",
+        "actual_display": "19%",
         "target_display": "20%"
       },
       {
@@ -1090,10 +1090,10 @@
         "label": "Duraci\u00f3n media por run ETL",
         "status": "DONE",
         "metric": "avg_run_seconds",
-        "actual": 636708.448982178,
+        "actual": 599975.4423099642,
         "target": null,
         "format": "seconds",
-        "actual_display": "636708.4s",
+        "actual_display": "599975.4s",
         "target_display": "\u2014"
       }
     ],
@@ -1113,6 +1113,20 @@
     ]
   },
   "actions": [
+    {
+      "kind": "ingest_error",
+      "priority": "P0",
+      "scope": "",
+      "title": "Ingesta en error: dir3_unidades_age",
+      "details": "Error: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Temporarily",
+      "source_ids": [
+        "dir3_unidades_age"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source dir3_unidades_age --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
     {
       "kind": "ingest_error",
       "priority": "P0",
@@ -1618,7 +1632,7 @@
       "priority": "P1",
       "scope": "outcomes",
       "title": "PARTIAL: ESIOS/REE API (token)",
-      "details": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
+      "details": "Estado real-only `2026-08-12`: conector y parser existen, pero `0` filas REE reales aceptadas. Las `2` filas hist\u00f3ricas proven\u00edan de un fixture y fueron retiradas; aquella corrida no cuenta. Probe actual al endpoint oficial de demanda: `HTTP 403` con p\u00e1gina Incapsula, sin `ESIOS_API_TOKEN` disponible. Evidencia machine-readable: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-access-blocker-20260812.json`; body: `ree-demanda-incapsula-block-20260812.html`; incidente p\u00fablico actualizado en `docs/etl/name-and-shame-access-blockers.md`. No ejecutar fallback. Siguiente comando solo con lever nuevo: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
       "source_ids": [
         "ree_esios_indicators"
       ],
@@ -1905,6 +1919,15 @@
       "scope": "municipal",
       "title": "PARTIAL: Tr\u00e1fico/movilidad + tributario/SS + seguridad ciudadana + ordenanzas c\u00edvicas/residuos",
       "details": "Done now: PARTIAL. Slice AI-OPS-117 publica `norm_dossiers` (`5` fichas) con `conducta` (tipolog\u00edas), `volumen`, `importe`, `base legal` (`norma -> fragmentos`) y lanes de evidencia (`source_lanes`/enlaces municipales) en `report_sanction_volume_pilot_status.py`. Evidencia: `docs/etl/sprints/AI-OPS-117/reports/sanction-volume-pilot-lane.md`, `docs/etl/sprints/AI-OPS-117/evidence/sanction_volume_pilot_status_20260223T180041Z.json`, `docs/etl/sprints/AI-OPS-117/evidence/just_parl_sanction_citizen_pilot_pipeline_20260223T180041Z.txt`. Falta enriquecer perfil afectado y sustituir valores piloto por observaciones oficiales recurrentes por fuente/periodo. Siguiente comando: `DB_PATH=<db> just parl-report-sanction-volume-pilot-status`.",
+      "source_ids": [],
+      "commands": []
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "territorial",
+      "title": "PARTIAL: `indicator_series` + `domains`",
+      "details": "Corrida real-only `2026-08-12`: captures oficiales Eurostat (`417` series / `3,376` observaciones) y Banco de Espa\u00f1a (`58` / `1,798`) cargadas y normalizadas en DB principal; total `475` series / `5,174` observaciones, provenance `475/475` y `5,174/5,174`, FK `0`, `quick_check=ok` ([evidencia](sprints/SCALE-FOUNDATION-20260810/evidence/indicator-real-only-main-db-20260812.json)). Distribuci\u00f3n auditable: Eurostat `417` -> `proteccion_social_pensiones`; BDE `49` -> `impuestos_gasto_fiscalidad`, `9` -> `vivienda_urbanismo`. El replay BDE ahora conserva `series_label`; antes lo degradaba al c\u00f3digo. AEMET y REE siguen `0` capture real. Las m\u00e9tricas hist\u00f3ricas `2,400/37,431` depend\u00edan de fixtures retirados y no cuentan. Siguiente gate: segundo snapshot real, revisi\u00f3n de codebook/dominios, export sem\u00e1ntico bounded y origin/restore.",
       "source_ids": [],
       "commands": []
     },
@@ -3393,7 +3416,7 @@
       "institution_name": "",
       "role_title": "",
       "format": "json",
-      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "default_url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=1000&order=fechaConcesion&direccion=desc",
       "desired": true,
       "in_db": true,
       "active": true,
@@ -3474,7 +3497,7 @@
       "institution_name": "",
       "role_title": "",
       "format": "json",
-      "default_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/convocatorias",
+      "default_url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=1000&order=fechaConcesion&direccion=desc",
       "desired": true,
       "in_db": true,
       "active": true,
@@ -5303,23 +5326,23 @@
       "tracker_tipo_dato": "",
       "tracker_fuentes_objetivo": "",
       "tracker_block_note": "",
-      "sql_status": "TODO",
-      "ops_state": "not_run",
+      "sql_status": "PARTIAL",
+      "ops_state": "error",
       "catalog_state": "missing",
       "mismatch_state": "UNTRACKED",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 0,
+      "runs_total": 1,
       "runs_ok": 0,
-      "last_status": "",
+      "last_status": "error",
       "last_loaded": 0,
       "max_loaded_any": 0,
       "max_loaded_network": 0,
       "network_fetches": 0,
       "fallback_fetches": 0,
-      "last_seen_at": "",
-      "latest_snapshot": "",
-      "last_message": "",
+      "last_seen_at": "2026-08-12T11:49:49+00:00",
+      "latest_snapshot": "2026-08-12T11:49:49+00:00",
+      "last_message": "Error: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Temporarily",
       "blocker_reason": "",
       "progress": {
         "loaded": 0,
@@ -5464,17 +5487,17 @@
       "mismatch_state": "MATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
-      "runs_total": 1,
-      "runs_ok": 1,
+      "runs_total": 2,
+      "runs_ok": 2,
       "last_status": "ok",
       "last_loaded": 58,
       "max_loaded_any": 58,
       "max_loaded_network": 58,
       "network_fetches": 1,
-      "fallback_fetches": 0,
-      "last_seen_at": "2026-05-11T17:57:00+00:00",
-      "latest_snapshot": "2026-05-11T17:57:00+00:00",
-      "last_message": "Ingesta completada: 58/58 registros validos",
+      "fallback_fetches": 1,
+      "last_seen_at": "2026-08-12T11:31:40+00:00",
+      "latest_snapshot": "2026-08-12T11:31:40+00:00",
+      "last_message": "Ingesta completada: 58/58 registros validos (from-file)",
       "blocker_reason": "",
       "progress": {
         "loaded": 58,
@@ -5537,84 +5560,7 @@
       "tracker_status": "PARTIAL",
       "tracker_tipo_dato": "Indicadores (confusores): ESIOS/REE",
       "tracker_fuentes_objetivo": "ESIOS/REE API (token)",
-      "tracker_block_note": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
-      "sql_status": "TODO",
-      "ops_state": "not_run",
-      "catalog_state": "blocked",
-      "mismatch_state": "MISMATCH",
-      "mismatch_waived": false,
-      "waiver_expiry": "",
-      "runs_total": 0,
-      "runs_ok": 0,
-      "last_status": "",
-      "last_loaded": 0,
-      "max_loaded_any": 0,
-      "max_loaded_network": 0,
-      "network_fetches": 0,
-      "fallback_fetches": 0,
-      "last_seen_at": "",
-      "latest_snapshot": "",
-      "last_message": "",
-      "blocker_reason": "Done now: PARTIAL. AI-OPS-296 cierra el gap de conector con `ree_esios_indicators` (config/registry + parser de payload REE `included[].attributes.values` + soporte de contenedor serializado `records` + rechazo de snapshots legacy `metric,value` + fallback sample reproducible) y lo integra en `backfill-indicators`/mapeo tracker. Corrida reproducible en DB principal desde muestra (`--from-file`) deja `status=ok`, `records_loaded=2`, `source_records_total=2`; el probe `--strict-network` al endpoint oficial sigue bloqueado de forma reproducible con `HTTP 500`, body HTML y cabecera `x-cdn: Imperva`, por lo que no aplica `DONE` en red real. Evidencia: `docs/etl/sprints/AI-OPS-296/reports/ree-esios-indicators-connector-partial-closure-20260228.md`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_ingest_status_latest.json`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/e2e_tracker_status_main_db_latest.txt`, `docs/etl/sprints/AI-OPS-296/evidence/ree_esios_main_db_ingestion_runs_latest.txt`. Siguiente comando: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
-      "progress": {
-        "loaded": 0,
-        "target": 1,
-        "percent": 0
-      },
-      "warehouse": {
-        "primary_table": "mandates",
-        "primary_rows": 0,
-        "counts": {
-          "mandates": 0,
-          "parl_vote_events": 0,
-          "parl_initiatives": 0,
-          "infoelectoral_convocatoria_tipos": 0,
-          "infoelectoral_procesos": 0
-        }
-      },
-      "execution": {
-        "runner_script": "scripts/ingestar_politicos_es.py",
-        "strict_target": 1,
-        "fallback_file": "",
-        "sample_url": "",
-        "sample_available": false
-      },
-      "flags": {
-        "under_threshold": false,
-        "done_zero_real": false,
-        "has_network": false,
-        "has_any": false,
-        "blocked_note": true
-      },
-      "legal": {
-        "verification_status": "pending_review",
-        "reuse_basis": "Sin verificaci\u00f3n documental espec\u00edfica en este snapshot",
-        "terms_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour",
-        "obligations": [
-          "Verificar aviso legal/licencia del dominio de origen antes de redistribuci\u00f3n comercial."
-        ],
-        "notes": "Fuente sin ficha legal espec\u00edfica en esta versi\u00f3n. Revisi\u00f3n manual requerida antes de redistribuci\u00f3n comercial.",
-        "personal_data_notes": "Conservar \u00edntegramente los datos personales que la fuente oficial publique como registro p\u00fablico de rendici\u00f3n de cuentas; no a\u00f1adir datos no p\u00fablicos ni deshacer el enmascarado del origen.",
-        "reviewed_on": "2026-02-21"
-      }
-    },
-    {
-      "source_id": "eurostat_sdmx",
-      "source_name": "Eurostat - Indicadores outcomes (API/SDMX)",
-      "domain": "politicos",
-      "scope": "outcomes",
-      "level": "",
-      "institution_name": "",
-      "role_title": "",
-      "format": "json",
-      "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
-      "desired": true,
-      "in_db": true,
-      "active": true,
-      "tracker_status": "PARTIAL",
-      "tracker_tipo_dato": "Indicadores (outcomes): Eurostat",
-      "tracker_fuentes_objetivo": "Eurostat (API/SDMX)",
-      "tracker_block_note": "Done now: NO para live-clean. Live ETL `2026-05-11` carg\u00f3 solo fallback (`2/2`) tras `HTTP 404` en red real (`max_net=0`, `net/fallback_fetches=0/1`), as\u00ed que queda `PARTIAL` hasta corregir endpoint/query o confirmar contrato alternativo. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "tracker_block_note": "Estado real-only `2026-08-12`: conector y parser existen, pero `0` filas REE reales aceptadas. Las `2` filas hist\u00f3ricas proven\u00edan de un fixture y fueron retiradas; aquella corrida no cuenta. Probe actual al endpoint oficial de demanda: `HTTP 403` con p\u00e1gina Incapsula, sin `ESIOS_API_TOKEN` disponible. Evidencia machine-readable: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-access-blocker-20260812.json`; body: `ree-demanda-incapsula-block-20260812.html`; incidente p\u00fablico actualizado en `docs/etl/name-and-shame-access-blockers.md`. No ejecutar fallback. Siguiente comando solo con lever nuevo: `ESIOS_API_TOKEN=<token> python3 scripts/ingestar_politicos_es.py ingest --db <db> --source ree_esios_indicators --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30 && python3 scripts/ingestar_politicos_es.py backfill-indicators --db <db> --source-ids ree_esios_indicators`.",
       "sql_status": "TODO",
       "ops_state": "not_run",
       "catalog_state": "missing",
@@ -5661,6 +5607,83 @@
         "done_zero_real": false,
         "has_network": false,
         "has_any": false,
+        "blocked_note": false
+      },
+      "legal": {
+        "verification_status": "pending_review",
+        "reuse_basis": "Sin verificaci\u00f3n documental espec\u00edfica en este snapshot",
+        "terms_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-02-11T00:00&end_date=2026-02-12T23:59&time_trunc=hour",
+        "obligations": [
+          "Verificar aviso legal/licencia del dominio de origen antes de redistribuci\u00f3n comercial."
+        ],
+        "notes": "Fuente sin ficha legal espec\u00edfica en esta versi\u00f3n. Revisi\u00f3n manual requerida antes de redistribuci\u00f3n comercial.",
+        "personal_data_notes": "Conservar \u00edntegramente los datos personales que la fuente oficial publique como registro p\u00fablico de rendici\u00f3n de cuentas; no a\u00f1adir datos no p\u00fablicos ni deshacer el enmascarado del origen.",
+        "reviewed_on": "2026-02-21"
+      }
+    },
+    {
+      "source_id": "eurostat_sdmx",
+      "source_name": "Eurostat - Indicadores outcomes (API/SDMX)",
+      "domain": "politicos",
+      "scope": "outcomes",
+      "level": "",
+      "institution_name": "",
+      "role_title": "",
+      "format": "json",
+      "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+      "desired": true,
+      "in_db": true,
+      "active": true,
+      "tracker_status": "PARTIAL",
+      "tracker_tipo_dato": "Indicadores (outcomes): Eurostat",
+      "tracker_fuentes_objetivo": "Eurostat (API/SDMX)",
+      "tracker_block_note": "Done now: NO para live-clean. Live ETL `2026-05-11` carg\u00f3 solo fallback (`2/2`) tras `HTTP 404` en red real (`max_net=0`, `net/fallback_fetches=0/1`), as\u00ed que queda `PARTIAL` hasta corregir endpoint/query o confirmar contrato alternativo. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "sql_status": "DONE",
+      "ops_state": "ok",
+      "catalog_state": "available",
+      "mismatch_state": "MISMATCH",
+      "mismatch_waived": false,
+      "waiver_expiry": "",
+      "runs_total": 1,
+      "runs_ok": 1,
+      "last_status": "ok",
+      "last_loaded": 417,
+      "max_loaded_any": 417,
+      "max_loaded_network": 417,
+      "network_fetches": 1,
+      "fallback_fetches": 0,
+      "last_seen_at": "2026-08-12T11:31:50+00:00",
+      "latest_snapshot": "2026-08-12T11:31:50+00:00",
+      "last_message": "Ingesta completada: 417/417 registros validos (from-file)",
+      "blocker_reason": "",
+      "progress": {
+        "loaded": 417,
+        "target": 1,
+        "percent": 100
+      },
+      "warehouse": {
+        "primary_table": "mandates",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "execution": {
+        "runner_script": "scripts/ingestar_politicos_es.py",
+        "strict_target": 1,
+        "fallback_file": "",
+        "sample_url": "",
+        "sample_available": false
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": true,
+        "has_any": true,
         "blocked_note": false
       },
       "legal": {

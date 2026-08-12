@@ -1,0 +1,765 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "actor_resolution_state_complete": true,
+    "bounded_file_rows": true,
+    "bounded_peak_rss": true,
+    "database_join_balance": true,
+    "distinct_entry_ids": true,
+    "lineage_complete": true,
+    "minimum_rows": true,
+    "no_private_tokens": true,
+    "source_id_complete": true,
+    "source_url_complete": true
+  },
+  "coverage": {
+    "lineage": 1.0,
+    "resolved_actor": 0.99997633,
+    "source_record": 0.99979489,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-12T10:55:36+00:00",
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 0,
+    "input_fingerprint": "sha256_canonical_public_rows",
+    "partitions_rebuilt": 13,
+    "partitions_reused": 0,
+    "previous_manifest_sha256": null,
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version"
+    ]
+  },
+  "lane": "accountability_ledger",
+  "limitations": [
+    "Explicit unresolved actor states are preserved and require review rather than forced identity merges.",
+    "Local materialization does not prove durable public-origin publication or restore.",
+    "This ledger is dominated by parliamentary facts and does not imply complete money, implementation, enforcement, audit, or outcome coverage."
+  ],
+  "partition_contract": {
+    "compression": "zstd",
+    "keys": [
+      "snapshot_date",
+      "source_id",
+      "jurisdiction",
+      "year"
+    ],
+    "max_file_rows": 100000,
+    "ordering": [
+      "source_id",
+      "year",
+      "entry_id"
+    ],
+    "row_group_rows": 25000,
+    "strategy": "semantic_hive"
+  },
+  "partitions": [
+    {
+      "files": [
+        {
+          "bytes": 16148,
+          "max_id": "sanction-norm-current-owner:es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+          "min_id": "legal-responsibility:5",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=1994/part-00000.parquet",
+          "rows": 3,
+          "sha256": "c025a56e586d2e5eeb6ea2c9dc7b76886089aa51b6e4465a063c6126363022b1"
+        }
+      ],
+      "input_sha256": "4a3ede01ebaf002b329b53f2b3928bf33ed9180f62633430504b17103d1fbb35",
+      "lineage_rows": 3,
+      "materialization": "rebuilt",
+      "max_id": "sanction-norm-current-owner:es:boe-a-1994-8985:fragment:articulo:bloque-procedimental-sancionador",
+      "min_id": "legal-responsibility:5",
+      "official_url_source_id_rows": 3,
+      "partition_id": "boe_api_legal|es-national|1994",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=1994",
+      "resolved_actor_rows": 3,
+      "rows": 3,
+      "source_default_url_rows": 0,
+      "source_record_rows": 0,
+      "source_record_url_rows": 3,
+      "source_url_rows": 3,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "1994"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 16191,
+          "max_id": "sanction-norm-current-owner:es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+          "min_id": "legal-responsibility:13",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2000/part-00000.parquet",
+          "rows": 3,
+          "sha256": "56aaf1e833b659e483cd1d54865e6882a2672f8c08563d5ff4dbe098cc2e04a7"
+        }
+      ],
+      "input_sha256": "20d014f8e946fccf42dc31ce05f99592d5c4f10e9793644deb839896a3ece905",
+      "lineage_rows": 3,
+      "materialization": "rebuilt",
+      "max_id": "sanction-norm-current-owner:es:boe-a-2000-15060:fragment:articulo:bloque-de-tipificacion-laboral",
+      "min_id": "legal-responsibility:13",
+      "official_url_source_id_rows": 3,
+      "partition_id": "boe_api_legal|es-national|2000",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2000",
+      "resolved_actor_rows": 3,
+      "rows": 3,
+      "source_default_url_rows": 0,
+      "source_record_rows": 0,
+      "source_record_url_rows": 3,
+      "source_url_rows": 3,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "2000"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 16627,
+          "max_id": "sanction-norm-current-owner:es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+          "min_id": "legal-responsibility:3",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2003/part-00000.parquet",
+          "rows": 5,
+          "sha256": "d756a33c84ebbc3eb12593c12bab629b5bd5822805c00863a17deb273ab7c209"
+        }
+      ],
+      "input_sha256": "7a704c969124190ab10df899c56c305ad11ee3af209ca827405b9ef9599a89a6",
+      "lineage_rows": 5,
+      "materialization": "rebuilt",
+      "max_id": "sanction-norm-current-owner:es:boe-a-2003-23514:fragment:articulo:bloque-de-infracciones-tributarias",
+      "min_id": "legal-responsibility:3",
+      "official_url_source_id_rows": 5,
+      "partition_id": "boe_api_legal|es-national|2003",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2003",
+      "resolved_actor_rows": 5,
+      "rows": 5,
+      "source_default_url_rows": 0,
+      "source_record_rows": 0,
+      "source_record_url_rows": 5,
+      "source_url_rows": 5,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "2003"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 15680,
+          "max_id": "sanction-norm-current-owner:es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+          "min_id": "legal-responsibility:8",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2004/part-00000.parquet",
+          "rows": 3,
+          "sha256": "09fbeffc200fc019edeb0f1dba4cfdeb86dec54b6487e7a4b9ab9cf0a964221e"
+        }
+      ],
+      "input_sha256": "4d85c9b0a98c313f4b35a3e41c160adeb8adec157c917e094e694a35525f7ea2",
+      "lineage_rows": 3,
+      "materialization": "rebuilt",
+      "max_id": "sanction-norm-current-owner:es:boe-a-2004-18398:fragment:articulo:bloque-procedimental-y-de-graduacion",
+      "min_id": "legal-responsibility:8",
+      "official_url_source_id_rows": 3,
+      "partition_id": "boe_api_legal|es-national|2004",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2004",
+      "resolved_actor_rows": 3,
+      "rows": 3,
+      "source_default_url_rows": 0,
+      "source_record_rows": 0,
+      "source_record_url_rows": 3,
+      "source_url_rows": 3,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "2004"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 16590,
+          "max_id": "sanction-norm-current-owner:es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+          "min_id": "legal-responsibility:1",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2015/part-00000.parquet",
+          "rows": 9,
+          "sha256": "34e1f929caf227fb89ab8da872f57bb9c67ac456ba73cf66c4f069258ea3c422"
+        }
+      ],
+      "input_sha256": "3bb26a2cfd27e49d1e0702979f7cdb7171bbd444ea8c00b0b95967e02c8e4259",
+      "lineage_rows": 9,
+      "materialization": "rebuilt",
+      "max_id": "sanction-norm-current-owner:es:boe-a-2015-3442:fragment:articulo:bloque-sancionador-principal",
+      "min_id": "legal-responsibility:1",
+      "official_url_source_id_rows": 9,
+      "partition_id": "boe_api_legal|es-national|2015",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2015",
+      "resolved_actor_rows": 9,
+      "rows": 9,
+      "source_default_url_rows": 0,
+      "source_record_rows": 0,
+      "source_record_url_rows": 9,
+      "source_url_rows": 9,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "2015"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 32818,
+          "max_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3290",
+          "min_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3221",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 97,
+          "sha256": "92585440edc1f499a2680faea02e4db713305787a5f0ad85b7aeccfebf0fd5d4"
+        }
+      ],
+      "input_sha256": "9e644a0f53eca7c9aa11a2821d1b659da93bb9f0ec48bd095f887a20623e39f6",
+      "lineage_rows": 97,
+      "materialization": "rebuilt",
+      "max_id": "policy-event:boe:boe_api_legal:BOE-A-2026-3290",
+      "min_id": "boe-appointment:boe:boe_api_legal:BOE-A-2026-3221",
+      "official_url_source_id_rows": 0,
+      "partition_id": "boe_api_legal|es-national|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2026",
+      "resolved_actor_rows": 97,
+      "rows": 97,
+      "source_default_url_rows": 0,
+      "source_record_rows": 97,
+      "source_record_url_rows": 97,
+      "source_url_rows": 97,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "2026"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 14690,
+          "max_id": "cash-payment-limit-spain:responsibility_link:jefatura-estado-promulgates-rule",
+          "min_id": "cash-payment-limit-spain:responsibility_link:aeat-applies-rule",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=unknown/part-00000.parquet",
+          "rows": 3,
+          "sha256": "c7e37dace1a18e348c83cc494a396b56b87d1e167e32324d1f764395291d63c2"
+        }
+      ],
+      "input_sha256": "9d5ae1603b22c4d0967be1a8bb876578260f4e3f9bdf7bbba8aab2b115ccc424",
+      "lineage_rows": 3,
+      "materialization": "rebuilt",
+      "max_id": "cash-payment-limit-spain:responsibility_link:jefatura-estado-promulgates-rule",
+      "min_id": "cash-payment-limit-spain:responsibility_link:aeat-applies-rule",
+      "official_url_source_id_rows": 3,
+      "partition_id": "boe_api_legal|es-national|unknown",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=unknown",
+      "resolved_actor_rows": 0,
+      "rows": 3,
+      "source_default_url_rows": 0,
+      "source_record_rows": 0,
+      "source_record_url_rows": 3,
+      "source_url_rows": 3,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 3,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "boe_api_legal",
+        "year": "unknown"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 39244,
+          "max_id": "parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json:name:yolanda diaz perez:parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+          "min_id": "parl-group-vote:congreso:vote:d6d15e5a8f16384ce6481d10:1:voted_for:parl-vote:congreso:vote:d6d15e5a8f16384ce6481d10",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=congreso_votaciones/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 725,
+          "sha256": "8668c911dba3de18a120add58934fc1f7ee5c97c1f0f3e261a070b65fcfef38c"
+        }
+      ],
+      "input_sha256": "d59d06facedcadb7715f767c2d42b99213e87a41cb17a010b2a0dbe1555026cd",
+      "lineage_rows": 725,
+      "materialization": "rebuilt",
+      "max_id": "parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json:name:yolanda diaz perez:parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+      "min_id": "parl-group-vote:congreso:vote:d6d15e5a8f16384ce6481d10:1:voted_for:parl-vote:congreso:vote:d6d15e5a8f16384ce6481d10",
+      "official_url_source_id_rows": 0,
+      "partition_id": "congreso_votaciones|es-national|2026",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=congreso_votaciones/jurisdiction=es-national/year=2026",
+      "resolved_actor_rows": 725,
+      "rows": 725,
+      "source_default_url_rows": 362,
+      "source_record_rows": 725,
+      "source_record_url_rows": 363,
+      "source_url_rows": 725,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "congreso_votaciones",
+        "year": "2026"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 382282,
+          "max_id": "parl-vote:url:https://www.senado.es/legis14/votaciones/ses_23_524.xml:9:parl-initiative:senado:leg14:exp:621/000012",
+          "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_15_72.xml:10:voted_against:parl-initiative:senado:leg14:exp:621/000004",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2020/part-00000.parquet",
+          "rows": 75542,
+          "sha256": "3054db9c8bfffb531d71482ee8c79b2cffd1c9bf95f8a83ad668fce0164e0948"
+        }
+      ],
+      "input_sha256": "ad0716b45b74a529771e704afd6fdd237c0466b8103f2da4b01123bc79bb9681",
+      "lineage_rows": 75542,
+      "materialization": "rebuilt",
+      "max_id": "parl-vote:url:https://www.senado.es/legis14/votaciones/ses_23_524.xml:9:parl-initiative:senado:leg14:exp:621/000012",
+      "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_15_72.xml:10:voted_against:parl-initiative:senado:leg14:exp:621/000004",
+      "official_url_source_id_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2020",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2020",
+      "resolved_actor_rows": 75542,
+      "rows": 75542,
+      "source_default_url_rows": 0,
+      "source_record_rows": 75542,
+      "source_record_url_rows": 75542,
+      "source_url_rows": 75542,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "senado_votaciones",
+        "year": "2020"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 214675,
+          "max_id": "parl-vote:url:https://www.senado.es/legis14/votaciones/ses_42_1657.xml:9:parl-initiative:senado:leg14:exp:610/000077",
+          "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_16_100.xml:10:voted_for:parl-initiative:senado:leg14:exp:610/000013",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2021/part-00000.parquet",
+          "rows": 11437,
+          "sha256": "5cdb6adb33f6e318279750be52c30cda6ac799e11f44fb91d6a585310f6fe2cc"
+        }
+      ],
+      "input_sha256": "53abcd08c3903afe52dc813f5cf4e066ac25893496b8ccc9eddfd6cdacea3ac4",
+      "lineage_rows": 11437,
+      "materialization": "rebuilt",
+      "max_id": "parl-vote:url:https://www.senado.es/legis14/votaciones/ses_42_1657.xml:9:parl-initiative:senado:leg14:exp:610/000077",
+      "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_16_100.xml:10:voted_for:parl-initiative:senado:leg14:exp:610/000013",
+      "official_url_source_id_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2021",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2021",
+      "resolved_actor_rows": 11437,
+      "rows": 11437,
+      "source_default_url_rows": 0,
+      "source_record_rows": 11437,
+      "source_record_url_rows": 11437,
+      "source_url_rows": 11437,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "senado_votaciones",
+        "year": "2021"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 188001,
+          "max_id": "parl-vote:url:https://www.senado.es/legis14/votaciones/ses_62_3293.xml:9:parl-initiative:senado:leg14:exp:605/000004",
+          "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_43_1727.xml:11:voted_for:parl-initiative:senado:leg14:exp:605/000003",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2022/part-00000.parquet",
+          "rows": 9612,
+          "sha256": "94932fe8df1786fc794e0bb1da0c10a7b84b9dac5846bd539b3a86b598187c96"
+        }
+      ],
+      "input_sha256": "c8b0c862c621c37baf23a43f0644eb74578f1658dbc1c6afe1c182e0cd060d5a",
+      "lineage_rows": 9612,
+      "materialization": "rebuilt",
+      "max_id": "parl-vote:url:https://www.senado.es/legis14/votaciones/ses_62_3293.xml:9:parl-initiative:senado:leg14:exp:605/000004",
+      "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_43_1727.xml:11:voted_for:parl-initiative:senado:leg14:exp:605/000003",
+      "official_url_source_id_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2022",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2022",
+      "resolved_actor_rows": 9612,
+      "rows": 9612,
+      "source_default_url_rows": 0,
+      "source_record_rows": 9612,
+      "source_record_url_rows": 9612,
+      "source_url_rows": 9612,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "senado_votaciones",
+        "year": "2022"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 133128,
+          "max_id": "parl-vote:url:https://www.senado.es/legis15/votaciones/ses_8_43.xml:9:parl-initiative:senado:leg15:exp:622/000010",
+          "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_64_3844.xml:12:abstained:parl-initiative:senado:leg14:exp:610/000104",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 7568,
+          "sha256": "41d29fc70d07fe71cf050db65f6380a5a678fcf9f156215af8ecb130ef976d74"
+        }
+      ],
+      "input_sha256": "b13c765f1daf5fe23400d2112cf675428d9b72d8e7f23cc567e23c8ba9d454b8",
+      "lineage_rows": 7568,
+      "materialization": "rebuilt",
+      "max_id": "parl-vote:url:https://www.senado.es/legis15/votaciones/ses_8_43.xml:9:parl-initiative:senado:leg15:exp:622/000010",
+      "min_id": "parl-group-vote:url:https://www.senado.es/legis14/votaciones/ses_64_3844.xml:12:abstained:parl-initiative:senado:leg14:exp:610/000104",
+      "official_url_source_id_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2023",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2023",
+      "resolved_actor_rows": 7568,
+      "rows": 7568,
+      "source_default_url_rows": 0,
+      "source_record_rows": 7568,
+      "source_record_url_rows": 7568,
+      "source_url_rows": 7568,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "senado_votaciones",
+        "year": "2023"
+      }
+    },
+    {
+      "files": [
+        {
+          "bytes": 185575,
+          "max_id": "parl-vote:url:https://www.senado.es/legis15/votaciones/ses_19_179.xml:9:parl-initiative:senado:leg15:exp:621/000001",
+          "min_id": "parl-group-vote:url:https://www.senado.es/legis15/votaciones/ses_11_57.xml:21:unknown:parl-initiative:senado:leg15:exp:622/000019",
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 21753,
+          "sha256": "2fb2fe15a0e10e77062cf76c84ae4eb4f8a934678c9f49087dfa084b70838794"
+        }
+      ],
+      "input_sha256": "460f086e32a7ce96b8d9b6f88842053b9ddf2e4e8c2f980df26de59fd3aa732b",
+      "lineage_rows": 21753,
+      "materialization": "rebuilt",
+      "max_id": "parl-vote:url:https://www.senado.es/legis15/votaciones/ses_19_179.xml:9:parl-initiative:senado:leg15:exp:621/000001",
+      "min_id": "parl-group-vote:url:https://www.senado.es/legis15/votaciones/ses_11_57.xml:21:unknown:parl-initiative:senado:leg15:exp:622/000019",
+      "official_url_source_id_rows": 0,
+      "partition_id": "senado_votaciones|es-national|2024",
+      "private_token_findings": 0,
+      "relative_dir": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2024",
+      "resolved_actor_rows": 21753,
+      "rows": 21753,
+      "source_default_url_rows": 0,
+      "source_record_rows": 21753,
+      "source_record_url_rows": 21753,
+      "source_url_rows": 21753,
+      "unknown_source_id_rows": 0,
+      "unresolved_actor_rows": 0,
+      "values": {
+        "jurisdiction": "es-national",
+        "snapshot_date": "2026-08-12",
+        "source_id": "senado_votaciones",
+        "year": "2024"
+      }
+    }
+  ],
+  "performance": {
+    "fingerprint_seconds": 6.128328,
+    "materialize_seconds": 4.500767,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 208.918,
+    "rows_per_second": 11687.272,
+    "total_seconds": 10.845987
+  },
+  "promotion_checks": {
+    "analytical_partition_gate": true,
+    "durable_public_origin_verified": false,
+    "published_artifact_restore_verified": false
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "schema": [
+    {
+      "name": "entry_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "issue_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "issue_key",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "issue_label",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "issue_status",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "entry_kind",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "accountability_role",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "role_in_chain",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "actor_label",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "actor_kind",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "actor_resolution_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "person_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "party_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "parliamentary_group_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "mandate_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "institution_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "org_unit_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "position_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "linked_object_type",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "linked_object_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "policy_event_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "topic_evidence_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "legal_fragment_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "event_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "published_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "entry_year",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "summary",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "accountability_question",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "confidence",
+      "nullable": true,
+      "type": "float64"
+    },
+    {
+      "name": "evidence_tier",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "source_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_id_scope",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_title",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_url_scope",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_record_pk",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "evidence_quote",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "lineage_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "jurisdiction",
+      "nullable": false,
+      "type": "string"
+    }
+  ],
+  "schema_sha256": "c4d27957b8f10c351f35cc425325847fbfce5dc1ebb719ab32f9c905f0db327c",
+  "schema_version": "semantic_partition_manifest_v1",
+  "snapshot_date": "2026-08-12",
+  "source": {
+    "database_bytes": 727314432,
+    "database_file": "politicos-es.db",
+    "issue_table": "accountability_issues",
+    "raw_payload_published": false,
+    "source_locator_published": false,
+    "table": "accountability_ledger_entries"
+  },
+  "totals": {
+    "distinct_entry_ids": 126760,
+    "files": 13,
+    "joined_rows": 126760,
+    "ledger_rows": 126760,
+    "lineage_rows": 126760,
+    "official_url_source_id_rows": 26,
+    "parquet_bytes": 1271649,
+    "partitions": 13,
+    "private_token_findings": 0,
+    "resolved_actor_rows": 126757,
+    "rows": 126760,
+    "source_default_url_rows": 362,
+    "source_record_rows": 126734,
+    "source_record_url_rows": 126398,
+    "source_url_rows": 126760,
+    "unknown_source_id_rows": 0,
+    "unknown_year_rows": 3,
+    "unresolved_actor_rows": 3
+  },
+  "transformer_version": "accountability_ledger_public_v2"
+}
