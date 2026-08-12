@@ -1,0 +1,61 @@
+name: Data correction or attribution dispute
+description: Challenge a public record, identity link, responsibility claim, or source interpretation.
+title: "[Correction] "
+labels:
+  - "area:governance"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections are evidence work, not debate by volume. Do not post private personal data. Link the exact public route and primary evidence.
+  - type: input
+    id: public_route
+    attributes:
+      label: Public route or artifact
+      description: Exact URL, snapshot path, answer id, or evidence id.
+    validations:
+      required: true
+  - type: textarea
+    id: disputed_claim
+    attributes:
+      label: Disputed claim
+      description: Copy the shortest exact statement or field that should change.
+    validations:
+      required: true
+  - type: dropdown
+    id: correction_kind
+    attributes:
+      label: Correction type
+      options:
+        - Wrong person or organization identity
+        - Wrong action or responsibility role
+        - Wrong date, amount, vote, or status
+        - Source does not support the claim
+        - Missing context changes the interpretation
+        - Privacy or safety concern
+        - Other factual correction
+    validations:
+      required: true
+  - type: textarea
+    id: primary_evidence
+    attributes:
+      label: Primary evidence
+      description: Official URL, document identifier, page or article, date, and short explanation.
+    validations:
+      required: true
+  - type: textarea
+    id: requested_resolution
+    attributes:
+      label: Requested resolution
+      description: Corrected value, caveat, removal, or review you request.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials and unnecessary private personal data.
+          required: true
+        - label: I understand the original snapshot remains in history and any correction is versioned.
+          required: true

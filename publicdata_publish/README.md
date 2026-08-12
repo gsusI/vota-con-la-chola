@@ -3,8 +3,8 @@
 Reusable publishing helpers for public-data projects.
 
 Current scope:
-- public artifact privacy scan
-- sensitive text redaction
+- public artifact publication-hygiene scan
+- credential, token, and workstation-trace redaction; official public identity and contact data are retained
 - public URL sanitization for logs and manifests
 - generic HF/static snapshot packaging helpers in `hf_snapshot`: `.env` setting resolution, published artifact collection, quality/source-catalog summaries, SQLite schema payloads, ingestion/source-record CSV exports, deterministic gzip/checksums and Parquet table export
 

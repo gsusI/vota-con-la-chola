@@ -1,0 +1,41 @@
+{
+  "applied_at": "2026-08-12T10:37:46Z",
+  "scope": "Only stale ingestion_runs rows with status running, no finish time, and zero seen/loaded rows.",
+  "after": {
+    "status": "error",
+    "finished_at": "2026-08-12T10:37:46Z",
+    "message": "data-integrity repair: stale running marker closed; zero rows observed and loaded"
+  },
+  "repairs": [
+    {
+      "database": "etl/data/staging/politicos-es.db",
+      "run_ids": [29, 33],
+      "source_id": "senado_votaciones"
+    },
+    {
+      "database": "etl/data/staging/parlamentario-es.db",
+      "run_ids": [8, 11],
+      "source_id": "congreso_votaciones"
+    },
+    {
+      "database": "etl/data/staging/placsp-contracts-real-s1-20260811.db",
+      "run_ids": [3],
+      "source_id": "placsp_sindicacion"
+    },
+    {
+      "database": "etl/data/staging/politicos-es.e2e19.db",
+      "run_ids": [29, 33],
+      "source_id": "senado_votaciones"
+    },
+    {
+      "database": "etl/data/staging/politicos-es.one-go-2026-04-13.db",
+      "run_ids": [29, 33, 63],
+      "source_ids": ["senado_votaciones", "congreso_votaciones"]
+    },
+    {
+      "database": "etl/data/staging/politicos-es.one-go-r2-2026-04-13.db",
+      "run_ids": [29, 33, 56, 62],
+      "source_ids": ["senado_votaciones", "congreso_votaciones"]
+    }
+  ]
+}

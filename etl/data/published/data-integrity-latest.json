@@ -1,0 +1,85 @@
+{
+  "databases": [
+    {
+      "bytes": 735555584,
+      "checks": {
+        "exists": true,
+        "foreign_keys": true,
+        "no_recovery_residue": true,
+        "no_stale_ingestion_runs": true,
+        "sqlite_quick_check": true
+      },
+      "foreign_key_violations": 0,
+      "issues": [],
+      "lost_and_found_rows": 0,
+      "path": "etl/data/staging/politicos-es.db",
+      "stale_ingestion_runs": []
+    },
+    {
+      "bytes": 355815424,
+      "checks": {
+        "exists": true,
+        "foreign_keys": true,
+        "no_recovery_residue": true,
+        "no_stale_ingestion_runs": true,
+        "sqlite_quick_check": true
+      },
+      "foreign_key_violations": 0,
+      "issues": [],
+      "lost_and_found_rows": 0,
+      "path": "etl/data/staging/parlamentario-es.db",
+      "stale_ingestion_runs": []
+    },
+    {
+      "bytes": 2801963008,
+      "checks": {
+        "exists": true,
+        "foreign_keys": true,
+        "no_recovery_residue": true,
+        "no_stale_ingestion_runs": true,
+        "sqlite_quick_check": true
+      },
+      "foreign_key_violations": 0,
+      "issues": [],
+      "lost_and_found_rows": 0,
+      "path": "etl/data/staging/eurostat-indicators-real-s2-20260811.db",
+      "stale_ingestion_runs": []
+    },
+    {
+      "bytes": 7998259200,
+      "checks": {
+        "exists": true,
+        "foreign_keys": true,
+        "no_recovery_residue": true,
+        "no_stale_ingestion_runs": true,
+        "sqlite_quick_check": true
+      },
+      "foreign_key_violations": 0,
+      "issues": [],
+      "lost_and_found_rows": 0,
+      "path": "etl/data/staging/placsp-contracts-real-s1-20260811.db",
+      "stale_ingestion_runs": []
+    }
+  ],
+  "derived_artifacts": {
+    "checks": {
+      "no_zero_byte_artifacts": true
+    },
+    "exists": true,
+    "issues": [],
+    "root": "etl/data/derived/parl_initiative_doc_texts",
+    "zero_byte_files": []
+  },
+  "generated_at": "2026-08-12T12:41:12.745681Z",
+  "policy": {
+    "quarantine_directories_excluded": true,
+    "stale_running_after_hours": 24
+  },
+  "status": "ok",
+  "summary": {
+    "databases_checked": 4,
+    "databases_with_issues": 0,
+    "issue_count": 0,
+    "zero_byte_artifacts": 0
+  }
+}

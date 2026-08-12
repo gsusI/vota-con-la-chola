@@ -1,0 +1,52 @@
+name: Integrity signal review
+description: Reproduce, confirm, reject, or contextualize a public-spending or decision anomaly.
+title: "[Integrity review] "
+labels:
+  - "area:governance"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form reviews a signal, not a person. Do not allege corruption or criminal conduct. Follow `docs/method/integrity-signal-policy.md`.
+  - type: input
+    id: signal_id
+    attributes:
+      label: Signal or artifact id
+      description: Stable signal id, public route, snapshot, and checksum when available.
+    validations:
+      required: true
+  - type: dropdown
+    id: decision
+    attributes:
+      label: Review decision
+      options:
+        - Confirmed reproducible anomaly
+        - Rejected false positive
+        - Needs more primary evidence
+        - Correct fact but misleading interpretation
+        - Duplicate of an existing signal
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Exact command or query, snapshot id, expected result, and observed result.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary evidence and counterevidence
+      description: Include evidence supporting and weakening the signal.
+    validations:
+      required: true
+  - type: checkboxes
+    id: declarations
+    attributes:
+      label: Reviewer declarations
+      options:
+        - label: I disclose any material conflict of interest in this review.
+          required: true
+        - label: I reviewed a signal and did not infer guilt, intent, or criminality.
+          required: true

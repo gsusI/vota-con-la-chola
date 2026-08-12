@@ -24,11 +24,11 @@ SENSITIVE_KV_RE = re.compile(
     r"(?i)\b(token|api[_-]?key|password|passwd|secret|cookie|access_token|refresh_token|client_secret)\b\s*[:=]\s*([^\s,;]+)"
 )
 AUTH_KV_RE = re.compile(r"(?i)\bauthorization\b\s*[:=]\s*(?!bearer\b)([^\s,;]+)")
-EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 LOCAL_USERS_PREFIX = "/" + "Users" + "/"
 LOCAL_HOME_PREFIX = "/" + "home" + "/"
 LOCAL_USER_SEGMENT_RE = re.compile(re.escape(LOCAL_USERS_PREFIX) + r"[^/\s]+")
 LOCAL_HOME_SEGMENT_RE = re.compile(re.escape(LOCAL_HOME_PREFIX) + r"[^/\s]+")
+GDRIVE_ACCOUNT_SEGMENT_RE = re.compile(r"GoogleDrive-[^/\s]+@[^/\s]+")
 
 
 def is_sensitive_query_key(name: str) -> bool:
@@ -57,7 +57,7 @@ def redact_sensitive_text(value: str) -> str:
         return f"{match.group(1)}=REDACTED"
 
     redacted = SENSITIVE_KV_RE.sub(repl, redacted)
-    redacted = EMAIL_RE.sub("<redacted-email>", redacted)
+    redacted = GDRIVE_ACCOUNT_SEGMENT_RE.sub("GoogleDrive-<redacted-account>", redacted)
     redacted = LOCAL_USER_SEGMENT_RE.sub(LOCAL_USERS_PREFIX + "<redacted-user>", redacted)
     redacted = LOCAL_HOME_SEGMENT_RE.sub(LOCAL_HOME_PREFIX + "<redacted-user>", redacted)
     return redacted

@@ -47,8 +47,8 @@ Estado de revisión:
 | `boe_api_legal` | verificado | Aviso legal BOE (autorizada con condiciones y excepciones de terceros) | https://www.boe.es | Excluir/segregar materiales restringidos |
 | `moncloa_referencias` | verificado | Aviso legal La Moncloa (reproducción, modificación y distribución autorizadas) | https://www.lamoncloa.gob.es/Paginas/avisolegal.aspx | Atribución explícita |
 | `moncloa_rss_referencias` | verificado | Aviso legal La Moncloa (reproducción, modificación y distribución autorizadas) | https://www.lamoncloa.gob.es/Paginas/avisolegal.aspx | Atribución explícita |
-| `bdns_api_subvenciones` | verificado | Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones) | https://datos.gob.es/es/aviso-legal | Atención a minimización de datos personales |
-| `bdns_autonomico` | verificado | Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones) | https://datos.gob.es/es/aviso-legal | Atención a minimización de datos personales |
+| `bdns_api_subvenciones` | verificado | Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones) | https://datos.gob.es/es/aviso-legal | Conservar beneficiario e identificador exactamente como los publique BDNS |
+| `bdns_autonomico` | verificado | Aviso legal tipo AGE/Hacienda (reutilización abierta con condiciones) | https://datos.gob.es/es/aviso-legal | Conservar beneficiario e identificador exactamente como los publique BDNS |
 | `placsp_sindicacion` | verificado | Reproducción autorizada con cita de origen; vinculada a datos abiertos de Hacienda | https://datos.gob.es/es/aviso-legal | Mezcla con datos de Hacienda, aplicar ambas condiciones |
 | `placsp_autonomico` | verificado | Reproducción autorizada con cita de origen; vinculada a datos abiertos de Hacienda | https://datos.gob.es/es/aviso-legal | Mezcla con datos de Hacienda, aplicar ambas condiciones |
 | `asamblea_madrid_ocupaciones` | verificado | CC BY 3.0 ES (salvo indicación en contrario) | https://www.asambleamadrid.es/datos-abiertos | Atribución explícita |
@@ -71,14 +71,14 @@ Fuentes sin ficha en `LEGAL_PROFILE_BY_SOURCE` se tratan como:
 4. Exponer metadatos de cumplimiento:
    - tabla `sources/<source_id>.json` por snapshot
    - `ingestion_runs`, `checksums.sha256` y metadatos de calidad asociados.
-5. Aplicar minimización y no reidentificación sobre cualquier dato personal.
+5. Conservar íntegramente la información personal publicada por una fuente oficial como evidencia de rendición de cuentas. No enriquecerla con datos no públicos ni intentar deshacer el enmascarado aplicado por la fuente.
 
 ## 4) Señales de estado y revisión humana
 
 - Marcar en cada `sources/<source_id>.json` el estado de revisión vigente.
 - Los estados `parcial`, `pendiente` o `no verificado` requieren
   **revisión legal humana** antes de distribución comercial o usos de alto riesgo.
-- Cualquier fuente con dudas de terceros o datos personales sensibles se clasifica con cautela y puede ser excluida de `parquet` público si aplica.
+- Una revisión legal puede bloquear una redistribución completa, pero no autoriza a publicar un registro oficial mutilado como si fuese íntegro. El estado y la razón deben quedar explícitos.
 
 ## 5) Cómo mantener esta matriz
 
