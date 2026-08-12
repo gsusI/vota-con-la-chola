@@ -105,11 +105,50 @@ class TestExportAccountabilityEvidenceApiSnapshot(unittest.TestCase):
                 }
             ],
         }
+        source_catalog = {
+            "catalog_version": "source_catalog_v1",
+            "summary": {"sources_total": 1, "blocked_total": 1},
+            "actions": [
+                {
+                    "details": (
+                        "Done now: NO. Blocker: `aemet_opendata_series` en `strict-network` falla. "
+                        "Evidencia: `docs/etl/sprints/AI-OPS-1/evidence/aemet.log`. "
+                        "Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --source aemet_opendata_series --strict-network`."
+                    ),
+                    "source_ids": ["aemet_opendata_series"],
+                    "commands": ["python3 scripts/ingestar_politicos_es.py ingest --source aemet_opendata_series --strict-network"],
+                }
+            ],
+            "sources": [
+                {
+                    "source_id": "aemet_opendata_series",
+                    "source_name": "AEMET OpenData",
+                    "domain": "politicos",
+                    "scope": "outcomes",
+                    "institution_name": "AEMET",
+                    "catalog_state": "blocked",
+                    "tracker_status": "PARTIAL",
+                    "sql_status": "PARTIAL",
+                    "default_url": "https://opendata.aemet.es/",
+                    "blocker_reason": (
+                        "HTTP 403 in strict network. Evidence: "
+                        "`docs/etl/sprints/AI-OPS-1/evidence/aemet.log`. "
+                        "Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --source aemet_opendata_series --strict-network`."
+                    ),
+                    "runs_total": 2,
+                    "runs_ok": 0,
+                    "last_loaded": 0,
+                    "max_loaded_network": 0,
+                    "network_fetches": 0,
+                    "fallback_fetches": 1,
+                }
+            ],
+        }
 
-        payload = build_evidence_api(dossiers, ledger, snapshot_date="2026-02-12")
+        payload = build_evidence_api(dossiers, ledger, snapshot_date="2026-02-12", source_catalog=source_catalog)
 
         self.assertEqual(payload["meta"]["schema_version"], "accountability_evidence_api_v1")
-        self.assertEqual(payload["coverage"]["question_templates_total"], 5)
+        self.assertEqual(payload["coverage"]["question_templates_total"], 6)
         self.assertEqual(payload["coverage"]["actor_answers_total"], 1)
         self.assertEqual(payload["coverage"]["issue_answers_total"], 1)
         self.assertEqual(payload["coverage"]["actor_issue_refs_total"], 1)
@@ -120,6 +159,10 @@ class TestExportAccountabilityEvidenceApiSnapshot(unittest.TestCase):
         self.assertEqual(payload["coverage"]["issue_cluster_assignment_review_needed_total"], 1)
         self.assertEqual(payload["coverage"]["issue_cluster_assignment_review_queue_total"], 1)
         self.assertEqual(payload["coverage"]["gap_answers_total"], 9)
+        self.assertEqual(payload["coverage"]["blocker_answers_total"], 1)
+        self.assertEqual(payload["coverage"]["source_catalog_blocked_total"], 1)
+        self.assertEqual(payload["coverage"]["blocker_answer_status_counts"], {"blocked": 1})
+        self.assertEqual(payload["coverage"]["blocker_kind_counts"], {"http_403": 1})
         self.assertGreaterEqual(payload["coverage"]["qa_answers_total"], 4)
         self.assertEqual(payload["coverage"]["qa_answers_with_self_route_total"], payload["coverage"]["qa_answers_total"])
         self.assertEqual(payload["actor_answers"][0]["answer_status"], "partial")
@@ -180,6 +223,15 @@ class TestExportAccountabilityEvidenceApiSnapshot(unittest.TestCase):
         self.assertEqual(payload["indexes"]["gap_answer_by_dimension"]["money"], "gap:money")
         self.assertEqual(payload["actor_answers"][0]["evidence_samples"][0]["entry_id"], "entry-1")
         self.assertEqual(payload["issue_answers"][0]["evidence_samples"][0]["entry_id"], "entry-2")
+        self.assertEqual(payload["blocker_answers"][0]["question_id"], "source_blocker")
+        self.assertEqual(payload["blocker_answers"][0]["source_id"], "aemet_opendata_series")
+        self.assertEqual(payload["blocker_answers"][0]["evidence_refs"][0]["path"], "docs/etl/sprints/AI-OPS-1/evidence/aemet.log")
+        self.assertEqual(
+            payload["indexes"]["blocker_answer_by_source_id"]["aemet_opendata_series"],
+            "blocker:aemet_opendata_series",
+        )
+        self.assertIn("qa:blocker:aemet_opendata_series", qa_by_id)
+        self.assertEqual(qa_by_id["qa:blocker:aemet_opendata_series"]["answer_status"], "blocked")
 
     def test_build_applies_issue_cluster_review_seed(self) -> None:
         dossiers = {
