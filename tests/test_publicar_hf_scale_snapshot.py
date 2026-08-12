@@ -6,6 +6,7 @@ import shutil
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from scripts.publicar_hf_scale_snapshot import (
@@ -100,6 +101,7 @@ class PublishHFScaleSnapshotTests(unittest.TestCase):
                     dataset_repo="owner/data",
                     build_root=root,
                     snapshot_date="2026-08-12",
+                    operation_factory=lambda **kwargs: SimpleNamespace(**kwargs),
                 )
 
         self.assertEqual(
