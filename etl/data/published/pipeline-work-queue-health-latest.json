@@ -1,0 +1,152 @@
+{
+  "active_workers": [],
+  "attempt_status_counts": {
+    "dead": 198,
+    "retry": 2197,
+    "succeeded": 13584
+  },
+  "attempts_total": 15979,
+  "checks": {
+    "dead_letter_rate": true,
+    "overdue_leases": true
+  },
+  "dead_letter_rate": 0.014367,
+  "earliest_lease_expiry": null,
+  "generated_at": "2026-08-10T14:56:06+00:00",
+  "items_total": 15876,
+  "max_attempts_observed": 2,
+  "oldest_pending_at": "2026-08-10T15:38:15+00:00",
+  "overdue_leases_total": 0,
+  "pipeline_id": "",
+  "retry_attempts_total": 103,
+  "schema_version": "pipeline_work_queue_observability_v1",
+  "state_counts": {
+    "dead": 198,
+    "leased": 0,
+    "pending": 2094,
+    "succeeded": 13584
+  },
+  "status": "ok",
+  "terminal_total": 13782,
+  "top_errors": [
+    {
+      "error": "host_circuit_open",
+      "total": 2070
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "total": 198
+    },
+    {
+      "error": "HTTPError: HTTP Error 500: Internal Server Error",
+      "total": 21
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "total": 3
+    }
+  ],
+  "top_partitions": [
+    {
+      "partition_key": "parl_initiative_docs",
+      "state": "succeeded",
+      "total": 6792
+    },
+    {
+      "partition_key": "senado_iniciativas:leg10",
+      "state": "succeeded",
+      "total": 1492
+    },
+    {
+      "partition_key": "senado_iniciativas:leg14",
+      "state": "succeeded",
+      "total": 1261
+    },
+    {
+      "partition_key": "senado_iniciativas:leg15",
+      "state": "succeeded",
+      "total": 664
+    },
+    {
+      "partition_key": "senado_iniciativas:leg12",
+      "state": "succeeded",
+      "total": 633
+    },
+    {
+      "partition_key": "senado_iniciativas:leg6",
+      "state": "succeeded",
+      "total": 600
+    },
+    {
+      "partition_key": "senado_iniciativas:leg7",
+      "state": "succeeded",
+      "total": 573
+    },
+    {
+      "partition_key": "senado_iniciativas:leg8",
+      "state": "succeeded",
+      "total": 565
+    },
+    {
+      "partition_key": "senado_iniciativas:leg9",
+      "state": "succeeded",
+      "total": 521
+    },
+    {
+      "partition_key": "senado_iniciativas:leg6",
+      "state": "pending",
+      "total": 480
+    },
+    {
+      "partition_key": "senado_iniciativas:leg7",
+      "state": "pending",
+      "total": 455
+    },
+    {
+      "partition_key": "senado_iniciativas:leg8",
+      "state": "pending",
+      "total": 445
+    },
+    {
+      "partition_key": "senado_iniciativas:leg5",
+      "state": "succeeded",
+      "total": 437
+    },
+    {
+      "partition_key": "senado_iniciativas:leg9",
+      "state": "pending",
+      "total": 395
+    },
+    {
+      "partition_key": "senado_iniciativas:leg5",
+      "state": "pending",
+      "total": 317
+    },
+    {
+      "partition_key": "senado_iniciativas:leg10",
+      "state": "dead",
+      "total": 180
+    },
+    {
+      "partition_key": "senado_iniciativas:leg13",
+      "state": "succeeded",
+      "total": 34
+    },
+    {
+      "partition_key": "senado_iniciativas:leg11",
+      "state": "succeeded",
+      "total": 12
+    },
+    {
+      "partition_key": "senado_iniciativas:leg14",
+      "state": "dead",
+      "total": 7
+    },
+    {
+      "partition_key": "senado_iniciativas:leg12",
+      "state": "dead",
+      "total": 6
+    }
+  ],
+  "unfinished_total": 2094
+}

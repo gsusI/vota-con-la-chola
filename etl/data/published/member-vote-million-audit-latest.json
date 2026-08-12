@@ -1,0 +1,381 @@
+{
+  "checks": {
+    "bounded_delivery_shape": true,
+    "bounded_public_artifact": false,
+    "duplicate_member_rate": true,
+    "event_total_reconciliation": false,
+    "million_real_member_votes_observed": true,
+    "person_id_coverage": true,
+    "recognized_vote_choices": true,
+    "source_hash_coverage": true,
+    "source_record_lineage_coverage": true,
+    "source_url_coverage": true,
+    "unique_event_ids": true
+  },
+  "coverage": {
+    "duplicate_member_rate": 0.0,
+    "events_reconciled_pct": 0.78264,
+    "other_choice_rate": 0.0,
+    "person_id_pct": 0.980636,
+    "source_hash_pct": 1.0,
+    "source_record_lineage_effective_pct": 1.0,
+    "source_record_lineage_missing_or_mismatch_rate": 0.0,
+    "source_record_parent_inherited_pct": 1.0,
+    "source_record_pk_direct_pct": 0.0,
+    "source_url_direct_public_pct": 0.429574,
+    "source_url_effective_public_pct": 0.999807,
+    "source_url_parent_inherited_pct": 0.570232
+  },
+  "file_bytes": 1399930201,
+  "file_sha256": "53eaccccfae07f4f79caf166cbfece645a4c6476591dd878b9aeced7f780259e",
+  "limitations": [
+    "This audits the published JSON artifact, not the upstream fetch run or current canonical SQLite database.",
+    "A million observed member-vote objects does not promote identity, document, money, outcome, review, or public-delivery lanes.",
+    "Member-vote lineage may be inherited only from its containing vote event when source ids match and the event has a source record id, primary key, and hash; direct and inherited coverage remain separate metrics.",
+    "Absent members are a distinct Senate category, not a no-vote ballot. Absence totals are reconciled only when totals_absent is present in the event artifact; older snapshots still report observed absences separately.",
+    "A bounded shard/index alternative may satisfy delivery shape locally, but promotion still requires durable public publication and checksum verification."
+  ],
+  "peak_rss_mb": 63.97,
+  "promotion_gate_passed": false,
+  "raw_vote_choice_counts": {
+    "ABSTENCION": 4322,
+    "ABSTENCI\u00d3N": 90784,
+    "AUSENTE": 34364,
+    "Abstenci\u00f3n": 54725,
+    "NO": 725766,
+    "NO VOTAN": 7160,
+    "No": 258181,
+    "No vota": 6688,
+    "SI": 18895,
+    "S\u00cd": 339157,
+    "S\u00ed": 269180
+  },
+  "reconciliation_by_source": {
+    "congreso_votaciones:not_reconciled": 1,
+    "congreso_votaciones:reconciled": 1682,
+    "senado_votaciones:not_reconciled": 1509,
+    "senado_votaciones:reconciled": 3755,
+    "senado_votaciones:totals_unavailable": 148
+  },
+  "reconciliation_samples": [
+    {
+      "expected": {
+        "abstain": 52,
+        "no": 0,
+        "no_vote": 7,
+        "yes": 291
+      },
+      "member_votes": 106,
+      "observed": {
+        "yes": 106
+      },
+      "source_id": "congreso_votaciones",
+      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion005/20200204/Votacion004/VOT_20201204110009.json"
+    },
+    {
+      "expected": {
+        "abstain": 2,
+        "no": 0,
+        "no_vote": 0,
+        "yes": 254
+      },
+      "member_votes": 7,
+      "observed": {
+        "absent": 7
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_2_3.xml"
+    },
+    {
+      "expected": {
+        "abstain": 7,
+        "no": 145,
+        "no_vote": 0,
+        "yes": 66
+      },
+      "member_votes": 48,
+      "observed": {
+        "absent": 48
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_9_68.xml"
+    },
+    {
+      "expected": {
+        "abstain": 2,
+        "no": 0,
+        "no_vote": 0,
+        "yes": 214
+      },
+      "member_votes": 50,
+      "observed": {
+        "absent": 50
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_21_1044.xml"
+    },
+    {
+      "expected": {
+        "abstain": 1,
+        "no": 142,
+        "no_vote": 0,
+        "yes": 81
+      },
+      "member_votes": 41,
+      "observed": {
+        "absent": 41
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_24_1684.xml"
+    },
+    {
+      "expected": {
+        "abstain": 0,
+        "no": 166,
+        "no_vote": 0,
+        "yes": 76
+      },
+      "member_votes": 23,
+      "observed": {
+        "absent": 23
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_29_1800.xml"
+    },
+    {
+      "expected": {
+        "abstain": 4,
+        "no": 147,
+        "no_vote": 0,
+        "yes": 91
+      },
+      "member_votes": 23,
+      "observed": {
+        "absent": 23
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_31_1824.xml"
+    },
+    {
+      "expected": {
+        "abstain": 1,
+        "no": 153,
+        "no_vote": 0,
+        "yes": 90
+      },
+      "member_votes": 20,
+      "observed": {
+        "absent": 20
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1896.xml"
+    },
+    {
+      "expected": {
+        "abstain": 0,
+        "no": 154,
+        "no_vote": 0,
+        "yes": 90
+      },
+      "member_votes": 20,
+      "observed": {
+        "absent": 20
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1897.xml"
+    },
+    {
+      "expected": {
+        "abstain": 0,
+        "no": 154,
+        "no_vote": 0,
+        "yes": 91
+      },
+      "member_votes": 19,
+      "observed": {
+        "absent": 19
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1898.xml"
+    },
+    {
+      "expected": {
+        "abstain": 5,
+        "no": 145,
+        "no_vote": 0,
+        "yes": 89
+      },
+      "member_votes": 25,
+      "observed": {
+        "absent": 25
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1899.xml"
+    },
+    {
+      "expected": {
+        "abstain": 19,
+        "no": 210,
+        "no_vote": 0,
+        "yes": 10
+      },
+      "member_votes": 25,
+      "observed": {
+        "absent": 25
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1900.xml"
+    },
+    {
+      "expected": {
+        "abstain": 5,
+        "no": 145,
+        "no_vote": 0,
+        "yes": 89
+      },
+      "member_votes": 25,
+      "observed": {
+        "absent": 25
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1901.xml"
+    },
+    {
+      "expected": {
+        "abstain": 8,
+        "no": 146,
+        "no_vote": 0,
+        "yes": 83
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1902.xml"
+    },
+    {
+      "expected": {
+        "abstain": 5,
+        "no": 145,
+        "no_vote": 0,
+        "yes": 87
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1903.xml"
+    },
+    {
+      "expected": {
+        "abstain": 6,
+        "no": 225,
+        "no_vote": 0,
+        "yes": 6
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1904.xml"
+    },
+    {
+      "expected": {
+        "abstain": 5,
+        "no": 213,
+        "no_vote": 0,
+        "yes": 19
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1905.xml"
+    },
+    {
+      "expected": {
+        "abstain": 1,
+        "no": 143,
+        "no_vote": 0,
+        "yes": 93
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1906.xml"
+    },
+    {
+      "expected": {
+        "abstain": 5,
+        "no": 145,
+        "no_vote": 0,
+        "yes": 87
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1907.xml"
+    },
+    {
+      "expected": {
+        "abstain": 0,
+        "no": 210,
+        "no_vote": 0,
+        "yes": 27
+      },
+      "member_votes": 27,
+      "observed": {
+        "absent": 27
+      },
+      "source_id": "senado_votaciones",
+      "vote_event_id": "url:http://www.senado.es/legis10/votaciones/ses_32_1908.xml"
+    }
+  ],
+  "schema_version": "large_vote_snapshot_audit_v3",
+  "shard_delivery": {
+    "bounded_delivery_shape": true,
+    "index_bytes": 4484875,
+    "manifest": "member-vote-shard-manifest-latest.json",
+    "matching_snapshot": true,
+    "max_shard_bytes": 31044,
+    "publication_status": "local_generated_not_published",
+    "shard_bytes_total": 170990067
+  },
+  "snapshot_file": "votaciones-es-2026-02-25.json",
+  "source_event_counts": {
+    "congreso_votaciones": 2839,
+    "senado_votaciones": 5534
+  },
+  "status": "observed_not_promoted",
+  "totals": {
+    "duplicate_event_ids": 0,
+    "duplicate_member_rows": 0,
+    "events": 8373,
+    "events_absent_totals_available": 0,
+    "events_absent_totals_unavailable": 7095,
+    "events_not_reconciled": 1510,
+    "events_reconciled": 5437,
+    "events_totals_unavailable": 148,
+    "member_votes": 1809222,
+    "member_votes_absent_observed": 34364,
+    "member_votes_with_direct_source_record": 0,
+    "member_votes_with_parent_event_source_record": 1809222,
+    "member_votes_without_effective_source_record": 0,
+    "unique_event_ids": 8373
+  },
+  "vote_choice_counts": {
+    "absent": 34364,
+    "abstain": 149831,
+    "no": 983947,
+    "no_vote": 13848,
+    "yes": 627232
+  }
+}

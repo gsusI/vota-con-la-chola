@@ -1,0 +1,235 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "actor_resolution_states_consistent": true,
+    "actor_resolution_states_explicit": true,
+    "all_files_present": true,
+    "bounded_peak_rss": true,
+    "checksums_and_bytes": true,
+    "entry_ids_sorted_within_partitions": true,
+    "file_minmax": true,
+    "file_rows": true,
+    "lane": true,
+    "lineage_complete": true,
+    "lineage_states_consistent": true,
+    "manifest_byte_total": true,
+    "manifest_file_total": true,
+    "manifest_row_total": true,
+    "manifest_schema": true,
+    "minimum_rows": true,
+    "no_duplicate_manifest_paths": true,
+    "no_extra_parquet_files": true,
+    "no_private_tokens": true,
+    "parquet_schemas": true,
+    "partition_hashes": true,
+    "partition_rows": true,
+    "partition_values": true,
+    "schema_sha256": true,
+    "source_urls_complete_and_public": true,
+    "transformer_version": true
+  },
+  "coverage": {
+    "lineage": 1.0,
+    "resolved_actor": 0.99997633,
+    "source_record": 0.99979489,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-12T11:01:24+00:00",
+  "manifest_file": "accountability-ledger-semantic-partition-incremental-latest.json",
+  "partitions": [
+    {
+      "files": [
+        {
+          "bytes": 16148,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=1994/part-00000.parquet",
+          "rows": 3,
+          "sha256": "c025a56e586d2e5eeb6ea2c9dc7b76886089aa51b6e4465a063c6126363022b1"
+        }
+      ],
+      "input_sha256": "4a3ede01ebaf002b329b53f2b3928bf33ed9180f62633430504b17103d1fbb35",
+      "partition_id": "boe_api_legal|es-national|1994",
+      "rows": 3
+    },
+    {
+      "files": [
+        {
+          "bytes": 16191,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2000/part-00000.parquet",
+          "rows": 3,
+          "sha256": "56aaf1e833b659e483cd1d54865e6882a2672f8c08563d5ff4dbe098cc2e04a7"
+        }
+      ],
+      "input_sha256": "20d014f8e946fccf42dc31ce05f99592d5c4f10e9793644deb839896a3ece905",
+      "partition_id": "boe_api_legal|es-national|2000",
+      "rows": 3
+    },
+    {
+      "files": [
+        {
+          "bytes": 16627,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2003/part-00000.parquet",
+          "rows": 5,
+          "sha256": "d756a33c84ebbc3eb12593c12bab629b5bd5822805c00863a17deb273ab7c209"
+        }
+      ],
+      "input_sha256": "7a704c969124190ab10df899c56c305ad11ee3af209ca827405b9ef9599a89a6",
+      "partition_id": "boe_api_legal|es-national|2003",
+      "rows": 5
+    },
+    {
+      "files": [
+        {
+          "bytes": 15680,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2004/part-00000.parquet",
+          "rows": 3,
+          "sha256": "09fbeffc200fc019edeb0f1dba4cfdeb86dec54b6487e7a4b9ab9cf0a964221e"
+        }
+      ],
+      "input_sha256": "4d85c9b0a98c313f4b35a3e41c160adeb8adec157c917e094e694a35525f7ea2",
+      "partition_id": "boe_api_legal|es-national|2004",
+      "rows": 3
+    },
+    {
+      "files": [
+        {
+          "bytes": 16590,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2015/part-00000.parquet",
+          "rows": 9,
+          "sha256": "34e1f929caf227fb89ab8da872f57bb9c67ac456ba73cf66c4f069258ea3c422"
+        }
+      ],
+      "input_sha256": "3bb26a2cfd27e49d1e0702979f7cdb7171bbd444ea8c00b0b95967e02c8e4259",
+      "partition_id": "boe_api_legal|es-national|2015",
+      "rows": 9
+    },
+    {
+      "files": [
+        {
+          "bytes": 32818,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 97,
+          "sha256": "92585440edc1f499a2680faea02e4db713305787a5f0ad85b7aeccfebf0fd5d4"
+        }
+      ],
+      "input_sha256": "9e644a0f53eca7c9aa11a2821d1b659da93bb9f0ec48bd095f887a20623e39f6",
+      "partition_id": "boe_api_legal|es-national|2026",
+      "rows": 97
+    },
+    {
+      "files": [
+        {
+          "bytes": 14690,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=boe_api_legal/jurisdiction=es-national/year=unknown/part-00000.parquet",
+          "rows": 3,
+          "sha256": "c7e37dace1a18e348c83cc494a396b56b87d1e167e32324d1f764395291d63c2"
+        }
+      ],
+      "input_sha256": "9d5ae1603b22c4d0967be1a8bb876578260f4e3f9bdf7bbba8aab2b115ccc424",
+      "partition_id": "boe_api_legal|es-national|unknown",
+      "rows": 3
+    },
+    {
+      "files": [
+        {
+          "bytes": 39244,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=congreso_votaciones/jurisdiction=es-national/year=2026/part-00000.parquet",
+          "rows": 725,
+          "sha256": "8668c911dba3de18a120add58934fc1f7ee5c97c1f0f3e261a070b65fcfef38c"
+        }
+      ],
+      "input_sha256": "d59d06facedcadb7715f767c2d42b99213e87a41cb17a010b2a0dbe1555026cd",
+      "partition_id": "congreso_votaciones|es-national|2026",
+      "rows": 725
+    },
+    {
+      "files": [
+        {
+          "bytes": 382282,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2020/part-00000.parquet",
+          "rows": 75542,
+          "sha256": "3054db9c8bfffb531d71482ee8c79b2cffd1c9bf95f8a83ad668fce0164e0948"
+        }
+      ],
+      "input_sha256": "ad0716b45b74a529771e704afd6fdd237c0466b8103f2da4b01123bc79bb9681",
+      "partition_id": "senado_votaciones|es-national|2020",
+      "rows": 75542
+    },
+    {
+      "files": [
+        {
+          "bytes": 214675,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2021/part-00000.parquet",
+          "rows": 11437,
+          "sha256": "5cdb6adb33f6e318279750be52c30cda6ac799e11f44fb91d6a585310f6fe2cc"
+        }
+      ],
+      "input_sha256": "53abcd08c3903afe52dc813f5cf4e066ac25893496b8ccc9eddfd6cdacea3ac4",
+      "partition_id": "senado_votaciones|es-national|2021",
+      "rows": 11437
+    },
+    {
+      "files": [
+        {
+          "bytes": 188001,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2022/part-00000.parquet",
+          "rows": 9612,
+          "sha256": "94932fe8df1786fc794e0bb1da0c10a7b84b9dac5846bd539b3a86b598187c96"
+        }
+      ],
+      "input_sha256": "c8b0c862c621c37baf23a43f0644eb74578f1658dbc1c6afe1c182e0cd060d5a",
+      "partition_id": "senado_votaciones|es-national|2022",
+      "rows": 9612
+    },
+    {
+      "files": [
+        {
+          "bytes": 133128,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2023/part-00000.parquet",
+          "rows": 7568,
+          "sha256": "41d29fc70d07fe71cf050db65f6380a5a678fcf9f156215af8ecb130ef976d74"
+        }
+      ],
+      "input_sha256": "b13c765f1daf5fe23400d2112cf675428d9b72d8e7f23cc567e23c8ba9d454b8",
+      "partition_id": "senado_votaciones|es-national|2023",
+      "rows": 7568
+    },
+    {
+      "files": [
+        {
+          "bytes": 185575,
+          "path": "lane=accountability_ledger/snapshot_date=2026-08-12/source_id=senado_votaciones/jurisdiction=es-national/year=2024/part-00000.parquet",
+          "rows": 21753,
+          "sha256": "2fb2fe15a0e10e77062cf76c84ae4eb4f8a934678c9f49087dfa084b70838794"
+        }
+      ],
+      "input_sha256": "460f086e32a7ce96b8d9b6f88842053b9ddf2e4e8c2f980df26de59fd3aa732b",
+      "partition_id": "senado_votaciones|es-national|2024",
+      "rows": 21753
+    }
+  ],
+  "performance": {
+    "batch_rows": 10000,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 273.469
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "root_name": "semantic-accountability-ledger-incremental",
+  "schema_version": "accountability_partition_validation_v1",
+  "status": "ok",
+  "totals": {
+    "files": 13,
+    "lineage_rows": 126760,
+    "parquet_bytes": 1271649,
+    "partitions": 13,
+    "private_token_findings": 0,
+    "resolved_actor_rows": 126757,
+    "rows": 126760,
+    "source_default_url_rows": 362,
+    "source_record_rows": 126734,
+    "source_record_url_rows": 126398,
+    "source_url_rows": 126760,
+    "unknown_year_rows": 3,
+    "unresolved_actor_rows": 3
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "backend": "configured",
+  "manifest": "content-objects-latest.jsonl",
+  "namespace": "raw/text-documents",
+  "schema_version": "content_object_replication_report_v1",
+  "status": "ok",
+  "totals": {
+    "bytes": 133219457,
+    "candidates": 6792,
+    "deduplicated": 4018,
+    "missing_local": 0,
+    "replicated": 6792
+  }
+}
