@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "free_space_sufficient": true,
+    "hardlink_probe_passed": true,
+    "output_and_incremental_same_device": true,
+    "reference_bytes_present": true,
+    "reference_rows_present": true,
+    "required_hardlink_reuse_available": true
+  },
+  "estimated_incremental_physical_bytes": 12405792,
+  "estimated_initial_parquet_bytes": 1240579147,
+  "estimated_peak_sort_spill_bytes": 8800000,
+  "generated_at": "2026-08-12T07:53:57+00:00",
+  "headroom_bytes": 5368709120,
+  "observed_free_bytes": 27546034176,
+  "reference_bytes_per_row": 107.876447,
+  "reference_manifest": "candidate-occurrence-10m-streaming-capacity-manifest.json",
+  "reference_parquet_bytes": 1078764475,
+  "reference_rows": 10000000,
+  "remaining_after_required_bytes": 20915540117,
+  "require_hardlink_reuse": true,
+  "required_free_bytes": 6630494059,
+  "safety_factor": 1.15,
+  "schema_version": "candidate_occurrence_storage_preflight_v1",
+  "status": "ok",
+  "target_rows": 10000000
+}

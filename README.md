@@ -9,7 +9,7 @@
 
 Herramienta abierta y orientada a la evidencia para ayudar a decidir tu voto: cruza tus prioridades con lo que actores políticos y partidos **dicen** y **hacen**, con explicaciones trazables y fuentes auditables.
 
-Este repo es intencionalmente **ultraligero**: un solo SQLite, snapshots reproducibles y trazabilidad por defecto.
+Este repo es intencionalmente **ultraligero**: SQLite reproducible para control/snapshots, objetos content-addressed para documentos, artefactos analíticos/publicación acotados y trazabilidad por defecto.
 
 ## Sobre el repo (para colaboradores)
 
@@ -40,6 +40,7 @@ Misión:
 ## Leer primero
 
 - Índice de docs: `docs/README.md`
+- KB de agentes / aprendizajes duraderos: `project_kb/README.md`
 - Roadmap canónico del futuro: `ROADMAP.md`
 - Roadmap macro de modelo/arquitectura: `docs/roadmap.md`
 - Roadmap técnico derivado (ejecución): `docs/roadmap-tecnico.md`
@@ -58,6 +59,17 @@ Misión:
 - App pública estática para Cloudflare Pages en `ui/gh-pages-next/`; salida de build en `ui/gh-pages-next/out/`.
 - Espejo público de snapshots en Hugging Face Datasets (`just etl-publish-hf`): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
 - UI local para explorar el esquema y la evidencia: `just graph-ui` (ver `docs/etl/README.md`).
+
+Estado de escala (`2026-08-12`): solo datos capturados de fuentes oficiales cuentan. `just etl-scale-readiness` valida todos los ficheros, bytes, SHA-256, filas, `source_id` y hosts de seis corpora actuales:
+
+- votos nominales: `1,809,222` filas / `8,373` shards; URL pública y source record `100%`; `102,172` apuntan a un endpoint oficial HTTP;
+- Eurostat: `1,755,809` observaciones / `37` Parquet; full validation y replay `26/26`;
+- PLACSP: `263,302` facts / `50` Parquet; `128,849/128,849` nombres e identificadores de contraparte publicados por la fuente se conservan exactamente; full validation y replay `50/50`;
+- BDNS: `100,000` facts / `1` Parquet; nombres `100,000/100,000` e identificadores source `39,539/39,539` retenidos exactamente; full validation y replay `1/1`;
+- accountability ledger: `126,770` facts / `15` Parquet; full validation y replay `15/15`;
+- actores: `88,031` mandatos / `108` Parquet; full validation y replay `108/108`.
+
+Hay `2` lanes reales por encima de un millón, `6` corpora registrados y `0` lanes promocionadas. BDNS pasa `R1`, pero sigue en `100,000/1M`, sin historia representativa, segundo snapshot, origin público ni clean restore. Candidaturas nominales siguen en `0` por bloqueo del origen oficial. El inventario documental real contiene `21,398` instancias / `19,538` hashes. Estado honesto: `real_foundation_ready_scale_incomplete`. Ver `etl/data/published/scale-readiness-latest.json`, `docs/etl/real-corpus-registry.json` y `ROADMAP.md`.
 
 ## Fuente de verdad (código)
 
@@ -94,6 +106,55 @@ just parl-quality-pipeline
 just etl-publish-votaciones
 ```
 
+Gates y pipelines de escala real:
+
+```bash
+just etl-scale-readiness
+just etl-scale-audit-vote-db
+just parl-refresh-senado-local-cache
+just etl-scale-export-vote-db-shards
+just etl-scale-validate-vote-db-shards
+just etl-scale-export-semantic-member-votes
+just etl-scale-validate-semantic-member-votes
+just etl-scale-export-semantic-accountability-ledger
+just etl-scale-validate-semantic-accountability-ledger
+just etl-scale-export-semantic-actor-mandates
+just etl-scale-validate-semantic-actor-mandates
+just etl-scale-export-semantic-public-money
+just etl-scale-validate-semantic-public-money
+just etl-scale-export-semantic-indicators
+just etl-scale-validate-semantic-indicators
+just etl-scale-bdns-bulk-enqueue
+just etl-scale-bdns-bulk-work
+just etl-scale-bdns-bulk-report
+just etl-scale-eurostat-indicators-enqueue
+just etl-scale-eurostat-indicators-work
+just etl-scale-eurostat-indicators-backfill
+just etl-scale-eurostat-indicators-report
+just etl-scale-eurostat-indicators-export
+just etl-scale-eurostat-indicators-validate
+just etl-scale-eurostat-indicators-replay
+just etl-scale-eurostat-indicators-replay-validate
+just etl-scale-placsp-archives-enqueue
+just etl-scale-placsp-archives-work
+just etl-scale-placsp-members-work
+just etl-scale-placsp-report
+just etl-scale-placsp-export
+just etl-scale-placsp-validate
+just etl-scale-placsp-replay
+just etl-scale-placsp-replay-validate
+just etl-scale-placsp-documents-enqueue
+just etl-scale-placsp-documents-work
+just etl-scale-placsp-integrity-review
+just etl-scale-gate
+```
+
+El worker Eurostat renueva su lease durante cada chunk descargado y cada commit batch; aborta si pierde ownership. Cada query del registry declara `maximum_bytes` y `maximum_cube_cells`; payloads legacy de queue reciben un techo conservador. `EUROSTAT_INDICATOR_CA_BUNDLE` solo es necesario si el CA store del runtime está desactualizado: mantener esa ruta fuera del repo. No usar TLS inseguro en la lane reproducible.
+
+PLACSP usa dos queues para archivos ZIP y miembros Atom, y una tercera queue independiente para documentos. El parser inspecciona ZIP en streaming y falla ante límites de path, tamaño, ratio, records o documentos. `PLACSP_BULK_ARCHIVE_ARGS` permite ampliar meses/años sin cambiar el loader. No drenar la queue de `998,392` documentos con los defaults de muestra: definir primero presupuesto por host, ventana, concurrencia, origin remoto, coste y cohortes crecientes. Los imports son notices/awards publicados; no son pagos. Las señales de integridad quedan internas y requieren revisión humana.
+
+Ningún resultado generado localmente sustituye las promociones reales por lane (`100k` documentos estratificados; `1M` actores/votos/ledger/dinero/indicadores). Los gates están desglosados en `docs/roadmap-tecnico.md` y su estado vive en el tracker.
+
 ## Notas (KISS)
 
 - `ROADMAP.md` es la única fuente de verdad para el futuro y la secuencia del proyecto.
@@ -106,6 +167,10 @@ just etl-publish-votaciones
 
 - Contribuir: `CONTRIBUTING.md`
 - Gobernanza: `GOVERNANCE.md`
+- Código de conducta: `CODE_OF_CONDUCT.md`
+- Seguridad y reporte responsable: `SECURITY.md`
+- Citación: `CITATION.cff`
+- Política para señales de integridad: `docs/method/integrity-signal-policy.md`
 - Retos de fuentes: `docs/community/contributor-challenges-v1.md`
 - Guía de integración: `docs/community/partner-integration-guide.md`
 - Steward map: `docs/community/steward-map.md`

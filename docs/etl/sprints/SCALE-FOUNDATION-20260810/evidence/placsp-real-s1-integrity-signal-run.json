@@ -1,0 +1,209 @@
+{
+  "detector_id": "procurement-threshold-pattern-review",
+  "detector_version": "v3",
+  "evidence_basis": "latest_contract_versions_with_award_results_preferred",
+  "min_records": 3,
+  "safety": {
+    "corruption_finding": false,
+    "human_review_required": true,
+    "initial_state": "review_signal",
+    "public_by_default": false
+  },
+  "samples": [
+    {
+      "amount_eur": 24610.0,
+      "cpv_code": "71730000",
+      "period_month": "2024-12",
+      "records": 3,
+      "review_subject_id": "ADIF - Presidencia|cpv:71730000",
+      "signal_id": "integrity-033351e1e9b2624e160aecac42978b6f",
+      "subject_id": "ADIF - Presidencia"
+    },
+    {
+      "amount_eur": 52200.0,
+      "cpv_code": "80500000",
+      "period_month": "2025-02",
+      "records": 4,
+      "review_subject_id": "ADIF - Presidencia|cpv:80500000",
+      "signal_id": "integrity-4f908586f36ee0503bb3580f9c4e8e02",
+      "subject_id": "ADIF - Presidencia"
+    },
+    {
+      "amount_eur": 42560.0,
+      "cpv_code": "39130000",
+      "period_month": "2025-03",
+      "records": 4,
+      "review_subject_id": "ADIF Alta Velocidad - Presidencia|cpv:39130000",
+      "signal_id": "integrity-75219c7c80eb39c962e067c619d81df8",
+      "subject_id": "ADIF Alta Velocidad - Presidencia"
+    },
+    {
+      "amount_eur": 24470.87,
+      "cpv_code": "44100000",
+      "period_month": "2024-11",
+      "records": 3,
+      "review_subject_id": "ALCALD\u00cdA DEL AYUNTAMIENTO DE VILLAGARCIA DE LA TORRE|cpv:44100000",
+      "signal_id": "integrity-fcfe3f8e4ea5f4ed88b12770a43d5c23",
+      "subject_id": "ALCALD\u00cdA DEL AYUNTAMIENTO DE VILLAGARCIA DE LA TORRE"
+    },
+    {
+      "amount_eur": 53640.0,
+      "cpv_code": "80000000",
+      "period_month": "2025-03",
+      "records": 6,
+      "review_subject_id": "Administrador Unico de FEVAL Gesti\u00f3n de Sevicios S.L.U.|cpv:80000000",
+      "signal_id": "integrity-f0bd811f540b961de0b39da7d2d14623",
+      "subject_id": "Administrador Unico de FEVAL Gesti\u00f3n de Sevicios S.L.U."
+    },
+    {
+      "amount_eur": 54815.34,
+      "cpv_code": "34990000",
+      "period_month": "2025-01",
+      "records": 13,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-eff42fdad4821dbb1e6f41c85f85d5ae",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 30050.1,
+      "cpv_code": "34990000",
+      "period_month": "2025-02",
+      "records": 7,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-17925a1a1e574fa9cde1ee40d0926008",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 28589.59,
+      "cpv_code": "34990000",
+      "period_month": "2025-03",
+      "records": 8,
+      "review_subject_id": "Aena. Consejo de Administraci\u00f3n|cpv:34990000",
+      "signal_id": "integrity-27ccaa2fef3714e45894764c4159ac27",
+      "subject_id": "Aena. Consejo de Administraci\u00f3n"
+    },
+    {
+      "amount_eur": 18520.72,
+      "cpv_code": "22200000",
+      "period_month": "2025-02",
+      "records": 8,
+      "review_subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n|cpv:22200000",
+      "signal_id": "integrity-f36f892459d5a267d47b1fcf7c732257",
+      "subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n"
+    },
+    {
+      "amount_eur": 20957.0,
+      "cpv_code": "79112000",
+      "period_month": "2025-01",
+      "records": 10,
+      "review_subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n|cpv:79112000",
+      "signal_id": "integrity-c559554b08f453a7b7147fdbba21c07c",
+      "subject_id": "Aena. Direcci\u00f3n de Contrataci\u00f3n"
+    },
+    {
+      "amount_eur": 17975.59,
+      "cpv_code": "18331000",
+      "period_month": "2024-12",
+      "records": 3,
+      "review_subject_id": "Alcalde de Ayuntamiento de Puente Genil|cpv:18331000",
+      "signal_id": "integrity-8f58d84d09d155c1e791be8acba6a088",
+      "subject_id": "Alcalde de Ayuntamiento de Puente Genil"
+    },
+    {
+      "amount_eur": 23087.6,
+      "cpv_code": "50232100",
+      "period_month": "2024-07",
+      "records": 3,
+      "review_subject_id": "Alcalde de Ayuntamiento de Puente Genil|cpv:50232100",
+      "signal_id": "integrity-ea2a7dd9e9aa55ef6e22a93f40ca8e18",
+      "subject_id": "Alcalde de Ayuntamiento de Puente Genil"
+    },
+    {
+      "amount_eur": 67399.0,
+      "cpv_code": "79954000",
+      "period_month": "2024-07",
+      "records": 9,
+      "review_subject_id": "Alcalde de Ayuntamiento de Puente Genil|cpv:79954000",
+      "signal_id": "integrity-5334ff0b7d54f1175db85ceff99aa219",
+      "subject_id": "Alcalde de Ayuntamiento de Puente Genil"
+    },
+    {
+      "amount_eur": 22161.86,
+      "cpv_code": "03321000",
+      "period_month": "2024-07",
+      "records": 3,
+      "review_subject_id": "Alcalde del Ayuntamiento de Ejea de Los Caballeros|cpv:03321000",
+      "signal_id": "integrity-4256e418c35d982b0818333d6e7b2f65",
+      "subject_id": "Alcalde del Ayuntamiento de Ejea de Los Caballeros"
+    },
+    {
+      "amount_eur": 18577.0,
+      "cpv_code": "03321000",
+      "period_month": "2024-08",
+      "records": 7,
+      "review_subject_id": "Alcalde del Ayuntamiento de Ejea de Los Caballeros|cpv:03321000",
+      "signal_id": "integrity-696883e9fcd294963e7615ffdb2a8027",
+      "subject_id": "Alcalde del Ayuntamiento de Ejea de Los Caballeros"
+    },
+    {
+      "amount_eur": 37750.4,
+      "cpv_code": "90911200",
+      "period_month": "2024-04",
+      "records": 3,
+      "review_subject_id": "Alcalde del Ayuntamiento de \u00c9pila|cpv:90911200",
+      "signal_id": "integrity-1db9a6f66b630021e2f9df281eff32e1",
+      "subject_id": "Alcalde del Ayuntamiento de \u00c9pila"
+    },
+    {
+      "amount_eur": 47894.31,
+      "cpv_code": "44100000",
+      "period_month": "2024-12",
+      "records": 10,
+      "review_subject_id": "Alcaldia del Ayuntamiento Llerena|cpv:44100000",
+      "signal_id": "integrity-813a215f65a57cf42a316fc08f37daf6",
+      "subject_id": "Alcaldia del Ayuntamiento Llerena"
+    },
+    {
+      "amount_eur": 25040.38,
+      "cpv_code": "44100000",
+      "period_month": "2025-02",
+      "records": 13,
+      "review_subject_id": "Alcaldia del Ayuntamiento Llerena|cpv:44100000",
+      "signal_id": "integrity-add93cde1e7d656030ab966ef4d68c53",
+      "subject_id": "Alcaldia del Ayuntamiento Llerena"
+    },
+    {
+      "amount_eur": 27001.52,
+      "cpv_code": "14210000",
+      "period_month": "2025-03",
+      "records": 4,
+      "review_subject_id": "Alcaldia del Ayuntamiento de Aguilar de la Frontera|cpv:14210000",
+      "signal_id": "integrity-c632c66eed89f592a93bea43d1be08bd",
+      "subject_id": "Alcaldia del Ayuntamiento de Aguilar de la Frontera"
+    },
+    {
+      "amount_eur": 57273.36,
+      "cpv_code": "44111200",
+      "period_month": "2025-03",
+      "records": 11,
+      "review_subject_id": "Alcaldia del Ayuntamiento de Aguilar de la Frontera|cpv:44111200",
+      "signal_id": "integrity-bb19a6b850dcf6f3d2bd2c091cf3635e",
+      "subject_id": "Alcaldia del Ayuntamiento de Aguilar de la Frontera"
+    }
+  ],
+  "schema_version": "procurement_integrity_signal_detection_v3",
+  "source_ids": [
+    "placsp_sindicacion"
+  ],
+  "status": "ok",
+  "threshold_eur": 15000.0,
+  "totals": {
+    "evidence_rows_materialized": 3150,
+    "evidence_rows_sampled": 7163,
+    "matched_candidate_rows": 9000,
+    "matched_contract_rows": 9000,
+    "signals_detected": 1041,
+    "signals_materialized": 1041,
+    "signals_persisted": 1041
+  }
+}

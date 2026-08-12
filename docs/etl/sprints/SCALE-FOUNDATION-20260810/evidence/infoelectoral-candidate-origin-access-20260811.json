@@ -1,0 +1,40 @@
+{
+  "anti_loop_decision": "no_new_lever; do not retry this source again in the current sprint",
+  "catalog_snapshot": {
+    "candidate_archive_items_enqueued": 60,
+    "distinct_election_ids": 36,
+    "election_type_counts": {
+      "02_congress": 16,
+      "03_senate": 13,
+      "04_municipal": 12,
+      "06_cabildos": 10,
+      "07_european": 9
+    }
+  },
+  "first_seen_utc": "2026-08-11T19:01:59.665Z",
+  "last_seen_utc": "2026-08-11T19:06:41.872Z",
+  "official_archive_probe": {
+    "command": "curl -k -L --fail --show-error --connect-timeout 20 --max-time 300 --output /dev/null https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/04202305_MUNI.zip",
+    "error": "curl: (56) Recv failure: Connection reset by peer",
+    "partial_output_retained": false,
+    "url": "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/04202305_MUNI.zip"
+  },
+  "official_catalog_api_probe": {
+    "credential_material_recorded": false,
+    "error": "curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received",
+    "max_time_seconds": 30,
+    "url": "https://infoelectoral.interior.gob.es/min/convocatorias/tipos/"
+  },
+  "pipeline_effect": {
+    "facts_loaded": 0,
+    "network_attempts_recorded_by_queue": 0,
+    "queue_dead": 0,
+    "queue_leased": 0,
+    "queue_pending": 60,
+    "queue_succeeded": 0,
+    "worker_started": false
+  },
+  "schema_version": "infoelectoral_candidate_origin_access_v1",
+  "source_id": "infoelectoral_candidates",
+  "status": "blocked_intermittent_origin_access"
+}

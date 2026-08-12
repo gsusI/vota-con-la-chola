@@ -1,0 +1,58 @@
+{
+  "schema_version": "indicator_real_only_main_db_v1",
+  "database": "etl/data/staging/politicos-es.db",
+  "snapshot_date": "2026-08-12",
+  "inputs": [
+    {
+      "source_id": "eurostat_sdmx",
+      "capture_path": "etl/data/object-origin/eurostat-indicators/fc/a5/fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018.json",
+      "capture_sha256": "fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018",
+      "official_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_peps11n?lang=EN&sinceTimePeriod=2015",
+      "series": 417,
+      "observations": 3376
+    },
+    {
+      "source_id": "bde_series_api",
+      "capture_path": "etl/data/raw/bde_series_api/2026/05/11/bde_series_api_20260511T175659Z.json",
+      "capture_sha256": "e3e740773e32fecb4318271ecfde729a9a3b876e992d7318b06166fa1a102236",
+      "official_url_host": "app.bde.es",
+      "series": 58,
+      "observations": 1798
+    }
+  ],
+  "backfill": {
+    "command": "python3 scripts/ingestar_politicos_es.py backfill-indicators --db etl/data/staging/politicos-es.db",
+    "series": 475,
+    "series_with_source_record": 475,
+    "observations": 5174,
+    "observations_with_source_record": 5174,
+    "domains": [
+      {
+        "source_id": "bde_series_api",
+        "domain_key": "impuestos_gasto_fiscalidad",
+        "series": 49,
+        "observations": 1519
+      },
+      {
+        "source_id": "bde_series_api",
+        "domain_key": "vivienda_urbanismo",
+        "series": 9,
+        "observations": 279
+      },
+      {
+        "source_id": "eurostat_sdmx",
+        "domain_key": "proteccion_social_pensiones",
+        "series": 417,
+        "observations": 3376
+      }
+    ]
+  },
+  "integrity": {
+    "foreign_key_errors": 0,
+    "quick_check": "ok",
+    "synthetic_or_mock_rows": 0,
+    "public_source_identity_retained": true
+  },
+  "publication_status": "local_not_published",
+  "ok": true
+}

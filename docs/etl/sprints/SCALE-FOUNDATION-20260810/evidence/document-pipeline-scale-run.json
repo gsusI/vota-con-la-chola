@@ -1,0 +1,57 @@
+{
+  "schema_version": "document_pipeline_scale_evidence_v1",
+  "observed_at": "2026-08-10T14:50:57Z",
+  "status": "partial_upstream_blocked",
+  "source_id": "senado_iniciativas",
+  "discovery": {
+    "initiatives_scanned": 4035,
+    "senate_initiatives_with_links": 3607,
+    "invalid_json_values": 0,
+    "document_links_materialized": 9084
+  },
+  "fetch": {
+    "succeeded": 6792,
+    "dead": 198,
+    "pending": 2094,
+    "last_run_failure_classes": {
+      "host_circuit_open": 2070,
+      "not_fetchable": 19,
+      "timeout": 1,
+      "upstream_server_error": 21
+    },
+    "opened_circuits": [
+      "www.senado.es|legis:5|web/actividadparlamentaria",
+      "www.senado.es|legis:6|web/actividadparlamentaria",
+      "www.senado.es|legis:7|web/actividadparlamentaria",
+      "www.senado.es|legis:8|web/actividadparlamentaria",
+      "www.senado.es|legis:9|web/actividadparlamentaria"
+    ]
+  },
+  "extraction": {
+    "succeeded": 6792,
+    "failed": 0,
+    "text_chars": 29728661,
+    "truncated": 0,
+    "formats": {
+      "text_html": 2052,
+      "text_xml": 4740
+    }
+  },
+  "local_object_origin": {
+    "objects": 6792,
+    "bytes": 133219457,
+    "missing_local": 0,
+    "restore_sample": 100,
+    "restore_status": "ok"
+  },
+  "coverage": {
+    "senate_initiatives_with_any_link": 3607,
+    "senate_initiatives_with_fetched_document": 3607
+  },
+  "safety": {
+    "per_host_workers": 2,
+    "no_overdue_leases": true,
+    "no_new_lever": true,
+    "next_network_retry_allowed_only_with_new_lever": true
+  }
+}

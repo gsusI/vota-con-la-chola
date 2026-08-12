@@ -1,0 +1,109 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "all_files_present": true,
+    "amount_states_explicit": true,
+    "amounts_nonnegative": true,
+    "bounded_peak_rss": true,
+    "checksums_and_bytes": true,
+    "counterparty_identifiers_retained_exactly": true,
+    "counterparty_names_retained_exactly": true,
+    "counterparty_publication_assurance": true,
+    "currency_eur_for_amounts": true,
+    "decimal_amount_types": true,
+    "file_minmax": true,
+    "file_rows": true,
+    "lane": true,
+    "manifest_coverage": true,
+    "manifest_metric_totals": true,
+    "manifest_schema": true,
+    "manifest_schema_definition": true,
+    "minimum_rows": true,
+    "money_fact_ids_sorted_within_partitions": true,
+    "money_fact_ids_unique": true,
+    "no_duplicate_manifest_paths": true,
+    "no_extra_parquet_files": true,
+    "no_private_tokens": true,
+    "parquet_schemas": true,
+    "partition_hashes": true,
+    "partition_rows_and_money": true,
+    "partition_values": true,
+    "public_domain_counterparty_retention_complete": true,
+    "row_semantics_consistent": true,
+    "schema_sha256": true,
+    "source_records_complete": true,
+    "source_urls_complete_and_public": true,
+    "transformer_version": true
+  },
+  "counterparty_publication_assurance": "all_official_public_domain_names_and_identifiers_retained;entity_type_is_classification_not_suppression",
+  "coverage": {
+    "amount": 1.0,
+    "counterparty_identifier": 0.39539,
+    "counterparty_name": 1.0,
+    "counterparty_publication_state": 1.0,
+    "source_record": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-12T12:35:20+00:00",
+  "manifest_file": "bdns-public-money-real-s1-v5-manifest-20260812.json",
+  "money_assurance": "published_amounts_not_execution_or_disbursement",
+  "partitions": [
+    {
+      "amount_eur_total": "3259528635.280000",
+      "files": [
+        {
+          "bytes": 3464007,
+          "path": "lane=public_money_facts/snapshot_date=2026-08-12/fact_kind=subsidy_record/source_id=bdns_api_subvenciones/jurisdiction=es-territorial/year=2026/part-00000.parquet",
+          "rows": 100000,
+          "sha256": "c51c95f1b1bc4467b3f6e3f94f3c4b6ee00f4f07bdec7e0e5cbea215a8439a4c"
+        }
+      ],
+      "input_sha256": "285a2e4a7fd0ca8bf08cb02da41549cc890465a5c293ad5f62bce1dd766fd7e3",
+      "partition_id": "subsidy_record|bdns_api_subvenciones|es-territorial|2026",
+      "rows": 100000
+    }
+  ],
+  "performance": {
+    "batch_rows": 10000,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 211.453
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "root_name": "bdns-public-money-real-s1-v5-20260812",
+  "schema_version": "public_money_partition_validation_v1",
+  "status": "ok",
+  "totals": {
+    "amount_eur_by_fact_kind": {
+      "subsidy_record": "3259528635.280000"
+    },
+    "amount_eur_total": "3259528635.280000",
+    "amount_rows": 100000,
+    "contract_award_rows": 0,
+    "contract_award_table_rows": 0,
+    "contract_notice_rows": 0,
+    "contract_table_rows": 0,
+    "counterparty_identifier_rows": 39539,
+    "counterparty_name_rows": 100000,
+    "counterparty_not_available_rows": 0,
+    "counterparty_published_legal_entity_rows": 39539,
+    "counterparty_published_natural_person_rows": 0,
+    "counterparty_published_rows": 100000,
+    "counterparty_published_unclassified_rows": 60461,
+    "distinct_source_records": 100000,
+    "eur_rows": 100000,
+    "files": 1,
+    "joined_rows": 100000,
+    "money_table_rows": 100000,
+    "nonnegative_amount_rows": 100000,
+    "parquet_bytes": 3464007,
+    "partitions": 1,
+    "private_token_findings": 0,
+    "rows": 100000,
+    "source_record_rows": 100000,
+    "source_url_rows": 100000,
+    "subsidy_record_rows": 100000,
+    "subsidy_table_rows": 100000,
+    "unknown_year_rows": 0
+  }
+}

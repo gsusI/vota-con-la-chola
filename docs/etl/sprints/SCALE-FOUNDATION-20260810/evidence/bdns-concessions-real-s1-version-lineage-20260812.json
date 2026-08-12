@@ -1,0 +1,89 @@
+{
+  "analytical_ingest_gate_passed": true,
+  "checks": {
+    "all_pages_succeeded": true,
+    "api_total_elements_stable": true,
+    "api_total_pages_stable": true,
+    "distinct_snapshot_rows_reconcile": true,
+    "no_dead_pages": true,
+    "page_fetch_rows_complete": true,
+    "page_record_counts_reconcile": true,
+    "raw_page_version_lineage_complete": true,
+    "version_sightings_distinct_reconcile": true,
+    "version_sightings_reconcile": true
+  },
+  "discovery": {
+    "page_size": 1000,
+    "pages_enqueued": 100,
+    "total_elements": 28676987,
+    "total_pages": 28677
+  },
+  "limitations": [
+    "Official BDNS fields, including natural-person names and source-published identifiers, are retained exactly; source-side masking remains unchanged.",
+    "A limited page cohort proves bounded acquisition and reconciliation, not full-registry completeness."
+  ],
+  "limited_run": true,
+  "money_bulk_run_id": 1,
+  "observed": {
+    "bytes": 80509937,
+    "pages_fetched": 100,
+    "peak_rss_mb": 45.531,
+    "records_loaded_distinct": 100000,
+    "records_seen": 100000
+  },
+  "pipeline_id": "bdns-concessions-real-s1-20260812",
+  "promotion_gate_passed": false,
+  "publication_status": "local_raw_captured_not_published",
+  "queue": {
+    "active_workers": [],
+    "attempt_status_counts": {
+      "succeeded": 100
+    },
+    "attempts_total": 100,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-12T12:34:33+00:00",
+    "items_total": 100,
+    "max_attempts_observed": 1,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "bdns-concessions-real-s1-20260812",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 100
+    },
+    "terminal_total": 100,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "block:00000",
+        "state": "succeeded",
+        "total": 100
+      }
+    ],
+    "unfinished_total": 0
+  },
+  "record_versions": {
+    "current_source_rows_for_snapshot": 100000,
+    "distinct_source_records": 100000,
+    "raw_page_lineage_rows": 100000,
+    "raw_payload_duplicated": false,
+    "records_with_prior_versions": 0,
+    "sightings_total": 100000,
+    "versions_linked": 100000
+  },
+  "schema_version": "bdns_bulk_run_report_v1",
+  "snapshot_date": "2026-08-12",
+  "source_id": "bdns_api_subvenciones",
+  "status": "partial",
+  "version_backfill": {
+    "max_pages": 0,
+    "pages_processed": 0,
+    "raw_payload_duplicated": false,
+    "records_versioned": 0
+  }
+}

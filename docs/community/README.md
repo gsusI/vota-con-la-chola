@@ -11,6 +11,11 @@ Start here:
 - Starter tasks: `docs/community/contributor-challenges-v1.md`
 - Steward map: `docs/community/steward-map.md`
 - Partner guide: `docs/community/partner-integration-guide.md`
+- Conduct: `CODE_OF_CONDUCT.md`
+- Security and sensitive reporting: `SECURITY.md`
+- Data correction template: `.github/ISSUE_TEMPLATE/data_correction.yml`
+- Integrity signal review: `docs/method/integrity-signal-policy.md`
+- Citation metadata: `CITATION.cff`
 
 GitHub operations created:
 

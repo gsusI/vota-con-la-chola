@@ -1,0 +1,22 @@
+{
+  "schema_version": "real_data_only_validation_v1",
+  "generated_at": "2026-08-12T12:53:17+00:00",
+  "policy": {
+    "synthetic_or_mock_records_forbidden": true,
+    "implicit_sample_fallback_forbidden": true,
+    "official_public_domain_personal_information_retained": true
+  },
+  "databases_scanned": [
+    "etl/data/staging/politicos-es.db"
+  ],
+  "artifact_roots_scanned": [
+    "etl/data/raw",
+    "etl/data/derived",
+    "etl/data/published",
+    "ui/gh-pages-next/public"
+  ],
+  "files_scanned": 34392,
+  "findings_total": 0,
+  "findings": [],
+  "ok": true
+}

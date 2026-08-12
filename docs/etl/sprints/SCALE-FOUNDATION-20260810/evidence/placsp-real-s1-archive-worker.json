@@ -1,0 +1,85 @@
+{
+  "archive_queue": {
+    "active_workers": [],
+    "attempt_status_counts": {
+      "succeeded": 3
+    },
+    "attempts_total": 3,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-11T15:40:17+00:00",
+    "items_total": 3,
+    "max_attempts_observed": 1,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-contracts-real-s1-20260811:archives",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 3
+    },
+    "terminal_total": 3,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "period:2025",
+        "state": "succeeded",
+        "total": 3
+      }
+    ],
+    "unfinished_total": 0
+  },
+  "failed_attempts": 0,
+  "member_queue": {
+    "active_workers": [],
+    "attempt_status_counts": {},
+    "attempts_total": 0,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-11T15:40:17+00:00",
+    "items_total": 297,
+    "max_attempts_observed": 0,
+    "oldest_pending_at": "2026-08-11T15:36:38+00:00",
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-contracts-real-s1-20260811:members",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 297,
+      "succeeded": 0
+    },
+    "terminal_total": 0,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "archive:3",
+        "state": "pending",
+        "total": 111
+      },
+      {
+        "partition_key": "archive:1",
+        "state": "pending",
+        "total": 94
+      },
+      {
+        "partition_key": "archive:2",
+        "state": "pending",
+        "total": 92
+      }
+    ],
+    "unfinished_total": 297
+  },
+  "members_enqueued": 297,
+  "peak_rss_mb": 49.625,
+  "pipeline_id": "placsp-contracts-real-s1-20260811",
+  "processed": 3,
+  "schema_version": "placsp_archive_worker_v1",
+  "status": "ok",
+  "succeeded": 3,
+  "worker_id": "placsp-archive-real-s1"
+}

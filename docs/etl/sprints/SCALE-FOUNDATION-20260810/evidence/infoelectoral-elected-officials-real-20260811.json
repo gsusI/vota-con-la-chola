@@ -1,0 +1,161 @@
+{
+  "acquisition": [
+    {
+      "acquisition_mode": "official_network",
+      "bytes": 326847,
+      "chamber": "congreso",
+      "content_sha256": "cafc4e0f3fc53f01d1370dd47ac841c6cad43a5394e8a8d1afe2495897fbdad4",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "deduplicated": true,
+      "etag": "\"4fcbf-65521aeb01ed3\"",
+      "last_modified": "Fri, 26 Jun 2026 05:50:13 GMT",
+      "raw_path": "etl/data/object-origin/infoelectoral-elected-officials/ca/fc/cafc4e0f3fc53f01d1370dd47ac841c6cad43a5394e8a8d1afe2495897fbdad4.xlsx",
+      "source_url": "https://descargas.interior.gob.es/datasets/resultados_electorales/Elecciones-Congreso-cargos-electos.xlsx",
+      "tls_verified": false
+    },
+    {
+      "acquisition_mode": "official_network",
+      "bytes": 265483,
+      "chamber": "senado",
+      "content_sha256": "303542e0e5e6a825bed6ad4d4fb66ecdb54e5cdca283c2b307709e51d937adb6",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "deduplicated": true,
+      "etag": "\"40d0b-65521afd7744a\"",
+      "last_modified": "Fri, 26 Jun 2026 05:50:32 GMT",
+      "raw_path": "etl/data/object-origin/infoelectoral-elected-officials/30/35/303542e0e5e6a825bed6ad4d4fb66ecdb54e5cdca283c2b307709e51d937adb6.xlsx",
+      "source_url": "https://descargas.interior.gob.es/datasets/resultados_electorales/Elecciones-Senado-cargos-electos.xlsx",
+      "tls_verified": false
+    }
+  ],
+  "actor_lane": {
+    "mandates_after": 88031,
+    "mandates_before": 88031,
+    "net_new_mandates": 0
+  },
+  "database": {
+    "foreign_key_violations": 0,
+    "ok": true,
+    "quick_check": "ok"
+  },
+  "ingest": {
+    "batch_rows": 5000,
+    "batches": 2,
+    "processed": 8926
+  },
+  "official_catalog_url": "https://datos.gob.es/es/catalogo/e00003801-resultados-electorales1",
+  "peak_rss_mb": 49.246,
+  "publication_status": "local_official_not_published",
+  "raw_manifest_path": "etl/data/raw/infoelectoral/elected-officials/manifests/2026-08-11-e0e10aa927193795.json",
+  "records_loaded": 8926,
+  "records_seen": 8926,
+  "run_id": 53,
+  "schema_version": "infoelectoral_elected_officials_run_v2",
+  "snapshot_date": "2026-08-11",
+  "source_drift": {
+    "allow_large_drift": false,
+    "bootstrap": false,
+    "chambers": {
+      "congreso": {
+        "absolute_drift_ratio": 0.0,
+        "delta_rows": 0,
+        "incoming_rows": 5600,
+        "previous_present_rows": 5600,
+        "within_limit": true
+      },
+      "senado": {
+        "absolute_drift_ratio": 0.0,
+        "delta_rows": 0,
+        "incoming_rows": 3326,
+        "previous_present_rows": 3326,
+        "within_limit": true
+      }
+    },
+    "max_row_drift_ratio": 0.15,
+    "ready": true,
+    "schema_version": "infoelectoral_source_drift_v1",
+    "status": "ok"
+  },
+  "source_id": "infoelectoral_elected_officials",
+  "source_report": {
+    "by_chamber": {
+      "congreso": 5600,
+      "senado": 3326
+    },
+    "checks": {
+      "both_chambers_present": true,
+      "direct_institution_links_complete": true,
+      "direct_mandate_links_complete": true,
+      "direct_party_links_complete": true,
+      "direct_person_links_complete": true,
+      "direct_role_links_complete": true,
+      "direct_territory_links_complete": true,
+      "mandates_reconcile": true,
+      "no_exact_duplicate_outcomes": true,
+      "nonzero": true,
+      "observation_coverage_complete": true,
+      "occurrence_people_reconcile": true,
+      "presence_balance": true,
+      "snapshot_state_complete": true,
+      "source_record_fk_complete": true,
+      "source_records_reconcile": true
+    },
+    "identity_assurance": "source_scoped_election_occurrence; cross-election person resolution not asserted",
+    "publication_status": "local_official_not_published",
+    "schema_version": "infoelectoral_elected_officials_ingest_v2",
+    "source_id": "infoelectoral_elected_officials",
+    "status": "ok",
+    "totals": {
+      "absent_elected_officials": 0,
+      "candidacies": 228,
+      "distinct_official_labels": 5115,
+      "elected_officials": 8926,
+      "elections": 16,
+      "exact_duplicate_groups": 0,
+      "first_election_date": "1977-06-15",
+      "last_election_date": "2023-07-23",
+      "mandates": 8926,
+      "observation_runs": 1,
+      "observation_snapshots": 1,
+      "observation_workbook_versions": 2,
+      "observations": 8926,
+      "observed_officials": 8926,
+      "occurrence_people": 8926,
+      "present_elected_officials": 8926,
+      "source_records": 8926,
+      "workbook_versions": 2
+    }
+  },
+  "status": "ok",
+  "storage_preflight": {
+    "free_bytes": 37343399936,
+    "headroom_bytes": 31840473088,
+    "min_free_bytes": 5368709120,
+    "path": "etl/data/object-origin/infoelectoral-elected-officials",
+    "ready": true,
+    "required_free_bytes": 5502926848,
+    "reserve_bytes": 134217728,
+    "schema_version": "storage_capacity_preflight_v1"
+  },
+  "transport": {
+    "mode": "official_network",
+    "source_specific_insecure_tls": true,
+    "tls_verified": false
+  },
+  "validation": {
+    "limits": {
+      "max_rows_per_workbook": 1000000,
+      "max_uncompressed_bytes": 536870912,
+      "max_workbook_bytes": 67108864
+    },
+    "minimum_rows_by_chamber": {
+      "congreso": 5000,
+      "senado": 3000
+    },
+    "rows_by_chamber": {
+      "congreso": 5600,
+      "senado": 3326
+    },
+    "status": "ok",
+    "total_rows": 8926
+  }
+}

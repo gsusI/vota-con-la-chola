@@ -513,7 +513,6 @@ LABEL_COLUMN_CANDIDATES = (
 
 COHERENCE_BUCKETS = {"overlap", "explicit", "coherent", "incoherent"}
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 LOCAL_USER_SEGMENT_RE = re.compile(r"/Users/[^/\s]+")
 LOCAL_HOME_SEGMENT_RE = re.compile(r"/home/[^/\s]+")
 
@@ -553,7 +552,6 @@ def sanitize_public_text(value: Any) -> str:
         text = text.replace(f"{base_text}/", "")
         text = text.replace(base_text, ".")
 
-    text = EMAIL_RE.sub("<redacted-email>", text)
     text = LOCAL_USER_SEGMENT_RE.sub("/Users/<redacted-user>", text)
     text = LOCAL_HOME_SEGMENT_RE.sub("/home/<redacted-user>", text)
     return text
@@ -865,6 +863,9 @@ TRACKER_TABLE_HEADER = "| Tipo de dato | Dominio | Fuentes objetivo | Estado | B
 # free-text "Fuentes objetivo" wording changes.
 TRACKER_TIPO_SOURCE_HINTS = {
     "Marco legal electoral": ["boe_api_legal"],
+    "Cargos electos históricos Congreso/Senado": [
+        "infoelectoral_elected_officials"
+    ],
     # AI-OPS-09: explicit row-level contracts for money/outcomes families.
     # Keep these exact tracker labels in sync with e2e_tracker_status.py.
     "Contratación autonómica (piloto 3 CCAA)": ["placsp_autonomico"],

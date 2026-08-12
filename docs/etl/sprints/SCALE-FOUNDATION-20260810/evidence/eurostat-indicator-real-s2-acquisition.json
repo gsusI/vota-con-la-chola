@@ -1,0 +1,174 @@
+{
+  "acquisition_totals": {
+    "acquisitions": 4,
+    "observations_discovered": 1755809,
+    "ok_total": 4,
+    "raw_bytes": 27846080,
+    "series_loaded": 155435,
+    "verified_ca_total": 4
+  },
+  "acquisitions": [
+    {
+      "dataset_code": "demo_r_d3dens",
+      "error": null,
+      "indicator_bulk_acquisition_id": 3,
+      "item_key": "regional_population_density_nuts3_since_2000:eee3021f7dbc45c8",
+      "observations_discovered": 45710,
+      "raw_bytes": 756354,
+      "raw_content_sha256": "f51082106b682f72cfbdad40ca45cb3e1a36c18daf197b5a61ad84a8153172de",
+      "series_loaded": 2086,
+      "source_snapshot_date": "2026-08-11",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_d3dens?lang=EN&sinceTimePeriod=2000",
+      "status": "ok",
+      "transport_security": "verified_ca"
+    },
+    {
+      "dataset_code": "demo_r_pjangrp3",
+      "error": null,
+      "indicator_bulk_acquisition_id": 1,
+      "item_key": "regional_population_age_sex_nuts3_since_2015:dba3567732f04782",
+      "observations_discovered": 1410401,
+      "raw_bytes": 22267786,
+      "raw_content_sha256": "09a62991fd6f2a5e6dad9955975552300466327f648e35c8aa7e04189f261fec",
+      "series_loaded": 140574,
+      "source_snapshot_date": "2026-08-11",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_pjangrp3?lang=EN&sinceTimePeriod=2015",
+      "status": "ok",
+      "transport_security": "verified_ca"
+    },
+    {
+      "dataset_code": "ilc_peps11n",
+      "error": null,
+      "indicator_bulk_acquisition_id": 4,
+      "item_key": "regional_poverty_exclusion_nuts2_since_2015:5b78ac9ac8e99320",
+      "observations_discovered": 3376,
+      "raw_bytes": 58353,
+      "raw_content_sha256": "fca5f0c54754173cab1048a6ca52e2e9f7094ca8fa1220f2c29babd9a3911018",
+      "series_loaded": 417,
+      "source_snapshot_date": "2026-08-11",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_peps11n?lang=EN&sinceTimePeriod=2015",
+      "status": "ok",
+      "transport_security": "verified_ca"
+    },
+    {
+      "dataset_code": "nama_10r_3gdp",
+      "error": null,
+      "indicator_bulk_acquisition_id": 2,
+      "item_key": "regional_gdp_nuts3_since_2000:93550cd8243fb919",
+      "observations_discovered": 296322,
+      "raw_bytes": 4763587,
+      "raw_content_sha256": "8584b2c144ad608be5f28e2fc028517ba7c583a6245ca65bdc87238f1e1cf491",
+      "series_loaded": 12358,
+      "source_snapshot_date": "2026-08-11",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10r_3gdp?lang=EN&sinceTimePeriod=2000",
+      "status": "ok",
+      "transport_security": "verified_ca"
+    }
+  ],
+  "analytical_ingest_gate_passed": true,
+  "checks": {
+    "all_acquisitions_ok": true,
+    "all_acquisitions_recorded": true,
+    "all_items_succeeded": true,
+    "discovered_observations_reconcile": true,
+    "foreign_keys": true,
+    "keyset_index_used": true,
+    "methodology_complete": true,
+    "million_real_observations": true,
+    "no_dead_items": true,
+    "normalized_observations_reconcile": true,
+    "observation_dimensions_not_duplicated": true,
+    "official_source_urls_complete": true,
+    "queue_finished": true,
+    "quick_check": true,
+    "series_dimensions_normalized": true,
+    "source_record_mapping_reconciles": true,
+    "verified_tls_for_all_acquisitions": true
+  },
+  "database_bytes": 2801963008,
+  "database_file": "eurostat-indicators-real-s2-20260811.db",
+  "foreign_key_errors": 0,
+  "generated_at": "2026-08-11T15:14:00+00:00",
+  "limitations": [
+    "Four official Eurostat regional datasets do not establish representative coverage of every policy outcome domain.",
+    "Verified local acquisition and normalization do not prove durable public publication or clean-room restore.",
+    "Population, GDP, density, and poverty context support accountability analysis but do not prove causal impact."
+  ],
+  "mapping": {
+    "observations_discovered": 1755809,
+    "source_records": 155435
+  },
+  "normalized": {
+    "indicator_series": 155435,
+    "methodology_rows": 1755809,
+    "observation_records": 1755809,
+    "official_url_rows": 1755809,
+    "source_records": 155435
+  },
+  "pipeline_id": "eurostat-indicators-real-s2-20260811",
+  "promotion_gate_passed": false,
+  "publication_status": "local_real_official_not_published",
+  "queue": {
+    "active_workers": [],
+    "attempt_status_counts": {
+      "retry": 4,
+      "succeeded": 4
+    },
+    "attempts_total": 8,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-11T15:13:15+00:00",
+    "items_total": 4,
+    "max_attempts_observed": 3,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "eurostat-indicators-real-s2-20260811",
+    "retry_attempts_total": 4,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 4
+    },
+    "terminal_total": 4,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "demo_r_d3dens",
+        "state": "succeeded",
+        "total": 1
+      },
+      {
+        "partition_key": "demo_r_pjangrp3",
+        "state": "succeeded",
+        "total": 1
+      },
+      {
+        "partition_key": "ilc_peps11n",
+        "state": "succeeded",
+        "total": 1
+      },
+      {
+        "partition_key": "nama_10r_3gdp",
+        "state": "succeeded",
+        "total": 1
+      }
+    ],
+    "unfinished_total": 0
+  },
+  "quick_check": "ok",
+  "real_coverage_claim": true,
+  "representative_mix_claim": false,
+  "schema_version": "eurostat_indicator_registry_report_v1",
+  "source_id": "eurostat_sdmx",
+  "storage": {
+    "keyset_query_plan": [
+      "SEARCH source_records USING INDEX idx_source_records_indicator_backfill (source_id=?)"
+    ],
+    "observation_inline_dimensions_rows": 0,
+    "observation_raw_payload_bytes": 192021737,
+    "series_dimensions_rows": 155435,
+    "series_raw_payload_bytes": 58640845
+  }
+}

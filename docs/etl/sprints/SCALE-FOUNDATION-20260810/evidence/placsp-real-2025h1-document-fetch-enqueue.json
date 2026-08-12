@@ -1,0 +1,32 @@
+{
+  "batch_size": 5000,
+  "db": "etl/data/staging/placsp-contracts-real-s1-20260811.db",
+  "enqueue": {
+    "existing_total": 579685,
+    "input_total": 998372,
+    "inserted_total": 418687,
+    "pipeline_total": 998392
+  },
+  "kind": "placsp-document-fetch",
+  "limit": 0,
+  "link_materialization": null,
+  "only_missing": true,
+  "pipeline_id": "placsp_document_fetch_real_s1",
+  "queue": {
+    "items_total": 998392,
+    "pipeline_id": "placsp_document_fetch_real_s1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 998372,
+      "succeeded": 20
+    },
+    "terminal_total": 20,
+    "unfinished_total": 998372
+  },
+  "schema_version": "scale_work_queue_enqueue_v1",
+  "source_ids": [
+    "placsp_sindicacion"
+  ],
+  "status": "ok"
+}
