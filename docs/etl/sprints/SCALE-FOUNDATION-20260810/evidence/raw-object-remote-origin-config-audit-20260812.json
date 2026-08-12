@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "aws_access_key_id_configured": false,
+    "aws_default_region_configured": false,
+    "aws_profile_configured": false,
+    "aws_secret_access_key_configured": false,
+    "object_store_bucket_configured": false,
+    "object_store_endpoint_url_configured": false
+  },
+  "generated_at": "2026-08-12T18:01:41Z",
+  "next_gate": "Configure a dedicated S3-compatible public-data origin, then verify bucket versioning, retention, encryption, immutable object upload, remote checksum metadata, and clean restore without recording credential values.",
+  "policy": {
+    "credential_values_recorded": false,
+    "official_public_domain_personal_information_retained": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "schema_version": "raw_object_remote_origin_config_audit_v1",
+  "status": "blocked_configuration"
+}

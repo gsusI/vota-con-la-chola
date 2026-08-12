@@ -523,6 +523,10 @@ PROJECT_FACTS = [
                 detail="Streaming full-manifest local restore proof for all 6792 replicated real objects and 133219457 bytes.",
             ),
             Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/raw-object-remote-origin-config-audit-20260812.json",
+                detail="Secret-free configuration audit proving the external S3-compatible origin cannot be exercised until bucket and credential configuration exist.",
+            ),
+            Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-s2-partial-run.json",
                 detail="Durable million-cohort checkpoint, bounded raw acquisition, timeout circuit, and zero-dead-page evidence.",
             ),
