@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "<redacted-local-root>/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/ingestar_politicos_es.py", line 22, in <module>
+    raise SystemExit(main())
+  File "<redacted-local-root>/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/cli.py", line 360, in main
+    return cmd_ingest(args)
+  File "<redacted-local-root>/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/cli.py", line 172, in cmd_ingest
+    seen, loaded, note = ingest_one_source(
+  File "<redacted-local-root>/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/pipeline.py", line 46, in ingest_one_source
+    extracted = connector.extract(
+  File "<redacted-local-root>/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/connectors/bdns_subsidies.py", line 386, in extract
+    records = parse_bdns_records(payload, feed_url=resolved_url, content_type=content_type)
+  File "<redacted-local-root>/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/connectors/bdns_subsidies.py", line 164, in parse_bdns_records
+    raise RuntimeError(f"Respuesta HTML inesperada para BDNS feed (payload_sig={payload_sig})")
+RuntimeError: Respuesta HTML inesperada para BDNS feed (payload_sig=0401a40b059385b8a4d3e2fd933fe16213e22dd72df2f2fe2cdbd2872114c2fa)

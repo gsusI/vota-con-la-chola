@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-02-28T21:25:18+00:00",
+  "before_generated_at": "2026-02-28T21:21:04+00:00",
+  "totals_before": {
+    "missing_urls": 649,
+    "missing_initiatives": 345,
+    "blocked_403_urls": 475,
+    "blocked_403_rate": 0.731895,
+    "blocked_500_urls": 60,
+    "unknown_status_urls": 0,
+    "zero_doc_initiatives": 6
+  },
+  "totals_after": {
+    "missing_urls": 767,
+    "missing_initiatives": 345,
+    "blocked_403_urls": 678,
+    "blocked_403_rate": 0.883963,
+    "blocked_500_urls": 36,
+    "unknown_status_urls": 51,
+    "zero_doc_initiatives": 6
+  },
+  "delta": {
+    "missing_urls": 118,
+    "blocked_403_urls": 203,
+    "blocked_500_urls": -24,
+    "unknown_status_urls": 51,
+    "zero_doc_initiatives": 0,
+    "blocked_403_rate": 0.1520680000000001
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "actor_scale": {
+    "actor_candidate_mandate_rows": 88031,
+    "candidate_occurrences": 0,
+    "external_identity_verified": false,
+    "mandates": 88031,
+    "promotion_gate_passed": false,
+    "real_s1_row_gate_passed": false,
+    "s1_minimum_rows": 100000
+  },
+  "database": {
+    "foreign_key_violations": 0,
+    "ok": true,
+    "path": "etl/data/staging/politicos-es.db",
+    "quick_check": "ok"
+  },
+  "facts": {
+    "checks": {
+      "archive_candidate_rows_reconcile": true,
+      "loaded_archives_have_party_rows": true,
+      "observation_coverage_complete": true,
+      "occurrence_people_reconcile": true,
+      "party_links_complete": true,
+      "person_links_complete": true,
+      "presence_balance": true,
+      "source_record_links_complete": true,
+      "source_records_reconcile": true
+    },
+    "identity_assurance": "source_scoped_election_occurrence; cross-election person resolution not asserted",
+    "public_domain_identity": {
+      "dni_persisted": true,
+      "normalized_birth_date_persisted": true,
+      "official_archive_retained": true,
+      "source_birth_date_persisted": true
+    },
+    "schema_version": "infoelectoral_candidates_report_v1",
+    "source_id": "infoelectoral_candidates",
+    "status": "not_ready",
+    "totals": {
+      "absent_candidate_occurrences": 0,
+      "archives_with_facts": 0,
+      "candidate_occurrences": 0,
+      "cataloged_archives": 60,
+      "elections": 0,
+      "latest_archive_candidate_rows": 0,
+      "loaded_archives": 0,
+      "observations": 0,
+      "occurrence_people": 0,
+      "parties": 0,
+      "present_candidate_occurrences": 0,
+      "source_party_rows": 0,
+      "source_records": 0
+    }
+  },
+  "pipeline_id": "infoelectoral-candidates-v1",
+  "publication_status": "official_public_domain_raw_local_normalized_not_published",
+  "queue": {
+    "active_workers": [],
+    "attempt_status_counts": {},
+    "attempts_total": 0,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-08-13T01:28:32+00:00",
+    "items_total": 60,
+    "max_attempts_observed": 0,
+    "oldest_pending_at": "2026-08-11T19:22:15+00:00",
+    "overdue_leases_total": 0,
+    "pipeline_id": "infoelectoral-candidates-v1",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 60,
+      "succeeded": 0
+    },
+    "terminal_total": 0,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "2019",
+        "state": "pending",
+        "total": 7
+      },
+      {
+        "partition_key": "2011",
+        "state": "pending",
+        "total": 4
+      },
+      {
+        "partition_key": "2015",
+        "state": "pending",
+        "total": 4
+      },
+      {
+        "partition_key": "2023",
+        "state": "pending",
+        "total": 4
+      },
+      {
+        "partition_key": "1987",
+        "state": "pending",
+        "total": 3
+      },
+      {
+        "partition_key": "1989",
+        "state": "pending",
+        "total": 3
+      },
+      {
+        "partition_key": "1999",
+        "state": "pending",
+        "total": 3
+      },
+      {
+        "partition_key": "2004",
+        "state": "pending",
+        "total": 3
+      },
+      {
+        "partition_key": "1979",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "1986",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "1991",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "1993",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "1995",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "1996",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "2000",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "2003",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "2007",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "2008",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "2016",
+        "state": "pending",
+        "total": 2
+      },
+      {
+        "partition_key": "1977",
+        "state": "pending",
+        "total": 1
+      }
+    ],
+    "unfinished_total": 60
+  },
+  "schema_version": "infoelectoral_candidate_pipeline_report_v1",
+  "source_id": "infoelectoral_candidates",
+  "status": "pending"
+}

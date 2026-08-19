@@ -1,0 +1,52 @@
+{
+  "documents": {
+    "candidate_urls": 24,
+    "doc_links_seen": 24,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000265.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000266.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000267.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000268.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000269.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000270.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000271.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000272.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000273.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000274.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000275.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=http://www.senado.es/legis9/expedientes/610/xml/INI-3-610000276.xml -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000265 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000266 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000267 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000268 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000269 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000270 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000271 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000272 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000273 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000274 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000275 -> HTTPError: HTTP Error 403: Forbidden",
+      "url=https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=9&id1=610&id2=000276 -> HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "fetched_ok": 0,
+    "initiative_documents_upserted": 24,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 12,
+    "skipped_existing": 0,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 0,
+    "urls_to_fetch": 24
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

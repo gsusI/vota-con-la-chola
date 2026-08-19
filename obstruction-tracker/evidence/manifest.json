@@ -1,0 +1,1205 @@
+{
+  "schema_version": "obstruction_evidence_bundle_v1",
+  "policy": {
+    "official_public_information_retained": true,
+    "credentials_private_sessions_and_workstation_paths_redacted": true
+  },
+  "summary": {
+    "files_total": 119,
+    "files_sanitized": 7,
+    "source_bytes_total": 2455204,
+    "public_bytes_total": 2455273
+  },
+  "files": [
+    {
+      "source_path": "docs/etl/e2e-scrape-load-tracker.md",
+      "public_file": "cfa99b5612061641-e2e-scrape-load-tracker.md.txt",
+      "source_bytes": 1300875,
+      "public_bytes": 1300875,
+      "source_sha256": "33711cbc978da332c835ae0c36c5366ebdf10e43f5e1724d5cc08dd5771cab8e",
+      "public_sha256": "b0ce442d4ade3418e82d5fc46f2982f90abf5e6c12f6a2957a843ad4d762c27a",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_finish_fast_20260220T144046Z/13_run_summary.md",
+      "public_file": "5826e54e6fe8c857-13_run_summary.md.txt",
+      "source_bytes": 604,
+      "public_bytes": 604,
+      "source_sha256": "7155539126085afd0cf6982d239c7fecc7ff5598328abfadd5ffae1d5cdcb310",
+      "public_sha256": "7155539126085afd0cf6982d239c7fecc7ff5598328abfadd5ffae1d5cdcb310",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded12_20260221T133419Z/round_1.json",
+      "public_file": "27e4ed3ed77ac313-round_1.json.txt",
+      "source_bytes": 4992,
+      "public_bytes": 4992,
+      "source_sha256": "8560bf9bbe3f83d98e8e4392589f22f9e74b6e97831b8a2ae52965b686cbf5fb",
+      "public_sha256": "8560bf9bbe3f83d98e8e4392589f22f9e74b6e97831b8a2ae52965b686cbf5fb",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded12_20260221T133419Z/round_2.json",
+      "public_file": "a9ac86a25a3716a1-round_2.json.txt",
+      "source_bytes": 4990,
+      "public_bytes": 4990,
+      "source_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "public_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded12_20260221T133419Z/round_3.json",
+      "public_file": "1c10e2bb6334db37-round_3.json.txt",
+      "source_bytes": 5302,
+      "public_bytes": 5302,
+      "source_sha256": "d80ecbeb70e9a4e2ceb6aaf9ae43999a3ce6b2fad00cd999072d824be6698eca",
+      "public_sha256": "d80ecbeb70e9a4e2ceb6aaf9ae43999a3ce6b2fad00cd999072d824be6698eca",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded17_20260221T183415Z/round_1.json",
+      "public_file": "75f0fe7d13f07f21-round_1.json.txt",
+      "source_bytes": 4990,
+      "public_bytes": 4990,
+      "source_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "public_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded17_20260221T183415Z/round_2.json",
+      "public_file": "eeb7ae3ed1c5613a-round_2.json.txt",
+      "source_bytes": 4990,
+      "public_bytes": 4990,
+      "source_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "public_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded17_20260221T183415Z/round_3.json",
+      "public_file": "2237dcfaa5d406aa-round_3.json.txt",
+      "source_bytes": 4990,
+      "public_bytes": 4990,
+      "source_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "public_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/runs/senado_postfix_bounded17_20260221T183415Z/round_4.json",
+      "public_file": "f0035ab604c00a74-round_4.json.txt",
+      "source_bytes": 5350,
+      "public_bytes": 5350,
+      "source_sha256": "d3068a172a7c6f2e6a6441eb6cc57e3aa6d3f070707cd4b3b8ed939e8e47f26f",
+      "public_sha256": "d3068a172a7c6f2e6a6441eb6cc57e3aa6d3f070707cd4b3b8ed939e8e47f26f",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-galicia-strict.log",
+      "public_file": "5841481877de6e1a-waiver-burndown-apply-recompute-probe-galicia-strict.log.txt",
+      "source_bytes": 3527,
+      "public_bytes": 3576,
+      "source_sha256": "04d9336e42d7a0061137772885ca044297d1c6535bf606367d524c17bafacb29",
+      "public_sha256": "5c3d59fbde611a3c72fcf3ce58a0897a1e2057bf187f6f7bc9941286c6559cfa",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-08/evidence/waiver-burndown-apply-recompute-probe-navarra-strict.log",
+      "public_file": "9f025467e107e86a-waiver-burndown-apply-recompute-probe-navarra-strict.log.txt",
+      "source_bytes": 3540,
+      "public_bytes": 3589,
+      "source_sha256": "a2c69d5a493efe06280bca8869f50d756569e066f737950c9c584cfa57832465",
+      "public_sha256": "7ef35513cea2c4ece204d96b006439667f08035ca887a8643bf8e1bee4ffa980",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-08/reports/waiver-burndown-apply-recompute.md",
+      "public_file": "a6840015b4d41f50-waiver-burndown-apply-recompute.md.txt",
+      "source_bytes": 4746,
+      "public_bytes": 4746,
+      "source_sha256": "bfde391d0d2209b23cee91c908b6c5b1430533c6810d32852099714756310f99",
+      "public_sha256": "bfde391d0d2209b23cee91c908b6c5b1430533c6810d32852099714756310f99",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-09/evidence/bdns-apply-logs/bdns_api_subvenciones__strict-network.stderr.log",
+      "public_file": "5b1c5c054f986866-bdns_api_subvenciones__strict-network.stderr.log.txt",
+      "source_bytes": 1579,
+      "public_bytes": 1621,
+      "source_sha256": "1b7090cf65e09e3ede11c5f2bfd458ec92f893b692326207ec1fa99c86a91d3f",
+      "public_sha256": "9d8b4b96b69ea7727c466b60d766abac0cf86e519d6230b4f76726e6869e6fa4",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-09/evidence/bdns-apply-logs/bdns_autonomico__strict-network.stderr.log",
+      "public_file": "dcffc9ced5b9137b-bdns_autonomico__strict-network.stderr.log.txt",
+      "source_bytes": 1579,
+      "public_bytes": 1621,
+      "source_sha256": "1b7090cf65e09e3ede11c5f2bfd458ec92f893b692326207ec1fa99c86a91d3f",
+      "public_sha256": "9d8b4b96b69ea7727c466b60d766abac0cf86e519d6230b4f76726e6869e6fa4",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-09/evidence/tracker-row-reconciliation.md",
+      "public_file": "bab60224636feb4a-tracker-row-reconciliation.md.txt",
+      "source_bytes": 7072,
+      "public_bytes": 7072,
+      "source_sha256": "23fa4084930ffb57dd699cdf5c390a1214a79a0adc513aea6cf6d2e3ab1f8705",
+      "public_sha256": "23fa4084930ffb57dd699cdf5c390a1214a79a0adc513aea6cf6d2e3ab1f8705",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-09/reports/bdns-apply-recompute.md",
+      "public_file": "e5754e28b0377ba3-bdns-apply-recompute.md.txt",
+      "source_bytes": 5128,
+      "public_bytes": 5128,
+      "source_sha256": "2ce0f0b32cc90419920a7224d5861fdfa425be123eb29ff6631fd1074927b2b3",
+      "public_sha256": "2ce0f0b32cc90419920a7224d5861fdfa425be123eb29ff6631fd1074927b2b3",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-216/evidence/congreso-votaciones-block-20260225.md",
+      "public_file": "62cf6d4ace23ea96-congreso-votaciones-block-20260225.md.txt",
+      "source_bytes": 881,
+      "public_bytes": 881,
+      "source_sha256": "f65c4c809a863518af8d389023518bf08d8e74016342380642bda003bcce0e48",
+      "public_sha256": "f65c4c809a863518af8d389023518bf08d8e74016342380642bda003bcce0e48",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-225/evidence/quality_initiatives_delta_pre_vs_final_latest.csv",
+      "public_file": "237e6ce8dc2ccc24-quality_initiatives_delta_pre_vs_final_latest.csv.txt",
+      "source_bytes": 991,
+      "public_bytes": 991,
+      "source_sha256": "001a78b55fdde3e13998b2edf6771f5606e4c9ad6ba139413afd2ed39c896282",
+      "public_sha256": "001a78b55fdde3e13998b2edf6771f5606e4c9ad6ba139413afd2ed39c896282",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-225/evidence/quality_initiatives_final_20260227T080442Z.json",
+      "public_file": "2a3bf90eda54f9db-quality_initiatives_final_20260227T080442Z.json.txt",
+      "source_bytes": 10677,
+      "public_bytes": 10677,
+      "source_sha256": "fb60491ada92d136924b18ea4896993a0afe06650cc199e8cbef1be478437b2d",
+      "public_sha256": "fb60491ada92d136924b18ea4896993a0afe06650cc199e8cbef1be478437b2d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-225/evidence/senado_backfill_docs_cookiefile_run_20260227T075634Z.log",
+      "public_file": "a1e7635e9bfcfa39-senado_backfill_docs_cookiefile_run_20260227T075634Z.log.txt",
+      "source_bytes": 5725,
+      "public_bytes": 5725,
+      "source_sha256": "1ba2705df9153630c5408b6493f39a666228b52b282b15b7b5cd4bb79319b8aa",
+      "public_sha256": "1ba2705df9153630c5408b6493f39a666228b52b282b15b7b5cd4bb79319b8aa",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-225/evidence/senado_backfill_docs_playwright_run_circuit_20260227T080231Z.log",
+      "public_file": "2ccbc1bfd2cde886-senado_backfill_docs_playwright_run_circuit_20260227T080231Z.log.txt",
+      "source_bytes": 10649,
+      "public_bytes": 10684,
+      "source_sha256": "73bd318360fc340d6888c71d0cd0fabe2b65b3a9297e015076cdd3abb6da17c1",
+      "public_sha256": "90b3078fe0c214df69c8a939cad807b02652ed7c81e58d2852d00cf1c3ec08e2",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-225/evidence/senado_backfill_docs_run_20260227T074122Z.log",
+      "public_file": "c04d63dfecbb1524-senado_backfill_docs_run_20260227T074122Z.log.txt",
+      "source_bytes": 4570,
+      "public_bytes": 4570,
+      "source_sha256": "fa38856b21eceb6b9a106fc0a1259a7b13fe88da21369f2a8319f0817532e6c7",
+      "public_sha256": "fa38856b21eceb6b9a106fc0a1259a7b13fe88da21369f2a8319f0817532e6c7",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-225/reports/senado-actionable-tail-retry-and-playwright-hardening-20260227.md",
+      "public_file": "f909939b63b912c1-senado-actionable-tail-retry-and-playwright-hardening-20260227.md.txt",
+      "source_bytes": 3428,
+      "public_bytes": 3428,
+      "source_sha256": "1f3366e97b68d2341f676667f7e9575cea4be4153cc60f180f45cab7150f437e",
+      "public_sha256": "1f3366e97b68d2341f676667f7e9575cea4be4153cc60f180f45cab7150f437e",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-232/evidence/senado_backfill_docs_retry_cookie_latest.json",
+      "public_file": "2e59eefd29b4df7f-senado_backfill_docs_retry_cookie_latest.json.txt",
+      "source_bytes": 5344,
+      "public_bytes": 5344,
+      "source_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "public_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-232/evidence/senado_waf_block_profile_latest.json",
+      "public_file": "3f810a1d0bed3572-senado_waf_block_profile_latest.json.txt",
+      "source_bytes": 52715,
+      "public_bytes": 52715,
+      "source_sha256": "a0028afe8e150c30c4901fd6ff5e84118d10e6640c398748e3c39996d0b6e3be",
+      "public_sha256": "a0028afe8e150c30c4901fd6ff5e84118d10e6640c398748e3c39996d0b6e3be",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-232/evidence/senado_waf_block_profile_strict_latest.json",
+      "public_file": "82131d464a4bafeb-senado_waf_block_profile_strict_latest.json.txt",
+      "source_bytes": 52566,
+      "public_bytes": 52566,
+      "source_sha256": "b70af37b948754a9574c59e09b943749b7f9bd9b024cfe9028a84dfc40e3de46",
+      "public_sha256": "b70af37b948754a9574c59e09b943749b7f9bd9b024cfe9028a84dfc40e3de46",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-232/exports/senado_zero_doc_actionable_queue_latest.csv",
+      "public_file": "4c4be5f2ea71eb85-senado_zero_doc_actionable_queue_latest.csv.txt",
+      "source_bytes": 5157,
+      "public_bytes": 5157,
+      "source_sha256": "b25559f32a92265b62b975568b545cd0c7951c0efc0514e54a29e172e7023e27",
+      "public_sha256": "b25559f32a92265b62b975568b545cd0c7951c0efc0514e54a29e172e7023e27",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-232/reports/senado-waf-block-profile-and-zero-doc-queue-20260227.md",
+      "public_file": "1de3248fbe1e24f6-senado-waf-block-profile-and-zero-doc-queue-20260227.md.txt",
+      "source_bytes": 3479,
+      "public_bytes": 3479,
+      "source_sha256": "c4c0083b6caf23c5751bae5b11a8e6847454f74b958175ca0a5e3c1c3293ae5d",
+      "public_sha256": "c4c0083b6caf23c5751bae5b11a8e6847454f74b958175ca0a5e3c1c3293ae5d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-233/evidence/senado_backfill_docs_retry_cookie_limit50_latest.json",
+      "public_file": "56c4af4137dc21a8-senado_backfill_docs_retry_cookie_limit50_latest.json.txt",
+      "source_bytes": 5402,
+      "public_bytes": 5402,
+      "source_sha256": "a53f49e3147bd15dea395eed50d6c88592c812549a5e913777211dceb8d5fc9d",
+      "public_sha256": "a53f49e3147bd15dea395eed50d6c88592c812549a5e913777211dceb8d5fc9d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-233/evidence/senado_waf_block_profile_delta_vs_ai_ops_232_latest.json",
+      "public_file": "4b124e6fc1a88151-senado_waf_block_profile_delta_vs_ai_ops_232_latest.json.txt",
+      "source_bytes": 717,
+      "public_bytes": 717,
+      "source_sha256": "fc2747477e12b6777366793a229079e0b0d879ebcce61d7334be92e061d04412",
+      "public_sha256": "fc2747477e12b6777366793a229079e0b0d879ebcce61d7334be92e061d04412",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-233/evidence/senado_waf_block_profile_latest.json",
+      "public_file": "3ba64ebbc922cb5b-senado_waf_block_profile_latest.json.txt",
+      "source_bytes": 52704,
+      "public_bytes": 52704,
+      "source_sha256": "528defa72a4070179ac6104dbcbeee4d5f94246a562ba37c3442dfcec4f8f455",
+      "public_sha256": "528defa72a4070179ac6104dbcbeee4d5f94246a562ba37c3442dfcec4f8f455",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-233/evidence/senado_waf_block_profile_strict_latest.json",
+      "public_file": "90de88ea45d921ae-senado_waf_block_profile_strict_latest.json.txt",
+      "source_bytes": 52704,
+      "public_bytes": 52704,
+      "source_sha256": "528defa72a4070179ac6104dbcbeee4d5f94246a562ba37c3442dfcec4f8f455",
+      "public_sha256": "528defa72a4070179ac6104dbcbeee4d5f94246a562ba37c3442dfcec4f8f455",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-233/exports/senado_zero_doc_actionable_queue_latest.csv",
+      "public_file": "08a0c4b49fa5a493-senado_zero_doc_actionable_queue_latest.csv.txt",
+      "source_bytes": 5157,
+      "public_bytes": 5157,
+      "source_sha256": "88109cc3115e4bf5aa7d729f4a930c0e5ea77c03eb4441201ea374ad4e237772",
+      "public_sha256": "88109cc3115e4bf5aa7d729f4a930c0e5ea77c03eb4441201ea374ad4e237772",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-233/reports/senado-escalado-cohortes-top-strict-retry-20260227.md",
+      "public_file": "1ecd92f9c2d7c6cf-senado-escalado-cohortes-top-strict-retry-20260227.md.txt",
+      "source_bytes": 3512,
+      "public_bytes": 3512,
+      "source_sha256": "6e1d00ad8483906f130d118ca462d5c41869853b1837fff75c754540406d73b6",
+      "public_sha256": "6e1d00ad8483906f130d118ca462d5c41869853b1837fff75c754540406d73b6",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-234/evidence/senado_backfill_docs_retry_cookie_limit25_latest.json",
+      "public_file": "8a81eba3b58333fa-senado_backfill_docs_retry_cookie_limit25_latest.json.txt",
+      "source_bytes": 5344,
+      "public_bytes": 5344,
+      "source_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "public_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-234/evidence/senado_cookie_lever_status_latest.json",
+      "public_file": "047ccaddc5579c17-senado_cookie_lever_status_latest.json.txt",
+      "source_bytes": 1177,
+      "public_bytes": 1177,
+      "source_sha256": "9c3b69a9d67d4eafac84f39452a44f4c5aab95812e4cfceb1b732a101fcd5027",
+      "public_sha256": "9c3b69a9d67d4eafac84f39452a44f4c5aab95812e4cfceb1b732a101fcd5027",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-234/evidence/senado_cookie_lever_status_strict_latest.json",
+      "public_file": "ab3c6c2abfb201fa-senado_cookie_lever_status_strict_latest.json.txt",
+      "source_bytes": 1177,
+      "public_bytes": 1177,
+      "source_sha256": "9c3b69a9d67d4eafac84f39452a44f4c5aab95812e4cfceb1b732a101fcd5027",
+      "public_sha256": "9c3b69a9d67d4eafac84f39452a44f4c5aab95812e4cfceb1b732a101fcd5027",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-234/evidence/senado_cookie_lever_status_strict_rc_latest.txt",
+      "public_file": "2e32ae746e71e240-senado_cookie_lever_status_strict_rc_latest.txt.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-234/evidence/senado_waf_block_profile_delta_vs_ai_ops_233_latest.json",
+      "public_file": "e61a08ffebf22f5c-senado_waf_block_profile_delta_vs_ai_ops_233_latest.json.txt",
+      "source_bytes": 697,
+      "public_bytes": 697,
+      "source_sha256": "ba01c965b5b17edad0e532b5991f08a5de3b8b3a84736b952f113f9f08402653",
+      "public_sha256": "ba01c965b5b17edad0e532b5991f08a5de3b8b3a84736b952f113f9f08402653",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-234/reports/senado-cookie-lever-no-new-lever-closure-20260227.md",
+      "public_file": "420530e515858a92-senado-cookie-lever-no-new-lever-closure-20260227.md.txt",
+      "source_bytes": 4045,
+      "public_bytes": 4045,
+      "source_sha256": "e46e7033eb82869b4379813a47c121f4ea3e4ac772f9ce57d401d47ee21d1b81",
+      "public_sha256": "e46e7033eb82869b4379813a47c121f4ea3e4ac772f9ce57d401d47ee21d1b81",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/evidence/senado_backfill_docs_retry_cookie_refresh_limit25_latest.json",
+      "public_file": "b3cadbf7f9bc47c0-senado_backfill_docs_retry_cookie_refresh_limit25_latest.json.txt",
+      "source_bytes": 5344,
+      "public_bytes": 5344,
+      "source_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "public_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/evidence/senado_cookie_lever_status_latest.json",
+      "public_file": "565252cb3edd4bb8-senado_cookie_lever_status_latest.json.txt",
+      "source_bytes": 1037,
+      "public_bytes": 1037,
+      "source_sha256": "8d14b26d2a555a78cbe8026065f9c91581fbf7e681d27b40bf3a6cd59b092d98",
+      "public_sha256": "8d14b26d2a555a78cbe8026065f9c91581fbf7e681d27b40bf3a6cd59b092d98",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/evidence/senado_cookie_lever_status_strict_latest.json",
+      "public_file": "020f95cacc515e4d-senado_cookie_lever_status_strict_latest.json.txt",
+      "source_bytes": 1037,
+      "public_bytes": 1037,
+      "source_sha256": "8d14b26d2a555a78cbe8026065f9c91581fbf7e681d27b40bf3a6cd59b092d98",
+      "public_sha256": "8d14b26d2a555a78cbe8026065f9c91581fbf7e681d27b40bf3a6cd59b092d98",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/evidence/senado_cookie_lever_status_strict_rc_latest.txt",
+      "public_file": "f241f17e1808c396-senado_cookie_lever_status_strict_rc_latest.txt.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/evidence/senado_manual_cookie_capture_summary_latest.json",
+      "public_file": "ab5d09b954de02fd-senado_manual_cookie_capture_summary_latest.json.txt",
+      "source_bytes": 1264,
+      "public_bytes": 1264,
+      "source_sha256": "aca892056e34ca486597944d75e86c364031d015131677a4f2ce7811c74d0930",
+      "public_sha256": "aca892056e34ca486597944d75e86c364031d015131677a4f2ce7811c74d0930",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/evidence/senado_waf_block_profile_delta_vs_ai_ops_234_latest.json",
+      "public_file": "49014c00f49f2c57-senado_waf_block_profile_delta_vs_ai_ops_234_latest.json.txt",
+      "source_bytes": 697,
+      "public_bytes": 697,
+      "source_sha256": "6f518588af839a9dc16651d65cf09ef5ecdc07236a0a7df9a643486bdb146b78",
+      "public_sha256": "6f518588af839a9dc16651d65cf09ef5ecdc07236a0a7df9a643486bdb146b78",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-235/reports/senado-manual-capture-runtime-hardening-and-cookie-refresh-probe-20260227.md",
+      "public_file": "c9c99cbc4a526f91-senado-manual-capture-runtime-hardening-and-cookie-refresh-probe-20260227.md.txt",
+      "source_bytes": 3737,
+      "public_bytes": 3737,
+      "source_sha256": "f66ca7f86bb057a07f4caf85816f6beedfaf43b57abe578ff0bb1bbc6f895e6b",
+      "public_sha256": "f66ca7f86bb057a07f4caf85816f6beedfaf43b57abe578ff0bb1bbc6f895e6b",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-236/evidence/just_parl_check_senado_manual_capture_validity_latest.txt",
+      "public_file": "abf6fad5b22b1c7b-just_parl_check_senado_manual_capture_validity_latest.txt.txt",
+      "source_bytes": 2096,
+      "public_bytes": 2096,
+      "source_sha256": "42f74aa90ea4042a1df1592290e68b8f156b08b408524c4eb652bc295907107b",
+      "public_sha256": "42f74aa90ea4042a1df1592290e68b8f156b08b408524c4eb652bc295907107b",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-236/evidence/just_parl_check_senado_manual_capture_validity_rc_latest.txt",
+      "public_file": "8113c4d133afb3aa-just_parl_check_senado_manual_capture_validity_rc_latest.txt.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-236/evidence/senado_manual_capture_validity_latest.json",
+      "public_file": "44237598c1d078ca-senado_manual_capture_validity_latest.json.txt",
+      "source_bytes": 1723,
+      "public_bytes": 1723,
+      "source_sha256": "ed793bdaa1784abab73c362828182b81db9cda0a8c8a5866f12225914f16462f",
+      "public_sha256": "ed793bdaa1784abab73c362828182b81db9cda0a8c8a5866f12225914f16462f",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-236/evidence/senado_manual_capture_validity_strict_latest.json",
+      "public_file": "4fa4786450153a9c-senado_manual_capture_validity_strict_latest.json.txt",
+      "source_bytes": 1723,
+      "public_bytes": 1723,
+      "source_sha256": "ed793bdaa1784abab73c362828182b81db9cda0a8c8a5866f12225914f16462f",
+      "public_sha256": "ed793bdaa1784abab73c362828182b81db9cda0a8c8a5866f12225914f16462f",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-236/evidence/senado_manual_capture_validity_strict_rc_latest.txt",
+      "public_file": "96679ac35130b8f9-senado_manual_capture_validity_strict_rc_latest.txt.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-236/reports/senado-manual-capture-validity-gate-20260227.md",
+      "public_file": "88e4503cbe85dd95-senado-manual-capture-validity-gate-20260227.md.txt",
+      "source_bytes": 2253,
+      "public_bytes": 2253,
+      "source_sha256": "9c5efe1d44c2039d42e0372f8ea076a08c71619e1953fb26fde580738f33a45f",
+      "public_sha256": "9c5efe1d44c2039d42e0372f8ea076a08c71619e1953fb26fde580738f33a45f",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-24/evidence/senado_initdocs_playwright_resume_run_2026-02-18.log",
+      "public_file": "38890350d8a5ad1e-senado_initdocs_playwright_resume_run_2026-02-18.log.txt",
+      "source_bytes": 5054,
+      "public_bytes": 5054,
+      "source_sha256": "fe56f7a3eb308b253b4dee71f1250555f0d10f2936a600b394ac7ade59b287f0",
+      "public_sha256": "fe56f7a3eb308b253b4dee71f1250555f0d10f2936a600b394ac7ade59b287f0",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-24/evidence/senado_initdocs_prioritized_auto_2026-02-18.log",
+      "public_file": "437e0b2a47a0a22d-senado_initdocs_prioritized_auto_2026-02-18.log.txt",
+      "source_bytes": 17563,
+      "public_bytes": 17563,
+      "source_sha256": "f5ee0f328252df3c4353ed4cdc639a92ed5090e2b8a6ce990080c8f0582f8c1e",
+      "public_sha256": "f5ee0f328252df3c4353ed4cdc639a92ed5090e2b8a6ce990080c8f0582f8c1e",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-24/exports/quality_initiatives_2026-02-18_final2.json",
+      "public_file": "94045c2832becce1-quality_initiatives_2026-02-18_final2.json.txt",
+      "source_bytes": 6171,
+      "public_bytes": 6171,
+      "source_sha256": "842e047fa6b4683a709ec5283d2d05079bd5f9fcada8007a17bf5a77b0c85be4",
+      "public_sha256": "842e047fa6b4683a709ec5283d2d05079bd5f9fcada8007a17bf5a77b0c85be4",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-26/evidence/senado_retry_cookiefile_20260220T0000.json",
+      "public_file": "a973e227e26fdf1b-senado_retry_cookiefile_20260220T0000.json.txt",
+      "source_bytes": 4325,
+      "public_bytes": 4325,
+      "source_sha256": "8f052f371a8ab45f5d6852220474273f64ccc37d97e9cd4a877cca77267af205",
+      "public_sha256": "8f052f371a8ab45f5d6852220474273f64ccc37d97e9cd4a877cca77267af205",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-26/evidence/senado_retry_noprofile_20260220T0000.json",
+      "public_file": "8883b148390f13f1-senado_retry_noprofile_20260220T0000.json.txt",
+      "source_bytes": 4037,
+      "public_bytes": 4037,
+      "source_sha256": "05ae85cc4ba95be014f3411f8a1a21b6c3029a3561a57a175bd446186f151065",
+      "public_sha256": "05ae85cc4ba95be014f3411f8a1a21b6c3029a3561a57a175bd446186f151065",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-26/evidence/senado_retry_playwright_20260220T0000.json",
+      "public_file": "98102aba4455c362-senado_retry_playwright_20260220T0000.json.txt",
+      "source_bytes": 4085,
+      "public_bytes": 4085,
+      "source_sha256": "6bd006ffee71d5a198dc2d31e3fa6c89f5e60906029eeaad8d2c715650bbd1d0",
+      "public_sha256": "6bd006ffee71d5a198dc2d31e3fa6c89f5e60906029eeaad8d2c715650bbd1d0",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-26/reports/senado-vpn-retry-20260220.md",
+      "public_file": "a68e5cc774f9304f-senado-vpn-retry-20260220.md.txt",
+      "source_bytes": 3816,
+      "public_bytes": 3816,
+      "source_sha256": "a899c1a56f100777813c58719947250dae1579835b9e4a27996d5ec9a71fe5e0",
+      "public_sha256": "a899c1a56f100777813c58719947250dae1579835b9e4a27996d5ec9a71fe5e0",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initdoc_archive_sweep_20260222T135005Z.json",
+      "public_file": "de45d946ca7bfe50-initdoc_archive_sweep_20260222T135005Z.json.txt",
+      "source_bytes": 5805,
+      "public_bytes": 5805,
+      "source_sha256": "87a41fe43f9f75bb5f9e8da4f3ee6bf5a825db4adb57dca4a9f118e9f5201eb2",
+      "public_sha256": "87a41fe43f9f75bb5f9e8da4f3ee6bf5a825db4adb57dca4a9f118e9f5201eb2",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initdoc_derived_ini_probe_20260222T140436Z.json",
+      "public_file": "50ec766b3265f7e1-initdoc_derived_ini_probe_20260222T140436Z.json.txt",
+      "source_bytes": 1781,
+      "public_bytes": 1781,
+      "source_sha256": "378550bbd6478a2681bb5c7e0b476255b3f3e039b462ec3ac43e515c53b4fd06",
+      "public_sha256": "378550bbd6478a2681bb5c7e0b476255b3f3e039b462ec3ac43e515c53b4fd06",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initdoc_derived_ini_probe_postfix_20260222T140611Z.json",
+      "public_file": "19880265ca652d85-initdoc_derived_ini_probe_postfix_20260222T140611Z.json.txt",
+      "source_bytes": 836,
+      "public_bytes": 836,
+      "source_sha256": "5312cbbd5fe8837562a18f365e1e1e9b9f9516815462abc7ccb5a6b686202c75",
+      "public_sha256": "5312cbbd5fe8837562a18f365e1e1e9b9f9516815462abc7ccb5a6b686202c75",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initiative_doc_status_20260222T103042Z.json",
+      "public_file": "3d1d28ba8afd3e47-initiative_doc_status_20260222T103042Z.json.txt",
+      "source_bytes": 10197,
+      "public_bytes": 10197,
+      "source_sha256": "2e78029fc96e10ed5f26256a75caa0715576023426d336d51e2af71534dec6f8",
+      "public_sha256": "2e78029fc96e10ed5f26256a75caa0715576023426d336d51e2af71534dec6f8",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initiative_doc_status_after_archive_20260222T135622Z.json",
+      "public_file": "4919557192dd1807-initiative_doc_status_after_archive_20260222T135622Z.json.txt",
+      "source_bytes": 3822,
+      "public_bytes": 3822,
+      "source_sha256": "29600adae9cfab54de2884d8ba55b8eb74d9f1f7d8c93001bd5fb1faf85fbccb",
+      "public_sha256": "29600adae9cfab54de2884d8ba55b8eb74d9f1f7d8c93001bd5fb1faf85fbccb",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initiative_doc_status_enhanced_detailfallback_20260222T140646Z.json",
+      "public_file": "eed8cac1069b46b8-initiative_doc_status_enhanced_detailfallback_20260222T140646Z.json.txt",
+      "source_bytes": 10422,
+      "public_bytes": 10422,
+      "source_sha256": "ba335bba807841001faabf85198ae9169164edf31ed9539586a27eab764002ca",
+      "public_sha256": "ba335bba807841001faabf85198ae9169164edf31ed9539586a27eab764002ca",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/initiative_doc_status_redundant_global_triage_20260222T142835Z.json",
+      "public_file": "dbb1302b0d086338-initiative_doc_status_redundant_global_triage_20260222T142835Z.json.txt",
+      "source_bytes": 11084,
+      "public_bytes": 11084,
+      "source_sha256": "a5d321fe3ef6d35a2aaca3ebf2dcc4bdedf5109988a99a2b3e7b84a6db68d75b",
+      "public_sha256": "a5d321fe3ef6d35a2aaca3ebf2dcc4bdedf5109988a99a2b3e7b84a6db68d75b",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/quality_initiatives_doclink_kpis_20260222T133754Z.json",
+      "public_file": "ebd4260f04e8bcbc-quality_initiatives_doclink_kpis_20260222T133754Z.json.txt",
+      "source_bytes": 7719,
+      "public_bytes": 7719,
+      "source_sha256": "0a84724dae567a063ef349bc33fc7150b2f965b7af6ae5c9c3f4889fdd44c92f",
+      "public_sha256": "0a84724dae567a063ef349bc33fc7150b2f965b7af6ae5c9c3f4889fdd44c92f",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/senado_redundant_global_skip_run_20260222T142846Z.json",
+      "public_file": "8631d419607317d9-senado_redundant_global_skip_run_20260222T142846Z.json.txt",
+      "source_bytes": 868,
+      "public_bytes": 868,
+      "source_sha256": "a7d5fc8ff4c7de155cf4fb470cb02616969ffb04f1419397903387fafc4ccac0",
+      "public_sha256": "a7d5fc8ff4c7de155cf4fb470cb02616969ffb04f1419397903387fafc4ccac0",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/senado_tail_daemon_real_20260222T103548Z/_stop_summary.json",
+      "public_file": "8c486dc3fc726067-_stop_summary.json.txt",
+      "source_bytes": 186,
+      "public_bytes": 186,
+      "source_sha256": "7ec791330abfbeb6ddeb42a67b0208cbcbd347d2c4798f926cfe7377757c11d2",
+      "public_sha256": "7ec791330abfbeb6ddeb42a67b0208cbcbd347d2c4798f926cfe7377757c11d2",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/evidence/senado_tail_retry_post_fetchstatus_20260222T102357Z.json",
+      "public_file": "4bcb3d0efdcc3b86-senado_tail_retry_post_fetchstatus_20260222T102357Z.json.txt",
+      "source_bytes": 4990,
+      "public_bytes": 4990,
+      "source_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "public_sha256": "782e6ffdc32013a7559a11619ce74982ee9f6fc5de4ff1ade3c786b6a41645e9",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/reports/initiative-doc-archive-fallback-20260222.md",
+      "public_file": "64bd1c1d2fab2efc-initiative-doc-archive-fallback-20260222.md.txt",
+      "source_bytes": 2442,
+      "public_bytes": 2442,
+      "source_sha256": "2878faa69badf30e3d003ddd8a47f4a93288623c8f8830dc0d093786016b19b5",
+      "public_sha256": "2878faa69badf30e3d003ddd8a47f4a93288623c8f8830dc0d093786016b19b5",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/reports/initiative-doc-status-report-20260222.md",
+      "public_file": "10bf26a06970ccaa-initiative-doc-status-report-20260222.md.txt",
+      "source_bytes": 3200,
+      "public_bytes": 3200,
+      "source_sha256": "a1e0099000d09456c60708248e65a1dcada7f835f619677ad3f86b5367906c23",
+      "public_sha256": "a1e0099000d09456c60708248e65a1dcada7f835f619677ad3f86b5367906c23",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/reports/initiative-quality-kpis-extension-20260222.md",
+      "public_file": "2ca5fd9788ed2f6a-initiative-quality-kpis-extension-20260222.md.txt",
+      "source_bytes": 3106,
+      "public_bytes": 3106,
+      "source_sha256": "a50874bcf8ff0a2683316dc4a99ab5b66d15b5805b5486a9cde515d8452681ca",
+      "public_sha256": "a50874bcf8ff0a2683316dc4a99ab5b66d15b5805b5486a9cde515d8452681ca",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/reports/senado-tail-daemon-anti-stall-20260222.md",
+      "public_file": "6553ee2bcf7d0b21-senado-tail-daemon-anti-stall-20260222.md.txt",
+      "source_bytes": 1596,
+      "public_bytes": 1596,
+      "source_sha256": "c4aaed83a926bc75e0468f223cc298c430b760eb9c2d822883a9883b26fb3bff",
+      "public_sha256": "c4aaed83a926bc75e0468f223cc298c430b760eb9c2d822883a9883b26fb3bff",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/reports/senado-tail-status-20260222.md",
+      "public_file": "5189be019ba12749-senado-tail-status-20260222.md.txt",
+      "source_bytes": 5661,
+      "public_bytes": 5661,
+      "source_sha256": "650f4f2c293adb9ed8efea7d989e96d74634e66022c4b369cb816825ac941ccd",
+      "public_sha256": "650f4f2c293adb9ed8efea7d989e96d74634e66022c4b369cb816825ac941ccd",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-27/reports/senado-tail-triage-20260222.md",
+      "public_file": "cadea15fb18b13a9-senado-tail-triage-20260222.md.txt",
+      "source_bytes": 3599,
+      "public_bytes": 3599,
+      "source_sha256": "2e5c012d7e03c3274f87bc6a79b789f0c0ac0ddb37734c87cd227a94c021d589",
+      "public_sha256": "2e5c012d7e03c3274f87bc6a79b789f0c0ac0ddb37734c87cd227a94c021d589",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt",
+      "public_file": "b11c10445d76fe04-ree_esios_curl_headers_latest.txt.txt",
+      "source_bytes": 821,
+      "public_bytes": 673,
+      "source_sha256": "ae74c15df5feb158408c02018e3be35fd5cfe83cb9042223d3d0e8b0372f48cd",
+      "public_sha256": "8164b8be4fc65a5fb1f1d387974517d9f6cc67125b5114c6300b4aeaf071aebe",
+      "sanitized": true,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-296/evidence/ree_esios_strict_network_stderr_latest.log",
+      "public_file": "12e4c44d6aa932fc-ree_esios_strict_network_stderr_latest.log.txt",
+      "source_bytes": 113,
+      "public_bytes": 113,
+      "source_sha256": "f21c118a39b097021e41536bfa47b5cab07f22ab72fe6c12172c60946853f725",
+      "public_sha256": "f21c118a39b097021e41536bfa47b5cab07f22ab72fe6c12172c60946853f725",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-306/evidence/just_parl_check_missing_initdoc_urls_actionable_empty_senado_20260228T205500Z.rc",
+      "public_file": "4999d690223be200-just_parl_check_missing_initdoc_urls_actionable_empty_senado_20260228T205500Z.rc.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-306/evidence/senado_retry_cookie_attempt_20260228T205000Z.txt",
+      "public_file": "06529ffa07ad2a26-senado_retry_cookie_attempt_20260228T205000Z.txt.txt",
+      "source_bytes": 5344,
+      "public_bytes": 5344,
+      "source_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "public_sha256": "0aeb6eae2e59f16a632a58cfa37e323f325613a615568e12331b048c9750c771",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-306/evidence/senado_waf_block_profile_post_retry_20260228T205000Z.json",
+      "public_file": "840b4aceb3494d32-senado_waf_block_profile_post_retry_20260228T205000Z.json.txt",
+      "source_bytes": 52724,
+      "public_bytes": 52724,
+      "source_sha256": "170e4dca7ee8ddf01a9af1ac3f149dbb39355c8efddd30c520afd02b3bec71c7",
+      "public_sha256": "170e4dca7ee8ddf01a9af1ac3f149dbb39355c8efddd30c520afd02b3bec71c7",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-306/exports/senado_tail_actionable_post_retry_20260228T205000Z.csv",
+      "public_file": "078f0a11df816022-senado_tail_actionable_post_retry_20260228T205000Z.csv.txt",
+      "source_bytes": 125288,
+      "public_bytes": 125288,
+      "source_sha256": "6d884fb1652b6e09e9536996a0eddaa7303ac29b00fd210fc03e957178500d1d",
+      "public_sha256": "6d884fb1652b6e09e9536996a0eddaa7303ac29b00fd210fc03e957178500d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-306/reports/senado-initdoc-rebaseline-no-new-lever-20260228.md",
+      "public_file": "ce07b9035aae5153-senado-initdoc-rebaseline-no-new-lever-20260228.md.txt",
+      "source_bytes": 3508,
+      "public_bytes": 3508,
+      "source_sha256": "444fb4dd355a33f7752adee5b7d633bef45ab0ac305ae886cdbd8dcd68fd1291",
+      "public_sha256": "444fb4dd355a33f7752adee5b7d633bef45ab0ac305ae886cdbd8dcd68fd1291",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-307/evidence/just_parl_check_missing_initdoc_urls_actionable_empty_after_custom_status_retry_20260228T210400Z.rc",
+      "public_file": "bf7e229d5af8df4a-just_parl_check_missing_initdoc_urls_actionable_empty_after_custom_status_retry_20260228T210400Z.rc.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-307/evidence/senado_retry_archive_custom_statuses_attempt_20260228T212300Z.txt",
+      "public_file": "0124853b432da257-senado_retry_archive_custom_statuses_attempt_20260228T212300Z.txt.txt",
+      "source_bytes": 4572,
+      "public_bytes": 4572,
+      "source_sha256": "0f32e729b82e15642219a2391bbf998a9435e97413f4e1964d57ce2eee782de3",
+      "public_sha256": "0f32e729b82e15642219a2391bbf998a9435e97413f4e1964d57ce2eee782de3",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-307/evidence/senado_waf_block_profile_after_custom_status_retry_20260228T212300Z.json",
+      "public_file": "b67707f006d16b64-senado_waf_block_profile_after_custom_status_retry_20260228T212300Z.json.txt",
+      "source_bytes": 43506,
+      "public_bytes": 43506,
+      "source_sha256": "eca22bb65601553d9e821455d1e6daa74ce2f8cb87a8120ef83138f248cf594a",
+      "public_sha256": "eca22bb65601553d9e821455d1e6daa74ce2f8cb87a8120ef83138f248cf594a",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-307/exports/senado_tail_actionable_after_custom_status_retry_20260228T210400Z.csv",
+      "public_file": "f709a27f767f60d8-senado_tail_actionable_after_custom_status_retry_20260228T210400Z.csv.txt",
+      "source_bytes": 121846,
+      "public_bytes": 121846,
+      "source_sha256": "90a4ee5c23bc269af692844d6f52d7358a97b71b65f88ff610e06e2cb1e32196",
+      "public_sha256": "90a4ee5c23bc269af692844d6f52d7358a97b71b65f88ff610e06e2cb1e32196",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-307/reports/senado-initdoc-archive-fallback-403-500-recovery-20260228.md",
+      "public_file": "6a4b2628269821a1-senado-initdoc-archive-fallback-403-500-recovery-20260228.md.txt",
+      "source_bytes": 3667,
+      "public_bytes": 3667,
+      "source_sha256": "9a3083b49969292baa771114fe4219024bdf8afb4a9d7c91d9775ab0685b3452",
+      "public_sha256": "9a3083b49969292baa771114fe4219024bdf8afb4a9d7c91d9775ab0685b3452",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-308/evidence/just_parl_check_missing_initdoc_urls_actionable_empty_after_20260228T222400Z.rc",
+      "public_file": "0bdbfe3def333680-just_parl_check_missing_initdoc_urls_actionable_empty_after_20260228T222400Z.rc.txt",
+      "source_bytes": 2,
+      "public_bytes": 2,
+      "source_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-308/evidence/senado_manual_capture_validity_20260228T220500Z.json",
+      "public_file": "f0341f9921521f16-senado_manual_capture_validity_20260228T220500Z.json.txt",
+      "source_bytes": 3060,
+      "public_bytes": 3060,
+      "source_sha256": "e76def1b6c0cfdb18290fd7937cefa0d3b7e06458a59b9b8e66cf2263677b4fb",
+      "public_sha256": "e76def1b6c0cfdb18290fd7937cefa0d3b7e06458a59b9b8e66cf2263677b4fb",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-308/evidence/senado_retry_archive_custom_statuses_attempt_20260228T221500Z.txt",
+      "public_file": "4a498982218cf97e-senado_retry_archive_custom_statuses_attempt_20260228T221500Z.txt.txt",
+      "source_bytes": 5889,
+      "public_bytes": 5889,
+      "source_sha256": "21880eb63be331ed746b38dee48317817ccda92369981d189334127618b1bf88",
+      "public_sha256": "21880eb63be331ed746b38dee48317817ccda92369981d189334127618b1bf88",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-308/evidence/senado_waf_block_profile_after_20260228T222400Z.json",
+      "public_file": "0f56f209c66d925f-senado_waf_block_profile_after_20260228T222400Z.json.txt",
+      "source_bytes": 55640,
+      "public_bytes": 55640,
+      "source_sha256": "8c00ba9599bfb67ff7dabba90ecb0c6518c345c5439c9e84fe658d7a7ac4e334",
+      "public_sha256": "8c00ba9599bfb67ff7dabba90ecb0c6518c345c5439c9e84fe658d7a7ac4e334",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-308/exports/senado_tail_actionable_after_20260228T222400Z.csv",
+      "public_file": "35f08ff3fee004ff-senado_tail_actionable_after_20260228T222400Z.csv.txt",
+      "source_bytes": 119024,
+      "public_bytes": 119024,
+      "source_sha256": "37220b67a84b0715a1c18f5664da14b648fd3ed3047c273c5681666a49e4c212",
+      "public_sha256": "37220b67a84b0715a1c18f5664da14b648fd3ed3047c273c5681666a49e4c212",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-308/reports/senado-initdoc-archive-fallback-expanded-retry-and-extraction-closure-20260228.md",
+      "public_file": "d3fc297bcc57b515-senado-initdoc-archive-fallback-expanded-retry-and-extraction-closure-20260228.md.txt",
+      "source_bytes": 4103,
+      "public_bytes": 4103,
+      "source_sha256": "52239be8db71a74a3911c717f868be6819bd81d43ab1d9a8c49afc0e9d993b4e",
+      "public_sha256": "52239be8db71a74a3911c717f868be6819bd81d43ab1d9a8c49afc0e9d993b4e",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_manual_capture_validity_20260228T233500Z.rc",
+      "public_file": "9533cb149e618f60-senado_manual_capture_validity_20260228T233500Z.rc.txt",
+      "source_bytes": 1,
+      "public_bytes": 1,
+      "source_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+      "public_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_retry_status404_archive_attempt_20260228T225500Z.txt",
+      "public_file": "ddd0498c70ef51a0-senado_retry_status404_archive_attempt_20260228T225500Z.txt.txt",
+      "source_bytes": 5319,
+      "public_bytes": 5319,
+      "source_sha256": "c1e19f57e0b4ccf81bc2ad93ce18fc9d751bfa9fe61b1ae87fc564d86c2ced28",
+      "public_sha256": "c1e19f57e0b4ccf81bc2ad93ce18fc9d751bfa9fe61b1ae87fc564d86c2ced28",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_retry_status500_archive403500_attempt_20260228T232500Z.txt",
+      "public_file": "0c1bab42b9e6ac0c-senado_retry_status500_archive403500_attempt_20260228T232500Z.txt.txt",
+      "source_bytes": 854,
+      "public_bytes": 854,
+      "source_sha256": "088429b3b0d4cd8c07043ebc42eb179d30634931a6cdab046c6971ab3099d9fa",
+      "public_sha256": "088429b3b0d4cd8c07043ebc42eb179d30634931a6cdab046c6971ab3099d9fa",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_retry_status500_archive_attempt_20260228T231500Z.txt",
+      "public_file": "b1c9a94da81ebf0d-senado_retry_status500_archive_attempt_20260228T231500Z.txt.txt",
+      "source_bytes": 5678,
+      "public_bytes": 5678,
+      "source_sha256": "1f52fe8d319927e2214847f13d3619b05f6341ac22a157e866c939be929f4cee",
+      "public_sha256": "1f52fe8d319927e2214847f13d3619b05f6341ac22a157e866c939be929f4cee",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_tail_actionable_delta_ai_ops_309_20260228T233500Z.json",
+      "public_file": "9dbfc820dd32325d-senado_tail_actionable_delta_ai_ops_309_20260228T233500Z.json.txt",
+      "source_bytes": 67,
+      "public_bytes": 67,
+      "source_sha256": "bceb20a5b0d4e715e07810ffa07c12437bbf5a34aaa781b55b6138073a99f4fc",
+      "public_sha256": "bceb20a5b0d4e715e07810ffa07c12437bbf5a34aaa781b55b6138073a99f4fc",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_waf_block_profile_delta_ai_ops_309_20260228T233500Z.json",
+      "public_file": "f7a8955ef80f2f22-senado_waf_block_profile_delta_ai_ops_309_20260228T233500Z.json.txt",
+      "source_bytes": 778,
+      "public_bytes": 778,
+      "source_sha256": "e905ae0d2fc8369c3d3883930f6f7db118825321f6749d008a6e65f7471cbd45",
+      "public_sha256": "e905ae0d2fc8369c3d3883930f6f7db118825321f6749d008a6e65f7471cbd45",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-309/reports/senado-initdoc-retry-http-statuses-lane-and-status-drift-20260228.md",
+      "public_file": "eef9373081bea241-senado-initdoc-retry-http-statuses-lane-and-status-drift-20260228.md.txt",
+      "source_bytes": 4017,
+      "public_bytes": 4017,
+      "source_sha256": "5c53a1e9dd06a045978154d95ed140672d99f9483ec7fa36bc1f4f619385da41",
+      "public_sha256": "5c53a1e9dd06a045978154d95ed140672d99f9483ec7fa36bc1f4f619385da41",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-553/evidence/congreso_vote_event_url_403_body_20260308T180003Z.html",
+      "public_file": "597533b7b30b9677-congreso_vote_event_url_403_body_20260308T180003Z.html.txt",
+      "source_bytes": 496,
+      "public_bytes": 496,
+      "source_sha256": "eb2907b0c8b9f0812c650a3692e8e51ae61386b5f8a699bfa66db4bd9fe9ae27",
+      "public_sha256": "eb2907b0c8b9f0812c650a3692e8e51ae61386b5f8a699bfa66db4bd9fe9ae27",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-553/evidence/congreso_vote_event_url_403_headers_20260308T180003Z.txt",
+      "public_file": "bb9392eba6421354-congreso_vote_event_url_403_headers_20260308T180003Z.txt.txt",
+      "source_bytes": 294,
+      "public_bytes": 294,
+      "source_sha256": "653b09be60b7ee1a9b2c3446f1c377689011802238681296d6a0dc5dc826ec80",
+      "public_sha256": "653b09be60b7ee1a9b2c3446f1c377689011802238681296d6a0dc5dc826ec80",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-553/reports/citizen-vote-implication-review-queue-contract-20260308.md",
+      "public_file": "f5e16fd9872797d8-citizen-vote-implication-review-queue-contract-20260308.md.txt",
+      "source_bytes": 6646,
+      "public_bytes": 6646,
+      "source_sha256": "0154561f1718ad45a4de42c1f3797e7eef0e80b57874352a518bffaef139b868",
+      "public_sha256": "0154561f1718ad45a4de42c1f3797e7eef0e80b57874352a518bffaef139b868",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/AI-OPS-ORG/evidence/dir3_unidades_age_strict_network_block_20260425T105248Z.txt",
+      "public_file": "7ab2e446446846f9-dir3_unidades_age_strict_network_block_20260425T105248Z.txt.txt",
+      "source_bytes": 2007,
+      "public_bytes": 2007,
+      "source_sha256": "45803bc4ca95da7b41eaaa1912040b23068cfb399209e8acd8ecd89d57f1f710",
+      "public_sha256": "45803bc4ca95da7b41eaaa1912040b23068cfb399209e8acd8ecd89d57f1f710",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/cortes_aragon_github_actions_403_20260511.md",
+      "public_file": "6709ce0ac4d6d012-cortes_aragon_github_actions_403_20260511.md.txt",
+      "source_bytes": 950,
+      "public_bytes": 950,
+      "source_sha256": "f272d2536cf170f229d06d15eb2b450d10cd5dbbb804262dc804140a7824d829",
+      "public_sha256": "f272d2536cf170f229d06d15eb2b450d10cd5dbbb804262dc804140a7824d829",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/senado_senadores_github_actions_403_20260511.md",
+      "public_file": "d76585299616ec6b-senado_senadores_github_actions_403_20260511.md.txt",
+      "source_bytes": 1280,
+      "public_bytes": 1280,
+      "source_sha256": "e0c840e7ff181023657289a64e24c7972fe9174b34265118fe44ff84f4bd68bc",
+      "public_sha256": "e0c840e7ff181023657289a64e24c7972fe9174b34265118fe44ff84f4bd68bc",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/dir3-age-access-blocker-20260812.json",
+      "public_file": "8168db914030fd00-dir3-age-access-blocker-20260812.json.txt",
+      "source_bytes": 1543,
+      "public_bytes": 1543,
+      "source_sha256": "8a35d279283fc798a4be753fa0ab68977e3ece4bcc7fa13b17affe495886f970",
+      "public_sha256": "8a35d279283fc798a4be753fa0ab68977e3ece4bcc7fa13b17affe495886f970",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-pipeline-scale-run.json",
+      "public_file": "71395fff8ced430a-document-pipeline-scale-run.json.txt",
+      "source_bytes": 1521,
+      "public_bytes": 1521,
+      "source_sha256": "92001030cfac323ad334a86af6edaf5e7895aba39f055267439c9032a98da11e",
+      "public_sha256": "92001030cfac323ad334a86af6edaf5e7895aba39f055267439c9032a98da11e",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/infoelectoral-candidate-archive-queue-latest.json",
+      "public_file": "72f4750479a40855-infoelectoral-candidate-archive-queue-latest.json.txt",
+      "source_bytes": 4604,
+      "public_bytes": 4604,
+      "source_sha256": "1d6643e1a5e8f66753c40e6ea36b0638506c2157402091dc37c14fea9b6aeef7",
+      "public_sha256": "1d6643e1a5e8f66753c40e6ea36b0638506c2157402091dc37c14fea9b6aeef7",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/infoelectoral-candidate-origin-access-20260811.json",
+      "public_file": "4897a90f021811ba-infoelectoral-candidate-origin-access-20260811.json.txt",
+      "source_bytes": 2595,
+      "public_bytes": 2595,
+      "source_sha256": "dffe8071c163ebb55424c1727dc8feafc32149236ad09f180770219ae1aea763",
+      "public_sha256": "dffe8071c163ebb55424c1727dc8feafc32149236ad09f180770219ae1aea763",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/member-vote-source-url-lineage-20260812.json",
+      "public_file": "424af3887a7d5f1b-member-vote-source-url-lineage-20260812.json.txt",
+      "source_bytes": 5979,
+      "public_bytes": 5979,
+      "source_sha256": "0cad31dc1f0d9a552fc97142d654044fef1da1ad9de23ff51f21d1a6b15c07c2",
+      "public_sha256": "0cad31dc1f0d9a552fc97142d654044fef1da1ad9de23ff51f21d1a6b15c07c2",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-history-archive-access-probe-20260811.md",
+      "public_file": "0aeb4d5699c04586-placsp-history-archive-access-probe-20260811.md.txt",
+      "source_bytes": 1978,
+      "public_bytes": 1978,
+      "source_sha256": "3078da7c4f2068834d43e832f8582107624dfb3870d30840f87a5336e169d638",
+      "public_sha256": "3078da7c4f2068834d43e832f8582107624dfb3870d30840f87a5336e169d638",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-archive-catalog-20260811.json",
+      "public_file": "40a3ac1bbfe8e898-placsp-official-archive-catalog-20260811.json.txt",
+      "source_bytes": 6115,
+      "public_bytes": 6115,
+      "source_sha256": "0b764ab6348cf30cbfc68f0ae1bea5ca2ba4258757bc9ae4feaab8cd36ab758d",
+      "public_sha256": "0b764ab6348cf30cbfc68f0ae1bea5ca2ba4258757bc9ae4feaab8cd36ab758d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-access-blocker-20260812.json",
+      "public_file": "58ece1caf5401030-ree-demanda-access-blocker-20260812.json.txt",
+      "source_bytes": 909,
+      "public_bytes": 909,
+      "source_sha256": "3e788fcad5bdf0d58684eb02ffda19cbe3a9e28c4d938290056d5a40318cdc55",
+      "public_sha256": "3e788fcad5bdf0d58684eb02ffda19cbe3a9e28c4d938290056d5a40318cdc55",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-incapsula-block-20260812.html",
+      "public_file": "35f446dc07820946-ree-demanda-incapsula-block-20260812.html.txt",
+      "source_bytes": 860,
+      "public_bytes": 860,
+      "source_sha256": "87e6df31220106a7cb55c5cb5359c5f429c2e010bd245d307fa9b418af18d73d",
+      "public_sha256": "87e6df31220106a7cb55c5cb5359c5f429c2e010bd245d307fa9b418af18d73d",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/infoelectoral-candidate-archive-lane-20260811.md",
+      "public_file": "0b9e78df2430a79e-infoelectoral-candidate-archive-lane-20260811.md.txt",
+      "source_bytes": 7304,
+      "public_bytes": 7304,
+      "source_sha256": "bc1d8e11ec9f213a9f6baf465ac02d4f4c4b7872692627d268cb28ec7e847180",
+      "public_sha256": "bc1d8e11ec9f213a9f6baf465ac02d4f4c4b7872692627d268cb28ec7e847180",
+      "sanitized": false,
+      "official_public_information_retained": true
+    },
+    {
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
+      "public_file": "0ac6ec372d1cd1bd-million-scale-foundation-and-real-document-run.md.txt",
+      "source_bytes": 47942,
+      "public_bytes": 47942,
+      "source_sha256": "2b67ae53a31aff6f8d0f3e24601eea69c8ee943011dced8793fae947c6bfa99b",
+      "public_sha256": "2b67ae53a31aff6f8d0f3e24601eea69c8ee943011dced8793fae947c6bfa99b",
+      "sanitized": false,
+      "official_public_information_retained": true
+    }
+  ]
+}
