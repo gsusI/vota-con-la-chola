@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T22:38:55+00:00",
+    "generated_at": "2026-08-19T22:50:48+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-19T22:36:55+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "5cf236a3c060fe18c65a647e8e4153cef677954490c215a923d1af0d045dd887",
+    "source_sha256": "b4a3d90e330250d7e9528a9f9871cc4117aca98bc8285945e2fde3481266c5e0",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "7247b69e13ec71841316998412244138fd6faf95b91be6bd93acab05b8578931"
+    "evidence_manifest_sha256": "5264e48e8eac157e55b69fbf8432133a0f9f1e3eebaea3154801184b223046fe"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -224,7 +224,7 @@
     {
       "id": "indicators-mvp-2026-08-20",
       "date": "2026-08-19T22:36:55+00:00",
-      "status": "validated_pending_publication",
+      "status": "published_live_verified",
       "title": "Indicators MVP",
       "summary": "Materializa 2.091 observaciones reales de PIB por habitante Eurostat como definición -> release -> territorio -> periodo -> celda, preservando 113 marcas provisionales y sin inferir causalidad, mérito ni culpa.",
       "public_routes": [
@@ -234,8 +234,8 @@
       "note": {
         "path": "docs/release-notes/indicators-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/indicators-mvp.md",
-        "bytes": 4798,
-        "sha256": "314373eda9812c99e4742d43da27841428a34dcf8a52df4f00233f38349949d8"
+        "bytes": 5625,
+        "sha256": "035130ccc5a5f055f723caa3c17fac57b00d6d3281caa1073a0cb4364a67b778"
       },
       "evidence": [
         {
@@ -247,6 +247,16 @@
           "path": "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json",
           "sha256": "97e7adb2d918154f0c0b712a000fe37eb9f3f3ab3c934d75f062db3c4926e182"
+        },
+        {
+          "path": "docs/etl/sprints/INDICATORS-20260820/evidence/live-eurostat-gdp-verification.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/INDICATORS-20260820/evidence/live-eurostat-gdp-verification.json",
+          "sha256": "cbb5f3d2afdcf83fa4ac6743c7865e2c466045c641670bc3140ce1a693d31c2c"
+        },
+        {
+          "path": "docs/etl/sprints/INDICATORS-20260820/evidence/live-route-audit.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/INDICATORS-20260820/evidence/live-route-audit.json",
+          "sha256": "9df5fcc34140e56a5fd7acbff57b512702c93aa546151a6e1a9fffb0f3c92bc5"
         },
         {
           "path": "tests/test_eurostat_gdp_indicator_real_pipeline.py",
