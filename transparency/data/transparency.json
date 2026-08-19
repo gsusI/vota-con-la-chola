@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T19:36:39+00:00",
+    "generated_at": "2026-08-19T19:43:14+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-19T19:36:18+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "bd8532d7b1bbb1c483676374bd49eb59db878af32a9fe37187db943909faf3bb",
+    "source_sha256": "a00a4ef11764b45623502cfa3a1ff828e00281690db71e2a73cd305f4bc59c78",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "4b761c8ebb0f5a2fe008844e5e7848bea460dc79c1428ea64455d0782d794211"
+    "evidence_manifest_sha256": "04bf7c16be30a53b5c4ca771fd4c75fbce23c24cd1fcf7fbdb8eb6e695c349f3"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -224,7 +224,7 @@
     {
       "id": "evidence-api-v1-2026-08-19",
       "date": "2026-08-19T19:36:18+00:00",
-      "status": "release_candidate_verified",
+      "status": "published_live_verified",
       "title": "Evidence API v1",
       "summary": "Publica entidades, cadenas de evidencia, salud de fuentes y resultados reales como páginas content-addressed con cursor, provenance e identidad pública intacta.",
       "public_routes": [
@@ -234,8 +234,8 @@
       "note": {
         "path": "docs/release-notes/evidence-api-v1.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/evidence-api-v1.md",
-        "bytes": 1487,
-        "sha256": "5cd93701c0197748615443b47f9547e0c0f33ea2641ab586d5b634bc31728a9a"
+        "bytes": 1551,
+        "sha256": "2aa1b012d522823f46455f56f771784fabe815c4f2622528a415d24f724265fa"
       },
       "evidence": [
         {
@@ -247,6 +247,11 @@
           "path": "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json",
           "sha256": "e2fe52581a8b9809a7d1aefd6210ad013164368e3dd4a63ef7e9b33fe8308ba5"
+        },
+        {
+          "path": "docs/etl/sprints/EVIDENCE-API-20260819/evidence/live-evidence-api-v1-verification.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/EVIDENCE-API-20260819/evidence/live-evidence-api-v1-verification.json",
+          "sha256": "9967aa50c450a7bc7417114737c0ff1023e79be1ba83cca5e0fcaa38a05ddf85"
         },
         {
           "path": "docs/api/evidence-api-v1.schema.json",
