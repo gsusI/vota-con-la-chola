@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T20:18:01+00:00",
+    "generated_at": "2026-08-19T20:23:07+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-19T20:00:00+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -132,7 +132,7 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "8e91656cd513d5953a5b790bcaa2fbc813f4575280b70c4f66829c95a0270c16",
+    "source_sha256": "76c9a4704707a7ae7018fbbb811f845cccbde880e593e55446fd46ffd34dda37",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
     "evidence_manifest_sha256": "281b6a67f1747d76049bddccf71d0f7d79a8de310614c09c9636bc12b671b4cb"
   },
@@ -251,7 +251,7 @@
         {
           "path": "docs/etl/sprints/PROMISES-20260819/evidence/live-promises-bng-2023-verification.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/PROMISES-20260819/evidence/live-promises-bng-2023-verification.json",
-          "sha256": "fe29f7c3b1f729f1c0d9f0ba4b615dbc6fb705d63e0c2b6c28222b2373d23884"
+          "sha256": "4af9e3e0cc043a2f0935e9beb54c6c542e016e02f648008816625e9cd24bc2c0"
         },
         {
           "path": "tests/test_manifesto_promises_real_pipeline.py",
@@ -366,8 +366,8 @@
       "note": {
         "path": "docs/release-notes/transparency-dashboard-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/transparency-dashboard-mvp.md",
-        "bytes": 3164,
-        "sha256": "f0d1987219b56cc4d50c3cfab803c4e2b5ab4acafb021e02fab58ecdc67100ee"
+        "bytes": 3170,
+        "sha256": "54c3ec03f9d4f594cf98127efec0ab6829559380f445b05bacbba5926e5bcf70"
       },
       "evidence": [
         {
@@ -405,8 +405,8 @@
       "note": {
         "path": "docs/release-notes/obstruction-tracker-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/obstruction-tracker-mvp.md",
-        "bytes": 4739,
-        "sha256": "1f9cc69ad8d3830f1e4be05506186af3f09ec18b1885a06b2750eaa278adab46"
+        "bytes": 4736,
+        "sha256": "7115918744d0416c145e3a3c9720005b6161eaa1d7914910c4a4c015a681a034"
       },
       "evidence": [
         {
@@ -417,7 +417,7 @@
         {
           "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
-          "sha256": "d84ad4754fed564eda319b25dfd12d8fd35922d096ab46e8ac5d292f002fedb6"
+          "sha256": "3e99a6de8f72cb4164f9d5e6c3dc35cdfad86578d7fcb42595a664daa1a62d9d"
         }
       ]
     },
@@ -450,7 +450,7 @@
         {
           "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
-          "sha256": "d84ad4754fed564eda319b25dfd12d8fd35922d096ab46e8ac5d292f002fedb6"
+          "sha256": "3e99a6de8f72cb4164f9d5e6c3dc35cdfad86578d7fcb42595a664daa1a62d9d"
         }
       ]
     }
