@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T20:23:07+00:00",
+    "generated_at": "2026-08-19T20:55:54+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-19T20:00:00+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "76c9a4704707a7ae7018fbbb811f845cccbde880e593e55446fd46ffd34dda37",
+    "source_sha256": "ebf59d1422d1c576d494e353de19415fa810f0f341601a20b86340fecbcb4d8c",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "281b6a67f1747d76049bddccf71d0f7d79a8de310614c09c9636bc12b671b4cb"
+    "evidence_manifest_sha256": "bd339a64eff36a71fdb4664cfe4d7257ac054fe560d5be4833f80988bd07756b"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -389,6 +389,45 @@
           "path": "tests/test_transparency_dashboard_ui_contract.js",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_transparency_dashboard_ui_contract.js",
           "sha256": "15b13eeeaa6f34429db1fd36b0abfe09ccfe99a88bc5547499dbc4a54ac8b35b"
+        }
+      ]
+    },
+    {
+      "id": "spending-connector-mvp-2026-08-19",
+      "date": "2026-08-19",
+      "status": "built_pending_live",
+      "title": "Spending connector MVP",
+      "summary": "Materializa 20 adjudicaciones PLACSP reales como actor -> spending item -> evidencia, con importes exactos e identidad pública intacta, sin representarlas como pagos.",
+      "public_routes": [
+        "/spending/",
+        "/spending/data/placsp-sample.json"
+      ],
+      "note": {
+        "path": "docs/release-notes/spending-connector-mvp.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/spending-connector-mvp.md",
+        "bytes": 4191,
+        "sha256": "37f4cc876d47f9ff74ad7a0f8a9822ef68bae1d4061c4ccaaf04dcc7d1e5d373"
+      },
+      "evidence": [
+        {
+          "path": "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-materialization.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-materialization.json",
+          "sha256": "261357f2e92b1c32af60309de6e4377226ce729c79ecbaf9ac3a1bc5dbb9a311"
+        },
+        {
+          "path": "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-validation.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-validation.json",
+          "sha256": "c2d735fac4784f2a457e63221551152979cf9c387e1076bcd862ec0cc5e234f1"
+        },
+        {
+          "path": "tests/test_placsp_spending_real_pipeline.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_placsp_spending_real_pipeline.py",
+          "sha256": "98bdb5f20b0a188357ad59a18839592c44c7bff2cfc362b704fb5ea252c099f5"
+        },
+        {
+          "path": "tests/test_placsp_spending_ui_contract.js",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_placsp_spending_ui_contract.js",
+          "sha256": "d5563f5365a3cad5aa1b300239be9a743085cf447f85f1aad6fea2c892a8b0a6"
         }
       ]
     },
