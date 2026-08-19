@@ -1,0 +1,23 @@
+{
+  "api_release_id": "feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300",
+  "api_version": "v1",
+  "collection": "source-health",
+  "first": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/source-health/pages/00000001-91576bfc964d0e78149896ff74acf8a750cc5dc9a3b52aba4fc32861c39c9564.json",
+  "item_count": 48,
+  "page_count": 1,
+  "page_size": 250,
+  "pages": [
+    {
+      "bytes": 108797,
+      "first_key": "source:aemet_opendata_series",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/source-health/pages/00000001-91576bfc964d0e78149896ff74acf8a750cc5dc9a3b52aba4fc32861c39c9564.json",
+      "item_count": 48,
+      "last_key": "source:senado_votaciones",
+      "page_number": 1,
+      "sha256": "91576bfc964d0e78149896ff74acf8a750cc5dc9a3b52aba4fc32861c39c9564"
+    }
+  ],
+  "pagination": "opaque seek cursor; follow page_info.next",
+  "schema_version": "evidence_api_collection_manifest_v1",
+  "sort": "id ascending, Unicode code-point order"
+}

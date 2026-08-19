@@ -1,9 +1,9 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T19:15:11+00:00",
+    "generated_at": "2026-08-19T19:36:39+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
-    "latest_release_date": "2026-08-19T19:00:00+00:00",
+    "latest_release_date": "2026-08-19T19:36:18+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
   },
   "policy": {
@@ -17,8 +17,8 @@
     "last_refresh_at": "2026-08-12T11:09:08+00:00",
     "latest_snapshot_date": "2026-08-19",
     "latest_snapshot_release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
-    "latest_release_id": "signed-reproducible-scale-snapshot-2026-08-19",
-    "latest_release_date": "2026-08-19T19:00:00+00:00"
+    "latest_release_id": "evidence-api-v1-2026-08-19",
+    "latest_release_date": "2026-08-19T19:36:18+00:00"
   },
   "metrics": [
     {
@@ -132,7 +132,7 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "c8dad1c87c924862d09f3c5ecda641fdbdeaf91fbd4b8e52c1436e06184de8a4",
+    "source_sha256": "bd8532d7b1bbb1c483676374bd49eb59db878af32a9fe37187db943909faf3bb",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
     "evidence_manifest_sha256": "4b761c8ebb0f5a2fe008844e5e7848bea460dc79c1428ea64455d0782d794211"
   },
@@ -221,6 +221,45 @@
     "verification_evidence_sha256": "dc6ed2b6d5e2fbe30a09bc98a52d90f022bfbb73da51a6422319bb43b0af2fa1"
   },
   "recent_changes": [
+    {
+      "id": "evidence-api-v1-2026-08-19",
+      "date": "2026-08-19T19:36:18+00:00",
+      "status": "release_candidate_verified",
+      "title": "Evidence API v1",
+      "summary": "Publica entidades, cadenas de evidencia, salud de fuentes y resultados reales como páginas content-addressed con cursor, provenance e identidad pública intacta.",
+      "public_routes": [
+        "/api/v1/index.json",
+        "/api/v1/schema.json"
+      ],
+      "note": {
+        "path": "docs/release-notes/evidence-api-v1.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/evidence-api-v1.md",
+        "bytes": 1487,
+        "sha256": "5cd93701c0197748615443b47f9547e0c0f33ea2641ab586d5b634bc31728a9a"
+      },
+      "evidence": [
+        {
+          "path": "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-export.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-export.json",
+          "sha256": "a9d30caeebeabb5794d524594532c85712bbe162e8ca12f4103936976a46add9"
+        },
+        {
+          "path": "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json",
+          "sha256": "e2fe52581a8b9809a7d1aefd6210ad013164368e3dd4a63ef7e9b33fe8308ba5"
+        },
+        {
+          "path": "docs/api/evidence-api-v1.schema.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/api/evidence-api-v1.schema.json",
+          "sha256": "a246c0ccdd98f887385e3f534aaaf3eb59affb7ef8c75ec028ede189806e6400"
+        },
+        {
+          "path": "tests/test_evidence_api_v1_contract.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_evidence_api_v1_contract.py",
+          "sha256": "4535233b9169aaa61cbd6133a4350a946b426f64a162fb7d6ff118e023f08378"
+        }
+      ]
+    },
     {
       "id": "signed-reproducible-scale-snapshot-2026-08-19",
       "date": "2026-08-19T19:00:00+00:00",

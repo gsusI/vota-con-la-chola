@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://votaconlachola.org/api/v1/schema.json",
+  "title": "Vota con la Chola Evidence API v1",
+  "description": "Machine contract for the read-only, static, content-addressed Evidence API.",
+  "oneOf": [
+    { "$ref": "#/$defs/currentPointer" },
+    { "$ref": "#/$defs/releaseIndex" },
+    { "$ref": "#/$defs/collectionManifest" },
+    { "$ref": "#/$defs/collectionPage" }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "webPath": {
+      "type": "string",
+      "pattern": "^/api/v1/"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "api_release_id",
+        "upstream_scale_release_id",
+        "data_snapshot_date",
+        "source_artifact_sha256",
+        "source_collection",
+        "source_record_id",
+        "official_real_record"
+      ],
+      "properties": {
+        "api_release_id": { "$ref": "#/$defs/sha256" },
+        "upstream_scale_release_id": { "$ref": "#/$defs/sha256" },
+        "data_snapshot_date": { "type": "string", "format": "date" },
+        "source_artifact_sha256": { "$ref": "#/$defs/sha256" },
+        "source_collection": { "type": "string", "minLength": 1 },
+        "source_record_id": { "type": "string", "minLength": 1 },
+        "official_real_record": { "const": true }
+      }
+    },
+    "pageInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "page_number",
+        "page_size",
+        "returned",
+        "has_next",
+        "start_cursor",
+        "end_cursor",
+        "next_cursor",
+        "next"
+      ],
+      "properties": {
+        "page_number": { "type": "integer", "minimum": 1 },
+        "page_size": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "returned": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "has_next": { "type": "boolean" },
+        "start_cursor": { "type": ["string", "null"] },
+        "end_cursor": { "type": ["string", "null"] },
+        "next_cursor": { "type": ["string", "null"] },
+        "next": {
+          "oneOf": [
+            { "$ref": "#/$defs/webPath" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "currentPointer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "api_version", "current_release", "policy", "links"],
+      "properties": {
+        "schema_version": { "const": "evidence_api_current_pointer_v1" },
+        "api_version": { "const": "v1" },
+        "current_release": {
+          "type": "object",
+          "required": ["api_release_id", "upstream_scale_release_id", "snapshot_date", "href", "sha256"],
+          "properties": {
+            "api_release_id": { "$ref": "#/$defs/sha256" },
+            "upstream_scale_release_id": { "$ref": "#/$defs/sha256" },
+            "snapshot_date": { "type": "string", "format": "date" },
+            "href": { "$ref": "#/$defs/webPath" },
+            "sha256": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "policy": { "$ref": "#/$defs/policy" },
+        "links": { "type": "object" }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "read_only",
+        "official_real_records_only",
+        "synthetic_or_mock_records",
+        "public_domain_personal_information",
+        "unknown_states_explicit"
+      ],
+      "properties": {
+        "read_only": { "const": true },
+        "official_real_records_only": { "const": true },
+        "synthetic_or_mock_records": { "const": "forbidden" },
+        "public_domain_personal_information": { "const": "retained" },
+        "unknown_states_explicit": { "const": true }
+      }
+    },
+    "releaseIndex": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "api_version",
+        "api_release_id",
+        "upstream_scale_release",
+        "source_artifacts",
+        "collections",
+        "policy",
+        "compatibility"
+      ],
+      "properties": {
+        "schema_version": { "const": "evidence_api_release_index_v1" },
+        "api_version": { "const": "v1" },
+        "api_release_id": { "$ref": "#/$defs/sha256" },
+        "upstream_scale_release": { "type": "object" },
+        "source_artifacts": { "type": "array", "minItems": 4 },
+        "collections": { "type": "array", "minItems": 4 },
+        "policy": { "$ref": "#/$defs/policy" },
+        "compatibility": { "type": "object" }
+      }
+    },
+    "collectionManifest": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "api_version",
+        "api_release_id",
+        "collection",
+        "item_count",
+        "page_count",
+        "page_size",
+        "first",
+        "pages"
+      ],
+      "properties": {
+        "schema_version": { "const": "evidence_api_collection_manifest_v1" },
+        "api_version": { "const": "v1" },
+        "api_release_id": { "$ref": "#/$defs/sha256" },
+        "collection": {
+          "enum": ["entities", "evidence-chains", "source-health", "question-results"]
+        },
+        "item_count": { "type": "integer", "minimum": 0 },
+        "page_count": { "type": "integer", "minimum": 0 },
+        "page_size": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "first": {
+          "oneOf": [
+            { "$ref": "#/$defs/webPath" },
+            { "type": "null" }
+          ]
+        },
+        "pages": { "type": "array" }
+      }
+    },
+    "collectionPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "api_version", "api_release_id", "collection", "page_info", "items"],
+      "properties": {
+        "schema_version": { "const": "evidence_api_collection_page_v1" },
+        "api_version": { "const": "v1" },
+        "api_release_id": { "$ref": "#/$defs/sha256" },
+        "collection": {
+          "enum": ["entities", "evidence-chains", "source-health", "question-results"]
+        },
+        "page_info": { "$ref": "#/$defs/pageInfo" },
+        "items": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "type": "object",
+            "required": ["id", "provenance"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "provenance": { "$ref": "#/$defs/provenance" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "api_release_id": "feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300",
+  "api_version": "v1",
+  "collection": "question-results",
+  "first": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000001-b5647566fc7409f872229ec6f11b43880b9ca7708259d17e07bf5c1cd4f01d7f.json",
+  "item_count": 3530,
+  "page_count": 15,
+  "page_size": 250,
+  "pages": [
+    {
+      "bytes": 698022,
+      "first_key": "question-result:actor:institution_id:8163",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000001-b5647566fc7409f872229ec6f11b43880b9ca7708259d17e07bf5c1cd4f01d7f.json",
+      "item_count": 250,
+      "last_key": "question-result:actor:person_id:259",
+      "page_number": 1,
+      "sha256": "b5647566fc7409f872229ec6f11b43880b9ca7708259d17e07bf5c1cd4f01d7f"
+    },
+    {
+      "bytes": 739493,
+      "first_key": "question-result:actor:person_id:26",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000002-87f07d6aee1d5afcaa5409d213770904c9889c828feee84728825ac0c54f4cf8.json",
+      "item_count": 250,
+      "last_key": "question-result:actor:person_id:550",
+      "page_number": 2,
+      "sha256": "87f07d6aee1d5afcaa5409d213770904c9889c828feee84728825ac0c54f4cf8"
+    },
+    {
+      "bytes": 776065,
+      "first_key": "question-result:actor:person_id:551",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000003-af52d4fdeecb2081221f463be9dc1d3e6d3bfa48901eab21c3bb97b87cd6270d.json",
+      "item_count": 250,
+      "last_key": "question-result:actor:person_id:70557",
+      "page_number": 3,
+      "sha256": "af52d4fdeecb2081221f463be9dc1d3e6d3bfa48901eab21c3bb97b87cd6270d"
+    },
+    {
+      "bytes": 637607,
+      "first_key": "question-result:actor:person_id:70558",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000004-0405f061ee259fe0dfa9f91594825ef5a1b1af4b256d767b5b14ec72e1f183d4.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:parliamentary_group_id:10:parl-initiative:senado:leg14:exp:621/000012",
+      "page_number": 4,
+      "sha256": "0405f061ee259fe0dfa9f91594825ef5a1b1af4b256d767b5b14ec72e1f183d4"
+    },
+    {
+      "bytes": 406683,
+      "first_key": "question-result:actor_issue:parliamentary_group_id:10:parl-initiative:senado:leg14:exp:621/000013",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000005-5b896576757757b917f1089def2fb437c17c088b5f86fb50eda47db14795cc79.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:175:parl-vote:congreso:vote:d6d15e5a8f16384ce6481d10",
+      "page_number": 5,
+      "sha256": "5b896576757757b917f1089def2fb437c17c088b5f86fb50eda47db14795cc79"
+    },
+    {
+      "bytes": 402315,
+      "first_key": "question-result:actor_issue:person_id:175:parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000006-66293cbb4eaeda28a2842fcddd30b63246222745d61477ae1f8ea171fd68ccb0.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:288:parl-vote:congreso:vote:d6d15e5a8f16384ce6481d10",
+      "page_number": 6,
+      "sha256": "66293cbb4eaeda28a2842fcddd30b63246222745d61477ae1f8ea171fd68ccb0"
+    },
+    {
+      "bytes": 397163,
+      "first_key": "question-result:actor_issue:person_id:288:parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000007-19e4ee5ca09f02a8381c9f8c09ececca05063ed372253f9798c480f7ecc9dff4.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:453:parl-initiative:senado:leg15:exp:621/000001",
+      "page_number": 7,
+      "sha256": "19e4ee5ca09f02a8381c9f8c09ececca05063ed372253f9798c480f7ecc9dff4"
+    },
+    {
+      "bytes": 384843,
+      "first_key": "question-result:actor_issue:person_id:454:parl-initiative:senado:leg14:exp:621/000012",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000008-0987fb3830371cab62a70a685afe330ecfb494de337e36f6911996e3e2d75796.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:531:parl-initiative:senado:leg15:exp:621/000001",
+      "page_number": 8,
+      "sha256": "0987fb3830371cab62a70a685afe330ecfb494de337e36f6911996e3e2d75796"
+    },
+    {
+      "bytes": 392608,
+      "first_key": "question-result:actor_issue:person_id:531:parl-initiative:senado:leg15:exp:622/000006",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000009-a6df1244d7bb9741dab2de0582565cccc4ac158fd836f5769160530baf91fb03.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:609:parl-initiative:senado:leg15:exp:621/000001",
+      "page_number": 9,
+      "sha256": "a6df1244d7bb9741dab2de0582565cccc4ac158fd836f5769160530baf91fb03"
+    },
+    {
+      "bytes": 392568,
+      "first_key": "question-result:actor_issue:person_id:609:parl-initiative:senado:leg15:exp:622/000006",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000010-ee86d86574ea504c1228f4f6ef3f3952c1f94624f55b1e12e7fc6044a9a6ab38.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:69905:parl-initiative:senado:leg14:exp:621/000013",
+      "page_number": 10,
+      "sha256": "ee86d86574ea504c1228f4f6ef3f3952c1f94624f55b1e12e7fc6044a9a6ab38"
+    },
+    {
+      "bytes": 385982,
+      "first_key": "question-result:actor_issue:person_id:69905:parl-initiative:senado:leg15:exp:621/000001",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000011-056a9b2eabf641d60da3dac06844bdfbca45c468a3a9d44bfd9cf6de00d641ee.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:70534:parl-initiative:senado:leg14:exp:621/000012",
+      "page_number": 11,
+      "sha256": "056a9b2eabf641d60da3dac06844bdfbca45c468a3a9d44bfd9cf6de00d641ee"
+    },
+    {
+      "bytes": 381017,
+      "first_key": "question-result:actor_issue:person_id:70534:parl-initiative:senado:leg14:exp:621/000013",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000012-e92fdcd139c407d91be846dc479c48627a441b8d0d0162bbea359247234aefda.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:70654:parl-initiative:senado:leg14:exp:621/000006",
+      "page_number": 12,
+      "sha256": "e92fdcd139c407d91be846dc479c48627a441b8d0d0162bbea359247234aefda"
+    },
+    {
+      "bytes": 392136,
+      "first_key": "question-result:actor_issue:person_id:70655:parl-initiative:senado:leg14:exp:621/000010",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000013-e62a1e1d81fc6173cbbd2f28aee4804649d6df268abef7d4f76c122d8e8e3633.json",
+      "item_count": 250,
+      "last_key": "question-result:actor_issue:person_id:93:parl-vote:url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+      "page_number": 13,
+      "sha256": "e62a1e1d81fc6173cbbd2f28aee4804649d6df268abef7d4f76c122d8e8e3633"
+    },
+    {
+      "bytes": 1080866,
+      "first_key": "question-result:actor_issue:person_id:94:parl-vote:congreso:vote:d6d15e5a8f16384ce6481d10",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000014-47011e40ce036b8072a3a58042ce1bc14bea5328452ae456abba051b06262463.json",
+      "item_count": 250,
+      "last_key": "question-result:issue:policy-event:boe:boe_api_legal:BOE-A-2026-3289",
+      "page_number": 14,
+      "sha256": "47011e40ce036b8072a3a58042ce1bc14bea5328452ae456abba051b06262463"
+    },
+    {
+      "bytes": 56396,
+      "first_key": "question-result:issue:policy-event:boe:boe_api_legal:BOE-A-2026-3290",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/question-results/pages/00000015-fd77a7f94d2027ac3e914c42b1638afcc9374ec4a6744fdc2207cec0065e5df7.json",
+      "item_count": 30,
+      "last_key": "question-result:qa:issue:parl-initiative:senado:leg15:exp:621/000001",
+      "page_number": 15,
+      "sha256": "fd77a7f94d2027ac3e914c42b1638afcc9374ec4a6744fdc2207cec0065e5df7"
+    }
+  ],
+  "pagination": "opaque seek cursor; follow page_info.next",
+  "schema_version": "evidence_api_collection_manifest_v1",
+  "sort": "id ascending, Unicode code-point order"
+}
