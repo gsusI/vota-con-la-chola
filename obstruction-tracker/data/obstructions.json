@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "obstruction_tracker_v2",
-    "generated_at": "2026-08-19T18:28:23+00:00",
+    "generated_at": "2026-08-19T19:15:10+00:00",
     "source_snapshot_generated_at": "2026-08-12T11:09:08+00:00",
     "status_json_path": "/explorer-sources/data/status.json",
     "status_json_evidence_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
@@ -219,7 +219,7 @@
         "source_ids": [
           "boe_election_candidates"
         ],
-        "next_gate": "Review and materialize the eight captured historical corrections without mutating base evidence, model the November 2019 source defect explicitly, extend official proclamation coverage election by election, add official result linkage as a separate fact type, publish through the authorized durable origin, prove a clean-room restore, and reach one million real candidate occurrences."
+        "next_gate": "Review and materialize the eight captured historical corrections without mutating base evidence, model the November 2019 source defect explicitly, extend official proclamation coverage election by election, add official result linkage as a separate fact type, prove a clean-room restore, and reach one million real candidate occurrences."
       }
     ],
     "gaps": [
