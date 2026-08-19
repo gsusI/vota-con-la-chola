@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "schema_version": "transparency_dashboard_v1",
+    "generated_at": "2026-08-19T17:38:33+00:00",
+    "source_status_generated_at": "2026-08-12T11:09:08+00:00",
+    "latest_release_date": "2026-08-19",
+    "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
+  },
+  "policy": {
+    "data_origin": "official_real_records_and_verified_project_releases_only",
+    "synthetic_or_mock_records": "forbidden",
+    "placeholder_releases": "forbidden",
+    "public_domain_personal_information": "retained",
+    "metric_trace_required": true
+  },
+  "headline": {
+    "last_refresh_at": "2026-08-12T11:09:08+00:00",
+    "latest_snapshot_date": "2026-08-12",
+    "latest_snapshot_release_id": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "latest_release_id": "transparency-dashboard-mvp-2026-08-19",
+    "latest_release_date": "2026-08-19"
+  },
+  "metrics": [
+    {
+      "id": "sources_ok",
+      "label": "Fuentes OK",
+      "value": 28,
+      "unit": "fuentes",
+      "source_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
+      "source_url": "/explorer-sources/data/status.json"
+    },
+    {
+      "id": "sources_degraded",
+      "label": "Fuentes degradadas",
+      "value": 1,
+      "unit": "fuentes",
+      "source_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
+      "source_url": "/explorer-sources/data/status.json"
+    },
+    {
+      "id": "sources_not_run",
+      "label": "Fuentes no ejecutadas",
+      "value": 19,
+      "unit": "fuentes",
+      "source_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
+      "source_url": "/explorer-sources/data/status.json"
+    },
+    {
+      "id": "open_obstructions",
+      "label": "Incidencias abiertas",
+      "value": 27,
+      "unit": "incidencias",
+      "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
+      "source_url": "/obstruction-tracker/data/obstructions.json"
+    },
+    {
+      "id": "obstruction_evidence",
+      "label": "Evidencias públicas",
+      "value": 119,
+      "unit": "ficheros",
+      "source_path": "ui/gh-pages-next/public/obstruction-tracker/evidence/manifest.json",
+      "source_url": "/obstruction-tracker/evidence/manifest.json"
+    },
+    {
+      "id": "validated_real_corpora",
+      "label": "Corpus reales validados",
+      "value": 7,
+      "unit": "corpora",
+      "source_path": "etl/data/published/scale-readiness-latest.json",
+      "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json"
+    },
+    {
+      "id": "real_million_scale_lanes",
+      "label": "Lanes de millón",
+      "value": 3,
+      "unit": "lanes",
+      "source_path": "etl/data/published/scale-readiness-latest.json",
+      "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json"
+    },
+    {
+      "id": "promoted_lanes",
+      "label": "Lanes promovidas",
+      "value": 0,
+      "unit": "lanes",
+      "source_path": "etl/data/published/scale-readiness-latest.json",
+      "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json"
+    },
+    {
+      "id": "published_snapshot_rows",
+      "label": "Filas en origen público",
+      "value": 5403506,
+      "unit": "filas",
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json",
+      "source_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139/manifest.json"
+    },
+    {
+      "id": "published_snapshot_files",
+      "label": "Ficheros de datos públicos",
+      "value": 8595,
+      "unit": "ficheros",
+      "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json",
+      "source_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139/manifest.json"
+    }
+  ],
+  "source_health": {
+    "summary": {
+      "desired": 48,
+      "present": 48,
+      "missing": 0,
+      "ok": 28,
+      "degraded": 1,
+      "not_run": 19,
+      "partial": 0,
+      "error": 0,
+      "running": 0,
+      "unknown": 0
+    },
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "data_age_days": 7,
+      "should_warn": false,
+      "detail": "Corte reciente: 7 días de antigüedad."
+    },
+    "source_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
+    "source_url": "/explorer-sources/data/status.json",
+    "source_sha256": "fc04e436561c63edcf21696743d74bae8fb7517edcfd310dccc7567f6cb57640"
+  },
+  "obstruction": {
+    "open_incidents_total": 27,
+    "blocked_sources_total": 14,
+    "evidence_files_total": 119,
+    "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
+    "source_url": "/obstruction-tracker/data/obstructions.json",
+    "source_sha256": "3ae92dd58ea3c9cbfdd641e1670a2d9a2fcee6c88b58ae8385f303a8913c391a",
+    "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
+    "evidence_manifest_sha256": "d8d4ab7bd1869a9494e2ab559f4966c07f6d730d46594a1f7adc22a43f07d7c7"
+  },
+  "scale_readiness": {
+    "status": "real_foundation_ready_scale_incomplete",
+    "summary": {
+      "registered_real_corpora": 7,
+      "validated_real_corpora": 7,
+      "real_million_scale_lanes": 3,
+      "promoted_lanes": 0,
+      "open_gaps": 4
+    },
+    "source_path": "etl/data/published/scale-readiness-latest.json",
+    "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json",
+    "source_sha256": "2c19e68b6c3216849fa25dfc5088e6bcf891e856dc291b76898fcb97fb22a92e"
+  },
+  "published_snapshot": {
+    "verification_status": "verified_current_scale_origin_metadata_drift",
+    "verification_passed": true,
+    "metadata_freshness": false,
+    "warnings": [
+      "remote scale origin does not contain the current readiness report",
+      "remote scale origin does not contain the current corpus registry"
+    ],
+    "dataset_repo": "JesusIC/vota-con-la-chola-data",
+    "snapshot_date": "2026-08-12",
+    "release_id": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "schema_version": "real-scale-origin-bundle-v2",
+    "snapshot_path": "scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "corpora_total": 6,
+    "rows_total": 5403506,
+    "data_files_total": 8595,
+    "data_bytes_total": 498631274,
+    "corpora": [
+      {
+        "bytes": 1271649,
+        "files": 13,
+        "id": "accountability_ledger",
+        "rows": 126760
+      },
+      {
+        "bytes": 9236064,
+        "files": 108,
+        "id": "actor_mandates",
+        "rows": 88031
+      },
+      {
+        "bytes": 42955289,
+        "files": 14,
+        "id": "bdns_public_money",
+        "rows": 1360382
+      },
+      {
+        "bytes": 253373860,
+        "files": 37,
+        "id": "eurostat_indicators",
+        "rows": 1755809
+      },
+      {
+        "bytes": 170990631,
+        "files": 8373,
+        "id": "member_votes",
+        "rows": 1809222
+      },
+      {
+        "bytes": 20803781,
+        "files": 50,
+        "id": "placsp_public_money",
+        "rows": 263302
+      }
+    ],
+    "freshness": {
+      "tier": "fresh",
+      "label": "reciente",
+      "data_age_days": 7,
+      "should_warn": false,
+      "detail": "Corte reciente: 7 días de antigüedad."
+    },
+    "pointer_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/latest.json",
+    "manifest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139/manifest.json",
+    "verification_evidence_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json",
+    "verification_evidence_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json",
+    "verification_evidence_sha256": "cd5f151c7ad8b2fef921ca09019c103812468f434948f45dc7913127d2b659d6"
+  },
+  "recent_changes": [
+    {
+      "id": "transparency-dashboard-mvp-2026-08-19",
+      "date": "2026-08-19",
+      "status": "published_mvp",
+      "title": "Transparency dashboard MVP",
+      "summary": "Publica frescura, salud de fuentes, obstrucciones, readiness, versión durable y cambios con evidencia por cada cifra.",
+      "public_routes": [
+        "/transparency/",
+        "/transparency/data/transparency.json"
+      ],
+      "note": {
+        "path": "docs/release-notes/transparency-dashboard-mvp.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/transparency-dashboard-mvp.md",
+        "bytes": 3164,
+        "sha256": "f0d1987219b56cc4d50c3cfab803c4e2b5ab4acafb021e02fab58ecdc67100ee"
+      },
+      "evidence": [
+        {
+          "path": "scripts/export_transparency_dashboard_snapshot.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/export_transparency_dashboard_snapshot.py",
+          "sha256": "39068b394c67aac31eb2ee92002f12e4b9338ea78bb72d93c518f18106b00f55"
+        },
+        {
+          "path": "scripts/validate_transparency_dashboard_snapshot.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/validate_transparency_dashboard_snapshot.py",
+          "sha256": "9541bbcea42871b4a6b1a5622b2033603f8e7236e3d091047275777deb54fc8f"
+        },
+        {
+          "path": "tests/test_transparency_dashboard_snapshot.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_transparency_dashboard_snapshot.py",
+          "sha256": "320de8aa33bcedde8d51889590d9ace1158d912757d0e26b71f2a7f4a781f08f"
+        },
+        {
+          "path": "tests/test_transparency_dashboard_ui_contract.js",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_transparency_dashboard_ui_contract.js",
+          "sha256": "15b13eeeaa6f34429db1fd36b0abfe09ccfe99a88bc5547499dbc4a54ac8b35b"
+        }
+      ]
+    },
+    {
+      "id": "obstruction-tracker-mvp-2026-08-19",
+      "date": "2026-08-19",
+      "status": "published_live_verified",
+      "title": "Obstruction tracker MVP",
+      "summary": "Publica salud de fuentes, bloqueos, cobertura afectada, escala real y evidencia técnica verificable en una ruta estática.",
+      "public_routes": [
+        "/obstruction-tracker/",
+        "/obstruction-tracker/data/obstructions.json"
+      ],
+      "note": {
+        "path": "docs/release-notes/obstruction-tracker-mvp.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/obstruction-tracker-mvp.md",
+        "bytes": 4739,
+        "sha256": "1f9cc69ad8d3830f1e4be05506186af3f09ec18b1885a06b2750eaa278adab46"
+      },
+      "evidence": [
+        {
+          "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/obstruction-tracker-validation.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/obstruction-tracker-validation.json",
+          "sha256": "030adf9202b32e8b827193b92b5867b9388c014f8fed99eda3c541f5654c194e"
+        },
+        {
+          "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
+          "sha256": "d84ad4754fed564eda319b25dfd12d8fd35922d096ab46e8ac5d292f002fedb6"
+        }
+      ]
+    },
+    {
+      "id": "vote-explainer-mvp-2026-04-04",
+      "date": "2026-04-04",
+      "status": "published_mvp",
+      "title": "Vote explainer MVP",
+      "summary": "Publica páginas canónicas por votación con resultado, desglose visible, fuentes oficiales y caveats metodológicos.",
+      "public_routes": [
+        "/vote-explainer/"
+      ],
+      "note": {
+        "path": "docs/release-notes/vote-explainer-mvp.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/vote-explainer-mvp.md",
+        "bytes": 2013,
+        "sha256": "86ae97b53420621dd410a34f51a296e419dc47e2060a3abada7a7bcc6e501ee7"
+      },
+      "evidence": [
+        {
+          "path": "scripts/export_vote_explainer_snapshot.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/export_vote_explainer_snapshot.py",
+          "sha256": "e10491389882fab5b7cbdffc14c56f546b871a612b210774dcc62a2d5127e8c7"
+        },
+        {
+          "path": "tests/test_export_vote_explainer_snapshot.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_export_vote_explainer_snapshot.py",
+          "sha256": "7f3a82893ef58a9c704e11256650c6496502798f3f4047d2f9fd1bdb1b9a26a1"
+        },
+        {
+          "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
+          "sha256": "d84ad4754fed564eda319b25dfd12d8fd35922d096ab46e8ac5d292f002fedb6"
+        }
+      ]
+    }
+  ],
+  "audit_links": {
+    "self": "/transparency/data/transparency.json",
+    "source_status": "/explorer-sources/data/status.json",
+    "obstruction_tracker": "/obstruction-tracker/",
+    "obstruction_feed": "/obstruction-tracker/data/obstructions.json",
+    "release_registry": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/releases.json",
+    "roadmap": "https://github.com/gsusI/vota-con-la-chola/blob/main/ROADMAP.md",
+    "technical_roadmap": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/roadmap-tecnico.md",
+    "operational_tracker": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/e2e-scrape-load-tracker.md"
+  }
+}
