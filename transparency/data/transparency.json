@@ -1,9 +1,9 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T21:47:16+00:00",
+    "generated_at": "2026-08-19T22:09:51+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
-    "latest_release_date": "2026-08-19T21:30:00+00:00",
+    "latest_release_date": "2026-08-19T22:05:00+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
   },
   "policy": {
@@ -17,8 +17,8 @@
     "last_refresh_at": "2026-08-12T11:09:08+00:00",
     "latest_snapshot_date": "2026-08-19",
     "latest_snapshot_release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
-    "latest_release_id": "agreements-connector-mvp-2026-08-19",
-    "latest_release_date": "2026-08-19T21:30:00+00:00"
+    "latest_release_id": "geopolitics-mvp-2026-08-20",
+    "latest_release_date": "2026-08-19T22:05:00+00:00"
   },
   "metrics": [
     {
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "3cfe22b0ebc1cc0fbc31f87b981ef8625822440d4a75c0ff57289ba743084029",
+    "source_sha256": "2ad47a008456bf66749e42e7dbc2c4cc4e4ade3675162a5d2826f0dd83a08d79",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "4bf6eb1c5cf69e780cdd601982a10d766d217c88bef8089c13001591ef766dc5"
+    "evidence_manifest_sha256": "c237641737195b539333684aacf293b8e3e1597522e543549c1b8ee3c458bb49"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -221,6 +221,45 @@
     "verification_evidence_sha256": "dc6ed2b6d5e2fbe30a09bc98a52d90f022bfbb73da51a6422319bb43b0af2fa1"
   },
   "recent_changes": [
+    {
+      "id": "geopolitics-mvp-2026-08-20",
+      "date": "2026-08-19T22:05:00+00:00",
+      "status": "validated_pending_publication",
+      "title": "Geopolitics connector MVP",
+      "summary": "Materializa dos acciones exteriores reales de La Moncloa como fuente -> etapa jurídica -> actores -> evidencia, sin inferir vigencia, implementación, alineamiento, influencia ni impacto.",
+      "public_routes": [
+        "/geopolitics/",
+        "/geopolitics/data/moncloa-sample.json"
+      ],
+      "note": {
+        "path": "docs/release-notes/geopolitics-mvp.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/geopolitics-mvp.md",
+        "bytes": 4367,
+        "sha256": "6dceb6c672b775b3f93d80e4a29455c07de0e6bccc39edefd2856184645af9e7"
+      },
+      "evidence": [
+        {
+          "path": "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-materialization.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-materialization.json",
+          "sha256": "12245f841cb33f3d35758776ddb7a6eb198711edb110e1a5011a72bddbafdfdc"
+        },
+        {
+          "path": "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json",
+          "sha256": "70920625ad8e29082a6483721e11a265d7b822897cad56b02fd762c021f52c09"
+        },
+        {
+          "path": "tests/test_moncloa_geopolitics_real_pipeline.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_moncloa_geopolitics_real_pipeline.py",
+          "sha256": "36d1ce2b3755be125948cf63ddabbe270ce0d969712db1bbd0a8d8e5517168e4"
+        },
+        {
+          "path": "tests/test_moncloa_geopolitics_ui_contract.js",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_moncloa_geopolitics_ui_contract.js",
+          "sha256": "0a262c6d288899d921784943e02240486a3a8163964790bd64792729244b8405"
+        }
+      ]
+    },
     {
       "id": "agreements-connector-mvp-2026-08-19",
       "date": "2026-08-19T21:30:00+00:00",
