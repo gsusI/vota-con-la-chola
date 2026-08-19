@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T21:33:18+00:00",
+    "generated_at": "2026-08-19T21:39:26+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-19T20:00:00+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "8f9ee2363a344a9b22579f35d61ae9075aa6c5c9f97491c555770ceedb71aea8",
+    "source_sha256": "612b10dd7da57a0186e0f086ba13c565ad21cd7f5862eb89c2666232fd522a26",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "0f6ecac6911bab0b9dee621abe86f9645ead863deecd4402283e2ca4cdc82d3a"
+    "evidence_manifest_sha256": "576dd28fa24f69b31f3eda4258350c4daa8cecbb6c0f361f250e41c43c6cdefc"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -468,7 +468,7 @@
     {
       "id": "agreements-connector-mvp-2026-08-19",
       "date": "2026-08-19",
-      "status": "ready_to_publish",
+      "status": "published_live_verified",
       "title": "Agreements and meetings connector MVP",
       "summary": "Materializa 11 acuerdos reales del Consejo de Ministros como sesión -> acuerdo -> actores -> evidencia, con temas derivados visibles y cero asistentes o influencia inventados.",
       "public_routes": [
@@ -478,8 +478,8 @@
       "note": {
         "path": "docs/release-notes/agreements-connector-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/agreements-connector-mvp.md",
-        "bytes": 4405,
-        "sha256": "8e93268605f8c4774341ddf47803c37589b0666c06bcd9949ad08ff8fe53a0d4"
+        "bytes": 4869,
+        "sha256": "70b772108e3f960844752583f631a5cedf1bb0dc5e93dc5e2d0d378108a712e2"
       },
       "evidence": [
         {
@@ -491,6 +491,11 @@
           "path": "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json",
           "sha256": "1bbf2d3406c3f447b4ec179e1672e80881ac568ad780f1ab32769f6a10965ae1"
+        },
+        {
+          "path": "docs/etl/sprints/AGREEMENTS-20260819/evidence/live-moncloa-agreements-verification.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/AGREEMENTS-20260819/evidence/live-moncloa-agreements-verification.json",
+          "sha256": "8c9c7bfc9182d148055854a8873753e166a3b462c05b29f8752bdeea349bc773"
         },
         {
           "path": "tests/test_moncloa_agreements_real_pipeline.py",
