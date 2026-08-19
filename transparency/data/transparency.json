@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T22:09:51+00:00",
+    "generated_at": "2026-08-19T22:17:11+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-19T22:05:00+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "2ad47a008456bf66749e42e7dbc2c4cc4e4ade3675162a5d2826f0dd83a08d79",
+    "source_sha256": "06c52686543fec7aff538d802440819688bf2b8225aa2c76b7515916dc1e8fcb",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "c237641737195b539333684aacf293b8e3e1597522e543549c1b8ee3c458bb49"
+    "evidence_manifest_sha256": "7247b69e13ec71841316998412244138fd6faf95b91be6bd93acab05b8578931"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -224,7 +224,7 @@
     {
       "id": "geopolitics-mvp-2026-08-20",
       "date": "2026-08-19T22:05:00+00:00",
-      "status": "validated_pending_publication",
+      "status": "published_live_verified",
       "title": "Geopolitics connector MVP",
       "summary": "Materializa dos acciones exteriores reales de La Moncloa como fuente -> etapa jurídica -> actores -> evidencia, sin inferir vigencia, implementación, alineamiento, influencia ni impacto.",
       "public_routes": [
@@ -234,8 +234,8 @@
       "note": {
         "path": "docs/release-notes/geopolitics-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/geopolitics-mvp.md",
-        "bytes": 4367,
-        "sha256": "6dceb6c672b775b3f93d80e4a29455c07de0e6bccc39edefd2856184645af9e7"
+        "bytes": 4938,
+        "sha256": "5477691dec6746295d2ebbf27da02a0c4ff9bbce7c6e9c81b7b3e6a1dc7e7865"
       },
       "evidence": [
         {
@@ -247,6 +247,11 @@
           "path": "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json",
           "sha256": "70920625ad8e29082a6483721e11a265d7b822897cad56b02fd762c021f52c09"
+        },
+        {
+          "path": "docs/etl/sprints/GEOPOLITICS-20260819/evidence/live-moncloa-geopolitics-verification.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/GEOPOLITICS-20260819/evidence/live-moncloa-geopolitics-verification.json",
+          "sha256": "6905c50cdf4f3cc38b13d434c863fdb72464122cb77a634a173b4113d3a6f6b8"
         },
         {
           "path": "tests/test_moncloa_geopolitics_real_pipeline.py",
@@ -533,7 +538,7 @@
         "path": "docs/release-notes/obstruction-tracker-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/obstruction-tracker-mvp.md",
         "bytes": 4736,
-        "sha256": "fe80518e433bcd6634e2dddf71822da2e9667869fef623de9ba8ae9de7efb58c"
+        "sha256": "396e89aa64e7d2bd9b6e465f2d42f7af32e4482465a7a92bfad492e1c22cb85f"
       },
       "evidence": [
         {
@@ -544,7 +549,7 @@
         {
           "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
-          "sha256": "cf2ec3633fa17a150f2704022beb429a2a896b2aeca7b6e19b6e0617e2453ded"
+          "sha256": "2404bd8bd5f3942f815379ac1445ce4c86b251f0c390978ff83db4ad2e0c3363"
         }
       ]
     },
@@ -577,7 +582,7 @@
         {
           "path": "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
-          "sha256": "cf2ec3633fa17a150f2704022beb429a2a896b2aeca7b6e19b6e0617e2453ded"
+          "sha256": "2404bd8bd5f3942f815379ac1445ce4c86b251f0c390978ff83db4ad2e0c3363"
         }
       ]
     }
