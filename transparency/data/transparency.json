@@ -1,9 +1,9 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-19T22:17:11+00:00",
+    "generated_at": "2026-08-19T22:38:55+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
-    "latest_release_date": "2026-08-19T22:05:00+00:00",
+    "latest_release_date": "2026-08-19T22:36:55+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
   },
   "policy": {
@@ -17,8 +17,8 @@
     "last_refresh_at": "2026-08-12T11:09:08+00:00",
     "latest_snapshot_date": "2026-08-19",
     "latest_snapshot_release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
-    "latest_release_id": "geopolitics-mvp-2026-08-20",
-    "latest_release_date": "2026-08-19T22:05:00+00:00"
+    "latest_release_id": "indicators-mvp-2026-08-20",
+    "latest_release_date": "2026-08-19T22:36:55+00:00"
   },
   "metrics": [
     {
@@ -132,7 +132,7 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "06c52686543fec7aff538d802440819688bf2b8225aa2c76b7515916dc1e8fcb",
+    "source_sha256": "5cf236a3c060fe18c65a647e8e4153cef677954490c215a923d1af0d045dd887",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
     "evidence_manifest_sha256": "7247b69e13ec71841316998412244138fd6faf95b91be6bd93acab05b8578931"
   },
@@ -221,6 +221,45 @@
     "verification_evidence_sha256": "dc6ed2b6d5e2fbe30a09bc98a52d90f022bfbb73da51a6422319bb43b0af2fa1"
   },
   "recent_changes": [
+    {
+      "id": "indicators-mvp-2026-08-20",
+      "date": "2026-08-19T22:36:55+00:00",
+      "status": "validated_pending_publication",
+      "title": "Indicators MVP",
+      "summary": "Materializa 2.091 observaciones reales de PIB por habitante Eurostat como definición -> release -> territorio -> periodo -> celda, preservando 113 marcas provisionales y sin inferir causalidad, mérito ni culpa.",
+      "public_routes": [
+        "/indicators/",
+        "/indicators/data/eurostat-gdp-es.json"
+      ],
+      "note": {
+        "path": "docs/release-notes/indicators-mvp.md",
+        "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/indicators-mvp.md",
+        "bytes": 4798,
+        "sha256": "314373eda9812c99e4742d43da27841428a34dcf8a52df4f00233f38349949d8"
+      },
+      "evidence": [
+        {
+          "path": "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-materialization.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-materialization.json",
+          "sha256": "ad125bc1a4b4a7198855b2189f97ab0bb363ae58223ef2bb1e9e400f25b9e8c3"
+        },
+        {
+          "path": "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json",
+          "sha256": "97e7adb2d918154f0c0b712a000fe37eb9f3f3ab3c934d75f062db3c4926e182"
+        },
+        {
+          "path": "tests/test_eurostat_gdp_indicator_real_pipeline.py",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_eurostat_gdp_indicator_real_pipeline.py",
+          "sha256": "599e21f486478dce6e88b22aa48eb22bb881fb27b7c106a9c02320aae8144bba"
+        },
+        {
+          "path": "tests/test_eurostat_gdp_indicator_ui_contract.js",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_eurostat_gdp_indicator_ui_contract.js",
+          "sha256": "4eb933e55209b788d4f3408d7bfba3b463f858ca6c2c2ccf15b0e2e8da664025"
+        }
+      ]
+    },
     {
       "id": "geopolitics-mvp-2026-08-20",
       "date": "2026-08-19T22:05:00+00:00",
