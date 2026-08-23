@@ -2031,14 +2031,14 @@ etl-scale-origin-hf-restore:
   if [ -n "{{hf_scale_restore_corpus_ids}}" ]; then corpus_arg="--corpus-ids {{hf_scale_restore_corpus_ids}}"; fi; \
   if [ -n "{{hf_scale_restore_snapshot_path}}" ]; then snapshot_arg="--snapshot-path {{hf_scale_restore_snapshot_path}}"; fi; \
   if [ -n "{{hf_scale_restore_report_out}}" ]; then report_arg="--report-out {{hf_scale_restore_report_out}}"; fi; \
-  python3 scripts/restore_hf_scale_origin.py --dataset-repo {{hf_dataset_repo_id}} --destination {{hf_scale_restore_destination}} --workers {{hf_scale_restore_workers}} --timeout {{hf_verify_timeout}} --min-free-bytes {{hf_scale_restore_min_free_bytes}} ${snapshot_arg} ${corpus_arg} ${report_arg}
+  python3 scripts/restore_hf_scale_origin.py --dataset-repo {{hf_dataset_repo_id}} --destination {{hf_scale_restore_destination}} --workers {{hf_scale_restore_workers}} --timeout {{hf_verify_timeout}} --min-free-bytes {{hf_scale_restore_min_free_bytes}} --allowed-signers {{snapshot_allowed_signers}} --signer-identity {{snapshot_signer_identity}} --require-empty-destination ${snapshot_arg} ${corpus_arg} ${report_arg}
 
 etl-scale-origin-hf-validate-restored:
   corpus_arg=""; \
   report_arg=""; \
   if [ -n "{{hf_scale_restore_corpus_ids}}" ]; then corpus_arg="--corpus-ids {{hf_scale_restore_corpus_ids}}"; fi; \
   if [ -n "{{hf_scale_restore_validation_out}}" ]; then report_arg="--report-out {{hf_scale_restore_validation_out}}"; fi; \
-  uv run --no-project --with pyarrow python scripts/validate_restored_scale_origin.py --root {{hf_scale_restore_destination}} --registry {{hf_scale_registry}} --max-peak-rss-mb {{hf_scale_restore_validation_max_rss_mb}} ${corpus_arg} ${report_arg} --enforce
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-scale-origin-validate-env uv run --no-project --with pyarrow python scripts/validate_restored_scale_origin.py --root {{hf_scale_restore_destination}} --max-peak-rss-mb {{hf_scale_restore_validation_max_rss_mb}} --allowed-signers {{snapshot_allowed_signers}} --signer-identity {{snapshot_signer_identity}} --require-isolated ${corpus_arg} ${report_arg} --enforce
 
 etl-scale-origin-hf-restore-validate:
   just etl-scale-origin-hf-restore

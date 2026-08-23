@@ -127,6 +127,34 @@ el `allowed_signers` local. Después exige:
 - artifact contract igual entre manifest y attestation;
 - las cuatro políticas obligatorias en `true`.
 
+## Restaurar y validar sin confiar en el workspace
+
+El recipe combinado exige ahora un destino vacío, firma válida y validación
+aislada. La validación usa el registry incluido y firmado dentro del restore; no
+lee el registry mutable del checkout.
+
+```bash
+HF_SCALE_RESTORE_DESTINATION=etl/data/restored/hf-scale-clean \
+HF_SCALE_RESTORE_REPORT_OUT=path/to/restore-report.json \
+HF_SCALE_RESTORE_VALIDATION_OUT=path/to/validation-report.json \
+just etl-scale-origin-hf-restore-validate
+```
+
+Para una release inmutable concreta, fijar además
+`HF_SCALE_RESTORE_SNAPSHOT_PATH=scale/snapshots/<date>/<full-sha256>`. Para una
+lane, usar `HF_SCALE_RESTORE_CORPUS_IDS=<corpus_id>`. El destino debe no existir o
+estar vacío; no se reutilizan bytes previos. Ambos pasos verifican la attestation
+contra `SNAPSHOT_ALLOWED_SIGNERS` y `SNAPSHOT_SIGNER_IDENTITY`. Esto es GET-only:
+no mueve el pointer ni escribe en el origin.
+
+Prueba real del `2026-08-24`: la lane publicada `candidate_occurrences` se
+restauró anónimamente desde cero (`8` ficheros seleccionados, `2,211,900` bytes,
+`0` reusados) junto con `6` controles firmados. La validación aislada aceptó el
+inventario exacto de `14` ficheros y reconcilió `10,820` filas / `2` Parquet /
+`2,083,541` data bytes, conservando la información personal oficial pública.
+Esta prueba cierra recovery analítico de la séptima lane. No demuestra recovery
+del corpus documental raw ni del C2 outcome aún no publicado.
+
 ## Diff entre releases reales
 
 ```bash

@@ -1,0 +1,121 @@
+{
+  "artifact_contract_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+  "attestation": {
+    "attestation_sha256": "909c90a5c95cea8e74aaa5e048349e870d60511d667ccdafe1f230a1bb45d2a3",
+    "errors": [],
+    "public_key_fingerprint": "SHA256:R2B1jFbkLoigmKxObr+ExlBLrKENkaUDp0C3ip0Lj7A",
+    "signature_sha256": "a544ea55eca3be73b7d8bb9ce6bf4eda924a651bedbfdbbfe0bf79d5742a81ab",
+    "signer_identity": "vclc-snapshot-release-2026",
+    "status": "ok"
+  },
+  "checks": {
+    "bundled_registry_used": true,
+    "corpora_valid": true,
+    "data_bytes_match_release": true,
+    "data_files_match_release": true,
+    "isolated_inventory_exact": true,
+    "no_symlinks": true,
+    "no_undeclared_files": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "remote_pointer_capture_valid": true,
+    "rows_match_release": true,
+    "selected_restored_bytes_valid": true,
+    "selected_restored_files_valid": true,
+    "signed_origin_verified": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "corpora": [
+    {
+      "actual": {
+        "bytes": 2083541,
+        "files": 2,
+        "rows": 10820
+      },
+      "checks": {
+        "bytes_match_release": true,
+        "files_match_release": true,
+        "no_private_tokens": true,
+        "rows_match_release": true,
+        "validator_status_ok": true
+      },
+      "declared": {
+        "bytes": 2083541,
+        "files": 2,
+        "rows": 10820
+      },
+      "id": "candidate_occurrences",
+      "kind": "parquet_manifest",
+      "lane": "candidate_occurrences",
+      "performance": {
+        "batch_rows": 10000,
+        "max_peak_rss_mb": 1536.0,
+        "peak_rss_mb": 139.594,
+        "rows_per_second": 3308.398,
+        "total_seconds": 3.270465,
+        "validation_mode": "sequential",
+        "workers": 1
+      },
+      "private_token_findings": 0,
+      "status": "ok"
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-08-23T22:28:35.343606Z",
+  "isolation": {
+    "actual_bytes": 4986546,
+    "actual_files": 14,
+    "expected_files": 14,
+    "findings_limit": 100,
+    "missing_files": [],
+    "missing_files_count": 0,
+    "passed": true,
+    "registry_source": "restored_bundle",
+    "required": true,
+    "symlinks": [],
+    "symlinks_count": 0,
+    "undeclared_files": [],
+    "undeclared_files_count": 0
+  },
+  "public_promotion_eligible": false,
+  "publish_eligible": false,
+  "reference_file": "restore-reference.json",
+  "release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+  "remote_latest_capture": {
+    "checks": {
+      "artifact_contract_sha256_matches_reference": true,
+      "attestation_matches_reference": true,
+      "checksum_matches_capture": true,
+      "manifest_sha256_matches_reference": true,
+      "project_matches_reference": true,
+      "release_id_matches_reference": true,
+      "schema_version_matches_reference": true,
+      "snapshot_date_matches_reference": true,
+      "snapshot_path_matches_reference": true
+    },
+    "passed": true,
+    "required": true
+  },
+  "root_name": "hf-scale-candidate-isolated-20260824",
+  "schema_version": "restored_scale_origin_validation_v1",
+  "selected_corpus_ids": [
+    "candidate_occurrences"
+  ],
+  "selection_mode": "latest_pointer",
+  "signed_attestation_required": true,
+  "signed_attestation_verified": true,
+  "snapshot_date": "2026-08-19",
+  "status": "ok",
+  "totals": {
+    "bundle_bytes": 4986546,
+    "bundle_files": 14,
+    "corpora": 1,
+    "data_bytes": 2083541,
+    "data_files": 2,
+    "restored_bytes": 2211900,
+    "restored_bytes_checksum_valid": 2211900,
+    "restored_files": 8,
+    "restored_files_checksum_valid": 8,
+    "rows": 10820
+  }
+}

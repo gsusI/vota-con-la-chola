@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: `canonical`
-Updated: `2026-08-23`
+Updated: `2026-08-24`
 
 Scope boundary: strategic direction, delivery sequence, evidence gates, ownership roles, and societal-scale completion. Operational row status remains in the tracker; near-term commands remain in the technical roadmap.
 
@@ -13,6 +13,7 @@ Scope boundary: strategic direction, delivery sequence, evidence gates, ownershi
 | --- | --- | --- | --- |
 | `REV-01` | `2026-08-23` | Maintainer mandate for end-to-end accountability at million-item scale using official real data and retaining public-domain identity | Canonical mission, scale classes, SLOs, ten delivery waves, and societal-scale DoD established and updated from current artifacts. |
 | `REV-02` | `2026-08-23` | Systematic scope audit of this canonical roadmap plus current C1/C2, actor-graph, comparison, origin, restore, and review evidence | Added claim ledger, normalized topics, initiatives, outcome-based epics, granular stories, ownership, uncertainty, bidirectional traceability, explicit estimate omission, decision questions, audit log, and residual-risk register. Existing `W*` truth remains authoritative and unchanged by the planning index. |
+| `REV-03` | `2026-08-24` | Signed anonymous clean-room recovery of the seventh analytical corpus | Closed every-lane analytical recovery: `candidate_occurrences` restored from an empty root with zero reuse/credentials/remote mutation, then independently validated from bundled controls and the external signer policy. Raw-document origin and outcome C2 durability remain separate open gates. |
 
 ## Executive Summary
 
@@ -20,9 +21,10 @@ Outcome: public users must be able to trace promises, decisions, responsibility,
 
 Current posture is useful foundation, not societal scale. Seven real corpora and three million-row lanes exist, but zero lanes are promoted because representativeness, source-total reconciliation, durable recovery, correction handling, or other lane-specific gates remain open. Analytical releases have durable origin and clean-restore evidence; full raw-document origin and restore do not.
 
-Immediate release truth as of `2026-08-23`:
+Immediate release truth as of `2026-08-24`:
 
 - actor graph v1 and promise/action comparison C1 are locally validated but still require live publication and exact remote verification;
+- all seven published analytical corpora now have signed, checksum-bound clean-room recovery evidence; the newest isolated candidate-occurrence drill validates `10,820` real rows / `2` Parquet files with zero reuse, credentials, undeclared files, or remote mutation;
 - outcome-context C1 public v3 status, immutable `17`-asset evidence package, full `1,435`-page build, local route/asset audit, and real browser verification agree; remote publication and exact live verification remain open;
 - outcome C2A physically processes all `33,726` national-only real pairs and C2B physically processes all `2,865,602` wider strict real pairs through streaming keyset batches, checkpoints, partitions and independent semantic validation; these are internal L0 capacity facts, never outcome relationships or scale-promotion claims;
 - outcome human review, durable remote artifact origin, remote clean restore/rollback, public release, and any reviewed public outcome link remain open;
@@ -270,7 +272,7 @@ Target: four weeks. Priority: `P0`.
 | `W1-002` | `PARTIAL 2026-08-12`: upload immutable raw objects by SHA-256 | `W1-001` | 16-worker local CAS replay is idempotent for `6,792` real objects and full-manifest restore passes; remote S3-compatible upload, versioning/retention proof, and all-document coverage remain open |
 | `W1-003` | `DONE 2026-08-19`: upload Parquet/shards/manifests as immutable release | `W1-001` | published signed release v2 `5d9ce557...` is content-addressed and remotely verified for `7` corpora / `5,414,326` rows / `8,597` data files / `500,714,815` data bytes; artifact, corpus, registry/readiness metadata, policy, and signature parity pass without warnings |
 | `W1-004` | `DONE 2026-08-12`: add bounded origin-to-cache fetch by checksum | `W1-002` | worker streams atomically, verifies bytes/SHA-256, reuses verified files, checks storage before download, and restored all six real corpora from fresh empty caches |
-| `W1-005` | `PARTIAL 2026-08-12`: run full clean-room restore of every registered analytical lane | `W1-003..004` | isolated no-project validators full-validate `5,403,506` rows / `8,595` data files for the six legacy restore-enabled corpora after fresh-cache download; candidate occurrences remains registered with `clean_room_restore=false`, so every-lane recovery is still open; no canonical corpus input was used in the six completed proofs |
+| `W1-005` | `DONE 2026-08-24`: run clean-room restore of every registered analytical lane | `W1-003..004` | isolated no-project validators full-validate the six legacy corpora (`5,403,506` rows / `8,595` data files), and a fresh anonymous GET-only seventh-lane drill restores `candidate_occurrences` into a nonexistent root with `8` checksum-valid selected files plus `6` signed control files; bundled-registry validation reconciles `10,820` rows / `2` Parquet / `2,083,541` data bytes, exact `14`-file inventory, official public identity retention, zero cache reuse, zero credentials, and zero remote mutation |
 | `W1-006` | Prove remote raw-object immutability, versioning, retention, lifecycle, and recovery | `W1-001..002` | independent configuration audit plus write/read/version/delete-guard/restore drill on a dedicated non-production prefix; secrets excluded; retention and recovery evidence current |
 | `W1-007` | `PARTIAL 2026-08-12`: define RPO/RTO, release rollback, and supersession | `W1-003` | prior immutable release `623b4a5a...` full-restored `8,619` checksum-valid files / `504,093,303` bytes in `1,199.614s` and full-validated all six corpora / `5,403,506` rows. GET-only rollback plan from live `5872efaf...` passes all checks with zero data delta, evidence SHA bindings, compare-and-swap, immutable-release preservation, `authorized=false`, and `mutation_performed=false`; next: activate/revert under explicit authority, record supersession, approve formal RPO, and measure pointer activation RTO |
 | `W1-008` | `PARTIAL 2026-08-12`: publish storage health without secrets or workstation paths | `W1-003` | public-safe local artifact aggregates real BDNS/PLACSP preflights, validates reserve/headroom arithmetic, hashes its evidence and omits roots/session/workstation state; next: place the artifact in the next explicitly authorized public release and monitor freshness |

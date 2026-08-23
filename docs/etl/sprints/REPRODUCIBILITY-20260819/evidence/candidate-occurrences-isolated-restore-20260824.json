@@ -1,0 +1,83 @@
+{
+  "artifact_contract_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+  "attestation": {
+    "attestation_sha256": "909c90a5c95cea8e74aaa5e048349e870d60511d667ccdafe1f230a1bb45d2a3",
+    "errors": [],
+    "public_key_fingerprint": "SHA256:R2B1jFbkLoigmKxObr+ExlBLrKENkaUDp0C3ip0Lj7A",
+    "signature_namespace": "vota-con-la-chola-snapshot-v1",
+    "signature_sha256": "a544ea55eca3be73b7d8bb9ce6bf4eda924a651bedbfdbbfe0bf79d5742a81ab",
+    "signer_identity": "vclc-snapshot-release-2026",
+    "status": "ok"
+  },
+  "bundle_bytes": 4986546,
+  "bundle_files": 14,
+  "bytes": 2211900,
+  "clean_room_restore": true,
+  "control_files": 6,
+  "credentials_used": false,
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "download_queue_limit": 16,
+  "downloaded_bytes": 2211900,
+  "downloaded_files": 8,
+  "elapsed_seconds": 0.954226,
+  "errors": [],
+  "files": 8,
+  "inventory": {
+    "actual_bytes": 4986546,
+    "actual_files": 14,
+    "expected_files": 14,
+    "findings_limit": 100,
+    "missing_files": [],
+    "missing_files_count": 0,
+    "passed": true,
+    "symlinks": [],
+    "symlinks_count": 0,
+    "undeclared_files": [],
+    "undeclared_files_count": 0
+  },
+  "isolation": {
+    "destination_initial_state": {
+      "bytes": 0,
+      "directories": 0,
+      "empty": true,
+      "entries": 0,
+      "existed": false,
+      "files": 0,
+      "symlinks": 0
+    },
+    "empty_destination_required": true
+  },
+  "manifest_sha256": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+  "max_pending_downloads": 8,
+  "partial_files": [],
+  "preflight": {
+    "bytes": 2211900,
+    "files": 8,
+    "free_bytes": 112504729600,
+    "headroom_bytes": 101765099460,
+    "minimum_free_after_restore_bytes": 10737418240,
+    "missing_bytes": 2211900,
+    "missing_files": 8,
+    "required_bytes": 10739630140,
+    "reusable_bytes": 0,
+    "reusable_files": 0,
+    "status": "ok"
+  },
+  "public_domain_personal_information_retained": true,
+  "public_promotion_eligible": false,
+  "publish_eligible": false,
+  "remote_method": "GET_only",
+  "remote_mutation": false,
+  "reused_bytes": 0,
+  "reused_files": 0,
+  "schema_version": "real-scale-origin-restore-v1",
+  "selected_corpus_ids": [
+    "candidate_occurrences"
+  ],
+  "selection_mode": "latest_pointer",
+  "signed_attestation_required": true,
+  "signed_attestation_verified": true,
+  "snapshot_date": "2026-08-19",
+  "snapshot_path": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+  "status": "restored_checksums_verified"
+}
