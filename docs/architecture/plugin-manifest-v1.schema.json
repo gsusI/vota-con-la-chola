@@ -1,0 +1,672 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://votaconlachola.org/schemas/plugin-manifest-v1.schema.json",
+  "title": "Vota con La Chola public-data plugin manifest v1",
+  "description": "Machine contract for real-source public accountability plugins. It contains no dataset records or credentials.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plugin_id",
+    "name",
+    "version",
+    "description",
+    "license",
+    "entry_point",
+    "plugin_types",
+    "maintainers",
+    "compatibility",
+    "sources",
+    "capabilities",
+    "hooks",
+    "inputs",
+    "outputs",
+    "runtime",
+    "partitions",
+    "idempotency",
+    "provenance",
+    "quality_gates",
+    "test_hooks",
+    "security",
+    "publication"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "plugin_manifest_v1"
+    },
+    "plugin_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)+$",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "version": {
+      "$ref": "#/$defs/semver"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "entry_point": {
+      "type": "string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_.]*:[A-Za-z_][A-Za-z0-9_.]*$"
+    },
+    "plugin_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/plugin_type"
+      }
+    },
+    "maintainers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["handle", "role"],
+        "properties": {
+          "handle": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+          },
+          "role": {
+            "enum": ["owner", "reviewer", "security_reviewer"]
+          }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plugin_api", "core_ontology", "python", "sqlite_schema"],
+      "properties": {
+        "plugin_api": {
+          "type": "string",
+          "pattern": "^[<>=~^0-9.,* xX-]+$"
+        },
+        "core_ontology": {
+          "const": "core_ontology_v1"
+        },
+        "python": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sqlite_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_contracts": {
+          "$ref": "#/$defs/version_map"
+        },
+        "output_contracts": {
+          "$ref": "#/$defs/version_map"
+        },
+        "optional_features": {
+          "$ref": "#/$defs/nonempty_string_array"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "network",
+          "object_store_read",
+          "object_store_write",
+          "queue_read",
+          "queue_write",
+          "sqlite_read",
+          "sqlite_write",
+          "partition_read",
+          "partition_write",
+          "review_queue_write",
+          "publish_static",
+          "publish_dataset"
+        ]
+      }
+    },
+    "hooks": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "register",
+          "validate_config",
+          "plan",
+          "discover",
+          "acquire",
+          "parse",
+          "normalize",
+          "extract",
+          "link",
+          "score",
+          "validate",
+          "publish",
+          "checkpoint",
+          "cleanup"
+        ]
+      },
+      "contains": {
+        "const": "validate"
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/input"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/output"
+      }
+    },
+    "runtime": {
+      "$ref": "#/$defs/runtime"
+    },
+    "partitions": {
+      "$ref": "#/$defs/partitions"
+    },
+    "idempotency": {
+      "$ref": "#/$defs/idempotency"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "quality_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/gate"
+      }
+    },
+    "test_hooks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/test_hook"
+      }
+    },
+    "security": {
+      "$ref": "#/$defs/security"
+    },
+    "publication": {
+      "$ref": "#/$defs/publication"
+    },
+    "deprecation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["active", "deprecated", "retired"]
+        },
+        "replacement_plugin_id": {
+          "type": "string"
+        },
+        "remove_after_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "migration_document": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "plugin_types": {
+            "contains": {
+              "const": "connector"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "minItems": 1
+          },
+          "hooks": {
+            "allOf": [
+              {"contains": {"const": "discover"}},
+              {"contains": {"const": "acquire"}}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "plugin_types": {
+            "contains": {
+              "const": "publisher"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "hooks": {
+            "contains": {
+              "const": "publish"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "plugin_type": {
+      "enum": [
+        "connector",
+        "parser",
+        "normalizer",
+        "extractor",
+        "linker",
+        "scorer",
+        "publisher"
+      ]
+    },
+    "nonempty_string_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "version_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "name",
+        "source_kind",
+        "scope",
+        "official_base_urls",
+        "formats",
+        "rights_basis",
+        "official_capture_contracts",
+        "official_public_domain_personal_information_retained",
+        "synthetic_or_mock_data",
+        "implicit_fallback"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_kind": {
+          "enum": ["primary", "control", "indicator", "catalog", "secondary"]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "official_base_urls": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(https://|manifest://)\\S+$"
+          }
+        },
+        "formats": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "rights_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_update_cadence": {
+          "type": "string"
+        },
+        "min_records_loaded_strict": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "full_universe_required": {
+          "type": "boolean"
+        },
+        "official_capture_contracts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "provenance_path",
+              "sha256",
+              "bytes",
+              "official_url",
+              "captured_at",
+              "rights_basis"
+            ],
+            "properties": {
+              "path": {"type": "string", "minLength": 1},
+              "provenance_path": {"type": "string", "minLength": 1},
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "bytes": {"type": "integer", "minimum": 1},
+              "official_url": {
+                "type": "string",
+                "pattern": "^https://\\S+$"
+              },
+              "captured_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "rights_basis": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "official_public_domain_personal_information_retained": {
+          "const": true
+        },
+        "synthetic_or_mock_data": {
+          "const": false
+        },
+        "implicit_fallback": {
+          "const": false
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "schema_version", "storage_kind"],
+      "properties": {
+        "contract": {"type": "string", "minLength": 1},
+        "schema_version": {"type": "string", "minLength": 1},
+        "storage_kind": {
+          "enum": ["none", "cas", "sqlite", "parquet", "json", "jsonl", "manifest"]
+        },
+        "required": {"type": "boolean"}
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "schema_version",
+        "ontology_concept",
+        "storage_kind",
+        "public_id_field",
+        "natural_key_fields",
+        "partition_fields",
+        "provenance_mode",
+        "publication_class"
+      ],
+      "properties": {
+        "contract": {"type": "string", "minLength": 1},
+        "schema_version": {"type": "string", "minLength": 1},
+        "ontology_concept": {
+          "enum": [
+            "actor",
+            "organization",
+            "role",
+            "territory",
+            "source",
+            "document",
+            "evidence",
+            "topic",
+            "claim",
+            "promise",
+            "initiative",
+            "vote",
+            "spending_item",
+            "contract",
+            "agreement",
+            "meeting",
+            "event",
+            "indicator",
+            "outcome"
+          ]
+        },
+        "storage_kind": {
+          "enum": ["cas", "sqlite", "parquet", "json", "jsonl", "manifest"]
+        },
+        "public_id_field": {
+          "type": "string",
+          "pattern": "_id$"
+        },
+        "natural_key_fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "partition_fields": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "provenance_mode": {"type": "string", "minLength": 1},
+        "publication_class": {
+          "enum": ["internal", "public_bounded", "public_partitioned", "public_manifest"]
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network_access",
+        "allowed_hosts",
+        "required_secret_names",
+        "max_batch_rows",
+        "max_memory_mb",
+        "timeout_seconds",
+        "max_concurrency",
+        "checkpoint_interval_items"
+      ],
+      "properties": {
+        "network_access": {"type": "boolean"},
+        "allowed_hosts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9.-]+$"
+          }
+        },
+        "required_secret_names": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]*$"
+          }
+        },
+        "filesystem_read_roots": {"$ref": "#/$defs/nonempty_string_array"},
+        "filesystem_write_roots": {"$ref": "#/$defs/nonempty_string_array"},
+        "max_batch_rows": {"type": "integer", "minimum": 1},
+        "max_memory_mb": {"type": "integer", "minimum": 1},
+        "timeout_seconds": {"type": "integer", "minimum": 1},
+        "max_concurrency": {"type": "integer", "minimum": 1},
+        "requests_per_second": {"type": "number", "exclusiveMinimum": 0},
+        "checkpoint_interval_items": {"type": "integer", "minimum": 1}
+      }
+    },
+    "partitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "fields", "max_rows_per_output_file", "max_bytes_per_output_file"],
+      "properties": {
+        "strategy": {
+          "enum": ["none", "source_time", "source_time_territory", "source_kind_time", "custom_stable"]
+        },
+        "fields": {"$ref": "#/$defs/nonempty_string_array"},
+        "max_rows_per_output_file": {"type": "integer", "minimum": 1},
+        "max_bytes_per_output_file": {"type": "integer", "minimum": 1},
+        "cursor_contract": {"type": "string"}
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work_item_key_fields", "natural_key_policy", "version_model", "replay_expected"],
+      "properties": {
+        "work_item_key_fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "natural_key_policy": {"type": "string", "minLength": 1},
+        "version_model": {
+          "enum": ["append_only_observations", "append_only_versions", "current_state_plus_sightings", "immutable_artifacts"]
+        },
+        "replay_expected": {"const": "same_logical_ids_and_counts"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_record_required",
+        "source_url_required_when_public",
+        "content_sha256_required",
+        "observed_at_required",
+        "method_version_required_for_derived",
+        "evidence_links_required_for_relations"
+      ],
+      "properties": {
+        "source_record_required": {"const": true},
+        "source_url_required_when_public": {"const": true},
+        "content_sha256_required": {"const": true},
+        "observed_at_required": {"const": true},
+        "method_version_required_for_derived": {"const": true},
+        "evidence_links_required_for_relations": {"const": true}
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gate_id", "stage", "command", "blocking"],
+      "properties": {
+        "gate_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]*$"
+        },
+        "stage": {
+          "enum": ["register", "acquire", "normalize", "enrich", "publish"]
+        },
+        "command": {"type": "string", "minLength": 1},
+        "blocking": {"const": true}
+      }
+    },
+    "test_hook": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "command", "uses_official_real_data"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "contract",
+            "official_capture_replay",
+            "idempotence",
+            "schema",
+            "provenance",
+            "strict_network",
+            "scale",
+            "publish_dry_run",
+            "restore",
+            "regression"
+          ]
+        },
+        "command": {"type": "string", "minLength": 1},
+        "uses_official_real_data": {"const": true},
+        "capture_contract_paths": {"$ref": "#/$defs/nonempty_string_array"}
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_embedded",
+        "remote_code_execution",
+        "auto_install_dependencies",
+        "manifest_contains_secrets",
+        "runtime_capability_enforcement"
+      ],
+      "properties": {
+        "credentials_embedded": {"const": false},
+        "remote_code_execution": {"const": false},
+        "auto_install_dependencies": {"const": false},
+        "manifest_contains_secrets": {"const": false},
+        "runtime_capability_enforcement": {"const": true}
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "official_records_only",
+        "synthetic_or_mock_data_forbidden",
+        "placeholder_data_forbidden",
+        "implicit_fallback_forbidden",
+        "official_public_domain_personal_information_retained",
+        "publication_hygiene_required",
+        "validation_before_publish_required"
+      ],
+      "properties": {
+        "official_records_only": {"const": true},
+        "synthetic_or_mock_data_forbidden": {"const": true},
+        "placeholder_data_forbidden": {"const": true},
+        "implicit_fallback_forbidden": {"const": true},
+        "official_public_domain_personal_information_retained": {"const": true},
+        "publication_hygiene_required": {"const": true},
+        "validation_before_publish_required": {"const": true},
+        "durable_origin_required_when_claimed": {"type": "boolean"},
+        "restore_verification_required_when_claimed": {"type": "boolean"}
+      }
+    }
+  }
+}

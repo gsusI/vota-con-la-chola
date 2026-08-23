@@ -1,0 +1,879 @@
+{
+  "schema_version": "core_ontology_v1",
+  "updated_at": "2026-08-19",
+  "status": "stable_vocabulary_experimental_physical_mappings",
+  "source_of_truth": "docs/data-model/core-ontology-v1.md",
+  "policy": {
+    "official_records_only": true,
+    "synthetic_or_mock_data_forbidden": true,
+    "placeholder_records_forbidden": true,
+    "implicit_fixture_fallback_forbidden": true,
+    "official_public_domain_personal_information_retained": true,
+    "private_or_secret_material_excluded": true,
+    "derived_signals_are_not_corruption_findings": true,
+    "causality_requires_separate_methodological_gate": true
+  },
+  "id_contract": {
+    "public_id_format": "urn:vclc:<entity_type>:<uuidv5>",
+    "source_scoped_components": [
+      "entity_type",
+      "source_id",
+      "source_native_id",
+      "source_scope"
+    ],
+    "local_primary_key_suffix": "_pk",
+    "public_id_suffix": "_id",
+    "person_name_alone_may_define_identity": false,
+    "cross_source_resolution_requires_evidence": true,
+    "old_ids_remain_resolvable_after_merge_or_split": true
+  },
+  "time_contract": {
+    "instant_format": "ISO-8601-with-offset",
+    "date_format": "YYYY-MM-DD",
+    "required_observation_fields": [
+      "observed_at",
+      "source_snapshot_date"
+    ],
+    "lifecycle_fields": [
+      "valid_from",
+      "valid_to",
+      "created_at",
+      "updated_at",
+      "superseded_at"
+    ],
+    "event_fields": [
+      "occurred_at",
+      "occurred_on",
+      "occurred_from",
+      "occurred_to"
+    ],
+    "publication_fields": [
+      "published_at",
+      "published_on",
+      "effective_from",
+      "effective_to",
+      "fetched_at"
+    ],
+    "precision_values": [
+      "instant",
+      "day",
+      "month",
+      "year",
+      "interval",
+      "unknown"
+    ]
+  },
+  "provenance_contract": {
+    "required_fact_fields": [
+      "source_id",
+      "source_record_id_or_pk",
+      "source_url_when_public",
+      "source_snapshot_date",
+      "observed_at",
+      "content_sha256_or_cas_reference",
+      "created_at",
+      "updated_at"
+    ],
+    "required_derived_fields": [
+      "method",
+      "method_version",
+      "evidence_id_or_links",
+      "confidence_when_applicable",
+      "review_status"
+    ],
+    "document_locator_fields": [
+      "page",
+      "section",
+      "paragraph",
+      "char_start",
+      "char_end",
+      "selector",
+      "fragment_sha256"
+    ],
+    "raw_bytes_storage": "content_addressed_object_storage",
+    "sqlite_role": "catalog_ids_foreign_keys_queues_indexes_and_navigation",
+    "mass_fact_storage": "partitioned_parquet"
+  },
+  "unknown_states": [
+    "known",
+    "unknown",
+    "not_applicable",
+    "not_published",
+    "not_observed",
+    "withheld_by_source",
+    "blocked",
+    "disputed",
+    "no_signal",
+    "pending_review",
+    "superseded"
+  ],
+  "concepts": [
+    {
+      "code": "actor",
+      "kind": "entity",
+      "definition": "Accountable participant to which a statement, role, action, payment, receipt, participation, or documented responsibility can be attributed.",
+      "public_id_field": "actor_id",
+      "implementation_status": "partial",
+      "provenance_mode": "identity_evidence_links",
+      "current_tables": [
+        "persons",
+        "parties",
+        "institutions",
+        "government_org_units",
+        "parliamentary_groups",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "actor_id",
+        "actor_kind",
+        "canonical_label",
+        "identity_state",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "ALIAS_OF",
+        "MEMBER_OF",
+        "HOLDS_ROLE",
+        "ATTRIBUTED_TO",
+        "SPONSORS",
+        "VOTES_IN",
+        "PAYS",
+        "RECEIVES",
+        "PARTY_TO",
+        "ATTENDS"
+      ]
+    },
+    {
+      "code": "organization",
+      "kind": "entity",
+      "definition": "Collective actor with an institutional or legal identity, including public bodies, parties, groups, companies, unions, NGOs, coalitions, and international organizations.",
+      "public_id_field": "organization_id",
+      "implementation_status": "partial",
+      "provenance_mode": "identity_evidence_links",
+      "current_tables": [
+        "institutions",
+        "government_org_units",
+        "parties",
+        "parliamentary_groups"
+      ],
+      "required_fields": [
+        "organization_id",
+        "organization_kind",
+        "official_name",
+        "identity_state",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "SUBUNIT_OF",
+        "MEMBER_OF",
+        "HOLDS_ROLE",
+        "PUBLISHED_BY",
+        "PAYS",
+        "RECEIVES",
+        "PARTY_TO"
+      ]
+    },
+    {
+      "code": "role",
+      "kind": "association_vocabulary",
+      "definition": "Time-scoped function an actor performs in an organization, event, contract, agreement, or accountability chain.",
+      "public_id_field": "role_id",
+      "implementation_status": "operational_fragmented",
+      "provenance_mode": "assignment_evidence_links",
+      "current_tables": [
+        "roles",
+        "mandates",
+        "government_positions",
+        "person_org_memberships",
+        "person_parliamentary_group_memberships",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "role_id",
+        "role_code",
+        "role_scope",
+        "title",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "HOLDS_ROLE"
+      ]
+    },
+    {
+      "code": "territory",
+      "kind": "entity",
+      "definition": "Versioned geographic or jurisdictional unit used to scope actors, organizations, events, money, and indicators.",
+      "public_id_field": "territory_id",
+      "implementation_status": "operational",
+      "provenance_mode": "source_record_or_curated_codebook",
+      "current_tables": [
+        "territories",
+        "admin_levels"
+      ],
+      "required_fields": [
+        "territory_id",
+        "code",
+        "code_scheme",
+        "territory_kind",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "LOCATED_IN"
+      ]
+    },
+    {
+      "code": "source",
+      "kind": "provenance_entity",
+      "definition": "Publisher, official registry, endpoint, or declared transport origin from which public records are acquired.",
+      "public_id_field": "source_id",
+      "implementation_status": "operational",
+      "provenance_mode": "self_describing_source_registry",
+      "current_tables": [
+        "sources",
+        "ingestion_runs",
+        "raw_fetches",
+        "run_fetches",
+        "source_records"
+      ],
+      "required_fields": [
+        "source_id",
+        "name",
+        "source_kind",
+        "default_url",
+        "data_format",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "PUBLISHED_BY",
+        "IDENTIFIES"
+      ]
+    },
+    {
+      "code": "document",
+      "kind": "versioned_artifact",
+      "definition": "Logical public artifact and immutable byte version, including PDF, HTML, XML, JSON, CSV, ZIP, image, audio, or video.",
+      "public_id_field": "document_id",
+      "implementation_status": "partial",
+      "provenance_mode": "source_record_content_hash_and_cas",
+      "current_tables": [
+        "text_documents",
+        "raw_fetches",
+        "document_fetches",
+        "parl_initiative_documents",
+        "parl_initiative_text_versions",
+        "money_contract_documents"
+      ],
+      "required_fields": [
+        "document_id",
+        "document_version_id",
+        "document_kind",
+        "source_id",
+        "source_url",
+        "content_sha256",
+        "observed_at",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "PUBLISHED_BY",
+        "VERSION_OF",
+        "EXTRACTED_FROM"
+      ]
+    },
+    {
+      "code": "evidence",
+      "kind": "provenance_object",
+      "definition": "Smallest auditable unit supporting, contradicting, contextualizing, correcting, or superseding a fact, claim, relation, or result.",
+      "public_id_field": "evidence_id",
+      "implementation_status": "partial",
+      "provenance_mode": "exact_locator_hash_and_source_chain",
+      "current_tables": [
+        "topic_evidence",
+        "parl_text_fragments",
+        "legal_fragment_responsibility_evidence",
+        "integrity_signal_evidence",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "evidence_id",
+        "evidence_kind",
+        "evidence_tier",
+        "source_id",
+        "source_record_id_or_pk",
+        "observed_at",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "EXTRACTED_FROM",
+        "SUPPORTS",
+        "CONTRADICTS",
+        "ABOUT",
+        "CORRECTS",
+        "SUPERSEDES"
+      ]
+    },
+    {
+      "code": "topic",
+      "kind": "versioned_vocabulary",
+      "definition": "Versioned thematic concept used to organize evidence, questions, events, and outcomes under explicit codebook rules.",
+      "public_id_field": "topic_id",
+      "implementation_status": "operational",
+      "provenance_mode": "versioned_codebook_and_assignment_method",
+      "current_tables": [
+        "topics",
+        "topic_sets",
+        "topic_set_topics"
+      ],
+      "required_fields": [
+        "topic_id",
+        "canonical_key",
+        "label",
+        "codebook_version",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "ABOUT",
+        "MEASURES"
+      ]
+    },
+    {
+      "code": "claim",
+      "kind": "attributed_assertion",
+      "definition": "Proposition expressed by an actor or source; records what was said without asserting that it is true.",
+      "public_id_field": "claim_id",
+      "implementation_status": "planned_todo_18_19",
+      "provenance_mode": "exact_text_attribution_and_extraction_method",
+      "current_tables": [
+        "topic_evidence",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "claim_id",
+        "claim_kind",
+        "claim_text",
+        "speaker_actor_id",
+        "claim_status",
+        "evidence_id_or_links",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "ATTRIBUTED_TO",
+        "ABOUT",
+        "SUPPORTS",
+        "CONTRADICTS",
+        "CORRECTS",
+        "SUPERSEDES"
+      ]
+    },
+    {
+      "code": "promise",
+      "kind": "claim_specialization",
+      "definition": "Claim that commits an actor to a future action or outcome under stated or extractable conditions.",
+      "public_id_field": "promise_id",
+      "implementation_status": "planned_todo_18_19",
+      "provenance_mode": "claim_evidence_codebook_and_review",
+      "current_tables": [
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "promise_id",
+        "claim_id",
+        "commitment_strength",
+        "measurability_state",
+        "evidence_id_or_links",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "ATTRIBUTED_TO",
+        "COMMITS_TO",
+        "ABOUT",
+        "IMPLEMENTS"
+      ]
+    },
+    {
+      "code": "initiative",
+      "kind": "institutional_process",
+      "definition": "Institutional proposal or proceeding with source identity, stages, sponsors, documents, and decision links.",
+      "public_id_field": "initiative_id",
+      "implementation_status": "operational_parliamentary",
+      "provenance_mode": "source_record_documents_and_stage_links",
+      "current_tables": [
+        "parl_initiatives",
+        "parl_initiative_documents",
+        "parl_initiative_text_versions",
+        "parl_vote_event_initiatives"
+      ],
+      "required_fields": [
+        "initiative_id",
+        "initiative_kind",
+        "title",
+        "source_id",
+        "source_record_id_or_pk",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "SPONSORS",
+        "ABOUT",
+        "IMPLEMENTS",
+        "PRECEDES"
+      ]
+    },
+    {
+      "code": "vote",
+      "kind": "decision_event",
+      "definition": "Collective decision event with exact question, source totals, result, and individual or aggregate ballots.",
+      "public_id_field": "vote_id",
+      "implementation_status": "operational_parliamentary",
+      "provenance_mode": "vote_source_record_ballots_and_text_version",
+      "current_tables": [
+        "parl_vote_events",
+        "parl_vote_member_votes",
+        "parl_vote_event_initiatives",
+        "parl_vote_event_text_versions"
+      ],
+      "required_fields": [
+        "vote_id",
+        "occurred_on",
+        "source_id",
+        "source_record_id_or_pk",
+        "reconciliation_state",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "VOTES_IN",
+        "ABOUT",
+        "PRECEDES"
+      ]
+    },
+    {
+      "code": "spending_item",
+      "kind": "monetary_fact",
+      "definition": "Atomic monetary authorization or movement with exact amount, currency, accounting semantics, actors, dates, and evidence.",
+      "public_id_field": "spending_item_id",
+      "implementation_status": "partial",
+      "provenance_mode": "source_record_exact_decimal_and_version",
+      "current_tables": [
+        "money_contract_records",
+        "money_contract_award_results",
+        "money_subsidy_records",
+        "policy_events",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "spending_item_id",
+        "spending_kind",
+        "amount_decimal",
+        "currency",
+        "amount_semantics",
+        "source_id",
+        "source_record_id_or_pk",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "PAYS",
+        "RECEIVES",
+        "ABOUT",
+        "LOCATED_IN"
+      ]
+    },
+    {
+      "code": "contract",
+      "kind": "versioned_legal_process",
+      "definition": "Versioned procurement or contractual process with lots, stages, parties, award results, amounts, and source documents.",
+      "public_id_field": "contract_id",
+      "implementation_status": "partial_robust",
+      "provenance_mode": "source_record_versions_bulk_sightings_and_documents",
+      "current_tables": [
+        "money_contract_records",
+        "money_contract_award_results",
+        "money_contract_documents",
+        "placsp_contract_detail_records",
+        "placsp_bulk_record_sightings"
+      ],
+      "required_fields": [
+        "contract_id",
+        "contract_kind",
+        "source_id",
+        "source_record_id_or_pk",
+        "contract_status",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "PARTY_TO",
+        "PAYS",
+        "RECEIVES",
+        "VERSION_OF",
+        "ABOUT"
+      ]
+    },
+    {
+      "code": "agreement",
+      "kind": "versioned_commitment_object",
+      "definition": "Formal or officially published agreement among two or more actors, with typed parties, terms, dates, versions, and evidence.",
+      "public_id_field": "agreement_id",
+      "implementation_status": "planned_todo_22_23",
+      "provenance_mode": "official_document_terms_and_party_evidence",
+      "current_tables": [
+        "policy_events",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "agreement_id",
+        "agreement_kind",
+        "agreement_status",
+        "evidence_id_or_links",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "PARTY_TO",
+        "ABOUT",
+        "VERSION_OF",
+        "IMPLEMENTS"
+      ]
+    },
+    {
+      "code": "meeting",
+      "kind": "disclosed_event",
+      "definition": "Officially disclosed meeting with host, participants, roles, agenda, time, place, documents, and completeness caveats.",
+      "public_id_field": "meeting_id",
+      "implementation_status": "planned_todo_22_23",
+      "provenance_mode": "disclosure_record_attendance_and_agenda_evidence",
+      "current_tables": [],
+      "required_fields": [
+        "meeting_id",
+        "meeting_kind",
+        "occurred_from",
+        "source_id",
+        "source_record_id_or_pk",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "ATTENDS",
+        "ABOUT",
+        "LOCATED_IN",
+        "PRECEDES"
+      ]
+    },
+    {
+      "code": "event",
+      "kind": "temporal_superconcept",
+      "definition": "Typed occurrence that provides common temporal navigation while preserving specialized domain semantics.",
+      "public_id_field": "event_id",
+      "implementation_status": "partial",
+      "provenance_mode": "specialized_event_source_and_evidence_links",
+      "current_tables": [
+        "policy_events",
+        "parl_vote_events",
+        "accountability_ledger_entries",
+        "responsibility_explainer_warning_timeline_events"
+      ],
+      "required_fields": [
+        "event_id",
+        "event_kind",
+        "occurred_from_or_on",
+        "time_precision",
+        "source_id",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "ABOUT",
+        "LOCATED_IN",
+        "PRECEDES",
+        "IMPLEMENTS"
+      ]
+    },
+    {
+      "code": "indicator",
+      "kind": "versioned_measurement_series",
+      "definition": "Versioned definition of a measurable series and its source observations, vintages, dimensions, units, and revisions.",
+      "public_id_field": "indicator_id",
+      "implementation_status": "partial_robust",
+      "provenance_mode": "series_methodology_observation_record_and_revision",
+      "current_tables": [
+        "indicator_series",
+        "indicator_points",
+        "indicator_observation_records",
+        "indicator_bulk_acquisitions"
+      ],
+      "required_fields": [
+        "indicator_id",
+        "indicator_code",
+        "definition",
+        "unit",
+        "methodology_version",
+        "source_id",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "MEASURES",
+        "OBSERVED_AS",
+        "LOCATED_IN",
+        "VERSION_OF"
+      ]
+    },
+    {
+      "code": "outcome",
+      "kind": "derived_observation",
+      "definition": "Descriptive state or change supported by indicator observations and explicit transformations; not causal unless separately gated.",
+      "public_id_field": "outcome_id",
+      "implementation_status": "experimental",
+      "provenance_mode": "indicator_inputs_method_diagnostics_and_evidence",
+      "current_tables": [
+        "indicator_series",
+        "indicator_points",
+        "interventions",
+        "intervention_events",
+        "causal_estimates",
+        "accountability_ledger_entries"
+      ],
+      "required_fields": [
+        "outcome_id",
+        "period",
+        "method",
+        "method_version",
+        "causal_claim_state",
+        "evidence_id_or_links",
+        "created_at",
+        "updated_at"
+      ],
+      "relations": [
+        "OBSERVED_AS",
+        "ABOUT",
+        "LOCATED_IN",
+        "SUPPORTS",
+        "CONTRADICTS"
+      ]
+    }
+  ],
+  "relationship_types": [
+    {
+      "code": "IDENTIFIES",
+      "source_concepts": ["source"],
+      "target_concepts": ["actor", "organization"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "ALIAS_OF",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["actor", "organization"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "MEMBER_OF",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["organization"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "HOLDS_ROLE",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["role"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "SUBUNIT_OF",
+      "source_concepts": ["organization"],
+      "target_concepts": ["organization"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "LOCATED_IN",
+      "source_concepts": ["actor", "organization", "initiative", "vote", "spending_item", "contract", "agreement", "meeting", "event", "indicator", "outcome"],
+      "target_concepts": ["territory"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "PUBLISHED_BY",
+      "source_concepts": ["document", "evidence", "claim", "initiative", "vote", "contract", "agreement", "meeting", "indicator"],
+      "target_concepts": ["source", "organization"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "VERSION_OF",
+      "source_concepts": ["document", "claim", "initiative", "contract", "agreement", "indicator"],
+      "target_concepts": ["document", "claim", "initiative", "contract", "agreement", "indicator"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "EXTRACTED_FROM",
+      "source_concepts": ["evidence", "claim", "promise", "initiative", "vote", "spending_item", "contract", "agreement", "meeting", "indicator"],
+      "target_concepts": ["document", "source"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "SUPPORTS",
+      "source_concepts": ["evidence", "claim", "outcome"],
+      "target_concepts": ["claim", "promise", "initiative", "vote", "spending_item", "contract", "agreement", "meeting", "event", "outcome"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "CONTRADICTS",
+      "source_concepts": ["evidence", "claim", "outcome"],
+      "target_concepts": ["claim", "promise", "initiative", "vote", "spending_item", "contract", "agreement", "meeting", "event", "outcome"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "ABOUT",
+      "source_concepts": ["evidence", "claim", "promise", "initiative", "vote", "spending_item", "contract", "agreement", "meeting", "event", "indicator", "outcome"],
+      "target_concepts": ["actor", "organization", "territory", "topic"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "ATTRIBUTED_TO",
+      "source_concepts": ["claim", "promise"],
+      "target_concepts": ["actor", "organization"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "COMMITS_TO",
+      "source_concepts": ["promise"],
+      "target_concepts": ["initiative", "spending_item", "contract", "agreement", "event", "outcome"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "SPONSORS",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["initiative"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "VOTES_IN",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["vote"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "IMPLEMENTS",
+      "source_concepts": ["actor", "organization", "initiative", "vote", "spending_item", "contract", "agreement", "event"],
+      "target_concepts": ["promise", "initiative", "agreement", "event", "outcome"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "PAYS",
+      "source_concepts": ["actor", "organization", "contract"],
+      "target_concepts": ["spending_item"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "RECEIVES",
+      "source_concepts": ["actor", "organization", "contract"],
+      "target_concepts": ["spending_item"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "PARTY_TO",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["contract", "agreement"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "ATTENDS",
+      "source_concepts": ["actor", "organization"],
+      "target_concepts": ["meeting"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "MEASURES",
+      "source_concepts": ["indicator"],
+      "target_concepts": ["topic", "outcome"],
+      "temporal": false,
+      "evidence_required": true
+    },
+    {
+      "code": "OBSERVED_AS",
+      "source_concepts": ["indicator"],
+      "target_concepts": ["outcome"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "PRECEDES",
+      "source_concepts": ["initiative", "vote", "meeting", "event"],
+      "target_concepts": ["initiative", "vote", "spending_item", "contract", "agreement", "meeting", "event", "outcome"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "SUPERSEDES",
+      "source_concepts": ["document", "evidence", "claim", "promise", "initiative", "contract", "agreement", "indicator", "outcome"],
+      "target_concepts": ["document", "evidence", "claim", "promise", "initiative", "contract", "agreement", "indicator", "outcome"],
+      "temporal": true,
+      "evidence_required": true
+    },
+    {
+      "code": "CORRECTS",
+      "source_concepts": ["document", "evidence", "claim"],
+      "target_concepts": ["actor", "organization", "document", "evidence", "claim", "promise", "initiative", "vote", "spending_item", "contract", "agreement", "meeting", "event", "indicator", "outcome"],
+      "temporal": true,
+      "evidence_required": true
+    }
+  ],
+  "scale_contract": {
+    "minimum_supported_facts": 10000000,
+    "minimum_supported_documents": 1000000,
+    "target_supported_facts_without_ontology_change": 100000000,
+    "queue_model": "durable_bounded_leases",
+    "write_model": "batched_partitioned_idempotent",
+    "version_model": "append_only_observations_and_sightings",
+    "browser_model": "bounded_static_indexes_and_shards",
+    "promotion_requires_real_official_corpus": true,
+    "reconciliation_dimensions": [
+      "discovered",
+      "enqueued",
+      "fetched",
+      "parsed",
+      "loaded",
+      "deduplicated",
+      "rejected",
+      "dead",
+      "bytes",
+      "objects",
+      "rows",
+      "source_url_coverage",
+      "source_record_coverage",
+      "identity_coverage",
+      "evidence_coverage",
+      "foreign_key_failures",
+      "orphan_count",
+      "freshness"
+    ]
+  }
+}

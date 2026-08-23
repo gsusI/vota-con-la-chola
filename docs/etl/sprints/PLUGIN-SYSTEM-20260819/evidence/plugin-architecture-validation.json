@@ -1,0 +1,14 @@
+{
+  "schema_version": "plugin_architecture_validation_v1",
+  "status": "ok",
+  "checks": {
+    "manifest_schema_version": "plugin_manifest_v1",
+    "plugin_types_total": 7,
+    "lifecycle_hooks_total": 14,
+    "ontology_output_concepts_total": 19,
+    "test_hooks_total": 10,
+    "source_real_only_enforced": true,
+    "public_identity_retention_enforced": true
+  },
+  "errors": []
+}

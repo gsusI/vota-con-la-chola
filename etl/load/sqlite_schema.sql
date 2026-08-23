@@ -351,6 +351,341 @@ CREATE TABLE IF NOT EXISTS mandates (
   UNIQUE (source_id, source_record_id)
 );
 
+-- Time-aware actor graph. Source-scoped nodes are the safe default; a
+-- cross-source identity requires an exact official identifier or a reviewed,
+-- evidence-backed resolution decision. All changes are append-only by release.
+CREATE TABLE IF NOT EXISTS actor_graph_releases (
+  release_id TEXT PRIMARY KEY,
+  snapshot_date TEXT NOT NULL,
+  contract_version TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  source_semantic_sha256 TEXT NOT NULL,
+  source_mapping_semantic_sha256 TEXT NOT NULL,
+  source_database_sha256 TEXT,
+  input_manifest_sha256 TEXT,
+  input_releases_json TEXT NOT NULL DEFAULT '{}',
+  counts_json TEXT NOT NULL DEFAULT '{}',
+  real_data_only INTEGER NOT NULL DEFAULT 1 CHECK (real_data_only IN (0, 1)),
+  public_identity_retained INTEGER NOT NULL DEFAULT 1
+    CHECK (public_identity_retained IN (0, 1)),
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_source_mappings (
+  source_mapping_id TEXT PRIMARY KEY,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  input_database_key TEXT NOT NULL,
+  upstream_source_id TEXT NOT NULL,
+  graph_source_id TEXT NOT NULL
+    REFERENCES sources(source_id) ON DELETE RESTRICT,
+  source_metadata_sha256 TEXT NOT NULL,
+  mapping_reason TEXT NOT NULL CHECK (
+    mapping_reason IN (
+      'unique_upstream_id', 'identical_metadata',
+      'metadata_conflict_namespaced'
+    )
+  ),
+  created_at TEXT NOT NULL,
+  UNIQUE (release_id, input_database_key, upstream_source_id)
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_nodes (
+  actor_id TEXT PRIMARY KEY,
+  actor_kind TEXT NOT NULL CHECK (
+    actor_kind IN ('person', 'organization', 'office', 'collective', 'unknown')
+  ),
+  actor_subtype TEXT NOT NULL,
+  identity_scope TEXT NOT NULL CHECK (
+    identity_scope IN ('source_scoped', 'resolved')
+  ),
+  source_scope_id TEXT NOT NULL,
+  stable_source_key TEXT NOT NULL,
+  first_release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  created_at TEXT NOT NULL,
+  UNIQUE (actor_kind, source_scope_id, stable_source_key)
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_node_versions (
+  node_version_id TEXT PRIMARY KEY,
+  actor_id TEXT NOT NULL
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  canonical_label TEXT NOT NULL,
+  normalized_label TEXT,
+  identity_state TEXT NOT NULL CHECK (
+    identity_state IN (
+      'source_scoped', 'resolved', 'disputed', 'superseded', 'unresolved'
+    )
+  ),
+  valid_from TEXT,
+  valid_to TEXT,
+  observed_at TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT,
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  provenance_state TEXT NOT NULL CHECK (
+    provenance_state IN (
+      'exact_record', 'exact_document', 'source_default',
+      'normalized_registry', 'missing'
+    )
+  ),
+  attributes_json TEXT NOT NULL DEFAULT '{}',
+  supersedes_node_version_id TEXT
+    REFERENCES actor_graph_node_versions(node_version_id) ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (actor_id, release_id)
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_identifier_versions (
+  identifier_version_id TEXT PRIMARY KEY,
+  actor_id TEXT NOT NULL
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  namespace TEXT NOT NULL,
+  value TEXT NOT NULL,
+  valid_from TEXT,
+  valid_to TEXT,
+  observed_at TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  provenance_state TEXT NOT NULL CHECK (
+    provenance_state IN (
+      'exact_record', 'exact_document', 'source_default',
+      'normalized_registry', 'missing'
+    )
+  ),
+  created_at TEXT NOT NULL,
+  UNIQUE (actor_id, release_id, namespace, value)
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_alias_versions (
+  alias_version_id TEXT PRIMARY KEY,
+  actor_id TEXT NOT NULL
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  alias TEXT NOT NULL,
+  normalized_alias TEXT NOT NULL,
+  valid_from TEXT,
+  valid_to TEXT,
+  observed_at TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT,
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  provenance_state TEXT NOT NULL CHECK (
+    provenance_state IN (
+      'exact_record', 'exact_document', 'source_default',
+      'normalized_registry', 'missing'
+    )
+  ),
+  created_at TEXT NOT NULL,
+  UNIQUE (actor_id, release_id, normalized_alias, alias)
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_relationships (
+  relationship_id TEXT PRIMARY KEY,
+  subject_actor_id TEXT NOT NULL
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  relationship_type TEXT NOT NULL CHECK (
+    relationship_type IN (
+      'holds_role_at', 'affiliated_with_party', 'candidate_for',
+      'effective_candidate_for', 'elected_in',
+      'member_of_parliamentary_group', 'member_of_organization',
+      'acts_in_spending_item', 'party_to_agreement',
+      'participates_in_meeting', 'acts_in_geopolitical_action',
+      'publishes_manifesto', 'member_of_coalition',
+      'predecessor_of', 'successor_of'
+    )
+  ),
+  object_actor_id TEXT
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  context_kind TEXT NOT NULL,
+  context_id TEXT NOT NULL,
+  created_release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  created_at TEXT NOT NULL,
+  UNIQUE (
+    subject_actor_id, relationship_type, object_actor_id,
+    context_kind, context_id
+  )
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_relationship_versions (
+  relationship_version_id TEXT PRIMARY KEY,
+  relationship_id TEXT NOT NULL
+    REFERENCES actor_graph_relationships(relationship_id) ON DELETE CASCADE,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  role_label TEXT,
+  valid_from TEXT,
+  valid_to TEXT,
+  observed_at TEXT NOT NULL,
+  is_present INTEGER NOT NULL DEFAULT 1 CHECK (is_present IN (0, 1)),
+  resolution_state TEXT NOT NULL CHECK (
+    resolution_state IN (
+      'source_scoped', 'exact_identifier_match', 'reviewed_match',
+      'reviewed_no_match', 'conflict', 'unresolved', 'superseded'
+    )
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT,
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  attributes_json TEXT NOT NULL DEFAULT '{}',
+  supersedes_relationship_version_id TEXT
+    REFERENCES actor_graph_relationship_versions(relationship_version_id)
+    ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (relationship_id, release_id)
+);
+
+CREATE TABLE IF NOT EXISTS actor_graph_relationship_evidence (
+  relationship_evidence_id TEXT PRIMARY KEY,
+  relationship_version_id TEXT NOT NULL
+    REFERENCES actor_graph_relationship_versions(relationship_version_id)
+    ON DELETE CASCADE,
+  evidence_kind TEXT NOT NULL CHECK (
+    evidence_kind IN (
+      'exact_record', 'exact_document', 'source_default',
+      'normalized_registry', 'missing'
+    )
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT,
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  source_locator TEXT NOT NULL,
+  exact_quote TEXT,
+  observed_at TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (relationship_version_id, source_locator)
+);
+
+CREATE TABLE IF NOT EXISTS actor_resolution_decisions (
+  resolution_decision_id TEXT PRIMARY KEY,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  source_actor_id TEXT NOT NULL
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  candidate_actor_id TEXT
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  outcome TEXT NOT NULL CHECK (
+    outcome IN (
+      'source_scoped', 'exact_identifier_match', 'reviewed_match',
+      'reviewed_no_match', 'conflict', 'unresolved', 'superseded'
+    )
+  ),
+  method TEXT NOT NULL,
+  confidence TEXT NOT NULL CHECK (
+    confidence IN ('not_scored', 'exact', 'reviewed', 'conflict')
+  ),
+  decided_by_kind TEXT NOT NULL CHECK (
+    decided_by_kind IN ('system_exact', 'human_reviewer', 'imported_source')
+  ),
+  decided_by TEXT NOT NULL,
+  observed_at TEXT NOT NULL,
+  valid_from TEXT,
+  valid_to TEXT,
+  rationale TEXT NOT NULL,
+  supersedes_decision_id TEXT
+    REFERENCES actor_resolution_decisions(resolution_decision_id)
+    ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (release_id, source_actor_id, candidate_actor_id, outcome, method)
+);
+
+CREATE TABLE IF NOT EXISTS actor_resolution_evidence (
+  resolution_evidence_id TEXT PRIMARY KEY,
+  resolution_decision_id TEXT NOT NULL
+    REFERENCES actor_resolution_decisions(resolution_decision_id)
+    ON DELETE CASCADE,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT,
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  source_locator TEXT NOT NULL,
+  exact_quote TEXT,
+  observed_at TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (resolution_decision_id, source_locator)
+);
+
+CREATE TABLE IF NOT EXISTS actor_organization_change_events (
+  organization_change_event_id TEXT PRIMARY KEY,
+  release_id TEXT NOT NULL
+    REFERENCES actor_graph_releases(release_id) ON DELETE RESTRICT,
+  event_type TEXT NOT NULL CHECK (
+    event_type IN (
+      'renamed', 'merged_into', 'split_into', 'absorbed_by',
+      'superseded_by', 'founded', 'dissolved'
+    )
+  ),
+  subject_actor_id TEXT NOT NULL
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  object_actor_id TEXT
+    REFERENCES actor_graph_nodes(actor_id) ON DELETE CASCADE,
+  effective_date TEXT,
+  effective_date_state TEXT NOT NULL CHECK (
+    effective_date_state IN ('exact', 'partial', 'unknown')
+  ),
+  observed_at TEXT NOT NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_id TEXT,
+  source_url TEXT,
+  source_content_sha256 TEXT,
+  supersedes_event_id TEXT
+    REFERENCES actor_organization_change_events(organization_change_event_id)
+    ON DELETE SET NULL,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS actor_organization_change_evidence (
+  organization_change_evidence_id TEXT PRIMARY KEY,
+  organization_change_event_id TEXT NOT NULL
+    REFERENCES actor_organization_change_events(organization_change_event_id)
+    ON DELETE CASCADE,
+  source_locator TEXT NOT NULL,
+  exact_quote TEXT,
+  created_at TEXT NOT NULL,
+  UNIQUE (organization_change_event_id, source_locator)
+);
+
+CREATE INDEX IF NOT EXISTS idx_actor_graph_nodes_scope
+ON actor_graph_nodes(source_scope_id, actor_kind, actor_subtype, stable_source_key);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_source_mappings_upstream
+ON actor_graph_source_mappings(
+  upstream_source_id, input_database_key, release_id
+);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_source_mappings_graph
+ON actor_graph_source_mappings(graph_source_id, release_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_node_versions_release_kind
+ON actor_graph_node_versions(release_id, identity_state, actor_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_node_versions_label
+ON actor_graph_node_versions(normalized_label, actor_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_identifiers_lookup
+ON actor_graph_identifier_versions(namespace, value, release_id, actor_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_aliases_lookup
+ON actor_graph_alias_versions(normalized_alias, release_id, actor_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_relationships_subject
+ON actor_graph_relationships(subject_actor_id, relationship_type, context_kind, context_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_relationships_object
+ON actor_graph_relationships(object_actor_id, relationship_type, context_kind, context_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_relationship_versions_release_time
+ON actor_graph_relationship_versions(release_id, source_id, valid_from, valid_to, relationship_id);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_resolution_source
+ON actor_resolution_decisions(source_actor_id, observed_at, outcome);
+CREATE INDEX IF NOT EXISTS idx_actor_graph_resolution_candidate
+ON actor_resolution_decisions(candidate_actor_id, observed_at, outcome);
+CREATE INDEX IF NOT EXISTS idx_actor_org_change_subject_time
+ON actor_organization_change_events(subject_actor_id, effective_date, event_type);
+
 -- Electoral: Infoelectoral (area de descargas)
 CREATE TABLE IF NOT EXISTS infoelectoral_convocatoria_tipos (
   tipo_convocatoria TEXT PRIMARY KEY,
@@ -568,6 +903,302 @@ CREATE TABLE IF NOT EXISTS infoelectoral_candidate_observations (
   last_observed_at TEXT NOT NULL,
   UNIQUE (candidate_occurrence_id, snapshot_date, source_content_sha256)
 );
+
+-- Electoral: candidate proclamations published as immutable BOE documents.
+-- This lane remains source-scoped. It never infers that a matching name is the
+-- same person in another election or source, and it preserves the exact public
+-- paragraph alongside the parsed public name.
+CREATE TABLE IF NOT EXISTS boe_election_candidate_documents (
+  document_id TEXT PRIMARY KEY,
+  election_id TEXT NOT NULL,
+  election_date TEXT NOT NULL,
+  election_type_code TEXT NOT NULL,
+  publication_date TEXT NOT NULL,
+  title TEXT NOT NULL,
+  document_source_record_pk INTEGER NOT NULL UNIQUE
+    REFERENCES source_records(source_record_pk),
+  source_url TEXT NOT NULL UNIQUE,
+  source_content_sha256 TEXT NOT NULL,
+  source_bytes INTEGER NOT NULL CHECK (source_bytes > 0),
+  raw_path TEXT NOT NULL,
+  correction_state TEXT NOT NULL
+    CHECK (correction_state IN ('none_declared', 'pending', 'applied')),
+  correction_refs_json TEXT NOT NULL DEFAULT '[]',
+  candidacy_rows INTEGER NOT NULL DEFAULT 0 CHECK (candidacy_rows >= 0),
+  candidate_rows INTEGER NOT NULL DEFAULT 0 CHECK (candidate_rows >= 0),
+  parser_version TEXT NOT NULL,
+  first_seen_snapshot_date TEXT NOT NULL,
+  last_seen_snapshot_date TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS boe_election_candidacies (
+  candidacy_id TEXT PRIMARY KEY,
+  document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_documents(document_id),
+  electoral_board TEXT NOT NULL DEFAULT '',
+  electoral_district TEXT NOT NULL DEFAULT '',
+  chamber_code TEXT NOT NULL,
+  candidacy_number INTEGER NOT NULL CHECK (candidacy_number >= 1),
+  candidacy_name TEXT NOT NULL,
+  source_text_exact TEXT NOT NULL,
+  proclamation_status TEXT NOT NULL
+    CHECK (proclamation_status IN ('proclaimed', 'not_proclaimed')),
+  source_paragraph_number INTEGER NOT NULL
+    CHECK (source_paragraph_number >= 1),
+  party_id INTEGER REFERENCES parties(party_id),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (
+    document_id, electoral_board, electoral_district, chamber_code,
+    candidacy_number
+  )
+);
+
+CREATE TABLE IF NOT EXISTS boe_election_candidate_occurrences (
+  candidate_occurrence_id TEXT PRIMARY KEY,
+  candidacy_id TEXT NOT NULL REFERENCES boe_election_candidacies(candidacy_id),
+  document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_documents(document_id),
+  election_id TEXT NOT NULL,
+  election_date TEXT NOT NULL,
+  election_type_code TEXT NOT NULL,
+  electoral_board TEXT NOT NULL DEFAULT '',
+  electoral_district TEXT NOT NULL DEFAULT '',
+  chamber_code TEXT NOT NULL,
+  candidacy_number INTEGER NOT NULL CHECK (candidacy_number >= 1),
+  candidate_order INTEGER NOT NULL CHECK (candidate_order >= 1),
+  candidate_type_code TEXT NOT NULL
+    CHECK (candidate_type_code IN ('titular', 'suplente')),
+  substitute_for_candidate_order INTEGER
+    CHECK (
+      substitute_for_candidate_order IS NULL
+      OR substitute_for_candidate_order >= 1
+    ),
+  full_name TEXT NOT NULL,
+  source_text_exact TEXT NOT NULL,
+  person_id INTEGER NOT NULL REFERENCES persons(person_id),
+  party_id INTEGER NOT NULL REFERENCES parties(party_id),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL UNIQUE REFERENCES source_records(source_record_pk),
+  document_source_record_pk INTEGER NOT NULL
+    REFERENCES source_records(source_record_pk),
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  source_paragraph_number INTEGER NOT NULL
+    CHECK (source_paragraph_number >= 1),
+  row_content_sha256 TEXT NOT NULL,
+  first_seen_snapshot_date TEXT NOT NULL,
+  last_seen_snapshot_date TEXT NOT NULL,
+  is_present INTEGER NOT NULL DEFAULT 1 CHECK (is_present IN (0, 1)),
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (
+    candidacy_id, candidate_type_code, candidate_order,
+    substitute_for_candidate_order
+  )
+);
+
+-- Immutable correction evidence. Paragraphs remain exact and unapplied until a
+-- correction materializer proves the affected candidate slots and resulting
+-- effective election snapshot.
+CREATE TABLE IF NOT EXISTS boe_election_candidate_correction_documents (
+  correction_document_id TEXT PRIMARY KEY,
+  publication_date TEXT NOT NULL,
+  title TEXT NOT NULL,
+  document_source_record_pk INTEGER NOT NULL UNIQUE
+    REFERENCES source_records(source_record_pk),
+  source_url TEXT NOT NULL UNIQUE,
+  source_content_sha256 TEXT NOT NULL,
+  source_bytes INTEGER NOT NULL CHECK (source_bytes > 0),
+  raw_path TEXT NOT NULL,
+  paragraph_rows INTEGER NOT NULL CHECK (paragraph_rows >= 1),
+  application_state TEXT NOT NULL
+    CHECK (application_state IN ('captured_unapplied', 'applied')),
+  parser_version TEXT NOT NULL,
+  first_seen_snapshot_date TEXT NOT NULL,
+  last_seen_snapshot_date TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS boe_election_candidate_correction_targets (
+  correction_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_correction_documents(
+      correction_document_id
+    ),
+  base_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_documents(document_id),
+  relation_basis TEXT NOT NULL
+    CHECK (relation_basis IN ('official_metadata', 'correction_body_scope')),
+  created_at TEXT NOT NULL,
+  PRIMARY KEY (correction_document_id, base_document_id)
+) WITHOUT ROWID;
+
+CREATE TABLE IF NOT EXISTS boe_election_candidate_correction_paragraphs (
+  correction_paragraph_id TEXT PRIMARY KEY,
+  correction_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_correction_documents(
+      correction_document_id
+    ),
+  source_paragraph_number INTEGER NOT NULL
+    CHECK (source_paragraph_number >= 1),
+  source_css_class TEXT NOT NULL,
+  source_text_exact TEXT NOT NULL,
+  normalized_text TEXT NOT NULL,
+  semantic_marker TEXT NOT NULL,
+  electoral_board TEXT NOT NULL DEFAULT '',
+  electoral_district TEXT NOT NULL DEFAULT '',
+  chamber_code TEXT NOT NULL DEFAULT '',
+  candidacy_number INTEGER CHECK (candidacy_number IS NULL OR candidacy_number >= 1),
+  created_at TEXT NOT NULL,
+  UNIQUE (correction_document_id, source_paragraph_number)
+) WITHOUT ROWID;
+
+-- Validated semantic effects derived from immutable official correction text.
+-- Base proclamation rows are never updated or deleted. before_value_json and
+-- after_value_json make every materialized change independently reconstructable.
+CREATE TABLE IF NOT EXISTS boe_election_candidate_correction_operations (
+  correction_operation_id TEXT PRIMARY KEY,
+  correction_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_correction_documents(
+      correction_document_id
+    ),
+  base_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_documents(document_id),
+  candidacy_id TEXT NOT NULL REFERENCES boe_election_candidacies(candidacy_id),
+  operation_order INTEGER NOT NULL CHECK (operation_order >= 1),
+  operation_type TEXT NOT NULL
+    CHECK (operation_type IN (
+      'replace_candidacy_name',
+      'replace_candidate_slot',
+      'replace_candidate_list',
+      'replace_candidacy_status_and_list'
+    )),
+  base_match_state TEXT NOT NULL
+    CHECK (base_match_state IN (
+      'before_matches',
+      'already_effective_after_matches',
+      'partial_base_matches',
+      'replacement_scope_matches'
+    )),
+  candidate_type_code TEXT
+    CHECK (
+      candidate_type_code IS NULL
+      OR candidate_type_code IN ('titular', 'suplente', 'all')
+    ),
+  candidate_order INTEGER
+    CHECK (candidate_order IS NULL OR candidate_order >= 1),
+  substitute_for_candidate_order INTEGER
+    CHECK (
+      substitute_for_candidate_order IS NULL
+      OR substitute_for_candidate_order >= 1
+    ),
+  before_value_json TEXT NOT NULL,
+  after_value_json TEXT NOT NULL,
+  evidence_paragraph_numbers_json TEXT NOT NULL,
+  evidence_text_sha256 TEXT NOT NULL,
+  materializer_version TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (correction_document_id, base_document_id, operation_order)
+);
+
+-- Current effective candidacy state. Original proclamation state remains in
+-- boe_election_candidacies; correction_operation_id points to the last change.
+CREATE TABLE IF NOT EXISTS boe_election_effective_candidacies (
+  candidacy_id TEXT PRIMARY KEY REFERENCES boe_election_candidacies(candidacy_id),
+  base_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_documents(document_id),
+  election_id TEXT NOT NULL,
+  election_date TEXT NOT NULL,
+  election_type_code TEXT NOT NULL,
+  electoral_board TEXT NOT NULL DEFAULT '',
+  electoral_district TEXT NOT NULL DEFAULT '',
+  chamber_code TEXT NOT NULL,
+  candidacy_number INTEGER NOT NULL CHECK (candidacy_number >= 1),
+  candidacy_name TEXT NOT NULL,
+  party_id INTEGER REFERENCES parties(party_id),
+  proclamation_status TEXT NOT NULL
+    CHECK (proclamation_status IN ('proclaimed', 'not_proclaimed')),
+  effective_source_document_id TEXT NOT NULL,
+  effective_source_url TEXT NOT NULL,
+  effective_source_content_sha256 TEXT NOT NULL,
+  source_text_exact TEXT NOT NULL,
+  source_paragraph_number INTEGER NOT NULL
+    CHECK (source_paragraph_number >= 1),
+  correction_operation_id TEXT
+    REFERENCES boe_election_candidate_correction_operations(
+      correction_operation_id
+    ),
+  materialized_at TEXT NOT NULL
+);
+
+-- Current effective source-scoped candidate slots. Corrected rows remain exact
+-- public evidence and do not imply identity equivalence with another source.
+CREATE TABLE IF NOT EXISTS boe_election_effective_candidate_occurrences (
+  effective_candidate_occurrence_id TEXT PRIMARY KEY,
+  candidacy_id TEXT NOT NULL
+    REFERENCES boe_election_effective_candidacies(candidacy_id),
+  base_candidate_occurrence_id TEXT
+    REFERENCES boe_election_candidate_occurrences(candidate_occurrence_id),
+  base_document_id TEXT NOT NULL
+    REFERENCES boe_election_candidate_documents(document_id),
+  election_id TEXT NOT NULL,
+  election_date TEXT NOT NULL,
+  election_type_code TEXT NOT NULL,
+  electoral_board TEXT NOT NULL DEFAULT '',
+  electoral_district TEXT NOT NULL DEFAULT '',
+  chamber_code TEXT NOT NULL,
+  candidacy_number INTEGER NOT NULL CHECK (candidacy_number >= 1),
+  candidate_order INTEGER NOT NULL CHECK (candidate_order >= 1),
+  candidate_type_code TEXT NOT NULL
+    CHECK (candidate_type_code IN ('titular', 'suplente')),
+  substitute_for_candidate_order INTEGER
+    CHECK (
+      substitute_for_candidate_order IS NULL
+      OR substitute_for_candidate_order >= 1
+    ),
+  full_name TEXT NOT NULL,
+  person_id INTEGER REFERENCES persons(person_id),
+  party_id INTEGER REFERENCES parties(party_id),
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER UNIQUE REFERENCES source_records(source_record_pk),
+  document_source_record_pk INTEGER REFERENCES source_records(source_record_pk),
+  effective_source_document_id TEXT NOT NULL,
+  effective_source_url TEXT NOT NULL,
+  effective_source_content_sha256 TEXT NOT NULL,
+  source_text_exact TEXT NOT NULL,
+  source_paragraph_number INTEGER NOT NULL
+    CHECK (source_paragraph_number >= 1),
+  correction_operation_id TEXT
+    REFERENCES boe_election_candidate_correction_operations(
+      correction_operation_id
+    ),
+  row_content_sha256 TEXT NOT NULL,
+  first_seen_snapshot_date TEXT,
+  last_seen_snapshot_date TEXT,
+  is_present INTEGER CHECK (is_present IN (0, 1)),
+  person_identity_state TEXT
+    CHECK (
+      person_identity_state IS NULL
+      OR person_identity_state IN (
+        'source_scoped_base_exact',
+        'source_scoped_correction_exact'
+      )
+    ),
+  materialized_at TEXT NOT NULL,
+  UNIQUE (
+    candidacy_id, candidate_type_code, candidate_order,
+    substitute_for_candidate_order
+  )
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_boe_effective_candidate_source_record
+  ON boe_election_effective_candidate_occurrences(source_record_pk)
+  WHERE source_record_pk IS NOT NULL;
 
 -- Parlamentario: votaciones (roll-call cuando exista)
 CREATE TABLE IF NOT EXISTS parl_vote_events (
@@ -928,6 +1559,315 @@ CREATE TABLE IF NOT EXISTS text_documents (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
+
+-- Canonical manifesto/commitment documents and their page-addressable claims.
+-- Raw bytes and full extracted text stay outside SQLite; exact bounded quotes
+-- remain here so every published claim is independently auditable.
+CREATE TABLE IF NOT EXISTS manifesto_documents (
+  manifesto_document_id TEXT PRIMARY KEY,
+  text_document_id INTEGER REFERENCES text_documents(text_document_id) ON DELETE SET NULL,
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  party_id INTEGER NOT NULL REFERENCES parties(party_id) ON DELETE RESTRICT,
+  document_kind TEXT NOT NULL CHECK (document_kind IN (
+    'manifesto','coalition_agreement','policy_platform',
+    'investiture_agreement','other_official_commitment'
+  )),
+  title TEXT NOT NULL,
+  election_key TEXT,
+  jurisdiction TEXT,
+  language TEXT,
+  published_date TEXT,
+  snapshot_date TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL,
+  bytes INTEGER NOT NULL CHECK (bytes > 0),
+  page_count INTEGER CHECK (page_count IS NULL OR page_count > 0),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (party_id, election_key, source_url, content_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS claim_extraction_runs (
+  claim_extraction_run_id TEXT PRIMARY KEY,
+  manifesto_document_id TEXT NOT NULL
+    REFERENCES manifesto_documents(manifesto_document_id) ON DELETE CASCADE,
+  pipeline_version TEXT NOT NULL,
+  segmentation_version TEXT NOT NULL,
+  topic_codebook_version TEXT NOT NULL,
+  config_sha256 TEXT NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('running','ok','error')),
+  started_at TEXT NOT NULL,
+  finished_at TEXT,
+  pages_seen INTEGER NOT NULL DEFAULT 0,
+  segments_seen INTEGER NOT NULL DEFAULT 0,
+  claims_loaded INTEGER NOT NULL DEFAULT 0,
+  promises_loaded INTEGER NOT NULL DEFAULT 0,
+  publishable_claims INTEGER NOT NULL DEFAULT 0,
+  message TEXT,
+  UNIQUE (
+    manifesto_document_id, pipeline_version, segmentation_version,
+    topic_codebook_version, config_sha256
+  )
+);
+
+CREATE TABLE IF NOT EXISTS claims (
+  claim_id TEXT PRIMARY KEY,
+  manifesto_document_id TEXT NOT NULL
+    REFERENCES manifesto_documents(manifesto_document_id) ON DELETE CASCADE,
+  claim_extraction_run_id TEXT NOT NULL
+    REFERENCES claim_extraction_runs(claim_extraction_run_id) ON DELETE RESTRICT,
+  party_id INTEGER NOT NULL REFERENCES parties(party_id) ON DELETE RESTRICT,
+  attributed_actor_label TEXT NOT NULL,
+  claim_kind TEXT NOT NULL CHECK (claim_kind IN (
+    'explicit_promise','soft_commitment','preference','slogan',
+    'coalition_commitment','issue_position','context'
+  )),
+  exact_text TEXT NOT NULL,
+  normalized_text TEXT NOT NULL,
+  language TEXT,
+  page_start INTEGER NOT NULL CHECK (page_start > 0),
+  page_end INTEGER NOT NULL CHECK (page_end >= page_start),
+  section_path TEXT,
+  document_ordinal INTEGER NOT NULL CHECK (document_ordinal >= 0),
+  extraction_method TEXT NOT NULL,
+  extraction_version TEXT NOT NULL,
+  extraction_confidence REAL CHECK (
+    extraction_confidence IS NULL OR extraction_confidence BETWEEN 0.0 AND 1.0
+  ),
+  review_status TEXT NOT NULL DEFAULT 'pending' CHECK (review_status IN (
+    'pending','rule_confirmed','human_confirmed','rejected','needs_context'
+  )),
+  review_method TEXT,
+  reviewed_at TEXT,
+  claim_status TEXT NOT NULL DEFAULT 'active' CHECK (claim_status IN (
+    'active','withdrawn','corrected','superseded','disputed'
+  )),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (manifesto_document_id, page_start, page_end, document_ordinal, exact_text)
+);
+
+CREATE TABLE IF NOT EXISTS claim_evidence (
+  claim_evidence_id TEXT PRIMARY KEY,
+  claim_id TEXT NOT NULL REFERENCES claims(claim_id) ON DELETE CASCADE,
+  text_document_id INTEGER REFERENCES text_documents(text_document_id) ON DELETE SET NULL,
+  evidence_role TEXT NOT NULL CHECK (evidence_role IN (
+    'primary','context','contradicting','correcting','superseding'
+  )),
+  source_url TEXT NOT NULL,
+  document_sha256 TEXT NOT NULL,
+  page_start INTEGER NOT NULL CHECK (page_start > 0),
+  page_end INTEGER NOT NULL CHECK (page_end >= page_start),
+  char_start INTEGER,
+  char_end INTEGER,
+  exact_quote TEXT NOT NULL,
+  quote_sha256 TEXT NOT NULL,
+  extraction_method TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (claim_id, evidence_role, document_sha256, page_start, page_end, quote_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS promises (
+  promise_id TEXT PRIMARY KEY,
+  claim_id TEXT NOT NULL UNIQUE REFERENCES claims(claim_id) ON DELETE CASCADE,
+  commitment_strength TEXT NOT NULL CHECK (commitment_strength IN (
+    'explicit','strong','conditional','aspirational','unclear'
+  )),
+  action_text TEXT,
+  object_text TEXT,
+  target_population TEXT,
+  target_territory TEXT,
+  deadline_text TEXT,
+  conditions_text TEXT,
+  measurability_state TEXT NOT NULL CHECK (measurability_state IN (
+    'measurable','partially_measurable','not_measurable','unknown'
+  )),
+  measurable_criteria_json TEXT NOT NULL DEFAULT '[]',
+  observation_status TEXT NOT NULL DEFAULT 'not_assessed' CHECK (observation_status IN (
+    'not_assessed','unknown','no_evidence','in_progress','fulfilled',
+    'partially_fulfilled','not_fulfilled','superseded','not_applicable'
+  )),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS claim_topics (
+  claim_topic_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  claim_id TEXT NOT NULL REFERENCES claims(claim_id) ON DELETE CASCADE,
+  topic_id INTEGER NOT NULL REFERENCES topics(topic_id) ON DELETE CASCADE,
+  assignment_method TEXT NOT NULL,
+  assignment_version TEXT NOT NULL,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0.0 AND 1.0),
+  review_status TEXT NOT NULL DEFAULT 'rule_assigned' CHECK (review_status IN (
+    'rule_assigned','human_confirmed','rejected'
+  )),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (claim_id, topic_id, assignment_method, assignment_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_manifesto_documents_party_election
+  ON manifesto_documents(party_id, election_key, published_date);
+CREATE INDEX IF NOT EXISTS idx_manifesto_documents_source_hash
+  ON manifesto_documents(source_id, content_sha256);
+CREATE INDEX IF NOT EXISTS idx_claim_extraction_runs_document_status
+  ON claim_extraction_runs(manifesto_document_id, status, finished_at);
+CREATE INDEX IF NOT EXISTS idx_claims_document_page
+  ON claims(manifesto_document_id, page_start, document_ordinal);
+CREATE INDEX IF NOT EXISTS idx_claims_party_kind_review
+  ON claims(party_id, claim_kind, review_status, page_start);
+CREATE INDEX IF NOT EXISTS idx_claim_evidence_claim_role
+  ON claim_evidence(claim_id, evidence_role);
+CREATE INDEX IF NOT EXISTS idx_promises_observation_measurability
+  ON promises(observation_status, measurability_state);
+CREATE INDEX IF NOT EXISTS idx_claim_topics_topic_claim
+  ON claim_topics(topic_id, claim_id);
+
+-- Versioned promise/position -> later action comparisons. Source records live
+-- in their owning databases; this layer preserves their stable IDs, exact
+-- public evidence, and the explicit review that makes a comparison defensible.
+CREATE TABLE IF NOT EXISTS comparison_releases (
+  comparison_release_id TEXT PRIMARY KEY,
+  schema_version TEXT NOT NULL,
+  method_version TEXT NOT NULL,
+  mapping_review_version TEXT NOT NULL,
+  snapshot_date TEXT NOT NULL,
+  generated_at TEXT NOT NULL,
+  promises_source_scope_sha256 TEXT NOT NULL,
+  actions_source_scope_sha256 TEXT NOT NULL,
+  actor_source_scope_sha256 TEXT NOT NULL,
+  actor_graph_release_id TEXT NOT NULL,
+  reviewed_mappings_sha256 TEXT NOT NULL,
+  semantic_sha256 TEXT NOT NULL,
+  comparison_count INTEGER NOT NULL CHECK (comparison_count >= 0),
+  evidence_count INTEGER NOT NULL CHECK (evidence_count >= 0),
+  status_counts_json TEXT NOT NULL,
+  source_manifest_json TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS comparison_mapping_reviews (
+  mapping_review_id TEXT PRIMARY KEY,
+  comparison_release_id TEXT NOT NULL
+    REFERENCES comparison_releases(comparison_release_id) ON DELETE CASCADE,
+  claim_id TEXT NOT NULL,
+  promise_id TEXT,
+  action_kind TEXT NOT NULL CHECK (
+    action_kind IN ('roll_call_vote', 'bounded_action_search')
+  ),
+  action_id TEXT,
+  action_search_state TEXT NOT NULL CHECK (action_search_state IN (
+    'not_applicable','no_reviewed_action_found'
+  )),
+  action_search_scope_json TEXT NOT NULL DEFAULT '{}',
+  claim_actor_id TEXT NOT NULL,
+  action_actor_id TEXT,
+  action_registry_actor_id TEXT,
+  action_party_actor_id TEXT,
+  affiliation_relationship_id TEXT,
+  actor_link_state TEXT NOT NULL CHECK (actor_link_state IN (
+    'reviewed_official_identity_and_affiliation',
+    'claim_actor_only_no_action'
+  )),
+  review_outcome TEXT NOT NULL CHECK (review_outcome IN (
+    'aligned','conflicted','insufficient_evidence','ambiguous_mapping',
+    'changed_framing','not_comparable'
+  )),
+  claim_direction TEXT NOT NULL CHECK (claim_direction IN ('support','oppose','unclear')),
+  action_direction TEXT NOT NULL CHECK (action_direction IN (
+    'support','oppose','unclear','not_applicable'
+  )),
+  action_substance_state TEXT NOT NULL CHECK (action_substance_state IN (
+    'substantive','procedural','unknown','not_applicable'
+  )),
+  mapping_basis TEXT NOT NULL CHECK (mapping_basis IN (
+    'exact_measure','reviewed_related_measure','broad_topic_only',
+    'procedural_near_match','bounded_search_no_reviewed_action'
+  )),
+  review_method TEXT NOT NULL CHECK (review_method = 'explicit_evidence_review'),
+  review_version TEXT NOT NULL,
+  review_rationale TEXT NOT NULL,
+  directional_countable INTEGER NOT NULL DEFAULT 0 CHECK (directional_countable IN (0, 1)),
+  reviewed_at TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (comparison_release_id, claim_id, action_kind, action_id)
+);
+
+CREATE TABLE IF NOT EXISTS promise_action_comparisons (
+  comparison_id TEXT PRIMARY KEY,
+  comparison_release_id TEXT NOT NULL
+    REFERENCES comparison_releases(comparison_release_id) ON DELETE CASCADE,
+  mapping_review_id TEXT NOT NULL UNIQUE
+    REFERENCES comparison_mapping_reviews(mapping_review_id) ON DELETE CASCADE,
+  claim_id TEXT NOT NULL,
+  promise_id TEXT,
+  claim_kind TEXT NOT NULL,
+  claim_actor_label TEXT NOT NULL,
+  claim_actor_id TEXT NOT NULL,
+  claim_text TEXT NOT NULL,
+  claim_page_start INTEGER NOT NULL CHECK (claim_page_start > 0),
+  claim_page_end INTEGER NOT NULL CHECK (claim_page_end >= claim_page_start),
+  claim_published_date TEXT,
+  claim_review_status TEXT NOT NULL,
+  action_kind TEXT NOT NULL CHECK (
+    action_kind IN ('roll_call_vote', 'bounded_action_search')
+  ),
+  action_id TEXT,
+  action_search_state TEXT NOT NULL CHECK (action_search_state IN (
+    'not_applicable','no_reviewed_action_found'
+  )),
+  action_search_scope_json TEXT NOT NULL DEFAULT '{}',
+  action_date TEXT,
+  action_title TEXT,
+  action_member_name TEXT,
+  action_vote_choice TEXT,
+  action_actor_id TEXT,
+  action_party_actor_id TEXT,
+  action_source_id TEXT,
+  action_source_url TEXT,
+  comparison_status TEXT NOT NULL CHECK (comparison_status IN (
+    'aligned','conflicted','insufficient_evidence','ambiguous_mapping',
+    'changed_framing','not_comparable'
+  )),
+  directional_countable INTEGER NOT NULL DEFAULT 0 CHECK (directional_countable IN (0, 1)),
+  public_summary TEXT NOT NULL,
+  caveat TEXT NOT NULL,
+  decided_at TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (comparison_release_id, claim_id, action_kind, action_id)
+);
+
+CREATE TABLE IF NOT EXISTS comparison_evidence (
+  comparison_evidence_id TEXT PRIMARY KEY,
+  comparison_id TEXT NOT NULL
+    REFERENCES promise_action_comparisons(comparison_id) ON DELETE CASCADE,
+  evidence_side TEXT NOT NULL CHECK (evidence_side IN (
+    'claim','action','actor_link','mapping_review'
+  )),
+  evidence_role TEXT NOT NULL CHECK (evidence_role IN (
+    'primary','context','identity','review'
+  )),
+  source_id TEXT NOT NULL,
+  source_record_id TEXT,
+  source_url TEXT,
+  content_sha256 TEXT,
+  exact_quote TEXT,
+  observed_at TEXT,
+  metadata_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  UNIQUE (comparison_id, evidence_side, evidence_role, source_id, source_record_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_comparison_reviews_release_status
+  ON comparison_mapping_reviews(comparison_release_id, review_outcome, claim_id);
+CREATE INDEX IF NOT EXISTS idx_comparisons_release_status
+  ON promise_action_comparisons(comparison_release_id, comparison_status, claim_id);
+CREATE INDEX IF NOT EXISTS idx_comparisons_action
+  ON promise_action_comparisons(action_kind, action_id, comparison_status);
+CREATE INDEX IF NOT EXISTS idx_comparison_evidence_comparison_side
+  ON comparison_evidence(comparison_id, evidence_side, evidence_role);
 
 -- Generic fetch status table for large, multi-stage backfills.
 -- Used to avoid re-trying permanently blocked URLs (e.g. 403/404) unless explicitly requested.
@@ -1586,6 +2526,818 @@ CREATE TABLE IF NOT EXISTS policy_event_axis_scores (
   UNIQUE (policy_event_id, policy_axis_id, method)
 );
 
+-- Agreements, meetings, public agendas, lobbying disclosures, and influence.
+-- Facts stay in the meeting/agreement tables. Any influence interpretation is
+-- isolated in influence_assertions and cannot silently become a source fact.
+CREATE TABLE IF NOT EXISTS accountability_meetings (
+  meeting_id TEXT PRIMARY KEY,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  meeting_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (meeting_ordinal >= 0),
+  meeting_kind TEXT NOT NULL CHECK (
+    meeting_kind IN (
+      'bilateral_meeting', 'public_agenda_meeting', 'lobbying_contact',
+      'parliamentary_negotiation', 'coalition_negotiation', 'council_session',
+      'committee_session', 'hearing', 'roundtable', 'conference_event',
+      'written_contact', 'other'
+    )
+  ),
+  title TEXT NOT NULL,
+  summary TEXT,
+  scheduled_state TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    scheduled_state IN ('scheduled', 'occurred', 'cancelled', 'postponed', 'unknown')
+  ),
+  attendance_disclosure_state TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    attendance_disclosure_state IN ('complete', 'partial', 'not_disclosed', 'unknown')
+  ),
+  event_date TEXT,
+  started_at TEXT,
+  ended_at TEXT,
+  time_precision TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    time_precision IN ('instant', 'day', 'month', 'year', 'interval', 'unknown')
+  ),
+  timezone TEXT,
+  location_name TEXT,
+  location_address TEXT,
+  territory_id INTEGER REFERENCES territories(territory_id) ON DELETE SET NULL,
+  territory_code TEXT,
+  published_at TEXT,
+  observed_at TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  fact_state TEXT NOT NULL CHECK (
+    fact_state IN ('source_explicit', 'source_summary', 'derived_structure', 'disputed')
+  ),
+  extractor_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_id, meeting_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_meetings_source_date
+ON accountability_meetings(source_id, event_date, meeting_kind, meeting_id);
+
+CREATE INDEX IF NOT EXISTS idx_accountability_meetings_state
+ON accountability_meetings(scheduled_state, attendance_disclosure_state, event_date);
+
+CREATE TABLE IF NOT EXISTS meeting_participants (
+  meeting_participant_id TEXT PRIMARY KEY,
+  meeting_id TEXT NOT NULL REFERENCES accountability_meetings(meeting_id) ON DELETE CASCADE,
+  participant_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (participant_ordinal >= 0),
+  actor_role TEXT NOT NULL CHECK (
+    actor_role IN (
+      'attendee', 'convener', 'host', 'guest', 'lobbyist', 'public_official',
+      'counterparty', 'observer', 'disclosing_body', 'other'
+    )
+  ),
+  attendance_claim_state TEXT NOT NULL DEFAULT 'not_claimed' CHECK (
+    attendance_claim_state IN ('source_explicit', 'source_listed', 'not_claimed', 'disputed')
+  ),
+  actor_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    actor_kind IN ('person', 'organization', 'public_body', 'collective', 'unknown')
+  ),
+  source_label TEXT NOT NULL,
+  source_identifier TEXT,
+  source_identifier_scheme TEXT,
+  role_title_source TEXT,
+  represented_organization_source TEXT,
+  identity_state TEXT NOT NULL DEFAULT 'source_scoped' CHECK (
+    identity_state IN ('source_scoped', 'resolved', 'disputed', 'unknown')
+  ),
+  person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  party_id INTEGER REFERENCES parties(party_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  resolution_method TEXT,
+  resolution_confidence REAL CHECK (
+    resolution_confidence IS NULL OR resolution_confidence BETWEEN 0 AND 1
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (meeting_id, actor_role, participant_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_meeting_participants_meeting_role
+ON meeting_participants(meeting_id, actor_role, participant_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_meeting_participants_identity
+ON meeting_participants(source_identifier_scheme, source_identifier, source_label);
+
+CREATE TABLE IF NOT EXISTS meeting_agenda_items (
+  agenda_item_id TEXT PRIMARY KEY,
+  meeting_id TEXT NOT NULL REFERENCES accountability_meetings(meeting_id) ON DELETE CASCADE,
+  item_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (item_ordinal >= 0),
+  agenda_state TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    agenda_state IN (
+      'scheduled', 'discussed', 'decided', 'deferred', 'cancelled',
+      'source_summary', 'unknown'
+    )
+  ),
+  title TEXT NOT NULL,
+  description TEXT,
+  external_item_id TEXT,
+  source_text_state TEXT NOT NULL CHECK (
+    source_text_state IN ('source_explicit', 'source_summary', 'derived_topic', 'unknown')
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  extractor_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (meeting_id, item_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_meeting_agenda_items_meeting_state
+ON meeting_agenda_items(meeting_id, agenda_state, item_ordinal);
+
+CREATE TABLE IF NOT EXISTS meeting_evidence (
+  meeting_evidence_id TEXT PRIMARY KEY,
+  meeting_id TEXT NOT NULL REFERENCES accountability_meetings(meeting_id) ON DELETE CASCADE,
+  agenda_item_id TEXT REFERENCES meeting_agenda_items(agenda_item_id) ON DELETE CASCADE,
+  evidence_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (evidence_ordinal >= 0),
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN ('announcement', 'agenda', 'attendance', 'minutes', 'outcome', 'context')
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  exact_quote TEXT,
+  quote_sha256 TEXT CHECK (quote_sha256 IS NULL OR length(quote_sha256) = 64),
+  page INTEGER CHECK (page IS NULL OR page >= 1),
+  section TEXT,
+  selector TEXT,
+  evidence_state TEXT NOT NULL CHECK (
+    evidence_state IN ('captured_bytes', 'official_url_only', 'missing', 'blocked')
+  ),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (meeting_id, evidence_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_meeting_evidence_meeting_role
+ON meeting_evidence(meeting_id, evidence_role, evidence_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_meeting_evidence_source
+ON meeting_evidence(source_id, source_record_pk);
+
+CREATE TABLE IF NOT EXISTS agreements (
+  agreement_id TEXT PRIMARY KEY,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  agreement_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (agreement_ordinal >= 0),
+  agreement_kind TEXT NOT NULL CHECK (
+    agreement_kind IN (
+      'coalition_agreement', 'investiture_agreement', 'parliamentary_pact',
+      'executive_decision', 'interinstitutional_agreement',
+      'collective_bargaining_agreement', 'memorandum_of_understanding',
+      'convention', 'joint_declaration', 'amendment_or_addendum',
+      'other_official_agreement'
+    )
+  ),
+  agreement_status TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    agreement_status IN (
+      'proposed', 'negotiating', 'adopted', 'signed', 'in_force',
+      'partially_implemented', 'implemented', 'expired', 'terminated',
+      'superseded', 'withdrawn', 'disputed', 'unknown'
+    )
+  ),
+  title TEXT NOT NULL,
+  summary TEXT,
+  external_agreement_id TEXT,
+  meeting_id TEXT REFERENCES accountability_meetings(meeting_id) ON DELETE SET NULL,
+  agenda_item_id TEXT REFERENCES meeting_agenda_items(agenda_item_id) ON DELETE SET NULL,
+  proposed_on TEXT,
+  adopted_on TEXT,
+  signed_on TEXT,
+  effective_from TEXT,
+  effective_to TEXT,
+  published_on TEXT,
+  observed_at TEXT NOT NULL,
+  date_precision TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    date_precision IN ('instant', 'day', 'month', 'year', 'interval', 'unknown')
+  ),
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  fact_state TEXT NOT NULL CHECK (
+    fact_state IN ('source_explicit', 'source_summary', 'derived_structure', 'disputed')
+  ),
+  extractor_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_id, agreement_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_agreements_source_kind_date
+ON agreements(source_id, agreement_kind, adopted_on, published_on, agreement_id);
+
+CREATE INDEX IF NOT EXISTS idx_agreements_status
+ON agreements(agreement_status, effective_from, effective_to);
+
+CREATE TABLE IF NOT EXISTS agreement_parties (
+  agreement_party_id TEXT PRIMARY KEY,
+  agreement_id TEXT NOT NULL REFERENCES agreements(agreement_id) ON DELETE CASCADE,
+  party_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (party_ordinal >= 0),
+  party_role TEXT NOT NULL CHECK (
+    party_role IN (
+      'proposer', 'negotiating_party', 'adopter', 'signatory', 'counterparty',
+      'implementing_body', 'guarantor', 'witness', 'affected_body',
+      'publishing_body', 'other'
+    )
+  ),
+  actor_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    actor_kind IN ('person', 'organization', 'public_body', 'collective', 'unknown')
+  ),
+  source_label TEXT NOT NULL,
+  source_identifier TEXT,
+  source_identifier_scheme TEXT,
+  role_title_source TEXT,
+  identity_state TEXT NOT NULL DEFAULT 'source_scoped' CHECK (
+    identity_state IN ('source_scoped', 'resolved', 'disputed', 'unknown')
+  ),
+  person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  party_id INTEGER REFERENCES parties(party_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  resolution_method TEXT,
+  resolution_confidence REAL CHECK (
+    resolution_confidence IS NULL OR resolution_confidence BETWEEN 0 AND 1
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (agreement_id, party_role, party_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_parties_agreement_role
+ON agreement_parties(agreement_id, party_role, party_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_parties_identity
+ON agreement_parties(source_identifier_scheme, source_identifier, source_label);
+
+CREATE TABLE IF NOT EXISTS agreement_evidence (
+  agreement_evidence_id TEXT PRIMARY KEY,
+  agreement_id TEXT NOT NULL REFERENCES agreements(agreement_id) ON DELETE CASCADE,
+  evidence_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (evidence_ordinal >= 0),
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN (
+      'primary_text', 'official_summary', 'signature', 'publication',
+      'amendment', 'implementation', 'termination', 'context'
+    )
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  document_url TEXT,
+  document_id TEXT,
+  document_label TEXT,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  exact_quote TEXT,
+  quote_sha256 TEXT CHECK (quote_sha256 IS NULL OR length(quote_sha256) = 64),
+  page INTEGER CHECK (page IS NULL OR page >= 1),
+  section TEXT,
+  selector TEXT,
+  evidence_state TEXT NOT NULL CHECK (
+    evidence_state IN ('captured_bytes', 'official_url_only', 'missing', 'blocked')
+  ),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (agreement_id, evidence_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_evidence_agreement_role
+ON agreement_evidence(agreement_id, evidence_role, evidence_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_evidence_source
+ON agreement_evidence(source_id, source_record_pk);
+
+CREATE TABLE IF NOT EXISTS agreement_topics (
+  agreement_topic_id TEXT PRIMARY KEY,
+  agreement_id TEXT NOT NULL REFERENCES agreements(agreement_id) ON DELETE CASCADE,
+  topic_id INTEGER REFERENCES topics(topic_id) ON DELETE SET NULL,
+  topic_key TEXT NOT NULL,
+  topic_label TEXT NOT NULL,
+  assignment_kind TEXT NOT NULL CHECK (
+    assignment_kind IN ('source_explicit', 'reviewed', 'derived_rule', 'derived_model')
+  ),
+  assignment_method TEXT NOT NULL,
+  assignment_version TEXT NOT NULL,
+  match_text TEXT,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0 AND 1),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (agreement_id, topic_key, assignment_method, assignment_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_topics_topic
+ON agreement_topics(topic_key, review_status, agreement_id);
+
+CREATE TABLE IF NOT EXISTS agreement_links (
+  agreement_link_id TEXT PRIMARY KEY,
+  subject_agreement_id TEXT NOT NULL REFERENCES agreements(agreement_id) ON DELETE CASCADE,
+  relationship_type TEXT NOT NULL CHECK (
+    relationship_type IN (
+      'amends', 'implements', 'supersedes', 'terminates', 'renews',
+      'derived_from', 'related_to', 'other'
+    )
+  ),
+  object_agreement_id TEXT NOT NULL REFERENCES agreements(agreement_id) ON DELETE CASCADE,
+  method TEXT NOT NULL,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0 AND 1),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  CHECK (subject_agreement_id <> object_agreement_id),
+  UNIQUE (subject_agreement_id, relationship_type, object_agreement_id, method)
+);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_links_subject
+ON agreement_links(subject_agreement_id, relationship_type);
+
+CREATE INDEX IF NOT EXISTS idx_agreement_links_object
+ON agreement_links(object_agreement_id, relationship_type);
+
+CREATE TABLE IF NOT EXISTS influence_assertions (
+  influence_assertion_id TEXT PRIMARY KEY,
+  assertion_version INTEGER NOT NULL DEFAULT 1 CHECK (assertion_version >= 1),
+  supersedes_assertion_id TEXT REFERENCES influence_assertions(influence_assertion_id) ON DELETE SET NULL,
+  meeting_id TEXT REFERENCES accountability_meetings(meeting_id) ON DELETE SET NULL,
+  agreement_id TEXT REFERENCES agreements(agreement_id) ON DELETE SET NULL,
+  subject_actor_label TEXT,
+  subject_actor_kind TEXT CHECK (
+    subject_actor_kind IS NULL OR subject_actor_kind IN (
+      'person', 'organization', 'public_body', 'collective', 'unknown'
+    )
+  ),
+  subject_person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  subject_party_id INTEGER REFERENCES parties(party_id) ON DELETE SET NULL,
+  subject_institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  object_type TEXT NOT NULL,
+  object_id TEXT NOT NULL,
+  assertion_kind TEXT NOT NULL,
+  inference_level TEXT NOT NULL CHECK (
+    inference_level IN (
+      'fact_only', 'temporal_proximity', 'content_alignment',
+      'plausible_pathway', 'substantiated_influence',
+      'improper_influence_allegation'
+    )
+  ),
+  assertion_text TEXT NOT NULL,
+  limitations_text TEXT NOT NULL,
+  alternatives_json TEXT NOT NULL DEFAULT '[]',
+  window_start TEXT,
+  window_end TEXT,
+  method TEXT NOT NULL,
+  method_version TEXT NOT NULL,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0 AND 1),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  reviewed_by TEXT,
+  reviewed_at TEXT,
+  adjudication_text TEXT,
+  publication_state TEXT NOT NULL DEFAULT 'private' CHECK (
+    publication_state IN ('private', 'review_queue', 'publishable', 'published', 'withdrawn')
+  ),
+  publication_reason TEXT NOT NULL,
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  CHECK (meeting_id IS NOT NULL OR agreement_id IS NOT NULL),
+  UNIQUE (object_type, object_id, assertion_kind, method, method_version, assertion_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_influence_assertions_review_publication
+ON influence_assertions(review_status, publication_state, inference_level);
+
+CREATE INDEX IF NOT EXISTS idx_influence_assertions_meeting_agreement
+ON influence_assertions(meeting_id, agreement_id);
+
+CREATE TABLE IF NOT EXISTS influence_assertion_evidence (
+  influence_assertion_evidence_id TEXT PRIMARY KEY,
+  influence_assertion_id TEXT NOT NULL
+    REFERENCES influence_assertions(influence_assertion_id) ON DELETE CASCADE,
+  evidence_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (evidence_ordinal >= 0),
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN ('supporting', 'contrary', 'context', 'methodology')
+  ),
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  source_url TEXT,
+  content_sha256 TEXT CHECK (content_sha256 IS NULL OR length(content_sha256) = 64),
+  exact_quote TEXT,
+  quote_sha256 TEXT CHECK (quote_sha256 IS NULL OR length(quote_sha256) = 64),
+  locator TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (influence_assertion_id, evidence_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_influence_assertion_evidence_assertion_role
+ON influence_assertion_evidence(influence_assertion_id, evidence_role, evidence_ordinal);
+
+-- Canonical foreign-policy action layer. Source wording and procedural stages
+-- remain explicit so domestic authorization cannot be mistaken for signature,
+-- ratification, entry into force, implementation, alignment, or outcome.
+CREATE TABLE IF NOT EXISTS geopolitical_actions (
+  geopolitical_action_id TEXT PRIMARY KEY,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  action_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (action_ordinal >= 0),
+  action_kind TEXT NOT NULL CHECK (
+    action_kind IN (
+      'treaty_process', 'international_resolution', 'sanction_measure',
+      'aid_commitment', 'defence_agreement', 'international_vote',
+      'diplomatic_action', 'other_foreign_policy_action'
+    )
+  ),
+  action_status TEXT NOT NULL DEFAULT 'not_assessed' CHECK (
+    action_status IN (
+      'announced', 'proposed', 'approved', 'authorized', 'referred',
+      'signed', 'ratified', 'published', 'entered_into_force',
+      'implemented', 'amended', 'renewed', 'suspended', 'terminated',
+      'rejected', 'abstained', 'not_assessed', 'unknown'
+    )
+  ),
+  procedure_stage TEXT NOT NULL,
+  title TEXT NOT NULL,
+  summary TEXT NOT NULL,
+  external_action_id TEXT,
+  instrument_name TEXT,
+  instrument_identifier TEXT,
+  instrument_identifier_scheme TEXT,
+  scope_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    scope_kind IN ('bilateral', 'multilateral', 'global', 'domestic_external', 'unknown')
+  ),
+  scope_assignment_kind TEXT NOT NULL DEFAULT 'source_explicit' CHECK (
+    scope_assignment_kind IN ('source_explicit', 'reviewed', 'derived_rule', 'unknown')
+  ),
+  action_date TEXT,
+  published_at TEXT,
+  valid_from TEXT,
+  valid_to TEXT,
+  effective_from TEXT,
+  effective_to TEXT,
+  observed_at TEXT NOT NULL,
+  date_precision TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    date_precision IN ('instant', 'day', 'month', 'year', 'interval', 'unknown')
+  ),
+  binding_state TEXT NOT NULL DEFAULT 'not_assessed' CHECK (
+    binding_state IN ('explicit_yes', 'explicit_no', 'not_assessed', 'unknown', 'disputed')
+  ),
+  entry_into_force_state TEXT NOT NULL DEFAULT 'not_assessed' CHECK (
+    entry_into_force_state IN (
+      'explicit_yes', 'explicit_no', 'not_assessed', 'unknown', 'disputed'
+    )
+  ),
+  implementation_state TEXT NOT NULL DEFAULT 'not_assessed' CHECK (
+    implementation_state IN (
+      'not_assessed', 'announced', 'started', 'partial', 'implemented',
+      'suspended', 'terminated', 'unknown', 'disputed'
+    )
+  ),
+  outcome_state TEXT NOT NULL DEFAULT 'not_assessed' CHECK (
+    outcome_state IN ('not_assessed', 'observed', 'unknown', 'disputed')
+  ),
+  position_state TEXT NOT NULL DEFAULT 'not_assessed' CHECK (
+    position_state IN (
+      'source_explicit', 'derived', 'not_assessed', 'unknown', 'disputed'
+    )
+  ),
+  related_agreement_id TEXT REFERENCES agreements(agreement_id) ON DELETE SET NULL,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  fact_state TEXT NOT NULL CHECK (
+    fact_state IN ('source_explicit', 'source_summary', 'derived_structure', 'disputed')
+  ),
+  extractor_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_id, action_ordinal, action_kind, procedure_stage)
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_actions_source_kind_date
+ON geopolitical_actions(
+  source_id, action_kind, substr(COALESCE(action_date, ''), 1, 7),
+  action_date, geopolitical_action_id
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_actions_stage_status
+ON geopolitical_actions(procedure_stage, action_status, action_date);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_actions_instrument
+ON geopolitical_actions(instrument_identifier_scheme, instrument_identifier, instrument_name);
+
+CREATE TABLE IF NOT EXISTS geopolitical_action_actors (
+  geopolitical_action_actor_id TEXT PRIMARY KEY,
+  geopolitical_action_id TEXT NOT NULL
+    REFERENCES geopolitical_actions(geopolitical_action_id) ON DELETE CASCADE,
+  actor_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (actor_ordinal >= 0),
+  actor_role TEXT NOT NULL CHECK (
+    actor_role IN (
+      'acting_state', 'approving_body', 'authorizing_body', 'publishing_body',
+      'parliamentary_recipient', 'counterparty_state',
+      'counterparty_organization', 'issuing_organization', 'voting_actor',
+      'sanctioning_actor', 'sanction_target', 'aid_provider', 'aid_recipient',
+      'implementing_body', 'beneficiary', 'named_official', 'other_named_party'
+    )
+  ),
+  actor_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    actor_kind IN (
+      'person', 'state', 'territory', 'international_organization',
+      'public_body', 'organization', 'legal_entity', 'unknown'
+    )
+  ),
+  source_label TEXT NOT NULL,
+  source_identifier TEXT,
+  source_identifier_scheme TEXT,
+  jurisdiction_code TEXT,
+  identity_state TEXT NOT NULL DEFAULT 'source_scoped' CHECK (
+    identity_state IN ('source_scoped', 'resolved', 'disputed', 'unknown')
+  ),
+  person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  resolution_method TEXT NOT NULL,
+  resolution_confidence REAL CHECK (
+    resolution_confidence IS NULL OR resolution_confidence BETWEEN 0 AND 1
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (geopolitical_action_id, actor_role, actor_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_actors_action_role
+ON geopolitical_action_actors(geopolitical_action_id, actor_role, actor_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_actors_identity
+ON geopolitical_action_actors(
+  source_identifier_scheme, source_identifier, source_label, actor_role
+);
+
+CREATE TABLE IF NOT EXISTS geopolitical_action_evidence (
+  geopolitical_action_evidence_id TEXT PRIMARY KEY,
+  geopolitical_action_id TEXT NOT NULL
+    REFERENCES geopolitical_actions(geopolitical_action_id) ON DELETE CASCADE,
+  evidence_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (evidence_ordinal >= 0),
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN (
+      'official_action', 'instrument_text', 'actor_identity', 'procedure_stage',
+      'amount', 'vote_choice', 'position_statement', 'implementation',
+      'correction', 'counterevidence', 'context'
+    )
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  capture_path TEXT,
+  capture_bytes INTEGER CHECK (capture_bytes IS NULL OR capture_bytes >= 0),
+  captured_at TEXT,
+  capture_sha256 TEXT CHECK (capture_sha256 IS NULL OR length(capture_sha256) = 64),
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  exact_quote TEXT NOT NULL,
+  quote_sha256 TEXT NOT NULL CHECK (length(quote_sha256) = 64),
+  page INTEGER CHECK (page IS NULL OR page >= 1),
+  section TEXT,
+  selector TEXT,
+  evidence_state TEXT NOT NULL CHECK (
+    evidence_state IN ('captured_bytes', 'official_url_only', 'missing', 'blocked')
+  ),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (geopolitical_action_id, evidence_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_evidence_action_role
+ON geopolitical_action_evidence(geopolitical_action_id, evidence_role, evidence_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_evidence_source
+ON geopolitical_action_evidence(source_id, source_record_pk, content_sha256);
+
+CREATE TABLE IF NOT EXISTS geopolitical_action_topics (
+  geopolitical_action_topic_id TEXT PRIMARY KEY,
+  geopolitical_action_id TEXT NOT NULL
+    REFERENCES geopolitical_actions(geopolitical_action_id) ON DELETE CASCADE,
+  topic_id INTEGER REFERENCES topics(topic_id) ON DELETE SET NULL,
+  topic_key TEXT NOT NULL,
+  topic_label TEXT NOT NULL,
+  assignment_kind TEXT NOT NULL CHECK (
+    assignment_kind IN ('source_explicit', 'reviewed', 'derived_rule', 'derived_model')
+  ),
+  assignment_method TEXT NOT NULL,
+  assignment_version TEXT NOT NULL,
+  match_text TEXT,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0 AND 1),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (geopolitical_action_id, topic_key, assignment_method, assignment_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_topics_topic
+ON geopolitical_action_topics(topic_key, review_status, geopolitical_action_id);
+
+CREATE TABLE IF NOT EXISTS geopolitical_positions (
+  geopolitical_position_id TEXT PRIMARY KEY,
+  position_version INTEGER NOT NULL DEFAULT 1 CHECK (position_version >= 1),
+  supersedes_position_id TEXT
+    REFERENCES geopolitical_positions(geopolitical_position_id) ON DELETE SET NULL,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  actor_kind TEXT NOT NULL CHECK (
+    actor_kind IN (
+      'person', 'state', 'territory', 'international_organization',
+      'public_body', 'organization', 'legal_entity', 'unknown'
+    )
+  ),
+  actor_source_label TEXT NOT NULL,
+  actor_source_identifier TEXT,
+  actor_source_identifier_scheme TEXT,
+  person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  subject_kind TEXT NOT NULL,
+  subject_id TEXT,
+  subject_label TEXT NOT NULL,
+  position_kind TEXT NOT NULL CHECK (
+    position_kind IN (
+      'support', 'oppose', 'abstain', 'recognize', 'not_recognize',
+      'condemn', 'endorse', 'reserve', 'commit', 'other_explicit'
+    )
+  ),
+  position_text TEXT NOT NULL,
+  source_date TEXT NOT NULL,
+  valid_from TEXT,
+  valid_to TEXT,
+  date_precision TEXT NOT NULL DEFAULT 'day' CHECK (
+    date_precision IN ('instant', 'day', 'month', 'year', 'interval', 'unknown')
+  ),
+  position_state TEXT NOT NULL DEFAULT 'source_explicit' CHECK (
+    position_state IN ('source_explicit', 'reviewed', 'disputed', 'superseded')
+  ),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  extractor_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (
+    source_id, source_record_id, actor_source_label, subject_label,
+    position_kind, source_date, position_version
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_positions_actor_date
+ON geopolitical_positions(actor_source_label, source_date, position_kind);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_positions_subject_date
+ON geopolitical_positions(subject_kind, subject_id, source_date);
+
+CREATE TABLE IF NOT EXISTS geopolitical_position_evidence (
+  geopolitical_position_evidence_id TEXT PRIMARY KEY,
+  geopolitical_position_id TEXT NOT NULL
+    REFERENCES geopolitical_positions(geopolitical_position_id) ON DELETE CASCADE,
+  evidence_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (evidence_ordinal >= 0),
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN ('position_statement', 'correction', 'counterevidence', 'context')
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  exact_quote TEXT NOT NULL,
+  quote_sha256 TEXT NOT NULL CHECK (length(quote_sha256) = 64),
+  locator TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (geopolitical_position_id, evidence_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_position_evidence_position_role
+ON geopolitical_position_evidence(
+  geopolitical_position_id, evidence_role, evidence_ordinal
+);
+
+CREATE TABLE IF NOT EXISTS geopolitical_action_links (
+  geopolitical_action_link_id TEXT PRIMARY KEY,
+  subject_action_id TEXT NOT NULL
+    REFERENCES geopolitical_actions(geopolitical_action_id) ON DELETE CASCADE,
+  relationship_type TEXT NOT NULL CHECK (
+    relationship_type IN (
+      'derived_from_agreement', 'amends', 'implements', 'supersedes',
+      'renews', 'suspends', 'terminates', 'related_vote',
+      'related_spending', 'later_observation', 'other'
+    )
+  ),
+  object_type TEXT NOT NULL CHECK (
+    object_type IN (
+      'geopolitical_action', 'agreement', 'vote_event', 'spending_item',
+      'source_record', 'other'
+    )
+  ),
+  object_id TEXT NOT NULL,
+  object_action_id TEXT
+    REFERENCES geopolitical_actions(geopolitical_action_id) ON DELETE CASCADE,
+  object_agreement_id TEXT REFERENCES agreements(agreement_id) ON DELETE CASCADE,
+  object_vote_event_id TEXT REFERENCES parl_vote_events(vote_event_id) ON DELETE CASCADE,
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  method TEXT NOT NULL,
+  method_version TEXT NOT NULL,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0 AND 1),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  CHECK (subject_action_id <> COALESCE(object_action_id, '')),
+  UNIQUE (subject_action_id, relationship_type, object_type, object_id, method, method_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_links_subject
+ON geopolitical_action_links(subject_action_id, relationship_type, object_type);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_action_links_object
+ON geopolitical_action_links(object_type, object_id, relationship_type);
+
+CREATE TABLE IF NOT EXISTS geopolitical_observations (
+  geopolitical_observation_id TEXT PRIMARY KEY,
+  geopolitical_action_id TEXT NOT NULL
+    REFERENCES geopolitical_actions(geopolitical_action_id) ON DELETE CASCADE,
+  observation_kind TEXT NOT NULL CHECK (
+    observation_kind IN (
+      'legal_stage', 'entry_into_force', 'implementation', 'disbursement',
+      'delivery', 'compliance', 'outcome', 'correction', 'other'
+    )
+  ),
+  observation_state TEXT NOT NULL,
+  observation_text TEXT NOT NULL,
+  observed_at TEXT NOT NULL,
+  date_precision TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    date_precision IN ('instant', 'day', 'month', 'year', 'interval', 'unknown')
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  exact_quote TEXT NOT NULL,
+  quote_sha256 TEXT NOT NULL CHECK (length(quote_sha256) = 64),
+  selector TEXT,
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (
+    geopolitical_action_id, observation_kind, observation_state,
+    observed_at, source_record_pk
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_geopolitical_observations_action_kind_date
+ON geopolitical_observations(
+  geopolitical_action_id, observation_kind, observed_at, geopolitical_observation_id
+);
+
 -- Dinero publico (staging normalizado, previo al mapeo a policy_events).
 -- Contrato explicito AI-OPS-09:
 -- - PLACSP nacional: source_id = placsp_sindicacion
@@ -1623,7 +3375,8 @@ CREATE TABLE IF NOT EXISTS money_contract_records (
 );
 
 -- One contract version can resolve multiple lots/results. Amounts remain exact
--- decimal strings; public publication applies legal-entity privacy rules.
+-- decimal strings. Officially published supplier names and identifiers remain
+-- intact in public accountability artifacts with source provenance.
 CREATE TABLE IF NOT EXISTS money_contract_award_results (
   contract_award_result_id INTEGER PRIMARY KEY AUTOINCREMENT,
   source_id TEXT NOT NULL REFERENCES sources(source_id)
@@ -1670,6 +3423,221 @@ CREATE TABLE IF NOT EXISTS money_contract_documents (
   UNIQUE (source_record_pk, document_ordinal),
   UNIQUE (source_record_pk, source_url)
 );
+
+-- Canonical monetary event layer. Source-specific money tables above preserve
+-- every upstream field; these additive tables make actor -> event -> evidence
+-- traversal uniform without collapsing awards, contracts, invoices, payments,
+-- delivery, budgets, or subsidies into a false generic "spend" fact.
+CREATE TABLE IF NOT EXISTS spending_items (
+  spending_item_id TEXT PRIMARY KEY,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT,
+  source_url TEXT NOT NULL,
+  content_sha256 TEXT NOT NULL CHECK (length(content_sha256) = 64),
+  spending_kind TEXT NOT NULL CHECK (
+    spending_kind IN (
+      'budget_appropriation',
+      'budget_amendment',
+      'procurement_notice',
+      'procurement_award',
+      'contract_commitment',
+      'contract_modification',
+      'recognized_obligation',
+      'invoice',
+      'payment',
+      'delivery_milestone',
+      'subsidy_award',
+      'subsidy_payment',
+      'refund_recovery',
+      'other'
+    )
+  ),
+  source_kind_label TEXT,
+  stable_object_id TEXT NOT NULL,
+  semantic_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (semantic_ordinal >= 0),
+  external_contract_id TEXT,
+  lot_id TEXT,
+  title TEXT,
+  description TEXT,
+  classification_scheme TEXT,
+  classification_code TEXT,
+  procedure_code TEXT,
+  result_code TEXT,
+  amount_decimal TEXT,
+  payable_amount_decimal TEXT,
+  currency TEXT,
+  amount_semantics TEXT NOT NULL,
+  tax_semantics TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    tax_semantics IN (
+      'excluding_tax', 'including_tax', 'tax_only', 'not_applicable', 'unknown'
+    )
+  ),
+  amount_source_text TEXT,
+  published_on TEXT,
+  decision_on TEXT,
+  signed_on TEXT,
+  effective_from TEXT,
+  effective_to TEXT,
+  accrued_on TEXT,
+  invoice_on TEXT,
+  paid_on TEXT,
+  delivered_on TEXT,
+  period_start TEXT,
+  period_end TEXT,
+  date_precision TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    date_precision IN ('instant', 'day', 'month', 'year', 'interval', 'unknown')
+  ),
+  territory_id INTEGER REFERENCES territories(territory_id) ON DELETE SET NULL,
+  territory_code TEXT,
+  publication_state TEXT NOT NULL DEFAULT 'published' CHECK (
+    publication_state IN ('published', 'withdrawn', 'superseded', 'unknown')
+  ),
+  extractor_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  raw_payload_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, source_record_id, spending_kind, semantic_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_spending_items_source_kind_date
+ON spending_items(source_id, spending_kind, decision_on, published_on, spending_item_id);
+
+CREATE INDEX IF NOT EXISTS idx_spending_items_stable_object
+ON spending_items(source_id, stable_object_id, spending_kind);
+
+CREATE INDEX IF NOT EXISTS idx_spending_items_amount
+ON spending_items(currency, amount_semantics, amount_decimal);
+
+CREATE INDEX IF NOT EXISTS idx_spending_items_territory
+ON spending_items(territory_id, territory_code, spending_kind);
+
+CREATE TABLE IF NOT EXISTS spending_item_actors (
+  spending_item_actor_id TEXT PRIMARY KEY,
+  spending_item_id TEXT NOT NULL REFERENCES spending_items(spending_item_id) ON DELETE CASCADE,
+  actor_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (actor_ordinal >= 0),
+  actor_role TEXT NOT NULL CHECK (
+    actor_role IN (
+      'appropriating_authority',
+      'contracting_authority',
+      'payer',
+      'supplier',
+      'beneficiary',
+      'invoice_issuer',
+      'payment_recipient',
+      'delivery_responsible',
+      'auditor',
+      'other'
+    )
+  ),
+  actor_kind TEXT NOT NULL DEFAULT 'unknown' CHECK (
+    actor_kind IN ('person', 'organization', 'public_body', 'unknown')
+  ),
+  source_label TEXT NOT NULL,
+  source_identifier TEXT,
+  source_identifier_scheme TEXT,
+  identity_state TEXT NOT NULL DEFAULT 'source_scoped' CHECK (
+    identity_state IN ('source_scoped', 'resolved', 'disputed', 'unknown')
+  ),
+  person_id INTEGER REFERENCES persons(person_id) ON DELETE SET NULL,
+  party_id INTEGER REFERENCES parties(party_id) ON DELETE SET NULL,
+  institution_id INTEGER REFERENCES institutions(institution_id) ON DELETE SET NULL,
+  org_unit_id INTEGER REFERENCES government_org_units(org_unit_id) ON DELETE SET NULL,
+  resolution_method TEXT,
+  resolution_confidence REAL CHECK (
+    resolution_confidence IS NULL OR resolution_confidence BETWEEN 0 AND 1
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (spending_item_id, actor_role, actor_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_actors_item_role
+ON spending_item_actors(spending_item_id, actor_role, actor_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_actors_source_identifier
+ON spending_item_actors(source_identifier_scheme, source_identifier, actor_role);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_actors_source_label
+ON spending_item_actors(source_label, actor_role);
+
+CREATE TABLE IF NOT EXISTS spending_item_evidence (
+  spending_evidence_id TEXT PRIMARY KEY,
+  spending_item_id TEXT NOT NULL REFERENCES spending_items(spending_item_id) ON DELETE CASCADE,
+  evidence_ordinal INTEGER NOT NULL DEFAULT 0 CHECK (evidence_ordinal >= 0),
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN (
+      'primary_record',
+      'notice',
+      'award_decision',
+      'contract',
+      'invoice',
+      'payment_record',
+      'delivery_record',
+      'audit',
+      'context'
+    )
+  ),
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  source_record_pk INTEGER NOT NULL REFERENCES source_records(source_record_pk) ON DELETE CASCADE,
+  contract_document_id INTEGER REFERENCES money_contract_documents(contract_document_id) ON DELETE SET NULL,
+  document_id TEXT,
+  source_url TEXT NOT NULL,
+  document_url TEXT,
+  document_label TEXT,
+  document_kind TEXT,
+  content_sha256 TEXT CHECK (content_sha256 IS NULL OR length(content_sha256) = 64),
+  exact_quote TEXT,
+  quote_sha256 TEXT CHECK (quote_sha256 IS NULL OR length(quote_sha256) = 64),
+  page INTEGER CHECK (page IS NULL OR page >= 1),
+  section TEXT,
+  selector TEXT,
+  evidence_state TEXT NOT NULL CHECK (
+    evidence_state IN ('captured_bytes', 'official_url_only', 'missing', 'blocked')
+  ),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (spending_item_id, evidence_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_evidence_item_role
+ON spending_item_evidence(spending_item_id, evidence_role, evidence_ordinal);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_evidence_source
+ON spending_item_evidence(source_id, source_record_pk);
+
+CREATE TABLE IF NOT EXISTS spending_item_links (
+  spending_item_link_id TEXT PRIMARY KEY,
+  subject_spending_item_id TEXT NOT NULL REFERENCES spending_items(spending_item_id) ON DELETE CASCADE,
+  relationship_type TEXT NOT NULL CHECK (
+    relationship_type IN (
+      'amends', 'announces', 'awards', 'formalizes', 'invoices', 'pays',
+      'delivers', 'refunds', 'supersedes', 'same_procedure_as', 'other'
+    )
+  ),
+  object_spending_item_id TEXT NOT NULL REFERENCES spending_items(spending_item_id) ON DELETE CASCADE,
+  method TEXT NOT NULL,
+  confidence REAL CHECK (confidence IS NULL OR confidence BETWEEN 0 AND 1),
+  review_status TEXT NOT NULL DEFAULT 'unreviewed' CHECK (
+    review_status IN ('unreviewed', 'pending', 'confirmed', 'rejected', 'superseded')
+  ),
+  source_id TEXT REFERENCES sources(source_id),
+  source_record_pk INTEGER REFERENCES source_records(source_record_pk) ON DELETE SET NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  CHECK (subject_spending_item_id <> object_spending_item_id),
+  UNIQUE (subject_spending_item_id, relationship_type, object_spending_item_id, method)
+);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_links_subject
+ON spending_item_links(subject_spending_item_id, relationship_type);
+
+CREATE INDEX IF NOT EXISTS idx_spending_item_links_object
+ON spending_item_links(object_spending_item_id, relationship_type);
 
 -- Detalle estructurado de licitaciones/cpvs/documentos (scrape puntual PLACSP).
 -- Guardamos evidencia de la página de detalle por contrato para enriquecer
@@ -2055,6 +4023,114 @@ CREATE TABLE IF NOT EXISTS indicator_bulk_acquisition_records (
   observations_discovered INTEGER NOT NULL,
   record_sha256 TEXT NOT NULL,
   PRIMARY KEY (indicator_bulk_acquisition_id, source_record_pk)
+);
+
+-- Canonical indicator contract v1. These tables sit beside the legacy
+-- indicator_series/indicator_observation_records ingestion tables. They keep
+-- immutable source releases and observation versions explicit so a later
+-- official correction never overwrites what the project previously observed.
+CREATE TABLE IF NOT EXISTS indicator_definitions (
+  indicator_id TEXT PRIMARY KEY,
+  source_id TEXT NOT NULL REFERENCES sources(source_id),
+  dataset_code TEXT NOT NULL,
+  indicator_code TEXT NOT NULL,
+  label TEXT NOT NULL,
+  definition TEXT,
+  domain_key TEXT,
+  frequency_code TEXT NOT NULL,
+  frequency_label TEXT,
+  unit_code TEXT NOT NULL,
+  unit_label TEXT,
+  methodology_version TEXT,
+  methodology_url TEXT,
+  revision_policy TEXT NOT NULL,
+  license_url TEXT,
+  source_url TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (source_id, dataset_code, indicator_code, frequency_code, unit_code)
+);
+
+CREATE TABLE IF NOT EXISTS indicator_releases (
+  indicator_release_id TEXT PRIMARY KEY,
+  indicator_id TEXT NOT NULL REFERENCES indicator_definitions(indicator_id) ON DELETE CASCADE,
+  source_snapshot_date TEXT NOT NULL,
+  source_updated_at TEXT,
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  source_bytes INTEGER NOT NULL,
+  raw_path TEXT NOT NULL,
+  source_metadata_json TEXT NOT NULL,
+  comparison_state TEXT NOT NULL
+    CHECK (comparison_state IN ('baseline', 'compared')),
+  previous_indicator_release_id TEXT REFERENCES indicator_releases(indicator_release_id),
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (indicator_id, source_content_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS indicator_series_versions (
+  indicator_series_version_id TEXT PRIMARY KEY,
+  indicator_id TEXT NOT NULL REFERENCES indicator_definitions(indicator_id) ON DELETE CASCADE,
+  indicator_release_id TEXT NOT NULL REFERENCES indicator_releases(indicator_release_id) ON DELETE CASCADE,
+  stable_series_key TEXT NOT NULL,
+  geography_code TEXT NOT NULL,
+  geography_name TEXT,
+  geography_system TEXT NOT NULL,
+  geography_level TEXT NOT NULL,
+  geography_version TEXT,
+  territory_id INTEGER REFERENCES territories(territory_id),
+  dimensions_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (indicator_release_id, stable_series_key)
+);
+
+CREATE TABLE IF NOT EXISTS indicator_observation_versions (
+  indicator_observation_version_id TEXT PRIMARY KEY,
+  indicator_series_version_id TEXT NOT NULL
+    REFERENCES indicator_series_versions(indicator_series_version_id) ON DELETE CASCADE,
+  indicator_release_id TEXT NOT NULL
+    REFERENCES indicator_releases(indicator_release_id) ON DELETE CASCADE,
+  period_label TEXT NOT NULL,
+  period_start TEXT NOT NULL,
+  period_end TEXT NOT NULL,
+  interval_kind TEXT NOT NULL,
+  value_decimal TEXT,
+  value_text TEXT,
+  source_status_code TEXT,
+  source_status_labels_json TEXT NOT NULL,
+  uncertainty_lower_decimal TEXT,
+  uncertainty_upper_decimal TEXT,
+  uncertainty_state TEXT NOT NULL
+    CHECK (uncertainty_state IN ('provided', 'not_provided', 'not_applicable')),
+  revision_ordinal INTEGER NOT NULL CHECK (revision_ordinal >= 1),
+  revision_state TEXT NOT NULL
+    CHECK (revision_state IN ('baseline', 'unchanged', 'changed', 'superseded', 'deleted', 'corrected')),
+  previous_observation_version_id TEXT
+    REFERENCES indicator_observation_versions(indicator_observation_version_id),
+  source_published_at TEXT,
+  raw_cell_index INTEGER NOT NULL CHECK (raw_cell_index >= 0),
+  raw_value_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  CHECK (value_decimal IS NOT NULL OR value_text IS NOT NULL OR revision_state = 'deleted'),
+  UNIQUE (indicator_series_version_id, period_label)
+);
+
+CREATE TABLE IF NOT EXISTS indicator_observation_evidence (
+  indicator_observation_evidence_id TEXT PRIMARY KEY,
+  indicator_observation_version_id TEXT NOT NULL
+    REFERENCES indicator_observation_versions(indicator_observation_version_id) ON DELETE CASCADE,
+  source_url TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  raw_path TEXT NOT NULL,
+  value_json_pointer TEXT NOT NULL,
+  status_json_pointer TEXT,
+  extraction_method TEXT NOT NULL,
+  extractor_version TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE (indicator_observation_version_id, source_content_sha256)
 );
 
 -- Causal estimates: resultados de evaluacion con diagnosticos y trazabilidad.
@@ -2607,6 +4683,52 @@ CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_observations_snapshot
   ON infoelectoral_candidate_observations(snapshot_date, candidate_occurrence_id);
 CREATE INDEX IF NOT EXISTS idx_infoelectoral_candidate_observations_run
   ON infoelectoral_candidate_observations(run_id);
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_documents_election
+  ON boe_election_candidate_documents(
+    election_date, election_type_code, document_id
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_candidacies_document
+  ON boe_election_candidacies(
+    document_id, electoral_board, electoral_district, chamber_code,
+    candidacy_number
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_occurrence_election
+  ON boe_election_candidate_occurrences(
+    election_date, election_type_code, candidate_occurrence_id
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_occurrence_name
+  ON boe_election_candidate_occurrences(full_name, election_date);
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_occurrence_party
+  ON boe_election_candidate_occurrences(party_id, election_date);
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_occurrence_person
+  ON boe_election_candidate_occurrences(person_id);
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_occurrence_source_record
+  ON boe_election_candidate_occurrences(source_record_pk);
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_correction_target_base
+  ON boe_election_candidate_correction_targets(
+    base_document_id, correction_document_id
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_correction_paragraph_context
+  ON boe_election_candidate_correction_paragraphs(
+    correction_document_id, electoral_board, electoral_district,
+    chamber_code, candidacy_number, source_paragraph_number
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_candidate_correction_operation_candidacy
+  ON boe_election_candidate_correction_operations(
+    candidacy_id, correction_document_id, operation_order
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_effective_candidacy_election
+  ON boe_election_effective_candidacies(
+    election_date, election_type_code, candidacy_id
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_effective_candidate_election
+  ON boe_election_effective_candidate_occurrences(
+    election_date, election_type_code, effective_candidate_occurrence_id
+  );
+CREATE INDEX IF NOT EXISTS idx_boe_effective_candidate_name
+  ON boe_election_effective_candidate_occurrences(full_name, election_date);
+CREATE INDEX IF NOT EXISTS idx_boe_effective_candidate_correction
+  ON boe_election_effective_candidate_occurrences(correction_operation_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_active ON mandates(is_active);
 CREATE INDEX IF NOT EXISTS idx_mandates_role_id ON mandates(role_id);
 CREATE INDEX IF NOT EXISTS idx_mandates_admin_level_id ON mandates(admin_level_id);
@@ -2812,6 +4934,22 @@ CREATE INDEX IF NOT EXISTS idx_indicator_observation_records_partition
       COALESCE(source_record_id, ''),
       observation_record_id
     );
+CREATE INDEX IF NOT EXISTS idx_indicator_definitions_source_dataset
+    ON indicator_definitions(source_id, dataset_code);
+CREATE INDEX IF NOT EXISTS idx_indicator_releases_indicator_snapshot
+    ON indicator_releases(indicator_id, source_snapshot_date);
+CREATE INDEX IF NOT EXISTS idx_indicator_series_versions_indicator_geo
+    ON indicator_series_versions(indicator_id, geography_code);
+CREATE INDEX IF NOT EXISTS idx_indicator_series_versions_stable_key
+    ON indicator_series_versions(stable_series_key, indicator_release_id);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_versions_release_period
+    ON indicator_observation_versions(indicator_release_id, period_start);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_versions_series_period
+    ON indicator_observation_versions(indicator_series_version_id, period_start);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_versions_revision
+    ON indicator_observation_versions(revision_state, previous_observation_version_id);
+CREATE INDEX IF NOT EXISTS idx_indicator_observation_evidence_observation
+    ON indicator_observation_evidence(indicator_observation_version_id);
 CREATE INDEX IF NOT EXISTS idx_causal_estimates_intervention_id ON causal_estimates(intervention_id);
 
 CREATE INDEX IF NOT EXISTS idx_legal_norms_scope ON legal_norms(scope);
@@ -3033,3 +5171,807 @@ CREATE INDEX IF NOT EXISTS idx_source_records_indicator_backfill
     source_record_id,
     source_record_pk
   );
+
+-- Outcome-context candidate/review/release graph (v1).
+-- BEGIN OUTCOME LINKING V1 SCHEMA
+CREATE TABLE IF NOT EXISTS outcome_links (
+  outcome_link_id TEXT PRIMARY KEY,
+  identity_contract_version TEXT NOT NULL,
+  link_kind TEXT NOT NULL CHECK (link_kind = 'descriptive_outcome_context'),
+  action_id TEXT NOT NULL,
+  indicator_id TEXT NOT NULL,
+  stable_series_key TEXT NOT NULL,
+  geography_code TEXT NOT NULL,
+  geography_level TEXT NOT NULL,
+  geography_system TEXT NOT NULL,
+  identity_sha256 TEXT NOT NULL CHECK (
+    length(identity_sha256) = 64 AND identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  identity_canonical_bytes INTEGER NOT NULL CHECK (identity_canonical_bytes > 0),
+  identity_preimage_json TEXT NOT NULL CHECK (json_valid(identity_preimage_json)),
+  created_at TEXT NOT NULL,
+  UNIQUE (identity_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_versions (
+  outcome_link_version_id TEXT PRIMARY KEY,
+  outcome_link_id TEXT NOT NULL
+    REFERENCES outcome_links(outcome_link_id) ON DELETE RESTRICT,
+  version_identity_sha256 TEXT NOT NULL CHECK (
+    length(version_identity_sha256) = 64
+    AND version_identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  version_identity_canonical_bytes INTEGER NOT NULL
+    CHECK (version_identity_canonical_bytes > 0),
+  identity_contract_version TEXT NOT NULL,
+  method_version TEXT NOT NULL,
+  evidence_package_kind TEXT NOT NULL,
+  version_state TEXT NOT NULL CHECK (
+    version_state IN ('preproduction_candidate', 'reviewable', 'superseded')
+  ),
+  evidence_level TEXT NOT NULL CHECK (evidence_level IN ('L0', 'L1', 'L2')),
+  candidate_status TEXT NOT NULL CHECK (
+    candidate_status IN (
+      'pending_human_review', 'human_reviewed', 'rejected', 'superseded'
+    )
+  ),
+  machine_audit_state TEXT NOT NULL CHECK (
+    machine_audit_state IN ('pending', 'machine_validated', 'failed')
+  ),
+  human_review_required INTEGER NOT NULL CHECK (human_review_required IN (0, 1)),
+  human_review_completed INTEGER NOT NULL CHECK (human_review_completed IN (0, 1)),
+  published INTEGER NOT NULL CHECK (published IN (0, 1)),
+  directional_countable INTEGER NOT NULL CHECK (directional_countable IN (0, 1)),
+  ranking_eligible INTEGER NOT NULL CHECK (ranking_eligible IN (0, 1)),
+  action_id TEXT NOT NULL,
+  action_occurred_at TEXT NOT NULL,
+  action_source_id TEXT NOT NULL,
+  action_source_record_id TEXT NOT NULL,
+  action_source_snapshot_date TEXT NOT NULL,
+  action_source_record_content_sha256 TEXT NOT NULL,
+  initiative_id TEXT NOT NULL,
+  initiative_source_id TEXT NOT NULL,
+  initiative_source_record_id TEXT NOT NULL,
+  initiative_source_record_content_sha256 TEXT NOT NULL,
+  original_vote_xml_capture_state TEXT NOT NULL,
+  original_vote_xml_content_sha256 TEXT,
+  indicator_id TEXT NOT NULL,
+  indicator_release_id TEXT NOT NULL,
+  indicator_series_version_id TEXT NOT NULL,
+  indicator_source_content_sha256 TEXT NOT NULL,
+  action_scope_sha256 TEXT NOT NULL,
+  action_scope_kind TEXT NOT NULL CHECK (action_scope_kind = 'action'),
+  indicator_scope_sha256 TEXT NOT NULL,
+  indicator_scope_kind TEXT NOT NULL CHECK (indicator_scope_kind = 'indicator'),
+  actor_reference_scope_sha256 TEXT NOT NULL,
+  actor_reference_scope_kind TEXT NOT NULL CHECK (
+    actor_reference_scope_kind = 'actor_reference'
+  ),
+  combined_scope_sha256 TEXT NOT NULL,
+  combined_scope_kind TEXT NOT NULL CHECK (combined_scope_kind = 'combined'),
+  participant_count INTEGER NOT NULL CHECK (participant_count >= 0),
+  participant_source_projection_sha256 TEXT NOT NULL,
+  participant_export_projection_sha256 TEXT NOT NULL,
+  actor_graph_release_id TEXT NOT NULL,
+  actor_reference_projection_sha256 TEXT NOT NULL,
+  actor_reference_label_mismatch_count INTEGER NOT NULL CHECK (
+    actor_reference_label_mismatch_count >= 0
+  ),
+  version_identity_preimage_json TEXT NOT NULL
+    CHECK (json_valid(version_identity_preimage_json)),
+  action_json TEXT NOT NULL CHECK (json_valid(action_json)),
+  participant_contract_json TEXT NOT NULL CHECK (json_valid(participant_contract_json)),
+  indicator_json TEXT NOT NULL CHECK (json_valid(indicator_json)),
+  temporal_assessment_json TEXT NOT NULL CHECK (json_valid(temporal_assessment_json)),
+  semantic_assessment_json TEXT NOT NULL CHECK (json_valid(semantic_assessment_json)),
+  geography_assessment_json TEXT NOT NULL CHECK (json_valid(geography_assessment_json)),
+  calculation_json TEXT NOT NULL CHECK (json_valid(calculation_json)),
+  claim_policy_json TEXT NOT NULL CHECK (json_valid(claim_policy_json)),
+  reason_codes_json TEXT NOT NULL CHECK (json_valid(reason_codes_json)),
+  limitations_json TEXT NOT NULL CHECK (json_valid(limitations_json)),
+  reader_wording_json TEXT NOT NULL CHECK (json_valid(reader_wording_json)),
+  supersedes_outcome_link_version_id TEXT
+    REFERENCES outcome_link_versions(outcome_link_version_id) ON DELETE RESTRICT,
+  created_at TEXT NOT NULL,
+  CHECK (
+    published = 0 OR (
+      evidence_level = 'L2'
+      AND human_review_completed = 1
+      AND candidate_status = 'human_reviewed'
+      AND machine_audit_state = 'machine_validated'
+    )
+  ),
+  FOREIGN KEY (action_scope_sha256, action_scope_kind)
+    REFERENCES outcome_link_scope_closures(scope_closure_sha256, scope_kind)
+    ON DELETE RESTRICT,
+  FOREIGN KEY (indicator_scope_sha256, indicator_scope_kind)
+    REFERENCES outcome_link_scope_closures(scope_closure_sha256, scope_kind)
+    ON DELETE RESTRICT,
+  FOREIGN KEY (actor_reference_scope_sha256, actor_reference_scope_kind)
+    REFERENCES outcome_link_scope_closures(scope_closure_sha256, scope_kind)
+    ON DELETE RESTRICT,
+  FOREIGN KEY (combined_scope_sha256, combined_scope_kind)
+    REFERENCES outcome_link_scope_closures(scope_closure_sha256, scope_kind)
+    ON DELETE RESTRICT,
+  UNIQUE (version_identity_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_reviews (
+  outcome_link_review_version_id TEXT PRIMARY KEY,
+  outcome_link_version_id TEXT NOT NULL
+    REFERENCES outcome_link_versions(outcome_link_version_id) ON DELETE RESTRICT,
+  review_identity_sha256 TEXT NOT NULL CHECK (
+    length(review_identity_sha256) = 64
+    AND review_identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  review_identity_contract_version TEXT NOT NULL,
+  reviewer_public_id TEXT NOT NULL,
+  reviewed_at TEXT NOT NULL,
+  review_method TEXT NOT NULL,
+  semantic_decision TEXT NOT NULL CHECK (
+    semantic_decision IN (
+      'target_outcome_confirmed', 'broad_context_only', 'incompatible',
+      'needs_context'
+    )
+  ),
+  geography_decision TEXT NOT NULL CHECK (
+    geography_decision IN (
+      'exact', 'national_scope_compatible', 'nested_not_equal',
+      'crosswalk_versioned', 'incompatible', 'needs_context'
+    )
+  ),
+  level_decision TEXT NOT NULL CHECK (level_decision IN ('L0', 'L1', 'L2')),
+  evidence_examined_json TEXT NOT NULL CHECK (json_valid(evidence_examined_json)),
+  reason_codes_json TEXT NOT NULL CHECK (json_valid(reason_codes_json)),
+  rationale TEXT NOT NULL,
+  claim_policy_json TEXT NOT NULL CHECK (json_valid(claim_policy_json)),
+  reader_wording_json TEXT NOT NULL CHECK (json_valid(reader_wording_json)),
+  signoff TEXT NOT NULL,
+  review_identity_preimage_json TEXT NOT NULL CHECK (json_valid(review_identity_preimage_json)),
+  supersedes_review_version_id TEXT
+    REFERENCES outcome_link_reviews(outcome_link_review_version_id) ON DELETE RESTRICT,
+  UNIQUE (review_identity_sha256),
+  UNIQUE (outcome_link_review_version_id, outcome_link_version_id),
+  UNIQUE (
+    outcome_link_review_version_id, outcome_link_version_id,
+    semantic_decision, geography_decision, level_decision
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_releases (
+  outcome_link_release_id TEXT PRIMARY KEY,
+  release_identity_contract_version TEXT NOT NULL,
+  schema_version TEXT NOT NULL,
+  method_version TEXT NOT NULL,
+  config_sha256 TEXT NOT NULL,
+  as_of_date TEXT NOT NULL,
+  source_release_roots_json TEXT NOT NULL CHECK (json_valid(source_release_roots_json)),
+  scope_closure_root_sha256 TEXT NOT NULL,
+  membership_semantic_root_sha256 TEXT NOT NULL,
+  member_count INTEGER NOT NULL CHECK (member_count >= 0),
+  review_count_by_state_json TEXT NOT NULL CHECK (json_valid(review_count_by_state_json)),
+  level_counts_json TEXT NOT NULL CHECK (json_valid(level_counts_json)),
+  previous_outcome_link_release_id TEXT
+    REFERENCES outcome_link_releases(outcome_link_release_id) ON DELETE RESTRICT,
+  release_descriptor_sha256 TEXT NOT NULL CHECK (
+    length(release_descriptor_sha256) = 64
+    AND release_descriptor_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  release_descriptor_json TEXT NOT NULL CHECK (json_valid(release_descriptor_json)),
+  UNIQUE (release_descriptor_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_release_memberships (
+  outcome_link_release_membership_id TEXT PRIMARY KEY,
+  outcome_link_release_id TEXT NOT NULL
+    REFERENCES outcome_link_releases(outcome_link_release_id) ON DELETE RESTRICT,
+  outcome_link_version_id TEXT NOT NULL
+    REFERENCES outcome_link_versions(outcome_link_version_id) ON DELETE RESTRICT,
+  outcome_link_review_version_id TEXT
+    REFERENCES outcome_link_reviews(outcome_link_review_version_id) ON DELETE RESTRICT,
+  membership_identity_sha256 TEXT NOT NULL CHECK (
+    length(membership_identity_sha256) = 64
+    AND membership_identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  membership_state TEXT NOT NULL CHECK (
+    membership_state IN ('included', 'excluded', 'withdrawn', 'superseded')
+  ),
+  selected_level TEXT NOT NULL CHECK (selected_level IN ('L0', 'L1', 'L2')),
+  selected_decision TEXT CHECK (
+    selected_decision IS NULL OR selected_decision IN (
+      'target_outcome_confirmed', 'broad_context_only', 'incompatible',
+      'needs_context'
+    )
+  ),
+  selected_semantic_decision TEXT CHECK (
+    selected_semantic_decision IS NULL OR selected_semantic_decision IN (
+      'target_outcome_confirmed', 'broad_context_only', 'incompatible',
+      'needs_context'
+    )
+  ),
+  selected_geography_decision TEXT CHECK (
+    selected_geography_decision IS NULL OR selected_geography_decision IN (
+      'exact', 'national_scope_compatible', 'nested_not_equal',
+      'crosswalk_versioned', 'incompatible', 'needs_context'
+    )
+  ),
+  inclusion_reason TEXT NOT NULL,
+  publication_flag INTEGER NOT NULL CHECK (publication_flag IN (0, 1)),
+  membership_identity_preimage_json TEXT NOT NULL
+    CHECK (json_valid(membership_identity_preimage_json)),
+  CHECK (selected_decision IS selected_semantic_decision),
+  CHECK (
+    outcome_link_review_version_id IS NULL OR (
+      selected_semantic_decision IS NOT NULL
+      AND selected_geography_decision IS NOT NULL
+    )
+  ),
+  CHECK (
+    publication_flag = 0 OR (
+      outcome_link_review_version_id IS NOT NULL
+      AND selected_level = 'L2'
+      AND membership_state = 'included'
+      AND selected_decision IS NOT NULL
+    )
+  ),
+  UNIQUE (membership_identity_sha256),
+  UNIQUE (outcome_link_release_id, outcome_link_version_id),
+  FOREIGN KEY (outcome_link_review_version_id, outcome_link_version_id)
+    REFERENCES outcome_link_reviews(
+      outcome_link_review_version_id, outcome_link_version_id
+    ) ON DELETE RESTRICT,
+  FOREIGN KEY (
+    outcome_link_review_version_id, outcome_link_version_id,
+    selected_semantic_decision, selected_geography_decision, selected_level
+  ) REFERENCES outcome_link_reviews(
+    outcome_link_review_version_id, outcome_link_version_id,
+    semantic_decision, geography_decision, level_decision
+  ) ON DELETE RESTRICT
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_observation_refs (
+  outcome_link_observation_ref_id TEXT PRIMARY KEY,
+  outcome_link_version_id TEXT NOT NULL
+    REFERENCES outcome_link_versions(outcome_link_version_id) ON DELETE RESTRICT,
+  identity_sha256 TEXT NOT NULL CHECK (
+    length(identity_sha256) = 64 AND identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  identity_contract_version TEXT NOT NULL,
+  role TEXT NOT NULL CHECK (role IN ('pre', 'overlap_excluded', 'post')),
+  exclusion_reason TEXT,
+  indicator_id TEXT NOT NULL,
+  indicator_release_id TEXT NOT NULL,
+  indicator_series_version_id TEXT NOT NULL,
+  indicator_observation_version_id TEXT NOT NULL,
+  indicator_observation_evidence_id TEXT NOT NULL,
+  period_label TEXT NOT NULL,
+  period_start TEXT NOT NULL,
+  period_end TEXT NOT NULL,
+  value_decimal TEXT,
+  value_text TEXT,
+  source_status_code TEXT,
+  uncertainty_state TEXT NOT NULL,
+  revision_ordinal INTEGER NOT NULL,
+  revision_state TEXT NOT NULL,
+  source_content_sha256 TEXT NOT NULL,
+  raw_path TEXT NOT NULL,
+  value_json_pointer TEXT NOT NULL,
+  status_json_pointer TEXT,
+  identity_preimage_json TEXT NOT NULL CHECK (json_valid(identity_preimage_json)),
+  CHECK (
+    (role = 'overlap_excluded' AND exclusion_reason IS NOT NULL)
+    OR (role IN ('pre', 'post') AND exclusion_reason IS NULL)
+  ),
+  UNIQUE (identity_sha256),
+  UNIQUE (
+    outcome_link_version_id, role, indicator_observation_version_id
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_participant_refs (
+  outcome_link_participant_ref_id TEXT PRIMARY KEY,
+  outcome_link_version_id TEXT NOT NULL
+    REFERENCES outcome_link_versions(outcome_link_version_id) ON DELETE RESTRICT,
+  participant_row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(participant_row_semantic_sha256) = 64
+    AND participant_row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  identity_contract_version TEXT NOT NULL,
+  action_id TEXT NOT NULL,
+  seat TEXT NOT NULL,
+  official_member_name TEXT NOT NULL,
+  upstream_person_id TEXT NOT NULL,
+  official_group_code TEXT NOT NULL,
+  official_vote_choice TEXT NOT NULL,
+  actor_graph_release_id TEXT NOT NULL,
+  actor_id TEXT NOT NULL,
+  actor_node_version_id TEXT NOT NULL,
+  actor_canonical_label TEXT NOT NULL,
+  actor_identity_state TEXT NOT NULL,
+  actor_provenance_state TEXT NOT NULL,
+  actor_source_record_id TEXT,
+  actor_source_url TEXT,
+  actor_source_content_sha256 TEXT,
+  vote_source_id TEXT NOT NULL,
+  vote_source_url TEXT NOT NULL,
+  vote_source_snapshot_date TEXT NOT NULL,
+  vote_source_record_id TEXT NOT NULL,
+  vote_source_record_content_sha256 TEXT NOT NULL,
+  vote_source_locator TEXT NOT NULL,
+  official_label_authoritative INTEGER NOT NULL CHECK (
+    official_label_authoritative = 1
+  ),
+  actor_label_mismatch INTEGER NOT NULL CHECK (actor_label_mismatch IN (0, 1)),
+  identity_preimage_json TEXT NOT NULL CHECK (json_valid(identity_preimage_json)),
+  CHECK (actor_label_mismatch = (official_member_name <> actor_canonical_label)),
+  UNIQUE (participant_row_semantic_sha256),
+  UNIQUE (outcome_link_version_id, action_id, seat, upstream_person_id)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_evidence (
+  outcome_link_evidence_id TEXT PRIMARY KEY,
+  outcome_link_version_id TEXT NOT NULL
+    REFERENCES outcome_link_versions(outcome_link_version_id) ON DELETE RESTRICT,
+  identity_sha256 TEXT NOT NULL CHECK (
+    length(identity_sha256) = 64 AND identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  identity_contract_version TEXT NOT NULL,
+  evidence_role TEXT NOT NULL CHECK (
+    evidence_role IN (
+      'normalized_vote_source_record',
+      'normalized_initiative_source_record',
+      'original_vote_xml_gap',
+      'indicator_source_bytes',
+      'indicator_observation_pre',
+      'indicator_observation_overlap_excluded',
+      'indicator_observation_post'
+    )
+  ),
+  entity_version_id TEXT NOT NULL,
+  source_id TEXT NOT NULL,
+  source_record_id TEXT,
+  official_url TEXT,
+  content_sha256 TEXT CHECK (
+    content_sha256 IS NULL OR (
+      length(content_sha256) = 64
+      AND content_sha256 NOT GLOB '*[^0-9a-f]*'
+    )
+  ),
+  bytes INTEGER CHECK (bytes IS NULL OR bytes >= 0),
+  raw_path TEXT,
+  locator TEXT,
+  capture_state TEXT NOT NULL CHECK (
+    capture_state IN (
+      'normalized_source_record_present',
+      'original_source_bytes_present',
+      'absent_from_current_snapshot'
+    )
+  ),
+  normalized_record_is_original_bytes INTEGER NOT NULL CHECK (
+    normalized_record_is_original_bytes IN (0, 1)
+  ),
+  identity_preimage_json TEXT NOT NULL CHECK (json_valid(identity_preimage_json)),
+  CHECK (
+    (
+      evidence_role IN (
+        'normalized_vote_source_record',
+        'normalized_initiative_source_record'
+      )
+      AND capture_state = 'normalized_source_record_present'
+      AND source_record_id IS NOT NULL
+      AND official_url IS NOT NULL
+      AND content_sha256 IS NOT NULL
+      AND bytes > 0
+      AND raw_path IS NULL
+      AND locator IS NOT NULL
+      AND normalized_record_is_original_bytes = 0
+    ) OR (
+      evidence_role = 'original_vote_xml_gap'
+      AND capture_state = 'absent_from_current_snapshot'
+      AND official_url IS NOT NULL
+      AND content_sha256 IS NULL
+      AND bytes IS NULL
+      AND raw_path IS NULL
+      AND locator IS NULL
+      AND normalized_record_is_original_bytes = 0
+    ) OR (
+      evidence_role IN (
+        'indicator_source_bytes',
+        'indicator_observation_pre',
+        'indicator_observation_overlap_excluded',
+        'indicator_observation_post'
+      )
+      AND capture_state = 'original_source_bytes_present'
+      AND official_url IS NOT NULL
+      AND content_sha256 IS NOT NULL
+      AND bytes > 0
+      AND raw_path IS NOT NULL
+      AND locator IS NOT NULL
+      AND normalized_record_is_original_bytes = 0
+    )
+  ),
+  UNIQUE (identity_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_link_scope_closures (
+  scope_closure_sha256 TEXT PRIMARY KEY CHECK (
+    length(scope_closure_sha256) = 64
+    AND scope_closure_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  scope_kind TEXT NOT NULL CHECK (
+    scope_kind IN ('action', 'indicator', 'actor_reference', 'combined')
+  ),
+  closure_contract_version TEXT NOT NULL,
+  canonical_preimage_json TEXT NOT NULL CHECK (json_valid(canonical_preimage_json)),
+  canonical_bytes INTEGER NOT NULL CHECK (canonical_bytes > 0),
+  bounded_scope_complete INTEGER NOT NULL CHECK (bounded_scope_complete IN (0, 1)),
+  all_possible_actions_searched INTEGER NOT NULL CHECK (
+    all_possible_actions_searched IN (0, 1)
+  ),
+  all_possible_indicators_searched INTEGER NOT NULL CHECK (
+    all_possible_indicators_searched IN (0, 1)
+  ),
+  all_possible_actor_sources_searched INTEGER NOT NULL CHECK (
+    all_possible_actor_sources_searched IN (0, 1)
+  ),
+  all_possible_action_indicator_pairs_searched INTEGER NOT NULL CHECK (
+    all_possible_action_indicator_pairs_searched IN (0, 1)
+  ),
+  UNIQUE (scope_closure_sha256, scope_kind)
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_link_versions_link_state
+  ON outcome_link_versions(outcome_link_id, version_state, outcome_link_version_id);
+CREATE INDEX IF NOT EXISTS idx_outcome_link_versions_action
+  ON outcome_link_versions(action_id, action_occurred_at, outcome_link_version_id);
+CREATE INDEX IF NOT EXISTS idx_outcome_link_versions_indicator
+  ON outcome_link_versions(indicator_id, indicator_release_id, outcome_link_version_id);
+CREATE INDEX IF NOT EXISTS idx_outcome_link_reviews_version_time
+  ON outcome_link_reviews(outcome_link_version_id, reviewed_at, outcome_link_review_version_id);
+CREATE INDEX IF NOT EXISTS idx_outcome_link_memberships_release_state
+  ON outcome_link_release_memberships(
+    outcome_link_release_id, membership_state, outcome_link_release_membership_id
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_link_observation_refs_version_role
+  ON outcome_link_observation_refs(
+    outcome_link_version_id, role, period_start, outcome_link_observation_ref_id
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_link_participant_refs_action_person
+  ON outcome_link_participant_refs(
+    action_id, upstream_person_id, outcome_link_participant_ref_id
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_link_participant_refs_actor
+  ON outcome_link_participant_refs(
+    actor_graph_release_id, actor_id, outcome_link_participant_ref_id
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_link_participant_refs_version_seat
+  ON outcome_link_participant_refs(
+    outcome_link_version_id, CAST(seat AS INTEGER), seat,
+    outcome_link_participant_ref_id
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_link_evidence_version_role
+  ON outcome_link_evidence(
+    outcome_link_version_id, evidence_role, outcome_link_evidence_id
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_link_scope_closures_kind_sha
+  ON outcome_link_scope_closures(scope_kind, scope_closure_sha256);
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_links_no_update
+BEFORE UPDATE ON outcome_links BEGIN
+  SELECT RAISE(ABORT, 'outcome_links is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_links_no_delete
+BEFORE DELETE ON outcome_links BEGIN
+  SELECT RAISE(ABORT, 'outcome_links is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_versions_no_update
+BEFORE UPDATE ON outcome_link_versions BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_versions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_versions_no_delete
+BEFORE DELETE ON outcome_link_versions BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_versions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_reviews_no_update
+BEFORE UPDATE ON outcome_link_reviews BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_reviews is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_reviews_no_delete
+BEFORE DELETE ON outcome_link_reviews BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_reviews is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_releases_no_update
+BEFORE UPDATE ON outcome_link_releases BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_releases is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_releases_no_delete
+BEFORE DELETE ON outcome_link_releases BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_releases is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_release_memberships_no_update
+BEFORE UPDATE ON outcome_link_release_memberships BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_release_memberships is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_release_memberships_no_delete
+BEFORE DELETE ON outcome_link_release_memberships BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_release_memberships is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_observation_refs_no_update
+BEFORE UPDATE ON outcome_link_observation_refs BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_observation_refs is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_observation_refs_no_delete
+BEFORE DELETE ON outcome_link_observation_refs BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_observation_refs is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_participant_refs_no_update
+BEFORE UPDATE ON outcome_link_participant_refs BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_participant_refs is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_participant_refs_no_delete
+BEFORE DELETE ON outcome_link_participant_refs BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_participant_refs is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_evidence_no_update
+BEFORE UPDATE ON outcome_link_evidence BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_evidence is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_evidence_no_delete
+BEFORE DELETE ON outcome_link_evidence BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_evidence is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_scope_closures_no_update
+BEFORE UPDATE ON outcome_link_scope_closures BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_scope_closures is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_link_scope_closures_no_delete
+BEFORE DELETE ON outcome_link_scope_closures BEGIN
+  SELECT RAISE(ABORT, 'outcome_link_scope_closures is append-only');
+END;
+-- END OUTCOME LINKING V1 SCHEMA
+
+-- Bounded C2A discovery-pair plan. This is deliberately outside the C1
+-- outcome-linking marker: C1's nine-table release contract remains unchanged.
+-- BEGIN OUTCOME PAIR PLANNER C2A SCHEMA
+CREATE TABLE IF NOT EXISTS pipeline_keyset_checkpoints (
+  pipeline_key TEXT NOT NULL,
+  stage TEXT NOT NULL,
+  partition_key TEXT NOT NULL DEFAULT '',
+  checkpoint_contract_version TEXT NOT NULL,
+  config_sha256 TEXT NOT NULL CHECK (
+    length(config_sha256) = 64 AND config_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  input_root_sha256 TEXT NOT NULL CHECK (
+    length(input_root_sha256) = 64
+    AND input_root_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  schema_root_sha256 TEXT NOT NULL CHECK (
+    length(schema_root_sha256) = 64
+    AND schema_root_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  last_key_json TEXT NOT NULL CHECK (json_valid(last_key_json)),
+  rows_written INTEGER NOT NULL DEFAULT 0 CHECK (rows_written >= 0),
+  batches_committed INTEGER NOT NULL DEFAULT 0 CHECK (batches_committed >= 0),
+  semantic_chain_sha256 TEXT NOT NULL CHECK (
+    length(semantic_chain_sha256) = 64
+    AND semantic_chain_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  completed INTEGER NOT NULL DEFAULT 0 CHECK (completed IN (0, 1)),
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (pipeline_key, stage, partition_key)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_pair_plan_actions (
+  action_plan_pk INTEGER PRIMARY KEY,
+  pipeline_key TEXT NOT NULL,
+  action_id TEXT NOT NULL,
+  action_date TEXT NOT NULL CHECK (date(action_date) IS action_date),
+  action_year INTEGER NOT NULL CHECK (
+    action_year BETWEEN 1900 AND 2999
+    AND action_year = CAST(substr(action_date, 1, 4) AS INTEGER)
+  ),
+  action_label TEXT NOT NULL,
+  source_id TEXT NOT NULL CHECK (source_id = 'senado_votaciones'),
+  source_record_pk INTEGER NOT NULL,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT NOT NULL,
+  official_action_url TEXT NOT NULL CHECK (
+    official_action_url LIKE 'https://www.senado.es/%'
+  ),
+  source_page_url TEXT NOT NULL CHECK (
+    source_page_url LIKE 'https://www.senado.es/%'
+  ),
+  source_record_content_sha256 TEXT NOT NULL CHECK (
+    length(source_record_content_sha256) = 64
+    AND source_record_content_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  member_vote_count INTEGER NOT NULL CHECK (member_vote_count > 0),
+  official_name_count INTEGER NOT NULL CHECK (official_name_count > 0),
+  participant_projection_sha256 TEXT NOT NULL CHECK (
+    length(participant_projection_sha256) = 64
+    AND participant_projection_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (pipeline_key, action_id),
+  UNIQUE (pipeline_key, action_plan_pk),
+  UNIQUE (pipeline_key, action_plan_pk, action_year)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_pair_plan_series (
+  series_plan_pk INTEGER PRIMARY KEY,
+  pipeline_key TEXT NOT NULL,
+  indicator_series_id INTEGER NOT NULL,
+  canonical_key TEXT NOT NULL,
+  series_label TEXT NOT NULL,
+  dataset_code TEXT NOT NULL CHECK (
+    dataset_code = json_extract(dimensions_json, '$.dataset_code')
+  ),
+  country_code TEXT NOT NULL CHECK (country_code = 'ES'),
+  geography_code TEXT NOT NULL CHECK (
+    geography_code GLOB 'ES*'
+    AND geography_code = json_extract(
+      dimensions_json, '$.series_dimensions.geo'
+    )
+    AND country_code = substr(geography_code, 1, 2)
+  ),
+  frequency_code TEXT NOT NULL CHECK (frequency_code = 'A'),
+  unit_code TEXT NOT NULL,
+  dimensions_json TEXT NOT NULL CHECK (json_valid(dimensions_json)),
+  source_id TEXT NOT NULL CHECK (source_id = 'eurostat_sdmx'),
+  source_record_pk INTEGER NOT NULL,
+  source_record_id TEXT NOT NULL,
+  source_snapshot_date TEXT NOT NULL,
+  official_source_url TEXT NOT NULL CHECK (
+    official_source_url LIKE 'https://ec.europa.eu/eurostat/%'
+  ),
+  source_record_content_sha256 TEXT NOT NULL CHECK (
+    length(source_record_content_sha256) = 64
+    AND source_record_content_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  origin_capture_sha256 TEXT NOT NULL CHECK (
+    length(origin_capture_sha256) = 64
+    AND origin_capture_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  observation_count INTEGER NOT NULL CHECK (observation_count > 1),
+  observation_years_json TEXT NOT NULL CHECK (json_valid(observation_years_json)),
+  observation_projection_sha256 TEXT NOT NULL CHECK (
+    length(observation_projection_sha256) = 64
+    AND observation_projection_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  first_observation_date TEXT NOT NULL,
+  last_observation_date TEXT NOT NULL,
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (pipeline_key, indicator_series_id),
+  UNIQUE (pipeline_key, series_plan_pk),
+  UNIQUE (pipeline_key, series_plan_pk, dataset_code)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_pair_plan_pairs (
+  pair_plan_id TEXT PRIMARY KEY,
+  pipeline_key TEXT NOT NULL,
+  base_partition_key TEXT NOT NULL,
+  pair_bucket TEXT NOT NULL CHECK (
+    length(pair_bucket) = 2
+    AND pair_bucket NOT GLOB '*[^0-9a-f]*'
+    AND pair_bucket = substr(pair_plan_id, 24, 2)
+  ),
+  partition_key TEXT NOT NULL CHECK (
+    partition_key = base_partition_key || '/bucket=' || pair_bucket
+  ),
+  action_plan_pk INTEGER NOT NULL,
+  series_plan_pk INTEGER NOT NULL,
+  action_year INTEGER NOT NULL,
+  dataset_code TEXT NOT NULL,
+  strict_pre_latest_date TEXT NOT NULL,
+  strict_post_earliest_date TEXT NOT NULL,
+  evidence_level TEXT NOT NULL CHECK (evidence_level = 'L0'),
+  link_state TEXT NOT NULL CHECK (link_state = 'internal_discovery_pair'),
+  association_assessment TEXT NOT NULL CHECK (
+    association_assessment = 'not_assessed'
+  ),
+  causal_assessment TEXT NOT NULL CHECK (causal_assessment = 'not_assessed'),
+  effect_estimate_state TEXT NOT NULL CHECK (
+    effect_estimate_state = 'not_computed'
+  ),
+  political_merit_or_blame TEXT NOT NULL CHECK (
+    political_merit_or_blame = 'not_assessed'
+  ),
+  corruption_assessment TEXT NOT NULL CHECK (
+    corruption_assessment = 'not_assessed'
+  ),
+  ranking_eligible INTEGER NOT NULL CHECK (ranking_eligible = 0),
+  publication_eligible INTEGER NOT NULL CHECK (publication_eligible = 0),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (pipeline_key, action_plan_pk, series_plan_pk),
+  FOREIGN KEY (pipeline_key, action_plan_pk)
+    REFERENCES outcome_pair_plan_actions(pipeline_key, action_plan_pk)
+    ON DELETE RESTRICT,
+  FOREIGN KEY (pipeline_key, action_plan_pk, action_year)
+    REFERENCES outcome_pair_plan_actions(
+      pipeline_key, action_plan_pk, action_year
+    ) ON DELETE RESTRICT,
+  FOREIGN KEY (pipeline_key, series_plan_pk)
+    REFERENCES outcome_pair_plan_series(pipeline_key, series_plan_pk)
+    ON DELETE RESTRICT,
+  FOREIGN KEY (pipeline_key, series_plan_pk, dataset_code)
+    REFERENCES outcome_pair_plan_series(
+      pipeline_key, series_plan_pk, dataset_code
+    )
+    ON DELETE RESTRICT
+);
+
+CREATE INDEX IF NOT EXISTS idx_pipeline_keyset_checkpoints_state
+  ON pipeline_keyset_checkpoints(pipeline_key, completed, stage, partition_key);
+CREATE INDEX IF NOT EXISTS idx_outcome_pair_plan_actions_keyset
+  ON outcome_pair_plan_actions(pipeline_key, action_date, action_id, action_plan_pk);
+CREATE INDEX IF NOT EXISTS idx_outcome_pair_plan_series_keyset
+  ON outcome_pair_plan_series(
+    pipeline_key, dataset_code, indicator_series_id, series_plan_pk
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_pair_plan_pairs_partition
+  ON outcome_pair_plan_pairs(
+    pipeline_key, base_partition_key, pair_bucket, action_plan_pk, series_plan_pk
+  );
+CREATE INDEX IF NOT EXISTS idx_outcome_pair_plan_pairs_action
+  ON outcome_pair_plan_pairs(pipeline_key, action_plan_pk, series_plan_pk);
+CREATE INDEX IF NOT EXISTS idx_outcome_pair_plan_pairs_series
+  ON outcome_pair_plan_pairs(pipeline_key, series_plan_pk, action_plan_pk);
+
+CREATE TRIGGER IF NOT EXISTS trg_pipeline_keyset_checkpoints_roots_immutable
+BEFORE UPDATE ON pipeline_keyset_checkpoints
+WHEN OLD.pipeline_key IS NOT NEW.pipeline_key
+  OR OLD.stage IS NOT NEW.stage
+  OR OLD.partition_key IS NOT NEW.partition_key
+  OR OLD.checkpoint_contract_version IS NOT NEW.checkpoint_contract_version
+  OR OLD.config_sha256 IS NOT NEW.config_sha256
+  OR OLD.input_root_sha256 IS NOT NEW.input_root_sha256
+  OR OLD.schema_root_sha256 IS NOT NEW.schema_root_sha256
+BEGIN
+  SELECT RAISE(ABORT, 'pipeline checkpoint identity roots are immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_pipeline_keyset_checkpoints_completed_immutable
+BEFORE UPDATE ON pipeline_keyset_checkpoints
+WHEN OLD.completed = 1
+BEGIN
+  SELECT RAISE(ABORT, 'completed pipeline checkpoint is immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_pair_plan_actions_no_update
+BEFORE UPDATE ON outcome_pair_plan_actions BEGIN
+  SELECT RAISE(ABORT, 'outcome_pair_plan_actions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_pair_plan_actions_no_delete
+BEFORE DELETE ON outcome_pair_plan_actions BEGIN
+  SELECT RAISE(ABORT, 'outcome_pair_plan_actions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_pair_plan_series_no_update
+BEFORE UPDATE ON outcome_pair_plan_series BEGIN
+  SELECT RAISE(ABORT, 'outcome_pair_plan_series is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_pair_plan_series_no_delete
+BEFORE DELETE ON outcome_pair_plan_series BEGIN
+  SELECT RAISE(ABORT, 'outcome_pair_plan_series is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_pair_plan_pairs_no_update
+BEFORE UPDATE ON outcome_pair_plan_pairs BEGIN
+  SELECT RAISE(ABORT, 'outcome_pair_plan_pairs is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_pair_plan_pairs_no_delete
+BEFORE DELETE ON outcome_pair_plan_pairs BEGIN
+  SELECT RAISE(ABORT, 'outcome_pair_plan_pairs is append-only');
+END;
+-- END OUTCOME PAIR PLANNER C2A SCHEMA
+
+-- Supports one bounded actor-release/source scan before bulk participant matching.
+CREATE INDEX IF NOT EXISTS idx_actor_graph_node_versions_release_source_actor
+  ON actor_graph_node_versions(release_id, source_id, actor_id, node_version_id);

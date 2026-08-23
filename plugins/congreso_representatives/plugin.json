@@ -1,0 +1,231 @@
+{
+  "schema_version": "plugin_manifest_v1",
+  "plugin_id": "org.votaconlachola.congreso-representatives",
+  "name": "Congreso official representatives",
+  "version": "1.0.0",
+  "description": "Reference connector, parser, and normalizer for the official Congreso de los Diputados active representative roster.",
+  "license": "MIT",
+  "entry_point": "plugins.congreso_representatives.plugin:PLUGIN",
+  "plugin_types": [
+    "connector",
+    "parser",
+    "normalizer"
+  ],
+  "maintainers": [
+    {
+      "handle": "gsusI",
+      "role": "owner"
+    }
+  ],
+  "compatibility": {
+    "plugin_api": ">=1.0.0,<2.0.0",
+    "core_ontology": "core_ontology_v1",
+    "python": ">=3.11",
+    "sqlite_schema": "additive-current",
+    "input_contracts": {
+      "acquired_artifact": "1"
+    },
+    "output_contracts": {
+      "representative_role_assignment": "1"
+    },
+    "optional_features": []
+  },
+  "sources": [
+    {
+      "source_id": "congreso_diputados",
+      "name": "Congreso de los Diputados - diputados activos",
+      "source_kind": "primary",
+      "scope": "nacional",
+      "official_base_urls": [
+        "https://www.congreso.es/"
+      ],
+      "formats": [
+        "application/json"
+      ],
+      "rights_basis": "official public parliamentary open-data endpoint",
+      "expected_update_cadence": "snapshot",
+      "min_records_loaded_strict": 1,
+      "full_universe_required": false,
+      "official_capture_contracts": [
+        {
+          "path": "etl/data/raw/samples/congreso_diputados_sample.json",
+          "provenance_path": "etl/data/raw/samples/congreso_diputados_sample.provenance.json",
+          "sha256": "6cb85d7fb70dd807c9a5a85e91fa3e4a20d1b19edb4f981a5c63c0d113444ef4",
+          "bytes": 2073,
+          "official_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260212050007.json",
+          "captured_at": "2026-02-12T12:05:29+00:00",
+          "rights_basis": "official public parliamentary open-data endpoint"
+        }
+      ],
+      "official_public_domain_personal_information_retained": true,
+      "synthetic_or_mock_data": false,
+      "implicit_fallback": false
+    }
+  ],
+  "capabilities": [
+    "network",
+    "object_store_write",
+    "sqlite_read",
+    "sqlite_write"
+  ],
+  "hooks": [
+    "register",
+    "validate_config",
+    "plan",
+    "discover",
+    "acquire",
+    "parse",
+    "normalize",
+    "validate",
+    "checkpoint",
+    "cleanup"
+  ],
+  "inputs": [
+    {
+      "contract": "official_http_or_capture",
+      "schema_version": "1",
+      "storage_kind": "cas",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "contract": "representative_role_assignment",
+      "schema_version": "1",
+      "ontology_concept": "role",
+      "storage_kind": "sqlite",
+      "public_id_field": "role_assignment_id",
+      "natural_key_fields": [
+        "source_id",
+        "source_record_id"
+      ],
+      "partition_fields": [
+        "source_id",
+        "source_snapshot_date"
+      ],
+      "provenance_mode": "official_capture_source_record_and_raw_payload",
+      "publication_class": "public_partitioned"
+    }
+  ],
+  "runtime": {
+    "network_access": true,
+    "allowed_hosts": [
+      "www.congreso.es"
+    ],
+    "required_secret_names": [],
+    "filesystem_read_roots": [
+      "etl/data/raw/samples"
+    ],
+    "filesystem_write_roots": [
+      "etl/data/raw"
+    ],
+    "max_batch_rows": 1000,
+    "max_memory_mb": 256,
+    "timeout_seconds": 45,
+    "max_concurrency": 2,
+    "requests_per_second": 1,
+    "checkpoint_interval_items": 1
+  },
+  "partitions": {
+    "strategy": "source_time",
+    "fields": [
+      "source_id",
+      "source_snapshot_date"
+    ],
+    "max_rows_per_output_file": 100000,
+    "max_bytes_per_output_file": 134217728,
+    "cursor_contract": "one active-roster artifact per snapshot"
+  },
+  "idempotency": {
+    "work_item_key_fields": [
+      "source_id",
+      "source_snapshot_date"
+    ],
+    "natural_key_policy": "source_id plus official CODDIPUTADO source_record_id",
+    "version_model": "current_state_plus_sightings",
+    "replay_expected": "same_logical_ids_and_counts"
+  },
+  "provenance": {
+    "source_record_required": true,
+    "source_url_required_when_public": true,
+    "content_sha256_required": true,
+    "observed_at_required": true,
+    "method_version_required_for_derived": true,
+    "evidence_links_required_for_relations": true
+  },
+  "quality_gates": [
+    {
+      "gate_id": "manifest-contract",
+      "stage": "register",
+      "command": "python3 scripts/validate_reference_plugin.py",
+      "blocking": true
+    },
+    {
+      "gate_id": "official-capture-origin",
+      "stage": "acquire",
+      "command": "just etl-audit-official-samples",
+      "blocking": true
+    },
+    {
+      "gate_id": "reference-plugin-e2e",
+      "stage": "normalize",
+      "command": "python3 -m unittest tests.test_reference_plugin_congreso",
+      "blocking": true
+    }
+  ],
+  "test_hooks": [
+    {
+      "kind": "contract",
+      "command": "python3 scripts/validate_reference_plugin.py",
+      "uses_official_real_data": true,
+      "capture_contract_paths": [
+        "etl/data/raw/samples/congreso_diputados_sample.json"
+      ]
+    },
+    {
+      "kind": "official_capture_replay",
+      "command": "python3 -m unittest tests.test_reference_plugin_congreso",
+      "uses_official_real_data": true,
+      "capture_contract_paths": [
+        "etl/data/raw/samples/congreso_diputados_sample.json"
+      ]
+    },
+    {
+      "kind": "idempotence",
+      "command": "python3 -m unittest tests.test_reference_plugin_congreso",
+      "uses_official_real_data": true,
+      "capture_contract_paths": [
+        "etl/data/raw/samples/congreso_diputados_sample.json"
+      ]
+    },
+    {
+      "kind": "provenance",
+      "command": "python3 -m unittest tests.test_reference_plugin_congreso",
+      "uses_official_real_data": true,
+      "capture_contract_paths": [
+        "etl/data/raw/samples/congreso_diputados_sample.json"
+      ]
+    }
+  ],
+  "security": {
+    "credentials_embedded": false,
+    "remote_code_execution": false,
+    "auto_install_dependencies": false,
+    "manifest_contains_secrets": false,
+    "runtime_capability_enforcement": true
+  },
+  "publication": {
+    "official_records_only": true,
+    "synthetic_or_mock_data_forbidden": true,
+    "placeholder_data_forbidden": true,
+    "implicit_fallback_forbidden": true,
+    "official_public_domain_personal_information_retained": true,
+    "publication_hygiene_required": true,
+    "validation_before_publish_required": true,
+    "durable_origin_required_when_claimed": true,
+    "restore_verification_required_when_claimed": true
+  },
+  "deprecation": {
+    "status": "active"
+  }
+}

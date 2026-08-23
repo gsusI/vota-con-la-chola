@@ -5,16 +5,20 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
-from publicdata_sqlite import ensure_column, open_db, seed_sources_from_config
-from publicdata_sqlite import table_columns, table_create_sql, table_exists
+from publicdata_sqlite import (
+    ensure_column,
+    open_db,  # noqa: F401 - compatibility re-export
+    seed_sources_from_config,
+    table_create_sql,
+    table_exists,
+)
 from publicdata_sqlite import upsert_source_record as _upsert_source_record
 
 from .config import SOURCE_CONFIG
 from .util import canonical_key, normalize_key_part, normalize_ws, now_utc_iso
 
-
 _UNIQUE_SOURCE_URL_RE = re.compile(
-    r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.I
+    r"UNIQUE\s*\(\s*source_id\s*,\s*source_url\s*\)", re.IGNORECASE
 )
 
 
@@ -486,6 +490,11 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             "source_snapshot_date": "source_snapshot_date TEXT",
             "content_sha256": "content_sha256 TEXT",
         },
+        "actor_graph_releases": {
+            "source_mapping_semantic_sha256": (
+                "source_mapping_semantic_sha256 TEXT NOT NULL DEFAULT ''"
+            ),
+        },
         "mandates": {
             "role_id": "role_id INTEGER REFERENCES roles(role_id)",
             "admin_level_id": "admin_level_id INTEGER REFERENCES admin_levels(admin_level_id)",
@@ -532,6 +541,30 @@ def ensure_schema_compat(conn: sqlite3.Connection) -> None:
             "birth_date": "birth_date TEXT",
             "birth_date_source": "birth_date_source TEXT",
             "dni": "dni TEXT",
+        },
+        "boe_election_effective_candidacies": {
+            "party_id": "party_id INTEGER REFERENCES parties(party_id)",
+        },
+        "boe_election_effective_candidate_occurrences": {
+            "person_id": "person_id INTEGER REFERENCES persons(person_id)",
+            "party_id": "party_id INTEGER REFERENCES parties(party_id)",
+            "source_id": "source_id TEXT REFERENCES sources(source_id)",
+            "source_record_pk": (
+                "source_record_pk INTEGER REFERENCES source_records(source_record_pk)"
+            ),
+            "document_source_record_pk": (
+                "document_source_record_pk INTEGER "
+                "REFERENCES source_records(source_record_pk)"
+            ),
+            "first_seen_snapshot_date": "first_seen_snapshot_date TEXT",
+            "last_seen_snapshot_date": "last_seen_snapshot_date TEXT",
+            "is_present": "is_present INTEGER CHECK (is_present IN (0, 1))",
+            "person_identity_state": (
+                "person_identity_state TEXT CHECK ("
+                "person_identity_state IS NULL OR person_identity_state IN ("
+                "'source_scoped_base_exact', "
+                "'source_scoped_correction_exact'))"
+            ),
         },
         "money_contract_records": {
             "amount_eur_decimal": "amount_eur_decimal TEXT",
@@ -1235,7 +1268,6 @@ def finish_run(
 
 def backfill_normalized_dimensions(conn: sqlite3.Connection) -> None:
     # Keep behavior identical to legacy script; imported lazily to avoid circular imports.
-    from .util import normalize_key_part as _normalize_key_part  # noqa: PLC0415
 
     now_iso = now_utc_iso()
     for row in conn.execute(

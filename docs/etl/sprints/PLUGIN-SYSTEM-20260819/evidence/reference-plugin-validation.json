@@ -1,0 +1,91 @@
+{
+  "schema_version": "reference_plugin_run_v1",
+  "status": "ok",
+  "plugin": {
+    "plugin_id": "org.votaconlachola.congreso-representatives",
+    "version": "1.0.0",
+    "manifest_path": "plugins/congreso_representatives/plugin.json",
+    "registration": {
+      "plugin_id": "org.votaconlachola.congreso-representatives",
+      "version": "1.0.0",
+      "source_ids": [
+        "congreso_diputados"
+      ],
+      "output_contracts": [
+        "representative_role_assignment_v1"
+      ]
+    }
+  },
+  "policy": {
+    "official_records_only": true,
+    "synthetic_or_mock": false,
+    "official_public_domain_personal_information_retained": true,
+    "network_enabled": false
+  },
+  "capture": {
+    "source_id": "congreso_diputados",
+    "source_url": "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260212050007.json",
+    "content_sha256": "6cb85d7fb70dd807c9a5a85e91fa3e4a20d1b19edb4f981a5c63c0d113444ef4",
+    "bytes": 2073,
+    "note": "official-capture-replay:6cb85d7fb70dd807c9a5a85e91fa3e4a20d1b19edb4f981a5c63c0d113444ef4"
+  },
+  "hooks": {
+    "config_validation": {
+      "status": "ok",
+      "network_enabled": false,
+      "source_id": "congreso_diputados",
+      "snapshot_date": "2026-02-12"
+    },
+    "work_items": 1,
+    "records_parsed": 3,
+    "fact_batch_rows": 3,
+    "logical_sha256": "793de741e723ba7758c4636825821ed61a0a394dba1b777c2fa6e0741e36f1a8",
+    "validation": {
+      "status": "ok",
+      "records_seen": 3,
+      "records_loaded": 3,
+      "logical_sha256": "793de741e723ba7758c4636825821ed61a0a394dba1b777c2fa6e0741e36f1a8",
+      "official_public_domain_personal_information_retained": true,
+      "synthetic_or_mock": false
+    },
+    "checkpoint": {
+      "item_key": "congreso_diputados:2026-02-12:active-roster",
+      "partition_key": "congreso_diputados/2026-02-12",
+      "logical_sha256": "793de741e723ba7758c4636825821ed61a0a394dba1b777c2fa6e0741e36f1a8",
+      "records_loaded": 3
+    },
+    "cleanup": {
+      "status": "ok",
+      "temporary_files_removed": 0,
+      "snapshot_date": "2026-02-12"
+    }
+  },
+  "sqlite": {
+    "db_file": "congreso-reference-plugin.db",
+    "replays": [
+      {
+        "replay_number": 1,
+        "records_seen": 3,
+        "records_loaded": 3,
+        "note": "official-capture-replay:6cb85d7fb70dd807c9a5a85e91fa3e4a20d1b19edb4f981a5c63c0d113444ef4"
+      },
+      {
+        "replay_number": 2,
+        "records_seen": 3,
+        "records_loaded": 3,
+        "note": "official-capture-replay:6cb85d7fb70dd807c9a5a85e91fa3e4a20d1b19edb4f981a5c63c0d113444ef4"
+      }
+    ],
+    "counts": {
+      "source_records": 3,
+      "mandates": 3,
+      "persons_linked": 3,
+      "ingestion_runs": 2
+    },
+    "source_urls": [
+      "https://www.congreso.es/webpublica/opendata/diputados/DiputadosActivos__20260212050007.json"
+    ],
+    "foreign_key_failures": 0,
+    "idempotent": true
+  }
+}

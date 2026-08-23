@@ -499,6 +499,8 @@ LABEL_COLUMN_CANDIDATES = (
     "role_title",
     "institution_name",
     "party_name",
+    "candidacy_name",
+    "normalized_text",
     "display_name",
     "acronym",
     "source_record_id",
