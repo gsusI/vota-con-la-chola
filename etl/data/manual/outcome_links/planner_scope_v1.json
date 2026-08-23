@@ -1,0 +1,96 @@
+{
+  "format_version": "outcome_context_pair_planner_scope_v1",
+  "scope_revision": 1,
+  "planner_contract_version": "outcome_context_sparse_pair_planner_c2a_v1",
+  "checkpoint_contract_version": "pipeline_keyset_checkpoint_v1",
+  "checkpoint_batch_size": 1000,
+  "contract_date": "2026-08-23",
+  "canonicalization": "UTF-8 JSON; sorted object keys; compact separators; Unicode retained; no trailing LF; streaming rows length-prefixed with unsigned 64-bit big-endian byte length",
+  "policy": {
+    "real_data_only": true,
+    "official_public_identities_retained": true,
+    "evidence_level": "L0",
+    "link_state": "internal_discovery_pair",
+    "association_assessment": "not_assessed",
+    "causal_assessment": "not_assessed",
+    "effect_estimate_state": "not_computed",
+    "political_merit_or_blame": "not_assessed",
+    "corruption_assessment": "not_assessed",
+    "ranking_eligible": false,
+    "publication_eligible": false
+  },
+  "sources": {
+    "actions": {
+      "path": "etl/data/staging/politicos-es.db",
+      "bytes": 1575038976,
+      "sha256": "46e72488f24bbecc240ac94c524fe503b8599d742c983595919678a842c5f0e3",
+      "source_id": "senado_votaciones",
+      "source_snapshot_date": "2026-02-12",
+      "official_url_prefix": "https://www.senado.es/"
+    },
+    "indicators": {
+      "path": "etl/data/staging/eurostat-indicators-real-s2-20260811.db",
+      "bytes": 2801963008,
+      "sha256": "1c2ca257b93fc2a0b69a4798d5c558320a160469e3308039e9e9cee44910c9a6",
+      "source_id": "eurostat_sdmx",
+      "source_snapshot_date": "2026-08-11",
+      "frequency_code": "A",
+      "geography_code": "ES",
+      "official_url_prefix": "https://ec.europa.eu/eurostat/"
+    }
+  },
+  "query_contract": {
+    "actions_keyset_sql_utf8": "SELECT v.vote_event_id AS action_id,v.vote_date AS action_date,v.title AS action_label,v.source_id,v.source_record_pk,sr.source_record_id,sr.source_snapshot_date,substr(v.vote_event_id,5) AS official_action_url,v.source_url AS source_page_url,sr.content_sha256 AS source_record_content_sha256 FROM parl_vote_events v JOIN source_records sr ON sr.source_record_pk=v.source_record_pk WHERE v.source_id=? AND sr.source_snapshot_date=? AND v.vote_date IS NOT NULL AND trim(v.vote_date)<>'' AND (v.vote_date>? OR (v.vote_date=? AND v.vote_event_id>?)) ORDER BY v.vote_date,v.vote_event_id LIMIT ?",
+    "actions_keyset_sql_sha256": "02b92851bf9eae78c97b8a8a97364e69e52804922d27e0254bdc1817844d211f",
+    "members_keyset_sql_utf8": "SELECT m.vote_event_id AS action_id,m.member_vote_id,m.seat,m.member_name,m.member_name_normalized,CAST(m.person_id AS TEXT) AS person_id,m.group_code,m.vote_choice,m.source_id,m.source_url,m.source_snapshot_date FROM parl_vote_member_votes m JOIN parl_vote_events v ON v.vote_event_id=m.vote_event_id JOIN source_records sr ON sr.source_record_pk=v.source_record_pk WHERE v.source_id=? AND sr.source_snapshot_date=? AND v.vote_date IS NOT NULL AND trim(v.vote_date)<>'' AND (m.vote_event_id>? OR (m.vote_event_id=? AND m.member_vote_id>?)) ORDER BY m.vote_event_id,m.member_vote_id LIMIT ?",
+    "members_keyset_sql_sha256": "f2ebef508bb8537dc3bec50bb8b0204060085395ee821398bd554f7b00bc224c",
+    "series_keyset_sql_utf8": "SELECT s.indicator_series_id,s.canonical_key,s.label AS series_label,json_extract(s.dimensions_json,'$.dataset_code') AS dataset_code,json_extract(s.dimensions_json,'$.series_dimensions.geo') AS geography_code,s.frequency AS frequency_code,s.unit AS unit_code,s.dimensions_json,s.source_id,s.source_record_pk,sr.source_record_id,sr.source_snapshot_date,s.source_url AS official_source_url,sr.content_sha256 AS source_record_content_sha256,json_extract(s.raw_payload,'$.origin_capture_sha256') AS origin_capture_sha256 FROM indicator_series s JOIN source_records sr ON sr.source_record_pk=s.source_record_pk WHERE s.source_id=? AND sr.source_snapshot_date=? AND s.frequency=? AND json_extract(s.dimensions_json,'$.series_dimensions.geo')=? AND s.indicator_series_id>? ORDER BY s.indicator_series_id LIMIT ?",
+    "series_keyset_sql_sha256": "d99d35a215c8f4c41c34ef534571d4d406965def2ce44824df64592b0f16add9",
+    "points_keyset_sql_utf8": "SELECT p.indicator_series_id,p.date,p.indicator_point_id,CAST(p.value AS TEXT) AS value_decimal,p.value_text FROM indicator_points p JOIN indicator_series s ON s.indicator_series_id=p.indicator_series_id JOIN source_records sr ON sr.source_record_pk=s.source_record_pk WHERE s.source_id=? AND sr.source_snapshot_date=? AND s.frequency=? AND json_extract(s.dimensions_json,'$.series_dimensions.geo')=? AND (p.indicator_series_id>? OR (p.indicator_series_id=? AND (p.date>? OR (p.date=? AND p.indicator_point_id>?)))) ORDER BY p.indicator_series_id,p.date,p.indicator_point_id LIMIT ?",
+    "points_keyset_sql_sha256": "416fac9a317076906767f9a9198066e12092134869284f9ebd9edcc29e66aea8",
+    "partition_contract": {
+      "version": "outcome_pair_plan_partition_v1",
+      "base_key_format": "action_source={action_source}/year={action_year}/indicator_source={indicator_source}/dataset={dataset_code}/country={country_code}",
+      "bucket_derivation": "first two lowercase hexadecimal characters of full pair identity SHA-256",
+      "full_key_format": "{base_partition_key}/bucket={pair_bucket}"
+    },
+    "pair_scan_order": [
+      "action_plan_pk",
+      "series_plan_pk"
+    ],
+    "pair_eligibility": "strict_pre exists when observation year < action year; strict_post exists when observation year > action year; action-year observation is overlap-excluded; both strict sides required"
+  },
+  "expected": {
+    "dated_actions": 458,
+    "action_years": 5,
+    "member_votes": 119116,
+    "distinct_official_names": 490,
+    "all_indicator_series": 155435,
+    "eligible_es_annual_series": 75,
+    "eligible_series_observations": 937,
+    "datasets": 4,
+    "global_unfiltered_product": 71189230,
+    "eligible_pairs": 33726,
+    "base_partitions": 18,
+    "partition_rows": {
+      "action_source=senado_votaciones/year=2020/indicator_source=eurostat_sdmx/dataset=demo_r_d3dens/country=ES": 278,
+      "action_source=senado_votaciones/year=2020/indicator_source=eurostat_sdmx/dataset=demo_r_pjangrp3/country=ES": 18348,
+      "action_source=senado_votaciones/year=2020/indicator_source=eurostat_sdmx/dataset=ilc_peps11n/country=ES": 278,
+      "action_source=senado_votaciones/year=2020/indicator_source=eurostat_sdmx/dataset=nama_10r_3gdp/country=ES": 1946,
+      "action_source=senado_votaciones/year=2021/indicator_source=eurostat_sdmx/dataset=demo_r_d3dens/country=ES": 41,
+      "action_source=senado_votaciones/year=2021/indicator_source=eurostat_sdmx/dataset=demo_r_pjangrp3/country=ES": 2706,
+      "action_source=senado_votaciones/year=2021/indicator_source=eurostat_sdmx/dataset=ilc_peps11n/country=ES": 41,
+      "action_source=senado_votaciones/year=2021/indicator_source=eurostat_sdmx/dataset=nama_10r_3gdp/country=ES": 287,
+      "action_source=senado_votaciones/year=2022/indicator_source=eurostat_sdmx/dataset=demo_r_d3dens/country=ES": 34,
+      "action_source=senado_votaciones/year=2022/indicator_source=eurostat_sdmx/dataset=demo_r_pjangrp3/country=ES": 2244,
+      "action_source=senado_votaciones/year=2022/indicator_source=eurostat_sdmx/dataset=ilc_peps11n/country=ES": 34,
+      "action_source=senado_votaciones/year=2022/indicator_source=eurostat_sdmx/dataset=nama_10r_3gdp/country=ES": 238,
+      "action_source=senado_votaciones/year=2023/indicator_source=eurostat_sdmx/dataset=demo_r_d3dens/country=ES": 27,
+      "action_source=senado_votaciones/year=2023/indicator_source=eurostat_sdmx/dataset=demo_r_pjangrp3/country=ES": 1782,
+      "action_source=senado_votaciones/year=2023/indicator_source=eurostat_sdmx/dataset=ilc_peps11n/country=ES": 27,
+      "action_source=senado_votaciones/year=2023/indicator_source=eurostat_sdmx/dataset=nama_10r_3gdp/country=ES": 189,
+      "action_source=senado_votaciones/year=2024/indicator_source=eurostat_sdmx/dataset=demo_r_pjangrp3/country=ES": 5148,
+      "action_source=senado_votaciones/year=2024/indicator_source=eurostat_sdmx/dataset=ilc_peps11n/country=ES": 78
+    }
+  }
+}

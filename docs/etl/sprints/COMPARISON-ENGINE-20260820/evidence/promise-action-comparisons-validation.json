@@ -1,0 +1,146 @@
+{
+  "artifact": {
+    "bytes": 72146,
+    "published_public_byte_parity": true,
+    "sha256": "24b6edd02329158040b50dc80a9191df3efea8ec07e10bbcb7adaaed280e0ca6"
+  },
+  "bounded_action_searches": [
+    {
+      "candidate_events_scanned": 97,
+      "candidate_rows_sha256": "1b8e4e8e982edf2985a5e184395331d3271ae7a0d055eb9d6a9f3d509dbadb0a",
+      "candidate_vote_rows_scanned": 97,
+      "claim_id": "claim_8c34c8252fed8dd130a66dac7ef9233394d4d33ef607a9b5542a1ca2f72d09a5",
+      "matching_events": 0
+    }
+  ],
+  "checks": {
+    "actions_scope_hash_includes_real_bounded_searches": true,
+    "all_foreign_keys_clean": true,
+    "all_sqlite_integrity": true,
+    "bounded_search_candidate_rows_hashed": true,
+    "comparison_rows_reconcile": true,
+    "deterministic_ids": true,
+    "evidence_reconstructed": true,
+    "no_claim_fulfillment_inference": true,
+    "no_fake_markers": true,
+    "no_private_or_workstation_markers": true,
+    "official_public_identity_retained": true,
+    "public_comparison_ids_exact": true,
+    "public_input_releases_have_no_volatile_lineage": true,
+    "public_input_releases_semantic_lineage_exact": true,
+    "public_item_uncertainty_present": true,
+    "public_json_bounded": true,
+    "public_method_states_present": true,
+    "public_real_only_policy": true,
+    "public_release_metadata_matches": true,
+    "public_status_counts_complete": true,
+    "published_public_byte_parity": true,
+    "release_contract_versions": true,
+    "release_counts_reconcile": true,
+    "release_id_reconstructed": true,
+    "release_ids_well_formed": true,
+    "required_real_inputs_present": true,
+    "review_input_contract": true,
+    "review_input_hash": true,
+    "review_keys_unique": true,
+    "review_rows_reconcile": true,
+    "reviewed_mapping_hash_matches_release": true,
+    "row_ids_well_formed": true,
+    "semantic_hash_reconstructed": true,
+    "single_actor_graph_release": true,
+    "single_release": true,
+    "source_manifest_has_no_volatile_lineage": true,
+    "source_manifest_semantic_lineage_exact": true,
+    "source_rows_reconstructed": true,
+    "source_scope_hashes_reconstructed": true,
+    "status_semantics_fail_closed": true,
+    "temporal_order_valid": true,
+    "v1_changed_framing_disabled": true,
+    "zero_strong_v1_truth": true
+  },
+  "counts": {
+    "actor_nodes": 7,
+    "actor_relationships": 2,
+    "claims": 4,
+    "comparisons": 5,
+    "evidence": 18,
+    "mapping_reviews": 5,
+    "official_identity_labels_retained": 3,
+    "roll_call_actions": 4
+  },
+  "database": {
+    "bytes": 4067328,
+    "foreign_key_violations": 0,
+    "integrity_check": "ok",
+    "sha256": "97ca482c7e9376f3e7313c16afa19be144a0eafe237502ef1792802a01bc9941"
+  },
+  "errors": [],
+  "failed_checks": [],
+  "input_file_facts": {
+    "actions_db": {
+      "bytes": 1575038976,
+      "path": "etl/data/staging/politicos-es.db",
+      "sha256": "46e72488f24bbecc240ac94c524fe503b8599d742c983595919678a842c5f0e3"
+    },
+    "actor_graph_db": {
+      "bytes": 1436262400,
+      "path": "etl/data/staging/actor-graph-v1.db",
+      "sha256": "b6792dfc02194c4bc434bdf97f29e05d31aa951a22f0813da993f83572093cb1"
+    },
+    "promises_db": {
+      "bytes": 4997120,
+      "path": "etl/data/staging/promises-bng-2023.db",
+      "sha256": "9f0b61abf13f8d046a58762f2e14806fb3a78d73477ae355d1acb3b91493dfc2"
+    },
+    "reviewed_mappings": {
+      "bytes": 11104,
+      "path": "etl/data/manual/promise_action_comparisons/reviewed_mappings_v1.json",
+      "sha256": "82bbfa1c34c227ce3e6525e32149be0d6ded86a1eb20ab56fadbca0d717d0e3b"
+    }
+  },
+  "policy": {
+    "absence_is_not_nonfulfillment": true,
+    "confidence_is_quality_not_truth": true,
+    "no_causality_or_corruption_inference": true,
+    "official_public_domain_information_retained": true,
+    "real_data_only": true,
+    "synthetic_or_mock": false
+  },
+  "reviewed_mappings_sha256": "44b579a3e16e59f8807dd3ed1933bed17ee7e290e4f605b2e4694502d6f21c49",
+  "schema_version": "promise_action_comparison_validation_v1",
+  "semantic_sha256": "7b37c75c836a0a85c0aab70b7165a5ce005cef320c22c49e34ec650969691b19",
+  "snapshot_date": "2026-08-20",
+  "source_scope_sha256": {
+    "actions": "e7535d6a4c186c79ff8ba7b56cbe96c886aa2c49ebe5adef4d83d2bd6db933e1",
+    "actors": "7513cb344282eab9cd29c5242a63db92eeb6a6a1bcac472e6f8dc57ffe1eb060",
+    "promises": "23539aa305db1ff157c33566e380f69dc43f0d6e86a3bb95e265ea0a31aba954"
+  },
+  "status": "passed",
+  "status_counts": {
+    "aligned": 0,
+    "ambiguous_mapping": 3,
+    "changed_framing": 0,
+    "conflicted": 0,
+    "insufficient_evidence": 1,
+    "not_comparable": 1
+  },
+  "strong_comparisons": 0,
+  "validated_output_file_facts": {
+    "comparison_db": {
+      "bytes": 4067328,
+      "path": "etl/data/staging/promise-action-comparisons-v1.db",
+      "sha256": "97ca482c7e9376f3e7313c16afa19be144a0eafe237502ef1792802a01bc9941"
+    },
+    "public": {
+      "bytes": 72146,
+      "path": "ui/gh-pages-next/public/comparisons/data/comparisons.json",
+      "sha256": "24b6edd02329158040b50dc80a9191df3efea8ec07e10bbcb7adaaed280e0ca6"
+    },
+    "published": {
+      "bytes": 72146,
+      "path": "etl/data/published/promise-action-comparisons-v1.json",
+      "sha256": "24b6edd02329158040b50dc80a9191df3efea8ec07e10bbcb7adaaed280e0ca6"
+    }
+  },
+  "validated_release_id": "vclc:comparison-release:ea65f3b8104dd678cb7ebce724b78f86"
+}

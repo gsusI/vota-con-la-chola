@@ -1,0 +1,520 @@
+.page {
+  --outcome-ink: #132a2e;
+  --outcome-teal: #155f67;
+  --outcome-teal-soft: #e8f5f4;
+  --outcome-amber: #74430e;
+  --outcome-amber-soft: #fff6e3;
+  gap: 18px;
+  color: var(--outcome-ink);
+  animation: policy-outcomes-page-enter 320ms ease-out both;
+}
+
+.runtimeGate,
+.runtimeVerified {
+  min-height: 100vh;
+  animation: policy-outcomes-runtime-enter 240ms ease-out both;
+}
+
+.runtimeGate {
+  align-content: start;
+  padding-top: clamp(24px, 7vh, 72px);
+}
+
+.runtimePhasePanel {
+  animation: policy-outcomes-runtime-phase 220ms ease-out both;
+}
+
+.runtimeRetry {
+  margin-top: 14px;
+  border: 1px solid var(--outcome-teal);
+  border-radius: 6px;
+  background: var(--outcome-teal);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 10px 14px;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.runtimeRetry:hover,
+.runtimeRetry:focus-visible {
+  background: #fff;
+  color: var(--outcome-teal);
+  transform: translateY(-1px);
+}
+
+.hero,
+.statePanel,
+.section,
+.boundaryCard,
+.auditSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
+  gap: 22px;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(22px, 4vw, 38px);
+  background:
+    radial-gradient(circle at 92% 12%, rgba(69, 147, 151, 0.16), transparent 31%),
+    linear-gradient(135deg, #ffffff 0%, #f3faf9 100%);
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--outcome-teal);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  max-width: 18ch;
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.heroSummary,
+.sectionCopy,
+.sectionNote,
+.gateDescription,
+.metricNote {
+  color: var(--ink-soft);
+  line-height: 1.58;
+}
+
+.heroSummary {
+  max-width: 69ch;
+  margin: 15px 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+
+.heroFacts,
+.provenanceFacts {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.heroFact,
+.provenanceFacts > div {
+  border: 1px solid #bad7d7;
+  border-left: 3px solid var(--outcome-teal);
+  border-radius: 6px;
+  background: rgba(232, 245, 244, 0.82);
+  padding: 11px 12px;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.heroFact:hover,
+.provenanceFacts > div:hover {
+  border-color: #88b8b9;
+  background: #f3fbfa;
+  transform: translateY(-1px);
+}
+
+.heroFact dt,
+.provenanceFacts dt {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.heroFact dd,
+.provenanceFacts dd {
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+.statePanel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 20px;
+  border-left: 5px solid var(--outcome-teal);
+  transition: grid-template-columns 220ms ease, padding 220ms ease, border-color 180ms ease;
+}
+
+.stateMarker {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--outcome-teal-soft);
+  color: var(--outcome-teal);
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  transition: width 220ms ease, height 220ms ease, transform 180ms ease;
+}
+
+.statePanel:hover .stateMarker {
+  transform: scale(1.04);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy {
+  max-width: 76ch;
+  margin: 8px 0 0;
+}
+
+.section {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+  transition: padding 220ms ease;
+}
+
+.sectionHeading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.sectionNote {
+  max-width: 54ch;
+  margin: 0;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.inputCard {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid #c8dddd;
+  border-radius: 7px;
+  background: #f8fcfb;
+  padding: 15px;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.inputCard:hover {
+  border-color: #8ebcbd;
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.inputTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.inputCard p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.metric {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  border: 1px solid #c8dddd;
+  border-top: 3px solid var(--outcome-teal);
+  border-radius: 7px;
+  background: #f8fcfb;
+  padding: 15px;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.metric:hover {
+  border-color: #8ebcbd;
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+.metricLabel {
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.metricValue {
+  color: var(--outcome-teal);
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1;
+}
+
+.metricNote {
+  font-size: 0.78rem;
+}
+
+.gateList {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gateStep {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  border: 1px solid #e7d1a8;
+  border-radius: 7px;
+  background: var(--outcome-amber-soft);
+  padding: 13px;
+  transition: grid-template-columns 220ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.gateStep:first-child {
+  border-color: #b8d6d5;
+  background: var(--outcome-teal-soft);
+}
+
+.gateNumber {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  background: #f1d9a8;
+  color: var(--outcome-amber);
+  font-family: var(--mono);
+  font-weight: 900;
+}
+
+.gateStep:first-child .gateNumber {
+  background: #bfe1df;
+  color: var(--outcome-teal);
+}
+
+.gateHeading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gateTitle {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.gateStatus {
+  border-radius: 999px;
+  background: #f3d7a1;
+  padding: 4px 8px;
+  color: var(--outcome-amber);
+  font-size: 0.66rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.gateStep:first-child .gateStatus {
+  background: #b9dedc;
+  color: var(--outcome-teal);
+}
+
+.gateDescription {
+  margin: 5px 0 0;
+  font-size: 0.86rem;
+}
+
+.boundaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.boundaryCard {
+  min-width: 0;
+  padding: 20px;
+  transition: padding 220ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.boundaryCard:hover {
+  border-color: #a9c9c9;
+  transform: translateY(-1px);
+}
+
+.boundaryList {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.auditSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, auto);
+  gap: 18px 24px;
+  align-items: start;
+  padding: 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.auditLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.provenanceFacts {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  transition: grid-template-columns 220ms ease;
+}
+
+.provenanceFacts code {
+  overflow-wrap: anywhere;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+@keyframes policy-outcomes-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes policy-outcomes-runtime-phase {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes policy-outcomes-runtime-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 980px) {
+  .metricGrid,
+  .inputGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .hero,
+  .auditSection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .provenanceFacts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .hero,
+  .statePanel,
+  .section,
+  .boundaryCard,
+  .auditSection {
+    padding: 15px;
+  }
+
+  .statePanel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stateMarker {
+    width: 44px;
+    height: 44px;
+  }
+
+  .metricGrid,
+  .inputGrid,
+  .boundaryGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    animation: none;
+  }
+
+  .runtimeGate,
+  .runtimeVerified,
+  .runtimePhasePanel {
+    animation: none;
+  }
+
+  .hero,
+  .heroFact,
+  .statePanel,
+  .stateMarker,
+  .section,
+  .metricGrid,
+  .inputGrid,
+  .inputCard,
+  .metric,
+  .gateStep,
+  .boundaryGrid,
+  .boundaryCard,
+  .auditSection,
+  .provenanceFacts,
+  .provenanceFacts > div {
+    transition: none;
+  }
+
+  .runtimeRetry {
+    transition: none;
+  }
+}

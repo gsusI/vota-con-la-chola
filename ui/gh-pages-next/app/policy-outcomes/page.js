@@ -1,706 +1,406 @@
-"use client";
+import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 
-import { useEffect, useMemo, useState } from "react";
-import { resolveBasePath, withBasePath } from "../path-utils.mjs";
+import { formatDate, formatInt } from "../static-snapshot.mjs";
+import { StaticRouteLink } from "../static-route-components";
+import PolicyOutcomesRuntimeGate from "./PolicyOutcomesRuntimeGate";
+import {
+  isSafePolicyOutcomesManifestPath,
+  resolvePolicyOutcomesEvidenceAssetPath,
+  validatePolicyOutcomesPackage,
+} from "./status-contract.mjs";
+import styles from "./policy-outcomes.module.css";
 
-function safeInt(value) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : 0;
+
+const STATUS_PATH = "/policy-outcomes/data/policy-outcomes.json";
+
+export const metadata = {
+  title: "Estado de resultados | Vota Con La Chola",
+  description:
+    "Estado público verificable de la evidencia y los límites de los vínculos de resultado.",
+};
+
+function sha256(bytes) {
+  return crypto.createHash("sha256").update(bytes).digest("hex");
 }
 
-function safeFloat(value) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
-function normalize(value) {
-  return String(value || "").trim().toLowerCase();
-}
-
-function normalizeQuery(value) {
-  return normalize(value).replace(/\s+/g, " ");
-}
-
-function formatInt(value) {
-  return safeInt(value).toLocaleString("es-ES");
-}
-
-function formatFloat(value) {
-  const parsed = safeFloat(value);
-  if (parsed === null) {
-    return "—";
+function readPublicBytes(publicPath) {
+  const segments = String(publicPath || "").split("/").filter(Boolean);
+  const publicRoot = path.resolve(process.cwd(), "public");
+  const filePath = path.resolve(publicRoot, ...segments);
+  if (!filePath.startsWith(`${publicRoot}${path.sep}`) || !fs.existsSync(filePath)) return null;
+  try {
+    return fs.readFileSync(filePath);
+  } catch (_error) {
+    return null;
   }
-  return parsed.toLocaleString("es-ES", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 4,
+}
+
+function parseJsonBytes(bytes) {
+  if (!bytes) return null;
+  try {
+    const value = JSON.parse(bytes.toString("utf8"));
+    return value && typeof value === "object" && !Array.isArray(value) ? value : null;
+  } catch (_error) {
+    return null;
+  }
+}
+
+function loadValidatedPackage() {
+  const statusRaw = readPublicBytes(STATUS_PATH);
+  const status = parseJsonBytes(statusRaw);
+  const manifestPath = status?.evidence_package?.manifest_path;
+  const manifestRaw = isSafePolicyOutcomesManifestPath(manifestPath)
+    ? readPublicBytes(manifestPath)
+    : null;
+  const manifest = parseJsonBytes(manifestRaw);
+  const observedAssets = {};
+  if (manifest?.assets && typeof manifest.assets === "object" && !Array.isArray(manifest.assets)) {
+    for (const [key, fact] of Object.entries(manifest.assets)) {
+      const publicAssetPath = resolvePolicyOutcomesEvidenceAssetPath(manifestPath, fact?.path);
+      const assetRaw = publicAssetPath ? readPublicBytes(publicAssetPath) : null;
+      if (assetRaw) {
+        observedAssets[key] = { bytes: assetRaw.length, sha256: sha256(assetRaw) };
+      }
+    }
+  }
+  const validation = validatePolicyOutcomesPackage({
+    status,
+    manifest,
+    statusBytes: statusRaw?.length,
+    statusSha256: statusRaw ? sha256(statusRaw) : "",
+    manifestSha256: manifestRaw ? sha256(manifestRaw) : "",
+    observedAssets,
   });
+  return validation.ok ? { status, manifest } : { status: null, manifest: null };
 }
 
-function formatPct(value) {
-  const parsed = safeFloat(value);
-  if (parsed === null) {
-    return "—";
-  }
-  const sign = parsed > 0 ? "+" : "";
-  return `${sign}${parsed.toFixed(2)}%`;
-}
-
-function formatDate(value) {
-  return String(value || "—");
-}
-
-function looksLikeUrl(value) {
-  const text = String(value || "").trim().toLowerCase();
-  return text.startsWith("http://") || text.startsWith("https://");
-}
-
-function deltaClass(value) {
-  const parsed = safeFloat(value);
-  if (parsed === null) {
-    return "pill-muted";
-  }
-  if (parsed > 0) {
-    return "pill-success";
-  }
-  if (parsed < 0) {
-    return "pill-danger";
-  }
-  return "pill-muted";
-}
-
-function formatDelta(value) {
-  const parsed = safeFloat(value);
-  if (parsed === null) {
-    return "—";
-  }
-  const sign = parsed > 0 ? "+" : "";
-  return `${sign}${formatFloat(parsed)}`;
-}
-
-function readUrlState() {
-  if (typeof window === "undefined") {
-    return {
-      q: "",
-      seriesSource: "",
-      eventSource: "",
-      domain: "",
-      sortSeries: "delta_abs_desc",
-      sortAssoc: "delta_abs_desc",
-      minAbsDelta: "",
-      mode: "series",
-    };
-  }
-
-  const params = new URLSearchParams(window.location.search);
-  return {
-    q: String(params.get("q") || ""),
-    seriesSource: String(params.get("series_source") || ""),
-    eventSource: String(params.get("event_source") || ""),
-    domain: String(params.get("domain") || ""),
-    sortSeries: String(params.get("sortSeries") || "delta_abs_desc"),
-    sortAssoc: String(params.get("sortAssoc") || "delta_abs_desc"),
-    minAbsDelta: String(params.get("minAbsDelta") || ""),
-    mode: String(params.get("mode") || "series"),
-  };
-}
-
-function setUrlState(state) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  const params = new URLSearchParams();
-  if (state.q) params.set("q", state.q);
-  if (state.seriesSource) params.set("series_source", state.seriesSource);
-  if (state.eventSource) params.set("event_source", state.eventSource);
-  if (state.domain) params.set("domain", state.domain);
-  if (state.sortSeries !== "delta_abs_desc") params.set("sortSeries", state.sortSeries);
-  if (state.sortAssoc !== "delta_abs_desc") params.set("sortAssoc", state.sortAssoc);
-  if (state.minAbsDelta) params.set("minAbsDelta", state.minAbsDelta);
-  if (state.mode !== "series") params.set("mode", state.mode);
-
-  const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`;
-  window.history.replaceState({}, "", nextUrl);
-}
-
-function renderSourceUrl(sourceUrl) {
-  const normalized = String(sourceUrl || "").trim();
-  if (!normalized) {
-    return "—";
-  }
+function Metric({ label, value, note, state }) {
   return (
-    <a className="tableButton" href={normalized} rel="noopener noreferrer" target="_blank">
-      Ver fuente
-    </a>
+    <article className={`policy-outcome-metric policy-outcome-metric--${state} ${styles.metric}`}>
+      <span className={`policy-outcome-metric__label ${styles.metricLabel}`}>{label}</span>
+      <strong className={`policy-outcome-metric__value ${styles.metricValue}`}>{value}</strong>
+      <span className={`policy-outcome-metric__note ${styles.metricNote}`}>{note}</span>
+    </article>
   );
 }
 
-function renderSourceCell(source) {
-  const sourceUrl = String(source?.url || "").trim();
-  const sourceLabel = String(source?.label || "").trim();
-  if (looksLikeUrl(sourceUrl)) {
-    return (
-      <a className="tableButton" href={sourceUrl} rel="noopener noreferrer" target="_blank">
-        Ver fuente
-      </a>
-    );
-  }
-  if (sourceLabel) {
-    return <span className="tileNote">{sourceLabel}</span>;
-  }
-  return "—";
+function GateStep({ number, title, state, children }) {
+  return (
+    <li className={`policy-outcome-gate-step policy-outcome-gate-step--${state} ${styles.gateStep}`}>
+      <span className={`policy-outcome-gate-step__number ${styles.gateNumber}`} aria-hidden="true">{number}</span>
+      <div className="policy-outcome-gate-step__copy">
+        <div className={`policy-outcome-gate-step__heading ${styles.gateHeading}`}>
+          <h3 className={`policy-outcome-gate-step__title ${styles.gateTitle}`}>{title}</h3>
+          <span className={`policy-outcome-gate-step__status policy-outcome-gate-step__status--${state} ${styles.gateStatus}`}>
+            {state === "complete" ? "completado" : "pendiente"}
+          </span>
+        </div>
+        <p className={`policy-outcome-gate-step__description ${styles.gateDescription}`}>{children}</p>
+      </div>
+    </li>
+  );
 }
 
-function usePolicyOutcomesPayload() {
-  const [state, setState] = useState({
-    loading: true,
-    error: null,
-    data: null,
-  });
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const url = `${resolveBasePath()}/policy-outcomes/data/policy-outcomes.json`;
-    setState({ loading: true, error: null, data: null });
-
-    fetch(url, { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Respuesta no válida: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((payload) => setState({ loading: false, error: null, data: payload }))
-      .catch((error) => {
-        if (error.name === "AbortError") {
-          return;
-        }
-        setState({ loading: false, error: error.message || String(error), data: null });
-      });
-
-    return () => controller.abort();
-  }, []);
-
-  return state;
-}
-
-function sortSeriesRows(rows, sortKey, minAbsDelta) {
-  const minThreshold = safeFloat(minAbsDelta);
-  const filtered = rows.filter((row) => {
-    if (minThreshold === null) {
-      return true;
-    }
-    const absDelta = Math.abs(safeFloat(row?.latest_delta) || 0);
-    return absDelta >= minThreshold;
-  });
-
-  const ordered = [...filtered];
-  ordered.sort((left, right) => {
-    if (sortKey === "points_desc") {
-      return safeInt(right.point_count) - safeInt(left.point_count);
-    }
-    if (sortKey === "label_asc") {
-      return normalize(left.label || "").localeCompare(normalize(right.label || ""));
-    }
-    if (sortKey === "delta_desc") {
-      return (safeFloat(right.latest_delta) || 0) - (safeFloat(left.latest_delta) || 0);
-    }
-    if (sortKey === "delta_asc") {
-      return (safeFloat(left.latest_delta) || 0) - (safeFloat(right.latest_delta) || 0);
-    }
-    if (sortKey === "recent") {
-      return normalize(right.latest_date).localeCompare(normalize(left.latest_date));
-    }
-    return Math.abs(safeFloat(right.latest_delta) || 0) - Math.abs(safeFloat(left.latest_delta) || 0);
-  });
-  return ordered;
-}
-
-function sortAssociations(rows, sortKey) {
-  const ordered = [...rows];
-  ordered.sort((left, right) => {
-    if (sortKey === "delta_desc") {
-      return (safeFloat(right.delta) || 0) - (safeFloat(left.delta) || 0);
-    }
-    if (sortKey === "delta_asc") {
-      return (safeFloat(left.delta) || 0) - (safeFloat(right.delta) || 0);
-    }
-    if (sortKey === "event_date_desc") {
-      return normalize(right.policy_event_date).localeCompare(normalize(left.policy_event_date));
-    }
-    if (sortKey === "event_date_asc") {
-      return normalize(left.policy_event_date).localeCompare(normalize(right.policy_event_date));
-    }
-    if (sortKey === "series_asc") {
-      return normalize(left.indicator_series_label).localeCompare(normalize(right.indicator_series_label));
-    }
-    return Math.abs(safeFloat(right.delta) || 0) - Math.abs(safeFloat(left.delta) || 0);
-  });
-  return ordered;
+function EvidenceLink({ manifest, assetKey, children }) {
+  const fact = manifest?.assets?.[assetKey];
+  if (!fact) return null;
+  const href = `/policy-outcomes/evidence/${manifest.package_id}/${fact.path}`;
+  return <StaticRouteLink href={href}>{children}</StaticRouteLink>;
 }
 
 export default function PolicyOutcomesPage() {
-  const { loading, error, data } = usePolicyOutcomesPayload();
-  const [state, setState] = useState(() => readUrlState());
+  const { status: snapshot, manifest } = loadValidatedPackage();
+  const feedIsValid = Boolean(snapshot && manifest);
 
-  useEffect(() => {
-    setState(readUrlState());
-  }, []);
-
-  useEffect(() => {
-    setUrlState(state);
-  }, [state]);
-
-  const coverage = data?.coverage || {};
-  const limitations = data?.limitations || {};
-  const seriesSourceOptions = Array.isArray(data?.filters?.series_source_ids) ? data.filters.series_source_ids : [];
-  const eventSourceOptions = Array.isArray(data?.filters?.event_source_ids) ? data.filters.event_source_ids : [];
-  const domainOptions = Array.isArray(data?.filters?.domains) ? data.filters.domains : [];
-  const domainFilter = normalize(state.domain);
-  const q = normalizeQuery(state.q);
-
-  const allSeries = useMemo(() => (Array.isArray(data?.series) ? data.series : []), [data?.series]);
-  const allAssociations = useMemo(() => (Array.isArray(data?.associations) ? data.associations : []), [data?.associations]);
-
-  const filteredSeries = useMemo(() => {
-    const sourceFilter = normalize(state.seriesSource);
-    const output = allSeries.filter((row) => {
-      const text = normalize(`${row.label} ${row.canonical_key} ${row.domain_label} ${row.domain_key} ${row.territory_label}`);
-      if (q && !text.includes(q)) {
-        return false;
-      }
-      if (sourceFilter && normalize(row.source_id) !== sourceFilter) {
-        return false;
-      }
-      if (domainFilter) {
-        const rowDomain = normalize(`${row.domain_label} ${row.domain_key}`);
-        if (!rowDomain.includes(domainFilter)) {
-          return false;
-        }
-      }
-      return true;
-    });
-    return sortSeriesRows(output, state.sortSeries, state.minAbsDelta);
-  }, [allSeries, q, state.seriesSource, state.sortSeries, state.minAbsDelta, domainFilter]);
-
-  const filteredAssociations = useMemo(() => {
-    const eventSourceFilter = normalize(state.eventSource);
-    const out = allAssociations.filter((row) => {
-      const text = normalize(
-        `${row.indicator_series_label} ${row.indicator_series_canonical_key} ${row.policy_event_title} ${row.policy_event_id}`,
-      );
-      if (q && !text.includes(q)) {
-        return false;
-      }
-      if (eventSourceFilter && normalize(row.policy_event_source_id) !== eventSourceFilter) {
-        return false;
-      }
-      if (domainFilter) {
-        const rowDomain = normalize(
-          `${row.policy_event_domain_label} ${row.policy_event_domain_key} ${row.indicator_domain_label}`,
-        );
-        if (!rowDomain.includes(domainFilter)) {
-          return false;
-        }
-      }
-      if (safeFloat(state.minAbsDelta) !== null) {
-        return Math.abs(safeFloat(row.delta) || 0) >= safeFloat(state.minAbsDelta);
-      }
-      return true;
-    });
-    return sortAssociations(out, state.sortAssoc);
-  }, [allAssociations, q, state.eventSource, state.sortAssoc, state.minAbsDelta, domainFilter]);
-
-  const eventRows = useMemo(() => {
-    const eventSourceFilter = normalize(state.eventSource);
-    if (!q) {
-      return (Array.isArray(data?.policy_events) ? data.policy_events : []).filter((event) => {
-        if (!eventSourceFilter) {
-          return true;
-        }
-        return normalize(event.source_id) === eventSourceFilter;
-      });
-    }
-    return (Array.isArray(data?.policy_events) ? data.policy_events : []).filter((event) =>
-      (eventSourceFilter ? normalize(event.source_id) === eventSourceFilter : true) &&
-      normalize(`${event.policy_event_id} ${event.title} ${event.summary} ${event.domain_label}`).includes(q),
-    );
-  }, [data?.policy_events, q, state.eventSource]);
-
-  const correlationStatement = [
-    "Estas señales son descriptivas y comparables solo como evidencia de co-movimiento temporal.",
-    "No se reporta inferencia causal en esta fase por ausencia de vínculos `interventions` y `causal_estimates`.",
-    "Sin un diseño de identificación explícito (p. ej. placebo, panel, diferencias en diferencias), no se infiere impacto causal.",
-  ];
-
-  if (loading) {
+  if (!feedIsValid) {
     return (
-      <main className="shell">
-        <section className="card block">
-          <h1>Cargando resultados de política…</h1>
+      <main className={`shell policy-outcomes-status-page policy-outcomes-status-page--unverified ${styles.page}`}>
+        <section className={`policy-outcomes-hero policy-outcomes-hero--unverified ${styles.hero}`} aria-labelledby="policy-outcomes-title">
+          <div className="policy-outcomes-hero__copy">
+            <p className={`policy-outcomes-hero__eyebrow ${styles.eyebrow}`}>Estado público no verificable</p>
+            <h1 className={`policy-outcomes-hero__title ${styles.heroTitle}`} id="policy-outcomes-title">
+              El paquete de evidencia no supera el contrato de publicación
+            </h1>
+            <p className={`policy-outcomes-hero__summary ${styles.heroSummary}`}>
+              La página falla cerrada. No publica conteos, candidatos, fuentes ni conclusiones mientras estado, manifest y evidencia no coincidan exactamente.
+            </p>
+          </div>
+        </section>
+        <section
+          className={`policy-outcomes-publication-state policy-outcomes-publication-state--unverified ${styles.statePanel}`}
+          aria-labelledby="policy-outcomes-state-title"
+          role="status"
+        >
+          <div className={`policy-outcomes-publication-state__marker ${styles.stateMarker}`} aria-hidden="true">!</div>
+          <div className="policy-outcomes-publication-state__copy">
+            <p className={`policy-outcomes-publication-state__eyebrow ${styles.eyebrow}`}>Bloqueo preventivo</p>
+            <h2 className={`policy-outcomes-publication-state__title ${styles.sectionTitle}`} id="policy-outcomes-state-title">
+              Estado, manifest o evidencia no verificables
+            </h2>
+            <p className={`policy-outcomes-publication-state__description ${styles.sectionCopy}`}>
+              Ningún dato parcial se convierte en afirmación pública. El paquete completo debe volver a validarse antes de mostrar hechos.
+            </p>
+          </div>
         </section>
       </main>
     );
   }
 
-  if (error) {
-    return (
-      <main className="shell">
-        <section className="card block">
-          <h1>No se pudo cargar el corte</h1>
-          <p className="sub">{error}</p>
-          <p className="sub">
-            <a href={withBasePath("/policy-outcomes/")}>Reintentar</a>
-          </p>
-        </section>
-      </main>
-    );
-  }
-
-  if (!data) {
-    return (
-      <main className="shell">
-        <section className="card block">
-          <h1>Sin datos</h1>
-          <p className="sub">No hay corte de resultados e indicadores disponible.</p>
-        </section>
-      </main>
-    );
-  }
+  const pipeline = snapshot?.pipeline;
+  const scope = snapshot?.bounded_universe;
+  const inputs = snapshot?.selected_inputs;
+  const identity = manifest?.identity_retention;
 
   return (
-    <main className="shell">
-      <section className="hero card">
-        <p className="eyebrow">Resultados de políticas</p>
-        <h1>Indicadores de resultados e impacto</h1>
-        <p className="sub">
-          Seguimiento temprano de series de indicadores (Eurostat/INE, BDE, AEMET), con cruces descriptivos
-          frente a eventos de política pública.
-        </p>
-        <div className="chips">
-          <span className="chip">Corte: {coverage.snapshot_date || data.meta?.snapshot_date || "—"}</span>
-          <span className="chip">Series exportadas: {formatInt(coverage.series_loaded || 0)}</span>
-          <span className="chip">Puntos: {formatInt(coverage.indicator_points_total || 0)}</span>
-          <span className="chip">Eventos: {formatInt(coverage.events_loaded || 0)}</span>
-          <span className="chip">Asociaciones: {formatInt(coverage.associations_total || 0)}</span>
-        </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Resumen ejecutivo</h2>
-        </div>
-        <div className="kpiGrid">
-          <div className="kpiCard">
-            <span className="kpiLabel">Intervenciones</span>
-            <span className="kpiValue">{formatInt(coverage.interventions_total || 0)}</span>
-            <span className="tileNote">No hay tabla de intervenciones en esta ventana útil.</span>
-          </div>
-          <div className="kpiCard">
-            <span className="kpiLabel">Eventos vinculados</span>
-            <span className="kpiValue">{formatInt(coverage.events_in_association || 0)}</span>
-            <span className="tileNote">Eventos con al menos una asociación.</span>
-          </div>
-          <div className="kpiCard">
-            <span className="kpiLabel">Series con asociación</span>
-            <span className="kpiValue">{formatInt(coverage.series_in_association || 0)}</span>
-            <span className="tileNote">Series incluidas en asociaciones descriptivas.</span>
-          </div>
-          <div className="kpiCard">
-            <span className="kpiLabel">Series totales</span>
-            <span className="kpiValue">{formatInt(coverage.indicator_series_total || 0)}</span>
-            <span className="tileNote">Cobertura total en BD.</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Guía de interpretación</h2>
-        </div>
-        <ul className="artifactList">
-          {correlationStatement.map((line) => (
-            <li key={line}>
-              <span>{line}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="sub" style={{ marginTop: "10px" }}>
-          Estado causal:
-          <span className="chip" style={{ marginLeft: "8px" }}>
-            {limitations.causal_estimates_available ? "estimación disponible" : "sin estimaciones causales"}
-          </span>
-        </p>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>Filtros</h2>
-        </div>
-        <div className="filterGrid">
-          <div className="field">
-            <label>Buscar</label>
-            <input
-              className="textInput"
-              value={state.q}
-              onChange={(event) => setState((prev) => ({ ...prev, q: event.target.value }))}
-              placeholder="Serie o evento..."
-            />
-          </div>
-          <div className="field">
-            <label>Fuente (series)</label>
-            <select
-              className="textInput"
-              value={state.seriesSource}
-              onChange={(event) => setState((prev) => ({ ...prev, seriesSource: event.target.value }))}
-            >
-              <option value="">Todas</option>
-              {seriesSourceOptions.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="field">
-            <label>Fuente (eventos)</label>
-            <select
-              className="textInput"
-              value={state.eventSource}
-              onChange={(event) => setState((prev) => ({ ...prev, eventSource: event.target.value }))}
-            >
-              <option value="">Todas</option>
-              {eventSourceOptions.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="field">
-            <label>Dominio</label>
-            <select
-              className="textInput"
-              value={state.domain}
-              onChange={(event) => setState((prev) => ({ ...prev, domain: event.target.value }))}
-            >
-              <option value="">Todos</option>
-              {domainOptions.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="field">
-            <label>Orden (series)</label>
-            <select
-              className="textInput"
-              value={state.sortSeries}
-              onChange={(event) => setState((prev) => ({ ...prev, sortSeries: event.target.value }))}
-            >
-              <option value="delta_abs_desc">Variación absoluta (desc)</option>
-              <option value="delta_desc">Variación (desc)</option>
-              <option value="delta_asc">Variación (asc)</option>
-              <option value="points_desc">Puntos</option>
-              <option value="recent">Último punto</option>
-              <option value="label_asc">Etiqueta</option>
-            </select>
-          </div>
-          <div className="field">
-            <label>Orden (asociaciones)</label>
-            <select
-              className="textInput"
-              value={state.sortAssoc}
-              onChange={(event) => setState((prev) => ({ ...prev, sortAssoc: event.target.value }))}
-            >
-              <option value="delta_abs_desc">Variación absoluta (desc)</option>
-              <option value="delta_desc">Variación (desc)</option>
-              <option value="delta_asc">Variación (asc)</option>
-              <option value="event_date_desc">Evento (reciente)</option>
-              <option value="event_date_asc">Evento (antiguo)</option>
-              <option value="series_asc">Serie</option>
-            </select>
-          </div>
-          <div className="field">
-            <label>Umbral mínimo de cambio absoluto</label>
-            <input
-              className="textInput"
-              value={state.minAbsDelta}
-              onChange={(event) => setState((prev) => ({ ...prev, minAbsDelta: event.target.value }))}
-              placeholder="0"
-              inputMode="decimal"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>1) Series de indicadores</h2>
-        </div>
-        <div className="tableWrap">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Serie</th>
-                <th>Fuente</th>
-                <th>Dominio</th>
-                <th>Territorio / ámbito</th>
-                <th>Último punto</th>
-                <th>Cambio reciente</th>
-                <th>Último cambio %</th>
-                <th>Fuente</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredSeries.map((row) => {
-                const labelParts = [row.domain_label, row.frequency, row.unit].filter(Boolean).join(" · ");
-                const latestValue = row.latest_value_text || formatFloat(row.latest_value);
-                return (
-                  <tr key={row.indicator_series_id}>
-                    <td>
-                      <strong>{row.label || row.canonical_key}</strong>
-                      <div className="tileNote">{labelParts || row.canonical_key}</div>
-                    </td>
-                    <td>{row.source_id || "—"}</td>
-                    <td>{row.domain_label || row.domain_key || "—"}</td>
-                    <td>{row.territory_label || row.admin_level_label || "—"}</td>
-                    <td>
-                      {formatFloat(row.latest_value)} {row.unit ? `(${row.unit})` : ""} · {formatDate(row.latest_date)}
-                      <div className="tileNote">
-                        {formatDate(row.previous_date)} → {formatDate(row.latest_date)}
-                      </div>
-                    </td>
-                    <td>
-                      <span className={`pill ${deltaClass(row.latest_delta)}`}>{formatDelta(row.latest_delta)}</span>
-                    </td>
-                    <td>{formatPct(row.latest_delta_pct)}</td>
-                    <td>{renderSourceCell({ label: row.source_id, url: row.source_url })}</td>
-                  </tr>
-                );
-              })}
-              {!filteredSeries.length && (
-                <tr>
-                  <td className="sub" colSpan={8}>
-                    No hay series que cumplan el filtro actual.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="card block">
-        <div className="blockHead">
-          <h2>2) Eventos vinculados (descriptivo)</h2>
-          <p className="sub">
-            "Evento → indicador": compara el último punto previo y el siguiente punto posterior al evento.
+    <PolicyOutcomesRuntimeGate>
+      <main className={`shell policy-outcomes-status-page ${styles.page}`}>
+      <section className={`policy-outcomes-hero ${styles.hero}`} aria-labelledby="policy-outcomes-title">
+        <div className="policy-outcomes-hero__copy">
+          <p className={`policy-outcomes-hero__eyebrow ${styles.eyebrow}`}>
+            {feedIsValid ? "Estado público verificable · C0 / L1" : "Estado público · no verificable"}
+          </p>
+          <h1 className={`policy-outcomes-hero__title ${styles.heroTitle}`} id="policy-outcomes-title">
+            {feedIsValid
+              ? "Un candidato metodológico pendiente; 0 vínculos de resultado validados"
+              : "El paquete de evidencia no supera el contrato de publicación"}
+          </h1>
+          <p className={`policy-outcomes-hero__summary ${styles.heroSummary}`}>
+            {feedIsValid
+              ? "Una votación del Senado, su iniciativa y una serie de Eurostat fueron seleccionadas juntas dentro de un candidato metodológico pendiente. La selección es pública y verificable byte por byte. No es un vínculo validado ni una conclusión sobre resultados."
+              : "La página falla cerrada. No muestra conteos ni fuentes como hechos mientras estado, manifest y hashes no coincidan con la identidad de release aprobada."}
           </p>
         </div>
-        <div className="tableWrap">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Evento</th>
-                <th>Indicador</th>
-                <th>Delta previo/posterior</th>
-                <th>Cambio relativo</th>
-                <th>Distancia temporal</th>
-                <th>Fuente evento</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredAssociations.map((row) => (
-                <tr key={`${row.policy_event_id}-${row.indicator_series_id}-${row.pre_point_date}`}>
-                  <td>
-                    <div>
-                      <strong>{formatDate(row.policy_event_date)}</strong>
-                    </div>
-                    <div className="tileNote">{row.policy_event_title || row.policy_event_id}</div>
-                    <div className="tileNote">{row.policy_event_domain_label || row.policy_event_domain_key || "—"}</div>
-                  </td>
-                  <td>
-                    <div>{row.indicator_series_label || row.indicator_series_canonical_key}</div>
-                    <div className="tileNote">{row.indicator_unit ? `Unidad: ${row.indicator_unit}` : "—"}</div>
-                  </td>
-                  <td>
-                    <div>
-                      {formatDate(row.pre_point_date)}: {formatFloat(row.pre_value)}
-                    </div>
-                    <div>
-                      {formatDate(row.post_point_date)}: {formatFloat(row.post_value)}
-                    </div>
-                    <div>
-                      Cambio:
-                      <span className={`pill ${deltaClass(row.delta)}`} style={{ marginLeft: "6px" }}>
-                        {formatDelta(row.delta)}
-                      </span>
-                    </div>
-                  </td>
-                  <td>{formatPct(row.delta_pct)}</td>
-                  <td>
-                    <div>Antes: {formatInt(row.pre_gap_days)} días</div>
-                    <div>Después: {formatInt(row.post_gap_days)} días</div>
-                  </td>
-                  <td>{renderSourceCell({ label: row.policy_event_source_id, url: row.policy_event_source_url })}</td>
-                </tr>
-              ))}
-              {!filteredAssociations.length && (
-                <tr>
-                  <td className="sub" colSpan={6}>
-                    No hay asociaciones descriptivas para los filtros seleccionados.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+        <dl className={`policy-outcomes-hero__facts ${styles.heroFacts}`}>
+          <div className={`policy-outcomes-hero__fact ${styles.heroFact}`}>
+            <dt className="policy-outcomes-hero__fact-label">Candidatos pendientes divulgados</dt>
+            <dd className="policy-outcomes-hero__fact-value">
+              {feedIsValid ? formatInt(pipeline.pending_methodological_candidates_disclosed) : "no verificable"}
+            </dd>
+          </div>
+          <div className={`policy-outcomes-hero__fact ${styles.heroFact}`}>
+            <dt className="policy-outcomes-hero__fact-label">Vínculos validados</dt>
+            <dd className="policy-outcomes-hero__fact-value">
+              {feedIsValid ? formatInt(pipeline.validated_outcome_links) : "no verificable"}
+            </dd>
+          </div>
+          <div className={`policy-outcomes-hero__fact ${styles.heroFact}`}>
+            <dt className="policy-outcomes-hero__fact-label">Gate actual</dt>
+            <dd className="policy-outcomes-hero__fact-value">
+              {feedIsValid ? "revisión humana pendiente" : "bloqueo preventivo"}
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section
+        className={`policy-outcomes-publication-state policy-outcomes-publication-state--${feedIsValid ? "verified" : "unverified"} ${styles.statePanel}`}
+        aria-labelledby="policy-outcomes-state-title"
+        role="status"
+      >
+        <div className={`policy-outcomes-publication-state__marker ${styles.stateMarker}`} aria-hidden="true">
+          {feedIsValid ? "1/0" : "!"}
+        </div>
+        <div className="policy-outcomes-publication-state__copy">
+          <p className={`policy-outcomes-publication-state__eyebrow ${styles.eyebrow}`}>
+            {feedIsValid ? "Divulgación honesta" : "Bloqueo preventivo"}
+          </p>
+          <h2 className={`policy-outcomes-publication-state__title ${styles.sectionTitle}`} id="policy-outcomes-state-title">
+            {feedIsValid
+              ? "Un candidato pendiente divulgado; 0 vínculos de resultado validados"
+              : "Estado, manifest o evidencia no verificables"}
+          </h2>
+          <p className={`policy-outcomes-publication-state__description ${styles.sectionCopy}`}>
+            {feedIsValid
+              ? "Las entradas no están sueltas ni se presentan como una asociación aprobada: están seleccionadas juntas en un candidato L1 que exige revisión humana. No pertenece a ningún release de resultados."
+              : "Ningún dato parcial se convierte en afirmación pública. Corrige el paquete y vuelve a validar todos los bytes antes de publicar."}
+          </p>
         </div>
       </section>
 
-      <section className="card block">
-        <div className="blockHead">
-          <h2>3) Eventos de política más recientes</h2>
-        </div>
-        <div className="tableWrap">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Evento</th>
-                <th>Resumen</th>
-                <th>Fuente</th>
-                <th>Territorio</th>
-                <th>Series asociadas</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventRows.slice(0, 120).map((event) => (
-                <tr key={event.policy_event_id}>
-                  <td>
-                    <div>
-                      <strong>{formatDate(event.event_date)}</strong>
-                    </div>
-                    <div className="tileNote">{event.policy_event_id}</div>
-                    <div className="tileNote">{event.title ? event.title : event.summary || "—"}</div>
-                  </td>
-                  <td className="tileNote">{event.summary || "—"}</td>
-                  <td>{renderSourceUrl(event.source_url)}</td>
-                  <td>{event.territory_label || event.institution_name || event.admin_level_label || "—"}</td>
-                  <td>{formatInt(event.associated_series_count || 0)}</td>
-                </tr>
-              ))}
-              {!eventRows.length && (
-                <tr>
-                  <td className="sub" colSpan={5}>
-                    No hay eventos en el rango del corte.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+      <section className={`policy-outcomes-pending-candidate ${styles.section}`} aria-labelledby="policy-outcomes-candidate-title">
+        <header className={`policy-outcomes-section-heading ${styles.sectionHeading}`}>
+          <div className="policy-outcomes-section-heading__copy">
+            <p className={`policy-outcomes-section-heading__eyebrow ${styles.eyebrow}`}>Candidato metodológico pendiente</p>
+            <h2 className={`policy-outcomes-section-heading__title ${styles.sectionTitle}`} id="policy-outcomes-candidate-title">
+              Las tres entradas seleccionadas juntas
+            </h2>
+          </div>
+          <p className={`policy-outcomes-section-heading__note ${styles.sectionNote}`}>
+            Selección metodológica no equivale a asociación estadística, causalidad, efecto, mérito, culpa, éxito, fracaso o corrupción.
+          </p>
+        </header>
+        <div className={`policy-outcomes-input-grid ${styles.inputGrid}`}>
+          <article className={`policy-outcomes-input policy-outcomes-input--vote ${styles.inputCard}`}>
+            <p className={`policy-outcomes-input__eyebrow ${styles.eyebrow}`}>Acción seleccionada</p>
+            <h3 className={`policy-outcomes-input__title ${styles.inputTitle}`}>Votación oficial del Senado</h3>
+            <p className={`policy-outcomes-input__description ${styles.metricNote}`}>
+              Registro normalizado exacto. Corte {formatDate(inputs?.senate_vote?.source_snapshot_date)}. XML original específico ausente: gap explícito.
+            </p>
+            {feedIsValid ? <StaticRouteLink href={inputs.senate_vote.official_page_url}>Abrir votación oficial</StaticRouteLink> : null}
+          </article>
+          <article className={`policy-outcomes-input policy-outcomes-input--initiative ${styles.inputCard}`}>
+            <p className={`policy-outcomes-input__eyebrow ${styles.eyebrow}`}>Contexto de acción</p>
+            <h3 className={`policy-outcomes-input__title ${styles.inputTitle}`}>Iniciativa oficial del Senado</h3>
+            <p className={`policy-outcomes-input__description ${styles.metricNote}`}>
+              Registro normalizado exacto enlazado a la votación. Corte {formatDate(inputs?.senate_initiative?.source_snapshot_date)}.
+            </p>
+            {feedIsValid ? <StaticRouteLink href={inputs.senate_initiative.official_url}>Abrir iniciativa oficial</StaticRouteLink> : null}
+          </article>
+          <article className={`policy-outcomes-input policy-outcomes-input--indicator ${styles.inputCard}`}>
+            <p className={`policy-outcomes-input__eyebrow ${styles.eyebrow}`}>Indicador seleccionado</p>
+            <h3 className={`policy-outcomes-input__title ${styles.inputTitle}`}>Serie oficial de Eurostat</h3>
+            <p className={`policy-outcomes-input__description ${styles.metricNote}`}>
+              Captura original exacta del dataset {inputs?.eurostat_indicator?.dataset_code || "no verificable"}. Corte {formatDate(inputs?.eurostat_indicator?.source_snapshot_date)}.
+            </p>
+            {feedIsValid ? <StaticRouteLink href={inputs.eurostat_indicator.official_url}>Abrir dataset oficial</StaticRouteLink> : null}
+          </article>
         </div>
       </section>
-    </main>
+
+      <section className={`policy-outcomes-bounded-universe ${styles.section}`} aria-labelledby="policy-outcomes-scope-title">
+        <header className={`policy-outcomes-section-heading ${styles.sectionHeading}`}>
+          <div className="policy-outcomes-section-heading__copy">
+            <p className={`policy-outcomes-section-heading__eyebrow ${styles.eyebrow}`}>Cierre exacto del universo acotado</p>
+            <h2 className={`policy-outcomes-section-heading__title ${styles.sectionTitle}`} id="policy-outcomes-scope-title">
+              20 acciones × 1 serie elegible = 20 pares
+            </h2>
+          </div>
+          <p className={`policy-outcomes-section-heading__note ${styles.sectionNote}`}>
+            Cierre verificable de este alcance. No se buscaron todas las acciones, todos los indicadores ni todos los pares posibles.
+          </p>
+        </header>
+        <div className={`policy-outcomes-metrics ${styles.metricGrid}`}>
+          <Metric label="Acciones candidatas" value={feedIsValid ? formatInt(scope.action_candidates) : "—"} note="Las 20 filas canónicas se descargan completas." state="bounded" />
+          <Metric label="Series elegibles" value={feedIsValid ? formatInt(scope.eligible_indicator_series) : "—"} note="Filtro geográfico exacto ES / country." state="bounded" />
+          <Metric label="Pares acotados" value={feedIsValid ? formatInt(scope.candidate_pairs) : "—"} note="Producto exacto 20 × 1; no búsqueda global." state="machine" />
+          <Metric label="Revisados por persona" value={feedIsValid ? formatInt(pipeline.human_reviewed_pairs) : "—"} note="Ninguna decisión humana registrada aún." state="pending" />
+        </div>
+        <dl className={`policy-outcomes-closure-facts ${styles.provenanceFacts}`}>
+          <div className="policy-outcomes-closure-facts__fact">
+            <dt className="policy-outcomes-closure-facts__label">SHA universo de acciones</dt>
+            <dd className="policy-outcomes-closure-facts__value"><code className="policy-outcomes-closure-facts__hash">{scope?.action_universe_sha256 || "no verificable"}</code></dd>
+          </div>
+          <div className="policy-outcomes-closure-facts__fact">
+            <dt className="policy-outcomes-closure-facts__label">SHA serie elegible</dt>
+            <dd className="policy-outcomes-closure-facts__value"><code className="policy-outcomes-closure-facts__hash">{scope?.eligible_indicator_series_sha256 || "no verificable"}</code></dd>
+          </div>
+          <div className="policy-outcomes-closure-facts__fact">
+            <dt className="policy-outcomes-closure-facts__label">SHA cierre combinado</dt>
+            <dd className="policy-outcomes-closure-facts__value"><code className="policy-outcomes-closure-facts__hash">{scope?.combined_scope_sha256 || "no verificable"}</code></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className={`policy-outcomes-public-evidence ${styles.auditSection}`} aria-labelledby="policy-outcomes-evidence-title">
+        <div className="policy-outcomes-public-evidence__copy">
+          <p className={`policy-outcomes-public-evidence__eyebrow ${styles.eyebrow}`}>Evidencia pública byte por byte</p>
+          <h2 className={`policy-outcomes-public-evidence__title ${styles.sectionTitle}`} id="policy-outcomes-evidence-title">
+            Verificar el candidato y auditar sus límites
+          </h2>
+          <p className={`policy-outcomes-public-evidence__description ${styles.sectionCopy}`}>
+            El manifest content-addressed fija ruta, bytes, SHA-256 y función de cada activo. Se publica al final de la promoción. El manifest es unsigned: aporta integridad por hash, no autenticación criptográfica propia.
+          </p>
+        </div>
+        <nav className={`policy-outcomes-public-evidence__downloads ${styles.auditLinks}`} aria-label="Descargas de evidencia de resultados">
+          {feedIsValid ? <StaticRouteLink href={snapshot.evidence_package.manifest_path}>Descargar manifest de evidencia</StaticRouteLink> : null}
+          {feedIsValid ? <StaticRouteLink href={STATUS_PATH}>Descargar estado público</StaticRouteLink> : null}
+          <EvidenceLink manifest={manifest} assetKey="action_candidate_universe">Descargar universo exacto de 20 acciones</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="eligible_indicator_series_universe">Descargar universo exacto de 1 serie elegible</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="senate_vote_normalized_record">Descargar registro exacto de votación</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="senate_initiative_normalized_record">Descargar registro exacto de iniciativa</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="eurostat_raw_capture">Descargar captura original de Eurostat</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="independent_validation_evidence_projection">Descargar proyección determinista de validación independiente</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="materialization_evidence_projection">Descargar proyección determinista de materialización</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="semantic_evidence">Descargar evidencia semántica con nombres oficiales</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="sqlite_bundle">Descargar bundle SQLite exacto</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="scale_origin_allowed_signers">Descargar trust root público Ed25519</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="scale_origin_attestation">Descargar attestation del origen de escala</EvidenceLink>
+          <EvidenceLink manifest={manifest} assetKey="scale_origin_attestation_signature">Descargar firma del origen de escala</EvidenceLink>
+        </nav>
+      </section>
+
+      <section className={`policy-outcomes-boundaries ${styles.boundaryGrid}`} aria-label="Límites e identidad pública">
+        <article className={`policy-outcomes-claim-boundary ${styles.boundaryCard}`}>
+          <p className={`policy-outcomes-claim-boundary__eyebrow ${styles.eyebrow}`}>Límite de afirmación</p>
+          <h2 className={`policy-outcomes-claim-boundary__title ${styles.sectionTitle}`}>Qué no se concluye</h2>
+          <ul className={`policy-outcomes-claim-boundary__list ${styles.boundaryList}`}>
+            <li className="policy-outcomes-claim-boundary__item">No hay asociación estadística validada ni causalidad.</li>
+            <li className="policy-outcomes-claim-boundary__item">No se calculó un efecto.</li>
+            <li className="policy-outcomes-claim-boundary__item">No se atribuye mérito, culpa, éxito o fracaso.</li>
+            <li className="policy-outcomes-claim-boundary__item">No se evalúa corrupción, legalidad o intención.</li>
+          </ul>
+        </article>
+        <article className={`policy-outcomes-identity-boundary ${styles.boundaryCard}`}>
+          <p className={`policy-outcomes-identity-boundary__eyebrow ${styles.eyebrow}`}>Identidad oficial preservada</p>
+          <h2 className={`policy-outcomes-identity-boundary__title ${styles.sectionTitle}`}>No se eliminó ni seudonimizó ningún nombre público</h2>
+          <p className={`policy-outcomes-identity-boundary__description ${styles.sectionCopy}`}>
+            {feedIsValid
+              ? `La evidencia semántica pública conserva, byte por byte, ${formatInt(identity.official_public_names_retained)} nombres oficiales, escaños, grupos, votos y referencias de procedencia. El estado agregado no duplica filas individuales; la descarga pública sí las conserva completas.`
+              : "El contrato exige retener toda identidad oficial pública en la evidencia semántica. Un paquete no verificable no permite afirmar el conteo."}
+          </p>
+        </article>
+      </section>
+
+      <section className={`policy-outcomes-review-gate ${styles.section}`} aria-labelledby="policy-outcomes-gate-title">
+        <header className={`policy-outcomes-section-heading ${styles.sectionHeading}`}>
+          <div className="policy-outcomes-section-heading__copy">
+            <p className={`policy-outcomes-section-heading__eyebrow ${styles.eyebrow}`}>Gate de publicación</p>
+            <h2 className={`policy-outcomes-section-heading__title ${styles.sectionTitle}`} id="policy-outcomes-gate-title">
+              Qué falta para validar un vínculo de resultado
+            </h2>
+          </div>
+          <p className={`policy-outcomes-section-heading__note ${styles.sectionNote}`}>
+            Más datos, más cómputo o una puntuación automática nunca sustituyen una decisión humana auditable.
+          </p>
+        </header>
+        <ol className={`policy-outcomes-review-gate__steps ${styles.gateList}`}>
+          <GateStep number="1" state={feedIsValid ? "complete" : "pending"} title="Fuentes y universo verificables">
+            Copias exactas, SQL de cierre, 20 filas de acción, una serie elegible, hashes y bundle verificables.
+          </GateStep>
+          <GateStep number="2" state="pending" title="Revisión humana identificada">
+            Una persona revisora debe decidir encaje semántico, geográfico y temporal, documentar razones, fecha y sign-off.
+          </GateStep>
+          <GateStep number="3" state="pending" title="Release versionado">
+            La decisión debe quedar append-only y pertenecer a un release exacto; hoy hay cero releases y cero membresías.
+          </GateStep>
+          <GateStep number="4" state="pending" title="Publicación trazable">
+            Solo entonces puede existir un vínculo validado con acceso directo a acción, indicador, decisión y evidencia.
+          </GateStep>
+        </ol>
+      </section>
+
+      <section className={`policy-outcomes-audit ${styles.auditSection}`} aria-labelledby="policy-outcomes-audit-title">
+        <div className="policy-outcomes-audit__copy">
+          <p className={`policy-outcomes-audit__eyebrow ${styles.eyebrow}`}>Procedencia y autenticación</p>
+          <h2 className={`policy-outcomes-audit__title ${styles.sectionTitle}`} id="policy-outcomes-audit-title">
+            La firma de escala no cubre este paquete
+          </h2>
+          <p className={`policy-outcomes-audit__description ${styles.sectionCopy}`}>
+            Cada export verifica criptográficamente el origen de escala contra el signer, fingerprint y trust root Ed25519 fijados. Este paquete de candidato no forma parte de ese origen firmado y su manifest propio está explícitamente unsigned.
+          </p>
+        </div>
+        <dl className={`policy-outcomes-audit__provenance ${styles.provenanceFacts}`}>
+          <div className="policy-outcomes-audit__provenance-fact">
+            <dt className="policy-outcomes-audit__provenance-label">Fecha contractual</dt>
+            <dd className="policy-outcomes-audit__provenance-value"><time className="policy-outcomes-audit__contract-date" dateTime={snapshot?.contract_date || undefined}>{formatDate(snapshot?.contract_date)}</time></dd>
+          </div>
+          <div className="policy-outcomes-audit__provenance-fact">
+            <dt className="policy-outcomes-audit__provenance-label">Checks independientes</dt>
+            <dd className="policy-outcomes-audit__provenance-value">{feedIsValid ? formatInt(snapshot.validation_identity.check_count) : "no verificable"}</dd>
+          </div>
+          <div className="policy-outcomes-audit__provenance-fact">
+            <dt className="policy-outcomes-audit__provenance-label">Manifest propio</dt>
+            <dd className="policy-outcomes-audit__provenance-value">{feedIsValid ? "unsigned" : "no verificable"}</dd>
+          </div>
+          <div className="policy-outcomes-audit__provenance-fact">
+            <dt className="policy-outcomes-audit__provenance-label">Membresía en origen firmado</dt>
+            <dd className="policy-outcomes-audit__provenance-value">{feedIsValid ? "no" : "no verificable"}</dd>
+          </div>
+        </dl>
+      </section>
+      </main>
+    </PolicyOutcomesRuntimeGate>
   );
 }

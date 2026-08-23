@@ -1,0 +1,611 @@
+.page {
+  --comparison-ink: #173942;
+  --comparison-ink-deep: #102b34;
+  --comparison-paper: #fbfaf5;
+  --comparison-blue-soft: #e8f2f3;
+  --comparison-amber: #8a4c13;
+  --comparison-amber-soft: #fff4de;
+  --comparison-violet: #5f4b78;
+  --comparison-violet-soft: #f2edf7;
+  --comparison-red: #8b352f;
+  --comparison-red-soft: #fff0ed;
+  gap: 18px;
+  animation: comparisons-page-enter 320ms ease-out both;
+}
+
+.truthPanel,
+.coverageSection,
+.comparisonsSection,
+.methodSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--shadow);
+}
+
+.truthPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 22px;
+  align-items: center;
+  padding: 20px;
+  border-left: 5px solid var(--comparison-amber);
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--comparison-amber);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--comparison-ink-deep);
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy,
+.sectionNote {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.sectionCopy {
+  max-width: 76ch;
+  margin: 9px 0 0;
+}
+
+.sectionNote {
+  max-width: 62ch;
+  margin: 0;
+}
+
+.truthList {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.truthItem {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  color: var(--comparison-ink);
+  line-height: 1.4;
+}
+
+.truthMarker {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.42em;
+  border: 2px solid var(--comparison-amber);
+  border-radius: 50%;
+  background: var(--comparison-amber-soft);
+}
+
+.coverageSection,
+.comparisonsSection,
+.methodSection {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.statusLedger {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid #c7d5d5;
+  border-radius: 7px;
+  background: #c7d5d5;
+  transition: grid-template-columns 220ms ease;
+}
+
+.statusLedgerItem {
+  min-width: 0;
+  background: var(--comparison-paper);
+  padding: 13px 11px;
+}
+
+.statusLedgerLabel {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.statusLedgerValue {
+  margin: 7px 0 0;
+  color: var(--comparison-ink);
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 850;
+}
+
+.strongStatusNotice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  padding: 13px 15px;
+  border: 1px solid #d7b778;
+  border-radius: 7px;
+  background: var(--comparison-amber-soft);
+  color: #61370f;
+}
+
+.strongStatusNotice strong {
+  flex: 0 0 auto;
+}
+
+.strongStatusNotice span {
+  flex: 1 1 34rem;
+  min-width: 0;
+}
+
+.comparisonList {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comparisonItem {
+  min-width: 0;
+}
+
+.comparisonCard {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  border: 1px solid #bfcfd0;
+  border-left: 5px solid var(--comparison-violet);
+  border-radius: 8px;
+  background: var(--comparison-paper);
+  padding: 17px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.comparisonCard:hover,
+.comparisonCard:focus-within {
+  border-color: #819ea1;
+  box-shadow: 0 12px 28px rgba(16, 43, 52, 0.1);
+  transform: translateY(-2px);
+}
+
+.comparisonHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: flex-start;
+}
+
+.comparisonHeading {
+  flex: 1 1 38rem;
+  min-width: 0;
+}
+
+.actorName {
+  margin: 0;
+  color: var(--comparison-ink-deep);
+  font-family: var(--display);
+  font-size: clamp(1.12rem, 1.8vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.frameLabel {
+  margin: 5px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.42;
+}
+
+.statusBadge {
+  flex: 0 0 auto;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.statusAligned {
+  color: #1d6356;
+  background: #e7f6f1;
+}
+
+.statusConflicted {
+  color: var(--comparison-red);
+  background: var(--comparison-red-soft);
+}
+
+.statusInsufficient {
+  color: var(--comparison-amber);
+  background: var(--comparison-amber-soft);
+}
+
+.statusAmbiguous,
+.statusChanged {
+  color: var(--comparison-violet);
+  background: var(--comparison-violet-soft);
+}
+
+.statusNotComparable {
+  color: #546467;
+  background: #eef2f2;
+}
+
+.comparisonBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(80px, 0.13fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  transition: grid-template-columns 220ms ease;
+}
+
+.evidenceSide {
+  display: grid;
+  align-content: start;
+  gap: 11px;
+  min-width: 0;
+  border: 1px solid #d3dfdf;
+  border-radius: 6px;
+  background: #fff;
+  padding: 14px;
+}
+
+.assertionSide {
+  border-top: 3px solid var(--comparison-amber);
+}
+
+.actionSide {
+  border-top: 3px solid var(--comparison-ink);
+}
+
+.evidenceSideHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+.evidenceSideLabel {
+  color: var(--comparison-amber);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.actionSide .evidenceSideLabel {
+  color: var(--comparison-ink);
+}
+
+.evidenceSideDate {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.evidenceTitle {
+  margin: 0;
+  color: var(--comparison-ink-deep);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.evidenceQuote {
+  margin: 0;
+  border-left: 3px solid #d9c08a;
+  padding: 2px 0 2px 12px;
+  color: #263d42;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.actionSide .evidenceQuote {
+  border-color: #95b3b6;
+}
+
+.evidenceFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 12px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.evidenceFact {
+  min-width: 0;
+}
+
+.evidenceFact dt,
+.mappingFact dt,
+.provenanceFact dt {
+  color: var(--ink-soft);
+  font-size: 0.65rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.evidenceFact dd,
+.mappingFact dd,
+.provenanceFact dd {
+  overflow-wrap: anywhere;
+  margin: 3px 0 0;
+  color: var(--comparison-ink);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.evidenceFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.evidenceHash {
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
+}
+
+.comparisonConnector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: var(--comparison-violet);
+}
+
+.connectorLine {
+  display: block;
+  width: 2px;
+  height: 34px;
+  background: #bbaec8;
+  transform-origin: center top;
+  animation: comparison-connector-grow 420ms ease-out both;
+}
+
+.connectorLabel {
+  max-width: 9ch;
+  font-size: 0.65rem;
+  font-weight: 850;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mappingPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 12px 18px;
+  border-top: 1px solid #d5dfdf;
+  padding-top: 14px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.mappingReason {
+  margin: 0;
+  color: #2a4146;
+  line-height: 1.55;
+}
+
+.mappingFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 12px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.counterEvidence {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #dac7df;
+  border-radius: 6px;
+  background: #faf6fc;
+  padding: 11px 13px;
+}
+
+.counterEvidenceTitle {
+  margin: 0;
+  color: var(--comparison-violet);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.counterEvidenceCopy {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.caveatList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.caveatItem {
+  border: 1px solid #d6c294;
+  border-radius: 4px;
+  background: #fff9e9;
+  padding: 5px 8px;
+  color: #684517;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.emptyState {
+  border: 1px dashed #b3c5c6;
+  border-radius: 7px;
+  background: #f5f8f8;
+  padding: 18px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.methodGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.methodRules,
+.provenanceGrid {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.methodRules {
+  padding-left: 1.2rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.provenanceGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  transition: grid-template-columns 220ms ease;
+}
+
+.provenanceFact {
+  min-width: 0;
+  border: 1px solid #cad9da;
+  border-radius: 6px;
+  background: var(--comparison-blue-soft);
+  padding: 10px;
+}
+
+@media (max-width: 1050px) {
+  .statusLedger {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .comparisonBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .comparisonConnector {
+    flex-direction: row;
+    min-height: 34px;
+  }
+
+  .connectorLine {
+    width: min(18vw, 90px);
+    height: 2px;
+    transform-origin: left center;
+  }
+}
+
+@media (max-width: 760px) {
+  .truthPanel,
+  .mappingPanel,
+  .methodGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .truthPanel,
+  .coverageSection,
+  .comparisonsSection,
+  .methodSection {
+    padding: 16px;
+  }
+
+  .statusLedger {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .comparisonCard {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 460px) {
+  .statusLedger,
+  .evidenceFacts,
+  .mappingFacts,
+  .provenanceGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .connectorLine {
+    animation: none;
+  }
+
+  .truthPanel,
+  .statusLedger,
+  .comparisonCard,
+  .comparisonBody,
+  .evidenceFacts,
+  .mappingPanel,
+  .mappingFacts,
+  .methodGrid,
+  .provenanceGrid {
+    transition: none;
+  }
+
+  .comparisonCard:hover,
+  .comparisonCard:focus-within {
+    transform: none;
+  }
+}
+
+@keyframes comparisons-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes comparison-connector-grow {
+  from {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

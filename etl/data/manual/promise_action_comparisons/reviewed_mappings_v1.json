@@ -1,0 +1,186 @@
+{
+  "format_version": "promise_action_review_input_v1",
+  "review_version": "explicit_mapping_review_v1",
+  "review_method": "explicit_evidence_review",
+  "reviewed_at": "2026-08-20T00:00:00Z",
+  "claim_actor": {
+    "actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+    "label": "Bloque Nacionalista Galego",
+    "source_scope_id": "programas_partidos@promises"
+  },
+  "reviews": [
+    {
+      "claim_id": "claim_67146dd9977d23b456c0a65f9d0b396baa01a4a177f179e1ac379b2567137cdf",
+      "action_kind": "roll_call_vote",
+      "action_id": "url:https://www.senado.es/legis15/votaciones/ses_4_12.xml",
+      "expected_member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+      "expected_vote_choice": "SÍ",
+      "action_actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+      "action_registry_actor_id": "urn:vclc:actor:d72d976cd39783aa17567cc42ab50cfbe4bcd9a7d6f77e5f884faaec9033d51d",
+      "action_party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+      "affiliation_relationship_id": "urn:vclc:actor-relationship:96df6ae519e64b5eb12ee0054d20341725c18b77e8b8b22f3dcbcdb85a4f7b1d",
+      "actor_link_state": "reviewed_official_identity_and_affiliation",
+      "review_outcome": "ambiguous_mapping",
+      "claim_direction": "support",
+      "action_direction": "unclear",
+      "action_substance_state": "procedural",
+      "mapping_basis": "broad_topic_only",
+      "directional_countable": false,
+      "reason_codes": [
+        "exact_action_text_missing",
+        "consideration_vote_not_final_approval",
+        "competing_legislative_alternatives",
+        "topic_overlap_not_equivalence"
+      ],
+      "material_differences": [
+        "promised_goods_not_verified_in_action",
+        "tax_rate_not_verified_in_action",
+        "permanence_not_verified_in_action"
+      ],
+      "review_rationale": "La promesa enumera bienes y servicios concretos para una rebaja permanente del IVA. El registro del Senado identifica una toma en consideración de una alternativa del GPP que modifica el artículo 91 de la Ley del IVA, pero el corpus acotado no contiene el texto operativo de esa alternativa. El título común y el artículo compartido no prueban que coincidan bienes, tipo o permanencia.",
+      "public_summary": "Hay una votación posterior sobre el artículo 91 del IVA, pero la evidencia disponible no permite afirmar que ejecute o contradiga esta promesa.",
+      "caveat": "Mapeo ambiguo: no se cuenta como alineación ni conflicto hasta revisar el texto exacto de la alternativa votada."
+    },
+    {
+      "claim_id": "claim_67146dd9977d23b456c0a65f9d0b396baa01a4a177f179e1ac379b2567137cdf",
+      "action_kind": "roll_call_vote",
+      "action_id": "url:https://www.senado.es/legis15/votaciones/ses_4_13.xml",
+      "expected_member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+      "expected_vote_choice": "SÍ",
+      "action_actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+      "action_registry_actor_id": "urn:vclc:actor:d72d976cd39783aa17567cc42ab50cfbe4bcd9a7d6f77e5f884faaec9033d51d",
+      "action_party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+      "affiliation_relationship_id": "urn:vclc:actor-relationship:96df6ae519e64b5eb12ee0054d20341725c18b77e8b8b22f3dcbcdb85a4f7b1d",
+      "actor_link_state": "reviewed_official_identity_and_affiliation",
+      "review_outcome": "ambiguous_mapping",
+      "claim_direction": "support",
+      "action_direction": "unclear",
+      "action_substance_state": "procedural",
+      "mapping_basis": "broad_topic_only",
+      "directional_countable": false,
+      "reason_codes": [
+        "exact_action_text_missing",
+        "consideration_vote_not_final_approval",
+        "competing_legislative_alternatives",
+        "topic_overlap_not_equivalence"
+      ],
+      "material_differences": [
+        "promised_goods_not_verified_in_action",
+        "tax_rate_not_verified_in_action",
+        "permanence_not_verified_in_action"
+      ],
+      "review_rationale": "La promesa enumera bienes y servicios concretos para una rebaja permanente del IVA. El registro del Senado identifica una segunda toma en consideración, esta vez de una alternativa del GPMX, bajo el mismo expediente y artículo, pero el corpus acotado no contiene su texto operativo. No se puede sustituir ese texto por coincidencia temática.",
+      "public_summary": "Una segunda alternativa sobre el mismo artículo del IVA fue votada, pero falta el texto exacto que permitiría compararla con la lista prometida.",
+      "caveat": "Mapeo ambiguo: una coincidencia de expediente no demuestra equivalencia de medida."
+    },
+    {
+      "claim_id": "claim_810d40a5ac625cf15fe96b2e1383e3d82b392d17e0a2f1f13589d3f7cc58ddae",
+      "action_kind": "roll_call_vote",
+      "action_id": "url:https://www.senado.es/legis15/votaciones/ses_8_42.xml",
+      "expected_member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+      "expected_vote_choice": "SÍ",
+      "action_actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+      "action_registry_actor_id": "urn:vclc:actor:d72d976cd39783aa17567cc42ab50cfbe4bcd9a7d6f77e5f884faaec9033d51d",
+      "action_party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+      "affiliation_relationship_id": "urn:vclc:actor-relationship:96df6ae519e64b5eb12ee0054d20341725c18b77e8b8b22f3dcbcdb85a4f7b1d",
+      "actor_link_state": "reviewed_official_identity_and_affiliation",
+      "review_outcome": "ambiguous_mapping",
+      "claim_direction": "support",
+      "action_direction": "unclear",
+      "action_substance_state": "procedural",
+      "mapping_basis": "reviewed_related_measure",
+      "directional_countable": false,
+      "reason_codes": [
+        "different_eligibility_trigger",
+        "different_target_population",
+        "consideration_vote_not_final_approval",
+        "third_party_initiative_not_actor_reframing"
+      ],
+      "material_differences": [
+        "diagnosis_vs_dependency_assessment",
+        "neurodegenerative_disease_vs_dependency_population"
+      ],
+      "review_rationale": "La promesa pide acceso directo al 33 % junto al diagnóstico para personas con enfermedades neurodegenerativas. La toma en consideración votada trata de equiparar una valoración de dependencia con un grado mínimo de discapacidad. Son una fase procesal, mecanismos y poblaciones distintos. El voto favorable a tramitar una iniciativa de tercero no prueba que el actor reformulara, cumpliera o contradijera su promesa.",
+      "public_summary": "La toma en consideración aborda una vía relacionada de reconocimiento de discapacidad, pero no aprueba la medida final ni coincide con la vía diagnóstica o la población exacta de la promesa.",
+      "caveat": "Mapeo ambiguo: relación revisada, pero no equivalencia sustantiva; no se cuenta como alineación."
+    },
+    {
+      "claim_id": "claim_7da7c5f0e7c8f31e666412a68d0310136478a95af85e24d1cb1fc822ed329f24",
+      "action_kind": "roll_call_vote",
+      "action_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+      "expected_member_name": "Néstor Rego Candamil",
+      "expected_vote_choice": "Sí",
+      "action_actor_id": "urn:vclc:actor:2abed899439f5f0863228bbc0d63cd217452e8016d90d2ae71438c7ceb5cac48",
+      "action_registry_actor_id": "urn:vclc:actor:6e30dbe1d59ebb0ce18cafa45e069d448a3c75859ee8b62bc96c95a7d142e705",
+      "action_party_actor_id": "urn:vclc:actor:b373962642c1bc636fc463024c818b9e26ffe3a9fd1698f6e97b24935d8fb8f6",
+      "affiliation_relationship_id": "urn:vclc:actor-relationship:21cd3e219796f3c531e3aad0d53042bb5e790ea29320d7553b3341c06a47e8a0",
+      "actor_link_state": "reviewed_official_identity_and_affiliation",
+      "review_outcome": "not_comparable",
+      "claim_direction": "support",
+      "action_direction": "not_applicable",
+      "action_substance_state": "procedural",
+      "mapping_basis": "procedural_near_match",
+      "directional_countable": false,
+      "reason_codes": [
+        "procedural_vote",
+        "different_policy_object",
+        "lexical_overlap_only"
+      ],
+      "material_differences": [
+        "administrative_service_access_vs_disability_rights",
+        "service_delivery_vs_parliamentary_avocation"
+      ],
+      "review_rationale": "La promesa se refiere a atención presencial sin cita y accesibilidad de oficinas administrativas. La votación es una solicitud procesal de avocación parlamentaria de otro proyecto sobre discapacidad, dependencia y accesibilidad universal. Comparte una palabra, no el objeto ni el tipo de acción.",
+      "public_summary": "El voto registrado es procesal y trata otra dimensión de accesibilidad; no permite evaluar la promesa sobre atención presencial.",
+      "caveat": "No comparable: ni el objeto ni el efecto institucional de las dos evidencias son equivalentes."
+    },
+    {
+      "claim_id": "claim_8c34c8252fed8dd130a66dac7ef9233394d4d33ef607a9b5542a1ca2f72d09a5",
+      "action_kind": "bounded_action_search",
+      "action_id": null,
+      "expected_member_name": null,
+      "expected_vote_choice": null,
+      "action_actor_id": null,
+      "action_registry_actor_id": null,
+      "action_party_actor_id": null,
+      "affiliation_relationship_id": null,
+      "actor_link_state": "claim_actor_only_no_action",
+      "review_outcome": "insufficient_evidence",
+      "claim_direction": "support",
+      "action_direction": "not_applicable",
+      "action_substance_state": "not_applicable",
+      "mapping_basis": "bounded_search_no_reviewed_action",
+      "directional_countable": false,
+      "reason_codes": [
+        "no_reviewed_action_in_bounded_scope",
+        "absence_not_nonfulfilment"
+      ],
+      "material_differences": [
+        "action_not_observed_in_bounded_scope"
+      ],
+      "action_search": {
+        "member_names": [
+          "MARÍA CARMEN DA SILVA MÉNDEZ",
+          "Néstor Rego Candamil"
+        ],
+        "date_from": "2023-07-05",
+        "date_to": "2026-02-12",
+        "search_terms": [
+          "AP-9",
+          "AP 9",
+          "AP-53",
+          "AP 53"
+        ],
+        "source_tables": [
+          "parl_vote_events",
+          "parl_vote_member_votes"
+        ],
+        "matching_policy": "literal_terms_then_explicit_evidence_review",
+        "expected_matching_events": 0
+      },
+      "review_rationale": "No hay una acción posterior explícitamente revisada y vinculada a esta promesa dentro del recorte de votaciones cargado. La ausencia en este corpus no demuestra inacción ni incumplimiento.",
+      "public_summary": "Todavía no hay una acción posterior revisada en este recorte que permita evaluar el traspaso o la nacionalización de la AP-9 y la AP-53.",
+      "caveat": "Evidencia insuficiente: ausencia de acción vinculada no equivale a promesa incumplida."
+    }
+  ]
+}

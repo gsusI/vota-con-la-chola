@@ -1,0 +1,101 @@
+{
+  "artifact_set_atomic": false,
+  "batch_size": 10000,
+  "bounded_action_searches": [
+    {
+      "candidate_events_scanned": 97,
+      "candidate_rows_sha256": "1b8e4e8e982edf2985a5e184395331d3271ae7a0d055eb9d6a9f3d509dbadb0a",
+      "candidate_vote_rows_scanned": 97,
+      "date_from": "2023-07-05",
+      "date_to": "2026-02-12",
+      "expected_matching_events": 0,
+      "matching_event_ids": [],
+      "matching_policy": "literal_terms_then_explicit_evidence_review",
+      "member_names": [
+        "MARÍA CARMEN DA SILVA MÉNDEZ",
+        "Néstor Rego Candamil"
+      ],
+      "result_state": "no_reviewed_action_found",
+      "search_terms": [
+        "AP-9",
+        "AP 9",
+        "AP-53",
+        "AP 53"
+      ],
+      "source_tables": [
+        "parl_vote_events",
+        "parl_vote_member_votes"
+      ]
+    }
+  ],
+  "byte_identical_public_copy": true,
+  "comparison_count": 5,
+  "comparison_release_id": "vclc:comparison-release:ea65f3b8104dd678cb7ebce724b78f86",
+  "evidence_count": 18,
+  "input_file_facts": {
+    "actions_db": {
+      "bytes": 1575038976,
+      "path": "etl/data/staging/politicos-es.db",
+      "sha256": "46e72488f24bbecc240ac94c524fe503b8599d742c983595919678a842c5f0e3"
+    },
+    "actor_graph_db": {
+      "bytes": 1436262400,
+      "path": "etl/data/staging/actor-graph-v1.db",
+      "sha256": "b6792dfc02194c4bc434bdf97f29e05d31aa951a22f0813da993f83572093cb1"
+    },
+    "promises_db": {
+      "bytes": 4997120,
+      "path": "etl/data/staging/promises-bng-2023.db",
+      "sha256": "9f0b61abf13f8d046a58762f2e14806fb3a78d73477ae355d1acb3b91493dfc2"
+    },
+    "reviewed_mappings": {
+      "bytes": 11104,
+      "path": "etl/data/manual/promise_action_comparisons/reviewed_mappings_v1.json",
+      "sha256": "82bbfa1c34c227ce3e6525e32149be0d6ded86a1eb20ab56fadbca0d717d0e3b"
+    },
+    "schema": {
+      "bytes": 249163,
+      "path": "etl/load/sqlite_schema.sql",
+      "sha256": "920a38dc06e6ace2c10142a7642f4d619c0b83efd728b5a964e5349e6948f5c2"
+    }
+  },
+  "input_scope_sha256": {
+    "actions": {
+      "coverage_cutoff": "2026-02-12",
+      "selected_scope_sha256": "e7535d6a4c186c79ff8ba7b56cbe96c886aa2c49ebe5adef4d83d2bd6db933e1"
+    },
+    "actor_graph": {
+      "release_id": "e52dd7fac6f29570d23756e927e0b9cfe73d1bf2f7c30fa01de75d4dc3a6f4a5",
+      "selected_scope_sha256": "7513cb344282eab9cd29c5242a63db92eeb6a6a1bcac472e6f8dc57ffe1eb060"
+    },
+    "promises": {
+      "selected_scope_sha256": "23539aa305db1ff157c33566e380f69dc43f0d6e86a3bb95e265ea0a31aba954"
+    },
+    "reviewed_mappings": {
+      "canonical_sha256": "44b579a3e16e59f8807dd3ed1933bed17ee7e290e4f605b2e4694502d6f21c49"
+    }
+  },
+  "json_bytes": 72146,
+  "json_sha256": "24b6edd02329158040b50dc80a9191df3efea8ec07e10bbcb7adaaed280e0ca6",
+  "million_row_physical_run_proven": false,
+  "out_db": "etl/data/staging/promise-action-comparisons-v1.db",
+  "out_db_bytes": 4067328,
+  "out_db_sha256": "97ca482c7e9376f3e7313c16afa19be144a0eafe237502ef1792802a01bc9941",
+  "out_json": "etl/data/published/promise-action-comparisons-v1.json",
+  "peak_rss_mb": 50.812,
+  "per_file_atomic_replacement": true,
+  "public_out": "ui/gh-pages-next/public/comparisons/data/comparisons.json",
+  "real_data_only": true,
+  "report_out": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
+  "reviewed_mappings_canonical_sha256": "44b579a3e16e59f8807dd3ed1933bed17ee7e290e4f605b2e4694502d6f21c49",
+  "reviewed_mappings_file_sha256": "82bbfa1c34c227ce3e6525e32149be0d6ded86a1eb20ab56fadbca0d717d0e3b",
+  "schema_version": "promise_action_comparison_materialization_report_v1",
+  "semantic_sha256": "7b37c75c836a0a85c0aab70b7165a5ce005cef320c22c49e34ec650969691b19",
+  "status": "ok",
+  "status_counts": {
+    "ambiguous_mapping": 3,
+    "insufficient_evidence": 1,
+    "not_comparable": 1
+  },
+  "synthetic_or_mock": false
+}
